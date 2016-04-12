@@ -143,6 +143,11 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
             self.imageBox = ImageBox(imageType: .Local, imageArray: imageURLArray!)
             self.reloadData()
         }
+        backgroundColor = UIColor.whiteColor()
+        timeInterval = 3.0
+        currentDotColor = GrayColorlevel1
+        otherDotColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
+        autoScroll = true
     }
     
     override func awakeFromNib() {
@@ -172,7 +177,7 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         self.flowLayout = flowLayout
         
         let collectionView = UICollectionView(frame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height), collectionViewLayout: flowLayout)
-//        collectionView.backgroundColor = UIColor.orangeColor()
+        collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.bounces = false
@@ -202,6 +207,7 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
             pageControl.currentPageIndicatorTintColor = self.currentDotColor
             pageControl.pageIndicatorTintColor = self.otherDotColor
             pageControl.userInteractionEnabled = false
+            pageControl.backgroundColor = UIColor.whiteColor()
             self.addSubview(pageControl)
             
             self.pageControl = pageControl

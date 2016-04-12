@@ -9,7 +9,7 @@
         <!--尖叫-->
         <scene sceneID="grd-Fr-fQg">
             <objects>
-                <navigationController id="TR4-mJ-1qI" customClass="WOWNavigationController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="TR4-mJ-1qI" customClass="WOWNavigationController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="尖叫" id="bjo-7B-YvH"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9nJ-m5-uvl">
@@ -27,7 +27,7 @@
         <!--尖叫-->
         <scene sceneID="bzw-ue-Dsp">
             <objects>
-                <viewController title="尖叫" id="iWL-Oz-JyM" customClass="WOWController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="尖叫" id="iWL-Oz-JyM" customClass="WOWController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zth-Uz-Pao"/>
                         <viewControllerLayoutGuide type="bottom" id="Qr7-pK-v6K"/>
@@ -65,7 +65,7 @@
         <!--喜欢-->
         <scene sceneID="QUc-1l-x1X">
             <objects>
-                <viewController storyboardIdentifier="WOWLikeListController" title="喜欢" id="fAZ-wF-Vf3" customClass="WOWLikeListController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWLikeListController" title="喜欢" id="fAZ-wF-Vf3" customClass="WOWLikeListController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KeN-7Y-NHd"/>
                         <viewControllerLayoutGuide type="bottom" id="OW8-EB-Eqi"/>
@@ -78,7 +78,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWLikeListCell" rowHeight="201" id="jZf-4B-1Q7" customClass="WOWLikeListCell" customModule="Wow" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWLikeListCell" rowHeight="201" id="jZf-4B-1Q7" customClass="WOWLikeListCell" customModule="WowDsgn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="201"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jZf-4B-1Q7" id="rAr-2u-r8S">
@@ -182,7 +182,7 @@
         <!--评论-->
         <scene sceneID="Ggl-Mw-UzC">
             <objects>
-                <viewController storyboardIdentifier="WOWCommentController" title="评论" id="EBo-vS-uWn" customClass="WOWCommentController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWCommentController" title="评论" id="EBo-vS-uWn" customClass="WOWCommentController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TDj-vU-p97"/>
                         <viewControllerLayoutGuide type="bottom" id="GFl-Rn-ftz"/>
@@ -202,7 +202,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dta-oW-EI5">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AGh-ld-bfI" customClass="KMPlaceholderTextView" customModule="Wow" customModuleProvider="target">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AGh-ld-bfI" customClass="KMPlaceholderTextView" customModule="WowDsgn" customModuleProvider="target">
                                         <rect key="frame" x="15" y="7" width="241" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -275,7 +275,7 @@
         <!--搜索子视图-->
         <scene sceneID="HmX-pJ-0Az">
             <objects>
-                <viewController storyboardIdentifier="WOWSearchChildController" title="搜索子视图" id="vj4-bI-v0s" customClass="WOWSearchChildController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSearchChildController" title="搜索子视图" id="vj4-bI-v0s" customClass="WOWSearchChildController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VkB-ui-fMO"/>
                         <viewControllerLayoutGuide type="bottom" id="ZWs-k5-JjC"/>
@@ -284,7 +284,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIy-or-tjJ" customClass="TagListView" customModule="Wow" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIy-or-tjJ" customClass="TagListView" customModule="WowDsgn" customModuleProvider="target">
                                 <rect key="frame" x="15" y="35" width="290" height="518"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -340,7 +340,7 @@
         <!--搜索-->
         <scene sceneID="eSF-SW-C5k">
             <objects>
-                <viewController storyboardIdentifier="WOWSearchController" title="搜索" id="8Qs-qZ-KeY" customClass="WOWSearchController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSearchController" title="搜索" id="8Qs-qZ-KeY" customClass="WOWSearchController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nvl-lx-KCO"/>
                         <viewControllerLayoutGuide type="bottom" id="gCz-qx-jEY"/>
@@ -375,7 +375,7 @@
         <!--场景-->
         <scene sceneID="Ra8-Sw-QwD">
             <objects>
-                <viewController storyboardIdentifier="WOWSenceController" title="场景" id="ZjH-5o-9uo" customClass="WOWSenceController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSenceController" title="场景" id="ZjH-5o-9uo" customClass="WOWSenceController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eje-vN-Ivu"/>
                         <viewControllerLayoutGuide type="bottom" id="Mua-h8-4G3"/>
@@ -388,7 +388,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="Wow" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="WowDsgn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="320" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nGH-pF-T2j" id="dq8-W0-doG">
@@ -445,7 +445,7 @@
                                             <outlet property="timeLabel" destination="Hgi-7z-bn9" id="l0o-HH-TqO"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WOWSubArtCell" rowHeight="87" id="rxx-vP-EvM" customClass="WOWSubArtCell" customModule="Wow" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WOWSubArtCell" rowHeight="87" id="rxx-vP-EvM" customClass="WOWSubArtCell" customModule="WowDsgn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="167" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rxx-vP-EvM" id="kPa-M9-UWh">
@@ -482,7 +482,7 @@
                                             <outlet property="collectionView" destination="SpA-BR-d6y" id="5cR-be-gLD"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WowSenceLikeCell" rowHeight="76" id="bsn-ME-uni" customClass="WowSenceLikeCell" customModule="Wow" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WowSenceLikeCell" rowHeight="76" id="bsn-ME-uni" customClass="WowSenceLikeCell" customModule="WowDsgn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="254" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bsn-ME-uni" id="Zos-bm-mXU">

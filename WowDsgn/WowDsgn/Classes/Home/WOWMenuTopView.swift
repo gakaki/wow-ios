@@ -42,20 +42,20 @@ class WOWMenuTopView: UIView {
         }
         
         topLine = UILabel()
-        topLine.backgroundColor = GrayColorlevel4
+        topLine.backgroundColor = BorderColor
         self.addSubview(topLine)
         topLine.snp_makeConstraints { (make) in
-            make.height.equalTo(0.8)
-            make.left.equalTo(weakSelf!).offset(15)
+            make.height.equalTo(0.5)
+            make.left.equalTo(weakSelf!).offset(0)
             make.top.equalTo(weakSelf!).offset(0)
             make.right.equalTo(weakSelf!).offset(0)
         }
         
         bottomLine = UILabel()
-        bottomLine.backgroundColor = GrayColorlevel4
+        bottomLine.backgroundColor = BorderColor
         self.addSubview(bottomLine)
         bottomLine.snp_makeConstraints { (make) in
-            make.height.equalTo(0.8)
+            make.height.equalTo(0.5)
             make.left.equalTo(weakSelf!).offset(0)
             make.right.equalTo(weakSelf!).offset(0)
             make.bottom.equalTo(weakSelf!).offset(0)
@@ -65,8 +65,15 @@ class WOWMenuTopView: UIView {
         
     }
     
+    func showLine(show:Bool) {
+        bottomLine.hidden = !show
+        topLine.hidden = !show
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
 }

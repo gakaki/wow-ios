@@ -1,0 +1,27 @@
+//
+//  WOWGoodsDetailCell.swift
+//  WowDsgn
+//
+//  Created by 小黑 on 16/4/12.
+//  Copyright © 2016年 王云鹏. All rights reserved.
+//
+
+import UIKit
+
+class WOWGoodsDetailCell: UITableViewCell {
+
+    @IBOutlet weak var cellHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var goodsImageView: UIImageView!
+    @IBOutlet weak var goodsDesLabel: UILabel!
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+    }
+    
+}

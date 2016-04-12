@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="WOWGoodsBigCell" reuseIdentifier="WOWGoodsBigCell" id="gTV-IL-0wX" customClass="WOWGoodsBigCell" customModule="Wow" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="WOWGoodsBigCell" reuseIdentifier="WOWGoodsBigCell" id="gTV-IL-0wX" customClass="WOWGoodsBigCell" customModule="WowDsgn" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="408" height="414"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -120,7 +120,7 @@
                 <outlet property="shareButton" destination="tno-T3-rGi" id="E8Y-N7-H9o"/>
                 <outlet property="titleLabel" destination="tDG-Tc-7y0" id="TGW-6J-O54"/>
             </connections>
-            <point key="canvasLocation" x="682" y="517"/>
+            <point key="canvasLocation" x="559" y="513"/>
         </collectionViewCell>
     </objects>
     <resources>

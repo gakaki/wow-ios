@@ -49,18 +49,14 @@ class WOWStoreController: WOWBaseViewController {
     
     private func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth * 215/375), imageURLArray: nil)
-        cycleView.autoScroll = true
         cycleView.placeholderImage = UIImage(named: "test2")
         //FIXME:修改图片Url
         cycleView.imageURLArray = ["http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg","http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg"]
-        cycleView.timeInterval = 3.0
-        cycleView.currentDotColor = GrayColorlevel1
-        cycleView.otherDotColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
         tableView.tableHeaderView = cycleView
     }
 }
 
-//MARK:Delegate
+
 extension WOWStoreController:BrandCellDelegate{
     func hotBrandCellClick() {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController

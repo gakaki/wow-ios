@@ -98,7 +98,8 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.delegate = self
         menuView.addSubview(styleButton)
         styleButton.snp_makeConstraints { (make) in
-            make.centerY.equalTo(menuView.snp_centerY)
+            make.top.bottom.equalTo(menuView).offset(0)
+            make.width.equalTo(50)
             make.right.bottom.equalTo(menuView).offset(-15)
         }
         
@@ -173,6 +174,7 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }

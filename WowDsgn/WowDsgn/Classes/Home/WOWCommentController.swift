@@ -1,0 +1,194 @@
+//
+//  WOWCommentController.swift
+//  Wow
+//
+//  Created by 王云鹏 on 16/3/24.
+//  Copyright © 2016年 wowdsgn. All rights reserved.
+//
+
+import UIKit
+
+class WOWCommentController: WOWBaseViewController {
+    let cellID = String(WOWCommentCell)
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var inputTextView: KMPlaceholderTextView!
+    
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var inputConstraint: NSLayoutConstraint!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addObserver()
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    override func setUI() {
+        super.setUI()
+        WOWBorderColor(self.inputTextView)
+        WOWBorderRadius(self.inputTextView)
+        tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 200
+        tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:cellID)
+        navigationItem.title = "评论"
+    }
+    
+    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
+    @IBAction func sendButtonClick(sender: UIButton) {
+        send()
+    }
+    
+    
+    private func send(){
+        inputTextView.resignFirstResponder()
+        DLog("发送评论:\(inputTextView.text)")
+        inputTextView.text = ""
+        inputConstraint.constant = 30
+        self.view.layoutIfNeeded()
+    }
+    
+    private func addObserver(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyBoardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyBoardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
+    }
+
+    
+    func keyBoardWillShow(note:NSNotification){
+        let userInfo  = note.userInfo as [NSObject:AnyObject]!
+        let  keyBoardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let deltaY = keyBoardBounds.size.height
+        let animations:(() -> Void) = {
+            self.bottomViewConstraint.constant = deltaY
+            self.view.layoutIfNeeded()
+        }
+        
+        if duration > 0 {
+            let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
+            UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+        }else{
+            animations()
+        }
+        
+    }
+    
+    func keyBoardWillHide(note:NSNotification){
+        let userInfo  = note.userInfo as [NSObject:AnyObject]!
+        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let animations:(() -> Void) = {
+            self.bottomViewConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        if duration > 0 {
+            let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
+            UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+        }else{
+            animations()
+        }
+
+    }
+}
+
+extension WOWCommentController:UITextViewDelegate{
+    
+    var COMMENTS_LIMIT:Int{
+        get {
+            return 250
+        }
+    }
+//    
+//    //中文和其他字符的判断方式不一样
+    func textViewDidChange(textView: UITextView) {
+        /*
+        if COMMENTS_LIMIT > 0 {
+            // markedTextRange指的是当前高亮选中的，除了长按选中，用户中文输入拼音过程往往也是高亮选中状态
+            if let selectedRange = textView.markedTextRange {
+                
+            } else {
+                let text = textView.text
+                if text.characters.count > COMMENTS_LIMIT {
+                    let range = Range(start: text.startIndex, end: adv)
+                    let subText = text.substringWithRange(range)
+                    textView.text = subText
+                }
+            }
+        }
+        */
+        /*
+        let lang = textView.textInputMode?.primaryLanguage
+        if lang == "zh-Hans"{
+            let range = textView.markedTextRange
+            if let selectedRange = range {
+                let position = textView.positionFromPosition(selectedRange.start, offset: 0)
+                if position == nil{
+                    if textView.text.characters.count > COMMENTS_LIMIT {
+                        textView.text = (textView.text as NSString).substringToIndex(COMMENTS_LIMIT)
+                    }
+                }else{}
+            }
+        }else{
+            if textView.text.characters.count > COMMENTS_LIMIT {
+                textView.text = (textView.text as NSString).substringToIndex(COMMENTS_LIMIT)
+            }
+        }
+         */
+    
+        guard inputConstraint.constant < 100 else{
+            return
+        }
+        let fixedWidth = inputTextView.frame.size.width
+        inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
+        let newSize = inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
+        inputConstraint.constant = newSize.height
+        self.view.layoutIfNeeded()
+    }
+
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            send()
+            return false
+        }
+        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
+        if ret == false{
+            DLog("超过了最多字符")
+            //FIXME:少了一个警告框
+            WOWHud.showMsg("您输入的字符超过限制")
+            return false
+        }
+        return true
+    }
+}
+
+
+extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWCommentCell
+        //FIXME:测试
+        cell.headImageView.image = UIImage(named: "testHeadImage")
+        cell.commentLabel.text = "尖叫君☺️尖叫君☺️尖叫君\n☺️尖叫君☺️尖叫君☺️尖叫君☺️尖叫君☺️尖叫君☺️尖叫君☺️"
+        cell.nameLabel.text = "尖叫君"
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.inputTextView.resignFirstResponder()
+    }
+    
+}

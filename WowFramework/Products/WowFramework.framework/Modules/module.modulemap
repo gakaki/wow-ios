@@ -1,0 +1,10 @@
+framework module WowFramework {
+  umbrella header "WowFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module WowFramework.Swift {
+    header "WowFramework-Swift.h"
+}

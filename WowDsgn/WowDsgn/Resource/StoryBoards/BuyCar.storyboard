@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QDu-1s-RJp">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="AbO-gI-MLG">
+            <objects>
+                <navigationController id="QDu-1s-RJp" customClass="WOWNavigationController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="j1e-bc-pag">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="t5S-nt-7u6" kind="relationship" relationship="rootViewController" id="L64-Xg-qwf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gQF-Eq-1Ea" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-109" y="463"/>
+        </scene>
+        <!--购物车-->
+        <scene sceneID="J05-vd-CCR">
+            <objects>
+                <viewController storyboardIdentifier="WOWBuyCarController" id="t5S-nt-7u6" customClass="WOWBuyCarController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ieb-aM-0jm"/>
+                        <viewControllerLayoutGuide type="bottom" id="sXD-Ff-rxY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PQb-LQ-U4O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="购物车" id="GdU-x6-BgS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lKZ-bP-kn1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="404" y="463"/>
+        </scene>
+    </scenes>
+</document>

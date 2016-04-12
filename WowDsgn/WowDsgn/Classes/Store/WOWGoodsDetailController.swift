@@ -27,6 +27,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         super.setUI()
         
     }
+    
     @IBAction func back(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
     }

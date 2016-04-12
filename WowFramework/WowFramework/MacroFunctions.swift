@@ -8,7 +8,7 @@
 
 import Foundation
 
-public func DLog (value: Any , fileName : String = __FILE__, line : Int32 = __LINE__ ){
+public func DLog (value: Any , fileName : String = #file, line : Int32 = #line ){
     /// Debug Log
     let debug = true
     if debug {
@@ -21,7 +21,9 @@ public func MGRgb(r:CGFloat,g:CGFloat,b:CGFloat,alpha:CGFloat = 1) -> UIColor{
 }
 
 
-
+public func kkLog(){
+    debugPrint("123")
+}
 
 
 public func MGFrame(x:CGFloat,y:CGFloat,width:CGFloat,height:CGFloat) -> CGRect{

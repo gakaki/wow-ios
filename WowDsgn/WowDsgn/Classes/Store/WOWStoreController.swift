@@ -60,7 +60,7 @@ class WOWStoreController: WOWBaseViewController {
     }
 }
 
-
+//MARK:Delegate
 extension WOWStoreController:BrandCellDelegate{
     func hotBrandCellClick() {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController

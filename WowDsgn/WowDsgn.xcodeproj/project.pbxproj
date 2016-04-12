@@ -593,8 +593,8 @@
 				2991AD6B1CBCCAB100F5F5A0 /* WOWCommentController.swift */,
 				2991AD6C1CBCCAB100F5F5A0 /* WOWController.swift */,
 				2991AD6F1CBCCAB100F5F5A0 /* WOWLikeListController.swift */,
-				2991AD7A1CBCCAB100F5F5A0 /* WOWSearchChildController.swift */,
 				2991AD7B1CBCCAB100F5F5A0 /* WOWSearchController.swift */,
+				2991AD7A1CBCCAB100F5F5A0 /* WOWSearchChildController.swift */,
 				2991AD7D1CBCCAB100F5F5A0 /* WOWSenceController.swift */,
 			);
 			name = Controller;

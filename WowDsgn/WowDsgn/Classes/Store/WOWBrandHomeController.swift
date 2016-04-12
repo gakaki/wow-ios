@@ -110,6 +110,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
+        vc.entrance = GoodsDetailEntrance.FromBrand
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -53,6 +53,7 @@ class WOWSearchController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         navigationController?.navigationBar.addSubview(searchView)
+        navigationItem.leftBarButtonItems = nil
         makeCustomerNavigationItem("", left: true, handler:nil)
         configCheckView()
         configChildControllers()

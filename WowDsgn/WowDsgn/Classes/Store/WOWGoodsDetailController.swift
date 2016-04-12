@@ -8,8 +8,16 @@
 
 import UIKit
 
+enum GoodsDetailEntrance{
+    case FromBrand
+    case FromGoodsList
+}
+
+
 class WOWGoodsDetailController: WOWBaseViewController {
     var cycleView:CyclePictureView!
+    /// 默认从商品列表进入
+    var entrance:GoodsDetailEntrance = .FromGoodsList
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +25,12 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     override func viewWillDisappear(animated: Bool) {
-        
+        switch entrance {
+        case .FromBrand:
+            return
+        default:
+            self.navigationController? .setNavigationBarHidden(false, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {

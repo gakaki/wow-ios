@@ -100,7 +100,7 @@ class WOWGoodsController: WOWBaseViewController {
         styleButton.snp_makeConstraints { (make) in
             make.top.bottom.equalTo(menuView).offset(0)
             make.width.equalTo(50)
-            make.right.bottom.equalTo(menuView).offset(-15)
+            make.right.equalTo(menuView).offset(-15)
         }
         
         view.addSubview(menuView)

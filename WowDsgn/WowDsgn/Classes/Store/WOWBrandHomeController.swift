@@ -10,9 +10,10 @@ import UIKit
 
 class WOWBrandHomeController: WOWBaseViewController {
     @IBOutlet var collectionView: UICollectionView!
-
+    var dataArr = [WOWGoodsModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        initData()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -41,6 +42,19 @@ class WOWBrandHomeController: WOWBaseViewController {
 
     
 //MARK:Private Method
+    private func initData(){
+        //FIXME:测试数据
+        let string = ["年成立，总部设立在丹麦的Aarup。Carl Hansen & Son公司缘起于1908年Carl Hansen先生创立他的橱柜制造"," 11208"]
+        for index in 1...40 {
+            let model = WOWGoodsModel()
+            model.des = string[index % 2 ]
+            model.calCellHeight()
+            dataArr.append(model)
+        }
+        collectionView.reloadData()
+    }
+    
+    
     override func setUI() {
         super.setUI()
         self.edgesForExtendedLayout = .None
@@ -68,12 +82,12 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return dataArr.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
-        cell.showData()
+        cell.showData(dataArr[indexPath.row])
         return cell
     }
     
@@ -103,7 +117,8 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
 
 extension WOWBrandHomeController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((MGScreenWidth - 3) / 2,(MGScreenWidth - 3) / 2 + CGFloat(indexPath.row * 2))
+        let model = dataArr[indexPath.item]
+        return CGSizeMake(WOWGoodsSmallCell.itemWidth,model.cellHeight)
     }
 }
 

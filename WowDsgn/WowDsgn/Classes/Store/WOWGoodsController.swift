@@ -17,13 +17,14 @@ class WOWGoodsController: WOWBaseViewController {
     private var cellBigId = String(WOWGoodsBigCell)
     private var cellSmallId = String(WOWGoodsSmallCell)
     var menuIndex:Int = 0
+    var dataArr = [WOWGoodsModel]()
     var menuView: BTNavigationDropdownMenu!
     private var cellShowStyle:GoodsCellStyle = .Big
     
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initData()
                            
     }
     
@@ -62,6 +63,18 @@ class WOWGoodsController: WOWBaseViewController {
     }()
     
 //MARK:Private Method
+    private func initData(){
+        //FIXME:测试数据
+        let string = ["年成立，总部设立在丹麦的Aarup。Carl Hansen & Son公司缘起于1908年Carl Hansen先生创立他的橱柜制造"," 11208"]
+        for index in 1...40 {
+            let model = WOWGoodsModel()
+            model.des = string[index % 2 ]
+            model.calCellHeight()
+            dataArr.append(model)
+        }
+        collectionView.reloadData()
+    }
+    
     override func setUI() {
         super.setUI()
         view.addSubview(collectionView)
@@ -141,7 +154,7 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return dataArr.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -153,7 +166,7 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
             return cell
         case .Small:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellSmallId, forIndexPath: indexPath) as! WOWGoodsSmallCell
-            cell.showData()
+            cell.showData(dataArr[indexPath.item])
             return cell
         }
     }
@@ -166,7 +179,12 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
 
 extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((MGScreenWidth - 3) / 2,(MGScreenWidth - 3) / 2 + CGFloat(indexPath.row * 2))
+        switch cellShowStyle {
+        case .Big:
+            return CGSizeMake(MGScreenWidth, MGScreenWidth)
+        case .Small:
+            return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)
+        }
     }
 }
 

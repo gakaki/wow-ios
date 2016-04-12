@@ -38,6 +38,7 @@ class WOWGoodsBigCell: UICollectionViewCell {
     }
     
     func showData(){
+        //FIXME:测试数据
         let priceImage = UIImage(named: "yellow_corner_back")
         priceBackImageView.image = priceImage?.stretchableImageWithLeftCapWidth(15, topCapHeight:Int((priceImage?.size.height)!)/2)
     }

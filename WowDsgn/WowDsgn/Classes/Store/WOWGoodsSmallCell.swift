@@ -9,19 +9,24 @@
 import UIKit
 
 class WOWGoodsSmallCell: UICollectionViewCell {
-
+     class var itemWidth:CGFloat{
+        get{
+           return (MGScreenWidth - 3) / 2
+        }
+    }
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         WOWBorderColor(contentView)
-        desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(3)) / CGFloat(2)
+        desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30
     }
     
-    func showData() {
+    func showData(model:WOWGoodsModel) {
+        //FIXME:测试数据
         pictureImageView.image = UIImage(named: "testGoods")
-        desLabel.text = "无知系列 | 茶桌 无知系列 | 茶桌 无知系列 | 茶桌 无知系列 | 茶桌 无知系列 | 茶桌"
+        desLabel.text = model.des
         priceLabel.text = "¥ 10200.00"
     }
     

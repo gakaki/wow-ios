@@ -8,7 +8,7 @@
         <!--商店-->
         <scene sceneID="lmm-YX-XXG">
             <objects>
-                <navigationController id="3Sm-BO-NMd" customClass="WOWNavigationController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="3Sm-BO-NMd" customClass="WOWNavigationController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="商店" id="TKr-vl-phK"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zxf-Qg-Jxk">
@@ -26,7 +26,7 @@
         <!--商店-->
         <scene sceneID="p4Y-Dx-v6l">
             <objects>
-                <viewController storyboardIdentifier="WOWStoreController" id="AiG-sc-6dI" customClass="WOWStoreController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWStoreController" id="AiG-sc-6dI" customClass="WOWStoreController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="maa-bU-8qV"/>
                         <viewControllerLayoutGuide type="bottom" id="ZUJ-M0-5fH"/>
@@ -39,11 +39,11 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WOWMenuCell" rowHeight="55" id="TxM-ue-7O0" customClass="WOWMenuCell" customModule="Wow" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WOWMenuCell" rowHeight="55" id="TxM-ue-7O0" customClass="WOWMenuCell" customModule="WowDsgn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TxM-ue-7O0" id="eOA-7t-rvq">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="54.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="45" placeholderIntrinsicHeight="35" translatesAutoresizingMaskIntoConstraints="NO" id="IiW-Uf-jOl">
@@ -106,7 +106,7 @@
         <!--分类-->
         <scene sceneID="Irw-0d-MOm">
             <objects>
-                <viewController storyboardIdentifier="WOWGoodsController" title="分类" id="b4E-cP-ysV" customClass="WOWGoodsController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWGoodsController" title="分类" id="b4E-cP-ysV" customClass="WOWGoodsController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uDF-4f-Jy1"/>
                         <viewControllerLayoutGuide type="bottom" id="6X2-NQ-Wkg"/>
@@ -124,7 +124,7 @@
         <!--商品详情-->
         <scene sceneID="DlB-ev-69l">
             <objects>
-                <viewController storyboardIdentifier="WOWGoodsDetailController" title="商品详情" id="C9Q-UM-zRR" customClass="WOWGoodsDetailController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWGoodsDetailController" title="商品详情" id="C9Q-UM-zRR" customClass="WOWGoodsDetailController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lU6-12-fda"/>
                         <viewControllerLayoutGuide type="bottom" id="MWA-7z-euj"/>
@@ -155,7 +155,7 @@
         <!--品牌列表-->
         <scene sceneID="Cvm-UP-XDW">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandListController" title="品牌列表" automaticallyAdjustsScrollViewInsets="NO" id="KNs-x8-LYF" customClass="WOWBrandListController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandListController" title="品牌列表" automaticallyAdjustsScrollViewInsets="NO" id="KNs-x8-LYF" customClass="WOWBrandListController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xwk-R0-2CC"/>
                         <viewControllerLayoutGuide type="bottom" id="cRj-ol-oIh"/>
@@ -192,7 +192,7 @@
         <!--品牌主页-->
         <scene sceneID="WGN-WR-BPF">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandHomeController" title="品牌主页" id="WaH-lQ-3xj" customClass="WOWBrandHomeController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandHomeController" title="品牌主页" id="WaH-lQ-3xj" customClass="WOWBrandHomeController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8R7-fJ-UlM"/>
                         <viewControllerLayoutGuide type="bottom" id="TMI-x8-ieU"/>
@@ -246,7 +246,7 @@
         <!--品牌详情-->
         <scene sceneID="0yp-SM-qhg">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandDetailController" title="品牌详情" id="u6f-ag-qbK" customClass="WOWBrandDetailController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandDetailController" title="品牌详情" id="u6f-ag-qbK" customClass="WOWBrandDetailController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sq9-lW-pgY"/>
                         <viewControllerLayoutGuide type="bottom" id="KqK-Wx-7E1"/>
@@ -263,16 +263,18 @@
                                     <outlet property="delegate" destination="u6f-ag-qbK" id="36Z-nt-bTy"/>
                                 </connections>
                             </tableView>
-                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAw-ws-xTb" customClass="WOWBrandUnderView" customModule="Wow" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAw-ws-xTb" customClass="WOWBrandUnderView" customModule="WowDsgn" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="533" width="320" height="35"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="HpY-ok-RHW"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KqK-Wx-7E1" firstAttribute="top" secondItem="QAw-ws-xTb" secondAttribute="bottom" id="0VP-Je-vN6"/>
                             <constraint firstAttribute="trailing" secondItem="lyf-Wk-0Ay" secondAttribute="trailing" id="2zD-8X-46b"/>
-                            <constraint firstItem="QAw-ws-xTb" firstAttribute="top" secondItem="lyf-Wk-0Ay" secondAttribute="bottom" id="5xY-y3-EK7"/>
                             <constraint firstItem="QAw-ws-xTb" firstAttribute="leading" secondItem="3nH-b0-E2I" secondAttribute="leading" id="Jo8-Vb-F9C"/>
                             <constraint firstItem="lyf-Wk-0Ay" firstAttribute="leading" secondItem="3nH-b0-E2I" secondAttribute="leading" id="KXq-rT-6Af"/>
                             <constraint firstAttribute="trailing" secondItem="QAw-ws-xTb" secondAttribute="trailing" id="aag-R8-9e7"/>
@@ -282,6 +284,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="lyf-Wk-0Ay" id="ukY-Bj-bve"/>
+                        <outlet property="underView" destination="QAw-ws-xTb" id="qnT-TR-c16"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSi-4Z-E4k" userLabel="First Responder" sceneMemberID="firstResponder"/>

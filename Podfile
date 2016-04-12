@@ -7,6 +7,7 @@ xcodeproj ‘WowDsgn/WowDsgn.xcodeproj'
 
 
 target :WowFramework do #FrameWork
+platform :ios, ‘8.0’
 pod 'Kingfisher','~>2.0.1'
 use_frameworks!
 
@@ -14,6 +15,7 @@ xcodeproj ‘WowFramework/WowFramework.xcodeproj'
 end
 
 target :WowDsgn do #实例工程
+platform :ios, ‘8.0’
 use_frameworks!
 pod 'SnapKit', '~> 0.19.1'
 pod 'Moya', '~> 6.1.3'

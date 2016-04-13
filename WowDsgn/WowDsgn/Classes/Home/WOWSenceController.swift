@@ -32,6 +32,9 @@ class WOWSenceController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerNib(UINib.nibName(String(WOWSenceImageCell)), forCellReuseIdentifier:String(WOWSenceImageCell))
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
+        tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
+        tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
+
         WOWSenceHelper.senceController = self
         configTableFooterView()
     }

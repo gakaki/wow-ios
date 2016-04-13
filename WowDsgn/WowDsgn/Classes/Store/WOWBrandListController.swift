@@ -45,6 +45,7 @@ class WOWBrandListController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
+        self.edgesForExtendedLayout = .None
         navigationItem.title = "品牌"
         configureSearchController()
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
@@ -54,11 +55,12 @@ class WOWBrandListController: WOWBaseViewController {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         //輸入搜尋關鍵字的時候，讓整個view背景變得黯淡
-        searchController.dimsBackgroundDuringPresentation = true
+//        searchController.dimsBackgroundDuringPresentation = true
         searchController.searchBar.placeholder = "search"
         searchController.searchBar.setSearchFieldBackgroundImage(UIImage(named: "searchbar"), forState:.Normal)
         searchController.searchBar.searchBarStyle = .Minimal
         searchController.searchBar.backgroundColor = UIColor.whiteColor()
+        searchController.view.backgroundColor = UIColor.whiteColor()
 //        searchController.searchBar.delegate = self
         //讓搜尋列(search bar)的尺寸跟tableview所顯示的尺寸一致
         searchController.searchBar.sizeToFit()

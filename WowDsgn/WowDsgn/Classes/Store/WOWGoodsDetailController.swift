@@ -31,6 +31,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
         default:
             self.navigationController? .setNavigationBarHidden(false, animated: true)
         }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,9 +54,10 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWGoodsTypeCell)), forCellReuseIdentifier:String(WOWGoodsTypeCell))
         tableView.registerNib(UINib.nibName(String(WOWGoodsDetailCell)), forCellReuseIdentifier:String(WOWGoodsDetailCell))
         tableView.registerNib(UINib.nibName(String(WOWGoodsParamCell)), forCellReuseIdentifier:String(WOWGoodsParamCell))
-        //FIXME:需要提取出来
-//        tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
-//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"argumentCell")
+        tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
+        tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
+        tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
+
     }
     
     
@@ -76,7 +79,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
 
 extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 6
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,6 +92,10 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             return 5
         case 3: //相关场景
             return 1
+        case 4: //喜欢
+            return 1
+        case 5: //评论
+            return 5
         default:
             return 0
         }
@@ -112,19 +119,18 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             cell.paramLabel.text = "参数"
             cell.valueLabel.text = "参数详情参数详情参数详情"
             returnCell = cell
-//            var cell = tableView.dequeueReusableCellWithIdentifier("argumentCell")
-//            if cell == nil {
-//                cell = UITableViewCell(style: .Subtitle, reuseIdentifier:"argumentCell")
-//                cell?.textLabel?.font = FontMediumlevel003
-//                cell?.detailTextLabel?.font = Fontlevel003
-//                cell?.detailTextLabel?.textColor = GrayColorlevel3
-//                cell?.textLabel!.text = "参数"
-//                cell?.detailTextLabel?.text = "参数详情参数详情参数详情"
-//                cell?.imageView?.image = UIImage(named: "goodsWeight")
-//                returnCell = cell
-//            }
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSubArtCell),forIndexPath: indexPath) as! WOWSubArtCell
+            returnCell = cell
+        case 4:
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
+            cell.moreLikeButton.addTarget(self, action: #selector(moreLikeButtonClick), forControlEvents:.TouchUpInside)
+            returnCell = cell
+        case 5:
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
+            cell.hideHeadImage()
+            //FIXME:测试数据
+            cell.commentLabel.text = "我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君"
             returnCell = cell
         default:
             DLog("")
@@ -132,11 +138,16 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         return returnCell
     }
     
+    func moreLikeButtonClick(){
+        let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
+        navigationController?.pushViewController(likeVC, animated: true)
+    }
+    
     
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0,1:
+        case 0,1,4:
             return 0.01
         default:
             return 36
@@ -145,32 +156,52 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 0,3:
+        case 0,3,4:
             return 0.01
+        case 5: //评论
+            return 44
         default:
             return 20
         }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         switch section {
         case 0,1:
             return nil
+        case 2://参数
+            return WOWMenuTopView(leftTitle: "产品参数", rightHiden: true, topLineHiden: false, bottomLineHiden: false)
+        case 3: //相关场景
+           return WOWMenuTopView(leftTitle: "相关场景", rightHiden: true, topLineHiden: false, bottomLineHiden: true)
+        case 5: //评论
+            let view =  WOWMenuTopView(leftTitle: "xx条评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
+            goComment(view)
+            return view
         default:
-            let headerView = WOWMenuTopView(frame:CGRectMake(0,0,tableView.width,36))
-            if section == 2 {
-                headerView.leftLabel.text = "产品参数"
-                headerView.rightButton.hidden = true
-                headerView.showLine(true)
-            }else if section == 3{
-                headerView.leftLabel.text = "相关场景"
-                headerView.rightButton.setImage(UIImage(named: "next_arrow")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
-                headerView.rightButton.hidden = false
-                headerView.topLine.hidden = false
-            }
-            return headerView
+            return nil
         }
     }
+    
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 5 {
+            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
+            goComment(footerView)
+            return footerView
+        }
+        return nil
+    }
+    
+    private func goComment(commentView:UIView!){
+        commentView.addAction{[weak self] in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
     
     
 }

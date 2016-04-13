@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class WowSenceLikeCell: UITableViewCell {
+class WOWSenceLikeCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var moreLikeButton: UIButton!
     override func awakeFromNib() {
@@ -15,14 +15,14 @@ class WowSenceLikeCell: UITableViewCell {
         self.collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
         
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 }
 
 
-extension WowSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -34,7 +34,7 @@ extension WowSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWImageCell), forIndexPath: indexPath) as! WOWImageCell
         //FIXME:测试
-         cell.pictureImageView.image = UIImage(named: "testHeadImage")
+        cell.pictureImageView.image = UIImage(named: "testHeadImage")
         cell.pictureImageView.layer.cornerRadius = 15
         return cell
     }
@@ -42,4 +42,6 @@ extension WowSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake(30,30)
     }
+    
+    
 }

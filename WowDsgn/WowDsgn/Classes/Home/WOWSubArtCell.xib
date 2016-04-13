@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WOWSubArtCell" rowHeight="129" id="OXy-Vp-sjf" customClass="WOWSubArtCell" customModule="WowDsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OXy-Vp-sjf" id="CJH-qX-VAf">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="raw-Id-6Sx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="raw-Id-6Sx" secondAttribute="height" multiplier="8:3" id="ceL-Fm-dg8"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="IoJ-vY-xSV">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ceL-Fm-dg8"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outlet property="dataSource" destination="OXy-Vp-sjf" id="Zlg-eI-agn"/>
+                            <outlet property="delegate" destination="OXy-Vp-sjf" id="jS8-20-5Ss"/>
+                        </connections>
+                    </collectionView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="raw-Id-6Sx" secondAttribute="bottom" priority="999" id="79A-Xe-l2T"/>
+                    <constraint firstItem="raw-Id-6Sx" firstAttribute="leading" secondItem="CJH-qX-VAf" secondAttribute="leading" id="Oe1-BL-kxr"/>
+                    <constraint firstItem="raw-Id-6Sx" firstAttribute="width" secondItem="raw-Id-6Sx" secondAttribute="height" multiplier="8:3" id="ZEH-br-8cp"/>
+                    <constraint firstItem="raw-Id-6Sx" firstAttribute="top" secondItem="CJH-qX-VAf" secondAttribute="top" id="bFb-Bb-JMG"/>
+                    <constraint firstAttribute="trailing" secondItem="raw-Id-6Sx" secondAttribute="trailing" id="f4u-WW-MFN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionView" destination="raw-Id-6Sx" id="rSy-EE-AxV"/>
+            </connections>
+            <point key="canvasLocation" x="1076" y="580.5"/>
+        </tableViewCell>
+    </objects>
+</document>

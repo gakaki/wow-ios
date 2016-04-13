@@ -41,7 +41,7 @@ class WOWSenceHelper: NSObject {
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSubArtCell),forIndexPath: indexPath) as! WOWSubArtCell
             returnCell = cell
         case 3:
-            let cell = tableview.dequeueReusableCellWithIdentifier(String(WowSenceLikeCell),forIndexPath: indexPath) as! WowSenceLikeCell
+            let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
             cell.moreLikeButton.addTarget(self, action: #selector(moreLikeButtonClick), forControlEvents:.TouchUpInside)
             returnCell = cell
         case 4:

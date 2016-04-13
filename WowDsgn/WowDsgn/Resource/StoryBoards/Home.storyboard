@@ -88,7 +88,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGa-V7-hGx">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMe-MI-aSc" customClass="RoundImageView" customModule="WowLib">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMe-MI-aSc">
                                                             <rect key="frame" x="15" y="12" width="36" height="36"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="lMe-MI-aSc" secondAttribute="height" multiplier="1:1" id="x9P-kU-Z5m"/>
@@ -445,94 +445,6 @@
                                             <outlet property="timeLabel" destination="Hgi-7z-bn9" id="l0o-HH-TqO"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WOWSubArtCell" rowHeight="87" id="rxx-vP-EvM" customClass="WOWSubArtCell" customModule="WowDsgn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="167" width="320" height="87"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rxx-vP-EvM" id="kPa-M9-UWh">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SpA-BR-d6y">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="SpA-BR-d6y" secondAttribute="height" multiplier="8:3" id="fGK-nK-fxu"/>
-                                                    </constraints>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="Zkk-bZ-7HM">
-                                                        <size key="itemSize" width="50" height="50"/>
-                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    </collectionViewFlowLayout>
-                                                    <connections>
-                                                        <outlet property="dataSource" destination="rxx-vP-EvM" id="521-pg-nvP"/>
-                                                        <outlet property="delegate" destination="rxx-vP-EvM" id="mhK-1E-FU8"/>
-                                                    </connections>
-                                                </collectionView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="SpA-BR-d6y" firstAttribute="top" secondItem="kPa-M9-UWh" secondAttribute="top" id="L1W-io-wAS"/>
-                                                <constraint firstAttribute="bottom" secondItem="SpA-BR-d6y" secondAttribute="bottom" priority="999" id="SuM-Ir-z84"/>
-                                                <constraint firstAttribute="trailing" secondItem="SpA-BR-d6y" secondAttribute="trailing" id="Ulh-Oi-twx"/>
-                                                <constraint firstItem="SpA-BR-d6y" firstAttribute="leading" secondItem="kPa-M9-UWh" secondAttribute="leading" id="ob9-4R-dHy"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.93271922201708268" green="0.60138873328297326" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="collectionView" destination="SpA-BR-d6y" id="5cR-be-gLD"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WowSenceLikeCell" rowHeight="76" id="bsn-ME-uni" customClass="WowSenceLikeCell" customModule="WowDsgn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="254" width="320" height="76"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bsn-ME-uni" id="Zos-bm-mXU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jW2-WF-Oc3">
-                                                    <rect key="frame" x="203" y="22" width="117" height="36"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="90" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="xx人喜欢" image="blackArrow" backgroundImage="moreLickBtnBack">
-                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Qo-zk-2yz">
-                                                    <rect key="frame" x="15" y="20" width="182" height="40"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="s9g-51-Ibe"/>
-                                                    </constraints>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="2" minimumInteritemSpacing="2" id="K5x-wP-JjV">
-                                                        <size key="itemSize" width="50" height="50"/>
-                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    </collectionViewFlowLayout>
-                                                    <connections>
-                                                        <outlet property="dataSource" destination="bsn-ME-uni" id="wv0-TO-DrP"/>
-                                                        <outlet property="delegate" destination="bsn-ME-uni" id="lbc-7x-e7m"/>
-                                                    </connections>
-                                                </collectionView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="8Qo-zk-2yz" firstAttribute="top" secondItem="Zos-bm-mXU" secondAttribute="top" constant="20" id="874-UV-J3X"/>
-                                                <constraint firstAttribute="bottom" secondItem="8Qo-zk-2yz" secondAttribute="bottom" priority="999" constant="20" id="8Sa-fT-btG"/>
-                                                <constraint firstItem="8Qo-zk-2yz" firstAttribute="leading" secondItem="Zos-bm-mXU" secondAttribute="leading" constant="15" id="eIQ-uz-t0b"/>
-                                                <constraint firstItem="8Qo-zk-2yz" firstAttribute="leading" secondItem="Zos-bm-mXU" secondAttribute="leading" priority="999" constant="20" id="jYR-R0-VS7"/>
-                                                <constraint firstItem="8Qo-zk-2yz" firstAttribute="centerY" secondItem="Zos-bm-mXU" secondAttribute="centerY" id="pfU-do-6IR"/>
-                                                <constraint firstItem="jW2-WF-Oc3" firstAttribute="leading" secondItem="8Qo-zk-2yz" secondAttribute="trailing" constant="6" id="vbV-lf-HXA"/>
-                                                <constraint firstItem="jW2-WF-Oc3" firstAttribute="centerY" secondItem="Zos-bm-mXU" secondAttribute="centerY" id="ysc-1r-aL6"/>
-                                                <constraint firstAttribute="trailing" secondItem="jW2-WF-Oc3" secondAttribute="trailing" id="zfb-K5-Hfu"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="collectionView" destination="8Qo-zk-2yz" id="C9e-EO-8Kd"/>
-                                            <outlet property="moreLikeButton" destination="jW2-WF-Oc3" id="I7C-Mb-0FB"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="ZjH-5o-9uo" id="KbJ-2e-MPV"/>
@@ -568,9 +480,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="blackArrow" width="8" height="13"/>
         <image name="closeNav" width="43" height="38"/>
-        <image name="moreLickBtnBack" width="117" height="36"/>
         <image name="sence_authorBack" width="309" height="60"/>
         <image name="testHeadImage" width="49" height="49"/>
     </resources>

@@ -75,5 +75,15 @@ class WOWMenuTopView: UIView {
     }
     
     
+    convenience init(leftTitle:String!,rightHiden:Bool,topLineHiden:Bool,bottomLineHiden:Bool) {
+        self.init(frame:CGRectMake(0,0,MGScreenWidth,36))
+        rightButton.setImage(UIImage(named: "next_arrow")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
+        leftLabel.text = leftTitle
+        rightButton.userInteractionEnabled = false
+        rightButton.hidden = rightHiden
+        topLine.hidden = topLineHiden
+        bottomLine.hidden = bottomLineHiden
+    }
+    
     
 }

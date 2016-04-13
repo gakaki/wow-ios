@@ -51,7 +51,8 @@ extension UIViewController{
         
         //取消左侧的margin
         let item2 = UIBarButtonItem(barButtonSystemItem:.FixedSpace, target: nil, action: nil)
-        item2.width -= 16
+//        item2.width -= 16
+        item2.width = UIDevice.deviceType.rawValue > 3 ? -20 : -16
         self.navigationItem.leftBarButtonItems = [item2,barItem]
     }
     

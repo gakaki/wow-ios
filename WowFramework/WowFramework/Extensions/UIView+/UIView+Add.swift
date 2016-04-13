@@ -44,7 +44,7 @@ public extension UIView{
     
 //MARK:ACTION
     func addAction(closure:()->()){
-        let tap = UITapGestureRecognizer(target: self, action: "tapClick:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.tapClick(_:)))
         self.addGestureRecognizer(tap)
         ActionManager.sharedManager.actionDict[NSValue(nonretainedObject: self)] = closure
     }

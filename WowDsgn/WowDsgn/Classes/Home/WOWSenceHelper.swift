@@ -93,10 +93,6 @@ class WOWSenceHelper: NSObject {
             let headerView = WOWMenuTopView(leftTitle: "xx件商品", rightHiden: true, topLineHiden: true, bottomLineHiden:true)
             //FIXME:
             headerView.leftLabel.text = "100件商品"
-            //FIXME:应该要跳商品清单吧
-            headerView.addAction({ 
-                DLog("商品列表")
-            })
             return headerView
         }else if section == 4{
             let headerView = WOWMenuTopView(leftTitle: "xx条评论 ", rightHiden:false, topLineHiden: true, bottomLineHiden:true)

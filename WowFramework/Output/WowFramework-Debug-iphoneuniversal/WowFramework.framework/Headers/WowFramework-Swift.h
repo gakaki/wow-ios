@@ -237,6 +237,11 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 - (void)makeCustomerNavigationItem:(NSString * _Null_unspecified)title left:(BOOL)left handler:(void (^ _Nullable)(void))handler;
 - (void)makeCustomerImageNavigationItem:(NSString * _Null_unspecified)image left:(BOOL)left handler:(void (^ _Nonnull)(void))handler;
 - (void)itemClick:(UIBarButtonItem * _Nonnull)item;
+
+/// 获取自己之前的视图
+///
+/// \returns  
+- (UIViewController * _Nullable)forwardController;
 @end
 
 #pragma clang diagnostic pop

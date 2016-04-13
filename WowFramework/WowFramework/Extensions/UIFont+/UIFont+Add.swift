@@ -11,7 +11,7 @@ import Foundation
 public extension UIFont{
     static var scale:CGFloat{
         get {
-            return 1.2
+            return 1.1
         }
     }
     

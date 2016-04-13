@@ -110,7 +110,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
-        vc.entrance = GoodsDetailEntrance.FromBrand
+        vc.goodsDetailEntrance = .FromBrand
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -133,7 +133,6 @@ extension WOWBrandHomeController:WOWActionDelegate{
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
             presentViewController(vc, animated: true, completion: nil)
-            
         default:
             DLog("")
         }

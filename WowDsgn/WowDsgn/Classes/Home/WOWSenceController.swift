@@ -8,17 +8,31 @@
 
 import UIKit
 
+enum  SenceEntrance{
+    case FromHome
+    case FromGoods
+}
+
 class WOWSenceController: WOWBaseViewController {
+    
+
+    
+    
     var footerCollectionView:UICollectionView!
     @IBOutlet weak var tableView: UITableView!
-    var disappearBarHiden = false
+    var senceEntrance:SenceEntrance = .FromHome
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    
     override func viewWillDisappear(animated: Bool) {
-        self.navigationController? .setNavigationBarHidden(disappearBarHiden, animated: true)
+        switch senceEntrance {
+        case .FromGoods:
+            return
+        default:
+            break;
+//            self.navigationController? .setNavigationBarHidden(false, animated: true)
+        }
     }
     
     deinit{
@@ -44,7 +58,7 @@ class WOWSenceController: WOWBaseViewController {
     }
 
     @IBAction func backButtonClick(sender: UIButton) {
-        disappearBarHiden = false
+        
         navigationController?.popViewControllerAnimated(true)
     }
     
@@ -87,8 +101,7 @@ extension WOWSenceController:WOWSubAlertDelegate{
     func subAlertItemClick() {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
-        vc.entrance = GoodsDetailEntrance.FromSence
-        disappearBarHiden = true
+        vc.goodsDetailEntrance  = .FromSence
         WOWSenceHelper.senceController.navigationController?.pushViewController(vc, animated: true)
     }
 }

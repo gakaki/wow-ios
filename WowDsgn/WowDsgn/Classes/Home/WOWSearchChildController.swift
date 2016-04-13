@@ -9,7 +9,6 @@
 import UIKit
 class WOWSearchChildController: UIViewController{
     @IBOutlet weak var tagListView: TagListView!
-    let cellID = "WOWSearchCell"
     let searchItems = []
     
     override func viewDidLoad() {

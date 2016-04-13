@@ -8,34 +8,25 @@
 
 import UIKit
 
-enum GoodsDetailEntrance{
-    case FromBrand
-    case FromGoodsList
-    case FromSence
-}
+
 
 
 class WOWGoodsDetailController: WOWBaseViewController {
     var cycleView:CyclePictureView!
-    /// 默认从商品列表进入
-    var entrance:GoodsDetailEntrance = .FromGoodsList
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var priceLabel: UILabel!
-    
+    var goodsDetailEntrance:GoodsDetailEntrance = .FromGoodsList
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func viewWillDisappear(animated: Bool) {
-        switch entrance {
+        switch goodsDetailEntrance {
         case .FromBrand,.FromSence:
             return
         default:
             self.navigationController? .setNavigationBarHidden(false, animated: true)
         }
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,7 +53,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
 
     }
     
-    
     private func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth), imageURLArray: nil)
         cycleView.placeholderImage = UIImage (named: "test2")
@@ -87,12 +77,18 @@ class WOWGoodsDetailController: WOWBaseViewController {
     @IBAction func buyButtonClick(sender: UIButton) {
         
     }
+    
+    
 }
+
+
+
 
 extension WOWGoodsDetailController:WOWSubAlertDelegate{
     func subAlertItemClick() {
         let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
         sence.hideNavigationBar = true
+        sence.senceEntrance = .FromGoods
         navigationController?.pushViewController(sence, animated: true)
     }
 }

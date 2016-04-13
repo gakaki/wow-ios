@@ -37,8 +37,8 @@ public extension String{
     
     
     func toPinYin() -> String? {
-        var s = self ?? ""
-        var string = NSMutableString(string:s) as CFMutableString
+        let s = self ?? ""
+        let string = NSMutableString(string:s) as CFMutableString
         if CFStringTransform(string, nil, kCFStringTransformMandarinLatin,false) == true{
             if CFStringTransform(string,nil, kCFStringTransformStripDiacritics, false) == true{
                 return string as String

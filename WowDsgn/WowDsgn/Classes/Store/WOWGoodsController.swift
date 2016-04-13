@@ -175,6 +175,7 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
+        vc.goodsDetailEntrance = .FromGoodsList
         navigationController?.pushViewController(vc, animated: true)
     }
 }

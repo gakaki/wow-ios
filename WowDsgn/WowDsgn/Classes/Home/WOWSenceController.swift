@@ -11,10 +11,14 @@ import UIKit
 class WOWSenceController: WOWBaseViewController {
     var footerCollectionView:UICollectionView!
     @IBOutlet weak var tableView: UITableView!
+    var disappearBarHiden = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController? .setNavigationBarHidden(disappearBarHiden, animated: true)
     }
     
     deinit{
@@ -40,6 +44,7 @@ class WOWSenceController: WOWBaseViewController {
     }
 
     @IBAction func backButtonClick(sender: UIButton) {
+        disappearBarHiden = false
         navigationController?.popViewControllerAnimated(true)
     }
     
@@ -69,11 +74,23 @@ class WOWSenceController: WOWBaseViewController {
         guard height != footerCollectionView.size.height else{
             return
         }
-        DLog("\(height)")
         footerCollectionView.size = CGSizeMake(MGScreenWidth, height)
         tableView.tableFooterView = footerCollectionView
     }
     
+}
+
+
+
+//MARK:
+extension WOWSenceController:WOWSubAlertDelegate{
+    func subAlertItemClick() {
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        vc.hideNavigationBar = true
+        vc.entrance = GoodsDetailEntrance.FromSence
+        disappearBarHiden = true
+        WOWSenceHelper.senceController.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 

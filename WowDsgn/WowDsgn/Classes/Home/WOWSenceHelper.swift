@@ -39,6 +39,7 @@ class WOWSenceHelper: NSObject {
             returnCell = cell
         case 2:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSubArtCell),forIndexPath: indexPath) as! WOWSubArtCell
+            cell.delegate = WOWSenceHelper.senceController
             returnCell = cell
         case 3:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
@@ -48,10 +49,9 @@ class WOWSenceHelper: NSObject {
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
                 cell.hideHeadImage()
             cell.commentLabel.text = "我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君"
-            
             returnCell = cell
         default:
-            DLog("")
+           break
         }
         return returnCell
     }
@@ -60,6 +60,7 @@ class WOWSenceHelper: NSObject {
         let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
         senceController.navigationController?.pushViewController(likeVC, animated: true)
     }
+    
     
     
     class func heightForHeaderInSection(section:Int) -> CGFloat{
@@ -85,37 +86,32 @@ class WOWSenceHelper: NSObject {
         case 0,1,3:
             return nil
         default:
-            DLog("")
+            break
         }
         
-        let headerView = WOWMenuTopView(frame:CGRectMake(0,0,tableView.width,36))
-        headerView.rightButton.tag = section + 1001
-        headerView.rightButton.setImage(UIImage(named: "next_arrow")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
         if section == 2 {
+            let headerView = WOWMenuTopView(leftTitle: "xx件商品", rightHiden: true, topLineHiden: true, bottomLineHiden:true)
             //FIXME:
             headerView.leftLabel.text = "100件商品"
             //FIXME:应该要跳商品清单吧
             headerView.addAction({ 
                 DLog("商品列表")
             })
+            return headerView
         }else if section == 4{
-            headerView.leftLabel.text = "100条评论"
+            let headerView = WOWMenuTopView(leftTitle: "xx条评论 ", rightHiden:false, topLineHiden: true, bottomLineHiden:true)
             headerView.addAction({ 
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
                 senceController.navigationController?.pushViewController(vc, animated: true)
             })
+            return headerView
         }
-        return headerView
+        return nil
     }
     
     class func viewForFooterInSection(tableView:UITableView,section:Int) ->UIView?{
         if section == 4 {
-            let footerView = WOWMenuTopView(frame:CGRectMake(0,0,tableView.width,36))
-            footerView.leftLabel.text = "我要评论"
-            footerView.rightButton.setImage(UIImage(named: "next_arrow")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
-            footerView.rightButton.userInteractionEnabled = false
-            footerView.topLine.hidden = false
-            footerView.bottomLine.hidden = false
+            let footerView = WOWMenuTopView(leftTitle: "我要评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
             footerView.addAction({
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
                 senceController.navigationController?.pushViewController(vc, animated: true)

@@ -11,6 +11,7 @@ import UIKit
 enum GoodsDetailEntrance{
     case FromBrand
     case FromGoodsList
+    case FromSence
 }
 
 
@@ -19,6 +20,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
     /// 默认从商品列表进入
     var entrance:GoodsDetailEntrance = .FromGoodsList
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var priceLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +29,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     override func viewWillDisappear(animated: Bool) {
         switch entrance {
-        case .FromBrand:
+        case .FromBrand,.FromSence:
             return
         default:
             self.navigationController? .setNavigationBarHidden(false, animated: true)
@@ -44,7 +47,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
         self.edgesForExtendedLayout = .None
         configTableView()
         configHeaderView()
-        
     }
     
 //MARK:Private Method
@@ -63,7 +65,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth), imageURLArray: nil)
-        cycleView.placeholderImage = UIImage(named: "test2")
+        cycleView.placeholderImage = UIImage (named: "test2")
         //FIXME:修改图片Url
         cycleView.imageURLArray = ["http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg","http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg"]
         tableView.tableHeaderView = cycleView
@@ -73,6 +75,25 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:Actions
     @IBAction func back(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func likeButtonClick(sender: UIButton) {
+        DLog("收藏")
+    }
+    
+    @IBAction func shareButtonClick(sender: UIButton) {
+        DLog("分享")
+    }
+    @IBAction func buyButtonClick(sender: UIButton) {
+        
+    }
+}
+
+extension WOWGoodsDetailController:WOWSubAlertDelegate{
+    func subAlertItemClick() {
+        let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
+        sence.hideNavigationBar = true
+        navigationController?.pushViewController(sence, animated: true)
     }
 }
 
@@ -121,6 +142,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSubArtCell),forIndexPath: indexPath) as! WOWSubArtCell
+            cell.delegate = self
             returnCell = cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell

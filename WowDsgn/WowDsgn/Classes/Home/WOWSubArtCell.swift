@@ -7,9 +7,14 @@
 //
 
 import UIKit
+protocol WOWSubAlertDelegate:class{
+    func subAlertItemClick()
+}
+
 class WOWSubArtCell: UITableViewCell {
     let imageScale:CGFloat = 1.4
     @IBOutlet weak var collectionView: UICollectionView!
+    weak var delegate:WOWSubAlertDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
@@ -38,7 +43,9 @@ extension WOWSubArtCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        DLog("图片被点击")
+        if  let del = self.delegate {
+            del.subAlertItemClick()
+        }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

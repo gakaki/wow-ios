@@ -25,8 +25,13 @@ class WOWGoodsController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initData()
-                           
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

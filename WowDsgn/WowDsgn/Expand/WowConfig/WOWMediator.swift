@@ -16,5 +16,5 @@ enum GoodsDetailEntrance {
 
 
 struct WOWMediator {
-    static var goodsDetailEntrance:GoodsDetailEntrance = .FromGoodsList
+    static var goodsDetailSecondEntrance:GoodsDetailEntrance = .FromGoodsList
 }

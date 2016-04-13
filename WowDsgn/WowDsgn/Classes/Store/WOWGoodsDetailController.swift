@@ -25,10 +25,14 @@ class WOWGoodsDetailController: WOWBaseViewController {
         case .FromBrand,.FromSence:
             return
         default:
-            self.navigationController? .setNavigationBarHidden(false, animated: true)
+            break
         }
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -64,7 +68,18 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func back(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+//        navigationController?.popViewControllerAnimated(true)
+        switch WOWMediator.goodsDetailSecondEntrance {
+        case .FromGoodsList,.FromSence:
+            navigationController?.popToViewController((navigationController?.viewControllers[1])!, animated: true)
+        case .FromBrand:
+            let vcs = navigationController?.viewControllers
+            vcs?.forEach({ (viewcontroller) in
+                if viewcontroller is WOWBrandHomeController{
+                    navigationController?.popToViewController(viewcontroller, animated: true)
+                }
+            })
+        }
     }
     
     @IBAction func likeButtonClick(sender: UIButton) {

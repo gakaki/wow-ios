@@ -24,10 +24,14 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
-//        makeCustomerNavigationItem("关闭", left: true) {[weak self] in
-//            if let strongSelf = self{
-//                strongSelf.dismissViewControllerAnimated(true, completion: nil)
-//            }
-//        }
+        configLeftNav()
+    }
+    
+    private func configLeftNav(){
+        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
+            if let strongSelf = self{
+                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
     }
 }

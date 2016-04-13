@@ -40,12 +40,12 @@ class WOWTabBarController: UITabBarController {
 extension WOWTabBarController:UITabBarControllerDelegate{
     //将要点击
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-//        let controllers = tabBarController.viewControllers
-//        let index = controllers?.indexOf(viewController)
-//        if index == 3{
-//            showBuyCar()
-//            return false
-//        }
+        let controllers = tabBarController.viewControllers
+        let index = controllers?.indexOf(viewController)
+        if index == 3{
+            showBuyCar()
+            return false
+        }
         return true
     }
     

@@ -26,7 +26,7 @@ pod 'UMengSocial', '~> 4.3'
 pod 'RxSwift', '~> 2.2.0'
 pod 'Kingfisher','~>2.0.1'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
-pod 'TagCellLayout', '~> 0.1'
+
 
 xcodeproj ‘WowDsgn/WowDsgn.xcodeproj'
 
@@ -35,4 +35,5 @@ end
 
 #waitting For use
 # 列表空的占位图 TBEmptyDataSet
+#pod 'TagCellLayout', '~> 0.1'
 #pod 'ReactiveCocoa', '~> 4.0.4-alpha-4'

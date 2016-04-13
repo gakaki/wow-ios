@@ -93,7 +93,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WowDsgn/SVProgressHUD.framework"
   install_framework "Pods-WowDsgn/SnapKit.framework"
   install_framework "Pods-WowDsgn/SwiftyJSON.framework"
-  install_framework "Pods-WowDsgn/TagCellLayout.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WowDsgn/Kingfisher.framework"
@@ -105,5 +104,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WowDsgn/SVProgressHUD.framework"
   install_framework "Pods-WowDsgn/SnapKit.framework"
   install_framework "Pods-WowDsgn/SwiftyJSON.framework"
-  install_framework "Pods-WowDsgn/TagCellLayout.framework"
 fi

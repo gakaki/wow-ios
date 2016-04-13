@@ -15,7 +15,7 @@ class WOWGoodsModel: WOWBaseModel {
     func calCellHeight(){
         let s = self.des ?? ""
         var height = s.heightWithConstrainedWidth((MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30, font: UIFont.systemScaleFontSize(13))
-        height = height > 16 ? 30 : 15
+        height = height > 18 ? 30 : 18
         self.cellHeight = 20 + 5 + 14 + height + 6 + WOWGoodsSmallCell.itemWidth
     }
 }

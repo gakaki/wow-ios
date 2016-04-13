@@ -19,15 +19,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    override func viewWillDisappear(animated: Bool) {
-        switch goodsDetailEntrance {
-        case .FromBrand,.FromSence:
-            return
-        default:
-            break
-        }
-    }
+
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -89,8 +81,18 @@ class WOWGoodsDetailController: WOWBaseViewController {
     @IBAction func shareButtonClick(sender: UIButton) {
         DLog("分享")
     }
+    
+    lazy var buyView:WOWGoodsBuyView = {
+        let v = NSBundle.loadResourceName(String(WOWGoodsBuyView))
+        return v as! WOWGoodsBuyView
+    }()
+    
     @IBAction func buyButtonClick(sender: UIButton) {
-        
+        let v = NSBundle.mainBundle().loadNibNamed(("WOWGoodsBuyView"), owner: self, options: nil).last as! WOWGoodsBuyView
+        view.addSubview(v)
+        v.snp_makeConstraints { (make) in
+            make.left.right.top.equalTo(self.view).offset(0)
+        }
     }
     
     
@@ -138,6 +140,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsTypeCell), forIndexPath: indexPath) as! WOWGoodsTypeCell
+            cell.headImageView.addTarget(self, action: #selector(brandHeadClick), forControlEvents:.TouchUpInside)
             cell.showData()
             returnCell = cell
         case 1:
@@ -169,6 +172,11 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             DLog("")
         }
         return returnCell
+    }
+    
+    func brandHeadClick() {
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
+        presentViewController(vc, animated: true, completion: nil)
     }
     
     func moreLikeButtonClick(){

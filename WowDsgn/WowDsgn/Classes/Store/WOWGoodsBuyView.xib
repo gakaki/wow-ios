@@ -35,10 +35,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Wu-oK-qHK">
-                            <rect key="frame" x="555" y="17" width="30" height="30"/>
-                            <color key="backgroundColor" red="0.011764705882352941" green="0.011764705882352941" blue="0.011764705882352941" alpha="0.10280172413793104" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="553" y="16" width="32" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                            <state key="normal" title="+">
+                            <state key="normal" title="+" backgroundImage="addButtonBack">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -46,20 +46,20 @@
                             </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-yM-ked">
-                            <rect key="frame" x="443" y="17" width="110" height="30"/>
+                            <rect key="frame" x="461" y="16" width="90" height="32"/>
                             <color key="backgroundColor" red="0.01176470588" green="0.01176470588" blue="0.01176470588" alpha="0.10280172410000001" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="110" id="2bQ-IT-G7j"/>
-                                <constraint firstAttribute="height" constant="30" id="9Wl-VR-8zw"/>
+                                <constraint firstAttribute="width" constant="90" id="2bQ-IT-G7j"/>
+                                <constraint firstAttribute="height" constant="32" id="9Wl-VR-8zw"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMQ-s7-DD5">
-                            <rect key="frame" x="411" y="17" width="30" height="30"/>
-                            <color key="backgroundColor" red="0.01176470588" green="0.01176470588" blue="0.01176470588" alpha="0.10280172410000001" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="427" y="16" width="32" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                            <state key="normal" title="-">
+                            <state key="normal" title="-" backgroundImage="subButtonBack">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -80,7 +80,7 @@
                         <constraint firstAttribute="height" constant="64" id="suI-Q6-uF0"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHD-9F-HCR">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHD-9F-HCR">
                     <rect key="frame" x="519" y="15" width="66" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="66" id="xSV-4P-UvE"/>
@@ -101,7 +101,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="150" id="cvb-QV-9e9"/>
                     </constraints>
-                    <collectionViewLayout key="collectionViewLayout" id="s8M-T4-Y9m" customClass="TagCellLayout" customModule="TagCellLayout"/>
+                    <collectionViewLayout key="collectionViewLayout" id="s8M-T4-Y9m" customClass="TagCellLayout" customModule="WowDsgn" customModuleProvider="target"/>
                     <connections>
                         <outlet property="dataSource" destination="iN0-l3-epB" id="21N-wb-nBw"/>
                         <outlet property="delegate" destination="iN0-l3-epB" id="lHc-TA-VrE"/>
@@ -128,8 +128,11 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="collectionView" destination="hyL-jG-Ufx" id="jRk-fT-nm7"/>
+                <outlet property="addButton" destination="9Wu-oK-qHK" id="BB2-yx-w4q"/>
+                <outlet property="collectionView" destination="hyL-jG-Ufx" id="Xup-L4-zWd"/>
+                <outlet property="collectionViewHeight" destination="cvb-QV-9e9" id="HUI-TN-nh6"/>
                 <outlet property="countTextField" destination="sR8-yM-ked" id="hoJ-ZM-NOd"/>
+                <outlet property="subButton" destination="QMQ-s7-DD5" id="83A-Ii-m4t"/>
                 <outlet property="totalPriceLabel" destination="GNc-6e-Kjs" id="Pom-Ry-Ebm"/>
             </connections>
             <point key="canvasLocation" x="929" y="486.5"/>
@@ -137,6 +140,8 @@
     </objects>
     <resources>
         <image name="Bar" width="375" height="65"/>
+        <image name="addButtonBack" width="32" height="32"/>
         <image name="close" width="12" height="12"/>
+        <image name="subButtonBack" width="32" height="32"/>
     </resources>
 </document>

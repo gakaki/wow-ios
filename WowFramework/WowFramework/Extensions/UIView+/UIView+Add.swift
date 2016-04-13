@@ -24,6 +24,7 @@ public extension UIView{
     
     func borderRadius(radius:CGFloat){
         self.layer.cornerRadius = radius
+        self.clipsToBounds = true
     }
     
     /**

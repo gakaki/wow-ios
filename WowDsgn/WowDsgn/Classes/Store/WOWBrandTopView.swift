@@ -103,10 +103,10 @@ class WOWBrandHeadView:UIView  {
             if let strongSelf = self{
                 make.centerX.equalTo(strongSelf.snp_centerX)
                 make.bottom.equalTo(strongSelf.nameLabel.snp_top).offset(-20)
-                make.width.height.equalTo(CGFloat(CGFloat(95) * scale))
+                make.width.height.equalTo(CGFloat(CGFloat(96) * scale))
             }
         }
-        headImageView.borderRadius(CGFloat(95) * scale / 2)
+        headImageView.borderRadius(CGFloat(96) * scale / 2)
         headImageView.addAction {[weak self] in
             if let strongSelf = self{
                 if let del = strongSelf.delegate{

@@ -15,7 +15,6 @@ PODS:
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.2)
   - SwiftyJSON (2.3.2)
-  - TagCellLayout (0.1.0)
   - UMengSocial (4.4)
 
 DEPENDENCIES:
@@ -27,7 +26,6 @@ DEPENDENCIES:
   - SnapKit (~> 0.19.1)
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON (~> 2.3.2)
-  - TagCellLayout (~> 0.1)
   - UMengSocial (~> 4.3)
 
 SPEC CHECKSUMS:
@@ -40,7 +38,6 @@ SPEC CHECKSUMS:
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: e4020e23badbd7cc61bc4a80d3c1da57f166a978
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  TagCellLayout: 91e290d7d1893a9338b2bf28033f1beb81bbe44d
   UMengSocial: aba7296602310385114d82c255539a7bef3b7ab0
 
 COCOAPODS: 0.39.0

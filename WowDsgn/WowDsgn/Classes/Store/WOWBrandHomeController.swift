@@ -15,10 +15,6 @@ class WOWBrandHomeController: WOWBaseViewController {
         super.viewDidLoad()
         initData()
     }
-
-    override func viewWillDisappear(animated: Bool) {
-        
-    }
     
     //MARK:Lazy
     lazy var styleButton:UIButton = {

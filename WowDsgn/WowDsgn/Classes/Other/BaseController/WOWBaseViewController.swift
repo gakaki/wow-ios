@@ -18,9 +18,9 @@ class WOWBaseViewController: UIViewController {
 //    override func viewWillDisappear(animated: Bool) {
 //        super.viewWillDisappear(animated)
 //        UIApplication.sharedApplication().keyWindow?.endEditing(true)
-//        if hideNavigationBar {
+////        if hideNavigationBar {
 //            self.navigationController? .setNavigationBarHidden(false, animated: true)
-//        }
+////        }
 //    }
     
     override func viewWillAppear(animated: Bool) {

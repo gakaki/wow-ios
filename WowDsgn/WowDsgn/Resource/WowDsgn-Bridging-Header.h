@@ -9,4 +9,3 @@
 //@import ReactiveCocoa;
 @import Kingfisher;
 //@import Observable;
-#import "UMSocial.h"

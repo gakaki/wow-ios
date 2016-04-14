@@ -15,7 +15,6 @@ PODS:
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.2)
   - SwiftyJSON (2.3.2)
-  - UMengSocial (4.4)
 
 DEPENDENCIES:
   - Kingfisher (~> 2.0.1)
@@ -26,7 +25,6 @@ DEPENDENCIES:
   - SnapKit (~> 0.19.1)
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON (~> 2.3.2)
-  - UMengSocial (~> 4.3)
 
 SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
@@ -38,6 +36,5 @@ SPEC CHECKSUMS:
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: e4020e23badbd7cc61bc4a80d3c1da57f166a978
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  UMengSocial: aba7296602310385114d82c255539a7bef3b7ab0
 
 COCOAPODS: 0.39.0

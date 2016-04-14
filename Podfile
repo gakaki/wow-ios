@@ -22,7 +22,7 @@ pod 'Moya', '~> 6.1.3'
 pod 'SwiftyJSON', '~> 2.3.2'
 pod 'Moya/RxSwift'
 pod 'ObjectMapper', '~> 1.1.5'
-pod 'UMengSocial', '~> 4.3'
+
 pod 'RxSwift', '~> 2.2.0'
 pod 'Kingfisher','~>2.0.1'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框

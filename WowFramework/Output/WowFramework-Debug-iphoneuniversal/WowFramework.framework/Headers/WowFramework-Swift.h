@@ -242,6 +242,7 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 ///
 /// \returns  
 - (UIViewController * _Nullable)forwardController;
+- (BOOL)forwardControllerType:(Class _Nonnull)controller;
 @end
 
 #pragma clang diagnostic pop

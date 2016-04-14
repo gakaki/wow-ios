@@ -28,7 +28,7 @@ class WOWBuyCarNormalCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        checkButton.selected = selected
     }
     
     @IBAction func checkButtonClick(sender: UIButton) {

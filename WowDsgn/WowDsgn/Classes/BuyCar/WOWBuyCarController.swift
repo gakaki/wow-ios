@@ -14,6 +14,8 @@ class WOWBuyCarController: WOWBaseViewController {
     private var rightItemButton:UIButton!
     //FIXME:测试数据
     private var dataArr = ["1","1","1","1","1","1","1","1","1","1","1"]
+    //存放选中的数组
+    private var selectedArr = []
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var endEditButton: UIButton!
@@ -124,8 +126,15 @@ class WOWBuyCarController: WOWBaseViewController {
     }
     
     @IBAction func allButtonClick(sender: UIButton) {
-        
-        
+        sender.selected = !sender.selected
+        for index in 0..<dataArr.count {
+            let indexPath = NSIndexPath(forRow: index, inSection: 0)
+            if sender.selected {//全选
+                tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+            }else{//全不选
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            }
+        }
     }
 }
 
@@ -150,6 +159,14 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return isEditing ? 128 : 108
     }
@@ -165,6 +182,8 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         return "删除"
     }
+    
+    
 }
 
 extension WOWBuyCarController:CarEditCellDelegate{

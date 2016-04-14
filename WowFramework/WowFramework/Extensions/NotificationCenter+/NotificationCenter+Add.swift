@@ -8,18 +8,18 @@
 
 import Foundation
 public extension NSNotificationCenter{
-    func postNotificationOnMainThread(notification:NSNotification){
+   static func postNotificationOnMainThread(notification:NSNotification){
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             NSNotificationCenter.defaultCenter().postNotification(notification)
         }
     }
     
-    func postNotificationNameOnMainThread(aName:String,object:AnyObject?){
+   static  func postNotificationNameOnMainThread(aName:String,object:AnyObject?){
         let not = NSNotification(name: aName, object: object)
         postNotificationOnMainThread(not)
     }
     
-    func postNotificationNameOnMainThread(aName:String,object:AnyObject?,userInfo:[NSObject:AnyObject]?){
+    static func postNotificationNameOnMainThread(aName:String,object:AnyObject?,userInfo:[NSObject:AnyObject]?){
         let not = NSNotification(name: aName, object: object, userInfo: userInfo)
         postNotificationOnMainThread(not)
     }

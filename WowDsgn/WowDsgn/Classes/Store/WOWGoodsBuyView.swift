@@ -8,6 +8,78 @@
 
 import UIKit
 
+//MARK:*****************************背景视图******************************************
+class WOWBuyBackView: UIView {
+ 
+    
+//MARK:Lazy
+    lazy var buyView:WOWGoodsBuyView = {
+        let v = NSBundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView
+        v.closeButton.addTarget(self, action: #selector(closeButtonClick), forControlEvents:.TouchUpInside)
+        v.userInteractionEnabled = true
+        return v
+    }()
+    
+    lazy var backClear:UIView = {
+        let v = UIView()
+        v.backgroundColor = UIColor.clearColor()
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap))
+//        v.addGestureRecognizer(tap)
+        return v
+    }()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUP()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+//MARK:Private Method
+    private func setUP(){
+        self.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight)
+        backgroundColor = MGRgb(0, g: 0, b: 0, alpha: 0.4)
+        self.alpha = 0
+    }
+
+//MARK:Actions
+    
+    func tap() {
+        hideBuyView()
+    }
+    
+    func show() {
+        backClear.frame = CGRectMake(0,self.height,self.width,self.height)
+        addSubview(backClear)
+        backClear.addSubview(buyView)
+        buyView.snp_makeConstraints { (make) in
+            make.left.right.bottom.equalTo(backClear).offset(0)
+        }
+        UIView.animateWithDuration(0.3) {
+            self.alpha = 1
+            self.backClear.y = 0
+        }
+    }
+    
+    func closeButtonClick()  {
+        hideBuyView()
+    }
+    
+    func hideBuyView(){
+        UIView.animateWithDuration(0.3, animations: {
+            self.backClear.y = MGScreenHeight + 10
+            self.alpha = 0
+        }) { (ret) in
+            self.removeFromSuperview()
+        }
+    }
+    
+    
+}
+
+
+//MARK **********************************内容视图***********************************
+
 class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
 
     @IBOutlet weak var countTextField: UITextField!
@@ -16,10 +88,15 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var subButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
-//    var autoLayoutHeight:CGFloat = 0
+    
+    private var buyCount:Int = 1
+    private var totalPrice:String = "¥ " + "\(WOWGoodsDetailController.goodsPrice)"
+    private var typeString:String?
+    
     var token: dispatch_once_t = 0
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,7 +123,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
         let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
         collectionView?.registerNib(nib, forCellWithReuseIdentifier: "WOWTagCollectionViewCell")
         let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
-        
+        totalPriceLabel.text = totalPrice
         collectionView?.collectionViewLayout = tagCellLayout
         collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
         
@@ -56,32 +133,41 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         dispatch_once(&token) {
             let height = self.collectionView.collectionViewLayout.collectionViewContentSize().height
-            guard height != self.collectionView.size.height else{
-                return
+            var endHeight:CGFloat = 200
+            if UIDevice.deviceType.rawValue < 2{
+                endHeight = 130
             }
-            if height > 200 {
-                self.collectionViewHeight.constant = 200
+            
+            if height > endHeight {
+                self.collectionViewHeight.constant = endHeight
             }else{
                 self.collectionViewHeight.constant = height
             }
-//            self.autoLayoutHeight = self.collectionViewHeight.constant  + 250
-//            DLog("view的高度\(self.autoLayoutHeight)")
             DLog("规格的collectionView的高度\(height)")
         }
     }
 
     
-//MARK:Actions
-    @IBAction func closeButtonClick(sender: UIButton) {
-        
+//MARK:Actions    
+    @IBAction func countButtonClick(sender: UIButton) {
+        if sender.tag == 1001 {
+            buyCount -= 1
+            buyCount = buyCount == 0 ? 1 : buyCount
+            showResult(buyCount, perPrice:WOWGoodsDetailController.goodsPrice)
+        }else{
+            buyCount += 1
+            showResult(buyCount, perPrice:WOWGoodsDetailController.goodsPrice)
+        }
     }
     
-    @IBAction func countButtonClick(sender: UIButton) {
-        
-        
-    }
     @IBAction func sureButtonClick(sender: UIButton) {
-        
+        let model = PostBuyModel(count: buyCount, totalPrice:totalPrice, typeString:typeString)
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWGoodsSureBuyNotificationKey, object:model)
+    }
+    
+    private func showResult(count:Int,perPrice:Float){
+        self.countTextField.text = "\(buyCount)"
+        self.totalPriceLabel.text = "¥ " + WOWCalPrice.calGoodsDetailPrice(count, perPrice:perPrice)
     }
 
 
@@ -103,6 +189,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let identifier = "WOWTagCollectionViewCell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
+        //FIXME:假数据
         cell.textLabel.text = "123123"
         return cell
     }
@@ -116,9 +203,26 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        debugPrint("123")
+        typeString = "120宽30高"
     }
+    
 }
+
+
+class PostBuyModel{
+    var count:Int = 0
+    var totalPrice:String = ""
+        /// 产品规格
+    var typeStrng:String = ""
+    init(count:Int,totalPrice:String,typeString:String?){
+        self.count = count
+        self.totalPrice = totalPrice
+        self.typeStrng = typeString ?? ""
+    }
+    
+    
+}
+
 
 
 

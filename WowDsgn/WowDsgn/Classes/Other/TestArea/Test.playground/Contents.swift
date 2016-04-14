@@ -138,6 +138,16 @@ if CFStringTransform(string, nil, kCFStringTransformMandarinLatin,false) == true
 }
 
 
+let count = NSDecimalNumber(float: 1)
+let price = NSDecimalNumber(float:999.0000)
+let totalPrice = count.decimalNumberByMultiplyingBy(price)
+
+let numberFormat = NSNumberFormatter()
+numberFormat.numberStyle = .DecimalStyle
+var result = numberFormat.stringFromNumber(totalPrice)
+result = result ?? ""
+
+
 
 
 

@@ -16,8 +16,12 @@ class WOWGoodsDetailController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var priceLabel: UILabel!
     var goodsDetailEntrance:GoodsDetailEntrance = .FromGoodsList
+    //FIXME:假价钱 声明为类属性，方便后面封装的view计算
+    static var goodsPrice:Float = 111
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObservers()
     }
 
 
@@ -37,6 +41,18 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
 //MARK:Private Method
+    private func addObservers(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
+    }
+    
+    func sureButton(nf:NSNotification)  {
+        let object = nf.object as? PostBuyModel
+        if let model = object {
+            DLog("确定的东东\(model.count),另外\(model.typeStrng)")
+        }
+        backView.hideBuyView()
+    }
+    
     private func configTableView(){
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -60,18 +76,18 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func back(sender: UIButton) {
-//        navigationController?.popViewControllerAnimated(true)
-        switch WOWMediator.goodsDetailSecondEntrance {
-        case .FromGoodsList,.FromSence:
-            navigationController?.popToViewController((navigationController?.viewControllers[1])!, animated: true)
-        case .FromBrand:
-            let vcs = navigationController?.viewControllers
-            vcs?.forEach({ (viewcontroller) in
-                if viewcontroller is WOWBrandHomeController{
-                    navigationController?.popToViewController(viewcontroller, animated: true)
-                }
-            })
-        }
+        navigationController?.popViewControllerAnimated(true)
+//        switch WOWMediator.goodsDetailSecondEntrance {
+//        case .FromGoodsList,.FromSence:
+//            navigationController?.popToViewController((navigationController?.viewControllers[1])!, animated: true)
+//        case .FromBrand:
+//            let vcs = navigationController?.viewControllers
+//            vcs?.forEach({ (viewcontroller) in
+//                if viewcontroller is WOWBrandHomeController{
+//                    navigationController?.popToViewController(viewcontroller, animated: true)
+//                }
+//            })
+//        }
     }
     
     @IBAction func likeButtonClick(sender: UIButton) {
@@ -83,20 +99,24 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     lazy var buyView:WOWGoodsBuyView = {
-        let v = NSBundle.loadResourceName(String(WOWGoodsBuyView))
-        return v as! WOWGoodsBuyView
+        let v = NSBundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView
+        return v
     }()
     
+    lazy var backView:WOWBuyBackView = {
+        let v = WOWBuyBackView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight))
+        return v
+    }()
+
     @IBAction func buyButtonClick(sender: UIButton) {
-        let v = NSBundle.mainBundle().loadNibNamed(("WOWGoodsBuyView"), owner: self, options: nil).last as! WOWGoodsBuyView
-        view.addSubview(v)
-        v.snp_makeConstraints { (make) in
-            make.left.right.top.equalTo(self.view).offset(0)
-        }
+        view.addSubview(backView)
+        view.bringSubviewToFront(backView)
+        backView.show()
     }
-    
+
     
 }
+
 
 
 

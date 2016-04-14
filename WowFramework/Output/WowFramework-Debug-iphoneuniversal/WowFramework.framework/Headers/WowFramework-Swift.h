@@ -108,9 +108,9 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 @class NSObject;
 
 @interface NSNotificationCenter (SWIFT_EXTENSION(WowFramework))
-- (void)postNotificationOnMainThread:(NSNotification * _Nonnull)notification;
-- (void)postNotificationNameOnMainThread:(NSString * _Nonnull)aName object:(id _Nullable)object;
-- (void)postNotificationNameOnMainThread:(NSString * _Nonnull)aName object:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo;
++ (void)postNotificationOnMainThread:(NSNotification * _Nonnull)notification;
++ (void)postNotificationNameOnMainThread:(NSString * _Nonnull)aName object:(id _Nullable)object;
++ (void)postNotificationNameOnMainThread:(NSString * _Nonnull)aName object:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo;
 @end
 
 @class UIViewController;

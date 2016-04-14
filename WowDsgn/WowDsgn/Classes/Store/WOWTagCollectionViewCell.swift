@@ -16,4 +16,14 @@ class WOWTagCollectionViewCell: UICollectionViewCell {
         textLabel.borderRadius(20)
     }
 
+    override var selected: Bool{
+        didSet{
+            if selected {
+                textLabel.backgroundColor = ThemeColor
+            }else{
+                textLabel.backgroundColor = MGRgb(3, g: 3, b: 3, alpha: 0.1)
+            }
+        }
+    }
+    
 }

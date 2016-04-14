@@ -182,7 +182,7 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
         vc.goodsDetailEntrance = .FromGoodsList
-        WOWMediator.goodsDetailSecondEntrance = GoodsDetailEntrance.FromGoodsList
+//        WOWMediator.goodsDetailSecondEntrance = GoodsDetailEntrance.FromGoodsList
         navigationController?.pushViewController(vc, animated: true)
     }
 }

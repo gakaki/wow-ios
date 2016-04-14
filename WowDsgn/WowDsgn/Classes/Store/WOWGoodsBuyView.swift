@@ -31,6 +31,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     }
     
     
+    deinit{
+        collectionView.removeObserver(self, forKeyPath: "contentSize")
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         defaultSetup()

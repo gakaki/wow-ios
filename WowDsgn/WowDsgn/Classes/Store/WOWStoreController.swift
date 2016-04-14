@@ -108,7 +108,6 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
             vc.navigationItem.title = item.menuName
             vc.menuIndex = indexPath.row
-            WOWMediator.goodsDetailSecondEntrance = GoodsDetailEntrance.FromGoodsList
             navigationController?.pushViewController(vc, animated: true)
         }
     }

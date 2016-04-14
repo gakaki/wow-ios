@@ -85,6 +85,7 @@ class WOWGoodsController: WOWBaseViewController {
         view.addSubview(collectionView)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsBigCell)), forCellWithReuseIdentifier: cellBigId)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: cellSmallId)
+        //FIXME:下拉箭头再找下更适合的吧
         configNavigation()
         configMenuView()
     }
@@ -181,6 +182,7 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
         vc.goodsDetailEntrance = .FromGoodsList
+        WOWMediator.goodsDetailSecondEntrance = GoodsDetailEntrance.FromGoodsList
         navigationController?.pushViewController(vc, animated: true)
     }
 }

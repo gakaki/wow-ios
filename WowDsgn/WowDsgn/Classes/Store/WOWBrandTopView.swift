@@ -70,7 +70,7 @@ class WOWBrandHeadView:UIView  {
         backImageView = UIImageView()
         //FIXME:测试数据
         backImageView.image = UIImage(named: "testBrandBack")
-        backImageView.contentMode = .Top
+        backImageView.contentMode = .ScaleAspectFill
         backImageView.clipsToBounds = true
         addSubview(backImageView)
         backImageView.snp_makeConstraints {[weak self] (make) in

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-//左边文字。  右边图片
+//左边文字。  右边图片 
+/// 这个是个人中心右上角的东东
 class WOWNumberMessageView: UIView {
     var leftLabel = UILabel()
     var rightImageView = UIImageView()

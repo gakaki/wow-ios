@@ -8,7 +8,7 @@
         <!--我的-->
         <scene sceneID="PFY-9q-Bx2">
             <objects>
-                <navigationController id="pW3-c3-z6F" customClass="WOWNavigationController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="pW3-c3-z6F" customClass="WOWNavigationController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="我的" id="4gv-cW-hzq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="80n-uP-tph">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -25,7 +25,7 @@
         <!--我-->
         <scene sceneID="Jgs-cp-9oc">
             <objects>
-                <tableViewController storyboardIdentifier="WOWUserController" id="wq2-AE-rHl" customClass="WOWUserController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WOWUserController" id="wq2-AE-rHl" customClass="WOWUserController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="a4W-Ho-J5h">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,7 +260,7 @@
         <!--订单-->
         <scene sceneID="uMR-JW-eg8">
             <objects>
-                <viewController storyboardIdentifier="WOWOrderController" title="订单" id="bUw-c8-WE1" customClass="WOWOrderController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWOrderController" title="订单" id="bUw-c8-WE1" customClass="WOWOrderController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XLI-sT-9by"/>
                         <viewControllerLayoutGuide type="bottom" id="bRM-Wo-NHO"/>
@@ -275,10 +275,28 @@
             </objects>
             <point key="canvasLocation" x="230" y="1160"/>
         </scene>
+        <!--收货地址-->
+        <scene sceneID="VA1-6z-f6k">
+            <objects>
+                <tableViewController storyboardIdentifier="WOWAddressController" title="收货地址" id="fjy-kY-Peo" customClass="WOWAddressController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Sxs-hz-zxM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="fjy-kY-Peo" id="SjJ-wy-ImA"/>
+                            <outlet property="delegate" destination="fjy-kY-Peo" id="gEx-t2-OW0"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D4R-zO-qdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="518" y="430"/>
+        </scene>
         <!--消息中心-->
         <scene sceneID="RTq-RK-Stc">
             <objects>
-                <viewController storyboardIdentifier="WOWMessageController" title="消息中心" id="RZB-fZ-YLE" customClass="WOWMessageController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWMessageController" title="消息中心" id="RZB-fZ-YLE" customClass="WOWMessageController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QWK-Fx-Qla"/>
                         <viewControllerLayoutGuide type="bottom" id="dqb-9M-7Ny"/>
@@ -296,7 +314,7 @@
         <!--设置-->
         <scene sceneID="UYs-Ms-Eyd">
             <objects>
-                <tableViewController storyboardIdentifier="WOWSettingController" title="设置" id="c6C-nt-6YF" customClass="WOWSettingController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WOWSettingController" title="设置" id="c6C-nt-6YF" customClass="WOWSettingController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="DpJ-ZF-vDZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

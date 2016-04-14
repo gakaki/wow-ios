@@ -16,10 +16,19 @@ public extension UIImage {
      
      - returns: 图片
      */
-    class func imageWithColor(color: UIColor, size: CGSize) -> UIImage? {
+    class func imageWithColor(color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(MGScreenWidth, MGScreenHeight), true, UIScreen.mainScreen().scale)
+        color.set()
+        UIRectFill(CGRectMake(0, 0,MGScreenWidth,MGScreenHeight))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    class func imageWithColor(color: UIColor,size:CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(size.width, size.height), true, UIScreen.mainScreen().scale)
         color.set()
-        UIRectFill(CGRectMake(0, 0, size.width, size.height))
+        UIRectFill(CGRectMake(0, 0,size.width,size.height))
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image

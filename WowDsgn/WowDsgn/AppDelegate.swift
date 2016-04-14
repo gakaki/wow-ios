@@ -76,7 +76,7 @@ extension AppDelegate{
         navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
         
         let barButtonItem = UIBarButtonItem.appearance()
-        barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel003], forState: .Normal)
+        barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], forState: .Normal)
         
         
         

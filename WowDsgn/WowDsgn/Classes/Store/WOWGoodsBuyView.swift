@@ -37,7 +37,7 @@ class WOWBuyBackView: UIView {
     }
 //MARK:Private Method
     private func setUP(){
-        self.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight)
+        self.frame = CGRectMake(0, 0, MGScreenWidth, self.height)
         backgroundColor = MGRgb(0, g: 0, b: 0, alpha: 0.4)
         self.alpha = 0
     }
@@ -83,18 +83,17 @@ class WOWBuyBackView: UIView {
 class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
 
     @IBOutlet weak var countTextField: UITextField!
-    
-    @IBOutlet weak var totalPriceLabel: UILabel!
-    
+    @IBOutlet weak var perPriceLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var goodsImageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var subButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
     private var buyCount:Int = 1
-    private var totalPrice:String = "¥ " + "\(WOWGoodsDetailController.goodsPrice)"
+    private var perPrice:String = "0"
     private var typeString:String?
     
     var token: dispatch_once_t = 0
@@ -123,11 +122,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
         let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
         collectionView?.registerNib(nib, forCellWithReuseIdentifier: "WOWTagCollectionViewCell")
         let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
-        totalPriceLabel.text = totalPrice
+        //FIXME:单价
+        perPriceLabel.text = "单价的东东"
+        nameLabel.text = "尖叫系列"
         collectionView?.collectionViewLayout = tagCellLayout
         collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
-        
-        
+        collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .None)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -153,21 +153,20 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
         if sender.tag == 1001 {
             buyCount -= 1
             buyCount = buyCount == 0 ? 1 : buyCount
-            showResult(buyCount, perPrice:WOWGoodsDetailController.goodsPrice)
+            showResult(buyCount)
         }else{
             buyCount += 1
-            showResult(buyCount, perPrice:WOWGoodsDetailController.goodsPrice)
+            showResult(buyCount)
         }
     }
     
     @IBAction func sureButtonClick(sender: UIButton) {
-        let model = PostBuyModel(count: buyCount, totalPrice:totalPrice, typeString:typeString)
+        let model = PostBuyModel(count: buyCount, price:perPrice, typeString:typeString)
         NSNotificationCenter.postNotificationNameOnMainThread(WOWGoodsSureBuyNotificationKey, object:model)
     }
     
-    private func showResult(count:Int,perPrice:Float){
+    private func showResult(count:Int){
         self.countTextField.text = "\(buyCount)"
-        self.totalPriceLabel.text = "¥ " + WOWCalPrice.calGoodsDetailPrice(count, perPrice:perPrice)
     }
 
 
@@ -204,6 +203,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         typeString = "120宽30高"
+        
     }
     
 }
@@ -211,12 +211,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
 
 class PostBuyModel{
     var count:Int = 0
-    var totalPrice:String = ""
+    var perPrice:String = ""
         /// 产品规格
     var typeStrng:String = ""
-    init(count:Int,totalPrice:String,typeString:String?){
+    init(count:Int,price:String,typeString:String?){
         self.count = count
-        self.totalPrice = totalPrice
+        self.perPrice = price
         self.typeStrng = typeString ?? ""
     }
     

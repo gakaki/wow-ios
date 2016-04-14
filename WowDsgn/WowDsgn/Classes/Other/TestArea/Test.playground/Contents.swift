@@ -127,13 +127,19 @@ print(aa!)
  */
 
 var items = [1,2,3,4]
+var ss = items.map({ item in
+    "\(item)"
+})
+
+
 var total = items.reduce(0,combine: {$0 + $1})
 print(total)
 
-var string = NSMutableString(string:"wanyunpeng") as CFMutableString
+var string = NSMutableString(string:"小黑") as CFMutableString
 if CFStringTransform(string, nil, kCFStringTransformMandarinLatin,false) == true{
     if CFStringTransform(string,nil, kCFStringTransformStripDiacritics, false) == true{
-        print(string)
+        let ss = string as String
+        print("ss\(ss)")
     }
 }
 
@@ -147,7 +153,34 @@ numberFormat.numberStyle = .DecimalStyle
 var result = numberFormat.stringFromNumber(totalPrice)
 result = result ?? ""
 
+var strrr = "xiaohei"
+strrr.uppercaseString
 
+let sss:String = "siaoheimemed"
+let arrs = ["s","s"]
+let c = String(sss.characters.first!)
+let ret = arrs.contains(c)
+
+
+let ii:Int?
+let iis = String()
+
+let names = ["ss","喜来登"]
+
+func toPinYin(ss:String) -> String {
+    let string = NSMutableString(string:ss) as CFMutableString
+    if CFStringTransform(string, nil, kCFStringTransformMandarinLatin,false) == true{
+        if CFStringTransform(string,nil, kCFStringTransformStripDiacritics, false) == true{
+            return string as String
+        }
+    }
+    return ""
+}
+
+let maps = names.map { (name) -> String in
+    return toPinYin(name)
+}
+print(maps)
 
 
 

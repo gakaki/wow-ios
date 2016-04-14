@@ -17,7 +17,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     @IBOutlet weak var priceLabel: UILabel!
     var goodsDetailEntrance:GoodsDetailEntrance = .FromGoodsList
     //FIXME:假价钱 声明为类属性，方便后面封装的view计算
-    static var goodsPrice:Float = 111
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()

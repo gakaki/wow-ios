@@ -26,7 +26,6 @@ public extension UIViewController{
         if let left = self.navigationItem.leftBarButtonItem{
             let offset = UIDevice.deviceType.rawValue > 3 ? -20 : -16
             left.imageInsets = UIEdgeInsetsMake(0,CGFloat(offset),0, 0);
-
         }
         
     }

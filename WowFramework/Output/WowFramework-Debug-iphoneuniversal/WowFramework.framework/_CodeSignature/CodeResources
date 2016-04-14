@@ -58,7 +58,7 @@
 		</data>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		WeSKH6Q25E1MnNFXm6DzpMEjRFA=
+		V+3LqL9e5GVSu9QTAmRG5wckxW0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -203,11 +203,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WeSKH6Q25E1MnNFXm6DzpMEjRFA=
+			V+3LqL9e5GVSu9QTAmRG5wckxW0=
 			</data>
 			<key>hash2</key>
 			<data>
-			5WSWlzflGMsh44CUJk1fy3z8uogJJDL6yoAiWVuqCSM=
+			pTZtmLcA9WyIXK4jtsEo+zODsuZ04KPPivIP8FCbl+Q=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

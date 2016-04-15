@@ -10,6 +10,8 @@ import UIKit
 
 class WOWBuyCarNormalCell: UITableViewCell {
 
+    @IBOutlet weak var checkWidth: NSLayoutConstraint!
+    @IBOutlet weak var checkRightSpace: NSLayoutConstraint!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var goodsImageView: UIImageView!
     
@@ -36,6 +38,9 @@ class WOWBuyCarNormalCell: UITableViewCell {
         
     }
     
-    
+    func hideLeftCheck(){
+        checkWidth.constant = 0
+        checkRightSpace.constant = 0
+    }
     
 }

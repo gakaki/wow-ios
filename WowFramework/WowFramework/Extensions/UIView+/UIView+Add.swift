@@ -27,6 +27,15 @@ public extension UIView{
         self.clipsToBounds = true
     }
     
+    
+    func addCorner(roundingCorners: UIRectCorner, cornerSize: CGSize) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundingCorners, cornerRadii: cornerSize)
+        let cornerLayer = CAShapeLayer()
+        cornerLayer.frame = bounds
+        cornerLayer.path = path.CGPath
+        layer.mask = cornerLayer
+    }
+    
     /**
      * 默认为为grayColor
      * 默认透明度为0.5

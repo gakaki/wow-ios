@@ -15,13 +15,10 @@ class WOWBaseViewController: UIViewController {
         setUI()
     }
 
-//    override func viewWillDisappear(animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        UIApplication.sharedApplication().keyWindow?.endEditing(true)
-////        if hideNavigationBar {
-//            self.navigationController? .setNavigationBarHidden(false, animated: true)
-////        }
-//    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.sharedApplication().keyWindow?.endEditing(true)
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,7 +42,7 @@ class WOWBaseViewController: UIViewController {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        view.endEditing(true)
+        UIApplication.sharedApplication().keyWindow?.endEditing(true)
     }
 
     

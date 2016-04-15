@@ -9,11 +9,26 @@
 import UIKit
 class WOWSenceLikeCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var moreLikeButton: UIButton!
+//    @IBOutlet weak var moreLikeButton: UIButton!
+    @IBOutlet weak var rightBackView: UIView!
+    
+    @IBOutlet weak var backImageView: UIImageView!
+    @IBOutlet weak var rightTitleLabel: UILabel!
+    
+    
+    /// 是确认订单界面用到的话，需要将它的尺寸搞大点 其他的都是小一点的
+    var orderTag:Bool = false{
+        didSet{
+            if orderTag {
+                collectionView.reloadData()
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
-        
+        backImageView.addCorner([.TopLeft,.BottomLeft], cornerSize: CGSizeMake(20, 20))
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -40,7 +55,15 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(30,30)
+        if orderTag {
+            return CGSizeMake(46,46)
+        }else{
+            return CGSizeMake(30, 30)
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(15, 0, 15, 0)
     }
     
     

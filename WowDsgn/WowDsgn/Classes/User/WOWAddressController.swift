@@ -64,7 +64,7 @@ extension WOWAddressController{
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 0
     }
     
     
@@ -75,6 +75,7 @@ extension WOWAddressController{
             cell.checkButton.hidden = false
         case .Me:
             cell.checkButton.hidden = true
+            //FIXME:但是默认地址的那行得显示出来哦
         }
         return cell
     }

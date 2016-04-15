@@ -120,6 +120,7 @@ class WOWBuyCarController: WOWBaseViewController {
         if isEditing { //删除
             
         }else{ //结算
+            //FIXME:判断是否登录
             let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWSureOrderController") as! WOWSureOrderController
             navigationController?.pushViewController(sv, animated: true)
         }

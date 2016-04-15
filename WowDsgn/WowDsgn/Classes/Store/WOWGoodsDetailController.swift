@@ -180,7 +180,13 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
-            cell.moreLikeButton.addTarget(self, action: #selector(moreLikeButtonClick), forControlEvents:.TouchUpInside)
+            cell.rightTitleLabel.text = "xxx人喜欢"
+            cell.rightBackView.addAction({ [weak self] in
+                if let strongSelf = self{
+                    let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
+                    strongSelf.navigationController?.pushViewController(likeVC, animated: true)
+                }
+            })
             returnCell = cell
         case 5:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
@@ -232,7 +238,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 0,1:
             return nil
         case 2://参数
-            return WOWMenuTopView(leftTitle: "产品参数", rightHiden: true, topLineHiden: false, bottomLineHiden: false)
+            return WOWMenuTopView(leftTitle: "产品参数", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
         case 3: //相关场景
            return WOWMenuTopView(leftTitle: "相关场景", rightHiden: true, topLineHiden: false, bottomLineHiden: true)
         case 5: //评论

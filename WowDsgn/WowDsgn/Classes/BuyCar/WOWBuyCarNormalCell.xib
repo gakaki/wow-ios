@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9K-Hp-I0F">
@@ -78,6 +78,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="checkButton" destination="y9K-Hp-I0F" id="haN-RX-tDO"/>
+                <outlet property="checkRightSpace" destination="6Hv-Su-b8r" id="DVb-rR-pq2"/>
+                <outlet property="checkWidth" destination="Xbp-qs-uE2" id="3hE-69-2Cm"/>
                 <outlet property="countLabel" destination="fXp-Sn-M48" id="LDq-ed-n1x"/>
                 <outlet property="goodsImageView" destination="qgX-zd-Hl4" id="tRm-aA-kFx"/>
                 <outlet property="nameLabel" destination="Yig-fi-lNd" id="1SS-hX-zki"/>

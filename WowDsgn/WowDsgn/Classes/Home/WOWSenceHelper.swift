@@ -43,7 +43,11 @@ class WOWSenceHelper: NSObject {
             returnCell = cell
         case 3:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
-            cell.moreLikeButton.addTarget(self, action: #selector(moreLikeButtonClick), forControlEvents:.TouchUpInside)
+            cell.rightTitleLabel.text = "xx 人喜欢"
+            cell.rightBackView.addAction({
+                let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
+                senceController.navigationController?.pushViewController(likeVC, animated: true)
+            })
             returnCell = cell
         case 4:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
@@ -55,14 +59,7 @@ class WOWSenceHelper: NSObject {
         }
         return returnCell
     }
-    
-    class func moreLikeButtonClick(){
-        let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
-        senceController.navigationController?.pushViewController(likeVC, animated: true)
-    }
-    
-    
-    
+        
     class func heightForHeaderInSection(section:Int) -> CGFloat{
         switch section {
         case 0,1,3:

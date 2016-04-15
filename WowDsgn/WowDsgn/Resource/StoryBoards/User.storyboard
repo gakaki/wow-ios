@@ -69,7 +69,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="代付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="12R-9F-2LV">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="待付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="12R-9F-2LV">
                                                     <rect key="frame" x="51" y="13" width="45" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -438,7 +438,7 @@
                         <sections>
                             <tableViewSection headerTitle="" id="Wg3-d3-FZp">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="88" id="Cf9-KH-1B3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="88" id="Cf9-KH-1B3">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cf9-KH-1B3" id="fI2-Io-WE2">
@@ -450,6 +450,9 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="CVw-Pa-PKc" id="Hyf-dp-kqG"/>
+                                                    </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOG-TS-AgX" userLabel="line">
                                                     <rect key="frame" x="69" y="44" width="236" height="0.0"/>
@@ -463,6 +466,9 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="CVw-Pa-PKc" id="egB-y9-ANJ"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收件人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbw-LL-wAI">
                                                     <rect key="frame" x="15" y="15" width="39" height="16"/>
@@ -489,7 +495,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="132" id="yIs-D8-z0d">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="132" id="yIs-D8-z0d">
                                         <rect key="frame" x="0.0" y="88" width="320" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yIs-D8-z0d" id="9em-ch-g15">
@@ -523,6 +529,9 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="CVw-Pa-PKc" id="m7C-NH-xE0"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -546,7 +555,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="   " id="Gjj-1a-JIW">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UoU-xH-wjY">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UoU-xH-wjY">
                                         <rect key="frame" x="0.0" y="240" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UoU-xH-wjY" id="8Tg-fk-GuS">
@@ -561,6 +570,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BvQ-BA-vXd">
                                                     <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="switchChanged:" destination="CVw-Pa-PKc" eventType="valueChanged" id="Gfg-7Y-bqC"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -579,6 +591,13 @@
                             <outlet property="delegate" destination="CVw-Pa-PKc" id="HxG-an-ev2"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="cityTextField" destination="r3n-kf-TqY" id="NA7-Pm-1Qm"/>
+                        <outlet property="defaultSwitch" destination="BvQ-BA-vXd" id="bQR-IQ-cen"/>
+                        <outlet property="detailAddressTextField" destination="zv5-zH-7Qo" id="zYj-rd-Xwi"/>
+                        <outlet property="nameTextField" destination="hny-q5-qtF" id="ubw-Pl-b7t"/>
+                        <outlet property="phoneTextField" destination="da1-0b-Bo4" id="9NA-hI-x2b"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZQ-G8-yEz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

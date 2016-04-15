@@ -89,12 +89,22 @@
                                             <action selector="endButtonClick:" destination="t5S-nt-7u6" eventType="touchUpInside" id="ePg-Hs-sc2"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UV6-fk-1yk">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                        <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="iQ3-HC-Wwz"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="k6y-vj-XDz" secondAttribute="bottom" id="1EY-Wr-UWb"/>
                                     <constraint firstItem="MHI-be-nCo" firstAttribute="centerY" secondItem="ccY-3m-yCX" secondAttribute="centerY" id="8f1-h5-Lws"/>
+                                    <constraint firstItem="UV6-fk-1yk" firstAttribute="top" secondItem="ccY-3m-yCX" secondAttribute="top" id="9cd-MA-dyA"/>
+                                    <constraint firstItem="UV6-fk-1yk" firstAttribute="leading" secondItem="ccY-3m-yCX" secondAttribute="leading" id="DyS-NW-ZLY"/>
                                     <constraint firstItem="MHI-be-nCo" firstAttribute="leading" secondItem="bkW-n9-3vb" secondAttribute="trailing" constant="25" id="F70-GM-Wft"/>
+                                    <constraint firstAttribute="trailing" secondItem="UV6-fk-1yk" secondAttribute="trailing" id="OXO-Tc-481"/>
                                     <constraint firstAttribute="trailing" secondItem="k6y-vj-XDz" secondAttribute="trailing" id="WHy-O7-hI4"/>
                                     <constraint firstItem="bkW-n9-3vb" firstAttribute="leading" secondItem="ccY-3m-yCX" secondAttribute="leading" constant="15" id="Wmg-PR-W2n"/>
                                     <constraint firstItem="k6y-vj-XDz" firstAttribute="top" secondItem="ccY-3m-yCX" secondAttribute="top" id="Y7i-RM-H9l"/>
@@ -217,15 +227,25 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAK-7y-rvA">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                        <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="vKs-FT-CGJ"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="WAK-7y-rvA" firstAttribute="top" secondItem="d80-Yv-fLm" secondAttribute="top" id="1LU-1B-KwY"/>
                                     <constraint firstAttribute="bottom" secondItem="OKh-9C-YNC" secondAttribute="bottom" id="1di-B6-UiC"/>
                                     <constraint firstItem="OKh-9C-YNC" firstAttribute="top" secondItem="d80-Yv-fLm" secondAttribute="top" id="4Gc-Lq-i1n"/>
                                     <constraint firstItem="ODD-Hx-8hc" firstAttribute="leading" secondItem="5X1-hm-dNy" secondAttribute="trailing" constant="4" id="4O0-ka-ogs"/>
+                                    <constraint firstAttribute="trailing" secondItem="WAK-7y-rvA" secondAttribute="trailing" id="DCN-Tm-bLa"/>
                                     <constraint firstAttribute="trailing" secondItem="OKh-9C-YNC" secondAttribute="trailing" id="Jma-j1-8e0"/>
                                     <constraint firstItem="5X1-hm-dNy" firstAttribute="centerY" secondItem="cey-PQ-z6b" secondAttribute="centerY" id="PqZ-jd-CN1"/>
                                     <constraint firstItem="5X1-hm-dNy" firstAttribute="leading" secondItem="cey-PQ-z6b" secondAttribute="trailing" constant="8" id="PwY-kT-TGa"/>
+                                    <constraint firstItem="WAK-7y-rvA" firstAttribute="leading" secondItem="d80-Yv-fLm" secondAttribute="leading" id="Rbs-DT-KMa"/>
                                     <constraint firstItem="cey-PQ-z6b" firstAttribute="leading" secondItem="d80-Yv-fLm" secondAttribute="leading" constant="15" id="Sgl-hH-AzL"/>
                                     <constraint firstItem="cey-PQ-z6b" firstAttribute="centerY" secondItem="d80-Yv-fLm" secondAttribute="centerY" id="U4X-tU-N5z"/>
                                     <constraint firstItem="OKh-9C-YNC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ODD-Hx-8hc" secondAttribute="trailing" constant="8" id="Wp1-4G-f11"/>

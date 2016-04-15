@@ -28,7 +28,9 @@ class WOWSenceLikeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
-        backImageView.addCorner([.TopLeft,.BottomLeft], cornerSize: CGSizeMake(20, 20))
+//        rightBackView.addCorner([.TopLeft,.BottomLeft], cornerSize: CGSizeMake(20,0))
+//        let image = UIImage(named: "moreButton")
+//        backImageView.image = image?.stretchableImageWithLeftCapWidth(Int((image?.size.width)!/2), topCapHeight:Int((image?.size.height)!/2))
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

@@ -19,7 +19,7 @@ class WOWBrandListController: WOWBaseViewController {
     var showHeaderIndexs = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
+//        initData()
     }
     
     override func viewWillDisappear(animated: Bool) {

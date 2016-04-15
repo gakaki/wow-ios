@@ -144,6 +144,9 @@
 		2991AE1C1CBD104700F5F5A0 /* WOWGoodsParamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991AE1A1CBD104700F5F5A0 /* WOWGoodsParamCell.swift */; };
 		2991AE1D1CBD104700F5F5A0 /* WOWGoodsParamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2991AE1B1CBD104700F5F5A0 /* WOWGoodsParamCell.xib */; };
 		2996D0891CBCC78900F257FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996D0881CBCC78900F257FF /* AppDelegate.swift */; };
+		29AE2C2B1CC08FB900588429 /* WOWUserInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2C2A1CC08FB900588429 /* WOWUserInfoController.swift */; };
+		29AE2C2D1CC09B0B00588429 /* WOWAddressBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2C2C1CC09B0B00588429 /* WOWAddressBottomView.swift */; };
+		29AE2C311CC09E1C00588429 /* WOWAddAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2C301CC09E1C00588429 /* WOWAddAddressController.swift */; };
 		4BCFA81DDC2C05131EE68148 /* Pods_WowDsgn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 290184FC22EBF7AEE29B0221 /* Pods_WowDsgn.framework */; };
 /* End PBXBuildFile section */
 
@@ -304,6 +307,9 @@
 		2996D0851CBCC78900F257FF /* WowDsgn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WowDsgn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2996D0881CBCC78900F257FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2996D0941CBCC78900F257FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29AE2C2A1CC08FB900588429 /* WOWUserInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUserInfoController.swift; sourceTree = "<group>"; };
+		29AE2C2C1CC09B0B00588429 /* WOWAddressBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAddressBottomView.swift; sourceTree = "<group>"; };
+		29AE2C301CC09E1C00588429 /* WOWAddAddressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAddAddressController.swift; sourceTree = "<group>"; };
 		476599E4AFCFADFD0C787368 /* Pods-WowDsgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WowDsgn.release.xcconfig"; path = "../Pods/Target Support Files/Pods-WowDsgn/Pods-WowDsgn.release.xcconfig"; sourceTree = "<group>"; };
 		951A0804A00C70F7D3A846CC /* Pods-WowDsgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WowDsgn.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-WowDsgn/Pods-WowDsgn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -766,11 +772,13 @@
 		2991ADF31CBCD58500F5F5A0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2991ADD41CBCCAD400F5F5A0 /* WOWUserController.swift */,
 				2991ADD01CBCCAD400F5F5A0 /* WOWMessageController.swift */,
 				2991ADD21CBCCAD400F5F5A0 /* WOWOrderController.swift */,
 				2991ADD31CBCCAD400F5F5A0 /* WOWSettingController.swift */,
-				2991ADD41CBCCAD400F5F5A0 /* WOWUserController.swift */,
 				295659021CBFC76F0029B897 /* WOWAddressController.swift */,
+				29AE2C2A1CC08FB900588429 /* WOWUserInfoController.swift */,
+				29AE2C301CC09E1C00588429 /* WOWAddAddressController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -782,6 +790,7 @@
 				2991ADD51CBCCAD400F5F5A0 /* WOWUserTopView.swift */,
 				295659051CBFC7F10029B897 /* WOWAddressCell.swift */,
 				295659061CBFC7F10029B897 /* WOWAddressCell.xib */,
+				29AE2C2C1CC09B0B00588429 /* WOWAddressBottomView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -901,7 +910,7 @@
 				TargetAttributes = {
 					2996D0841CBCC78900F257FF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = QWYYQTZY98;
+						DevelopmentTeam = YER26K3N7V;
 					};
 				};
 			};
@@ -1055,11 +1064,13 @@
 				2991AD1D1CBCCA0B00F5F5A0 /* WOWSideContainerController.swift in Sources */,
 				2991AD1A1CBCCA0B00F5F5A0 /* WOWBaseViewController.swift in Sources */,
 				295658F71CBFB05B0029B897 /* WOWBurCarEditCell.swift in Sources */,
+				29AE2C2D1CC09B0B00588429 /* WOWAddressBottomView.swift in Sources */,
 				2991AD991CBCCAB100F5F5A0 /* WOWCommentController.swift in Sources */,
 				2991ADD71CBCCAD400F5F5A0 /* WOWActivityListCell.swift in Sources */,
 				2991AD9A1CBCCAB100F5F5A0 /* WOWController.swift in Sources */,
 				2991AD9C1CBCCAB100F5F5A0 /* WOWLikeListCell.swift in Sources */,
 				2991ADD91CBCCAD400F5F5A0 /* WOWBuyCarController.swift in Sources */,
+				29AE2C2B1CC08FB900588429 /* WOWUserInfoController.swift in Sources */,
 				2996D0891CBCC78900F257FF /* AppDelegate.swift in Sources */,
 				2991AD551CBCCA7400F5F5A0 /* UIApplication+Add.swift in Sources */,
 				2991AD231CBCCA0B00F5F5A0 /* WOWDropMenuColumn.swift in Sources */,
@@ -1091,6 +1102,7 @@
 				2991AD971CBCCAB100F5F5A0 /* WOWCommentCell.swift in Sources */,
 				2943FB2C1CBE306200EC90EB /* WOWMediator.swift in Sources */,
 				2943FB281CBE19AD00EC90EB /* WOWGoodsBuyView.swift in Sources */,
+				29AE2C311CC09E1C00588429 /* WOWAddAddressController.swift in Sources */,
 				2991AD641CBCCA7400F5F5A0 /* TagView.swift in Sources */,
 				2991AE1C1CBD104700F5F5A0 /* WOWGoodsParamCell.swift in Sources */,
 				295658F31CBFAAEB0029B897 /* WOWBuyCarNormalCell.swift in Sources */,
@@ -1224,7 +1236,7 @@
 				INFOPLIST_FILE = WowDsgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wow.dsgn.WowDsgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.he.friend;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WowDsgn/Resource/WowDsgn-Bridging-Header.h";
@@ -1245,7 +1257,7 @@
 				INFOPLIST_FILE = WowDsgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wow.dsgn.WowDsgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.he.friend;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WowDsgn/Resource/WowDsgn-Bridging-Header.h";

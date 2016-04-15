@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/WowFramework-Swift.h</key>
 		<data>
-		oWrAjoFoXp2MlywZlVHPbXVmTXc=
+		KBvXMDm/qYkUMbCWZ8SwHPJvkwo=
 		</data>
 		<key>Headers/WowFramework.h</key>
 		<data>
@@ -52,13 +52,21 @@
 		<data>
 		pEmogv7Eg/DNO88TvUo+SJcCQxI=
 		</data>
+		<key>Modules/WowFramework.swiftmodule/arm.swiftdoc</key>
+		<data>
+		9L2D4QllzFQ7N9tlI1IXTgB4Lwk=
+		</data>
+		<key>Modules/WowFramework.swiftmodule/arm.swiftmodule</key>
+		<data>
+		5Oe8wYf1ETTWCvQI89u/d6u7UcU=
+		</data>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		016Jy9cscFSjvinHzxvAVahpCmM=
+		+ftZi6Dt5IZvGIjyWcNt7mtSnlc=
 		</data>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		V+3LqL9e5GVSu9QTAmRG5wckxW0=
+		L1G7VjliQu/T84poPVlSqAKbZLU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -170,11 +178,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oWrAjoFoXp2MlywZlVHPbXVmTXc=
+			KBvXMDm/qYkUMbCWZ8SwHPJvkwo=
 			</data>
 			<key>hash2</key>
 			<data>
-			SY7rH/j8rspr6P/t48Nns/hNstn1VmaGX0LWnMSOGlY=
+			Sp+n35oqm9SocpAGGZvQqd1UkFsC3FFolpaxh8ed0HE=
 			</data>
 		</dict>
 		<key>Headers/WowFramework.h</key>
@@ -188,26 +196,48 @@
 			tR0R1oP1+iWffKCQrkSMovZIhrYCWdoi426ffBvQDRc=
 			</data>
 		</dict>
+		<key>Modules/WowFramework.swiftmodule/arm.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9L2D4QllzFQ7N9tlI1IXTgB4Lwk=
+			</data>
+			<key>hash2</key>
+			<data>
+			EZ72inqR31h7HJMHtfqmqMxnZwenlNoPsl4WmU5vfVg=
+			</data>
+		</dict>
+		<key>Modules/WowFramework.swiftmodule/arm.swiftmodule</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5Oe8wYf1ETTWCvQI89u/d6u7UcU=
+			</data>
+			<key>hash2</key>
+			<data>
+			r8ymx6yXoYIwz3Ug/bUGIg+3ZHZyqYuB+wcN6tTK94s=
+			</data>
+		</dict>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			016Jy9cscFSjvinHzxvAVahpCmM=
+			+ftZi6Dt5IZvGIjyWcNt7mtSnlc=
 			</data>
 			<key>hash2</key>
 			<data>
-			qUNqy75xbcIc76H8z4seCRmKpMVl567gFZZEAR9o6kQ=
+			LMLtXV+hoKtUCVeDpceVVjuStvBwFxIZ/efUb2HEy/4=
 			</data>
 		</dict>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			V+3LqL9e5GVSu9QTAmRG5wckxW0=
+			L1G7VjliQu/T84poPVlSqAKbZLU=
 			</data>
 			<key>hash2</key>
 			<data>
-			pTZtmLcA9WyIXK4jtsEo+zODsuZ04KPPivIP8FCbl+Q=
+			7gh907M7Ixr/La0CnLVFDNuUCU4T3OwwIRCJ3wbYAL0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

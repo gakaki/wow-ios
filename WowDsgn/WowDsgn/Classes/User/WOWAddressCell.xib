@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mby-r8-WIO">
@@ -44,6 +44,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="z1J-R2-KwA" secondAttribute="bottom" constant="15" id="2jg-rx-X9s"/>
+                    <constraint firstItem="z1J-R2-KwA" firstAttribute="top" secondItem="mby-r8-WIO" secondAttribute="bottom" constant="11" id="5ZP-Yp-sxs"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qNz-Hn-AaS" secondAttribute="trailing" constant="60" id="8NI-RE-ntg"/>
                     <constraint firstItem="Q7w-hn-pvz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="z1J-R2-KwA" secondAttribute="trailing" constant="68" id="CKp-Kw-TXf"/>
                     <constraint firstItem="qNz-Hn-AaS" firstAttribute="centerY" secondItem="mby-r8-WIO" secondAttribute="centerY" id="SBH-i7-8vH"/>

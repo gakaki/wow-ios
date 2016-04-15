@@ -22,7 +22,10 @@ class WOWUserController: WOWBaseTableViewController {
     
     override func setUI() {
         super.setUI()
-        configRightNav()
+        /**
+         暂时社区干掉
+         */
+//        configRightNav()
         configHeaderView()
     }
     
@@ -48,9 +51,15 @@ class WOWUserController: WOWBaseTableViewController {
         //FIXME:需要判断下，点击之后干嘛
         header.topContainerView.addAction {[weak self] in
             if let strongSelf = self{
-                strongSelf.goLogin()
+//                strongSelf.goLogin()
+                strongSelf.goUserInfo()
             }
         }
+    }
+    
+    private func goUserInfo(){
+        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWUserInfoController))
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func goLogin(){

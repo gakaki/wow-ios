@@ -119,6 +119,30 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 + (UIViewController * _Nullable)currentViewController:(UIViewController * _Nullable)base;
 @end
 
+@class UIColor;
+
+@interface UIButton (SWIFT_EXTENSION(WowFramework))
+
+/// 倒计时
+///
+/// \param timeLine 倒计时总时间
+///
+/// \param title 还没倒计时的title
+///
+/// \param mainBGColor 还没倒计时的背景颜色
+///
+/// \param mainTitleColor 还没倒计时的文字颜色
+///
+/// \param countBGColor 倒计时中的背景颜色
+///
+/// \param countTitlecolor 倒计时中的文字颜色
+///
+/// \param handle 点击按钮的事件
+///
+/// \returns  void
+- (void)startTimer:(NSInteger)timeLine title:(NSString * _Nonnull)title mainBGColor:(UIColor * _Nonnull)mainBGColor mainTitleColor:(UIColor * _Nonnull)mainTitleColor countBGColor:(UIColor * _Nonnull)countBGColor countTitleColor:(UIColor * _Nonnull)countTitleColor handle:(void (^ _Nullable)(void))handle;
+@end
+
 
 @interface UIDevice (SWIFT_EXTENSION(WowFramework))
 
@@ -150,7 +174,6 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 + (UIFont * _Nonnull)mediumScaleFontSize:(CGFloat)fontSize;
 @end
 
-@class UIColor;
 
 @interface UIImage (SWIFT_EXTENSION(WowFramework))
 
@@ -161,6 +184,7 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 /// \param size 尺寸
 ///
 /// \returns  图片
++ (UIImage * _Nullable)imageWithColor:(UIColor * _Nonnull)color;
 + (UIImage * _Nullable)imageWithColor:(UIColor * _Nonnull)color size:(CGSize)size;
 @end
 

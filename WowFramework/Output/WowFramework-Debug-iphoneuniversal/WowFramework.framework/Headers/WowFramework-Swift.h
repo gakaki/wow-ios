@@ -232,6 +232,7 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 @interface UIView (SWIFT_EXTENSION(WowFramework))
 - (void)borderColor:(CGFloat)borderWidth borderColor:(UIColor * _Nonnull)borderColor;
 - (void)borderRadius:(CGFloat)radius;
+- (void)addCorner:(UIRectCorner)roundingCorners cornerSize:(CGSize)cornerSize;
 
 /// 默认为为grayColor 默认透明度为0.5 默认扩散范围为2 默认阴影范围为size(1,1) - parameter color:
 - (void)shadow:(UIColor * _Nonnull)color shadowOpacity:(float)shadowOpacity shadowRadius:(CGFloat)shadowRadius shadowOffset:(CGSize)shadowOffset;

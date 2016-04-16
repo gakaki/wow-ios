@@ -77,12 +77,16 @@ extension WOWUserController{
         switch indexPath.section {
         case 0://订单
             let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
+            vc.selectIndex = indexPath.row
             navigationController?.pushViewController(vc, animated: true)
         case 2://设置
             let vc = UIStoryboard.initialViewController("User", identifier:String(WOWSettingController)) as! WOWSettingController
             navigationController?.pushViewController(vc, animated: true)
+        case 1://喜欢的
+            let vc = UIStoryboard.initialViewController("User", identifier:"WOWILikeController") as! WOWILikeController
+            navigationController?.pushViewController(vc, animated: true)
         default:
-            DLog("点击")
+            break
         }
     }
     

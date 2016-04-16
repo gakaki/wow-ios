@@ -183,5 +183,10 @@ let maps = names.map { (name) -> String in
 print(maps)
 
 
+for index in 0...26{
+    print(index)
+}
+
+
 
 

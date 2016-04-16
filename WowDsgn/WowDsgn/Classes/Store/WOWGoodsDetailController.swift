@@ -15,7 +15,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     var cycleView:CyclePictureView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var priceLabel: UILabel!
-    var goodsDetailEntrance:GoodsDetailEntrance = .FromGoodsList
+//    var goodsDetailEntrance:GoodsDetailEntrance = .FromGoodsList
     //FIXME:假价钱 声明为类属性，方便后面封装的view计算
    
     

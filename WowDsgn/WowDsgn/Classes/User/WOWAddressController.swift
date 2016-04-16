@@ -39,6 +39,7 @@ class WOWAddressController: WOWBaseTableViewController {
     
     private func configFooter(){
         let footerView = WOWMenuTopView(leftTitle: "新增地址", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
+        footerView.height = 40
         footerView.rightButton.setImage(UIImage(named:"address_add")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
         footerView.addAction {[weak self] in
             if let strongSelf = self{
@@ -64,7 +65,7 @@ extension WOWAddressController{
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 2
     }
     
     

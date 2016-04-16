@@ -43,7 +43,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="QCA-rg-Dp4" firstAttribute="leading" secondItem="qBu-Lr-chA" secondAttribute="trailing" constant="8" id="33q-8u-Vwj"/>
-                    <constraint firstAttribute="bottom" secondItem="qBu-Lr-chA" secondAttribute="bottom" constant="6" id="5yH-S9-teO"/>
+                    <constraint firstAttribute="bottom" secondItem="qBu-Lr-chA" secondAttribute="bottom" priority="998" constant="6" id="5yH-S9-teO"/>
                     <constraint firstItem="QCA-rg-Dp4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9oy-gS-GgR"/>
                     <constraint firstItem="Nqn-rw-dPD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ImY-jc-y3S"/>
                     <constraint firstItem="qBu-Lr-chA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="R12-1T-sf5"/>

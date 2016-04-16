@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct CheckMenuSetting {
+struct WOWCheckMenuSetting {
     static var fill:Bool = false
     static var margin:CGFloat = 15
     static var itemMargin:CGFloat = 30
@@ -16,6 +16,16 @@ struct CheckMenuSetting {
     static var normalTitleColor = UIColor.blackColor()
     static var selectTitleColor = UIColor(red: 74/255.0, green: 74/255.0, blue: 74/255.0, alpha: 1)
     static var titleFont:UIFont = UIFont.systemScaleFontSize(12)
+    
+    static func defaultSetUp(){
+        fill = false
+        margin = 15
+        itemMargin = 30
+        selectedIndex = 0
+        normalTitleColor = UIColor.blackColor()
+        selectTitleColor = UIColor(red: 74/255.0, green: 74/255.0, blue: 74/255.0, alpha: 1)
+        titleFont = UIFont.systemScaleFontSize(12)
+    }
 }
 
 
@@ -24,10 +34,10 @@ protocol TopMenuProtocol:class{
     func topMenuItemClick(index:Int)
 }
 
-class TopMenuTitleView: UIView {
+class WOWTopMenuTitleView: UIView {
     weak var delegate:TopMenuProtocol?
     
-    var selectedIndex = CheckMenuSetting.selectedIndex{
+    var selectedIndex = WOWCheckMenuSetting.selectedIndex{
         didSet{
             changeIndex()
         }
@@ -55,27 +65,26 @@ class TopMenuTitleView: UIView {
     
     private func configSubViews(){
         itemWidths = itemTitles.map({
-            $0.size(CheckMenuSetting.titleFont).width + 8
+            $0.size(WOWCheckMenuSetting.titleFont).width + 8
         })
         titleTotalWidth = itemWidths.reduce(0, combine:{$0 + $1})
-        
         configItems()
     }
     
     private func configItems(){
-        if  CheckMenuSetting.fill{ //铺满
-            CheckMenuSetting.itemMargin = (self.width - titleTotalWidth - CheckMenuSetting.margin * 2) / CGFloat((itemTitles.count - 1))
+        if  WOWCheckMenuSetting.fill{ //铺满
+            WOWCheckMenuSetting.itemMargin = (self.width - titleTotalWidth - WOWCheckMenuSetting.margin * 2) / CGFloat((itemTitles.count - 1))
         }else{ //不铺满
-             let restWidth = self.width - titleTotalWidth - CheckMenuSetting.itemMargin * CGFloat((itemTitles.count - 1))
-             CheckMenuSetting.margin = restWidth / 2
+             let restWidth = self.width - titleTotalWidth - WOWCheckMenuSetting.itemMargin * CGFloat((itemTitles.count - 1))
+             WOWCheckMenuSetting.margin = restWidth / 2
         }
         
         for (index,item) in itemTitles.enumerate(){
             let btn = createItem(item)
-            if index == selectedIndex {
-                btn.frame = CGRectMake(CheckMenuSetting.margin, 5,itemWidths[index],self.height-5)
+            if index == 0 {
+                btn.frame = CGRectMake(WOWCheckMenuSetting.margin, 5,itemWidths[index],self.height-5)
             }else{
-                btn.frame = CGRectMake(itemArr[index - 1].right + CheckMenuSetting.itemMargin,5,itemWidths[index],self.height-5)
+                btn.frame = CGRectMake(itemArr[index - 1].right + WOWCheckMenuSetting.itemMargin,5,itemWidths[index],self.height-5)
             }
             btn.tag = 1000 + index
             btn.addTarget(self, action:#selector(itemClick(_:)), forControlEvents:.TouchUpInside)
@@ -84,9 +93,11 @@ class TopMenuTitleView: UIView {
         }
         
         //下划线
-        bottomLine.frame = self.itemArr[CheckMenuSetting.selectedIndex].frame
-        bottomLine.y = self.height - 3
+        bottomLine.frame = self.itemArr[WOWCheckMenuSetting.selectedIndex].frame
+        bottomLine.y = self.height - 2
         bottomLine.height = 2
+        bottomLine.width += 20
+        bottomLine.centerX = self.itemArr[WOWCheckMenuSetting.selectedIndex].centerX
         self.addSubview(bottomLine)
     }
     
@@ -119,9 +130,9 @@ class TopMenuTitleView: UIView {
     
     private func createItem(title:String) ->UIButton{
         let button = UIButton(type:.System)
-        button.titleLabel?.font = CheckMenuSetting.titleFont
-        button.setTitleColor(CheckMenuSetting.normalTitleColor, forState: .Normal)
-        button.setTitleColor(CheckMenuSetting.selectTitleColor, forState: .Selected)
+        button.titleLabel?.font = WOWCheckMenuSetting.titleFont
+        button.setTitleColor(WOWCheckMenuSetting.normalTitleColor, forState: .Normal)
+        button.setTitleColor(WOWCheckMenuSetting.selectTitleColor, forState: .Selected)
         button.tintColor = UIColor.whiteColor()
         button.setTitle(title, forState: .Normal)
         return button

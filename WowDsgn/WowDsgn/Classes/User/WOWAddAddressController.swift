@@ -39,7 +39,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
             }
         }
         makeCustomerNavigationItem("保存", left: false) {[weak self] in
-            if let strongSelf = self{
+            if let _ = self{
                 DLog("保存")
             }
         }

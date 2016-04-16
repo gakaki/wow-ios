@@ -45,7 +45,7 @@
                     <constraint firstItem="blA-YB-RHb" firstAttribute="centerY" secondItem="F9I-xz-qUx" secondAttribute="centerY" id="aqZ-HJ-5vI"/>
                     <constraint firstAttribute="trailing" secondItem="TUJ-zb-KL5" secondAttribute="trailing" constant="15" id="bxv-z6-1Yp"/>
                     <constraint firstItem="F9I-xz-qUx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="gLi-Cw-RHF"/>
-                    <constraint firstAttribute="bottom" secondItem="F9I-xz-qUx" secondAttribute="bottom" id="qj2-k5-0TX"/>
+                    <constraint firstAttribute="bottom" secondItem="F9I-xz-qUx" secondAttribute="bottom" priority="999" id="qj2-k5-0TX"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

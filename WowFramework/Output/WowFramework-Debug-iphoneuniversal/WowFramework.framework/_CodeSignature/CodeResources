@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/WowFramework-Swift.h</key>
 		<data>
-		KBvXMDm/qYkUMbCWZ8SwHPJvkwo=
+		6UPrr0UxxNgGEFR2KkV7yaUTMx4=
 		</data>
 		<key>Headers/WowFramework.h</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		L1G7VjliQu/T84poPVlSqAKbZLU=
+		uljWImdoQKY9ZomlqcKlKLcY5tM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -178,11 +178,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KBvXMDm/qYkUMbCWZ8SwHPJvkwo=
+			6UPrr0UxxNgGEFR2KkV7yaUTMx4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Sp+n35oqm9SocpAGGZvQqd1UkFsC3FFolpaxh8ed0HE=
+			M+LKBZwaVVfyXvQP9aLJlf98Ao4E3Km0HntadYxD9D8=
 			</data>
 		</dict>
 		<key>Headers/WowFramework.h</key>
@@ -233,11 +233,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			L1G7VjliQu/T84poPVlSqAKbZLU=
+			uljWImdoQKY9ZomlqcKlKLcY5tM=
 			</data>
 			<key>hash2</key>
 			<data>
-			7gh907M7Ixr/La0CnLVFDNuUCU4T3OwwIRCJ3wbYAL0=
+			uJRwzzG8Tdvxd2Uxne0yizx461JPsD+TedfV5KfsF6w=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWSearchController: WOWBaseViewController {
-    var menuView:TopMenuTitleView!
+    var menuView:WOWTopMenuTitleView!
     @IBOutlet weak var containerView: UIView!
     var pageController:UIPageViewController!
     var controllers:[UIViewController] = []
@@ -70,10 +70,10 @@ class WOWSearchController: WOWBaseViewController {
     }
     
     private func configCheckView(){
-        menuView = TopMenuTitleView(frame:CGRectMake(0, 0, MGScreenWidth, 36), titles: ["热门搜索","搜索历史"])
+        WOWCheckMenuSetting.defaultSetUp()
+        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, MGScreenWidth, 40), titles: ["热门搜索","搜索历史"])
         menuView.delegate = self
         WOWBorderColor(menuView)
-
         self.view.addSubview(menuView)
     }
     
@@ -131,6 +131,7 @@ extension WOWSearchController:UIPageViewControllerDataSource,UIPageViewControlle
 
 extension WOWSearchController:TopMenuProtocol{
     func topMenuItemClick(index: Int) {
+        DLog("选择了\(index)")
         currentPage = index
         if currentPage > lastPage {
              pageController.setViewControllers([controllers[currentPage]], direction:.Forward, animated: true, completion: nil)

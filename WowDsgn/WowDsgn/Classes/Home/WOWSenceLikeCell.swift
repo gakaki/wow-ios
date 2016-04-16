@@ -11,8 +11,6 @@ class WOWSenceLikeCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
 //    @IBOutlet weak var moreLikeButton: UIButton!
     @IBOutlet weak var rightBackView: UIView!
-    
-    @IBOutlet weak var backImageView: UIImageView!
     @IBOutlet weak var rightTitleLabel: UILabel!
     
     

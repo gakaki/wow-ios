@@ -38,7 +38,7 @@
                         </connections>
                     </collectionView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqh-z2-5ZQ">
-                        <rect key="frame" x="320" y="20" width="104" height="36"/>
+                        <rect key="frame" x="320" y="19" width="104" height="36"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moreButton" translatesAutoresizingMaskIntoConstraints="NO" id="Ecg-9r-Jqv">
                                 <rect key="frame" x="0.0" y="0.0" width="104" height="36"/>
@@ -75,10 +75,15 @@
                     <constraint firstItem="aqh-z2-5ZQ" firstAttribute="centerY" secondItem="JNg-X8-Gxb" secondAttribute="centerY" id="MYg-Tq-nmG"/>
                     <constraint firstAttribute="trailing" secondItem="aqh-z2-5ZQ" secondAttribute="trailing" id="gTF-4U-6im"/>
                     <constraint firstItem="XXs-Cn-6bm" firstAttribute="leading" secondItem="JNg-X8-Gxb" secondAttribute="leading" constant="15" id="rCa-dM-Gv4"/>
-                    <constraint firstAttribute="bottom" secondItem="XXs-Cn-6bm" secondAttribute="bottom" id="soN-yn-I2x"/>
+                    <constraint firstAttribute="bottom" secondItem="XXs-Cn-6bm" secondAttribute="bottom" priority="999" id="soN-yn-I2x"/>
                     <constraint firstItem="aqh-z2-5ZQ" firstAttribute="leading" secondItem="XXs-Cn-6bm" secondAttribute="trailing" constant="8" id="sph-Go-Ljf"/>
                     <constraint firstItem="XXs-Cn-6bm" firstAttribute="centerY" secondItem="JNg-X8-Gxb" secondAttribute="centerY" id="wkB-Te-ltd"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="wkB-Te-ltd"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="XXs-Cn-6bm" id="EoD-5A-Loi"/>

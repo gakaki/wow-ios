@@ -17,6 +17,9 @@ class WOWBrandDetailController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var underView: WOWBrandUnderView!
     var effectView:UIVisualEffectView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,7 +28,7 @@ class WOWBrandDetailController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-//MARK:Private Method-
+//MARK:Private Method
     override func setUI() {
         super.setUI()
         underView.delegate = self
@@ -63,6 +66,9 @@ class WOWBrandDetailController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWBrandDetailCell)), forCellReuseIdentifier:cellID)
     }
     
+    @IBAction func back(sender: UIButton) {
+        navigationController?.popViewControllerAnimated(true)
+    }
 }
 
 extension WOWBrandDetailController:UITableViewDelegate,UITableViewDataSource{

@@ -353,6 +353,13 @@
                                     <constraint firstAttribute="height" constant="35" id="HpY-ok-RHW"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xe-AJ-9G3">
+                                <rect key="frame" x="0.0" y="20" width="43" height="38"/>
+                                <state key="normal" image="closeNav"/>
+                                <connections>
+                                    <action selector="back:" destination="u6f-ag-qbK" eventType="touchUpInside" id="vlk-WC-Abe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -360,7 +367,9 @@
                             <constraint firstAttribute="trailing" secondItem="lyf-Wk-0Ay" secondAttribute="trailing" id="2zD-8X-46b"/>
                             <constraint firstItem="QAw-ws-xTb" firstAttribute="leading" secondItem="3nH-b0-E2I" secondAttribute="leading" id="Jo8-Vb-F9C"/>
                             <constraint firstItem="lyf-Wk-0Ay" firstAttribute="leading" secondItem="3nH-b0-E2I" secondAttribute="leading" id="KXq-rT-6Af"/>
+                            <constraint firstItem="3Xe-AJ-9G3" firstAttribute="leading" secondItem="3nH-b0-E2I" secondAttribute="leading" id="ZFb-MH-uK8"/>
                             <constraint firstAttribute="trailing" secondItem="QAw-ws-xTb" secondAttribute="trailing" id="aag-R8-9e7"/>
+                            <constraint firstItem="3Xe-AJ-9G3" firstAttribute="top" secondItem="Sq9-lW-pgY" secondAttribute="bottom" id="djX-qb-ggc"/>
                             <constraint firstItem="lyf-Wk-0Ay" firstAttribute="top" secondItem="3nH-b0-E2I" secondAttribute="top" id="jOb-px-SJN"/>
                             <constraint firstItem="KqK-Wx-7E1" firstAttribute="top" secondItem="lyf-Wk-0Ay" secondAttribute="bottom" constant="35" id="xHo-48-9LD"/>
                         </constraints>

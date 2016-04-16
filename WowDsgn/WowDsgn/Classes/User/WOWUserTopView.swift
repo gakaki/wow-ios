@@ -13,10 +13,11 @@ class WOWUserTopView: UIView {
     var headImageView: UIImageView!
     var nameLabel: UILabel!
     var desLabel: UILabel!
-    var bottomContainerView: UIView!
+    private var bottomContainerView: UIView!
     var focusCountLabel: UILabel!
     var fansCountLabel: UILabel!
-    
+    var focusBackView:UIView!
+    var fansBackView:UIView!
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.whiteColor()
@@ -76,7 +77,7 @@ class WOWUserTopView: UIView {
         topContainerView.addSubview(desLabel)
         desLabel.snp_makeConstraints { (make) in
             if let _ = weakSelf{
-                make.centerY.equalTo(headImageView.snp_centerY).offset(8)
+                make.centerY.equalTo(headImageView.snp_centerY).offset(12)
                 make.left.equalTo(headImageView.snp_right).offset(8)
                 make.right.equalTo(nameLabel.snp_right)
             }
@@ -114,29 +115,78 @@ class WOWUserTopView: UIView {
             }
         }
         
-        focusCountLabel = UILabel()
-        //FIXME:
-        focusCountLabel.text = "关注"
-        focusCountLabel.font = Fontlevel003 //修改
-        focusCountLabel.textAlignment = .Center
-        bottomContainerView.addSubview(focusCountLabel)
-        focusCountLabel.snp_makeConstraints { (make) in
+        focusBackView = UIView()
+        focusBackView.backgroundColor = UIColor.whiteColor()
+        bottomContainerView.addSubview(focusBackView)
+        focusBackView.snp_makeConstraints { (make) in
             if let _ = weakSelf{
                 make.left.top.bottom.equalTo(0)
                 make.right.equalTo(bottomCenterLine.snp_left).offset(-1)
             }
         }
         
-        fansCountLabel = UILabel()
-        //FIXME:
-        fansCountLabel.text = "粉丝"
-        fansCountLabel.font = Fontlevel003 //修改
-        fansCountLabel.textAlignment = .Center
-        bottomContainerView.addSubview(fansCountLabel)
-        fansCountLabel.snp_makeConstraints { (make) in
+        let smallView1 = UIView()
+        focusBackView.addSubview(smallView1)
+        smallView1.snp_makeConstraints { (make) in
+            if let _ = weakSelf{
+                make.top.bottom.equalTo(0)
+                make.centerX.equalTo(focusBackView.centerX).offset(0)
+            }
+        }
+        let l1 = createLabel("关注")
+        smallView1.addSubview(l1)
+        l1.snp_makeConstraints { (make) in
             if let _ = weakSelf{
                 make.right.top.bottom.equalTo(0)
-                make.left.equalTo(bottomCenterLine.snp_left).offset(1)
+            }
+        }
+        
+        focusCountLabel = createNumberLabel()
+        //FIXME:
+        focusCountLabel.text = "123"
+        smallView1.addSubview(focusCountLabel)
+        focusCountLabel.snp_makeConstraints { (make) in
+            if let _ = weakSelf{
+                make.left.top.bottom.equalTo(0)
+                make.right.equalTo(l1.snp_left).offset(-2)
+            }
+        }
+        
+        
+        
+        fansBackView = UIView()
+        fansBackView.backgroundColor = UIColor.whiteColor()
+        bottomContainerView.addSubview(fansBackView)
+        fansBackView.snp_makeConstraints { (make) in
+            if let _ = weakSelf{
+                make.right.top.bottom.equalTo(0)
+                make.left.equalTo(bottomCenterLine.snp_right).offset(1)
+            }
+        }
+       
+        let smallView2 = UIView()
+        fansBackView.addSubview(smallView2)
+        smallView2.snp_makeConstraints { (make) in
+            if let _ = weakSelf{
+                make.top.bottom.equalTo(0)
+                make.centerX.equalTo(fansBackView.centerX).offset(0)
+            }
+        }
+        let l2 = createLabel("粉丝")
+        smallView2.addSubview(l2)
+        l2.snp_makeConstraints { (make) in
+            if let _ = weakSelf{
+                make.right.top.bottom.equalTo(0)
+            }
+        }
+        //FIXME:
+        fansCountLabel = createNumberLabel()
+        fansCountLabel.text = "321"
+        smallView2.addSubview(fansCountLabel)
+        fansCountLabel.snp_makeConstraints { (make) in
+            if let _ = weakSelf{
+                make.left.top.bottom.equalTo(0)
+                make.right.equalTo(l2.snp_left).offset(-2)
             }
         }
         
@@ -150,6 +200,21 @@ class WOWUserTopView: UIView {
             }
         }
         
+    }
+    
+    private func createNumberLabel() ->UILabel{
+        let l1 = UILabel()
+        l1.textColor = GrayColorlevel1
+        l1.font = Fontlevel001
+        return l1
+    }
+    
+    private func createLabel(title:String) ->UILabel{
+        let l1 = UILabel()
+        l1.text = title
+        l1.textColor = GrayColorlevel3
+        l1.font = Fontlevel004
+        return l1
     }
     
     required init?(coder aDecoder: NSCoder) {

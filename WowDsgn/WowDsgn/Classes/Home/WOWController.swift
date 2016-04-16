@@ -67,8 +67,12 @@ class WOWController: WOWBaseViewController {
 
 
 extension WOWController:LeftSideProtocol{
-    func sideMenuSelect(tagString: String!) {
+    func sideMenuSelect(tagString: String!, index: Int) {
         DLog(tagString)
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
+        vc.navigationItem.title = tagString
+        vc.menuIndex = index
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

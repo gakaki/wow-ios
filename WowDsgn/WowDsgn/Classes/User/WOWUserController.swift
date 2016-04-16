@@ -42,11 +42,15 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     private func configHeaderView(){
+        
+        func gotoSociety(type:SocietyType){
+            let soc = UIStoryboard.initialViewController("User", identifier:"WOWMeSocietyController") as! WOWMeSocietyController
+            soc.society = type
+            navigationController?.pushViewController(soc, animated: true)
+        }
+        
         let header = WOWUserTopView()
         header.frame = CGRectMake(0, 0, MGScreenWidth, 120)
-        header.addAction({
-            DLog("头部点击")
-        })
         self.tableView.tableHeaderView = header
         //FIXME:需要判断下，点击之后干嘛
         header.topContainerView.addAction {[weak self] in
@@ -55,6 +59,20 @@ class WOWUserController: WOWBaseTableViewController {
                 strongSelf.goUserInfo()
             }
         }
+        header.focusBackView.addAction {[weak self] in
+            if let _ = self{
+                gotoSociety(SocietyType.Focus)
+            }
+        }
+        
+        header.fansBackView.addAction {[weak self] in
+            if let _ = self{
+                gotoSociety(SocietyType.Fans)
+            }
+        }
+        
+       
+        
     }
     
     private func goUserInfo(){

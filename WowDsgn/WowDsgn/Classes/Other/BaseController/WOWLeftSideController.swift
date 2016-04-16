@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol LeftSideProtocol{
-    func sideMenuSelect(tagString:String!)
+    func sideMenuSelect(tagString:String!,index:Int)
 }
 
 class WOWLeftSideController: UIViewController {
@@ -100,7 +100,7 @@ extension WOWLeftSideController:UITableViewDataSource,UITableViewDelegate{
         self.selectedTag = model.menuTag
         self.appdelegate.sideController.hideSide()
         if let dele = self.delegate{
-            dele.sideMenuSelect(selectedTag)
+            dele.sideMenuSelect(selectedTag,index: indexPath.row)
         }
     }
     

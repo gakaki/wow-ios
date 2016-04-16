@@ -13,6 +13,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var sexLabel: UILabel!
     @IBOutlet weak var nickLabel: UILabel!
+    //个性签名
+    @IBOutlet weak var desLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,12 +42,33 @@ extension WOWUserInfoController{
         case 1:
             changeNick()
         case 2:
+            changeDes()
+        case 3:
             changeSex()
         default:
             break
         }
     }
     
+    //更改签名
+    private func changeDes(){
+        let alertController: UIAlertController = UIAlertController(title: "更改签名", message: nil, preferredStyle: .Alert)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .Cancel) { action -> Void in
+            
+        }
+        
+        alertController.addAction(cancelAction)
+        let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
+            let field = alertController.textFields?.first
+            self.desLabel.text = field?.text
+        }
+        alertController.addAction(sureAction)
+        alertController.addTextFieldWithConfigurationHandler { (field) in
+            field.placeholder = "请输入签名"
+        }
+        self.presentViewController(alertController, animated: true, completion: nil)
+
+    }
     
     private func showPicture(){
         let actionSheetController: UIAlertController = UIAlertController(title: "更改头像", message: nil, preferredStyle: .ActionSheet)

@@ -14,3 +14,10 @@ let WOWMenus = ["所有商品","家什","灯光","装点","食居","童趣"]
 
 /***********************************Const**********************************/
 let WOWGoodsSureBuyNotificationKey = "WOWGoodsSureBuyNotificationKey"
+
+
+
+
+
+/***********************************Test***************************************/
+let WOWTestStr = "不可救药的理想主义者"

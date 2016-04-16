@@ -10,6 +10,7 @@ import UIKit
 
 class WOWSettingController: WOWBaseTableViewController {
 
+    @IBOutlet weak var cacheLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,15 +38,7 @@ class WOWSettingController: WOWBaseTableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        //研究下switch高级用法的再写
-//        switch indexPath.section {
-//        case 0: //绑定账号
-//            DLog("绑定账号")
-//        case 1:
-//            
-//        default:
-//            
-//        }
+        
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -46,6 +46,7 @@ class WOWGoodsController: WOWBaseViewController {
         b.setImage(UIImage(named: "store_style_big")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Selected)
         b.addTarget(self, action:#selector(WOWGoodsController.showStyleChange(_:)), forControlEvents:.TouchUpInside)
         b.tintColor = UIColor.whiteColor()
+        b.contentHorizontalAlignment = .Right
         return b
     }()
     

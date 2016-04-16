@@ -451,7 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1EY-HE-DgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="285" y="947"/>
+            <point key="canvasLocation" x="166" y="947"/>
         </scene>
         <!--用户主页-->
         <scene sceneID="U8Z-o2-dYu">
@@ -485,7 +485,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMv-9O-4Co" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="681" y="947"/>
+            <point key="canvasLocation" x="582" y="947"/>
         </scene>
         <!--订单-->
         <scene sceneID="uMR-JW-eg8">
@@ -921,6 +921,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="0lC-yP-Czq" kind="push" id="vq1-5w-u6w"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="20r-bf-Jrh" detailTextLabel="1TM-Mn-5LN" style="IBUITableViewCellStyleValue1" id="tvS-Up-2j9">
                                         <rect key="frame" x="0.0" y="79" width="320" height="44"/>
@@ -986,7 +989,65 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1i-gr-fGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="882" y="3223"/>
+            <point key="canvasLocation" x="617" y="3185"/>
+        </scene>
+        <!--关于-->
+        <scene sceneID="ci8-s5-odA">
+            <objects>
+                <viewController storyboardIdentifier="WOWAboutController" title="关于" id="0lC-yP-Czq" customClass="WOWAboutController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Abx-5e-YUc"/>
+                        <viewControllerLayoutGuide type="bottom" id="FsD-2O-rwj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lc0-PL-x9x">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2015-2016 Wowdsgn All Rights Reserved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0i-rK-7TA">
+                                <rect key="frame" x="37" y="538" width="247" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.64313725490196072" green="0.66666666666666663" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尖叫设计 版权所有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUY-vh-az7">
+                                <rect key="frame" x="110" y="515" width="100" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.64313725489999995" green="0.66666666669999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qtD-17-65s">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="484"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0lC-yP-Czq" id="G72-bD-l0k"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="FsD-2O-rwj" firstAttribute="top" secondItem="F0i-rK-7TA" secondAttribute="bottom" constant="15" id="7qh-qh-tgD"/>
+                            <constraint firstItem="NUY-vh-az7" firstAttribute="centerX" secondItem="Lc0-PL-x9x" secondAttribute="centerX" id="C7x-L1-Zvi"/>
+                            <constraint firstItem="qtD-17-65s" firstAttribute="leading" secondItem="Lc0-PL-x9x" secondAttribute="leading" id="DYG-xJ-W5t"/>
+                            <constraint firstItem="qtD-17-65s" firstAttribute="top" secondItem="Lc0-PL-x9x" secondAttribute="top" id="DqO-U7-tAz"/>
+                            <constraint firstItem="NUY-vh-az7" firstAttribute="top" secondItem="qtD-17-65s" secondAttribute="bottom" constant="31" id="Rew-xj-oRH"/>
+                            <constraint firstItem="F0i-rK-7TA" firstAttribute="top" secondItem="NUY-vh-az7" secondAttribute="bottom" constant="8" id="dYb-FC-LyE"/>
+                            <constraint firstItem="F0i-rK-7TA" firstAttribute="centerX" secondItem="Lc0-PL-x9x" secondAttribute="centerX" id="vpK-b0-hNz"/>
+                            <constraint firstAttribute="trailing" secondItem="qtD-17-65s" secondAttribute="trailing" id="zQu-IM-KCm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZNh-nH-P0W"/>
+                    <connections>
+                        <outlet property="tableView" destination="qtD-17-65s" id="UXY-7A-emg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xno-b4-Nex" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="KEX-3V-S3T">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="1092" y="3185"/>
         </scene>
     </scenes>
     <resources>

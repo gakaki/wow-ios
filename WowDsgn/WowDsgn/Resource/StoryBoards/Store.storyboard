@@ -270,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Gm-fF-oYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="600" y="1088"/>
+            <point key="canvasLocation" x="610" y="1122"/>
         </scene>
         <!--品牌主页-->
         <scene sceneID="WGN-WR-BPF">
@@ -324,7 +324,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbd-b7-OyL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="938" y="1088"/>
+            <point key="canvasLocation" x="1004" y="1122"/>
         </scene>
         <!--品牌详情-->
         <scene sceneID="0yp-SM-qhg">

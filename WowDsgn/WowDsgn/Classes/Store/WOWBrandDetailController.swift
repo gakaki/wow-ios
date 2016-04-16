@@ -67,7 +67,7 @@ class WOWBrandDetailController: WOWBaseViewController {
     }
     
     @IBAction func back(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(true, completion:nil)
     }
 }
 

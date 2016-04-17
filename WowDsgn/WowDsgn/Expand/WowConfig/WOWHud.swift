@@ -11,7 +11,7 @@ import SVProgressHUD
 
 struct WOWHud {
     static func showLoading(){
-        configSVHud()
+        SVProgressHUD.setDefaultMaskType(.Black)
         SVProgressHUD.show()
     }
     

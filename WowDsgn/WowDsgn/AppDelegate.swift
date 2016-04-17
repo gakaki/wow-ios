@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          拉取配置数据
          */
+        //FIXME:要看下loading的加载效果咯
         requestConfigData()
         
         window?.makeKeyAndVisible()
@@ -63,14 +64,11 @@ extension AppDelegate{
     
     func requestConfigData(){
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: { (result) in
-            let json = JSON(result).arrayObject
-            if let js = json{
-                for subJson in js {
-                    let categoryModel = Mapper<WOWCategoryModel>().map(subJson)
-                    try! WOWRealm.write({
-                        if let m = categoryModel{
-                             WOWRealm.add(m, update: true)
-                        }
+            let cateArr = Mapper<WOWCategoryModel>().mapArray(result)
+            if let categorys = cateArr{
+                for cate in categorys{
+                    try! WOWRealm.write({ 
+                         WOWRealm.add(cate, update: true)
                     })
                 }
             }

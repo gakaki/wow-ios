@@ -21,6 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initialAppearance()
 //        registAppKey()
         configRootVC()
+        
+        /**
+         拉取配置数据
+         */
+        requestConfigData()
+        
         window?.makeKeyAndVisible()
         return true
     }
@@ -54,6 +60,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 extension AppDelegate{
+    
+    func requestConfigData(){
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: { (result) in
+            let json = JSON(result).arrayObject
+            if let js = json{
+                for subJson in js {
+                    let categoryModel = Mapper<WOWCategoryModel>().map(subJson)
+                    try! WOWRealm.write({
+                        if let m = categoryModel{
+                             WOWRealm.add(m, update: true)
+                        }
+                    })
+                }
+            }
+            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
+        }) { (errorMsg) in
+            
+        }
+    }
     
     func configRootVC(){
         let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))

@@ -17,7 +17,8 @@ class WOWStoreMenuCell: UICollectionViewCell {
         super.awakeFromNib()
         
     }
-    func showDataModel(model:WOWMenuModel){
+    
+    func showDataModel(model:WOWCategoryModel){
         
     }
 }

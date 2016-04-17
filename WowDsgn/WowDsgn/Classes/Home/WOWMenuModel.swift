@@ -7,18 +7,27 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class WOWMenuModel: WOWBaseModel {
-    var menuImage:String?
-    var menuName:String?
-    var menuCount:String?
-    var menuTag:String!
-    convenience init(imageName:String?,name:String?,count:Int?,tag:String!) {
+final class WOWCategoryModel : Object{
+   dynamic var categoryName:String = ""
+   dynamic var categoryCount:Int = 0
+   dynamic var categoryID:String = ""
+    
+    override static func primaryKey() -> String? {
+        return "categoryID"
+    }
+    
+}
+
+extension WOWCategoryModel:Mappable{
+    func mapping(map: Map) {
+        categoryName    <-    map["name"]
+        categoryCount   <-    map["sum"]
+        categoryID      <-    map["cid"]
+    }
+    
+    convenience init?(_ map: Map) {
         self.init()
-        menuImage = imageName
-        menuName  = name
-        let totalCount = count ?? 0
-        menuCount = "\(totalCount)件商品"
-        menuTag = tag
     }
 }

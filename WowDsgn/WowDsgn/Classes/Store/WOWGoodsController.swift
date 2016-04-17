@@ -17,6 +17,7 @@ class WOWGoodsController: WOWBaseViewController {
     private var cellBigId = String(WOWGoodsBigCell)
     private var cellSmallId = String(WOWGoodsSmallCell)
     var menuIndex:Int = 0
+    var menuTitles = ["",""]
     var dataArr = [WOWGoodsModel]()
     var menuView: BTNavigationDropdownMenu!
     private var cellShowStyle:GoodsCellStyle = .Big
@@ -111,12 +112,10 @@ class WOWGoodsController: WOWBaseViewController {
         }
         
         view.addSubview(menuView)
-        
     }
     
     private func configNavigation(){
-        let items = WOWMenus
-        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: items[menuIndex], items: items,defaultSelectIndex: menuIndex)
+        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: menuTitles[menuIndex], items: menuTitles,defaultSelectIndex: menuIndex)
         menuView.cellHeight = 50
         menuView.cellBackgroundColor = UIColor.whiteColor()
         menuView.cellSelectionColor = ThemeColor
@@ -130,6 +129,7 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.cellSeparatorColor = BorderColor
         menuView.checkMarkImage = UIImage(named: "duihao")
         menuView.arrowImage = UIImage(named:"nav_arrow")
+        menuView.maxShowRowNumber = 5
         menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
             DLog("Did select item at index: \(indexPath)")
         }

@@ -120,6 +120,16 @@ public class BTNavigationDropdownMenu: UIView {
         }
     }
     
+    
+    public var maxShowRowNumber:Int{
+        get{
+            return self.configuration.maxShowRowNumber
+        }
+        set(value){
+            self.configuration.maxShowRowNumber = value
+        }
+    }
+    
     // The checkmark icon of the cell
     public var checkMarkImage: UIImage! {
         get {
@@ -429,6 +439,7 @@ class BTConfiguration {
     var animationDuration: NSTimeInterval!
     var maskBackgroundColor: UIColor!
     var maskBackgroundOpacity: CGFloat!
+    var maxShowRowNumber:Int!
     
     init() {
         self.defaultValue()
@@ -459,6 +470,7 @@ class BTConfiguration {
         self.arrowPadding = 15
         self.maskBackgroundColor = UIColor.blackColor()
         self.maskBackgroundOpacity = 0.3
+        self.maxShowRowNumber = 5
     }
 }
 
@@ -506,7 +518,7 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        return self.configuration.maxShowRowNumber
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

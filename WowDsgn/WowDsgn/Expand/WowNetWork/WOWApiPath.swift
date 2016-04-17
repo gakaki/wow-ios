@@ -8,4 +8,12 @@
 
 import Foundation
 
-let userPath = "api/AppConfig/GetAppConfig"
+//Host
+//王云鹏自己的本机
+let BaseUrl = "http://127.0.0.1:8360/"
+
+
+//API_URL接口
+let URL_category = "api/category"
+
+

@@ -11,7 +11,7 @@ import UIKit
 class WOWStoreController: WOWBaseViewController {
     let cellID1  = String(WOWStoreBrandCell)
     let cellID2 = String(WOWMenuCell)
-    var menuDataArr = [WOWMenuModel]()
+    var dataArr = [WOWCategoryModel]()
     var cycleView:CyclePictureView!
     @IBOutlet var tableView: UITableView!
     
@@ -25,26 +25,22 @@ class WOWStoreController: WOWBaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func initData(){
-        let images = ["all","jiashi","dengguang","zhuangdian","shiju","tongqu"]
-        //FIXME:测试数据
-        let names  = WOWMenus
-        let tags   = ["0","1","2","3","4","5"]
-        let count  = [111,222,333,444,555,666]
-        for index in 0..<images.count{
-            let model = WOWMenuModel(imageName:"store_" + images[index], name: names[index], count: count[index],tag:tags[index])
-            menuDataArr.append(model)
-        }
-        
-    }
+//MARK:Private Method
     
     override func setUI() {
         super.setUI()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
-//        tableView.registerClass(WOWStoreBrandCell.self, forCellReuseIdentifier:cellID1)
         configHeaderView()
+    }
+    
+    private func initData(){
+        let categorys = WOWRealm.objects(WOWCategoryModel)
+        dataArr = []
+        for model in categorys {
+            dataArr.append(model)
+        }
     }
     
     private func configHeaderView(){
@@ -54,6 +50,16 @@ class WOWStoreController: WOWBaseViewController {
         cycleView.imageURLArray = ["http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg","http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg"]
         tableView.tableHeaderView = cycleView
     }
+    
+    /*
+    private func addObserver(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateCategory), name:WOWCategoryUpdateNotificationKey, object: nil)
+    }
+    */
+    
+//MARK:Actions
+    
+    
 }
 
 
@@ -75,7 +81,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         if section == 0{
             return 1
         }else{
-            return menuDataArr.count
+            return dataArr.count
         }
     }
     
@@ -87,7 +93,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
             tableViewCell = cell
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID2, forIndexPath: indexPath) as! WOWMenuCell
-            cell.showDataModel(menuDataArr[indexPath.row])
+            cell.showDataModel(dataArr[indexPath.row])
             tableViewCell = cell
         }
         return tableViewCell
@@ -104,14 +110,23 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 { //分类
-            let item = menuDataArr[indexPath.row]
+            let item = dataArr[indexPath.row]
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
-            vc.navigationItem.title = item.menuName
+            vc.navigationItem.title = item.categoryName
             vc.menuIndex = indexPath.row
+            vc.menuTitles = categoryTitles
             navigationController?.pushViewController(vc, animated: true)
         }
     }
     
+    
+    var categoryTitles:[String]{
+        get{
+          return dataArr.map { (model) -> String in
+                return model.categoryName
+            }
+        }
+    }
     
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

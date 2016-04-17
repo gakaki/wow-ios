@@ -9,9 +9,9 @@
 import Foundation
 
 public enum RequestApi{
-    static var HostUrl:String! = "http://testapi.cddtwx.cn/api/AppConfig/GetAppConfig"
+    static var HostUrl:String! = BaseUrl
     
-    case Weather
+    case Api_Category
 }
 
 
@@ -22,21 +22,18 @@ extension RequestApi:TargetType{
     
     public var path:String{
         switch self{
-        case .Weather:
-            return ""
+        case .Api_Category:
+            return URL_category
         }
     }
     
     public var method:Moya.Method{
-        switch self{
-        case .Weather:
-            return .POST
-        }
+        return .POST
     }
     
     public var parameters:[String: AnyObject]?{
         switch self{
-        case .Weather:
+        case .Api_Category:
             return nil
         }
     }

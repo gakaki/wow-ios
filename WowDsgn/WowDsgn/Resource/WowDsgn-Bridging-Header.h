@@ -6,6 +6,10 @@
 @import  SnapKit;
 @import  Moya;
 @import RxSwift;
+@import ObjectMapper;
+@import SwiftyJSON;
 //@import ReactiveCocoa;
 @import Kingfisher;
+@import RealmSwift;
+
 //@import Observable;

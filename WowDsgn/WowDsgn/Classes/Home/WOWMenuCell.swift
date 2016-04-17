@@ -25,10 +25,31 @@ class WOWMenuCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func showDataModel(model:WOWMenuModel){
-        menuImageView.image = UIImage(named:model.menuImage ?? "")
-        menuNameLabel.text = model.menuName
-        menuCountLabel.text = model.menuCount
+    func showDataModel(model:WOWCategoryModel){
+        menuImageView.image = UIImage(named:getImageName(model.categoryID))
+        menuNameLabel.text = model.categoryName
+        menuCountLabel.text = "\(model.categoryCount)"
+    }
+    
+    private func getImageName(categoryID:String) -> String{
+        switch categoryID {
+        case "5": //全部
+            return "all"
+        case "17"://装点
+            return  "jiashi"
+        case "18"://家什
+            return "dengguang"
+        case "19"://灯光
+            return "zhuangdian"
+        case "20"://食居
+            return "shiju"
+        case "21"://童趣
+            return "tongqu"
+        case "216"://活动
+            return "  "
+        default:
+            return "  "
+        }
     }
     
 }

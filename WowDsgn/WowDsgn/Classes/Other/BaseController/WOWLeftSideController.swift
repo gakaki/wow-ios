@@ -14,50 +14,35 @@ import UIKit
 
 class WOWLeftSideController: UIViewController {
     let cellID = String(WOWMenuCell)
-    var dataArr = [WOWMenuModel]()
+    var dataArr = [WOWCategoryModel]()
     weak var delegate:LeftSideProtocol?
     //FIXME:默认应该为全部的额
     var selectedTag:String! = ""
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
         setUI()
+        addObserver()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+
+//MARK:Private Method
     
     private func setUI(){
         tableView.clearRestCell()
-        //tableview 设置毛玻璃效果
-//        let blurView = UIVisualEffectView(frame:CGRectMake(0,0,tableView.width,tableView.height))
-//        let blurEffect = UIBlurEffect(style: .Light)
-//        blurView.effect = blurEffect
-//        self.tableView.backgroundView = blurView
         let imageView = UIImageView(frame:CGRectMake(0,0,tableView.width,tableView.height))
         imageView.image = UIImage(named: "menuTableView")
         self.tableView.backgroundView = imageView
     }
     
-    private func initData(){
-        //FIXME:估计后期是要做成活的咯
-        let images = ["all","jiashi","dengguang","zhuangdian","shiju","tongqu"]
-        let names  = WOWMenus
-        let tags   = ["0","1","2","3","4","5"]
-        let count  = [111,222,333,444,555,666]
-        for index in 0..<images.count{
-            let model = WOWMenuModel(imageName:images[index], name: names[index], count: count[index],tag:tags[index])
-            dataArr.append(model)
-        }
+    private func addObserver(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateCategory), name:WOWCategoryUpdateNotificationKey, object: nil)
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.appdelegate.sideController.hideSide()
-    }
-    
+//MARK:Lazy
     lazy var appdelegate:AppDelegate = {
         let a =  UIApplication.sharedApplication().delegate as! AppDelegate
         return a
@@ -72,12 +57,27 @@ class WOWLeftSideController: UIViewController {
         return view
     }()
     
+//MARK:Actions
+    func updateCategory() {
+        let categorys = WOWRealm.objects(WOWCategoryModel)
+        dataArr = []
+        for model in categorys {
+            dataArr.append(model)
+        }
+        tableView.reloadData()
+         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.appdelegate.sideController.hideSide()
+    }
+    
     func closeButtonClick(){
         self.appdelegate.sideController.hideSide()
     }
 }
 
-
+//MARK:Delegate
 extension WOWLeftSideController:UITableViewDataSource,UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -97,7 +97,7 @@ extension WOWLeftSideController:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let model = dataArr[indexPath.row]
-        self.selectedTag = model.menuTag
+        self.selectedTag = model.categoryID
         self.appdelegate.sideController.hideSide()
         if let dele = self.delegate{
             dele.sideMenuSelect(selectedTag,index: indexPath.row)

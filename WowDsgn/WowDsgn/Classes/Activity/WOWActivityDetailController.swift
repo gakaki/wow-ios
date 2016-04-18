@@ -41,15 +41,15 @@ class WOWActivityDetailController: WOWBaseViewController {
 extension WOWActivityDetailController:WKUIDelegate,WKNavigationDelegate{
     //开始加载
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        WOWHud.showLoading()
+       
     }
     
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        WOWHud.showMsg("加载失败")
+//        WOWHud.showMsg("加载失败")
     }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        WOWHud.dismiss()
+//        WOWHud.dismiss()
         navigationItem.title = webView.title
     }
     

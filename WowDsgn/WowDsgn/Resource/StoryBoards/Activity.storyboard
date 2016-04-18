@@ -43,10 +43,10 @@
             </objects>
             <point key="canvasLocation" x="651" y="589"/>
         </scene>
-        <!--活动详情-->
+        <!--Activity Detail Controller-->
         <scene sceneID="j83-fH-tYB">
             <objects>
-                <viewController storyboardIdentifier="WOWActivityDetailController" title="活动详情" id="ne0-N5-XVN" customClass="WOWActivityDetailController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWActivityDetailController" id="ne0-N5-XVN" customClass="WOWActivityDetailController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZJq-c9-MGB"/>
                         <viewControllerLayoutGuide type="bottom" id="VIj-eq-ac0"/>

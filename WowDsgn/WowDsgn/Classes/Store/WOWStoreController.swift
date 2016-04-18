@@ -37,11 +37,10 @@ class WOWStoreController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
         
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth * 215/375), imageURLArray: nil)
-        
+        cycleView.delegate = self
         //FIXME:默认图片
         cycleView.placeholderImage = UIImage(named: "test2")
         tableView.tableHeaderView = cycleView
-        
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction:#selector(pullToRefresh))
     }
     
@@ -90,12 +89,20 @@ class WOWStoreController: WOWBaseViewController {
                 
         }
     }
-    
-
-    
-    
 }
 
+
+extension WOWStoreController:CyclePictureViewDelegate{
+    func cyclePictureView(cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let model = bannerArr[indexPath.item]
+        guard let string = model.url else{
+            return
+        }
+        let vc = UIStoryboard.initialViewController("Activity", identifier:"WOWActivityDetailController") as! WOWActivityDetailController
+        vc.url = string
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 extension WOWStoreController:BrandCellDelegate{
     func hotBrandCellClick(brandModel: WOWBrandListModel) {

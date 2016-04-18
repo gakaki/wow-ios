@@ -9,12 +9,18 @@
 import UIKit
 
 class WOWRegistController: WOWBaseViewController {
-
-    @IBOutlet weak var countryCodeView: UIView!
+    
 
     @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var msgCodeTextField: UITextField!
     
     @IBOutlet weak var tipsLabel: UILabel!
+    @IBOutlet weak var msgCodeButton: UIButton!
+    
+    @IBOutlet weak var passwdTextField: UITextField!
+    
+    @IBOutlet weak var protocolCheckButton: UIButton!
+//MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,9 +32,9 @@ class WOWRegistController: WOWBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK:Life
+//MARK:Lazy
     
-    //MARK:Private Method
+//MARK:Private Method
     override func setUI() {
         super.setUI()
         configNavItem()
@@ -48,17 +54,28 @@ class WOWRegistController: WOWBaseViewController {
         }
     }
     
-    //MARK:Actions
+//MARK:Actions
     private func back(){
         navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func nextClick(sender: UIButton) {
+    @IBAction func msgCodeButtonClick(sender: AnyObject) {
+        DLog("获取验证码")
+    }
+    
+    
+    @IBAction func registClick(sender: UIButton) {
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistProtocolController)) as! WOWRegistProtocolController
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    //MARK:Lazy
+    @IBAction func protocolCheckButtonClick(sender:UIButton) {
+        sender.selected = !sender.selected
+    }
+    
+    @IBAction func showProtocol(sender: UIButton) {
+        DLog("用户协议")
+    }
     
     
 

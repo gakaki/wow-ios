@@ -50,10 +50,12 @@ class WOWLoginController: WOWBaseViewController {
         navigationController?.pushViewController(v, animated: true)
     }
     
+    
     @IBAction func forgetPasswordClick(sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
-        vc.entrance  = .ForgetPasswordHome
-        navigationController?.pushViewController(vc, animated: true)
+        DLog("忘记密码")
+//        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
+//        vc.entrance  = .ForgetPasswordHome
+//        navigationController?.pushViewController(vc, animated: true)
         
     }
     

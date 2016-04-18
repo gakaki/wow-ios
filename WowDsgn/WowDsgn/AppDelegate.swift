@@ -19,7 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //初始化外观
         //com.wowdsgn.Wow
         initialAppearance()
-//        registAppKey()
+        
+        /**
+         注册第三方
+         */
+        registAppKey()
+        
         configRootVC()
         
         /**
@@ -56,6 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        let ret = UMSocialSnsService.handleOpenURL(url)
+        if ret == false {
+            
+        }
+        return ret
+    }
     
 }
 
@@ -85,9 +98,17 @@ extension AppDelegate{
         window?.rootViewController = sideController
     }
     
-//    func registAppKey(){
-//        UMSocialData.setAppKey(UMKey)
-//    }
+    func registAppKey(){
+        MobClick.startWithAppkey(WOWUMKey)
+        #if DEBUG
+            MobClick.setCrashReportEnabled(true)
+        #endif
+        UMSocialData.setAppKey(WOWUMKey)
+        UMSocialWechatHandler.setWXAppId(WOWWXID, appSecret: WOWWXAppSecret, url:"http://www.wowdsgn.com/")
+//        UMSocialSinaHandler.openSSOWithRedirectURL("http://www.wowdsgn.com")
+//        UMSocialSinaSSOHandler.openNewSinaSSOWithAppKey(WOWWeibokey, redirectURL:"http://www.wowdsgn.com")
+        UMSocialConfig.hiddenNotInstallPlatforms([UMShareToWechatSession,UMShareToWechatTimeline])
+    }
     
     func initialAppearance(){
         window?.backgroundColor = UIColor.whiteColor()

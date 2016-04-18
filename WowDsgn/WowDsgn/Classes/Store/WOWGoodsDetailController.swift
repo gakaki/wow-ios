@@ -95,7 +95,27 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     @IBAction func shareButtonClick(sender: UIButton) {
-        DLog("分享")
+        //替换
+        let shareText = "尖叫君....."
+        //微信好友
+        UMSocialData.defaultData().extConfig.wxMessageType = UMSocialWXMessageTypeWeb
+        UMSocialData.defaultData().extConfig.wechatSessionData.url = "www.baidu.com"
+        UMSocialData.defaultData().extConfig.wechatSessionData.shareText = shareText
+        UMSocialData.defaultData().extConfig.wechatSessionData.shareImage = UIImage(named: "me_logo")
+        UMSocialData.defaultData().extConfig.wechatSessionData.title = "尖叫君"
+        
+        //朋友圈
+        UMSocialData.defaultData().extConfig.wechatTimelineData.url = "www.baidu.com"
+        UMSocialData.defaultData().extConfig.wechatTimelineData.shareText = shareText
+        UMSocialData.defaultData().extConfig.wechatTimelineData.shareImage = UIImage(named: "me_logo")
+        UMSocialData.defaultData().extConfig.wechatTimelineData.title = "尖叫君"
+        
+        //微博
+        UMSocialData.defaultData().extConfig.sinaData.shareText = shareText + "www.baidu.com"
+        UMSocialData.defaultData().extConfig.sinaData.shareImage = UIImage(named: "me_logo")
+        
+        UMSocialSnsService.presentSnsIconSheetView(self, appKey:WOWUMKey, shareText:"", shareImage:nil, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: self)
+        
     }
     
     lazy var buyView:WOWGoodsBuyView = {
@@ -113,10 +133,23 @@ class WOWGoodsDetailController: WOWBaseViewController {
         view.bringSubviewToFront(backView)
         backView.show()
     }
-
-    
 }
 
+
+extension WOWGoodsDetailController:UMSocialUIDelegate{
+    func isDirectShareInIconActionSheet() -> Bool {
+        return true
+    }
+    
+    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
+        if response.responseCode == UMSResponseCodeSuccess {
+            DLog("分享成功")
+        }else{
+            WOWHud.showMsg("分享失败")
+        }
+    }
+    
+}
 
 
 

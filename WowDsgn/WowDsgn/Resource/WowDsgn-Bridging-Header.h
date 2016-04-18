@@ -11,5 +11,9 @@
 //@import ReactiveCocoa;
 @import Kingfisher;
 @import RealmSwift;
-
+#import <UMSocial.h>
+#import "UMSocialSinaHandler.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialSinaSSOHandler.h"
+#import <MobClick.h>
 //@import Observable;

@@ -47,7 +47,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
 //MARK:Lazy
     lazy var backView:WOWBuyBackView = {
-        let v = WOWBuyBackView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight - 64))
+        let v = WOWBuyBackView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight))
         return v
     }()
     
@@ -189,8 +189,8 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 
 extension WOWBuyCarController:CarEditCellDelegate{
     func carEditCellAction() { //选择规格
-        view.addSubview(backView)
-        view.bringSubviewToFront(backView)
+        navigationController?.view.addSubview(backView)
+        navigationController?.view.bringSubviewToFront(backView)
         backView.show()
     }
 }

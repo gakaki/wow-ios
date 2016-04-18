@@ -23,8 +23,6 @@ class WOWBuyBackView: UIView {
     lazy var backClear:UIView = {
         let v = UIView()
         v.backgroundColor = UIColor.clearColor()
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap))
-//        v.addGestureRecognizer(tap)
         return v
     }()
     override init(frame: CGRect) {

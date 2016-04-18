@@ -13,7 +13,11 @@ import Foundation
 let BaseUrl = "http://10.0.23.67:8360/"
 
 
-//API_URL接口
+/****************************API_URL接口**********************************/
+
+//1.app商品分类
 let URL_category = "api/category"
+
+
 
 

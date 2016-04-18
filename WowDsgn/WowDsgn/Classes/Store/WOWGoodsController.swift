@@ -129,7 +129,7 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.cellSeparatorColor = BorderColor
         menuView.checkMarkImage = UIImage(named: "duihao")
         menuView.arrowImage = UIImage(named:"nav_arrow")
-        menuView.maxShowRowNumber = 5
+//        menuView.maxShowRowNumber = 5
         menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
             DLog("Did select item at index: \(indexPath)")
         }

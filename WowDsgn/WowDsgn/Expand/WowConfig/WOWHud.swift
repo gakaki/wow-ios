@@ -12,6 +12,7 @@ import SVProgressHUD
 struct WOWHud {
     static func showLoading(){
         SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setDefaultMaskType(.Clear)
         SVProgressHUD.setBackgroundColor(UIColor(white: 0.8, alpha: 0.8))
         SVProgressHUD.show()
     }

@@ -26,6 +26,7 @@
 		2912E0E31CC26223005929D1 /* WOWAboutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2912E0E21CC26223005929D1 /* WOWAboutHeaderView.swift */; };
 		2912E0E51CC2623D005929D1 /* WOWAboutHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2912E0E41CC2623D005929D1 /* WOWAboutHeaderView.xib */; };
 		2912E0E71CC26303005929D1 /* WOWAboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2912E0E61CC26303005929D1 /* WOWAboutController.swift */; };
+		291ACB621CC47B7A00AFF02F /* WOWCopyrightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291ACB611CC47B7A00AFF02F /* WOWCopyrightController.swift */; };
 		2936A5651CC385BC00990345 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2936A5631CC385BC00990345 /* Realm.framework */; };
 		2936A5661CC385BC00990345 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2936A5631CC385BC00990345 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2936A5671CC385BC00990345 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2936A5641CC385BC00990345 /* RealmSwift.framework */; };
@@ -215,6 +216,7 @@
 		2912E0E21CC26223005929D1 /* WOWAboutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAboutHeaderView.swift; sourceTree = "<group>"; };
 		2912E0E41CC2623D005929D1 /* WOWAboutHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWAboutHeaderView.xib; sourceTree = "<group>"; };
 		2912E0E61CC26303005929D1 /* WOWAboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAboutController.swift; sourceTree = "<group>"; };
+		291ACB611CC47B7A00AFF02F /* WOWCopyrightController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCopyrightController.swift; sourceTree = "<group>"; };
 		2936A5631CC385BC00990345 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		2936A5641CC385BC00990345 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		2943FB1F1CBDDE2600EC90EB /* WOWSubArtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSubArtCell.xib; sourceTree = "<group>"; };
@@ -867,6 +869,7 @@
 				2912E0D21CC232FA005929D1 /* WOWMeSocietyController.swift */,
 				2912E0D81CC23C47005929D1 /* WOWUserHomeController.swift */,
 				2912E0E61CC26303005929D1 /* WOWAboutController.swift */,
+				291ACB611CC47B7A00AFF02F /* WOWCopyrightController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -989,7 +992,7 @@
 				TargetAttributes = {
 					2996D0841CBCC78900F257FF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = YER26K3N7V;
+						DevelopmentTeam = QWYYQTZY98;
 					};
 				};
 			};
@@ -1193,6 +1196,7 @@
 				2991ADB91CBCCAB100F5F5A0 /* WOWGoodsSmallCell.swift in Sources */,
 				2991ADDD1CBCCAD400F5F5A0 /* WOWRegistController.swift in Sources */,
 				2991AD611CBCCA7400F5F5A0 /* CloseButton.swift in Sources */,
+				291ACB621CC47B7A00AFF02F /* WOWCopyrightController.swift in Sources */,
 				295658F01CBF8EEE0029B897 /* String+Add.swift in Sources */,
 				2991ADB51CBCCAB100F5F5A0 /* WOWGoodsBigCell.swift in Sources */,
 				2991AD211CBCCA0B00F5F5A0 /* WOWCheckSelectView.swift in Sources */,
@@ -1344,7 +1348,7 @@
 				INFOPLIST_FILE = WowDsgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.he.friend;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wow.dsgn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WowDsgn/Resource/WowDsgn-Bridging-Header.h";
@@ -1369,7 +1373,7 @@
 				INFOPLIST_FILE = WowDsgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.he.friend;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wow.dsgn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WowDsgn/Resource/WowDsgn-Bridging-Header.h";

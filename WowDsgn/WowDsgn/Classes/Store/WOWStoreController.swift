@@ -93,7 +93,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
             tableViewCell = cell
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID2, forIndexPath: indexPath) as! WOWMenuCell
-            cell.showDataModel(dataArr[indexPath.row])
+            cell.showDataModel(dataArr[indexPath.row],isStore:true)
             tableViewCell = cell
         }
         return tableViewCell

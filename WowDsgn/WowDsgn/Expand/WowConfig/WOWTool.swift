@@ -23,4 +23,14 @@ struct WOWCalPrice {
 }
 
 
+struct WOWTool {
+    static var appTab:UITabBarController {
+        get{
+            let del = UIApplication.sharedApplication().delegate as? AppDelegate
+            let tab = del?.sideController.mainController as! UITabBarController
+            return tab
+        }
+    }
+}
+
 

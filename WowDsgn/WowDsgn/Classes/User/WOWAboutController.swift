@@ -57,4 +57,18 @@ extension WOWAboutController:UITableViewDelegate,UITableViewDataSource{
         cell.backgroundColor = UIColor.whiteColor()
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWCopyrightController") as! WOWCopyrightController
+        switch indexPath.row {
+        case 0:
+            vc.navTitle = "使用协议"
+        case 1:
+            vc.navTitle = "版权声明"
+        default:
+            break
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

@@ -91,7 +91,7 @@ extension WOWLeftSideController:UITableViewDataSource,UITableViewDelegate{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID) as! WOWMenuCell
         cell.backgroundColor = UIColor.clearColor()
-        cell.showDataModel(dataArr[indexPath.row])
+        cell.showDataModel(dataArr[indexPath.row],isStore:false)
         return cell
     }
     

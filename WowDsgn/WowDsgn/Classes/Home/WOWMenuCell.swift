@@ -25,8 +25,10 @@ class WOWMenuCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func showDataModel(model:WOWCategoryModel){
-        menuImageView.image = UIImage(named:getImageName(model.categoryID))
+    func showDataModel(model:WOWCategoryModel,isStore:Bool){
+        var imageName = getImageName(model.categoryID)
+        imageName = isStore ? "store_" + imageName : imageName
+        menuImageView.image = UIImage(named:imageName)
         menuNameLabel.text = model.categoryName
         menuCountLabel.text = "\(model.categoryCount)"
     }

@@ -10,13 +10,13 @@ import Foundation
 
 //Host
 //王云鹏自己的本机
-let BaseUrl = "http://10.0.23.67:8360/"
+let BaseUrl = "http://10.0.23.67:8360/apiv1/"
 
 
 /****************************API_URL接口**********************************/
 
 //1.app商品分类
-let URL_category = "api/category"
+let URL_category = "category"
 
 
 

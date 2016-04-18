@@ -23,6 +23,7 @@ class WOWLeftSideController: UIViewController {
         super.viewDidLoad()
         setUI()
         addObserver()
+        initData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +31,14 @@ class WOWLeftSideController: UIViewController {
     }
 
 //MARK:Private Method
+    
+    private func initData(){
+        let categorys = WOWRealm.objects(WOWCategoryModel)
+        dataArr = []
+        for model in categorys {
+            dataArr.append(model)
+        }
+    }
     
     private func setUI(){
         tableView.clearRestCell()

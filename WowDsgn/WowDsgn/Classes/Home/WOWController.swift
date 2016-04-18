@@ -39,7 +39,6 @@ class WOWController: WOWBaseViewController {
     private func configBarItem(){
         makeCustomerImageNavigationItem("menu", left: true) {[weak self] () -> () in
             if let strongSelf = self{
-                DLog("click menu")
                 let sideVC = strongSelf.appdelegate.sideController
                 if sideVC.showing{//显示中
                     sideVC.hideSide()

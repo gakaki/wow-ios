@@ -7,9 +7,25 @@
 //
 
 import UIKit
-
-class WOWBrandListModel: WOWBaseModel {
+import ObjectMapper
+class WOWBrandListModel: NSObject,Mappable {
     var imageUrl:String?
     var brandName:String?
     var brandCountry:String?
+    var brandID:String?
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    override init() {
+        
+    }
+
+    
+    func mapping(map: Map) {
+        imageUrl    <- map["pic"]
+        brandName   <- map["name"]
+        brandID     <- map["id"]
+    }
 }

@@ -10,23 +10,39 @@ import UIKit
 
 class WOWActivityController: WOWBaseViewController {
     let cellID = String(WOWActivityListCell)
+    var dataArr = [WOWActivityModel]()
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        request()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-    
+//MARK:Private Method
     override func setUI() {
         super.setUI()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
         tableView.registerNib(UINib.nibName(String(WOWActivityListCell)), forCellReuseIdentifier:cellID)
+    }
+    
+//MARK:Private Network
+    override func request() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Activity, successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let actArr = Mapper<WOWActivityModel>().mapArray(result)
+                if let arr = actArr{
+                    strongSelf.dataArr.appendContentsOf(arr)
+                    strongSelf.tableView.reloadData()
+                }
+            }
+        }) { (errorMsg) in
+                
+        }
     }
 }
 
@@ -36,14 +52,22 @@ extension WOWActivityController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //FIXME:测试数据
-        return 20
+        return dataArr.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWActivityListCell
-        //FIXME:测试数据
-        cell.pictureImageView.image = UIImage(named: "testActivity")
+        let model = dataArr[indexPath.row]
+        let imageUrl = NSURL(string:model.image ?? "")
+        //FIXME:默认图
+        cell.pictureImageView.kf_setImageWithURL(imageUrl!, placeholderImage:nil)
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let model = dataArr[indexPath.row]
+        let vc = UIStoryboard.initialViewController("Activity", identifier:"WOWActivityDetailController") as! WOWActivityDetailController
+        vc.url = model.url
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -7,7 +7,8 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class WOWBaseModel: NSObject {
-
+class WOWBaseModel: NSObject{
+    
 }

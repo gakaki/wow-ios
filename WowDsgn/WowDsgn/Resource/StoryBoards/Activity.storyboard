@@ -8,7 +8,7 @@
         <!--活动-->
         <scene sceneID="Rfn-XX-P4w">
             <objects>
-                <viewController storyboardIdentifier="WOWActivityController" id="f4N-7q-KRL" customClass="WOWActivityController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWActivityController" id="f4N-7q-KRL" customClass="WOWActivityController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XtG-YT-oa8"/>
                         <viewControllerLayoutGuide type="bottom" id="8le-9Y-rlD"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ptw-Yp-fps">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ptw-Yp-fps">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -43,10 +43,28 @@
             </objects>
             <point key="canvasLocation" x="651" y="589"/>
         </scene>
+        <!--活动详情-->
+        <scene sceneID="j83-fH-tYB">
+            <objects>
+                <viewController storyboardIdentifier="WOWActivityDetailController" title="活动详情" id="ne0-N5-XVN" customClass="WOWActivityDetailController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZJq-c9-MGB"/>
+                        <viewControllerLayoutGuide type="bottom" id="VIj-eq-ac0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gWH-Uf-asx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SJL-zU-XT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656" y="1255"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="PTt-BD-tDk">
             <objects>
-                <navigationController id="8KZ-dZ-k1p" customClass="WOWNavigationController" customModule="Wow" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="8KZ-dZ-k1p" customClass="WOWNavigationController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fXU-c7-QgB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

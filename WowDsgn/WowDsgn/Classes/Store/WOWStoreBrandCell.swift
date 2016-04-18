@@ -9,13 +9,18 @@
 import UIKit
 
 protocol BrandCellDelegate:class{
-    func hotBrandCellClick()
+    func hotBrandCellClick(brandModel:WOWBrandListModel)
 }
 
 class WOWStoreBrandCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     weak var delegate:BrandCellDelegate?
+    var dataArr : [WOWBrandListModel]?{
+        didSet{
+            collectionView.reloadData()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
@@ -35,13 +40,20 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        if let arr = dataArr {
+            return arr.count
+        }
+        return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
-        //FIXME:修改掉
-        cell.pictureImageView.image = UIImage(named: "testBrand")
+        if let arr = dataArr {
+            let model = arr[indexPath.item]
+            let url = NSURL(string:model.imageUrl ?? "")
+            //FIXME:默认图片
+            cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "testBrand"))
+        }
         return cell
     }
     
@@ -51,7 +63,7 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let del = self.delegate {
-            del.hotBrandCellClick()
+            del.hotBrandCellClick(dataArr![indexPath.row])
         }
     }
 }

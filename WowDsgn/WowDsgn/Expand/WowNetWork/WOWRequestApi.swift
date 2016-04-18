@@ -12,6 +12,10 @@ public enum RequestApi{
     static var HostUrl:String! = BaseUrl
     
     case Api_Category
+    
+    case Api_Activity
+    
+    case Api_StoreHome
 }
 
 
@@ -24,6 +28,10 @@ extension RequestApi:TargetType{
         switch self{
         case .Api_Category:
             return URL_category
+        case .Api_Activity:
+            return URL_activity
+        case .Api_StoreHome:
+            return URL_storeHome
         }
     }
     
@@ -33,7 +41,8 @@ extension RequestApi:TargetType{
     
     public var parameters:[String: AnyObject]?{
         switch self{
-        case .Api_Category:
+        
+        default:
             return nil
         }
     }

@@ -10,9 +10,12 @@ import UIKit
 
 class WOWBaseViewController: UIViewController {
     var hideNavigationBar:Bool = false
+    var reuestIndex = 0 //翻页
+    var isRreshing : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        request()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -28,7 +31,7 @@ class WOWBaseViewController: UIViewController {
         }
     }
 
-
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -40,6 +43,21 @@ class WOWBaseViewController: UIViewController {
     func setUI(){
         self.view.backgroundColor = UIColor.whiteColor()
     }
+    
+    func request(){
+        
+    }
+    
+    func pullToRefresh() {
+        if isRreshing {
+            return
+        }else{
+           isRreshing = true
+        }
+    }
+    
+    
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         UIApplication.sharedApplication().keyWindow?.endEditing(true)

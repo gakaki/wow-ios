@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SVProgressHUD
+
 class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
     @IBOutlet var tableView: UITableView!

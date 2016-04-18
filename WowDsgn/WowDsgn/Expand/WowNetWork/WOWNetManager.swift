@@ -64,7 +64,7 @@ class WOWNetManager {
                         WOWHud.showMsg("加载失败")
                         return
                     }
-                    WOWHud.dismiss()
+//                    WOWHud.dismiss()
                     successClosure(result:data)
                 case .Error(let error):
                     DLog(error)

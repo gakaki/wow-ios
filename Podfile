@@ -8,7 +8,7 @@ xcodeproj ‘WowDsgn/WowDsgn.xcodeproj'
 
 target :WowFramework do #FrameWork
 platform :ios, ‘8.0’
-pod 'Kingfisher','~>2.0.1'
+#pod 'Kingfisher','~>2.0.1'
 use_frameworks!
 
 xcodeproj ‘WowFramework/WowFramework.xcodeproj'

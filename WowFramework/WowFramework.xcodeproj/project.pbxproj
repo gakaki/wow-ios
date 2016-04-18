@@ -39,7 +39,6 @@
 		2996D0C61CBCC7FE00F257FF /* UIView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996D0B71CBCC7FE00F257FF /* UIView+Add.swift */; };
 		2996D0C71CBCC7FE00F257FF /* UIViewController+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996D0B91CBCC7FE00F257FF /* UIViewController+Add.swift */; };
 		2996D0C81CBCC7FE00F257FF /* MacroFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996D0BA1CBCC7FE00F257FF /* MacroFunctions.swift */; };
-		B024725B167DD005C82EF190 /* Pods_WowFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A26AD47D81C42101AAB5E1 /* Pods_WowFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,9 +71,6 @@
 		2996D0B71CBCC7FE00F257FF /* UIView+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Add.swift"; sourceTree = "<group>"; };
 		2996D0B91CBCC7FE00F257FF /* UIViewController+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Add.swift"; sourceTree = "<group>"; };
 		2996D0BA1CBCC7FE00F257FF /* MacroFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroFunctions.swift; sourceTree = "<group>"; };
-		6713933CAC25815C4EEAC95B /* Pods-WowFramework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WowFramework.release.xcconfig"; path = "../Pods/Target Support Files/Pods-WowFramework/Pods-WowFramework.release.xcconfig"; sourceTree = "<group>"; };
-		77A26AD47D81C42101AAB5E1 /* Pods_WowFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WowFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		868F9B0FCCC0E7ED105930FE /* Pods-WowFramework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WowFramework.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-WowFramework/Pods-WowFramework.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +78,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B024725B167DD005C82EF190 /* Pods_WowFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,8 +105,6 @@
 			children = (
 				2996D0731CBCC73600F257FF /* WowFramework */,
 				2996D0721CBCC73600F257FF /* Products */,
-				8FD61230BB6563B38265A574 /* Pods */,
-				86D56FCF43CD3703926137D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -260,23 +253,6 @@
 			path = "UIViewController+";
 			sourceTree = "<group>";
 		};
-		86D56FCF43CD3703926137D4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				77A26AD47D81C42101AAB5E1 /* Pods_WowFramework.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		8FD61230BB6563B38265A574 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				868F9B0FCCC0E7ED105930FE /* Pods-WowFramework.debug.xcconfig */,
-				6713933CAC25815C4EEAC95B /* Pods-WowFramework.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -295,12 +271,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2996D0791CBCC73600F257FF /* Build configuration list for PBXNativeTarget "WowFramework" */;
 			buildPhases = (
-				F4CE4681336CF11C7EA91AF3 /* Check Pods Manifest.lock */,
 				2996D06C1CBCC73600F257FF /* Sources */,
 				2996D06D1CBCC73600F257FF /* Frameworks */,
 				2996D06E1CBCC73600F257FF /* Headers */,
 				2996D06F1CBCC73600F257FF /* Resources */,
-				464008F9ED4CEBB507D53EBB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -369,36 +343,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=false\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\"\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\n\n######################\n# Build Frameworks\n######################\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\n\n######################\n# Create directory for universal\n######################\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${FRAMEWORK}\"\n\n\n######################\n# Copy files Framework\n######################\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n######################\n# Make an universal binary\n######################\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n# For Swift framework, Swiftmodule needs to be copied in the universal framework\nif [ -d \"${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/* \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\n                                                                      fi\n                                                                      \n                                                                      if [ -d \"${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\n                                                                      cp -f ${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/* \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\n                                                                      fi\n                                                                      \n                                                                      ######################\n                                                                      # On Release, copy the result to release directory\n                                                                      ######################\n                                                                      OUTPUT_DIR=\"${PROJECT_DIR}/Output/${FRAMEWORK_NAME}-${CONFIGURATION}-iphoneuniversal/\"\n                                                                      \n                                                                      rm -rf \"$OUTPUT_DIR\"\n                                                                      mkdir -p \"$OUTPUT_DIR\"\n                                                                      \n                                                                      cp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n                                                                      \n                                                                      if [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\n                                                                      open \"${OUTPUT_DIR}/\"\n                                                                      fi";
-		};
-		464008F9ED4CEBB507D53EBB /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-WowFramework/Pods-WowFramework-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F4CE4681336CF11C7EA91AF3 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -530,7 +474,6 @@
 		};
 		2996D07A1CBCC73600F257FF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 868F9B0FCCC0E7ED105930FE /* Pods-WowFramework.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -550,7 +493,6 @@
 		};
 		2996D07B1CBCC73600F257FF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6713933CAC25815C4EEAC95B /* Pods-WowFramework.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;

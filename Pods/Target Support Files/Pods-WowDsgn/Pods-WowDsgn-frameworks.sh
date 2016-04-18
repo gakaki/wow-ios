@@ -84,8 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-WowDsgn/Kingfisher.framework"
   install_framework "Pods-WowDsgn/Alamofire.framework"
+  install_framework "Pods-WowDsgn/Kingfisher.framework"
   install_framework "Pods-WowDsgn/MJRefresh.framework"
   install_framework "Pods-WowDsgn/Moya.framework"
   install_framework "Pods-WowDsgn/ObjectMapper.framework"
@@ -96,8 +96,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WowDsgn/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-WowDsgn/Kingfisher.framework"
   install_framework "Pods-WowDsgn/Alamofire.framework"
+  install_framework "Pods-WowDsgn/Kingfisher.framework"
   install_framework "Pods-WowDsgn/MJRefresh.framework"
   install_framework "Pods-WowDsgn/Moya.framework"
   install_framework "Pods-WowDsgn/ObjectMapper.framework"

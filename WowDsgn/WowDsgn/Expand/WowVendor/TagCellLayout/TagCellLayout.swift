@@ -210,9 +210,15 @@ private extension TagCellLayout {
     let lastIndex = startingIndex - numberOfTagsInCurrentRow
     let whiteSpace = calculateWhiteSpace(startingIndex)
     
-    for (var tagIndex=startingIndex; tagIndex>lastIndex; tagIndex -= 1) {
-      insertWhiteSpace(tagIndex, whiteSpace: whiteSpace)
+//    for (var tagIndex=startingIndex; tagIndex>lastIndex; tagIndex -= 1) {
+//      insertWhiteSpace(tagIndex, whiteSpace: whiteSpace)
+//    }    
+    var tagIndex = startingIndex
+    while tagIndex > lastIndex {
+        insertWhiteSpace(tagIndex, whiteSpace: whiteSpace)
+        tagIndex -= 1
     }
+    
   }
   
   func calculateWhiteSpace(tagIndex: Int) -> CGFloat {

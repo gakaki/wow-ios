@@ -1,6 +1,0 @@
-framework module Pods_WowFramework {
-  umbrella header "Pods-WowFramework-umbrella.h"
-
-  export *
-  module * { export * }
-}

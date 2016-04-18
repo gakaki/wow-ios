@@ -97,7 +97,7 @@ class WOWGoodsController: WOWBaseViewController {
         //FIXME:测试数据
         WOWDropMenuSetting.rowTitles =  [
                                             ["销量","价格","信誉","性价比吧","口碑吧"],
-                                            ["现代简约","中式传统","清新田园","古朴禅意","自然清雅","经典怀旧","LOFT工业风","商务质感","玩味童趣","后现代"]
+                                            ["默认风格","现代简约","中式传统","清新田园","古朴禅意","自然清雅","经典怀旧","LOFT工业风","商务质感","玩味童趣","后现代"]
                                         ]
         WOWDropMenuSetting.maxShowCellNumber = 4
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2

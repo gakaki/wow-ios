@@ -79,15 +79,15 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
-            return 1
-        }else{
             return dataArr.count
+        }else{
+            return 1
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var tableViewCell:UITableViewCell
-        if indexPath.section == 0{
+        if indexPath.section == 1{ //品牌
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID1, forIndexPath: indexPath) as! WOWStoreBrandCell
             cell.delegate = self
             tableViewCell = cell
@@ -100,7 +100,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0{
+        if indexPath.section == 1{
             return MGScreenWidth
         }else{
             return 55
@@ -109,7 +109,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 { //分类
+        if indexPath.section == 0 { //分类
             let item = dataArr[indexPath.row]
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
             vc.navigationItem.title = item.categoryName
@@ -134,7 +134,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0{
+        if section == 1{
             let sectionView =  NSBundle.mainBundle().loadNibNamed(String(WOWStoreSectionView), owner: self, options: nil).last as! WOWStoreSectionView
             sectionView.leftLabel.text = "热门品牌"
             //FIXME:修改掉

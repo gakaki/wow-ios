@@ -45,6 +45,8 @@ class WOWSureOrderController: WOWBaseViewController {
     
     @IBAction func payButtonClick(sender: UIButton) {
         DLog("结算")
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

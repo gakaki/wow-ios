@@ -168,13 +168,13 @@ extension WOWSearchController:SearchResultViewDelegate{
 extension WOWSearchController:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        DLog("开始搜索吧")
         showResult()
         return true
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
         hideResult()
+        
         return true
     }
     
@@ -252,12 +252,13 @@ class  SearchResultView:UIView,DropMenuViewDelegate{
         configMenuView()
         self.addSubview(collectionView)
     }
+    
     private func configMenuView(){
-        WOWDropMenuSetting.columnTitles = ["综合排序","风格"]
+        WOWDropMenuSetting.columnTitles = ["综合排序","全部风格"]
         //FIXME:测试数据
         WOWDropMenuSetting.rowTitles =  [
-            ["销量","价格","信誉","性价比吧","口碑吧"],
-            ["现代简约","中式传统","清新田园","古朴禅意","自然清雅","经典怀旧","LOFT工业风","商务质感","玩味童趣","后现代"]
+            ["综合排序","销量","价格","信誉","性价比吧","口碑吧"],
+            ["全部风格","现代简约","中式传统","清新田园","古朴禅意","自然清雅","经典怀旧","LOFT工业风","商务质感","玩味童趣","后现代"]
         ]
         WOWDropMenuSetting.maxShowCellNumber = 4
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2

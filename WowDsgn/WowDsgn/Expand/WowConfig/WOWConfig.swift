@@ -9,7 +9,11 @@
 import Foundation
 
 //MARK:第三方Key
-let UMKey = "56ebe0a867e58e33e300228e"
+let WOWUMKey = "57146c72e0f55a807e000a0b" //友盟
+let WOWWXID  = "wx5491e5203286430c" //微信id
+let WOWWXAppSecret = "4b58993541eeafdd8c236d15bfb15609" //微信app secret
+let WOWWeibokey   = "1279179552"
+let WOWWeiboSecret = "d0624f8a210a0e862ea581d2c6b6e507"
 
 
 

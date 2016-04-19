@@ -9,10 +9,10 @@
 import UIKit
 
 class WOWAuthorCell: UITableViewCell {
-
-    @IBOutlet weak var headImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+//
+//    @IBOutlet weak var headImageView: UIImageView!
+//    @IBOutlet weak var nameLabel: UILabel!
+//    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var desLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

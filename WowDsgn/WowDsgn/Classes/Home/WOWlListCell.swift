@@ -15,7 +15,6 @@ protocol SenceCellDelegate:class{
 class WOWlListCell: UITableViewCell {
     
     @IBOutlet var bigImageView: UIImageView!
-    @IBOutlet var dateLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     private var productBtns = [UIButton]()
     weak var delegate:SenceCellDelegate?
@@ -32,7 +31,6 @@ class WOWlListCell: UITableViewCell {
     func showData(model:WOWSenceModel) {
         let url = model.senceImage ?? ""
         bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named:"squarePlaceHoder"))
-        dateLabel.text = model.senceTime
         titleLabel.text = model.senceName
         
         productBtns.forEach { (view) in

@@ -34,7 +34,7 @@ class WOWSenceHelper: NSObject {
         case 1:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWAuthorCell), forIndexPath:indexPath) as! WOWAuthorCell
             //FIXME:测试数据
-            cell.desLabel.text = "尖叫设计君君"
+            cell.desLabel.text = "尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯"
             cell.contentView.bringSubviewToFront(cell.desLabel)
             returnCell = cell
         case 2:

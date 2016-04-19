@@ -39,25 +39,26 @@ class WOWlListCell: UITableViewCell {
         productBtns.forEach { (view) in
             view.removeFromSuperview()
         }
-
+        bigImageView.userInteractionEnabled = true
         let products = model.senceProducts ?? []
         productBtns = []
         for productModel in products {
-            let btn = UIButton()
+            let btn = UIButton(type: .System)
             btn.setImage(UIImage(named: "sence_animatePot")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
             btn.tag = Int(productModel.productID ?? "-1111") ?? -1111
             btn.addTarget(self, action:#selector(productBtnClick(_:)) , forControlEvents:.TouchUpInside)
             if let X = productModel.productX,Y = productModel.productY {
-                let frame = CGRectMake(CGFloat(X),CGFloat(Y), 40, 40)
 //                let frame = self.convertRect(CGRectMake(CGFloat(X),CGFloat(Y), 40, 40), fromView: bigImageView)
+                let frame = CGRectMake(CGFloat(X),CGFloat(Y), 40, 40)
                 btn.frame = frame
-                //FIXME:暂时先放view上，等 图片正常调试
                 self.addSubview(btn)
-//                self.bringSubviewToFront(btn)
                 self.productBtns.append(btn)
             }
         }
-        startAnimate()
+    }
+    
+    func click() {
+        DLog("123")
     }
     
     func productBtnClick(sender:UIButton) {
@@ -71,7 +72,7 @@ class WOWlListCell: UITableViewCell {
     
     
     func startAnimate() {
-        UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse, .CurveEaseOut], animations: {
+        UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse, .CurveEaseOut,.AllowUserInteraction], animations: {
             self.productBtns.forEach({ (view) in
                 view.alpha = 1
                 view.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1)

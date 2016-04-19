@@ -11,7 +11,7 @@ import Foundation
 public enum RequestApi{
     static var HostUrl:String! = BaseUrl
     
-    case Api_Sence
+    case Api_Sence(String,Int)
     
     case Api_Category
     
@@ -45,7 +45,9 @@ extension RequestApi:TargetType{
     
     public var parameters:[String: AnyObject]?{
         switch self{
-        
+        case let .Api_Sence(key, value):
+            return [key:String(value)]
+            
         default:
             return nil
         }

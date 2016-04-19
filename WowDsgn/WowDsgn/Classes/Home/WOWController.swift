@@ -70,7 +70,7 @@ class WOWController: WOWBaseViewController {
     
 //MARK:Private Network
     override func request() {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Sence, successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Sence("pageIndex",pageIndex), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 let arr1 = Mapper<WOWSenceModel>().mapArray(result)
@@ -132,11 +132,11 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         sence.hideNavigationBar = true
         navigationController?.pushViewController(sence, animated: true)
     }
-//    
-//    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        let senceCell = cell as! WOWlListCell
-////        senceCell.startAnimate()
-//    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = cell as! WOWlListCell
+        cell.startAnimate()
+    }
 }
 
 extension WOWController:SenceCellDelegate{

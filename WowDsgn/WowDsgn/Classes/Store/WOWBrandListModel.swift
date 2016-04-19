@@ -8,7 +8,7 @@
 
 import UIKit
 import ObjectMapper
-class WOWBrandListModel: NSObject,Mappable {
+class WOWBrandListModel: WOWBaseModel,Mappable {
     var imageUrl:String?
     var brandName:String?
     var brandCountry:String?

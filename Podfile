@@ -28,6 +28,7 @@ pod 'SVProgressHUD', '~> 2.0.2' #提示框
 pod 'UMengSocial', '~> 4.4'
 pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
+pod 'DZNEmptyDataSet'
 xcodeproj ‘WowDsgn/WowDsgn.xcodeproj'
 
 end

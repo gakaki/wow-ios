@@ -11,6 +11,8 @@ import Foundation
 public enum RequestApi{
     static var HostUrl:String! = BaseUrl
     
+    case Api_Sence
+    
     case Api_Category
     
     case Api_Activity
@@ -32,6 +34,8 @@ extension RequestApi:TargetType{
             return URL_activity
         case .Api_StoreHome:
             return URL_storeHome
+        case .Api_Sence:
+            return URL_scene
         }
     }
     

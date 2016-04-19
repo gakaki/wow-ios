@@ -8,9 +8,9 @@
 
 import UIKit
 
-class WOWBaseViewController: UIViewController {
+class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource{
     var hideNavigationBar:Bool = false
-    var reuestIndex = 0 //翻页
+    var pageIndex = 0 //翻页
     var isRreshing : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,7 @@ class WOWBaseViewController: UIViewController {
         request()
     }
 
+//MARK:Life
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.sharedApplication().keyWindow?.endEditing(true)
@@ -31,15 +32,23 @@ class WOWBaseViewController: UIViewController {
         }
     }
 
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+//MARK:Lazy
+    lazy var mj_header:MJRefreshNormalHeader = {
+        let h = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction:#selector(pullToRefresh))
+        return h
+    }()
+    
+    lazy var mj_footer:MJRefreshAutoNormalFooter = {
+        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadMore))
+        return f
+    }()
+    
+//MARK:Private Method
     func setUI(){
         self.view.backgroundColor = UIColor.whiteColor()
     }
@@ -48,20 +57,56 @@ class WOWBaseViewController: UIViewController {
         
     }
     
+    func loadMore() {
+        if isRreshing {
+            return
+        }else{
+            pageIndex += 1
+            isRreshing = true
+        }
+        request()
+    }
+    
+    /**
+     子类必须实现父类方法先
+     */
     func pullToRefresh() {
         if isRreshing {
             return
         }else{
+            pageIndex = 0
            isRreshing = true
         }
+        request()
     }
     
+    func endRefresh() {
+        mj_header.endRefreshing()
+        mj_footer.endRefreshing()
+        self.isRreshing = false
+    }
     
-    
-    
+
+//MARK:Private Actions
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         UIApplication.sharedApplication().keyWindow?.endEditing(true)
     }
 
+}
+
+
+extension WOWBaseViewController{
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = WOWEmptyText
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
     
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return GrayColorLevel5
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "placeholder_instagram")
+    }
 }

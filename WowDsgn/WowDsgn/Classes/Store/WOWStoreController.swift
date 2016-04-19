@@ -41,7 +41,7 @@ class WOWStoreController: WOWBaseViewController {
         //FIXME:默认图片
         cycleView.placeholderImage = UIImage(named: "test2")
         tableView.tableHeaderView = cycleView
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction:#selector(pullToRefresh))
+        tableView.mj_header = mj_header
     }
     
     private func configHeaderView(){
@@ -51,15 +51,7 @@ class WOWStoreController: WOWBaseViewController {
     }
  
 //MARK:Actions
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        request()
-    }
-    
-    func endRefresh(){
-        self.tableView.mj_header.endRefreshing()
-        isRreshing = false
-    }
+
 
 //MARK:Private Network
     override func request() {

@@ -23,7 +23,7 @@ let WOWCategoryUpdateNotificationKey = "WOWCategoryUpdateNotificationKey"
 let WOWGoodsSureBuyNotificationKey = "WOWGoodsSureBuyNotificationKey"
 
 
-
+let WOWEmptyText  = "暂无数据"
 
 
 

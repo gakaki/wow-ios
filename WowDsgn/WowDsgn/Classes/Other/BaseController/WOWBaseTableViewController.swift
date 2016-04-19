@@ -9,7 +9,8 @@
 import UIKit
 
 class WOWBaseTableViewController: UITableViewController {
-
+//    var reuestIndex = 0 //翻页
+//    var isRreshing : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()

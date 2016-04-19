@@ -15,19 +15,20 @@ let BaseUrl = "http://127.0.0.1:8360/apiv1/"
 
 /****************************API_URL接口**********************************/
 
-//1.app商品分类
-let URL_category = "category"
+//1.app首页
 
+let URL_category    = "category"
 
+let URL_scene       = "scene"
 
 
 //2.商店
-let URL_storeHome = "shop"
+let URL_storeHome   = "shop"
 
 
 
 //3.app活动
-let URL_activity = "post"
+let URL_activity    = "post"
 
 
 

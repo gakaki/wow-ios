@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-202" y="1313"/>
         </scene>
-        <!--尖叫-->
+        <!--Empty Data Set Delegate-->
         <scene sceneID="bzw-ue-Dsp">
             <objects>
                 <viewController title="尖叫" id="iWL-Oz-JyM" customClass="WOWController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
@@ -42,6 +42,8 @@
                                 <connections>
                                     <outlet property="dataSource" destination="iWL-Oz-JyM" id="1Ma-N6-H4e"/>
                                     <outlet property="delegate" destination="iWL-Oz-JyM" id="j2o-M9-qgx"/>
+                                    <outlet property="emptyDataSetDelegate" destination="iWL-Oz-JyM" id="7fk-RL-ZEK"/>
+                                    <outlet property="emptyDataSetSource" destination="iWL-Oz-JyM" id="Ejp-F9-gdH"/>
                                 </connections>
                             </tableView>
                         </subviews>

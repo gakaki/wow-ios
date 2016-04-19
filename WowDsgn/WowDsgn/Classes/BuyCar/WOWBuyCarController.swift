@@ -13,7 +13,7 @@ class WOWBuyCarController: WOWBaseViewController {
     let cellEditID   = String(WOWBurCarEditCell)
     private var rightItemButton:UIButton!
     //FIXME:测试数据
-    private var dataArr = ["1","1","1","1","1","1","1","1","1","1","1"]
+    private var dataArr = ["1"]
     //存放选中的数组
     private var selectedArr = []
     @IBOutlet weak var tableView: UITableView!
@@ -177,11 +177,25 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         if editingStyle == .Delete {
             dataArr.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            //FIXME:后期应该根据服务器端返回再删除
+            if dataArr.isEmpty {
+                tableView.reloadData()
+            }
         }
     }
     
     func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         return "删除"
+    }
+    
+    override func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "buycar_none")
+    }
+    
+    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "您的购物车是空的"
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
     }
     
     

@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WowDsgn/Alamofire.framework"
+  install_framework "Pods-WowDsgn/DZNEmptyDataSet.framework"
   install_framework "Pods-WowDsgn/Kingfisher.framework"
   install_framework "Pods-WowDsgn/MJRefresh.framework"
   install_framework "Pods-WowDsgn/Moya.framework"
@@ -97,6 +98,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WowDsgn/Alamofire.framework"
+  install_framework "Pods-WowDsgn/DZNEmptyDataSet.framework"
   install_framework "Pods-WowDsgn/Kingfisher.framework"
   install_framework "Pods-WowDsgn/MJRefresh.framework"
   install_framework "Pods-WowDsgn/Moya.framework"

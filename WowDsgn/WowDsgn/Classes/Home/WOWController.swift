@@ -10,6 +10,7 @@ import UIKit
 
 class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
+    var dataArr = [WOWSenceModel]()
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,13 @@ class WOWController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
+//MARK:Lazy
+    lazy var appdelegate:AppDelegate = {
+        let a =  UIApplication.sharedApplication().delegate as! AppDelegate
+        return a
+    }()
+    
+//MARK:Private Method
     override func setUI() {
         navigationItem.title = "尖叫设计"
         tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
@@ -33,6 +41,7 @@ class WOWController: WOWBaseViewController {
         configBarItem()
         let sideVC = appdelegate.sideController.sideController as! WOWLeftSideController
         sideVC.delegate = self
+        tableView.mj_header = mj_header
     }
 
     
@@ -56,11 +65,24 @@ class WOWController: WOWBaseViewController {
         }
     }
     
-    lazy var appdelegate:AppDelegate = {
-        let a =  UIApplication.sharedApplication().delegate as! AppDelegate
-        return a
-    }()
+//MARK:Actions
 
+    
+//MARK:Private Network
+    override func request() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Sence, successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                let arr1 = Mapper<WOWSenceModel>().mapArray(result)
+                if let arr2 = arr1{
+                    strongSelf.dataArr += arr2
+                    strongSelf.tableView.reloadData()
+                }
+            }
+        }) { (errorMsg) in
+                
+        }
+    }
 }
 
 
@@ -94,11 +116,13 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return dataArr.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
+        let model = dataArr[indexPath.row]
+        cell.showData(model)
         return cell
     }
     

@@ -23,9 +23,13 @@ class WOWLoginController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
     }
 
-    //MARK:Life
+//MARK:Life
+
     
-    //MARK:Private Method
+//MARK:Lazy
+    
+    
+//MARK:Private Method
     override func setUI() {
         super.setUI()
         configNavItem()
@@ -44,7 +48,10 @@ class WOWLoginController: WOWBaseViewController {
         }
     }
     
-    //MARK:Actions
+    
+//MARK:Actions
+
+    
     private func regist(){
         let v = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController))
         navigationController?.pushViewController(v, animated: true)
@@ -64,25 +71,31 @@ class WOWLoginController: WOWBaseViewController {
             WOWHud.showMsg("请输入账号")
             return
         }
-        
         guard let passwd = passWordTextField.text where !passwd.isEmpty else{
             WOWHud.showMsg("请输入密码")
             return
         }
-
-        
         guard phone.validateMobile() || phone.validateEmail() else{
-            WOWHud.showMsg("对不起，您输入的账号不符合规则")
+            WOWHud.showMsg("对不起，账号格式错误")
             return
         }
-        
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Login(phone,passwd), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                WOWHud.showMsg("登录成功")
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+        }) { (errorMsg) in
+                
+        }
         
     }
     
-    
-    
-    //MARK:Lazy
-    
-    //MARK:Delegate
-    
 }
+
+
+//MARK:Delegate
+
+

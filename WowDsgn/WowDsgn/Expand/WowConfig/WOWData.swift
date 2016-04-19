@@ -18,9 +18,14 @@ let WOWRealm = try! Realm()
 
 /***********************************Const**********************************/
 //拉取分类配置文件之后  进行回调更新操作
-let WOWCategoryUpdateNotificationKey = "WOWCategoryUpdateNotificationKey"
+let WOWCategoryUpdateNotificationKey    = "WOWCategoryUpdateNotificationKey"
 
-let WOWGoodsSureBuyNotificationKey = "WOWGoodsSureBuyNotificationKey"
+let WOWGoodsSureBuyNotificationKey      = "WOWGoodsSureBuyNotificationKey"
+
+//登录成功
+let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
+
+
 
 
 let WOWEmptyText  = "暂无数据"

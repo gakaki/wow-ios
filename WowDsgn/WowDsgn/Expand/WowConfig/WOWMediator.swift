@@ -8,13 +8,13 @@
 
 import UIKit
 
-enum GoodsDetailEntrance {
-    case FromGoodsList
-    case FromBrand
-    case FromSence
-}
-
-
-struct WOWMediator {
-    static var goodsDetailSecondEntrance:GoodsDetailEntrance = .FromGoodsList
-}
+//enum GoodsDetailEntrance {
+//    case FromGoodsList
+//    case FromBrand
+//    case FromSence
+//}
+//
+//
+//struct WOWMediator {
+//    static var goodsDetailSecondEntrance:GoodsDetailEntrance = .FromGoodsList
+//}

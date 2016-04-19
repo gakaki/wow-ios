@@ -21,7 +21,7 @@ public enum RequestApi{
     
     
     
-    case Api_Login(String,String,String)
+    case Api_Login(String,String)
 }
 
 
@@ -55,8 +55,8 @@ extension RequestApi:TargetType{
         switch self{
         case let .Api_Sence(_, value):
             return ["pageIndex":String(value)]
-        case let .Api_Login(mobile,email,passwd):
-            return ["mobile":mobile,"email":email,"passwd":passwd]
+        case let .Api_Login(account,passwd):
+            return ["account":account,"passwd":passwd]
         default:
             return nil
         }

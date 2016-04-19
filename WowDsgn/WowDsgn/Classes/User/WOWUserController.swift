@@ -27,7 +27,10 @@ class WOWUserController: WOWBaseTableViewController {
          */
 //        configRightNav()
         configHeaderView()
+        addObserver()
     }
+
+//MARK:Private Method
     
     private func configRightNav(){
         rightItem = WOWNumberMessageView(frame:CGRectMake(0,0,50,30))
@@ -42,7 +45,6 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     private func configHeaderView(){
-        
         func gotoSociety(type:SocietyType){
             let soc = UIStoryboard.initialViewController("User", identifier:"WOWMeSocietyController") as! WOWMeSocietyController
             soc.society = type
@@ -51,12 +53,9 @@ class WOWUserController: WOWBaseTableViewController {
         
         let header = WOWUserTopView()
         header.frame = CGRectMake(0, 0, MGScreenWidth, 120)
-        self.tableView.tableHeaderView = header
-        //FIXME:需要判断下，点击之后干嘛
         header.topContainerView.addAction {[weak self] in
             if let strongSelf = self{
                 strongSelf.goLogin()
-//                strongSelf.goUserInfo()
             }
         }
         header.focusBackView.addAction {[weak self] in
@@ -71,7 +70,8 @@ class WOWUserController: WOWBaseTableViewController {
             }
         }
         
-       
+        self.tableView.tableHeaderView = header
+        
         
     }
     
@@ -85,9 +85,22 @@ class WOWUserController: WOWBaseTableViewController {
         presentViewController(vc, animated: true, completion: nil)
     }
     
+    private func addObserver(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
+    }
+    
+    
+    
+//MARK:Actions
+    func loginSuccess(){
+        
+    }
+    
+    
 }
 
 
+//MARK:Delegate
 extension WOWUserController{
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

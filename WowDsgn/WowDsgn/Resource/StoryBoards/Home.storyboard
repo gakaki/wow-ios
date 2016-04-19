@@ -27,7 +27,7 @@
         <!--Empty Data Set Delegate-->
         <scene sceneID="bzw-ue-Dsp">
             <objects>
-                <viewController title="尖叫" id="iWL-Oz-JyM" customClass="WOWController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWController" title="尖叫" id="iWL-Oz-JyM" customClass="WOWController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zth-Uz-Pao"/>
                         <viewControllerLayoutGuide type="bottom" id="Qr7-pK-v6K"/>

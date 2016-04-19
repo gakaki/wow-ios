@@ -55,8 +55,8 @@ class WOWUserController: WOWBaseTableViewController {
         //FIXME:需要判断下，点击之后干嘛
         header.topContainerView.addAction {[weak self] in
             if let strongSelf = self{
-//                strongSelf.goLogin()
-                strongSelf.goUserInfo()
+                strongSelf.goLogin()
+//                strongSelf.goUserInfo()
             }
         }
         header.focusBackView.addAction {[weak self] in

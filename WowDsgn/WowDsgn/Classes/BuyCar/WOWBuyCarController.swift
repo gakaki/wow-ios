@@ -13,7 +13,17 @@ class WOWBuyCarController: WOWBaseViewController {
     let cellEditID   = String(WOWBurCarEditCell)
     private var rightItemButton:UIButton!
     //FIXME:测试数据
-    private var dataArr = ["1"]
+    private var dataArr = ["1"]{
+        didSet{
+            if dataArr.isEmpty {
+                bottomView.hidden = true
+                rightItemButton.hidden = true
+            }else{
+                bottomView.hidden = false
+                rightItemButton.hidden = false
+            }
+        }
+    }
     //存放选中的数组
     private var selectedArr = []
     @IBOutlet weak var tableView: UITableView!
@@ -21,6 +31,7 @@ class WOWBuyCarController: WOWBaseViewController {
     @IBOutlet weak var endEditButton: UIButton!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var bottomView: UIView!
     private var isEditing:Bool = false{
         didSet{
             totalLabel.hidden = isEditing

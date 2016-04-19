@@ -54,14 +54,34 @@ class WOWRegistController: WOWBaseViewController {
         }
     }
     
+    private func validatePhone(phoneNumber:String?) -> Bool{
+        guard let phone = phoneNumber where !phone.isEmpty else{
+            WOWHud.showMsg("请输入账号")
+            return false
+        }
+        
+        guard phone.validateMobile() else{
+            WOWHud.showMsg("请输入正确的手机号")
+            return false
+        }
+        return true
+    }
+    
 //MARK:Actions
     private func back(){
         navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func msgCodeButtonClick(sender: AnyObject) {
-        DLog("获取验证码")
+        if !validatePhone(phoneTextField.text){
+            return
+        }
+        
     }
+    
+    
+    
+    
     
     
     @IBAction func registClick(sender: UIButton) {

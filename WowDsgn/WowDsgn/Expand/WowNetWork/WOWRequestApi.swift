@@ -18,6 +18,10 @@ public enum RequestApi{
     case Api_Activity
     
     case Api_StoreHome
+    
+    
+    
+    case Api_Login(String,String,String)
 }
 
 
@@ -36,6 +40,10 @@ extension RequestApi:TargetType{
             return URL_storeHome
         case .Api_Sence:
             return URL_scene
+            
+            
+        case .Api_Login:
+            return URL_login
         }
     }
     
@@ -45,9 +53,10 @@ extension RequestApi:TargetType{
     
     public var parameters:[String: AnyObject]?{
         switch self{
-        case let .Api_Sence(key, value):
-            return [key:String(value)]
-            
+        case let .Api_Sence(_, value):
+            return ["pageIndex":String(value)]
+        case let .Api_Login(mobile,email,passwd):
+            return ["mobile":mobile,"email":email,"passwd":passwd]
         default:
             return nil
         }

@@ -43,7 +43,7 @@
                                     <outlet property="emptyDataSetSource" destination="t5S-nt-7u6" id="PFP-Yj-dFH"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-3m-yCX">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-3m-yCX" userLabel="bottomView">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkW-n9-3vb">
@@ -99,7 +99,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="k6y-vj-XDz" secondAttribute="bottom" id="1EY-Wr-UWb"/>
                                     <constraint firstItem="MHI-be-nCo" firstAttribute="centerY" secondItem="ccY-3m-yCX" secondAttribute="centerY" id="8f1-h5-Lws"/>
@@ -117,7 +117,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ccY-3m-yCX" secondAttribute="trailing" id="2uV-sc-smn"/>
                             <constraint firstItem="Z6e-3O-4Cr" firstAttribute="top" secondItem="ieb-aM-0jm" secondAttribute="bottom" id="6Km-so-7O7"/>
@@ -131,6 +131,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="购物车" id="GdU-x6-BgS"/>
                     <connections>
+                        <outlet property="bottomView" destination="ccY-3m-yCX" id="9yI-lp-1rz"/>
                         <outlet property="endButton" destination="k6y-vj-XDz" id="t6K-5o-W9E"/>
                         <outlet property="endEditButton" destination="bkW-n9-3vb" id="ZTu-fE-Sq7"/>
                         <outlet property="tableView" destination="Z6e-3O-4Cr" id="8IL-uN-041"/>

@@ -229,8 +229,6 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 /// \returns  图片
 + (UIImage * _Nullable)imageWithColor:(UIColor * _Nonnull)color;
 + (UIImage * _Nullable)imageWithColor:(UIColor * _Nonnull)color size:(CGSize)size;
-- (UIImage * _Nonnull)resizeImage:(UIImage * _Nonnull)image newWidth:(CGFloat)newWidth;
-- (UIImage * _Nonnull)resizeImage:(UIImage * _Nonnull)image newHeight:(CGFloat)newHeight;
 @end
 
 

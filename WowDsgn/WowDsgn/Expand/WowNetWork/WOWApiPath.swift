@@ -10,6 +10,7 @@ import Foundation
 
 //Host
 //王云鹏自己的本机 10.0.23.67        127.0.0.1
+
 let BaseUrl = "http://10.0.23.67:8360/apiv1/"
 
 
@@ -31,4 +32,7 @@ let URL_storeHome   = "shop"
 let URL_activity    = "post"
 
 
+
+//5.app 注册
+let URL_login       = "user/login"
 

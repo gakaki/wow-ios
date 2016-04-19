@@ -60,8 +60,26 @@ class WOWLoginController: WOWBaseViewController {
     }
     
     @IBAction func login(sender: UIButton) {
-        DLog("登录")
+        guard let phone = accountTextField.text where !phone.isEmpty else{
+            WOWHud.showMsg("请输入账号")
+            return
+        }
+        
+        guard let passwd = passWordTextField.text where !passwd.isEmpty else{
+            WOWHud.showMsg("请输入密码")
+            return
+        }
+
+        
+        guard phone.validateMobile() || phone.validateEmail() else{
+            WOWHud.showMsg("对不起，您输入的账号不符合规则")
+            return
+        }
+        
+        
     }
+    
+    
     
     //MARK:Lazy
     

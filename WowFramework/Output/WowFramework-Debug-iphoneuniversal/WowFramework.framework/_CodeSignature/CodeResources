@@ -4,45 +4,9 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Frameworks/libswiftContacts.dylib</key>
-		<data>
-		Jnshsj+Cjm4CmLKUFlkQAjp7Nzs=
-		</data>
-		<key>Frameworks/libswiftCore.dylib</key>
-		<data>
-		eaNfjJSs2TXSlHs04uQD2/nbNIY=
-		</data>
-		<key>Frameworks/libswiftCoreGraphics.dylib</key>
-		<data>
-		TCG4HJXbHLaWfTmEje3s1rJ0IqE=
-		</data>
-		<key>Frameworks/libswiftCoreImage.dylib</key>
-		<data>
-		9Jvg04xetE7sVO0n1bsTaULvRQY=
-		</data>
-		<key>Frameworks/libswiftDarwin.dylib</key>
-		<data>
-		0MeeKAvFEheNuuA9O4OY6//09MQ=
-		</data>
-		<key>Frameworks/libswiftDispatch.dylib</key>
-		<data>
-		aoBmfxKiy/c4pnuKm1y/ESTA0S0=
-		</data>
-		<key>Frameworks/libswiftFoundation.dylib</key>
-		<data>
-		7hsF/+oOdlyU3Bfs7ZobRrpp+7A=
-		</data>
-		<key>Frameworks/libswiftObjectiveC.dylib</key>
-		<data>
-		uMN2shQBlX/Nsq177Q8KnNTc8WA=
-		</data>
-		<key>Frameworks/libswiftUIKit.dylib</key>
-		<data>
-		KPGnh4Etwmgk09MR37RGcaNjRdw=
-		</data>
 		<key>Headers/WowFramework-Swift.h</key>
 		<data>
-		6UPrr0UxxNgGEFR2KkV7yaUTMx4=
+		aaFZuo0oHi0fPoTxzDSc2dPIDw0=
 		</data>
 		<key>Headers/WowFramework.h</key>
 		<data>
@@ -52,21 +16,13 @@
 		<data>
 		pEmogv7Eg/DNO88TvUo+SJcCQxI=
 		</data>
-		<key>Modules/WowFramework.swiftmodule/arm.swiftdoc</key>
-		<data>
-		9L2D4QllzFQ7N9tlI1IXTgB4Lwk=
-		</data>
-		<key>Modules/WowFramework.swiftmodule/arm.swiftmodule</key>
-		<data>
-		5Oe8wYf1ETTWCvQI89u/d6u7UcU=
-		</data>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		+ftZi6Dt5IZvGIjyWcNt7mtSnlc=
+		HJ/Arq+pD6kdHiCi9p6p9kKt748=
 		</data>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		uljWImdoQKY9ZomlqcKlKLcY5tM=
+		SLKxu8I21PYUEY8S31ggIvo2ktE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -75,114 +31,15 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Frameworks/libswiftContacts.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Jnshsj+Cjm4CmLKUFlkQAjp7Nzs=
-			</data>
-			<key>hash2</key>
-			<data>
-			BRrDVfDAcZ7pRIO0rbgKP0e3uZHBo/DfjzLs3RQpztc=
-			</data>
-		</dict>
-		<key>Frameworks/libswiftCore.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			eaNfjJSs2TXSlHs04uQD2/nbNIY=
-			</data>
-			<key>hash2</key>
-			<data>
-			sct3LPhc4mK2VwOrrq17XSPd8+tKyuEZsKgNeYvEYHE=
-			</data>
-		</dict>
-		<key>Frameworks/libswiftCoreGraphics.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			TCG4HJXbHLaWfTmEje3s1rJ0IqE=
-			</data>
-			<key>hash2</key>
-			<data>
-			WO9t/E3dTXjLzt8Qe4U7tXVySYNLdPh24hp9MKbbAyA=
-			</data>
-		</dict>
-		<key>Frameworks/libswiftCoreImage.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			9Jvg04xetE7sVO0n1bsTaULvRQY=
-			</data>
-			<key>hash2</key>
-			<data>
-			WQBI55EY8ON0Ces+8IK5Jl+5jOSYy0BHS6AI7lyXpUo=
-			</data>
-		</dict>
-		<key>Frameworks/libswiftDarwin.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			0MeeKAvFEheNuuA9O4OY6//09MQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			qzzl3oIrYQdTPegOfsh4x/i0FcoPCvSdK9aH9b0AbeU=
-			</data>
-		</dict>
-		<key>Frameworks/libswiftDispatch.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			aoBmfxKiy/c4pnuKm1y/ESTA0S0=
-			</data>
-			<key>hash2</key>
-			<data>
-			tGwUxq5Ry0kUNA4Nm+SUxR6fCI5U2Z56zUOhDwvALHM=
-			</data>
-		</dict>
-		<key>Frameworks/libswiftFoundation.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			7hsF/+oOdlyU3Bfs7ZobRrpp+7A=
-			</data>
-			<key>hash2</key>
-			<data>
-			1FxbOaEGzQI1b9Oy+huRKjMC2PuaB3itZvg/2nYWqAE=
-			</data>
-		</dict>
-		<key>Frameworks/libswiftObjectiveC.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			uMN2shQBlX/Nsq177Q8KnNTc8WA=
-			</data>
-			<key>hash2</key>
-			<data>
-			4s1tYmf5cuJXGNGUF64dlwxF01Nkz2YLzrJ49oonMvE=
-			</data>
-		</dict>
-		<key>Frameworks/libswiftUIKit.dylib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			KPGnh4Etwmgk09MR37RGcaNjRdw=
-			</data>
-			<key>hash2</key>
-			<data>
-			Wc79H8/d2/17VJMNizvkSGE1KQzlLR8dOIuP4O86o5U=
-			</data>
-		</dict>
 		<key>Headers/WowFramework-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6UPrr0UxxNgGEFR2KkV7yaUTMx4=
+			aaFZuo0oHi0fPoTxzDSc2dPIDw0=
 			</data>
 			<key>hash2</key>
 			<data>
-			M+LKBZwaVVfyXvQP9aLJlf98Ao4E3Km0HntadYxD9D8=
+			C3iyLD1L0fJ6JG0YGHDcqhTjwLIV436BZCJbfdXQj7M=
 			</data>
 		</dict>
 		<key>Headers/WowFramework.h</key>
@@ -196,48 +53,26 @@
 			tR0R1oP1+iWffKCQrkSMovZIhrYCWdoi426ffBvQDRc=
 			</data>
 		</dict>
-		<key>Modules/WowFramework.swiftmodule/arm.swiftdoc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			9L2D4QllzFQ7N9tlI1IXTgB4Lwk=
-			</data>
-			<key>hash2</key>
-			<data>
-			EZ72inqR31h7HJMHtfqmqMxnZwenlNoPsl4WmU5vfVg=
-			</data>
-		</dict>
-		<key>Modules/WowFramework.swiftmodule/arm.swiftmodule</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			5Oe8wYf1ETTWCvQI89u/d6u7UcU=
-			</data>
-			<key>hash2</key>
-			<data>
-			r8ymx6yXoYIwz3Ug/bUGIg+3ZHZyqYuB+wcN6tTK94s=
-			</data>
-		</dict>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+ftZi6Dt5IZvGIjyWcNt7mtSnlc=
+			HJ/Arq+pD6kdHiCi9p6p9kKt748=
 			</data>
 			<key>hash2</key>
 			<data>
-			LMLtXV+hoKtUCVeDpceVVjuStvBwFxIZ/efUb2HEy/4=
+			ggz9eWF7vpoXIGQ+J+MWBH/vJkvGyTqliCFHC72Kxa8=
 			</data>
 		</dict>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uljWImdoQKY9ZomlqcKlKLcY5tM=
+			SLKxu8I21PYUEY8S31ggIvo2ktE=
 			</data>
 			<key>hash2</key>
 			<data>
-			uJRwzzG8Tdvxd2Uxne0yizx461JPsD+TedfV5KfsF6w=
+			whXFYp79NUHgo9NKuS2LB6YRD6emhPZLPiqAkni813c=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

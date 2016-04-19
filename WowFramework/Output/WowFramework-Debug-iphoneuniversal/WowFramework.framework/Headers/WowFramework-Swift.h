@@ -144,6 +144,49 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 @end
 
 
+@interface UIColor (SWIFT_EXTENSION(WowFramework))
+
+/// The shorthand three-digit hexadecimal representation of color. #RGB defines to the color #RRGGBB.
+///
+/// \param hex3 Three-digit hexadecimal value.
+///
+/// \param alpha 0.0 - 1.0. The default is 1.0.
+- (nonnull instancetype)initWithHex3:(uint16_t)hex3 alpha:(CGFloat)alpha;
+
+/// The shorthand four-digit hexadecimal representation of color with alpha. #RGBA defines to the color #RRGGBBAA.
+///
+/// \param hex4 Four-digit hexadecimal value.
+- (nonnull instancetype)initWithHex4:(uint16_t)hex4;
+
+/// The six-digit hexadecimal representation of color of the form #RRGGBB.
+///
+/// \param hex6 Six-digit hexadecimal value.
+- (nonnull instancetype)initWithHex6:(uint32_t)hex6 alpha:(CGFloat)alpha;
+
+/// The six-digit hexadecimal representation of color with alpha of the form #RRGGBBAA.
+///
+/// \param hex8 Eight-digit hexadecimal value.
+- (nonnull instancetype)initWithHex8:(uint32_t)hex8;
+
+/// The rgba string representation of color with alpha of the form #RRGGBBAA/#RRGGBB, throws error.
+///
+/// \param rgba String value.
+- (nullable instancetype)initWithRgba_throws:(NSString * _Nonnull)rgba error:(NSError * _Nullable * _Null_unspecified)error;
+
+/// The rgba string representation of color with alpha of the form #RRGGBBAA/#RRGGBB, fails to default color.
+///
+/// \param rgba String value.
+- (nonnull instancetype)initWithRgba:(NSString * _Nonnull)rgba defaultColor:(UIColor * _Nonnull)defaultColor;
+
+/// Hex string of a UIColor instance.
+///
+/// \param rgba Whether the alpha should be included.
+- (NSString * _Nonnull)hexString:(BOOL)includeAlpha;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@property (nonatomic, readonly, copy) NSString * _Nonnull debugDescription;
+@end
+
+
 @interface UIDevice (SWIFT_EXTENSION(WowFramework))
 
 /// 判断当前设备是不是iPhone设备
@@ -186,6 +229,8 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 /// \returns  图片
 + (UIImage * _Nullable)imageWithColor:(UIColor * _Nonnull)color;
 + (UIImage * _Nullable)imageWithColor:(UIColor * _Nonnull)color size:(CGSize)size;
+- (UIImage * _Nonnull)resizeImage:(UIImage * _Nonnull)image newWidth:(CGFloat)newWidth;
+- (UIImage * _Nonnull)resizeImage:(UIImage * _Nonnull)image newHeight:(CGFloat)newHeight;
 @end
 
 

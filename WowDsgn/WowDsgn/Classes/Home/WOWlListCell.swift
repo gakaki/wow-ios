@@ -30,7 +30,6 @@ class WOWlListCell: UITableViewCell {
     }
     
     func showData(model:WOWSenceModel) {
-        
         let url = model.senceImage ?? ""
         bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named:"squarePlaceHoder"))
         dateLabel.text = model.senceTime
@@ -48,11 +47,15 @@ class WOWlListCell: UITableViewCell {
             btn.tag = Int(productModel.productID ?? "-1111") ?? -1111
             btn.addTarget(self, action:#selector(productBtnClick(_:)) , forControlEvents:.TouchUpInside)
             if let X = productModel.productX,Y = productModel.productY {
-//                let frame = self.convertRect(CGRectMake(CGFloat(X),CGFloat(Y), 40, 40), fromView: bigImageView)
-                let frame = CGRectMake(CGFloat(X),CGFloat(Y), 40, 40)
+                let frame = self.convertRect(CGRectMake(CGFloat(X),CGFloat(Y), 40, 40), fromView: bigImageView)
                 btn.frame = frame
                 self.addSubview(btn)
                 self.productBtns.append(btn)
+                UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse,.AllowUserInteraction], animations: { 
+                    btn.layer.transform = CATransform3DMakeScale(1.4, 1.4, 1)
+                }, completion: { (ret) in
+                        
+                })
             }
         }
     }
@@ -72,10 +75,9 @@ class WOWlListCell: UITableViewCell {
     
     
     func startAnimate() {
-        UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse, .CurveEaseOut,.AllowUserInteraction], animations: {
+        UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse,.AllowUserInteraction], animations: {
             self.productBtns.forEach({ (view) in
-                view.alpha = 1
-                view.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1)
+                view.layer.transform = CATransform3DMakeScale(1.4, 1.4, 1)
             })
         }) { (ret) in
                 

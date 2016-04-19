@@ -20,8 +20,10 @@ class WOWController: WOWBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //FIXME:为了让动画出现 所以多reload一次咯
+        tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -133,10 +135,6 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         navigationController?.pushViewController(sence, animated: true)
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = cell as! WOWlListCell
-        cell.startAnimate()
-    }
 }
 
 extension WOWController:SenceCellDelegate{

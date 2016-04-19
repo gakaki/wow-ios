@@ -30,7 +30,7 @@ class WOWMenuCell: UITableViewCell {
         imageName = isStore ? "store_" + imageName : imageName
         menuImageView.image = UIImage(named:imageName)
         menuNameLabel.text = model.categoryName
-        menuCountLabel.text = "\(model.categoryCount)"
+        menuCountLabel.text = "\(model.categoryCount)件商品"
     }
     
     private func getImageName(categoryID:String) -> String{

@@ -15,6 +15,14 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var nickLabel: UILabel!
     //个性签名
     @IBOutlet weak var desLabel: UILabel!
+    
+//MARK:Lazy
+    lazy var imagePicker:UIImagePickerController = {
+        let v = UIImagePickerController()
+        v.delegate = self
+//        v.allowsEditing = true
+        return v
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +36,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     override func setUI() {
         super.setUI()
+        headImageView.borderRadius(23)
         navigationItem.title = "个人信息"
     }
 }
@@ -77,15 +86,29 @@ extension WOWUserInfoController{
         }
          actionSheetController.addAction(cancelAction)
         let takePictureAction: UIAlertAction = UIAlertAction(title: "相机拍照", style: .Default) { action -> Void in
-            
+            self.choosePhtot(.Camera)
         }
         actionSheetController.addAction(takePictureAction)
         let choosePictureAction: UIAlertAction = UIAlertAction(title: "相册选取", style: .Default) { action -> Void in
-            
-            }
+            self.choosePhtot(.PhotoLibrary)
+        }
         actionSheetController.addAction(choosePictureAction)
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
+    
+    
+    private func choosePhtot(type:UIImagePickerControllerSourceType){
+        if UIImagePickerController.isSourceTypeAvailable(type){
+            //指定图片控制器类型
+            imagePicker.sourceType = type
+            //弹出控制器，显示界面
+            self.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+            self.presentViewController(imagePicker, animated: true, completion:nil)
+        }else{
+            DLog("读取相册错误")
+        }
+    }
+    
     
     
     private func changeNick(){
@@ -122,6 +145,18 @@ extension WOWUserInfoController{
         actionSheetController.addAction(womanAction)
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
-
-    
 }
+
+
+//MARK:Delegate
+
+extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        headImageView.image = image
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+
+
+

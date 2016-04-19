@@ -14,7 +14,7 @@ class WOWSenceModel: WOWBaseModel,Mappable{
     var senceName        :   String?
     var senceProducts    :   [WOWProductModel]?
     var senceTime        :   String?
-    
+    var senceImage       :   String?
     required init?(_ map: Map) {
         
     }
@@ -24,5 +24,6 @@ class WOWSenceModel: WOWBaseModel,Mappable{
         senceName       <- map["name"]
         senceTime       <- map["time"]
         senceProducts   <- map["products"]
+        senceImage      <- map["image"]
     }
 }

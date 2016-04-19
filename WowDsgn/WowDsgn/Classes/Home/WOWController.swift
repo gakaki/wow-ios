@@ -121,6 +121,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
+        cell.delegate = self
         let model = dataArr[indexPath.row]
         cell.showData(model)
         return cell
@@ -131,4 +132,18 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         sence.hideNavigationBar = true
         navigationController?.pushViewController(sence, animated: true)
     }
+//    
+//    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        let senceCell = cell as! WOWlListCell
+////        senceCell.startAnimate()
+//    }
 }
+
+extension WOWController:SenceCellDelegate{
+    func senceProductClick(produtID: String) {
+        DLog("选择了id为\(produtID)的商品")
+    }
+}
+
+
+

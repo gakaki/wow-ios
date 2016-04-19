@@ -40,4 +40,5 @@ end
 # pod 'AFImageHelper'  Image的拓展
 #pod 'TagCellLayout', '~> 0.1'
 #pod 'ReactiveCocoa', '~> 4.0.4-alpha-4'
+# DOFavoriteButton 点赞动画
 #  http://cdn0.jianshu.io/p/83c069022e45/comments/802155 swift项目需要用到的开源组件

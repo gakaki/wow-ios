@@ -9,8 +9,6 @@
 import UIKit
 
 class WOWPasswordController: WOWBaseViewController {
-    var entrance:MsgCodeEntrance = .RegistCode
-    @IBOutlet weak var firstPassLabel: UILabel!
     @IBOutlet weak var firstPassTextField: UITextField!
     @IBOutlet weak var secondPassTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
@@ -27,21 +25,14 @@ class WOWPasswordController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
-        makeBackButton("上一步")
-        switch entrance{
-            case .RegistCode:
-                navigationItem.title = "注册"
-            case .ForgetPasswordCode:
-                firstPassLabel.text = "新密码"
-                navigationItem.title = "重置密码"
-            default:
-                DLog("")
-        }
+        navigationItem.title = "重置密码"
+        
     }
 
     
     @IBAction func nextClick(sender: UIButton) {
-        DLog("下一步")
+        //返回登录界面再登录吧
+        navigationController?.popToRootViewControllerAnimated(true)
     }
 
 }

@@ -33,15 +33,18 @@ class WOWMsgCodeController: WOWBaseViewController {
 //MARK:Private Method
     override func setUI() {
         super.setUI()
+        navigationItem.title = "忘记密码"
         switch entrance {
-        case .RegistCode:
-            navigationItem.title = "注册"
         case .ForgetPasswordCode:
-            navigationItem.title = "忘记密码"
+            leftLabel.text = "验证码"
+            codeTextField.placeholder = "请输入6位验证码"
+            codeTextField.keyboardType = .NumbersAndPunctuation
         case .ForgetPasswordHome:
-            navigationItem.title = "忘记密码"
             leftLabel.text = "注册手机号"
-            codeTextField.placeholder = "请输入手机号码"
+            codeTextField.keyboardType = .NumberPad
+            codeTextField.placeholder = "请输入11位手机号码"
+        default:
+            break
         }
         makeBackButton("上一步")
     }
@@ -57,7 +60,6 @@ class WOWMsgCodeController: WOWBaseViewController {
             navigationController?.pushViewController(vc, animated: true)
         default:
             let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWPasswordController)) as! WOWPasswordController
-            vc.entrance  = entrance
             navigationController?.pushViewController(vc, animated: true)
         }
     }

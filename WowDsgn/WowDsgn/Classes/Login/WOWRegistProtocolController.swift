@@ -8,16 +8,18 @@
 
 import UIKit
 
-class WOWRegistProtocolController: WOWBaseViewController {
+typealias ActionClosure = () -> ()
 
+class WOWRegistProtocolController: WOWBaseViewController {
+    
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var agreeButton: UIButton!
+    var agreeAction:ActionClosure?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.title = "尖叫用户使用协议"
         // Do any additional setup after loading the view.
     }
-    @IBOutlet weak var nextButton: UIButton!
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -37,12 +39,11 @@ class WOWRegistProtocolController: WOWBaseViewController {
     @IBAction func agreeButtonClick(sender: UIButton) {
         //FIXME:
         DLog("同意")
+        if let action = self.agreeAction {
+            action()
+        }
+        navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func nextClick(sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
-        vc.entrance = .RegistCode
-        navigationController?.pushViewController(vc, animated: true)
-    }
 
 }

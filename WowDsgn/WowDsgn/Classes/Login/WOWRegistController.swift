@@ -46,12 +46,11 @@ class WOWRegistController: WOWBaseViewController {
                 strongSelf.back()
             }
         }
-        self.navigationItem.leftBarButtonItems = nil
-        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
-            if let strongSelf = self{
-                strongSelf.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
+//        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
+//            if let strongSelf = self{
+//                strongSelf.navigationController?.popViewControllerAnimated(true)
+//            }
+//        }
     }
     
     private func validatePhone(phoneNumber:String?) -> Bool{
@@ -87,8 +86,7 @@ class WOWRegistController: WOWBaseViewController {
     
     
     @IBAction func registClick(sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistProtocolController)) as! WOWRegistProtocolController
-        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     @IBAction func protocolCheckButtonClick(sender:UIButton) {
@@ -97,6 +95,13 @@ class WOWRegistController: WOWBaseViewController {
     
     @IBAction func showProtocol(sender: UIButton) {
         DLog("用户协议")
+        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistProtocolController)) as! WOWRegistProtocolController
+        vc.agreeAction = {[weak self] in
+            if let strongSelf = self{
+                strongSelf.protocolCheckButton.selected = true
+            }
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

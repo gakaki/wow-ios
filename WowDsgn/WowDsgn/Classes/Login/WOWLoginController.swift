@@ -60,9 +60,9 @@ class WOWLoginController: WOWBaseViewController {
     
     @IBAction func forgetPasswordClick(sender: UIButton) {
         DLog("忘记密码")
-//        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
-//        vc.entrance  = .ForgetPasswordHome
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
+        vc.entrance  = .ForgetPasswordHome
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -88,8 +88,10 @@ class WOWLoginController: WOWBaseViewController {
                     strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 })
             }
-        }) { (errorMsg) in
-                
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.tipsLabel.text = errorMsg
+            }
         }
     }
 }

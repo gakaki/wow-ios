@@ -14,6 +14,7 @@ import ObjectMapper
 typealias FailClosure = (errorMsg:String?) -> ()
 typealias SuccessClosure = (result:AnyObject) ->()
 
+
 enum RequestCode:Int{
     case FailError = 1000
     case Success = 1001
@@ -55,18 +56,18 @@ class WOWNetManager {
                             return
                         }
                     }else{
-                        failClosure(errorMsg:"加载失败")
-                        WOWHud.showMsg("加载失败")
+                        failClosure(errorMsg:"请求失败")
+                        WOWHud.showMsg("请求失败")
                         return
                     }
                     guard let data = info?.data else{
-                        failClosure(errorMsg:"加载失败")
-                        WOWHud.showMsg("加载失败")
+                        failClosure(errorMsg:"请求失败")
+                        WOWHud.showMsg("请求失败")
                         return
                     }
                     WOWHud.dismiss()
                     successClosure(result:data)
-                case .Error(let error):
+            case .Error(let error):
                     DLog(error)
                     failClosure(errorMsg:"网络错误")
                     WOWHud.showMsg("网络错误")

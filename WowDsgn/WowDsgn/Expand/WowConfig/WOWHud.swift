@@ -18,12 +18,12 @@ struct WOWHud {
     }
     
     static func dismiss(){
-        SVProgressHUD.dismiss()
+        SVProgressHUD.popActivity()
     }
     
     static func showMsg(message:String?){
         configSVHud()
-        let msg = message ?? "加载失败"
+        let msg = message ?? "请求失败"
         SVProgressHUD.showInfoWithStatus(msg)
     }
     

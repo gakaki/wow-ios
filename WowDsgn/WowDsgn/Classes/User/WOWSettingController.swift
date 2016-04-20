@@ -28,17 +28,45 @@ class WOWSettingController: WOWBaseTableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        switch WOWLoginManager.status {
-        case .Logined:
-            return 3
-        default:
+        switch WOWUserManager.loginStatus {
+        case true:
             return 2
+        case false:
+            return 1
         }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+        switch indexPath.section {
+        case 1:
+            alertExit()
+        default:
+            break
+        }
+    }
+    
+    
+    private func alertExit(){
+        let alertController: UIAlertController = UIAlertController(title: "退出登录", message: nil, preferredStyle: .Alert)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style:.Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
+            self.exitLogin()
+        }
+        alertController.addAction(sureAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    
+    private func exitLogin(){
+        WOWUserManager.exitLogin()
+        tableView.reloadData()
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+        WOWHud.showMsg("退出登录")
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            self.navigationController?.popViewControllerAnimated(true)
+        })
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

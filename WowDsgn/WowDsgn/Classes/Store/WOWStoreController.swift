@@ -58,6 +58,7 @@ class WOWStoreController: WOWBaseViewController {
     override func request() {
         WOWNetManager.sharedManager.requestWithTarget(.Api_StoreHome, successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                WOWHud.dismiss()
                 strongSelf.categoryArr = []
                 strongSelf.bannerArr   = []
                 strongSelf.brandArr    = []

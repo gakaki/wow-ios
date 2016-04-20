@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 class WOWUserModel:NSObject,Mappable{
-    var userName : String?
+//    var userName : String?
     var userID   : String?
     
     required init?(_ map: Map) {
@@ -18,8 +18,8 @@ class WOWUserModel:NSObject,Mappable{
     }
     
     func mapping(map: Map) {
-        userName   <- map["userName"]
-        userID     <- map["userID"]
+//        userName   <- map["userName"]
+        userID     <- map["entity_id"]
     }
     
 }

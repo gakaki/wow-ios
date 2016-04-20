@@ -25,7 +25,8 @@ let WOWGoodsSureBuyNotificationKey      = "WOWGoodsSureBuyNotificationKey"
 //登录成功
 let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
 
-
+//退出登录
+let WOWExitLoginNotificationKey         = "WOWExitLoginNotificationKey"
 
 
 let WOWEmptyText  = "网络错误"

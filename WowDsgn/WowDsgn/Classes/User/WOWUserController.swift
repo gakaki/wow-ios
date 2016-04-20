@@ -12,12 +12,16 @@ class WOWUserController: WOWBaseTableViewController {
     var rightItem:WOWNumberMessageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        addObserver()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func setUI() {
@@ -45,19 +49,27 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     private func configHeaderView(){
+        /*
         func gotoSociety(type:SocietyType){
             let soc = UIStoryboard.initialViewController("User", identifier:"WOWMeSocietyController") as! WOWMeSocietyController
             soc.society = type
             navigationController?.pushViewController(soc, animated: true)
         }
-        
+        */
+ 
         let header = WOWUserTopView()
-        header.frame = CGRectMake(0, 0, MGScreenWidth, 120)
+        header.frame = CGRectMake(0, 0, MGScreenWidth, 76)
+        header.configShow(WOWUserManager.loginStatus)
         header.topContainerView.addAction {[weak self] in
             if let strongSelf = self{
-                strongSelf.goLogin()
+                if WOWUserManager.loginStatus{
+                    strongSelf.goUserInfo()
+                }else{
+                    strongSelf.goLogin()
+                }
             }
         }
+        /*
         header.focusBackView.addAction {[weak self] in
             if let _ = self{
                 gotoSociety(SocietyType.Focus)
@@ -69,7 +81,8 @@ class WOWUserController: WOWBaseTableViewController {
                 gotoSociety(SocietyType.Fans)
             }
         }
-        
+        */
+        self.tableView.tableHeaderView = nil
         self.tableView.tableHeaderView = header
         
         
@@ -87,13 +100,17 @@ class WOWUserController: WOWBaseTableViewController {
     
     private func addObserver(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
+
     }
     
-    
-    
 //MARK:Actions
+    func exitLogin() {
+        configHeaderView()
+    }
+    
     func loginSuccess(){
-        
+        configHeaderView()
     }
     
     
@@ -119,6 +136,8 @@ extension WOWUserController{
         default:
             break
         }
+        
+     
     }
     
     var types:[String]{

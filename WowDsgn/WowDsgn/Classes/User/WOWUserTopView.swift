@@ -9,6 +9,7 @@
 import UIKit
 
 class WOWUserTopView: UIView {
+    var loginLabel:UILabel!
     var topContainerView: UIView!
     var headImageView: UIImageView!
     var nameLabel: UILabel!
@@ -35,7 +36,7 @@ class WOWUserTopView: UIView {
         
         headImageView = UIImageView()
         //FIXME:测试
-        headImageView.image = UIImage(named: "testHeadImage")
+        headImageView.backgroundColor = UIColor.orangeColor()
         topContainerView.addSubview(headImageView)
         headImageView.snp_makeConstraints { (make) in
             if let _ = weakSelf{
@@ -91,8 +92,24 @@ class WOWUserTopView: UIView {
             make.height.equalTo(0.5)
         }
         
+        loginLabel = UILabel()
+        loginLabel.text = "点击登录"
+        loginLabel.font = Fontlevel001
+        loginLabel.textColor = GrayColorlevel3
+        loginLabel.hidden = true
+        topContainerView.addSubview(loginLabel)
+        loginLabel.snp_makeConstraints { (make) in
+            if let _ = weakSelf{
+                make.left.equalTo(headImageView.snp_right).offset(8)
+                make.centerY.equalTo(topContainerView.centerY).offset(0)
+                make.right.lessThanOrEqualTo(topContainerView.right).offset(-15)
+            }
+        }
+        
+        
         
         //下方容器
+        /*
         bottomContainerView = UIView()
         bottomContainerView.backgroundColor = UIColor.whiteColor()
         addSubview(bottomContainerView)
@@ -199,7 +216,7 @@ class WOWUserTopView: UIView {
                 make.height.equalTo(0.5)
             }
         }
-        
+        */
     }
     
     private func createNumberLabel() ->UILabel{
@@ -223,14 +240,18 @@ class WOWUserTopView: UIView {
     
     
     
-    func configShow(loginStatus:LoginStatus) {
+    func configShow(loginStatus:Bool) {
         switch loginStatus {
-        case .UnLogin:
-            self.bottomContainerView.hidden = true
-            self.height = 76
-        case .Logined:
-            self.bottomContainerView.hidden = false
-            self.height = 120
+        case false:
+            loginLabel.hidden = false
+            nameLabel.hidden = true
+            desLabel.hidden = true
+//            self.bottomContainerView.hidden = true
+//            self.height = 76
+        case true:
+            break
+//            self.bottomContainerView.hidden = false
+//            self.height = 120
         }
     }
     

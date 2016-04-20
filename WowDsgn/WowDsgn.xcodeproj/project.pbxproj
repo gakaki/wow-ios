@@ -164,7 +164,6 @@
 		2991ADDC1CBCCAD400F5F5A0 /* WOWPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991ADCB1CBCCAD400F5F5A0 /* WOWPasswordController.swift */; };
 		2991ADDD1CBCCAD400F5F5A0 /* WOWRegistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991ADCC1CBCCAD400F5F5A0 /* WOWRegistController.swift */; };
 		2991ADDE1CBCCAD400F5F5A0 /* WOWRegistProtocolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991ADCD1CBCCAD400F5F5A0 /* WOWRegistProtocolController.swift */; };
-		2991ADDF1CBCCAD400F5F5A0 /* WOWLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991ADCF1CBCCAD400F5F5A0 /* WOWLoginManager.swift */; };
 		2991ADE01CBCCAD400F5F5A0 /* WOWMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991ADD01CBCCAD400F5F5A0 /* WOWMessageController.swift */; };
 		2991ADE11CBCCAD400F5F5A0 /* WOWNumberMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991ADD11CBCCAD400F5F5A0 /* WOWNumberMessageView.swift */; };
 		2991ADE21CBCCAD400F5F5A0 /* WOWOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991ADD21CBCCAD400F5F5A0 /* WOWOrderController.swift */; };
@@ -393,7 +392,6 @@
 		2991ADCB1CBCCAD400F5F5A0 /* WOWPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWPasswordController.swift; sourceTree = "<group>"; };
 		2991ADCC1CBCCAD400F5F5A0 /* WOWRegistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistController.swift; sourceTree = "<group>"; };
 		2991ADCD1CBCCAD400F5F5A0 /* WOWRegistProtocolController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistProtocolController.swift; sourceTree = "<group>"; };
-		2991ADCF1CBCCAD400F5F5A0 /* WOWLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWLoginManager.swift; sourceTree = "<group>"; };
 		2991ADD01CBCCAD400F5F5A0 /* WOWMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWMessageController.swift; sourceTree = "<group>"; };
 		2991ADD11CBCCAD400F5F5A0 /* WOWNumberMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNumberMessageView.swift; sourceTree = "<group>"; };
 		2991ADD21CBCCAD400F5F5A0 /* WOWOrderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderController.swift; sourceTree = "<group>"; };
@@ -987,7 +985,6 @@
 		2991ADF21CBCD57D00F5F5A0 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				2991ADCF1CBCCAD400F5F5A0 /* WOWLoginManager.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -1341,7 +1338,6 @@
 				2991ADB11CBCCAB100F5F5A0 /* WOWBrandDetailController.swift in Sources */,
 				2991ADAC1CBCCAB100F5F5A0 /* WOWSenceHelper.swift in Sources */,
 				2991ADD61CBCCAD400F5F5A0 /* WOWActivityController.swift in Sources */,
-				2991ADDF1CBCCAD400F5F5A0 /* WOWLoginManager.swift in Sources */,
 				29E412501CC5D1FE002A78B6 /* WOWSceneModel.swift in Sources */,
 				295658FA1CBFBB620029B897 /* WOWSureOrderController.swift in Sources */,
 				2991ADA41CBCCAB100F5F5A0 /* WOWSearchBarView.swift in Sources */,

@@ -55,8 +55,8 @@ extension RequestApi:TargetType{
         switch self{
         case let .Api_Sence(_, value):
             return ["pageIndex":String(value)]
-        case let .Api_Login(account,passwd):
-            return ["account":account,"passwd":passwd]
+        case let .Api_Login(account,password):
+            return ["account":account,"password":password]
         default:
             return nil
         }

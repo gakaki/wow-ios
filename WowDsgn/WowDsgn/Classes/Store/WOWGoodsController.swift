@@ -32,12 +32,16 @@ class WOWGoodsController: WOWBaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+         menuView.hideMenu()
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
-        
+       
     }
     
 //MARK:Lazy
@@ -172,6 +176,9 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
             cell.showData()
             cell.delegate = self
             return cell
+            
+            
+            
         case .Small:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellSmallId, forIndexPath: indexPath) as! WOWGoodsSmallCell
             cell.showData(dataArr[indexPath.item])

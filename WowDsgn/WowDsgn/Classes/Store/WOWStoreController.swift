@@ -35,6 +35,7 @@ class WOWStoreController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
+        tableView.clearRestCell()
         
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth * 215/375), imageURLArray: nil)
         cycleView.delegate = self
@@ -77,8 +78,10 @@ class WOWStoreController: WOWBaseViewController {
                 strongSelf.configHeaderView()
                 strongSelf.tableView.reloadData()
             }
-        }) { (errorMsg) in
-                
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
         }
     }
 }
@@ -114,7 +117,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         if section == 0{
             return categoryArr.count
         }else{
-            return 1
+            return  1
         }
     }
     

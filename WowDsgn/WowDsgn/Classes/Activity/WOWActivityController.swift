@@ -40,8 +40,10 @@ class WOWActivityController: WOWBaseViewController {
                     strongSelf.tableView.reloadData()
                 }
             }
-        }) { (errorMsg) in
-                
+        }) { [weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
         }
     }
 }

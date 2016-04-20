@@ -28,7 +28,7 @@ let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
 
 
 
-let WOWEmptyText  = "暂无数据"
+let WOWEmptyText  = "网络错误"
 
 
 

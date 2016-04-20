@@ -208,7 +208,8 @@ extension WOWGoodsController:WOWActionDelegate{
         case WOWItemActionType.Share.rawValue:
             DLog("分享")
         case WOWItemActionType.Brand.rawValue:
-            DLog("品牌")
+            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
+            presentViewController(vc, animated: true, completion: nil)
         default:
             DLog(" ")
         }

@@ -25,8 +25,24 @@ class WOWSettingController: WOWBaseTableViewController {
     override func setUI() {
         super.setUI()
         navigationItem.title  = "设置"
+        calCacheSize()
+        
     }
     
+//MARK:Private Method
+    private func calCacheSize(){
+        
+        KingfisherManager.sharedManager.cache.calculateDiskCacheSizeWithCompletionHandler {[weak self](size) in
+            if let strongSelf = self{
+                let mSize = Float(size) / 1024 / 1024
+                let str = String(format:"%.1f",mSize)
+                strongSelf.cacheLabel.text = str + "m"
+            }
+        }
+    }
+    
+    
+//MARK:Delegate
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         switch WOWUserManager.loginStatus {
         case true:
@@ -39,6 +55,15 @@ class WOWSettingController: WOWBaseTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch indexPath.section {
+        case 0:
+            if indexPath.row == 1 {
+                KingfisherManager.sharedManager.cache.clearDiskCacheWithCompletionHandler({[weak self] in
+                    if let strongSelf = self{
+                        WOWHud.showMsg("清除成功")
+                        strongSelf.cacheLabel.text = "0.0m"
+                    }
+                })
+            }
         case 1:
             alertExit()
         default:

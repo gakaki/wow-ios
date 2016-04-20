@@ -28,6 +28,7 @@ class WOWActivityController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
         tableView.registerNib(UINib.nibName(String(WOWActivityListCell)), forCellReuseIdentifier:cellID)
+        tableView.mj_header = self.mj_header
     }
     
 //MARK:Private Network
@@ -39,6 +40,7 @@ class WOWActivityController: WOWBaseViewController {
                     strongSelf.dataArr.appendContentsOf(arr)
                     strongSelf.tableView.reloadData()
                 }
+                strongSelf.endRefresh()
             }
         }) { [weak self](errorMsg) in
             if let strongSelf = self{

@@ -8,14 +8,14 @@
 
 import UIKit
 import ObjectMapper
-class WOWBrandListModel: WOWBaseModel,Mappable {
-    var imageUrl:String?
+class WOWBrandModel: WOWBaseModel,Mappable {
+    var brandImageUrl:String?
     var brandName:String?
     var brandCountry:String?
     var brandID:String?
     
     //brand des
-    var brandDes:String?
+    var brandDesc:String?
     
     
     
@@ -29,8 +29,9 @@ class WOWBrandListModel: WOWBaseModel,Mappable {
 
     
     func mapping(map: Map) {
-        imageUrl    <- map["pic"]
-        brandName   <- map["name"]
-        brandID     <- map["id"]
+        brandImageUrl    <- map["brand_image"]
+        brandName   <- map["brand_name"]
+        brandID     <- map["brand_id"]
+        brandDesc   <- map["brand_desc"]
     }
 }

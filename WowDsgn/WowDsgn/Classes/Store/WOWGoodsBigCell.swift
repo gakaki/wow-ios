@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ProductCellDelegate :class{
+    func productCellAction(tag:Int,model:WOWProductModel)
+}
+
+
 class WOWGoodsBigCell: UICollectionViewCell {
 
     @IBOutlet weak var bigPictureImageView: UIImageView!
@@ -26,18 +31,21 @@ class WOWGoodsBigCell: UICollectionViewCell {
     
     @IBOutlet weak var priceLabel: UILabel!
     
-    weak var delegate : WOWActionDelegate?
+    private var model:WOWProductModel!
+    
+    weak var delegate : ProductCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     @IBAction func actionButtonClick(sender: UIButton) {
         if let del = self.delegate{
-            del.itemAction(sender.tag)
+            del.productCellAction(sender.tag, model:self.model)
         }
     }
     
     func showData(model:WOWProductModel){
+        self.model = model
         let priceImage = UIImage(named: "yellow_corner_back")
         priceBackImageView.image = priceImage?.stretchableImageWithLeftCapWidth(15, topCapHeight:Int((priceImage?.size.height)!)/2)
         let url = model.productImage ?? ""

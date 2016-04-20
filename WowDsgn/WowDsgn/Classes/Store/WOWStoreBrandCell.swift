@@ -9,14 +9,14 @@
 import UIKit
 
 protocol BrandCellDelegate:class{
-    func hotBrandCellClick(brandModel:WOWBrandListModel)
+    func hotBrandCellClick(brandModel:WOWBrandModel)
 }
 
 class WOWStoreBrandCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     weak var delegate:BrandCellDelegate?
-    var dataArr : [WOWBrandListModel]?{
+    var dataArr : [WOWBrandModel]?{
         didSet{
             collectionView.reloadData()
         }
@@ -50,7 +50,7 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
         if let arr = dataArr {
             let model = arr[indexPath.item]
-            let url = NSURL(string:model.imageUrl ?? "")
+            let url = NSURL(string:model.brandImageUrl ?? "")
             cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
         }
         return cell

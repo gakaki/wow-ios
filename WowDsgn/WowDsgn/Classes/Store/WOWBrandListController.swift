@@ -13,7 +13,7 @@ class WOWBrandListController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //原始数据源
-    var dataArray = [[WOWBrandListModel]]()
+    var dataArray = [[WOWBrandModel]]()
     //有使用Search Controller时，显示的数据源
     var filteredArray = [String]()
     var showHeaderIndexs = [String]()
@@ -49,12 +49,12 @@ class WOWBrandListController: WOWBaseViewController {
         
         //FIXME:测试数据
         let names = ["Alibaba","jianjiao","阿玛尼","蒂芙尼","正式","阿玛尼","阿玛尼","阿玛尼","阿玛尼","正式","正式","正式","正式","正式","正式","阿玛尼","阿玛尼","阿玛尼","阿玛尼","阿玛尼","阿玛尼"]
-        var brands = [WOWBrandListModel]()
+        var brands = [WOWBrandModel]()
         for i in names {
-            let model = WOWBrandListModel()
+            let model = WOWBrandModel()
             model.brandCountry = "意大利"
             model.brandName = i
-            model.imageUrl = nil
+            model.brandImageUrl = nil
             brands.append(model)
         }
         

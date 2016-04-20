@@ -12,7 +12,7 @@ class WOWStoreController: WOWBaseViewController {
     let cellID1  = String(WOWStoreBrandCell)
     let cellID2 = String(WOWMenuCell)
     var categoryArr = [WOWCategoryModel]()
-    var brandArr    = [WOWBrandListModel]()
+    var brandArr    = [WOWBrandModel]()
     var bannerArr   = [WOWBannerModel]()
     var cycleView:CyclePictureView!
     var brandsCount : Int = 0
@@ -62,7 +62,7 @@ class WOWStoreController: WOWBaseViewController {
                 strongSelf.bannerArr   = []
                 strongSelf.brandArr    = []
                 strongSelf.brandsCount = JSON(result)["brands_count"].intValue
-                let brands = Mapper<WOWBrandListModel>().mapArray(JSON(result)["brands"].arrayObject)
+                let brands = Mapper<WOWBrandModel>().mapArray(JSON(result)["brands"].arrayObject)
                 if let brandArray = brands{
                     strongSelf.brandArr.appendContentsOf(brandArray)
                 }
@@ -100,7 +100,7 @@ extension WOWStoreController:CyclePictureViewDelegate{
 }
 
 extension WOWStoreController:BrandCellDelegate{
-    func hotBrandCellClick(brandModel: WOWBrandListModel) {
+    func hotBrandCellClick(brandModel: WOWBrandModel) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

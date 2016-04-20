@@ -264,8 +264,8 @@ extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
 }
 
 
-extension WOWGoodsController:WOWActionDelegate{
-    func itemAction(tag: Int) {
+extension WOWGoodsController:ProductCellDelegate{
+    func productCellAction(tag: Int, model: WOWProductModel) {
         switch tag {
         case WOWItemActionType.Like.rawValue:
             DLog("喜欢")
@@ -273,6 +273,12 @@ extension WOWGoodsController:WOWActionDelegate{
             DLog("分享")
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
+            let brandModel = WOWBrandModel()
+            brandModel.brandImageUrl = model.brandImage
+            brandModel.brandName     = model.brandName
+            brandModel.brandDesc     = model.brandDesc
+            brandModel.brandID       = model.brandID
+            vc.brandModel = brandModel
             presentViewController(vc, animated: true, completion: nil)
         default:
             DLog(" ")

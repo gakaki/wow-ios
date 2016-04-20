@@ -55,7 +55,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35h-vs-C9p" userLabel="密码">
-                                <rect key="frame" x="0.0" y="125" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="126" width="320" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHh-F0-8aK">
                                         <rect key="frame" x="15" y="13" width="30" height="18"/>
@@ -92,7 +92,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMt-Yp-2xd">
-                                <rect key="frame" x="15" y="210" width="290" height="44"/>
+                                <rect key="frame" x="15" y="211" width="290" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.90196078431372551" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="fCX-rS-q2b"/>
@@ -107,13 +107,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="       " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOz-4N-7uh" userLabel="tips">
-                                <rect key="frame" x="75" y="178" width="22" height="14"/>
+                                <rect key="frame" x="75" y="179" width="22" height="14"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                 <color key="textColor" red="0.99607843137254903" green="0.2196078431372549" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUu-bx-ll5">
-                                <rect key="frame" x="240" y="262" width="65" height="28"/>
+                                <rect key="frame" x="240" y="263" width="65" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="忘记密码？">
                                     <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -136,7 +136,7 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SOz-4N-7uh" secondAttribute="trailing" constant="15" id="bKs-U2-jHM"/>
                             <constraint firstItem="35h-vs-C9p" firstAttribute="leading" secondItem="DPo-0X-XQo" secondAttribute="leading" id="jt5-aL-LXA"/>
                             <constraint firstItem="CMt-Yp-2xd" firstAttribute="top" secondItem="35h-vs-C9p" secondAttribute="bottom" constant="40" id="pXi-ru-g6R"/>
-                            <constraint firstItem="35h-vs-C9p" firstAttribute="top" secondItem="YMq-1r-6nX" secondAttribute="bottom" constant="1" id="umh-Wy-3nV"/>
+                            <constraint firstItem="35h-vs-C9p" firstAttribute="top" secondItem="YMq-1r-6nX" secondAttribute="bottom" constant="2" id="umh-Wy-3nV"/>
                             <constraint firstItem="CMt-Yp-2xd" firstAttribute="leading" secondItem="DPo-0X-XQo" secondAttribute="leading" constant="15" id="usK-JU-EqA"/>
                             <constraint firstItem="SOz-4N-7uh" firstAttribute="leading" secondItem="qQv-aS-J9F" secondAttribute="leading" id="vWQ-0i-2Oe"/>
                         </constraints>

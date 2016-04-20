@@ -14,7 +14,7 @@ class WOWTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewControllers()
-        configNetReachable()
+//        configNetReachable()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +39,9 @@ class WOWTabBarController: UITabBarController {
         self.viewControllers = viewControllers
     }
     
+    /**
+     网络监测
+     */
     func configNetReachable() {
         let reachability: Reachability
         do {
@@ -68,6 +71,12 @@ class WOWTabBarController: UITabBarController {
                 alert.addAction(action)
                 self.presentViewController(alert, animated: true, completion: nil)
             }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
         }
         
     }

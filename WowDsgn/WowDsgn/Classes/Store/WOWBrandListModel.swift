@@ -14,6 +14,11 @@ class WOWBrandListModel: WOWBaseModel,Mappable {
     var brandCountry:String?
     var brandID:String?
     
+    //brand des
+    var brandDes:String?
+    
+    
+    
     required init?(_ map: Map) {
         
     }

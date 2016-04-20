@@ -25,7 +25,7 @@ let URL_scene       = "scene"
 
 //2.商店
 let URL_storeHome   = "shop"
-
+let URL_product     = "product"
 
 
 //3.app活动

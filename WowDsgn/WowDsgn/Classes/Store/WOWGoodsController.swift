@@ -14,18 +14,25 @@ enum GoodsCellStyle {
 
 
 class WOWGoodsController: WOWBaseViewController {
-    private var cellBigId = String(WOWGoodsBigCell)
+    private var cellBigId   = String(WOWGoodsBigCell)
     private var cellSmallId = String(WOWGoodsSmallCell)
-    var menuIndex:Int = 0
-    var menuTitles = ["",""]
-    var dataArr = [WOWGoodsModel]()
-    var menuView: BTNavigationDropdownMenu!
+    var categoryIndex       : Int = 0
+    var categoryTitles      = ["",""]
+    var categoryArr         = [WOWCategoryModel]()
+    var dataArr             = [WOWProductModel]()
+    var menuView            : BTNavigationDropdownMenu!
+    var productTypeArr      = [WOWProductStyleModel]()
     private var cellShowStyle:GoodsCellStyle = .Big
+    
+    //请求参数
+    var categoryID          = "5"
+    private var style       = "3"
+    private var sort        = "new"
     
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
+        request()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,7 +72,7 @@ class WOWGoodsController: WOWBaseViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,self.view.width,self.view.height - 45), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,self.view.width,self.view.height - 65), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.whiteColor()
@@ -74,34 +81,38 @@ class WOWGoodsController: WOWBaseViewController {
     }()
     
 //MARK:Private Method
-    private func initData(){
-        //FIXME:测试数据
-        let string = ["年成立，总部设立在丹麦的Aarup。Carl Hansen & Son公司缘起于1908年Carl Hansen先生创立他的橱柜制造"," 11208"]
-        for index in 1...40 {
-            let model = WOWGoodsModel()
-            model.des = string[index % 2 ]
-            model.calCellHeight()
-            dataArr.append(model)
-        }
-        collectionView.reloadData()
-    }
     
     override func setUI() {
         super.setUI()
         view.addSubview(collectionView)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsBigCell)), forCellWithReuseIdentifier: cellBigId)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: cellSmallId)
+        collectionView.mj_header = self.mj_header
+        collectionView.mj_footer = self.mj_footer
+        
         //FIXME:下拉箭头再找下更适合的吧
         configNavigation()
         configMenuView()
     }
     
+    private func configProductType(){
+        let ret = WOWRealm.objects(WOWProductStyleModel)
+        for model in ret {
+            productTypeArr.append(model)
+        }
+    }
+    
     private func configMenuView(){
+        configProductType()
+        let typeTitleArr = productTypeArr.map { (model) -> String in
+            return model.styleName ?? ""
+        }
+        
         WOWDropMenuSetting.columnTitles = ["新品","所有风格"]
         //FIXME:测试数据
         WOWDropMenuSetting.rowTitles =  [
                                             ["新品","销量","价格"],
-                                            ["所有风格","现代简约","中式传统","清新田园","古朴禅意","自然清雅","经典怀旧","LOFT工业风","商务质感","玩味童趣","后现代"]
+                                            typeTitleArr
                                         ]
         WOWDropMenuSetting.maxShowCellNumber = 5
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2
@@ -119,7 +130,7 @@ class WOWGoodsController: WOWBaseViewController {
     }
     
     private func configNavigation(){
-        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: menuTitles[menuIndex], items: menuTitles,defaultSelectIndex: menuIndex)
+        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: categoryTitles[categoryIndex], items: categoryTitles,defaultSelectIndex: categoryIndex)
         menuView.cellHeight = 50
         menuView.cellBackgroundColor = UIColor.whiteColor()
         menuView.cellSelectionColor = ThemeColor
@@ -133,11 +144,16 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.cellSeparatorColor = BorderColor
         menuView.checkMarkImage = UIImage(named: "duihao")
         menuView.arrowImage = UIImage(named:"nav_arrow")
-        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
-            DLog("Did select item at index: \(indexPath)")
+        menuView.didSelectItemAtIndexHandler = {[weak self](indexPath: Int) -> () in
+            if let strongSelf = self{
+                strongSelf.categoryID = strongSelf.categoryArr[indexPath].categoryID
+                strongSelf.request()
+            }
         }
         self.navigationItem.titleView = menuView
     }
+    
+    
 
     
 //MARK:Actions
@@ -147,6 +163,40 @@ class WOWGoodsController: WOWBaseViewController {
         layout.columnCount = btn.selected ? 2 : 1
         collectionView.reloadData()
     }
+    
+    
+//MARK:Private Network
+    override func request() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                let totalPage = JSON(result)["total_page"].intValue
+                if totalPage == strongSelf.pageIndex{
+                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                
+                let goodsArr  = JSON(result)["rows"].arrayObject
+                if let arr  = goodsArr{
+                    if strongSelf.pageIndex == 0{
+                        strongSelf.dataArr = []
+                    }
+                    for item in arr{
+                        let model = Mapper<WOWProductModel>().map(item)
+                        if let m = model{
+                            m.calCellHeight()
+                            strongSelf.dataArr.append(m)
+                        }
+                    }
+                    strongSelf.collectionView.reloadData()
+                }
+            }
+            
+        }) {[weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+    }
 }
 
 
@@ -155,7 +205,19 @@ class WOWGoodsController: WOWBaseViewController {
 //MARK:Delegate
 extension WOWGoodsController:DropMenuViewDelegate{
     func dropMenuClick(column: Int, row: Int) {
-        DLog("选择了第\(column)列，第\(row)行")
+        let sorts = ["new","sale","price"]
+        switch (column,row) {
+            case let (0,x):
+                sort = sorts[x]
+                break
+            case let (1,x):
+                let typeModel = productTypeArr[x]
+                style = typeModel.styleValue
+                break
+            default:
+                break
+        }
+        request()
     }
 }
 
@@ -172,11 +234,9 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
         switch cellShowStyle {
         case .Big:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellBigId, forIndexPath: indexPath) as! WOWGoodsBigCell
-            cell.showData()
+            cell.showData(dataArr[indexPath.item])
             cell.delegate = self
             return cell
-            
-            
             
         case .Small:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellSmallId, forIndexPath: indexPath) as! WOWGoodsSmallCell
@@ -188,8 +248,6 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
-//        vc.goodsDetailEntrance = .FromGoodsList
-//        WOWMediator.goodsDetailSecondEntrance = GoodsDetailEntrance.FromGoodsList
         navigationController?.pushViewController(vc, animated: true)
     }
 }

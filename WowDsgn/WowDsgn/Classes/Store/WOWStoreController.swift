@@ -20,7 +20,7 @@ class WOWStoreController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        request()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,8 +39,7 @@ class WOWStoreController: WOWBaseViewController {
         
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth * 215/375), imageURLArray: nil)
         cycleView.delegate = self
-        //FIXME:默认图片
-        cycleView.placeholderImage = UIImage(named: "test2")
+        cycleView.placeholderImage = UIImage(named: "placeholder_banner")
         tableView.tableHeaderView = cycleView
         tableView.mj_header = mj_header
     }
@@ -150,9 +149,10 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         if indexPath.section == 0 { //分类
             let item = categoryArr[indexPath.row]
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
-            vc.navigationItem.title = item.categoryName
-            vc.menuIndex = indexPath.row
-            vc.menuTitles = categoryTitles
+            vc.categoryIndex            =   indexPath.row
+            vc.categoryTitles           =   categoryTitles
+            vc.categoryID               =   item.categoryID
+            vc.categoryArr              =   categoryArr
             navigationController?.pushViewController(vc, animated: true)
         }
     }

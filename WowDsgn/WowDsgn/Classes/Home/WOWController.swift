@@ -14,7 +14,7 @@ class WOWController: WOWBaseViewController {
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        request()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -92,13 +92,15 @@ class WOWController: WOWBaseViewController {
 
 
 extension WOWController:LeftSideProtocol{
-    func sideMenuSelect(tagString: String!, index: Int) {
+    func sideMenuSelect(tagString: String!, index: Int,dataArr:[WOWCategoryModel]) {
         DLog(tagString)
        let tab = WOWTool.appTab
         tab.selectedIndex = 1
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
-        vc.menuIndex = index
-        vc.menuTitles = categoryTitles
+        vc.categoryIndex    = index
+        vc.categoryTitles   = categoryTitles
+        vc.categoryID       = WOWRealm.objects(WOWCategoryModel)[index].categoryID
+        vc.categoryArr      = dataArr
         let nav = tab.selectedViewController as! WOWNavigationController
         nav.pushViewController(vc, animated: true)
     }

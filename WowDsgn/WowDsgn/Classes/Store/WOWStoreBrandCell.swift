@@ -51,8 +51,7 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
         if let arr = dataArr {
             let model = arr[indexPath.item]
             let url = NSURL(string:model.imageUrl ?? "")
-            //FIXME:默认图片
-            cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "testBrand"))
+            cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
         }
         return cell
     }

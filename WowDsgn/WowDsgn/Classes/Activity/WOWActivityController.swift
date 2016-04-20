@@ -63,8 +63,7 @@ extension WOWActivityController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWActivityListCell
         let model = dataArr[indexPath.row]
         let imageUrl = NSURL(string:model.image ?? "")
-        //FIXME:默认图
-        cell.pictureImageView.kf_setImageWithURL(imageUrl!, placeholderImage:nil)
+        cell.pictureImageView.kf_setImageWithURL(imageUrl!, placeholderImage:UIImage(named: "placeholder_banner"))
         return cell
     }
     

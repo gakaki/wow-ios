@@ -30,7 +30,7 @@ class WOWlListCell: UITableViewCell {
     
     func showData(model:WOWSenceModel) {
         let url = model.senceImage ?? ""
-        bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named:"squarePlaceHoder"))
+        bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
         titleLabel.text = model.senceName
         
         productBtns.forEach { (view) in

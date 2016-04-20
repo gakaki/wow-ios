@@ -15,7 +15,6 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        request()
     }
 
 //MARK:Life

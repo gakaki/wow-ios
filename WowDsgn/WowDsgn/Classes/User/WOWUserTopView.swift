@@ -35,6 +35,7 @@ class WOWUserTopView: UIView {
         }
         
         headImageView = UIImageView()
+        headImageView.image = UIImage(named: "placeholder_userhead")
         topContainerView.addSubview(headImageView)
         headImageView.snp_makeConstraints { (make) in
             if let _ = weakSelf{

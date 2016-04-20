@@ -13,38 +13,38 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="408" height="414"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testGoods" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-SD-YpL">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-SD-YpL">
                         <rect key="frame" x="0.0" y="0.0" width="408" height="414"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store_mask" translatesAutoresizingMaskIntoConstraints="NO" id="uVt-z6-LIM">
                         <rect key="frame" x="0.0" y="319" width="408" height="95"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="行云流水般。。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vj9-Ps-xrn">
-                        <rect key="frame" x="15" y="356" width="84" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vj9-Ps-xrn">
+                        <rect key="frame" x="15" y="356" width="60" height="15"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tno-T3-rGi">
-                        <rect key="frame" x="71" y="385" width="34" height="14"/>
+                        <rect key="frame" x="96" y="385" width="59" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <state key="normal" title="100" image="icon_share">
+                        <state key="normal" title="              " image="icon_share">
                             <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="actionButtonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="7U3-7n-6ca"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尖叫君-系列" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDG-Tc-7y0">
-                        <rect key="frame" x="15" y="334" width="82" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDG-Tc-7y0">
+                        <rect key="frame" x="15" y="334" width="74" height="18"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZE-jM-28a">
-                        <rect key="frame" x="15" y="385" width="36" height="14"/>
+                        <rect key="frame" x="15" y="385" width="61" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <state key="normal" title="100" image="icon_like">
+                        <state key="normal" title="              " image="icon_like">
                             <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
@@ -60,12 +60,11 @@
                             <constraint firstAttribute="height" constant="66" id="65B-fB-htl"/>
                             <constraint firstAttribute="width" constant="66" id="yI6-tz-1aw"/>
                         </constraints>
-                        <state key="normal" image="testBrand"/>
                         <connections>
                             <action selector="actionButtonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="cox-LJ-nPq"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥ 10" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajL-tw-Wa5">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="               " textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajL-tw-Wa5">
                         <rect key="frame" x="15" y="30" width="75" height="42"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -127,7 +126,5 @@
         <image name="icon_like" width="16" height="13"/>
         <image name="icon_share" width="14" height="14"/>
         <image name="store_mask" width="375" height="95"/>
-        <image name="testBrand" width="105" height="105"/>
-        <image name="testGoods" width="375" height="355"/>
     </resources>
 </document>

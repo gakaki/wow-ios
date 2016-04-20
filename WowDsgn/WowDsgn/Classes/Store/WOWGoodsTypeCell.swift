@@ -24,7 +24,7 @@ class WOWGoodsTypeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-     func showData() {
+    func showData(model:WOWProductModel) {
         //FIXME:测试数据
         titleLabel.text = "尖叫君...."
         summaryLabel.text = "结合东方礼仪的设计,特有的内嵌杯垫设计，使得咖啡杯在使用过程中保持静音。采用传统釉料与质朴的陶泥结合。丰富釉面变化，让杯子多一份自然的感觉。"

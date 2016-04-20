@@ -90,7 +90,7 @@ extension WOWUserHomeController:UICollectionViewDelegate,UICollectionViewDataSou
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
-        cell.showData(goodsDataArr[indexPath.row])
+        
         return cell
     }
     

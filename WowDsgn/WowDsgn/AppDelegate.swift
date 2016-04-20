@@ -77,7 +77,7 @@ extension AppDelegate{
     
     func requestConfigData(){
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: { (result) in
-            let cateArr = Mapper<WOWCategoryModel>().mapArray(result)
+            let cateArr = Mapper<WOWCategoryModel>().mapArray(result["category"])
             if let categorys = cateArr{
                 for cate in categorys{
                     try! WOWRealm.write({ 
@@ -85,6 +85,20 @@ extension AppDelegate{
                     })
                 }
             }
+            
+            let productTypeArr = Mapper<WOWProductStyleModel>().mapArray(result["product_style"])
+            if let typeArr = productTypeArr{
+                let ret = WOWRealm.objects(WOWProductStyleModel)
+                try! WOWRealm.write({
+                    WOWRealm.delete(ret)
+                })
+                for type in typeArr{
+                    try! WOWRealm.write({ 
+                        WOWRealm.add(type)
+                    })
+                }
+            }
+            
             NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
         }) { (errorMsg) in
             

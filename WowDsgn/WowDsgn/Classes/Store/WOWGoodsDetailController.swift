@@ -194,7 +194,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsTypeCell), forIndexPath: indexPath) as! WOWGoodsTypeCell
             cell.headImageView.addTarget(self, action: #selector(brandHeadClick), forControlEvents:.TouchUpInside)
-            cell.showData()
+            
             returnCell = cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsDetailCell), forIndexPath: indexPath) as! WOWGoodsDetailCell

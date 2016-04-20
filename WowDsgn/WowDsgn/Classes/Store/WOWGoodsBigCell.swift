@@ -37,9 +37,17 @@ class WOWGoodsBigCell: UICollectionViewCell {
         }
     }
     
-    func showData(){
-        //FIXME:测试数据
+    func showData(model:WOWProductModel){
         let priceImage = UIImage(named: "yellow_corner_back")
         priceBackImageView.image = priceImage?.stretchableImageWithLeftCapWidth(15, topCapHeight:Int((priceImage?.size.height)!)/2)
+        let url = model.productImage ?? ""
+        bigPictureImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage: UIImage(named: "placeholder_product"))
+        titleLabel.text = model.productName
+        desLabel.text   = model.productDes
+        
+        let url2 = model.brandImage ?? ""
+        brandButton.kf_setImageWithURL(NSURL(string:url2)!, forState:.Normal, placeholderImage:UIImage(named: "placeholder_product"))
+        priceLabel.text  = model.price
+        
     }
 }

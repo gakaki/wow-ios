@@ -114,7 +114,7 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
             returnCell = cell
         case 1:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
-            cell.showData(goodsDataArr[indexPath.item])
+            
             returnCell = cell
         default:
             break

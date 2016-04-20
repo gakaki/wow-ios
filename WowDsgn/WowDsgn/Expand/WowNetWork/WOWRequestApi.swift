@@ -19,7 +19,7 @@ public enum RequestApi{
     
     case Api_StoreHome
     
-    
+    case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String)
     
     case Api_Login(String,String)
 }
@@ -40,8 +40,8 @@ extension RequestApi:TargetType{
             return URL_storeHome
         case .Api_Sence:
             return URL_scene
-            
-            
+        case .Api_ProductList:
+            return URL_product
         case .Api_Login:
             return URL_login
         }
@@ -57,6 +57,8 @@ extension RequestApi:TargetType{
             return ["pageIndex":String(value)]
         case let .Api_Login(account,password):
             return ["account":account,"password":password]
+        case let .Api_ProductList(pageindex,categoryID,style,sort):
+            return ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort]
         default:
             return nil
         }

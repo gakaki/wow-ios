@@ -23,11 +23,11 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30
     }
     
-    func showData(model:WOWGoodsModel) {
-        //FIXME:测试数据
-        pictureImageView.image = UIImage(named: "testGoods")
-        desLabel.text = model.des
-        priceLabel.text = "¥ 10200.00"
+    func showData(model:WOWProductModel) {
+        let url             = model.productImage ?? ""
+        pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
+        desLabel.text       = model.productDes
+        priceLabel.text     = model.price
     }
     
 }

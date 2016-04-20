@@ -207,7 +207,7 @@ protocol SearchResultViewDelegate:class{
 
 class  SearchResultView:UIView,DropMenuViewDelegate{
     
-    var dataArr = [WOWGoodsModel](){
+    var dataArr = [WOWProductModel](){
         didSet{
             collectionView.reloadData()
         }
@@ -292,7 +292,7 @@ extension SearchResultView:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let dele = self.delegate {
-           dele.goodsItemClick(dataArr[indexPath.item])
+           
         }
     }
 }

@@ -9,17 +9,20 @@
 import UIKit
 
 class WOWTabBarController: UITabBarController {
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewControllers()
+        configNetReachable()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
+
+//MARK:Private Method
     func setViewControllers(){
         self.delegate = self;
         let storys = ["Home","Store","Activity","BuyCar","User"]
@@ -35,6 +38,40 @@ class WOWTabBarController: UITabBarController {
         }
         self.viewControllers = viewControllers
     }
+    
+    func configNetReachable() {
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            return
+        }
+        
+        reachability.whenReachable = { reachability in
+            // this is called on a background thread, but UI updates must
+            // be on the main thread, like this:
+            dispatch_async(dispatch_get_main_queue()) {
+                if reachability.isReachableViaWiFi() {
+                    DLog("Wift")
+                } else {
+                    DLog("")
+                }
+            }
+        }
+        reachability.whenUnreachable = { reachability in
+            // this is called on a background thread, but UI updates must
+            // be on the main thread, like this:
+            dispatch_async(dispatch_get_main_queue()) {
+                let alert = UIAlertController(title: "网络故障", message:"您似乎脱离了与互联网的链接", preferredStyle:.Alert)
+                let action = UIAlertAction(title: "我知道了", style: .Default, handler:nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        
+    }
+    
 }
 
 extension WOWTabBarController:UITabBarControllerDelegate{

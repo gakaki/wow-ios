@@ -13,6 +13,7 @@
 @import ObjectMapper;
 @import MJRefresh;
 @import DZNEmptyDataSet;
+@import ReachabilitySwift;
 #import <UMSocial.h>
 #import "UMSocialSinaHandler.h"
 #import "UMSocialWechatHandler.h"

@@ -9,7 +9,8 @@
 import UIKit
 
 class WOWUserController: WOWBaseTableViewController {
-    var rightItem:WOWNumberMessageView!
+    var rightItem       :   WOWNumberMessageView!
+    var headerView      :   WOWUserTopView!
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
@@ -57,10 +58,10 @@ class WOWUserController: WOWBaseTableViewController {
         }
         */
  
-        let header = WOWUserTopView()
-        header.frame = CGRectMake(0, 0, MGScreenWidth, 76)
-        header.configShow(WOWUserManager.loginStatus)
-        header.topContainerView.addAction {[weak self] in
+        headerView       = WOWUserTopView()
+        headerView.frame = CGRectMake(0, 0, MGScreenWidth, 76)
+        headerView.configShow(WOWUserManager.loginStatus)
+        headerView.topContainerView.addAction {[weak self] in
             if let strongSelf = self{
                 if WOWUserManager.loginStatus{
                     strongSelf.goUserInfo()
@@ -82,16 +83,28 @@ class WOWUserController: WOWBaseTableViewController {
             }
         }
         */
+        configUserInfo()
         self.tableView.tableHeaderView = nil
-        self.tableView.tableHeaderView = header
+        self.tableView.tableHeaderView = headerView
         
         
     }
     
     private func goUserInfo(){
-        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWUserInfoController))
+        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWUserInfoController)) as! WOWUserInfoController
+        vc.editInfoAction = { [weak self] in
+            if let strongSelf = self{
+                strongSelf.configUserInfo()
+            }
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    private func configUserInfo(){
+        headerView.headImageView.image = WOWUserManager.userHeadImage
+        //还有名字和签名噻
+    }
+    
     
     private func goLogin(){
         let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")

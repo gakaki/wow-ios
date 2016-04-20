@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class WOWUserInfoController: WOWBaseTableViewController {
 
     @IBOutlet weak var headImageView: UIImageView!
@@ -15,6 +16,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var nickLabel: UILabel!
     //个性签名
     @IBOutlet weak var desLabel: UILabel!
+    
+    var editInfoAction:ActionClosure?
     
 //MARK:Lazy
     lazy var imagePicker:UIImagePickerController = {
@@ -37,7 +40,15 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func setUI() {
         super.setUI()
         headImageView.borderRadius(23)
+        headImageView.image = WOWUserManager.userHeadImage
         navigationItem.title = "个人信息"
+    }
+    
+//MARK:Actions
+    func editInfoComplete() {
+        if let closure = self.editInfoAction {
+            closure()
+        }
     }
 }
 
@@ -110,7 +121,7 @@ extension WOWUserInfoController{
     }
     
     
-    
+    //更改昵称
     private func changeNick(){
         let alertController: UIAlertController = UIAlertController(title: "更改昵称", message: nil, preferredStyle: .Alert)
         let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .Cancel) { action -> Void in
@@ -121,6 +132,7 @@ extension WOWUserInfoController{
         let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
             let field = alertController.textFields?.first
             self.nickLabel.text = field?.text
+            
         }
         alertController.addAction(sureAction)
         alertController.addTextFieldWithConfigurationHandler { (field) in
@@ -148,11 +160,16 @@ extension WOWUserInfoController{
 }
 
 
+
+
+
 //MARK:Delegate
 
 extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         headImageView.image = image
+        WOWUserManager.saveUserHeadImage(image)
+        self.editInfoComplete()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

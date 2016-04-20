@@ -11,8 +11,9 @@ import Foundation
 
 struct WOWUserManager {
     
-   static let WOWUserID = "WOWUserID"
-    
+    static let WOWUserID            = "WOWUserID"
+    static let WOWUserHeadImage     = "WOWUserHeadImage"
+    static let WOWUserName          = "WOWUserName"
     
     static var loginStatus:Bool{
         get{
@@ -23,14 +24,46 @@ struct WOWUserManager {
         }
     }
     
+    static var userHeadImage:UIImage?{
+        get {
+            let data =  MGDefault.objectForKey(WOWUserHeadImage) as? NSData
+            if let d = data {
+                return UIImage(data:d)
+            }
+            return nil
+        }
+    }
+    
+    
     static func saveUserInfo(data:AnyObject){
         let model = Mapper<WOWUserModel>().map(data)
         MGDefault.setObject(model?.userID, forKey:WOWUserID)
         
         
-        
         MGDefault.synchronize()
     }
+    
+    /**
+     保存用户头像
+     
+     - parameter image:
+     */
+    static func saveUserHeadImage(image:UIImage?){
+        if let headImage = image {
+            let data = UIImagePNGRepresentation(headImage)
+            MGDefault.setObject(data, forKey:WOWUserHeadImage)
+            MGDefault.synchronize()
+        }
+    }
+    
+    /**
+     保存用户昵称
+     */
+    static func saveUserName(name:String?){
+        MGDefault.setObject(name, forKey:WOWUserName)
+        MGDefault.synchronize()
+    }
+    
     
     
     /**

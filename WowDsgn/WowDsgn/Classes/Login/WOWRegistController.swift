@@ -46,11 +46,6 @@ class WOWRegistController: WOWBaseViewController {
                 strongSelf.back()
             }
         }
-//        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
-//            if let strongSelf = self{
-//                strongSelf.navigationController?.popViewControllerAnimated(true)
-//            }
-//        }
     }
     
     private func validatePhone(phoneNumber:String?) -> Bool{
@@ -104,9 +99,6 @@ class WOWRegistController: WOWBaseViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-
-   
 }
 
 //MARK:Delegate

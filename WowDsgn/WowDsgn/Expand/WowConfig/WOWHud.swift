@@ -13,6 +13,7 @@ struct WOWHud {
     static func showLoading(){
         SVProgressHUD.setDefaultStyle(.Custom)
         SVProgressHUD.setDefaultMaskType(.Clear)
+        SVProgressHUD.setForegroundColor(UIColor.blackColor())
         SVProgressHUD.setBackgroundColor(UIColor(white: 0.8, alpha: 0.8))
         SVProgressHUD.show()
     }
@@ -30,8 +31,10 @@ struct WOWHud {
     
     static func configSVHud(){
         SVProgressHUD.setDefaultMaskType(.Clear)
-        SVProgressHUD.setDefaultStyle(.Dark)
+        SVProgressHUD.setDefaultStyle(.Custom)
         SVProgressHUD.setInfoImage(UIImage(named:"  "))
+        SVProgressHUD.setBackgroundColor(UIColor.blackColor())
+        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)
     }
     

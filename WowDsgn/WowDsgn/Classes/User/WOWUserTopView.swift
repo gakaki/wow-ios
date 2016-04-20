@@ -35,8 +35,6 @@ class WOWUserTopView: UIView {
         }
         
         headImageView = UIImageView()
-        //FIXME:测试
-        headImageView.backgroundColor = UIColor.orangeColor()
         topContainerView.addSubview(headImageView)
         headImageView.snp_makeConstraints { (make) in
             if let _ = weakSelf{
@@ -45,6 +43,7 @@ class WOWUserTopView: UIView {
                 make.left.equalTo(topContainerView).offset(15)
             }
         }
+        headImageView.borderRadius(23)
         
         let arrowImageView = UIImageView()
         arrowImageView.image = UIImage(named: "next_arrow")

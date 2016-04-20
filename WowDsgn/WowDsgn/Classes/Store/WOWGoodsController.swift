@@ -75,6 +75,7 @@ class WOWGoodsController: WOWBaseViewController {
         let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,self.view.width,self.view.height - 65), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -87,9 +88,10 @@ class WOWGoodsController: WOWBaseViewController {
         view.addSubview(collectionView)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsBigCell)), forCellWithReuseIdentifier: cellBigId)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: cellSmallId)
-        collectionView.mj_header = self.mj_header
-        collectionView.mj_footer = self.mj_footer
-        
+        collectionView.mj_header            = self.mj_header
+        collectionView.mj_footer            = self.mj_footer
+        collectionView.emptyDataSetSource   = self
+        collectionView.emptyDataSetDelegate = self
         //FIXME:下拉箭头再找下更适合的吧
         configNavigation()
         configMenuView()
@@ -261,6 +263,20 @@ extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
             return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)
         }
     }
+}
+
+
+extension WOWGoodsController{
+    override  func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "暂无此分类商品"
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        return -40
+    }
+    
 }
 
 

@@ -29,8 +29,9 @@ let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
 let WOWExitLoginNotificationKey         = "WOWExitLoginNotificationKey"
 
 
-let WOWEmptyText  = "网络错误"
+let WOWEmptyNetWorkText  = "网络错误"
 
+let WOWEmptyNoDataText   = "暂无数据"
 
 
 /***********************************Test***************************************/

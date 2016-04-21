@@ -30,6 +30,9 @@ pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
 pod 'ReachabilitySwift' #网络监测
+#Ping++支付
+pod 'Pingpp/Alipay', '~> 2.1.0'
+pod 'Pingpp/Wx', '~> 2.1.0'
 xcodeproj ‘WowDsgn/WowDsgn.xcodeproj'
 
 end

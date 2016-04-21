@@ -101,7 +101,12 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     private func configUserInfo(){
-        headerView.headImageView.image = WOWUserManager.userHeadImage
+        if WOWUserManager.loginStatus {
+            headerView.headImageView.image = WOWUserManager.userHeadImage
+        }else{
+            headerView.headImageView.image = UIImage(named: "placeholder_userhead")
+        }
+        
         //还有名字和签名噻
     }
     

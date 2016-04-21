@@ -234,8 +234,9 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     }
     
     func brandHeadClick() {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
-        presentViewController(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func moreLikeButtonClick(){

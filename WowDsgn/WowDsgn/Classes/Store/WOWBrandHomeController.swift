@@ -60,7 +60,6 @@ class WOWBrandHomeController: WOWBaseViewController {
         collectionView.collectionViewLayout = self.layout
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
         collectionView.registerClass(WOWBrandTopView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
-        
     }
     
 //MARK:Actions
@@ -106,8 +105,6 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
-//        vc.goodsDetailEntrance = .FromBrand
-//        WOWMediator.goodsDetailSecondEntrance = GoodsDetailEntrance.FromBrand
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -128,8 +125,11 @@ extension WOWBrandHomeController:WOWActionDelegate{
         case WOWItemActionType.Share.rawValue:
             DLog("分享")
         case WOWItemActionType.Brand.rawValue:
+            DLog("跳转到详情去吧")
+            /*
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
             presentViewController(vc, animated: true, completion: nil)
+            */
         default:
             DLog("")
         }

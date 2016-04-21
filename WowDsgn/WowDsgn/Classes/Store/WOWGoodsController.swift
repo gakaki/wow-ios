@@ -288,14 +288,9 @@ extension WOWGoodsController:ProductCellDelegate{
         case WOWItemActionType.Share.rawValue:
             DLog("分享")
         case WOWItemActionType.Brand.rawValue:
-            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
-            let brandModel = WOWBrandModel()
-            brandModel.brandImageUrl = model.brandImage
-            brandModel.brandName     = model.brandName
-            brandModel.brandDesc     = model.brandDesc
-            brandModel.brandID       = model.brandID
-            vc.brandModel = brandModel
-            presentViewController(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+            vc.hideNavigationBar = true
+            navigationController?.pushViewController(vc, animated: true)
         default:
             DLog(" ")
         }

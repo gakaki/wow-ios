@@ -12,6 +12,11 @@ PODS:
     - Moya/Core
     - RxSwift (~> 2.0)
   - ObjectMapper (1.2.0)
+  - Pingpp/Alipay (2.1.4):
+    - Pingpp/Core
+  - Pingpp/Core (2.1.4)
+  - Pingpp/Wx (2.1.4):
+    - Pingpp/Core
   - ReachabilitySwift (2.3.3)
   - Result (1.0.2)
   - RxSwift (2.2.0)
@@ -28,6 +33,8 @@ DEPENDENCIES:
   - Moya (~> 6.1.3)
   - Moya/RxSwift
   - ObjectMapper
+  - Pingpp/Alipay (~> 2.1.0)
+  - Pingpp/Wx (~> 2.1.0)
   - ReachabilitySwift
   - RxSwift (~> 2.2.0)
   - SnapKit (~> 0.19.1)
@@ -43,6 +50,7 @@ SPEC CHECKSUMS:
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   Moya: 26b290a8d675c167ea6229ba08e07dce562265a5
   ObjectMapper: b1e9c7c8a9f6400b72690c80072c131504caa66f
+  Pingpp: 08415163eb1791bc07d7d939f1648d2e36a30eda
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b

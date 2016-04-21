@@ -10,8 +10,9 @@ import Foundation
 
 //Host
 //王云鹏自己的本机 10.0.23.67        127.0.0.1
+//测服地址 http://api.dev.wowdsgn.com
 
-let BaseUrl = "http://10.0.23.67:8360/apiv1/"
+let BaseUrl = "http://api.dev.wowdsgn.com"
 
 
 /****************************API_URL接口**********************************/

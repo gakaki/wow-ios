@@ -41,10 +41,41 @@ class WOWNetManager {
     static let sharedManager = WOWNetManager()
     private init(){}
 
-    let requestProvider = RxMoyaProvider<RequestApi>()
+    let requestProvider = MoyaProvider<RequestApi>()
     let disposeBag = DisposeBag()
     func requestWithTarget(target:RequestApi,successClosure:SuccessClosure,failClosure:FailClosure){
         WOWHud.showLoading()
+        requestProvider.request(target) { (result) in
+            switch result{
+                case let .Success(response):
+                    let info = Mapper<ReturnInfo>().map(JSON(data: response.data,options: .AllowFragments).object)
+                    if let code = info?.code{
+                        guard code == RequestCode.Success.rawValue else{
+                            failClosure(errorMsg:info?.message)
+                            WOWHud.showMsg(info?.message)
+                            return
+                        }
+                    }else{
+                        failClosure(errorMsg:"请求失败")
+                        WOWHud.showMsg("请求失败")
+                        return
+                    }
+                    guard let data = info?.data else{
+                        failClosure(errorMsg:"请求失败")
+                        WOWHud.showMsg("请求失败")
+                        return
+                    }
+                    WOWHud.dismiss()
+                    successClosure(result:data)
+                case let .Failure(error):
+                    DLog(error)
+                    WOWHud.showMsg("请求失败")
+                    break
+            }
+        }
+    }
+}
+        /*
         requestProvider.request(target).subscribe { (event) -> Void in
             switch event{
                 case .Next(let response):
@@ -75,5 +106,4 @@ class WOWNetManager {
                     break
             }
         }.addDisposableTo(disposeBag)
-    }
-}
+    }*/

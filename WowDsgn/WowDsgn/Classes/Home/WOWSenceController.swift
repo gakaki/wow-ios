@@ -87,8 +87,6 @@ extension WOWSenceController:WOWSubAlertDelegate{
     func subAlertItemClick() {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
-//        vc.goodsDetailEntrance  = .FromSence
-//        WOWMediator.goodsDetailSecondEntrance = GoodsDetailEntrance.FromSence
         WOWSenceHelper.senceController.navigationController?.pushViewController(vc, animated: true)
     }
 }

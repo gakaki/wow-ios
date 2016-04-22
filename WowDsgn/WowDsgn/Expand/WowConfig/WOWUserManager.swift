@@ -15,6 +15,16 @@ struct WOWUserManager {
     static let WOWUserHeadImage     = "WOWUserHeadImage"
     static let WOWUserName          = "WOWUserName"
     
+    static var userHeadImageUrl:String{
+        get{
+            return (MGDefault.objectForKey(WOWUserHeadImage) as? String) ?? ""
+        }
+        set{
+            MGDefault.setObject(newValue, forKey:WOWUserHeadImage)
+            MGDefault.synchronize()
+        }
+    }
+    
     static var loginStatus:Bool{
         get{
             guard let _ = fetchUserID() where !WOWUserID.isEmpty else{
@@ -55,6 +65,9 @@ struct WOWUserManager {
             MGDefault.synchronize()
         }
     }
+    
+    
+    
     
     /**
      保存用户昵称

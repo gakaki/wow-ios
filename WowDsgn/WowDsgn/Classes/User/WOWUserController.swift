@@ -102,7 +102,7 @@ class WOWUserController: WOWBaseTableViewController {
     
     private func configUserInfo(){
         if WOWUserManager.loginStatus {
-            headerView.headImageView.image = WOWUserManager.userHeadImage
+            headerView.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage:UIImage(named: "placeholder_userhead"))
         }else{
             headerView.headImageView.image = UIImage(named: "placeholder_userhead")
         }

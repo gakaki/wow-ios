@@ -122,6 +122,9 @@ extension AppDelegate{
 //        UMSocialSinaHandler.openSSOWithRedirectURL("http://www.wowdsgn.com")
 //        UMSocialSinaSSOHandler.openNewSinaSSOWithAppKey(WOWWeibokey, redirectURL:"http://www.wowdsgn.com")
         UMSocialConfig.hiddenNotInstallPlatforms([UMShareToWechatSession,UMShareToWechatTimeline])
+        
+        //LeanCloud
+        AVOSCloud.setApplicationId(WOWLeanCloudID, clientKey: WOWLeanCloudKey)
     }
     
     func initialAppearance(){

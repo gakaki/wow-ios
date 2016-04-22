@@ -377,7 +377,7 @@ public class BTNavigationDropdownMenu: UIView {
     
     func hideMenu() {
         // Rotate arrow
-        self.rotateArrow()
+        self.resetArrow()
         
         self.isShown = false
         
@@ -409,8 +409,19 @@ public class BTNavigationDropdownMenu: UIView {
             if let selfie = self {
                 selfie.menuArrow.transform = CGAffineTransformRotate(selfie.menuArrow.transform, 180 * CGFloat(M_PI/180))
             }
-            })
+        })
     }
+    
+    func resetArrow() {
+        UIView.animateWithDuration(self.configuration.animationDuration, animations: {[weak self] () -> () in
+            if let selfie = self {
+                selfie.menuArrow.transform = CGAffineTransformIdentity
+            }
+        })
+    }
+    
+    
+    
     
     func setMenuTitle(title: String) {
         self.menuTitle.text = title

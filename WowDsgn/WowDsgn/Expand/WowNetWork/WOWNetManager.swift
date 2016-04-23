@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftyJSON
-import RxSwift
+//import RxSwift
 import ObjectMapper
 
 typealias FailClosure = (errorMsg:String?) -> ()
@@ -42,7 +42,7 @@ class WOWNetManager {
     private init(){}
 
     let requestProvider = MoyaProvider<RequestApi>()
-    let disposeBag = DisposeBag()
+
     func requestWithTarget(target:RequestApi,successClosure:SuccessClosure,failClosure:FailClosure){
         WOWHud.showLoading()
         requestProvider.request(target) { (result) in

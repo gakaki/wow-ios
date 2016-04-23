@@ -166,7 +166,7 @@ extension WOWGoodsDetailController:WOWSubAlertDelegate{
 
 extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 6
+        return 5
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -177,11 +177,13 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             return 5
         case 2: //参数
             return 5
+            /*
         case 3: //相关场景
             return 1
-        case 4: //喜欢
+             */
+        case 3: //喜欢
             return 1
-        case 5: //评论
+        case 4: //评论
             return 5
         default:
             return 0
@@ -207,11 +209,13 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             cell.paramLabel.text = "参数"
             cell.valueLabel.text = "参数详情参数详情参数详情"
             returnCell = cell
+            /*
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSubArtCell),forIndexPath: indexPath) as! WOWSubArtCell
             cell.delegate = self
             returnCell = cell
-        case 4:
+            */
+        case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
             cell.rightTitleLabel.text = "xxx人喜欢"
             cell.rightBackView.addAction({ [weak self] in
@@ -221,7 +225,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
                 }
             })
             returnCell = cell
-        case 5:
+        case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
             cell.hideHeadImage()
             //FIXME:测试数据
@@ -248,21 +252,21 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0,1,4:
-            return 0.01
-        default:
+        case 2,4:
             return 36
+        default:
+            return 0.01
         }
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 0,3,4:
-            return 0.01
-        case 5: //评论
+        case 1,2:
+            return 20
+        case 4: //评论
             return 44
         default:
-            return 20
+            return 0.01
         }
     }
     
@@ -273,9 +277,11 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             return nil
         case 2://参数
             return WOWMenuTopView(leftTitle: "产品参数", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
+        /*
         case 3: //相关场景
            return WOWMenuTopView(leftTitle: "相关场景", rightHiden: true, topLineHiden: false, bottomLineHiden: true)
-        case 5: //评论
+        */
+        case 4: //评论
             let view =  WOWMenuTopView(leftTitle: "xx条评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
             goComment(view)
             return view
@@ -286,7 +292,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 5 {
+        if section == 4 {
             let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
             goComment(footerView)
             return footerView

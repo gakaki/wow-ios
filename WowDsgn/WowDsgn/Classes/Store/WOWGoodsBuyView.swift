@@ -131,6 +131,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             skuModel.skuProductPrice = p.price ?? ""
             skuModel.skuProductCount = 1
             skuModel.skuProductImageUrl = p.productImage ?? ""
+            skuModel.skuID = p.skus?.first?.skuID ?? ""
         }
         collectionView?.collectionViewLayout = tagCellLayout
         collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
@@ -221,6 +222,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             perPriceLabel.text = model.skuPrice?.priceFormat()
             skuModel.skuProductPrice = model.skuPrice ?? ""
             skuModel.skuName  = model.skuTitle ?? ""
+            skuModel.skuID    = model.skuID ?? ""
         }
     }
     

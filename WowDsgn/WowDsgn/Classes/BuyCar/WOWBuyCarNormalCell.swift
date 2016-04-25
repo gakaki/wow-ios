@@ -43,4 +43,11 @@ class WOWBuyCarNormalCell: UITableViewCell {
         checkRightSpace.constant = 0
     }
     
+    func showData(model:WOWBuyCarModel) {
+        goodsImageView.kf_setImageWithURL(NSURL(string:model.skuProductImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        nameLabel.text = model.skuProductName
+        typeLabel.text = model.skuName
+        countLabel.text = "x \(model.skuProductCount)"
+        perPriceLabel.text = model.skuProductPrice.priceFormat()
+    }
 }

@@ -48,6 +48,13 @@ class WOWBurCarEditCell: UITableViewCell {
     }
     
     
+    func showData(model:WOWBuyCarModel) {
+        goodsImageView.kf_setImageWithURL(NSURL(string:model.skuProductImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        nameLabel.text = model.skuProductName
+        typeLabel.text = model.skuName
+        countTextField.text = "\(model.skuProductCount)"
+    }
+    
     
     
 }

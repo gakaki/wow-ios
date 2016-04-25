@@ -47,9 +47,29 @@ class WOWGoodsDetailController: WOWBaseViewController {
     func sureButton(nf:NSNotification)  {
         let object = nf.object as? WOWBuyCarModel
         if let model = object {
-            //存入数据库
+           resolveBuyModel(model)
         }
         backView.hideBuyView()
+    }
+    
+    private func resolveBuyModel(model:WOWBuyCarModel){
+        if WOWUserManager.loginStatus { //登录
+            
+        }else{
+            //存入数据库 先判断是否存在
+            let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+            if let m = skus.first{
+                let count = m.skuProductCount
+                model.skuProductCount += count
+                try! WOWRealm.write({
+                    WOWRealm.add(model, update: true)
+                })
+            }else{
+                try! WOWRealm.write({
+                    WOWRealm.add(model, update:true)
+                })
+            }
+        }
     }
     
     private func configTableView(){

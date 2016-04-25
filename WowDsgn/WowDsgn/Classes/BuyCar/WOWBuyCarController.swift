@@ -13,19 +13,36 @@ class WOWBuyCarController: WOWBaseViewController {
     let cellEditID   = String(WOWBurCarEditCell)
     private var rightItemButton:UIButton!
     //FIXME:测试数据
-    private var dataArr = ["1"]{
+    private var dataArr = [WOWBuyCarModel](){
         didSet{
             if dataArr.isEmpty {
+                navigationItem.title = "购物车"
                 bottomView.hidden = true
                 rightItemButton.hidden = true
             }else{
+                navigationItem.title = "购物车\(dataArr.count)"
                 bottomView.hidden = false
                 rightItemButton.hidden = false
             }
         }
     }
     //存放选中的数组
-    private var selectedArr = []
+    private var selectedArr = [WOWBuyCarModel](){
+        didSet{
+            if isEditing == false{ //不在编辑中,每选中一个就得计算价钱
+               let prices = selectedArr.map({ (model) -> String in
+                    return model.skuProductPrice
+               })
+                let counts = selectedArr.map({ (model) -> Int in
+                    return model.skuProductCount
+                })
+                let result = WOWCalPrice.calTotalPrice(prices,counts:counts)
+                totalPriceLabel.text = "¥ " + result
+            }
+        }
+    }
+    
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var endEditButton: UIButton!
@@ -49,7 +66,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        configData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,15 +86,25 @@ class WOWBuyCarController: WOWBaseViewController {
     
 //MARK:Private Method
     
+    private func configData(){
+        if WOWUserManager.loginStatus { //登录
+            //将购物车数据提交，同步
+        }else{//未登录
+            //走本地数据库
+            let objects = WOWRealm.objects(WOWBuyCarModel)
+            for object in objects{
+                dataArr.append(object)
+            }
+            dataArr = dataArr.reverse()
+            tableView.reloadData()
+        }
+    }
+    
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
     }
     
     func sureButton(nf:NSNotification)  {
-//        let object = nf.object as? PostBuyModel
-//        if let model = object {
-//            DLog("确定的东东\(model.count),另外\(model.typeStrng)")
-//        }
         backView.hideBuyView()
     }
 
@@ -85,6 +112,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
+        totalPriceLabel.text = "¥ 0.0"
         endButton.setTitle("删除", forState:.Selected)
         endButton.setTitle("去结算", forState:.Normal)
         endButton.tintColor = UIColor.clearColor()
@@ -102,7 +130,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private func configNav(){
         //FIXME:测试数据
-        navigationItem.title = "购物车\(22)"
+        navigationItem.title = "购物车"
         makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
             if let strongSelf = self{
                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
@@ -143,8 +171,11 @@ class WOWBuyCarController: WOWBaseViewController {
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             if sender.selected {//全选
                 tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+                selectedArr = []
+                selectedArr.appendContentsOf(dataArr)
             }else{//全不选
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                selectedArr = []
             }
         }
     }
@@ -164,19 +195,28 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         if isEditing{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellEditID, forIndexPath: indexPath) as! WOWBurCarEditCell
             cell.delegate = self
+            cell.showData(dataArr[indexPath.row])
             return cell
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellNormalID, forIndexPath: indexPath) as! WOWBuyCarNormalCell
+            cell.showData(dataArr[indexPath.row])
             return cell
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let model = dataArr[indexPath.row]
+        selectedArr.append(model)
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let model = dataArr[indexPath.row]
+        let index = selectedArr.indexOf{
+            $0 == model
+        }
+        if let i = index {
+            selectedArr.removeAtIndex(i)
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

@@ -20,6 +20,26 @@ struct WOWCalPrice {
         result = result ?? ""
         return result!
     }
+    
+    
+    static func calTotalPrice(prices:[String],counts:[Int]) ->String{
+        if prices.isEmpty {
+            return "0"
+        }
+        var totalPrice = NSDecimalNumber(float:0)
+        for (index,value) in prices.enumerate() {
+            let perPrice = NSDecimalNumber(string:value)
+            let countNumber = NSDecimalNumber(integer:counts[index])
+            let itemPrice = perPrice.decimalNumberByMultiplyingBy(countNumber)
+            totalPrice = totalPrice.decimalNumberByAdding(itemPrice)
+        }
+        let numberFormat = NSNumberFormatter()
+        numberFormat.numberStyle = .DecimalStyle
+        var result = numberFormat.stringFromNumber(totalPrice)
+        result = result ?? "0"
+        return result!
+    }
+    
 }
 
 

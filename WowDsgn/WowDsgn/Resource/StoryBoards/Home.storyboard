@@ -389,7 +389,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="WowDsgn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="117"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="320" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nGH-pF-T2j" id="dq8-W0-doG">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
@@ -433,7 +433,7 @@
                                     <outlet property="delegate" destination="ZjH-5o-9uo" id="hMM-T2-FMN"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
                                 <rect key="frame" x="0.0" y="20" width="43" height="38"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>

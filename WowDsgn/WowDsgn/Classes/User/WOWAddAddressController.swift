@@ -13,7 +13,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
-    @IBOutlet weak var detailAddressTextField: UITextField!
+    @IBOutlet weak var detailAddressTextView: KMPlaceholderTextView!
     @IBOutlet weak var defaultSwitch: UISwitch!
     private var defaultAddress:Bool = true
     override func viewDidLoad() {

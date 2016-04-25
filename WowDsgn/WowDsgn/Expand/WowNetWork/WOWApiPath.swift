@@ -19,21 +19,23 @@ let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/"
 
 //1.app首页
 
-let URL_category    = "category"
+let URL_category               = "category"
 
-let URL_scene       = "scene"
+let URL_scene                   = "scene"
 
 
 //2.商店
-let URL_storeHome   = "shop"
-let URL_product     = "product"
+let URL_storeHome               = "shop"
+let URL_product                 = "product"
+let URL_product_detail          = "product/detail"
 
 
 //3.app活动
-let URL_activity    = "post"
+let URL_activity                = "post"
 
 
 
-//5.app 注册
-let URL_login       = "user/login"
+//5.app 登录注册
+let URL_Register                = "user/register"
+let URL_login                   = "user/login"
 

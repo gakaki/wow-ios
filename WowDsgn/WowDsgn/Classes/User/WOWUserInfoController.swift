@@ -23,7 +23,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
     lazy var imagePicker:UIImagePickerController = {
         let v = UIImagePickerController()
         v.delegate = self
-//        v.allowsEditing = true
         return v
     }()
     override func viewDidLoad() {
@@ -39,9 +38,9 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     override func setUI() {
         super.setUI()
-        headImageView.borderRadius(23)
-        headImageView.image = WOWUserManager.userHeadImage
         navigationItem.title = "个人信息"
+        headImageView.borderRadius(23)
+        headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage:UIImage(named: "placeholder_userhead"))
     }
     
 //MARK:Actions
@@ -168,8 +167,7 @@ extension WOWUserInfoController{
 extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         headImageView.image = image
-//        WOWUserManager.saveUserHeadImage(image)
-        
+        picker.dismissViewControllerAnimated(true, completion: nil)        
         let data = UIImageJPEGRepresentation(image,0.8)
         let file = AVFile(name:"headimage.jpg", data:data)
         WOWHud.showLoading()

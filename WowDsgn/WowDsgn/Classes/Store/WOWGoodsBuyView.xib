@@ -108,7 +108,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-vH-OUv" userLabel="bottomView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="96"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testBrand" translatesAutoresizingMaskIntoConstraints="NO" id="Pm8-hJ-vcq">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pm8-hJ-vcq">
                             <rect key="frame" x="15" y="15" width="66" height="66"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="66" id="CgJ-uu-7Af"/>
@@ -191,6 +191,5 @@
         <image name="addButtonBack" width="32" height="32"/>
         <image name="close" width="12" height="12"/>
         <image name="subButtonBack" width="32" height="32"/>
-        <image name="testBrand" width="105" height="105"/>
     </resources>
 </document>

@@ -248,8 +248,10 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let item = dataArr[indexPath.item]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
+        vc.productID = item.productID
         navigationController?.pushViewController(vc, animated: true)
     }
 }

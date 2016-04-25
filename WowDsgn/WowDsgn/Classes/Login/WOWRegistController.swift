@@ -61,6 +61,15 @@ class WOWRegistController: WOWBaseViewController {
         return true
     }
     
+    private func validatePassword(password:String?) -> Bool{
+        guard let pass = password where !pass.isEmpty else{
+            WOWHud.showMsg("请输入密码")
+            return false
+        }
+        return true
+    }
+    
+    
 //MARK:Actions
     private func back(){
         navigationController?.popViewControllerAnimated(true)
@@ -71,8 +80,6 @@ class WOWRegistController: WOWBaseViewController {
             return
         }
         
-        
-        
     }
     
     
@@ -81,7 +88,21 @@ class WOWRegistController: WOWBaseViewController {
     
     
     @IBAction func registClick(sender: UIButton) {
-        
+        if !validatePhone(phoneTextField.text){
+            return
+        }
+        if !validatePassword(passwdTextField.text){
+            return
+        }
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                WOWHud.showMsg("注册成功")
+                //等下填充UID
+            }
+        }) { (errorMsg) in
+                
+        }
+
     }
     
     @IBAction func protocolCheckButtonClick(sender:UIButton) {

@@ -11,7 +11,6 @@ import UIKit
 //MARK:*****************************背景视图******************************************
 class WOWBuyBackView: UIView {
  
-    
 //MARK:Lazy
     lazy var buyView:WOWGoodsBuyView = {
         let v = NSBundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView

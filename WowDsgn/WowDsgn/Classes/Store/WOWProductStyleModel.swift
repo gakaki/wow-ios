@@ -9,6 +9,8 @@
 import UIKit
 import ObjectMapper
 
+///列表的风格model
+
 class WOWProductStyleModel: Object,Mappable{
    dynamic var styleName   :   String = ""
    dynamic var styleValue  :   String = ""

@@ -12,11 +12,13 @@ import UIKit
 
 
 class WOWGoodsDetailController: WOWBaseViewController {
+    var productID:String?
     var cycleView:CyclePictureView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var priceLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        request()
         addObservers()
     }
 
@@ -52,6 +54,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     private func configTableView(){
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.mj_header = self.mj_header
         tableView.registerNib(UINib.nibName(String(WOWGoodsTypeCell)), forCellReuseIdentifier:String(WOWGoodsTypeCell))
         tableView.registerNib(UINib.nibName(String(WOWGoodsDetailCell)), forCellReuseIdentifier:String(WOWGoodsDetailCell))
         tableView.registerNib(UINib.nibName(String(WOWGoodsParamCell)), forCellReuseIdentifier:String(WOWGoodsParamCell))
@@ -68,7 +71,17 @@ class WOWGoodsDetailController: WOWBaseViewController {
         cycleView.imageURLArray = ["http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg","http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg"]
         tableView.tableHeaderView = cycleView
     }
-    
+
+//MARK:Private Network
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productid: productID ?? ""), successClosure: { (result) in
+            
+        }) { (errorMsg) in
+                
+        }
+        
+    }
     
 //MARK:Actions
     @IBAction func back(sender: UIButton) {
@@ -201,10 +214,11 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 2: //设计师
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWDesignerCell), forIndexPath:indexPath) as! WOWDesignerCell
             returnCell = cell
-        case 3:
+        case 3: //参数
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsParamCell), forIndexPath: indexPath) as! WOWGoodsParamCell
             cell.paramLabel.text = "参数"
             cell.valueLabel.text = "参数详情参数详情参数详情"
+            
             returnCell = cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell

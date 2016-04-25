@@ -26,7 +26,6 @@
                             <constraint firstAttribute="height" constant="66" id="YrH-cf-HDT"/>
                             <constraint firstAttribute="width" constant="66" id="aeh-yr-liW"/>
                         </constraints>
-                        <state key="normal" image="testBrand"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ov-L2-0WF">
                         <rect key="frame" x="15" y="55" width="11" height="15"/>
@@ -65,7 +64,4 @@
             <point key="canvasLocation" x="314" y="601"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="testBrand" width="105" height="105"/>
-    </resources>
 </document>

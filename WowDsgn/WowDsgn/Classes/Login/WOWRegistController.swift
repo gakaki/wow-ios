@@ -96,11 +96,29 @@ class WOWRegistController: WOWBaseViewController {
         }
         WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!), successClosure: { [weak self](result) in
             if let strongSelf = self{
-                WOWHud.showMsg("注册成功")
                 //等下填充UID
+                WOWUserManager.saveUserInfo(result)
+                let object = AVObject(className:"WOWUser")
+//                object.setObject(WOWUserManager.userID ?? "", forKey:"wowuserid")
+                //FIXME:测试数据
+                object.setObject("456789", forKey:"wowuserid")
+                object.saveInBackgroundWithBlock({ (ret, error) in
+                    if let e = error{
+                        DLog(e)
+                        WOWHud.showMsg("注册失败")
+                        return
+                    }
+                    WOWHud.showMsg("注册成功")
+                    NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                        strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                    })
+                })
             }
-        }) { (errorMsg) in
-                
+        }) {[weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.tipsLabel.text = errorMsg
+            }
         }
 
     }

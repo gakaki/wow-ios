@@ -180,7 +180,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                 }else{
                     let headUrl = file.url ?? ""
                     let wowUser = AVQuery(className:"WOWUser")
-                    wowUser.whereKey("wowuserid", equalTo:WOWUserManager.fetchUserID() ?? "")
+                    wowUser.whereKey("wowuserid", equalTo:WOWUserManager.userID)
                     wowUser.findObjectsInBackgroundWithBlock({[weak self] (objects, error) in
                         if let _ = self{
                             if let e = error{

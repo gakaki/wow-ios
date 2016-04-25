@@ -16,6 +16,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     var cycleView:CyclePictureView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var priceLabel: UILabel!
+    var productModel:WOWProductModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -66,19 +67,28 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth), imageURLArray: nil)
-        cycleView.placeholderImage = UIImage (named: "test2")
-        //FIXME:修改图片Url
-        cycleView.imageURLArray = ["http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg","http://pic1.zhimg.com/05a55004e42ef9d778d502c96bc198a4.jpg"]
+        cycleView.placeholderImage = UIImage(named: "placeholder_banner")
         tableView.tableHeaderView = cycleView
+    }
+    
+    private func configData(){
+        cycleView.imageURLArray = [productModel?.productImage ?? ""]
     }
 
 //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productid: productID ?? ""), successClosure: { (result) in
-            
-        }) { (errorMsg) in
-                
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productid: productID ?? ""), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                strongSelf.productModel = Mapper<WOWProductModel>().map(result)
+                strongSelf.configData()
+                strongSelf.tableView.reloadData()
+                strongSelf.endRefresh()
+            }
+        }) {[weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
         }
         
     }
@@ -86,17 +96,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:Actions
     @IBAction func back(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
-//        switch WOWMediator.goodsDetailSecondEntrance {
-//        case .FromGoodsList,.FromSence:
-//            navigationController?.popToViewController((navigationController?.viewControllers[1])!, animated: true)
-//        case .FromBrand:
-//            let vcs = navigationController?.viewControllers
-//            vcs?.forEach({ (viewcontroller) in
-//                if viewcontroller is WOWBrandHomeController{
-//                    navigationController?.popToViewController(viewcontroller, animated: true)
-//                }
-//            })
-//        }
     }
     
     @IBAction func likeButtonClick(sender: UIButton) {
@@ -183,11 +182,20 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 0: //系列
             return 1
         case 1: //图文
-            return 5
+            if let pics = productModel?.pics_compose{
+                return pics.count
+            }
+            return 0
         case 2: //设计师
-            return 1
+            if let _ = productModel?.designer_name{
+                return 1
+            }
+            return 0
         case 3: //参数
-            return 5
+            if let att = productModel?.attributes {
+                return att.count
+            }
+            return 0
         case 4: //喜欢
             return 1
         case 5: //评论
@@ -203,26 +211,28 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsTypeCell), forIndexPath: indexPath) as! WOWGoodsTypeCell
             cell.headImageView.addTarget(self, action: #selector(brandHeadClick), forControlEvents:.TouchUpInside)
-            
+            cell.showData(productModel)
             returnCell = cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsDetailCell), forIndexPath: indexPath) as! WOWGoodsDetailCell
-            //FIXME:测试数据
-            cell.goodsDesLabel.text = "结合东方礼仪的设计,特有的内嵌杯垫设计，使得咖啡杯在使用过程中保持静音。采用传统釉料与质朴的陶泥结合。丰富釉面变化，让杯子多一份自然的感觉。"
-            cell.cellHeightConstraint.constant = CGFloat((indexPath.row + 1) * 20)
+            if let pics = productModel?.pics_compose{
+                let model = pics[indexPath.row]
+                cell.showData(model)
+            }
             returnCell = cell
         case 2: //设计师
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWDesignerCell), forIndexPath:indexPath) as! WOWDesignerCell
+            cell.showData(productModel)
             returnCell = cell
         case 3: //参数
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsParamCell), forIndexPath: indexPath) as! WOWGoodsParamCell
-            cell.paramLabel.text = "参数"
-            cell.valueLabel.text = "参数详情参数详情参数详情"
-            
+            if let att = productModel?.attributes {
+                cell.showData(att[indexPath.row])
+            }
             returnCell = cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
-            cell.rightTitleLabel.text = "xxx人喜欢"
+            cell.rightTitleLabel.text = "\(productModel?.favorites_count ?? 0)人喜欢"
             cell.rightBackView.addAction({ [weak self] in
                 if let strongSelf = self{
                     let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
@@ -258,7 +268,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 2:
-            return 0.01
+            return productModel?.designer_name == nil ? 0.01 : 36
         case 3:
             return 36
         case 5: //评论
@@ -287,12 +297,11 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 0,1:
             return nil
         case 2: //设计师
-            return nil
-//            return WOWMenuTopView(leftTitle: "设计师", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
+            return productModel?.designer_name == nil ? nil : WOWMenuTopView(leftTitle: "设计师", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
         case 3://参数
             return WOWMenuTopView(leftTitle: "产品参数", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
         case 5: //评论
-            let view =  WOWMenuTopView(leftTitle: "xx条评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
+            let view =  WOWMenuTopView(leftTitle: "\(productModel?.comments_count ?? 0)条评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
             goComment(view)
             return view
         default:

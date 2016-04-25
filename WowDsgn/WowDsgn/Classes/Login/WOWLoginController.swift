@@ -85,7 +85,9 @@ class WOWLoginController: WOWBaseViewController {
                 WOWUserManager.saveUserInfo(result)
                 //获取HeadImageUrl
                 let wowUser = AVQuery(className:"WOWUser")
-                wowUser.whereKey("wowuserid", equalTo:WOWUserManager.fetchUserID() ?? "")
+//                wowUser.whereKey("wowuserid", equalTo:WOWUserManager.userID)
+                //FIXME:测试数据
+                wowUser.whereKey("wowuserid", equalTo:"456789")
                 wowUser.findObjectsInBackgroundWithBlock({[weak self] (objects, error) in
                     if let _ = self{
                         if let e = error{

@@ -51,11 +51,10 @@ class WOWGoodsBigCell: UICollectionViewCell {
         let url = model.productImage ?? ""
         bigPictureImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage: UIImage(named: "placeholder_product"))
         titleLabel.text = model.productName
-        desLabel.text   = model.productDes
+        desLabel.text   = model.productShortDes
         
         let url2 = model.brandImage ?? ""
         brandButton.kf_setImageWithURL(NSURL(string:url2)!, forState:.Normal, placeholderImage:UIImage(named: "placeholder_product"))
         priceLabel.text  = model.price
-        
     }
 }

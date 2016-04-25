@@ -26,7 +26,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     func showData(model:WOWProductModel) {
         let url             = model.productImage ?? ""
         pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
-        desLabel.text       = model.productDes
+        desLabel.text       = model.productShortDes
         priceLabel.text     = model.price
     }
     

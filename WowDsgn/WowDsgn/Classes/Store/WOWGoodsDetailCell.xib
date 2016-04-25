@@ -22,7 +22,6 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DnZ-zi-fn1">
                         <rect key="frame" x="15" y="15" width="290" height="141"/>
-                        <color key="backgroundColor" red="1" green="0.62155993229999995" blue="0.54271797619999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="141" id="sIk-VJ-xO1"/>
                         </constraints>

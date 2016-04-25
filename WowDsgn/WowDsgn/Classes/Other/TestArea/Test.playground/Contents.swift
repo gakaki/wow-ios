@@ -124,7 +124,7 @@ Features.bark()
 var aa:Int?
 aa = aa ?? 0
 print(aa!)
- */
+
 
 var items = [1,2,3,4]
 var ss = items.map({ item in
@@ -186,7 +186,14 @@ print(maps)
 for index in 0...26{
     print(index)
 }
+ */
 
+var url : String? = ""
+if let u = url {
+    print("非空")
+}else{
+    print("空的")
+}
 
 
 

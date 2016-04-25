@@ -13,6 +13,7 @@ class WOWDesignerCell: UITableViewCell {
     @IBOutlet weak var designerImageView: UIImageView!
     @IBOutlet weak var designerNameLabel: UILabel!
     @IBOutlet weak var designerDesLabel: UILabel!
+    @IBOutlet weak var designerImageHeight: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +25,16 @@ class WOWDesignerCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func showData(model:WOWProductModel?) {
+        designerDesLabel.text   = model?.designer_desc
+        designerNameLabel.text  = model?.designer_name
+        guard let url = model?.designer_image where !url.isEmpty else{
+            designerImageHeight.constant = 0
+            return
+        }
+        designerImageHeight.constant = MGScreenHeight
+        designerImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage:UIImage(named: "placeholder_product"))
+    }
     
     
 }

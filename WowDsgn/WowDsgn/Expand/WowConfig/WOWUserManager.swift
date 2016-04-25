@@ -10,7 +10,6 @@ import Foundation
 
 
 struct WOWUserManager {
-    
     static let WOWUserID            = "WOWUserID"
     static let WOWUserHeadImage     = "WOWUserHeadImage"
     static let WOWUserName          = "WOWUserName"
@@ -25,22 +24,30 @@ struct WOWUserManager {
         }
     }
     
-    static var loginStatus:Bool{
+    
+    static var userID:String{
         get{
-            guard let _ = fetchUserID() where !WOWUserID.isEmpty else{
-                return false
-            }
-            return true
+            return (MGDefault.objectForKey(WOWUserID) as? String) ?? ""
         }
     }
     
-    static var userHeadImage:UIImage?{
-        get {
-            let data =  MGDefault.objectForKey(WOWUserHeadImage) as? NSData
-            if let d = data {
-                return UIImage(data:d)
+    static var userName:String{
+        get{
+            return (MGDefault.objectForKey(WOWUserName) as? String) ?? ""
+        }
+        
+        set{
+            MGDefault.setObject(newValue, forKey:WOWUserName)
+            MGDefault.synchronize()
+        }
+    }
+    
+    static var loginStatus:Bool{
+        get{
+            guard !userID.isEmpty else{
+                return false
             }
-            return nil
+            return true
         }
     }
     
@@ -48,35 +55,10 @@ struct WOWUserManager {
     static func saveUserInfo(data:AnyObject){
         let model = Mapper<WOWUserModel>().map(data)
         MGDefault.setObject(model?.userID, forKey:WOWUserID)
-        
-        
+        //FIXME:测试的userID
+        MGDefault.setObject("456789", forKey:WOWUserID)
         MGDefault.synchronize()
     }
-    
-    /**
-     保存用户头像
-     
-     - parameter image:
-     */
-    static func saveUserHeadImage(image:UIImage?){
-        if let headImage = image {
-            let data = UIImagePNGRepresentation(headImage)
-            MGDefault.setObject(data, forKey:WOWUserHeadImage)
-            MGDefault.synchronize()
-        }
-    }
-    
-    
-    
-    
-    /**
-     保存用户昵称
-     */
-    static func saveUserName(name:String?){
-        MGDefault.setObject(name, forKey:WOWUserName)
-        MGDefault.synchronize()
-    }
-    
     
     
     /**
@@ -85,15 +67,8 @@ struct WOWUserManager {
      */
     static func exitLogin(){
         MGDefault.setObject(nil, forKey: WOWUserID)
-        
-        
+        MGDefault.setObject(nil, forKey: WOWUserHeadImage)
         MGDefault.synchronize()
     }
-    
-    
-    static func fetchUserID() -> String?{
-        return MGDefault.objectForKey(WOWUserID) as? String
-    }
-    
     
 }

@@ -9,10 +9,8 @@
 import UIKit
 class WOWSenceLikeCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
-//    @IBOutlet weak var moreLikeButton: UIButton!
     @IBOutlet weak var rightBackView: UIView!
     @IBOutlet weak var rightTitleLabel: UILabel!
-    
     
     /// 是确认订单界面用到的话，需要将它的尺寸搞大点 其他的都是小一点的
     var orderTag:Bool = false{
@@ -26,9 +24,6 @@ class WOWSenceLikeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
-//        rightBackView.addCorner([.TopLeft,.BottomLeft], cornerSize: CGSizeMake(20,0))
-//        let image = UIImage(named: "moreButton")
-//        backImageView.image = image?.stretchableImageWithLeftCapWidth(Int((image?.size.width)!/2), topCapHeight:Int((image?.size.height)!/2))
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

@@ -24,4 +24,13 @@ class WOWGoodsDetailCell: UITableViewCell {
 
     }
     
+    func showData(model:WOWProductPicTextModel?) {
+        goodsDesLabel.text = model?.text
+        guard let imageUrl = model?.image where !imageUrl.isEmpty else{
+            cellHeightConstraint.constant = 0
+            return
+        }
+        cellHeightConstraint.constant = MGScreenWidth * 333 / 500
+        goodsImageView.kf_setImageWithURL(NSURL(string:imageUrl)!, placeholderImage:UIImage(named: "placeholder_banner"))
+    }
 }

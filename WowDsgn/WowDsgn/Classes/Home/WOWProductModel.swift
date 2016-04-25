@@ -16,12 +16,26 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var productY:Float?
     
     var productDes      : String?
+    var productShortDes : String?
+    
     var productImage    : String?
     var price           : String?
     var brandID         : String?
     var brandName       : String?
     var brandImage      : String?
     var brandDesc       : String?
+    
+    var comments_count  : Int?
+    var favorites_count : Int?
+    
+    var designer_url    : String?
+    var designer_name   : String?
+    var designer_image  : String?
+    var designer_desc   : String?
+    var attributes      : [WOWAttributeModel]?
+    var skus            : [WOWProductSkuModel]?
+    var pics_compose    : [WOWProductPicTextModel]? //图文详情
+    var pics_carousel   : [String]?  //详情轮播的图片
     
     required init?(_ map: Map) {
         
@@ -34,12 +48,22 @@ class WOWProductModel: WOWBaseModel,Mappable{
         productY        <- map["y"]
         
         productDes      <- map["description"]
+        productShortDes <- map["description_short"]
         productImage    <- map["image"]
         price           <- map["price"]
         brandID         <- map["brand_id"]
         brandName       <- map["brand_name"]
         brandImage      <- map["brand_image"]
         brandDesc       <- map["brand_desc"]
+        comments_count  <- map["comments_count"]
+        favorites_count <- map["favorites_count"]
+        designer_url    <- map["designer_url"]
+        designer_name   <- map["designer_name"]
+        designer_desc   <- map["designer_desc"]
+        attributes      <- map["attributes"]
+        skus            <- map["skus"]
+        pics_compose    <- map["pics_compose"]
+        pics_carousel   <- map["pics_carousel"]
     }
     
     var cellHeight:CGFloat = 0

@@ -19,8 +19,12 @@ class WOWGoodsParamCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        
+    }
+    
+    func showData(model:WOWAttributeModel?) {
+        leftImageView.image = UIImage(named:model?.attriImage ?? " ")
+        paramLabel.text     = model?.title
+        valueLabel.text     = model?.value
     }
     
 }

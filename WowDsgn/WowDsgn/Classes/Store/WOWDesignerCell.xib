@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,7 +17,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ME0-zc-DJs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="ME0-zc-DJs" secondAttribute="height" multiplier="1:1" id="bSf-8N-TF0"/>
+                            <constraint firstAttribute="height" constant="320" id="X3q-bD-sc6"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="     " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Goa-5O-gLF">
@@ -49,6 +48,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="designerDesLabel" destination="QIC-00-FVv" id="R25-GB-ljj"/>
+                <outlet property="designerImageHeight" destination="X3q-bD-sc6" id="AfC-tL-h6T"/>
                 <outlet property="designerImageView" destination="ME0-zc-DJs" id="Hds-Ib-l6A"/>
                 <outlet property="designerNameLabel" destination="Goa-5O-gLF" id="Mbp-a2-8jd"/>
             </connections>

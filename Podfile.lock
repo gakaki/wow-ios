@@ -17,6 +17,7 @@ PODS:
     - Pingpp/Core
   - ReachabilitySwift (2.3.3)
   - Result (1.0.2)
+  - RxSwift (2.2.0)
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.2)
   - SwiftyJSON (2.3.2)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - Pingpp/Alipay (~> 2.1.0)
   - Pingpp/Wx (~> 2.1.0)
   - ReachabilitySwift
+  - RxSwift (~> 2.2.0)
   - SnapKit (~> 0.19.1)
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON
@@ -50,6 +52,7 @@ SPEC CHECKSUMS:
   Pingpp: 08415163eb1791bc07d7d939f1648d2e36a30eda
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
+  RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: e4020e23badbd7cc61bc4a80d3c1da57f166a978
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a

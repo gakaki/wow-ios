@@ -101,8 +101,8 @@
                     </constraints>
                     <collectionViewLayout key="collectionViewLayout" id="s8M-T4-Y9m" customClass="TagCellLayout" customModule="WowDsgn" customModuleProvider="target"/>
                     <connections>
-                        <outlet property="dataSource" destination="iN0-l3-epB" id="21N-wb-nBw"/>
-                        <outlet property="delegate" destination="iN0-l3-epB" id="lHc-TA-VrE"/>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="Ipj-92-dx5"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="8ZA-k1-B1R"/>
                     </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-vH-OUv" userLabel="bottomView">
@@ -115,7 +115,7 @@
                                 <constraint firstAttribute="height" constant="66" id="SeO-vS-Dsb"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttI-Mh-Qzd">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="ttI-Mh-Qzd">
                             <rect key="frame" x="96" y="15" width="16" height="18"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -175,7 +175,7 @@
             <connections>
                 <outlet property="addButton" destination="9Wu-oK-qHK" id="BB2-yx-w4q"/>
                 <outlet property="closeButton" destination="hgg-DS-lz6" id="WXX-JO-Ntw"/>
-                <outlet property="collectionView" destination="hyL-jG-Ufx" id="Xup-L4-zWd"/>
+                <outlet property="collectionView" destination="hyL-jG-Ufx" id="c7x-9J-ugp"/>
                 <outlet property="collectionViewHeight" destination="cvb-QV-9e9" id="HUI-TN-nh6"/>
                 <outlet property="countTextField" destination="sR8-yM-ked" id="hoJ-ZM-NOd"/>
                 <outlet property="goodsImageView" destination="Pm8-hJ-vcq" id="AAi-Vs-Xde"/>

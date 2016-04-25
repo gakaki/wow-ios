@@ -66,8 +66,8 @@ class WOWProductModel: WOWBaseModel,Mappable{
         pics_carousel   <- map["pics_carousel"]
     }
     
+    /// 商品列表瀑布流需要用的高度
     var cellHeight:CGFloat = 0
-    
     func calCellHeight(){
         let s = self.productDes ?? ""
         var height = s.heightWithConstrainedWidth((MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30, font: UIFont.systemScaleFontSize(13))

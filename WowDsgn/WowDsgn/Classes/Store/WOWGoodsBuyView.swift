@@ -77,8 +77,7 @@ class WOWBuyBackView: UIView {
 
 //MARK **********************************内容视图***********************************
 
-class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
-
+class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UICollectionViewDataSource{
     @IBOutlet weak var countTextField: UITextField!
     @IBOutlet weak var perPriceLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -89,6 +88,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
+    var dataArr = WOWBuyCarMananger.sharedBuyCar.producModel?.skus
+    
     private var buyCount:Int = 1
     private var perPrice:String = "0"
     private var typeString:String?
@@ -98,6 +99,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
         super.init(frame: frame)
 
     }
+    
+    lazy var skuModel:WOWBuyCarModel = WOWBuyCarModel()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -119,12 +122,20 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
         let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
         collectionView?.registerNib(nib, forCellWithReuseIdentifier: "WOWTagCollectionViewCell")
         let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
-        //FIXME:单价
-        perPriceLabel.text = "单价的东东"
-        nameLabel.text = "尖叫系列"
+        if let p = WOWBuyCarMananger.sharedBuyCar.producModel{
+            nameLabel.text = p.productName
+            perPriceLabel.text  = p.price?.priceFormat()
+            goodsImageView.kf_setImageWithURL(NSURL(string:p.productImage ?? " ")!, placeholderImage:UIImage(named: "placeholder_product"))
+            skuModel.skuProductName = p.productName ?? ""
+            skuModel.skuName = p.skus?.first?.skuTitle ?? ""
+            skuModel.skuProductPrice = p.price ?? ""
+            skuModel.skuProductCount = 1
+            skuModel.skuProductImageUrl = p.productImage ?? ""
+        }
         collectionView?.collectionViewLayout = tagCellLayout
         collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
         collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .None)
+        
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -158,8 +169,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     }
     
     @IBAction func sureButtonClick(sender: UIButton) {
-        let model = PostBuyModel(count: buyCount, price:perPrice, typeString:typeString)
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWGoodsSureBuyNotificationKey, object:model)
+        skuModel.skuProductCount = buyCount
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWGoodsSureBuyNotificationKey, object:skuModel)
     }
     
     private func showResult(count:Int){
@@ -174,19 +185,25 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     }
     
     func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
-        //FIXME:测试数据
-        return CGFloat(125 + arc4random()%100)
+        if let arr = dataArr {
+            let item = arr[index]
+            let title = item.skuTitle ?? ""
+            let width = title.size(Fontlevel004).width + 50
+            return width
+        }
+        return 0
     }
 
     
     
 //MARK: - UICollectionView Delegate/Datasource Methods
-    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let identifier = "WOWTagCollectionViewCell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
-        //FIXME:假数据
-        cell.textLabel.text = "123123"
+        if let arr = dataArr {
+            let item = arr[indexPath.row]
+            cell.textLabel.text = item.skuTitle
+        }
         return cell
     }
     
@@ -195,30 +212,34 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate{
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return dataArr == nil ? 0 : (dataArr?.count)!
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        typeString = "120宽30高"
-        
+        if let arr = dataArr {
+            let model = arr[indexPath.item]
+            perPriceLabel.text = model.skuPrice?.priceFormat()
+            skuModel.skuProductPrice = model.skuPrice ?? ""
+            skuModel.skuName  = model.skuTitle ?? ""
+        }
     }
     
 }
 
 
-class PostBuyModel{
-    var count:Int = 0
-    var perPrice:String = ""
-        /// 产品规格
-    var typeStrng:String = ""
-    init(count:Int,price:String,typeString:String?){
-        self.count = count
-        self.perPrice = price
-        self.typeStrng = typeString ?? ""
-    }
-    
-    
-}
+//class PostBuyModel{
+//    var count:Int = 0
+//    var perPrice:String = ""
+//        /// 产品规格
+//    var typeStrng:String = ""
+//    init(count:Int,price:String,typeString:String?){
+//        self.count = count
+//        self.perPrice = price
+//        self.typeStrng = typeString ?? ""
+//    }
+//    
+//    
+//}
 
 
 

@@ -79,7 +79,6 @@ class WOWRegistController: WOWBaseViewController {
         if !validatePhone(phoneTextField.text){
             return
         }
-        
     }
     
     

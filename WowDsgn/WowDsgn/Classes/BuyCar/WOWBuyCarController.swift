@@ -74,10 +74,10 @@ class WOWBuyCarController: WOWBaseViewController {
     }
     
     func sureButton(nf:NSNotification)  {
-        let object = nf.object as? PostBuyModel
-        if let model = object {
-            DLog("确定的东东\(model.count),另外\(model.typeStrng)")
-        }
+//        let object = nf.object as? PostBuyModel
+//        if let model = object {
+//            DLog("确定的东东\(model.count),另外\(model.typeStrng)")
+//        }
         backView.hideBuyView()
     }
 

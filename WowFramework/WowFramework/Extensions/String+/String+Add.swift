@@ -62,4 +62,17 @@ public extension String{
         return (phoneTest.evaluateWithObject(self));
     }
     
+    
+    func priceFormat() -> String {
+        let price = Float(self)
+        guard let p = price else{
+            return "¥"
+        }
+        let number = NSNumber(float:p)
+        let numberFormat = NSNumberFormatter()
+        numberFormat.numberStyle = .DecimalStyle
+        let result = "¥" + (numberFormat.stringFromNumber(number) ?? "")
+        return result
+    }
+    
 }

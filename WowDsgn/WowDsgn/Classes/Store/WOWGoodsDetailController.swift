@@ -45,9 +45,9 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     func sureButton(nf:NSNotification)  {
-        let object = nf.object as? PostBuyModel
+        let object = nf.object as? WOWBuyCarModel
         if let model = object {
-            DLog("确定的东东\(model.count),另外\(model.typeStrng)")
+            //存入数据库
         }
         backView.hideBuyView()
     }
@@ -127,7 +127,9 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     lazy var buyView:WOWGoodsBuyView = {
+        WOWBuyCarMananger.sharedBuyCar.producModel = self.productModel
         let v = NSBundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView
+        v.collectionView.reloadData()
         return v
     }()
     
@@ -136,7 +138,9 @@ class WOWGoodsDetailController: WOWBaseViewController {
         return v
     }()
 
+//MARK:选择规格
     @IBAction func buyButtonClick(sender: UIButton) {
+        buyView.dataArr = productModel?.skus
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
         backView.show()

@@ -19,6 +19,11 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     var editInfoAction:ActionClosure?
     
+    private var headImageUrl:String = WOWUserManager.userHeadImageUrl
+    private var nick        :String = WOWUserManager.userName
+    private var sex         :String = WOWUserManager.userSex
+    private var des         :String = WOWUserManager.userDes
+    
 //MARK:Lazy
     lazy var imagePicker:UIImagePickerController = {
         let v = UIImagePickerController()
@@ -47,6 +52,19 @@ class WOWUserInfoController: WOWBaseTableViewController {
     func editInfoComplete() {
         if let closure = self.editInfoAction {
             closure()
+        }
+    }
+    
+//MARK:Private Network
+    override func request() {
+        super.request()
+        let params = ["user_headimage":headImageUrl,"user_nick":nick,"user_desc":des,"user_sex":sex,"uid":WOWUserManager.userID]
+        WOWNetManager.sharedManager.requestWithTarget(.Api_UserUpdate(param:params), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                DLog(result)
+            }
+        }) { (errorMsg) in
+            DLog(errorMsg)
         }
     }
 }
@@ -80,6 +98,8 @@ extension WOWUserInfoController{
         let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
             let field = alertController.textFields?.first
             self.desLabel.text = field?.text
+            self.des = field?.text ?? ""
+            self.request()
         }
         alertController.addAction(sureAction)
         alertController.addTextFieldWithConfigurationHandler { (field) in
@@ -131,7 +151,8 @@ extension WOWUserInfoController{
         let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
             let field = alertController.textFields?.first
             self.nickLabel.text = field?.text
-            
+            self.nick = field?.text ?? ""
+            self.request()
         }
         alertController.addAction(sureAction)
         alertController.addTextFieldWithConfigurationHandler { (field) in
@@ -148,10 +169,14 @@ extension WOWUserInfoController{
         actionSheetController.addAction(cancelAction)
         let manAction: UIAlertAction = UIAlertAction(title: "男", style: .Default) { action -> Void in
             self.sexLabel.text = "男"
+            self.sex = "男"
+            self.request()
         }
         actionSheetController.addAction(manAction)
         let womanAction: UIAlertAction = UIAlertAction(title: "女", style: .Default) { action -> Void in
             self.sexLabel.text = "女"
+            self.sex = "女"
+            self.request()
         }
         actionSheetController.addAction(womanAction)
         self.presentViewController(actionSheetController, animated: true, completion: nil)
@@ -172,13 +197,16 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         let file = AVFile(name:"headimage.jpg", data:data)
         WOWHud.showLoading()
         file.saveInBackgroundWithBlock {[weak self] (ret,error) in
-            if let _ = self{
+            if let stongSelf = self{
                 if let e = error{
                     DLog(e)
                     WOWHud.showMsg("头像修改失败")
                     return
                 }else{
-                    let headUrl = file.url ?? ""
+                    stongSelf.headImageUrl = file.url ?? ""
+                    stongSelf.request()
+                    
+                    /*
                     let wowUser = AVQuery(className:"WOWUser")
                     wowUser.whereKey("wowuserid", equalTo:WOWUserManager.userID)
                     wowUser.findObjectsInBackgroundWithBlock({[weak self] (objects, error) in
@@ -206,6 +234,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                             }
                         }
                     })
+                     */
                 }
             }
         }

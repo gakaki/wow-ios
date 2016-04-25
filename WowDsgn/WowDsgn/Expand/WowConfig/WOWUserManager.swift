@@ -13,6 +13,8 @@ struct WOWUserManager {
     static let WOWUserID            = "WOWUserID"
     static let WOWUserHeadImage     = "WOWUserHeadImage"
     static let WOWUserName          = "WOWUserName"
+    static let WOWUserSex           = "WOWUserSex"
+    static let WOWUserDes           = "WOWUserDes"
     
     static var userHeadImageUrl:String{
         get{
@@ -38,6 +40,28 @@ struct WOWUserManager {
         
         set{
             MGDefault.setObject(newValue, forKey:WOWUserName)
+            MGDefault.synchronize()
+        }
+    }
+    
+    static var userSex:String{
+        get{
+            return (MGDefault.objectForKey(WOWUserSex) as? String) ?? ""
+        }
+        
+        set{
+            MGDefault.setObject(newValue, forKey:WOWUserSex)
+            MGDefault.synchronize()
+        }
+    }
+    
+    static var userDes:String{
+        get{
+            return (MGDefault.objectForKey(WOWUserDes) as? String) ?? ""
+        }
+        
+        set{
+            MGDefault.setObject(newValue, forKey:WOWUserDes)
             MGDefault.synchronize()
         }
     }

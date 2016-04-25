@@ -36,4 +36,7 @@ class WOWBaseTableViewController: UITableViewController {
         self.tableView.tableFooterView = UIView(frame:CGRectZero)
     }
 
+    func request(){
+        
+    }
 }

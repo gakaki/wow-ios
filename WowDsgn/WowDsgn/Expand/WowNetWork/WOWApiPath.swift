@@ -35,6 +35,9 @@ let URL_activity                = "post"
 
 
 
+//4.个人中心
+let URL_UpdateInfo              = "userupdate"
+
 //5.app 登录注册
 let URL_Register                = "user/register"
 let URL_login                   = "user/login"

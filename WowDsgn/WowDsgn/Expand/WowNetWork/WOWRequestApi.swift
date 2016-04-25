@@ -23,6 +23,8 @@ public enum RequestApi{
     
     case Api_ProductDetail(productid:String)
     
+    case Api_UserUpdate(param:[String:String])
+    
     case Api_Login(String,String)
     
     case Api_Register(account:String,password:String)
@@ -48,6 +50,8 @@ extension RequestApi:TargetType{
             return URL_product
         case .Api_ProductDetail:
             return URL_product_detail
+        case .Api_UserUpdate:
+            return URL_UpdateInfo
         case .Api_Login:
             return URL_login
         case .Api_Register:
@@ -71,6 +75,8 @@ extension RequestApi:TargetType{
             return ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort]
         case let .Api_ProductDetail(productid):
             return ["id":productid]
+        case let .Api_UserUpdate(param):
+            return param
         default:
             return nil
         }

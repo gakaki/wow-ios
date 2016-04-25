@@ -48,7 +48,10 @@ class WOWBurCarEditCell: UITableViewCell {
     }
     
     
-    func showData(model:WOWBuyCarModel) {
+    func showData(m:WOWBuyCarModel?) {
+        guard let model = m else{
+            return
+        }
         goodsImageView.kf_setImageWithURL(NSURL(string:model.skuProductImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         nameLabel.text = model.skuProductName
         typeLabel.text = model.skuName

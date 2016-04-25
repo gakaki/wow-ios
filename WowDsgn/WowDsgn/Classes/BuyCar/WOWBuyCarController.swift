@@ -43,6 +43,7 @@ class WOWBuyCarController: WOWBaseViewController {
     }
     
     
+    @IBOutlet weak var allButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var endEditButton: UIButton!
@@ -91,6 +92,7 @@ class WOWBuyCarController: WOWBaseViewController {
             //将购物车数据提交，同步
         }else{//未登录
             //走本地数据库
+            dataArr = []
             let objects = WOWRealm.objects(WOWBuyCarModel)
             for object in objects{
                 dataArr.append(object)
@@ -152,12 +154,18 @@ class WOWBuyCarController: WOWBaseViewController {
         isEditing = !isEditing
         let title = isEditing ? "完成" : "编辑"
         rightItemButton.setTitle(title, forState:.Normal)
+        allButton.selected = false
+        selectedArr = []
         tableView.reloadData()
+        
     }
     
     @IBAction func endButtonClick(sender: UIButton) {
         if isEditing { //删除
-            
+            guard !selectedArr.isEmpty else{
+                return
+            }
+            removeCarItem(selectedArr)
         }else{ //结算
             //FIXME:判断是否登录
             let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWSureOrderController") as! WOWSureOrderController
@@ -178,6 +186,27 @@ class WOWBuyCarController: WOWBaseViewController {
                 selectedArr = []
             }
         }
+    }
+    
+//MARK:Private Network 删除购物车
+    private func removeCarItem(items:[WOWBuyCarModel]){
+        if WOWUserManager.loginStatus { //登录
+            
+        }else{ //未登录
+//           dispatch_async(dispatch_get_main_queue(), { 
+                try! WOWRealm.write({
+                    WOWRealm.delete(items)
+                })
+//           })
+            configData()
+        }
+    }
+    
+//MARK:Private Network
+    
+    
+    override func request() {
+        super.request()
     }
 }
 
@@ -226,6 +255,9 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            try! WOWRealm.write({
+                WOWRealm.delete(dataArr[indexPath.row])
+            })
             dataArr.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             //FIXME:后期应该根据服务器端返回再删除

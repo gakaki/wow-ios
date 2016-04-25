@@ -131,6 +131,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="购物车" id="GdU-x6-BgS"/>
                     <connections>
+                        <outlet property="allButton" destination="bkW-n9-3vb" id="8Gt-et-gh3"/>
                         <outlet property="bottomView" destination="ccY-3m-yCX" id="9yI-lp-1rz"/>
                         <outlet property="endButton" destination="k6y-vj-XDz" id="t6K-5o-W9E"/>
                         <outlet property="endEditButton" destination="bkW-n9-3vb" id="ZTu-fE-Sq7"/>

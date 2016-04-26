@@ -89,7 +89,24 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private func configData(){
         if WOWUserManager.loginStatus { //登录
-            //将购物车数据提交，同步
+            //1.若本地有数据，那就进行同步,否则走第二步
+            //2.直接拉取服务器端购物车数据
+            let uid = WOWUserManager.userID
+            var param = ["uid":uid]
+            let objects = WOWRealm.objects(WOWBuyCarModel)
+            if objects.isEmpty {
+                let string = JSONStringify(param)
+                WOWNetManager.sharedManager.requestWithTarget(.Api_CarList(cart:string), successClosure: {[weak self](result) in
+                    if let strongSelf = self{
+                        DLog(result)
+                    }
+                }, failClosure: { (errorMsg) in
+                        
+                })
+            }else{
+                
+            }
+            
         }else{//未登录
             //走本地数据库
             dataArr = []

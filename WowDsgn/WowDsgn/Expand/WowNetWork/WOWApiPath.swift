@@ -40,11 +40,16 @@ let URL_CommentList             = "product/commentlist"
 let URL_activity                = "post"
 
 
+//*********************4.购物车**********
+let URL_CarEdit                 = "cart/update"
 
-//4.个人中心
+let URL_CarList                 = "cart/list"
+
+
+//5.个人中心
 let URL_UpdateInfo              = "user/userupdate"
 
-//5.app 登录注册
+//6.app 登录注册
 let URL_Register                = "user/register"
 let URL_login                   = "user/login"
 

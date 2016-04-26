@@ -95,8 +95,8 @@ class WOWRegistController: WOWBaseViewController {
         }
         WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!), successClosure: { [weak self](result) in
             if let strongSelf = self{
-            //等下填充信息
-            WOWHud.showMsg("注册成功")
+            let model = Mapper<WOWUserModel>().map(result)
+            WOWUserManager.saveUserInfo(model)
             NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
                 strongSelf.dismissViewControllerAnimated(true, completion: nil)

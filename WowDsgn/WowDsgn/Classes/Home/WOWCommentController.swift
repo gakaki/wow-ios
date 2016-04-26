@@ -72,7 +72,6 @@ class WOWCommentController: WOWBaseViewController {
         
         WOWNetManager.sharedManager.requestWithTarget(.Api_SubmitComment(uid:WOWUserManager.userID,comment:comments,product_id:self.mainID), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                
                 strongSelf.endEditing()
             }
         }) {[weak self] (errorMsg) in

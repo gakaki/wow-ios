@@ -10,11 +10,11 @@ import Foundation
 
 
 struct WOWUserManager {
-    static let WOWUserID            = "WOWUserID"
-    static let WOWUserHeadImage     = "WOWUserHeadImage"
-    static let WOWUserName          = "WOWUserName"
-    static let WOWUserSex           = "WOWUserSex"
-    static let WOWUserDes           = "WOWUserDes"
+   private static let WOWUserID            = "WOWUserID"
+   private static let WOWUserHeadImage     = "WOWUserHeadImage"
+   private static let WOWUserName          = "WOWUserName"
+   private static let WOWUserSex           = "WOWUserSex"
+   private static let WOWUserDes           = "WOWUserDes"
     
     static var userHeadImageUrl:String{
         get{
@@ -77,7 +77,6 @@ struct WOWUserManager {
     
     
     static func saveUserInfo(model:WOWUserModel?){
-        //FIXME:测试的userID
         MGDefault.setObject(model?.userID, forKey:WOWUserID)
         MGDefault.setObject(model?.user_sex, forKey:WOWUserSex)
         MGDefault.setObject(model?.user_nick, forKey:WOWUserName)

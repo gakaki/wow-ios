@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/WowFramework.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		OiAtAAvRHdMeULIucm5CTP6Dz4Y=
+		92fyzcUQAm7BMf1/YH3q3naMh/M=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -68,11 +68,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OiAtAAvRHdMeULIucm5CTP6Dz4Y=
+			92fyzcUQAm7BMf1/YH3q3naMh/M=
 			</data>
 			<key>hash2</key>
 			<data>
-			/MAqJ0sbPgPfwQiopRc5ZPZHfiMiuJ0YL58jQfvtLaU=
+			TskRu9drhpLhFUFmjTW4QnHHjhPHC1iEP48tXPWz/gk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

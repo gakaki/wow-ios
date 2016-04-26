@@ -16,6 +16,7 @@ class WOWBuyCarModel: Object,Mappable{
     dynamic var skuProductImageUrl:String  = ""
     dynamic var skuName:String             = ""
     dynamic var skuID  :String             = ""
+    dynamic var productID :String          = ""
     
     override static func primaryKey() -> String? {
         return "skuID"

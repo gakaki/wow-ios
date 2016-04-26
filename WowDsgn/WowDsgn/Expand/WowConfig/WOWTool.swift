@@ -39,8 +39,30 @@ struct WOWCalPrice {
         result = result ?? "0"
         return result!
     }
+}
+
+
+
+func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
+    let options = prettyPrinted ? NSJSONWritingOptions.PrettyPrinted : NSJSONWritingOptions(rawValue: 0)
+    if NSJSONSerialization.isValidJSONObject(value) {
+        
+        do{
+            let data = try NSJSONSerialization.dataWithJSONObject(value, options: options)
+            if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
+                return string as String
+            }
+        }catch {
+            print("error")
+            //Access error here
+        }
+        
+    }
+    return ""
     
 }
+
+
 
 
 struct WOWTool {

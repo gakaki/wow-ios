@@ -27,6 +27,10 @@ public enum RequestApi{
     
     case Api_SubmitComment(uid:String,comment:String,product_id:String)
     
+    case Api_CarEdit(cart:String)
+    
+    case Api_CarList(cart:String)
+    
     case Api_UserUpdate(param:[String:String])
     
     case Api_Login(String,String)
@@ -58,8 +62,12 @@ extension RequestApi:TargetType{
             return URL_CommentList
         case .Api_SubmitComment:
             return URL_SubmitComment
+        case .Api_CarEdit:
+            return URL_CarEdit
         case .Api_UserUpdate:
             return URL_UpdateInfo
+        case .Api_CarList:
+            return URL_CarList
         case .Api_Login:
             return URL_login
         case .Api_Register:
@@ -89,6 +97,10 @@ extension RequestApi:TargetType{
             return ["uid":uid,"product_id":product_id,"comment":comment]
         case let .Api_UserUpdate(param):
             return param
+        case let .Api_CarEdit(cart):
+            return ["cart":cart]
+        case let .Api_CarList(cart):
+            return ["cart":cart]
         default:
             return nil
         }
@@ -103,6 +115,8 @@ extension RequestApi:TargetType{
             return "注册成功"
         case .Api_SubmitComment:
             return "评论成功"
+        case .Api_UserUpdate:
+            return "修改成功"
         default:
             return nil
         }

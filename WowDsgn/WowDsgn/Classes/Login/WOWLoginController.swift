@@ -82,8 +82,8 @@ class WOWLoginController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Login(phone,passwd), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)
-                WOWHud.showMsg("登录成功")
-                
+                let model = Mapper<WOWUserModel>().map(result)
+                WOWUserManager.saveUserInfo(model)
                 NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
                     strongSelf.dismissViewControllerAnimated(true, completion: nil)

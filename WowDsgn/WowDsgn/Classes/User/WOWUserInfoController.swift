@@ -46,6 +46,16 @@ class WOWUserInfoController: WOWBaseTableViewController {
         navigationItem.title = "个人信息"
         headImageView.borderRadius(23)
         headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage:UIImage(named: "placeholder_userhead"))
+        configUserInfo()
+    }
+    
+    private func configUserInfo(){
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.sexLabel.text    = WOWUserManager.userSex
+            self.desLabel.text    = WOWUserManager.userDes
+            self.nickLabel.text   = WOWUserManager.userName
+            self.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+        }
     }
     
 //MARK:Actions
@@ -63,12 +73,12 @@ class WOWUserInfoController: WOWBaseTableViewController {
             if let strongSelf = self{
                 DLog(result)
                 let model = Mapper<WOWUserModel>().map(result["user"])
-                strongSelf.sexLabel.text    = model?.user_sex
-                strongSelf.desLabel.text    = model?.user_desc
-                strongSelf.nickLabel.text   = model?.user_nick
-                strongSelf.headImageView.kf_setImageWithURL(NSURL(string:model?.user_headimage ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
-                WOWHud.dismiss()
                 WOWUserManager.saveUserInfo(model)
+                strongSelf.configUserInfo()
+                WOWHud.dismiss()
+                if let action = strongSelf.editInfoAction{
+                    action()
+                }
             }
         }) { (errorMsg) in
             WOWHud.dismiss()

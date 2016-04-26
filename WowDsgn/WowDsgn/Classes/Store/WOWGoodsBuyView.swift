@@ -24,6 +24,7 @@ class WOWBuyBackView: UIView {
         v.backgroundColor = UIColor.clearColor()
         return v
     }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUP()
@@ -48,9 +49,12 @@ class WOWBuyBackView: UIView {
     func show() {
         backClear.frame = CGRectMake(0,self.height,self.width,self.height)
         addSubview(backClear)
+        buyView.frame = CGRectMake(0, 0, 0, 400)
         backClear.addSubview(buyView)
-        buyView.snp_makeConstraints { (make) in
-            make.left.right.bottom.equalTo(backClear).offset(0)
+        buyView.snp_makeConstraints {[weak self](make) in
+            if let strongSelf = self{
+                make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
+            }
         }
         
         UIView.animateWithDuration(0.3) {
@@ -92,11 +96,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     var dataArr:[WOWProductSkuModel]? = WOWBuyCarMananger.sharedBuyCar.producModel?.skus
     
     private var skuCount:Int = 1
-    private var skuPerPrice:String = ""
-    private var skuName:String  = ""
-    private var skuImageUrl:String = ""
-    private var skuID      :String = ""
-    private var productName:String = ""
+    private var skuPerPrice :String = ""
+    private var skuName     :String = ""
+    private var skuImageUrl :String = ""
+    private var skuID       :String = ""
+    private var productName :String = ""
+    private var productID   :String = ""
     
     var token: dispatch_once_t = 0
     override init(frame: CGRect) {
@@ -136,13 +141,14 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             nameLabel.text = p.productName
             perPriceLabel.text  = p.price?.priceFormat()
             goodsImageView.kf_setImageWithURL(NSURL(string:p.productImage ?? " ")!, placeholderImage:UIImage(named: "placeholder_product"))
-            
+
             skuID       = p.skus?.first?.skuID ?? ""
             skuImageUrl = p.productImage ?? ""
             skuName     = p.skus?.first?.skuTitle ?? ""
             skuPerPrice = p.price ?? ""
             skuCount    = 1
             productName = p.productName ?? ""
+            productID   = p.productID ?? ""
             
             collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .None)
         }
@@ -187,6 +193,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         model.skuProductImageUrl = skuImageUrl
         model.skuProductName = productName
         model.skuID = skuID
+        model.productID = productID
         NSNotificationCenter.postNotificationNameOnMainThread(WOWGoodsSureBuyNotificationKey, object:model)
     }
     
@@ -208,7 +215,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             let width = title.size(Fontlevel004).width + 50
             return width
         }
-        return 0
+        return 20
     }
 
     

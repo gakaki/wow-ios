@@ -54,9 +54,9 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func resolveBuyModel(model:WOWBuyCarModel){
         if WOWUserManager.loginStatus { //登录
-            
+            saveNetBuyCar(model)
         }else{
-            //存入数据库 先判断是否存在
+            //存入本地数据库 先判断是否存在
             let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
             if let m = skus.first{
                 let count = m.skuProductCount
@@ -71,6 +71,23 @@ class WOWGoodsDetailController: WOWBaseViewController {
             }
         }
     }
+    
+    
+    private func saveNetBuyCar(model:WOWBuyCarModel){
+        let uid = WOWUserManager.userID
+        let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID]]
+        let param = ["uid":uid,"cart":carItems]
+        let string = JSONStringify(param)
+        DLog(string)
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
+            if let _ = self{
+                
+            }
+        }) { (errorMsg) in
+                
+        }
+    }
+    
     
     private func configTableView(){
         tableView.estimatedRowHeight = 150
@@ -145,12 +162,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
         UMSocialSnsService.presentSnsIconSheetView(self, appKey:WOWUMKey, shareText:"", shareImage:nil, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: self)
         
     }
-    
-    lazy var buyView:WOWGoodsBuyView = {
-        let v = NSBundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView
-        v.collectionView.reloadData()
-        return v
-    }()
     
     lazy var backView:WOWBuyBackView = {
         let v = WOWBuyBackView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight))

@@ -92,7 +92,8 @@ class WOWBuyCarController: WOWBaseViewController {
             //1.若本地有数据，那就进行同步,否则走第二步
             //2.直接拉取服务器端购物车数据
             let uid = WOWUserManager.userID
-            var param = ["uid":uid]
+            var cars = [AnyObject]()
+            var param:[String:AnyObject] = ["uid":uid]
             let objects = WOWRealm.objects(WOWBuyCarModel)
             if objects.isEmpty {
                 let string = JSONStringify(param)
@@ -104,7 +105,11 @@ class WOWBuyCarController: WOWBaseViewController {
                         
                 })
             }else{
-                
+                for obj in objects {
+                    let dict = ["skuid":obj.skuID,"count":obj.skuProductCount,"productid":obj.productID]
+                    cars.append(dict)
+                }
+                param["cart"] = cars
             }
             
         }else{//未登录

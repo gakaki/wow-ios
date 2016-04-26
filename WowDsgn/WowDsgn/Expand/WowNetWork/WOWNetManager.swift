@@ -65,7 +65,11 @@ class WOWNetManager {
                         WOWHud.showMsg("请求失败")
                         return
                     }
-                    WOWHud.dismiss()
+                    if let endMsg = target.endSuccessMsg{
+                        WOWHud.showMsg(endMsg)
+                    }else{
+                        WOWHud.dismiss()
+                    }
                     successClosure(result:data)
                 case let .Failure(error):
                     DLog(error)

@@ -94,6 +94,20 @@ extension RequestApi:TargetType{
         }
     }
     
+    
+    public var endSuccessMsg:String?{
+        switch self {
+        case .Api_Login:
+            return "登录成功"
+        case .Api_Register:
+            return "注册成功"
+        case .Api_SubmitComment:
+            return "评论成功"
+        default:
+            return nil
+        }
+    }
+    
     //  单元测试用
     public var sampleData: NSData {
         return "{}".dataUsingEncoding(NSUTF8StringEncoding)!

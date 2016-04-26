@@ -72,7 +72,7 @@ class WOWCommentController: WOWBaseViewController {
         
         WOWNetManager.sharedManager.requestWithTarget(.Api_SubmitComment(uid:WOWUserManager.userID,comment:comments,product_id:self.mainID), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                WOWHud.showMsg("评论成功")
+                
                 strongSelf.endEditing()
             }
         }) {[weak self] (errorMsg) in
@@ -142,7 +142,7 @@ class WOWCommentController: WOWBaseViewController {
         //FIXME:评论列表接口目前是挂掉的
         WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(product_id:self.mainID), successClosure: {[weak self](result) in
             if let strongSelf = self{
-                DLog(result)
+                
                 
             }
         }) {(errorMsg) in

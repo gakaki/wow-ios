@@ -193,18 +193,14 @@ class WOWBuyCarController: WOWBaseViewController {
         if WOWUserManager.loginStatus { //登录
             
         }else{ //未登录
-//           dispatch_async(dispatch_get_main_queue(), { 
-                try! WOWRealm.write({
-                    WOWRealm.delete(items)
-                })
-//           })
+            try! WOWRealm.write({
+                WOWRealm.delete(items)
+            })
             configData()
         }
     }
     
 //MARK:Private Network
-    
-    
     override func request() {
         super.request()
     }

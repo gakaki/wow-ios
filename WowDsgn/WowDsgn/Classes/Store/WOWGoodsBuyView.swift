@@ -52,6 +52,7 @@ class WOWBuyBackView: UIView {
         buyView.snp_makeConstraints { (make) in
             make.left.right.bottom.equalTo(backClear).offset(0)
         }
+        
         UIView.animateWithDuration(0.3) {
             self.alpha = 1
             self.backClear.y = 0
@@ -88,11 +89,14 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
-    var dataArr = WOWBuyCarMananger.sharedBuyCar.producModel?.skus
+    var dataArr:[WOWProductSkuModel]? = WOWBuyCarMananger.sharedBuyCar.producModel?.skus
     
-    private var buyCount:Int = 1
-    private var perPrice:String = "0"
-    private var typeString:String?
+    private var skuCount:Int = 1
+    private var skuPerPrice:String = ""
+    private var skuName:String  = ""
+    private var skuImageUrl:String = ""
+    private var skuID      :String = ""
+    private var productName:String = ""
     
     var token: dispatch_once_t = 0
     override init(frame: CGRect) {
@@ -100,7 +104,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 
     }
     
-    lazy var skuModel:WOWBuyCarModel = WOWBuyCarModel()
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -122,22 +126,28 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
         collectionView?.registerNib(nib, forCellWithReuseIdentifier: "WOWTagCollectionViewCell")
         let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
+        configDefaultData()
+        collectionView?.collectionViewLayout = tagCellLayout
+        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
+    }
+    
+    func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.producModel{
             nameLabel.text = p.productName
             perPriceLabel.text  = p.price?.priceFormat()
             goodsImageView.kf_setImageWithURL(NSURL(string:p.productImage ?? " ")!, placeholderImage:UIImage(named: "placeholder_product"))
-            skuModel.skuProductName = p.productName ?? ""
-            skuModel.skuName = p.skus?.first?.skuTitle ?? ""
-            skuModel.skuProductPrice = p.price ?? ""
-            skuModel.skuProductCount = 1
-            skuModel.skuProductImageUrl = p.productImage ?? ""
-            skuModel.skuID = p.skus?.first?.skuID ?? ""
+            
+            skuID       = p.skus?.first?.skuID ?? ""
+            skuImageUrl = p.productImage ?? ""
+            skuName     = p.skus?.first?.skuTitle ?? ""
+            skuPerPrice = p.price ?? ""
+            skuCount    = 1
+            productName = p.productName ?? ""
+            
+            collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .None)
         }
-        collectionView?.collectionViewLayout = tagCellLayout
-        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
-        collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .None)
-        
     }
+    
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         dispatch_once(&token) {
@@ -160,22 +170,28 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 //MARK:Actions    
     @IBAction func countButtonClick(sender: UIButton) {
         if sender.tag == 1001 {
-            buyCount -= 1
-            buyCount = buyCount == 0 ? 1 : buyCount
-            showResult(buyCount)
+            skuCount -= 1
+            skuCount = skuCount == 0 ? 1 : skuCount
+            showResult(skuCount)
         }else{
-            buyCount += 1
-            showResult(buyCount)
+            skuCount += 1
+            showResult(skuCount)
         }
     }
     
     @IBAction func sureButtonClick(sender: UIButton) {
-        skuModel.skuProductCount = buyCount
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWGoodsSureBuyNotificationKey, object:skuModel)
+        let model = WOWBuyCarModel()
+        model.skuProductCount = skuCount
+        model.skuName = skuName
+        model.skuProductPrice = skuPerPrice
+        model.skuProductImageUrl = skuImageUrl
+        model.skuProductName = productName
+        model.skuID = skuID
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWGoodsSureBuyNotificationKey, object:model)
     }
     
     private func showResult(count:Int){
-        self.countTextField.text = "\(buyCount)"
+        self.countTextField.text = "\(skuCount)"
     }
 
 
@@ -218,31 +234,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let arr = dataArr {
-            let model = arr[indexPath.item]
-            perPriceLabel.text = model.skuPrice?.priceFormat()
-            skuModel.skuProductPrice = model.skuPrice ?? ""
-            skuModel.skuName  = model.skuTitle ?? ""
-            skuModel.skuID    = model.skuID ?? ""
+            let model                = arr[indexPath.item]
+            perPriceLabel.text       = model.skuPrice?.priceFormat()
+            skuPerPrice              = model.skuPrice ?? ""
+            skuName                  = model.skuTitle ?? ""
+            skuID                    = model.skuID ?? ""
         }
     }
-    
 }
-
-
-//class PostBuyModel{
-//    var count:Int = 0
-//    var perPrice:String = ""
-//        /// 产品规格
-//    var typeStrng:String = ""
-//    init(count:Int,price:String,typeString:String?){
-//        self.count = count
-//        self.perPrice = price
-//        self.typeStrng = typeString ?? ""
-//    }
-//    
-//    
-//}
-
-
-
 

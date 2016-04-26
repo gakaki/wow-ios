@@ -98,7 +98,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productid: productID ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(product_id: productID ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.configData()
@@ -147,7 +147,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     lazy var buyView:WOWGoodsBuyView = {
-        WOWBuyCarMananger.sharedBuyCar.producModel = self.productModel
         let v = NSBundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView
         v.collectionView.reloadData()
         return v
@@ -160,7 +159,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
 
 //MARK:选择规格
     @IBAction func buyButtonClick(sender: UIButton) {
-        buyView.dataArr = productModel?.skus
+        WOWBuyCarMananger.sharedBuyCar.producModel = self.productModel
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
         backView.show()
@@ -347,6 +346,8 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         commentView.addAction{[weak self] in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
+                vc.commentType = CommentType.Product
+                vc.mainID = self?.productID!
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }

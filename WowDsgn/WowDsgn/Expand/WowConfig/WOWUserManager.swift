@@ -76,11 +76,13 @@ struct WOWUserManager {
     }
     
     
-    static func saveUserInfo(data:AnyObject){
-        let model = Mapper<WOWUserModel>().map(data)
-        MGDefault.setObject(model?.userID, forKey:WOWUserID)
+    static func saveUserInfo(model:WOWUserModel?){
         //FIXME:测试的userID
-        MGDefault.setObject("456789", forKey:WOWUserID)
+        MGDefault.setObject(model?.userID, forKey:WOWUserID)
+        MGDefault.setObject(model?.user_sex, forKey:WOWUserSex)
+        MGDefault.setObject(model?.user_nick, forKey:WOWUserName)
+        MGDefault.setObject(model?.user_desc, forKey:WOWUserDes)
+        MGDefault.setObject(model?.user_headimage, forKey:WOWUserHeadImage)
         MGDefault.synchronize()
     }
     

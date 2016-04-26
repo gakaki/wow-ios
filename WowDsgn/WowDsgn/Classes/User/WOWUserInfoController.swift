@@ -62,8 +62,16 @@ class WOWUserInfoController: WOWBaseTableViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_UserUpdate(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 DLog(result)
+                let model = Mapper<WOWUserModel>().map(result["user"])
+                strongSelf.sexLabel.text    = model?.user_sex
+                strongSelf.desLabel.text    = model?.user_desc
+                strongSelf.nickLabel.text   = model?.user_nick
+                strongSelf.headImageView.kf_setImageWithURL(NSURL(string:model?.user_headimage ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+                WOWHud.dismiss()
+                WOWUserManager.saveUserInfo(model)
             }
         }) { (errorMsg) in
+            WOWHud.dismiss()
             DLog(errorMsg)
         }
     }
@@ -97,7 +105,6 @@ extension WOWUserInfoController{
         alertController.addAction(cancelAction)
         let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
             let field = alertController.textFields?.first
-            self.desLabel.text = field?.text
             self.des = field?.text ?? ""
             self.request()
         }
@@ -150,7 +157,6 @@ extension WOWUserInfoController{
         alertController.addAction(cancelAction)
         let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
             let field = alertController.textFields?.first
-            self.nickLabel.text = field?.text
             self.nick = field?.text ?? ""
             self.request()
         }
@@ -168,13 +174,11 @@ extension WOWUserInfoController{
         }
         actionSheetController.addAction(cancelAction)
         let manAction: UIAlertAction = UIAlertAction(title: "男", style: .Default) { action -> Void in
-            self.sexLabel.text = "男"
             self.sex = "男"
             self.request()
         }
         actionSheetController.addAction(manAction)
         let womanAction: UIAlertAction = UIAlertAction(title: "女", style: .Default) { action -> Void in
-            self.sexLabel.text = "女"
             self.sex = "女"
             self.request()
         }
@@ -191,21 +195,20 @@ extension WOWUserInfoController{
 
 extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        headImageView.image = image
         picker.dismissViewControllerAnimated(true, completion: nil)        
         let data = UIImageJPEGRepresentation(image,0.8)
         let file = AVFile(name:"headimage.jpg", data:data)
         WOWHud.showLoading()
         file.saveInBackgroundWithBlock {[weak self] (ret,error) in
-            if let stongSelf = self{
+            if let strongSelf = self{
                 if let e = error{
                     DLog(e)
                     WOWHud.showMsg("头像修改失败")
                     return
                 }else{
-                    stongSelf.headImageUrl = file.url ?? ""
-                    stongSelf.request()
-                    
+                    strongSelf.headImageUrl = file.url
+                    strongSelf.request()
+
                     /*
                     let wowUser = AVQuery(className:"WOWUser")
                     wowUser.whereKey("wowuserid", equalTo:WOWUserManager.userID)

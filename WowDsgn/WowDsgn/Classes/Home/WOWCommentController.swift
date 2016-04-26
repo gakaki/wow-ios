@@ -8,8 +8,15 @@
 
 import UIKit
 
+enum CommentType {
+    case Sence
+    case Product
+}
+
 class WOWCommentController: WOWBaseViewController {
+    var mainID:String!
     let cellID = String(WOWCommentCell)
+    var commentType:CommentType = CommentType.Sence
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!
     
@@ -20,7 +27,7 @@ class WOWCommentController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
-        // Do any additional setup after loading the view.
+        request()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -53,12 +60,41 @@ class WOWCommentController: WOWBaseViewController {
     
     
     private func send(){
-        inputTextView.resignFirstResponder()
-        DLog("发送评论:\(inputTextView.text)")
-        inputTextView.text = ""
-        inputConstraint.constant = 30
+        guard WOWUserManager.loginStatus else{
+            goLogin()
+            return
+        }
+        let comments = inputTextView.text
+        guard !comments.isEmpty else{
+            WOWHud.showMsg("请输入评论")
+            return
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(.Api_SubmitComment(uid:WOWUserManager.userID,comment:comments,product_id:self.mainID), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                WOWHud.showMsg("评论成功")
+                strongSelf.endEditing()
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endEditing()
+            }
+        }
+    }
+    
+    private func endEditing(){
+        self.inputTextView.resignFirstResponder()
+        self.inputTextView.text = ""
+        self.inputConstraint.constant = 30
         self.view.layoutIfNeeded()
     }
+    
+    
+    private func goLogin(){
+        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
+        presentViewController(vc, animated: true, completion: nil)
+    }
+    
     
     private func addObserver(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyBoardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
@@ -98,8 +134,21 @@ class WOWCommentController: WOWBaseViewController {
         }else{
             animations()
         }
-
     }
+    
+//MARK:Private Network
+    override func request() {
+        super.request()
+        //FIXME:评论列表接口目前是挂掉的
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(product_id:self.mainID), successClosure: {[weak self](result) in
+            if let strongSelf = self{
+                DLog(result)
+                
+            }
+        }) {(errorMsg) in
+        }
+    }
+    
 }
 
 extension WOWCommentController:UITextViewDelegate{

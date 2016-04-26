@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 class WOWBuyCarModel: Object,Mappable{
-    dynamic var skuProductCount:Int        = 0
+    dynamic var skuProductCount:Int        = 1
     dynamic var skuProductName:String      = ""
     dynamic var skuProductPrice:String     = ""
     dynamic var skuProductImageUrl:String  = ""

@@ -81,28 +81,12 @@ class WOWLoginController: WOWBaseViewController {
         }
         WOWNetManager.sharedManager.requestWithTarget(.Api_Login(phone,passwd), successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                DLog(result)
                 WOWHud.showMsg("登录成功")
-                WOWUserManager.saveUserInfo(result)
-                //获取HeadImageUrl
-                let wowUser = AVQuery(className:"WOWUser")
-//                wowUser.whereKey("wowuserid", equalTo:WOWUserManager.userID)
-                //FIXME:测试数据
-                wowUser.whereKey("wowuserid", equalTo:"456789")
-                wowUser.findObjectsInBackgroundWithBlock({[weak self] (objects, error) in
-                    if let _ = self{
-                        if let e = error{
-                            DLog(e)
-                            return
-                        }
-                        if let object = objects.last as? AVObject{
-                            let headImageUrl = object.valueForKey("wowheadimageurl") as? String ?? ""
-                            WOWUserManager.userHeadImageUrl = headImageUrl
-                        }
-                    }
-                    NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                        strongSelf.dismissViewControllerAnimated(true, completion: nil)
-                    })
+                
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 })
             }
         }) {[weak self] (errorMsg) in

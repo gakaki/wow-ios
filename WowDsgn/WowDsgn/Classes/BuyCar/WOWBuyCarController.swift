@@ -263,6 +263,11 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
+        allButton.selected = false
+        selectedArr = []
+    }
+    
     func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         return "删除"
     }

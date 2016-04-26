@@ -21,7 +21,11 @@ public enum RequestApi{
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String)
     
-    case Api_ProductDetail(productid:String)
+    case Api_ProductDetail(product_id:String)
+    
+    case Api_CommentList(product_id:String)
+    
+    case Api_SubmitComment(uid:String,comment:String,product_id:String)
     
     case Api_UserUpdate(param:[String:String])
     
@@ -50,6 +54,10 @@ extension RequestApi:TargetType{
             return URL_product
         case .Api_ProductDetail:
             return URL_product_detail
+        case .Api_CommentList:
+            return URL_CommentList
+        case .Api_SubmitComment:
+            return URL_SubmitComment
         case .Api_UserUpdate:
             return URL_UpdateInfo
         case .Api_Login:
@@ -73,8 +81,12 @@ extension RequestApi:TargetType{
             return ["account":account,"password":password]
         case let .Api_ProductList(pageindex,categoryID,style,sort):
             return ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort]
-        case let .Api_ProductDetail(productid):
-            return ["id":productid]
+        case let .Api_ProductDetail(product_id):
+            return ["id":product_id]
+        case let .Api_CommentList(product_id):
+            return ["product_id":product_id]
+        case let .Api_SubmitComment(uid,comment,product_id):
+            return ["uid":uid,"product_id":product_id,"comment":comment]
         case let .Api_UserUpdate(param):
             return param
         default:

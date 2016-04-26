@@ -13,7 +13,7 @@ import Foundation
 //测服地址 http://api.dev.wowdsgn.com
 
 let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/"
-
+//let BaseUrl = "http://127.0.0.1:8360/apiv1/"
 
 /****************************API_URL接口**********************************/
 

@@ -75,7 +75,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func saveNetBuyCar(model:WOWBuyCarModel){
         let uid = WOWUserManager.userID
-        let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID]]
+        let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName]]
         let param = ["uid":uid,"cart":carItems]
         let string = JSONStringify(param)
         DLog(string)

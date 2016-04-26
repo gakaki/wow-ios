@@ -99,7 +99,8 @@ class WOWBuyCarController: WOWBaseViewController {
                 let string = JSONStringify(param)
                 WOWNetManager.sharedManager.requestWithTarget(.Api_CarList(cart:string), successClosure: {[weak self](result) in
                     if let strongSelf = self{
-                        DLog(result)
+                        let json = JSON(result)
+                        
                     }
                 }, failClosure: { (errorMsg) in
                         

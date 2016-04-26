@@ -24,7 +24,7 @@ struct WOWHud {
     
     static func showMsg(message:String?){
         configSVHud()
-        let msg = message ?? "请求失败"
+        let msg = message ?? "网络错误"
         SVProgressHUD.showInfoWithStatus(msg)
     }
     

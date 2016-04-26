@@ -56,13 +56,13 @@ class WOWNetManager {
                             return
                         }
                     }else{
-                        failClosure(errorMsg:"请求失败")
-                        WOWHud.showMsg("请求失败")
+                        failClosure(errorMsg:"网络错误")
+                        WOWHud.showMsg("网络错误")
                         return
                     }
                     guard let data = info?.data else{
-                        failClosure(errorMsg:"请求失败")
-                        WOWHud.showMsg("请求失败")
+                        failClosure(errorMsg:"网络错误")
+                        WOWHud.showMsg("网络错误")
                         return
                     }
                     if let endMsg = target.endSuccessMsg{
@@ -73,7 +73,7 @@ class WOWNetManager {
                     successClosure(result:data)
                 case let .Failure(error):
                     DLog(error)
-                    WOWHud.showMsg("请求失败")
+                    WOWHud.showMsg("网络错误")
                     break
             }
         }

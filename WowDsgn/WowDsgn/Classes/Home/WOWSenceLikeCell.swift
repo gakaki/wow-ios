@@ -21,6 +21,12 @@ class WOWSenceLikeCell: UITableViewCell {
         }
     }
     
+    var orderArr = [WOWBuyCarModel](){
+        didSet{
+            collectionView.reloadData()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
@@ -38,13 +44,21 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        if orderTag {
+            return orderArr.count
+        }else{
+            //FIXME:测试数据
+            return 50
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWImageCell), forIndexPath: indexPath) as! WOWImageCell
+        if orderTag {
+            let orderItem = orderArr[indexPath.item]
+            cell.pictureImageView.kf_setImageWithURL(NSURL(string:orderItem.skuProductImageUrl)!, placeholderImage: UIImage(named: "placeholder_product"))
+        }
         //FIXME:测试
-        cell.pictureImageView.image = UIImage(named: "testHeadImage")
         cell.pictureImageView.layer.cornerRadius = 15
         return cell
     }

@@ -214,15 +214,19 @@ class WOWBuyCarController: WOWBaseViewController {
     }
     
     @IBAction func endButtonClick(sender: UIButton) {
+        if selectedArr.isEmpty {
+            WOWHud.showMsg("您还没有选中商品哦")
+            return
+        }
         if isEditing { //删除
             if selectedArr.isEmpty {
-                WOWHud.showMsg("您还没有选中商品哦")
                 return
             }
             removeCarItem(selectedArr)
         }else{ //结算
             if  WOWUserManager.loginStatus {
                 let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWSureOrderController") as! WOWSureOrderController
+                sv.productArr = selectedArr
                 navigationController?.pushViewController(sv, animated: true)
             }else{
                 goLogin()
@@ -372,9 +376,12 @@ class WOWBuyCarController: WOWBaseViewController {
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                strongSelf.editingModel?.skuName = model.skuName
-                strongSelf.editingCell?.typeLabel.text = model.skuName
-                strongSelf.editingCell?.countTextField.text = "\(model.skuProductCount)"
+                strongSelf.dataArr = []
+                let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                if let a = array{
+                    strongSelf.dataArr.appendContentsOf(a)
+                    strongSelf.tableView.reloadData()
+                }
             }
         }) { (errorMsg) in
             

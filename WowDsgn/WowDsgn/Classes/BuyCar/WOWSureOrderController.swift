@@ -13,6 +13,7 @@ class WOWSureOrderController: WOWBaseViewController {
     @IBOutlet weak var goodsCountLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    var productArr:[WOWBuyCarModel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,10 +92,12 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         case 2: //商品清单
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell), forIndexPath: indexPath) as! WOWSenceLikeCell
             cell.orderTag = true
-            cell.rightTitleLabel.text = "共xx件"
+            cell.rightTitleLabel.text = "共\(productArr.count)件"
+            cell.orderArr = productArr
             cell.rightBackView.addAction({ [weak self] in
                 if let strongSelf = self{
                     let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWCarGoodsListController") as! WOWCarGoodsListController
+                    vc.productArr = strongSelf.productArr
                     strongSelf.navigationController?.pushViewController(vc, animated: true)
                 }
             })

@@ -15,7 +15,7 @@ class WOWBuyCarController: WOWBaseViewController {
     private var editingModel    : WOWBuyCarModel?
     private var rightItemButton : UIButton!
     private var totalPrice      : String?
-    //FIXME:测试数据
+    
     private var dataArr = [WOWBuyCarModel](){
         didSet{
             if dataArr.isEmpty {
@@ -176,7 +176,6 @@ class WOWBuyCarController: WOWBaseViewController {
     }
     
     private func configNav(){
-        //FIXME:测试数据
         navigationItem.title = "购物车"
         makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
             if let strongSelf = self{

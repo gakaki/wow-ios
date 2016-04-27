@@ -103,7 +103,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     private var productName :String = ""
     private var productID   :String = ""
     
-//    var token: dispatch_once_t = 0
     override init(frame: CGRect) {
         super.init(frame: frame)
 

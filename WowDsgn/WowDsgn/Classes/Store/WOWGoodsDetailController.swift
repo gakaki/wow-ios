@@ -111,6 +111,13 @@ class WOWGoodsDetailController: WOWBaseViewController {
     private func configData(){
         cycleView.imageURLArray = [productModel?.productImage ?? ""]
     }
+    
+//MARK:Actions
+    
+    @IBAction func carEntranceClick(sender: UIButton) {
+        let buyCar = UIStoryboard.initialViewController("BuyCar")
+        self.presentViewController(buyCar, animated: true, completion: nil)
+    }
 
 //MARK:Private Network
     override func request() {

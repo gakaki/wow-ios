@@ -336,6 +336,7 @@ class WOWBuyCarController: WOWBaseViewController {
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                strongSelf.editingModel?.skuName = model.skuName
                 strongSelf.editingCell?.typeLabel.text = model.skuName
                 strongSelf.editingCell?.countTextField.text = "\(model.skuProductCount)"
             }
@@ -359,17 +360,15 @@ class WOWBuyCarController: WOWBaseViewController {
         if WOWUserManager.loginStatus { //登录
             asyncCarDelete(items)
         }else{ //未登录
-            try! WOWRealm.write({
-                WOWRealm.delete(items)
-            })
+            for delModel in items {
+                let model = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(delModel.skuID)'")
+                try! WOWRealm.write({
+                    WOWRealm.delete(model)
+                })
+            }
             self.removeObjectsInArray(items)
             self.tableView.reloadData()
         }
-    }
-    
-//MARK:Private Network
-    override func request() {
-        super.request()
     }
 }
 
@@ -421,8 +420,10 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
             if WOWUserManager.loginStatus {
                 asyncCarDelete([dataArr[indexPath.row]])
             }else{ //未登录
+                let delModel = dataArr[indexPath.row]
+                let model = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(delModel.skuID)'")
                 try! WOWRealm.write({
-                    WOWRealm.delete(dataArr[indexPath.row])
+                    WOWRealm.delete(model)
                 })
                 dataArr.removeAtIndex(indexPath.row)
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -498,10 +499,9 @@ extension WOWBuyCarController:CarEditCellDelegate{
             //存入本地数据库 先判断是否存在
             let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
             if let m = skus.first{
-                m.skuProductCount = model.skuProductCount
                dispatch_async(dispatch_get_main_queue(), { 
                     try! WOWRealm.write({
-                        WOWRealm.add(m, update: true)
+                        m.skuProductCount = model.skuProductCount
                     })
                })
             }else{

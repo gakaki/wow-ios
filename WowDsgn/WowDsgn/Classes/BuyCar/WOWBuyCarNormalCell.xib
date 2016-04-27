@@ -14,18 +14,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9K-Hp-I0F">
-                        <rect key="frame" x="15" y="41" width="26" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="26" id="GdR-CM-ZlS"/>
-                            <constraint firstAttribute="width" constant="26" id="Xbp-qs-uE2"/>
-                        </constraints>
-                        <state key="normal" image="car_check"/>
-                        <state key="selected" image="checked"/>
-                        <connections>
-                            <action selector="checkButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Nz3-Ck-eyf"/>
-                        </connections>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qgX-zd-Hl4">
                         <rect key="frame" x="49" y="14" width="80" height="80"/>
                         <constraints>
@@ -57,6 +45,18 @@
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9K-Hp-I0F">
+                        <rect key="frame" x="15" y="41" width="26" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="GdR-CM-ZlS"/>
+                            <constraint firstAttribute="width" constant="26" id="Xbp-qs-uE2"/>
+                        </constraints>
+                        <state key="normal" image="car_check"/>
+                        <state key="selected" image="checked"/>
+                        <connections>
+                            <action selector="checkButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Nz3-Ck-eyf"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ks0-k6-Sg4" firstAttribute="bottom" secondItem="qgX-zd-Hl4" secondAttribute="bottom" id="4G3-RD-keE"/>

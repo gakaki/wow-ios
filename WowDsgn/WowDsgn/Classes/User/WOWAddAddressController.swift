@@ -65,40 +65,54 @@ class WOWAddAddressController: WOWBaseTableViewController {
     }
     
     private func configPicker(){
-        let view = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 300))
+        let view = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 290))
         view.backgroundColor = UIColor.whiteColor()
-        let topView = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 50))
-        topView.backgroundColor = UIColor.redColor()
+        let topView = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 40))
+        topView.backgroundColor = UIColor.whiteColor()
         view.addSubview(topView)
         
         let cancelButton = UIButton(type: .System)
         cancelButton.backgroundColor = UIColor.whiteColor()
         cancelButton.setTitleColor(GrayColorlevel2, forState:.Normal)
-        cancelButton.frame = CGRectMake(15, 0, 60, 50)
+        cancelButton.setTitle("取消", forState:.Normal)
+        cancelButton.frame = CGRectMake(8, 0, 60, 40)
         cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
         topView.addSubview(cancelButton)
         
         let sureButton = UIButton(type: .System)
+        sureButton.setTitle("确定", forState:.Normal)
         sureButton.backgroundColor = UIColor.whiteColor()
         sureButton.setTitleColor(GrayColorlevel2, forState:.Normal)
-        sureButton.frame = CGRectMake(MGScreenWidth - 75, 0, 60, 50)
+        sureButton.frame = CGRectMake(MGScreenWidth - 68, 0, 60, 45)
         sureButton.addTarget(self, action:#selector(sure), forControlEvents:.TouchUpInside)
         topView.addSubview(sureButton)
         
-        pickerView.frame = CGRectMake(0, 50, MGScreenWidth, 250)
+        pickerView.frame = CGRectMake(0, 40, MGScreenWidth, 250)
         pickerView.backgroundColor      = GrayColorLevel5
         pickerView.delegate             = self
         pickerView.dataSource           = self
         view.addSubview(pickerView)
-        detailAddressTextView.inputView = view
+        cityTextField.inputView = view
     }
     
     func cancel(){
-        detailAddressTextView.resignFirstResponder()
+        cityTextField.resignFirstResponder()
     }
     
     func sure() {
-        detailAddressTextView.resignFirstResponder()
+        let provinceIndex   = pickerView.selectedRowInComponent(0)
+        let cityIndex       = pickerView.selectedRowInComponent(1)
+        let districtIndex   = pickerView.selectedRowInComponent(2)
+        let p = self.provinces![provinceIndex].objectForKey("state") as? String
+        let c = self.cities![cityIndex].objectForKey("city") as? String
+        var d : String? = ""
+        if self.districts?.count != 0 {
+            d = self.districts![districtIndex] as? String
+        }
+        let address = (p ?? "") + (c ?? "") + (d ?? "")
+        DLog("选择的地址\(address)")
+        cityTextField.text = address
+        cityTextField.resignFirstResponder()
     }
     
     
@@ -172,21 +186,16 @@ extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
             // reselect 1st city
             self.pickerView.selectRow(0, inComponent: 1, animated: true)
             self.pickerView.reloadComponent(1)
-            
             self.districts = cities?.objectAtIndex(0).objectForKey("areas") as? NSArray
-            
             // reselect 1st area
             self.pickerView.selectRow(0, inComponent: 2, animated: true)
             self.pickerView.reloadComponent(2)
             
         case 1:
             self.districts = cities?.objectAtIndex(row).objectForKey("areas") as? NSArray
-            
             // reselect 1st area
             self.pickerView.selectRow(0, inComponent: 2, animated: true)
             self.pickerView.reloadComponent(2)
-            
-            
         default:
             break
         }

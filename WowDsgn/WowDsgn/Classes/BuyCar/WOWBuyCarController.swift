@@ -122,6 +122,7 @@ class WOWBuyCarController: WOWBaseViewController {
             if let oldItem = oldSkus.first{ //以前有
                 model.skuProductCount += oldItem.skuProductCount
                 try! WOWRealm.write({
+                    //还会自增噻
                     WOWRealm.add(model, update: true)
                 })
             }else{//以前没
@@ -129,10 +130,6 @@ class WOWBuyCarController: WOWBaseViewController {
                     WOWRealm.add(model, update: true)
                 })
             }
-            
-//            let skuids = dataArr.map({ (model) -> String in
-//                return model.skuID
-//            })
             var exitIndex = -1
             for (index,value) in dataArr.enumerate() {
                 if value.skuID == model.skuID{
@@ -141,19 +138,20 @@ class WOWBuyCarController: WOWBaseViewController {
                 }
             }
             if exitIndex != -1{//包含了
-                let exitModel = dataArr[exitIndex]
-                model.skuProductCount = exitModel.skuProductCount + model.skuProductCount
+                editingModel!.skuProductCount = model.skuProductCount
+                editingModel?.skuName = model.skuName
+                editingModel?.skuID = model.skuID
                 dataArr.removeAtIndex(exitIndex)
-                dataArr.insert(model, atIndex:exitIndex)
             }else{//没包含
                 editingModel?.skuID = model.skuID
+                editingModel?.skuName = model.skuName
                 editingModel?.skuProductCount = model.skuProductCount
             }
             tableView.reloadData()
-//            configNewData()
         }
     }
-
+    
+    /*
     private func configNewData(){
         let objects = WOWRealm.objects(WOWBuyCarModel)
         guard !objects.isEmpty else{
@@ -165,7 +163,7 @@ class WOWBuyCarController: WOWBaseViewController {
         }
         tableView.reloadData()
     }
-    
+    */
 
     override func setUI() {
         super.setUI()

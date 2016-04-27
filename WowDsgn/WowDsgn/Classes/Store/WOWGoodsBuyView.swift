@@ -93,7 +93,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
-    var dataArr:[WOWProductSkuModel]? = WOWBuyCarMananger.sharedBuyCar.producModel?.skus
+    var dataArr:[WOWProductSkuModel]?
     
     private var skuCount:Int = 1
     private var skuPerPrice :String = ""
@@ -138,19 +138,23 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
     func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.producModel{
+            
             nameLabel.text = p.productName
-            perPriceLabel.text  = p.price?.priceFormat()
+            perPriceLabel.text  = WOWBuyCarMananger.sharedBuyCar.skuPrice.priceFormat()
             goodsImageView.kf_setImageWithURL(NSURL(string:p.productImage ?? " ")!, placeholderImage:UIImage(named: "placeholder_product"))
 
-            skuID       = p.skus?.first?.skuID ?? ""
+            skuID       = WOWBuyCarMananger.sharedBuyCar.skuID
             skuImageUrl = p.productImage ?? ""
-            skuName     = p.skus?.first?.skuTitle ?? ""
-            skuPerPrice = p.price ?? ""
-            skuCount    = 1
+            skuName     = WOWBuyCarMananger.sharedBuyCar.skuName ?? ""
+            skuPerPrice = WOWBuyCarMananger.sharedBuyCar.skuPrice
+            skuCount    = WOWBuyCarMananger.sharedBuyCar.buyCount
             productName = p.productName ?? ""
             productID   = p.productID ?? ""
-            
-            collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .None)
+            dataArr = WOWBuyCarMananger.sharedBuyCar.producModel?.skus
+            let index = WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect
+            collectionView.reloadData()
+            collectionView.selectItemAtIndexPath(NSIndexPath(forItem:index, inSection: 0), animated: true, scrollPosition: .None)
+            countTextField.text = "\(skuCount)"
         }
     }
     

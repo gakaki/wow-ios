@@ -16,6 +16,13 @@ class WOWBuyCarMananger {
 //    var skuDataArr:[WOWProductSkuModel]?
     var producModel:WOWProductModel?
     
+    var skuName:String?
     
+    var buyCount = 1
     
+    var skuID :String = ""
+    
+    var skuPrice:String = ""
+    
+    var skuDefaultSelect = 0
 }

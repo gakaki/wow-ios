@@ -79,7 +79,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
        
         let param = ["uid":uid,"cart":carItems,"tag":"0"]
         let string = JSONStringify(param)
-        DLog(string)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let _ = self{
                 
@@ -172,6 +171,11 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:选择规格
     @IBAction func buyButtonClick(sender: UIButton) {
         WOWBuyCarMananger.sharedBuyCar.producModel = self.productModel
+        WOWBuyCarMananger.sharedBuyCar.skuName     = self.productModel?.skus?.first?.skuTitle
+        WOWBuyCarMananger.sharedBuyCar.buyCount    = 1
+        WOWBuyCarMananger.sharedBuyCar.skuID       = self.productModel?.skus?.first?.skuID ?? ""
+        WOWBuyCarMananger.sharedBuyCar.skuPrice = productModel?.price ?? ""
+        WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
         backView.show()

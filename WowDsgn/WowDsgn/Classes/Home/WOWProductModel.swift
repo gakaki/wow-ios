@@ -37,6 +37,11 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var pics_compose    : [WOWProductPicTextModel]? //图文详情
     var pics_carousel   : [String]?  //详情轮播的图片
     
+    override init() {
+        super.init()
+    }
+    
+    
     required init?(_ map: Map) {
         
     }

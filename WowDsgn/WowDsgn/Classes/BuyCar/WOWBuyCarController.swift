@@ -112,60 +112,50 @@ class WOWBuyCarController: WOWBaseViewController {
         if WOWUserManager.loginStatus { //登录
             asyncUpdate(model)
         }else{
-            //先把老的删掉
-            let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
-            if let m = skus.first{
+            //存在一个和更改之后相同的东西
+            let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+            if let oldItem = exitSkus.first{ //这个是老的
                 try! WOWRealm.write({
-                    WOWRealm.delete(m)
+                    oldItem.skuProductCount += model.skuProductCount
                 })
+                let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
+                if let item = unUseSku.first {
+                    try! WOWRealm.write({
+                        WOWRealm.delete(item)
+                    })
+                }
+            }else{//更改之后它还是唯一的
+                let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
+                if let item = unUseSku.first {
+                    try! WOWRealm.write({
+                        WOWRealm.delete(item)
+                        WOWRealm.add(model,update: true)
+                    })
+                }
             }
-            //再来考虑合并的东西
-            let oldSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
-            if let oldItem = oldSkus.first{ //以前有
-                model.skuProductCount += oldItem.skuProductCount
-                try! WOWRealm.write({
-                    //还会自增噻
-                    WOWRealm.add(model, update: true)
-                })
-            }else{//以前没
-                try! WOWRealm.write({ 
-                    WOWRealm.add(model, update: true)
-                })
-            }
-            var exitIndex = -1
+
+            
+            var exitIndex:Int = Int(dataArr.indexOf({$0 == editingModel})!)
             for (index,value) in dataArr.enumerate() {
                 if value.skuID == model.skuID{
                     exitIndex = index
                     break
                 }
             }
-            if exitIndex != -1{//包含了
-                editingModel!.skuProductCount = model.skuProductCount
-                editingModel?.skuName = model.skuName
-                editingModel?.skuID = model.skuID
-                dataArr.removeAtIndex(exitIndex)
-            }else{//没包含
+            if editingModel == dataArr[exitIndex] { //两个是同一个
                 editingModel?.skuID = model.skuID
                 editingModel?.skuName = model.skuName
                 editingModel?.skuProductCount = model.skuProductCount
+            }else{
+                editingModel!.skuProductCount = dataArr[exitIndex].skuProductCount + model.skuProductCount
+                editingModel?.skuID = model.skuID
+                editingModel?.skuName = model.skuName
+                dataArr.removeAtIndex(exitIndex)
             }
             tableView.reloadData()
         }
     }
-    
-    /*
-    private func configNewData(){
-        let objects = WOWRealm.objects(WOWBuyCarModel)
-        guard !objects.isEmpty else{
-            return
-        }
-        dataArr = []
-        for model in objects {
-            dataArr.append(model)
-        }
-        tableView.reloadData()
-    }
-    */
+
 
     override func setUI() {
         super.setUI()

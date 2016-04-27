@@ -103,7 +103,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     private var productName :String = ""
     private var productID   :String = ""
     
-    var token: dispatch_once_t = 0
+//    var token: dispatch_once_t = 0
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -160,7 +160,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        dispatch_once(&token) {
             let height = self.collectionView.collectionViewLayout.collectionViewContentSize().height
             var endHeight:CGFloat = 200
             if UIDevice.deviceType.rawValue < 2{
@@ -173,7 +172,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 self.collectionViewHeight.constant = height
             }
             DLog("规格的collectionView的高度\(height)")
-        }
     }
 
     

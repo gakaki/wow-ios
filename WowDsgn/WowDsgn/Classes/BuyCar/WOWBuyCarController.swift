@@ -110,23 +110,61 @@ class WOWBuyCarController: WOWBaseViewController {
         if WOWUserManager.loginStatus { //登录
             asyncUpdate(model)
         }else{
-            editingCell?.typeLabel.text = model.skuName
-            //存入本地数据库 先判断是否存在
-            let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+            //先把老的删掉
+            let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
             if let m = skus.first{
-                let count = m.skuProductCount
-                model.skuProductCount += count
+                try! WOWRealm.write({
+                    WOWRealm.delete(m)
+                })
+            }
+            //再来考虑合并的东西
+            let oldSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+            if let oldItem = oldSkus.first{ //以前有
+                model.skuProductCount += oldItem.skuProductCount
                 try! WOWRealm.write({
                     WOWRealm.add(model, update: true)
                 })
-            }else{
-//                try! WOWRealm.write({
-//                    WOWRealm.add(model, update:true)
-//                })
+            }else{//以前没
+                try! WOWRealm.write({ 
+                    WOWRealm.add(model, update: true)
+                })
             }
+            
+//            let skuids = dataArr.map({ (model) -> String in
+//                return model.skuID
+//            })
+            var exitIndex = -1
+            for (index,value) in dataArr.enumerate() {
+                if value.skuID == model.skuID{
+                    exitIndex = index
+                    break
+                }
+            }
+            if exitIndex != -1{//包含了
+                let exitModel = dataArr[exitIndex]
+                model.skuProductCount = exitModel.skuProductCount + model.skuProductCount
+                dataArr.removeAtIndex(exitIndex)
+                dataArr.insert(model, atIndex:exitIndex)
+            }else{//没包含
+                editingModel?.skuID = model.skuID
+                editingModel?.skuProductCount = model.skuProductCount
+            }
+            tableView.reloadData()
+//            configNewData()
         }
     }
 
+    private func configNewData(){
+        let objects = WOWRealm.objects(WOWBuyCarModel)
+        guard !objects.isEmpty else{
+            return
+        }
+        dataArr = []
+        for model in objects {
+            dataArr.append(model)
+        }
+        tableView.reloadData()
+    }
     
 
     override func setUI() {
@@ -331,7 +369,7 @@ class WOWBuyCarController: WOWBaseViewController {
      */
     private func asyncUpdate(model:WOWBuyCarModel){
         let uid = WOWUserManager.userID
-        let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName]]
+        let carItems = [["newskuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName,"oldskuid":editingModel!.skuID]]
         let param = ["uid":uid,"cart":carItems,"tag":"1"]
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
@@ -476,7 +514,7 @@ extension WOWBuyCarController:CarEditCellDelegate{
         productModel.productName    = model.skuProductName
         productModel.productImage   = model.skuProductImageUrl
         productModel.price          = model.skuProductPrice
-        
+        productModel.productID      = model.productID
         
         WOWBuyCarMananger.sharedBuyCar.skuPrice = model.skuProductPrice
         WOWBuyCarMananger.sharedBuyCar.skuID = model.skuID
@@ -488,6 +526,7 @@ extension WOWBuyCarController:CarEditCellDelegate{
         navigationController?.view.bringSubviewToFront(backView)
         backView.show()
     }
+    
     
     func carCountChange(model: WOWBuyCarModel, cell: WOWBurCarEditCell) {
         editingModel                = model

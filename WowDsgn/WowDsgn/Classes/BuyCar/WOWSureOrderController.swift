@@ -10,15 +10,18 @@ import UIKit
 
 class WOWSureOrderController: WOWBaseViewController {
 
-    @IBOutlet weak var goodsCountLabel: UILabel!
-    @IBOutlet weak var totalPriceLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    var productArr:[WOWBuyCarModel]!
+    @IBOutlet weak var goodsCountLabel  : UILabel!
+    @IBOutlet weak var totalPriceLabel  : UILabel!
+    @IBOutlet weak var tableView        : UITableView!
+    var totalPrice                      : String?
+    var productArr                      :[WOWBuyCarModel]!
+    
+    //post的参数
+    private var addressID               : String?
+//    private var payType                 :
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +33,8 @@ class WOWSureOrderController: WOWBaseViewController {
     override func setUI() {
         makeBackButton("购物车")
         navigationItem.title = "确认订单"
+        goodsCountLabel.text = "共\(productArr.count)件商品"
+        totalPriceLabel.text = "¥ " + (totalPrice ?? "")
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = GrayColorLevel5
@@ -45,9 +50,10 @@ class WOWSureOrderController: WOWBaseViewController {
 //MARK:Actions
     
     @IBAction func payButtonClick(sender: UIButton) {
-        DLog("结算")
-        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
-        navigationController?.pushViewController(vc, animated: true)
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! WOWTipsCell
+        let tips = cell.textField.text ?? ""
+//        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -110,9 +116,13 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWValue2Cell), forIndexPath:indexPath) as! WOWValue2Cell
             cell.leftViseLabel.hidden = indexPath.row == 0 ? false : true
             cell.leftLabel.text = titles[indexPath.row]
-            //FIXME:测试数据
-            cell.rightLabel.text = "¥ 00000"
-            cell.leftViseLabel.text = "(共多少件)"
+            switch indexPath.row {
+            case 0,2:
+                cell.rightLabel.text = "¥" + (totalPrice ?? "")
+            default:
+                cell.rightLabel.text = "¥ 0.0"
+            }
+            cell.leftViseLabel.text = "(共\(productArr.count)件)"
             if indexPath.row == 2 {
                 cell.leftLabel.font = FontMediumlevel003
             }

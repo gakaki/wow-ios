@@ -13,9 +13,11 @@ enum WOWAddressEntrance {
     case  Me
 }
 
+
+
 class WOWAddressController: WOWBaseTableViewController {
-    
     var entrance:WOWAddressEntrance = .Me
+    var pickerView: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,6 @@ class WOWAddressController: WOWBaseTableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.title = "收获地址"
         configFooter()
-         //FIXME:根据默认地址，再把勾打上
     }
     
     private func configFooter(){

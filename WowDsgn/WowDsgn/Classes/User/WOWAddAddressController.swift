@@ -18,8 +18,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     private var defaultAddress:Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,7 +49,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
 //MARK:Actions
     @IBAction func switchChanged(sender: UISwitch) {
         defaultAddress = sender.on
-        DLog("默认地址")
+        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

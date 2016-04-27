@@ -19,6 +19,7 @@ class WOWCommentController: WOWBaseViewController {
     var commentType:CommentType = CommentType.Sence
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!
+    var dataArr = [WOWCommentListModel]()
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
@@ -49,6 +50,7 @@ class WOWCommentController: WOWBaseViewController {
         WOWBorderRadius(self.inputTextView)
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 200
+        tableView.clearRestCell()
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:cellID)
         navigationItem.title = "评论"
     }
@@ -73,6 +75,13 @@ class WOWCommentController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_SubmitComment(uid:WOWUserManager.userID,comment:comments,product_id:self.mainID), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endEditing()
+                let model = WOWCommentListModel()
+                model.comment = comments
+                model.user_nick = WOWUserManager.userName
+                model.user_headimage = WOWUserManager.userHeadImageUrl
+                model.created_at = "刚刚"
+                strongSelf.dataArr.insert(model, atIndex: 0)
+                strongSelf.tableView.reloadData()
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
@@ -141,8 +150,11 @@ class WOWCommentController: WOWBaseViewController {
         //FIXME:评论列表接口目前是挂掉的
         WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(product_id:self.mainID), successClosure: {[weak self](result) in
             if let strongSelf = self{
-                
-                
+               let arr = Mapper<WOWCommentListModel>().mapArray(result)
+                if let array = arr{
+                    strongSelf.dataArr.appendContentsOf(array)
+                }
+                strongSelf.tableView.reloadData()
             }
         }) {(errorMsg) in
         }
@@ -211,8 +223,6 @@ extension WOWCommentController:UITextViewDelegate{
         }
         let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
         if ret == false{
-            DLog("超过了最多字符")
-            //FIXME:少了一个警告框
             WOWHud.showMsg("您输入的字符超过限制")
             return false
         }
@@ -227,15 +237,12 @@ extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return dataArr.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWCommentCell
-        //FIXME:测试
-        cell.headImageView.image = UIImage(named: "testHeadImage")
-        cell.commentLabel.text = "尖叫君☺️尖叫君☺️尖叫君\n☺️尖叫君☺️尖叫君☺️尖叫君☺️尖叫君☺️尖叫君☺️尖叫君☺️"
-        cell.nameLabel.text = "尖叫君"
+        cell.showData(dataArr[indexPath.row])
         return cell
     }
     

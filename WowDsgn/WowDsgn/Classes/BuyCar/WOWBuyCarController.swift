@@ -13,7 +13,8 @@ class WOWBuyCarController: WOWBaseViewController {
     let cellEditID   = String(WOWBurCarEditCell)
     private var editingCell     : WOWBurCarEditCell?
     private var editingModel    : WOWBuyCarModel?
-    private var rightItemButton:UIButton!
+    private var rightItemButton : UIButton!
+    private var totalPrice      : String?
     //FIXME:测试数据
     private var dataArr = [WOWBuyCarModel](){
         didSet{
@@ -39,6 +40,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     return model.skuProductCount
                 })
                 let result = WOWCalPrice.calTotalPrice(prices,counts:counts)
+                totalPrice = result
                 totalPriceLabel.text = "¥ " + result
             }
         }
@@ -227,6 +229,7 @@ class WOWBuyCarController: WOWBaseViewController {
             if  WOWUserManager.loginStatus {
                 let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWSureOrderController") as! WOWSureOrderController
                 sv.productArr = selectedArr
+                sv.totalPrice = totalPrice
                 navigationController?.pushViewController(sv, animated: true)
             }else{
                 goLogin()

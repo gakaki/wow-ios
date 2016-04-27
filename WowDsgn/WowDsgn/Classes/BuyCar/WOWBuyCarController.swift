@@ -11,7 +11,8 @@ import UIKit
 class WOWBuyCarController: WOWBaseViewController {
     let cellNormalID = String(WOWBuyCarNormalCell)
     let cellEditID   = String(WOWBurCarEditCell)
-    private var editingCell : WOWBurCarEditCell?
+    private var editingCell     : WOWBurCarEditCell?
+    private var editingModel    : WOWBuyCarModel?
     private var rightItemButton:UIButton!
     //FIXME:测试数据
     private var dataArr = [WOWBuyCarModel](){
@@ -456,7 +457,8 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 
 extension WOWBuyCarController:CarEditCellDelegate{
     func carEditCellAction(model:WOWBuyCarModel,cell:WOWBurCarEditCell) { //选择规格
-        editingCell = cell
+        editingModel                = model
+        editingCell                 = cell
         let productModel            = WOWProductModel()
         productModel.skus           = model.skus
         
@@ -487,8 +489,26 @@ extension WOWBuyCarController:CarEditCellDelegate{
     }
     
     func carCountChange(model: WOWBuyCarModel, cell: WOWBurCarEditCell) {
-        editingCell = cell
-        asyncUpdate(model)
+        editingModel                = model
+        editingCell                 = cell
+        if WOWUserManager.loginStatus {
+            asyncUpdate(model)
+        }else{
+            editingCell?.countTextField.text = "\(model.skuProductCount)"
+            //存入本地数据库 先判断是否存在
+            let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+            if let m = skus.first{
+                m.skuProductCount = model.skuProductCount
+               dispatch_async(dispatch_get_main_queue(), { 
+                    try! WOWRealm.write({
+                        WOWRealm.add(m, update: true)
+                    })
+               })
+            }else{
+
+            }
+
+        }
     }
     
     

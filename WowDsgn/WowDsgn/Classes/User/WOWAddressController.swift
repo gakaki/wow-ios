@@ -17,7 +17,7 @@ enum WOWAddressEntrance {
 
 class WOWAddressController: WOWBaseTableViewController {
     var entrance:WOWAddressEntrance = .Me
-    var pickerView: UIPickerView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,8 @@ class WOWAddressController: WOWBaseTableViewController {
         navigationItem.title = "收获地址"
         configFooter()
     }
+    
+
     
     private func configFooter(){
         let footerView = WOWMenuTopView(leftTitle: "新增地址", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
@@ -83,7 +85,7 @@ extension WOWAddressController{
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        DLog("选择了地址")
+        
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
@@ -96,5 +98,7 @@ extension WOWAddressController{
         return [delete,edit]
     }
 }
+
+
 
 

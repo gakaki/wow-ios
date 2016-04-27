@@ -61,6 +61,8 @@
 		2943FB331CBE5D4C00EC90EB /* WOWTagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2943FB311CBE5D4C00EC90EB /* WOWTagCollectionViewCell.xib */; };
 		2943FB371CBE604F00EC90EB /* TagCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943FB351CBE604F00EC90EB /* TagCellLayout.swift */; };
 		2943FB381CBE604F00EC90EB /* TagCellLayout+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943FB361CBE604F00EC90EB /* TagCellLayout+Helper.swift */; };
+		294948B11CD0E53900BA5DFC /* WOWProvinceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294948B01CD0E53900BA5DFC /* WOWProvinceModel.swift */; };
+		294948B31CD0ED6100BA5DFC /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 294948B21CD0ED6100BA5DFC /* area.plist */; };
 		295658EB1CBF499B0029B897 /* WOWTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295658EA1CBF499B0029B897 /* WOWTool.swift */; };
 		295658EE1CBF7EC00029B897 /* WOWBrandListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295658ED1CBF7EC00029B897 /* WOWBrandListModel.swift */; };
 		295658F01CBF8EEE0029B897 /* String+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295658EF1CBF8EEE0029B897 /* String+Add.swift */; };
@@ -292,6 +294,8 @@
 		2943FB311CBE5D4C00EC90EB /* WOWTagCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWTagCollectionViewCell.xib; sourceTree = "<group>"; };
 		2943FB351CBE604F00EC90EB /* TagCellLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCellLayout.swift; sourceTree = "<group>"; };
 		2943FB361CBE604F00EC90EB /* TagCellLayout+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TagCellLayout+Helper.swift"; sourceTree = "<group>"; };
+		294948B01CD0E53900BA5DFC /* WOWProvinceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWProvinceModel.swift; sourceTree = "<group>"; };
+		294948B21CD0ED6100BA5DFC /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		295658EA1CBF499B0029B897 /* WOWTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWTool.swift; sourceTree = "<group>"; };
 		295658ED1CBF7EC00029B897 /* WOWBrandListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBrandListModel.swift; sourceTree = "<group>"; };
 		295658EF1CBF8EEE0029B897 /* String+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Add.swift"; sourceTree = "<group>"; };
@@ -588,6 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				29E412771CC65BFE002A78B6 /* WOWUserModel.swift */,
+				294948B01CD0E53900BA5DFC /* WOWProvinceModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -690,6 +695,7 @@
 		2991AD0E1CBCCA0B00F5F5A0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				294948B21CD0ED6100BA5DFC /* area.plist */,
 				2991AD0F1CBCCA0B00F5F5A0 /* Assets.xcassets */,
 				2991AD101CBCCA0B00F5F5A0 /* StoryBoards */,
 				2991AD2F1CBCCA2900F5F5A0 /* WowDsgn-Bridging-Header.h */,
@@ -1226,6 +1232,7 @@
 				2991AD621CBCCA7400F5F5A0 /* Info.plist in Resources */,
 				2943FB241CBDE3AD00EC90EB /* WOWSenceLikeCell.xib in Resources */,
 				2991ADAE1CBCCAB100F5F5A0 /* WOWSenceImageCell.xib in Resources */,
+				294948B31CD0ED6100BA5DFC /* area.plist in Resources */,
 				2991AD591CBCCA7400F5F5A0 /* LICENSE in Resources */,
 				2943FB331CBE5D4C00EC90EB /* WOWTagCollectionViewCell.xib in Resources */,
 				2991AD2A1CBCCA0B00F5F5A0 /* LaunchScreen.storyboard in Resources */,
@@ -1305,6 +1312,7 @@
 				2991AD201CBCCA0B00F5F5A0 /* WOWBaseModel.swift in Sources */,
 				2912E0C81CC20D83005929D1 /* WOWOrderTransCell.swift in Sources */,
 				2991AD9B1CBCCAB100F5F5A0 /* WOWImageCell.swift in Sources */,
+				294948B11CD0E53900BA5DFC /* WOWProvinceModel.swift in Sources */,
 				2991ADDB1CBCCAD400F5F5A0 /* WOWMsgCodeController.swift in Sources */,
 				2943FB371CBE604F00EC90EB /* TagCellLayout.swift in Sources */,
 				2912E0E31CC26223005929D1 /* WOWAboutHeaderView.swift in Sources */,

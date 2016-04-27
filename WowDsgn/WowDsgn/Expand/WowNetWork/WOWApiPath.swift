@@ -41,9 +41,14 @@ let URL_activity                = "post"
 
 
 //*********************4.购物车**********
+// tag 为0 的时候 自增  为1的时候覆盖掉
 let URL_CarEdit                 = "cart/update"
 
 let URL_CarList                 = "cart/list"
+
+let URL_CarNologin              = "cart/nologinlistandadd"
+
+let URL_CarDelete               = "cart/del"
 
 
 //5.个人中心

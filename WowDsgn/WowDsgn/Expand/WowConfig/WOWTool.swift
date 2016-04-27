@@ -54,7 +54,7 @@ func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
             }
         }catch {
             print("error")
-            //Access error here
+            
         }
         
     }

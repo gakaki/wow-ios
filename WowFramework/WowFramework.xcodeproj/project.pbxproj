@@ -23,6 +23,7 @@
 
 /* Begin PBXBuildFile section */
 		2912E0BF1CC1FD84005929D1 /* UIColor+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2912E0BE1CC1FD84005929D1 /* UIColor+Add.swift */; };
+		292AB5AC1CD0659D00666BF4 /* Array+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292AB5AB1CD0659D00666BF4 /* Array+Add.swift */; };
 		295658FD1CBFC5D90029B897 /* UIButton+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295658FC1CBFC5D90029B897 /* UIButton+Add.swift */; };
 		2996D0751CBCC73600F257FF /* WowFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 2996D0741CBCC73600F257FF /* WowFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2996D0BB1CBCC7FE00F257FF /* NotificationCenter+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996D0A11CBCC7FE00F257FF /* NotificationCenter+Add.swift */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		2912E0BE1CC1FD84005929D1 /* UIColor+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Add.swift"; sourceTree = "<group>"; };
+		292AB5AB1CD0659D00666BF4 /* Array+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Add.swift"; sourceTree = "<group>"; };
 		295658FC1CBFC5D90029B897 /* UIButton+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Add.swift"; sourceTree = "<group>"; };
 		2996D0711CBCC73600F257FF /* WowFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WowFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2996D0741CBCC73600F257FF /* WowFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WowFramework.h; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 				2912E0BE1CC1FD84005929D1 /* UIColor+Add.swift */,
 			);
 			path = "UIColor+";
+			sourceTree = "<group>";
+		};
+		292AB5AA1CD0659000666BF4 /* Array+ */ = {
+			isa = PBXGroup;
+			children = (
+				292AB5AB1CD0659D00666BF4 /* Array+Add.swift */,
+			);
+			path = "Array+";
 			sourceTree = "<group>";
 		};
 		295658FB1CBFC5C60029B897 /* UIButton+ */ = {
@@ -130,6 +140,7 @@
 		2996D09F1CBCC7FE00F257FF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				292AB5AA1CD0659000666BF4 /* Array+ */,
 				2912E0BB1CC1FD66005929D1 /* UIColor+ */,
 				295658FB1CBFC5C60029B897 /* UIButton+ */,
 				2996D0A01CBCC7FE00F257FF /* NotificationCenter+ */,
@@ -364,6 +375,7 @@
 				2996D0C21CBCC7FE00F257FF /* UINib+Add.swift in Sources */,
 				2996D0C61CBCC7FE00F257FF /* UIView+Add.swift in Sources */,
 				2996D0C31CBCC7FE00F257FF /* UIStoryBoard+Add.swift in Sources */,
+				292AB5AC1CD0659D00666BF4 /* Array+Add.swift in Sources */,
 				2912E0BF1CC1FD84005929D1 /* UIColor+Add.swift in Sources */,
 				2996D0BF1CBCC7FE00F257FF /* UIDevice+Add.swift in Sources */,
 				2996D0BB1CBCC7FE00F257FF /* NotificationCenter+Add.swift in Sources */,

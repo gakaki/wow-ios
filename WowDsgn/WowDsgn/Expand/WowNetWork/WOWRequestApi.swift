@@ -31,6 +31,10 @@ public enum RequestApi{
     
     case Api_CarList(cart:String)
     
+    case Api_CarNologin(cart:String)
+    
+    case Api_CarDelete(cart:String)
+    
     case Api_UserUpdate(param:[String:String])
     
     case Api_Login(String,String)
@@ -68,6 +72,10 @@ extension RequestApi:TargetType{
             return URL_UpdateInfo
         case .Api_CarList:
             return URL_CarList
+        case .Api_CarNologin:
+            return URL_CarNologin
+        case .Api_CarDelete:
+            return URL_CarDelete
         case .Api_Login:
             return URL_login
         case .Api_Register:
@@ -100,6 +108,10 @@ extension RequestApi:TargetType{
         case let .Api_CarEdit(cart):
             return ["cart":cart]
         case let .Api_CarList(cart):
+            return ["cart":cart]
+        case let .Api_CarNologin(cart):
+            return ["cart":cart]
+        case let .Api_CarDelete(cart):
             return ["cart":cart]
         default:
             return nil

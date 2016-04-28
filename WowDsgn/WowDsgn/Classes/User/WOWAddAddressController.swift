@@ -24,6 +24,11 @@ class WOWAddAddressController: WOWBaseTableViewController {
     var districts:NSArray?
     var provinces:NSArray?
     
+    //net param
+    var province:String?    = ""
+    var city:String?        = ""
+    var district : String?  = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +37,6 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
-
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -57,8 +59,8 @@ class WOWAddAddressController: WOWBaseTableViewController {
             }
         }
         makeCustomerNavigationItem("保存", left: false) {[weak self] in
-            if let _ = self{
-                DLog("保存")
+            if let strongSelf = self{
+                strongSelf.saveAddress()
             }
         }
         configPicker()
@@ -103,17 +105,63 @@ class WOWAddAddressController: WOWBaseTableViewController {
         let provinceIndex   = pickerView.selectedRowInComponent(0)
         let cityIndex       = pickerView.selectedRowInComponent(1)
         let districtIndex   = pickerView.selectedRowInComponent(2)
-        let p = self.provinces![provinceIndex].objectForKey("state") as? String
-        let c = self.cities![cityIndex].objectForKey("city") as? String
-        var d : String? = ""
+        province = self.provinces![provinceIndex].objectForKey("state") as? String
+        city = self.cities![cityIndex].objectForKey("city") as? String
         if self.districts?.count != 0 {
-            d = self.districts![districtIndex] as? String
+            district = self.districts![districtIndex] as? String
         }
-        let address = (p ?? "") + (c ?? "") + (d ?? "")
-        DLog("选择的地址\(address)")
+        let address = (province ?? "") + (city ?? "") + (district ?? "")
         cityTextField.text = address
         cityTextField.resignFirstResponder()
     }
+    
+//MARK:Network
+    func saveAddress() {
+        let name = nameTextField.text ?? ""
+        if name.isEmpty {
+            WOWHud.showMsg("请输入姓名")
+            return
+        }
+        if !validatePhone(phoneTextField.text) {
+            return
+        }
+        guard let c = city where !c.isEmpty else{
+            WOWHud.showMsg("请选择省市区")
+            return
+        }
+        let detailAddress = detailAddressTextView.text
+        if detailAddress.isEmpty {
+            WOWHud.showMsg("请填写详细地址")
+            return
+        }
+        let is_def  = defaultSwitch.on ? "1" : "0"
+        let uid = WOWUserManager.userID
+        //FIXME:替换uid
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:uid, name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+            }
+        }) { (errorMsg) in
+                
+        }
+        
+    }
+    
+    
+    private func validatePhone(phoneNumber:String?) -> Bool{
+        guard let phone = phoneNumber where !phone.isEmpty else{
+            WOWHud.showMsg("请输入手机号")
+            return false
+        }
+        
+        guard phone.validateMobile() else{
+            WOWHud.showMsg("请输入正确的手机号")
+            return false
+        }
+        return true
+    }
+    
     
     
 //MARK:Actions

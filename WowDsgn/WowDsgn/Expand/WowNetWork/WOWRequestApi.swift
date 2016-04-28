@@ -42,6 +42,8 @@ public enum RequestApi{
     case Api_Register(account:String,password:String)
     
     case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
+    
+    case Api_AddressAdd(uid:String,name:String,province:String,city:String,district:String,street:String,mobile:String,is_default:String)
 }
 
 
@@ -84,7 +86,8 @@ extension RequestApi:TargetType{
             return URL_Register
         case .Api_Sms:
             return URL_Sms
-            
+        case .Api_AddressAdd:
+            return URL_AddressAdd
         }
     }
     
@@ -120,6 +123,8 @@ extension RequestApi:TargetType{
             return ["cart":cart]
         case let .Api_Sms(type,mobile):
             return ["type":type,"mobile":mobile]
+        case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default):
+            return ["uid":uid,"name":name,"province":province,"city":city,"district":district,"street":street,"mobile":mobile,"is_default":is_default]
         default:
             return nil
         }

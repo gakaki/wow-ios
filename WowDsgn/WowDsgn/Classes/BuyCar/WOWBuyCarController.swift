@@ -73,6 +73,7 @@ class WOWBuyCarController: WOWBaseViewController {
     }
     
     
+ //MARK:Private Method
     
     override func viewDidLoad() {
         super.viewDidLoad()

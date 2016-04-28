@@ -15,6 +15,7 @@ class WOWSureOrderController: WOWBaseViewController {
     @IBOutlet weak var tableView        : UITableView!
     var totalPrice                      : String?
     var productArr                      :[WOWBuyCarModel]!
+    var addressArr                      = [WOWAddressListModel]()
     
     //post的参数
     private var addressID               : String?
@@ -22,6 +23,7 @@ class WOWSureOrderController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        request()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +45,7 @@ class WOWSureOrderController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWTipsCell)), forCellReuseIdentifier:String(WOWTipsCell))
         tableView.registerNib(UINib.nibName(String(WOWValue2Cell)), forCellReuseIdentifier:String(WOWValue2Cell))
         tableView.keyboardDismissMode = .OnDrag
+//        tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: .None)
     }
     
     
@@ -53,6 +56,26 @@ class WOWSureOrderController: WOWBaseViewController {
         let tips = cell.textField.text ?? ""
 //        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
 //        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+//MARK:Network
+    override func request() {
+        super.request()
+        //请求地址数据
+        //FIXME:替换掉
+        let uid =  WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:"22"), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let arr = Mapper<WOWAddressListModel>().mapArray(result)
+                if let array = arr{
+                    strongSelf.addressArr = []
+                    strongSelf.addressArr.appendContentsOf(array)
+                    strongSelf.tableView.reloadData()
+                }
+            }
+        }) { (errorMsg) in
+                
+        }
     }
     
 }
@@ -66,7 +89,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:     //地址
-            return 2
+            return addressArr.count > 1 ? 1 : addressArr.count
         case 1:     //支付方式
             return 2
         case 2,3:   //商品清单,订单备注
@@ -83,6 +106,8 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         switch indexPath.section {
         case 0: //地址
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWAddressCell), forIndexPath: indexPath) as! WOWAddressCell
+            cell.checkButton.selected = true
+            cell.showData(addressArr[indexPath.row])
             returnCell = cell
         case 1: //支付方式
             let type = ["支付宝","微信支付"]
@@ -131,6 +156,10 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         return returnCell!
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let titles = ["收货信息","支付方式","商品清单","订单备注","订单汇总"]
         return titles[section]
@@ -147,15 +176,38 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     //尾视图  只有地址栏需要
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 { //地址
-            let footerView = WOWMenuTopView(leftTitle: "其他收货地址", rightHiden:false, topLineHiden: true, bottomLineHiden: false)
+            let footerView = WOWMenuTopView(leftTitle: "", rightHiden:false, topLineHiden: true, bottomLineHiden: false)
+            if addressArr.isEmpty {
+                footerView.leftLabel.text = "增加收货地址"
+                footerView.addAction({[weak self] in
+                    if let strongSelf = self{
+                        let addvc = UIStoryboard.initialViewController("User", identifier:String(WOWAddAddressController)) as! WOWAddAddressController
+                        addvc.entrance = .SureOrder
+                        addvc.action = {
+                            strongSelf.request()
+                        }
+                        strongSelf.navigationController?.pushViewController(addvc, animated: true)
+
+                    }
+                })
+            }else{
+                footerView.leftLabel.text = "其他收货地址"
+                footerView.addAction({[weak self] in
+                    if let strongSelf = self{
+                        let addvc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
+                        addvc.entrance = .SureOrder
+                        addvc.selectModel = strongSelf.addressArr.first
+                        addvc.action = {(model:AnyObject) in
+                            let m = model as! WOWAddressListModel
+                            strongSelf.addressID = m.id
+                            strongSelf.addressArr = [m]
+                            strongSelf.tableView.reloadData()
+                        }
+                        strongSelf.navigationController?.pushViewController(addvc, animated: true)
+                    }
+                })
+            }
             footerView.leftLabel.textColor = GrayColorlevel1
-            footerView.addAction({[weak self] in
-                if let strongSelf = self{
-                    let addvc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
-                    addvc.entrance = .SureOrder
-                    strongSelf.navigationController?.pushViewController(addvc, animated: true)
-                }
-            })
             return footerView
         }
         return nil

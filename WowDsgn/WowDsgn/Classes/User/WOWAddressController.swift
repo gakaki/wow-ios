@@ -18,7 +18,8 @@ enum WOWAddressEntrance {
 class WOWAddressController: WOWBaseTableViewController {
     var entrance:WOWAddressEntrance = .Me
     var dataArr = [WOWAddressListModel]()
-    
+    var action  : WOWObjectAction?
+    var selectModel : WOWAddressListModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -48,6 +49,7 @@ class WOWAddressController: WOWBaseTableViewController {
             }
         }
     }
+    
 
  
 //MARK:Network
@@ -86,7 +88,11 @@ extension WOWAddressController{
         switch entrance {
         case .SureOrder:
             cell.checkButton.hidden = false
-        case .Me:
+            if let selModel = selectModel{
+                let model = dataArr[indexPath.row]
+                cell.checkButton.selected = (model.id == selModel.id)
+            }
+            case .Me:
             cell.checkButton.hidden = true
         }
         cell.showData(dataArr[indexPath.row])
@@ -94,7 +100,20 @@ extension WOWAddressController{
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if entrance == .SureOrder {
+            if let ac = action{
+                ac(object: dataArr[indexPath.row])
+                navigationController?.popViewControllerAnimated(true)
+            }
+        }
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if self.entrance == .SureOrder {
+            return false
+        }else{
+            return true
+        }
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
@@ -106,6 +125,8 @@ extension WOWAddressController{
         }
         return [delete,edit]
     }
+    
+
     
     func editAddress(model:WOWAddressListModel) {
          let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController

@@ -21,7 +21,7 @@ class WOWAddressCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        checkButton.selected = selected
+//        checkButton.selected = selected
     }
     
     func showData(model:WOWAddressListModel)  {

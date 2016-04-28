@@ -33,7 +33,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     var district : String?  = ""
     
     var addressModel : WOWAddressListModel?
-    
+    var entrance:WOWAddressEntrance = .Me
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,6 +176,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
                             ac()
                             strongSelf.navigationController?.popViewControllerAnimated(true)
                         }
+                        
                     }else{
                         
                     }

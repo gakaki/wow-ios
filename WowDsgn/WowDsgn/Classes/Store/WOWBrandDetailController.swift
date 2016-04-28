@@ -17,7 +17,7 @@ class WOWBrandDetailController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var underView: WOWBrandUnderView!
     var brandModel:WOWBrandModel!
-    var effectView:UIVisualEffectView!
+//    var effectView:UIVisualEffectView!
     
     
     
@@ -39,12 +39,12 @@ class WOWBrandDetailController: WOWBaseViewController {
     private func configTableView(){
         let imageView = UIImageView(frame:tableView.bounds)
         //FIXME:测试
-        imageView.image = UIImage(named: "testBrandBack")
-        effectView = UIVisualEffectView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight - 35))
-        let blurEffect = UIBlurEffect(style: .Light)
-        effectView.effect = blurEffect
-        effectView.alpha = 0.1
-        imageView.addSubview(effectView)
+        imageView.image = UIImage(named: "brandBack")
+//        effectView = UIVisualEffectView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight - 35))
+//        let blurEffect = UIBlurEffect(style: .Light)
+//        effectView.effect = blurEffect
+//        effectView.alpha = 0.1
+//        imageView.addSubview(effectView)
         
         let shadownView = UIView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight - 35))
         shadownView.backgroundColor = UIColor.lightGrayColor()
@@ -85,6 +85,7 @@ extension WOWBrandDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWBrandDetailCell
+        cell.desTextLabel.textColor = MGRgb(0, g: 0, b: 0, alpha: 0.5)
         cell.desTextLabel?.text = brandModel.brandDesc
         cell.desTextLabel.shadowColor = MGRgb(0, g: 0, b: 0, alpha: 0.2)
         cell.desTextLabel.shadowOffset = CGSizeMake(1, 1)
@@ -94,7 +95,7 @@ extension WOWBrandDetailController:UITableViewDelegate,UITableViewDataSource{
 
 extension WOWBrandDetailController:UIScrollViewDelegate{
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        effectView.alpha = scrollView.contentOffset.y / scrollView.contentSize.height
+//        effectView.alpha = scrollView.contentOffset.y / scrollView.contentSize.height
     }
 }
 

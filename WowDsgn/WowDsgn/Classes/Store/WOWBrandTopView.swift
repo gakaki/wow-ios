@@ -69,7 +69,7 @@ class WOWBrandHeadView:UIView  {
     private func configSubviews(){
         backImageView = UIImageView()
         //FIXME:测试数据
-        backImageView.image = UIImage(named: "testBrandBack")
+        backImageView.image = UIImage(named: "brandBack")
         backImageView.contentMode = .ScaleAspectFill
         backImageView.clipsToBounds = true
         addSubview(backImageView)
@@ -83,7 +83,7 @@ class WOWBrandHeadView:UIView  {
         //FIXME:测试数据
         nameLabel.text = "尖叫君"
         nameLabel.font = FontMediumlevel001
-        nameLabel.textColor = UIColor.whiteColor()
+        nameLabel.textColor = GrayColorlevel2
         nameLabel.textAlignment = .Center
         addSubview(nameLabel)
         nameLabel.snp_makeConstraints {[weak self] (make) in

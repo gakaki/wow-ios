@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2912B5E11CD22D74009B29FD /* WOWIntroduceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2912B5E01CD22D74009B29FD /* WOWIntroduceController.swift */; };
 		2912E0B81CC1E9E5005929D1 /* WOWOrderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2912E0B61CC1E9E5005929D1 /* WOWOrderListCell.swift */; };
 		2912E0B91CC1E9E5005929D1 /* WOWOrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2912E0B71CC1E9E5005929D1 /* WOWOrderListCell.xib */; };
 		2912E0C11CC2055F005929D1 /* WOWOrderDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2912E0C01CC2055F005929D1 /* WOWOrderDetailController.swift */; };
@@ -228,6 +229,7 @@
 
 /* Begin PBXFileReference section */
 		290184FC22EBF7AEE29B0221 /* Pods_WowDsgn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WowDsgn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2912B5E01CD22D74009B29FD /* WOWIntroduceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWIntroduceController.swift; sourceTree = "<group>"; };
 		2912E0B61CC1E9E5005929D1 /* WOWOrderListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderListCell.swift; sourceTree = "<group>"; };
 		2912E0B71CC1E9E5005929D1 /* WOWOrderListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWOrderListCell.xib; sourceTree = "<group>"; };
 		2912E0C01CC2055F005929D1 /* WOWOrderDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderDetailController.swift; sourceTree = "<group>"; };
@@ -1046,6 +1048,7 @@
 				2991ADCB1CBCCAD400F5F5A0 /* WOWPasswordController.swift */,
 				2991ADCC1CBCCAD400F5F5A0 /* WOWRegistController.swift */,
 				2991ADCD1CBCCAD400F5F5A0 /* WOWRegistProtocolController.swift */,
+				2912B5E01CD22D74009B29FD /* WOWIntroduceController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1339,6 +1342,7 @@
 				2912E0E11CC24641005929D1 /* WOWUserHomeContainerView.swift in Sources */,
 				2991ADA11CBCCAB100F5F5A0 /* WOWMenuModel.swift in Sources */,
 				2991ADB31CBCCAB100F5F5A0 /* WOWBrandListController.swift in Sources */,
+				2912B5E11CD22D74009B29FD /* WOWIntroduceController.swift in Sources */,
 				2991ADAD1CBCCAB100F5F5A0 /* WOWSenceImageCell.swift in Sources */,
 				2991ADB01CBCCAB100F5F5A0 /* WOWSubArtCell.swift in Sources */,
 				291ACBD21CC4ECB600AFF02F /* WOWBannerModel.swift in Sources */,

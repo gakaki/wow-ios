@@ -18,6 +18,7 @@ class WOWSureOrderController: WOWBaseViewController {
     var addressArr                      = [WOWAddressListModel]()
     
     //post的参数
+    private var tipsTextField           : UITextField!
     private var addressID               : String?
     private var payType                 = "``````azsfcc"
     
@@ -53,8 +54,8 @@ class WOWSureOrderController: WOWBaseViewController {
 //MARK:Actions
     
     @IBAction func payButtonClick(sender: UIButton) {
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! WOWTipsCell
-        let tips = cell.textField.text ?? ""
+        let tips = tipsTextField.text ?? ""
+        DLog(tips)
 //        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
 //        navigationController?.pushViewController(vc, animated: true)
     }
@@ -136,6 +137,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             returnCell = cell
         case 3: //订单备注
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWTipsCell), forIndexPath:indexPath) as! WOWTipsCell
+            tipsTextField = cell.textField
             returnCell = cell
         case 4: //订单汇总
             let titles = ["订单合计","运费","实付金额"]

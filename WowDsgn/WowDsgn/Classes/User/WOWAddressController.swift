@@ -99,12 +99,36 @@ extension WOWAddressController{
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .Normal, title: "编辑") { (action, indexPath) in
-            
+            self.editAddress(self.dataArr[indexPath.row])
         }
         let delete = UITableViewRowAction(style: .Default, title: "删除") { (action, indexPath) in
-            DLog("删除")
+            self.deleteAddress(self.dataArr[indexPath.row])
         }
         return [delete,edit]
+    }
+    
+    func editAddress(model:WOWAddressListModel) {
+         let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
+        vc.addressModel = model
+        vc.action = {[weak self] in
+            if let strongSelf = self{
+                strongSelf.request()
+            }
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    func deleteAddress(model:WOWAddressListModel) {
+        let uid =  WOWUserManager.userID
+        //FIXME:更改uid
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(uid:"22", addressid: model.id ?? ""), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                strongSelf.request()
+            }
+        }) {(errorMsg) in
+                
+        }
     }
 }
 

@@ -75,10 +75,17 @@ class WOWAddAddressController: WOWBaseTableViewController {
     }
     
     private func configEditData(){
-        nameTextField.text  = addressModel?.name
-        phoneTextField.text = addressModel?.mobile
-        cityTextField.text = (addressModel?.province ?? "") + (addressModel?.city ?? "") + (addressModel?.district ?? "")
-//        detailAddressTextView.text = addressModel.street ?? ""
+        if let model = addressModel{
+            province = model.province
+            city = model.city
+            district = model.district
+            nameTextField.text  = model.name
+            phoneTextField.text = model.mobile
+            cityTextField.text = (model.province ?? "") + (model.city ?? "") + (model.district ?? "")
+            detailAddressTextView.text = model.street ?? ""
+            let status = (model.isDefault ?? 0) == 1
+            defaultSwitch.setOn(status, animated: true)
+        }
         
     }
     
@@ -154,8 +161,13 @@ class WOWAddAddressController: WOWBaseTableViewController {
         }
         let is_def  = defaultSwitch.on ? "1" : "0"
         let uid = WOWUserManager.userID
+        var addressdid = ""
+        if let model = addressModel {
+            addressdid = model.id ?? ""
+        }
+        
         //FIXME:uid要替换
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:"22", name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:"22", name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def,addressid:addressdid), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result).int
                 if let ret = json{
@@ -188,7 +200,16 @@ class WOWAddAddressController: WOWBaseTableViewController {
         }
         return true
     }
-    
+
+//MARK:Delegate
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if let model = addressModel{
+            if model.isDefault == 1{
+                return 1
+            }
+        }
+        return 2
+    }
     
     
 //MARK:Actions

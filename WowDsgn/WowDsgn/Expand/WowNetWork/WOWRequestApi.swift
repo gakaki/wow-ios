@@ -45,9 +45,11 @@ public enum RequestApi{
     
     case Api_ResetPwd(mobile:String,code:String,password:String)
     
-    case Api_AddressAdd(uid:String,name:String,province:String,city:String,district:String,street:String,mobile:String,is_default:String)
+    case Api_AddressAdd(uid:String,name:String,province:String,city:String,district:String,street:String,mobile:String,is_default:String,addressid:String)
     
     case Api_Addresslist(uid:String)
+
+    case Api_AddressDelete(uid:String,addressid:String)
 }
 
 
@@ -96,6 +98,8 @@ extension RequestApi:TargetType{
             return URL_AddressAdd
         case .Api_Addresslist:
             return URL_AddressList
+        case .Api_AddressDelete:
+            return URL_AddressDelete
         }
     }
     
@@ -133,10 +137,12 @@ extension RequestApi:TargetType{
             return ["type":type,"mobile":mobile]
         case let .Api_ResetPwd(mobile, code, password):
             return ["mobile":mobile,"code":code,"password":password]
-        case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default):
-            return ["uid":uid,"name":name,"province":province,"city":city,"district":district,"street":street,"mobile":mobile,"is_default":is_default]
+        case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default,addressid):
+            return ["uid":uid,"name":name,"province":province,"city":city,"district":district,"street":street,"mobile":mobile,"is_default":is_default,"id":addressid]
         case let .Api_Addresslist(uid):
             return ["uid":uid]
+        case let .Api_AddressDelete(uid,id):
+            return ["uid":uid,"id":id]
         default:
             return nil
         }

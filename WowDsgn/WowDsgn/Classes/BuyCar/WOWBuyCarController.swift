@@ -43,6 +43,11 @@ class WOWBuyCarController: WOWBaseViewController {
                 totalPrice = result
                 totalPriceLabel.text = "¥ " + result
             }
+            if selectedArr.count == dataArr.count {
+                allButton.selected = true
+            }else{
+                allButton.selected = false
+            }
         }
     }
     

@@ -805,6 +805,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="详细地址"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="CVw-Pa-PKc" id="t2K-f3-C0L"/>
+                                                    </connections>
                                                 </textView>
                                             </subviews>
                                             <constraints>

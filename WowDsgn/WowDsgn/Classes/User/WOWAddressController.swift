@@ -36,50 +36,33 @@ class WOWAddressController: WOWBaseTableViewController {
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.title = "收获地址"
-        configFooter()
-    }
-    
-
-    
-    private func configFooter(){
-        let footerView = WOWMenuTopView(leftTitle: "新增地址", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
-        footerView.height = 40
-        footerView.rightButton.setImage(UIImage(named:"address_add")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
-        footerView.addAction {[weak self] in
+        makeCustomerNavigationItem("增加地址", left: false) {[weak self] in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
                 vc.action = {[weak self] in
-                    if let _ = self{
-                        DLog("123")
+                    if let strongSelf = self{
+                        strongSelf.request()
                     }
                 }
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
-        tableView.tableFooterView = footerView
     }
-    
-//MARK:Actions
-//    func addAddress(){
-//        let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
-//        vc.action = {
-//            DLog("123")
-//        }
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
-//  
-    
+
+ 
 //MARK:Network
     override func request() {
         super.request()
+        let uid = WOWUserManager.userID
+        //FIXME:uid要替换掉
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:"22"), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                let s = JSON(result)
-                DLog(s)
-//                let arr = Mapper<WOWAddressListModel>().mapArray(result)
-//                if let array = arr{
-//                    DLog(array)
-//                }
+                let arr = Mapper<WOWAddressListModel>().mapArray(result)
+                if let array = arr{
+                    strongSelf.dataArr = []
+                    strongSelf.dataArr.appendContentsOf(array)
+                    strongSelf.tableView.reloadData()
+                }
             }
         }) { (errorMsg) in
                 
@@ -105,8 +88,8 @@ extension WOWAddressController{
             cell.checkButton.hidden = false
         case .Me:
             cell.checkButton.hidden = true
-            //FIXME:但是默认地址的那行得显示出来哦
         }
+        cell.showData(dataArr[indexPath.row])
         return cell
     }
     
@@ -124,6 +107,8 @@ extension WOWAddressController{
         return [delete,edit]
     }
 }
+
+
 
 
 

@@ -67,12 +67,12 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
 //        if orderTag {
 //            return CGSizeMake(46,46)
 //        }else{
-            return CGSizeMake(30, 30)
+            return CGSizeMake(40, 40)
 //        }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(15, 0, 15, 0)
+        return UIEdgeInsetsMake(8, 0, 8, 0)
     }
     
     

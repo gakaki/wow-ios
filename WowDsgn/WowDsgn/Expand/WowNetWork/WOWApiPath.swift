@@ -61,5 +61,5 @@ let URL_Sms                     = "sms/getcode"
 let URL_ResetPassword           = "user/resettingpwd"
 
 
-let URL_AddressAdd              = "address/add"
+let URL_AddressAdd              = "address/addorupdate"
 let URL_AddressList             = "address/list"

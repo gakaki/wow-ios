@@ -24,4 +24,10 @@ class WOWAddressCell: UITableViewCell {
         checkButton.selected = selected
     }
     
+    func showData(model:WOWAddressListModel)  {
+        nameLabel.text = model.name
+        phoneLabel.text = model.mobile
+        detailAddressLabel.text = model.full_address
+    }
+    
 }

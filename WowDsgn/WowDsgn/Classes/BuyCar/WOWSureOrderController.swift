@@ -18,7 +18,7 @@ class WOWSureOrderController: WOWBaseViewController {
     
     //post的参数
     private var addressID               : String?
-//    private var payType                 :
+    private var payType                 = 0  //0.支付宝
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,6 @@ class WOWSureOrderController: WOWBaseViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 //MARK:Private Method

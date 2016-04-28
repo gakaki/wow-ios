@@ -32,6 +32,8 @@ class WOWAddAddressController: WOWBaseTableViewController {
     var city:String?        = ""
     var district : String?  = ""
     
+    var addressModel : WOWAddressListModel?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,8 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
 
 //MARK:Private Method
+    
+    
     private func getCityData() {
         self.provinces = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("area", ofType: "plist")!)!
         self.cities = self.provinces!.objectAtIndex(0).objectForKey("cities") as? NSArray
@@ -67,7 +71,18 @@ class WOWAddAddressController: WOWBaseTableViewController {
             }
         }
         configPicker()
+        configEditData()
     }
+    
+    private func configEditData(){
+        nameTextField.text  = addressModel?.name
+        phoneTextField.text = addressModel?.mobile
+        cityTextField.text = (addressModel?.province ?? "") + (addressModel?.city ?? "") + (addressModel?.district ?? "")
+//        detailAddressTextView.text = addressModel.street ?? ""
+        
+    }
+    
+    
     
     private func configPicker(){
         let view = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 290))
@@ -139,7 +154,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
         }
         let is_def  = defaultSwitch.on ? "1" : "0"
         let uid = WOWUserManager.userID
-        //FIXME:替换uid
+        //FIXME:uid要替换
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:"22", name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result).int
@@ -147,6 +162,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
                     if ret == 1{
                         if let ac = strongSelf.action{
                             ac()
+                            strongSelf.navigationController?.popViewControllerAnimated(true)
                         }
                     }else{
                         
@@ -259,5 +275,15 @@ extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
             break
         }
     }
+}
+
+extension WOWAddAddressController:UITextViewDelegate{
     
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
 }

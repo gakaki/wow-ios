@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WOWTipsCell" rowHeight="44" id="Pc7-KI-CrF" customClass="WOWTipsCell" customModule="WowDsgn" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWTipsCell" rowHeight="44" id="Pc7-KI-CrF" customClass="WOWTipsCell" customModule="WowDsgn" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="387" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pc7-KI-CrF" id="pCJ-3x-6Az">
-                <rect key="frame" x="0.0" y="0.0" width="387" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="387" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="给尖叫设计留言" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ecU-HV-o4K">

@@ -126,11 +126,11 @@ class WOWRegistController: WOWBaseViewController {
                 strongSelf.tipsLabel.text = errorMsg
             }
         }
-
     }
     
     @IBAction func protocolCheckButtonClick(sender:UIButton) {
         sender.selected = !sender.selected
+        agreeProtocol = sender.selected
     }
     
     @IBAction func showProtocol(sender: UIButton) {

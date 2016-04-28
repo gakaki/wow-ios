@@ -45,7 +45,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.setUI()
         navigationItem.title = "个人信息"
         headImageView.borderRadius(23)
-        headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage:UIImage(named: "placeholder_userhead"))
         configUserInfo()
     }
     

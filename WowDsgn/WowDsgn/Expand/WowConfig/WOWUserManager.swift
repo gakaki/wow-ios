@@ -73,7 +73,16 @@ struct WOWUserManager {
     
     static var userSex:String{
         get{
-            return (MGDefault.objectForKey(WOWUserSex) as? String) ?? ""
+            let sex = MGDefault.objectForKey(WOWUserSex) as? String
+            if let userSex = sex{
+                if userSex.isEmpty {
+                    return ""
+                }else{
+                    return userSex
+                }
+            }else{
+                return ""
+            }
         }
         
         set{

@@ -151,12 +151,12 @@ class WOWCommentController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(pageindex:"\(self.pageIndex)",product_id:self.mainID), successClosure: {[weak self](result) in
             if let strongSelf = self{
-               let arr = Mapper<WOWCommentListModel>().mapArray(result)
+                let totalPage = JSON(result)["totalPages"].intValue
+               let arr = Mapper<WOWCommentListModel>().mapArray(result["comment"])
                 strongSelf.endRefresh()
                 if let array = arr{
-                    if array.isEmpty{
-                        WOWHud.showMsg("暂无更多")
-                        return
+                    if strongSelf.pageIndex == totalPage - 1{
+                        strongSelf.mj_footer.endRefreshingWithNoMoreData()
                     }
                     if strongSelf.pageIndex == 0{
                         strongSelf.dataArr = []

@@ -106,10 +106,24 @@ extension AppDelegate{
     }
     
     func configRootVC(){
-        let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
-        let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-        sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
-        window?.rootViewController = sideController
+        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
+        // 取出之前保存的版本号
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let appVersion = userDefaults.stringForKey("appVersion")
+        
+        // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
+        if appVersion == nil || appVersion != currentAppVersion {
+            // 保存最新的版本号
+            userDefaults.setValue(currentAppVersion, forKey: "appVersion")
+            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
+            self.window?.rootViewController = introVC
+        }else{
+            let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
+            let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
+            sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
+            window?.rootViewController = sideController
+        }
     }
     
     func registAppKey(){

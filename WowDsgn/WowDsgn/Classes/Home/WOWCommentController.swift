@@ -152,12 +152,23 @@ class WOWCommentController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(pageindex:"\(self.pageIndex)",product_id:self.mainID), successClosure: {[weak self](result) in
             if let strongSelf = self{
                let arr = Mapper<WOWCommentListModel>().mapArray(result)
+                strongSelf.endRefresh()
                 if let array = arr{
+                    if array.isEmpty{
+                        WOWHud.showMsg("暂无更多")
+                        return
+                    }
+                    if strongSelf.pageIndex == 0{
+                        strongSelf.dataArr = []
+                    }
                     strongSelf.dataArr.appendContentsOf(array)
                 }
                 strongSelf.tableView.reloadData()
             }
-        }) {(errorMsg) in
+        }) {[weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
         }
     }
     

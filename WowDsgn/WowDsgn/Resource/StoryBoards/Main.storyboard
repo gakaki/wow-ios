@@ -59,7 +59,7 @@
                                         <rect key="frame" x="0.0" y="50" width="240" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aWs-X3-hBX" id="FS0-uv-VCy">
-                                            <rect key="frame" x="0.0" y="0.0" width="207" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="207" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="45" placeholderIntrinsicHeight="35" translatesAutoresizingMaskIntoConstraints="NO" id="CFX-39-w36">

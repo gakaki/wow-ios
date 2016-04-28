@@ -15,6 +15,9 @@ class WOWUserModel:NSObject,Mappable{
     var user_headimage  : String?
     var user_nick       : String?
     var user_sex        : String?
+    var user_mobile     : String?
+    var user_email      : String?
+    
     
     required init?(_ map: Map) {
         
@@ -26,6 +29,8 @@ class WOWUserModel:NSObject,Mappable{
         user_headimage   <- map["user_headimage"]
         user_nick        <- map["user_nick"]
         user_sex         <- map["user_sex"]
+        user_mobile      <- map["mobile"]
+        user_email       <- map["email"]
     }
     
 }

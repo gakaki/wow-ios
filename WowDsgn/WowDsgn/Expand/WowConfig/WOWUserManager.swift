@@ -10,11 +10,13 @@ import Foundation
 
 
 struct WOWUserManager {
-   private static let WOWUserID            = "WOWUserID"
-   private static let WOWUserHeadImage     = "WOWUserHeadImage"
-   private static let WOWUserName          = "WOWUserName"
-   private static let WOWUserSex           = "WOWUserSex"
-   private static let WOWUserDes           = "WOWUserDes"
+    private static let WOWUserID            = "WOWUserID"
+    private static let WOWUserHeadImage     = "WOWUserHeadImage"
+    private static let WOWUserName          = "WOWUserName"
+    private static let WOWUserSex           = "WOWUserSex"
+    private static let WOWUserDes           = "WOWUserDes"
+    private static let WOWUserEmail         = "WOWUserEmail"
+    private static let WOWUserMobile        = "WOWUserMobile"
     
     static var userHeadImageUrl:String{
         get{
@@ -35,12 +37,37 @@ struct WOWUserManager {
     
     static var userName:String{
         get{
-            return (MGDefault.objectForKey(WOWUserName) as? String) ?? ""
+            let name = (MGDefault.objectForKey(WOWUserName) as? String) ?? ""
+            if name.isEmpty {
+                if self.userMobile.isEmpty {
+                    if self.userEmail.isEmpty {
+                        return ""
+                    }else{
+                        return self.userEmail
+                    }
+                }else{
+                    return self.userMobile
+                }
+            }else{
+                return name
+            }
         }
         
         set{
             MGDefault.setObject(newValue, forKey:WOWUserName)
             MGDefault.synchronize()
+        }
+    }
+    
+    static var userEmail:String{
+        get{
+            return (MGDefault.objectForKey(WOWUserEmail) as? String) ?? ""
+        }
+    }
+    
+    static var userMobile:String{
+        get{
+            return (MGDefault.objectForKey(WOWUserMobile) as? String) ?? ""
         }
     }
     
@@ -57,7 +84,12 @@ struct WOWUserManager {
     
     static var userDes:String{
         get{
-            return (MGDefault.objectForKey(WOWUserDes) as? String) ?? ""
+            let des = (MGDefault.objectForKey(WOWUserDes) as? String) ?? ""
+            if des.isEmpty {
+                return "点击修改签名"
+            }else{
+                return des
+            }
         }
         
         set{
@@ -82,6 +114,8 @@ struct WOWUserManager {
         MGDefault.setObject(model?.user_nick, forKey:WOWUserName)
         MGDefault.setObject(model?.user_desc, forKey:WOWUserDes)
         MGDefault.setObject(model?.user_headimage, forKey:WOWUserHeadImage)
+        MGDefault.setObject(model?.user_email, forKey:WOWUserEmail)
+        MGDefault.setObject(model?.user_mobile, forKey:WOWUserMobile)
         MGDefault.synchronize()
     }
     

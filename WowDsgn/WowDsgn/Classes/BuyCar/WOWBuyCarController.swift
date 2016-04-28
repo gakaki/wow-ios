@@ -72,11 +72,21 @@ class WOWBuyCarController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configData()
-        addObservers()
+    }
+    
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        addObservers()
     }
     
 //MARK:Lazy

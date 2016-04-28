@@ -20,12 +20,17 @@ class WOWGoodsDetailController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
-        addObservers()
     }
-
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        addObservers()
     }
     
     override func didReceiveMemoryWarning() {

@@ -17,10 +17,11 @@ enum WOWAddressEntrance {
 
 class WOWAddressController: WOWBaseTableViewController {
     var entrance:WOWAddressEntrance = .Me
-
+    var dataArr = [WOWAddressListModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        request()
     }
     
     
@@ -46,7 +47,12 @@ class WOWAddressController: WOWBaseTableViewController {
         footerView.rightButton.setImage(UIImage(named:"address_add")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
         footerView.addAction {[weak self] in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController 
+                let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
+                vc.action = {[weak self] in
+                    if let _ = self{
+                        DLog("123")
+                    }
+                }
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -54,11 +60,31 @@ class WOWAddressController: WOWBaseTableViewController {
     }
     
 //MARK:Actions
-    func addAddress(){
-        let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
-        navigationController?.pushViewController(vc, animated: true)
-    }
+//    func addAddress(){
+//        let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
+//        vc.action = {
+//            DLog("123")
+//        }
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
+//  
     
+//MARK:Network
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:"22"), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                let s = JSON(result)
+                DLog(s)
+//                let arr = Mapper<WOWAddressListModel>().mapArray(result)
+//                if let array = arr{
+//                    DLog(array)
+//                }
+            }
+        }) { (errorMsg) in
+                
+        }
+    }
 }
 
 
@@ -68,7 +94,7 @@ extension WOWAddressController{
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return dataArr.count
     }
     
     

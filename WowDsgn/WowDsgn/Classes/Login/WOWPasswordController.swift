@@ -13,6 +13,10 @@ class WOWPasswordController: WOWBaseViewController {
     @IBOutlet weak var secondPassTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var tipsLabel: UILabel!
+    
+    var mobile:String!
+    var code:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,8 +35,36 @@ class WOWPasswordController: WOWBaseViewController {
 
     
     @IBAction func nextClick(sender: UIButton) {
-        //返回登录界面再登录吧
-        navigationController?.popToRootViewControllerAnimated(true)
+        guard let f = firstPassTextField.text where !f.isEmpty else{
+            WOWHud.showMsg("请输入密码")
+            return
+        }
+        
+        guard let s = secondPassTextField.text where !s.isEmpty else{
+            WOWHud.showMsg("请确认密码")
+            return
+        }
+        
+        guard f == s else{
+            WOWHud.showMsg("两次输入密码不一致")
+            return
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ResetPwd(mobile:mobile, code:code, password:f), successClosure: {[weak self](result) in
+            if let strongSelf = self{
+                strongSelf.navigationController?.popToRootViewControllerAnimated(true)
+            }
+        }) { (errorMsg) in
+                
+        }
+        
     }
+    
+}
 
+extension WOWPasswordController:UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
 }

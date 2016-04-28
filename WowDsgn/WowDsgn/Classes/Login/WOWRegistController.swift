@@ -20,6 +20,8 @@ class WOWRegistController: WOWBaseViewController {
     @IBOutlet weak var passwdTextField: UITextField!
     
     @IBOutlet weak var protocolCheckButton: UIButton!
+    
+    var agreeProtocol = true
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,26 +50,23 @@ class WOWRegistController: WOWBaseViewController {
         }
     }
     
-    private func validatePhone(phoneNumber:String?) -> Bool{
+    private func validatePhone(phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
         guard let phone = phoneNumber where !phone.isEmpty else{
-            WOWHud.showMsg("请输入账号")
+            WOWHud.showMsg(tips)
             return false
         }
         
-        guard phone.validateMobile() else{
-            WOWHud.showMsg("请输入正确的手机号")
-            return false
+        if is_phone {
+            guard phone.validateMobile() else{
+                WOWHud.showMsg(tips)
+                return false
+            }
         }
         return true
     }
+
     
-    private func validatePassword(password:String?) -> Bool{
-        guard let pass = password where !pass.isEmpty else{
-            WOWHud.showMsg("请输入密码")
-            return false
-        }
-        return true
-    }
+    
     
     
 //MARK:Actions
@@ -76,13 +75,14 @@ class WOWRegistController: WOWBaseViewController {
     }
     
     @IBAction func msgCodeButtonClick(sender: AnyObject) {
-        if !validatePhone(phoneTextField.text){
+        if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }
         let mobile = phoneTextField.text ?? ""
+        self.msgCodeButton.startTimer(60, title: "获取验证码", mainBGColor: ThemeColor, mainTitleColor: UIColor.blackColor(), countBGColor: GrayColorlevel3, countTitleColor:UIColor.whiteColor(), handle: nil)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Sms(type:"1", mobile:mobile), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-                strongSelf.msgCodeButton.startTimer(60, title: "获取验证码", mainBGColor: ThemeColor, mainTitleColor: UIColor.blackColor(), countBGColor: GrayColorlevel4, countTitleColor:UIColor.whiteColor(), handle: nil)
+            if let _ = self{
+                
             }
         }) { (errorMsg) in
                 
@@ -95,13 +95,24 @@ class WOWRegistController: WOWBaseViewController {
     
     
     @IBAction func registClick(sender: UIButton) {
-        if !validatePhone(phoneTextField.text){
+        if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }
-        if !validatePassword(passwdTextField.text){
+        
+        if !validatePhone(msgCodeTextField.text,tips:"请输入验证码"){
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!), successClosure: { [weak self](result) in
+        
+        if !validatePhone(passwdTextField.text,tips:"请输入密码"){
+            return
+        }
+        
+        if agreeProtocol == false{
+            WOWHud.showMsg("请阅读并同意用户协议")
+            return
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!,code:msgCodeTextField.text!), successClosure: { [weak self](result) in
             if let strongSelf = self{
             let model = Mapper<WOWUserModel>().map(result)
             WOWUserManager.saveUserInfo(model)
@@ -136,3 +147,10 @@ class WOWRegistController: WOWBaseViewController {
 }
 
 //MARK:Delegate
+
+extension WOWRegistController:UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+}

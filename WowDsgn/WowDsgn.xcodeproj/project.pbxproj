@@ -207,6 +207,7 @@
 		29E412521CC5D280002A78B6 /* WOWProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E412511CC5D280002A78B6 /* WOWProductModel.swift */; };
 		29E412761CC656E8002A78B6 /* WOWUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E412751CC656E8002A78B6 /* WOWUserManager.swift */; };
 		29E412781CC65BFE002A78B6 /* WOWUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E412771CC65BFE002A78B6 /* WOWUserModel.swift */; };
+		29E7463D1CD1EF28007DC728 /* WOWAddressListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7463C1CD1EF28007DC728 /* WOWAddressListModel.swift */; };
 		4BCFA81DDC2C05131EE68148 /* Pods_WowDsgn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 290184FC22EBF7AEE29B0221 /* Pods_WowDsgn.framework */; };
 /* End PBXBuildFile section */
 
@@ -445,6 +446,7 @@
 		29E412511CC5D280002A78B6 /* WOWProductModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWProductModel.swift; sourceTree = "<group>"; };
 		29E412751CC656E8002A78B6 /* WOWUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUserManager.swift; sourceTree = "<group>"; };
 		29E412771CC65BFE002A78B6 /* WOWUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUserModel.swift; sourceTree = "<group>"; };
+		29E7463C1CD1EF28007DC728 /* WOWAddressListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAddressListModel.swift; sourceTree = "<group>"; };
 		476599E4AFCFADFD0C787368 /* Pods-WowDsgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WowDsgn.release.xcconfig"; path = "../Pods/Target Support Files/Pods-WowDsgn/Pods-WowDsgn.release.xcconfig"; sourceTree = "<group>"; };
 		951A0804A00C70F7D3A846CC /* Pods-WowDsgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WowDsgn.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-WowDsgn/Pods-WowDsgn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -593,6 +595,7 @@
 			children = (
 				29E412771CC65BFE002A78B6 /* WOWUserModel.swift */,
 				294948B01CD0E53900BA5DFC /* WOWProvinceModel.swift */,
+				29E7463C1CD1EF28007DC728 /* WOWAddressListModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1372,6 +1375,7 @@
 				2912E0DD1CC24114005929D1 /* WOWUserHomeTopView.swift in Sources */,
 				2991AD191CBCCA0B00F5F5A0 /* WOWBaseTableViewController.swift in Sources */,
 				2991AD561CBCCA7400F5F5A0 /* WOWApiPath.swift in Sources */,
+				29E7463D1CD1EF28007DC728 /* WOWAddressListModel.swift in Sources */,
 				2991AD541CBCCA7400F5F5A0 /* WOWHud.swift in Sources */,
 				2991AE121CBCFE5500F5F5A0 /* WOWGoodsTypeCell.swift in Sources */,
 				2912E0CE1CC215DF005929D1 /* WOWTransLineCell.swift in Sources */,

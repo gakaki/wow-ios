@@ -36,3 +36,7 @@ let WOWEmptyNoDataText   = "暂无数据"
 
 /***********************************Test***************************************/
 let WOWTestStr = "不可救药的理想主义者"
+
+
+
+typealias WOWAction = () -> ()

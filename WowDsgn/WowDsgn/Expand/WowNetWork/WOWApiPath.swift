@@ -58,5 +58,8 @@ let URL_UpdateInfo              = "user/userupdate"
 let URL_Register                = "user/register"
 let URL_login                   = "user/login"
 let URL_Sms                     = "sms/getcode"
+let URL_ResetPassword           = "user/resettingpwd"
+
 
 let URL_AddressAdd              = "address/add"
+let URL_AddressList             = "address/list"

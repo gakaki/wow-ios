@@ -39,11 +39,15 @@ public enum RequestApi{
     
     case Api_Login(String,String)
     
-    case Api_Register(account:String,password:String)
+    case Api_Register(account:String,password:String,code:String)
     
     case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
     
+    case Api_ResetPwd(mobile:String,code:String,password:String)
+    
     case Api_AddressAdd(uid:String,name:String,province:String,city:String,district:String,street:String,mobile:String,is_default:String)
+    
+    case Api_Addresslist(uid:String)
 }
 
 
@@ -86,8 +90,12 @@ extension RequestApi:TargetType{
             return URL_Register
         case .Api_Sms:
             return URL_Sms
+        case .Api_ResetPwd:
+            return URL_ResetPassword
         case .Api_AddressAdd:
             return URL_AddressAdd
+        case .Api_Addresslist:
+            return URL_AddressList
         }
     }
     
@@ -99,8 +107,8 @@ extension RequestApi:TargetType{
         switch self{
         case let .Api_Sence(_, value):
             return ["pageIndex":String(value)]
-        case let .Api_Register(account,password):
-            return ["account":account,"password":password]
+        case let .Api_Register(account,password,code):
+            return ["account":account,"password":password,"code":code]
         case let .Api_Login(account,password):
             return ["account":account,"password":password]
         case let .Api_ProductList(pageindex,categoryID,style,sort):
@@ -123,8 +131,12 @@ extension RequestApi:TargetType{
             return ["cart":cart]
         case let .Api_Sms(type,mobile):
             return ["type":type,"mobile":mobile]
+        case let .Api_ResetPwd(mobile, code, password):
+            return ["mobile":mobile,"code":code,"password":password]
         case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default):
             return ["uid":uid,"name":name,"province":province,"city":city,"district":district,"street":street,"mobile":mobile,"is_default":is_default]
+        case let .Api_Addresslist(uid):
+            return ["uid":uid]
         default:
             return nil
         }
@@ -139,8 +151,8 @@ extension RequestApi:TargetType{
             return "注册成功"
         case .Api_SubmitComment:
             return "评论成功"
-        case .Api_UserUpdate:
-            return "修改成功"
+        case .Api_Sms:
+            return "验证码发送成功"
         default:
             return nil
         }

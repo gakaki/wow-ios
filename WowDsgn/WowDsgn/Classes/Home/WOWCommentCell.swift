@@ -20,7 +20,7 @@ class WOWCommentCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        headImageView.borderRadius(22)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

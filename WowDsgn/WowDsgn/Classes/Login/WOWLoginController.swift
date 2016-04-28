@@ -95,6 +95,16 @@ class WOWLoginController: WOWBaseViewController {
     }
 }
 
+
+
 //MARK:Delegate
+extension WOWLoginController:UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+}
+
+
 
 

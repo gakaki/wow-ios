@@ -8,8 +8,9 @@
 
 import UIKit
 
-class WOWAddAddressController: WOWBaseTableViewController {
 
+
+class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var nameTextField        : UITextField!
     @IBOutlet weak var phoneTextField       : UITextField!
     @IBOutlet weak var cityTextField        : UITextField!
@@ -18,6 +19,8 @@ class WOWAddAddressController: WOWBaseTableViewController {
     private var defaultAddress:Bool         = true
     
     lazy var pickerView                     = UIPickerView()
+    
+    var action:WOWAction?
     
     // properties
     var cities:NSArray?
@@ -137,10 +140,18 @@ class WOWAddAddressController: WOWBaseTableViewController {
         let is_def  = defaultSwitch.on ? "1" : "0"
         let uid = WOWUserManager.userID
         //FIXME:替换uid
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:uid, name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:"22", name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def), successClosure: { [weak self](result) in
             if let strongSelf = self{
-                let json = JSON(result)
-                DLog(json)
+                let json = JSON(result).int
+                if let ret = json{
+                    if ret == 1{
+                        if let ac = strongSelf.action{
+                            ac()
+                        }
+                    }else{
+                        
+                    }
+                }
             }
         }) { (errorMsg) in
                 

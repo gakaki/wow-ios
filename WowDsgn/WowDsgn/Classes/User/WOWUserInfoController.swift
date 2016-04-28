@@ -205,8 +205,8 @@ extension WOWUserInfoController{
 
 extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        picker.dismissViewControllerAnimated(true, completion: nil)        
-        let data = UIImageJPEGRepresentation(image,0.8)
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        let data = UIImageJPEGRepresentation(image,0.5)
         let file = AVFile(name:"headimage.jpg", data:data)
         WOWHud.showLoading()
         file.saveInBackgroundWithBlock {[weak self] (ret,error) in
@@ -218,36 +218,6 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                 }else{
                     strongSelf.headImageUrl = file.url
                     strongSelf.request()
-
-                    /*
-                    let wowUser = AVQuery(className:"WOWUser")
-                    wowUser.whereKey("wowuserid", equalTo:WOWUserManager.userID)
-                    wowUser.findObjectsInBackgroundWithBlock({[weak self] (objects, error) in
-                        if let _ = self{
-                            if let e = error{
-                                DLog(e)
-                                WOWHud.showMsg("头像修改失败")
-                                return
-                            }
-                            if let object = objects.last as? AVObject{
-                                object.setObject(headUrl, forKey:"wowheadimageurl")
-                                object.saveInBackgroundWithBlock({[weak self](ret,error) in
-                                    if let strongSelf = self{
-                                        if let e = error{
-                                            DLog(e)
-                                            WOWHud.showMsg("头像修改失败")
-                                            return
-                                        }else{
-                                            WOWHud.showMsg("头像修改成功")
-                                            WOWUserManager.userHeadImageUrl = headUrl
-                                            strongSelf.editInfoComplete()
-                                        }
-                                    }
-                                })
-                            }
-                        }
-                    })
-                     */
                 }
             }
         }

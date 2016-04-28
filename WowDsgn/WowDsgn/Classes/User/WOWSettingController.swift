@@ -25,7 +25,7 @@ class WOWSettingController: WOWBaseTableViewController {
     override func setUI() {
         super.setUI()
         navigationItem.title  = "设置"
-        calCacheSize()
+//        calCacheSize()
         
     }
     
@@ -58,9 +58,9 @@ class WOWSettingController: WOWBaseTableViewController {
         case 0:
             if indexPath.row == 1 {
                 KingfisherManager.sharedManager.cache.clearDiskCacheWithCompletionHandler({[weak self] in
-                    if let strongSelf = self{
+                    if let _ = self{
                         WOWHud.showMsg("清除成功")
-                        strongSelf.cacheLabel.text = "0.0m"
+//                        strongSelf.cacheLabel.text = "0.0m"
                     }
                 })
             }

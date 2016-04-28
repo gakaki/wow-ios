@@ -12,6 +12,7 @@ class WOWImageCell: UICollectionViewCell {
     var pictureImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
     
     override init(frame: CGRect) {

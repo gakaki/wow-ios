@@ -17,6 +17,8 @@ class WOWMsgCodeController: WOWBaseViewController {
     var entrance:MsgCodeEntrance = .RegistCode
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var leftLabel: UILabel!
+    
+    var mobile:String!
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +65,8 @@ class WOWMsgCodeController: WOWBaseViewController {
                 return
             }
             let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWPasswordController)) as! WOWPasswordController
+            vc.mobile = self.mobile
+            vc.code = code
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -77,10 +81,11 @@ class WOWMsgCodeController: WOWBaseViewController {
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
                 vc.entrance  = .ForgetPasswordCode
+                vc.mobile = strongSelf.codeTextField.text
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }) { (errorMsg) in
-                
+            
         }
     }
     
@@ -105,3 +110,9 @@ class WOWMsgCodeController: WOWBaseViewController {
 
 
 //MARK:Delegate
+extension WOWMsgCodeController:UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+}

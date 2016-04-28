@@ -31,6 +31,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="7Sz-xq-7KD" id="79H-uJ-x5n"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jcs-K0-cgf" userLabel="line">
                                         <rect key="frame" x="75" y="43" width="245" height="1"/>
@@ -67,7 +70,10 @@
                                         <rect key="frame" x="75" y="1" width="245" height="43"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="7Sz-xq-7KD" id="hn7-Iu-SFO"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tm7-Ea-ker" userLabel="line">
                                         <rect key="frame" x="75" y="43" width="245" height="1"/>
@@ -249,6 +255,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="VKR-Q8-qTk" id="jkL-dd-HU3"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWI-bY-GZ4" userLabel="line">
                                         <rect key="frame" x="75" y="43" width="245" height="1"/>
@@ -307,6 +316,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="VKR-Q8-qTk" id="hMl-YJ-E6z"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -338,7 +350,10 @@
                                         <rect key="frame" x="75" y="2" width="245" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="VKR-Q8-qTk" id="a1G-EB-Hav"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6g-OW-O5x" userLabel="line">
                                         <rect key="frame" x="75" y="43" width="245" height="1"/>
@@ -368,7 +383,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="Hnd-F5-fet"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L1Z-yA-RUf">
+                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L1Z-yA-RUf">
                                 <rect key="frame" x="15" y="234" width="30" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="gCz-ZE-3m8"/>
@@ -465,6 +480,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="gLw-59-oJl" id="wa2-Se-htQ"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tCa-9N-92m" userLabel="line">
                                         <rect key="frame" x="120" y="43" width="200" height="1"/>
@@ -557,7 +575,10 @@
                                         <rect key="frame" x="105" y="1" width="215" height="43"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="RMH-Qw-dFM" id="2Pk-ui-IWe"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hII-LQ-JDq" userLabel="line">
                                         <rect key="frame" x="105" y="43" width="215" height="1"/>
@@ -593,7 +614,10 @@
                                         <rect key="frame" x="105" y="1" width="215" height="43"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="RMH-Qw-dFM" id="AwF-RT-972"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jcr-xJ-3NL" userLabel="line">
                                         <rect key="frame" x="105" y="43" width="215" height="1"/>
@@ -634,8 +658,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="login:" destination="7Sz-xq-7KD" eventType="touchUpInside" id="fig-28-Gzd"/>
-                                    <action selector="nextClick:" destination="gLw-59-oJl" eventType="touchUpInside" id="E5l-V9-WWq"/>
+                                    <action selector="nextClick:" destination="RMH-Qw-dFM" eventType="touchUpInside" id="gm0-j0-LCH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -658,7 +681,6 @@
                     </view>
                     <connections>
                         <outlet property="firstPassTextField" destination="2sC-4x-IgS" id="o2k-zs-2ra"/>
-                        <outlet property="nextButton" destination="y9U-3d-x3V" id="OBL-4N-ccm"/>
                         <outlet property="secondPassTextField" destination="pJW-o0-6d0" id="OpQ-Er-caY"/>
                         <outlet property="tipsLabel" destination="KjK-aI-tr3" id="CpZ-Kg-Xj9"/>
                     </connections>

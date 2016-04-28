@@ -19,7 +19,8 @@ class WOWSureOrderController: WOWBaseViewController {
     
     //post的参数
     private var addressID               : String?
-    private var payType                 = 0  //0.支付宝
+    private var payType                 = "``````azsfcc"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,7 @@ class WOWSureOrderController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWTipsCell)), forCellReuseIdentifier:String(WOWTipsCell))
         tableView.registerNib(UINib.nibName(String(WOWValue2Cell)), forCellReuseIdentifier:String(WOWValue2Cell))
         tableView.keyboardDismissMode = .OnDrag
-//        tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: .None)
+        tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true, scrollPosition: .None)
     }
     
     
@@ -71,6 +72,7 @@ class WOWSureOrderController: WOWBaseViewController {
                     strongSelf.addressArr = []
                     strongSelf.addressArr.appendContentsOf(array)
                     strongSelf.tableView.reloadData()
+                    strongSelf.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true, scrollPosition: .None)
                 }
             }
         }) { (errorMsg) in
@@ -106,6 +108,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         switch indexPath.section {
         case 0: //地址
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWAddressCell), forIndexPath: indexPath) as! WOWAddressCell
+            cell.userInteractionEnabled = false
             cell.checkButton.selected = true
             cell.showData(addressArr[indexPath.row])
             returnCell = cell
@@ -137,6 +140,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         case 4: //订单汇总
             let titles = ["订单合计","运费","实付金额"]
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWValue2Cell), forIndexPath:indexPath) as! WOWValue2Cell
+            cell.userInteractionEnabled = false
             cell.leftViseLabel.hidden = indexPath.row == 0 ? false : true
             cell.leftLabel.text = titles[indexPath.row]
             switch indexPath.row {
@@ -155,10 +159,21 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         }
         return returnCell!
     }
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        switch indexPath.section {
+        case 1:
+            if indexPath.row == 0 {
+                payType = "aliPay"
+            }else{
+                payType = "wxPay"
+            }
+            DLog("支付方式:\(payType)")
+        default:
+            break
+        }
     }
+
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let titles = ["收货信息","支付方式","商品清单","订单备注","订单汇总"]

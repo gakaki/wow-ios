@@ -72,7 +72,7 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(8, 0, 8, 0)
+        return UIEdgeInsetsMake(8, 15, 8, 8)
     }
     
     

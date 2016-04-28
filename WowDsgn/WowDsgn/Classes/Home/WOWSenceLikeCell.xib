@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XXs-Cn-6bm">
-                        <rect key="frame" x="15" y="0.0" width="297" height="76"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="76" id="E60-xC-nHQ"/>
@@ -74,9 +74,9 @@
                     <constraint firstItem="XXs-Cn-6bm" firstAttribute="top" secondItem="JNg-X8-Gxb" secondAttribute="top" id="F82-r1-qq5"/>
                     <constraint firstItem="aqh-z2-5ZQ" firstAttribute="centerY" secondItem="JNg-X8-Gxb" secondAttribute="centerY" id="MYg-Tq-nmG"/>
                     <constraint firstAttribute="trailing" secondItem="aqh-z2-5ZQ" secondAttribute="trailing" id="gTF-4U-6im"/>
-                    <constraint firstItem="XXs-Cn-6bm" firstAttribute="leading" secondItem="JNg-X8-Gxb" secondAttribute="leading" constant="15" id="rCa-dM-Gv4"/>
+                    <constraint firstItem="XXs-Cn-6bm" firstAttribute="leading" secondItem="JNg-X8-Gxb" secondAttribute="leading" id="rCa-dM-Gv4"/>
                     <constraint firstAttribute="bottom" secondItem="XXs-Cn-6bm" secondAttribute="bottom" priority="999" id="soN-yn-I2x"/>
-                    <constraint firstItem="aqh-z2-5ZQ" firstAttribute="leading" secondItem="XXs-Cn-6bm" secondAttribute="trailing" constant="8" id="sph-Go-Ljf"/>
+                    <constraint firstItem="aqh-z2-5ZQ" firstAttribute="leading" secondItem="XXs-Cn-6bm" secondAttribute="trailing" id="sph-Go-Ljf"/>
                     <constraint firstItem="XXs-Cn-6bm" firstAttribute="centerY" secondItem="JNg-X8-Gxb" secondAttribute="centerY" id="wkB-Te-ltd"/>
                 </constraints>
                 <variation key="default">

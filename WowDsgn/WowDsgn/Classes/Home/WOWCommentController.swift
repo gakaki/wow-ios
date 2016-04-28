@@ -52,6 +52,8 @@ class WOWCommentController: WOWBaseViewController {
         tableView.estimatedRowHeight = 200
         tableView.clearRestCell()
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:cellID)
+        tableView.mj_header = self.mj_header
+        tableView.mj_footer = self.mj_footer
         navigationItem.title = "评论"
     }
     
@@ -147,8 +149,7 @@ class WOWCommentController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        //FIXME:评论列表接口目前是挂掉的
-        WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(product_id:self.mainID), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(pageindex:"\(self.pageIndex)",product_id:self.mainID), successClosure: {[weak self](result) in
             if let strongSelf = self{
                let arr = Mapper<WOWCommentListModel>().mapArray(result)
                 if let array = arr{

@@ -21,7 +21,6 @@ class WOWMsgCodeController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +28,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         
     }
     
+//MARK:Lazy
     
 //MARK:Private Method
     override func setUI() {
@@ -53,19 +53,53 @@ class WOWMsgCodeController: WOWBaseViewController {
 //MARK:Actions
 
     @IBAction func nextClick(sender: UIButton) {
-        switch entrance {
+        switch entrance { //从第一页进去
         case .ForgetPasswordHome:
-            let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
-            vc.entrance  = .ForgetPasswordCode
-            navigationController?.pushViewController(vc, animated: true)
-        default:
+            entranceSmsCode()
+        default: //第二页进去
+            let code = codeTextField.text ?? ""
+            if code.isEmpty {
+                WOWHud.showMsg("请输入验证码")
+                return
+            }
             let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWPasswordController)) as! WOWPasswordController
             navigationController?.pushViewController(vc, animated: true)
         }
     }
     
-//MARK:Lazy
+    private func entranceSmsCode(){
+        //手机号验证成功才进去验证码界面
+        if !validatePhone(codeTextField.text){
+            return
+        }
+        let mobile = codeTextField.text ?? ""
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Sms(type:"2", mobile:mobile), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
+                vc.entrance  = .ForgetPasswordCode
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }) { (errorMsg) in
+                
+        }
+    }
     
+    private func validatePhone(phoneNumber:String?) -> Bool{
+        guard let phone = phoneNumber where !phone.isEmpty else{
+            WOWHud.showMsg("请输入手机号")
+            return false
+        }
+        
+        guard phone.validateMobile() else{
+            WOWHud.showMsg("请输入正确的手机号")
+            return false
+        }
+        return true
+    }
+    
+    
+//MARK:Network
+
 
 }
 

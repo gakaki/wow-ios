@@ -23,7 +23,7 @@ public enum RequestApi{
     
     case Api_ProductDetail(product_id:String)
     
-    case Api_CommentList(product_id:String)
+    case Api_CommentList(pageindex:String,product_id:String)
     
     case Api_SubmitComment(uid:String,comment:String,product_id:String)
     
@@ -40,6 +40,8 @@ public enum RequestApi{
     case Api_Login(String,String)
     
     case Api_Register(account:String,password:String)
+    
+    case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
 }
 
 
@@ -80,6 +82,9 @@ extension RequestApi:TargetType{
             return URL_login
         case .Api_Register:
             return URL_Register
+        case .Api_Sms:
+            return URL_Sms
+            
         }
     }
     
@@ -96,11 +101,11 @@ extension RequestApi:TargetType{
         case let .Api_Login(account,password):
             return ["account":account,"password":password]
         case let .Api_ProductList(pageindex,categoryID,style,sort):
-            return ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort]
+            return ["z":pageindex,"cid":categoryID,"style":style,"sort":sort]
         case let .Api_ProductDetail(product_id):
             return ["id":product_id]
-        case let .Api_CommentList(product_id):
-            return ["product_id":product_id]
+        case let .Api_CommentList(pageindex,product_id):
+            return ["pageindex":pageindex,"product_id":product_id]
         case let .Api_SubmitComment(uid,comment,product_id):
             return ["uid":uid,"product_id":product_id,"comment":comment]
         case let .Api_UserUpdate(param):
@@ -113,6 +118,8 @@ extension RequestApi:TargetType{
             return ["cart":cart]
         case let .Api_CarDelete(cart):
             return ["cart":cart]
+        case let .Api_Sms(type,mobile):
+            return ["type":type,"mobile":mobile]
         default:
             return nil
         }

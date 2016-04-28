@@ -57,4 +57,4 @@ let URL_UpdateInfo              = "user/userupdate"
 //6.app 登录注册
 let URL_Register                = "user/register"
 let URL_login                   = "user/login"
-
+let URL_Sms                     = "sms/getcode"

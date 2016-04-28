@@ -79,6 +79,14 @@ class WOWRegistController: WOWBaseViewController {
         if !validatePhone(phoneTextField.text){
             return
         }
+        let mobile = phoneTextField.text ?? ""
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Sms(type:"1", mobile:mobile), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                strongSelf.msgCodeButton.startTimer(60, title: "获取验证码", mainBGColor: ThemeColor, mainTitleColor: UIColor.blackColor(), countBGColor: GrayColorlevel4, countTitleColor:UIColor.whiteColor(), handle: nil)
+            }
+        }) { (errorMsg) in
+                
+        }
     }
     
     

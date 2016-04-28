@@ -43,7 +43,7 @@
                                         <rect key="frame" x="0.0" y="92" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TxM-ue-7O0" id="eOA-7t-rvq">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="54.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="45" placeholderIntrinsicHeight="35" translatesAutoresizingMaskIntoConstraints="NO" id="IiW-Uf-jOl">
@@ -150,8 +150,8 @@
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="0bl-no-dGH"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSR-sd-AUR">
-                                <rect key="frame" x="245" y="449" width="60" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSR-sd-AUR">
+                                <rect key="frame" x="245" y="15" width="60" height="60"/>
                                 <state key="normal" backgroundImage="car_entrance"/>
                                 <connections>
                                     <action selector="carEntranceClick:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="15g-Vu-hlf"/>
@@ -236,9 +236,9 @@
                             <constraint firstItem="0BJ-4W-L43" firstAttribute="top" secondItem="ehA-O6-YuP" secondAttribute="top" id="XX7-LF-kjI"/>
                             <constraint firstItem="kCp-4q-LpT" firstAttribute="leading" secondItem="ehA-O6-YuP" secondAttribute="leading" id="c8N-ik-yQZ"/>
                             <constraint firstItem="kCp-4q-LpT" firstAttribute="top" secondItem="ehA-O6-YuP" secondAttribute="top" constant="20" id="cXl-Lb-wCO"/>
+                            <constraint firstItem="lSR-sd-AUR" firstAttribute="top" secondItem="ehA-O6-YuP" secondAttribute="top" constant="15" id="iyl-Vz-8Fm"/>
                             <constraint firstItem="MWA-7z-euj" firstAttribute="top" secondItem="Xd0-LU-9Sd" secondAttribute="bottom" id="lHV-bn-UZo"/>
                             <constraint firstItem="MWA-7z-euj" firstAttribute="top" secondItem="0BJ-4W-L43" secondAttribute="bottom" constant="44" id="nGx-Os-Z7p"/>
-                            <constraint firstItem="Xd0-LU-9Sd" firstAttribute="top" secondItem="lSR-sd-AUR" secondAttribute="bottom" constant="15" id="t33-jT-KSH"/>
                         </constraints>
                     </view>
                     <connections>

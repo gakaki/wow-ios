@@ -13,13 +13,13 @@ class WOWSenceLikeCell: UITableViewCell {
     @IBOutlet weak var rightTitleLabel: UILabel!
     
     /// 是确认订单界面用到的话，需要将它的尺寸搞大点 其他的都是小一点的
-    var orderTag:Bool = false{
-        didSet{
-            if orderTag {
-                collectionView.reloadData()
-            }
-        }
-    }
+//    var orderTag:Bool = false{
+//        didSet{
+//            if orderTag {
+//                collectionView.reloadData()
+//            }
+//        }
+//    }
     
     var orderArr = [WOWBuyCarModel](){
         didSet{
@@ -44,31 +44,31 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if orderTag {
+//        if orderTag {
             return orderArr.count
-        }else{
-            //FIXME:测试数据
-            return 50
-        }
+//        }else{
+//            //FIXME:测试数据
+//            return 50
+//        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWImageCell), forIndexPath: indexPath) as! WOWImageCell
-        if orderTag {
+//        if orderTag {
             let orderItem = orderArr[indexPath.item]
             cell.pictureImageView.kf_setImageWithURL(NSURL(string:orderItem.skuProductImageUrl)!, placeholderImage: UIImage(named: "placeholder_product"))
-        }
+//        }
         //FIXME:测试
         cell.pictureImageView.layer.cornerRadius = 15
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if orderTag {
-            return CGSizeMake(46,46)
-        }else{
+//        if orderTag {
+//            return CGSizeMake(46,46)
+//        }else{
             return CGSizeMake(30, 30)
-        }
+//        }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {

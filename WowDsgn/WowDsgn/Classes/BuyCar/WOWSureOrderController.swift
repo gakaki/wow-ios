@@ -97,7 +97,6 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             returnCell = cell
         case 2: //商品清单
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell), forIndexPath: indexPath) as! WOWSenceLikeCell
-            cell.orderTag = true
             cell.rightTitleLabel.text = "共\(productArr.count)件"
             cell.orderArr = productArr
             cell.rightBackView.addAction({ [weak self] in

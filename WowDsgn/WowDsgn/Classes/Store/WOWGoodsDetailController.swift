@@ -109,6 +109,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     private func configData(){
+        priceLabel.text = productModel?.price?.priceFormat() ?? ""
         cycleView.imageURLArray = [productModel?.productImage ?? ""]
     }
     
@@ -243,7 +244,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             }
             return 0
         case 4: //喜欢
-            return 1
+            return 0
         case 5: //评论
             return 5
         default:

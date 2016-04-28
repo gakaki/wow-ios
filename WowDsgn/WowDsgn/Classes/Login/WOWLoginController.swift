@@ -16,7 +16,6 @@ class WOWLoginController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,7 +49,6 @@ class WOWLoginController: WOWBaseViewController {
     
     
 //MARK:Actions
-
     
     private func regist(){
         let v = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController))

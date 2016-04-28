@@ -112,28 +112,36 @@ class WOWBuyCarController: WOWBaseViewController {
         if WOWUserManager.loginStatus { //登录
             asyncUpdate(model)
         }else{
-            //存在一个和更改之后相同的东西
-            let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
-            if let oldItem = exitSkus.first{ //这个是老的
-                try! WOWRealm.write({
-                    oldItem.skuProductCount += model.skuProductCount
-                })
-                let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
-                if let item = unUseSku.first {
+            if editingModel?.skuID == model.skuID {
+                let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+                if let item = exitSkus.first{
                     try! WOWRealm.write({
-                        WOWRealm.delete(item)
+                        item.skuProductCount = model.skuProductCount
                     })
                 }
-            }else{//更改之后它还是唯一的
-                let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
-                if let item = unUseSku.first {
+            }else{
+                //存在一个和更改之后相同的东西
+                let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+                if let oldItem = exitSkus.first{ //这个是老的
                     try! WOWRealm.write({
-                        WOWRealm.delete(item)
-                        WOWRealm.add(model,update: true)
+                        oldItem.skuProductCount += model.skuProductCount
                     })
+                    let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
+                    if let item = unUseSku.first {
+                        try! WOWRealm.write({
+                            WOWRealm.delete(item)
+                        })
+                    }
+                }else{//更改之后它还是唯一的
+                    let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
+                    if let item = unUseSku.first {
+                        try! WOWRealm.write({
+                            WOWRealm.delete(item)
+                            WOWRealm.add(model,update: true)
+                        })
+                    }
                 }
             }
-
             
             var exitIndex:Int = Int(dataArr.indexOf({$0 == editingModel})!)
             for (index,value) in dataArr.enumerate() {

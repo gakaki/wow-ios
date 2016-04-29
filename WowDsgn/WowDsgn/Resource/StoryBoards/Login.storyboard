@@ -172,7 +172,7 @@
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRQ-gd-wAI">
                                 <rect key="frame" x="0.0" y="20" width="320" height="440"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bT-Lt-7xg">
                                 <rect key="frame" x="15" y="480" width="290" height="44"/>
@@ -228,14 +228,15 @@
                                 </connections>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="07I-aA-omo">
-                                <rect key="frame" x="140" y="481" width="39" height="37"/>
+                                <rect key="frame" x="140" y="506" width="39" height="37"/>
+                                <color key="currentPageIndicatorTintColor" red="1" green="0.90196078431372551" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yaJ-j1-CCV" firstAttribute="leading" secondItem="u6M-gh-jLz" secondAttribute="leading" id="VNl-Bd-j7c"/>
                             <constraint firstItem="sQt-22-HdS" firstAttribute="top" secondItem="yaJ-j1-CCV" secondAttribute="bottom" id="aad-rX-Noh"/>
-                            <constraint firstItem="sQt-22-HdS" firstAttribute="top" secondItem="07I-aA-omo" secondAttribute="bottom" constant="50" id="it7-Da-FMH"/>
+                            <constraint firstItem="sQt-22-HdS" firstAttribute="top" secondItem="07I-aA-omo" secondAttribute="bottom" constant="25" id="it7-Da-FMH"/>
                             <constraint firstItem="yaJ-j1-CCV" firstAttribute="top" secondItem="u6M-gh-jLz" secondAttribute="top" id="nl0-Y8-MH7"/>
                             <constraint firstAttribute="trailing" secondItem="yaJ-j1-CCV" secondAttribute="trailing" id="qrT-q0-IN5"/>
                             <constraint firstItem="07I-aA-omo" firstAttribute="centerX" secondItem="u6M-gh-jLz" secondAttribute="centerX" id="uXl-uT-Xqo"/>

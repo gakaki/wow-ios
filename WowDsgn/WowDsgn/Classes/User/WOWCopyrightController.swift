@@ -9,7 +9,8 @@
 import UIKit
 import WebKit
 class WOWCopyrightController: WOWBaseViewController {
-    var navTitle:String = "使用协议"
+    
+    @IBOutlet weak var webview: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,14 +26,12 @@ class WOWCopyrightController: WOWBaseViewController {
 //MARK:Private Method
     override func setUI() {
         super.setUI()
-        navigationItem.title = navTitle
-        let webview = WKWebView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        webview.UIDelegate = self
-        webview.navigationDelegate = self
-        //FIXME:要替换
-        let url = NSURL(string: "http://www.jianshu.com/users/040395b7230c/latest_articles")
+        navigationItem.title = "用户协议"
+
+        let path = NSBundle.mainBundle().pathForResource("wowprotocol", ofType:"html")
+        let url = NSURL(fileURLWithPath: path!)
         //创建请求
-        let request = NSURLRequest(URL: url!)
+        let request = NSURLRequest(URL: url)
         //加载请求
         webview.loadRequest(request)
         //添加wkwebview
@@ -42,18 +41,3 @@ class WOWCopyrightController: WOWBaseViewController {
     
 }
 
-extension WOWCopyrightController:WKUIDelegate,WKNavigationDelegate{
-    //开始加载
-    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        WOWHud.showLoading()
-    }
-    
-    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        WOWHud.showMsg("加载失败")
-    }
-    
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        WOWHud.dismiss()
-    }
-    
-}

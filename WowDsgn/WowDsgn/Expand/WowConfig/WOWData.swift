@@ -39,5 +39,5 @@ let WOWTestStr = "不可救药的理想主义者"
 
 
 
-typealias WOWAction         = () -> ()
-typealias WOWObjectAction   = (object:AnyObject) ->()
+typealias WOWActionClosure         = () -> ()
+typealias WOWObjectActionClosure   = (object:AnyObject) ->()

@@ -20,7 +20,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     lazy var pickerView                     = UIPickerView()
     
-    var action:WOWAction?
+    var action:WOWActionClosure?
     
     // properties
     var cities:NSArray?

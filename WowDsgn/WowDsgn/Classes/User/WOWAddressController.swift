@@ -18,7 +18,7 @@ enum WOWAddressEntrance {
 class WOWAddressController: WOWBaseTableViewController {
     var entrance:WOWAddressEntrance = .Me
     var dataArr = [WOWAddressListModel]()
-    var action  : WOWObjectAction?
+    var action  : WOWObjectActionClosure?
     var selectModel : WOWAddressListModel?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,7 +145,10 @@ extension WOWAddressController{
         //FIXME:更改uid
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(uid:"22", addressid: model.id ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                strongSelf.request()
+                let json = JSON(result).int ?? 0
+                if json == 1{
+                    strongSelf.request()
+                }
             }
         }) {(errorMsg) in
                 

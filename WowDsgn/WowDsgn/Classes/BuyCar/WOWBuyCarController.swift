@@ -23,7 +23,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 bottomView.hidden = true
                 rightItemButton.hidden = true
             }else{
-                navigationItem.title = "购物车\(dataArr.count)"
+                navigationItem.title = "购物车"
                 bottomView.hidden = false
                 rightItemButton.hidden = false
             }

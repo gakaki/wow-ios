@@ -17,7 +17,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     //个性签名
     @IBOutlet weak var desLabel: UILabel!
     
-    var editInfoAction:ActionClosure?
+    var editInfoAction:WOWActionClosure?
     
     private var headImageUrl:String = WOWUserManager.userHeadImageUrl
     private var nick        :String = WOWUserManager.userName

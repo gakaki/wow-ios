@@ -61,17 +61,7 @@ extension WOWIntroduceController:UIScrollViewDelegate{
         }
     }
 
-    
-    
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        if scrollView.contentOffset.x > MGScreenWidth * 2{
-//            let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
-//            let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-//            let sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
-//            self.presentViewController(sideController, animated: true, completion: nil)
-//        }
-//
-//    }
+
 
 }
 

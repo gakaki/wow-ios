@@ -81,16 +81,4 @@ class WOWlListCell: UITableViewCell {
                 
         }
     }
-    
-//    func stopAnimate() {
-//        let btns = bigImageView.subviews
-//        btns.forEach { (view) in
-//            UIView.animateWithDuration(0.3, delay: 0, options: [.CurveLinear], animations: { 
-//                view.alpha = 0
-//                view.layer.removeAllAnimations()
-//            }, completion: { (ret) in
-//                        
-//            })
-//        }
-//    }
 }

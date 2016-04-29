@@ -19,9 +19,11 @@ let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/"
 
 //1.app首页
 
-let URL_category               = "category"
+let URL_category                = "category"
 
 let URL_scene                   = "scene"
+
+let URL_senceDetail             = "scene/detail"
 
 
 //***********2.商店************
@@ -35,6 +37,9 @@ let URL_product_detail          = "product/detail"
 let URL_SubmitComment           = "product/comment"
 //2.5评论列表
 let URL_CommentList             = "product/commentlist"
+
+//2.6收藏
+let URL_Favorite                = "favorite/like"
 
 //3.app活动
 let URL_activity                = "post"

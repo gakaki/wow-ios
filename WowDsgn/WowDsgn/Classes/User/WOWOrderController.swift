@@ -62,7 +62,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 0
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -83,5 +83,15 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 12
+    }
+    
+    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "暂无订单哦"
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        return -40
     }
 }

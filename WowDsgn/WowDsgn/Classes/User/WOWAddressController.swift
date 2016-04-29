@@ -157,6 +157,15 @@ extension WOWAddressController{
 }
 
 
+extension WOWAddressController{
+    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "暂无地址哦，快去添加吧"
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
+}
+
+
 
 
 

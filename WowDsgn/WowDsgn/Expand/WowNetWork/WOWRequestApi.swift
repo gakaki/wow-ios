@@ -13,6 +13,8 @@ public enum RequestApi{
     
     case Api_Sence(String,Int)
     
+    case Api_SenceDetail(senceid:String)
+    
     case Api_Category
     
     case Api_Activity
@@ -22,6 +24,8 @@ public enum RequestApi{
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String)
     
     case Api_ProductDetail(product_id:String)
+    
+    case Api_Favotite(thingid:String,uid:String,type:String,is_cancel:String)
     
     case Api_CommentList(pageindex:String,product_id:String)
     
@@ -50,6 +54,7 @@ public enum RequestApi{
     case Api_Addresslist(uid:String)
 
     case Api_AddressDelete(uid:String,addressid:String)
+    
 }
 
 
@@ -68,10 +73,14 @@ extension RequestApi:TargetType{
             return URL_storeHome
         case .Api_Sence:
             return URL_scene
+        case .Api_SenceDetail:
+            return URL_senceDetail
         case .Api_ProductList:
             return URL_product
         case .Api_ProductDetail:
             return URL_product_detail
+        case .Api_Favotite:
+            return URL_Favorite
         case .Api_CommentList:
             return URL_CommentList
         case .Api_SubmitComment:
@@ -111,6 +120,8 @@ extension RequestApi:TargetType{
         switch self{
         case let .Api_Sence(_, value):
             return ["pageIndex":String(value)]
+        case let .Api_SenceDetail(senceid):
+            return ["senceid":senceid]
         case let .Api_Register(account,password,code):
             return ["account":account,"password":password,"code":code]
         case let .Api_Login(account,password):
@@ -119,6 +130,8 @@ extension RequestApi:TargetType{
             return ["z":pageindex,"cid":categoryID,"style":style,"sort":sort]
         case let .Api_ProductDetail(product_id):
             return ["id":product_id]
+        case let .Api_Favotite(thingid,uid,type,is_cancel):
+            return ["uid":uid,"thingid":thingid,"type":type,"is_cancel":is_cancel]
         case let .Api_CommentList(pageindex,product_id):
             return ["pageindex":pageindex,"product_id":product_id]
         case let .Api_SubmitComment(uid,comment,product_id):

@@ -58,7 +58,7 @@ class WOWUserController: WOWBaseTableViewController {
         }
         */
  
-        headerView       = WOWUserTopView()
+        headerView       = WOWUserTopView()     
         headerView.frame = CGRectMake(0, 0, MGScreenWidth, 76)
         headerView.configShow(WOWUserManager.loginStatus)
         headerView.topContainerView.addAction {[weak self] in

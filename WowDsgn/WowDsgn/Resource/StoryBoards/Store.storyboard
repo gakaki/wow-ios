@@ -166,6 +166,7 @@
                                             <constraint firstAttribute="width" constant="50" id="PjI-Hu-kf9"/>
                                         </constraints>
                                         <state key="normal" image="icon_like"/>
+                                        <state key="selected" image="icon_like_hightlighted"/>
                                         <connections>
                                             <action selector="likeButtonClick:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="NN8-u1-zVR"/>
                                         </connections>
@@ -242,6 +243,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="favoriteButton" destination="Gbd-tg-zDt" id="l65-SD-sri"/>
                         <outlet property="priceLabel" destination="mRP-DZ-mcM" id="nh4-Zy-zGh"/>
                         <outlet property="tableView" destination="0BJ-4W-L43" id="znK-jC-zdn"/>
                     </connections>
@@ -310,7 +312,7 @@
                                     <outlet property="delegate" destination="WaH-lQ-3xj" id="cHm-qM-CAK"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OgO-gS-w03">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OgO-gS-w03">
                                 <rect key="frame" x="0.0" y="20" width="43" height="38"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
@@ -364,7 +366,7 @@
                                     <constraint firstAttribute="height" constant="35" id="HpY-ok-RHW"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xe-AJ-9G3">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xe-AJ-9G3">
                                 <rect key="frame" x="0.0" y="20" width="43" height="38"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
@@ -400,6 +402,7 @@
         <image name="car_right" width="63" height="36"/>
         <image name="closeNav" width="43" height="38"/>
         <image name="icon_like" width="16" height="13"/>
+        <image name="icon_like_hightlighted" width="16" height="13"/>
         <image name="icon_share" width="14" height="14"/>
         <image name="store_buyCar" width="26" height="25"/>
     </resources>

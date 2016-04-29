@@ -487,7 +487,7 @@
             </objects>
             <point key="canvasLocation" x="582" y="947"/>
         </scene>
-        <!--订单-->
+        <!--Empty Data Set Delegate-->
         <scene sceneID="uMR-JW-eg8">
             <objects>
                 <viewController storyboardIdentifier="WOWOrderController" title="订单" id="bUw-c8-WE1" customClass="WOWOrderController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
@@ -505,6 +505,8 @@
                                 <connections>
                                     <outlet property="dataSource" destination="bUw-c8-WE1" id="dd7-xH-6Jh"/>
                                     <outlet property="delegate" destination="bUw-c8-WE1" id="JV6-H8-SRl"/>
+                                    <outlet property="emptyDataSetDelegate" destination="bUw-c8-WE1" id="Map-GY-zde"/>
+                                    <outlet property="emptyDataSetSource" destination="bUw-c8-WE1" id="Yaq-B8-uld"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -681,7 +683,7 @@
             </objects>
             <point key="canvasLocation" x="1529" y="1818"/>
         </scene>
-        <!--收货地址-->
+        <!--Empty Data Set Delegate-->
         <scene sceneID="VA1-6z-f6k">
             <objects>
                 <tableViewController storyboardIdentifier="WOWAddressController" title="收货地址" id="fjy-kY-Peo" customClass="WOWAddressController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
@@ -692,6 +694,8 @@
                         <connections>
                             <outlet property="dataSource" destination="fjy-kY-Peo" id="SjJ-wy-ImA"/>
                             <outlet property="delegate" destination="fjy-kY-Peo" id="gEx-t2-OW0"/>
+                            <outlet property="emptyDataSetDelegate" destination="fjy-kY-Peo" id="z5a-ID-q2h"/>
+                            <outlet property="emptyDataSetSource" destination="fjy-kY-Peo" id="Ic6-Rs-csI"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Q8a-a2-dAr"/>

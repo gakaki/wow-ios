@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WOWBaseTableViewController: UITableViewController {
+class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource {
 //    var reuestIndex = 0 //翻页
 //    var isRreshing : Bool = false
     override func viewDidLoad() {
@@ -38,5 +38,22 @@ class WOWBaseTableViewController: UITableViewController {
 
     func request(){
         
+    }
+}
+
+
+extension WOWBaseTableViewController{
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = WOWEmptyNoDataText
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return GrayColorLevel5
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "placeholder_instagram")
     }
 }

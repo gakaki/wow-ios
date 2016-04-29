@@ -13,7 +13,10 @@ import UIKit
 
 class WOWGoodsDetailController: WOWBaseViewController {
     var productID:String?
+    
     var cycleView:CyclePictureView!
+    
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var priceLabel: UILabel!
     var productModel:WOWProductModel?
@@ -131,6 +134,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(product_id: productID ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
+                //FIXME:需要给我的还有该商品官网的url，分享出去哦
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
@@ -140,7 +144,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 strongSelf.endRefresh()
             }
         }
-        
     }
     
 //MARK:Actions
@@ -149,27 +152,52 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     @IBAction func likeButtonClick(sender: UIButton) {
-        DLog("收藏")
+        if WOWUserManager.loginStatus {
+            goLogin()
+        }else{
+            let uid         = WOWUserManager.userID
+            let thingid     = self.productID ?? ""
+            let type        = "poduct" //1为商品 0 为场景
+            //FIXME:更改状态噻
+            let is_cancel   = "1"
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(thingid:thingid, uid:uid, type:type,is_cancel:is_cancel), successClosure: { [weak self](result) in
+                if let strongSelf = self{
+                    let ret = JSON(result).int ?? 0
+                    if ret == 1{ //收藏成功
+                        strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
+                    }
+                }
+            }, failClosure: { (errorMsg) in
+                    
+            })
+        }
     }
+    
+    
+    private func goLogin(){
+        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
+        presentViewController(vc, animated: true, completion: nil)
+    }
+
     
     @IBAction func shareButtonClick(sender: UIButton) {
         //替换
         let shareText = "尖叫君....."
         //微信好友
         UMSocialData.defaultData().extConfig.wxMessageType = UMSocialWXMessageTypeWeb
-        UMSocialData.defaultData().extConfig.wechatSessionData.url = "www.baidu.com"
+        UMSocialData.defaultData().extConfig.wechatSessionData.url = "www.wowdsgn.com"
         UMSocialData.defaultData().extConfig.wechatSessionData.shareText = shareText
         UMSocialData.defaultData().extConfig.wechatSessionData.shareImage = UIImage(named: "me_logo")
         UMSocialData.defaultData().extConfig.wechatSessionData.title = "尖叫君"
         
         //朋友圈
-        UMSocialData.defaultData().extConfig.wechatTimelineData.url = "www.baidu.com"
+        UMSocialData.defaultData().extConfig.wechatTimelineData.url = "www.wowdsgn.com"
         UMSocialData.defaultData().extConfig.wechatTimelineData.shareText = shareText
         UMSocialData.defaultData().extConfig.wechatTimelineData.shareImage = UIImage(named: "me_logo")
         UMSocialData.defaultData().extConfig.wechatTimelineData.title = "尖叫君"
         
         //微博
-        UMSocialData.defaultData().extConfig.sinaData.shareText = shareText + "www.baidu.com"
+        UMSocialData.defaultData().extConfig.sinaData.shareText = shareText + "www.wowdsgn.com"
         UMSocialData.defaultData().extConfig.sinaData.shareImage = UIImage(named: "me_logo")
         
         UMSocialSnsService.presentSnsIconSheetView(self, appKey:WOWUMKey, shareText:"", shareImage:nil, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: self)

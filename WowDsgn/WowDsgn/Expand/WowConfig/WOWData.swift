@@ -41,3 +41,6 @@ let WOWTestStr = "不可救药的理想主义者"
 
 typealias WOWActionClosure         = () -> ()
 typealias WOWObjectActionClosure   = (object:AnyObject) ->()
+
+
+let WOWTestUID   = "20"

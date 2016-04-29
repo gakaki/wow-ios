@@ -150,6 +150,7 @@ extension WOWUserController{
             navigationController?.pushViewController(vc, animated: true)
         case 1://喜欢的
             let vc = UIStoryboard.initialViewController("User", identifier:"WOWILikeController") as! WOWILikeController
+            vc.selectIndex = indexPath.row
             navigationController?.pushViewController(vc, animated: true)
         default:
             break

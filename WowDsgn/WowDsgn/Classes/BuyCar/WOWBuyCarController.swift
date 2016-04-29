@@ -307,9 +307,10 @@ class WOWBuyCarController: WOWBaseViewController {
     private func asyncCarList(){
         //1.若本地有数据，那就进行同步,否则走第二步
         //2.直接拉取服务器端购物车数据
+        //FIXME:uid要变过来
         let uid = WOWUserManager.userID
         var cars = [AnyObject]()
-        var param:[String:AnyObject] = ["uid":uid]
+        var param:[String:AnyObject] = ["uid":WOWTestUID]
         let objects = WOWRealm.objects(WOWBuyCarModel)
         if objects.count == 0 {
             let string = JSONStringify(param)

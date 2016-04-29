@@ -9,12 +9,17 @@
 import UIKit
 
 class WOWILikeController: WOWBaseViewController {
-    var selectIndex:Int = 1
+    var selectIndex:Int = 0{
+        didSet{
+            type = selectIndex == 0 ? "2" : "1"
+        }
+    }
+    var type = "1"  //type 1为商品  2为场景
     var checkView:WOWTopMenuTitleView!
-    var goodsDataArr = [WOWGoodsModel]()
+    var dataArr = [WOWFavoriteListModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
+        request()
         // Do any additional setup after loading the view.
     }
     
@@ -27,7 +32,7 @@ class WOWILikeController: WOWBaseViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 //MARK:Lazy
@@ -52,17 +57,6 @@ class WOWILikeController: WOWBaseViewController {
 
 
 //MARK:Private Method
-    private func initData(){
-        //FIXME:测试数据
-        let string = ["年成立，总部设立在丹麦的Aarup。Carl Hansen & Son公司缘起于1908年Carl Hansen先生创立他的橱柜制造"," 11208"]
-        for index in 1...40 {
-            let model = WOWGoodsModel()
-            model.des = string[index % 2 ]
-            model.calCellHeight()
-            goodsDataArr.append(model)
-        }
-        collectionView.reloadData()
-    }
     
     override func setUI() {
         super.setUI()
@@ -87,12 +81,39 @@ class WOWILikeController: WOWBaseViewController {
         self.view.addSubview(checkView)
     }
     
+//MARK:Network
+    override func request() {
+        super.request()
+        let uid = WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_UserFavorite(uid:uid, type:type), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let json = JSON(result).arrayObject
+                if let js = json{
+                    strongSelf.dataArr = []
+                    for item in js{
+                        let model = Mapper<WOWFavoriteListModel>().map(item)
+                        if let m = model{
+                            strongSelf.dataArr.append(m)
+                            if strongSelf.type == "1"{ //商品的
+                                m.calCellHeight()
+                            }
+                        }
+                    }
+                    strongSelf.collectionView.reloadData()
+                }
+            }
+        }) { (errorMsg) in
+                
+        }
+    }
+    
 }
 
 
 extension WOWILikeController:TopMenuProtocol{
     func topMenuItemClick(index: Int) {
-        DLog("\(index)")
+        selectIndex = index
+        request()
     }
 }
 
@@ -103,18 +124,23 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dataArr.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var returnCell : UICollectionViewCell!
+        let model = dataArr[indexPath.row]
         switch selectIndex {
         case 0:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
+            cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.imgUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
             returnCell = cell
         case 1:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
-            
+            cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.imgUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+            cell.desLabel.text = model.name
+            //FIXME:要提醒tom哥更改过来哦
+            cell.priceLabel.text = model.price?.priceFormat()
             returnCell = cell
         default:
             break
@@ -124,14 +150,16 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let model = dataArr[indexPath.row]
         if selectIndex == 0 { //场景
             let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
             sence.hideNavigationBar = true
+            sence.senceID = model.id
             navigationController?.pushViewController(sence, animated: true)
         }else{//单品
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+            vc.productID = model.id
             vc.hideNavigationBar = true
-//            vc.goodsDetailEntrance = .FromGoodsList
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -143,10 +171,10 @@ extension WOWILikeController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         switch selectIndex {
         case 0:
-            //返回正方形
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth, WOWGoodsSmallCell.itemWidth)
+//            //返回正方形
+            return CGSizeMake(WOWImageCell.itemWidth, WOWImageCell.itemWidth)
         case 1:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,goodsDataArr[indexPath.item].cellHeight)
+            return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)
         default:
             return CGSizeMake(0, 0)
         }

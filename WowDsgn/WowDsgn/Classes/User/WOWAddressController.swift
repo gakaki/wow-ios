@@ -143,7 +143,7 @@ extension WOWAddressController{
     func deleteAddress(model:WOWAddressListModel) {
         let uid =  WOWUserManager.userID
         //FIXME:更改uid
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(uid:"22", addressid: model.id ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(uid:WOWTestUID, addressid: model.id ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let json = JSON(result).int ?? 0
                 if json == 1{

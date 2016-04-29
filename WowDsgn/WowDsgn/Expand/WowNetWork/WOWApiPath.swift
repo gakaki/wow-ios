@@ -55,9 +55,12 @@ let URL_CarNologin              = "cart/nologinlistandadd"
 
 let URL_CarDelete               = "cart/del"
 
+let URL_CarCommit               = "order/commit"
+
 
 //5.个人中心
 let URL_UpdateInfo              = "user/userupdate"
+let URL_FavoriteList            = "like/get"
 
 //6.app 登录注册
 let URL_Register                = "user/register"

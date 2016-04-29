@@ -9,6 +9,13 @@
 import UIKit
 
 class WOWImageCell: UICollectionViewCell {
+    
+    class var itemWidth:CGFloat{
+        get{
+            return (MGScreenWidth - 3) / 2
+        }
+    }
+    
     var pictureImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -39,7 +39,11 @@ public enum RequestApi{
     
     case Api_CarDelete(cart:String)
     
+    case Api_CarCommit(car:String)
+    
     case Api_UserUpdate(param:[String:String])
+    
+    case Api_UserFavorite(uid:String,type:String)
     
     case Api_Login(String,String)
     
@@ -54,6 +58,8 @@ public enum RequestApi{
     case Api_Addresslist(uid:String)
 
     case Api_AddressDelete(uid:String,addressid:String)
+    
+    
     
 }
 
@@ -91,10 +97,14 @@ extension RequestApi:TargetType{
             return URL_UpdateInfo
         case .Api_CarList:
             return URL_CarList
+        case .Api_UserFavorite:
+            return URL_FavoriteList
         case .Api_CarNologin:
             return URL_CarNologin
         case .Api_CarDelete:
             return URL_CarDelete
+        case .Api_CarCommit:
+            return URL_CarCommit
         case .Api_Login:
             return URL_login
         case .Api_Register:
@@ -138,6 +148,8 @@ extension RequestApi:TargetType{
             return ["uid":uid,"product_id":product_id,"comment":comment]
         case let .Api_UserUpdate(param):
             return param
+        case let .Api_UserFavorite(uid,type):
+            return ["uid":uid,"type":type]
         case let .Api_CarEdit(cart):
             return ["cart":cart]
         case let .Api_CarList(cart):
@@ -145,6 +157,8 @@ extension RequestApi:TargetType{
         case let .Api_CarNologin(cart):
             return ["cart":cart]
         case let .Api_CarDelete(cart):
+            return ["cart":cart]
+        case let .Api_CarCommit(cart):
             return ["cart":cart]
         case let .Api_Sms(type,mobile):
             return ["type":type,"mobile":mobile]
@@ -162,6 +176,7 @@ extension RequestApi:TargetType{
     }
     
     
+        /// 返回""空串的话代表需要在回调函数里面自己提示
     public var endSuccessMsg:String?{
         switch self {
         case .Api_Login:
@@ -172,6 +187,8 @@ extension RequestApi:TargetType{
             return "评论成功"
         case .Api_Sms:
             return "验证码发送成功"
+        case .Api_AddressAdd:
+            return ""
         default:
             return nil
         }

@@ -66,7 +66,11 @@ class WOWNetManager {
                         return
                     }
                     if let endMsg = target.endSuccessMsg{
-                        WOWHud.showMsg(endMsg)
+                        if endMsg == ""{
+                            
+                        }else{
+                            WOWHud.showMsg(endMsg)
+                        }
                     }else{
                         WOWHud.dismiss()
                     }

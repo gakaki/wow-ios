@@ -20,7 +20,7 @@ class WOWSureOrderController: WOWBaseViewController {
     //post的参数
     private var tipsTextField           : UITextField!
     private var addressID               : String?
-    private var payType                 = "``````azsfcc"
+    private var payType                 = "ali"
     
     
     override func viewDidLoad() {
@@ -55,7 +55,23 @@ class WOWSureOrderController: WOWBaseViewController {
     
     @IBAction func payButtonClick(sender: UIButton) {
         let tips = tipsTextField.text ?? ""
-        DLog(tips)
+        //FIXME:uid要变过来
+        let uid  = WOWUserManager.userID
+        var productParam = [AnyObject]()
+        for item in productArr {
+            let dict = ["skuid":item.skuID,"count":item.skuProductCount,"productid":item.productID]
+            productParam.append(dict)
+        }
+        let requestParam  = ["cart":productParam,"uid":WOWTestUID,"pay_method":payType,"tips":tips]
+        let requestString = JSONStringify(requestParam)
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CarCommit(car:requestString), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+            }
+        }) { (errorMsg) in
+                
+        }
 //        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
 //        navigationController?.pushViewController(vc, animated: true)
     }
@@ -66,7 +82,7 @@ class WOWSureOrderController: WOWBaseViewController {
         //请求地址数据
         //FIXME:替换掉
         let uid =  WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:"22"), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:WOWTestUID), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(result)
                 if let array = arr{
@@ -166,9 +182,9 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         switch indexPath.section {
         case 1:
             if indexPath.row == 0 {
-                payType = "aliPay"
+                payType = "ali"
             }else{
-                payType = "wxPay"
+                payType = "wx"
             }
             DLog("支付方式:\(payType)")
         default:

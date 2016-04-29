@@ -83,9 +83,10 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func saveNetBuyCar(model:WOWBuyCarModel){
         let uid = WOWUserManager.userID
+        //FIXME:uid要变过来
         let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName]]
        
-        let param = ["uid":uid,"cart":carItems,"tag":"0"]
+        let param = ["uid":WOWTestUID,"cart":carItems,"tag":"0"]
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let _ = self{

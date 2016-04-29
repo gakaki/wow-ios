@@ -14,9 +14,10 @@ enum  SenceEntrance{
 }
 
 class WOWSenceController: WOWBaseViewController {
-    var footerCollectionView:UICollectionView!
-    @IBOutlet weak var tableView: UITableView!
-    var senceEntrance:SenceEntrance = .FromHome
+    var footerCollectionView        :UICollectionView!
+    @IBOutlet weak var tableView    : UITableView!
+    var senceID                     :String?
+    var senceEntrance               :SenceEntrance = .FromHome
     override func viewDidLoad() {
         super.viewDidLoad()
     }

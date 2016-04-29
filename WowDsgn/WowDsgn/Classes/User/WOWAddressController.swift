@@ -57,7 +57,7 @@ class WOWAddressController: WOWBaseTableViewController {
         super.request()
         let uid = WOWUserManager.userID
         //FIXME:uid要替换掉
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:"22"), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:WOWTestUID), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(result)
                 if let array = arr{

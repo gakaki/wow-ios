@@ -141,23 +141,24 @@ class WOWBrandUnderView: UIView {
     }
     
     private func configSubViews(){
+        /* 收藏功能暂时去掉
         likeButton = UIButton(type: .System)
         likeButton.titleLabel?.font = UIFont.systemFontOfSize(10)
         likeButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
         likeButton.setImage(UIImage(named: "icon_like")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
         likeButton.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Selected)
-        //FIXME:测数据
+        
         likeButton.setTitle("123", forState: .Normal)
         likeButton.tag = WOWItemActionType.Like.rawValue
         likeButton.addTarget(self, action: #selector(action(_:)), forControlEvents:.TouchUpInside)
-        addSubview(likeButton)
+//        addSubview(likeButton)
         likeButton.snp_makeConstraints { [weak self](make) in
             if let strongSelf = self{
                 make.left.equalTo(strongSelf).offset(15)
                 make.bottom.top.equalTo(strongSelf).offset(0)
             }
         }
-        
+        */
         shareButton = UIButton(type: .System)
         shareButton.setImage(UIImage(named: "icon_share")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
         shareButton.titleLabel?.font = UIFont.systemFontOfSize(10)
@@ -169,7 +170,8 @@ class WOWBrandUnderView: UIView {
         addSubview(shareButton)
         shareButton.snp_makeConstraints { [weak self](make) in
             if let strongSelf = self{
-                make.left.equalTo(strongSelf.likeButton.snp_right).offset(20)
+//                make.left.equalTo(strongSelf.likeButton.snp_right).offset(20)
+                 make.left.equalTo(strongSelf).offset(15)
                 make.bottom.top.equalTo(strongSelf).offset(0)
             }
         }

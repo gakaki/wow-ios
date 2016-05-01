@@ -49,6 +49,7 @@ class WOWNetManager {
             switch result{
                 case let .Success(response):
                     let info = Mapper<ReturnInfo>().map(JSON(data: response.data,options: .AllowFragments).object)
+                    
                     if let code = info?.code{
                         guard code == RequestCode.Success.rawValue else{
                             failClosure(errorMsg:info?.message)

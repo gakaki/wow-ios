@@ -70,7 +70,10 @@ class WOWSureOrderController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CarCommit(car:requestString), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
-                DLog(json)
+                let charge = json["charge"]
+                if charge != nil{
+                    strongSelf.goPay()
+                }
             }
         }) { (errorMsg) in
                 
@@ -78,6 +81,11 @@ class WOWSureOrderController: WOWBaseViewController {
 //        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
 //        navigationController?.pushViewController(vc, animated: true)
     }
+    
+    private func goPay(){
+        
+    }
+    
     
 //MARK:Network
     override func request() {

@@ -23,6 +23,7 @@ class WOWFavoriteListModel: WOWBaseModel,Mappable{
         type    <- map["type"]
         imgUrl  <- map["imageurl"]
         name    <- map["name"]
+        price   <- map["price"]
     }
     
     required init?(_ map: Map) {

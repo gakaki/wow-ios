@@ -20,7 +20,7 @@ class WOWILikeController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,9 +47,11 @@ class WOWILikeController: WOWBaseViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,self.view.width,self.view.height - 45 - 64), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 40,self.view.width,self.view.height - 40 - 64), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.emptyDataSetDelegate = self
+        collectionView.emptyDataSetSource   = self
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -68,7 +70,8 @@ class WOWILikeController: WOWBaseViewController {
     private func configColelction(){
         view.addSubview(collectionView)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
-       collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
+        collectionView.mj_header = self.mj_header
+        collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
     }
     
     private func configCheck(){
@@ -101,9 +104,12 @@ class WOWILikeController: WOWBaseViewController {
                     }
                     strongSelf.collectionView.reloadData()
                 }
+                strongSelf.endRefresh()
             }
-        }) { (errorMsg) in
-                
+        }) { [weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
         }
     }
     
@@ -139,7 +145,6 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
             cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.imgUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
             cell.desLabel.text = model.name
-            //FIXME:要提醒tom哥更改过来哦
             cell.priceLabel.text = model.price?.priceFormat()
             returnCell = cell
         default:
@@ -164,6 +169,15 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
         }
     }
     
+    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "暂无您喜欢的" + (selectIndex == 0 ? "场景哦...":"单品哦...")
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        return -40
+    }
 }
 
 
@@ -178,6 +192,9 @@ extension WOWILikeController:CollectionViewWaterfallLayoutDelegate{
         default:
             return CGSizeMake(0, 0)
         }
+    }
+    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, insetForSection section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(5, 0, 0, 0)
     }
 }
 

@@ -70,7 +70,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         let params = ["user_headimage":headImageUrl,"user_nick":nick,"user_desc":des,"user_sex":sex,"uid":WOWUserManager.userID]
         WOWNetManager.sharedManager.requestWithTarget(.Api_UserUpdate(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
-                DLog(result)
                 let model = Mapper<WOWUserModel>().map(result["user"])
                 WOWUserManager.saveUserInfo(model)
                 strongSelf.configUserInfo()

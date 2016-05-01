@@ -134,6 +134,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(product_id: productID ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 //FIXME:需要给我的还有该商品官网的url，分享出去哦
                 strongSelf.configData()

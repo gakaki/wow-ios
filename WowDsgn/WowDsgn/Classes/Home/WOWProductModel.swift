@@ -80,7 +80,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     /// 商品列表瀑布流需要用的高度
     var cellHeight:CGFloat = 0
     func calCellHeight(){
-        let s = self.productDes ?? ""
+        let s = self.productShortDes ?? ""
         var height = s.heightWithConstrainedWidth((MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30, font: UIFont.systemScaleFontSize(13))
         height = height > 18 ? 30 : 18
         self.cellHeight = 20 + 5 + 14 + height + 6 + WOWGoodsSmallCell.itemWidth

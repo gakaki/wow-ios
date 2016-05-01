@@ -173,7 +173,7 @@ class WOWGoodsController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 let totalPage = JSON(result)["total_page"].intValue
-                if totalPage == strongSelf.pageIndex{
+                if strongSelf.pageIndex == totalPage - 1{
                     strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
                 }
                 

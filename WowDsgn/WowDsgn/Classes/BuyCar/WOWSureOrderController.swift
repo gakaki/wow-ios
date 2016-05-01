@@ -54,15 +54,18 @@ class WOWSureOrderController: WOWBaseViewController {
 //MARK:Actions
     
     @IBAction func payButtonClick(sender: UIButton) {
+        guard let addressid = addressID else{
+            WOWHud.showMsg("请先选择收货地址")
+            return
+        }
         let tips = tipsTextField.text ?? ""
-        //FIXME:uid要变过来
         let uid  = WOWUserManager.userID
         var productParam = [AnyObject]()
         for item in productArr {
             let dict = ["skuid":item.skuID,"count":item.skuProductCount,"productid":item.productID]
             productParam.append(dict)
         }
-        let requestParam  = ["cart":productParam,"uid":WOWTestUID,"pay_method":payType,"tips":tips]
+        let requestParam  = ["cart":productParam,"uid":uid,"pay_method":payType,"tips":tips,"addressid":addressid]
         let requestString = JSONStringify(requestParam)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CarCommit(car:requestString), successClosure: { [weak self](result) in
             if let strongSelf = self{
@@ -82,7 +85,7 @@ class WOWSureOrderController: WOWBaseViewController {
         //请求地址数据
         //FIXME:替换掉
         let uid =  WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:WOWTestUID), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:uid), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(result)
                 if let array = arr{
@@ -128,6 +131,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             cell.userInteractionEnabled = false
             cell.checkButton.selected = true
             cell.showData(addressArr[indexPath.row])
+            addressID = addressArr[indexPath.row].id
             returnCell = cell
         case 1: //支付方式
             let type = ["支付宝","微信支付"]

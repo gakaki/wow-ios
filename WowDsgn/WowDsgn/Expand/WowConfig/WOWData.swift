@@ -43,4 +43,4 @@ typealias WOWActionClosure         = () -> ()
 typealias WOWObjectActionClosure   = (object:AnyObject) ->()
 
 
-let WOWTestUID   = "20"
+//let WOWTestUID   = "20"

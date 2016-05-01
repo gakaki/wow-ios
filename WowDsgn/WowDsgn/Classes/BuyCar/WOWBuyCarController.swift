@@ -310,7 +310,7 @@ class WOWBuyCarController: WOWBaseViewController {
         //FIXME:uid要变过来
         let uid = WOWUserManager.userID
         var cars = [AnyObject]()
-        var param:[String:AnyObject] = ["uid":WOWTestUID]
+        var param:[String:AnyObject] = ["uid":uid]
         let objects = WOWRealm.objects(WOWBuyCarModel)
         if objects.count == 0 {
             let string = JSONStringify(param)

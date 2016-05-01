@@ -167,7 +167,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
         }
         
         //FIXME:uid要替换
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:WOWTestUID, name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def,addressid:addressdid), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:uid, name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def,addressid:addressdid), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result).int
                 if let ret = json{

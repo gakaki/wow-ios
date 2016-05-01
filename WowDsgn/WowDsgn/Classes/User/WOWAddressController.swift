@@ -57,7 +57,7 @@ class WOWAddressController: WOWBaseTableViewController {
         super.request()
         let uid = WOWUserManager.userID
         //FIXME:uid要替换掉
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:WOWTestUID), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:uid), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(result)
                 if let array = arr{
@@ -143,7 +143,7 @@ extension WOWAddressController{
     func deleteAddress(model:WOWAddressListModel) {
         let uid =  WOWUserManager.userID
         //FIXME:更改uid
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(uid:WOWTestUID, addressid: model.id ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(uid:uid, addressid: model.id ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let json = JSON(result).int ?? 0
                 if json == 1{

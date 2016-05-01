@@ -50,6 +50,11 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:Private Method
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+    }
+    
+    func loginSuccess() {
+        request()
     }
     
     func sureButton(nf:NSNotification)  {
@@ -59,6 +64,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         }
         backView.hideBuyView()
     }
+
     
     private func resolveBuyModel(model:WOWBuyCarModel){
         if WOWUserManager.loginStatus { //登录
@@ -120,6 +126,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     private func configData(){
         priceLabel.text = productModel?.price?.priceFormat() ?? ""
         cycleView.imageURLArray = [productModel?.productImage ?? ""]
+        favoriteButton.selected = (productModel?.user_isLike ?? "false") == "true"
     }
     
 //MARK:Actions
@@ -161,8 +168,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
             let uid         = WOWUserManager.userID
             let thingid     = self.productID ?? ""
             let type        = "1" //1为商品 0 为场景
-            //FIXME:更改状态噻
-            let is_delete   = "1"
+            let is_delete   = (productModel?.user_isLike ?? "false") == "true" ? "1" : "0"
             WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
                 if let strongSelf = self{
                     strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
@@ -279,7 +285,10 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 4: //喜欢
             return 0
         case 5: //评论
-            return 5
+            if let commentList = productModel?.comments {
+                return commentList.count
+            }
+            return 0
         default:
             return 0
         }
@@ -312,7 +321,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
-            cell.rightTitleLabel.text = "\(productModel?.favorites_count ?? 0)人喜欢"
+            cell.rightTitleLabel.text = "\(productModel?.likesCount ?? 0)人喜欢"
             cell.rightBackView.addAction({ [weak self] in
                 if let strongSelf = self{
                     let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
@@ -320,11 +329,14 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
                 }
             })
             returnCell = cell
-        case 5:
+        case 5: //评论
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
             cell.hideHeadImage()
-            //FIXME:测试数据
-            cell.commentLabel.text = "我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君"
+            if let model = productModel?.comments![indexPath.row]{
+                cell.commentLabel.text = model.comment
+                cell.dateLabel.text    = model.created_at
+                cell.nameLabel.text    = model.user_nick
+            }
             returnCell = cell
         default:
             DLog("")
@@ -352,7 +364,10 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 3:
             return 36
         case 5: //评论
-            return 36
+            if let arr = productModel?.comments {
+                return arr.count == 0 ? 0.01 : 36
+            }
+            return 0.01
         default:
             return 0.01
         }
@@ -381,9 +396,17 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 3://参数
             return WOWMenuTopView(leftTitle: "产品参数", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
         case 5: //评论
-            let view =  WOWMenuTopView(leftTitle: "\(productModel?.comments_count ?? 0)条评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
-            goComment(view)
-            return view
+            if let arr = productModel?.comments {
+                if arr.count == 0 {
+                    return nil
+                }else{
+                    let view =  WOWMenuTopView(leftTitle: "\(productModel?.comments_count ?? 0)条评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
+                    goComment(view)
+                    return view
+                }
+            }else{
+                return nil
+            }
         default:
             return nil
         }

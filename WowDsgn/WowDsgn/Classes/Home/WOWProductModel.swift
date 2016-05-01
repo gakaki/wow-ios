@@ -26,7 +26,11 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var brandDesc       : String?
     
     var comments_count  : Int?
-    var favorites_count : Int?
+    var comments        : [WOWCommentListModel]?
+    var likesCount      : Int?
+//    var likesList       : []
+//    var favorites_count : Int?
+    var user_isLike     : String?
     
     var designer_url    : String?
     var designer_name   : String?
@@ -60,15 +64,17 @@ class WOWProductModel: WOWBaseModel,Mappable{
         brandName       <- map["brand_name"]
         brandImage      <- map["brand_image"]
         brandDesc       <- map["brand_desc"]
-        comments_count  <- map["comments_count"]
-        favorites_count <- map["favorites_count"]
+        comments_count  <- map["commentcount"]
+        comments        <- map["comments"]
+        likesCount      <- map["likes_count"]
         designer_url    <- map["designer_url"]
         designer_name   <- map["designer_name"]
         designer_desc   <- map["designer_desc"]
-        attributes      <- map["attributes"]
+        attributes      <- map["attr"]
         skus            <- map["skus"]
         pics_compose    <- map["pics_compose"]
         pics_carousel   <- map["pics_carousel"]
+        user_isLike     <- map["likes_list"]
     }
     
     /// 商品列表瀑布流需要用的高度

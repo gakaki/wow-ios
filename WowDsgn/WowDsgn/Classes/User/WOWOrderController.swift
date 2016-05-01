@@ -55,7 +55,8 @@ class WOWOrderController: WOWBaseViewController {
     
     override func backButtonClick() {
         if entrance == .PaySuccess {
-            navigationController?.popToRootViewControllerAnimated(true)
+//            navigationController?.popToRootViewControllerAnimated(true)
+            navigationController?.dismissViewControllerAnimated(true, completion: nil)
         }else{
             navigationController?.popViewControllerAnimated(true)
         }

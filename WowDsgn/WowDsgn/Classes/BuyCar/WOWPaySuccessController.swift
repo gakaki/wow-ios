@@ -58,7 +58,8 @@ extension WOWPaySuccessController{
                 vc.entrance = OrderEntrance.PaySuccess
                 navigationController?.pushViewController(vc, animated: true)
             }else{
-                navigationController?.popToRootViewControllerAnimated(true)
+//                navigationController?.popToRootViewControllerAnimated(true)
+                navigationController?.dismissViewControllerAnimated(true, completion: nil)
             }
         default:
             break

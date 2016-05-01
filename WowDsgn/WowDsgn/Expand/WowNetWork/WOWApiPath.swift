@@ -63,8 +63,8 @@ let URL_UpdateInfo              = "user/userupdate"
 let URL_FavoriteList            = "like/get"
 
 //6.app 登录注册
-let URL_Register                = "user/register"
-let URL_login                   = "user/login"
+let URL_Register                = "usermongo/register"
+let URL_login                   = "usermongo/login"
 let URL_Sms                     = "sms/getcode"
 let URL_ResetPassword           = "user/resettingpwd"
 

@@ -39,7 +39,7 @@ let URL_SubmitComment           = "product/comment"
 let URL_CommentList             = "product/commentlist"
 
 //2.6收藏
-let URL_Favorite                = "favorite/like"
+let URL_Favorite                = "/like/do"
 
 //3.app活动
 let URL_activity                = "post"

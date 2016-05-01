@@ -63,11 +63,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        let ret = UMSocialSnsService.handleOpenURL(url)
-        if ret == false {
-            
-        }
-        return ret
+        UMSocialSnsService.handleOpenURL(url)
+        Pingpp.handleOpenURL(url, withCompletion: nil)
+        return true
+    }
+    
+    // iOS 9 以上请用这个
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        Pingpp.handleOpenURL(url, withCompletion: nil)
+        return true
     }
     
 }

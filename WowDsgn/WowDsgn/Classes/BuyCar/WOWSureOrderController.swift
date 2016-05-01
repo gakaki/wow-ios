@@ -22,7 +22,6 @@ class WOWSureOrderController: WOWBaseViewController {
     private var addressID               : String?
     private var payType                 = "ali"
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -65,25 +64,41 @@ class WOWSureOrderController: WOWBaseViewController {
             let dict = ["skuid":item.skuID,"count":item.skuProductCount,"productid":item.productID]
             productParam.append(dict)
         }
-        let requestParam  = ["cart":productParam,"uid":uid,"pay_method":payType,"tips":tips,"addressid":addressid]
+        let requestParam  = ["cart":productParam,"uid":uid,"pay_method":payType,"tips":tips,"address_id":addressid]
         let requestString = JSONStringify(requestParam)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CarCommit(car:requestString), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
+                DLog(json)
                 let charge = json["charge"]
+                let totalPrice = json["total"].string ?? ""
+                let orderid    = json["order_id"].string ?? ""
                 if charge != nil{
-                    strongSelf.goPay()
+                    strongSelf.goPay(charge.object,totalPrice: totalPrice,orderid: orderid)
                 }
             }
         }) { (errorMsg) in
                 
         }
-//        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
-//        navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func goPay(){
-        
+    private func goPay(charge:AnyObject,totalPrice:String,orderid:String){
+        dispatch_async(dispatch_get_main_queue()) { 
+            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
+                if let strongSelf = self{
+                    if ret == "success"{
+                        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
+                        vc.payMethod = (strongSelf.payType == "ali" ? "支付宝":"微信")
+                        vc.orderid = orderid
+                        vc.totalPrice = totalPrice
+                        strongSelf.navigationController?.pushViewController(vc, animated: true)
+                    }else{
+                        DLog(error.code.rawValue)
+                        DLog(error.getMsg())
+                    }
+                }
+            }
+        }
     }
     
     

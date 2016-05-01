@@ -8,7 +8,14 @@
 
 import UIKit
 
+enum OrderEntrance {
+    case PaySuccess
+    case User
+}
+
 class WOWOrderController: WOWBaseViewController {
+    var entrance = OrderEntrance.User
+    
     var selectIndex:Int = 0
     @IBOutlet weak var tableView: UITableView!
     var menuView:WOWTopMenuTitleView!
@@ -44,6 +51,14 @@ class WOWOrderController: WOWBaseViewController {
         menuView.delegate = self
         WOWBorderColor(menuView)
         self.view.addSubview(menuView)
+    }
+    
+    override func backButtonClick() {
+        if entrance == .PaySuccess {
+            navigationController?.popToRootViewControllerAnimated(true)
+        }else{
+            navigationController?.popViewControllerAnimated(true)
+        }
     }
 
 }

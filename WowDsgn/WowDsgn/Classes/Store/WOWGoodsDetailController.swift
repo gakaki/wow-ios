@@ -153,20 +153,17 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     @IBAction func likeButtonClick(sender: UIButton) {
-        if WOWUserManager.loginStatus {
+        if !WOWUserManager.loginStatus {
             goLogin()
         }else{
             let uid         = WOWUserManager.userID
             let thingid     = self.productID ?? ""
-            let type        = "poduct" //1为商品 0 为场景
+            let type        = "1" //1为商品 0 为场景
             //FIXME:更改状态噻
-            let is_cancel   = "1"
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(thingid:thingid, uid:uid, type:type,is_cancel:is_cancel), successClosure: { [weak self](result) in
+            let is_delete   = "1"
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
                 if let strongSelf = self{
-                    let ret = JSON(result).int ?? 0
-                    if ret == 1{ //收藏成功
-                        strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
-                    }
+                    strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
                 }
             }, failClosure: { (errorMsg) in
                     

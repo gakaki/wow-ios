@@ -21,7 +21,7 @@ class WOWFavoriteListModel: WOWBaseModel,Mappable{
     func mapping(map: Map) {
         id      <- map["id"]
         type    <- map["type"]
-        imgUrl  <- map["imgUrl"]
+        imgUrl  <- map["imageurl"]
         name    <- map["name"]
     }
     

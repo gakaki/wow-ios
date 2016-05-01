@@ -9,7 +9,9 @@
 import UIKit
 
 class WOWPaySuccessController: WOWBaseTableViewController {
-
+    var orderid     = "  "
+    var totalPrice  = ""
+    var payMethod   = "支付宝"
     @IBOutlet weak var orderIdLabel: UILabel!
     
     @IBOutlet weak var payMethodLabel: UILabel!
@@ -17,6 +19,9 @@ class WOWPaySuccessController: WOWBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "支付成功"
+        orderIdLabel.text = orderid
+        orderCountLabel.text = totalPrice.priceFormat()
+        payMethodLabel.text = payMethod
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,12 +49,16 @@ extension WOWPaySuccessController{
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        switch indexPath.section {
         case 2:
-            if indexPath.row == 0 {
-                DLog("查看订单")
+            if indexPath.row == 0 {//订单
+                let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
+                vc.selectIndex = 0
+                vc.entrance = OrderEntrance.PaySuccess
+                navigationController?.pushViewController(vc, animated: true)
             }else{
-                DLog("返回首页")
+                navigationController?.popToRootViewControllerAnimated(true)
             }
         default:
             break

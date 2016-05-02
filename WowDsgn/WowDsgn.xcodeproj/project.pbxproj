@@ -76,6 +76,7 @@
 		295659031CBFC76F0029B897 /* WOWAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295659021CBFC76F0029B897 /* WOWAddressController.swift */; };
 		295659071CBFC7F10029B897 /* WOWAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295659051CBFC7F10029B897 /* WOWAddressCell.swift */; };
 		295659081CBFC7F10029B897 /* WOWAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 295659061CBFC7F10029B897 /* WOWAddressCell.xib */; };
+		2972C7CB1CD740290061E0BA /* WOWOrderListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972C7CA1CD740290061E0BA /* WOWOrderListModel.swift */; };
 		2975F30E1CCDB05000D05007 /* WOWDesignerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F30C1CCDB05000D05007 /* WOWDesignerCell.swift */; };
 		2975F30F1CCDB05000D05007 /* WOWDesignerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2975F30D1CCDB05000D05007 /* WOWDesignerCell.xib */; };
 		2991AD191CBCCA0B00F5F5A0 /* WOWBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991ACFA1CBCCA0B00F5F5A0 /* WOWBaseTableViewController.swift */; };
@@ -313,6 +314,7 @@
 		295659021CBFC76F0029B897 /* WOWAddressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAddressController.swift; sourceTree = "<group>"; };
 		295659051CBFC7F10029B897 /* WOWAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAddressCell.swift; sourceTree = "<group>"; };
 		295659061CBFC7F10029B897 /* WOWAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWAddressCell.xib; sourceTree = "<group>"; };
+		2972C7CA1CD740290061E0BA /* WOWOrderListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderListModel.swift; sourceTree = "<group>"; };
 		2975F30C1CCDB05000D05007 /* WOWDesignerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWDesignerCell.swift; sourceTree = "<group>"; };
 		2975F30D1CCDB05000D05007 /* WOWDesignerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWDesignerCell.xib; sourceTree = "<group>"; };
 		2991ACFA1CBCCA0B00F5F5A0 /* WOWBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBaseTableViewController.swift; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 				294948B01CD0E53900BA5DFC /* WOWProvinceModel.swift */,
 				29E7463C1CD1EF28007DC728 /* WOWAddressListModel.swift */,
 				29C64FA01CD37EC000D01156 /* WOWFavoriteListModel.swift */,
+				2972C7CA1CD740290061E0BA /* WOWOrderListModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1432,6 +1435,7 @@
 				2991ADDA1CBCCAD400F5F5A0 /* WOWLoginController.swift in Sources */,
 				2991ADA31CBCCAB100F5F5A0 /* WOWReuseSectionView.swift in Sources */,
 				2912E0D31CC232FA005929D1 /* WOWMeSocietyController.swift in Sources */,
+				2972C7CB1CD740290061E0BA /* WOWOrderListModel.swift in Sources */,
 				29AE2C341CC0C41400588429 /* WOWValue1Cell.swift in Sources */,
 				2991ADE51CBCCAD400F5F5A0 /* WOWUserTopView.swift in Sources */,
 				2991AD5D1CBCCA7400F5F5A0 /* CyclePictureCell.swift in Sources */,

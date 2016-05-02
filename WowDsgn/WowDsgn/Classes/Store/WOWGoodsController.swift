@@ -95,6 +95,16 @@ class WOWGoodsController: WOWBaseViewController {
         //FIXME:下拉箭头再找下更适合的吧
         configNavigation()
         configMenuView()
+        configNav()
+    }
+    
+    private func configNav(){
+        makeCustomerImageNavigationItem("car", left: false) {[weak self] in
+            if let strongSelf = self{
+                let buyCar = UIStoryboard.initialViewController("BuyCar")
+                strongSelf.presentViewController(buyCar, animated: true, completion: nil)
+            }
+        }
     }
     
     private func configProductType(){

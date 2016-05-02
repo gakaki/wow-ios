@@ -43,3 +43,6 @@ class WOWBuyCarModel: Object,Mappable{
         self.init()
     }
 }
+
+
+

@@ -72,3 +72,5 @@ let URL_ResetPassword           = "user/resettingpwd"
 let URL_AddressAdd              = "address/addorupdate"
 let URL_AddressList             = "address/list"
 let URL_AddressDelete           = "address/delete"
+
+let URL_OrderList               = "order/list"

@@ -30,7 +30,7 @@
                                         <rect key="frame" x="75" y="1" width="245" height="43"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
                                             <outlet property="delegate" destination="7Sz-xq-7KD" id="79H-uJ-x5n"/>
                                         </connections>

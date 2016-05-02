@@ -15,19 +15,33 @@ enum OrderEntrance {
 
 class WOWOrderController: WOWBaseViewController {
     var entrance = OrderEntrance.User
-    
-    var selectIndex:Int = 0
+    var dataArr  = [WOWOrderListModel]()
+    var type = "100"  //100代表全部
+    var selectIndex:Int = 0{
+        didSet{
+            switch selectIndex {
+            case 0:
+                type = "100" //全部
+            case 1: //待付款
+                type = "0"
+            case 2: //待收货
+                type = "2"
+            case 3: //待评价
+                type = "3"
+            default:
+                type = "100"
+            }
+        }
+    }
     @IBOutlet weak var tableView: UITableView!
     var menuView:WOWTopMenuTitleView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        request()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 //MARK:Private Method
@@ -55,10 +69,27 @@ class WOWOrderController: WOWBaseViewController {
     
     override func backButtonClick() {
         if entrance == .PaySuccess {
-//            navigationController?.popToRootViewControllerAnimated(true)
             navigationController?.dismissViewControllerAnimated(true, completion: nil)
         }else{
             navigationController?.popViewControllerAnimated(true)
+        }
+    }
+
+//MARK:Network
+    override func request() {
+        super.request()
+        let uid = WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderList(uid: uid, type: type), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let arr = Mapper<WOWOrderListModel>().mapArray(result)
+                strongSelf.dataArr = []
+                if let array = arr{
+                    strongSelf.dataArr.appendContentsOf(array)
+                }
+                strongSelf.tableView.reloadData()
+            }
+        }) { (errorMsg) in
+                
         }
     }
 
@@ -67,7 +98,8 @@ class WOWOrderController: WOWBaseViewController {
 
 extension WOWOrderController:TopMenuProtocol{
     func topMenuItemClick(index: Int) {
-        DLog("选择了\(index)")
+        selectIndex = index
+        request()
     }
 }
 
@@ -78,7 +110,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return dataArr.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -87,7 +119,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderListCell", forIndexPath: indexPath) as! WOWOrderListCell
-        cell.showData(indexPath.row % 5)
+        cell.showData(dataArr[indexPath.row])
         return cell
     }
     

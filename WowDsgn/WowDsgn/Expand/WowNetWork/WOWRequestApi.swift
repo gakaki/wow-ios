@@ -59,7 +59,7 @@ public enum RequestApi{
 
     case Api_AddressDelete(uid:String,addressid:String)
     
-    
+    case Api_OrderList(uid:String,type:String) //100为全部
     
 }
 
@@ -119,6 +119,8 @@ extension RequestApi:TargetType{
             return URL_AddressList
         case .Api_AddressDelete:
             return URL_AddressDelete
+        case .Api_OrderList:
+            return URL_OrderList
         }
     }
     
@@ -170,6 +172,8 @@ extension RequestApi:TargetType{
             return ["uid":uid]
         case let .Api_AddressDelete(uid,id):
             return ["uid":uid,"id":id]
+        case let .Api_OrderList(uid,type):
+            return ["uid":uid,"type":type]
         default:
             return nil
         }

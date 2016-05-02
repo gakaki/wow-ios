@@ -10,17 +10,25 @@ import UIKit
 
 protocol BrandCellDelegate:class{
     func hotBrandCellClick(brandModel:WOWBrandModel)
+    func recommenProductCellClick(productModel:WOWProductModel)
 }
 
 class WOWStoreBrandCell: UITableViewCell {
-
     @IBOutlet weak var collectionView: UICollectionView!
+    var showBrand : Bool = true //热门品牌和推荐商品都取这两个
     weak var delegate:BrandCellDelegate?
-    var dataArr : [WOWBrandModel]?{
+    var brandDataArr = [WOWBrandModel](){
         didSet{
             collectionView.reloadData()
         }
     }
+    
+    var productArr = [WOWProductModel](){
+        didSet{
+            collectionView.reloadData()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
@@ -40,17 +48,22 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let arr = dataArr {
-            return arr.count
+        if showBrand {
+            return brandDataArr.count
+        }else{
+            return productArr.count > 9 ? 9 : productArr.count
         }
-        return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
-        if let arr = dataArr {
-            let model = arr[indexPath.item]
+        if showBrand {
+            let model = brandDataArr[indexPath.item]
             let url = NSURL(string:model.brandImageUrl ?? "")
+            cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
+        }else{
+            let model = productArr[indexPath.item]
+            let url = NSURL(string:model.productImage ?? "")
             cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
         }
         return cell
@@ -62,7 +75,11 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let del = self.delegate {
-            del.hotBrandCellClick(dataArr![indexPath.row])
+            if showBrand {
+                 del.hotBrandCellClick(brandDataArr[indexPath.row])
+            }else{
+                del.recommenProductCellClick(productArr[indexPath.row])
+            }
         }
     }
 }

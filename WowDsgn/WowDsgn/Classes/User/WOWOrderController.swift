@@ -78,6 +78,7 @@ class WOWOrderController: WOWBaseViewController {
 //MARK:Network
     override func request() {
         super.request()
+        DLog(type)
         let uid = WOWUserManager.userID
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderList(uid: uid, type: type), successClosure: { [weak self](result) in
             if let strongSelf = self{
@@ -125,6 +126,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
+        vc.orderModel = dataArr[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     

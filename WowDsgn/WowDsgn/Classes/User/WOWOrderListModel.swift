@@ -18,19 +18,27 @@ class WOWOrderListModel: WOWBaseModel,Mappable{
     var total           : String?
     var address_full    : String?
     var pay_method      : String?
+    var address_username: String?
+    var address_mobile  : String?
+    var created_at      : String?
+    var tips            : String?
     
     required init?(_ map: Map) {
         
     }
     
     func mapping(map: Map) {
-        id              <- map["id"]
-        products        <- map["items"]
-        status          <- map["status"]
-        status_chs      <- map["status_chs"]
-        total           <- map["total"]
-        address_full    <- map["address_full"]
-        pay_method      <- map["pay_method"]
+        id                  <- map["id"]
+        products            <- map["items"]
+        status              <- map["status"]
+        status_chs          <- map["status_chs"]
+        total               <- map["total"]
+        address_full        <- map["address_full"]
+        pay_method          <- map["pay_method"]
+        address_username    <- map["address_username"]
+        address_mobile      <- map["address_mobile"]
+        created_at          <- map["created_at"]
+        tips                <- map["tips"]
     }
 }
 
@@ -41,7 +49,7 @@ class WOWOrderProductModel: WOWBaseModel ,Mappable{
     var sku_title   : String?
     var imageUrl    : String?
     var sku_price   : String?
-    var count       : Int?
+    var count       : String?
     var price       : String?
     var total       : String?
     

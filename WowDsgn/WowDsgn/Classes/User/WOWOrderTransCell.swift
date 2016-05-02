@@ -11,7 +11,7 @@ import UIKit
 class WOWOrderTransCell: UITableViewCell {
 
     @IBOutlet weak var topLabel: UILabel!
-    @IBOutlet weak var rightLabel: UILabel!
+    @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

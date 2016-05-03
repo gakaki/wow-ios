@@ -58,7 +58,7 @@
                             <constraint firstItem="jad-Jw-1Fe" firstAttribute="centerY" secondItem="crM-Nr-P5m" secondAttribute="centerY" id="ttU-yt-fXI"/>
                         </constraints>
                     </view>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="J6H-fM-Fnp">
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="J6H-fM-Fnp">
                         <rect key="frame" x="0.0" y="44" width="438" height="75"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aLG-V0-X6j">

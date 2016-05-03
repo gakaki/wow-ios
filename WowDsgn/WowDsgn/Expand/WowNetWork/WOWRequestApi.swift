@@ -23,7 +23,7 @@ public enum RequestApi{
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String)
     
-    case Api_ProductDetail(product_id:String)
+    case Api_ProductDetail(product_id:String,uid:String)
     
     case Api_Favotite(product_id:String,uid:String,type:String,is_delete:String,scene_id:String)
     
@@ -60,6 +60,8 @@ public enum RequestApi{
     case Api_AddressDelete(uid:String,addressid:String)
     
     case Api_OrderList(uid:String,type:String) //100为全部
+    
+    case Api_OrderStatus(uid:String,order_id:String,status:String)
     
 }
 
@@ -121,6 +123,8 @@ extension RequestApi:TargetType{
             return URL_AddressDelete
         case .Api_OrderList:
             return URL_OrderList
+        case .Api_OrderStatus:
+            return URL_OrderStatus
         }
     }
     
@@ -140,8 +144,8 @@ extension RequestApi:TargetType{
             return ["account":account,"password":password]
         case let .Api_ProductList(pageindex,categoryID,style,sort):
             return ["z":pageindex,"cid":categoryID,"style":style,"sort":sort]
-        case let .Api_ProductDetail(product_id):
-            return ["id":product_id]
+        case let .Api_ProductDetail(product_id,uid):
+            return ["id":product_id,"uid":uid]
         case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):
             return ["uid":uid,"product_id":product_id,"type":type,"is_delete":is_delete,"scene_id":scene_id]
         case let .Api_CommentList(pageindex,product_id):
@@ -174,6 +178,8 @@ extension RequestApi:TargetType{
             return ["uid":uid,"id":id]
         case let .Api_OrderList(uid,type):
             return ["uid":uid,"type":type]
+        case let .Api_OrderStatus(uid,order_id,status):
+            return ["uid":uid,"order_id":order_id,"status":status]
         default:
             return nil
         }

@@ -115,6 +115,9 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
         tableView.registerNib(UINib.nibName(String(WOWDesignerCell)), forCellReuseIdentifier:String(WOWDesignerCell))
+        
+        
+        
     }
     
     private func configHeaderView(){
@@ -139,7 +142,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(product_id: productID ?? ""), successClosure: {[weak self] (result) in
+        let uid = WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(product_id: productID ?? "",uid:uid), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -168,8 +172,10 @@ class WOWGoodsDetailController: WOWBaseViewController {
             let uid         = WOWUserManager.userID
             let thingid     = self.productID ?? ""
             let type        = "1" //1为商品 0 为场景
-            let is_delete   = (productModel?.user_isLike ?? "false") == "true" ? "1" : "0"
+            let is_delete   = favoriteButton.selected ? "1":"0"
             WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
+                let json = JSON(result)
+                DLog(json)
                 if let strongSelf = self{
                     strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
                 }

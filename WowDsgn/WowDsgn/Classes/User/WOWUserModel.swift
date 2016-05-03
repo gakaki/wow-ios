@@ -25,10 +25,10 @@ class WOWUserModel:NSObject,Mappable{
     
     func mapping(map: Map) {
         userID           <- map["uid"]
-        user_desc        <- map["user_desc"]
-        user_headimage   <- map["user_headimage"]
-        user_nick        <- map["user_nick"]
-        user_sex         <- map["user_sex"]
+        user_desc        <- map["desc"]
+        user_headimage   <- map["headimage"]
+        user_nick        <- map["nick"]
+        user_sex         <- map["sex"]
         user_mobile      <- map["mobile"]
         user_email       <- map["email"]
     }

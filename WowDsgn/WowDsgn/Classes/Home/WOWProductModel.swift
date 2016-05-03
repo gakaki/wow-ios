@@ -74,7 +74,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         skus            <- map["skus"]
         pics_compose    <- map["pics_compose"]
         pics_carousel   <- map["pics_carousel"]
-        user_isLike     <- map["likes_list"]
+        user_isLike     <- map["user_like"]
     }
     
     /// 商品列表瀑布流需要用的高度

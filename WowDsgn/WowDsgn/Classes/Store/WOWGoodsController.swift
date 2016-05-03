@@ -298,9 +298,9 @@ extension WOWGoodsController:ProductCellDelegate{
     func productCellAction(tag: Int, model: WOWProductModel) {
         switch tag {
         case WOWItemActionType.Like.rawValue:
-            DLog("喜欢")
+            like()
         case WOWItemActionType.Share.rawValue:
-            DLog("分享")
+            share()
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
             vc.hideNavigationBar = true
@@ -309,6 +309,15 @@ extension WOWGoodsController:ProductCellDelegate{
             DLog(" ")
         }
     }
+    
+    private func like(){
+        
+    }
+    
+    private func share(){
+        
+    }
+    
 }
 
 

@@ -78,7 +78,6 @@ class WOWOrderController: WOWBaseViewController {
 //MARK:Network
     override func request() {
         super.request()
-        DLog(type)
         let uid = WOWUserManager.userID
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderList(uid: uid, type: type), successClosure: { [weak self](result) in
             if let strongSelf = self{
@@ -116,8 +115,35 @@ extension WOWOrderController:OrderCellDelegate{
         case .ShowTrans:
             DLog("查看物流")
         case .SureReceive:
-            DLog("确认收货")
+            confirmReceive(model.id ?? "")
         }
+    }
+    
+    private func confirmReceive(orderid:String){
+        func confirm(){
+            let uid = WOWUserManager.userID
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderStatus(uid: uid, order_id: orderid, status:"3"), successClosure: { [weak self](result) in
+                if let strongSelf = self{
+                    let ret = JSON(result).int ?? 0
+                    if ret == 1{
+                        strongSelf.request()
+                    }
+                }
+            }) { (errorMsg) in
+                    
+            }
+        }
+        
+        let alert = UIAlertController(title:"确认收货", message:nil, preferredStyle:.Alert)
+        let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        let sure = UIAlertAction(title: "确定", style: .Default) { (action) in
+            confirm()
+        }
+        alert.addAction(cancel)
+        alert.addAction(sure)
+        presentViewController(alert, animated: true, completion: nil)
+        
+        
     }
 }
 

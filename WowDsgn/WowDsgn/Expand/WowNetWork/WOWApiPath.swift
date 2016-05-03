@@ -74,3 +74,5 @@ let URL_AddressList             = "address/list"
 let URL_AddressDelete           = "address/delete"
 
 let URL_OrderList               = "order/list"
+
+let URL_OrderStatus             = "order/setstatus" //状态客户端操作之后加上去

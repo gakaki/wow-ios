@@ -25,16 +25,6 @@
                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tno-T3-rGi">
-                        <rect key="frame" x="96" y="385" width="59" height="14"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <state key="normal" title="              " image="icon_share">
-                            <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="actionButtonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="7U3-7n-6ca"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDG-Tc-7y0">
                         <rect key="frame" x="15" y="334" width="74" height="18"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
@@ -42,11 +32,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZE-jM-28a">
-                        <rect key="frame" x="15" y="385" width="61" height="14"/>
+                        <rect key="frame" x="15" y="385" width="26" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <state key="normal" title="              " image="icon_like">
+                        <state key="normal" title="   " image="icon_like">
                             <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <state key="selected" image="icon_like_hightlighted"/>
                         <connections>
                             <action selector="actionButtonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="UXg-GT-7P2"/>
                         </connections>
@@ -74,6 +65,16 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tno-T3-rGi">
+                        <rect key="frame" x="61" y="385" width="34" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <state key="normal" title="      " image="icon_share">
+                            <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="actionButtonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="7U3-7n-6ca"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -124,6 +125,7 @@
     </objects>
     <resources>
         <image name="icon_like" width="16" height="13"/>
+        <image name="icon_like_hightlighted" width="16" height="13"/>
         <image name="icon_share" width="14" height="14"/>
         <image name="store_mask" width="375" height="95"/>
     </resources>

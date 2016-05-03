@@ -28,12 +28,13 @@ class WOWDesignerCell: UITableViewCell {
     func showData(model:WOWProductModel?) {
         designerDesLabel.text   = model?.designer_desc
         designerNameLabel.text  = model?.designer_name
-        guard let url = model?.designer_image where !url.isEmpty else{
+        //暂时不要设计师图片
+//        guard let url = model?.designer_image where !url.isEmpty else{
             designerImageHeight.constant = 0
-            return
-        }
-        designerImageHeight.constant = MGScreenHeight
-        designerImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage:UIImage(named: "placeholder_product"))
+//            return
+//        }
+//        designerImageHeight.constant = MGScreenWidth
+//        designerImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage:UIImage(named: "placeholder_product"))
     }
     
     

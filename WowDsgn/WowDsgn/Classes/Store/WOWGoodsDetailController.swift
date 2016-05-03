@@ -292,7 +292,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             return 0
         case 5: //评论
             if let commentList = productModel?.comments {
-                return commentList.count
+                return commentList.count > 5 ? 5 : commentList.count
             }
             return 0
         default:

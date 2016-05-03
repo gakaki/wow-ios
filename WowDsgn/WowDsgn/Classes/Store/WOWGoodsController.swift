@@ -40,6 +40,16 @@ class WOWGoodsController: WOWBaseViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        addObserver()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
          menuView.hideMenu()
@@ -82,6 +92,14 @@ class WOWGoodsController: WOWBaseViewController {
     }()
     
 //MARK:Private Method
+    
+    private func addObserver(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+    }
+    
+    func loginSuccess() {
+        request()
+    }
     
     override func setUI() {
         super.setUI()
@@ -179,7 +197,8 @@ class WOWGoodsController: WOWBaseViewController {
     
 //MARK:Private Network
     override func request() {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort), successClosure: {[weak self] (result) in
+        let uid = WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 let totalPage = JSON(result)["total_page"].intValue
@@ -295,10 +314,10 @@ extension WOWGoodsController{
 
 
 extension WOWGoodsController:ProductCellDelegate{
-    func productCellAction(tag: Int, model: WOWProductModel) {
+    func productCellAction(tag: Int, model: WOWProductModel,cell:WOWGoodsBigCell) {
         switch tag {
         case WOWItemActionType.Like.rawValue:
-            like()
+            like(model, cell: cell)
         case WOWItemActionType.Share.rawValue:
             share()
         case WOWItemActionType.Brand.rawValue:
@@ -310,12 +329,33 @@ extension WOWGoodsController:ProductCellDelegate{
         }
     }
     
-    private func like(){
-        
+    private func like(model:WOWProductModel,cell:WOWGoodsBigCell){
+        guard WOWUserManager.loginStatus else { //未登录
+            goLogin()
+            return
+        }
+        let is_delete = cell.likeButton.selected ? "1":"0"
+        let uid       = WOWUserManager.userID
+        let thingid   = model.productID ?? ""
+        let type      = "1"//1为商品 0为场景
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result) in
+            if let _ = self{
+                let json = JSON(result)
+                DLog(json)
+                cell.likeButton.selected = !cell.likeButton.selected
+            }
+        }) { (errorMsg) in
+                
+        }
     }
     
     private func share(){
         
+    }
+    
+    private func goLogin(){
+        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
+        presentViewController(vc, animated: true, completion: nil)
     }
     
 }

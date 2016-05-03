@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProductCellDelegate :class{
-    func productCellAction(tag:Int,model:WOWProductModel)
+    func productCellAction(tag:Int,model:WOWProductModel,cell:WOWGoodsBigCell)
 }
 
 
@@ -40,7 +40,7 @@ class WOWGoodsBigCell: UICollectionViewCell {
 
     @IBAction func actionButtonClick(sender: UIButton) {
         if let del = self.delegate{
-            del.productCellAction(sender.tag, model:self.model)
+            del.productCellAction(sender.tag, model:self.model,cell: self)
         }
     }
     
@@ -56,5 +56,6 @@ class WOWGoodsBigCell: UICollectionViewCell {
         let url2 = model.brandImage ?? ""
         brandButton.kf_setImageWithURL(NSURL(string:url2)!, forState:.Normal, placeholderImage:UIImage(named: "placeholder_product"))
         priceLabel.text  = model.price
+        likeButton.selected = (model.user_isLike == "true")
     }
 }

@@ -21,7 +21,7 @@ public enum RequestApi{
     
     case Api_StoreHome
     
-    case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String)
+    case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String)
     
     case Api_ProductDetail(product_id:String,uid:String)
     
@@ -142,8 +142,8 @@ extension RequestApi:TargetType{
             return ["account":account,"password":password,"code":code]
         case let .Api_Login(account,password):
             return ["account":account,"password":password]
-        case let .Api_ProductList(pageindex,categoryID,style,sort):
-            return ["z":pageindex,"cid":categoryID,"style":style,"sort":sort]
+        case let .Api_ProductList(pageindex,categoryID,style,sort,uid):
+            return ["z":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid]
         case let .Api_ProductDetail(product_id,uid):
             return ["id":product_id,"uid":uid]
         case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):

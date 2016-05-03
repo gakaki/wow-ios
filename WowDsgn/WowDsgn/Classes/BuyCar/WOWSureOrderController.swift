@@ -92,9 +92,12 @@ class WOWSureOrderController: WOWBaseViewController {
                         vc.orderid = orderid
                         vc.totalPrice = totalPrice
                         strongSelf.navigationController?.pushViewController(vc, animated: true)
-                    }else{
-                        DLog(error.code.rawValue)
-                        DLog(error.getMsg())
+                    }else{//订单支付取消或者失败
+                        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
+                        vc.selectIndex = 0
+                        vc.entrance = OrderEntrance.PaySuccess
+                        strongSelf.navigationController?.pushViewController(vc, animated: true)
+                        
                     }
                 }
             }

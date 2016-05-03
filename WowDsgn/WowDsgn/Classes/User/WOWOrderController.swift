@@ -40,6 +40,17 @@ class WOWOrderController: WOWBaseViewController {
         request()
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if entrance == .PaySuccess{
+            self.navigationController?.interactivePopGestureRecognizer?.enabled = false;
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = true;
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -50,6 +61,7 @@ class WOWOrderController: WOWBaseViewController {
         navigationItem.title = "订单"
         configCheckView()
         configTable()
+        
     }
     private func configTable(){
         tableView.clearRestCell()
@@ -104,22 +116,23 @@ extension WOWOrderController:TopMenuProtocol{
 }
 
 extension WOWOrderController:OrderCellDelegate{
-    func OrderCellClick(type: OrderCellAction,model:WOWOrderListModel) {
+    func OrderCellClick(type: OrderCellAction,model:WOWOrderListModel,cell:WOWOrderListCell) {
         switch type {
         case .Comment:
             DLog("评价")
         case .Delete:
-            DLog("删除")
+            deleteOrder(model,cell: cell)
         case .Pay:
             DLog("支付")
         case .ShowTrans:
             DLog("查看物流")
         case .SureReceive:
-            confirmReceive(model.id ?? "")
+            confirmReceive(model.id ?? "",cell: cell)
         }
     }
     
-    private func confirmReceive(orderid:String){
+    //确认收货
+    private func confirmReceive(orderid:String,cell:WOWOrderListCell){
         func confirm(){
             let uid = WOWUserManager.userID
             WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderStatus(uid: uid, order_id: orderid, status:"3"), successClosure: { [weak self](result) in
@@ -142,8 +155,24 @@ extension WOWOrderController:OrderCellDelegate{
         alert.addAction(cancel)
         alert.addAction(sure)
         presentViewController(alert, animated: true, completion: nil)
-        
-        
+    }
+    
+    private func deleteOrder(model:WOWOrderListModel,cell:WOWOrderListCell){
+        let uid      = WOWUserManager.userID
+        let order_id = model.id ?? ""
+        let status   = "20" //删除被回收
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderStatus(uid:uid, order_id:order_id, status:status), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                let ret = JSON(result).int ?? 0
+                if ret == 1{
+                    strongSelf.dataArr.removeAtIndex(strongSelf.dataArr.indexOf(model)!)
+                    let indexPath = strongSelf.tableView.indexPathForCell(cell)
+                    strongSelf.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation:.None)
+                }
+            }
+        }) { (errorMsg) in
+                
+        }
     }
 }
 

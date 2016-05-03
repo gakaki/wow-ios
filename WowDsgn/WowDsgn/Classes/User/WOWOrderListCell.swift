@@ -17,7 +17,7 @@ enum OrderCellAction {
 }
 
 protocol OrderCellDelegate:class{
-    func  OrderCellClick(type:OrderCellAction,model:WOWOrderListModel)
+    func  OrderCellClick(type:OrderCellAction,model:WOWOrderListModel,cell:WOWOrderListCell)
 }
 
 class WOWOrderListCell: UITableViewCell {
@@ -79,7 +79,7 @@ class WOWOrderListCell: UITableViewCell {
     @IBAction func rightButtonClick(sender: UIButton) {
         if sender.tag == 1001 {
             if let del = delegate {
-                del.OrderCellClick(.ShowTrans,model:self.model!)
+                del.OrderCellClick(.ShowTrans,model:self.model!,cell: self)
             }
         }else{
             var action = OrderCellAction.Pay
@@ -96,7 +96,7 @@ class WOWOrderListCell: UITableViewCell {
                 break
             }
             if let del = delegate {
-                del.OrderCellClick(action,model: self.model!)
+                del.OrderCellClick(action,model: self.model!,cell:self)
             }
         }
     }

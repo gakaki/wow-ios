@@ -319,7 +319,7 @@ extension WOWGoodsController:ProductCellDelegate{
         case WOWItemActionType.Like.rawValue:
             like(model, cell: cell)
         case WOWItemActionType.Share.rawValue:
-            share()
+            share(model)
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
             vc.hideNavigationBar = true
@@ -349,8 +349,27 @@ extension WOWGoodsController:ProductCellDelegate{
         }
     }
     
-    private func share(){
+    private func share(model:WOWProductModel){
+        //FIXME:替换掉分享的url
+        let shareText = "尖叫君....."
+        //微信好友
+        UMSocialData.defaultData().extConfig.wxMessageType = UMSocialWXMessageTypeWeb
+        UMSocialData.defaultData().extConfig.wechatSessionData.url = "www.wowdsgn.com"
+        UMSocialData.defaultData().extConfig.wechatSessionData.shareText = shareText
+        UMSocialData.defaultData().extConfig.wechatSessionData.shareImage = UIImage(named: "me_logo")
+        UMSocialData.defaultData().extConfig.wechatSessionData.title = "尖叫君"
         
+        //朋友圈
+        UMSocialData.defaultData().extConfig.wechatTimelineData.url = "www.wowdsgn.com"
+        UMSocialData.defaultData().extConfig.wechatTimelineData.shareText = shareText
+        UMSocialData.defaultData().extConfig.wechatTimelineData.shareImage = UIImage(named: "me_logo")
+        UMSocialData.defaultData().extConfig.wechatTimelineData.title = "尖叫君"
+        
+        //微博
+        UMSocialData.defaultData().extConfig.sinaData.shareText = shareText + "www.wowdsgn.com"
+        UMSocialData.defaultData().extConfig.sinaData.shareImage = UIImage(named: "me_logo")
+        
+        UMSocialSnsService.presentSnsIconSheetView(self, appKey:WOWUMKey, shareText:"", shareImage:nil, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: self)
     }
     
     private func goLogin(){
@@ -359,5 +378,21 @@ extension WOWGoodsController:ProductCellDelegate{
     }
     
 }
+
+extension WOWGoodsController:UMSocialUIDelegate{
+    func isDirectShareInIconActionSheet() -> Bool {
+        return true
+    }
+    
+    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
+        if response.responseCode == UMSResponseCodeSuccess {
+            DLog("分享成功")
+        }else{
+            WOWHud.showMsg("分享失败")
+        }
+    }
+    
+}
+
 
 

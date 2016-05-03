@@ -151,17 +151,19 @@ class WOWCommentController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(pageindex:"\(self.pageIndex)",product_id:self.mainID), successClosure: {[weak self](result) in
             if let strongSelf = self{
-                let totalPage = JSON(result)["totalPages"].intValue
+            let totalPage = JSON(result)["totalPages"].intValue
                let arr = Mapper<WOWCommentListModel>().mapArray(result["comment"])
                 strongSelf.endRefresh()
                 if let array = arr{
-                    if strongSelf.pageIndex == totalPage - 1{
-                        strongSelf.mj_footer.endRefreshingWithNoMoreData()
-                    }
                     if strongSelf.pageIndex == 0{
                         strongSelf.dataArr = []
                     }
                     strongSelf.dataArr.appendContentsOf(array)
+                    if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
+                        strongSelf.tableView.mj_footer = nil
+                    }else{
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    }
                 }
                 strongSelf.tableView.reloadData()
             }
@@ -184,40 +186,6 @@ extension WOWCommentController:UITextViewDelegate{
 //    
 //    //中文和其他字符的判断方式不一样
     func textViewDidChange(textView: UITextView) {
-        /*
-        if COMMENTS_LIMIT > 0 {
-            // markedTextRange指的是当前高亮选中的，除了长按选中，用户中文输入拼音过程往往也是高亮选中状态
-            if let selectedRange = textView.markedTextRange {
-                
-            } else {
-                let text = textView.text
-                if text.characters.count > COMMENTS_LIMIT {
-                    let range = Range(start: text.startIndex, end: adv)
-                    let subText = text.substringWithRange(range)
-                    textView.text = subText
-                }
-            }
-        }
-        */
-        /*
-        let lang = textView.textInputMode?.primaryLanguage
-        if lang == "zh-Hans"{
-            let range = textView.markedTextRange
-            if let selectedRange = range {
-                let position = textView.positionFromPosition(selectedRange.start, offset: 0)
-                if position == nil{
-                    if textView.text.characters.count > COMMENTS_LIMIT {
-                        textView.text = (textView.text as NSString).substringToIndex(COMMENTS_LIMIT)
-                    }
-                }else{}
-            }
-        }else{
-            if textView.text.characters.count > COMMENTS_LIMIT {
-                textView.text = (textView.text as NSString).substringToIndex(COMMENTS_LIMIT)
-            }
-        }
-         */
-    
         guard inputConstraint.constant < 100 else{
             return
         }
@@ -262,5 +230,15 @@ extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.inputTextView.resignFirstResponder()
     }
+    
+    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "暂无评论"
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
+    
+//    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+//        return 40
+//    }
     
 }

@@ -43,7 +43,7 @@ public enum RequestApi{
     
     case Api_UserUpdate(param:[String:String])
     
-    case Api_UserFavorite(uid:String,type:String)
+    case Api_UserFavorite(uid:String,type:String,pageindex:String)
     
     case Api_Login(String,String)
     
@@ -150,8 +150,8 @@ extension RequestApi:TargetType{
             return ["uid":uid,"product_id":product_id,"comment":comment]
         case let .Api_UserUpdate(param):
             return param
-        case let .Api_UserFavorite(uid,type):
-            return ["uid":uid,"type":type]
+        case let .Api_UserFavorite(uid,type,pageindex):
+            return ["uid":uid,"type":type,"pageindex":pageindex]
         case let .Api_CarEdit(cart):
             return ["cart":cart]
         case let .Api_CarList(cart):

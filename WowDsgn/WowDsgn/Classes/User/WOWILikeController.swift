@@ -69,6 +69,8 @@ class WOWILikeController: WOWBaseViewController {
     
     private func configColelction(){
         view.addSubview(collectionView)
+        collectionView.mj_footer = self.mj_footer
+        collectionView.mj_header = self.mj_header
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
         collectionView.mj_header = self.mj_header
         collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
@@ -88,12 +90,20 @@ class WOWILikeController: WOWBaseViewController {
     override func request() {
         super.request()
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_UserFavorite(uid:uid, type:type), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_UserFavorite(uid:uid, type:type,pageindex:"\(pageIndex))"), successClosure: { [weak self](result) in
             if let strongSelf = self{
-                let json = JSON(result).arrayObject
+                let totalPage = JSON(result)["totalPages"].int ?? 0
+                if totalPage == 0 || strongSelf.pageIndex == totalPage - 1 {
+                    strongSelf.collectionView.mj_footer = nil
+                }else{
+                    strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                }
+                let json = JSON(result)["likes"].arrayObject
                 if let js = json{
-                    strongSelf.dataArr = []
-                    for item in js{
+                    if strongSelf.pageIndex == 0{
+                        strongSelf.dataArr = []
+                    }
+                        for item in js{
                         let model = Mapper<WOWFavoriteListModel>().map(item)
                         if let m = model{
                             strongSelf.dataArr.append(m)
@@ -119,6 +129,7 @@ class WOWILikeController: WOWBaseViewController {
 extension WOWILikeController:TopMenuProtocol{
     func topMenuItemClick(index: Int) {
         selectIndex = index
+        pageIndex = 0
         request()
     }
 }
@@ -161,7 +172,7 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
             sence.hideNavigationBar = true
             sence.senceID = model.id
             navigationController?.pushViewController(sence, animated: true)
-        }else{//单品
+        }else{ //单品
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
             vc.productID = model.id
             vc.hideNavigationBar = true
@@ -185,7 +196,6 @@ extension WOWILikeController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         switch selectIndex {
         case 0:
-//            //返回正方形
             return CGSizeMake(WOWImageCell.itemWidth, WOWImageCell.itemWidth)
         case 1:
             return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)

@@ -179,7 +179,7 @@
             </objects>
             <point key="canvasLocation" x="1193" y="1471"/>
         </scene>
-        <!--评论-->
+        <!--Empty Data Set Delegate-->
         <scene sceneID="Ggl-Mw-UzC">
             <objects>
                 <viewController storyboardIdentifier="WOWCommentController" title="评论" id="EBo-vS-uWn" customClass="WOWCommentController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
@@ -197,6 +197,8 @@
                                 <connections>
                                     <outlet property="dataSource" destination="EBo-vS-uWn" id="SDr-A4-FXF"/>
                                     <outlet property="delegate" destination="EBo-vS-uWn" id="lOk-yM-pic"/>
+                                    <outlet property="emptyDataSetDelegate" destination="EBo-vS-uWn" id="SZm-qW-dX6"/>
+                                    <outlet property="emptyDataSetSource" destination="EBo-vS-uWn" id="doc-82-Y6S"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dta-oW-EI5">
@@ -433,7 +435,7 @@
                                     <outlet property="delegate" destination="ZjH-5o-9uo" id="hMM-T2-FMN"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
                                 <rect key="frame" x="0.0" y="20" width="43" height="38"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>

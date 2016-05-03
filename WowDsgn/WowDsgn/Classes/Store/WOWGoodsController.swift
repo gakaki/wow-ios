@@ -72,7 +72,7 @@ class WOWGoodsController: WOWBaseViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,self.view.width,self.view.height - 65), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,self.view.width,self.view.height - 65 - 40), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -183,8 +183,10 @@ class WOWGoodsController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 let totalPage = JSON(result)["total_page"].intValue
-                if strongSelf.pageIndex == totalPage - 1{
-                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
+                    strongSelf.collectionView.mj_footer = nil
+                }else{
+                    strongSelf.collectionView.mj_footer = strongSelf.mj_footer
                 }
                 
                 let goodsArr  = JSON(result)["rows"].arrayObject

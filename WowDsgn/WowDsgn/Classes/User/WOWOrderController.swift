@@ -104,6 +104,23 @@ extension WOWOrderController:TopMenuProtocol{
     }
 }
 
+extension WOWOrderController:OrderCellDelegate{
+    func OrderCellClick(type: OrderCellAction,model:WOWOrderListModel) {
+        switch type {
+        case .Comment:
+            DLog("评价")
+        case .Delete:
+            DLog("删除")
+        case .Pay:
+            DLog("支付")
+        case .ShowTrans:
+            DLog("查看物流")
+        case .SureReceive:
+            DLog("确认收货")
+        }
+    }
+}
+
 
 extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -120,6 +137,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderListCell", forIndexPath: indexPath) as! WOWOrderListCell
+        cell.delegate = self
         cell.showData(dataArr[indexPath.row])
         return cell
     }

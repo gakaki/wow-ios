@@ -17,12 +17,12 @@ class WOWOrderDetailController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 //MARK:Private Method
@@ -50,11 +50,11 @@ class WOWOrderDetailController: WOWBaseViewController {
         switch orderModel.status ?? 0 {
         case 0:
             buttonTtile = "立即支付"
-        case 1,2: //待发货，待收货
+        case 2: //待发货，待收货
             buttonTtile = "确认收货"
         case 3: //待评价
             buttonTtile = "立即评价"
-        case 4: //完成订单
+        case 1,4: //完成订单
             rightButton.hidden = true
         default:
             break

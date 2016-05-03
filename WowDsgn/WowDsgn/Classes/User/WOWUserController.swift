@@ -140,6 +140,10 @@ extension WOWUserController{
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        guard WOWUserManager.loginStatus else{
+            goLogin()
+            return
+        }
         switch indexPath.section {
         case 0://订单
             let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController

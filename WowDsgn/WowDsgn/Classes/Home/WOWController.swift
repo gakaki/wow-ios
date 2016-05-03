@@ -70,7 +70,7 @@ class WOWController: WOWBaseViewController {
 //MARK:Actions
 
     
-//MARK:Private Network
+//MARK:Private Networkr
     override func request() {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Sence("pageIndex",pageIndex), successClosure: {[weak self] (result) in
             if let strongSelf = self{

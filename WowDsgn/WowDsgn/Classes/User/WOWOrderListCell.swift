@@ -8,6 +8,18 @@
 
 import UIKit
 
+enum OrderCellAction {
+    case ShowTrans
+    case Pay
+    case Comment
+    case SureReceive
+    case Delete
+}
+
+protocol OrderCellDelegate:class{
+    func  OrderCellClick(type:OrderCellAction,model:WOWOrderListModel)
+}
+
 class WOWOrderListCell: UITableViewCell {
 
     @IBOutlet weak var statusLabel: UILabel!
@@ -26,6 +38,8 @@ class WOWOrderListCell: UITableViewCell {
     @IBOutlet weak var singleNameLabel: UILabel!
     @IBOutlet weak var singleTypeLabel: UILabel!
     
+    weak var delegate : OrderCellDelegate?
+    var model : WOWOrderListModel?
     let statuTitles = ["待付款","待发货","待收货","待评价","已完成"]
     let rightTitles = ["立即支付","","确认收货","评价","删除订单"]
     var dataArr = [WOWOrderProductModel] ()
@@ -40,14 +54,15 @@ class WOWOrderListCell: UITableViewCell {
 
     }
     
-    func showData(model:WOWOrderListModel){
-        if model.products?.count > 1 {
+    func showData(m:WOWOrderListModel){
+        model = m
+        if m.products?.count > 1 {
             collectionView.hidden = false
             singleBackView.hidden = true
-            dataArr = model.products!
+            dataArr = m.products!
             collectionView.reloadData()
         }else{
-            let itemModel = model.products?.first
+            let itemModel = m.products?.first
             singleImageView.kf_setImageWithURL(NSURL(string:itemModel?.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
             singleNameLabel.text = itemModel?.name
             singleTypeLabel.text = itemModel?.sku_title
@@ -55,17 +70,34 @@ class WOWOrderListCell: UITableViewCell {
             singleBackView.hidden = false
             dataArr = [ ]
         }
-        orderIdLabel.text = model.id
-        goodsCountLabel.text = "共\(model.products?.count ?? 1)件商品"
-        totalPriceLabel.text = model.total?.priceFormat()
-        configShowStatus(model.status!)
+        orderIdLabel.text = m.id
+        goodsCountLabel.text = "共\(m.products?.count ?? 1)件商品"
+        totalPriceLabel.text = m.total?.priceFormat()
+        configShowStatus(m.status!)
     }
     
     @IBAction func rightButtonClick(sender: UIButton) {
-        if sender.tag == 1002 { //右1
-            
-        }else{ //右2
-            
+        if sender.tag == 1001 {
+            if let del = delegate {
+                del.OrderCellClick(.ShowTrans,model:self.model!)
+            }
+        }else{
+            var action = OrderCellAction.Pay
+            switch model?.status ?? 0{
+            case 0: //未付款
+                action = .Pay
+            case 2: //未收货
+                action = .SureReceive
+            case 3: //待评价
+                action = .Comment
+            case 4: //已完成
+                action = .Delete
+            default:
+                break
+            }
+            if let del = delegate {
+                del.OrderCellClick(action,model: self.model!)
+            }
         }
     }
     

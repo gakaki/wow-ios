@@ -61,7 +61,7 @@
                 <outlet property="pictureImageView" destination="cfV-yt-dm1" id="mmW-Zo-uyv"/>
                 <outlet property="priceLabel" destination="Ch7-KJ-x6p" id="9Ew-64-uch"/>
             </connections>
-            <point key="canvasLocation" x="1125.5" y="418"/>
+            <point key="canvasLocation" x="1282.5" y="429"/>
         </collectionViewCell>
     </objects>
 </document>

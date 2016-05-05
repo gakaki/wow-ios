@@ -26,7 +26,12 @@ class WOWPaySuccessController: WOWBaseTableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
+    }
+    
+    
+    
+    override func backButtonClick() {
+        navigationController?.dismissViewControllerAnimated(true, completion:nil)
     }
     
 }
@@ -58,7 +63,7 @@ extension WOWPaySuccessController{
                 vc.entrance = OrderEntrance.PaySuccess
                 navigationController?.pushViewController(vc, animated: true)
             }else{
-//                navigationController?.popToRootViewControllerAnimated(true)
+
                 navigationController?.dismissViewControllerAnimated(true, completion: nil)
             }
         default:

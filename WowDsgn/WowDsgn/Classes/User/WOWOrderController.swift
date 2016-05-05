@@ -20,8 +20,8 @@ class WOWOrderController: WOWBaseViewController {
     var selectIndex:Int = 0{
         didSet{
             switch selectIndex {
-            case 0:
-                type = "100" //全部
+            case 0: //全部
+                type = "100"
             case 1: //待付款
                 type = "0"
             case 2: //待收货
@@ -92,6 +92,8 @@ class WOWOrderController: WOWBaseViewController {
         super.request()
         let uid = WOWUserManager.userID
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderList(uid: uid, type: type), successClosure: { [weak self](result) in
+            let json = JSON(result)
+            DLog(json)
             if let strongSelf = self{
                 let arr = Mapper<WOWOrderListModel>().mapArray(result)
                 strongSelf.dataArr = []
@@ -152,6 +154,7 @@ extension WOWOrderController:OrderCellDelegate{
         let sure = UIAlertAction(title: "确定", style: .Default) { (action) in
             confirm()
         }
+        
         alert.addAction(cancel)
         alert.addAction(sure)
         presentViewController(alert, animated: true, completion: nil)
@@ -165,6 +168,7 @@ extension WOWOrderController:OrderCellDelegate{
             if let strongSelf = self{
                 let ret = JSON(result).int ?? 0
                 if ret == 1{
+                    //FIXME:要测试下
                     strongSelf.dataArr.removeAtIndex(strongSelf.dataArr.indexOf(model)!)
                     let indexPath = strongSelf.tableView.indexPathForCell(cell)
                     strongSelf.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation:.None)

@@ -18,11 +18,17 @@ class WOWBuyCarMananger {
     
     var skuName:String?
     
-    var buyCount = 1
+    var buyCount            = 1
     
-    var skuID :String = ""
+    var skuID :String       = ""
     
-    var skuPrice:String = ""
+    var skuPrice:String     = ""
     
-    var skuDefaultSelect = 0
+    var skuDefaultSelect    = 0
+    
+    //app启动这一次添加进购物车的商品列表
+    var chooseProducts      = [String]()
 }
+
+
+

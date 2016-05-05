@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BrandCellDelegate:class{
-    func hotBrandCellClick(brandModel:WOWBrandModel)
+    func hotBrandCellClick(brandModel:WOWBrandListModel)
     func recommenProductCellClick(productModel:WOWProductModel)
 }
 
@@ -17,7 +17,7 @@ class WOWStoreBrandCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     var showBrand : Bool = true //热门品牌和推荐商品都取这两个
     weak var delegate:BrandCellDelegate?
-    var brandDataArr = [WOWBrandModel](){
+    var brandDataArr = [WOWBrandListModel](){
         didSet{
             collectionView.reloadData()
         }

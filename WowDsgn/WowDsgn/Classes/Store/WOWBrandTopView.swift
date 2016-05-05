@@ -165,17 +165,17 @@ class WOWBrandUnderView: UIView {
         shareButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
         shareButton.tag = WOWItemActionType.Share.rawValue
         //FIXME:测数据
-        shareButton.setTitle("123", forState: .Normal)
         shareButton.addTarget(self, action: #selector(action(_:)), forControlEvents:.TouchUpInside)
         addSubview(shareButton)
         shareButton.snp_makeConstraints { [weak self](make) in
             if let strongSelf = self{
-//                make.left.equalTo(strongSelf.likeButton.snp_right).offset(20)
+
                  make.left.equalTo(strongSelf).offset(15)
                 make.bottom.top.equalTo(strongSelf).offset(0)
             }
         }
         
+        /*
         locationButton = UIButton(type: .System)
         locationButton.setImage(UIImage(named: "location")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
         locationButton.titleLabel?.font = UIFont.systemFontOfSize(10)
@@ -189,6 +189,7 @@ class WOWBrandUnderView: UIView {
                 make.bottom.top.equalTo(strongSelf).offset(0)
             }
         }
+        */
         
         backButton = UIButton(type: .System)
         backButton.setImage(UIImage(named: "up_arrow")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)

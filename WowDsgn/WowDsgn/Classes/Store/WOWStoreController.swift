@@ -12,9 +12,8 @@ class WOWStoreController: WOWBaseViewController {
     let cellID1     = String(WOWStoreBrandCell)
     let cellID2     = String(WOWMenuCell)
     var categoryArr = [WOWCategoryModel]()
-    var brandArr    = [WOWBrandModel]()
+    var brandArr    = [WOWBrandListModel]()
     var recommenArr = [WOWProductModel]()
-//    var bannerArr   = [WOWBannerModel]()
     var cycleView:CyclePictureView!
     var brandsCount : Int = 0
     @IBOutlet var tableView: UITableView!
@@ -65,7 +64,8 @@ class WOWStoreController: WOWBaseViewController {
                 strongSelf.brandArr    = []
                 strongSelf.recommenArr = []
                 strongSelf.brandsCount = JSON(result)["brands_count"].intValue
-                let brands = Mapper<WOWBrandModel>().mapArray(JSON(result)["brands"].arrayObject)
+                let brands = Mapper<WOWBrandListModel>().mapArray(JSON(result)["brands"].arrayObject)
+                //FIXME:缺少brandid
                 if let brandArray = brands{
                     strongSelf.brandArr.appendContentsOf(brandArray)
                 }
@@ -73,10 +73,6 @@ class WOWStoreController: WOWBaseViewController {
                 if let productArr = products{
                     strongSelf.recommenArr.appendContentsOf(productArr)
                 }
-//                let banners = Mapper<WOWBannerModel>().mapArray(JSON(result)["story"].arrayObject)
-//                if let bannerArray = banners{
-//                    strongSelf.bannerArr.appendContentsOf(bannerArray)
-//                }
                 let cates = Mapper<WOWCategoryModel>().mapArray(JSON(result)["cats"].arrayObject)
                 if let cateArr = cates{
                     strongSelf.categoryArr.appendContentsOf(cateArr)
@@ -107,8 +103,9 @@ extension WOWStoreController:CyclePictureViewDelegate{
 */
  
 extension WOWStoreController:BrandCellDelegate{
-    func hotBrandCellClick(brandModel: WOWBrandModel) {
+    func hotBrandCellClick(brandModel: WOWBrandListModel) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.brandID = brandModel.brandID
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }

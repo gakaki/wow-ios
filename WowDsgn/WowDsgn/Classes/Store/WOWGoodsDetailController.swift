@@ -67,6 +67,9 @@ class WOWGoodsDetailController: WOWBaseViewController {
 
     
     private func resolveBuyModel(model:WOWBuyCarModel){
+        //放进购物车管理类，进行选中
+        WOWBuyCarMananger.sharedBuyCar.chooseProducts.append(model.skuID)
+        
         if WOWUserManager.loginStatus { //登录
             saveNetBuyCar(model)
         }else{

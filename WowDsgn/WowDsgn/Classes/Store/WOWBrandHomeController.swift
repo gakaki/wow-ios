@@ -10,10 +10,12 @@ import UIKit
 
 class WOWBrandHomeController: WOWBaseViewController {
     @IBOutlet var collectionView: UICollectionView!
-    var dataArr = [WOWGoodsModel]()
+    var dataArr = [WOWProductModel]()
+    var brandID : String?
+    var brandModel : WOWBrandModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
+        request()
     }
     
     //MARK:Lazy
@@ -37,20 +39,6 @@ class WOWBrandHomeController: WOWBaseViewController {
     }()
 
     
-//MARK:Private Method
-    private func initData(){
-        //FIXME:测试数据
-        let string = ["年成立，总部设立在丹麦的Aarup。Carl Hansen & Son公司缘起于1908年Carl Hansen先生创立他的橱柜制造"," 11208"]
-        for index in 1...40 {
-            let model = WOWGoodsModel()
-            model.des = string[index % 2 ]
-            model.calCellHeight()
-            dataArr.append(model)
-        }
-        collectionView.reloadData()
-    }
-    
-    
     override func setUI() {
         super.setUI()
         self.edgesForExtendedLayout = .None
@@ -62,12 +50,24 @@ class WOWBrandHomeController: WOWBaseViewController {
         collectionView.registerClass(WOWBrandTopView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
+    
 //MARK:Actions
     @IBAction func back(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
     }
     
-    
+//MARK:Network
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandDetail(brandid: brandID ?? ""), successClosure: {[weak self](result) in
+            if let strongSelf = self{
+                strongSelf.brandModel = Mapper<WOWBrandModel>().map(result)
+                strongSelf.collectionView.reloadData()
+            }
+        }) { (errorMsg) in
+                
+        }
+    }
 }
 
 
@@ -77,12 +77,14 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr.count
+        return brandModel?.products?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
-        
+        let model = brandModel?.products?[indexPath.row]
+        cell.desLabel.text = model?.productName
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         return cell
     }
     
@@ -92,9 +94,10 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         if kind == CollectionViewWaterfallElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as? WOWBrandTopView
             if let view = headerView {
-                //FIXME:这个地方填充数据
                 view.topHeadView.delegate = self
                 view.underHeadView.delegate = self
+                view.topHeadView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+                view.topHeadView.nameLabel.text = brandModel?.name
                 reusableView = view
             }
         }
@@ -112,8 +115,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
 
 extension WOWBrandHomeController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let model = dataArr[indexPath.item]
-        return CGSizeMake(WOWGoodsSmallCell.itemWidth,model.cellHeight)
+        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth * 1.3)
     }
 }
 

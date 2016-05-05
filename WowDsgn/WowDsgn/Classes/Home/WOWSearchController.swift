@@ -291,7 +291,7 @@ extension SearchResultView:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let dele = self.delegate {
+        if let _ = self.delegate {
            
         }
     }

@@ -18,6 +18,8 @@ class WOWSenceHelper: NSObject {
         switch section {
         case 4:
             return 5
+        case 3: //喜欢的暂时干掉
+            return 0
         default:
             return 1
         }

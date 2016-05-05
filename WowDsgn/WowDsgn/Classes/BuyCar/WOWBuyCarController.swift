@@ -271,7 +271,7 @@ class WOWBuyCarController: WOWBaseViewController {
         }
     }
     
-//MARK Network 删除购物车
+//MARK Network 购物车
     /**
      1.没登录的时候，同步本地的购物车数据，防止失效商品的出现
      */
@@ -294,12 +294,24 @@ class WOWBuyCarController: WOWBaseViewController {
                     strongSelf.dataArr.appendContentsOf(a)
                 }
                 strongSelf.tableView.reloadData()
+//                strongSelf.checkChoose()
             }
             }, failClosure: { (errorMsg) in
                 
         })
     }
     
+    
+    private func checkChoose(){
+        //选中的model
+        for (index,model) in dataArr.enumerate() {
+            let ret = WOWBuyCarMananger.sharedBuyCar.chooseProducts.contains(model.skuID)
+            if ret {
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), animated: true, scrollPosition: .None)
+                selectedArr.append(model)
+            }
+        }
+    }
     
     /**
      2.同步登录之后个人购物车的数据，同时合并自己本地保存的购物车数据
@@ -443,14 +455,15 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let model = dataArr[indexPath.row]
         if isEditing{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellEditID, forIndexPath: indexPath) as! WOWBurCarEditCell
             cell.delegate = self
-            cell.showData(dataArr[indexPath.row])
+            cell.showData(model)
             return cell
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellNormalID, forIndexPath: indexPath) as! WOWBuyCarNormalCell
-            cell.showData(dataArr[indexPath.row])
+            cell.showData(model)
             return cell
         }
     }

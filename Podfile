@@ -20,7 +20,6 @@ use_frameworks!
 pod 'SnapKit', '~> 0.19.1'
 pod 'Moya', '~> 6.1.3'
 pod 'SwiftyJSON'
-#pod 'Moya/RxSwift'
 pod 'ObjectMapper'
 pod 'RxSwift', '~> 2.2.0'
 pod 'Kingfisher','~>2.0.1'
@@ -30,6 +29,12 @@ pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
 pod 'ReachabilitySwift' #网络监测
+
+#pod 'EZSwiftExtensions', '~> 1.2.3' 通用的拓展库
+#pod 'Format', '~> 0.2' 可格式化string,color的库
+#pod 'SwiftCop' 正则表达式的验证库
+#pod Timepiece Swift NSDate扩展库.
+
 #Ping++支付
 pod 'Pingpp/Alipay', '~> 2.1.0'
 pod 'Pingpp/Wx', '~> 2.1.0'

@@ -12,8 +12,8 @@ import Foundation
 //王云鹏自己的本机 10.0.23.67        127.0.0.1
 //测服地址 http://api.dev.wowdsgn.com
 
-let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/"
-//let BaseUrl = "http://127.0.0.1:8360/apiv1/"
+//let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/"
+let BaseUrl = "http://127.0.0.1:8360/apiv1/"
 
 /****************************API_URL接口**********************************/
 
@@ -39,7 +39,9 @@ let URL_SubmitComment           = "product/comment"
 let URL_CommentList             = "product/commentlist"
 
 //2.6收藏
-let URL_Favorite                = "/like/do"
+let URL_Favorite                = "like/do"
+
+let URL_BrandDetail             = "brand/detail"
 
 //3.app活动
 let URL_activity                = "post"

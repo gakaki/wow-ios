@@ -45,13 +45,13 @@ class WOWBrandListController: WOWBaseViewController {
         //FIXME:要搞定的
         /*
             小Bug
-         */
+ 
         
         //FIXME:测试数据
         let names = ["Alibaba","jianjiao","阿玛尼","蒂芙尼","正式","阿玛尼","阿玛尼","阿玛尼","阿玛尼","正式","正式","正式","正式","正式","正式","阿玛尼","阿玛尼","阿玛尼","阿玛尼","阿玛尼","阿玛尼"]
         var brands = [WOWBrandModel]()
         for i in names {
-            let model = WOWBrandModel()
+            let model = WOWBrandListModel()
             model.brandCountry = "意大利"
             model.brandName = i
             model.brandImageUrl = nil
@@ -95,6 +95,7 @@ class WOWBrandListController: WOWBaseViewController {
             dataArray.append(otherBrand)
         }
         tableView.reloadData()
+         */
     }
     
     
@@ -154,8 +155,8 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        let model = dataArray[indexPath.section][indexPath.row]
-        cell.textLabel?.text = "\(model.brandName!)"
+        _ = dataArray[indexPath.section][indexPath.row]
+        
         return cell
     }
     

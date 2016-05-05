@@ -16,7 +16,7 @@ class WOWBrandDetailController: WOWBaseViewController {
     private let cellID = "WOWBrandDetailCell"
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var underView: WOWBrandUnderView!
-    var brandModel:WOWBrandModel!
+    var brandModel:WOWBrandListModel!
 //    var effectView:UIVisualEffectView!
     
     

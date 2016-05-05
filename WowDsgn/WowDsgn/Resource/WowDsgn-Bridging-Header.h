@@ -14,6 +14,7 @@
 @import MJRefresh;
 @import DZNEmptyDataSet;
 @import ReachabilitySwift;
+@import EZSwiftExtensions;
 #import <Pingpp.h>
 #import <AVOSCloud/AVOSCloud.h>
 #import <UMSocial.h>

@@ -30,7 +30,7 @@ pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
 pod 'ReachabilitySwift' #网络监测
 
-#pod 'EZSwiftExtensions', '~> 1.2.3' 通用的拓展库
+pod 'EZSwiftExtensions', '~> 1.2.3' #通用的拓展库
 #pod 'Format', '~> 0.2' 可格式化string,color的库
 #pod 'SwiftCop' 正则表达式的验证库
 #pod Timepiece Swift NSDate扩展库.

@@ -170,10 +170,12 @@ class WOWBuyCarController: WOWBaseViewController {
                 editingModel?.skuID = model.skuID
                 editingModel?.skuName = model.skuName
                 editingModel?.skuProductCount = model.skuProductCount
+                editingModel?.skuProductPrice = model.skuProductPrice
             }else{
                 editingModel!.skuProductCount = dataArr[exitIndex].skuProductCount + model.skuProductCount
                 editingModel?.skuID = model.skuID
                 editingModel?.skuName = model.skuName
+                editingModel?.skuProductPrice = model.skuProductPrice
                 dataArr.removeAtIndex(exitIndex)
             }
             tableView.reloadData()

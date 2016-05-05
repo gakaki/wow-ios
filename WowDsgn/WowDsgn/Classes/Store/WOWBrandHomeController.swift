@@ -127,7 +127,8 @@ extension WOWBrandHomeController:WOWActionDelegate{
         case WOWItemActionType.Like.rawValue:
             DLog("喜欢")
         case WOWItemActionType.Share.rawValue:
-            WOWBrandModel.shareBrand(brandModel?.name ?? "", url: brandModel?.url ?? "")
+            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url)
+            
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
             vc.brandModel = brandModel!

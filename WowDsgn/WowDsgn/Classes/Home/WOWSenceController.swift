@@ -79,11 +79,55 @@ class WOWSenceController: WOWBaseViewController {
 //MARK:Actions
     
     @IBAction func carClick(sender: UIButton) {
-        DLog("放入购物车")
+        let products = sceneModel?.products
+        let alert = UIAlertController(title:"温馨提示", message:"确定添加\(products?.count ?? 0)件商品进购物车", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title:"取消", style: .Cancel, handler: nil)
+        let sure   = UIAlertAction(title: "确定", style: .Default) { (action) in
+            if let arr = products{
+                if WOWUserManager.loginStatus { //登录了
+                    self.saveNetCar()
+                }else{ //未登录
+                    self.saveRealm(arr)
+                }
+            }
+        }
+        alert.addAction(cancel)
+        alert.addAction(sure)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    //FIXME:同步到云端购物车去
+    private func saveNetCar(){
+        
+    }
+    
+    private func saveRealm(arr:[WOWProductModel]){
+        for item in arr {
+            let buyCarModel = WOWBuyCarModel()
+            buyCarModel.productID       = item.productID ?? ""
+            buyCarModel.skuID           = item.skuID ?? ""
+            buyCarModel.skuProductPrice = item.price ?? ""
+            buyCarModel.skuProductName = item.productName ?? ""
+            buyCarModel.skuName         = "  " //FIXME:这个地方缺少一个规格
+            buyCarModel.skuProductImageUrl  = item.productImage ?? ""
+            
+            let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(buyCarModel.skuID)'")
+            if let exitModel = exitSkus.first { //之前存在 那就更新数量
+                try! WOWRealm.write({ 
+                    exitModel.skuProductCount += 1
+                })
+            }else{//之前不存在
+                try! WOWRealm.write({
+                    WOWRealm.add(buyCarModel)
+                })
+            }
+        }
+        WOWHud.showMsg("添加购物车成功")
     }
     
     @IBAction func share(sender: UIButton) {
-        DLog("分享")
+        //FIXME:是分享出去公司的官网还是商品或者场景呢
+        WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url: sceneModel?.url)
     }
     
     @IBAction func favorite(sender: UIButton) {
@@ -101,7 +145,7 @@ class WOWSenceController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.sceneModel = Mapper<WOWSenceModel>().map(result)
                 WOWSenceHelper.sceneModel = strongSelf.sceneModel
-                //FIXME:场景详情数据咯
+                //FIXME:价钱要转字符串
                 strongSelf.tableView.reloadData()
             }
         }) { (errorMsg) in

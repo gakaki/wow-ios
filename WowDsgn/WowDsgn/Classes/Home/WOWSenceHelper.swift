@@ -40,6 +40,7 @@ class WOWSenceHelper: NSObject {
             returnCell = cell
         case 2:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSubArtCell),forIndexPath: indexPath) as! WOWSubArtCell
+            cell.dataArr = sceneModel?.products
             cell.delegate = WOWSenceHelper.senceController
             returnCell = cell
         case 3:

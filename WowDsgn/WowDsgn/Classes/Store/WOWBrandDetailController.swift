@@ -74,7 +74,6 @@ extension WOWBrandDetailController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWBrandDetailCell
         cell.desTextLabel.textColor = MGRgb(0, g: 0, b: 0, alpha: 0.5)
         cell.desTextLabel?.text = brandModel.desc
-//        cell.desTextLabel.shadowColor = MGRgb(0, g: 0, b: 0, alpha: 0.2)
         cell.desTextLabel.shadowOffset = CGSizeMake(1, 1)
         return cell
     }
@@ -89,7 +88,7 @@ extension WOWBrandDetailController:WOWActionDelegate{
     func itemAction(tag: Int) {
         switch tag {
         case WOWItemActionType.Share.rawValue:
-            WOWBrandModel.shareBrand(brandModel.name ?? "", url:brandModel.url ?? "")
+            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url)
         default:
             break
         }

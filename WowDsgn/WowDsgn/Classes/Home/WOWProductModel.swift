@@ -38,6 +38,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var designer_desc   : String?
     var attributes      : [WOWAttributeModel]?
     var skus            : [WOWProductSkuModel]?
+    var skuID           : String?
     var pics_compose    : [WOWProductPicTextModel]? //图文详情
     var pics_carousel   : [String]?  //详情轮播的图片
     
@@ -72,6 +73,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         designer_desc   <- map["designer_desc"]
         attributes      <- map["attr"]
         skus            <- map["skus"]
+        skuID           <- map["sku"]
         pics_compose    <- map["pics_compose"]
         pics_carousel   <- map["pics_carousel"]
         user_isLike     <- map["user_like"]

@@ -62,6 +62,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandDetail(brandid: brandID ?? ""), successClosure: {[weak self](result) in
             if let strongSelf = self{
                 strongSelf.brandModel = Mapper<WOWBrandModel>().map(result)
+                //FIXME:商品中的price字段
                 strongSelf.collectionView.reloadData()
             }
         }) { (errorMsg) in

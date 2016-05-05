@@ -132,9 +132,8 @@ extension AppDelegate{
     
     func registAppKey(){
         MobClick.startWithAppkey(WOWUMKey)
-        #if DEBUG
-            MobClick.setCrashReportEnabled(true)
-        #endif
+        MobClick.setCrashReportEnabled(true)
+        
         UMSocialData.setAppKey(WOWUMKey)
         UMSocialWechatHandler.setWXAppId(WOWWXID, appSecret: WOWWXAppSecret, url:"http://www.wowdsgn.com/")
 //        UMSocialSinaHandler.openSSOWithRedirectURL("http://www.wowdsgn.com")

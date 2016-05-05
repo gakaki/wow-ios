@@ -8,28 +8,26 @@
 
 import UIKit
 
-enum  SenceEntrance{
-    case FromHome
-    case FromGoods
-}
-
 class WOWSenceController: WOWBaseViewController {
-    var footerCollectionView        :UICollectionView!
+    var footerCollectionView        : UICollectionView!
     @IBOutlet weak var tableView    : UITableView!
-    var senceID                     :String?
-    var senceEntrance               :SenceEntrance = .FromHome
+    var sceneID                     : String?
+    var sceneModel                  : WOWSenceModel?
+    @IBOutlet weak var totalPriceLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        request()
     }
     
-    deinit{
-        footerCollectionView.removeObserver(self, forKeyPath: "contentSize")
-    }
+//    deinit{
+//        footerCollectionView.removeObserver(self, forKeyPath: "contentSize")
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+//MARK:Private Method
     override func setUI() {
         super.setUI()
         navigationItem.title = "场景"
@@ -39,16 +37,14 @@ class WOWSenceController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
         tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
         tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
-
         WOWSenceHelper.senceController = self
-        configTableFooterView()
     }
 
     @IBAction func backButtonClick(sender: UIButton) {
-        
         navigationController?.popViewControllerAnimated(true)
     }
     
+    /*
     func configTableFooterView(){
         let space:CGFloat = 4
         let layout = UICollectionViewFlowLayout()
@@ -69,7 +65,8 @@ class WOWSenceController: WOWBaseViewController {
         tableView.tableFooterView = footerCollectionView
         footerCollectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
     }
-
+ 
+ 
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         let height = self.footerCollectionView.collectionViewLayout.collectionViewContentSize().height
         guard height != footerCollectionView.size.height else{
@@ -77,22 +74,87 @@ class WOWSenceController: WOWBaseViewController {
         }
         footerCollectionView.size = CGSizeMake(MGScreenWidth, height)
         tableView.tableFooterView = footerCollectionView
+    }*/
+    
+//MARK:Actions
+    
+    @IBAction func carClick(sender: UIButton) {
+        DLog("放入购物车")
+    }
+    
+    @IBAction func share(sender: UIButton) {
+        DLog("分享")
+    }
+    
+    @IBAction func favorite(sender: UIButton) {
+        DLog("收藏")
+    }
+    
+    
+    
+//MARK:Network
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_SenceDetail(sceneid:sceneID ?? ""), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.sceneModel = Mapper<WOWSenceModel>().map(result)
+                WOWSenceHelper.sceneModel = strongSelf.sceneModel
+                //FIXME:场景详情数据咯
+                strongSelf.tableView.reloadData()
+            }
+        }) { (errorMsg) in
+                
+        }
     }
     
 }
 
 
 
-//MARK:
+//MARK: Delegate
 extension WOWSenceController:WOWSubAlertDelegate{
-    func subAlertItemClick() {
+    func subAlertItemClick(productID:String) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        vc.productID = productID
         vc.hideNavigationBar = true
         WOWSenceHelper.senceController.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 
+extension WOWSenceController:UITableViewDelegate,UITableViewDataSource{
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return WOWSenceHelper.sectionsNumber()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return WOWSenceHelper.rowsNumberInSection(section)
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return WOWSenceHelper.cellForRow(tableView, indexPath: indexPath)
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return WOWSenceHelper.heightForHeaderInSection(section)
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return WOWSenceHelper.viewForHeaderInSection(tableView, section: section)
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return WOWSenceHelper.heightForFooterInSection(section)
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
+    }
+}
+
+/*
 extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource{
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -123,35 +185,5 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
         return returnView
     }
 }
+*/
 
-
-extension WOWSenceController:UITableViewDelegate,UITableViewDataSource{
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return WOWSenceHelper.sectionsNumber()
-     }
-    
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return WOWSenceHelper.rowsNumberInSection(section)
-    }
-    
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return WOWSenceHelper.cellForRow(tableView, indexPath: indexPath)
-    }
-    
-     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-       return WOWSenceHelper.heightForHeaderInSection(section)
-    }
-    
-     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return WOWSenceHelper.viewForHeaderInSection(tableView, section: section)
-    }
-    
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return WOWSenceHelper.heightForFooterInSection(section)
-    }
-    
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
-    }
-    
-}

@@ -9,14 +9,15 @@
 import UIKit
 
 class WOWSenceHelper: NSObject {
-    static var senceController:WOWSenceController!
+    static var senceController : WOWSenceController!
+    static var sceneModel      : WOWSenceModel?
     class func sectionsNumber() -> Int{
         return 5
     }
     
     class func rowsNumberInSection(section:Int) ->Int{
         switch section {
-        case 4:
+        case 4: //评论
             return 5
         case 3: //喜欢的暂时干掉
             return 0
@@ -30,13 +31,11 @@ class WOWSenceHelper: NSObject {
         switch indexPath.section {
         case 0:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSenceImageCell), forIndexPath:indexPath) as! WOWSenceImageCell
-            //FIXME:测试数据
-            cell.contentImageView.image = UIImage(named:"testPic")
+            cell.contentImageView.kf_setImageWithURL(NSURL(string:sceneModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
             returnCell = cell
         case 1:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWAuthorCell), forIndexPath:indexPath) as! WOWAuthorCell
-            //FIXME:测试数据
-            cell.desLabel.text = "尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯尖叫的产品咯"
+            cell.desLabel.text = sceneModel?.desc
             cell.contentView.bringSubviewToFront(cell.desLabel)
             returnCell = cell
         case 2:
@@ -90,8 +89,7 @@ class WOWSenceHelper: NSObject {
         
         if section == 2 {
             let headerView = WOWMenuTopView(leftTitle: "xx件商品", rightHiden: true, topLineHiden: true, bottomLineHiden:true)
-            //FIXME:
-            headerView.leftLabel.text = "100件商品"
+            headerView.leftLabel.text = "\(sceneModel?.products?.count ?? 0)件商品"
             return headerView
         }else if section == 4{
             let headerView = WOWMenuTopView(leftTitle: "xx条评论 ", rightHiden:false, topLineHiden: true, bottomLineHiden:true)

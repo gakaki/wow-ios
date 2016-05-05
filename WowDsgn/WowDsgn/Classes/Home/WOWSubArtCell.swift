@@ -8,18 +8,27 @@
 
 import UIKit
 protocol WOWSubAlertDelegate:class{
-    func subAlertItemClick()
+    func subAlertItemClick(productID:String)
 }
 
 class WOWSubArtCell: UITableViewCell {
     let imageScale:CGFloat = 1.4
     @IBOutlet weak var collectionView: UICollectionView!
     weak var delegate:WOWSubAlertDelegate?
+    
+    var dataArr : [WOWProductModel]?{
+        didSet{
+            collectionView.reloadData()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
     }
-
+    
+    
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -32,19 +41,20 @@ extension WOWSubArtCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return dataArr?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
-        //FIXME:替换掉图片
-        cell.pictureImageView.image = UIImage(named: "test2")
+        let model = dataArr?[indexPath.row]
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if  let del = self.delegate {
-            del.subAlertItemClick()
+            let model = dataArr?[indexPath.row]
+            del.subAlertItemClick(model?.productID ?? "")
         }
     }
     

@@ -114,7 +114,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWGoodsTypeCell)), forCellReuseIdentifier:String(WOWGoodsTypeCell))
         tableView.registerNib(UINib.nibName(String(WOWGoodsDetailCell)), forCellReuseIdentifier:String(WOWGoodsDetailCell))
         tableView.registerNib(UINib.nibName(String(WOWGoodsParamCell)), forCellReuseIdentifier:String(WOWGoodsParamCell))
-        tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
         tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
         tableView.registerNib(UINib.nibName(String(WOWDesignerCell)), forCellReuseIdentifier:String(WOWDesignerCell))  
@@ -246,19 +245,6 @@ extension WOWGoodsDetailController:UMSocialUIDelegate{
         }else{
             WOWHud.showMsg("分享失败")
         }
-    }
-    
-}
-
-
-
-
-extension WOWGoodsDetailController:WOWSubAlertDelegate{
-    func subAlertItemClick() {
-        let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
-        sence.hideNavigationBar = true
-        sence.senceEntrance = .FromGoods
-        navigationController?.pushViewController(sence, animated: true)
     }
 }
 

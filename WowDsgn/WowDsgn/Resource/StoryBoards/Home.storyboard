@@ -387,7 +387,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tmc-Xk-Wmi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="WowDsgn" customModuleProvider="target">
@@ -435,27 +435,100 @@
                                     <outlet property="delegate" destination="ZjH-5o-9uo" id="hMM-T2-FMN"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
                                 <rect key="frame" x="0.0" y="20" width="43" height="38"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
                                     <action selector="backButtonClick:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="bhv-hU-ebn"/>
                                 </connections>
                             </button>
+                            <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uv1-Ti-RuP">
+                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ef-mh-v9m">
+                                        <rect key="frame" x="50" y="0.0" width="50" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="vcf-QA-nIr"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_share"/>
+                                        <connections>
+                                            <action selector="share:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="F4P-2n-bMG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InS-kG-pkp">
+                                        <rect key="frame" x="240" y="0.0" width="80" height="45"/>
+                                        <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="rJe-fi-VeR"/>
+                                        </constraints>
+                                        <state key="normal" image="store_buyCar"/>
+                                        <connections>
+                                            <action selector="carClick:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="rgl-AY-E6L"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E70-rc-q8q">
+                                        <rect key="frame" x="212" y="0.0" width="20" height="45"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yv9-6E-UFd" userLabel="line">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                        <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="gLu-Xu-iLT"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddH-D3-MVx">
+                                        <rect key="frame" x="0.0" y="7" width="50" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="ydp-RN-vYg"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_like"/>
+                                        <state key="selected" image="icon_like_hightlighted"/>
+                                        <connections>
+                                            <action selector="favorite:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="s4L-YQ-W7w"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="yv9-6E-UFd" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="4eX-sO-Eba"/>
+                                    <constraint firstItem="9ef-mh-v9m" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="4w7-qK-j16"/>
+                                    <constraint firstAttribute="bottom" secondItem="9ef-mh-v9m" secondAttribute="bottom" id="6zF-P2-cqr"/>
+                                    <constraint firstItem="yv9-6E-UFd" firstAttribute="leading" secondItem="uv1-Ti-RuP" secondAttribute="leading" id="K2j-re-mD8"/>
+                                    <constraint firstItem="InS-kG-pkp" firstAttribute="leading" secondItem="E70-rc-q8q" secondAttribute="trailing" constant="8" id="LB5-bE-VZr"/>
+                                    <constraint firstAttribute="bottom" secondItem="E70-rc-q8q" secondAttribute="bottom" id="T1N-qD-mvM"/>
+                                    <constraint firstItem="E70-rc-q8q" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="aDe-Vo-5t7"/>
+                                    <constraint firstAttribute="trailing" secondItem="InS-kG-pkp" secondAttribute="trailing" id="aNi-pU-tDf"/>
+                                    <constraint firstAttribute="bottom" secondItem="ddH-D3-MVx" secondAttribute="bottom" constant="7" id="cXf-TR-5EG"/>
+                                    <constraint firstAttribute="bottom" secondItem="InS-kG-pkp" secondAttribute="bottom" id="eZq-na-rRQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="yv9-6E-UFd" secondAttribute="trailing" id="iVZ-7K-Mhb"/>
+                                    <constraint firstItem="ddH-D3-MVx" firstAttribute="leading" secondItem="uv1-Ti-RuP" secondAttribute="leading" id="jIg-5u-tRK"/>
+                                    <constraint firstItem="InS-kG-pkp" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="lK7-Qn-OF1"/>
+                                    <constraint firstItem="9ef-mh-v9m" firstAttribute="leading" secondItem="ddH-D3-MVx" secondAttribute="trailing" id="nOT-RT-J5m"/>
+                                    <constraint firstItem="ddH-D3-MVx" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" constant="7" id="w5j-ie-3Me"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Mua-h8-4G3" firstAttribute="top" secondItem="tmc-Xk-Wmi" secondAttribute="bottom" id="BSa-34-tlc"/>
+                            <constraint firstItem="Mua-h8-4G3" firstAttribute="top" secondItem="tmc-Xk-Wmi" secondAttribute="bottom" constant="45" id="BSa-34-tlc"/>
+                            <constraint firstItem="uv1-Ti-RuP" firstAttribute="leading" secondItem="bcz-XR-lDG" secondAttribute="leading" id="Bfh-eg-gDU"/>
                             <constraint firstAttribute="trailing" secondItem="tmc-Xk-Wmi" secondAttribute="trailing" id="EaD-Oi-uDf"/>
                             <constraint firstItem="7x2-PO-jB8" firstAttribute="leading" secondItem="bcz-XR-lDG" secondAttribute="leading" id="Jls-bg-tQY"/>
+                            <constraint firstAttribute="trailing" secondItem="uv1-Ti-RuP" secondAttribute="trailing" id="TBN-8i-mrG"/>
                             <constraint firstItem="tmc-Xk-Wmi" firstAttribute="top" secondItem="bcz-XR-lDG" secondAttribute="top" id="Xxm-4H-bby"/>
+                            <constraint firstAttribute="bottom" secondItem="uv1-Ti-RuP" secondAttribute="bottom" id="aG5-1q-qhv"/>
                             <constraint firstItem="tmc-Xk-Wmi" firstAttribute="leading" secondItem="bcz-XR-lDG" secondAttribute="leading" id="fvK-dE-nKT"/>
                             <constraint firstItem="7x2-PO-jB8" firstAttribute="top" secondItem="bcz-XR-lDG" secondAttribute="top" constant="20" id="gtB-tU-CjX"/>
+                            <constraint firstItem="uv1-Ti-RuP" firstAttribute="top" secondItem="tmc-Xk-Wmi" secondAttribute="bottom" id="tBH-hJ-ltt"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="tableView" destination="tmc-Xk-Wmi" id="Efd-ta-e3T"/>
+                        <outlet property="totalPriceLabel" destination="E70-rc-q8q" id="E4n-94-I52"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C52-5x-XiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -465,5 +538,9 @@
     </scenes>
     <resources>
         <image name="closeNav" width="43" height="38"/>
+        <image name="icon_like" width="16" height="13"/>
+        <image name="icon_like_hightlighted" width="16" height="13"/>
+        <image name="icon_share" width="14" height="14"/>
+        <image name="store_buyCar" width="26" height="25"/>
     </resources>
 </document>

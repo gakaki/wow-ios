@@ -29,15 +29,15 @@ class WOWlListCell: UITableViewCell {
     }
     
     func showData(model:WOWSenceModel) {
-        let url = model.senceImage ?? ""
+        let url = model.image ?? ""
         bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
-        titleLabel.text = model.senceName
+        titleLabel.text = model.name
         
         productBtns.forEach { (view) in
             view.removeFromSuperview()
         }
         bigImageView.userInteractionEnabled = true
-        let products = model.senceProducts ?? []
+        let products = model.products ?? []
         productBtns = []
         for productModel in products {
             let btn = UIButton(type: .System)

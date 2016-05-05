@@ -11,9 +11,9 @@ import Foundation
 public enum RequestApi{
     static var HostUrl:String! = BaseUrl
     
-    case Api_Sence(String,Int)
+    case Api_Sence
     
-    case Api_SenceDetail(senceid:String)
+    case Api_SenceDetail(sceneid:String)
     
     case Api_Category
     
@@ -138,10 +138,8 @@ extension RequestApi:TargetType{
     
     public var parameters:[String: AnyObject]?{
         switch self{
-        case let .Api_Sence(_, value):
-            return ["pageIndex":String(value)]
-        case let .Api_SenceDetail(senceid):
-            return ["senceid":senceid]
+        case let .Api_SenceDetail(sceneid):
+            return ["sceneid":sceneid]
         case let .Api_Register(account,password,code):
             return ["account":account,"password":password,"code":code]
         case let .Api_Login(account,password):

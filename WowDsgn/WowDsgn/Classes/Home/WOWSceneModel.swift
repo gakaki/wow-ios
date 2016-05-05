@@ -10,20 +10,25 @@ import UIKit
 import ObjectMapper
 
 class WOWSenceModel: WOWBaseModel,Mappable{
-    var senceID          :   String?
-    var senceName        :   String?
-    var senceProducts    :   [WOWProductModel]?
+    var id               :   String?
+    var name             :   String?
+    var products         :   [WOWProductModel]?
     var senceTime        :   String?
-    var senceImage       :   String?
+    var image            :   String?
+    var url              :   String?
+    var desc             :   String?
+    
     required init?(_ map: Map) {
         
     }
     
     func mapping(map: Map) {
-        senceID         <- map["id"]
-        senceName       <- map["name"]
+        id              <- map["_id"]
+        name            <- map["name"]
         senceTime       <- map["time"]
-        senceProducts   <- map["products"]
-        senceImage      <- map["image"]
+        products        <- map["products"]
+        image           <- map["image"]
+        url             <- map["url"]
+        desc            <- map["desc"]
     }
 }

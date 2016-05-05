@@ -72,7 +72,7 @@ class WOWController: WOWBaseViewController {
     
 //MARK:Private Networkr
     override func request() {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Sence("pageIndex",pageIndex), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Sence, successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
                 strongSelf.endRefresh()
@@ -136,9 +136,11 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
-        sence.hideNavigationBar = true
-        navigationController?.pushViewController(sence, animated: true)
+        let scene = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
+        let model       = dataArr[indexPath.row]
+        scene.sceneID   = model.id
+        scene.hideNavigationBar = true
+        navigationController?.pushViewController(scene, animated: true)
     }
     
 }

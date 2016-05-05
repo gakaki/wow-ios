@@ -170,7 +170,7 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
         if selectIndex == 0 { //场景
             let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
             sence.hideNavigationBar = true
-            sence.senceID = model.id
+            sence.sceneID = model.id
             navigationController?.pushViewController(sence, animated: true)
         }else{ //单品
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController

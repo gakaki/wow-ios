@@ -121,7 +121,7 @@ extension WOWOrderController:OrderCellDelegate{
     func OrderCellClick(type: OrderCellAction,model:WOWOrderListModel,cell:WOWOrderListCell) {
         switch type {
         case .Comment:
-            DLog("评价")
+            commitOrder(model.id ?? "")
         case .Delete:
             deleteOrder(model,cell: cell)
         case .Pay:
@@ -131,6 +131,12 @@ extension WOWOrderController:OrderCellDelegate{
         case .SureReceive:
             confirmReceive(model.id ?? "",cell: cell)
         }
+    }
+    
+    private func commitOrder(orderID:String){
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
+        vc.orderID = orderID
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     //确认收货

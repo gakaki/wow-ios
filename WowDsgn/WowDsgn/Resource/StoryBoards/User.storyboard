@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--我的-->
@@ -543,6 +544,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gw7-3B-o06" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="319" y="2488"/>
+        </scene>
+        <!--Order Comment Controller-->
+        <scene sceneID="OfF-uf-hOK">
+            <objects>
+                <viewController storyboardIdentifier="WOWOrderCommentController" id="YYB-h6-kCr" customClass="WOWOrderCommentController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hyH-9e-Hkm"/>
+                        <viewControllerLayoutGuide type="bottom" id="gNe-ZR-liV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XmT-uK-e15">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JN9-4y-2Vr" customClass="KMPlaceholderTextView" customModule="WowDsgn" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="320" height="189"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入您的评论"/>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsN-ZX-ltd">
+                                <rect key="frame" x="15" y="239" width="290" height="44"/>
+                                <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="NkO-g2-yVi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="提交">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitButtonClick:" destination="YYB-h6-kCr" eventType="touchUpInside" id="zev-8X-T4O"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RsN-ZX-ltd" secondAttribute="trailing" constant="15" id="4kZ-Zq-O10"/>
+                            <constraint firstItem="JN9-4y-2Vr" firstAttribute="top" secondItem="hyH-9e-Hkm" secondAttribute="bottom" id="Fhf-Q1-S1I"/>
+                            <constraint firstItem="JN9-4y-2Vr" firstAttribute="leading" secondItem="XmT-uK-e15" secondAttribute="leading" id="NAM-56-pWH"/>
+                            <constraint firstItem="RsN-ZX-ltd" firstAttribute="top" secondItem="JN9-4y-2Vr" secondAttribute="bottom" constant="30" id="Qkd-N9-ImN"/>
+                            <constraint firstAttribute="trailing" secondItem="JN9-4y-2Vr" secondAttribute="trailing" id="UDT-2B-6uQ"/>
+                            <constraint firstItem="RsN-ZX-ltd" firstAttribute="leading" secondItem="XmT-uK-e15" secondAttribute="leading" constant="15" id="bFM-ZZ-oiD"/>
+                            <constraint firstItem="JN9-4y-2Vr" firstAttribute="height" secondItem="XmT-uK-e15" secondAttribute="height" multiplier="1/3" id="u4j-gJ-Gm7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="submitButton" destination="RsN-ZX-ltd" id="Jjv-Pd-oYu"/>
+                        <outlet property="textView" destination="JN9-4y-2Vr" id="Uf3-GP-dog"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OXQ-Bo-53b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="710" y="2489"/>
         </scene>
         <!--订单详情-->
         <scene sceneID="dlk-ju-7Sr">

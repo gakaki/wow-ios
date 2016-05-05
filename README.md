@@ -21,3 +21,30 @@
 	
 	商品列表数据貌似是有问题的哎
 	购物车价钱的东西
+	订单评论接口  以及场景评论的接口噻
+
+#2.前后端约定
+	*验证码接口
+type
+	"1" :注册
+	"2" :更改验证码
+		
+	*comment接口
+type 
+  "product" : 商品
+  "scene"   : 场景
+  "order"   : 订单
+uid : xx
+
+thingid:  可能是商品的id,场景的id，或者是订单的id  根据type进行区分
+
+	*favorite接口
+type
+	"1": 商品
+	"2":场景
+product_id : 商品的
+scene_id   : 场景的
+is_delete
+	"1" : 取消收藏
+	"2" : 收藏
+		

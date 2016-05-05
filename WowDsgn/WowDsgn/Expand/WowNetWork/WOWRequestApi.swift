@@ -205,6 +205,8 @@ extension RequestApi:TargetType{
             return "验证码发送成功"
         case .Api_AddressAdd:
             return ""
+        case .Api_CarEdit:
+            return ""
         default:
             return nil
         }

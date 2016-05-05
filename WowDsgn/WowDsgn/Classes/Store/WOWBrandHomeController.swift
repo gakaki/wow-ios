@@ -107,6 +107,8 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        let model = brandModel?.products?[indexPath.row]
+        vc.productID = model?.productID ?? ""
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -125,15 +127,13 @@ extension WOWBrandHomeController:WOWActionDelegate{
         case WOWItemActionType.Like.rawValue:
             DLog("喜欢")
         case WOWItemActionType.Share.rawValue:
-            DLog("分享")
+            WOWBrandModel.shareBrand(brandModel?.name ?? "", url: brandModel?.url ?? "")
         case WOWItemActionType.Brand.rawValue:
-            DLog("跳转到详情去吧")
-            /*
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
+            vc.brandModel = brandModel!
             presentViewController(vc, animated: true, completion: nil)
-            */
         default:
-            DLog("")
+            break
         }
     }
 }

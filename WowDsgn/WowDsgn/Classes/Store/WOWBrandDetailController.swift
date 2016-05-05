@@ -16,7 +16,7 @@ class WOWBrandDetailController: WOWBaseViewController {
     private let cellID = "WOWBrandDetailCell"
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var underView: WOWBrandUnderView!
-    var brandModel:WOWBrandListModel!
+    var brandModel:WOWBrandModel!
 //    var effectView:UIVisualEffectView!
     
     
@@ -38,19 +38,7 @@ class WOWBrandDetailController: WOWBaseViewController {
     
     private func configTableView(){
         let imageView = UIImageView(frame:tableView.bounds)
-        //FIXME:测试
         imageView.image = UIImage(named: "brandBack")
-//        effectView = UIVisualEffectView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight - 35))
-//        let blurEffect = UIBlurEffect(style: .Light)
-//        effectView.effect = blurEffect
-//        effectView.alpha = 0.1
-//        imageView.addSubview(effectView)
-        
-        let shadownView = UIView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenHeight - 35))
-        shadownView.backgroundColor = UIColor.lightGrayColor()
-        shadownView.alpha = 0.3
-        imageView.addSubview(shadownView)
-        
         tableView.backgroundView = imageView
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
         tableView.estimatedRowHeight = 100
@@ -59,9 +47,8 @@ class WOWBrandDetailController: WOWBaseViewController {
         
         let headerView = WOWBrandHeadView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenWidth * 215/375))
         headerView.nameLabel.font = UIFont.mediumScaleFontSize(21)
-        headerView.nameLabel.shadowColor = MGRgb(0, g: 0, b: 0, alpha: 0.5)
-        headerView.nameLabel.text = brandModel.brandName
-        headerView.headImageView.kf_setImageWithURL(NSURL(string:brandModel.brandImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        headerView.nameLabel.text = brandModel.name
+        headerView.headImageView.kf_setImageWithURL(NSURL(string:brandModel.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         headerView.nameLabel.shadowOffset = CGSizeMake(1, 1)
         headerView.backImageView.hidden = true
         headerView.backgroundColor = UIColor.clearColor()
@@ -86,8 +73,8 @@ extension WOWBrandDetailController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWBrandDetailCell
         cell.desTextLabel.textColor = MGRgb(0, g: 0, b: 0, alpha: 0.5)
-        cell.desTextLabel?.text = brandModel.brandDesc
-        cell.desTextLabel.shadowColor = MGRgb(0, g: 0, b: 0, alpha: 0.2)
+        cell.desTextLabel?.text = brandModel.desc
+//        cell.desTextLabel.shadowColor = MGRgb(0, g: 0, b: 0, alpha: 0.2)
         cell.desTextLabel.shadowOffset = CGSizeMake(1, 1)
         return cell
     }
@@ -95,20 +82,16 @@ extension WOWBrandDetailController:UITableViewDelegate,UITableViewDataSource{
 
 extension WOWBrandDetailController:UIScrollViewDelegate{
     func scrollViewDidScroll(scrollView: UIScrollView) {
-//        effectView.alpha = scrollView.contentOffset.y / scrollView.contentSize.height
     }
 }
 
 extension WOWBrandDetailController:WOWActionDelegate{
     func itemAction(tag: Int) {
         switch tag {
-        case WOWItemActionType.Like.rawValue:
-            DLog("喜欢")
         case WOWItemActionType.Share.rawValue:
-            DLog("分享")
+            WOWBrandModel.shareBrand(brandModel.name ?? "", url:brandModel.url ?? "")
         default:
-            DLog("")
+            break
         }
-
     }
 }

@@ -81,10 +81,12 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 try! WOWRealm.write({
                     WOWRealm.add(model, update: true)
                 })
+                WOWHud.showMsg("添加购物车成功")
             }else{
                 try! WOWRealm.write({
                     WOWRealm.add(model, update:true)
                 })
+                WOWHud.showMsg("添加购物车成功")
             }
         }
     }
@@ -92,17 +94,15 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func saveNetBuyCar(model:WOWBuyCarModel){
         let uid = WOWUserManager.userID
-        //FIXME:uid要变过来
         let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName]]
-       
         let param = ["uid":uid,"cart":carItems,"tag":"0"]
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let _ = self{
-                
+                WOWHud.showMsg("添加购物车成功")
             }
         }) { (errorMsg) in
-                
+            WOWHud.showMsg("添加购物车失败")
         }
     }
     
@@ -117,10 +117,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
         tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
-        tableView.registerNib(UINib.nibName(String(WOWDesignerCell)), forCellReuseIdentifier:String(WOWDesignerCell))
-        
-        
-        
+        tableView.registerNib(UINib.nibName(String(WOWDesignerCell)), forCellReuseIdentifier:String(WOWDesignerCell))  
     }
     
     private func configHeaderView(){
@@ -216,7 +213,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
         UMSocialData.defaultData().extConfig.sinaData.shareImage = UIImage(named: "me_logo")
         
         UMSocialSnsService.presentSnsIconSheetView(self, appKey:WOWUMKey, shareText:"", shareImage:nil, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: self)
-        
     }
     
     lazy var backView:WOWBuyBackView = {
@@ -355,6 +351,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     func brandHeadClick() {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.brandID = productModel?.brandID
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }

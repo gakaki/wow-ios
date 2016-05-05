@@ -57,11 +57,7 @@ class WOWlListCell: UITableViewCell {
             }
         }
     }
-    
-    func click() {
-        DLog("123")
-    }
-    
+
     func productBtnClick(sender:UIButton) {
         guard sender.tag != -1111 else{
             return

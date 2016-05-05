@@ -288,6 +288,8 @@ class WOWBuyCarController: WOWBaseViewController {
         }
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarNologin(cart:string), successClosure: { [weak self](result) in
+            let json = JSON(result)
+            DLog(json)
             if let strongSelf = self{
                 let array = Mapper<WOWBuyCarModel>().mapArray(result)
                 if let a = array{
@@ -350,7 +352,6 @@ class WOWBuyCarController: WOWBaseViewController {
                 if let strongSelf = self{
                     let json = JSON(result)
                     DLog(json)
-
                     let array = Mapper<WOWBuyCarModel>().mapArray(result)
                     if let a = array{
                         strongSelf.dataArr.appendContentsOf(a)
@@ -405,6 +406,7 @@ class WOWBuyCarController: WOWBaseViewController {
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                WOWHud.showMsg("修改成功")
                 strongSelf.dataArr = []
                 let array = Mapper<WOWBuyCarModel>().mapArray(result)
                 if let a = array{
@@ -413,7 +415,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 }
             }
         }) { (errorMsg) in
-            
+            WOWHud.showMsg("修改失败")
         }
         
     }

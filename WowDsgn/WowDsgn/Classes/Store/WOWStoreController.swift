@@ -65,7 +65,6 @@ class WOWStoreController: WOWBaseViewController {
                 strongSelf.recommenArr = []
                 strongSelf.brandsCount = JSON(result)["brands_count"].intValue
                 let brands = Mapper<WOWBrandListModel>().mapArray(JSON(result)["brands"].arrayObject)
-                //FIXME:缺少brandid
                 if let brandArray = brands{
                     strongSelf.brandArr.appendContentsOf(brandArray)
                 }

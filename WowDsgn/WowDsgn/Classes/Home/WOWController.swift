@@ -58,13 +58,13 @@ class WOWController: WOWBaseViewController {
                 }
             }
         }
-        
+        /*
         makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController))
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
-        }
+        }*/
     }
     
 //MARK:Actions
@@ -78,6 +78,7 @@ class WOWController: WOWBaseViewController {
                 strongSelf.endRefresh()
                 let arr1 = Mapper<WOWSenceModel>().mapArray(result)
                 if let arr2 = arr1{
+                    strongSelf.dataArr = []
                     strongSelf.dataArr += arr2
                     strongSelf.tableView.reloadData()
                 }

@@ -22,6 +22,7 @@ class WOWOrderListModel: WOWBaseModel,Mappable{
     var address_mobile  : String?
     var created_at      : String?
     var tips            : String?
+    var charge          : AnyObject?
     
     required init?(_ map: Map) {
         
@@ -39,6 +40,7 @@ class WOWOrderListModel: WOWBaseModel,Mappable{
         address_mobile      <- map["address_mobile"]
         created_at          <- map["created_at"]
         tips                <- map["tips"]
+        charge              <- map["charge"]
     }
 }
 

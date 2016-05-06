@@ -12,4 +12,5 @@ class WOWStoreSectionView: UIView {
     @IBOutlet var leftLabel: UILabel!
     @IBOutlet var rightDetailLabel: UILabel!
     @IBOutlet var rightBackView: UIView!
+    @IBOutlet weak var rightArrowButton: UIImageView!
 }

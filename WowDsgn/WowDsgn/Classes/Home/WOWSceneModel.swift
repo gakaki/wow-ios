@@ -17,6 +17,9 @@ class WOWSenceModel: WOWBaseModel,Mappable{
     var image            :   String?
     var url              :   String?
     var desc             :   String?
+    var totalPrice       :   String?
+    var userLike         :   String?
+    var recommendProducts:   [WOWProductModel]?
     
     required init?(_ map: Map) {
         
@@ -30,5 +33,8 @@ class WOWSenceModel: WOWBaseModel,Mappable{
         image           <- map["image"]
         url             <- map["url"]
         desc            <- map["desc"]
+        totalPrice      <- map["total_price"]
+        userLike        <- map["user_like"]
+        recommendProducts  <- map["recommend_products"]
     }
 }

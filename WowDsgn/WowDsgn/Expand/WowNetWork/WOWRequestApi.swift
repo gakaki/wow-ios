@@ -13,7 +13,7 @@ public enum RequestApi{
     
     case Api_Sence
     
-    case Api_SenceDetail(sceneid:String)
+    case Api_SenceDetail(sceneid:String,uid:String)
     
     case Api_Category
     
@@ -31,7 +31,7 @@ public enum RequestApi{
     
     case Api_CommentList(pageindex:String,product_id:String)
     
-    case Api_SubmitComment(uid:String,comment:String,product_id:String)
+    case Api_SubmitComment(uid:String,comment:String,thingid:String,type:String)
     
     case Api_CarEdit(cart:String)
     
@@ -138,8 +138,8 @@ extension RequestApi:TargetType{
     
     public var parameters:[String: AnyObject]?{
         switch self{
-        case let .Api_SenceDetail(sceneid):
-            return ["sceneid":sceneid]
+        case let .Api_SenceDetail(sceneid,uid):
+            return ["scene_id":sceneid,"uid":uid]
         case let .Api_Register(account,password,code):
             return ["account":account,"password":password,"code":code]
         case let .Api_Login(account,password):
@@ -154,8 +154,8 @@ extension RequestApi:TargetType{
             return ["uid":uid,"product_id":product_id,"type":type,"is_delete":is_delete,"scene_id":scene_id]
         case let .Api_CommentList(pageindex,product_id):
             return ["pageindex":pageindex,"product_id":product_id,"full":"ss"]
-        case let .Api_SubmitComment(uid,comment,product_id):
-            return ["uid":uid,"product_id":product_id,"comment":comment]
+        case let .Api_SubmitComment(uid,comment,thingid,type):
+            return ["uid":uid,"thingid":thingid,"comment":comment,"type":type]
         case let .Api_UserUpdate(param):
             return param
         case let .Api_UserFavorite(uid,type,pageindex):
@@ -204,6 +204,8 @@ extension RequestApi:TargetType{
         case .Api_AddressAdd:
             return ""
         case .Api_CarEdit:
+            return ""
+        case .Api_CarList:
             return ""
         default:
             return nil

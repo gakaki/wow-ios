@@ -8,12 +8,18 @@
 
 import UIKit
 
-class WOWOrderDetailController: WOWBaseViewController {
+protocol OrderDetailDelegate:class{
+    func orderStatusChange()
+}
+
+
+class WOWOrderDetailController: WOWBaseViewController{
     var orderModel                  : WOWOrderListModel!
     @IBOutlet weak var tableView    : UITableView!
     @IBOutlet weak var countLabel   : UILabel!
     @IBOutlet weak var priceLabel   : UILabel!
     @IBOutlet weak var rightButton  : UIButton!
+    weak var delegate               : OrderDetailDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,7 +60,7 @@ class WOWOrderDetailController: WOWBaseViewController {
             buttonTtile = "确认收货"
         case 3: //待评价
             buttonTtile = "立即评价"
-        case 1,4: //完成订单
+        case 1,4: //完成订单 待发货
             rightButton.hidden = true
         default:
             break
@@ -66,14 +72,80 @@ class WOWOrderDetailController: WOWBaseViewController {
     @IBAction func rightButtonClick(sender: UIButton) {
         switch orderModel.status ?? 0 {
         case 0:
-            DLog("去支付吧")
-        case 1,2:
-            DLog("确认收货")
-        case 3:
-            DLog("去评价吧")
+            payOrder()
+        case 1,2: //为2d的时候确定收货
+            changeStatus()
+        case 3: //评价
+            commentOrder()
         default:
             break
         }
+    }
+    
+//MARK:Network
+    private func payOrder(){
+        if let charge = orderModel.charge {
+            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME, withCompletion: { [weak self](ret, error) in
+                if let strongSelf = self{
+                    if ret == "success"{ //支付成功
+                       strongSelf.orderModel.status = 1
+                       strongSelf.rightButton.hidden = true
+                        strongSelf.callBack()
+                    }else{//订单支付取消或者失败
+                        if error != nil{
+                            WOWHud.showMsg("支付失败")
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
+    private func commentOrder(){
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
+        vc.orderID = orderModel.id ?? ""
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    
+    //更改状态
+    private func changeStatus(){
+        let uid = WOWUserManager.userID
+        let order_id = orderModel.id ?? ""
+        var status = "2"
+        switch orderModel.status ?? 0 {
+        case 2: //目前为待收货
+            status = "3" //待评价
+        default:
+            break
+        }
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderStatus(uid:uid, order_id:order_id, status:status), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                let ret = JSON(result).int ?? 0
+                if ret == 1{
+                    strongSelf.orderModel.status = 3
+                    strongSelf.rightButton.setTitle("待评价", forState:.Normal)
+                    strongSelf.callBack()
+                }
+            }
+        }) { (errorMsg) in
+            
+        }
+    }
+    
+    private func callBack(){
+        if let del = delegate{
+            del.orderStatusChange()
+        }
+    }
+}
+
+extension WOWOrderDetailController:OrderCommentDelegate{
+    func orderCommentSuccess() {
+        self.orderModel.status = 4 //已完成
+        self.rightButton.hidden = true
+        callBack()
     }
 }
 

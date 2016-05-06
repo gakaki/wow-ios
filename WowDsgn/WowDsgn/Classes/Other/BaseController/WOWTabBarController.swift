@@ -25,9 +25,9 @@ class WOWTabBarController: UITabBarController {
 //MARK:Private Method
     func setViewControllers(){
         self.delegate = self;
-        let storys = ["Home","Store","Activity","BuyCar","User"]
-        let titles = ["尖叫","商店","活动","购物车","我"]
-        let images = ["home","store","activity","buycar","me"]
+        let storys = ["Home","Store",/*"Activity",*/"BuyCar","User"]
+        let titles = ["尖叫","商店",/*"活动",*/"购物车","我"]
+        let images = ["home","store",/*"activity",*/"buycar","me"]
         var viewControllers = [UIViewController]()
         for index in 0..<storys.count{
             let vc = UIStoryboard.initialViewController(storys[index])
@@ -88,7 +88,7 @@ extension WOWTabBarController:UITabBarControllerDelegate{
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         let controllers = tabBarController.viewControllers
         let index = controllers?.indexOf(viewController)
-        if index == 3{
+        if index == 2{
             showBuyCar()
             return false
         }

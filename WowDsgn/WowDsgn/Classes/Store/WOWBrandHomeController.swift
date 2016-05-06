@@ -44,12 +44,14 @@ class WOWBrandHomeController: WOWBaseViewController {
         self.edgesForExtendedLayout = .None
         configCollectionView()
     }
+    
     private func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
         collectionView.registerClass(WOWBrandTopView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
+
     
 //MARK:Actions
     @IBAction func back(sender: UIButton) {
@@ -61,8 +63,9 @@ class WOWBrandHomeController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandDetail(brandid: brandID ?? ""), successClosure: {[weak self](result) in
             if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
                 strongSelf.brandModel = Mapper<WOWBrandModel>().map(result)
-                //FIXME:商品中的price字段
                 strongSelf.collectionView.reloadData()
             }
         }) { (errorMsg) in
@@ -85,6 +88,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
         let model = brandModel?.products?[indexPath.row]
         cell.desLabel.text = model?.productName
+        cell.priceLabel.text = model?.price
         cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         return cell
     }

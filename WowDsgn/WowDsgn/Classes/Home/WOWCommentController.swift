@@ -73,8 +73,15 @@ class WOWCommentController: WOWBaseViewController {
             WOWHud.showMsg("请输入评论")
             return
         }
+        var type = "scene"
+        switch commentType {
+        case .Product:
+            type = "product"
+        case .Sence:
+            type = "scene"
+        }
         
-        WOWNetManager.sharedManager.requestWithTarget(.Api_SubmitComment(uid:WOWUserManager.userID,comment:comments,product_id:self.mainID), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_SubmitComment(uid:WOWUserManager.userID,comment:comments,thingid:self.mainID,type:type), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endEditing()
                 let model = WOWCommentListModel()

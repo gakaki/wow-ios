@@ -24,9 +24,11 @@ class WOWOrderController: WOWBaseViewController {
                 type = "100"
             case 1: //待付款
                 type = "0"
-            case 2: //待收货
+            case 2: //待发货
+                type = "1"
+            case 3: //待收货
                 type = "2"
-            case 3: //待评价
+            case 4: //待评价
                 type = "3"
             default:
                 type = "100"
@@ -73,7 +75,7 @@ class WOWOrderController: WOWBaseViewController {
         WOWCheckMenuSetting.defaultSetUp()
         WOWCheckMenuSetting.fill = true
         WOWCheckMenuSetting.selectedIndex = selectIndex
-        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, MGScreenWidth, 40), titles: ["全部","待付款","待收货","待评价"])
+        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, MGScreenWidth, 40), titles: ["全部","待付款","待发货","待收货","待评价"])
         menuView.delegate = self
         WOWBorderColor(menuView)
         self.view.addSubview(menuView)
@@ -121,11 +123,11 @@ extension WOWOrderController:OrderCellDelegate{
     func OrderCellClick(type: OrderCellAction,model:WOWOrderListModel,cell:WOWOrderListCell) {
         switch type {
         case .Comment:
-            commitOrder(model.id ?? "")
+            commentOrder(model.id ?? "")
         case .Delete:
             deleteOrder(model,cell: cell)
         case .Pay:
-            DLog("支付")
+            payOrder(model.id ?? "",model: model)
         case .ShowTrans:
             DLog("查看物流")
         case .SureReceive:
@@ -133,9 +135,28 @@ extension WOWOrderController:OrderCellDelegate{
         }
     }
     
-    private func commitOrder(orderID:String){
+    //支付
+    private func payOrder(orderID:String,model:WOWOrderListModel){
+        if let charge = model.charge {
+            Pingpp.createPayment(charge as! NSObject, appURLScheme: WOWDSGNSCHEME, withCompletion: {[weak self] (ret, error) in
+                if let strongSelf = self{
+                    if ret == "success"{ //支付成功
+                        strongSelf.request()
+                    }else{//订单支付取消或者失败
+                        if error != nil{
+                            WOWHud.showMsg("支付失败")
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
+    //评价订单
+    private func commentOrder(orderID:String){
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
         vc.orderID = orderID
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -174,15 +195,24 @@ extension WOWOrderController:OrderCellDelegate{
             if let strongSelf = self{
                 let ret = JSON(result).int ?? 0
                 if ret == 1{
-                    //FIXME:要测试下
-                    strongSelf.dataArr.removeAtIndex(strongSelf.dataArr.indexOf(model)!)
-                    let indexPath = strongSelf.tableView.indexPathForCell(cell)
-                    strongSelf.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation:.None)
+                     strongSelf.request()
                 }
             }
         }) { (errorMsg) in
                 
         }
+    }
+}
+
+extension WOWOrderController:OrderCommentDelegate{
+    func orderCommentSuccess() {
+        request()
+    }
+}
+
+extension WOWOrderController:OrderDetailDelegate{
+    func orderStatusChange() {
+        request()
     }
 }
 
@@ -210,6 +240,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
         vc.orderModel = dataArr[indexPath.row]
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     

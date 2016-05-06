@@ -177,6 +177,7 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.didSelectItemAtIndexHandler = {[weak self](indexPath: Int) -> () in
             if let strongSelf = self{
                 strongSelf.categoryID = strongSelf.categoryArr[indexPath].categoryID
+                strongSelf.pageIndex = 0
                 strongSelf.request()
             }
         }
@@ -239,6 +240,7 @@ class WOWGoodsController: WOWBaseViewController {
 extension WOWGoodsController:DropMenuViewDelegate{
     func dropMenuClick(column: Int, row: Int) {
         let sorts = ["new","sale","price"]
+        pageIndex = 0
         switch (column,row) {
             case let (0,x):
                 sort = sorts[x]
@@ -350,49 +352,13 @@ extension WOWGoodsController:ProductCellDelegate{
     }
     
     private func share(model:WOWProductModel){
-        //FIXME:替换掉分享的url
-        let shareText = "尖叫君....."
-        //微信好友
-        UMSocialData.defaultData().extConfig.wxMessageType = UMSocialWXMessageTypeWeb
-        UMSocialData.defaultData().extConfig.wechatSessionData.url = "www.wowdsgn.com"
-        UMSocialData.defaultData().extConfig.wechatSessionData.shareText = shareText
-        UMSocialData.defaultData().extConfig.wechatSessionData.shareImage = UIImage(named: "me_logo")
-        UMSocialData.defaultData().extConfig.wechatSessionData.title = "尖叫君"
-        
-        //朋友圈
-        UMSocialData.defaultData().extConfig.wechatTimelineData.url = "www.wowdsgn.com"
-        UMSocialData.defaultData().extConfig.wechatTimelineData.shareText = shareText
-        UMSocialData.defaultData().extConfig.wechatTimelineData.shareImage = UIImage(named: "me_logo")
-        UMSocialData.defaultData().extConfig.wechatTimelineData.title = "尖叫君"
-        
-        //微博
-        UMSocialData.defaultData().extConfig.sinaData.shareText = shareText + "www.wowdsgn.com"
-        UMSocialData.defaultData().extConfig.sinaData.shareImage = UIImage(named: "me_logo")
-        
-        UMSocialSnsService.presentSnsIconSheetView(self, appKey:WOWUMKey, shareText:"", shareImage:nil, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: self)
+        WOWShareManager.share(model.productName, shareText:model.productDes, url:nil)
     }
     
     private func goLogin(){
         let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
         presentViewController(vc, animated: true, completion: nil)
     }
-    
 }
-
-extension WOWGoodsController:UMSocialUIDelegate{
-    func isDirectShareInIconActionSheet() -> Bool {
-        return true
-    }
-    
-    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
-        if response.responseCode == UMSResponseCodeSuccess {
-            DLog("分享成功")
-        }else{
-            WOWHud.showMsg("分享失败")
-        }
-    }
-    
-}
-
 
 

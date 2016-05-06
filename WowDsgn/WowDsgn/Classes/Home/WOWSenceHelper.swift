@@ -17,8 +17,8 @@ class WOWSenceHelper: NSObject {
     
     class func rowsNumberInSection(section:Int) ->Int{
         switch section {
-        case 4: //评论
-            return 5
+        case 4: //评论 暂时干掉
+            return 0
         case 3: //喜欢的暂时干掉
             return 0
         default:
@@ -73,8 +73,8 @@ class WOWSenceHelper: NSObject {
     
     
     class func heightForFooterInSection(section:Int) ->CGFloat{
-        if section == 4 {
-            return 44
+        if section == 4 { //评论暂时干掉
+            return 0.01
         }else{
             return 0.01
         }
@@ -93,16 +93,20 @@ class WOWSenceHelper: NSObject {
             headerView.leftLabel.text = "\(sceneModel?.products?.count ?? 0)件商品"
             return headerView
         }else if section == 4{
+            /*
             let headerView = WOWMenuTopView(leftTitle: "xx条评论 ", rightHiden:false, topLineHiden: true, bottomLineHiden:true)
             headerView.addAction({ 
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
                 senceController.navigationController?.pushViewController(vc, animated: true)
             })
             return headerView
+             */
+            return nil
         }
         return nil
     }
     
+    /*
     class func viewForFooterInSection(tableView:UITableView,section:Int) ->UIView?{
         if section == 4 {
             let footerView = WOWMenuTopView(leftTitle: "我要评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
@@ -114,5 +118,5 @@ class WOWSenceHelper: NSObject {
         }
         return nil
     }
-    
+    */
 }

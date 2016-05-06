@@ -332,6 +332,7 @@ class WOWBuyCarController: WOWBaseViewController {
             let string = JSONStringify(param)
             WOWNetManager.sharedManager.requestWithTarget(.Api_CarList(cart:string), successClosure: {[weak self](result) in
                 if let strongSelf = self{
+                    WOWHud.dismiss()
                     let json = JSON(result)
                     DLog(json)
                     let array = Mapper<WOWBuyCarModel>().mapArray(result)
@@ -341,7 +342,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     }
                 }
                 }, failClosure: { (errorMsg) in
-                    
+                    WOWHud.dismiss()
             })
         }else{
             for obj in objects {
@@ -352,6 +353,7 @@ class WOWBuyCarController: WOWBaseViewController {
             let string = JSONStringify(param)
             WOWNetManager.sharedManager.requestWithTarget(.Api_CarList(cart:string), successClosure: { [weak self](result) in
                 if let strongSelf = self{
+                    WOWHud.dismiss()
                     let json = JSON(result)
                     DLog(json)
                     let array = Mapper<WOWBuyCarModel>().mapArray(result)
@@ -364,7 +366,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     }
                 }
                 }, failClosure: { (errorMsg) in
-                    
+                    WOWHud.dismiss()
             })
         }
     }

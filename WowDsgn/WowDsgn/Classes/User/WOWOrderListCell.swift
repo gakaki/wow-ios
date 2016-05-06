@@ -40,7 +40,7 @@ class WOWOrderListCell: UITableViewCell {
     
     weak var delegate : OrderCellDelegate?
     var model : WOWOrderListModel?
-    let statuTitles = ["待付款","待发货","待收货","待评价","已完成"]
+    let statuTitles = ["待付款","待发货","待收货","待评价","已完成","已关闭"]
     let rightTitles = ["立即支付","","确认收货","评价","删除订单"]
     var dataArr = [WOWOrderProductModel] ()
     override func awakeFromNib() {
@@ -130,6 +130,10 @@ class WOWOrderListCell: UITableViewCell {
             rightButton.borderColor(0.5, borderColor:UIColor.redColor())
             rightButton.backgroundColor = UIColor.whiteColor()
             rightButton.setTitleColor(UIColor.redColor(), forState:.Normal)
+        case 5: //已关闭 单子过期没支付
+            statusLabel.textColor = UIColor.blackColor()
+            rightButton.hidden = true
+            rightViseButton.hidden = true
         default:
             break
         }

@@ -34,7 +34,7 @@ let URL_product                 = "product"
 //2.3商品详情
 let URL_product_detail          = "product/detail"
 //2.4发表评论
-let URL_SubmitComment           = "product/comment"
+let URL_SubmitComment           = "comment/add"
 //2.5评论列表
 let URL_CommentList             = "product/commentlist"
 
@@ -68,7 +68,7 @@ let URL_FavoriteList            = "like/get"
 let URL_Register                = "usermongo/register"
 let URL_login                   = "usermongo/login"
 let URL_Sms                     = "sms/getcode"
-let URL_ResetPassword           = "user/resettingpwd"
+let URL_ResetPassword           = "usermongo/resettingpwd"
 
 
 let URL_AddressAdd              = "address/addorupdate"

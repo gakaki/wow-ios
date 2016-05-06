@@ -14,14 +14,15 @@ class WOWSenceController: WOWBaseViewController {
     var sceneID                     : String?
     var sceneModel                  : WOWSenceModel?
     @IBOutlet weak var totalPriceLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
     }
     
-//    deinit{
-//        footerCollectionView.removeObserver(self, forKeyPath: "contentSize")
-//    }
+    deinit{
+        footerCollectionView.removeObserver(self, forKeyPath: "contentSize")
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -38,13 +39,20 @@ class WOWSenceController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
         tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
         WOWSenceHelper.senceController = self
+        configTableFooterView()
     }
+    
+    private func configData(){
+        totalPriceLabel.text = sceneModel?.totalPrice?.priceFormat()
+        favoriteButton.selected = (sceneModel?.userLike ?? "fasle") == "true"
+    }
+    
 
     @IBAction func backButtonClick(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
     }
     
-    /*
+    
     func configTableFooterView(){
         let space:CGFloat = 4
         let layout = UICollectionViewFlowLayout()
@@ -74,7 +82,7 @@ class WOWSenceController: WOWBaseViewController {
         }
         footerCollectionView.size = CGSizeMake(MGScreenWidth, height)
         tableView.tableFooterView = footerCollectionView
-    }*/
+    }
     
 //MARK:Actions
     
@@ -85,7 +93,7 @@ class WOWSenceController: WOWBaseViewController {
         let sure   = UIAlertAction(title: "确定", style: .Default) { (action) in
             if let arr = products{
                 if WOWUserManager.loginStatus { //登录了
-                    self.saveNetCar()
+                    self.saveNetCar(arr)
                 }else{ //未登录
                     self.saveRealm(arr)
                 }
@@ -97,8 +105,27 @@ class WOWSenceController: WOWBaseViewController {
     }
     
     //FIXME:同步到云端购物车去
-    private func saveNetCar(){
-        
+    private func saveNetCar(arr:[WOWProductModel]){
+        let uid = WOWUserManager.userID
+        var cars = [AnyObject]()
+        var param:[String:AnyObject] = ["uid":uid]
+        if arr.count != 0 {
+            for obj in arr {
+                let dict = ["skuid":obj.skuID ?? "","count":"1","productid":obj.productID ?? ""]
+                cars.append(dict)
+            }
+            param["cart"] = cars
+            let string = JSONStringify(param)
+            WOWNetManager.sharedManager.requestWithTarget(.Api_CarList(cart:string), successClosure: { [weak self](result) in
+                if let _ = self{
+                    let json = JSON(result)
+                    DLog(json)
+                    WOWHud.showMsg("添加购物车成功")
+                }
+                }, failClosure: { (errorMsg) in
+                    WOWHud.showMsg("添加购物车失败")
+            })
+        }
     }
     
     private func saveRealm(arr:[WOWProductModel]){
@@ -131,7 +158,19 @@ class WOWSenceController: WOWBaseViewController {
     }
     
     @IBAction func favorite(sender: UIButton) {
-        DLog("收藏")
+        let uid         = WOWUserManager.userID
+        let thingid     = self.sceneID ?? ""
+        let type        = "2" //1为商品 2 为场景
+        let is_delete   = favoriteButton.selected ? "1":"0"
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id:"", uid: uid, type: type, is_delete:is_delete, scene_id:thingid), successClosure: { [weak self](result) in
+            let json = JSON(result)
+            DLog(json)
+            if let strongSelf = self{
+                strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
+            }
+        }, failClosure: { (errorMsg) in
+                
+        })
     }
     
     
@@ -139,14 +178,16 @@ class WOWSenceController: WOWBaseViewController {
 //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_SenceDetail(sceneid:sceneID ?? ""), successClosure: { [weak self](result) in
+        let uid = WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_SenceDetail(sceneid:sceneID ?? "",uid:uid), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.sceneModel = Mapper<WOWSenceModel>().map(result)
                 WOWSenceHelper.sceneModel = strongSelf.sceneModel
-                //FIXME:价钱要转字符串
+                strongSelf.configData()
                 strongSelf.tableView.reloadData()
+                strongSelf.footerCollectionView.reloadData()
             }
         }) { (errorMsg) in
                 
@@ -193,26 +234,37 @@ extension WOWSenceController:UITableViewDelegate,UITableViewDataSource{
         return WOWSenceHelper.heightForFooterInSection(section)
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
-    }
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
+//    }
 }
 
-/*
+
 extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource{
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return sceneModel?.recommendProducts?.count ?? 0
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let  cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
-        cell.pictureImageView.image = UIImage(named: "testBrand")
+        let  model = sceneModel?.recommendProducts?[indexPath.row]
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         WOWBorderColor(cell.pictureImageView)
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let  model = sceneModel?.recommendProducts?[indexPath.row]
+        let  pid = model?.productID ?? ""
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        vc.productID = pid
+        vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         var returnView:UICollectionReusableView!
@@ -229,5 +281,5 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
         return returnView
     }
 }
-*/
+
 

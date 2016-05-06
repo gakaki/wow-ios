@@ -52,7 +52,10 @@ class WOWPasswordController: WOWBaseViewController {
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ResetPwd(mobile:mobile, code:code, password:f), successClosure: {[weak self](result) in
             if let strongSelf = self{
-                strongSelf.navigationController?.popToRootViewControllerAnimated(true)
+                let json = JSON(result).string
+                if let ret = json where ret == "ok"{
+                    strongSelf.navigationController?.popToRootViewControllerAnimated(true)
+                }
             }
         }) { (errorMsg) in
                 

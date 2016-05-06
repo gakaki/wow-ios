@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol OrderCommentDelegate : class{
+    func orderCommentSuccess()
+}
+
+
 class WOWOrderCommentController: WOWBaseViewController {
-    var orderID : String!
+    var orderID : String?
     @IBOutlet weak var textView: KMPlaceholderTextView!
     @IBOutlet weak var submitButton: UIButton!
+    weak var delegate:OrderCommentDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +34,19 @@ class WOWOrderCommentController: WOWBaseViewController {
         guard !text.isEmpty else{
             WOWHud.showMsg("请输入您的评论")
             return
+        }
+        let uid = WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_SubmitComment(uid: uid, comment:text, thingid: orderID ?? "", type:"order"), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+                if let del = strongSelf.delegate{
+                    del.orderCommentSuccess()
+                }
+            }
+            
+        }) { (errorMsg) in
+                
         }
     }
 }

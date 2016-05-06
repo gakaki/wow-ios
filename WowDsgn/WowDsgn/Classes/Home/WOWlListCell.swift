@@ -44,10 +44,12 @@ class WOWlListCell: UITableViewCell {
             btn.setImage(UIImage(named: "sence_animatePot")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
             btn.tag = Int(productModel.productID ?? "-1111") ?? -1111
             btn.addTarget(self, action:#selector(productBtnClick(_:)) , forControlEvents:.TouchUpInside)
-            if let X = productModel.productX,Y = productModel.productY {
-                let frame = self.convertRect(CGRectMake(CGFloat(X),CGFloat(Y), 40, 40), fromView: bigImageView)
+            if let X = Float(productModel.productX ?? "0"),Y = Float(productModel.productY ?? "0") {
+                let px = CGFloat(X) * (MGScreenWidth/100)
+                let py = CGFloat(Y) * (MGScreenWidth/100)
+                let frame = CGRectMake(px,py, 40, 40)
                 btn.frame = frame
-                self.addSubview(btn)
+                self.bigImageView.addSubview(btn)
                 self.productBtns.append(btn)
                 UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse,.AllowUserInteraction], animations: { 
                     btn.layer.transform = CATransform3DMakeScale(1.4, 1.4, 1)

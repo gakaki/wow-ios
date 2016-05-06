@@ -12,8 +12,8 @@ import ObjectMapper
 class WOWProductModel: WOWBaseModel,Mappable{
     var productID:String?
     var productName:String?
-    var productX:Float?
-    var productY:Float?
+    var productX:String?
+    var productY:String?
     
     var productDes      : String?
     var productShortDes : String?

@@ -147,7 +147,10 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 
 extension WOWController:SenceCellDelegate{
     func senceProductClick(produtID: String) {
-        DLog("选择了id为\(produtID)的商品")
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        vc.hideNavigationBar = true
+        vc.productID = produtID
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

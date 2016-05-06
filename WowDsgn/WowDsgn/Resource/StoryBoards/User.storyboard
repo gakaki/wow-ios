@@ -101,7 +101,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="待发货" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ljv-bB-OjX">
-                                                    <rect key="frame" x="51" y="13" width="45" height="18"/>
+                                                    <rect key="frame" x="55" y="13" width="45" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -114,8 +114,8 @@
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="me_order_purchasing" id="lwb-vj-w9n">
-                                                    <rect key="frame" x="15" y="14" width="21" height="15"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="me_order_waiting" id="lwb-vj-w9n">
+                                                    <rect key="frame" x="15" y="11" width="25" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -1232,6 +1232,7 @@
         <image name="me_order_delivering" width="23" height="15"/>
         <image name="me_order_purchasing" width="21" height="15"/>
         <image name="me_order_unconfirm" width="23" height="21"/>
+        <image name="me_order_waiting" width="25" height="21"/>
         <image name="me_setting" width="23" height="23"/>
         <image name="next_arrow" width="8" height="14"/>
     </resources>

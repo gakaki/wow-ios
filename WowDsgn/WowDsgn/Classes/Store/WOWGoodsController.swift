@@ -139,7 +139,6 @@ class WOWGoodsController: WOWBaseViewController {
         }
         
         WOWDropMenuSetting.columnTitles = ["新品","所有风格"]
-        //FIXME:测试数据
         WOWDropMenuSetting.rowTitles =  [
                                             ["新品","销量","价格"],
                                             typeTitleArr

@@ -16,7 +16,7 @@ class WOWLeftSideController: UIViewController {
     let cellID = String(WOWMenuCell)
     var dataArr = [WOWCategoryModel]()
     weak var delegate:LeftSideProtocol?
-    //FIXME:默认应该为全部的额
+    //FIXME:默认应该为全部的额 下版本修复
     var selectedTag:String! = ""
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {

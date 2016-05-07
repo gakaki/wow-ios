@@ -38,6 +38,7 @@ class WOWSenceController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
         tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
         tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
+        tableView.mj_header = self.mj_header
         WOWSenceHelper.senceController = self
         configTableFooterView()
     }
@@ -104,7 +105,7 @@ class WOWSenceController: WOWBaseViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    //FIXME:同步到云端购物车去
+    //同步到云端购物车
     private func saveNetCar(arr:[WOWProductModel]){
         let uid = WOWUserManager.userID
         var cars = [AnyObject]()
@@ -188,9 +189,12 @@ class WOWSenceController: WOWBaseViewController {
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
                 strongSelf.footerCollectionView.reloadData()
+                strongSelf.endRefresh()
             }
-        }) { (errorMsg) in
-                
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
         }
     }
     

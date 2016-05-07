@@ -84,35 +84,3 @@ class WOWNetManager {
         }
     }
 }
-        /*
-        requestProvider.request(target).subscribe { (event) -> Void in
-            switch event{
-                case .Next(let response):
-                    let info = Mapper<ReturnInfo>().map(JSON(data: response.data,options: .AllowFragments).object)
-                    if let code = info?.code{
-                        guard code == RequestCode.Success.rawValue else{
-                            failClosure(errorMsg:info?.message)
-                            WOWHud.showMsg(info?.message)
-                            return
-                        }
-                    }else{
-                        failClosure(errorMsg:"请求失败")
-                        WOWHud.showMsg("请求失败")
-                        return
-                    }
-                    guard let data = info?.data else{
-                        failClosure(errorMsg:"请求失败")
-                        WOWHud.showMsg("请求失败")
-                        return
-                    }
-                    WOWHud.dismiss()
-                    successClosure(result:data)
-            case .Error(let error):
-                    DLog(error)
-                    failClosure(errorMsg:"网络错误")
-                    WOWHud.showMsg("网络错误")
-                default:
-                    break
-            }
-        }.addDisposableTo(disposeBag)
-    }*/

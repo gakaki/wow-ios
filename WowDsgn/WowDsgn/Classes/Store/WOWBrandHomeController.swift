@@ -43,6 +43,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         super.setUI()
         self.edgesForExtendedLayout = .None
         configCollectionView()
+        collectionView.mj_header = self.mj_header
     }
     
     private func configCollectionView(){
@@ -67,9 +68,12 @@ class WOWBrandHomeController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.brandModel = Mapper<WOWBrandModel>().map(result)
                 strongSelf.collectionView.reloadData()
+                strongSelf.endRefresh()
             }
-        }) { (errorMsg) in
-                
+        }) {[weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
         }
     }
 }

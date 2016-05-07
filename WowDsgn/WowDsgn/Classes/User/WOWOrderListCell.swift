@@ -41,7 +41,7 @@ class WOWOrderListCell: UITableViewCell {
     weak var delegate : OrderCellDelegate?
     var model : WOWOrderListModel?
     let statuTitles = ["待付款","待发货","待收货","待评价","已完成","已关闭"]
-    let rightTitles = ["立即支付","","确认收货","评价","删除订单"]
+    let rightTitles = ["立即支付","","确认收货","评价","删除订单",""]
     var dataArr = [WOWOrderProductModel] ()
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -73,7 +73,7 @@ class WOWOrderListCell: UITableViewCell {
         orderIdLabel.text = m.id
         goodsCountLabel.text = "共\(m.products?.count ?? 1)件商品"
         totalPriceLabel.text = m.total?.priceFormat()
-        configShowStatus(m.status!)
+        configShowStatus(m.status ?? 2)
     }
     
     @IBAction func rightButtonClick(sender: UIButton) {
@@ -83,7 +83,7 @@ class WOWOrderListCell: UITableViewCell {
             }
         }else{
             var action = OrderCellAction.Pay
-            switch model?.status ?? 0{
+            switch model?.status ?? 2{
             case 0: //未付款
                 action = .Pay
             case 2: //未收货

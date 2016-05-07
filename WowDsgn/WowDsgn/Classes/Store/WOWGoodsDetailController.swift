@@ -147,7 +147,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
-                //FIXME:需要给我的还有该商品官网的url，分享出去哦
+                
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
@@ -192,7 +192,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
 
     
     @IBAction func shareButtonClick(sender: UIButton) {
-        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:nil)
+        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
+        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl)
     }
     
     lazy var backView:WOWBuyBackView = {

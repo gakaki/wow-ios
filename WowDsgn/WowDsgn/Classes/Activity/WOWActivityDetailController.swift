@@ -25,7 +25,6 @@ class WOWActivityDetailController: WOWBaseViewController {
         let webview = WKWebView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         webview.UIDelegate = self
         webview.navigationDelegate = self
-        //FIXME:要替换
         let url = NSURL(string:self.url ?? "")
         //创建请求
         let request = NSURLRequest(URL: url!)

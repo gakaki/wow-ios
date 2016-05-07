@@ -51,16 +51,15 @@ class WOWOrderDetailController: WOWBaseViewController{
     private func configBottomView(){
         countLabel.text  = "共\(orderModel.products?.count ?? 0)件商品"
         priceLabel.text  = orderModel.total?.priceFormat()
-        //FIXME:按钮状态 上面显示的文字做下配置咯
         var buttonTtile = ""
         switch orderModel.status ?? 0 {
         case 0:
             buttonTtile = "立即支付"
-        case 2: //待发货，待收货
+        case 2: //待收货
             buttonTtile = "确认收货"
         case 3: //待评价
             buttonTtile = "立即评价"
-        case 1,4: //完成订单 待发货
+        case 1,4,5: //完成订单 待发货,已关闭
             rightButton.hidden = true
         default:
             break
@@ -158,10 +157,13 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: //订单
-            if orderModel.status == 1 {//待发货
+            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
+            case 0,1,5:
                 return 1
+            default:
+                return 2
             }
-            return 2
+            
         case 1: //收货人
             return 1
         case 2: //商品清单

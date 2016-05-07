@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          拉取配置数据
          */
-        //FIXME:要看下loading的加载效果咯
         requestConfigData()
         
         window?.makeKeyAndVisible()

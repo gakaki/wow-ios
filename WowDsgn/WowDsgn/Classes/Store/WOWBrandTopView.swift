@@ -68,7 +68,6 @@ class WOWBrandHeadView:UIView  {
     
     private func configSubviews(){
         backImageView = UIImageView()
-        //FIXME:测试数据
         backImageView.image = UIImage(named: "brandBack")
         backImageView.contentMode = .ScaleAspectFill
         backImageView.clipsToBounds = true
@@ -80,8 +79,6 @@ class WOWBrandHeadView:UIView  {
         }
         
         nameLabel = UILabel()
-        //FIXME:测试数据
-        nameLabel.text = "尖叫君"
         nameLabel.font = FontMediumlevel001
         nameLabel.textColor = GrayColorlevel2
         nameLabel.textAlignment = .Center
@@ -95,8 +92,6 @@ class WOWBrandHeadView:UIView  {
         }
         
         headImageView = UIImageView()
-        //FIXME:假数据
-        headImageView.image = UIImage(named: "testBrand")
         headImageView.userInteractionEnabled = true
         addSubview(headImageView)
         headImageView.snp_makeConstraints { [weak self](make) in
@@ -164,7 +159,6 @@ class WOWBrandUnderView: UIView {
         shareButton.titleLabel?.font = UIFont.systemFontOfSize(10)
         shareButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
         shareButton.tag = WOWItemActionType.Share.rawValue
-        //FIXME:测数据
         shareButton.addTarget(self, action: #selector(action(_:)), forControlEvents:.TouchUpInside)
         addSubview(shareButton)
         shareButton.snp_makeConstraints { [weak self](make) in

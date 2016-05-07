@@ -42,7 +42,6 @@ class WOWBrandListController: WOWBaseViewController {
     
 //MARK:Private Method
     private func initData(){
-        //FIXME:要搞定的
         /*
             小Bug
  

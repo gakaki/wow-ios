@@ -143,7 +143,7 @@ extension WOWOrderController:OrderCellDelegate{
                     if ret == "success"{ //支付成功
                         strongSelf.request()
                     }else{//订单支付取消或者失败
-                        if error != nil{
+                        if ret == "fail"{
                             WOWHud.showMsg("支付失败")
                         }
                     }

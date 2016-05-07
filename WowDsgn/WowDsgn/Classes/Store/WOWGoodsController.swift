@@ -25,7 +25,7 @@ class WOWGoodsController: WOWBaseViewController {
     private var cellShowStyle:GoodsCellStyle = .Big
     
     //请求参数
-    var categoryID          = "5"
+    var categoryID          = "5" //5是全部
     private var style       = "3"
     private var sort        = "new"
     
@@ -207,7 +207,6 @@ class WOWGoodsController: WOWBaseViewController {
                 }else{
                     strongSelf.collectionView.mj_footer = strongSelf.mj_footer
                 }
-                
                 let goodsArr  = JSON(result)["rows"].arrayObject
                 DLog(goodsArr)
                 if let arr  = goodsArr{

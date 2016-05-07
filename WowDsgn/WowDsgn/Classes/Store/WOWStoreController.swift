@@ -59,8 +59,9 @@ class WOWStoreController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_StoreHome, successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
+                let json = JSON(result)
+                DLog(json)
                 strongSelf.categoryArr = []
-//                strongSelf.bannerArr   = []
                 strongSelf.brandArr    = []
                 strongSelf.recommenArr = []
                 strongSelf.brandsCount = JSON(result)["brands_count"].intValue
@@ -87,19 +88,6 @@ class WOWStoreController: WOWBaseViewController {
     }
 }
 
-/*
-extension WOWStoreController:CyclePictureViewDelegate{
-    func cyclePictureView(cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let model = bannerArr[indexPath.item]
-        guard let string = model.url else{
-            return
-        }
-        let vc = UIStoryboard.initialViewController("Activity", identifier:"WOWActivityDetailController") as! WOWActivityDetailController
-        vc.url = string
-        navigationController?.pushViewController(vc, animated: true)
-    }
-}
-*/
  
 extension WOWStoreController:BrandCellDelegate{
     func hotBrandCellClick(brandModel: WOWBrandListModel) {

@@ -26,7 +26,7 @@ class WOWGoodsTypeCell: UITableViewCell {
     
     func showData(model:WOWProductModel?) {
         titleLabel.text = model?.productName
-        summaryLabel.text = model?.productShortDes
+        summaryLabel.text = model?.productDes
         if let m = model {
             headImageView.kf_setBackgroundImageWithURL(NSURL(string:m.brandImage ?? " ")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
         }

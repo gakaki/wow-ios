@@ -36,7 +36,7 @@ let URL_product_detail          = "product/detail"
 //2.4发表评论
 let URL_SubmitComment           = "comment/add"
 //2.5评论列表
-let URL_CommentList             = "product/commentlist"
+let URL_CommentList             = "comment"
 
 //2.6收藏
 let URL_Favorite                = "like/do"

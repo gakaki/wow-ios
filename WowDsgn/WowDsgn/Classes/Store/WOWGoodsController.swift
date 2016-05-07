@@ -209,6 +209,7 @@ class WOWGoodsController: WOWBaseViewController {
                 }
                 
                 let goodsArr  = JSON(result)["rows"].arrayObject
+                DLog(goodsArr)
                 if let arr  = goodsArr{
                     if strongSelf.pageIndex == 0{
                         strongSelf.dataArr = []
@@ -324,6 +325,7 @@ extension WOWGoodsController:ProductCellDelegate{
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
             vc.hideNavigationBar = true
+            vc.brandID = model.brandID
             navigationController?.pushViewController(vc, animated: true)
         default:
             DLog(" ")

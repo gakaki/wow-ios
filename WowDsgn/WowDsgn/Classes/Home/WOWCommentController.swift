@@ -156,8 +156,11 @@ class WOWCommentController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(pageindex:"\(self.pageIndex)",product_id:self.mainID), successClosure: {[weak self](result) in
+        let type = commentType == .Product ? "product":"scene"
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(pageindex:"\(self.pageIndex)",thingid:self.mainID,type:type), successClosure: {[weak self](result) in
             if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
             let totalPage = JSON(result)["totalPages"].intValue
                let arr = Mapper<WOWCommentListModel>().mapArray(result["comment"])
                 strongSelf.endRefresh()

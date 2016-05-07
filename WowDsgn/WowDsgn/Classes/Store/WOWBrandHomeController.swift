@@ -92,7 +92,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
         let model = brandModel?.products?[indexPath.row]
         cell.desLabel.text = model?.productName
-        cell.priceLabel.text = model?.price
+        cell.priceLabel.text = model?.price?.priceFormat()
         cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         return cell
     }

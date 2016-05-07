@@ -29,7 +29,7 @@ public enum RequestApi{
     
     case Api_Favotite(product_id:String,uid:String,type:String,is_delete:String,scene_id:String)
     
-    case Api_CommentList(pageindex:String,product_id:String)
+    case Api_CommentList(pageindex:String,thingid:String,type:String)
     
     case Api_SubmitComment(uid:String,comment:String,thingid:String,type:String)
     
@@ -152,8 +152,8 @@ extension RequestApi:TargetType{
             return ["id":product_id,"uid":uid]
         case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):
             return ["uid":uid,"product_id":product_id,"type":type,"is_delete":is_delete,"scene_id":scene_id]
-        case let .Api_CommentList(pageindex,product_id):
-            return ["pageindex":pageindex,"product_id":product_id,"full":"ss"]
+        case let .Api_CommentList(pageindex,thingid,type):
+            return ["pageindex":pageindex,"thingid":thingid,"type":type]
         case let .Api_SubmitComment(uid,comment,thingid,type):
             return ["uid":uid,"thingid":thingid,"comment":comment,"type":type]
         case let .Api_UserUpdate(param):

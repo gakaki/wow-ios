@@ -91,7 +91,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                        strongSelf.rightButton.hidden = true
                         strongSelf.callBack()
                     }else{//订单支付取消或者失败
-                        if error != nil{
+                        if ret == "fail"{
                             WOWHud.showMsg("支付失败")
                         }
                     }
@@ -158,7 +158,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         switch section {
         case 0: //订单
             switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
-            case 0,1,5:
+            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
                 return 1
             default:
                 return 2
@@ -192,16 +192,15 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderTransCell", forIndexPath: indexPath) as! WOWOrderTransCell
-            cell.accessoryType = indexPath.row == 1 ? .DisclosureIndicator : .None
+//            cell.accessoryType = indexPath.row == 1 ? .DisclosureIndicator : .None
             cell.statusLabel.hidden = indexPath.row == 1 ? true : false
             if indexPath.row == 0{ //订单
                 cell.statusLabel.text = orderModel.status_chs
                 cell.topLabel.text = "订单：\(orderModel.id ?? "")"
                 cell.leftLabel.text = orderModel.created_at
             }else{ //快递
-                //FIXME:快递
-                cell.topLabel.text = "物流公司"
-                cell.leftLabel.text = "运单号：xxxxxxxxx"
+                cell.topLabel.text = "物流公司：" + (orderModel.transCompany ?? "暂无信息")
+                cell.leftLabel.text = "运单号："  + (orderModel.transNumber ?? "暂无信息")
             }
             returnCell = cell
         case 1:
@@ -229,7 +228,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         return returnCell
     }
     
-    
+    /* FIXME:查看物流暂时放这里
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 0:
@@ -241,7 +240,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             break
         }
     }
-    
+    */
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
@@ -263,8 +262,4 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             headerView.textLabel?.font = Fontlevel003
         }
     }
-    
-    
-    
-    
 }

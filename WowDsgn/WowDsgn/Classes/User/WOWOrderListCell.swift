@@ -108,18 +108,18 @@ class WOWOrderListCell: UITableViewCell {
         rightButton.hidden = false
         rightButton.backgroundColor = ThemeColor
         rightButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
+        rightViseButton.hidden = true //先暂时把查看物流干掉吧
         WOWBorderColor(rightButton)
         switch status {
         case 0: //待付款
             statusLabel.textColor = UIColor.redColor()
         case 1: //待发货
             rightButton.hidden = true
-            rightViseButton.hidden = true
             statusLabel.text = "待发货"
             statusLabel.textColor = UIColor.orangeColor()
         case 2: //待收货 查看物流
             statusLabel.textColor = MGRgb(255, g: 150, b: 0)
-            rightViseButton.hidden = false
+//            rightViseButton.hidden = false
             rightViseButton.borderColor(0.5, borderColor:UIColor.blackColor())
             rightViseButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
             rightViseButton.setTitle("查看物流", forState: .Normal)
@@ -133,7 +133,6 @@ class WOWOrderListCell: UITableViewCell {
         case 5: //已关闭 单子过期没支付
             statusLabel.textColor = UIColor.blackColor()
             rightButton.hidden = true
-            rightViseButton.hidden = true
         default:
             break
         }

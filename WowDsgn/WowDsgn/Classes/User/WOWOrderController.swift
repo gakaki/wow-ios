@@ -31,7 +31,7 @@ class WOWOrderController: WOWBaseViewController {
             case 4: //待评价
                 type = "3"
             default:
-                type = "100"
+                type = "100" //全部
             }
         }
     }

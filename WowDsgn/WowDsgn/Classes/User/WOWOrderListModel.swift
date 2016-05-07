@@ -23,6 +23,8 @@ class WOWOrderListModel: WOWBaseModel,Mappable{
     var created_at      : String?
     var tips            : String?
     var charge          : AnyObject?
+    var transCompany    : String? //物流公司
+    var transNumber     : String? //物流单号
     
     required init?(_ map: Map) {
         
@@ -41,6 +43,8 @@ class WOWOrderListModel: WOWBaseModel,Mappable{
         created_at          <- map["created_at"]
         tips                <- map["tips"]
         charge              <- map["charge"]
+        transCompany        <- map["transCompany"]
+        transNumber         <- map["transNumber"]
     }
 }
 

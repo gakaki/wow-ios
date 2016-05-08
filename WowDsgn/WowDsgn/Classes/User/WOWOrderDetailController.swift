@@ -126,6 +126,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 let ret = JSON(result).int ?? 0
                 if ret == 1{
                     strongSelf.orderModel.status = 3
+                    strongSelf.statusLabel.text = "待评价"
                     strongSelf.rightButton.setTitle("待评价", forState:.Normal)
                     strongSelf.callBack()
                 }
@@ -146,6 +147,7 @@ extension WOWOrderDetailController:OrderCommentDelegate{
     func orderCommentSuccess() {
         self.orderModel.status = 4 //已完成
         self.rightButton.hidden = true
+        statusLabel.text = "已完成"
         callBack()
     }
 }

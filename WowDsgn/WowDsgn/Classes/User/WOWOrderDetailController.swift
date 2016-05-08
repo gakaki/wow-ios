@@ -53,7 +53,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         countLabel.text  = "共\(orderModel.products?.count ?? 0)件商品"
         priceLabel.text  = orderModel.total?.priceFormat()
         var buttonTtile = ""
-        switch orderModel.status ?? 0 {
+        switch orderModel.status ?? 2{
         case 0:
             buttonTtile = "立即支付"
         case 2: //待收货
@@ -115,7 +115,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         let uid = WOWUserManager.userID
         let order_id = orderModel.id ?? ""
         var status = "2"
-        switch orderModel.status ?? 0 {
+        switch orderModel.status ?? 2 {
         case 2: //目前为待收货
             status = "3" //待评价
         default:

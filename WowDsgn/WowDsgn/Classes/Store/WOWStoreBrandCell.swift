@@ -70,7 +70,7 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((MGScreenWidth - 45)/3, (MGScreenWidth - 45)/3)
+        return CGSizeMake((self.width - 45)/3, (self.width - 45)/3)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

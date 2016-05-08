@@ -80,7 +80,7 @@ class WOWILikeController: WOWBaseViewController {
         WOWCheckMenuSetting.defaultSetUp()
         WOWCheckMenuSetting.fill = false
         WOWCheckMenuSetting.selectedIndex = selectIndex
-        checkView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, MGScreenWidth, 40), titles: ["喜欢的场景","喜欢的单品"])
+        checkView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.width, 40), titles: ["喜欢的场景","喜欢的单品"])
         checkView.delegate = self
         WOWBorderColor(checkView)
         self.view.addSubview(checkView)

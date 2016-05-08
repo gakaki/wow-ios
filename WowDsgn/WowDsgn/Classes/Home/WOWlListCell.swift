@@ -45,8 +45,8 @@ class WOWlListCell: UITableViewCell {
             btn.tag = Int(productModel.productID ?? "-1111") ?? -1111
             btn.addTarget(self, action:#selector(productBtnClick(_:)) , forControlEvents:.TouchUpInside)
             if let X = Float(productModel.productX ?? "0"),Y = Float(productModel.productY ?? "0") {
-                let px = CGFloat(X) * (MGScreenWidth/100)
-                let py = CGFloat(Y) * (MGScreenWidth/100)
+                let px = CGFloat(X) * (self.width/100)
+                let py = CGFloat(Y) * (self.width/100)
                 let frame = CGRectMake(px,py, 40, 40)
                 btn.frame = frame
                 self.bigImageView.addSubview(btn)

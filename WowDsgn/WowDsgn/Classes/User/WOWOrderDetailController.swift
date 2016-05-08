@@ -19,6 +19,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     @IBOutlet weak var countLabel   : UILabel!
     @IBOutlet weak var priceLabel   : UILabel!
     @IBOutlet weak var rightButton  : UIButton!
+    var statusLabel                 : UILabel!
     weak var delegate               : OrderDetailDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,8 +88,9 @@ class WOWOrderDetailController: WOWBaseViewController{
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME, withCompletion: { [weak self](ret, error) in
                 if let strongSelf = self{
                     if ret == "success"{ //支付成功
-                       strongSelf.orderModel.status = 1
-                       strongSelf.rightButton.hidden = true
+                        strongSelf.orderModel.status = 1
+                        strongSelf.rightButton.hidden = true
+                        strongSelf.statusLabel.text = "待发货"
                         strongSelf.callBack()
                     }else{//订单支付取消或者失败
                         if ret == "fail"{
@@ -198,6 +200,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 cell.statusLabel.text = orderModel.status_chs
                 cell.topLabel.text = "订单：\(orderModel.id ?? "")"
                 cell.leftLabel.text = orderModel.created_at
+                statusLabel = cell.statusLabel
             }else{ //快递
                 cell.topLabel.text = "物流公司：" + (orderModel.transCompany ?? "暂无信息")
                 cell.leftLabel.text = "运单号："  + (orderModel.transNumber ?? "暂无信息")

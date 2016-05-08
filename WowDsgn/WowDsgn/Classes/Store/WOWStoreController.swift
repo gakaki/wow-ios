@@ -149,7 +149,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         if indexPath.section == 1{
             return 50
         }else{
-            return MGScreenWidth
+            return self.view.width
         }
     }
     

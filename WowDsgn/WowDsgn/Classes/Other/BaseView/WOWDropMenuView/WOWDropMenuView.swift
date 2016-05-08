@@ -22,7 +22,7 @@ struct WOWDropMenuSetting {
     
     static var maxShowCellNumber:Int = 4
     
-        /// 每列的title是否等宽
+    /// 每列的title是否等宽
     static var columnEqualWidth:Bool = false
     
     static var cellTextLabelColor:UIColor = UIColor.blackColor()
@@ -189,9 +189,9 @@ class WOWDropMenuView: UIView {
             tableView.hidden = false
             backView.hidden  = false
             bottomButton.hidden = false
-            tableView.frame = CGRectMake(0, self.y + self.height,MGScreenWidth, 0)
-            bottomButton.frame = CGRectMake(0,self.y + self.height,MGScreenWidth,21)
-            backView.frame = CGRectMake(0, self.y + self.height, MGScreenWidth, MGScreenHeight)
+            tableView.frame = CGRectMake(0, self.y + self.height,self.width, 0)
+            bottomButton.frame = CGRectMake(0,self.y + self.height,self.width,21)
+            backView.frame = CGRectMake(0, self.y + self.height, self.width, MGScreenHeight)
             self.superview?.addSubview(tableView)
             self.superview?.addSubview(bottomButton)
             self.superview?.addSubview(backView)
@@ -282,18 +282,4 @@ extension WOWDropMenuView:UITableViewDelegate,UITableViewDataSource{
             del.dropMenuClick(currentColumn, row: indexPath.row)
         }
     }
-    
-//    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-//        var view = super.hitTest(point, withEvent: event)
-//        if view == nil {
-//            for v in self.subviews {
-//                let p = v.convertPoint(point, fromView: self)
-//                if  CGRectContainsPoint(v.bounds, p) {
-//                    view = v
-//                }
-//            }
-//        }
-//        return view
-//    }
-    
 }

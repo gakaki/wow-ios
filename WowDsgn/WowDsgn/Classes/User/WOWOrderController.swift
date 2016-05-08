@@ -75,7 +75,7 @@ class WOWOrderController: WOWBaseViewController {
         WOWCheckMenuSetting.defaultSetUp()
         WOWCheckMenuSetting.fill = true
         WOWCheckMenuSetting.selectedIndex = selectIndex
-        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, MGScreenWidth, 40), titles: ["全部","待付款","待发货","待收货","待评价"])
+        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.width, 40), titles: ["全部","待付款","待发货","待收货","待评价"])
         menuView.delegate = self
         WOWBorderColor(menuView)
         self.view.addSubview(menuView)

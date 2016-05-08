@@ -21,7 +21,7 @@ class WOWGoodsController: WOWBaseViewController {
     var categoryArr         = [WOWCategoryModel]()
     var dataArr             = [WOWProductModel]()
     var menuView            : BTNavigationDropdownMenu!
-    var productTypeArr      = [WOWProductStyleModel]()
+//    var productTypeArr      = [WOWProductStyleModel]()
     private var cellShowStyle:GoodsCellStyle = .Big
     
     //请求参数
@@ -125,28 +125,29 @@ class WOWGoodsController: WOWBaseViewController {
         }
     }
     
+    /*
     private func configProductType(){
         let ret = WOWRealm.objects(WOWProductStyleModel)
         for model in ret {
             productTypeArr.append(model)
         }
     }
-    
+    */
     private func configMenuView(){
-        configProductType()
-        let typeTitleArr = productTypeArr.map { (model) -> String in
-            return model.styleName ?? ""
-        }
+//        configProductType()
+//        let typeTitleArr = productTypeArr.map { (model) -> String in
+//            return model.styleName ?? ""
+//        }
         
-        WOWDropMenuSetting.columnTitles = ["新品","所有风格"]
+        WOWDropMenuSetting.columnTitles = ["新品"/*,"所有风格"*/]
         WOWDropMenuSetting.rowTitles =  [
                                             ["新品","销量","价格"],
-                                            typeTitleArr
+                                            /*typeTitleArr*/
                                         ]
-        WOWDropMenuSetting.maxShowCellNumber = 5
+        WOWDropMenuSetting.maxShowCellNumber = 3
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2
         WOWDropMenuSetting.showDuration = 0.2
-        let menuView = WOWDropMenuView(frame:CGRectMake(0,0,MGScreenWidth,44))
+        let menuView = WOWDropMenuView(frame:CGRectMake(0,0,self.view.width,44))
         menuView.delegate = self
         menuView.addSubview(styleButton)
         styleButton.snp_makeConstraints { (make) in
@@ -244,10 +245,10 @@ extension WOWGoodsController:DropMenuViewDelegate{
             case let (0,x):
                 sort = sorts[x]
                 break
-            case let (1,x):
-                let typeModel = productTypeArr[x]
-                style = typeModel.styleValue
-                break
+//            case let (1,x):
+//                let typeModel = productTypeArr[x]
+//                style = typeModel.styleValue
+//                break
             default:
                 break
         }

@@ -1197,7 +1197,7 @@
 				TargetAttributes = {
 					2996D0841CBCC78900F257FF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = QWYYQTZY98;
+						DevelopmentTeam = B4WSDTADTT;
 					};
 				};
 			};
@@ -1658,9 +1658,9 @@
 					"\"TwitterKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wow.dsgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0ae8960e-cf2d-40b3-8706-0a3b5db3db01";
 				SWIFT_OBJC_BRIDGING_HEADER = "WowDsgn/Resource/WowDsgn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1763,9 +1763,9 @@
 					"\"TwitterKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wow.dsgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0ae8960e-cf2d-40b3-8706-0a3b5db3db01";
 				SWIFT_OBJC_BRIDGING_HEADER = "WowDsgn/Resource/WowDsgn-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

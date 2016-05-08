@@ -147,7 +147,7 @@ extension RequestApi:TargetType{
         case let .Api_BrandDetail(brandid):
             return ["brandid":brandid]
         case let .Api_ProductList(pageindex,categoryID,style,sort,uid):
-            return ["z":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid]
+            return ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid]
         case let .Api_ProductDetail(product_id,uid):
             return ["id":product_id,"uid":uid]
         case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):

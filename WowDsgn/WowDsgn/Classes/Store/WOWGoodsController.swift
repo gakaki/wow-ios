@@ -26,7 +26,7 @@ class WOWGoodsController: WOWBaseViewController {
     
     //请求参数
     var categoryID          = "5" //5是全部
-    private var style       = "3"
+    private var style       = "0"
     private var sort        = "new"
     
 //MARK:Life

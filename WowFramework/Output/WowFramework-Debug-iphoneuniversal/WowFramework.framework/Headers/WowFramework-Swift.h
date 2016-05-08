@@ -281,22 +281,8 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 - (void)shadow:(UIColor * _Nonnull)color shadowOpacity:(float)shadowOpacity shadowRadius:(CGFloat)shadowRadius shadowOffset:(CGSize)shadowOffset;
 - (void)addAction:(void (^ _Nonnull)(void))closure;
 - (void)tapClick:(UITapGestureRecognizer * _Nonnull)tap;
-@property (nonatomic) CGFloat x;
-@property (nonatomic) CGFloat y;
-
-/// bottom, right, width, height
-@property (nonatomic, readonly) CGFloat bottom;
-@property (nonatomic, readonly) CGFloat right;
 @property (nonatomic) CGFloat width;
 @property (nonatomic) CGFloat height;
-
-/// origin, size
-@property (nonatomic) CGPoint origin;
-@property (nonatomic) CGSize size;
-
-/// centerX, centerY
-@property (nonatomic) CGFloat centerX;
-@property (nonatomic) CGFloat centerY;
 @end
 
 @class UIBarButtonItem;

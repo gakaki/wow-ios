@@ -139,7 +139,8 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         case 0:     //地址
             return addressArr.count > 1 ? 1 : addressArr.count
         case 1:     //支付方式
-            return 2
+            let ret = WXApi.isWXAppInstalled()
+            return ret == true ? 2 : 1
         case 2,3:   //商品清单,订单备注
             return 1
         case 4:     //订单汇总

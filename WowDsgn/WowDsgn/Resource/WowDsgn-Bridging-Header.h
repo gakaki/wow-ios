@@ -15,6 +15,7 @@
 @import DZNEmptyDataSet;
 @import ReachabilitySwift;
 @import EZSwiftExtensions;
+#import "WXApi.h"
 #import <Pingpp.h>
 #import <AVOSCloud/AVOSCloud.h>
 #import <UMSocial.h>

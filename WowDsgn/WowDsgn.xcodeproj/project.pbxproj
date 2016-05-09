@@ -1174,6 +1174,7 @@
 				D2187622B5FEAD6D714750EC /* Embed Pods Frameworks */,
 				C0F5EAB3E82BD7C7E00EBA06 /* Copy Pods Resources */,
 				2991ADE61CBCCAE800F5F5A0 /* CopyFiles */,
+				9EFA77DD1CDFA00E002A30B5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1197,7 +1198,7 @@
 				TargetAttributes = {
 					2996D0841CBCC78900F257FF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = QWYYQTZY98;
+						DevelopmentTeam = B4WSDTADTT;
 					};
 				};
 			};
@@ -1294,6 +1295,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		9EFA77DD1CDFA00E002A30B5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
 		};
 		C0F5EAB3E82BD7C7E00EBA06 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

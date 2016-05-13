@@ -8,14 +8,6 @@
 
 import Foundation
 
-public func DLog (value: Any , fileName : String = #file, line : Int32 = #line ){
-    /// Debug Log
-    let debug = false
-    if debug {
-        print("file：\(NSURL(string: fileName)!.lastPathComponent!)  line：\(line) \(value)\n")
-    }
-}
-
 public func MGRgb(r:CGFloat,g:CGFloat,b:CGFloat,alpha:CGFloat = 1) -> UIColor{
     return UIColor(red:r/255.0, green: g/255.0, blue: b/255.0, alpha:alpha)
 }

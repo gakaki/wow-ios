@@ -2,10 +2,10 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-@import  WowFramework;
+@import  PonyFrameworkOnSwift;
 @import  SnapKit;
 @import  Moya;
-@import RxSwift;
+//@import RxSwift;
 
 @import SwiftyJSON;
 @import Kingfisher;

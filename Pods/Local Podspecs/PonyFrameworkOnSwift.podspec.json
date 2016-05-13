@@ -1,0 +1,17 @@
+{
+  "name": "PonyFrameworkOnSwift",
+  "version": "0.0.2",
+  "summary": "王云鹏的PonyFrameworkOnSwift.",
+  "description": "",
+  "homepage": "https://github.com/MakeBetterMe/PonyFrameworkOnSwift",
+  "license": "MIT (example)",
+  "authors": {
+    "ponycoder": "571533442@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git",
+    "tag": "0.0.1"
+  },
+  "source_files": "PonyFrameworkOnSwift/**/*.swift",
+  "exclude_files": "PonyFrameworkOnSwift/**/*.{png,xib,storyboard}"
+}

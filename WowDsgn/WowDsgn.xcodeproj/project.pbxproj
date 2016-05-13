@@ -1198,7 +1198,7 @@
 				TargetAttributes = {
 					2996D0841CBCC78900F257FF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = QWYYQTZY98;
+						DevelopmentTeam = B4WSDTADTT;
 					};
 				};
 			};
@@ -1659,7 +1659,7 @@
 					"\"TwitterKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wow.dsgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WowDsgn/Resource/WowDsgn-Bridging-Header.h";
@@ -1764,7 +1764,7 @@
 					"\"TwitterKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wow.dsgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WowDsgn/Resource/WowDsgn-Bridging-Header.h";

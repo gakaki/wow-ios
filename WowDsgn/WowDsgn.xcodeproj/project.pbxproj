@@ -1172,6 +1172,7 @@
 				D2187622B5FEAD6D714750EC /* Embed Pods Frameworks */,
 				C0F5EAB3E82BD7C7E00EBA06 /* Copy Pods Resources */,
 				2991ADE61CBCCAE800F5F5A0 /* Copy Files */,
+				29225DAD1CE635F900D084F2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1278,6 +1279,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		29225DAD1CE635F900D084F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
+		};
 		2CF67FC2FB75D0D0BAD11389 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

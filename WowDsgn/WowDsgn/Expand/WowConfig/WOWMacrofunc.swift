@@ -10,7 +10,7 @@ import Foundation
 
 public func DLog (value: Any , fileName : String = #file, line : Int32 = #line ){
     /// Debug Log
-    let debug = false
+    let debug = true
     if debug {
         print("file：\(NSURL(string: fileName)!.lastPathComponent!)  line：\(line) \(value)\n")
     }

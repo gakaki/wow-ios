@@ -10,6 +10,7 @@ use_frameworks!
 
 pod 'SnapKit', '~> 0.19.1'
 pod 'Moya', '~> 6.1.3'
+pod 'RxSwift', '~> 2.2.0'
 pod 'SwiftyJSON'
 pod 'ObjectMapper'
 pod 'Kingfisher','~>2.0.1'
@@ -36,7 +37,6 @@ end
 
 
 #waitting For use
-#pod 'RxSwift', '~> 2.2.0'
 #列表空的占位图 TBEmptyDataSet
 #pod 'ActiveLabel'  @ #特殊的label
 #pod 'AFImageHelper'  Image的拓展

@@ -38,11 +38,11 @@ class WOWMenuCell: UITableViewCell {
         case "5": //全部
             return "all"
         case "17"://装点
-            return  "jiashi"
-        case "18"://家什
-            return "dengguang"
-        case "19"://灯光
             return "zhuangdian"
+        case "18"://家什
+            return "jiashi"
+        case "19"://灯光
+            return "dengguang"
         case "20"://食居
             return "shiju"
         case "21"://儿童

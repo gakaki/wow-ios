@@ -45,7 +45,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="HZ1-Nh-mgr">
                         <rect key="frame" x="0.0" y="26" width="110" height="50"/>
                     </imageView>
-                    <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vae-i8-x9g">
+                    <button hidden="YES" opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vae-i8-x9g">
                         <rect key="frame" x="327" y="333" width="66" height="66"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="66" id="65B-fB-htl"/>

@@ -68,26 +68,26 @@ public extension UIView{
     }
 
 //MARK:Frame
-    var width:CGFloat {
-        get {
-            return CGRectGetWidth(self.frame)
-        }
-        
-        set {
-            var frame = self.frame
-            frame.size.width = newValue
-            self.frame = frame
-        }
-    }
-    var height:CGFloat {
-        get {
-            return CGRectGetHeight(self.frame)
-        }
-        
-        set {
-            var frame = self.frame
-            frame.size.height = newValue
-            self.frame = frame
-        }
-    }
+//    var width:CGFloat {
+//        get {
+//            return CGRectGetWidth(self.frame)
+//        }
+//        
+//        set {
+//            var frame = self.frame
+//            frame.size.width = newValue
+//            self.frame = frame
+//        }
+//    }
+//    var height:CGFloat {
+//        get {
+//            return CGRectGetHeight(self.frame)
+//        }
+//        
+//        set {
+//            var frame = self.frame
+//            frame.size.height = newValue
+//            self.frame = frame
+//        }
+//    }
 }

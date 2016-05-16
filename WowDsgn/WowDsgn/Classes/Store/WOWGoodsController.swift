@@ -75,17 +75,16 @@ class WOWGoodsController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 1
-        l.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0)
-        l.minimumColumnSpacing = 1
-        l.minimumInteritemSpacing = 1
+        l.sectionInset = UIEdgeInsetsMake(0, 0, 1, 0)
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
         return l
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,self.view.width,self.view.height - 65 - 40), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.width,self.view.height - 65 - 40), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -110,7 +109,7 @@ class WOWGoodsController: WOWBaseViewController {
         collectionView.mj_footer            = self.mj_footer
         collectionView.emptyDataSetSource   = self
         collectionView.emptyDataSetDelegate = self
-        //FIXME:下拉箭头再找下更适合的吧
+
         configNavigation()
         configMenuView()
         configNav()
@@ -209,7 +208,6 @@ class WOWGoodsController: WOWBaseViewController {
                     strongSelf.collectionView.mj_footer = strongSelf.mj_footer
                 }
                 let goodsArr  = JSON(result)["rows"].arrayObject
-                DLog(goodsArr)
                 if let arr  = goodsArr{
                     if strongSelf.pageIndex == 0{
                         strongSelf.dataArr = []
@@ -217,7 +215,7 @@ class WOWGoodsController: WOWBaseViewController {
                     for item in arr{
                         let model = Mapper<WOWProductModel>().map(item)
                         if let m = model{
-                            m.calCellHeight()
+//                            m.calCellHeight()
                             strongSelf.dataArr.append(m)
                         }
                     }
@@ -295,7 +293,7 @@ extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
         case .Big:
             return CGSizeMake(MGScreenWidth, MGScreenWidth)
         case .Small:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)
+            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth * 1.3)
         }
     }
 }
@@ -343,8 +341,6 @@ extension WOWGoodsController:ProductCellDelegate{
         let type      = "1"//1为商品 0为场景
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result) in
             if let _ = self{
-                let json = JSON(result)
-                DLog(json)
                 cell.likeButton.selected = !cell.likeButton.selected
             }
         }) { (errorMsg) in

@@ -11,7 +11,7 @@ import UIKit
 class WOWGoodsSmallCell: UICollectionViewCell {
      class var itemWidth:CGFloat{
         get{
-           return (MGScreenWidth - 3) / 2
+           return (MGScreenWidth - 0) / 2
         }
     }
     @IBOutlet weak var pictureImageView: UIImageView!
@@ -20,7 +20,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         WOWBorderColor(contentView)
-        desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30
+        desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(1)) / CGFloat(2) - 30
     }
     
     func showData(model:WOWProductModel) {
@@ -29,5 +29,4 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         desLabel.text       = model.productShortDes
         priceLabel.text     = model.price
     }
-    
 }

@@ -34,6 +34,7 @@ class WOWStoreController: WOWBaseViewController {
         super.setUI()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
+        tableView.separatorColor = SeprateColor;
         tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
         tableView.clearRestCell()
         /*

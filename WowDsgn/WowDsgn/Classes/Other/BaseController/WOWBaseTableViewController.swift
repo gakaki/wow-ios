@@ -34,6 +34,7 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
         self.view.backgroundColor = UIColor.whiteColor()
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.tableFooterView = UIView(frame:CGRectZero)
+        self.tableView.separatorColor = SeprateColor
     }
 
     func request(){

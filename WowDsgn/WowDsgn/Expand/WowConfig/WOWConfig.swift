@@ -43,6 +43,8 @@ let ThemeColor = MGRgb(255, g: 230, b:0)
 
 let BorderColor = MGRgb(200, g: 199, b: 204)
 
+let SeprateColor = MGRgb(234, g:234, b: 234)
+
 
 //MARK:Font
  /// 15号system字体

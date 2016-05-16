@@ -373,7 +373,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 5 {
-            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
+            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden: true, bottomLineHiden: false)
             goComment(footerView)
             return footerView
         }

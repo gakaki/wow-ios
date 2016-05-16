@@ -72,7 +72,7 @@ let FontMediumlevel004 = UIFont.mediumScaleFontSize(12)
 
 //MARK:Layer
 func WOWBorderColor(view:UIView){
-    view.borderColor(0.5, borderColor:BorderColor)
+    view.borderColor(0.5, borderColor:SeprateColor)
 }
 
 func WOWBorderRadius(view:UIView){

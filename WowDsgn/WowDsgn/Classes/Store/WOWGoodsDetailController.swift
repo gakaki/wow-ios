@@ -197,7 +197,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     lazy var backView:WOWBuyBackView = {
-        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.width,self.view.height))
+        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.w,self.view.h))
         return v
     }()
 

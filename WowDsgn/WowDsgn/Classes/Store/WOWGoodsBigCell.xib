@@ -16,17 +16,17 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-SD-YpL">
                         <rect key="frame" x="0.0" y="0.0" width="408" height="414"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="store_mask" translatesAutoresizingMaskIntoConstraints="NO" id="uVt-z6-LIM">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store_mask" translatesAutoresizingMaskIntoConstraints="NO" id="uVt-z6-LIM">
                         <rect key="frame" x="0.0" y="319" width="408" height="95"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vj9-Ps-xrn">
-                        <rect key="frame" x="15" y="356" width="60" height="15"/>
+                        <rect key="frame" x="15" y="356" width="378" height="15"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDG-Tc-7y0">
-                        <rect key="frame" x="15" y="334" width="74" height="18"/>
+                        <rect key="frame" x="15" y="334" width="378" height="18"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -45,16 +45,6 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="HZ1-Nh-mgr">
                         <rect key="frame" x="0.0" y="26" width="110" height="50"/>
                     </imageView>
-                    <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vae-i8-x9g">
-                        <rect key="frame" x="327" y="333" width="66" height="66"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="66" id="65B-fB-htl"/>
-                            <constraint firstAttribute="width" constant="66" id="yI6-tz-1aw"/>
-                        </constraints>
-                        <connections>
-                            <action selector="actionButtonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="cox-LJ-nPq"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="               " textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajL-tw-Wa5">
                         <rect key="frame" x="15" y="30" width="75" height="42"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -86,12 +76,8 @@
                 <constraint firstItem="HZ1-Nh-mgr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BNQ-E6-IP8"/>
                 <constraint firstItem="tno-T3-rGi" firstAttribute="leading" secondItem="aZE-jM-28a" secondAttribute="trailing" constant="20" id="EMs-4Q-68X"/>
                 <constraint firstAttribute="trailing" secondItem="uVt-z6-LIM" secondAttribute="trailing" id="EWf-70-Lpi"/>
-                <constraint firstItem="Vae-i8-x9g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vj9-Ps-xrn" secondAttribute="trailing" constant="8" id="H4R-1D-LGg"/>
                 <constraint firstItem="aZE-jM-28a" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="HDt-Wi-Y5D"/>
-                <constraint firstItem="Vae-i8-x9g" firstAttribute="leading" secondItem="uVt-z6-LIM" secondAttribute="trailing" id="InB-cb-ux8"/>
                 <constraint firstItem="uVt-z6-LIM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="LSm-hW-w4p"/>
-                <constraint firstItem="Vae-i8-x9g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tDG-Tc-7y0" secondAttribute="trailing" constant="8" id="PY8-t4-XDY"/>
-                <constraint firstAttribute="trailing" secondItem="Vae-i8-x9g" secondAttribute="trailing" constant="15" id="QtK-v5-Xfh"/>
                 <constraint firstItem="HZ1-Nh-mgr" firstAttribute="centerY" secondItem="ajL-tw-Wa5" secondAttribute="centerY" id="R5w-Ab-txs"/>
                 <constraint firstItem="tno-T3-rGi" firstAttribute="centerY" secondItem="aZE-jM-28a" secondAttribute="centerY" id="S4w-Wt-zlm"/>
                 <constraint firstItem="ajL-tw-Wa5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="30" id="X7M-J5-44v"/>
@@ -99,21 +85,16 @@
                 <constraint firstAttribute="bottom" secondItem="aZE-jM-28a" secondAttribute="bottom" constant="15" id="e5X-oN-tQs"/>
                 <constraint firstItem="HZ1-Nh-mgr" firstAttribute="trailing" secondItem="ajL-tw-Wa5" secondAttribute="trailing" constant="20" id="edK-YH-GDI"/>
                 <constraint firstItem="ajL-tw-Wa5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="gjS-sg-rba"/>
-                <constraint firstAttribute="bottom" secondItem="Vae-i8-x9g" secondAttribute="bottom" constant="15" id="grc-F3-IuC"/>
+                <constraint firstAttribute="trailing" secondItem="tDG-Tc-7y0" secondAttribute="trailing" constant="15" id="hgj-1t-GL7"/>
                 <constraint firstItem="Qnf-SD-YpL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lmb-yJ-OgB"/>
                 <constraint firstItem="vj9-Ps-xrn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="miA-KY-yDE"/>
                 <constraint firstAttribute="bottom" secondItem="uVt-z6-LIM" secondAttribute="bottom" id="r2Y-Nq-Lep"/>
                 <constraint firstAttribute="trailing" secondItem="Qnf-SD-YpL" secondAttribute="trailing" id="tGn-tg-Ghi"/>
+                <constraint firstAttribute="trailing" secondItem="vj9-Ps-xrn" secondAttribute="trailing" constant="15" id="vNW-ts-xc6"/>
             </constraints>
             <size key="customSize" width="408" height="414"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="InB-cb-ux8"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="bigPictureImageView" destination="Qnf-SD-YpL" id="B3w-yA-0V6"/>
-                <outlet property="brandButton" destination="Vae-i8-x9g" id="MpW-tg-4Yg"/>
                 <outlet property="desLabel" destination="vj9-Ps-xrn" id="7Qp-4U-RdN"/>
                 <outlet property="likeButton" destination="aZE-jM-28a" id="rlQ-8w-iaq"/>
                 <outlet property="priceBackImageView" destination="HZ1-Nh-mgr" id="JMd-xh-7Hp"/>

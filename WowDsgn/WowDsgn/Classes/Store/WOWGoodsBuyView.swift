@@ -35,7 +35,7 @@ class WOWBuyBackView: UIView {
     }
 //MARK:Private Method
     private func setUP(){
-        self.frame = CGRectMake(0, 0, self.width, self.height)
+        self.frame = CGRectMake(0, 0, self.w, self.h)
         backgroundColor = MGRgb(0, g: 0, b: 0, alpha: 0.4)
         self.alpha = 0
     }
@@ -47,7 +47,7 @@ class WOWBuyBackView: UIView {
     }
     
     func show() {
-        backClear.frame = CGRectMake(0,self.height,self.width,self.height)
+        backClear.frame = CGRectMake(0,self.h,self.w,self.h)
         addSubview(backClear)
 //        buyView.frame = CGRectMake(0, 0, 0, 400)
         backClear.addSubview(buyView)

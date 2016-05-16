@@ -189,15 +189,15 @@ class WOWDropMenuView: UIView {
             tableView.hidden = false
             backView.hidden  = false
             bottomButton.hidden = false
-            tableView.frame = CGRectMake(0, self.y + self.height,self.width, 0)
-            bottomButton.frame = CGRectMake(0,self.y + self.height,self.width,21)
-            backView.frame = CGRectMake(0, self.y + self.height, self.width, MGScreenHeight)
+            tableView.frame = CGRectMake(0, self.y + self.h,self.w, 0)
+            bottomButton.frame = CGRectMake(0,self.y + self.h,self.w,21)
+            backView.frame = CGRectMake(0, self.y + self.h, self.w, MGScreenHeight)
             self.superview?.addSubview(tableView)
             self.superview?.addSubview(bottomButton)
             self.superview?.addSubview(backView)
             self.superview?.insertSubview(backView, belowSubview: tableView)
             UIView.animateWithDuration(WOWDropMenuSetting.showDuration, animations: {
-                self.tableView.height = CGFloat(WOWDropMenuSetting.maxShowCellNumber) * WOWDropMenuSetting.cellHeight
+                self.tableView.h = CGFloat(WOWDropMenuSetting.maxShowCellNumber) * WOWDropMenuSetting.cellHeight
                 self.bottomButton.y = CGFloat(WOWDropMenuSetting.maxShowCellNumber) * WOWDropMenuSetting.cellHeight + CGRectGetHeight(self.frame) - CGFloat(2)
                 self.backView.alpha = 0.8
             })
@@ -218,7 +218,7 @@ class WOWDropMenuView: UIView {
     private func hide(){
         show = false
         UIView.animateWithDuration(WOWDropMenuSetting.showDuration, animations: {
-            self.tableView.height = 0
+            self.tableView.h = 0
             self.bottomButton.y -= CGFloat(WOWDropMenuSetting.maxShowCellNumber) * WOWDropMenuSetting.cellHeight
             self.columItemArr[self.currentColumn].arrowImageView.transform = CGAffineTransformIdentity
             self.backView.alpha = 0

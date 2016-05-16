@@ -82,7 +82,7 @@ class WOWGoodsController: WOWBaseViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.width,self.view.height - 65 - 40), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 65 - 40), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.whiteColor()
@@ -146,7 +146,7 @@ class WOWGoodsController: WOWBaseViewController {
         WOWDropMenuSetting.maxShowCellNumber = 3
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2
         WOWDropMenuSetting.showDuration = 0.2
-        let menuView = WOWDropMenuView(frame:CGRectMake(0,0,self.view.width,44))
+        let menuView = WOWDropMenuView(frame:CGRectMake(0,0,self.view.w,44))
         menuView.delegate = self
         menuView.addSubview(styleButton)
         styleButton.snp_makeConstraints { (make) in

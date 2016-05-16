@@ -36,7 +36,7 @@ class WOWUserHomeController: WOWBaseViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0,0,self.view.width,self.view.height), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0,0,self.view.w,self.view.h), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.whiteColor()

@@ -97,7 +97,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
 //MARK:Lazy
     lazy var backView:WOWBuyBackView = {
-        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.width,MGScreenHeight))
+        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.w,MGScreenHeight))
         return v
     }()
 

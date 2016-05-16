@@ -47,7 +47,7 @@ class WOWILikeController: WOWBaseViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 40,self.view.width,self.view.height - 40 - 64), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 40,self.view.w,self.view.h - 40 - 64), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.emptyDataSetDelegate = self
@@ -80,7 +80,7 @@ class WOWILikeController: WOWBaseViewController {
         WOWCheckMenuSetting.defaultSetUp()
         WOWCheckMenuSetting.fill = false
         WOWCheckMenuSetting.selectedIndex = selectIndex
-        checkView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.width, 40), titles: ["喜欢的场景","喜欢的单品"])
+        checkView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.w, 40), titles: ["喜欢的场景","喜欢的单品"])
         checkView.delegate = self
         WOWBorderColor(checkView)
         self.view.addSubview(checkView)

@@ -42,7 +42,7 @@ class WOWLeftSideController: UIViewController {
     
     private func setUI(){
         tableView.clearRestCell()
-        let imageView = UIImageView(frame:CGRectMake(0,0,tableView.width,tableView.height))
+        let imageView = UIImageView(frame:CGRectMake(0,0,tableView.w,tableView.h))
         imageView.image = UIImage(named: "menuTableView")
         self.tableView.backgroundView = imageView
     }
@@ -59,7 +59,7 @@ class WOWLeftSideController: UIViewController {
     
     lazy var topSectionHeaderView:UIView = {
         var view = UIView(frame:CGRectMake(0,0,MGScreenWidth,64))
-        let menuView = WOWMenuTopView(frame:CGRectMake(0,24,self.tableView.width,40))
+        let menuView = WOWMenuTopView(frame:CGRectMake(0,24,self.tableView.w,40))
         menuView.rightButton.addTarget(self, action: #selector(WOWLeftSideController.closeButtonClick), forControlEvents:.TouchUpInside)
         menuView.backgroundColor = UIColor.clearColor()
         view.addSubview(menuView)

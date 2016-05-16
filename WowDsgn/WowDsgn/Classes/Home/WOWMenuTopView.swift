@@ -46,7 +46,7 @@ class WOWMenuTopView: UIView {
         self.addSubview(topLine)
         topLine.snp_makeConstraints { (make) in
             make.height.equalTo(0.5)
-            make.left.equalTo(weakSelf!).offset(15)
+            make.left.equalTo(weakSelf!).offset(0)
             make.top.equalTo(weakSelf!).offset(0)
             make.right.equalTo(weakSelf!).offset(0)
         }

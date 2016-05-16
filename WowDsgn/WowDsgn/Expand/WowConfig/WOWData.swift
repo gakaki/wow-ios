@@ -28,6 +28,9 @@ let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
 //退出登录
 let WOWExitLoginNotificationKey         = "WOWExitLoginNotificationKey"
 
+//更新购物车，更新badge
+let WOWUpdateCarBadgeNotificationKey    = "WOWUpdateCarBadgeNotificationKey"
+
 
 let WOWEmptyNetWorkText  = "网络错误"
 

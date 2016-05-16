@@ -94,8 +94,7 @@ class WOWController: WOWBaseViewController {
 
 extension WOWController:LeftSideProtocol{
     func sideMenuSelect(tagString: String!, index: Int,dataArr:[WOWCategoryModel]) {
-        DLog(tagString)
-       let tab = WOWTool.appTab
+       let tab = WOWTool.appTabBarController
         tab.selectedIndex = 1
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
         vc.categoryIndex    = index

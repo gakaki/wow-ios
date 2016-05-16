@@ -21,7 +21,7 @@ class WOWGoodsController: WOWBaseViewController {
     var categoryArr         = [WOWCategoryModel]()
     var dataArr             = [WOWProductModel]()
     var menuView            : BTNavigationDropdownMenu!
-//    var productTypeArr      = [WOWProductStyleModel]()
+    var carButton           : MIBadgeButton!
     private var cellShowStyle:GoodsCellStyle = .Big
     
     //请求参数
@@ -47,12 +47,15 @@ class WOWGoodsController: WOWBaseViewController {
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
          menuView.hideMenu()
+    }
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     
@@ -94,6 +97,11 @@ class WOWGoodsController: WOWBaseViewController {
     
     private func addObserver(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
+    }
+    
+    func updateBadge(){
+        carButton.badgeString = WOWBuyCarMananger.calCarCount()
     }
     
     func loginSuccess() {
@@ -115,33 +123,22 @@ class WOWGoodsController: WOWBaseViewController {
         configNav()
     }
     
-    private func configNav(){
-        makeCustomerImageNavigationItem("car", left: false) {[weak self] in
-            if let strongSelf = self{
-                let buyCar = UIStoryboard.initialViewController("BuyCar")
-                strongSelf.presentViewController(buyCar, animated: true, completion: nil)
-            }
-        }
-    }
     
-    /*
-    private func configProductType(){
-        let ret = WOWRealm.objects(WOWProductStyleModel)
-        for model in ret {
-            productTypeArr.append(model)
-        }
+    
+    private func configNav(){
+        carButton = MIBadgeButton(type: .System)
+        carButton.setImage(UIImage(named: "store_buyCar"), forState: .Normal)
+        carButton.sizeToFit()
+        carButton.addTarget(self, action:#selector(goCar), forControlEvents:.TouchUpInside)
+        let item = UIBarButtonItem(customView: carButton)
+        carButton.badgeString = WOWBuyCarMananger.calCarCount()
+        navigationItem.rightBarButtonItem = item
     }
-    */
+
     private func configMenuView(){
-//        configProductType()
-//        let typeTitleArr = productTypeArr.map { (model) -> String in
-//            return model.styleName ?? ""
-//        }
-        
         WOWDropMenuSetting.columnTitles = ["新品"/*,"所有风格"*/]
         WOWDropMenuSetting.rowTitles =  [
                                             ["新品","销量","价格"],
-                                            /*typeTitleArr*/
                                         ]
         WOWDropMenuSetting.maxShowCellNumber = 3
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2
@@ -190,6 +187,17 @@ class WOWGoodsController: WOWBaseViewController {
 
     
 //MARK:Actions
+    func goCar() {
+        let nav = UIStoryboard.initialViewController("BuyCar")
+//        let buyCar = nav.topViewController as! WOWBuyCarController
+//        buyCar.updateCarAction = {[weak self] in
+//            if let strongSelf = self{
+//                strongSelf.carButton.badgeString = WOWBuyCarMananger.calCarCount()
+//            }
+//        }
+        presentViewController(nav, animated: true, completion: nil)
+    }
+    
     func showStyleChange(btn:UIButton) {
         btn.selected = !btn.selected
         cellShowStyle = btn.selected ? .Small : .Big

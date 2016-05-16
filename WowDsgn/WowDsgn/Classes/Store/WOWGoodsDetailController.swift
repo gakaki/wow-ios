@@ -16,6 +16,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     var cycleView:CyclePictureView!
     
+    @IBOutlet weak var carEntranceButton: MIBadgeButton!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var priceLabel: UILabel!
@@ -27,13 +28,17 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWGoodsSureBuyNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
     }
-    
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         addObservers()
+    }
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,12 +50,21 @@ class WOWGoodsDetailController: WOWBaseViewController {
         self.edgesForExtendedLayout = .None
         configTableView()
         configHeaderView()
+        updateCarBadge()
     }
     
+    
+    
 //MARK:Private Method
+    
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
+    }
+    
+    func updateBadge(){
+        updateCarBadge()
     }
     
     func loginSuccess() {
@@ -63,6 +77,11 @@ class WOWGoodsDetailController: WOWBaseViewController {
            resolveBuyModel(model)
         }
         backView.hideBuyView()
+    }
+    
+    private func updateCarBadge(){
+        carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
+        carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(15, 0, 0,15)
     }
 
     
@@ -88,6 +107,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 })
                 WOWHud.showMsg("添加购物车成功")
             }
+            WOWBuyCarMananger.updateBadge()
+            updateCarBadge()
         }
     }
     
@@ -100,6 +121,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let _ = self{
                 WOWHud.showMsg("添加购物车成功")
+                //FIXME:要修改本地user的carcount的
             }
         }) { (errorMsg) in
             WOWHud.showMsg("添加购物车失败")
@@ -134,8 +156,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:Actions
     
     @IBAction func carEntranceClick(sender: UIButton) {
-        let buyCar = UIStoryboard.initialViewController("BuyCar")
-        self.presentViewController(buyCar, animated: true, completion: nil)
+        let nav = UIStoryboard.initialViewController("BuyCar")
+        self.presentViewController(nav, animated: true, completion: nil)
     }
 
 //MARK:Private Network
@@ -373,7 +395,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 5 {
-            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden: true, bottomLineHiden: false)
+            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden:(productModel?.comments?.count ?? 0) == 0 ? true:false, bottomLineHiden: false)
             goComment(footerView)
             return footerView
         }

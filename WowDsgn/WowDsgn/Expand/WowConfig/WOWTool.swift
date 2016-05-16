@@ -66,7 +66,7 @@ func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
 
 
 struct WOWTool {
-    static var appTab:UITabBarController {
+    static var appTabBarController:UITabBarController {
         get{
             let del = UIApplication.sharedApplication().delegate as? AppDelegate
             let tab = del?.sideController.mainController as! UITabBarController

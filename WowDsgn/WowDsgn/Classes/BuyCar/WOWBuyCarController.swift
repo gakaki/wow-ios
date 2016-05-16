@@ -15,6 +15,7 @@ class WOWBuyCarController: WOWBaseViewController {
     private var editingModel    : WOWBuyCarModel?
     private var rightItemButton : UIButton!
     private var totalPrice      : String?
+//    var updateCarAction         : WOWActionClosure?
     
     private var dataArr = [WOWBuyCarModel](){
         didSet{
@@ -116,6 +117,102 @@ class WOWBuyCarController: WOWBaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
     }
     
+    override func setUI() {
+        super.setUI()
+        totalPriceLabel.text = "¥ 0.0"
+        endButton.setTitle("删除", forState:.Selected)
+        endButton.setTitle("去结算", forState:.Normal)
+        endButton.tintColor = UIColor.clearColor()
+        
+        configNav()
+        configTable()
+    }
+    
+    
+    private func configTable(){
+        tableView.registerNib(UINib.nibName(String(WOWBuyCarNormalCell)), forCellReuseIdentifier:cellNormalID)
+        tableView.registerNib(UINib.nibName(String(WOWBurCarEditCell)), forCellReuseIdentifier:cellEditID)
+        tableView.clearRestCell()
+    }
+    
+    private func configNav(){
+        navigationItem.title = "购物车"
+        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
+            if let strongSelf = self{
+                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+        rightItemButton = UIButton(type: .System)
+        rightItemButton.contentHorizontalAlignment = .Right
+        rightItemButton.frame = CGRectMake(0, 0, 60, 32)
+        rightItemButton.setTitle("编辑", forState:.Normal)
+        rightItemButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
+        rightItemButton.titleLabel?.font = Fontlevel002
+        rightItemButton.addTarget(self, action: #selector(editButtonClick), forControlEvents:.TouchUpInside)
+        let rightItem = UIBarButtonItem(customView:rightItemButton)
+        self.navigationItem.rightBarButtonItem = rightItem
+    }
+    
+    private func updateCarCountBadge(){
+        WOWBuyCarMananger.updateBadge()
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+    }
+    
+//MARK:Actions
+    func editButtonClick() {
+        isEditing = !isEditing
+        let title = isEditing ? "完成" : "编辑"
+        rightItemButton.setTitle(title, forState:.Normal)
+        allButton.selected = false
+        selectedArr = []
+        tableView.reloadData()
+        
+    }
+    
+    @IBAction func endButtonClick(sender: UIButton) {
+        if selectedArr.isEmpty {
+            WOWHud.showMsg("您还没有选中商品哦")
+            return
+        }
+        if isEditing { //删除
+            if selectedArr.isEmpty {
+                return
+            }
+            removeCarItem(selectedArr)
+        }else{ //结算
+            if  WOWUserManager.loginStatus {
+                let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWSureOrderController") as! WOWSureOrderController
+                sv.productArr = selectedArr
+                sv.totalPrice = totalPrice
+                navigationController?.pushViewController(sv, animated: true)
+            }else{
+                goLogin()
+            }
+        }
+    }
+    
+    private func goLogin(){
+        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
+        presentViewController(vc, animated: true, completion: nil)
+    }
+    
+//MARK:全选按钮点击
+    @IBAction func allButtonClick(sender: UIButton) {
+        sender.selected = !sender.selected
+        for index in 0..<dataArr.count {
+            let indexPath = NSIndexPath(forRow: index, inSection: 0)
+            if sender.selected {//全选
+                tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+                selectedArr = []
+                selectedArr.appendContentsOf(dataArr)
+            }else{//全不选
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                selectedArr = []
+            }
+        }
+    }
+    
+    
     func sureButton(nf:NSNotification)  {
         let object = nf.object as? WOWBuyCarModel
         if let model = object{
@@ -181,97 +278,8 @@ class WOWBuyCarController: WOWBaseViewController {
             tableView.reloadData()
         }
     }
+    
 
-
-    override func setUI() {
-        super.setUI()
-        totalPriceLabel.text = "¥ 0.0"
-        endButton.setTitle("删除", forState:.Selected)
-        endButton.setTitle("去结算", forState:.Normal)
-        endButton.tintColor = UIColor.clearColor()
-        
-        configNav()
-        configTable()
-    }
-    
-    
-    private func configTable(){
-        tableView.registerNib(UINib.nibName(String(WOWBuyCarNormalCell)), forCellReuseIdentifier:cellNormalID)
-        tableView.registerNib(UINib.nibName(String(WOWBurCarEditCell)), forCellReuseIdentifier:cellEditID)
-        tableView.clearRestCell()
-    }
-    
-    private func configNav(){
-        navigationItem.title = "购物车"
-        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
-            if let strongSelf = self{
-                strongSelf.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
-        rightItemButton = UIButton(type: .System)
-        rightItemButton.contentHorizontalAlignment = .Right
-        rightItemButton.frame = CGRectMake(0, 0, 60, 32)
-        rightItemButton.setTitle("编辑", forState:.Normal)
-        rightItemButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
-        rightItemButton.titleLabel?.font = Fontlevel002
-        rightItemButton.addTarget(self, action: #selector(editButtonClick), forControlEvents:.TouchUpInside)
-        let rightItem = UIBarButtonItem(customView:rightItemButton)
-        self.navigationItem.rightBarButtonItem = rightItem
-    }
-    
-//MARK:Actions
-    func editButtonClick() {
-        isEditing = !isEditing
-        let title = isEditing ? "完成" : "编辑"
-        rightItemButton.setTitle(title, forState:.Normal)
-        allButton.selected = false
-        selectedArr = []
-        tableView.reloadData()
-        
-    }
-    
-    @IBAction func endButtonClick(sender: UIButton) {
-        if selectedArr.isEmpty {
-            WOWHud.showMsg("您还没有选中商品哦")
-            return
-        }
-        if isEditing { //删除
-            if selectedArr.isEmpty {
-                return
-            }
-            removeCarItem(selectedArr)
-        }else{ //结算
-            if  WOWUserManager.loginStatus {
-                let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWSureOrderController") as! WOWSureOrderController
-                sv.productArr = selectedArr
-                sv.totalPrice = totalPrice
-                navigationController?.pushViewController(sv, animated: true)
-            }else{
-                goLogin()
-            }
-        }
-    }
-    
-    private func goLogin(){
-        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
-        presentViewController(vc, animated: true, completion: nil)
-    }
-    
-//MARK:全选按钮点击
-    @IBAction func allButtonClick(sender: UIButton) {
-        sender.selected = !sender.selected
-        for index in 0..<dataArr.count {
-            let indexPath = NSIndexPath(forRow: index, inSection: 0)
-            if sender.selected {//全选
-                tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
-                selectedArr = []
-                selectedArr.appendContentsOf(dataArr)
-            }else{//全不选
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                selectedArr = []
-            }
-        }
-    }
     
 //MARK Network 购物车
     /**
@@ -298,7 +306,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     strongSelf.dataArr.appendContentsOf(a)
                 }
                 strongSelf.tableView.reloadData()
-//                strongSelf.checkChoose()
+                //FIXME:应该把过期删除的商品返回给我，本地数据库也得删除的
             }
             }, failClosure: { (errorMsg) in
                 
@@ -372,7 +380,6 @@ class WOWBuyCarController: WOWBaseViewController {
     
     /**
      3.删除购物车数据
-     
      - parameter items:
      */
     private func asyncCarDelete(items:[WOWBuyCarModel]){
@@ -430,6 +437,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 self.dataArr.removeAtIndex(index)
             }
         }
+        updateCarCountBadge()
     }
     
 
@@ -503,6 +511,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
                 try! WOWRealm.write({
                     WOWRealm.delete(model)
                 })
+                updateCarCountBadge()
                 dataArr.removeAtIndex(indexPath.row)
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 if dataArr.isEmpty {

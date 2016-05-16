@@ -37,11 +37,22 @@ class WOWTabBarController: UITabBarController {
             viewControllers.append(vc)
         }
         self.viewControllers = viewControllers
+        configBadge()
+    }
+    
+    private func configBadge(){
+        let vc = self.viewControllers![2]
+        if WOWUserManager.loginStatus { //登录了
+           //FIXME:赞不考虑与电脑同步
+            
+        }else{ //未登录
+            WOWBuyCarMananger.updateBadge()
+        }
     }
     
     /**
      网络监测
-     */
+ 
     func configNetReachable() {
         let reachability: Reachability
         do {
@@ -80,7 +91,7 @@ class WOWTabBarController: UITabBarController {
         }
         
     }
-    
+    */
 }
 
 extension WOWTabBarController:UITabBarControllerDelegate{

@@ -61,7 +61,6 @@ class WOWSenceController: WOWBaseViewController {
         layout.headerReferenceSize = CGSizeMake(MGScreenWidth,50);  //设置head大小
         layout.minimumInteritemSpacing = 0.5;
         layout.minimumLineSpacing = 0.5;
-//        layout.sectionInset = UIEdgeInsetsMake(space, space, space, space)
         layout.scrollDirection = .Vertical
         footerCollectionView = UICollectionView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: 0), collectionViewLayout: layout)
         footerCollectionView.backgroundColor = SeprateColor
@@ -154,8 +153,8 @@ class WOWSenceController: WOWBaseViewController {
     }
     
     @IBAction func share(sender: UIButton) {
-        //FIXME:是分享出去公司的官网还是商品或者场景呢
-        WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url: sceneModel?.url)
+        //FIXME:暂时分享出去公司的官网
+        WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url:WOWCompanyUrl);
     }
     
     @IBAction func favorite(sender: UIButton) {

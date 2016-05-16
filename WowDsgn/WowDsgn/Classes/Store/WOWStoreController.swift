@@ -37,21 +37,8 @@ class WOWStoreController: WOWBaseViewController {
         tableView.separatorColor = SeprateColor;
         tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
         tableView.clearRestCell()
-        /*
-        cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth * 215/375), imageURLArray: nil)
-        cycleView.delegate = self
-        cycleView.placeholderImage = UIImage(named: "placeholder_banner")
-        tableView.tableHeaderView = cycleView
-         */
         tableView.mj_header = mj_header
     }
-    /*
-    private func configHeaderView(){
-        cycleView.imageURLArray = bannerArr.map({ (model) -> String in
-            return model.imageUrl ?? ""
-        })
-    }
-    */
 //MARK:Actions
 
 
@@ -195,15 +182,13 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         case 2:
             let sectionView =  NSBundle.mainBundle().loadNibNamed(String(WOWStoreSectionView), owner: self, options: nil).last as! WOWStoreSectionView
             sectionView.leftLabel.text = "热门品牌"
-//            sectionView.rightDetailLabel.text = "全部\(brandsCount)个品牌"
-            sectionView.rightDetailLabel.text = ""
-            sectionView.rightArrowButton.hidden = true
-//            sectionView.rightBackView.addAction({[weak self] in
-//                if let strongSelf = self{
-//                    let brandVC = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandListController)) as! WOWBrandListController
-//                    strongSelf.navigationController?.pushViewController(brandVC, animated: true)
-//                }
-//                })
+            sectionView.rightDetailLabel.text = "全部\(brandsCount)个品牌"
+            sectionView.rightBackView.addAction({[weak self] in
+                if let strongSelf = self{
+                    let brandVC = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandListController)) as! WOWBrandListController
+                    strongSelf.navigationController?.pushViewController(brandVC, animated: true)
+                }
+                })
             return sectionView
         default:
             break

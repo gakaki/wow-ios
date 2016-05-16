@@ -14,7 +14,7 @@ let WOWRealm = try! Realm()
 
 //let WOWMenus = ["所有商品","家什","灯光","装点","食居","童趣"]
 
-
+let WOWCompanyUrl                       = "http://www.wowdsgn.com/"
 
 /***********************************Const**********************************/
 //拉取分类配置文件之后  进行回调更新操作

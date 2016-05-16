@@ -19,7 +19,6 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-//        WOWBorderColor(contentView)
         desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(1)) / CGFloat(2) - 30
     }
     

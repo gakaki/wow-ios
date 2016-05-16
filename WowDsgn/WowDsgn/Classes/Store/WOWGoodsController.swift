@@ -189,12 +189,6 @@ class WOWGoodsController: WOWBaseViewController {
 //MARK:Actions
     func goCar() {
         let nav = UIStoryboard.initialViewController("BuyCar")
-//        let buyCar = nav.topViewController as! WOWBuyCarController
-//        buyCar.updateCarAction = {[weak self] in
-//            if let strongSelf = self{
-//                strongSelf.carButton.badgeString = WOWBuyCarMananger.calCarCount()
-//            }
-//        }
         presentViewController(nav, animated: true, completion: nil)
     }
     
@@ -209,7 +203,7 @@ class WOWGoodsController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid,keyword:""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 let totalPage = JSON(result)["total_page"].intValue

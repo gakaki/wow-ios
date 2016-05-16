@@ -16,8 +16,6 @@ class WOWSearchsController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -40,13 +38,6 @@ class WOWSearchsController: WOWBaseViewController {
         view.cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
         return view
     }()
-
-//MARK:Actions
-    func cancel(){
-        searchView.searchTextField.resignFirstResponder()
-        navigationController?.popViewControllerAnimated(true)
-    }
-    
     
 //MARK:Private Method
     override func setUI() {
@@ -54,9 +45,52 @@ class WOWSearchsController: WOWBaseViewController {
         navigationController?.navigationBar.addSubview(searchView)
         navigationItem.leftBarButtonItems = nil
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
+        collectionView.mj_header = self.mj_header
         makeCustomerNavigationItem("", left: true, handler:nil)
     }
+    
+//MARK:Actions
+    func cancel(){
+        searchView.searchTextField.resignFirstResponder()
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+//MARK:Network
+    func searchRequest(text:String) {
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductList(pageindex: String(pageIndex), categoryID:"", style:"", sort: "", uid:"",keyword:"花瓶"), successClosure: {[weak self](result) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                let json = JSON(result)
+                DLog(json)
+                let totalPage = JSON(result)["total_page"].intValue
+                if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
+                    strongSelf.collectionView.mj_footer = nil
+                }else{
+                    strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                }
+                let goodsArr  = JSON(result)["rows"].arrayObject
+                if let arr  = goodsArr{
+                    if strongSelf.pageIndex == 0{
+                        strongSelf.dataArr = []
+                    }
+                    for item in arr{
+                        let model = Mapper<WOWProductModel>().map(item)
+                        if let m = model{
+                            strongSelf.dataArr.append(m)
+                        }
+                    }
+                    strongSelf.collectionView.reloadData()
+                }
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+    }
 }
+
+
 
 
 //MARK:Delegate
@@ -83,17 +117,17 @@ extension WOWSearchsController:UICollectionViewDataSource,UICollectionViewDelega
 extension WOWSearchsController:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        startSearch()
+        startSearch(textField.text ?? "")
         return true
     }
+
     
-    func textFieldShouldClear(textField: UITextField) -> Bool {
-        
-        return true
-    }
-    
-    func startSearch() {
-        DLog("搜索")
+    func startSearch(text:String) {
+        guard !text.isEmpty else{
+            WOWHud.showMsg("请输入搜索关键字")
+            return
+        }
+        searchRequest(text)
     }
 }
 

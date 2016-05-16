@@ -11,7 +11,7 @@ import UIKit
 class WOWGoodsSmallCell: UICollectionViewCell {
      class var itemWidth:CGFloat{
         get{
-           return (MGScreenWidth - 0.01) / 2
+           return (MGScreenWidth - 0) / 2
         }
     }
     @IBOutlet weak var pictureImageView: UIImageView!

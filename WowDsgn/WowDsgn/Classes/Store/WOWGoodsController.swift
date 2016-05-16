@@ -76,8 +76,8 @@ class WOWGoodsController: WOWBaseViewController {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 1
         l.sectionInset = UIEdgeInsetsMake(0, 0, 1, 0)
-        l.minimumColumnSpacing = 0.01
-        l.minimumInteritemSpacing = 0.01
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
         return l
     }()
     
@@ -85,7 +85,6 @@ class WOWGoodsController: WOWBaseViewController {
         let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.width,self.view.height - 65 - 40), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -209,7 +208,6 @@ class WOWGoodsController: WOWBaseViewController {
                     strongSelf.collectionView.mj_footer = strongSelf.mj_footer
                 }
                 let goodsArr  = JSON(result)["rows"].arrayObject
-                DLog(goodsArr)
                 if let arr  = goodsArr{
                     if strongSelf.pageIndex == 0{
                         strongSelf.dataArr = []
@@ -343,8 +341,6 @@ extension WOWGoodsController:ProductCellDelegate{
         let type      = "1"//1为商品 0为场景
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result) in
             if let _ = self{
-                let json = JSON(result)
-                DLog(json)
                 cell.likeButton.selected = !cell.likeButton.selected
             }
         }) { (errorMsg) in

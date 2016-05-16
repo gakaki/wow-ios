@@ -85,7 +85,7 @@ class WOWUserTopView: UIView {
         }
         
         let centerLine = UIView()
-        centerLine.backgroundColor = BorderColor
+        centerLine.backgroundColor = SeprateColor
         topContainerView.addSubview(centerLine)
         centerLine.snp_makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)

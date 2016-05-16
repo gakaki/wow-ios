@@ -42,7 +42,7 @@ class WOWMenuTopView: UIView {
         }
         
         topLine = UILabel()
-        topLine.backgroundColor = BorderColor
+        topLine.backgroundColor = SeprateColor
         self.addSubview(topLine)
         topLine.snp_makeConstraints { (make) in
             make.height.equalTo(0.5)
@@ -52,7 +52,7 @@ class WOWMenuTopView: UIView {
         }
         
         bottomLine = UILabel()
-        bottomLine.backgroundColor = BorderColor
+        bottomLine.backgroundColor = SeprateColor
         self.addSubview(bottomLine)
         bottomLine.snp_makeConstraints { (make) in
             make.height.equalTo(0.5)

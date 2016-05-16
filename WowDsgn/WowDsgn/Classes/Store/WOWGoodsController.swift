@@ -76,8 +76,8 @@ class WOWGoodsController: WOWBaseViewController {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 1
         l.sectionInset = UIEdgeInsetsMake(0, 0, 1, 0)
-        l.minimumColumnSpacing = 0
-        l.minimumInteritemSpacing = 0
+        l.minimumColumnSpacing = 0.5
+        l.minimumInteritemSpacing = 0.5
         return l
     }()
     
@@ -85,7 +85,7 @@ class WOWGoodsController: WOWBaseViewController {
         let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 65 - 40), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = SeprateColor
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()

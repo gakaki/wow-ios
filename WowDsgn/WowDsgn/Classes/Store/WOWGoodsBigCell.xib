@@ -13,10 +13,11 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="408" height="414"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-SD-YpL">
-                        <rect key="frame" x="0.0" y="0.0" width="408" height="414"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-SD-YpL">
+                        <rect key="frame" x="0.0" y="0.0" width="408" height="319"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store_mask" translatesAutoresizingMaskIntoConstraints="NO" id="uVt-z6-LIM">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store_mask" translatesAutoresizingMaskIntoConstraints="NO" id="uVt-z6-LIM">
                         <rect key="frame" x="0.0" y="319" width="408" height="95"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vj9-Ps-xrn">
@@ -68,6 +69,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="vj9-Ps-xrn" firstAttribute="top" secondItem="tDG-Tc-7y0" secondAttribute="bottom" constant="4" id="1jK-oY-bvZ"/>
                 <constraint firstAttribute="bottom" secondItem="Qnf-SD-YpL" secondAttribute="bottom" id="5vr-5K-toL"/>
@@ -81,6 +83,7 @@
                 <constraint firstItem="HZ1-Nh-mgr" firstAttribute="centerY" secondItem="ajL-tw-Wa5" secondAttribute="centerY" id="R5w-Ab-txs"/>
                 <constraint firstItem="tno-T3-rGi" firstAttribute="centerY" secondItem="aZE-jM-28a" secondAttribute="centerY" id="S4w-Wt-zlm"/>
                 <constraint firstItem="ajL-tw-Wa5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="30" id="X7M-J5-44v"/>
+                <constraint firstItem="uVt-z6-LIM" firstAttribute="top" secondItem="Qnf-SD-YpL" secondAttribute="bottom" id="Zwq-0t-7ON"/>
                 <constraint firstItem="aZE-jM-28a" firstAttribute="top" secondItem="vj9-Ps-xrn" secondAttribute="bottom" constant="14" id="e2b-uQ-Vjk"/>
                 <constraint firstAttribute="bottom" secondItem="aZE-jM-28a" secondAttribute="bottom" constant="15" id="e5X-oN-tQs"/>
                 <constraint firstItem="HZ1-Nh-mgr" firstAttribute="trailing" secondItem="ajL-tw-Wa5" secondAttribute="trailing" constant="20" id="edK-YH-GDI"/>
@@ -93,6 +96,11 @@
                 <constraint firstAttribute="trailing" secondItem="vj9-Ps-xrn" secondAttribute="trailing" constant="15" id="vNW-ts-xc6"/>
             </constraints>
             <size key="customSize" width="408" height="414"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="5vr-5K-toL"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="bigPictureImageView" destination="Qnf-SD-YpL" id="B3w-yA-0V6"/>
                 <outlet property="desLabel" destination="vj9-Ps-xrn" id="7Qp-4U-RdN"/>

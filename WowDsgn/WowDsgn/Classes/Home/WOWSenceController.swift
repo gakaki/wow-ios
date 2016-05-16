@@ -55,17 +55,17 @@ class WOWSenceController: WOWBaseViewController {
     
     
     func configTableFooterView(){
-        let space:CGFloat = 4
+        let space:CGFloat = 1
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake((self.view.w - space * 3)/2,(self.view.w - space)/2)
+        layout.itemSize = CGSizeMake((self.view.w - space)/2,(self.view.w - space)/2)
         layout.headerReferenceSize = CGSizeMake(MGScreenWidth,50);  //设置head大小
-        layout.footerReferenceSize = CGSizeMake(MGScreenWidth,50);
-        layout.minimumInteritemSpacing = space;
-        layout.minimumLineSpacing = space;
-        layout.sectionInset = UIEdgeInsetsMake(space, space, space, space)
+        layout.minimumInteritemSpacing = 0.5;
+        layout.minimumLineSpacing = 0.5;
+//        layout.sectionInset = UIEdgeInsetsMake(space, space, space, space)
         layout.scrollDirection = .Vertical
         footerCollectionView = UICollectionView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: 0), collectionViewLayout: layout)
-        footerCollectionView.backgroundColor = UIColor.whiteColor()
+        footerCollectionView.backgroundColor = SeprateColor
+        WOWBorderColor(footerCollectionView)
         footerCollectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
          footerCollectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionFooter, withReuseIdentifier:"WOWCollectionFooterCell")
         footerCollectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
@@ -256,7 +256,6 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
         let  cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
         let  model = sceneModel?.recommendProducts?[indexPath.row]
         cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
-        WOWBorderColor(cell.pictureImageView)
         return cell
     }
     

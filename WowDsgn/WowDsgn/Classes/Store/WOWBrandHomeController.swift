@@ -31,8 +31,8 @@ class WOWBrandHomeController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.minimumColumnSpacing = 1
-        l.minimumInteritemSpacing = 1
+        l.minimumColumnSpacing = 0.5
+        l.minimumInteritemSpacing = 0.5
         l.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1)
         l.headerHeight = Float(MGScreenWidth * 2 / 3)
         return l
@@ -49,6 +49,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     private func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        WOWBorderColor(collectionView)
         collectionView.registerClass(WOWBrandTopView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     

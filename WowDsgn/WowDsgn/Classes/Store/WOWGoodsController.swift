@@ -146,6 +146,9 @@ class WOWGoodsController: WOWBaseViewController {
         WOWDropMenuSetting.maxShowCellNumber = 3
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2
         WOWDropMenuSetting.showDuration = 0.2
+        WOWDropMenuSetting.cellHeight = 50
+        WOWDropMenuSetting.cellSeparatorColor = SeprateColor
+        WOWDropMenuSetting.cellSelectionColor = ThemeColor
         let menuView = WOWDropMenuView(frame:CGRectMake(0,0,self.view.w,44))
         menuView.delegate = self
         menuView.addSubview(styleButton)
@@ -164,13 +167,13 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.cellBackgroundColor = UIColor.whiteColor()
         menuView.cellSelectionColor = ThemeColor
         menuView.cellTextLabelColor = UIColor.blackColor()
+        menuView.cellSeparatorColor = SeprateColor
         menuView.cellTextLabelFont = Fontlevel001
         menuView.cellTextLabelAlignment = .Left
         menuView.arrowPadding = 8
         menuView.animationDuration = 0.3
         menuView.maskBackgroundColor = UIColor.blackColor()
         menuView.maskBackgroundOpacity = 0.3
-        menuView.cellSeparatorColor = BorderColor
         menuView.checkMarkImage = UIImage(named: "duihao")
         menuView.arrowImage = UIImage(named:"nav_arrow")
         menuView.didSelectItemAtIndexHandler = {[weak self](indexPath: Int) -> () in

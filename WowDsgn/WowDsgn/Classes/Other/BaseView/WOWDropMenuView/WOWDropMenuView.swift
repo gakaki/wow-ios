@@ -35,8 +35,11 @@ struct WOWDropMenuSetting {
     
     static var showDuration:NSTimeInterval = 0.3
     
-    static var cellSelectionColor:UIColor = UIColor(colorLiteralRed: 255/255.0, green: 230/255.0, blue: 0/255.0, alpha: 1)
+    static var cellSeparatorColor:UIColor = MGRgb(224, g: 224, b: 224)
     
+    static var cellSelectionColor:UIColor = UIColor.lightGrayColor()
+    
+    static var cellBackgroundColor:UIColor = UIColor.whiteColor()
     //列数
     private static var columnNumber:Int = 0
 }
@@ -64,6 +67,7 @@ class WOWDropMenuView: UIView {
     
     private lazy var tableView:UITableView = {
         let v = UITableView(frame:CGRectMake(0, self.frame.size.height, self.frame.size.width, 0), style:.Plain)
+        v.separatorColor = WOWDropMenuSetting.cellSeparatorColor
         v.delegate = self
         v.dataSource = self
         return v
@@ -281,5 +285,14 @@ extension WOWDropMenuView:UITableViewDelegate,UITableViewDataSource{
         if let del = self.delegate {
             del.dropMenuClick(currentColumn, row: indexPath.row)
         }
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.contentView.backgroundColor = WOWDropMenuSetting.cellSelectionColor
     }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.contentView.backgroundColor = WOWDropMenuSetting.cellBackgroundColor
+    }
+    
+    
 }

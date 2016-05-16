@@ -75,14 +75,14 @@ class WOWGoodsController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 1
-        l.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0)
-        l.minimumColumnSpacing = 1
-        l.minimumInteritemSpacing = 1
+        l.sectionInset = UIEdgeInsetsMake(0, 0, 1, 0)
+        l.minimumColumnSpacing = 0.01
+        l.minimumInteritemSpacing = 0.01
         return l
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,self.view.width,self.view.height - 65 - 40), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.width,self.view.height - 65 - 40), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -110,7 +110,7 @@ class WOWGoodsController: WOWBaseViewController {
         collectionView.mj_footer            = self.mj_footer
         collectionView.emptyDataSetSource   = self
         collectionView.emptyDataSetDelegate = self
-        //FIXME:下拉箭头再找下更适合的吧
+
         configNavigation()
         configMenuView()
         configNav()
@@ -217,7 +217,7 @@ class WOWGoodsController: WOWBaseViewController {
                     for item in arr{
                         let model = Mapper<WOWProductModel>().map(item)
                         if let m = model{
-                            m.calCellHeight()
+//                            m.calCellHeight()
                             strongSelf.dataArr.append(m)
                         }
                     }
@@ -295,7 +295,7 @@ extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
         case .Big:
             return CGSizeMake(MGScreenWidth, MGScreenWidth)
         case .Small:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)
+            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth * 1.3)
         }
     }
 }

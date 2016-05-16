@@ -17,10 +17,11 @@ class WOWGoodsDetailController: WOWBaseViewController {
     var cycleView:CyclePictureView!
     
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
-    @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var priceLabel: UILabel!
-    var productModel:WOWProductModel?
+    @IBOutlet weak var favoriteButton   : UIButton!
+    @IBOutlet weak var tableView        : UITableView!
+    @IBOutlet weak var priceLabel       : UILabel!
+    var productModel                    : WOWProductModel?
+    var updateBadgeAction               : WOWActionClosure?
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -82,6 +83,9 @@ class WOWGoodsDetailController: WOWBaseViewController {
     private func updateCarBadge(){
         carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
         carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(15, 0, 0,15)
+        if let action = updateBadgeAction {
+            action()
+        }
     }
 
     
@@ -108,6 +112,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 WOWHud.showMsg("添加购物车成功")
             }
             WOWBuyCarMananger.updateBadge()
+            
             updateCarBadge()
         }
     }

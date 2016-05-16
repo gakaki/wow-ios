@@ -218,7 +218,6 @@ class WOWGoodsController: WOWBaseViewController {
                     for item in arr{
                         let model = Mapper<WOWProductModel>().map(item)
                         if let m = model{
-//                            m.calCellHeight()
                             strongSelf.dataArr.append(m)
                         }
                     }

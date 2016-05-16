@@ -273,7 +273,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="wTN-0v-pe4" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C6X-Cp-FR5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="430" y="2368"/>
+            <point key="canvasLocation" x="422" y="2792"/>
         </scene>
         <!--搜索子视图-->
         <scene sceneID="HmX-pJ-0Az">
@@ -341,6 +341,50 @@
             <point key="canvasLocation" x="816" y="2388"/>
         </scene>
         <!--搜索-->
+        <scene sceneID="f5z-DS-P3L">
+            <objects>
+                <viewController storyboardIdentifier="WOWSearchsController" title="搜索" id="Xp8-SD-pEC" customClass="WOWSearchsController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IAL-nT-SOc"/>
+                        <viewControllerLayoutGuide type="bottom" id="mFd-nB-FQS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KdU-kS-09v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iI9-cc-IAE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZDO-eA-Fwp">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Xp8-SD-pEC" id="VxM-WJ-6ez"/>
+                                    <outlet property="delegate" destination="Xp8-SD-pEC" id="9KM-o3-lpT"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iI9-cc-IAE" firstAttribute="leading" secondItem="KdU-kS-09v" secondAttribute="leading" id="9jv-My-D1c"/>
+                            <constraint firstItem="iI9-cc-IAE" firstAttribute="top" secondItem="KdU-kS-09v" secondAttribute="top" id="Ebb-0h-pTf"/>
+                            <constraint firstItem="mFd-nB-FQS" firstAttribute="top" secondItem="iI9-cc-IAE" secondAttribute="bottom" id="dvM-c3-5jT"/>
+                            <constraint firstAttribute="trailing" secondItem="iI9-cc-IAE" secondAttribute="trailing" id="ref-5S-KDb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="iI9-cc-IAE" id="B0t-dv-eVG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kKY-Ve-Wrn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="97" y="2045"/>
+        </scene>
+        <!--搜索-->
         <scene sceneID="eSF-SW-C5k">
             <objects>
                 <viewController storyboardIdentifier="WOWSearchController" title="搜索" id="8Qs-qZ-KeY" customClass="WOWSearchController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
@@ -373,7 +417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7x-e3-Cq1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48" y="2368"/>
+            <point key="canvasLocation" x="-71" y="2752"/>
         </scene>
         <!--场景-->
         <scene sceneID="Ra8-Sw-QwD">

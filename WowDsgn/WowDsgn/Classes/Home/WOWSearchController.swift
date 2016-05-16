@@ -193,8 +193,6 @@ extension WOWSearchController:UITextFieldDelegate{
             self.resultView.removeFromSuperview()
         }
     }
-    
-    
 }
 
 

@@ -283,7 +283,7 @@ extension SearchResultView:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
-            cell.showData(dataArr[indexPath.item])
+            cell.showData(dataArr[indexPath.item],indexPath: indexPath)
             return cell
     }
     

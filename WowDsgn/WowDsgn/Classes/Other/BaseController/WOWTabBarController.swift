@@ -41,10 +41,9 @@ class WOWTabBarController: UITabBarController {
     }
     
     private func configBadge(){
-        let vc = self.viewControllers![2]
         if WOWUserManager.loginStatus { //登录了
            //FIXME:赞不考虑与电脑同步
-            
+            WOWBuyCarMananger.updateBadge(WOWUserManager.userCarCount)
         }else{ //未登录
             WOWBuyCarMananger.updateBadge()
         }

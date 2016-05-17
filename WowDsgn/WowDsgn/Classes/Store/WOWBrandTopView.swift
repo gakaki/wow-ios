@@ -201,6 +201,7 @@ class WOWBrandUnderView: UIView {
         
         line = UIView()
         line.backgroundColor = SeprateColor
+        line.hidden = true
         self.addSubview(line)
         line.snp_makeConstraints { (make) in
             make.left.bottom.right.equalTo(self).offset(0)

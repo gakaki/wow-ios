@@ -11,21 +11,28 @@ import UIKit
 class WOWGoodsSmallCell: UICollectionViewCell {
      class var itemWidth:CGFloat{
         get{
-           return (MGScreenWidth - 1) / 2
+           return (MGScreenWidth) / 2
         }
     }
+    @IBOutlet weak var topLine: UIView!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(1)) / CGFloat(2) - 30
+        desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(0)) / CGFloat(2) - 30
     }
     
-    func showData(model:WOWProductModel) {
+    func showData(model:WOWProductModel,indexPath:NSIndexPath) {
         let url             = model.productImage ?? ""
         pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
-        desLabel.text       = model.productShortDes
+        desLabel.text       = model.productName
         priceLabel.text     = model.price
+        switch indexPath.row {
+        case 0,1:
+            topLine.hidden = false
+        default:
+            topLine.hidden = true
+        }
     }
 }

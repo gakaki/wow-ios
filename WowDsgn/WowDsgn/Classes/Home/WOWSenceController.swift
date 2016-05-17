@@ -57,10 +57,10 @@ class WOWSenceController: WOWBaseViewController {
     func configTableFooterView(){
         let space:CGFloat = 1
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake((self.view.w - space)/2,(self.view.w - space)/2)
+        layout.itemSize = CGSizeMake((self.view.w - 0)/2,(self.view.w - 0)/2)
         layout.headerReferenceSize = CGSizeMake(MGScreenWidth,50);  //设置head大小
-        layout.minimumInteritemSpacing = 0.5;
-        layout.minimumLineSpacing = 0.5;
+        layout.minimumInteritemSpacing = 0;
+        layout.minimumLineSpacing = 0;
         layout.scrollDirection = .Vertical
         footerCollectionView = UICollectionView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: 0), collectionViewLayout: layout)
         footerCollectionView.backgroundColor = SeprateColor

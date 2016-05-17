@@ -40,9 +40,8 @@ class WOWILikeController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0)
-        l.minimumColumnSpacing = 1
-        l.minimumInteritemSpacing = 1
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
         return l
     }()
     
@@ -107,9 +106,6 @@ class WOWILikeController: WOWBaseViewController {
                         let model = Mapper<WOWFavoriteListModel>().map(item)
                         if let m = model{
                             strongSelf.dataArr.append(m)
-                            if strongSelf.type == "1"{ //商品的
-                                m.calCellHeight()
-                            }
                         }
                     }
                     strongSelf.collectionView.reloadData()
@@ -157,6 +153,12 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
             cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.imgUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
             cell.desLabel.text = model.name
             cell.priceLabel.text = model.price?.priceFormat()
+            switch indexPath.row {
+            case 0,1:
+                cell.topLine.hidden = false
+            default:
+                cell.topLine.hidden = true
+            }
             returnCell = cell
         default:
             break
@@ -198,7 +200,7 @@ extension WOWILikeController:CollectionViewWaterfallLayoutDelegate{
         case 0:
             return CGSizeMake(WOWImageCell.itemWidth, WOWImageCell.itemWidth)
         case 1:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)
+            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 50)
         default:
             return CGSizeMake(0, 0)
         }

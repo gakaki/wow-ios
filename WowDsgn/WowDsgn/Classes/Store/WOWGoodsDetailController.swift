@@ -13,7 +13,7 @@ import UIKit
 
 class WOWGoodsDetailController: WOWBaseViewController {
     var productID:String?
-    
+    var shareProductImage:UIImage?
     var cycleView:CyclePictureView!
     
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
@@ -220,7 +220,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     @IBAction func shareButtonClick(sender: UIButton) {
         let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
-        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl)
+        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
     lazy var backView:WOWBuyBackView = {

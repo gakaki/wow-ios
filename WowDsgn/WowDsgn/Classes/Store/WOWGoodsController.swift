@@ -78,9 +78,8 @@ class WOWGoodsController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 1
-        l.sectionInset = UIEdgeInsetsMake(0, 0, 1, 0)
-        l.minimumColumnSpacing = 0.5
-        l.minimumInteritemSpacing = 0.5
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
         return l
     }()
     
@@ -88,7 +87,7 @@ class WOWGoodsController: WOWBaseViewController {
         let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 65 - 40), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = SeprateColor
+        collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -277,7 +276,7 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
             
         case .Small:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellSmallId, forIndexPath: indexPath) as! WOWGoodsSmallCell
-            cell.showData(dataArr[indexPath.item])
+            cell.showData(dataArr[indexPath.item],indexPath: indexPath)
             return cell
         }
     }
@@ -292,6 +291,14 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
         }
         vc.hideNavigationBar = true
         vc.productID = item.productID
+        switch cellShowStyle {
+        case .Big:
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsBigCell
+            vc.shareProductImage = cell.bigPictureImageView.image
+        case .Small:
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsSmallCell
+            vc.shareProductImage = cell.pictureImageView.image
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -302,7 +309,7 @@ extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
         case .Big:
             return CGSizeMake(MGScreenWidth, MGScreenWidth)
         case .Small:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth * 1.3)
+            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 50)
         }
     }
 }
@@ -328,7 +335,7 @@ extension WOWGoodsController:ProductCellDelegate{
         case WOWItemActionType.Like.rawValue:
             like(model, cell: cell)
         case WOWItemActionType.Share.rawValue:
-            share(model)
+            share(model,image: cell.bigPictureImageView.image)
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
             vc.hideNavigationBar = true
@@ -357,8 +364,9 @@ extension WOWGoodsController:ProductCellDelegate{
         }
     }
     
-    private func share(model:WOWProductModel){
-        WOWShareManager.share(model.productName, shareText:model.productDes, url:nil)
+    private func share(model:WOWProductModel,image:UIImage?){
+        let shareUrl = "http://www.wowdsgn.com/\(model.skuID ?? "").html"
+        WOWShareManager.share((model.productName ?? "") + "-尖叫设计", shareText: model.productShortDes, url:shareUrl, shareImage:image ?? UIImage(named: "me_logo")!)
     }
     
     private func goLogin(){

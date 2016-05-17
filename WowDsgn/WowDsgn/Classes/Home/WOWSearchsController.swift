@@ -13,7 +13,7 @@ class WOWSearchsController: WOWBaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var dataArr = [WOWProductModel]()
-    
+    var keyword : String?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -23,6 +23,17 @@ class WOWSearchsController: WOWBaseViewController {
         searchView.hidden = true
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        searchView.hidden = false
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,10 +67,10 @@ class WOWSearchsController: WOWBaseViewController {
     }
     
 //MARK:Network
-    func searchRequest(text:String) {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductList(pageindex: String(pageIndex), categoryID:"", style:"", sort: "", uid:"",keyword:"花瓶"), successClosure: {[weak self](result) in
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductList(pageindex: String(pageIndex), categoryID:"", style:"", sort: "", uid:"",keyword:keyword ?? ""), successClosure: {[weak self](result) in
             if let strongSelf = self{
-                strongSelf.endRefresh()
                 let json = JSON(result)
                 DLog(json)
                 let totalPage = JSON(result)["total_page"].intValue
@@ -79,6 +90,7 @@ class WOWSearchsController: WOWBaseViewController {
                             strongSelf.dataArr.append(m)
                         }
                     }
+                    strongSelf.endRefresh()
                     strongSelf.collectionView.reloadData()
                 }
             }
@@ -104,14 +116,23 @@ extension WOWSearchsController:UICollectionViewDataSource,UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
+        let model = dataArr[indexPath.row]
+        cell.showData(model,indexPath: indexPath)
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth * 1.3)
+        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 50)
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0
+    }
 }
 
 extension WOWSearchsController:UITextFieldDelegate{
@@ -121,13 +142,13 @@ extension WOWSearchsController:UITextFieldDelegate{
         return true
     }
 
-    
     func startSearch(text:String) {
         guard !text.isEmpty else{
             WOWHud.showMsg("请输入搜索关键字")
             return
         }
-        searchRequest(text)
+        keyword = text
+        request()
     }
 }
 

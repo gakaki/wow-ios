@@ -31,8 +31,8 @@ class WOWBrandHomeController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.minimumColumnSpacing = 0.5
-        l.minimumInteritemSpacing = 0.5
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
         l.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1)
         l.headerHeight = Float(MGScreenWidth * 2 / 3)
         return l
@@ -92,10 +92,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
         let model = brandModel?.products?[indexPath.row]
-        cell.desLabel.text = model?.productName
-        cell.priceLabel.text = model?.price?.priceFormat()
-        cell.desLabel.numberOfLines = 1;
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        cell.showData(model!, indexPath: indexPath)
         return cell
     }
     

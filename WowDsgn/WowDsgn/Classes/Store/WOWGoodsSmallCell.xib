@@ -38,21 +38,51 @@
                             <constraint firstAttribute="height" constant="0.5" id="rti-fJ-b48"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oum-zS-9g3" userLabel="rightline">
+                        <rect key="frame" x="187" y="0.0" width="0.0" height="254"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="0.5" id="v58-m5-YfA"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anL-G8-fG6" userLabel="bottomline">
+                        <rect key="frame" x="0.0" y="254" width="187" height="0.0"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="D8i-oB-6Y0"/>
+                        </constraints>
+                    </view>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFp-vx-DCe" userLabel="topline">
+                        <rect key="frame" x="0.0" y="0.0" width="187" height="0.0"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="U4L-Ji-77x"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="cfV-yt-dm1" secondAttribute="trailing" id="1SZ-OB-cgW"/>
+                <constraint firstAttribute="bottom" secondItem="oum-zS-9g3" secondAttribute="bottom" id="2r0-f4-Zsf"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="2yj-hN-rrE"/>
                 <constraint firstAttribute="trailing" secondItem="tGH-fi-w6F" secondAttribute="trailing" id="4xZ-iT-AYc"/>
+                <constraint firstAttribute="bottom" secondItem="anL-G8-fG6" secondAttribute="bottom" id="6WU-s9-RMj"/>
                 <constraint firstItem="kCJ-4c-ZI5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="ErB-c6-4qN"/>
                 <constraint firstItem="Ch7-KJ-x6p" firstAttribute="leading" secondItem="kCJ-4c-ZI5" secondAttribute="leading" id="G4H-63-Qyk"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="HT4-Nd-wsD"/>
+                <constraint firstAttribute="trailing" secondItem="oum-zS-9g3" secondAttribute="trailing" id="RgT-e1-Do6"/>
                 <constraint firstItem="Ch7-KJ-x6p" firstAttribute="top" secondItem="kCJ-4c-ZI5" secondAttribute="bottom" constant="5" id="XYt-dU-OZP"/>
+                <constraint firstItem="oum-zS-9g3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="axT-hh-dSd"/>
+                <constraint firstItem="dFp-vx-DCe" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="g0R-EN-AA3"/>
+                <constraint firstItem="dFp-vx-DCe" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g3s-Cx-phe"/>
+                <constraint firstAttribute="trailing" secondItem="dFp-vx-DCe" secondAttribute="trailing" id="hRe-5i-39h"/>
                 <constraint firstItem="tGH-fi-w6F" firstAttribute="top" secondItem="cfV-yt-dm1" secondAttribute="bottom" id="k5I-f7-d7R"/>
                 <constraint firstAttribute="trailing" secondItem="kCJ-4c-ZI5" secondAttribute="trailing" constant="15" id="keW-dv-wxk"/>
                 <constraint firstItem="tGH-fi-w6F" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ot0-aL-3bD"/>
+                <constraint firstItem="oum-zS-9g3" firstAttribute="leading" secondItem="anL-G8-fG6" secondAttribute="trailing" id="pf3-O2-kyp"/>
+                <constraint firstItem="anL-G8-fG6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vyZ-hb-xSv"/>
                 <constraint firstItem="Ch7-KJ-x6p" firstAttribute="trailing" secondItem="kCJ-4c-ZI5" secondAttribute="trailing" id="xoZ-Vn-NKB"/>
                 <constraint firstItem="kCJ-4c-ZI5" firstAttribute="top" secondItem="cfV-yt-dm1" secondAttribute="bottom" constant="6" id="xoh-2R-bV6"/>
             </constraints>
@@ -61,8 +91,9 @@
                 <outlet property="desLabel" destination="kCJ-4c-ZI5" id="ndL-fR-k14"/>
                 <outlet property="pictureImageView" destination="cfV-yt-dm1" id="mmW-Zo-uyv"/>
                 <outlet property="priceLabel" destination="Ch7-KJ-x6p" id="9Ew-64-uch"/>
+                <outlet property="topLine" destination="dFp-vx-DCe" id="m36-4a-6p0"/>
             </connections>
-            <point key="canvasLocation" x="1282.5" y="429"/>
+            <point key="canvasLocation" x="1410.5" y="468"/>
         </collectionViewCell>
     </objects>
 </document>

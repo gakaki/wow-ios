@@ -48,6 +48,7 @@ extension WOWSubArtCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
         let model = dataArr?[indexPath.row]
         cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        cell.backgroundColor = UIColor.whiteColor()
         return cell
     }
     

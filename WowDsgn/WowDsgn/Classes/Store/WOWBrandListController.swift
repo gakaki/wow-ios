@@ -12,7 +12,9 @@ class WOWBrandListController: WOWBaseViewController {
     var searchController: UISearchController!
     @IBOutlet weak var tableView: UITableView!
     
-    //原始数据源
+    //数据集合
+    var originalArray = [WOWBrandModel]()
+    //数据源
     var dataArray = [[WOWBrandModel]]()
     //有使用Search Controller时，显示的数据源
     var filteredArray = [WOWBrandModel]()
@@ -52,15 +54,18 @@ class WOWBrandListController: WOWBaseViewController {
         navigationItem.title = "品牌"
         configureSearchController()
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
-//        tableView.registerNib(UINib.nibName(String(WOWGoodsParamCell)), forCellReuseIdentifier:String(WOWGoodsParamCell))
     }
 
     private func configureSearchController() {
-        searchController = UISearchController(searchResultsController: nil)
+        let resultVC = WOWSearchResultController()
+        resultVC.delegate = self
+//        let nav = UINavigationController(rootViewController:resultVC)
+        searchController = UISearchController(searchResultsController: resultVC)
         searchController.searchResultsUpdater = self
         //输入搜索关键字的时候，整个view背景变暗淡
 //        searchController.dimsBackgroundDuringPresentation = true
         searchController.searchBar.setSearchFieldBackgroundImage(UIImage(named: "searchbar"), forState:.Normal)
+        searchController.searchBar.backgroundColor = UIColor.whiteColor()
         searchController.searchBar.searchBarStyle = .Minimal
         searchController.view.backgroundColor = UIColor.whiteColor()
         searchController.searchBar.placeholder = "请输入搜索关键字"
@@ -89,6 +94,7 @@ class WOWBrandListController: WOWBaseViewController {
                         let letterArr = Mapper<WOWBrandModel>().mapArray(arrary)
                         if let retArr = letterArr{
                             strongSelf.dataArray.append(retArr)
+                            strongSelf.originalArray.appendContentsOf(retArr)
                         }
                     }
                     strongSelf.tableView.reloadData()
@@ -152,14 +158,35 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+}
+
+extension WOWBrandListController:SearchResultDelegate{
+    func searchResultSelect(model: WOWBrandModel) {
+//        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
+        searchController.active = false
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.brandID = model.id
+        vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension WOWBrandListController:UISearchResultsUpdating,UISearchBarDelegate{
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        guard let _ = searchController.searchBar.text else {
+        guard let text = searchController.searchBar.text else {
             return
         }
         //根据searchString进行过滤
+        let arr = originalArray.filter { (model) -> Bool in
+            if model.name?.rangeOfString(text) != nil{
+                return true
+            }else{
+                return false
+            }
+        }
+        let resultVC = searchController.searchResultsController as! WOWSearchResultController
+//        let  resultVC = nav.topViewController as! WOWSearchResultController
+        resultVC.resultArr = arr
+        resultVC.tableView.reloadData()
     }
 }

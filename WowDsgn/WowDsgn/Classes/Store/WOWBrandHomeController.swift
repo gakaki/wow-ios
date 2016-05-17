@@ -18,16 +18,6 @@ class WOWBrandHomeController: WOWBaseViewController {
         request()
     }
     
-    //MARK:Lazy
-    lazy var styleButton:UIButton = {
-        let b = UIButton(type:.System)
-        b.setImage(UIImage(named: "store_style_small")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
-        b.setImage(UIImage(named: "store_style_big")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Selected)
-        b.addTarget(self, action:#selector(WOWGoodsController.showStyleChange(_:)), forControlEvents:.TouchUpInside)
-        b.tintColor = UIColor.whiteColor()
-        return b
-    }()
-    
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
@@ -92,7 +82,15 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
         let model = brandModel?.products?[indexPath.row]
-        cell.showData(model!, indexPath: indexPath)
+        cell.desLabel.text = model?.productName
+        cell.priceLabel.text = model?.price?.priceFormat()
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        switch indexPath.row {
+        case 0,1:
+            cell.topLine.hidden = false
+        default:
+            cell.topLine.hidden = true
+        }
         return cell
     }
     

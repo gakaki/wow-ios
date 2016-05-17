@@ -24,7 +24,7 @@ class WOWImageCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = SeprateColor
+        backgroundColor = UIColor.whiteColor()
         pictureImageView = UIImageView()
         self.addSubview(pictureImageView)
         pictureImageView.snp_makeConstraints { (make) -> Void in

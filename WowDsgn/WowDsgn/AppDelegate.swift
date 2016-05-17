@@ -11,7 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var sideController:WOWSideContainerController!
+//    var sideController:WOWSideContainerController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame:UIScreen.mainScreen().bounds)
@@ -122,10 +122,10 @@ extension AppDelegate{
 //            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
 //            self.window?.rootViewController = introVC
 //        }else{
-            let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
+//            let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
             let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-            sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
-            window?.rootViewController = sideController
+//            sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
+            window?.rootViewController = mainVC
 //        }
     }
     

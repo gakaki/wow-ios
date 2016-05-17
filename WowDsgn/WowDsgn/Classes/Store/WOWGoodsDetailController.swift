@@ -148,6 +148,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth), imageURLArray: nil)
+//        cycleView.detailLableBackgroundColor = SeprateColor
         cycleView.placeholderImage = UIImage(named: "placeholder_banner")
         tableView.tableHeaderView = cycleView
     }

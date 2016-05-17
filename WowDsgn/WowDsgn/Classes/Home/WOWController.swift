@@ -41,13 +41,14 @@ class WOWController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
         configBarItem()
-        let sideVC = appdelegate.sideController.sideController as! WOWLeftSideController
-        sideVC.delegate = self
+//        let sideVC = appdelegate.sideController.sideController as! WOWLeftSideController
+//        sideVC.delegate = self
         tableView.mj_header = mj_header
     }
 
-    
+   
     private func configBarItem(){
+        /*菜单暂时不需要
         makeCustomerImageNavigationItem("menu", left: true) {[weak self] () -> () in
             if let strongSelf = self{
                 let sideVC = strongSelf.appdelegate.sideController
@@ -58,7 +59,7 @@ class WOWController: WOWBaseViewController {
                 }
             }
         }
-        
+         */
         makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))

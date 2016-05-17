@@ -69,7 +69,8 @@ struct WOWTool {
     static var appTabBarController:UITabBarController {
         get{
             let del = UIApplication.sharedApplication().delegate as? AppDelegate
-            let tab = del?.sideController.mainController as! UITabBarController
+            let tab = del?.window?.rootViewController as! UITabBarController
+//            let tab = del?.sideController.mainController as! UITabBarController
             return tab
         }
     }

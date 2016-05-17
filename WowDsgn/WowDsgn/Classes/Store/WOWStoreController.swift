@@ -38,7 +38,20 @@ class WOWStoreController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
         tableView.clearRestCell()
         tableView.mj_header = mj_header
+        configBarItem()
     }
+    
+    private func configBarItem(){
+        makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+
+    
 //MARK:Actions
 
 

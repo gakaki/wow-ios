@@ -56,7 +56,7 @@ extension WOWIntroduceController:UIScrollViewDelegate{
             let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
             let sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
             let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appdelegate.sideController = sideController
+//            appdelegate.sideController = sideController
             self.presentViewController(sideController, animated: true, completion: nil)
         }
     }

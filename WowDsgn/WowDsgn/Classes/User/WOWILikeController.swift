@@ -200,7 +200,7 @@ extension WOWILikeController:CollectionViewWaterfallLayoutDelegate{
         case 0:
             return CGSizeMake(WOWImageCell.itemWidth, WOWImageCell.itemWidth)
         case 1:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 50)
+            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 68)
         default:
             return CGSizeMake(0, 0)
         }

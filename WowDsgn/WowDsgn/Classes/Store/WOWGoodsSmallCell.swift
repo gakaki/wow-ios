@@ -27,7 +27,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         let url             = model.productImage ?? ""
         pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
         desLabel.text       = model.productName
-        priceLabel.text     = model.price
+        priceLabel.text     = model.price //千万不用格式化了
         switch indexPath.row {
         case 0,1:
             topLine.hidden = false

@@ -16,6 +16,7 @@ class WOWBrandModel: WOWBaseModel,Mappable {
     var url        : String?
     var products   : [WOWProductModel]?
     var desc       : String?
+    var pinyin     : String?
     
     required init?(_ map: Map) {
         
@@ -29,5 +30,6 @@ class WOWBrandModel: WOWBaseModel,Mappable {
         url      <- map["url"]
         products <- map["products"]
         desc     <- map["desc"]
+        pinyin   <- map["pinyin"]
     }
 }

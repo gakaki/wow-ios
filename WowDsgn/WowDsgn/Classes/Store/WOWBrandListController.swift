@@ -18,6 +18,7 @@ class WOWBrandListController: WOWBaseViewController {
     var filteredArray = [WOWBrandModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        request()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -28,6 +29,7 @@ class WOWBrandListController: WOWBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.translucent = true
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
 
@@ -50,6 +52,7 @@ class WOWBrandListController: WOWBaseViewController {
         navigationItem.title = "品牌"
         configureSearchController()
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
+//        tableView.registerNib(UINib.nibName(String(WOWGoodsParamCell)), forCellReuseIdentifier:String(WOWGoodsParamCell))
     }
 
     private func configureSearchController() {
@@ -72,6 +75,28 @@ class WOWBrandListController: WOWBaseViewController {
         //讓搜尋列(search bar)的尺寸跟tableview所顯示的尺寸一致
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
+    }
+    
+//MARK:Network
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandList, successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let dict = JSON(result).dictionary
+                if let dataDcit = dict{
+                    for letter in strongSelf.headerIndexs{
+                        let arrary = dataDcit[letter]?.arrayObject
+                        let letterArr = Mapper<WOWBrandModel>().mapArray(arrary)
+                        if let retArr = letterArr{
+                            strongSelf.dataArray.append(retArr)
+                        }
+                    }
+                    strongSelf.tableView.reloadData()
+                }
+            }
+        }) {(errorMsg) in
+                
+        }
     }
 }
 
@@ -96,16 +121,19 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return headerIndexs.count
+        return dataArray.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return dataArray[section].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        
+        let model = dataArray[indexPath.section][indexPath.row]
+        cell.imageView!.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        cell.textLabel!.text = model.name
+        cell.selectionStyle = .None
         return cell
     }
     
@@ -117,6 +145,14 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
         return 0.01
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let model = dataArray[indexPath.section][indexPath.row]
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.brandID = model.id
+        vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 extension WOWBrandListController:UISearchResultsUpdating,UISearchBarDelegate{
@@ -124,7 +160,6 @@ extension WOWBrandListController:UISearchResultsUpdating,UISearchBarDelegate{
         guard let _ = searchController.searchBar.text else {
             return
         }
-        
         //根据searchString进行过滤
     }
 }

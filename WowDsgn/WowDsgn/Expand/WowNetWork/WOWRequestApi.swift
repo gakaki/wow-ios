@@ -21,6 +21,8 @@ public enum RequestApi{
     
     case Api_StoreHome
     
+    case Api_BrandList
+    
     case Api_BrandDetail(brandid:String)
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
@@ -89,6 +91,8 @@ extension RequestApi:TargetType{
             return URL_product
         case .Api_ProductDetail:
             return URL_product_detail
+        case .Api_BrandList:
+            return URL_BrandList
         case .Api_BrandDetail:
             return URL_BrandDetail
         case .Api_Favotite:

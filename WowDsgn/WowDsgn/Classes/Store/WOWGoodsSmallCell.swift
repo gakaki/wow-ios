@@ -20,7 +20,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        desLabel.preferredMaxLayoutWidth = (MGScreenWidth - CGFloat(0)) / CGFloat(2) - 30
+        desLabel.preferredMaxLayoutWidth = MGScreenWidth / CGFloat(2) - 30
     }
     
     func showData(model:WOWProductModel,indexPath:NSIndexPath) {
@@ -28,7 +28,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
         desLabel.text       = model.productName
         priceLabel.text     = model.price //千万不用格式化了
-        switch indexPath.row {
+        switch indexPath.item {
         case 0,1:
             topLine.hidden = false
         default:

@@ -22,6 +22,11 @@ class WOWBuyBackView: UIView {
     lazy var backClear:UIView = {
         let v = UIView()
         v.backgroundColor = UIColor.clearColor()
+        v.addTapGesture(action: {[weak self](tap) in
+            if let strongSelf = self{
+                strongSelf.hideBuyView()
+            }
+        })
         return v
     }()
     
@@ -38,13 +43,14 @@ class WOWBuyBackView: UIView {
         self.frame = CGRectMake(0, 0, self.w, self.h)
         backgroundColor = MGRgb(0, g: 0, b: 0, alpha: 0.4)
         self.alpha = 0
+        
     }
 
 //MARK:Actions
     
-    func tap() {
-        hideBuyView()
-    }
+//    func tap() {
+//        hideBuyView()
+//    }
     
     func show() {
         backClear.frame = CGRectMake(0,self.h,self.w,self.h)

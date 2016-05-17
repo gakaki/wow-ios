@@ -80,8 +80,8 @@ class WOWGoodsController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.minimumColumnSpacing = 0
-        l.minimumInteritemSpacing = 0
+        l.minimumColumnSpacing = 0.5
+        l.minimumInteritemSpacing = 0.5
         return l
     }()
     
@@ -313,7 +313,7 @@ extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
 //        case .Big:
 //            return CGSizeMake(MGScreenWidth, MGScreenWidth)
 //        case .Small:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 68)
+            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 65)
 //        }
     }
 }
@@ -358,7 +358,7 @@ extension WOWGoodsController:ProductCellDelegate{
         let is_delete = cell.likeButton.selected ? "1":"0"
         let uid       = WOWUserManager.userID
         let thingid   = model.productID ?? ""
-        let type      = "1"//1为商品 0为场景
+        let type      = "1"//1为商品 2为场景
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result) in
             if let _ = self{
                 cell.likeButton.selected = !cell.likeButton.selected

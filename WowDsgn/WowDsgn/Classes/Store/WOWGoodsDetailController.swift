@@ -174,7 +174,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
-                
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()

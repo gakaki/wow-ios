@@ -205,6 +205,7 @@ class WOWGoodsController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid,keyword:""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.dismiss()
                 let totalPage = JSON(result)["total_page"].intValue
                 if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
                     strongSelf.collectionView.mj_footer = nil
@@ -229,6 +230,7 @@ class WOWGoodsController: WOWBaseViewController {
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.dismiss()
             }
         }
     }

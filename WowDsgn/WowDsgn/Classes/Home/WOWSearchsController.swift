@@ -25,12 +25,13 @@ class WOWSearchsController: WOWBaseViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.title = ""
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        searchView.hidden = false
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        searchView.hidden = false
     }
     
     
@@ -84,6 +85,11 @@ class WOWSearchsController: WOWBaseViewController {
                     if strongSelf.pageIndex == 0{
                         strongSelf.dataArr = []
                     }
+                    if arr.isEmpty{
+                        WOWHud.showMsg("暂无您搜索的商品")
+                    }else{
+                        WOWHud.dismiss()
+                    }
                     for item in arr{
                         let model = Mapper<WOWProductModel>().map(item)
                         if let m = model{
@@ -92,11 +98,14 @@ class WOWSearchsController: WOWBaseViewController {
                     }
                     strongSelf.endRefresh()
                     strongSelf.collectionView.reloadData()
+                }else{
+                    WOWHud.dismiss()
                 }
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.dismiss()
             }
         }
     }
@@ -133,6 +142,16 @@ extension WOWSearchsController:UICollectionViewDataSource,UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let model = dataArr[indexPath.row]
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsSmallCell
+        vc.shareProductImage = cell.pictureImageView.image
+        vc.productID = model.productID
+         vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension WOWSearchsController:UITextFieldDelegate{
@@ -148,6 +167,7 @@ extension WOWSearchsController:UITextFieldDelegate{
             return
         }
         keyword = text
+        pageIndex = 0
         request()
     }
 }

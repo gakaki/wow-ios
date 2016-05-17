@@ -205,7 +205,7 @@ extension RequestApi:TargetType{
             return ""
         case .Api_CarEdit:
             return ""
-        case .Api_CarList:
+        case .Api_CarList,.Api_ProductList:
             return ""
         default:
             return nil

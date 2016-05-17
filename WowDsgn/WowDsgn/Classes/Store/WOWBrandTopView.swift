@@ -165,8 +165,8 @@ class WOWBrandUnderView: UIView {
         addSubview(shareButton)
         shareButton.snp_makeConstraints { [weak self](make) in
             if let strongSelf = self{
-
-                 make.left.equalTo(strongSelf).offset(15)
+                make.left.equalTo(strongSelf).offset(15)
+                make.width.equalTo(60)
                 make.bottom.top.equalTo(strongSelf).offset(0)
             }
         }

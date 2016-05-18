@@ -18,6 +18,10 @@ struct WOWDropMenuSetting {
                             ]
     static var columnTitleFont:UIFont = UIFont.init(name:"HelveticaNeue-Medium", size:13)!
     
+    static var showBlur = false
+    
+    static var maskColor = MGRgb(0, g: 0, b: 0, alpha: 0.6)
+    
     static var cellHeight:CGFloat = 40
     
     static var maxShowCellNumber:Int = 4
@@ -115,13 +119,16 @@ class WOWDropMenuView: UIView {
         
         backView = UIView(frame:CGRectMake(0,CGRectGetHeight(frame),CGRectGetWidth(frame),UIScreen.mainScreen().bounds.size.height))
         backView.hidden = true
+        backView.backgroundColor = WOWDropMenuSetting.maskColor
         backView.alpha = 0
         
         //添加背景毛玻璃效果
-        let blurEffect = UIBlurEffect(style: .Light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = CGRectMake(0, 0, backView.frame.size.width, backView.frame.size.height)
-        backView.addSubview(blurView)
+        if WOWDropMenuSetting.showBlur {
+            let blurEffect = UIBlurEffect(style: .Light)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = CGRectMake(0, 0, backView.frame.size.width, backView.frame.size.height)
+            backView.addSubview(blurView)
+        }
         //添加点击手势
         let tap = UITapGestureRecognizer(target: self, action:#selector(backTap))
         backView.addGestureRecognizer(tap)

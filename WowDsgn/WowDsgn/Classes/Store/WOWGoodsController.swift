@@ -172,7 +172,7 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.arrowPadding = 8
         menuView.animationDuration = 0.3
         menuView.maskBackgroundColor = UIColor.blackColor()
-        menuView.maskBackgroundOpacity = 0.3
+        menuView.maskBackgroundOpacity = 0.6
         menuView.checkMarkImage = UIImage(named: "duihao")
         menuView.arrowImage = UIImage(named:"nav_arrow")
         menuView.didSelectItemAtIndexHandler = {[weak self](indexPath: Int) -> () in

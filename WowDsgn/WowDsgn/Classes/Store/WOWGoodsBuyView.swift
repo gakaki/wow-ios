@@ -41,21 +41,15 @@ class WOWBuyBackView: UIView {
 //MARK:Private Method
     private func setUP(){
         self.frame = CGRectMake(0, 0, self.w, self.h)
-        backgroundColor = MGRgb(0, g: 0, b: 0, alpha: 0.4)
+        backgroundColor = MaskColor
         self.alpha = 0
         
     }
 
 //MARK:Actions
-    
-//    func tap() {
-//        hideBuyView()
-//    }
-    
     func show() {
         backClear.frame = CGRectMake(0,self.h,self.w,self.h)
         addSubview(backClear)
-//        buyView.frame = CGRectMake(0, 0, 0, 400)
         backClear.addSubview(buyView)
         buyView.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{

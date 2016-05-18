@@ -49,8 +49,14 @@
                         <rect key="frame" x="0.0" y="253" width="187" height="0.0"/>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="D8i-oB-6Y0"/>
+                            <constraint firstAttribute="height" id="D8i-oB-6Y0"/>
+                            <constraint firstAttribute="height" constant="0.5" id="EWX-M0-YUt"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="D8i-oB-6Y0"/>
+                            </mask>
+                        </variation>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFp-vx-DCe" userLabel="topline">
                         <rect key="frame" x="0.0" y="0.0" width="187" height="0.0"/>
@@ -72,6 +78,7 @@
                 <constraint firstItem="kCJ-4c-ZI5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="ErB-c6-4qN"/>
                 <constraint firstItem="Ch7-KJ-x6p" firstAttribute="leading" secondItem="kCJ-4c-ZI5" secondAttribute="leading" id="G4H-63-Qyk"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="HT4-Nd-wsD"/>
+                <constraint firstAttribute="bottom" secondItem="anL-G8-fG6" secondAttribute="bottom" constant="0.69999999999999996" id="RH3-mP-YZt"/>
                 <constraint firstAttribute="trailing" secondItem="oum-zS-9g3" secondAttribute="trailing" id="RgT-e1-Do6"/>
                 <constraint firstItem="Ch7-KJ-x6p" firstAttribute="top" secondItem="kCJ-4c-ZI5" secondAttribute="bottom" constant="5" id="XYt-dU-OZP"/>
                 <constraint firstItem="oum-zS-9g3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="axT-hh-dSd"/>
@@ -87,6 +94,11 @@
                 <constraint firstItem="kCJ-4c-ZI5" firstAttribute="top" secondItem="cfV-yt-dm1" secondAttribute="bottom" constant="6" id="xoh-2R-bV6"/>
             </constraints>
             <size key="customSize" width="231" height="254"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="6WU-s9-RMj"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="desLabel" destination="kCJ-4c-ZI5" id="ndL-fR-k14"/>
                 <outlet property="pictureImageView" destination="cfV-yt-dm1" id="mmW-Zo-uyv"/>

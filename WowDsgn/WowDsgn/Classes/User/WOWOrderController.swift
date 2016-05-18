@@ -53,6 +53,8 @@ class WOWOrderController: WOWBaseViewController {
         self.navigationController?.interactivePopGestureRecognizer?.enabled = true;
     }
     
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -67,7 +69,7 @@ class WOWOrderController: WOWBaseViewController {
     }
     private func configTable(){
         tableView.clearRestCell()
-        tableView.backgroundColor = GrayColorLevel5
+        tableView.backgroundColor = DefaultBackColor
         tableView.registerNib(UINib.nibName(String(WOWOrderListCell)), forCellReuseIdentifier:"WOWOrderListCell")
     }
     
@@ -81,13 +83,14 @@ class WOWOrderController: WOWBaseViewController {
         self.view.addSubview(menuView)
     }
     
-    override func backButtonClick() {
+    override func navBack() {
         if entrance == .PaySuccess {
             navigationController?.dismissViewControllerAnimated(true, completion: nil)
         }else{
             navigationController?.popViewControllerAnimated(true)
         }
     }
+    
 
 //MARK:Network
     override func request() {

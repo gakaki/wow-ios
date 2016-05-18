@@ -530,7 +530,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         return "删除"
     }
     
-    override func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "buycar_none")
     }
     

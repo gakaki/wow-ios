@@ -117,8 +117,8 @@ extension WOWBaseViewController{
     func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
         return GrayColorLevel5
     }
-    
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-        return UIImage(named: "placeholder_instagram")
-    }
+//    
+//    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+//        return UIImage(named: "placeholder_instagram")
+//    }
 }

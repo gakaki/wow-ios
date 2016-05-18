@@ -51,7 +51,7 @@ class WOWILikeController: WOWBaseViewController {
         collectionView.delegate = self
         collectionView.emptyDataSetDelegate = self
         collectionView.emptyDataSetSource   = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = DefaultBackColor
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()

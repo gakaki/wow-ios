@@ -162,8 +162,8 @@ extension AppDelegate{
         navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSizeMake(MGScreenWidth, 64)), forBarPosition: .Any, barMetrics: .Default)
         navBar.shadowImage = UIImage.imageWithColor(SeprateColor, size:CGSizeMake(MGScreenWidth, 0.5)) //去除导航栏下方黑线
         //更换导航栏返回按图片
-        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
-        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
+//        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
+//        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
         
         //设置导航条背景
         navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()] //导航栏标题颜色

@@ -15,6 +15,8 @@
 @import DZNEmptyDataSet;
 @import ReachabilitySwift;
 @import EZSwiftExtensions;
+@import HidingNavigationBar;
+
 
 #import "WXApi.h"
 #import <Pingpp.h>

@@ -34,6 +34,7 @@ class WOWNavigationController: UINavigationController {
 
 
 extension UIViewController{
+    /*
     func makeBackButton(title:String!){
         let button = UIButton(type:.System)
         let size = title.size(FontMediumlevel003)
@@ -60,4 +61,5 @@ extension UIViewController{
     func backButtonClick() {
         self.navigationController?.popViewControllerAnimated(true)
     }
+ */
 }

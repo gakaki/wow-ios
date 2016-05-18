@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jZw-sM-bw2">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="iWL-Oz-JyM" id="1Ma-N6-H4e"/>
@@ -50,7 +50,7 @@
                             <constraint firstItem="jZw-sM-bw2" firstAttribute="leading" secondItem="WjY-BI-OED" secondAttribute="leading" id="2Cl-Hb-fQZ"/>
                             <constraint firstItem="Qr7-pK-v6K" firstAttribute="top" secondItem="jZw-sM-bw2" secondAttribute="bottom" id="5nj-yT-bh2"/>
                             <constraint firstAttribute="trailing" secondItem="jZw-sM-bw2" secondAttribute="trailing" id="H62-Rb-qJ8"/>
-                            <constraint firstItem="jZw-sM-bw2" firstAttribute="top" secondItem="Zth-Uz-Pao" secondAttribute="bottom" id="JhL-ku-qRV"/>
+                            <constraint firstItem="jZw-sM-bw2" firstAttribute="top" secondItem="WjY-BI-OED" secondAttribute="top" id="IKs-1z-jer"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tLF-m6-I8Z"/>
@@ -354,7 +354,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iI9-cc-IAE">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZDO-eA-Fwp">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>

@@ -65,18 +65,6 @@ class WOWGoodsController: WOWBaseViewController {
     }
     
 //MARK:Lazy
-    /*
-    lazy var styleButton:UIButton = {
-        let b = UIButton(type:.System)
-        b.setImage(UIImage(named: "store_style_small")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
-        b.setImage(UIImage(named: "store_style_big")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Selected)
-        b.addTarget(self, action:#selector(WOWGoodsController.showStyleChange(_:)), forControlEvents:.TouchUpInside)
-        b.tintColor = UIColor.whiteColor()
-        b.contentHorizontalAlignment = .Right
-        return b
-    }()
-    */
- 
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
@@ -89,7 +77,7 @@ class WOWGoodsController: WOWBaseViewController {
         let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 65 - 40), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = DefaultBackColor
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -137,7 +125,7 @@ class WOWGoodsController: WOWBaseViewController {
     }
 
     private func configMenuView(){
-        WOWDropMenuSetting.columnTitles = ["新品"/*,"所有风格"*/]
+        WOWDropMenuSetting.columnTitles = ["新品"]
         WOWDropMenuSetting.rowTitles =  [
                                             ["新品","销量","价格"],
                                         ]
@@ -149,14 +137,6 @@ class WOWGoodsController: WOWBaseViewController {
         WOWDropMenuSetting.cellSelectionColor = MGRgb(250, g: 250, b: 250)
         let menuView = WOWDropMenuView(frame:CGRectMake(0,0,self.view.w,44))
         menuView.delegate = self
-        /*
-        menuView.addSubview(styleButton)
-        styleButton.snp_makeConstraints { (make) in
-            make.top.bottom.equalTo(menuView).offset(0)
-            make.width.equalTo(50)
-            make.right.equalTo(menuView).offset(-15)
-        }
-        */
         view.addSubview(menuView)
     }
     

@@ -24,10 +24,11 @@ class WOWSearchsController: WOWBaseViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+//        super.viewWillAppear(animated)
         self.navigationItem.title = ""
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         searchView.hidden = false
+//        navigationItem.leftBarButtonItem = nil
     }
     
     override func viewDidAppear(animated: Bool) {

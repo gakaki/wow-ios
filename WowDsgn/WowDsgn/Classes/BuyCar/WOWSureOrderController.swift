@@ -33,7 +33,6 @@ class WOWSureOrderController: WOWBaseViewController {
     
 //MARK:Private Method
     override func setUI() {
-        makeBackButton("购物车")
         navigationItem.title = "确认订单"
         goodsCountLabel.text = "共\(productArr.count)件商品"
         totalPriceLabel.text = "¥ " + (totalPrice ?? "")

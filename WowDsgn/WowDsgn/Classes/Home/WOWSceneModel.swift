@@ -21,7 +21,7 @@ class WOWSenceModel: WOWBaseModel,Mappable{
     var userLike         :   String?
     var recommendProducts:   [WOWProductModel]?
     var comments         :   [WOWCommentListModel]?
-    var comments_count   : Int?
+    var comments_count   :   Int?
     
     required init?(_ map: Map) {
         

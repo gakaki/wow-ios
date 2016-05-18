@@ -656,7 +656,7 @@
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7PS-8B-XCe" userLabel="top">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="1" width="320" height="0.0"/>
                                         <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="Oxv-pP-H3b"/>
@@ -674,10 +674,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHh-nc-bae">
-                                        <rect key="frame" x="235" y="12" width="70" height="26"/>
+                                        <rect key="frame" x="235" y="9" width="70" height="32"/>
                                         <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="cLB-SV-Sdp"/>
+                                            <constraint firstAttribute="height" constant="32" id="r8e-8I-zh7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="状态">
@@ -699,17 +700,15 @@
                                     <constraint firstItem="v7E-wD-TAg" firstAttribute="leading" secondItem="HG8-kc-l1T" secondAttribute="trailing" constant="8" id="48b-73-H92"/>
                                     <constraint firstAttribute="trailing" secondItem="DHh-nc-bae" secondAttribute="trailing" constant="15" id="6wH-MP-j7z"/>
                                     <constraint firstItem="DHh-nc-bae" firstAttribute="centerY" secondItem="2s6-Zw-f6D" secondAttribute="centerY" id="DVT-Bx-7mP"/>
-                                    <constraint firstItem="DHh-nc-bae" firstAttribute="top" secondItem="7PS-8B-XCe" secondAttribute="bottom" constant="12" id="EY8-S2-pKQ"/>
                                     <constraint firstItem="HG8-kc-l1T" firstAttribute="centerY" secondItem="2s6-Zw-f6D" secondAttribute="centerY" id="FDP-op-DKO"/>
                                     <constraint firstItem="HG8-kc-l1T" firstAttribute="leading" secondItem="2s6-Zw-f6D" secondAttribute="leadingMargin" constant="15" id="UcT-Zt-aRu"/>
                                     <constraint firstAttribute="height" constant="50" id="ZyI-km-GOF"/>
                                     <constraint firstItem="0ST-pW-jeT" firstAttribute="centerY" secondItem="2s6-Zw-f6D" secondAttribute="centerY" id="h3f-Yn-rAz"/>
-                                    <constraint firstAttribute="bottom" secondItem="DHh-nc-bae" secondAttribute="bottom" constant="12" id="hsd-yk-fSS"/>
                                     <constraint firstItem="0ST-pW-jeT" firstAttribute="leading" secondItem="v7E-wD-TAg" secondAttribute="trailing" id="iaP-ZN-Auc"/>
-                                    <constraint firstItem="7PS-8B-XCe" firstAttribute="top" secondItem="2s6-Zw-f6D" secondAttribute="top" id="jUf-BZ-B0x"/>
                                     <constraint firstItem="v7E-wD-TAg" firstAttribute="centerY" secondItem="2s6-Zw-f6D" secondAttribute="centerY" id="lYa-fJ-Gjf"/>
                                     <constraint firstItem="7PS-8B-XCe" firstAttribute="leading" secondItem="2s6-Zw-f6D" secondAttribute="leading" id="odk-Nb-UAe"/>
                                     <constraint firstAttribute="trailing" secondItem="7PS-8B-XCe" secondAttribute="trailing" id="t7x-yi-Cg7"/>
+                                    <constraint firstItem="7PS-8B-XCe" firstAttribute="top" secondItem="2s6-Zw-f6D" secondAttribute="top" constant="1" id="yhS-St-aq4"/>
                                 </constraints>
                             </view>
                         </subviews>

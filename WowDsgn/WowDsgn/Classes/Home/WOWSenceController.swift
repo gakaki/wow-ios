@@ -62,7 +62,7 @@ class WOWSenceController: WOWBaseViewController {
         layout.minimumLineSpacing = 0;
         layout.scrollDirection = .Vertical
         footerCollectionView = UICollectionView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: 0), collectionViewLayout: layout)
-        footerCollectionView.backgroundColor = MGRgb(245, g: 245, b: 245)
+        footerCollectionView.backgroundColor = DefaultBackColor
         WOWBorderColor(footerCollectionView)
         footerCollectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
         footerCollectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))

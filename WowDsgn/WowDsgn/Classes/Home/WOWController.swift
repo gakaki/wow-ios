@@ -12,6 +12,7 @@ class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
     var dataArr = [WOWSenceModel]()
     @IBOutlet var tableView: UITableView!
+    var hidingNavBarManager: HidingNavigationBarManager?
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -22,6 +23,23 @@ class WOWController: WOWBaseViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         //FIXME:为了让动画出现 所以多reload一次咯
         tableView.reloadData()
+        hidingNavBarManager?.viewWillAppear(animated)
+    }
+    
+    var originalFrame = WOWTool.appTabBarController.tabBar.frame
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        hidingNavBarManager?.viewWillDisappear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        hidingNavBarManager?.viewDidLayoutSubviews()
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,10 +58,18 @@ class WOWController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
+//        tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+//        tableView.contentOffset = CGPointMake(0, -64)
         configBarItem()
 //        let sideVC = appdelegate.sideController.sideController as! WOWLeftSideController
 //        sideVC.delegate = self
         tableView.mj_header = mj_header
+        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+        if let tabBar = navigationController?.tabBarController?.tabBar {
+            hidingNavBarManager?.manageBottomBar(tabBar)
+//            tabBar.barTintColor = UIColor(white: 230/255, alpha: 1)
+        }
+        
     }
 
    
@@ -146,6 +172,12 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         navigationController?.pushViewController(scene, animated: true)
     }
     
+    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+        hidingNavBarManager?.shouldScrollToTop()
+        return true
+    }
+
+    
 }
 
 extension WOWController:SenceCellDelegate{
@@ -157,5 +189,7 @@ extension WOWController:SenceCellDelegate{
     }
 }
 
-
+extension WOWController:UIScrollViewDelegate{
+    
+}
 

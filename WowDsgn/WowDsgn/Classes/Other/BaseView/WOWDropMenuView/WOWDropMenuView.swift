@@ -174,6 +174,10 @@ class WOWDropMenuView: UIView {
         self.addSubview(headerView)
     }
     
+    private func refreshData(){
+        
+    }
+    
     func  backTap(){
         hide()
     }

@@ -65,6 +65,7 @@ let URL_CarCommit               = "order/commit"
 //5.个人中心
 let URL_UpdateInfo              = "usermongo/userupdate"
 let URL_FavoriteList            = "like/get"
+let URL_UserInfo                = "usermongo/info"
 
 //6.app 登录注册
 let URL_Register                = "usermongo/register"

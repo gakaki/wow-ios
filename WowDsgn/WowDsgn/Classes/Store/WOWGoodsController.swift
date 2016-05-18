@@ -177,7 +177,7 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.arrowImage = UIImage(named:"nav_arrow")
         menuView.didSelectItemAtIndexHandler = {[weak self](indexPath: Int) -> () in
             if let strongSelf = self{
-                strongSelf.categoryID = strongSelf.categoryArr[indexPath].categoryID
+                strongSelf.categoryID = strongSelf.categoryArr[indexPath].categoryID ?? "5"
                 strongSelf.pageIndex = 0
                 strongSelf.request()
             }

@@ -80,6 +80,13 @@ extension AppDelegate{
     
     func requestConfigData(){
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: { (result) in
+//            let cateArr = JSON(result)["category"].arrayObject
+//            if let cats = cateArr{
+//                for item in cats{
+//                    
+//                }
+//            }
+            /*
             let cateArr = Mapper<WOWCategoryModel>().mapArray(result["category"])
             if let categorys = cateArr{
                 for cate in categorys{
@@ -87,7 +94,7 @@ extension AppDelegate{
                          WOWRealm.add(cate, update: true)
                     })
                 }
-            }
+            }*/
             
             let productTypeArr = Mapper<WOWProductStyleModel>().mapArray(result["product_style"])
             if let typeArr = productTypeArr{
@@ -102,7 +109,7 @@ extension AppDelegate{
                 }
             }
             
-            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
+//            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
         }) { (errorMsg) in
             
         }
@@ -145,20 +152,19 @@ extension AppDelegate{
     
     func initialAppearance(){
         window?.backgroundColor = UIColor.whiteColor()
-        let navBar = UINavigationBar.appearance()
-        navBar.translucent = false
-        navBar.shadowImage = UIImage.imageWithColor(ThemeColor, size:CGSizeMake(MGScreenWidth, 1)) //去除导航栏下方黑线
-        //更换导航栏返回按图片
-        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
-        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
-        
         let barButtonItem = UIBarButtonItem.appearance()
         barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], forState: .Normal)
         
         
-        
+        let navBar = UINavigationBar.appearance()
+        navBar.translucent = false
+//        navBar.shadowImage = UIImage.imageWithColor(ThemeColor, size:CGSizeMake(MGScreenWidth, 1)) //去除导航栏下方黑线
+        //更换导航栏返回按图片
+        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
+        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
         //设置导航条背景
-        navBar.setBackgroundImage(UIImage(named: "Bar"), forBarPosition: .Any, barMetrics: .Default)
+//        navBar.setBackgroundImage(UIImage(named: "Bar"), forBarPosition: .Any, barMetrics: .Default)
+        navBar.backgroundColor = UIColor.whiteColor()
         navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()] //导航栏标题颜色
         navBar.tintColor = UIColor.blackColor() //导航栏元素颜色
         navBar.translucent = false

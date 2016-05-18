@@ -12,7 +12,9 @@ import UIKit
     func sideMenuSelect(tagString:String!,index:Int,dataArr:[WOWCategoryModel])
 }
 
+/*
 class WOWLeftSideController: UIViewController {
+    
     let cellID = String(WOWMenuCell)
     var dataArr = [WOWCategoryModel]()
     weak var delegate:LeftSideProtocol?
@@ -48,7 +50,7 @@ class WOWLeftSideController: UIViewController {
     }
     
     private func addObserver(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateCategory), name:WOWCategoryUpdateNotificationKey, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateCategory), name:WOWCategoryUpdateNotificationKey, object: nil)
     }
     
 //MARK:Lazy
@@ -124,6 +126,5 @@ extension WOWLeftSideController:UITableViewDataSource,UITableViewDelegate{
         
         return topSectionHeaderView
     }
-    
-    
 }
+ */

@@ -26,11 +26,11 @@ class WOWMenuCell: UITableViewCell {
     }
 
     func showDataModel(model:WOWCategoryModel,isStore:Bool){
-        var imageName = getImageName(model.categoryID)
+        var imageName = getImageName(model.categoryID ?? "5")
         imageName = isStore ? "store_" + imageName : imageName
         menuImageView.image = UIImage(named:imageName)
         menuNameLabel.text = model.categoryName
-        menuCountLabel.text = "\(model.categoryCount)件商品"
+        menuCountLabel.text = "\(model.categoryCount ?? 0)件商品"
     }
     
     private func getImageName(categoryID:String) -> String{

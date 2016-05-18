@@ -50,19 +50,16 @@ extension WOWIntroduceController:UIScrollViewDelegate{
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         DLog(scrollView.contentOffset.x)
-        if scrollView.contentOffset.x >= MGScreenWidth * 2{
-            
-            let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
-            let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-            let sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
-            let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//            appdelegate.sideController = sideController
-            self.presentViewController(sideController, animated: true, completion: nil)
-        }
+//        if scrollView.contentOffset.x >= MGScreenWidth * 2{
+//            
+//            let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
+//            let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
+//            let sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
+//            let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+////            appdelegate.sideController = sideController
+//            self.presentViewController(sideController, animated: true, completion: nil)
+//        }
     }
-
-
-
 }
 
 

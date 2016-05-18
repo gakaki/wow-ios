@@ -2,17 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "store_jiashi.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "store_jiashi@2x.png",
+      "filename" : "store_jiashi_yellow@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "store_jiashi@3x.png",
+      "filename" : "store_jiashi_yellow@3x.png",
       "scale" : "3x"
     }
   ],

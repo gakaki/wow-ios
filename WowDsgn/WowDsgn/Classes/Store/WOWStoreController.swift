@@ -72,9 +72,14 @@ class WOWStoreController: WOWBaseViewController {
                 if let productArr = products{
                     strongSelf.recommenArr.appendContentsOf(productArr)
                 }
-                let cates = Mapper<WOWCategoryModel>().mapArray(JSON(result)["cats"].arrayObject)
-                if let cateArr = cates{
-                    strongSelf.categoryArr.appendContentsOf(cateArr)
+                let json = JSON(result)["cats"].arrayObject
+                if let cats = json{
+                    for item in cats{
+                        let model = Mapper<WOWCategoryModel>().map(item)
+                        if let m = model{
+                            strongSelf.categoryArr.append(m)
+                        }
+                    }
                 }
                 strongSelf.endRefresh()
                 strongSelf.tableView.reloadData()
@@ -162,7 +167,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
             vc.categoryIndex            =   indexPath.row
             vc.categoryTitles           =   categoryTitles
-            vc.categoryID               =   item.categoryID
+            vc.categoryID               =   item.categoryID ?? "5"
             vc.categoryArr              =   categoryArr
             navigationController?.pushViewController(vc, animated: true)
         case 2:
@@ -172,11 +177,10 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    
     var categoryTitles:[String]{
         get{
           return categoryArr.map { (model) -> String in
-                return model.categoryName
+                return model.categoryName ?? "全部"
             }
         }
     }

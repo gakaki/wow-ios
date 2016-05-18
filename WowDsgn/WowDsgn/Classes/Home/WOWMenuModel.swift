@@ -66,7 +66,7 @@ extension WOWCategoryModel:Mappable{
         categoryName    <-    map["name"]
         categoryCount   <-    map["sum"]
         categoryID      <-    map["cid"]
-        subCats         <-    map["cats"]
+        subCats         <-    map["subcats"]
     }
     
     convenience init?(_ map: Map) {

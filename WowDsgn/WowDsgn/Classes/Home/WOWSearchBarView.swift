@@ -25,6 +25,7 @@ class WOWSearchBarView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         backView.borderRadius(15)
+        backView.borderColor(0.5, borderColor:SeprateColor)
         backView.shadow()
     }
 

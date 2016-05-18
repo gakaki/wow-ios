@@ -29,6 +29,20 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
         
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        setBack()
+    }
+    
+    func setBack() {
+        let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.Plain, target: self, action:#selector(back))
+        navigationItem.leftBarButtonItem = item
+    }
+    
+    func back() {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
     
     func setUI(){
         self.view.backgroundColor = UIColor.whiteColor()

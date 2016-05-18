@@ -146,7 +146,7 @@ class WOWGoodsController: WOWBaseViewController {
         WOWDropMenuSetting.showDuration = 0.2
         WOWDropMenuSetting.cellHeight = 50
         WOWDropMenuSetting.cellSeparatorColor = SeprateColor
-        WOWDropMenuSetting.cellSelectionColor = ThemeColor
+        WOWDropMenuSetting.cellSelectionColor = MGRgb(250, g: 250, b: 250)
         let menuView = WOWDropMenuView(frame:CGRectMake(0,0,self.view.w,44))
         menuView.delegate = self
         /*
@@ -164,7 +164,7 @@ class WOWGoodsController: WOWBaseViewController {
         menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: categoryTitles[categoryIndex], items: categoryTitles,defaultSelectIndex: categoryIndex)
         menuView.cellHeight = 50
         menuView.cellBackgroundColor = UIColor.whiteColor()
-        menuView.cellSelectionColor = ThemeColor
+        menuView.cellSelectionColor = MGRgb(250, g: 250, b: 250)
         menuView.cellTextLabelColor = UIColor.blackColor()
         menuView.cellSeparatorColor = SeprateColor
         menuView.cellTextLabelFont = Fontlevel001

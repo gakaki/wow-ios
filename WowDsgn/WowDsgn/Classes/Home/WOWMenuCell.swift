@@ -46,7 +46,7 @@ class WOWMenuCell: UITableViewCell {
         case "20"://食居
             return "shiju"
         case "21"://儿童
-            return "tongqu"
+            return "ertong"
         default:
             return "  "
         }

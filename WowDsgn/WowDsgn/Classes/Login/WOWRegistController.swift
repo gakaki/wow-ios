@@ -45,7 +45,7 @@ class WOWRegistController: WOWBaseViewController {
     private func configNavItem(){
         makeCustomerNavigationItem("已有账号?登录", left: false) {[weak self] in
             if let strongSelf = self{
-                strongSelf.back()
+                strongSelf.setCustomerBack()
             }
         }
     }
@@ -66,14 +66,7 @@ class WOWRegistController: WOWBaseViewController {
     }
 
     
-    
-    
-    
 //MARK:Actions
-    private func back(){
-        navigationController?.popViewControllerAnimated(true)
-    }
-    
     @IBAction func msgCodeButtonClick(sender: AnyObject) {
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return

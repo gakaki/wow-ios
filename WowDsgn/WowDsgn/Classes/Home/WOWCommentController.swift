@@ -156,7 +156,7 @@ class WOWCommentController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        let type = commentType == .Product ? "product":"scene"
+        let type = (commentType == .Product) ? "product":"scene"
         WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(pageindex:"\(self.pageIndex)",thingid:self.mainID,type:type), successClosure: {[weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)

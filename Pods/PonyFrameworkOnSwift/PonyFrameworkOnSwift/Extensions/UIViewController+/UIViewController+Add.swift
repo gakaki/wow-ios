@@ -12,7 +12,7 @@ public typealias NavigationItemHandler = () -> ()
 
 public extension UIViewController{
     
-    func makeCustomerNavigationItem(title:String!,left:Bool,handler:NavigationItemHandler?){
+    func makeCustomerNavigationItem(title:String!,left:Bool,isOffset:Bool = false,handler:NavigationItemHandler?){
 //        self.navigationItem.leftBarButtonItems = nil
         let item = UIBarButtonItem(title: title, style: .Plain, target: self, action: #selector(UIViewController.itemClick(_:)))
         if let action = handler {
@@ -23,14 +23,16 @@ public extension UIViewController{
         }else{
             self.navigationItem.rightBarButtonItem = item
         }
-        if let left = self.navigationItem.leftBarButtonItem{
-            let offset = UIDevice.deviceType.rawValue > 3 ? -20 : -16
-            left.imageInsets = UIEdgeInsetsMake(0,CGFloat(offset),0, 0);
+        if isOffset {
+            if let left = self.navigationItem.leftBarButtonItem{
+                let offset = UIDevice.deviceType.rawValue > 3 ? -20 : -16
+                left.imageInsets = UIEdgeInsetsMake(0,CGFloat(offset),0, 0);
+            }
         }
         
     }
     
-    func makeCustomerImageNavigationItem(image:String!,left:Bool,handler:NavigationItemHandler){
+    func makeCustomerImageNavigationItem(image:String!,left:Bool,isOffset:Bool = false,handler:NavigationItemHandler){
         let image = UIImage(named:image)
         let item = UIBarButtonItem(image:image?.imageWithRenderingMode(.AlwaysOriginal), style: .Plain, target: self, action: #selector(UIViewController.itemClick(_:)))
         ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:item)] = handler
@@ -39,12 +41,15 @@ public extension UIViewController{
         }else{
             self.navigationItem.rightBarButtonItem = item
         }
-
-        if let left = self.navigationItem.leftBarButtonItem{
-            let offset = UIDevice.deviceType.rawValue > 3 ? -20 : -16
-            left.imageInsets = UIEdgeInsetsMake(0,CGFloat(offset),0, 0);
+        
+        if isOffset {
+            if let left = self.navigationItem.leftBarButtonItem{
+                let offset = UIDevice.deviceType.rawValue > 3 ? -20 : -16
+                left.imageInsets = UIEdgeInsetsMake(0,CGFloat(offset),0, 0);
+            }
         }
     }
+    
     
     func itemClick(item:UIBarButtonItem){
         if let closure = ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:item)]{

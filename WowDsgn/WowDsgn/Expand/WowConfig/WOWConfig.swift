@@ -27,6 +27,19 @@ let WOWLeanCloudKey     = "IGR5VQANuxRq3XsQnL9MYtyW"
 //MARK:WOW
 public let WOWSizeScale:CGFloat = 1.2
 
+/*
+ 空白的背景色 f5f5f5  245 245 245
+ 
+ 三级的title  128 128 128
+ 二级title    74 74 74
+ 一级title  0 0 0
+ bordercolor 234 234 234
+ 分割线的颜色  234 234 234
+ maskcolor  0 0 0 0.6
+ */
+
+
+
 //MARK:Color
 /// 0
 let GrayColorlevel1 = MGRgb(0, g: 0, b: 0)

@@ -18,6 +18,9 @@ class WOWSenceHelper: NSObject {
     class func rowsNumberInSection(section:Int) ->Int{
         switch section {
         case 4: //评论 暂时干掉
+            if let count = sceneModel?.comments_count {
+                return count > 5 ? 5 : count
+            }
             return 0
         case 3: //喜欢的暂时干掉
             return 0
@@ -54,7 +57,11 @@ class WOWSenceHelper: NSObject {
         case 4:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
                 cell.hideHeadImage()
-            cell.commentLabel.text = "我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君我叫尖叫君尖叫君"
+            if let model = sceneModel?.comments?[indexPath.row] {
+                cell.commentLabel.text = model.comment
+                cell.dateLabel.text    = model.created_at
+                cell.nameLabel.text    = model.user_nick
+            }
             returnCell = cell
         default:
            break
@@ -66,16 +73,24 @@ class WOWSenceHelper: NSObject {
         switch section {
         case 0,1,3:
             return 0.01
+        case 4:
+            if let count = sceneModel?.comments_count{
+                return count == 0 ? 0.01 : 36
+            }
+            return 0.01
         default:
-            return 36
+            return 44
         }
     }
     
     
     class func heightForFooterInSection(section:Int) ->CGFloat{
-        if section == 4 { //评论暂时干掉
-            return 0.01
-        }else{
+        switch section {
+        case 4:
+            return 44
+        case 2:
+            return 20
+        default:
             return 0.01
         }
     }
@@ -93,30 +108,36 @@ class WOWSenceHelper: NSObject {
             headerView.leftLabel.text = "\(sceneModel?.products?.count ?? 0)件商品"
             return headerView
         }else if section == 4{
-            /*
-            let headerView = WOWMenuTopView(leftTitle: "xx条评论 ", rightHiden:false, topLineHiden: true, bottomLineHiden:true)
-            headerView.addAction({ 
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
-                senceController.navigationController?.pushViewController(vc, animated: true)
-            })
-            return headerView
-             */
+            if let arr = sceneModel?.comments {
+                if arr.count == 0 {
+                    return nil
+                }
+                let headerView = WOWMenuTopView(leftTitle: "\(sceneModel?.comments_count ?? 0)条评论 ", rightHiden:false, topLineHiden: false, bottomLineHiden:false)
+                headerView.addAction({
+                    let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
+                    vc.mainID = sceneModel?.id
+                    vc.commentType = CommentType.Sence
+                    senceController.navigationController?.pushViewController(vc, animated: true)
+                })
+                return headerView
+            }
             return nil
         }
         return nil
     }
     
-    /*
+   
     class func viewForFooterInSection(tableView:UITableView,section:Int) ->UIView?{
-        if section == 4 {
-            let footerView = WOWMenuTopView(leftTitle: "我要评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
+        if section == 4{
+            let footerView = WOWMenuTopView(leftTitle: "我要评论", rightHiden: false, topLineHiden: false, bottomLineHiden: true)
             footerView.addAction({
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
+                vc.mainID = sceneModel?.id
+                vc.commentType = CommentType.Sence
                 senceController.navigationController?.pushViewController(vc, animated: true)
             })
             return footerView
         }
         return nil
     }
-    */
 }

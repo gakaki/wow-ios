@@ -25,8 +25,10 @@ class WOWSearchResultController: WOWBaseTableViewController {
     
     override func setUI() {
         super.setUI()
+        tableView.estimatedRowHeight = 90
+        tableView.rowHeight = UITableViewAutomaticDimension
         self.edgesForExtendedLayout = .None
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
+        tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
     }
 }
 
@@ -41,11 +43,10 @@ extension WOWSearchResultController{
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("WOWBaseStyleCell", forIndexPath: indexPath) as! WOWBaseStyleCell
         let model = resultArr[indexPath.row]
-        cell.imageView!.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
-        cell.textLabel!.text = model.name
-        cell.selectionStyle = .None
+        cell.leftImageView.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        cell.centerTitleLabel!.text = model.name
         return cell
     }
     

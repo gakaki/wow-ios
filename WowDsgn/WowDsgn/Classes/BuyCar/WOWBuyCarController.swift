@@ -137,7 +137,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private func configNav(){
         navigationItem.title = "购物车"
-        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
+        makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
             }

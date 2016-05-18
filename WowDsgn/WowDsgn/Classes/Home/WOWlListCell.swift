@@ -16,6 +16,7 @@ class WOWlListCell: UITableViewCell {
     
     @IBOutlet var bigImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
     private var productBtns = [UIButton]()
     weak var delegate:SenceCellDelegate?
     override func awakeFromNib() {
@@ -32,6 +33,7 @@ class WOWlListCell: UITableViewCell {
         let url = model.image ?? ""
         bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
         titleLabel.text = model.name
+        descLabel.text  = model.desc
         
         productBtns.forEach { (view) in
             view.removeFromSuperview()

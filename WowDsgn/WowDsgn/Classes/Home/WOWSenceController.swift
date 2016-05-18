@@ -57,15 +57,14 @@ class WOWSenceController: WOWBaseViewController {
     func configTableFooterView(){
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSizeMake((self.view.w - 0)/2,(self.view.w - 0)/2)
-        layout.headerReferenceSize = CGSizeMake(MGScreenWidth,50);  //设置head大小
+        layout.headerReferenceSize = CGSizeMake(MGScreenWidth,70);  //设置head大小
         layout.minimumInteritemSpacing = 0;
         layout.minimumLineSpacing = 0;
         layout.scrollDirection = .Vertical
         footerCollectionView = UICollectionView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: 0), collectionViewLayout: layout)
-        footerCollectionView.backgroundColor = SeprateColor
+        footerCollectionView.backgroundColor = MGRgb(245, g: 245, b: 245)
         WOWBorderColor(footerCollectionView)
         footerCollectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
-         footerCollectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionFooter, withReuseIdentifier:"WOWCollectionFooterCell")
         footerCollectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
         footerCollectionView.delegate = self
         footerCollectionView.dataSource = self
@@ -236,9 +235,9 @@ extension WOWSenceController:UITableViewDelegate,UITableViewDataSource{
         return WOWSenceHelper.heightForFooterInSection(section)
     }
     
-//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
-//    }
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
+    }
 }
 
 

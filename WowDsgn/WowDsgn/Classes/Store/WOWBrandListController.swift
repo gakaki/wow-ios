@@ -43,17 +43,15 @@ class WOWBrandListController: WOWBaseViewController {
     var headerIndexs = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"]
     
 //MARK:Private Method
-    private func initData(){
-        
-    }
-    
     override func setUI() {
         super.setUI()
+        tableView.estimatedRowHeight = 90
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionIndexColor = GrayColorlevel1
         tableView.clearRestCell()
         navigationItem.title = "品牌"
         configureSearchController()
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
+        tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
     }
 
     private func configureSearchController() {
@@ -135,11 +133,10 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("WOWBaseStyleCell", forIndexPath: indexPath) as! WOWBaseStyleCell
         let model = dataArray[indexPath.section][indexPath.row]
-        cell.imageView!.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
-        cell.textLabel!.text = model.name
-        cell.selectionStyle = .None
+        cell.leftImageView.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        cell.centerTitleLabel!.text = model.name
         return cell
     }
     

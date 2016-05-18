@@ -40,7 +40,7 @@ class WOWLoginController: WOWBaseViewController {
                 strongSelf.regist()
             }
         }
-        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
+        makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
             }

@@ -433,7 +433,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tmc-Xk-Wmi">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="WowDsgn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="320" height="117"/>
@@ -501,18 +501,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InS-kG-pkp">
-                                        <rect key="frame" x="240" y="0.0" width="80" height="50"/>
+                                        <rect key="frame" x="195" y="0.0" width="125" height="50"/>
                                         <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="rJe-fi-VeR"/>
+                                            <constraint firstAttribute="width" constant="125" id="rJe-fi-VeR"/>
                                         </constraints>
-                                        <state key="normal" image="store_buyCar"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <state key="normal" title="加入购物车">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="carClick:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="rgl-AY-E6L"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E70-rc-q8q">
-                                        <rect key="frame" x="212" y="0.0" width="20" height="50"/>
+                                        <rect key="frame" x="160" y="0.0" width="20" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -542,7 +545,7 @@
                                     <constraint firstItem="9ef-mh-v9m" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="4w7-qK-j16"/>
                                     <constraint firstAttribute="bottom" secondItem="9ef-mh-v9m" secondAttribute="bottom" id="6zF-P2-cqr"/>
                                     <constraint firstItem="yv9-6E-UFd" firstAttribute="leading" secondItem="uv1-Ti-RuP" secondAttribute="leading" id="K2j-re-mD8"/>
-                                    <constraint firstItem="InS-kG-pkp" firstAttribute="leading" secondItem="E70-rc-q8q" secondAttribute="trailing" constant="8" id="LB5-bE-VZr"/>
+                                    <constraint firstItem="InS-kG-pkp" firstAttribute="leading" secondItem="E70-rc-q8q" secondAttribute="trailing" constant="15" id="LB5-bE-VZr"/>
                                     <constraint firstAttribute="bottom" secondItem="E70-rc-q8q" secondAttribute="bottom" id="T1N-qD-mvM"/>
                                     <constraint firstItem="E70-rc-q8q" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="aDe-Vo-5t7"/>
                                     <constraint firstAttribute="trailing" secondItem="InS-kG-pkp" secondAttribute="trailing" id="aNi-pU-tDf"/>
@@ -587,6 +590,5 @@
         <image name="icon_like" width="16" height="13"/>
         <image name="icon_like_hightlighted" width="16" height="13"/>
         <image name="icon_share" width="14" height="14"/>
-        <image name="store_buyCar" width="26" height="25"/>
     </resources>
 </document>

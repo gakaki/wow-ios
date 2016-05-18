@@ -20,21 +20,25 @@ class WOWSenceModel: WOWBaseModel,Mappable{
     var totalPrice       :   String?
     var userLike         :   String?
     var recommendProducts:   [WOWProductModel]?
+    var comments         :   [WOWCommentListModel]?
+    var comments_count   : Int?
     
     required init?(_ map: Map) {
         
     }
     
     func mapping(map: Map) {
-        id              <- map["_id"]
-        name            <- map["name"]
-        senceTime       <- map["time"]
-        products        <- map["products"]
-        image           <- map["image"]
-        url             <- map["url"]
-        desc            <- map["desc"]
-        totalPrice      <- map["total_price"]
-        userLike        <- map["user_like"]
-        recommendProducts  <- map["recommend_products"]
+        id                  <- map["_id"]
+        name                <- map["name"]
+        senceTime           <- map["time"]
+        products            <- map["products"]
+        image               <- map["image"]
+        url                 <- map["url"]
+        desc                <- map["desc"]
+        totalPrice          <- map["total_price"]
+        userLike            <- map["user_like"]
+        recommendProducts   <- map["recommend_products"]
+        comments            <- map["comments"]
+        comments_count      <- map["commentcount"]
     }
 }

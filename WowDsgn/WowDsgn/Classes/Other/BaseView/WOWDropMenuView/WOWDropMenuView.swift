@@ -116,6 +116,7 @@ class WOWDropMenuView: UIView {
         backView = UIView(frame:CGRectMake(0,CGRectGetHeight(frame),CGRectGetWidth(frame),UIScreen.mainScreen().bounds.size.height))
         backView.hidden = true
         backView.alpha = 0
+        
         //添加背景毛玻璃效果
         let blurEffect = UIBlurEffect(style: .Light)
         let blurView = UIVisualEffectView(effect: blurEffect)

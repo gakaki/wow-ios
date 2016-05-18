@@ -316,7 +316,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 5: //评论
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
             cell.hideHeadImage()
-            if let model = productModel?.comments![indexPath.row]{
+            if let model = productModel?.comments?[indexPath.row]{
                 cell.commentLabel.text = model.comment
                 cell.dateLabel.text    = model.created_at
                 cell.nameLabel.text    = model.user_nick

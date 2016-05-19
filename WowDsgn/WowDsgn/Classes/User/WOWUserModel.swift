@@ -17,7 +17,7 @@ class WOWUserModel:NSObject,Mappable{
     var user_sex        : String?
     var user_mobile     : String?
     var user_email      : String?
-    var user_carCount   : Int?
+    var user_carCount   : String?
     
     
     required init?(_ map: Map) {
@@ -33,7 +33,7 @@ class WOWUserModel:NSObject,Mappable{
         user_mobile      <- map["mobile"]
         user_email       <- map["email"]
         //FIXME:后台要返回的
-        user_carCount    <- map["carCount"]
+        user_carCount    <- map["productcount"]
     }
     
 }

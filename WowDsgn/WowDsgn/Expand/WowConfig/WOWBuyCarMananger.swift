@@ -32,10 +32,11 @@ class WOWBuyCarMananger {
     static func updateBadge(count:Int = 0){
         let vc = WOWTool.appTabBarController.viewControllers![2]
         if WOWUserManager.loginStatus {
-            if  count == 0 {
+            let carCount = WOWUserManager.userCarCount
+            if  carCount == 0 {
                 vc.tabBarItem.badgeValue = nil
             }else{
-                vc.tabBarItem.badgeValue = "\(count)" ?? ""
+                vc.tabBarItem.badgeValue = "\(carCount)" ?? ""
             }
         }else{
             let products = WOWRealm.objects(WOWBuyCarModel)

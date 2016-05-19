@@ -108,7 +108,6 @@ class WOWSureOrderController: WOWBaseViewController {
     override func request() {
         super.request()
         //请求地址数据
-        //FIXME:替换掉
         let uid =  WOWUserManager.userID
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:uid), successClosure: { [weak self](result) in
             if let strongSelf = self{

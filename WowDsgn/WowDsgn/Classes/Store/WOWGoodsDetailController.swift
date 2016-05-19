@@ -125,6 +125,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let _ = self{
+                let json = JSON(result)
+                DLog(json)
                 WOWHud.showMsg("添加购物车成功")
                 //FIXME:要修改本地user的carcount的
             }

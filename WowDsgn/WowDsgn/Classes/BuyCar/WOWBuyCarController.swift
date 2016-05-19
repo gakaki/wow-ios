@@ -169,6 +169,7 @@ class WOWBuyCarController: WOWBaseViewController {
         
     }
     
+//MARK:结算
     @IBAction func endButtonClick(sender: UIButton) {
         if selectedArr.isEmpty {
             WOWHud.showMsg("您还没有选中商品哦")
@@ -301,7 +302,7 @@ class WOWBuyCarController: WOWBaseViewController {
             let json = JSON(result)
             DLog(json)
             if let strongSelf = self{
-                let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
                 if let a = array{
                     strongSelf.dataArr.appendContentsOf(a)
                 }
@@ -342,7 +343,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     WOWHud.dismiss()
                     let json = JSON(result)
                     DLog(json)
-                    let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                    let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
                     if let a = array{
                         strongSelf.dataArr.appendContentsOf(a)
                         strongSelf.tableView.reloadData()
@@ -363,7 +364,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     WOWHud.dismiss()
                     let json = JSON(result)
                     DLog(json)
-                    let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                    let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
                     if let a = array{
                         strongSelf.dataArr.appendContentsOf(a)
                         try! WOWRealm.write({
@@ -418,7 +419,7 @@ class WOWBuyCarController: WOWBaseViewController {
             if let strongSelf = self{
                 WOWHud.showMsg("修改成功")
                 strongSelf.dataArr = []
-                let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
                 if let a = array{
                     strongSelf.dataArr.appendContentsOf(a)
                     strongSelf.tableView.reloadData()

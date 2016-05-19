@@ -15,11 +15,11 @@ import Foundation
 
 //let BaseUrl = "http://127.0.0.1:8360/apiv1/"
 
-#if WOWDEBUG
+//#if WOWDEBUG
     let BaseUrl = "http://apidev.dev.wowdsgn.com:8400/apiv1/" //开发
-#else
-    let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/" //正服
-#endif
+//#else
+//    let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/" //正服
+//#endif
 
 /****************************API_URL接口**********************************/
 

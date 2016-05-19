@@ -121,7 +121,6 @@ extension AppDelegate{
 //        // 取出之前保存的版本号
 //        let userDefaults = NSUserDefaults.standardUserDefaults()
 //        let appVersion = userDefaults.stringForKey("appVersion")
-//        
 //        // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
 //        if appVersion == nil || appVersion != currentAppVersion {
 //            // 保存最新的版本号
@@ -129,9 +128,7 @@ extension AppDelegate{
 //            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
 //            self.window?.rootViewController = introVC
 //        }else{
-//            let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
             let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-//            sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
             window?.rootViewController = mainVC
 //        }
     }
@@ -142,8 +139,6 @@ extension AppDelegate{
         
         UMSocialData.setAppKey(WOWUMKey)
         UMSocialWechatHandler.setWXAppId(WOWWXID, appSecret: WOWWXAppSecret, url:"http://www.wowdsgn.com/")
-//        UMSocialSinaHandler.openSSOWithRedirectURL("http://www.wowdsgn.com")
-//        UMSocialSinaSSOHandler.openNewSinaSSOWithAppKey(WOWWeibokey, redirectURL:"http://www.wowdsgn.com")
         UMSocialConfig.hiddenNotInstallPlatforms([UMShareToWechatSession,UMShareToWechatTimeline])
         
         //LeanCloud
@@ -155,12 +150,11 @@ extension AppDelegate{
         let barButtonItem = UIBarButtonItem.appearance()
         barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], forState: .Normal)
         
-        
-        
         let navBar = UINavigationBar.appearance()
         navBar.translucent = false
         navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSizeMake(MGScreenWidth, 64)), forBarPosition: .Any, barMetrics: .Default)
-        navBar.shadowImage = UIImage.imageWithColor(MGRgb(255, g: 255, b: 255, alpha:1), size:CGSizeMake(MGScreenWidth, 0.5)) //去除导航栏下方黑线
+        navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSizeMake(MGScreenWidth, 0.5)) //去除导航栏下方黑线
+        
 //        navBar.shadowImage = UIImage()
         //更换导航栏返回按图片
 //        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")

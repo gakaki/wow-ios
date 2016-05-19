@@ -56,7 +56,7 @@ class WOWSenceController: WOWBaseViewController {
     
     func configTableFooterView(){
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake((self.view.w - 0)/2,(self.view.w - 0)/2)
+        layout.itemSize = CGSizeMake((self.view.w)/2,(self.view.w)/2)
         layout.headerReferenceSize = CGSizeMake(MGScreenWidth,70);  //设置head大小
         layout.minimumInteritemSpacing = 0;
         layout.minimumLineSpacing = 0;

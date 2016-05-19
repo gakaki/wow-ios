@@ -224,7 +224,6 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             }else{
                 payType = "wx"
             }
-            DLog("支付方式:\(payType)")
         default:
             break
         }
@@ -242,7 +241,6 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             headerView.textLabel?.font = Fontlevel003
         }
     }
-    
     
     //尾视图  只有地址栏需要
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

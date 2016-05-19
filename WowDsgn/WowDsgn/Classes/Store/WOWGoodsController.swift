@@ -22,10 +22,12 @@ class WOWGoodsController: WOWBaseViewController {
     var dataArr             = [WOWProductModel]()
     var menuView            : BTNavigationDropdownMenu!
     var carButton           : MIBadgeButton!
+//    private var showCatIndex :Int = 0
     private var cellShowStyle:GoodsCellStyle = .Small
     
-    //请求参数
-    var categoryID          = "5" //5是全部
+    
+    //请求参数 //5是全部
+    var categoryID          = "5"
     private var style       = "0"
     private var sort        = "new"
     
@@ -91,7 +93,7 @@ class WOWGoodsController: WOWBaseViewController {
     
     func updateBadge(){
         carButton.badgeString = WOWBuyCarMananger.calCarCount()
-        WOWBuyCarMananger.updateBadge()
+        
     }
     
     func loginSuccess() {
@@ -126,20 +128,37 @@ class WOWGoodsController: WOWBaseViewController {
         navigationItem.rightBarButtonItem = item
     }
 
-    private func configMenuView(){
-        WOWDropMenuSetting.columnTitles = ["新品"]
-        WOWDropMenuSetting.rowTitles =  [
-                                            ["新品","销量","价格"],
-                                        ]
-        WOWDropMenuSetting.maxShowCellNumber = 3
+    
+    lazy var dropMenuView : WOWDropMenuView! = {
+        WOWDropMenuSetting.columnTitles = ["新品",""]
+        WOWDropMenuSetting.rowTitles = [["新品","销量","价格"],[""]]
+        WOWDropMenuSetting.maxShowCellNumber = 5
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2
         WOWDropMenuSetting.showDuration = 0.2
         WOWDropMenuSetting.cellHeight = 50
         WOWDropMenuSetting.cellSeparatorColor = SeprateColor
         WOWDropMenuSetting.cellSelectionColor = MGRgb(250, g: 250, b: 250)
-        let menuView = WOWDropMenuView(frame:CGRectMake(0,0,self.view.w,44))
-        menuView.delegate = self
-        view.addSubview(menuView)
+        let v = WOWDropMenuView(frame:CGRectMake(0,0,self.view.w,44))
+        v.delegate = self
+        return v
+    }()
+    
+    private func configMenuView(){
+        view.addSubview(dropMenuView)
+        let model = self.categoryArr[self.categoryIndex]
+        let subcats = model.subCats ?? []
+        if categoryID == "5" || subcats.isEmpty{ //全部 或子分类为空
+            dropMenuView.columItemArr.last?.hidden = true
+        }else{
+            dropMenuView.columItemArr.last?.hidden = false
+            let subTitles = subcats.map({ (subModel) -> String in
+                return subModel.subCatName
+            })
+            dropMenuView.columItemArr.last?.titleButton.setTitle("全部", forState: .Normal)
+            WOWDropMenuSetting.rowTitles = [["新品","销量","价格"],subTitles]
+            dropMenuView.columnShowingDict[1] = "全部"
+        }
+        
     }
     
     private func configNavigation(){
@@ -159,13 +178,35 @@ class WOWGoodsController: WOWBaseViewController {
         menuView.arrowImage = UIImage(named:"nav_arrow")
         menuView.didSelectItemAtIndexHandler = {[weak self](indexPath: Int) -> () in
             if let strongSelf = self{
-                strongSelf.categoryID = strongSelf.categoryArr[indexPath].categoryID ?? "5"
+                strongSelf.dropMenuView.hide()
+                strongSelf.categoryIndex = indexPath
+                let model = strongSelf.categoryArr[indexPath]
+                strongSelf.categoryID = model.categoryID ?? "5"
+                let subcats = model.subCats ?? []
+                if strongSelf.categoryID == "5" || subcats.isEmpty{
+                    strongSelf.dropMenuView.columItemArr.last?.hidden = true
+                }else{
+                    strongSelf.dropMenuView.columItemArr.last?.hidden = false
+                    strongSelf.dropMenuView.columItemArr.last?.titleButton.setTitle("全部", forState: .Normal)
+                    strongSelf.dropMenuView.columnShowingDict[1] = "全部"
+                }
+                
+                
+                let subTitles = subcats.map({ (subModel) -> String in
+                    return subModel.subCatName
+                })
+                WOWDropMenuSetting.rowTitles =  [
+                    ["新品","销量","价格"],
+                    subTitles
+                ]
                 strongSelf.pageIndex = 0
                 strongSelf.request()
             }
         }
         self.navigationItem.titleView = menuView
     }
+    
+    
     
     
 
@@ -221,18 +262,19 @@ class WOWGoodsController: WOWBaseViewController {
 extension WOWGoodsController:DropMenuViewDelegate{
     func dropMenuClick(column: Int, row: Int) {
         let sorts = ["new","sale","price"]
-        pageIndex = 0
         switch (column,row) {
             case let (0,x):
                 sort = sorts[x]
                 break
-//            case let (1,x):
-//                let typeModel = productTypeArr[x]
-//                style = typeModel.styleValue
-//                break
+            case let (1,x):
+                let model = categoryArr[categoryIndex]
+                let subcats = model.subCats ?? []
+                categoryID = subcats[x].subCatID
+                break
             default:
                 break
         }
+        pageIndex = 0
         request()
     }
 }

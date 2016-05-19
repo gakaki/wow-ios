@@ -61,9 +61,9 @@ class WOWDropMenuView: UIView {
     private var bottomButton:UIButton!
     private var currentColumn:Int = 0
     private var show:Bool = false
-    private var columItemArr = [WOWDropMenuColumn]()
+    var columItemArr = [WOWDropMenuColumn]()
     //存放的是每一列正在选择的title  row = value
-    private var columnShowingDict = [Int:String]()
+    var columnShowingDict = [Int:String]()
     
     weak var delegate:DropMenuViewDelegate?
     
@@ -231,7 +231,7 @@ class WOWDropMenuView: UIView {
         })
     }
     
-    private func hide(){
+    func hide(){
         show = false
         UIView.animateWithDuration(WOWDropMenuSetting.showDuration, animations: {
             self.tableView.h = 0

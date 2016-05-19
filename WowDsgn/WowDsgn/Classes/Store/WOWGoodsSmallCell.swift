@@ -11,7 +11,7 @@ import UIKit
 class WOWGoodsSmallCell: UICollectionViewCell {
      class var itemWidth:CGFloat{
         get{
-           return (MGScreenWidth) / 2
+           return (MGScreenWidth - 1) / 2
         }
     }
     @IBOutlet weak var topLine: UIView!

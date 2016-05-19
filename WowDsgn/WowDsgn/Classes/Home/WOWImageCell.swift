@@ -28,10 +28,9 @@ class WOWImageCell: UICollectionViewCell {
         pictureImageView = UIImageView()
         self.addSubview(pictureImageView)
         pictureImageView.snp_makeConstraints { (make) -> Void in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, -0.5, -0.5))
+            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

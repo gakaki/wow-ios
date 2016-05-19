@@ -136,6 +136,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID2, forIndexPath: indexPath) as! WOWMenuCell
             cell.showDataModel(categoryArr[indexPath.row],isStore:true)
+            cell.backgroundColor = UIColor.whiteColor()
             returnCell = cell
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID1, forIndexPath: indexPath) as! WOWStoreBrandCell
@@ -185,6 +186,15 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 2:
+            return 0.01
+        default:
+            return 15
+        }
+    }
+    
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
@@ -199,6 +209,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         case 2:
             let sectionView =  NSBundle.mainBundle().loadNibNamed(String(WOWStoreSectionView), owner: self, options: nil).last as! WOWStoreSectionView
             sectionView.leftLabel.text = "热门品牌"
+            sectionView.bottomLine.hidden = true
             sectionView.rightDetailLabel.text = "全部\(brandsCount)个品牌"
             sectionView.rightBackView.addAction({[weak self] in
                 if let strongSelf = self{

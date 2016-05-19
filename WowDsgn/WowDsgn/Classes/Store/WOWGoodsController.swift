@@ -76,7 +76,7 @@ class WOWGoodsController: WOWBaseViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 65 - 40), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 55), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = DefaultBackColor
@@ -103,7 +103,6 @@ class WOWGoodsController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         view.addSubview(collectionView)
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsBigCell)), forCellWithReuseIdentifier: cellBigId)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: cellSmallId)
         collectionView.mj_header            = self.mj_header
         collectionView.mj_footer            = self.mj_footer

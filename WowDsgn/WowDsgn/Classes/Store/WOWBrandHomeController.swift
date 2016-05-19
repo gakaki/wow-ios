@@ -21,8 +21,8 @@ class WOWBrandHomeController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.minimumColumnSpacing = 0
-        l.minimumInteritemSpacing = 0
+        l.minimumColumnSpacing = 0.5
+        l.minimumInteritemSpacing = 0.5
         l.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1)
         l.headerHeight = Float(MGScreenWidth * 2 / 3)
         return l

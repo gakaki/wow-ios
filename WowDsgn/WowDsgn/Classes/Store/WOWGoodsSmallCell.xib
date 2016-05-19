@@ -38,14 +38,14 @@
                             <constraint firstAttribute="height" constant="0.5" id="rti-fJ-b48"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oum-zS-9g3" userLabel="rightline">
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oum-zS-9g3" userLabel="rightline">
                         <rect key="frame" x="187" y="0.0" width="0.0" height="254"/>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="0.5" id="v58-m5-YfA"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anL-G8-fG6" userLabel="bottomline">
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anL-G8-fG6" userLabel="bottomline">
                         <rect key="frame" x="0.0" y="254" width="187" height="0.0"/>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

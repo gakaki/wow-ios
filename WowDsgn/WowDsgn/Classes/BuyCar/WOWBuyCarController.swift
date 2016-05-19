@@ -115,6 +115,11 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSucces), name: WOWLoginSuccessNotificationKey, object:nil)
+    }
+    
+    func loginSucces(){
+        asyncCarList()
     }
     
     override func setUI() {

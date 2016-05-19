@@ -11,6 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    static var rootVC : UIViewController?
 //    var sideController:WOWSideContainerController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -30,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          拉取配置数据
          */
-        requestConfigData()
+//        requestConfigData()
         
         window?.makeKeyAndVisible()
         return true
@@ -116,21 +117,22 @@ extension AppDelegate{
     }
     
     func configRootVC(){
-//        let infoDictionary = NSBundle.mainBundle().infoDictionary
-//        let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
+        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
 //        // 取出之前保存的版本号
-//        let userDefaults = NSUserDefaults.standardUserDefaults()
-//        let appVersion = userDefaults.stringForKey("appVersion")
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let appVersion = userDefaults.stringForKey("appVersion")
 //        // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
-//        if appVersion == nil || appVersion != currentAppVersion {
+        if appVersion == nil || appVersion != currentAppVersion {
 //            // 保存最新的版本号
-//            userDefaults.setValue(currentAppVersion, forKey: "appVersion")
-//            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
-//            self.window?.rootViewController = introVC
-//        }else{
+            userDefaults.setValue(currentAppVersion, forKey: "appVersion")
+            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
+            self.window?.rootViewController = introVC
+        }else{
             let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
+            AppDelegate.rootVC = mainVC
             window?.rootViewController = mainVC
-//        }
+        }
     }
     
     func registAppKey(){

@@ -26,8 +26,6 @@ class WOWController: WOWBaseViewController {
         hidingNavBarManager?.viewWillAppear(animated)
     }
     
-    var originalFrame = WOWTool.appTabBarController.tabBar.frame
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }

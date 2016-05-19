@@ -68,10 +68,10 @@ func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
 struct WOWTool {
     static var appTabBarController:UITabBarController {
         get{
-            let del = UIApplication.sharedApplication().delegate as? AppDelegate
-            let tab = del?.window?.rootViewController as! UITabBarController
+//            let del = UIApplication.sharedApplication().delegate as? AppDelegate
+//            let tab = del?.window?.rootViewController as! UITabBarController
 //            let tab = del?.sideController.mainController as! UITabBarController
-            return tab
+            return AppDelegate.rootVC as! UITabBarController
         }
     }
 }

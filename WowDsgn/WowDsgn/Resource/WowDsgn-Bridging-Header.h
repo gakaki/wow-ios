@@ -16,6 +16,7 @@
 @import ReachabilitySwift;
 @import EZSwiftExtensions;
 @import HidingNavigationBar;
+@import YYImage;
 
 
 #import "WXApi.h"

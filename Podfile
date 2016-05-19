@@ -21,7 +21,7 @@ pod 'DZNEmptyDataSet'
 pod 'ReachabilitySwift' #网络监测
 pod 'EZSwiftExtensions', '~> 1.2.3' #通用的拓展库
 pod 'HidingNavigationBar', '~> 0.3.0'
-
+pod 'YYImage'
 
 #Ping++支付
 pod 'Pingpp/Alipay', '~> 2.1.0'

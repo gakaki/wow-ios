@@ -69,6 +69,9 @@ class WOWSureOrderController: WOWBaseViewController {
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
+                let productCount = json["productcount"].int ?? 0
+                WOWUserManager.userCarCount = productCount
+                strongSelf.updateCarCountBadge()
                 let charge = json["charge"]
                 let totalPrice = json["total"].string ?? ""
                 let orderid    = json["order_id"].string ?? ""
@@ -80,6 +83,12 @@ class WOWSureOrderController: WOWBaseViewController {
                 
         }
     }
+    
+    private func updateCarCountBadge(){
+        WOWBuyCarMananger.updateBadge()
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+    }
+    
     
     private func goPay(charge:AnyObject,totalPrice:String,orderid:String){
         dispatch_async(dispatch_get_main_queue()) { 

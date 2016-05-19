@@ -146,9 +146,11 @@ struct WOWUserManager {
      清空用户的各个信息
      */
     static func exitLogin(){
+        MGDefault.setObject(nil, forKey: WOWUserCarCount)
         MGDefault.setObject(nil, forKey: WOWUserID)
         MGDefault.setObject(nil, forKey: WOWUserHeadImage)
         MGDefault.synchronize()
+        WOWBuyCarMananger.updateBadge()
     }
     
 }

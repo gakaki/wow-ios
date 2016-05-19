@@ -256,7 +256,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     }
                 }
             }
-            
+            updateCarCountBadge()
             var exitIndex:Int = Int(dataArr.indexOf({$0 == editingModel})!)
             for (index,value) in dataArr.enumerate() {
                 if value.skuID == model.skuID{
@@ -344,6 +344,9 @@ class WOWBuyCarController: WOWBaseViewController {
                     let json = JSON(result)
                     DLog(json)
                     let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
+                    let productCount = json["productcount"].int ?? 0
+                    WOWUserManager.userCarCount = productCount
+                    strongSelf.updateCarCountBadge()
                     if let a = array{
                         strongSelf.dataArr.appendContentsOf(a)
                         strongSelf.tableView.reloadData()
@@ -365,6 +368,9 @@ class WOWBuyCarController: WOWBaseViewController {
                     let json = JSON(result)
                     DLog(json)
                     let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
+                    let productCount = json["productcount"].int ?? 0
+                    WOWUserManager.userCarCount = productCount
+                    strongSelf.updateCarCountBadge()
                     if let a = array{
                         strongSelf.dataArr.appendContentsOf(a)
                         try! WOWRealm.write({
@@ -395,6 +401,11 @@ class WOWBuyCarController: WOWBaseViewController {
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CarDelete(cart:string), successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+                let productCount = json["productcount"].int ?? 0
+                WOWUserManager.userCarCount = productCount
+                strongSelf.updateCarCountBadge()
                 //若删除成功，我就把它从dataArr里面干掉吧
                 strongSelf.removeObjectsInArray(items)
                 strongSelf.tableView.reloadData()
@@ -418,6 +429,11 @@ class WOWBuyCarController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.showMsg("修改成功")
+                let json = JSON(result)
+                DLog(json)
+                let productCount = json["productcount"].int ?? 0
+                WOWUserManager.userCarCount = productCount
+                strongSelf.updateCarCountBadge()
                 strongSelf.dataArr = []
                 let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
                 if let a = array{
@@ -453,6 +469,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 })
             }
             self.removeObjectsInArray(items)
+            updateCarCountBadge()
             self.tableView.reloadData()
         }
     }
@@ -592,6 +609,7 @@ extension WOWBuyCarController:CarEditCellDelegate{
                     try! WOWRealm.write({
                         m.skuProductCount = model.skuProductCount
                     })
+                self.updateCarCountBadge()
                })
             }else{
 

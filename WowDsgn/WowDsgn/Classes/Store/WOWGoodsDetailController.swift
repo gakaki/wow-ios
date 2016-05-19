@@ -61,11 +61,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
-    }
-    
-    func updateBadge(){
-        updateCarBadge()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateCarBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
     }
     
     func loginSuccess() {
@@ -79,15 +75,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
         }
         backView.hideBuyView()
     }
-    
-    private func updateCarBadge(){
-        carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
-        carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(15, 0, 0,15)
-        if let action = updateBadgeAction {
-            action()
-        }
-    }
-
     
     private func resolveBuyModel(model:WOWBuyCarModel){
         //放进购物车管理类，进行选中
@@ -111,8 +98,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 })
                 WOWHud.showMsg("添加购物车成功")
             }
-            WOWBuyCarMananger.updateBadge()
-            
             updateCarBadge()
         }
     }
@@ -124,14 +109,26 @@ class WOWGoodsDetailController: WOWBaseViewController {
         let param = ["uid":uid,"cart":carItems,"tag":"0"]
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
-            if let _ = self{
+            if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
                 WOWHud.showMsg("添加购物车成功")
-                //FIXME:要修改本地user的carcount的
+                let carCount = json["productcount"].int ?? 0
+                WOWUserManager.userCarCount = carCount
+                strongSelf.updateCarBadge()
             }
         }) { (errorMsg) in
             WOWHud.showMsg("添加购物车失败")
+        }
+    }
+    
+    
+    func updateCarBadge(){
+        WOWBuyCarMananger.updateBadge()
+        carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
+        carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(15, 0, 0,15)
+        if let action = updateBadgeAction {
+            action()
         }
     }
     

@@ -17,7 +17,7 @@ class WOWUserModel:NSObject,Mappable{
     var user_sex        : String?
     var user_mobile     : String?
     var user_email      : String?
-    var user_carCount   : String?
+    var user_carCount   : Int?
     
     
     required init?(_ map: Map) {

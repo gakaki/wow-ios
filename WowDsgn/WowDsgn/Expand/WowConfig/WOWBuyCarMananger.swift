@@ -28,8 +28,7 @@ class WOWBuyCarMananger {
     
     //app启动这一次添加进购物车的商品列表
     var chooseProducts      = [String]()
-    
-    static func updateBadge(count:Int = 0){
+    static func updateBadge(){
         let vc = WOWTool.appTabBarController.viewControllers![2]
         if WOWUserManager.loginStatus {
             let carCount = WOWUserManager.userCarCount
@@ -40,10 +39,14 @@ class WOWBuyCarMananger {
             }
         }else{
             let products = WOWRealm.objects(WOWBuyCarModel)
-            if products.count == 0 {
+            var count = 0
+            for p in products {
+                count += p.skuProductCount
+            }
+            if count == 0 {
                 vc.tabBarItem.badgeValue = nil
             }else{
-                vc.tabBarItem.badgeValue = "\(products.count)" ?? ""
+                vc.tabBarItem.badgeValue = "\(count)" ?? ""
             }
         }
     }
@@ -54,7 +57,9 @@ class WOWBuyCarMananger {
             count = WOWUserManager.userCarCount
         }else{
             let products = WOWRealm.objects(WOWBuyCarModel)
-            count = products.count
+            for p in products {
+                count += p.skuProductCount
+            }
         }
         if count == 0 {
             return ""

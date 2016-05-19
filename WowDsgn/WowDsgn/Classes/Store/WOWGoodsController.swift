@@ -91,6 +91,7 @@ class WOWGoodsController: WOWBaseViewController {
     
     func updateBadge(){
         carButton.badgeString = WOWBuyCarMananger.calCarCount()
+        WOWBuyCarMananger.updateBadge()
     }
     
     func loginSuccess() {
@@ -110,6 +111,7 @@ class WOWGoodsController: WOWBaseViewController {
         configNavigation()
         configMenuView()
         configNav()
+        updateBadge()
     }
     
     
@@ -173,14 +175,7 @@ class WOWGoodsController: WOWBaseViewController {
         let nav = UIStoryboard.initialViewController("BuyCar")
         presentViewController(nav, animated: true, completion: nil)
     }
-    /*
-    func showStyleChange(btn:UIButton) {
-        btn.selected = !btn.selected
-        cellShowStyle = btn.selected ? .Small : .Big
-        layout.columnCount = btn.selected ? 2 : 1
-        collectionView.reloadData()
-    }*/
-    
+
     
 //MARK:Private Network
     override func request() {
@@ -252,17 +247,9 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        switch cellShowStyle {
-//        case .Big:
-//            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellBigId, forIndexPath: indexPath) as! WOWGoodsBigCell
-//            cell.showData(dataArr[indexPath.item])
-//            cell.delegate = self
-//            return cell
-//        case .Small:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellSmallId, forIndexPath: indexPath) as! WOWGoodsSmallCell
             cell.showData(dataArr[indexPath.item],indexPath: indexPath)
             return cell
-//        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -275,26 +262,15 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
         }
         vc.hideNavigationBar = true
         vc.productID = item.productID
-//        switch cellShowStyle {
-//        case .Big:
-//            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsBigCell
-//            vc.shareProductImage = cell.bigPictureImageView.image
-//        case .Small:
-            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsSmallCell
-            vc.shareProductImage = cell.pictureImageView.image
-//        }
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsSmallCell
+        vc.shareProductImage = cell.pictureImageView.image
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        switch cellShowStyle {
-//        case .Big:
-//            return CGSizeMake(MGScreenWidth, MGScreenWidth)
-//        case .Small:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 65)
-//        }
+        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 65)
     }
 }
 

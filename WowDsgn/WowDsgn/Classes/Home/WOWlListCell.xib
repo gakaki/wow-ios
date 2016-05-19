@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCD-g1-kLV">
-                        <rect key="frame" x="15" y="335" width="290" height="21"/>
+                        <rect key="frame" x="15" y="335" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -40,8 +40,16 @@
                             <constraint firstAttribute="height" constant="10" id="184-oB-JyZ"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfE-aq-qCw">
+                        <rect key="frame" x="269" y="337" width="36" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="wfE-aq-qCw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XCD-g1-kLV" secondAttribute="trailing" constant="8" id="1dz-rZ-3oG"/>
+                    <constraint firstAttribute="trailing" secondItem="wfE-aq-qCw" secondAttribute="trailing" constant="15" id="31X-ZZ-QDW"/>
                     <constraint firstAttribute="trailing" secondItem="hOW-EY-3e9" secondAttribute="trailing" constant="15" id="3cx-Wr-Eeu"/>
                     <constraint firstItem="vqi-uS-piU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Gvu-UR-mAM"/>
                     <constraint firstAttribute="bottom" secondItem="aXV-xE-zX7" secondAttribute="bottom" id="Qjj-tS-RHC"/>
@@ -51,7 +59,7 @@
                     <constraint firstItem="aXV-xE-zX7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XxW-ne-mNx"/>
                     <constraint firstAttribute="trailing" secondItem="aXV-xE-zX7" secondAttribute="trailing" id="YcB-C0-CDj"/>
                     <constraint firstItem="vqi-uS-piU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dMn-4K-uNw"/>
-                    <constraint firstAttribute="trailing" secondItem="XCD-g1-kLV" secondAttribute="trailing" constant="15" id="lQh-zI-7D8"/>
+                    <constraint firstItem="wfE-aq-qCw" firstAttribute="centerY" secondItem="XCD-g1-kLV" secondAttribute="centerY" id="pPq-Q5-vVD"/>
                     <constraint firstItem="hOW-EY-3e9" firstAttribute="top" secondItem="XCD-g1-kLV" secondAttribute="bottom" constant="5" id="vLc-fD-OR5"/>
                     <constraint firstItem="hOW-EY-3e9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="wbg-bz-1Az"/>
                     <constraint firstItem="aXV-xE-zX7" firstAttribute="top" secondItem="hOW-EY-3e9" secondAttribute="bottom" priority="750" constant="25" id="xGA-td-vjQ"/>
@@ -60,6 +68,7 @@
             <connections>
                 <outlet property="bigImageView" destination="vqi-uS-piU" id="zFl-cg-3XT"/>
                 <outlet property="descLabel" destination="hOW-EY-3e9" id="sDo-ik-BJ3"/>
+                <outlet property="priceLabel" destination="wfE-aq-qCw" id="ZAs-DH-avx"/>
                 <outlet property="titleLabel" destination="XCD-g1-kLV" id="aMD-Ol-6m3"/>
             </connections>
             <point key="canvasLocation" x="387" y="429"/>

@@ -14,6 +14,7 @@ protocol SenceCellDelegate:class{
 
 class WOWlListCell: UITableViewCell {
     
+    @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet var bigImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
@@ -26,11 +27,11 @@ class WOWlListCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
     func showData(model:WOWSenceModel) {
         let url = model.image ?? ""
+        priceLabel.text = model.totalPrice?.priceFormat()
         bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
         titleLabel.text = model.name
         descLabel.text  = model.desc

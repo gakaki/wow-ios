@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eQM-AL-7Ds" id="QvM-K4-Tpt">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="272"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="THy-1N-gOC">

@@ -188,11 +188,17 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 2:
-            return 0.01
-        default:
+        case 1:
             return 15
+        default:
+            return 0.01
         }
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let v = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 15))
+        v.backgroundColor = UIColor.whiteColor()
+        return v
     }
     
     

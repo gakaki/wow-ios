@@ -143,8 +143,8 @@
                                     <outlet property="delegate" destination="C9Q-UM-zRR" id="Z4T-ko-ozl"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCp-4q-LpT">
-                                <rect key="frame" x="0.0" y="20" width="43" height="38"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCp-4q-LpT">
+                                <rect key="frame" x="0.0" y="20" width="40" height="32"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="0bl-no-dGH"/>
@@ -320,8 +320,8 @@
                                     <outlet property="delegate" destination="WaH-lQ-3xj" id="cHm-qM-CAK"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OgO-gS-w03">
-                                <rect key="frame" x="0.0" y="20" width="43" height="38"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OgO-gS-w03">
+                                <rect key="frame" x="0.0" y="20" width="40" height="32"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
                                     <action selector="back:" destination="WaH-lQ-3xj" eventType="touchUpInside" id="6KG-fv-7Is"/>
@@ -374,8 +374,8 @@
                                     <constraint firstAttribute="height" constant="50" id="HpY-ok-RHW"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xe-AJ-9G3">
-                                <rect key="frame" x="0.0" y="20" width="43" height="38"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xe-AJ-9G3">
+                                <rect key="frame" x="0.0" y="20" width="40" height="32"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
                                     <action selector="back:" destination="u6f-ag-qbK" eventType="touchUpInside" id="vlk-WC-Abe"/>
@@ -407,7 +407,7 @@
     </scenes>
     <resources>
         <image name="car_right" width="63" height="36"/>
-        <image name="closeNav" width="43" height="38"/>
+        <image name="closeNav" width="40" height="32"/>
         <image name="icon_like" width="16" height="13"/>
         <image name="icon_like_hightlighted" width="16" height="13"/>
         <image name="icon_share" width="14" height="14"/>

@@ -54,20 +54,16 @@ class WOWController: WOWBaseViewController {
     override func setUI() {
         navigationItem.title = "尖叫设计"
         tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
+        tableView.backgroundColor = DefaultBackColor
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
-//        tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
-//        tableView.contentOffset = CGPointMake(0, -64)
         configBarItem()
-//        let sideVC = appdelegate.sideController.sideController as! WOWLeftSideController
-//        sideVC.delegate = self
         tableView.mj_header = mj_header
         hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
-        if let tabBar = navigationController?.tabBarController?.tabBar {
-            hidingNavBarManager?.manageBottomBar(tabBar)
+//        if let tabBar = navigationController?.tabBarController?.tabBar {
+//            hidingNavBarManager?.manageBottomBar(tabBar)
 //            tabBar.barTintColor = UIColor(white: 230/255, alpha: 1)
-        }
-        
+//        }
     }
 
    
@@ -188,7 +184,15 @@ extension WOWController:SenceCellDelegate{
     }
 }
 
-extension WOWController:UIScrollViewDelegate{
-    
-}
+//extension WOWController:HidingNavigationBarManagerDelegate{
+//    func hidingNavigationBarManagerDidChangeState(manager: HidingNavigationBarManager, toState state: HidingNavigationBarState) {
+//        if state == .Closed {
+//            DLog("dismiss")
+//        }
+//    }
+//    
+//    func hidingNavigationBarManagerDidUpdateScrollViewInsets(manager: HidingNavigationBarManager) {
+//        
+//    }
+//}
 

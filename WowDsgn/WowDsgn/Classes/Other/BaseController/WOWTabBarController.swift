@@ -24,6 +24,7 @@ class WOWTabBarController: UITabBarController {
 
 //MARK:Private Method
     func setViewControllers(){
+        self.view.backgroundColor = DefaultBackColor
         self.delegate = self;
         let storys = ["Home","Store",/*"Activity",*/"BuyCar","User"]
         let titles = ["尖叫","商店",/*"活动",*/"购物车","我"]

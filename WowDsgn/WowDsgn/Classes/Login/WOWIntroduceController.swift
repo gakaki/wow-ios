@@ -30,7 +30,7 @@ class WOWIntroduceController: WOWBaseViewController {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 4.3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
             imageView.stopAnimating()
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.7 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
                 let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
                 mainVC?.modalTransitionStyle = .FlipHorizontal
                 AppDelegate.rootVC = mainVC

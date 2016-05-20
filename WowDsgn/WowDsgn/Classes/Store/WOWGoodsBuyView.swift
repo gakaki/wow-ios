@@ -22,11 +22,6 @@ class WOWBuyBackView: UIView {
     lazy var backClear:UIView = {
         let v = UIView()
         v.backgroundColor = UIColor.clearColor()
-        v.addTapGesture(action: {[weak self](tap) in
-            if let strongSelf = self{
-                strongSelf.hideBuyView()
-            }
-        })
         return v
     }()
     
@@ -38,13 +33,21 @@ class WOWBuyBackView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    lazy var dismissButton:UIButton = {
+        let b = UIButton(type: .System)
+        b.backgroundColor = UIColor.clearColor()
+        b.addTarget(self, action: #selector(hideBuyView), forControlEvents:.TouchUpInside)
+        return b
+    }()
 //MARK:Private Method
     private func setUP(){
         self.frame = CGRectMake(0, 0, self.w, self.h)
         backgroundColor = MaskColor
         self.alpha = 0
-        
     }
+    
+    
 
 //MARK:Actions
     func show() {
@@ -54,6 +57,14 @@ class WOWBuyBackView: UIView {
         buyView.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
+            }
+        }
+        
+        backClear.insertSubview(dismissButton, belowSubview: buyView)
+        dismissButton.snp_makeConstraints {[weak self](make) in
+            if let strongSelf = self{
+                make.left.top.right.equalTo(strongSelf.backClear).offset(0)
+                make.bottom.equalTo(strongSelf.buyView.snp_top).offset(0)
             }
         }
         

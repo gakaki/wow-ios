@@ -11,6 +11,7 @@ import UIKit
 class WOWSenceHelper: NSObject {
     static var senceController : WOWSenceController!
     static var sceneModel      : WOWSenceModel?
+    static var shareImage      : UIImage?
     class func sectionsNumber() -> Int{
         return 5
     }
@@ -35,6 +36,7 @@ class WOWSenceHelper: NSObject {
         case 0:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSenceImageCell), forIndexPath:indexPath) as! WOWSenceImageCell
             cell.contentImageView.kf_setImageWithURL(NSURL(string:sceneModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+            self.shareImage = cell.contentImageView.image
             returnCell = cell
         case 1:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWAuthorCell), forIndexPath:indexPath) as! WOWAuthorCell

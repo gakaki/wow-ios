@@ -156,7 +156,7 @@ class WOWSenceController: WOWBaseViewController {
     
     @IBAction func share(sender: UIButton) {
         //FIXME:暂时分享出去公司的官网
-        WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url:WOWCompanyUrl);
+        WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url: WOWCompanyUrl, shareImage:WOWSenceHelper.shareImage ?? UIImage(named: "me_logo")!)
     }
     
     @IBAction func favorite(sender: UIButton) {

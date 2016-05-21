@@ -29,6 +29,7 @@ class WOWSearchResultController: WOWBaseTableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         self.edgesForExtendedLayout = .None
         tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
+        tableView.keyboardDismissMode = .OnDrag
     }
 }
 

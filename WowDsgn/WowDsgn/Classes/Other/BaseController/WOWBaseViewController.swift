@@ -28,7 +28,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
         setCustomerBack()
         if hideNavigationBar {
             //设置导航栏透明
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
 

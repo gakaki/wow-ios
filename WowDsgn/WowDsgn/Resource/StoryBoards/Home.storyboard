@@ -480,7 +480,7 @@
                                     <outlet property="delegate" destination="ZjH-5o-9uo" id="hMM-T2-FMN"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
                                 <rect key="frame" x="0.0" y="20" width="40" height="32"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>

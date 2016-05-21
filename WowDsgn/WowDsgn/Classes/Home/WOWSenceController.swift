@@ -119,6 +119,9 @@ class WOWSenceController: WOWBaseViewController {
                     let json = JSON(result)
                     DLog(json)
                     WOWHud.showMsg("添加购物车成功")
+                    let count = json["productcount"].int ?? 0
+                    WOWUserManager.userCarCount = count
+                    WOWBuyCarMananger.updateBadge()
                 }
                 }, failClosure: { (errorMsg) in
                     WOWHud.showMsg("添加购物车失败")
@@ -147,6 +150,7 @@ class WOWSenceController: WOWBaseViewController {
                 })
             }
         }
+        WOWBuyCarMananger.updateBadge()
         WOWHud.showMsg("添加购物车成功")
     }
     

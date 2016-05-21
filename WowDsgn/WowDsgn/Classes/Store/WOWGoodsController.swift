@@ -76,7 +76,7 @@ class WOWGoodsController: WOWBaseViewController {
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 55), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 55 - 44), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = DefaultBackColor

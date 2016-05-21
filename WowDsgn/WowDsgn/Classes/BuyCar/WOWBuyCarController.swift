@@ -15,16 +15,13 @@ class WOWBuyCarController: WOWBaseViewController {
     private var editingModel    : WOWBuyCarModel?
     private var rightItemButton : UIButton!
     private var totalPrice      : String?
-//    var updateCarAction         : WOWActionClosure?
     
     private var dataArr = [WOWBuyCarModel](){
         didSet{
             if dataArr.isEmpty {
-                navigationItem.title = "购物车"
                 bottomView.hidden = true
                 rightItemButton.hidden = true
             }else{
-                navigationItem.title = "购物车"
                 bottomView.hidden = false
                 rightItemButton.hidden = false
             }
@@ -124,6 +121,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
+        navigationItem.title = "购物车"
         totalPriceLabel.text = "¥ 0.0"
         endButton.setTitle("删除", forState:.Selected)
         endButton.setTitle("去结算", forState:.Normal)
@@ -563,6 +561,8 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         return attri
     }
     
+    
+    
 
 }
 
@@ -619,11 +619,8 @@ extension WOWBuyCarController:CarEditCellDelegate{
             }else{
 
             }
-
         }
     }
-    
-    
 }
 
 

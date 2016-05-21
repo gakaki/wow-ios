@@ -45,7 +45,7 @@ class WOWRegistController: WOWBaseViewController {
     private func configNavItem(){
         makeCustomerNavigationItem("已有账号?登录", left: false) {[weak self] in
             if let strongSelf = self{
-                strongSelf.setCustomerBack()
+                strongSelf.navBack()
             }
         }
     }
@@ -127,11 +127,11 @@ class WOWRegistController: WOWBaseViewController {
     }
     
     @IBAction func showProtocol(sender: UIButton) {
-        DLog("用户协议")
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistProtocolController)) as! WOWRegistProtocolController
         vc.agreeAction = {[weak self] in
             if let strongSelf = self{
                 strongSelf.protocolCheckButton.selected = true
+                strongSelf.agreeProtocol = true
             }
         }
         navigationController?.pushViewController(vc, animated: true)

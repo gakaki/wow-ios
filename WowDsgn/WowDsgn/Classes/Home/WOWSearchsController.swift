@@ -173,3 +173,10 @@ extension WOWSearchsController:UITextFieldDelegate{
     }
 }
 
+
+extension WOWSearchsController:UIScrollViewDelegate{
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        searchView.searchTextField.resignFirstResponder()
+    }
+}
+

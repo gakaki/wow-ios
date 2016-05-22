@@ -18,7 +18,7 @@ import Foundation
 //#if WOWDEBUG
 //    let BaseUrl = "http://apidev.dev.wowdsgn.com:8400/apiv1/" //开发
 //#else
-    let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/" //正服
+    let BaseUrl = "http://apidev.dev.wowdsgn.com/apiv1/" //正服
 //#endif
 
 /****************************API_URL接口**********************************/

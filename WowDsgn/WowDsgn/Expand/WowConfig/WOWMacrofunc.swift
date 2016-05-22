@@ -8,7 +8,7 @@
 
 import Foundation
 
-let WOWDEBUG = false
+let WOWDEBUG = true
 public func DLog (value: Any , fileName : String = #file, line : Int32 = #line ){
     /// Debug Log
     if WOWDEBUG {

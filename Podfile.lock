@@ -25,7 +25,7 @@ PODS:
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
   - UMengAnalytics-NO-IDFA (4.0.3)
-  - UMengSocialCOM (5.1.0)
+  - UMengSocialCOM (5.2.0)
   - YYImage (1.0.2):
     - YYImage/Core (= 1.0.2)
   - YYImage/Core (1.0.2)
@@ -79,7 +79,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   UMengAnalytics-NO-IDFA: 173a5a2541536225f4c947935560975136f18a34
-  UMengSocialCOM: 8fa4732b03757161aaa8aab97be7d980adb9ccdb
+  UMengSocialCOM: c5fd4182cd86d93192d3cb2fd4a64509ebed0528
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
 
 COCOAPODS: 0.39.0

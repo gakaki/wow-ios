@@ -28,3 +28,4 @@
 
 
 
+/var/folders/_b/54q18mzd4pgcsfm36j9ntr300000gn/T/AppIconMaker/appicon.png

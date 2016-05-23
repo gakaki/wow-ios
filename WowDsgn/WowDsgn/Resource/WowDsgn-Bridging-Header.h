@@ -17,16 +17,14 @@
 @import EZSwiftExtensions;
 @import HidingNavigationBar;
 @import YYImage;
-
-
 #import "WXApi.h"
 #import <Pingpp.h>
+#import <UMMobClick/MobClick.h>
 #import <AVOSCloud/AVOSCloud.h>
 #import <UMSocial.h>
-#import "UMSocialSinaHandler.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialSinaSSOHandler.h"
-#import <MobClick.h>
+
 
 
 

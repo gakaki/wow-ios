@@ -29,7 +29,6 @@
 		2912E0E71CC26303005929D1 /* WOWAboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2912E0E61CC26303005929D1 /* WOWAboutController.swift */; };
 		291843A51CCDC048004E8364 /* WOWAttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291843A41CCDC048004E8364 /* WOWAttributeModel.swift */; };
 		291ACB621CC47B7A00AFF02F /* WOWCopyrightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291ACB611CC47B7A00AFF02F /* WOWCopyrightController.swift */; };
-		291ACBA71CC4CA6700AFF02F /* libSocialSina.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACB9F1CC4CA6700AFF02F /* libSocialSina.a */; };
 		291ACBA81CC4CA6700AFF02F /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACBA21CC4CA6700AFF02F /* libSocialWechat.a */; };
 		291ACBA91CC4CA6700AFF02F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACBA31CC4CA6700AFF02F /* libWeChatSDK.a */; };
 		291ACBAB1CC4CA8100AFF02F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACBAA1CC4CA8100AFF02F /* Security.framework */; };
@@ -40,9 +39,6 @@
 		291ACBB51CC4CAA600AFF02F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACBB41CC4CAA600AFF02F /* CoreTelephony.framework */; };
 		291ACBB71CC4CAB000AFF02F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACBB61CC4CAB000AFF02F /* libstdc++.tbd */; };
 		291ACBB91CC4CAB600AFF02F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACBB81CC4CAB600AFF02F /* libz.tbd */; };
-		291ACBC91CC4CC0A00AFF02F /* libSocialSinaSSO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACBBB1CC4CC0A00AFF02F /* libSocialSinaSSO.a */; };
-		291ACBCA1CC4CC0A00AFF02F /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 291ACBBC1CC4CC0A00AFF02F /* libWeiboSDK.a */; };
-		291ACBCB1CC4CC0A00AFF02F /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 291ACBC61CC4CC0A00AFF02F /* WeiboSDK.bundle */; };
 		291ACBCE1CC4E04200AFF02F /* WOWActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291ACBCD1CC4E04200AFF02F /* WOWActivityModel.swift */; };
 		291ACBD01CC4E5B900AFF02F /* WOWActivityDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291ACBCF1CC4E5B900AFF02F /* WOWActivityDetailController.swift */; };
 		291ACBD21CC4ECB600AFF02F /* WOWBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291ACBD11CC4ECB600AFF02F /* WOWBannerModel.swift */; };
@@ -260,8 +256,6 @@
 		2912E0E61CC26303005929D1 /* WOWAboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAboutController.swift; sourceTree = "<group>"; };
 		291843A41CCDC048004E8364 /* WOWAttributeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAttributeModel.swift; sourceTree = "<group>"; };
 		291ACB611CC47B7A00AFF02F /* WOWCopyrightController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCopyrightController.swift; sourceTree = "<group>"; };
-		291ACB9F1CC4CA6700AFF02F /* libSocialSina.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialSina.a; sourceTree = "<group>"; };
-		291ACBA01CC4CA6700AFF02F /* UMSocialSinaHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSinaHandler.h; sourceTree = "<group>"; };
 		291ACBA21CC4CA6700AFF02F /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		291ACBA31CC4CA6700AFF02F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		291ACBA41CC4CA6700AFF02F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -275,20 +269,6 @@
 		291ACBB41CC4CAA600AFF02F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		291ACBB61CC4CAB000AFF02F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		291ACBB81CC4CAB600AFF02F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		291ACBBB1CC4CC0A00AFF02F /* libSocialSinaSSO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialSinaSSO.a; sourceTree = "<group>"; };
-		291ACBBC1CC4CC0A00AFF02F /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
-		291ACBBD1CC4CC0A00AFF02F /* UMSocialSinaSSOHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSinaSSOHandler.h; sourceTree = "<group>"; };
-		291ACBBE1CC4CC0A00AFF02F /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
-		291ACBBF1CC4CC0A00AFF02F /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
-		291ACBC01CC4CC0A00AFF02F /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
-		291ACBC11CC4CC0A00AFF02F /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
-		291ACBC21CC4CC0A00AFF02F /* WBHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBHttpRequest.h; sourceTree = "<group>"; };
-		291ACBC31CC4CC0A00AFF02F /* WBSDKBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKBasicButton.h; sourceTree = "<group>"; };
-		291ACBC41CC4CC0A00AFF02F /* WBSDKCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKCommentButton.h; sourceTree = "<group>"; };
-		291ACBC51CC4CC0A00AFF02F /* WBSDKRelationshipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKRelationshipButton.h; sourceTree = "<group>"; };
-		291ACBC61CC4CC0A00AFF02F /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
-		291ACBC71CC4CC0A00AFF02F /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
-		291ACBC81CC4CC0A00AFF02F /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
 		291ACBCD1CC4E04200AFF02F /* WOWActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWActivityModel.swift; sourceTree = "<group>"; };
 		291ACBCF1CC4E5B900AFF02F /* WOWActivityDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWActivityDetailController.swift; sourceTree = "<group>"; };
 		291ACBD11CC4ECB600AFF02F /* WOWBannerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBannerModel.swift; sourceTree = "<group>"; };
@@ -480,9 +460,7 @@
 				291ACBB91CC4CAB600AFF02F /* libz.tbd in Frameworks */,
 				291ACBB71CC4CAB000AFF02F /* libstdc++.tbd in Frameworks */,
 				291ACBB51CC4CAA600AFF02F /* CoreTelephony.framework in Frameworks */,
-				291ACBC91CC4CC0A00AFF02F /* libSocialSinaSSO.a in Frameworks */,
 				291ACBB31CC4CAA000AFF02F /* libsqlite3.tbd in Frameworks */,
-				291ACBCA1CC4CC0A00AFF02F /* libWeiboSDK.a in Frameworks */,
 				291ACBB11CC4CA9700AFF02F /* CoreGraphics.framework in Frameworks */,
 				291ACBAF1CC4CA9100AFF02F /* SystemConfiguration.framework in Frameworks */,
 				291ACBAD1CC4CA8A00AFF02F /* libiconv.tbd in Frameworks */,
@@ -490,7 +468,6 @@
 				291ACBA91CC4CA6700AFF02F /* libWeChatSDK.a in Frameworks */,
 				2936A5651CC385BC00990345 /* Realm.framework in Frameworks */,
 				4BCFA81DDC2C05131EE68148 /* Pods_WowDsgn.framework in Frameworks */,
-				291ACBA71CC4CA6700AFF02F /* libSocialSina.a in Frameworks */,
 				2936A5671CC385BC00990345 /* RealmSwift.framework in Frameworks */,
 				291ACBA81CC4CA6700AFF02F /* libSocialWechat.a in Frameworks */,
 			);
@@ -527,20 +504,9 @@
 		291ACB9D1CC4CA5F00AFF02F /* UMShare */ = {
 			isa = PBXGroup;
 			children = (
-				291ACBBA1CC4CC0A00AFF02F /* SinaSSO */,
-				291ACB9E1CC4CA6700AFF02F /* Sina */,
 				291ACBA11CC4CA6700AFF02F /* Wechat */,
 			);
 			path = UMShare;
-			sourceTree = "<group>";
-		};
-		291ACB9E1CC4CA6700AFF02F /* Sina */ = {
-			isa = PBXGroup;
-			children = (
-				291ACB9F1CC4CA6700AFF02F /* libSocialSina.a */,
-				291ACBA01CC4CA6700AFF02F /* UMSocialSinaHandler.h */,
-			);
-			path = Sina;
 			sourceTree = "<group>";
 		};
 		291ACBA11CC4CA6700AFF02F /* Wechat */ = {
@@ -553,27 +519,6 @@
 				291ACBA61CC4CA6700AFF02F /* WXApiObject.h */,
 			);
 			path = Wechat;
-			sourceTree = "<group>";
-		};
-		291ACBBA1CC4CC0A00AFF02F /* SinaSSO */ = {
-			isa = PBXGroup;
-			children = (
-				291ACBBB1CC4CC0A00AFF02F /* libSocialSinaSSO.a */,
-				291ACBBC1CC4CC0A00AFF02F /* libWeiboSDK.a */,
-				291ACBBD1CC4CC0A00AFF02F /* UMSocialSinaSSOHandler.h */,
-				291ACBBE1CC4CC0A00AFF02F /* WBHttpRequest+WeiboGame.h */,
-				291ACBBF1CC4CC0A00AFF02F /* WBHttpRequest+WeiboShare.h */,
-				291ACBC01CC4CC0A00AFF02F /* WBHttpRequest+WeiboToken.h */,
-				291ACBC11CC4CC0A00AFF02F /* WBHttpRequest+WeiboUser.h */,
-				291ACBC21CC4CC0A00AFF02F /* WBHttpRequest.h */,
-				291ACBC31CC4CC0A00AFF02F /* WBSDKBasicButton.h */,
-				291ACBC41CC4CC0A00AFF02F /* WBSDKCommentButton.h */,
-				291ACBC51CC4CC0A00AFF02F /* WBSDKRelationshipButton.h */,
-				291ACBC61CC4CC0A00AFF02F /* WeiboSDK.bundle */,
-				291ACBC71CC4CC0A00AFF02F /* WeiboSDK.h */,
-				291ACBC81CC4CC0A00AFF02F /* WeiboUser.h */,
-			);
-			path = SinaSSO;
 			sourceTree = "<group>";
 		};
 		291ACBCC1CC4DFA100AFF02F /* Model */ = {
@@ -1258,7 +1203,6 @@
 				2991AD2D1CBCCA0B00F5F5A0 /* Store.storyboard in Resources */,
 				2991AD281CBCCA0B00F5F5A0 /* BuyCar.storyboard in Resources */,
 				2991AE191CBD096800F5F5A0 /* WOWGoodsDetailCell.xib in Resources */,
-				291ACBCB1CC4CC0A00AFF02F /* WeiboSDK.bundle in Resources */,
 				29AE2C3D1CC0E2A500588429 /* WOWValue2Cell.xib in Resources */,
 				2991AD261CBCCA0B00F5F5A0 /* Assets.xcassets in Resources */,
 				29E1328F1CEC53A6006988DE /* WOWBaseStyleCell.xib in Resources */,
@@ -1625,20 +1569,16 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"APOpenSdk\"",
-					"-l\"SocialAlipayShare\"",
 					"-l\"SocialFacebook\"",
 					"-l\"SocialInstagram\"",
 					"-l\"SocialLaiWang\"",
 					"-l\"SocialLine\"",
 					"-l\"SocialQQ\"",
-					"-l\"SocialSina\"",
 					"-l\"SocialSinaSSO\"",
 					"-l\"SocialTumblr\"",
 					"-l\"SocialTwitter\"",
 					"-l\"SocialWechat\"",
 					"-l\"SocialWhatsapp\"",
-					"-l\"UMSocial_Sdk_4.4\"",
-					"-l\"UMSocial_Sdk_Comment_4.4\"",
 					"-l\"WeChatSDK\"",
 					"-l\"WeiboSDK\"",
 					"-l\"iconv\"",
@@ -1730,20 +1670,16 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"APOpenSdk\"",
-					"-l\"SocialAlipayShare\"",
 					"-l\"SocialFacebook\"",
 					"-l\"SocialInstagram\"",
 					"-l\"SocialLaiWang\"",
 					"-l\"SocialLine\"",
 					"-l\"SocialQQ\"",
-					"-l\"SocialSina\"",
 					"-l\"SocialSinaSSO\"",
 					"-l\"SocialTumblr\"",
 					"-l\"SocialTwitter\"",
 					"-l\"SocialWechat\"",
 					"-l\"SocialWhatsapp\"",
-					"-l\"UMSocial_Sdk_4.4\"",
-					"-l\"UMSocial_Sdk_Comment_4.4\"",
 					"-l\"WeChatSDK\"",
 					"-l\"WeiboSDK\"",
 					"-l\"iconv\"",

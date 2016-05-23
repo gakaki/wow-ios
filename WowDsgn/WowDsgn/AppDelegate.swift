@@ -119,12 +119,12 @@ extension AppDelegate{
     func configRootVC(){
         let infoDictionary = NSBundle.mainBundle().infoDictionary
         let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
-//        // 取出之前保存的版本号
+        // 取出之前保存的版本号
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let appVersion = userDefaults.stringForKey("appVersion")
-//        // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
+        // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
         if appVersion == nil || appVersion != currentAppVersion {
-//            // 保存最新的版本号
+            // 保存最新的版本号
             userDefaults.setValue(currentAppVersion, forKey: "appVersion")
             let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
             self.window?.rootViewController = introVC
@@ -136,7 +136,9 @@ extension AppDelegate{
     }
     
     func registAppKey(){
-        MobClick.startWithAppkey(WOWUMKey)
+        UMAnalyticsConfig.sharedInstance().appKey = WOWUMKey
+        UMAnalyticsConfig.sharedInstance().channelId = ""
+        MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
         
         UMSocialData.setAppKey(WOWUMKey)

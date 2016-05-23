@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (3.4.0)
-  - AVOSCloud (3.2.9)
-  - DZNEmptyDataSet (1.8)
+  - AVOSCloud (3.2.12)
+  - DZNEmptyDataSet (1.8.1)
   - EZSwiftExtensions (1.2.3)
   - HidingNavigationBar (0.3.0)
   - Kingfisher (2.0.4)
@@ -24,11 +24,11 @@ PODS:
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
-  - UMengAnalytics-NO-IDFA (3.6.7)
-  - UMengSocial (4.4)
-  - YYImage (1.0.1):
-    - YYImage/Core (= 1.0.1)
-  - YYImage/Core (1.0.1)
+  - UMengAnalytics-NO-IDFA (4.0.3)
+  - UMengSocialCOM (5.1.0)
+  - YYImage (1.0.2):
+    - YYImage/Core (= 1.0.2)
+  - YYImage/Core (1.0.2)
 
 DEPENDENCIES:
   - AVOSCloud
@@ -48,7 +48,7 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON
   - UMengAnalytics-NO-IDFA
-  - UMengSocial (~> 4.4)
+  - UMengSocialCOM
   - YYImage
 
 EXTERNAL SOURCES:
@@ -62,8 +62,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  AVOSCloud: b020009b1f2e35c271d4d019075458c879fc1d21
-  DZNEmptyDataSet: d2351b2e8daefa40433ef292e246e21f6be31a7b
+  AVOSCloud: fcbb5c2bcccaddbdea8c2b4f6c1ad7f13e6639fe
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
   Kingfisher: 8f1ec2c067ade2c549a1a594379b69c4b1ff81ab
@@ -78,8 +78,8 @@ SPEC CHECKSUMS:
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  UMengAnalytics-NO-IDFA: 6d02561a00579b2e37718f204eb81347df5d7b8b
-  UMengSocial: aba7296602310385114d82c255539a7bef3b7ab0
-  YYImage: b41b45bc5f32bfcdf67bdfb9c09da9e9832357c0
+  UMengAnalytics-NO-IDFA: 173a5a2541536225f4c947935560975136f18a34
+  UMengSocialCOM: 8fa4732b03757161aaa8aab97be7d980adb9ccdb
+  YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
 
 COCOAPODS: 0.39.0

@@ -14,7 +14,9 @@ pod 'SwiftyJSON'
 pod 'ObjectMapper'
 pod 'Kingfisher','~>2.0.1'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
-pod 'UMengSocial', '~> 4.4'
+#pod 'UMengSocial', '~> 4.4'
+pod 'UMengSocialCOM'
+
 pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'

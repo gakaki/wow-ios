@@ -15,6 +15,10 @@
 @import DZNEmptyDataSet;
 @import ReachabilitySwift;
 @import EZSwiftExtensions;
+@import HidingNavigationBar;
+@import YYImage;
+
+
 #import "WXApi.h"
 #import <Pingpp.h>
 #import <AVOSCloud/AVOSCloud.h>

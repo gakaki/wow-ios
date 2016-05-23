@@ -36,6 +36,7 @@
                     <constraint firstAttribute="trailing" secondItem="THy-1N-gOC" secondAttribute="trailing" id="r0t-sQ-ZKE"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="collectionView" destination="THy-1N-gOC" id="biq-Tt-dcz"/>
             </connections>

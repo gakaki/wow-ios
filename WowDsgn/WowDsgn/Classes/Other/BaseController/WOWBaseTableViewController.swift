@@ -29,6 +29,23 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
         
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        setCustomerBack()
+    }
+    
+    func setCustomerBack() {
+        if navigationController?.viewControllers.count > 1 {
+            let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.Plain, target: self, action:#selector(navBack))
+            navigationItem.leftBarButtonItem = item
+        }
+    }
+    
+    func navBack() {
+        navigationController?.popViewControllerAnimated(true)
+    }
+
+    
     
     func setUI(){
         self.view.backgroundColor = UIColor.whiteColor()
@@ -53,8 +70,8 @@ extension WOWBaseTableViewController{
     func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
         return GrayColorLevel5
     }
-    
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-        return UIImage(named: "placeholder_instagram")
-    }
+//    
+//    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+//        return UIImage(named: "placeholder_instagram")
+//    }
 }

@@ -35,7 +35,7 @@
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全部品牌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tby-5j-sZW">
                     <rect key="frame" x="15" y="25" width="60" height="18"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -46,13 +46,18 @@
                         <constraint firstAttribute="height" constant="0.5" id="WBj-k9-cMc"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhY-M5-Jwc" userLabel="bottom">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhY-M5-Jwc" userLabel="bottom">
                     <rect key="frame" x="0.0" y="68" width="600" height="0.0"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="VYr-8T-Nu3"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="qGS-fU-SNo"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="qGS-fU-SNo"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -80,10 +85,12 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="bottomLine" destination="uhY-M5-Jwc" id="R67-hR-PbB"/>
                 <outlet property="leftLabel" destination="Tby-5j-sZW" id="8S8-fi-hJe"/>
                 <outlet property="rightArrowButton" destination="p8X-tm-q4q" id="Fkj-Cz-MJp"/>
                 <outlet property="rightBackView" destination="VYP-DG-K56" id="IlY-Fy-Qq9"/>
                 <outlet property="rightDetailLabel" destination="rVS-k4-9hZ" id="S59-Yr-EhU"/>
+                <outlet property="topLine" destination="nX0-ad-tgV" id="6as-Mp-6iy"/>
             </connections>
             <point key="canvasLocation" x="417" y="493"/>
         </view>

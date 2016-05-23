@@ -7,7 +7,6 @@ inhibit_all_warnings!
 platform :ios, ‘8.0’
 use_frameworks!
 
-
 pod 'SnapKit', '~> 0.19.1'
 pod 'Moya', '~> 6.1.3'
 pod 'RxSwift', '~> 2.2.0'
@@ -21,6 +20,8 @@ pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
 pod 'ReachabilitySwift' #网络监测
 pod 'EZSwiftExtensions', '~> 1.2.3' #通用的拓展库
+pod 'HidingNavigationBar', '~> 0.3.0'
+pod 'YYImage'
 
 #Ping++支付
 pod 'Pingpp/Alipay', '~> 2.1.0'
@@ -46,4 +47,5 @@ end
 #pod 'Format', '~> 0.2' 可格式化string,color的库
 #pod 'SwiftCop' 正则表达式的验证库
 #pod Timepiece Swift NSDate扩展库.
+
 #http://cdn0.jianshu.io/p/83c069022e45/comments/802155 swift项目需要用到的开源组件

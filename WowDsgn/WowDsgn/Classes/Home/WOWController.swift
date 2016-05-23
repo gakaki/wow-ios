@@ -12,6 +12,7 @@ class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
     var dataArr = [WOWSenceModel]()
     @IBOutlet var tableView: UITableView!
+    var hidingNavBarManager: HidingNavigationBarManager?
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -22,6 +23,21 @@ class WOWController: WOWBaseViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         //FIXME:为了让动画出现 所以多reload一次咯
         tableView.reloadData()
+        hidingNavBarManager?.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        hidingNavBarManager?.viewWillDisappear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        hidingNavBarManager?.viewDidLayoutSubviews()
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,16 +54,21 @@ class WOWController: WOWBaseViewController {
     override func setUI() {
         navigationItem.title = "尖叫设计"
         tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
+        tableView.backgroundColor = DefaultBackColor
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
         configBarItem()
-        let sideVC = appdelegate.sideController.sideController as! WOWLeftSideController
-        sideVC.delegate = self
         tableView.mj_header = mj_header
+        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+//        if let tabBar = navigationController?.tabBarController?.tabBar {
+//            hidingNavBarManager?.manageBottomBar(tabBar)
+//            tabBar.barTintColor = UIColor(white: 230/255, alpha: 1)
+//        }
     }
 
-    
+   
     private func configBarItem(){
+        /*菜单暂时不需要
         makeCustomerImageNavigationItem("menu", left: true) {[weak self] () -> () in
             if let strongSelf = self{
                 let sideVC = strongSelf.appdelegate.sideController
@@ -58,13 +79,13 @@ class WOWController: WOWBaseViewController {
                 }
             }
         }
-        /*
+         */
         makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController))
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
-        }*/
+        }
     }
     
 //MARK:Actions
@@ -74,7 +95,8 @@ class WOWController: WOWBaseViewController {
     override func request() {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Sence, successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                WOWHud.dismiss()
+                let json = JSON(result)
+                DLog(json)
                 strongSelf.endRefresh()
                 let arr1 = Mapper<WOWSenceModel>().mapArray(result)
                 if let arr2 = arr1{
@@ -94,8 +116,8 @@ class WOWController: WOWBaseViewController {
 
 extension WOWController:LeftSideProtocol{
     func sideMenuSelect(tagString: String!, index: Int,dataArr:[WOWCategoryModel]) {
-        DLog(tagString)
-       let tab = WOWTool.appTab
+        /*
+       let tab = WOWTool.appTabBarController
         tab.selectedIndex = 1
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
         vc.categoryIndex    = index
@@ -104,8 +126,9 @@ extension WOWController:LeftSideProtocol{
         vc.categoryArr      = dataArr
         let nav = tab.selectedViewController as! WOWNavigationController
         nav.pushViewController(vc, animated: true)
+         */
     }
-    
+     /*
     var categoryTitles:[String]{
         get{
             let categorys = WOWRealm.objects(WOWCategoryModel)
@@ -114,6 +137,7 @@ extension WOWController:LeftSideProtocol{
             }
         }
     }
+     */
 }
 
 
@@ -143,6 +167,12 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         navigationController?.pushViewController(scene, animated: true)
     }
     
+    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+        hidingNavBarManager?.shouldScrollToTop()
+        return true
+    }
+
+    
 }
 
 extension WOWController:SenceCellDelegate{
@@ -154,5 +184,15 @@ extension WOWController:SenceCellDelegate{
     }
 }
 
-
+//extension WOWController:HidingNavigationBarManagerDelegate{
+//    func hidingNavigationBarManagerDidChangeState(manager: HidingNavigationBarManager, toState state: HidingNavigationBarState) {
+//        if state == .Closed {
+//            DLog("dismiss")
+//        }
+//    }
+//    
+//    func hidingNavigationBarManagerDidUpdateScrollViewInsets(manager: HidingNavigationBarManager) {
+//        
+//    }
+//}
 

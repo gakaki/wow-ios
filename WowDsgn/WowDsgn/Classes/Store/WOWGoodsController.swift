@@ -21,11 +21,13 @@ class WOWGoodsController: WOWBaseViewController {
     var categoryArr         = [WOWCategoryModel]()
     var dataArr             = [WOWProductModel]()
     var menuView            : BTNavigationDropdownMenu!
-//    var productTypeArr      = [WOWProductStyleModel]()
-    private var cellShowStyle:GoodsCellStyle = .Big
+    var carButton           : MIBadgeButton!
+//    private var showCatIndex :Int = 0
+    private var cellShowStyle:GoodsCellStyle = .Small
     
-    //请求参数
-    var categoryID          = "5" //5是全部
+    
+    //请求参数 //5是全部
+    var categoryID          = "5"
     private var style       = "0"
     private var sort        = "new"
     
@@ -47,12 +49,15 @@ class WOWGoodsController: WOWBaseViewController {
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
          menuView.hideMenu()
+    }
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     
@@ -62,30 +67,19 @@ class WOWGoodsController: WOWBaseViewController {
     }
     
 //MARK:Lazy
-    lazy var styleButton:UIButton = {
-        let b = UIButton(type:.System)
-        b.setImage(UIImage(named: "store_style_small")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
-        b.setImage(UIImage(named: "store_style_big")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Selected)
-        b.addTarget(self, action:#selector(WOWGoodsController.showStyleChange(_:)), forControlEvents:.TouchUpInside)
-        b.tintColor = UIColor.whiteColor()
-        b.contentHorizontalAlignment = .Right
-        return b
-    }()
-    
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
-        l.columnCount = 1
-        l.sectionInset = UIEdgeInsetsMake(0, 0, 1, 0)
-        l.minimumColumnSpacing = 0
-        l.minimumInteritemSpacing = 0
+        l.columnCount = 2
+        l.minimumColumnSpacing = 0.5
+        l.minimumInteritemSpacing = 0.5
         return l
     }()
     
     private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.width,self.view.height - 65 - 40), collectionViewLayout:self.layout)
+        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 55 - 44), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = DefaultBackColor
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -94,6 +88,12 @@ class WOWGoodsController: WOWBaseViewController {
     
     private func addObserver(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
+    }
+    
+    func updateBadge(){
+        carButton.badgeString = WOWBuyCarMananger.calCarCount()
+        
     }
     
     func loginSuccess() {
@@ -103,79 +103,100 @@ class WOWGoodsController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         view.addSubview(collectionView)
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsBigCell)), forCellWithReuseIdentifier: cellBigId)
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: cellSmallId)
         collectionView.mj_header            = self.mj_header
-        collectionView.mj_footer            = self.mj_footer
         collectionView.emptyDataSetSource   = self
         collectionView.emptyDataSetDelegate = self
 
         configNavigation()
         configMenuView()
         configNav()
+        updateBadge()
     }
+    
+    
     
     private func configNav(){
-        makeCustomerImageNavigationItem("car", left: false) {[weak self] in
-            if let strongSelf = self{
-                let buyCar = UIStoryboard.initialViewController("BuyCar")
-                strongSelf.presentViewController(buyCar, animated: true, completion: nil)
-            }
-        }
+        carButton = MIBadgeButton(type: .System)
+        carButton.setImage(UIImage(named: "store_buyCar"), forState: .Normal)
+        carButton.sizeToFit()
+        carButton.addTarget(self, action:#selector(goCar), forControlEvents:.TouchUpInside)
+        let item = UIBarButtonItem(customView: carButton)
+        carButton.badgeString = WOWBuyCarMananger.calCarCount()
+        navigationItem.rightBarButtonItem = item
     }
+
     
-    /*
-    private func configProductType(){
-        let ret = WOWRealm.objects(WOWProductStyleModel)
-        for model in ret {
-            productTypeArr.append(model)
-        }
-    }
-    */
-    private func configMenuView(){
-//        configProductType()
-//        let typeTitleArr = productTypeArr.map { (model) -> String in
-//            return model.styleName ?? ""
-//        }
-        
-        WOWDropMenuSetting.columnTitles = ["新品"/*,"所有风格"*/]
-        WOWDropMenuSetting.rowTitles =  [
-                                            ["新品","销量","价格"],
-                                            /*typeTitleArr*/
-                                        ]
-        WOWDropMenuSetting.maxShowCellNumber = 3
+    lazy var dropMenuView : WOWDropMenuView! = {
+        WOWDropMenuSetting.columnTitles = ["新品",""]
+        WOWDropMenuSetting.rowTitles = [["新品","销量","价格"],[""]]
+        WOWDropMenuSetting.maxShowCellNumber = 5
         WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2
         WOWDropMenuSetting.showDuration = 0.2
-        let menuView = WOWDropMenuView(frame:CGRectMake(0,0,self.view.width,44))
-        menuView.delegate = self
-        menuView.addSubview(styleButton)
-        styleButton.snp_makeConstraints { (make) in
-            make.top.bottom.equalTo(menuView).offset(0)
-            make.width.equalTo(50)
-            make.right.equalTo(menuView).offset(-15)
+        WOWDropMenuSetting.cellHeight = 50
+        WOWDropMenuSetting.cellSeparatorColor = SeprateColor
+        WOWDropMenuSetting.cellSelectionColor = MGRgb(250, g: 250, b: 250)
+        let v = WOWDropMenuView(frame:CGRectMake(0,0,self.view.w,44))
+        v.delegate = self
+        return v
+    }()
+    
+    private func configMenuView(){
+        view.addSubview(dropMenuView)
+        let model = self.categoryArr[self.categoryIndex]
+        let subcats = model.subCats ?? []
+        if categoryID == "5" || subcats.isEmpty{ //全部 或子分类为空
+            dropMenuView.columItemArr.last?.hidden = true
+        }else{
+            dropMenuView.columItemArr.last?.hidden = false
+            let subTitles = subcats.map({ (subModel) -> String in
+                return subModel.subCatName
+            })
+            dropMenuView.columItemArr.last?.titleButton.setTitle("全部", forState: .Normal)
+            WOWDropMenuSetting.rowTitles = [["新品","销量","价格"],subTitles]
+            dropMenuView.columnShowingDict[1] = "全部"
         }
         
-        view.addSubview(menuView)
     }
     
     private func configNavigation(){
         menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: categoryTitles[categoryIndex], items: categoryTitles,defaultSelectIndex: categoryIndex)
         menuView.cellHeight = 50
         menuView.cellBackgroundColor = UIColor.whiteColor()
-        menuView.cellSelectionColor = ThemeColor
+        menuView.cellSelectionColor = MGRgb(250, g: 250, b: 250)
         menuView.cellTextLabelColor = UIColor.blackColor()
+        menuView.cellSeparatorColor = SeprateColor
         menuView.cellTextLabelFont = Fontlevel001
         menuView.cellTextLabelAlignment = .Left
         menuView.arrowPadding = 8
         menuView.animationDuration = 0.3
         menuView.maskBackgroundColor = UIColor.blackColor()
-        menuView.maskBackgroundOpacity = 0.3
-        menuView.cellSeparatorColor = BorderColor
+        menuView.maskBackgroundOpacity = 0.6
         menuView.checkMarkImage = UIImage(named: "duihao")
         menuView.arrowImage = UIImage(named:"nav_arrow")
         menuView.didSelectItemAtIndexHandler = {[weak self](indexPath: Int) -> () in
             if let strongSelf = self{
-                strongSelf.categoryID = strongSelf.categoryArr[indexPath].categoryID
+                strongSelf.dropMenuView.hide()
+                strongSelf.categoryIndex = indexPath
+                let model = strongSelf.categoryArr[indexPath]
+                strongSelf.categoryID = model.categoryID ?? "5"
+                let subcats = model.subCats ?? []
+                if strongSelf.categoryID == "5" || subcats.isEmpty{
+                    strongSelf.dropMenuView.columItemArr.last?.hidden = true
+                }else{
+                    strongSelf.dropMenuView.columItemArr.last?.hidden = false
+                    strongSelf.dropMenuView.columItemArr.last?.titleButton.setTitle("全部", forState: .Normal)
+                    strongSelf.dropMenuView.columnShowingDict[1] = "全部"
+                }
+                
+                
+                let subTitles = subcats.map({ (subModel) -> String in
+                    return subModel.subCatName
+                })
+                WOWDropMenuSetting.rowTitles =  [
+                    ["新品","销量","价格"],
+                    subTitles
+                ]
                 strongSelf.pageIndex = 0
                 strongSelf.request()
             }
@@ -184,23 +205,24 @@ class WOWGoodsController: WOWBaseViewController {
     }
     
     
+    
+    
 
     
 //MARK:Actions
-    func showStyleChange(btn:UIButton) {
-        btn.selected = !btn.selected
-        cellShowStyle = btn.selected ? .Small : .Big
-        layout.columnCount = btn.selected ? 2 : 1
-        collectionView.reloadData()
+    func goCar() {
+        let nav = UIStoryboard.initialViewController("BuyCar")
+        presentViewController(nav, animated: true, completion: nil)
     }
-    
+
     
 //MARK:Private Network
     override func request() {
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid,keyword:""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.dismiss()
                 let totalPage = JSON(result)["total_page"].intValue
                 if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
                     strongSelf.collectionView.mj_footer = nil
@@ -215,7 +237,6 @@ class WOWGoodsController: WOWBaseViewController {
                     for item in arr{
                         let model = Mapper<WOWProductModel>().map(item)
                         if let m = model{
-//                            m.calCellHeight()
                             strongSelf.dataArr.append(m)
                         }
                     }
@@ -226,6 +247,7 @@ class WOWGoodsController: WOWBaseViewController {
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.dismiss()
             }
         }
     }
@@ -238,18 +260,19 @@ class WOWGoodsController: WOWBaseViewController {
 extension WOWGoodsController:DropMenuViewDelegate{
     func dropMenuClick(column: Int, row: Int) {
         let sorts = ["new","sale","price"]
-        pageIndex = 0
         switch (column,row) {
             case let (0,x):
                 sort = sorts[x]
                 break
-//            case let (1,x):
-//                let typeModel = productTypeArr[x]
-//                style = typeModel.styleValue
-//                break
+            case let (1,x):
+                let model = categoryArr[categoryIndex]
+                let subcats = model.subCats ?? []
+                categoryID = subcats[x].subCatID
+                break
             default:
                 break
         }
+        pageIndex = 0
         request()
     }
 }
@@ -264,37 +287,30 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        switch cellShowStyle {
-        case .Big:
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellBigId, forIndexPath: indexPath) as! WOWGoodsBigCell
-            cell.showData(dataArr[indexPath.item])
-            cell.delegate = self
-            return cell
-            
-        case .Small:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellSmallId, forIndexPath: indexPath) as! WOWGoodsSmallCell
-            cell.showData(dataArr[indexPath.item])
+            cell.showData(dataArr[indexPath.item],indexPath: indexPath)
             return cell
-        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let item = dataArr[indexPath.item]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        vc.updateBadgeAction = {[weak self] in
+            if let strongSelf = self{
+                strongSelf.updateBadge()
+            }
+        }
         vc.hideNavigationBar = true
         vc.productID = item.productID
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsSmallCell
+        vc.shareProductImage = cell.pictureImageView.image
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        switch cellShowStyle {
-        case .Big:
-            return CGSizeMake(MGScreenWidth, MGScreenWidth)
-        case .Small:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth * 1.3)
-        }
+        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 65)
     }
 }
 
@@ -319,7 +335,7 @@ extension WOWGoodsController:ProductCellDelegate{
         case WOWItemActionType.Like.rawValue:
             like(model, cell: cell)
         case WOWItemActionType.Share.rawValue:
-            share(model)
+            share(model,image: cell.bigPictureImageView.image)
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
             vc.hideNavigationBar = true
@@ -338,7 +354,7 @@ extension WOWGoodsController:ProductCellDelegate{
         let is_delete = cell.likeButton.selected ? "1":"0"
         let uid       = WOWUserManager.userID
         let thingid   = model.productID ?? ""
-        let type      = "1"//1为商品 0为场景
+        let type      = "1"//1为商品 2为场景
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result) in
             if let _ = self{
                 cell.likeButton.selected = !cell.likeButton.selected
@@ -348,8 +364,9 @@ extension WOWGoodsController:ProductCellDelegate{
         }
     }
     
-    private func share(model:WOWProductModel){
-        WOWShareManager.share(model.productName, shareText:model.productDes, url:nil)
+    private func share(model:WOWProductModel,image:UIImage?){
+        let shareUrl = "http://www.wowdsgn.com/\(model.skuID ?? "").html"
+        WOWShareManager.share((model.productName ?? "") + "-尖叫设计", shareText: model.productShortDes, url:shareUrl, shareImage:image ?? UIImage(named: "me_logo")!)
     }
     
     private func goLogin(){

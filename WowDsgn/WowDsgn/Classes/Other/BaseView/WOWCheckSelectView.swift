@@ -73,18 +73,18 @@ class WOWTopMenuTitleView: UIView {
     
     private func configItems(){
         if  WOWCheckMenuSetting.fill{ //铺满
-            WOWCheckMenuSetting.itemMargin = (self.width - titleTotalWidth - WOWCheckMenuSetting.margin * 2) / CGFloat((itemTitles.count - 1))
+            WOWCheckMenuSetting.itemMargin = (self.w - titleTotalWidth - WOWCheckMenuSetting.margin * 2) / CGFloat((itemTitles.count - 1))
         }else{ //不铺满
-             let restWidth = self.width - titleTotalWidth - WOWCheckMenuSetting.itemMargin * CGFloat((itemTitles.count - 1))
+             let restWidth = self.w - titleTotalWidth - WOWCheckMenuSetting.itemMargin * CGFloat((itemTitles.count - 1))
              WOWCheckMenuSetting.margin = restWidth / 2
         }
         
         for (index,item) in itemTitles.enumerate(){
             let btn = createItem(item)
             if index == 0 {
-                btn.frame = CGRectMake(WOWCheckMenuSetting.margin, 5,itemWidths[index],self.height-5)
+                btn.frame = CGRectMake(WOWCheckMenuSetting.margin, 5,itemWidths[index],self.h-5)
             }else{
-                btn.frame = CGRectMake(itemArr[index - 1].right + WOWCheckMenuSetting.itemMargin,5,itemWidths[index],self.height-5)
+                btn.frame = CGRectMake(itemArr[index - 1].right + WOWCheckMenuSetting.itemMargin,5,itemWidths[index],self.h - 5)
             }
             btn.tag = 1000 + index
             btn.addTarget(self, action:#selector(itemClick(_:)), forControlEvents:.TouchUpInside)
@@ -94,9 +94,9 @@ class WOWTopMenuTitleView: UIView {
         
         //下划线
         bottomLine.frame = self.itemArr[WOWCheckMenuSetting.selectedIndex].frame
-        bottomLine.y = self.height - 2
-        bottomLine.height = 2
-        bottomLine.width += 20
+        bottomLine.y = self.h - 2
+        bottomLine.h = 2
+        bottomLine.w += 20
         bottomLine.centerX = self.itemArr[WOWCheckMenuSetting.selectedIndex].centerX
         self.addSubview(bottomLine)
     }

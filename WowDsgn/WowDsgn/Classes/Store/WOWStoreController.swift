@@ -37,21 +37,21 @@ class WOWStoreController: WOWBaseViewController {
         tableView.separatorColor = SeprateColor;
         tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
         tableView.clearRestCell()
-        /*
-        cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth * 215/375), imageURLArray: nil)
-        cycleView.delegate = self
-        cycleView.placeholderImage = UIImage(named: "placeholder_banner")
-        tableView.tableHeaderView = cycleView
-         */
         tableView.mj_header = mj_header
+        configBarItem()
     }
-    /*
-    private func configHeaderView(){
-        cycleView.imageURLArray = bannerArr.map({ (model) -> String in
-            return model.imageUrl ?? ""
-        })
+    
+    private func configBarItem(){
+        makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
-    */
+    
+
+    
 //MARK:Actions
 
 
@@ -60,8 +60,6 @@ class WOWStoreController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_StoreHome, successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
-                let json = JSON(result)
-                DLog(json)
                 strongSelf.categoryArr = []
                 strongSelf.brandArr    = []
                 strongSelf.recommenArr = []
@@ -74,9 +72,14 @@ class WOWStoreController: WOWBaseViewController {
                 if let productArr = products{
                     strongSelf.recommenArr.appendContentsOf(productArr)
                 }
-                let cates = Mapper<WOWCategoryModel>().mapArray(JSON(result)["cats"].arrayObject)
-                if let cateArr = cates{
-                    strongSelf.categoryArr.appendContentsOf(cateArr)
+                let json = JSON(result)["cats"].arrayObject
+                if let cats = json{
+                    for item in cats{
+                        let model = Mapper<WOWCategoryModel>().map(item)
+                        if let m = model{
+                            strongSelf.categoryArr.append(m)
+                        }
+                    }
                 }
                 strongSelf.endRefresh()
                 strongSelf.tableView.reloadData()
@@ -133,6 +136,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID2, forIndexPath: indexPath) as! WOWMenuCell
             cell.showDataModel(categoryArr[indexPath.row],isStore:true)
+            cell.backgroundColor = UIColor.whiteColor()
             returnCell = cell
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID1, forIndexPath: indexPath) as! WOWStoreBrandCell
@@ -150,7 +154,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         if indexPath.section == 1{
             return 50
         }else{
-            return self.view.width
+            return self.view.w
         }
     }
     
@@ -164,7 +168,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
             vc.categoryIndex            =   indexPath.row
             vc.categoryTitles           =   categoryTitles
-            vc.categoryID               =   item.categoryID
+            vc.categoryID               =   item.categoryID ?? "5"
             vc.categoryArr              =   categoryArr
             navigationController?.pushViewController(vc, animated: true)
         case 2:
@@ -174,13 +178,27 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    
     var categoryTitles:[String]{
         get{
           return categoryArr.map { (model) -> String in
-                return model.categoryName
+                return model.categoryName ?? "全部"
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 1:
+            return 15
+        default:
+            return 0.01
+        }
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let v = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 15))
+        v.backgroundColor = UIColor.whiteColor()
+        return v
     }
     
     
@@ -197,15 +215,14 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         case 2:
             let sectionView =  NSBundle.mainBundle().loadNibNamed(String(WOWStoreSectionView), owner: self, options: nil).last as! WOWStoreSectionView
             sectionView.leftLabel.text = "热门品牌"
-//            sectionView.rightDetailLabel.text = "全部\(brandsCount)个品牌"
-            sectionView.rightDetailLabel.text = ""
-            sectionView.rightArrowButton.hidden = true
-//            sectionView.rightBackView.addAction({[weak self] in
-//                if let strongSelf = self{
-//                    let brandVC = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandListController)) as! WOWBrandListController
-//                    strongSelf.navigationController?.pushViewController(brandVC, animated: true)
-//                }
-//                })
+            sectionView.bottomLine.hidden = true
+            sectionView.rightDetailLabel.text = "全部\(brandsCount)个品牌"
+            sectionView.rightBackView.addAction({[weak self] in
+                if let strongSelf = self{
+                    let brandVC = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandListController)) as! WOWBrandListController
+                    strongSelf.navigationController?.pushViewController(brandVC, animated: true)
+                }
+                })
             return sectionView
         default:
             break

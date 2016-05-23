@@ -18,21 +18,11 @@ class WOWBrandHomeController: WOWBaseViewController {
         request()
     }
     
-    //MARK:Lazy
-    lazy var styleButton:UIButton = {
-        let b = UIButton(type:.System)
-        b.setImage(UIImage(named: "store_style_small")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
-        b.setImage(UIImage(named: "store_style_big")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Selected)
-        b.addTarget(self, action:#selector(WOWGoodsController.showStyleChange(_:)), forControlEvents:.TouchUpInside)
-        b.tintColor = UIColor.whiteColor()
-        return b
-    }()
-    
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.minimumColumnSpacing = 1
-        l.minimumInteritemSpacing = 1
+        l.minimumColumnSpacing = 0.5
+        l.minimumInteritemSpacing = 0.5
         l.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1)
         l.headerHeight = Float(MGScreenWidth * 2 / 3)
         return l
@@ -49,6 +39,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     private func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        WOWBorderColor(collectionView)
         collectionView.registerClass(WOWBrandTopView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
@@ -93,8 +84,13 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let model = brandModel?.products?[indexPath.row]
         cell.desLabel.text = model?.productName
         cell.priceLabel.text = model?.price?.priceFormat()
-        cell.desLabel.numberOfLines = 1;
         cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        switch indexPath.row {
+        case 0,1:
+            cell.topLine.hidden = false
+        default:
+            cell.topLine.hidden = true
+        }
         return cell
     }
     
@@ -127,7 +123,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
 
 extension WOWBrandHomeController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth * 1.3)
+        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 65)
     }
 }
 

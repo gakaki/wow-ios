@@ -53,6 +53,8 @@ class WOWOrderController: WOWBaseViewController {
         self.navigationController?.interactivePopGestureRecognizer?.enabled = true;
     }
     
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -67,7 +69,7 @@ class WOWOrderController: WOWBaseViewController {
     }
     private func configTable(){
         tableView.clearRestCell()
-        tableView.backgroundColor = GrayColorLevel5
+        tableView.backgroundColor = DefaultBackColor
         tableView.registerNib(UINib.nibName(String(WOWOrderListCell)), forCellReuseIdentifier:"WOWOrderListCell")
     }
     
@@ -75,19 +77,20 @@ class WOWOrderController: WOWBaseViewController {
         WOWCheckMenuSetting.defaultSetUp()
         WOWCheckMenuSetting.fill = true
         WOWCheckMenuSetting.selectedIndex = selectIndex
-        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.width, 40), titles: ["全部","待付款","待发货","待收货","待评价"])
+        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.w, 40), titles: ["全部","待付款","待发货","待收货","待评价"])
         menuView.delegate = self
         WOWBorderColor(menuView)
         self.view.addSubview(menuView)
     }
     
-    override func backButtonClick() {
+    override func navBack() {
         if entrance == .PaySuccess {
             navigationController?.dismissViewControllerAnimated(true, completion: nil)
         }else{
             navigationController?.popViewControllerAnimated(true)
         }
     }
+    
 
 //MARK:Network
     override func request() {

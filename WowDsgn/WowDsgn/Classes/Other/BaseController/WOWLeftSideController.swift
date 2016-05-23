@@ -12,7 +12,9 @@ import UIKit
     func sideMenuSelect(tagString:String!,index:Int,dataArr:[WOWCategoryModel])
 }
 
+/*
 class WOWLeftSideController: UIViewController {
+    
     let cellID = String(WOWMenuCell)
     var dataArr = [WOWCategoryModel]()
     weak var delegate:LeftSideProtocol?
@@ -42,13 +44,13 @@ class WOWLeftSideController: UIViewController {
     
     private func setUI(){
         tableView.clearRestCell()
-        let imageView = UIImageView(frame:CGRectMake(0,0,tableView.width,tableView.height))
+        let imageView = UIImageView(frame:CGRectMake(0,0,tableView.w,tableView.h))
         imageView.image = UIImage(named: "menuTableView")
         self.tableView.backgroundView = imageView
     }
     
     private func addObserver(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateCategory), name:WOWCategoryUpdateNotificationKey, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateCategory), name:WOWCategoryUpdateNotificationKey, object: nil)
     }
     
 //MARK:Lazy
@@ -59,8 +61,8 @@ class WOWLeftSideController: UIViewController {
     
     lazy var topSectionHeaderView:UIView = {
         var view = UIView(frame:CGRectMake(0,0,MGScreenWidth,64))
-        let menuView = WOWMenuTopView(frame:CGRectMake(0,24,self.tableView.width,40))
-        menuView.rightButton.addTarget(self, action: #selector(WOWLeftSideController.closeButtonClick), forControlEvents:.TouchUpInside)
+        let menuView = WOWMenuTopView(frame:CGRectMake(0,24,self.tableView.w,40))
+//        menuView.rightButton.addTarget(self, action: #selector(WOWLeftSideController.closeButtonClick), forControlEvents:.TouchUpInside)
         menuView.backgroundColor = UIColor.clearColor()
         view.addSubview(menuView)
         return view
@@ -77,13 +79,16 @@ class WOWLeftSideController: UIViewController {
          NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    /*
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.appdelegate.sideController.hideSide()
     }
-    
+ 
     func closeButtonClick(){
         self.appdelegate.sideController.hideSide()
     }
+    */
+ 
 }
 
 //MARK:Delegate
@@ -107,7 +112,7 @@ extension WOWLeftSideController:UITableViewDataSource,UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let model = dataArr[indexPath.row]
         self.selectedTag = model.categoryID
-        self.appdelegate.sideController.hideSide()
+//        self.appdelegate.sideController.hideSide()
         if let dele = self.delegate{
             dele.sideMenuSelect(selectedTag,index: indexPath.row,dataArr:dataArr)
         }
@@ -121,6 +126,5 @@ extension WOWLeftSideController:UITableViewDataSource,UITableViewDelegate{
         
         return topSectionHeaderView
     }
-    
-    
 }
+ */

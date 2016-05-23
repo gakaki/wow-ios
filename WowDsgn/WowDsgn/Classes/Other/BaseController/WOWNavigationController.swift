@@ -22,9 +22,9 @@ class WOWNavigationController: UINavigationController {
     
     override func pushViewController(viewController: UIViewController, animated: Bool) {
         if (self.viewControllers.count > 0) {
-            var forwardVCTitle = self.topViewController?.navigationItem.title
-            forwardVCTitle = forwardVCTitle ?? ""
-            viewController.makeBackButton(forwardVCTitle)
+//            var forwardVCTitle = self.topViewController?.navigationItem.title
+//            forwardVCTitle = forwardVCTitle ?? ""
+//            viewController.makeBackButton(forwardVCTitle)
             viewController.hidesBottomBarWhenPushed = true
         }
         super.pushViewController(viewController, animated: true)
@@ -34,6 +34,7 @@ class WOWNavigationController: UINavigationController {
 
 
 extension UIViewController{
+    /*
     func makeBackButton(title:String!){
         let button = UIButton(type:.System)
         let size = title.size(FontMediumlevel003)
@@ -60,4 +61,5 @@ extension UIViewController{
     func backButtonClick() {
         self.navigationController?.popViewControllerAnimated(true)
     }
+ */
 }

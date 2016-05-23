@@ -25,12 +25,25 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        setCustomerBack()
         if hideNavigationBar {
             //设置导航栏透明
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
 
+    
+    func setCustomerBack() {
+        if navigationController?.viewControllers.count > 1 {
+            let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.Plain, target: self, action:#selector(navBack))
+            navigationItem.leftBarButtonItem = item
+        }
+    }
+    
+    func navBack() {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,9 +116,5 @@ extension WOWBaseViewController{
     
     func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
         return GrayColorLevel5
-    }
-    
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-        return UIImage(named: "placeholder_instagram")
     }
 }

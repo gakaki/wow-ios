@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jZw-sM-bw2">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="iWL-Oz-JyM" id="1Ma-N6-H4e"/>
@@ -45,12 +45,12 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="jZw-sM-bw2" firstAttribute="leading" secondItem="WjY-BI-OED" secondAttribute="leading" id="2Cl-Hb-fQZ"/>
-                            <constraint firstItem="Qr7-pK-v6K" firstAttribute="top" secondItem="jZw-sM-bw2" secondAttribute="bottom" id="5nj-yT-bh2"/>
                             <constraint firstAttribute="trailing" secondItem="jZw-sM-bw2" secondAttribute="trailing" id="H62-Rb-qJ8"/>
-                            <constraint firstItem="jZw-sM-bw2" firstAttribute="top" secondItem="Zth-Uz-Pao" secondAttribute="bottom" id="JhL-ku-qRV"/>
+                            <constraint firstItem="jZw-sM-bw2" firstAttribute="top" secondItem="WjY-BI-OED" secondAttribute="top" id="IKs-1z-jer"/>
+                            <constraint firstAttribute="bottom" secondItem="jZw-sM-bw2" secondAttribute="bottom" id="xeN-wK-qad"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tLF-m6-I8Z"/>
@@ -60,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4TL-3M-Zrf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="261" y="1313"/>
+            <point key="canvasLocation" x="450" y="1906"/>
         </scene>
         <!--喜欢-->
         <scene sceneID="QUc-1l-x1X">
@@ -194,6 +194,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YAd-Tb-hmn">
                                 <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="EBo-vS-uWn" id="SDr-A4-FXF"/>
                                     <outlet property="delegate" destination="EBo-vS-uWn" id="lOk-yM-pic"/>
@@ -272,7 +273,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="wTN-0v-pe4" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C6X-Cp-FR5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="430" y="2368"/>
+            <point key="canvasLocation" x="422" y="2792"/>
         </scene>
         <!--搜索子视图-->
         <scene sceneID="HmX-pJ-0Az">
@@ -340,6 +341,50 @@
             <point key="canvasLocation" x="816" y="2388"/>
         </scene>
         <!--搜索-->
+        <scene sceneID="f5z-DS-P3L">
+            <objects>
+                <viewController storyboardIdentifier="WOWSearchsController" title="搜索" id="Xp8-SD-pEC" customClass="WOWSearchsController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IAL-nT-SOc"/>
+                        <viewControllerLayoutGuide type="bottom" id="mFd-nB-FQS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KdU-kS-09v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iI9-cc-IAE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZDO-eA-Fwp">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Xp8-SD-pEC" id="VxM-WJ-6ez"/>
+                                    <outlet property="delegate" destination="Xp8-SD-pEC" id="9KM-o3-lpT"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iI9-cc-IAE" firstAttribute="leading" secondItem="KdU-kS-09v" secondAttribute="leading" id="9jv-My-D1c"/>
+                            <constraint firstItem="iI9-cc-IAE" firstAttribute="top" secondItem="KdU-kS-09v" secondAttribute="top" id="Ebb-0h-pTf"/>
+                            <constraint firstItem="mFd-nB-FQS" firstAttribute="top" secondItem="iI9-cc-IAE" secondAttribute="bottom" id="dvM-c3-5jT"/>
+                            <constraint firstAttribute="trailing" secondItem="iI9-cc-IAE" secondAttribute="trailing" id="ref-5S-KDb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="iI9-cc-IAE" id="B0t-dv-eVG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kKY-Ve-Wrn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="97" y="2045"/>
+        </scene>
+        <!--搜索-->
         <scene sceneID="eSF-SW-C5k">
             <objects>
                 <viewController storyboardIdentifier="WOWSearchController" title="搜索" id="8Qs-qZ-KeY" customClass="WOWSearchController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
@@ -372,7 +417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7x-e3-Cq1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48" y="2368"/>
+            <point key="canvasLocation" x="-71" y="2752"/>
         </scene>
         <!--场景-->
         <scene sceneID="Ra8-Sw-QwD">
@@ -387,8 +432,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tmc-Xk-Wmi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="523"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="WowDsgn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="320" height="117"/>
@@ -435,18 +480,18 @@
                                     <outlet property="delegate" destination="ZjH-5o-9uo" id="hMM-T2-FMN"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
-                                <rect key="frame" x="0.0" y="20" width="43" height="38"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-PO-jB8">
+                                <rect key="frame" x="0.0" y="20" width="40" height="32"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
                                     <action selector="backButtonClick:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="bhv-hU-ebn"/>
                                 </connections>
                             </button>
                             <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uv1-Ti-RuP">
-                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ef-mh-v9m">
-                                        <rect key="frame" x="50" y="0.0" width="50" height="45"/>
+                                        <rect key="frame" x="50" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="vcf-QA-nIr"/>
                                         </constraints>
@@ -456,18 +501,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InS-kG-pkp">
-                                        <rect key="frame" x="240" y="0.0" width="80" height="45"/>
+                                        <rect key="frame" x="195" y="0.0" width="125" height="50"/>
                                         <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="rJe-fi-VeR"/>
+                                            <constraint firstAttribute="width" constant="125" id="rJe-fi-VeR"/>
                                         </constraints>
-                                        <state key="normal" image="store_buyCar"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <state key="normal" title="加入购物车">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="carClick:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="rgl-AY-E6L"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E70-rc-q8q">
-                                        <rect key="frame" x="212" y="0.0" width="20" height="45"/>
+                                        <rect key="frame" x="160" y="0.0" width="20" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -480,7 +528,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddH-D3-MVx">
-                                        <rect key="frame" x="0.0" y="7" width="50" height="31"/>
+                                        <rect key="frame" x="0.0" y="7" width="50" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="ydp-RN-vYg"/>
                                         </constraints>
@@ -497,7 +545,7 @@
                                     <constraint firstItem="9ef-mh-v9m" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="4w7-qK-j16"/>
                                     <constraint firstAttribute="bottom" secondItem="9ef-mh-v9m" secondAttribute="bottom" id="6zF-P2-cqr"/>
                                     <constraint firstItem="yv9-6E-UFd" firstAttribute="leading" secondItem="uv1-Ti-RuP" secondAttribute="leading" id="K2j-re-mD8"/>
-                                    <constraint firstItem="InS-kG-pkp" firstAttribute="leading" secondItem="E70-rc-q8q" secondAttribute="trailing" constant="8" id="LB5-bE-VZr"/>
+                                    <constraint firstItem="InS-kG-pkp" firstAttribute="leading" secondItem="E70-rc-q8q" secondAttribute="trailing" constant="15" id="LB5-bE-VZr"/>
                                     <constraint firstAttribute="bottom" secondItem="E70-rc-q8q" secondAttribute="bottom" id="T1N-qD-mvM"/>
                                     <constraint firstItem="E70-rc-q8q" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="aDe-Vo-5t7"/>
                                     <constraint firstAttribute="trailing" secondItem="InS-kG-pkp" secondAttribute="trailing" id="aNi-pU-tDf"/>
@@ -513,7 +561,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Mua-h8-4G3" firstAttribute="top" secondItem="tmc-Xk-Wmi" secondAttribute="bottom" constant="45" id="BSa-34-tlc"/>
+                            <constraint firstItem="Mua-h8-4G3" firstAttribute="top" secondItem="tmc-Xk-Wmi" secondAttribute="bottom" constant="50" id="BSa-34-tlc"/>
                             <constraint firstItem="uv1-Ti-RuP" firstAttribute="leading" secondItem="bcz-XR-lDG" secondAttribute="leading" id="Bfh-eg-gDU"/>
                             <constraint firstAttribute="trailing" secondItem="tmc-Xk-Wmi" secondAttribute="trailing" id="EaD-Oi-uDf"/>
                             <constraint firstItem="7x2-PO-jB8" firstAttribute="leading" secondItem="bcz-XR-lDG" secondAttribute="leading" id="Jls-bg-tQY"/>
@@ -538,10 +586,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="closeNav" width="43" height="38"/>
+        <image name="closeNav" width="40" height="32"/>
         <image name="icon_like" width="16" height="13"/>
         <image name="icon_like_hightlighted" width="16" height="13"/>
         <image name="icon_share" width="14" height="14"/>
-        <image name="store_buyCar" width="26" height="25"/>
     </resources>
 </document>

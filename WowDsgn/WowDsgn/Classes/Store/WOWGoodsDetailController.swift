@@ -13,13 +13,15 @@ import UIKit
 
 class WOWGoodsDetailController: WOWBaseViewController {
     var productID:String?
-    
+    var shareProductImage:UIImage?
     var cycleView:CyclePictureView!
     
-    @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var priceLabel: UILabel!
-    var productModel:WOWProductModel?
+    @IBOutlet weak var carEntranceButton: MIBadgeButton!
+    @IBOutlet weak var favoriteButton   : UIButton!
+    @IBOutlet weak var tableView        : UITableView!
+    @IBOutlet weak var priceLabel       : UILabel!
+    var productModel                    : WOWProductModel?
+    var updateBadgeAction               : WOWActionClosure?
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -27,13 +29,17 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWGoodsSureBuyNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
     }
-    
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         addObservers()
+    }
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,12 +51,17 @@ class WOWGoodsDetailController: WOWBaseViewController {
         self.edgesForExtendedLayout = .None
         configTableView()
         configHeaderView()
+        updateCarBadge()
     }
     
+    
+    
 //MARK:Private Method
+    
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateCarBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
     }
     
     func loginSuccess() {
@@ -64,7 +75,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
         }
         backView.hideBuyView()
     }
-
     
     private func resolveBuyModel(model:WOWBuyCarModel){
         //放进购物车管理类，进行选中
@@ -88,6 +98,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 })
                 WOWHud.showMsg("添加购物车成功")
             }
+            updateCarBadge()
         }
     }
     
@@ -98,11 +109,26 @@ class WOWGoodsDetailController: WOWBaseViewController {
         let param = ["uid":uid,"cart":carItems,"tag":"0"]
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
-            if let _ = self{
+            if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
                 WOWHud.showMsg("添加购物车成功")
+                let carCount = json["productcount"].int ?? 0
+                WOWUserManager.userCarCount = carCount
+                strongSelf.updateCarBadge()
             }
         }) { (errorMsg) in
             WOWHud.showMsg("添加购物车失败")
+        }
+    }
+    
+    
+    func updateCarBadge(){
+        WOWBuyCarMananger.updateBadge()
+        carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
+        carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(15, 0, 0,15)
+        if let action = updateBadgeAction {
+            action()
         }
     }
     
@@ -121,6 +147,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth), imageURLArray: nil)
+//        cycleView.detailLableBackgroundColor = SeprateColor
         cycleView.placeholderImage = UIImage(named: "placeholder_banner")
         tableView.tableHeaderView = cycleView
     }
@@ -134,8 +161,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:Actions
     
     @IBAction func carEntranceClick(sender: UIButton) {
-        let buyCar = UIStoryboard.initialViewController("BuyCar")
-        self.presentViewController(buyCar, animated: true, completion: nil)
+        let nav = UIStoryboard.initialViewController("BuyCar")
+        self.presentViewController(nav, animated: true, completion: nil)
     }
 
 //MARK:Private Network
@@ -147,7 +174,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
-                
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
@@ -193,11 +219,11 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     @IBAction func shareButtonClick(sender: UIButton) {
         let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
-        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl)
+        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
     lazy var backView:WOWBuyBackView = {
-        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.width,self.view.height))
+        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.w,self.view.h))
         return v
     }()
 
@@ -289,7 +315,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 5: //评论
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
             cell.hideHeadImage()
-            if let model = productModel?.comments![indexPath.row]{
+            if let model = productModel?.comments?[indexPath.row]{
                 cell.commentLabel.text = model.comment
                 cell.dateLabel.text    = model.created_at
                 cell.nameLabel.text    = model.user_nick
@@ -373,7 +399,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 5 {
-            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden: true, bottomLineHiden: false)
+            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden:(productModel?.comments?.count ?? 0) == 0 ? true:false, bottomLineHiden: false)
             goComment(footerView)
             return footerView
         }

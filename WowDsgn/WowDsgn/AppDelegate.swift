@@ -11,7 +11,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var sideController:WOWSideContainerController!
+    static var rootVC : UIViewController?
+//    var sideController:WOWSideContainerController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame:UIScreen.mainScreen().bounds)
@@ -30,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          拉取配置数据
          */
-        requestConfigData()
+//        requestConfigData()
         
         window?.makeKeyAndVisible()
         return true
@@ -80,6 +81,13 @@ extension AppDelegate{
     
     func requestConfigData(){
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: { (result) in
+//            let cateArr = JSON(result)["category"].arrayObject
+//            if let cats = cateArr{
+//                for item in cats{
+//                    
+//                }
+//            }
+            /*
             let cateArr = Mapper<WOWCategoryModel>().mapArray(result["category"])
             if let categorys = cateArr{
                 for cate in categorys{
@@ -87,7 +95,7 @@ extension AppDelegate{
                          WOWRealm.add(cate, update: true)
                     })
                 }
-            }
+            }*/
             
             let productTypeArr = Mapper<WOWProductStyleModel>().mapArray(result["product_style"])
             if let typeArr = productTypeArr{
@@ -102,31 +110,29 @@ extension AppDelegate{
                 }
             }
             
-            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
+//            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
         }) { (errorMsg) in
             
         }
     }
     
     func configRootVC(){
-//        let infoDictionary = NSBundle.mainBundle().infoDictionary
-//        let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
+        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
 //        // 取出之前保存的版本号
-//        let userDefaults = NSUserDefaults.standardUserDefaults()
-//        let appVersion = userDefaults.stringForKey("appVersion")
-//        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let appVersion = userDefaults.stringForKey("appVersion")
 //        // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
-//        if appVersion == nil || appVersion != currentAppVersion {
+        if appVersion == nil || appVersion != currentAppVersion {
 //            // 保存最新的版本号
-//            userDefaults.setValue(currentAppVersion, forKey: "appVersion")
-//            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
-//            self.window?.rootViewController = introVC
-//        }else{
-            let sideVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateViewControllerWithIdentifier(String(WOWLeftSideController))
+            userDefaults.setValue(currentAppVersion, forKey: "appVersion")
+            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
+            self.window?.rootViewController = introVC
+        }else{
             let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-            sideController = WOWSideContainerController(sideViewController:sideVC, mainViewController:mainVC)
-            window?.rootViewController = sideController
-//        }
+            AppDelegate.rootVC = mainVC
+            window?.rootViewController = mainVC
+        }
     }
     
     func registAppKey(){
@@ -135,8 +141,6 @@ extension AppDelegate{
         
         UMSocialData.setAppKey(WOWUMKey)
         UMSocialWechatHandler.setWXAppId(WOWWXID, appSecret: WOWWXAppSecret, url:"http://www.wowdsgn.com/")
-//        UMSocialSinaHandler.openSSOWithRedirectURL("http://www.wowdsgn.com")
-//        UMSocialSinaSSOHandler.openNewSinaSSOWithAppKey(WOWWeibokey, redirectURL:"http://www.wowdsgn.com")
         UMSocialConfig.hiddenNotInstallPlatforms([UMShareToWechatSession,UMShareToWechatTimeline])
         
         //LeanCloud
@@ -145,20 +149,20 @@ extension AppDelegate{
     
     func initialAppearance(){
         window?.backgroundColor = UIColor.whiteColor()
-        let navBar = UINavigationBar.appearance()
-        navBar.translucent = false
-        navBar.shadowImage = UIImage.imageWithColor(ThemeColor, size:CGSizeMake(MGScreenWidth, 1)) //去除导航栏下方黑线
-        //更换导航栏返回按图片
-        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
-        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
-        
         let barButtonItem = UIBarButtonItem.appearance()
         barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], forState: .Normal)
         
+        let navBar = UINavigationBar.appearance()
+        navBar.translucent = false
+        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSizeMake(MGScreenWidth, 64)), forBarPosition: .Any, barMetrics: .Default)
+        navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSizeMake(MGScreenWidth, 0.5)) //去除导航栏下方黑线
         
+//        navBar.shadowImage = UIImage()
+        //更换导航栏返回按图片
+//        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
+//        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
         
         //设置导航条背景
-        navBar.setBackgroundImage(UIImage(named: "Bar"), forBarPosition: .Any, barMetrics: .Default)
         navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()] //导航栏标题颜色
         navBar.tintColor = UIColor.blackColor() //导航栏元素颜色
         navBar.translucent = false

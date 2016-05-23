@@ -61,6 +61,7 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
             let model = brandDataArr[indexPath.item]
             let url = NSURL(string:model.brandImageUrl ?? "")
             cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
+            WOWBorderColor(cell)
         }else{
             let model = productArr[indexPath.item]
             let url = NSURL(string:model.productImage ?? "")
@@ -70,7 +71,7 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((self.width - 45)/3, (self.width - 45)/3)
+        return CGSizeMake((self.w - 45)/3, (self.w - 45)/3)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

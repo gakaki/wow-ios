@@ -9,6 +9,8 @@
 import UIKit
 
 class WOWStoreSectionView: UIView {
+    @IBOutlet weak var topLine: UIView!
+    @IBOutlet weak var bottomLine: UIView!
     @IBOutlet var leftLabel: UILabel!
     @IBOutlet var rightDetailLabel: UILabel!
     @IBOutlet var rightBackView: UIView!

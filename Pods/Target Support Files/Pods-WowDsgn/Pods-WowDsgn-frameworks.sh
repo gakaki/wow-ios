@@ -87,6 +87,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WowDsgn/Alamofire.framework"
   install_framework "Pods-WowDsgn/DZNEmptyDataSet.framework"
   install_framework "Pods-WowDsgn/EZSwiftExtensions.framework"
+  install_framework "Pods-WowDsgn/HidingNavigationBar.framework"
   install_framework "Pods-WowDsgn/Kingfisher.framework"
   install_framework "Pods-WowDsgn/MJRefresh.framework"
   install_framework "Pods-WowDsgn/Moya.framework"
@@ -98,11 +99,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WowDsgn/SVProgressHUD.framework"
   install_framework "Pods-WowDsgn/SnapKit.framework"
   install_framework "Pods-WowDsgn/SwiftyJSON.framework"
+  install_framework "Pods-WowDsgn/YYImage.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WowDsgn/Alamofire.framework"
   install_framework "Pods-WowDsgn/DZNEmptyDataSet.framework"
   install_framework "Pods-WowDsgn/EZSwiftExtensions.framework"
+  install_framework "Pods-WowDsgn/HidingNavigationBar.framework"
   install_framework "Pods-WowDsgn/Kingfisher.framework"
   install_framework "Pods-WowDsgn/MJRefresh.framework"
   install_framework "Pods-WowDsgn/Moya.framework"
@@ -114,4 +117,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WowDsgn/SVProgressHUD.framework"
   install_framework "Pods-WowDsgn/SnapKit.framework"
   install_framework "Pods-WowDsgn/SwiftyJSON.framework"
+  install_framework "Pods-WowDsgn/YYImage.framework"
 fi

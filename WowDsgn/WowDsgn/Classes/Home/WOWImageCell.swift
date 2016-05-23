@@ -12,7 +12,7 @@ class WOWImageCell: UICollectionViewCell {
     
     class var itemWidth:CGFloat{
         get{
-            return (MGScreenWidth - 3) / 2
+            return (MGScreenWidth - 1) / 2
         }
     }
     
@@ -24,13 +24,13 @@ class WOWImageCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.whiteColor()
         pictureImageView = UIImageView()
         self.addSubview(pictureImageView)
         pictureImageView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

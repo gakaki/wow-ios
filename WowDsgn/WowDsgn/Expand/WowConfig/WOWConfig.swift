@@ -27,6 +27,19 @@ let WOWLeanCloudKey     = "IGR5VQANuxRq3XsQnL9MYtyW"
 //MARK:WOW
 public let WOWSizeScale:CGFloat = 1.2
 
+/*
+ 空白的背景色 f5f5f5  245 245 245
+ 
+ 三级的title  128 128 128
+ 二级title    74 74 74
+ 一级title  0 0 0
+ bordercolor 234 234 234
+ 分割线的颜色  234 234 234
+ maskcolor  0 0 0 0.6
+ */
+
+
+
 //MARK:Color
 /// 0
 let GrayColorlevel1 = MGRgb(0, g: 0, b: 0)
@@ -37,13 +50,17 @@ let GrayColorlevel3 = MGRgb(128, g: 128, b: 128)
 /// 240
 let GrayColorlevel4 = MGRgb(240, g: 240, b: 240)
 /// 250 同时也是tableView全局的背景颜色
-let GrayColorLevel5 = MGRgb(250, g: 250, b: 250)
+let GrayColorLevel5 = MGRgb(245, g: 245, b: 245)
 
 let ThemeColor = MGRgb(255, g: 230, b:0)
 
 let BorderColor = MGRgb(200, g: 199, b: 204)
 
 let SeprateColor = MGRgb(234, g:234, b: 234)
+
+let MaskColor    = MGRgb(0, g: 0, b: 0, alpha: 0.6)
+
+let DefaultBackColor = GrayColorLevel5
 
 
 //MARK:Font
@@ -72,7 +89,7 @@ let FontMediumlevel004 = UIFont.mediumScaleFontSize(12)
 
 //MARK:Layer
 func WOWBorderColor(view:UIView){
-    view.borderColor(0.5, borderColor:BorderColor)
+    view.borderColor(0.5, borderColor:SeprateColor)
 }
 
 func WOWBorderRadius(view:UIView){

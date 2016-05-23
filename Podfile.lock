@@ -3,6 +3,7 @@ PODS:
   - AVOSCloud (3.2.9)
   - DZNEmptyDataSet (1.8)
   - EZSwiftExtensions (1.2.3)
+  - HidingNavigationBar (0.3.0)
   - Kingfisher (2.0.4)
   - MJRefresh (3.1.0)
   - Moya (6.1.3):
@@ -25,11 +26,15 @@ PODS:
   - SwiftyJSON (2.3.2)
   - UMengAnalytics-NO-IDFA (3.6.7)
   - UMengSocial (4.4)
+  - YYImage (1.0.1):
+    - YYImage/Core (= 1.0.1)
+  - YYImage/Core (1.0.1)
 
 DEPENDENCIES:
   - AVOSCloud
   - DZNEmptyDataSet
   - EZSwiftExtensions (~> 1.2.3)
+  - HidingNavigationBar (~> 0.3.0)
   - Kingfisher (~> 2.0.1)
   - MJRefresh
   - Moya (~> 6.1.3)
@@ -44,6 +49,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - UMengAnalytics-NO-IDFA
   - UMengSocial (~> 4.4)
+  - YYImage
 
 EXTERNAL SOURCES:
   PonyFrameworkOnSwift:
@@ -51,7 +57,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PonyFrameworkOnSwift:
-    :commit: f3325f653b0e84f60fd0352879fe0d4fea9a946e
+    :commit: 6aa36190edf2df6a440fe18ae0a12355b9fec5f4
     :git: https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git
 
 SPEC CHECKSUMS:
@@ -59,6 +65,7 @@ SPEC CHECKSUMS:
   AVOSCloud: b020009b1f2e35c271d4d019075458c879fc1d21
   DZNEmptyDataSet: d2351b2e8daefa40433ef292e246e21f6be31a7b
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
+  HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
   Kingfisher: 8f1ec2c067ade2c549a1a594379b69c4b1ff81ab
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   Moya: 26b290a8d675c167ea6229ba08e07dce562265a5
@@ -73,5 +80,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   UMengAnalytics-NO-IDFA: 6d02561a00579b2e37718f204eb81347df5d7b8b
   UMengSocial: aba7296602310385114d82c255539a7bef3b7ab0
+  YYImage: b41b45bc5f32bfcdf67bdfb9c09da9e9832357c0
 
 COCOAPODS: 0.39.0

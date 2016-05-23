@@ -101,16 +101,17 @@ class WOWOrderListCell: UITableViewCell {
         }
     }
     
-    private func configShowStatus(status:Int){
-        rightButton.setTitle(rightTitles[status], forState: .Normal)
-        statusLabel.text = statuTitles[status]
+    private func configShowStatus( status:Int){
+        let orderStatus = status > 5 ? 5:status
+        rightButton.setTitle(rightTitles[orderStatus], forState: .Normal)
+        statusLabel.text = statuTitles[orderStatus]
         rightViseButton.hidden = true
         rightButton.hidden = false
         rightButton.backgroundColor = ThemeColor
         rightButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
         rightViseButton.hidden = true //先暂时把查看物流干掉吧
         WOWBorderColor(rightButton)
-        switch status {
+        switch orderStatus {
         case 0: //待付款
             statusLabel.textColor = UIColor.redColor()
         case 1: //待发货

@@ -55,19 +55,16 @@ class WOWSenceController: WOWBaseViewController {
     
     
     func configTableFooterView(){
-        let space:CGFloat = 4
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake((self.view.width - space * 3)/2,(self.view.width - space)/2)
-        layout.headerReferenceSize = CGSizeMake(MGScreenWidth,50);  //设置head大小
-        layout.footerReferenceSize = CGSizeMake(MGScreenWidth,50);
-        layout.minimumInteritemSpacing = space;
-        layout.minimumLineSpacing = space;
-        layout.sectionInset = UIEdgeInsetsMake(space, space, space, space)
+        layout.itemSize = CGSizeMake((self.view.w - 1)/2,(self.view.w - 1)/2)
+        layout.headerReferenceSize = CGSizeMake(MGScreenWidth,70);  //设置head大小
+        layout.minimumInteritemSpacing = 0.5;
+        layout.minimumLineSpacing = 0.5;
         layout.scrollDirection = .Vertical
         footerCollectionView = UICollectionView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: 0), collectionViewLayout: layout)
-        footerCollectionView.backgroundColor = UIColor.whiteColor()
+        footerCollectionView.backgroundColor = DefaultBackColor
+        WOWBorderColor(footerCollectionView)
         footerCollectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
-         footerCollectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionFooter, withReuseIdentifier:"WOWCollectionFooterCell")
         footerCollectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
         footerCollectionView.delegate = self
         footerCollectionView.dataSource = self
@@ -122,6 +119,9 @@ class WOWSenceController: WOWBaseViewController {
                     let json = JSON(result)
                     DLog(json)
                     WOWHud.showMsg("添加购物车成功")
+                    let count = json["productcount"].int ?? 0
+                    WOWUserManager.userCarCount = count
+                    WOWBuyCarMananger.updateBadge()
                 }
                 }, failClosure: { (errorMsg) in
                     WOWHud.showMsg("添加购物车失败")
@@ -150,12 +150,13 @@ class WOWSenceController: WOWBaseViewController {
                 })
             }
         }
+        WOWBuyCarMananger.updateBadge()
         WOWHud.showMsg("添加购物车成功")
     }
     
     @IBAction func share(sender: UIButton) {
-        //FIXME:是分享出去公司的官网还是商品或者场景呢
-        WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url: sceneModel?.url)
+        //FIXME:暂时分享出去公司的官网
+        WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url: WOWCompanyUrl, shareImage:WOWSenceHelper.shareImage ?? UIImage(named: "me_logo")!)
     }
     
     @IBAction func favorite(sender: UIButton) {
@@ -238,9 +239,9 @@ extension WOWSenceController:UITableViewDelegate,UITableViewDataSource{
         return WOWSenceHelper.heightForFooterInSection(section)
     }
     
-//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
-//    }
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
+    }
 }
 
 
@@ -256,7 +257,7 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
         let  cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
         let  model = sceneModel?.recommendProducts?[indexPath.row]
         cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
-        WOWBorderColor(cell.pictureImageView)
+        cell.backgroundColor = SeprateColor
         return cell
     }
     

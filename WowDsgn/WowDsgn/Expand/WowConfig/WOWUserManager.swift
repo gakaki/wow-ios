@@ -17,6 +17,17 @@ struct WOWUserManager {
     private static let WOWUserDes           = "WOWUserDes"
     private static let WOWUserEmail         = "WOWUserEmail"
     private static let WOWUserMobile        = "WOWUserMobile"
+    private static let WOWUserCarCount      = "WOWUserCarCount"
+    
+    static var userCarCount:Int{
+        get{
+            return (MGDefault.objectForKey(WOWUserCarCount) as? Int) ?? 0
+        }
+        set{
+            MGDefault.setObject(newValue, forKey:WOWUserCarCount)
+            MGDefault.synchronize()
+        }
+    }
     
     static var userHeadImageUrl:String{
         get{
@@ -125,6 +136,7 @@ struct WOWUserManager {
         MGDefault.setObject(model?.user_headimage, forKey:WOWUserHeadImage)
         MGDefault.setObject(model?.user_email, forKey:WOWUserEmail)
         MGDefault.setObject(model?.user_mobile, forKey:WOWUserMobile)
+        MGDefault.setObject(model?.user_carCount, forKey:WOWUserCarCount)
         MGDefault.synchronize()
     }
     
@@ -134,9 +146,11 @@ struct WOWUserManager {
      清空用户的各个信息
      */
     static func exitLogin(){
+        MGDefault.setObject(nil, forKey: WOWUserCarCount)
         MGDefault.setObject(nil, forKey: WOWUserID)
         MGDefault.setObject(nil, forKey: WOWUserHeadImage)
         MGDefault.synchronize()
+        WOWBuyCarMananger.updateBadge()
     }
     
 }

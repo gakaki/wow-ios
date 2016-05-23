@@ -12,8 +12,14 @@ import Foundation
 //王云鹏自己的本机 10.0.23.67        127.0.0.1
 //测服地址 http://api.dev.wowdsgn.com
 
-let BaseUrl = "http://api.dev.wowdsgn.com/apiv1/"
+
 //let BaseUrl = "http://127.0.0.1:8360/apiv1/"
+
+//#if WOWDEBUG
+    let BaseUrl = "http://apidev.dev.wowdsgn.com:8400/apiv1/" //开发
+//#else
+//    let BaseUrl = "http://apidev.dev.wowdsgn.com/apiv1/" //正服
+//#endif
 
 /****************************API_URL接口**********************************/
 
@@ -41,6 +47,8 @@ let URL_CommentList             = "comment"
 //2.6收藏
 let URL_Favorite                = "like/do"
 
+let URL_BrandList               = "brand/list"
+
 let URL_BrandDetail             = "brand/detail"
 
 //3.app活动
@@ -63,6 +71,7 @@ let URL_CarCommit               = "order/commit"
 //5.个人中心
 let URL_UpdateInfo              = "usermongo/userupdate"
 let URL_FavoriteList            = "like/get"
+let URL_UserInfo                = "usermongo/info"
 
 //6.app 登录注册
 let URL_Register                = "usermongo/register"
@@ -78,3 +87,5 @@ let URL_AddressDelete           = "address/delete"
 let URL_OrderList               = "order/list"
 
 let URL_OrderStatus             = "order/setstatus" //状态客户端操作之后加上去
+
+

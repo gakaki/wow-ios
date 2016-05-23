@@ -79,6 +79,7 @@ class WOWNetManager {
                 case let .Failure(error):
                     DLog(error)
                     WOWHud.showMsg("网络错误")
+                    failClosure(errorMsg:"网络错误")
                     break
             }
         }

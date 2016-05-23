@@ -14,8 +14,10 @@ protocol SenceCellDelegate:class{
 
 class WOWlListCell: UITableViewCell {
     
+    @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet var bigImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
     private var productBtns = [UIButton]()
     weak var delegate:SenceCellDelegate?
     override func awakeFromNib() {
@@ -25,13 +27,14 @@ class WOWlListCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
     func showData(model:WOWSenceModel) {
         let url = model.image ?? ""
+        priceLabel.text = model.totalPrice?.priceFormat()
         bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
         titleLabel.text = model.name
+        descLabel.text  = model.desc
         
         productBtns.forEach { (view) in
             view.removeFromSuperview()
@@ -45,11 +48,14 @@ class WOWlListCell: UITableViewCell {
             btn.tag = Int(productModel.productID ?? "-1111") ?? -1111
             btn.addTarget(self, action:#selector(productBtnClick(_:)) , forControlEvents:.TouchUpInside)
             if let X = Float(productModel.productX ?? "0"),Y = Float(productModel.productY ?? "0") {
-                let px = CGFloat(X) * (self.width/100)
-                let py = CGFloat(Y) * (self.width/100)
-                let frame = CGRectMake(px,py, 40, 40)
+//                let px = CGFloat(X) * (self.w/100)
+//                let py = CGFloat(Y) * (self.w/100)
+//                let frame = CGRectMake(px,py, 40, 40)
+                let scale = CGFloat(1000) / MGScreenWidth
+                let frame = CGRectMake(0,0,40,40)
                 btn.frame = frame
                 self.bigImageView.addSubview(btn)
+                btn.center = CGPointMake(CGFloat(X * 10 / Float(scale)),CGFloat(Y * 10 / Float(scale)))
                 self.productBtns.append(btn)
                 UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse,.AllowUserInteraction], animations: { 
                     btn.layer.transform = CATransform3DMakeScale(1.4, 1.4, 1)

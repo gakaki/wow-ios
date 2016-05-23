@@ -18,6 +18,10 @@ struct WOWDropMenuSetting {
                             ]
     static var columnTitleFont:UIFont = UIFont.init(name:"HelveticaNeue-Medium", size:13)!
     
+    static var showBlur = false
+    
+    static var maskColor = MGRgb(0, g: 0, b: 0, alpha: 0.6)
+    
     static var cellHeight:CGFloat = 40
     
     static var maxShowCellNumber:Int = 4
@@ -35,8 +39,11 @@ struct WOWDropMenuSetting {
     
     static var showDuration:NSTimeInterval = 0.3
     
-    static var cellSelectionColor:UIColor = UIColor(colorLiteralRed: 255/255.0, green: 230/255.0, blue: 0/255.0, alpha: 1)
+    static var cellSeparatorColor:UIColor = MGRgb(224, g: 224, b: 224)
     
+    static var cellSelectionColor:UIColor = UIColor.lightGrayColor()
+    
+    static var cellBackgroundColor:UIColor = UIColor.whiteColor()
     //列数
     private static var columnNumber:Int = 0
 }
@@ -54,9 +61,9 @@ class WOWDropMenuView: UIView {
     private var bottomButton:UIButton!
     private var currentColumn:Int = 0
     private var show:Bool = false
-    private var columItemArr = [WOWDropMenuColumn]()
+    var columItemArr = [WOWDropMenuColumn]()
     //存放的是每一列正在选择的title  row = value
-    private var columnShowingDict = [Int:String]()
+    var columnShowingDict = [Int:String]()
     
     weak var delegate:DropMenuViewDelegate?
     
@@ -64,6 +71,7 @@ class WOWDropMenuView: UIView {
     
     private lazy var tableView:UITableView = {
         let v = UITableView(frame:CGRectMake(0, self.frame.size.height, self.frame.size.width, 0), style:.Plain)
+        v.separatorColor = WOWDropMenuSetting.cellSeparatorColor
         v.delegate = self
         v.dataSource = self
         return v
@@ -111,12 +119,16 @@ class WOWDropMenuView: UIView {
         
         backView = UIView(frame:CGRectMake(0,CGRectGetHeight(frame),CGRectGetWidth(frame),UIScreen.mainScreen().bounds.size.height))
         backView.hidden = true
+        backView.backgroundColor = WOWDropMenuSetting.maskColor
         backView.alpha = 0
+        
         //添加背景毛玻璃效果
-        let blurEffect = UIBlurEffect(style: .Light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = CGRectMake(0, 0, backView.frame.size.width, backView.frame.size.height)
-        backView.addSubview(blurView)
+        if WOWDropMenuSetting.showBlur {
+            let blurEffect = UIBlurEffect(style: .Light)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = CGRectMake(0, 0, backView.frame.size.width, backView.frame.size.height)
+            backView.addSubview(blurView)
+        }
         //添加点击手势
         let tap = UITapGestureRecognizer(target: self, action:#selector(backTap))
         backView.addGestureRecognizer(tap)
@@ -162,6 +174,10 @@ class WOWDropMenuView: UIView {
         self.addSubview(headerView)
     }
     
+    private func refreshData(){
+        
+    }
+    
     func  backTap(){
         hide()
     }
@@ -189,15 +205,15 @@ class WOWDropMenuView: UIView {
             tableView.hidden = false
             backView.hidden  = false
             bottomButton.hidden = false
-            tableView.frame = CGRectMake(0, self.y + self.height,self.width, 0)
-            bottomButton.frame = CGRectMake(0,self.y + self.height,self.width,21)
-            backView.frame = CGRectMake(0, self.y + self.height, self.width, MGScreenHeight)
+            tableView.frame = CGRectMake(0, self.y + self.h,self.w, 0)
+            bottomButton.frame = CGRectMake(0,self.y + self.h,self.w,21)
+            backView.frame = CGRectMake(0, self.y + self.h, self.w, MGScreenHeight)
             self.superview?.addSubview(tableView)
             self.superview?.addSubview(bottomButton)
             self.superview?.addSubview(backView)
             self.superview?.insertSubview(backView, belowSubview: tableView)
             UIView.animateWithDuration(WOWDropMenuSetting.showDuration, animations: {
-                self.tableView.height = CGFloat(WOWDropMenuSetting.maxShowCellNumber) * WOWDropMenuSetting.cellHeight
+                self.tableView.h = CGFloat(WOWDropMenuSetting.maxShowCellNumber) * WOWDropMenuSetting.cellHeight
                 self.bottomButton.y = CGFloat(WOWDropMenuSetting.maxShowCellNumber) * WOWDropMenuSetting.cellHeight + CGRectGetHeight(self.frame) - CGFloat(2)
                 self.backView.alpha = 0.8
             })
@@ -215,10 +231,10 @@ class WOWDropMenuView: UIView {
         })
     }
     
-    private func hide(){
+    func hide(){
         show = false
         UIView.animateWithDuration(WOWDropMenuSetting.showDuration, animations: {
-            self.tableView.height = 0
+            self.tableView.h = 0
             self.bottomButton.y -= CGFloat(WOWDropMenuSetting.maxShowCellNumber) * WOWDropMenuSetting.cellHeight
             self.columItemArr[self.currentColumn].arrowImageView.transform = CGAffineTransformIdentity
             self.backView.alpha = 0
@@ -281,5 +297,14 @@ extension WOWDropMenuView:UITableViewDelegate,UITableViewDataSource{
         if let del = self.delegate {
             del.dropMenuClick(currentColumn, row: indexPath.row)
         }
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.contentView.backgroundColor = WOWDropMenuSetting.cellSelectionColor
     }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.contentView.backgroundColor = WOWDropMenuSetting.cellBackgroundColor
+    }
+    
+    
 }

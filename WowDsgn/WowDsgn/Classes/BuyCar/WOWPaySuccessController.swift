@@ -30,7 +30,7 @@ class WOWPaySuccessController: WOWBaseTableViewController {
     
     
     
-    override func backButtonClick() {
+    override func navBack() {
         navigationController?.dismissViewControllerAnimated(true, completion:nil)
     }
     

@@ -19,11 +19,9 @@ class WOWBuyCarController: WOWBaseViewController {
     private var dataArr = [WOWBuyCarModel](){
         didSet{
             if dataArr.isEmpty {
-                navigationItem.title = "购物车"
                 bottomView.hidden = true
                 rightItemButton.hidden = true
             }else{
-                navigationItem.title = "购物车"
                 bottomView.hidden = false
                 rightItemButton.hidden = false
             }
@@ -97,7 +95,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
 //MARK:Lazy
     lazy var backView:WOWBuyBackView = {
-        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.width,MGScreenHeight))
+        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.w,MGScreenHeight))
         return v
     }()
 
@@ -114,77 +112,16 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSucces), name: WOWLoginSuccessNotificationKey, object:nil)
     }
     
-    func sureButton(nf:NSNotification)  {
-        let object = nf.object as? WOWBuyCarModel
-        if let model = object{
-            resolveBuyModel(model)
-        }
-        backView.hideBuyView()
+    func loginSucces(){
+        asyncCarList()
     }
     
-    private func resolveBuyModel(model:WOWBuyCarModel){
-        if WOWUserManager.loginStatus { //登录
-            asyncUpdate(model)
-        }else{
-            if editingModel?.skuID == model.skuID {
-                let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
-                if let item = exitSkus.first{
-                    try! WOWRealm.write({
-                        item.skuProductCount = model.skuProductCount
-                    })
-                }
-            }else{
-                //存在一个和更改之后相同的东西
-                let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
-                if let oldItem = exitSkus.first{ //这个是老的
-                    try! WOWRealm.write({
-                        oldItem.skuProductCount += model.skuProductCount
-                    })
-                    let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
-                    if let item = unUseSku.first {
-                        try! WOWRealm.write({
-                            WOWRealm.delete(item)
-                        })
-                    }
-                }else{//更改之后它还是唯一的
-                    let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
-                    if let item = unUseSku.first {
-                        try! WOWRealm.write({
-                            WOWRealm.delete(item)
-                            WOWRealm.add(model,update: true)
-                        })
-                    }
-                }
-            }
-            
-            var exitIndex:Int = Int(dataArr.indexOf({$0 == editingModel})!)
-            for (index,value) in dataArr.enumerate() {
-                if value.skuID == model.skuID{
-                    exitIndex = index
-                    break
-                }
-            }
-            if editingModel == dataArr[exitIndex] { //两个是同一个
-                editingModel?.skuID = model.skuID
-                editingModel?.skuName = model.skuName
-                editingModel?.skuProductCount = model.skuProductCount
-                editingModel?.skuProductPrice = model.skuProductPrice
-            }else{
-                editingModel!.skuProductCount = dataArr[exitIndex].skuProductCount + model.skuProductCount
-                editingModel?.skuID = model.skuID
-                editingModel?.skuName = model.skuName
-                editingModel?.skuProductPrice = model.skuProductPrice
-                dataArr.removeAtIndex(exitIndex)
-            }
-            tableView.reloadData()
-        }
-    }
-
-
     override func setUI() {
         super.setUI()
+        navigationItem.title = "购物车"
         totalPriceLabel.text = "¥ 0.0"
         endButton.setTitle("删除", forState:.Selected)
         endButton.setTitle("去结算", forState:.Normal)
@@ -203,7 +140,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private func configNav(){
         navigationItem.title = "购物车"
-        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
+        makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -219,6 +156,11 @@ class WOWBuyCarController: WOWBaseViewController {
         self.navigationItem.rightBarButtonItem = rightItem
     }
     
+    private func updateCarCountBadge(){
+        WOWBuyCarMananger.updateBadge()
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+    }
+    
 //MARK:Actions
     func editButtonClick() {
         isEditing = !isEditing
@@ -230,6 +172,7 @@ class WOWBuyCarController: WOWBaseViewController {
         
     }
     
+//MARK:结算
     @IBAction func endButtonClick(sender: UIButton) {
         if selectedArr.isEmpty {
             WOWHud.showMsg("您还没有选中商品哦")
@@ -273,6 +216,75 @@ class WOWBuyCarController: WOWBaseViewController {
         }
     }
     
+    
+    func sureButton(nf:NSNotification)  {
+        let object = nf.object as? WOWBuyCarModel
+        if let model = object{
+            resolveBuyModel(model)
+        }
+        backView.hideBuyView()
+    }
+    
+    private func resolveBuyModel(model:WOWBuyCarModel){
+        if WOWUserManager.loginStatus { //登录
+            asyncUpdate(model)
+        }else{
+            if editingModel?.skuID == model.skuID {
+                let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+                if let item = exitSkus.first{
+                    try! WOWRealm.write({
+                        item.skuProductCount = model.skuProductCount
+                    })
+                }
+            }else{
+                //存在一个和更改之后相同的东西
+                let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
+                if let oldItem = exitSkus.first{ //这个是老的
+                    try! WOWRealm.write({
+                        oldItem.skuProductCount += model.skuProductCount
+                    })
+                    let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
+                    if let item = unUseSku.first {
+                        try! WOWRealm.write({
+                            WOWRealm.delete(item)
+                        })
+                    }
+                }else{//更改之后它还是唯一的
+                    let unUseSku = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(editingModel!.skuID)'")
+                    if let item = unUseSku.first {
+                        try! WOWRealm.write({
+                            WOWRealm.delete(item)
+                            WOWRealm.add(model,update: true)
+                        })
+                    }
+                }
+            }
+            updateCarCountBadge()
+            var exitIndex:Int = Int(dataArr.indexOf({$0 == editingModel})!)
+            for (index,value) in dataArr.enumerate() {
+                if value.skuID == model.skuID{
+                    exitIndex = index
+                    break
+                }
+            }
+            if editingModel == dataArr[exitIndex] { //两个是同一个
+                editingModel?.skuID = model.skuID
+                editingModel?.skuName = model.skuName
+                editingModel?.skuProductCount = model.skuProductCount
+                editingModel?.skuProductPrice = model.skuProductPrice
+            }else{
+                editingModel!.skuProductCount = dataArr[exitIndex].skuProductCount + model.skuProductCount
+                editingModel?.skuID = model.skuID
+                editingModel?.skuName = model.skuName
+                editingModel?.skuProductPrice = model.skuProductPrice
+                dataArr.removeAtIndex(exitIndex)
+            }
+            tableView.reloadData()
+        }
+    }
+    
+
+    
 //MARK Network 购物车
     /**
      1.没登录的时候，同步本地的购物车数据，防止失效商品的出现
@@ -293,12 +305,12 @@ class WOWBuyCarController: WOWBaseViewController {
             let json = JSON(result)
             DLog(json)
             if let strongSelf = self{
-                let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
                 if let a = array{
                     strongSelf.dataArr.appendContentsOf(a)
                 }
                 strongSelf.tableView.reloadData()
-//                strongSelf.checkChoose()
+                //FIXME:应该把过期删除的商品返回给我，本地数据库也得删除的
             }
             }, failClosure: { (errorMsg) in
                 
@@ -334,7 +346,10 @@ class WOWBuyCarController: WOWBaseViewController {
                     WOWHud.dismiss()
                     let json = JSON(result)
                     DLog(json)
-                    let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                    let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
+                    let productCount = json["productcount"].int ?? 0
+                    WOWUserManager.userCarCount = productCount
+                    strongSelf.updateCarCountBadge()
                     if let a = array{
                         strongSelf.dataArr.appendContentsOf(a)
                         strongSelf.tableView.reloadData()
@@ -355,7 +370,10 @@ class WOWBuyCarController: WOWBaseViewController {
                     WOWHud.dismiss()
                     let json = JSON(result)
                     DLog(json)
-                    let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                    let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
+                    let productCount = json["productcount"].int ?? 0
+                    WOWUserManager.userCarCount = productCount
+                    strongSelf.updateCarCountBadge()
                     if let a = array{
                         strongSelf.dataArr.appendContentsOf(a)
                         try! WOWRealm.write({
@@ -372,7 +390,6 @@ class WOWBuyCarController: WOWBaseViewController {
     
     /**
      3.删除购物车数据
-     
      - parameter items:
      */
     private func asyncCarDelete(items:[WOWBuyCarModel]){
@@ -387,6 +404,11 @@ class WOWBuyCarController: WOWBaseViewController {
         let string = JSONStringify(param)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CarDelete(cart:string), successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+                let productCount = json["productcount"].int ?? 0
+                WOWUserManager.userCarCount = productCount
+                strongSelf.updateCarCountBadge()
                 //若删除成功，我就把它从dataArr里面干掉吧
                 strongSelf.removeObjectsInArray(items)
                 strongSelf.tableView.reloadData()
@@ -410,8 +432,13 @@ class WOWBuyCarController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.showMsg("修改成功")
+                let json = JSON(result)
+                DLog(json)
+                let productCount = json["productcount"].int ?? 0
+                WOWUserManager.userCarCount = productCount
+                strongSelf.updateCarCountBadge()
                 strongSelf.dataArr = []
-                let array = Mapper<WOWBuyCarModel>().mapArray(result)
+                let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
                 if let a = array{
                     strongSelf.dataArr.appendContentsOf(a)
                     strongSelf.tableView.reloadData()
@@ -430,6 +457,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 self.dataArr.removeAtIndex(index)
             }
         }
+        updateCarCountBadge()
     }
     
 
@@ -444,6 +472,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 })
             }
             self.removeObjectsInArray(items)
+            updateCarCountBadge()
             self.tableView.reloadData()
         }
     }
@@ -503,6 +532,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
                 try! WOWRealm.write({
                     WOWRealm.delete(model)
                 })
+                updateCarCountBadge()
                 dataArr.removeAtIndex(indexPath.row)
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 if dataArr.isEmpty {
@@ -521,7 +551,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         return "删除"
     }
     
-    override func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "buycar_none")
     }
     
@@ -530,6 +560,8 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
     }
+    
+    
     
 
 }
@@ -582,15 +614,13 @@ extension WOWBuyCarController:CarEditCellDelegate{
                     try! WOWRealm.write({
                         m.skuProductCount = model.skuProductCount
                     })
+                self.updateCarCountBadge()
                })
             }else{
 
             }
-
         }
     }
-    
-    
 }
 
 

@@ -12,14 +12,15 @@ class WOWBrandListController: WOWBaseViewController {
     var searchController: UISearchController!
     @IBOutlet weak var tableView: UITableView!
     
-    //原始数据源
+    //数据集合
+    var originalArray = [WOWBrandModel]()
+    //数据源
     var dataArray = [[WOWBrandModel]]()
     //有使用Search Controller时，显示的数据源
-    var filteredArray = [String]()
-    var showHeaderIndexs = [String]()
+    var filteredArray = [WOWBrandModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        initData()
+        request()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -30,6 +31,7 @@ class WOWBrandListController: WOWBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.translucent = true
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
 
@@ -41,86 +43,64 @@ class WOWBrandListController: WOWBaseViewController {
     var headerIndexs = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"]
     
 //MARK:Private Method
-    private func initData(){
-        /*
-            小Bug
- 
-        
-        //FIXME:测试数据
-        let names = ["Alibaba","jianjiao","阿玛尼","蒂芙尼","正式","阿玛尼","阿玛尼","阿玛尼","阿玛尼","正式","正式","正式","正式","正式","正式","阿玛尼","阿玛尼","阿玛尼","阿玛尼","阿玛尼","阿玛尼"]
-        var brands = [WOWBrandModel]()
-        for i in names {
-            let model = WOWBrandListModel()
-            model.brandCountry = "意大利"
-            model.brandName = i
-            model.brandImageUrl = nil
-            brands.append(model)
-        }
-        
-        let pinyinBrands = brands.map { (model) -> String in
-            let name = model.brandName ?? ""
-            return name.toPinYin().uppercaseString
-        }
-        
-        for item in pinyinBrands {
-            let c = String(item.characters.first!)
-            if !(c >= "A" && c <= "Z") {
-                break
-            }
-            if !showHeaderIndexs.contains(c) {
-                showHeaderIndexs.append(c)
-            }
-        }
-        showHeaderIndexs.sortInPlace { (str1, str2) -> Bool in
-            return str1 < str2
-        }
-        showHeaderIndexs.append("#")
-       
-        for item in headerIndexs {
-            let models = brands.filter({ (model) -> Bool in
-                let name = model.brandName ?? ""
-                return name.toPinYin().uppercaseString.hasPrefix(item)
-            })
-            if !models.isEmpty {
-                dataArray.append(models)
-            }
-        }
-        let otherBrand = brands.filter { (model) -> Bool in
-            let name = model.brandName ?? ""
-            let c =  name.toPinYin().uppercaseString.characters.first!
-            return !(c >= "A" && c <= "Z")
-        }
-        if !otherBrand.isEmpty {
-            dataArray.append(otherBrand)
-        }
-        tableView.reloadData()
-         */
-    }
-    
-    
     override func setUI() {
         super.setUI()
+        tableView.estimatedRowHeight = 90
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionIndexColor = GrayColorlevel1
-        self.edgesForExtendedLayout = .None
+        tableView.clearRestCell()
         navigationItem.title = "品牌"
         configureSearchController()
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
+        tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
     }
 
     private func configureSearchController() {
-        searchController = UISearchController(searchResultsController: nil)
+        let resultVC = WOWSearchResultController()
+        resultVC.delegate = self
+//        let nav = UINavigationController(rootViewController:resultVC)
+        searchController = UISearchController(searchResultsController: resultVC)
         searchController.searchResultsUpdater = self
-        //輸入搜尋關鍵字的時候，讓整個view背景變得黯淡
+        //输入搜索关键字的时候，整个view背景变暗淡
 //        searchController.dimsBackgroundDuringPresentation = true
-        searchController.searchBar.placeholder = "search"
         searchController.searchBar.setSearchFieldBackgroundImage(UIImage(named: "searchbar"), forState:.Normal)
-        searchController.searchBar.searchBarStyle = .Minimal
         searchController.searchBar.backgroundColor = UIColor.whiteColor()
+        searchController.searchBar.searchBarStyle = .Minimal
         searchController.view.backgroundColor = UIColor.whiteColor()
-//        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "请输入搜索关键字"
+        searchController.searchBar.delegate = self
+        searchController.searchBar.barTintColor = UIColor.whiteColor()
+        searchController.searchBar.setValue("取消", forKey:"_cancelButtonText")
+        if #available(iOS 9.0, *) {
+            UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.blackColor(),NSFontAttributeName:Fontlevel002], forState: .Normal)
+        } else {
+            
+        }
         //讓搜尋列(search bar)的尺寸跟tableview所顯示的尺寸一致
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
+    }
+    
+//MARK:Network
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandList, successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                let dict = JSON(result).dictionary
+                if let dataDcit = dict{
+                    for letter in strongSelf.headerIndexs{
+                        let arrary = dataDcit[letter]?.arrayObject
+                        let letterArr = Mapper<WOWBrandModel>().mapArray(arrary)
+                        if let retArr = letterArr{
+                            strongSelf.dataArray.append(retArr)
+                            strongSelf.originalArray.appendContentsOf(retArr)
+                        }
+                    }
+                    strongSelf.tableView.reloadData()
+                }
+            }
+        }) {(errorMsg) in
+                
+        }
     }
 }
 
@@ -153,29 +133,57 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        _ = dataArray[indexPath.section][indexPath.row]
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("WOWBaseStyleCell", forIndexPath: indexPath) as! WOWBaseStyleCell
+        let model = dataArray[indexPath.section][indexPath.row]
+        cell.leftImageView.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        cell.centerTitleLabel!.text = model.name
         return cell
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return showHeaderIndexs[section]
+        return headerIndexs[section]
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let model = dataArray[indexPath.section][indexPath.row]
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.brandID = model.id
+        vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
-extension WOWBrandListController:UISearchResultsUpdating{
+extension WOWBrandListController:SearchResultDelegate{
+    func searchResultSelect(model: WOWBrandModel) {
+//        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
+        searchController.active = false
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.brandID = model.id
+        vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension WOWBrandListController:UISearchResultsUpdating,UISearchBarDelegate{
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        guard let _ = searchController.searchBar.text else {
+        guard let text = searchController.searchBar.text else {
             return
         }
-        
         //根据searchString进行过滤
+        let arr = originalArray.filter { (model) -> Bool in
+            if model.name?.rangeOfString(text) != nil{
+                return true
+            }else{
+                return false
+            }
+        }
+        let resultVC = searchController.searchResultsController as! WOWSearchResultController
+//        let  resultVC = nav.topViewController as! WOWSearchResultController
+        resultVC.resultArr = arr
+        resultVC.tableView.reloadData()
     }
-
 }

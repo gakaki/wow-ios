@@ -124,6 +124,7 @@ class WOWBrandUnderView: UIView {
     var shareButton     :  UIButton!
     var locationButton  :  UIButton!
     var backButton      :  UIButton!
+    var line            :  UIView!
     weak var delegate   :  WOWActionDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -154,6 +155,7 @@ class WOWBrandUnderView: UIView {
             }
         }
         */
+        backgroundColor = UIColor.whiteColor()
         shareButton = UIButton(type: .System)
         shareButton.setImage(UIImage(named: "icon_share")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
         shareButton.titleLabel?.font = UIFont.systemFontOfSize(10)
@@ -163,8 +165,8 @@ class WOWBrandUnderView: UIView {
         addSubview(shareButton)
         shareButton.snp_makeConstraints { [weak self](make) in
             if let strongSelf = self{
-
-                 make.left.equalTo(strongSelf).offset(15)
+                make.left.equalTo(strongSelf).offset(0)
+                make.width.equalTo(50)
                 make.bottom.top.equalTo(strongSelf).offset(0)
             }
         }
@@ -196,6 +198,16 @@ class WOWBrandUnderView: UIView {
                 make.width.equalTo(50)
             }
         }
+        
+        line = UIView()
+        line.backgroundColor = SeprateColor
+        line.hidden = true
+        self.addSubview(line)
+        line.snp_makeConstraints { (make) in
+            make.left.bottom.right.equalTo(self).offset(0)
+            make.height.equalTo(0.5)
+        }
+        
     }
     
     func back() {

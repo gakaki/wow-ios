@@ -26,11 +26,11 @@ class WOWMenuCell: UITableViewCell {
     }
 
     func showDataModel(model:WOWCategoryModel,isStore:Bool){
-        var imageName = getImageName(model.categoryID)
+        var imageName = getImageName(model.categoryID ?? "5")
         imageName = isStore ? "store_" + imageName : imageName
         menuImageView.image = UIImage(named:imageName)
         menuNameLabel.text = model.categoryName
-        menuCountLabel.text = "\(model.categoryCount)件商品"
+        menuCountLabel.text = "\(model.categoryCount ?? 0)件商品"
     }
     
     private func getImageName(categoryID:String) -> String{
@@ -38,17 +38,15 @@ class WOWMenuCell: UITableViewCell {
         case "5": //全部
             return "all"
         case "17"://装点
-            return  "jiashi"
-        case "18"://家什
-            return "dengguang"
-        case "19"://灯光
             return "zhuangdian"
+        case "18"://家什
+            return "jiashi"
+        case "19"://灯光
+            return "dengguang"
         case "20"://食居
             return "shiju"
         case "21"://儿童
-            return "tongqu"
-        case "216"://活动
-            return "  "
+            return "ertong"
         default:
             return "  "
         }

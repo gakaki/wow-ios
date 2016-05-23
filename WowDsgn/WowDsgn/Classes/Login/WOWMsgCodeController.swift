@@ -48,7 +48,6 @@ class WOWMsgCodeController: WOWBaseViewController {
         default:
             break
         }
-        makeBackButton("上一步")
     }
     
     

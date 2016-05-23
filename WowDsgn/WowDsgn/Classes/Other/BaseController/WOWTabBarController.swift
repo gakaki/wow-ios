@@ -24,6 +24,7 @@ class WOWTabBarController: UITabBarController {
 
 //MARK:Private Method
     func setViewControllers(){
+        self.view.backgroundColor = DefaultBackColor
         self.delegate = self;
         let storys = ["Home","Store",/*"Activity",*/"BuyCar","User"]
         let titles = ["尖叫","商店",/*"活动",*/"购物车","我"]
@@ -37,11 +38,22 @@ class WOWTabBarController: UITabBarController {
             viewControllers.append(vc)
         }
         self.viewControllers = viewControllers
+        configBadge()
+    }
+    
+    private func configBadge(){
+        WOWBuyCarMananger.updateBadge()
+//        if WOWUserManager.loginStatus { //登录了
+//           //FIXME:赞不考虑与电脑同步
+//            WOWBuyCarMananger.updateBadge()
+//        }else{ //未登录
+//            WOWBuyCarMananger.updateBadge()
+//        }
     }
     
     /**
      网络监测
-     */
+ 
     func configNetReachable() {
         let reachability: Reachability
         do {
@@ -80,7 +92,7 @@ class WOWTabBarController: UITabBarController {
         }
         
     }
-    
+    */
 }
 
 extension WOWTabBarController:UITabBarControllerDelegate{

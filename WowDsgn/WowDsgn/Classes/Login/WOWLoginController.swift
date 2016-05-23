@@ -40,7 +40,7 @@ class WOWLoginController: WOWBaseViewController {
                 strongSelf.regist()
             }
         }
-        makeCustomerImageNavigationItem("closeNav_white", left:true) {[weak self] in
+        makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -82,6 +82,7 @@ class WOWLoginController: WOWBaseViewController {
                 DLog(result)
                 let model = Mapper<WOWUserModel>().map(result)
                 WOWUserManager.saveUserInfo(model)
+                WOWBuyCarMananger.updateBadge()
                 NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
                     strongSelf.dismissViewControllerAnimated(true, completion: nil)

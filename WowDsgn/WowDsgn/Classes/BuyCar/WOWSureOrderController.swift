@@ -33,7 +33,6 @@ class WOWSureOrderController: WOWBaseViewController {
     
 //MARK:Private Method
     override func setUI() {
-        makeBackButton("购物车")
         navigationItem.title = "确认订单"
         goodsCountLabel.text = "共\(productArr.count)件商品"
         totalPriceLabel.text = "¥ " + (totalPrice ?? "")
@@ -70,6 +69,9 @@ class WOWSureOrderController: WOWBaseViewController {
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
+                let productCount = json["productcount"].int ?? 0
+                WOWUserManager.userCarCount = productCount
+                strongSelf.updateCarCountBadge()
                 let charge = json["charge"]
                 let totalPrice = json["total"].string ?? ""
                 let orderid    = json["order_id"].string ?? ""
@@ -81,6 +83,12 @@ class WOWSureOrderController: WOWBaseViewController {
                 
         }
     }
+    
+    private func updateCarCountBadge(){
+        WOWBuyCarMananger.updateBadge()
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+    }
+    
     
     private func goPay(charge:AnyObject,totalPrice:String,orderid:String){
         dispatch_async(dispatch_get_main_queue()) { 
@@ -109,7 +117,6 @@ class WOWSureOrderController: WOWBaseViewController {
     override func request() {
         super.request()
         //请求地址数据
-        //FIXME:替换掉
         let uid =  WOWUserManager.userID
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:uid), successClosure: { [weak self](result) in
             if let strongSelf = self{
@@ -217,7 +224,6 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             }else{
                 payType = "wx"
             }
-            DLog("支付方式:\(payType)")
         default:
             break
         }
@@ -235,7 +241,6 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             headerView.textLabel?.font = Fontlevel003
         }
     }
-    
     
     //尾视图  只有地址栏需要
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

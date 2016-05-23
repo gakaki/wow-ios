@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WOWShareView" customModule="WowDsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="128"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZvT-tV-4FH">
+                    <rect key="frame" x="400" y="0.0" width="200" height="128"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="微博" translatesAutoresizingMaskIntoConstraints="NO" id="qSK-mp-Quu">
+                            <rect key="frame" x="75" y="25" width="50" height="50"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微博" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30C-Ip-qBO">
+                            <rect key="frame" x="88" y="85" width="24" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="qSK-mp-Quu" firstAttribute="top" secondItem="ZvT-tV-4FH" secondAttribute="top" constant="25" id="aZ5-mA-7Id"/>
+                        <constraint firstItem="30C-Ip-qBO" firstAttribute="top" secondItem="qSK-mp-Quu" secondAttribute="bottom" constant="10" id="k3E-OI-til"/>
+                        <constraint firstItem="qSK-mp-Quu" firstAttribute="centerX" secondItem="ZvT-tV-4FH" secondAttribute="centerX" id="vOU-bp-SzH"/>
+                        <constraint firstItem="30C-Ip-qBO" firstAttribute="centerX" secondItem="qSK-mp-Quu" secondAttribute="centerX" id="yBA-6a-Unu"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0z-4o-9j5">
+                    <rect key="frame" x="200" y="0.0" width="200" height="128"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="微信好友" translatesAutoresizingMaskIntoConstraints="NO" id="aET-HN-dEA">
+                            <rect key="frame" x="75" y="25" width="50" height="50"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信好友" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RiK-Op-Kje">
+                            <rect key="frame" x="76" y="85" width="48" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="aET-HN-dEA" firstAttribute="centerX" secondItem="A0z-4o-9j5" secondAttribute="centerX" id="57u-hW-UUp"/>
+                        <constraint firstItem="aET-HN-dEA" firstAttribute="top" secondItem="A0z-4o-9j5" secondAttribute="top" constant="25" id="Hrk-Gt-aiD"/>
+                        <constraint firstItem="RiK-Op-Kje" firstAttribute="top" secondItem="aET-HN-dEA" secondAttribute="bottom" constant="10" id="JE1-jq-uzV"/>
+                        <constraint firstItem="RiK-Op-Kje" firstAttribute="centerX" secondItem="aET-HN-dEA" secondAttribute="centerX" id="efw-WY-JFk"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToR-Qf-oFO">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="128"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="朋友圈" translatesAutoresizingMaskIntoConstraints="NO" id="m2N-8b-Luj">
+                            <rect key="frame" x="75" y="25" width="50" height="50"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="朋友圈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiX-us-A12">
+                            <rect key="frame" x="82" y="85" width="36" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="IiX-us-A12" firstAttribute="centerX" secondItem="m2N-8b-Luj" secondAttribute="centerX" id="QJW-cE-rMa"/>
+                        <constraint firstItem="IiX-us-A12" firstAttribute="top" secondItem="m2N-8b-Luj" secondAttribute="bottom" constant="10" id="llZ-Oq-Fi9"/>
+                        <constraint firstItem="m2N-8b-Luj" firstAttribute="centerX" secondItem="ToR-Qf-oFO" secondAttribute="centerX" id="wXx-dy-msj"/>
+                        <constraint firstItem="m2N-8b-Luj" firstAttribute="top" secondItem="ToR-Qf-oFO" secondAttribute="top" constant="25" id="xmp-BB-r1C"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ZvT-tV-4FH" firstAttribute="leading" secondItem="A0z-4o-9j5" secondAttribute="trailing" id="7FR-5v-XGq"/>
+                <constraint firstItem="ZvT-tV-4FH" firstAttribute="width" secondItem="ToR-Qf-oFO" secondAttribute="width" id="Fdp-Ct-msT"/>
+                <constraint firstAttribute="bottom" secondItem="ZvT-tV-4FH" secondAttribute="bottom" id="PKL-uo-Oev"/>
+                <constraint firstItem="ZvT-tV-4FH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Q25-qZ-Tzc"/>
+                <constraint firstItem="ToR-Qf-oFO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Q7A-83-oYv"/>
+                <constraint firstItem="A0z-4o-9j5" firstAttribute="width" secondItem="ToR-Qf-oFO" secondAttribute="width" id="T43-AT-i0b"/>
+                <constraint firstAttribute="trailing" secondItem="ZvT-tV-4FH" secondAttribute="trailing" id="U9t-Oz-lSE"/>
+                <constraint firstItem="A0z-4o-9j5" firstAttribute="leading" secondItem="ToR-Qf-oFO" secondAttribute="trailing" id="W4Y-af-ziU"/>
+                <constraint firstItem="A0z-4o-9j5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aDE-fn-4tu"/>
+                <constraint firstItem="ToR-Qf-oFO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nnw-Tt-43u"/>
+                <constraint firstAttribute="bottom" secondItem="A0z-4o-9j5" secondAttribute="bottom" id="oyZ-nt-NlY"/>
+                <constraint firstAttribute="bottom" secondItem="ToR-Qf-oFO" secondAttribute="bottom" id="wM1-ME-B06"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="friendView" destination="ToR-Qf-oFO" id="kku-Mq-0Va"/>
+                <outlet property="wechatView" destination="A0z-4o-9j5" id="jyX-Ce-dWb"/>
+                <outlet property="weiboView" destination="ZvT-tV-4FH" id="zzj-W3-IGz"/>
+            </connections>
+            <point key="canvasLocation" x="437" y="729"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="微信好友" width="50" height="50"/>
+        <image name="微博" width="50" height="50"/>
+        <image name="朋友圈" width="50" height="50"/>
+    </resources>
+</document>

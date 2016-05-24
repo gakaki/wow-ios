@@ -24,4 +24,5 @@
 #import <UMSocial.h>
 #import "UMSocialWechatHandler.h"
 #import "UMSocialSinaSSOHandler.h"
+#import <CoreLocation/CoreLocation.h>
 

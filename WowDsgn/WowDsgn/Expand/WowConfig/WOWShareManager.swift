@@ -19,18 +19,18 @@ struct WOWShareManager {
         //微信好友
         UMSocialData.defaultData().extConfig.wxMessageType = UMSocialWXMessageTypeWeb
         UMSocialData.defaultData().extConfig.wechatSessionData.url = shareUrl
-        UMSocialData.defaultData().extConfig.wechatSessionData.shareText = (shareText ?? "") + "-尖叫设计"
+        UMSocialData.defaultData().extConfig.wechatSessionData.shareText = shareText ?? ""
         UMSocialData.defaultData().extConfig.wechatSessionData.shareImage = shareImage
-        UMSocialData.defaultData().extConfig.wechatSessionData.title = title ?? ""
+        UMSocialData.defaultData().extConfig.wechatSessionData.title = (title ?? "")  + "-尖叫设计"
         
         //朋友圈
         UMSocialData.defaultData().extConfig.wechatTimelineData.url = shareUrl
-        UMSocialData.defaultData().extConfig.wechatTimelineData.shareText = (shareText ?? "") + "-尖叫设计"
+        UMSocialData.defaultData().extConfig.wechatTimelineData.shareText = shareText ?? ""
         UMSocialData.defaultData().extConfig.wechatTimelineData.shareImage = shareImage
-        UMSocialData.defaultData().extConfig.wechatTimelineData.title = title ?? ""
+        UMSocialData.defaultData().extConfig.wechatTimelineData.title = (title ?? "")  + "-尖叫设计"
         
         //微博
-        UMSocialData.defaultData().extConfig.sinaData.shareText = (shareText ?? "") + "-尖叫设计"
+        UMSocialData.defaultData().extConfig.sinaData.shareText = shareText ?? ""
         UMSocialData.defaultData().extConfig.sinaData.shareImage = shareImage
         shareBackView.show()
         
@@ -43,16 +43,11 @@ struct WOWShareManager {
             case .weibo:
                 sharePlatForm = UMShareToSina
             }
-            UMSocialDataService.defaultDataService().postSNSWithTypes([sharePlatForm], content: (shareText ?? "") + "尖叫设计", image: shareImage, location: nil, urlResource: UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url:shareUrl), presentedController: vc, completion: { (ret) in
+            UMSocialDataService.defaultDataService().postSNSWithTypes([sharePlatForm], content: shareText ?? "", image: shareImage, location: nil, urlResource: UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url:shareUrl), presentedController: vc, completion: { (ret) in
                 if ret.responseCode == UMSResponseCodeSuccess{
                     DLog("分享成功")
                 }
             })
-//            UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatTimeline], content: shareText, image: shareImage, location: nil, urlResource: UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: url), completion: { (ret) in
-//                if ret.responseCode == UMSResponseCodeSuccess{
-//                    DLog("分享成功")
-//                }
-//            })
         }
         
 //        let vc = UIApplication.currentViewController()

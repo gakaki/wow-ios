@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        UMSocialSnsService.applicationDidBecomeActive()
     }
     
     func applicationWillTerminate(application: UIApplication) {
@@ -73,6 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Pingpp.handleOpenURL(url, withCompletion: nil)
         return true
     }
+    
+    
     
 }
 
@@ -109,7 +111,6 @@ extension AppDelegate{
                     })
                 }
             }
-            
 //            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
         }) { (errorMsg) in
             
@@ -141,9 +142,8 @@ extension AppDelegate{
         MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
         
-        UMSocialData.setAppKey(WOWUMKey)
+        UMSocialData.setAppKey("53290df956240b6b4a0084b3")
         UMSocialWechatHandler.setWXAppId(WOWWXID, appSecret: WOWWXAppSecret, url:"http://www.wowdsgn.com/")
-        UMSocialConfig.hiddenNotInstallPlatforms([UMShareToWechatSession,UMShareToWechatTimeline])
         
         //LeanCloud
         AVOSCloud.setApplicationId(WOWLeanCloudID, clientKey: WOWLeanCloudKey)

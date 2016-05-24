@@ -9,6 +9,10 @@
 import Foundation
 
 struct WOWShareManager {
+    static let vc = UIApplication.currentViewController()
+
+    static var shareBackView = WOWShareBackView(frame:CGRectMake(0, 0, vc?.view.w ?? MGScreenWidth, vc?.view.h ?? MGScreenHeight))
+    
     static func share(title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
         let shareUrl = url ?? "http://www.wowdsgn.com/"
         //微信好友
@@ -27,8 +31,11 @@ struct WOWShareManager {
         //微博
         UMSocialData.defaultData().extConfig.sinaData.shareText = shareText ?? ""
         UMSocialData.defaultData().extConfig.sinaData.shareImage = shareImage
-        
-        let vc = UIApplication.currentViewController()
-        UMSocialSnsService.presentSnsIconSheetView(vc, appKey:WOWUMKey, shareText:shareText ?? "", shareImage:shareImage, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: nil)
+        shareBackView.show()
+        shareBackView.shareActionBack = {(shareType:WOWShareType)in
+            DLog(shareType.rawValue)
+        }
+//        let vc = UIApplication.currentViewController()
+//        UMSocialSnsService.presentSnsIconSheetView(vc, appKey:WOWUMKey, shareText:shareText ?? "", shareImage:shareImage, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: nil)
     }
 }

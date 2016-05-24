@@ -80,7 +80,7 @@ class WOWBuyBackView: UIView {
     
     func hideBuyView(){
         UIView.animateWithDuration(0.3, animations: {
-            self.backClear.y = MGScreenHeight + 10
+            self.backClear.y = self.h + 10
             self.alpha = 0
         }) { (ret) in
             self.removeFromSuperview()

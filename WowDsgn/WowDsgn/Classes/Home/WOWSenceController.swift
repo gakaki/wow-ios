@@ -154,7 +154,13 @@ class WOWSenceController: WOWBaseViewController {
         WOWHud.showMsg("添加购物车成功")
     }
     
+//    lazy var shareView:WOWShareBackView = {
+//        let v = WOWShareBackView(frame:CGRectMake(0, 0, self.view.w, self.view.h))
+//        return v
+//    }()
+    
     @IBAction func share(sender: UIButton) {
+//        shareView.show()
         //FIXME:暂时分享出去公司的官网
         WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url: WOWCompanyUrl, shareImage:WOWSenceHelper.shareImage ?? UIImage(named: "me_logo")!)
     }

@@ -7,50 +7,75 @@
 //
 
 import Foundation
-
+import MonkeyKing
 struct WOWShareManager {
-    static var sharePlatForm = UMShareToQQ
+    
     static let vc = UIApplication.currentViewController()
-
+    
     static var shareBackView = WOWShareBackView(frame:CGRectMake(0, 0, vc?.view.w ?? MGScreenWidth, vc?.view.h ?? MGScreenHeight))
     
+    static var accessToken: String?
+    
+    static let weiboAccount = MonkeyKing.Account.Weibo(appID: WOWID.Weibo.appID, appKey: WOWID.Weibo.appKey, redirectURL: WOWID.Weibo.redirectURL)
+    
+    static let wxAccount    = MonkeyKing.Account.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey)
+    
+    
     static func share(title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
-        let shareUrl = url ?? "http://www.wowdsgn.com/"
-        //微信好友
-        UMSocialData.defaultData().extConfig.wxMessageType = UMSocialWXMessageTypeWeb
-        UMSocialData.defaultData().extConfig.wechatSessionData.url = shareUrl
-        UMSocialData.defaultData().extConfig.wechatSessionData.shareText = shareText ?? ""
-        UMSocialData.defaultData().extConfig.wechatSessionData.shareImage = shareImage
-        UMSocialData.defaultData().extConfig.wechatSessionData.title = (title ?? "")  + "-尖叫设计"
-        
-        //朋友圈
-        UMSocialData.defaultData().extConfig.wechatTimelineData.url = shareUrl
-        UMSocialData.defaultData().extConfig.wechatTimelineData.shareText = shareText ?? ""
-        UMSocialData.defaultData().extConfig.wechatTimelineData.shareImage = shareImage
-        UMSocialData.defaultData().extConfig.wechatTimelineData.title = (title ?? "")  + "-尖叫设计"
-        
-        //微博
-        UMSocialData.defaultData().extConfig.sinaData.shareText = shareText ?? ""
-        UMSocialData.defaultData().extConfig.sinaData.shareImage = shareImage
+        let postTitle = (title ?? "")  + "-尖叫设计"
+        let postDes   = shareText ?? ""
+        let postUrl   = url ?? "http://www.wowdsgn.com/"
+        let postImage = shareImage
+        let info =  MonkeyKing.Info(
+            title: postTitle,
+            description: postDes,
+            thumbnail: postImage,
+            media: .URL(NSURL(string:postUrl)!)
+        )
         shareBackView.show()
-        
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
+            var message : MonkeyKing.Message?
+            switch shareType {
+            case .friends,.wechat:
+                if !wxAccount.isAppInstalled {
+                    WOWHud.showMsg("暂未安装微信客户端")
+                    return
+                }
+            default:
+                break
+            }
+            
             switch shareType {
             case .friends:
-                sharePlatForm = UMShareToWechatTimeline
+                message = MonkeyKing.Message.WeChat(.Timeline(info:info))
             case .wechat:
-                sharePlatForm = UMShareToWechatSession
+                message = MonkeyKing.Message.WeChat(.Session(info:info))
             case .weibo:
-                sharePlatForm = UMShareToSina
-            }
-            UMSocialDataService.defaultDataService().postSNSWithTypes([sharePlatForm], content: shareText ?? "", image: shareImage, location: nil, urlResource: UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url:shareUrl), presentedController: vc, completion: { (ret) in
-                if ret.responseCode == UMSResponseCodeSuccess{
-                    DLog("分享成功")
+                if !weiboAccount.isAppInstalled {
+                    MonkeyKing.OAuth(.Weibo, completionHandler: {(dictionary, response, error) -> Void in
+                        if let json = dictionary, accessToken = json["access_token"] as? String {
+                            self.accessToken = accessToken
+                        }
+                        print("dictionary \(dictionary) error \(error)")
+                    })
                 }
-            })
+                
+                let message = MonkeyKing.Message.Weibo(.Default(info: (
+                    title: postTitle,
+                    description: postDes,
+                    thumbnail: UIImage(named: "me_logo"),
+                    media: .URL(NSURL(string:postUrl)!)
+                    ), accessToken: accessToken))
+                MonkeyKing.shareMessage(message) { result in
+                    print("result: \(result)")
+                }
+                return
+            }
+            if  let message = message {
+                MonkeyKing.shareMessage(message) { result in
+                    print("result: \(result)")
+                }
+            }
         }
-        
-//        let vc = UIApplication.currentViewController()
-//        UMSocialSnsService.presentSnsIconSheetView(vc, appKey:WOWUMKey, shareText:shareText ?? "", shareImage:shareImage, shareToSnsNames: [UMShareToWechatTimeline,UMShareToWechatSession,UMShareToSina], delegate: nil)
     }
 }

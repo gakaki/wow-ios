@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import MonkeyKing
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     static var rootVC : UIViewController?
-//    var sideController:WOWSideContainerController!
+    //    var sideController:WOWSideContainerController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame:UIScreen.mainScreen().bounds)
@@ -31,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          拉取配置数据
          */
-//        requestConfigData()
+        //        requestConfigData()
         
         window?.makeKeyAndVisible()
         return true
@@ -54,17 +56,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
-        UMSocialSnsService.applicationDidBecomeActive()
-    }
     
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        UMSocialSnsService.handleOpenURL(url)
-        Pingpp.handleOpenURL(url, withCompletion: nil)
+        //        UMSocialSnsService.handleOpenURL(url)
+        if Pingpp.handleOpenURL(url, withCompletion: nil) {
+            return true
+        }
+        if MonkeyKing.handleOpenURL(url) {
+            return true
+        }
         return true
     }
     
@@ -83,21 +87,21 @@ extension AppDelegate{
     
     func requestConfigData(){
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: { (result) in
-//            let cateArr = JSON(result)["category"].arrayObject
-//            if let cats = cateArr{
-//                for item in cats{
-//                    
-//                }
-//            }
+            //            let cateArr = JSON(result)["category"].arrayObject
+            //            if let cats = cateArr{
+            //                for item in cats{
+            //
+            //                }
+            //            }
             /*
-            let cateArr = Mapper<WOWCategoryModel>().mapArray(result["category"])
-            if let categorys = cateArr{
-                for cate in categorys{
-                    try! WOWRealm.write({ 
-                         WOWRealm.add(cate, update: true)
-                    })
-                }
-            }*/
+             let cateArr = Mapper<WOWCategoryModel>().mapArray(result["category"])
+             if let categorys = cateArr{
+             for cate in categorys{
+             try! WOWRealm.write({
+             WOWRealm.add(cate, update: true)
+             })
+             }
+             }*/
             
             let productTypeArr = Mapper<WOWProductStyleModel>().mapArray(result["product_style"])
             if let typeArr = productTypeArr{
@@ -106,12 +110,12 @@ extension AppDelegate{
                     WOWRealm.delete(ret)
                 })
                 for type in typeArr{
-                    try! WOWRealm.write({ 
+                    try! WOWRealm.write({
                         WOWRealm.add(type)
                     })
                 }
             }
-//            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
+            //            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
         }) { (errorMsg) in
             
         }
@@ -137,16 +141,16 @@ extension AppDelegate{
     }
     
     func registAppKey(){
-        UMAnalyticsConfig.sharedInstance().appKey = WOWUMKey
+        UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
         UMAnalyticsConfig.sharedInstance().channelId = ""
         MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
         
-        UMSocialData.setAppKey("53290df956240b6b4a0084b3")
-        UMSocialWechatHandler.setWXAppId(WOWWXID, appSecret: WOWWXAppSecret, url:"http://www.wowdsgn.com/")
+        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))
+        MonkeyKing.registerAccount(.Weibo(appID: WOWID.Weibo.appID, appKey: WOWID.Weibo.appKey, redirectURL: WOWID.Weibo.redirectURL))
         
         //LeanCloud
-        AVOSCloud.setApplicationId(WOWLeanCloudID, clientKey: WOWLeanCloudKey)
+        AVOSCloud.setApplicationId(WOWID.LeanCloud.appID, clientKey:WOWID.LeanCloud.appKey)
     }
     
     func initialAppearance(){
@@ -159,10 +163,10 @@ extension AppDelegate{
         navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSizeMake(MGScreenWidth, 64)), forBarPosition: .Any, barMetrics: .Default)
         navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSizeMake(MGScreenWidth, 0.5)) //去除导航栏下方黑线
         
-//        navBar.shadowImage = UIImage()
+        //        navBar.shadowImage = UIImage()
         //更换导航栏返回按图片
-//        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
-//        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
+        //        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
+        //        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
         
         //设置导航条背景
         navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()] //导航栏标题颜色

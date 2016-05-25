@@ -60,7 +60,7 @@ struct WOWShareManager {
                     })
                 }
                 
-                let message = MonkeyKing.Message.Weibo(.Default(info: (
+                let message = MonkeyKing.Message.Weibo(.Default(info:(
                     title: postTitle,
                     description: postDes,
                     thumbnail: UIImage(named: "me_logo"),

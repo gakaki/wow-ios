@@ -19,7 +19,6 @@ PODS:
   - Pingpp/Wx (2.1.4):
     - Pingpp/Core
   - PonyFrameworkOnSwift (0.0.2)
-  - ReachabilitySwift (2.3.3)
   - Result (1.0.2)
   - RxSwift (2.2.0)
   - SnapKit (0.19.1)
@@ -44,7 +43,6 @@ DEPENDENCIES:
   - Pingpp/Alipay (~> 2.1.0)
   - Pingpp/Wx (~> 2.1.0)
   - PonyFrameworkOnSwift (from `https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git`)
-  - ReachabilitySwift
   - RxSwift (~> 2.2.0)
   - SnapKit (~> 0.19.1)
   - SVProgressHUD (~> 2.0.2)
@@ -75,7 +73,6 @@ SPEC CHECKSUMS:
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
   Pingpp: 08415163eb1791bc07d7d939f1648d2e36a30eda
   PonyFrameworkOnSwift: 9f684a416c7973862c5eb497377773607d0067cd
-  ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d

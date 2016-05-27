@@ -14,14 +14,12 @@ pod 'SwiftyJSON'
 pod 'ObjectMapper'
 pod 'Kingfisher','~>2.0.1'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
-#pod 'UMengSocial', '~> 4.4'
 pod 'UMengSocialCOM'
 pod 'MonkeyKing', '~> 0.9.2'
 
 pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
-pod 'ReachabilitySwift' #网络监测
 pod 'EZSwiftExtensions', '~> 1.2.3' #通用的拓展库
 pod 'HidingNavigationBar', '~> 0.3.0'
 pod 'YYImage'
@@ -50,5 +48,7 @@ end
 #pod 'Format', '~> 0.2' 可格式化string,color的库
 #pod 'SwiftCop' 正则表达式的验证库
 #pod Timepiece Swift NSDate扩展库.
+#pod 'ReachabilitySwift' #网络监测
 
+#https://github.com/onmyway133/fantastic-ios-animation/blob/master/Animation/popup.md 动画集合，备用，可参考代码
 #http://cdn0.jianshu.io/p/83c069022e45/comments/802155 swift项目需要用到的开源组件

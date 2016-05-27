@@ -20,6 +20,7 @@ PODS:
     - Pingpp/Core
   - PonyFrameworkOnSwift (0.0.2)
   - Result (1.0.2)
+  - RongCloudIMKit (2.6.0)
   - RxSwift (2.2.0)
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.3)
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - Pingpp/Alipay (~> 2.1.0)
   - Pingpp/Wx (~> 2.1.0)
   - PonyFrameworkOnSwift (from `https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git`)
+  - RongCloudIMKit (= 2.6.0)
   - RxSwift (~> 2.2.0)
   - SnapKit (~> 0.19.1)
   - SVProgressHUD (~> 2.0.2)
@@ -74,6 +76,7 @@ SPEC CHECKSUMS:
   Pingpp: 08415163eb1791bc07d7d939f1648d2e36a30eda
   PonyFrameworkOnSwift: 9f684a416c7973862c5eb497377773607d0067cd
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
+  RongCloudIMKit: bbfcb34596b25666fb1be470644162142368bcdb
   RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4

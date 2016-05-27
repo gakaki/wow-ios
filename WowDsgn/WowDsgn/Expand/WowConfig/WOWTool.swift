@@ -9,6 +9,14 @@
 import Foundation
 
 struct WOWCalPrice {
+    /**
+     计算价钱
+     
+     - parameter count:
+     - parameter perPrice:
+     
+     - returns:
+     */
     static func calGoodsDetailPrice(count:Int,perPrice:Float!) ->String{
         let count = NSDecimalNumber(long: count)
         let price = NSDecimalNumber(float: perPrice)
@@ -20,7 +28,6 @@ struct WOWCalPrice {
         result = result ?? ""
         return result!
     }
-    
     
     static func calTotalPrice(prices:[String],counts:[Int]) ->String{
         if prices.isEmpty {
@@ -41,8 +48,13 @@ struct WOWCalPrice {
     }
 }
 
-
-
+/**
+ 转换Json字符串
+ - parameter value:
+ - parameter prettyPrinted:
+ 
+ - returns:
+ */
 func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
     let options = prettyPrinted ? NSJSONWritingOptions.PrettyPrinted : NSJSONWritingOptions(rawValue: 0)
     if NSJSONSerialization.isValidJSONObject(value) {
@@ -56,12 +68,10 @@ func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
             print("error")
             
         }
-        
     }
     return ""
     
 }
-
 
 
 
@@ -74,6 +84,16 @@ struct WOWTool {
             return AppDelegate.rootVC as! UITabBarController
         }
     }
+    
+    
+    static func callPhone(){
+        if let url = NSURL(string: "tel://\(WOWCompanyTel)") {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
+    
+    
 }
 
 

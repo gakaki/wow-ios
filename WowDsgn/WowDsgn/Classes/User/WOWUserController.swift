@@ -9,8 +9,14 @@
 import UIKit
 
 class WOWUserController: WOWBaseTableViewController {
-    var rightItem       :   WOWNumberMessageView!
     var headerView      :   WOWUserTopView!
+    
+    @IBOutlet weak var allOrderView: UIView!
+    @IBOutlet weak var noPayView: UIView!
+    @IBOutlet weak var noSendView: UIView!
+    @IBOutlet weak var noReceiveView: UIView!
+    @IBOutlet weak var noCommentView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
@@ -24,42 +30,56 @@ class WOWUserController: WOWBaseTableViewController {
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    
-    override func setUI() {
-        super.setUI()
-        /**
-         暂时社区干掉
-         */
-//        configRightNav()
-        configHeaderView()
-        addObserver()
-    }
 
 //MARK:Private Method
+    override func setUI() {
+        super.setUI()
+        configHeaderView()
+        addObserver()
+        configClickAction()
+    }
     
-    private func configRightNav(){
-        rightItem = WOWNumberMessageView(frame:CGRectMake(0,0,50,30))
-        rightItem.sizeToFit()
-        rightItem.addAction {[weak self] in
+    private func configClickAction(){
+        allOrderView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("User", identifier:String(WOWMessageController)) as! WOWMessageController
-                strongSelf.navigationController?.pushViewController(vc, animated:true)
+                strongSelf.goOrder(0)
             }
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightItem)
+        noPayView.addTapGesture {[weak self](tap) in
+            if let strongSelf = self{
+                strongSelf.goOrder(1)
+            }
+        }
+        noSendView.addTapGesture {[weak self](tap) in
+            if let strongSelf = self{
+                strongSelf.goOrder(2)
+            }
+        }
+        noReceiveView.addTapGesture {[weak self](tap) in
+            if let strongSelf = self{
+                strongSelf.goOrder(3)
+            }
+        }
+        noCommentView.addTapGesture {[weak self](tap) in
+            if let strongSelf = self{
+                strongSelf.goOrder(4)
+            }
+        }
+    }
+    
+    func goOrder(type:Int) {
+        guard WOWUserManager.loginStatus else{
+            goLogin()
+            return
+        }
+        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
+        vc.selectIndex = type
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func configHeaderView(){
-        /*
-        func gotoSociety(type:SocietyType){
-            let soc = UIStoryboard.initialViewController("User", identifier:"WOWMeSocietyController") as! WOWMeSocietyController
-            soc.society = type
-            navigationController?.pushViewController(soc, animated: true)
-        }
-        */
- 
         headerView       = WOWUserTopView()     
-        headerView.frame = CGRectMake(0, 0, MGScreenWidth, 76)
+        headerView.frame = CGRectMake(0, 0, MGScreenWidth, 75)
         headerView.configShow(WOWUserManager.loginStatus)
         headerView.topContainerView.addAction {[weak self] in
             if let strongSelf = self{
@@ -70,24 +90,9 @@ class WOWUserController: WOWBaseTableViewController {
                 }
             }
         }
-        /*
-        header.focusBackView.addAction {[weak self] in
-            if let _ = self{
-                gotoSociety(SocietyType.Focus)
-            }
-        }
-        
-        header.fansBackView.addAction {[weak self] in
-            if let _ = self{
-                gotoSociety(SocietyType.Fans)
-            }
-        }
-        */
         configUserInfo()
         self.tableView.tableHeaderView = nil
         self.tableView.tableHeaderView = headerView
-        
-        
     }
     
     private func goUserInfo(){
@@ -144,72 +149,27 @@ extension WOWUserController{
             goLogin()
             return
         }
-        switch indexPath.section {
-        case 0://订单
-            let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
-            vc.selectIndex = indexPath.row
-            navigationController?.pushViewController(vc, animated: true)
-        case 2://设置
+        switch (indexPath.section,indexPath.row){
+        case let (1,row):
+            switch row {
+            case 2://打电话
+                WOWTool.callPhone()
+            default:
+                break
+            }
+        case (2,_)://设置
             let vc = UIStoryboard.initialViewController("User", identifier:String(WOWSettingController)) as! WOWSettingController
-            navigationController?.pushViewController(vc, animated: true)
-        case 1://喜欢的
-            let vc = UIStoryboard.initialViewController("User", identifier:"WOWILikeController") as! WOWILikeController
-            vc.selectIndex = indexPath.row
             navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
-        
-     
-    }
-    
-    var types:[String]{
-        get{
-            return ["我的订单","我喜欢的"]
-        }
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0,1:
-            return 40
-        default:
-            return 20
-        }
+        return 15
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
-    }
-    
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-        case 0,1:
-            let v = SectionView(frame:CGRectMake(0,0,MGScreenWidth,40))
-            v.label.text = types[section]
-            return v
-        default:
-            return nil
-        }
-    }
-}
-
-
-class SectionView: UIView {
-    var label = UILabel()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        label.textColor = GrayColorlevel3
-        label.font = Fontlevel003
-        self.addSubview(label)
-        label.snp_makeConstraints { (make) in
-            make.left.equalTo(self).offset(15)
-            make.centerY.equalTo(self)
-        }
-    }
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

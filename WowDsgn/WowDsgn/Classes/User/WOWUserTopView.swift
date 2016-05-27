@@ -58,15 +58,14 @@ class WOWUserTopView: UIView {
         }
         
         nameLabel = UILabel()
-        //FIXME:
-        nameLabel.text = "尖叫君"
-        nameLabel.font = Fontlevel001
+        nameLabel.text = ""
+        nameLabel.font = Fontlevel000
         nameLabel.textColor = GrayColorlevel1
         topContainerView.addSubview(nameLabel)
         nameLabel.snp_makeConstraints { (make) in
             if let _ = weakSelf{
                 make.centerY.equalTo(headImageView.snp_centerY).offset(-8)
-                make.left.equalTo(headImageView.snp_right).offset(8)
+                make.left.equalTo(headImageView.snp_right).offset(15)
                 make.right.equalTo(arrowImageView.snp_left).offset(-8)
             }
         }
@@ -79,7 +78,7 @@ class WOWUserTopView: UIView {
         desLabel.snp_makeConstraints { (make) in
             if let _ = weakSelf{
                 make.centerY.equalTo(headImageView.snp_centerY).offset(12)
-                make.left.equalTo(headImageView.snp_right).offset(8)
+                make.left.equalTo(headImageView.snp_right).offset(15)
                 make.right.equalTo(nameLabel.snp_right)
             }
         }

@@ -10,9 +10,10 @@ import Foundation
 
 let WOWDSGNSCHEME       = "com.wow.dsgn"
 
+let WOWCompanyTel        = "4008-208-237"
+
 //MARK:第三方Key
 struct WOWID {
-    
     struct Weibo {
         static let appID = "1279179552"
         static let appKey = "d0624f8a210a0e862ea581d2c6b6e507"
@@ -31,6 +32,11 @@ struct WOWID {
     struct LeanCloud {
         static let appID = "aSqukoQ9xLsQSMh0wHqbENH2-gzGzoHsz"
         static let appKey = "IGR5VQANuxRq3XsQnL9MYtyW"
+    }
+    
+    struct RongCloud {
+        static let appID = "k51hidwq1u67b"
+        static let testToken = "iKHh7k4J8eoTvZfTCwSNWsSBbbBNFKcjb+ORbC53wq1VMTGO2QDTJNTFI3Q7IHRJ+1EE9lHpuTQ="
     }
 }
 
@@ -76,6 +82,8 @@ let DefaultBackColor = GrayColorLevel5
 
 
 //MARK:Font
+ /// 
+let Fontlevel000 = UIFont.systemScaleFontSize(17)
  /// 15号system字体
 let Fontlevel001 = UIFont.systemScaleFontSize(15)
  /// 14号system字体

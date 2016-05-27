@@ -313,6 +313,14 @@ SOFTWARE.</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright 2014 Rong Cloud</string>
+			<key>Title</key>
+			<string>RongCloudIMKit</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>**The MIT License**
 **Copyright &#169; 2015 Krunoslav Zaher**
 **All rights reserved.**

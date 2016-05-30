@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class WOWUserController: WOWBaseTableViewController {
     var headerView      :   WOWUserTopView!
@@ -141,7 +142,7 @@ class WOWUserController: WOWBaseTableViewController {
 
 
 //MARK:Delegate
-extension WOWUserController{
+extension WOWUserController:SKStoreProductViewControllerDelegate{
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -152,8 +153,13 @@ extension WOWUserController{
         switch (indexPath.section,indexPath.row){
         case let (1,row):
             switch row {
+            case 1://邀请好友
+                let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
+                navigationController?.pushViewController(vc, animated: true)
             case 2://打电话
                 WOWTool.callPhone()
+            case 4://支持尖叫设计
+                evaluateApp()
             default:
                 break
             }
@@ -172,4 +178,23 @@ extension WOWUserController{
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
+    
+    private func evaluateApp(){
+        let vc = SKStoreProductViewController()
+        vc.delegate = self
+        vc.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier:"1110300308"], completionBlock: nil)
+        self.presentViewController(vc, animated: true, completion: nil)
+//        vc.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier:"1110300308"]) { (ret, error) in
+//            if let e = error{
+//                DLog(e)
+//            }else{
+//               
+//            }
+//        }
+    }
+    
+    func productViewControllerDidFinish(viewController: SKStoreProductViewController) {
+        viewController.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }

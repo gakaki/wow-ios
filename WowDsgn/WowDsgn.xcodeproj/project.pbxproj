@@ -77,6 +77,8 @@
 		295659071CBFC7F10029B897 /* WOWAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295659051CBFC7F10029B897 /* WOWAddressCell.swift */; };
 		295659081CBFC7F10029B897 /* WOWAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 295659061CBFC7F10029B897 /* WOWAddressCell.xib */; };
 		295E8CBA1CE61E4F00FAAB24 /* WOWMacrofunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E8CB91CE61E4F00FAAB24 /* WOWMacrofunc.swift */; };
+		296BF0761CFC3411007C06DC /* WOWInviteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296BF0751CFC3411007C06DC /* WOWInviteController.swift */; };
+		296BF0781CFC3D20007C06DC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 296BF0771CFC3D20007C06DC /* StoreKit.framework */; };
 		296BF13B1CFBF39F00DC2C86 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296BF1351CFBF39F00DC2C86 /* libSocialWechat.a */; };
 		296BF13C1CFBF39F00DC2C86 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296BF1361CFBF39F00DC2C86 /* libWeChatSDK.a */; };
 		296BF1421CFBF4E100DC2C86 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296BF13E1CFBF4E100DC2C86 /* libSocialQQ.a */; };
@@ -309,6 +311,8 @@
 		295659051CBFC7F10029B897 /* WOWAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAddressCell.swift; sourceTree = "<group>"; };
 		295659061CBFC7F10029B897 /* WOWAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWAddressCell.xib; sourceTree = "<group>"; };
 		295E8CB91CE61E4F00FAAB24 /* WOWMacrofunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWMacrofunc.swift; sourceTree = "<group>"; };
+		296BF0751CFC3411007C06DC /* WOWInviteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWInviteController.swift; sourceTree = "<group>"; };
+		296BF0771CFC3D20007C06DC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		296BF1351CFBF39F00DC2C86 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		296BF1361CFBF39F00DC2C86 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		296BF1371CFBF39F00DC2C86 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -474,6 +478,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				296BF0781CFC3D20007C06DC /* StoreKit.framework in Frameworks */,
 				296BF1421CFBF4E100DC2C86 /* libSocialQQ.a in Frameworks */,
 				296BF1431CFBF4E100DC2C86 /* TencentOpenAPI.framework in Frameworks */,
 				296BF13C1CFBF39F00DC2C86 /* libWeChatSDK.a in Frameworks */,
@@ -1053,6 +1058,7 @@
 				2912E0E61CC26303005929D1 /* WOWAboutController.swift */,
 				291ACB611CC47B7A00AFF02F /* WOWCopyrightController.swift */,
 				294A64251CDB358D002933CE /* WOWOrderCommentController.swift */,
+				296BF0751CFC3411007C06DC /* WOWInviteController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1152,6 +1158,7 @@
 		830ED3B0E0867920A88B22A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				296BF0771CFC3D20007C06DC /* StoreKit.framework */,
 				29FADE071CF431FD0047039D /* ImageIO.framework */,
 				291ACBB81CC4CAB600AFF02F /* libz.tbd */,
 				291ACBB61CC4CAB000AFF02F /* libstdc++.tbd */,
@@ -1403,6 +1410,7 @@
 				2991AD1E1CBCCA0B00F5F5A0 /* WOWTabBarController.swift in Sources */,
 				29AE2C3C1CC0E2A500588429 /* WOWValue2Cell.swift in Sources */,
 				2991ADB21CBCCAB100F5F5A0 /* WOWBrandHomeController.swift in Sources */,
+				296BF0761CFC3411007C06DC /* WOWInviteController.swift in Sources */,
 				295659031CBFC76F0029B897 /* WOWAddressController.swift in Sources */,
 				2991AD521CBCCA7400F5F5A0 /* WOWConfig.swift in Sources */,
 				295659071CBFC7F10029B897 /* WOWAddressCell.swift in Sources */,

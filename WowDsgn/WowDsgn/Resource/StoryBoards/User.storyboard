@@ -325,8 +325,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="关于我们" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6JR-sD-dSu">
-                                                    <rect key="frame" x="15" y="16" width="60" height="18"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="支持尖叫设计" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6JR-sD-dSu">
+                                                    <rect key="frame" x="15" y="16" width="90" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -653,6 +653,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpV-Av-JsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="327" y="1818"/>
+        </scene>
+        <!--邀请好友-->
+        <scene sceneID="EJM-XI-ChJ">
+            <objects>
+                <viewController storyboardIdentifier="WOWInviteController" id="kXA-70-hnO" customClass="WOWInviteController" customModule="WowDsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DHM-F5-IPB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zmp-0r-7aY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zny-y5-UBX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XxR-MW-snF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XxR-MW-snF" firstAttribute="leading" secondItem="zny-y5-UBX" secondAttribute="leading" id="0G8-Fi-KVR"/>
+                            <constraint firstItem="Zmp-0r-7aY" firstAttribute="top" secondItem="XxR-MW-snF" secondAttribute="bottom" id="Acj-E6-x6b"/>
+                            <constraint firstItem="XxR-MW-snF" firstAttribute="top" secondItem="zny-y5-UBX" secondAttribute="top" id="tpc-hh-uvz"/>
+                            <constraint firstAttribute="trailing" secondItem="XxR-MW-snF" secondAttribute="trailing" id="zv5-Qh-63U"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="邀请好友" id="nNn-kc-fGh"/>
+                    <connections>
+                        <outlet property="webView" destination="XxR-MW-snF" id="jr4-AW-Tdr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Vz-eg-Kde" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-117" y="2576"/>
         </scene>
         <!--喜欢的单品-->
         <scene sceneID="aIe-XK-wKa">

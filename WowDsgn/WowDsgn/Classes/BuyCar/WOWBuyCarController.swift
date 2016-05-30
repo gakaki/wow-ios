@@ -70,9 +70,6 @@ class WOWBuyCarController: WOWBaseViewController {
         }
     }
     
-    
- //MARK:Private Method
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configData()
@@ -93,6 +90,7 @@ class WOWBuyCarController: WOWBaseViewController {
         addObservers()
     }
     
+    
 //MARK:Lazy
     lazy var backView:WOWBuyBackView = {
         let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.w,MGScreenHeight))
@@ -101,7 +99,6 @@ class WOWBuyCarController: WOWBaseViewController {
 
     
 //MARK:Private Method
-    
     private func configData(){
         if WOWUserManager.loginStatus { //登录
             asyncCarList()
@@ -200,15 +197,29 @@ class WOWBuyCarController: WOWBaseViewController {
         presentViewController(vc, animated: true, completion: nil)
     }
     
+    private func selectAll(){
+        allButton.selected = true
+        selectedArr = []
+        selectedArr.appendContentsOf(dataArr)
+        for index in 0..<dataArr.count{
+            let indexPath = NSIndexPath(forRow: index, inSection: 0)
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+        }
+    }
+    
 //MARK:全选按钮点击
     @IBAction func allButtonClick(sender: UIButton) {
         sender.selected = !sender.selected
+        if sender.selected {
+            selectedArr = []
+            selectedArr.appendContentsOf(dataArr)
+        }else{
+            selectedArr = []
+        }
         for index in 0..<dataArr.count {
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             if sender.selected {//全选
                 tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
-                selectedArr = []
-                selectedArr.appendContentsOf(dataArr)
             }else{//全不选
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
                 selectedArr = []
@@ -310,6 +321,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     strongSelf.dataArr.appendContentsOf(a)
                 }
                 strongSelf.tableView.reloadData()
+                strongSelf.selectAll()
                 //FIXME:应该把过期删除的商品返回给我，本地数据库也得删除的
             }
             }, failClosure: { (errorMsg) in
@@ -333,8 +345,8 @@ class WOWBuyCarController: WOWBaseViewController {
      2.同步登录之后个人购物车的数据，同时合并自己本地保存的购物车数据
      */
     private func asyncCarList(){
-        //1.若本地有数据，那就进行同步,否则走第二步
-        //2.直接拉取服务器端购物车数据
+        //1.直接拉取服务器端购物车数据
+        //2.若本地有数据，那就进行同步,否则走第一步
         let uid = WOWUserManager.userID
         var cars = [AnyObject]()
         var param:[String:AnyObject] = ["uid":uid]
@@ -353,6 +365,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     if let a = array{
                         strongSelf.dataArr.appendContentsOf(a)
                         strongSelf.tableView.reloadData()
+                        strongSelf.selectAll()
                     }
                 }
                 }, failClosure: { (errorMsg) in
@@ -380,6 +393,7 @@ class WOWBuyCarController: WOWBaseViewController {
                             WOWRealm.delete(objects)
                         })
                         strongSelf.tableView.reloadData()
+                        strongSelf.selectAll()
                     }
                 }
                 }, failClosure: { (errorMsg) in

@@ -138,6 +138,7 @@ extension WOWBrandHomeController:WOWActionDelegate{
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
             vc.brandModel = brandModel!
+            vc.modalTransitionStyle = .CrossDissolve
             presentViewController(vc, animated: true, completion: nil)
         default:
             break

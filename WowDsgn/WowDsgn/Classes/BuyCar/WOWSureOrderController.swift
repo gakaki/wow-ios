@@ -94,23 +94,33 @@ class WOWSureOrderController: WOWBaseViewController {
         dispatch_async(dispatch_get_main_queue()) { 
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
                 if let strongSelf = self{
-                    if ret == "success"{
+                    switch ret{
+                    case "success":
                         let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                         vc.payMethod = (strongSelf.payType == "ali" ? "支付宝":"微信")
                         vc.orderid = orderid
                         vc.totalPrice = totalPrice
                         strongSelf.navigationController?.pushViewController(vc, animated: true)
-                    }else{//订单支付取消或者失败
-                        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
-                        vc.selectIndex = 0
-                        vc.entrance = OrderEntrance.PaySuccess
-                        strongSelf.navigationController?.pushViewController(vc, animated: true)
+                    case "cancel":
+                        WOWHud.showMsg("支付取消")
                         
+                        break
+                    default:
+                        WOWHud.showMsg("支付失败")
+                        break
                     }
                 }
             }
         }
     }
+    
+    private func resolveOrderRet(){
+        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
+        vc.selectIndex = 0
+        vc.entrance = OrderEntrance.PaySuccess
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     
 //MARK:Network

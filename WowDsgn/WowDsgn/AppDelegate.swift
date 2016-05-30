@@ -141,11 +141,16 @@ extension AppDelegate{
     }
     
     func registAppKey(){
+        //友盟
         UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
         UMAnalyticsConfig.sharedInstance().channelId = ""
         MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
+        UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
+        UMSocialQQHandler.setQQWithAppId(WOWID.QQ.appID, appKey: WOWID.QQ.appKey, url:"http://www.wowdsgn.com/")
         
+        
+        //MonkeyKing
         MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))
         MonkeyKing.registerAccount(.Weibo(appID: WOWID.Weibo.appID, appKey: WOWID.Weibo.appKey, redirectURL: WOWID.Weibo.redirectURL))
         

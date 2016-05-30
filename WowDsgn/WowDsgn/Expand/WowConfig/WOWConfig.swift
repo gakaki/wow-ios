@@ -15,28 +15,33 @@ let WOWCompanyTel        = "4008-208-237"
 //MARK:第三方Key
 struct WOWID {
     struct Weibo {
-        static let appID = "1279179552"
-        static let appKey = "d0624f8a210a0e862ea581d2c6b6e507"
+        static let appID       = "1279179552"
+        static let appKey      = "d0624f8a210a0e862ea581d2c6b6e507"
         static let redirectURL = "http://www.wowdsgn.com"
     }
     
     struct Wechat {
-        static let appID = "wx5491e5203286430c"
-        static let appKey = "4b58993541eeafdd8c236d15bfb15609"
+        static let appID       = "wx5491e5203286430c"
+        static let appKey      = "4b58993541eeafdd8c236d15bfb15609"
+    }
+    
+    struct QQ {
+        static let appID       = "1105396854"
+        static let appKey      = "05Iv8sCDsuxxyYxx"
     }
     
     struct UMeng {
-        static let appID = "57146c72e0f55a807e000a0b"
+        static let appID       = "57146c72e0f55a807e000a0b"
     }
     
     struct LeanCloud {
-        static let appID = "aSqukoQ9xLsQSMh0wHqbENH2-gzGzoHsz"
-        static let appKey = "IGR5VQANuxRq3XsQnL9MYtyW"
+        static let appID       = "aSqukoQ9xLsQSMh0wHqbENH2-gzGzoHsz"
+        static let appKey      = "IGR5VQANuxRq3XsQnL9MYtyW"
     }
     
     struct RongCloud {
-        static let appID = "k51hidwq1u67b"
-        static let testToken = "iKHh7k4J8eoTvZfTCwSNWsSBbbBNFKcjb+ORbC53wq1VMTGO2QDTJNTFI3Q7IHRJ+1EE9lHpuTQ="
+        static let appID       = "k51hidwq1u67b"
+        static let testToken   = "iKHh7k4J8eoTvZfTCwSNWsSBbbBNFKcjb+ORbC53wq1VMTGO2QDTJNTFI3Q7IHRJ+1EE9lHpuTQ="
     }
 }
 

@@ -18,13 +18,21 @@
 
 @import HidingNavigationBar;
 @import YYImage;
+
 #import "WXApi.h"
 #import <Pingpp.h>
-#import <UMMobClick/MobClick.h>
+
+//Leancloud
 #import <AVOSCloud/AVOSCloud.h>
 
+//融云
 #import <RongIMKit/RongIMKit.h>
-
 #import "RCDCustomerServiceViewController.h"
+
+//友盟
+#import <UMMobClick/MobClick.h>
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+
 
 

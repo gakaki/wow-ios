@@ -77,6 +77,11 @@
 		295659071CBFC7F10029B897 /* WOWAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295659051CBFC7F10029B897 /* WOWAddressCell.swift */; };
 		295659081CBFC7F10029B897 /* WOWAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 295659061CBFC7F10029B897 /* WOWAddressCell.xib */; };
 		295E8CBA1CE61E4F00FAAB24 /* WOWMacrofunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E8CB91CE61E4F00FAAB24 /* WOWMacrofunc.swift */; };
+		296BF13B1CFBF39F00DC2C86 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296BF1351CFBF39F00DC2C86 /* libSocialWechat.a */; };
+		296BF13C1CFBF39F00DC2C86 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296BF1361CFBF39F00DC2C86 /* libWeChatSDK.a */; };
+		296BF1421CFBF4E100DC2C86 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296BF13E1CFBF4E100DC2C86 /* libSocialQQ.a */; };
+		296BF1431CFBF4E100DC2C86 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 296BF13F1CFBF4E100DC2C86 /* TencentOpenAPI.framework */; };
+		296BF1441CFBF4E100DC2C86 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 296BF1401CFBF4E100DC2C86 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		2972C7CB1CD740290061E0BA /* WOWOrderListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972C7CA1CD740290061E0BA /* WOWOrderListModel.swift */; };
 		2975F30E1CCDB05000D05007 /* WOWDesignerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F30C1CCDB05000D05007 /* WOWDesignerCell.swift */; };
 		2975F30F1CCDB05000D05007 /* WOWDesignerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2975F30D1CCDB05000D05007 /* WOWDesignerCell.xib */; };
@@ -304,6 +309,16 @@
 		295659051CBFC7F10029B897 /* WOWAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAddressCell.swift; sourceTree = "<group>"; };
 		295659061CBFC7F10029B897 /* WOWAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWAddressCell.xib; sourceTree = "<group>"; };
 		295E8CB91CE61E4F00FAAB24 /* WOWMacrofunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWMacrofunc.swift; sourceTree = "<group>"; };
+		296BF1351CFBF39F00DC2C86 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
+		296BF1361CFBF39F00DC2C86 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		296BF1371CFBF39F00DC2C86 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
+		296BF1381CFBF39F00DC2C86 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		296BF1391CFBF39F00DC2C86 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		296BF13A1CFBF39F00DC2C86 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		296BF13E1CFBF4E100DC2C86 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
+		296BF13F1CFBF4E100DC2C86 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		296BF1401CFBF4E100DC2C86 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		296BF1411CFBF4E100DC2C86 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
 		2972C7CA1CD740290061E0BA /* WOWOrderListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderListModel.swift; sourceTree = "<group>"; };
 		2975F30C1CCDB05000D05007 /* WOWDesignerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWDesignerCell.swift; sourceTree = "<group>"; };
 		2975F30D1CCDB05000D05007 /* WOWDesignerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWDesignerCell.xib; sourceTree = "<group>"; };
@@ -459,9 +474,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				296BF1421CFBF4E100DC2C86 /* libSocialQQ.a in Frameworks */,
+				296BF1431CFBF4E100DC2C86 /* TencentOpenAPI.framework in Frameworks */,
+				296BF13C1CFBF39F00DC2C86 /* libWeChatSDK.a in Frameworks */,
 				29FADE081CF431FD0047039D /* ImageIO.framework in Frameworks */,
 				291ACBB91CC4CAB600AFF02F /* libz.tbd in Frameworks */,
 				291ACBB71CC4CAB000AFF02F /* libstdc++.tbd in Frameworks */,
+				296BF13B1CFBF39F00DC2C86 /* libSocialWechat.a in Frameworks */,
 				291ACBB51CC4CAA600AFF02F /* CoreTelephony.framework in Frameworks */,
 				291ACBB31CC4CAA000AFF02F /* libsqlite3.tbd in Frameworks */,
 				291ACBB11CC4CA9700AFF02F /* CoreGraphics.framework in Frameworks */,
@@ -555,6 +574,39 @@
 				2972C7CA1CD740290061E0BA /* WOWOrderListModel.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		296BF1331CFBF2D200DC2C86 /* UMeng */ = {
+			isa = PBXGroup;
+			children = (
+				296BF13D1CFBF4E100DC2C86 /* TencentOpenAPI */,
+				296BF1341CFBF39F00DC2C86 /* Wechat */,
+			);
+			path = UMeng;
+			sourceTree = "<group>";
+		};
+		296BF1341CFBF39F00DC2C86 /* Wechat */ = {
+			isa = PBXGroup;
+			children = (
+				296BF1351CFBF39F00DC2C86 /* libSocialWechat.a */,
+				296BF1361CFBF39F00DC2C86 /* libWeChatSDK.a */,
+				296BF1371CFBF39F00DC2C86 /* UMSocialWechatHandler.h */,
+				296BF1381CFBF39F00DC2C86 /* WechatAuthSDK.h */,
+				296BF1391CFBF39F00DC2C86 /* WXApi.h */,
+				296BF13A1CFBF39F00DC2C86 /* WXApiObject.h */,
+			);
+			path = Wechat;
+			sourceTree = "<group>";
+		};
+		296BF13D1CFBF4E100DC2C86 /* TencentOpenAPI */ = {
+			isa = PBXGroup;
+			children = (
+				296BF13E1CFBF4E100DC2C86 /* libSocialQQ.a */,
+				296BF13F1CFBF4E100DC2C86 /* TencentOpenAPI.framework */,
+				296BF1401CFBF4E100DC2C86 /* TencentOpenApi_IOS_Bundle.bundle */,
+				296BF1411CFBF4E100DC2C86 /* UMSocialQQHandler.h */,
+			);
+			path = TencentOpenAPI;
 			sourceTree = "<group>";
 		};
 		2991ACF71CBCCA0B00F5F5A0 /* Classes */ = {
@@ -721,6 +773,7 @@
 		2991AD3C1CBCCA7400F5F5A0 /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
+				296BF1331CFBF2D200DC2C86 /* UMeng */,
 				29D2A1F71CF84E69002DBA57 /* RongCloud */,
 				29D6F7171CE9D65F008410FA /* MIBadgeButton */,
 				2943FB341CBE604800EC90EB /* TagCellLayout */,
@@ -1197,6 +1250,7 @@
 				2912E0B91CC1E9E5005929D1 /* WOWOrderListCell.xib in Resources */,
 				2991AD221CBCCA0B00F5F5A0 /* icon_chose_bottom@2x.png in Resources */,
 				2991AE131CBCFE5500F5F5A0 /* WOWGoodsTypeCell.xib in Resources */,
+				296BF1441CFBF4E100DC2C86 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				295659081CBFC7F10029B897 /* WOWAddressCell.xib in Resources */,
 				2991AD5A1CBCCA7400F5F5A0 /* BTNavigationDropdownMenu.bundle in Resources */,
 				2943FB2A1CBE19C200EC90EB /* WOWGoodsBuyView.xib in Resources */,
@@ -1560,11 +1614,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/WowDsgn/Expand/WowVendor/UMeng/TencentOpenAPI",
 				);
 				INFOPLIST_FILE = WowDsgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WowDsgn/Expand/WowVendor/UMeng/Wechat",
+					"$(PROJECT_DIR)/WowDsgn/Expand/WowVendor/UMeng/TencentOpenAPI",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"APOpenSdk\"",
@@ -1660,11 +1719,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/WowDsgn/Expand/WowVendor/UMeng/TencentOpenAPI",
 				);
 				INFOPLIST_FILE = WowDsgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WowDsgn/Expand/WowVendor/UMeng/Wechat",
+					"$(PROJECT_DIR)/WowDsgn/Expand/WowVendor/UMeng/TencentOpenAPI",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"APOpenSdk\"",

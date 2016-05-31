@@ -62,6 +62,7 @@ public extension UIButton{
                     self.backgroundColor = countBGColor
                     self.setTitleColor(countTitleColor, forState: .Normal)
                     self.setTitle(content, forState: .Normal)
+//                    self.titleLabel?.text = content
                     self.userInteractionEnabled = false // 这里不要用enable
                     
                 })

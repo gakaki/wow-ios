@@ -57,7 +57,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PonyFrameworkOnSwift:
-    :commit: 8cc403a227937b54688bb6270bd4ed94e2ecc1dd
+    :commit: 3906c698189f091a9340c24246ce49873a2c6757
     :git: https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git
 
 SPEC CHECKSUMS:

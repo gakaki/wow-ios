@@ -327,12 +327,9 @@
                                             <constraint firstAttribute="height" constant="0.5" id="SO0-wr-roG"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzB-cl-nwU">
-                                        <rect key="frame" x="240" y="0.0" width="65" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzB-cl-nwU">
+                                        <rect key="frame" x="250" y="0.0" width="55" height="48"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="65" id="fot-d3-b7C"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <state key="normal" title="获取验证码">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -342,7 +339,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JYd-39-PEs">
-                                        <rect key="frame" x="15" y="2" width="223" height="46"/>
+                                        <rect key="frame" x="15" y="2" width="227" height="46"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
@@ -355,7 +352,6 @@
                                 <constraints>
                                     <constraint firstItem="qzB-cl-nwU" firstAttribute="top" secondItem="MKi-ck-hai" secondAttribute="top" id="5iX-4c-age"/>
                                     <constraint firstAttribute="height" constant="50" id="Hki-Fe-plY"/>
-                                    <constraint firstItem="qzB-cl-nwU" firstAttribute="leading" secondItem="JYd-39-PEs" secondAttribute="trailing" constant="2" id="IGp-Qb-kYf"/>
                                     <constraint firstAttribute="trailing" secondItem="2ZR-Ga-ZW6" secondAttribute="trailing" id="IRk-65-qGz"/>
                                     <constraint firstAttribute="bottom" secondItem="2ZR-Ga-ZW6" secondAttribute="bottom" constant="1" id="Np7-80-BBQ"/>
                                     <constraint firstItem="JYd-39-PEs" firstAttribute="leading" secondItem="MKi-ck-hai" secondAttribute="leading" constant="15" id="O0k-IF-B2i"/>
@@ -363,6 +359,7 @@
                                     <constraint firstAttribute="trailing" secondItem="qzB-cl-nwU" secondAttribute="trailing" constant="15" id="cBu-wj-cVZ"/>
                                     <constraint firstAttribute="bottom" secondItem="JYd-39-PEs" secondAttribute="bottom" constant="2" id="cai-RS-VMz"/>
                                     <constraint firstItem="2ZR-Ga-ZW6" firstAttribute="top" secondItem="qzB-cl-nwU" secondAttribute="bottom" id="iY9-iR-HCq"/>
+                                    <constraint firstItem="qzB-cl-nwU" firstAttribute="leading" secondItem="JYd-39-PEs" secondAttribute="trailing" constant="8" id="p8Y-F4-25O"/>
                                     <constraint firstItem="2ZR-Ga-ZW6" firstAttribute="leading" secondItem="JYd-39-PEs" secondAttribute="leading" id="xae-j9-exb"/>
                                 </constraints>
                             </view>

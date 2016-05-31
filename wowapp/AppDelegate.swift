@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          拉取配置数据
          */
-        //        requestConfigData()
+        //requestConfigData()
         
         window?.makeKeyAndVisible()
         return true
@@ -146,8 +146,9 @@ extension AppDelegate{
         UMAnalyticsConfig.sharedInstance().channelId = ""
         MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
+        
+        UMSocialData.setAppKey(WOWID.UMeng.appID)
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
-        UMSocialQQHandler.setQQWithAppId(WOWID.QQ.appID, appKey: WOWID.QQ.appKey, url:"http://www.wowdsgn.com/")
         
         
         //MonkeyKing

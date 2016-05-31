@@ -31,6 +31,7 @@
 #import "RCDCustomerServiceViewController.h"
 
 //友盟
+#import "UMSocial.h"
 #import <UMMobClick/MobClick.h>
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"

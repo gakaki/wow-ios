@@ -56,8 +56,15 @@ class WOWLoginController: WOWBaseViewController {
     }
     
     @IBAction func wechatLogin(sender: UIButton) {
-        DLog("微信登录")
-        
+        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+        snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {response in
+            if response.responseCode == UMSResponseCodeSuccess {
+                let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
+                print("username is \(snsAccount.userName), uid is \(snsAccount.usid), token is \(snsAccount.accessToken) url is \(snsAccount.iconURL)")
+            }else{
+                DLog(response)
+            }
+        })
     }
     
     

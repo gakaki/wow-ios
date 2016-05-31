@@ -44,7 +44,7 @@ class WOWSearchsController: WOWBaseViewController {
 //MARK:Lazy
     lazy var searchView:WOWSearchBarView = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWSearchBarView), owner: self, options: nil).last as! WOWSearchBarView
-        view.frame = CGRectMake(15, 8, MGScreenWidth - 30,30)
+        view.frame = CGRectMake(15, 8, self.view.w - 30,30)
         view.layer.shadowColor = UIColor(white: 0, alpha: 0.5).CGColor
         view.searchTextField.delegate = self
         view.searchTextField.becomeFirstResponder()
@@ -147,8 +147,8 @@ extension WOWSearchsController:UICollectionViewDataSource,UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let model = dataArr[indexPath.row]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsSmallCell
-        vc.shareProductImage = cell.pictureImageView.image
+//        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsSmallCell
+//        vc.shareProductImage = cell.pictureImageView.image
         vc.productID = model.productID
          vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

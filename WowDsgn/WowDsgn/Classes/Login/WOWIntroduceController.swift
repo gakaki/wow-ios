@@ -25,7 +25,7 @@ class WOWIntroduceController: WOWBaseViewController {
         super.setUI()
         let image = YYImage(named: "intro")
         let imageView = YYAnimatedImageView(image: image)
-        imageView.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight)
+        imageView.frame = CGRectMake(0, 0, self.view.w, self.view.h)
         self.view.addSubview(imageView)
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 4.3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {

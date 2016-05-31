@@ -13,7 +13,6 @@ import UIKit
 
 class WOWGoodsDetailController: WOWBaseViewController {
     var productID:String?
-    var shareProductImage:UIImage?
     var cycleView:CyclePictureView!
     
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
@@ -22,6 +21,13 @@ class WOWGoodsDetailController: WOWBaseViewController {
     @IBOutlet weak var priceLabel       : UILabel!
     var productModel                    : WOWProductModel?
     var updateBadgeAction               : WOWActionClosure?
+    private var shareProductImage:UIImage? //供分享使用
+    
+    lazy var placeImageView:UIImageView={
+        let image = UIImageView()
+        return image
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -147,7 +153,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth), imageURLArray: nil)
-//        cycleView.detailLableBackgroundColor = SeprateColor
         cycleView.placeholderImage = UIImage(named: "placeholder_banner")
         tableView.tableHeaderView = cycleView
     }
@@ -156,6 +161,11 @@ class WOWGoodsDetailController: WOWBaseViewController {
         priceLabel.text = productModel?.price?.priceFormat() ?? ""
         cycleView.imageURLArray = [productModel?.productImage ?? ""]
         favoriteButton.selected = (productModel?.user_isLike ?? "false") == "true"
+        placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImage ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+            if let strongSelf = self{
+                strongSelf.shareProductImage = image
+            }
+        }
     }
     
 //MARK:Actions
@@ -171,8 +181,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
         let uid = WOWUserManager.userID
         WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(product_id: productID ?? "",uid:uid), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                let json = JSON(result)
-                DLog(json)
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()

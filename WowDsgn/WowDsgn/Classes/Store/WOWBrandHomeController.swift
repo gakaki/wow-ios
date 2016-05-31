@@ -13,6 +13,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     var dataArr = [WOWProductModel]()
     var brandID : String?
     var brandModel : WOWBrandModel?
+    private var shareBrandImage:UIImage? //供分享使用
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -102,7 +103,11 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
             if let view = headerView {
                 view.topHeadView.delegate = self
                 view.underHeadView.delegate = self
-                view.topHeadView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+                view.topHeadView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"), optionsInfo: nil, completionHandler: {[weak self](image, error, cacheType, imageURL) in
+                    if let strongSelf = self{
+                        strongSelf.shareBrandImage = image
+                    }
+                })
                 view.topHeadView.nameLabel.text = brandModel?.name
                 reusableView = view
             }
@@ -133,8 +138,7 @@ extension WOWBrandHomeController:WOWActionDelegate{
         case WOWItemActionType.Like.rawValue:
             DLog("喜欢")
         case WOWItemActionType.Share.rawValue:
-            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url)
-            
+            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
             vc.brandModel = brandModel!

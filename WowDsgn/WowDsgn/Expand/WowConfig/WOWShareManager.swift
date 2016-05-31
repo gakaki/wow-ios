@@ -23,7 +23,13 @@ struct WOWShareManager {
     
     static func share(title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
         let postTitle = (title ?? "")  + "-尖叫设计"
-        let postDes   = shareText ?? ""
+        var postDes = ""
+        if shareText?.length > 100 {
+            let index = shareText?.startIndex.advancedBy(100)
+            postDes   = (shareText?.substringToIndex(index!) ?? "") + "......"
+        }else{
+            postDes   = shareText ?? ""
+        }
         let postUrl   = url ?? "http://www.wowdsgn.com/"
         let postImage = shareImage
         let info =  MonkeyKing.Info(

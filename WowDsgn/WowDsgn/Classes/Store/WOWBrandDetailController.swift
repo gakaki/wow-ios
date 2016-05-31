@@ -17,10 +17,8 @@ class WOWBrandDetailController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var underView: WOWBrandUnderView!
     var brandModel:WOWBrandModel!
-//    var effectView:UIVisualEffectView!
-    
-    
-    
+    private var shareBrandImage:UIImage? //供分享使用
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -49,6 +47,13 @@ class WOWBrandDetailController: WOWBaseViewController {
         let headerView = WOWBrandHeadView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenWidth * 2/3 - 35))
         headerView.nameLabel.text = brandModel.name
         headerView.headImageView.kf_setImageWithURL(NSURL(string:brandModel.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        headerView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"), optionsInfo: nil, completionHandler: {[weak self](image, error, cacheType, imageURL) in
+            if let strongSelf = self{
+                strongSelf.shareBrandImage = image
+            }
+        })
+        
+        
         headerView.nameLabel.shadowOffset = CGSizeMake(1, 1)
         headerView.backImageView.hidden = true
         headerView.delegate = self
@@ -65,12 +70,6 @@ class WOWBrandDetailController: WOWBaseViewController {
     @IBAction func back(sender: UIButton) {
         dismissViewControllerAnimated(true, completion:nil)
     }
-    
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        dismissViewControllerAnimated(true, completion:nil)
-//        super.touchesBegan(touches, withEvent: event)
-//    }
-    
 }
 
 extension WOWBrandDetailController:UITableViewDelegate,UITableViewDataSource{
@@ -100,7 +99,7 @@ extension WOWBrandDetailController:WOWActionDelegate{
     func itemAction(tag: Int) {
         switch tag {
         case WOWItemActionType.Share.rawValue:
-            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url)
+            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
         case WOWItemActionType.Brand.rawValue:
             dismissViewControllerAnimated(true, completion: nil)
         default:

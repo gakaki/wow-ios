@@ -57,6 +57,7 @@ class WOWLoginController: WOWBaseViewController {
     
     @IBAction func wechatLogin(sender: UIButton) {
         let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+        UMSocialControllerService.defaultControllerService().socialUIDelegate = self
         snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {response in
             if response.responseCode == UMSResponseCodeSuccess {
                 let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
@@ -106,6 +107,10 @@ class WOWLoginController: WOWBaseViewController {
 
 
 //MARK:Delegate
+extension WOWLoginController:UMSocialUIDelegate{
+    
+}
+
 extension WOWLoginController:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()

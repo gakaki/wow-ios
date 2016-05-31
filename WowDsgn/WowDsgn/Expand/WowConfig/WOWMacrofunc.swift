@@ -15,3 +15,4 @@ public func DLog (value: Any , fileName : String = #file, line : Int32 = #line )
         print("file：\(NSURL(string: fileName)!.lastPathComponent!)  line：\(line) \(value)\n")
     }
 }
+

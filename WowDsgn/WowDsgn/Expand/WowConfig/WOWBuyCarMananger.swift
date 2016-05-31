@@ -29,7 +29,7 @@ class WOWBuyCarMananger {
     //app启动这一次添加进购物车的商品列表
     var chooseProducts      = [String]()
     static func updateBadge(){
-        let vc = WOWTool.appTabBarController.viewControllers![2]
+        let vc = UIApplication.appTabBarController.viewControllers![2]
         if WOWUserManager.loginStatus {
             let carCount = WOWUserManager.userCarCount
             if  carCount == 0 {

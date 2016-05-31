@@ -8,28 +8,12 @@
 
 import Foundation
 
-extension UIApplication{
-    class func currentViewController(base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
-        if let nav = base as? UINavigationController {
-            return currentViewController(nav.visibleViewController)
+extension UIApplication{    
+    class var appTabBarController:UITabBarController {
+        get{
+            return AppDelegate.rootVC as! UITabBarController
         }
-        if let tab = base as? UITabBarController {
-            if let selected = tab.selectedViewController {
-                return currentViewController(selected)
-            }
-        }
-        
-        if let side = base as? WOWSideContainerController{
-            return currentViewController(side.mainController)
-        }
-        
-        if let presented = base?.presentedViewController {
-            return currentViewController(presented)
-        }
-        
-        
-        
-        return base
     }
+
 
 }

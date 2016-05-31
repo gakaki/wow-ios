@@ -14,6 +14,10 @@ let WOWCompanyTel        = "4008-208-237"
 
 //MARK:第三方Key
 struct WOWID {
+    struct AppStore {
+        static let appID       = "1110300308"
+    }
+    
     struct Weibo {
         static let appID       = "1279179552"
         static let appKey      = "d0624f8a210a0e862ea581d2c6b6e507"

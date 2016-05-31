@@ -180,10 +180,13 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
     }
     
     private func evaluateApp(){
-        let vc = SKStoreProductViewController()
-        vc.delegate = self
-        vc.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier:"1110300308"], completionBlock: nil)
-        self.presentViewController(vc, animated: true, completion: nil)
+        let url = NSURL(string:"https://itunes.apple.com/cn/app/jian-jiao-she-ji/id1110300308?mt=8")
+        UIApplication.sharedApplication().openURL(url!)
+        
+//        let vc = SKStoreProductViewController()
+//        vc.delegate = self
+//        vc.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier:"1110300308"], completionBlock: nil)
+//        self.presentViewController(vc, animated: true, completion: nil)
 //        vc.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier:"1110300308"]) { (ret, error) in
 //            if let e = error{
 //                DLog(e)

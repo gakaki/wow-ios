@@ -76,20 +76,15 @@ func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
 
 
 struct WOWTool {
-    static var appTabBarController:UITabBarController {
-        get{
-//            let del = UIApplication.sharedApplication().delegate as? AppDelegate
-//            let tab = del?.window?.rootViewController as! UITabBarController
-//            let tab = del?.sideController.mainController as! UITabBarController
-            return AppDelegate.rootVC as! UITabBarController
-        }
-    }
-    
-    
     static func callPhone(){
-        if let url = NSURL(string: "tel://\(WOWCompanyTel)") {
-            UIApplication.sharedApplication().openURL(url)
-        }
+        let web = UIWebView()
+        let tel = NSURL(string: "tel:\(WOWCompanyTel)")
+        web.loadRequest(NSURLRequest(URL: tel!))
+        UIApplication.currentViewController()?.view.addSubview(web)
+        
+//        if let url = NSURL(string: "tel://\(WOWCompanyTel)") {
+//            UIApplication.sharedApplication().openURL(url)
+//        }
     }
     
     

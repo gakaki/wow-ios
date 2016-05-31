@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (3.4.0)
-  - AVOSCloud (3.2.12)
+  - AVOSCloud (3.3.1)
   - DZNEmptyDataSet (1.8.1)
   - EZSwiftExtensions (1.2.3)
   - HidingNavigationBar (0.3.0)
@@ -25,8 +25,7 @@ PODS:
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
-  - UMengAnalytics-NO-IDFA (4.0.3)
-  - UMengSocialCOM (5.2.0)
+  - UMengAnalytics-NO-IDFA (4.0.5)
   - YYImage (1.0.2):
     - YYImage/Core (= 1.0.2)
   - YYImage/Core (1.0.2)
@@ -50,7 +49,6 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON
   - UMengAnalytics-NO-IDFA
-  - UMengSocialCOM
   - YYImage
 
 EXTERNAL SOURCES:
@@ -59,12 +57,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PonyFrameworkOnSwift:
-    :commit: 6aa36190edf2df6a440fe18ae0a12355b9fec5f4
+    :commit: 8cc403a227937b54688bb6270bd4ed94e2ecc1dd
     :git: https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  AVOSCloud: fcbb5c2bcccaddbdea8c2b4f6c1ad7f13e6639fe
+  AVOSCloud: ce999e21da976f78c4eda53243699b634891d42d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
@@ -81,8 +79,7 @@ SPEC CHECKSUMS:
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  UMengAnalytics-NO-IDFA: 173a5a2541536225f4c947935560975136f18a34
-  UMengSocialCOM: c5fd4182cd86d93192d3cb2fd4a64509ebed0528
+  UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
 
 COCOAPODS: 0.39.0

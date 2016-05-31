@@ -26,6 +26,4 @@ public extension UIApplication{
         
         return base
     }
-
-    
 }

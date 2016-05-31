@@ -56,9 +56,7 @@ public extension UIButton{
                 })
                 
             } else {
-                
-                let content = "\((time - 1) % 60)s"
-                
+                let content = "重新获取" + "（\((time - 1) % 60)s）"
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     
                     self.backgroundColor = countBGColor

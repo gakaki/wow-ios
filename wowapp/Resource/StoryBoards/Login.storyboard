@@ -903,6 +903,9 @@
                                                     <rect key="frame" x="92" y="0.0" width="213" height="49"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="TOt-dG-YP6" id="yqp-vn-26U"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -932,6 +935,9 @@
                                                     <rect key="frame" x="92" y="0.0" width="213" height="49"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="TOt-dG-YP6" id="24K-VU-Erd"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>

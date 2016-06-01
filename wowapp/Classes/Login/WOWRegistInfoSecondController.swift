@@ -9,28 +9,42 @@
 import UIKit
 
 class WOWRegistInfoSecondController: WOWBaseTableViewController {
-    var fromUserCenter:Bool = false
-    var sex = "男"
     @IBOutlet weak var manButton: UIButton!
     @IBOutlet weak var womanButton: UIButton!
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var starTextField: UITextField!
     @IBOutlet weak var jobTextField: UITextField!
+    var editingTextField:UITextField?
+    
+    var fromUserCenter:Bool = false
+    var sex = "男"
+    var pickDataArr:[String] = [String]()
+    lazy var pickerContainerView :WOWPickerView = {
+        let v = NSBundle.mainBundle().loadNibNamed("WOWPickerView", owner: self, options: nil).last as! WOWPickerView
+        return v
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func setUI() {
         super.setUI()
         configTable()
         configNav()
+        configTextField()
+    }
+    
+    private func configTextField(){
+        ageTextField.inputView = pickerContainerView
+        starTextField.inputView = pickerContainerView
+        pickerContainerView.pickerView.delegate = self
+        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancelPicker), forControlEvents:.TouchUpInside)
+        pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), forControlEvents:.TouchUpInside)
+
     }
     
     private func configNav(){
@@ -54,6 +68,18 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     
 //MARK:Actions
+    func cancelPicker(){
+        ageTextField.resignFirstResponder()
+        starTextField.resignFirstResponder()
+    }
+    
+    func surePicker() {
+        let row = pickerContainerView.pickerView.selectedRowInComponent(0)
+        editingTextField?.text = pickDataArr[row]
+        cancelPicker()
+    }
+    
+    
     func sure() {
         dismissViewControllerAnimated(true, completion: nil)
         if fromUserCenter{
@@ -70,5 +96,37 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
             sex = "女"
         }
     }
-    
 }
+
+extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate{
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickDataArr.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickDataArr[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        editingTextField?.text = pickDataArr[row]
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        editingTextField = textField
+        if textField == ageTextField {
+            pickDataArr = ["00后","95后","90后","85后","80后","75后","70后","65后","60后"]
+        }else if textField == starTextField{
+            pickDataArr = ["水瓶座","双鱼座","白羊座","金牛座","双子座","巨蟹座","狮子座","处女座","天秤座","天蝎座","射手座","摩羯座"]
+        }
+        self.pickerContainerView.pickerView.reloadComponent(0)
+        let row = pickDataArr.indexesOf(textField.text ?? "").first ?? 0
+        pickerContainerView.pickerView.selectRow(row, inComponent: 0, animated: true)
+        return true
+    }
+
+}
+

@@ -18,7 +18,6 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var defaultSwitch        : UISwitch!
     private var defaultAddress:Bool         = true
     
-    lazy var pickerView                     = UIPickerView()
     
     var action:WOWActionClosure?
     
@@ -34,6 +33,11 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     var addressModel : WOWAddressListModel?
     var entrance:WOWAddressEntrance = .Me
+    
+    lazy var pickerContainerView :WOWPickerView = {
+        let v = NSBundle.mainBundle().loadNibNamed("WOWPickerView", owner: self, options: nil).last as! WOWPickerView
+        return v
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,34 +96,10 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     
     private func configPicker(){
-        let view = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 290))
-        view.backgroundColor = UIColor.whiteColor()
-        let topView = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 40))
-        topView.backgroundColor = UIColor.whiteColor()
-        view.addSubview(topView)
-        
-        let cancelButton = UIButton(type: .System)
-        cancelButton.backgroundColor = UIColor.whiteColor()
-        cancelButton.setTitleColor(GrayColorlevel2, forState:.Normal)
-        cancelButton.setTitle("取消", forState:.Normal)
-        cancelButton.frame = CGRectMake(8, 0, 60, 40)
-        cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
-        topView.addSubview(cancelButton)
-        
-        let sureButton = UIButton(type: .System)
-        sureButton.setTitle("确定", forState:.Normal)
-        sureButton.backgroundColor = UIColor.whiteColor()
-        sureButton.setTitleColor(GrayColorlevel2, forState:.Normal)
-        sureButton.frame = CGRectMake(MGScreenWidth - 68, 0, 60, 45)
-        sureButton.addTarget(self, action:#selector(sure), forControlEvents:.TouchUpInside)
-        topView.addSubview(sureButton)
-        
-        pickerView.frame = CGRectMake(0, 40, MGScreenWidth, 250)
-        pickerView.backgroundColor      = GrayColorLevel5
-        pickerView.delegate             = self
-        pickerView.dataSource           = self
-        view.addSubview(pickerView)
-        cityTextField.inputView = view
+        pickerContainerView.pickerView.delegate = self
+        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
+        pickerContainerView.sureButton.addTarget(self, action:#selector(sure), forControlEvents:.TouchUpInside)
+        cityTextField.inputView = pickerContainerView
     }
     
     func cancel(){
@@ -127,9 +107,9 @@ class WOWAddAddressController: WOWBaseTableViewController {
     }
     
     func sure() {
-        let provinceIndex   = pickerView.selectedRowInComponent(0)
-        let cityIndex       = pickerView.selectedRowInComponent(1)
-        let districtIndex   = pickerView.selectedRowInComponent(2)
+        let provinceIndex   = pickerContainerView.pickerView.selectedRowInComponent(0)
+        let cityIndex       = pickerContainerView.pickerView.selectedRowInComponent(1)
+        let districtIndex   = pickerContainerView.pickerView.selectedRowInComponent(2)
         province = self.provinces![provinceIndex].objectForKey("state") as? String
         city = self.cities![cityIndex].objectForKey("city") as? String
         if self.districts?.count != 0 {
@@ -280,18 +260,18 @@ extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
             cities = provinces?.objectAtIndex(row).objectForKey("cities") as? NSArray
             
             // reselect 1st city
-            self.pickerView.selectRow(0, inComponent: 1, animated: true)
-            self.pickerView.reloadComponent(1)
+            self.pickerContainerView.pickerView.selectRow(0, inComponent: 1, animated: true)
+            self.pickerContainerView.pickerView.reloadComponent(1)
             self.districts = cities?.objectAtIndex(0).objectForKey("areas") as? NSArray
             // reselect 1st area
-            self.pickerView.selectRow(0, inComponent: 2, animated: true)
-            self.pickerView.reloadComponent(2)
+            self.pickerContainerView.pickerView.selectRow(0, inComponent: 2, animated: true)
+            self.pickerContainerView.pickerView.reloadComponent(2)
             
         case 1:
             self.districts = cities?.objectAtIndex(row).objectForKey("areas") as? NSArray
             // reselect 1st area
-            self.pickerView.selectRow(0, inComponent: 2, animated: true)
-            self.pickerView.reloadComponent(2)
+            self.pickerContainerView.pickerView.selectRow(0, inComponent: 2, animated: true)
+            self.pickerContainerView.pickerView.reloadComponent(2)
         default:
             break
         }
@@ -299,7 +279,6 @@ extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
 }
 
 extension WOWAddAddressController:UITextViewDelegate{
-    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             textView.resignFirstResponder()

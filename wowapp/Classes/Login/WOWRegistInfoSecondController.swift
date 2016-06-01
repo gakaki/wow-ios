@@ -15,7 +15,6 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     @IBOutlet weak var starTextField: UITextField!
     @IBOutlet weak var jobTextField: UITextField!
     var editingTextField:UITextField?
-    
     var fromUserCenter:Bool = false
     var sex = "男"
     var pickDataArr:[String] = [String]()

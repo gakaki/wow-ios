@@ -26,6 +26,7 @@ pod 'Pingpp/Wx', '~> 2.1.0'
 #LeanCloud
 pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
 
+pod 'SwftWebViewProgress'
 
 #融云
 pod 'RongCloudIMKit', '2.6.0'

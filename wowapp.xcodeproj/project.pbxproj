@@ -13,6 +13,9 @@
 		292CBA0F1CFE86B600248C88 /* WOWRegistInfoSureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 292CBA0E1CFE86B600248C88 /* WOWRegistInfoSureView.xib */; };
 		2958BD8A1CFEA97100F6A6D7 /* WOWPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958BD891CFEA97100F6A6D7 /* WOWPickerView.swift */; };
 		2958BD8C1CFEA9B400F6A6D7 /* WOWPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2958BD8B1CFEA9B400F6A6D7 /* WOWPickerView.xib */; };
+		2958BD8E1CFEBB7100F6A6D7 /* WOWInfoTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958BD8D1CFEBB7100F6A6D7 /* WOWInfoTextController.swift */; };
+		2958BD921CFECA9300F6A6D7 /* SwiftWebViewProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958BD901CFECA9300F6A6D7 /* SwiftWebViewProgress.swift */; };
+		2958BD931CFECA9300F6A6D7 /* SwiftWebViewProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958BD911CFECA9300F6A6D7 /* SwiftWebViewProgressView.swift */; };
 		29FF263C1CFDA86300DF2A9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25261CFDA86300DF2A9B /* AppDelegate.swift */; };
 		29FF263D1CFDA86300DF2A9B /* WOWActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25291CFDA86300DF2A9B /* WOWActivityController.swift */; };
 		29FF263E1CFDA86300DF2A9B /* WOWActivityDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF252A1CFDA86300DF2A9B /* WOWActivityDetailController.swift */; };
@@ -264,6 +267,9 @@
 		292CBA0E1CFE86B600248C88 /* WOWRegistInfoSureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWRegistInfoSureView.xib; sourceTree = "<group>"; };
 		2958BD891CFEA97100F6A6D7 /* WOWPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWPickerView.swift; sourceTree = "<group>"; };
 		2958BD8B1CFEA9B400F6A6D7 /* WOWPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWPickerView.xib; sourceTree = "<group>"; };
+		2958BD8D1CFEBB7100F6A6D7 /* WOWInfoTextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWInfoTextController.swift; sourceTree = "<group>"; };
+		2958BD901CFECA9300F6A6D7 /* SwiftWebViewProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWebViewProgress.swift; sourceTree = "<group>"; };
+		2958BD911CFECA9300F6A6D7 /* SwiftWebViewProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWebViewProgressView.swift; sourceTree = "<group>"; };
 		29FF25101CFDA75700DF2A9B /* wowapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wowapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29FF25251CFDA86300DF2A9B /* wowapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wowapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		29FF25261CFDA86300DF2A9B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -554,6 +560,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		2958BD8F1CFECA9300F6A6D7 /* SwiftWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				2958BD901CFECA9300F6A6D7 /* SwiftWebViewProgress.swift */,
+				2958BD911CFECA9300F6A6D7 /* SwiftWebViewProgressView.swift */,
+			);
+			path = SwiftWebViewProgress;
+			sourceTree = "<group>";
+		};
 		29FF25071CFDA75700DF2A9B = {
 			isa = PBXGroup;
 			children = (
@@ -792,6 +807,7 @@
 		29FF25E41CFDA86300DF2A9B /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
+				2958BD8F1CFECA9300F6A6D7 /* SwiftWebViewProgress */,
 				29FF25E51CFDA86300DF2A9B /* BTNavigationDropdownMenu */,
 				29FF25EA1CFDA86300DF2A9B /* CyclePictureView */,
 				29FF25EE1CFDA86300DF2A9B /* KMPlaceholderTextView */,
@@ -1065,6 +1081,7 @@
 		29FF271F1CFDAFC000DF2A9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				29FF25CA1CFDA86300DF2A9B /* WOWUserController.swift */,
 				29FF25AB1CFDA86300DF2A9B /* WOWAboutController.swift */,
 				29FF25AE1CFDA86300DF2A9B /* WOWAddAddressController.swift */,
 				29FF25B21CFDA86300DF2A9B /* WOWAddressController.swift */,
@@ -1078,9 +1095,9 @@
 				29FF25BD1CFDA86300DF2A9B /* WOWOrderDetailController.swift */,
 				29FF25C31CFDA86300DF2A9B /* WOWOrderTransController.swift */,
 				29FF25C51CFDA86300DF2A9B /* WOWSettingController.swift */,
-				29FF25CA1CFDA86300DF2A9B /* WOWUserController.swift */,
 				29FF25CC1CFDA86300DF2A9B /* WOWUserHomeController.swift */,
 				29FF25CF1CFDA86300DF2A9B /* WOWUserInfoController.swift */,
+				2958BD8D1CFEBB7100F6A6D7 /* WOWInfoTextController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1510,6 +1527,7 @@
 				29FF26B51CFDA86300DF2A9B /* WOWAddressCell.swift in Sources */,
 				29FF26BF1CFDA86300DF2A9B /* WOWNumberMessageView.swift in Sources */,
 				29FF264A1CFDA86300DF2A9B /* WOWPaySuccessController.swift in Sources */,
+				2958BD8E1CFEBB7100F6A6D7 /* WOWInfoTextController.swift in Sources */,
 				29FF26AE1CFDA86300DF2A9B /* WOWTagCollectionViewCell.swift in Sources */,
 				29FF26EE1CFDA86300DF2A9B /* RCDCustomerServiceViewController.m in Sources */,
 				29FF26C51CFDA86300DF2A9B /* WOWOrderListModel.swift in Sources */,
@@ -1521,6 +1539,7 @@
 				29FF26A91CFDA86300DF2A9B /* WOWStoreBrandCell.swift in Sources */,
 				29FF267E1CFDA86300DF2A9B /* WOWSideContainerController.swift in Sources */,
 				29FF26B31CFDA86300DF2A9B /* WOWAddAddressController.swift in Sources */,
+				2958BD931CFECA9300F6A6D7 /* SwiftWebViewProgressView.swift in Sources */,
 				29FF267C1CFDA86300DF2A9B /* WOWLeftSideController.swift in Sources */,
 				29FF264E1CFDA86300DF2A9B /* WOWValue1Cell.swift in Sources */,
 				29FF26DC1CFDA86300DF2A9B /* WOWMediator.swift in Sources */,
@@ -1549,6 +1568,7 @@
 				29FF269C1CFDA86300DF2A9B /* WOWGoodsController.swift in Sources */,
 				29FF264C1CFDA86300DF2A9B /* WOWTipsCell.swift in Sources */,
 				29FF268A1CFDA86300DF2A9B /* WOWShareView.swift in Sources */,
+				2958BD921CFECA9300F6A6D7 /* SwiftWebViewProgress.swift in Sources */,
 				29FF26781CFDA86300DF2A9B /* WOWRegistController.swift in Sources */,
 				29FF267B1CFDA86300DF2A9B /* WOWBaseViewController.swift in Sources */,
 				29FF26701CFDA86300DF2A9B /* WOWSenceLikeCell.swift in Sources */,

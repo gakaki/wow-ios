@@ -12,7 +12,10 @@ import UIKit
 class WOWUserInfoController: WOWBaseTableViewController {
 
     @IBOutlet weak var headImageView: UIImageView!
-    @IBOutlet weak var sexLabel: UILabel!
+    
+    @IBOutlet weak var starTextField: UITextField!
+    @IBOutlet weak var ageTextField: UITextField!
+    @IBOutlet weak var sexTextField: UITextField!
     @IBOutlet weak var nickLabel: UILabel!
     //个性签名
     @IBOutlet weak var desLabel: UILabel!
@@ -23,34 +26,51 @@ class WOWUserInfoController: WOWBaseTableViewController {
     private var nick        :String = WOWUserManager.userName
     private var sex         :String = WOWUserManager.userSex
     private var des         :String = WOWUserManager.userDes
+//    private var star        :string = WOWUserManager.userStar
     
+    var pickDataArr:[String] = [String]()
+    var editingTextField:UITextField?
 //MARK:Lazy
     lazy var imagePicker:UIImagePickerController = {
         let v = UIImagePickerController()
         v.delegate = self
         return v
     }()
+    
+    lazy var pickerContainerView :WOWPickerView = {
+        let v = NSBundle.mainBundle().loadNibNamed("WOWPickerView", owner: self, options: nil).last as! WOWPickerView
+        return v
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func setUI() {
         super.setUI()
         navigationItem.title = "个人信息"
-        headImageView.borderRadius(23)
+        headImageView.borderRadius(25)
         configUserInfo()
+        configTextField()
+    }
+    
+    private func configTextField(){
+        ageTextField.inputView = pickerContainerView
+        sexTextField.inputView = pickerContainerView
+        starTextField.inputView = pickerContainerView
+        pickerContainerView.pickerView.delegate = self
+        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancelPicker), forControlEvents:.TouchUpInside)
+        pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), forControlEvents:.TouchUpInside)
     }
     
     private func configUserInfo(){
         dispatch_async(dispatch_get_main_queue()) { 
-            self.sexLabel.text    = WOWUserManager.userSex
+            self.sexTextField.text    = WOWUserManager.userSex
             self.desLabel.text    = WOWUserManager.userDes
             self.nickLabel.text   = WOWUserManager.userName
             self.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
@@ -58,10 +78,16 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }
     
 //MARK:Actions
-    func editInfoComplete() {
-        if let closure = self.editInfoAction {
-            closure()
-        }
+    func cancelPicker(){
+        ageTextField.resignFirstResponder()
+        starTextField.resignFirstResponder()
+        sexTextField.resignFirstResponder()
+    }
+    
+    func surePicker() {
+        let row = pickerContainerView.pickerView.selectedRowInComponent(0)
+        editingTextField?.text = pickDataArr[row]
+        cancelPicker()
     }
     
 //MARK:Private Network
@@ -85,45 +111,38 @@ class WOWUserInfoController: WOWBaseTableViewController {
             DLog(errorMsg)
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destina = segue.destinationViewController as? WOWInfoTextController
+        guard let toVC = destina else{
+            return
+        }
+        let segueid = segue.identifier
+        switch segueid!{
+        case "usernick":
+            toVC.entrance = InfoTextEntrance.NickEntrance(value: "昵称")
+        case "userdesc":
+            toVC.entrance = InfoTextEntrance.NickEntrance(value: "签名")
+        case "userjob":
+            toVC.entrance = InfoTextEntrance.NickEntrance(value: "职业")
+        default:break
+        }
+    }
 }
 
 
 extension WOWUserInfoController{
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.row {
-        case 0:
-            DLog("头像")
+        switch (indexPath.section,indexPath.row) {
+        case (0,0):
             showPicture()
-        case 1:
-            changeNick()
-        case 2:
-            changeDes()
-        case 3:
-            changeSex()
         default:
             break
         }
     }
     
-    //更改签名
-    private func changeDes(){
-        let alertController: UIAlertController = UIAlertController(title: "更改签名", message: nil, preferredStyle: .Alert)
-        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .Cancel) { action -> Void in
-            
-        }
-        
-        alertController.addAction(cancelAction)
-        let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
-            let field = alertController.textFields?.first
-            self.des = field?.text ?? ""
-            self.request()
-        }
-        alertController.addAction(sureAction)
-        alertController.addTextFieldWithConfigurationHandler { (field) in
-            field.placeholder = "请输入签名"
-        }
-        self.presentViewController(alertController, animated: true, completion: nil)
-
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 0.01 : 15
     }
     
     private func showPicture(){
@@ -155,46 +174,6 @@ extension WOWUserInfoController{
             DLog("读取相册错误")
         }
     }
-    
-    
-    //更改昵称
-    private func changeNick(){
-        let alertController: UIAlertController = UIAlertController(title: "更改昵称", message: nil, preferredStyle: .Alert)
-        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .Cancel) { action -> Void in
-            
-        }
-        
-        alertController.addAction(cancelAction)
-        let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
-            let field = alertController.textFields?.first
-            self.nick = field?.text ?? ""
-            self.request()
-        }
-        alertController.addAction(sureAction)
-        alertController.addTextFieldWithConfigurationHandler { (field) in
-            field.placeholder = "请输入昵称"
-        }
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-
-    private func changeSex(){
-        let actionSheetController: UIAlertController = UIAlertController(title: "更改性别", message: nil, preferredStyle: .ActionSheet)
-        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .Cancel) { action -> Void in
-            
-        }
-        actionSheetController.addAction(cancelAction)
-        let manAction: UIAlertAction = UIAlertAction(title: "男", style: .Default) { action -> Void in
-            self.sex = "男"
-            self.request()
-        }
-        actionSheetController.addAction(manAction)
-        let womanAction: UIAlertAction = UIAlertAction(title: "女", style: .Default) { action -> Void in
-            self.sex = "女"
-            self.request()
-        }
-        actionSheetController.addAction(womanAction)
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
-    }
 }
 
 
@@ -203,7 +182,7 @@ extension WOWUserInfoController{
 
 //MARK:Delegate
 
-extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
         let data = UIImageJPEGRepresentation(image,0.5)
@@ -222,6 +201,38 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
             }
         }
     }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickDataArr.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickDataArr[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        editingTextField?.text = pickDataArr[row]
+    }
+    
+   func textFieldShouldBeginEditing(textField: UITextField) -> Bool{
+        editingTextField = textField
+        if textField == ageTextField {
+            pickDataArr = ["00后","95后","90后","85后","80后","75后","70后","65后","60后"]
+        }else if textField == starTextField{
+            pickDataArr = ["水瓶座","双鱼座","白羊座","金牛座","双子座","巨蟹座","狮子座","处女座","天秤座","天蝎座","射手座","摩羯座"]
+        }else if textField == sexTextField{
+            pickDataArr = ["男","女"]
+        }
+        self.pickerContainerView.pickerView.reloadComponent(0)
+        let row = pickDataArr.indexesOf(textField.text ?? "").first ?? 0
+        pickerContainerView.pickerView.selectRow(row, inComponent: 0, animated: true)
+        return true
+    }
+    
 }
 
 

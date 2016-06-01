@@ -39,8 +39,8 @@ struct WOWID {
     }
     
     struct LeanCloud {
-        static let appID       = "aSqukoQ9xLsQSMh0wHqbENH2-gzGzoHsz"
-        static let appKey      = "IGR5VQANuxRq3XsQnL9MYtyW"
+        static let appID       = "O2RXUVqlHFdHRAXRMiTzzqCe-gzGzoHsz"
+        static let appKey      = "B3jDpT847ccj3hYQkh7Xk4xu"
     }
     
     struct RongCloud {

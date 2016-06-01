@@ -12,9 +12,9 @@ import StoreKit
 class WOWUserController: WOWBaseTableViewController {
     var headerView      :   WOWUserTopView!
     
-    @IBOutlet weak var allOrderView: UIView!
-    @IBOutlet weak var noPayView: UIView!
-    @IBOutlet weak var noSendView: UIView!
+    @IBOutlet weak var allOrderView : UIView!
+    @IBOutlet weak var noPayView    : UIView!
+    @IBOutlet weak var noSendView   : UIView!
     @IBOutlet weak var noReceiveView: UIView!
     @IBOutlet weak var noCommentView: UIView!
     

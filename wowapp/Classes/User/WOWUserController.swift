@@ -118,7 +118,9 @@ class WOWUserController: WOWBaseTableViewController {
     
     
     private func goLogin(){
-        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
+        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
+        let login = vc.topViewController as! WOWLoginController
+        login.fromUserCenter = true
         presentViewController(vc, animated: true, completion: nil)
     }
     
@@ -182,18 +184,6 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
     private func evaluateApp(){
         let url = NSURL(string:"https://itunes.apple.com/cn/app/jian-jiao-she-ji/id1110300308?mt=8")
         UIApplication.sharedApplication().openURL(url!)
-        
-//        let vc = SKStoreProductViewController()
-//        vc.delegate = self
-//        vc.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier:"1110300308"], completionBlock: nil)
-//        self.presentViewController(vc, animated: true, completion: nil)
-//        vc.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier:"1110300308"]) { (ret, error) in
-//            if let e = error{
-//                DLog(e)
-//            }else{
-//               
-//            }
-//        }
     }
     
     func productViewControllerDidFinish(viewController: SKStoreProductViewController) {

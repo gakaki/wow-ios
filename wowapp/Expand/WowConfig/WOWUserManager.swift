@@ -19,6 +19,8 @@ struct WOWUserManager {
     private static let WOWUserMobile        = "WOWUserMobile"
     private static let WOWUserCarCount      = "WOWUserCarCount"
     
+    static var wechatToken = ""
+    
     static var userCarCount:Int{
         get{
             return (MGDefault.objectForKey(WOWUserCarCount) as? Int) ?? 0

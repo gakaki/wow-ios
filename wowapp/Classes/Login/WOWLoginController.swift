@@ -9,11 +9,11 @@
 import UIKit
 
 class WOWLoginController: WOWBaseViewController {
-
     @IBOutlet weak var wechatButton: UIButton!
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var tipsLabel: UILabel!
+    var fromUserCenter:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +46,13 @@ class WOWLoginController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func regist(sender: UIButton) {
-        let v = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController))
+        goRegist()
+    }
+    
+    func goRegist(fromWechat:Bool = false) {
+        let v = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController)) as! WOWRegistController
+        v.fromUserCenter = fromUserCenter
+        v.byWechat = fromWechat
         navigationController?.pushViewController(v, animated: true)
     }
     
@@ -60,16 +66,43 @@ class WOWLoginController: WOWBaseViewController {
     @IBAction func wechatLogin(sender: UIButton) {
         let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
         UMSocialControllerService.defaultControllerService().socialUIDelegate = self
-        snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {response in
-            if response.responseCode == UMSResponseCodeSuccess {
-                let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
-                print("username is \(snsAccount.userName), uid is \(snsAccount.usid), token is \(snsAccount.accessToken) url is \(snsAccount.iconURL)")
-            }else{
-                DLog(response)
+        snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {[weak self]response in
+            if let strongSelf = self{
+                if response.responseCode == UMSResponseCodeSuccess {
+                    let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
+                    DLog("username is \(snsAccount.userName), uid is \(snsAccount.usid), token is \(snsAccount.accessToken) url is \(snsAccount.iconURL)")
+                    let token = snsAccount.accessToken
+                    strongSelf.checkWechatToken(token)
+                }else{
+                    DLog(response)
+                }
             }
         })
     }
     
+    private func checkWechatToken(token:String?){
+        //FIXME:验证token是否是第一次咯或者是第二次
+        WOWUserManager.wechatToken = token ?? ""
+        let first = true //假设的bool值
+        if first {
+            goRegist(true)
+        }else{ //二次登录，拿到用户信息，这时候算是登录成功咯
+            //FIXME:未写的，先保存用户信息
+            loginSuccess()
+        }
+    }
+    
+    
+    private func loginSuccess(){
+        WOWBuyCarMananger.updateBadge()
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            self.dismissViewControllerAnimated(true, completion: nil)
+            if self.fromUserCenter{
+                UIApplication.appTabBarController.selectedIndex = 0
+            }
+        })
+    }
     
     @IBAction func login(sender: UIButton) {
         guard let phone = accountTextField.text where !phone.isEmpty else{
@@ -92,11 +125,7 @@ class WOWLoginController: WOWBaseViewController {
                 DLog(result)
                 let model = Mapper<WOWUserModel>().map(result)
                 WOWUserManager.saveUserInfo(model)
-                WOWBuyCarMananger.updateBadge()
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
-                })
+                strongSelf.loginSuccess()
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{

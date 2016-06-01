@@ -9,11 +9,11 @@
 import UIKit
 
 class WOWRegistController: WOWBaseViewController {
-    
-
+    var fromUserCenter:Bool = false
+    var byWechat      :Bool = false
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var msgCodeTextField: UITextField!
-    
+    @IBOutlet weak var registButton: UIButton!
     @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var msgCodeButton: UIButton!
     
@@ -39,6 +39,8 @@ class WOWRegistController: WOWBaseViewController {
 //MARK:Private Method
     override func setUI() {
         configNavItem()
+        navigationItem.title = byWechat ? "绑定手机" :"注册"
+        registButton.setTitle(byWechat ? "绑定" :"注册", forState: .Normal)
     }
     
     private func configNavItem(){
@@ -113,19 +115,24 @@ class WOWRegistController: WOWBaseViewController {
             tipsLabel.text = "请阅读并同意用户协议"
             return
         }
-        
+        //FIXME:这个接口应该扩充一个字段 wechattoken 不带的话就是注册，带的话就是绑定 wowusermanager.wechatoken
         WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!,code:msgCodeTextField.text!), successClosure: { [weak self](result) in
             if let strongSelf = self{
             let model = Mapper<WOWUserModel>().map(result)
             WOWUserManager.saveUserInfo(model)
             NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
+                vc.fromUserCenter = strongSelf.fromUserCenter
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
             })
         }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
                 strongSelf.tipsLabel.text = errorMsg
+                let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
+                vc.fromUserCenter = strongSelf.fromUserCenter
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

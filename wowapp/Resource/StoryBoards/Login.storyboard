@@ -160,6 +160,7 @@
                         <outlet property="accountTextField" destination="7Ko-dc-HOq" id="Vf7-Yr-lIO"/>
                         <outlet property="passWordTextField" destination="qQv-aS-J9F" id="9qo-MK-bik"/>
                         <outlet property="tipsLabel" destination="SOz-4N-7uh" id="GvQ-sc-UHO"/>
+                        <outlet property="wechatButton" destination="moI-Aj-fKa" id="MNv-XE-Z7v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnE-sx-yeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -327,9 +328,12 @@
                                             <constraint firstAttribute="height" constant="0.5" id="SO0-wr-roG"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzB-cl-nwU">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzB-cl-nwU">
                                         <rect key="frame" x="250" y="0.0" width="55" height="48"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="P17-HH-m0r"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <state key="normal" title="获取验证码">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

@@ -61,12 +61,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func applicationDidBecomeActive(application: UIApplication) {
+        UMSocialSnsService.applicationDidBecomeActive()
+    }
+    
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        //        UMSocialSnsService.handleOpenURL(url)
         if Pingpp.handleOpenURL(url, withCompletion: nil) {
             return true
         }
         if MonkeyKing.handleOpenURL(url) {
+            return true
+        }
+        if UMSocialSnsService.handleOpenURL(url) {
             return true
         }
         return true
@@ -75,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // iOS 9 以上请用这个
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         Pingpp.handleOpenURL(url, withCompletion: nil)
+        UMSocialSnsService.handleOpenURL(url)
         return true
     }
     

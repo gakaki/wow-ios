@@ -10,6 +10,7 @@ import UIKit
 
 class WOWLoginController: WOWBaseViewController {
 
+    @IBOutlet weak var wechatButton: UIButton!
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var tipsLabel: UILabel!
@@ -31,6 +32,7 @@ class WOWLoginController: WOWBaseViewController {
 //MARK:Private Method
     override func setUI() {
         configNavItem()
+        wechatButton.hidden = !WXApi.isWXAppInstalled()
     }
     
     private func configNavItem(){

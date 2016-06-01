@@ -94,7 +94,7 @@ class WOWLoginController: WOWBaseViewController {
     
     
     private func loginSuccess(){
-        WOWBuyCarMananger.updateBadge()
+        WOWBuyCarMananger.updateBadge(true)
         NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
             self.dismissViewControllerAnimated(true, completion: nil)

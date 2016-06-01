@@ -138,8 +138,6 @@ class WOWUserController: WOWBaseTableViewController {
     func loginSuccess(){
         configHeaderView()
     }
-    
-    
 }
 
 
@@ -148,6 +146,16 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        switch (indexPath.section,indexPath.row) {
+        case (1,2): //打电话
+            WOWTool.callPhone()
+            return
+        case (1,4): //支持尖叫设计
+            evaluateApp()
+            return
+        default:
+            break
+        }
         guard WOWUserManager.loginStatus else{
             goLogin()
             return
@@ -158,10 +166,6 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             case 1://邀请好友
                 let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
                 navigationController?.pushViewController(vc, animated: true)
-            case 2://打电话
-                WOWTool.callPhone()
-            case 4://支持尖叫设计
-                evaluateApp()
             default:
                 break
             }

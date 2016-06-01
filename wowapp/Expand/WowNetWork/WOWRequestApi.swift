@@ -55,6 +55,8 @@ public enum RequestApi{
     
     case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
     
+    case Api_Invite //邀请好友
+    
     case Api_ResetPwd(mobile:String,code:String,password:String)
     
     case Api_AddressAdd(uid:String,name:String,province:String,city:String,district:String,street:String,mobile:String,is_default:String,addressid:String)
@@ -133,6 +135,8 @@ extension RequestApi:TargetType{
             return URL_OrderList
         case .Api_OrderStatus:
             return URL_OrderStatus
+        case .Api_Invite:
+            return URL_Invite
         }
     }
     

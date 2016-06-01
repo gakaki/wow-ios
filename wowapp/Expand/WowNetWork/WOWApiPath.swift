@@ -16,9 +16,9 @@ import Foundation
 //let BaseUrl = "http://127.0.0.1:8360/apiv1/"
 
 //#if WOWDEBUG
-//    let BaseUrl = "http://apidev.dev.wowdsgn.com:8400/apiv1/" //开发
+    let BaseUrl = "http://apidev.dev.wowdsgn.com:8400/apiv1/" //开发
 //#else
-    let BaseUrl = "http://apidev.dev.wowdsgn.com/apiv1/" //正服
+//    let BaseUrl = "http://apidev.dev.wowdsgn.com/apiv1/" //正服
 //#endif
 
 /****************************API_URL接口**********************************/
@@ -72,6 +72,7 @@ let URL_CarCommit               = "order/commit"
 let URL_UpdateInfo              = "usermongo/userupdate"
 let URL_FavoriteList            = "like/get"
 let URL_UserInfo                = "usermongo/info"
+let URL_Invite                  = "articleinfo"
 
 //6.app 登录注册
 let URL_Register                = "usermongo/register"
@@ -87,5 +88,7 @@ let URL_AddressDelete           = "address/delete"
 let URL_OrderList               = "order/list"
 
 let URL_OrderStatus             = "order/setstatus" //状态客户端操作之后加上去
+
+
 
 

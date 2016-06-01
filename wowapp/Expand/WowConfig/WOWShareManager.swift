@@ -39,6 +39,7 @@ struct WOWShareManager {
             media: .URL(NSURL(string:postUrl)!)
         )
         shareBackView.show()
+        
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             var message : MonkeyKing.Message?
             switch shareType {

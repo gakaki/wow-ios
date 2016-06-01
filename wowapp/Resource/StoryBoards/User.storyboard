@@ -836,7 +836,47 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Vz-eg-Kde" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-117" y="2576"/>
+            <point key="canvasLocation" x="-137" y="3185"/>
+        </scene>
+        <!--Leave Tips Controller-->
+        <scene sceneID="aTm-Tl-CLw">
+            <objects>
+                <viewController storyboardIdentifier="WOWLeaveTipsController" id="oxA-3v-h6l" customClass="WOWLeaveTipsController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dka-Yn-Emv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Inc-sq-vBV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iG8-x2-qHv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9Sk-AK-hNf" customClass="KMPlaceholderTextView" customModule="wowapp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Pba-g8-eE4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入您的意见或反馈"/>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="9Sk-AK-hNf" firstAttribute="top" secondItem="iG8-x2-qHv" secondAttribute="top" id="Bed-aZ-alD"/>
+                            <constraint firstAttribute="trailing" secondItem="9Sk-AK-hNf" secondAttribute="trailing" id="Yit-Vy-cGz"/>
+                            <constraint firstItem="9Sk-AK-hNf" firstAttribute="leading" secondItem="iG8-x2-qHv" secondAttribute="leading" id="bzJ-cQ-uSS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="9Sk-AK-hNf" id="feq-BE-dEh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bh3-cx-fBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-117" y="2489"/>
         </scene>
         <!--喜欢的单品-->
         <scene sceneID="aIe-XK-wKa">
@@ -1251,24 +1291,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZQ-G8-yEz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1610" y="111"/>
-        </scene>
-        <!--消息中心-->
-        <scene sceneID="RTq-RK-Stc">
-            <objects>
-                <viewController storyboardIdentifier="WOWMessageController" title="消息中心" id="RZB-fZ-YLE" customClass="WOWMessageController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="QWK-Fx-Qla"/>
-                        <viewControllerLayoutGuide type="bottom" id="dqb-9M-7Ny"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xRk-hJ-PEJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IBN-VL-b8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="236" y="3195"/>
         </scene>
         <!--设置-->
         <scene sceneID="UYs-Ms-Eyd">

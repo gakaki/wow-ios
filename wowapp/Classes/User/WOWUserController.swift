@@ -150,6 +150,8 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
         case (1,2): //打电话
             WOWTool.callPhone()
             return
+        case (1,3): //意见反馈
+            goLeavaTips()
         case (1,4): //支持尖叫设计
             evaluateApp()
             return
@@ -183,6 +185,11 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
+    }
+    
+    private func goLeavaTips(){
+        let vc = UIStoryboard.initialViewController("User", identifier: String(WOWLeaveTipsController))
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func evaluateApp(){

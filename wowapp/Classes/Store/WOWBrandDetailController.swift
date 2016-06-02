@@ -83,6 +83,7 @@ extension WOWBrandDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWBrandDetailCell
+        cell.backgroundColor = UIColor.clearColor()
         cell.desTextLabel.textColor = MGRgb(0, g: 0, b: 0, alpha: 0.5)
         cell.desTextLabel?.text = brandModel.desc
         cell.desTextLabel.shadowOffset = CGSizeMake(1, 1)

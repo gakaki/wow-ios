@@ -816,22 +816,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XxR-MW-snF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testinvitation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qx-UB-gfU">
+                                <rect key="frame" x="0.0" y="20" width="320" height="266"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9s-jE-15A">
+                                <rect key="frame" x="15" y="358" width="290" height="44"/>
+                                <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="T9H-rV-j6Z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="邀请好友">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="inviteButtonClick:" destination="kXA-70-hnO" eventType="touchUpInside" id="aMk-2z-Co1"/>
+                                    <action selector="submitButtonClick:" destination="YYB-h6-kCr" eventType="touchUpInside" id="JKN-WA-Z5m"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                 " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIA-Ap-Wk5">
+                                <rect key="frame" x="15" y="316" width="290" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="XxR-MW-snF" firstAttribute="leading" secondItem="zny-y5-UBX" secondAttribute="leading" id="0G8-Fi-KVR"/>
-                            <constraint firstItem="Zmp-0r-7aY" firstAttribute="top" secondItem="XxR-MW-snF" secondAttribute="bottom" id="Acj-E6-x6b"/>
-                            <constraint firstItem="XxR-MW-snF" firstAttribute="top" secondItem="zny-y5-UBX" secondAttribute="top" id="tpc-hh-uvz"/>
-                            <constraint firstAttribute="trailing" secondItem="XxR-MW-snF" secondAttribute="trailing" id="zv5-Qh-63U"/>
+                            <constraint firstAttribute="trailing" secondItem="ZIA-Ap-Wk5" secondAttribute="trailing" constant="15" id="81V-Nz-usr"/>
+                            <constraint firstAttribute="trailing" secondItem="2Qx-UB-gfU" secondAttribute="trailing" id="Jfv-dv-f3C"/>
+                            <constraint firstItem="R9s-jE-15A" firstAttribute="top" secondItem="ZIA-Ap-Wk5" secondAttribute="bottom" constant="25" id="M6B-pt-GQ4"/>
+                            <constraint firstItem="2Qx-UB-gfU" firstAttribute="top" secondItem="DHM-F5-IPB" secondAttribute="bottom" id="V2P-Ku-e4C"/>
+                            <constraint firstAttribute="trailing" secondItem="R9s-jE-15A" secondAttribute="trailing" constant="15" id="ek7-Pz-fH1"/>
+                            <constraint firstItem="R9s-jE-15A" firstAttribute="leading" secondItem="zny-y5-UBX" secondAttribute="leading" constant="15" id="iLA-P2-00E"/>
+                            <constraint firstItem="ZIA-Ap-Wk5" firstAttribute="leading" secondItem="zny-y5-UBX" secondAttribute="leading" constant="15" id="mTL-tn-MaH"/>
+                            <constraint firstItem="ZIA-Ap-Wk5" firstAttribute="top" secondItem="2Qx-UB-gfU" secondAttribute="bottom" constant="30" id="wkT-9k-PLY"/>
+                            <constraint firstItem="2Qx-UB-gfU" firstAttribute="leading" secondItem="zny-y5-UBX" secondAttribute="leading" id="xTu-gF-97K"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="邀请好友" id="nNn-kc-fGh"/>
                     <connections>
-                        <outlet property="webView" destination="XxR-MW-snF" id="jr4-AW-Tdr"/>
+                        <outlet property="bannerImageView" destination="2Qx-UB-gfU" id="84O-bw-UFT"/>
+                        <outlet property="titleLabel" destination="ZIA-Ap-Wk5" id="LUi-QP-26X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Vz-eg-Kde" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1536,6 +1562,7 @@
         <image name="me_order_unconfirm" width="30" height="30"/>
         <image name="me_order_waiting" width="30" height="30"/>
         <image name="next_arrow" width="8" height="14"/>
+        <image name="testinvitation" width="365" height="266"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="FQJ-fc-DSo"/>

@@ -150,8 +150,6 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
         case (1,2): //打电话
             WOWTool.callPhone()
             return
-        case (1,3): //意见反馈
-            goLeavaTips()
         case (1,4): //支持尖叫设计
             evaluateApp()
             return
@@ -168,6 +166,8 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             case 1://邀请好友
                 let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
                 navigationController?.pushViewController(vc, animated: true)
+            case 3: //意见反馈
+                goLeavaTips()
             default:
                 break
             }

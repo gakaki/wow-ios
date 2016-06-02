@@ -1164,7 +1164,6 @@
 				29FF25931CFDA86300DF2A9B /* WOWGoodsBigCell.xib */,
 				29FF25941CFDA86300DF2A9B /* WOWGoodsBuyView.swift */,
 				29FF25951CFDA86300DF2A9B /* WOWGoodsBuyView.xib */,
-				29FF25961CFDA86300DF2A9B /* WOWGoodsController.swift */,
 				29FF25971CFDA86300DF2A9B /* WOWGoodsDetailCell.swift */,
 				29FF25981CFDA86300DF2A9B /* WOWGoodsDetailCell.xib */,
 				29FF259B1CFDA86300DF2A9B /* WOWGoodsParamCell.swift */,
@@ -1186,12 +1185,13 @@
 		29FF27241CFDB00F00DF2A9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				29FF25A51CFDA86300DF2A9B /* WOWStoreController.swift */,
+				29FF25961CFDA86300DF2A9B /* WOWGoodsController.swift */,
 				29FF258A1CFDA86300DF2A9B /* WOWBrandDetailController.swift */,
 				29FF258B1CFDA86300DF2A9B /* WOWBrandHomeController.swift */,
 				29FF258C1CFDA86300DF2A9B /* WOWBrandListController.swift */,
 				29FF25991CFDA86300DF2A9B /* WOWGoodsDetailController.swift */,
 				29FF25A21CFDA86300DF2A9B /* WOWSearchResultController.swift */,
-				29FF25A51CFDA86300DF2A9B /* WOWStoreController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

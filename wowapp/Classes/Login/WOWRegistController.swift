@@ -130,9 +130,6 @@ class WOWRegistController: WOWBaseViewController {
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
                 strongSelf.tipsLabel.text = errorMsg
-                let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
-                vc.fromUserCenter = strongSelf.fromUserCenter
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

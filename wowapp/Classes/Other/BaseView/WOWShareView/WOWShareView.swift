@@ -30,7 +30,7 @@ class WOWShareBackView:UIView{
     }
     
     lazy var backClear:UIView! = {
-        let v = UIView(frame:CGRectMake(0, self.h, self.w, self.h))
+        let v = UIView(frame:CGRectMake(0, self.h, self.w,self.popWindow.h))
         v.backgroundColor = UIColor.clearColor()
         return v
     }()

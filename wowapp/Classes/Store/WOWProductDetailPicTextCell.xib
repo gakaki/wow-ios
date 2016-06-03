@@ -26,7 +26,7 @@
                             <constraint firstAttribute="height" constant="141" id="ZIr-99-Cad"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wD3-0I-tZE">
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wD3-0I-tZE">
                         <rect key="frame" x="128" y="203" width="65" height="15"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看详情" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NND-Ev-QOf">
@@ -35,7 +35,7 @@
                                 <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detailmore" translatesAutoresizingMaskIntoConstraints="NO" id="lYD-aw-ki9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="detailmore" translatesAutoresizingMaskIntoConstraints="NO" id="lYD-aw-ki9">
                                 <rect key="frame" x="53" y="1" width="12" height="12"/>
                             </imageView>
                         </subviews>

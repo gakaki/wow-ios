@@ -72,7 +72,7 @@ public let WOWSizeScale:CGFloat = 1.2
 let GrayColorlevel1 = MGRgb(0, g: 0, b: 0)
 /// 60
 let GrayColorlevel2 = MGRgb(60, g: 60, b: 60)
- /// 128
+ /// 128  #808080
 let GrayColorlevel3 = MGRgb(128, g: 128, b: 128)
 /// 240
 let GrayColorlevel4 = MGRgb(240, g: 240, b: 240)

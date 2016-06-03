@@ -302,8 +302,6 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
         }
         vc.hideNavigationBar = true
         vc.productID = item.productID
-//        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWGoodsSmallCell
-//        vc.shareProductImage = cell.pictureImageView.image
         navigationController?.pushViewController(vc, animated: true)
     }
 }

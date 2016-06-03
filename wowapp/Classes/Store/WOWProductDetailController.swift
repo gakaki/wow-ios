@@ -94,7 +94,7 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.configData()
-                strongSelf.numberSections = 4
+                strongSelf.numberSections = 5
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }

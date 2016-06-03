@@ -21,6 +21,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.registerNib(UINib.nibName(String(WOWProductDetailAttriCell)), forCellReuseIdentifier:String(WOWProductDetailAttriCell))
         tableView.registerNib(UINib.nibName(String(WOWProductDetailTipsCell)), forCellReuseIdentifier:String(WOWProductDetailTipsCell))
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
+        tableView.registerNib(UINib.nibName(String(WOWProductDetailAboutCell)), forCellReuseIdentifier: "WOWProductDetailAboutCell")
     }
     
     
@@ -38,6 +39,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             return 1
         case 3: //评论
             return 3
+        case 4: //相关商品
+            return 1
         default:
             break
         }
@@ -73,6 +76,11 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case (3,_)://评论
             let cell = tableView.dequeueReusableCellWithIdentifier("WOWCommentCell", forIndexPath: indexPath) as! WOWCommentCell
             returnCell = cell
+        case (4,_)://相关商品
+            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailAboutCell", forIndexPath: indexPath) as! WOWProductDetailAboutCell
+            //FIXME:测试
+            cell.dataArr = [productModel!,productModel!,productModel!,productModel!,productModel!]
+            returnCell = cell
         default:
             break
         }
@@ -83,15 +91,45 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         switch section {
         case 3:
             return 30
+        case 4://相关商品
+            return 40
         default:
-            return 0
+            return 0.01
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 3:
+            return 60
+        case 4:
+            return 20
+        default:
+            return 0.01
+        }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.textColor = GrayColorlevel3
+            headerView.textLabel?.font = Fontlevel004
+            headerView.backgroundColor = DefaultBackColor
+        }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 4:
+            return "相关商品"
+        default:
+            return nil
         }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 3:
-            let v = DetailSectionView(leftTitle: "评论")
+            let v = DetailSectionHeaderView(leftTitle:"评论")
             return v
         default:
             return nil
@@ -99,14 +137,75 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     }
     
     
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        switch section {
+        case 3:
+            let v = DetailSectionFooterView(frame:CGRectMake(0, 0, MGScreenWidth, 60))
+            v.addTapGesture(action: {[weak self](tap) in
+                if let strongSelf = self{
+                    DLog("更多评论咯")
+                }
+            })
+            return v
+        default:
+            return nil
+        }
+    }
 }
 
-class DetailSectionView:UIView{
+
+class DetailSectionFooterView:UIView{
+    var containerView = UIView()
+    var leftLabel = UILabel()
+    var rightImageView = UIImageView()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.whiteColor()
+        configSubview()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configSubview(){
+        addSubview(containerView)
+        containerView.snp_makeConstraints {[weak self](make) in
+            if let strongSelf = self{
+                make.center.equalTo(strongSelf.snp_center)
+            }
+        }
+        
+        containerView.addSubview(leftLabel)
+        leftLabel.text = "查看详情"
+        leftLabel.font = Fontlevel004
+        leftLabel.textColor = GrayColorlevel3
+        leftLabel.snp_makeConstraints {[weak self](make) in
+            if let strongSelf = self{
+                make.left.top.bottom.equalTo(strongSelf.containerView).offset(0)
+            }
+        }
+        rightImageView.image = UIImage(named: "detailmore")
+        containerView.addSubview(rightImageView)
+        rightImageView.snp_makeConstraints {[weak self](make) in
+            if let strongSelf = self{
+                make.right.equalTo(strongSelf.containerView.snp_right).offset(0)
+                make.left.equalTo(strongSelf.leftLabel.snp_right).offset(5)
+                make.centerY.equalTo(strongSelf.leftLabel.snp_centerY)
+            }
+        }
+        
+    }
+    
+}
+
+class DetailSectionHeaderView:UIView{
     var leftLabel:UILabel!
     var line:UIView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configSubviews()
     }
     
     private func configSubviews(){
@@ -124,6 +223,7 @@ class DetailSectionView:UIView{
         line.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.equalTo(strongSelf.leftLabel.snp_right).offset(10)
+                make.right.equalTo(strongSelf).offset(0)
                 make.centerY.equalTo(strongSelf.leftLabel.snp_centerY)
                 make.height.equalTo(0.5)
             }
@@ -136,6 +236,7 @@ class DetailSectionView:UIView{
         self.backgroundColor = backColor
         self.leftLabel.textColor = leftTtileColor
         self.leftLabel.text = leftTitle
+        self.leftLabel.font = Fontlevel002
     }
     
     required init?(coder aDecoder: NSCoder) {

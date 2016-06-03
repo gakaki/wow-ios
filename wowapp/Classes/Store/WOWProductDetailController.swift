@@ -50,17 +50,6 @@ class WOWProductDetailController: WOWBaseViewController {
         configTable()
     }
 
-    private func configTable(){
-        tableView.estimatedRowHeight = 200
-        tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.mj_header = self.mj_header
-        tableView.tableHeaderView = cycleView
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailPriceCell)), forCellReuseIdentifier:String(WOWProductDetailPriceCell))
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailDescCell)), forCellReuseIdentifier:String(WOWProductDetailDescCell))
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailPicTextCell)), forCellReuseIdentifier:String(WOWProductDetailPicTextCell))
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailAttriCell)), forCellReuseIdentifier:String(WOWProductDetailAttriCell))
-    }
-    
     private func configData(){
         cycleView.imageURLArray = [productModel?.productImage ?? ""]
         likeButton.selected = (productModel?.user_isLike ?? "false") == "true"
@@ -105,7 +94,7 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.configData()
-                strongSelf.numberSections = 2
+                strongSelf.numberSections = 4
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }

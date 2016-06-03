@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,20 +15,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品参数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoN-nt-fJ4">
-                        <rect key="frame" x="15" y="0.0" width="56" height="50"/>
+                        <rect key="frame" x="15" y="0.0" width="56" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSB-8W-Fut">
-                        <rect key="frame" x="81" y="25" width="239" height="1"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSB-8W-Fut" userLabel="line">
+                        <rect key="frame" x="81" y="9" width="239" height="1"/>
                         <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="A16-kp-GLY"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OE4-CA-Po2">
-                        <rect key="frame" x="70" y="275" width="180" height="35"/>
+                        <rect key="frame" x="70" y="243" width="180" height="35"/>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="SC4-Ce-ttA"/>
@@ -49,7 +48,7 @@
                         </connections>
                     </button>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8H9-fF-5fw">
-                        <rect key="frame" x="15" y="65" width="290" height="180"/>
+                        <rect key="frame" x="15" y="33" width="290" height="180"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="180" id="fyn-Tb-Z7V"/>
@@ -67,14 +66,12 @@
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="OE4-CA-Po2" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="1hF-bl-HA6"/>
                     <constraint firstItem="OE4-CA-Po2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="6yE-c0-C3x"/>
                     <constraint firstAttribute="trailing" secondItem="RSB-8W-Fut" secondAttribute="trailing" id="774-ee-JRe"/>
                     <constraint firstItem="RSB-8W-Fut" firstAttribute="leading" secondItem="DoN-nt-fJ4" secondAttribute="trailing" constant="10" id="HZ1-wK-JVI"/>
                     <constraint firstItem="8H9-fF-5fw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="J9D-Xl-QrB"/>
                     <constraint firstAttribute="trailing" secondItem="OE4-CA-Po2" secondAttribute="trailing" constant="70" id="Jt9-bH-bti"/>
                     <constraint firstItem="8H9-fF-5fw" firstAttribute="top" secondItem="DoN-nt-fJ4" secondAttribute="bottom" constant="15" id="NoV-Qc-nrC"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="OE4-CA-Po2" secondAttribute="bottom" constant="10" id="Q40-fJ-LKT"/>
                     <constraint firstAttribute="trailing" secondItem="8H9-fF-5fw" secondAttribute="trailing" constant="15" id="dlJ-H9-GjL"/>
                     <constraint firstItem="DoN-nt-fJ4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fBx-m3-hmh"/>
                     <constraint firstItem="RSB-8W-Fut" firstAttribute="centerY" secondItem="DoN-nt-fJ4" secondAttribute="centerY" id="h72-hN-Dxl"/>
@@ -82,11 +79,6 @@
                     <constraint firstItem="OE4-CA-Po2" firstAttribute="top" secondItem="8H9-fF-5fw" secondAttribute="bottom" constant="30" id="sgE-ez-SCk"/>
                     <constraint firstAttribute="bottom" secondItem="OE4-CA-Po2" secondAttribute="bottom" priority="750" constant="50" id="xL3-Ju-x88"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="1hF-bl-HA6"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>

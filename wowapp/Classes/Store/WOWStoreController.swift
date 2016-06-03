@@ -101,8 +101,9 @@ extension WOWStoreController:BrandCellDelegate{
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    //MARK:推荐商品
     func recommenProductCellClick(productModel: WOWProductModel) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productID = productModel.productID
         navigationController?.pushViewController(vc, animated: true)

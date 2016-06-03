@@ -23,7 +23,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     var updateBadgeAction               : WOWActionClosure?
     private var shareProductImage:UIImage? //供分享使用
     
-    lazy var placeImageView:UIImageView={
+    lazy var placeImageView:UIImageView={  //供分享使用
         let image = UIImageView()
         return image
     }()

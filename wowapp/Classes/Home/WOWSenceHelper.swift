@@ -58,7 +58,7 @@ class WOWSenceHelper: NSObject {
             returnCell = cell
         case 4:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
-                cell.hideHeadImage()
+//                cell.hideHeadImage()
             if let model = sceneModel?.comments?[indexPath.row] {
                 cell.commentLabel.text = model.comment
                 cell.dateLabel.text    = model.created_at

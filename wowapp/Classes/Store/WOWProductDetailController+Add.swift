@@ -92,7 +92,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case 3:
             return 30
         case 4://相关商品
-            return 40
+            return 50
         default:
             return 0.01
         }
@@ -109,27 +109,30 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
-        if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.textColor = GrayColorlevel3
-            headerView.textLabel?.font = Fontlevel004
-            headerView.backgroundColor = DefaultBackColor
-        }
-    }
+//    func tableView(tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
+//        if let headerView = view as? UITableViewHeaderFooterView {
+//            headerView.textLabel?.textColor = GrayColorlevel3
+//            headerView.textLabel?.font = Fontlevel004
+//        }
+//    }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 4:
-            return "相关商品"
-        default:
-            return nil
-        }
-    }
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        switch section {
+//        case 4:
+//            return "相关商品"
+//        default:
+//            return nil
+//        }
+//    }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 3:
+        case 3://评论
             let v = DetailSectionHeaderView(leftTitle:"评论")
+            return v
+        case 4: //相关商品
+            let v = DetailSectionHeaderView(leftTitle:"相关商品", backColor:DefaultBackColor, leftTtileColor:GrayColorlevel3)
+            v.line.hidden = true
             return v
         default:
             return nil

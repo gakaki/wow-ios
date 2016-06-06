@@ -212,7 +212,7 @@ class WOWSenceController: WOWBaseViewController {
 //MARK: Delegate
 extension WOWSenceController:WOWSubAlertDelegate{
     func subAlertItemClick(productID:String) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.productID = productID
         vc.hideNavigationBar = true
         WOWSenceHelper.senceController.navigationController?.pushViewController(vc, animated: true)
@@ -270,7 +270,7 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let  model = sceneModel?.recommendProducts?[indexPath.row]
         let  pid = model?.productID ?? ""
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.productID = pid
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

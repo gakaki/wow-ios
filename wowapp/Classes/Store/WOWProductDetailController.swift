@@ -19,10 +19,16 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
     
+    
     private var shareProductImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
         let image = UIImageView()
         return image
+    }()
+    
+    lazy var backView:WOWBuyBackView = {
+        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.w,self.view.h))
+        return v
     }()
     
     override func viewDidLoad() {
@@ -74,17 +80,47 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:分享
     @IBAction func shareClick(sender: UIButton) {
-        
+        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
+        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
     //MARK:喜欢
     @IBAction func likeClick(sender: UIButton) {
-        
+        if !WOWUserManager.loginStatus {
+            goLogin()
+        }else{
+            let uid         = WOWUserManager.userID
+            let thingid     = self.productID ?? ""
+            let type        = "1" //1为商品 2 为场景
+            let is_delete   = likeButton.selected ? "1":"0"
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
+                if let strongSelf = self{
+                    strongSelf.likeButton.selected = !strongSelf.likeButton.selected
+                }
+                }, failClosure: { (errorMsg) in
+                    
+            })
+        }
     }
     
+    
+    private func goLogin(){
+        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
+        presentViewController(vc, animated: true, completion: nil)
+    }
+    
+
     //MARK:选择规格
     func chooseStyle() {
-        DLog("选择规格")
+        WOWBuyCarMananger.sharedBuyCar.producModel = self.productModel
+        WOWBuyCarMananger.sharedBuyCar.skuName     = self.productModel?.skus?.first?.skuTitle
+        WOWBuyCarMananger.sharedBuyCar.buyCount    = 1
+        WOWBuyCarMananger.sharedBuyCar.skuID       = self.productModel?.skus?.first?.skuID ?? ""
+        WOWBuyCarMananger.sharedBuyCar.skuPrice = productModel?.price ?? ""
+        WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
+        view.addSubview(backView)
+        view.bringSubviewToFront(backView)
+        backView.show()
     }
     
     @IBAction func backClick(sender: UIButton) {

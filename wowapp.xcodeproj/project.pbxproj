@@ -1236,8 +1236,8 @@
 			isa = PBXGroup;
 			children = (
 				29FF25A51CFDA86300DF2A9B /* WOWStoreController.swift */,
-				29FF258A1CFDA86300DF2A9B /* WOWBrandDetailController.swift */,
 				29FF258B1CFDA86300DF2A9B /* WOWBrandHomeController.swift */,
+				29FF258A1CFDA86300DF2A9B /* WOWBrandDetailController.swift */,
 				29FF258C1CFDA86300DF2A9B /* WOWBrandListController.swift */,
 				29FF25A21CFDA86300DF2A9B /* WOWSearchResultController.swift */,
 				29FF25961CFDA86300DF2A9B /* WOWGoodsController.swift */,
@@ -1315,10 +1315,10 @@
 		29FF272A1CFDB08300DF2A9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				29FF25451CFDA86300DF2A9B /* WOWCommentController.swift */,
 				29FF25471CFDA86300DF2A9B /* WOWController.swift */,
 				29FF254A1CFDA86300DF2A9B /* WOWLikeListController.swift */,
 				29FF25571CFDA86300DF2A9B /* WOWSearchChildController.swift */,
+				29FF25451CFDA86300DF2A9B /* WOWCommentController.swift */,
 				29FF25581CFDA86300DF2A9B /* WOWSearchController.swift */,
 				29FF255A1CFDA86300DF2A9B /* WOWSearchsController.swift */,
 				29FF255B1CFDA86300DF2A9B /* WOWSenceController.swift */,

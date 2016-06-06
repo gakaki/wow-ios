@@ -7,10 +7,6 @@
 //
 
 import UIKit
-
-
-
-
 class WOWGoodsDetailController: WOWBaseViewController {
     var productID:String?
     var cycleView:CyclePictureView!

@@ -34,7 +34,10 @@ class WOWProductDetailDescCell: UITableViewCell {
     }
  
     @IBAction func brandClick(sender: UIButton) {
-        DLog("调到品牌去")
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.brandID = productModel?.brandID
+        vc.hideNavigationBar = true
+        UIApplication.currentViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func designerClick(sender: UIButton) {
         DLog("调到设计师去")

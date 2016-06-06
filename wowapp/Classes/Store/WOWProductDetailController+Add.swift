@@ -119,22 +119,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             return 0.01
         }
     }
-    
-//    func tableView(tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
-//        if let headerView = view as? UITableViewHeaderFooterView {
-//            headerView.textLabel?.textColor = GrayColorlevel3
-//            headerView.textLabel?.font = Fontlevel004
-//        }
-//    }
-    
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch section {
-//        case 4:
-//            return "相关商品"
-//        default:
-//            return nil
-//        }
-//    }
+
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {

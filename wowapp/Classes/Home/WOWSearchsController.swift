@@ -28,7 +28,6 @@ class WOWSearchsController: WOWBaseViewController {
         self.navigationItem.title = ""
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         searchView.hidden = false
-//        navigationItem.leftBarButtonItem = nil
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -38,7 +37,6 @@ class WOWSearchsController: WOWBaseViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 //MARK:Lazy

@@ -56,7 +56,7 @@ class WOWSenceController: WOWBaseViewController {
     
     func configTableFooterView(){
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake((self.view.w - 1)/2,(self.view.w - 1)/2)
+        layout.itemSize = CGSizeMake((self.view.w - 0.5)/2,(self.view.w - 0.5)/2)
         layout.headerReferenceSize = CGSizeMake(MGScreenWidth,70);  //设置head大小
         layout.minimumInteritemSpacing = 0.5;
         layout.minimumLineSpacing = 0.5;
@@ -153,14 +153,8 @@ class WOWSenceController: WOWBaseViewController {
         WOWBuyCarMananger.updateBadge()
         WOWHud.showMsg("添加购物车成功")
     }
-    
-//    lazy var shareView:WOWShareBackView = {
-//        let v = WOWShareBackView(frame:CGRectMake(0, 0, self.view.w, self.view.h))
-//        return v
-//    }()
-    
+
     @IBAction func share(sender: UIButton) {
-//        shareView.show()
         //FIXME:暂时分享出去公司的官网
         WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url: WOWCompanyUrl, shareImage:WOWSenceHelper.shareImage ?? UIImage(named: "me_logo")!)
     }

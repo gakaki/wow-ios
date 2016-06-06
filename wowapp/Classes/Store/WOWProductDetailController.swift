@@ -82,6 +82,11 @@ class WOWProductDetailController: WOWBaseViewController {
         
     }
     
+    //MARK:选择规格
+    func chooseStyle() {
+        DLog("选择规格")
+    }
+    
     @IBAction func backClick(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
     }

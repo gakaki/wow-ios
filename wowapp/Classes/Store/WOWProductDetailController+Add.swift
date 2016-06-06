@@ -18,7 +18,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.registerNib(UINib.nibName(String(WOWProductDetailPriceCell)), forCellReuseIdentifier:String(WOWProductDetailPriceCell))
         tableView.registerNib(UINib.nibName(String(WOWProductDetailDescCell)), forCellReuseIdentifier:String(WOWProductDetailDescCell))
         tableView.registerNib(UINib.nibName(String(WOWProductDetailPicTextCell)), forCellReuseIdentifier:String(WOWProductDetailPicTextCell))
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailAttriCell)), forCellReuseIdentifier:String(WOWProductDetailAttriCell))
+        tableView.registerNib(UINib.nibName(String(WOWProductParamCell)), forCellReuseIdentifier:String(WOWProductParamCell))
         tableView.registerNib(UINib.nibName(String(WOWProductDetailTipsCell)), forCellReuseIdentifier:String(WOWProductDetailTipsCell))
         tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
         tableView.registerNib(UINib.nibName(String(WOWProductDetailAboutCell)), forCellReuseIdentifier: "WOWProductDetailAboutCell")
@@ -34,7 +34,10 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 3
         case 1: //参数
-            return 1
+            let ret1 = (productModel?.attributes?.count ?? 0) / 2
+            let ret2 = (productModel?.attributes?.count ?? 0) % 2
+            let total = ret1 + ret2
+            return total
         case 2: //温馨提示
             return 1
         case 3: //评论
@@ -66,9 +69,15 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 cell.showData(model)
             }
             returnCell = cell
-        case (1,0): //参数
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailAttriCell", forIndexPath: indexPath) as! WOWProductDetailAttriCell
-             cell.dataArr = productModel?.attributes
+        case let (1,row): //参数
+            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductParamCell", forIndexPath: indexPath) as! WOWProductParamCell
+            let index1 = row * 2
+            let index2 = row * 2 + 1
+            if index2 >= productModel?.attributes?.count{
+                cell.showData((productModel?.attributes?[index1])!)
+            }else{
+                cell.showData((productModel?.attributes?[index1])!,(productModel?.attributes?[index2])!)
+            }
             returnCell = cell
         case (2,0)://温馨提示
             let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailTipsCell", forIndexPath: indexPath) as! WOWProductDetailTipsCell
@@ -100,6 +109,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
+        case 1: //参数
+            return 120
         case 3:
             return 60
         case 4:
@@ -142,6 +153,25 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch section {
+        case 1: //参数
+            let v = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 100))
+            v.backgroundColor = UIColor.whiteColor()
+            let b = UIButton(type:.System)
+            b.backgroundColor = MGRgb(20, g: 20, b: 20)
+            b.setTitle("选择规格", forState:.Normal)
+            b.setTitleColor(UIColor.whiteColor(), forState:.Normal)
+            b.titleLabel?.font = Fontlevel002
+            b.addTarget(self, action:#selector(chooseStyle), forControlEvents:.TouchUpInside)
+            v.addSubview(b)
+            b.snp_makeConstraints(closure: {[weak self](make) in
+                if let _ = self{
+                    make.left.equalTo(v).offset(75)
+                    make.right.equalTo(v).offset(-75)
+                    make.height.equalTo(35)
+                    make.centerY.equalTo(v.snp_centerY).offset(-20)
+                }
+            })
+            return v
         case 3:
             let v = DetailSectionFooterView(frame:CGRectMake(0, 0, MGScreenWidth, 60))
             v.addTapGesture(action: {[weak self](tap) in

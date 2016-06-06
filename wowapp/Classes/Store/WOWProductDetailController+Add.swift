@@ -145,7 +145,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case 3:
             let v = DetailSectionFooterView(frame:CGRectMake(0, 0, MGScreenWidth, 60))
             v.addTapGesture(action: {[weak self](tap) in
-                if let strongSelf = self{
+                if let _ = self{
                     DLog("更多评论咯")
                 }
             })

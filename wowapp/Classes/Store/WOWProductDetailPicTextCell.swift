@@ -24,7 +24,7 @@ class WOWProductDetailPicTextCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         moreContainerView.addTapGesture {[weak self] (tap) in
-            if let strongSelf = self{
+            if let _ = self{
                 DLog("跳转到详情去")
             }
         }

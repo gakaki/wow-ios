@@ -31,6 +31,17 @@ class WOWProductDetailController: WOWBaseViewController {
         return v
     }()
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        addObservers()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWGoodsSureBuyNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -56,6 +67,14 @@ class WOWProductDetailController: WOWBaseViewController {
         configTable()
     }
 
+    private func addObservers(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sureButton(_:)), name: WOWGoodsSureBuyNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSucces), name: WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateCarBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
+
+    }
+
+    
     private func configData(){
         cycleView.imageURLArray = [productModel?.productImage ?? ""]
         likeButton.selected = (productModel?.user_isLike ?? "false") == "true"
@@ -67,6 +86,26 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     
 //MARK:Actions
+    //MARK:更新角标
+    func updateCarBadge(){
+//        WOWBuyCarMananger.updateBadge()
+//        carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
+//        carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(15, 0, 0,15)
+//        if let action = updateBadgeAction {
+//            action()
+//        }
+    }
+    
+    //MARK:登录成功回调
+    func loginSucces(){
+        DLog("登录成功")
+    }
+    
+    //MARK:确定购买回调
+    func sureButton(nf:NSNotification)  {
+        
+    }
+    
     
     //MARK:立即购买
     @IBAction func buyClick(sender: UIButton) {

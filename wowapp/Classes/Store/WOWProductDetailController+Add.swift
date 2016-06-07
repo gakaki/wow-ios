@@ -142,10 +142,10 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             let v = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 100))
             v.backgroundColor = UIColor.whiteColor()
             let b = UIButton(type:.System)
-            b.backgroundColor = MGRgb(20, g: 20, b: 20)
             b.setTitle("选择规格", forState:.Normal)
-            b.setTitleColor(UIColor.whiteColor(), forState:.Normal)
+            b.setTitleColor(UIColor.blackColor(), forState:.Normal)
             b.titleLabel?.font = Fontlevel002
+            b.addBorder(width: 1, color: UIColor.blackColor())
             b.addTarget(self, action:#selector(chooseStyle), forControlEvents:.TouchUpInside)
             v.addSubview(b)
             b.snp_makeConstraints(closure: {[weak self](make) in

@@ -151,11 +151,11 @@ class WOWProductDetailController: WOWBaseViewController {
 
     //MARK:选择规格
     func chooseStyle() {
-        WOWBuyCarMananger.sharedBuyCar.producModel = self.productModel
-        WOWBuyCarMananger.sharedBuyCar.skuName     = self.productModel?.skus?.first?.skuTitle
-        WOWBuyCarMananger.sharedBuyCar.buyCount    = 1
-        WOWBuyCarMananger.sharedBuyCar.skuID       = self.productModel?.skus?.first?.skuID ?? ""
-        WOWBuyCarMananger.sharedBuyCar.skuPrice = productModel?.price ?? ""
+        WOWBuyCarMananger.sharedBuyCar.producModel      = self.productModel
+        WOWBuyCarMananger.sharedBuyCar.skuName          = self.productModel?.skus?.first?.skuTitle
+        WOWBuyCarMananger.sharedBuyCar.buyCount         = 1
+        WOWBuyCarMananger.sharedBuyCar.skuID            = self.productModel?.skus?.first?.skuID ?? ""
+        WOWBuyCarMananger.sharedBuyCar.skuPrice         = productModel?.price ?? ""
         WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
         view.addSubview(backView)
         view.bringSubviewToFront(backView)

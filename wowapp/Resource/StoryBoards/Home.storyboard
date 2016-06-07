@@ -6,11 +6,11 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--尖叫-->
+        <!--Navigation Controller-->
         <scene sceneID="grd-Fr-fQg">
             <objects>
                 <navigationController id="TR4-mJ-1qI" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="尖叫" id="bjo-7B-YvH"/>
+                    <tabBarItem key="tabBarItem" title="" id="bjo-7B-YvH"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9nJ-m5-uvl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

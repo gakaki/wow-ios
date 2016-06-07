@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--商店-->
+        <!--Navigation Controller-->
         <scene sceneID="lmm-YX-XXG">
             <objects>
                 <navigationController id="3Sm-BO-NMd" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="商店" id="TKr-vl-phK"/>
+                    <tabBarItem key="tabBarItem" title="" id="TKr-vl-phK"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zxf-Qg-Jxk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

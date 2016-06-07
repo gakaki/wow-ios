@@ -14,7 +14,7 @@ class WOWStoreController: WOWBaseViewController {
     var categoryArr = [WOWCategoryModel]()
     var brandArr    = [WOWBrandListModel]()
     var recommenArr = [WOWProductModel]()
-    var cycleView:CyclePictureView!
+    var cycleView   :CyclePictureView!
     var brandsCount : Int = 0
     @IBOutlet var tableView: UITableView!
     
@@ -32,12 +32,12 @@ class WOWStoreController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
-        tableView.separatorColor = SeprateColor;
+        tableView.separatorColor     = SeprateColor;
         tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
         tableView.clearRestCell()
-        tableView.mj_header = mj_header
+        tableView.mj_header          = mj_header
         configBarItem()
     }
     

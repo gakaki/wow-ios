@@ -7,11 +7,11 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--我的-->
+        <!--Navigation Controller-->
         <scene sceneID="PFY-9q-Bx2">
             <objects>
                 <navigationController id="pW3-c3-z6F" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的" id="4gv-cW-hzq"/>
+                    <tabBarItem key="tabBarItem" title="" id="4gv-cW-hzq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="80n-uP-tph">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

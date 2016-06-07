@@ -202,6 +202,7 @@ extension AppDelegate{
         navBar.translucent = false
         
         let tabBar = UITabBar.appearance()
+        tabBar.barTintColor = MGRgb(20, g: 20, b: 20)
         tabBar.translucent = false
         
         let tabBarItem = UITabBarItem.appearance()

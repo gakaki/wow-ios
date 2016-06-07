@@ -85,10 +85,10 @@ class WOWBrandListController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandList, successClosure: { [weak self](result) in
             if let strongSelf = self{
-                let dict = JSON(result).dictionary
+                let dict        = JSON(result).dictionary
                 if let dataDcit = dict{
                     for letter in strongSelf.headerIndexs{
-                        let arrary = dataDcit[letter]?.arrayObject
+                        let arrary    = dataDcit[letter]?.arrayObject
                         let letterArr = Mapper<WOWBrandModel>().mapArray(arrary)
                         if let retArr = letterArr{
                             strongSelf.dataArray.append(retArr)

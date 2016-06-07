@@ -97,6 +97,7 @@ class WOWDropMenuView: UIView {
     }
     
     private func configSubView(){
+        backgroundColor = UIColor.whiteColor()
         configHeaderView()
         //添加下方阴影线
         let line = UIImageView()

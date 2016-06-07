@@ -79,13 +79,15 @@ let GrayColorlevel4 = MGRgb(240, g: 240, b: 240)
 /// 250 同时也是tableView全局的背景颜色
 let GrayColorLevel5 = MGRgb(245, g: 245, b: 245)
 
-let ThemeColor = MGRgb(255, g: 230, b:0)
+let ThemeColor      = MGRgb(255, g: 230, b:0)
 
-let BorderColor = MGRgb(200, g: 199, b: 204)
+let ThemeBlackColor = MGRgb(20, g:20, b:20)
 
-let SeprateColor = MGRgb(234, g:234, b: 234)
+let BorderColor     = MGRgb(200, g: 199, b: 204)
 
-let MaskColor    = MGRgb(0, g: 0, b: 0, alpha: 0.6)
+let SeprateColor    = MGRgb(234, g:234, b: 234)
+
+let MaskColor       = MGRgb(0, g: 0, b: 0, alpha: 0.6)
 
 let DefaultBackColor = GrayColorLevel5
 

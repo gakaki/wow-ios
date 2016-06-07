@@ -71,6 +71,7 @@ class WOWGoodsController: WOWBaseViewController {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
         l.minimumColumnSpacing = 0.5
+        l.headerInset = UIEdgeInsetsMake(2, 0, 0, 0)
         l.minimumInteritemSpacing = 0.5
         return l
     }()

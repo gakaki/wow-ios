@@ -30,35 +30,35 @@ class WOWBuyCarMananger {
     var chooseProducts      = [String]()
     //登录成功的时候要将本地的和云端购物车的进行累加
     static func updateBadge(isLoginSuccess:Bool = false){
-        let vc = UIApplication.appTabBarController.viewControllers![2]
-        if WOWUserManager.loginStatus {
-            let carCount = WOWUserManager.userCarCount
-            if  carCount == 0 {
-                vc.tabBarItem.badgeValue = nil
-            }else{
-                if isLoginSuccess {
-                    let products = WOWRealm.objects(WOWBuyCarModel)
-                    var count = 0
-                    for p in products {
-                        count += p.skuProductCount
-                    }
-                    vc.tabBarItem.badgeValue = "\(carCount + count)" ?? ""
-                }else{
-                    vc.tabBarItem.badgeValue = "\(carCount)" ?? ""
-                }
-            }
-        }else{
-            let products = WOWRealm.objects(WOWBuyCarModel)
-            var count = 0
-            for p in products {
-                count += p.skuProductCount
-            }
-            if count == 0 {
-                vc.tabBarItem.badgeValue = nil
-            }else{
-                vc.tabBarItem.badgeValue = "\(count)" ?? ""
-            }
-        }
+//        let vc = UIApplication.appTabBarController.viewControllers![2]
+//        if WOWUserManager.loginStatus {
+//            let carCount = WOWUserManager.userCarCount
+//            if  carCount == 0 {
+//                vc.tabBarItem.badgeValue = nil
+//            }else{
+//                if isLoginSuccess {
+//                    let products = WOWRealm.objects(WOWBuyCarModel)
+//                    var count = 0
+//                    for p in products {
+//                        count += p.skuProductCount
+//                    }
+//                    vc.tabBarItem.badgeValue = "\(carCount + count)" ?? ""
+//                }else{
+//                    vc.tabBarItem.badgeValue = "\(carCount)" ?? ""
+//                }
+//            }
+//        }else{
+//            let products = WOWRealm.objects(WOWBuyCarModel)
+//            var count = 0
+//            for p in products {
+//                count += p.skuProductCount
+//            }
+//            if count == 0 {
+//                vc.tabBarItem.badgeValue = nil
+//            }else{
+//                vc.tabBarItem.badgeValue = "\(count)" ?? ""
+//            }
+//        }
     }
     
     static func calCarCount() ->String{

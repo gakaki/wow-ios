@@ -16,6 +16,27 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
         super.viewDidLoad()
         setUI()
     }
+    
+    lazy var navigationShadowImageView:UIView? = {
+        return self.getNavShadow(self.navigationController?.navigationBar)
+    }()
+    
+    private func getNavShadow(paramView:UIView?) -> UIView?{
+        if let bar = paramView{
+            if bar.bounds.size.height <= 1.0 {
+                DLog("找到了")
+                return bar
+            }
+        }
+        for subView in paramView?.subviews ?? []{
+            let image = getNavShadow(subView)
+            if let i = image {
+                return i
+            }
+        }
+        return nil
+    }
+    
 
 //MARK:Life
     override func viewWillDisappear(animated: Bool) {
@@ -31,8 +52,15 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
-
     
+    
+    
+//    
+//    func hideNavSeprator(isHiden:Bool = true) {
+//        navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSizeMake(MGScreenWidth, 1)), forBarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//    }
+//    
     func setCustomerBack() {
         if navigationController?.viewControllers.count > 1 {
             let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.Plain, target: self, action:#selector(navBack))
@@ -62,7 +90,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
 //MARK:Private Method
     func setUI(){
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = DefaultBackColor
     }
     
     func request(){

@@ -41,6 +41,11 @@ class WOWOrderController: WOWBaseViewController {
         super.viewDidLoad()
         request()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationShadowImageView?.hidden = true
+    }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -51,6 +56,7 @@ class WOWOrderController: WOWBaseViewController {
     
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.enabled = true;
+        self.navigationShadowImageView?.hidden = false
     }
     
     
@@ -79,7 +85,7 @@ class WOWOrderController: WOWBaseViewController {
         WOWCheckMenuSetting.selectedIndex = selectIndex
         menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.w, 40), titles: ["全部","待付款","待发货","待收货","待评价"])
         menuView.delegate = self
-        WOWBorderColor(menuView)
+        menuView.addBorderBottom(size:0.5, color:BorderColor)
         self.view.addSubview(menuView)
     }
     

@@ -13,18 +13,18 @@ struct WOWCheckMenuSetting {
     static var margin:CGFloat = 15
     static var itemMargin:CGFloat = 30
     static var selectedIndex:Int = 0
-    static var normalTitleColor = UIColor.blackColor()
-    static var selectTitleColor = UIColor(red: 74/255.0, green: 74/255.0, blue: 74/255.0, alpha: 1)
+    static var normalTitleColor = GrayColorlevel3
+    static var selectTitleColor = UIColor.blackColor()
     static var titleFont:UIFont = UIFont.systemScaleFontSize(12)
     
     static func defaultSetUp(){
-        fill = false
-        margin = 15
-        itemMargin = 30
-        selectedIndex = 0
-        normalTitleColor = UIColor.blackColor()
-        selectTitleColor = UIColor(red: 74/255.0, green: 74/255.0, blue: 74/255.0, alpha: 1)
-        titleFont = UIFont.systemScaleFontSize(12)
+        fill             = false
+        margin           = 15
+        itemMargin       = 30
+        selectedIndex    = 0
+        normalTitleColor = GrayColorlevel3
+        selectTitleColor = UIColor.blackColor()
+        titleFont        = UIFont.systemScaleFontSize(12)
     }
 }
 
@@ -53,7 +53,7 @@ class WOWTopMenuTitleView: UIView {
     
     private lazy var bottomLine:UIView = {
         let v = UIView(frame: CGRectMake(0,0,20,1))
-        v.backgroundColor = ThemeColor
+        v.backgroundColor = ThemeBlackColor
         return v
     }()
     
@@ -64,6 +64,7 @@ class WOWTopMenuTitleView: UIView {
     }
     
     private func configSubViews(){
+        backgroundColor = UIColor.whiteColor()
         itemWidths = itemTitles.map({
             $0.size(WOWCheckMenuSetting.titleFont).width + 8
         })
@@ -91,11 +92,11 @@ class WOWTopMenuTitleView: UIView {
             self.addSubview(btn)
             itemArr.append(btn)
         }
-        
+        itemArr[selectedIndex].selected = true
         //下划线
         bottomLine.frame = self.itemArr[WOWCheckMenuSetting.selectedIndex].frame
-        bottomLine.y = self.h - 2
-        bottomLine.h = 2
+        bottomLine.y = self.h - 3
+        bottomLine.h = 3
         bottomLine.w += 20
         bottomLine.centerX = self.itemArr[WOWCheckMenuSetting.selectedIndex].centerX
         self.addSubview(bottomLine)

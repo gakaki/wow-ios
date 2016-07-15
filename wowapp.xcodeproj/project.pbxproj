@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01AB28BA53C4F72D66E55203 /* Pods_wowapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB4F29088DBD332D4681CDD /* Pods_wowapp.framework */; };
 		292CBA081CFE85B000248C88 /* WOWRegistInfoFirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */; };
 		292CBA0A1CFE867D00248C88 /* WOWRegistInfoSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */; };
 		292CBA0D1CFE86AB00248C88 /* WOWRegistInfoSureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA0C1CFE86AB00248C88 /* WOWRegistInfoSureView.swift */; };
@@ -252,7 +253,6 @@
 		29FF27391CFDB5E000DF2A9B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF27381CFDB5E000DF2A9B /* CoreTelephony.framework */; };
 		29FF273B1CFDB5E600DF2A9B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */; };
 		29FF273D1CFDB5EC00DF2A9B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF273C1CFDB5EC00DF2A9B /* libz.tbd */; };
-		EF2F67BADF7391A00A29B38B /* Pods_wowapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995D86B802E035846DFA2BEB /* Pods_wowapp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -538,9 +538,9 @@
 		29FF27381CFDB5E000DF2A9B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		29FF273C1CFDB5EC00DF2A9B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		995D86B802E035846DFA2BEB /* Pods_wowapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A70AFCF12BFAE2EDD981DE07 /* Pods-wowapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.release.xcconfig"; sourceTree = "<group>"; };
-		B94E932E1CFAF96F8BC675EF /* Pods-wowapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.debug.xcconfig"; sourceTree = "<group>"; };
+		D3918CA65EA43D15F782F0B9 /* Pods-wowapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.release.xcconfig"; sourceTree = "<group>"; };
+		DAB4F29088DBD332D4681CDD /* Pods_wowapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBDA0C3EC14E0A85FE2FB974 /* Pods-wowapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -564,13 +564,22 @@
 				29FF27151CFDA8C000DF2A9B /* Realm.framework in Frameworks */,
 				29FF26F91CFDA86300DF2A9B /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
 				29FF27171CFDA8C100DF2A9B /* RealmSwift.framework in Frameworks */,
-				EF2F67BADF7391A00A29B38B /* Pods_wowapp.framework in Frameworks */,
+				01AB28BA53C4F72D66E55203 /* Pods_wowapp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24459A1A0A8FA627292EC313 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DBDA0C3EC14E0A85FE2FB974 /* Pods-wowapp.debug.xcconfig */,
+				D3918CA65EA43D15F782F0B9 /* Pods-wowapp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		292CBA0B1CFE868800248C88 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,8 +619,8 @@
 			children = (
 				29FF25121CFDA75700DF2A9B /* wowapp */,
 				29FF25111CFDA75700DF2A9B /* Products */,
-				5273F73BF759BB8506544B73 /* Pods */,
 				EF468D690CFDA424F86FC10D /* Frameworks */,
+				24459A1A0A8FA627292EC313 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1298,15 +1307,6 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
-		5273F73BF759BB8506544B73 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B94E932E1CFAF96F8BC675EF /* Pods-wowapp.debug.xcconfig */,
-				A70AFCF12BFAE2EDD981DE07 /* Pods-wowapp.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		EF468D690CFDA424F86FC10D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1321,7 +1321,7 @@
 				29FF272C1CFDB5AB00DF2A9B /* SystemConfiguration.framework */,
 				29FF27131CFDA8C000DF2A9B /* Realm.framework */,
 				29FF27141CFDA8C000DF2A9B /* RealmSwift.framework */,
-				995D86B802E035846DFA2BEB /* Pods_wowapp.framework */,
+				DAB4F29088DBD332D4681CDD /* Pods_wowapp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1333,14 +1333,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29FF25221CFDA75700DF2A9B /* Build configuration list for PBXNativeTarget "wowapp" */;
 			buildPhases = (
-				368B18CC9106CEF7F6C50B76 /* Check Pods Manifest.lock */,
+				C01216098CDE3AF48EC03458 /* [CP] Check Pods Manifest.lock */,
 				29FF250C1CFDA75700DF2A9B /* Sources */,
 				29FF250D1CFDA75700DF2A9B /* Frameworks */,
 				29FF250E1CFDA75700DF2A9B /* Resources */,
-				DEEB380C691B0F9A2863EE04 /* Embed Pods Frameworks */,
-				D7F38DBFBC504836C77FB23F /* Copy Pods Resources */,
 				29FF27191CFDA8C100DF2A9B /* Embed Frameworks */,
 				29FF271A1CFDA8D900DF2A9B /* ShellScript */,
+				3493D56251C6535C936AEC0F /* [CP] Embed Pods Frameworks */,
+				658FE4089DC6FBCB7DCC34E0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1363,7 +1363,7 @@
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = B4WSDTADTT;
+						DevelopmentTeam = P73J96278G;
 					};
 				};
 			};
@@ -1479,29 +1479,29 @@
 			shellPath = /bin/sh;
 			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
 		};
-		368B18CC9106CEF7F6C50B76 /* Check Pods Manifest.lock */ = {
+		3493D56251C6535C936AEC0F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wowapp/Pods-wowapp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D7F38DBFBC504836C77FB23F /* Copy Pods Resources */ = {
+		658FE4089DC6FBCB7DCC34E0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1509,19 +1509,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wowapp/Pods-wowapp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DEEB380C691B0F9A2863EE04 /* Embed Pods Frameworks */ = {
+		C01216098CDE3AF48EC03458 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wowapp/Pods-wowapp-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1792,7 +1792,7 @@
 		};
 		29FF25231CFDA75700DF2A9B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B94E932E1CFAF96F8BC675EF /* Pods-wowapp.debug.xcconfig */;
+			baseConfigurationReference = DBDA0C3EC14E0A85FE2FB974 /* Pods-wowapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1814,7 +1814,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";
@@ -1825,7 +1825,7 @@
 		};
 		29FF25241CFDA75700DF2A9B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A70AFCF12BFAE2EDD981DE07 /* Pods-wowapp.release.xcconfig */;
+			baseConfigurationReference = D3918CA65EA43D15F782F0B9 /* Pods-wowapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1847,7 +1847,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";

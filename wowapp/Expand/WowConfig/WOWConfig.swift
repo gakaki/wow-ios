@@ -47,6 +47,10 @@ struct WOWID {
         static let appID       = "k51hidwq1u67b"
         static let testToken   = "iKHh7k4J8eoTvZfTCwSNWsSBbbBNFKcjb+ORbC53wq1VMTGO2QDTJNTFI3Q7IHRJ+1EE9lHpuTQ="
     }
+    struct ShareSDK {
+        static let appKey      = "14d4601757e60"
+        static let appSecret  = "342a1fa206ea35cc413f7385e1c4b56a"
+    }
 }
 
 

@@ -64,20 +64,45 @@ class WOWLoginController: WOWBaseViewController {
     }
     
     @IBAction func wechatLogin(sender: UIButton) {
-        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
-        UMSocialControllerService.defaultControllerService().socialUIDelegate = self
-        snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {[weak self]response in
-            if let strongSelf = self{
-                if response.responseCode == UMSResponseCodeSuccess {
-                    let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
-                    DLog("username is \(snsAccount.userName), uid is \(snsAccount.usid), token is \(snsAccount.accessToken) url is \(snsAccount.iconURL)")
-                    let token = snsAccount.accessToken
-                    strongSelf.checkWechatToken(token)
-                }else{
-                    DLog(response)
-                }
+        /// um第三方登录
+//        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+//        UMSocialControllerService.defaultControllerService().socialUIDelegate = self
+//        snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {[weak self]response in
+//            if let strongSelf = self{
+//                if response.responseCode == UMSResponseCodeSuccess {
+//                    let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
+//                    DLog("username is \(snsAccount.userName), uid is \(snsAccount.usid), token is \(snsAccount.accessToken) url is \(snsAccount.iconURL)")
+//                    let token = snsAccount.accessToken
+//                    strongSelf.checkWechatToken(token)
+//                }else{
+//                    DLog(response)
+//                }
+//            }
+//        })
+        /**
+         shareSDK第三方登录
+         */
+
+        
+        ShareSDK.getUserInfo(SSDKPlatformType.TypeWechat) { (state:SSDKResponseState, userData:SSDKUser!, error:NSError!) -> Void in
+            switch state{
+                
+            case SSDKResponseState.Success:
+                print("获取授权成功")
+                print(userData)
+                
+            case SSDKResponseState.Fail:
+                print("授权失败,错误描述:\(error)")
+                
+            case SSDKResponseState.Cancel:
+                print("授权取消")
+                
+            default:
+                break
             }
-        })
+
+        }
+        
     }
     
     private func checkWechatToken(token:String?){

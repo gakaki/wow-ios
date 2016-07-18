@@ -1,1 +1,1 @@
-../../../Pingpp/lib/Pingpp.h
+../../../../pingpp-ios/lib/Pingpp.h

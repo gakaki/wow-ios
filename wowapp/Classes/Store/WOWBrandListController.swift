@@ -109,7 +109,7 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return headerIndexs
     }
-
+    
     //点击索引，移动TableView的组位置
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         //遍历索引值

@@ -64,7 +64,6 @@ class WOWLoginController: WOWBaseViewController {
     }
     
     @IBAction func wechatLogin(sender: UIButton) {
-        /// um第三方登录
 //        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
 //        UMSocialControllerService.defaultControllerService().socialUIDelegate = self
 //        snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {[weak self]response in
@@ -79,36 +78,56 @@ class WOWLoginController: WOWBaseViewController {
 //                }
 //            }
 //        })
+        
         /**
          shareSDK第三方登录
          */
-
         
-        ShareSDK.getUserInfo(SSDKPlatformType.TypeWechat) { (state:SSDKResponseState, userData:SSDKUser!, error:NSError!) -> Void in
-            switch state{
-                
-            case SSDKResponseState.Success:
-                print("获取授权成功")
-                print(userData)
-                
-            case SSDKResponseState.Fail:
-                print("授权失败,错误描述:\(error)")
-                
-            case SSDKResponseState.Cancel:
-                print("授权取消")
-                
-            default:
-                break
+        
+        ShareSDK.getUserInfo(SSDKPlatformType.TypeWechat) { [weak self](state:SSDKResponseState, userData:SSDKUser!, error:NSError!) -> Void in
+            if let strongSelf = self{
+                switch state{
+                    
+                case SSDKResponseState.Success:
+                    print("获取授权成功")
+                    print(userData)
+                    strongSelf.checkWechatToken(userData.uid)
+                    
+                case SSDKResponseState.Fail:
+                    print("授权失败,错误描述:\(error)")
+                    
+                case SSDKResponseState.Cancel:
+                    print("授权取消")
+                    
+                default:
+                    break
+                }
             }
-
+            
         }
-        
+
     }
     
     private func checkWechatToken(token:String?){
         //FIXME:验证token是否是第一次咯或者是第二次
         WOWUserManager.wechatToken = token ?? ""
-        let first = true //假设的bool值
+        let params = ["openId":WOWUserManager.wechatToken]
+        var first = Bool(true)//假设的bool值
+        var dict = [String: AnyObject]()
+        dict["paramJson"] = params
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CheckWechat(paramJson:dict), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                DLog(result)
+                print(result)
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.tipsLabel.text = errorMsg
+                
+            }
+        }
+
         if first {
             goRegist(true)
         }else{ //二次登录，拿到用户信息，这时候算是登录成功咯

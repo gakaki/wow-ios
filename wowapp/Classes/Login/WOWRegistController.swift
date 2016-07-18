@@ -44,7 +44,7 @@ class WOWRegistController: WOWBaseViewController {
     }
     
     private func configNavItem(){
-        makeCustomerNavigationItem("已有账号?登录", left: false) {[weak self] in
+        makeCustomerNavigationItem("已有账号 登录", left: false) {[weak self] in
             if let strongSelf = self{
                 strongSelf.navBack()
             }

@@ -33,13 +33,11 @@
 //友盟
 #import "UMSocial.h"
 #import <UMMobClick/MobClick.h>
-//#import "UMSocialWechatHandler.h"
-//#import "UMSocialQQHandler.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 
 //shareSDK
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
-//微信SDK头文件
-#import "WXApi.h"

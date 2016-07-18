@@ -1,6 +1,6 @@
 target :wowapp do #实例工程
 inhibit_all_warnings!
-platform :ios, ‘8.0’
+platform :ios, '8.0'
 use_frameworks!
 
 pod 'SnapKit', '~> 0.19.1'
@@ -20,20 +20,21 @@ pod 'HidingNavigationBar', '~> 0.3.0'
 pod 'YYImage'
 
 #Ping++支付
-pod 'Pingpp/Alipay', '~> 2.1.0'
-pod 'Pingpp/Wx', '~> 2.1.0'
+pod 'Pingpp/Alipay',:path => "pingpp-ios/Pingpp.podspec"
+pod 'Pingpp/Wx',:path => "pingpp-ios/Pingpp.podspec"
 
 #LeanCloud
 pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
 
+pod 'JSONCodable', '~> 2.1'
 
 
 #融云
 pod 'RongCloudIMKit', '2.6.0'
 
 #王云鹏自己的framework
-#pod 'PonyFrameworkOnSwift',:git => 'https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git'
-pod 'PonyFrameworkOnSwift’,:path => '/Users/anyongchao/Downloads/PonyFrameworkOnSwift-master/'
+# pod 'PonyFrameworkOnSwift',:git => 'https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git'
+pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
 
 # ShareSDK主模块(必须)
 pod 'ShareSDK3'
@@ -47,8 +48,6 @@ pod 'ShareSDK3/ShareSDKUI'
 #pod 'ShareSDK3/ShareSDKPlatforms/QQ'
 pod 'ShareSDK3/ShareSDKPlatforms/SinaWeibo'
 pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
-
-
 #waitting For use
 #列表空的占位图 TBEmptyDataSet
 #pod 'ActiveLabel'  @ #特殊的label
@@ -65,5 +64,3 @@ pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 #http://cdn0.jianshu.io/p/83c069022e45/comments/802155 swift项目需要用到的开源组件
 
 end
-
-

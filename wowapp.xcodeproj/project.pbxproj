@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01AB28BA53C4F72D66E55203 /* Pods_wowapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB4F29088DBD332D4681CDD /* Pods_wowapp.framework */; };
+		069056DF1D36665B00A851F9 /* WOWGuideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069056DE1D36665B00A851F9 /* WOWGuideController.swift */; };
+		069056E11D36666F00A851F9 /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069056E01D36666F00A851F9 /* WOWController.swift */; };
+		06DCF8161D375A9500039F8A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8151D375A9500039F8A /* main.m */; };
+		06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */; };
 		292CBA081CFE85B000248C88 /* WOWRegistInfoFirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */; };
 		292CBA0A1CFE867D00248C88 /* WOWRegistInfoSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */; };
 		292CBA0D1CFE86AB00248C88 /* WOWRegistInfoSureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA0C1CFE86AB00248C88 /* WOWRegistInfoSureView.swift */; };
@@ -56,7 +59,6 @@
 		29FF26551CFDA86300DF2A9B /* WOWCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29FF25441CFDA86300DF2A9B /* WOWCommentCell.xib */; };
 		29FF26561CFDA86300DF2A9B /* WOWCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25451CFDA86300DF2A9B /* WOWCommentController.swift */; };
 		29FF26571CFDA86300DF2A9B /* WOWCommentListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25461CFDA86300DF2A9B /* WOWCommentListModel.swift */; };
-		29FF26581CFDA86300DF2A9B /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25471CFDA86300DF2A9B /* WOWController.swift */; };
 		29FF26591CFDA86300DF2A9B /* WOWImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25481CFDA86300DF2A9B /* WOWImageCell.swift */; };
 		29FF265A1CFDA86300DF2A9B /* WOWLikeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25491CFDA86300DF2A9B /* WOWLikeListCell.swift */; };
 		29FF265B1CFDA86300DF2A9B /* WOWLikeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF254A1CFDA86300DF2A9B /* WOWLikeListController.swift */; };
@@ -253,6 +255,7 @@
 		29FF27391CFDB5E000DF2A9B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF27381CFDB5E000DF2A9B /* CoreTelephony.framework */; };
 		29FF273B1CFDB5E600DF2A9B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */; };
 		29FF273D1CFDB5EC00DF2A9B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF273C1CFDB5EC00DF2A9B /* libz.tbd */; };
+		3ED3BC4851F34DEAC2416C6D /* Pods_wowapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98AEBDD3562DCD8D8DFB519A /* Pods_wowapp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -271,6 +274,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		069056DE1D36665B00A851F9 /* WOWGuideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGuideController.swift; sourceTree = "<group>"; };
+		069056E01D36666F00A851F9 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
+		06DCF8151D375A9500039F8A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+VCManager.swift"; sourceTree = "<group>"; };
 		292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoFirstController.swift; sourceTree = "<group>"; };
 		292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoSecondController.swift; sourceTree = "<group>"; };
 		292CBA0C1CFE86AB00248C88 /* WOWRegistInfoSureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoSureView.swift; sourceTree = "<group>"; };
@@ -321,7 +328,6 @@
 		29FF25441CFDA86300DF2A9B /* WOWCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWCommentCell.xib; sourceTree = "<group>"; };
 		29FF25451CFDA86300DF2A9B /* WOWCommentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCommentController.swift; sourceTree = "<group>"; };
 		29FF25461CFDA86300DF2A9B /* WOWCommentListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCommentListModel.swift; sourceTree = "<group>"; };
-		29FF25471CFDA86300DF2A9B /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
 		29FF25481CFDA86300DF2A9B /* WOWImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWImageCell.swift; sourceTree = "<group>"; };
 		29FF25491CFDA86300DF2A9B /* WOWLikeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWLikeListCell.swift; sourceTree = "<group>"; };
 		29FF254A1CFDA86300DF2A9B /* WOWLikeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWLikeListController.swift; sourceTree = "<group>"; };
@@ -538,9 +544,9 @@
 		29FF27381CFDB5E000DF2A9B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		29FF273C1CFDB5EC00DF2A9B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		D3918CA65EA43D15F782F0B9 /* Pods-wowapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.release.xcconfig"; sourceTree = "<group>"; };
-		DAB4F29088DBD332D4681CDD /* Pods_wowapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBDA0C3EC14E0A85FE2FB974 /* Pods-wowapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.debug.xcconfig"; sourceTree = "<group>"; };
+		3E5C8E688B6F27D65B9C07E1 /* Pods-wowapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.release.xcconfig"; sourceTree = "<group>"; };
+		6D82CF16CDE3CFCF20061FE2 /* Pods-wowapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.debug.xcconfig"; sourceTree = "<group>"; };
+		98AEBDD3562DCD8D8DFB519A /* Pods_wowapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -564,20 +570,50 @@
 				29FF27151CFDA8C000DF2A9B /* Realm.framework in Frameworks */,
 				29FF26F91CFDA86300DF2A9B /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
 				29FF27171CFDA8C100DF2A9B /* RealmSwift.framework in Frameworks */,
-				01AB28BA53C4F72D66E55203 /* Pods_wowapp.framework in Frameworks */,
+				3ED3BC4851F34DEAC2416C6D /* Pods_wowapp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		24459A1A0A8FA627292EC313 /* Pods */ = {
+		069056DA1D3665FC00A851F9 /* Guide */ = {
 			isa = PBXGroup;
 			children = (
-				DBDA0C3EC14E0A85FE2FB974 /* Pods-wowapp.debug.xcconfig */,
-				D3918CA65EA43D15F782F0B9 /* Pods-wowapp.release.xcconfig */,
+				069056DB1D36661600A851F9 /* Controller */,
+				069056DC1D36661600A851F9 /* Model */,
+				069056DD1D36661600A851F9 /* View */,
 			);
-			name = Pods;
+			path = Guide;
+			sourceTree = "<group>";
+		};
+		069056DB1D36661600A851F9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				069056DE1D36665B00A851F9 /* WOWGuideController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		069056DC1D36661600A851F9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		069056DD1D36661600A851F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		06DCF8191D37C41B00039F8A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		292CBA0B1CFE868800248C88 /* View */ = {
@@ -620,7 +656,7 @@
 				29FF25121CFDA75700DF2A9B /* wowapp */,
 				29FF25111CFDA75700DF2A9B /* Products */,
 				EF468D690CFDA424F86FC10D /* Frameworks */,
-				24459A1A0A8FA627292EC313 /* Pods */,
+				DDADBB1642C2522879D121E6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -641,6 +677,7 @@
 				29FF262C1CFDA86300DF2A9B /* wowInfo.plist */,
 				29FF25261CFDA86300DF2A9B /* AppDelegate.swift */,
 				29FF25251CFDA86300DF2A9B /* wowapp-Bridging-Header.h */,
+				06DCF8151D375A9500039F8A /* main.m */,
 			);
 			path = wowapp;
 			sourceTree = "<group>";
@@ -648,6 +685,7 @@
 		29FF25271CFDA86300DF2A9B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				069056DA1D3665FC00A851F9 /* Guide */,
 				29FF25401CFDA86300DF2A9B /* Home */,
 				2953F1981D06A678006D7D95 /* Favorite */,
 				29FF252E1CFDA86300DF2A9B /* BuyCar */,
@@ -683,6 +721,7 @@
 		29FF25631CFDA86300DF2A9B /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				06DCF8191D37C41B00039F8A /* Model */,
 				292CBA0B1CFE868800248C88 /* View */,
 				29FF271B1CFDAEE900DF2A9B /* Controller */,
 			);
@@ -827,6 +866,7 @@
 				29FF25DE1CFDA86300DF2A9B /* String+Add.swift */,
 				29FF25DF1CFDA86300DF2A9B /* UIApplication+Add.swift */,
 				29D5EC341D0125640001266C /* UIFont+Add.swift */,
+				06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */,
 			);
 			path = WowExtension;
 			sourceTree = "<group>";
@@ -1288,7 +1328,7 @@
 		29FF272A1CFDB08300DF2A9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				29FF25471CFDA86300DF2A9B /* WOWController.swift */,
+				069056E01D36666F00A851F9 /* WOWController.swift */,
 				29FF254A1CFDA86300DF2A9B /* WOWLikeListController.swift */,
 				29FF25571CFDA86300DF2A9B /* WOWSearchChildController.swift */,
 				29FF25451CFDA86300DF2A9B /* WOWCommentController.swift */,
@@ -1307,6 +1347,15 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		DDADBB1642C2522879D121E6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D82CF16CDE3CFCF20061FE2 /* Pods-wowapp.debug.xcconfig */,
+				3E5C8E688B6F27D65B9C07E1 /* Pods-wowapp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EF468D690CFDA424F86FC10D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1321,7 +1370,7 @@
 				29FF272C1CFDB5AB00DF2A9B /* SystemConfiguration.framework */,
 				29FF27131CFDA8C000DF2A9B /* Realm.framework */,
 				29FF27141CFDA8C000DF2A9B /* RealmSwift.framework */,
-				DAB4F29088DBD332D4681CDD /* Pods_wowapp.framework */,
+				98AEBDD3562DCD8D8DFB519A /* Pods_wowapp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1333,14 +1382,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29FF25221CFDA75700DF2A9B /* Build configuration list for PBXNativeTarget "wowapp" */;
 			buildPhases = (
-				C01216098CDE3AF48EC03458 /* [CP] Check Pods Manifest.lock */,
+				700927501610EC1AA3EEAEA5 /* [CP] Check Pods Manifest.lock */,
 				29FF250C1CFDA75700DF2A9B /* Sources */,
 				29FF250D1CFDA75700DF2A9B /* Frameworks */,
 				29FF250E1CFDA75700DF2A9B /* Resources */,
 				29FF27191CFDA8C100DF2A9B /* Embed Frameworks */,
 				29FF271A1CFDA8D900DF2A9B /* ShellScript */,
-				3493D56251C6535C936AEC0F /* [CP] Embed Pods Frameworks */,
-				658FE4089DC6FBCB7DCC34E0 /* [CP] Copy Pods Resources */,
+				25B58FAE1A1D1AFA16D131AF /* [CP] Embed Pods Frameworks */,
+				53207D0EB85A28A57EE33873 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1466,20 +1515,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		29FF271A1CFDA8D900DF2A9B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
-		};
-		3493D56251C6535C936AEC0F /* [CP] Embed Pods Frameworks */ = {
+		25B58FAE1A1D1AFA16D131AF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1494,7 +1530,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wowapp/Pods-wowapp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		658FE4089DC6FBCB7DCC34E0 /* [CP] Copy Pods Resources */ = {
+		29FF271A1CFDA8D900DF2A9B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
+		};
+		53207D0EB85A28A57EE33873 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1509,7 +1558,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wowapp/Pods-wowapp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C01216098CDE3AF48EC03458 /* [CP] Check Pods Manifest.lock */ = {
+		700927501610EC1AA3EEAEA5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1601,6 +1650,7 @@
 				29FF26611CFDA86300DF2A9B /* WOWProductModel.swift in Sources */,
 				29FF26A81CFDA86300DF2A9B /* WOWSearchResultController.swift in Sources */,
 				29FF26601CFDA86300DF2A9B /* WOWMenuTopView.swift in Sources */,
+				06DCF8161D375A9500039F8A /* main.m in Sources */,
 				29FF26501CFDA86300DF2A9B /* WOWValue2Cell.swift in Sources */,
 				29FF26941CFDA86300DF2A9B /* WOWBrandModel.swift in Sources */,
 				29FF26821CFDA86300DF2A9B /* WOWBaseStyleCell.swift in Sources */,
@@ -1616,6 +1666,7 @@
 				29FF26D41CFDA86300DF2A9B /* WOWUserInfoController.swift in Sources */,
 				29FF26F01CFDA86300DF2A9B /* TagCellLayout.swift in Sources */,
 				29FF26B71CFDA86300DF2A9B /* WOWAddressController.swift in Sources */,
+				069056E11D36666F00A851F9 /* WOWController.swift in Sources */,
 				29FF26AC1CFDA86300DF2A9B /* WOWStoreSectionView.swift in Sources */,
 				29FF26DF1CFDA86300DF2A9B /* WOWUserManager.swift in Sources */,
 				29FF269F1CFDA86300DF2A9B /* WOWGoodsDetailController.swift in Sources */,
@@ -1665,11 +1716,11 @@
 				29FF268D1CFDA86300DF2A9B /* WOWBannerModel.swift in Sources */,
 				29FF26BB1CFDA86300DF2A9B /* WOWILikeController.swift in Sources */,
 				29FF26B41CFDA86300DF2A9B /* WOWAddressBottomView.swift in Sources */,
+				069056DF1D36665B00A851F9 /* WOWGuideController.swift in Sources */,
 				297F187B1D0520A3003CCA2F /* WOWProductParamCell.swift in Sources */,
 				29FF26491CFDA86300DF2A9B /* WOWCarGoodsListController.swift in Sources */,
 				2958BD951CFEECF400F6A6D7 /* WOWLeaveTipsController.swift in Sources */,
 				29FF26811CFDA86300DF2A9B /* WOWBaseModel.swift in Sources */,
-				29FF26581CFDA86300DF2A9B /* WOWController.swift in Sources */,
 				29FF26561CFDA86300DF2A9B /* WOWCommentController.swift in Sources */,
 				29FF26841CFDA86300DF2A9B /* WOWBaseTableViewCell.swift in Sources */,
 				29FF26B01CFDA86300DF2A9B /* WOWAboutController.swift in Sources */,
@@ -1685,6 +1736,7 @@
 				29FF26981CFDA86300DF2A9B /* WOWGoodsBigCell.swift in Sources */,
 				29FF26471CFDA86300DF2A9B /* WOWBuyCarNormalCell.swift in Sources */,
 				29FF26CD1CFDA86300DF2A9B /* WOWTransLineCell.swift in Sources */,
+				06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */,
 				29FF267F1CFDA86300DF2A9B /* WOWTabBarController.swift in Sources */,
 				29FF26E41CFDA86300DF2A9B /* WOWRequestApi.swift in Sources */,
 				29D5EC4D1D016CF50001266C /* WOWProductDetailTipsCell.swift in Sources */,
@@ -1738,6 +1790,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1792,7 +1845,7 @@
 		};
 		29FF25231CFDA75700DF2A9B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DBDA0C3EC14E0A85FE2FB974 /* Pods-wowapp.debug.xcconfig */;
+			baseConfigurationReference = 6D82CF16CDE3CFCF20061FE2 /* Pods-wowapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1805,6 +1858,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/TencentOpenAPI",
 					"$(PROJECT_DIR)",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = wowapp/wowInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1825,7 +1879,7 @@
 		};
 		29FF25241CFDA75700DF2A9B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D3918CA65EA43D15F782F0B9 /* Pods-wowapp.release.xcconfig */;
+			baseConfigurationReference = 3E5C8E688B6F27D65B9C07E1 /* Pods-wowapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "35F870F88E41053A91AA128F5567A1D340D1690D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "35F870F88E41053A91AA128F5567A1D340D1690D" : 0,
+    "4F32C305776E0ECE55901323754785324FD241CC" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "84AB0E0E-DC15-47C2-AF56-2634FE7AFA8F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "35F870F88E41053A91AA128F5567A1D340D1690D" : "PonyFrameworkOnSwift\/",
+    "4F32C305776E0ECE55901323754785324FD241CC" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PonyFrameworkOnSwift",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PonyFrameworkOnSwift.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/MakeBetterMe\/PonyFrameworkOnSwift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "35F870F88E41053A91AA128F5567A1D340D1690D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/git.coding.net\/ponycoder\/VirtualFriend.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4F32C305776E0ECE55901323754785324FD241CC"
+    }
+  ]
+}

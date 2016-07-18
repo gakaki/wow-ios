@@ -35,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          */
         //requestConfigData()
         
+        
+        
         window?.makeKeyAndVisible()
         return true
     }
@@ -90,7 +92,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
+
+
 extension AppDelegate{
+    
+    func rootVCGuide(){
+        let nav = UIStoryboard.initNavVC("Login", identifier:String(WOWGuideController))
+        nav.navigationController?.setNavigationBarHidden(true, animated: false)
+        nav.navigationBarHidden = true
+        window?.rootViewController =    nav
+    }
     
     func requestConfigData(){
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: { (result) in
@@ -128,6 +139,7 @@ extension AppDelegate{
         }
     }
     
+   
     func configRootVC(){
         let infoDictionary = NSBundle.mainBundle().infoDictionary
         let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
@@ -140,11 +152,16 @@ extension AppDelegate{
             userDefaults.setValue(currentAppVersion, forKey: "appVersion")
             let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
             self.window?.rootViewController = introVC
+            
         }else{
+            
             let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
             AppDelegate.rootVC = mainVC
             window?.rootViewController = mainVC
+            
         }
+        
+        rootVCGuide()
     }
     
     func registAppKey(){
@@ -155,7 +172,7 @@ extension AppDelegate{
         MobClick.setCrashReportEnabled(true)
         
         UMSocialData.setAppKey(WOWID.UMeng.appID)
-//        UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
+        UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
         
         
         //MonkeyKing
@@ -179,7 +196,7 @@ extension AppDelegate{
         })
         
         //shareSDK
-        
+
         ShareSDK.registerApp(WOWID.ShareSDK.appKey,
                              
                              activePlatforms: [SSDKPlatformType.TypeWechat.rawValue,],
@@ -196,7 +213,7 @@ extension AppDelegate{
             },
                              onConfiguration: {(platform : SSDKPlatformType,appInfo : NSMutableDictionary!) -> Void in
                                 switch platform {
-
+                                    
                                 case SSDKPlatformType.TypeWechat:
                                     //设置微信应用信息
                                     appInfo.SSDKSetupWeChatByAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey)
@@ -206,6 +223,8 @@ extension AppDelegate{
                                     
                                 }
         })
+
+        
         
     }
     

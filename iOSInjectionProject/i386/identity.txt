@@ -1,0 +1,2 @@
+/Users/g/Library/Developer/Xcode/DerivedData/wowapp-dpciefaamsrvnjdnecuqnuexqtpo/Build/Products/Debug-iphonesimulator/wowapp.app
+iPhone Developer

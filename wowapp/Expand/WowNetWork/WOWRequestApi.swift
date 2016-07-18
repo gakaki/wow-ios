@@ -55,6 +55,8 @@ public enum RequestApi{
     
     case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
     
+    case Api_CheckWechat(paramJson:[String:AnyObject]) //openId  验证APP是否授权过微信
+    
     case Api_Invite //邀请好友
     
     case Api_ResetPwd(mobile:String,code:String,password:String)
@@ -123,6 +125,8 @@ extension RequestApi:TargetType{
             return URL_Register
         case .Api_Sms:
             return URL_Sms
+        case .Api_CheckWechat:
+            return URL_CheckWechat
         case .Api_ResetPwd:
             return URL_ResetPassword
         case .Api_AddressAdd:
@@ -141,7 +145,13 @@ extension RequestApi:TargetType{
     }
     
     public var method:Moya.Method{
-        return .POST
+        switch self {
+        case .Api_CheckWechat:
+            return .GET
+        default:
+            return .POST
+        }
+        
     }
     
     public var parameters:[String: AnyObject]?{
@@ -180,6 +190,8 @@ extension RequestApi:TargetType{
             return ["cart":cart]
         case let .Api_Sms(type,mobile):
             return ["type":type,"mobile":mobile]
+        case let .Api_CheckWechat(paramJson):
+            return paramJson
         case let .Api_ResetPwd(mobile, code, password):
             return ["mobile":mobile,"code":code,"password":password]
         case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default,addressid):

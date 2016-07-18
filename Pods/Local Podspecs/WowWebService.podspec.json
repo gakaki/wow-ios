@@ -2,7 +2,7 @@
   "name": "WowWebService",
   "version": "0.1.0",
   "summary": "A short description of WowWebService.",
-  "description": "TODO: Add long description of the pod here.",
+  "description": "TODO: 尖叫设计的网络服务层",
   "homepage": "https://github.com/<GITHUB_USERNAME>/WowWebService",
   "license": {
     "type": "MIT",

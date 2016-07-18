@@ -1,0 +1,6 @@
+framework module PonyFrameworkOnSwift {
+  umbrella header "PonyFrameworkOnSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

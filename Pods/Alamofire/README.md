@@ -70,9 +70,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 use_frameworks!
 
-target '<Your Target Name>' do
-    pod 'Alamofire', '~> 3.4'
-end
+pod 'Alamofire', '~> 3.4'
 ```
 
 Then, run the following command:
@@ -713,20 +711,6 @@ Requests can be suspended, resumed, and cancelled:
 
 ### Response Serialization
 
-#### Handling Errors
-
-Before implementing custom response serializers or object serialization methods, it's important to be prepared to handle any errors that may occur. Alamofire recommends handling these through the use of either your own `NSError` creation methods, or a simple `enum` that conforms to `ErrorType`. For example, this `BackendError` type, which will be used in later examples:
-
-```swift
-enum BackendError: ErrorType {
-    case Network(error: NSError)
-    case DataSerialization(reason: String)
-    case JSONSerialization(error: NSError)
-    case ObjectSerialization(reason: String)
-    case XMLSerialization(error: NSError)
-}
-```
-
 #### Creating a Custom Response Serializer
 
 Alamofire provides built-in response serialization for strings, JSON, and property lists, but others can be added in extensions on `Alamofire.Request`.
@@ -735,24 +719,26 @@ For example, here's how a response handler using [Ono](https://github.com/mattt/
 
 ```swift
 extension Request {
-    public static func XMLResponseSerializer() -> ResponseSerializer<ONOXMLDocument, BackendError> {
+    public static func XMLResponseSerializer() -> ResponseSerializer<ONOXMLDocument, NSError> {
         return ResponseSerializer { request, response, data, error in
-            guard error == nil else { return .Failure(.Network(error: error!)) }
+            guard error == nil else { return .Failure(error!) }
 
             guard let validData = data else {
-                return .Failure(.DataSerialization(reason: "Data could not be serialized. Input data was nil."))
+                let failureReason = "Data could not be serialized. Input data was nil."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
             }
 
             do {
                 let XML = try ONOXMLDocument(data: validData)
                 return .Success(XML)
             } catch {
-                return .Failure(.XMLSerialization(error: error as NSError))
+                return .Failure(error as NSError)
             }
         }
     }
 
-    public func responseXMLDocument(completionHandler: Response<ONOXMLDocument, BackendError> -> Void) -> Self {
+    public func responseXMLDocument(completionHandler: Response<ONOXMLDocument, NSError> -> Void) -> Self {
         return response(responseSerializer: Request.XMLResponseSerializer(), completionHandler: completionHandler)
     }
 }
@@ -768,9 +754,9 @@ public protocol ResponseObjectSerializable {
 }
 
 extension Request {
-    public func responseObject<T: ResponseObjectSerializable>(completionHandler: Response<T, BackendError> -> Void) -> Self {
-        let responseSerializer = ResponseSerializer<T, BackendError> { request, response, data, error in
-            guard error == nil else { return .Failure(.Network(error: error!)) }
+    public func responseObject<T: ResponseObjectSerializable>(completionHandler: Response<T, NSError> -> Void) -> Self {
+        let responseSerializer = ResponseSerializer<T, NSError> { request, response, data, error in
+            guard error == nil else { return .Failure(error!) }
 
             let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
             let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
@@ -783,10 +769,12 @@ extension Request {
                 {
                     return .Success(responseObject)
                 } else {
-                    return .Failure(.ObjectSerialization(reason: "JSON could not be serialized into response object: \(value)"))
+                    let failureReason = "JSON could not be serialized into response object: \(value)"
+                    let error = Error.errorWithCode(.JSONSerializationFailed, failureReason: failureReason)
+                    return .Failure(error)
                 }
             case .Failure(let error):
-                return .Failure(.JSONSerialization(error: error))
+                return .Failure(error)
             }
         }
 
@@ -809,7 +797,7 @@ final class User: ResponseObjectSerializable {
 
 ```swift
 Alamofire.request(.GET, "https://example.com/users/mattt")
-         .responseObject { (response: Response<User, BackendError>) in
+         .responseObject { (response: Response<User, NSError>) in
              debugPrint(response)
          }
 ```
@@ -821,26 +809,10 @@ public protocol ResponseCollectionSerializable {
     static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Self]
 }
 
-extension ResponseCollectionSerializable where Self: ResponseObjectSerializable {
-    static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Self] {
-        var collection = [Self]()
-        
-        if let representation = representation as? [[String: AnyObject]] {
-            for itemRepresentation in representation {
-                if let item = Self(response: response, representation: itemRepresentation) {
-                    collection.append(item)
-                }
-            }
-        }
-        
-        return collection
-    }
-}
-
 extension Alamofire.Request {
-    public func responseCollection<T: ResponseCollectionSerializable>(completionHandler: Response<[T], BackendError> -> Void) -> Self {
-        let responseSerializer = ResponseSerializer<[T], BackendError> { request, response, data, error in
-            guard error == nil else { return .Failure(.Network(error: error!)) }
+    public func responseCollection<T: ResponseCollectionSerializable>(completionHandler: Response<[T], NSError> -> Void) -> Self {
+        let responseSerializer = ResponseSerializer<[T], NSError> { request, response, data, error in
+            guard error == nil else { return .Failure(error!) }
 
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
             let result = JSONSerializer.serializeResponse(request, response, data, error)
@@ -850,10 +822,12 @@ extension Alamofire.Request {
                 if let response = response {
                     return .Success(T.collection(response: response, representation: value))
                 } else {
-                    return .Failure(. ObjectSerialization(reason: "Response collection could not be serialized due to nil response"))
+                    let failureReason = "Response collection could not be serialized due to nil response"
+                    let error = Error.errorWithCode(.JSONSerializationFailed, failureReason: failureReason)
+                    return .Failure(error)
                 }
             case .Failure(let error):
-                return .Failure(.JSONSerialization(error: error))
+                return .Failure(error)
             }
         }
 
@@ -871,12 +845,26 @@ final class User: ResponseObjectSerializable, ResponseCollectionSerializable {
         self.username = response.URL!.lastPathComponent!
         self.name = representation.valueForKeyPath("name") as! String
     }
+
+    static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [User] {
+        var users: [User] = []
+
+        if let representation = representation as? [[String: AnyObject]] {
+            for userRepresentation in representation {
+                if let user = User(response: response, representation: userRepresentation) {
+                    users.append(user)
+                }
+            }
+        }
+
+        return users
+    }
 }
 ```
 
 ```swift
 Alamofire.request(.GET, "http://example.com/users")
-         .responseCollection { (response: Response<[User], BackendError>) in
+         .responseCollection { (response: Response<[User], NSError>) in
              debugPrint(response)
          }
 ```
@@ -956,7 +944,7 @@ enum Router: URLRequestConvertible {
     var URLRequest: NSMutableURLRequest {
         let result: (path: String, parameters: [String: AnyObject]) = {
             switch self {
-            case .Search(let query, let page) where page > 0:
+            case .Search(let query, let page) where page > 1:
                 return ("/search", ["q": query, "offset": Router.perPage * page])
             case .Search(let query, _):
                 return ("/search", ["q": query])
@@ -1260,7 +1248,6 @@ There are some important things to remember when using network reachability to d
 The following rdars have some affect on the current implementation of Alamofire.
 
 * [rdar://21349340](http://www.openradar.me/radar?id=5517037090635776) - Compiler throwing warning due to toll-free bridging issue in test case
-* [rdar://26761490](http://www.openradar.me/radar?id=5010235949318144) - Swift string interpolation causing memory leak with common usage
 
 ## FAQ
 
@@ -1277,20 +1264,6 @@ Alamofire is owned and maintained by the [Alamofire Software Foundation](http://
 ### Security Disclosure
 
 If you believe you have identified a security vulnerability with Alamofire, you should report it as soon as possible via email to security@alamofire.org. Please do not post it to a public issue tracker.
-
-## Donations
-
-The [ASF](https://github.com/Alamofire/Foundation#members) is looking to raise money to officially register as a federal non-profit organization. Registering will allow us members to gain some legal protections and also allow us to put donations to use, tax free. Donating to the ASF will enable us to:
-
-* Pay our legal fees to register as a federal non-profit organization
-* Pay our yearly legal fees to keep the non-profit in good status
-* Pay for our mail servers to help us stay on top of all questions and security issues
-* Potentially fund test servers to make it easier for us to test the edge cases
-* Potentially fund developers to work on one of our projects full-time
-
-The community adoption of the ASF libraries has been amazing. We are greatly humbled by your enthusiam around the projects, and want to continue to do everything we can to move the needle forward. With your continued support, the ASF will be able to improve its reach and also provide better legal safety for the core members. If you use any of our libraries for work, see if your employers would be interested in donating. Our initial goal is to raise $1000 to get all our legal ducks in a row and kickstart this campaign. Any amount you can donate today to help us reach our goal would be greatly appreciated.
-
-<a href='https://pledgie.com/campaigns/31474'><img alt='Click here to lend your support to: Alamofire Software Foundation and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31474.png?skin_name=chrome' border='0' ></a>
 
 ## License
 

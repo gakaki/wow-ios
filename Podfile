@@ -55,8 +55,8 @@ pod 'RongCloudIMKit', '2.6.0'
 #王云鹏自己的framework
 # pod 'PonyFrameworkOnSwift',:git => 'https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git'
 pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
-pod 'WowWebService',:path => "../WowWebService/WowWebService.podspec"
-
+pod 'WowWebService',:path => "./WowWebService/WowWebService.podspec"
+pod 'WowUI',:path => "./WowUI/WowUI.podspec"
 
 
 #waitting For use

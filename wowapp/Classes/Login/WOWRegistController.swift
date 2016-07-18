@@ -91,6 +91,11 @@ class WOWRegistController: WOWBaseViewController {
     
     
     @IBAction func registClick(sender: UIButton) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
+            vc.fromUserCenter = self.fromUserCenter
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }

@@ -48,17 +48,25 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     
     override func navBack() {
         let alert = UIAlertController(title: "您有资料未填写", message: "确定退出？", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: { (action) in
+        let cancel = UIAlertAction(title:"取消", style: .Cancel, handler: { (action) in
             DLog("取消")
-        }))
-        alert.addAction(UIAlertAction(title: "确定", style: .Cancel, handler: {[weak self] (action) in
+        })
+
+        let sure   = UIAlertAction(title: "确定", style: .Default) {[weak self] (action) in
             if let strongSelf = self{
-                strongSelf.dismissViewControllerAnimated(true, completion: nil)
-                if strongSelf.fromUserCenter{
-                    UIApplication.appTabBarController.selectedIndex = 0
-                }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                    strongSelf.navigationController?.popViewControllerAnimated(true)
+                    if strongSelf.fromUserCenter{
+                        UIApplication.appTabBarController.selectedIndex = 0
+                    }
+                })
+
             }
-        }))
+        }
+        alert.addAction(cancel)
+        alert.addAction(sure)
+        presentViewController(alert, animated: true, completion: nil)
+
     }
     
 //MARK:Actions

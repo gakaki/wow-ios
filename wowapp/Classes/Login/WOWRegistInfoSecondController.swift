@@ -49,9 +49,15 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     private func configNav(){
         makeCustomerNavigationItem("跳过", left: false) {[weak self] in
             if let strongSelf = self{
-                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+               
+//                strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 if strongSelf.fromUserCenter{
+                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                    print("gerenzhongxin")
                     UIApplication.appTabBarController.selectedIndex = 0
+                }else {
+                    //进入首页
+                    strongSelf.toMainVC()
                 }
             }
         }
@@ -80,9 +86,14 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     
     func sure() {
-        dismissViewControllerAnimated(true, completion: nil)
+//        dismissViewControllerAnimated(true, completion: nil)
         if fromUserCenter{
+            dismissViewControllerAnimated(true, completion: nil)
+            print("gerenzhongxin")
             UIApplication.appTabBarController.selectedIndex = 0
+        }else {
+            //进入首页
+            toMainVC()
         }
     }
     

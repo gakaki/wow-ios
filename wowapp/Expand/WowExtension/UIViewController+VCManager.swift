@@ -18,10 +18,13 @@ extension  UIViewController {
         self.presentViewController(mainVC!, animated: true, completion: nil)
     }
     func toLoginVC(){
-        let mainVC = UIStoryboard(name: "Login", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-        mainVC?.modalTransitionStyle = .FlipHorizontal
-        AppDelegate.rootVC = mainVC
-        self.presentViewController(mainVC!, animated: true, completion: nil)
+//        let mainVC = UIStoryboard(name: "Login", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
+//        mainVC?.modalTransitionStyle = .FlipHorizontal
+//        AppDelegate.rootVC = mainVC
+//        self.presentViewController(mainVC!, animated: true, completion: nil)
+        
+        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWLoginController))
+        self.pushVC( vc )
     }
     func toRegVC(){
         

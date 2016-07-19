@@ -8,11 +8,10 @@
 
 import Foundation
 import SwiftyJSON
-//import RxSwift
 import ObjectMapper
 
-typealias FailClosure = (errorMsg:String?) -> ()
-typealias SuccessClosure = (result:AnyObject) ->()
+typealias FailClosure       = (errorMsg:String?) -> ()
+typealias SuccessClosure    = (result:AnyObject) ->()
 
 
 enum RequestCode:Int{
@@ -31,8 +30,8 @@ class ReturnInfo: Mappable {
     
     func mapping(map: Map) {
         data          <-    map["data"]
-        code          <-    map["errno"]
-        message       <-    map["errmsg"]
+        code          <-    map["resCode"]
+        message       <-    map["resMsg"]
     }
 }
 

@@ -13,7 +13,6 @@ pod 'Kingfisher','~>2.0.1'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
 pod 'MonkeyKing', '~> 0.9.2'
 
-pod 'MoyaX'
 pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
@@ -47,17 +46,11 @@ pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 #LeanCloud
 pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
 
-pod 'JSONCodable', '~> 2.1'
-
-
 #融云
 pod 'RongCloudIMKit', '2.6.0'
 
 #王云鹏自己的framework
-# pod 'PonyFrameworkOnSwift',:git => 'https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git'
 pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
-pod 'WowWebService',:path => "./WowWebService/WowWebService.podspec"
-pod 'WowUI',:path => "./WowUI/WowUI.podspec"
 
 
 #waitting For use

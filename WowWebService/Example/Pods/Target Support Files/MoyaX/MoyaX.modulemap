@@ -1,6 +1,0 @@
-framework module MoyaX {
-  umbrella header "MoyaX-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -9,6 +9,8 @@
 import Foundation
 
 public enum RequestApi{
+    
+    
     static var HostUrl:String! = BaseUrl
     
     case Api_Sence

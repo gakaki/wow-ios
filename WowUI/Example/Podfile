@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'WowUI_Example' do
+  pod 'WowUI', :path => '../'
+
+  target 'WowUI_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

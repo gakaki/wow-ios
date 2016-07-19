@@ -1,0 +1,6 @@
+framework module Pods_WowUI_Tests {
+  umbrella header "Pods-WowUI_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

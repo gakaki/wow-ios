@@ -1,0 +1,6 @@
+framework module WowWebService {
+  umbrella header "WowWebService-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,14 @@
+use_frameworks!
+
+target 'WowWebService_Example' do
+  pod 'WowWebService', :path => '../'
+  pod 'Moya'
+  pod 'MoyaX'
+  pod 'JSONCodable', '~> 2.1'
+  pod 'Moya/RxSwift'
+  target 'WowWebService_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

@@ -1,0 +1,40 @@
+PODS:
+  - Alamofire (3.4.0)
+  - JSONCodable (2.1)
+  - Moya (6.5.0):
+    - Moya/Core (= 6.5.0)
+  - Moya/Core (6.5.0):
+    - Alamofire (~> 3.0)
+    - Result (~> 2.0)
+  - Moya/RxSwift (6.5.0):
+    - Moya/Core
+    - RxSwift (~> 2.0)
+  - MoyaX (0.0.8):
+    - Alamofire (~> 3.0)
+  - Result (2.0.0)
+  - RxSwift (2.5.0)
+  - WowWebService (0.1.0)
+
+DEPENDENCIES:
+  - JSONCodable (~> 2.1)
+  - Moya
+  - Moya/RxSwift
+  - MoyaX
+  - WowWebService (from `../`)
+
+EXTERNAL SOURCES:
+  WowWebService:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  JSONCodable: d3bb8d1323bb4cbc381b16219046c5282565a4f1
+  Moya: f7a4044719381cc6299f9ad3e0ef05f426f0557b
+  MoyaX: cdf52c96152a03812672b2c04b01d5dd1bc265e1
+  Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
+  WowWebService: f2231730d1f55318b8c51f79617f7cc67d7ef293
+
+PODFILE CHECKSUM: 1e6493ffb019c38ef8b5a00caa4229b76aaa993f
+
+COCOAPODS: 1.1.0.beta.1

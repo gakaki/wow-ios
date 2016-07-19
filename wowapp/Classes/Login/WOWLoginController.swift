@@ -16,7 +16,10 @@ class WOWLoginController: WOWBaseViewController {
     var fromUserCenter:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let s = "13764641531";
+        self.accountTextField.text = s;
+        self.passWordTextField.text = s;
     }
     
     override func didReceiveMemoryWarning() {

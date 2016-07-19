@@ -156,59 +156,65 @@ extension RequestApi:TargetType{
         
     }
     
+    
+    
     public var parameters:[String: AnyObject]?{
+        var params = [String: AnyObject]?()
         switch self{
-        case let .Api_SenceDetail(sceneid,uid):
-            return ["scene_id":sceneid,"uid":uid]
-        case let .Api_Register(account,password,code):
-            return ["account":account,"password":password,"code":code]
-        case let .Api_Login(account,password):
-            return ["account":account,"password":password]
-        case let .Api_BrandDetail(brandid):
-            return ["brandid":brandid]
-        case let .Api_ProductList(pageindex,categoryID,style,sort,uid,keyword):
-            return ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid,"keyword":keyword]
-        case let .Api_ProductDetail(product_id,uid):
-            return ["id":product_id,"uid":uid]
-        case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):
-            return ["uid":uid,"product_id":product_id,"type":type,"is_delete":is_delete,"scene_id":scene_id]
-        case let .Api_CommentList(pageindex,thingid,type):
-            return ["pageindex":pageindex,"thingid":thingid,"type":type]
-        case let .Api_SubmitComment(uid,comment,thingid,type):
-            return ["uid":uid,"thingid":thingid,"comment":comment,"type":type]
-        case let .Api_UserUpdate(param):
-            return param
-        case let .Api_UserFavorite(uid,type,pageindex):
-            return ["uid":uid,"type":type,"pageindex":pageindex]
-        case let .Api_CarEdit(cart):
-            return ["cart":cart]
-        case let .Api_CarList(cart):
-            return ["cart":cart]
-        case let .Api_CarNologin(cart):
-            return ["cart":cart]
-        case let .Api_CarDelete(cart):
-            return ["cart":cart]
-        case let .Api_CarCommit(cart):
-            return ["cart":cart]
-        case let .Api_Sms(type,mobile):
-            return ["type":type,"mobile":mobile]
-        case let .Api_CheckWechat(paramJson):
-            return paramJson
-        case let .Api_ResetPwd(mobile, code, password):
-            return ["mobile":mobile,"code":code,"password":password]
-        case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default,addressid):
-            return ["uid":uid,"name":name,"province":province,"city":city,"district":district,"street":street,"mobile":mobile,"is_default":is_default,"id":addressid]
-        case let .Api_Addresslist(uid):
-            return ["uid":uid]
-        case let .Api_AddressDelete(uid,id):
-            return ["uid":uid,"id":id]
-        case let .Api_OrderList(uid,type):
-            return ["uid":uid,"type":type]
-        case let .Api_OrderStatus(uid,order_id,status):
-            return ["uid":uid,"order_id":order_id,"status":status]
-        default:
-            return nil
+            case let .Api_SenceDetail(sceneid,uid):
+                params = ["scene_id":sceneid,"uid":uid]
+            case let .Api_Register(account,password,code):
+                params = ["mobile":account,"password":password,"code":code]
+            case let .Api_Login(account,password):
+                params = ["mobile":account,"password":password]
+            case let .Api_BrandDetail(brandid):
+                params = ["brandid":brandid]
+            case let .Api_ProductList(pageindex,categoryID,style,sort,uid,keyword):
+                params = ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid,"keyword":keyword]
+            case let .Api_ProductDetail(product_id,uid):
+                params = ["id":product_id,"uid":uid]
+            case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):
+                params = ["uid":uid,"product_id":product_id,"type":type,"is_delete":is_delete,"scene_id":scene_id]
+            case let .Api_CommentList(pageindex,thingid,type):
+                params = ["pageindex":pageindex,"thingid":thingid,"type":type]
+            case let .Api_SubmitComment(uid,comment,thingid,type):
+                params =  ["uid":uid,"thingid":thingid,"comment":comment,"type":type]
+            case let .Api_UserUpdate(param):
+                params =  param
+            case let .Api_UserFavorite(uid,type,pageindex):
+                params =  ["uid":uid,"type":type,"pageindex":pageindex]
+            case let .Api_CarEdit(cart):
+                params =  ["cart":cart]
+            case let .Api_CarList(cart):
+                params =  ["cart":cart]
+            case let .Api_CarNologin(cart):
+                params =  ["cart":cart]
+            case let .Api_CarDelete(cart):
+                params =  ["cart":cart]
+            case let .Api_CarCommit(cart):
+                params =  ["cart":cart]
+            case let .Api_Sms(type,mobile):
+                params =  ["type":type,"mobile":mobile]
+            case let .Api_CheckWechat(paramJson):
+                params =  paramJson
+            case let .Api_ResetPwd(mobile, code, password):
+                params =  ["mobile":mobile,"code":code,"password":password]
+            case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default,addressid):
+                params =  ["uid":uid,"name":name,"province":province,"city":city,"district":district,"street":street,"mobile":mobile,"is_default":is_default,"id":addressid]
+            case let .Api_Addresslist(uid):
+                params =  ["uid":uid]
+            case let .Api_AddressDelete(uid,id):
+                params =  ["uid":uid,"id":id]
+            case let .Api_OrderList(uid,type):
+                params =  ["uid":uid,"type":type]
+            case let .Api_OrderStatus(uid,order_id,status):
+                params =  ["uid":uid,"order_id":order_id,"status":status]
+            default:
+                params =  nil
         }
+        params =   ["paramJson":JSONStringify(params!),"channel":"1"]
+//        print(params)
+        return params
     }
     
     

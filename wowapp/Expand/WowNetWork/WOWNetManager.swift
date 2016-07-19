@@ -14,16 +14,16 @@ typealias FailClosure       = (errorMsg:String?) -> ()
 typealias SuccessClosure    = (result:AnyObject) ->()
 
 
-enum RequestCode:Int{
-    case FailError = 1000
-    case Success = 1001
+enum RequestCode:String{
+    case FailError = "40000"
+    case Success = "0"
 }
 
 
 //MARK:前后端约定的返回数据结构
 class ReturnInfo: Mappable {
     var data:AnyObject? //若返回无数据，returnObject字段也得带上,可为空值
-    var code: Int!
+    var code: String?
     var message: String?
     required init?(_ map: Map) {
     }

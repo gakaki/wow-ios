@@ -10,8 +10,8 @@ import Foundation
 import SwiftyJSON
 import ObjectMapper
 
-typealias FailClosure       = (errorMsg:String?) -> ()
-typealias SuccessClosure    = (result:AnyObject) ->()
+typealias FailClosure             = (errorMsg:String?) -> ()
+typealias SuccessClosure          = (result:AnyObject?) ->()
 
 
 enum RequestCode:String{
@@ -60,11 +60,13 @@ class WOWNetManager {
                         WOWHud.showMsg("网络错误")
                         return
                     }
-                    guard let data = info?.data else{
-                        failClosure(errorMsg:"网络错误")
-                        WOWHud.showMsg("网络错误")
-                        return
-                    }
+                    //逻辑变化了 返回0为成功
+//                    guard let data = info?.data else{
+//                        failClosure(errorMsg:"网络错误")
+//                        WOWHud.showMsg("网络错误")
+//                        return
+//                    }
+                    
                     if let endMsg = target.endSuccessMsg{
                         if endMsg == ""{
                             
@@ -74,7 +76,7 @@ class WOWNetManager {
                     }else{
                         WOWHud.dismiss()
                     }
-                    successClosure(result:data)
+                    successClosure(result:info?.data)
                 case let .Failure(error):
                     DLog(error)
                     WOWHud.showMsg("网络错误")

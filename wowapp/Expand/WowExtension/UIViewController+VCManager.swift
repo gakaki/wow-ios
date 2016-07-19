@@ -34,5 +34,9 @@ extension  UIViewController {
     func toWeixinVC(){
         print("toWeixinVC")
     }
+    
+    func toReg2ndVC(){
+        
+    }
 
 }

@@ -26,6 +26,7 @@ class WOWRegistController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.phoneTextField.text = "13764641531"
         // Do any additional setup after loading the view.
     }
 
@@ -41,6 +42,10 @@ class WOWRegistController: WOWBaseViewController {
         configNavItem()
         navigationItem.title = byWechat ? "绑定手机" :"注册"
         registButton.setTitle(byWechat ? "绑定" :"注册", forState: .Normal)
+        
+        navigationItem.title = "绑定手机"
+        registButton.setTitle( "确定" , forState: .Normal)
+
     }
     
     private func configNavItem(){
@@ -76,7 +81,8 @@ class WOWRegistController: WOWBaseViewController {
         }
         let mobile = phoneTextField.text ?? ""
         self.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor(), mainTitleColor: UIColor.blackColor(), countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Sms(type:"1", mobile:mobile), successClosure: {[weak self] (result) in
+        
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Sms_Code(mobile:mobile), successClosure: {[weak self] (result) in
             if let _ = self{
                 
             }
@@ -86,16 +92,8 @@ class WOWRegistController: WOWBaseViewController {
     }
     
     
-    
-    
-    
-    
     @IBAction func registClick(sender: UIButton) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
-            vc.fromUserCenter = self.fromUserCenter
-            self.navigationController?.pushViewController(vc, animated: true)
-        })
+
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }
@@ -121,16 +119,17 @@ class WOWRegistController: WOWBaseViewController {
             return
         }
         //FIXME:这个接口应该扩充一个字段 wechattoken 不带的话就是注册，带的话就是绑定 wowusermanager.wechatoken
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!,code:msgCodeTextField.text!), successClosure: { [weak self](result) in
-            if let strongSelf = self{
-            let model = Mapper<WOWUserModel>().map(result)
-            WOWUserManager.saveUserInfo(model)
-            NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
-                vc.fromUserCenter = strongSelf.fromUserCenter
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            })
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!,captcha:msgCodeTextField.text!), successClosure: { [weak self](result) in
+                if let strongSelf = self{
+                let model = Mapper<WOWUserModel>().map(result)
+                WOWUserManager.saveUserInfo(model)
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                    let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
+                    vc.fromUserCenter = strongSelf.fromUserCenter
+                    strongSelf.navigationController?.pushViewController(vc, animated: true)
+                })
+                
         }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
@@ -146,13 +145,13 @@ class WOWRegistController: WOWBaseViewController {
     
     @IBAction func showProtocol(sender: UIButton) {
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistProtocolController)) as! WOWRegistProtocolController
-        vc.agreeAction = {[weak self] in
-            if let strongSelf = self{
-                strongSelf.protocolCheckButton.selected = true
-                strongSelf.agreeProtocol = true
+            vc.agreeAction = {[weak self] in
+                if let strongSelf = self{
+                    strongSelf.protocolCheckButton.selected = true
+                    strongSelf.agreeProtocol = true
+                }
             }
-        }
-        navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
     }
     
 }

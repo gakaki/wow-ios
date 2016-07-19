@@ -53,10 +53,12 @@ public enum RequestApi{
     
     case Api_Login(String,String)
     
-    case Api_Register(account:String,password:String,code:String)
+    case Api_Register(account:String,password:String,captcha:String)
     
     case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
     
+    case Api_Sms_Code(mobile:String)//验证码
+
     case Api_CheckWechat(paramJson:[String:AnyObject]) //openId  验证APP是否授权过微信
     
     case Api_Invite //邀请好友
@@ -127,6 +129,10 @@ extension RequestApi:TargetType{
             return URL_Register
         case .Api_Sms:
             return URL_Sms
+        case .Api_Sms_Code:
+            return URL_Sms
+            
+            
         case .Api_CheckWechat:
             return URL_CheckWechat
         case .Api_ResetPwd:
@@ -164,7 +170,7 @@ extension RequestApi:TargetType{
             case let .Api_SenceDetail(sceneid,uid):
                 params = ["scene_id":sceneid,"uid":uid]
             case let .Api_Register(account,password,code):
-                params = ["mobile":account,"password":password,"code":code]
+                params = ["mobile":account,"password":password,"captcha":code]
             case let .Api_Login(account,password):
                 params = ["mobile":account,"password":password]
             case let .Api_BrandDetail(brandid):
@@ -195,6 +201,8 @@ extension RequestApi:TargetType{
                 params =  ["cart":cart]
             case let .Api_Sms(type,mobile):
                 params =  ["type":type,"mobile":mobile]
+            case let .Api_Sms_Code(mobile):
+                params =  ["mobile":mobile]
             case let .Api_CheckWechat(paramJson):
                 params =  paramJson
             case let .Api_ResetPwd(mobile, code, password):

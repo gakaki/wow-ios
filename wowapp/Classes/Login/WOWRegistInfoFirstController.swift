@@ -72,6 +72,19 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     
 //MARK:Actions
     func nextButton() {
+        let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? "","mobile":telTextField.text ?? ""]
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: {[weak self] (result) in
+            if let _ = self{
+                DLog(result)
+                print(result)
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let _ = self{
+
+            }
+        }
+        
         //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistInfoSecondController)) as! WOWRegistInfoSecondController
         vc.fromUserCenter = fromUserCenter

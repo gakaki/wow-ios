@@ -43,7 +43,7 @@ class WOWRegistController: WOWBaseViewController {
         navigationItem.title = byWechat ? "绑定手机" :"注册"
         registButton.setTitle(byWechat ? "绑定" :"注册", forState: .Normal)
         
-        navigationItem.title = "绑定手机"
+//        navigationItem.title = "绑定手机"
         registButton.setTitle( "确定" , forState: .Normal)
 
     }
@@ -80,11 +80,10 @@ class WOWRegistController: WOWBaseViewController {
             return
         }
         let mobile = phoneTextField.text ?? ""
-        self.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor(), mainTitleColor: UIColor.blackColor(), countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
         
             WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Sms_Code(mobile:mobile), successClosure: {[weak self] (result) in
-            if let _ = self{
-                
+            if let strongSelf = self{
+                strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor(), mainTitleColor: UIColor.blackColor(), countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
                 

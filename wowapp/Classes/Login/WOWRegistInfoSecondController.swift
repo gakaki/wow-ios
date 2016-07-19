@@ -16,8 +16,11 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     @IBOutlet weak var jobTextField: UITextField!
     var editingTextField:UITextField?
     var fromUserCenter:Bool = false
-    var sex = "男"
-    var pickDataArr:[String] = [String]()
+    var sex = 0
+    var ageRow = Int(3)
+    var starRow = Int()
+    
+    var pickDataArr:[Int:String] = [Int:String]()
     lazy var pickerContainerView :WOWPickerView = {
         let v = NSBundle.mainBundle().loadNibNamed("WOWPickerView", owner: self, options: nil).last as! WOWPickerView
         return v
@@ -80,7 +83,12 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     func surePicker() {
         let row = pickerContainerView.pickerView.selectedRowInComponent(0)
-        editingTextField?.text = pickDataArr[row]
+        
+        if editingTextField == ageTextField {
+            editingTextField?.text = pickDataArr[row]
+        }else{
+            editingTextField?.text = pickDataArr[row + 1]
+        }
         cancelPicker()
     }
     
@@ -101,9 +109,9 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         manButton.selected = (sender == manButton)
         womanButton.selected = (sender == womanButton)
         if sender.tag == 1001 { //男
-            sex = "男"
+            sex = 0
         }else{ //女
-            sex = "女"
+            sex = 1
         }
     }
 }
@@ -118,23 +126,35 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickDataArr[row]
+        
+        if editingTextField == ageTextField {
+            return pickDataArr[row]
+        }else{
+            return pickDataArr[row + 1]
+        }
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        editingTextField?.text = pickDataArr[row]
+        
+        if editingTextField == ageTextField {
+            editingTextField?.text = pickDataArr[row]
+        }else{
+            editingTextField?.text = pickDataArr[row + 1]
+        }
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         editingTextField = textField
         if textField == ageTextField {
-            pickDataArr = ["00后","95后","90后","85后","80后","75后","70后","65后","60后"]
+            pickDataArr = [0:"保密", 1:"60后", 2:"70后", 3:"80后", 4:"85后", 5:"90后", 6:"95后", 7:"00后"]
+            self.pickerContainerView.pickerView.reloadComponent(0)
+            pickerContainerView.pickerView.selectRow(ageRow, inComponent: 0, animated: true)
         }else if textField == starTextField{
-            pickDataArr = ["水瓶座","双鱼座","白羊座","金牛座","双子座","巨蟹座","狮子座","处女座","天秤座","天蝎座","射手座","摩羯座"]
+            pickDataArr = [1:"白羊座",2:"金牛座",3:"双子座",4:"巨蟹座",5:"狮子座",6:"处女座",7:"天秤座",8:"天蝎座",9:"射手座",10:"摩羯座",11:"水瓶座",12:"双鱼座"]
+            self.pickerContainerView.pickerView.reloadComponent(0)
+            pickerContainerView.pickerView.selectRow(starRow, inComponent: 0, animated: true)
         }
-        self.pickerContainerView.pickerView.reloadComponent(0)
-        let row = pickDataArr.indexesOf(textField.text ?? "").first ?? 0
-        pickerContainerView.pickerView.selectRow(row, inComponent: 0, animated: true)
+
         return true
     }
 

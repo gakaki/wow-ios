@@ -82,6 +82,7 @@ let URL_BlindWechat             = "user/register-and-bind-wechat" //注册并绑
 let URL_MobileExisted           = "user/is-mobile-existed"        //查询手机是否存在
 let URL_Logout                  = "session/logout"                //登出
 let URL_captcha                 = "user/captcha"                  //获取验证码
+let URL_Change                  = "user/change"                   //修改用户信息
 
 
 

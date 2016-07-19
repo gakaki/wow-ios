@@ -47,6 +47,8 @@ public enum RequestApi{
     
     case Api_CarCommit(car:String)
     
+    case Api_Change(param:[String:String])
+    
     case Api_UserUpdate(param:[String:String])
     
     case Api_UserFavorite(uid:String,type:String,pageindex:String)
@@ -121,6 +123,8 @@ extension RequestApi:TargetType{
             return URL_CarNologin
         case .Api_CarDelete:
             return URL_CarDelete
+        case .Api_Change:
+            return URL_Change
         case .Api_CarCommit:
             return URL_CarCommit
         case .Api_Login:
@@ -199,6 +203,8 @@ extension RequestApi:TargetType{
                 params =  ["cart":cart]
             case let .Api_CarCommit(cart):
                 params =  ["cart":cart]
+            case let .Api_Change(param):
+                params = param
             case let .Api_Sms(type,mobile):
                 params =  ["type":type,"mobile":mobile]
             case let .Api_Sms_Code(mobile):

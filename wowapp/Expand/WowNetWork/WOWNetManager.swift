@@ -11,7 +11,7 @@ import SwiftyJSON
 import ObjectMapper
 
 typealias FailClosure             = (errorMsg:String?) -> ()
-typealias SuccessClosure          = (result:AnyObject?) ->()
+typealias SuccessClosure          = (result:AnyObject) ->()
 
 
 enum RequestCode:String{
@@ -76,7 +76,7 @@ class WOWNetManager {
                     }else{
                         WOWHud.dismiss()
                     }
-                    successClosure(result:info?.data)
+                    successClosure(result:info?.data ?? "")
                 case let .Failure(error):
                     DLog(error)
                     WOWHud.showMsg("网络错误")

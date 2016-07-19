@@ -79,8 +79,7 @@ class WOWGuideController: WOWBaseViewController {
         }
         
         self.view.insertSubview(scrollerView, atIndex: 0)
-        
-        
+        pageControl.addTarget(self, action:#selector(WOWGuideController.didPage) , forControlEvents: UIControlEvents.TouchUpInside)
 //        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
 //        button.backgroundColor = .greenColor()
 //        button.setTitle("Test Button", forState: .Normal)
@@ -172,10 +171,14 @@ class WOWGuideController: WOWBaseViewController {
         navigationItem.title = "尖叫设计"
        
     }
-
-   
-    
-    
+//MARK:Private pageController
+    func didPage() {
+        print(self.pageControl.currentPage)
+        let frame = self.view.bounds
+        let index = self.pageControl.currentPage
+        let scrollPoint = CGPointMake(frame.size.width * CGFloat(index), 0)
+        self.scrollerView.setContentOffset(scrollPoint, animated: true)
+    }
 }
 
 // MARK: - UIScrollViewDelegate

@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YMq-1r-6nX" userLabel="账号">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YMq-1r-6nX" userLabel="账号">
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入注册邮箱或手机号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7Ko-dc-HOq">
@@ -50,7 +50,7 @@
                                     <constraint firstAttribute="trailing" secondItem="7Ko-dc-HOq" secondAttribute="trailing" constant="15" id="w6G-Cv-WKH"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35h-vs-C9p" userLabel="密码">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35h-vs-C9p" userLabel="密码">
                                 <rect key="frame" x="0.0" y="114" width="320" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUu-bx-ll5">
@@ -85,7 +85,7 @@
                                     <constraint firstAttribute="bottom" secondItem="qQv-aS-J9F" secondAttribute="bottom" constant="1" id="hQi-3t-03j"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMt-Yp-2xd">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMt-Yp-2xd">
                                 <rect key="frame" x="15" y="204" width="290" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.90196078431372551" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -100,13 +100,13 @@
                                     <action selector="login:" destination="7Sz-xq-7KD" eventType="touchUpInside" id="80F-fx-ZvU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="       " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOz-4N-7uh" userLabel="tips">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="       " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOz-4N-7uh" userLabel="tips">
                                 <rect key="frame" x="15" y="172" width="22" height="14"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                 <color key="textColor" red="0.99607843137254903" green="0.2196078431372549" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moI-Aj-fKa">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moI-Aj-fKa">
                                 <rect key="frame" x="15" y="268" width="290" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -120,7 +120,7 @@
                                     <action selector="wechatLogin:" destination="7Sz-xq-7KD" eventType="touchUpInside" id="spc-Xs-7jH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRR-wj-LbE">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRR-wj-LbE">
                                 <rect key="frame" x="15" y="324" width="290" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="fEB-Zs-J2H"/>
@@ -1047,7 +1047,7 @@
                                     <action selector="btnLoginAction:forEvent:" destination="Ww8-4p-5aW" eventType="touchUpInside" id="ZeH-jx-uhB"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YyO-kq-eic">
+                            <pageControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YyO-kq-eic">
                                 <rect key="frame" x="120" y="305" width="81" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="CH8-16-guG"/>

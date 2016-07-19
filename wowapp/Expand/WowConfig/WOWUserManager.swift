@@ -18,9 +18,20 @@ struct WOWUserManager {
     private static let WOWUserEmail         = "WOWUserEmail"
     private static let WOWUserMobile        = "WOWUserMobile"
     private static let WOWUserCarCount      = "WOWUserCarCount"
-    
+    private static let WOWSessionToken      = "WOWSessionToken"
+
     static var wechatToken = ""
     
+    static var sessionToken:String {
+        get{
+            return (MGDefault.objectForKey(WOWSessionToken) as? String) ?? ""
+        }
+        set{
+            MGDefault.setObject(newValue, forKey:WOWSessionToken)
+            MGDefault.synchronize()
+        }
+    }
+
     static var userCarCount:Int{
         get{
             return (MGDefault.objectForKey(WOWUserCarCount) as? Int) ?? 0

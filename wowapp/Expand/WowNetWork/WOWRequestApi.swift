@@ -220,7 +220,8 @@ extension RequestApi:TargetType{
             default:
                 params =  nil
         }
-        params =   ["paramJson":JSONStringify(params!),"channel":"1"]
+        params =   ["paramJson":JSONStringify(params!),"channel":"2","sessionToken":WOWUserManager.sessionToken]
+
 //        print(params)
         return params
     }

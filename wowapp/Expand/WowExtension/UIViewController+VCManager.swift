@@ -49,7 +49,7 @@ extension  UIViewController {
                 case SSDKResponseState.Success:
                     print("获取授权成功")
                     print(userData)
-                    strongSelf.checkWechatToken(userData.uid)
+                    strongSelf.checkWechatToken(userData)
                     
                 case SSDKResponseState.Fail:
                     print("授权失败,错误描述:\(error)")
@@ -65,11 +65,10 @@ extension  UIViewController {
         }
         
     }
-    private func checkWechatToken(token:String?,fromUserCenter:Bool = false){
+    private func checkWechatToken(userData:SSDKUser!,fromUserCenter:Bool = false){
         //FIXME:验证token是否是第一次咯或者是第二次
-        WOWUserManager.wechatToken = token ?? ""
         var first = Bool(true)//假设的bool值
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:WOWUserManager.wechatToken), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:userData.uid ?? "",wechat_nick_name:userData.nickname ?? "",sex:String(userData.gender.rawValue),wechat_avatar:userData.icon), successClosure: {[weak self] (result) in
             if let _ = self{
                 DLog(result)
             }

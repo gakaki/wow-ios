@@ -75,7 +75,7 @@ class WOWMsgCodeController: WOWBaseViewController {
             return
         }
         let mobile = codeTextField.text ?? ""
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Sms(type:"2", mobile:mobile), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_PwdResetCode(mobile: mobile), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
                 vc.entrance  = .ForgetPasswordCode

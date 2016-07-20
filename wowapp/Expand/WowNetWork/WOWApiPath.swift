@@ -80,12 +80,13 @@ let URL_Invite                  = "articleinfo"
 //6.app 登录注册
 let URL_Register                = "user/register"
 let URL_login                   = "session/login"
-let URL_Sms                     = "user/captcha"
+let URL_Sms                     = "user/captcha/register"
 let URL_ResetPassword           = "usermongo/resettingpwd"
 let URL_Wechat                  = "session/login/wechat"          //微信登录
 let URL_BlindWechat             = "user/wechat-bind"              //绑定微信
 let URL_Logout                  = "session/logout"                //登出
-let URL_Captcha                 = "user/captcha-for-wechat-bind"  //微信绑定获取验证码
+let URL_Captcha                 = "user/captcha/wechat-bind"      //微信绑定获取验证码
+let URL_PwpResetCode            = "user/captcha/pwd-reset"        //重置密码获取验证码
 let URL_Change                  = "user/change"                   //修改用户信息
 
 

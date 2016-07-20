@@ -8,6 +8,7 @@
 
 import UIKit
 import MonkeyKing
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame:UIScreen.mainScreen().bounds)
-        
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         //初始化外观
         //com.wowdsgn.Wow
         initialAppearance()
@@ -34,9 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          拉取配置数据
          */
         //requestConfigData()
-        
-        
-        
+
         window?.makeKeyAndVisible()
         return true
     }

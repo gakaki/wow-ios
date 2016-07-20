@@ -16,6 +16,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var telTextField: UITextField!
     @IBOutlet weak var descTextField: UITextField!
+    var nextView : WOWRegistInfoSureView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,7 +41,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     }
     
     private func configTable(){
-        let nextView = NSBundle.mainBundle().loadNibNamed(String(WOWRegistInfoSureView), owner: self, options: nil).last as! WOWRegistInfoSureView
+        nextView = NSBundle.mainBundle().loadNibNamed(String(WOWRegistInfoSureView), owner: self, options: nil).last as! WOWRegistInfoSureView
         nextView.sureButton.addTarget(self, action: #selector(nextButton), forControlEvents: .TouchUpInside)
         nextView.tipsLabel.hidden = true
         nextView.frame = CGRectMake(0,0, self.view.w, 200)
@@ -72,6 +73,13 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     
 //MARK:Actions
     func nextButton() {
+        guard let nickName = nickTextField.text where !nickName.isEmpty else{
+            WOWHud.showMsg("请输入昵称")
+            nextView.tipsLabel.hidden = false
+            nextView.tipsLabel.textColor = .redColor()
+            nextView.tipsLabel.text = "请输入昵称"
+            return
+        }
         let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? "","mobile":telTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: {[weak self] (result) in
             if let _ = self{
@@ -141,5 +149,12 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
     
     
 }
+//MARK:Delegate
 
+extension WOWRegistInfoFirstController:UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+}
 

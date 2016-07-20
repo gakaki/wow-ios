@@ -16,7 +16,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     @IBOutlet weak var jobTextField: UITextField!
     var editingTextField:UITextField?
     var fromUserCenter:Bool = false
-    var sex = 0
+    var sex = 1
     var ageRow = Int(3)
     var starRow = Int()
     
@@ -123,9 +123,9 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         manButton.selected = (sender == manButton)
         womanButton.selected = (sender == womanButton)
         if sender.tag == 1001 { //男
-            sex = 0
-        }else{ //女
             sex = 1
+        }else{ //女
+            sex = 2
         }
     }
 }

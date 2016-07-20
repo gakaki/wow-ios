@@ -4,6 +4,7 @@ PODS:
   - DZNEmptyDataSet (1.8.1)
   - EZSwiftExtensions (1.2.3)
   - HidingNavigationBar (0.3.0)
+  - IQKeyboardManagerSwift (4.0.4)
   - Kingfisher (2.0.4)
   - MJRefresh (3.1.0)
   - MOBFoundation (1.5.3)
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - EZSwiftExtensions (~> 1.2.3)
   - HidingNavigationBar (~> 0.3.0)
+  - IQKeyboardManagerSwift
   - Kingfisher (~> 2.0.1)
   - MJRefresh
   - MOBFoundation
@@ -77,6 +79,7 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
+  IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   Kingfisher: 8f1ec2c067ade2c549a1a594379b69c4b1ff81ab
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   MOBFoundation: 1a4f9865c777e76f069050c4990602c668126a89
@@ -95,6 +98,6 @@ SPEC CHECKSUMS:
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
 
-PODFILE CHECKSUM: 8f0f6e2a3bdd40de85c9065fadfad244bcc8fa75
+PODFILE CHECKSUM: 89100274d5abebed6b8944d6fa7bd925e798b9cf
 
-COCOAPODS: 1.1.0.beta.1
+COCOAPODS: 1.0.1

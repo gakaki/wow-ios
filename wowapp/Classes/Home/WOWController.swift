@@ -15,7 +15,7 @@ class WOWController: WOWBaseViewController {
     var hidingNavBarManager: HidingNavigationBarManager?
     override func viewDidLoad() {
         super.viewDidLoad()
-        request()
+//        request()
     }
     
     override func viewWillAppear(animated: Bool) {

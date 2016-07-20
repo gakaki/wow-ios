@@ -161,7 +161,7 @@ extension AppDelegate{
             
         }
         
-        rootVCGuide()
+//        rootVCGuide()
     }
     
     func registAppKey(){

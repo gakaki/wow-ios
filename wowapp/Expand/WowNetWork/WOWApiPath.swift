@@ -33,6 +33,11 @@ let URL_senceDetail             = "scene/detail"
 //***********2.商店************
 //2.1首页
 let URL_storeHome               = "shop"
+
+let URL_home_banners            = "page/banners"    //1.1首页 查看首页Banner
+let URL_home_scenes             = "page/scenes"     //1.2首页 查看首页场景
+let URL_home_topics             = "page/topics"     //1.3首页 查看首页专题
+
 //2.2商品列表
 let URL_product                 = "product"
 //2.3商品详情

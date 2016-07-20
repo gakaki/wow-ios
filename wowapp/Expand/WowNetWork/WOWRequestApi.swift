@@ -15,6 +15,12 @@ public enum RequestApi{
     
     case Api_Sence
     
+    //Tab 第一个栏 首页 该死的那3个url
+    case Api_Home_Banners
+    case Api_Home_Scenes
+    case Api_Home_Topics
+    
+    
     case Api_SenceDetail(sceneid:String,uid:String)
     
     case Api_Category
@@ -99,6 +105,15 @@ extension RequestApi:TargetType{
             return URL_scene
         case .Api_SenceDetail:
             return URL_senceDetail
+            
+        //Tab 第一个栏 首页 该死的那3个url
+        case .Api_Home_Banners:
+            return URL_home_banners
+        case .Api_Home_Scenes:
+            return URL_home_scenes
+        case .Api_Home_Topics:
+            return URL_home_topics
+            
         case .Api_ProductList:
             return URL_product
         case .Api_ProductDetail:
@@ -159,9 +174,7 @@ extension RequestApi:TargetType{
     }
     
     public var method:Moya.Method{
-
             return .POST
-        
     }
     
     
@@ -223,6 +236,15 @@ extension RequestApi:TargetType{
                 params =  ["uid":uid,"type":type]
             case let .Api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]
+            
+            
+            case .Api_Home_Banners():
+                params =  ["pageType":1]
+            case  .Api_Home_Scenes():
+                params =  ["pageType":1]
+            case  .Api_Home_Topics():
+                params =  ["pageType":1]
+            
             default:
                 params =  nil
         }

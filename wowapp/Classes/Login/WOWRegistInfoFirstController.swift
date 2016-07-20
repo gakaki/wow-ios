@@ -11,7 +11,7 @@ import UIKit
 
 class WOWRegistInfoFirstController: WOWBaseTableViewController {
     var fromUserCenter:Bool = false
-    
+    var mobile = String()
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var telTextField: UITextField!
@@ -19,7 +19,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     var nextView : WOWRegistInfoSureView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.telTextField.text = mobile
         // Do any additional setup after loading the view.
     }
 
@@ -80,7 +80,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
             nextView.tipsLabel.text = "请输入昵称"
             return
         }
-        let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? "","mobile":telTextField.text ?? ""]
+        let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: {[weak self] (result) in
             if let _ = self{
                 DLog(result)

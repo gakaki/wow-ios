@@ -9,8 +9,11 @@
 import UIKit
 
 class WOWRegistController: WOWBaseViewController {
-    var fromUserCenter:Bool = false
-    var byWechat      :Bool = false
+    var fromUserCenter      :Bool = false
+    var byWechat            :Bool = false
+    var userInfoFromWechat  :SSDKUser = SSDKUser()
+    
+    
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var msgCodeTextField: UITextField!
     @IBOutlet weak var registButton: UIButton!
@@ -81,10 +84,11 @@ class WOWRegistController: WOWBaseViewController {
         }
         let mobile = phoneTextField.text ?? ""
         navigationItem.title = byWechat ? "绑定手机" :"注册"
-        let Api_Code = byWechat ? RequestApi.Api_Sms_Code :RequestApi.Api_Sms_Code
+        let Api_Code = byWechat ? RequestApi.Api_Captcha :RequestApi.Api_Sms_Code
         
         WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                WOWHud.showMsg("验证码发送成功")
                 strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor(), mainTitleColor: UIColor.blackColor(), countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
@@ -94,11 +98,7 @@ class WOWRegistController: WOWBaseViewController {
     
     
     @IBAction func registClick(sender: UIButton) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
-            vc.fromUserCenter = self.fromUserCenter
-            self.navigationController?.pushViewController(vc, animated: true)
-        })
+
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }
@@ -124,7 +124,14 @@ class WOWRegistController: WOWBaseViewController {
             return
         }
         //FIXME:这个接口应该扩充一个字段 wechattoken 不带的话就是注册，带的话就是绑定 wowusermanager.wechatoken
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!,captcha:msgCodeTextField.text!), successClosure: { [weak self](result) in
+        //注册时的信息
+        let registerTarget = RequestApi.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!,captcha:msgCodeTextField.text!)
+        //微信的用户信息
+        let param = ["openId":userInfoFromWechat.uid,"wechatNickName":userInfoFromWechat.nickname,"wechatAvatar":userInfoFromWechat.icon,"sex":String(userInfoFromWechat.gender.rawValue + 1)]
+        
+        let wechatBlindTarget = RequestApi.Api_WechatBind(mobile: phoneTextField.text!, captcha: msgCodeTextField.text!, password: passwdTextField.text!, userInfoFromWechat: param)
+        let target = byWechat ? wechatBlindTarget : registerTarget
+            WOWNetManager.sharedManager.requestWithTarget(target, successClosure: { [weak self](result) in
                 if let strongSelf = self{
                 let model = Mapper<WOWUserModel>().map(result)
                 WOWUserManager.saveUserInfo(model)
@@ -132,6 +139,7 @@ class WOWRegistController: WOWBaseViewController {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
                     let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
                     vc.fromUserCenter = strongSelf.fromUserCenter
+                    vc.mobile = strongSelf.phoneTextField.text!
                     strongSelf.navigationController?.pushViewController(vc, animated: true)
                 })
         }

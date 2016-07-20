@@ -29,11 +29,12 @@ extension  UIViewController {
         self.pushVC( vc )
     }
     //跳转注册/绑定微信界面需要传从哪跳转来的
-    func toRegVC(fromWechat:Bool = false , fromUserCenter:Bool = false){
+    func toRegVC(fromWechat:Bool = false , fromUserCenter:Bool = false,userInfoFromWechat:SSDKUser = SSDKUser()){
         
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController)) as! WOWRegistController
         vc.fromUserCenter = fromUserCenter
         vc.byWechat = fromWechat
+        vc.userInfoFromWechat = userInfoFromWechat
         self.pushVC( vc )
     }
     //跳转微信登录界面
@@ -49,6 +50,7 @@ extension  UIViewController {
                 case SSDKResponseState.Success:
                     print("获取授权成功")
                     print(userData)
+                    print(userData.rawData)
                     strongSelf.checkWechatToken(userData)
                     
                 case SSDKResponseState.Fail:
@@ -68,7 +70,7 @@ extension  UIViewController {
     private func checkWechatToken(userData:SSDKUser!,fromUserCenter:Bool = false){
         //FIXME:验证token是否是第一次咯或者是第二次
         var first = Bool(true)//假设的bool值
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:userData.uid ?? "",wechat_nick_name:userData.nickname ?? "",sex:String(userData.gender.rawValue),wechat_avatar:userData.icon), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:userData.uid ?? ""), successClosure: {[weak self] (result) in
             if let _ = self{
                 DLog(result)
             }
@@ -79,7 +81,7 @@ extension  UIViewController {
         }
         
         if first {
-            toRegVC(true,fromUserCenter: fromUserCenter)
+            toRegVC(true,fromUserCenter: fromUserCenter,userInfoFromWechat: userData)
         }else{ //二次登录，拿到用户信息，这时候算是登录成功咯
             //FIXME:未写的，先保存用户信息
             toLoginSuccess()

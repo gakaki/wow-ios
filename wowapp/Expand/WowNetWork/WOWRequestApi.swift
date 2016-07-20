@@ -71,7 +71,9 @@ public enum RequestApi{
     
     case Api_PwdResetCode(mobile:String) //重置密码获取验证码
 
-    case Api_Wechat(openId:String,wechat_nick_name:String,sex:String,wechat_avatar:String) //openId
+    case Api_Wechat(openId:String) //openId
+    
+    case Api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
     
     case Api_Invite //邀请好友
     
@@ -160,6 +162,8 @@ extension RequestApi:TargetType{
             return URL_PwpResetCode
         case .Api_Wechat:
             return URL_Wechat
+        case .Api_WechatBind:
+            return URL_WechatBind
         case .Api_ResetPwd:
             return URL_ResetPassword
         case .Api_AddressAdd:
@@ -228,8 +232,10 @@ extension RequestApi:TargetType{
                 params =  ["mobile":mobile]
             case let .Api_PwdResetCode(mobile):
                 params =  ["mobile":mobile]
-            case let .Api_Wechat(openId,wechat_nick_name,sex,wechat_avatar):
-                params =  ["openId":openId,"wechat_nick_name":wechat_nick_name,"sex":sex,"wechat_avatar":wechat_avatar]
+            case let .Api_Wechat(openId):
+                params =  ["openId":openId]
+            case let .Api_WechatBind(mobile,captcha,password,userInfoFromWechat):
+                params =  ["mobile":mobile,"captcha":captcha,"password":password,"userInfoFromWechat":userInfoFromWechat]
             case let .Api_ResetPwd(mobile, code, password):
                 params =  ["mobile":mobile,"code":code,"password":password]
             case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default,addressid):

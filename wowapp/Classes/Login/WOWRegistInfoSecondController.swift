@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class WOWRegistInfoSecondController: WOWBaseTableViewController {
     @IBOutlet weak var manButton: UIButton!
     @IBOutlet weak var womanButton: UIButton!
@@ -27,7 +28,9 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -98,10 +101,17 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     func sure() {
         let params = ["sex":String(sex),"ageRange":String(ageRow),"constellation":String(starRow),"industry":jobTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params ), successClosure: {[weak self] (result) in
-            if let _ = self{
+            if let strongSelf = self{
                 DLog(result)
                 print(result)
-                
+                if strongSelf.fromUserCenter{
+                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                    print("gerenzhongxin")
+                    UIApplication.appTabBarController.selectedIndex = 0
+                }else {
+                    //进入首页
+                    strongSelf.toMainVC()
+                }
             }
         }) {[weak self] (errorMsg) in
             if let _ = self{
@@ -109,14 +119,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
             }
         }
 //        dismissViewControllerAnimated(true, completion: nil)
-        if fromUserCenter{
-            dismissViewControllerAnimated(true, completion: nil)
-            print("gerenzhongxin")
-            UIApplication.appTabBarController.selectedIndex = 0
-        }else {
-            //进入首页
-            toMainVC()
-        }
+
     }
     
     @IBAction func sexClick(sender: UIButton) {
@@ -159,11 +162,11 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         editingTextField = textField
-        if textField == ageTextField {
+        if editingTextField == ageTextField {
             pickDataArr = [0:"保密", 1:"60后", 2:"70后", 3:"80后", 4:"85后", 5:"90后", 6:"95后", 7:"00后"]
             self.pickerContainerView.pickerView.reloadComponent(0)
             pickerContainerView.pickerView.selectRow(ageRow, inComponent: 0, animated: true)
-        }else if textField == starTextField{
+        }else if editingTextField == starTextField{
             pickDataArr = [1:"白羊座",2:"金牛座",3:"双子座",4:"巨蟹座",5:"狮子座",6:"处女座",7:"天秤座",8:"天蝎座",9:"射手座",10:"摩羯座",11:"水瓶座",12:"双鱼座"]
             self.pickerContainerView.pickerView.reloadComponent(0)
             pickerContainerView.pickerView.selectRow(starRow, inComponent: 0, animated: true)

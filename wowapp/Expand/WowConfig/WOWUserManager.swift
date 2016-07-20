@@ -100,12 +100,12 @@ struct WOWUserManager {
             let sex = MGDefault.objectForKey(WOWUserSex) as? String
             if let userSex = sex{
                 if userSex.isEmpty {
-                    return ""
+                    return "3"
                 }else{
                     return userSex
                 }
             }else{
-                return ""
+                return "3"
             }
         }
         

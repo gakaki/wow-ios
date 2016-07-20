@@ -17,6 +17,7 @@ extension  UIViewController {
         AppDelegate.rootVC = mainVC
         self.presentViewController(mainVC!, animated: true, completion: nil)
     }
+    //跳转登录界面需要传从哪跳转来的true：个人中心 false：其他
     func toLoginVC(fromUserCenter:Bool = false){
 //        let mainVC = UIStoryboard(name: "Login", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
 //        mainVC?.modalTransitionStyle = .FlipHorizontal
@@ -27,6 +28,7 @@ extension  UIViewController {
         vc.fromUserCenter = fromUserCenter
         self.pushVC( vc )
     }
+    //跳转注册/绑定微信界面需要传从哪跳转来的
     func toRegVC(fromWechat:Bool = false , fromUserCenter:Bool = false){
         
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController)) as! WOWRegistController
@@ -34,6 +36,7 @@ extension  UIViewController {
         vc.byWechat = fromWechat
         self.pushVC( vc )
     }
+    //跳转微信登录界面
     func toWeixinVC(fromUserCenter:Bool = false){
         print("toWeixinVC")
         /**
@@ -69,7 +72,6 @@ extension  UIViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:WOWUserManager.wechatToken), successClosure: {[weak self] (result) in
             if let _ = self{
                 DLog(result)
-                
             }
         }) {[weak self] (errorMsg) in
             if let _ = self{
@@ -84,7 +86,7 @@ extension  UIViewController {
             toLoginSuccess()
         }
     }
-    
+    //登录成功方法
     func toLoginSuccess(fromUserCenter:Bool = false){
         WOWBuyCarMananger.updateBadge(true)
         NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)

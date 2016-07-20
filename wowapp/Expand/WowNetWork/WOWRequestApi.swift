@@ -60,6 +60,8 @@ public enum RequestApi{
     case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
     
     case Api_Sms_Code(mobile:String)//验证码
+    
+    case Api_Captcha(mobile:String)//绑定微信验证码
 
     case Api_Wechat(openId:String) //openId  验证APP是否授权过微信
     
@@ -135,6 +137,8 @@ extension RequestApi:TargetType{
             return URL_Sms
         case .Api_Sms_Code:
             return URL_Sms
+        case .Api_Captcha:
+            return URL_Captcha
         case .Api_Wechat:
             return URL_Wechat
         case .Api_ResetPwd:
@@ -203,6 +207,8 @@ extension RequestApi:TargetType{
                 params =  ["type":type,"mobile":mobile]
             case let .Api_Sms_Code(mobile):
                 params =  ["mobile":mobile]
+            case let .Api_Captcha(mobile):
+                params =  ["mobile":mobile]
             case let .Api_Wechat(openId):
                 params =  ["openId":openId]
             case let .Api_ResetPwd(mobile, code, password):
@@ -222,7 +228,7 @@ extension RequestApi:TargetType{
         }
         params =   ["paramJson":JSONStringify(params!),"channel":"2","sessionToken":WOWUserManager.sessionToken]
 
-//        print(params)
+        print(params)
         return params
     }
     

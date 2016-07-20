@@ -80,7 +80,7 @@ let URL_ResetPassword           = "usermongo/resettingpwd"
 let URL_Wechat                  = "session/login/wechat"          //微信登录
 let URL_BlindWechat             = "user/wechat-bind"              //绑定微信
 let URL_Logout                  = "session/logout"                //登出
-let URL_captcha                 = "user/captcha-for-wechat-bind"  //微信绑定获取验证码
+let URL_Captcha                 = "user/captcha-for-wechat-bind"  //微信绑定获取验证码
 let URL_Change                  = "user/change"                   //修改用户信息
 
 

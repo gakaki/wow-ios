@@ -85,8 +85,10 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         let row = pickerContainerView.pickerView.selectedRowInComponent(0)
         
         if editingTextField == ageTextField {
+            ageRow = row
             editingTextField?.text = pickDataArr[row]
         }else{
+            starRow = row + 1
             editingTextField?.text = pickDataArr[row + 1]
         }
         cancelPicker()
@@ -94,6 +96,18 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     
     func sure() {
+        let params = ["sex":String(sex),"ageRange":String(ageRow),"constellation":String(starRow),"industry":jobTextField.text ?? ""]
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params ), successClosure: {[weak self] (result) in
+            if let _ = self{
+                DLog(result)
+                print(result)
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let _ = self{
+                
+            }
+        }
 //        dismissViewControllerAnimated(true, completion: nil)
         if fromUserCenter{
             dismissViewControllerAnimated(true, completion: nil)

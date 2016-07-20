@@ -52,10 +52,6 @@ class WOWGuideController: WOWBaseViewController {
             btn2.setTitle(title2, forState: .Normal)
         }
     }
-    
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,6 +116,7 @@ class WOWGuideController: WOWBaseViewController {
         else if ( currentState == .Register) {
             //to weixin reg vc
            toWeixinVC()
+            
         }
     }
  

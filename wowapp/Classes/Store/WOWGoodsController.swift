@@ -97,7 +97,7 @@ class WOWGoodsController: WOWBaseViewController {
         
     }
     
-    func loginSuccess() {
+     func loginSuccess() {
         request()
     }
     

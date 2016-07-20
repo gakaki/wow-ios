@@ -77,11 +77,10 @@ let URL_Register                = "user/register"
 let URL_login                   = "session/login"
 let URL_Sms                     = "user/captcha"
 let URL_ResetPassword           = "usermongo/resettingpwd"
-let URL_CheckWechat             = "user/is-wechat-bind-user"      //验证微信账号是否已在本平台注册
-let URL_BlindWechat             = "user/register-and-bind-wechat" //注册并绑定微信
-let URL_MobileExisted           = "user/is-mobile-existed"        //查询手机是否存在
+let URL_Wechat                  = "session/login/wechat"          //微信登录
+let URL_BlindWechat             = "user/wechat-bind"              //绑定微信
 let URL_Logout                  = "session/logout"                //登出
-let URL_captcha                 = "user/captcha"                  //获取验证码
+let URL_captcha                 = "user/captcha-for-wechat-bind"  //微信绑定获取验证码
 let URL_Change                  = "user/change"                   //修改用户信息
 
 

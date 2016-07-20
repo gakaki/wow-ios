@@ -49,15 +49,9 @@ class WOWLoginController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func regist(sender: UIButton) {
-        goRegist()
+        toRegVC(false,fromUserCenter: fromUserCenter)
     }
     
-    func goRegist(fromWechat:Bool = false) {
-        let v = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController)) as! WOWRegistController
-        v.fromUserCenter = fromUserCenter
-        v.byWechat = fromWechat
-        navigationController?.pushViewController(v, animated: true)
-    }
     
     @IBAction func forgetPasswordClick(sender: UIButton) {
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
@@ -82,74 +76,10 @@ class WOWLoginController: WOWBaseViewController {
 //            }
 //        })
         
-        /**
-         shareSDK第三方登录
-         */
-        
-        
-        ShareSDK.getUserInfo(SSDKPlatformType.TypeWechat) { [weak self](state:SSDKResponseState, userData:SSDKUser!, error:NSError!) -> Void in
-            if let strongSelf = self{
-                switch state{
-                    
-                case SSDKResponseState.Success:
-                    print("获取授权成功")
-                    print(userData)
-                    strongSelf.checkWechatToken(userData.uid)
-                    
-                case SSDKResponseState.Fail:
-                    print("授权失败,错误描述:\(error)")
-                    
-                case SSDKResponseState.Cancel:
-                    print("授权取消")
-                    
-                default:
-                    break
-                }
-            }
-            
-        }
 
+        toWeixinVC(fromUserCenter)
     }
     
-    private func checkWechatToken(token:String?){
-        //FIXME:验证token是否是第一次咯或者是第二次
-        WOWUserManager.wechatToken = token ?? ""
-        let params = ["openId":WOWUserManager.wechatToken]
-        var first = Bool(true)//假设的bool值
-        var dict = [String: AnyObject]()
-        dict["paramJson"] = params
-        WOWNetManager.sharedManager.requestWithTarget(.Api_CheckWechat(paramJson:dict), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-                DLog(result)
-                print(result)
-                
-            }
-        }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
-                strongSelf.tipsLabel.text = errorMsg
-                
-            }
-        }
-
-        if first {
-            goRegist(true)
-        }else{ //二次登录，拿到用户信息，这时候算是登录成功咯
-            //FIXME:未写的，先保存用户信息
-            loginSuccess()
-        }
-    }
-    
-    
-    private func loginSuccess(){
-        WOWBuyCarMananger.updateBadge(true)
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            self.dismissViewControllerAnimated(true, completion: nil)
-            if self.fromUserCenter{
-                UIApplication.appTabBarController.selectedIndex = 0
-            }
-        })
-    }
     
     @IBAction func login(sender: UIButton) {
         guard let phone = accountTextField.text where !phone.isEmpty else{
@@ -172,7 +102,7 @@ class WOWLoginController: WOWBaseViewController {
                 DLog(result)
                 let model = Mapper<WOWUserModel>().map(result)
                 WOWUserManager.saveUserInfo(model)
-                strongSelf.loginSuccess()
+                strongSelf.toLoginSuccess(strongSelf.fromUserCenter)
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{

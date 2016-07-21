@@ -16,7 +16,7 @@ typealias SuccessClosure          = (result:AnyObject) ->()
 
 enum RequestCode:String{
     case FailError = "40000"
-    case Success = "0"
+    case Success = "0"      //数据请求成功
 }
 
 
@@ -44,14 +44,14 @@ class WOWNetManager {
 
     func requestWithTarget(target:RequestApi,successClosure:SuccessClosure,failClosure:FailClosure){
         WOWHud.showLoading()
-        print("request target ",target)
+        print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         requestProvider.request(target) { (result) in
        
             switch result{
                 case let .Success(response):
                     let info = Mapper<ReturnInfo>().map(JSON(data: response.data,options: .AllowFragments).object)
                     
-                     print("response ",info?.data)
+                     print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
                     
                     //其实也只有登入能获得session token 而已了
                     if let session_token = info?.data?["sessionToken"] {

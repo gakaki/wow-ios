@@ -15,7 +15,9 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
     }
+    
     
     lazy var navigationShadowImageView:UIView? = {
         return self.getNavShadow(self.navigationController?.navigationBar)

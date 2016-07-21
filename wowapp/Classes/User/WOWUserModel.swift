@@ -10,14 +10,16 @@ import Foundation
 import ObjectMapper
 
 class WOWUserModel:NSObject,Mappable{
-    var userID          : String?
-    var user_desc       : String?
-    var user_headimage  : String?
-    var user_nick       : String?
-    var user_sex        : String?
-    var user_mobile     : String?
-    var user_email      : String?
-    var user_carCount   : Int?
+    var sessionToken        : String?
+    var user_desc           : String?
+    var user_headimage      : String?
+    var user_nick           : String?
+    var user_mobile         : String?
+    var user_constellation  : String?
+    var user_sex            : Int?
+    var user_carCount       : Int?
+    var user_industry       : Int?
+    var user_ageRange       : Int?
     
     
     required init?(_ map: Map) {
@@ -25,15 +27,15 @@ class WOWUserModel:NSObject,Mappable{
     }
     
     func mapping(map: Map) {
-        userID           <- map["uid"]
-        user_desc        <- map["desc"]
-        user_headimage   <- map["headimage"]
-        user_nick        <- map["nick"]
-        user_sex         <- map["sex"]
-        user_mobile      <- map["mobile"]
-        user_email       <- map["email"]
+        user_desc           <- map["selfIntroduction"]
+        user_headimage      <- map["avatar"]
+        user_nick           <- map["nickName"]
+        user_constellation  <- map["constellation"]
+        user_sex            <- map["sex"]
+        user_industry       <- map["industry"]
+        user_ageRange       <- map["ageRange"]
         //FIXME:后台要返回的
-        user_carCount    <- map["productcount"]
+        user_carCount       <- map["productcount"]
     }
     
 }

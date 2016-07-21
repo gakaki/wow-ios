@@ -24,7 +24,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     private var headImageUrl:String = WOWUserManager.userHeadImageUrl
     private var nick        :String = WOWUserManager.userName
-    private var sex         :String = WOWUserManager.userSex
+    private var sex         :String = WOWSex[WOWUserManager.userSex]!
     private var des         :String = WOWUserManager.userDes
 //    private var star        :string = WOWUserManager.userStar
     
@@ -69,10 +69,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }
     
     private func configUserInfo(){
-        dispatch_async(dispatch_get_main_queue()) { 
-            self.sexTextField.text    = WOWUserManager.userSex
-            self.desLabel.text    = WOWUserManager.userDes
-            self.nickLabel.text   = WOWUserManager.userName
+        dispatch_async(dispatch_get_main_queue()) {
+            self.sexTextField.text  = WOWAgeRange[WOWUserManager.userSex]!
+            self.desLabel.text      = WOWUserManager.userDes
+            self.nickLabel.text     = WOWUserManager.userName
             self.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
         }
     }

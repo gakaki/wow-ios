@@ -39,6 +39,11 @@ class WOWGuideController: WOWBaseViewController {
             
             var title1 = "加入我们"
             var title2 = "瞎逛逛"
+            var backGroundColor1 = UIColor.yellowColor()
+            var backGroundColor2 = UIColor.clearColor()
+            var titleColor1 = UIColor.blackColor()
+            var titleColor2 = UIColor.whiteColor()
+            
             
             switch currentState {
                 case .Standby: break
@@ -46,10 +51,18 @@ class WOWGuideController: WOWBaseViewController {
                 case .Register:
                     title1 = "微信注册"
                     title2 = "手机注册"
+                backGroundColor1 = UIColor.whiteColor()
+                backGroundColor2 = UIColor.whiteColor()
+                titleColor1 = UIColor.blackColor()
+                titleColor2 = UIColor.blackColor()
             }
             
             btn1.setTitle(title1, forState: .Normal)
             btn2.setTitle(title2, forState: .Normal)
+            btn1.backgroundColor = backGroundColor1
+            btn2.backgroundColor = backGroundColor2
+            btn1.setTitleColor(titleColor1,forState: .Normal) //普通状态下文字的颜色
+            btn2.setTitleColor(titleColor2,forState: .Normal) //普通状态下文字的颜色
         }
     }
     override func viewDidLoad() {
@@ -111,7 +124,23 @@ class WOWGuideController: WOWBaseViewController {
         
         if ( currentState == .Standby) {
             //播放动画
-            currentState =  .Register
+            
+            UIView.animateWithDuration(0.5, animations: {
+                self.btn1.y += 50
+                self.btn1.alpha = 0.0
+                self.btn2.y += 50
+                self.btn2.alpha = 0.0
+                }, completion: { (finished:Bool) -> Void in
+                    self.currentState =  .Register
+                    UIView.animateWithDuration(0.5, animations: {
+                        self.btn1.y -= 50
+                        self.btn1.alpha = 1.0
+                        self.btn2.y -= 50
+                        self.btn2.alpha = 1.0
+                        }, completion: { (finished:Bool) -> Void in
+                            
+                    })
+            })
         }
         else if ( currentState == .Register) {
             //to weixin reg vc

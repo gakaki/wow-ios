@@ -17,7 +17,7 @@ extension  UIViewController {
         AppDelegate.rootVC = mainVC
         self.presentViewController(mainVC!, animated: true, completion: nil)
     }
-    //跳转登录界面需要传从哪跳转来的true：个人中心 false：其他
+    //跳转登录界面需要传从哪跳转来的 true：个人中心 false：其他
     func toLoginVC(fromUserCenter:Bool = false){
 //        let mainVC = UIStoryboard(name: "Login", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
 //        mainVC?.modalTransitionStyle = .FlipHorizontal
@@ -71,8 +71,19 @@ extension  UIViewController {
         //FIXME:验证token是否是第一次咯或者是第二次
         var first = Bool(true)//假设的bool值
         WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:userData.uid ?? ""), successClosure: {[weak self] (result) in
-            if let _ = self{
-                DLog(result)
+            if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+               let code = JSON(result)["resCode"].string
+                print(code)
+                first = false
+                
+                if first {
+                    strongSelf.toRegVC(true,fromUserCenter: fromUserCenter,userInfoFromWechat: userData)
+                }else{ //二次登录，拿到用户信息，这时候算是登录成功咯
+                    //FIXME:未写的，先保存用户信息
+                    strongSelf.toLoginSuccess()
+                }
             }
         }) {[weak self] (errorMsg) in
             if let _ = self{
@@ -80,26 +91,33 @@ extension  UIViewController {
             }
         }
         
-        if first {
-            toRegVC(true,fromUserCenter: fromUserCenter,userInfoFromWechat: userData)
-        }else{ //二次登录，拿到用户信息，这时候算是登录成功咯
-            //FIXME:未写的，先保存用户信息
-            toLoginSuccess()
-        }
+        
     }
+    
     //登录成功方法
     func toLoginSuccess(fromUserCenter:Bool = false){
         WOWBuyCarMananger.updateBadge(true)
         NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            self.dismissViewControllerAnimated(true, completion: nil)
-            if fromUserCenter{
+        if fromUserCenter{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                self.dismissViewControllerAnimated(true, completion: nil)
                 UIApplication.appTabBarController.selectedIndex = 0
-            }
-        })
+            })
+        }else {
+            //进入首页
+            toMainVC()
+        }
     }
 
-    
+    func toRegInfo(fromUserCenter:Bool = false) {
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
+            vc.fromUserCenter = fromUserCenter
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        
+    }
     func toReg2ndVC(){
         
     }

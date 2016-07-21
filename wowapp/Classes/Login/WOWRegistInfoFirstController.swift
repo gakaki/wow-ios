@@ -11,7 +11,6 @@ import UIKit
 
 class WOWRegistInfoFirstController: WOWBaseTableViewController {
     var fromUserCenter:Bool = false
-    var mobile = String()
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var telTextField: UITextField!
@@ -19,7 +18,9 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     var nextView : WOWRegistInfoSureView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.telTextField.text = mobile
+        self.telTextField.text = WOWUserManager.userMobile
+        self.nickTextField.text = WOWUserManager.userName
+        headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
         // Do any additional setup after loading the view.
     }
 
@@ -82,9 +83,17 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         }
         let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: {[weak self] (result) in
-            if let _ = self{
+            if let strongSelf = self{
                 DLog(result)
                 print(result)
+                //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯
+                WOWUserManager.userName = strongSelf.nickTextField.text!
+//                WOWUserManager.userHeadImageUrl = strongSelf.userInfoFromWechat.icon
+                WOWUserManager.userDes = strongSelf.descTextField.text ?? ""
+                
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistInfoSecondController)) as! WOWRegistInfoSecondController
+                vc.fromUserCenter = strongSelf.fromUserCenter
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
                 
             }
         }) {[weak self] (errorMsg) in
@@ -93,10 +102,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
             }
         }
         
-        //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistInfoSecondController)) as! WOWRegistInfoSecondController
-        vc.fromUserCenter = fromUserCenter
-        navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
 

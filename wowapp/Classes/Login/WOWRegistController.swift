@@ -126,22 +126,32 @@ class WOWRegistController: WOWBaseViewController {
         //FIXME:这个接口应该扩充一个字段 wechattoken 不带的话就是注册，带的话就是绑定 wowusermanager.wechatoken
         //注册时的信息
         let registerTarget = RequestApi.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!,captcha:msgCodeTextField.text!)
+        
         //微信的用户信息
         let param = ["openId":userInfoFromWechat.uid,"wechatNickName":userInfoFromWechat.nickname,"wechatAvatar":userInfoFromWechat.icon,"sex":String(userInfoFromWechat.gender.rawValue + 1)]
         
         let wechatBlindTarget = RequestApi.Api_WechatBind(mobile: phoneTextField.text!, captcha: msgCodeTextField.text!, password: passwdTextField.text!, userInfoFromWechat: param)
+        
+        //如果是通过微信就走微信绑定的接口，如果是注册的话就走注册的接口
         let target = byWechat ? wechatBlindTarget : registerTarget
             WOWNetManager.sharedManager.requestWithTarget(target, successClosure: { [weak self](result) in
                 if let strongSelf = self{
                 let model = Mapper<WOWUserModel>().map(result)
-                WOWUserManager.saveUserInfo(model)
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                    let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
-                    vc.fromUserCenter = strongSelf.fromUserCenter
-                    vc.mobile = strongSelf.phoneTextField.text!
-                    strongSelf.navigationController?.pushViewController(vc, animated: true)
-                })
+                    WOWUserManager.saveUserInfo(model)
+                    //暂时保存一下手机号
+                    WOWUserManager.userMobile = strongSelf.phoneTextField.text!
+                    WOWUserManager.userName = strongSelf.userInfoFromWechat.nickname ?? ""
+                    WOWUserManager.userHeadImageUrl = strongSelf.userInfoFromWechat.icon ?? ""
+                    WOWUserManager.userSex = (strongSelf.userInfoFromWechat.gender.rawValue.toInt + 1) ?? 3
+                    
+                let newUser = JSON(result)["newUser"]
+                    //判断如果是新用户的话就去填写资料，如果不是的话就登录成功
+                    if newUser == 1 {
+                        strongSelf.toLoginSuccess()
+                    }else {
+                        strongSelf.toRegInfo(strongSelf.fromUserCenter)
+                    }
+                    
         }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
@@ -150,6 +160,7 @@ class WOWRegistController: WOWBaseViewController {
         }
     }
     
+
     @IBAction func protocolCheckButtonClick(sender:UIButton) {
         sender.selected = !sender.selected
         agreeProtocol = sender.selected

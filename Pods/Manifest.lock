@@ -1,8 +1,24 @@
 PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
   - Alamofire (3.4.0)
   - AVOSCloud (3.3.1)
   - DZNEmptyDataSet (1.8.1)
   - EZSwiftExtensions (1.2.3)
+  - HappyDNS (0.3.9)
   - HidingNavigationBar (0.3.0)
   - IQKeyboardManagerSwift (4.0.4)
   - Kingfisher (2.0.4)
@@ -23,6 +39,9 @@ PODS:
   - Pingpp/Wx (2.2.5):
     - Pingpp/Core
   - PonyFrameworkOnSwift (0.0.2)
+  - Qiniu (7.1.0.1):
+    - AFNetworking (~> 3)
+    - HappyDNS (~> 0.3)
   - Result (1.0.2)
   - RongCloudIMKit (2.6.0)
   - RxSwift (2.2.0)
@@ -55,6 +74,7 @@ DEPENDENCIES:
   - Pingpp/Alipay (from `pingpp-ios/Pingpp.podspec`)
   - Pingpp/Wx (from `pingpp-ios/Pingpp.podspec`)
   - PonyFrameworkOnSwift (from `PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec`)
+  - Qiniu (from `qiniu-sdk/Qiniu.podspec`)
   - RongCloudIMKit (= 2.6.0)
   - RxSwift (~> 2.2.0)
   - ShareSDK3
@@ -72,12 +92,16 @@ EXTERNAL SOURCES:
     :path: pingpp-ios/Pingpp.podspec
   PonyFrameworkOnSwift:
     :path: PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec
+  Qiniu:
+    :path: qiniu-sdk/Qiniu.podspec
 
 SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   AVOSCloud: ce999e21da976f78c4eda53243699b634891d42d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
+  HappyDNS: 17be04178df2dd09f0ee6ac33628589b7f9910e8
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   Kingfisher: 8f1ec2c067ade2c549a1a594379b69c4b1ff81ab
@@ -88,6 +112,7 @@ SPEC CHECKSUMS:
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
   Pingpp: 98db8836e52fb8ab1da494e65a9835540039646c
   PonyFrameworkOnSwift: 12ff0055496c68cffa297c168c282b869dd5d1e1
+  Qiniu: 0e92ff0d1b9afbc55275306671284e4ebeb08d03
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RongCloudIMKit: bbfcb34596b25666fb1be470644162142368bcdb
   RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
@@ -98,6 +123,6 @@ SPEC CHECKSUMS:
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
 
-PODFILE CHECKSUM: 89100274d5abebed6b8944d6fa7bd925e798b9cf
+PODFILE CHECKSUM: 74977560fb706d66da0ebfd0f1de40f2b1aff357
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.beta.1

@@ -13,6 +13,7 @@ pod 'Kingfisher','~>2.0.1'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
 pod 'MonkeyKing', '~> 0.9.2'
 
+
 pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
@@ -43,7 +44,6 @@ pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 
 
 
-
 #LeanCloud
 pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
 
@@ -52,6 +52,8 @@ pod 'RongCloudIMKit', '2.6.0'
 
 #王云鹏自己的framework
 pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
+#七牛 sdk
+pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"
 
 
 #waitting For use

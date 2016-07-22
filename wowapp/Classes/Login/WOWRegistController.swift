@@ -144,9 +144,9 @@ class WOWRegistController: WOWBaseViewController {
                     WOWUserManager.userHeadImageUrl = strongSelf.userInfoFromWechat.icon ?? ""
                     WOWUserManager.userSex = (strongSelf.userInfoFromWechat.gender.rawValue.toInt + 1) ?? 3
                     
-                let newUser = JSON(result)["newUser"]
+                let newUser = JSON(result)["newUser"].int
                     //判断如果是新用户的话就去填写资料，如果不是的话就登录成功
-                    if newUser == 1 {
+                    if newUser == 0 {
                         strongSelf.toLoginSuccess()
                     }else {
                         strongSelf.toRegInfo(strongSelf.fromUserCenter)

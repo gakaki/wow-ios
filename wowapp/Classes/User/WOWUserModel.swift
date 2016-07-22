@@ -35,7 +35,7 @@ class WOWUserModel:NSObject,Mappable{
         user_industry       <- map["industry"]
         user_ageRange       <- map["ageRange"]
         //FIXME:后台要返回的
-        user_carCount       <- map["productcount"]
+        user_carCount       <- map["productQtyInCart"]
     }
     
 }

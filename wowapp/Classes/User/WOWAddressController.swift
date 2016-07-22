@@ -15,7 +15,8 @@ enum WOWAddressEntrance {
 
 
 
-class WOWAddressController: WOWBaseTableViewController {
+class WOWAddressController: WOWBaseViewController {
+    @IBOutlet weak var tableView:UITableView!
     var entrance:WOWAddressEntrance = .Me
     var dataArr = [WOWAddressListModel]()
     var action  : WOWObjectActionClosure?
@@ -25,29 +26,43 @@ class WOWAddressController: WOWBaseTableViewController {
         request()
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+//MAEK:Action
+    @IBAction func addAddress(sender: UIButton) {
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
+        vc.action = {[weak self] in
+            if let strongSelf = self{
+                strongSelf.request()
+            }
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+
 //MARK:Private Method
     
      override func setUI() {
         super.setUI()
         tableView.registerNib(UINib.nibName(String(WOWAddressCell)), forCellReuseIdentifier: "WOWAddressCell")
-        tableView.estimatedRowHeight = 60
+        tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
-        navigationItem.title = "收获地址"
-        makeCustomerNavigationItem("增加地址", left: false) {[weak self] in
-            if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
-                vc.action = {[weak self] in
-                    if let strongSelf = self{
-                        strongSelf.request()
-                    }
-                }
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        self.tableView.backgroundColor = GrayColorLevel5
+        self.tableView.separatorColor = SeprateColor
+        navigationItem.title = "管理收货地址"
+//        makeCustomerNavigationItem("增加地址", left: false) {[weak self] in
+//            if let strongSelf = self{
+//                let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
+//                vc.action = {[weak self] in
+//                    if let strongSelf = self{
+//                        strongSelf.request()
+//                    }
+//                }
+//                strongSelf.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
     }
     
 
@@ -72,17 +87,19 @@ class WOWAddressController: WOWBaseTableViewController {
 }
 
 
-extension WOWAddressController{
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArr.count
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 131
     }
     
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWAddressCell", forIndexPath:indexPath) as! WOWAddressCell
         switch entrance {
         case .SureOrder:
@@ -92,13 +109,13 @@ extension WOWAddressController{
                 cell.checkButton.selected = (model.id == selModel.id)
             }
             case .Me:
-            cell.checkButton.hidden = true
+            cell.checkButton.hidden = false
         }
-        cell.showData(dataArr[indexPath.row])
+//        cell.showData(dataArr[indexPath.row])
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if entrance == .SureOrder {
             if let ac = action{
                 ac(object: dataArr[indexPath.row])
@@ -107,7 +124,7 @@ extension WOWAddressController{
         }
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if self.entrance == .SureOrder {
             return false
         }else{
@@ -115,7 +132,7 @@ extension WOWAddressController{
         }
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .Normal, title: "编辑") { (action, indexPath) in
             self.editAddress(self.dataArr[indexPath.row])
         }
@@ -157,8 +174,8 @@ extension WOWAddressController{
 
 extension WOWAddressController{
     override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "暂无地址哦，快去添加吧"
-        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        let text = "你还没添加收货地址"
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.systemScaleFontSize(17)])
         return attri
     }
 }

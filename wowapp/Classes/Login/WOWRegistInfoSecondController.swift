@@ -151,11 +151,13 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        if editingTextField == ageTextField {
-            editingTextField?.text = pickDataArr[row]
-        }else{
-            editingTextField?.text = pickDataArr[row + 1]
-        }
+//        if editingTextField == ageTextField {
+//            ageRow = row
+//            editingTextField?.text = pickDataArr[row]
+//        }else{
+//            starRow = row + 1
+//            editingTextField?.text = pickDataArr[row + 1]
+//        }
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {

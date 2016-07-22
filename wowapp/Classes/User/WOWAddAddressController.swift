@@ -14,8 +14,9 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var nameTextField        : UITextField!
     @IBOutlet weak var phoneTextField       : UITextField!
     @IBOutlet weak var cityTextField        : UITextField!
+    @IBOutlet weak var streeTextField       : UITextField!
     @IBOutlet weak var detailAddressTextView: KMPlaceholderTextView!
-    @IBOutlet weak var defaultSwitch        : UISwitch!
+    @IBOutlet weak var footView             : UIView!
     private var defaultAddress:Bool         = true
     
     
@@ -61,9 +62,10 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     override func setUI() {
         super.setUI()
-        navigationItem.title = "新增地址"
+        navigationItem.title = "新增收货地址"
         navigationItem.leftBarButtonItems = nil
         tableView.keyboardDismissMode = .OnDrag
+        tableView.tableFooterView = footView
         makeCustomerNavigationItem("取消", left: true) {[weak self] in
             if let strongSelf = self{
                 strongSelf.navigationController?.popViewControllerAnimated(true)
@@ -88,7 +90,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
             cityTextField.text = (model.province ?? "") + (model.city ?? "") + (model.district ?? "")
             detailAddressTextView.text = model.street ?? ""
             let status = (model.isDefault ?? 0) == 1
-            defaultSwitch.setOn(status, animated: true)
+ 
         }
         
     }
@@ -139,7 +141,8 @@ class WOWAddAddressController: WOWBaseTableViewController {
             WOWHud.showMsg("请填写详细地址")
             return
         }
-        let is_def  = defaultSwitch.on ? "1" : "0"
+//        let is_def  = defaultSwitch.on ? "1" : "0"
+        let is_def = "1"
         let uid = WOWUserManager.userID
         var addressdid = ""
         if let model = addressModel {
@@ -183,21 +186,28 @@ class WOWAddAddressController: WOWBaseTableViewController {
 
 //MARK:Delegate
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let model = addressModel{
-            if model.isDefault == 1{
-                return 1
-            }
-        }
-        return 2
+//        if let model = addressModel{
+//            if model.isDefault == 1{
+//                return 1
+//            }
+//        }
+        return 1
     }
     
     
 //MARK:Actions
-    @IBAction func switchChanged(sender: UISwitch) {
-        defaultAddress = sender.on
+    @IBAction func selectBtn(sender: UIButton) {
+        defaultAddress = !defaultAddress
+        if defaultAddress {
+            sender.setImage(UIImage(named: "select"), forState: .Normal)
+        }else {
+            sender.setImage(UIImage(named: "car_check"), forState: .Normal)
+        }
     }
     
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         UIApplication.sharedApplication().keyWindow?.endEditing(true)
     }
     
@@ -276,6 +286,7 @@ extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
             break
         }
     }
+
 }
 
 extension WOWAddAddressController:UITextViewDelegate{

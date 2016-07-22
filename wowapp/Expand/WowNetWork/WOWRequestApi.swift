@@ -20,28 +20,23 @@ public enum RequestApi{
     case Api_Home_Scenes
     case Api_Home_Topics
     
-    
-    case Api_SenceDetail(sceneid:String,uid:String)
-    
-    case Api_Category
-    
     case Api_Activity
     
-    case Api_StoreHome
+    case Api_AddressAdd(uid:String,name:String,province:String,city:String,district:String,street:String,mobile:String,is_default:String,addressid:String)
+    
+    case Api_Addresslist(uid:String)
+    
+    case Api_AddressDelete(uid:String,addressid:String)
+    
+    case Api_SenceDetail(sceneid:String,uid:String)
     
     case Api_BrandList
     
     case Api_BrandDetail(brandid:String)
     
-    case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
+    case Api_Category
     
-    case Api_ProductDetail(product_id:String,uid:String)
-    
-    case Api_Favotite(product_id:String,uid:String,type:String,is_delete:String,scene_id:String)
-    
-    case Api_CommentList(pageindex:String,thingid:String,type:String)
-    
-    case Api_SubmitComment(uid:String,comment:String,thingid:String,type:String)
+    case Api_Captcha(mobile:String) //绑定微信验证码
     
     case Api_CarEdit(cart:String)
     
@@ -53,42 +48,47 @@ public enum RequestApi{
     
     case Api_CarCommit(car:String)
     
+    case Api_CommentList(pageindex:String,thingid:String,type:String)
+    
     case Api_Change(param:[String:String])
     
-    case Api_UserUpdate(param:[String:String])
-    
-    case Api_UserFavorite(uid:String,type:String,pageindex:String)
-    
-    case Api_Login(String,String)
-    
-    case Api_Register(account:String,password:String,captcha:String)
-    
-    case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
-    
-    case Api_Sms_Code(mobile:String) //验证码
-    
-    case Api_Captcha(mobile:String) //绑定微信验证码
-    
-    case Api_PwdResetCode(mobile:String) //重置密码获取验证码
+    case Api_Favotite(product_id:String,uid:String,type:String,is_delete:String,scene_id:String)
 
-    case Api_Wechat(openId:String) //openId
-    
-    case Api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
-    
     case Api_Invite //邀请好友
     
-    case Api_ResetPwd(mobile:String,code:String,password:String)
-    
-    case Api_AddressAdd(uid:String,name:String,province:String,city:String,district:String,street:String,mobile:String,is_default:String,addressid:String)
-    
-    case Api_Addresslist(uid:String)
-
-    case Api_AddressDelete(uid:String,addressid:String)
+    case Api_Login(String,String)
     
     case Api_OrderList(uid:String,type:String) //100为全部
     
     case Api_OrderStatus(uid:String,order_id:String,status:String)
     
+    case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
+    
+    case Api_ProductDetail(product_id:String,uid:String)
+    
+    case Api_PwdResetCode(mobile:String) //重置密码获取验证码
+    
+    case Api_Register(account:String,password:String,captcha:String)
+    
+    case Api_ResetPwd(mobile:String,code:String,password:String)
+    
+    case Api_StoreHome
+    
+    case Api_SubmitComment(uid:String,comment:String,thingid:String,type:String)
+
+    
+    case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
+    
+    case Api_Sms_Code(mobile:String) //验证码
+    
+    case Api_UserUpdate(param:[String:String])
+    
+    case Api_UserFavorite(uid:String,type:String,pageindex:String)
+
+    case Api_Wechat(openId:String) //openId
+    
+    case Api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
+
 }
 
 

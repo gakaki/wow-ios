@@ -158,7 +158,7 @@ struct WOWUserManager {
     }
     static var loginStatus:Bool{
         get{
-            guard !userID.isEmpty else{
+            guard !sessionToken.isEmpty else{
                 return false
             }
             return true

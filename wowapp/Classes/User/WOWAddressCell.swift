@@ -14,6 +14,7 @@ class WOWAddressCell: UITableViewCell {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var detailAddressLabel: UILabel!
     @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         

@@ -17,18 +17,21 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var sexTextField: UITextField!
     @IBOutlet weak var nickLabel: UILabel!
+    @IBOutlet weak var jobLabel: UILabel!
     //个性签名
     @IBOutlet weak var desLabel: UILabel!
+    
     
     var editInfoAction:WOWActionClosure?
     
     private var headImageUrl:String = WOWUserManager.userHeadImageUrl
     private var nick        :String = WOWUserManager.userName
-    private var sex         :String = WOWSex[WOWUserManager.userSex]!
+    private var sex         :Int = WOWUserManager.userSex
     private var des         :String = WOWUserManager.userDes
-//    private var star        :string = WOWUserManager.userStar
+    private var star        :Int = WOWUserManager.userConstellation
+    private var age         :Int = WOWUserManager.userAgeRange
     
-    var pickDataArr:[String] = [String]()
+    var pickDataArr:[Int:String] = [Int:String]()
     var editingTextField:UITextField?
 //MARK:Lazy
     lazy var imagePicker:UIImagePickerController = {
@@ -46,6 +49,11 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.viewDidLoad()
 
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+            configUserInfo()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -55,7 +63,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.setUI()
         navigationItem.title = "个人信息"
         headImageView.borderRadius(25)
-        configUserInfo()
         configTextField()
     }
     
@@ -70,9 +77,12 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     private func configUserInfo(){
         dispatch_async(dispatch_get_main_queue()) {
-            self.sexTextField.text  = WOWAgeRange[WOWUserManager.userSex]!
+            self.sexTextField.text  = WOWSex[WOWUserManager.userSex]!
             self.desLabel.text      = WOWUserManager.userDes
             self.nickLabel.text     = WOWUserManager.userName
+            self.ageTextField.text  = WOWAgeRange[self.age]!
+            self.starTextField.text = WOWConstellation[self.star]
+            self.jobLabel.text      = WOWUserManager.userIndustry
             self.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
         }
     }
@@ -86,20 +96,35 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     func surePicker() {
         let row = pickerContainerView.pickerView.selectedRowInComponent(0)
-        editingTextField?.text = pickDataArr[row]
+        
+        if editingTextField == ageTextField {
+            age = row
+            editingTextField?.text = pickDataArr[row]
+        }else if editingTextField == starTextField {
+            star = row + 1
+            editingTextField?.text = pickDataArr[row + 1]
+        }else if editingTextField == sexTextField {
+            sex = row + 1
+        }
+
         cancelPicker()
     }
     
 //MARK:Private Network
     override func request() {
         super.request()
-        let params = ["headimage":headImageUrl,"nick":nick,"desc":des,"sex":sex,"uid":WOWUserManager.userID]
-        WOWNetManager.sharedManager.requestWithTarget(.Api_UserUpdate(param:params), successClosure: { [weak self](result) in
+        let params = ["headimage":headImageUrl,"sex":String(sex),"ageRange":String(age),"constellation":String(star)]
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
-                let model = Mapper<WOWUserModel>().map(result["user"])
-                WOWUserManager.saveUserInfo(model)
+//                let model = Mapper<WOWUserModel>().map(result["user"])
+//                WOWUserManager.saveUserInfo(model)
+                //保存一些用户信息
+                WOWUserManager.userHeadImageUrl = strongSelf.headImageUrl
+                WOWUserManager.userSex = strongSelf.sex
+                WOWUserManager.userAgeRange = strongSelf.age
+                WOWUserManager.userConstellation = strongSelf.star
                 strongSelf.configUserInfo()
                 WOWHud.dismiss()
                 if let action = strongSelf.editInfoAction{
@@ -121,10 +146,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
         switch segueid!{
         case "usernick":
             toVC.entrance = InfoTextEntrance.NickEntrance(value: "昵称")
+            toVC.userInfo = WOWUserManager.userName
         case "userdesc":
-            toVC.entrance = InfoTextEntrance.NickEntrance(value: "签名")
+            toVC.entrance = InfoTextEntrance.DescEntrance(value: "签名")
+            toVC.userInfo = WOWUserManager.userDes
         case "userjob":
-            toVC.entrance = InfoTextEntrance.NickEntrance(value: "职业")
+            toVC.entrance = InfoTextEntrance.JobEntrance(value: "职业")
+            toVC.userInfo = WOWUserManager.userIndustry
         default:break
         }
     }
@@ -210,25 +238,42 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickDataArr[row]
+        if editingTextField == ageTextField {
+            return pickDataArr[row]
+        }else {
+            return pickDataArr[row + 1]
+        }
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        editingTextField?.text = pickDataArr[row]
+     
+//        if editingTextField == ageTextField {
+//            age = row
+//            editingTextField?.text = pickDataArr[row]
+//        }else if editingTextField == starTextField{
+//            star = row + 1
+//            editingTextField?.text = pickDataArr[row + 1]
+//        }else if editingTextField == sexTextField {
+//            sex = row + 1
+//            editingTextField?.text = pickDataArr[row + 1]
+//        }
     }
     
    func textFieldShouldBeginEditing(textField: UITextField) -> Bool{
         editingTextField = textField
         if textField == ageTextField {
-            pickDataArr = ["00后","95后","90后","85后","80后","75后","70后","65后","60后"]
+            pickDataArr = WOWAgeRange
+            self.pickerContainerView.pickerView.reloadComponent(0)
+            pickerContainerView.pickerView.selectRow(age, inComponent: 0, animated: true)
         }else if textField == starTextField{
-            pickDataArr = ["水瓶座","双鱼座","白羊座","金牛座","双子座","巨蟹座","狮子座","处女座","天秤座","天蝎座","射手座","摩羯座"]
+            pickDataArr = WOWConstellation
+            self.pickerContainerView.pickerView.reloadComponent(0)
+            pickerContainerView.pickerView.selectRow(star - 1, inComponent: 0, animated: true)
         }else if textField == sexTextField{
-            pickDataArr = ["男","女"]
+            pickDataArr = WOWSex
+            self.pickerContainerView.pickerView.reloadComponent(0)
+            pickerContainerView.pickerView.selectRow(sex - 1, inComponent: 0, animated: true)
         }
-        self.pickerContainerView.pickerView.reloadComponent(0)
-        let row = pickDataArr.indexesOf(textField.text ?? "").first ?? 0
-        pickerContainerView.pickerView.selectRow(row, inComponent: 0, animated: true)
         return true
     }
     

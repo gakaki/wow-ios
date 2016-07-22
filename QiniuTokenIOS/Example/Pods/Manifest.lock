@@ -1,0 +1,16 @@
+PODS:
+  - QiniuTokenIOS (0.1.0)
+
+DEPENDENCIES:
+  - QiniuTokenIOS (from `../`)
+
+EXTERNAL SOURCES:
+  QiniuTokenIOS:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  QiniuTokenIOS: 2dbbf0236f8e8a0bfe06164965bd864aa7a16cd4
+
+PODFILE CHECKSUM: aea7057171f3ba58414f68216dcce8dd312305c9
+
+COCOAPODS: 1.1.0.beta.1

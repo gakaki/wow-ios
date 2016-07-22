@@ -1,0 +1,6 @@
+framework module Pods_QiniuTokenIOS_Tests {
+  umbrella header "Pods-QiniuTokenIOS_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

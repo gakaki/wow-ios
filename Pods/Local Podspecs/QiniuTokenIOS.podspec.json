@@ -1,0 +1,27 @@
+{
+  "name": "QiniuTokenIOS",
+  "version": "0.1.0",
+  "summary": "QiniuTokenIOS use ios generate token",
+  "description": "qiniutoken local version",
+  "homepage": "https://github.com/gakaki/QiniuTokenIOS",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gakaki": "gakaki@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/gakaki/QiniuTokenIOS.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "QiniuTokenIOS/Classes/**/*",
+  "dependencies": {
+    "Qiniu": [
+      "~> 7.1"
+    ]
+  }
+}

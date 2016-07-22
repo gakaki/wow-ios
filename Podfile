@@ -54,7 +54,7 @@ pod 'RongCloudIMKit', '2.6.0'
 pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
 #七牛 sdk
 pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"
-
+pod “QiniuTokenIOS”,:path=> "QiniuTokenIOS/QiniuTokenIOS.podspec"
 
 #waitting For use
 #列表空的占位图 TBEmptyDataSet

@@ -19,6 +19,7 @@ PODS:
   - DZNEmptyDataSet (1.8.1)
   - EZSwiftExtensions (1.2.3)
   - HappyDNS (0.3.9)
+  - Hashids-Swift (0.3.0)
   - HidingNavigationBar (0.3.0)
   - IQKeyboardManagerSwift (4.0.4)
   - Kingfisher (2.0.4)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - AVOSCloud
   - DZNEmptyDataSet
   - EZSwiftExtensions (~> 1.2.3)
+  - Hashids-Swift
   - HidingNavigationBar (~> 0.3.0)
   - IQKeyboardManagerSwift
   - Kingfisher (~> 2.0.1)
@@ -107,6 +109,7 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
   HappyDNS: 17be04178df2dd09f0ee6ac33628589b7f9910e8
+  Hashids-Swift: 5d7c069b0d4a3b70d4e2a840c420115dd517050d
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   Kingfisher: 8f1ec2c067ade2c549a1a594379b69c4b1ff81ab
@@ -129,6 +132,6 @@ SPEC CHECKSUMS:
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
 
-PODFILE CHECKSUM: ca2076da24cdf975ac63d260bb6c135eb0e5825c
+PODFILE CHECKSUM: c44f48e5d2d0f0c01e5ec67835afff401d6f00c0
 
 COCOAPODS: 1.1.0.beta.1

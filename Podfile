@@ -46,6 +46,7 @@ pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 
 #LeanCloud
 pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
+pod 'Hashids-Swift'			#短id生成
 
 #融云
 pod 'RongCloudIMKit', '2.6.0'

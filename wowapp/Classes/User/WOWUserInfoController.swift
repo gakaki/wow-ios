@@ -7,7 +7,11 @@
 //
 
 import UIKit
-
+import PromiseKit
+import Qiniu
+import QiniuTokenIOS
+import Hashids_Swift
+import AwaitKit
 
 class WOWUserInfoController: WOWBaseTableViewController {
 
@@ -222,7 +226,13 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                     WOWHud.showMsg("头像修改失败")
                     return
                 }else{
+                    
                     strongSelf.headImageUrl = file.url
+                    
+                    let qiniu_path          = try! await( strongSelf.upload_to_swift(file.url) )
+                    strongSelf.headImageUrl = qiniu_path
+                    print(qiniu_path)
+                    
                     strongSelf.request()
                 }
             }
@@ -279,6 +289,59 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
     
 }
 
-
+extension WOWUserInfoController{
+    
+    
+    func upload_to_swift( file_path: String ) -> Promise<String> {
+        
+        return Promise { resolve, reject in
+            
+            let qiniu_upload_manager = GCQiniuUploadManager.sharedInstance()
+            
+            qiniu_upload_manager.registerWithScope(
+                "wowdsgn",
+                accessKey: "l4bcP6bByVSJWgqOeKxHGtCyXl3L3bWlLh9wOLYu",
+                secretKey: "kevimwWUrbsidQLFRD00zadC0RSUt7qZOFHUW7OY"
+            )
+            qiniu_upload_manager.createToken()
+            
+            print ("Token is \(qiniu_upload_manager.uploadToken)")
+            
+            let uploadOption            = QNUploadOption.init(
+                mime: nil,
+                progressHandler: { ( key, percent_f) in
+                    print(key,percent_f)
+                },
+                params: nil  ,
+                checkCrc: false,
+                cancellationSignal: nil
+            )
+            
+            let hashids                 = Hashids(salt:"this is my salt")
+            let qiniu_key               =  "user/avatar/\(hashids.encode([1,2,3])!)"
+            let qm                      = QNUploadManager()
+            qm.putFile(
+                file_path,
+                key: qiniu_key,
+                token: qiniu_upload_manager.uploadToken,
+                complete: { ( info, key, resp) in
+                    print(info,key,resp)
+                    resolve(key)
+                },
+                option: uploadOption
+            )
+        }
+    }
+    
+    func upload_to_swift2( file_path: String ) -> Promise<String> {
+        return Promise { resolve, reject in
+            let qiniu_url = "2"
+            resolve(qiniu_url)
+        }
+    }
+    
+    
+    
+}
 
 

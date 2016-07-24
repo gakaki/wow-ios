@@ -20,12 +20,14 @@
 @import HidingNavigationBar;
 @import YYImage;
 
+@import QiniuTokenIOS;
+
+
 #import "WXApi.h"
 #import <Pingpp.h>
 
 //Leancloud
 #import <AVOSCloud/AVOSCloud.h>
-
 
 //融云
 #import <RongIMKit/RongIMKit.h>
@@ -37,9 +39,10 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 
-//shareSDK
+
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
-#import "GCQiniuUploadManager.h"
+
+

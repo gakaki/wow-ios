@@ -55,7 +55,20 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     
     private func getCityData() {
-        self.provinces = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("area", ofType: "plist")!)!
+        let dic = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("city", ofType: "plist")!)!
+        let array = dic.objectForKey("RECORDS") as? NSArray
+        for dict in array! {
+            if (String(dict["level_type"]) == "1") {
+                provinces?.arrayByAddingObject(dict)
+            }
+            if (String(dict["level_type"]) == "1") {
+                cities?.arrayByAddingObject(dict)
+            }
+            if (String(dict["level_type"]) == "1") {
+                districts?.arrayByAddingObject(dict)
+            }
+        }
+    
         self.cities = self.provinces!.objectAtIndex(0).objectForKey("cities") as? NSArray
         self.districts = cities?.objectAtIndex(0).objectForKey("areas") as? NSArray
     }
@@ -250,6 +263,14 @@ extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
         default:
             return 0
         }
+    }
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.font = UIFont.systemFontOfSize(15)
+        pickerLabel.numberOfLines = 0
+        pickerLabel.textAlignment = .Center
+        pickerLabel.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+        return pickerLabel
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

@@ -256,7 +256,7 @@
 		29FF273B1CFDB5E600DF2A9B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */; };
 		29FF273D1CFDB5EC00DF2A9B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF273C1CFDB5EC00DF2A9B /* libz.tbd */; };
 		3ED3BC4851F34DEAC2416C6D /* Pods_wowapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98AEBDD3562DCD8D8DFB519A /* Pods_wowapp.framework */; };
-		635716911D45AECA006BD746 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 635716901D45AECA006BD746 /* Address.plist */; };
+		635716991D45D206006BD746 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 635716981D45D206006BD746 /* city.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -546,7 +546,7 @@
 		29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		29FF273C1CFDB5EC00DF2A9B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3E5C8E688B6F27D65B9C07E1 /* Pods-wowapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.release.xcconfig"; sourceTree = "<group>"; };
-		635716901D45AECA006BD746 /* Address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Address.plist; sourceTree = "<group>"; };
+		635716981D45D206006BD746 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		6D82CF16CDE3CFCF20061FE2 /* Pods-wowapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.debug.xcconfig"; sourceTree = "<group>"; };
 		98AEBDD3562DCD8D8DFB519A /* Pods_wowapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1114,7 +1114,7 @@
 			isa = PBXGroup;
 			children = (
 				29FF262E1CFDA86300DF2A9B /* area.plist */,
-				635716901D45AECA006BD746 /* Address.plist */,
+				635716981D45D206006BD746 /* city.plist */,
 				29FF262F1CFDA86300DF2A9B /* Assets.xcassets */,
 				29FF26301CFDA86300DF2A9B /* intro.gif */,
 				29FF263B1CFDA86300DF2A9B /* wowprotocol.html */,
@@ -1502,6 +1502,7 @@
 				29FF26AD1CFDA86300DF2A9B /* WOWStoreSectionView.xib in Resources */,
 				29FF26D31CFDA86300DF2A9B /* WOWUserHomeTopView.xib in Resources */,
 				29FF270B1CFDA86300DF2A9B /* BuyCar.storyboard in Resources */,
+				635716991D45D206006BD746 /* city.plist in Resources */,
 				29FF26831CFDA86300DF2A9B /* WOWBaseStyleCell.xib in Resources */,
 				29FF26FB1CFDA86300DF2A9B /* UMSCommentInputController.xib in Resources */,
 				29FF27111CFDA86300DF2A9B /* User.storyboard in Resources */,
@@ -1515,7 +1516,6 @@
 				29FF26CE1CFDA86300DF2A9B /* WOWTransLineCell.xib in Resources */,
 				29D5EC3C1D0135850001266C /* WOWProductDetailDescCell.xib in Resources */,
 				29FF26FD1CFDA86300DF2A9B /* UMShareEditViewController.xib in Resources */,
-				635716911D45AECA006BD746 /* Address.plist in Resources */,
 				29FF27091CFDA86300DF2A9B /* intro.gif in Resources */,
 				29FF26E61CFDA86300DF2A9B /* BTNavigationDropdownMenu.bundle in Resources */,
 				29FF26711CFDA86300DF2A9B /* WOWSenceLikeCell.xib in Resources */,

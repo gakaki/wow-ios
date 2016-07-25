@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06643A361D44A74500EB475E /* GCQiniuUploadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 06643A341D44A74500EB475E /* GCQiniuUploadManager.h */; };
+		06643A371D44A74500EB475E /* GCQiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 06643A351D44A74500EB475E /* GCQiniuUploadManager.m */; };
 		1967978593EF218DFE213744C7AB2048 /* Pods-QiniuTokenIOS_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F964A44871C601588013304D789C2C02 /* Pods-QiniuTokenIOS_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A63B1B71DF39554C3292EB930F4C3B9 /* QiniuTokenIOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD0DF440852C5C9CAE75012F1EF3E4 /* QiniuTokenIOS-dummy.m */; };
 		2E2C3622DC725363E54FC2CC360AB5C8 /* Pods-QiniuTokenIOS_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D73065C8B7DF42A36CCB749672A1F2 /* Pods-QiniuTokenIOS_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -15,7 +17,6 @@
 		680A420737649D1F37622380D64D4E1C /* Pods-QiniuTokenIOS_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC1FF8C1261E5D8F88A616C4852561E /* Pods-QiniuTokenIOS_Tests-dummy.m */; };
 		6DC8A7DB99DA01E47FFE63C90B8DB013 /* Pods-QiniuTokenIOS_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 822B1BF64392E8B7CDCDE2CCA531CDFA /* Pods-QiniuTokenIOS_Example-dummy.m */; };
 		92F3A557C1B62484F8E2D60EC91246C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		C40274456A6B04A3F307DE56728455A8 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E97B4D58235843ED1A342A883B0F7E /* ReplaceMe.swift */; };
 		D7FCC67700CEEDE04181BEDFE5956805 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06643A341D44A74500EB475E /* GCQiniuUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCQiniuUploadManager.h; sourceTree = "<group>"; };
+		06643A351D44A74500EB475E /* GCQiniuUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCQiniuUploadManager.m; sourceTree = "<group>"; };
 		071EEF7DEC6A1D849BF565E7F3CA609C /* Pods-QiniuTokenIOS_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QiniuTokenIOS_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		09DBBF5FAA0F9D9DC0D109055CC038C9 /* Pods-QiniuTokenIOS_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QiniuTokenIOS_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		0EBD0DF440852C5C9CAE75012F1EF3E4 /* QiniuTokenIOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QiniuTokenIOS-dummy.m"; sourceTree = "<group>"; };
@@ -58,7 +61,6 @@
 		C84E8A7099313D5137706A76BBEB48BA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D1A6ED817B7A614CB7678E53BF41F83D /* Pods-QiniuTokenIOS_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QiniuTokenIOS_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		D5E97B4D58235843ED1A342A883B0F7E /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
 		DB822966832FAFE79207ADAB24844F0C /* QiniuTokenIOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = QiniuTokenIOS.modulemap; sourceTree = "<group>"; };
 		F964A44871C601588013304D789C2C02 /* Pods-QiniuTokenIOS_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QiniuTokenIOS_Example-umbrella.h"; sourceTree = "<group>"; };
 		FB8EEF72902A439C81D3D8491967A47C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,7 +134,8 @@
 		890F65C52300725528157414CEAC4152 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D5E97B4D58235843ED1A342A883B0F7E /* ReplaceMe.swift */,
+				06643A341D44A74500EB475E /* GCQiniuUploadManager.h */,
+				06643A351D44A74500EB475E /* GCQiniuUploadManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06643A361D44A74500EB475E /* GCQiniuUploadManager.h in Headers */,
 				5C1D7AD8AECF3739A9847DEA92819508 /* QiniuTokenIOS-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,7 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A63B1B71DF39554C3292EB930F4C3B9 /* QiniuTokenIOS-dummy.m in Sources */,
-				C40274456A6B04A3F307DE56728455A8 /* ReplaceMe.swift in Sources */,
+				06643A371D44A74500EB475E /* GCQiniuUploadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

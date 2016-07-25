@@ -13,6 +13,10 @@ pod 'Kingfisher','~>2.0.1'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
 pod 'MonkeyKing', '~> 0.9.2'
 
+#七牛 sdk
+pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"
+pod “QiniuTokenIOS”,:path=> "QiniuTokenIOS/QiniuTokenIOS.podspec"
+
 
 pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
@@ -45,16 +49,19 @@ pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 
 
 #LeanCloud
-pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
+pod 'AVOSCloud'             # 数据存储、短信、云引擎调用等基础服务模块
+pod 'Hashids-Swift'			#短id生成
+pod 'AwaitKit', '~> 1.0.1'	#对付该死的多重network请求
+pod 'FCUUID'
+pod 'SwiftyUserDefaults'
+
 
 #融云
 pod 'RongCloudIMKit', '2.6.0'
 
 #王云鹏自己的framework
 pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
-#七牛 sdk
-pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"
-pod “QiniuTokenIOS”,:path=> "QiniuTokenIOS/QiniuTokenIOS.podspec"
+
 
 #waitting For use
 #列表空的占位图 TBEmptyDataSet

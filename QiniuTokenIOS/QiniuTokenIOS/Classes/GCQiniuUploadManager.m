@@ -52,6 +52,7 @@ static NSString *QiNiuHost = @"host";
 }
 
 - (void)createToken {
+    
     if (!self.scope.length || !self.accessKey.length || !self.secretKey.length) {
         return;
     }
@@ -59,13 +60,21 @@ static NSString *QiNiuHost = @"host";
     // 将上传策略中的scrop和deadline序列化成json格式
     NSMutableDictionary *authInfo = [NSMutableDictionary dictionary];
     [authInfo setObject:self.scope forKey:@"scope"];
-    [authInfo
-    setObject:[NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970] + self.liveTime * 24 * 3600]
-       forKey:@"deadline"];
+    
+    
+    NSNumber *deadline_time = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970] + self.liveTime * 24 * 3600];
+    deadline_time = [NSNumber numberWithLong:1469674792];
+    [authInfo setObject:deadline_time forKey:@"deadline"];
 
     NSData *jsonData =
     [NSJSONSerialization dataWithJSONObject:authInfo options:NSJSONWritingPrettyPrinted error:nil];
 
+//    
+//    NSString *s = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSLog(@"%@",s);
+//    
+//    jsonData = [@"{\"scope\":\"wowdsgn\",\"deadline\":1469674792}" dataUsingEncoding:NSUTF8StringEncoding];
+//    
     // 对json序列化后的上传策略进行URL安全的base64编码
     NSString *encodedString = [self urlSafeBase64Encode:jsonData];
 

@@ -274,7 +274,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		062684F01D44BE5D00BAC7A7 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		069056DE1D36665B00A851F9 /* WOWGuideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGuideController.swift; sourceTree = "<group>"; };
 		069056E01D36666F00A851F9 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
@@ -709,7 +708,6 @@
 				29FF262C1CFDA86300DF2A9B /* wowInfo.plist */,
 				29FF25261CFDA86300DF2A9B /* AppDelegate.swift */,
 				29FF25251CFDA86300DF2A9B /* wowapp-Bridging-Header.h */,
-				062684F01D44BE5D00BAC7A7 /* MyPlayground.playground */,
 			);
 			path = wowapp;
 			sourceTree = "<group>";

@@ -20,6 +20,8 @@ PODS:
     - PromiseKit (~> 3.2)
   - DZNEmptyDataSet (1.8.1)
   - EZSwiftExtensions (1.2.3)
+  - FCUUID (1.2.0):
+    - UICKeyChainStore (~> 2.1.0)
   - HappyDNS (0.3.9)
   - Hashids-Swift (0.3.0)
   - HidingNavigationBar (0.3.0)
@@ -78,6 +80,8 @@ PODS:
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
+  - SwiftyUserDefaults (2.2.0)
+  - UICKeyChainStore (2.1.0)
   - UMengAnalytics-NO-IDFA (4.0.5)
   - YYImage (1.0.2):
     - YYImage/Core (= 1.0.2)
@@ -88,6 +92,7 @@ DEPENDENCIES:
   - AwaitKit (~> 1.0.1)
   - DZNEmptyDataSet
   - EZSwiftExtensions (~> 1.2.3)
+  - FCUUID
   - Hashids-Swift
   - HidingNavigationBar (~> 0.3.0)
   - IQKeyboardManagerSwift
@@ -111,6 +116,7 @@ DEPENDENCIES:
   - SnapKit (~> 0.19.1)
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON
+  - SwiftyUserDefaults
   - UMengAnalytics-NO-IDFA
   - YYImage
 
@@ -131,6 +137,7 @@ SPEC CHECKSUMS:
   AwaitKit: 6da328da30a8d0124913e2e051db75c4429d829c
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
+  FCUUID: 9bfe031d35b7c221a7c66156a0af45d4eb49c3b6
   HappyDNS: 17be04178df2dd09f0ee6ac33628589b7f9910e8
   Hashids-Swift: 5d7c069b0d4a3b70d4e2a840c420115dd517050d
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
@@ -154,9 +161,11 @@ SPEC CHECKSUMS:
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyUserDefaults: e7c8197a9d4068702e7f2406a968cae413b8de27
+  UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
 
-PODFILE CHECKSUM: dac1f9505d6c9a92fdebb7433c2f308d07504bd4
+PODFILE CHECKSUM: 255884c227485828ed492f6e5e3eba875985661f
 
 COCOAPODS: 1.1.0.beta.1

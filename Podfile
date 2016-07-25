@@ -52,6 +52,8 @@ pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 pod 'AVOSCloud'             # 数据存储、短信、云引擎调用等基础服务模块
 pod 'Hashids-Swift'			#短id生成
 pod 'AwaitKit', '~> 1.0.1'	#对付该死的多重network请求
+pod 'FCUUID'
+pod 'SwiftyUserDefaults'
 
 
 #融云

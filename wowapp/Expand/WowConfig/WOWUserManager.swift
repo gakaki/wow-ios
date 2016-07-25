@@ -20,7 +20,7 @@ struct WOWUserManager {
     private static let WOWUserCarCount      = "WOWUserCarCount"
     private static let WOWSessionToken      = "WOWSessionToken"
     private static let WOWUserIndustry      = "WOWUserIndustry"
-    private static let WOWUserConstellation      = "WOWUserConstellation"
+    private static let WOWUserConstellation = "WOWUserConstellation"
     private static let WOWUserAgeRange      = "WOWUserAgeRange"
 
     static var wechatToken = ""

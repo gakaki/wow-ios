@@ -22,9 +22,12 @@
 
 @import QiniuTokenIOS;
 
+#import <FCUUID/FCUUID.h>
 
 #import "WXApi.h"
 #import <Pingpp.h>
+
+#import <FCUUID/FCUUID.h>
 
 //Leancloud
 #import <AVOSCloud/AVOSCloud.h>
@@ -44,5 +47,6 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
+
 
 

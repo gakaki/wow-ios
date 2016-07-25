@@ -9,15 +9,16 @@
 import UIKit
 
 enum InfoTextEntrance{
-    case NickEntrance(value:String)
-    case DescEntrance(value:String)
-    case JobEntrance(value:String)
+    case NickEntrance()
+    case DescEntrance()
+    case JobEntrance()
 }
 
 class WOWInfoTextController: WOWBaseTableViewController {
     var userInfo:String = ""
+    var vcTitle: String?
     @IBOutlet weak var textField: UITextField!
-    var entrance : InfoTextEntrance = InfoTextEntrance.NickEntrance(value: "昵称")
+    var entrance : InfoTextEntrance = InfoTextEntrance.NickEntrance()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,30 +40,42 @@ class WOWInfoTextController: WOWBaseTableViewController {
         super.setUI()
         textField.text = userInfo
         switch entrance {
-        case let .NickEntrance(value):
-            navigationItem.title = value
-        case let .DescEntrance(value):
-            navigationItem.title = value
-        case let .JobEntrance(value):
-            navigationItem.title = value
+        case .NickEntrance:
+            navigationItem.title = "昵称"
+            vcTitle = "昵称"
+        case .DescEntrance:
+            navigationItem.title = "个性签名"
+            vcTitle = "个性签名"
+        case .JobEntrance:
+            navigationItem.title = "职业"
+            vcTitle = "职业"
         }
     }
     
     private func saveInfo(){
         DLog("保存信息")
         guard let info = textField.text where !info.isEmpty else{
-            WOWHud.showMsg("请输入" + self.title!)
+            WOWHud.showMsg("请输入" + vcTitle!)
             return
         }
         var params = [String : String]()
         switch entrance {
         case .NickEntrance:
-            params = ["nickName":info]
+           params = ["nickName":info]
         case .DescEntrance:
             params = ["selfIntroduction":info]
         case .JobEntrance:
             params = ["industry":info]
         }
+
+//        switch entrance {
+//        case .NickEntrance(_):
+//            
+//        case .DescEntrance(_):
+//            
+//        case .JobEntrance(_):
+//            
+//        }
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)

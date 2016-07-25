@@ -21,14 +21,21 @@ class WOWAddressCell: UITableViewCell {
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
+
         super.setSelected(selected, animated: animated)
-//        checkButton.selected = selected
+        
     }
-    
+
     func showData(model:WOWAddressListModel)  {
         nameLabel.text = model.name
         phoneLabel.text = model.mobile
         detailAddressLabel.text = model.full_address
+        if model.isDefault  == 1{
+            checkButton.setImage(UIImage(named: "select"), forState: .Normal)
+        }else {
+            checkButton.setImage(UIImage(named: "car_check"), forState: .Normal)
+        }
+        
     }
     
 }

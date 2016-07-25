@@ -28,8 +28,8 @@ class WOWProductDetailTipsCell: UITableViewCell {
         WOWTool.callPhone()
     }
     
-    @IBAction func customerServiceClick(sender: UIButton) {
-        DLog("在线客服")
-    }
+//    @IBAction func customerServiceClick(sender: UIButton) {
+//        DLog("在线客服")
+//    }
     
 }

@@ -15,10 +15,10 @@ class WOWUserModel:NSObject,Mappable{
     var user_headimage      : String?
     var user_nick           : String?
     var user_mobile         : String?
-    var user_constellation  : String?
+    var user_industry       : String?
     var user_sex            : Int?
     var user_carCount       : Int?
-    var user_industry       : Int?
+    var user_constellation  : Int?
     var user_ageRange       : Int?
     
     

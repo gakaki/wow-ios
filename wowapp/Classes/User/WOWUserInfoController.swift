@@ -77,10 +77,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     private func configUserInfo(){
         dispatch_async(dispatch_get_main_queue()) {
-            self.sexTextField.text  = WOWSex[WOWUserManager.userSex]!
+            self.sexTextField.text  = WOWSex[self.sex]
             self.desLabel.text      = WOWUserManager.userDes
             self.nickLabel.text     = WOWUserManager.userName
-            self.ageTextField.text  = WOWAgeRange[self.age]!
+            self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
             self.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
@@ -105,15 +105,16 @@ class WOWUserInfoController: WOWBaseTableViewController {
             editingTextField?.text = pickDataArr[row + 1]
         }else if editingTextField == sexTextField {
             sex = row + 1
+            editingTextField?.text = pickDataArr[row + 1]
         }
-
+        request()
         cancelPicker()
     }
     
 //MARK:Private Network
     override func request() {
         super.request()
-        let params = ["headimage":headImageUrl,"sex":String(sex),"ageRange":String(age),"constellation":String(star)]
+        let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star)]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
@@ -126,7 +127,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 WOWUserManager.userAgeRange = strongSelf.age
                 WOWUserManager.userConstellation = strongSelf.star
                 strongSelf.configUserInfo()
-                WOWHud.dismiss()
+           
                 if let action = strongSelf.editInfoAction{
                     action()
                 }
@@ -145,13 +146,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
         let segueid = segue.identifier
         switch segueid!{
         case "usernick":
-            toVC.entrance = InfoTextEntrance.NickEntrance(value: "昵称")
+            toVC.entrance = InfoTextEntrance.NickEntrance()
             toVC.userInfo = WOWUserManager.userName
         case "userdesc":
-            toVC.entrance = InfoTextEntrance.DescEntrance(value: "签名")
+            toVC.entrance = InfoTextEntrance.DescEntrance()
             toVC.userInfo = WOWUserManager.userDes
         case "userjob":
-            toVC.entrance = InfoTextEntrance.JobEntrance(value: "职业")
+            toVC.entrance = InfoTextEntrance.JobEntrance()
             toVC.userInfo = WOWUserManager.userIndustry
         default:break
         }

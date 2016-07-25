@@ -22,9 +22,9 @@ public enum RequestApi{
     
     case Api_Activity
     
-    case Api_AddressAdd(uid:String,name:String,province:String,city:String,district:String,street:String,mobile:String,is_default:String,addressid:String)
+    case Api_AddressAdd(receiverName:String,provinceId:String,cityId:String,addressDetail:String,receiverMobile:String,isDefault:String)
     
-    case Api_Addresslist(uid:String)
+    case Api_Addresslist
     
     case Api_AddressDelete(uid:String,addressid:String)
     
@@ -182,7 +182,13 @@ extension RequestApi:TargetType{
     }
     
     public var method:Moya.Method{
+        switch self {
+        case .Api_Addresslist:
+            return .GET
+        default:
             return .POST
+        }
+        
     }
     
     
@@ -238,10 +244,10 @@ extension RequestApi:TargetType{
                 params =  ["mobile":mobile,"captcha":captcha,"password":password,"userInfoFromWechat":userInfoFromWechat]
             case let .Api_ResetPwd(mobile, code, password):
                 params =  ["mobile":mobile,"code":code,"password":password]
-            case let .Api_AddressAdd(uid,name,province, city, district, street, mobile,is_default,addressid):
-                params =  ["uid":uid,"name":name,"province":province,"city":city,"district":district,"street":street,"mobile":mobile,"is_default":is_default,"id":addressid]
-            case let .Api_Addresslist(uid):
-                params =  ["uid":uid]
+            case let .Api_AddressAdd(receiverName,provinceId,cityId,addressDetail,receiverMobile,isDefault):
+                params =  ["receiverName":receiverName,"provinceId":provinceId,"cityId":cityId,"addressDetail":addressDetail,"receiverMobile":receiverMobile,"isDefault":isDefault]
+            case .Api_Addresslist:
+                break
             case let .Api_AddressDelete(uid,id):
                 params =  ["uid":uid,"id":id]
             case let .Api_OrderList(uid,type):
@@ -284,7 +290,7 @@ extension RequestApi:TargetType{
         case .Api_CarList,.Api_ProductList:
             return ""
         default:
-            return nil
+            return ""
         }
     }
     

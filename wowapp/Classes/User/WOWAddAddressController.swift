@@ -17,6 +17,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var streeTextField       : UITextField!
     @IBOutlet weak var detailAddressTextView: KMPlaceholderTextView!
     @IBOutlet weak var footView             : UIView!
+    @IBOutlet weak var selectButton         : UIButton!
     private var defaultAddress:Bool         = true
     
     
@@ -89,8 +90,15 @@ class WOWAddAddressController: WOWBaseTableViewController {
             phoneTextField.text = model.mobile
             cityTextField.text = (model.province ?? "") + (model.city ?? "") + (model.district ?? "")
             detailAddressTextView.text = model.street ?? ""
-            let status = (model.isDefault ?? 0) == 1
- 
+            let status = model.isDefault
+            if status == 1 {
+                defaultAddress = true
+                selectButton.setImage(UIImage(named: "select"), forState: .Normal)
+            }else {
+                defaultAddress = false
+                selectButton.setImage(UIImage(named: "car_check"), forState: .Normal)
+
+            }
         }
         
     }
@@ -141,15 +149,14 @@ class WOWAddAddressController: WOWBaseTableViewController {
             WOWHud.showMsg("请填写详细地址")
             return
         }
-//        let is_def  = defaultSwitch.on ? "1" : "0"
-        let is_def = "1"
-        let uid = WOWUserManager.userID
+        let is_def  = defaultAddress ? "1" : "0"
+
         var addressdid = ""
         if let model = addressModel {
             addressdid = model.id ?? ""
         }
-        
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(uid:uid, name:name, province:province ?? "", city: city ?? "", district: district ?? "", street:detailAddress, mobile: phoneTextField.text ?? "", is_default: is_def,addressid:addressdid), successClosure: { [weak self](result) in
+
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(receiverName: name, provinceId: province ?? "", cityId: city ?? "", addressDetail: detailAddress, receiverMobile: phoneTextField.text ?? "", isDefault: is_def), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result).int
                 if let ret = json{
@@ -196,7 +203,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     
 //MARK:Actions
-    @IBAction func selectBtn(sender: UIButton) {
+    @IBAction func selectButton(sender: UIButton) {
         defaultAddress = !defaultAddress
         if defaultAddress {
             sender.setImage(UIImage(named: "select"), forState: .Normal)

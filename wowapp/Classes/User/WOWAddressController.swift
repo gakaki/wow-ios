@@ -23,6 +23,9 @@ class WOWAddressController: WOWBaseViewController {
     var selectModel : WOWAddressListModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
         request()
     }
     
@@ -70,8 +73,8 @@ class WOWAddressController: WOWBaseViewController {
 //MARK:Network
     override func request() {
         super.request()
-        let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:uid), successClosure: {[weak self] (result) in
+//        let uid = WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist, successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(result)
                 if let array = arr{
@@ -93,7 +96,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
     }
     
      func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return dataArr.count
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 131
@@ -104,6 +107,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
         switch entrance {
         case .SureOrder:
             cell.checkButton.hidden = false
+
             if let selModel = selectModel{
                 let model = dataArr[indexPath.row]
                 cell.checkButton.selected = (model.id == selModel.id)
@@ -111,8 +115,29 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
             case .Me:
             cell.checkButton.hidden = false
         }
-//        cell.showData(dataArr[indexPath.row])
+        cell.checkButton.tag = indexPath.row
+        cell.checkButton.addTarget(self, action: #selector(checkDefaut(_:)), forControlEvents:.TouchUpInside)
+        
+        cell.editButton.tag = indexPath.row
+        cell.editButton.addTarget(self, action: #selector(editAddress(_:)), forControlEvents:.TouchUpInside)
+        
+        cell.showData(dataArr[indexPath.row])
+
         return cell
+    }
+
+    //选择默认地址
+    func checkDefaut(sender:UIButton) {
+        for model:WOWAddressListModel in dataArr {
+            model.isDefault = 0
+        }
+        let model = dataArr[sender.tag]
+        model.isDefault = 1
+        let section = NSIndexSet(index: 0)
+
+        tableView.reloadSections(section, withRowAnimation: .Automatic)
+     
+        
     }
     
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -132,19 +157,20 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .Normal, title: "编辑") { (action, indexPath) in
-            self.editAddress(self.dataArr[indexPath.row])
-        }
-        let delete = UITableViewRowAction(style: .Default, title: "删除") { (action, indexPath) in
-            self.deleteAddress(self.dataArr[indexPath.row])
-        }
-        return [delete,edit]
-    }
+//     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+//        let edit = UITableViewRowAction(style: .Normal, title: "编辑") { (action, indexPath) in
+//            self.editAddress(self.dataArr[indexPath.row])
+//        }
+//        let delete = UITableViewRowAction(style: .Default, title: "删除") { (action, indexPath) in
+//            self.deleteAddress(self.dataArr[indexPath.row])
+//        }
+//        return [delete,edit]
+//    }
     
 
     
-    func editAddress(model:WOWAddressListModel) {
+    func editAddress(sender:UIButton) {
+        let model = dataArr[sender.tag]
          let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
         vc.addressModel = model
         vc.action = {[weak self] in

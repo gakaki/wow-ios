@@ -58,7 +58,8 @@ class WOWNetManager {
                      print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
                     
                     //其实也只有登入能获得session token 而已了
-                    if let session_token = info?.data?["sessionToken"] ?? ""{
+
+                    if let session_token = info?.data?["sessionToken"] {
                         WOWUserManager.sessionToken = session_token as! String
                     }
                     
@@ -90,6 +91,7 @@ class WOWNetManager {
                     }else{
                         WOWHud.dismiss()
                     }
+                    WOWHud.dismiss()
                     successClosure(result:info?.data ?? "")
                 case let .Failure(error):
                     DLog(error)

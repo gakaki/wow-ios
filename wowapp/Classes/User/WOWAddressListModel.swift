@@ -25,14 +25,14 @@ class WOWAddressListModel: WOWBaseModel,Mappable{
     }
     
      func mapping(map: Map) {
-        name        <- map["name"]
-        city        <- map["city"]
+        name        <- map["receiverName"]
+        city        <- map["cityId"]
         district    <- map["district"]
         street      <- map["street"]
-        province    <- map["province"]
-        mobile      <- map["mobile"]
-        isDefault   <- map["is_default"]
+        province    <- map["provinceId"]
+        mobile      <- map["receiverMobile"]
+        isDefault   <- map["isDefault"]
         id          <- map["id"]
-        full_address <- map["full_address"]
+        full_address <- map["addressDetail"]
     }
 }

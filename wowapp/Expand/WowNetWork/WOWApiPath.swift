@@ -91,8 +91,8 @@ let URL_Change                  = "user/change"                   //修改用户
 
 
 
-let URL_AddressAdd              = "address/addorupdate"
-let URL_AddressList             = "address/list"
+let URL_AddressAdd              = "user/shippinginfo/create"   //添加收货地址
+let URL_AddressList             = "user/shippinginfo/list"
 let URL_AddressDelete           = "address/delete"
 
 let URL_OrderList               = "order/list"

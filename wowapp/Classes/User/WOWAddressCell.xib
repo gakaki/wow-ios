@@ -43,14 +43,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVo-ee-Dyr">
-                        <rect key="frame" x="0.0" y="70" width="320" height="0.5"/>
+                        <rect key="frame" x="0.0" y="72" width="320" height="0.5"/>
                         <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="nPc-d3-3nT"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUs-OL-1c5">
-                        <rect key="frame" x="15" y="85" width="75" height="16"/>
+                        <rect key="frame" x="15" y="87" width="75" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="7ba-aC-WsT"/>
                             <constraint firstAttribute="height" constant="16" id="mXo-JY-nRn"/>
@@ -61,7 +61,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNy-so-yyy">
-                        <rect key="frame" x="258" y="84" width="50" height="18"/>
+                        <rect key="frame" x="258" y="86" width="50" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="oK2-zL-tLT"/>
                             <constraint firstAttribute="height" constant="18" id="y1v-U1-rcF"/>
@@ -76,7 +76,7 @@
                 <constraints>
                     <constraint firstItem="gUs-OL-1c5" firstAttribute="top" secondItem="ZVo-ee-Dyr" secondAttribute="bottom" constant="14.5" id="00D-ge-eri"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qNz-Hn-AaS" secondAttribute="trailing" constant="60" id="8NI-RE-ntg"/>
-                    <constraint firstItem="ZVo-ee-Dyr" firstAttribute="top" secondItem="z1J-R2-KwA" secondAttribute="bottom" constant="14" id="Eem-nT-zHv"/>
+                    <constraint firstItem="ZVo-ee-Dyr" firstAttribute="top" secondItem="z1J-R2-KwA" secondAttribute="bottom" constant="16" id="Eem-nT-zHv"/>
                     <constraint firstItem="ZVo-ee-Dyr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Lq1-he-SjB"/>
                     <constraint firstItem="qNz-Hn-AaS" firstAttribute="centerY" secondItem="mby-r8-WIO" secondAttribute="centerY" id="SBH-i7-8vH"/>
                     <constraint firstItem="nNy-so-yyy" firstAttribute="top" secondItem="ZVo-ee-Dyr" secondAttribute="bottom" constant="13.5" id="UDB-8S-qx4"/>
@@ -96,7 +96,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="checkButton" destination="gUs-OL-1c5" id="u01-I3-6WE"/>
+                <outlet property="checkButton" destination="gUs-OL-1c5" id="zVW-GJ-xey"/>
                 <outlet property="detailAddressLabel" destination="z1J-R2-KwA" id="h4Z-2s-f04"/>
                 <outlet property="editButton" destination="nNy-so-yyy" id="S1e-AE-H88"/>
                 <outlet property="nameLabel" destination="mby-r8-WIO" id="ejH-qd-aYr"/>

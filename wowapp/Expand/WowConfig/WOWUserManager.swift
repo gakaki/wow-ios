@@ -104,7 +104,7 @@ struct WOWUserManager {
     
     static var userSex:Int{
         get{
-            return (MGDefault.objectForKey(WOWUserConstellation) as? Int) ?? 3
+            return (MGDefault.objectForKey(WOWUserSex) as? Int) ?? 3
         }
 
         set{

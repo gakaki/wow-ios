@@ -127,8 +127,8 @@ class WOWSureOrderController: WOWBaseViewController {
     override func request() {
         super.request()
         //请求地址数据
-        let uid =  WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist(uid:uid), successClosure: { [weak self](result) in
+//        let uid =  WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(result)
                 if let array = arr{

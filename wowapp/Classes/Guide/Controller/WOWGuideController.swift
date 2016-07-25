@@ -82,7 +82,7 @@ class WOWGuideController: WOWBaseViewController {
         scrollerView.delegate = self
         
         for index in 0..<numOfPages {
-            let imageView = UIImageView(image: UIImage(named: "testinvitation"))
+            let imageView = UIImageView(image: UIImage(named: "guide\(index)"))
             imageView.frame = CGRect(x: frame.size.width * CGFloat(index), y: 0, w: frame.size.width, h: frame.size.height)
             scrollerView.addSubview(imageView)
         }

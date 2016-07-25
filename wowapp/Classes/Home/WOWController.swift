@@ -10,17 +10,20 @@ import UIKit
 
 class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
-    var dataArr = [WOWSenceModel]()
+    var dataArr = [WOWCarouselBanners]()
+    var bannerArray = [WOWCarouselBanners]()
     @IBOutlet var tableView: UITableView!
     var hidingNavBarManager: HidingNavigationBarManager?
     override func viewDidLoad() {
         super.viewDidLoad()
-//        request()
+        
+        request()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
         //FIXME:为了让动画出现 所以多reload一次咯
         tableView.reloadData()
         hidingNavBarManager?.viewWillAppear(animated)
@@ -49,6 +52,12 @@ class WOWController: WOWBaseViewController {
         let a =  UIApplication.sharedApplication().delegate as! AppDelegate
         return a
     }()
+
+    lazy var banner:WOWBanner = {
+        let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
+        return view
+    }()
+
     
 //MARK:Private Method
     override func setUI() {
@@ -59,6 +68,7 @@ class WOWController: WOWBaseViewController {
         tableView.estimatedRowHeight = 410
         configBarItem()
         tableView.mj_header = mj_header
+        tableView.tableHeaderView = banner
         hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
 //        if let tabBar = navigationController?.tabBarController?.tabBar {
 //            hidingNavBarManager?.manageBottomBar(tabBar)
@@ -93,17 +103,30 @@ class WOWController: WOWBaseViewController {
     
 //MARK:Private Networkr
     override func request() {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Sence, successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_Banners, successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.endRefresh()
-                let arr1 = Mapper<WOWSenceModel>().mapArray(result)
-                if let arr2 = arr1{
-                    strongSelf.dataArr = []
-                    strongSelf.dataArr += arr2
-                    strongSelf.tableView.reloadData()
+               
+                let bannerList = Mapper<WOWCarouselBanners>().mapArray(JSON(result)["bannerList"].arrayObject)
+                print(bannerList)
+                
+                let carouselBanners = Mapper<WOWCarouselBanners>().mapArray(JSON(result)["carouselBanners"].arrayObject)
+                if let carouselBanners = carouselBanners{
+                    strongSelf.bannerArray = carouselBanners
                 }
+                if let brandArray = bannerList{
+                    strongSelf.dataArr.appendContentsOf(brandArray)
+                }
+                strongSelf.banner.reloadBanner(strongSelf.bannerArray)
+              
+                strongSelf.tableView.reloadData()
+//                if let arr2 = arr1{
+//                    strongSelf.dataArr = []
+//                    strongSelf.dataArr += arr2
+//                    strongSelf.tableView.reloadData()
+//                }
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
@@ -143,9 +166,7 @@ extension WOWController:LeftSideProtocol{
 
 
 extension WOWController:UITableViewDelegate,UITableViewDataSource{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArr.count
@@ -156,13 +177,14 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         cell.delegate = self
         let model = dataArr[indexPath.row]
         cell.showData(model)
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let scene = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
-        let model       = dataArr[indexPath.row]
-        scene.sceneID   = model.id
+//        let model       = dataArr[indexPath.row]
+//        scene.sceneID   = model.id
         scene.hideNavigationBar = true
         navigationController?.pushViewController(scene, animated: true)
     }

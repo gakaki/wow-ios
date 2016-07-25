@@ -59,7 +59,7 @@ class WOWNetManager {
                     
                     //其实也只有登入能获得session token 而已了
 
-                    if let session_token = info?.data?["sessionToken"] {
+                    if let session_token = info?.data?["sessionToken"] ?? WOWUserManager.sessionToken{
                         WOWUserManager.sessionToken = session_token as! String
                     }
                     

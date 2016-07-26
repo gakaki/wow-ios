@@ -128,15 +128,28 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
 
     //选择默认地址
     func checkDefaut(sender:UIButton) {
-        for model:WOWAddressListModel in dataArr {
-            model.isDefault = 0
-        }
         let model = dataArr[sender.tag]
-        model.isDefault = 1
-        let section = NSIndexSet(index: 0)
+        guard model.isDefault == 1 else {
+            let addressId = model.id ?? 0
+            
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDefault(id: String(addressId)), successClosure: {[weak self] (result) in
+                if let strongSelf = self{
+                    for model:WOWAddressListModel in strongSelf.dataArr {
+                        model.isDefault = 0
+                    }
+                    
+                    model.isDefault = 1
+                    let section = NSIndexSet(index: 0)
+                    
+                    strongSelf.tableView.reloadSections(section, withRowAnimation: .Automatic)
 
-        tableView.reloadSections(section, withRowAnimation: .Automatic)
-     
+                }
+            }) { (errorMsg) in
+                
+            }
+            
+                return
+        }
         
     }
     
@@ -184,7 +197,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
     
     func deleteAddress(model:WOWAddressListModel) {
         let uid =  WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(uid:uid, addressid: model.id ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(uid:uid, addressid:String(model.id) ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let json = JSON(result).int ?? 0
                 if json == 1{

@@ -175,7 +175,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             cell.userInteractionEnabled = false
             cell.checkButton.selected = true
             cell.showData(addressArr[indexPath.row])
-            addressID = addressArr[indexPath.row].id
+            addressID = String(addressArr[indexPath.row].id)
             returnCell = cell
         case 1: //支付方式
             let type = ["支付宝","微信支付"]
@@ -278,7 +278,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                         addvc.selectModel = strongSelf.addressArr.first
                         addvc.action = {(model:AnyObject) in
                             let m = model as! WOWAddressListModel
-                            strongSelf.addressID = m.id
+                            strongSelf.addressID = String(m.id)
                             strongSelf.addressArr = [m]
                             strongSelf.tableView.reloadData()
                         }

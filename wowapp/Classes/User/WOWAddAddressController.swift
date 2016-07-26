@@ -166,7 +166,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
 
         var addressdid = ""
         if let model = addressModel {
-            addressdid = model.id ?? ""
+            addressdid = String(model.id) ?? ""
         }
 
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(receiverName: name, provinceId: province ?? "", cityId: city ?? "", addressDetail: detailAddress, receiverMobile: phoneTextField.text ?? "", isDefault: is_def), successClosure: { [weak self](result) in

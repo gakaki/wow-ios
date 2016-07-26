@@ -28,6 +28,8 @@ public enum RequestApi{
     
     case Api_AddressDelete(uid:String,addressid:String)
     
+    case Api_AddressDefault(id:String)
+    
     case Api_SenceDetail(sceneid:String,uid:String)
     
     case Api_BrandList
@@ -172,6 +174,8 @@ extension RequestApi:TargetType{
             return URL_AddressList
         case .Api_AddressDelete:
             return URL_AddressDelete
+        case .Api_AddressDefault:
+            return URL_AddressDefault
         case .Api_OrderList:
             return URL_OrderList
         case .Api_OrderStatus:
@@ -250,6 +254,8 @@ extension RequestApi:TargetType{
                 break
             case let .Api_AddressDelete(uid,id):
                 params =  ["uid":uid,"id":id]
+            case let .Api_AddressDefault(id):
+                params = ["id":id]
             case let .Api_OrderList(uid,type):
                 params =  ["uid":uid,"type":type]
             case let .Api_OrderStatus(uid,order_id,status):

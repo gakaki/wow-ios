@@ -18,7 +18,7 @@ class WOWAddressListModel: WOWBaseModel,Mappable{
     var mobile      : String?
     var full_address: String?
     var isDefault   : Int?
-    var id          : String?
+    var id          : Int?
     
     required init?(_ map: Map) {
         

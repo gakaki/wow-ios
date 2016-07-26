@@ -94,6 +94,7 @@ let URL_Change                  = "user/change"                   //修改用户
 let URL_AddressAdd              = "user/shippinginfo/create"   //添加收货地址
 let URL_AddressList             = "user/shippinginfo/list"
 let URL_AddressDelete           = "address/delete"
+let URL_AddressDefault          = "user/shippinginfo/set-default" //设为默认收货地址
 
 let URL_OrderList               = "order/list"
 

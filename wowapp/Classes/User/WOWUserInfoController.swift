@@ -231,7 +231,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         let uploadOption            = QNUploadOption.init(
             mime: nil,
             progressHandler: { ( key, percent_f) in
-                print(key,percent_f)
+//                print(key,percent_f)
             },
             params: nil  ,
             checkCrc: false,
@@ -239,11 +239,12 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         )
         
         let hashids                 = Hashids(salt:FCUUID.uuidForDevice())
-        let qiniu_key               =  "user/avatar/\(hashids.encode([1,2,3])!)"
+        let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
         let qm                      = QNUploadManager()
 
         qiniu_upload_manager.registerWithScope(
-            "usericon:\(qiniu_key)",
+//           "wowdsgn:\(qiniu_key)",
+            "usericon",
             accessKey: "l4bcP6bByVSJWgqOeKxHGtCyXl3L3bWlLh9wOLYu",
             secretKey: "kevimwWUrbsidQLFRD00zadC0RSUt7qZOFHUW7OY"
         )
@@ -254,7 +255,8 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         
         qm.putData(
             data,
-            key: qiniu_key,
+            key:   nil,
+
             token: qiniu_upload_manager.uploadToken,
             complete: { ( info, key, resp) in
                 
@@ -265,8 +267,10 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         WOWHud.showMsg("头像修改失败")
                     } else {
                         print(resp,resp["key"])
-                        print(info,key,resp)
-                        self.headImageUrl = "http://img.wowdsgn.com/\(key)"
+//                        print(info,key,resp)
+                        let key = resp["key"]
+                        self.headImageUrl = "http://img.wowdsgn.com/\(key!)"
+                        print(self.headImageUrl)
                         self.request()
                     }
 //                }

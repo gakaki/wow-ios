@@ -65,14 +65,15 @@ static NSString *QiNiuHost = @"host";
     NSNumber *deadline_time = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970] + self.liveTime * 24 * 3600];
     deadline_time = [NSNumber numberWithLong:1469674792];
     [authInfo setObject:deadline_time forKey:@"deadline"];
+//    [authInfo setObject:@"usericon:user/avatar/bnuqik" forKey:@"saveKey"];
 
     NSData *jsonData =
     [NSJSONSerialization dataWithJSONObject:authInfo options:NSJSONWritingPrettyPrinted error:nil];
 
 //    
-//    NSString *s = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSLog(@"%@",s);
-//    
+    NSString *s = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",s);
+//
 //    jsonData = [@"{\"scope\":\"wowdsgn\",\"deadline\":1469674792}" dataUsingEncoding:NSUTF8StringEncoding];
 //    
     // 对json序列化后的上传策略进行URL安全的base64编码

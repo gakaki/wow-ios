@@ -41,6 +41,7 @@ class WOWAddressController: WOWBaseViewController {
                 strongSelf.request()
             }
         }
+  
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

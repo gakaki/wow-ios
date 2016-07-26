@@ -83,7 +83,6 @@ class WOWRegistController: WOWBaseViewController {
             return
         }
         let mobile = phoneTextField.text ?? ""
-        navigationItem.title = byWechat ? "绑定手机" :"注册"
         let Api_Code = byWechat ? RequestApi.Api_Captcha :RequestApi.Api_Sms_Code
         
         WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result) in

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="WOWBuyCarEmpty" customClass="WOWBuyCarEmpty" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buyCarEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="pJK-Rx-PNt">
+                    <rect key="frame" x="152" y="0.0" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="fu4-fE-lQh"/>
+                        <constraint firstAttribute="height" constant="70" id="m7W-uL-XLY"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的购物车还是空的快去逛逛吧" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byU-9y-PGV">
+                    <rect key="frame" x="119" y="90" width="137" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="BDW-3G-anm"/>
+                        <constraint firstAttribute="width" constant="137" id="tDL-Ou-yVo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pJK-Rx-PNt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4EO-ki-reK"/>
+                <constraint firstItem="pJK-Rx-PNt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="asl-39-AYX"/>
+                <constraint firstAttribute="bottom" secondItem="byU-9y-PGV" secondAttribute="bottom" id="jsy-RN-Tj3"/>
+                <constraint firstItem="byU-9y-PGV" firstAttribute="top" secondItem="pJK-Rx-PNt" secondAttribute="bottom" constant="20" id="nQV-iq-gTI"/>
+                <constraint firstItem="byU-9y-PGV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pli-Tt-ZDX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="371.5" y="73"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="buyCarEmpty" width="69" height="62"/>
+    </resources>
+</document>

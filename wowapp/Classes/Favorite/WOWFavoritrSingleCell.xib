@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WOWFavoritrSingleCell" id="WBL-jt-rfW" userLabel="WOWFavoritrSingleCell" customClass="WOWFavoritrSingleCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="187" height="187"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="187" height="187"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eoc-9M-3ps">
+                        <rect key="frame" x="0.0" y="0.0" width="187" height="187"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="eoc-9M-3ps" secondAttribute="height" multiplier="1:1" id="MpZ-jL-O0A"/>
+                        </constraints>
+                    </imageView>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4j-UV-9cx" userLabel="rightline">
+                        <rect key="frame" x="187" y="0.0" width="0.0" height="187"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="0.5" id="dLa-eb-jw6"/>
+                        </constraints>
+                    </view>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qxs-7V-f4D" userLabel="bottomline">
+                        <rect key="frame" x="0.0" y="187" width="187" height="0.0"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="AOB-b9-t9o"/>
+                            <constraint firstAttribute="height" id="djq-oq-Y1H"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="djq-oq-Y1H"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mts-mM-qsX" userLabel="topline">
+                        <rect key="frame" x="0.0" y="0.0" width="187" height="0.0"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="RuF-Qd-ixe"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="s4j-UV-9cx" secondAttribute="trailing" id="5Sn-mX-GmV"/>
+                <constraint firstAttribute="bottom" secondItem="Qxs-7V-f4D" secondAttribute="bottom" id="6Ty-rL-2Pa"/>
+                <constraint firstItem="eoc-9M-3ps" firstAttribute="top" secondItem="WBL-jt-rfW" secondAttribute="top" id="7C9-2n-Nyr"/>
+                <constraint firstItem="s4j-UV-9cx" firstAttribute="top" secondItem="WBL-jt-rfW" secondAttribute="top" id="Gkm-fG-i3p"/>
+                <constraint firstAttribute="bottom" secondItem="s4j-UV-9cx" secondAttribute="bottom" id="TFd-rj-xjH"/>
+                <constraint firstAttribute="trailing" secondItem="eoc-9M-3ps" secondAttribute="trailing" id="fAh-lv-WSy"/>
+                <constraint firstAttribute="trailing" secondItem="mts-mM-qsX" secondAttribute="trailing" id="hcl-9q-3u1"/>
+                <constraint firstAttribute="bottom" secondItem="Qxs-7V-f4D" secondAttribute="bottom" constant="1" id="jji-CN-JGU"/>
+                <constraint firstItem="mts-mM-qsX" firstAttribute="leading" secondItem="WBL-jt-rfW" secondAttribute="leading" id="vLh-gw-sSh"/>
+                <constraint firstItem="eoc-9M-3ps" firstAttribute="leading" secondItem="WBL-jt-rfW" secondAttribute="leading" id="vR6-Oy-Kut"/>
+                <constraint firstItem="s4j-UV-9cx" firstAttribute="leading" secondItem="Qxs-7V-f4D" secondAttribute="trailing" id="vTg-EQ-5rI"/>
+                <constraint firstItem="mts-mM-qsX" firstAttribute="top" secondItem="WBL-jt-rfW" secondAttribute="top" id="vWe-hv-77d"/>
+                <constraint firstItem="Qxs-7V-f4D" firstAttribute="leading" secondItem="WBL-jt-rfW" secondAttribute="leading" id="xyD-tj-HR9"/>
+            </constraints>
+            <size key="customSize" width="231" height="187"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="jji-CN-JGU"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="imageView" destination="eoc-9M-3ps" id="KFe-Yq-4H0"/>
+                <outlet property="topLine" destination="mts-mM-qsX" id="fWc-oo-y5E"/>
+            </connections>
+            <point key="canvasLocation" x="1283.5" y="320.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

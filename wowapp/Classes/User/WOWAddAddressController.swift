@@ -56,18 +56,20 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     private func getCityData() {
         let dic = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("city", ofType: "plist")!)!
-        let array = dic.objectForKey("RECORDS") as? NSArray
-        for dict in array! {
-            if (String(dict["level_type"]) == "1") {
-                provinces?.arrayByAddingObject(dict)
-            }
-            if (String(dict["level_type"]) == "1") {
-                cities?.arrayByAddingObject(dict)
-            }
-            if (String(dict["level_type"]) == "1") {
-                districts?.arrayByAddingObject(dict)
-            }
-        }
+        let array = Mapper<WOWSimpleSSQModel>().mapArray(JSON(dic)["RECORDS"].arrayObject)
+        print(array)
+//        let array = dic.objectForKey("RECORDS") as? NSArray
+//        for dict in array! {
+//            if (String(dict["level_type"]) == "1") {
+//                provinces?.arrayByAddingObject(dict)
+//            }
+//            if (String(dict["level_type"]) == "1") {
+//                cities?.arrayByAddingObject(dict)
+//            }
+//            if (String(dict["level_type"]) == "1") {
+//                districts?.arrayByAddingObject(dict)
+//            }
+//        }
     
         self.cities = self.provinces!.objectAtIndex(0).objectForKey("cities") as? NSArray
         self.districts = cities?.objectAtIndex(0).objectForKey("areas") as? NSArray

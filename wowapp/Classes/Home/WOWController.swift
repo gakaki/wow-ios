@@ -55,6 +55,7 @@ class WOWController: WOWBaseViewController {
 
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
+       
         return view
     }()
 
@@ -99,7 +100,9 @@ class WOWController: WOWBaseViewController {
     }
     
 //MARK:Actions
-
+    func tapHandler() -> Void {
+        print("jiashi")
+    }
     
 //MARK:Private Networkr
     override func request() {

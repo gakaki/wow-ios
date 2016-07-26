@@ -11,6 +11,7 @@ import UIKit
 class WOWBanner: UIView {
     var imageURLArray: [String] = []
     @IBOutlet weak var cyclePictureView: CyclePictureView!
+    @IBOutlet weak var jsImg:UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

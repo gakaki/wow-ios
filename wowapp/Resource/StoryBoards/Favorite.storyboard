@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="70d-dw-kWz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="70d-dw-kWz">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-64" y="578"/>
         </scene>
-        <!--我喜欢的-->
+        <!--Empty Data Set Delegate-->
         <scene sceneID="Ieh-JQ-4vO">
             <objects>
                 <viewController storyboardIdentifier="WOWFavoriteController" id="pq5-Ec-fe3" customClass="WOWFavoriteController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,10 +33,38 @@
                     <view key="view" contentMode="scaleToFill" id="pJW-xs-0sq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J0q-SS-qxD">
+                                <rect key="frame" x="0.0" y="104" width="320" height="464"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BTt-OW-EI7">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="pq5-Ec-fe3" id="FyH-nv-CuS"/>
+                                    <outlet property="delegate" destination="pq5-Ec-fe3" id="jkK-H5-uRj"/>
+                                    <outlet property="emptyDataSetDelegate" destination="pq5-Ec-fe3" id="5zA-cU-O3A"/>
+                                    <outlet property="emptyDataSetSource" destination="pq5-Ec-fe3" id="aFf-J5-8Rj"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="J0q-SS-qxD" firstAttribute="leading" secondItem="pJW-xs-0sq" secondAttribute="leading" id="CfW-Yg-9pB"/>
+                            <constraint firstAttribute="trailing" secondItem="J0q-SS-qxD" secondAttribute="trailing" id="MwK-yQ-KYO"/>
+                            <constraint firstItem="KIF-H8-Pof" firstAttribute="top" secondItem="J0q-SS-qxD" secondAttribute="bottom" id="lkL-32-j2V"/>
+                            <constraint firstItem="J0q-SS-qxD" firstAttribute="top" secondItem="zuN-MM-c4H" secondAttribute="bottom" constant="40" id="sLi-3k-uYN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="我喜欢的" id="bDq-SF-S0f"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="collectionView" destination="J0q-SS-qxD" id="1bM-Vb-nCT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s9U-F6-NWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

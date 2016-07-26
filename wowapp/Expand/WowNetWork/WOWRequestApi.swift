@@ -72,7 +72,7 @@ public enum RequestApi{
     
     case Api_Register(account:String,password:String,captcha:String)
     
-    case Api_ResetPwd(mobile:String,code:String,password:String)
+    case Api_ResetPwd(mobile:String,captcha:String,newPwd:String)
     
     case Api_StoreHome
     
@@ -247,7 +247,7 @@ extension RequestApi:TargetType{
             case let .Api_WechatBind(mobile,captcha,password,userInfoFromWechat):
                 params =  ["mobile":mobile,"captcha":captcha,"password":password,"userInfoFromWechat":userInfoFromWechat]
             case let .Api_ResetPwd(mobile, code, password):
-                params =  ["mobile":mobile,"code":code,"password":password]
+                params =  ["mobile":mobile,"captcha":code,"newPwd":password]
             case let .Api_AddressAdd(receiverName,provinceId,cityId,addressDetail,receiverMobile,isDefault):
                 params =  ["receiverName":receiverName,"provinceId":provinceId,"cityId":cityId,"addressDetail":addressDetail,"receiverMobile":receiverMobile,"isDefault":isDefault]
             case .Api_Addresslist:

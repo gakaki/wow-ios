@@ -232,7 +232,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArr.count
+        return 10
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -242,7 +242,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderListCell", forIndexPath: indexPath) as! WOWOrderListCell
         cell.delegate = self
-        cell.showData(dataArr[indexPath.row])
+//        cell.showData(dataArr[indexPath.row])
         return cell
     }
     
@@ -257,10 +257,10 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         return "删除"
     }
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        let model = dataArr[indexPath.row]
-        return model.status == 0 //待付款的是可以取消的
-    }
+//    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        let model = dataArr[indexPath.row]
+//        return model.status == 0 //待付款的是可以取消的
+//    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController

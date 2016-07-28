@@ -147,13 +147,13 @@ extension WOWOrderListCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr.count
+        return 10
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
-        let model = dataArr[indexPath.row]
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+//        let model = dataArr[indexPath.row]
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string: "")!, placeholderImage: UIImage(named: "placeholder_product"))
         return cell
     }
     

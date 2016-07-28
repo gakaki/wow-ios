@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -680,7 +679,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="NWr-Ei-6UF"/>
-                                            <constraint firstAttribute="width" constant="55" id="RgK-gu-9V7"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="RgK-gu-9V7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <state key="normal" title="获取验证码">
@@ -1083,7 +1082,7 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YyO-kq-eic">
-                                <rect key="frame" x="120" y="305" width="81" height="37"/>
+                                <rect key="frame" x="119" y="305" width="81" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="CH8-16-guG"/>
                                     <constraint firstAttribute="width" constant="81" id="JWg-1e-yXT"/>
@@ -1092,33 +1091,43 @@
                                 <color key="currentPageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </pageControl>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="qce-zB-L8p">
-                                <rect key="frame" x="97" y="60" width="125" height="115"/>
+                                <rect key="frame" x="97" y="88" width="125" height="125"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="115" id="0hL-yv-SfG"/>
-                                    <constraint firstAttribute="width" secondItem="qce-zB-L8p" secondAttribute="height" multiplier="25:23" id="4Mv-TV-h2i"/>
-                                    <constraint firstAttribute="width" constant="125" id="ZFD-Oe-eda"/>
+                                    <constraint firstAttribute="height" constant="125" id="2oC-BA-gh6"/>
+                                    <constraint firstAttribute="width" constant="125" id="ohr-Si-r6j"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKD-bc-gMp">
+                                <rect key="frame" x="0.0" y="284" width="320" height="0.0"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="nHj-bC-Dmg"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YyO-kq-eic" firstAttribute="top" secondItem="qce-zB-L8p" secondAttribute="bottom" constant="130" id="3eu-Yp-UpO"/>
                             <constraint firstItem="2vC-lT-k7q" firstAttribute="leading" secondItem="Am2-xx-25L" secondAttribute="leadingMargin" constant="44" id="AFX-oV-QhV"/>
+                            <constraint firstAttribute="trailing" secondItem="IKD-bc-gMp" secondAttribute="trailing" id="CJc-Qv-GjB"/>
                             <constraint firstItem="J6e-dO-U3t" firstAttribute="top" secondItem="168-2S-OpQ" secondAttribute="bottom" constant="13" id="FbG-VE-Z2y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="q8u-1M-Mdn" secondAttribute="trailing" constant="10" id="Gt7-kJ-wXp"/>
                             <constraint firstItem="Coq-p4-7pr" firstAttribute="top" secondItem="q8u-1M-Mdn" secondAttribute="bottom" constant="17" id="Inc-f3-sIA"/>
                             <constraint firstItem="s7D-yn-8Vl" firstAttribute="top" secondItem="2vC-lT-k7q" secondAttribute="bottom" constant="24" id="PTs-X0-nZy"/>
-                            <constraint firstItem="qce-zB-L8p" firstAttribute="top" relation="lessThanOrEqual" secondItem="168-2S-OpQ" secondAttribute="bottom" constant="150" id="YK1-o3-JSo"/>
+                            <constraint firstItem="IKD-bc-gMp" firstAttribute="top" secondItem="qce-zB-L8p" secondAttribute="bottom" constant="71" id="VjK-AE-VT7"/>
+                            <constraint firstItem="Coq-p4-7pr" firstAttribute="top" secondItem="s7D-yn-8Vl" secondAttribute="bottom" constant="113" id="YNH-kv-YHt"/>
                             <constraint firstItem="s7D-yn-8Vl" firstAttribute="leading" secondItem="Am2-xx-25L" secondAttribute="leadingMargin" constant="44" id="Zfq-eT-6SL"/>
-                            <constraint firstItem="Coq-p4-7pr" firstAttribute="top" secondItem="s7D-yn-8Vl" secondAttribute="bottom" constant="113" id="bXG-LJ-JzK"/>
                             <constraint firstItem="2vC-lT-k7q" firstAttribute="top" secondItem="YyO-kq-eic" secondAttribute="bottom" constant="13" id="cHn-qi-c58"/>
-                            <constraint firstItem="qce-zB-L8p" firstAttribute="centerX" secondItem="Am2-xx-25L" secondAttribute="centerX" id="dvd-n9-1gP"/>
+                            <constraint firstItem="qce-zB-L8p" firstAttribute="centerX" secondItem="Am2-xx-25L" secondAttribute="centerX" id="dtQ-0U-JSs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="s7D-yn-8Vl" secondAttribute="trailing" constant="44" id="iTi-UV-oXA"/>
+                            <constraint firstItem="IKD-bc-gMp" firstAttribute="leading" secondItem="Am2-xx-25L" secondAttribute="leading" id="jid-jX-vID"/>
+                            <constraint firstItem="IKD-bc-gMp" firstAttribute="centerY" secondItem="Am2-xx-25L" secondAttribute="centerY" id="rLr-LZ-qml"/>
                             <constraint firstItem="YyO-kq-eic" firstAttribute="centerX" secondItem="Am2-xx-25L" secondAttribute="centerX" id="rm6-EV-ygx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="J6e-dO-U3t" secondAttribute="trailing" constant="10" id="ryv-HV-FKg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2vC-lT-k7q" secondAttribute="trailing" constant="44" id="wH2-Pc-bWt"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="btn1" destination="2vC-lT-k7q" id="xOa-oT-ULW"/>
                         <outlet property="btn2" destination="s7D-yn-8Vl" id="59i-7G-Nx2"/>
@@ -1127,7 +1136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uy3-1G-4vI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="723" y="800"/>
+            <point key="canvasLocation" x="1302" y="758"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MVa-Oq-gPA">

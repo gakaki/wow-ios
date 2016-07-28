@@ -7,7 +7,7 @@
 //
 
 import UIKit
-protocol WOWSubAlertDelegate:class{
+@objc protocol WOWSubAlertDelegate:class{
     func subAlertItemClick(productID:String)
 }
 

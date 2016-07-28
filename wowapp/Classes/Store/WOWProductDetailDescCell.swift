@@ -45,15 +45,15 @@ class WOWProductDetailDescCell: UITableViewCell {
     
     func showData(model:WOWProductModel?){
         productModel = model
-        brandNameLabel.text = model?.brandName
-        descLabel.text      = model?.productShortDes
-        brandButton.kf_setBackgroundImageWithURL(NSURL(string:model?.brandImage ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
-        guard let designerName = model?.designer_name where !designerName.isEmpty else{
+        brandNameLabel.text = model?.brandCname
+        descLabel.text      = model?.sellingPoint
+        brandButton.kf_setBackgroundImageWithURL(NSURL(string:model?.brandLogoImg ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
+        guard let designerName = model?.designerName where !designerName.isEmpty else{
             designerContainerView.hidden = true
             brandContainerRightConstraint.priority = 250;
             return
         }
         designerNameLabel.text = designerName
-        designerButton.kf_setBackgroundImageWithURL(NSURL(string: model?.designer_url ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
+        designerButton.kf_setBackgroundImageWithURL(NSURL(string: model?.designerPhoto ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
     }
 }

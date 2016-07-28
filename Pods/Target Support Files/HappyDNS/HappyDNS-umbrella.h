@@ -15,7 +15,6 @@
 #import "QNResolvUtil.h"
 #import "QNTxtResolver.h"
 #import "QNDes.h"
-#import "QNGetAddrInfo.h"
 #import "QNHex.h"
 #import "QNIP.h"
 

@@ -11,7 +11,10 @@ import UIKit
 class WOWBanner: UIView {
     var imageURLArray: [String] = []
     @IBOutlet weak var cyclePictureView: CyclePictureView!
-    @IBOutlet weak var jsImg:UIImageView!
+    @IBOutlet weak var jsButton:UIButton!
+    @IBOutlet weak var dgButton:UIButton!
+    @IBOutlet weak var zdButton:UIButton!
+    @IBOutlet weak var sjButton:UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

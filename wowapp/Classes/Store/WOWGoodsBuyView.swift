@@ -151,7 +151,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             nameLabel.text = p.productName
             perPriceLabel.text  = WOWBuyCarMananger.sharedBuyCar.skuPrice.priceFormat()
-            goodsImageView.kf_setImageWithURL(NSURL(string:p.productImage ?? " ")!, placeholderImage:UIImage(named: "placeholder_product"))
+            if p.primaryImgs?.count > 0 {
+                 goodsImageView.kf_setImageWithURL(NSURL(string:p.primaryImgs![0] ?? " ")!, placeholderImage:UIImage(named: "placeholder_product"))
+            }
+           
 
             skuID       = WOWBuyCarMananger.sharedBuyCar.skuID
             skuImageUrl = p.productImage ?? ""

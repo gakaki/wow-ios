@@ -72,6 +72,7 @@ public extension String{
 //        let numberFormat = NSNumberFormatter()
 //        numberFormat.numberStyle = .DecimalStyle
 //        let result = "¥" + (numberFormat.stringFromNumber(number) ?? "")
+        
         let result = "¥ " + self
         return result
     }

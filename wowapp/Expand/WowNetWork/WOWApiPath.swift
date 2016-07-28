@@ -41,7 +41,9 @@ let URL_home_topics             = "page/topics"     //1.3首页 查看首页专�
 //2.2商品列表
 let URL_product                 = "product"
 //2.3商品详情
-let URL_product_detail          = "product/detail"
+let URL_product_detail          = "product"
+//产品图文详情
+let URL_Product_imageDetail     = "product/images/detail"
 //2.4发表评论
 let URL_SubmitComment           = "comment/add"
 //2.5评论列表
@@ -53,6 +55,8 @@ let URL_Favorite                = "like/do"
 let URL_BrandList               = "brand/list"
 
 let URL_BrandDetail             = "brand/detail"
+
+let URL_LikeBrand               = "user/like/brand"    //喜欢的品牌列表
 
 //3.app活动
 let URL_activity                = "post"

@@ -26,6 +26,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        productID = "15"
         request()
     }
     
@@ -174,8 +175,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(product_id: productID ?? "",uid:uid), successClosure: {[weak self] (result) in
+//        let uid = WOWUserManager.userID
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productID ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.configData()

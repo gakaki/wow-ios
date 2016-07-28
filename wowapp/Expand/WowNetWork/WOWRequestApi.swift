@@ -60,13 +60,17 @@ public enum RequestApi{
     
     case Api_Login(String,String)
     
+    case Api_LikeBrand
+    
     case Api_OrderList(uid:String,type:String) //100为全部
     
     case Api_OrderStatus(uid:String,order_id:String,status:String)
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
     
-    case Api_ProductDetail(product_id:String,uid:String)
+    case Api_ProductDetail(productId:String)
+    
+    case Api_ProductImgDetail(productId:String)
     
     case Api_PwdResetCode(mobile:String) //重置密码获取验证码
     
@@ -119,11 +123,12 @@ extension RequestApi:TargetType{
             return URL_home_scenes
         case .Api_Home_Topics:
             return URL_home_topics
-            
         case .Api_ProductList:
             return URL_product
         case .Api_ProductDetail:
             return URL_product_detail
+        case .Api_ProductImgDetail:
+            return URL_Product_imageDetail
         case .Api_BrandList:
             return URL_BrandList
         case .Api_BrandDetail:
@@ -152,6 +157,8 @@ extension RequestApi:TargetType{
             return URL_CarCommit
         case .Api_Login:
             return URL_login
+        case .Api_LikeBrand:
+            return URL_LikeBrand
         case .Api_Register:
             return URL_Register
         case .Api_Sms:
@@ -187,7 +194,7 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist,.Api_Home_Banners:
+        case .Api_Addresslist,.Api_Home_Banners,.Api_LikeBrand,.Api_ProductDetail,.Api_ProductImgDetail:
             return .GET
         default:
             return .POST
@@ -210,8 +217,10 @@ extension RequestApi:TargetType{
                 params = ["brandid":brandid]
             case let .Api_ProductList(pageindex,categoryID,style,sort,uid,keyword):
                 params = ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid,"keyword":keyword]
-            case let .Api_ProductDetail(product_id,uid):
-                params = ["id":product_id,"uid":uid]
+            case let .Api_ProductDetail(productId):
+                params = ["productId":productId]
+            case let .Api_ProductImgDetail(productId):
+                params = ["productId":productId]
             case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):
                 params = ["uid":uid,"product_id":product_id,"type":type,"is_delete":is_delete,"scene_id":scene_id]
             case let .Api_CommentList(pageindex,thingid,type):
@@ -260,7 +269,6 @@ extension RequestApi:TargetType{
                 params =  ["uid":uid,"type":type]
             case let .Api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]
-            
             
             case .Api_Home_Banners():
                 params =  ["pageType":1]

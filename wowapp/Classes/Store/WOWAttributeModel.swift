@@ -28,6 +28,30 @@ class WOWAttributeModel: WOWBaseModel,Mappable{
     }
 }
 
+class WOWParameter: WOWBaseModel,Mappable{
+    
+    var materialText        :String?
+    var needAssemble        :Bool?
+    var origin              :String?
+    var style               :String?
+    var applicableSceneText :String?
+    var applicablePeople    :String?
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        materialText            <- map["materialText"]
+        needAssemble            <- map["needAssemble"]
+        origin                  <- map["origin"]
+        style                   <- map["style"]
+        applicableSceneText     <- map["applicableSceneText"]
+        applicablePeople        <- map["applicablePeople"]
+
+    }
+}
+
 
 class WOWProductPicTextModel:WOWBaseModel,Mappable {
     var image  :String?
@@ -38,8 +62,8 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
     }
     
     func mapping(map: Map) {
-        image <- map["image"]
-        text  <- map["text"]
+        image <- map["imgUrl"]
+        text  <- map["imgDesc"]
     }
 }
 

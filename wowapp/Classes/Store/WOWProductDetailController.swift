@@ -44,6 +44,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        productID = "15"
         request()
     }
 
@@ -57,7 +58,8 @@ class WOWProductDetailController: WOWBaseViewController {
         let v = CyclePictureView(frame:MGFrame(0, y: 0, width:MGScreenWidth, height:MGScreenWidth), imageURLArray: nil)
         v.placeholderImage = UIImage(named: "placeholder_banner")
         v.currentDotColor = UIColor.blackColor()
-        v.otherDotColor   = UIColor.lightGrayColor()
+        v.otherDotColor   = UIColor.whiteColor()
+        v.autoScroll = false
         return v
     }()
 
@@ -65,6 +67,7 @@ class WOWProductDetailController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configTable()
+
     }
 
     private func addObservers(){
@@ -76,7 +79,7 @@ class WOWProductDetailController: WOWBaseViewController {
 
     
     private func configData(){
-        cycleView.imageURLArray = [productModel?.productImage ?? ""]
+        cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
         likeButton.selected = (productModel?.user_isLike ?? "false") == "true"
         placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImage ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
             if let strongSelf = self{
@@ -169,10 +172,10 @@ class WOWProductDetailController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(product_id: productID ?? "",uid:uid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productID ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
+                strongSelf.productModel?.productID = strongSelf.productID
                 strongSelf.configData()
                 strongSelf.numberSections = 5
                 strongSelf.tableView.reloadData()

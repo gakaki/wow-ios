@@ -23,19 +23,15 @@ class WOWProductDetailPicTextCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        moreContainerView.addTapGesture {[weak self] (tap) in
-            if let _ = self{
-                DLog("跳转到详情去")
-            }
-        }
+        
     }
     
-    func showData(model:WOWProductPicTextModel?) {
-        productTextLabel.text = model?.text
-        if let title = model?.text where title.isEmpty {
+    func showData(imgUrl:String?,imgDesc:String?) {
+        productTextLabel.text = imgDesc
+        if let title = imgDesc where title.isEmpty {
             itemSpacing.constant = 0
         }
-        guard let imageUrl = model?.image where !imageUrl.isEmpty else{
+        guard let imageUrl = imgUrl where !imageUrl.isEmpty else{
             cellHeightConstraint.constant = 0
             return
         }

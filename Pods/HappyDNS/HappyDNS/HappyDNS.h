@@ -18,5 +18,3 @@
 #import "QNRecord.h"
 #import "QNResolver.h"
 #import "QNResolverDelegate.h"
-
-#import "QNGetAddrInfo.h"

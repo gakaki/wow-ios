@@ -26,6 +26,7 @@ pod 'HidingNavigationBar', '~> 0.3.0'
 pod 'YYImage'
 pod 'IQKeyboardManagerSwift'
 
+
 #Ping++支付
 pod 'Pingpp/Alipay',:path => "pingpp-ios/Pingpp.podspec"
 pod 'Pingpp/Wx',:path => "pingpp-ios/Pingpp.podspec"

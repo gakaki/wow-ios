@@ -19,6 +19,8 @@ class WOWProductDetailAboutCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         
     }
 
@@ -41,6 +43,8 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
+        //FIX 测试数据
+        cell.pictureImageView.image = UIImage(named: "4")
         let model = dataArr?[indexPath.item]
         if let m = model {
             let url             = m.productImage ?? ""

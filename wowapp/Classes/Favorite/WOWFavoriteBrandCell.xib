@@ -46,15 +46,15 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yP1-ZZ-md4" userLabel="bottomLine">
-                        <rect key="frame" x="0.0" y="180" width="188" height="1"/>
+                        <rect key="frame" x="0.0" y="179" width="188" height="1"/>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="87Q-64-yql"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rWT-KB-sms" userLabel="rightLine">
-                        <rect key="frame" x="188" y="0.0" width="1" height="180"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="187" y="0.0" width="1" height="180"/>
+                        <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="zpI-Ai-NaT"/>
                         </constraints>
@@ -70,8 +70,8 @@
                 <constraint firstItem="yP1-ZZ-md4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SQW-r0-cuK"/>
                 <constraint firstAttribute="bottom" secondItem="rWT-KB-sms" secondAttribute="bottom" id="T6b-OU-OxZ"/>
                 <constraint firstAttribute="trailing" secondItem="ffS-g5-GO1" secondAttribute="trailing" constant="35" id="XR7-7E-Ezy"/>
-                <constraint firstAttribute="trailing" secondItem="rWT-KB-sms" secondAttribute="trailing" constant="-1" id="dpY-aW-zdt"/>
-                <constraint firstAttribute="bottom" secondItem="yP1-ZZ-md4" secondAttribute="bottom" constant="-1" id="eOV-nu-2HF"/>
+                <constraint firstAttribute="trailing" secondItem="rWT-KB-sms" secondAttribute="trailing" id="dpY-aW-zdt"/>
+                <constraint firstAttribute="bottom" secondItem="yP1-ZZ-md4" secondAttribute="bottom" id="eOV-nu-2HF"/>
                 <constraint firstItem="YGS-iV-QEW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="eSY-MS-3Fq"/>
                 <constraint firstItem="YGS-iV-QEW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="h2v-8x-s2L"/>
                 <constraint firstAttribute="bottom" secondItem="SiY-I1-EkF" secondAttribute="bottom" constant="21" id="hcs-pA-Nci"/>

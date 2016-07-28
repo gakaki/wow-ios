@@ -14,7 +14,7 @@ protocol SearchResultDelegate:class{
 
 class WOWSearchResultController: WOWBaseTableViewController {
     var resultArr = [WOWBrandModel]()
-    var delegate  : SearchResultDelegate?
+    weak var delegate  : SearchResultDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
     }

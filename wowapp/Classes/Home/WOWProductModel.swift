@@ -10,10 +10,20 @@ import UIKit
 import ObjectMapper
 
 class WOWProductModel: WOWBaseModel,Mappable{
-    var productID:String?
-    var productName:String?
-    var productX:String?
-    var productY:String?
+    var productID             : String?
+    var primaryImgs           : Array<String>?
+    var productName           : String?
+    var sellPrice             : Double?
+    var sellingPoint          : String?
+    var brandCname            : String?
+    var brandLogoImg          : String?
+    var designerName          : String?
+    var designerPhoto         : String?
+    var firstNonPrimaryImgUrl : String?
+    var firstNonPrimaryImgDesc: String?
+    var detailDescription     : String?
+    var productParameter      : WOWParameter?
+    
     
     var productDes      : String?
     var productShortDes : String?
@@ -28,8 +38,6 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var comments_count  : Int?
     var comments        : [WOWCommentListModel]?
     var likesCount      : Int?
-//    var likesList       : []
-//    var favorites_count : Int?
     var user_isLike     : String?
     
     var designer_url    : String?
@@ -52,11 +60,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     }
     
     func mapping(map: Map) {
-        productID       <- map["id"]
-        productName     <- map["name"]
-        productX        <- map["x"]
-        productY        <- map["y"]
-        
+
         productDes      <- map["description"]
         productShortDes <- map["description_short"]
         productImage    <- map["image"]
@@ -78,6 +82,24 @@ class WOWProductModel: WOWBaseModel,Mappable{
         pics_carousel   <- map["pics_carousel"]
         user_isLike     <- map["user_like"]
         designer_image  <- map["designer_image"]
+        
+        /*************************新版Map***********************/
+        productID               <- map["id"]
+        primaryImgs             <- map["primaryImgs"]
+        productName             <- map["productName"]
+        sellPrice               <- map["sellPrice"]
+        sellingPoint            <- map["sellingPoint"]
+        brandCname              <- map["brandCname"]
+        brandLogoImg            <- map["brandLogoImg"]
+        designerName            <- map["designerName"]
+        designerPhoto           <- map["designerPhoto"]
+        firstNonPrimaryImgUrl   <- map["firstNonPrimaryImgUrl"]
+        firstNonPrimaryImgDesc  <- map["firstNonPrimaryImgDesc"]
+        detailDescription       <- map["detailDescription"]
+        productParameter        <- map["productParameter"]
+        
+    
+        
     }
     
     /// 商品列表瀑布流需要用的高度

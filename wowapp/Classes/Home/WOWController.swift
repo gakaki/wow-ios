@@ -55,7 +55,10 @@ class WOWController: WOWBaseViewController {
 
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
-       
+        view.jsButton.addTarget(self, action: #selector(jsClick), forControlEvents: .TouchUpInside)
+        view.dgButton.addTarget(self, action: #selector(dgClick), forControlEvents: .TouchUpInside)
+        view.zdButton.addTarget(self, action: #selector(zdClick), forControlEvents: .TouchUpInside)
+        view.sjButton.addTarget(self, action: #selector(sjClick), forControlEvents: .TouchUpInside)
         return view
     }()
 
@@ -100,8 +103,17 @@ class WOWController: WOWBaseViewController {
     }
     
 //MARK:Actions
-    func tapHandler() -> Void {
-        print("jiashi")
+    func jsClick() -> Void {
+        print("家什")
+    }
+    func dgClick() -> Void {
+        print("灯光")
+    }
+    func zdClick() -> Void {
+        print("装点")
+    }
+    func sjClick() -> Void {
+        print("食居")
     }
     
 //MARK:Private Networkr
@@ -196,6 +208,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         hidingNavBarManager?.shouldScrollToTop()
         return true
     }
+
 
     
 }

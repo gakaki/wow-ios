@@ -9,17 +9,51 @@
 import UIKit
 
 class WOWFavoriteController: WOWBaseViewController {
-    var menuView:WOWTopMenuTitleView!
-     @IBOutlet var collectionView: UICollectionView!
+    var pageMenu:CAPSPageMenu?
+    var controllerArray : [UIViewController] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        let productVC = UIStoryboard.initialViewController("Favorite", identifier:String(WOWFavProduct)) as! WOWFavProduct
+        productVC.title = "单品"
+        
+        productVC.parentNavigationController = self.navigationController
+        let brandVC = UIStoryboard.initialViewController("Favorite", identifier:String(WOWFavBrand)) as! WOWFavBrand
+        brandVC.title = "品牌"
+        brandVC.parentNavigationController = self.navigationController
+
+        let designerVC = UIStoryboard.initialViewController("Favorite", identifier:String(WOWFavDesigner)) as! WOWFavDesigner
+        designerVC.title = "设计师"
+        designerVC.parentNavigationController = self.navigationController
+
+        controllerArray.append(productVC)
+        controllerArray.append(brandVC)
+        controllerArray.append(designerVC)
+        
+        let parameters: [CAPSPageMenuOption] = [
+            .ScrollMenuBackgroundColor(UIColor.whiteColor()),
+            .MenuHeight(40),
+            .MenuMargin((MGScreenWidth - 240)/3),
+            .MenuItemWidth(60),
+            .SelectionIndicatorColor(UIColor.blackColor()),
+            .SelectedMenuItemLabelColor(UIColor.blackColor()),
+            .MenuItemSeparatorPercentageHeight(0.1),
+        ]
+        
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
+
+        self.view.addSubview(pageMenu!.view)
+
         
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.hidden = true
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+            
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -36,77 +70,7 @@ class WOWFavoriteController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        configCheckView()
-        configCollectionView()
-
-    }
-    lazy var layout:CollectionViewWaterfallLayout = {
-        let l = CollectionViewWaterfallLayout()
-        l.columnCount = 2
-        l.minimumColumnSpacing = 0.5
-        l.minimumInteritemSpacing = 0.5
-        l.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1)
-        return l
-    }()
-    private func configCollectionView(){
-        collectionView.collectionViewLayout = self.layout
-        collectionView.registerNib(UINib.nibName(String(WOWFavoritrSingleCell)), forCellWithReuseIdentifier:String(WOWFavoritrSingleCell))
-        WOWBorderColor(collectionView)
-
-    }
-    
-
-    private func configCheckView(){
-        WOWCheckMenuSetting.defaultSetUp()
-        WOWCheckMenuSetting.margin = 40
-        WOWCheckMenuSetting.titleFont = UIFont.systemScaleFontSize(14)
-        WOWCheckMenuSetting.fill = true
-
-        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.w, 40), titles: ["单品","品牌","设计师"])
-        menuView.delegate = self
-        menuView.addBorderBottom(size:0.5, color:BorderColor)
-        self.view.addSubview(menuView)
     }
 
-  
-    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
-        let view = NSBundle.mainBundle().loadNibNamed(String(FavoriteEmpty), owner: self, options: nil).last as! FavoriteEmpty
-
-        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
-            
-        return view
-    }
-
-    
-    func goStore() -> Void {
-        print("去逛逛")
-    }
 }
-extension WOWFavoriteController:UICollectionViewDelegate,UICollectionViewDataSource{
 
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  0
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoritrSingleCell), forIndexPath: indexPath) as! WOWFavoritrSingleCell
-        cell.imageView.image = UIImage(named: "favoritrEmpty")
-        return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.row)
-    }
-}
-extension WOWFavoriteController:CollectionViewWaterfallLayoutDelegate{
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWFavoritrSingleCell.itemWidth,WOWFavoritrSingleCell.itemWidth)
-    }
-}
-//MARK:Delegate
-extension WOWFavoriteController:TopMenuProtocol{
-    func topMenuItemClick(index: Int) {
-        DLog("\(index)")
-    }
-}

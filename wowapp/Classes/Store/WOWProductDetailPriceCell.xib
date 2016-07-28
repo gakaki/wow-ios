@@ -45,7 +45,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="actualPriceLabel" destination="e2a-qC-F5G" id="K7l-ad-az2"/>
+                <outlet property="actualPriceLabel" destination="e2a-qC-F5G" id="8KF-AO-U1f"/>
                 <outlet property="nameLabel" destination="Txr-pI-ItL" id="2g1-dr-SZu"/>
                 <outlet property="originalPriceLabel" destination="Fd3-i3-Ffm" id="rWF-js-4y5"/>
             </connections>

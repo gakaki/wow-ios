@@ -96,7 +96,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     }
     
     func request(){
-        
+
     }
     
     func loadMore() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */; };
 		069056DF1D36665B00A851F9 /* WOWGuideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069056DE1D36665B00A851F9 /* WOWGuideController.swift */; };
 		069056E11D36666F00A851F9 /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069056E01D36666F00A851F9 /* WOWController.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
@@ -286,6 +287,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayGroupBy.swift; sourceTree = "<group>"; };
 		069056DE1D36665B00A851F9 /* WOWGuideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGuideController.swift; sourceTree = "<group>"; };
 		069056E01D36666F00A851F9 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
@@ -924,6 +926,7 @@
 				29FF25DF1CFDA86300DF2A9B /* UIApplication+Add.swift */,
 				29D5EC341D0125640001266C /* UIFont+Add.swift */,
 				06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */,
+				0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */,
 			);
 			path = WowExtension;
 			sourceTree = "<group>";
@@ -1800,6 +1803,7 @@
 				29FF26641CFDA86300DF2A9B /* WOWSearchBarView.swift in Sources */,
 				29FF26801CFDA86300DF2A9B /* PageControllerDataSource.swift in Sources */,
 				29DD40EB1D018C07002507EC /* WOWProductDetailAboutCell.swift in Sources */,
+				0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */,
 				29FF26871CFDA86300DF2A9B /* WOWDropMenuColumn.swift in Sources */,
 				29FF26C01CFDA86300DF2A9B /* WOWOrderCommentController.swift in Sources */,
 				29FF26911CFDA86300DF2A9B /* WOWBrandHomeController.swift in Sources */,

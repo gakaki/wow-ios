@@ -187,8 +187,9 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist,.Api_Home_Banners:
+        case .Api_BrandList,.Api_Addresslist,.Api_Home_Banners:
             return .GET
+
         default:
             return .POST
         }

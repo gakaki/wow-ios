@@ -13,9 +13,9 @@ class WOWBrandListController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //数据集合
-    var originalArray = [WOWBrandModel]()
+    var originalArray   = [WOWBrandV1Model]()
     //数据源
-    var dataArray = [[WOWBrandModel]]()
+    var dataArray       = [[WOWBrandV1Model]]()
     //有使用Search Controller时，显示的数据源
     var filteredArray = [WOWBrandModel]()
     override func viewDidLoad() {
@@ -85,16 +85,25 @@ class WOWBrandListController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandList, successClosure: { [weak self](result) in
             if let strongSelf = self{
-                let dict        = JSON(result).dictionary
-                if let dataDcit = dict{
-                    for letter in strongSelf.headerIndexs{
-                        let arrary    = dataDcit[letter]?.arrayObject
-                        let letterArr = Mapper<WOWBrandModel>().mapArray(arrary)
-                        if let retArr = letterArr{
-                            strongSelf.dataArray.append(retArr)
-                            strongSelf.originalArray.appendContentsOf(retArr)
+                
+                let arr        = JSON(result).arrayObject
+     
+                if let dataArr = arr{
+                    
+                    let brands  = Mapper<WOWBrandV1Model>().mapArray(dataArr)
+                    
+                    //循环所有的然后给分组
+                      for letter in strongSelf.headerIndexs{
+                        let group_row    = brands!.filter{ (brand) in brand.letter == letter }
+                        for row in group_row {
+                            row.image = "http://wowdsgn.com/\(row.image)"
+                            row.url = "http://wowdsgn.com/\(row.url)"
                         }
+                        strongSelf.dataArray.append(group_row)
+                        strongSelf.originalArray.appendContentsOf(group_row)
                     }
+
+                    
                     strongSelf.tableView.reloadData()
                 }
             }
@@ -158,7 +167,7 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension WOWBrandListController:SearchResultDelegate{
-    func searchResultSelect(model: WOWBrandModel) {
+    func searchResultSelect(model: WOWBrandV1Model) {
 //        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
         searchController.active = false
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
@@ -175,12 +184,15 @@ extension WOWBrandListController:UISearchResultsUpdating,UISearchBarDelegate{
         }
         //根据searchString进行过滤
         let arr = originalArray.filter { (model) -> Bool in
-            if model.name?.rangeOfString(text) != nil{
+            if model.brandEname?.rangeOfString(text) != nil{
+                return true
+            }else if model.name?.rangeOfString(text) != nil{
                 return true
             }else{
                 return false
             }
         }
+        
         let resultVC = searchController.searchResultsController as! WOWSearchResultController
 //        let  resultVC = nav.topViewController as! WOWSearchResultController
         resultVC.resultArr = arr

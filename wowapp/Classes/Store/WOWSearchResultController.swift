@@ -9,12 +9,13 @@
 import UIKit
 
 protocol SearchResultDelegate:class{
-    func searchResultSelect(model:WOWBrandModel)
+    func searchResultSelect(model:WOWBrandV1Model)
 }
 
 class WOWSearchResultController: WOWBaseTableViewController {
-    var resultArr = [WOWBrandModel]()
-    weak var delegate  : SearchResultDelegate?
+
+    var resultArr = [WOWBrandV1Model]()
+    var delegate  : SearchResultDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
     }

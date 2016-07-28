@@ -13,12 +13,10 @@ import ObjectMapper
 typealias FailClosure             = (errorMsg:String?) -> ()
 typealias SuccessClosure          = (result:AnyObject) ->()
 
-
 enum RequestCode:String{
     case FailError = "40000"
     case Success = "0"      //数据请求成功
 }
-
 
 //MARK:前后端约定的返回数据结构
 class ReturnInfo: Mappable {

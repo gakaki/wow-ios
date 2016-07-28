@@ -33,3 +33,33 @@ class WOWBrandModel: WOWBaseModel,Mappable {
         pinyin   <- map["pinyin"]
     }
 }
+
+
+class WOWBrandV1Model: WOWBaseModel,Mappable {
+    var id         : String?
+    var name       : String?
+    var letter     : String?
+    var image      : String = ""
+    var url        : String?
+    var products   : [WOWProductModel]?
+    var desc       : String?
+    var brandEname     : String?
+    
+    required init?(_ map: Map) {
+        
+        
+    }
+    
+    func mapping(map: Map) {
+        id       <- map["id"]
+        letter   <- map["brandNameFirstLetter"]
+        name     <- map["brandCname"]
+        image    <- map["brandLogoImg"]
+        url      <- map["brandHomeUrl"]
+        products <- map["products"]
+        desc     <- map["brandDesc"]
+        brandEname   <- map["brandEname"]
+    }
+
+}
+

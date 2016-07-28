@@ -21,10 +21,9 @@ class WOWAddressController: WOWBaseViewController {
     var dataArr = [WOWAddressListModel]()
     var action  : WOWObjectActionClosure?
     var selectModel : WOWAddressListModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         request()
     }

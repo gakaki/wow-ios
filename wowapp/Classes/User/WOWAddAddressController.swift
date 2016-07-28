@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import JSONCodable
 
 
 class WOWAddAddressController: WOWBaseTableViewController {
@@ -20,13 +20,19 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var selectButton         : UIButton!
     private var defaultAddress:Bool         = true
     
+    var data:VoSldData                      = VoSldData()
+    
+    //选择的省索引
+    var provinceIndex = 0
+    //选择的市索引
+    var cityIndex = 0
+    //选择的县索引
+    var districtIndex = 0
+
+    
     
     var action:WOWActionClosure?
     
-    // properties
-    var cities:NSArray?
-    var districts:NSArray?
-    var provinces:NSArray?
     
     //net param
     var province:String?    = ""
@@ -43,38 +49,28 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCityData()
     }
     
+    func loadJson(){
+        if let path = NSBundle.mainBundle().pathForResource("city", ofType: "json") {
+            
+            do {
+                let json_str    = try! String(contentsOfURL: NSURL(fileURLWithPath: path), encoding: NSUTF8StringEncoding)
+                data = try! VoSldData(JSONString:json_str)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }catch {
+                print("error")
+            }
+        } else {
+            print("Invalid filename/path.")
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-
-//MARK:Private Method
-    
-    
-    private func getCityData() {
-        let dic = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("city", ofType: "plist")!)!
-        let array = Mapper<WOWSimpleSSQModel>().mapArray(JSON(dic)["RECORDS"].arrayObject)
-        print(array)
-//        let array = dic.objectForKey("RECORDS") as? NSArray
-//        for dict in array! {
-//            if (String(dict["level_type"]) == "1") {
-//                provinces?.arrayByAddingObject(dict)
-//            }
-//            if (String(dict["level_type"]) == "1") {
-//                cities?.arrayByAddingObject(dict)
-//            }
-//            if (String(dict["level_type"]) == "1") {
-//                districts?.arrayByAddingObject(dict)
-//            }
-//        }
-    
-        self.cities = self.provinces!.objectAtIndex(0).objectForKey("cities") as? NSArray
-        self.districts = cities?.objectAtIndex(0).objectForKey("areas") as? NSArray
-    }
-
     
     override func setUI() {
         super.setUI()
@@ -92,6 +88,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
                 strongSelf.saveAddress()
             }
         }
+        loadJson()
         configPicker()
         configEditData()
     }
@@ -112,7 +109,6 @@ class WOWAddAddressController: WOWBaseTableViewController {
             }else {
                 defaultAddress = false
                 selectButton.setImage(UIImage(named: "car_check"), forState: .Normal)
-
             }
         }
         
@@ -122,28 +118,52 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     private func configPicker(){
         pickerContainerView.pickerView.delegate = self
+        pickerContainerView.pickerView.dataSource = self
         pickerContainerView.cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
         pickerContainerView.sureButton.addTarget(self, action:#selector(sure), forControlEvents:.TouchUpInside)
+        
         cityTextField.inputView = pickerContainerView
     }
     
     func cancel(){
+        print("cancel")
         cityTextField.resignFirstResponder()
     }
     
     func sure() {
-        let provinceIndex   = pickerContainerView.pickerView.selectedRowInComponent(0)
-        let cityIndex       = pickerContainerView.pickerView.selectedRowInComponent(1)
-        let districtIndex   = pickerContainerView.pickerView.selectedRowInComponent(2)
-        province = self.provinces![provinceIndex].objectForKey("state") as? String
-        city = self.cities![cityIndex].objectForKey("city") as? String
-        if self.districts?.count != 0 {
-            district = self.districts![districtIndex] as? String
-        }
-        let address = (province ?? "") + (city ?? "") + (district ?? "")
-        cityTextField.text = address
         cityTextField.resignFirstResponder()
+
+        //获取选中的省
+        let province = self.data.provinces[provinceIndex]
+        
+        //获取选中的市
+        let cities      = self.data.getSubCities(province)
+        if ( cities.count <= 0) { //没有找到城市的问题其实还是需要从源头json上处理的
+            //消息显示
+            let alertController = UIAlertController(title: "出错没有找到城市",
+                                                    message: "出错没有找到城市", preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
+        let city        = cities[cityIndex]
+        
+        //获取选中的县（地区）
+        let districts   = self.data.getSubDistricts(city)
+        let district    = districts[districtIndex]
+        
+        //拼接输出消息
+//        let message = "索引：\(provinceIndex)-\(cityIndex)-\(districtIndex)\n"
+//            + "值：\(province.name) - \(city.name) - \(district.name)"
+        
+        let message = "\(province.name) - \(city.name) - \(district.name)"
+
+        
+        cityTextField.text = message
     }
+    
+
     
 //MARK:Network
     func saveAddress() {
@@ -249,75 +269,102 @@ extension WOWAddAddressController:UITextFieldDelegate{
 
 
 
+
+
 extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 3
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        
         switch (component) {
         case 0:
-            return (self.provinces != nil ? self.provinces!.count : 0)
+            return self.data.provinces.count
         case 1:
-            return (self.cities != nil ? self.cities!.count : 0)
+            let province    = self.data.provinces[provinceIndex]
+            let cities      = self.data.getSubCities(province)
+            return cities.count
         case 2:
-            return (self.districts != nil ? self.districts!.count : 0)
+            
+            let province    = self.data.provinces[provinceIndex]
+            let cities      = self.data.getSubCities(province)
+            if ( cities.count <= 0 ){
+                return 0
+            }
+            let  city       = cities[cityIndex]
+            let districts   = self.data.getSubDistricts(city)
+            return districts.count
         default:
             return 0
         }
-    }
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        let pickerLabel = UILabel()
-        pickerLabel.font = UIFont.systemFontOfSize(15)
-        pickerLabel.numberOfLines = 0
-        pickerLabel.textAlignment = .Center
-        pickerLabel.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
-        return pickerLabel
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         switch (component) {
         case 0:
-            return provinces?.objectAtIndex(row).objectForKey("state") as? String
-            
+            let province    = self.data.provinces[row]
+            return province.name
         case 1:
-            return cities?.objectAtIndex(row).objectForKey("city") as? String
+            let province    = self.data.provinces[provinceIndex]
+            let cities      = self.data.getSubCities(province)
+            let city        = cities[row]
+            return city.name
         case 2:
-            if (self.districts?.count > 0) {
-                return self.districts?.objectAtIndex(row) as? String
+            let province    = self.data.provinces[provinceIndex]
+            let cities      = self.data.getSubCities(province)
+            let city        = cities[cityIndex]
+            let districts   = self.data.getSubDistricts(city)
+            if ( districts.count > 0) {
+                let district    = districts[row]
+                return district.name
+            }else{
+                return ""
             }
         default:
             return ""
         }
-        return nil
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        //根据列、行索引判断需要改变数据的区域
+        
         switch (component) {
         case 0:
             
-            cities = provinces?.objectAtIndex(row).objectForKey("cities") as? NSArray
+            provinceIndex = row;
+            cityIndex = 0;
+            districtIndex = 0;
+            pickerView.reloadComponent(1);
+            pickerView.selectRow(0, inComponent: 1, animated: false);
             
-            // reselect 1st city
-            self.pickerContainerView.pickerView.selectRow(0, inComponent: 1, animated: true)
-            self.pickerContainerView.pickerView.reloadComponent(1)
-            self.districts = cities?.objectAtIndex(0).objectForKey("areas") as? NSArray
             // reselect 1st area
-            self.pickerContainerView.pickerView.selectRow(0, inComponent: 2, animated: true)
-            self.pickerContainerView.pickerView.reloadComponent(2)
+            
+            pickerView.reloadComponent(2);
+            pickerView.selectRow(0, inComponent: 2, animated: false);
             
         case 1:
-            self.districts = cities?.objectAtIndex(row).objectForKey("areas") as? NSArray
+            
+            cityIndex           = row;
+            districtIndex      = 0;
+            
             // reselect 1st area
-            self.pickerContainerView.pickerView.selectRow(0, inComponent: 2, animated: true)
-            self.pickerContainerView.pickerView.reloadComponent(2)
+            pickerView.reloadComponent(2);
+            pickerView.selectRow(0, inComponent: 2, animated: false);
+            
+        case 2:
+            districtIndex      = row;
         default:
             break
         }
+        
     }
+} 
 
-}
 
 extension WOWAddAddressController:UITextViewDelegate{
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {

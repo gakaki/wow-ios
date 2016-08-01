@@ -186,6 +186,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
         let model = dataArr[sender.tag]
          let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
         vc.addressModel = model
+        vc.addressEntrance     = AddressEntrance.editAddress
         vc.action = {[weak self] in
             if let strongSelf = self{
                 strongSelf.request()

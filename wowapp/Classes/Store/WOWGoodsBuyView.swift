@@ -50,10 +50,11 @@ class WOWBuyBackView: UIView {
     
 
 //MARK:Actions
-    func show() {
+    func show(isSpec: Bool) {
         backClear.frame = CGRectMake(0,self.h,self.w,self.h)
         addSubview(backClear)
         backClear.addSubview(buyView)
+        buyView.specView.hidden = isSpec
         buyView.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
@@ -103,8 +104,29 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     @IBOutlet weak var subButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
-    
-    var dataArr:[WOWProductSkuModel]?
+    @IBOutlet weak var secondCollectionView: UICollectionView!
+    @IBOutlet weak var secondCollectionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var specView: UIView!
+    let identifier = "WOWTagCollectionViewCell"
+
+    //下面显示哪个view
+    var isSpec      = Bool(false)
+    //通过颜色选规格的数组
+    var colorSpecArr : [WOWColorSpecModel]!
+    //通过规格选颜色的数组
+    var specColorArr : [WOWSpecColorModel]!
+    //所有颜色的数值
+    var colorArr    = Array<String>()
+    //所有规格的数组
+    var specArr     = Array<String>()
+    //所选颜色下标，如果为-1则没有选择颜色
+    var colorIndex  = Int(-1)
+    //所选规格下标，如果为-1则没有选择规格
+    var specIndex   = Int(-1)
+    //选择好颜色，所对应规格的数组
+    var color_SpecArr : [WOWSpecModel]?
+    //选好规格，所对应颜色的数组
+    var spec_ColorArr : [WOWColorModel]?
     
     private var skuCount:Int = 1
     private var skuPerPrice :String = ""
@@ -128,51 +150,72 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
     deinit{
         collectionView.removeObserver(self, forKeyPath: "contentSize")
+        secondCollectionView.removeObserver(self, forKeyPath: "contentSize")
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        defaultSetup()
+        countTextField.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
+        addButton.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
+        subButton.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
+        
+        defaultSetup1()
+        defaultSetup2()
+        configDefaultData()
+
     }
     
 
 //MARK:Private Method
-    func defaultSetup() {
+    func defaultSetup1() {
+        //颜色视图
         let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
-        collectionView?.registerNib(nib, forCellWithReuseIdentifier: "WOWTagCollectionViewCell")
+        collectionView?.registerNib(nib, forCellWithReuseIdentifier: identifier)
         let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
-        configDefaultData()
         collectionView?.collectionViewLayout = tagCellLayout
         collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
     }
     
+    func defaultSetup2() {
+        //规格视图
+        let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
+        secondCollectionView?.registerNib(nib, forCellWithReuseIdentifier: identifier)
+        let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
+
+        secondCollectionView?.collectionViewLayout = tagCellLayout
+        secondCollectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
+    }
+    
     func configDefaultData() {
-        if let p = WOWBuyCarMananger.sharedBuyCar.producModel{
+        if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
             
             nameLabel.text = p.productName
             perPriceLabel.text  = WOWBuyCarMananger.sharedBuyCar.skuPrice.priceFormat()
-            if p.primaryImgs?.count > 0 {
-                 goodsImageView.kf_setImageWithURL(NSURL(string:p.primaryImgs![0] ?? " ")!, placeholderImage:UIImage(named: "placeholder_product"))
-            }
            
+//            goodsImageView.kf_setImageWithURL(NSURL(string: " ")!, placeholderImage:UIImage(named: "placeholder_product"))
+            if let array = p.colorDisplayNameList {
+                colorArr = array
+            }
+            if let array = p.specNameList {
+                specArr = array
+            }
+            
+            if let array = p.colorSpecVoList {
+                colorSpecArr = array
+            }
+            if let array = p.specColorVoList{
+                specColorArr = array
+            }
 
-            skuID       = WOWBuyCarMananger.sharedBuyCar.skuID
-            skuImageUrl = p.productImage ?? ""
-            skuName     = WOWBuyCarMananger.sharedBuyCar.skuName ?? ""
-            skuPerPrice = WOWBuyCarMananger.sharedBuyCar.skuPrice
-            skuCount    = WOWBuyCarMananger.sharedBuyCar.buyCount
-            productName = p.productName ?? ""
-            productID   = p.productID ?? ""
-            dataArr = WOWBuyCarMananger.sharedBuyCar.producModel?.skus
-            let index = WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect
             collectionView.reloadData()
-            collectionView.selectItemAtIndexPath(NSIndexPath(forItem:index, inSection: 0), animated: true, scrollPosition: .None)
+
             countTextField.text = "\(skuCount)"
         }
     }
     
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
             let height = self.collectionView.collectionViewLayout.collectionViewContentSize().height
             var endHeight:CGFloat = 200
             if UIDevice.deviceType.rawValue < 2{
@@ -184,7 +227,24 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }else{
                 self.collectionViewHeight.constant = height
             }
+            DLog("颜色的collectionView的高度\(height)")
+
+            let height2 = self.secondCollectionView.collectionViewLayout.collectionViewContentSize().height
+            var endHeight2:CGFloat = 200
+            if UIDevice.deviceType.rawValue < 2{
+                endHeight2 = 130
+            }
+            
+            if height2 > endHeight2 {
+                self.secondCollectionViewHeight.constant = endHeight2
+            }else{
+                self.secondCollectionViewHeight.constant = height2
+            }
             DLog("规格的collectionView的高度\(height)")
+
+        
+        
+        
     }
 
     
@@ -220,30 +280,61 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
 //MARK: - TagCellLayout Delegate Methods
     func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat {
-        return CGFloat(50.0)
+        return CGFloat(44.0)
     }
     
     func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
-        if let arr = dataArr {
-            let item = arr[index]
-            let title = item.skuTitle ?? ""
+        if layout == collectionView?.collectionViewLayout {
+            
+                let item = colorArr[index]
+                let title = item ?? ""
+                let width = title.size(Fontlevel004).width + 50
+                return width
+            
+        }else {
+    
+            let item = specArr[index]
+            let title = item ?? ""
             let width = title.size(Fontlevel004).width + 50
             return width
+            
         }
-        return 20
+       
     }
 
     
     
 //MARK: - UICollectionView Delegate/Datasource Methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let identifier = "WOWTagCollectionViewCell"
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
-        if let arr = dataArr {
-            let item = arr[indexPath.row]
-            cell.textLabel.text = item.skuTitle
+        if collectionView.tag == 100 {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
+                let item = colorArr[indexPath.row]
+                cell.textLabel.text = item
+            if indexPath.row == colorIndex {
+                updateCellStatus(cell, selected: true)
+            }else {
+                updateCellStatus(cell, selected: false)
+            }
+            if let spec_ColorArr = spec_ColorArr {
+                let str = colorArr[indexPath.row]
+                for color in spec_ColorArr {
+                    
+                }
+            }
+
+            return cell
+        }else {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
+                let item = specArr[indexPath.row]
+                cell.textLabel.text = item
+            if indexPath.row == specIndex {
+                updateCellStatus(cell, selected: true)
+            }else {
+                updateCellStatus(cell, selected: false)
+            }
+            return cell
         }
-        return cell
+        
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -251,17 +342,80 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr == nil ? 0 : (dataArr?.count)!
+        if collectionView.tag == 100 {
+            return colorArr.count
+
+        }else {
+            return specArr.count
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let arr = dataArr {
-            let model                = arr[indexPath.item]
-            perPriceLabel.text       = model.skuPrice?.priceFormat()
-            skuPerPrice              = model.skuPrice ?? ""
-            skuName                  = model.skuTitle ?? ""
-            skuID                    = model.skuID ?? ""
+        if collectionView.tag == 100 {
+            colorIndex = indexPath.row
+                for array in colorSpecArr{
+                    if array.colorDisplayName == colorArr[indexPath.row]{
+                        color_SpecArr = array.specMapVoList
+                    }
+                }
+            if let color_SpecArr = color_SpecArr {
+                for spec in color_SpecArr {
+                    print(spec.specName)
+                    
+                }
+            }
+            self.collectionView.reloadData()
+
+            secondCollectionView.reloadData()
+            
+        }else {
+            specIndex = indexPath.row
+            for array in specColorArr{
+                if array.specName == specArr[indexPath.row]{
+                    spec_ColorArr = array.colorMapVoList
+                }
+            }
+            if let spec_ColorArr = spec_ColorArr {
+                for color in spec_ColorArr {
+                    print(color.colorDisplayName)
+                }
+            }
+            self.collectionView.reloadData()
+            
+            secondCollectionView.reloadData()
         }
+//        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWTagCollectionViewCell
+//        cell.textLabel.backgroundColor = MGRgb(3, g: 3, b: 3, alpha: 0.1)
+//        updateCellStatus(cell, selected: true)
+//          if collectionView.tag == 100 {
+//            colorIndex = indexPath.row
+//            secondCollectionView.reloadData()
+//            self.collectionView.reloadData()
+//
+//          }else {
+//            specIndex = indexPath.row
+//            secondCollectionView.reloadData()
+//            self.collectionView.reloadData()
+//        }
+
+       
     }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWTagCollectionViewCell
+        updateCellStatus(cell, selected: false)
+
+    }
+    func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
+        cell.textLabel.backgroundColor = selected ? ThemeColor : MGRgb(255, g: 255, b: 255, alpha: 1)
+
+    }
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+       
+        return true
+
+    }
+ 
+    
 }
 

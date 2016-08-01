@@ -37,7 +37,7 @@ public enum TagAlignmentType:Int {
 }
 
 public class TagCellLayout: UICollectionViewLayout {
-  
+
   var layoutInfoList = Array<TagCellLayoutInfo>()
   var lastTagPosition = CGPointZero
   var tagAlignmentType = TagAlignmentType.Left
@@ -45,7 +45,8 @@ public class TagCellLayout: UICollectionViewLayout {
   var numberOfTagsInCurrentRow = 0
   var tagsCount = 0
   var collectionViewWidth = CGFloat(0)
-  
+    
+    
   weak var delegate:TagCellLayoutDelegate?
   
   //MARK: - Init Methods
@@ -257,7 +258,7 @@ private extension TagCellLayout {
         lastTagPosition.y += layoutInfo.frame.size.height
         lastTagPosition.x = 0
       }
-      
+
       numberOfTagsInCurrentRow = moveTag ? 1 : Int(numberOfTagsInCurrentRow += 1)
       lastTagPosition.x += layoutInfo.frame.size.width
     }

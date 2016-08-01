@@ -234,7 +234,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
 
 //MARK:选择规格
     @IBAction func buyButtonClick(sender: UIButton) {
-        WOWBuyCarMananger.sharedBuyCar.producModel = self.productModel
+//        WOWBuyCarMananger.sharedBuyCar.productSpecModel = self.productModel
         WOWBuyCarMananger.sharedBuyCar.skuName     = self.productModel?.skus?.first?.skuTitle
         WOWBuyCarMananger.sharedBuyCar.buyCount    = 1
         WOWBuyCarMananger.sharedBuyCar.skuID       = self.productModel?.skus?.first?.skuID ?? ""
@@ -242,7 +242,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
-        backView.show()
+        backView.show(false)
     }
 }
 

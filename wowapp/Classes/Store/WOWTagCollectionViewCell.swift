@@ -13,17 +13,22 @@ class WOWTagCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var textLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        textLabel.borderRadius(20)
+//        textLabel.borderRadius(20)
+        textLabel.layer.borderWidth = 1
+        textLabel.layer.borderColor = UIColor.blackColor().CGColor
     }
 
-    override var selected: Bool{
-        didSet{
-            if selected {
-                textLabel.backgroundColor = ThemeColor
-            }else{
-                textLabel.backgroundColor = MGRgb(3, g: 3, b: 3, alpha: 0.1)
-            }
-        }
-    }
+//    override var selected: Bool{
+//        didSet{
+//            if selected {
+//                textLabel.backgroundColor = ThemeColor
+//            }else{
+//                textLabel.backgroundColor = MGRgb(255, g: 255, b: 255, alpha: 1)
+//
+//            }
+//
+//        }
+//    
+//    }
     
 }

@@ -72,6 +72,8 @@ public enum RequestApi{
     
     case Api_ProductImgDetail(productId:String)
     
+    case Api_ProductSpec(productId:String)
+    
     case Api_PwdResetCode(mobile:String) //重置密码获取验证码
     
     case Api_Register(account:String,password:String,captcha:String)
@@ -129,6 +131,8 @@ extension RequestApi:TargetType{
             return URL_product_detail
         case .Api_ProductImgDetail:
             return URL_Product_imageDetail
+        case .Api_ProductSpec:
+            return URL_ProductSpec
         case .Api_BrandList:
             return URL_BrandList
         case .Api_BrandDetail:
@@ -194,7 +198,7 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist,Api_BrandList,.Api_Home_Banners,.Api_LikeBrand,.Api_ProductDetail,.Api_ProductImgDetail:
+        case .Api_Addresslist,Api_BrandList,.Api_Home_Banners,.Api_LikeBrand,.Api_ProductDetail,.Api_ProductImgDetail,.Api_ProductSpec:
             return .GET
 
         default:
@@ -221,6 +225,8 @@ extension RequestApi:TargetType{
             case let .Api_ProductDetail(productId):
                 params = ["productId":productId]
             case let .Api_ProductImgDetail(productId):
+                params = ["productId":productId]
+            case let .Api_ProductSpec(productId):
                 params = ["productId":productId]
             case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):
                 params = ["uid":uid,"product_id":product_id,"type":type,"is_delete":is_delete,"scene_id":scene_id]

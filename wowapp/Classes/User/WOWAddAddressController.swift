@@ -8,7 +8,10 @@
 
 import UIKit
 import JSONCodable
-
+enum AddressEntrance {
+    case addAddress
+    case editAddress
+}
 
 class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var nameTextField        : UITextField!
@@ -21,6 +24,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     private var defaultAddress:Bool         = true
     
     var data:VoSldData                      = VoSldData()
+    var addressEntrance:AddressEntrance            = .addAddress
     
     //选择的省索引
     var provinceIndex = 0
@@ -74,7 +78,12 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     override func setUI() {
         super.setUI()
-        navigationItem.title = "新增收货地址"
+        switch addressEntrance {
+        case .addAddress:
+            navigationItem.title = "新增收货地址"
+        case .editAddress:
+            navigationItem.title = "编辑收货地址"
+        }
         navigationItem.leftBarButtonItems = nil
         tableView.keyboardDismissMode = .OnDrag
         tableView.tableFooterView = footView
@@ -163,7 +172,14 @@ class WOWAddAddressController: WOWBaseTableViewController {
         cityTextField.text = message
     }
     
-
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.font = UIFont.systemFontOfSize(15)
+        pickerLabel.numberOfLines = 0
+        pickerLabel.textAlignment = .Center
+        pickerLabel.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+        return pickerLabel
+    }
     
 //MARK:Network
     func saveAddress() {

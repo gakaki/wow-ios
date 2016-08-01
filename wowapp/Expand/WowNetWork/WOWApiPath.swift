@@ -49,6 +49,8 @@ let URL_SubmitComment           = "comment/add"
 //2.5评论列表
 let URL_CommentList             = "comment"
 
+let URL_ProductSpec             = "product/spec"    //选择产品颜色规格
+
 //2.6收藏
 let URL_Favorite                = "like/do"
 

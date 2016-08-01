@@ -90,6 +90,8 @@ class WOWBuyCarController: WOWBaseViewController {
         addObservers()
     }
     
+
+
     
 //MARK:Lazy
     lazy var backView:WOWBuyBackView = {
@@ -124,50 +126,23 @@ class WOWBuyCarController: WOWBaseViewController {
         endButton.setTitle("去结算", forState:.Normal)
         endButton.tintColor = UIColor.clearColor()
         
-        configNav()
+
         configTable()
     }
     
     
     private func configTable(){
         tableView.registerNib(UINib.nibName(String(WOWBuyCarNormalCell)), forCellReuseIdentifier:cellNormalID)
-        tableView.registerNib(UINib.nibName(String(WOWBurCarEditCell)), forCellReuseIdentifier:cellEditID)
-        tableView.clearRestCell()
+
     }
     
-    private func configNav(){
-        navigationItem.title = "购物车"
-        makeCustomerImageNavigationItem("close", left:true) {[weak self] in
-            if let strongSelf = self{
-                strongSelf.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
-        rightItemButton = UIButton(type: .System)
-        rightItemButton.contentHorizontalAlignment = .Right
-        rightItemButton.frame = CGRectMake(0, 0, 60, 32)
-        rightItemButton.setTitle("编辑", forState:.Normal)
-        rightItemButton.setTitleColor(UIColor.blackColor(), forState:.Normal)
-        rightItemButton.titleLabel?.font = Fontlevel002
-        rightItemButton.addTarget(self, action: #selector(editButtonClick), forControlEvents:.TouchUpInside)
-        let rightItem = UIBarButtonItem(customView:rightItemButton)
-        self.navigationItem.rightBarButtonItem = rightItem
-    }
     
     private func updateCarCountBadge(){
         WOWBuyCarMananger.updateBadge()
         NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
     }
     
-//MARK:Actions
-    func editButtonClick() {
-        isEditing = !isEditing
-        let title = isEditing ? "完成" : "编辑"
-        rightItemButton.setTitle(title, forState:.Normal)
-        allButton.selected = false
-        selectedArr = []
-        tableView.reloadData()
-        
-    }
+
     
 //MARK:结算
     @IBAction func endButtonClick(sender: UIButton) {
@@ -605,12 +580,12 @@ extension WOWBuyCarController:CarEditCellDelegate{
         WOWBuyCarMananger.sharedBuyCar.skuPrice = model.skuProductPrice
         WOWBuyCarMananger.sharedBuyCar.skuID = model.skuID
         WOWBuyCarMananger.sharedBuyCar.buyCount = model.skuProductCount
-        WOWBuyCarMananger.sharedBuyCar.producModel = productModel
+//        WOWBuyCarMananger.sharedBuyCar.producModel = productModel
         WOWBuyCarMananger.sharedBuyCar.skuName = model.skuName
         backView.buyView.configDefaultData()
         navigationController?.view.addSubview(backView)
         navigationController?.view.bringSubviewToFront(backView)
-        backView.show()
+        backView.show(true)
     }
     
     

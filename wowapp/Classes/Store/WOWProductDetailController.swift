@@ -12,7 +12,8 @@ class WOWProductDetailController: WOWBaseViewController {
     //Param
     var productID:String?
     var productModel                    : WOWProductModel?
-    private(set) var numberSections = 0
+    var productSpecModel                : WOWProductSpecModel?
+    private(set) var numberSections = 5
     
     //UI
     @IBOutlet weak var tableView: UITableView!
@@ -38,13 +39,14 @@ class WOWProductDetailController: WOWBaseViewController {
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
+        
         NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWGoodsSureBuyNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        productID = "15"
+        productID = "104"
         request()
     }
 
@@ -98,6 +100,13 @@ class WOWProductDetailController: WOWBaseViewController {
 //            action()
 //        }
     }
+    //MARK:购物车
+    @IBAction func carEntranceButton(sender: UIButton) {
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+        vc.hideNavigationBar = false
+        navigationController?.pushViewController(vc, animated: true)
+
+    }
     
     //MARK:登录成功回调
     func loginSucces(){
@@ -112,12 +121,12 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:立即购买
     @IBAction func buyClick(sender: UIButton) {
-        
+        chooseStyle(true)
     }
     
     //MARK:放入购物车
     @IBAction func addCarClick(sender: UIButton) {
-        
+        chooseStyle(true)
     }
     
     //MARK:分享
@@ -152,9 +161,9 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     
 
-    //MARK:选择规格
-    func chooseStyle() {
-        WOWBuyCarMananger.sharedBuyCar.producModel      = self.productModel
+    //MARK:选择规格,有两种视图，如果ture，下面没有收藏和分享，如果false，下面有
+    func chooseStyle(isSpec: Bool) {
+        WOWBuyCarMananger.sharedBuyCar.productSpecModel      = self.productSpecModel
         WOWBuyCarMananger.sharedBuyCar.skuName          = self.productModel?.skus?.first?.skuTitle
         WOWBuyCarMananger.sharedBuyCar.buyCount         = 1
         WOWBuyCarMananger.sharedBuyCar.skuID            = self.productModel?.skus?.first?.skuID ?? ""
@@ -162,7 +171,7 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
-        backView.show()
+        backView.show(isSpec)
     }
     
     @IBAction func backClick(sender: UIButton) {
@@ -186,7 +195,26 @@ class WOWProductDetailController: WOWBaseViewController {
                 strongSelf.endRefresh()
             }
         }
+        requestProductSpec()
+        
+        
     }
+    
+    func requestProductSpec() -> Void {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductSpec(productId: productID ?? ""), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(result)
+                print(strongSelf.productSpecModel)
+                
+            }
+        }) {[weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+
+    }
+    
     
 }
 

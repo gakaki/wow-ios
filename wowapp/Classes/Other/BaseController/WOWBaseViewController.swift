@@ -52,6 +52,9 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
         if hideNavigationBar {
             //设置导航栏透明
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }else {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+
         }
     }
     

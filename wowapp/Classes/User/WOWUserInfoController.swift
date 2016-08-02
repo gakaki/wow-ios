@@ -223,7 +223,6 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         picker.dismissViewControllerAnimated(true, completion: nil)
         
         let data = UIImageJPEGRepresentation(image,0.5)
-        
         WOWHud.showLoading()
        
   
@@ -237,8 +236,11 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
             cancellationSignal: nil
         )
         
+        
         let hashids                 = Hashids(salt:FCUUID.uuidForDevice())
+        let mobile                  = WOWUserManager.userMobile;
         let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
+//        let qiniu_key               = "user/avatar/13621822254"
         let qiniu_token_url         = "\(BaseUrl)qiniutoken"
         Alamofire.request(.POST,qiniu_token_url, parameters: ["file_path": qiniu_key])
         .response { request, response, data, error in
@@ -246,9 +248,13 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                 print(response)
                 print(data)
                 print(error)
+            
+            self.headImageView.image =  image
+
             if (( error ) != nil){
                 WOWHud.dismiss()
             }
+            
             
         }.responseString { (str) in
             print(str.result)
@@ -258,7 +264,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
             
             qm.putData(
                 data,
-                key:   nil,
+                key:   qiniu_key,
                 token: token,
                 complete: { ( info, key, resp) in
                     
@@ -276,7 +282,8 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         print(self.headImageUrl)
                         self.request()
                     }
-                    
+                    self.headImageView.image =  image
+
                 },
                 option: uploadOption
             )

@@ -35,6 +35,25 @@ class WOWProductSpecModel: WOWBaseModel,Mappable {
         
     }
 }
+class WOWColorNameModel: WOWBaseModel {
+    var colorDisplayName                   : String
+    var isSelect                           : Bool
+     init(colorDisplayName: String,isSelect: Bool) {
+        self.colorDisplayName = colorDisplayName
+        self.isSelect = isSelect
+    }
+    
+}
+
+class WOWSpecNameModel: WOWBaseModel {
+    var specName                           : String
+    var isSelect                           : Bool
+    init(specName: String,isSelect: Bool) {
+        self.specName = specName
+        self.isSelect = isSelect
+    }
+    
+}
 
 class WOWColorSpecModel: WOWBaseModel,Mappable {
     var colorDisplayName                   : String?
@@ -69,12 +88,12 @@ class WOWSpecModel: WOWBaseModel,Mappable {
     
 }
 class WOWProductInfoModel: WOWBaseModel,Mappable {
-    var subProductId                        : String?
+    var subProductId                        : Int?
     var productColorImg                     : String?
     var sizeText                            : String?
-    var weight                              : String?
+    var weight                              : Int?
     var sellPrice                           : Double?
-    var availableStock                      : String?
+    var availableStock                      : Int?
     var hasStock                            : Bool?
     
     required init?(_ map: Map) {

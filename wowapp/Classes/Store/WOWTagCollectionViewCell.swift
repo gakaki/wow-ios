@@ -15,7 +15,7 @@ class WOWTagCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
 //        textLabel.borderRadius(20)
         textLabel.layer.borderWidth = 1
-        textLabel.layer.borderColor = UIColor.blackColor().CGColor
+        textLabel.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
     }
 
 //    override var selected: Bool{

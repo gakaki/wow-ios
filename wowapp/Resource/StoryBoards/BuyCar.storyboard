@@ -30,10 +30,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z6e-3O-4Cr">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Z6e-3O-4Cr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="t5S-nt-7u6" id="X6y-we-0vg"/>
                                     <outlet property="delegate" destination="t5S-nt-7u6" id="qpm-Be-Zma"/>
@@ -55,7 +54,7 @@
                                         <state key="normal" title="全选" image="car_check">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="checked"/>
+                                        <state key="selected" image="select"/>
                                         <connections>
                                             <action selector="allButtonClick:" destination="t5S-nt-7u6" eventType="touchUpInside" id="tLv-zz-3Ew"/>
                                         </connections>
@@ -97,7 +96,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="k6y-vj-XDz" secondAttribute="bottom" id="1EY-Wr-UWb"/>
                                     <constraint firstItem="MHI-be-nCo" firstAttribute="centerY" secondItem="ccY-3m-yCX" secondAttribute="centerY" id="8f1-h5-Lws"/>
@@ -432,6 +431,6 @@
     <resources>
         <image name="car_check" width="16" height="16"/>
         <image name="car_paysuccess" width="44" height="44"/>
-        <image name="checked" width="16" height="16"/>
+        <image name="select" width="16" height="17"/>
     </resources>
 </document>

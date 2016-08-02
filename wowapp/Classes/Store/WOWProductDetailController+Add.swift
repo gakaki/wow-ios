@@ -171,7 +171,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             b.setTitleColor(UIColor.blackColor(), forState:.Normal)
             b.titleLabel?.font = Fontlevel002
             b.addBorder(width: 1, color: UIColor.blackColor())
-            b.addTarget(self, action:#selector(chooseStyle), forControlEvents:.TouchUpInside)
+            b.addTarget(self, action:#selector(chooseSpec), forControlEvents:.TouchUpInside)
+
             v.addSubview(b)
             b.snp_makeConstraints(closure: {[weak self](make) in
                 if let _ = self{
@@ -193,6 +194,11 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         default:
             return nil
         }
+    }
+    
+    //选择规格
+    func chooseSpec() {
+        chooseStyle(carEntrance.SpecEntrance)
     }
 }
 

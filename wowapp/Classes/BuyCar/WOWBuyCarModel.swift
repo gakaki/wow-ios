@@ -43,6 +43,57 @@ class WOWBuyCarModel: Object,Mappable{
         self.init()
     }
 }
+class WOWCarModel: WOWBaseModel,Mappable {
+    var totalPrice                          : NSNumber?
+    var shoppingCartResult                  : [WOWCarProductModel]?
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        totalPrice                            <- map["totalPrice"]
+        shoppingCartResult                    <- map["shoppingCartResult"]
+        
+    }
+    
+}
 
+class WOWCarProductModel: WOWBaseModel,Mappable {
+    var shoppingCartId                      : Int?
+    var productId                           : Int?
+    var productName                         : String?
+    var sellPrice                           : NSNumber?
+    var productQty                          : Int?
+    var sellTotalAmount                     : NSNumber?
+    var productStock                        : Int?
+    var color                               : String?
+    var specImg                             : String?
+    var productStatus                       : String?
+    var productStatusName                   : String?
+    var isSelected                          : Bool?
+    var specName                            : String?
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        shoppingCartId                       <- map["shoppingCartId"]
+        productId                            <- map["productId"]
+        productName                          <- map["productName"]
+        sellPrice                            <- map["sellPrice"]
+        productQty                           <- map["productQty"]
+        sellTotalAmount                      <- map["sellTotalAmount"]
+        productStock                         <- map["productStock"]
+        color                                <- map["color"]
+        specImg                              <- map["specImg"]
+        productStatus                        <- map["productStatus"]
+        productStatusName                    <- map["productStatusName"]
+        isSelected                           <- map["isSelected"]
+        specName                             <- map["specName"]
+    }
+    
+}
 
 

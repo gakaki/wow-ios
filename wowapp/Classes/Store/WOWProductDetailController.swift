@@ -115,18 +115,25 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:确定购买回调
     func sureButton(nf:NSNotification)  {
+        let productInfo = nf.object as! WOWProductInfoModel
+        print(productInfo.weight, productInfo.sizeText, productInfo.subProductId, productInfo.sellPrice)
         
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CarAdd(productId:productInfo.subProductId ?? 0, productQty:1), successClosure: { (result) in
+            
+            }) { (errorMsg) in
+                
+        }
     }
     
     
     //MARK:立即购买
     @IBAction func buyClick(sender: UIButton) {
-        chooseStyle(true)
+        chooseStyle(carEntrance.PayEntrance)
     }
     
     //MARK:放入购物车
     @IBAction func addCarClick(sender: UIButton) {
-        chooseStyle(true)
+        chooseStyle(carEntrance.AddEntrance)
     }
     
     //MARK:分享
@@ -162,7 +169,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
 
     //MARK:选择规格,有两种视图，如果ture，下面没有收藏和分享，如果false，下面有
-    func chooseStyle(isSpec: Bool) {
+    func chooseStyle(entrue: carEntrance) {
         WOWBuyCarMananger.sharedBuyCar.productSpecModel      = self.productSpecModel
         WOWBuyCarMananger.sharedBuyCar.skuName          = self.productModel?.skus?.first?.skuTitle
         WOWBuyCarMananger.sharedBuyCar.buyCount         = 1
@@ -171,7 +178,7 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
-        backView.show(isSpec)
+        backView.show(entrue)
     }
     
     @IBAction func backClick(sender: UIButton) {

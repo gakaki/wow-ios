@@ -84,7 +84,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         WOWBuyCarMananger.sharedBuyCar.chooseProducts.append(model.skuID)
         
         if WOWUserManager.loginStatus { //登录
-            saveNetBuyCar(model)
+//            saveNetBuyCar(model)
         }else{
             //存入本地数据库 先判断是否存在
             let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
@@ -106,24 +106,24 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     
-    private func saveNetBuyCar(model:WOWBuyCarModel){
-        let uid = WOWUserManager.userID
-        let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName]]
-        let param = ["uid":uid,"cart":carItems,"tag":"0"]
-        let string = JSONStringify(param)
-        WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-                let json = JSON(result)
-                DLog(json)
-                WOWHud.showMsg("添加购物车成功")
-                let carCount = json["productcount"].int ?? 0
-                WOWUserManager.userCarCount = carCount
-                strongSelf.updateCarBadge()
-            }
-        }) { (errorMsg) in
-            WOWHud.showMsg("添加购物车失败")
-        }
-    }
+//    private func saveNetBuyCar(model:WOWBuyCarModel){
+//        let uid = WOWUserManager.userID
+//        let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName]]
+//        let param = ["uid":uid,"cart":carItems,"tag":"0"]
+//        let string = JSONStringify(param)
+//        WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
+//            if let strongSelf = self{
+//                let json = JSON(result)
+//                DLog(json)
+//                WOWHud.showMsg("添加购物车成功")
+//                let carCount = json["productcount"].int ?? 0
+//                WOWUserManager.userCarCount = carCount
+//                strongSelf.updateCarBadge()
+//            }
+//        }) { (errorMsg) in
+//            WOWHud.showMsg("添加购物车失败")
+//        }
+//    }
     
     
     func updateCarBadge(){
@@ -242,7 +242,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
-        backView.show(false)
+        backView.show(carEntrance.PayEntrance)
     }
 }
 

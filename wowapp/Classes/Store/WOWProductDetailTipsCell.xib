@@ -29,7 +29,7 @@
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccF-me-4tS">
                         <rect key="frame" x="15" y="47" width="290" height="351"/>
-                        <mutableString key="text">退换货规：除定制产品、特价产品外，尖叫设计所售产品均提供7天退换货服务。
+                        <string key="text">退换货规：除定制产品、特价产品外，尖叫设计所售产品均提供7天退换货服务。
 
 商品质量：尖叫设计所售商品均为原创正品，如遇商品签收后发现质量问题，请您签收后24小时内拍照取证并向客服提出反馈，尽快联系客服申请退换货。
 
@@ -37,7 +37,7 @@
 
 配送时间：客户下单后我们将在72小时内发货，特殊商品具体到货时间依情况有所差异，我们将在您下单后第一时间与您确认。
 
-发货范围：全国可送（除新疆、西藏、甘肃、青海） 特殊地区（香港、台湾等地）发货与内地发货的邮费计算方式不同，您可于付款前联系客服确认。</mutableString>
+发货范围：全国可送（除新疆、西藏、甘肃、青海） 特殊地区（香港、台湾等地）发货与内地发货的邮费计算方式不同，您可于付款前联系客服确认。</string>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

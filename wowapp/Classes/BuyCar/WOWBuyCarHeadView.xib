@@ -18,7 +18,7 @@
                         <constraint firstAttribute="height" constant="30" id="UQc-tL-CEc"/>
                     </constraints>
                     <state key="normal" image="select"/>
-                    <state key="selected" image="checked"/>
+                    <state key="selected" image="select"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWf-ov-06Z">
                     <rect key="frame" x="220" y="13" width="24" height="24"/>
@@ -72,7 +72,6 @@
         </view>
     </objects>
     <resources>
-        <image name="checked" width="16" height="16"/>
         <image name="select" width="16" height="17"/>
     </resources>
 </document>

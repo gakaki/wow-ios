@@ -40,7 +40,7 @@ public enum RequestApi{
     
     case Api_Captcha(mobile:String) //绑定微信验证码
     
-    case Api_CarEdit(cart:String)
+    case Api_CarModify(shoppingCartId:Int, productQty:Int)
     
     case Api_CarList(cart:String)
     
@@ -49,6 +49,10 @@ public enum RequestApi{
     case Api_CarDelete(cart:String)
     
     case Api_CarCommit(car:String)
+    
+    case Api_CarAdd(productId: Int, productQty: Int)
+    
+    case Api_CarGet
     
     case Api_CommentList(pageindex:String,thingid:String,type:String)
     
@@ -143,12 +147,16 @@ extension RequestApi:TargetType{
             return URL_CommentList
         case .Api_SubmitComment:
             return URL_SubmitComment
-        case .Api_CarEdit:
-            return URL_CarEdit
+        case .Api_CarModify:
+            return URL_CarModify
         case .Api_UserUpdate:
             return URL_UpdateInfo
         case .Api_CarList:
             return URL_CarList
+        case .Api_CarAdd:
+            return URL_CarAdd
+        case .Api_CarGet:
+            return URL_CarGet
         case .Api_UserFavorite:
             return URL_FavoriteList
         case .Api_CarNologin:
@@ -198,7 +206,7 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist,Api_BrandList,.Api_Home_Banners,.Api_LikeBrand,.Api_ProductDetail,.Api_ProductImgDetail,.Api_ProductSpec:
+        case .Api_Addresslist,Api_BrandList,.Api_Home_Banners,.Api_LikeBrand,.Api_ProductDetail,.Api_ProductImgDetail,.Api_ProductSpec,.Api_CarGet:
             return .GET
 
         default:
@@ -238,8 +246,8 @@ extension RequestApi:TargetType{
                 params =  param
             case let .Api_UserFavorite(uid,type,pageindex):
                 params =  ["uid":uid,"type":type,"pageindex":pageindex]
-            case let .Api_CarEdit(cart):
-                params =  ["cart":cart]
+            case let .Api_CarModify(shoppingCartId, productQty):
+                params =  ["shoppingCartId": shoppingCartId, "productQty": productQty]
             case let .Api_CarList(cart):
                 params =  ["cart":cart]
             case let .Api_CarNologin(cart):
@@ -248,6 +256,9 @@ extension RequestApi:TargetType{
                 params =  ["cart":cart]
             case let .Api_CarCommit(cart):
                 params =  ["cart":cart]
+            case let .Api_CarAdd(productId, productQty):
+                params =  ["productId": productId, "productQty": productQty]
+            
             case let .Api_Change(param):
                 params = param
             case let .Api_Sms(type,mobile):
@@ -305,8 +316,6 @@ extension RequestApi:TargetType{
         case .Api_Sms:
             return "验证码发送成功"
         case .Api_AddressAdd:
-            return ""
-        case .Api_CarEdit:
             return ""
         case .Api_CarList,.Api_ProductList:
             return ""

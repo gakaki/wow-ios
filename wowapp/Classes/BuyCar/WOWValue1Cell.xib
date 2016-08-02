@@ -38,7 +38,7 @@
                             <constraint firstAttribute="width" constant="30" id="dbQ-Ch-H2w"/>
                         </constraints>
                         <state key="normal" image="car_check"/>
-                        <state key="selected" image="checked"/>
+                        <state key="selected" image="select"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -62,6 +62,6 @@
     </objects>
     <resources>
         <image name="car_check" width="16" height="16"/>
-        <image name="checked" width="16" height="16"/>
+        <image name="select" width="16" height="17"/>
     </resources>
 </document>

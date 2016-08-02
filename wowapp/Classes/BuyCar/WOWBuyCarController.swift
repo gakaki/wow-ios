@@ -10,37 +10,33 @@ import UIKit
 
 class WOWBuyCarController: WOWBaseViewController {
     let cellNormalID = String(WOWBuyCarNormalCell)
-    let cellEditID   = String(WOWBurCarEditCell)
-    private var editingCell     : WOWBurCarEditCell?
     private var editingModel    : WOWBuyCarModel?
-    private var rightItemButton : UIButton!
     private var totalPrice      : String?
     
-    private var dataArr = [WOWBuyCarModel](){
+    private var dataArr = [WOWCarProductModel](){
         didSet{
             if dataArr.isEmpty {
                 bottomView.hidden = true
-                rightItemButton.hidden = true
             }else{
                 bottomView.hidden = false
-                rightItemButton.hidden = false
             }
         }
     }
+
     //存放选中的数组
     private var selectedArr = [WOWBuyCarModel](){
         didSet{
-            if isEditing == false{ //不在编辑中,每选中一个就得计算价钱
-               let prices = selectedArr.map({ (model) -> String in
-                    return model.skuProductPrice
-               })
-                let counts = selectedArr.map({ (model) -> Int in
-                    return model.skuProductCount
-                })
-                let result = WOWCalPrice.calTotalPrice(prices,counts:counts)
-                totalPrice = result
-                totalPriceLabel.text = "¥ " + result
-            }
+//            if isEditing == false{ //不在编辑中,每选中一个就得计算价钱
+//               let prices = selectedArr.map({ (model) -> String in
+//                    return model.skuProductPrice
+//               })
+//                let counts = selectedArr.map({ (model) -> Int in
+//                    return model.skuProductCount
+//                })
+//                let result = WOWCalPrice.calTotalPrice(prices,counts:counts)
+//                totalPrice = result
+//                totalPriceLabel.text = "¥ " + result
+//            }
             if selectedArr.count == dataArr.count {
                 allButton.selected = true
             }else{
@@ -133,6 +129,8 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private func configTable(){
         tableView.registerNib(UINib.nibName(String(WOWBuyCarNormalCell)), forCellReuseIdentifier:cellNormalID)
+        self.tableView.backgroundColor = GrayColorLevel5
+        self.tableView.separatorColor = SeprateColor
 
     }
     
@@ -175,7 +173,7 @@ class WOWBuyCarController: WOWBaseViewController {
     private func selectAll(){
         allButton.selected = true
         selectedArr = []
-        selectedArr.appendContentsOf(dataArr)
+//        selectedArr.appendContentsOf(dataArr)
         for index in 0..<dataArr.count{
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
@@ -187,7 +185,7 @@ class WOWBuyCarController: WOWBaseViewController {
         sender.selected = !sender.selected
         if sender.selected {
             selectedArr = []
-            selectedArr.appendContentsOf(dataArr)
+//            selectedArr.appendContentsOf(dataArr)
         }else{
             selectedArr = []
         }
@@ -213,7 +211,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private func resolveBuyModel(model:WOWBuyCarModel){
         if WOWUserManager.loginStatus { //登录
-            asyncUpdate(model)
+//            asyncUpdate(model)
         }else{
             if editingModel?.skuID == model.skuID {
                 let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
@@ -248,10 +246,10 @@ class WOWBuyCarController: WOWBaseViewController {
             updateCarCountBadge()
             var exitIndex:Int = Int(dataArr.indexOf({$0 == editingModel})!)
             for (index,value) in dataArr.enumerate() {
-                if value.skuID == model.skuID{
-                    exitIndex = index
-                    break
-                }
+//                if value.skuID == model.skuID{
+//                    exitIndex = index
+//                    break
+//                }
             }
             if editingModel == dataArr[exitIndex] { //两个是同一个
                 editingModel?.skuID = model.skuID
@@ -259,7 +257,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 editingModel?.skuProductCount = model.skuProductCount
                 editingModel?.skuProductPrice = model.skuProductPrice
             }else{
-                editingModel!.skuProductCount = dataArr[exitIndex].skuProductCount + model.skuProductCount
+//                editingModel!.skuProductCount = dataArr[exitIndex].skuProductCount + model.skuProductCount
                 editingModel?.skuID = model.skuID
                 editingModel?.skuName = model.skuName
                 editingModel?.skuProductPrice = model.skuProductPrice
@@ -293,7 +291,7 @@ class WOWBuyCarController: WOWBaseViewController {
             if let strongSelf = self{
                 let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
                 if let a = array{
-                    strongSelf.dataArr.appendContentsOf(a)
+//                    strongSelf.dataArr.appendContentsOf(a)
                 }
                 strongSelf.tableView.reloadData()
                 strongSelf.selectAll()
@@ -308,11 +306,11 @@ class WOWBuyCarController: WOWBaseViewController {
     private func checkChoose(){
         //选中的model
         for (index,model) in dataArr.enumerate() {
-            let ret = WOWBuyCarMananger.sharedBuyCar.chooseProducts.contains(model.skuID)
-            if ret {
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), animated: true, scrollPosition: .None)
-                selectedArr.append(model)
-            }
+//            let ret = WOWBuyCarMananger.sharedBuyCar.chooseProducts.contains(model.skuID)
+//            if ret {
+//                tableView.selectRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), animated: true, scrollPosition: .None)
+//                selectedArr.append(model)
+//            }
         }
     }
     
@@ -321,60 +319,20 @@ class WOWBuyCarController: WOWBaseViewController {
      */
     private func asyncCarList(){
         //1.直接拉取服务器端购物车数据
-        //2.若本地有数据，那就进行同步,否则走第一步
-        let uid = WOWUserManager.userID
-        var cars = [AnyObject]()
-        var param:[String:AnyObject] = ["uid":uid]
-        let objects = WOWRealm.objects(WOWBuyCarModel)
-        if objects.count == 0 {
-            let string = JSONStringify(param)
-            WOWNetManager.sharedManager.requestWithTarget(.Api_CarList(cart:string), successClosure: {[weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(.Api_CarGet, successClosure: {[weak self](result) in
                 if let strongSelf = self{
-                    WOWHud.dismiss()
-                    let json = JSON(result)
-                    DLog(json)
-                    let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
-                    let productCount = json["productcount"].int ?? 0
-                    WOWUserManager.userCarCount = productCount
-                    strongSelf.updateCarCountBadge()
-                    if let a = array{
-                        strongSelf.dataArr.appendContentsOf(a)
-                        strongSelf.tableView.reloadData()
-                        strongSelf.selectAll()
+                    let model = Mapper<WOWCarModel>().map(result)
+                    if let arr = model?.shoppingCartResult {
+                        strongSelf.dataArr = arr
                     }
+
+                    strongSelf.updateCarCountBadge()
+                    strongSelf.tableView.reloadData()
+
                 }
                 }, failClosure: { (errorMsg) in
-                    WOWHud.dismiss()
+                    
             })
-        }else{
-            for obj in objects {
-                let dict = ["skuid":obj.skuID,"count":obj.skuProductCount,"productid":obj.productID]
-                cars.append(dict)
-            }
-            param["cart"] = cars
-            let string = JSONStringify(param)
-            WOWNetManager.sharedManager.requestWithTarget(.Api_CarList(cart:string), successClosure: { [weak self](result) in
-                if let strongSelf = self{
-                    WOWHud.dismiss()
-                    let json = JSON(result)
-                    DLog(json)
-                    let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
-                    let productCount = json["productcount"].int ?? 0
-                    WOWUserManager.userCarCount = productCount
-                    strongSelf.updateCarCountBadge()
-                    if let a = array{
-                        strongSelf.dataArr.appendContentsOf(a)
-                        try! WOWRealm.write({
-                            WOWRealm.delete(objects)
-                        })
-                        strongSelf.tableView.reloadData()
-                        strongSelf.selectAll()
-                    }
-                }
-                }, failClosure: { (errorMsg) in
-                    WOWHud.dismiss()
-            })
-        }
     }
     
     /**
@@ -409,30 +367,20 @@ class WOWBuyCarController: WOWBaseViewController {
     
     
     /**
-     4.更新购物车数据
+     4.更改购物车商品数量
      
      - parameter items:
      */
-    private func asyncUpdate(model:WOWBuyCarModel){
-        let uid = WOWUserManager.userID
-        let carItems = [["newskuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName,"oldskuid":editingModel!.skuID]]
-        let param = ["uid":uid,"cart":carItems,"tag":"1"]
-        let string = JSONStringify(param)
-        WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
+    private func asyncUpdateCount(productId: Int, productQty: Int, indexPath: NSIndexPath){
+
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CarModify(shoppingCartId:productId, productQty: productQty), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                WOWHud.showMsg("修改成功")
-                let json = JSON(result)
-                DLog(json)
-                let productCount = json["productcount"].int ?? 0
-                WOWUserManager.userCarCount = productCount
-                strongSelf.updateCarCountBadge()
-                strongSelf.dataArr = []
-                let array = Mapper<WOWBuyCarModel>().mapArray(result["cart"])
-                if let a = array{
-                    strongSelf.dataArr.appendContentsOf(a)
-                    strongSelf.tableView.reloadData()
-                }
+            
+                
+                strongSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
             }
+            
+            
         }) { (errorMsg) in
             WOWHud.showMsg("修改失败")
         }
@@ -470,65 +418,55 @@ class WOWBuyCarController: WOWBaseViewController {
 
 extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArr.count
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let model = dataArr[indexPath.row]
-        if isEditing{
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellEditID, forIndexPath: indexPath) as! WOWBurCarEditCell
-            cell.delegate = self
-            cell.showData(model)
-            return cell
-        }else{
+        let model = dataArr[indexPath.section]
+        
             let cell = tableView.dequeueReusableCellWithIdentifier(cellNormalID, forIndexPath: indexPath) as! WOWBuyCarNormalCell
             cell.showData(model)
+            cell.selectButton.tag = indexPath.section
+            cell.selectButton.addTarget(self, action: #selector(selectClick(_:)), forControlEvents: .TouchUpInside)
+            cell.subCountButton.tag = indexPath.section
+            cell.subCountButton.addTarget(self, action: #selector(subCountClick(_:)), forControlEvents: .TouchUpInside)
+            cell.addCountButton.tag = indexPath.section
+            cell.addCountButton.addTarget(self, action: #selector(addCountClick(_:)), forControlEvents: .TouchUpInside)
             return cell
-        }
+        
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let model = dataArr[indexPath.row]
-        selectedArr.append(model)
-    }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let model = dataArr[indexPath.row]
+//        selectedArr.append(model)
+//    }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let model = dataArr[indexPath.row]
-        let index = selectedArr.indexOf{
-            $0 == model
-        }
-        if let i = index {
-            selectedArr.removeAtIndex(i)
-        }
-    }
+//    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+//        let model = dataArr[indexPath.row]
+//        let index = selectedArr.indexOf{
+//            $0 == model
+//        }
+//        if let i = index {
+//            selectedArr.removeAtIndex(i)
+//        }
+//    }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return isEditing ? 128 : 108
+        return  170
     }
 
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             if WOWUserManager.loginStatus {
-                asyncCarDelete([dataArr[indexPath.row]])
-            }else{ //未登录
-                let delModel = dataArr[indexPath.row]
-                let model = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(delModel.skuID)'")
-                try! WOWRealm.write({
-                    WOWRealm.delete(model)
-                })
-                updateCarCountBadge()
-                dataArr.removeAtIndex(indexPath.row)
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                if dataArr.isEmpty {
-                    tableView.reloadData()
-                }
+//                asyncCarDelete([dataArr[indexPath.row]])
             }
         }
+        
     }
     
     func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
@@ -540,6 +478,41 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         return "删除"
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 15
+    }
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    //MARK: - cellAction 
+    func selectClick(sender: UIButton) {
+        let model = dataArr[sender.tag]
+        let select = model.isSelected ?? false
+        model.isSelected = !select
+        let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
+    
+    }
+    
+    func addCountClick(sender: UIButton) {
+        let model = dataArr[sender.tag]
+        var productQty = model.productQty!
+        productQty += 1
+        let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
+        asyncUpdateCount(model.productId!, productQty: productQty, indexPath: indexPath)
+    }
+    
+    func subCountClick(sender: UIButton) {
+        let model = dataArr[sender.tag]
+            model.productQty! -= 1
+            let count = model.productQty ?? 1
+            model.productQty = (count == 0 ? 1:count)
+        let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
+        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        
+    }
+    
+    //MARK: - EmptyData
     func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "buycar_none")
     }
@@ -555,62 +528,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 
 }
 
-extension WOWBuyCarController:CarEditCellDelegate{
-    func carEditCellAction(model:WOWBuyCarModel,cell:WOWBurCarEditCell) { //选择规格
-        editingModel                = model
-        editingCell                 = cell
-        let productModel            = WOWProductModel()
-        productModel.skus           = model.skus
-        
-        let skuTitles = model.skus.map { (model) -> String in
-            return model.skuTitle!
-        }
-        let index = skuTitles.indexOf(model.skuName)
-        var selectIndex = 0
-        if  let defaultIndex = index {
-            selectIndex = Int(defaultIndex)
-        }
-        WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = selectIndex
-        
-        productModel.productName    = model.skuProductName
-        productModel.productImage   = model.skuProductImageUrl
-        productModel.price          = model.skuProductPrice
-        productModel.productID      = model.productID
-        
-        WOWBuyCarMananger.sharedBuyCar.skuPrice = model.skuProductPrice
-        WOWBuyCarMananger.sharedBuyCar.skuID = model.skuID
-        WOWBuyCarMananger.sharedBuyCar.buyCount = model.skuProductCount
-//        WOWBuyCarMananger.sharedBuyCar.producModel = productModel
-        WOWBuyCarMananger.sharedBuyCar.skuName = model.skuName
-        backView.buyView.configDefaultData()
-        navigationController?.view.addSubview(backView)
-        navigationController?.view.bringSubviewToFront(backView)
-        backView.show(true)
-    }
-    
-    
-    func carCountChange(model: WOWBuyCarModel, cell: WOWBurCarEditCell) {
-        editingModel                = model
-        editingCell                 = cell
-        if WOWUserManager.loginStatus {
-            asyncUpdate(model)
-        }else{
-            editingCell?.countTextField.text = "\(model.skuProductCount)"
-            //存入本地数据库 先判断是否存在
-            let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
-            if let m = skus.first{
-               dispatch_async(dispatch_get_main_queue(), { 
-                    try! WOWRealm.write({
-                        m.skuProductCount = model.skuProductCount
-                    })
-                self.updateCarCountBadge()
-               })
-            }else{
 
-            }
-        }
-    }
-}
 
 
 

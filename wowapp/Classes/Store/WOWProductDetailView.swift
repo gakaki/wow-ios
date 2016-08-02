@@ -12,12 +12,10 @@ class WOWProductDetailView: UIView {
     @IBOutlet weak var productNameLabel:UILabel!
     @IBOutlet weak var productDescLabel:UILabel!
    
-
+    
     func showDataa (model:WOWProductModel) {
             productNameLabel.text = model.productName ?? ""
             productDescLabel.text = model.sellingPoint ?? ""
-
-            
     }
     
 }

@@ -21,7 +21,7 @@
                             <constraint firstAttribute="height" constant="26" id="vHS-Iz-W7h"/>
                         </constraints>
                         <state key="normal" image="car_check"/>
-                        <state key="selected" image="checked"/>
+                        <state key="selected" image="select"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B9m-ZF-cse">
                         <rect key="frame" x="49" y="15" width="80" height="80"/>
@@ -146,7 +146,7 @@
         <image name="buycar_add" width="32" height="32"/>
         <image name="buycar_sub" width="32" height="32"/>
         <image name="car_check" width="16" height="16"/>
-        <image name="checked" width="16" height="16"/>
         <image name="down_arrow" width="10" height="6"/>
+        <image name="select" width="16" height="17"/>
     </resources>
 </document>

@@ -164,7 +164,7 @@
                 <outlet property="designerContainerView" destination="crs-M2-mcG" id="RK8-UX-Ivu"/>
                 <outlet property="designerNameLabel" destination="oPC-d2-cmj" id="8Gd-RA-WDU"/>
             </connections>
-            <point key="canvasLocation" x="494" y="662.5"/>
+            <point key="canvasLocation" x="552" y="653.5"/>
         </tableViewCell>
     </objects>
 </document>

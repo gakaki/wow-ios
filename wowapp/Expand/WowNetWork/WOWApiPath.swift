@@ -66,7 +66,7 @@ let URL_activity                = "post"
 
 //*********************4.购物车**********
 // tag 为0 的时候 自增  为1的时候覆盖掉
-let URL_CarEdit                 = "cart/update"
+let URL_CarModify           = "cart/modify"
 
 let URL_CarList                 = "cart/list"
 
@@ -75,6 +75,10 @@ let URL_CarNologin              = "cart/nologinlistandadd"
 let URL_CarDelete               = "cart/del"
 
 let URL_CarCommit               = "order/commit"
+
+let URL_CarAdd                  = "cart/add"        //添加购物车
+
+let URL_CarGet                  = "cart/get"        //查询购物车列表
 
 
 //5.个人中心

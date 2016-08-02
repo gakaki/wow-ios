@@ -10,29 +10,37 @@ import UIKit
 import ObjectMapper
 
 class WOWAddressListModel: WOWBaseModel,Mappable{
-    var name        : String?
-    var city        : String?
-    var district    : String?
-    var street      : String?
-    var province    : String?
-    var mobile      : String?
-    var full_address: String?
-    var isDefault   : Int?
-    var id          : Int?
+    var name            : String?
+    var city            : String?
+    var county          : String?
+    var district        : String?
+    var street          : String?
+    var province        : String?
+    var mobile          : String?
+    var addressDetail   : String?
+    var isDefault       : Bool?
+    var id              : Int?
+    var provinceId      : Int?
+    var cityId          : Int?
+    var countyId        : Int?
     
     required init?(_ map: Map) {
         
     }
     
      func mapping(map: Map) {
-        name        <- map["receiverName"]
-        city        <- map["cityId"]
-        district    <- map["district"]
-        street      <- map["street"]
-        province    <- map["provinceId"]
-        mobile      <- map["receiverMobile"]
-        isDefault   <- map["isDefault"]
-        id          <- map["id"]
-        full_address <- map["addressDetail"]
+        name            <- map["receiverName"]
+        cityId          <- map["cityId"]
+        district        <- map["district"]
+        street          <- map["street"]
+        provinceId      <- map["provinceId"]
+        mobile          <- map["receiverMobile"]
+        isDefault       <- map["isDefault"]
+        id              <- map["id"]
+        addressDetail   <- map["addressDetail"]
+        countyId        <- map["countyId"]
+        province        <- map["provinceName"]
+        city            <- map["cityName"]
+        county          <- map["countyName"]
     }
 }

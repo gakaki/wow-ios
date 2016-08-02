@@ -7,20 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAddressCell" rowHeight="131" id="KGk-i7-Jjw" customClass="WOWAddressCell" customModule="wowapp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="131"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAddressCell" rowHeight="115" id="KGk-i7-Jjw" customClass="WOWAddressCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="130.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="114.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HuR-W8-O3R">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="116" id="hd0-RS-kSm"/>
-                        </constraints>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mby-r8-WIO">
                         <rect key="frame" x="15" y="15" width="4" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -59,6 +52,7 @@
                         <state key="normal" title="   默认地址" image="car_check">
                             <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <state key="selected" image="select"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNy-so-yyy">
                         <rect key="frame" x="258" y="86" width="50" height="18"/>
@@ -72,7 +66,7 @@
                         </state>
                     </button>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="gUs-OL-1c5" firstAttribute="top" secondItem="ZVo-ee-Dyr" secondAttribute="bottom" constant="14.5" id="00D-ge-eri"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qNz-Hn-AaS" secondAttribute="trailing" constant="60" id="8NI-RE-ntg"/>
@@ -83,18 +77,15 @@
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z1J-R2-KwA" secondAttribute="trailing" constant="10" id="W37-fP-Pb5"/>
                     <constraint firstItem="gUs-OL-1c5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XWY-rT-QaC"/>
                     <constraint firstItem="z1J-R2-KwA" firstAttribute="top" secondItem="mby-r8-WIO" secondAttribute="bottom" constant="6" id="XdJ-MM-t3I"/>
-                    <constraint firstAttribute="trailing" secondItem="HuR-W8-O3R" secondAttribute="trailing" id="d2y-Bt-1uD"/>
                     <constraint firstItem="z1J-R2-KwA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="dcc-WE-FqL"/>
                     <constraint firstItem="mby-r8-WIO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="dyE-xt-iSI"/>
-                    <constraint firstItem="HuR-W8-O3R" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fWX-Yj-3oA"/>
                     <constraint firstAttribute="trailing" secondItem="ZVo-ee-Dyr" secondAttribute="trailing" id="qfD-C8-vlo"/>
-                    <constraint firstItem="HuR-W8-O3R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="s3X-HP-7la"/>
                     <constraint firstItem="qNz-Hn-AaS" firstAttribute="leading" secondItem="mby-r8-WIO" secondAttribute="trailing" constant="15" id="wfq-98-zIg"/>
                     <constraint firstAttribute="trailing" secondItem="nNy-so-yyy" secondAttribute="trailing" constant="12" id="wp2-Te-bkS"/>
                     <constraint firstItem="mby-r8-WIO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="yQF-bc-cSu"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="checkButton" destination="gUs-OL-1c5" id="zVW-GJ-xey"/>
                 <outlet property="detailAddressLabel" destination="z1J-R2-KwA" id="h4Z-2s-f04"/>
@@ -107,5 +98,6 @@
     </objects>
     <resources>
         <image name="car_check" width="16" height="16"/>
+        <image name="select" width="16" height="17"/>
     </resources>
 </document>

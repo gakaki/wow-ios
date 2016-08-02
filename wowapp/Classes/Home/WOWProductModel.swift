@@ -10,13 +10,15 @@ import UIKit
 import ObjectMapper
 
 class WOWProductModel: WOWBaseModel,Mappable{
-    var productID             : String?
+    var productId             : String?
     var primaryImgs           : Array<String>?
     var productName           : String?
-    var sellPrice             : Double?
+    var sellPrice             : NSNumber?
     var sellingPoint          : String?
     var brandCname            : String?
+    var brandId               : Int?
     var brandLogoImg          : String?
+    var designerId            : Int?
     var designerName          : String?
     var designerPhoto         : String?
     var firstNonPrimaryImgUrl : String?
@@ -84,14 +86,16 @@ class WOWProductModel: WOWBaseModel,Mappable{
         designer_image  <- map["designer_image"]
         
         /*************************新版Map***********************/
-        productID               <- map["id"]
+        productId               <- map["id"]
         primaryImgs             <- map["primaryImgs"]
         productName             <- map["productName"]
         sellPrice               <- map["sellPrice"]
         sellingPoint            <- map["sellingPoint"]
         brandCname              <- map["brandCname"]
+        brandId                 <- map["brandId"]
         brandLogoImg            <- map["brandLogoImg"]
         designerName            <- map["designerName"]
+        designerId              <- map["designerId"]
         designerPhoto           <- map["designerPhoto"]
         firstNonPrimaryImgUrl   <- map["firstNonPrimaryImgUrl"]
         firstNonPrimaryImgDesc  <- map["firstNonPrimaryImgDesc"]

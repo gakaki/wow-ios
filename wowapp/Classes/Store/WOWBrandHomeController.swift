@@ -120,7 +120,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         let model = brandModel?.products?[indexPath.row]
         vc.hideNavigationBar = true
-        vc.productID = model?.productID ?? ""
+        vc.productId = model?.productId ?? ""
         navigationController?.pushViewController(vc, animated: true)
     }
 }

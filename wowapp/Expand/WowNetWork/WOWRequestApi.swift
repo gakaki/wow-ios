@@ -22,13 +22,15 @@ public enum RequestApi{
     
     case Api_Activity
     
-    case Api_AddressAdd(receiverName:String,provinceId:String,cityId:String,addressDetail:String,receiverMobile:String,isDefault:String)
+    case Api_AddressAdd(receiverName: String, provinceId: Int, cityId: Int, countyId: Int, addressDetail: String, receiverMobile: String, isDefault:Bool)
     
     case Api_Addresslist
     
-    case Api_AddressDelete(uid:String,addressid:String)
+    case Api_AddressDelete(id:Int)
     
-    case Api_AddressDefault(id:String)
+    case Api_AddressDefault(id:Int)
+    
+    case Api_AddressEdit(id: Int, receiverName: String, provinceId: Int, cityId: Int, countyId: Int, addressDetail: String, receiverMobile: String, isDefault:Bool)
     
     case Api_SenceDetail(sceneid:String,uid:String)
     
@@ -58,8 +60,8 @@ public enum RequestApi{
     
     case Api_Change(param:[String:String])
     
-    case Api_Favotite(product_id:String,uid:String,type:String,is_delete:String,scene_id:String)
-
+    case Api_FavoriteProduct(productId:Int)
+    
     case Api_Invite //邀请好友
     
     case Api_Login(String,String)
@@ -141,8 +143,6 @@ extension RequestApi:TargetType{
             return URL_BrandList
         case .Api_BrandDetail:
             return URL_BrandDetail
-        case .Api_Favotite:
-            return URL_Favorite
         case .Api_CommentList:
             return URL_CommentList
         case .Api_SubmitComment:
@@ -167,6 +167,8 @@ extension RequestApi:TargetType{
             return URL_Change
         case .Api_CarCommit:
             return URL_CarCommit
+        case .Api_FavoriteProduct:
+            return URL_FavoriteProduct
         case .Api_Login:
             return URL_login
         case .Api_LikeBrand:
@@ -195,6 +197,8 @@ extension RequestApi:TargetType{
             return URL_AddressDelete
         case .Api_AddressDefault:
             return URL_AddressDefault
+        case .Api_AddressEdit:
+            return URL_AddressEdit
         case .Api_OrderList:
             return URL_OrderList
         case .Api_OrderStatus:
@@ -236,8 +240,6 @@ extension RequestApi:TargetType{
                 params = ["productId":productId]
             case let .Api_ProductSpec(productId):
                 params = ["productId":productId]
-            case let .Api_Favotite(product_id,uid,type,is_delete,scene_id):
-                params = ["uid":uid,"product_id":product_id,"type":type,"is_delete":is_delete,"scene_id":scene_id]
             case let .Api_CommentList(pageindex,thingid,type):
                 params = ["pageindex":pageindex,"thingid":thingid,"type":type]
             case let .Api_SubmitComment(uid,comment,thingid,type):
@@ -258,9 +260,10 @@ extension RequestApi:TargetType{
                 params =  ["cart":cart]
             case let .Api_CarAdd(productId, productQty):
                 params =  ["productId": productId, "productQty": productQty]
-            
             case let .Api_Change(param):
                 params = param
+            case let .Api_FavoriteProduct(productId):
+                params = ["productId":productId]
             case let .Api_Sms(type,mobile):
                 params =  ["type":type,"mobile":mobile]
             case let .Api_Sms_Code(mobile):
@@ -275,14 +278,16 @@ extension RequestApi:TargetType{
                 params =  ["mobile":mobile,"captcha":captcha,"password":password,"userInfoFromWechat":userInfoFromWechat]
             case let .Api_ResetPwd(mobile, code, password):
                 params =  ["mobile":mobile,"captcha":code,"newPwd":password]
-            case let .Api_AddressAdd(receiverName,provinceId,cityId,addressDetail,receiverMobile,isDefault):
-                params =  ["receiverName":receiverName,"provinceId":provinceId,"cityId":cityId,"addressDetail":addressDetail,"receiverMobile":receiverMobile,"isDefault":isDefault]
+            case let .Api_AddressAdd(receiverName, provinceId, cityId, countyId, addressDetail, receiverMobile, isDefault):
+                params =  ["receiverName": receiverName, "provinceId": provinceId, "cityId": cityId, "countyId":countyId, "addressDetail": addressDetail, "receiverMobile": receiverMobile, "isDefault": isDefault]
             case .Api_Addresslist:
                 break
-            case let .Api_AddressDelete(uid,id):
-                params =  ["uid":uid,"id":id]
+            case let .Api_AddressDelete(id):
+                params =  ["id":id]
             case let .Api_AddressDefault(id):
                 params = ["id":id]
+            case let .Api_AddressEdit(id, receiverName, provinceId, cityId, countyId, addressDetail, receiverMobile, isDefault):
+                params = ["id": id, "receiverName": receiverName, "provinceId": provinceId, "cityId": cityId, "countyId":countyId, "addressDetail": addressDetail, "receiverMobile": receiverMobile, "isDefault": isDefault]
             case let .Api_OrderList(uid,type):
                 params =  ["uid":uid,"type":type]
             case let .Api_OrderStatus(uid,order_id,status):

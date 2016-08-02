@@ -54,7 +54,7 @@ extension WOWSubArtCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if  let del = self.delegate {
             let model = dataArr?[indexPath.row]
-            del.subAlertItemClick(model?.productID ?? "")
+            del.subAlertItemClick(model?.productId ?? "")
         }
     }
     

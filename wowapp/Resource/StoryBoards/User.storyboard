@@ -51,10 +51,10 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phY-Jr-drU">
+                                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phY-Jr-drU">
                                                             <rect key="frame" x="210" y="0.0" width="110" height="50"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8tP-zZ-YQV">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8tP-zZ-YQV">
                                                                     <rect key="frame" x="87" y="18" width="8" height="14"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看全部订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yx9-GI-vgq">
@@ -1224,7 +1224,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="6HL-P8-FMT">
-                            <rect key="frame" x="0.0" y="250" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="200" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0P-dr-Ofw">
@@ -1234,9 +1234,10 @@
                                         <constraint firstAttribute="width" constant="80" id="UMm-vi-HCq"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <state key="normal" title="   默认地址" image="select">
+                                    <state key="normal" title="   默认地址" image="car_check">
                                         <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <state key="selected" image="select"/>
                                     <connections>
                                         <action selector="selectButton:" destination="CVw-Pa-PKc" eventType="touchUpInside" id="Uo5-V1-sb6"/>
                                     </connections>
@@ -1378,47 +1379,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="jrn-zv-umU">
-                                        <rect key="frame" x="0.0" y="150" width="320" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jrn-zv-umU" id="fnT-TY-bj6">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="街道" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reS-FR-FTn">
-                                                    <rect key="frame" x="15" y="17" width="55" height="16"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="WaU-mz-apf"/>
-                                                        <constraint firstAttribute="width" constant="55" id="vYZ-YY-xmD"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择街道" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ehr-Uv-3fP">
-                                                    <rect key="frame" x="78" y="2" width="227" height="45"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="45" id="kCM-6Q-Ykw"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="CVw-Pa-PKc" id="eNk-cj-4vA"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="ehr-Uv-3fP" secondAttribute="trailing" constant="15" id="6kA-et-oLc"/>
-                                                <constraint firstItem="reS-FR-FTn" firstAttribute="leading" secondItem="fnT-TY-bj6" secondAttribute="leading" constant="15" id="9wk-8W-Q22"/>
-                                                <constraint firstItem="ehr-Uv-3fP" firstAttribute="top" secondItem="fnT-TY-bj6" secondAttribute="top" constant="2" id="DZF-XJ-CRV"/>
-                                                <constraint firstItem="ehr-Uv-3fP" firstAttribute="leading" secondItem="reS-FR-FTn" secondAttribute="trailing" constant="8" id="EDL-Cz-zRr"/>
-                                                <constraint firstItem="reS-FR-FTn" firstAttribute="top" secondItem="fnT-TY-bj6" secondAttribute="top" constant="17" id="cCg-r6-qxM"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="ftc-f3-bsC">
-                                        <rect key="frame" x="0.0" y="200" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="150" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ftc-f3-bsC" id="ZdO-1Y-n7S">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
@@ -1471,7 +1433,6 @@
                         <outlet property="nameTextField" destination="hny-q5-qtF" id="ubw-Pl-b7t"/>
                         <outlet property="phoneTextField" destination="ukF-gw-TQl" id="MmI-mD-Ig1"/>
                         <outlet property="selectButton" destination="b0P-dr-Ofw" id="yaV-Jh-zSU"/>
-                        <outlet property="streeTextField" destination="ehr-Uv-3fP" id="PuU-Nh-nxI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZQ-G8-yEz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1619,7 +1580,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="kRD-Qr-R34">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="kRD-Qr-R34">
                                         <rect key="frame" x="297" y="18" width="8" height="14"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFV-os-m7d" userLabel="topLine">
@@ -1715,6 +1676,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="car_check" width="16" height="16"/>
         <image name="closeNav" width="40" height="32"/>
         <image name="me_logo" width="80" height="80"/>
         <image name="me_order_delivering" width="30" height="30"/>

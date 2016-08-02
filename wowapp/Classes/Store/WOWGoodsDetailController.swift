@@ -8,7 +8,7 @@
 
 import UIKit
 class WOWGoodsDetailController: WOWBaseViewController {
-    var productID:String?
+    var productId:String?
     var cycleView:CyclePictureView!
     
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
@@ -26,7 +26,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        productID = "15"
+        productId = "15"
         request()
     }
     
@@ -176,7 +176,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     override func request() {
         super.request()
 //        let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productID ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productId ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.configData()
@@ -200,18 +200,18 @@ class WOWGoodsDetailController: WOWBaseViewController {
             goLogin()
         }else{
             let uid         = WOWUserManager.userID
-            let thingid     = self.productID ?? ""
+            let thingid     = self.productId ?? ""
             let type        = "1" //1为商品 2 为场景
             let is_delete   = favoriteButton.selected ? "1":"0"
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
-                let json = JSON(result)
-                DLog(json)
-                if let strongSelf = self{
-                    strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
-                }
-            }, failClosure: { (errorMsg) in
-                    
-            })
+//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Apifa(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
+//                let json = JSON(result)
+//                DLog(json)
+//                if let strongSelf = self{
+//                    strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
+//                }
+//            }, failClosure: { (errorMsg) in
+//                    
+//            })
         }
     }
     
@@ -416,7 +416,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
                 vc.commentType = CommentType.Product
-                vc.mainID = self?.productID!
+                vc.mainID = self?.productId!
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }

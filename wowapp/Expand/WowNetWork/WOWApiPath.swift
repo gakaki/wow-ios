@@ -52,14 +52,21 @@ let URL_CommentList             = "comment"
 let URL_ProductSpec             = "product/spec"    //选择产品颜色规格
 
 //2.6收藏
-let URL_Favorite                = "like/do"
+let URL_FavoriteProduct         = "user/product/favorite"   //收藏单品
+
+let URL_FavoriteBrand           = "user/brand/favorite"   //收藏单品
+
+let URL_FavoriteDesigner        = "user/designer/favorite"   //收藏单品
 
 let URL_BrandList               = "brand/list"
 
 let URL_BrandDetail             = "brand/detail"
 
-let URL_LikeBrand               = "user/like/brand"    //喜欢的品牌列表
+let URL_LikeProduct             = "user/product/favorite-list"    //喜欢的品牌列表
 
+let URL_LikeDesigner            = "user/designer/favorite-list"    //喜欢的品牌列表
+
+let URL_LikeBrand               = "user/brand/favorite-list"    //喜欢的品牌列表
 //3.app活动
 let URL_activity                = "post"
 
@@ -103,8 +110,10 @@ let URL_Change                  = "user/change"                   //修改用户
 
 let URL_AddressAdd              = "user/shippinginfo/create"   //添加收货地址
 let URL_AddressList             = "user/shippinginfo/list"
-let URL_AddressDelete           = "address/delete"
+let URL_AddressDelete           = "user/shippinginfo/delete"
 let URL_AddressDefault          = "user/shippinginfo/set-default" //设为默认收货地址
+
+let URL_AddressEdit             = "user/shippinginfo/update"    //编辑收货地址
 
 let URL_OrderList               = "order/list"
 

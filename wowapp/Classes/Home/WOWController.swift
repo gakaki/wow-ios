@@ -217,7 +217,7 @@ extension WOWController:SenceCellDelegate{
     func senceProductClick(produtID: String) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
-        vc.productID = produtID
+        vc.productId = produtID
         navigationController?.pushViewController(vc, animated: true)
     }
 }

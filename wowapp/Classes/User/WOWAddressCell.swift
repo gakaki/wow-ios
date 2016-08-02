@@ -29,12 +29,8 @@ class WOWAddressCell: UITableViewCell {
     func showData(model:WOWAddressListModel)  {
         nameLabel.text = model.name
         phoneLabel.text = model.mobile
-        detailAddressLabel.text = model.full_address
-        if model.isDefault  == 1{
-            checkButton.setImage(UIImage(named: "select"), forState: .Normal)
-        }else {
-            checkButton.setImage(UIImage(named: "car_check"), forState: .Normal)
-        }
+        detailAddressLabel.text = (model.province ?? "") + (model.city ?? "") + (model.county ?? "") + (model.addressDetail ?? "")
+        checkButton.selected = model.isDefault ?? false
         
     }
     

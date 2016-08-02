@@ -145,7 +145,7 @@ extension WOWSearchsController:UICollectionViewDataSource,UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let model = dataArr[indexPath.row]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
-        vc.productID = model.productID
+        vc.productId = model.productId
          vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -17,14 +17,13 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var nameTextField        : UITextField!
     @IBOutlet weak var phoneTextField       : UITextField!
     @IBOutlet weak var cityTextField        : UITextField!
-    @IBOutlet weak var streeTextField       : UITextField!
     @IBOutlet weak var detailAddressTextView: KMPlaceholderTextView!
     @IBOutlet weak var footView             : UIView!
     @IBOutlet weak var selectButton         : UIButton!
-    private var defaultAddress:Bool         = true
+    private var defaultAddress:Bool         = false
     
     var data:VoSldData                      = VoSldData()
-    var addressEntrance:AddressEntrance            = .addAddress
+    var addressEntrance:AddressEntrance?
     
     //选择的省索引
     var provinceIndex = 0
@@ -39,9 +38,11 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     
     //net param
-    var province:String?    = ""
-    var city:String?        = ""
-    var district : String?  = ""
+    var provinceId:Int?     = 0
+    var cityId:Int?         = 0
+    var countyId:Int?      = 0
+
+    
     
     var addressModel : WOWAddressListModel?
     var entrance:WOWAddressEntrance = .Me
@@ -78,7 +79,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     override func setUI() {
         super.setUI()
-        switch addressEntrance {
+        switch addressEntrance! {
         case .addAddress:
             navigationItem.title = "新增收货地址"
         case .editAddress:
@@ -87,11 +88,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
         navigationItem.leftBarButtonItems = nil
         tableView.keyboardDismissMode = .OnDrag
         tableView.tableFooterView = footView
-        makeCustomerNavigationItem("取消", left: true) {[weak self] in
-            if let strongSelf = self{
-                strongSelf.navigationController?.popViewControllerAnimated(true)
-            }
-        }
+
         makeCustomerNavigationItem("保存", left: false) {[weak self] in
             if let strongSelf = self{
                 strongSelf.saveAddress()
@@ -104,21 +101,17 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     private func configEditData(){
         if let model = addressModel{
-            province = model.province
-            city = model.city
-            district = model.district
+            provinceId = model.provinceId
+            cityId = model.cityId
+            countyId = model.countyId
+            
+        
             nameTextField.text  = model.name
             phoneTextField.text = model.mobile
-            cityTextField.text = (model.province ?? "") + (model.city ?? "") + (model.district ?? "")
-            detailAddressTextView.text = model.street ?? ""
-            let status = model.isDefault
-            if status == 1 {
-                defaultAddress = true
-                selectButton.setImage(UIImage(named: "select"), forState: .Normal)
-            }else {
-                defaultAddress = false
-                selectButton.setImage(UIImage(named: "car_check"), forState: .Normal)
-            }
+            cityTextField.text = "\(model.province ?? "") - \(model.city ?? "") - \(model.county ?? "")"
+            detailAddressTextView.text = model.addressDetail ?? ""
+            defaultAddress = model.isDefault ?? false
+            selectButton.selected = defaultAddress
         }
         
     }
@@ -167,7 +160,9 @@ class WOWAddAddressController: WOWBaseTableViewController {
 //            + "值：\(province.name) - \(city.name) - \(district.name)"
         
         let message = "\(province.name) - \(city.name) - \(district.name)"
-
+        addressModel?.provinceId = (province.id).toInt()
+        addressModel?.cityId = (city.id).toInt()
+        addressModel?.countyId = (district.id).toInt()
         
         cityTextField.text = message
     }
@@ -191,7 +186,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
         if !validatePhone(phoneTextField.text) {
             return
         }
-        guard let c = city where !c.isEmpty else{
+        guard let c = cityTextField.text where !c.isEmpty else{
             WOWHud.showMsg("请选择省市区")
             return
         }
@@ -200,31 +195,18 @@ class WOWAddAddressController: WOWBaseTableViewController {
             WOWHud.showMsg("请填写详细地址")
             return
         }
-        let is_def  = defaultAddress ? "1" : "0"
-
-        var addressdid = ""
-        if let model = addressModel {
-            addressdid = String(model.id) ?? ""
+        addressModel?.name = name
+        addressModel?.mobile = phoneTextField.text
+        addressModel?.addressDetail = detailAddress
+        addressModel?.isDefault  = defaultAddress
+        
+        switch addressEntrance! {
+        case .addAddress:
+            addAddress(addressModel!)
+        case .editAddress:
+            editAddress(addressModel!)
         }
 
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(receiverName: name, provinceId: province ?? "", cityId: city ?? "", addressDetail: detailAddress, receiverMobile: phoneTextField.text ?? "", isDefault: is_def), successClosure: { [weak self](result) in
-            if let strongSelf = self{
-                let json = JSON(result).int
-                if let ret = json{
-                    if ret == 1{
-                        WOWHud.showMsg("添加成功")
-                        if let ac = strongSelf.action{
-                            ac()
-                            strongSelf.navigationController?.popViewControllerAnimated(true)
-                        }
-                    }else{
-                        WOWHud.showMsg("添加失败")
-                    }
-                }
-            }
-        }) { (errorMsg) in
-                
-        }
         
     }
     
@@ -263,6 +245,38 @@ class WOWAddAddressController: WOWBaseTableViewController {
         }
     }
     
+    //MARK: - Net 
+    func addAddress(parameters:WOWAddressListModel) -> Void {
+   
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressAdd(receiverName: parameters.name!, provinceId:parameters.provinceId ?? 0 , cityId: parameters.cityId ?? 0, countyId: parameters.countyId ?? 0, addressDetail: parameters.addressDetail ?? "", receiverMobile: parameters.mobile!, isDefault: parameters.isDefault ?? false), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                if let ac = strongSelf.action{
+                    ac()
+                    strongSelf.navigationController?.popViewControllerAnimated(true)
+                    
+                }
+            }
+        }) { (errorMsg) in
+            
+        }
+
+    }
+    
+    func editAddress(parameters:WOWAddressListModel) -> Void {
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressEdit(id:parameters.id ?? 0 ,receiverName: parameters.name!, provinceId:parameters.provinceId ?? 0 , cityId: parameters.cityId ?? 0, countyId: parameters.countyId ?? 0, addressDetail: parameters.addressDetail ?? "", receiverMobile: parameters.mobile!, isDefault: parameters.isDefault ?? false), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                if let ac = strongSelf.action{
+                    ac()
+                    strongSelf.navigationController?.popViewControllerAnimated(true)
+                    
+                }
+            }
+        }) { (errorMsg) in
+            
+        }
+        
+    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

@@ -491,6 +491,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         let select = model.isSelected ?? false
         model.isSelected = !select
         let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
+        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
     
     }
     

@@ -176,7 +176,7 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
             navigationController?.pushViewController(sence, animated: true)
         }else{ //单品
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
-            vc.productID = model.id
+            vc.productId = model.id
             vc.hideNavigationBar = true
             navigationController?.pushViewController(vc, animated: true)
         }

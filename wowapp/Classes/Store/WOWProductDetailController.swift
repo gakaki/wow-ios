@@ -10,10 +10,10 @@ import UIKit
 
 class WOWProductDetailController: WOWBaseViewController {
     //Param
-    var productID:String?
+    var productId                       : String?
     var productModel                    : WOWProductModel?
     var productSpecModel                : WOWProductSpecModel?
-    private(set) var numberSections = 5
+    private(set) var numberSections = 0
     
     //UI
     @IBOutlet weak var tableView: UITableView!
@@ -46,7 +46,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        productID = "104"
+        productId = "104"
         request()
     }
 
@@ -147,11 +147,8 @@ class WOWProductDetailController: WOWBaseViewController {
         if !WOWUserManager.loginStatus {
             goLogin()
         }else{
-            let uid         = WOWUserManager.userID
-            let thingid     = self.productID ?? ""
-            let type        = "1" //1为商品 2 为场景
             let is_delete   = likeButton.selected ? "1":"0"
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId: (productId?.toInt()) ?? 0), successClosure: { [weak self](result) in
                 if let strongSelf = self{
                     strongSelf.likeButton.selected = !strongSelf.likeButton.selected
                 }
@@ -168,7 +165,7 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     
 
-    //MARK:选择规格,有两种视图，如果ture，下面没有收藏和分享，如果false，下面有
+    //MARK:选择规格,有两种视图
     func chooseStyle(entrue: carEntrance) {
         WOWBuyCarMananger.sharedBuyCar.productSpecModel      = self.productSpecModel
         WOWBuyCarMananger.sharedBuyCar.skuName          = self.productModel?.skus?.first?.skuTitle
@@ -188,10 +185,10 @@ class WOWProductDetailController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productID ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productId ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
-                strongSelf.productModel?.productID = strongSelf.productID
+                strongSelf.productModel?.productId = strongSelf.productId
                 strongSelf.configData()
                 strongSelf.numberSections = 5
                 strongSelf.tableView.reloadData()
@@ -208,7 +205,7 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     
     func requestProductSpec() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductSpec(productId: productID ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductSpec(productId: productId ?? ""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(result)
                 print(strongSelf.productSpecModel)

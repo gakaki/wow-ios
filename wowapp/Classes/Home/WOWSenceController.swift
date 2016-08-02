@@ -109,7 +109,7 @@ class WOWSenceController: WOWBaseViewController {
         var param:[String:AnyObject] = ["uid":uid]
         if arr.count != 0 {
             for obj in arr {
-                let dict = ["skuid":obj.skuID ?? "","count":"1","productid":obj.productID ?? ""]
+                let dict = ["skuid":obj.skuID ?? "","count":"1","productid":obj.productId ?? ""]
                 cars.append(dict)
             }
             param["cart"] = cars
@@ -132,7 +132,7 @@ class WOWSenceController: WOWBaseViewController {
     private func saveRealm(arr:[WOWProductModel]){
         for item in arr {
             let buyCarModel = WOWBuyCarModel()
-            buyCarModel.productID       = item.productID ?? ""
+            buyCarModel.productID       = item.productId ?? ""
             buyCarModel.skuID           = item.skuID ?? ""
             buyCarModel.skuProductPrice = item.price ?? ""
             buyCarModel.skuProductName = item.productName ?? ""
@@ -164,15 +164,15 @@ class WOWSenceController: WOWBaseViewController {
         let thingid     = self.sceneID ?? ""
         let type        = "2" //1为商品 2 为场景
         let is_delete   = favoriteButton.selected ? "1":"0"
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id:"", uid: uid, type: type, is_delete:is_delete, scene_id:thingid), successClosure: { [weak self](result) in
-            let json = JSON(result)
-            DLog(json)
-            if let strongSelf = self{
-                strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
-            }
-        }, failClosure: { (errorMsg) in
-                
-        })
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id:"", uid: uid, type: type, is_delete:is_delete, scene_id:thingid), successClosure: { [weak self](result) in
+//            let json = JSON(result)
+//            DLog(json)
+//            if let strongSelf = self{
+//                strongSelf.favoriteButton.selected = !strongSelf.favoriteButton.selected
+//            }
+//        }, failClosure: { (errorMsg) in
+//                
+//        })
     }
     
     
@@ -207,7 +207,7 @@ class WOWSenceController: WOWBaseViewController {
 extension WOWSenceController:WOWSubAlertDelegate{
     func subAlertItemClick(productID:String) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
-        vc.productID = productID
+        vc.productId = productID
         vc.hideNavigationBar = true
         WOWSenceHelper.senceController.navigationController?.pushViewController(vc, animated: true)
     }
@@ -263,9 +263,9 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let  model = sceneModel?.recommendProducts?[indexPath.row]
-        let  pid = model?.productID ?? ""
+        let  pid = model?.productId ?? ""
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
-        vc.productID = pid
+        vc.productId = pid
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }

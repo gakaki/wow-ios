@@ -26,7 +26,7 @@
         <!--Empty Data Set Delegate-->
         <scene sceneID="p4Y-Dx-v6l">
             <objects>
-                <viewController storyboardIdentifier="WOWStoreController" id="AiG-sc-6dI" customClass="WOWStoreController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWStoreController" id="AiG-sc-6dI" customClass="WOWFoundController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="maa-bU-8qV"/>
                         <viewControllerLayoutGuide type="bottom" id="ZUJ-M0-5fH"/>
@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BS1-Lt-l4e">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="76" width="320" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WOWMenuCell" rowHeight="55" id="TxM-ue-7O0" customClass="WOWMenuCell" customModule="wowapp" customModuleProvider="target">
@@ -92,11 +92,11 @@
                         <constraints>
                             <constraint firstItem="BS1-Lt-l4e" firstAttribute="leading" secondItem="Sbn-Zj-HSb" secondAttribute="leading" id="CIq-a8-wop"/>
                             <constraint firstAttribute="trailing" secondItem="BS1-Lt-l4e" secondAttribute="trailing" id="EIE-8m-Li7"/>
-                            <constraint firstItem="ZUJ-M0-5fH" firstAttribute="top" secondItem="BS1-Lt-l4e" secondAttribute="bottom" id="LiI-GT-P1t"/>
-                            <constraint firstItem="BS1-Lt-l4e" firstAttribute="top" secondItem="maa-bU-8qV" secondAttribute="bottom" id="pol-gC-OZU"/>
+                            <constraint firstItem="ZUJ-M0-5fH" firstAttribute="top" secondItem="BS1-Lt-l4e" secondAttribute="bottom" constant="-49" id="LiI-GT-P1t"/>
+                            <constraint firstItem="BS1-Lt-l4e" firstAttribute="top" secondItem="maa-bU-8qV" secondAttribute="bottom" constant="12" id="pol-gC-OZU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="商店" id="Oae-yn-pnL"/>
+                    <navigationItem key="navigationItem" title="发现" id="Oae-yn-pnL"/>
                     <connections>
                         <outlet property="tableView" destination="BS1-Lt-l4e" id="50f-ZV-Mmb"/>
                     </connections>

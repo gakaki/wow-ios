@@ -47,7 +47,7 @@ extension WOWCarGoodsListController{
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWBuyCarNormalCell", forIndexPath: indexPath) as! WOWBuyCarNormalCell
-        cell.hideLeftCheck()
+//        cell.hideLeftCheck()
         cell.showData(productArr[indexPath.row])
         return cell
     }

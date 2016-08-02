@@ -218,12 +218,12 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("WOWBuyCarNormalCell", forIndexPath: indexPath) as! WOWBuyCarNormalCell
-            cell.hideLeftCheck()
+//            cell.hideLeftCheck()
             cell.checkButton.hidden = true
             let itemModel = self.orderModel.products![indexPath.row]
         cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
             cell.nameLabel.text = itemModel.name
-            cell.typeLabel.text = itemModel.sku_title
+//            cell.typeLabel.text = itemModel.sku_title
             cell.perPriceLabel.text = itemModel.price?.priceFormat()
             cell.countLabel.text = "x \(itemModel.count ?? "")"
             returnCell = cell

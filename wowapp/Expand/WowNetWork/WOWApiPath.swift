@@ -93,6 +93,7 @@ let URL_UpdateInfo              = "usermongo/userupdate"
 let URL_FavoriteList            = "like/get"
 let URL_UserInfo                = "usermongo/info"
 let URL_Invite                  = "articleinfo"
+let URL_QINIU_TOKEN             = "qiniutoken"
 
 //6.app 登录注册
 let URL_Register                = "user/register"

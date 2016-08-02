@@ -179,7 +179,7 @@ extension AppDelegate{
         MonkeyKing.registerAccount(.Weibo(appID: WOWID.Weibo.appID, appKey: WOWID.Weibo.appKey, redirectURL: WOWID.Weibo.redirectURL))
         
         //LeanCloud
-        AVOSCloud.setApplicationId(WOWID.LeanCloud.appID, clientKey:WOWID.LeanCloud.appKey)
+//        AVOSCloud.setApplicationId(WOWID.LeanCloud.appID, clientKey:WOWID.LeanCloud.appKey)
         
         //融云IM
         RCIM.sharedRCIM().initWithAppKey(WOWID.RongCloud.appID)

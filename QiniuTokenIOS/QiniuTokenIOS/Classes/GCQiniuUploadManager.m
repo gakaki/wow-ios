@@ -14,6 +14,28 @@
 #import "QN_GTM_Base64.h"
 #import "QiniuSDK.h"
 
+/*
+ 
+ 
+ 
+func create_qiniu_token_local() -> String {
+ 
+     let qiniu_upload_manager = GCQiniuUploadManager.sharedInstance()
+     qiniu_upload_manager.registerWithScope(
+     //           "wowdsgn:\(qiniu_key)",
+     "usericon",
+     accessKey: "l4bcP6bByVSJWgqOeKxHGtCyXl3L3bWlLh9wOLYu",
+     secretKey: "kevimwWUrbsidQLFRD00zadC0RSUt7qZOFHUW7OY"
+     )
+     let token = qiniu_upload_manager.createToken()
+     return token
+}
+ 
+ 
+ 
+ 
+ */
+
 static NSInteger defaultLiveTime = 5;
 static NSString *QiNiuHost = @"host";
 

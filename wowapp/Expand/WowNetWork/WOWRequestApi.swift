@@ -103,6 +103,8 @@ public enum RequestApi{
     
     case Api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
 
+
+
 }
 
 
@@ -205,6 +207,8 @@ extension RequestApi:TargetType{
             return URL_OrderStatus
         case .Api_Invite:
             return URL_Invite
+            
+            
         }
     }
     
@@ -299,7 +303,7 @@ extension RequestApi:TargetType{
                 params =  ["pageType":1]
             case  .Api_Home_Topics():
                 params =  ["pageType":1]
-            
+           
             default:
                 params =  nil
         }

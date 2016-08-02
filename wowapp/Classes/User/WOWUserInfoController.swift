@@ -9,9 +9,8 @@
 import UIKit
 import PromiseKit
 import Qiniu
-import QiniuTokenIOS
+import Alamofire
 import Hashids_Swift
-import AwaitKit
 import FCUUID
 
 class WOWUserInfoController: WOWBaseTableViewController {
@@ -218,15 +217,15 @@ extension WOWUserInfoController{
 //MARK:Delegate
 
 extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
+    
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
         
         let data = UIImageJPEGRepresentation(image,0.5)
         
         WOWHud.showLoading()
-        
-        let qiniu_upload_manager = GCQiniuUploadManager.sharedInstance()
-        
+       
   
         let uploadOption            = QNUploadOption.init(
             mime: nil,
@@ -240,65 +239,57 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         
         let hashids                 = Hashids(salt:FCUUID.uuidForDevice())
         let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
-        let qm                      = QNUploadManager()
-
-        qiniu_upload_manager.registerWithScope(
-//           "wowdsgn:\(qiniu_key)",
-            "usericon",
-            accessKey: "l4bcP6bByVSJWgqOeKxHGtCyXl3L3bWlLh9wOLYu",
-            secretKey: "kevimwWUrbsidQLFRD00zadC0RSUt7qZOFHUW7OY"
-        )
-        qiniu_upload_manager.createToken()
-        
-        print ("Token is \(qiniu_upload_manager.uploadToken)")
-        
-        
-        qm.putData(
-            data,
-            key:   nil,
-
-            token: qiniu_upload_manager.uploadToken,
-            complete: { ( info, key, resp) in
+        let qiniu_token_url         = "\(BaseUrl)qiniutoken"
+        Alamofire.request(.POST,qiniu_token_url, parameters: ["file_path": qiniu_key])
+            .response { request, response, data, error in
+                print(request)
+                print(response)
+                print(data)
+                print(error)
                 
-//                if let strongSelf = self{
-                
-                    if (info.error != nil) {
-                        DLog(info.error)
-                        WOWHud.showMsg("头像修改失败")
-                    } else {
-                        print(resp,resp["key"])
-//                        print(info,key,resp)
-                        let key = resp["key"]
-                        self.headImageUrl = "http://img.wowdsgn.com/\(key!)"
-                        print(self.headImageUrl)
-                        self.request()
-                    }
-//                }
-    
-            },
-            option: uploadOption
-        )
-
-        
-        
-        //        let file = AVFile(name:"headimage.jpg", data:data)
-        //        data!.writeToFile("headimage.jpg", atomically: true)
-        
-//        file.saveInBackgroundWithBlock {[weak self] (ret,error) in
-//            if let strongSelf = self{
-//                if let e = error{
-//                    DLog(e)
-//                    WOWHud.showMsg("头像修改失败")
-//                    return
-//                }else{
+        }
+//          if let strongSelf = self{
+//                let json = JSON(result)
+//                DLog(json.string!)
+//                
+//                let qm                      = QNUploadManager()
+//                let token = ""
+//                
+//                qm.putData(
+//                    data,
+//                    key:   nil,
 //                    
-//                    
-//                    
-//                   
+//                    token: token,
+//                    complete: { ( info, key, resp) in
+//                        
+//                        //                if let strongSelf = self{
+//                        
+//                        if (info.error != nil) {
+//                            DLog(info.error)
+//                            WOWHud.showMsg("头像修改失败")
+//                        } else {
+//                            
+//                            print(resp,resp["key"])
+//                            //                        print(info,key,resp)
+//                            let key = resp["key"]
+//                            strongSelf.headImageUrl = "http://img.wowdsgn.com/\(key!)"
+//                            print(strongSelf.headImageUrl)
+//                            strongSelf.request()
+//                        }
+//                        //                }
+//                        
+//                    },
+//                    option: uploadOption
+//                )
 //
-//                }
+//            
 //            }
-//        }
+//        
+//        
+//              WOWHud.dismiss()
+//            DLog(errorMsg)
+ 
+
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

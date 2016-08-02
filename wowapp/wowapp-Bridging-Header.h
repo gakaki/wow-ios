@@ -20,7 +20,7 @@
 @import HidingNavigationBar;
 @import YYImage;
 
-@import QiniuTokenIOS;
+//@import QiniuTokenIOS;
 
 #import <FCUUID/FCUUID.h>
 

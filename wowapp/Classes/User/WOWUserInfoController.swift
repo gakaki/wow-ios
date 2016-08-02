@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PromiseKit
+//import PromiseKit
 import Qiniu
 import Alamofire
 import Hashids_Swift

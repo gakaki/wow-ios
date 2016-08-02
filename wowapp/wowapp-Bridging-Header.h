@@ -30,7 +30,7 @@
 #import <FCUUID/FCUUID.h>
 
 //Leancloud
-#import <AVOSCloud/AVOSCloud.h>
+//#import <AVOSCloud/AVOSCloud.h>
 
 //融云
 #import <RongIMKit/RongIMKit.h>

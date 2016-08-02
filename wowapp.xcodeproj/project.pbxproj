@@ -239,7 +239,6 @@
 		29FF27031CFDA86300DF2A9B /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF26241CFDA86300DF2A9B /* libSocialWechat.a */; };
 		29FF27041CFDA86300DF2A9B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF26251CFDA86300DF2A9B /* libWeChatSDK.a */; };
 		29FF27051CFDA86300DF2A9B /* CollectionViewWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF262B1CFDA86300DF2A9B /* CollectionViewWaterfallLayout.swift */; };
-		29FF27071CFDA86300DF2A9B /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29FF262E1CFDA86300DF2A9B /* area.plist */; };
 		29FF27081CFDA86300DF2A9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FF262F1CFDA86300DF2A9B /* Assets.xcassets */; };
 		29FF27091CFDA86300DF2A9B /* intro.gif in Resources */ = {isa = PBXBuildFile; fileRef = 29FF26301CFDA86300DF2A9B /* intro.gif */; };
 		29FF270B1CFDA86300DF2A9B /* BuyCar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FF26331CFDA86300DF2A9B /* BuyCar.storyboard */; };
@@ -288,7 +287,6 @@
 		632A93901D4E0F19003A5966 /* WOWBuyCarHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A938F1D4E0F19003A5966 /* WOWBuyCarHeadView.swift */; };
 		632A93921D4E1CA3003A5966 /* WOWBuyCarFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A93911D4E1CA3003A5966 /* WOWBuyCarFootView.swift */; };
 		632A93941D4E1CB0003A5966 /* WOWBuyCarFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632A93931D4E1CB0003A5966 /* WOWBuyCarFootView.xib */; };
-		635716991D45D206006BD746 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 635716981D45D206006BD746 /* city.plist */; };
 		635716A81D45E494006BD746 /* WOWBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635716A61D45E494006BD746 /* WOWBanner.swift */; };
 		635716A91D45E494006BD746 /* WOWBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635716A71D45E494006BD746 /* WOWBanner.xib */; };
 		635716BA1D45EB89006BD746 /* AuxiliaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635716B71D45EB89006BD746 /* AuxiliaryModels.swift */; };
@@ -569,7 +567,6 @@
 		29FF26291CFDA86300DF2A9B /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		29FF262B1CFDA86300DF2A9B /* CollectionViewWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewWaterfallLayout.swift; sourceTree = "<group>"; };
 		29FF262C1CFDA86300DF2A9B /* wowInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wowInfo.plist; sourceTree = "<group>"; };
-		29FF262E1CFDA86300DF2A9B /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		29FF262F1CFDA86300DF2A9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29FF26301CFDA86300DF2A9B /* intro.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = intro.gif; sourceTree = "<group>"; };
 		29FF26331CFDA86300DF2A9B /* BuyCar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BuyCar.storyboard; sourceTree = "<group>"; };
@@ -616,7 +613,6 @@
 		632A938F1D4E0F19003A5966 /* WOWBuyCarHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBuyCarHeadView.swift; sourceTree = "<group>"; };
 		632A93911D4E1CA3003A5966 /* WOWBuyCarFootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBuyCarFootView.swift; sourceTree = "<group>"; };
 		632A93931D4E1CB0003A5966 /* WOWBuyCarFootView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWBuyCarFootView.xib; sourceTree = "<group>"; };
-		635716981D45D206006BD746 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		635716A61D45E494006BD746 /* WOWBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBanner.swift; sourceTree = "<group>"; };
 		635716A71D45E494006BD746 /* WOWBanner.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWBanner.xib; sourceTree = "<group>"; };
 		635716B71D45EB89006BD746 /* AuxiliaryModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuxiliaryModels.swift; sourceTree = "<group>"; };
@@ -1224,8 +1220,6 @@
 			isa = PBXGroup;
 			children = (
 				06FED4431D4634A600D7B068 /* city.json */,
-				29FF262E1CFDA86300DF2A9B /* area.plist */,
-				635716981D45D206006BD746 /* city.plist */,
 				29FF262F1CFDA86300DF2A9B /* Assets.xcassets */,
 				29FF26301CFDA86300DF2A9B /* intro.gif */,
 				29FF263B1CFDA86300DF2A9B /* wowprotocol.html */,
@@ -1625,7 +1619,12 @@
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 8FPQ7629B9;
+						DevelopmentTeam = B4WSDTADTT;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -1663,7 +1662,6 @@
 				292CBA0F1CFE86B600248C88 /* WOWRegistInfoSureView.xib in Resources */,
 				29FF26A41CFDA86300DF2A9B /* WOWGoodsSmallCell.xib in Resources */,
 				29FF268F1CFDA86300DF2A9B /* WOWBrandDetailCell.xib in Resources */,
-				29FF27071CFDA86300DF2A9B /* area.plist in Resources */,
 				29FF268B1CFDA86300DF2A9B /* WOWShareView.xib in Resources */,
 				29FF26CC1CFDA86300DF2A9B /* WOWSocietyCell.xib in Resources */,
 				29FF270E1CFDA86300DF2A9B /* Login.storyboard in Resources */,
@@ -1685,7 +1683,6 @@
 				29FF26D31CFDA86300DF2A9B /* WOWUserHomeTopView.xib in Resources */,
 				632A93351D474848003A5966 /* WOWFavoriteBrandCell.xib in Resources */,
 				29FF270B1CFDA86300DF2A9B /* BuyCar.storyboard in Resources */,
-				635716991D45D206006BD746 /* city.plist in Resources */,
 				068B60B71D4F419A001AD778 /* WOWFoundRecommendCell.xib in Resources */,
 				29FF26831CFDA86300DF2A9B /* WOWBaseStyleCell.xib in Resources */,
 				29FF26FB1CFDA86300DF2A9B /* UMSCommentInputController.xib in Resources */,
@@ -1800,7 +1797,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2120,7 +2117,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.appk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";
@@ -2153,7 +2150,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.appk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";

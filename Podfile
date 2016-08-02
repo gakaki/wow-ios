@@ -16,8 +16,7 @@ pod 'JSONCodable'
 
 #七牛 sdk
 pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"
-pod “QiniuTokenIOS”,:path=> "QiniuTokenIOS/QiniuTokenIOS.podspec"
-
+#pod “QiniuTokenIOS”,:path=> "QiniuTokenIOS/QiniuTokenIOS.podspec"
 
 pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
@@ -33,7 +32,7 @@ pod 'Pingpp/Alipay',:path => "pingpp-ios/Pingpp.podspec"
 pod 'Pingpp/Wx',:path => "pingpp-ios/Pingpp.podspec"
 
 #LeanCloud
-pod 'AVOSCloud'               # 数据存储、短信、云引target :wowapp do #实例工程
+#pod 'AVOSCloud'               # 数据存储、短信、云引target :wowapp do #实例工程
 
 # ShareSDK主模块(必须)
 pod 'ShareSDK3'
@@ -49,11 +48,10 @@ pod 'ShareSDK3/ShareSDKPlatforms/SinaWeibo'
 pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 
 
-
 #LeanCloud
-pod 'AVOSCloud'             # 数据存储、短信、云引擎调用等基础服务模块
+#pod 'AVOSCloud'             # 数据存储、短信、云引擎调用等基础服务模块
 pod 'Hashids-Swift'			#短id生成
-pod 'AwaitKit', '~> 1.0.1'	#对付该死的多重network请求
+#pod 'AwaitKit', '~> 1.0.1'	#对付该死的多重network请求
 pod 'FCUUID'
 pod 'SwiftyUserDefaults'
 

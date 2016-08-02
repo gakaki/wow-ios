@@ -1,6 +1,0 @@
-framework module QiniuTokenIOS {
-  umbrella header "QiniuTokenIOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

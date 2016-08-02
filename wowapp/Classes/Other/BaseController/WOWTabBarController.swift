@@ -26,7 +26,7 @@ class WOWTabBarController: UITabBarController {
     func setViewControllers(){
         self.view.backgroundColor = DefaultBackColor
         self.delegate = self;
-        let storys = ["Home","Favorite","Store","Brand","User"]
+        let storys = ["Home","Favorite","Found","Brand","User"]
         let images = ["home","Favorite","store","brand","me"]
         var viewControllers = [UIViewController]()
         for index in 0..<storys.count{

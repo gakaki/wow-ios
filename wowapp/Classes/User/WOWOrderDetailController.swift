@@ -219,6 +219,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("WOWBuyCarNormalCell", forIndexPath: indexPath) as! WOWBuyCarNormalCell
 //            cell.checkButton.hidden = true
+//            cell.hideLeftCheck()
+
             let itemModel = self.orderModel.products![indexPath.row]
         cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
             cell.nameLabel.text = itemModel.name

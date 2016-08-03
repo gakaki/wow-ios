@@ -14,9 +14,9 @@ import Foundation
 
 
 //#if WOWDEBUG
-   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
+//   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
 //#else
-//    let BaseUrl = "https://openapi.wowdsgn.com/v1/" //外网地址
+   let BaseUrl = "https://openapi.wowdsgn.com/v1/" //外网地址
 //#endif
 
 /****************************API_URL接口**********************************/

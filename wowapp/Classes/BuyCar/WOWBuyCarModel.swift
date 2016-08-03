@@ -9,40 +9,40 @@
 import UIKit
 import ObjectMapper
 
-class WOWBuyCarModel: Object,Mappable{
-    dynamic var skuProductCount:Int        = 1
-    dynamic var skuProductName:String      = ""
-    dynamic var skuProductPrice:String     = ""
-    dynamic var skuProductImageUrl:String  = ""
-    dynamic var skuName:String             = ""
-    dynamic var skuID  :String             = ""
-    dynamic var productID :String          = ""
-    dynamic var skus:[WOWProductSkuModel]  = [WOWProductSkuModel]()
-    
-    override static func primaryKey() -> String? {
-        return "skuID"
-    }
-
-    override static func ignoredProperties() -> [String] {
-        return ["skus"]
-    }
-    
-    
-    func mapping(map: Map) {
-        skuProductCount         <- map["count"]
-        skuProductName          <- map["product_name"]
-        skuProductPrice         <- map["price"]
-        skuProductImageUrl      <- map["product_image"]
-        skuName                 <- map["sku_title"]
-        skuID                   <- map["sku_id"]
-        productID               <- map["id"]
-        skus                    <- map["skus"]
-    }
-    
-    convenience required init?(_ map: Map) {
-        self.init()
-    }
-}
+//class WOWBuyCarModel: Object,Mappable{
+//    dynamic var skuProductCount:Int        = 1
+//    dynamic var skuProductName:String      = ""
+//    dynamic var skuProductPrice:String     = ""
+//    dynamic var skuProductImageUrl:String  = ""
+//    dynamic var skuName:String             = ""
+//    dynamic var skuID  :String             = ""
+//    dynamic var productID :String          = ""
+//    dynamic var skus:[WOWProductSkuModel]  = [WOWProductSkuModel]()
+//    
+//    override static func primaryKey() -> String? {
+//        return "skuID"
+//    }
+//
+//    override static func ignoredProperties() -> [String] {
+//        return ["skus"]
+//    }
+//    
+//    
+//    func mapping(map: Map) {
+//        skuProductCount         <- map["count"]
+//        skuProductName          <- map["product_name"]
+//        skuProductPrice         <- map["price"]
+//        skuProductImageUrl      <- map["product_image"]
+//        skuName                 <- map["sku_title"]
+//        skuID                   <- map["sku_id"]
+//        productID               <- map["id"]
+//        skus                    <- map["skus"]
+//    }
+//    
+//    convenience required init?(_ map: Map) {
+//        self.init()
+//    }
+//}
 class WOWCarModel: WOWBaseModel,Mappable {
     var totalPrice                          : NSNumber?
     var shoppingCartResult                  : [WOWCarProductModel]?
@@ -63,9 +63,9 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var shoppingCartId                      : Int?
     var productId                           : Int?
     var productName                         : String?
-    var sellPrice                           : NSNumber?
+    var sellPrice                           : Double?
     var productQty                          : Int?
-    var sellTotalAmount                     : NSNumber?
+    var sellTotalAmount                     : Double?
     var productStock                        : Int?
     var color                               : String?
     var specImg                             : String?

@@ -95,6 +95,7 @@ class WOWProductInfoModel: WOWBaseModel,Mappable {
     var sellPrice                           : Double?
     var availableStock                      : Int?
     var hasStock                            : Bool?
+    var productQty                          : Int?
     
     required init?(_ map: Map) {
         

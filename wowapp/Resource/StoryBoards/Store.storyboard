@@ -120,7 +120,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdm-uj-kwH">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" tag="4001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-7l-afX" userLabel="like">
+                                    <button opaque="NO" tag="4001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-7l-afX" userLabel="like">
                                         <rect key="frame" x="0.0" y="7" width="50" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="c0S-xc-K50"/>

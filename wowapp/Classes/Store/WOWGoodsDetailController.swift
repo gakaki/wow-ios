@@ -72,35 +72,35 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     func sureButton(nf:NSNotification)  {
-        let object = nf.object as? WOWBuyCarModel
+        let object = nf.object as? WOWCarProductModel
         if let model = object {
            resolveBuyModel(model)
         }
         backView.hideBuyView()
     }
     
-    private func resolveBuyModel(model:WOWBuyCarModel){
+    private func resolveBuyModel(model:WOWCarProductModel){
         //放进购物车管理类，进行选中
-        WOWBuyCarMananger.sharedBuyCar.chooseProducts.append(model.skuID)
+//        WOWBuyCarMananger.sharedBuyCar.chooseProducts.append(model.skuID)
         
         if WOWUserManager.loginStatus { //登录
 //            saveNetBuyCar(model)
         }else{
             //存入本地数据库 先判断是否存在
-            let skus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(model.skuID)'")
-            if let m = skus.first{
-                let count = m.skuProductCount
-                model.skuProductCount += count
-                try! WOWRealm.write({
-                    WOWRealm.add(model, update: true)
-                })
-                WOWHud.showMsg("添加购物车成功")
-            }else{
-                try! WOWRealm.write({
-                    WOWRealm.add(model, update:true)
-                })
-                WOWHud.showMsg("添加购物车成功")
-            }
+//            let skus = WOWRealm.objects(WOWCarProductModel).filter("skuID = '\(model.skuID)'")
+//            if let m = skus.first{
+//                let count = m.skuProductCount
+//                model.skuProductCount += count
+//                try! WOWRealm.write({
+//                    WOWRealm.add(model, update: true)
+//                })
+//                WOWHud.showMsg("添加购物车成功")
+//            }else{
+//                try! WOWRealm.write({
+//                    WOWRealm.add(model, update:true)
+//                })
+//                WOWHud.showMsg("添加购物车成功")
+//            }
             updateCarBadge()
         }
     }
@@ -128,7 +128,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     func updateCarBadge(){
         WOWBuyCarMananger.updateBadge()
-        carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
+//        carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
         carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(15, 0, 0,15)
         if let action = updateBadgeAction {
             action()

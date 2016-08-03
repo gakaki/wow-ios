@@ -14,9 +14,11 @@ class WOWBuyCarMananger {
     
      /// 选规格的时候弹出的框框用到的信息
 //    var skuDataArr:[WOWProductSkuModel]?
-    var productSpecModel:WOWProductSpecModel?
+    var productSpecModel    : WOWProductSpecModel?
     
-    var skuName:String?
+    var isFavorite          : Bool?
+    
+    var skuName             : String?
     
     var buyCount            = 1
     
@@ -61,22 +63,22 @@ class WOWBuyCarMananger {
 //        }
     }
     
-    static func calCarCount() ->String{
-        var count = 0
-        if WOWUserManager.loginStatus {
-            count = WOWUserManager.userCarCount
-        }else{
-            let products = WOWRealm.objects(WOWBuyCarModel)
-            for p in products {
-                count += p.skuProductCount
-            }
-        }
-        if count == 0 {
-            return ""
-        }else{
-            return "\(count)"
-        }
-    }
+//    static func calCarCount() ->String{
+//        var count = 0
+//        if WOWUserManager.loginStatus {
+//            count = WOWUserManager.userCarCount
+//        }else{
+//            let products = WOWRealm.objects(WOWCarProductModel)
+//            for p in products {
+//                count += p.skuProductCount
+//            }
+//        }
+//        if count == 0 {
+//            return ""
+//        }else{
+//            return "\(count)"
+//        }
+//    }
 }
 
 

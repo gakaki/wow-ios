@@ -52,6 +52,12 @@ let URL_CommentList             = "comment"
 let URL_ProductSpec             = "product/spec"    //选择产品颜色规格
 
 //2.6收藏
+let URL_IsFavoriteProduct       = "user/product/is-favorite"   //是否喜欢某个单品
+
+let URL_IsFavoriteBrand         = "user/brand/is-favorite"      //是否喜欢某个品牌
+
+let URL_IsFavoriteDesigner      = "user/designer/is-favorite"      //是否喜欢某个品牌
+
 let URL_FavoriteProduct         = "user/product/favorite"   //收藏单品
 
 let URL_FavoriteBrand           = "user/brand/favorite"   //收藏单品
@@ -79,7 +85,7 @@ let URL_CarList                 = "cart/list"
 
 let URL_CarNologin              = "cart/nologinlistandadd"
 
-let URL_CarDelete               = "cart/del"
+let URL_CarRemove               = "cart/remove" //删除购物车商品
 
 let URL_CarCommit               = "order/commit"
 

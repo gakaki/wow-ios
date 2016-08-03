@@ -70,7 +70,7 @@ class WOWUserController: WOWBaseTableViewController {
     
     func goOrder(type:Int) {
         guard WOWUserManager.loginStatus else{
-            goLogin()
+            toLoginVC(true)
             return
         }
         let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
@@ -87,7 +87,7 @@ class WOWUserController: WOWBaseTableViewController {
                 if WOWUserManager.loginStatus{
                     strongSelf.goUserInfo()
                 }else{
-                    strongSelf.goLogin()
+                    strongSelf.toLoginVC(true)
                 }
             }
         }
@@ -117,12 +117,6 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     
-    private func goLogin(){
-        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
-        let login = vc.topViewController as! WOWLoginController
-        login.fromUserCenter = true
-        presentViewController(vc, animated: true, completion: nil)
-    }
     
     private func addObserver(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
@@ -157,7 +151,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             break
         }
         guard WOWUserManager.loginStatus else{
-            goLogin()
+            toLoginVC(true)
             return
         }
         switch (indexPath.section,indexPath.row){

@@ -48,7 +48,7 @@ public enum RequestApi{
     
     case Api_CarNologin(cart:String)
     
-    case Api_CarDelete(cart:String)
+    case Api_CarRemove(shoppingCartId:Int)
     
     case Api_CarCommit(car:String)
     
@@ -60,13 +60,30 @@ public enum RequestApi{
     
     case Api_Change(param:[String:String])
     
-    case Api_FavoriteProduct(productId:Int)
+    //用户收藏相关
+    case Api_FavoriteProduct(productId: Int)
+    
+    case Api_FavoriteBrand(brandId: Int)
+    
+    case Api_FavoriteDesigner(designerId: Int)
+    
+    case Api_IsFavoriteProduct(productId: Int)
+    
+    case Api_IsFavoriteBrand(brandId: Int)
+    
+    case Api_IsFavoriteDesigner(designerId: Int)
+    
+    case Api_LikeProduct
+    
+    case Api_LikeBrand
+    
+    case Api_LikeDesigner
+    
+    
     
     case Api_Invite //邀请好友
     
     case Api_Login(String,String)
-    
-    case Api_LikeBrand
     
     case Api_OrderList(uid:String,type:String) //100为全部
     
@@ -133,6 +150,7 @@ extension RequestApi:TargetType{
             return URL_home_scenes
         case .Api_Home_Topics:
             return URL_home_topics
+            
         case .Api_ProductList:
             return URL_product
         case .Api_ProductDetail:
@@ -163,18 +181,34 @@ extension RequestApi:TargetType{
             return URL_FavoriteList
         case .Api_CarNologin:
             return URL_CarNologin
-        case .Api_CarDelete:
-            return URL_CarDelete
+        case .Api_CarRemove:
+            return URL_CarRemove
         case .Api_Change:
             return URL_Change
         case .Api_CarCommit:
             return URL_CarCommit
+        //收藏相关
         case .Api_FavoriteProduct:
             return URL_FavoriteProduct
-        case .Api_Login:
-            return URL_login
+        case .Api_FavoriteBrand:
+            return URL_FavoriteBrand
+        case .Api_FavoriteDesigner:
+            return URL_FavoriteDesigner
+        case .Api_IsFavoriteProduct:
+            return URL_IsFavoriteProduct
+        case .Api_IsFavoriteBrand:
+            return URL_IsFavoriteBrand
+        case .Api_IsFavoriteDesigner:
+            return URL_IsFavoriteDesigner
+        case .Api_LikeProduct:
+            return URL_LikeProduct
         case .Api_LikeBrand:
             return URL_LikeBrand
+        case .Api_LikeDesigner:
+            return URL_LikeDesigner
+            
+        case .Api_Login:
+            return URL_login
         case .Api_Register:
             return URL_Register
         case .Api_Sms:
@@ -214,7 +248,7 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist,Api_BrandList,.Api_Home_Banners,.Api_LikeBrand,.Api_ProductDetail,.Api_ProductImgDetail,.Api_ProductSpec,.Api_CarGet:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_CarGet:
             return .GET
 
         default:
@@ -258,16 +292,28 @@ extension RequestApi:TargetType{
                 params =  ["cart":cart]
             case let .Api_CarNologin(cart):
                 params =  ["cart":cart]
-            case let .Api_CarDelete(cart):
-                params =  ["cart":cart]
+            case let .Api_CarRemove(shoppingCartId):
+                params =  ["shoppingCartId":shoppingCartId]
             case let .Api_CarCommit(cart):
                 params =  ["cart":cart]
             case let .Api_CarAdd(productId, productQty):
                 params =  ["productId": productId, "productQty": productQty]
             case let .Api_Change(param):
                 params = param
+            //用户喜欢相关
             case let .Api_FavoriteProduct(productId):
                 params = ["productId":productId]
+            case let .Api_FavoriteBrand(brandId):
+                params = ["brandId":brandId]
+            case let .Api_FavoriteDesigner(designerId):
+                params = ["designerId":designerId]
+            case let .Api_IsFavoriteProduct(productId):
+                params = ["productId":productId]
+            case let .Api_IsFavoriteBrand(brandId):
+                params = ["brandId":brandId]
+            case let .Api_IsFavoriteDesigner(designerId):
+                params = ["designerId":designerId]
+            
             case let .Api_Sms(type,mobile):
                 params =  ["type":type,"mobile":mobile]
             case let .Api_Sms_Code(mobile):

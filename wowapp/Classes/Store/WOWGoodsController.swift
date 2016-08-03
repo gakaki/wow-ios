@@ -93,7 +93,7 @@ class WOWGoodsController: WOWBaseViewController {
     }
     
     func updateBadge(){
-        carButton.badgeString = WOWBuyCarMananger.calCarCount()
+//        carButton.badgeString = WOWBuyCarMananger.calCarCount()
         
     }
     
@@ -123,7 +123,7 @@ class WOWGoodsController: WOWBaseViewController {
         carButton.sizeToFit()
         carButton.addTarget(self, action:#selector(goCar), forControlEvents:.TouchUpInside)
         let item = UIBarButtonItem(customView: carButton)
-        carButton.badgeString = WOWBuyCarMananger.calCarCount()
+//        carButton.badgeString = WOWBuyCarMananger.calCarCount()
         navigationItem.rightBarButtonItem = item
     }
 

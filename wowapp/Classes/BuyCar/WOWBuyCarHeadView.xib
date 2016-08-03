@@ -53,9 +53,17 @@
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bR7-RQ-Rqf" userLabel="lineView">
+                    <rect key="frame" x="15" y="49" width="305" height="1"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Ubx-Xt-d9t"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="bR7-RQ-Rqf" secondAttribute="bottom" id="1s9-xr-552"/>
                 <constraint firstItem="1bK-q2-0hC" firstAttribute="leading" secondItem="GWf-ov-06Z" secondAttribute="trailing" constant="2" id="2DP-kb-7g3"/>
                 <constraint firstItem="kFh-8p-2sN" firstAttribute="centerY" secondItem="7On-5i-pQz" secondAttribute="centerY" id="4Pn-fQ-e2E"/>
                 <constraint firstItem="GWf-ov-06Z" firstAttribute="centerY" secondItem="7On-5i-pQz" secondAttribute="centerY" id="8vQ-df-T06"/>
@@ -63,6 +71,8 @@
                 <constraint firstItem="1bK-q2-0hC" firstAttribute="centerY" secondItem="7On-5i-pQz" secondAttribute="centerY" id="9yt-Js-pH2"/>
                 <constraint firstItem="kFh-8p-2sN" firstAttribute="leading" secondItem="1bK-q2-0hC" secondAttribute="trailing" id="Dpa-kB-GQY"/>
                 <constraint firstItem="7On-5i-pQz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Kjt-zn-uqa"/>
+                <constraint firstItem="bR7-RQ-Rqf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="Rus-no-xAc"/>
+                <constraint firstAttribute="trailing" secondItem="bR7-RQ-Rqf" secondAttribute="trailing" id="YPQ-Ac-G2a"/>
                 <constraint firstAttribute="trailing" secondItem="kFh-8p-2sN" secondAttribute="trailing" constant="15" id="i5w-9L-kuM"/>
                 <constraint firstAttribute="bottom" secondItem="7On-5i-pQz" secondAttribute="bottom" constant="10" id="jQz-j1-Jjs"/>
             </constraints>

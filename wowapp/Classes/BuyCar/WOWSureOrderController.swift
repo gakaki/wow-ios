@@ -14,7 +14,7 @@ class WOWSureOrderController: WOWBaseViewController {
     @IBOutlet weak var totalPriceLabel  : UILabel!
     @IBOutlet weak var tableView        : UITableView!
     var totalPrice                      : String?
-    var productArr                      :[WOWBuyCarModel]!
+    var productArr                      :[WOWCarProductModel]!
     var addressArr                      = [WOWAddressListModel]()
     
     //post的参数
@@ -59,10 +59,10 @@ class WOWSureOrderController: WOWBaseViewController {
         let tips = tipsTextField.text ?? ""
         let uid  = WOWUserManager.userID
         var productParam = [AnyObject]()
-        for item in productArr {
-            let dict = ["skuid":item.skuID,"count":item.skuProductCount,"productid":item.productID]
-            productParam.append(dict)
-        }
+//        for item in productArr {
+//            let dict = ["skuid":item.skuID,"count":item.skuProductCount,"productid":item.productID]
+//            productParam.append(dict)
+//        }
         let requestParam  = ["cart":productParam,"uid":uid,"pay_method":payType,"tips":tips,"address_id":addressid]
         let requestString = JSONStringify(requestParam)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CarCommit(car:requestString), successClosure: { [weak self](result) in

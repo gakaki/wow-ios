@@ -74,7 +74,7 @@ class WOWBuyBackView: UIView {
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
             }
         }
-        
+        buyView.favoriteButton.selected = WOWBuyCarMananger.sharedBuyCar.isFavorite ?? false
         backClear.insertSubview(dismissButton, belowSubview: buyView)
         dismissButton.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{
@@ -107,6 +107,18 @@ class WOWBuyBackView: UIView {
 
 
 //MARK **********************************内容视图***********************************
+protocol goodsBuyViewDelegate:class {
+    //确定购买
+    func sureBuyClick(product: WOWProductInfoModel?)
+    //确定加车
+    func sureAddCarClick(product: WOWProductInfoModel?)
+    //收藏单品
+    func favoriteClick() ->Bool
+   
+    //分享
+    func sharClick()
+}
+
 
 class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UICollectionViewDataSource{
     @IBOutlet weak var countTextField: UITextField!
@@ -121,9 +133,11 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     @IBOutlet weak var secondCollectionView: UICollectionView!
     @IBOutlet weak var secondCollectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var specView: UIView!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
     let identifier = "WOWTagCollectionViewCell"
     var entrance : carEntrance = carEntrance.SpecEntrance
-    
+    weak var delegate: goodsBuyViewDelegate?
     //通过颜色选规格的数组
     var colorSpecArr : [WOWColorSpecModel]!
     //通过规格选颜色的数组
@@ -232,7 +246,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }
 
             collectionView.reloadData()
-
             countTextField.text = "\(skuCount)"
         }
     }
@@ -266,9 +279,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }
             DLog("规格的collectionView的高度\(height)")
 
-        
-        
-        
     }
 
     
@@ -285,14 +295,59 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     
     @IBAction func sureButtonClick(sender: UIButton) {
-        let model = WOWBuyCarModel()
-        model.skuProductCount = skuCount
-        model.skuName = skuName
-        model.skuProductPrice = skuPerPrice
-        model.skuProductImageUrl = skuImageUrl
-        model.skuProductName = productName
-        model.skuID = skuID
-        model.productID = productID
+        
+        guard colorIndex >= 0 else {
+            WOWHud.showMsg("请选择产品颜色")
+            return
+        }
+        guard specIndex >= 0 else {
+            WOWHud.showMsg("请选择产品规格")
+            return
+        }
+        if let color_SpecArr = color_SpecArr {
+            for product in color_SpecArr {
+                if product.specName == specArr[specIndex].specName {
+                    productInfo = product.subProductInfo
+                    productInfo?.productQty = skuCount
+                }
+            }
+        }
+        switch entrance {
+        case .AddEntrance:
+            if let del = delegate {
+                del.sureAddCarClick(productInfo)
+            }
+            print("添加购物车确定")
+        case .PayEntrance:
+       
+             if let del = delegate {
+                del.sureBuyClick(productInfo)
+             }
+            print("立即支付确定")
+        default:
+//            print("选择规格")
+            return
+        }
+        
+       
+    }
+    
+    @IBAction func favoriteButtonClick(sender: UIButton) {
+        
+        if let del = delegate {
+            let favorite = del.favoriteClick()
+            favoriteButton.selected = !favorite
+        }
+        
+    }
+    
+    @IBAction func sharButtonClick(sender: UIButton) {
+        if let del = delegate {
+            del.sharClick()
+        }
+    }
+    
+    @IBAction func addCarButtonClick(sender: UIButton) {
         guard colorIndex >= 0 else {
             WOWHud.showMsg("请选择产品颜色")
             return
@@ -308,21 +363,38 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 }
             }
         }
-        switch entrance {
-        case .AddEntrance:
-            print("添加购物车确定")
-        case .PayEntrance:
-            print("立即支付确定")
-        default:
-//            print("选择规格")
+
+        if let del = delegate {
+            del.sureAddCarClick(productInfo)
+           
+        }
+    }
+    
+    @IBAction func payButtonClick(sender: UIButton) {
+        guard colorIndex >= 0 else {
+            WOWHud.showMsg("请选择产品颜色")
             return
         }
+        guard specIndex >= 0 else {
+            WOWHud.showMsg("请选择产品规格")
+            return
+        }
+        if let color_SpecArr = color_SpecArr {
+            for product in color_SpecArr {
+                if product.specName == specArr[specIndex].specName {
+                    productInfo = product.subProductInfo
+                }
+            }
+        }
         
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWGoodsSureBuyNotificationKey, object:productInfo)
+        if let del = delegate {
+            del.sureBuyClick(productInfo)
+            
+        }
     }
     
     private func showResult(count:Int){
-        self.countTextField.text = "\(skuCount)"
+        self.countTextField.text = "\(count)"
     }
 
 

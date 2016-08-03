@@ -13,7 +13,6 @@ class WOWTagCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var textLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-//        textLabel.borderRadius(20)
         textLabel.layer.borderWidth = 1
         textLabel.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
     }

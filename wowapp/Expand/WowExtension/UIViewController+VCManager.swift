@@ -17,16 +17,22 @@ extension  UIViewController {
         AppDelegate.rootVC = mainVC
         self.presentViewController(mainVC!, animated: true, completion: nil)
     }
-    //跳转登录界面需要传从哪跳转来的 true：个人中心 false：其他
+    //跳转登录界面需要传从哪跳转来的 true：present跳转 false：push跳转
     func toLoginVC(fromUserCenter:Bool = false){
-//        let mainVC = UIStoryboard(name: "Login", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-//        mainVC?.modalTransitionStyle = .FlipHorizontal
-//        AppDelegate.rootVC = mainVC
-//        self.presentViewController(mainVC!, animated: true, completion: nil)
+
+        if fromUserCenter {
+            let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
+            let login = vc.topViewController as! WOWLoginController
+            login.fromUserCenter = fromUserCenter
+            presentViewController(vc, animated: true, completion: nil)
+
+        }else {
+            let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWLoginController)) as! WOWLoginController
+            vc.fromUserCenter = fromUserCenter
+            self.pushVC( vc )
+        }
         
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWLoginController)) as! WOWLoginController
-        vc.fromUserCenter = fromUserCenter
-        self.pushVC( vc )
+        
     }
     //跳转注册/绑定微信界面需要传从哪跳转来的
     func toRegVC(fromWechat:Bool = false , fromUserCenter:Bool = false,userInfoFromWechat:SSDKUser = SSDKUser()){
@@ -101,7 +107,7 @@ extension  UIViewController {
         if fromUserCenter{
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
                 self.dismissViewControllerAnimated(true, completion: nil)
-                UIApplication.appTabBarController.selectedIndex = 0
+//                UIApplication.appTabBarController.selectedIndex = 0
             })
         }else {
             //进入首页

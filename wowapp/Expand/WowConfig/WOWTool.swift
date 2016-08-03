@@ -29,13 +29,13 @@ struct WOWCalPrice {
         return result!
     }
     
-    static func calTotalPrice(prices:[String],counts:[Int]) ->String{
+    static func calTotalPrice(prices:[Double],counts:[Int]) ->String{
         if prices.isEmpty {
             return "0"
         }
         var totalPrice = NSDecimalNumber(float:0)
         for (index,value) in prices.enumerate() {
-            let perPrice = NSDecimalNumber(string:value)
+            let perPrice = NSDecimalNumber(double: value)
             let countNumber = NSDecimalNumber(integer:counts[index])
             let itemPrice = perPrice.decimalNumberByMultiplyingBy(countNumber)
             totalPrice = totalPrice.decimalNumberByAdding(itemPrice)

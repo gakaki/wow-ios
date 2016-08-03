@@ -10,7 +10,7 @@ import UIKit
 
 class WOWCarGoodsListController: WOWBaseTableViewController {
     
-    var productArr:[WOWBuyCarModel]!
+    var productArr:[WOWCarProductModel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()

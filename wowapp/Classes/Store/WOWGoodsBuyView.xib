@@ -22,7 +22,7 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="sureButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="dVV-2K-BIp"/>
+                        <action selector="sureButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="XpB-AN-hmm"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hza-a2-1RF">
@@ -36,6 +36,9 @@
                             </constraints>
                             <state key="normal" image="like_white"/>
                             <state key="selected" image="like_select"/>
+                            <connections>
+                                <action selector="favoriteButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Nte-vj-Fll"/>
+                            </connections>
                         </button>
                         <button opaque="NO" tag="4002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6K3-rO-I60" userLabel="share">
                             <rect key="frame" x="50" y="0.0" width="50" height="50"/>
@@ -45,6 +48,9 @@
                             </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <state key="normal" image="share_white"/>
+                            <connections>
+                                <action selector="sharButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="4w8-aa-Mr9"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MFg-ob-Mh5" userLabel="line">
                             <rect key="frame" x="0.0" y="0.0" width="395" height="1"/>
@@ -63,6 +69,9 @@
                             <state key="normal" title="加入购物车">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="addCarButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="aGy-Qw-aEX"/>
+                            </connections>
                         </button>
                         <button opaque="NO" tag="4004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onZ-29-BUW">
                             <rect key="frame" x="295" y="0.0" width="100" height="50"/>
@@ -75,6 +84,9 @@
                             <state key="normal" title="立即购买">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="payButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="pb3-4Q-C1s"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -314,6 +326,7 @@
                 <outlet property="collectionView" destination="hyL-jG-Ufx" id="c7x-9J-ugp"/>
                 <outlet property="collectionViewHeight" destination="cvb-QV-9e9" id="HUI-TN-nh6"/>
                 <outlet property="countTextField" destination="sR8-yM-ked" id="hoJ-ZM-NOd"/>
+                <outlet property="favoriteButton" destination="5oP-rH-F7B" id="K1J-9X-18Z"/>
                 <outlet property="goodsImageView" destination="Pm8-hJ-vcq" id="AAi-Vs-Xde"/>
                 <outlet property="nameLabel" destination="ttI-Mh-Qzd" id="FAQ-Ws-T2L"/>
                 <outlet property="perPriceLabel" destination="lt0-VW-gYn" id="RHy-uB-1p7"/>

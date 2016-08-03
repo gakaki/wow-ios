@@ -93,7 +93,7 @@ class WOWSenceController: WOWBaseViewController {
                 if WOWUserManager.loginStatus { //登录了
                     self.saveNetCar(arr)
                 }else{ //未登录
-                    self.saveRealm(arr)
+//                    self.saveRealm(arr)
                 }
             }
         }
@@ -129,30 +129,30 @@ class WOWSenceController: WOWBaseViewController {
         }
     }
     
-    private func saveRealm(arr:[WOWProductModel]){
-        for item in arr {
-            let buyCarModel = WOWBuyCarModel()
-            buyCarModel.productID       = item.productId ?? ""
-            buyCarModel.skuID           = item.skuID ?? ""
-            buyCarModel.skuProductPrice = item.price ?? ""
-            buyCarModel.skuProductName = item.productName ?? ""
-            buyCarModel.skuName         = "  " //FIXME:这个地方缺少一个规格
-            buyCarModel.skuProductImageUrl  = item.productImage ?? ""
-            
-            let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(buyCarModel.skuID)'")
-            if let exitModel = exitSkus.first { //之前存在 那就更新数量
-                try! WOWRealm.write({ 
-                    exitModel.skuProductCount += 1
-                })
-            }else{//之前不存在
-                try! WOWRealm.write({
-                    WOWRealm.add(buyCarModel)
-                })
-            }
-        }
-        WOWBuyCarMananger.updateBadge()
-        WOWHud.showMsg("添加购物车成功")
-    }
+//    private func saveRealm(arr:[WOWProductModel]){
+//        for item in arr {
+//            let buyCarModel = WOWBuyCarModel()
+//            buyCarModel.productID       = item.productId ?? ""
+//            buyCarModel.skuID           = item.skuID ?? ""
+//            buyCarModel.skuProductPrice = item.price ?? ""
+//            buyCarModel.skuProductName = item.productName ?? ""
+//            buyCarModel.skuName         = "  " //FIXME:这个地方缺少一个规格
+//            buyCarModel.skuProductImageUrl  = item.productImage ?? ""
+//            
+//            let exitSkus = WOWRealm.objects(WOWBuyCarModel).filter("skuID = '\(buyCarModel.skuID)'")
+//            if let exitModel = exitSkus.first { //之前存在 那就更新数量
+//                try! WOWRealm.write({ 
+//                    exitModel.skuProductCount += 1
+//                })
+//            }else{//之前不存在
+//                try! WOWRealm.write({
+//                    WOWRealm.add(buyCarModel)
+//                })
+//            }
+//        }
+//        WOWBuyCarMananger.updateBadge()
+//        WOWHud.showMsg("添加购物车成功")
+//    }
 
     @IBAction func share(sender: UIButton) {
         //FIXME:暂时分享出去公司的官网

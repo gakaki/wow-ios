@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame:UIScreen.mainScreen().bounds)
-//        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enable = true
         //初始化外观
         //com.wowdsgn.Wow
         initialAppearance()

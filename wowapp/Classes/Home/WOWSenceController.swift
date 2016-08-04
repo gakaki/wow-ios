@@ -114,7 +114,7 @@ class WOWSenceController: WOWBaseViewController {
             }
             param["cart"] = cars
             let string = JSONStringify(param)
-            WOWNetManager.sharedManager.requestWithTarget(.Api_CarList(cart:string), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(.Api_CartList(cart:string), successClosure: { [weak self](result) in
                 if let _ = self{
                     let json = JSON(result)
                     DLog(json)

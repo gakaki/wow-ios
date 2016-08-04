@@ -12,6 +12,7 @@ import Qiniu
 import Alamofire
 import Hashids_Swift
 import FCUUID
+import IQKeyboardManagerSwift
 
 class WOWUserInfoController: WOWBaseTableViewController {
 
@@ -56,11 +57,25 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    
+        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
             configUserInfo()
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -76,6 +91,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         ageTextField.inputView = pickerContainerView
         sexTextField.inputView = pickerContainerView
         starTextField.inputView = pickerContainerView
+ 
         pickerContainerView.pickerView.delegate = self
         pickerContainerView.cancelButton.addTarget(self, action:#selector(cancelPicker), forControlEvents:.TouchUpInside)
         pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), forControlEvents:.TouchUpInside)
@@ -328,18 +344,22 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
             pickDataArr = WOWAgeRange
             self.pickerContainerView.pickerView.reloadComponent(0)
             pickerContainerView.pickerView.selectRow(age, inComponent: 0, animated: true)
+           
         }else if textField == starTextField{
             pickDataArr = WOWConstellation
             self.pickerContainerView.pickerView.reloadComponent(0)
             pickerContainerView.pickerView.selectRow(star - 1, inComponent: 0, animated: true)
+         
         }else if textField == sexTextField{
             pickDataArr = WOWSex
             self.pickerContainerView.pickerView.reloadComponent(0)
             pickerContainerView.pickerView.selectRow(sex - 1, inComponent: 0, animated: true)
+     
         }
         return true
     }
     
+  
 }
 
 

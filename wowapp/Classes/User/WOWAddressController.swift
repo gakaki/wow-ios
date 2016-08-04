@@ -55,7 +55,13 @@ class WOWAddressController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.separatorColor = SeprateColor
-        navigationItem.title = "管理收货地址"
+        switch entrance {
+        case .Me:
+            navigationItem.title = "管理收货地址"
+        default:
+            navigationItem.title = "收货地址"
+
+        }
     }
     
 
@@ -65,7 +71,7 @@ class WOWAddressController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist, successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                let arr = Mapper<WOWAddressListModel>().mapArray(result)
+                let arr = Mapper<WOWAddressListModel>().mapArray(JSON(result)["shippingInfoResultList"].arrayObject)
                 if let array = arr{
                     strongSelf.dataArr = []
                     strongSelf.dataArr.appendContentsOf(array)
@@ -119,7 +125,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if entrance == .SureOrder {
             if let ac = action{
-                ac(object: dataArr[indexPath.row])
+                ac(object: dataArr[indexPath.section])
                 navigationController?.popViewControllerAnimated(true)
             }
         }
@@ -154,10 +160,11 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
     //选择默认地址
     func checkDefaut(sender:UIButton) {
         let model = dataArr[sender.tag]
+        //如果这个地址本来就是默认的就不进这个方法
         guard model.isDefault!  else {
             let addressId = model.id ?? 0
             
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDefault(id: addressId), successClosure: {[weak self] (result) in
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressSetDefault(id: addressId), successClosure: {[weak self] (result) in
                 if let strongSelf = self{
                     for model:WOWAddressListModel in strongSelf.dataArr {
                         model.isDefault = false

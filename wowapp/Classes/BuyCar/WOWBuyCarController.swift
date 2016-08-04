@@ -115,7 +115,7 @@ class WOWBuyCarController: WOWBaseViewController {
             return
         }
          //结算
-            let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWSureOrderController") as!WOWSureOrderController
+            let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
             sv.productArr = selectedArr
             sv.totalPrice = totalPrice
             navigationController?.pushViewController(sv, animated: true)
@@ -165,7 +165,7 @@ class WOWBuyCarController: WOWBaseViewController {
      */
     private func asyncCarList(){
         //1.直接拉取服务器端购物车数据
-            WOWNetManager.sharedManager.requestWithTarget(.Api_CarGet, successClosure: {[weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(.Api_CartGet, successClosure: {[weak self](result) in
                 if let strongSelf = self{
                     let model = Mapper<WOWCarModel>().map(result)
                     if let arr = model?.shoppingCartResult {
@@ -191,11 +191,17 @@ class WOWBuyCarController: WOWBaseViewController {
      3.删除购物车数据
      - parameter items:
      */
-    private func asyncCarDelete(indexPath: NSIndexPath){
-        let model = dataArr[indexPath.section]
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CarRemove(shoppingCartId:model.shoppingCartId ?? 0), successClosure: {[weak self] (result) in
+    private func asyncCarDelete(model: WOWCarProductModel){
+        var shoppingCartId = [Int]()
+        shoppingCartId.append(model.shoppingCartId ?? 0)
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CartRemove(shoppingCartId:shoppingCartId), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-               strongSelf.dataArr.removeAtIndex(indexPath.section)
+               strongSelf.dataArr.removeObject(model)
+                //判断一下如果删除的商品是已选中商品。那么从selectedArr中也要删除这个元素
+                
+                if model.isSelected ?? false{
+                    strongSelf.selectedArr.removeObject(model)
+                }
                 strongSelf.tableView.reloadData()
             }
         }) { (errorMsg) in
@@ -211,7 +217,7 @@ class WOWBuyCarController: WOWBaseViewController {
      */
     private func asyncUpdateCount(shoppingCartId: Int, productQty: Int, indexPath: NSIndexPath){
 
-        WOWNetManager.sharedManager.requestWithTarget(.Api_CarModify(shoppingCartId:shoppingCartId, productQty: productQty), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CartModify(shoppingCartId:shoppingCartId, productQty: productQty), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let model = strongSelf.dataArr[indexPath.section]
                 model.productQty = productQty
@@ -271,7 +277,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-                asyncCarDelete(indexPath)
+                asyncCarDelete(dataArr[indexPath.section])
         }
         
     }

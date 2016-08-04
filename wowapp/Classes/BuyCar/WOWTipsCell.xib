@@ -7,24 +7,26 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWTipsCell" rowHeight="44" id="Pc7-KI-CrF" customClass="WOWTipsCell" customModule="wowapp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="387" height="44"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWTipsCell" rowHeight="130" id="Pc7-KI-CrF" customClass="WOWTipsCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="387" height="130"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pc7-KI-CrF" id="pCJ-3x-6Az">
-                <rect key="frame" x="0.0" y="0.0" width="387" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="387" height="129.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="给尖叫设计留言" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ecU-HV-o4K">
-                        <rect key="frame" x="15" y="0.0" width="357" height="43"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="写下您的特殊要求" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="ecU-HV-o4K">
+                        <rect key="frame" x="15" y="15" width="357" height="99.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="DKm-Ne-eMS"/>
                             <constraint firstAttribute="height" constant="43" id="h0c-28-9E8"/>
+                            <constraint firstAttribute="height" constant="99.5" id="yRd-YR-IfU"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="DKm-Ne-eMS"/>
+                                <exclude reference="h0c-28-9E8"/>
                             </mask>
                         </variation>
                         <connections>
@@ -33,16 +35,16 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ecU-HV-o4K" firstAttribute="top" secondItem="pCJ-3x-6Az" secondAttribute="top" id="Exn-zB-eq3"/>
+                    <constraint firstItem="ecU-HV-o4K" firstAttribute="top" secondItem="pCJ-3x-6Az" secondAttribute="top" constant="15" id="Exn-zB-eq3"/>
                     <constraint firstAttribute="trailing" secondItem="ecU-HV-o4K" secondAttribute="trailing" constant="15" id="HFq-Bw-DzE"/>
                     <constraint firstItem="ecU-HV-o4K" firstAttribute="leading" secondItem="pCJ-3x-6Az" secondAttribute="leading" constant="15" id="RBu-2l-Yh0"/>
-                    <constraint firstAttribute="bottom" secondItem="ecU-HV-o4K" secondAttribute="bottom" priority="999" id="iB8-2V-3nj"/>
+                    <constraint firstAttribute="bottom" secondItem="ecU-HV-o4K" secondAttribute="bottom" priority="999" constant="15" id="iB8-2V-3nj"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="textField" destination="ecU-HV-o4K" id="515-Oa-szQ"/>
             </connections>
-            <point key="canvasLocation" x="207.5" y="552"/>
+            <point key="canvasLocation" x="267.5" y="526"/>
         </tableViewCell>
     </objects>
 </document>

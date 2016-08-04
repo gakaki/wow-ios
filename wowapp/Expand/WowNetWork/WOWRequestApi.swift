@@ -28,7 +28,9 @@ public enum RequestApi{
     
     case Api_AddressDelete(id:Int)
     
-    case Api_AddressDefault(id:Int)
+    case Api_AddressSetDefault(id:Int)
+    
+    case Api_AddressDefault
     
     case Api_AddressEdit(id: Int, receiverName: String, provinceId: Int, cityId: Int, countyId: Int, addressDetail: String, receiverMobile: String, isDefault:Bool)
     
@@ -42,19 +44,21 @@ public enum RequestApi{
     
     case Api_Captcha(mobile:String) //绑定微信验证码
     
-    case Api_CarModify(shoppingCartId:Int, productQty:Int)
+    case Api_CartModify(shoppingCartId:Int, productQty:Int)
     
-    case Api_CarList(cart:String)
+    case Api_CartList(cart:String)
     
-    case Api_CarNologin(cart:String)
+    case Api_CartNologin(cart:String)
     
-    case Api_CarRemove(shoppingCartId:Int)
+    case Api_CartRemove(shoppingCartId:[Int])
     
-    case Api_CarCommit(car:String)
+    case Api_CartCommit(car:String)
     
-    case Api_CarAdd(productId: Int, productQty: Int)
+    case Api_CartAdd(productId: Int, productQty: Int)
     
-    case Api_CarGet
+    case Api_CartGet
+    
+    case Api_CartSelect
     
     case Api_CommentList(pageindex:String,thingid:String,type:String)
     
@@ -88,6 +92,8 @@ public enum RequestApi{
     case Api_OrderList(uid:String,type:String) //100为全部
     
     case Api_OrderStatus(uid:String,order_id:String,status:String)
+    
+    case Api_OrderSettle
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
     
@@ -167,27 +173,29 @@ extension RequestApi:TargetType{
             return URL_CommentList
         case .Api_SubmitComment:
             return URL_SubmitComment
-        case .Api_CarModify:
-            return URL_CarModify
+        //购物车相关
+        case .Api_CartModify:
+            return URL_CartModify
         case .Api_UserUpdate:
             return URL_UpdateInfo
-        case .Api_CarList:
-            return URL_CarList
-        case .Api_CarAdd:
-            return URL_CarAdd
-        case .Api_CarGet:
-            return URL_CarGet
+        case .Api_CartList:
+            return URL_CartList
+        case .Api_CartAdd:
+            return URL_CartAdd
+        case .Api_CartGet:
+            return URL_CartGet
+        case .Api_CartNologin:
+            return URL_CartNologin
+        case .Api_CartRemove:
+            return URL_CartRemove
+        case .Api_CartCommit:
+            return URL_CartCommit
+        case .Api_CartSelect:
+            return URL_CartSelect
+            
+        //收藏相关
         case .Api_UserFavorite:
             return URL_FavoriteList
-        case .Api_CarNologin:
-            return URL_CarNologin
-        case .Api_CarRemove:
-            return URL_CarRemove
-        case .Api_Change:
-            return URL_Change
-        case .Api_CarCommit:
-            return URL_CarCommit
-        //收藏相关
         case .Api_FavoriteProduct:
             return URL_FavoriteProduct
         case .Api_FavoriteBrand:
@@ -225,20 +233,28 @@ extension RequestApi:TargetType{
             return URL_WechatBind
         case .Api_ResetPwd:
             return URL_ResetPassword
+        case .Api_Change:
+            return URL_Change
+            
         case .Api_AddressAdd:
             return URL_AddressAdd
         case .Api_Addresslist:
             return URL_AddressList
         case .Api_AddressDelete:
             return URL_AddressDelete
-        case .Api_AddressDefault:
-            return URL_AddressDefault
+        case .Api_AddressSetDefault:
+            return URL_AddressSetDefault
         case .Api_AddressEdit:
             return URL_AddressEdit
+        case .Api_AddressDefault:
+            return URL_AddressDefault
+            
         case .Api_OrderList:
             return URL_OrderList
         case .Api_OrderStatus:
             return URL_OrderStatus
+        case .Api_OrderSettle:
+            return URL_OrderSettle
         case .Api_Invite:
             return URL_Invite
             
@@ -248,7 +264,7 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_CarGet:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_CartGet, .Api_AddressDefault, .Api_OrderSettle:
             return .GET
 
         default:
@@ -286,17 +302,17 @@ extension RequestApi:TargetType{
                 params =  param
             case let .Api_UserFavorite(uid,type,pageindex):
                 params =  ["uid":uid,"type":type,"pageindex":pageindex]
-            case let .Api_CarModify(shoppingCartId, productQty):
+            case let .Api_CartModify(shoppingCartId, productQty):
                 params =  ["shoppingCartId": shoppingCartId, "productQty": productQty]
-            case let .Api_CarList(cart):
+            case let .Api_CartList(cart):
                 params =  ["cart":cart]
-            case let .Api_CarNologin(cart):
+            case let .Api_CartNologin(cart):
                 params =  ["cart":cart]
-            case let .Api_CarRemove(shoppingCartId):
-                params =  ["shoppingCartId":shoppingCartId]
-            case let .Api_CarCommit(cart):
+            case let .Api_CartRemove(shoppingCartId):
+                params =  ["shoppingCartIds":shoppingCartId]
+            case let .Api_CartCommit(cart):
                 params =  ["cart":cart]
-            case let .Api_CarAdd(productId, productQty):
+            case let .Api_CartAdd(productId, productQty):
                 params =  ["productId": productId, "productQty": productQty]
             case let .Api_Change(param):
                 params = param
@@ -334,7 +350,7 @@ extension RequestApi:TargetType{
                 break
             case let .Api_AddressDelete(id):
                 params =  ["id":id]
-            case let .Api_AddressDefault(id):
+            case let .Api_AddressSetDefault(id):
                 params = ["id":id]
             case let .Api_AddressEdit(id, receiverName, provinceId, cityId, countyId, addressDetail, receiverMobile, isDefault):
                 params = ["id": id, "receiverName": receiverName, "provinceId": provinceId, "cityId": cityId, "countyId":countyId, "addressDetail": addressDetail, "receiverMobile": receiverMobile, "isDefault": isDefault]
@@ -372,7 +388,7 @@ extension RequestApi:TargetType{
             return "验证码发送成功"
         case .Api_AddressAdd:
             return ""
-        case .Api_CarList,.Api_ProductList:
+        case .Api_CartList,.Api_ProductList:
             return ""
         default:
             return ""

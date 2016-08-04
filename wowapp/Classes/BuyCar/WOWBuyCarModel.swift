@@ -72,7 +72,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var productStatus                       : String?
     var productStatusName                   : String?
     var isSelected                          : Bool?
-    var specName                            : String?
+    var specName                            : String?   //图片地址
     
     required init?(_ map: Map) {
         

@@ -14,9 +14,9 @@ import Foundation
 
 
 //#if WOWDEBUG
-//   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
+   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
 //#else
-   let BaseUrl = "https://openapi.wowdsgn.com/v1/" //外网地址
+//   let BaseUrl = "https://openapi.wowdsgn.com/v1/" //外网地址
 //#endif
 
 /****************************API_URL接口**********************************/
@@ -79,19 +79,24 @@ let URL_activity                = "post"
 
 //*********************4.购物车**********
 // tag 为0 的时候 自增  为1的时候覆盖掉
-let URL_CarModify           = "cart/modify"
+let URL_CartModify               = "cart/modify"
 
-let URL_CarList                 = "cart/list"
+let URL_CartList                 = "cart/list"
 
-let URL_CarNologin              = "cart/nologinlistandadd"
+let URL_CartNologin              = "cart/nologinlistandadd"
 
-let URL_CarRemove               = "cart/remove" //删除购物车商品
+let URL_CartRemove               = "cart/remove" //删除购物车商品
 
-let URL_CarCommit               = "order/commit"
+let URL_CartCommit               = "order/commit"
 
-let URL_CarAdd                  = "cart/add"        //添加购物车
+let URL_CartAdd                  = "cart/add"        //添加购物车
 
-let URL_CarGet                  = "cart/get"        //查询购物车列表
+let URL_CartGet                  = "cart/get"        //查询购物车列表
+
+let URL_CartSelect              = "cart/selectOrCancel"     //选中或取消选中购物车商品
+
+//订单相关
+let URL_OrderSettle             = "order/settle"            //查询订单内的物品
 
 
 //5.个人中心
@@ -118,8 +123,8 @@ let URL_Change                  = "user/change"                   //修改用户
 let URL_AddressAdd              = "user/shippinginfo/create"   //添加收货地址
 let URL_AddressList             = "user/shippinginfo/list"
 let URL_AddressDelete           = "user/shippinginfo/delete"
-let URL_AddressDefault          = "user/shippinginfo/set-default" //设为默认收货地址
-
+let URL_AddressSetDefault       = "user/shippinginfo/set-default" //设为默认收货地址
+let URL_AddressDefault          = "user/shippinginfo/default"   //查询默认收货地址
 let URL_AddressEdit             = "user/shippinginfo/update"    //编辑收货地址
 
 let URL_OrderList               = "order/list"

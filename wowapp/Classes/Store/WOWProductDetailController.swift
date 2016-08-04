@@ -244,7 +244,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         if let product = product {
             print(product.weight, product.sizeText, product.subProductId, product.sellPrice)
             
-            WOWNetManager.sharedManager.requestWithTarget(.Api_CarAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: { (result) in
+            WOWNetManager.sharedManager.requestWithTarget(.Api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: { (result) in
                 
             }) { (errorMsg) in
                 

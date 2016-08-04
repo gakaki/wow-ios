@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="WOWOrderFreightCell" selectionStyle="none" indentationWidth="10" rowHeight="52" id="KGk-i7-Jjw" userLabel="OrderFreightCell" customClass="WOWOrderFreightCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3F-YQ-meT">
+                        <rect key="frame" x="15" y="16" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freightInfo" translatesAutoresizingMaskIntoConstraints="NO" id="qL0-on-iip">
+                        <rect key="frame" x="60.5" y="18" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Bi6-ol-TtB"/>
+                            <constraint firstAttribute="width" constant="15" id="sOu-0V-q7C"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="MjL-Ga-mgn">
+                        <rect key="frame" x="352" y="19" width="8" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="8" id="coM-id-mnX"/>
+                            <constraint firstAttribute="height" constant="13" id="uyM-Fq-2X0"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgN-gi-k8r">
+                        <rect key="frame" x="304" y="16.5" width="33" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.99607843137254903" green="0.2196078431372549" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXa-Nj-Ycs">
+                        <rect key="frame" x="327" y="16.5" width="33" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95m-1U-wxq">
+                        <rect key="frame" x="15" y="49" width="360" height="1"/>
+                        <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="NlG-IR-ZiV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="MjL-Ga-mgn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="46q-dZ-2Z5"/>
+                    <constraint firstAttribute="trailing" secondItem="yXa-Nj-Ycs" secondAttribute="trailing" constant="15" id="6w9-z1-S6V"/>
+                    <constraint firstAttribute="bottom" secondItem="95m-1U-wxq" secondAttribute="bottom" id="7y4-WA-l8F"/>
+                    <constraint firstItem="yXa-Nj-Ycs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KdX-Pb-a9i"/>
+                    <constraint firstItem="I3F-YQ-meT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Tj0-C4-ouM"/>
+                    <constraint firstItem="qL0-on-iip" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VeA-Ph-xkC"/>
+                    <constraint firstItem="qL0-on-iip" firstAttribute="leading" secondItem="I3F-YQ-meT" secondAttribute="trailing" constant="10" id="Zbl-vI-m0t"/>
+                    <constraint firstAttribute="trailing" secondItem="95m-1U-wxq" secondAttribute="trailing" id="bg6-3b-9nN"/>
+                    <constraint firstItem="95m-1U-wxq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ctd-eF-QnS"/>
+                    <constraint firstItem="dgN-gi-k8r" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gM4-LD-B5N"/>
+                    <constraint firstAttribute="trailing" secondItem="MjL-Ga-mgn" secondAttribute="trailing" constant="15" id="gqI-UO-9Kw"/>
+                    <constraint firstItem="I3F-YQ-meT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="h9H-61-Ryw"/>
+                    <constraint firstItem="MjL-Ga-mgn" firstAttribute="leading" secondItem="dgN-gi-k8r" secondAttribute="trailing" constant="15" id="z5d-cw-jE5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="couponLabel" destination="dgN-gi-k8r" id="TUX-Mh-YQd"/>
+                <outlet property="freightInfoImage" destination="qL0-on-iip" id="nJh-Z9-Ihh"/>
+                <outlet property="freightPriceLabel" destination="yXa-Nj-Ycs" id="Cfj-ru-8iv"/>
+                <outlet property="leftLabel" destination="I3F-YQ-meT" id="MPj-eL-j5n"/>
+                <outlet property="lineView" destination="95m-1U-wxq" id="0Qr-TW-CyD"/>
+                <outlet property="nextImage" destination="MjL-Ga-mgn" id="emk-Xe-tMb"/>
+            </connections>
+            <point key="canvasLocation" x="290.5" y="221"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="freightInfo" width="16" height="16"/>
+        <image name="rectangle" width="9" height="16"/>
+    </resources>
+</document>

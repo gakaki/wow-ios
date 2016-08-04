@@ -73,7 +73,7 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     }
     //MARK: - UICollectionView Delegate/Datasource Methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTypeCollectionCell
         if let arr = typeArr {
             let item = arr[indexPath.row]
             cell.textLabel.text = item

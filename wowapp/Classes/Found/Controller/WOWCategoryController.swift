@@ -3,7 +3,7 @@
 import UIKit
 
 class WOWCategoryController: WOWBaseViewController {
-    
+        var cid:String = ""
 //    let cellID1              = String( WOWCategoryTopCell )
 //    let cellID2              = String( WOWCategoryColumnCell )
 //    

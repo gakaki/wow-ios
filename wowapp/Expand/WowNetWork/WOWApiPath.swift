@@ -98,6 +98,9 @@ let URL_CartSelect              = "cart/selectOrCancel"     //选中或取消选
 //订单相关
 let URL_OrderSettle             = "order/settle"            //查询订单内的物品
 
+let URL_OrderCreat              = "/order/create"           //创建订单
+
+let URL_OrderCharge             = "/order/charge"             //获取支付交易凭证
 
 //5.个人中心
 let URL_UpdateInfo              = "usermongo/userupdate"

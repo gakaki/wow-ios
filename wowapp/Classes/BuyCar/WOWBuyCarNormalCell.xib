@@ -16,11 +16,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyR-ah-l3S" userLabel="lineView">
-                        <rect key="frame" x="15" y="50" width="360" height="1"/>
+                        <rect key="frame" x="15" y="50" width="360" height="0.5"/>
                         <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="2GW-n7-O1I"/>
+                            <constraint firstAttribute="height" constant="0.5" id="PwK-tT-giS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2GW-n7-O1I"/>
+                            </mask>
+                        </variation>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qgX-zd-Hl4">
                         <rect key="frame" x="15" y="66" width="80" height="80"/>
@@ -72,7 +78,7 @@
                     </collectionView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRw-uF-qyi">
                         <rect key="frame" x="277" y="13" width="24" height="24"/>
-                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="GD8-zF-d89"/>
                             <constraint firstAttribute="width" constant="24" id="Mvj-A3-yzC"/>
@@ -102,7 +108,7 @@
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTf-lT-f2D">
                         <rect key="frame" x="336" y="13" width="24" height="24"/>
-                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="7r8-qd-RYz"/>
                             <constraint firstAttribute="width" constant="24" id="Fvq-NL-BoC"/>
@@ -152,7 +158,7 @@
                 <outlet property="selectButton" destination="1L5-Zq-KJv" id="dao-YH-vgK"/>
                 <outlet property="subCountButton" destination="nRw-uF-qyi" id="h6Q-sL-qEw"/>
             </connections>
-            <point key="canvasLocation" x="797.5" y="312.5"/>
+            <point key="canvasLocation" x="873.5" y="299"/>
         </tableViewCell>
     </objects>
     <resources>

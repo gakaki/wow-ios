@@ -55,11 +55,17 @@
                         </connections>
                     </collectionView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DpN-ux-8nx">
-                        <rect key="frame" x="15" y="110" width="360" height="1"/>
+                        <rect key="frame" x="15" y="110" width="360" height="0.5"/>
                         <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Yik-jL-GI3"/>
+                            <constraint firstAttribute="height" constant="0.5" id="Ywz-eC-6CF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Yik-jL-GI3"/>
+                            </mask>
+                        </variation>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFe-6P-Mt5">
                         <rect key="frame" x="302" y="79" width="58" height="16"/>

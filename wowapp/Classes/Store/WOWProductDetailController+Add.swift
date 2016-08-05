@@ -59,7 +59,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             let cell =  tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailPriceCell), forIndexPath: indexPath) as! WOWProductDetailPriceCell
             cell.nameLabel.text = productModel?.productName
             if let price = productModel?.sellPrice {
-                cell.actualPriceLabel.text = String(price).priceFormat()
+                cell.actualPriceLabel.text = String(format: "%.2f",price).priceFormat()
             }
             returnCell = cell
         case (0,1): //品牌设计师

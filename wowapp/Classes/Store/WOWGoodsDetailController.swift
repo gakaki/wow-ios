@@ -235,11 +235,11 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //MARK:选择规格
     @IBAction func buyButtonClick(sender: UIButton) {
 //        WOWBuyCarMananger.sharedBuyCar.productSpecModel = self.productModel
-        WOWBuyCarMananger.sharedBuyCar.skuName     = self.productModel?.skus?.first?.skuTitle
-        WOWBuyCarMananger.sharedBuyCar.buyCount    = 1
-        WOWBuyCarMananger.sharedBuyCar.skuID       = self.productModel?.skus?.first?.skuID ?? ""
-        WOWBuyCarMananger.sharedBuyCar.skuPrice = productModel?.price ?? ""
-        WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
+//        WOWBuyCarMananger.sharedBuyCar.skuName     = self.productModel?.skus?.first?.skuTitle
+//        WOWBuyCarMananger.sharedBuyCar.buyCount    = 1
+//        WOWBuyCarMananger.sharedBuyCar.skuID       = self.productModel?.skus?.first?.skuID ?? ""
+//        WOWBuyCarMananger.sharedBuyCar.skuPrice = productModel?.price ?? ""
+//        WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
         backView.show(carEntrance.PayEntrance)

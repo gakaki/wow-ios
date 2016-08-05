@@ -44,6 +44,7 @@ public enum RequestApi{
     
     case Api_Captcha(mobile:String) //绑定微信验证码
     
+    //购物车相关
     case Api_CartModify(shoppingCartId:Int, productQty:Int)
     
     case Api_CartList(cart:String)
@@ -58,7 +59,10 @@ public enum RequestApi{
     
     case Api_CartGet
     
-    case Api_CartSelect
+    case Api_CartSelect(shoppingCartIds: [Int])
+    
+    case Api_CartUnSelect(shoppingCartIds: [Int])
+    
     
     case Api_CommentList(pageindex:String,thingid:String,type:String)
     
@@ -98,6 +102,8 @@ public enum RequestApi{
     case Api_OrderSettle
     
     case Api_OrderCreate(params: [String: AnyObject]?)
+    
+    case Api_OrderCharge(orderNo: String, channel: String, clientIp: String)
 //
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
@@ -197,6 +203,8 @@ extension RequestApi:TargetType{
             return URL_CartCommit
         case .Api_CartSelect:
             return URL_CartSelect
+        case .Api_CartUnSelect:
+            return URL_CartUnSelect
             
         //收藏相关
         case .Api_UserFavorite:
@@ -254,6 +262,7 @@ extension RequestApi:TargetType{
         case .Api_AddressDefault:
             return URL_AddressDefault
             
+        //订单相关
         case .Api_OrderList:
             return URL_OrderList
         case .Api_OrderStatus:
@@ -262,6 +271,9 @@ extension RequestApi:TargetType{
             return URL_OrderSettle
         case .Api_OrderCreate:
             return URL_OrderCreat
+        case .Api_OrderCharge:
+            return URL_OrderCharge
+            
         case .Api_Invite:
             return URL_Invite
             
@@ -309,6 +321,7 @@ extension RequestApi:TargetType{
                 params =  param
             case let .Api_UserFavorite(uid,type,pageindex):
                 params =  ["uid":uid,"type":type,"pageindex":pageindex]
+            
             case let .Api_CartModify(shoppingCartId, productQty):
                 params =  ["shoppingCartId": shoppingCartId, "productQty": productQty]
             case let .Api_CartList(cart):
@@ -321,6 +334,12 @@ extension RequestApi:TargetType{
                 params =  ["cart":cart]
             case let .Api_CartAdd(productId, productQty):
                 params =  ["productId": productId, "productQty": productQty]
+            case let .Api_CartSelect(shoppingCartIds):
+                params = ["shoppingCartIds": shoppingCartIds]
+            case let .Api_CartUnSelect(shoppingCartIds):
+                params = ["shoppingCartIds": shoppingCartIds]
+
+            
             case let .Api_Change(param):
                 params = param
             //用户喜欢相关
@@ -361,12 +380,16 @@ extension RequestApi:TargetType{
                 params = ["id":id]
             case let .Api_AddressEdit(id, receiverName, provinceId, cityId, countyId, addressDetail, receiverMobile, isDefault):
                 params = ["id": id, "receiverName": receiverName, "provinceId": provinceId, "cityId": cityId, "countyId":countyId, "addressDetail": addressDetail, "receiverMobile": receiverMobile, "isDefault": isDefault]
+            
+            //订单相关
             case let .Api_OrderList(uid,type):
                 params =  ["uid":uid,"type":type]
             case let .Api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]
             case let .Api_OrderCreate(param):
                 params = param
+            case let .Api_OrderCharge(orderNo, channel, alientIp):
+                params = ["orderNo": orderNo, "channel": channel, "clientIp": alientIp]
             
             case .Api_Home_Banners():
                 params =  ["pageType":1]

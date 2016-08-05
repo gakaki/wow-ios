@@ -49,7 +49,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        productId = "104"
+        productId = "140"
         request()
     }
 
@@ -152,11 +152,11 @@ class WOWProductDetailController: WOWBaseViewController {
     func chooseStyle(entrue: carEntrance) {
         WOWBuyCarMananger.sharedBuyCar.productSpecModel      = self.productSpecModel
         WOWBuyCarMananger.sharedBuyCar.isFavorite       = likeButton.selected
-        WOWBuyCarMananger.sharedBuyCar.skuName          = self.productModel?.skus?.first?.skuTitle
-        WOWBuyCarMananger.sharedBuyCar.buyCount         = 1
-        WOWBuyCarMananger.sharedBuyCar.skuID            = self.productModel?.skus?.first?.skuID ?? ""
-        WOWBuyCarMananger.sharedBuyCar.skuPrice         = productModel?.price ?? ""
-        WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
+        if let product = productModel {
+            WOWBuyCarMananger.sharedBuyCar.defaultImg = product.firstNonPrimaryImgUrl
+            WOWBuyCarMananger.sharedBuyCar.defaultPrice = String(format: "%.2f",(product.sellPrice) ?? 0)
+
+        }
         view.addSubview(backView)
         view.bringSubviewToFront(backView)
         backView.show(entrue)

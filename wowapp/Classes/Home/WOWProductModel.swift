@@ -13,7 +13,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var productId             : String?
     var primaryImgs           : Array<String>?
     var productName           : String?
-    var sellPrice             : NSNumber?
+    var sellPrice             : Double?
     var sellingPoint          : String?
     var brandCname            : String?
     var brandId               : Int?

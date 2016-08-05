@@ -270,7 +270,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
 //        let qiniu_key               = "user/avatar/13621822254"
         let qiniu_token_url         = "\(BaseUrl)qiniutoken"
         
-        let json_str                = json_serialize( ["key": qiniu_key,"bucket": "usericon"] )
+        let json_str                = json_serialize( ["key": qiniu_key,"bucket": "wowdsgn"] )
         let params_qiniu            = ["paramJson": json_str ]
        
         

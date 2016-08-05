@@ -56,6 +56,7 @@ PODS:
   - ShareSDK3/ShareSDKUI (3.3.2)
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.3)
+  - SwiftString (0.5)
   - SwiftyJSON (2.3.2)
   - SwiftyUserDefaults (2.2.0)
   - UICKeyChainStore (2.1.0)
@@ -90,6 +91,7 @@ DEPENDENCIES:
   - ShareSDK3/ShareSDKUI
   - SnapKit (~> 0.19.1)
   - SVProgressHUD (~> 2.0.2)
+  - SwiftString
   - SwiftyJSON
   - SwiftyUserDefaults
   - UMengAnalytics-NO-IDFA
@@ -129,12 +131,13 @@ SPEC CHECKSUMS:
   ShareSDK3: c76cb96eb38e079952b8157071486d945faa2df2
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
+  SwiftString: ec9c31c55b2aa147a1154f5f5f8483dc71e3165f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SwiftyUserDefaults: e7c8197a9d4068702e7f2406a968cae413b8de27
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
 
-PODFILE CHECKSUM: 51d8f56c64b538168c0335c7eb068c7280cd5085
+PODFILE CHECKSUM: 8ecdc743551998572a7bf9f988362f2c2a25f97c
 
 COCOAPODS: 1.1.0.beta.1

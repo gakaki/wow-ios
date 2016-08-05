@@ -228,10 +228,21 @@ extension WOWUserInfoController{
 }
 
 
-
-
 //MARK:Delegate
+func json_serialize( dict:[String:AnyObject]) -> String {
+    var str = ""
+    
+    do {
+//        let jsonData        = try NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.PrettyPrinted)
+        let jsonData        = try NSJSONSerialization.dataWithJSONObject(dict, options: [])
+         str                = NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
 
+    } catch let error as NSError {
+        print(error)
+    }
+    
+    return str
+}
 extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
     
     
@@ -258,7 +269,12 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
 //        let qiniu_key               = "user/avatar/13621822254"
         let qiniu_token_url         = "\(BaseUrl)qiniutoken"
-        Alamofire.request(.POST,qiniu_token_url, parameters: ["file_path": qiniu_key])
+        
+        let json_str                = json_serialize( ["key": qiniu_key,"bucket": "usericon"] )
+        let params_qiniu            = ["paramJson": json_str ]
+       
+        
+        Alamofire.request(.POST,qiniu_token_url, parameters: params_qiniu)
         .response { request, response, data, error in
                 print(request)
                 print(response)
@@ -272,10 +288,11 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
             }
             
             
-        }.responseString { (str) in
-            print(str.result)
+        }.responseJSON { (json) in
+           
+            let res   = JSON(json.result.value!)
+            let token = res["data"]["token"].string
             
-            let token = str.result.value!
             let qm    = QNUploadManager()
             
             qm.putData(

@@ -14,20 +14,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="103.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2a-qC-F5G">
-                        <rect key="frame" x="15" y="45" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2a-qC-F5G">
+                        <rect key="frame" x="15" y="63.5" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fd3-i3-Ffm">
-                        <rect key="frame" x="67" y="48" width="31" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fd3-i3-Ffm">
+                        <rect key="frame" x="25" y="63" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Txr-pI-ItL">
-                        <rect key="frame" x="15" y="16" width="290" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Txr-pI-ItL">
+                        <rect key="frame" x="15" y="16" width="0.0" height="42.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -37,7 +37,7 @@
                     <constraint firstItem="Fd3-i3-Ffm" firstAttribute="centerY" secondItem="e2a-qC-F5G" secondAttribute="centerY" id="0JG-co-0SO"/>
                     <constraint firstItem="Txr-pI-ItL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="9Ic-un-f7B"/>
                     <constraint firstAttribute="bottom" secondItem="e2a-qC-F5G" secondAttribute="bottom" priority="750" constant="40" id="En8-jT-sEK"/>
-                    <constraint firstAttribute="trailing" secondItem="Txr-pI-ItL" secondAttribute="trailing" constant="15" id="FMu-0s-64k"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Txr-pI-ItL" secondAttribute="trailing" constant="15" id="FMu-0s-64k"/>
                     <constraint firstItem="Fd3-i3-Ffm" firstAttribute="leading" secondItem="e2a-qC-F5G" secondAttribute="trailing" constant="10" id="SUI-hI-UDH"/>
                     <constraint firstItem="Txr-pI-ItL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="VUH-bS-S6V"/>
                     <constraint firstItem="e2a-qC-F5G" firstAttribute="top" secondItem="Txr-pI-ItL" secondAttribute="bottom" constant="5" id="rmC-b2-l9e"/>

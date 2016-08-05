@@ -116,43 +116,21 @@ class WOWBuyCarController: WOWBaseViewController {
         }
          //结算
             let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
-            sv.productArr = selectedArr
-            sv.totalPrice = totalPrice
             navigationController?.pushViewController(sv, animated: true)
         
     }
     
-    private func selectAll(){
-        allButton.selected = true
-        selectedArr = []
-        selectedArr.appendContentsOf(dataArr)
-        for index in 0..<dataArr.count{
-            let indexPath = NSIndexPath(forRow: index, inSection: 0)
-            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
-        }
-    }
     
 //MARK:全选按钮点击
     @IBAction func allButtonClick(sender: UIButton) {
-        sender.selected = !sender.selected
+        //判断全选按钮的状态，如果是全部选中的状态，点击按钮取消全部选中，如果未选中状态，点击按钮则要全部选中
         if sender.selected {
-            selectedArr = []
-            selectedArr.appendContentsOf(dataArr)
+            asynCartUnSelect(dataArr)
+          
         }else{
-            selectedArr = []
+            asyncCartSelect(dataArr)
         }
-        for index in 0..<dataArr.count {
-             let model = dataArr[index]
-            if sender.selected {//全选
-               
-                model.isSelected = true
-            }else{//全不选
-                model.isSelected = false
-
-                selectedArr = []
-            }
-        }
-        tableView.reloadData()
+        
     }
     
     
@@ -229,6 +207,83 @@ class WOWBuyCarController: WOWBaseViewController {
         
     }
     
+    /**
+     5.购物车内产品选中
+     
+     - parameter model: 购物车商品model
+     */
+    private func asyncCartSelect(array: [WOWCarProductModel]) {
+        var shoppingCartIdArray = [Int]()
+        for carProduct in array {
+            shoppingCartIdArray.append(carProduct.shoppingCartId!)
+        }
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CartSelect(shoppingCartIds: shoppingCartIdArray), successClosure: {[weak self] (result) in
+            if let strongSelf = self {
+               
+                for index in 0..<strongSelf.dataArr.count {
+                    let model = strongSelf.dataArr[index]
+                    //判断是全部取消还是逐个取消，如果array.count大于1，则是全部选中，选择状态要都置为true
+                    //如果逐个取消，只把选择的那个对象状态置为true
+                    if array.count > 1 {
+                        strongSelf.selectedArr = []
+                        strongSelf.allButton.selected = true
+                        model.isSelected = true
+                    }else {
+                        if model == array[0] {
+                            model.isSelected = true
+                        }
+                    }
+                }
+
+                strongSelf.selectedArr.appendContentsOf(array)
+                strongSelf.tableView.reloadData()
+
+            }
+           
+
+            }) { (errorMsg) in
+                
+        }
+    }
+    
+    /**
+     购物车内产品取消
+     
+     - parameter model: 购物车商品model
+     */
+    private func asynCartUnSelect(array: [WOWCarProductModel]) {
+        var shoppingCartIdArray = [Int]()
+        for carProduct in array {
+            shoppingCartIdArray.append(carProduct.shoppingCartId!)
+        }
+        WOWNetManager.sharedManager.requestWithTarget(.Api_CartUnSelect(shoppingCartIds: shoppingCartIdArray), successClosure: {[weak self] (result) in
+            if let strongSelf = self {
+                strongSelf.allButton.selected = false
+                //循环遍历传来的数组，逐个从已选中数组中移除掉
+                for carProduct in array {
+                    strongSelf.selectedArr.removeObject(carProduct)
+                }
+                for index in 0..<strongSelf.dataArr.count {
+                    let model = strongSelf.dataArr[index]
+                    //判断是全部取消还是逐个取消，如果array.count大于1，则是全部取消，选择状态要都置为false
+                    //如果逐个取消，只把选择的那个对象状态置为false
+                    if array.count > 1 {
+                        model.isSelected = false
+                    }else {
+                        if model == array[0] {
+                            model.isSelected = false
+                        }
+                    }
+                }
+                
+                strongSelf.tableView.reloadData()
+            }
+        }) { (errorMsg) in
+            
+        }
+    
+    }
+
     
     private func removeObjectsInArray(items:[WOWCarProductModel]){
         for item in items{
@@ -298,15 +353,12 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func selectClick(sender: UIButton) {
         let model = dataArr[sender.tag]
         let select = model.isSelected ?? false
-        model.isSelected = !select
-        if !select {
-            selectedArr.append(model)
+        if select {
+            asynCartUnSelect([model])
         }else {
-            selectedArr.removeObject(model)
+            asyncCartSelect([model])
         }
-        let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
-        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-    
+        
     }
     //添加商品数量
     func addCountClick(sender: UIButton) {

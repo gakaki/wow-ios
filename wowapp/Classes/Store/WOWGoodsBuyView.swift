@@ -219,9 +219,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
             
             nameLabel.text = p.productName
-            perPriceLabel.text  = WOWBuyCarMananger.sharedBuyCar.skuPrice.priceFormat()
-           
-//            goodsImageView.kf_setImageWithURL(NSURL(string: " ")!, placeholderImage:UIImage(named: "placeholder_product"))
+            perPriceLabel.text = WOWBuyCarMananger.sharedBuyCar.defaultPrice?.priceFormat()
+            if let img = WOWBuyCarMananger.sharedBuyCar.defaultImg {
+                goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+            }
             //得到颜色的数组，并给每种颜色对应一个bool值，方便记录哪个颜色有库存
             if let array = p.colorDisplayNameList {
                 for color in array {
@@ -289,7 +290,16 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             skuCount = skuCount == 0 ? 1 : skuCount
             showResult(skuCount)
         }else{
-            skuCount += 1
+            if colorIndex >= 0 && specIndex >= 0 {
+                if productInfo?.availableStock! > skuCount {
+                    skuCount += 1
+                }else {
+                    WOWHud.showMsg("库存不足")
+                }
+            
+            }else {
+                skuCount += 1
+            }
             showResult(skuCount)
         }
     }
@@ -304,17 +314,15 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             WOWHud.showMsg("请选择产品规格")
             return
         }
-        if let color_SpecArr = color_SpecArr {
-            for product in color_SpecArr {
-                if product.specName == specArr[specIndex].specName {
-                    productInfo = product.subProductInfo
-                    productInfo?.productQty = skuCount
-                }
-            }
+        guard skuCount > 0 else {
+            WOWHud.showMsg("所选产品无库存")
+            return
         }
+        self.productInfo?.productQty = skuCount
         switch entrance {
         case .AddEntrance:
             if let del = delegate {
+
                 del.sureAddCarClick(productInfo)
             }
             print("添加购物车确定")
@@ -356,15 +364,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             WOWHud.showMsg("请选择产品规格")
             return
         }
-        if let color_SpecArr = color_SpecArr {
-            for product in color_SpecArr {
-                if product.specName == specArr[specIndex].specName {
-                    productInfo = product.subProductInfo
-                }
-            }
+        guard skuCount > 0 else {
+            WOWHud.showMsg("所选产品无库存")
+            return
         }
-
         if let del = delegate {
+            self.productInfo?.productQty = skuCount
             del.sureAddCarClick(productInfo)
            
         }
@@ -379,15 +384,13 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             WOWHud.showMsg("请选择产品规格")
             return
         }
-        if let color_SpecArr = color_SpecArr {
-            for product in color_SpecArr {
-                if product.specName == specArr[specIndex].specName {
-                    productInfo = product.subProductInfo
-                }
-            }
+        guard skuCount > 0 else {
+            WOWHud.showMsg("所选产品无库存")
+            return
         }
         
         if let del = delegate {
+            self.productInfo?.productQty = skuCount
             del.sureBuyClick(productInfo)
             
         }
@@ -511,6 +514,14 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             self.collectionView.reloadData()
             secondCollectionView.reloadData()
             
+            //根据选中的颜色改变产品图片
+            if color_SpecArr?.count > 0 {
+                let img = color_SpecArr![0].subProductInfo?.productColorImg
+                if let img = img {
+                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                }
+            }
+            
         }else {
             specIndex = indexPath.row
             for array in specColorArr{
@@ -534,7 +545,41 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             secondCollectionView.reloadData()
         }
+        //如果颜色和规格都选中的话就拿出这个产品的信息
+        if colorIndex >= 0 && specIndex >= 0 {
+            if let color_SpecArr = self.color_SpecArr {
+                for product in color_SpecArr {
+                    if product.specName == self.specArr[self.specIndex].specName {
+                        self.productInfo = product.subProductInfo
+                        perPriceLabel.text = String(format: "%.2f",(self.productInfo?.sellPrice) ?? 0).priceFormat()
 
+                        //如果产品有库存的话就显示1.如果没有库存的话就显示0
+                        if self.productInfo?.hasStock ?? false {
+                            if skuCount == 0 {
+                                skuCount = 1
+                            }
+                            //如果所加数量大于已有库存，则显示库存最大数
+                            if self.productInfo?.availableStock! < skuCount {
+                                skuCount = (self.productInfo?.availableStock)!
+                            }
+                            showResult(skuCount)
+                            addButton.enabled = true
+                            addButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+                            subButton.enabled = true
+                            subButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+                        }else {
+                            skuCount = 0
+                            showResult(skuCount)
+                            addButton.enabled = false
+                            addButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
+                            subButton.enabled = false
+                            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
+                        }
+                    }
+                }
+            }
+        }
+        
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {

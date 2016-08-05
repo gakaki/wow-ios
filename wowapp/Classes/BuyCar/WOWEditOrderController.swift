@@ -66,7 +66,12 @@ class WOWEditOrderController: WOWBaseViewController {
     //MARK: - Action
     @IBAction func sureClick(sender: UIButton) {
         chooseStyle()
-//        requestOrderCreat()
+       
+        guard let orderCode = orderCode else {
+            requestOrderCreat()
+            return
+        }
+
     }
     
     
@@ -258,6 +263,20 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
 extension WOWEditOrderController: selectPayDelegate {
     func surePay(channel: String) {
         backView.hidePayView()
+        guard let orderCode = orderCode else {
+            print("订单生成失败")
+            return
+        }
+        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCharge(orderNo: orderCode ?? "", channel: channel, clientIp: "192.168.1.1"), successClosure: { [weak self](result) in
+            if let strongSelf = self {
+                let json = JSON(result)
+                let charge = json["charge"]
+                strongSelf.goPay(charge.object, totalPrice: strongSelf.totalPrice ?? "", orderid: orderCode)
+            }
+            
+            }) { (errorMsg) in
+                
+        }
         print("确定支付",channel)
     }
 }

@@ -30,10 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registAppKey()
         
         configRootVC()
-        /**
-         /ssssssss
-         */
-        
+    
         /**
          拉取配置数据
          */

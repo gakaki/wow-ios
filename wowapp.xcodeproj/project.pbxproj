@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */; };
 		060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060869721D49EB74008FB61D /* ModelVoSld.swift */; };
+		0639686E1D545FE900631BDF /* hex-kit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0639686D1D545FE900631BDF /* hex-kit.swift */; };
+		063968701D54601500631BDF /* IPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0639686F1D54601500631BDF /* IPManager.swift */; };
 		068B60B11D4F3561001AD778 /* Found.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B01D4F3560001AD778 /* Found.storyboard */; };
 		068B60B31D4F3DD5001AD778 /* WOWFoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60B21D4F3DD5001AD778 /* WOWFoundController.swift */; };
 		068B60B51D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */; };
@@ -326,6 +328,8 @@
 /* Begin PBXFileReference section */
 		0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayGroupBy.swift; sourceTree = "<group>"; };
 		060869721D49EB74008FB61D /* ModelVoSld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVoSld.swift; sourceTree = "<group>"; };
+		0639686D1D545FE900631BDF /* hex-kit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "hex-kit.swift"; sourceTree = "<group>"; };
+		0639686F1D54601500631BDF /* IPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
 		068B60B21D4F3DD5001AD778 /* WOWFoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWFoundController.swift; sourceTree = "<group>"; };
 		068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWFoundWeeklyNewCell.xib; sourceTree = "<group>"; };
@@ -1021,6 +1025,7 @@
 		29FF25D31CFDA86300DF2A9B /* WowConfig */ = {
 			isa = PBXGroup;
 			children = (
+				0639686F1D54601500631BDF /* IPManager.swift */,
 				29FF25D41CFDA86300DF2A9B /* WOWBuyCarMananger.swift */,
 				29FF25D51CFDA86300DF2A9B /* WOWConfig.swift */,
 				29FF25D61CFDA86300DF2A9B /* WOWData.swift */,
@@ -1059,6 +1064,7 @@
 		29FF25E41CFDA86300DF2A9B /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
+				0639686D1D545FE900631BDF /* hex-kit.swift */,
 				632A93421D488DCC003A5966 /* CAPSPageMenu */,
 				635716B61D45EB89006BD746 /* CyclePictureView */,
 				2958BD8F1CFECA9300F6A6D7 /* SwiftWebViewProgress */,
@@ -2020,6 +2026,7 @@
 				632A93301D474825003A5966 /* WOWFavoritrSingleCell.swift in Sources */,
 				29FF26811CFDA86300DF2A9B /* WOWBaseModel.swift in Sources */,
 				29FF26561CFDA86300DF2A9B /* WOWCommentController.swift in Sources */,
+				0639686E1D545FE900631BDF /* hex-kit.swift in Sources */,
 				29FF26841CFDA86300DF2A9B /* WOWBaseTableViewCell.swift in Sources */,
 				29FF26B01CFDA86300DF2A9B /* WOWAboutController.swift in Sources */,
 				29FF26B11CFDA86300DF2A9B /* WOWAboutHeaderView.swift in Sources */,
@@ -2041,6 +2048,7 @@
 				29FF26E41CFDA86300DF2A9B /* WOWRequestApi.swift in Sources */,
 				29D5EC4D1D016CF50001266C /* WOWProductDetailTipsCell.swift in Sources */,
 				292CBA081CFE85B000248C88 /* WOWRegistInfoFirstController.swift in Sources */,
+				063968701D54601500631BDF /* IPManager.swift in Sources */,
 				068B60B31D4F3DD5001AD778 /* WOWFoundController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

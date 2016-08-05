@@ -7,6 +7,12 @@
 //
 
 import UIKit
+/**
+ 点击事件类型
+ 
+ - ageType:  点击选择年龄
+ - starType: 点就选择星座
+ */
 enum ClickActionType {
     case ageType
     case starType
@@ -19,7 +25,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     @IBOutlet weak var starTextField: UITextField!
     @IBOutlet weak var jobTextField: UITextField!
     var editingTextField:UITextField?
-    var  backGroundMaskView : UIView!
+    var  backGroundMaskView : UIView! // 背景蒙板
     var  backGroundWindow : UIWindow!
     var clickType = ClickActionType.ageType
     var fromUserCenter:Bool = false
@@ -39,11 +45,11 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         configPickerView()
     }
     
-
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -52,7 +58,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -61,10 +67,10 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         super.setUI()
         configTable()
         configNav()
-
+        
     }
     //MARK:实例pickerView
-
+    
     private func configPickerView(){
         
         backGroundMaskView = UIView()
@@ -72,7 +78,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         backGroundMaskView.backgroundColor = UIColor.blackColor()
         backGroundMaskView.alpha = 0.2
         
-
+        
         
         backGroundMaskView.addTapGesture(target: self, action: #selector(cancelPicker))
         
@@ -80,7 +86,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         
         
         pickerContainerView.pickerView.delegate = self
-
+        
         pickerContainerView.cancelButton.hidden = true
         pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), forControlEvents:.TouchUpInside)
         
@@ -94,12 +100,12 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         
         
     }
-   
+    
     private func configNav(){
         makeCustomerNavigationItem("跳过", left: false) {[weak self] in
             if let strongSelf = self{
-               
-
+                
+                
                 if strongSelf.fromUserCenter{
                     strongSelf.dismissViewControllerAnimated(true, completion: nil)
                     print("gerenzhongxin")
@@ -121,7 +127,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }
     
     
-//MARK:Actions
+    //MARK:Actions
     func cancelPicker(){
         ageTextField.resignFirstResponder()
         starTextField.resignFirstResponder()
@@ -130,24 +136,24 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         UIView.animateWithDuration(0.5){
             self.pickerContainerView.mj_y = MGScreenHeight
         }
-
+        
     }
     
     func surePicker() {
         let row = pickerContainerView.pickerView.selectedRowInComponent(0)
-
+        
         let currentType = clickType
         switch currentType {
             
         case .ageType:
-
+            
             ageTextField?.text = pickDataArr[row]
         case .starType:
-
+            
             starTextField?.text = pickDataArr[row + 1]
             
         }
-
+        
         cancelPicker()
     }
     
@@ -171,29 +177,41 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
                 
             }
         }
-
+        
     }
+    /**
+     点击年龄选择按钮
+     
+     */
     @IBAction func ageClick(sender: UIButton){
         clickType = ClickActionType.ageType
         pickDataArr = WOWAgeRange
-       
+        
         self.pickerContainerView.pickerView.reloadComponent(0)
         pickerContainerView.pickerView.selectRow(ageRow, inComponent: 0, animated: true)
         self.pickerContainerView.pickerView.reloadComponent(0)
         showPickerView()
         jobTextField.resignFirstResponder()
     }
+    /**
+     点击星座选择按钮
+     
+     */
     @IBAction func starClick(sender: UIButton){
         clickType = ClickActionType.starType
         pickDataArr = WOWConstellation
-
+        
         self.pickerContainerView.pickerView.reloadComponent(0)
         pickerContainerView.pickerView.selectRow(starRow - 1, inComponent: 0, animated: true)
         self.pickerContainerView.pickerView.reloadComponent(0)
         showPickerView()
         jobTextField.resignFirstResponder()
-
+        
     }
+    /**
+     点击性别选择按钮
+     
+     */
     @IBAction func sexClick(sender: UIButton) {
         manButton.selected = (sender == manButton)
         womanButton.selected = (sender == womanButton)
@@ -220,15 +238,15 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
         switch currentType {
             
         case .ageType:
-
+            
             return pickDataArr[row]
         case .starType:
-
-             return pickDataArr[row + 1]
+            
+            return pickDataArr[row + 1]
             
             
         }
-
+        
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -238,12 +256,12 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
             
         case .ageType:
             ageRow = row
-             ageTextField?.text = pickDataArr[row]
+            ageTextField?.text = pickDataArr[row]
         case .starType:
-             starRow = row + 1
-             starTextField?.text = pickDataArr[row + 1]
-
-       
+            starRow = row + 1
+            starTextField?.text = pickDataArr[row + 1]
+            
+            
         }
     }
     private func showPickerView(){
@@ -255,6 +273,6 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
             
         }
     }
-
+    
 }
 

@@ -17,6 +17,7 @@ class WOWEditOrderController: WOWBaseViewController {
     var orderSettle                     :WOWEditOrderModel?
     var totalPrice                      : String?
     var addressInfo                     :WOWAddressListModel?
+    var orderCode                       : String? //订单号
     private var tipsTextField           : UITextField!
 
     override func viewDidLoad() {
@@ -30,10 +31,26 @@ class WOWEditOrderController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    //MARK: - lazy
+    lazy var backView:WOWPayBackView = {
+        let v = WOWPayBackView(frame:CGRectMake(0,0,self.view.w,self.view.h + 64))
+        v.payView.delegate = self
+        return v
+    }()
+    
+    //MARK: - 弹出选择支付窗口
+    func chooseStyle() {
+        let window = UIApplication.sharedApplication().windows.last
+        
+        window?.addSubview(backView)
+        window?.bringSubviewToFront(backView)
+        backView.show()
+    }
+
     
     //MARK:Private Method
     override func setUI() {
-        navigationItem.title = "编辑订单"
+        navigationItem.title = "填写订单"
         totalPriceLabel.text = "¥ " + (totalPrice ?? "")
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -45,6 +62,13 @@ class WOWEditOrderController: WOWBaseViewController {
         tableView.keyboardDismissMode = .OnDrag
  
     }
+    
+    //MARK: - Action
+    @IBAction func sureClick(sender: UIButton) {
+        chooseStyle()
+//        requestOrderCreat()
+    }
+    
     
     //MARK:Network
     override func request() {
@@ -75,6 +99,45 @@ class WOWEditOrderController: WOWBaseViewController {
             
             }) { (errorMsg) in
                 
+        }
+    }
+    
+    //请求创建订单
+    func requestOrderCreat() -> Void {
+        var params = [String: AnyObject]?()
+        params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? ""]
+        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
+            if let strongSelf = self {
+                strongSelf.orderCode = JSON(result)["orderCode"].string
+            }
+            
+            }) { (errorMsg) in
+                
+        }
+    }
+    
+    //去支付
+    private func goPay(charge:AnyObject,totalPrice:String,orderid:String){
+        dispatch_async(dispatch_get_main_queue()) {
+            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
+                if let strongSelf = self{
+                    switch ret{
+                    case "success":
+                        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
+//                        vc.payMethod = (strongSelf.payType == "ali" ? "支付宝":"微信")
+                        vc.orderid = orderid
+                        vc.totalPrice = totalPrice
+                        strongSelf.navigationController?.pushViewController(vc, animated: true)
+                    case "cancel":
+                        WOWHud.showMsg("支付取消")
+                        
+                        break
+                    default:
+                        WOWHud.showMsg("支付失败")
+                        break
+                    }
+                }
+            }
         }
     }
     
@@ -188,6 +251,14 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         default:
             return 0.01
         }
+    }
+}
+
+//MARK: - selectPayDelegate
+extension WOWEditOrderController: selectPayDelegate {
+    func surePay(channel: String) {
+        backView.hidePayView()
+        print("确定支付",channel)
     }
 }
 

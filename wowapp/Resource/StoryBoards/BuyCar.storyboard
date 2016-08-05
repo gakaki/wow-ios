@@ -57,6 +57,7 @@
                                         </state>
                                         <connections>
                                             <action selector="payButtonClick:" destination="lG0-Wp-h5y" eventType="touchUpInside" id="kzk-ep-Cyr"/>
+                                            <action selector="sureClick:" destination="Cth-Z6-gBn" eventType="touchUpInside" id="QJL-6b-6dw"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7U-N0-66Z">

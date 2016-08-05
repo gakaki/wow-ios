@@ -89,11 +89,16 @@ public enum RequestApi{
     
     case Api_Login(String,String)
     
+    //订单相关
+    
     case Api_OrderList(uid:String,type:String) //100为全部
     
     case Api_OrderStatus(uid:String,order_id:String,status:String)
     
     case Api_OrderSettle
+    
+    case Api_OrderCreate(params: [String: AnyObject]?)
+//
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
     
@@ -255,6 +260,8 @@ extension RequestApi:TargetType{
             return URL_OrderStatus
         case .Api_OrderSettle:
             return URL_OrderSettle
+        case .Api_OrderCreate:
+            return URL_OrderCreat
         case .Api_Invite:
             return URL_Invite
             
@@ -358,6 +365,8 @@ extension RequestApi:TargetType{
                 params =  ["uid":uid,"type":type]
             case let .Api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]
+            case let .Api_OrderCreate(param):
+                params = param
             
             case .Api_Home_Banners():
                 params =  ["pageType":1]

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftString
+import EZSwiftExtensions
 
 class IPManager {
     
@@ -98,8 +98,8 @@ class IPManager {
             
             if ip.contains("var returnCitySN = ") {
                 //对字符串进行处理，只要后面json那段
-                ip = ip.between("=", ";")!
-                
+                ip = ip[ip.getIndexOf("=")!...ip.getIndexOf(";")!]
+
                 //将字符串转换成二进制进行Json解析
                 let data: NSData = ip.dataUsingEncoding(NSUTF8StringEncoding)!
                 let dict: [String : String] = (try NSJSONSerialization.JSONObjectWithData(data, options:[])) as! [String : String]
@@ -115,7 +115,7 @@ class IPManager {
             ip_final = self.getIFAddresses()[0]
         }
 
-        if ( ip_final.isEmpty() )  { ip_final = "127.0.0.1" }
+        if ( ip_final.length == 0 )  { ip_final = "127.0.0.1" }
         
         self.ip_public = ip_final
         return ip_final

@@ -13,7 +13,6 @@ pod 'Kingfisher','~>2.0.1'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
 pod 'MonkeyKing', '~> 0.9.2'
 pod 'JSONCodable'
-pod "SwiftString"
 
 #七牛 sdk
 pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"

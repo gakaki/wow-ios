@@ -12,6 +12,22 @@ let WOWDSGNSCHEME       = "com.wow.dsgn"
 
 let WOWCompanyTel        = "4008-208-237"
 
+
+enum StoryBoardNames: String {
+    case Found
+    case BuyCard
+    case Home
+    
+    case Login
+    case Main
+    case Store
+    
+    case User
+    case Favorite
+    case Brand
+}
+
+
 //MARK:第三方Key
 struct WOWID {
     struct AppStore {

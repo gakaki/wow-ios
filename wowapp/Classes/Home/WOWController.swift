@@ -102,30 +102,26 @@ class WOWController: WOWBaseViewController {
         }
     }
     
-    func toCategoryVC(cid:String){
-        let vc = UIStoryboard.initialViewController("Found", identifier: String(WOWCategoryController)) as! WOWCategoryController
-        vc.cid = cid
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+
     
 //MARK:Actions
     func jsClick() -> Void {
         print("家什")
-        toCategoryVC("10")
+        toVCCategory("10")
     }
     func dgClick() -> Void {
         print("灯光")
-        toCategoryVC("15")
+        toVCCategory("15")
 
     }
     func zdClick() -> Void {
         print("装点")
-        toCategoryVC("16")
+        toVCCategory("16")
 
     }
     func sjClick() -> Void {
         print("厨房")
-        toCategoryVC("11")
+        toVCCategory("11")
 
     }
     

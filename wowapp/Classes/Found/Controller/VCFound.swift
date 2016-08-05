@@ -2,50 +2,49 @@
 
 import UIKit
 
-class WOWCategoryController: WOWBaseViewController {
-        var cid:String = ""
-//    let cellID1              = String( WOWCategoryTopCell )
-//    let cellID2              = String( WOWCategoryColumnCell )
-//    
-//    var vo_top_category      = [WOWCategoryTopModel]()
-//    var vo_bottom_products   = [WOWCategoryProductModel]()
-//    
-//    
-//    var vo_categories        = [WOWFoundCategoryModel]()
-//    
-//    @IBOutlet var tableView: UITableView!
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        request()
-//    }
-//    
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: true)
-//    }
-//    
-//    //MARK:Private Method
-//    
-//    override func setUI() {
-//        super.setUI()
-//        tableView.rowHeight          = UITableViewAutomaticDimension
-//        tableView.estimatedRowHeight = 300
-//        tableView.separatorColor     = SeprateColor;
-//        tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
-//        tableView.clearRestCell()
-//        tableView.mj_header          = mj_header
-//        configBarItem()
-//    }
-//    
-//    private func configBarItem(){
-//        makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
-//            if let strongSelf = self{
-//                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
-//                strongSelf.navigationController?.pushViewController(vc, animated: true)
-//            }
-//        }
-//    }
+class VCFound: WOWBaseViewController {
+    
+    let cellID1              = String( WOWFoundWeeklyNewCell )
+    let cellID2              = String( WOWFoundRecommendCell )
+    let cellID3              = String( WOWFoundCategoryCell )
+
+    var vo_products          = [WOWFoundWeeklyNewModel]()
+    var vo_recommend_product = []//WOWFoundRecommendModel()
+    var vo_categories        = [WOWFoundCategoryModel]()
+    
+    @IBOutlet var tableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        request()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+//MARK:Private Method
+    
+    override func setUI() {
+        super.setUI()
+        tableView.rowHeight          = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300
+        tableView.separatorColor     = SeprateColor;
+        tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
+        tableView.clearRestCell()
+        tableView.mj_header          = mj_header
+        configBarItem()
+    }
+    
+    private func configBarItem(){
+        makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
 }
 
 
@@ -89,7 +88,7 @@ class WOWCategoryController: WOWBaseViewController {
 //    }
 //}
 //
-//
+// 
 //extension WOWStoreController:BrandCellDelegate{
 //    func hotBrandCellClick(brandModel: WOWBrandListModel) {
 //        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
@@ -97,7 +96,7 @@ class WOWCategoryController: WOWBaseViewController {
 //        vc.hideNavigationBar = true
 //        navigationController?.pushViewController(vc, animated: true)
 //    }
-//
+//    
 //    //MARK:推荐商品
 //    func recommenProductCellClick(productModel: WOWProductModel) {
 //        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
@@ -112,7 +111,7 @@ class WOWCategoryController: WOWBaseViewController {
 //    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 //        return 3
 //    }
-//
+//    
 //    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        switch section {
 //        case 0,2:
@@ -121,7 +120,7 @@ class WOWCategoryController: WOWBaseViewController {
 //             return categoryArr.count
 //        }
 //    }
-//
+//    
 //    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 //        var returnCell : UITableViewCell!
 //        switch indexPath.section {
@@ -147,7 +146,7 @@ class WOWCategoryController: WOWBaseViewController {
 //        }
 //        return returnCell
 //    }
-//
+//    
 //    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 //        if indexPath.section == 1{
 //            return 50
@@ -155,8 +154,8 @@ class WOWCategoryController: WOWBaseViewController {
 //            return self.view.w
 //        }
 //    }
-//
-//
+//    
+//    
 //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 //        switch indexPath.section {
 //        case 0:
@@ -175,7 +174,7 @@ class WOWCategoryController: WOWBaseViewController {
 //            break
 //        }
 //    }
-//
+//    
 //    var categoryTitles:[String]{
 //        get{
 //          return categoryArr.map { (model) -> String in
@@ -183,7 +182,7 @@ class WOWCategoryController: WOWBaseViewController {
 //            }
 //        }
 //    }
-//
+//    
 //    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 //        switch section {
 //        case 1:
@@ -192,18 +191,18 @@ class WOWCategoryController: WOWBaseViewController {
 //            return 0.01
 //        }
 //    }
-//
+//    
 //    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 //        let v = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 15))
 //        v.backgroundColor = UIColor.whiteColor()
 //        return v
 //    }
-//
-//
+//    
+//    
 //    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        return 44
 //    }
-//
+//    
 //    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        switch section {
 //        case 0:
@@ -227,7 +226,7 @@ class WOWCategoryController: WOWBaseViewController {
 //        }
 //        return nil
 //    }
-//
+//    
 //    private func configSectionHeader(title:String) -> WOWStoreSectionView{
 //        let sectionView =  NSBundle.mainBundle().loadNibNamed(String(WOWStoreSectionView), owner: self, options: nil).last as! WOWStoreSectionView
 //        sectionView.leftLabel.text = title

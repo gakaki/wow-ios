@@ -13,11 +13,22 @@ let kIndicatorViewH: CGFloat = 3.0      // 首页顶部标签指示条的高度
 let kTitlesViewH: CGFloat = 35          // 顶部标题的高度
 let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度倍
 
-class WOWCategory2ndVC: UIViewController, UICollectionViewDelegate{
+class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
+    
+    var cid:String  = "10"
     
     @IBOutlet weak var btn_choose_view: UIView!
     @IBOutlet weak var cv: UICollectionView!
     
+    override func setUI(){
+      super.setUI()
+        
+    }
+    
+    
+    override func request(){
+        
+    }
     /// 当前选中的按钮
     weak var selectedButton = UIButton()
     //底部红色指示器
@@ -55,6 +66,8 @@ class WOWCategory2ndVC: UIViewController, UICollectionViewDelegate{
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        request()
+        
         
         //为了在autolayout的视图里获得真的宽度
         self.view.setNeedsLayout()
@@ -139,8 +152,7 @@ class WOWCategory2ndVC: UIViewController, UICollectionViewDelegate{
 }
 
 
-
-extension WOWCategory2ndVC : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+extension VCCategory : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func layoutCells() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Horizontal

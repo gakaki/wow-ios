@@ -17,59 +17,24 @@ class VCFound: WOWBaseViewController {
         super.viewDidLoad()
         request()
     }
+
     
-<<<<<<< b8ee3dbc6d85854645828a797e8f455be27dd33e
     override func request(){
         
-        
-        
-        /*
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandList, successClosure: { [weak self](result) in
-            if let strongSelf = self{
-                
-                let arr        = JSON(result).arrayObject
-                
-                if let dataArr = arr{
-                    
-                    let brands  = Mapper<WOWBrandV1Model>().mapArray(dataArr)
-                    
-                    //循环所有的然后给分组
-                    for letter in strongSelf.headerIndexs{
-                        let group_row    = brands!.filter{ (brand) in brand.letter == letter }
-                        //                        for row in group_row {
-                        //                            row.image = "http://wowdsgn.com/\(row.image)"
-                        //                            row.url = "http://wowdsgn.com/\(row.url)"
-                        //                        }
-                        strongSelf.dataArray.append(group_row)
-                        strongSelf.originalArray.appendContentsOf(group_row)
-                    }
-                    
-                    
-                    strongSelf.tableView.reloadData()
-                }
-            }
-        }) {(errorMsg) in
-            
-        }*/
-=======
-    //MARK:Network
-    override func request(){
-        
-            super.request()
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist, successClosure: {[weak self] (result) in
-                if let strongSelf = self{
-                    let arr = Mapper<WOWAddressListModel>().mapArray(JSON(result)["shippingInfoResultList"].arrayObject)
-                    if let array = arr{
-                        strongSelf.vo_products = []
-//                        strongSelf.vo_products.appendContentsOf(array)
-                        strongSelf.tableView.reloadData()
-                    }
-                }
-            }) { (errorMsg) in
-                
-            }
+//            super.request()
+//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_Main, successClosure: {[weak self] (result) in
+//                if let strongSelf = self{
+//                    let arr = Mapper<WOWAddressListModel>().mapArray(JSON(result)["shippingInfoResultList"].arrayObject)
+//                    if let array = arr{
+//                        strongSelf.vo_products = []
+////                        strongSelf.vo_products.appendContentsOf(array)
+//                        strongSelf.tableView.reloadData()
+//                    }
+//                }
+//            }) { (errorMsg) in
+//                
+//            }
       
->>>>>>> 删除无用qiniu dmeo
         
    
     }

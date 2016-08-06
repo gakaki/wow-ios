@@ -103,6 +103,9 @@ let URL_OrderSettle             = "order/settle"            //查询订单内的
 let URL_OrderCreat              = "/order/create"           //创建订单
 
 let URL_OrderCharge             = "/pay/charge"             //获取支付交易凭证
+//4. 发现页面
+let URL_Found_Main              = "page/find/product"       
+let URL_Found_2nd               = "page/find/category"
 
 //5.个人中心
 let URL_UpdateInfo              = "usermongo/userupdate"

@@ -14,7 +14,6 @@
 		063968701D54601500631BDF /* IPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0639686F1D54601500631BDF /* IPManager.swift */; };
 		063968741D54950B00631BDF /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968731D54950B00631BDF /* VCCategory.swift */; };
 		063968771D549F8000631BDF /* VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968761D549F8000631BDF /* VCManager.swift */; };
-		064074AC1D55CD9800547670 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 064074AB1D55CD9800547670 /* main.m */; };
 		068B60B11D4F3561001AD778 /* Found.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B01D4F3560001AD778 /* Found.storyboard */; };
 		068B60B31D4F3DD5001AD778 /* VCFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60B21D4F3DD5001AD778 /* VCFound.swift */; };
 		068B60B51D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */; };
@@ -336,7 +335,6 @@
 		0639686F1D54601500631BDF /* IPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		063968731D54950B00631BDF /* VCCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategory.swift; sourceTree = "<group>"; };
 		063968761D549F8000631BDF /* VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCManager.swift; sourceTree = "<group>"; };
-		064074AB1D55CD9800547670 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
 		068B60B21D4F3DD5001AD778 /* VCFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCFound.swift; sourceTree = "<group>"; };
 		068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWFoundWeeklyNewCell.xib; sourceTree = "<group>"; };
@@ -854,7 +852,6 @@
 				29FF25AA1CFDA86300DF2A9B /* User */,
 				29FF25631CFDA86300DF2A9B /* Login */,
 				29FF256A1CFDA86300DF2A9B /* Other */,
-				064074AB1D55CD9800547670 /* main.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1896,7 +1893,6 @@
 				29FF27051CFDA86300DF2A9B /* CollectionViewWaterfallLayout.swift in Sources */,
 				635716BA1D45EB89006BD746 /* AuxiliaryModels.swift in Sources */,
 				29D5EC3F1D0150700001266C /* WOWProductDetailPicTextCell.swift in Sources */,
-				064074AC1D55CD9800547670 /* main.m in Sources */,
 				29FF26AB1CFDA86300DF2A9B /* WOWStoreController.swift in Sources */,
 				29FF26C31CFDA86300DF2A9B /* WOWOrderListCell.swift in Sources */,
 				632A93921D4E1CA3003A5966 /* WOWBuyCarFootView.swift in Sources */,

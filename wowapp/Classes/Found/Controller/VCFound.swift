@@ -1,6 +1,7 @@
 
 
 import UIKit
+import SnapKit
 
 class VCFound: WOWBaseViewController {
     
@@ -12,11 +13,20 @@ class VCFound: WOWBaseViewController {
     var vo_recommend_product = []//WOWFoundRecommendModel()
     var vo_categories        = [WOWFoundCategoryModel]()
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         request()
+    }
+    
+    
+    override func request(){
+        
+        
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -24,21 +34,31 @@ class VCFound: WOWBaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-//MARK:Private Method
     
     override func setUI() {
         super.setUI()
+    
+       
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
-        tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
-        tableView.clearRestCell()
+        tableView.registerNib(UINib.nibName(String(WOWFoundWeeklyNewCell)), forCellReuseIdentifier:cellID1)
+//        tableView.clearRestCell()
         tableView.mj_header          = mj_header
+        
         configBarItem()
     }
     
     private func configBarItem(){
-        makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
+        
+        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+
+        makeCustomerImageNavigationItem("cart", left:false) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
@@ -58,28 +78,54 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200
+
+        switch indexPath.section {
+        case 1:
+            return 150
+        case 2:
+            return 300
+        case 3:
+            return 700
+        default:
+            return 200
+            
+        }
     }
     
+    
+    
+ 
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        view.tintColor = UIColor.whiteColor()
+        
+        let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        headerView.textLabel!.textColor = UIColor.blackColor()
+        headerView.textLabel!.font = UIFont(name: "systemFont", size: 14)
+
+    }
+
+    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 40
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20
+        return 15
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         switch section {
+        case 0:
+            return "本周上新"
         case 1:
-            return "1"
+            return "单品推荐"
         case 2:
-            return "2"
-        case 3:
-            return "3"
+            return "全部分类"
         default:
-            return "4"
+            return "全部分类"
 
         }
     }
@@ -98,11 +144,11 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         switch indexPath.row  {
+        case 0:
+            return UITableViewCell()
         case 1:
             return UITableViewCell()
         case 2:
-            return UITableViewCell()
-        case 3:
             return UITableViewCell()
         default:
             return UITableViewCell()

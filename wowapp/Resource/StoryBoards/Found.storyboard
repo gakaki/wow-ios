@@ -27,7 +27,7 @@
         <!--发现-->
         <scene sceneID="p4Y-Dx-v6l">
             <objects>
-                <viewController storyboardIdentifier="VCFound" id="AiG-sc-6dI" customClass="VCFound" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VCFound" id="AiG-sc-6dI" customClass="VCFound" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="maa-bU-8qV"/>
                         <viewControllerLayoutGuide type="bottom" id="ZUJ-M0-5fH"/>
@@ -40,8 +40,8 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="AiG-sc-6dI" id="MVc-5r-POl"/>
-                                    <outlet property="delegate" destination="AiG-sc-6dI" id="wlK-4J-GXt"/>
+                                    <outlet property="dataSource" destination="AiG-sc-6dI" id="baq-S4-2Ws"/>
+                                    <outlet property="delegate" destination="AiG-sc-6dI" id="SfY-PJ-VBL"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -54,6 +54,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="发现" id="Oae-yn-pnL"/>
+                    <connections>
+                        <outlet property="tableView" destination="3q1-Wm-5dr" id="biD-vM-yLj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15s-ZJ-vAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

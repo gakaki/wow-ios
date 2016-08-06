@@ -21,6 +21,7 @@
 @import YYImage;
 @import YYCache;
 @import YYWebImage;
+@import Kingfisher;
 
 //@import QiniuTokenIOS;
 
@@ -29,7 +30,6 @@
 #import "WXApi.h"
 #import <Pingpp.h>
 
-#import <FCUUID/FCUUID.h>
 
 //Leancloud
 //#import <AVOSCloud/AVOSCloud.h>

@@ -27,19 +27,6 @@
 		069056E11D36666F00A851F9 /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069056E01D36666F00A851F9 /* WOWController.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
 		06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */; };
-		06F61CEF1D55A2EE00DC586D /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CDF1D55A2EE00DC586D /* Image.swift */; };
-		06F61CF01D55A2EE00DC586D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CE01D55A2EE00DC586D /* ImageCache.swift */; };
-		06F61CF11D55A2EE00DC586D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CE11D55A2EE00DC586D /* ImageDownloader.swift */; };
-		06F61CF21D55A2EE00DC586D /* ImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CE21D55A2EE00DC586D /* ImagePrefetcher.swift */; };
-		06F61CF31D55A2EE00DC586D /* ImageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CE31D55A2EE00DC586D /* ImageTransition.swift */; };
-		06F61CF41D55A2EE00DC586D /* ImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CE41D55A2EE00DC586D /* ImageView+Kingfisher.swift */; };
-		06F61CF51D55A2EE00DC586D /* KingfisherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CE61D55A2EE00DC586D /* KingfisherManager.swift */; };
-		06F61CF61D55A2EE00DC586D /* KingfisherOptionsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CE71D55A2EE00DC586D /* KingfisherOptionsInfo.swift */; };
-		06F61CF71D55A2EE00DC586D /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CE91D55A2EE00DC586D /* Resource.swift */; };
-		06F61CF81D55A2EE00DC586D /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CEA1D55A2EE00DC586D /* String+MD5.swift */; };
-		06F61CF91D55A2EE00DC586D /* ThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CEB1D55A2EE00DC586D /* ThreadHelper.swift */; };
-		06F61CFA1D55A2EE00DC586D /* UIButton+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CEC1D55A2EE00DC586D /* UIButton+Kingfisher.swift */; };
-		06F61CFB1D55A2EE00DC586D /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F61CEE1D55A2EE00DC586D /* UIImage+WebP.m */; };
 		06FED4441D4634A600D7B068 /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 06FED4431D4634A600D7B068 /* city.json */; };
 		292CBA081CFE85B000248C88 /* WOWRegistInfoFirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */; };
 		292CBA0A1CFE867D00248C88 /* WOWRegistInfoSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */; };
@@ -361,22 +348,6 @@
 		069056E01D36666F00A851F9 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
 		06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+VCManager.swift"; sourceTree = "<group>"; };
-		06F61CDF1D55A2EE00DC586D /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		06F61CE01D55A2EE00DC586D /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
-		06F61CE11D55A2EE00DC586D /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
-		06F61CE21D55A2EE00DC586D /* ImagePrefetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePrefetcher.swift; sourceTree = "<group>"; };
-		06F61CE31D55A2EE00DC586D /* ImageTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTransition.swift; sourceTree = "<group>"; };
-		06F61CE41D55A2EE00DC586D /* ImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageView+Kingfisher.swift"; sourceTree = "<group>"; };
-		06F61CE51D55A2EE00DC586D /* Kingfisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kingfisher.h; sourceTree = "<group>"; };
-		06F61CE61D55A2EE00DC586D /* KingfisherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingfisherManager.swift; sourceTree = "<group>"; };
-		06F61CE71D55A2EE00DC586D /* KingfisherOptionsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingfisherOptionsInfo.swift; sourceTree = "<group>"; };
-		06F61CE81D55A2EE00DC586D /* KingfisherWebP_demo_Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KingfisherWebP_demo_Bridging.h; sourceTree = "<group>"; };
-		06F61CE91D55A2EE00DC586D /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
-		06F61CEA1D55A2EE00DC586D /* String+MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
-		06F61CEB1D55A2EE00DC586D /* ThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadHelper.swift; sourceTree = "<group>"; };
-		06F61CEC1D55A2EE00DC586D /* UIButton+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Kingfisher.swift"; sourceTree = "<group>"; };
-		06F61CED1D55A2EE00DC586D /* UIImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP.h"; sourceTree = "<group>"; };
-		06F61CEE1D55A2EE00DC586D /* UIImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP.m"; sourceTree = "<group>"; };
 		06FED4431D4634A600D7B068 /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
 		292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoFirstController.swift; sourceTree = "<group>"; };
 		292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoSecondController.swift; sourceTree = "<group>"; };
@@ -833,29 +804,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		06F61CDE1D55A2EE00DC586D /* Kingfisher_WebP-master */ = {
-			isa = PBXGroup;
-			children = (
-				06F61CDF1D55A2EE00DC586D /* Image.swift */,
-				06F61CE01D55A2EE00DC586D /* ImageCache.swift */,
-				06F61CE11D55A2EE00DC586D /* ImageDownloader.swift */,
-				06F61CE21D55A2EE00DC586D /* ImagePrefetcher.swift */,
-				06F61CE31D55A2EE00DC586D /* ImageTransition.swift */,
-				06F61CE41D55A2EE00DC586D /* ImageView+Kingfisher.swift */,
-				06F61CE51D55A2EE00DC586D /* Kingfisher.h */,
-				06F61CE61D55A2EE00DC586D /* KingfisherManager.swift */,
-				06F61CE71D55A2EE00DC586D /* KingfisherOptionsInfo.swift */,
-				06F61CE81D55A2EE00DC586D /* KingfisherWebP_demo_Bridging.h */,
-				06F61CE91D55A2EE00DC586D /* Resource.swift */,
-				06F61CEA1D55A2EE00DC586D /* String+MD5.swift */,
-				06F61CEB1D55A2EE00DC586D /* ThreadHelper.swift */,
-				06F61CEC1D55A2EE00DC586D /* UIButton+Kingfisher.swift */,
-				06F61CED1D55A2EE00DC586D /* UIImage+WebP.h */,
-				06F61CEE1D55A2EE00DC586D /* UIImage+WebP.m */,
-			);
-			path = "Kingfisher_WebP-master";
-			sourceTree = "<group>";
-		};
 		292CBA0B1CFE868800248C88 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1130,7 +1078,6 @@
 		29FF25E41CFDA86300DF2A9B /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
-				06F61CDE1D55A2EE00DC586D /* Kingfisher_WebP-master */,
 				0639686D1D545FE900631BDF /* hex-kit.swift */,
 				632A93421D488DCC003A5966 /* CAPSPageMenu */,
 				635716B61D45EB89006BD746 /* CyclePictureView */,
@@ -1930,7 +1877,6 @@
 				29FF26B81CFDA86300DF2A9B /* WOWAddressListModel.swift in Sources */,
 				29FF268E1CFDA86300DF2A9B /* WOWBrandDetailCell.swift in Sources */,
 				29FF26CF1CFDA86300DF2A9B /* WOWUserController.swift in Sources */,
-				06F61CF31D55A2EE00DC586D /* ImageTransition.swift in Sources */,
 				2953F19A1D06A6A2006D7D95 /* WOWFavoriteController.swift in Sources */,
 				29FF26D21CFDA86300DF2A9B /* WOWUserHomeTopView.swift in Sources */,
 				29FF26ED1CFDA86300DF2A9B /* MIBadgeButton.swift in Sources */,
@@ -1957,10 +1903,8 @@
 				632A933D1D487847003A5966 /* WOWFavProduct.swift in Sources */,
 				29D5EC2F1D011F390001266C /* WOWProductDetailController.swift in Sources */,
 				636C33D61D52E5E400CA4E69 /* WOWOrderFooterView.swift in Sources */,
-				06F61CF71D55A2EE00DC586D /* Resource.swift in Sources */,
 				29D5EC3B1D0135850001266C /* WOWProductDetailDescCell.swift in Sources */,
 				29FF267E1CFDA86300DF2A9B /* WOWSideContainerController.swift in Sources */,
-				06F61CF21D55A2EE00DC586D /* ImagePrefetcher.swift in Sources */,
 				632A93451D49B417003A5966 /* WOWProductParameter.swift in Sources */,
 				29FF26B31CFDA86300DF2A9B /* WOWAddAddressController.swift in Sources */,
 				2958BD931CFECA9300F6A6D7 /* SwiftWebViewProgressView.swift in Sources */,
@@ -1993,7 +1937,6 @@
 				29FF26E21CFDA86300DF2A9B /* WOWApiPath.swift in Sources */,
 				632A93391D475F8B003A5966 /* WOWBuyCarEmpty.swift in Sources */,
 				29FF264B1CFDA86300DF2A9B /* WOWSureOrderController.swift in Sources */,
-				06F61CF41D55A2EE00DC586D /* ImageView+Kingfisher.swift in Sources */,
 				29FF26C81CFDA86300DF2A9B /* WOWOrderTransController.swift in Sources */,
 				29FF269C1CFDA86300DF2A9B /* WOWGoodsController.swift in Sources */,
 				068B60BB1D4F41B1001AD778 /* WOWFoundCategoryCell.swift in Sources */,
@@ -2033,7 +1976,6 @@
 				29FF26D41CFDA86300DF2A9B /* WOWUserInfoController.swift in Sources */,
 				29FF26F01CFDA86300DF2A9B /* TagCellLayout.swift in Sources */,
 				29FF26B71CFDA86300DF2A9B /* WOWAddressController.swift in Sources */,
-				06F61CEF1D55A2EE00DC586D /* Image.swift in Sources */,
 				069056E11D36666F00A851F9 /* WOWController.swift in Sources */,
 				29FF26AC1CFDA86300DF2A9B /* WOWStoreSectionView.swift in Sources */,
 				29FF26DF1CFDA86300DF2A9B /* WOWUserManager.swift in Sources */,
@@ -2048,14 +1990,11 @@
 				29FF26721CFDA86300DF2A9B /* WOWSubArtCell.swift in Sources */,
 				29FF263C1CFDA86300DF2A9B /* AppDelegate.swift in Sources */,
 				29FF26A01CFDA86300DF2A9B /* WOWGoodsModel.swift in Sources */,
-				06F61CFA1D55A2EE00DC586D /* UIButton+Kingfisher.swift in Sources */,
 				29FF265F1CFDA86300DF2A9B /* WOWMenuModel.swift in Sources */,
 				292CBA0D1CFE86AB00248C88 /* WOWRegistInfoSureView.swift in Sources */,
 				29FF266A1CFDA86300DF2A9B /* WOWSearchItemModel.swift in Sources */,
-				06F61CF91D55A2EE00DC586D /* ThreadHelper.swift in Sources */,
 				29FF26E71CFDA86300DF2A9B /* BTNavigationDropdownMenu.swift in Sources */,
 				29FF26BA1CFDA86300DF2A9B /* WOWFavoriteListModel.swift in Sources */,
-				06F61CFB1D55A2EE00DC586D /* UIImage+WebP.m in Sources */,
 				29FF26761CFDA86300DF2A9B /* WOWMsgCodeController.swift in Sources */,
 				068B60C11D4F563C001AD778 /* WowFoundModel.swift in Sources */,
 				29FF26D91CFDA86300DF2A9B /* WOWData.swift in Sources */,
@@ -2077,7 +2016,6 @@
 				29FF26C01CFDA86300DF2A9B /* WOWOrderCommentController.swift in Sources */,
 				29FF26911CFDA86300DF2A9B /* WOWBrandHomeController.swift in Sources */,
 				636C33D31D52DD1D00CA4E69 /* WOWOrderAddressCell.swift in Sources */,
-				06F61CF51D55A2EE00DC586D /* KingfisherManager.swift in Sources */,
 				29FF266C1CFDA86300DF2A9B /* WOWSenceController.swift in Sources */,
 				29FF26A11CFDA86300DF2A9B /* WOWGoodsParamCell.swift in Sources */,
 				29FF265B1CFDA86300DF2A9B /* WOWLikeListController.swift in Sources */,
@@ -2089,15 +2027,12 @@
 				29FF26C21CFDA86300DF2A9B /* WOWOrderDetailController.swift in Sources */,
 				635716BB1D45EB89006BD746 /* CyclePictureCell.swift in Sources */,
 				29FF269D1CFDA86300DF2A9B /* WOWGoodsDetailCell.swift in Sources */,
-				06F61CF81D55A2EE00DC586D /* String+MD5.swift in Sources */,
 				29FF26DD1CFDA86300DF2A9B /* WOWShareManager.swift in Sources */,
 				632A935A1D4B50F7003A5966 /* WOWProductSpecModel.swift in Sources */,
 				29FF26631CFDA86300DF2A9B /* WOWSceneModel.swift in Sources */,
-				06F61CF11D55A2EE00DC586D /* ImageDownloader.swift in Sources */,
 				29FF268C1CFDA86300DF2A9B /* WOWAttributeModel.swift in Sources */,
 				29FF268D1CFDA86300DF2A9B /* WOWBannerModel.swift in Sources */,
 				29FF26BB1CFDA86300DF2A9B /* WOWILikeController.swift in Sources */,
-				06F61CF01D55A2EE00DC586D /* ImageCache.swift in Sources */,
 				29FF26B41CFDA86300DF2A9B /* WOWAddressBottomView.swift in Sources */,
 				069056DF1D36665B00A851F9 /* WOWGuideController.swift in Sources */,
 				635716BC1D45EB89006BD746 /* CyclePictureView.swift in Sources */,
@@ -2117,7 +2052,6 @@
 				632A933B1D487388003A5966 /* CAPSPageMenu.swift in Sources */,
 				29FF26621CFDA86300DF2A9B /* WOWReuseSectionView.swift in Sources */,
 				29FF267A1CFDA86300DF2A9B /* WOWBaseTableViewController.swift in Sources */,
-				06F61CF61D55A2EE00DC586D /* KingfisherOptionsInfo.swift in Sources */,
 				29FF265E1CFDA86300DF2A9B /* WOWMenuCell.swift in Sources */,
 				29FF26531CFDA86300DF2A9B /* WOWAuthorCell.swift in Sources */,
 				29FF26F11CFDA86300DF2A9B /* CloseButton.swift in Sources */,

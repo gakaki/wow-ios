@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //初始化外观
         //com.wowdsgn.Wow
         initialAppearance()
-        YYImageWebPAvailable()
+        let webpSupport = YYImageWebPAvailable()
         /**
          注册第三方
          */

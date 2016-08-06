@@ -15,6 +15,7 @@ pod 'JSONCodable'
 pod 'YYWebImage'
 pod 'YYImage/WebP'
 pod 'YYImage'
+pod 'Kingfisher'
 
 #七牛 sdk
 pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"

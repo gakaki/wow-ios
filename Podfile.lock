@@ -24,6 +24,7 @@ PODS:
   - HidingNavigationBar (0.3.0)
   - IQKeyboardManagerSwift (4.0.4)
   - JSONCodable (2.1)
+  - Kingfisher (2.4.2)
   - MJRefresh (3.1.10)
   - MOBFoundation (2.0.7)
   - MonkeyKing (0.9.2)
@@ -77,6 +78,7 @@ DEPENDENCIES:
   - HidingNavigationBar (~> 0.3.0)
   - IQKeyboardManagerSwift
   - JSONCodable
+  - Kingfisher
   - MJRefresh
   - MOBFoundation
   - MonkeyKing (~> 0.9.2)
@@ -120,6 +122,7 @@ SPEC CHECKSUMS:
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   JSONCodable: d3bb8d1323bb4cbc381b16219046c5282565a4f1
+  Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
   MOBFoundation: af2388967017966e003c676a6cfffe784a1dead2
   MonkeyKing: 2cf420f9202a51714734374c97d96cf496e7ae2b
@@ -142,6 +145,6 @@ SPEC CHECKSUMS:
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: effc122bb037bc7df8e5d7bc52a9175fcfd46489
+PODFILE CHECKSUM: cc1cae455f7bb2a1333f65a26c387cf575c6dd3d
 
 COCOAPODS: 1.1.0.beta.1

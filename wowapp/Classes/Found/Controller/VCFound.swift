@@ -15,10 +15,10 @@ class VCFound: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         request()
     }
     
+<<<<<<< b8ee3dbc6d85854645828a797e8f455be27dd33e
     override func request(){
         
         
@@ -51,6 +51,25 @@ class VCFound: WOWBaseViewController {
         }) {(errorMsg) in
             
         }*/
+=======
+    //MARK:Network
+    override func request(){
+        
+            super.request()
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist, successClosure: {[weak self] (result) in
+                if let strongSelf = self{
+                    let arr = Mapper<WOWAddressListModel>().mapArray(JSON(result)["shippingInfoResultList"].arrayObject)
+                    if let array = arr{
+                        strongSelf.vo_products = []
+//                        strongSelf.vo_products.appendContentsOf(array)
+                        strongSelf.tableView.reloadData()
+                    }
+                }
+            }) { (errorMsg) in
+                
+            }
+      
+>>>>>>> 删除无用qiniu dmeo
         
    
     }
@@ -68,7 +87,7 @@ class VCFound: WOWBaseViewController {
         tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
         tableView.registerNib(UINib.nibName(String(WOWFoundWeeklyNewCell)), forCellReuseIdentifier:cellID1)
-//        tableView.clearRestCell()
+
         tableView.mj_header          = mj_header
         
         configBarItem()

@@ -24,7 +24,6 @@ PODS:
   - HidingNavigationBar (0.3.0)
   - IQKeyboardManagerSwift (4.0.4)
   - JSONCodable (2.1)
-  - Kingfisher (2.0.4)
   - MJRefresh (3.1.10)
   - MOBFoundation (2.0.7)
   - MonkeyKing (0.9.2)
@@ -60,9 +59,15 @@ PODS:
   - SwiftyUserDefaults (2.2.0)
   - UICKeyChainStore (2.1.0)
   - UMengAnalytics-NO-IDFA (4.0.5)
+  - YYCache (1.0.3)
   - YYImage (1.0.2):
     - YYImage/Core (= 1.0.2)
   - YYImage/Core (1.0.2)
+  - YYImage/WebP (1.0.2):
+    - YYImage/Core
+  - YYWebImage (1.0.4):
+    - YYCache
+    - YYImage
 
 DEPENDENCIES:
   - DZNEmptyDataSet
@@ -72,7 +77,6 @@ DEPENDENCIES:
   - HidingNavigationBar (~> 0.3.0)
   - IQKeyboardManagerSwift
   - JSONCodable
-  - Kingfisher (~> 2.0.1)
   - MJRefresh
   - MOBFoundation
   - MonkeyKing (~> 0.9.2)
@@ -94,6 +98,8 @@ DEPENDENCIES:
   - SwiftyUserDefaults
   - UMengAnalytics-NO-IDFA
   - YYImage
+  - YYImage/WebP
+  - YYWebImage
 
 EXTERNAL SOURCES:
   Pingpp:
@@ -114,7 +120,6 @@ SPEC CHECKSUMS:
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   JSONCodable: d3bb8d1323bb4cbc381b16219046c5282565a4f1
-  Kingfisher: 8f1ec2c067ade2c549a1a594379b69c4b1ff81ab
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
   MOBFoundation: af2388967017966e003c676a6cfffe784a1dead2
   MonkeyKing: 2cf420f9202a51714734374c97d96cf496e7ae2b
@@ -133,8 +138,10 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: e7c8197a9d4068702e7f2406a968cae413b8de27
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
+  YYCache: 282f35b5b0990833d0b7a06d864a87141a021da2
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
+  YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: 51d8f56c64b538168c0335c7eb068c7280cd5085
+PODFILE CHECKSUM: effc122bb037bc7df8e5d7bc52a9175fcfd46489
 
 COCOAPODS: 1.1.0.beta.1

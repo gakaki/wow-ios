@@ -48,6 +48,70 @@ class VCFound: WOWBaseViewController {
 }
 
 
+// MARK: VCFound UITableViewDelegate
+extension VCFound : UITableViewDataSource,UITableViewDelegate {
+	
+    //MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 200
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        switch section {
+        case 1:
+            return "1"
+        case 2:
+            return "2"
+        case 3:
+            return "3"
+        default:
+            return "4"
+
+        }
+    }
+    
+    
+    
+  
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        switch indexPath.row  {
+        case 1:
+            return UITableViewCell()
+        case 2:
+            return UITableViewCell()
+        case 3:
+            return UITableViewCell()
+        default:
+            return UITableViewCell()
+            
+        }
+    }
+	    
+}
+
 ////MARK:Actions
 //
 //

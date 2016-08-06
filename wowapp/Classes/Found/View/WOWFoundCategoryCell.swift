@@ -4,6 +4,7 @@ import UIKit
 class WOWFoundCategoryCell: UITableViewCell {
     
     @IBOutlet weak var desTextLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

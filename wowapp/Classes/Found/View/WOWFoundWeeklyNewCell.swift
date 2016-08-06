@@ -11,63 +11,48 @@ class WOWFoundWeeklyNewCell: UITableViewCell {
     
     weak var delegate:FoundWeeklyNewCellDelegate?
     
-    var brandDataArr = [WOWBrandListModel](){
+    var products = [WOWFoundRecommendModel](){
         didSet{
-            collectionView.reloadData()
-        }
-    }
-    
-    var productArr = [WOWProductModel](){
-        didSet{
-            collectionView.reloadData()
+            if ( products.count > 0 ){
+                collectionView.reloadData()
+            }
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
+        collectionView.registerClass(WOWFoundWeeklyNewCellElementCell.self, forCellWithReuseIdentifier:String(WOWFoundWeeklyNewCellElementCell))
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
 }
-//
-//
-//extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+
+//extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
 //    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 //        return 1
 //    }
 //    
 //    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if showBrand {
-//            return brandDataArr.count
-//        }else{
-//            return productArr.count > 9 ? 9 : productArr.count
-//        }
+//        return products.count
 //    }
-//    
+    
 //    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
-//        if showBrand {
-//            let model = brandDataArr[indexPath.item]
-//            let url = NSURL(string:model.brandImageUrl ?? "")
-//            cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
-//            WOWBorderColor(cell)
-//        }else{
-//            let model = productArr[indexPath.item]
-//            let url = NSURL(string:model.productImage ?? "")
-//            cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
-//        }
+//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFoundWeeklyNewCellElementCell), forIndexPath: indexPath) as! WOWFoundWeeklyNewCellElementCell
+//       
+//        let model = products[indexPath.item]
+//        let url = NSURL(string:model.brandImageUrl ?? "")
+//        cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
+//        WOWBorderColor(cell)
 //        return cell
 //    }
-//    
+    
 //    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 //        return CGSizeMake((self.w - 45)/3, (self.w - 45)/3)
 //    }
-//    
+
 //    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 //        if let del = self.delegate {
 //            if showBrand {

@@ -21,8 +21,11 @@ class WOWTabBarController: UITabBarController {
         super.didReceiveMemoryWarning()
         
     }
-
-//MARK:Private Method
+    //MARK: UITableViewDataSource
+    func configureCell(cell: UITableViewCell, forRowAtIndexPath: NSIndexPath) {
+        
+    }
+    //MARK:Private Method
     func setViewControllers(){
         self.view.backgroundColor = DefaultBackColor
         self.delegate = self;

@@ -25,7 +25,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
         
     }
     
-    
     override func request(){
         
     }

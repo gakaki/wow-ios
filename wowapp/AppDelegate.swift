@@ -9,6 +9,7 @@
 import UIKit
 import MonkeyKing
 import IQKeyboardManagerSwift
+import YYWebImage
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //初始化外观
         //com.wowdsgn.Wow
         initialAppearance()
-        
+        YYImageWebPAvailable()
         /**
          注册第三方
          */

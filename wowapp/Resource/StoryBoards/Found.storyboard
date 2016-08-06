@@ -35,7 +35,23 @@
                     <view key="view" contentMode="scaleToFill" id="Sbn-Zj-HSb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3q1-Wm-5dr">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="AiG-sc-6dI" id="MVc-5r-POl"/>
+                                    <outlet property="delegate" destination="AiG-sc-6dI" id="wlK-4J-GXt"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3q1-Wm-5dr" firstAttribute="leading" secondItem="Sbn-Zj-HSb" secondAttribute="leading" id="IkS-dC-jKj"/>
+                            <constraint firstAttribute="bottom" secondItem="3q1-Wm-5dr" secondAttribute="bottom" id="Iz7-wX-aEp"/>
+                            <constraint firstItem="3q1-Wm-5dr" firstAttribute="top" secondItem="maa-bU-8qV" secondAttribute="bottom" id="TUe-UX-JzV"/>
+                            <constraint firstAttribute="trailing" secondItem="3q1-Wm-5dr" secondAttribute="trailing" id="Yd1-UV-QTg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="发现" id="Oae-yn-pnL"/>
                 </viewController>

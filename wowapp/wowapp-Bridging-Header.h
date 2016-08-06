@@ -10,7 +10,6 @@
 //@import RxSwift;
 
 @import SwiftyJSON;
-@import Kingfisher;
 @import RealmSwift;
 @import ObjectMapper;
 @import MJRefresh;
@@ -20,6 +19,8 @@
 
 @import HidingNavigationBar;
 @import YYImage;
+@import YYCache;
+@import YYWebImage;
 
 //@import QiniuTokenIOS;
 

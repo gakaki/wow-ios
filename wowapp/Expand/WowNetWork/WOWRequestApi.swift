@@ -20,6 +20,11 @@ public enum RequestApi{
     case Api_Home_Scenes
     case Api_Home_Topics
     
+    //发现 分类 页面
+    case Api_Found_Main
+    case Api_Found_2nd
+    
+    
     case Api_Activity
     
     case Api_AddressAdd(receiverName: String, provinceId: Int, cityId: Int, countyId: Int, addressDetail: String, receiverMobile: String, isDefault:Bool)
@@ -277,6 +282,11 @@ extension RequestApi:TargetType{
         case .Api_Invite:
             return URL_Invite
             
+        case .Api_Found_Main:
+            return URL_Invite
+        case .Api_Found_2nd:
+            return URL_Invite
+
             
         }
     }

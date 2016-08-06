@@ -111,6 +111,7 @@ let URL_UserInfo                = "usermongo/info"
 let URL_Invite                  = "articleinfo"
 let URL_QINIU_TOKEN             = "qiniutoken"
 
+
 //6.app 登录注册
 let URL_Register                = "user/register"
 let URL_login                   = "session/login"
@@ -124,7 +125,7 @@ let URL_PwpResetCode            = "user/captcha/pwd-reset"        //重置密码
 let URL_Change                  = "user/change"                   //修改用户信息
 
 
-
+//7.地址
 let URL_AddressAdd              = "user/shippinginfo/create"   //添加收货地址
 let URL_AddressList             = "user/shippinginfo/list"
 let URL_AddressDelete           = "user/shippinginfo/delete"
@@ -136,6 +137,9 @@ let URL_OrderList               = "order/list"
 
 let URL_OrderStatus             = "order/setstatus" //状态客户端操作之后加上去
 
+//8.发现页面
+let URL_Found_Main             = "order/setstatus" //发现页面首页
+let URL_Found_2nd              = "order/setstatus" //发现页面二级页
 
 
 

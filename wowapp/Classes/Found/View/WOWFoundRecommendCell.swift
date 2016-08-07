@@ -155,9 +155,7 @@ class WOWFoundRecommendCell: UITableViewCell {
         self.product_view.removeFromSuperview()
         
         let defaultMargin: Inset = (8.0, -20.0, 8.0, 8.0, 8.0, 8.0)
-        iv                       = UIImageView()
-        let url                  = NSURL(string:self.imageName ?? "")
-        iv.yy_setImageWithURL(url , placeholder: UIImage(named: "placeholder_product"))
+        iv                       = UIImageView.imageWithUrlWebP(self.imageName)
         
         let screen_w             = Float( self.w )
         

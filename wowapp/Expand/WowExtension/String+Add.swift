@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 extension String{
     func toPinYin() -> String {
         let s = self ?? ""
@@ -18,5 +17,12 @@ extension String{
             }
         }
         return "#"
+    }
+    
+    func get_formted_price() -> String {
+        if ( self.length <= 0){
+            return ""
+        }
+        return "¥\(self)"
     }
 }

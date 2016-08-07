@@ -36,7 +36,6 @@ class WOWFoundProductModel: WOWBaseModel,Mappable{
     var pageModuleType          :   Int?
 
     func get_formted_price() -> String {
-//        return "123123123123123"
         return "¥\(self.sellPrice!)"
     }
     

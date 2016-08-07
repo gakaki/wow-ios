@@ -22,6 +22,7 @@
 @import YYCache;
 @import YYWebImage;
 @import Kingfisher;
+@import FlexboxLayout;
 
 //@import QiniuTokenIOS;
 

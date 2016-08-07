@@ -13,7 +13,7 @@ import ObjectMapper
 class WOWOrderListModel: WOWBaseModel,Mappable{
     var id              : String?
     var products        : [WOWOrderProductModel]?
-    var status          : Int? 
+    var status          : Int?
     var status_chs      : String?
     var total           : String?
     var address_full    : String?
@@ -73,5 +73,52 @@ class WOWOrderProductModel: WOWBaseModel ,Mappable{
         price       <- map["price"]
         total       <- map["total"]
         imageUrl    <- map["image"]
+    }
+}
+class WOWNewOrderListModel: WOWBaseModel,Mappable{
+    var orderId              : Int? // 订单Id
+    
+    var orderCode       : String?// 订单编号
+    
+    var orderAmount     : Double?// 订单金额
+    
+    var orderStatus     : Int?// 订单状态
+    
+    var orderStatusName : String?//订单状态名称
+    
+    var totalProductQty : Int?// 订单产品总件数
+    
+    var productSpecImgs : Array<String> = [] // 产品规格图片列表
+    
+    var orderCreateTimeFormat : String? // 订单创建的时间
+    
+    
+    
+    required init?(_ map: Map) {
+        
+        
+        
+    }
+    
+    
+    
+    func mapping(map: Map) {
+        
+        orderId                  <- map["orderId"]
+        
+        orderCode            <- map["orderCode"]
+        
+        orderAmount              <- map["orderAmount"]
+        
+        orderStatus          <- map["orderStatus"]
+        
+        orderStatusName               <- map["orderStatusName"]
+        
+        totalProductQty        <- map["totalProductQty"]
+        
+        productSpecImgs          <- map["productSpecImgs"]
+        
+        orderCreateTimeFormat    <- map["orderCreateTimeFormat"]
+        
     }
 }

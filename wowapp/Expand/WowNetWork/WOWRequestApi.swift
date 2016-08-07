@@ -104,7 +104,10 @@ public enum RequestApi{
     
     //订单相关
     
-    case Api_OrderList(uid: String, type: String) //100为全部
+
+//    case Api_OrderList(uid:String,type:String) //100为全部
+    case Api_OrderList(orderStatus:String,currentPage:Int,pageSize:Int)
+
     
     case Api_OrderStatus(uid: String, order_id: String, status: String)
     
@@ -294,17 +297,17 @@ extension RequestApi:TargetType{
             return URL_Invite
         //发现页面
         case .Api_Found_Main:
-            return URL_Invite
+            return URL_Found_Main
         case .Api_Found_2nd:
-            return URL_Invite
+            return URL_Found_2nd
 
-            
         }
     }
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_OrderBuyNow, .Api_BrandDetail, .Api_ProductBrand:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_OrderBuyNow, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd:
+
             return .GET
 
         default:
@@ -405,8 +408,8 @@ extension RequestApi:TargetType{
                 params = ["id": id, "receiverName": receiverName, "provinceId": provinceId, "cityId": cityId, "countyId":countyId, "addressDetail": addressDetail, "receiverMobile": receiverMobile, "isDefault": isDefault]
             
             //订单相关
-            case let .Api_OrderList(uid,type):
-                params =  ["uid":uid,"type":type]
+            case let .Api_OrderList(orderStatus,currentPage,pageSize):
+                params =  ["orderStatus":orderStatus,"currentPage":currentPage,"pageSize":pageSize]
             case let .Api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]
             case let .Api_OrderCreate(param):

@@ -140,7 +140,7 @@ let URL_AddressSetDefault       = "user/shippinginfo/set-default" //设为默认
 let URL_AddressDefault          = "user/shippinginfo/default"   //查询默认收货地址
 let URL_AddressEdit             = "user/shippinginfo/update"    //编辑收货地址
 
-let URL_OrderList               = "order/list"
+let URL_OrderList               = "order/get"
 
 let URL_OrderStatus             = "order/setstatus" //状态客户端操作之后加上去
 

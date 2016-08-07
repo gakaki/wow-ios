@@ -6,44 +6,40 @@ import YYImage
 
 class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
     
-    class var itemWidth:CGFloat{
-        get{
-            return (MGScreenWidth - 1) / 3.5
-        }
-    }
-    
     var pictureImageView: UIImageView!
     var label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor     = UIColor.whiteColor()
+//        backgroundColor     = UIColor.grayColor()
         
         pictureImageView    = UIImageView()
         label               = UILabel()
         label.textAlignment = NSTextAlignment.Center
+        
         self.addSubview(label)
-        
         self.addSubview(pictureImageView)
-        
+
         
         pictureImageView.snp_makeConstraints { (make) -> Void in
-            make.size.equalTo(CGSizeMake(30, 30))
-            make.center.equalTo(self).offset(UIEdgeInsets.init(top: -20, left: 5, bottom: 35, right: 5))
+            make.size.equalTo(CGSizeMake(70, 70))
+            make.center.equalTo(self).offset(UIEdgeInsets.init(top: -10, left: 0, bottom: 0, right: 0))
         }
         
         label.snp_makeConstraints { (make) -> Void in
             
-            make.size.equalTo(CGSizeMake(pictureImageView.size.width, 20))
-            make.top.equalTo(pictureImageView.snp_top).offset(5)
-            make.left.equalTo(pictureImageView.snp_left)
-            make.right.equalTo(pictureImageView.snp_right)
+            label.font      = UIFont.systemFontOfSize(12)
+            label.textColor = UIColor.blackColor()
+            
+            make.width.equalTo(self.snp_width)
+            make.height.equalTo(20)
+            
+            make.baseline.equalTo(self.snp_baseline)
         }
     }
     

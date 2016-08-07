@@ -264,6 +264,9 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
             
         }
     }
+    /**
+     弹出选择器
+     */
     private func showPickerView(){
         
         self.backGroundMaskView.hidden = false

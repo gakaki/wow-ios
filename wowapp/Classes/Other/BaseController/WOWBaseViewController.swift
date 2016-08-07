@@ -10,7 +10,7 @@ import UIKit
 
 class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource{
     var hideNavigationBar:Bool = false
-    var pageIndex = 0 //翻页
+    var pageIndex = 1 //翻页
     var isRreshing : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +57,6 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 
         }
     }
-    
-    
     
 //    
 //    func hideNavSeprator(isHiden:Bool = true) {
@@ -119,7 +117,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
         if isRreshing {
             return
         }else{
-            pageIndex = 0
+            pageIndex = 1
            isRreshing = true
         }
         request()

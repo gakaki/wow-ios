@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WOWPaySuccessController: WOWBaseTableViewController {
+class WOWPaySuccessController: WOWBaseViewController {
     var orderid     = "  "
     var totalPrice  = ""
     var payMethod   = "支付宝"
@@ -31,43 +31,9 @@ class WOWPaySuccessController: WOWBaseTableViewController {
     
     
     override func navBack() {
-        navigationController?.dismissViewControllerAnimated(true, completion:nil)
+        navigationController?.popViewControllerAnimated(true)
+        
     }
     
 }
 
-extension WOWPaySuccessController{
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0.01
-        case 1,20:
-            return 20
-        default:
-            return 0
-        }
-    }
-    
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
-    }
-    
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        switch indexPath.section {
-        case 2:
-            if indexPath.row == 0 {//订单
-                let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
-                vc.selectIndex = 0
-                vc.entrance = OrderEntrance.PaySuccess
-                navigationController?.pushViewController(vc, animated: true)
-            }else{
-
-                navigationController?.dismissViewControllerAnimated(true, completion: nil)
-            }
-        default:
-            break
-        }
-    }
-}

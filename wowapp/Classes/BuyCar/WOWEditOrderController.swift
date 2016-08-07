@@ -17,7 +17,8 @@ class WOWEditOrderController: WOWBaseViewController {
     var orderSettle                     :WOWEditOrderModel?
     var totalPrice                      : String?
     var addressInfo                     :WOWAddressListModel?
-    var orderCode                       : String? //订单号
+    var orderCode                       = String()
+    var payType                         : String? //支付方式
     private var tipsTextField           : UITextField!
 
     override func viewDidLoad() {
@@ -66,10 +67,10 @@ class WOWEditOrderController: WOWBaseViewController {
     //MARK: - Action
     @IBAction func sureClick(sender: UIButton) {
         chooseStyle()
-       
-        guard let orderCode = orderCode else {
+        
+        if orderCode.isEmpty {
             requestOrderCreat()
-            return
+
         }
 
     }
@@ -113,7 +114,7 @@ class WOWEditOrderController: WOWBaseViewController {
         params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
-                strongSelf.orderCode = JSON(result)["orderCode"].string
+                strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
             }
             
             }) { (errorMsg) in
@@ -129,7 +130,7 @@ class WOWEditOrderController: WOWBaseViewController {
                     switch ret{
                     case "success":
                         let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
-//                        vc.payMethod = (strongSelf.payType == "ali" ? "支付宝":"微信")
+                        vc.payMethod = (strongSelf.payType == "alipay" ? "支付宝":"微信")
                         vc.orderid = orderid
                         vc.totalPrice = totalPrice
                         strongSelf.navigationController?.pushViewController(vc, animated: true)
@@ -262,16 +263,16 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
 //MARK: - selectPayDelegate
 extension WOWEditOrderController: selectPayDelegate {
     func surePay(channel: String) {
+        payType = channel
         backView.hidePayView()
-        guard let orderCode = orderCode else {
-            print("订单生成失败")
-            return
+        if  orderCode.isEmpty {
+            WOWHud.showMsg("订单生成失败")
         }
-        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCharge(orderNo: orderCode ?? "", channel: channel, clientIp: "192.168.1.1"), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCharge(orderNo: orderCode ?? "", channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let charge = json["charge"]
-                strongSelf.goPay(charge.object, totalPrice: strongSelf.totalPrice ?? "", orderid: orderCode)
+                strongSelf.goPay(charge.object, totalPrice: strongSelf.totalPrice ?? "", orderid: strongSelf.orderCode)
             }
             
             }) { (errorMsg) in

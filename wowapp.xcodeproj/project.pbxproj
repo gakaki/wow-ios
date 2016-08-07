@@ -310,6 +310,7 @@
 		636C33DE1D5314F200CA4E69 /* WOWEditOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C33DD1D5314F200CA4E69 /* WOWEditOrderModel.swift */; };
 		636C33E01D534CC000CA4E69 /* WOWSelectPayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C33DF1D534CC000CA4E69 /* WOWSelectPayView.swift */; };
 		636C33E21D534CD400CA4E69 /* WOWSelectPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636C33E11D534CD400CA4E69 /* WOWSelectPayView.xib */; };
+		636C33E41D54933700CA4E69 /* WOWFavoriteProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C33E31D54933600CA4E69 /* WOWFavoriteProductModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -653,6 +654,7 @@
 		636C33DD1D5314F200CA4E69 /* WOWEditOrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWEditOrderModel.swift; sourceTree = "<group>"; };
 		636C33DF1D534CC000CA4E69 /* WOWSelectPayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSelectPayView.swift; sourceTree = "<group>"; };
 		636C33E11D534CD400CA4E69 /* WOWSelectPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSelectPayView.xib; sourceTree = "<group>"; };
+		636C33E31D54933600CA4E69 /* WOWFavoriteProductModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWFavoriteProductModel.swift; sourceTree = "<group>"; };
 		6D82CF16CDE3CFCF20061FE2 /* Pods-wowapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.debug.xcconfig"; sourceTree = "<group>"; };
 		98AEBDD3562DCD8D8DFB519A /* Pods_wowapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1535,6 +1537,7 @@
 		632A932B1D473087003A5966 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				636C33E31D54933600CA4E69 /* WOWFavoriteProductModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1646,7 +1649,7 @@
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = B4WSDTADTT;
+						DevelopmentTeam = 8FPQ7629B9;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -1994,6 +1997,7 @@
 				29FF26E01CFDA86300DF2A9B /* String+Add.swift in Sources */,
 				29FF26C21CFDA86300DF2A9B /* WOWOrderDetailController.swift in Sources */,
 				635716BB1D45EB89006BD746 /* CyclePictureCell.swift in Sources */,
+				636C33E41D54933700CA4E69 /* WOWFavoriteProductModel.swift in Sources */,
 				29FF269D1CFDA86300DF2A9B /* WOWGoodsDetailCell.swift in Sources */,
 				29FF26DD1CFDA86300DF2A9B /* WOWShareManager.swift in Sources */,
 				632A935A1D4B50F7003A5966 /* WOWProductSpecModel.swift in Sources */,
@@ -2162,7 +2166,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.apph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";
@@ -2197,7 +2201,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.apph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";

@@ -86,7 +86,7 @@ class WOWBrandListController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandList, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 
-                let arr        = JSON(result).arrayObject
+                let arr        = JSON(result)["brandVoList"].arrayObject
      
                 if let dataArr = arr{
                     

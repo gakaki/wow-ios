@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="197" height="50"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7W3-S8-Mqd">
-                        <rect key="frame" x="0.0" y="0.0" width="189" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="182" height="40"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -27,7 +27,7 @@
             <constraints>
                 <constraint firstItem="7W3-S8-Mqd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Qur-c5-t1u"/>
                 <constraint firstItem="7W3-S8-Mqd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="SMz-Rr-go0"/>
-                <constraint firstAttribute="trailing" secondItem="7W3-S8-Mqd" secondAttribute="trailing" constant="8" id="ZDs-1y-vQX"/>
+                <constraint firstAttribute="trailing" secondItem="7W3-S8-Mqd" secondAttribute="trailing" constant="15" id="ZDs-1y-vQX"/>
                 <constraint firstAttribute="bottom" secondItem="7W3-S8-Mqd" secondAttribute="bottom" constant="10" id="uzO-94-Ats"/>
             </constraints>
             <size key="customSize" width="197" height="66"/>

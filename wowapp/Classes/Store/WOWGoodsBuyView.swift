@@ -220,6 +220,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             nameLabel.text = p.productName
             perPriceLabel.text = WOWBuyCarMananger.sharedBuyCar.defaultPrice?.priceFormat()
+            goodsImageView.layer.borderWidth = 0.5
+            goodsImageView.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
             if let img = WOWBuyCarMananger.sharedBuyCar.defaultImg {
                 goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
             }
@@ -247,7 +249,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }
 
             collectionView.reloadData()
-            countTextField.text = "\(skuCount)"
+            showResult(skuCount)
         }
     }
     
@@ -397,6 +399,13 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     
     private func showResult(count:Int){
+        if count <= 1 {
+            subButton.enabled = false
+            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
+        }else {
+            subButton.enabled = true
+            subButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        }
         self.countTextField.text = "\(count)"
     }
 
@@ -404,7 +413,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
 //MARK: - TagCellLayout Delegate Methods
     func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat {
-        return CGFloat(44.0)
+        return CGFloat(45.0)
     }
     
     func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
@@ -444,7 +453,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             if specIndex >= 0 {
                 let str = colorArr[indexPath.row]
                 if !str.isSelect {
-                    cell.textLabel.textColor = MGRgb(234, g: 234, b: 234)
+                    cell.textLabel.textColor = MGRgb(204, g: 204, b: 204)
+                    cell.textLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
                     cell.userInteractionEnabled = false
                 }
             }
@@ -562,18 +572,18 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                             if self.productInfo?.availableStock! < skuCount {
                                 skuCount = (self.productInfo?.availableStock)!
                             }
-                            showResult(skuCount)
                             addButton.enabled = true
                             addButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
                             subButton.enabled = true
                             subButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+                            showResult(skuCount)
                         }else {
                             skuCount = 0
-                            showResult(skuCount)
                             addButton.enabled = false
                             addButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
                             subButton.enabled = false
                             subButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
+                            showResult(skuCount)
                         }
                     }
                 }
@@ -589,6 +599,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
         cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
+        cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
         cell.textLabel.textColor = selected ? UIColor.blackColor() : MGRgb(128, g: 128, b: 128)
         cell.userInteractionEnabled = true
 

@@ -56,7 +56,7 @@ class WOWFavDesigner: WOWBaseViewController {
     }()
     private func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
-        
+        collectionView.mj_header  = self.mj_header
         collectionView.registerNib(UINib.nibName(String(WOWFavoriteBrandCell)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
         
         
@@ -86,10 +86,13 @@ class WOWFavDesigner: WOWBaseViewController {
                     strongSelf.dataArr = brandList
                 }
                 strongSelf.collectionView.reloadData()
+                strongSelf.endRefresh()
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
                 
             }
-        }) { (errorMsg) in
-            
         }
     }
 }

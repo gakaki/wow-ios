@@ -13,7 +13,7 @@ import UIKit
 class WOWFavProduct: WOWBaseViewController {
 
 
-    var dataArr  = [WOWBrandListModel]()
+    var dataArr  = [WOWFavoriteProductModel]()
     
     var parentNavigationController : UINavigationController?
     
@@ -56,7 +56,7 @@ class WOWFavProduct: WOWBaseViewController {
     }()
     private func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
-        
+        collectionView.mj_header  = self.mj_header
         collectionView.registerNib(UINib.nibName(String(WOWFavoritrSingleCell)), forCellWithReuseIdentifier:String(WOWFavoritrSingleCell))
         WOWBorderColor(collectionView)
         
@@ -81,17 +81,23 @@ class WOWFavProduct: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeBrand, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProduct, successClosure: { [weak self](result) in
             if let strongSelf = self{
-                let brandList = Mapper<WOWBrandListModel>().mapArray(JSON(result)["likedBrandVoList"].arrayObject)
-                if let brandList = brandList{
-                    strongSelf.dataArr = brandList
+                let productList = Mapper<WOWFavoriteProductModel>().mapArray(JSON(result)["favoriteProductVoList"].arrayObject)
+                if let productList = productList{
+                    strongSelf.dataArr = productList
                 }
+                strongSelf.endRefresh()
+
                 strongSelf.collectionView.reloadData()
 
             }
-        }) { (errorMsg) in
-            
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+
+            }
+
         }
     }
     
@@ -100,13 +106,13 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  2
+        return  dataArr.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoritrSingleCell), forIndexPath: indexPath) as! WOWFavoritrSingleCell
-//        let model = dataArr[indexPath.row]
-        cell.imageView.kf_setImageWithURL(NSURL(string: "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        let model = dataArr[indexPath.row]
+        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         return cell
     }
     
@@ -116,9 +122,10 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
 ////            let model = dataArr[indexPath.row]
 //            del.goGoodsDetail(1)
 //        }
+        let product = dataArr[indexPath.row]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
-        //        vc.productID = produtID
+        vc.productId = String(product.productId)
         parentNavigationController?.pushViewController(vc, animated: true)
 
        

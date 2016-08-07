@@ -15,23 +15,26 @@ enum OrderEntrance {
 
 class WOWOrderController: WOWBaseViewController {
     var entrance = OrderEntrance.User
-    var dataArr  = [WOWOrderListModel]()
-    var type = "100"  //100代表全部
+    var dataArr  = [WOWNewOrderListModel]()
+    
+//    var currentPage = 1
+    
+    var type = ""  //100代表全部
     var selectIndex:Int = 0{
         didSet{
             switch selectIndex {
             case 0: //全部
-                type = "100"
+                type = ""
             case 1: //待付款
                 type = "0"
             case 2: //待发货
                 type = "1"
             case 3: //待收货
-                type = "2"
-            case 4: //待评价
                 type = "3"
+            case 4: //待评价
+                type = "4"
             default:
-                type = "100" //全部
+                type = "" //全部
             }
         }
     }
@@ -39,6 +42,10 @@ class WOWOrderController: WOWBaseViewController {
     var menuView:WOWTopMenuTitleView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.mj_header = self.mj_header
+        
+        tableView.mj_footer = self.mj_footer
+        
         request()
     }
     
@@ -46,7 +53,7 @@ class WOWOrderController: WOWBaseViewController {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.hidden = true
     }
-
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if entrance == .PaySuccess{
@@ -65,7 +72,7 @@ class WOWOrderController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-//MARK:Private Method
+    //MARK:Private Method
     override func setUI() {
         super.setUI()
         navigationItem.title = "订单"
@@ -97,33 +104,61 @@ class WOWOrderController: WOWBaseViewController {
         }
     }
     
-
-//MARK:Network
+    
+    //MARK:Network
     override func request() {
+        
+        
         super.request()
-        let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderList(uid: uid, type: type), successClosure: { [weak self](result) in
-            let json = JSON(result)
+        
+        let totalPage = 10
+        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderList(orderStatus: type, currentPage: pageIndex,pageSize:totalPage), successClosure: { [weak self](result) in
+            
+            let json = JSON(result)["orderLists"].arrayObject
             DLog(json)
+            
             if let strongSelf = self{
-                let arr = Mapper<WOWOrderListModel>().mapArray(result)
-                strongSelf.dataArr = []
+                
+                strongSelf.endRefresh()
+                
+                
+                
+                let arr = Mapper<WOWNewOrderListModel>().mapArray(json)
+                
+                
+              
+                
+                
                 if let array = arr{
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
                     strongSelf.dataArr.appendContentsOf(array)
+                    
+                    if strongSelf.pageIndex == totalPage - 1 || totalPage == 0 || arr == nil{
+                        strongSelf.tableView.mj_footer = nil
+                    }else{
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    }
+
                 }
+
+                
                 strongSelf.tableView.reloadData()
             }
         }) { (errorMsg) in
-                
+            
         }
     }
-
+    
 }
 
 
 extension WOWOrderController:TopMenuProtocol{
     func topMenuItemClick(index: Int) {
         selectIndex = index
+        self.dataArr  = [WOWNewOrderListModel]()
+        self.pageIndex = 1
         request()
     }
 }
@@ -157,7 +192,7 @@ extension WOWOrderController:OrderCellDelegate{
                         }
                     }
                 }
-            })
+                })
         }
     }
     
@@ -181,7 +216,7 @@ extension WOWOrderController:OrderCellDelegate{
                     }
                 }
             }) { (errorMsg) in
-                    
+                
             }
         }
         
@@ -204,11 +239,11 @@ extension WOWOrderController:OrderCellDelegate{
             if let strongSelf = self{
                 let ret = JSON(result).int ?? 0
                 if ret == 1{
-                     strongSelf.request()
+                    strongSelf.request()
                 }
             }
         }) { (errorMsg) in
-                
+            
         }
     }
 }
@@ -228,7 +263,7 @@ extension WOWOrderController:OrderDetailDelegate{
 
 extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 10
+        return self.dataArr.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -241,8 +276,10 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderListCell", forIndexPath: indexPath) as! WOWOrderListCell
-        cell.delegate = self
-//        cell.showData(dataArr[indexPath.row])
+        //        let orderModel = self.dataArr[indexPath.section]
+        
+        cell.showData(dataArr[indexPath.section])
+        
         return cell
     }
     
@@ -251,21 +288,21 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
             DLog("删除订单");
         }
     }
-
+    
     
     func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         return "删除"
     }
     
-//    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        let model = dataArr[indexPath.row]
-//        return model.status == 0 //待付款的是可以取消的
-//    }
+    //    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    //        let model = dataArr[indexPath.row]
+    //        return model.status == 0 //待付款的是可以取消的
+    //    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
-        vc.orderModel = dataArr[indexPath.row]
-        vc.delegate = self
+        //        vc.orderModel = dataArr[indexPath.row]
+        //        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     

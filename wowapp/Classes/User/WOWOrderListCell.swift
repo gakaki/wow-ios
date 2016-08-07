@@ -22,13 +22,13 @@ protocol OrderCellDelegate:class{
 
 class WOWOrderListCell: UITableViewCell {
 
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel! // 订单状态
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var orderIdLabel: UILabel!
-    @IBOutlet weak var goodsCountLabel: UILabel!
-    @IBOutlet weak var totalPriceLabel: UILabel!
+    @IBOutlet weak var orderIdLabel: UILabel! // 订单ID
+    @IBOutlet weak var goodsCountLabel: UILabel! // 共多少件
+    @IBOutlet weak var totalPriceLabel: UILabel! // 合计多少钱
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var rightViseButton: UIButton!
     
@@ -40,6 +40,7 @@ class WOWOrderListCell: UITableViewCell {
     
     weak var delegate : OrderCellDelegate?
     var model : WOWOrderListModel?
+     var modelNew : WOWNewOrderListModel?
     let statuTitles = ["待付款","待发货","待收货","待评价","已完成","已关闭"]
     let rightTitles = ["立即支付","","确认收货","评价","删除订单",""]
     var dataArr = [WOWOrderProductModel] ()
@@ -54,26 +55,35 @@ class WOWOrderListCell: UITableViewCell {
 
     }
     
-    func showData(m:WOWOrderListModel){
-        model = m
-        if m.products?.count > 1 {
-            collectionView.hidden = false
-            singleBackView.hidden = true
-            dataArr = m.products!
-            collectionView.reloadData()
-        }else{
-            let itemModel = m.products?.first
-            singleImageView.kf_setImageWithURL(NSURL(string:itemModel?.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
-            singleNameLabel.text = itemModel?.name
-            singleTypeLabel.text = itemModel?.sku_title
-            collectionView.hidden = true
-            singleBackView.hidden = false
-            dataArr = [ ]
-        }
-        orderIdLabel.text = m.id
-        goodsCountLabel.text = "共\(m.products?.count ?? 1)件商品"
-        totalPriceLabel.text = m.total?.priceFormat()
-        configShowStatus(m.status ?? 2)
+    func showData(m:WOWNewOrderListModel){
+        modelNew = m
+//        if m.products?.count > 1 {
+//            collectionView.hidden = false
+//            singleBackView.hidden = true
+//            dataArr = m.products!
+//            collectionView.reloadData()
+//        }else{
+//            let itemModel = m.products?.first
+//            singleImageView.kf_setImageWithURL(NSURL(string:itemModel?.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+//            singleNameLabel.text = itemModel?.name
+//            singleTypeLabel.text = itemModel?.sku_title
+//            collectionView.hidden = true
+//            singleBackView.hidden = false
+//            dataArr = [ ]
+//        }
+//        orderIdLabel.text = m.id
+//        goodsCountLabel.text = "共\(m.products?.count ?? 1)件商品"
+//        totalPriceLabel.text = m.total?.priceFormat()
+//        configShowStatus(m.status ?? 2)
+        
+//        cell.modelNew = orderModel
+//        cell.delegate = self
+        
+        statusLabel.text = m.orderStatusName
+        orderIdLabel.text = m.orderCode
+        goodsCountLabel.text = "共"+(m.totalProductQty?.toString)!+"件"
+        totalPriceLabel.text = "¥ "+(m.orderAmount?.toString)!
+        
     }
     
     @IBAction func rightButtonClick(sender: UIButton) {
@@ -147,13 +157,14 @@ extension WOWOrderListCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return modelNew?.productSpecImgs.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
 //        let model = dataArr[indexPath.row]
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string: "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        print((modelNew?.productSpecImgs[indexPath.row])!)
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string: (modelNew?.productSpecImgs[indexPath.row])!)!, placeholderImage: UIImage(named: "placeholder_product"))
         return cell
     }
     

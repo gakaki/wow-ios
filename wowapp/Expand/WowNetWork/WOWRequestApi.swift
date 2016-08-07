@@ -283,17 +283,16 @@ extension RequestApi:TargetType{
             return URL_Invite
         //发现页面
         case .Api_Found_Main:
-            return URL_Invite
+            return URL_Found_Main
         case .Api_Found_2nd:
-            return URL_Invite
+            return URL_Found_2nd
 
-            
         }
     }
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_CartGet, .Api_AddressDefault, .Api_OrderSettle:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_Found_Main , .Api_Found_2nd:
             return .GET
 
         default:

@@ -58,15 +58,26 @@ final class WOWCategoryModel : WOWBaseModel{
      var categoryName:String?
      var categoryCount:Int?
      var categoryID:String?
+    
+     var categoryBgImg:String?
+     var categoryIconBig:String?
+     var categoryIconBg:String?
+
+    
      var subCats:[WOWSubCategoryModel]?
 }
 
 extension WOWCategoryModel:Mappable{
     func mapping(map: Map) {
-        categoryName    <-    map["name"]
+        categoryName    <-    map["categoryName"]
         categoryCount   <-    map["sum"]
-        categoryID      <-    map["cid"]
+        categoryID      <-    map["categoryId"]
         subCats         <-    map["subcats"]
+        
+        categoryBgImg   <-    map["categoryBgImg"]
+        categoryIconBig <-    map["categoryIconBig"]
+        categoryIconBg  <-    map["categoryIconBg"]
+        
     }
     
     convenience init?(_ map: Map) {

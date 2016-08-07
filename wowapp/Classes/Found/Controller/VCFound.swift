@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import FlexboxLayout
 
 class VCFound: WOWBaseViewController {
     
@@ -7,36 +8,53 @@ class VCFound: WOWBaseViewController {
     let cellID2              = String( WOWFoundRecommendCell )
     let cellID3              = String( WOWFoundCategoryCell )
 
-    var vo_products          = [WOWFoundWeeklyNewModel]()
-    var vo_recommend_product = []//WOWFoundRecommendModel()
-    var vo_categories        = [WOWFoundCategoryModel]()
+    var vo_products          = [WOWFoundProductModel]()
+    var vo_recommend_product:WOWFoundProductModel?
+    var vo_categories        = [WOWCategoryModel]()
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        request()
+        
+        do {
+            try request_with_throw()
+        }catch{
+            DLog(error)
+        }
+        
     }
-
     
-    override func request(){
+    func request_with_throw() throws -> Void {
         
-//            super.request()
-//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_Main, successClosure: {[weak self] (result) in
-//                if let strongSelf = self{
-//                    let arr = Mapper<WOWAddressListModel>().mapArray(JSON(result)["shippingInfoResultList"].arrayObject)
-//                    if let array = arr{
-//                        strongSelf.vo_products = []
-////                        strongSelf.vo_products.appendContentsOf(array)
-//                        strongSelf.tableView.reloadData()
-//                    }
-//                }
-//            }) { (errorMsg) in
-//                
-//            }
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_Main, successClosure: {[weak self] (result) in
+                if let strongSelf = self{
+                    
+                        let r                             =  JSON(result)
+                        strongSelf.vo_products            =  Mapper<WOWFoundProductModel>().mapArray(r["pageNewProductVoList"].arrayObject)!
+                        strongSelf.vo_recommend_product   =  Mapper<WOWFoundProductModel>().map( r["recommendProduct"].dictionaryObject )
+                        //还要请求一次分类 在加载数据 以后改成rxswift 2者合并 现在代码真糟糕
+                    
+                        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_2nd, successClosure: {[weak self] (result) in
+                            if let strongSelf = self{
+                                
+                                let r                             =  JSON(result)
+                                strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray(r["pageCategoryVoList"].arrayObject)!
+                                
+                                strongSelf.tableView.reloadData()
+                                
+                            }
+                            
+                        }){ (errorMsg) in
+                            print(errorMsg)
+                        }
+                 
+                }
+                
+            }){ (errorMsg) in
+                print(errorMsg)
+            }
       
-        
-   
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,10 +67,15 @@ class VCFound: WOWBaseViewController {
     
        
         tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = 200
         tableView.separatorColor     = SeprateColor;
         tableView.registerNib(UINib.nibName(String(WOWFoundWeeklyNewCell)), forCellReuseIdentifier:cellID1)
+        tableView.registerClass(WOWFoundRecommendCell.self, forCellReuseIdentifier:cellID2)
+        tableView.registerNib(UINib.nibName(String(WOWFoundCategoryCell)), forCellReuseIdentifier:cellID3)
 
+//        tableView.userInteractionEnabled = false
+//        tableView.allowsSelection   = false
+        
         tableView.mj_header          = mj_header
         
         configBarItem()
@@ -67,7 +90,7 @@ class VCFound: WOWBaseViewController {
             }
         }
 
-        makeCustomerImageNavigationItem("cart", left:false) {[weak self] () -> () in
+        makeCustomerImageNavigationItem("store_buyCar", left:false) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
@@ -77,7 +100,7 @@ class VCFound: WOWBaseViewController {
 }
 
 
-extension VCFound : UITableViewDataSource,UITableViewDelegate {
+extension VCFound : UITableViewDataSource,UITableViewDelegate,FoundWeeklyNewCellDelegate,WOWFoundRecommendCellDelegate{
 	
 //MARK: UITableViewDelegate
     
@@ -88,21 +111,17 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 
         switch indexPath.section {
+        case 0:
+            return 100
         case 1:
-            return 150
-        case 2:
             return 300
-        case 3:
+        case 2:
             return 700
         default:
             return 200
             
         }
     }
-    
-    
-    
- 
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
@@ -138,9 +157,6 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate {
         }
     }
     
-    
-    
-  
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
@@ -148,21 +164,48 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        return nil
+    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        switch indexPath.row  {
-        case 0:
-            return UITableViewCell()
-        case 1:
-            return UITableViewCell()
-        case 2:
-            return UITableViewCell()
-        default:
-            return UITableViewCell()
-            
+        let section = indexPath.section
+        let row     = indexPath.row
+        
+        if ( section == 0 && row == 0){
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellID1 , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
+            cell.products = self.vo_products
+            cell.delegate = self
+            cell.selectionStyle = .None
+            cell.bringSubviewToFront(cell.collectionView)
+            return cell
         }
+        else if ( section == 1 && row == 0){
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellID2 , forIndexPath: indexPath) as! WOWFoundRecommendCell
+            
+            cell.delegate = self
+            cell.selectionStyle = .None
+            
+//            cell.bringSubviewToFront(cell.product_view)
+            
+            if let data  = vo_recommend_product {
+                cell.assign_val(data)
+            }
+            return cell
+        }
+        else if ( section == 2 && row == 0){
+            return UITableViewCell()
+        }
+        
+        return UITableViewCell()
+
     }
-	    
+    func cellTouchInside(m:WOWFoundProductModel)
+    {
+        print(m.productId)
+//        self.pushVC(vc:)
+    }
+    
 }
 

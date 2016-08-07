@@ -11,26 +11,55 @@ let VOFoundCategories = [
     
 ]
 
-class WOWFoundRecommendModel: WOWBaseModel,Mappable{
-    var id               :   String?
-    var name             :   String?
-    var pic              :   String?
-    var desc             :   String?
+
+//
+//public class ForceToStringTransform {
+//
+//    func transformFromJSON(value: AnyObject?) -> Object?{
+//        return value as! String
+//    }
+//    func transformToJSON(value: Object?) -> JSON?{
+//        turn 
+//    }
+//}
+
+
+class WOWFoundProductModel: WOWBaseModel,Mappable{
+    var productId               :   Int?
+    var productName             :   String?
+    var productImg              :   String?
     
-    var price_before     :   String?
-    var price            :   String?
+    var sellPrice               :   Double?
+    var originalPrice           :   Float?
+
+    var detailDescription       :   String?
+    var pageModuleType          :   Int?
+
+    func get_formted_price() -> String {
+//        return "123123123123123"
+        return "¥\(self.sellPrice!)"
+    }
     
+//    "productId": 158,
+//    "productName": "不伞5",
+//    "productImg": "http://www.wowdsgn.com/media/catalog/product/cache/1/mainimg_1/9df78eab33525d08d6e5fb8d27136e95/t/0/t03.jpg",
+//    "sellPrice": 0.01,
+//    "originalPrice": 20,
+//    "detailDescription": "不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞不一样的伞",
+//    "pageModuleType": 4
+
     required init?(_ map: Map) {
         
     }
     
     func mapping(map: Map) {
-        id                  <- map["id"]
-        name                <- map["name"]
-        pic                 <- map["pic"]
-        desc                <- map["desc"]
-        price_before        <- map["price_before"]
-        price               <- map["price"]
+        productId                  <- map["productId"]
+        productName                <- map["productName"]
+        productImg                 <- map["productImg"]
+        sellPrice                  <- map["sellPrice"]
+        originalPrice              <- map["originalPrice"]
+        detailDescription          <- map["detailDescription"]
+        pageModuleType             <- map["pageModuleType"]
     }
 }
 
@@ -40,27 +69,4 @@ struct WOWFoundCategoryModel{
     var pic:String      = "" //图片路径
     var title:String    = "" //标题
     
-}
-
-class WOWFoundWeeklyNewModel: WOWBaseModel,Mappable{
-    var id               :   String?
-    var name             :   String?
-    var pic              :   String?
-    var desc             :   String?
-    
-    var price_before     :   String?
-    var price            :   String?
-    
-    required init?(_ map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        id                  <- map["id"]
-        name                <- map["name"]
-        pic                 <- map["pic"]
-        desc                <- map["desc"]
-        price_before        <- map["price_before"]
-        price               <- map["price"]
-    }
 }

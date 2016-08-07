@@ -1,0 +1,10 @@
+framework module FlexboxLayout {
+  umbrella header "FlexboxLayout.h"
+
+  export *
+  module * { export * }
+}
+
+module FlexboxLayout.Swift {
+    header "FlexboxLayout-Swift.h"
+}

@@ -140,9 +140,6 @@ let URL_OrderList               = "order/list"
 
 let URL_OrderStatus             = "order/setstatus" //状态客户端操作之后加上去
 
-//8.发现页面
-let URL_Found_Main             = "order/setstatus" //发现页面首页
-let URL_Found_2nd              = "order/setstatus" //发现页面二级页
 
 
 

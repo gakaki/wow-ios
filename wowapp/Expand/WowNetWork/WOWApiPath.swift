@@ -68,6 +68,8 @@ let URL_BrandList               = "brand/list"
 
 let URL_BrandDetail             = "brand/detail"
 
+let URL_ProductBrand            = "productBrand"                //查询品牌产品
+
 let URL_LikeProduct             = "user/product/favorite-list"    //喜欢的品牌列表
 
 let URL_LikeDesigner            = "user/designer/favorite-list"    //喜欢的品牌列表
@@ -99,6 +101,8 @@ let URL_CartUnSelect            = "cart/unselect"   //取消选中购物车商�
 
 //订单相关
 let URL_OrderSettle             = "order/settle"            //查询订单内的物品
+
+let URL_OrderBuyNow             = "order/buyNow"             //立即购买查询信息
 
 let URL_OrderCreat              = "/order/create"           //创建订单
 

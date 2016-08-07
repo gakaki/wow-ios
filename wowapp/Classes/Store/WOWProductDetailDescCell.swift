@@ -25,8 +25,8 @@ class WOWProductDetailDescCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        WOWBorderColor(brandBorderView)
-        WOWBorderColor(designerBorderView)
+//        WOWBorderColor(brandBorderView)
+//        WOWBorderColor(designerBorderView)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -35,7 +35,7 @@ class WOWProductDetailDescCell: UITableViewCell {
  
     @IBAction func brandClick(sender: UIButton) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-        vc.brandID = productModel?.brandID
+        vc.brandID = productModel?.brandId ?? 0
         vc.hideNavigationBar = true
         UIApplication.currentViewController()?.navigationController?.pushViewController(vc, animated: true)
     }

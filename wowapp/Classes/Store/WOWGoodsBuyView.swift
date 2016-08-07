@@ -327,13 +327,11 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 
                 del.sureAddCarClick(productInfo)
             }
-            print("添加购物车确定")
         case .PayEntrance:
        
              if let del = delegate {
                 del.sureBuyClick(productInfo)
              }
-            print("立即支付确定")
         default:
 //            print("选择规格")
             return

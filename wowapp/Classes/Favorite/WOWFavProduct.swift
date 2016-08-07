@@ -106,13 +106,13 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  dataArr.count
+        return  1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoritrSingleCell), forIndexPath: indexPath) as! WOWFavoritrSingleCell
-        let model = dataArr[indexPath.row]
-        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+//        let model = dataArr[indexPath.row]
+        cell.imageView.kf_setImageWithURL(NSURL(string: "")!, placeholderImage:UIImage(named: "placeholder_product"))
         return cell
     }
     
@@ -122,10 +122,11 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
 ////            let model = dataArr[indexPath.row]
 //            del.goGoodsDetail(1)
 //        }
-        let product = dataArr[indexPath.row]
+//        let product = dataArr[indexPath.row]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
-        vc.productId = String(product.productId)
+//        vc.productId = String(product.productId)
+        vc.productId = "140"
         parentNavigationController?.pushViewController(vc, animated: true)
 
        

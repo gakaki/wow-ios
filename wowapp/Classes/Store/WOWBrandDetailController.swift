@@ -15,7 +15,7 @@ import UIKit
 class WOWBrandDetailController: WOWBaseViewController {
     private let cellID = "WOWBrandDetailCell"
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var underView: WOWBrandUnderView!
+//    @IBOutlet weak var underView: WOWBrandUnderView!
     var brandModel:WOWBrandModel!
     private var shareBrandImage:UIImage? //供分享使用
 
@@ -30,41 +30,41 @@ class WOWBrandDetailController: WOWBaseViewController {
 //MARK:Private Method
     override func setUI() {
         super.setUI()
-        underView.delegate = self
+//        underView.delegate = self
         configTableView()
     }
     
     private func configTableView(){
-        underView.backgroundColor = UIColor.clearColor()
-        let imageView = UIImageView(frame:tableView.bounds)
-        imageView.image = UIImage(named: "brandBack")
-        tableView.backgroundView = imageView
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
-        
-        let headerView = WOWBrandHeadView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenWidth * 2/3 - 35))
-        headerView.nameLabel.text = brandModel.name
-        headerView.headImageView.kf_setImageWithURL(NSURL(string:brandModel.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
-        headerView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"), optionsInfo: nil, completionHandler: {[weak self](image, error, cacheType, imageURL) in
-            if let strongSelf = self{
-                strongSelf.shareBrandImage = image
-            }
-        })
-        
-        
-        headerView.nameLabel.shadowOffset = CGSizeMake(1, 1)
-        headerView.backImageView.hidden = true
-        headerView.delegate = self
-        headerView.backgroundColor = UIColor.clearColor()
-        tableView.tableHeaderView = headerView
-        tableView.registerNib(UINib.nibName(String(WOWBrandDetailCell)), forCellReuseIdentifier:cellID)
-        tableView.addTapGesture {[weak self] (tap) in
-            if let strongSelf = self{
-                strongSelf.dismissViewControllerAnimated(true, completion:nil)
-            }
-        }
+//        underView.backgroundColor = UIColor.clearColor()
+//        let imageView = UIImageView(frame:tableView.bounds)
+//        imageView.image = UIImage(named: "brandBack")
+//        tableView.backgroundView = imageView
+//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:"cell")
+//        tableView.estimatedRowHeight = 100
+//        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
+//        
+//        let headerView = WOWBrandHeadView(frame:CGRectMake(0,0,MGScreenWidth,MGScreenWidth * 2/3 - 35))
+//        headerView.nameLabel.text = brandModel.name
+//        headerView.headImageView.kf_setImageWithURL(NSURL(string:brandModel.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+//        headerView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"), optionsInfo: nil, completionHandler: {[weak self](image, error, cacheType, imageURL) in
+//            if let strongSelf = self{
+//                strongSelf.shareBrandImage = image
+//            }
+//        })
+//        
+//        
+//        headerView.nameLabel.shadowOffset = CGSizeMake(1, 1)
+//        headerView.backImageView.hidden = true
+//        headerView.delegate = self
+//        headerView.backgroundColor = UIColor.clearColor()
+//        tableView.tableHeaderView = headerView
+//        tableView.registerNib(UINib.nibName(String(WOWBrandDetailCell)), forCellReuseIdentifier:cellID)
+//        tableView.addTapGesture {[weak self] (tap) in
+//            if let strongSelf = self{
+//                strongSelf.dismissViewControllerAnimated(true, completion:nil)
+//            }
+//        }
     }
     
     @IBAction func back(sender: UIButton) {

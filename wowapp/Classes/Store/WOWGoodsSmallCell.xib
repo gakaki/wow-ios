@@ -105,7 +105,7 @@
                 <outlet property="priceLabel" destination="Ch7-KJ-x6p" id="9Ew-64-uch"/>
                 <outlet property="topLine" destination="dFp-vx-DCe" id="m36-4a-6p0"/>
             </connections>
-            <point key="canvasLocation" x="1410.5" y="468"/>
+            <point key="canvasLocation" x="1320.5" y="460"/>
         </collectionViewCell>
     </objects>
 </document>

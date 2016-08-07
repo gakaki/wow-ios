@@ -29,6 +29,10 @@ class WOWOrderAddressCell: UITableViewCell {
     
     func  showData(addressInfo: WOWAddressListModel?) -> Void {
         if let addressInfo = addressInfo {
+            nextImage.hidden = false
+            nameLabel.hidden = false
+            mobileLabel.hidden = false
+            addressLabel.hidden = false
             addAddressLabel.hidden = true
             nameLabel.text = addressInfo.name ?? ""
             mobileLabel.text = addressInfo.mobile ?? ""
@@ -38,6 +42,8 @@ class WOWOrderAddressCell: UITableViewCell {
             nameLabel.hidden = true
             mobileLabel.hidden = true
             addressLabel.hidden = true
+            addAddressLabel.hidden = false
+
         }
     
     }

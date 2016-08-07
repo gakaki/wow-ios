@@ -236,6 +236,14 @@ class WOWProductDetailController: WOWBaseViewController {
 extension WOWProductDetailController :goodsBuyViewDelegate {
     //确定购买
     func sureBuyClick(product: WOWProductInfoModel?) {
+        backView.hideBuyView()
+        let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
+        //入口
+        sv.entrance = editOrderEntrance.buyEntrance
+        sv.productId = product?.subProductId
+        sv.productQty = product?.productQty
+        navigationController?.pushViewController(sv, animated: true)
+
         print("确定购买")
     }
     //确定加车
@@ -245,7 +253,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             print(product.weight, product.sizeText, product.subProductId, product.sellPrice)
             
             WOWNetManager.sharedManager.requestWithTarget(.Api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: { (result) in
-                
+                WOWHud.showMsg("添加购物车成功")
             }) { (errorMsg) in
                 
             }

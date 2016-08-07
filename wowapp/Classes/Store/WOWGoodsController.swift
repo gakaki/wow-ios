@@ -338,7 +338,7 @@ extension WOWGoodsController:ProductCellDelegate{
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
             vc.hideNavigationBar = true
-            vc.brandID = model.brandID
+            vc.brandID = model.brandID?.toInt()
             navigationController?.pushViewController(vc, animated: true)
         default:
             DLog(" ")

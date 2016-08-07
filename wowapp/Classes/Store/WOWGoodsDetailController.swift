@@ -334,7 +334,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     func brandHeadClick() {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-        vc.brandID = productModel?.brandID
+        vc.brandID = productModel?.brandID?.toInt()
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }

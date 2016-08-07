@@ -116,6 +116,7 @@ class WOWBuyCarController: WOWBaseViewController {
         }
          //结算
             let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
+            sv.entrance = editOrderEntrance.carEntrance
             navigationController?.pushViewController(sv, animated: true)
         
     }

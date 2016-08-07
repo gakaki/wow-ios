@@ -41,9 +41,13 @@ public enum RequestApi{
     
     case Api_SenceDetail(sceneid:String,uid:String)
     
+    //品牌
     case Api_BrandList
     
-    case Api_BrandDetail(brandid:String)
+    case Api_BrandDetail(brandId: Int)
+    
+    case Api_ProductBrand(brandId: Int)
+    
     
     case Api_Category
     
@@ -100,11 +104,13 @@ public enum RequestApi{
     
     //订单相关
     
-    case Api_OrderList(uid:String,type:String) //100为全部
+    case Api_OrderList(uid: String, type: String) //100为全部
     
-    case Api_OrderStatus(uid:String,order_id:String,status:String)
+    case Api_OrderStatus(uid: String, order_id: String, status: String)
     
     case Api_OrderSettle
+    
+    case Api_OrderBuyNow(productId: Int, productQty: Int)
     
     case Api_OrderCreate(params: [String: AnyObject]?)
     
@@ -185,6 +191,9 @@ extension RequestApi:TargetType{
             return URL_BrandList
         case .Api_BrandDetail:
             return URL_BrandDetail
+        case .Api_ProductBrand:
+            return URL_ProductBrand
+            
         case .Api_CommentList:
             return URL_CommentList
         case .Api_SubmitComment:
@@ -274,6 +283,8 @@ extension RequestApi:TargetType{
             return URL_OrderStatus
         case .Api_OrderSettle:
             return URL_OrderSettle
+        case .Api_OrderBuyNow:
+            return URL_OrderBuyNow
         case .Api_OrderCreate:
             return URL_OrderCreat
         case .Api_OrderCharge:
@@ -293,7 +304,7 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_CartGet, .Api_AddressDefault, .Api_OrderSettle:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_OrderBuyNow, .Api_BrandDetail, .Api_ProductBrand:
             return .GET
 
         default:
@@ -314,7 +325,9 @@ extension RequestApi:TargetType{
             case let .Api_Login(account,password):
                 params = ["mobile":account,"password":password]
             case let .Api_BrandDetail(brandid):
-                params = ["brandid":brandid]
+                params = ["brandid": brandid]
+            case let .Api_ProductBrand(brandId):
+                params = ["brandId": brandId]
             case let .Api_ProductList(pageindex,categoryID,style,sort,uid,keyword):
                 params = ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid,"keyword":keyword]
             case let .Api_ProductDetail(productId):
@@ -400,6 +413,8 @@ extension RequestApi:TargetType{
                 params = param
             case let .Api_OrderCharge(orderNo, channel, alientIp):
                 params = ["orderNo": orderNo, "channel": channel, "clientIp": alientIp]
+            case let .Api_OrderBuyNow(productId, productQty):
+                params = ["productId": productId, "productQty": productQty]
             
             case .Api_Home_Banners():
                 params =  ["pageType":1]

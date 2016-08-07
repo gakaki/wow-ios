@@ -96,7 +96,7 @@ class WOWStoreController: WOWBaseViewController {
 extension WOWStoreController:BrandCellDelegate{
     func hotBrandCellClick(brandModel: WOWBrandListModel) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-        vc.brandID = brandModel.brandID
+        vc.brandID = brandModel.brandID?.toInt()
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }

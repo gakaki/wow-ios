@@ -7,11 +7,19 @@
 //
 
 import UIKit
+enum editOrderEntrance {
+    case buyEntrance        //立即购买入口
+    case carEntrance        //购物车入口
+}
 
 class WOWEditOrderController: WOWBaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalPriceLabel: UILabel!
+    
+    var productId                       :Int?
+    var productQty                      :Int?
+    var entrance                        :editOrderEntrance?
     
     var productArr                      :[WOWCarProductModel]?
     var orderSettle                     :WOWEditOrderModel?
@@ -24,7 +32,14 @@ class WOWEditOrderController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
-        requestProduct()
+        //如果是立即购买入口需要添加商品id和商品数量来创建订单。如果是购物车进来的，直接获取商品列表
+        switch entrance! {
+        case editOrderEntrance.buyEntrance:
+            requestBuyNowProduct()
+        case editOrderEntrance.carEntrance:
+            requestProduct()
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -69,7 +84,13 @@ class WOWEditOrderController: WOWBaseViewController {
         chooseStyle()
         
         if orderCode.isEmpty {
-            requestOrderCreat()
+            switch entrance! {
+            case editOrderEntrance.buyEntrance:
+                requestBuyNowOrderCreat()
+            case editOrderEntrance.carEntrance:
+                requestOrderCreat()
+            }
+
 
         }
 
@@ -99,12 +120,26 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
                 strongSelf.totalPriceLabel.text = String(format:"%.2f",(strongSelf.orderSettle?.totalAmount) ?? 0)
-                let section = NSIndexSet(index: 1)
-                strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
+                strongSelf.tableView.reloadData()
             }
             
             }) { (errorMsg) in
                 
+        }
+    }
+    
+    //请求立即购买订单信息
+    func requestBuyNowProduct() -> Void {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderBuyNow(productId: productId ?? 0, productQty: productQty ?? 1), successClosure: { [weak self](result) in
+            if let strongSelf = self {
+                strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
+                strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
+                strongSelf.totalPriceLabel.text = String(format:"%.2f",(strongSelf.orderSettle?.totalAmount) ?? 0)
+                strongSelf.tableView.reloadData()
+            }
+            
+        }) { (errorMsg) in
+            
         }
     }
     
@@ -119,6 +154,20 @@ class WOWEditOrderController: WOWBaseViewController {
             
             }) { (errorMsg) in
                 
+        }
+    }
+    
+    //立即支付创建订单
+    func requestBuyNowOrderCreat() -> Void {
+        var params = [String: AnyObject]?()
+        params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? ""]
+        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
+            if let strongSelf = self {
+                strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
+            }
+            
+        }) { (errorMsg) in
+            
         }
     }
     
@@ -278,6 +327,7 @@ extension WOWEditOrderController: selectPayDelegate {
             }) { (errorMsg) in
                 
         }
+
         print("确定支付",channel)
     }
 }

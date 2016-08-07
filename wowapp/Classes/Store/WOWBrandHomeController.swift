@@ -11,8 +11,8 @@ import UIKit
 class WOWBrandHomeController: WOWBaseViewController {
     @IBOutlet var collectionView: UICollectionView!
     var dataArr = [WOWProductModel]()
-    var brandID : String?
-    var brandModel : WOWBrandModel?
+    var brandID : Int?
+    var brandModel : WOWBrandV1Model?
     private var shareBrandImage:UIImage? //供分享使用
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         collectionView.collectionViewLayout = self.layout
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
         WOWBorderColor(collectionView)
-        collectionView.registerClass(WOWBrandTopView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
+        collectionView.registerClass(WOWBrandHeaderView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
 
@@ -54,11 +54,25 @@ class WOWBrandHomeController: WOWBaseViewController {
 //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandDetail(brandid: brandID ?? ""), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandDetail(brandId: brandID!), successClosure: {[weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
-                strongSelf.brandModel = Mapper<WOWBrandModel>().map(result)
+                strongSelf.brandModel = Mapper<WOWBrandV1Model>().map(result)
+                strongSelf.collectionView.reloadData()
+                strongSelf.endRefresh()
+            }
+        }) {[weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(brandId: brandID!), successClosure: {[weak self](result) in
+            if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.dataArr = Mapper<WOWProductModel>().mapArray(JSON(result)["carouselBanners"].arrayObject) ?? [WOWProductModel]()
                 strongSelf.collectionView.reloadData()
                 strongSelf.endRefresh()
             }
@@ -77,15 +91,15 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return brandModel?.products?.count ?? 0
+        return dataArr.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
-        let model = brandModel?.products?[indexPath.row]
-        cell.desLabel.text = model?.productName
-        cell.priceLabel.text = model?.price?.priceFormat()
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        let model = dataArr[indexPath.row]
+        cell.desLabel.text = model.productName
+        cell.priceLabel.text = String(format: "¥ %.2f", model.sellPrice ?? 0)
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         switch indexPath.row {
         case 0,1:
             cell.topLine.hidden = false
@@ -99,16 +113,16 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         var reusableView: UICollectionReusableView? = nil
         if kind == CollectionViewWaterfallElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as? WOWBrandTopView
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as? WOWBrandHeaderView
             if let view = headerView {
-                view.topHeadView.delegate = self
-                view.underHeadView.delegate = self
-                view.topHeadView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"), optionsInfo: nil, completionHandler: {[weak self](image, error, cacheType, imageURL) in
-                    if let strongSelf = self{
-                        strongSelf.shareBrandImage = image
-                    }
-                })
-                view.topHeadView.nameLabel.text = brandModel?.name
+//                view.topHeadView.delegate = self
+//                view.underHeadView.delegate = self
+//                view.topHeadView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"), optionsInfo: nil, completionHandler: {[weak self](image, error, cacheType, imageURL) in
+//                    if let strongSelf = self{
+//                        strongSelf.shareBrandImage = image
+//                    }
+//                })
+//                view.topHeadView.nameLabel.text = brandModel?.name
                 reusableView = view
             }
         }
@@ -132,20 +146,20 @@ extension WOWBrandHomeController:CollectionViewWaterfallLayoutDelegate{
     }
 }
 
-extension WOWBrandHomeController:WOWActionDelegate{
-    func itemAction(tag: Int) {
-        switch tag {
-        case WOWItemActionType.Like.rawValue:
-            DLog("喜欢")
-        case WOWItemActionType.Share.rawValue:
-            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
-        case WOWItemActionType.Brand.rawValue:
-            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
-            vc.brandModel = brandModel!
-            vc.modalTransitionStyle = .CrossDissolve
-            presentViewController(vc, animated: true, completion: nil)
-        default:
-            break
-        }
-    }
-}
+//extension WOWBrandHomeController:WOWActionDelegate{
+//    func itemAction(tag: Int) {
+//        switch tag {
+//        case WOWItemActionType.Like.rawValue:
+//            DLog("喜欢")
+//        case WOWItemActionType.Share.rawValue:
+//            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
+//        case WOWItemActionType.Brand.rawValue:
+//            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
+//            vc.brandModel = brandModel!
+//            vc.modalTransitionStyle = .CrossDissolve
+//            presentViewController(vc, animated: true, completion: nil)
+//        default:
+//            break
+//        }
+//    }
+//}

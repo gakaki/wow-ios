@@ -8,7 +8,7 @@
 
 import UIKit
 class WOWGoodsDetailController: WOWBaseViewController {
-    var productId:String?
+    var productId:Int?
     var cycleView:CyclePictureView!
     
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
@@ -26,7 +26,6 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        productId = "15"
         request()
     }
     
@@ -150,7 +149,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     private func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth), imageURLArray: nil)
-        cycleView.placeholderImage = UIImage(named: "placeholder_banner")
+        cycleView.placeholderImage = UIImage(named: "placeholder_product")
         tableView.tableHeaderView = cycleView
     }
     
@@ -176,7 +175,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     override func request() {
         super.request()
 //        let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productId ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.configData()
@@ -200,7 +199,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
             goLogin()
         }else{
             let uid         = WOWUserManager.userID
-            let thingid     = self.productId ?? ""
+            let thingid     = self.productId ?? 0
             let type        = "1" //1为商品 2 为场景
             let is_delete   = favoriteButton.selected ? "1":"0"
 //            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Apifa(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
@@ -416,7 +415,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
                 vc.commentType = CommentType.Product
-                vc.mainID = self?.productId!
+                vc.mainID = self?.productId ?? 0
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }

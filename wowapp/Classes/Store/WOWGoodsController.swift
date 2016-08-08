@@ -352,7 +352,7 @@ extension WOWGoodsController:ProductCellDelegate{
         }
         let is_delete = cell.likeButton.selected ? "1":"0"
         let uid       = WOWUserManager.userID
-        let thingid   = model.productId ?? ""
+        let thingid   = String(model.productId) ?? ""
         let type      = "1"//1为商品 2为场景
 //        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result) in
 //            if let _ = self{

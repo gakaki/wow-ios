@@ -153,12 +153,7 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
             cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.imgUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
             cell.desLabel.text = model.name
             cell.priceLabel.text = model.price?.priceFormat()
-            switch indexPath.row {
-            case 0,1:
-                cell.topLine.hidden = false
-            default:
-                cell.topLine.hidden = true
-            }
+            
             returnCell = cell
         default:
             break
@@ -172,7 +167,7 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
         if selectIndex == 0 { //场景
             let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
             sence.hideNavigationBar = true
-            sence.sceneID = model.id
+            sence.sceneID = String(model.id)
             navigationController?.pushViewController(sence, animated: true)
         }else{ //单品
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController

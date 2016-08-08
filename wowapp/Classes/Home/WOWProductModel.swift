@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 class WOWProductModel: WOWBaseModel,Mappable{
-    var productId             : String?
+    var productId             : Int?
     var primaryImgs           : Array<String>?
     var productName           : String?
     var sellPrice             : Double?

@@ -109,7 +109,7 @@ class WOWSenceController: WOWBaseViewController {
         var param:[String:AnyObject] = ["uid":uid]
         if arr.count != 0 {
             for obj in arr {
-                let dict = ["skuid":obj.skuID ?? "","count":"1","productid":obj.productId ?? ""]
+                let dict = ["skuid":obj.skuID ?? "","count":"1","productid":String(obj.productId) ?? ""]
                 cars.append(dict)
             }
             param["cart"] = cars
@@ -205,7 +205,7 @@ class WOWSenceController: WOWBaseViewController {
 
 //MARK: Delegate
 extension WOWSenceController:WOWSubAlertDelegate{
-    func subAlertItemClick(productID:String) {
+    func subAlertItemClick(productID:Int) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.productId = productID
         vc.hideNavigationBar = true
@@ -263,7 +263,7 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let  model = sceneModel?.recommendProducts?[indexPath.row]
-        let  pid = model?.productId ?? ""
+        let  pid = model?.productId ?? 0
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.productId = pid
         vc.hideNavigationBar = true

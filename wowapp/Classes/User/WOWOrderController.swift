@@ -193,7 +193,7 @@ extension WOWOrderController:OrderCellDelegate{
     //评价订单
     private func commentOrder(orderID:String){
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
-        vc.orderID = orderID
+        vc.orderID = orderID.toInt()
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }

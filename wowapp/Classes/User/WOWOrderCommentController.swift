@@ -14,7 +14,7 @@ protocol OrderCommentDelegate : class{
 
 
 class WOWOrderCommentController: WOWBaseViewController {
-    var orderID : String?
+    var orderID : Int?
     @IBOutlet weak var textView: KMPlaceholderTextView!
     @IBOutlet weak var submitButton: UIButton!
     weak var delegate:OrderCommentDelegate?
@@ -36,7 +36,7 @@ class WOWOrderCommentController: WOWBaseViewController {
             return
         }
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_SubmitComment(uid: uid, comment:text, thingid: orderID ?? "", type:"order"), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_SubmitComment(uid: uid, comment:text, thingid: orderID ?? 0, type:"order"), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)

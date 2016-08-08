@@ -8,7 +8,7 @@
 
 import UIKit
 @objc protocol WOWSubAlertDelegate:class{
-    func subAlertItemClick(productID:String)
+    func subAlertItemClick(productID:Int)
 }
 
 class WOWSubArtCell: UITableViewCell {
@@ -54,7 +54,7 @@ extension WOWSubArtCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if  let del = self.delegate {
             let model = dataArr?[indexPath.row]
-            del.subAlertItemClick(model?.productId ?? "")
+            del.subAlertItemClick(model?.productId ?? 0)
         }
     }
     

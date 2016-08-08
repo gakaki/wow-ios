@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SenceCellDelegate:class{
-    func senceProductClick(produtID:String)
+    func senceProductClick(produtID:Int)
 }
 
 class WOWlListCell: UITableViewCell {
@@ -68,7 +68,7 @@ class WOWlListCell: UITableViewCell {
             return
         }
         if let del = delegate {
-            del.senceProductClick(String(sender.tag))
+            del.senceProductClick(sender.tag)
         }
     }
     

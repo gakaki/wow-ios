@@ -47,6 +47,10 @@ public enum RequestApi{
     case Api_BrandDetail(brandId: Int)
     
     case Api_ProductBrand(brandId: Int)
+    //设计师
+    case Api_DesignerDetail(designerId: Int)
+    
+    case Api_productDesigner(designerId: Int)
     
     
     case Api_Category
@@ -73,7 +77,7 @@ public enum RequestApi{
     case Api_CartUnSelect(shoppingCartIds: [Int])
     
     
-    case Api_CommentList(pageindex:String,thingid:String,type:String)
+    case Api_CommentList(pageindex:String,thingid:Int,type:String)
     
     case Api_Change(param:[String:String])
     
@@ -122,11 +126,11 @@ public enum RequestApi{
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
     
-    case Api_ProductDetail(productId:String)
+    case Api_ProductDetail(productId: Int)
     
-    case Api_ProductImgDetail(productId:String)
+    case Api_ProductImgDetail(productId: Int)
     
-    case Api_ProductSpec(productId:String)
+    case Api_ProductSpec(productId: Int)
     
     case Api_PwdResetCode(mobile:String) //重置密码获取验证码
     
@@ -136,7 +140,7 @@ public enum RequestApi{
     
     case Api_StoreHome
     
-    case Api_SubmitComment(uid:String,comment:String,thingid:String,type:String)
+    case Api_SubmitComment(uid:String,comment:String,thingid:Int,type:String)
 
     
     case Api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
@@ -196,6 +200,10 @@ extension RequestApi:TargetType{
             return URL_BrandDetail
         case .Api_ProductBrand:
             return URL_ProductBrand
+        case .Api_DesignerDetail:
+            return URL_DesignerDetail
+        case .Api_productDesigner:
+            return URL_ProductDesigner
             
         case .Api_CommentList:
             return URL_CommentList
@@ -306,7 +314,7 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_OrderBuyNow, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_OrderBuyNow, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner:
 
             return .GET
 
@@ -331,6 +339,10 @@ extension RequestApi:TargetType{
                 params = ["brandId": brandid]
             case let .Api_ProductBrand(brandId):
                 params = ["brandId": brandId]
+            case let .Api_DesignerDetail(designerId):
+                params = ["designerId": designerId]
+            case let .Api_productDesigner(designerId):
+                params = ["designerId": designerId]
             case let .Api_ProductList(pageindex,categoryID,style,sort,uid,keyword):
                 params = ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid,"keyword":keyword]
             case let .Api_ProductDetail(productId):

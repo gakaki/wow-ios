@@ -472,7 +472,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             if colorIndex >= 0 {
                 let str = specArr[indexPath.row]
                 if !str.isSelect {
-                    cell.textLabel.textColor = MGRgb(234, g: 234, b: 234)
+                    cell.textLabel.textColor = MGRgb(204, g: 204, b: 204)
+                    cell.textLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
                     cell.userInteractionEnabled = false
                 }
                 
@@ -598,6 +599,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
         cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
         cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
+        cell.textLabel.backgroundColor = MGRgb(255, g: 255, b: 255)
         cell.textLabel.textColor = selected ? UIColor.blackColor() : MGRgb(128, g: 128, b: 128)
         cell.userInteractionEnabled = true
 

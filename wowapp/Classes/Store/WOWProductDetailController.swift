@@ -10,7 +10,7 @@ import UIKit
 
 class WOWProductDetailController: WOWBaseViewController {
     //Param
-    var productId                       : String?
+    var productId                       : Int?
     var productModel                    : WOWProductModel?
     var productSpecModel                : WOWProductSpecModel?
     private(set) var numberSections = 0
@@ -49,7 +49,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        productId = "140"
+//        productId = "140"
         request()
     }
 
@@ -61,7 +61,7 @@ class WOWProductDetailController: WOWBaseViewController {
 //MARK:Lazy
     var cycleView:CyclePictureView! = {
         let v = CyclePictureView(frame:MGFrame(0, y: 0, width:MGScreenWidth, height:MGScreenWidth), imageURLArray: nil)
-        v.placeholderImage = UIImage(named: "placeholder_banner")
+        v.placeholderImage = UIImage(named: "placeholder_product")
         v.currentDotColor = UIColor.blackColor()
         v.otherDotColor   = UIColor.whiteColor()
         v.autoScroll = false
@@ -169,7 +169,7 @@ class WOWProductDetailController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productId ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.productModel?.productId = strongSelf.productId
@@ -194,7 +194,7 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     //产品参数
     func requestProductSpec() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductSpec(productId: productId ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductSpec(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(result)
                 print(strongSelf.productSpecModel)
@@ -208,7 +208,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: productId?.toInt() ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.likeButton.selected = favorite ?? false
@@ -221,15 +221,17 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId: (productId?.toInt()) ?? 0), successClosure: { [weak self](result) in
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.likeButton.selected = !strongSelf.likeButton.selected
             }
-            }, failClosure: { (errorMsg) in
+            }) { (errorMsg) in
                 
-        })
-
+        
+        }
     }
+    
     
 }
 

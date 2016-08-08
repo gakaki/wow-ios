@@ -82,7 +82,7 @@ class WOWEditOrderController: WOWBaseViewController {
     //MARK: - Action
     @IBAction func sureClick(sender: UIButton) {
         chooseStyle()
-        guard let addressInfo = addressInfo else {
+        guard addressInfo != nil else {
             WOWHud.showMsg("请选择收货地址")
             return
         }
@@ -163,7 +163,7 @@ class WOWEditOrderController: WOWBaseViewController {
     //立即支付创建订单
     func requestBuyNowOrderCreat() -> Void {
         var params = [String: AnyObject]?()
-        params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? ""]
+        params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount) ?? 0, "remark": tipsTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""

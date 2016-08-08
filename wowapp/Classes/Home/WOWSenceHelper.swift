@@ -117,7 +117,7 @@ class WOWSenceHelper: NSObject {
                 let headerView = WOWMenuTopView(leftTitle: "\(sceneModel?.comments_count ?? 0)条评论 ", rightHiden:false, topLineHiden: false, bottomLineHiden:false)
                 headerView.addAction({
                     let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
-                    vc.mainID = sceneModel?.id
+                    vc.mainID = sceneModel?.id?.toInt()
                     vc.commentType = CommentType.Sence
                     senceController.navigationController?.pushViewController(vc, animated: true)
                 })
@@ -134,7 +134,7 @@ class WOWSenceHelper: NSObject {
             let footerView = WOWMenuTopView(leftTitle: "我要评论", rightHiden: false, topLineHiden: false, bottomLineHiden: true)
             footerView.addAction({
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
-                vc.mainID = sceneModel?.id
+                vc.mainID = sceneModel?.id?.toInt()
                 vc.commentType = CommentType.Sence
                 senceController.navigationController?.pushViewController(vc, animated: true)
             })

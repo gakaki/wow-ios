@@ -104,7 +104,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     
     private func commentOrder(){
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
-        vc.orderID = orderModel.id ?? ""
+        vc.orderID = orderModel.id?.toInt() ?? 0
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -14,7 +14,6 @@ class WOWGoodsSmallCell: UICollectionViewCell {
            return ( MGScreenWidth - 0.5) / 2
         }
     }
-    @IBOutlet weak var topLine: UIView!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -24,15 +23,14 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     }
     
     func showData(model:WOWProductModel,indexPath:NSIndexPath) {
-        let url             = model.productImage ?? ""
-        pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
-        desLabel.text       = model.productName
-        priceLabel.text     = model.price //千万不用格式化了
-        switch indexPath.item {
-        case 0,1:
-            topLine.hidden = false
-        default:
-            topLine.hidden = true
-        }
+        pictureImageView.kf_setImageWithURL(NSURL(string:model.productImg ?? ""), placeholderImage: UIImage(named: "placeholder_product"))
+        let str = NSMutableAttributedString(string: model.productName ?? "")
+        let style = NSMutableParagraphStyle()
+        style.lineHeightMultiple = 1.5      //设置1.5倍行距
+        style.lineBreakMode = .ByTruncatingTail
+        str.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
+        desLabel.attributedText = str
+        priceLabel.text     = String(format: "¥ %.2f", model.sellPrice ?? 0) //千万不用格式化了
+ 
     }
 }

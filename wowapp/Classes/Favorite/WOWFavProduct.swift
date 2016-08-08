@@ -122,11 +122,10 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
 ////            let model = dataArr[indexPath.row]
 //            del.goGoodsDetail(1)
 //        }
-//        let product = dataArr[indexPath.row]
+        let product = dataArr[indexPath.row]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
-//        vc.productId = String(product.productId)
-        vc.productId = "140"
+        vc.productId = product.productId
         parentNavigationController?.pushViewController(vc, animated: true)
 
        

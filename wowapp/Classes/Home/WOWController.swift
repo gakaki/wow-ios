@@ -223,7 +223,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension WOWController:SenceCellDelegate{
-    func senceProductClick(produtID: String) {
+    func senceProductClick(produtID: Int) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = produtID

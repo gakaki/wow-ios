@@ -511,7 +511,7 @@
                                 <state key="selected" image="like_select"/>
                                 <connections>
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="O3Y-a0-d1W"/>
-                                    <action selector="back:" destination="WaH-lQ-3xj" eventType="touchUpInside" id="ajJ-Ry-Smx"/>
+                                    <action selector="favoriteButton:" destination="WaH-lQ-3xj" eventType="touchUpInside" id="8ke-dZ-a2u"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lO8-Zr-BKn">
@@ -523,7 +523,6 @@
                                 <state key="normal" image="shareblack"/>
                                 <connections>
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="Gz9-gv-NZd"/>
-                                    <action selector="back:" destination="WaH-lQ-3xj" eventType="touchUpInside" id="fqS-4m-oMT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OgO-gS-w03">
@@ -556,6 +555,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="dhC-vH-OrN" id="J24-Iq-TqX"/>
+                        <outlet property="likeButton" destination="iCT-FQ-sCz" id="vGZ-E0-Q0j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbd-b7-OyL" userLabel="First Responder" sceneMemberID="firstResponder"/>

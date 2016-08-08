@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 class WOWFavoriteListModel: WOWBaseModel,Mappable{
-    var id         :String?
+    var id         :Int?
     var type       :String?
     var imgUrl     :String?
     var name       :String?

@@ -61,7 +61,7 @@ class WOWProductSecondDetailController: WOWBaseViewController {
     //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductImgDetail(productId: productModel.productId ?? ""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductImgDetail(productId: productModel.productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let productImgVoLit = Mapper<WOWProductPicTextModel>().mapArray(JSON(result)["productImgVoLit"].arrayObject)
                 if let productImgVoLit = productImgVoLit {

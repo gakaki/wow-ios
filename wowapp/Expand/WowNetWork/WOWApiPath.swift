@@ -23,7 +23,7 @@ import Foundation
 
 //1.app首页
 
-let URL_category                = "category"
+let URL_category                = "category/sub-category"
 
 let URL_scene                   = "scene"
 

@@ -20,13 +20,42 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
     @IBOutlet weak var btn_choose_view: UIView!
     @IBOutlet weak var cv: UICollectionView!
     
+    var vo_category_parent      = WOWCategoryModel()
+    var vo_categories           = [WOWCategoryModel]()
+    
     override func setUI(){
       super.setUI()
-        
     }
     
     override func request(){
-        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: {[weak self] (result) in
+            
+            if let strongSelf = self{
+                
+                let r                             =  JSON(result)
+                strongSelf.vo_category_parent     =  Mapper<WOWCategoryModel>().map( r["categoryFirstVo"].dictionaryObject )
+                strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray( r["categoryList"].arrayObject )!
+                
+                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_2nd, successClosure: {[weak self] (result) in
+                    if let strongSelf = self{
+                        
+                        let r                             =  JSON(result)
+                        strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray(r["pageCategoryVoList"].arrayObject)!
+                        
+                        strongSelf.tableView.reloadData()
+                        
+                    }
+                    
+                }){ (errorMsg) in
+                    print(errorMsg)
+                }
+                
+            }
+            
+        }){ (errorMsg) in
+            print(errorMsg)
+        }
+
     }
     /// 当前选中的按钮
     weak var selectedButton = UIButton()

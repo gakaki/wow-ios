@@ -8,6 +8,7 @@ class VCFound: WOWBaseViewController {
     let cellID2              = String( WOWFoundRecommendCell )
     let cellID3              = String( WOWFoundCategoryCell )
 
+    let cell3_height         = CGFloat(440)
     var vo_products          = [WOWFoundProductModel]()
     var vo_recommend_product:WOWFoundProductModel?
     var vo_categories        = [WOWCategoryModel]()
@@ -67,17 +68,18 @@ class VCFound: WOWBaseViewController {
     
        
         tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
         tableView.registerNib(UINib.nibName(String(WOWFoundWeeklyNewCell)), forCellReuseIdentifier:cellID1)
         tableView.registerClass(WOWFoundRecommendCell.self, forCellReuseIdentifier:cellID2)
-        tableView.registerNib(UINib.nibName(String(WOWFoundCategoryCell)), forCellReuseIdentifier:cellID3)
+        tableView.registerClass(WOWFoundCategoryCell.self, forCellReuseIdentifier:cellID3)
+        tableView.separatorStyle     = .None
 
 //        tableView.userInteractionEnabled = false
 //        tableView.allowsSelection   = false
         
         tableView.mj_header          = mj_header
-        
+        tableView.clearRestCell()
         configBarItem()
     }
     
@@ -100,7 +102,11 @@ class VCFound: WOWBaseViewController {
 }
 
 
-extension VCFound : UITableViewDataSource,UITableViewDelegate,FoundWeeklyNewCellDelegate,WOWFoundRecommendCellDelegate{
+extension VCFound : UITableViewDataSource,UITableViewDelegate,
+FoundWeeklyNewCellDelegate,
+WOWFoundRecommendCellDelegate,
+WOWFoundCategoryCellDelegate
+{
 	
 //MARK: UITableViewDelegate
     
@@ -114,9 +120,9 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate,FoundWeeklyNewCell
         case 0:
             return 100
         case 1:
-            return 300
+            return 170
         case 2:
-            return 700
+            return cell3_height
         default:
             return 200
             
@@ -128,8 +134,8 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate,FoundWeeklyNewCell
         view.tintColor = UIColor.whiteColor()
         
         let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
-        headerView.textLabel!.textColor = UIColor.blackColor()
-        headerView.textLabel!.font = UIFont(name: "systemFont", size: 14)
+        headerView.textLabel!.textColor             = UIColor.blackColor()
+        headerView.textLabel!.font                  =  UIFont.systemFontOfSize(14)
 
     }
 
@@ -139,6 +145,7 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate,FoundWeeklyNewCell
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if  ( section == 2) {return 0}
         return 15
     }
     
@@ -164,9 +171,9 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate,FoundWeeklyNewCell
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return nil
-    }
+//    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+//        return nil
+//    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -195,11 +202,18 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate,FoundWeeklyNewCell
             return cell
         }
         else if ( section == 2 && row == 0){
+            
+            let cell            = tableView.dequeueReusableCellWithIdentifier(cellID3 , forIndexPath: indexPath) as! WOWFoundCategoryCell
+            cell.delegate       = self
+            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
+            cell.setUI()
+            cell.selectionStyle = .None
+            cell.categories     = self.vo_categories
+            return cell
+        
+        }else{
             return UITableViewCell()
         }
-        
-        return UITableViewCell()
-
     }
     func cellTouchInside(m:WOWFoundProductModel)
     {
@@ -207,5 +221,10 @@ extension VCFound : UITableViewDataSource,UITableViewDelegate,FoundWeeklyNewCell
 //        self.pushVC(vc:)
     }
     
+    func foundCategorycellTouchInside(m:WOWCategoryModel)
+    {
+        print(m.categoryID)
+    }
+
 }
 

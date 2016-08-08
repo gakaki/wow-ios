@@ -30,6 +30,9 @@ public func MGNib(nibName:String) ->UINib{
 
 public let MGScreenWidth:CGFloat = UIScreen.mainScreen().bounds.size.width
 public let MGScreenHeight:CGFloat = UIScreen.mainScreen().bounds.size.height
+public let MGScreenWidthHalf:CGFloat = MGScreenWidth / 2
+public let MGScreenHeightHalf:CGFloat = MGScreenHeight / 2
+
 
 //MARK:简写的实例化
 public let MGDefault = NSUserDefaults.standardUserDefaults()

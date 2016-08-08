@@ -29,14 +29,11 @@ class WOWFoundWeeklyNewCell: UITableViewCell {
         collectionView.showsVerticalScrollIndicator       = false
         collectionView.showsHorizontalScrollIndicator     = false
         let layout                          = UICollectionViewFlowLayout()
-        layout.scrollDirection              = .Vertical
-        layout.sectionInset                 = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
-        layout.itemSize                     = CGSize(width: 80, height: 90)
+        layout.scrollDirection              = .Horizontal
+        layout.sectionInset                 = UIEdgeInsets(top: 3, left: 5, bottom: 5, right: 15)
+        layout.itemSize                     = CGSize(width: 70, height: 90)
         
-        layout.minimumInteritemSpacing      = 4
-        
-//        layout.minimumLineSpacing           = 1
-        //        layout.itemSize = CGSize(width: (UIScreen.mainScreen().bounds.size.width - 40)/3, height: ((UIScreen.mainScreen().bounds.size.width - 40)/3))
+        layout.minimumInteritemSpacing      = 3
         self.collectionView.collectionViewLayout = layout
 
     }
@@ -60,8 +57,7 @@ extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSou
         let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFoundWeeklyNewCellElementCell), forIndexPath: indexPath) as! WOWFoundWeeklyNewCellElementCell
         let model           = products[indexPath.item]
         
-        let url             = NSURL(string:model.productImg ?? "")
-        cell.pictureImageView.yy_setImageWithURL(url , placeholder: UIImage(named: "placeholder_product"))
+        cell.pictureImageView.set_webimage_url(model.productImg!)
         cell.label.text     = model.get_formted_price()
         return cell
     }

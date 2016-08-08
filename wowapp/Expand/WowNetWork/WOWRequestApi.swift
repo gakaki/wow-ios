@@ -425,7 +425,11 @@ extension RequestApi:TargetType{
                 params =  ["pageType":1]
             case  .Api_Home_Topics():
                 params =  ["pageType":1]
-           
+            case .Api_Found_2nd:
+                break
+            case .Api_Found_Main:
+                break
+
             default:
                 params =  nil
         }

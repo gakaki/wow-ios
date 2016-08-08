@@ -1,92 +1,6 @@
-
 import UIKit
 import FlexboxLayout
 import YYWebImage
-
-
-extension UILabel {
-    func setLineHeight(lineHeight: CGFloat) {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 1.0
-        paragraphStyle.lineHeightMultiple = lineHeight
-        paragraphStyle.alignment = self.textAlignment
-        
-        let attrString = NSMutableAttributedString(string: self.text!)
-        attrString.addAttribute(NSFontAttributeName, value: self.font, range: NSMakeRange(0, attrString.length))
-        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
-        self.attributedText = attrString
-    }
-}
-
-
-public enum FontWeight {
-    case Normal
-    case Regular
-    case Bold
-    case Black
-    case Heavy
-    case Semibold
-    case Thin
-    case Light
-    case UltraLight
-}
-
-extension UIFont {
-    
-    @available(iOS 7, *)
-    public class func systemFontOfSize(size: Double, weight: FontWeight) -> UIFont {
-        if #available(iOS 8.2, *) {
-            let fontWeightFloat: CGFloat
-            switch weight {
-            case .UltraLight:
-                fontWeightFloat = UIFontWeightUltraLight
-            case .Light:
-                fontWeightFloat = UIFontWeightLight
-            case .Thin:
-                fontWeightFloat = UIFontWeightThin
-            case .Normal:
-                fontWeightFloat = UIFontWeightRegular
-            case .Regular:
-                fontWeightFloat = UIFontWeightMedium
-            case .Semibold:
-                fontWeightFloat = UIFontWeightSemibold
-            case .Bold:
-                fontWeightFloat = UIFontWeightBold
-            case .Heavy:
-                fontWeightFloat = UIFontWeightHeavy
-            case .Black:
-                fontWeightFloat = UIFontWeightBlack
-            }
-            
-            return UIFont.systemFontOfSize(CGFloat(size), weight: fontWeightFloat)
-        } else {
-            let systemFontName: String
-            switch weight {
-            case .UltraLight:
-                systemFontName = "HelveticaNeue-UltraLight"
-            case .Light:
-                systemFontName = "HelveticaNeue-Light"
-            case .Thin:
-                systemFontName = "HelveticaNeue-Thin"
-            case .Normal:
-                systemFontName = "HelveticaNeue"
-            case .Regular:
-                systemFontName = "HelveticaNeue-Medium"
-            case .Semibold:
-                systemFontName = "HelveticaNeue-Medium"
-            case .Bold:
-                systemFontName = "HelveticaNeue-Bold"
-            case .Heavy:
-                systemFontName = "HelveticaNeue-Bold"
-            case .Black:
-                systemFontName = "HelveticaNeue-Bold"
-            }
-            
-            return UIFont(name: systemFontName, size: CGFloat(size))!
-        }
-    }
-    
-}
 
 
 protocol WOWFoundRecommendCellDelegate:class{
@@ -154,7 +68,7 @@ class WOWFoundRecommendCell: UITableViewCell {
         
         self.product_view.removeFromSuperview()
         
-        let defaultMargin: Inset = (8.0, -20.0, 8.0, 8.0, 8.0, 8.0)
+        let defaultMargin: Inset = (8.0,0.0, 8.0, 8.0, 8.0, 8.0)
         iv                       = UIImageView.imageWithUrlWebP(self.imageName)
         
         let screen_w             = Float( self.w )
@@ -215,7 +129,7 @@ class WOWFoundRecommendCell: UITableViewCell {
                             
                             $0.font = UIFont.systemFontOfSize(15, weight: FontWeight.Bold)
                             $0.style.alignSelf = .FlexStart
-                            $0.style.margin = (0, 4.0, 0, 0, 8.0, 0)
+                            $0.style.margin = (0, -4.0, 0, 0, 8.0, 0)
                         }),
                         
                         right_label_ceneter.configure({

@@ -121,13 +121,7 @@ class WOWOrderController: WOWBaseViewController {
                 
                 strongSelf.endRefresh()
                 
-                
-                
                 let arr = Mapper<WOWNewOrderListModel>().mapArray(json)
-                
-                
-              
-                
                 
                 if let array = arr{
                     if strongSelf.pageIndex == 1{

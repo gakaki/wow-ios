@@ -51,7 +51,7 @@ class WOWBrandV1Model: WOWBaseModel,Mappable {
     }
     
     func mapping(map: Map) {
-        id       <- (map["id"],StringDecimalNumberTransform())
+        id       <- map["id"]
         letter   <- map["brandNameFirstLetter"]
         name     <- map["brandCname"]
         image    <- map["brandLogoImg"]

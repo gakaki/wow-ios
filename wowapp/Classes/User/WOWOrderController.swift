@@ -270,10 +270,19 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderListCell", forIndexPath: indexPath) as! WOWOrderListCell
-        //        let orderModel = self.dataArr[indexPath.section]
+                let orderModel = self.dataArr[indexPath.section]
         
         cell.showData(dataArr[indexPath.section])
-        
+        if orderModel.orderStatus == 0 {
+            cell.rightButton.hidden = false
+            cell.rightButton.setTitle("立即支付", forState: .Normal)
+        }else if orderModel.orderStatus == 3{
+            cell.rightButton.hidden = false
+            cell.rightButton.setTitle("确认收货", forState: .Normal)
+        }else{
+            cell.rightButton.hidden = true
+        }
+
         return cell
     }
     

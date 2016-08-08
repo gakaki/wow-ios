@@ -183,8 +183,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
         let model = dataArr[indexPath.row]
         cell.showData(model, indexPath: indexPath)
-        
-        
+
         return cell
     }
     

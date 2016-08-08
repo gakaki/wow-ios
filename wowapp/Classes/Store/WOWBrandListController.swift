@@ -144,7 +144,7 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWBaseStyleCell", forIndexPath: indexPath) as! WOWBaseStyleCell
         let model = dataArray[indexPath.section][indexPath.row]
-        cell.leftImageView.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        cell.leftImageView.set_webimage_url(model.image)
         cell.centerTitleLabel!.text = model.name
         return cell
     }

@@ -8,17 +8,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WOWProductDetailView" customModule="wowapp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yb3-pF-reO">
-                    <rect key="frame" x="86" y="71" width="204" height="0.0"/>
+                    <rect key="frame" x="86" y="56" width="204" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddH-rp-Y7i">
-                    <rect key="frame" x="123" y="107" width="130" height="0.5"/>
+                    <rect key="frame" x="123" y="57" width="130" height="0.5"/>
                     <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="130" id="DN7-ak-eCJ"/>
@@ -40,10 +40,10 @@
                 <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="89M-LO-nrP" secondAttribute="trailing" constant="260" id="0fR-VV-R7I"/>
                 <constraint firstItem="ddH-rp-Y7i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="FNu-nH-suR"/>
                 <constraint firstAttribute="trailing" secondItem="yb3-pF-reO" secondAttribute="trailing" constant="85" id="GEP-KN-UjY"/>
-                <constraint firstItem="ddH-rp-Y7i" firstAttribute="top" secondItem="yb3-pF-reO" secondAttribute="bottom" constant="36" id="K4y-SX-bgs"/>
-                <constraint firstItem="yb3-pF-reO" firstAttribute="top" secondItem="89M-LO-nrP" secondAttribute="bottom" constant="30" id="bGP-fc-vO8"/>
+                <constraint firstItem="ddH-rp-Y7i" firstAttribute="top" secondItem="yb3-pF-reO" secondAttribute="bottom" constant="1" id="K4y-SX-bgs"/>
+                <constraint firstItem="yb3-pF-reO" firstAttribute="top" secondItem="89M-LO-nrP" secondAttribute="bottom" constant="15" id="bGP-fc-vO8"/>
                 <constraint firstItem="yb3-pF-reO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="86" id="edc-Zh-WGp"/>
-                <constraint firstAttribute="bottom" secondItem="ddH-rp-Y7i" secondAttribute="bottom" priority="750" constant="30" id="kN6-pJ-ZHC"/>
+                <constraint firstAttribute="bottom" secondItem="ddH-rp-Y7i" secondAttribute="bottom" constant="30" id="kN6-pJ-ZHC"/>
                 <constraint firstItem="89M-LO-nrP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="lMl-t8-NTs"/>
                 <constraint firstItem="89M-LO-nrP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="tP9-DO-cKY"/>
             </constraints>
@@ -52,7 +52,7 @@
                 <outlet property="productDescLabel" destination="yb3-pF-reO" id="RoB-IE-2NF"/>
                 <outlet property="productNameLabel" destination="89M-LO-nrP" id="lvZ-4C-VdX"/>
             </connections>
-            <point key="canvasLocation" x="228.5" y="152"/>
+            <point key="canvasLocation" x="228.5" y="133.5"/>
         </view>
     </objects>
 </document>

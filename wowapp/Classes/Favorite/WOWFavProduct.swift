@@ -49,9 +49,9 @@ class WOWFavProduct: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.minimumColumnSpacing = 0.5
-        l.minimumInteritemSpacing = 0.5
-        l.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1)
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
+        l.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         return l
     }()
     private func configCollectionView(){
@@ -63,7 +63,7 @@ class WOWFavProduct: WOWBaseViewController {
     }
     
     
-    
+    //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
     
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
         let view = NSBundle.mainBundle().loadNibNamed(String(FavoriteEmpty), owner: self, options: nil).last as! FavoriteEmpty
@@ -71,6 +71,9 @@ class WOWFavProduct: WOWBaseViewController {
         view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
         return view
+    }
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
     }
     
     //MARK:Action
@@ -106,13 +109,13 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  1
+        return  dataArr.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoritrSingleCell), forIndexPath: indexPath) as! WOWFavoritrSingleCell
-//        let model = dataArr[indexPath.row]
-        cell.imageView.kf_setImageWithURL(NSURL(string: "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        let model = dataArr[indexPath.row]
+        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         return cell
     }
     

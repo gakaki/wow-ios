@@ -9,7 +9,7 @@
 import UIKit
 
 protocol brandHeaderViewDelegate: class {
-    func moreClick()
+    func moreClick(sender: UIButton!)
 }
 
 class WOWBrandHeaderView: UICollectionReusableView {
@@ -55,7 +55,7 @@ class WOWBrandHeaderView: UICollectionReusableView {
     
     @IBAction func moreButtonClick(sender: UIButton!) {
         if let del = delegate {
-            del.moreClick()
+            del.moreClick(sender)
         }
     }
 

@@ -27,7 +27,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rt-cJ-Y51">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rt-cJ-Y51">
                     <rect key="frame" x="15" y="231" width="345" height="75"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,6 +39,7 @@
                         <constraint firstAttribute="height" constant="30" id="w3o-NG-kyP"/>
                     </constraints>
                     <state key="normal" image="down"/>
+                    <state key="selected" image="up"/>
                     <connections>
                         <action selector="moreButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="qdI-V2-0AR"/>
                     </connections>
@@ -70,5 +71,6 @@
     </objects>
     <resources>
         <image name="down" width="17" height="10"/>
+        <image name="up" width="17" height="10"/>
     </resources>
 </document>

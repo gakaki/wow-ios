@@ -23,4 +23,5 @@ class WOWFavoriteBrandCell: UICollectionViewCell {
         // Initialization code
     }
 
+    
 }

@@ -36,7 +36,7 @@ class WOWBrandModel: WOWBaseModel,Mappable {
 
 
 class WOWBrandV1Model: WOWBaseModel,Mappable {
-    var id         : String?
+    var id         : Int?
     var name       : String?
     var letter     : String?
     var image      : String = ""

@@ -59,7 +59,7 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
         if showBrand {
             let model = brandDataArr[indexPath.item]
-            let url = NSURL(string:model.brandImageUrl ?? "")
+            let url = NSURL(string:model.brandLogoImg ?? "")
             cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
             WOWBorderColor(cell)
         }else{

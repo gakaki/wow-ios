@@ -27,3 +27,21 @@ class WOWFavoriteProductModel: WOWBaseModel, Mappable {
     }
 
 }
+
+class WOWFavoriteDesignerModel: WOWBaseModel,Mappable{
+    var designerId        : Int?
+    var designerName      : String?
+    var designerPhoto     = String()
+    var designerDesc      : String?
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        designerId              <- map["designerId"]
+        designerName            <- map["designerName"]
+        designerPhoto           <- map["designerPhoto"]
+        designerDesc            <- map["designerDesc"]
+    }
+}

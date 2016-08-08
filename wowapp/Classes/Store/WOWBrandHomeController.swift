@@ -22,6 +22,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     var brandModel : WOWBrandV1Model?
     var designerId : Int?
     var designerModel : WOWDesignerModel?
+    var labelHeight : CGFloat?
     
     var entrance = brandOrDesignerEntrance.brandEntrance
     
@@ -66,6 +67,21 @@ class WOWBrandHomeController: WOWBaseViewController {
     
     @IBAction func favoriteButton(sender: UIButton) {
         
+        guard WOWUserManager.loginStatus else {
+            toLoginVC(true)
+            return
+        }
+        switch entrance {
+        case .brandEntrance:
+          
+            requestFavoriteBrand()
+            
+        case .designerEntrance:
+            
+            requestFavoriteDesigner()
+            
+        }
+
     }
     
 //MARK:Network
@@ -74,9 +90,18 @@ class WOWBrandHomeController: WOWBaseViewController {
         //判断一下是品牌详情还是设计师详情
         switch entrance {
         case .brandEntrance:
+            
             requestBrandDetail()
+            if WOWUserManager.loginStatus {
+                requestIsFavoriteBrand()
+            }
+            
         case .designerEntrance:
+            
             requestDesignerDetail()
+            if WOWUserManager.loginStatus {
+                requestIsFavoriteDesigner()
+            }
         
         }
     }
@@ -142,8 +167,8 @@ class WOWBrandHomeController: WOWBaseViewController {
         }
     }
     //用户是否喜欢某品牌
-    func requestIsFavoriteProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: brandID ?? 0), successClosure: {[weak self] (result) in
+    func requestIsFavoriteBrand() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteBrand(brandId: brandID ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.likeButton.selected = favorite ?? false
@@ -155,9 +180,9 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     
     //用户喜欢某个品牌
-    func requestFavoriteProduct()  {
+    func requestFavoriteBrand()  {
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId: brandID ?? 0), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteBrand(brandId: brandID ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.likeButton.selected = !strongSelf.likeButton.selected
             }
@@ -166,7 +191,30 @@ class WOWBrandHomeController: WOWBaseViewController {
             
         }
     }
+    //用户是否喜欢某设计师
+    func requestIsFavoriteDesigner() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteDesigner(designerId: designerId ?? 0), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                let favorite = JSON(result)["favorite"].bool
+                strongSelf.likeButton.selected = favorite ?? false
+            }
+        }) {(errorMsg) in
+            
+        }
+        
+    }
     
+    //用户喜欢某个设计师
+    func requestFavoriteDesigner()  {
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteDesigner(designerId: designerId ?? 0), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                strongSelf.likeButton.selected = !strongSelf.likeButton.selected
+            }
+        }) { (errorMsg) in
+            
+            
+        }
+    }
 }
 
 
@@ -203,6 +251,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
                 if let designerModel = designerModel {
                     view.showDesignerData(designerModel)
                 }
+                labelHeight = view.brandDescLabel.getEstimatedHeight()
                 
                 view.delegate = self
                 
@@ -230,8 +279,18 @@ extension WOWBrandHomeController:CollectionViewWaterfallLayoutDelegate{
 }
 
 extension WOWBrandHomeController: brandHeaderViewDelegate {
-    func moreClick() {
+    func moreClick(sender: UIButton!) {
         print("更多")
+        if sender.selected {
+            layout.headerHeight = 355
+            
+        }else {
+            layout.headerHeight = 355 + Float(labelHeight ?? 0) - 75
+
+        }
+        self.collectionView.reloadData()
+        sender.selected = !sender.selected
+        
     }
 }
 //extension WOWBrandHomeController:WOWActionDelegate{
@@ -251,3 +310,8 @@ extension WOWBrandHomeController: brandHeaderViewDelegate {
 //        }
 //    }
 //}
+
+
+    
+
+

@@ -13,7 +13,7 @@ import UIKit
 class WOWFavDesigner: WOWBaseViewController {
     
     
-    var dataArr  = [WOWBrandListModel]()
+    var dataArr  = [WOWFavoriteDesignerModel]()
     var parentNavigationController : UINavigationController?
 
     
@@ -49,9 +49,9 @@ class WOWFavDesigner: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.minimumColumnSpacing = 0.5
-        l.minimumInteritemSpacing = 0.5
-        l.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1)
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
+        l.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         return l
     }()
     private func configCollectionView(){
@@ -62,13 +62,16 @@ class WOWFavDesigner: WOWBaseViewController {
         
     }
     
-    
+    //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
         let view = NSBundle.mainBundle().loadNibNamed(String(FavoriteEmpty), owner: self, options: nil).last as! FavoriteEmpty
         
         view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
         return view
+    }
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
     }
     
     //MARK:Action
@@ -79,11 +82,11 @@ class WOWFavDesigner: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeBrand, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeDesigner, successClosure: { [weak self](result) in
             if let strongSelf = self{
-                let brandList = Mapper<WOWBrandListModel>().mapArray(JSON(result)["likedBrandVoList"].arrayObject)
-                if let brandList = brandList{
-                    strongSelf.dataArr = brandList
+                let designerList = Mapper<WOWFavoriteDesignerModel>().mapArray(JSON(result)["favoriteDesignerVoList"].arrayObject)
+                if let designerList = designerList{
+                    strongSelf.dataArr = designerList
                 }
                 strongSelf.collectionView.reloadData()
                 strongSelf.endRefresh()
@@ -106,22 +109,27 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoriteBrandCell), forIndexPath: indexPath) as! WOWFavoriteBrandCell
         let model = dataArr[indexPath.row]
-        cell.logoImg.kf_setImageWithURL(NSURL(string:model.brandImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        cell.logoImg.kf_setImageWithURL(NSURL(string:model.designerPhoto ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        WOWBorderColor(cell.logoImg)
+        cell.logoImg.borderRadius(32)
+        cell.logoName.text = model.designerName ?? ""
+        cell.logoDes.text = model.designerDesc ?? ""
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print(indexPath.row)
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        let model = dataArr[indexPath.row]
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.designerId = model.designerId
+        vc.entrance = .designerEntrance
         vc.hideNavigationBar = true
-        //        vc.productID = produtID
         parentNavigationController?.pushViewController(vc, animated: true)
-      
 
     }
 }
 extension WOWFavDesigner:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWFavoriteBrandCell.itemWidth,WOWFavoriteBrandCell.itemWidth + 63)
+        return CGSizeMake(WOWFavoriteBrandCell.itemWidth,WOWFavoriteBrandCell.itemWidth)
     }
 }

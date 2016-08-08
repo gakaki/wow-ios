@@ -83,6 +83,7 @@ class WOWStoreController: WOWBaseViewController {
                 }
                 strongSelf.endRefresh()
                 strongSelf.tableView.reloadData()
+            
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
@@ -96,7 +97,7 @@ class WOWStoreController: WOWBaseViewController {
 extension WOWStoreController:BrandCellDelegate{
     func hotBrandCellClick(brandModel: WOWBrandListModel) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-        vc.brandID = brandModel.brandID?.toInt()
+        vc.brandID = brandModel.brandId
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }

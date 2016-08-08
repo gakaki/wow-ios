@@ -477,7 +477,7 @@
         <!--品牌主页-->
         <scene sceneID="WGN-WR-BPF">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandHomeController" title="品牌主页" id="WaH-lQ-3xj" customClass="WOWBrandHomeController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandHomeController" title="品牌主页" hidesBottomBarWhenPushed="YES" id="WaH-lQ-3xj" customClass="WOWBrandHomeController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8R7-fJ-UlM"/>
                         <viewControllerLayoutGuide type="bottom" id="TMI-x8-ieU"/>

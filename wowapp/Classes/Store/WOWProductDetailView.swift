@@ -16,6 +16,8 @@ class WOWProductDetailView: UIView {
     func showDataa (model:WOWProductModel) {
             productNameLabel.text = model.productName ?? ""
             productDescLabel.text = model.sellingPoint ?? ""
+
     }
     
+        
 }

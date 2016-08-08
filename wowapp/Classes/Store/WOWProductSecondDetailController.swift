@@ -19,8 +19,7 @@ class WOWProductSecondDetailController: WOWBaseViewController {
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWGoodsSureBuyNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
+   
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -45,7 +44,6 @@ class WOWProductSecondDetailController: WOWBaseViewController {
         navigationItem.title = "详情"
 
         super.setUI()
-        
         configTable()
         
     }
@@ -56,6 +54,7 @@ class WOWProductSecondDetailController: WOWBaseViewController {
         tableView.estimatedRowHeight = 200
         tableView.mj_header = mj_header
         headView.showDataa(productModel)
+        headView.size = CGSize(width: MGScreenWidth, height: 88 + headView.productDescLabel.getEstimatedHeight())
         tableView.tableHeaderView = headView
     }
     //MARK:Private Network
@@ -99,6 +98,7 @@ extension WOWProductSecondDetailController:UITableViewDelegate,UITableViewDataSo
         return cell
     }
    
+    
 
 
 }

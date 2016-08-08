@@ -20,31 +20,31 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
     @IBOutlet weak var btn_choose_view: UIView!
     @IBOutlet weak var cv: UICollectionView!
     
-    var vo_category_parent      = WOWCategoryModel()
     var vo_categories           = [WOWCategoryModel]()
-    
+    var vo_products             = [WOWProductModel]()
     override func setUI(){
       super.setUI()
     }
     
+    var query_asc:Int           = 0
+    var query_currentPage:Int   = 0
+    var query_showCount:Int     = 1
+    var query_sortBy:Int        = 0
+    
     override func request(){
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: {[weak self] (result) in
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
                 
                 let r                             =  JSON(result)
-                strongSelf.vo_category_parent     =  Mapper<WOWCategoryModel>().map( r["categoryFirstVo"].dictionaryObject )
                 strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray( r["categoryList"].arrayObject )!
                 
-                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_2nd, successClosure: {[weak self] (result) in
-                    if let strongSelf = self{
-                        
-                        let r                             =  JSON(result)
-                        strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray(r["pageCategoryVoList"].arrayObject)!
-                        
-                        strongSelf.tableView.reloadData()
-                        
-                    }
+                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: strongSelf.query_asc, currentPage: strongSelf.query_currentPage, showCount: strongSelf.query_showCount, sortBy: strongSelf.query_sortBy, categoryId: strongSelf.cid.toInt()! ), successClosure: {[weak self] (result) in
+                    
+                        let res                   = JSON(result)
+                        strongSelf.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject)!
+                        strongSelf.cv.reloadData()
                     
                 }){ (errorMsg) in
                     print(errorMsg)

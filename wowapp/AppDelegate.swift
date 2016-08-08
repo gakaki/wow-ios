@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          拉取配置数据
          */
-        //requestConfigData()
+
 
         window?.makeKeyAndVisible()
         return true
@@ -101,42 +101,6 @@ extension AppDelegate{
         nav.navigationController?.setNavigationBarHidden(true, animated: false)
         nav.navigationBarHidden = true
         window?.rootViewController =    nav
-    }
-    
-    func requestConfigData(){
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category, successClosure: { (result) in
-            //            let cateArr = JSON(result)["category"].arrayObject
-            //            if let cats = cateArr{
-            //                for item in cats{
-            //
-            //                }
-            //            }
-            /*
-             let cateArr = Mapper<WOWCategoryModel>().mapArray(result["category"])
-             if let categorys = cateArr{
-             for cate in categorys{
-             try! WOWRealm.write({
-             WOWRealm.add(cate, update: true)
-             })
-             }
-             }*/
-            
-            let productTypeArr = Mapper<WOWProductStyleModel>().mapArray(result["product_style"])
-            if let typeArr = productTypeArr{
-                let ret = WOWRealm.objects(WOWProductStyleModel)
-                try! WOWRealm.write({
-                    WOWRealm.delete(ret)
-                })
-                for type in typeArr{
-                    try! WOWRealm.write({
-                        WOWRealm.add(type)
-                    })
-                }
-            }
-            //            NSNotificationCenter.postNotificationNameOnMainThread(WOWCategoryUpdateNotificationKey, object: nil)
-        }) { (errorMsg) in
-            
-        }
     }
     
    

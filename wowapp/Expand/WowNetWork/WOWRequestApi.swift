@@ -54,7 +54,8 @@ public enum RequestApi{
     
     
     case Api_Category(categoryId:String) //查看分类
-    
+    case Api_Product_By_Category(asc:Int , currentPage: Int, showCount :Int , sortBy:Int, categoryId:Int ) //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
+
     case Api_Captcha(mobile:String) //绑定微信验证码
     
     //购物车相关
@@ -155,8 +156,6 @@ public enum RequestApi{
     
     case Api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
 
-
-
 }
 
 
@@ -169,6 +168,8 @@ extension RequestApi:TargetType{
         switch self{
         case .Api_Category:
             return URL_category
+        case .Api_Product_By_Category:
+            return URL_producty_by_category
         case .Api_Activity:
             return URL_activity
         case .Api_StoreHome:

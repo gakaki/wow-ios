@@ -84,6 +84,34 @@ class WOWOrderListCell: UITableViewCell {
         goodsCountLabel.text = "共"+(m.totalProductQty?.toString)!+"件"
         totalPriceLabel.text = "¥ "+(m.orderAmount?.toString)!
         
+//        switch m.orderStatus ?? 2{
+//        case 0:
+//
+//             self.rightButton.setTitle("立即支付", forState: .Normal)
+//        case 3:
+//
+//            self.rightButton.setTitle("确认收货", forState: .Normal)
+//        case 1:
+//            self.rightButton.hidden = true
+//        case 2:
+//            self.rightButton.hidden = true
+//        case 4:
+//            self.rightButton.hidden = true
+//        case 5:
+//            self.rightButton.hidden = true
+//        case 6:
+//            self.rightButton.hidden = true
+//        default:
+//
+//            break
+//        }
+//        if m.orderStatus == 0 {
+//            self.rightButton.setTitle("立即支付", forState: .Normal)
+//        }else if m.orderStatus == 3{
+//            self.rightButton.setTitle("确认收货", forState: .Normal)
+//        }else{
+//            self.rightButton.hidden = true
+//        }
     }
     
     @IBAction func rightButtonClick(sender: UIButton) {

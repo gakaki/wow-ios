@@ -330,7 +330,7 @@ extension RequestApi:TargetType{
     public var parameters:[String: AnyObject]?{
         var params = [String: AnyObject]?()
         switch self{
-            case let .Api_Category(categoryId)
+            case let .Api_Category(categoryId):
                 params = ["categoryId":categoryId]
             case let .Api_SenceDetail(sceneid,uid):
                 params = ["scene_id":sceneid,"uid":uid]

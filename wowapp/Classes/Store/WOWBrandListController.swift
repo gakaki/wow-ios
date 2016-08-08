@@ -45,7 +45,7 @@ class WOWBrandListController: WOWBaseViewController {
 //MARK:Private Method
     override func setUI() {
         super.setUI()
-        tableView.estimatedRowHeight = 90
+        tableView.estimatedRowHeight = 140
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionIndexColor = GrayColorlevel1
         tableView.clearRestCell()
@@ -95,10 +95,6 @@ class WOWBrandListController: WOWBaseViewController {
                     //循环所有的然后给分组
                       for letter in strongSelf.headerIndexs{
                         let group_row    = brands!.filter{ (brand) in brand.letter == letter }
-//                        for row in group_row {
-//                            row.image = "http://wowdsgn.com/\(row.image)"
-//                            row.url = "http://wowdsgn.com/\(row.url)"
-//                        }
                         strongSelf.dataArray.append(group_row)
                         strongSelf.originalArray.appendContentsOf(group_row)
                     }

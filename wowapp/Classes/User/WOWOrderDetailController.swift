@@ -15,6 +15,8 @@ protocol OrderDetailDelegate:class{
 
 class WOWOrderDetailController: WOWBaseViewController{
     var orderModel                  : WOWOrderListModel!
+    var orderNumber                 : Int!
+    var isOpen                      : Bool!
     @IBOutlet weak var tableView    : UITableView!
     @IBOutlet weak var countLabel   : UILabel!
     @IBOutlet weak var priceLabel   : UILabel!
@@ -23,29 +25,33 @@ class WOWOrderDetailController: WOWBaseViewController{
     weak var delegate               : OrderDetailDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
     
-//MARK:Private Method
+    //MARK:Private Method
     override func setUI() {
         super.setUI()
+        orderNumber = 3
+        isOpen = true
         WOWBorderColor(rightButton)
         navigationItem.title = "订单详情"
         configTableView()
-        configBottomView()
+        //        configBottomView()
     }
     
     private func configTableView(){
-        tableView.estimatedRowHeight = 80
-        tableView.registerNib(UINib.nibName("WOWBuyCarNormalCell"), forCellReuseIdentifier: "WOWBuyCarNormalCell")
-        tableView.registerNib(UINib.nibName("WOWAddressCell"), forCellReuseIdentifier: "WOWAddressCell")
-        tableView.registerNib(UINib.nibName("WOWOrderTransCell"), forCellReuseIdentifier: "WOWOrderTransCell")
+        tableView.estimatedRowHeight = 70
+        tableView.registerNib(UINib.nibName("WOWOrderDetailNewCell"), forCellReuseIdentifier: "WOWOrderDetailNewCell")
+        tableView.registerNib(UINib.nibName("WOWOrderDetailTwoCell"), forCellReuseIdentifier: "WOWOrderDetailTwoCell")
+        tableView.registerNib(UINib.nibName("WOWOrderDetailSThreeCell"), forCellReuseIdentifier: "WOWOrderDetailSThreeCell")
+        tableView.registerNib(UINib.nibName("WOWOrderDetailFourCell"), forCellReuseIdentifier: "WOWOrderDetailFourCell")
+        tableView.registerNib(UINib.nibName("WOWOrderDetailPayCell"), forCellReuseIdentifier: "WOWOrderDetailPayCell")
         tableView.clearRestCell()
     }
     
@@ -82,7 +88,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         }
     }
     
-//MARK:Network
+    //MARK:Network
     private func payOrder(){
         if let charge = orderModel.charge {
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME, withCompletion: { [weak self](ret, error) in
@@ -98,17 +104,17 @@ class WOWOrderDetailController: WOWBaseViewController{
                         }
                     }
                 }
-            })
+                })
         }
     }
     
     private func commentOrder(){
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
-        vc.orderID = orderModel.id?.toInt() ?? 0
-        vc.delegate = self
+//        vc.orderID = orderModel.id ?? ""
+//        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     
     //更改状态
     private func changeStatus(){
@@ -155,36 +161,47 @@ extension WOWOrderDetailController:OrderCommentDelegate{
 
 extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: //订单
-            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
-            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
-                return 1
-            default:
-                return 2
-            }
+            //            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
+            //            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
+            //                return 1
+            //            default:
+            //                return 2
+            //            }
+            return 1
             
         case 1: //收货人
             return 1
         case 2: //商品清单
-            return orderModel.products?.count ?? 0
+            //            return orderModel.products?.count ?? 0
+            return orderNumber
+        case 3: //运费
+            return 2
+        case 4: //支付方式
+            return 2
         default:
             return 1
         }
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 56
+            return 44
         case 1:
-            return 64
+            return 70
         case 2:
-            return 108
+            return 70
+        case 3:
+            return 50
+        case 4:
+            return 60
         default:
             return 0
         }
@@ -195,73 +212,186 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         var returnCell:UITableViewCell!
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderTransCell", forIndexPath: indexPath) as! WOWOrderTransCell
-//            cell.accessoryType = indexPath.row == 1 ? .DisclosureIndicator : .None
-            cell.statusLabel.hidden = indexPath.row == 1 ? true : false
-            if indexPath.row == 0{ //订单
-                cell.statusLabel.text = orderModel.status_chs
-                cell.topLabel.text = "订单：\(orderModel.id ?? "")"
-                cell.leftLabel.text = orderModel.created_at
-                statusLabel = cell.statusLabel
-            }else{ //快递
-                cell.topLabel.text = "物流公司：" + (orderModel.transCompany ?? "暂无信息")
-                cell.leftLabel.text = "运单号："  + (orderModel.transNumber ?? "暂无信息")
-            }
+            //            var array = []
+            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
+            
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailTwoCell", forIndexPath: indexPath) as! WOWOrderDetailTwoCell
+            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
+            //                      cell = (array[0] as? WOWOrderDetailNewCell)!
+            //            let ceell = tableView.dequeueReusableCellWithIdentifier("", forIndexPath: <#T##NSIndexPath#>)
+            //            cell.accessoryType = indexPath.row == 1 ? .DisclosureIndicator : .None
+            //            cell.statusLabel.hidden = indexPath.row == 1 ? true : false
+            //            if indexPath.row == 0{ //订单
+            //                cell.statusLabel.text = orderModel.status_chs
+            //                cell.topLabel.text = "订单：\(orderModel.id ?? "")"
+            //                cell.leftLabel.text = orderModel.created_at
+            //                statusLabel = cell.statusLabel
+            //            }else{ //快递
+            //                cell.topLabel.text = "物流公司：" + (orderModel.transCompany ?? "暂无信息")
+            //                cell.leftLabel.text = "运单号："  + (orderModel.transNumber ?? "暂无信息")
+            //            }
             returnCell = cell
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWAddressCell", forIndexPath: indexPath) as! WOWAddressCell
-                cell.checkButton.hidden = true
-            cell.detailAddressLabel.text = orderModel.address_full
-            cell.phoneLabel.text = orderModel.address_mobile
-            cell.nameLabel.text  = orderModel.address_username
+            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailSThreeCell", forIndexPath: indexPath) as! WOWOrderDetailSThreeCell
+            //                cell.checkButton.hidden = true
+            //            cell.detailAddressLabel.text = orderModel.address_full
+            //            cell.phoneLabel.text = orderModel.address_mobile
+            //            cell.nameLabel.text  = orderModel.address_username
+            //            returnCell = cell
+            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
+            //            var array = []
+            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
+            //             cell = (array[1] as? WOWOrderDetailNewCell)!
             returnCell = cell
             
         case 2:
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWBuyCarNormalCell", forIndexPath: indexPath) as! WOWBuyCarNormalCell
-//            cell.checkButton.hidden = true
-//            cell.hideLeftCheck()
-
-            let itemModel = self.orderModel.products![indexPath.row]
-        cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
-            cell.nameLabel.text = itemModel.name
-//            cell.typeLabel.text = itemModel.sku_title
-            cell.perPriceLabel.text = itemModel.price?.priceFormat()
-            cell.countLabel.text = "x \(itemModel.count ?? "")"
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
+            ////            cell.checkButton.hidden = true
+            ////            cell.hideLeftCheck()
+            //
+            //            let itemModel = self.orderModel.products![indexPath.row]
+            //        cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+            //            cell.nameLabel.text = itemModel.name
+            ////            cell.typeLabel.text = itemModel.sku_title
+            //            cell.perPriceLabel.text = itemModel.price?.priceFormat()
+            //            cell.countLabel.text = "x \(itemModel.count ?? "")"
+            //            returnCell = cell
+            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
+            //            var array = []
+            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
+            //           cell = (array[2] as? WOWOrderDetailNewCell)!
             returnCell = cell
+            
+        case 3:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailFourCell", forIndexPath: indexPath) as! WOWOrderDetailFourCell
+            ////            cell.checkButton.hidden = true
+            ////            cell.hideLeftCheck()
+            //
+            //            let itemModel = self.orderModel.products![indexPath.row]
+            //        cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+            //            cell.nameLabel.text = itemModel.name
+            ////            cell.typeLabel.text = itemModel.sku_title
+            //            cell.perPriceLabel.text = itemModel.price?.priceFormat()
+            //            cell.countLabel.text = "x \(itemModel.count ?? "")"
+            //            returnCell = cell
+            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
+            //            var array = []
+            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
+            //           cell = (array[2] as? WOWOrderDetailNewCell)!
+            returnCell = cell
+        case 4:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailPayCell", forIndexPath: indexPath) as! WOWOrderDetailPayCell
+            ////            cell.checkButton.hidden = true
+            ////            cell.hideLeftCheck()
+            //
+            //            let itemModel = self.orderModel.products![indexPath.row]
+            //        cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+            //            cell.nameLabel.text = itemModel.name
+            ////            cell.typeLabel.text = itemModel.sku_title
+            //            cell.perPriceLabel.text = itemModel.price?.priceFormat()
+            //            cell.countLabel.text = "x \(itemModel.count ?? "")"
+            //            returnCell = cell
+            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
+            //            var array = []
+            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
+            //           cell = (array[2] as? WOWOrderDetailNewCell)!
+//            if indexPath.row == 0 {
+//                cell.payTypeImageView.image = UIImage(named: "alipay")
+//                cell.payTypeLabel.text = "支付宝"
+//            }
+//            if indexPath.row == 1 {
+//                cell.payTypeImageView.image = UIImage(named: "weixin")
+//                cell.payTypeLabel.text = "微信支付"
+//            }
+            
+            returnCell = cell
+            
         default:
             break
         }
+        returnCell.selectionStyle = .None
         return returnCell
     }
     
     /* FIXME:查看物流暂时放这里
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.section {
-        case 0:
-            if indexPath.row == 1{//物流
-                let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderTransController") as! WOWOrderTransController
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        default:
-            break
-        }
-    }
-    */
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     switch indexPath.section {
+     case 0:
+     if indexPath.row == 1{//物流
+     let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderTransController") as! WOWOrderTransController
+     navigationController?.pushViewController(vc, animated: true)
+     }
+     default:
+     break
+     }
+     }
+     */
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
             return 0.01
+        case 3:
+            return 12
         default:
-            return 41
+            return 38
         }
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let titles = [" ","收货人","商品清单"]
+        let titles = [" ","收货人","商品清单","","支付方式"]
         return titles[section]
     }
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
+        if section == 2 {
+            return 40
+        }
+        return 0.01
+    }
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 2 {
+            let view = UIView()
+            view.frame = CGRectMake(0, 0, MGScreenWidth, 40)
+            view.backgroundColor = UIColor.whiteColor()
+            
+            let likeButton = UIButton(type: .System)
+            likeButton.frame = CGRectMake(0, 0, 100, 40)
+            likeButton.center = view.center
+            likeButton.centerX = view.centerX - 10
+            likeButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+            likeButton.setTitleColor(GrayColorlevel3, forState: .Normal)
+            likeButton.setTitle("共7件", forState: .Normal)
+            
+            likeButton.setImage(UIImage(named: "downOrder")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+            likeButton.imageEdgeInsets = UIEdgeInsetsMake(10, 70, 10, 10)
+            likeButton.addTarget(self, action: #selector(clickAction(_:)), forControlEvents: .TouchUpInside)
+            view.addSubview(likeButton)
+            
+            
+            return view
+        }
+        
+        return nil
+    }
     
+    func clickAction(sender:UIButton)  {
+        print("你点击了")
+        
+        if isOpen == true {
+            orderNumber = 7
+            isOpen = false
+        }else{
+            orderNumber = 3
+            isOpen = true
+        }
+        
+        tableView.reloadData()
+        
+    }
     func tableView(tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textColor = MGRgb(109, g: 109, b: 114)

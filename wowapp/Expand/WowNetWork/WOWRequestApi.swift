@@ -53,8 +53,9 @@ public enum RequestApi{
     case Api_productDesigner(designerId: Int)
     
     
-    case Api_Category
-    
+    case Api_Category(categoryId:String) //查看分类
+    case Api_Product_By_Category(asc:Int , currentPage: Int, showCount :Int , sortBy:Int, categoryId:Int ) //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
+
     case Api_Captcha(mobile:String) //绑定微信验证码
     
     //购物车相关
@@ -155,8 +156,6 @@ public enum RequestApi{
     
     case Api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
 
-
-
 }
 
 
@@ -169,6 +168,8 @@ extension RequestApi:TargetType{
         switch self{
         case .Api_Category:
             return URL_category
+        case .Api_Product_By_Category:
+            return URL_producty_by_category
         case .Api_Activity:
             return URL_activity
         case .Api_StoreHome:
@@ -314,7 +315,8 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_OrderBuyNow, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_OrderBuyNow, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category:
+
 
             return .GET
 
@@ -329,6 +331,8 @@ extension RequestApi:TargetType{
     public var parameters:[String: AnyObject]?{
         var params = [String: AnyObject]?()
         switch self{
+            case let .Api_Category(categoryId):
+                params = ["categoryId":categoryId]
             case let .Api_SenceDetail(sceneid,uid):
                 params = ["scene_id":sceneid,"uid":uid]
             case let .Api_Register(account,password,code):

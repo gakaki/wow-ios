@@ -217,14 +217,17 @@ WOWFoundCategoryCellDelegate
     }
     func cellTouchInside(m:WOWFoundProductModel)
     {
-        print(m.productId)
+        print(m.productId!)
 //        self.pushVC(vc:)
     }
     
     func foundCategorycellTouchInside(m:WOWCategoryModel)
     {
-        print(m.categoryID)
-    }
+        if let cid = m.categoryID {
+            print ( cid )
+            toVCCategory(cid)
+        }
+     }
 
 }
 

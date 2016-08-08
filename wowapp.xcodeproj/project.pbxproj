@@ -14,6 +14,10 @@
 		063968701D54601500631BDF /* IPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0639686F1D54601500631BDF /* IPManager.swift */; };
 		063968741D54950B00631BDF /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968731D54950B00631BDF /* VCCategory.swift */; };
 		063968771D549F8000631BDF /* VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968761D549F8000631BDF /* VCManager.swift */; };
+		06568A881D585A30008D2B1A /* ObjectMapper+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */; };
+		06568A8B1D5861F1008D2B1A /* JSONNeverDie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; };
+		06568A8C1D586287008D2B1A /* JSONNeverDie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; };
+		06568A8D1D586287008D2B1A /* JSONNeverDie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		068B60B11D4F3561001AD778 /* Found.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B01D4F3560001AD778 /* Found.storyboard */; };
 		068B60B31D4F3DD5001AD778 /* VCFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60B21D4F3DD5001AD778 /* VCFound.swift */; };
 		068B60B51D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */; };
@@ -326,6 +330,7 @@
 			files = (
 				29FF27181CFDA8C100DF2A9B /* RealmSwift.framework in Embed Frameworks */,
 				06D48E621D57231B00C11088 /* FlexboxLayout.framework in Embed Frameworks */,
+				06568A8D1D586287008D2B1A /* JSONNeverDie.framework in Embed Frameworks */,
 				29FF27161CFDA8C100DF2A9B /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -341,6 +346,8 @@
 		0639686F1D54601500631BDF /* IPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		063968731D54950B00631BDF /* VCCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategory.swift; sourceTree = "<group>"; };
 		063968761D549F8000631BDF /* VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCManager.swift; sourceTree = "<group>"; };
+		06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObjectMapper+Transform.swift"; sourceTree = "<group>"; };
+		06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONNeverDie.framework; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
 		068B60B21D4F3DD5001AD778 /* VCFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCFound.swift; sourceTree = "<group>"; };
 		068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWFoundWeeklyNewCell.xib; sourceTree = "<group>"; };
@@ -683,12 +690,14 @@
 				29FF272F1CFDB5B500DF2A9B /* ImageIO.framework in Frameworks */,
 				29FF272D1CFDB5AB00DF2A9B /* SystemConfiguration.framework in Frameworks */,
 				29FF26F51CFDA86300DF2A9B /* libSocialQQ.a in Frameworks */,
+				06568A8B1D5861F1008D2B1A /* JSONNeverDie.framework in Frameworks */,
 				29FF27031CFDA86300DF2A9B /* libSocialWechat.a in Frameworks */,
 				29FF27041CFDA86300DF2A9B /* libWeChatSDK.a in Frameworks */,
 				29FF26F61CFDA86300DF2A9B /* TencentOpenAPI.framework in Frameworks */,
 				29FF27151CFDA8C000DF2A9B /* Realm.framework in Frameworks */,
 				29FF26F91CFDA86300DF2A9B /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
 				29FF27171CFDA8C100DF2A9B /* RealmSwift.framework in Frameworks */,
+				06568A8C1D586287008D2B1A /* JSONNeverDie.framework in Frameworks */,
 				3ED3BC4851F34DEAC2416C6D /* Pods_wowapp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1040,6 +1049,7 @@
 				0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */,
 				069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */,
 				069E094F1D57942C00F8AE8F /* UILabel+Style.swift */,
+				06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */,
 			);
 			path = WowExtension;
 			sourceTree = "<group>";
@@ -1057,6 +1067,7 @@
 		29FF25E41CFDA86300DF2A9B /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
+				06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */,
 				06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */,
 				0639686D1D545FE900631BDF /* hex-kit.swift */,
 				632A93421D488DCC003A5966 /* CAPSPageMenu */,
@@ -1871,6 +1882,7 @@
 				29FF26B51CFDA86300DF2A9B /* WOWAddressCell.swift in Sources */,
 				063968771D549F8000631BDF /* VCManager.swift in Sources */,
 				29FF26BF1CFDA86300DF2A9B /* WOWNumberMessageView.swift in Sources */,
+				06568A881D585A30008D2B1A /* ObjectMapper+Transform.swift in Sources */,
 				29FF264A1CFDA86300DF2A9B /* WOWPaySuccessController.swift in Sources */,
 				635716A81D45E494006BD746 /* WOWBanner.swift in Sources */,
 				2958BD8E1CFEBB7100F6A6D7 /* WOWInfoTextController.swift in Sources */,

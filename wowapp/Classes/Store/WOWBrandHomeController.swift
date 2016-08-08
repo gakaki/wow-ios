@@ -100,7 +100,8 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let model = dataArr[indexPath.row]
         cell.desLabel.text = model.productName
         cell.priceLabel.text = String(format: "¥ %.2f", model.sellPrice ?? 0)
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+//        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        cell.pictureImageView.set_webimage_url(model.productImg!)
         switch indexPath.row {
         case 0,1:
             cell.topLine.hidden = false

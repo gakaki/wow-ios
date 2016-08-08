@@ -82,7 +82,10 @@ class WOWEditOrderController: WOWBaseViewController {
     //MARK: - Action
     @IBAction func sureClick(sender: UIButton) {
         chooseStyle()
-        
+        guard let addressInfo = addressInfo else {
+            WOWHud.showMsg("请选择收货地址")
+            return
+        }
         if orderCode.isEmpty {
             switch entrance! {
             case editOrderEntrance.buyEntrance:

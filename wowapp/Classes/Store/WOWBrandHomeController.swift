@@ -22,10 +22,10 @@ class WOWBrandHomeController: WOWBaseViewController {
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
-        l.minimumColumnSpacing = 0.5
-        l.minimumInteritemSpacing = 0.5
-        l.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1)
-        l.headerHeight = Float(MGScreenWidth * 2 / 3)
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
+        l.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        l.headerHeight = 355
         return l
     }()
 
@@ -40,8 +40,9 @@ class WOWBrandHomeController: WOWBaseViewController {
     private func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
-        WOWBorderColor(collectionView)
-        collectionView.registerClass(WOWBrandHeaderView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
+//        WOWBorderColor(collectionView)
+
+        collectionView.registerNib(UINib.nibName(String(WOWBrandHeaderView)), forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
 
@@ -72,7 +73,7 @@ class WOWBrandHomeController: WOWBaseViewController {
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
-                strongSelf.dataArr = Mapper<WOWProductModel>().mapArray(JSON(result)["carouselBanners"].arrayObject) ?? [WOWProductModel]()
+                strongSelf.dataArr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject) ?? [WOWProductModel]()
                 strongSelf.collectionView.reloadData()
                 strongSelf.endRefresh()
             }
@@ -99,7 +100,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let model = dataArr[indexPath.row]
         cell.desLabel.text = model.productName
         cell.priceLabel.text = String(format: "¥ %.2f", model.sellPrice ?? 0)
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         switch indexPath.row {
         case 0,1:
             cell.topLine.hidden = false
@@ -113,16 +114,13 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         var reusableView: UICollectionReusableView? = nil
         if kind == CollectionViewWaterfallElementKindSectionHeader {
+            
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as? WOWBrandHeaderView
             if let view = headerView {
-//                view.topHeadView.delegate = self
-//                view.underHeadView.delegate = self
-//                view.topHeadView.headImageView.kf_setImageWithURL(NSURL(string:brandModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"), optionsInfo: nil, completionHandler: {[weak self](image, error, cacheType, imageURL) in
-//                    if let strongSelf = self{
-//                        strongSelf.shareBrandImage = image
-//                    }
-//                })
-//                view.topHeadView.nameLabel.text = brandModel?.name
+                if let brandModel = brandModel {
+                    view.showData(brandModel)
+                }
+                
                 reusableView = view
             }
         }

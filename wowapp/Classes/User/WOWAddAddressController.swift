@@ -41,7 +41,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     var provinceId:Int?     = 0
     var cityId:Int?         = 0
     var countyId:Int?      = 0
-
+    var addressInfo        = WOWAddressListModel()
     
     
     var addressModel : WOWAddressListModel?
@@ -160,9 +160,9 @@ class WOWAddAddressController: WOWBaseTableViewController {
 //            + "值：\(province.name) - \(city.name) - \(district.name)"
         
         let message = "\(province.name) - \(city.name) - \(district.name)"
-        addressModel?.provinceId = (province.id).toInt()
-        addressModel?.cityId = (city.id).toInt()
-        addressModel?.countyId = (district.id).toInt()
+        addressInfo.provinceId = (province.id).toInt()
+        addressInfo.cityId = (city.id).toInt()
+        addressInfo.countyId = (district.id).toInt()
         
         cityTextField.text = message
     }
@@ -195,16 +195,17 @@ class WOWAddAddressController: WOWBaseTableViewController {
             WOWHud.showMsg("请填写详细地址")
             return
         }
-        addressModel?.name = name
-        addressModel?.mobile = phoneTextField.text
-        addressModel?.addressDetail = detailAddress
-        addressModel?.isDefault  = defaultAddress
+        
+        addressInfo.name = name
+        addressInfo.mobile = phoneTextField.text
+        addressInfo.addressDetail = detailAddress
+        addressInfo.isDefault  = defaultAddress
         
         switch addressEntrance! {
         case .addAddress:
-            addAddress(addressModel!)
+            addAddress(addressInfo)
         case .editAddress:
-            editAddress(addressModel!)
+            editAddress(addressInfo)
         }
 
         

@@ -68,7 +68,7 @@ let URL_BrandList               = "brand/list"
 
 let URL_BrandDetail             = "brand/detail"
 
-let URL_ProductBrand            = "productBrand"                //查询品牌产品
+let URL_ProductBrand            = "product/brand"                //查询品牌产品
 
 let URL_LikeProduct             = "user/product/favorite-list"    //喜欢的品牌列表
 

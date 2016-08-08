@@ -328,7 +328,7 @@ extension RequestApi:TargetType{
             case let .Api_Login(account,password):
                 params = ["mobile":account,"password":password]
             case let .Api_BrandDetail(brandid):
-                params = ["brandid": brandid]
+                params = ["brandId": brandid]
             case let .Api_ProductBrand(brandId):
                 params = ["brandId": brandId]
             case let .Api_ProductList(pageindex,categoryID,style,sort,uid,keyword):

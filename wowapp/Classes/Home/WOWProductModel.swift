@@ -25,6 +25,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var firstNonPrimaryImgDesc: String?
     var detailDescription     : String?
     var productParameter      : WOWParameter?
+    var productImg            : String?
     
     
     var productDes      : String?
@@ -86,7 +87,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         designer_image  <- map["designer_image"]
         
         /*************************新版Map***********************/
-        productId               <- map["id"]
+        productId               <- map["productId"]
         primaryImgs             <- map["primaryImgs"]
         productName             <- map["productName"]
         sellPrice               <- map["sellPrice"]
@@ -101,7 +102,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         firstNonPrimaryImgDesc  <- map["firstNonPrimaryImgDesc"]
         detailDescription       <- map["detailDescription"]
         productParameter        <- map["productParameter"]
-        
+        productImg              <- map["productImg"]
     
         
     }

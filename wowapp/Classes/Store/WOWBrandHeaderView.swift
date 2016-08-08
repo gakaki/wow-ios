@@ -15,8 +15,19 @@ class WOWBrandHeaderView: UICollectionReusableView {
     @IBOutlet weak var brandDescLabel: UILabel!
     @IBOutlet weak var downButton: UIButton!
   
-    func showData() {
-    
+    func showData(model: WOWBrandV1Model) {
+       
+        logoImage.layer.cornerRadius = 40
+        logoImage.layer.masksToBounds = true
+        logoImage.kf_setImageWithURL(NSURL(string: model.image), placeholderImage: UIImage(named: "placeholder_product"))
+        brandNameLabel.text = model.brandEname ?? ""
+        let str = NSMutableAttributedString(string: model.desc ?? "")
+        let style = NSMutableParagraphStyle()
+        style.lineHeightMultiple = 1.5      //设置1.5倍行距
+        style.lineBreakMode = .ByTruncatingTail
+        str.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
+        brandDescLabel.attributedText = str
+
     }
  
 

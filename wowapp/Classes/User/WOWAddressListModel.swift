@@ -24,7 +24,13 @@ class WOWAddressListModel: WOWBaseModel,Mappable{
     var cityId          : Int?
     var countyId        : Int?
     
+    override init() {
+        super.init()
+    }
+
+    
     required init?(_ map: Map) {
+
         
     }
     

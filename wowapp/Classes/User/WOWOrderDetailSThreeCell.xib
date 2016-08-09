@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WOWOrderDetailSThreeCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="t1G-Wt-9he" customClass="WOWOrderDetailSThreeCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t1G-Wt-9he" id="S5p-Jb-qfq">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卷卷  1873628383" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-jx-xWu">
+                        <rect key="frame" x="15" y="11" width="286" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="I8A-Br-sRe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海市杨浦区控江路1500弄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1z-i5-V0J">
+                        <rect key="frame" x="15" y="40" width="286" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="EQD-aj-FpS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="l1z-i5-V0J" secondAttribute="trailing" constant="11" id="7dA-wG-dzg"/>
+                    <constraint firstItem="l1z-i5-V0J" firstAttribute="top" secondItem="S5p-Jb-qfq" secondAttribute="topMargin" constant="32" id="7nY-rA-3rz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="H6J-jx-xWu" secondAttribute="trailing" constant="11" id="FgX-IJ-41d"/>
+                    <constraint firstItem="H6J-jx-xWu" firstAttribute="leading" secondItem="S5p-Jb-qfq" secondAttribute="leadingMargin" constant="7" id="ZdJ-fa-QZB"/>
+                    <constraint firstItem="H6J-jx-xWu" firstAttribute="top" secondItem="S5p-Jb-qfq" secondAttribute="topMargin" constant="3" id="bZr-8c-lyG"/>
+                    <constraint firstItem="l1z-i5-V0J" firstAttribute="leading" secondItem="S5p-Jb-qfq" secondAttribute="leadingMargin" constant="7" id="raV-wq-mL0"/>
+                </constraints>
             </tableViewCellContentView>
+            <point key="canvasLocation" x="363" y="336"/>
         </tableViewCell>
     </objects>
 </document>

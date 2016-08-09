@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWRegistController: WOWBaseViewController {
-    var fromUserCenter      :Bool = false
+    var isPresent      :Bool = false
     var byWechat            :Bool = false
     var userInfoFromWechat  :SSDKUser = SSDKUser()
     
@@ -148,7 +148,7 @@ class WOWRegistController: WOWBaseViewController {
                     if newUser == 0 {
                         strongSelf.toLoginSuccess()
                     }else {
-                        strongSelf.toRegInfo(strongSelf.fromUserCenter)
+                        strongSelf.toRegInfo(strongSelf.isPresent)
                     }
                     
         }

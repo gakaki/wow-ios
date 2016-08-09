@@ -10,7 +10,7 @@
 import UIKit
 
 class WOWRegistInfoFirstController: WOWBaseTableViewController {
-    var fromUserCenter:Bool = false
+    var isPresent:Bool = false
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var telTextField: UITextField!
@@ -59,7 +59,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
             if let strongSelf = self{
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
                     strongSelf.navigationController?.popViewControllerAnimated(true)
-                    if strongSelf.fromUserCenter{
+                    if strongSelf.isPresent{
                         UIApplication.appTabBarController.selectedIndex = 0
                     }
                 })
@@ -92,7 +92,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
                 WOWUserManager.userDes = strongSelf.descTextField.text ?? ""
                 
                 let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistInfoSecondController)) as! WOWRegistInfoSecondController
-                vc.fromUserCenter = strongSelf.fromUserCenter
+                vc.isPresent = strongSelf.isPresent
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
                 
             }

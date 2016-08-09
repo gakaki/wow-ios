@@ -16,6 +16,7 @@ typealias SuccessClosure          = (result:AnyObject) ->()
 enum RequestCode:String{
     case FailError = "40000"
     case Success = "0"      //数据请求成功
+    case Login = "10000"    //session过期或无效
 }
 
 //MARK:前后端约定的返回数据结构
@@ -72,6 +73,7 @@ class WOWNetManager {
                     
                     
                     if let code = info?.code{
+                       
                         guard code == RequestCode.Success.rawValue else{
                             failClosure(errorMsg:info?.message)
                             WOWHud.showMsg(info?.message)
@@ -91,14 +93,13 @@ class WOWNetManager {
                     
                     if let endMsg = target.endSuccessMsg{
                         if endMsg == ""{
-                            
+                            WOWHud.dismiss()
                         }else{
                             WOWHud.showMsg(endMsg)
                         }
                     }else{
                         WOWHud.dismiss()
                     }
-                    WOWHud.dismiss()
                     successClosure(result:info?.data ?? "")
                 case let .Failure(error):
                     DLog(error)

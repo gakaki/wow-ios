@@ -84,6 +84,7 @@ class WOWFavDesigner: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeDesigner, successClosure: { [weak self](result) in
             if let strongSelf = self{
+                WOWHud.dismiss()
                 let designerList = Mapper<WOWFavoriteDesignerModel>().mapArray(JSON(result)["favoriteDesignerVoList"].arrayObject)
                 if let designerList = designerList{
                     strongSelf.dataArr = designerList

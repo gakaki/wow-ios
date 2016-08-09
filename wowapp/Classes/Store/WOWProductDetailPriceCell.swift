@@ -17,6 +17,8 @@ class WOWProductDetailPriceCell: UITableViewCell {
         super.awakeFromNib()
         actualPriceLabel.font   = UIFont.priceFont(17)
         originalPriceLabel.font = UIFont.priceFont(12)
+       
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

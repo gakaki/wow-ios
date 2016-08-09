@@ -83,6 +83,7 @@ class WOWFavBrand: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeBrand, successClosure: { [weak self](result) in
             if let strongSelf = self{
+                WOWHud.dismiss()
                 let brandList = Mapper<WOWBrandListModel>().mapArray(JSON(result)["favoriteBrandVoList"].arrayObject)
                 if let brandList = brandList{
                     strongSelf.dataArr = brandList

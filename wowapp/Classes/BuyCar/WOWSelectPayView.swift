@@ -36,7 +36,7 @@ class WOWPayBackView: UIView {
     lazy var dismissButton:UIButton = {
         let b = UIButton(type: .System)
         b.backgroundColor = UIColor.clearColor()
-        b.addTarget(self, action: #selector(hidePayView), forControlEvents:.TouchUpInside)
+//        b.addTarget(self, action: #selector(hidePayView), forControlEvents:.TouchUpInside)
         return b
     }()
     //MARK:Private Method

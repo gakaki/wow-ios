@@ -82,6 +82,43 @@ class WOWAddressController: WOWBaseViewController {
                 
         }
     }
+    
+    //选择默认地址
+    func checkDefaut(sender:UIButton) {
+        let model = dataArr[sender.tag]
+        //如果这个地址本来就是默认的就不进这个方法
+        guard model.isDefault!  else {
+            let addressId = model.id ?? 0
+            
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressSetDefault(id: addressId), successClosure: {[weak self] (result) in
+                if let strongSelf = self{
+                    for model:WOWAddressListModel in strongSelf.dataArr {
+                        model.isDefault = false
+                    }
+                    model.isDefault = true
+                    strongSelf.tableView.reloadData()
+                }
+            }) { (errorMsg) in
+                
+            }
+            
+            return
+        }
+        
+    }
+    //删除收货地址
+    func deleteAddress(indexPath:NSIndexPath) {
+        let model = self.dataArr[indexPath.section]
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(id:model.id ?? 0), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                strongSelf.dataArr.removeAtIndex(indexPath.section)
+                strongSelf.tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+                strongSelf.tableView.reloadData()
+            }
+        }) {(errorMsg) in
+            
+        }
+    }
 }
 
 
@@ -151,35 +188,15 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
     }
      func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
       
-        let delete = UITableViewRowAction(style: .Default, title: "删除") { (action, indexPath) in
-            self.deleteAddress(indexPath)
+        let delete = UITableViewRowAction(style: .Default, title: "删除") { [weak self](action, indexPath) in
+            if let strongSelf = self {
+                strongSelf.alertView(indexPath)
+            }
         }
         return [delete]
     }
     
-    //选择默认地址
-    func checkDefaut(sender:UIButton) {
-        let model = dataArr[sender.tag]
-        //如果这个地址本来就是默认的就不进这个方法
-        guard model.isDefault!  else {
-            let addressId = model.id ?? 0
-            
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressSetDefault(id: addressId), successClosure: {[weak self] (result) in
-                if let strongSelf = self{
-                    for model:WOWAddressListModel in strongSelf.dataArr {
-                        model.isDefault = false
-                    }
-                    model.isDefault = true
-                    strongSelf.tableView.reloadData()
-                }
-            }) { (errorMsg) in
-                
-            }
-            
-            return
-        }
-        
-    }
+    
 
     
     func editAddress(sender:UIButton) {
@@ -197,18 +214,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
     
     
     
-    func deleteAddress(indexPath:NSIndexPath) {
-        let model = self.dataArr[indexPath.section]
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDelete(id:model.id ?? 0), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-                strongSelf.dataArr.removeAtIndex(indexPath.section)
-                strongSelf.tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
-                strongSelf.tableView.reloadData()
-            }
-        }) {(errorMsg) in
-            
-        }
-    }
+
 }
 
 
@@ -217,6 +223,24 @@ extension WOWAddressController{
         let text = "你还没添加收货地址"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.systemScaleFontSize(17)])
         return attri
+    }
+    
+    
+    func alertView(indexPath: NSIndexPath) {
+        let alert = UIAlertController(title: "", message: "确定删除收货地址？", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title:"取消", style: .Cancel, handler: { (action) in
+            DLog("取消")
+        })
+        
+        let sure   = UIAlertAction(title: "确定", style: .Default) {[weak self] (action) in
+            if let strongSelf = self{
+                strongSelf.deleteAddress(indexPath)
+            }
+        }
+        alert.addAction(cancel)
+        alert.addAction(sure)
+        presentViewController(alert, animated: true, completion: nil)
+
     }
 }
 

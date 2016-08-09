@@ -32,15 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         configRootVC()
     
-        /**
-         拉取配置数据
-         */
+        
 
-
+        
         window?.makeKeyAndVisible()
         return true
     }
-    
+ 
     
     
     

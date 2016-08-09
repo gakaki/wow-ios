@@ -31,7 +31,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lVT-eG-irk">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_check" translatesAutoresizingMaskIntoConstraints="NO" id="lVT-eG-irk">
                         <rect key="frame" x="272" y="19" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="DN3-kg-n64"/>
@@ -49,6 +49,14 @@
                     <constraint firstItem="nLy-cq-xIm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="47" id="ecd-yo-AsO"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="isClooseImageView" destination="lVT-eG-irk" id="Z3A-1s-hPD"/>
+                <outlet property="payTypeImageView" destination="qVg-MK-f4f" id="d3u-v1-616"/>
+                <outlet property="payTypeLabel" destination="nLy-cq-xIm" id="eVP-4J-9SE"/>
+            </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="car_check" width="16" height="16"/>
+    </resources>
 </document>

@@ -122,3 +122,69 @@ class WOWNewOrderListModel: WOWBaseModel,Mappable{
         
     }
 }
+/// 已经发货MOdel
+class WOWNewForGoodsModel: WOWBaseModel,Mappable{
+    
+    var deliveryCompanyName              : String? //快递公司名称
+    
+    var deliveryOrderNo       : String?// 快递单号
+
+    
+    var productArray : [WOWNewProductModel]? // 产品列表
+    
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        
+        deliveryCompanyName                  <- map["deliveryCompanyName"]
+        
+        deliveryOrderNo            <- map["deliveryOrderNo"]
+        
+        productArray              <- map["productArray"]
+        
+    }
+}
+/// 产品model
+class WOWNewProductModel: WOWBaseModel,Mappable{
+    
+    var productId              : Int? //产品id
+    
+    var productName       : String?// 产品名称
+    
+    var sellPrice     : Double?// 产品销售价格
+    
+    var productQty     : Int?// 产品数量
+    
+    var sellTotalAmount : Double?//产品销售价乘以数量
+    
+    var color : String?// 产品颜色
+    
+    //    var productSpecImgs : Array<String> = [] // 产品规格图片列表
+    
+    var specImg : String? // 规格图片
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        
+        productId                  <- map["productId"]
+        
+        productName            <- map["productName"]
+        
+        sellTotalAmount              <- map["sellTotalAmount"]
+        
+        color          <- map["color"]
+        
+        specImg               <- map["specImg"]
+        
+        sellPrice          <- map["sellPrice"]
+        
+        productQty    <- map["productQty"]
+        
+    }
+}

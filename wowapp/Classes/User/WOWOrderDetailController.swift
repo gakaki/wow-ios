@@ -8,6 +8,13 @@
 
 import UIKit
 
+
+enum OrderNewType {
+    case payMent            //= "待付款"
+    case forGoods           //= "待收货"
+    case finish             //= "已完成"
+    case someFinishForGoods //= "部分完成"
+}
 protocol OrderDetailDelegate:class{
     func orderStatusChange()
 }
@@ -15,6 +22,16 @@ protocol OrderDetailDelegate:class{
 
 class WOWOrderDetailController: WOWBaseViewController{
     var orderModel                  : WOWOrderListModel!
+    var orderNewModel               : WOWNewOrderListModel!
+    
+    
+    var forGoods1 : WOWNewForGoodsModel!
+    var forProduct1 : WOWNewProductModel!
+    var forProduct2 : WOWNewProductModel!
+    var forProduct3 : WOWNewProductModel!
+    
+    var OrderDetailNewaType         : OrderNewType = .someFinishForGoods
+    //    let orderNewType : String!
     var orderNumber                 : Int!
     var isOpen                      : Bool!
     @IBOutlet weak var tableView    : UITableView!
@@ -22,10 +39,24 @@ class WOWOrderDetailController: WOWBaseViewController{
     @IBOutlet weak var priceLabel   : UILabel!
     @IBOutlet weak var rightButton  : UIButton!
     var statusLabel                 : UILabel!
+
+    
+    var dataArr =  [WOWNewForGoodsModel]() // 数组里存放字典 ，字典里存放model
+    
     weak var delegate               : OrderDetailDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        forGoods1.deliveryCompanyName = "天天快递"
+        forGoods1.deliveryOrderNo = "2323232323"
         
+        forProduct1.productName = "1"
+        forProduct2.productName = "2"
+        forProduct3.productName = "3"
+        
+        forGoods1.productArray = [forProduct1,forProduct2,forProduct3]
+        
+        dataArr.append(forGoods1)
         
     }
     
@@ -42,6 +73,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         WOWBorderColor(rightButton)
         navigationItem.title = "订单详情"
         configTableView()
+        
         //        configBottomView()
     }
     
@@ -110,8 +142,8 @@ class WOWOrderDetailController: WOWBaseViewController{
     
     private func commentOrder(){
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
-//        vc.orderID = orderModel.id ?? ""
-//        vc.delegate = self
+        //        vc.orderID = orderModel.id ?? ""
+        //        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -161,158 +193,267 @@ extension WOWOrderDetailController:OrderCommentDelegate{
 
 extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        switch OrderDetailNewaType {
+        case .payMent:
+            return 5
+        case .forGoods:
+            return 4
+        case .someFinishForGoods:
+            return 6
+            
+        default:
+            break
+        }
         return 5
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0: //订单
-            //            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
-            //            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
-            //                return 1
-            //            default:
-            //                return 2
-            //            }
-            return 1
+        switch OrderDetailNewaType {
+        case .payMent:
+            switch section {
+            case 0: //订单
+                //            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
+                //            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
+                //                return 1
+                //            default:
+                //                return 2
+                //            }
+                return 1
+                
+            case 1: //收货人
+                return 1
+            case 2: //商品清单
+                //            return orderModel.products?.count ?? 0
+                return orderNumber
+            case 3: //运费
+                return 2
+            case 4: //支付方式
+                return 2
+            default:
+                return 1
+            }
+        case .forGoods:
+            switch section {
+            case 0: //订单
+                //            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
+                //            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
+                //                return 1
+                //            default:
+                //                return 2
+                //            }
+                return 2
+                
+            case 1: //收货人
+                return 1
+            case 2: //商品清单
+                //            return orderModel.products?.count ?? 0
+                return orderNumber
+            case 3: //运费
+                return 2
+            default:
+                return 1
+            }
+        case .someFinishForGoods:
+            switch section {
+            case 0: //订单
+                //            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
+                //            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
+                //                return 1
+                //            default:
+                //                return 2
+                //            }
+                return 1
+                
+            case 1: //收货人
+                return 1
+            case 2: //商品清单
+                //            return orderModel.products?.count ?? 0
+                return orderNumber
+            case 3: //运费
+                return 2
+            case 4: //支付方式
+                return 2
+            default:
+                return 2
+            }
             
-        case 1: //收货人
-            return 1
-        case 2: //商品清单
-            //            return orderModel.products?.count ?? 0
-            return orderNumber
-        case 3: //运费
-            return 2
-        case 4: //支付方式
-            return 2
         default:
-            return 1
+            return 0
         }
+        
         
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 44
-        case 1:
-            return 70
-        case 2:
-            return 70
-        case 3:
-            return 50
-        case 4:
-            return 60
+        
+        switch OrderDetailNewaType {
+        case .payMent:
+            switch indexPath.section {
+            case 0:
+                return 44
+            case 1:
+                return 70
+            case 2:
+                return 70
+            case 3:
+                return 50
+            case 4:
+                return 60
+            default:
+                return 0
+            }
+            
+        case .forGoods:
+            switch indexPath.section {
+            case 0:
+                if indexPath.row == 0 {
+                    return 44
+                }else{
+                    return 70
+                }
+            case 1:
+                return 70
+            case 2:
+                return 70
+            case 3:
+                return 50
+            default:
+                return 0
+            }
+        case .someFinishForGoods:
+            switch indexPath.section {
+            case 0:
+                return 44
+            case 1:
+                return 70
+            case 2:
+                return 70
+            case 3:
+                return 70
+            case 4:
+                return 70
+            case 5:
+                return 50
+            default:
+                return 0
+            }
+            
+            
         default:
             return 0
         }
+        
+        
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var returnCell:UITableViewCell!
-        switch indexPath.section {
-        case 0:
-            //            var array = []
-            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
+        switch OrderDetailNewaType {
+        case .payMent:
+            switch indexPath.section {
+            case 0:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailTwoCell", forIndexPath: indexPath) as! WOWOrderDetailTwoCell
+                returnCell = cell
+            case 1:
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailSThreeCell", forIndexPath: indexPath) as! WOWOrderDetailSThreeCell
+                returnCell = cell
+                
+            case 2:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
+                returnCell = cell
+                
+            case 3:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailFourCell", forIndexPath: indexPath) as! WOWOrderDetailFourCell
+                returnCell = cell
+            case 4:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailPayCell", forIndexPath: indexPath) as! WOWOrderDetailPayCell
+                if indexPath.row == 0 {
+                    cell.payTypeImageView.image = UIImage(named: "alipay")
+                    cell.payTypeLabel.text = "支付宝"
+                }
+                if indexPath.row == 1 {
+                    cell.payTypeImageView.image = UIImage(named: "weixin")
+                    cell.payTypeLabel.text = "微信支付"
+                }
+                
+                returnCell = cell
+                
+            default:
+                break
+            }
             
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailTwoCell", forIndexPath: indexPath) as! WOWOrderDetailTwoCell
-            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
-            //                      cell = (array[0] as? WOWOrderDetailNewCell)!
-            //            let ceell = tableView.dequeueReusableCellWithIdentifier("", forIndexPath: <#T##NSIndexPath#>)
-            //            cell.accessoryType = indexPath.row == 1 ? .DisclosureIndicator : .None
-            //            cell.statusLabel.hidden = indexPath.row == 1 ? true : false
-            //            if indexPath.row == 0{ //订单
-            //                cell.statusLabel.text = orderModel.status_chs
-            //                cell.topLabel.text = "订单：\(orderModel.id ?? "")"
-            //                cell.leftLabel.text = orderModel.created_at
-            //                statusLabel = cell.statusLabel
-            //            }else{ //快递
-            //                cell.topLabel.text = "物流公司：" + (orderModel.transCompany ?? "暂无信息")
-            //                cell.leftLabel.text = "运单号："  + (orderModel.transNumber ?? "暂无信息")
-            //            }
-            returnCell = cell
-        case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailSThreeCell", forIndexPath: indexPath) as! WOWOrderDetailSThreeCell
-            //                cell.checkButton.hidden = true
-            //            cell.detailAddressLabel.text = orderModel.address_full
-            //            cell.phoneLabel.text = orderModel.address_mobile
-            //            cell.nameLabel.text  = orderModel.address_username
-            //            returnCell = cell
-            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
-            //            var array = []
-            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
-            //             cell = (array[1] as? WOWOrderDetailNewCell)!
-            returnCell = cell
-            
-        case 2:
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
-            ////            cell.checkButton.hidden = true
-            ////            cell.hideLeftCheck()
-            //
-            //            let itemModel = self.orderModel.products![indexPath.row]
-            //        cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
-            //            cell.nameLabel.text = itemModel.name
-            ////            cell.typeLabel.text = itemModel.sku_title
-            //            cell.perPriceLabel.text = itemModel.price?.priceFormat()
-            //            cell.countLabel.text = "x \(itemModel.count ?? "")"
-            //            returnCell = cell
-            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
-            //            var array = []
-            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
-            //           cell = (array[2] as? WOWOrderDetailNewCell)!
-            returnCell = cell
-            
-        case 3:
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailFourCell", forIndexPath: indexPath) as! WOWOrderDetailFourCell
-            ////            cell.checkButton.hidden = true
-            ////            cell.hideLeftCheck()
-            //
-            //            let itemModel = self.orderModel.products![indexPath.row]
-            //        cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
-            //            cell.nameLabel.text = itemModel.name
-            ////            cell.typeLabel.text = itemModel.sku_title
-            //            cell.perPriceLabel.text = itemModel.price?.priceFormat()
-            //            cell.countLabel.text = "x \(itemModel.count ?? "")"
-            //            returnCell = cell
-            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
-            //            var array = []
-            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
-            //           cell = (array[2] as? WOWOrderDetailNewCell)!
-            returnCell = cell
-        case 4:
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailPayCell", forIndexPath: indexPath) as! WOWOrderDetailPayCell
-            ////            cell.checkButton.hidden = true
-            ////            cell.hideLeftCheck()
-            //
-            //            let itemModel = self.orderModel.products![indexPath.row]
-            //        cell.goodsImageView.kf_setImageWithURL(NSURL(string:itemModel.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
-            //            cell.nameLabel.text = itemModel.name
-            ////            cell.typeLabel.text = itemModel.sku_title
-            //            cell.perPriceLabel.text = itemModel.price?.priceFormat()
-            //            cell.countLabel.text = "x \(itemModel.count ?? "")"
-            //            returnCell = cell
-            //            var cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell")
-            //            var array = []
-            //            array = NSBundle.mainBundle().loadNibNamed("WOWOrderDetailNewCell", owner: self, options: nil)
-            //           cell = (array[2] as? WOWOrderDetailNewCell)!
-//            if indexPath.row == 0 {
-//                cell.payTypeImageView.image = UIImage(named: "alipay")
-//                cell.payTypeLabel.text = "支付宝"
-//            }
-//            if indexPath.row == 1 {
-//                cell.payTypeImageView.image = UIImage(named: "weixin")
-//                cell.payTypeLabel.text = "微信支付"
-//            }
-            
-            returnCell = cell
+        case .forGoods:
+            switch indexPath.section {
+            case 0:
+                if indexPath.row == 0 {
+                    let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailTwoCell", forIndexPath: indexPath) as! WOWOrderDetailTwoCell
+                    returnCell = cell
+                }else{
+                    let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailSThreeCell", forIndexPath: indexPath) as! WOWOrderDetailSThreeCell
+                    returnCell = cell
+                    
+                }
+                
+            case 1:
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailSThreeCell", forIndexPath: indexPath) as! WOWOrderDetailSThreeCell
+                
+                returnCell = cell
+                
+            case 2:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
+                returnCell = cell
+                
+            case 3:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailFourCell", forIndexPath: indexPath) as! WOWOrderDetailFourCell
+                returnCell = cell
+                
+            default:
+                break
+            }
+        case .someFinishForGoods:
+            switch indexPath.section {
+            case 0:
+                
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailTwoCell", forIndexPath: indexPath) as! WOWOrderDetailTwoCell
+                returnCell = cell
+            case 1:
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailSThreeCell", forIndexPath: indexPath) as! WOWOrderDetailSThreeCell
+                returnCell = cell
+                
+            case 2:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
+                returnCell = cell
+                
+            case 3:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
+                returnCell = cell
+            case 4:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailFourCell", forIndexPath: indexPath) as! WOWOrderDetailFourCell
+                
+                returnCell = cell
+                
+            default:
+                break
+            }
             
         default:
             break
         }
+        
+        
+        
+        
         returnCell.selectionStyle = .None
         return returnCell
     }
@@ -332,19 +473,47 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
      */
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0.01
-        case 3:
-            return 12
+        switch OrderDetailNewaType {
+        case .someFinishForGoods:
+            switch section {
+            case 0:
+                return 0.01
+            case 4:
+                return 12
+            default:
+                return 38
+            }
+            
         default:
-            return 38
+            switch section {
+            case 0:
+                return 0.01
+            case 3:
+                return 12
+            default:
+                return 38
+            }
+            
         }
+        
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let titles = [" ","收货人","商品清单","","支付方式"]
-        return titles[section]
+        switch OrderDetailNewaType {
+        case .payMent:
+            let titles = [" ","收货人","商品清单","","支付方式"]
+            return titles[section]
+        case .forGoods:
+            let titles = [" ","收货人","商品清单",""]
+            return titles[section]
+        case .someFinishForGoods:
+            let titles = [" ","收货人","已发货商品清单","未商品清单",""]
+            return titles[section]
+        default:
+            return nil
+        }
+        
+        
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
         if section == 2 {

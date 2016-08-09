@@ -24,6 +24,9 @@ let WOWGoodsSureBuyNotificationKey      = "WOWGoodsSureBuyNotificationKey"
 
 let WOWGoodsSureAddCarNotificationKey   = "WOWGoodsSureAddCarNotificationKey"
 
+//跳到登录
+let  WOWToLoginNotificationKey          = "WOWToLoginNotificationKey"
+
 //登录成功
 let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
 

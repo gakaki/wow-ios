@@ -13,7 +13,7 @@ class WOWLoginController: WOWBaseViewController {
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var tipsLabel: UILabel!
-    var fromUserCenter:Bool = false
+    var isPresent:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +49,7 @@ class WOWLoginController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func regist(sender: UIButton) {
-        toRegVC(false,fromUserCenter: fromUserCenter)
+        toRegVC(false,isPresent: isPresent)
     }
     
     
@@ -76,7 +76,7 @@ class WOWLoginController: WOWBaseViewController {
 //        })
         
 
-        toWeixinVC(fromUserCenter)
+        toWeixinVC(isPresent)
     }
     
     
@@ -101,7 +101,7 @@ class WOWLoginController: WOWBaseViewController {
                 DLog(result)
                 let model = Mapper<WOWUserModel>().map(result)
                 WOWUserManager.saveUserInfo(model)
-                strongSelf.toLoginSuccess(strongSelf.fromUserCenter)
+                strongSelf.toLoginSuccess(strongSelf.isPresent)
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{

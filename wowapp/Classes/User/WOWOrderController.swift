@@ -44,7 +44,7 @@ class WOWOrderController: WOWBaseViewController {
         super.viewDidLoad()
         tableView.mj_header = self.mj_header
         
-        tableView.mj_footer = self.mj_footer
+//        tableView.mj_footer = self.mj_footer
         
         request()
     }
@@ -124,16 +124,15 @@ class WOWOrderController: WOWBaseViewController {
                 let arr = Mapper<WOWNewOrderListModel>().mapArray(json)
                 
                 if let array = arr{
+    
                     if strongSelf.pageIndex == 1{
                         strongSelf.dataArr = []
                     }
                     strongSelf.dataArr.appendContentsOf(array)
-                    
-                    if strongSelf.pageIndex == totalPage - 1 || totalPage == 0 || arr == nil{
-                        strongSelf.tableView.mj_footer = nil
-                    }else{
-                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
-                    }
+                    strongSelf.tableView.mj_footer = strongSelf.mj_footer
+
+                }else {
+                    strongSelf.tableView.mj_footer = nil
 
                 }
 
@@ -321,6 +320,9 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         let text = "暂无订单哦"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
+    }
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
     }
     
     func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {

@@ -41,7 +41,7 @@ class WOWBuyBackView: UIView {
     lazy var dismissButton:UIButton = {
         let b = UIButton(type: .System)
         b.backgroundColor = UIColor.clearColor()
-        b.addTarget(self, action: #selector(hideBuyView), forControlEvents:.TouchUpInside)
+//        b.addTarget(self, action: #selector(hideBuyView), forControlEvents:.TouchUpInside)
         return b
     }()
 //MARK:Private Method
@@ -134,6 +134,13 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     @IBOutlet weak var secondCollectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var specView: UIView!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var colorWarnImg: UIImageView!
+    @IBOutlet weak var specWarnImg: UIImageView!
+    
+  
+    private var _layer: CALayer!
+    private var path: UIBezierPath!
+
     
     let identifier = "WOWTagCollectionViewCell"
     var entrance : carEntrance = carEntrance.SpecEntrance
@@ -308,25 +315,23 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
     @IBAction func sureButtonClick(sender: UIButton) {
         
-        guard colorIndex >= 0 else {
-            WOWHud.showMsg("请选择产品颜色")
-            return
-        }
-        guard specIndex >= 0 else {
-            WOWHud.showMsg("请选择产品规格")
-            return
-        }
-        guard skuCount > 0 else {
-            WOWHud.showMsg("所选产品无库存")
+        if !validateMethods(){
             return
         }
         self.productInfo?.productQty = skuCount
         switch entrance {
         case .AddEntrance:
-            if let del = delegate {
+            startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                
+                if let del = self.delegate {
+                    self.productInfo?.productQty = self.skuCount
+                    
+                    del.sureAddCarClick(self.productInfo)
+                    
+                }
+            })
 
-                del.sureAddCarClick(productInfo)
-            }
         case .PayEntrance:
        
              if let del = delegate {
@@ -356,36 +361,25 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     
     @IBAction func addCarButtonClick(sender: UIButton) {
-        guard colorIndex >= 0 else {
-            WOWHud.showMsg("请选择产品颜色")
+        if !validateMethods(){
             return
         }
-        guard specIndex >= 0 else {
-            WOWHud.showMsg("请选择产品规格")
-            return
-        }
-        guard skuCount > 0 else {
-            WOWHud.showMsg("所选产品无库存")
-            return
-        }
-        if let del = delegate {
-            self.productInfo?.productQty = skuCount
-            del.sureAddCarClick(productInfo)
-           
-        }
+
+        startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            
+            if let del = self.delegate {
+                self.productInfo?.productQty = self.skuCount
+                
+                del.sureAddCarClick(self.productInfo)
+                    
+            }
+        })
+        
     }
     
     @IBAction func payButtonClick(sender: UIButton) {
-        guard colorIndex >= 0 else {
-            WOWHud.showMsg("请选择产品颜色")
-            return
-        }
-        guard specIndex >= 0 else {
-            WOWHud.showMsg("请选择产品规格")
-            return
-        }
-        guard skuCount > 0 else {
-            WOWHud.showMsg("所选产品无库存")
+        if !validateMethods(){
             return
         }
         
@@ -405,6 +399,34 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             subButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
         self.countTextField.text = "\(count)"
+    }
+    
+    //MARK: - validate Methods
+    private func validateMethods() -> Bool{
+        colorWarnImg.hidden = true
+        specWarnImg.hidden = true
+        if colorIndex < 0 && specIndex < 0 {
+            colorWarnImg.hidden = false
+            specWarnImg.hidden = false
+            WOWHud.showMsg("请选择产品颜色与规格")
+            return false
+        }
+        guard colorIndex >= 0 else {
+            colorWarnImg.hidden = false
+            WOWHud.showMsg("请选择产品颜色")
+            return false
+        }
+        guard specIndex >= 0 else {
+            specWarnImg.hidden = false
+            WOWHud.showMsg("请选择产品规格")
+            return false
+        }
+        guard skuCount > 0 else {
+            WOWHud.showMsg("所选产品无库存")
+            return false
+        }
+
+        return true
     }
 
 
@@ -596,6 +618,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         updateCellStatus(cell, selected: false)
 
     }
+    //更新cell点击状态
     func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
         cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
         cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
@@ -609,7 +632,95 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         return true
 
     }
- 
+    //MARK: - 添加购物车动画
+    
     
 }
+extension WOWGoodsBuyView {
+
+    func startAnimationWithRect(rect: CGRect, ImageView imageView:UIImageView)
+    {
+        if _layer == nil {
+            
+            _layer = CALayer()
+            _layer.contents = imageView.layer.contents
+            
+            _layer.contentsGravity = kCAGravityResizeAspectFill
+            _layer.frame = rect
+            // 导航64
+            _layer.position = CGPointMake(imageView.center.x, CGRectGetMidY(rect));
+            self.layer.addSublayer(_layer)
+            
+            self.path = UIBezierPath()
+            self.path.moveToPoint(_layer.position)
+            
+            //动画移动的位置
+            self.path.addQuadCurveToPoint(CGPointMake(MGScreenWidth - 22, -MGScreenHeight + self.size.height + 42), controlPoint: CGPointMake(MGScreenWidth/2, 0))
+            
+            
+            
+        }
+        self.groupAnimation()
+    }
+    func groupAnimation()
+    {
+        self.userInteractionEnabled = false
+    
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        
+        animation.path = self.path.CGPath
+        
+        //旋转动画
+        let expandAnimation1 = CABasicAnimation(keyPath: "transform.rotation.z")
+        
+        expandAnimation1.duration = 1.0
+        expandAnimation1.repeatCount = 1
+        expandAnimation1.fromValue = NSNumber(float: 0.0)
+        expandAnimation1.toValue = NSNumber(double: 10 * M_PI)
+        
+        
+        //到中间的动画
+        let expandAnimation = CABasicAnimation(keyPath: "transform.scale")
+        
+        expandAnimation.duration = 0.5
+        expandAnimation.fromValue = NSNumber(float: 1)
+        expandAnimation.toValue = NSNumber(float: 0.7)
+        
+        expandAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        
+        //从中间到购物车的动画
+        
+        let narrowAnimation = CABasicAnimation(keyPath: "transform.scale")
+        
+        narrowAnimation.beginTime = 0.5
+        narrowAnimation.fromValue = NSNumber(float: 0.7)
+        narrowAnimation.duration = 1.0
+        narrowAnimation.toValue = NSNumber(float: 0.3)
+        
+        narrowAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        
+        let groups = CAAnimationGroup()
+        
+        groups.animations = [animation,expandAnimation1,expandAnimation,narrowAnimation]
+        groups.duration = 1.5
+        groups.removedOnCompletion=false
+        groups.fillMode=kCAFillModeForwards
+        groups.delegate = self
+        self._layer.addAnimation(groups, forKey: "group")
+        
+    }
+    override func animationDidStop(anim: CAAnimation, finished flag:Bool)
+    {
+        
+        if anim == self._layer.animationForKey("group"){
+            self.userInteractionEnabled = true
+            self._layer.removeFromSuperlayer()
+            
+            self._layer = nil
+           
+        }
+    }
+
+}
+
 

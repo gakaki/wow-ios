@@ -112,6 +112,8 @@ let URL_OrderBuyNow             = "order/buyNow"             //立即购买查�
 let URL_OrderCreat              = "/order/create"           //创建订单
 
 let URL_OrderCharge             = "/pay/charge"             //获取支付交易凭证
+
+let URL_PayResult               = "/pay/payResult"          //查询支付结果
 //4. 发现页面
 let URL_Found_Main              = "page/find/product"       
 let URL_Found_2nd               = "page/find/category"

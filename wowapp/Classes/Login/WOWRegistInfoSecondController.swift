@@ -28,7 +28,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     var  backGroundMaskView : UIView! // 背景蒙板
     var  backGroundWindow : UIWindow!
     var clickType = ClickActionType.ageType
-    var fromUserCenter:Bool = false
+    var isPresent:Bool = false
     var sex = 1
     var ageRow = Int(0)
     var starRow = Int(0)
@@ -106,7 +106,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
             if let strongSelf = self{
                 
                 
-                if strongSelf.fromUserCenter{
+                if strongSelf.isPresent{
                     strongSelf.dismissViewControllerAnimated(true, completion: nil)
                     print("gerenzhongxin")
                     UIApplication.appTabBarController.selectedIndex = 0
@@ -170,7 +170,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
                 WOWUserManager.userAgeRange = strongSelf.ageRow
                 WOWUserManager.userIndustry = strongSelf.jobTextField.text ?? ""
                 
-                strongSelf.toLoginSuccess(strongSelf.fromUserCenter)
+                strongSelf.toLoginSuccess(strongSelf.isPresent)
             }
         }) {[weak self] (errorMsg) in
             if let _ = self{

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
+    
      func configTable(){
         tableView.estimatedRowHeight = 200
         tableView.rowHeight          = UITableViewAutomaticDimension
@@ -57,10 +58,14 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         switch (indexPath.section,indexPath.row) {
         case (0,0): //标题价钱
             let cell =  tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailPriceCell), forIndexPath: indexPath) as! WOWProductDetailPriceCell
-            cell.nameLabel.text = productModel?.productName
+            cell.nameLabel.text = productModel?.productName ?? ""
             if let price = productModel?.sellPrice {
                 cell.actualPriceLabel.text = String(format: "%.2f",price).priceFormat()
+                //显示下划线
+                let attrString = NSAttributedString(string: String(format: "%.2f",price).priceFormat(), attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
+                cell.originalPriceLabel.attributedText = attrString
             }
+           
             returnCell = cell
         case (0,1): //品牌设计师
             let cell =  tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailDescCell), forIndexPath: indexPath) as! WOWProductDetailDescCell

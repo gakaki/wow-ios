@@ -255,13 +255,12 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             print(product.weight, product.sizeText, product.subProductId, product.sellPrice)
             
             WOWNetManager.sharedManager.requestWithTarget(.Api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: { (result) in
-                WOWHud.showMsg("添加购物车成功")
+
             }) { (errorMsg) in
                 
             }
             
         }
-        print("确定驾车")
 
     }
     //收藏单品

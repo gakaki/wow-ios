@@ -26,7 +26,6 @@ class WOWEditOrderController: WOWBaseViewController {
     var totalPrice                      : String?
     var addressInfo                     :WOWAddressListModel?
     var orderCode                       = String()
-    var payType                         : String? //支付方式
     private var tipsTextField           : UITextField!
 
     override func viewDidLoad() {
@@ -162,8 +161,9 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //立即支付创建订单
     func requestBuyNowOrderCreat() -> Void {
+        
         var params = [String: AnyObject]?()
-        params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount) ?? 0, "remark": tipsTextField.text ?? ""]
+        params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": self.totalPriceLabel.text ?? "0", "remark": tipsTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
@@ -175,17 +175,13 @@ class WOWEditOrderController: WOWBaseViewController {
     }
     
     //去支付
-    private func goPay(charge:AnyObject,totalPrice:String,orderid:String){
+    private func goPay(charge:AnyObject){
         dispatch_async(dispatch_get_main_queue()) {
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
                 if let strongSelf = self{
                     switch ret{
                     case "success":
-                        let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
-                        vc.payMethod = (strongSelf.payType == "alipay" ? "支付宝":"微信")
-                        vc.orderid = orderid
-                        vc.totalPrice = totalPrice
-                        strongSelf.navigationController?.pushViewController(vc, animated: true)
+                        strongSelf.requestPayResult()
                     case "cancel":
                         WOWHud.showMsg("支付取消")
                         
@@ -196,6 +192,26 @@ class WOWEditOrderController: WOWBaseViewController {
                     }
                 }
             }
+        }
+    }
+    
+    //从服务端去拉取支付结果
+    func requestPayResult() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_PayResult(orderCode: orderCode), successClosure: { [weak self](result) in
+            if let strongSelf = self {
+                let json = JSON(result)
+                let orderCode = json["orderCode"].string
+                let payAmount = json["payAmount"].double
+                let paymentChannelName = json["paymentChannelName"].string
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
+                vc.payMethod = paymentChannelName ?? ""
+                vc.orderid = orderCode ?? ""
+                vc.totalPrice = String(format: "%.2f",payAmount ?? 0)
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            }) { (errorMsg) in
+                
         }
     }
     
@@ -286,11 +302,18 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     
 
     
-    //尾视图  只有地址栏需要
+    //尾视图  只有商品清单栏需要
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 1 { //地址
             let footerView = NSBundle.mainBundle().loadNibNamed(String(WOWOrderFooterView), owner: self, options: nil).last as!WOWOrderFooterView
-            footerView.countLabel.text = "共\(self.productArr?.count ?? 0)件"
+            var count = Int()
+            if let arr = productArr {
+                for product in arr {
+                    count += product.productQty ?? 0
+                }
+            }
+            
+            footerView.countLabel.text = "共\(count)件"
             footerView.totalPriceLabel.text = String(format:"%.2f",(self.orderSettle?.productTotalAmount) ?? 0)
             return footerView
         }
@@ -315,7 +338,6 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
 //MARK: - selectPayDelegate
 extension WOWEditOrderController: selectPayDelegate {
     func surePay(channel: String) {
-        payType = channel
         backView.hidePayView()
         if  orderCode.isEmpty {
             WOWHud.showMsg("订单生成失败")
@@ -324,7 +346,7 @@ extension WOWEditOrderController: selectPayDelegate {
             if let strongSelf = self {
                 let json = JSON(result)
                 let charge = json["charge"]
-                strongSelf.goPay(charge.object, totalPrice: strongSelf.totalPrice ?? "", orderid: strongSelf.orderCode)
+                strongSelf.goPay(charge.object)
             }
             
             }) { (errorMsg) in

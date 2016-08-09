@@ -16,7 +16,7 @@ class WOWController: WOWBaseViewController {
     var hidingNavBarManager: HidingNavigationBarManager?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         request()
     }
     
@@ -129,6 +129,7 @@ class WOWController: WOWBaseViewController {
     override func request() {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Home_Banners, successClosure: {[weak self] (result) in
             if let strongSelf = self{
+                WOWHud.dismiss()
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.endRefresh()

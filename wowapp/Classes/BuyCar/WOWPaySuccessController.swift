@@ -11,7 +11,7 @@ import UIKit
 class WOWPaySuccessController: WOWBaseViewController {
     var orderid     = "  "
     var totalPrice  = ""
-    var payMethod   = "支付宝"
+    var payMethod   = ""
     @IBOutlet weak var orderIdLabel: UILabel!
     @IBOutlet weak var payMethodLabel: UILabel!
     @IBOutlet weak var orderCountLabel: UILabel!

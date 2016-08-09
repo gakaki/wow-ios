@@ -86,6 +86,7 @@ class WOWFavProduct: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProduct, successClosure: { [weak self](result) in
             if let strongSelf = self{
+                WOWHud.dismiss()
                 let productList = Mapper<WOWFavoriteProductModel>().mapArray(JSON(result)["favoriteProductVoList"].arrayObject)
                 if let productList = productList{
                     strongSelf.dataArr = productList

@@ -200,6 +200,10 @@ class WOWBuyCarController: WOWBaseViewController {
             if let strongSelf = self{
                 let model = strongSelf.dataArr[indexPath.section]
                 model.productQty = productQty
+                if model.isSelected ?? false{
+                    strongSelf.selectedArr.removeObject(model)
+                    strongSelf.selectedArr.append(model)
+                }
                 strongSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
             }
         }) { (errorMsg) in
@@ -331,16 +335,26 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     }
 
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-                asyncCarDelete(dataArr[indexPath.section])
-        }
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == .Delete {
+//                asyncCarDelete(dataArr[indexPath.section])
+//        }
+//        
+//    }
+//    
+//    
+//    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+//        return "删除"
+//    }
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-    }
-    
-    
-    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-        return "删除"
+        let delete = UITableViewRowAction(style: .Default, title: "删除") { [weak self](action, indexPath) in
+            if let strongSelf = self {
+                
+                strongSelf.alertView(strongSelf.dataArr[indexPath.section])
+            }
+        }
+        return [delete]
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -388,6 +402,24 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         let text = "您的购物车是空的"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
+    }
+    
+    //MARK: - alertView
+    func alertView(model: WOWCarProductModel) {
+        let alert = UIAlertController(title: "", message: "确定删除此商品？", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title:"取消", style: .Cancel, handler: { (action) in
+            DLog("取消")
+        })
+        
+        let sure   = UIAlertAction(title: "确定", style: .Default) {[weak self] (action) in
+            if let strongSelf = self{
+                strongSelf.asyncCarDelete(model)
+            }
+        }
+        alert.addAction(cancel)
+        alert.addAction(sure)
+        presentViewController(alert, animated: true, completion: nil)
+        
     }
     
 }

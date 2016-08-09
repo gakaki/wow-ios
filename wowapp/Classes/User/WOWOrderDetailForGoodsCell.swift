@@ -1,17 +1,15 @@
 //
-//  WOWOrderDetailPayCell.swift
+//  WOWOrderDetailForGoodsCell.swift
 //  wowapp
 //
-//  Created by 陈旭 on 16/8/8.
+//  Created by 陈旭 on 16/8/9.
 //  Copyright © 2016年 小黑. All rights reserved.
 //
 
 import UIKit
 
-class WOWOrderDetailPayCell: UITableViewCell {
-    @IBOutlet weak var payTypeImageView: UIImageView!
-    @IBOutlet weak var payTypeLabel: UILabel!
-    @IBOutlet weak var isClooseImageView: UIImageView!
+class WOWOrderDetailForGoodsCell: UITableViewCell {
+  @IBOutlet weak var cellTableView: UITableView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

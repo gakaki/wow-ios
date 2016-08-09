@@ -15,11 +15,16 @@ enum OrderNewType {
     case finish             //= "已完成"
     case someFinishForGoods //= "部分完成"
 }
+
 protocol OrderDetailDelegate:class{
     func orderStatusChange()
 }
 
-
+struct CellHight {
+    static var ProductCellHight :CGFloat  = 70
+    static var PayCellHight :CGFloat = 60
+    static var CourceHight :CGFloat = 50
+}
 class WOWOrderDetailController: WOWBaseViewController{
     var orderModel                  : WOWOrderListModel!
     var orderNewModel               : WOWNewOrderListModel!
@@ -31,7 +36,9 @@ class WOWOrderDetailController: WOWBaseViewController{
     var forProduct3 : WOWNewProductModel!
     
     var OrderDetailNewaType         : OrderNewType = .someFinishForGoods
-    //    let orderNewType : String!
+    
+    
+        //    let orderNewType : String!
     var orderNumber                 : Int!
     var isOpen                      : Bool!
     @IBOutlet weak var tableView    : UITableView!
@@ -46,17 +53,6 @@ class WOWOrderDetailController: WOWBaseViewController{
     weak var delegate               : OrderDetailDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        forGoods1.deliveryCompanyName = "天天快递"
-        forGoods1.deliveryOrderNo = "2323232323"
-        
-        forProduct1.productName = "1"
-        forProduct2.productName = "2"
-        forProduct3.productName = "3"
-        
-        forGoods1.productArray = [forProduct1,forProduct2,forProduct3]
-        
-        dataArr.append(forGoods1)
         
     }
     
@@ -212,18 +208,11 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         case .payMent:
             switch section {
             case 0: //订单
-                //            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
-                //            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
-                //                return 1
-                //            default:
-                //                return 2
-                //            }
                 return 1
                 
             case 1: //收货人
                 return 1
             case 2: //商品清单
-                //            return orderModel.products?.count ?? 0
                 return orderNumber
             case 3: //运费
                 return 2
@@ -235,18 +224,11 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         case .forGoods:
             switch section {
             case 0: //订单
-                //            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
-                //            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
-                //                return 1
-                //            default:
-                //                return 2
-                //            }
                 return 2
                 
             case 1: //收货人
                 return 1
             case 2: //商品清单
-                //            return orderModel.products?.count ?? 0
                 return orderNumber
             case 3: //运费
                 return 2
@@ -256,23 +238,19 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         case .someFinishForGoods:
             switch section {
             case 0: //订单
-                //            switch orderModel.status ?? 2 { //因为后端把为2的改为字符串了。。。唉，不知道什么时候改了
-                //            case 0,1,5: //待付款，待发货，已关闭，不需要看物流的
-                //                return 1
-                //            default:
-                //                return 2
-                //            }
                 return 1
                 
             case 1: //收货人
                 return 1
             case 2: //商品清单
-                //            return orderModel.products?.count ?? 0
-                return orderNumber
+                return 3
             case 3: //运费
-                return 2
+                return 4
             case 4: //支付方式
                 return 2
+            case 5: //支付方式
+                return 2
+
             default:
                 return 2
             }
@@ -292,13 +270,13 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 0:
                 return 44
             case 1:
-                return 70
+                return CellHight.ProductCellHight
             case 2:
-                return 70
+                return CellHight.ProductCellHight
             case 3:
-                return 50
+                return CellHight.CourceHight
             case 4:
-                return 60
+                return CellHight.PayCellHight
             default:
                 return 0
             }
@@ -309,14 +287,14 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 if indexPath.row == 0 {
                     return 44
                 }else{
-                    return 70
+                    return CellHight.ProductCellHight
                 }
             case 1:
-                return 70
+                return CellHight.ProductCellHight
             case 2:
-                return 70
+                return CellHight.ProductCellHight
             case 3:
-                return 50
+                return CellHight.CourceHight
             default:
                 return 0
             }
@@ -325,15 +303,15 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 0:
                 return 44
             case 1:
-                return 70
+                return CellHight.ProductCellHight
             case 2:
-                return 70
+                return CellHight.ProductCellHight
             case 3:
-                return 70
+                return CellHight.ProductCellHight
             case 4:
-                return 70
+                return CellHight.ProductCellHight
             case 5:
-                return 50
+                return CellHight.CourceHight
             default:
                 return 0
             }
@@ -429,15 +407,77 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 returnCell = cell
                 
             case 2:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
+                let cellID = "MenuCell1"
+                var cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+                if cell == nil {
+                    cell = WOWOrderDetailNewCell(style: .Default, reuseIdentifier:cellID)
+                }
+
+//                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
+                if indexPath.row == 0 {
+                    cell!.contentView.removeSubviews()
+//                    cell?.detailTextLabel?.hidden = true
+//                    cell
+                    
+//                     cell!.contentView.titleImageView.hidden = true
+//                    cell .titleLabel.hidden = true
+//                    cell .colorLabel.hidden = true
+//                     cell .contentLabel.hidden = true
+//                    cell .priceLabel.hidden = true
+//                     cell .goodsNumber.hidden = true
+                    
+                    let deliveryName = UILabel()
+                    deliveryName.text = "包裹1： 顺丰快递"
+                    deliveryName.frame = CGRectMake(15, 10, 200, 20)
+                    deliveryName.textColor = UIColor.blackColor()
+                    deliveryName.font = UIFont.systemFontOfSize(14)
+                    cell!.contentView.addSubview(deliveryName)
+                    
+                    let deliveryNumber = UILabel()
+                    deliveryNumber.text = "运单号： 2223232323323"
+                    deliveryNumber.frame = CGRectMake(15, 35, 200, 20)
+//                    deliveryNumber.textColor = UIColor.init(rgba: "")
+                    deliveryNumber.textColor = UIColor.init(hexString: "808080")
+                    deliveryNumber.font = UIFont.systemFontOfSize(12)
+                    cell!.contentView.addSubview(deliveryNumber)
+                    
+                }
                 returnCell = cell
-                
             case 3:
+                let cellID = "MenuCell2"
+                var cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+                if cell == nil {
+                    cell = WOWOrderDetailNewCell(style: .Default, reuseIdentifier:cellID)
+                }
+
+//                let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
+                if indexPath.row == 0 {
+                    cell!.contentView.removeSubviews()
+                    let deliveryName = UILabel()
+                    deliveryName.text = "包裹2： 顺丰快递"
+                    deliveryName.frame = CGRectMake(15, 10, 200, 20)
+                    deliveryName.textColor = UIColor.blackColor()
+                    deliveryName.font = UIFont.systemFontOfSize(14)
+                    cell!.contentView.addSubview(deliveryName)
+                    
+                    let deliveryNumber = UILabel()
+                    deliveryNumber.text = "运单号： 2223232323323"
+                    deliveryNumber.frame = CGRectMake(15, 35, 200, 20)
+                    //                    deliveryNumber.textColor = UIColor.init(rgba: "")
+                    deliveryNumber.textColor = UIColor.init(hexString: "808080")
+                    deliveryNumber.font = UIFont.systemFontOfSize(12)
+                    cell!.contentView.addSubview(deliveryNumber)
+                    
+                }
+
+                returnCell = cell
+
+                
+            case 4:
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailNewCell", forIndexPath: indexPath) as! WOWOrderDetailNewCell
                 returnCell = cell
-            case 4:
+            case 5:
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailFourCell", forIndexPath: indexPath) as! WOWOrderDetailFourCell
                 
@@ -478,7 +518,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             switch section {
             case 0:
                 return 0.01
-            case 4:
+            case 3,5:
                 return 12
             default:
                 return 38
@@ -507,7 +547,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             let titles = [" ","收货人","商品清单",""]
             return titles[section]
         case .someFinishForGoods:
-            let titles = [" ","收货人","已发货商品清单","未商品清单",""]
+            let titles = [" ","收货人","已发货商品清单","包裹2","未商品清单",""]
             return titles[section]
         default:
             return nil
@@ -516,33 +556,55 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
-        if section == 2 {
-            return 40
+        
+        switch OrderDetailNewaType {
+        case .someFinishForGoods:
+            if section == 3 {
+                return 40
+            }else{
+                return 0.01
+            }
+        
+        default:
+            
+            if section == 2 {
+                return 40
+            }
+            return 0.01
         }
-        return 0.01
+      
     }
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 2 {
-            let view = UIView()
-            view.frame = CGRectMake(0, 0, MGScreenWidth, 40)
-            view.backgroundColor = UIColor.whiteColor()
-            
-            let likeButton = UIButton(type: .System)
-            likeButton.frame = CGRectMake(0, 0, 100, 40)
-            likeButton.center = view.center
-            likeButton.centerX = view.centerX - 10
-            likeButton.titleLabel?.font = UIFont.systemFontOfSize(12)
-            likeButton.setTitleColor(GrayColorlevel3, forState: .Normal)
-            likeButton.setTitle("共7件", forState: .Normal)
-            
-            likeButton.setImage(UIImage(named: "downOrder")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
-            likeButton.imageEdgeInsets = UIEdgeInsetsMake(10, 70, 10, 10)
-            likeButton.addTarget(self, action: #selector(clickAction(_:)), forControlEvents: .TouchUpInside)
-            view.addSubview(likeButton)
-            
-            
-            return view
+        
+        switch OrderDetailNewaType {
+        case .someFinishForGoods:
+           return nil
+        
+        default:
+            if section == 2 {
+                let view = UIView()
+                view.frame = CGRectMake(0, 0, MGScreenWidth, 40)
+                view.backgroundColor = UIColor.whiteColor()
+                
+                let likeButton = UIButton(type: .System)
+                likeButton.frame = CGRectMake(0, 0, 100, 40)
+                likeButton.center = view.center
+                likeButton.centerX = view.centerX - 10
+                likeButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+                likeButton.setTitleColor(GrayColorlevel3, forState: .Normal)
+                likeButton.setTitle("共7件", forState: .Normal)
+                
+                likeButton.setImage(UIImage(named: "downOrder")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+                likeButton.imageEdgeInsets = UIEdgeInsetsMake(10, 70, 10, 10)
+                likeButton.addTarget(self, action: #selector(clickAction(_:)), forControlEvents: .TouchUpInside)
+                view.addSubview(likeButton)
+                
+                
+                return view
+            }
         }
+
+        
         
         return nil
     }

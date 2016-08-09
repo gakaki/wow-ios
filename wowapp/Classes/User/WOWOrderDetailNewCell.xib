@@ -103,6 +103,14 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="colorLabel" destination="8Ha-VM-5gP" id="r8A-xa-TLL"/>
+                <outlet property="contentLabel" destination="crT-ID-XEu" id="ztT-qm-O8L"/>
+                <outlet property="goodsNumber" destination="au4-E8-Hsl" id="waB-j2-Xnk"/>
+                <outlet property="priceLabel" destination="GgV-4n-hot" id="Wgk-oh-hxB"/>
+                <outlet property="titleImageView" destination="R4R-2a-Q5F" id="QFz-tG-t7E"/>
+                <outlet property="titleLabel" destination="fXJ-fB-5XR" id="Nzv-kP-xwT"/>
+            </connections>
             <point key="canvasLocation" x="380" y="208"/>
         </tableViewCell>
     </objects>

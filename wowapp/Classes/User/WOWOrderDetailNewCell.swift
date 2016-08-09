@@ -9,6 +9,14 @@
 import UIKit
 
 class WOWOrderDetailNewCell: UITableViewCell {
+    
+    @IBOutlet weak var titleImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var colorLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var goodsNumber: UILabel!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

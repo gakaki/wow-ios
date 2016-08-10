@@ -303,9 +303,9 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
-                vc.orderNewModel = dataArr[indexPath.row]
+                vc.orderNewModel = dataArr[indexPath.section]
                 vc.delegate = self
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController!.pushViewController(vc, animated: true)
     }
     
     

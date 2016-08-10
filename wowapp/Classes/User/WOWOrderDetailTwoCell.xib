@@ -53,6 +53,11 @@
                     <constraint firstAttribute="trailingMargin" secondItem="s7S-l9-f3D" secondAttribute="trailing" constant="134" id="pX0-aB-lKi"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="orderNumberLabel" destination="s7S-l9-f3D" id="vN2-Hb-Agt"/>
+                <outlet property="orderTimeLabel" destination="3MI-e5-b2k" id="ZKF-XZ-6sI"/>
+                <outlet property="orderTypeLabel" destination="kHU-9O-Mfo" id="Icd-lJ-FCL"/>
+            </connections>
             <point key="canvasLocation" x="252" y="224"/>
         </tableViewCell>
     </objects>

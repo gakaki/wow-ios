@@ -73,6 +73,7 @@
                     <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="8" id="CI0-0A-aXc"/>
                     <constraint firstItem="R4R-2a-Q5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="GPj-4s-HIP"/>
                     <constraint firstAttribute="bottomMargin" secondItem="au4-E8-Hsl" secondAttribute="bottom" constant="6.5" id="Ikc-TS-L1h"/>
+                    <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="R4R-2a-Q5F" secondAttribute="trailing" constant="75" id="Iu2-Wc-v59"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="195" id="J6R-H3-vTe"/>
                     <constraint firstItem="au4-E8-Hsl" firstAttribute="leading" secondItem="crT-ID-XEu" secondAttribute="trailing" constant="55" id="Jvm-Dn-JHg"/>
                     <constraint firstItem="au4-E8-Hsl" firstAttribute="top" secondItem="GgV-4n-hot" secondAttribute="bottom" constant="1" id="Tvs-Ey-u2g"/>
@@ -96,6 +97,7 @@
                         <exclude reference="J6R-H3-vTe"/>
                         <exclude reference="eVd-4e-1oY"/>
                         <exclude reference="07H-XK-Lci"/>
+                        <exclude reference="CI0-0A-aXc"/>
                         <exclude reference="iac-5I-Bff"/>
                         <exclude reference="kc9-hU-0bg"/>
                         <exclude reference="tIt-ts-5fN"/>

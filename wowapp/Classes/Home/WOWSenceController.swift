@@ -108,10 +108,10 @@ class WOWSenceController: WOWBaseViewController {
         var cars = [AnyObject]()
         var param:[String:AnyObject] = ["uid":uid]
         if arr.count != 0 {
-            for obj in arr {
-                let dict = ["skuid":obj.skuID ?? "","count":"1","productid":String(obj.productId) ?? ""]
-                cars.append(dict)
-            }
+//            for obj in arr {
+//                let dict = ["skuid":obj.skuID ?? "","count":"1","productid":String(obj.productId) ?? ""]
+//                cars.append(dict)
+//            }
             param["cart"] = cars
             let string = JSONStringify(param)
             WOWNetManager.sharedManager.requestWithTarget(.Api_CartList(cart:string), successClosure: { [weak self](result) in
@@ -256,7 +256,7 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let  cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
         let  model = sceneModel?.recommendProducts?[indexPath.row]
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImage ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         cell.backgroundColor = SeprateColor
         return cell
     }

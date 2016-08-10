@@ -164,32 +164,32 @@ extension AppDelegate{
         
         //shareSDK
 
-        ShareSDK.registerApp(WOWID.ShareSDK.appKey,
-                             
-                             activePlatforms: [SSDKPlatformType.TypeWechat.rawValue,],
-                             onImport: {(platform : SSDKPlatformType) -> Void in
-                                
-                                switch platform{
-                                    
-                                case SSDKPlatformType.TypeWechat:
-                                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
-                                    
-                                default:
-                                    break
-                                }
-            },
-                             onConfiguration: {(platform : SSDKPlatformType,appInfo : NSMutableDictionary!) -> Void in
-                                switch platform {
-                                    
-                                case SSDKPlatformType.TypeWechat:
-                                    //设置微信应用信息
-                                    appInfo.SSDKSetupWeChatByAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey)
-                                    
-                                default:
-                                    break
-                                    
-                                }
-        })
+//        ShareSDK.registerApp(WOWID.ShareSDK.appKey,
+//                             
+//                             activePlatforms: [SSDKPlatformType.TypeWechat.rawValue,],
+//                             onImport: {(platform : SSDKPlatformType) -> Void in
+//                                
+//                                switch platform{
+//                                    
+//                                case SSDKPlatformType.TypeWechat:
+//                                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
+//                                    
+//                                default:
+//                                    break
+//                                }
+//            },
+//                             onConfiguration: {(platform : SSDKPlatformType,appInfo : NSMutableDictionary!) -> Void in
+//                                switch platform {
+//                                    
+//                                case SSDKPlatformType.TypeWechat:
+//                                    //设置微信应用信息
+//                                    appInfo.SSDKSetupWeChatByAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey)
+//                                    
+//                                default:
+//                                    break
+//                                    
+//                                }
+//        })
 
         
         

@@ -159,7 +159,8 @@ class WOWGuideController: WOWBaseViewController {
         }
         else if ( currentState == .Register) {
             //to mobile reg vc
-            toRegVC()
+//            toRegVC()
+            toRegVC(userInfoFromWechat: nil)
         }
     }
 

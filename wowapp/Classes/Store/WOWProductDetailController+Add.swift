@@ -37,9 +37,9 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 3
         case 1: //参数
-            let ret1 = (productModel?.attributes?.count ?? 0) / 2
-            let ret2 = (productModel?.attributes?.count ?? 0) % 2
-            let _ = ret1 + ret2
+//            let ret1 = (productModel?.attributes?.count ?? 0) / 2
+//            let ret2 = (productModel?.attributes?.count ?? 0) % 2
+//            let _ = ret1 + ret2
             return 1
         case 2: //温馨提示
             return 1

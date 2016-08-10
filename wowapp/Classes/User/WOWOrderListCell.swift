@@ -17,7 +17,7 @@ enum OrderCellAction {
 }
 
 protocol OrderCellDelegate:class{
-    func  OrderCellClick(type:OrderCellAction,model:WOWOrderListModel,cell:WOWOrderListCell)
+    func  OrderCellClick(type:OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell)
 }
 
 class WOWOrderListCell: UITableViewCell {
@@ -39,7 +39,7 @@ class WOWOrderListCell: UITableViewCell {
     @IBOutlet weak var singleTypeLabel: UILabel!
     
     weak var delegate : OrderCellDelegate?
-    var model : WOWOrderListModel?
+//    var model : WOWOrderListModel?
      var modelNew : WOWNewOrderListModel?
     let statuTitles = ["待付款","待发货","待收货","待评价","已完成","已关闭"]
     let rightTitles = ["立即支付","","确认收货","评价","删除订单",""]
@@ -68,24 +68,24 @@ class WOWOrderListCell: UITableViewCell {
     @IBAction func rightButtonClick(sender: UIButton) {
         if sender.tag == 1001 {
             if let del = delegate {
-                del.OrderCellClick(.ShowTrans,model:self.model!,cell: self)
+                del.OrderCellClick(.ShowTrans,model:self.modelNew!,cell: self)
             }
         }else{
             var action = OrderCellAction.Pay
-            switch model?.status ?? 2{
-            case 0: //未付款
+            switch modelNew?.orderStatus ?? 2{
+            case 0: //待付款
                 action = .Pay
-            case 2: //未收货
+            case 2: //部分收货
                 action = .SureReceive
-            case 3: //待评价
-                action = .Comment
+            case 3: //待收货
+                action = .SureReceive
             case 4: //已完成
                 action = .Delete
             default:
                 break
             }
             if let del = delegate {
-                del.OrderCellClick(action,model: self.model!,cell:self)
+                del.OrderCellClick(action,model: self.modelNew!,cell:self)
             }
         }
     }

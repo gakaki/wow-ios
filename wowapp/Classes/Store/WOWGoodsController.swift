@@ -338,7 +338,7 @@ extension WOWGoodsController:ProductCellDelegate{
         case WOWItemActionType.Brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
             vc.hideNavigationBar = true
-            vc.brandID = model.brandID?.toInt()
+            vc.brandID = model.brandId
             navigationController?.pushViewController(vc, animated: true)
         default:
             DLog(" ")
@@ -364,8 +364,8 @@ extension WOWGoodsController:ProductCellDelegate{
     }
     
     private func share(model:WOWProductModel,image:UIImage?){
-        let shareUrl = "http://www.wowdsgn.com/\(model.skuID ?? "").html"
-        WOWShareManager.share((model.productName ?? "") + "-尖叫设计", shareText: model.productShortDes, url:shareUrl, shareImage:image ?? UIImage(named: "me_logo")!)
+//        let shareUrl = "http://www.wowdsgn.com/\(model.skuID ?? "").html"
+//        WOWShareManager.share((model.productName ?? "") + "-尖叫设计", shareText: model.productShortDes, url:shareUrl, shareImage:image ?? UIImage(named: "me_logo")!)
     }
     
     private func goLogin(){

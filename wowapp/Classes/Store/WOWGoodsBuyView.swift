@@ -235,15 +235,30 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             //得到颜色的数组，并给每种颜色对应一个bool值，方便记录哪个颜色有库存
             if let array = p.colorDisplayNameList {
                 for color in array {
-                let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: false)
-                colorArr.append(colorModel)
+                    if array.count == 1 {
+                        colorIndex = 0
+                        let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: true)
+                        colorArr.append(colorModel)
+
+                    }else {
+                        let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: false)
+                        colorArr.append(colorModel)
+
+                    }
                 }
             }
             //得到规格的数组，同样给每个规格对应一个bool值，方便记录哪个规格有库存
             if let array = p.specNameList {
                 for spec in array {
-                    let specModel = WOWSpecNameModel(specName: spec, isSelect: false)
-                    specArr.append(specModel)
+                    if array.count == 1 {
+                        specIndex = 0
+                        let specModel = WOWSpecNameModel(specName: spec, isSelect: true)
+                        specArr.append(specModel)
+                    }else {
+                        let specModel = WOWSpecNameModel(specName: spec, isSelect: false)
+                        specArr.append(specModel)
+                    }
+                    
                 }
             }
             //通过颜色查找规格的数组
@@ -257,6 +272,17 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 
             collectionView.reloadData()
             showResult(skuCount)
+            /**
+             *  如果规格和颜色都是一个的话，默认选中第一个
+             */
+            if colorArr.count == 1 && specArr.count == 1 {
+                for array in colorSpecArr{
+                    if array.colorDisplayName == colorArr[0].colorDisplayName{
+                        color_SpecArr = array.specMapVoList
+                    }
+                }
+                getProductInfo()
+            }
         }
     }
     
@@ -294,6 +320,11 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
 //MARK:Actions    
     @IBAction func countButtonClick(sender: UIButton) {
+        /**
+         *  更改商品数量，商品数量为1时不能再减少
+         *  加商品时要判断商品的库存数量和已加商品数，如果库存数大于购买数可以继续增加
+         *  如果库存数小于等于购买数，则提示库存不足
+         */
         if sender.tag == 1001 {
             skuCount -= 1
             skuCount = skuCount == 0 ? 1 : skuCount
@@ -313,6 +344,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         }
     }
     
+    /**
+     确定按钮分为两个入口
+     1. 从加入购物车进来，点击确定按钮购物车数量+1 ，加车动画，并且回到商品详情页
+     2. 从立即支付进来，点击确定直接进入到确认订单页
+     
+     */
     @IBAction func sureButtonClick(sender: UIButton) {
         
         if !validateMethods(){
@@ -344,7 +381,11 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         
        
     }
-    
+    /**
+     
+     收藏按钮
+     
+     */
     @IBAction func favoriteButtonClick(sender: UIButton) {
         
         if let del = delegate {
@@ -359,7 +400,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             del.sharClick()
         }
     }
-    
+    /**
+     加入购物车
+     
+     */
     @IBAction func addCarButtonClick(sender: UIButton) {
         if !validateMethods(){
             return
@@ -377,7 +421,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         })
         
     }
+    /**
+     立即支付
     
+     */
     @IBAction func payButtonClick(sender: UIButton) {
         if !validateMethods(){
             return
@@ -389,7 +436,11 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
         }
     }
-    
+    /**
+     显示商品数量
+     
+     - parameter count: 传入数量
+     */
     private func showResult(count:Int){
         if count <= 1 {
             subButton.enabled = false
@@ -459,16 +510,23 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
 //MARK: - UICollectionView Delegate/Datasource Methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
+        /**
+         *  颜色规格显示
+         */
         if collectionView.tag == 100 {
+            
+            
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
                 let item = colorArr[indexPath.row]
                 cell.textLabel.text = item.colorDisplayName
-        
+                      //当选中某个cell时更改某个cell的颜色
             if indexPath.row == colorIndex {
                 updateCellStatus(cell, selected: true)
             }else {
                 updateCellStatus(cell, selected: false)
             }
+            
             //当选择产品规格的时候才会进到这个数组,通过判断所对应颜色的bool值来判断是否可选中
             if specIndex >= 0 {
                 let str = colorArr[indexPath.row]
@@ -478,18 +536,22 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                     cell.userInteractionEnabled = false
                 }
             }
+            
 
             return cell
         }else {
+            
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
                 let item = specArr[indexPath.row]
                 cell.textLabel.text = item.specName
             
+                      //当选中某个cell时更改某个cell的颜色
             if indexPath.row == specIndex {
                 updateCellStatus(cell, selected: true)
             }else {
                 updateCellStatus(cell, selected: false)
             }
+            
             //当选择产品颜色的时候才会进到这个数组,通过判断所对应规格的bool值来判断是否可选中
             if colorIndex >= 0 {
                 let str = specArr[indexPath.row]
@@ -500,6 +562,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 }
                 
             }
+            
 
             return cell
         }
@@ -520,17 +583,29 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        /**
+         *  选中颜色规格视图
+         */
         if collectionView.tag == 100 {
+            
+            //记录每次点击的cell下标，以便确定选择的商品规格颜色
             colorIndex = indexPath.row
+            
+            /**
+             *  遍历循环通过颜色对应规格的数组，如果数组中某个对象的颜色跟选中的颜色一样，则获取对应的产品规格列表
+             *  其中包括是否可点击，是否有库存等
+             */
                 for array in colorSpecArr{
                     if array.colorDisplayName == colorArr[indexPath.row].colorDisplayName{
                         color_SpecArr = array.specMapVoList
                     }
                 }
+            
             //遍历把每个规格的bool值设为false初始值，防止与上次选择的冲突
             for spec in specArr {
                 spec.isSelect = false
             }
+            
             //通过循环遍历两个数组来筛选出所选择颜色对应的规格
             if let color_SpecArr = color_SpecArr {
                 for spec in color_SpecArr {
@@ -554,15 +629,26 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }
             
         }else {
+            
+            //记录每次点击的cell下标，以便确定选择的商品规格颜色
             specIndex = indexPath.row
+            
+            /**
+             *  遍历循环通过规格对应颜色的数组，如果数组中某个对象的规格跟选中的规格一样，则获取对应的产品颜色列表
+             *  其中包括是否可点击，是否有库存等
+             */
             for array in specColorArr{
                 if array.specName == specArr[indexPath.row].specName{
                     spec_ColorArr = array.colorMapVoList
                 }
             }
+            
+            //遍历把每个颜色的bool值设为false初始值，防止与上次选择的冲突
             for color in colorArr {
                 color.isSelect = false
             }
+            
+            //通过循环遍历两个数组来筛选出所选择规格对应的颜色
             if let spec_ColorArr = spec_ColorArr {
                 for color in spec_ColorArr {
                     for selectColor in colorArr {
@@ -576,6 +662,31 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             secondCollectionView.reloadData()
         }
+        //获取产品信息
+        getProductInfo()
+        
+    }
+    
+    //取消选中状态
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWTagCollectionViewCell
+        updateCellStatus(cell, selected: false)
+
+    }
+    
+    //更新cell点击状态
+    func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
+        
+        cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
+        cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
+        cell.textLabel.backgroundColor = MGRgb(255, g: 255, b: 255)
+        cell.textLabel.textColor = selected ? UIColor.blackColor() : MGRgb(128, g: 128, b: 128)
+        cell.userInteractionEnabled = true
+
+    }
+    
+    //如果颜色和规格都选中的话就拿出这个产品的信息
+    func getProductInfo() {
         //如果颜色和规格都选中的话就拿出这个产品的信息
         if colorIndex >= 0 && specIndex >= 0 {
             if let color_SpecArr = self.color_SpecArr {
@@ -583,9 +694,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                     if product.specName == self.specArr[self.specIndex].specName {
                         self.productInfo = product.subProductInfo
                         perPriceLabel.text = String(format: "%.2f",(self.productInfo?.sellPrice) ?? 0).priceFormat()
-
+                        
                         //如果产品有库存的话就显示1.如果没有库存的话就显示0
                         if self.productInfo?.hasStock ?? false {
+                            
                             if skuCount == 0 {
                                 skuCount = 1
                             }
@@ -593,12 +705,14 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                             if self.productInfo?.availableStock! < skuCount {
                                 skuCount = (self.productInfo?.availableStock)!
                             }
+                            
                             addButton.enabled = true
                             addButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
                             subButton.enabled = true
                             subButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
                             showResult(skuCount)
                         }else {
+                            
                             skuCount = 0
                             addButton.enabled = false
                             addButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
@@ -610,32 +724,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 }
             }
         }
-        
-    }
-    
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWTagCollectionViewCell
-        updateCellStatus(cell, selected: false)
 
     }
-    //更新cell点击状态
-    func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
-        cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
-        cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
-        cell.textLabel.backgroundColor = MGRgb(255, g: 255, b: 255)
-        cell.textLabel.textColor = selected ? UIColor.blackColor() : MGRgb(128, g: 128, b: 128)
-        cell.userInteractionEnabled = true
 
-    }
-    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-       
-        return true
-
-    }
-    //MARK: - 添加购物车动画
-    
     
 }
+//MARK: - 添加购物车动画
 extension WOWGoodsBuyView {
 
     func startAnimationWithRect(rect: CGRect, ImageView imageView:UIImageView)

@@ -278,7 +278,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 return 1
             case 2: //商品清单
                 if let orderNewDetailModel = orderNewDetailModel {
-                    return orderNewDetailModel.unShipOutOrderItems!.count
+                    return orderNewDetailModel.unShipOutOrderItems!.count > 3 ? 3 : orderNewDetailModel.unShipOutOrderItems!.count
                 }else{
                     return 0
                 }
@@ -300,7 +300,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 return 1
             case 2: //商品清单
                 if let orderNewDetailModel = orderNewDetailModel {
-                    return orderNewDetailModel.unShipOutOrderItems!.count
+                    return orderNewDetailModel.unShipOutOrderItems!.count > 3 ? 3 : orderNewDetailModel.unShipOutOrderItems!.count
                 }else{
                     return 0
                 }
@@ -320,7 +320,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 return 1
             case 2: //商品清单
                 if let orderNewDetailModel = orderNewDetailModel {
-                    return orderNewDetailModel.unShipOutOrderItems!.count
+                    return orderNewDetailModel.unShipOutOrderItems!.count > 3 ? 3 : orderNewDetailModel.unShipOutOrderItems!.count
                 }else{
                     return 0
                 }
@@ -366,53 +366,47 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         switch OrderDetailNewaType {
         case .payMent:
             switch indexPath.section {
-            case 0:
-                return CellHight.ProductCellHight
-            case 1:
-                return CellHight.ProductCellHight
-            case 2:
-                return CellHight.ProductCellHight
             case 3:
                 return CellHight.CourceHight
             case 4:
                 return CellHight.PayCellHight
             default:
-                return 0
+                return CellHight.ProductCellHight
             }
             
         case .forGoods,.noForGoods:
             switch indexPath.section {
-            case 0:
-                if indexPath.row == 0 {
-                    return CellHight.ProductCellHight
-                }else{
-                    return CellHight.ProductCellHight
-                }
-            case 1:
-                return CellHight.ProductCellHight
-            case 2:
-                return CellHight.ProductCellHight
+//            case 0:
+//                if indexPath.row == 0 {
+//                    return CellHight.ProductCellHight
+//                }else{
+//                    return CellHight.ProductCellHight
+//                }
+//            case 1:
+//                return CellHight.ProductCellHight
+//            case 2:
+//                return
             case 3:
                 return CellHight.CourceHight
             default:
-                return 0
+                return CellHight.ProductCellHight
             }
         case .someFinishForGoods:
             switch indexPath.section {
-            case 0:
-                return CellHight.ProductCellHight
-            case 1:
-                return CellHight.ProductCellHight
-            case 2:
-                return CellHight.ProductCellHight
-            case 3:
-                return CellHight.ProductCellHight
-            case 4:
-                return CellHight.ProductCellHight
+//            case 0:
+//                return CellHight.ProductCellHight
+//            case 1:
+//                return CellHight.ProductCellHight
+//            case 2:
+//                return CellHight.ProductCellHight
+//            case 3:
+//                return CellHight.ProductCellHight
+//            case 4:
+//                return CellHight.ProductCellHight
             case 5:
                 return CellHight.CourceHight
             default:
-                return 0
+                return CellHight.ProductCellHight
             }
             
             

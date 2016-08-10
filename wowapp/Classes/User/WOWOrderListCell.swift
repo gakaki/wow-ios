@@ -57,61 +57,12 @@ class WOWOrderListCell: UITableViewCell {
     
     func showData(m:WOWNewOrderListModel){
         modelNew = m
-//        if m.products?.count > 1 {
-//            collectionView.hidden = false
-//            singleBackView.hidden = true
-//            dataArr = m.products!
-//            collectionView.reloadData()
-//        }else{
-//            let itemModel = m.products?.first
-//            singleImageView.kf_setImageWithURL(NSURL(string:itemModel?.imageUrl ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
-//            singleNameLabel.text = itemModel?.name
-//            singleTypeLabel.text = itemModel?.sku_title
-//            collectionView.hidden = true
-//            singleBackView.hidden = false
-//            dataArr = [ ]
-//        }
-//        orderIdLabel.text = m.id
-//        goodsCountLabel.text = "共\(m.products?.count ?? 1)件商品"
-//        totalPriceLabel.text = m.total?.priceFormat()
-//        configShowStatus(m.status ?? 2)
-        
-//        cell.modelNew = orderModel
-//        cell.delegate = self
         
         statusLabel.text = m.orderStatusName
         orderIdLabel.text = m.orderCode
         goodsCountLabel.text = "共"+(m.totalProductQty?.toString)!+"件"
         totalPriceLabel.text = "¥ "+(m.orderAmount?.toString)!
-        
-//        switch m.orderStatus ?? 2{
-//        case 0:
-//
-//             self.rightButton.setTitle("立即支付", forState: .Normal)
-//        case 3:
-//
-//            self.rightButton.setTitle("确认收货", forState: .Normal)
-//        case 1:
-//            self.rightButton.hidden = true
-//        case 2:
-//            self.rightButton.hidden = true
-//        case 4:
-//            self.rightButton.hidden = true
-//        case 5:
-//            self.rightButton.hidden = true
-//        case 6:
-//            self.rightButton.hidden = true
-//        default:
-//
-//            break
-//        }
-//        if m.orderStatus == 0 {
-//            self.rightButton.setTitle("立即支付", forState: .Normal)
-//        }else if m.orderStatus == 3{
-//            self.rightButton.setTitle("确认收货", forState: .Normal)
-//        }else{
-//            self.rightButton.hidden = true
-//        }
+        rightViseButton.hidden = true
     }
     
     @IBAction func rightButtonClick(sender: UIButton) {

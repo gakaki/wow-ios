@@ -43,6 +43,10 @@
                     <constraint firstItem="l1z-i5-V0J" firstAttribute="leading" secondItem="S5p-Jb-qfq" secondAttribute="leadingMargin" constant="7" id="raV-wq-mL0"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="addressLabel" destination="l1z-i5-V0J" id="t8b-PY-phC"/>
+                <outlet property="personNameLabel" destination="H6J-jx-xWu" id="dhs-Y2-USB"/>
+            </connections>
             <point key="canvasLocation" x="363" y="336"/>
         </tableViewCell>
     </objects>

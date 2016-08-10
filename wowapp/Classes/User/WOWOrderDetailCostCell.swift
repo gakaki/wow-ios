@@ -1,15 +1,17 @@
 //
-//  WOWOrderDetailForGoodsCell.swift
+//  WOWOrderDetailFourCell.swift
 //  wowapp
 //
-//  Created by 陈旭 on 16/8/9.
+//  Created by 陈旭 on 16/8/8.
 //  Copyright © 2016年 小黑. All rights reserved.
 //
 
 import UIKit
 
-class WOWOrderDetailForGoodsCell: UITableViewCell {
-  @IBOutlet weak var cellTableView: UITableView!
+class WOWOrderDetailCostCell: UITableViewCell {
+    @IBOutlet weak var freightTypeLabel: UILabel!// 邮费 / 优惠券
+    @IBOutlet weak var priceLabel: UILabel!// 相关费用
+    @IBOutlet weak var saidImageView: UIImageView!// 相关费用
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

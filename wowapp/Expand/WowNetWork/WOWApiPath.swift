@@ -111,7 +111,12 @@ let URL_OrderBuyNow             = "order/buyNow"             //立即购买查�
 
 let URL_OrderCreat              = "order/create"           //创建订单
 
+
 let URL_OrderCharge             = "pay/charge"             //获取支付交易凭证
+
+let URL_OrderDetail              = "order/getDetail"           //订单详情
+
+
 
 let URL_PayResult               = "pay/payResult"          //查询支付结果
 

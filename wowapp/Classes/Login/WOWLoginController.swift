@@ -49,7 +49,9 @@ class WOWLoginController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func regist(sender: UIButton) {
-        toRegVC(false,isPresent: isPresent)
+//        toRegVC(false,isPresent: isPresent)
+        toRegVC(false, isPresent: isPresent, userInfoFromWechat: nil)
+        
     }
     
     

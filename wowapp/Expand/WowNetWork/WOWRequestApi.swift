@@ -124,6 +124,8 @@ public enum RequestApi{
     case Api_OrderCharge(orderNo: String, channel: String, clientIp: String)
     
     case Api_PayResult(orderCode: String)
+    
+    case Api_OrderConfirm(orderCode: String)
 //
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
@@ -304,6 +306,8 @@ extension RequestApi:TargetType{
             return URL_OrderCharge
         case .Api_PayResult:
             return URL_PayResult
+        case .Api_OrderConfirm:
+            return URL_OrderConfirm
             
         case .Api_Invite:
             return URL_Invite
@@ -318,7 +322,7 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_OrderBuyNow, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult:
 
 
             return .GET
@@ -439,6 +443,9 @@ extension RequestApi:TargetType{
                 params = ["productId": productId, "productQty": productQty]
             case let .Api_PayResult(orderCode):
                 params = ["orderCode": orderCode]
+            case let .Api_OrderConfirm(orderCode):
+                params = ["orderCode": orderCode]
+            
             
             case .Api_Home_Banners():
                 params =  ["pageType":1]
@@ -477,6 +484,8 @@ extension RequestApi:TargetType{
             return ""
         case .Api_CartAdd:
             return "添加购物车成功"
+        case .Api_OrderConfirm:
+            return "确认收货成功"
         default:
             return ""
         }

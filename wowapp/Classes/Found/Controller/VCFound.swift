@@ -1,6 +1,6 @@
 import UIKit
 import SnapKit
-import FlexboxLayout
+//import FlexboxLayout
 
 class VCFound: WOWBaseViewController {
     
@@ -218,6 +218,10 @@ WOWFoundCategoryCellDelegate
     func cellTouchInside(m:WOWFoundProductModel)
     {
         print(m.productId!)
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        vc.hideNavigationBar = true
+        vc.productId = m.productId
+        navigationController?.pushViewController(vc, animated: true)
 //        self.pushVC(vc:)
     }
     

@@ -109,11 +109,13 @@ let URL_OrderSettle             = "order/settle"            //查询订单内的
 
 let URL_OrderBuyNow             = "order/buyNow"             //立即购买查询信息
 
-let URL_OrderCreat              = "/order/create"           //创建订单
+let URL_OrderCreat              = "order/create"           //创建订单
 
-let URL_OrderCharge             = "/pay/charge"             //获取支付交易凭证
+let URL_OrderCharge             = "pay/charge"             //获取支付交易凭证
 
-let URL_PayResult               = "/pay/payResult"          //查询支付结果
+let URL_PayResult               = "pay/payResult"          //查询支付结果
+
+let URL_OrderConfirm            = "order/confirm"           //确认收货
 //4. 发现页面
 let URL_Found_Main              = "page/find/product"       
 let URL_Found_2nd               = "page/find/category"

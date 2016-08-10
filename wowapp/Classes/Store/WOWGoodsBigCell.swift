@@ -46,11 +46,10 @@ class WOWGoodsBigCell: UICollectionViewCell {
         self.model = model
         let priceImage = UIImage(named: "yellow_corner_back")
         priceBackImageView.image = priceImage?.stretchableImageWithLeftCapWidth(15, topCapHeight:Int((priceImage?.size.height)!)/2)
-        let url = model.productImage ?? ""
+        let url = model.productImg ?? ""
         bigPictureImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage: UIImage(named: "placeholder_product"))
         titleLabel.text = model.productName
-        desLabel.text   = model.productShortDes        
-        priceLabel.text  = model.price
-        likeButton.selected = (model.user_isLike == "true")
+        desLabel.text   = model.sellingPoint
+        priceLabel.text  = String(format: "%.2f",model.sellPrice ?? 0)
     }
 }

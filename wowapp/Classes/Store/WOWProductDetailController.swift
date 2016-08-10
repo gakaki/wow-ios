@@ -49,7 +49,6 @@ class WOWProductDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        productId = "140"
         request()
     }
 
@@ -86,7 +85,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     private func configData(){
         cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
-        placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImage ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+        placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImg ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
             if let strongSelf = self{
                 strongSelf.shareProductImage = image
             }
@@ -128,8 +127,8 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:分享
     @IBAction func shareClick(sender: UIButton) {
-        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
-        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+//        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
+//        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
     //MARK:喜欢
@@ -275,8 +274,8 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
     //分享
     func sharClick() {
         backView.hideBuyView()
-        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
-        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+//        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
+//        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
 
     }
 }

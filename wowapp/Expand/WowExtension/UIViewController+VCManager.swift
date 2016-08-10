@@ -39,7 +39,7 @@ extension  UIViewController {
         
     }
     //跳转注册/绑定微信界面需要传从哪跳转来的
-    func toRegVC(fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:SSDKUser = SSDKUser()){
+    func toRegVC(fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:NSDictionary?){
         
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController)) as! WOWRegistController
         vc.isPresent = isPresent
@@ -50,49 +50,63 @@ extension  UIViewController {
     //跳转微信登录界面
     func toWeixinVC(isPresent:Bool = false){
         print("toWeixinVC")
+                let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+//                UMSocialControllerService.defaultControllerService().socialUIDelegate = self
+                snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {[weak self]response in
+                    if let strongSelf = self{
+                        if response.responseCode == UMSResponseCodeSuccess {
+//                            let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
+                  
+                            
+                            strongSelf.checkWechatToken(response.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
+                        }else{
+                            DLog(response.thirdPlatformUserProfile)
+                        }
+                    }
+                })
         /**
          shareSDK第三方登录
          */
-        ShareSDK.getUserInfo(SSDKPlatformType.TypeWechat) { [weak self](state:SSDKResponseState, userData:SSDKUser!, error:NSError!) -> Void in
-            if let strongSelf = self{
-                switch state{
-                    
-                case SSDKResponseState.Success:
-                    print("获取授权成功")
-                    print(userData)
-                    print(userData.rawData)
-                    strongSelf.checkWechatToken(userData)
-                    
-                case SSDKResponseState.Fail:
-                    print("授权失败,错误描述:\(error)")
-                    
-                case SSDKResponseState.Cancel:
-                    print("授权取消")
-                    
-                default:
-                    break
-                }
-            }
-            
-        }
+//        ShareSDK.getUserInfo(SSDKPlatformType.TypeWechat) { [weak self](state:SSDKResponseState, userData:SSDKUser!, error:NSError!) -> Void in
+//            if let strongSelf = self{
+//                switch state{
+//                    
+//                case SSDKResponseState.Success:
+//                    print("获取授权成功")
+//                    print(userData)
+//                    print(userData.rawData)
+//                    strongSelf.checkWechatToken(userData, isPresent: isPresent)
+//                    
+//                case SSDKResponseState.Fail:
+//                    print("授权失败,错误描述:\(error)")
+//                    
+//                case SSDKResponseState.Cancel:
+//                    print("授权取消")
+//                    
+//                default:
+//                    break
+//                }
+//            }
+//            
+//        }
         
     }
-    private func checkWechatToken(userData:SSDKUser!,isPresent:Bool = false){
+    private func checkWechatToken(userData:NSDictionary,isPresent:Bool = false){
         //FIXME:验证token是否是第一次咯或者是第二次
-        var first = Int()//假设的bool值
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:userData.uid ?? ""), successClosure: {[weak self] (result) in
+        var first = Bool()//假设的bool值
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:(userData["openid"] ?? "") as! String), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
-                first = JSON(result)["isOpenIdBinded"].int ?? 1
+                first = JSON(result)["isOpenIdBinded"].bool ?? false
                 
-                if first == 0 {
+                if first {
                     strongSelf.toRegVC(true,isPresent: isPresent,userInfoFromWechat: userData)
                 }else{ //二次登录，拿到用户信息，这时候算是登录成功咯
                     //FIXME:未写的，先保存用户信息
                     let model = Mapper<WOWUserModel>().map(result)
                     WOWUserManager.saveUserInfo(model)
-                    strongSelf.toLoginSuccess()
+                    strongSelf.toLoginSuccess(isPresent)
                 }
             }
         }) {[weak self] (errorMsg) in

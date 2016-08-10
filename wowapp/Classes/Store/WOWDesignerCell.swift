@@ -26,8 +26,8 @@ class WOWDesignerCell: UITableViewCell {
     }
     
     func showData(model:WOWProductModel?) {
-        designerDesLabel.text   = model?.designer_desc
-        designerNameLabel.text  = model?.designer_name
+        designerDesLabel.text   = model?.designerName
+        designerNameLabel.text  = model?.designerName
         //暂时不要设计师图片
 //        guard let url = model?.designer_image where !url.isEmpty else{
             designerImageHeight.constant = 0

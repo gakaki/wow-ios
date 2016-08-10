@@ -44,7 +44,7 @@ class WOWOrderController: WOWBaseViewController {
         super.viewDidLoad()
         tableView.mj_header = self.mj_header
         
-//        tableView.mj_footer = self.mj_footer
+        tableView.mj_footer = self.mj_footer
         
         request()
     }
@@ -157,18 +157,22 @@ extension WOWOrderController:TopMenuProtocol{
 }
 
 extension WOWOrderController:OrderCellDelegate{
-    func OrderCellClick(type: OrderCellAction,model:WOWOrderListModel,cell:WOWOrderListCell) {
+    func OrderCellClick(type: OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell) {
         switch type {
         case .Comment:
-            commentOrder(model.id ?? "")
+            print("评价")
+//            commentOrder(model.id ?? "")
         case .Delete:
-            deleteOrder(model,cell: cell)
+            print("删除")
+//            deleteOrder(model,cell: cell)
         case .Pay:
-            payOrder(model.id ?? "",model: model)
+            print("支付")
+//            payOrder(model.id ?? "",model: model)
         case .ShowTrans:
             DLog("查看物流")
         case .SureReceive:
-            confirmReceive(model.id ?? "",cell: cell)
+            print("确认收货")
+            confirmReceive(model.orderCode ?? "",cell: cell)
         }
     }
     
@@ -198,15 +202,12 @@ extension WOWOrderController:OrderCellDelegate{
     }
     
     //确认收货
-    private func confirmReceive(orderid:String,cell:WOWOrderListCell){
+    private func confirmReceive(orderCode:String,cell:WOWOrderListCell){
         func confirm(){
-            let uid = WOWUserManager.userID
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderStatus(uid: uid, order_id: orderid, status:"3"), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result) in
                 if let strongSelf = self{
-                    let ret = JSON(result).int ?? 0
-                    if ret == 1{
-                        strongSelf.request()
-                    }
+                    //确认收货成功后重新请求下网络刷新列表
+                    strongSelf.request()
                 }
             }) { (errorMsg) in
                 
@@ -270,7 +271,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderListCell", forIndexPath: indexPath) as! WOWOrderListCell
                 let orderModel = self.dataArr[indexPath.section]
-        
+        cell.delegate = self
         cell.showData(dataArr[indexPath.section])
         if orderModel.orderStatus == 0 {
             cell.rightButton.hidden = false

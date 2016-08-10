@@ -15,9 +15,6 @@
 		063968741D54950B00631BDF /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968731D54950B00631BDF /* VCCategory.swift */; };
 		063968771D549F8000631BDF /* VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968761D549F8000631BDF /* VCManager.swift */; };
 		06568A881D585A30008D2B1A /* ObjectMapper+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */; };
-		06568A8B1D5861F1008D2B1A /* JSONNeverDie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; };
-		06568A8C1D586287008D2B1A /* JSONNeverDie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; };
-		06568A8D1D586287008D2B1A /* JSONNeverDie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		068B60B11D4F3561001AD778 /* Found.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B01D4F3560001AD778 /* Found.storyboard */; };
 		068B60B31D4F3DD5001AD778 /* VCFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60B21D4F3DD5001AD778 /* VCFound.swift */; };
 		068B60B51D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */; };
@@ -30,8 +27,6 @@
 		069E094E1D576B3200F8AE8F /* UIImage+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */; };
 		069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094F1D57942C00F8AE8F /* UILabel+Style.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
-		06D48E611D57231B00C11088 /* FlexboxLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */; };
-		06D48E621D57231B00C11088 /* FlexboxLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */; };
 		06FED4441D4634A600D7B068 /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 06FED4431D4634A600D7B068 /* city.json */; };
 		292CBA081CFE85B000248C88 /* WOWRegistInfoFirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */; };
@@ -332,6 +327,10 @@
 		636C34201D57286A00CA4E69 /* WOWBrandHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C341F1D57286A00CA4E69 /* WOWBrandHeaderView.swift */; };
 		636C34221D57288400CA4E69 /* WOWBrandHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636C34211D57288400CA4E69 /* WOWBrandHeaderView.xib */; };
 		636C34241D585BF500CA4E69 /* WOWDesignerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C34231D585BF400CA4E69 /* WOWDesignerModel.swift */; };
+		636C34291D5B354400CA4E69 /* FlexboxLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */; };
+		636C342A1D5B354400CA4E69 /* FlexboxLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		636C342B1D5B354800CA4E69 /* JSONNeverDie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; };
+		636C342C1D5B354800CA4E69 /* JSONNeverDie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -342,8 +341,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				29FF27181CFDA8C100DF2A9B /* RealmSwift.framework in Embed Frameworks */,
-				06D48E621D57231B00C11088 /* FlexboxLayout.framework in Embed Frameworks */,
-				06568A8D1D586287008D2B1A /* JSONNeverDie.framework in Embed Frameworks */,
+				636C342A1D5B354400CA4E69 /* FlexboxLayout.framework in Embed Frameworks */,
+				636C342C1D5B354800CA4E69 /* JSONNeverDie.framework in Embed Frameworks */,
 				29FF27161CFDA8C100DF2A9B /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -712,18 +711,17 @@
 				29FF27351CFDB5D200DF2A9B /* CoreGraphics.framework in Frameworks */,
 				29FF27331CFDB5C300DF2A9B /* libiconv.tbd in Frameworks */,
 				29FF27311CFDB5BD00DF2A9B /* Security.framework in Frameworks */,
-				06D48E611D57231B00C11088 /* FlexboxLayout.framework in Frameworks */,
+				636C34291D5B354400CA4E69 /* FlexboxLayout.framework in Frameworks */,
 				29FF272F1CFDB5B500DF2A9B /* ImageIO.framework in Frameworks */,
 				29FF272D1CFDB5AB00DF2A9B /* SystemConfiguration.framework in Frameworks */,
 				29FF26F51CFDA86300DF2A9B /* libSocialQQ.a in Frameworks */,
-				06568A8B1D5861F1008D2B1A /* JSONNeverDie.framework in Frameworks */,
+				636C342B1D5B354800CA4E69 /* JSONNeverDie.framework in Frameworks */,
 				29FF27031CFDA86300DF2A9B /* libSocialWechat.a in Frameworks */,
 				29FF27041CFDA86300DF2A9B /* libWeChatSDK.a in Frameworks */,
 				29FF26F61CFDA86300DF2A9B /* TencentOpenAPI.framework in Frameworks */,
 				29FF27151CFDA8C000DF2A9B /* Realm.framework in Frameworks */,
 				29FF26F91CFDA86300DF2A9B /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
 				29FF27171CFDA8C100DF2A9B /* RealmSwift.framework in Frameworks */,
-				06568A8C1D586287008D2B1A /* JSONNeverDie.framework in Frameworks */,
 				3ED3BC4851F34DEAC2416C6D /* Pods_wowapp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1711,7 +1709,6 @@
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VSWKQE5HA8;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -1899,7 +1896,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

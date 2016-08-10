@@ -154,10 +154,9 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     private func configData(){
-        priceLabel.text = productModel?.price?.priceFormat() ?? ""
-        cycleView.imageURLArray = [productModel?.productImage ?? ""]
-        favoriteButton.selected = (productModel?.user_isLike ?? "false") == "true"
-        placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImage ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+        priceLabel.text = String(format: "¥ %.2f",productModel?.sellPrice ?? 0)
+        cycleView.imageURLArray = [productModel?.productImg ?? ""]
+        placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImg ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
             if let strongSelf = self{
                 strongSelf.shareProductImage = image
             }
@@ -222,8 +221,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
 
     
     @IBAction func shareButtonClick(sender: UIButton) {
-        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
-        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+//        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
+//        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
     lazy var backView:WOWBuyBackView = {
@@ -255,26 +254,26 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 0: //系列
             return 1
         case 1: //图文
-            if let pics = productModel?.pics_compose{
+            if let pics = productModel?.primaryImgs{
                 return pics.count
             }
             return 0
         case 2: //设计师
-            if let _ = productModel?.designer_name{
+            if let _ = productModel?.designerName{
                 return 1
             }
             return 0
         case 3: //参数
-            if let att = productModel?.attributes {
-                return att.count
-            }
+//            if let att = productModel?.productParameter {
+//                return att.count
+//            }
             return 0
         case 4: //喜欢
             return 0
         case 5: //评论
-            if let commentList = productModel?.comments {
-                return commentList.count > 5 ? 5 : commentList.count
-            }
+//            if let commentList = productModel?.comments {
+//                return commentList.count > 5 ? 5 : commentList.count
+//            }
             return 0
         default:
             return 0
@@ -291,9 +290,9 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsDetailCell), forIndexPath: indexPath) as! WOWGoodsDetailCell
-            if let pics = productModel?.pics_compose{
+            if let pics = productModel?.primaryImgs{
                 let model = pics[indexPath.row]
-                cell.showData(model)
+//                cell.showData(model)
             }
             returnCell = cell
         case 2: //设计师
@@ -302,13 +301,13 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case 3: //参数
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWGoodsParamCell), forIndexPath: indexPath) as! WOWGoodsParamCell
-            if let att = productModel?.attributes {
-                cell.showData(att[indexPath.row])
-            }
+//            if let att = productModel?.attributes {
+//                cell.showData(att[indexPath.row])
+//            }
             returnCell = cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
-            cell.rightTitleLabel.text = "\(productModel?.likesCount ?? 0)人喜欢"
+//            cell.rightTitleLabel.text = "\(productModel?.likesCount ?? 0)人喜欢"
             cell.rightBackView.addAction({ [weak self] in
                 if let strongSelf = self{
                     let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
@@ -319,11 +318,11 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 5: //评论
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
             cell.hideHeadImage()
-            if let model = productModel?.comments?[indexPath.row]{
-                cell.commentLabel.text = model.comment
-                cell.dateLabel.text    = model.created_at
-                cell.nameLabel.text    = model.user_nick
-            }
+//            if let model = productModel?.comments?[indexPath.row]{
+//                cell.commentLabel.text = model.comment
+//                cell.dateLabel.text    = model.created_at
+//                cell.nameLabel.text    = model.user_nick
+//            }
             returnCell = cell
         default:
             DLog("")
@@ -333,7 +332,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     func brandHeadClick() {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-        vc.brandID = productModel?.brandID?.toInt()
+        vc.brandID = productModel?.brandId
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -348,13 +347,13 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 2:
-            return productModel?.designer_name == nil ? 0.01 : 36
+            return productModel?.designerName == nil ? 0.01 : 36
         case 3:
             return 36
         case 5: //评论
-            if let arr = productModel?.comments {
-                return arr.count == 0 ? 0.01 : 36
-            }
+//            if let arr = productModel?.comments {
+//                return arr.count == 0 ? 0.01 : 36
+//            }
             return 0.01
         default:
             return 0.01
@@ -380,21 +379,21 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         case 0,1:
             return nil
         case 2: //设计师
-            return productModel?.designer_name == nil ? nil : WOWMenuTopView(leftTitle: "设计师", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
+            return productModel?.designerName == nil ? nil : WOWMenuTopView(leftTitle: "设计师", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
         case 3://参数
             return WOWMenuTopView(leftTitle: "产品参数", rightHiden: true, topLineHiden: true, bottomLineHiden: false)
-        case 5: //评论
-            if let arr = productModel?.comments {
-                if arr.count == 0 {
-                    return nil
-                }else{
-                    let view =  WOWMenuTopView(leftTitle: "\(productModel?.comments_count ?? 0)条评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
-                    goComment(view)
-                    return view
-                }
-            }else{
-                return nil
-            }
+//        case 5: //评论
+//            if let arr = productModel?.comments {
+//                if arr.count == 0 {
+//                    return nil
+//                }else{
+//                    let view =  WOWMenuTopView(leftTitle: "\(productModel?.comments_count ?? 0)条评论", rightHiden: false, topLineHiden: false, bottomLineHiden: false)
+//                    goComment(view)
+//                    return view
+//                }
+//            }else{
+//                return nil
+//            }
         default:
             return nil
         }
@@ -402,11 +401,11 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 5 {
-            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden:(productModel?.comments?.count ?? 0) == 0 ? true:false, bottomLineHiden: false)
-            goComment(footerView)
-            return footerView
-        }
+//        if section == 5 {
+//            let footerView = WOWMenuTopView(leftTitle: "发表评论", rightHiden: false, topLineHiden:(productModel?.comments?.count ?? 0) == 0 ? true:false, bottomLineHiden: false)
+//            goComment(footerView)
+//            return footerView
+//        }
         return nil
     }
     

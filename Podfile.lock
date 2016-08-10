@@ -19,14 +19,13 @@ PODS:
   - EZSwiftExtensions (1.2.3)
   - FCUUID (1.2.0):
     - UICKeyChainStore (~> 2.1.0)
-  - HappyDNS (0.3.9)
+  - HappyDNS (0.3.10)
   - Hashids-Swift (0.3.0)
   - HidingNavigationBar (0.3.0)
   - IQKeyboardManagerSwift (4.0.4)
   - JSONCodable (2.1)
   - Kingfisher (2.4.2)
   - MJRefresh (3.1.10)
-  - MOBFoundation (2.0.7)
   - MonkeyKing (0.9.2)
   - Moya (6.1.3):
     - Moya/Core (= 6.1.3)
@@ -48,12 +47,6 @@ PODS:
   - Result (1.0.2)
   - RongCloudIMKit (2.6.0)
   - RxSwift (2.2.0)
-  - ShareSDK3 (3.3.2):
-    - ShareSDK3/ShareSDK (= 3.3.2)
-  - ShareSDK3/ShareSDK (3.3.2)
-  - ShareSDK3/ShareSDKPlatforms/SinaWeibo (3.3.2)
-  - ShareSDK3/ShareSDKPlatforms/WeChat (3.3.2)
-  - ShareSDK3/ShareSDKUI (3.3.2)
   - SnapKit (0.19.1)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
@@ -80,7 +73,6 @@ DEPENDENCIES:
   - JSONCodable
   - Kingfisher
   - MJRefresh
-  - MOBFoundation
   - MonkeyKing (~> 0.9.2)
   - Moya (~> 6.1.3)
   - ObjectMapper
@@ -90,10 +82,6 @@ DEPENDENCIES:
   - Qiniu (from `qiniu-sdk/Qiniu.podspec`)
   - RongCloudIMKit (= 2.6.0)
   - RxSwift (~> 2.2.0)
-  - ShareSDK3
-  - ShareSDK3/ShareSDKPlatforms/SinaWeibo
-  - ShareSDK3/ShareSDKPlatforms/WeChat
-  - ShareSDK3/ShareSDKUI
   - SnapKit (~> 0.19.1)
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON
@@ -117,14 +105,13 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
   FCUUID: 9bfe031d35b7c221a7c66156a0af45d4eb49c3b6
-  HappyDNS: 17be04178df2dd09f0ee6ac33628589b7f9910e8
+  HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Hashids-Swift: 5d7c069b0d4a3b70d4e2a840c420115dd517050d
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
   JSONCodable: d3bb8d1323bb4cbc381b16219046c5282565a4f1
   Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
-  MOBFoundation: af2388967017966e003c676a6cfffe784a1dead2
   MonkeyKing: 2cf420f9202a51714734374c97d96cf496e7ae2b
   Moya: 26b290a8d675c167ea6229ba08e07dce562265a5
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
@@ -134,7 +121,6 @@ SPEC CHECKSUMS:
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RongCloudIMKit: bbfcb34596b25666fb1be470644162142368bcdb
   RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
-  ShareSDK3: c76cb96eb38e079952b8157071486d945faa2df2
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
@@ -145,6 +131,6 @@ SPEC CHECKSUMS:
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: cc1cae455f7bb2a1333f65a26c387cf575c6dd3d
+PODFILE CHECKSUM: fe49e062e0ca33eef99d86192d1e4dfa7d973285
 
-COCOAPODS: 1.1.0.beta.1
+COCOAPODS: 1.0.1

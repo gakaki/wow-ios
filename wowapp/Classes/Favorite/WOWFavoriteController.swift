@@ -59,6 +59,7 @@ class WOWFavoriteController: WOWBaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.hidden = false
+
     }
     
     override func didReceiveMemoryWarning() {

@@ -13,20 +13,21 @@ class WOWController: WOWBaseViewController {
     var dataArr = [WOWCarouselBanners]()
     var bannerArray = [WOWCarouselBanners]()
     @IBOutlet var tableView: UITableView!
-    var hidingNavBarManager: HidingNavigationBarManager?
+//    var hidingNavBarManager: HidingNavigationBarManager?
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.hideNavigationBar = true
         request()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
         
         //FIXME:为了让动画出现 所以多reload一次咯
-        tableView.reloadData()
-        hidingNavBarManager?.viewWillAppear(animated)
+//        tableView.reloadData()
+//        hidingNavBarManager?.viewWillAppear(animated)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -35,12 +36,12 @@ class WOWController: WOWBaseViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        hidingNavBarManager?.viewWillDisappear(animated)
+//        hidingNavBarManager?.viewWillDisappear(animated)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        hidingNavBarManager?.viewDidLayoutSubviews()
+//        hidingNavBarManager?.viewDidLayoutSubviews()
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,15 +66,15 @@ class WOWController: WOWBaseViewController {
     
 //MARK:Private Method
     override func setUI() {
-        navigationItem.title = "尖叫设计"
+//        navigationItem.title = "尖叫设计"
         tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
         tableView.backgroundColor = DefaultBackColor
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
-        configBarItem()
-        tableView.mj_header = mj_header
+//        configBarItem()
+//        tableView.mj_header = mj_header
         tableView.tableHeaderView = banner
-        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+//        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
 //        if let tabBar = navigationController?.tabBarController?.tabBar {
 //            hidingNavBarManager?.manageBottomBar(tabBar)
 //            tabBar.barTintColor = UIColor(white: 230/255, alpha: 1)
@@ -215,7 +216,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
-        hidingNavBarManager?.shouldScrollToTop()
+//        hidingNavBarManager?.shouldScrollToTop()
         return true
     }
 

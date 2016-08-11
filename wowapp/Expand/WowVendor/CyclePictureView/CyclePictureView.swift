@@ -257,8 +257,8 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         super.layoutSubviews()
         
 
-        self.flowLayout?.itemSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height - 20)
-        self.collectionView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 20)
+        self.flowLayout?.itemSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height)
+        self.collectionView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)
         //解决从SB中加载时，contentInset.Top默认为64的问题
         self.collectionView.contentInset = UIEdgeInsetsZero
         

@@ -32,7 +32,7 @@ class VCFound: WOWBaseViewController {
                 if let strongSelf = self{
                     
                         let r                             =  JSON(result)
-                        strongSelf.vo_products            =  Mapper<WOWFoundProductModel>().mapArray(r["pageNewProductVoList"].arrayObject)!
+                        strongSelf.vo_products            =  Mapper<WOWFoundProductModel>().mapArray(r["pageNewProductVoList"].arrayObject) ?? [WOWFoundProductModel]()
                         strongSelf.vo_recommend_product   =  Mapper<WOWFoundProductModel>().map( r["recommendProduct"].dictionaryObject )
                         //还要请求一次分类 在加载数据 以后改成rxswift 2者合并 现在代码真糟糕
                     
@@ -40,7 +40,7 @@ class VCFound: WOWBaseViewController {
                             if let strongSelf = self{
                                 
                                 let r                             =  JSON(result)
-                                strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray(r["pageCategoryVoList"].arrayObject)!
+                                strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray(r["pageCategoryVoList"].arrayObject) ?? [WOWCategoryModel]()
                                 
                                 strongSelf.tableView.reloadData()
                                 

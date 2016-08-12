@@ -41,10 +41,9 @@ class WOWProductDetailController: WOWBaseViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWGoodsSureBuyNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWUpdateCarBadgeNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWGoodsSureAddCarNotificationKey, object: nil)
+
     }
     
     override func viewDidLoad() {

@@ -207,9 +207,8 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
             pageControl.currentPageIndicatorTintColor = self.currentDotColor
             pageControl.pageIndicatorTintColor = self.otherDotColor
             pageControl.userInteractionEnabled = false
-            pageControl.backgroundColor = UIColor.whiteColor()
+            pageControl.backgroundColor = UIColor.clearColor()
             self.addSubview(pageControl)
-            
             self.pageControl = pageControl
         }
 

@@ -38,12 +38,12 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
             if let strongSelf = self{
                 
                 let r                             =  JSON(result)
-                strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray( r["categoryList"].arrayObject )!
+                strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWCategoryModel]()
                 
                 WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: strongSelf.query_asc, currentPage: strongSelf.query_currentPage, showCount: strongSelf.query_showCount, sortBy: strongSelf.query_sortBy, categoryId: strongSelf.cid.toInt()! ), successClosure: {[weak self] (result) in
                     
                         let res                   = JSON(result)
-                        strongSelf.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject)!
+                        strongSelf.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
                         strongSelf.cv.reloadData()
                     
                 }){ (errorMsg) in

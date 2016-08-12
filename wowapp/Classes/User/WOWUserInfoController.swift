@@ -14,6 +14,8 @@ import Hashids_Swift
 import FCUUID
 import IQKeyboardManagerSwift
 
+let PickerViewHeight : CGFloat   =    250
+
 class WOWUserInfoController: WOWBaseTableViewController {
 
     @IBOutlet weak var headImageView: UIImageView!
@@ -105,7 +107,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
         backGroundMaskView.addTapGesture(target: self, action: #selector(cancelPicker))
         
-        pickerContainerView.frame = CGRectMake(0, MGScreenHeight,UIApplication.currentViewController()?.view.w ?? MGScreenWidth, 300)
+        pickerContainerView.frame = CGRectMake(0, MGScreenHeight,UIApplication.currentViewController()?.view.w ?? MGScreenWidth, PickerViewHeight)
         
 
         pickerContainerView.pickerView.delegate = self
@@ -141,7 +143,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     func cancelPicker(){
 
         self.backGroundMaskView.hidden = true
-        UIView.animateWithDuration(0.5){
+        UIView.animateWithDuration(0.3){
             self.pickerContainerView.mj_y = MGScreenHeight
         }
     }
@@ -260,8 +262,8 @@ extension WOWUserInfoController{
         
         self.backGroundMaskView.hidden = false
         
-        UIView.animateWithDuration(0.5){
-            self.pickerContainerView.mj_y = self.view.h - 300 + 64
+        UIView.animateWithDuration(0.3){
+            self.pickerContainerView.mj_y = self.view.h - PickerViewHeight + 64
 
         }
     }

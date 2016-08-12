@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -24,8 +24,8 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="太白色" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ha-VM-5gP">
-                        <rect key="frame" x="64" y="34" width="58" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ha-VM-5gP">
+                        <rect key="frame" x="64" y="34" width="0.0" height="0.0"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,8 +54,8 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ciotole触碰式LED灯" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crT-ID-XEu">
-                        <rect key="frame" x="130" y="34" width="111" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crT-ID-XEu">
+                        <rect key="frame" x="72" y="34" width="0.0" height="0.0"/>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -65,30 +65,25 @@
                 <constraints>
                     <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="leading" constant="61" id="07H-XK-Lci"/>
                     <constraint firstItem="R4R-2a-Q5F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="28f-kt-bOW"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="8Ha-VM-5gP" secondAttribute="bottom" constant="6.5" id="2NF-9s-Uzs"/>
                     <constraint firstItem="GgV-4n-hot" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="229" id="4i8-NM-IVJ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="au4-E8-Hsl" secondAttribute="trailing" constant="0.5" id="59r-Za-9cT"/>
                     <constraint firstAttribute="trailingMargin" secondItem="fXJ-fB-5XR" secondAttribute="trailing" constant="78" id="6uy-Ve-fOu"/>
-                    <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="8" id="AA9-nA-a3K"/>
                     <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="8" id="CI0-0A-aXc"/>
+                    <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="8" id="EkI-P4-Fw2"/>
                     <constraint firstItem="R4R-2a-Q5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="GPj-4s-HIP"/>
                     <constraint firstAttribute="bottomMargin" secondItem="au4-E8-Hsl" secondAttribute="bottom" constant="6.5" id="Ikc-TS-L1h"/>
-                    <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="R4R-2a-Q5F" secondAttribute="trailing" constant="75" id="Iu2-Wc-v59"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="195" id="J6R-H3-vTe"/>
-                    <constraint firstItem="au4-E8-Hsl" firstAttribute="leading" secondItem="crT-ID-XEu" secondAttribute="trailing" constant="55" id="Jvm-Dn-JHg"/>
+                    <constraint firstItem="8Ha-VM-5gP" firstAttribute="top" secondItem="fXJ-fB-5XR" secondAttribute="bottom" constant="1" id="MKo-hR-mlb"/>
+                    <constraint firstItem="crT-ID-XEu" firstAttribute="centerY" secondItem="8Ha-VM-5gP" secondAttribute="centerY" id="PZW-Th-lZ0"/>
                     <constraint firstItem="au4-E8-Hsl" firstAttribute="top" secondItem="GgV-4n-hot" secondAttribute="bottom" constant="1" id="Tvs-Ey-u2g"/>
+                    <constraint firstItem="8Ha-VM-5gP" firstAttribute="leading" secondItem="R4R-2a-Q5F" secondAttribute="trailing" constant="9" id="ZuC-5y-WZb"/>
                     <constraint firstItem="GgV-4n-hot" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="aHG-Gh-xB7"/>
-                    <constraint firstItem="crT-ID-XEu" firstAttribute="top" secondItem="fXJ-fB-5XR" secondAttribute="bottom" constant="1" id="c3N-2m-d7j"/>
                     <constraint firstItem="8Ha-VM-5gP" firstAttribute="trailing" secondItem="crT-ID-XEu" secondAttribute="trailing" constant="-142" id="eVd-4e-1oY"/>
                     <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="8" id="iac-5I-Bff"/>
                     <constraint firstAttribute="trailingMargin" secondItem="GgV-4n-hot" secondAttribute="trailing" id="if5-8m-Qqq"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="crT-ID-XEu" secondAttribute="bottom" constant="6.5" id="jq9-H7-FRc"/>
                     <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="117" id="kc9-hU-0bg"/>
-                    <constraint firstItem="8Ha-VM-5gP" firstAttribute="leading" secondItem="R4R-2a-Q5F" secondAttribute="trailing" constant="9" id="sIM-7W-CfT"/>
                     <constraint firstAttribute="trailingMargin" secondItem="crT-ID-XEu" secondAttribute="trailing" constant="61" id="tIt-ts-5fN"/>
-                    <constraint firstItem="8Ha-VM-5gP" firstAttribute="top" secondItem="fXJ-fB-5XR" secondAttribute="bottom" constant="1" id="u5f-FT-dRb"/>
                     <constraint firstItem="fXJ-fB-5XR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="55" id="upv-IE-8Mh"/>
-                    <constraint firstItem="au4-E8-Hsl" firstAttribute="leading" secondItem="crT-ID-XEu" secondAttribute="trailing" constant="55" id="xm6-AI-kgg"/>
                     <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="16" id="zcV-le-N4S"/>
                     <constraint firstItem="fXJ-fB-5XR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="zkk-1X-ZEe"/>
                 </constraints>

@@ -18,6 +18,7 @@ enum ClickActionType {
     case starType
 }
 
+
 class WOWRegistInfoSecondController: WOWBaseTableViewController {
     @IBOutlet weak var manButton: UIButton!
     @IBOutlet weak var womanButton: UIButton!
@@ -82,7 +83,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         
         backGroundMaskView.addTapGesture(target: self, action: #selector(cancelPicker))
         
-        pickerContainerView.frame = CGRectMake(0, MGScreenHeight,UIApplication.currentViewController()?.view.w ?? MGScreenWidth, 300)
+        pickerContainerView.frame = CGRectMake(0, MGScreenHeight,UIApplication.currentViewController()?.view.w ?? MGScreenWidth, 250)
         
         
         pickerContainerView.pickerView.delegate = self
@@ -133,7 +134,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         starTextField.resignFirstResponder()
         
         self.backGroundMaskView.hidden = true
-        UIView.animateWithDuration(0.5){
+        UIView.animateWithDuration(0.3){
             self.pickerContainerView.mj_y = MGScreenHeight
         }
         
@@ -271,8 +272,8 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
         
         self.backGroundMaskView.hidden = false
         
-        UIView.animateWithDuration(0.5){
-            self.pickerContainerView.mj_y = self.view.h - 300 + 64
+        UIView.animateWithDuration(0.3){
+            self.pickerContainerView.mj_y = self.view.h - 250 + 64
             
         }
     }

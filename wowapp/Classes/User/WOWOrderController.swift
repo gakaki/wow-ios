@@ -129,18 +129,28 @@ class WOWOrderController: WOWBaseViewController {
                         strongSelf.dataArr = []
                     }
                     strongSelf.dataArr.appendContentsOf(array)
-                    strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < totalPage {
+                        strongSelf.tableView.mj_footer = nil
+
+                    }else {
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    }
 
                 }else {
                     strongSelf.tableView.mj_footer = nil
 
                 }
 
-                
                 strongSelf.tableView.reloadData()
             }
-        }) { (errorMsg) in
-            
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.tableView.mj_footer = nil
+                strongSelf.endRefresh()
+
+            }
+
         }
     }
     

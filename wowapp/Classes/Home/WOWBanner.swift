@@ -22,14 +22,15 @@ class WOWBanner: UIView {
         
     }
     func reloadBanner(dataArr:[WOWCarouselBanners]){
+        imageURLArray = []
         for i in 0..<dataArr.count {
             imageURLArray.append(dataArr[i].bannerImgSrc! as String)
         }
 
         cyclePictureView.showPageControl = false
         cyclePictureView.imageURLArray = imageURLArray
-        cyclePictureView.timeInterval = 5
-
+        cyclePictureView.timeInterval = 3
+        
     }
 
 }

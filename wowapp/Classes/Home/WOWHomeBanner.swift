@@ -25,10 +25,10 @@ class WOWHomeBanner: WOWBaseModel,Mappable {
 
 }
 final class WOWCarouselBanners: WOWBaseModel,Mappable{
-    var bannerLinkTargetId    :   String?
+    var bannerLinkTargetId    :   Int?
     var bannerLinkUrl         :   String?
     var bannerImgSrc          :   String?
-    var bannerLinkType        :   String?
+    var bannerLinkType        :   Int?
     
     required init?(_ map: Map) {
         

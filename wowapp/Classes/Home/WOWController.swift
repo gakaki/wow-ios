@@ -8,10 +8,11 @@
 
 import UIKit
 
+
 class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
-    var dataArr = [WOWCarouselBanners]()
-    var bannerArray = [WOWCarouselBanners]()
+    var dataArr = [WOWCarouselBanners]()    //商品列表数组
+    var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
     @IBOutlet var tableView: UITableView!
 //    var hidingNavBarManager: HidingNavigationBarManager?
     override func viewDidLoad() {
@@ -56,6 +57,7 @@ class WOWController: WOWBaseViewController {
 
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
+        view.cyclePictureView.delegate = self
         view.jsButton.addTarget(self, action: #selector(jsClick), forControlEvents: .TouchUpInside)
         view.dgButton.addTarget(self, action: #selector(dgClick), forControlEvents: .TouchUpInside)
         view.zdButton.addTarget(self, action: #selector(zdClick), forControlEvents: .TouchUpInside)
@@ -72,13 +74,10 @@ class WOWController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
 //        configBarItem()
-//        tableView.mj_header = mj_header
+        tableView.mj_header = mj_header
         tableView.tableHeaderView = banner
 //        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
-//        if let tabBar = navigationController?.tabBarController?.tabBar {
-//            hidingNavBarManager?.manageBottomBar(tabBar)
-//            tabBar.barTintColor = UIColor(white: 230/255, alpha: 1)
-//        }
+
     }
 
    
@@ -140,19 +139,17 @@ class WOWController: WOWBaseViewController {
                 
                 let carouselBanners = Mapper<WOWCarouselBanners>().mapArray(JSON(result)["carouselBanners"].arrayObject)
                 if let carouselBanners = carouselBanners{
+                    strongSelf.bannerArray = []
                     strongSelf.bannerArray = carouselBanners
                 }
                 if let brandArray = bannerList{
+                    strongSelf.dataArr = []
                     strongSelf.dataArr.appendContentsOf(brandArray)
                 }
                 strongSelf.banner.reloadBanner(strongSelf.bannerArray)
               
                 strongSelf.tableView.reloadData()
-//                if let arr2 = arr1{
-//                    strongSelf.dataArr = []
-//                    strongSelf.dataArr += arr2
-//                    strongSelf.tableView.reloadData()
-//                }
+
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
@@ -208,11 +205,38 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let scene = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
-//        let model       = dataArr[indexPath.row]
-//        scene.sceneID   = model.id
-        scene.hideNavigationBar = true
-        navigationController?.pushViewController(scene, animated: true)
+      
+        let model       = dataArr[indexPath.row]
+        if let bannerLinkType = model.bannerLinkType {
+            switch bannerLinkType {
+            case 1:
+                print("专题")
+            case 2:
+                print("品牌详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+                vc.brandID = model.bannerLinkTargetId
+                vc.entrance = .brandEntrance
+                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
+
+            case 3:
+                print("设计师详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+                vc.designerId = model.bannerLinkTargetId
+                vc.entrance = .designerEntrance
+                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
+            case 4:
+                print("商品详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+                vc.hideNavigationBar = true
+                vc.productId = model.bannerLinkTargetId
+                navigationController?.pushViewController(vc, animated: true)
+            default:
+                print("其他")
+            }
+            
+        }
     }
     
     func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
@@ -230,6 +254,51 @@ extension WOWController:SenceCellDelegate{
         vc.hideNavigationBar = true
         vc.productId = produtID
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension WOWController: CyclePictureViewDelegate {
+    func cyclePictureView(cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let model = bannerArray[indexPath.row]
+        print(model.bannerLinkType)
+        if let bannerLinkType = model.bannerLinkType {
+            switch bannerLinkType {
+            case 1:
+                print("web后台填连接")
+            case 2:
+                print("专题详情页（商品列表）")
+            case 3:
+                print("专题详情页（图文混排）")
+            case 4:
+                print("品牌详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+                vc.brandID = model.bannerLinkTargetId
+                vc.entrance = .brandEntrance
+                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
+
+            case 5:
+                print("设计师详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+                vc.designerId = model.bannerLinkTargetId
+                vc.entrance = .designerEntrance
+                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
+            case 6:
+                print("商品详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+                vc.hideNavigationBar = true
+                vc.productId = model.bannerLinkTargetId
+                navigationController?.pushViewController(vc, animated: true)
+
+            case 7:
+                print("分类详情页")
+            default:
+                print("其他")
+            }
+
+        }
+       
     }
 }
 

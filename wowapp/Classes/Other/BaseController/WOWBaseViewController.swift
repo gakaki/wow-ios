@@ -43,11 +43,14 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 //MARK:Life
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        MobClick.endLogPageView(self.title)
         UIApplication.sharedApplication().keyWindow?.endEditing(true)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        //友盟统计页面
+        MobClick.beginLogPageView(self.title)
         setCustomerBack()
         if hideNavigationBar {
             //设置导航栏透明

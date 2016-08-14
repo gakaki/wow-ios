@@ -8,7 +8,7 @@ class VCFound: WOWBaseViewController {
     let cellID2              = String( WOWFoundRecommendCell )
     let cellID3              = String( WOWFoundCategoryCell )
 
-    let cell3_height         = CGFloat(440)
+    let cell3_height         = CGFloat(400)
     var vo_products          = [WOWFoundProductModel]()
     var vo_recommend_product:WOWFoundProductModel?
     var vo_categories        = [WOWCategoryModel]()
@@ -33,7 +33,7 @@ class VCFound: WOWBaseViewController {
                     
                         let r                             =  JSON(result)
                         strongSelf.vo_products            =  Mapper<WOWFoundProductModel>().mapArray(r["pageNewProductVoList"].arrayObject) ?? [WOWFoundProductModel]()
-                        strongSelf.vo_recommend_product   =  Mapper<WOWFoundProductModel>().map( r["recommendProduct"].dictionaryObject )
+                        strongSelf.vo_recommend_product   =  Mapper<WOWFoundProductModel>().map( r["recommendProduct"].object )
                         //还要请求一次分类 在加载数据 以后改成rxswift 2者合并 现在代码真糟糕
                     
                         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_2nd, successClosure: {[weak self] (result) in
@@ -68,7 +68,7 @@ class VCFound: WOWBaseViewController {
     
        
         tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = 500
         tableView.separatorColor     = SeprateColor;
         tableView.registerNib(UINib.nibName(String(WOWFoundWeeklyNewCell)), forCellReuseIdentifier:cellID1)
         tableView.registerClass(WOWFoundRecommendCell.self, forCellReuseIdentifier:cellID2)
@@ -120,11 +120,11 @@ WOWFoundCategoryCellDelegate
         case 0:
             return 100
         case 1:
-            return 170
+            return 210
         case 2:
             return cell3_height
         default:
-            return 200
+            return 180
             
         }
     }
@@ -135,7 +135,7 @@ WOWFoundCategoryCellDelegate
         
         let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         headerView.textLabel!.textColor             = UIColor.blackColor()
-        headerView.textLabel!.font                  =  UIFont.systemFontOfSize(14)
+        headerView.textLabel!.font                  = UIFont.systemFontOfSize(14)
 
     }
 
@@ -194,11 +194,12 @@ WOWFoundCategoryCellDelegate
             cell.delegate = self
             cell.selectionStyle = .None
             
-//            cell.bringSubviewToFront(cell.product_view)
-            
             if let data  = vo_recommend_product {
                 cell.assign_val(data)
             }
+            
+            cell.bringSubviewToFront(cell.product_view)
+
             return cell
         }
         else if ( section == 2 && row == 0){

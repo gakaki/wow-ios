@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYWebImage
 
 protocol SenceCellDelegate:class{
     func senceProductClick(produtID:Int)
@@ -30,8 +31,22 @@ class WOWlListCell: UITableViewCell {
     func showData(model:WOWCarouselBanners) {
         let url = model.bannerImgSrc ?? ""
       print(url)
-        bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
-     
+//        bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
+        bigImageView.set_webimage_url(url);
+//        bigImageView
+//        
+//        bigImageView.yy_setImageWithURL(NSURL(string: url)!, placeholder: "placeholder_product", options: nil, progress: {(receivedSize: Int, expectedSize: Int) -> Void in
+//            let progress = Float(receivedSize) / expectedSize
+//            }, transform: {(image: UIImage, url: NSURL) -> UIImage in
+//                image = image.yy_imageByResizeToSize(CGSizeMake(100, 100), contentMode: .Center)
+//                return image.yy_imageByRoundCornerRadius(10)
+//            }, completion: {(image: UIImage, url: NSURL, from: YYWebImageFromType, stage: YYWebImageStage, error: NSError?) -> Void in
+//                if from == YYWebImageFromDiskCache {
+//                    print("load from disk cache")
+//                }
+//        })
+
+        
         
         productBtns.forEach { (view) in
             view.removeFromSuperview()

@@ -21,7 +21,8 @@ class CyclePictureCell: UICollectionViewCell {
             case let .Local(name):
                 self.imageView.image = UIImage(named: name)
             case let .Network(urlStr):
-                self.imageView.kf_setImageWithURL(NSURL(string:urlStr)!, placeholderImage: placeholderImage)
+//                self.imageView.kf_setImageWithURL(NSURL(string:urlStr)!, placeholderImage: placeholderImage)
+                self.imageView.set_webimage_url(urlStr)
             }
         }
     }

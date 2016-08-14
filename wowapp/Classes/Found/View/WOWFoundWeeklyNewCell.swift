@@ -58,7 +58,7 @@ extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSou
         let model           = products[indexPath.item]
         
         cell.pictureImageView.set_webimage_url(model.productImg!)
-        cell.label.text     = model.get_formted_price()
+        cell.label.text     = model.get_formted_sell_price()
         return cell
     }
     

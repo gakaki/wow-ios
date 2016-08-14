@@ -19,6 +19,7 @@ PODS:
   - EZSwiftExtensions (1.2.3)
   - FCUUID (1.2.0):
     - UICKeyChainStore (~> 2.1.0)
+  - FlexboxLayout (0.1.0)
   - HappyDNS (0.3.10)
   - Hashids-Swift (0.3.0)
   - HidingNavigationBar (0.3.0)
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - EZSwiftExtensions (~> 1.2.3)
   - FCUUID
+  - FlexboxLayout (from `FlexBoxLayout/FlexboxLayout.podspec`)
   - Hashids-Swift
   - HidingNavigationBar (~> 0.3.0)
   - IQKeyboardManagerSwift
@@ -92,6 +94,8 @@ DEPENDENCIES:
   - YYWebImage
 
 EXTERNAL SOURCES:
+  FlexboxLayout:
+    :path: FlexBoxLayout/FlexboxLayout.podspec
   Pingpp:
     :path: pingpp-ios/Pingpp.podspec
   PonyFrameworkOnSwift:
@@ -105,6 +109,7 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
   FCUUID: 9bfe031d35b7c221a7c66156a0af45d4eb49c3b6
+  FlexboxLayout: 1629dedd4edb69cdde0178bc4b8df277cb32d0d7
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Hashids-Swift: 5d7c069b0d4a3b70d4e2a840c420115dd517050d
   HidingNavigationBar: 6378af14cea27bfef8be73470b081a36d45b87c4
@@ -131,6 +136,6 @@ SPEC CHECKSUMS:
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: fe49e062e0ca33eef99d86192d1e4dfa7d973285
+PODFILE CHECKSUM: 934fcfc86f20a92c758372896e2f4520ccfef9a2
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.beta.1

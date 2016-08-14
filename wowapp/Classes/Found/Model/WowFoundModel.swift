@@ -22,9 +22,22 @@ class WOWFoundProductModel: WOWBaseModel,Mappable{
     var detailDescription       :   String?
     var pageModuleType          :   Int?
 
-    func get_formted_price() -> String {
-        return "¥\(self.sellPrice!)"
+    
+    func get_formted_sell_price() -> String {
+        if let p = sellPrice{
+            return "¥\(Int(p))"
+        }else{
+            return "¥ 0"
+        }
     }
+    func get_formted_original_price() -> String {
+        if let p = originalPrice{
+            return "¥\(Int(p))"
+        }else{
+            return "¥ 0"
+        }
+    }
+    
     
     required init?(_ map: Map) {
         

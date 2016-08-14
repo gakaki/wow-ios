@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
     var dataArr = [WOWCarouselBanners]()    //商品列表数组
@@ -73,6 +72,7 @@ class WOWController: WOWBaseViewController {
         tableView.backgroundColor = DefaultBackColor
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
+//        tableView.rowHeight = CGFloat(1242)
 //        configBarItem()
         tableView.mj_header = mj_header
         tableView.tableHeaderView = banner
@@ -204,6 +204,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
       
         let model       = dataArr[indexPath.row]

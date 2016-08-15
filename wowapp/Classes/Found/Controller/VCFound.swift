@@ -86,14 +86,14 @@ class VCFound: WOWBaseViewController {
     
     private func configBarItem(){
         
-        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
-            if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+//        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+//            if let strongSelf = self{
+//                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
+//                strongSelf.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
 
-        makeCustomerImageNavigationItem("store_buyCar", left:false) {[weak self] () -> () in
+        makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
@@ -233,10 +233,10 @@ WOWFoundCategoryCellDelegate
     
     func foundCategorycellTouchInside(m:WOWCategoryModel)
     {
-        if let cid = m.categoryID {
-            print ( cid )
+        if let cid = m.categoryID{
             toVCCategory(cid)
         }
+      
      }
 
 }

@@ -1,9 +1,16 @@
-//
-//  VCBaseVCCategoryFound.swift
-//  wowapp
-//
-//  Created by g on 16/8/15.
-//  Copyright © 2016年 小黑. All rights reserved.
-//
 
-import Foundation
+
+import UIKit
+
+
+class VCBaseVCCategoryFound:WOWBaseViewController{
+    
+    override func setUI(){
+        super.setUI()
+        
+        self.title = "客厅与卧室"
+        
+    }
+    
+    
+}

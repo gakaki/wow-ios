@@ -95,30 +95,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Baz-aN-Ayj">
-                                                    <rect key="frame" x="20" y="8" width="60" height="60"/>
+                                                    <rect key="frame" x="20" y="20" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="KpI-x7-Ace"/>
                                                         <constraint firstAttribute="height" constant="60" id="fBR-8D-RaX"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLj-Lf-hka">
-                                                    <rect key="frame" x="0.0" y="62" width="100" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="27" id="bTN-WR-vFg"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.93545484290000003" green="0.93545484290000003" blue="0.93545484290000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Baz-aN-Ayj" firstAttribute="centerY" secondItem="VCZ-Hd-gJR" secondAttribute="centerY" constant="-12" id="1yJ-SZ-Zzp"/>
-                                            <constraint firstItem="WLj-Lf-hka" firstAttribute="centerX" secondItem="VCZ-Hd-gJR" secondAttribute="centerX" id="DSN-KM-qbh"/>
+                                            <constraint firstItem="Baz-aN-Ayj" firstAttribute="centerY" secondItem="VCZ-Hd-gJR" secondAttribute="centerY" id="1yJ-SZ-Zzp"/>
                                             <constraint firstItem="Baz-aN-Ayj" firstAttribute="centerX" secondItem="VCZ-Hd-gJR" secondAttribute="centerX" id="IPV-rI-Y32"/>
-                                            <constraint firstItem="WLj-Lf-hka" firstAttribute="top" secondItem="Baz-aN-Ayj" secondAttribute="bottom" constant="-6" id="TrV-uN-ToL"/>
-                                            <constraint firstItem="WLj-Lf-hka" firstAttribute="width" secondItem="VCZ-Hd-gJR" secondAttribute="width" id="jAB-qL-vbl"/>
                                         </constraints>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reuse_id_label" id="tps-Vz-a3s">
@@ -128,11 +116,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHO-RX-4RS">
-                                                    <rect key="frame" x="0.0" y="37" width="100" height="27"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHO-RX-4RS">
+                                                    <rect key="frame" x="20" y="28" width="60" height="45"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="27" id="5Ys-64-gAc"/>
-                                                        <constraint firstAttribute="width" constant="100" id="gxq-vj-VnB"/>
+                                                        <constraint firstAttribute="height" constant="45" id="5Ys-64-gAc"/>
+                                                        <constraint firstAttribute="width" constant="60" id="gxq-vj-VnB"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

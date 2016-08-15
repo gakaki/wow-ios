@@ -11,5 +11,13 @@ extension UIViewController
     }
     
     
+    func toVCProduct( pid: Int? ){
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        vc.hideNavigationBar = true
+        vc.productId = pid
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+   
     
 }

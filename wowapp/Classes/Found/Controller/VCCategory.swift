@@ -15,13 +15,21 @@ let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度�
 
 class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
     
-    var cid:String  = "10"
+    var cid:String          = "10"
+    var option:String       = ""
     
+    
+    var vo_categorie_img_url:String?
+
+    var top_category_image_view:UIImageView = UIImageView()    
     @IBOutlet weak var btn_choose_view: UIView!
     @IBOutlet weak var cv: UICollectionView!
     
     var vo_categories           = [WOWCategoryModel]()
     var vo_products             = [WOWProductModel]()
+    
+    
+    
     override func setUI(){
       super.setUI()
     }
@@ -36,15 +44,19 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
-                
+//                MARK: 对付图片
                 let r                             =  JSON(result)
                 strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWCategoryModel]()
+                strongSelf.vo_categorie_img_url   =  r["bgImg"].string
+                strongSelf.cv.reloadData()
+
+                //设置顶部分类背景图
+                strongSelf.top_category_image_view.set_webimage_url(strongSelf.vo_categorie_img_url!)
                 
                 WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: strongSelf.query_asc, currentPage: strongSelf.query_currentPage, showCount: strongSelf.query_showCount, sortBy: strongSelf.query_sortBy, categoryId: strongSelf.cid.toInt()! ), successClosure: {[weak self] (result) in
                     
                         let res                   = JSON(result)
                         strongSelf.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
-                        strongSelf.cv.reloadData()
                     
                 }){ (errorMsg) in
                     print(errorMsg)
@@ -78,15 +90,7 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
     // 标签
     weak var titlesView = UIView()
     
-    let pics            = [
-        Pic(id: "10", name: "客厅与卧室" ),
-        Pic(id: "12", name: "厨房" ),
-        Pic(id: "13", name: "浴室" ),
-        Pic(id: "14", name: "户外" ),
-        Pic(id: "15", name: "办公室" ),
-        Pic(id: "16", name: "照明" ),
-        Pic(id: "17", name: "家装配饰" )
-    ]
+  
     let cell_reuse_id        = "reuse_id"
     let cell_reuse_id_label  = "reuse_id_label"
     
@@ -94,7 +98,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        request()
         
         
         //为了在autolayout的视图里获得真的宽度
@@ -108,17 +111,21 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
         self.cv.dataSource = self
         //not add this
         //        self.cv.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "reuse_id")
-        self.cv.backgroundView = UIImageView(image: UIImage(named: "bg"))
+        self.cv.backgroundView = top_category_image_view
         //        self.cv.backgroundColor = UIColor(patternImage: UIImage(named: "10")!)
         self.cv.showsHorizontalScrollIndicator = false
         self.cv.decelerationRate = UIScrollViewDecelerationRateFast;
         
         layoutCells()
         
-        self.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
         
         
+        request()
+
         self.addChooseCard()
+        
+//        self.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
+
     }
     
     
@@ -208,14 +215,14 @@ extension VCCategory : UICollectionViewDataSource,UICollectionViewDelegateFlowLa
     
     //2
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pics.count
+        return vo_categories.count
     }
     
     
     //3
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let row  =  pics[indexPath.row]
+        let row  =  vo_categories[indexPath.row]
         var cell =  UICollectionViewCell()
         
         if ( indexPath.row == 0) {
@@ -223,11 +230,7 @@ extension VCCategory : UICollectionViewDataSource,UICollectionViewDelegateFlowLa
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(cell_reuse_id, forIndexPath: indexPath)
             
             if let iv = cell.viewWithTag(2) as? UIImageView {
-                let image   =  UIImage(named: row.id )
-                iv.image    = image
-            }
-            if let lv = cell.viewWithTag(1) as? UILabel {
-                lv.text =  row.name
+                iv.set_webimage_url(row.categoryIconSmall!)
             }
             
             
@@ -236,7 +239,7 @@ extension VCCategory : UICollectionViewDataSource,UICollectionViewDelegateFlowLa
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(cell_reuse_id_label, forIndexPath: indexPath)
             
             if let lv = cell.viewWithTag(1) as? UILabel {
-                lv.text =  row.name
+                lv.text =  row.categoryName!
             }
         }
         self.updateCellStatus(cell, is_selected: false)
@@ -271,16 +274,25 @@ extension VCCategory : UICollectionViewDataSource,UICollectionViewDelegateFlowLa
         
     }
     
+    
+    func refresh_view(){
+        
+        
+    }
+    
+    
     //选中时的操作
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         if  let cell = collectionView.cellForItemAtIndexPath(indexPath) {
             self.cv.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .None)
             self.updateCellStatus(cell, is_selected: true)
-            let row = indexPath.row
+            let row = vo_categories[indexPath.row]
             cell.selected  = true;
-            print(pics[row])
+            self.cid = row.categoryID!
         }
+        
+        
         
     }
     

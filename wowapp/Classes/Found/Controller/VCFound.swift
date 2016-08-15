@@ -9,6 +9,7 @@ class VCFound: WOWBaseViewController {
     let cellID3              = String( WOWFoundCategoryCell )
 
     let cell3_height         = CGFloat(400)
+    
     var vo_products          = [WOWFoundProductModel]()
     var vo_recommend_product:WOWFoundProductModel?
     var vo_categories        = [WOWCategoryModel]()
@@ -111,7 +112,9 @@ WOWFoundCategoryCellDelegate
 //MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if(indexPath.section == 1){
+            toVCProduct(   vo_recommend_product?.productId         )
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -216,14 +219,16 @@ WOWFoundCategoryCellDelegate
             return UITableViewCell()
         }
     }
+    
+    
     func cellTouchInside(m:WOWFoundProductModel)
     {
-        print(m.productId!)
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
-        vc.hideNavigationBar = true
-        vc.productId = m.productId
-        navigationController?.pushViewController(vc, animated: true)
-//        self.pushVC(vc:)
+        print(m.productId as Int?)
+        
+        if let pid = m.productId as Int? {
+            self.toVCProduct(pid)
+        }
+
     }
     
     func foundCategorycellTouchInside(m:WOWCategoryModel)

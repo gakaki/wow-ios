@@ -281,19 +281,20 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.section {
-        case 0:
-            print("跳到收货地址")
+        switch (indexPath.section, indexPath.row ){
+        case (0, 0):
             
             let vc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
             vc.entrance = WOWAddressEntrance.SureOrder
             vc.action = {(model:AnyObject) in
                 self.addressInfo = model as? WOWAddressListModel
                 self.tableView.reloadData()
-                
             }
             navigationController?.pushViewController(vc, animated: true)
-            
+        case (2, 1):
+            let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
+            vc.entrance = couponEntrance.orderEntrance
+            navigationController?.pushViewController(vc, animated: true)
 
         default:
             break

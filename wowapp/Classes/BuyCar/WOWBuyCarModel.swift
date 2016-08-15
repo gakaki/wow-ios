@@ -60,6 +60,7 @@ class WOWCarModel: WOWBaseModel,Mappable {
 }
 
 class WOWCarProductModel: WOWBaseModel,Mappable {
+    var parentProductId                     : Int?
     var shoppingCartId                      : Int?
     var productId                           : Int?
     var productName                         : String?
@@ -79,6 +80,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     }
     
     func mapping(map: Map) {
+        parentProductId                      <- map["parentProductId"]
         shoppingCartId                       <- map["shoppingCartId"]
         productId                            <- map["productId"]
         productName                          <- map["productName"]

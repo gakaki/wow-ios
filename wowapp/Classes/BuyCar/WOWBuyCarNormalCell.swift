@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol buyCarDelegate: class {
+    func goProductDetail(productId: Int?)
+}
+
 class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
 
     @IBOutlet weak var goodsImageView: UIImageView!
@@ -23,6 +27,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     let identifier = "WOWTypeCollectionCell"
     var typeArr = Array<String>?()
     var model:WOWCarProductModel!
+    weak var delegate: buyCarDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,6 +76,14 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
             subCountButton.enabled = true
             subCountButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
+        
+        goodsImageView.addTapGesture(action: {[weak self] (tap) in
+            if let strongSelf = self {
+                if let del = strongSelf.delegate {
+                    del.goProductDetail(model.parentProductId)
+                }
+            }
+        })
     }
 
 

@@ -157,6 +157,10 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
         switch (indexPath.section,indexPath.row){
         case let (1,row):
             switch row {
+            case 0://优惠券
+                let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
+                vc.entrance = couponEntrance.userEntrance
+                navigationController?.pushViewController(vc, animated: true)
             case 1://邀请好友
                 let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
                 navigationController?.pushViewController(vc, animated: true)

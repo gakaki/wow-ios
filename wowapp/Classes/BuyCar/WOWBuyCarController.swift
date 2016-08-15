@@ -318,13 +318,13 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         
             let cell = tableView.dequeueReusableCellWithIdentifier(cellNormalID, forIndexPath: indexPath) as! WOWBuyCarNormalCell
             cell.showData(model)
-        
             cell.selectButton.tag = indexPath.section
             cell.selectButton.addTarget(self, action: #selector(selectClick(_:)), forControlEvents: .TouchUpInside)
             cell.subCountButton.tag = indexPath.section
             cell.subCountButton.addTarget(self, action: #selector(subCountClick(_:)), forControlEvents: .TouchUpInside)
             cell.addCountButton.tag = indexPath.section
             cell.addCountButton.addTarget(self, action: #selector(addCountClick(_:)), forControlEvents: .TouchUpInside)
+            cell.delegate = self
             return cell
         
     }
@@ -424,8 +424,16 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     
 }
 
-
-
+extension WOWBuyCarController: buyCarDelegate {
+    func goProductDetail(productId: Int?) {
+        if let productId = productId {
+            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+            vc.hideNavigationBar = true
+            vc.productId = productId
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
 
 
 

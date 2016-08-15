@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pW3-c3-z6F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pW3-c3-z6F">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -50,10 +50,10 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phY-Jr-drU">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phY-Jr-drU">
                                                             <rect key="frame" x="210" y="0.0" width="110" height="50"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8tP-zZ-YQV">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8tP-zZ-YQV">
                                                                     <rect key="frame" x="87" y="18" width="8" height="14"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看全部订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yx9-GI-vgq">
@@ -767,6 +767,43 @@
             </objects>
             <point key="canvasLocation" x="582" y="947"/>
         </scene>
+        <!--优惠券-->
+        <scene sceneID="LzA-Z9-CHs">
+            <objects>
+                <viewController storyboardIdentifier="WOWCouponController" title="优惠券" hidesBottomBarWhenPushed="YES" id="ASn-Ht-XYD" customClass="WOWCouponController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2QL-GM-VKX"/>
+                        <viewControllerLayoutGuide type="bottom" id="ctS-P7-pMH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QMj-co-UTs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Y0u-DG-sIY">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ASn-Ht-XYD" id="lOn-iZ-CZ4"/>
+                                    <outlet property="delegate" destination="ASn-Ht-XYD" id="KdP-ee-0eQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ctS-P7-pMH" firstAttribute="top" secondItem="Y0u-DG-sIY" secondAttribute="bottom" id="9si-42-v13"/>
+                            <constraint firstItem="Y0u-DG-sIY" firstAttribute="top" secondItem="QMj-co-UTs" secondAttribute="top" id="Fiv-dv-6F8"/>
+                            <constraint firstAttribute="trailing" secondItem="Y0u-DG-sIY" secondAttribute="trailing" id="YRh-kz-QVE"/>
+                            <constraint firstItem="Y0u-DG-sIY" firstAttribute="leading" secondItem="QMj-co-UTs" secondAttribute="leading" id="tgH-pT-iww"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Y0u-DG-sIY" id="GZM-hl-Uxp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xE5-io-rf7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="255" y="1762"/>
+        </scene>
         <!--Empty Data Set Delegate-->
         <scene sceneID="uMR-JW-eg8">
             <objects>
@@ -805,7 +842,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpV-Av-JsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327" y="1818"/>
+            <point key="canvasLocation" x="567" y="1832"/>
         </scene>
         <!--邀请好友-->
         <scene sceneID="EJM-XI-ChJ">
@@ -1589,7 +1626,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="kRD-Qr-R34">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="kRD-Qr-R34">
                                         <rect key="frame" x="297" y="18" width="8" height="14"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFV-os-m7d" userLabel="topLine">

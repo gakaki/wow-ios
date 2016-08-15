@@ -71,7 +71,7 @@ extension WOWCategoryModel:Mappable{
     func mapping(map: Map) {
         categoryName    <-    map["categoryName"]
         categoryCount   <-    map["sum"]
-        categoryID      <-    (map["id"],StringDecimalNumberTransform())
+        categoryID      <-    (map["categoryId"],StringDecimalNumberTransform())
         subCats         <-    map["subcats"]
         
         categoryBgImg   <-    map["categoryBgImg"]

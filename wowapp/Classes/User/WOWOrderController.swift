@@ -317,7 +317,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
                 vc.orderNewModel = dataArr[indexPath.section]
                 vc.delegate = self
         navigationController!.pushViewController(vc, animated: true)
-    }`
+    }
     
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

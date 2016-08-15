@@ -18,7 +18,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate{
     var cid:String          = "10"
     var option:String       = ""
     
-    
     var vo_categorie_img_url:String?
 
     var top_category_image_view:UIImageView = UIImageView()    
@@ -289,7 +288,10 @@ extension VCCategory : UICollectionViewDataSource,UICollectionViewDelegateFlowLa
             self.updateCellStatus(cell, is_selected: true)
             let row = vo_categories[indexPath.row]
             cell.selected  = true;
-            self.cid = row.categoryID!
+            if ( row.categoryID != nil ){
+                self.cid = row.categoryID!
+                toVCCategory(self.cid)
+            }
         }
         
         

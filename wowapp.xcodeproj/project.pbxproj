@@ -326,8 +326,6 @@
 		636C34201D57286A00CA4E69 /* WOWBrandHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C341F1D57286A00CA4E69 /* WOWBrandHeaderView.swift */; };
 		636C34221D57288400CA4E69 /* WOWBrandHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636C34211D57288400CA4E69 /* WOWBrandHeaderView.xib */; };
 		636C34241D585BF500CA4E69 /* WOWDesignerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C34231D585BF400CA4E69 /* WOWDesignerModel.swift */; };
-		636C342B1D5B354800CA4E69 /* JSONNeverDie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; };
-		636C342C1D5B354800CA4E69 /* JSONNeverDie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -338,7 +336,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				29FF27181CFDA8C100DF2A9B /* RealmSwift.framework in Embed Frameworks */,
-				636C342C1D5B354800CA4E69 /* JSONNeverDie.framework in Embed Frameworks */,
 				29FF27161CFDA8C100DF2A9B /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -709,7 +706,6 @@
 				29FF272F1CFDB5B500DF2A9B /* ImageIO.framework in Frameworks */,
 				29FF272D1CFDB5AB00DF2A9B /* SystemConfiguration.framework in Frameworks */,
 				29FF26F51CFDA86300DF2A9B /* libSocialQQ.a in Frameworks */,
-				636C342B1D5B354800CA4E69 /* JSONNeverDie.framework in Frameworks */,
 				29FF27031CFDA86300DF2A9B /* libSocialWechat.a in Frameworks */,
 				29FF27041CFDA86300DF2A9B /* libWeChatSDK.a in Frameworks */,
 				29FF26F61CFDA86300DF2A9B /* TencentOpenAPI.framework in Frameworks */,
@@ -2254,8 +2250,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = B4WSDTADTT;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

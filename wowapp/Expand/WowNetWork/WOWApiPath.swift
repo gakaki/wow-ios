@@ -159,6 +159,6 @@ let URL_OrderList               = "order/get"
 
 let URL_OrderStatus             = "order/setstatus" //状态客户端操作之后加上去
 
-
+let URL_Coupon                  = "coupon/list" //优惠券列表
 
 

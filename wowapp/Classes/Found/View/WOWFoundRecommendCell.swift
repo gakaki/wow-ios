@@ -146,7 +146,7 @@ class WOWFoundRecommendCell: UITableViewCell {
                         
                         right_label_ceneter.configure({
                             $0.textAlignment    = .Left
-                            $0.font             = UIFont.systemScaleFontSize(10)
+                            $0.font             = UIFont.systemScaleFontSize(13)
                             $0.setLineHeightAndLineBreak(1.15)
                             $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
                             $0.numberOfLines    = 3
@@ -183,7 +183,7 @@ class WOWFoundRecommendCell: UITableViewCell {
                                     $0.textAlignment = .Left
                                     $0.setLineHeightAndLineBreak(1.05)
                                     //                                    $0.style.flex = 0.9
-                                    $0.font = UIFont.systemFontOfSize(10)
+                                    $0.font = UIFont.systemFontOfSize(13)
                                     $0.style.alignSelf = .FlexStart
                                     $0.style.margin = (0, 4.0, 0, 0, 0.0, 0)
                                 }),

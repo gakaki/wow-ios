@@ -325,8 +325,6 @@
 		636C34201D57286A00CA4E69 /* WOWBrandHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C341F1D57286A00CA4E69 /* WOWBrandHeaderView.swift */; };
 		636C34221D57288400CA4E69 /* WOWBrandHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636C34211D57288400CA4E69 /* WOWBrandHeaderView.xib */; };
 		636C34241D585BF500CA4E69 /* WOWDesignerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C34231D585BF400CA4E69 /* WOWDesignerModel.swift */; };
-		636C34291D5B354400CA4E69 /* FlexboxLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */; };
-		636C342A1D5B354400CA4E69 /* FlexboxLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		636C342B1D5B354800CA4E69 /* JSONNeverDie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; };
 		636C342C1D5B354800CA4E69 /* JSONNeverDie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -339,7 +337,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				29FF27181CFDA8C100DF2A9B /* RealmSwift.framework in Embed Frameworks */,
-				636C342A1D5B354400CA4E69 /* FlexboxLayout.framework in Embed Frameworks */,
 				636C342C1D5B354800CA4E69 /* JSONNeverDie.framework in Embed Frameworks */,
 				29FF27161CFDA8C100DF2A9B /* Realm.framework in Embed Frameworks */,
 			);
@@ -707,7 +704,6 @@
 				29FF27351CFDB5D200DF2A9B /* CoreGraphics.framework in Frameworks */,
 				29FF27331CFDB5C300DF2A9B /* libiconv.tbd in Frameworks */,
 				29FF27311CFDB5BD00DF2A9B /* Security.framework in Frameworks */,
-				636C34291D5B354400CA4E69 /* FlexboxLayout.framework in Frameworks */,
 				29FF272F1CFDB5B500DF2A9B /* ImageIO.framework in Frameworks */,
 				29FF272D1CFDB5AB00DF2A9B /* SystemConfiguration.framework in Frameworks */,
 				29FF26F51CFDA86300DF2A9B /* libSocialQQ.a in Frameworks */,
@@ -1890,7 +1886,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

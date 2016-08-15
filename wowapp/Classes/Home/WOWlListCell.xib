@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -12,13 +12,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testinvitation" translatesAutoresizingMaskIntoConstraints="NO" id="vqi-uS-piU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
+                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="vqi-uS-piU" secondAttribute="height" multiplier="125:83" id="8Cz-Zu-Wbx"/>
+                            <constraint firstAttribute="width" secondItem="vqi-uS-piU" secondAttribute="height" multiplier="1:1" id="8Cz-Zu-Wbx"/>
                         </constraints>
                     </imageView>
                 </subviews>

@@ -77,21 +77,21 @@ class WOWOrderProductModel: WOWBaseModel ,Mappable{
 }
 /// 订单列表新model
 class WOWNewOrderListModel: WOWBaseModel,Mappable{
-    var orderId              : Int? // 订单Id
+    var orderId                 : Int? // 订单Id
     
-    var orderCode       : String?// 订单编号
+    var orderCode               : String?// 订单编号
     
-    var orderAmount     : Double?// 订单金额
+    var orderAmount             : Double?// 订单金额
     
-    var orderStatus     : Int?// 订单状态
+    var orderStatus             : Int?// 订单状态
     
-    var orderStatusName : String?//订单状态名称
+    var orderStatusName         : String?//订单状态名称
     
-    var totalProductQty : Int?// 订单产品总件数
+    var totalProductQty         : Int?// 订单产品总件数
     
-    var productSpecImgs : Array<String> = [] // 产品规格图片列表
+    var productSpecImgs         : Array<String> = [] // 产品规格图片列表
     
-    var orderCreateTimeFormat : String? // 订单创建的时间
+    var orderCreateTimeFormat   : String? // 订单创建的时间
     
     
     
@@ -105,49 +105,49 @@ class WOWNewOrderListModel: WOWBaseModel,Mappable{
     
     func mapping(map: Map) {
         
-        orderId                  <- map["orderId"]
+        orderId                     <- map["orderId"]
         
-        orderCode            <- map["orderCode"]
+        orderCode                   <- map["orderCode"]
         
-        orderAmount              <- map["orderAmount"]
+        orderAmount                 <- map["orderAmount"]
         
-        orderStatus          <- map["orderStatus"]
+        orderStatus                 <- map["orderStatus"]
         
-        orderStatusName               <- map["orderStatusName"]
+        orderStatusName             <- map["orderStatusName"]
         
-        totalProductQty        <- map["totalProductQty"]
+        totalProductQty             <- map["totalProductQty"]
         
-        productSpecImgs          <- map["productSpecImgs"]
+        productSpecImgs             <- map["productSpecImgs"]
         
-        orderCreateTimeFormat    <- map["orderCreateTimeFormat"]
+        orderCreateTimeFormat       <- map["orderCreateTimeFormat"]
         
     }
 }
 /// 订单详情MOdel
 class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     
-    var couponAmount                : Double? //订单优惠金额
+    var couponAmount                    : Double? //订单优惠金额
     
-    var deliveryFee                 : Double?// 订单运费
+    var deliveryFee                     : Double?// 订单运费
     
-     var orderAmount                 : String?// 订单总金额
-     var orderCode                 : String?// 订单号
-     var orderCreateTimeFormat                 : String?// 订单下单时间
-     var orderId                 : Int?// 订单Id
-     var orderStatus                 : Int?// 订单状态
-     var orderStatusName                 : String?// 订单状态名称
-      var receiverName                 : String?// 收货人姓名
-      var receiverMobile                 : String?// 收货人手机
-      var receiverAddress                 : String?// 收货人地址
+     var orderAmount                    : String?// 订单总金额
+     var orderCode                      : String?// 订单号
+     var orderCreateTimeFormat          : String?// 订单下单时间
+     var orderId                        : Int?// 订单Id
+     var orderStatus                    : Int?// 订单状态
+     var orderStatusName                : String?// 订单状态名称
+      var receiverName                  : String?// 收货人姓名
+      var receiverMobile                : String?// 收货人手机
+      var receiverAddress               : String?// 收货人地址
     
     
-     var paymentStatus                 : Int?// 支付状态
-     var paymentStatusName                 : String?// 支付状态名称
-     var paymentMethod                 : Int?//支付方式
-     var paymentMethodName                 : String?//支付方式名称
-     var totalProductQty                 : Int?//购买的商品总件数
-    var deliveryOrders                 : [WOWNewForGoodsModel]?//已发货清单列表
-    var unShipOutOrderItems                 : [WOWNewProductModel]?//未发货清单列表
+     var paymentStatus                  : Int?// 支付状态
+     var paymentStatusName              : String?// 支付状态名称
+     var paymentMethod                  : Int?//支付方式
+     var paymentMethodName              : String?//支付方式名称
+     var totalProductQty                : Int?//购买的商品总件数
+    var deliveryOrders                  : [WOWNewForGoodsModel]?//已发货清单列表
+    var unShipOutOrderItems             : [WOWNewProductModel]?//未发货清单列表
     
 
     
@@ -158,38 +158,38 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     
     func mapping(map: Map) {
         
-        couponAmount                  <- map["couponAmount"]
-        deliveryFee            <- map["deliveryFee"]
-        orderAmount              <- map["orderAmount"]
-        orderCode              <- map["orderCode"]
-        orderCreateTimeFormat              <- map["orderCreateTimeFormat"]
-        orderId              <- map["orderId"]
-        orderStatus              <- map["orderStatus"]
-        orderStatusName              <- map["orderStatusName"]
+        couponAmount                    <- map["couponAmount"]
+        deliveryFee                     <- map["deliveryFee"]
+        orderAmount                     <- map["orderAmount"]
+        orderCode                       <- map["orderCode"]
+        orderCreateTimeFormat           <- map["orderCreateTimeFormat"]
+        orderId                         <- map["orderId"]
+        orderStatus                     <- map["orderStatus"]
+        orderStatusName                 <- map["orderStatusName"]
         
-           receiverName              <- map["receiverName"]
-           receiverMobile              <- map["receiverMobile"]
+           receiverName                 <- map["receiverName"]
+           receiverMobile               <- map["receiverMobile"]
            receiverAddress              <- map["receiverAddress"]
         
-        paymentStatus              <- map["paymentStatus"]
-        paymentStatusName              <- map["paymentStatusName"]
-        paymentMethod              <- map["paymentMethod"]
-        paymentMethodName              <- map["paymentMethodName"]
-        totalProductQty              <- map["totalProductQty"]
-        deliveryOrders              <- map["deliveryOrders"]
-        unShipOutOrderItems              <- map["unShipOutOrderItems"]
+        paymentStatus                   <- map["paymentStatus"]
+        paymentStatusName               <- map["paymentStatusName"]
+        paymentMethod                   <- map["paymentMethod"]
+        paymentMethodName               <- map["paymentMethodName"]
+        totalProductQty                 <- map["totalProductQty"]
+        deliveryOrders                  <- map["deliveryOrders"]
+        unShipOutOrderItems             <- map["unShipOutOrderItems"]
     }
 }
 
 /// 已经发货MOdel
 class WOWNewForGoodsModel: WOWBaseModel,Mappable{
     
-    var deliveryCompanyName              : String? //快递公司名称
+    var deliveryCompanyName                 : String? //快递公司名称
     
-    var deliveryOrderNo       : String?// 快递单号
+    var deliveryOrderNo                     : String?// 快递单号
 
     
-    var productArray : [WOWNewProductModel]? // 产品列表
+    var productArray                        : [WOWNewProductModel]? // 产品列表
     
     
     required init?(_ map: Map) {
@@ -200,46 +200,46 @@ class WOWNewForGoodsModel: WOWBaseModel,Mappable{
         
         deliveryCompanyName                  <- map["deliveryCompanyName"]
         
-        deliveryOrderNo            <- map["deliveryOrderNo"]
+        deliveryOrderNo                      <- map["deliveryOrderNo"]
         
-        productArray              <- map["productArray"]
+        productArray                         <- map["productArray"]
         
     }
 }
 /// 产品model
 class WOWNewProductModel: WOWBaseModel,Mappable{
-    var productId              : Int? //产品id
-    var productName             : String?// 产品名称
-    var productQty     : Int?// 产品数量
-    var parentProductId     : Int?// 当前产品的Id
-    var color : String?// 产品颜色
+    var productId                   : Int? //产品id
+    var productName                 : String?// 产品名称
+    var productQty                  : Int?// 产品数量
+    var parentProductId             : Int?// 当前产品的Id
+    var color                       : String?// 产品颜色
 
-    var specImg : String? // 规格图片
+    var specImg                     : String? // 规格图片
 
-    var sellPrice     : Double?// 产品销售价格
-    var saleOrderItemId     : Int?// 销售订单单项Id
-    var sellTotalAmount : Double?//产品销售价乘以数量
+    var sellPrice                   : Double?// 产品销售价格
+    var saleOrderItemId             : Int?// 销售订单单项Id
+    var sellTotalAmount             : Double?//产品销售价乘以数量
 
-    var specName             : String?// 产品规格大小
+    var specName                    : String?// 产品规格大小
 
-    var productTotalAmount             : Double?// 产品总金额
+    var productTotalAmount          : Double?// 产品总金额
     
     required init?(_ map: Map) {
         
     }
     
     func mapping(map: Map) {
-        productId                  <- map["productId"]
-        productName            <- map["productName"]
-        sellTotalAmount              <- map["sellTotalAmount"]
-        color          <- map["color"]
-        specImg               <- map["specImg"]
-        sellPrice          <- map["sellPrice"]
-        productQty    <- map["productQty"]
-        saleOrderItemId    <- map["saleOrderItemId"]
-        specName    <- map["specName"]
-        parentProductId    <- map["parentProductId"]
-        productTotalAmount    <- map["productTotalAmount"]
+        productId                       <- map["productId"]
+        productName                     <- map["productName"]
+        sellTotalAmount                 <- map["sellTotalAmount"]
+        color                           <- map["color"]
+        specImg                         <- map["specImg"]
+        sellPrice                       <- map["sellPrice"]
+        productQty                      <- map["productQty"]
+        saleOrderItemId                 <- map["saleOrderItemId"]
+        specName                        <- map["specName"]
+        parentProductId                 <- map["parentProductId"]
+        productTotalAmount              <- map["productTotalAmount"]
 
     }
 }

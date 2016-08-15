@@ -89,12 +89,13 @@ class WOWOrderDetailController: WOWBaseViewController{
         let dic1  = ["baoguo":4]
         let dic2  = ["baoguo":2]
         let dic3  = ["baoguo":3]
-        
-        goodsArray = [dic1,dic2,dic3]
+        let dic4  = ["baoguo":5]
+        let dic5  = ["baoguo":2]
+        goodsArray = [dic1,dic2,dic3,dic4,dic5]
         
         orderNumber          = 4
         orderNumber2         = 4
-        orderNoNumber        = 4
+        orderNoNumber        = 2
         
         isOpen               = true
         request()

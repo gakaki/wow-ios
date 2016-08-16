@@ -15,12 +15,12 @@ let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度�
 
 
 
-class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
+class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
     
     var cid:String              = "10" {
-            didSet {
-                refresh_view()
-            }
+        didSet {
+            refresh_view()
+        }
     }
     
     var query_asc:Int           = 1 {
@@ -28,9 +28,13 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
             refresh_view()
         }
     }
-    var query_currentPage:Int   = 1 {
-        didSet {
+    var query_currentPage:Int  {
+        set {
+            self.pageIndex = newValue
             refresh_view()
+        }
+        get {
+            return self.pageIndex
         }
     }
     var query_sortBy:Int        = 1 {
@@ -38,6 +42,8 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
             refresh_view()
         }
     }
+    
+    
     
     
     var query_showCount:Int     = 10
@@ -66,7 +72,8 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         super.setUI()
         
         configCollectionView()
-
+        
+        
         //为了在autolayout的视图里获得真的宽度
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -91,7 +98,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         
         self.addChooseCard()
         
-//        self.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
         
     }
     
@@ -113,6 +119,8 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
 
         cv_bottom.decelerationRate = UIScrollViewDecelerationRateFast
         cv_bottom.bounces = false
+        
+        cv_bottom.mj_footer = self.mj_footer
     }
     
     override func request(){
@@ -128,19 +136,9 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
                 if let image_url = r["bgImg"].string {
                     strongSelf.top_category_image_view.set_webimage_url(image_url) //设置顶部分类背景图
                 }
+                //导航默认选中第一个
+                strongSelf.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
 
-//
-////                {"asc":1,"currentPage":1,"showCount":10,"sortBy":1,"categoryId":16}
-//                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: strongSelf.query_asc, currentPage: strongSelf.query_currentPage, showCount: strongSelf.query_showCount, sortBy: strongSelf.query_sortBy, categoryId: strongSelf.cid.toInt()! ), successClosure: {[weak self] (result) in
-//                    
-//                        let res                   = JSON(result)
-//                        strongSelf.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
-//                        DLog(strongSelf.vo_products)
-//                        strongSelf.cv_bottom.reloadData()
-//
-//                }){ (errorMsg) in
-//                    print(errorMsg)
-//                }
                 
             }
             
@@ -240,8 +238,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         super.didReceiveMemoryWarning()
     }
     
-    func layoutCells() {
-    }
 
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
@@ -339,9 +335,13 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: self.query_asc, currentPage: self.query_currentPage, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.cid.toInt()! ), successClosure: {[weak self] (result) in
             
             let res                   = JSON(result)
-            self!.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
+            let data                  = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
+            self!.vo_products         = [self!.vo_products, data].flatMap { $0 }
             DLog(self!.vo_products)
+            
+            
             self!.cv_bottom.reloadData()
+            self?.mj_footer.endRefreshing()
             
         }){ (errorMsg) in
             print(errorMsg)

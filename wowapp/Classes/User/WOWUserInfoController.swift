@@ -132,7 +132,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
-            self.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+            
+            let diceRoll            = Int(arc4random_uniform(UInt32(6)))
+            let url                 = "\(WOWUserManager.userHeadImageUrl)?t=\(diceRoll)"
+            self.headImageView.kf_setImageWithURL(NSURL(string:url ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
             self.starTextField.userInteractionEnabled = false

@@ -78,6 +78,9 @@ class WOWController: WOWBaseViewController {
         tableView.tableHeaderView = banner
 //        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
 
+        
+        configBarItem()
+        
     }
 
    
@@ -96,8 +99,7 @@ class WOWController: WOWBaseViewController {
          */
         makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                strongSelf.toVCCart()
             }
         }
     }
@@ -106,22 +108,18 @@ class WOWController: WOWBaseViewController {
     
 //MARK:Actions
     func jsClick() -> Void {
-        print("家什")
-        toVCCategory("10")
+        toVCCategory("10",cname: "家什")
     }
     func dgClick() -> Void {
-        print("灯光")
-        toVCCategory("15")
+        toVCCategory("15",cname: "灯光")
 
     }
     func zdClick() -> Void {
-        print("装点")
-        toVCCategory("16")
+        toVCCategory("16",cname: "装点")
 
     }
     func sjClick() -> Void {
-        print("厨房")
-        toVCCategory("11")
+        toVCCategory("11",cname: "厨房")
 
     }
     

@@ -127,7 +127,7 @@ class WOWRegistController: WOWBaseViewController {
         //如果是通过微信就走微信绑定的接口，如果是注册的话就走注册的接口
         if let userInfoFromWechat = userInfoFromWechat {
             //微信的用户信息
-            let param = ["openId":userInfoFromWechat["openId"] as! String ,"wechatNickName":userInfoFromWechat["nickname"] as! String,"wechatAvatar":userInfoFromWechat["headimgurl"] as! String,"sex":String(userInfoFromWechat["sex"]) ]
+            let param = ["openId":userInfoFromWechat["openid"] as! String ,"wechatNickName":userInfoFromWechat["nickname"] as! String,"wechatAvatar":userInfoFromWechat["headimgurl"] as! String,"sex":userInfoFromWechat["sex"]! ]
              registerTarget = RequestApi.Api_WechatBind(mobile: phoneTextField.text!, captcha: msgCodeTextField.text!, password: passwdTextField.text!, userInfoFromWechat: param)
         }
 

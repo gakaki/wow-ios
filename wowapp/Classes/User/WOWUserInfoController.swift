@@ -61,7 +61,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -96,7 +96,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.setUI()
         navigationItem.title = "个人信息"
         headImageView.borderRadius(25)
-
+        requestAddressInfo()
         
     }
     
@@ -136,6 +136,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
+            
             
             let diceRoll            = Int(arc4random_uniform(UInt32(6)))
             let url                 = "\(WOWUserManager.userHeadImageUrl)?t=\(diceRoll)"
@@ -204,16 +205,26 @@ class WOWUserInfoController: WOWBaseTableViewController {
             WOWHud.dismiss()
             DLog(errorMsg)
         }
+       
+    }
+    
+    func requestAddressInfo() {
         //请求地址数据
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDefault, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(result)
-                let section = NSIndexSet(index: 1)
-                strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
+                if let addressInfo = strongSelf.addressInfo {
+                    print((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
+                    strongSelf.addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "")
+                    let section = NSIndexSet(index: 1)
+                    strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
+                }
             }
+            
         }) { (errorMsg) in
             
         }
+
     }
     
 

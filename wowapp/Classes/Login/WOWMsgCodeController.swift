@@ -40,8 +40,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         navigationItem.title = "忘记密码"
        
     }
-    
-    
+
 //MARK:Actions
     @IBAction func msgCodeButtonClick(sender: UIButton) {
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
@@ -89,8 +88,9 @@ class WOWMsgCodeController: WOWBaseViewController {
         }
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ResetPwd(mobile:phoneTextField.text!, captcha:code, newPwd:newPwd), successClosure: {[weak self](result) in
             if let strongSelf = self{
-            
-            strongSelf.navigationController?.popToRootViewControllerAnimated(true)
+                WOWUserManager.exitLogin()
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+                strongSelf.navigationController?.popViewControllerAnimated(true)
                 
             }
         }) {[weak self](errorMsg) in

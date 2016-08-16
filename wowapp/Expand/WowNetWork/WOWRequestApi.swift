@@ -473,7 +473,13 @@ extension RequestApi:TargetType{
                 params =  nil
 
         }
-        params =   ["paramJson":JSONStringify(params ?? ""),"channel":"2","sessionToken":WOWUserManager.sessionToken]
+        print(WOWUserManager.sessionToken)
+        if WOWUserManager.sessionToken.isEmpty {
+            params =   ["paramJson":JSONStringify(params ?? ""),"channel":"2"]
+        }else {
+            params =   ["paramJson":JSONStringify(params ?? ""),"channel":"2","sessionToken":WOWUserManager.sessionToken]
+        }
+        
 
         return params
     }

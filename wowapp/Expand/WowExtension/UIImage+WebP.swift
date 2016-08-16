@@ -9,11 +9,11 @@ extension UIImageView {
         return image_view
     }
     
-    func set_webimage_url_user( url:String ) -> Void {
+    func set_webimage_url_user( url:String? ) -> Void {
         let pic_name    = "placeholder_userhead"
         self.set_webimage_url_base(url,place_holder_name: pic_name)
     }
-    func set_webimage_url_base( url:String , place_holder_name pic_name:String ) -> Void {
+    func set_webimage_url_base( url:String? , place_holder_name pic_name:String ) -> Void {
         let url = self.webp_url(url)
         self.yy_setImageWithURL(NSURL(string:url ?? "") , placeholder: UIImage(named: pic_name) , options: YYWebImageOptions.ProgressiveBlur, completion: nil)
     }

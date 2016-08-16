@@ -93,7 +93,8 @@ extension WOWProductSecondDetailController:UITableViewDelegate,UITableViewDataSo
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailCell), forIndexPath: indexPath) as! WOWProductDetailCell
         let model = dataArray[indexPath.row]
-        cell.productImg.kf_setImageWithURL(NSURL(string: model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+//        cell.productImg.kf_setImageWithURL(NSURL(string: model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        cell.productImg.set_webimage_url( model.image! )
         cell.imgDescLabel.text = model.text ?? ""
         return cell
     }

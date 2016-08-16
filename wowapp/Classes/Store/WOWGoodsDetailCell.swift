@@ -35,7 +35,8 @@ class WOWGoodsDetailCell: UITableViewCell {
             return
         }
         cellHeightConstraint.constant = (MGScreenWidth-30) * 333 / 500
-        goodsImageView.kf_setImageWithURL(NSURL(string:imageUrl)!, placeholderImage:UIImage(named: "placeholder_product"))
-        
+//        goodsImageView.kf_setImageWithURL(NSURL(string:imageUrl)!, placeholderImage:UIImage(named: "placeholder_product"))
+        goodsImageView.set_webimage_url(imageUrl)
+
     }
 }

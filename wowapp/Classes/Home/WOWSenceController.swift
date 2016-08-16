@@ -256,7 +256,9 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let  cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
         let  model = sceneModel?.recommendProducts?[indexPath.row]
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+//        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        cell.pictureImageView.set_webimage_url(model?.productImg )
+
         cell.backgroundColor = SeprateColor
         return cell
     }

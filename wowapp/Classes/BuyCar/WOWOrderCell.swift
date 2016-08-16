@@ -43,7 +43,10 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
             return
         }
         self.model = model
-        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+//        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        
+        goodsImageView.set_webimage_url(model.specImg)
+        
         nameLabel.text = model.productName
         countLabel.text = "x \(model.productQty ?? 1)"
         perPriceLabel.text = String(model.sellPrice ?? 0).priceFormat()

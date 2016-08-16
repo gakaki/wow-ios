@@ -52,6 +52,27 @@ class WOWBrandListController: WOWBaseViewController {
         navigationItem.title = "品牌"
         configureSearchController()
         tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
+        configBarItem()
+    }
+    private func configBarItem(){
+        
+        //                makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+        //                    if let strongSelf = self{
+        //                        let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
+        //                        let transition = CATransition.init()
+        //                        transition.duration = 0.3
+        //                        transition.subtype = kCATransitionFromBottom
+        //                        strongSelf.navigationController?.view.layer.addAnimation(transition, forKey: nil)
+        //                        strongSelf.navigationController?.pushViewController(vc, animated: true)
+        //                    }
+        //                }
+        
+        makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+                vc.hideNavigationBar = false
+                strongSelf.navigationController?.pushViewController(vc, animated: true)            }
+        }
     }
 
     private func configureSearchController() {

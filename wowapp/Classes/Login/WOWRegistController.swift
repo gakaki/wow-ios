@@ -29,7 +29,6 @@ class WOWRegistController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.phoneTextField.text = "13764641531"
         // Do any additional setup after loading the view.
     }
 

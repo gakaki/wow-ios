@@ -230,7 +230,9 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             goodsImageView.layer.borderWidth = 0.5
             goodsImageView.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
             if let img = WOWBuyCarMananger.sharedBuyCar.defaultImg {
-                goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+//                goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                goodsImageView.set_webimage_url(img)
+
             }
             //得到颜色的数组，并给每种颜色对应一个bool值，方便记录哪个颜色有库存
             if let array = p.colorDisplayNameList {
@@ -241,7 +243,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                         colorArr.append(colorModel)
 
                     }else {
-                        let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: false)
+                        let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: true)
                         colorArr.append(colorModel)
 
                     }
@@ -255,7 +257,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                         let specModel = WOWSpecNameModel(specName: spec, isSelect: true)
                         specArr.append(specModel)
                     }else {
-                        let specModel = WOWSpecNameModel(specName: spec, isSelect: false)
+                        let specModel = WOWSpecNameModel(specName: spec, isSelect: true)
                         specArr.append(specModel)
                     }
                     
@@ -588,6 +590,15 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
          */
         if collectionView.tag == 100 {
             
+            if colorIndex == indexPath.row {
+                colorIndex = -1
+                for selectSpec in specArr {
+                    selectSpec.isSelect = true
+                }
+                self.collectionView.reloadData()
+                secondCollectionView.reloadData()
+                return
+            }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
             colorIndex = indexPath.row
             
@@ -624,12 +635,22 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             if color_SpecArr?.count > 0 {
                 let img = color_SpecArr![0].subProductInfo?.productColorImg
                 if let img = img {
-                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+//                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                    goodsImageView.set_webimage_url(img)
+
                 }
             }
             
         }else {
-            
+            if specIndex == indexPath.row {
+                specIndex = -1
+                for selectColor in colorArr {
+                    selectColor.isSelect = true
+                }
+                self.collectionView.reloadData()
+                secondCollectionView.reloadData()
+                return
+            }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
             specIndex = indexPath.row
             

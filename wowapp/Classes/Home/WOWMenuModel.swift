@@ -89,6 +89,33 @@ extension WOWCategoryModel:Mappable{
 
 
 
+
+
+final class WOWFoundCategoryModel : WOWBaseModel{
+    var categoryName:String?
+    var categoryID:Int?
+    var categoryIconSmall:String?
+    
+}
+
+extension WOWFoundCategoryModel:Mappable{
+    func mapping(map: Map) {
+        categoryName            <-    map["categoryName"]
+        categoryID              <-    map["id"]
+        categoryIconSmall       <-    map["categoryIconSmall"]
+    }
+    
+    convenience init?(_ map: Map) {
+        self.init()
+    }
+}
+
+
+
+
+
+
+
 final class WOWSubCategoryModel: WOWBaseModel,Mappable{
       var subCatName : String = ""
       var subCatID   : String = ""

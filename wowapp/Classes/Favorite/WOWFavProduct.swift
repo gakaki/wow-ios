@@ -68,7 +68,7 @@ class WOWFavProduct: WOWBaseViewController {
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
         let view = NSBundle.mainBundle().loadNibNamed(String(FavoriteEmpty), owner: self, options: nil).last as! FavoriteEmpty
         
-        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
+//        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
         return view
     }
@@ -116,7 +116,8 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoritrSingleCell), forIndexPath: indexPath) as! WOWFavoritrSingleCell
         let model = dataArr[indexPath.row]
-        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+//        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        cell.imageView.set_webimage_url(model.productImg)
         return cell
     }
     

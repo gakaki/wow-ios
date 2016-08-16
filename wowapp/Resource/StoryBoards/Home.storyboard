@@ -345,7 +345,7 @@
         <!--搜索-->
         <scene sceneID="f5z-DS-P3L">
             <objects>
-                <viewController storyboardIdentifier="WOWSearchsController" title="搜索" id="Xp8-SD-pEC" customClass="WOWSearchsController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSearchsController" title="搜索" hidesBottomBarWhenPushed="YES" id="Xp8-SD-pEC" customClass="WOWSearchsController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IAL-nT-SOc"/>
                         <viewControllerLayoutGuide type="bottom" id="mFd-nB-FQS"/>

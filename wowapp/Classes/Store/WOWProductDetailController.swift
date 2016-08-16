@@ -172,7 +172,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.productModel?.productId = strongSelf.productId
                 strongSelf.configData()
-                strongSelf.numberSections = 5
+                strongSelf.numberSections = 4
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }

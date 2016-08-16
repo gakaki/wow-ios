@@ -117,7 +117,7 @@
         <!--Empty Data Set Delegate-->
         <scene sceneID="J05-vd-CCR">
             <objects>
-                <viewController storyboardIdentifier="WOWBuyCarController" id="t5S-nt-7u6" customClass="WOWBuyCarController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBuyCarController" hidesBottomBarWhenPushed="YES" id="t5S-nt-7u6" customClass="WOWBuyCarController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ieb-aM-0jm"/>
                         <viewControllerLayoutGuide type="bottom" id="sXD-Ff-rxY"/>

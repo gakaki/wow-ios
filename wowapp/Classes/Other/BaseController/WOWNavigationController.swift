@@ -14,6 +14,7 @@ class WOWNavigationController: UINavigationController {
         super.viewDidLoad()
         navigationBar.translucent = false
         interactivePopGestureRecognizer?.delegate = nil
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +35,7 @@ class WOWNavigationController: UINavigationController {
 
 
 extension UIViewController{
+    
     /*
     func makeBackButton(title:String!){
         let button = UIButton(type:.System)

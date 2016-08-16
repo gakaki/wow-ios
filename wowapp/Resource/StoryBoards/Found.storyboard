@@ -172,15 +172,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="GF4-7k-mKM" firstAttribute="top" secondItem="Acd-RW-H9Y" secondAttribute="bottom" id="0Iz-6g-OLs"/>
                             <constraint firstItem="PMi-4E-bc6" firstAttribute="top" secondItem="Uzg-Xa-DFY" secondAttribute="bottom" constant="-1" id="3fO-pg-WCm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PMi-4E-bc6" secondAttribute="trailing" constant="-25" id="C8e-Py-HID"/>
-                            <constraint firstItem="GF4-7k-mKM" firstAttribute="leading" secondItem="Acd-RW-H9Y" secondAttribute="leading" id="ERg-me-6nD"/>
-                            <constraint firstItem="GF4-7k-mKM" firstAttribute="width" secondItem="s2L-GQ-VAQ" secondAttribute="width" id="GmA-KN-Epi"/>
-                            <constraint firstItem="GF4-7k-mKM" firstAttribute="top" secondItem="Acd-RW-H9Y" secondAttribute="bottom" id="Key-58-nyo"/>
-                            <constraint firstItem="bWR-yB-LE1" firstAttribute="top" secondItem="GF4-7k-mKM" secondAttribute="bottom" id="MPU-jT-CPS"/>
+                            <constraint firstItem="GF4-7k-mKM" firstAttribute="trailing" secondItem="Acd-RW-H9Y" secondAttribute="trailing" id="G1Y-jD-JWd"/>
                             <constraint firstItem="Acd-RW-H9Y" firstAttribute="top" secondItem="PMi-4E-bc6" secondAttribute="bottom" id="TXX-lI-m0f"/>
-                            <constraint firstItem="GF4-7k-mKM" firstAttribute="leading" secondItem="s2L-GQ-VAQ" secondAttribute="leading" id="eEj-BF-UZa"/>
                             <constraint firstItem="Acd-RW-H9Y" firstAttribute="width" secondItem="s2L-GQ-VAQ" secondAttribute="width" id="jHU-tp-CoJ"/>
+                            <constraint firstItem="GF4-7k-mKM" firstAttribute="leading" secondItem="s2L-GQ-VAQ" secondAttribute="leading" id="l6P-90-KUw"/>
+                            <constraint firstItem="GF4-7k-mKM" firstAttribute="bottom" secondItem="bWR-yB-LE1" secondAttribute="top" id="p0V-Ny-pEN"/>
+                            <constraint firstItem="GF4-7k-mKM" firstAttribute="leading" secondItem="Acd-RW-H9Y" secondAttribute="leading" id="sHS-zs-KC2"/>
                             <constraint firstItem="PMi-4E-bc6" firstAttribute="width" secondItem="s2L-GQ-VAQ" secondAttribute="width" constant="10" id="z4e-xB-wmq"/>
                         </constraints>
                     </view>
@@ -188,6 +188,7 @@
                     <connections>
                         <outlet property="btn_choose_view" destination="Acd-RW-H9Y" id="bGm-P0-MAh"/>
                         <outlet property="cv" destination="PMi-4E-bc6" id="Jkx-bF-SQm"/>
+                        <outlet property="cv_bottom" destination="GF4-7k-mKM" id="0RI-WS-w0V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I04-ka-Jhe" sceneMemberID="firstResponder"/>

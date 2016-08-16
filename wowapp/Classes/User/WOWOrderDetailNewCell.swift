@@ -28,7 +28,11 @@ class WOWOrderDetailNewCell: UITableViewCell {
         let orderProductModel = orderNewDetailModel!.unShipOutOrderItems![indexRow]
         colorLabel.text = orderProductModel.color
         titleLabel.text = orderProductModel.productName
-        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+//        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        
+        titleImageView.set_webimage_url( orderProductModel.specImg )
+
+        
         priceLabel.text = "¥" + (orderProductModel.sellPrice)!.toString
         goodsNumber.text = "X" + (orderProductModel.productQty)!.toString
         contentLabel.text = orderProductModel.specName
@@ -41,7 +45,11 @@ class WOWOrderDetailNewCell: UITableViewCell {
         let orderProductModel = orderNewDetailModel!.packages![indexSection].orderItems![indexRow]
         colorLabel.text = orderProductModel.color
         titleLabel.text = orderProductModel.productName
-        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+//        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        
+        titleImageView.set_webimage_url( orderProductModel.specImg )
+
+        
         priceLabel.text = "¥" + (orderProductModel.sellPrice)!.toString
         goodsNumber.text = "X" + (orderProductModel.productQty)!.toString
         contentLabel.text = orderProductModel.specName

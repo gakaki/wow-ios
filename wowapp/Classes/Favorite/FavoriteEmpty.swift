@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoriteEmpty: UIView {
-    @IBOutlet weak var goStoreButton:UIButton!
+//    @IBOutlet weak var goStoreButton:UIButton!
 
     /*
     // Only override drawRect: if you perform custom drawing.

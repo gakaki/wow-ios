@@ -8,7 +8,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Ini-d5-Ktd">
             <objects>
-                <navigationController id="70d-dw-kWz" sceneMemberID="viewController">
+                <navigationController id="70d-dw-kWz" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7vY-Bo-D5Y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -27,10 +27,14 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var jobLabel: UILabel!
     //个性签名
     @IBOutlet weak var desLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    
     var  backGroundMaskView : UIView!
     var  backGroundWindow : UIWindow!
     
     var editInfoAction:WOWActionClosure?
+    var addressInfo                     :WOWAddressListModel?
+
     
     private var headImageUrl:String = WOWUserManager.userHeadImageUrl
     private var nick        :String = WOWUserManager.userName
@@ -132,7 +136,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
-            self.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+            
+            let diceRoll            = Int(arc4random_uniform(UInt32(6)))
+            let url                 = "\(WOWUserManager.userHeadImageUrl)?t=\(diceRoll)"
+//            self.headImageView.kf_setImageWithURL(NSURL(string:url ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+            
+            self.headImageView.set_webimage_url_user( url )
+            
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
             self.starTextField.userInteractionEnabled = false
@@ -197,8 +207,21 @@ class WOWUserInfoController: WOWBaseTableViewController {
             WOWHud.dismiss()
             DLog(errorMsg)
         }
+        //请求地址数据
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDefault, successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(result)
+                let section = NSIndexSet(index: 1)
+                strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
+            }
+        }) { (errorMsg) in
+            
+        }
     }
     
+
+
+//MARK: - prepareForSegue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destina = segue.destinationViewController as? WOWInfoTextController
         guard let toVC = destina else{

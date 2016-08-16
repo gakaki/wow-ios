@@ -55,13 +55,7 @@ class WOWAddressController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.separatorColor = SeprateColor
-        switch entrance {
-        case .Me:
-            navigationItem.title = "管理收货地址"
-        default:
-            navigationItem.title = "收货地址"
-
-        }
+        navigationItem.title = "收货地址"
     }
     
 

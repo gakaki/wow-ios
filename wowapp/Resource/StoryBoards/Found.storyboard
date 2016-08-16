@@ -188,6 +188,7 @@
                     <connections>
                         <outlet property="btn_choose_view" destination="Acd-RW-H9Y" id="bGm-P0-MAh"/>
                         <outlet property="cv" destination="PMi-4E-bc6" id="Jkx-bF-SQm"/>
+                        <outlet property="cv_bottom" destination="GF4-7k-mKM" id="94g-2M-dlC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I04-ka-Jhe" sceneMemberID="firstResponder"/>

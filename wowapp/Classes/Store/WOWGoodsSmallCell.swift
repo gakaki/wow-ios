@@ -23,7 +23,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     }
     
     func showData(model:WOWProductModel,indexPath:NSIndexPath) {
-        pictureImageView.kf_setImageWithURL(NSURL(string:model.productImg ?? ""), placeholderImage: UIImage(named: "placeholder_product"))
+        pictureImageView.set_webimage_url(model.productImg ?? "")
         let str = NSMutableAttributedString(string: model.productName ?? "")
         let style = NSMutableParagraphStyle()
         style.lineHeightMultiple = 1.5      //设置1.5倍行距

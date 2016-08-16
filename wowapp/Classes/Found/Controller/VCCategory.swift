@@ -17,23 +17,38 @@ let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度�
 
 class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
     
-    var cid:String              = "10"
-    var option:String           = ""
+    var cid:String              = "10" {
+            didSet {
+                refresh_view()
+            }
+    }
+    
+    var query_asc:Int           = 1 {
+        didSet {
+            refresh_view()
+        }
+    }
+    var query_currentPage:Int   = 1 {
+        didSet {
+            refresh_view()
+        }
+    }
+    var query_sortBy:Int        = 1 {
+        didSet {
+            refresh_view()
+        }
+    }
     
     
-    var query_asc:Int           = 1
-    var query_currentPage:Int   = 1
     var query_showCount:Int     = 10
-    var query_sortBy:Int        = 1
+    var top_category_image_view:UIImageView = UIImageView()
     
-    var vo_categorie_img_url:String?
-
-    var top_category_image_view:UIImageView = UIImageView()    
+    
     @IBOutlet weak var btn_choose_view: UIView!
     @IBOutlet weak var cv: UICollectionView!
     @IBOutlet weak var cv_bottom: UICollectionView!
     
-    var vo_categories           = [WOWCategoryModel]()
+    var vo_categories           = [WOWFoundCategoryModel]()
     var vo_products             = [WOWProductModel]()
     
     var layout:CollectionViewWaterfallLayout = {
@@ -107,23 +122,25 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
             if let strongSelf = self{
 //                MARK: 对付图片
                 let r                             =  JSON(result)
-                strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWCategoryModel]()
-                strongSelf.vo_categorie_img_url   =  r["bgImg"].string
+                strongSelf.vo_categories          =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.cv.reloadData()
-
-                //设置顶部分类背景图
-                strongSelf.top_category_image_view.set_webimage_url(strongSelf.vo_categorie_img_url!)
-//                {"asc":1,"currentPage":1,"showCount":10,"sortBy":1,"categoryId":16}
-                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: strongSelf.query_asc, currentPage: strongSelf.query_currentPage, showCount: strongSelf.query_showCount, sortBy: strongSelf.query_sortBy, categoryId: strongSelf.cid.toInt()! ), successClosure: {[weak self] (result) in
-                    
-                        let res                   = JSON(result)
-                        strongSelf.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
-                        DLog(strongSelf.vo_products)
-                        strongSelf.cv_bottom.reloadData()
-
-                }){ (errorMsg) in
-                    print(errorMsg)
+                
+                if let image_url = r["bgImg"].string {
+                    strongSelf.top_category_image_view.set_webimage_url(image_url) //设置顶部分类背景图
                 }
+
+//
+////                {"asc":1,"currentPage":1,"showCount":10,"sortBy":1,"categoryId":16}
+//                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: strongSelf.query_asc, currentPage: strongSelf.query_currentPage, showCount: strongSelf.query_showCount, sortBy: strongSelf.query_sortBy, categoryId: strongSelf.cid.toInt()! ), successClosure: {[weak self] (result) in
+//                    
+//                        let res                   = JSON(result)
+//                        strongSelf.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
+//                        DLog(strongSelf.vo_products)
+//                        strongSelf.cv_bottom.reloadData()
+//
+//                }){ (errorMsg) in
+//                    print(errorMsg)
+//                }
                 
             }
             
@@ -176,6 +193,8 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
             self.indicatorView.w = self.selectedButton!.titleLabel!.w * kIndicatorViewwRatio
             self.indicatorView.centerX = self.selectedButton!.centerX
         }
+        
+        query_sortBy = button.tag
     }
     
     func addChooseCard(){
@@ -190,13 +209,15 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
             button.h        = height
             button.w        = width
             button.x        = CGFloat(index) * width
-            button.tag      = index
+            button.tag      = index + 1 // 1 2 3
+            
             
             button.titleLabel!.font = UIFont.systemFontOfSize(14)
             button.setTitle(btn_titles[index], forState: .Normal)
-            button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-            button.setTitleColor(UIColor.grayColor(), forState: .Disabled)
+            button.setTitleColor(UIColor.blackColor(), forState: .Disabled)
+            button.setTitleColor(UIColor.grayColor(), forState: .Normal)
             button.addTarget(self, action: #selector(titlesClick(_:)), forControlEvents: .TouchUpInside)
+            
             btn_choose_view.addSubview(button)
             //默认点击了第一个按钮
             if index == 0 {
@@ -311,15 +332,27 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
     }
     
     
+    // 1 上方collectionview 触发 , 2 中间选择 tab 触发 3 下方下拉查看触发
     func refresh_view(){
         
-        
+        //                {"asc":1,"currentPage":1,"showCount":10,"sortBy":1,"categoryId":16}
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: self.query_asc, currentPage: self.query_currentPage, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.cid.toInt()! ), successClosure: {[weak self] (result) in
+            
+            let res                   = JSON(result)
+            self!.vo_products    = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
+            DLog(self!.vo_products)
+            self!.cv_bottom.reloadData()
+            
+        }){ (errorMsg) in
+            print(errorMsg)
+        }
+
     }
     
     
     //选中时的操作
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        //最上面的选择
         if ( collectionView == self.cv ){
             if  let cell = collectionView.cellForItemAtIndexPath(indexPath) {
                 self.cv.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .None)
@@ -327,11 +360,11 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
                 let row = vo_categories[indexPath.row]
                 cell.selected  = true;
                 if ( row.categoryID != nil ){
-                    self.cid = row.categoryID!
-                    toVCCategory(self.cid)
+                    self.cid = "\(row.categoryID!)"
                 }
             }
         }else{
+            //下方collectionview选择
             if  let cell = collectionView.cellForItemAtIndexPath(indexPath) {
 
                 self.cv_bottom.deselectItemAtIndexPath(indexPath, animated: false)

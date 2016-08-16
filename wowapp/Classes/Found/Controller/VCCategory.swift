@@ -17,7 +17,7 @@ let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度�
 
 class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
     
-    var cid:String          = "10"
+    var cid:String              = "10"
     var option:String           = ""
     
     
@@ -42,7 +42,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         l.minimumColumnSpacing = 0
         l.minimumInteritemSpacing = 0
         l.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        l.headerHeight = 355
         return l
     }()
 
@@ -58,38 +57,47 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         self.view.layoutIfNeeded()
         
         self.edgesForExtendedLayout = .None
-        //        self.extendedLayoutIncludesOpaqueBars = false
         
         self.cv.delegate = self
         self.cv.dataSource = self
         //not add this
-        //        self.cv.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "reuse_id")
+        //self.cv.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "reuse_id")
         self.cv.backgroundView = top_category_image_view
-        //        self.cv.backgroundColor = UIColor(patternImage: UIImage(named: "10")!)
         self.cv.showsHorizontalScrollIndicator = false
         self.cv.decelerationRate = UIScrollViewDecelerationRateFast;
         
-        layoutCells()
-        
+        let layout                          = UICollectionViewFlowLayout()
+        layout.scrollDirection              = .Horizontal
+        layout.sectionInset                 = UIEdgeInsets(top: 5, left: 25, bottom: 5, right: 25)
+        layout.minimumLineSpacing           = 15.0
+        cv!.collectionViewLayout            = layout
+
         request()
         
         self.addChooseCard()
         
-        //        self.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
+//        self.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
         
-      
     }
     
     
     private func configCollectionView(){
         cv_bottom.collectionViewLayout = self.layout
         cv_bottom.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        cv_bottom.backgroundColor = UIColor(patternImage: UIImage(named: "10")!)
         
+        let bg_view              = UIView()
+        bg_view.backgroundColor  = UIColor.whiteColor()
+        cv_bottom.backgroundView = bg_view
+            
+            
         cv_bottom.delegate = self
         cv_bottom.dataSource = self
         cv_bottom.showsHorizontalScrollIndicator = false
-        cv_bottom.decelerationRate = UIScrollViewDecelerationRateFast;
+        cv_bottom.showsVerticalScrollIndicator  = false
 
+        cv_bottom.decelerationRate = UIScrollViewDecelerationRateFast
+        cv_bottom.bounces = false
     }
     
     override func request(){
@@ -154,8 +162,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         
         super.viewDidLoad()
         
-        
-       
     }
     
     
@@ -211,26 +217,11 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-    
     
     func layoutCells() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Horizontal
-        layout.sectionInset                 = UIEdgeInsets(top: 5, left: 25, bottom: 5, right: 25)
-        //        layout.itemSize                     = CGSize(width: 180, height: 180)
-        
-        //        layout.minimumInteritemSpacing      = 135.0
-        layout.minimumLineSpacing           = 15.0
-        //        layout.itemSize = CGSize(width: (UIScreen.mainScreen().bounds.size.width - 40)/3, height: ((UIScreen.mainScreen().bounds.size.width - 40)/3))
-        cv!.collectionViewLayout = layout
     }
-    //    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
-    //    {
-    //        return UIEdgeInsetsMake(10, 10, 10, 10);
-    //    }
+
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
         if ( collectionView == self.cv_bottom){
@@ -242,12 +233,10 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
     }
     
     
-    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    //2
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if ( collectionView == cv){
             return vo_categories.count ?? 0
@@ -257,8 +246,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         }
     }
     
-    
-    //3
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if ( collectionView == self.cv ){
@@ -299,7 +286,6 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
         }
         
     }
-    
     
     // 改变cell的背景颜色
     func updateCellStatus(cell:UICollectionViewCell  , is_selected selected:Bool ){
@@ -347,9 +333,11 @@ class VCCategory:WOWBaseViewController, UICollectionViewDelegate,UICollectionVie
             }
         }else{
             if  let cell = collectionView.cellForItemAtIndexPath(indexPath) {
-                self.cv.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+
+                self.cv_bottom.deselectItemAtIndexPath(indexPath, animated: false)
                 let row = vo_products[indexPath.row]
                 cell.selected  = false;
+                
                 if ( row.productId != nil ){
                     toVCProduct(row.productId!)
                 }

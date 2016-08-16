@@ -47,7 +47,9 @@ class WOWGoodsBigCell: UICollectionViewCell {
         let priceImage = UIImage(named: "yellow_corner_back")
         priceBackImageView.image = priceImage?.stretchableImageWithLeftCapWidth(15, topCapHeight:Int((priceImage?.size.height)!)/2)
         let url = model.productImg ?? ""
-        bigPictureImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage: UIImage(named: "placeholder_product"))
+//        bigPictureImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage: UIImage(named: "placeholder_product"))
+        bigPictureImageView.set_webimage_url(url)
+        
         titleLabel.text = model.productName
         desLabel.text   = model.sellingPoint
         priceLabel.text  = String(format: "%.2f",model.sellPrice ?? 0)

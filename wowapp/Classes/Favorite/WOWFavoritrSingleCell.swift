@@ -22,7 +22,9 @@ class WOWFavoritrSingleCell: UICollectionViewCell {
     }
     func showData(model:WOWProductModel,indexPath:NSIndexPath) {
         let url             = model.productImg ?? ""
-        imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
+//        imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
+
+        imageView.set_webimage_url( url)
 
         switch indexPath.item {
         case 0,1:

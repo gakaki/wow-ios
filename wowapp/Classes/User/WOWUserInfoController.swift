@@ -140,7 +140,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
             
             let diceRoll            = Int(arc4random_uniform(UInt32(6)))
             let url                 = "\(WOWUserManager.userHeadImageUrl)?t=\(diceRoll)"
-            self.headImageView.kf_setImageWithURL(NSURL(string:url ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+//            self.headImageView.kf_setImageWithURL(NSURL(string:url ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+            
+            self.headImageView.set_webimage_url_user( url )
+            
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
             self.starTextField.userInteractionEnabled = false

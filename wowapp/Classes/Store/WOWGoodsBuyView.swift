@@ -230,7 +230,9 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             goodsImageView.layer.borderWidth = 0.5
             goodsImageView.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
             if let img = WOWBuyCarMananger.sharedBuyCar.defaultImg {
-                goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+//                goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                goodsImageView.set_webimage_url(img)
+
             }
             //得到颜色的数组，并给每种颜色对应一个bool值，方便记录哪个颜色有库存
             if let array = p.colorDisplayNameList {
@@ -633,7 +635,9 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             if color_SpecArr?.count > 0 {
                 let img = color_SpecArr![0].subProductInfo?.productColorImg
                 if let img = img {
-                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+//                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                    goodsImageView.set_webimage_url(img)
+
                 }
             }
             

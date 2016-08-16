@@ -26,7 +26,9 @@ class WOWBrandHeaderView: UICollectionReusableView {
        
         logoImage.layer.cornerRadius = 40
         logoImage.layer.masksToBounds = true
-        logoImage.kf_setImageWithURL(NSURL(string: model.image), placeholderImage: UIImage(named: "placeholder_product"))
+//        logoImage.kf_setImageWithURL(NSURL(string: model.image), placeholderImage: UIImage(named: "placeholder_product"))
+        logoImage.set_webimage_url( model.image)
+
         brandNameLabel.text = model.brandEname ?? ""
         let str = NSMutableAttributedString(string: model.desc ?? "")
         let style = NSMutableParagraphStyle()
@@ -42,7 +44,10 @@ class WOWBrandHeaderView: UICollectionReusableView {
         
         logoImage.layer.cornerRadius = 40
         logoImage.layer.masksToBounds = true
-        logoImage.kf_setImageWithURL(NSURL(string: model.designerPhoto), placeholderImage: UIImage(named: "placeholder_product"))
+//        logoImage.kf_setImageWithURL(NSURL(string: model.designerPhoto), placeholderImage: UIImage(named: "placeholder_product"))
+        
+        logoImage.set_webimage_url( model.designerPhoto )
+
         brandNameLabel.text = model.designerName ?? ""
         let str = NSMutableAttributedString(string: model.designerDesc ?? "")
         let style = NSMutableParagraphStyle()

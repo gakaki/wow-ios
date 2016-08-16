@@ -28,8 +28,11 @@ class VCBaseVCCategoryFound:WOWBaseViewController{
             pageIndex += 1
             isRreshing = true
         }
-//        refresh_view()
+        refresh_view()
     }
     
+    func refresh_view(){
+        
+    }
    
 }

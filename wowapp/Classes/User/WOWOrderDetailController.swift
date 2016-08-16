@@ -47,18 +47,14 @@ class WOWOrderDetailController: WOWBaseViewController{
     
     
     var OrderDetailNewaType         : OrderNewType = .someFinishForGoods
-    ///  Test: 存放包裹的数组
+    ///  : 存放包裹的数组
     var goodsArray = [WOWNewForGoodsModel]()
-    ///  包裹名称  包裹内商品数量
-    var airports: Dictionary<String, Int> = [:]
-    //    let orderNewType : String!
-    ///  Test: 总共几个包裹
-    //    var goodsNumber                 : Int! // 测试数据
     
-    ///  Test: 以发货清单的包裹1商品个数
-    var orderNumber                 : Int! // 测试数据 以发货清单的包裹1商品个数
-    ///  Test: 以发货清单的的包裹2商品个数
-    var orderNumber2                 : Int! // 测试数据 以发货清单的的包裹2商品个数
+    
+    ///  : 部分发货：发货清单的 产品 的数量
+    var orderGoodsNumber                 : Int!
+    
+    
     ///  Test: 未发货清单的的包裹商品个数
     var orderNoNumber                 : Int! // 测试数据 未发货清单的的包裹商品个数
     
@@ -88,27 +84,21 @@ class WOWOrderDetailController: WOWBaseViewController{
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-//        let dic1  = ["baoguo":4]
-//        let dic2  = ["baoguo":2]
-//        let dic3  = ["baoguo":3]
-//        let dic4  = ["baoguo":5]
-//        let dic5  = ["baoguo":2]
-//        goodsArray = [dic1,dic2,dic3,dic4,dic5]
         
-        orderNumber          = 4
-        orderNumber2         = 4
-        orderNoNumber        = 2
+        orderNoNumber        = 0
+        orderGoodsNumber     = 0
         
         isOpen               = true
         request()
         WOWBorderColor(rightButton)
         navigationItem.title = "订单详情"
         configTableView()
-        
-        //        configBottomView()
+
     }
     
     private func configTableView(){
+        tableView.clearRestCell()
+        tableView.backgroundColor = DefaultBackColor
         tableView.estimatedRowHeight = 70
         tableView.registerNib(UINib.nibName("WOWOrderDetailNewCell"), forCellReuseIdentifier: "WOWOrderDetailNewCell")
         tableView.registerNib(UINib.nibName("WOWOrderDetailTwoCell"), forCellReuseIdentifier: "WOWOrderDetailTwoCell")
@@ -215,7 +205,51 @@ class WOWOrderDetailController: WOWBaseViewController{
             }
         }
     }
-    
+    /**
+     拿到定制tableView 所需要的数据
+     */
+    func getOrderData(){
+        switch OrderDetailNewaType {
+        case .forGoods,.finish:
+            /// 拿出发货的商品数组
+            if  let forGoodsArr = self.orderNewDetailModel?.packages {
+                self.goodsArray = forGoodsArr
+                
+                self.orderGoodsNumber = forGoodsArr[0].orderItems?.count > 3 ? 3 : forGoodsArr[0].orderItems?.count
+                
+                
+            }
+
+            
+        case .payMent,.noForGoods:
+            
+            /// 拿出未发货的商品数组
+            if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
+                self.orderNoNumber = noForGoodsArr.count > 3 ? 3 : noForGoodsArr.count
+              
+                
+            }
+
+            
+        default:
+            /// 拿出发货的商品数组
+            if  let forGoodsArr = self.orderNewDetailModel?.packages {
+                self.goodsArray = forGoodsArr
+                
+                self.orderGoodsNumber = forGoodsArr[0].orderItems?.count > 3 ? 3 : forGoodsArr[0].orderItems?.count
+                
+                
+            }
+            /// 拿出未发货的商品数组
+            if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
+//                self.orderNoNumber = noForGoodsArr.count > 3 ? 3 : noForGoodsArr.count
+                self.orderNoNumber = noForGoodsArr.count
+                
+            }
+
+        }
+       
+    }
     //MARK:Network
     override func request() {
         
@@ -228,6 +262,8 @@ class WOWOrderDetailController: WOWBaseViewController{
         
         orderType()
         
+        isOpen = true
+        
         if let orderNewModel = orderNewModel {
             
             WOWNetManager.sharedManager.requestWithTarget(.Api_OrderDetail(OrderCode:orderNewModel.orderCode!), successClosure: { [weak self](result) in
@@ -235,15 +271,8 @@ class WOWOrderDetailController: WOWBaseViewController{
                 if let strongSelf = self{
                     
                 strongSelf.orderNewDetailModel = Mapper<WOWNewOrderDetailModel>().map(result)
-                    /// 拿出发货的商品数组
-                    if  let forGoodsArr = strongSelf.orderNewDetailModel?.packages {
-                        strongSelf.goodsArray = forGoodsArr
-                    }
-                    /// 拿出未发货的商品数组
-                    if  let noForGoodsArr = strongSelf.orderNewDetailModel?.unShipOutOrderItems {
-                        strongSelf.orderNoNumber = noForGoodsArr.count
-                    }
-
+                    
+                   strongSelf.getOrderData()
                 
                 strongSelf.tableView.reloadData()
                 }
@@ -331,11 +360,11 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1: //收货人
                 return 1
             case 2: //商品清单  如果大于三个商品隐藏
-                if let orderNewDetailModel = orderNewDetailModel {
-                    return orderNewDetailModel.unShipOutOrderItems!.count > 3 ? 3 : orderNewDetailModel.unShipOutOrderItems!.count
-                }else{
-                    return 0
-                }
+//                if let orderNewDetailModel = orderNewDetailModel {
+                    return orderNoNumber
+//                }else{
+//                    return 0
+//                }
                 
             case 3: //运费
                 return 2
@@ -353,11 +382,11 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1: //收货人
                 return 1
             case 2: //商品清单  如果大于三个商品隐藏
-                if let orderNewDetailModel = orderNewDetailModel {
-                    return orderNewDetailModel.packages!.count > 3 ? 3 : orderNewDetailModel.packages!.count
-                }else{
-                    return 0
-                }
+//                if let orderNewDetailModel = orderNewDetailModel {
+//                    return orderNewDetailModel.packages![0].orderItems!.count > 3 ? 3 : orderNewDetailModel.packages![0].orderItems!.count
+//                }else{
+                    return self.orderGoodsNumber
+//                }
                 
             case 3: //运费
                 return 2
@@ -373,11 +402,11 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1: //收货人
                 return 1
             case 2: //商品清单  如果大于三个商品隐藏
-                if let orderNewDetailModel = orderNewDetailModel {
-                    return orderNewDetailModel.unShipOutOrderItems!.count > 3 ? 3 : orderNewDetailModel.unShipOutOrderItems!.count
-                }else{
-                    return 0
-                }
+//                if let orderNewDetailModel = orderNewDetailModel {
+//                    return orderNewDetailModel.unShipOutOrderItems!.count > 3 ? 3 : orderNewDetailModel.unShipOutOrderItems!.count
+//                }else{
+                    return orderNoNumber
+//                }
                 
             case 3: //运费
                 return 2
@@ -393,12 +422,12 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1: //收货人
                 return 1
             case 2: //商品清单  如果大于三个商品隐藏
-                if let orderNewDetailModel = orderNewDetailModel {
-                    return orderNewDetailModel.packages!.count > 3 ? 3 : orderNewDetailModel.packages!.count
-                }else{
-                    return 0
-                }
-                
+//                if let orderNewDetailModel = orderNewDetailModel {
+//                    return orderNewDetailModel.packages![0].orderItems!.count > 3 ? 3 : orderNewDetailModel.packages![0].orderItems!.count
+//                }else{
+                    return self.orderGoodsNumber
+//                }
+//
             case 3: //运费
                 return 2
             default:
@@ -414,14 +443,16 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1:
                 return 1
             case goodsArray.count + 2 :
-                return (orderNoNumber > 3 ? 3 : orderNoNumber)
+//                return (orderNoNumber > 3 ? 3 : orderNoNumber)
+                return orderNoNumber
             case goodsArray.count + 3 :
                 return 2
             default:
                 
                 let goods : WOWNewForGoodsModel = goodsArray[section - 2]
-                
-                return (goods.orderItems!.count + 1) > 3 ? 4 : (goods.orderItems!.count + 1)
+
+                    return goods.orderItems!.count + 1
+
             }
             
         }
@@ -786,33 +817,47 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
         switch OrderDetailNewaType {
         case .someFinishForGoods:
-            switch section {
-            case 0 , 1:
+//            switch section {
+//            case 0 , 1:
                 return CellHight.minHight
-            case goodsArray.count + 2:
-                
-                return orderNoNumber > 3 ? CellHight.fooderHight : CellHight.minHight
-                
-            case goodsArray.count + 3:
-                
-                return CellHight.minHight
-                
-            default:
-                let goods = goodsArray[section - 2]
-                
-                return (goods.orderItems!.count + 1) > 3 ? CellHight.fooderHight : CellHight.minHight
-                
-                
-            }
-            
+//            case goodsArray.count + 2:
+//                
+//                return orderNoNumber > 3 ? CellHight.fooderHight : CellHight.minHight
+//                
+//            case goodsArray.count + 3:
+//                
+//                return CellHight.minHight
+//                
+//            default:
+//                let goods = goodsArray[section - 2]
+//                
+//                return (goods.orderItems!.count + 1) > 3 ? CellHight.fooderHight : CellHight.minHight
+//                
+//                
+//            }
+//        
             
             
         default:
             if let orderNewDetailModel = orderNewDetailModel {
-                
-                guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
-                    return CellHight.minHight
+                switch OrderDetailNewaType {
+                case .payMent,.noForGoods:
+                    guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
+                        return CellHight.minHight
+                    }
+
+                case .forGoods,.finish:
+                    
+                    guard orderNewDetailModel.packages![0].orderItems!.count > 3 else {
+                        return CellHight.minHight
+                    }
+
+                default:
+                    break
                 }
+//                guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
+//                    return CellHight.minHight
+//                }
                 
                 if section == 2 {
                     return CellHight.fooderHight
@@ -828,33 +873,46 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
         switch OrderDetailNewaType {
         case .someFinishForGoods:
-            switch section {
-            case 0 , 1:
+//            switch section {
+//            case 0 , 1:
                 return nil
                 
-            case goodsArray.count + 3:
-                return nil
-            case goodsArray.count + 2:
-                return orderNoNumber > 3 ? footSectionView() : nil
-            // FIXME:
-            default:
-                let goods = goodsArray[section - 2]
-                
-                return (goods.orderItems!.count + 1) > 3 ? footSectionView() : nil
-                
-                
-            }
-            
+//            case goodsArray.count + 3:
+//                return nil
+//            case goodsArray.count + 2:
+//                return orderNoNumber > 3 ? footSectionView(section) : nil
+//            // FIXME:
+//            default:
+//                let goods = goodsArray[section - 2]
+//                
+//                return (goods.orderItems!.count + 1) > 3 ? footSectionView(section) : nil
+//                
+//                
+//            }
+//            
             
             
         default:
             if let orderNewDetailModel = orderNewDetailModel {
-                guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
-                    return nil
+                switch OrderDetailNewaType {
+                case .payMent,.noForGoods:
+                    guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
+                        return nil
+                    }
+                    
+                case .forGoods,.finish:
+                    
+                    guard orderNewDetailModel.packages![0].orderItems!.count > 3 else {
+                        return nil
+                    }
+                    
+                default:
+                    break
                 }
+
                 
                 if section == 2 {
-                    return footSectionView()
+                    return footSectionView(section)
                 }
                 return nil
                 
@@ -865,7 +923,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         }
    
     }
-    func footSectionView() -> UIView {
+    func footSectionView(indexPathSetion:Int) -> UIView {
         let view = UIView()
         view.frame = CGRectMake(0, 0, MGScreenWidth, 40)
         view.backgroundColor = UIColor.whiteColor()
@@ -876,11 +934,40 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         likeButton.centerX = view.centerX - 10
         likeButton.titleLabel?.font = UIFont.systemFontOfSize(12)
         likeButton.setTitleColor(GrayColorlevel3, forState: .Normal)
-        likeButton.setTitle("共7件", forState: .Normal)
+        var totalNum : String?
+       
+        switch OrderDetailNewaType {
+        case .payMent,.noForGoods:
+            if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
+                
+                totalNum = "共" + noForGoodsArr.count.toString + "件"
+                
+            }
+            
+        case .forGoods,.finish:
+            if  let forGoodsArr = self.orderNewDetailModel?.packages![0].orderItems {
+                
+                totalNum = "共" + forGoodsArr.count.toString + "件"
+                
+            }
+
+            
+        default:
+            break
+            
+        }
+//        var totalNum = "共" + "" + "件"
+        likeButton.setTitle(totalNum, forState: .Normal)
         
-        likeButton.setImage(UIImage(named: "downOrder")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+        if isOpen == true {
+               likeButton.setImage(UIImage(named: "close")?.imageWithRenderingMode(.AlwaysOriginal), forState: UIControlState.Normal)
+        }else{
+          likeButton.setImage(UIImage(named: "downOrder")?.imageWithRenderingMode(.AlwaysOriginal), forState: UIControlState.Normal)
+        }
+//        likeButton.setImage(UIImage(named: "downOrder")?.imageWithRenderingMode(.Automatic), forState:  UIControlState.Selected)
         likeButton.imageEdgeInsets = UIEdgeInsetsMake(10, 70, 10, 10)
         likeButton.addTarget(self, action: #selector(clickAction(_:)), forControlEvents: .TouchUpInside)
+        likeButton.tag = indexPathSetion
         view.addSubview(likeButton)
         
         
@@ -888,34 +975,113 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
     }
     // 关闭页眉页脚的停留
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        let sectionHeaderHeight:CGFloat = 40
-        
-        let sectionFooterHeight:CGFloat = 40
-        let offsetY:CGFloat = scrollView.contentOffset.y;
-        if offsetY >= 0 && offsetY <= sectionHeaderHeight
-        {
-            scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -sectionFooterHeight, 0)
-        }else if offsetY >= sectionHeaderHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight
-        {
-            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, -sectionFooterHeight, 0)
-        }else if offsetY >= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height
-        {
-            scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight), 0)
-        }
-        
-        }
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        let sectionHeaderHeight:CGFloat = 38
+//        
+//        let sectionFooterHeight:CGFloat = 40
+//        let offsetY:CGFloat = scrollView.contentOffset.y;
+//        if offsetY >= 0 && offsetY <= sectionHeaderHeight
+//        {
+//            scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -sectionFooterHeight, 0)
+//        }else if offsetY >= sectionHeaderHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight
+//        {
+//            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, -sectionFooterHeight, 0)
+//        }else if offsetY >= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height
+//        {
+//            scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight), 0)
+//        }
+//        
+//        }
     func clickAction(sender:UIButton)  {
         
-        if isOpen == true {
-            orderNumber = 7
-            isOpen = false
-        }else{
-            orderNumber = 3
-            isOpen = true
-        }
         
-        tableView.reloadData()
+        switch OrderDetailNewaType {
+        case .someFinishForGoods:
+            print("")
+//            switch sender.tag {
+//            case 0 , 1:
+//                print("0,1")
+//            case goodsArray.count + 2:
+//                
+//                if isOpen == true {
+//                    
+//                    if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
+//                        self.orderNoNumber = noForGoodsArr.count
+//                    }
+//                    
+//                    isOpen = false
+//                }else{
+//                    
+//                    if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
+//                        self.orderNoNumber = noForGoodsArr.count > 3 ? 3 : noForGoodsArr.count
+//                    }
+//                    
+//                    isOpen = true
+//                }
+//                
+//            case goodsArray.count + 3:
+//
+//                print("last")
+//                
+//            default:
+//                sender.selected = true
+//                
+//                isOpen = true
+//                
+//            }
+
+            
+            
+            
+        case .payMent,.noForGoods:
+            
+            if isOpen == true {
+        
+                if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
+                    self.orderNoNumber = noForGoodsArr.count
+                }
+//                sender.selected = true
+                
+             
+                
+                isOpen = false
+            }else{
+               
+                if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
+                    self.orderNoNumber = noForGoodsArr.count > 3 ? 3 : noForGoodsArr.count
+                }
+//                 sender.setImage(UIImage(named: "downOrder")?.imageWithRenderingMode(.Automatic), forState: UIControlState.Normal)
+                isOpen = true
+            }
+            
+
+            
+        case .forGoods,.finish:
+            if isOpen == true {
+                if  let forGoodsArr = self.orderNewDetailModel?.packages![0].orderItems {
+                    self.orderGoodsNumber = forGoodsArr.count
+                }
+//                  sender.setImage(UIImage(named: "close")?.imageWithRenderingMode(.Automatic), forState: UIControlState.Normal)
+                isOpen = false
+            }else{
+                if  let forGoodsArr = self.orderNewDetailModel?.packages![0].orderItems {
+                    self.orderGoodsNumber = forGoodsArr.count > 3 ? 3 : forGoodsArr.count
+                }
+//                  sender.setImage(UIImage(named: "downOrder")?.imageWithRenderingMode(.Automatic), forState: UIControlState.Normal)
+                isOpen = true
+            }
+            
+
+            
+        }
+
+//        // 刷新单独一组
+        let indexSet = NSIndexSet.init(index: sender.tag)
+   
+        tableView.reloadSections(indexSet, withRowAnimation: UITableViewRowAnimation.Automatic)
+
+      
+//        tableView.reloadData()
         
     }
     func tableView(tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {

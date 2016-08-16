@@ -63,6 +63,7 @@ class WOWOrderListCell: UITableViewCell {
         goodsCountLabel.text = "共"+(m.totalProductQty?.toString)!+"件"
         totalPriceLabel.text = "¥ "+(m.orderAmount?.toString)!
         rightViseButton.hidden = true
+        collectionView.reloadData()
     }
     
     @IBAction func rightButtonClick(sender: UIButton) {
@@ -143,7 +144,10 @@ extension WOWOrderListCell:UICollectionViewDelegate,UICollectionViewDataSource,U
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
 //        let model = dataArr[indexPath.row]
         print((modelNew?.productSpecImgs[indexPath.row])!)
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string: (modelNew?.productSpecImgs[indexPath.row])!)!, placeholderImage: UIImage(named: "placeholder_product"))
+//        cell.pictureImageView.kf_setImageWithURL(NSURL(string: (modelNew?.productSpecImgs[indexPath.row])!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        
+        cell.pictureImageView.set_webimage_url(modelNew?.productSpecImgs[indexPath.row])
+
         return cell
     }
     

@@ -48,7 +48,9 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
         let model = dataArr?[indexPath.item]
         if let m = model {
             let url             = m.productImg ?? ""
-            cell.pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
+//            cell.pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
+            cell.pictureImageView.set_webimage_url(url)
+            
             cell.desLabel.text       = m.productName
             cell.priceLabel.text     = String(format: "¥ %.2f",m.sellPrice ?? 0) //千万不用格式化了
         }

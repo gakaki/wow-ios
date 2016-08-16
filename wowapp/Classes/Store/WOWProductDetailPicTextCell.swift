@@ -36,7 +36,9 @@ class WOWProductDetailPicTextCell: UITableViewCell {
             return
         }
         cellHeightConstraint.constant = (MGScreenWidth-30) * 333 / 500
-        picImageView.kf_setImageWithURL(NSURL(string:imageUrl)!, placeholderImage:UIImage(named: "placeholder_product"))
+//        picImageView.kf_setImageWithURL(NSURL(string:imageUrl)!, placeholderImage:UIImage(named: "placeholder_product"))
+        picImageView.set_webimage_url(imageUrl)
+
     }
     
     

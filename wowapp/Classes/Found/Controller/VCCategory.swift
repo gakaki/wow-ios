@@ -19,6 +19,7 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
     
     var cid:String              = "10" {
         didSet {
+            self.reset_fetch_params()
             refresh_view()
         }
     }
@@ -28,23 +29,18 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
             refresh_view()
         }
     }
-    var query_currentPage:Int  {
-        set {
-            self.pageIndex = newValue
-            refresh_view()
-        }
-        get {
-            return self.pageIndex
-        }
-    }
+    
     var query_sortBy:Int        = 1 {
         didSet {
+            self.reset_fetch_params()
             refresh_view()
         }
     }
-    
-    
-    
+    func reset_fetch_params(){
+        self.pageIndex = 1
+        self.vo_products = []
+//        self.cv_bottom.setContentOffset(CGPointZero, animated: true)
+    }
     
     var query_showCount:Int     = 10
     var top_category_image_view:UIImageView = UIImageView()
@@ -121,6 +117,11 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
         cv_bottom.bounces = false
         
         cv_bottom.mj_footer = self.mj_footer
+        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
+//        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
+
+//        [self.tableView.footer setTitle:@"" forState:MJRefreshFooterStateIdle];
+
     }
     
     override func request(){
@@ -329,22 +330,31 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
     
     
     // 1 上方collectionview 触发 , 2 中间选择 tab 触发 3 下方下拉查看触发
-    func refresh_view(){
+    override func refresh_view(){
         
         //                {"asc":1,"currentPage":1,"showCount":10,"sortBy":1,"categoryId":16}
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: self.query_asc, currentPage: self.query_currentPage, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.cid.toInt()! ), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.cid.toInt()! ), successClosure: {[weak self] (result) in
             
+            self!.endRefresh()
+
             let res                   = JSON(result)
             let data                  = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
+            DLog(self!.vo_products.count)
+
+            if ( data.count <= 0 || data.count < self?.query_showCount){
+                self!.cv_bottom.mj_footer = nil
+            }
+            else{
+                self!.cv_bottom.mj_footer = self?.mj_footer
+
+            }
+            
             self!.vo_products         = [self!.vo_products, data].flatMap { $0 }
-            DLog(self!.vo_products)
-            
-            
             self!.cv_bottom.reloadData()
-            self?.mj_footer.endRefreshing()
             
         }){ (errorMsg) in
             print(errorMsg)
+            self.endRefresh()
         }
 
     }

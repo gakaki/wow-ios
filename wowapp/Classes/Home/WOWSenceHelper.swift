@@ -35,7 +35,10 @@ class WOWSenceHelper: NSObject {
         switch indexPath.section {
         case 0:
             let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSenceImageCell), forIndexPath:indexPath) as! WOWSenceImageCell
-            cell.contentImageView.kf_setImageWithURL(NSURL(string:sceneModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+//            cell.contentImageView.kf_setImageWithURL(NSURL(string:sceneModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+            
+            cell.contentImageView.set_webimage_url(sceneModel?.image )
+
             self.shareImage = cell.contentImageView.image
             returnCell = cell
         case 1:

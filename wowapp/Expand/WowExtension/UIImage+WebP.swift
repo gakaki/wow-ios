@@ -22,7 +22,7 @@ extension UIImageView {
             return ""
         }
        res     = "\(url)?imageMogr2/format/webp"
-        DLog(res)
+//        DLog(res)
        return res
     }
     

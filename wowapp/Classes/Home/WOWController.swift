@@ -157,6 +157,49 @@ class WOWController: WOWBaseViewController {
             }
         }
     }
+    
+    
+    //点击跳转
+    func goController(model: WOWCarouselBanners) {
+        if let bannerLinkType = model.bannerLinkType {
+            switch bannerLinkType {
+            case 1:
+                print("web后台填连接")
+            case 2:
+                print("专题详情页（商品列表）")
+            case 3:
+                print("专题详情页（图文混排）")
+            case 4:
+                print("品牌详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+                vc.brandID = model.bannerLinkTargetId
+                vc.entrance = .brandEntrance
+                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
+                
+            case 5:
+                print("设计师详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+                vc.designerId = model.bannerLinkTargetId
+                vc.entrance = .designerEntrance
+                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
+            case 6:
+                print("商品详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+                vc.hideNavigationBar = true
+                vc.productId = model.bannerLinkTargetId
+                navigationController?.pushViewController(vc, animated: true)
+                
+            case 7:
+                print("分类详情页")
+            default:
+                print("其他")
+            }
+            
+        }
+        
+    }
 }
 
 
@@ -207,37 +250,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
       
-        let model       = dataArr[indexPath.row]
-        if let bannerLinkType = model.bannerLinkType {
-            switch bannerLinkType {
-            case 1:
-                print("专题")
-            case 2:
-                print("品牌详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-                vc.brandID = model.bannerLinkTargetId
-                vc.entrance = .brandEntrance
-                vc.hideNavigationBar = true
-                navigationController?.pushViewController(vc, animated: true)
-
-            case 3:
-                print("设计师详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-                vc.designerId = model.bannerLinkTargetId
-                vc.entrance = .designerEntrance
-                vc.hideNavigationBar = true
-                navigationController?.pushViewController(vc, animated: true)
-            case 4:
-                print("商品详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
-                vc.hideNavigationBar = true
-                vc.productId = model.bannerLinkTargetId
-                navigationController?.pushViewController(vc, animated: true)
-            default:
-                print("其他")
-            }
-            
-        }
+        let model = dataArr[indexPath.row]
+        goController(model)
     }
     
     func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
@@ -261,45 +275,8 @@ extension WOWController:SenceCellDelegate{
 extension WOWController: CyclePictureViewDelegate {
     func cyclePictureView(cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let model = bannerArray[indexPath.row]
-        print(model.bannerLinkType)
-        if let bannerLinkType = model.bannerLinkType {
-            switch bannerLinkType {
-            case 1:
-                print("web后台填连接")
-            case 2:
-                print("专题详情页（商品列表）")
-            case 3:
-                print("专题详情页（图文混排）")
-            case 4:
-                print("品牌详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-                vc.brandID = model.bannerLinkTargetId
-                vc.entrance = .brandEntrance
-                vc.hideNavigationBar = true
-                navigationController?.pushViewController(vc, animated: true)
-
-            case 5:
-                print("设计师详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-                vc.designerId = model.bannerLinkTargetId
-                vc.entrance = .designerEntrance
-                vc.hideNavigationBar = true
-                navigationController?.pushViewController(vc, animated: true)
-            case 6:
-                print("商品详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
-                vc.hideNavigationBar = true
-                vc.productId = model.bannerLinkTargetId
-                navigationController?.pushViewController(vc, animated: true)
-
-            case 7:
-                print("分类详情页")
-            default:
-                print("其他")
-            }
-
-        }
-       
+        
+        goController(model)
     }
 }
 

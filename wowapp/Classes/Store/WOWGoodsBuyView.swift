@@ -241,7 +241,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                         colorArr.append(colorModel)
 
                     }else {
-                        let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: false)
+                        let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: true)
                         colorArr.append(colorModel)
 
                     }
@@ -255,7 +255,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                         let specModel = WOWSpecNameModel(specName: spec, isSelect: true)
                         specArr.append(specModel)
                     }else {
-                        let specModel = WOWSpecNameModel(specName: spec, isSelect: false)
+                        let specModel = WOWSpecNameModel(specName: spec, isSelect: true)
                         specArr.append(specModel)
                     }
                     
@@ -588,6 +588,15 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
          */
         if collectionView.tag == 100 {
             
+            if colorIndex == indexPath.row {
+                colorIndex = -1
+                for selectSpec in specArr {
+                    selectSpec.isSelect = true
+                }
+                self.collectionView.reloadData()
+                secondCollectionView.reloadData()
+                return
+            }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
             colorIndex = indexPath.row
             
@@ -629,7 +638,15 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }
             
         }else {
-            
+            if specIndex == indexPath.row {
+                specIndex = -1
+                for selectColor in colorArr {
+                    selectColor.isSelect = true
+                }
+                self.collectionView.reloadData()
+                secondCollectionView.reloadData()
+                return
+            }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
             specIndex = indexPath.row
             

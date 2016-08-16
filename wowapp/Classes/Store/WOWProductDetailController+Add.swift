@@ -24,7 +24,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.registerNib(UINib.nibName(String(WOWProductDetailTipsCell)), forCellReuseIdentifier:String(WOWProductDetailTipsCell))
         //先不要评论
 //        tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailAboutCell)), forCellReuseIdentifier: "WOWProductDetailAboutCell")
+        //相关商品也不要
+//        tableView.registerNib(UINib.nibName(String(WOWProductDetailAboutCell)), forCellReuseIdentifier: "WOWProductDetailAboutCell")
     }
     
     
@@ -45,8 +46,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             return 1
 //        case 3: //评论
 //            return 3
-        case 3: //相关商品
-            return 1
+//        case 3: //相关商品
+//            return 1
         default:
             break
         }
@@ -110,11 +111,11 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
 //        case (3,_)://评论
 //            let cell = tableView.dequeueReusableCellWithIdentifier("WOWCommentCell", forIndexPath: indexPath) as! WOWCommentCell
 //            returnCell = cell
-        case (3,_)://相关商品
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailAboutCell", forIndexPath: indexPath) as! WOWProductDetailAboutCell
-            //FIXME:测试
-//            cell.dataArr = [productModel!,productModel!,productModel!,productModel!,productModel!]
-            returnCell = cell
+//        case (3,_)://相关商品
+//            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailAboutCell", forIndexPath: indexPath) as! WOWProductDetailAboutCell
+//            //FIXME:测试
+////            cell.dataArr = [productModel!,productModel!,productModel!,productModel!,productModel!]
+//            returnCell = cell
         default:
             break
         }
@@ -127,8 +128,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             return 30
 //        case 3:
 //            return 30
-        case 3://相关商品
-            return 50
+//        case 3://相关商品
+//            return 50
         default:
             return 0.01
         }
@@ -140,8 +141,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             return 120
 //        case 3:
 //            return 60
-        case 3:
-            return 20
+//        case 3:  //相关商品
+//            return 20
         default:
             return 0.01
         }
@@ -156,10 +157,10 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
 //        case 3://评论
 //            let v = DetailSectionHeaderView(leftTitle:"评论")
 //            return v
-        case 3: //相关商品
-            let v = DetailSectionHeaderView(leftTitle:"相关商品", backColor:DefaultBackColor, leftTtileColor:GrayColorlevel3)
-            v.line.hidden = true
-            return v
+//        case 3: //相关商品
+//            let v = DetailSectionHeaderView(leftTitle:"相关商品", backColor:DefaultBackColor, leftTtileColor:GrayColorlevel3)
+//            v.line.hidden = true
+//            return v
         default:
             return nil
         }

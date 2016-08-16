@@ -439,7 +439,6 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1:
                 return 1
             case goodsArray.count + 2 :
-                //                return (orderNoNumber > 3 ? 3 : orderNoNumber)
                 return orderNoNumber
             case goodsArray.count + 3 :
                 return 2

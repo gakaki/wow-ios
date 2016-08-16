@@ -111,7 +111,11 @@ extension WOWFavBrand:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoriteBrandCell), forIndexPath: indexPath) as! WOWFavoriteBrandCell
         let model = dataArr[indexPath.row]
-        cell.logoImg.kf_setImageWithURL(NSURL(string:model.brandLogoImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+//        cell.logoImg.kf_setImageWithURL(NSURL(string:model.brandLogoImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+        
+        cell.logoImg.set_webimage_url(model.brandLogoImg)
+
+        
         WOWBorderColor(cell.logoImg)
         cell.logoImg.borderRadius(32)
         cell.logoName.text = model.brandCName ?? ""

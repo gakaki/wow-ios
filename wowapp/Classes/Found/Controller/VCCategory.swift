@@ -117,7 +117,11 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
         cv_bottom.bounces = false
         
         cv_bottom.mj_footer = self.mj_footer
-        self.mj_footer.hidden = true
+        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
+//        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
+
+//        [self.tableView.footer setTitle:@"" forState:MJRefreshFooterStateIdle];
+
     }
     
     override func request(){
@@ -337,20 +341,20 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
             let data                  = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
             DLog(self!.vo_products.count)
 
-            if ( data.count > 0){
-                self!.cv_bottom.mj_footer = self?.mj_footer
-                self!.vo_products         = [self!.vo_products, data].flatMap { $0 }
-            }else{
+            if ( data.count <= 0 || data.count < self?.query_showCount){
                 self!.cv_bottom.mj_footer = nil
             }
-            
-            self!.cv_bottom.reloadData()
+            else{
+                self!.cv_bottom.mj_footer = self?.mj_footer
 
+            }
+            
+            self!.vo_products         = [self!.vo_products, data].flatMap { $0 }
+            self!.cv_bottom.reloadData()
             
         }){ (errorMsg) in
             print(errorMsg)
             self.endRefresh()
-
         }
 
     }

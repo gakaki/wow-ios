@@ -40,8 +40,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crT-ID-XEu">
-                        <rect key="frame" x="48" y="-17" width="0.0" height="0.0"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crT-ID-XEu">
+                        <rect key="frame" x="115" y="55" width="0.0" height="0.0"/>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,9 +64,17 @@
                     <constraint firstItem="8Ha-VM-5gP" firstAttribute="leading" secondItem="fXJ-fB-5XR" secondAttribute="leading" id="IQT-GI-pMQ"/>
                     <constraint firstItem="GgV-4n-hot" firstAttribute="top" secondItem="R4R-2a-Q5F" secondAttribute="top" id="LKR-HW-yNs"/>
                     <constraint firstItem="fXJ-fB-5XR" firstAttribute="top" secondItem="R4R-2a-Q5F" secondAttribute="top" id="Mer-59-oUy"/>
+                    <constraint firstItem="crT-ID-XEu" firstAttribute="bottom" secondItem="R4R-2a-Q5F" secondAttribute="bottom" id="gMI-95-g3I"/>
                     <constraint firstItem="au4-E8-Hsl" firstAttribute="trailing" secondItem="GgV-4n-hot" secondAttribute="trailing" id="mjm-BR-OE0"/>
+                    <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="leading" constant="50" id="pk4-sK-iSV"/>
+                    <constraint firstItem="crT-ID-XEu" firstAttribute="top" secondItem="fXJ-fB-5XR" secondAttribute="top" constant="40" id="vqA-cz-Gf3"/>
                     <constraint firstAttribute="trailing" secondItem="GgV-4n-hot" secondAttribute="trailing" constant="15" id="yB0-Q4-upg"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="vqA-cz-Gf3"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="colorLabel" destination="8Ha-VM-5gP" id="r8A-xa-TLL"/>

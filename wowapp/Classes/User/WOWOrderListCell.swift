@@ -63,6 +63,7 @@ class WOWOrderListCell: UITableViewCell {
         goodsCountLabel.text = "共"+(m.totalProductQty?.toString)!+"件"
         totalPriceLabel.text = "¥ "+(m.orderAmount?.toString)!
         rightViseButton.hidden = true
+        collectionView.reloadData()
     }
     
     @IBAction func rightButtonClick(sender: UIButton) {

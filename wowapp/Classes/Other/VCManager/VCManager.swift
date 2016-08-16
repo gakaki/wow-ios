@@ -4,20 +4,29 @@
 extension UIViewController
 {
    
-    func toVCCategory( cid: String = "10"){
-        let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(VCCategory)) as! VCCategory
-        vc.cid     = cid
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+    func toVCCategory( cid: String = "10" , cname:String ){
+        let vc      = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(VCCategory)) as! VCCategory
+        vc.cid      = cid
+        vc.title    = cname
+        self.pushVC(vc)
+     }
     
     
     func toVCProduct( pid: Int? ){
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = pid
-        navigationController?.pushViewController(vc, animated: true)
+        self.pushVC(vc)
     }
     
-   
+    
+    func toVCCart( ){
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+        let nav_vc = UINavigationController(rootViewController: vc)
+        vc.hideNavigationBar = false
+        self.presentVC(nav_vc)
+    }
+    
+    
     
 }

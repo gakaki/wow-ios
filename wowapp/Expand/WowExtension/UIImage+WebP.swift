@@ -11,7 +11,9 @@ extension UIImageView {
     
     func set_webimage_url( url:String ) -> Void {
         let url = self.webp_url(url)
-        self.yy_setImageWithURL(NSURL(string:url ?? "") , placeholder: UIImage(named: "placeholder_product"))
+//        self.yy_setImageWithURL(NSURL(string:url ?? "") , )
+        self.yy_setImageWithURL(NSURL(string:url ?? "") , placeholder: UIImage(named: "placeholder_product") , options: YYWebImageOptions.ProgressiveBlur, completion: nil)
+
     }
     
     func webp_url(url:String) -> String {
@@ -20,6 +22,7 @@ extension UIImageView {
             return ""
         }
        res     = "\(url)?imageMogr2/format/webp"
+        DLog(res)
        return res
     }
     

@@ -178,6 +178,7 @@ extension WOWOrderController:OrderCellDelegate{
         case .Pay:
             print("支付")
 //            payOrder(model.id ?? "",model: model)
+            goOrderDetailAction(model)
         case .ShowTrans:
             DLog("查看物流")
         case .SureReceive:
@@ -311,7 +312,13 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     //        let model = dataArr[indexPath.row]
     //        return model.status == 0 //待付款的是可以取消的
     //    }
-    
+    func goOrderDetailAction(model:WOWNewOrderListModel) {
+        let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
+        vc.orderNewModel = model
+        vc.delegate = self
+        navigationController!.pushViewController(vc, animated: true)
+
+    }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
                 vc.orderNewModel = dataArr[indexPath.section]

@@ -605,31 +605,29 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="  " id="3RW-Ut-aba">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="rtX-TB-fh9" rowHeight="50" style="IBUITableViewCellStyleDefault" id="EJY-6J-2eF">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="EKd-hN-wE9" detailTextLabel="W3Z-uj-0nX" rowHeight="50" style="IBUITableViewCellStyleValue1" id="gSo-dP-FTZ">
                                         <rect key="frame" x="0.0" y="404" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EJY-6J-2eF" id="SGY-ki-aLo">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gSo-dP-FTZ" id="Yeo-MN-pxm">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="收货地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rtX-TB-fh9">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="49.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="收货地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EKd-hN-wE9">
+                                                    <rect key="frame" x="15" y="15" width="64" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qx0-Y7-KBJ">
-                                                    <rect key="frame" x="109" y="18" width="177" height="16"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W3Z-uj-0nX">
+                                                    <rect key="frame" x="250" y="18" width="35" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="i3c-RK-Met" kind="push" id="v3q-Zd-ezE"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -640,6 +638,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="addressLabel" destination="W3Z-uj-0nX" id="PRx-QF-NlG"/>
                         <outlet property="ageTextField" destination="3j7-Dd-Pem" id="kaA-5O-err"/>
                         <outlet property="desLabel" destination="2i6-nL-EKv" id="Yu3-tN-D3e"/>
                         <outlet property="headImageView" destination="A4f-Kg-SLh" id="eJ2-hy-iD5"/>

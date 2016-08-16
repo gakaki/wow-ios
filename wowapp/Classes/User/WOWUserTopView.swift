@@ -92,7 +92,7 @@ class WOWUserTopView: UIView {
         }
         
         loginLabel = UILabel()
-        loginLabel.text = "点击登录"
+        loginLabel.text = "点击登录/注册"
         loginLabel.font = Fontlevel001
         loginLabel.textColor = GrayColorlevel3
         loginLabel.hidden = true

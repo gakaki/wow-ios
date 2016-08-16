@@ -56,6 +56,10 @@ class WOWSettingController: WOWBaseTableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch indexPath.section {
         case 0:
+            if indexPath.row == 0 {
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
+                navigationController?.pushViewController(vc, animated: true)
+            }
             if indexPath.row == 1 {
                 KingfisherManager.sharedManager.cache.clearDiskCacheWithCompletionHandler({[weak self] in
                     if let _ = self{

@@ -38,8 +38,30 @@ class WOWUserController: WOWBaseTableViewController {
         configHeaderView()
         addObserver()
         configClickAction()
+        configBarItem()
+
     }
-    
+    private func configBarItem(){
+        
+        //                makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+        //                    if let strongSelf = self{
+        //                        let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
+        //                        let transition = CATransition.init()
+        //                        transition.duration = 0.3
+        //                        transition.subtype = kCATransitionFromBottom
+        //                        strongSelf.navigationController?.view.layer.addAnimation(transition, forKey: nil)
+        //                        strongSelf.navigationController?.pushViewController(vc, animated: true)
+        //                    }
+        //                }
+        
+        makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+                vc.hideNavigationBar = false
+                strongSelf.navigationController?.pushViewController(vc, animated: true)            }
+        }
+    }
+
     private func configClickAction(){
         allOrderView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
@@ -147,6 +169,10 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
         case (1,4): //支持尖叫设计
             evaluateApp()
             return
+        case (2,_)://设置
+            let vc = UIStoryboard.initialViewController("User", identifier:String(WOWSettingController)) as! WOWSettingController
+            navigationController?.pushViewController(vc, animated: true)
+            return
         default:
             break
         }
@@ -169,9 +195,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             default:
                 break
             }
-        case (2,_)://设置
-            let vc = UIStoryboard.initialViewController("User", identifier:String(WOWSettingController)) as! WOWSettingController
-            navigationController?.pushViewController(vc, animated: true)
+
         default:
             break
         }

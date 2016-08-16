@@ -64,7 +64,7 @@ class WOWFavBrand: WOWBaseViewController {
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
         let view = NSBundle.mainBundle().loadNibNamed(String(FavoriteEmpty), owner: self, options: nil).last as! FavoriteEmpty
         
-        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
+//        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
         return view
     }

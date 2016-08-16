@@ -25,8 +25,8 @@ class WOWProductDetailDescCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        WOWBorderColor(brandBorderView)
-//        WOWBorderColor(designerBorderView)
+        WOWBorderColor(brandBorderView)
+        WOWBorderColor(designerBorderView)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

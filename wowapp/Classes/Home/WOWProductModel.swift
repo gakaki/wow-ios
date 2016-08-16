@@ -14,6 +14,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var primaryImgs           : Array<String>?
     var productName           : String?
     var sellPrice             : Double?
+    var original_price        : Double?
     var sellingPoint          : String?
     var brandCname            : String?
     var brandId               : Int?
@@ -46,6 +47,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         primaryImgs             <- map["primaryImgs"]
         productName             <- map["productName"]
         sellPrice               <- map["sellPrice"]
+        original_price          <- map["original_price"]
         sellingPoint            <- map["sellingPoint"]
         brandCname              <- map["brandCname"]
         brandId                 <- map["brandId"]

@@ -97,6 +97,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 //MARK:Private Method
     func setUI(){
         self.view.backgroundColor = DefaultBackColor
+        
     }
     
     func request(){

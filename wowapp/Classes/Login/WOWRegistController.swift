@@ -114,6 +114,11 @@ class WOWRegistController: WOWBaseViewController {
             tipsLabel.text = "密码不能少于6位"
             return
         }
+        if passwdTextField.text?.length > 20 {
+            WOWHud.showMsg("密码不能大于20位")
+            tipsLabel.text = "密码不能大于20位"
+            return
+        }
         
         
         if agreeProtocol == false{

@@ -63,10 +63,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.viewDidLoad()
         
     }
-    
+   
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-    
+        addObserver()
         IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
     }
@@ -79,7 +79,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-
+        removeObserver()
         backGroundMaskView.removeFromSuperview()
         pickerContainerView.removeFromSuperview()
         
@@ -91,7 +91,15 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+    private func addObserver(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
+        
+    }
+    private func removeObserver() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWExitLoginNotificationKey, object: nil)
+    }
     override func setUI() {
         super.setUI()
         navigationItem.title = "个人信息"
@@ -147,6 +155,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }
     
 //MARK:Actions
+    func exitLogin() {
+        configUserInfo()
+    }
+    
+    func loginSuccess(){
+        configUserInfo()
+    }
     func cancelPicker(){
 
         self.backGroundMaskView.hidden = true

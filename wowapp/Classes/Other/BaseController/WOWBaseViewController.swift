@@ -12,6 +12,9 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     var hideNavigationBar:Bool = false
     var pageIndex = 1 //翻页
     var isRreshing : Bool = false
+    
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()

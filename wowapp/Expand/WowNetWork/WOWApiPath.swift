@@ -14,8 +14,8 @@ import Foundation
 
 
 //#if WOWDEBUG
-//   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
-   let BaseUrl = "https://mobile-api.wowdsgn.com/v1/" //内网开发
+   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
+//   let BaseUrl = "https://mobile-api.wowdsgn.com/v1/" //内网开发
 //#else
 //   let BaseUrl = "https://openapi.wowdsgn.com/v1/" //外网地址
 //#endif
@@ -31,6 +31,10 @@ let URL_scene                   = "scene"
 
 let URL_senceDetail             = "scene/detail"
 
+//1.1 专题
+let URL_topic                   = "topic"
+let URL_topic_product           = "topic/product"
+
 
 //***********2.商店************
 //2.1首页
@@ -38,7 +42,6 @@ let URL_storeHome               = "shop"
 
 let URL_home_banners            = "page/banners"    //1.1首页 查看首页Banner
 let URL_home_scenes             = "page/scenes"     //1.2首页 查看首页场景
-let URL_home_topics             = "page/topics"     //1.3首页 查看首页专题
 
 //2.2商品列表
 let URL_product                 = "product"
@@ -148,7 +151,7 @@ let URL_Logout                  = "session/logout"                //登出
 let URL_Captcha                 = "user/captcha/wechat-bind"      //微信绑定获取验证码
 let URL_PwpResetCode            = "user/captcha/pwd-reset"        //重置密码获取验证码
 let URL_Change                  = "user/change"                   //修改用户信息
-
+let URL_Coupons                 = "user/coupons"                //用户优惠券列表
 
 //7.地址
 let URL_AddressAdd              = "user/shippinginfo/create"   //添加收货地址
@@ -162,6 +165,6 @@ let URL_OrderList               = "order/get"
 
 let URL_OrderStatus             = "order/setstatus" //状态客户端操作之后加上去
 
-let URL_Coupon                  = "coupon/list" //优惠券列表
+
 
 

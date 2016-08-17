@@ -129,6 +129,8 @@ public enum RequestApi{
     case Api_PayResult(orderCode: String)
     
     case Api_OrderConfirm(orderCode: String)
+    
+    case Api_OrderCancel(orderCode: String)
 //
     
     case Api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
@@ -313,7 +315,8 @@ extension RequestApi:TargetType{
             return URL_PayResult
         case .Api_OrderConfirm:
             return URL_OrderConfirm
-            
+        case .Api_OrderCancel:
+            return URL_OrderCancel
         case .Api_Invite:
             return URL_Invite
         //发现页面
@@ -451,6 +454,8 @@ extension RequestApi:TargetType{
                 params = ["orderCode": orderCode]
             case let .Api_OrderConfirm(orderCode):
                 params = ["orderCode": orderCode]
+            case let .Api_OrderCancel(orderCode):
+                params = ["orderCode": orderCode]
             case let .Api_OrderDetail(OrderCode):
                 params =  ["orderCode":OrderCode]
             
@@ -504,6 +509,8 @@ extension RequestApi:TargetType{
             return "添加购物车成功"
         case .Api_OrderConfirm:
             return "确认收货成功"
+        case .Api_OrderCancel:
+            return "取消订单成功"
         default:
             return ""
         }

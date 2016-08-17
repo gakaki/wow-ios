@@ -122,6 +122,9 @@ let URL_OrderDetail              = "order/getDetail"           //订单详情
 let URL_PayResult               = "pay/payResult"          //查询支付结果
 
 let URL_OrderConfirm            = "order/confirm"           //确认收货
+
+
+let URL_OrderCancel            = "order/cancel"           //取消订单
 //4. 发现页面
 let URL_Found_Main              = "page/find/product"       
 let URL_Found_2nd               = "page/find/category"

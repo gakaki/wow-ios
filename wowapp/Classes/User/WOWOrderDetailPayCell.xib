@@ -22,7 +22,7 @@
                             <constraint firstAttribute="height" constant="30" id="mQq-jX-Gge"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付宝" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLy-cq-xIm">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLy-cq-xIm">
                         <rect key="frame" x="55" y="19" width="110" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="3LX-9N-fXI"/>
@@ -31,19 +31,19 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_check" translatesAutoresizingMaskIntoConstraints="NO" id="lVT-eG-irk">
-                        <rect key="frame" x="272" y="19" width="20" height="20"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lVT-eG-irk">
+                        <rect key="frame" x="284" y="22" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="DN3-kg-n64"/>
-                            <constraint firstAttribute="width" constant="20" id="vWb-Lo-BGs"/>
+                            <constraint firstAttribute="height" constant="15" id="DN3-kg-n64"/>
+                            <constraint firstAttribute="width" constant="15" id="vWb-Lo-BGs"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="qVg-MK-f4f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="6Jc-RB-Oc5"/>
                     <constraint firstItem="qVg-MK-f4f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="Bl2-sg-7Sy"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="lVT-eG-irk" secondAttribute="trailing" constant="20" id="CiW-gb-xbv"/>
-                    <constraint firstItem="lVT-eG-irk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="GM1-wy-Fyw"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="lVT-eG-irk" secondAttribute="trailing" constant="13" id="CiW-gb-xbv"/>
+                    <constraint firstItem="lVT-eG-irk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="14" id="GM1-wy-Fyw"/>
                     <constraint firstItem="nLy-cq-xIm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="KtC-mj-vdV"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nLy-cq-xIm" secondAttribute="trailing" constant="147" id="Pyb-Mz-3bz"/>
                     <constraint firstItem="nLy-cq-xIm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="47" id="ecd-yo-AsO"/>
@@ -56,7 +56,4 @@
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="car_check" width="16" height="16"/>
-    </resources>
 </document>

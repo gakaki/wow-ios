@@ -20,7 +20,14 @@ enum OrderNewType {
     
     case someFinishForGoods  //= "部分完成"
 }
+enum PayType {
+    case none             //= 无
+    
+    case payAli             //= 支付宝
+    
+    case payWiXin            //= 微信
 
+}
 protocol OrderDetailDelegate:class{
     func orderStatusChange()
 }
@@ -38,26 +45,23 @@ struct CellHight {
     static var fooderHight      : CGFloat        = 40
 }
 class WOWOrderDetailController: WOWBaseViewController{
-    var orderModel                  : WOWOrderListModel!
+
     var orderNewModel               : WOWNewOrderListModel?
     
     var orderNewDetailModel         : WOWNewOrderDetailModel?
     
-    
+    var surePayType                 : PayType = .none
     
     var OrderDetailNewaType         : OrderNewType = .someFinishForGoods
     ///  : 存放包裹的数组
     var goodsArray = [WOWNewForGoodsModel]()
-    
-    
+
     ///  : 部分发货：发货清单的 产品 的数量
     var orderGoodsNumber                 : Int!
-    
-    
-    ///  Test: 未发货清单的的包裹商品个数
+
+    ///  : 未发货清单的的包裹商品个数
     var orderNoNumber                 : Int! // 测试数据 未发货清单的的包裹商品个数
-    
-    
+
     var isOpen                      : Bool!
     @IBOutlet weak var tableView    : UITableView!
     @IBOutlet weak var countLabel   : UILabel!
@@ -65,7 +69,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     @IBOutlet weak var rightButton  : UIButton!
     @IBOutlet weak var clooseOrderButton  : UIButton!
     var statusLabel                 : UILabel!
-    
+    var orderCode                   : String!
     weak var delegate               : OrderDetailDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +89,12 @@ class WOWOrderDetailController: WOWBaseViewController{
         orderGoodsNumber     = 0
         
         isOpen               = true
+        ///  拿到订单ID
+        if let orderNewModel = orderNewModel {
+              self.orderCode = orderNewModel.orderCode
+        }
+      
+        
         request()
         WOWBorderColor(rightButton)
         navigationItem.title = "订单详情"
@@ -104,59 +114,61 @@ class WOWOrderDetailController: WOWBaseViewController{
         tableView.clearRestCell()
     }
     
-    private func configBottomView(){
-        countLabel.text    = "共\(orderModel.products?.count ?? 0)件商品"
-        priceLabel.text    = orderModel.total?.priceFormat()
-        var buttonTtile    = ""
-        switch orderModel.status ?? 2{
-        case 0:
-            buttonTtile        = "立即支付"
-        case 2: //待收货
-            buttonTtile        = "确认收货"
-        case 3: //待评价
-            buttonTtile        = "立即评价"
-        case 1,4,5: //完成订单 待发货,已关闭
-            rightButton.hidden = true
-        default:
-            break
-        }
-        rightButton.setTitle(buttonTtile, forState:.Normal)
-    }
-    
-    
-    @IBAction func rightButtonClick(sender: UIButton) {
-        switch orderModel.status ?? 0 {
-        case 0:
-            payOrder()
-        case 1,2: //为2d的时候确定收货
-            changeStatus()
-        case 3: //评价
-            commentOrder()
-        default:
-            break
-        }
-    }
-    
-    //MARK:Network
-    private func payOrder(){
-        if let charge = orderModel.charge {
-            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME, withCompletion: { [weak self](ret, error) in
+    @IBAction func clooseOrderButtonClick(sender: UIButton) {
+        func clooseOrder(){
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderCancel(orderCode: orderCode), successClosure: { [weak self](result) in
                 if let strongSelf = self{
-                    if ret == "success"{ //支付成功
-                        strongSelf.orderModel.status  = 1
-                        strongSelf.rightButton.hidden = true
-                        strongSelf.statusLabel.text   = "待发货"
-                        strongSelf.callBack()
-                    }else{//订单支付取消或者失败
-                        if ret == "fail"{
-                            WOWHud.showMsg("支付失败")
-                        }
-                    }
+                    //取消订单成功后重新请求下网络刷新列表
+                    strongSelf.request()
                 }
-            })
+            }) { (errorMsg) in
+                
+            }
         }
+
+        let alert = UIAlertController(title:"确定取消订单吗？", message:nil, preferredStyle:.ActionSheet)
+        let cancel = UIAlertAction(title: "再看看", style: .Cancel, handler: nil)
+        let sure = UIAlertAction(title: "确定取消", style: .Default) { (action) in
+
+           clooseOrder()
+            
+        }
+        alert.addAction(cancel)
+        alert.addAction(sure)
+        presentViewController(alert, animated: true, completion: nil)
+
+
     }
-    
+    @IBAction func rightButtonClick(sender: UIButton) {
+        
+        if let orderNewModel = orderNewModel {
+        switch orderNewModel.orderStatus!  {
+            case 0:// 立即支付
+                
+                switch surePayType {
+                case .payAli:
+                    sureOrderPay("alipay")
+                case .payWiXin:
+                    sureOrderPay("wx")
+                default:
+                    WOWHud.showMsg("请选择支付方式")
+                    break
+                }
+            
+            case 3:// 确认收货
+                
+                confirmReceive(orderNewModel.orderCode!)
+                
+            default:
+                break
+            }
+        }
+
+    }
+ 
+    /**
+     隐藏右边按钮
+     */
     func hideRightBtn() {
         self.rightButton.hidden       = true
         self.clooseOrderButton.hidden = true
@@ -165,13 +177,13 @@ class WOWOrderDetailController: WOWBaseViewController{
         }
         
     }
-    
-    func orderType() {
-        if let orderNewModel = orderNewModel {
+    /**
+     *  区分订单类型 UI
+     */
+    func orderType(OrderDetailModel:WOWNewOrderDetailModel?) {
+        if let orderNewModel = OrderDetailModel {
             
-            /**
-             *  区分订单类型 UI
-             */
+           
             switch orderNewModel.orderStatus!  {
             case 0:
                 self.OrderDetailNewaType          = OrderNewType.payMent
@@ -202,7 +214,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         }
     }
     /**
-     拿到定制tableView 所需要的数据
+     拿到 定制tableView 所需要的数据
      */
     func getOrderData(){
         switch OrderDetailNewaType {
@@ -238,7 +250,7 @@ class WOWOrderDetailController: WOWBaseViewController{
             }
             /// 拿出未发货的商品数组
             if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
-                //                self.orderNoNumber = noForGoodsArr.count > 3 ? 3 : noForGoodsArr.count
+   
                 self.orderNoNumber = noForGoodsArr.count
                 
             }
@@ -248,7 +260,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     }
     
     //确认收货
-    private func confirmReceive(orderCode:String,cell:WOWOrderListCell){
+    private func confirmReceive(orderCode:String){
         func confirm(){
             WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result) in
                 if let strongSelf = self{
@@ -277,24 +289,23 @@ class WOWOrderDetailController: WOWBaseViewController{
         
         super.request()
         
-        /**
-         *  区分订单类型 UI
-         */
-        
-        orderType()
+//        orderType()
         
         isOpen = true
         
         if let orderNewModel = orderNewModel {
-            
-            WOWNetManager.sharedManager.requestWithTarget(.Api_OrderDetail(OrderCode:orderNewModel.orderCode!), successClosure: { [weak self](result) in
+           
+            WOWNetManager.sharedManager.requestWithTarget(.Api_OrderDetail(OrderCode:self.orderCode!), successClosure: { [weak self](result) in
                 
                 if let strongSelf = self{
                     
                     strongSelf.orderNewDetailModel = Mapper<WOWNewOrderDetailModel>().map(result)
+                    strongSelf.orderCode = orderNewModel.orderCode
+                    
+                    strongSelf.orderType(strongSelf.orderNewDetailModel)
                     
                     strongSelf.getOrderData()
-                    
+                
                     strongSelf.tableView.reloadData()
                 }
             }) { (errorMsg) in
@@ -303,61 +314,77 @@ class WOWOrderDetailController: WOWBaseViewController{
             
         }
     }
+}
+// MARK: - 订单支付相关
+extension WOWOrderDetailController{
     
-    
-    
-    
-    private func commentOrder(){
-        let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
-        //        vc.orderID = orderModel.id ?? ""
-        //        vc.delegate = self
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    
-    //更改状态
-    private func changeStatus(){
-        let uid      = WOWUserManager.userID
-        let order_id = orderModel.id ?? ""
-        var status   = "2"
-        switch orderModel.status ?? 2 {
-        case 2: //目前为待收货
-            status       = "3"//待评价
-        default:
-            break
+    func sureOrderPay(channl: String){
+        if let orderNewModel = self.orderNewModel {
+            
+            //    backView.hidePayView()
+            if  orderNewModel.orderCode!.isEmpty {
+                WOWHud.showMsg("订单不存在")
+                return
+            }
+            WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCharge(orderNo: self.orderCode ?? "", channel: channl, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+                if let strongSelf = self {
+                    let json = JSON(result)
+                    let charge = json["charge"]
+                    strongSelf.goPay(charge.object)
+                }
+                
+            }) { (errorMsg) in
+                
+            }
         }
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderStatus(uid:uid, order_id:order_id, status:status), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-                let ret = JSON(result).int ?? 0
-                if ret == 1{
-                    strongSelf.orderModel.status = 3
-                    strongSelf.statusLabel.text = "待评价"
-                    strongSelf.rightButton.setTitle("待评价", forState:.Normal)
-                    strongSelf.callBack()
+        
+    }
+    //去支付
+    private func goPay(charge:AnyObject){
+        dispatch_async(dispatch_get_main_queue()) {
+            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
+                if let strongSelf = self{
+                    switch ret{
+                    case "success":
+                        strongSelf.requestPayResult()
+                    case "cancel":
+                        WOWHud.showMsg("支付取消")
+                        
+                        break
+                    default:
+                        WOWHud.showMsg("支付失败")
+                        break
+                    }
                 }
             }
+        }
+    }
+    
+    //从服务端去拉取支付结果
+    func requestPayResult() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_PayResult(orderCode: orderCode), successClosure: { [weak self](result) in
+            if let strongSelf = self {
+                strongSelf.request() // 更新最新状态
+                let json = JSON(result)
+                let orderCode = json["orderCode"].string
+                let payAmount = json["payAmount"].double
+                let paymentChannelName = json["paymentChannelName"].string
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
+                vc.payMethod = paymentChannelName ?? ""
+                vc.orderid = orderCode ?? ""
+                vc.totalPrice = String(format: "%.2f",payAmount ?? 0)
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+            
         }) { (errorMsg) in
             
         }
     }
     
-    private func callBack(){
-        if let del = delegate{
-            del.orderStatusChange()
-        }
-    }
+
 }
 
-extension WOWOrderDetailController:OrderCommentDelegate{
-    func orderCommentSuccess() {
-        self.orderModel.status  = 4//已完成
-        self.rightButton.hidden = true
-        statusLabel.text        = "已完成"
-        callBack()
-    }
-}
-
-
+// MARK: - UITableViewDelegate,UITableViewDataSource
 extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         switch OrderDetailNewaType {
@@ -381,11 +408,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1: //收货人
                 return 1
             case 2: //商品清单  如果大于三个商品隐藏
-                //                if let orderNewDetailModel = orderNewDetailModel {
+              
                 return orderNoNumber
-                //                }else{
-                //                    return 0
-                //                }
                 
             case 3: //运费
                 return 2
@@ -403,11 +427,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1: //收货人
                 return 1
             case 2: //商品清单  如果大于三个商品隐藏
-                //                if let orderNewDetailModel = orderNewDetailModel {
-                //                    return orderNewDetailModel.packages![0].orderItems!.count > 3 ? 3 : orderNewDetailModel.packages![0].orderItems!.count
-                //                }else{
+                
                 return self.orderGoodsNumber
-                //                }
                 
             case 3: //运费
                 return 2
@@ -423,11 +444,9 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1: //收货人
                 return 1
             case 2: //商品清单  如果大于三个商品隐藏
-                //                if let orderNewDetailModel = orderNewDetailModel {
-                //                    return orderNewDetailModel.unShipOutOrderItems!.count > 3 ? 3 : orderNewDetailModel.unShipOutOrderItems!.count
-                //                }else{
+              
                 return orderNoNumber
-                //                }
+            
                 
             case 3: //运费
                 return 2
@@ -443,12 +462,9 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1: //收货人
                 return 1
             case 2: //商品清单  如果大于三个商品隐藏
-                //                if let orderNewDetailModel = orderNewDetailModel {
-                //                    return orderNewDetailModel.packages![0].orderItems!.count > 3 ? 3 : orderNewDetailModel.packages![0].orderItems!.count
-                //                }else{
+               
                 return self.orderGoodsNumber
-                //                }
-            //
+          
             case 3: //运费
                 return 2
             default:
@@ -578,12 +594,28 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailPayCell", forIndexPath: indexPath) as! WOWOrderDetailPayCell
                 if indexPath.row == 0 {
-                    cell.payTypeImageView.image = UIImage(named: "alipay")
-                    cell.payTypeLabel.text      = "支付宝"
+                    cell.payTypeImageView.image  = UIImage(named: "alipay")
+
+                    cell.payTypeLabel.text       = "支付宝"
+                    switch surePayType {
+                        
+                    case PayType.payAli:
+                        cell.isClooseImageView.image = UIImage(named: "select")
+                    default:
+                        cell.isClooseImageView.image = UIImage(named: "car_check")
+                    }
+
                 }
                 if indexPath.row == 1 {
                     cell.payTypeImageView.image = UIImage(named: "weixin")
                     cell.payTypeLabel.text      = "微信支付"
+                    switch surePayType {
+                    case PayType.payWiXin:
+                        cell.isClooseImageView.image = UIImage(named: "select")
+                    default:
+                        cell.isClooseImageView.image = UIImage(named: "car_check")
+                    }
+
                 }
                 
                 returnCell = cell
@@ -755,22 +787,30 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         returnCell.selectionStyle = .None
         return returnCell
     }
-    
-    /* FIXME:查看物流暂时放这里
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-     switch indexPath.section {
-     case 0:
-     if indexPath.row == 1{//物流
-     let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderTransController") as! WOWOrderTransController
-     navigationController?.pushViewController(vc, animated: true)
-     }
-     default:
-     break
-     }
-     }
-     */
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        
+        switch indexPath.section {
+        case 4:
+            switch indexPath.row {
+            case 0:
+                
+                print("支付宝")
+                 self.surePayType = PayType.payAli
+
+            case 1:
+                
+                print("微信")
+                self.surePayType = PayType.payWiXin
+                
+            default:
+                break
+            }
+            tableView.reloadData()
+        default:
+            break
+        }
+    }
+     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch OrderDetailNewaType {
         case .someFinishForGoods:
             
@@ -837,25 +877,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
         switch OrderDetailNewaType {
         case .someFinishForGoods:
-            //            switch section {
-            //            case 0 , 1:
+
             return CellHight.minHight
-            //            case goodsArray.count + 2:
-            //
-            //                return orderNoNumber > 3 ? CellHight.fooderHight : CellHight.minHight
-            //
-            //            case goodsArray.count + 3:
-            //
-            //                return CellHight.minHight
-            //
-            //            default:
-            //                let goods = goodsArray[section - 2]
-            //
-            //                return (goods.orderItems!.count + 1) > 3 ? CellHight.fooderHight : CellHight.minHight
-            //
-            //
-            //            }
-            //
             
             
         default:
@@ -875,9 +898,6 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 default:
                     break
                 }
-                //                guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
-                //                    return CellHight.minHight
-                //                }
                 
                 if section == 2 {
                     return CellHight.fooderHight
@@ -893,24 +913,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
         switch OrderDetailNewaType {
         case .someFinishForGoods:
-            //            switch section {
-            //            case 0 , 1:
+           
             return nil
-            
-            //            case goodsArray.count + 3:
-            //                return nil
-            //            case goodsArray.count + 2:
-            //                return orderNoNumber > 3 ? footSectionView(section) : nil
-            //            // FIXME:
-            //            default:
-            //                let goods = goodsArray[section - 2]
-            //
-            //                return (goods.orderItems!.count + 1) > 3 ? footSectionView(section) : nil
-            //
-            //
-            //            }
-            //
-            
             
         default:
             if let orderNewDetailModel = orderNewDetailModel {
@@ -929,8 +933,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 default:
                     break
                 }
-                
-                
+
                 if section == 2 {
                     return footSectionView(section)
                 }
@@ -970,8 +973,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 totalNum = "共" + forGoodsArr.count.toString + "件"
                 
             }
-            
-            
+
         default:
             break
             
@@ -994,6 +996,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         return view
         
     }
+    
     // 关闭页眉页脚的停留
 //        func scrollViewDidScroll(scrollView: UIScrollView) {
 //            let sectionHeaderHeight:CGFloat = 38
@@ -1018,40 +1021,6 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         switch OrderDetailNewaType {
         case .someFinishForGoods:
             print("")
-            //            switch sender.tag {
-            //            case 0 , 1:
-            //                print("0,1")
-            //            case goodsArray.count + 2:
-            //
-            //                if isOpen == true {
-            //
-            //                    if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
-            //                        self.orderNoNumber = noForGoodsArr.count
-            //                    }
-            //
-            //                    isOpen = false
-            //                }else{
-            //
-            //                    if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
-            //                        self.orderNoNumber = noForGoodsArr.count > 3 ? 3 : noForGoodsArr.count
-            //                    }
-            //
-            //                    isOpen = true
-            //                }
-            //
-            //            case goodsArray.count + 3:
-            //
-            //                print("last")
-            //
-            //            default:
-            //                sender.selected = true
-            //
-            //                isOpen = true
-            //
-            //            }
-            
-            
-            
             
         case .payMent,.noForGoods:
             
@@ -1060,9 +1029,6 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
                     self.orderNoNumber = noForGoodsArr.count
                 }
-                //                sender.selected = true
-                
-                
                 
                 isOpen = false
             }else{
@@ -1070,6 +1036,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
                     self.orderNoNumber = noForGoodsArr.count > 3 ? 3 : noForGoodsArr.count
                 }
+                
                 isOpen = true
             }
             
@@ -1089,18 +1056,14 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 
                 isOpen = true
             }
-            
-            
-            
+
         }
         
-        //        // 刷新单独一组
+        // 刷新单独一组
         let indexSet = NSIndexSet.init(index: sender.tag)
         
         tableView.reloadSections(indexSet, withRowAnimation: UITableViewRowAnimation.Automatic)
-        
-        
-        //        tableView.reloadData()
+
         
     }
     func tableView(tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {

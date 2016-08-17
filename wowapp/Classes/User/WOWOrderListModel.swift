@@ -130,7 +130,7 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     
     var deliveryFee                 : Double?// 订单运费
     
-     var orderAmount                 : String?// 订单总金额
+     var orderAmount                 : Double?// 订单总金额
      var orderCode                 : String?// 订单号
      var orderCreateTimeFormat                 : String?// 订单下单时间
      var orderId                 : Int?// 订单Id

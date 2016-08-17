@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -41,7 +41,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crT-ID-XEu">
-                        <rect key="frame" x="115" y="55" width="0.0" height="0.0"/>
+                        <rect key="frame" x="73" y="55" width="0.0" height="0.0"/>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,11 +67,13 @@
                     <constraint firstItem="crT-ID-XEu" firstAttribute="bottom" secondItem="R4R-2a-Q5F" secondAttribute="bottom" id="gMI-95-g3I"/>
                     <constraint firstItem="au4-E8-Hsl" firstAttribute="trailing" secondItem="GgV-4n-hot" secondAttribute="trailing" id="mjm-BR-OE0"/>
                     <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="leading" constant="50" id="pk4-sK-iSV"/>
+                    <constraint firstItem="crT-ID-XEu" firstAttribute="leading" secondItem="8Ha-VM-5gP" secondAttribute="trailing" constant="8" id="rqd-er-sKV"/>
                     <constraint firstItem="crT-ID-XEu" firstAttribute="top" secondItem="fXJ-fB-5XR" secondAttribute="top" constant="40" id="vqA-cz-Gf3"/>
                     <constraint firstAttribute="trailing" secondItem="GgV-4n-hot" secondAttribute="trailing" constant="15" id="yB0-Q4-upg"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="pk4-sK-iSV"/>
                         <exclude reference="vqA-cz-Gf3"/>
                     </mask>
                 </variation>

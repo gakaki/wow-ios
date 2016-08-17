@@ -353,8 +353,11 @@ extension WOWEditOrderController: selectPayDelegate {
             }) { (errorMsg) in
                 
         }
-
-        print("确定支付",channel)
     }
+    
+    func canclePay() {
+        
+    }
+
 }
 

@@ -73,6 +73,9 @@ class WOWPayBackView: UIView {
     }
     
     func closeButtonClick()  {
+        if let del = payView.delegate {
+            del.canclePay()
+        }
         hidePayView()
     }
     
@@ -91,6 +94,8 @@ class WOWPayBackView: UIView {
 protocol selectPayDelegate: class {
     //确定支付
     func surePay(channel: String)
+    //取消支付
+    func canclePay()
 }
 
 class WOWSelectPayView: UIView {

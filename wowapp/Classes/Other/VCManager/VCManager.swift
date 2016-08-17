@@ -24,9 +24,17 @@ extension UIViewController
         let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
         let nav_vc = UINavigationController(rootViewController: vc)
         vc.hideNavigationBar = false
-        self.presentVC(nav_vc)
+//        self.presentVC(nav_vc)
+        self.pushVC(nav_vc)
     }
     
     
+    func toVCTopic( ){
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+        let nav_vc = UINavigationController(rootViewController: vc)
+        vc.hideNavigationBar = false
+        self.pushVC(nav_vc)
+    }
     
+
 }

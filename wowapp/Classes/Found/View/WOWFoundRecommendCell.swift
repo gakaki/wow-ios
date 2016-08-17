@@ -1,6 +1,5 @@
 import UIKit
 import FlexboxLayout
-import YYWebImage
 
 
 protocol WOWFoundRecommendCellDelegate:class{

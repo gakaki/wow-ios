@@ -14,9 +14,12 @@ extension UILabel {
         paragraphStyle.lineHeightMultiple = lineHeight
         paragraphStyle.alignment = self.textAlignment
         paragraphStyle.lineBreakMode = .ByTruncatingTail
-        let attrString = NSMutableAttributedString(string: self.text!)
-        attrString.addAttribute(NSFontAttributeName, value: self.font, range: NSMakeRange(0, attrString.length))
-        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
-        self.attributedText = attrString
+        if let t = self.text {
+            let attrString = NSMutableAttributedString(string: t)
+            attrString.addAttribute(NSFontAttributeName, value: self.font, range: NSMakeRange(0, attrString.length))
+            attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+            self.attributedText = attrString
+
+        }
     }
 }

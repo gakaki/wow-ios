@@ -191,6 +191,12 @@ class WOWController: WOWBaseViewController {
                 
             case 7:
                 print("分类详情页")
+                
+            case 8:
+                toVCTopic(model.bannerLinkTargetId!)
+                print("场景还是专题")
+            
+                
             default:
                 print("其他")
             }

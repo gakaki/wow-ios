@@ -33,4 +33,6 @@ class WOWFavoritrSingleCell: UICollectionViewCell {
             topLine.hidden = true
         }
     }
+    
+    
 }

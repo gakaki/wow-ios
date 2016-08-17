@@ -17,13 +17,12 @@ public enum RequestApi{
     
     //Tab 第一个栏 首页 该死的那3个url
     case Api_Home_Banners
-    case Api_Home_Scenes
-    case Api_Home_Topics
     
     //发现 分类 页面
     case Api_Found_Main
     case Api_Found_2nd
     
+
     
     case Api_Activity
     
@@ -101,7 +100,8 @@ public enum RequestApi{
     
     case Api_LikeDesigner
     
-    
+    case Api_Coupons( currentPage:Int,pageSize:Int )  //用户优惠券列表
+
     
     case Api_Invite //邀请好友
     
@@ -163,6 +163,10 @@ public enum RequestApi{
     case Api_Wechat(openId:String) //openId
     
     case Api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
+    
+    case Api_Topics(topicId:Int)
+    
+    case Api_Topic_Products(topicId:Int)
 
 }
 
@@ -188,13 +192,14 @@ extension RequestApi:TargetType{
             return URL_senceDetail
             
         //Tab 第一个栏 首页 该死的那3个url
+        //Tab 第一个栏 首页 该死的那3个url
         case .Api_Home_Banners:
             return URL_home_banners
-        case .Api_Home_Scenes:
-            return URL_home_scenes
-        case .Api_Home_Topics:
-            return URL_home_topics
-            
+//        case .Api_Home_Scenes:
+//            return URL_home_scenes
+//        case .Api_Home_Topics:
+//            return URL_home_topics
+//            
         case .Api_ProductList:
             return URL_product
         case .Api_ProductDetail:
@@ -324,14 +329,25 @@ extension RequestApi:TargetType{
             return URL_Found_Main
         case .Api_Found_2nd:
             return URL_Found_2nd
+       
+        case Api_Coupons:
+            return URL_Coupons
+        case Api_Topics:
+            return URL_topic
+            
+        case Api_Topic_Products:
+            return URL_topic_product
 
+            
+        default:
+            return URL_topic
         }
     }
     
     public var method:Moya.Method{
         switch self {
 
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products:
 
             return .GET
 
@@ -461,10 +477,6 @@ extension RequestApi:TargetType{
             
             case .Api_Home_Banners():
                 params =  ["pageType":1]
-            case  .Api_Home_Scenes():
-                params =  ["pageType":1]
-            case  .Api_Home_Topics():
-                params =  ["pageType":1]
             case .Api_Found_2nd:
                 break
             case .Api_Found_Main:
@@ -473,6 +485,16 @@ extension RequestApi:TargetType{
             case let .Api_Product_By_Category(asc , currentPage, showCount , sortBy, categoryId ): //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
                     params = ["asc": asc, "currentPage": currentPage, "showCount": showCount, "sortBy": sortBy, "categoryId":categoryId]
                     break
+            
+//            优惠券
+            case let .Api_Coupons(currentPage,pageSize):
+                params =  ["currentPage":currentPage,"pageSize":pageSize]
+//            专题
+            case let .Api_Topics(topicId):
+                params =  ["topicId":topicId]
+//            专题商品
+            case let .Api_Topic_Products(topicId):
+                params =  ["topicId":topicId]
             
             default:
                 params =  nil

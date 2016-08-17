@@ -1,23 +1,13 @@
 import ObjectMapper
 
-//public class ForceToStringTransform {
-//
-//    func transformFromJSON(value: AnyObject?) -> Object?{
-//        return value as! String
-//    }
-//    func transformToJSON(value: Object?) -> JSON?{
-//        turn 
-//    }
-//}
-
 
 class WOWFoundProductModel: WOWBaseModel,Mappable{
     var productId               :   Int?
     var productName             :   String?
     var productImg              :   String?
     
-    var sellPrice               :   Double?
-    var originalPrice           :   Float?
+    var sellPrice               :   Int?
+    var originalPrice           :   Int?
 
     var detailDescription       :   String?
     var pageModuleType          :   Int?

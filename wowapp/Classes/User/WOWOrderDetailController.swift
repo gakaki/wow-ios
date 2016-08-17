@@ -90,9 +90,9 @@ class WOWOrderDetailController: WOWBaseViewController{
         
         isOpen               = true
         ///  拿到订单ID
-        if let orderNewModel = orderNewModel {
-              self.orderCode = orderNewModel.orderCode
-        }
+//        if let orderNewModel = orderNewModel {
+//              self.orderCode = orderNewModel.orderCode
+//        }
       
         
         request()
@@ -141,7 +141,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     }
     @IBAction func rightButtonClick(sender: UIButton) {
         
-        if let orderNewModel = orderNewModel {
+        if let orderNewModel = orderNewDetailModel {
         switch orderNewModel.orderStatus!  {
             case 0:// 立即支付
                 
@@ -172,7 +172,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     func hideRightBtn() {
         self.rightButton.hidden       = true
         self.clooseOrderButton.hidden = true
-        if let orderNewModel          = orderNewModel {
+        if let orderNewModel          = orderNewDetailModel {
             self.priceLabel.text          = "¥"+((orderNewModel.orderAmount)?.toString)!
         }
         
@@ -293,14 +293,14 @@ class WOWOrderDetailController: WOWBaseViewController{
         
         isOpen = true
         
-        if let orderNewModel = orderNewModel {
-           
+//        if let orderNewModel = orderNewModel {
+        
             WOWNetManager.sharedManager.requestWithTarget(.Api_OrderDetail(OrderCode:self.orderCode!), successClosure: { [weak self](result) in
                 
                 if let strongSelf = self{
                     
                     strongSelf.orderNewDetailModel = Mapper<WOWNewOrderDetailModel>().map(result)
-                    strongSelf.orderCode = orderNewModel.orderCode
+                    strongSelf.orderCode =  strongSelf.orderNewDetailModel!.orderCode
                     
                     strongSelf.orderType(strongSelf.orderNewDetailModel)
                     
@@ -313,13 +313,13 @@ class WOWOrderDetailController: WOWBaseViewController{
             }
             
         }
-    }
+//    }
 }
 // MARK: - 订单支付相关
 extension WOWOrderDetailController{
     
     func sureOrderPay(channl: String){
-        if let orderNewModel = self.orderNewModel {
+        if let orderNewModel = self.orderNewDetailModel {
             
             //    backView.hidePayView()
             if  orderNewModel.orderCode!.isEmpty {

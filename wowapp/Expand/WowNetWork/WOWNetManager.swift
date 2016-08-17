@@ -76,6 +76,7 @@ class WOWNetManager {
                        
                         guard code == RequestCode.Success.rawValue else{
                             if code == RequestCode.Login.rawValue {
+                                NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
                                 WOWHud.showMsg("登录已过期，请重新登录")
                                 WOWUserManager.exitLogin()
                                 UIApplication.currentViewController()?.toLoginVC(true)

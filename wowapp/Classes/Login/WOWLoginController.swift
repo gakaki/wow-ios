@@ -96,6 +96,7 @@ class WOWLoginController: WOWBaseViewController {
             tipsLabel.text = "账号格式错误"
             return
         }
+        
         WOWNetManager.sharedManager.requestWithTarget(.Api_Login(phone,passwd), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)

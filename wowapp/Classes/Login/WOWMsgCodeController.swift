@@ -91,12 +91,22 @@ class WOWMsgCodeController: WOWBaseViewController {
             tipsLabel.text = "请输入确认密码"
             return
         }
+
         guard newPwd == passwd else{
             WOWHud.showMsg("两次输入密码不一致")
             tipsLabel.text = "两次输入密码不一致"
             return
         }
-       
+        if pwdTextField.text?.length < 6 {
+            WOWHud.showMsg("密码不能少于6位")
+            tipsLabel.text = "密码不能少于6位"
+            return
+        }
+        if pwdTextField.text?.length > 20 {
+            WOWHud.showMsg("密码不能大于20位")
+            tipsLabel.text = "密码不能大于20位"
+            return
+        }
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ResetPwd(mobile:phoneTextField.text!, captcha:code, newPwd:newPwd), successClosure: {[weak self](result) in
             if let strongSelf = self{
                 switch strongSelf.entrance {

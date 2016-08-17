@@ -284,6 +284,11 @@ extension WOWUserInfoController{
             self.pickerContainerView.pickerView.reloadComponent(0)
             showPickerView()
             editingGroupAndRow = [0:5]
+        case (1, 0):
+            
+            let vc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
+            vc.entrance = WOWAddressEntrance.Me
+            navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }

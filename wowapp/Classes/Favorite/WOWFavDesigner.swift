@@ -21,9 +21,14 @@ class WOWFavDesigner: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        request()
+        if WOWUserManager.loginStatus {
+            request()
+        }
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        addObservers()
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.hidden = true
@@ -32,6 +37,7 @@ class WOWFavDesigner: WOWBaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.hidden = false
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,6 +47,13 @@ class WOWFavDesigner: WOWBaseViewController {
     
     
     //MARK:Private Method
+    private func addObservers(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+        
+    }
+    func loginSuccess() {
+        request()
+    }
     override func setUI() {
         super.setUI()
         configCollectionView()

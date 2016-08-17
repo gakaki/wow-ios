@@ -98,7 +98,7 @@ extension  UIViewController {
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
-                isOpenIdBinded = JSON(result)["isOpenIdBinded"].bool ?? false
+                isOpenIdBinded = JSON(result)["isOpenIdBinded"].bool ?? true
                 
                 if isOpenIdBinded {
                     //FIXME:未写的，先保存用户信息

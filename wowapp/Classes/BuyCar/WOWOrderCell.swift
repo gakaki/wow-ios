@@ -49,7 +49,7 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         
         nameLabel.text = model.productName
         countLabel.text = "x \(model.productQty ?? 1)"
-        perPriceLabel.text = String(model.sellPrice ?? 0).priceFormat()
+        perPriceLabel.text = String(format: "¥ %.2f", (model.sellPrice) ?? 0)
         let arr = [model.color ?? "",model.specName ?? ""]
         typeArr = arr
         collectionView.reloadData()

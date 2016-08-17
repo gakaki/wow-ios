@@ -61,6 +61,7 @@ class WOWBuyCarController: WOWBaseViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,6 +70,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        addObservers()
     }
     
 
@@ -76,6 +78,13 @@ class WOWBuyCarController: WOWBaseViewController {
 
     
 //MARK:Private Method
+    private func addObservers(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+        
+    }
+    func loginSuccess() {
+        configData()
+    }
     private func configData(){
        
         asyncCarList()
@@ -85,7 +94,7 @@ class WOWBuyCarController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         navigationItem.title = "购物车"
-        totalPriceLabel.text = "¥ 0.0"
+        totalPriceLabel.text = "¥ 0.00"
         endButton.setTitle("去结算", forState:.Normal)
         endButton.tintColor = UIColor.clearColor()
 

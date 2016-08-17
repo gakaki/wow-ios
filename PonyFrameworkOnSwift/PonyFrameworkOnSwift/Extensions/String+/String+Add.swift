@@ -73,6 +73,7 @@ public extension String{
 //        numberFormat.numberStyle = .DecimalStyle
 //        let result = "¥" + (numberFormat.stringFromNumber(number) ?? "")
         
+        
         let result = "¥ " + self
         return result
     }

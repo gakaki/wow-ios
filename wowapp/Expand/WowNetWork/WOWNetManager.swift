@@ -75,6 +75,12 @@ class WOWNetManager {
                     if let code = info?.code{
                        
                         guard code == RequestCode.Success.rawValue else{
+                            if code == RequestCode.Login.rawValue {
+                                WOWHud.showMsg("登录已过期，请重新登录")
+                                WOWUserManager.exitLogin()
+                                UIApplication.currentViewController()?.toLoginVC(true)
+                                return
+                            }
                             failClosure(errorMsg:info?.message)
                             WOWHud.showMsg(info?.message)
                             return

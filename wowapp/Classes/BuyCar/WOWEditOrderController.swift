@@ -206,7 +206,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                 vc.payMethod = paymentChannelName ?? ""
                 vc.orderid = orderCode ?? ""
-                vc.totalPrice = String(format: "%.2f",payAmount ?? 0)
+                vc.totalPrice = String(format: "¥ %.2f",payAmount ?? 0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
             
@@ -315,7 +315,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             }
             
             footerView.countLabel.text = "共\(count)件"
-            footerView.totalPriceLabel.text = String(format:"%.2f",(self.orderSettle?.productTotalAmount) ?? 0)
+            footerView.totalPriceLabel.text = String(format:"合计¥ %.2f",(self.orderSettle?.productTotalAmount) ?? 0)
             return footerView
         }
         return nil

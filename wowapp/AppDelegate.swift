@@ -111,9 +111,10 @@ extension AppDelegate{
         // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
         if appVersion == nil || appVersion != currentAppVersion {
             // 保存最新的版本号
-            userDefaults.setValue(currentAppVersion, forKey: "appVersion")
-            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
-            self.window?.rootViewController = introVC
+//            userDefaults.setValue(currentAppVersion, forKey: "appVersion")
+//            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
+//            self.window?.rootViewController = introVC
+            rootVCGuide()
             
         }else{
             
@@ -124,7 +125,6 @@ extension AppDelegate{
         }
         
 
-        rootVCGuide()
 
 //        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:String(VCCategory))
 //        window?.rootViewController =  UIStoryboard.initialViewController("Found")

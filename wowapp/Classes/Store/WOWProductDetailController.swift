@@ -103,6 +103,11 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     //MARK:购物车
     @IBAction func carEntranceButton(sender: UIButton) {
+        //判断下是否在登录状态
+        guard WOWUserManager.loginStatus else {
+            toLoginVC(true)
+            return
+        }
         let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
         vc.hideNavigationBar = false
         navigationController?.pushViewController(vc, animated: true)
@@ -112,6 +117,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //MARK:登录成功回调
     func loginSucces(){
         DLog("登录成功")
+        requestFavoriteProduct()
     }
     
     //MARK:立即购买

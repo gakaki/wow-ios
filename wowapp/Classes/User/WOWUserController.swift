@@ -56,9 +56,14 @@ class WOWUserController: WOWBaseTableViewController {
         
         makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
             if let strongSelf = self{
+                guard WOWUserManager.loginStatus else {
+                    strongSelf.toLoginVC(true)
+                    return
+                }
                 let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
                 vc.hideNavigationBar = false
-                strongSelf.navigationController?.pushViewController(vc, animated: true)            }
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 

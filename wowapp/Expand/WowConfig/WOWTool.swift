@@ -90,8 +90,17 @@ struct WOWTool {
 //            UIApplication.sharedApplication().openURL(url)
 //        }
     }
-    
-    
+    private static let WOWLastTabIndex      =  "lastTabIndex"
+
+    static var lastTabIndex:Int {
+        get{
+            return (MGDefault.objectForKey(WOWLastTabIndex) as? Int) ?? 0
+        }
+        set{
+            MGDefault.setObject(newValue, forKey:WOWLastTabIndex)
+            MGDefault.synchronize()
+        }
+    }
     
 }
 

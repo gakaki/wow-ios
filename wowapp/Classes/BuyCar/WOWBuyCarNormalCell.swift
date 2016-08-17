@@ -58,7 +58,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
         nameLabel.text = model.productName
         countLabel.text = "x \(model.productQty ?? 1)"
         countTextField.text = "\(model.productQty ?? 1)"
-        perPriceLabel.text = String(model.sellPrice ?? 0).priceFormat()
+        perPriceLabel.text = String(format: "¥ %.2f", (model.sellPrice) ?? 0)
         selectButton.selected = model.isSelected ?? false
         let arr = [model.color ?? "",model.specName ?? ""]
         typeArr = arr

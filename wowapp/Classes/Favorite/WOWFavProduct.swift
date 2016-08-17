@@ -138,11 +138,6 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.row)
-//        if  let del = self.delegate {
-////            let model = dataArr[indexPath.row]
-//            del.goGoodsDetail(1)
-//        }
         let product = dataArr[indexPath.row]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true

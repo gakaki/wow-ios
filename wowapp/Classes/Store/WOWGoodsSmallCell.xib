@@ -19,13 +19,6 @@
                             <constraint firstAttribute="height" constant="188" id="HJ9-qa-gwq"/>
                         </constraints>
                     </imageView>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oum-zS-9g3" userLabel="rightline">
-                        <rect key="frame" x="187" y="0.0" width="1" height="263"/>
-                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="0.5" id="fm0-rI-jPW"/>
-                        </constraints>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LJT-CF-ioX">
                         <rect key="frame" x="0.0" y="188" width="188" height="75"/>
                         <subviews>
@@ -70,6 +63,13 @@
                                 <exclude reference="uxj-p5-B1P"/>
                             </mask>
                         </variation>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oum-zS-9g3" userLabel="rightline">
+                        <rect key="frame" x="187" y="0.0" width="1" height="263"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="0.5" id="fm0-rI-jPW"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

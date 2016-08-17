@@ -73,7 +73,7 @@ class CyclePictureCell: UICollectionViewCell {
         }
     }
     
-    private var imageView: UIImageView!
+     var imageView: UIImageView!
     private var detailLable: UILabel!
     
     override init(frame: CGRect) {

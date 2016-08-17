@@ -1064,7 +1064,7 @@
                                     <action selector="btn1Action:forEvent:" destination="Ww8-4p-5aW" eventType="touchUpInside" id="7ng-zU-ZkF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6e-dO-U3t">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6e-dO-U3t">
                                 <rect key="frame" x="261" y="33" width="33" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="33" id="5fk-a0-HON"/>
@@ -1083,7 +1083,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="Aid-LJ-V1c"/>
                                 </constraints>
-                                <state key="normal" title="瞎逛逛">
+                                <state key="normal" title="先逛逛">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

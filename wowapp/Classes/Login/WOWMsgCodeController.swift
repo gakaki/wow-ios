@@ -8,7 +8,10 @@
 
 import UIKit
 
-
+enum msgCodeEntrance {
+    case loginEntrance
+    case userEntrance
+}
 
 class WOWMsgCodeController: WOWBaseViewController {
     
@@ -20,7 +23,7 @@ class WOWMsgCodeController: WOWBaseViewController {
     @IBOutlet weak var pwdTextField: UITextField!
     @IBOutlet weak var msgCodeButton: UIButton!
 
-    
+    var entrance = msgCodeEntrance.loginEntrance
     var mobile:String!
 //MARK:Life
     override func viewDidLoad() {
@@ -37,7 +40,14 @@ class WOWMsgCodeController: WOWBaseViewController {
     
 //MARK:Private Method
     override func setUI() {
-        navigationItem.title = "忘记密码"
+        switch entrance {
+        case .loginEntrance:
+            navigationItem.title = "忘记密码"
+
+        default:
+            navigationItem.title = "修改密码"
+
+        }
        
     }
 
@@ -86,11 +96,18 @@ class WOWMsgCodeController: WOWBaseViewController {
             tipsLabel.text = "两次输入密码不一致"
             return
         }
+       
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ResetPwd(mobile:phoneTextField.text!, captcha:code, newPwd:newPwd), successClosure: {[weak self](result) in
             if let strongSelf = self{
-                WOWUserManager.exitLogin()
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-                strongSelf.navigationController?.popViewControllerAnimated(true)
+                switch strongSelf.entrance {
+                case .loginEntrance:
+                    strongSelf.navigationController?.popViewControllerAnimated(true)
+                default:
+                    WOWUserManager.exitLogin()
+                    NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+                    strongSelf.navigationController?.popToRootViewControllerAnimated(false)
+                    strongSelf.toLoginVC(true)
+                }
                 
             }
         }) {[weak self](errorMsg) in
@@ -154,7 +171,7 @@ class WOWMsgCodeController: WOWBaseViewController {
     
 
 //MARK:Network
-
+  
 
 }
 

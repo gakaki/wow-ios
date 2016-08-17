@@ -38,7 +38,7 @@ class WOWGuideController: WOWBaseViewController {
         didSet {
             
             var title1 = "加入我们"
-            var title2 = "瞎逛逛"
+            var title2 = "先逛逛"
             var backGroundColor1 = UIColor.yellowColor()
             var backGroundColor2 = UIColor.clearColor()
             var titleColor1 = UIColor.blackColor()

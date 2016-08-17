@@ -27,6 +27,15 @@ class VCFound: VCBaseVCCategoryFound {
         
     }
     
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        do {
+            try request_with_throw()
+        }catch{
+            DLog(error)
+        }
+    }
+    
     func request_with_throw() throws -> Void {
             super.request()
             WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_Main, successClosure: {[weak self] (result) in

@@ -10,7 +10,7 @@ import Foundation
 
 let WOWDSGNSCHEME       = "com.wow.dsgn"
 
-let WOWCompanyTel        = "4008-208-237"
+let WOWCompanyTel        = "4008-203-237"
 
 
 enum StoryBoardNames: String {

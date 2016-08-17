@@ -14,33 +14,33 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="188" height="188"/>
                 <subviews>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4j-UV-9cx" userLabel="rightline">
-                        <rect key="frame" x="187" y="0.0" width="0.5" height="188"/>
-                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="0.5" id="dbB-Tg-eoI"/>
-                        </constraints>
-                    </view>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qxs-7V-f4D" userLabel="bottomline">
-                        <rect key="frame" x="0.0" y="187" width="188" height="0.5"/>
-                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="YNq-c7-e8g"/>
-                        </constraints>
-                    </view>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mts-mM-qsX" userLabel="topline">
-                        <rect key="frame" x="0.0" y="0.0" width="188" height="0.5"/>
-                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="BEf-hE-5z6"/>
-                        </constraints>
-                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eoc-9M-3ps">
                         <rect key="frame" x="0.0" y="0.0" width="188" height="188"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="eoc-9M-3ps" secondAttribute="height" multiplier="1:1" id="MpZ-jL-O0A"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4j-UV-9cx" userLabel="rightline">
+                        <rect key="frame" x="187" y="0.0" width="0.5" height="188"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="0.5" id="dbB-Tg-eoI"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qxs-7V-f4D" userLabel="bottomline">
+                        <rect key="frame" x="0.0" y="187" width="188" height="0.5"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="YNq-c7-e8g"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mts-mM-qsX" userLabel="topline">
+                        <rect key="frame" x="0.0" y="0.0" width="188" height="0.5"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="BEf-hE-5z6"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -52,7 +52,9 @@
                 <constraint firstAttribute="bottom" secondItem="Qxs-7V-f4D" secondAttribute="bottom" id="8jq-l2-LYr"/>
                 <constraint firstAttribute="trailing" secondItem="s4j-UV-9cx" secondAttribute="trailing" id="EMH-Ta-sxS"/>
                 <constraint firstItem="mts-mM-qsX" firstAttribute="top" secondItem="WBL-jt-rfW" secondAttribute="top" id="HHl-fi-JQR"/>
+                <constraint firstAttribute="trailing" secondItem="eoc-9M-3ps" secondAttribute="trailing" constant="0.5" id="HM5-tx-ngF"/>
                 <constraint firstAttribute="trailing" secondItem="Qxs-7V-f4D" secondAttribute="trailing" id="INW-zc-N3Z"/>
+                <constraint firstAttribute="bottom" secondItem="eoc-9M-3ps" secondAttribute="bottom" constant="0.5" id="KHc-lh-P10"/>
                 <constraint firstAttribute="trailing" secondItem="eoc-9M-3ps" secondAttribute="trailing" id="fAh-lv-WSy"/>
                 <constraint firstItem="mts-mM-qsX" firstAttribute="leading" secondItem="WBL-jt-rfW" secondAttribute="leading" id="hmF-ig-MN1"/>
                 <constraint firstAttribute="bottom" secondItem="Qxs-7V-f4D" secondAttribute="bottom" constant="1" id="jji-CN-JGU"/>
@@ -64,6 +66,8 @@
             <size key="customSize" width="231" height="187"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="fAh-lv-WSy"/>
+                    <exclude reference="lKP-Mn-OJn"/>
                     <exclude reference="jji-CN-JGU"/>
                 </mask>
             </variation>

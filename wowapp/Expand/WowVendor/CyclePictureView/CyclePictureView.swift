@@ -115,7 +115,7 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     var timer: NSTimer?     // EndlessCycleProtocol提供
     
     private var pageControl: UIPageControl?
-    private var collectionView: UICollectionView!
+     var collectionView: UICollectionView!
     private let cellID: String = "CyclePictureCell"
     private var flowLayout: UICollectionViewFlowLayout?
 

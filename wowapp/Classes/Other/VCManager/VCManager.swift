@@ -21,11 +21,15 @@ extension UIViewController
     
     
     func toVCCart( ){
+        guard WOWUserManager.loginStatus else {
+            toLoginVC(true)
+            return
+        }
         let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
-        let nav_vc = UINavigationController(rootViewController: vc)
+//        let nav_vc = UINavigationController(rootViewController: vc)
         vc.hideNavigationBar = false
 //        self.presentVC(nav_vc)
-        self.pushVC(nav_vc)
+        self.pushVC(vc)
     }
     
     

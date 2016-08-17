@@ -55,32 +55,17 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13n-gp-XjB">
-                    <rect key="frame" x="278" y="69.5" width="40" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13n-gp-XjB">
+                    <rect key="frame" x="0.0" y="69.5" width="320" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="LUh-x9-0Vx"/>
-                        <constraint firstAttribute="width" constant="40" id="bSQ-ki-Cfe"/>
                     </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
                     <state key="normal" image="car_check"/>
                     <state key="selected" image="select"/>
                     <state key="highlighted" image="select"/>
                     <connections>
                         <action selector="alipayClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="5hx-tV-Y8e"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISY-or-DSp">
-                    <rect key="frame" x="278" y="134.5" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="6wr-lf-vmc"/>
-                        <constraint firstAttribute="height" constant="40" id="hYu-14-HZd"/>
-                    </constraints>
-                    <state key="normal" image="car_check">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="select"/>
-                    <state key="highlighted" image="select"/>
-                    <connections>
-                        <action selector="weixinClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QSs-fY-IA2"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Oc-7B-Ncd">
@@ -94,22 +79,39 @@
                         <action selector="sureClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="0fL-9w-eM3"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISY-or-DSp">
+                    <rect key="frame" x="0.0" y="135" width="320" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="hYu-14-HZd"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
+                    <state key="normal" image="car_check">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="select"/>
+                    <state key="highlighted" image="select"/>
+                    <connections>
+                        <action selector="weixinClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QSs-fY-IA2"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3Oc-7B-Ncd" secondAttribute="trailing" id="0nv-UC-Q10"/>
+                <constraint firstItem="ISY-or-DSp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2wA-cQ-28Y"/>
                 <constraint firstItem="ISY-or-DSp" firstAttribute="centerY" secondItem="E8w-Kj-1sH" secondAttribute="centerY" id="5YY-AQ-AkP"/>
                 <constraint firstItem="ngd-SG-sGB" firstAttribute="centerY" secondItem="j4B-hz-vgO" secondAttribute="centerY" id="6gX-bJ-utc"/>
                 <constraint firstItem="29r-9F-HrL" firstAttribute="leading" secondItem="E8w-Kj-1sH" secondAttribute="trailing" constant="15" id="GIZ-1P-SV7"/>
-                <constraint firstAttribute="trailing" secondItem="ISY-or-DSp" secondAttribute="trailing" constant="2" id="LEe-KI-lOg"/>
+                <constraint firstAttribute="trailing" secondItem="ISY-or-DSp" secondAttribute="trailing" id="LEe-KI-lOg"/>
                 <constraint firstItem="3Oc-7B-Ncd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qf3-CQ-O6e"/>
                 <constraint firstAttribute="trailing" secondItem="QMH-vb-kWc" secondAttribute="trailing" constant="15" id="SdI-Se-AH7"/>
-                <constraint firstAttribute="trailing" secondItem="13n-gp-XjB" secondAttribute="trailing" constant="2" id="Tzu-6z-UBY"/>
+                <constraint firstAttribute="trailing" secondItem="13n-gp-XjB" secondAttribute="trailing" id="Tzu-6z-UBY"/>
                 <constraint firstItem="j4B-hz-vgO" firstAttribute="leading" secondItem="vXy-F2-HpT" secondAttribute="leading" id="WCj-hH-Uxm"/>
                 <constraint firstItem="3Oc-7B-Ncd" firstAttribute="top" secondItem="E8w-Kj-1sH" secondAttribute="bottom" constant="36" id="YgG-YL-k5t"/>
                 <constraint firstAttribute="bottom" secondItem="3Oc-7B-Ncd" secondAttribute="bottom" id="aIo-nb-wbE"/>
                 <constraint firstItem="ngd-SG-sGB" firstAttribute="leading" secondItem="j4B-hz-vgO" secondAttribute="trailing" constant="15" id="bGv-pv-2Wa"/>
                 <constraint firstItem="QMH-vb-kWc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="d84-Di-qu8"/>
+                <constraint firstItem="13n-gp-XjB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dwE-od-KV4"/>
                 <constraint firstItem="E8w-Kj-1sH" firstAttribute="leading" secondItem="vXy-F2-HpT" secondAttribute="leading" id="e83-XF-tgk"/>
                 <constraint firstItem="vXy-F2-HpT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="eTD-4H-pa8"/>
                 <constraint firstItem="E8w-Kj-1sH" firstAttribute="top" secondItem="j4B-hz-vgO" secondAttribute="bottom" constant="30" id="hEW-Mh-OSV"/>

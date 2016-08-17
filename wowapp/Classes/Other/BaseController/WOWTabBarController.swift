@@ -43,6 +43,7 @@ class WOWTabBarController: UITabBarController {
             viewControllers.append(vc)
         }
         self.viewControllers = viewControllers
+        WOWTool.lastTabIndex = 0
 //        configBadge()
     }
     

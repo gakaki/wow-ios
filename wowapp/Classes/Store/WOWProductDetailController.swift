@@ -62,6 +62,7 @@ class WOWProductDetailController: WOWBaseViewController {
         v.placeholderImage = UIImage(named: "placeholder_product")
         v.currentDotColor = UIColor.blackColor()
         v.otherDotColor   = UIColor.whiteColor()
+        v.timeInterval = 3
         v.autoScroll = false
         return v
     }()
@@ -84,6 +85,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     private func configData(){
         cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
+        cycleView.delegate = self
         placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImg ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
             if let strongSelf = self{
                 strongSelf.shareProductImage = image
@@ -279,12 +281,39 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
     //分享
     func sharClick() {
         backView.hideBuyView()
-//        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
-//        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        let shareUrl = " "
+        WOWShareManager.share(productModel?.productName, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
 
     }
 }
 
-
+extension WOWProductDetailController : CyclePictureViewDelegate {
+    func cyclePictureView(cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        func setPhoto() -> [PhotoModel] {
+            var photos: [PhotoModel] = []
+            for (index, photoURLString) in (productModel?.primaryImgs ?? [""]).enumerate() {
+                // 这个方法只能返回可见的cell, 如果不可见, 返回值为nil
+                let cell = cyclePictureView.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? CyclePictureCell
+                
+                let sourceView = cell?.imageView
+                
+                let photoModel = PhotoModel(imageUrlString: photoURLString, sourceImageView: sourceView)
+                photos.append(photoModel)
+            }
+            return photos
+        }
+        
+        let photoBrowser = PhotoBrowser(photoModels: setPhoto()) {[weak self] (extraBtn) in
+            if let sSelf = self {
+                let hud = SimpleHUD(frame:CGRect(x: 0.0, y: (sSelf.view.zj_height - 80)*0.5, width: sSelf.view.zj_width, height: 80.0))
+                sSelf.view.addSubview(hud)
+            }
+            
+        }
+        // 指定代理
+        
+        photoBrowser.show(inVc: self, beginPage: indexPath.row)
+    }
+}
 
 

@@ -19,7 +19,8 @@ class VCBaseVCCategoryFound:WOWBaseViewController{
             }
         }
     }
-
+    
+   
     
     override func loadMore() {
         if isRreshing {

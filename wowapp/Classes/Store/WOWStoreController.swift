@@ -20,8 +20,10 @@ class WOWStoreController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         request()
     }
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

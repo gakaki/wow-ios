@@ -246,6 +246,31 @@ class WOWOrderDetailController: WOWBaseViewController{
         }
         
     }
+    
+    //确认收货
+    private func confirmReceive(orderCode:String,cell:WOWOrderListCell){
+        func confirm(){
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result) in
+                if let strongSelf = self{
+                    //确认收货成功后重新请求下网络刷新列表
+                    strongSelf.request()
+                }
+            }) { (errorMsg) in
+                
+            }
+        }
+        
+        let alert = UIAlertController(title:"确认收货", message:nil, preferredStyle:.Alert)
+        let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        let sure = UIAlertAction(title: "确定", style: .Default) { (action) in
+            confirm()
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(sure)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+
     //MARK:Network
     override func request() {
         
@@ -970,23 +995,23 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
     }
     // 关闭页眉页脚的停留
-    //    func scrollViewDidScroll(scrollView: UIScrollView) {
-    //        let sectionHeaderHeight:CGFloat = 38
-    //
-    //        let sectionFooterHeight:CGFloat = 40
-    //        let offsetY:CGFloat = scrollView.contentOffset.y;
-    //        if offsetY >= 0 && offsetY <= sectionHeaderHeight
-    //        {
-    //            scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -sectionFooterHeight, 0)
-    //        }else if offsetY >= sectionHeaderHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight
-    //        {
-    //            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, -sectionFooterHeight, 0)
-    //        }else if offsetY >= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height
-    //        {
-    //            scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight), 0)
-    //        }
-    //
-    //        }
+//        func scrollViewDidScroll(scrollView: UIScrollView) {
+//            let sectionHeaderHeight:CGFloat = 38
+//    
+//            let sectionFooterHeight:CGFloat = 40
+//            let offsetY:CGFloat = scrollView.contentOffset.y;
+//            if offsetY >= 0 && offsetY <= sectionHeaderHeight
+//            {
+//                scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -sectionFooterHeight, 0)
+//            }else if offsetY >= sectionHeaderHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight
+//            {
+//                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, -sectionFooterHeight, 0)
+//            }else if offsetY >= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height
+//            {
+//                scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight), 0)
+//            }
+//    
+//            }
     func clickAction(sender:UIButton)  {
         
         

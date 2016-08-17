@@ -91,10 +91,11 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
 
         let layout                                   = UICollectionViewFlowLayout()
         layout.scrollDirection                       = .Vertical
-        layout.sectionInset                          = UIEdgeInsets(top: 0, left: 2, bottom: 1, right: 2)
-        layout.itemSize                              = CGSize(width: self.frame.width / 2 - CGFloat(3), height: 100 )
-        layout.minimumInteritemSpacing               = 1
-        layout.minimumLineSpacing                    = 1
+        layout.sectionInset                          = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.itemSize                              = CGSize(width: self.frame.width / 2 - CGFloat(8), height: self.frame.width / 3 - 15)
+        layout.minimumInteritemSpacing               = 0
+        layout.minimumLineSpacing                    = 5
+        
 //        layout.estimatedItemSize                     = CGSize(width: self.frame.width / 2 - CGFloat(2), height: 100 )
         
         self.cv                                      = UICollectionView(frame: self.frame, collectionViewLayout: layout)
@@ -105,7 +106,7 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
         self.cv.registerClass(WOWFoundCategoryCellCollectionViewCell.self, forCellWithReuseIdentifier:String(WOWFoundCategoryCellCollectionViewCell))
         self.cv.showsVerticalScrollIndicator         = false
         self.cv.showsHorizontalScrollIndicator       = false
-        
+        self.cv.scrollEnabled                        = false
         self.contentView.addSubview(self.cv)
         
         

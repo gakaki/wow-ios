@@ -27,7 +27,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
 
         
         pictureImageView.snp_makeConstraints { (make) -> Void in
-            make.size.equalTo(CGSizeMake(70, 70))
+            make.size.equalTo(CGSizeMake(100, 100))
             make.center.equalTo(self).offset(UIEdgeInsets.init(top: -10, left: 0, bottom: 0, right: 0))
         }
         

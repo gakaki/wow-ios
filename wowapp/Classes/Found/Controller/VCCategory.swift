@@ -10,7 +10,7 @@ struct Pic {
 
 let kAnimationDuration = 0.25
 let kIndicatorViewH: CGFloat = 3.0      // 首页顶部标签指示条的高度
-let kTitlesViewH: CGFloat = 35          // 顶部标题的高度
+let kTitlesViewH: CGFloat = 25          // 顶部标题的高度
 let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度倍
 
 
@@ -86,7 +86,7 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
         
         let layout                          = UICollectionViewFlowLayout()
         layout.scrollDirection              = .Horizontal
-        layout.sectionInset                 = UIEdgeInsets(top: 5, left: 25, bottom: 5, right: 25)
+        layout.sectionInset                 = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         layout.minimumLineSpacing           = 15.0
         cv!.collectionViewLayout            = layout
 
@@ -156,7 +156,7 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
         let v               = UIView()
         v.backgroundColor   = UIColor.blackColor()
         v.h                 = kIndicatorViewH
-        let offset          = CGFloat(13)
+        let offset          = CGFloat(9)
         v.y                 = kTitlesViewH + offset + kIndicatorViewH
         v.tag               = -1
         
@@ -245,7 +245,7 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
         if ( collectionView == self.cv_bottom){
             return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 75)
         }else{
-            let cellSize:CGSize = CGSizeMake(100,100  )
+            let cellSize:CGSize = CGSizeMake(80,80 )
             return cellSize
         }
     }

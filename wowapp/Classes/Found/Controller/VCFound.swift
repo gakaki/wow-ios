@@ -8,7 +8,7 @@ class VCFound: VCBaseVCCategoryFound {
     let cellID2              = String( WOWFoundRecommendCell )
     let cellID3              = String( WOWFoundCategoryCell )
 
-    let cell3_height         = CGFloat(400)
+    let cell3_height         = CGFloat(MGScreenWidth / 3 - 10)*4
     
     var vo_products          = [WOWFoundProductModel]()
     var vo_recommend_product:WOWFoundProductModel?
@@ -109,7 +109,7 @@ WOWFoundCategoryCellDelegate
 
         switch indexPath.section {
         case 0:
-            return 100
+            return 130
         case 1:
             return 210
         case 2:

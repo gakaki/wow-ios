@@ -533,6 +533,8 @@ extension RequestApi:TargetType{
             return "确认收货成功"
         case .Api_OrderCancel:
             return "取消订单成功"
+        case .Api_PwdResetCode:
+            return "修改密码成功"
         default:
             return ""
         }

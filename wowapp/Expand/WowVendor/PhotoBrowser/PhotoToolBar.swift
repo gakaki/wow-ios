@@ -88,8 +88,7 @@ class PhotoToolBar: UIView {
         indexLabel.textColor = UIColor.whiteColor()
         indexLabel.backgroundColor = UIColor.clearColor()
         indexLabel.textAlignment = NSTextAlignment.Center
-        indexLabel.font = UIFont.boldSystemFontOfSize(20.0)
-        indexLabel.hidden = true
+        indexLabel.font = UIFont.systemFontOfSize(16)
         return indexLabel
     }()
     

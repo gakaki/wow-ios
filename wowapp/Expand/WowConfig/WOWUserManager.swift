@@ -179,17 +179,25 @@ struct WOWUserManager {
         MGDefault.synchronize()
     }
     
-    
+    static func cleanUserInfo(){
+        MGDefault.setObject(nil, forKey:WOWSessionToken)
+        MGDefault.setObject(nil, forKey:WOWUserName)
+        MGDefault.setObject(nil, forKey:WOWUserSex)
+        MGDefault.setObject(nil, forKey:WOWUserName)
+        MGDefault.setObject(nil, forKey:WOWUserDes)
+        MGDefault.setObject(nil, forKey:WOWUserHeadImage)
+        MGDefault.setObject(nil, forKey:WOWUserConstellation)
+        MGDefault.setObject(nil, forKey:WOWUserAgeRange)
+        MGDefault.setObject(nil, forKey:WOWUserCarCount)
+        MGDefault.setObject(nil, forKey:WOWUserIndustry)
+        MGDefault.synchronize()
+    }
     /**
      退出登录
      清空用户的各个信息
      */
     static func exitLogin(){
-        MGDefault.setObject(nil, forKey: WOWUserCarCount)
-        MGDefault.setObject(nil, forKey: WOWSessionToken)
-        MGDefault.setObject(nil, forKey: WOWUserHeadImage)
-        MGDefault.synchronize()
-        WOWBuyCarMananger.updateBadge()
+        cleanUserInfo()
     }
     
     

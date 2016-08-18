@@ -20,8 +20,10 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var detailAddressTextView: KMPlaceholderTextView!
     @IBOutlet weak var footView             : UIView!
     @IBOutlet weak var selectButton         : UIButton!
-    @IBOutlet weak var warnImg              : UIImageView!
-    
+    @IBOutlet weak var warnImg1              : UIImageView!
+    @IBOutlet weak var warnImg2              : UIImageView!
+    @IBOutlet weak var warnImg3              : UIImageView!
+    @IBOutlet weak var warnImg4              : UIImageView!
     private var defaultAddress:Bool         = false
     
     var data:VoSldData                      = VoSldData()
@@ -86,6 +88,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
             navigationItem.title = "新增收货地址"
         case .editAddress:
             navigationItem.title = "编辑收货地址"
+            configEditData()
         }
         navigationItem.leftBarButtonItems = nil
         tableView.keyboardDismissMode = .OnDrag
@@ -98,8 +101,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
         }
         loadJson()
         configPicker()
-        configEditData()
-    }
+            }
     
     private func configEditData(){
 //        if let model = addressInfo{
@@ -180,21 +182,29 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
 //MARK:Network
     func saveAddress() {
+        warnImg1.hidden = true
+        warnImg2.hidden = true
+        warnImg3.hidden = true
+        warnImg4.hidden = true
         let name = nameTextField.text ?? ""
         if name.isEmpty {
             WOWHud.showMsg("请输入姓名")
+            warnImg1.hidden = false
             return
         }
         if !validatePhone(phoneTextField.text) {
+            warnImg2.hidden = false
             return
         }
         guard let c = cityTextField.text where !c.isEmpty else{
             WOWHud.showMsg("请选择省市区")
+            warnImg3.hidden = false
             return
         }
         let detailAddress = detailAddressTextView.text
         if detailAddress.isEmpty {
             WOWHud.showMsg("请填写详细地址")
+            warnImg4.hidden = false
             return
         }
         

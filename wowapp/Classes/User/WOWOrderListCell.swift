@@ -58,6 +58,25 @@ class WOWOrderListCell: UITableViewCell {
     func showData(m:WOWNewOrderListModel){
         modelNew = m
         
+        switch m.orderStatus ?? 0 {
+        case 4,5,6:
+            statusLabel.textColor = UIColor.init(hexString: "808080")
+            rightButton.hidden = true
+        case 0:
+            rightButton.hidden = false
+            rightButton.setTitle("立即支付", forState: .Normal)
+            statusLabel.textColor = UIColor.init(hexString: "FE3824")
+        case 3:
+            rightButton.hidden = false
+            rightButton.setTitle("确认收货", forState: .Normal)
+            statusLabel.textColor = UIColor.init(hexString: "FE3824")
+        default:
+            rightButton.hidden = true
+            statusLabel.textColor = UIColor.init(hexString: "FE3824")
+        }
+
+        
+        
         statusLabel.text = m.orderStatusName
         orderIdLabel.text = m.orderCode
         goodsCountLabel.text = "共"+(m.totalProductQty?.toString)!+"件"

@@ -295,7 +295,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         }else{
             cell.rightButton.hidden = true
         }
-
+       
         return cell
     }
     

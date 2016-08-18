@@ -58,7 +58,8 @@ class WOWOrderDetailController: WOWBaseViewController{
     var OrderDetailNewaType         : OrderNewType = .someFinishForGoods
     ///  : 存放包裹的数组
     var goodsArray = [WOWNewForGoodsModel]()
-
+    ///  : 未发货商品清单
+    var goodsNoArray = [WOWNewProductModel]()
     ///  : 部分发货：发货清单的 产品 的数量
     var orderGoodsNumber                 : Int!
 
@@ -66,6 +67,10 @@ class WOWOrderDetailController: WOWBaseViewController{
     var orderNoNumber                 : Int! // 测试数据 未发货清单的的包裹商品个数
 
     var isOpen                      : Bool!
+    
+    var isSomeForGoodsType          : Bool!
+    
+    
     @IBOutlet weak var tableView    : UITableView!
     @IBOutlet weak var countLabel   : UILabel!
     @IBOutlet weak var priceLabel   : UILabel!
@@ -92,19 +97,26 @@ class WOWOrderDetailController: WOWBaseViewController{
         
         orderNoNumber        = 0
         orderGoodsNumber     = 0
-        
+        isSomeForGoodsType   = true
         isOpen               = true
-        ///  拿到订单ID
-//        if let orderNewModel = orderNewModel {
-//              self.orderCode = orderNewModel.orderCode
-//        }
-      
-        
+
         request()
         WOWBorderColor(rightButton)
         navigationItem.title = "订单详情"
         configTableView()
+        configBarItem()
         
+    }
+    private func configBarItem(){
+        
+        
+        makeCustomerImageNavigationItem("telephonekefu", left:false) {[weak self] () -> () in
+//            if let strongSelf = self{
+
+                WOWTool.callPhone()
+                print("你点击了客服")
+//            }
+        }
     }
     override func navBack() {
         switch entrance {
@@ -210,10 +222,15 @@ class WOWOrderDetailController: WOWBaseViewController{
                 hideRightBtn()
             case 4:
                 self.OrderDetailNewaType = OrderNewType.finish
+                if orderNewModel.packages?.count > 1 {
+                    self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
+                    isSomeForGoodsType = false
+                }
                 hideRightBtn()
                 
             case 2:
                 self.OrderDetailNewaType = OrderNewType.someFinishForGoods
+                
                 hideRightBtn()
                 
                 
@@ -222,7 +239,10 @@ class WOWOrderDetailController: WOWBaseViewController{
                 self.clooseOrderButton.hidden     = true
                 self.rightButton.setTitle("确认收货", forState: UIControlState.Normal)
                 self.priceLabel.text              = "¥"+((orderNewModel.orderAmount)?.toString)!
-                
+                if orderNewModel.packages?.count > 1 {
+                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
+                    isSomeForGoodsType = false
+                }
             default:
                 break
             }
@@ -237,7 +257,7 @@ class WOWOrderDetailController: WOWBaseViewController{
             /// 拿出发货的商品数组
             if  let forGoodsArr = self.orderNewDetailModel?.packages {
                 self.goodsArray = forGoodsArr
-                
+
                 self.orderGoodsNumber = forGoodsArr[0].orderItems?.count > 3 ? 3 : forGoodsArr[0].orderItems?.count
                 
                 
@@ -258,14 +278,15 @@ class WOWOrderDetailController: WOWBaseViewController{
             /// 拿出发货的商品数组
             if  let forGoodsArr = self.orderNewDetailModel?.packages {
                 self.goodsArray = forGoodsArr
-                
+              
                 self.orderGoodsNumber = forGoodsArr[0].orderItems?.count > 3 ? 3 : forGoodsArr[0].orderItems?.count
                 
-                
             }
+            
             /// 拿出未发货的商品数组
             if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
-   
+                self.goodsNoArray = noForGoodsArr
+                
                 self.orderNoNumber = noForGoodsArr.count
                 
             }
@@ -410,6 +431,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         case .forGoods,.noForGoods,.finish:
             return 4
         case .someFinishForGoods:
+//            return 3 + goodsNoArray.count + goodsArray.count
             return 4 + goodsArray.count
             
         }
@@ -497,7 +519,13 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1:
                 return 1
             case goodsArray.count + 2 :
-                return orderNoNumber
+                switch goodsNoArray.count {
+                case 0:
+                    return 0
+                default:
+                    return orderNoNumber
+                }
+                
             case goodsArray.count + 3 :
                 return 2
             default:
@@ -778,7 +806,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailSThreeCell", forIndexPath: indexPath) as! WOWOrderDetailSThreeCell
                     if let orderNewDetailModel = orderNewDetailModel {
                         
-                        cell.personNameLabel.text = "包裹1：" + orderNewDetailModel.packages![indexPath.section - 2].deliveryCompanyName!
+                        cell.personNameLabel.text = "包裹" + (indexPath.section - 1).toString + "：" + orderNewDetailModel.packages![indexPath.section - 2].deliveryCompanyName!
                         cell.addressLabel.text    = "运单号：" + orderNewDetailModel.packages![indexPath.section - 2].deliveryOrderNo!
                         
                     }
@@ -833,11 +861,18 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             switch section {
             case 0:
                 return CellHight.minHight
-            case 1:
+            case 1 , 2:
                 return 38
                 
-            case goodsArray.count + 2 , 2:
-                return 38
+            case goodsArray.count + 2:
+                switch goodsNoArray.count {
+                case 0:
+                    return 0.01
+                default:
+                    return 38
+                }
+
+//                return 38
                 
             case goodsArray.count + 3 :
                 return 12
@@ -876,9 +911,21 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 1:
                 return "收货人"
             case 2:
-                return "已发货商品清单"
+                if isSomeForGoodsType == true {
+                        return "已发货商品清单"
+                }else{
+                        return "商品清单"
+                }
+                
             case goodsArray.count + 2:
-                return "未发货商品清单"
+                
+                switch goodsNoArray.count {
+                case 0:
+                    return " "
+                default:
+                    return "未发货商品清单"
+                }
+
                 
             default:
                 return " "

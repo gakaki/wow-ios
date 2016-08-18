@@ -159,7 +159,7 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWBuyCarMananger.sharedBuyCar.productSpecModel      = self.productSpecModel
         WOWBuyCarMananger.sharedBuyCar.isFavorite       = likeButton.selected
         if let product = productModel {
-            WOWBuyCarMananger.sharedBuyCar.defaultImg = product.firstNonPrimaryImgUrl
+            WOWBuyCarMananger.sharedBuyCar.defaultImg = product.primaryImgs![0]
             WOWBuyCarMananger.sharedBuyCar.defaultPrice = String(format: "%.2f",(product.sellPrice) ?? 0)
 
         }

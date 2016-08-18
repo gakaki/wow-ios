@@ -65,7 +65,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //MARK:Private Method
     override func setUI() {
-        navigationItem.title = "填写订单"
+        navigationItem.title = "确认订单"
         totalPriceLabel.text = "¥ " + (totalPrice ?? "")
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -91,7 +91,6 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //MARK: - Action
     @IBAction func sureClick(sender: UIButton) {
-        chooseStyle()
         guard addressInfo != nil else {
             WOWHud.showMsg("请选择收货地址")
             return
@@ -104,7 +103,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 requestOrderCreat()
             }
 
-
+            chooseStyle()
         }
 
     }

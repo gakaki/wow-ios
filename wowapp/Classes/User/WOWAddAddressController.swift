@@ -20,6 +20,8 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var detailAddressTextView: KMPlaceholderTextView!
     @IBOutlet weak var footView             : UIView!
     @IBOutlet weak var selectButton         : UIButton!
+    @IBOutlet weak var warnImg              : UIImageView!
+    
     private var defaultAddress:Bool         = false
     
     var data:VoSldData                      = VoSldData()
@@ -44,7 +46,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     var addressInfo        = WOWAddressListModel()
     
     
-    var addressModel : WOWAddressListModel?
+//    var addressModel : WOWAddressListModel?
     var entrance:WOWAddressEntrance = .Me
     
     lazy var pickerContainerView :WOWPickerView = {
@@ -100,19 +102,19 @@ class WOWAddAddressController: WOWBaseTableViewController {
     }
     
     private func configEditData(){
-        if let model = addressModel{
-            provinceId = model.provinceId
-            cityId = model.cityId
-            countyId = model.countyId
+//        if let model = addressInfo{
+            provinceId = addressInfo.provinceId
+            cityId = addressInfo.cityId
+            countyId = addressInfo.countyId
             
         
-            nameTextField.text  = model.name
-            phoneTextField.text = model.mobile
-            cityTextField.text = "\(model.province ?? "") - \(model.city ?? "") - \(model.county ?? "")"
-            detailAddressTextView.text = model.addressDetail ?? ""
-            defaultAddress = model.isDefault ?? false
+            nameTextField.text  = addressInfo.name
+            phoneTextField.text = addressInfo.mobile
+            cityTextField.text = "\(addressInfo.province ?? "") - \(addressInfo.city ?? "") - \(addressInfo.county ?? "")"
+            detailAddressTextView.text = addressInfo.addressDetail ?? ""
+            defaultAddress = addressInfo.isDefault ?? false
             selectButton.selected = defaultAddress
-        }
+//        }
         
     }
     
@@ -239,11 +241,8 @@ class WOWAddAddressController: WOWBaseTableViewController {
 //MARK:Actions
     @IBAction func selectButton(sender: UIButton) {
         defaultAddress = !defaultAddress
-        if defaultAddress {
-            sender.setImage(UIImage(named: "select"), forState: .Normal)
-        }else {
-            sender.setImage(UIImage(named: "car_check"), forState: .Normal)
-        }
+        sender.selected = defaultAddress
+        
     }
     
     //MARK: - Net 

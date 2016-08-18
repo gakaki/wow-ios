@@ -266,6 +266,8 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
                 
             }
             
+        }else {
+            WOWHud.showMsg("添加购物车失败")
         }
 
     }

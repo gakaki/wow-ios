@@ -234,35 +234,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 goodsImageView.set_webimage_url(img)
 
             }
-            //得到颜色的数组，并给每种颜色对应一个bool值，方便记录哪个颜色有库存
-            if let array = p.colorDisplayNameList {
-                for color in array {
-                    if array.count == 1 {
-                        colorIndex = 0
-                        let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: true)
-                        colorArr.append(colorModel)
-
-                    }else {
-                        let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: true)
-                        colorArr.append(colorModel)
-
-                    }
-                }
-            }
-            //得到规格的数组，同样给每个规格对应一个bool值，方便记录哪个规格有库存
-            if let array = p.specNameList {
-                for spec in array {
-                    if array.count == 1 {
-                        specIndex = 0
-                        let specModel = WOWSpecNameModel(specName: spec, isSelect: true)
-                        specArr.append(specModel)
-                    }else {
-                        let specModel = WOWSpecNameModel(specName: spec, isSelect: true)
-                        specArr.append(specModel)
-                    }
-                    
-                }
-            }
+            
             //通过颜色查找规格的数组
             if let array = p.colorSpecVoList {
                 colorSpecArr = array
@@ -271,20 +243,48 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             if let array = p.specColorVoList{
                 specColorArr = array
             }
+            
+            //得到颜色的数组，并给每种颜色对应一个bool值，方便记录哪个颜色有库存
+            if let array = p.colorDisplayNameList {
+                for color in array {
+                    let colorModel = WOWColorNameModel(colorDisplayName: color, isSelect: true)
+                    colorArr.append(colorModel)
+                    
+                    if array.count == 1 {
+                        colorIndex = 0
+                        selectColorIndex()
+                    }
+                }
+            }
+            //得到规格的数组，同样给每个规格对应一个bool值，方便记录哪个规格有库存
+            if let array = p.specNameList {
+                for spec in array {
+                    let specModel = WOWSpecNameModel(specName: spec, isSelect: true)
+                    specArr.append(specModel)
+                    
+                    if array.count == 1 {
+                        specIndex = 0
+                        selectSpecIndex()
+                    }
+
+                    
+                }
+            }
+           
 
             collectionView.reloadData()
             showResult(skuCount)
             /**
              *  如果规格和颜色都是一个的话，默认选中第一个
              */
-            if colorArr.count == 1 && specArr.count == 1 {
-                for array in colorSpecArr{
-                    if array.colorDisplayName == colorArr[0].colorDisplayName{
-                        color_SpecArr = array.specMapVoList
-                    }
-                }
-                getProductInfo()
-            }
+//            if colorArr.count == 1 && specArr.count == 1 {
+//                for array in colorSpecArr{
+//                    if array.colorDisplayName == colorArr[0].colorDisplayName{
+//                        color_SpecArr = array.specMapVoList
+//                    }
+//                }
+//                getProductInfo()
+//            }
         }
     }
     
@@ -602,44 +602,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
             colorIndex = indexPath.row
             
-            /**
-             *  遍历循环通过颜色对应规格的数组，如果数组中某个对象的颜色跟选中的颜色一样，则获取对应的产品规格列表
-             *  其中包括是否可点击，是否有库存等
-             */
-                for array in colorSpecArr{
-                    if array.colorDisplayName == colorArr[indexPath.row].colorDisplayName{
-                        color_SpecArr = array.specMapVoList
-                    }
-                }
-            
-            //遍历把每个规格的bool值设为false初始值，防止与上次选择的冲突
-            for spec in specArr {
-                spec.isSelect = false
-            }
-            
-            //通过循环遍历两个数组来筛选出所选择颜色对应的规格
-            if let color_SpecArr = color_SpecArr {
-                for spec in color_SpecArr {
-                    for selectSpec in specArr {
-                        if spec.specName == selectSpec.specName {
-                            selectSpec.isSelect = true
-                        }
-                    }
-                }
-                
-            }
-            self.collectionView.reloadData()
-            secondCollectionView.reloadData()
-            
-            //根据选中的颜色改变产品图片
-            if color_SpecArr?.count > 0 {
-                let img = color_SpecArr![0].subProductInfo?.productColorImg
-                if let img = img {
-//                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
-                    goodsImageView.set_webimage_url(img)
-
-                }
-            }
+            selectColorIndex()
             
         }else {
             if specIndex == indexPath.row {
@@ -653,35 +616,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
             specIndex = indexPath.row
-            
-            /**
-             *  遍历循环通过规格对应颜色的数组，如果数组中某个对象的规格跟选中的规格一样，则获取对应的产品颜色列表
-             *  其中包括是否可点击，是否有库存等
-             */
-            for array in specColorArr{
-                if array.specName == specArr[indexPath.row].specName{
-                    spec_ColorArr = array.colorMapVoList
-                }
-            }
-            
-            //遍历把每个颜色的bool值设为false初始值，防止与上次选择的冲突
-            for color in colorArr {
-                color.isSelect = false
-            }
-            
-            //通过循环遍历两个数组来筛选出所选择规格对应的颜色
-            if let spec_ColorArr = spec_ColorArr {
-                for color in spec_ColorArr {
-                    for selectColor in colorArr {
-                        if color.colorDisplayName == selectColor.colorDisplayName {
-                            selectColor.isSelect = true
-                        }
-                    }
-                }
-            }
-            self.collectionView.reloadData()
-            
-            secondCollectionView.reloadData()
+            selectSpecIndex()
+          
         }
         //获取产品信息
         getProductInfo()
@@ -706,6 +642,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 
     }
     
+
     //如果颜色和规格都选中的话就拿出这个产品的信息
     func getProductInfo() {
         //如果颜色和规格都选中的话就拿出这个产品的信息
@@ -834,6 +771,91 @@ extension WOWGoodsBuyView {
             self._layer = nil
            
         }
+    }
+
+}
+//MARK: - 筛选数组
+extension WOWGoodsBuyView {
+    
+    /**
+     选中某个颜色时筛选出对应规格数组
+     */
+    func selectColorIndex()  {
+        /**
+         *  遍历循环通过颜色对应规格的数组，如果数组中某个对象的颜色跟选中的颜色一样，则获取对应的产品规格列表
+         *  其中包括是否可点击，是否有库存等
+         */
+        for array in colorSpecArr{
+            if array.colorDisplayName == colorArr[colorIndex].colorDisplayName{
+                color_SpecArr = array.specMapVoList
+            }
+        }
+        
+        //遍历把每个规格的bool值设为false初始值，防止与上次选择的冲突
+        for spec in specArr {
+            spec.isSelect = false
+        }
+        
+        //通过循环遍历两个数组来筛选出所选择颜色对应的规格
+        if let color_SpecArr = color_SpecArr {
+            for spec in color_SpecArr {
+                for selectSpec in specArr {
+                    if spec.specName == selectSpec.specName {
+                        selectSpec.isSelect = true
+                    }
+                }
+            }
+            
+        }
+        self.collectionView.reloadData()
+        secondCollectionView.reloadData()
+        
+        //根据选中的颜色改变产品图片
+        if color_SpecArr?.count > 0 {
+            let img = color_SpecArr![0].subProductInfo?.productColorImg
+            if let img = img {
+                //                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                goodsImageView.set_webimage_url(img)
+                
+            }
+        }
+
+        
+    }
+    
+    /**
+     选中某个规格筛选出对应颜色数组
+     */
+    func selectSpecIndex() {
+        /**
+         *  遍历循环通过规格对应颜色的数组，如果数组中某个对象的规格跟选中的规格一样，则获取对应的产品颜色列表
+         *  其中包括是否可点击，是否有库存等
+         */
+        for array in specColorArr{
+            if array.specName == specArr[specIndex].specName{
+                spec_ColorArr = array.colorMapVoList
+            }
+        }
+        
+        //遍历把每个颜色的bool值设为false初始值，防止与上次选择的冲突
+        for color in colorArr {
+            color.isSelect = false
+        }
+        
+        //通过循环遍历两个数组来筛选出所选择规格对应的颜色
+        if let spec_ColorArr = spec_ColorArr {
+            for color in spec_ColorArr {
+                for selectColor in colorArr {
+                    if color.colorDisplayName == selectColor.colorDisplayName {
+                        selectColor.isSelect = true
+                    }
+                }
+            }
+        }
+        self.collectionView.reloadData()
+        
+        secondCollectionView.reloadData()
+
     }
 
 }

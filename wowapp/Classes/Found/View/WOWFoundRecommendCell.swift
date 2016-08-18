@@ -89,7 +89,7 @@ class WOWFoundRecommendCell: UITableViewCell {
         button.setImage(image_selected, forState: .Selected)
         
         button.addTarget(self, action: #selector(btn_like_toggle),forControlEvents:.TouchUpInside)
-        
+        button.selected = false
         btnLike                     = button
         self.addSubview(btnLike)
     }
@@ -97,6 +97,7 @@ class WOWFoundRecommendCell: UITableViewCell {
     func btn_like_toggle(){
         if let del = self.delegate {
             del.notLoginThanToLogin()
+            return
         }
         requestFavoriteProduct()
 

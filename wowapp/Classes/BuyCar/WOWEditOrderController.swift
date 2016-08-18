@@ -85,7 +85,8 @@ class WOWEditOrderController: WOWBaseViewController {
         func goOrderDetail() {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
         vc.orderCode = orderCode
-        navigationController!.pushViewController(vc, animated: true)
+        vc.entrance = orderDetailEntrance.orderPay
+        navigationController?.pushViewController(vc, animated: true)
 
     }
     
@@ -219,7 +220,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                 vc.payMethod = paymentChannelName ?? ""
                 vc.orderid = orderCode ?? ""
-                vc.totalPrice = String(format: "¥ %.2f",payAmount ?? 0)
+                vc.totalPrice = String(format: "%.2f",payAmount ?? 0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
             

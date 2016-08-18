@@ -117,7 +117,7 @@ class WOWSureOrderController: WOWBaseViewController {
     private func resolveOrderRet(){
         let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
         vc.selectIndex = 0
-        vc.entrance = OrderEntrance.PaySuccess
+//        vc.entrance = OrderEntrance.PaySuccess
         navigationController?.pushViewController(vc, animated: true)
     }
     

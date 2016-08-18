@@ -8,13 +8,9 @@
 
 import UIKit
 
-enum OrderEntrance {
-    case PaySuccess
-    case User
-}
 
 class WOWOrderController: WOWBaseViewController {
-    var entrance = OrderEntrance.User
+    var entrance = orderDetailEntrance.orderList
     var dataArr  = [WOWNewOrderListModel]()
     
 //    var currentPage = 1
@@ -56,7 +52,7 @@ class WOWOrderController: WOWBaseViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if entrance == .PaySuccess{
+        if entrance == .orderPay{
             self.navigationController?.interactivePopGestureRecognizer?.enabled = false;
         }
     }
@@ -97,10 +93,10 @@ class WOWOrderController: WOWBaseViewController {
     }
     
     override func navBack() {
-        if entrance == .PaySuccess {
-            navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        if entrance == .orderPay {
+            navigationController?.popToRootViewControllerAnimated(true)
         }else{
-            navigationController?.popViewControllerAnimated(true)
+            popVC()
         }
     }
     

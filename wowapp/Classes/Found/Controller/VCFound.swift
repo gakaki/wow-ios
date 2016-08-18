@@ -72,11 +72,30 @@ class VCFound: VCBaseVCCategoryFound {
       
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        addObserver()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    private func addObserver(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
+        
+    }
+    //MARK:Actions
+    func exitLogin() {
+        let secction = NSIndexSet(index: 1)
+        tableView.reloadSections(secction, withRowAnimation: .None)
+    }
     
+    func loginSuccess(){
+        let secction = NSIndexSet(index: 1)
+        tableView.reloadSections(secction, withRowAnimation: .None)
+    }
     override func setUI() {
         super.setUI()
     

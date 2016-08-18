@@ -342,6 +342,8 @@
 		63C42DC81D646B0400879FEB /* PhotoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC31D646B0400879FEB /* PhotoViewCell.swift */; };
 		63C42DC91D646B0400879FEB /* SimpleHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC41D646B0400879FEB /* SimpleHUD.swift */; };
 		63C42DCA1D646B0400879FEB /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC51D646B0400879FEB /* UIViewExtension.swift */; };
+		63C42DCD1D65642B00879FEB /* WOWProductOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DCB1D65642B00879FEB /* WOWProductOrderCell.swift */; };
+		63C42DCE1D65642B00879FEB /* WOWProductOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C42DCC1D65642B00879FEB /* WOWProductOrderCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -719,6 +721,8 @@
 		63C42DC31D646B0400879FEB /* PhotoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewCell.swift; sourceTree = "<group>"; };
 		63C42DC41D646B0400879FEB /* SimpleHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleHUD.swift; sourceTree = "<group>"; };
 		63C42DC51D646B0400879FEB /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		63C42DCB1D65642B00879FEB /* WOWProductOrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWProductOrderCell.swift; sourceTree = "<group>"; };
+		63C42DCC1D65642B00879FEB /* WOWProductOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWProductOrderCell.xib; sourceTree = "<group>"; };
 		6D82CF16CDE3CFCF20061FE2 /* Pods-wowapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowapp/Pods-wowapp.debug.xcconfig"; sourceTree = "<group>"; };
 		98AEBDD3562DCD8D8DFB519A /* Pods_wowapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1395,6 +1399,8 @@
 				632A93931D4E1CB0003A5966 /* WOWBuyCarFootView.xib */,
 				636C33C91D51D90300CA4E69 /* WOWOrderCell.swift */,
 				636C33CA1D51D90300CA4E69 /* WOWOrderCell.xib */,
+				63C42DCB1D65642B00879FEB /* WOWProductOrderCell.swift */,
+				63C42DCC1D65642B00879FEB /* WOWProductOrderCell.xib */,
 				636C33D11D52DD1D00CA4E69 /* WOWOrderAddressCell.swift */,
 				636C33D21D52DD1D00CA4E69 /* WOWOrderAddressCell.xib */,
 				636C33D51D52E5E400CA4E69 /* WOWOrderFooterView.swift */,
@@ -1786,7 +1792,7 @@
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VSWKQE5HA8;
+						DevelopmentTeam = 8FPQ7629B9;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -1859,6 +1865,7 @@
 				632A93351D474848003A5966 /* WOWFavoriteBrandCell.xib in Resources */,
 				29FF270B1CFDA86300DF2A9B /* BuyCar.storyboard in Resources */,
 				29FF26831CFDA86300DF2A9B /* WOWBaseStyleCell.xib in Resources */,
+				63C42DCE1D65642B00879FEB /* WOWProductOrderCell.xib in Resources */,
 				29FF26FB1CFDA86300DF2A9B /* UMSCommentInputController.xib in Resources */,
 				636C33D01D51DB3700CA4E69 /* WOWTypeCollectionCell.xib in Resources */,
 				29FF27111CFDA86300DF2A9B /* User.storyboard in Resources */,
@@ -2043,6 +2050,7 @@
 				29D5EC381D01295B0001266C /* WOWProductDetailController+Add.swift in Sources */,
 				29FF27051CFDA86300DF2A9B /* CollectionViewWaterfallLayout.swift in Sources */,
 				635716BA1D45EB89006BD746 /* AuxiliaryModels.swift in Sources */,
+				63C42DCD1D65642B00879FEB /* WOWProductOrderCell.swift in Sources */,
 				29D5EC3F1D0150700001266C /* WOWProductDetailPicTextCell.swift in Sources */,
 				29FF26AB1CFDA86300DF2A9B /* WOWStoreController.swift in Sources */,
 				29FF26C31CFDA86300DF2A9B /* WOWOrderListCell.swift in Sources */,
@@ -2339,7 +2347,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.wowapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";
@@ -2375,7 +2383,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.wowapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";

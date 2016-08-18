@@ -3,6 +3,17 @@ import UIKit
 import ObjectMapper
 import SnapKit
 
+import UIKit
+
+class HairlineView: UIView {
+    override func awakeFromNib() {
+        guard let backgroundColor = self.backgroundColor?.CGColor else { return }
+        self.layer.borderColor = backgroundColor
+        self.layer.borderWidth = (1.0 / UIScreen.mainScreen().scale) / 2;
+        self.backgroundColor = UIColor.clearColor()
+    }
+}
+
 class VCTopicHeaderView:UICollectionReusableView{
     
     var imageView: UIImageView!
@@ -31,7 +42,7 @@ class VCTopicHeaderView:UICollectionReusableView{
     
     var view_line:UIView   = {
         var l = UIView()
-        l.layer.borderWidth = 0.22
+        l.layer.borderWidth = 0.25
         l.layer.borderColor = UIColor.grayColor().CGColor
         return l
     }()
@@ -102,7 +113,11 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         config_collectionView()
         
     }
-    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+         request()
+        
+    }
     func btnBack(){
         self.navBack()
     }

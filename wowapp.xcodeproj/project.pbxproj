@@ -11,10 +11,10 @@
 		060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060869721D49EB74008FB61D /* ModelVoSld.swift */; };
 		062A91E71D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062A91E61D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift */; };
 		0633527B1D6435970026177E /* VCBaseNavCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633527A1D6435970026177E /* VCBaseNavCart.swift */; };
+		0633527E1D6540560026177E /* WowLikeBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633527D1D6540560026177E /* WowLikeBtn.swift */; };
 		0639686E1D545FE900631BDF /* hex-kit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0639686D1D545FE900631BDF /* hex-kit.swift */; };
 		063968701D54601500631BDF /* IPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0639686F1D54601500631BDF /* IPManager.swift */; };
 		063968741D54950B00631BDF /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968731D54950B00631BDF /* VCCategory.swift */; };
-		063968771D549F8000631BDF /* VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968761D549F8000631BDF /* VCManager.swift */; };
 		06568A881D585A30008D2B1A /* ObjectMapper+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */; };
 		068B60B11D4F3561001AD778 /* Found.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B01D4F3560001AD778 /* Found.storyboard */; };
 		068B60B31D4F3DD5001AD778 /* VCFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60B21D4F3DD5001AD778 /* VCFound.swift */; };
@@ -364,10 +364,10 @@
 		060869721D49EB74008FB61D /* ModelVoSld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVoSld.swift; sourceTree = "<group>"; };
 		062A91E61D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWFoundWeeklyNewCellElementCell.swift; sourceTree = "<group>"; };
 		0633527A1D6435970026177E /* VCBaseNavCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBaseNavCart.swift; sourceTree = "<group>"; };
+		0633527D1D6540560026177E /* WowLikeBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowLikeBtn.swift; sourceTree = "<group>"; };
 		0639686D1D545FE900631BDF /* hex-kit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "hex-kit.swift"; sourceTree = "<group>"; };
 		0639686F1D54601500631BDF /* IPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		063968731D54950B00631BDF /* VCCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategory.swift; sourceTree = "<group>"; };
-		063968761D549F8000631BDF /* VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCManager.swift; sourceTree = "<group>"; };
 		06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObjectMapper+Transform.swift"; sourceTree = "<group>"; };
 		06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONNeverDie.framework; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
@@ -751,12 +751,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		063968751D549F7800631BDF /* VCManager */ = {
+		0633527C1D65404D0026177E /* BaseUI */ = {
 			isa = PBXGroup;
 			children = (
-				063968761D549F8000631BDF /* VCManager.swift */,
+				0633527D1D6540560026177E /* WowLikeBtn.swift */,
 			);
-			path = VCManager;
+			path = BaseUI;
 			sourceTree = "<group>";
 		};
 		068B60AC1D4F34AF001AD778 /* Found */ = {
@@ -992,7 +992,7 @@
 		29FF256A1CFDA86300DF2A9B /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				063968751D549F7800631BDF /* VCManager */,
+				0633527C1D65404D0026177E /* BaseUI */,
 				29FF256B1CFDA86300DF2A9B /* BaseController */,
 				29FF25721CFDA86300DF2A9B /* BaseDatasource */,
 				29FF25741CFDA86300DF2A9B /* BaseModel */,
@@ -2005,7 +2005,6 @@
 				29FF26681CFDA86300DF2A9B /* WOWSearchChildController.swift in Sources */,
 				2958BD8A1CFEA97100F6A6D7 /* WOWPickerView.swift in Sources */,
 				29FF26B51CFDA86300DF2A9B /* WOWAddressCell.swift in Sources */,
-				063968771D549F8000631BDF /* VCManager.swift in Sources */,
 				29FF26BF1CFDA86300DF2A9B /* WOWNumberMessageView.swift in Sources */,
 				06568A881D585A30008D2B1A /* ObjectMapper+Transform.swift in Sources */,
 				29FF264A1CFDA86300DF2A9B /* WOWPaySuccessController.swift in Sources */,
@@ -2086,6 +2085,7 @@
 				29FF26501CFDA86300DF2A9B /* WOWValue2Cell.swift in Sources */,
 				29FF26941CFDA86300DF2A9B /* WOWBrandModel.swift in Sources */,
 				29FF26821CFDA86300DF2A9B /* WOWBaseStyleCell.swift in Sources */,
+				0633527E1D6540560026177E /* WowLikeBtn.swift in Sources */,
 				29FF26851CFDA86300DF2A9B /* WOWCheckSelectView.swift in Sources */,
 				060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */,
 				29FF26A51CFDA86300DF2A9B /* WOWGoodsTypeCell.swift in Sources */,

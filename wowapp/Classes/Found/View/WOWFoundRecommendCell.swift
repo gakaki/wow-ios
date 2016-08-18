@@ -2,14 +2,11 @@ import UIKit
 import FlexboxLayout
 
 
-protocol WOWFoundRecommendCellDelegate:class{
-    func cellTouchInside(m:WOWFoundProductModel)
-}
+
 class WOWFoundRecommendCell: UITableViewCell {
     
     var product:WOWFoundProductModel?
-    weak var delegate:WOWFoundRecommendCellDelegate?
-
+    
     override init(style: UITableViewCellStyle,reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -20,7 +17,8 @@ class WOWFoundRecommendCell: UITableViewCell {
         right_label_price_stroke.text = ""
         right_label_price_bottom.text = "¥ 378"
         
-
+        
+        setUI_btnLike()
         self.prepareViewHierarchy()
         
     }
@@ -44,9 +42,11 @@ class WOWFoundRecommendCell: UITableViewCell {
         right_label_price_stroke.text        = p.get_formted_original_price()
         right_label_price_bottom.text        = p.get_formted_sell_price()
         
-        
+        self.product                         = p
         
         render()
+        
+        self.requestIsFavoriteProduct()
         
     }
     override func setSelected(selected: Bool, animated: Bool) {
@@ -61,23 +61,64 @@ class WOWFoundRecommendCell: UITableViewCell {
     var right_label_price_stroke:UILabel    = UILabel()
     var right_label_price_bottom:UILabel    = UILabel()
     var button:UIButton = UIButton()
-    var button_share:UIButton = UIButton()
-    
-    
-    func buttonClicked(){
-        print ("buttonClicked")
-        if let del = self.delegate {
-            del.cellTouchInside(self.product!)
-        }
-    }
+    var btnLike:UIButton!
+
     func viewDidLayoutSubviews() {
         self.render()
     }
     
     func render() {
         self.product_view.render()
-//        self.product_view.center = self.center
     }
+    
+    
+    func setUI_btnLike() {
+        
+        let image                   = UIImage(named: "likeblack") as UIImage?
+        let image_selected          = UIImage(named: "like_select") as UIImage?
+        
+        let button                  = UIButton(type: UIButtonType.Custom)
+        button.frame                = CGRectMake(0, 0, 40, 32)
+        button.setImage(image, forState: .Normal)
+        button.setImage(image_selected, forState: .Selected)
+        
+        button.addTarget(self, action: #selector(btn_like_toggle),forControlEvents:.TouchUpInside)
+        
+        btnLike                     = button
+        self.addSubview(btnLike)
+    }
+    
+    func btn_like_toggle(){
+        requestFavoriteProduct()
+    }
+    
+    //用户是否喜欢单品
+    func requestIsFavoriteProduct() -> Void {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: self.product?.productId ?? 0), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                let favorite = JSON(result)["favorite"].bool
+                strongSelf.btnLike.selected = favorite ?? false
+            }
+        }) {(errorMsg) in
+            
+        }
+        
+    }
+    
+    //用户喜欢某个单品
+    func requestFavoriteProduct()  {
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:self.product?.productId ?? 0), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                strongSelf.btnLike.selected = !strongSelf.btnLike.selected
+            }
+        }) { (errorMsg) in
+            
+            
+        }
+    }
+    
+
 
     func prepareViewHierarchy() {
         
@@ -85,14 +126,6 @@ class WOWFoundRecommendCell: UITableViewCell {
         let defaultMargin: Inset = (8.0, 8.0, 8.0, 8.0, 8.0, 8.0)
         
         iv                       = UIImageView()
-        
-//        button.backgroundColor = UIColor.blackColor()
-//        button.setTitle("Button", forState: UIControlState.Normal)
-//        button.addTarget(self, action:#selector(self.buttonClicked), forControlEvents: .TouchUpInside)
-      
-        button_share.backgroundColor = UIColor.blackColor()
-        button_share.setTitle("Button", forState: UIControlState.Normal)
-        button_share.addTarget(self, action:#selector(self.buttonClicked), forControlEvents: .TouchUpInside)
         
         self.product_view =  UIView().configure({
             
@@ -193,10 +226,10 @@ class WOWFoundRecommendCell: UITableViewCell {
                                 //                                    $0.style.margin     =  (0, 5.0, 0, 0, 8.0, 0)
                                 //                                }),
                                 
-                                button_share.configure({
+                                btnLike.configure({
                                     $0.style.alignSelf  = .FlexStart
-                                    $0.style.dimensions = ( 10 , 10)
-                                    $0.style.margin     =  (0, 5.0, 0, 0, 0.0,20)
+                                    $0.style.dimensions = ( 40 , 32)
+                                    $0.style.margin     =  (0, -3.0, 0, 0, 0.0,20)
                                     
                                 })
                             ])

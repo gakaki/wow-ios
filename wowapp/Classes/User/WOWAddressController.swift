@@ -13,6 +13,9 @@ enum WOWAddressEntrance {
     case  Me
 }
 
+protocol addressDelegate:class {
+    func editAddress()
+}
 
 
 class WOWAddressController: WOWBaseViewController {
@@ -21,6 +24,7 @@ class WOWAddressController: WOWBaseViewController {
     var dataArr = [WOWAddressListModel]()
     var action  : WOWObjectActionClosure?
     var selectModel : WOWAddressListModel?
+    weak var delegate: addressDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +43,9 @@ class WOWAddressController: WOWBaseViewController {
         vc.action = {[weak self] in
             if let strongSelf = self{
                 strongSelf.request()
+                if let del = strongSelf.delegate {
+                    del.editAddress()
+                }
             }
         }
   
@@ -61,6 +68,7 @@ class WOWAddressController: WOWBaseViewController {
 
  
 //MARK:Network
+    //收货地址列表
     override func request() {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist, successClosure: {[weak self] (result) in
@@ -91,6 +99,9 @@ class WOWAddressController: WOWBaseViewController {
                     }
                     model.isDefault = true
                     strongSelf.tableView.reloadData()
+                    if let del = strongSelf.delegate {
+                        del.editAddress()
+                    }
                 }
             }) { (errorMsg) in
                 
@@ -108,10 +119,29 @@ class WOWAddressController: WOWBaseViewController {
                 strongSelf.dataArr.removeAtIndex(indexPath.section)
                 strongSelf.tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
                 strongSelf.tableView.reloadData()
+                if let del = strongSelf.delegate {
+                    del.editAddress()
+                }
             }
         }) {(errorMsg) in
             
         }
+    }
+    //编辑收货地址
+    func editAddress(sender:UIButton) {
+        let model = dataArr[sender.tag]
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
+        vc.addressInfo = model
+        vc.addressEntrance     = AddressEntrance.editAddress
+        vc.action = {[weak self] in
+            if let strongSelf = self{
+                strongSelf.request()
+                if let del = strongSelf.delegate {
+                    del.editAddress()
+                }
+            }
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -193,18 +223,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
     
 
     
-    func editAddress(sender:UIButton) {
-        let model = dataArr[sender.tag]
-         let vc = UIStoryboard.initialViewController("User", identifier:"WOWAddAddressController") as! WOWAddAddressController
-        vc.addressModel = model
-        vc.addressEntrance     = AddressEntrance.editAddress
-        vc.action = {[weak self] in
-            if let strongSelf = self{
-                strongSelf.request()
-            }
-        }
-        navigationController?.pushViewController(vc, animated: true)
-    }
+    
     
     
     

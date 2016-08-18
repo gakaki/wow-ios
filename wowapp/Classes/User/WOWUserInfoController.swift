@@ -223,7 +223,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }
     
     func requestAddressInfo() {
-        //请求地址数据
+        //请求默认地址数据
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDefault, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(result)
@@ -299,6 +299,7 @@ extension WOWUserInfoController{
             
             let vc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
             vc.entrance = WOWAddressEntrance.Me
+            vc.delegate = self
             navigationController?.pushViewController(vc, animated: true)
         default:
             break
@@ -487,4 +488,9 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
   
 }
 
+extension WOWUserInfoController: addressDelegate {
+    func editAddress() {
+        requestAddressInfo()
+    }
+}
 

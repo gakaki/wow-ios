@@ -41,7 +41,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        sex = WOWUserManager.userSex
+//        sex = WOWUserManager.userSex
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -88,8 +88,9 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         
         pickerContainerView.pickerView.delegate = self
         
-        pickerContainerView.cancelButton.hidden = true
+        pickerContainerView.cancelButton.hidden = false
         pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), forControlEvents:.TouchUpInside)
+        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
         
         //        pickerContainerView.tag == 1001
         
@@ -144,13 +145,13 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         let row = pickerContainerView.pickerView.selectedRowInComponent(0)
         
         let currentType = clickType
-        switch currentType {
+        switch currentType {// 星座下标从1开始，所以，做＋1处理 ，性别从1开始，默认为1，年龄从0开始
             
         case .ageType:
-            
+            ageRow = row
             ageTextField?.text = pickDataArr[row]
         case .starType:
-            
+            starRow = row + 1
             starTextField?.text = pickDataArr[row + 1]
             
         }
@@ -159,7 +160,17 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }
     
     
+    func cancel() {
+      print("取消")
+        self.backGroundMaskView.hidden = true
+        UIView.animateWithDuration(0.3){
+            self.pickerContainerView.mj_y = MGScreenHeight
+        }
+
+    }
+
     func sure() {
+//        print("\(sex)","\(ageRow)","\(starRow)")
         let params = ["sex":String(sex),"ageRange":String(ageRow),"constellation":String(starRow),"industry":jobTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params ), successClosure: {[weak self] (result) in
             if let strongSelf = self{
@@ -204,7 +215,8 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         
         self.pickerContainerView.pickerView.reloadComponent(0)
         pickerContainerView.pickerView.selectRow(starRow - 1, inComponent: 0, animated: true)
-        self.pickerContainerView.pickerView.reloadComponent(0)
+//        self.pickerContainerView.pickerView.reloadComponent(0)
+        self.pickerContainerView.pickerView.reloadAllComponents()
         showPickerView()
         jobTextField.resignFirstResponder()
         
@@ -252,18 +264,18 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let currentType = clickType
-        switch currentType {
-            
-        case .ageType:
-            ageRow = row
-            ageTextField?.text = pickDataArr[row]
-        case .starType:
-            starRow = row + 1
-            starTextField?.text = pickDataArr[row + 1]
-            
-            
-        }
+//        let currentType = clickType
+//        switch currentType {
+//            
+//        case .ageType:
+//            ageRow = row
+//            ageTextField?.text = pickDataArr[row]
+//        case .starType:
+//            starRow = row + 1
+//            starTextField?.text = pickDataArr[row + 1]
+//            
+//            
+//        }
     }
     /**
      弹出选择器

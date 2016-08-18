@@ -642,7 +642,7 @@
                         <outlet property="ageTextField" destination="3j7-Dd-Pem" id="kaA-5O-err"/>
                         <outlet property="desLabel" destination="2i6-nL-EKv" id="Yu3-tN-D3e"/>
                         <outlet property="headImageView" destination="A4f-Kg-SLh" id="eJ2-hy-iD5"/>
-                        <outlet property="jobLabel" destination="yd2-A3-89n" id="Gwt-rD-u4B"/>
+                        <outlet property="jobLabel" destination="yd2-A3-89n" id="qnF-gq-6kr"/>
                         <outlet property="nickLabel" destination="tzc-QX-O1f" id="BI0-dX-2Jp"/>
                         <outlet property="sexTextField" destination="rU5-cw-vz4" id="fqO-ps-Qey"/>
                         <outlet property="starTextField" destination="t5d-5h-9On" id="2Yq-b6-5Yl"/>

@@ -38,6 +38,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     private var headImageUrl:String = WOWUserManager.userHeadImageUrl
     private var nick        :String = WOWUserManager.userName
+    private var job         :String = WOWUserManager.userIndustry
     private var sex         :Int = WOWUserManager.userSex
     private var des         :String = WOWUserManager.userDes
     private var star        :Int = WOWUserManager.userConstellation
@@ -144,8 +145,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
-            
-            
             self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
             
             self.ageTextField.userInteractionEnabled = false

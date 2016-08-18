@@ -265,9 +265,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                     if array.count == 1 {
                         specIndex = 0
                         selectSpecIndex()
-                    }
-
-                    
+                    }                    
                 }
             }
            
@@ -277,14 +275,14 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             /**
              *  如果规格和颜色都是一个的话，默认选中第一个
              */
-//            if colorArr.count == 1 && specArr.count == 1 {
-//                for array in colorSpecArr{
-//                    if array.colorDisplayName == colorArr[0].colorDisplayName{
-//                        color_SpecArr = array.specMapVoList
-//                    }
-//                }
-//                getProductInfo()
-//            }
+            if colorArr.count == 1 && specArr.count == 1 {
+                for array in colorSpecArr{
+                    if array.colorDisplayName == colorArr[0].colorDisplayName{
+                        color_SpecArr = array.specMapVoList
+                    }
+                }
+                getProductInfo()
+            }
         }
     }
     

@@ -145,7 +145,12 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
-            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+//            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+            
+//            self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
+            
+             self.headImageView.kf_setImageWithURL(NSURL(string: WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
+            
             
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false

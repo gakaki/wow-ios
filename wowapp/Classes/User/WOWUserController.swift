@@ -135,10 +135,13 @@ class WOWUserController: WOWBaseTableViewController {
     
     private func configUserInfo(){
         if WOWUserManager.loginStatus {
-//            headerView.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage:UIImage(named: "placeholder_userhead"))
+            headerView.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage:UIImage(named: "placeholder_userhead"))
             
-            headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-
+//            headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+            
+//            headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_product")
+            
+            
             headerView.nameLabel.text = WOWUserManager.userName
             headerView.desLabel.text  = WOWUserManager.userDes
         }else{

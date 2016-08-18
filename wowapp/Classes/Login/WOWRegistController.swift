@@ -51,11 +51,11 @@ class WOWRegistController: WOWBaseViewController {
     }
     
 //    private func configNavItem(){
-////        makeCustomerNavigationItem("已有账号 登录", left: false) {[weak self] in
-////            if let strongSelf = self{
-////                strongSelf.navBack()
-////            }
-////        }
+//        makeCustomerNavigationItem("已有账号 登录", left: false) {[weak self] in
+//            if let strongSelf = self{
+//                strongSelf.navBack()
+//            }
+//        }
 //    }
     
     private func validatePhone(phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{

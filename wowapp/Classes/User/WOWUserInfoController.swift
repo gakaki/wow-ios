@@ -467,20 +467,20 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
      
         if editingGroupAndRow == [0:3] {
             
-            sex = row + 1
+//            sex = row + 1
 
-            sexTextField?.text = pickDataArr[row + 1]
+//            sexTextField?.text = pickDataArr[row + 1]
             
         }else if editingGroupAndRow == [0:4]{
             
-            age = row
+//            age = row
 
-            ageTextField?.text = pickDataArr[row]
+//            ageTextField?.text = pickDataArr[row]
 
         }else if editingGroupAndRow == [0:5] {
-            star = row + 1
+//            star = row + 1
 
-            starTextField?.text = pickDataArr[row + 1]
+//            starTextField?.text = pickDataArr[row + 1]
         }
     }
     

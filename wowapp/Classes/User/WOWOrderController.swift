@@ -75,7 +75,7 @@ class WOWOrderController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        navigationItem.title = "订单"
+        navigationItem.title = "我的订单"
         configCheckView()
         configTable()
         

@@ -21,9 +21,9 @@ enum OrderNewType {
     case someFinishForGoods  //= "部分完成"
 }
 enum PayType {
-    case none             //= 无
+    case none                //= 无
     
-    case payAli             //= 支付宝
+    case payAli              //= 支付宝
     
     case payWiXin            //= 微信
 
@@ -266,6 +266,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 if let strongSelf = self{
                     //确认收货成功后重新请求下网络刷新列表
                     strongSelf.request()
+                    strongSelf.delegate?.orderStatusChange()
                 }
             }) { (errorMsg) in
                 
@@ -365,6 +366,7 @@ extension WOWOrderDetailController{
         WOWNetManager.sharedManager.requestWithTarget(.Api_PayResult(orderCode: orderCode), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 strongSelf.request() // 更新最新状态
+                strongSelf.delegate?.orderStatusChange()
                 let json = JSON(result)
                 let orderCode = json["orderCode"].string
                 let payAmount = json["payAmount"].double

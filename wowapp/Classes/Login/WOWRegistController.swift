@@ -41,7 +41,7 @@ class WOWRegistController: WOWBaseViewController {
     
 //MARK:Private Method
     override func setUI() {
-        configNavItem()
+//        configNavItem()
         navigationItem.title = byWechat ? "绑定手机" :"注册"
         registButton.setTitle(byWechat ? "绑定" :"注册", forState: .Normal)
         
@@ -50,13 +50,13 @@ class WOWRegistController: WOWBaseViewController {
 
     }
     
-    private func configNavItem(){
-        makeCustomerNavigationItem("已有账号 登录", left: false) {[weak self] in
-            if let strongSelf = self{
-                strongSelf.navBack()
-            }
-        }
-    }
+//    private func configNavItem(){
+////        makeCustomerNavigationItem("已有账号 登录", left: false) {[weak self] in
+////            if let strongSelf = self{
+////                strongSelf.navBack()
+////            }
+////        }
+//    }
     
     private func validatePhone(phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
         guard let phone = phoneNumber where !phone.isEmpty else{

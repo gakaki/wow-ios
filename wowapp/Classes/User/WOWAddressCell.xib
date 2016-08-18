@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -43,10 +44,10 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUs-OL-1c5">
-                        <rect key="frame" x="15" y="87" width="75" height="16"/>
+                        <rect key="frame" x="15" y="77" width="75" height="32"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="7ba-aC-WsT"/>
-                            <constraint firstAttribute="height" constant="16" id="mXo-JY-nRn"/>
+                            <constraint firstAttribute="height" constant="32" id="mXo-JY-nRn"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="   默认地址" image="car_check">
@@ -54,26 +55,32 @@
                         </state>
                         <state key="selected" image="select"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNy-so-yyy">
-                        <rect key="frame" x="258" y="86" width="50" height="18"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNy-so-yyy">
+                        <rect key="frame" x="240" y="75.5" width="80" height="36"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="oK2-zL-tLT"/>
+                            <constraint firstAttribute="width" constant="80" id="oK2-zL-tLT"/>
                             <constraint firstAttribute="height" constant="18" id="y1v-U1-rcF"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="编辑">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="y1v-U1-rcF"/>
+                            </mask>
+                        </variation>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="gUs-OL-1c5" firstAttribute="top" secondItem="ZVo-ee-Dyr" secondAttribute="bottom" constant="14.5" id="00D-ge-eri"/>
+                    <constraint firstItem="gUs-OL-1c5" firstAttribute="top" secondItem="ZVo-ee-Dyr" secondAttribute="bottom" constant="5" id="00D-ge-eri"/>
+                    <constraint firstAttribute="bottom" secondItem="nNy-so-yyy" secondAttribute="bottom" constant="3" id="7UN-zd-DZy"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qNz-Hn-AaS" secondAttribute="trailing" constant="60" id="8NI-RE-ntg"/>
                     <constraint firstItem="ZVo-ee-Dyr" firstAttribute="top" secondItem="z1J-R2-KwA" secondAttribute="bottom" constant="16" id="Eem-nT-zHv"/>
                     <constraint firstItem="ZVo-ee-Dyr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Lq1-he-SjB"/>
                     <constraint firstItem="qNz-Hn-AaS" firstAttribute="centerY" secondItem="mby-r8-WIO" secondAttribute="centerY" id="SBH-i7-8vH"/>
-                    <constraint firstItem="nNy-so-yyy" firstAttribute="top" secondItem="ZVo-ee-Dyr" secondAttribute="bottom" constant="13.5" id="UDB-8S-qx4"/>
+                    <constraint firstItem="nNy-so-yyy" firstAttribute="top" secondItem="ZVo-ee-Dyr" secondAttribute="bottom" constant="3" id="UDB-8S-qx4"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z1J-R2-KwA" secondAttribute="trailing" constant="10" id="W37-fP-Pb5"/>
                     <constraint firstItem="gUs-OL-1c5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XWY-rT-QaC"/>
                     <constraint firstItem="z1J-R2-KwA" firstAttribute="top" secondItem="mby-r8-WIO" secondAttribute="bottom" constant="6" id="XdJ-MM-t3I"/>
@@ -81,9 +88,15 @@
                     <constraint firstItem="mby-r8-WIO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="dyE-xt-iSI"/>
                     <constraint firstAttribute="trailing" secondItem="ZVo-ee-Dyr" secondAttribute="trailing" id="qfD-C8-vlo"/>
                     <constraint firstItem="qNz-Hn-AaS" firstAttribute="leading" secondItem="mby-r8-WIO" secondAttribute="trailing" constant="15" id="wfq-98-zIg"/>
-                    <constraint firstAttribute="trailing" secondItem="nNy-so-yyy" secondAttribute="trailing" constant="12" id="wp2-Te-bkS"/>
+                    <constraint firstAttribute="trailing" secondItem="nNy-so-yyy" secondAttribute="trailing" id="wp2-Te-bkS"/>
                     <constraint firstItem="mby-r8-WIO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="yQF-bc-cSu"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="nNy-so-yyy" secondAttribute="bottom" constant="2" id="yvC-ny-l91"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="yvC-ny-l91"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>

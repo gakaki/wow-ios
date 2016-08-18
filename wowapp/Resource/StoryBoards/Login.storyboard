@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cYg-yG-eZv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cYg-yG-eZv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1064,7 +1064,7 @@
                                     <action selector="btn1Action:forEvent:" destination="Ww8-4p-5aW" eventType="touchUpInside" id="7ng-zU-ZkF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6e-dO-U3t">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6e-dO-U3t">
                                 <rect key="frame" x="261" y="33" width="33" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="33" id="5fk-a0-HON"/>
@@ -1154,6 +1154,7 @@
                         <outlet property="btn1" destination="2vC-lT-k7q" id="xOa-oT-ULW"/>
                         <outlet property="btn2" destination="s7D-yn-8Vl" id="59i-7G-Nx2"/>
                         <outlet property="pageControl" destination="YyO-kq-eic" id="I0C-hk-cVc"/>
+                        <outlet property="skipButton" destination="J6e-dO-U3t" id="La9-c6-5Hi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uy3-1G-4vI" userLabel="First Responder" sceneMemberID="firstResponder"/>

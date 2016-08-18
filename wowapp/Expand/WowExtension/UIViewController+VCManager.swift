@@ -60,7 +60,7 @@ extension  UIViewController {
                             
                             strongSelf.checkWechatToken(response.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
                         }else{
-                            DLog(response.thirdPlatformUserProfile)
+                            WOWHud.showMsg("授权登录失败")
                         }
                     }
                 })

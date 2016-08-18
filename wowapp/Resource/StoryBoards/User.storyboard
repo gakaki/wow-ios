@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pW3-c3-z6F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pW3-c3-z6F">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1384,11 +1384,20 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning" translatesAutoresizingMaskIntoConstraints="NO" id="YGu-q1-O6j">
+                                                    <rect key="frame" x="297" y="19" width="11" height="11"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="11" id="QWT-TE-dLk"/>
+                                                        <constraint firstAttribute="width" constant="11" id="kUJ-xb-OkA"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="OzU-Ha-UZG" firstAttribute="leading" secondItem="R4O-la-sgw" secondAttribute="leading" constant="15" id="CpJ-Ve-lod"/>
+                                                <constraint firstItem="YGu-q1-O6j" firstAttribute="top" secondItem="R4O-la-sgw" secondAttribute="top" constant="19" id="D4V-tb-Ec8"/>
                                                 <constraint firstAttribute="trailing" secondItem="ukF-gw-TQl" secondAttribute="trailing" constant="15" id="kHO-Z6-BaA"/>
                                                 <constraint firstItem="ukF-gw-TQl" firstAttribute="leading" secondItem="OzU-Ha-UZG" secondAttribute="trailing" constant="8" id="lNP-gu-jqQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="YGu-q1-O6j" secondAttribute="trailing" constant="12" id="n1u-Q6-Usm"/>
                                                 <constraint firstItem="OzU-Ha-UZG" firstAttribute="top" secondItem="R4O-la-sgw" secondAttribute="top" constant="17" id="oGJ-EI-k62"/>
                                                 <constraint firstItem="ukF-gw-TQl" firstAttribute="top" secondItem="R4O-la-sgw" secondAttribute="top" constant="2" id="t44-5M-cML"/>
                                             </constraints>
@@ -1413,6 +1422,13 @@
                                                         <outlet property="delegate" destination="CVw-Pa-PKc" id="W8F-kU-MbM"/>
                                                     </connections>
                                                 </textField>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning" translatesAutoresizingMaskIntoConstraints="NO" id="z9V-IU-R11">
+                                                    <rect key="frame" x="297" y="20" width="11" height="11"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="11" id="DTj-oM-KZk"/>
+                                                        <constraint firstAttribute="width" constant="11" id="SSq-mw-3fb"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="省市区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJP-wU-fkI">
                                                     <rect key="frame" x="15" y="17" width="55" height="16"/>
                                                     <constraints>
@@ -1425,9 +1441,11 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="z9V-IU-R11" firstAttribute="top" secondItem="i2m-X5-Uaa" secondAttribute="top" constant="20" id="HHz-LU-leI"/>
                                                 <constraint firstItem="RJP-wU-fkI" firstAttribute="leading" secondItem="i2m-X5-Uaa" secondAttribute="leading" constant="15" id="Oxp-Nj-4cT"/>
                                                 <constraint firstItem="RJP-wU-fkI" firstAttribute="top" secondItem="i2m-X5-Uaa" secondAttribute="top" constant="17" id="cte-pZ-DKb"/>
                                                 <constraint firstItem="dcR-bl-iJ1" firstAttribute="leading" secondItem="RJP-wU-fkI" secondAttribute="trailing" constant="8" id="eKY-7C-EUP"/>
+                                                <constraint firstAttribute="trailing" secondItem="z9V-IU-R11" secondAttribute="trailing" constant="12" id="ea3-Wd-2HH"/>
                                                 <constraint firstItem="dcR-bl-iJ1" firstAttribute="top" secondItem="i2m-X5-Uaa" secondAttribute="top" constant="2" id="xNB-UY-TBq"/>
                                                 <constraint firstAttribute="trailing" secondItem="dcR-bl-iJ1" secondAttribute="trailing" constant="15" id="xb1-OX-G67"/>
                                             </constraints>
@@ -1462,9 +1480,18 @@
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入详细地址"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </textView>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning" translatesAutoresizingMaskIntoConstraints="NO" id="Qd5-hR-JmM">
+                                                    <rect key="frame" x="297" y="20" width="11" height="11"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="11" id="9H8-yA-ger"/>
+                                                        <constraint firstAttribute="width" constant="11" id="YKj-v2-J2H"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Pte-av-q8w" firstAttribute="leading" secondItem="CQl-dT-L7C" secondAttribute="trailing" constant="8" id="A9W-Ds-l1h"/>
+                                                <constraint firstItem="Qd5-hR-JmM" firstAttribute="top" secondItem="ZdO-1Y-n7S" secondAttribute="top" constant="20" id="STF-Nl-PML"/>
+                                                <constraint firstAttribute="trailing" secondItem="Qd5-hR-JmM" secondAttribute="trailing" constant="12" id="bbO-Gg-Y7e"/>
                                                 <constraint firstAttribute="trailing" secondItem="Pte-av-q8w" secondAttribute="trailing" constant="15" id="ecj-1H-1JU"/>
                                                 <constraint firstItem="Pte-av-q8w" firstAttribute="top" secondItem="ZdO-1Y-n7S" secondAttribute="top" constant="9" id="lMI-zr-dPP"/>
                                                 <constraint firstItem="CQl-dT-L7C" firstAttribute="leading" secondItem="ZdO-1Y-n7S" secondAttribute="leading" constant="15" id="mh1-Qc-lcK"/>
@@ -1487,7 +1514,10 @@
                         <outlet property="nameTextField" destination="hny-q5-qtF" id="ubw-Pl-b7t"/>
                         <outlet property="phoneTextField" destination="ukF-gw-TQl" id="MmI-mD-Ig1"/>
                         <outlet property="selectButton" destination="b0P-dr-Ofw" id="yaV-Jh-zSU"/>
-                        <outlet property="warnImg" destination="PaB-d6-gYu" id="QJA-6B-2zp"/>
+                        <outlet property="warnImg1" destination="PaB-d6-gYu" id="19v-oy-Nno"/>
+                        <outlet property="warnImg2" destination="YGu-q1-O6j" id="hYO-im-y16"/>
+                        <outlet property="warnImg3" destination="z9V-IU-R11" id="mKj-h5-9dq"/>
+                        <outlet property="warnImg4" destination="Qd5-hR-JmM" id="66t-6e-i1A"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZQ-G8-yEz" userLabel="First Responder" sceneMemberID="firstResponder"/>

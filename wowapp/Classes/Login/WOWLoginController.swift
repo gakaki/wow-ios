@@ -39,6 +39,9 @@ class WOWLoginController: WOWBaseViewController {
         makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                if WOWTool.lastTabIndex == 1 {
+                    WOWTool.lastTabIndex = 0
+                }
                 UIApplication.appTabBarController.selectedIndex = WOWTool.lastTabIndex
             }
         }

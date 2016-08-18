@@ -11,6 +11,7 @@ import UIKit
 class WOWGuideController: WOWBaseViewController {
     
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var skipButton:  UIButton!
     
     private var scrollerView: UIScrollView!
     
@@ -49,8 +50,9 @@ class WOWGuideController: WOWBaseViewController {
                 case .Standby: break
                 
                 case .Register:
-                    title1 = "微信注册"
+                    title1 = "绑定微信"
                     title2 = "手机注册"
+                skipButton.hidden = false
                 backGroundColor1 = UIColor.whiteColor()
                 backGroundColor2 = UIColor.whiteColor()
                 titleColor1 = UIColor.blackColor()

@@ -658,8 +658,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     
                 }
                 
-                
-                
+
                 returnCell = cell
                 
             case 2:

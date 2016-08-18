@@ -112,7 +112,14 @@ class WOWOrderController: WOWBaseViewController {
         super.request()
         
         let totalPage = 10
-        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderList(orderStatus: type, currentPage: pageIndex,pageSize:totalPage), successClosure: { [weak self](result) in
+        
+        var params = [String: AnyObject]?()
+        if selectIndex == 2 { // 待收货 
+            params = ["orderStatusList": [1,2], "currentPage": pageIndex,"pageSize":totalPage]
+        }else{
+            params = ["orderStatus": type, "currentPage": pageIndex,"pageSize":totalPage]
+        }
+        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderList(params:params), successClosure: { [weak self](result) in
             
             let json = JSON(result)["orderLists"].arrayObject
             DLog(json)
@@ -155,7 +162,6 @@ class WOWOrderController: WOWBaseViewController {
     }
     
 }
-
 
 extension WOWOrderController:TopMenuProtocol{
     func topMenuItemClick(index: Int) {

@@ -111,8 +111,10 @@ public enum RequestApi{
     
 
 //    case Api_OrderList(uid:String,type:String) //100为全部
-    case Api_OrderList(orderStatus:String,currentPage:Int,pageSize:Int)
+//    case Api_OrderList(orderStatus:String,currentPage:Int,pageSize:Int)
 
+    case Api_OrderList(params: [String: AnyObject]?)
+    
     case Api_OrderDetail(OrderCode:String)
 
     
@@ -455,8 +457,8 @@ extension RequestApi:TargetType{
                 params = ["id": id, "receiverName": receiverName, "provinceId": provinceId, "cityId": cityId, "countyId":countyId, "addressDetail": addressDetail, "receiverMobile": receiverMobile, "isDefault": isDefault]
             
             //订单相关
-            case let .Api_OrderList(orderStatus,currentPage,pageSize):
-                params =  ["orderStatus":orderStatus,"currentPage":currentPage,"pageSize":pageSize]
+            case let .Api_OrderList(param):
+                params =  param
             
             case let .Api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]

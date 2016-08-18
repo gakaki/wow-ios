@@ -3,6 +3,17 @@ import UIKit
 import ObjectMapper
 import SnapKit
 
+import UIKit
+
+class HairlineView: UIView {
+    override func awakeFromNib() {
+        guard let backgroundColor = self.backgroundColor?.CGColor else { return }
+        self.layer.borderColor = backgroundColor
+        self.layer.borderWidth = (1.0 / UIScreen.mainScreen().scale) / 2;
+        self.backgroundColor = UIColor.clearColor()
+    }
+}
+
 class VCTopicHeaderView:UICollectionReusableView{
     
     var imageView: UIImageView!
@@ -31,8 +42,8 @@ class VCTopicHeaderView:UICollectionReusableView{
     
     var view_line:UIView   = {
         var l = UIView()
-        l.layer.borderWidth = 0.22
-        l.layer.borderColor = UIColor.grayColor().CGColor
+        l.layer.borderWidth = 0.25
+        l.layer.borderColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.00).CGColor
         return l
     }()
    
@@ -69,7 +80,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         }
         
         view_line.snp_makeConstraints { (make) -> Void in
-            make.width.equalTo( self.frame.width * 0.4 )
+            make.width.equalTo( self.frame.width * 0.35 )
             make.height.equalTo(1)
             make.centerX.equalTo(self.snp_centerX)
             make.top.equalTo(label_desc.snp_bottom).offset(15)
@@ -102,7 +113,11 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         config_collectionView()
         
     }
-    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+         request()
+        
+    }
     func btnBack(){
         self.navBack()
     }
@@ -178,7 +193,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         cv.showsVerticalScrollIndicator     = false
         
         cv.decelerationRate                 = UIScrollViewDecelerationRateFast
-        cv.bounces                          = false
+//        cv.bounces                          = false
         cv.mj_header                        = self.mj_header
 
         self.cv                             = cv

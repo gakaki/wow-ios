@@ -2,10 +2,14 @@ import UIKit
 import FlexboxLayout
 
 
+protocol WOWFoundRecommendCellDelegate:class{
+    func notLoginThanToLogin()
+}
 
 class WOWFoundRecommendCell: UITableViewCell {
     
     var product:WOWFoundProductModel?
+    var delegate:WOWFoundRecommendCellDelegate?
     
     override init(style: UITableViewCellStyle,reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,7 +50,9 @@ class WOWFoundRecommendCell: UITableViewCell {
         
         render()
         
-        self.requestIsFavoriteProduct()
+        if (WOWUserManager.loginStatus){
+            self.requestIsFavoriteProduct()
+        }
         
     }
     override func setSelected(selected: Bool, animated: Bool) {
@@ -89,7 +95,11 @@ class WOWFoundRecommendCell: UITableViewCell {
     }
     
     func btn_like_toggle(){
+        if let del = self.delegate {
+            del.notLoginThanToLogin()
+        }
         requestFavoriteProduct()
+
     }
     
     //用户是否喜欢单品

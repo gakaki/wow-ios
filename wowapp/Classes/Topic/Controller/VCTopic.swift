@@ -43,7 +43,7 @@ class VCTopicHeaderView:UICollectionReusableView{
     var view_line:UIView   = {
         var l = UIView()
         l.layer.borderWidth = 0.25
-        l.layer.borderColor = UIColor.grayColor().CGColor
+        l.layer.borderColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.00).CGColor
         return l
     }()
    
@@ -80,7 +80,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         }
         
         view_line.snp_makeConstraints { (make) -> Void in
-            make.width.equalTo( self.frame.width * 0.4 )
+            make.width.equalTo( self.frame.width * 0.35 )
             make.height.equalTo(1)
             make.centerX.equalTo(self.snp_centerX)
             make.top.equalTo(label_desc.snp_bottom).offset(15)
@@ -193,7 +193,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         cv.showsVerticalScrollIndicator     = false
         
         cv.decelerationRate                 = UIScrollViewDecelerationRateFast
-        cv.bounces                          = false
+//        cv.bounces                          = false
         cv.mj_header                        = self.mj_header
 
         self.cv                             = cv

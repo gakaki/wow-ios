@@ -95,8 +95,12 @@ class WOWFoundRecommendCell: UITableViewCell {
     }
     
     func btn_like_toggle(){
-        if let del = self.delegate {
-            del.notLoginThanToLogin()
+//        if let del = self.delegate {
+//            del.notLoginThanToLogin()
+//            return
+//        }
+        guard WOWUserManager.loginStatus else {
+            UIApplication.currentViewController()?.toLoginVC(true)
             return
         }
         requestFavoriteProduct()

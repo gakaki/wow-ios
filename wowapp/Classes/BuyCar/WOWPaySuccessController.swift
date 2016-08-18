@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWPaySuccessController: WOWBaseViewController {
-    var orderid     = "  "
+    var orderid     = ""
     var totalPrice  = ""
     var payMethod   = ""
     @IBOutlet weak var orderIdLabel: UILabel!
@@ -49,10 +49,18 @@ class WOWPaySuccessController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
-    
+    /**
+     查看订单详情
+     */
+     @IBAction func goOrderDetailClick(sender: UIButton) {
+        let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
+        vc.orderCode = orderid
+        vc.entrance = orderDetailEntrance.orderPay
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
     override func navBack() {
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popToRootViewControllerAnimated(true)
         
     }
     

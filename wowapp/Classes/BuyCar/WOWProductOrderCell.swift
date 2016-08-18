@@ -15,7 +15,8 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var perPriceLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
-    
+    @IBOutlet weak var subCountLabel: UILabel!
+    @IBOutlet weak var totalPriceLabel: UILabel!
     
     let identifier = "WOWTypeCollectionCell"
     var typeArr = Array<String>?()
@@ -50,7 +51,10 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         
         nameLabel.text = model.productName
         countLabel.text = "x \(model.productQty ?? 1)"
+        subCountLabel.text = "共\(model.productQty ?? 1)件"
         perPriceLabel.text = String(format: "¥ %.2f", (model.sellPrice) ?? 0)
+        let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[model.productQty ?? 1])
+        totalPriceLabel.text = "¥ " + result
         let arr = [model.color ?? "",model.specName ?? ""]
         typeArr = arr
         collectionView.reloadData()

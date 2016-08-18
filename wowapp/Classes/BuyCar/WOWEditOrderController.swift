@@ -71,7 +71,7 @@ class WOWEditOrderController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = GrayColorLevel5
         tableView.registerNib(UINib.nibName(String(WOWOrderAddressCell)), forCellReuseIdentifier:String(WOWOrderAddressCell))
-        tableView.registerNib(UINib.nibName(String(WOWOrderCell)), forCellReuseIdentifier:String(WOWOrderCell))
+        tableView.registerNib(UINib.nibName(String(WOWProductOrderCell)), forCellReuseIdentifier:String(WOWProductOrderCell))
         tableView.registerNib(UINib.nibName(String(WOWOrderFreightCell)), forCellReuseIdentifier:String(WOWOrderFreightCell))
         tableView.registerNib(UINib.nibName(String(WOWTipsCell)), forCellReuseIdentifier:String(WOWTipsCell))
         tableView.keyboardDismissMode = .OnDrag
@@ -85,7 +85,8 @@ class WOWEditOrderController: WOWBaseViewController {
         func goOrderDetail() {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
         vc.orderCode = orderCode
-        navigationController!.pushViewController(vc, animated: true)
+        vc.entrance = orderDetailEntrance.orderPay
+        navigationController?.pushViewController(vc, animated: true)
 
     }
     
@@ -219,7 +220,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                 vc.payMethod = paymentChannelName ?? ""
                 vc.orderid = orderCode ?? ""
-                vc.totalPrice = String(format: "¥ %.2f",payAmount ?? 0)
+                vc.totalPrice = String(format: "%.2f",payAmount ?? 0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
             
@@ -258,7 +259,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             cell.showData(addressInfo)
             returnCell = cell
         case 1: //商品清单
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWOrderCell), forIndexPath: indexPath) as! WOWOrderCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWProductOrderCell), forIndexPath: indexPath) as! WOWProductOrderCell
             if let productArr = productArr {
                 cell.showData(productArr[indexPath.row])
             }
@@ -316,32 +317,37 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     
 
     
-    //尾视图  只有商品清单栏需要
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 1 { //地址
-            let footerView = NSBundle.mainBundle().loadNibNamed(String(WOWOrderFooterView), owner: self, options: nil).last as!WOWOrderFooterView
-            var count = Int()
-            if let arr = productArr {
-                for product in arr {
-                    count += product.productQty ?? 0
-                }
-            }
-            
-            footerView.countLabel.text = "共\(count)件"
-            footerView.totalPriceLabel.text = String(format:"合计¥ %.2f",(self.orderSettle?.productTotalAmount) ?? 0)
-            return footerView
-        }
-        return nil
-    }
+//    //尾视图  只有商品清单栏需要
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        if section == 1 { //地址
+//            let footerView = NSBundle.mainBundle().loadNibNamed(String(WOWOrderFooterView), owner: self, options: nil).last as!WOWOrderFooterView
+//            var count = Int()
+//            if let arr = productArr {
+//                for product in arr {
+//                    count += product.productQty ?? 0
+//                }
+//            }
+//            
+//            footerView.countLabel.text = "共\(count)件"
+//            footerView.totalPriceLabel.text = String(format:"合计¥ %.2f",(self.orderSettle?.productTotalAmount) ?? 0)
+//            return footerView
+//        }
+//        return nil
+//    }
     
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
+        switch section {
+        case 1:
+            return 0.01
+        default:
+            return 15
+        }
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 1 ,3:
+        case 3:
             return 50
         default:
             return 0.01

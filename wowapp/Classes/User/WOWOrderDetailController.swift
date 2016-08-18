@@ -8,7 +8,10 @@
 
 import UIKit
 
-
+enum orderDetailEntrance {
+    case orderList
+    case orderPay
+}
 enum OrderNewType {
     case payMent             //= "待付款"
     
@@ -70,6 +73,8 @@ class WOWOrderDetailController: WOWBaseViewController{
     @IBOutlet weak var clooseOrderButton  : UIButton!
     var statusLabel                 : UILabel!
     var orderCode                   : String!
+    var entrance                    = orderDetailEntrance.orderList
+    
     weak var delegate               : OrderDetailDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +105,16 @@ class WOWOrderDetailController: WOWBaseViewController{
         navigationItem.title = "订单详情"
         configTableView()
         
+    }
+    override func navBack() {
+        switch entrance {
+        case .orderPay:
+            let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderController") as! WOWOrderController
+            vc.entrance = orderDetailEntrance.orderPay
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            popVC()
+        }
     }
     
     private func configTableView(){

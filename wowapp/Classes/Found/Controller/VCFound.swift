@@ -102,7 +102,6 @@ class VCFound: VCBaseVCCategoryFound {
 
 extension VCFound : UITableViewDataSource,UITableViewDelegate,
 FoundWeeklyNewCellDelegate,
-WOWFoundRecommendCellDelegate,
 WOWFoundCategoryCellDelegate
 {
 	
@@ -191,7 +190,6 @@ WOWFoundCategoryCellDelegate
         else if ( section == 1 && row == 0){
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID2 , forIndexPath: indexPath) as! WOWFoundRecommendCell
             
-            cell.delegate = self
             cell.selectionStyle = .None
             
             if let data  = vo_recommend_product {
@@ -225,8 +223,9 @@ WOWFoundCategoryCellDelegate
         if let pid = m.productId as Int? {
             self.toVCProduct(pid)
         }
-
+        
     }
+    
     
     func foundCategorycellTouchInside(m:WOWCategoryModel)
     {
@@ -235,6 +234,8 @@ WOWFoundCategoryCellDelegate
         }
       
      }
-
+    
+ 
 }
+
 

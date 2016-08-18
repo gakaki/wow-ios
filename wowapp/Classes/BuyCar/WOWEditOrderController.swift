@@ -78,6 +78,17 @@ class WOWEditOrderController: WOWBaseViewController {
  
     }
     
+    /**
+     跳转订单详情
+     
+     */
+        func goOrderDetail() {
+        let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
+        vc.orderCode = orderCode
+        navigationController!.pushViewController(vc, animated: true)
+
+    }
+    
     //MARK: - Action
     @IBAction func sureClick(sender: UIButton) {
         chooseStyle()
@@ -184,10 +195,13 @@ class WOWEditOrderController: WOWBaseViewController {
                         strongSelf.requestPayResult()
                     case "cancel":
                         WOWHud.showMsg("支付取消")
-                        
+                        strongSelf.goOrderDetail()
+
                         break
                     default:
                         WOWHud.showMsg("支付失败")
+                        strongSelf.goOrderDetail()
+
                         break
                     }
                 }
@@ -356,7 +370,10 @@ extension WOWEditOrderController: selectPayDelegate {
     }
     
     func canclePay() {
-        
+        if  orderCode.isEmpty {
+            WOWHud.showMsg("订单生成失败")
+        }
+        goOrderDetail()
     }
 
 }

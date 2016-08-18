@@ -3,10 +3,51 @@ import UIKit
 import ObjectMapper
 import SnapKit
 
+import UIKit
+
+class HairlineView: UIView {
+    override func awakeFromNib() {
+        guard let backgroundColor = self.backgroundColor?.CGColor else { return }
+        self.layer.borderColor = backgroundColor
+        self.layer.borderWidth = (1.0 / UIScreen.mainScreen().scale) / 2;
+        self.backgroundColor = UIColor.clearColor()
+    }
+}
+
 class VCTopicHeaderView:UICollectionReusableView{
     
     var imageView: UIImageView!
     
+    var label_name:UILabel      = {
+        let l = UILabel()
+        l.textAlignment = .Left
+//        l.lineBreakMode = .ByWordWrapping
+        l.numberOfLines = 0
+        l.setLineHeightAndLineBreak(1.05)
+        l.font          = UIFont.mediumScaleFontSize(16)
+        return l
+    }()
+    
+    var label_desc:UILabel      = {
+        let l = UILabel()
+        l.textAlignment = .Left
+        l.lineBreakMode = .ByWordWrapping
+        l.numberOfLines = 0
+        l.setLineHeightAndLineBreak(1.25)
+        l.textColor     = UIColor.grayColor()
+        l.font          = UIFont.systemScaleFontSize(14)
+        return l
+    }()
+    
+    
+    var view_line:UIView   = {
+        var l = UIView()
+        l.layer.borderWidth = 0.25
+        l.layer.borderColor = UIColor.grayColor().CGColor
+        return l
+    }()
+   
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -14,11 +55,38 @@ class VCTopicHeaderView:UICollectionReusableView{
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.addSubview(imageView)
         
+        self.addSubview(label_name)
+        self.addSubview(label_desc)
+        self.addSubview(view_line)
+
+        
         imageView.snp_makeConstraints { (make) -> Void in
-            make.size.equalTo(self)
-            make.center.equalTo(self)
+            make.width.equalTo(self)
+            make.height.equalTo(280)
+            make.top.equalTo(self.snp_top)
         }
-        //        self.bringSubviewToFront(imageView)
+        
+        label_name.snp_makeConstraints { (make) -> Void in
+            make.width.equalTo(self.frame.width * 0.9)
+            make.height.equalTo(50)
+            make.left.equalTo(imageView.snp_left).offset(20)
+            make.top.equalTo(imageView.snp_bottom).offset(10)
+        }
+        label_desc.snp_makeConstraints { (make) -> Void in
+            make.width.equalTo( self.frame.width * 0.7 )
+            make.height.equalTo(100)
+            make.centerX.equalTo(self.snp_centerX)
+            make.top.equalTo(label_name.snp_bottom).offset(5)
+        }
+        
+        view_line.snp_makeConstraints { (make) -> Void in
+            make.width.equalTo( self.frame.width * 0.4 )
+            make.height.equalTo(1)
+            make.centerX.equalTo(self.snp_centerX)
+            make.top.equalTo(label_desc.snp_bottom).offset(15)
+        }
+//        
+//                self.bringSubviewToFront(imageView)
 
     } 
     required init?(coder aDecoder: NSCoder) {
@@ -32,9 +100,9 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     var vo_products             = [WOWProductModel]()
     let cell_reuse              = "cell_reuse"
     let cell_header_reuse       = "cell_header_reuse"
-    let header_height           = Float(280)
+    let header_height           = Float(500)
 
-    var topic_id                = 1
+    var topic_id                = 4
     var vo_topic:WOWModelVoTopic?
 
     var cv:UICollectionView!
@@ -45,7 +113,11 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         config_collectionView()
         
     }
-    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+         request()
+        
+    }
     func btnBack(){
         self.navBack()
     }
@@ -149,6 +221,10 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
             
             if let pic = self.vo_topic?.topicImg {
                 headerView.imageView.set_webimage_url(pic )
+                headerView.label_name.text = self.vo_topic?.topicName
+                headerView.label_desc.text = self.vo_topic?.topicDesc
+                headerView.label_name.text = "归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋"
+
             }
             
             reusableView    =  headerView

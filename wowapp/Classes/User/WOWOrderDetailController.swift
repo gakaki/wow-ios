@@ -200,7 +200,9 @@ class WOWOrderDetailController: WOWBaseViewController{
         self.rightButton.hidden       = true
         self.clooseOrderButton.hidden = true
         if let orderNewModel          = orderNewDetailModel {
-            self.priceLabel.text          = "¥"+((orderNewModel.orderAmount)?.toString)!
+            
+            let result = WOWCalPrice.calTotalPrice([orderNewModel.orderAmount ?? 0],counts:[1])
+            self.priceLabel.text          = result
         }
         
     }
@@ -215,7 +217,9 @@ class WOWOrderDetailController: WOWBaseViewController{
             case 0:
                 self.OrderDetailNewaType          = OrderNewType.payMent
                 self.rightButton.setTitle("立即支付", forState: UIControlState.Normal)
-                self.priceLabel.text              = "¥"+((orderNewModel.orderAmount)?.toString)!
+                
+                let result = WOWCalPrice.calTotalPrice([orderNewModel.orderAmount ?? 0],counts:[1])
+                self.priceLabel.text          = result
                 
             case 1,5,6:
                 self.OrderDetailNewaType = OrderNewType.noForGoods
@@ -238,7 +242,9 @@ class WOWOrderDetailController: WOWBaseViewController{
                 self.OrderDetailNewaType          = OrderNewType.forGoods
                 self.clooseOrderButton.hidden     = true
                 self.rightButton.setTitle("确认收货", forState: UIControlState.Normal)
-                self.priceLabel.text              = "¥"+((orderNewModel.orderAmount)?.toString)!
+                let result = WOWCalPrice.calTotalPrice([orderNewModel.orderAmount ?? 0],counts:[1])
+                self.priceLabel.text          = result
+
                 if orderNewModel.packages?.count > 1 {
                      self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
                     isSomeForGoodsType = false
@@ -622,12 +628,15 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailCostCell", forIndexPath: indexPath) as! WOWOrderDetailCostCell
                 if let orderNewDetailModel = orderNewDetailModel {
                     if indexPath.row == 0 {
-                        cell.priceLabel.text       = "¥" + (orderNewDetailModel.deliveryFee)!.toString
+                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.deliveryFee ?? 0],counts:[1])
+
+                        cell.priceLabel.text       = result
                         cell.saidImageView.hidden  = false
                         cell.freightTypeLabel.text = "运费"
                     }
                     if indexPath.row == 1 {
-                        cell.priceLabel.text       = "¥" + (orderNewDetailModel.couponAmount)!.toString
+                         let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
+                        cell.priceLabel.text       = result
                         cell.saidImageView.hidden  = true
                         cell.freightTypeLabel.text = "优惠券"
                     }
@@ -729,12 +738,17 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailCostCell", forIndexPath: indexPath) as! WOWOrderDetailCostCell
                 if let orderNewDetailModel = orderNewDetailModel {
                     if indexPath.row == 0 {
-                        cell.priceLabel.text       = "¥" + (orderNewDetailModel.deliveryFee)!.toString
+                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.deliveryFee ?? 0],counts:[1])
+            
+                        cell.priceLabel.text       = result
+
                         cell.saidImageView.hidden  = false
                         cell.freightTypeLabel.text = "运费"
                     }
                     if indexPath.row == 1 {
-                        cell.priceLabel.text       = "¥" + (orderNewDetailModel.couponAmount)!.toString
+                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
+                        cell.priceLabel.text       = result
+
                         cell.saidImageView.hidden  = true
                         cell.freightTypeLabel.text = "优惠券"
                     }
@@ -784,12 +798,16 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailCostCell", forIndexPath: indexPath) as! WOWOrderDetailCostCell
                 if let orderNewDetailModel = orderNewDetailModel {
                     if indexPath.row == 0 {
-                        cell.priceLabel.text       = "¥" + (orderNewDetailModel.deliveryFee)!.toString
+                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.deliveryFee ?? 0],counts:[1])
+                        cell.priceLabel.text       = result
+
                         cell.saidImageView.hidden  = false
                         cell.freightTypeLabel.text = "运费"
                     }
                     if indexPath.row == 1 {
-                        cell.priceLabel.text       = "¥" + (orderNewDetailModel.couponAmount)!.toString
+                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
+                        cell.priceLabel.text       = result
+
                         cell.saidImageView.hidden  = true
                         cell.freightTypeLabel.text = "优惠券"
                     }

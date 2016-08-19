@@ -11,6 +11,7 @@ import StoreKit
 
 class WOWUserController: WOWBaseTableViewController {
     var headerView      :   WOWUserTopView!
+    var image_next_view: UIImage!
     
     @IBOutlet weak var allOrderView : UIView!
     @IBOutlet weak var noPayView    : UIView!
@@ -139,12 +140,12 @@ class WOWUserController: WOWBaseTableViewController {
     
     private func configUserInfo(){
         if WOWUserManager.loginStatus {
-//            headerView.headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage:UIImage(named: "placeholder_userhead"))
             
-            headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-            
-//            headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_product")
-            
+            if ( self.image_next_view != nil){
+                headerView.headImageView.image =  self.image_next_view 
+            }else{
+                headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+            }
             
             headerView.nameLabel.text = WOWUserManager.userName
             headerView.desLabel.text  = WOWUserManager.userDes
@@ -158,10 +159,23 @@ class WOWUserController: WOWBaseTableViewController {
     private func addObserver(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(changeHeaderImage), name:WOWUpdateUserHeaderImageNotificationKey, object:nil)
+        
     }
     
 //MARK:Actions
+
+    func changeHeaderImage(notification: NSNotification){
+        
+        let userInfo = notification.userInfo
+        if  let image  = userInfo!["image"] as? UIImage {
+            self.headerView.headImageView.image = image
+            self.image_next_view = image
+        }
+
+    }
+    
+    
     func exitLogin() {
         configHeaderView()
     }
@@ -178,10 +192,10 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch (indexPath.section,indexPath.row) {
-        case (1,2): //打电话
+        case (1,1): //打电话
             WOWTool.callPhone()
             return
-        case (1,4): //支持尖叫设计
+        case (1,2): //支持尖叫设计
             evaluateApp()
             return
         case (2,_)://设置
@@ -202,11 +216,11 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
                 let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
                 vc.entrance = couponEntrance.userEntrance
                 navigationController?.pushViewController(vc, animated: true)
-            case 1://邀请好友
-                let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
-                navigationController?.pushViewController(vc, animated: true)
-            case 3: //意见反馈
-                goLeavaTips()
+//            case 1://邀请好友
+//                let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
+//                navigationController?.pushViewController(vc, animated: true)
+//            case 3: //意见反馈
+//                goLeavaTips()
             default:
                 break
             }

@@ -32,8 +32,9 @@ class WOWOrderDetailNewCell: UITableViewCell {
         
         titleImageView.set_webimage_url( orderProductModel.specImg )
 
+        let result = WOWCalPrice.calTotalPrice([orderProductModel.sellPrice ?? 0],counts:[1])
         
-        priceLabel.text = "¥" + (orderProductModel.sellPrice)!.toString
+        priceLabel.text = result
         goodsNumber.text = "X" + (orderProductModel.productQty)!.toString
         contentLabel.text = " " + (orderProductModel.specName ?? " ") + "   "
 

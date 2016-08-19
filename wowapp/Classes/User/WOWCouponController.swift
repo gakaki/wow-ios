@@ -48,11 +48,13 @@ class WOWCouponController: WOWBaseViewController {
             if let ac = action{
                 ac(object: couponModel ?? "")
             }
-
+            super.navBack()
+            return
         default:
+            super.navBack()
             return
         }
-        super.navBack()
+        
 
     }
     override func request(){

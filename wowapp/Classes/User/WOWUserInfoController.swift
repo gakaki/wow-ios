@@ -146,13 +146,12 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
+
             self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
            
             print(WOWUserManager.userHeadImageUrl)
             print(WOWUserManager.userDes)
             print(WOWUserManager.userName)
-            
-
             
             if ( self.headImageView.image  == nil ){
                 self.headImageView.set_webimage_url_user( self.headImageUrl )
@@ -221,10 +220,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 WOWUserManager.userConstellation = strongSelf.star
                 strongSelf.configUserInfo()
                 
-                
-           
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil)
-
                 if let action = strongSelf.editInfoAction{
                     action()
                 }
@@ -448,12 +443,16 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         let key = resp["key"]
                         self.headImageUrl = "http://img.wowdsgn.com/\(key!)"
                         
+                        
+                        
+                        WOWUserManager.userHeadImageUrl = self.headImageUrl
+                        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil,userInfo:["image":image])
+                        
                         self.headImageView.image =  image
                         self.request()
                         
                     }
-                    WOWUserManager.userHeadImageUrl = self.headImageUrl
-                    self.headImageView.image =  image
+                    
                     
                 },
                 option: uploadOption

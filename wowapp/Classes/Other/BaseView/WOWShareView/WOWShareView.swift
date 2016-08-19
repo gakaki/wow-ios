@@ -11,7 +11,6 @@ import UIKit
 enum WOWShareType:String{
     case friends
     case wechat
-    case weibo
 }
 
 typealias ShareViewAction = (shareType:WOWShareType) -> Void
@@ -55,14 +54,14 @@ class WOWShareBackView:UIView{
             }
         }
         
-        v.weiboView.addTapGesture {[weak self](tap) in
-            if let strongSelf = self{
-                if let action = strongSelf.shareActionBack {
-                    action(shareType: WOWShareType.weibo)
-                }
-                strongSelf.dismiss()
-            }
-        }
+//        v.weiboView.addTapGesture {[weak self](tap) in
+//            if let strongSelf = self{
+//                if let action = strongSelf.shareActionBack {
+//                    action(shareType: WOWShareType.weibo)
+//                }
+//                strongSelf.dismiss()
+//            }
+//        }
         return v
     }()
     
@@ -111,7 +110,7 @@ class WOWShareBackView:UIView{
 class WOWShareView: UIView {
     @IBOutlet weak var friendView: UIView!
     @IBOutlet weak var wechatView: UIView!
-    @IBOutlet weak var weiboView: UIView!
+//    @IBOutlet weak var weiboView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

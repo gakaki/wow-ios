@@ -37,7 +37,7 @@
 "shareEdit_title" = "分享至";
 "shareEdit_post" = "发布";
 "shareEdit_change_account" = "切换账号";
-"shareEdit_post_finish" = "发送成功";
+"shareEdit_post_finish" = "分享成功";
 "shareEdit_post_fail" = "发送失败";
 "shareEdit_posting" = "正在发送";
 "shareEdit_delete_picture" = "删除图片";

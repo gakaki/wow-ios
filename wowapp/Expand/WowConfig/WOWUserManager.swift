@@ -158,7 +158,7 @@ struct WOWUserManager {
     }
     static var loginStatus:Bool{
         get{
-            guard !sessionToken.isEmpty else{
+            guard !WOWUserManager.userName.isEmpty else{
                 return false
             }
             return true
@@ -169,7 +169,6 @@ struct WOWUserManager {
     static func saveUserInfo(model:WOWUserModel?){
         MGDefault.setObject(model?.user_nick, forKey:WOWUserName)
         MGDefault.setObject(model?.user_sex, forKey:WOWUserSex)
-        MGDefault.setObject(model?.user_nick, forKey:WOWUserName)
         MGDefault.setObject(model?.user_desc, forKey:WOWUserDes)
         MGDefault.setObject(model?.user_headimage, forKey:WOWUserHeadImage)
         MGDefault.setObject(model?.user_constellation, forKey:WOWUserConstellation)
@@ -180,10 +179,8 @@ struct WOWUserManager {
     }
     
     static func cleanUserInfo(){
-        MGDefault.setObject(nil, forKey:WOWSessionToken)
         MGDefault.setObject(nil, forKey:WOWUserName)
         MGDefault.setObject(nil, forKey:WOWUserSex)
-        MGDefault.setObject(nil, forKey:WOWUserName)
         MGDefault.setObject(nil, forKey:WOWUserDes)
         MGDefault.setObject(nil, forKey:WOWUserHeadImage)
         MGDefault.setObject(nil, forKey:WOWUserConstellation)

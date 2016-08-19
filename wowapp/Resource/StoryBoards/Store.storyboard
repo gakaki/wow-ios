@@ -523,6 +523,7 @@
                                 <state key="normal" image="shareblack"/>
                                 <connections>
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="Gz9-gv-NZd"/>
+                                    <action selector="shareButton:" destination="WaH-lQ-3xj" eventType="touchUpInside" id="tfb-OI-KYg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OgO-gS-w03">

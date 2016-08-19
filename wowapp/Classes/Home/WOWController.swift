@@ -115,7 +115,7 @@ class WOWController: WOWBaseViewController {
 
     }
     func zdClick() -> Void {
-        toVCCategory("16",cname: "家装配饰品")
+        toVCCategory("16",cname: "家装配饰")
 
     }
     func sjClick() -> Void {

@@ -28,7 +28,7 @@ class WOWBrandHeaderView: UICollectionReusableView {
         logoImage.layer.masksToBounds = true
 //        logoImage.kf_setImageWithURL(NSURL(string: model.image), placeholderImage: UIImage(named: "placeholder_product"))
         logoImage.set_webimage_url( model.image)
-
+        
         brandNameLabel.text = model.brandEname ?? ""
         let str = NSMutableAttributedString(string: model.desc ?? "")
         let style = NSMutableParagraphStyle()

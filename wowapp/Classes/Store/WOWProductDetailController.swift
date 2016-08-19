@@ -63,7 +63,6 @@ class WOWProductDetailController: WOWBaseViewController {
         v.currentDotColor = UIColor.blackColor()
         v.otherDotColor   = UIColor.whiteColor()
         v.timeInterval = 3
-        v.autoScroll = false
         return v
     }()
 
@@ -86,7 +85,7 @@ class WOWProductDetailController: WOWBaseViewController {
     private func configData(){
         cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
         cycleView.delegate = self
-        placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImg ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+        placeImageView.kf_setImageWithURL(NSURL(string:productModel?.primaryImgs![0] ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
             if let strongSelf = self{
                 strongSelf.shareProductImage = image
             }
@@ -134,8 +133,8 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:分享
     @IBAction func shareClick(sender: UIButton) {
-//        let shareUrl = "http://www.wowdsgn.com/\(productModel?.skuID ?? "").html"
-//        WOWShareManager.share(productModel?.productName, shareText: productModel?.productDes, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        let shareUrl = "m.wowdsgn.com/item/\(productModel?.productId ?? 0)"
+        WOWShareManager.share(productModel?.productName, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
     //MARK:喜欢
@@ -283,7 +282,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
     //分享
     func sharClick() {
         backView.hideBuyView()
-        let shareUrl = " "
+        let shareUrl = "m.wowdsgn.com/item/\(productModel?.productId ?? 0)"
         WOWShareManager.share(productModel?.productName, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
 
     }

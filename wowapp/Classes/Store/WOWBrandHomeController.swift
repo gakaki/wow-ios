@@ -27,6 +27,10 @@ class WOWBrandHomeController: WOWBaseViewController {
     var entrance = brandOrDesignerEntrance.brandEntrance
     
     private var shareBrandImage:UIImage? //供分享使用
+    lazy var placeImageView:UIImageView={  //供分享使用
+        let image = UIImageView()
+        return image
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -58,7 +62,22 @@ class WOWBrandHomeController: WOWBaseViewController {
         collectionView.registerNib(UINib.nibName(String(WOWBrandHeaderView)), forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
-
+    private func configBrandData(){
+       
+        placeImageView.kf_setImageWithURL(NSURL(string:(brandModel?.image)!), placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+            if let strongSelf = self{
+                strongSelf.shareBrandImage = image
+            }
+        }
+    }
+    private func configDesignerData(){
+        
+        placeImageView.kf_setImageWithURL(NSURL(string:(designerModel?.designerPhoto)!), placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+            if let strongSelf = self{
+                strongSelf.shareBrandImage = image
+            }
+        }
+    }
     
 //MARK:Actions
     @IBAction func back(sender: UIButton) {
@@ -79,6 +98,20 @@ class WOWBrandHomeController: WOWBaseViewController {
         case .designerEntrance:
             
             requestFavoriteDesigner()
+            
+        }
+
+    }
+    @IBAction func shareButton(sender: UIButton) {
+        switch entrance {
+        case .brandEntrance:
+            
+            let shareUrl = "m.wowdsgn.com/brand/\(brandID ?? 0)"
+            WOWShareManager.share(brandModel?.brandEname, shareText: brandModel?.desc, url:shareUrl,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
+        case .designerEntrance:
+            
+            let shareUrl = "m.wowdsgn.com/designer/\(designerId ?? 0)"
+            WOWShareManager.share(designerModel?.designerName, shareText: designerModel?.designerDesc, url:shareUrl,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
             
         }
 
@@ -114,6 +147,7 @@ class WOWBrandHomeController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.brandModel = Mapper<WOWBrandV1Model>().map(result)
                 strongSelf.collectionView.reloadData()
+                strongSelf.configBrandData()
                 strongSelf.endRefresh()
             }
         }) {[weak self](errorMsg) in
@@ -144,6 +178,7 @@ class WOWBrandHomeController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.designerModel = Mapper<WOWDesignerModel>().map(result)
                 strongSelf.collectionView.reloadData()
+                strongSelf.configDesignerData()
                 strongSelf.endRefresh()
             }
         }) {[weak self](errorMsg) in

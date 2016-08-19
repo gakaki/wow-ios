@@ -27,7 +27,7 @@ class WOWLoginController: WOWBaseViewController {
 
     
 //MARK:Lazy
-    
+//                
     
 //MARK:Private Method
     override func setUI() {
@@ -38,11 +38,17 @@ class WOWLoginController: WOWBaseViewController {
     private func configNavItem(){
         makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
-                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+//                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                strongSelf.dismissViewControllerAnimated(true, completion: {
+                       UIApplication.currentViewController()?.navigationController?.popToRootViewControllerAnimated(true)
+                })
+
                 if WOWTool.lastTabIndex == 1 {
                     WOWTool.lastTabIndex = 0
                 }
                 UIApplication.appTabBarController.selectedIndex = WOWTool.lastTabIndex
+                
+                
             }
         }
     }

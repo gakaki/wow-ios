@@ -34,9 +34,9 @@ class WOWCommentCell: UITableViewCell {
     }
     
     func showData(model:WOWCommentListModel) {
-        self.headImageView.kf_setImageWithURL(NSURL(string: model.user_headimage ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+//        self.headImageView.kf_setImageWithURL(NSURL(string: model.user_headimage ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
         
-//        self.headImageView.set_webimage_url_user( model.user_headimage! )
+        self.headImageView.set_webimage_url_user( model.user_headimage! )
 
         dateLabel.text = model.created_at
         commentLabel.text = model.comment

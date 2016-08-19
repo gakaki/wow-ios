@@ -234,7 +234,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(result)
                 if let addressInfo = strongSelf.addressInfo {
-                    print((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
+                    DLog((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
                     strongSelf.addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "")
                     let section = NSIndexSet(index: 1)
                     strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
@@ -366,7 +366,7 @@ func json_serialize( dict:[String:AnyObject]) -> String {
          str                = NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
 
     } catch let error as NSError {
-        print(error)
+        DLog(error)
     }
     
     return str
@@ -404,10 +404,10 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         
         Alamofire.request(.POST,qiniu_token_url, parameters: params_qiniu)
         .response { request, response, data, error in
-                print(request)
-                print(response)
-                print(data)
-                print(error)
+                DLog(request)
+                DLog(response)
+                DLog(data)
+                DLog(error)
             
             self.headImageView.image =  image
 
@@ -440,7 +440,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         print(info,key,resp)
                         let key = resp["key"]
                         self.headImageUrl = "http://img.wowdsgn.com/\(key!)"
-                        print(self.headImageUrl)
+                        DLog(self.headImageUrl)
                         self.request()
                     }
                     WOWUserManager.userHeadImageUrl = self.headImageUrl

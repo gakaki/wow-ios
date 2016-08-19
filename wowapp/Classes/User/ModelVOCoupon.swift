@@ -32,6 +32,8 @@ class WOWCouponModel: WOWBaseModel,Mappable {
     var expired: Bool = false
     var return_str: String?
     var used: Bool = false
+    var canUsed: Bool?
+    var isSelect: Bool = false
     
     required init?(_ map: Map) {
         
@@ -52,6 +54,7 @@ class WOWCouponModel: WOWBaseModel,Mappable {
         expired                 <- map["expired"]
         return_str              <- map["return"]
         used                    <- map["used"]
+        canUsed                 <- map["canUsed"]
     }
 }
 

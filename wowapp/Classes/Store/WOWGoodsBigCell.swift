@@ -52,6 +52,7 @@ class WOWGoodsBigCell: UICollectionViewCell {
         
         titleLabel.text = model.productName
         desLabel.text   = model.sellingPoint
-        priceLabel.text  = String(format: "%.2f",model.sellPrice ?? 0)
+        let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
+        priceLabel.text  = result
     }
 }

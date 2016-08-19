@@ -33,7 +33,7 @@ struct WOWCalPrice {
     
     static func calTotalPrice(prices:[Double],counts:[Int]) ->String{
         if prices.isEmpty {
-            return "0.00"
+            return "¥ 0.00"
         }
         var totalPrice = NSDecimalNumber(double:0.00)
         for (index,value) in prices.enumerate() {
@@ -47,7 +47,8 @@ struct WOWCalPrice {
         numberFormat.minimumFractionDigits = 2
         numberFormat.maximumFractionDigits = 2
         var result = numberFormat.stringFromNumber(totalPrice)
-        result = result ?? "0.00"
+        result = "¥ " + (result ?? "0.00")
+        
         return result!
     }
 }
@@ -69,7 +70,7 @@ func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
                 return string as String
             }
         }catch {
-            print("error")
+            DLog("error")
             
         }
     }

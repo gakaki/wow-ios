@@ -34,7 +34,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 })
                 let result = WOWCalPrice.calTotalPrice(prices,counts:counts)
                 totalPrice = result
-                totalPriceLabel.text = "¥ " + result
+                totalPriceLabel.text = result
             if selectedArr.count == dataArr.count {
                 allButton.selected = true
             }else{

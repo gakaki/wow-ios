@@ -18,6 +18,9 @@
                     <state key="normal" title="不使用优惠券">
                         <color key="titleColor" red="0.01176470588" green="0.01176470588" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="noUserClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dda-no-FZ7"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -107,7 +107,6 @@ class WOWGuideController: WOWBaseViewController {
     }
     
     func buttonAction(sender: UIButton!) {
-        print("Button ")
     }
     
     
@@ -202,7 +201,6 @@ class WOWGuideController: WOWBaseViewController {
     }
 //MARK:Private pageController
     func didPage() {
-        print(self.pageControl.currentPage)
         let frame = self.view.bounds
         let index = self.pageControl.currentPage
         let scrollPoint = CGPointMake(frame.size.width * CGFloat(index), 0)

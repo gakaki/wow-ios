@@ -100,7 +100,7 @@ public enum RequestApi{
     
     case Api_LikeDesigner
     
-    case Api_Coupons( currentPage:Int,pageSize:Int )  //用户优惠券列表
+    case Api_Coupons(params: [String: AnyObject]? )  //用户优惠券列表
 
     
     case Api_Invite //邀请好友
@@ -489,8 +489,8 @@ extension RequestApi:TargetType{
                     break
             
 //            优惠券
-            case let .Api_Coupons(currentPage,pageSize):
-                params =  ["currentPage":currentPage,"pageSize":pageSize]
+            case let .Api_Coupons(param):
+                params =  param
 //            专题
             case let .Api_Topics(topicId):
                 params =  ["topicId":topicId]
@@ -502,7 +502,7 @@ extension RequestApi:TargetType{
                 params =  nil
 
         }
-        print(WOWUserManager.sessionToken)
+        DLog(WOWUserManager.sessionToken)
         if WOWUserManager.sessionToken.isEmpty {
             params =   ["paramJson":JSONStringify(params ?? ""),"channel":"2"]
         }else {

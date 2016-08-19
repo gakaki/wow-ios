@@ -14,6 +14,8 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
     var totalAmount                         : Double?
     var productTotalAmount                   : Double?
     var orderSettles                         : [WOWCarProductModel]?
+    var endUserCouponId                      : Int?
+    var deduction                            : Double?
     
     required init?(_ map: Map) {
         
@@ -24,6 +26,8 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
         totalAmount                         <- map["totalAmount"]
         orderSettles                         <- map["orderSettles"]
         productTotalAmount                   <- map["productTotalAmount"]
+        endUserCouponId                     <- map["endUserCouponId"]
+        deduction                           <- map["deduction"]
         
     }
     

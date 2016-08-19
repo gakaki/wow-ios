@@ -61,11 +61,14 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             let cell =  tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailPriceCell), forIndexPath: indexPath) as! WOWProductDetailPriceCell
             cell.nameLabel.text = productModel?.productName ?? ""
             if let price = productModel?.sellPrice {
-                cell.actualPriceLabel.text = String(format: "%.2f",price).priceFormat()
+                let result = WOWCalPrice.calTotalPrice([price],counts:[1])
+                cell.actualPriceLabel.text = result
                 if let originalPrice = productModel?.original_price {
                     if originalPrice > price{
                         //显示下划线
-                        let attrString = NSAttributedString(string: String(format: "%.2f",originalPrice).priceFormat(), attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
+                        let result = WOWCalPrice.calTotalPrice([originalPrice],counts:[1])
+
+                        let attrString = NSAttributedString(string: result, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
                         cell.originalPriceLabel.attributedText = attrString
                     }
                 }
@@ -207,6 +210,10 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     //选择规格
     func chooseSpec() {
+        guard WOWUserManager.loginStatus else {
+            toLoginVC(true)
+            return
+        }
         chooseStyle(carEntrance.SpecEntrance)
     }
 }

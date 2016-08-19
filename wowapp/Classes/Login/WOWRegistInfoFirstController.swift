@@ -87,7 +87,6 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)
-                print(result)
                 //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯
                 WOWUserManager.userName = strongSelf.nickTextField.text!
 //                WOWUserManager.userHeadImageUrl = strongSelf.userInfoFromWechat.icon

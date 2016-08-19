@@ -114,7 +114,7 @@ class WOWOrderDetailController: WOWBaseViewController{
 //            if let strongSelf = self{
 
                 WOWTool.callPhone()
-                print("你点击了客服")
+                DLog("你点击了客服")
 //            }
         }
     }
@@ -838,12 +838,10 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             switch indexPath.row {
             case 0:
                 
-                print("支付宝")
                  self.surePayType = PayType.payAli
 
             case 1:
                 
-                print("微信")
                 self.surePayType = PayType.payWiXin
                 
             default:

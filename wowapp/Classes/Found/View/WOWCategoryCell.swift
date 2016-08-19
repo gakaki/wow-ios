@@ -32,7 +32,8 @@ class WOWCategoryCell: UICollectionViewCell {
         style.lineBreakMode = .ByTruncatingTail
         str.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
         desLabel.attributedText = str
-        priceLabel.text     = String(format: "¥ %.2f", model.sellPrice ?? 0) //千万不用格式化了
+        let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
+        priceLabel.text     = result //千万不用格式化了
         
     }
 }

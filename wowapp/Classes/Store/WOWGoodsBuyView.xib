@@ -223,9 +223,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgg-DS-lz6">
-                            <rect key="frame" x="330" y="15" width="50" height="40"/>
+                            <rect key="frame" x="320" y="15" width="60" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="7kl-RE-DDV"/>
+                                <constraint firstAttribute="width" constant="60" id="7kl-RE-DDV"/>
                                 <constraint firstAttribute="height" constant="40" id="FMV-Y0-wDJ"/>
                             </constraints>
                             <state key="normal" image="close"/>

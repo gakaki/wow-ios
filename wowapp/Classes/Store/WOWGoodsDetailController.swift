@@ -154,7 +154,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
     }
     
     private func configData(){
-        priceLabel.text = String(format: "¥ %.2f",productModel?.sellPrice ?? 0)
+        let result = WOWCalPrice.calTotalPrice([productModel?.sellPrice ?? 0],counts:[1])
+        priceLabel.text = result
         cycleView.imageURLArray = [productModel?.productImg ?? ""]
         placeImageView.kf_setImageWithURL(NSURL(string:productModel?.productImg ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
             if let strongSelf = self{

@@ -6,26 +6,21 @@ class WOWFoundProductModel: WOWBaseModel,Mappable{
     var productName             :   String?
     var productImg              :   String?
     
-    var sellPrice               :   Int?
-    var originalPrice           :   Int?
+    var sellPrice               :   Double?
+    var originalPrice           :   Double?
 
     var detailDescription       :   String?
     var pageModuleType          :   Int?
 
     
     func get_formted_sell_price() -> String {
-        if let p = sellPrice{
-            return "¥\(Int(p))"
-        }else{
-            return "¥ 0"
-        }
+        return WOWCalPrice.calTotalPrice([sellPrice ?? 0],counts:[1])
+        
     }
     func get_formted_original_price() -> String {
-        if let p = originalPrice{
-            return "¥\(Int(p))"
-        }else{
-            return "¥ 0"
-        }
+
+        return WOWCalPrice.calTotalPrice([originalPrice ?? 0],counts:[1])
+
     }
     
     

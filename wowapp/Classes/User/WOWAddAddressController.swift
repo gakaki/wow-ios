@@ -99,9 +99,24 @@ class WOWAddAddressController: WOWBaseTableViewController {
                 strongSelf.saveAddress()
             }
         }
-        loadJson()
-        configPicker()
-            }
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//
+//            self.loadJson()
+//            
+//            dispatch_async(dispatch_get_main_queue(), {
+//
+//             self.configPicker()
+//            })
+//        })
+        weak var weakSelf = self
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            weakSelf!.loadJson()
+            
+        }
+
+        self.configPicker()
+    }
     
     private func configEditData(){
 //        if let model = addressInfo{

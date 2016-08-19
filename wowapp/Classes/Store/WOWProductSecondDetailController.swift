@@ -13,6 +13,8 @@ class WOWProductSecondDetailController: WOWBaseViewController {
     var dataArray : Array<WOWProductPicTextModel> = []
     var productModel:WOWProductModel!
 
+    var imageArray: Array<String> = []
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -25,7 +27,7 @@ class WOWProductSecondDetailController: WOWBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewDidLoad() {
@@ -57,6 +59,39 @@ class WOWProductSecondDetailController: WOWBaseViewController {
         headView.size = CGSize(width: MGScreenWidth, height: 88 + headView.productDescLabel.getEstimatedHeight())
         tableView.tableHeaderView = headView
     }
+    
+    func setPhoto() -> [PhotoModel] {
+        var photos: [PhotoModel] = []
+        
+        for  aa:WOWProductPicTextModel in self.dataArray{
+
+            if let imgStr = aa.image{
+
+                let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)
+                photos.append(photoModel)
+            }
+        }
+
+        
+        return photos
+    }
+
+    func lookBigImg(beginPage:Int)  {
+        dispatch_async(dispatch_get_main_queue()) {
+        let photoBrowser = PhotoBrowser(photoModels:self.setPhoto()) {[weak self] (extraBtn) in
+                if let sSelf = self {
+                    let hud = SimpleHUD(frame:CGRect(x: 0.0, y: (sSelf.view.zj_height - 80)*0.5, width: sSelf.view.zj_width, height: 80.0))
+                    sSelf.view.addSubview(hud)
+                }
+                
+            }
+            // 指定代理
+            photoBrowser.delegate = self
+            photoBrowser.show(inVc: self, beginPage: beginPage)
+
+        }
+
+    }
     //MARK:Private Network
     override func request() {
         super.request()
@@ -76,6 +111,12 @@ class WOWProductSecondDetailController: WOWBaseViewController {
         }
     }
 
+    func viewTap(sender:UITapGestureRecognizer) {
+
+        self.lookBigImg((sender.view?.tag)!)
+        
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -93,9 +134,16 @@ extension WOWProductSecondDetailController:UITableViewDelegate,UITableViewDataSo
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailCell), forIndexPath: indexPath) as! WOWProductDetailCell
         let model = dataArray[indexPath.row]
-//        cell.productImg.kf_setImageWithURL(NSURL(string: model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+
         cell.productImg.set_webimage_url( model.image! )
         cell.imgDescLabel.text = model.text ?? ""
+
+        let gesture = UITapGestureRecognizer(target: self, action:#selector(viewTap(_:)))
+        
+        cell.productImg.addGestureRecognizer(gesture)
+        cell.productImg.userInteractionEnabled = true
+        cell.productImg.tag = indexPath.row
+        
         return cell
     }
    
@@ -103,6 +151,14 @@ extension WOWProductSecondDetailController:UITableViewDelegate,UITableViewDataSo
 
 
 }
+extension WOWProductSecondDetailController:PhotoBrowserDelegate{
 
+    func photoBrowerWillDisplay(beginPage: Int){
+         self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    func photoBrowserWillEndDisplay(endPage: Int){
 
-
+         self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+}

@@ -26,6 +26,8 @@ class WOWEditOrderController: WOWBaseViewController {
     var totalPrice                      : String?
     var addressInfo                     :WOWAddressListModel?
     var orderCode                       = String()
+    var couponModel                     :WOWCouponModel?
+    
     private var tipsTextField           : UITextField!
 
     override func viewDidLoad() {
@@ -132,6 +134,10 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
+                let coupon = WOWCouponModel.init()
+                coupon.id = strongSelf.orderSettle?.endUserCouponId
+                coupon.deduction = strongSelf.orderSettle?.deduction
+                strongSelf.couponModel = coupon
                 let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
 
                 strongSelf.totalPriceLabel.text = result
@@ -149,6 +155,10 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
+                let coupon = WOWCouponModel.init()
+                coupon.id = strongSelf.orderSettle?.endUserCouponId
+                coupon.deduction = strongSelf.orderSettle?.deduction
+                strongSelf.couponModel = coupon
                 let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
                 strongSelf.totalPriceLabel.text = result
                 strongSelf.tableView.reloadData()
@@ -162,10 +172,10 @@ class WOWEditOrderController: WOWBaseViewController {
     //请求创建订单
     func requestOrderCreat() -> Void {
         var params = [String: AnyObject]?()
-        if let endUserCouponId = orderSettle?.endUserCouponId {
-            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+        if let endUserCouponId = couponModel?.id {
+            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount) ?? 0, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
         }else {
-            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? ""]
+            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount) ?? 0, "remark": tipsTextField.text ?? ""]
         }
         
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
@@ -181,10 +191,10 @@ class WOWEditOrderController: WOWBaseViewController {
     //立即支付创建订单
     func requestBuyNowOrderCreat() -> Void {
         var params = [String: AnyObject]?()
-        if let endUserCouponId = orderSettle?.endUserCouponId {
-            params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": self.totalPriceLabel.text ?? "0", "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+        if let endUserCouponId = couponModel?.id {
+            params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount) ?? 0, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
         }else {
-            params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": self.totalPriceLabel.text ?? "0", "remark": tipsTextField.text ?? ""]
+            params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount) ?? 0, "remark": tipsTextField.text ?? ""]
         }
         
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
@@ -323,8 +333,39 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         case (2, 1):
             let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
             vc.entrance = couponEntrance.orderEntrance
-            vc.couponId = orderSettle?.endUserCouponId
+            vc.couponModel = couponModel
             vc.minAmountLimit = orderSettle?.productTotalAmount
+            //从优惠券返回的时候要重新更新减得金额
+            vc.action = {[weak self] (model:AnyObject) in
+                if let strongSelf = self {
+                    let couponInfo: WOWCouponModel? = model as? WOWCouponModel
+                    
+                    if couponInfo?.id != strongSelf.couponModel?.id {
+                        strongSelf.couponModel = model as? WOWCouponModel
+                        
+                        strongSelf.orderSettle?.deduction = strongSelf.couponModel?.deduction
+                        
+                        let section = NSIndexSet(index: 2)
+                        strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
+                        
+                        //重新计算总金额
+                        let productTotal = NSDecimalNumber(double: strongSelf.orderSettle?.productTotalAmount ?? 0)
+                        let delivery = NSDecimalNumber(double: strongSelf.orderSettle?.deliveryFee ?? 0)
+                        let deduction = NSDecimalNumber(double: couponInfo?.deduction ?? 0)
+                        
+                        strongSelf.orderSettle?.totalAmount = (productTotal.decimalNumberByAdding(delivery).decimalNumberBySubtracting(deduction)).doubleValue
+                        
+                        let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
+                        strongSelf.totalPriceLabel.text = result
+
+              
+                    }
+                    
+                }
+                
+                
+                
+            }
             navigationController?.pushViewController(vc, animated: true)
 
         default:

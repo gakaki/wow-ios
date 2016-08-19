@@ -132,7 +132,9 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
-                strongSelf.totalPriceLabel.text = String(format:"%.2f",(strongSelf.orderSettle?.totalAmount) ?? 0)
+                let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
+
+                strongSelf.totalPriceLabel.text = result
                 strongSelf.tableView.reloadData()
             }
             
@@ -147,7 +149,8 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
-                strongSelf.totalPriceLabel.text = String(format:"%.2f",(strongSelf.orderSettle?.totalAmount) ?? 0)
+                let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
+                strongSelf.totalPriceLabel.text = result
                 strongSelf.tableView.reloadData()
             }
             
@@ -159,7 +162,12 @@ class WOWEditOrderController: WOWBaseViewController {
     //请求创建订单
     func requestOrderCreat() -> Void {
         var params = [String: AnyObject]?()
-        params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? ""]
+        if let endUserCouponId = orderSettle?.endUserCouponId {
+            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+        }else {
+            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount)!, "remark": tipsTextField.text ?? ""]
+        }
+        
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
@@ -172,9 +180,13 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //立即支付创建订单
     func requestBuyNowOrderCreat() -> Void {
-        
         var params = [String: AnyObject]?()
-        params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": self.totalPriceLabel.text ?? "0", "remark": tipsTextField.text ?? ""]
+        if let endUserCouponId = orderSettle?.endUserCouponId {
+            params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": self.totalPriceLabel.text ?? "0", "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+        }else {
+            params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": self.totalPriceLabel.text ?? "0", "remark": tipsTextField.text ?? ""]
+        }
+        
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
@@ -220,7 +232,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                 vc.payMethod = paymentChannelName ?? ""
                 vc.orderid = orderCode ?? ""
-                vc.totalPrice = String(format: "%.2f",payAmount ?? 0)
+                let result = WOWCalPrice.calTotalPrice([payAmount ?? 0],counts:[1])
+                vc.totalPrice = result
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
             
@@ -268,7 +281,8 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWOrderFreightCell), forIndexPath: indexPath) as! WOWOrderFreightCell
             if indexPath.row == 0 {
                 cell.leftLabel.text = "运费"
-                cell.freightPriceLabel.text = String(format:"%.2f",(self.orderSettle?.deliveryFee) ?? 0)
+                let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0],counts:[1])
+                cell.freightPriceLabel.text = result
                 cell.couponLabel.hidden = true
                 cell.nextImage.hidden = true
                 cell.freightPriceLabel.hidden = false
@@ -281,7 +295,8 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 cell.nextImage.hidden = false
                 cell.couponLabel.hidden = false
                 cell.lineView.hidden = true
-                cell.couponLabel.text = String(format:"-¥ %.0f",(self.orderSettle?.deliveryFee) ?? 0)
+                let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deduction ?? 0],counts:[1])
+                cell.couponLabel.text = "-" + result
             }
             returnCell = cell
         case 3: //订单备注
@@ -308,6 +323,8 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         case (2, 1):
             let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
             vc.entrance = couponEntrance.orderEntrance
+            vc.couponId = orderSettle?.endUserCouponId
+            vc.minAmountLimit = orderSettle?.productTotalAmount
             navigationController?.pushViewController(vc, animated: true)
 
         default:

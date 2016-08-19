@@ -121,7 +121,6 @@ let URL_OrderCharge             = "pay/charge"             //获取支付交易�
 let URL_OrderDetail              = "order/getDetail"           //订单详情
 
 
-
 let URL_PayResult               = "pay/payResult"          //查询支付结果
 
 let URL_OrderConfirm            = "order/confirm"           //确认收货

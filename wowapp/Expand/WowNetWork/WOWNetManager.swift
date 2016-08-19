@@ -57,7 +57,7 @@ class WOWNetManager {
                     
                     
                     if let str = info as? String {
-                        print(str)
+                        DLog(str)
                     }
                     else {
                         // obj is not a String

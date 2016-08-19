@@ -110,7 +110,6 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
                 
                 if strongSelf.isPresent{
                     strongSelf.dismissViewControllerAnimated(true, completion: nil)
-                    print("gerenzhongxin")
                     UIApplication.appTabBarController.selectedIndex = 0
                 }else {
                     //进入首页
@@ -161,7 +160,6 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     
     func cancel() {
-      print("取消")
         self.backGroundMaskView.hidden = true
         UIView.animateWithDuration(0.3){
             self.pickerContainerView.mj_y = MGScreenHeight
@@ -175,7 +173,6 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params ), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)
-                print(result)
                 //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯
                 WOWUserManager.userSex = strongSelf.sex
                 WOWUserManager.userConstellation = strongSelf.starRow

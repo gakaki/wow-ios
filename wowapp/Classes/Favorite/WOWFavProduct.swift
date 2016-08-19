@@ -94,7 +94,7 @@ class WOWFavProduct: WOWBaseViewController {
     
     //MARK:Action
     func goStore() -> Void {
-        print("去逛逛")
+        DLog("去逛逛")
     }
     
     //MARK:Network

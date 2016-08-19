@@ -184,7 +184,6 @@ extension WOWOrderController:OrderCellDelegate{
         case .ShowTrans:
             DLog("查看物流")
         case .SureReceive:
-            print("确认收货")
             confirmReceive(model.orderCode ?? "",cell: cell)
         }
     }

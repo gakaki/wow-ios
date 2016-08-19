@@ -11,6 +11,7 @@ import StoreKit
 
 class WOWUserController: WOWBaseTableViewController {
     var headerView      :   WOWUserTopView!
+    var image_next_view: UIImage!
     
     @IBOutlet weak var allOrderView : UIView!
     @IBOutlet weak var noPayView    : UIView!
@@ -140,7 +141,11 @@ class WOWUserController: WOWBaseTableViewController {
     private func configUserInfo(){
         if WOWUserManager.loginStatus {
             
-            headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+            if ( self.image_next_view != nil){
+                headerView.headImageView.image =  self.image_next_view 
+            }else{
+                headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+            }
             
             headerView.nameLabel.text = WOWUserManager.userName
             headerView.desLabel.text  = WOWUserManager.userDes
@@ -155,13 +160,22 @@ class WOWUserController: WOWBaseTableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(changeHeaderImage), name:WOWUpdateUserHeaderImageNotificationKey, object:nil)
-
+        
     }
     
 //MARK:Actions
-    func changeHeaderImage(){
-        configHeaderView()
+
+    func changeHeaderImage(notification: NSNotification){
+        
+        let userInfo = notification.userInfo
+        if  let image  = userInfo!["image"] as? UIImage {
+            self.headerView.headImageView.image = image
+            self.image_next_view = image
+        }
+
     }
+    
+    
     func exitLogin() {
         configHeaderView()
     }

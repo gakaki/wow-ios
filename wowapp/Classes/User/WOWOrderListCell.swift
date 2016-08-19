@@ -164,7 +164,7 @@ extension WOWOrderListCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
 //        let model = dataArr[indexPath.row]
-        print((modelNew?.productSpecImgs[indexPath.row])!)
+        DLog((modelNew?.productSpecImgs[indexPath.row])!)
 //        cell.pictureImageView.kf_setImageWithURL(NSURL(string: (modelNew?.productSpecImgs[indexPath.row])!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
         cell.pictureImageView.set_webimage_url(modelNew?.productSpecImgs[indexPath.row])

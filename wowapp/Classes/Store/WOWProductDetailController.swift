@@ -123,11 +123,19 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:立即购买
     @IBAction func buyClick(sender: UIButton) {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
         chooseStyle(carEntrance.PayEntrance)
     }
     
     //MARK:放入购物车
     @IBAction func addCarClick(sender: UIButton) {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
         chooseStyle(carEntrance.AddEntrance)
     }
     
@@ -159,7 +167,9 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWBuyCarMananger.sharedBuyCar.isFavorite       = likeButton.selected
         if let product = productModel {
             WOWBuyCarMananger.sharedBuyCar.defaultImg = product.primaryImgs![0]
-            WOWBuyCarMananger.sharedBuyCar.defaultPrice = String(format: "%.2f",(product.sellPrice) ?? 0)
+            let result = WOWCalPrice.calTotalPrice([product.sellPrice ?? 0],counts:[1])
+
+            WOWBuyCarMananger.sharedBuyCar.defaultPrice = result
 
         }
         view.addSubview(backView)
@@ -202,7 +212,7 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_ProductSpec(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(result)
-                print(strongSelf.productSpecModel)
+                DLog(strongSelf.productSpecModel)
                 
             }
         }) {(errorMsg) in
@@ -251,13 +261,11 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         sv.productQty = product?.productQty
         navigationController?.pushViewController(sv, animated: true)
 
-        print("确定购买")
     }
     //确定加车
     func sureAddCarClick(product: WOWProductInfoModel?) {
         backView.hideBuyView()
         if let product = product {
-            print(product.weight, product.sizeText, product.subProductId, product.sellPrice)
             
             WOWNetManager.sharedManager.requestWithTarget(.Api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: { (result) in
 

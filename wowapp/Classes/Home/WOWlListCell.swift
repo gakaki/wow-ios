@@ -30,7 +30,7 @@ class WOWlListCell: UITableViewCell {
     
     func showData(model:WOWCarouselBanners) {
         let url = model.bannerImgSrc ?? ""
-      print(url)
+      DLog(url)
 //        bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
         bigImageView.set_webimage_url(url);
 //        bigImageView

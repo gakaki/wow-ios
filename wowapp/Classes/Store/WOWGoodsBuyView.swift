@@ -649,7 +649,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 for product in color_SpecArr {
                     if product.specName == self.specArr[self.specIndex].specName {
                         self.productInfo = product.subProductInfo
-                        perPriceLabel.text = String(format: "%.2f",(self.productInfo?.sellPrice) ?? 0).priceFormat()
+                        let result = WOWCalPrice.calTotalPrice([self.productInfo?.sellPrice ?? 0],counts:[1])
+                        perPriceLabel.text = result
                         
                         //如果产品有库存的话就显示1.如果没有库存的话就显示0
                         if self.productInfo?.hasStock ?? false {

@@ -89,6 +89,8 @@ class WOWInfoTextController: WOWBaseTableViewController {
                 case .JobEntrance:
                 WOWUserManager.userIndustry = info
                 }
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+
                 strongSelf.popVC()
             
                 

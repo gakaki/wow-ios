@@ -145,11 +145,11 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
-//            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
             
 //            self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
             
-             self.headImageView.kf_setImageWithURL(NSURL(string: WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
+//             self.headImageView.kf_setImageWithURL(NSURL(string: WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
             
             
             self.ageTextField.userInteractionEnabled = false
@@ -214,7 +214,9 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 WOWUserManager.userAgeRange = strongSelf.age
                 WOWUserManager.userConstellation = strongSelf.star
                 strongSelf.configUserInfo()
-           
+                
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+                
                 if let action = strongSelf.editInfoAction{
                     action()
                 }
@@ -441,6 +443,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         print(self.headImageUrl)
                         self.request()
                     }
+                    WOWUserManager.userHeadImageUrl = self.headImageUrl
                     self.headImageView.image =  image
 
                 },

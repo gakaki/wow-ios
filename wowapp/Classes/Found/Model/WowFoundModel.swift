@@ -15,14 +15,14 @@ class WOWFoundProductModel: WOWBaseModel,Mappable{
     
     func get_formted_sell_price() -> String {
         if let p = sellPrice{
-            return "¥\(Int(p))"
+            return String(format: "¥%.2f",p ?? 0)
         }else{
             return "¥ 0"
         }
     }
     func get_formted_original_price() -> String {
         if let p = originalPrice{
-            return "¥\(Int(p))"
+            return String(format: "¥%.2f",p ?? 0)
         }else{
             return "¥ 0"
         }

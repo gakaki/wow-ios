@@ -146,6 +146,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
             self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+           
+            print(WOWUserManager.userHeadImageUrl)
+            print(WOWUserManager.userDes)
+            print(WOWUserManager.userName)
             
 //            self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
             

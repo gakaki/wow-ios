@@ -80,7 +80,9 @@ class WOWOrderListCell: UITableViewCell {
         statusLabel.text = m.orderStatusName
         orderIdLabel.text = m.orderCode
         goodsCountLabel.text = "共"+(m.totalProductQty?.toString)!+"件"
-        totalPriceLabel.text = "¥ "+(m.orderAmount?.toString)!
+        let result = WOWCalPrice.calTotalPrice([m.orderAmount ?? 0],counts:[1])
+        
+        totalPriceLabel.text = result
         rightViseButton.hidden = true
         collectionView.reloadData()
     }

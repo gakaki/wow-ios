@@ -178,10 +178,10 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch (indexPath.section,indexPath.row) {
-        case (1,2): //打电话
+        case (1,1): //打电话
             WOWTool.callPhone()
             return
-        case (1,4): //支持尖叫设计
+        case (1,2): //支持尖叫设计
             evaluateApp()
             return
         case (2,_)://设置
@@ -202,11 +202,11 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
                 let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
                 vc.entrance = couponEntrance.userEntrance
                 navigationController?.pushViewController(vc, animated: true)
-            case 1://邀请好友
-                let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
-                navigationController?.pushViewController(vc, animated: true)
-            case 3: //意见反馈
-                goLeavaTips()
+//            case 1://邀请好友
+//                let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
+//                navigationController?.pushViewController(vc, animated: true)
+//            case 3: //意见反馈
+//                goLeavaTips()
             default:
                 break
             }

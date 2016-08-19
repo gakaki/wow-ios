@@ -36,6 +36,11 @@ let WOWExitLoginNotificationKey         = "WOWExitLoginNotificationKey"
 //更新购物车，更新badge
 let WOWUpdateCarBadgeNotificationKey    = "WOWUpdateCarBadgeNotificationKey"
 
+//更新用户头像之后 更新user home页面的头像
+let WOWUpdateUserHeaderImageNotificationKey  = "WOWUpdateUserHeaderImageNotificationKey"
+
+
+
 
 let WOWEmptyNetWorkText  = "网络错误"
 

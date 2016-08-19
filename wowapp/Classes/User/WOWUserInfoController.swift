@@ -139,6 +139,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     private func configUserInfo(){
         dispatch_async(dispatch_get_main_queue()) {
+            
             self.sexTextField.text  = WOWSex[self.sex]
             self.desLabel.text      = WOWUserManager.userDes
             self.nickLabel.text     = WOWUserManager.userName
@@ -147,10 +148,11 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.jobLabel.text      = WOWUserManager.userIndustry
             self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
             
-//            self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
+
             
-//             self.headImageView.kf_setImageWithURL(NSURL(string: WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
-            
+            if ( self.headImageView.image  == nil ){
+                self.headImageView.set_webimage_url_user( self.headImageUrl )
+            }
             
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
@@ -201,7 +203,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star)]
+        let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star),"avatar":String(self.headImageUrl)]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
@@ -215,8 +217,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 WOWUserManager.userConstellation = strongSelf.star
                 strongSelf.configUserInfo()
                 
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
                 
+           
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil)
+
                 if let action = strongSelf.editInfoAction{
                     action()
                 }
@@ -234,7 +238,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(result)
                 if let addressInfo = strongSelf.addressInfo {
-                    print((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
+
                     strongSelf.addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "")
                     let section = NSIndexSet(index: 1)
                     strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
@@ -366,7 +370,7 @@ func json_serialize( dict:[String:AnyObject]) -> String {
          str                = NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
 
     } catch let error as NSError {
-        print(error)
+        DLog(error)
     }
     
     return str
@@ -404,19 +408,19 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         
         Alamofire.request(.POST,qiniu_token_url, parameters: params_qiniu)
         .response { request, response, data, error in
-                print(request)
-                print(response)
-                print(data)
-                print(error)
+//                Dlog(request)
+//                Dlog(response)
+//                Dlog(data)
+//                Dlog(error)
             
-            self.headImageView.image =  image
+//            self.headImageView.image =  image
 
             if (( error ) != nil){
                 WOWHud.dismiss()
             }
             
             
-        }.responseJSON { (json) in
+        }.responseJSON { (json) in 
            
             let res   = JSON(json.result.value!)
             let token = res["data"]["token"].string
@@ -436,16 +440,17 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         WOWHud.showMsg("头像修改失败")
                     } else {
 
-                        print(resp,resp["key"])
-                        print(info,key,resp)
+                        
                         let key = resp["key"]
                         self.headImageUrl = "http://img.wowdsgn.com/\(key!)"
-                        print(self.headImageUrl)
+                        
+                        self.headImageView.image =  image
                         self.request()
+                        
                     }
                     WOWUserManager.userHeadImageUrl = self.headImageUrl
                     self.headImageView.image =  image
-
+                    
                 },
                 option: uploadOption
             )

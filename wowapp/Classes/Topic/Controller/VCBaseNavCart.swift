@@ -20,11 +20,12 @@ class VCBaseNavCart:WOWBaseViewController{
     let offset_icon = {
       return UIApplication.sharedApplication().statusBarFrame.height
     }
+    let offset_width = CGFloat(10)
 
     func config_btn_back(){
         let image       = UIImage(named: "top_back")! as UIImage
         let button      = UIButton(type:.Custom)
-        button.frame    = CGRectMake(0, offset_icon(), btn_width_height, btn_width_height)
+        button.frame    = CGRectMake(offset_width, offset_icon(), btn_width_height, btn_width_height)
         button .setBackgroundImage(image, forState: UIControlState.Normal)
         button.addTarget(self, action:#selector(btn_back_action), forControlEvents:UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
@@ -33,7 +34,7 @@ class VCBaseNavCart:WOWBaseViewController{
     func config_btn_cart(){
         let image       = UIImage(named: "top_car")! as UIImage
         let button      = UIButton(type:.Custom)
-        button.frame    = CGRectMake(self.view.frame.width - btn_width_height, offset_icon(), btn_width_height, btn_width_height)
+        button.frame    = CGRectMake(self.view.frame.width - btn_width_height - offset_width, offset_icon(), btn_width_height, btn_width_height)
         button .setBackgroundImage(image, forState: UIControlState.Normal)
         button.addTarget(self, action:#selector(btn_cart_action), forControlEvents:UIControlEvents.TouchUpInside)
         self.view.addSubview(button)

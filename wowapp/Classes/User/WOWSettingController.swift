@@ -68,6 +68,20 @@ class WOWSettingController: WOWBaseTableViewController {
 //                        strongSelf.cacheLabel.text = "0.0m"
                     }
                 })
+                //清楚yywebimage cache
+                if let c  = YYWebImageManager.sharedManager().cache{
+                    // get cache capacity
+                    DLog("memoryCache.totalCost is \(c.memoryCache.totalCost), memoryCache.totalCount is \(c.memoryCache.totalCount),diskCache.totalCost is \(c.diskCache.totalCost()),diskCache.totalCount is \(c.diskCache.totalCount())")
+                    
+                    // clear cache
+                    c.memoryCache.removeAllObjects()
+                    c.diskCache.removeAllObjectsWithBlock({
+                        DLog("清除成功")
+                    })
+
+                }
+                
+                
             }
         case 1:
             alertExit()

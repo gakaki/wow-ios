@@ -14,6 +14,10 @@
   },
   "source_files": "PonyFrameworkOnSwift/**/*.swift",
   "exclude_files": "PonyFrameworkOnSwift/**/*.{png,xib,storyboard}",
+  "ios": {
+    "vendored_frameworks": "Frameworks/MyFramework.framework",
+    "vendored_libraries": "Frameworks/MyFramework.a"
+  },
   "platforms": {
     "osx": null,
     "ios": null,

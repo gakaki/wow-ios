@@ -1,0 +1,16 @@
+PODS:
+  - WowBase (0.1.0)
+
+DEPENDENCIES:
+  - WowBase (from `../`)
+
+EXTERNAL SOURCES:
+  WowBase:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  WowBase: 523ccd9bffdfca85097853e3b73902fb4368b24c
+
+PODFILE CHECKSUM: 3dacb0f06955779625ee4f2ea8aadefc13277c3c
+
+COCOAPODS: 1.1.0.beta.1

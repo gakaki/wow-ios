@@ -1,0 +1,26 @@
+{
+  "name": "WowBase",
+  "version": "0.1.0",
+  "summary": "A short description of WowBase.",
+  "description": "wowdsgn base library",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/WowBase",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gakaki": "gakaki@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/WowBase.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "WowBase/Classes/**/*",
+  "ios": {
+    "vendored_frameworks": "WowBase/WowBase.framework",
+    "vendored_libraries": "WowBase/WowBase.a"
+  }
+}

@@ -41,6 +41,16 @@ class WOWNetManager {
 
     let requestProvider = MoyaProvider<RequestApi>()
 
+    
+    func getPresentedController() -> UIViewController? {
+        var appRootVC: UIViewController = UIApplication.sharedApplication().keyWindow!.rootViewController!
+        var topVC: UIViewController     = appRootVC
+        let presentedVC                 = topVC.presentedViewController
+        
+        return presentedVC
+    }
+   
+
     func requestWithTarget(
         target:RequestApi,
         successClosure:SuccessClosure,
@@ -79,8 +89,12 @@ class WOWNetManager {
                                 NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
                                 WOWHud.showMsg("登录已过期，请重新登录")
                                 WOWUserManager.exitLogin()
-                                UIApplication.currentViewController()?.toLoginVC(true)
-                                return
+                                if ( self.getPresentedController()  != nil){
+                                    return
+                                }else{
+                                    UIApplication.currentViewController()?.toLoginVC(true)
+                                    return
+                                }
                             }
                             failClosure(errorMsg:info?.message)
                             WOWHud.showMsg(info?.message)

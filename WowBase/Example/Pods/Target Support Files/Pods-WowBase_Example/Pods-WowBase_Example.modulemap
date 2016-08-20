@@ -1,0 +1,6 @@
+framework module Pods_WowBase_Example {
+  umbrella header "Pods-WowBase_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

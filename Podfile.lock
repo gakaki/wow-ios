@@ -54,6 +54,7 @@ PODS:
   - SwiftyUserDefaults (2.2.0)
   - UICKeyChainStore (2.1.0)
   - UMengAnalytics-NO-IDFA (4.0.5)
+  - WowBase (0.1.0)
   - YYCache (1.0.3)
   - YYImage (1.0.2):
     - YYImage/Core (= 1.0.2)
@@ -89,6 +90,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - SwiftyUserDefaults
   - UMengAnalytics-NO-IDFA
+  - WowBase (from `WowBase/WowBase.podspec`)
   - YYImage
   - YYImage/WebP
   - YYWebImage
@@ -102,6 +104,8 @@ EXTERNAL SOURCES:
     :path: PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec
   Qiniu:
     :path: qiniu-sdk/Qiniu.podspec
+  WowBase:
+    :path: WowBase/WowBase.podspec
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -121,7 +125,7 @@ SPEC CHECKSUMS:
   Moya: 26b290a8d675c167ea6229ba08e07dce562265a5
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
   Pingpp: 98db8836e52fb8ab1da494e65a9835540039646c
-  PonyFrameworkOnSwift: 12ff0055496c68cffa297c168c282b869dd5d1e1
+  PonyFrameworkOnSwift: 69f791a8d4ca9e83e6a69f4f87840b475980afac
   Qiniu: 0e92ff0d1b9afbc55275306671284e4ebeb08d03
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RongCloudIMKit: bbfcb34596b25666fb1be470644162142368bcdb
@@ -132,10 +136,11 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: e7c8197a9d4068702e7f2406a968cae413b8de27
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
+  WowBase: 523ccd9bffdfca85097853e3b73902fb4368b24c
   YYCache: 282f35b5b0990833d0b7a06d864a87141a021da2
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: 934fcfc86f20a92c758372896e2f4520ccfef9a2
+PODFILE CHECKSUM: e8390cf9003bba65068b26cd0ecc01c178e48e88
 
 COCOAPODS: 1.1.0.beta.1

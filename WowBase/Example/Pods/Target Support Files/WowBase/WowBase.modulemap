@@ -1,0 +1,6 @@
+framework module WowBase {
+  umbrella header "WowBase-umbrella.h"
+
+  export *
+  module * { export * }
+}

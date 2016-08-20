@@ -5,6 +5,46 @@ protocol FoundWeeklyNewCellDelegate:class{
     func cellTouchInside(m:WOWFoundProductModel)
 }
 
+//protocol CGSizeDesign {
+//    init( design_width:CGFloat,design_height:CGFloat)
+//}
+//
+//extension CGSize:CGSizeDesign{
+//    
+//    static var scaleX:CGFloat{
+//        get {
+//            if let size = UIScreen.mainScreen().currentMode?.size{
+//                switch UIDevice.deviceType{
+//                case .DT_iPhone4S :     return
+//                case .DT_iPhone5 :      return
+//                case .DT_iPhone6 :      return
+//                case .DT_iPhone6_Plus : return
+//
+//                default : return .DT_UNKNOWN
+//                }
+//            }
+//            return .DT_UNKNOWN
+//        }
+//    }
+//    
+//    init( design_width:CGFloat,design_height:CGFloat)
+//    {
+//        switch UIDevice.deviceType{
+//            case .DT_iPhone5
+//            
+//            
+//        }
+//        if (  ==
+////        case CGSizeMake(640 , 960 ) : return .DT_iPhone4S
+////        case CGSizeMake(640 , 1136) : return .DT_iPhone5
+////        case CGSizeMake(750 , 1334) : return .DT_iPhone6
+////        case CGSizeMake(1242, 2208) : return .DT_iPhone6_Plus
+//
+//
+//    }
+//
+//}
+
 class WOWFoundWeeklyNewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -30,10 +70,14 @@ class WOWFoundWeeklyNewCell: UITableViewCell {
         collectionView.showsHorizontalScrollIndicator     = false
         let layout                          = UICollectionViewFlowLayout()
         layout.scrollDirection              = .Horizontal
-        layout.sectionInset                 = UIEdgeInsets(top: 3, left: 5, bottom: 5, right: 15)
-        layout.itemSize                     = CGSize(width: 100, height: 120)
+        layout.sectionInset                = UIEdgeInsets(top: 3, left: 15, bottom: 15, right: 0)
         
-        layout.minimumInteritemSpacing      = 3
+//        let size                            = self.w / 4
+//        layout.itemSize                     = CGSize(width: 100 * (MGScreenWidth / 320 ), height:100 * (MGScreenWidth / 320 ))
+//        layout.itemSize                     = CGSize(width:  MGScreenWidth * 3 / 8 , height:  MGScreenWidth *  3 / 8 + 20)
+//        layout.itemSize                     = CGSize(width:  MGScreenWidth * , height:  MGScreenWidth *  3 / 8 + 20)
+        
+        layout.minimumInteritemSpacing      = 5
         self.collectionView.collectionViewLayout = layout
 
     }

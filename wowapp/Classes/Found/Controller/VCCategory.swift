@@ -1,6 +1,6 @@
 
 import UIKit
-
+import SnapKit
 struct Pic {
     
     var id:String = ""
@@ -9,11 +9,40 @@ struct Pic {
 }
 
 let kAnimationDuration = 0.25
-let kIndicatorViewH: CGFloat = 3.0      // 首页顶部标签指示条的高度
+let kIndicatorViewH: CGFloat = 2.5      // 首页顶部标签指示条的高度
 let kTitlesViewH: CGFloat = 25          // 顶部标题的高度
 let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度倍
 
 
+extension UIView {
+    func addTopBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.CGColor
+        border.frame = CGRectMake(0, 0, self.frame.size.width, width)
+        self.layer.addSublayer(border)
+    }
+    
+    func addRightBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.CGColor
+        border.frame = CGRectMake(self.frame.size.width - width, 0, width, self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
+    
+    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.CGColor
+        border.frame = CGRectMake(0, self.frame.size.height - width, self.frame.size.width, width)
+        self.layer.addSublayer(border)
+    }
+    
+    func addLeftBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.CGColor
+        border.frame = CGRectMake(0, 0, width, self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
+}
 
 class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
     
@@ -162,10 +191,12 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
         
         v.layer.borderWidth   = 0.1
         v.layer.borderColor   = UIColor.blackColor().CGColor
-        v.layer.cornerRadius  = 3
+        v.layer.cornerRadius  = 0.1
         
         return v
     }()
+    
+    
     // 标签
     weak var titlesView = UIView()
     
@@ -225,12 +256,15 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
                 //让按钮内部的Label根据文字来计算内容
                 button.titleLabel?.sizeToFit()
                 self.indicatorView.w         = button.titleLabel!.w * kIndicatorViewwRatio
-                self.indicatorView.centerX       = button.centerX
+                self.indicatorView.centerX   = button.centerX
                 
             }
         }
-        //底部红色指示器
-        btn_choose_view.addSubview(indicatorView)
+        //底部的下划线
+        let c  = UIColor(hue:0.00, saturation:0.00, brightness:0.92, alpha:1.00)
+        btn_choose_view.addBottomBorderWithColor(c,width: 0.25)
+
+
     }
     
     
@@ -308,14 +342,21 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
     // 改变cell的背景颜色
     func updateCellStatus(cell:UICollectionViewCell  , is_selected selected:Bool ){
         
-        let alpha                = CGFloat( selected ?  0.4 : 0.2 )
+
         let borderWidth          = CGFloat( selected ?  1 :  0.8 )
+        let alpha_border         = CGFloat(0.4)
+        let color_border         = UIColor.whiteColor().colorWithAlphaComponent(alpha_border)
         
-        let color                = UIColor.whiteColor().colorWithAlphaComponent(alpha)
-        cell.backgroundColor     = color
+        if ( selected ){
+            let color_bg         = UIColor.whiteColor().colorWithAlphaComponent(alpha_border)
+            cell.backgroundColor = color_bg
+        }else{
+            cell.backgroundColor = UIColor.clearColor()
+        }
+        
         cell.layer.borderWidth   = borderWidth
-        cell.layer.borderColor   = color.CGColor
-        cell.layer.cornerRadius  = 4
+        cell.layer.borderColor   = color_border.CGColor
+        cell.layer.cornerRadius  = 0.5
     }
     
     

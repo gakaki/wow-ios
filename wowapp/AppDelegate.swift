@@ -127,7 +127,7 @@ extension AppDelegate{
 
 
 //        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:String(VCCategory))
-//        window?.rootViewController =  UIStoryboard.initialViewController("Found")
+        window?.rootViewController =  UIStoryboard.initialViewController("Found")
 
     }
     

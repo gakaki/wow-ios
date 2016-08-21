@@ -28,7 +28,6 @@ class WOWFoundRecommendCell: UITableViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
            super.init(coder: aDecoder)
     }
     override func awakeFromNib() {
@@ -36,8 +35,6 @@ class WOWFoundRecommendCell: UITableViewCell {
     }
     
     func assign_val(p:WOWFoundProductModel){
-        
-     
         
         imageName                            = p.productImg!
         self.iv.set_webimage_url(imageName)
@@ -84,7 +81,6 @@ class WOWFoundRecommendCell: UITableViewCell {
         let image_selected          = UIImage(named: "like_select") as UIImage?
         
         let button                  = UIButton(type: UIButtonType.Custom)
-        button.frame                = CGRectMake(0, 0, 40, 32)
         button.setImage(image, forState: .Normal)
         button.setImage(image_selected, forState: .Selected)
         
@@ -137,58 +133,42 @@ class WOWFoundRecommendCell: UITableViewCell {
 
     func prepareViewHierarchy() {
         
-        
-        let defaultMargin: Inset = (8.0, 8.0, 8.0, 8.0, 8.0, 8.0)
-        
+        let defaultMargin: Inset = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+//        public typealias Inset = (left: Float, top: Float, right: Float, bottom: Float, start: Float, end: Float)
+
         iv                       = UIImageView()
         
         self.product_view =  UIView().configure({
             
-            $0.backgroundColor      = UIColor.whiteColor()
-            $0.layer.borderColor    = UIColor.whiteColor().CGColor
-            $0.layer.borderWidth    = 2.0
             $0.style.justifyContent = .Center
             $0.style.alignSelf      = .Stretch
             $0.style.margin         = defaultMargin
             $0.style.flexDirection  = .Row
             
-            //            $0.style.maxDimensions.width = ~( CGFloat(screen_w)  - 20)
-            //            $0.style.maxDimensions.height = ~( CGFloat(screen_h)  / 3)
-            
-            $0.style.dimensions     = Dimension(Float(self.w) - 10,200)
+            $0.style.dimensions     = Dimension(Float(self.w) ,Float(180.w))
             
             }, children: [
                 
                 iv.configure({
-                    //                    $0.backgroundColor = UIColor.a
-                    //                    $0.layer.cornerRadius = 12.0
-                    //                    $0.style.dimensions     = ( 160 , 160)
-                    //                    $0.style.margin         = defaultMargin
-                    //                    $0.style.alignSelf      = .FlexStart
-                    //                    $0.style.justifyContent = .FlexStart
-                    $0.style.flex           = 1.2
+                    $0.style.dimensions     = ( Float(180.w) , Float(180.w))
+                    $0.style.flex           = 1
                 }),
                 
                 UIView().configure({
-                    //                    $0.backgroundColor      = UIColor.a
-                    //                    $0.style.alignSelf      = .Center
                     $0.style.flex           = 1
-                    $0.style.justifyContent = .SpaceAround
-                    //                    $0.style.dimensions     = ( 160 , 160)
-                    
+                    $0.style.justifyContent = .SpaceBetween
+
                     }, children: [
                         
                         right_label_top.configure({
                             $0.textAlignment = .Left
                             $0.lineBreakMode = .ByWordWrapping
                             $0.numberOfLines = 0
-                            $0.setLineHeightAndLineBreak(1.05)
+                            $0.setLineHeightAndLineBreak(1.03)
                             
-                            $0.font = UIFont.systemScaleFontSize(15)
+                            $0.font = UIFont.systemScaleFontSize(16)
                             $0.style.alignSelf = .FlexStart
-                            $0.style.flex           = 1
-                            
-                            //                            $0.style.margin = (0, 4.0, 0, 0, 8.0, 0)
+                            $0.style.margin   = (0, 0, 0, 0, 0.0, 0)
                         }),
                         
                         right_label_ceneter.configure({
@@ -198,10 +178,8 @@ class WOWFoundRecommendCell: UITableViewCell {
                             $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
                             $0.numberOfLines    = 3
                             $0.style.alignSelf  = .FlexStart
-                            $0.style.dimensions = ( 160 , 60)
-                            $0.style.flex           = 2
+                            $0.style.dimensions = ( Float(180.w) , 60)
                             
-                            //                            $0.style.margin     = defaultMargin
                         }),
                         
                         //                       right_label_price_stroke.configure({
@@ -218,21 +196,18 @@ class WOWFoundRecommendCell: UITableViewCell {
                         //                        }),
                         
                         UIView().configure({
-                            //                            $0.style.alignSelf      = .FlexEnd
+
                             $0.style.flexDirection  = .Row
-                            //                            $0.style.alignSelf  = .Stretch
                             $0.style.justifyContent = .SpaceBetween
-                            $0.style.flex           = 1
-                            
+
                             }, children: [
                                 
                                 right_label_price_bottom.configure({
                                     $0.textAlignment = .Left
                                     $0.setLineHeightAndLineBreak(1.05)
-                                    //                                    $0.style.flex = 0.9
-                                    $0.font = UIFont.systemFontOfSize(13)
-                                    $0.style.alignSelf = .FlexStart
-                                    $0.style.margin = (0, 4.0, 0, 0, 0.0, 0)
+                                    $0.font = UIFont.systemFontOfSize(14)
+                                    $0.style.alignSelf  = .FlexStart
+
                                 }),
                                 
                                 //                                button.configure({
@@ -242,10 +217,10 @@ class WOWFoundRecommendCell: UITableViewCell {
                                 //                                }),
                                 
                                 btnLike.configure({
-                                    $0.style.alignSelf  = .FlexStart
-                                    $0.style.dimensions = ( 40 , 32)
-                                    $0.style.margin     =  (0, -3.0, 0, 0, 0.0,20)
-                                    
+                                    $0.style.dimensions = ( 40 , 40)
+                                    $0.style.margin     = (0, Float(-10.h), 0, 0, 0,5)
+                                    $0.style.alignSelf  = .FlexEnd
+
                                 })
                             ])
                     ])

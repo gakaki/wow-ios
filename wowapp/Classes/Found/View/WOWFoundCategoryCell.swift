@@ -10,6 +10,7 @@ class WOWFoundCategoryCellCollectionViewCell:UICollectionViewCell{
     
     var pictureImageView: UIImageView!
     var label: UILabel!
+    var overlay:UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,17 +27,28 @@ class WOWFoundCategoryCellCollectionViewCell:UICollectionViewCell{
         label               = UILabel()
         label.textAlignment = NSTextAlignment.Center
         
+        
+        overlay             = UIView()
+        overlay.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
+
+        
         self.addSubview(label)
         self.addSubview(pictureImageView)
-        
+        self.addSubview(overlay)
+
         pictureImageView.snp_makeConstraints { (make) -> Void in
             make.size.equalTo(self)
             make.center.equalTo(self)
         }
         
+        overlay.snp_makeConstraints { (make) -> Void in
+            make.size.equalTo(self)
+            make.center.equalTo(self)
+        }
+
         label.snp_makeConstraints { (make) -> Void in
             
-            label.font      = UIFont.systemFontOfSize(12)
+            label.font      = UIFont.systemScaleFontSize(14)
             label.textColor = UIColor.whiteColor()
             
             make.width.equalTo(self.snp_width)
@@ -132,6 +144,36 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let del = self.delegate {
             del.foundCategorycellTouchInside(categories[indexPath.item])
+
+//            let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFoundCategoryCellCollectionViewCell), forIndexPath: indexPath) as! WOWFoundCategoryCellCollectionViewCell
+//            
+//            UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+//                cell.label.alpha = 0.0
+//                cell.overlay.alpha = 0.0
+//                }, completion:  { _ in
+////                    cell.overlay.removeFromSuperview()
+////                    cell.label.removeFromSuperview()
+//                    
+//                    cell.overlay.hidden = true
+//                    cell.label.hidden = true
+//
+//
+//            })
+            
+            
         }
+    }
+}
+
+extension UIView {
+    func fadeIn(duration: NSTimeInterval = 1.0, delay: NSTimeInterval = 0.0, completion: ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+            self.alpha = 1.0
+            }, completion: completion)  }
+    
+    func fadeOut(duration: NSTimeInterval = 1.0, delay: NSTimeInterval = 0.0, completion: (Bool) -> Void = {(finished: Bool) -> Void in}) {
+        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+            self.alpha = 0.0
+            }, completion: completion)
     }
 }

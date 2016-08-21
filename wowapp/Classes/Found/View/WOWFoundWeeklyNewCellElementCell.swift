@@ -1,5 +1,4 @@
 
-
 import UIKit
 import SnapKit
 import YYImage
@@ -27,8 +26,8 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
 
         
         pictureImageView.snp_makeConstraints { (make) -> Void in
-            make.size.equalTo(CGSizeMake( 100 * 320 / 375 , 100 * 320 / 375))
-            make.center.equalTo(self).offset(UIEdgeInsets.init(top: -10, left: 0, bottom: 0, right: 0))
+            make.size.equalTo(CGSizeD( 100 , height: 100))
+            make.center.equalTo(self).offset(UIEdgeInsets.init(top: -5.w, left: 0, bottom: 0, right: 0))
         }
         
         label.snp_makeConstraints { (make) -> Void in
@@ -37,9 +36,9 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
             label.textColor = UIColor.blackColor()
             
             make.width.equalTo(self.snp_width)
-            make.height.equalTo(20)
+            make.height.equalTo(15.h)
+            make.top.equalTo(pictureImageView.snp_bottom)
             
-            make.baseline.equalTo(self.snp_baseline)
         }
     }
     

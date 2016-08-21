@@ -80,6 +80,17 @@
                         <state key="normal" image="like-gray"/>
                         <state key="selected" image="like_select"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售罄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lT8-zm-B4c" userLabel="label_soldout">
+                        <rect key="frame" x="54" y="90" width="80" height="30"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="0CQ-iC-VLf"/>
+                            <constraint firstAttribute="width" constant="80" id="9Kv-4n-ATj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -89,6 +100,8 @@
                 <constraint firstItem="MeT-Ct-4uh" firstAttribute="leading" secondItem="OHK-TX-w9G" secondAttribute="leading" constant="30" id="6er-d6-yRw"/>
                 <constraint firstItem="RLT-Hl-aoZ" firstAttribute="top" secondItem="OHK-TX-w9G" secondAttribute="top" id="9da-pj-vHr"/>
                 <constraint firstAttribute="bottom" secondItem="RLT-Hl-aoZ" secondAttribute="bottom" id="MgV-HZ-KFO"/>
+                <constraint firstItem="lT8-zm-B4c" firstAttribute="centerY" secondItem="MeT-Ct-4uh" secondAttribute="centerY" id="SaW-eJ-XXU"/>
+                <constraint firstItem="lT8-zm-B4c" firstAttribute="centerX" secondItem="MeT-Ct-4uh" secondAttribute="centerX" id="UMR-4z-SNf"/>
                 <constraint firstItem="MeT-Ct-4uh" firstAttribute="top" secondItem="OHK-TX-w9G" secondAttribute="top" constant="30" id="Uj7-QC-Ord"/>
                 <constraint firstItem="RLT-Hl-aoZ" firstAttribute="leading" secondItem="We8-uk-h7K" secondAttribute="trailing" constant="3" id="YO2-mV-NSy"/>
                 <constraint firstAttribute="trailing" secondItem="M4W-0C-nE4" secondAttribute="trailing" id="YdS-2U-xQD"/>
@@ -107,6 +120,7 @@
             </variation>
             <connections>
                 <outlet property="desLabel" destination="bbZ-KC-Ev2" id="VbN-rC-Zy7"/>
+                <outlet property="label_soldout" destination="lT8-zm-B4c" id="gYL-eM-ytb"/>
                 <outlet property="likeButton" destination="We8-uk-h7K" id="rBC-ju-8uI"/>
                 <outlet property="pictureImageView" destination="MeT-Ct-4uh" id="gtb-9F-AzY"/>
                 <outlet property="priceLabel" destination="57f-W6-9XS" id="UxU-yz-KxE"/>

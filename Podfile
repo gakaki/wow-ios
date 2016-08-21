@@ -10,7 +10,7 @@ pod 'RxSwift', '~> 2.2.0'
 pod 'SwiftyJSON'
 pod 'ObjectMapper'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
-pod 'MonkeyKing', '~> 0.9.2'
+#pod 'MonkeyKing', '~> 0.9.2'
 pod 'JSONCodable'
 pod 'YYWebImage'
 pod 'YYImage/WebP'

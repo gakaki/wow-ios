@@ -57,7 +57,7 @@ class WOWNetManager {
         failClosure:FailClosure
     ){
         WOWHud.showLoading()
-        print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
+//        DLog("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
         requestProvider.request(target) { (result) in
        
@@ -67,13 +67,13 @@ class WOWNetManager {
                     
                     
                     if let str = info as? String {
-                        DLog(str)
+//                        DLog(str)
                     }
                     else {
                         // obj is not a String
                     }
                     
-                     print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
+//                     print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
                     
                     //其实也只有登入能获得session token 而已了
 

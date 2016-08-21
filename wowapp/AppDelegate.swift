@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MonkeyKing
+//import MonkeyKing
 import IQKeyboardManagerSwift
 import YYWebImage
 
@@ -69,9 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Pingpp.handleOpenURL(url, withCompletion: nil) {
             return true
         }
-        if MonkeyKing.handleOpenURL(url) {
-            return true
-        }
+//        if MonkeyKing.handleOpenURL(url) {
+//            return true
+//        }
         if UMSocialSnsService.handleOpenURL(url) {
             return true
         }
@@ -127,7 +127,7 @@ extension AppDelegate{
 
 
 //        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:String(VCCategory))
-        window?.rootViewController =  UIStoryboard.initialViewController("Found")
+//        window?.rootViewController =  UIStoryboard.initialViewController("Found")
 
     }
     
@@ -142,9 +142,9 @@ extension AppDelegate{
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
         
         
-        //MonkeyKing
-        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))
-        MonkeyKing.registerAccount(.Weibo(appID: WOWID.Weibo.appID, appKey: WOWID.Weibo.appKey, redirectURL: WOWID.Weibo.redirectURL))
+//        //MonkeyKing
+//        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))
+//        MonkeyKing.registerAccount(.Weibo(appID: WOWID.Weibo.appID, appKey: WOWID.Weibo.appKey, redirectURL: WOWID.Weibo.redirectURL))
         
         //LeanCloud
 //        AVOSCloud.setApplicationId(WOWID.LeanCloud.appID, clientKey:WOWID.LeanCloud.appKey)

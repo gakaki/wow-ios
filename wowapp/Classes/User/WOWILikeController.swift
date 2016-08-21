@@ -146,14 +146,11 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
         switch selectIndex {
         case 0:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
-//            cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.imgUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
             cell.pictureImageView.set_webimage_url(model.imgUrl );
 
             returnCell = cell
         case 1:
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
-//            cell.pictureImageView.kf_setImageWithURL(NSURL(string:model.imgUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
-            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell            
             cell.pictureImageView.set_webimage_url(model.imgUrl );
 
             cell.desLabel.text = model.name

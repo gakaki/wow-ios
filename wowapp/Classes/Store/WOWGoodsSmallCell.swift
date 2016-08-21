@@ -14,12 +14,22 @@ class WOWGoodsSmallCell: UICollectionViewCell {
            return ( MGScreenWidth - 0.5) / 2
         }
     }
+    
+    
+    @IBOutlet weak var label_soldout: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         desLabel.preferredMaxLayoutWidth = (UIApplication.currentViewController()?.view.w)! / CGFloat(2) - 30
+        
+    }
+    
+    func set_sold_out_status(){
+        self.label_soldout.hidden = false
+//        self.pictureImageView.alpha = 0.4
     }
     
     func showData(model:WOWProductModel,indexPath:NSIndexPath) {

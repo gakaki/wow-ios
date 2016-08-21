@@ -15,10 +15,13 @@ class WOWCategoryCell: UICollectionViewCell {
             return ( MGScreenWidth - 0.5) / 2
         }
     }
+    
+    @IBOutlet weak var label_soldout: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         desLabel.preferredMaxLayoutWidth = (UIApplication.currentViewController()?.view.w)! / CGFloat(2) - 30
@@ -35,18 +38,5 @@ class WOWCategoryCell: UICollectionViewCell {
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         priceLabel.text     = result //千万不用格式化了
         
-    }
-    
-    // 改变cell的背景颜色
-    func updateCellStatus( is_selected selected:Bool ){
-        
-        let alpha                = CGFloat( selected ?  0.4 : 0.2 )
-        let borderWidth          = CGFloat( selected ?  1 :  0.8 )
-        
-        let color                = UIColor.whiteColor().colorWithAlphaComponent(alpha)
-       backgroundColor           = color
-       layer.borderWidth         = borderWidth
-       layer.borderColor         = color.CGColor
-       layer.cornerRadius        = 4
     }
 }

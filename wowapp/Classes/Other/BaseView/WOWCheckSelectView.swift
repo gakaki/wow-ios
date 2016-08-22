@@ -24,7 +24,7 @@ struct WOWCheckMenuSetting {
         selectedIndex    = 0
         normalTitleColor = GrayColorlevel3
         selectTitleColor = UIColor.blackColor()
-        titleFont        = UIFont.systemScaleFontSize(12)
+        titleFont        = UIFont.systemScaleFontSize(14)
     }
 }
 
@@ -54,6 +54,7 @@ class WOWTopMenuTitleView: UIView {
     private lazy var bottomLine:UIView = {
         let v = UIView(frame: CGRectMake(0,0,20,1))
         v.backgroundColor = ThemeBlackColor
+//        v.backgroundColor =  UIColor.init(hexString: "000000")
         return v
     }()
     

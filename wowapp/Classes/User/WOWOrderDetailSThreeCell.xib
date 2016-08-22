@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-jx-xWu">
-                        <rect key="frame" x="15" y="11" width="286" height="21"/>
+                        <rect key="frame" x="15" y="13" width="286" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="I8A-Br-sRe"/>
                         </constraints>
@@ -25,7 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1z-i5-V0J">
-                        <rect key="frame" x="15" y="40" width="286" height="21"/>
+                        <rect key="frame" x="15" y="36" width="286" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="EQD-aj-FpS"/>
                         </constraints>
@@ -36,10 +36,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="l1z-i5-V0J" secondAttribute="trailing" constant="11" id="7dA-wG-dzg"/>
-                    <constraint firstItem="l1z-i5-V0J" firstAttribute="top" secondItem="S5p-Jb-qfq" secondAttribute="topMargin" constant="32" id="7nY-rA-3rz"/>
+                    <constraint firstItem="l1z-i5-V0J" firstAttribute="top" secondItem="S5p-Jb-qfq" secondAttribute="topMargin" constant="28" id="7nY-rA-3rz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="H6J-jx-xWu" secondAttribute="trailing" constant="11" id="FgX-IJ-41d"/>
                     <constraint firstItem="H6J-jx-xWu" firstAttribute="leading" secondItem="S5p-Jb-qfq" secondAttribute="leadingMargin" constant="7" id="ZdJ-fa-QZB"/>
-                    <constraint firstItem="H6J-jx-xWu" firstAttribute="top" secondItem="S5p-Jb-qfq" secondAttribute="topMargin" constant="3" id="bZr-8c-lyG"/>
+                    <constraint firstItem="H6J-jx-xWu" firstAttribute="top" secondItem="S5p-Jb-qfq" secondAttribute="topMargin" constant="5" id="bZr-8c-lyG"/>
                     <constraint firstItem="l1z-i5-V0J" firstAttribute="leading" secondItem="S5p-Jb-qfq" secondAttribute="leadingMargin" constant="7" id="raV-wq-mL0"/>
                 </constraints>
             </tableViewCellContentView>

@@ -72,7 +72,7 @@ CollectionViewWaterfallLayoutDelegate
     }
     func reset_fetch_params(){
         self.pageIndex = 1
-        self.vo_products = []
+//        self.vo_products = []
         if ( self.cv_bottom != nil ){
             self.cv_bottom.setContentOffset(CGPointZero, animated: true)
 
@@ -152,7 +152,7 @@ CollectionViewWaterfallLayoutDelegate
         cv_bottom.showsVerticalScrollIndicator  = false
 
         cv_bottom.decelerationRate = UIScrollViewDecelerationRateFast
-        cv_bottom.bounces = false
+//        cv_bottom.bounces = false
         
         cv_bottom.mj_footer = self.mj_footer
         self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
@@ -160,11 +160,7 @@ CollectionViewWaterfallLayoutDelegate
         
         cv_bottom.emptyDataSetSource = self;
         cv_bottom.emptyDataSetDelegate = self;
-        
-//        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
 
-//        [self.tableView.footer setTitle:@"" forState:MJRefreshFooterStateIdle];
-        
     }
 
     override func request(){

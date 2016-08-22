@@ -48,10 +48,12 @@ PODS:
   - RongCloudIMKit (2.6.0)
   - RxSwift (2.2.0)
   - SnapKit (0.19.1)
+  - StyleKit (1.0.0)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
   - SwiftyUserDefaults (2.2.0)
   - UICKeyChainStore (2.1.0)
+  - UIColor_Hex_Swift (2.1)
   - UMengAnalytics-NO-IDFA (4.0.5)
   - WowBase (0.1.0)
   - YYCache (1.0.3)
@@ -84,9 +86,11 @@ DEPENDENCIES:
   - RongCloudIMKit (= 2.6.0)
   - RxSwift (~> 2.2.0)
   - SnapKit (~> 0.19.1)
+  - StyleKit
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON
   - SwiftyUserDefaults
+  - UIColor_Hex_Swift
   - UMengAnalytics-NO-IDFA
   - WowBase (from `WowBase/WowBase.podspec`)
   - YYImage
@@ -128,16 +132,18 @@ SPEC CHECKSUMS:
   RongCloudIMKit: bbfcb34596b25666fb1be470644162142368bcdb
   RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
+  StyleKit: 7dac3ff9ffec40fec57f9a8582c4ff5a95ca17e8
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SwiftyUserDefaults: e7c8197a9d4068702e7f2406a968cae413b8de27
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
+  UIColor_Hex_Swift: e91dc51f6bf252ec7bf74c8704ceedeeb7640c1c
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
   WowBase: 523ccd9bffdfca85097853e3b73902fb4368b24c
   YYCache: 282f35b5b0990833d0b7a06d864a87141a021da2
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: 1815fb0cf3f57e47d46b24a7721257d108ebe1bf
+PODFILE CHECKSUM: 91a55bdb18df1da10864cac569f3c5d407655c4c
 
 COCOAPODS: 1.1.0.beta.1

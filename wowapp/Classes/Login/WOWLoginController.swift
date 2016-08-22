@@ -40,7 +40,7 @@ class WOWLoginController: WOWBaseViewController {
             if let strongSelf = self{
 //                strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 strongSelf.dismissViewControllerAnimated(true, completion: {
-                       UIApplication.currentViewController()?.navigationController?.popToRootViewControllerAnimated(true)
+//                       UIApplication.currentViewController()?.navigationController?.popToRootViewControllerAnimated(true)
                 })
 
                 if WOWTool.lastTabIndex == 1 {

@@ -153,7 +153,7 @@ WOWFoundCategoryCellDelegate
         header.backgroundColor      = UIColor.whiteColor()
         
         let grayView                = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 15.h))
-        grayView.backgroundColor    = UIColor(hue:0.00, saturation:0.00, brightness:0.91, alpha:1.00)
+        grayView.backgroundColor    = MGRgb(245, g: 245, b: 245)
         
         let l                       = UILabel(frame: CGRectMake(15.w, 15.h, 200.w, 50.h))
         

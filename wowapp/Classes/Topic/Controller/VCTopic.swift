@@ -24,7 +24,7 @@ class VCTopicHeaderView:UICollectionReusableView{
 //        l.lineBreakMode = .ByWordWrapping
         l.numberOfLines = 0
         l.setLineHeightAndLineBreak(1.05)
-        l.font          = UIFont.mediumScaleFontSize(16)
+        l.font          = UIFont.mediumScaleFontSize(20)
         return l
     }()
     
@@ -33,6 +33,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         l.textAlignment = .Left
         l.lineBreakMode = .ByWordWrapping
         l.numberOfLines = 0
+        l.textAlignment = .Center
         l.setLineHeightAndLineBreak(1.25)
         l.textColor     = UIColor.grayColor()
         l.font          = UIFont.systemScaleFontSize(14)
@@ -52,7 +53,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         super.init(frame: frame)
         
         imageView = UIImageView()
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIViewContentMode.ScaleToFill
         self.addSubview(imageView)
         
         self.addSubview(label_name)
@@ -62,6 +63,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         
         imageView.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(self)
+            
             make.height.equalTo(280)
             make.top.equalTo(self.snp_top)
         }

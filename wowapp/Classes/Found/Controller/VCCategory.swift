@@ -125,7 +125,7 @@ CollectionViewWaterfallLayoutDelegate
         let layout                          = UICollectionViewFlowLayout()
         layout.scrollDirection              = .Horizontal
         layout.sectionInset                 = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        layout.minimumLineSpacing           = 5.0
+        layout.minimumLineSpacing           = 15.0
         cv!.collectionViewLayout            = layout
 
         request()
@@ -374,6 +374,7 @@ CollectionViewWaterfallLayoutDelegate
                 cell = collectionView.dequeueReusableCellWithReuseIdentifier(cell_reuse_id_label, forIndexPath: indexPath)
                 
                 if let lv = cell.viewWithTag(1) as? UILabel {
+                    lv.font = UIFont.systemFontOfSize(13)
                     lv.text =  row.categoryName!
                 }
             }

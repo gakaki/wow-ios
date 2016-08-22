@@ -305,9 +305,9 @@ extension WOWProductDetailController : CyclePictureViewDelegate {
                 // 这个方法只能返回可见的cell, 如果不可见, 返回值为nil
                 let cell = cyclePictureView.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? CyclePictureCell
                 
-                let sourceView = cell?.imageView
+//                let sourceView = cell?.imageView
                 
-                let photoModel = PhotoModel(imageUrlString: photoURLString, sourceImageView: sourceView)
+                let photoModel = PhotoModel(imageUrlString: photoURLString, sourceImageView: nil)
                 photos.append(photoModel)
             }
             return photos

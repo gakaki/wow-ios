@@ -231,7 +231,8 @@ extension PhotoViewCell {
             image = sourceImageView.image
         }
         
-        image =  image ?? UIImage(named: "2")
+        image =  image ?? UIImage(named: "placeholder_product")
+        
         downloadTask = imageView.kf_setImageWithURL(url, placeholderImage: image, optionsInfo: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
             let progress = Double(receivedSize) / Double(totalSize)
             //            print(progress)

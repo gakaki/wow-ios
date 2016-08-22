@@ -110,7 +110,7 @@ class WOWOrderController: WOWBaseViewController {
         let totalPage = 10
         
         var params = [String: AnyObject]?()
-        if selectIndex == 2 { // 待收货 
+        if selectIndex == 2 { // 待发货 
             params = ["orderStatusList": [1,2], "currentPage": pageIndex,"pageSize":totalPage]
         }else{
             params = ["orderStatus": type, "currentPage": pageIndex,"pageSize":totalPage]

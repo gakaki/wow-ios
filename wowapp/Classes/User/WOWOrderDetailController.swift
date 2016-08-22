@@ -855,12 +855,27 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         case 4:
             switch indexPath.row {
             case 0:
+
+                switch surePayType {
+                case .payAli:
+                    self.surePayType = PayType.none
+                default:
+                    self.surePayType = PayType.payAli
+//                    break
+                }
                 
-                 self.surePayType = PayType.payAli
+               
 
             case 1:
-                
-                self.surePayType = PayType.payWiXin
+                switch surePayType {
+                case .payWiXin:
+                    self.surePayType = PayType.none
+                default:
+                    self.surePayType = PayType.payWiXin
+//                    break
+                }
+
+             
                 
             default:
                 break

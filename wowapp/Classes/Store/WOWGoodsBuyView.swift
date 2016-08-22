@@ -136,7 +136,9 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var colorWarnImg: UIImageView!
     @IBOutlet weak var specWarnImg: UIImageView!
-    
+    @IBOutlet weak var addCarButton: UIButton!
+    @IBOutlet weak var payButton: UIButton!
+    @IBOutlet weak var sureButton: UIButton!
   
     private var _layer: CALayer!
     private var path: UIBezierPath!
@@ -589,6 +591,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         if collectionView.tag == 100 {
             
             if colorIndex == indexPath.row {
+                //取消选中时恢复有库存状态
+                productStock(true)
                 colorIndex = -1
                 for selectSpec in specArr {
                     selectSpec.isSelect = true
@@ -604,6 +608,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
         }else {
             if specIndex == indexPath.row {
+                //取消选中时恢复有库存状态
+                productStock(true)
                 specIndex = -1
                 for selectColor in colorArr {
                     selectColor.isSelect = true
@@ -622,12 +628,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         
     }
     
-    //取消选中状态
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WOWTagCollectionViewCell
-        updateCellStatus(cell, selected: false)
-
-    }
     
     //更新cell点击状态
     func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
@@ -654,34 +654,63 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                         
                         //如果产品有库存的话就显示1.如果没有库存的话就显示0
                         if self.productInfo?.hasStock ?? false {
+                            productStock(true)
                             
-                            if skuCount == 0 {
-                                skuCount = 1
-                            }
-                            //如果所加数量大于已有库存，则显示库存最大数
-                            if self.productInfo?.availableStock! < skuCount {
-                                skuCount = (self.productInfo?.availableStock)!
-                            }
-                            
-                            addButton.enabled = true
-                            addButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-                            subButton.enabled = true
-                            subButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-                            showResult(skuCount)
                         }else {
-                            
-                            skuCount = 0
-                            addButton.enabled = false
-                            addButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
-                            subButton.enabled = false
-                            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
-                            showResult(skuCount)
+                            productStock(false)
+                           
                         }
                     }
                 }
             }
         }
 
+    }
+    
+    
+    /**
+     商品有无库存
+     */
+    func productStock(hasStock: Bool) {
+        if hasStock {
+            
+            //如果所加数量大于已有库存，则显示库存最大数
+            if let availableStock = self.productInfo?.availableStock {
+                if availableStock < skuCount {
+                    skuCount = (self.productInfo?.availableStock)!
+
+                }
+            }
+            if skuCount == 0 {
+                skuCount = 1
+            }
+            
+            addButton.enabled = true
+            subButton.enabled = true
+            showResult(skuCount)
+            
+            addCarButton.hidden = false
+            payButton.enabled = true
+            payButton.setBackgroundColor(MGRgb(255, g: 230, b: 0), forState: .Normal)
+            
+            sureButton.enabled = true
+            sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .Normal)
+
+            
+        }else {
+            skuCount = 0
+            addButton.enabled = false
+            subButton.enabled = false
+            showResult(skuCount)
+            
+            addCarButton.hidden = true
+            payButton.enabled = false
+            payButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .Disabled)
+            
+            sureButton.enabled = false
+            sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .Disabled)
+            
+        }
     }
 
     

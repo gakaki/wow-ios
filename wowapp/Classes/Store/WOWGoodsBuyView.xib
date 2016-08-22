@@ -21,6 +21,7 @@
                     <state key="normal" title="确定">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <state key="disabled" title="已售罄"/>
                     <connections>
                         <action selector="sureButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="XpB-AN-hmm"/>
                     </connections>
@@ -80,9 +81,12 @@
                                 <constraint firstAttribute="height" constant="50" id="VjO-KX-kpv"/>
                                 <constraint firstAttribute="width" constant="100" id="dPt-Z8-9M9"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="立即购买">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="disabled" title="已售罄">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="payButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="pb3-4Q-C1s"/>
@@ -119,6 +123,9 @@
                             <state key="normal" title="+">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="disabled" title="+">
+                                <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                     <integer key="value" value="1"/>
@@ -137,6 +144,9 @@
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <state key="normal" title="-">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" title="-">
+                                <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -340,6 +350,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="addButton" destination="9Wu-oK-qHK" id="BB2-yx-w4q"/>
+                <outlet property="addCarButton" destination="6Nh-Ir-38J" id="vJ8-hg-cTD"/>
                 <outlet property="closeButton" destination="hgg-DS-lz6" id="WXX-JO-Ntw"/>
                 <outlet property="collectionView" destination="hyL-jG-Ufx" id="c7x-9J-ugp"/>
                 <outlet property="collectionViewHeight" destination="cvb-QV-9e9" id="HUI-TN-nh6"/>
@@ -348,12 +359,14 @@
                 <outlet property="favoriteButton" destination="5oP-rH-F7B" id="K1J-9X-18Z"/>
                 <outlet property="goodsImageView" destination="Pm8-hJ-vcq" id="AAi-Vs-Xde"/>
                 <outlet property="nameLabel" destination="ttI-Mh-Qzd" id="FAQ-Ws-T2L"/>
+                <outlet property="payButton" destination="onZ-29-BUW" id="Nl2-ps-DiN"/>
                 <outlet property="perPriceLabel" destination="lt0-VW-gYn" id="RHy-uB-1p7"/>
                 <outlet property="secondCollectionView" destination="mVr-40-vwt" id="aav-Fp-CW2"/>
                 <outlet property="secondCollectionViewHeight" destination="izm-IF-6Vi" id="T8I-zp-S01"/>
                 <outlet property="specView" destination="Hza-a2-1RF" id="EPQ-e9-Zhe"/>
                 <outlet property="specWarnImg" destination="5PS-8t-0nY" id="mIF-dZ-YzB"/>
                 <outlet property="subButton" destination="QMQ-s7-DD5" id="83A-Ii-m4t"/>
+                <outlet property="sureButton" destination="7ah-iL-ikZ" id="GdU-5e-bey"/>
             </connections>
             <point key="canvasLocation" x="204.5" y="530"/>
         </view>

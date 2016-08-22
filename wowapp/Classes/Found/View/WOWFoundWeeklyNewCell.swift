@@ -5,6 +5,8 @@ protocol FoundWeeklyNewCellDelegate:class{
     func cellTouchInside(m:WOWFoundProductModel)
 }
 
+
+
 class WOWFoundWeeklyNewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -24,17 +26,18 @@ class WOWFoundWeeklyNewCell: UITableViewCell {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor      = UIColor.whiteColor()
+        collectionView.backgroundColor                    = UIColor.whiteColor()
         collectionView.registerClass(WOWFoundWeeklyNewCellElementCell.self, forCellWithReuseIdentifier:String(WOWFoundWeeklyNewCellElementCell))
         collectionView.showsVerticalScrollIndicator       = false
         collectionView.showsHorizontalScrollIndicator     = false
-        let layout                          = UICollectionViewFlowLayout()
-        layout.scrollDirection              = .Horizontal
-        layout.sectionInset                 = UIEdgeInsets(top: 3, left: 5, bottom: 5, right: 15)
-        layout.itemSize                     = CGSize(width: 100, height: 120)
+        let layout                                        = UICollectionViewFlowLayout()
+        layout.scrollDirection                            = .Horizontal
+        layout.sectionInset                               = UIEdgeInsets(top: 3.w, left: 0.w, bottom: 15.w, right: 0)
         
-        layout.minimumInteritemSpacing      = 3
-        self.collectionView.collectionViewLayout = layout
+        layout.itemSize                                   = CGSizeD( 100 ,height: 120)
+        
+        layout.minimumInteritemSpacing                    = 1.w
+        self.collectionView.collectionViewLayout          = layout
 
     }
     

@@ -28,6 +28,7 @@
 		069E094E1D576B3200F8AE8F /* UIImage+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */; };
 		069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094F1D57942C00F8AE8F /* UILabel+Style.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
+		06A2DBC11D6A268D00F4D479 /* TooglePriceBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A2DBC01D6A268D00F4D479 /* TooglePriceBtn.swift */; };
 		06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */; };
 		06DDAD751D61811500280210 /* VCBaseVCCategoryFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */; };
 		06FB94B11D6306C100554871 /* VCTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B01D6306C100554871 /* VCTopic.swift */; };
@@ -384,6 +385,7 @@
 		069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WebP.swift"; sourceTree = "<group>"; };
 		069E094F1D57942C00F8AE8F /* UILabel+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
+		06A2DBC01D6A268D00F4D479 /* TooglePriceBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooglePriceBtn.swift; sourceTree = "<group>"; };
 		06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlexboxLayout.framework; sourceTree = "<group>"; };
 		06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+VCManager.swift"; sourceTree = "<group>"; };
 		06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBaseVCCategoryFound.swift; sourceTree = "<group>"; };
@@ -776,6 +778,7 @@
 		068B60AD1D4F34AF001AD778 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				06A2DBC01D6A268D00F4D479 /* TooglePriceBtn.swift */,
 				068B60B21D4F3DD5001AD778 /* VCFound.swift */,
 				063968731D54950B00631BDF /* VCCategory.swift */,
 				06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */,
@@ -1792,7 +1795,7 @@
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VSWKQE5HA8;
+						DevelopmentTeam = B4WSDTADTT;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -2195,6 +2198,7 @@
 				63C42DC81D646B0400879FEB /* PhotoViewCell.swift in Sources */,
 				29FF26DE1CFDA86300DF2A9B /* WOWTool.swift in Sources */,
 				29FF26EF1CFDA86300DF2A9B /* TagCellLayout+Helper.swift in Sources */,
+				06A2DBC11D6A268D00F4D479 /* TooglePriceBtn.swift in Sources */,
 				632A933B1D487388003A5966 /* CAPSPageMenu.swift in Sources */,
 				29FF26621CFDA86300DF2A9B /* WOWReuseSectionView.swift in Sources */,
 				29FF267A1CFDA86300DF2A9B /* WOWBaseTableViewController.swift in Sources */,

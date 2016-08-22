@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import MonkeyKing
+//import MonkeyKing
 struct WOWShareManager {
     
     static let vc = UIApplication.currentViewController()
@@ -18,13 +18,14 @@ struct WOWShareManager {
     static func share(title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
 
         shareBackView.show()
-        let urlResoure = UMSocialUrlResource.init(snsResourceType: UMSocialUrlResourceTypeWeb, url: url)
+
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             switch shareType {
             case .friends:
                 UMSocialData.defaultData().extConfig.wechatTimelineData.title = title
-                
-                UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatTimeline], content: shareText, image: shareImage, location: nil, urlResource: urlResoure, presentedController: UIApplication.currentViewController(), completion: { response in
+                UMSocialData.defaultData().extConfig.wechatTimelineData.url = url
+
+                UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatTimeline], content: shareText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
                     if response.responseCode == UMSResponseCodeSuccess {
                         
                     }
@@ -33,8 +34,9 @@ struct WOWShareManager {
             case .wechat:
                 
                 UMSocialData.defaultData().extConfig.wechatSessionData.title = title
+                UMSocialData.defaultData().extConfig.wechatSessionData.url = url
 
-                UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatSession], content: shareText, image: shareImage, location: nil, urlResource: urlResoure, presentedController: UIApplication.currentViewController(), completion: { response in
+                UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatSession], content: shareText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
                     if response.responseCode == UMSResponseCodeSuccess {
                         
                     }

@@ -18,9 +18,6 @@
                     <state key="normal" title="不使用优惠券">
                         <color key="titleColor" red="0.01176470588" green="0.01176470588" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
-                    <connections>
-                        <action selector="noUserClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dda-no-FZ7"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -31,6 +28,9 @@
                 <constraint firstItem="rw9-QJ-IR3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="mvy-N5-bbk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="noUseButton" destination="rw9-QJ-IR3" id="ROR-Zc-7kU"/>
+            </connections>
             <point key="canvasLocation" x="223" y="322"/>
         </view>
     </objects>

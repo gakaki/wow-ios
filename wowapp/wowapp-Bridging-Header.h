@@ -23,6 +23,7 @@
 @import YYWebImage;
 @import Kingfisher;
 @import FlexboxLayout;
+@import WowBase;
 
 //@import QiniuTokenIOS;
 

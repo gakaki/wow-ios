@@ -10,7 +10,7 @@ pod 'RxSwift', '~> 2.2.0'
 pod 'SwiftyJSON'
 pod 'ObjectMapper'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
-pod 'MonkeyKing', '~> 0.9.2'
+#pod 'MonkeyKing', '~> 0.9.2'
 pod 'JSONCodable'
 pod 'YYWebImage'
 pod 'YYImage/WebP'
@@ -20,6 +20,7 @@ pod 'Kingfisher'
 #七牛 sdk
 pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"
 pod "FlexboxLayout",:path => "FlexBoxLayout/FlexboxLayout.podspec"
+pod "WowBase",:path => "WowBase/WowBase.podspec"
 
 pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'

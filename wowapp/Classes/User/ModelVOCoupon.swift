@@ -25,7 +25,7 @@ class WOWCouponModel: WOWBaseModel,Mappable {
     var couponDesc: String?
     var couponLimitType: Int?
     var discountRate: String?
-    var deduction: Int?
+    var deduction: Double?
     var minAmountLimit: Int?
     var effectiveFrom : String?
     var effectiveTo: String?
@@ -35,6 +35,9 @@ class WOWCouponModel: WOWBaseModel,Mappable {
     var canUsed: Bool?
     var isSelect: Bool = false
     
+    override init() {
+        super.init()
+    }
     required init?(_ map: Map) {
         
         

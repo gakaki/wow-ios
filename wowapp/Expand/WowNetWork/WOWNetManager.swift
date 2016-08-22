@@ -41,13 +41,23 @@ class WOWNetManager {
 
     let requestProvider = MoyaProvider<RequestApi>()
 
+    
+    func getPresentedController() -> UIViewController? {
+        var appRootVC: UIViewController = UIApplication.sharedApplication().keyWindow!.rootViewController!
+        var topVC: UIViewController     = appRootVC
+        let presentedVC                 = topVC.presentedViewController
+        
+        return presentedVC
+    }
+   
+
     func requestWithTarget(
         target:RequestApi,
         successClosure:SuccessClosure,
         failClosure:FailClosure
     ){
         WOWHud.showLoading()
-        print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
+//        DLog("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
         requestProvider.request(target) { (result) in
        
@@ -57,13 +67,13 @@ class WOWNetManager {
                     
                     
                     if let str = info as? String {
-                        DLog(str)
+//                        DLog(str)
                     }
                     else {
                         // obj is not a String
                     }
                     
-                     print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
+//                     print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
                     
                     //其实也只有登入能获得session token 而已了
 
@@ -79,8 +89,12 @@ class WOWNetManager {
                                 NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
                                 WOWHud.showMsg("登录已过期，请重新登录")
                                 WOWUserManager.exitLogin()
-                                UIApplication.currentViewController()?.toLoginVC(true)
-                                return
+                                if ( self.getPresentedController()  != nil){
+                                    return
+                                }else{
+                                    UIApplication.currentViewController()?.toLoginVC(true)
+                                    return
+                                }
                             }
                             failClosure(errorMsg:info?.message)
                             WOWHud.showMsg(info?.message)

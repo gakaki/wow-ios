@@ -6,7 +6,8 @@
 //  Copyright © 2016年 wowdsgn. All rights reserved.
 //
 
-import Foundation
+
+import UIKit
 
 public typealias NavigationItemHandler = () -> ()
 
@@ -49,7 +50,7 @@ public extension UIViewController{
             }
         }
     }
-    
+
     
     func itemClick(item:UIBarButtonItem){
         if let closure = ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:item)]{

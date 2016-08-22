@@ -1,0 +1,2 @@
+/Users/g/Library/Developer/Xcode/DerivedData/WowBase-czdqlngtojcwijemlwhbpaktxtvf/Build/Products/Debug-iphonesimulator/WowBase_Example.app
+

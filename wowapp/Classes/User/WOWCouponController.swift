@@ -20,7 +20,8 @@ class WOWCouponController: WOWBaseViewController {
     let pageSize        = 20
     var vo_cupons = [WOWCouponModel]()
     var minAmountLimit: Double?
-    var couponId:Int?
+    var couponModel:WOWCouponModel?
+    var action  : WOWObjectActionClosure?
 
     var entrance        = couponEntrance.userEntrance
     
@@ -41,6 +42,21 @@ class WOWCouponController: WOWBaseViewController {
         self.tableView.mj_footer = self.mj_footer
     }
     
+    override func navBack() {
+        switch entrance {
+        case .orderEntrance:
+            if let ac = action{
+                ac(object: couponModel ?? "")
+            }
+            super.navBack()
+            return
+        default:
+            super.navBack()
+            return
+        }
+        
+
+    }
     override func request(){
         var params = [String: AnyObject]?()
         switch entrance {
@@ -149,22 +165,38 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
                 }else {
                     changeColor(cell, color_status: color_status_enable)
                 }
-                if r.id == couponId {
+                if r.id == couponModel?.id {
                     r.isSelect = true
                 }
                 if r.isSelect {
                     cell.image_check.hidden         = false
+                    
                 }else {
                     cell.image_check.hidden         = true
                 }
             }
-       
         
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch entrance {
+            
+        case .orderEntrance:
+            let selectCoupon = vo_cupons[indexPath.section]
+            if selectCoupon.canUsed ?? false{
+                for coupon in vo_cupons {
+                    coupon.isSelect = false
+                }
+                selectCoupon.isSelect = true
+                couponModel = selectCoupon
+            }
+            tableView.reloadData()
+            
+        default:
+            return
+        }
         print(indexPath.section)
     }
     
@@ -197,6 +229,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
                 return view
             }else {
                 let view = NSBundle.mainBundle().loadNibNamed(String(WOWCouponheaderView), owner: self, options: nil).last as! WOWCouponheaderView
+                view.noUseButton.addTarget(self, action: #selector(noUserClick(_:)), forControlEvents:.TouchUpInside)
                 return view
             }
         default:
@@ -204,5 +237,14 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
             view.backgroundColor = UIColor.clearColor()
             return view
         }
+    }
+    
+    func noUserClick(sender: UIButton)  {
+        if let ac = action{
+            couponModel = nil
+            ac(object: couponModel ?? "")
+            navigationController?.popViewControllerAnimated(true)
+        }
+        
     }
 }

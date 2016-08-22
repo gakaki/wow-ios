@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'WowBase_Example' do
+  pod 'WowBase', :path => '../'
+
+  target 'WowBase_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

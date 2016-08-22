@@ -8,15 +8,9 @@
 
 import UIKit
 
-protocol WOWCouponheaderDelegate:class {
-    func noUseCoupon()
-    
-}
 class WOWCouponheaderView: UIView {
 
-    @IBAction func noUserClick (sender: UIButton) {
-        
-    }
+    @IBOutlet weak var noUseButton: UIButton!
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

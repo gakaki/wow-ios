@@ -8,7 +8,7 @@ class VCFound: VCBaseVCCategoryFound {
     let cellID2              = String( WOWFoundRecommendCell )
     let cellID3              = String( WOWFoundCategoryCell )
 
-    let cell3_height         = CGFloat(MGScreenWidth / 3 - 10)*4
+    let cell3_height         = CGFloat(MGScreenWidth / 3 - 10 )*4
     
     var vo_products          = [WOWFoundProductModel]()
     var vo_recommend_product:WOWFoundProductModel?
@@ -18,7 +18,7 @@ class VCFound: VCBaseVCCategoryFound {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         do {
             try request_with_throw()
         }catch{
@@ -107,12 +107,8 @@ class VCFound: VCBaseVCCategoryFound {
         tableView.registerClass(WOWFoundRecommendCell.self, forCellReuseIdentifier:cellID2)
         tableView.registerClass(WOWFoundCategoryCell.self, forCellReuseIdentifier:cellID3)
         tableView.separatorStyle     = .None
-
-//        tableView.userInteractionEnabled = false
-//        tableView.allowsSelection   = false
-        
         tableView.mj_header          = mj_header
-        tableView.clearRestCell()
+        self.edgesForExtendedLayout  = .None
         
     }
 
@@ -138,9 +134,9 @@ WOWFoundCategoryCellDelegate
 
         switch indexPath.section {
         case 0:
-            return 130
+            return 130.h
         case 1:
-            return 210
+            return 180.w
         case 2:
             return cell3_height
         default:
@@ -149,39 +145,49 @@ WOWFoundCategoryCellDelegate
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        view.tintColor = UIColor.whiteColor()
+        let frame                   = CGRectMake(0, 0, tableView.frame.size.width, 65.h)
+        let header                  = UIView(frame: frame)
+        header.backgroundColor      = UIColor.whiteColor()
         
-        let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
-        headerView.textLabel!.textColor             = UIColor.blackColor()
-        headerView.textLabel!.font                  = UIFont.systemFontOfSize(14)
+        let grayView                = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 15.h))
+        grayView.backgroundColor    = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.00)
+        
+        let l                       = UILabel(frame: CGRectMake(15.w, 15.h, 200.w, 50.h))
+        
+        l.textAlignment = .Left
+        l.lineBreakMode = .ByWordWrapping
+        l.numberOfLines = 0
+        l.setLineHeightAndLineBreak(1.25)
+        l.textColor     = UIColor.blackColor()
+        l.font          = UIFont.systemScaleFontSize(14)
 
+        var t           = "本周上新"
+        switch section {
+        case 1:
+            t           = "单品推荐"
+        case 2:
+            t           = "全部分类"
+        default:
+            t           = "本周上新"
+        }
+        l.text          = t
+
+        header.addSubview(grayView)
+        header.addSubview(l)
+     
+        return header
     }
 
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+       return 65.h
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if  ( section == 2) {return 0}
-        return 15
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        switch section {
-        case 0:
-            return "本周上新"
-        case 1:
-            return "单品推荐"
-        case 2:
-            return "全部分类"
-        default:
-            return "全部分类"
-
-        }
+        return CGFloat.min
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -191,9 +197,6 @@ WOWFoundCategoryCellDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-//    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-//        return nil
-//    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         

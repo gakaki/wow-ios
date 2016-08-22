@@ -8,6 +8,7 @@
 
 import UIKit
 import JSONCodable
+import IQKeyboardManagerSwift
 enum AddressEntrance {
     case addAddress
     case editAddress
@@ -55,11 +56,30 @@ class WOWAddAddressController: WOWBaseTableViewController {
         let v = NSBundle.mainBundle().loadNibNamed("WOWPickerView", owner: self, options: nil).last as! WOWPickerView
         return v
     }()
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(false)
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let gesture = UITapGestureRecognizer(target: self, action:#selector(viewTap(_:)))
+//
+//        cell.productImg.addGestureRecognizer(gesture)
+        self.view.addGestureRecognizer(gesture)
     }
-    
+    func viewTap(sender:UITapGestureRecognizer) {
+        nameTextField.resignFirstResponder()
+        phoneTextField.resignFirstResponder()
+        cityTextField.resignFirstResponder()
+        detailAddressTextView.resignFirstResponder()
+//        self.lookBigImg((sender.view?.tag)!)
+        
+    }
     func loadJson(){
         if let path = NSBundle.mainBundle().pathForResource("city", ofType: "json") {
             

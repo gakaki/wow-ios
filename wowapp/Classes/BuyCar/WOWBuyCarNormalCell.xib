@@ -118,14 +118,23 @@
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zg1-SQ-PJH">
+                        <rect key="frame" x="15" y="65" width="345" height="81"/>
+                        <connections>
+                            <action selector="productDetailClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8UL-xV-c2R"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="qgX-zd-Hl4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="369-71-Svm"/>
+                    <constraint firstItem="zg1-SQ-PJH" firstAttribute="top" secondItem="dyR-ah-l3S" secondAttribute="bottom" constant="14.5" id="3RJ-Do-cfs"/>
                     <constraint firstAttribute="trailing" secondItem="eTf-lT-f2D" secondAttribute="trailing" constant="15" id="8lg-Eb-v68"/>
                     <constraint firstAttribute="trailing" secondItem="u5r-HJ-88T" secondAttribute="trailing" constant="15" id="9Cd-Ne-OcS"/>
+                    <constraint firstItem="zg1-SQ-PJH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="9lJ-lK-s1k"/>
                     <constraint firstItem="fXp-Sn-M48" firstAttribute="bottom" secondItem="qgX-zd-Hl4" secondAttribute="bottom" id="A3D-er-wz6"/>
                     <constraint firstAttribute="bottomMargin" secondItem="qgX-zd-Hl4" secondAttribute="bottom" constant="5" id="C2Y-CU-Tmz"/>
                     <constraint firstAttribute="trailing" secondItem="fXp-Sn-M48" secondAttribute="trailing" constant="15" id="C82-XB-zcy"/>
+                    <constraint firstAttribute="bottom" secondItem="zg1-SQ-PJH" secondAttribute="bottom" constant="13.5" id="Dig-fO-WRD"/>
                     <constraint firstItem="fXp-Sn-M48" firstAttribute="top" secondItem="u5r-HJ-88T" secondAttribute="bottom" constant="8" id="F3c-bx-Yxx"/>
                     <constraint firstItem="7gH-zu-kOK" firstAttribute="leading" secondItem="nRw-uF-qyi" secondAttribute="trailing" id="IHm-Mc-JST"/>
                     <constraint firstItem="dyR-ah-l3S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="JqD-dX-KHi"/>
@@ -145,6 +154,7 @@
                     <constraint firstItem="qgX-zd-Hl4" firstAttribute="top" secondItem="dyR-ah-l3S" secondAttribute="bottom" constant="15" id="xC5-82-uf4"/>
                     <constraint firstItem="7gH-zu-kOK" firstAttribute="centerY" secondItem="1L5-Zq-KJv" secondAttribute="centerY" id="ycD-jr-8Ua"/>
                     <constraint firstItem="Ks0-k6-Sg4" firstAttribute="bottom" secondItem="qgX-zd-Hl4" secondAttribute="bottom" id="ydt-IF-bcP"/>
+                    <constraint firstAttribute="trailing" secondItem="zg1-SQ-PJH" secondAttribute="trailing" constant="15" id="zQM-rG-Oea"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -158,7 +168,7 @@
                 <outlet property="selectButton" destination="1L5-Zq-KJv" id="dao-YH-vgK"/>
                 <outlet property="subCountButton" destination="nRw-uF-qyi" id="h6Q-sL-qEw"/>
             </connections>
-            <point key="canvasLocation" x="873.5" y="299"/>
+            <point key="canvasLocation" x="921.5" y="270"/>
         </tableViewCell>
     </objects>
     <resources>

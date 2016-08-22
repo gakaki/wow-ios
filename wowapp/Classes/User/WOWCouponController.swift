@@ -92,17 +92,7 @@ class WOWCouponController: WOWBaseViewController {
 
     }
     
-    func changeColor(cell: WOWCouponCell, color_status: UIColor)  {
-        cell.label_amount.textColor             = color_status
-        cell.label_title.textColor              = color_status
-        cell.label_is_used.textColor            = color_status
-        cell.label_time_limit.textColor         = color_status
-        
-        cell.label_unit.textColor               = color_status
-        cell.label_identifier.backgroundColor   = color_status
-        
-        cell.draw_dashed_line(color_status)
-    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -125,46 +115,37 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         
         //这题注意是利用section做分隔 所以一个section 一个row
         let r = self.vo_cupons[indexPath.section]
-            cell.label_amount.font = UIFont.priceFont(50)
+            cell.label_amount.font = UIFont.priceFont(40)
             cell.label_amount.text          = r.minAmountLimit?.toString
             cell.label_title.text           = r.couponTitle!
         
-            if ( r.status == 0) { //不可用
-                cell.label_is_used.text         = r.used ? "已使用":"未使用"
-                cell.label_is_used.text         = r.statusDesc
-            }
+        
             cell.label_time_limit.text      = "\(r.effectiveFrom!)至\(r.effectiveTo!)"
             
 //            var bgView                      = UIView(frame: cell.frame)
 //            bgView.backgroundColor          = UIColor(red:0.80, green:0.80, blue:0.80, alpha:0.50)
 //            cell.addSubview(bgView)
-            let color_status_disable        = UIColor(red:0.80, green:0.80, blue:0.80, alpha:0.50)
-            let color_status_enable         = UIColor(red:0.82, green:0.71, blue:0.58, alpha:1.00)
-            
-            
-            if r.used == true || r.expired == true { //已使用 变灰
-               
-                changeColor(cell, color_status: color_status_disable)
-            }else{
-                changeColor(cell, color_status: color_status_enable)
+
+        if ( r.status == 0) { //不可用
+            cell.showData(false)
+        }else {
+            cell.showData(true)
+        }
+        cell.label_is_used.text         = r.statusDesc
+
+  
+        if entrance == .orderEntrance {
+             
+            if r.id == couponModel?.id {
+                r.isSelect = true
             }
-            
-            if entrance == .orderEntrance {
-                if r.canUsed == false {
-                    changeColor(cell, color_status: color_status_disable)
-                }else {
-                    changeColor(cell, color_status: color_status_enable)
-                }
-                if r.id == couponModel?.id {
-                    r.isSelect = true
-                }
-                if r.isSelect {
-                    cell.image_check.hidden         = false
+            if r.isSelect {
+                cell.image_check.hidden         = false
                     
-                }else {
-                    cell.image_check.hidden         = true
-                }
+            }else {
+                cell.image_check.hidden         = true
             }
+        }
         
         
         return cell

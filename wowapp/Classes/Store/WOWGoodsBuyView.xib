@@ -53,15 +53,8 @@
                                 <action selector="sharButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="4w8-aa-Mr9"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MFg-ob-Mh5" userLabel="line">
-                            <rect key="frame" x="0.0" y="0.0" width="395" height="1"/>
-                            <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="f34-LE-xGR"/>
-                            </constraints>
-                        </view>
                         <button opaque="NO" tag="4003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Nh-Ir-38J">
-                            <rect key="frame" x="195" y="1" width="100" height="50"/>
+                            <rect key="frame" x="195" y="0.0" width="100" height="50"/>
                             <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="7dt-nO-ytV"/>
@@ -96,7 +89,6 @@
                     <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="1zP-UU-QPs"/>
-                        <constraint firstItem="MFg-ob-Mh5" firstAttribute="leading" secondItem="Hza-a2-1RF" secondAttribute="leading" id="Bf0-Kg-qxX"/>
                         <constraint firstItem="onZ-29-BUW" firstAttribute="height" secondItem="6Nh-Ir-38J" secondAttribute="height" id="C87-pe-dTC"/>
                         <constraint firstItem="6K3-rO-I60" firstAttribute="centerY" secondItem="5oP-rH-F7B" secondAttribute="centerY" id="EEV-HB-JCS"/>
                         <constraint firstItem="onZ-29-BUW" firstAttribute="top" secondItem="Hza-a2-1RF" secondAttribute="top" id="EhP-ZD-rcH"/>
@@ -104,13 +96,11 @@
                         <constraint firstItem="6K3-rO-I60" firstAttribute="leading" secondItem="5oP-rH-F7B" secondAttribute="trailing" id="JGu-OF-1y4"/>
                         <constraint firstItem="onZ-29-BUW" firstAttribute="leading" secondItem="6Nh-Ir-38J" secondAttribute="trailing" id="SP0-1s-ucb"/>
                         <constraint firstItem="6K3-rO-I60" firstAttribute="top" secondItem="Hza-a2-1RF" secondAttribute="top" id="bT2-FZ-NT7"/>
-                        <constraint firstAttribute="trailing" secondItem="MFg-ob-Mh5" secondAttribute="trailing" id="dkG-tj-qWs"/>
                         <constraint firstAttribute="trailing" secondItem="onZ-29-BUW" secondAttribute="trailing" id="i3M-VF-p1h"/>
-                        <constraint firstItem="6Nh-Ir-38J" firstAttribute="top" secondItem="MFg-ob-Mh5" secondAttribute="bottom" id="qKa-fP-XYv"/>
                         <constraint firstItem="onZ-29-BUW" firstAttribute="width" secondItem="6Nh-Ir-38J" secondAttribute="width" id="qNN-0R-QeP"/>
+                        <constraint firstItem="6Nh-Ir-38J" firstAttribute="top" secondItem="Hza-a2-1RF" secondAttribute="top" id="rK2-Kk-UpP"/>
                         <constraint firstItem="6K3-rO-I60" firstAttribute="width" secondItem="5oP-rH-F7B" secondAttribute="width" id="v54-5i-Ib8"/>
                         <constraint firstItem="6K3-rO-I60" firstAttribute="height" secondItem="5oP-rH-F7B" secondAttribute="height" id="x71-uh-r8Z"/>
-                        <constraint firstItem="MFg-ob-Mh5" firstAttribute="top" secondItem="Hza-a2-1RF" secondAttribute="top" id="yOM-oz-ZIM"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXG-bR-i5f" userLabel="topView">

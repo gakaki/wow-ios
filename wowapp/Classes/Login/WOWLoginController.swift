@@ -91,8 +91,8 @@ class WOWLoginController: WOWBaseViewController {
     
     @IBAction func login(sender: UIButton) {
         guard let phone = accountTextField.text where !phone.isEmpty else{
-            WOWHud.showMsg("请输入账号")
-            tipsLabel.text = "请输入账号"
+            WOWHud.showMsg("请输入手机号")
+            tipsLabel.text = "请输入手机号"
             return
         }
         guard let passwd = passWordTextField.text where !passwd.isEmpty else{
@@ -101,8 +101,8 @@ class WOWLoginController: WOWBaseViewController {
             return
         }
         guard phone.validateMobile() || phone.validateEmail() else{
-            WOWHud.showMsg("对不起，账号格式错误")
-            tipsLabel.text = "账号格式错误"
+            WOWHud.showMsg("请输入正确的手机号")
+            tipsLabel.text = "请输入正确的手机号"
             return
         }
         

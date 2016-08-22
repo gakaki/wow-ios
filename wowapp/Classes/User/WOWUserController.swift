@@ -213,6 +213,10 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
         case let (1,row):
             switch row {
             case 0://优惠券
+                guard WOWUserManager.loginStatus else{
+                    toLoginVC(true)
+                    return
+                }
                 let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
                 vc.entrance = couponEntrance.userEntrance
                 navigationController?.pushViewController(vc, animated: true)

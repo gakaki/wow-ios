@@ -89,12 +89,12 @@ class WOWNetManager {
                                 NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
                                 WOWHud.showMsg("登录已过期，请重新登录")
                                 WOWUserManager.exitLogin()
-                                if ( self.getPresentedController()  != nil){
-                                    return
-                                }else{
+//                                if ( self.getPresentedController()  != nil){
+//                                    return
+//                                }else{
                                     UIApplication.currentViewController()?.toLoginVC(true)
                                     return
-                                }
+//                                }
                             }
                             failClosure(errorMsg:info?.message)
                             WOWHud.showMsg(info?.message)

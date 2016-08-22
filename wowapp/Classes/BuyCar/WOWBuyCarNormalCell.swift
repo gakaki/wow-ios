@@ -80,16 +80,14 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
             subCountButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
         
-        goodsImageView.addTapGesture(action: {[weak self] (tap) in
-            if let strongSelf = self {
-                if let del = strongSelf.delegate {
-                    del.goProductDetail(model.parentProductId)
-                }
-            }
-        })
+       
     }
 
-
+    @IBAction func productDetailClick (sender: UIButton) {
+        if let del = self.delegate {
+            del.goProductDetail(model.parentProductId)
+        }
+    }
     
     
     

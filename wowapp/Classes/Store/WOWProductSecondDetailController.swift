@@ -134,9 +134,16 @@ extension WOWProductSecondDetailController:UITableViewDelegate,UITableViewDataSo
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailCell), forIndexPath: indexPath) as! WOWProductDetailCell
         let model = dataArray[indexPath.row]
-
+        
         cell.productImg.set_webimage_url( model.image! )
-        cell.imgDescLabel.text = model.text ?? ""
+        
+        let descStr = NSMutableAttributedString(string: model.text ?? "")
+        let descStyle = NSMutableParagraphStyle()
+        descStyle.lineHeightMultiple = 1.5      //设置1.5倍行距
+        descStyle.lineBreakMode = .ByTruncatingTail
+        descStr.addAttribute(NSParagraphStyleAttributeName, value: descStyle, range: NSMakeRange(0, descStr.length))
+        cell.imgDescLabel.attributedText = descStr
+
 
         let gesture = UITapGestureRecognizer(target: self, action:#selector(viewTap(_:)))
         

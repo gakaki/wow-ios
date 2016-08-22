@@ -45,11 +45,11 @@ public enum RequestApi{
     
     case Api_BrandDetail(brandId: Int)
     
-    case Api_ProductBrand(brandId: Int)
+    case Api_ProductBrand(brandId: Int, pageSize: Int, currentPage: Int)
     //设计师
     case Api_DesignerDetail(designerId: Int)
     
-    case Api_productDesigner(designerId: Int)
+    case Api_productDesigner(designerId: Int, pageSize: Int, currentPage: Int)
     
     
     case Api_Category(categoryId:String) //查看分类
@@ -374,12 +374,12 @@ extension RequestApi:TargetType{
                 params = ["mobile":account,"password":password]
             case let .Api_BrandDetail(brandid):
                 params = ["brandId": brandid]
-            case let .Api_ProductBrand(brandId):
-                params = ["brandId": brandId]
+            case let .Api_ProductBrand(brandId, pageSize, currentPage):
+                params = ["brandId": brandId, "pageSize": pageSize, "currentPage": currentPage]
             case let .Api_DesignerDetail(designerId):
                 params = ["designerId": designerId]
-            case let .Api_productDesigner(designerId):
-                params = ["designerId": designerId]
+            case let .Api_productDesigner(designerId, pageSize, currentPage):
+                params = ["designerId": designerId, "pageSize": pageSize, "currentPage": currentPage]
             case let .Api_ProductList(pageindex,categoryID,style,sort,uid,keyword):
                 params = ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid,"keyword":keyword]
             case let .Api_ProductDetail(productId):

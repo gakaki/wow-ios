@@ -34,8 +34,8 @@ class WOWFavoriteController: WOWBaseViewController {
         let parameters: [CAPSPageMenuOption] = [
             .ScrollMenuBackgroundColor(UIColor.whiteColor()),
             .MenuHeight(40),
-            .MenuMargin((MGScreenWidth - 230)/3),
-            .MenuItemWidth(65),
+            .MenuMargin((MGScreenWidth - 180)/4),
+            .MenuItemWidth(60),
             .SelectionIndicatorColor(UIColor.blackColor()),
             .SelectedMenuItemLabelColor(UIColor.blackColor()),
             .MenuItemSeparatorPercentageHeight(0.1),

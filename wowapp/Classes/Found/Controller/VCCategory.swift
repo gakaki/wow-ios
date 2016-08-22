@@ -72,7 +72,7 @@ CollectionViewWaterfallLayoutDelegate
     }
     func reset_fetch_params(){
         self.pageIndex = 1
-        self.vo_products = []
+//        self.vo_products = []
         if ( self.cv_bottom != nil ){
             self.cv_bottom.setContentOffset(CGPointZero, animated: true)
 
@@ -152,7 +152,7 @@ CollectionViewWaterfallLayoutDelegate
         cv_bottom.showsVerticalScrollIndicator  = false
 
         cv_bottom.decelerationRate = UIScrollViewDecelerationRateFast
-        cv_bottom.bounces = false
+//        cv_bottom.bounces = false
         
         cv_bottom.mj_footer = self.mj_footer
         self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
@@ -160,11 +160,7 @@ CollectionViewWaterfallLayoutDelegate
         
         cv_bottom.emptyDataSetSource = self;
         cv_bottom.emptyDataSetDelegate = self;
-        
-//        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
 
-//        [self.tableView.footer setTitle:@"" forState:MJRefreshFooterStateIdle];
-        
     }
 
     override func request(){
@@ -234,6 +230,8 @@ CollectionViewWaterfallLayoutDelegate
 
             return
         }
+        
+        if ( selectedButton == nil) { selectedButton = button }
         // 修改按钮状态
         selectedButton!.highlighted = true
         selectedButton!.selected = false
@@ -293,25 +291,28 @@ CollectionViewWaterfallLayoutDelegate
             button.setTitleColor(UIColor.blackColor(), forState: .Normal)
             button.setTitleColor(UIColor.blackColor(), forState: .Selected)
             
-            
             button.addTarget(self, action: #selector(titlesClick(_:)), forControlEvents: .TouchUpInside)
             
             btn_choose_view.addSubview(button)
             
+            button.selected     = false
+            button.highlighted  = true
             
             
-            
-            //默认点击了第一个按钮
-            if index == 0 {
-                button.selected = true
-                selectedButton = button
-                //让按钮内部的Label根据文字来计算内容
-                button.titleLabel?.sizeToFit()
-//                self.indicatorView.w         = button.titleLabel!.w * kIndicatorViewwRatio
-                self.indicatorView.w         = self.view.w / 3
-                self.indicatorView.centerX   = button.centerX
-                
+            if index == 0 {//默认点击了第一个按钮
+                button.sendActionsForControlEvents(.TouchUpInside)
             }
+   
+//
+//            if index == 0 {
+//                button.selected     = true
+//                selectedButton = button
+//                //让按钮内部的Label根据文字来计算内容
+//                button.titleLabel?.sizeToFit()
+//                 self.indicatorView.w         = self.view.w / 3
+//                self.indicatorView.centerX   = button.centerX
+//                
+//            }
         }
         
         btn_choose_view.addSubview(self.indicatorView)

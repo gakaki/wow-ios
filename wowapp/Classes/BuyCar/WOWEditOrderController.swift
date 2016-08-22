@@ -296,12 +296,12 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 cell.couponLabel.hidden = true
                 cell.nextImage.hidden = true
                 cell.freightPriceLabel.hidden = false
-                cell.freightInfoImage.hidden = false
+//                cell.freightInfoImage.hidden = false
                 cell.lineView.hidden = false
             }else {
                 cell.leftLabel.text = "优惠券"
                 cell.freightPriceLabel.hidden = true
-                cell.freightInfoImage.hidden = true
+//                cell.freightInfoImage.hidden = true
                 cell.nextImage.hidden = false
                 cell.couponLabel.hidden = false
                 cell.lineView.hidden = true

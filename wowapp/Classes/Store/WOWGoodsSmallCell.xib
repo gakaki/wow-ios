@@ -15,8 +15,8 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="188" height="263"/>
                 <subviews>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="已售罄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO4-53-yGM" userLabel="label_soldout">
-                        <rect key="frame" x="55" y="88" width="80" height="30"/>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售罄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO4-53-yGM" userLabel="label_soldout">
+                        <rect key="frame" x="54" y="88" width="80" height="30"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="GaU-c5-P2f"/>
@@ -84,7 +84,7 @@
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfV-yt-dm1">
-                        <rect key="frame" x="2" y="6" width="184" height="184"/>
+                        <rect key="frame" x="0.0" y="4" width="186" height="186"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="cfV-yt-dm1" secondAttribute="height" multiplier="1:1" id="BMd-yG-t8p"/>
                             <constraint firstAttribute="width" secondItem="cfV-yt-dm1" secondAttribute="height" multiplier="1:1" priority="750" id="FLA-pK-sbw"/>
@@ -117,6 +117,7 @@
                 <constraint firstItem="oum-zS-9g3" firstAttribute="leading" secondItem="LJT-CF-ioX" secondAttribute="trailing" id="JlH-GG-3pd"/>
                 <constraint firstItem="LJT-CF-ioX" firstAttribute="top" secondItem="iO4-53-yGM" secondAttribute="bottom" constant="82" id="K4Z-tv-PtZ"/>
                 <constraint firstItem="LJT-CF-ioX" firstAttribute="top" secondItem="iO4-53-yGM" secondAttribute="bottom" constant="78" id="PaQ-NA-ctW"/>
+                <constraint firstItem="cfV-yt-dm1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RAT-3t-JU9"/>
                 <constraint firstItem="iO4-53-yGM" firstAttribute="centerX" secondItem="cfV-yt-dm1" secondAttribute="centerX" constant="1" id="RcI-jo-X9G"/>
                 <constraint firstItem="iO4-53-yGM" firstAttribute="centerY" secondItem="cfV-yt-dm1" secondAttribute="centerY" constant="6" id="Rrd-7H-1jy"/>
                 <constraint firstItem="LJT-CF-ioX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="S1G-pe-BoQ"/>
@@ -133,7 +134,7 @@
                 <constraint firstAttribute="trailing" secondItem="cfV-yt-dm1" secondAttribute="trailing" constant="15" id="ovW-c5-vLN"/>
                 <constraint firstAttribute="bottom" secondItem="oum-zS-9g3" secondAttribute="bottom" id="s3o-ed-CSu"/>
                 <constraint firstAttribute="bottom" secondItem="LJT-CF-ioX" secondAttribute="bottom" id="sbu-P0-5In"/>
-                <constraint firstItem="cfV-yt-dm1" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="98:100" id="vA3-VH-4Vt"/>
+                <constraint firstItem="cfV-yt-dm1" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="99:100" id="vA3-VH-4Vt"/>
                 <constraint firstItem="LJT-CF-ioX" firstAttribute="top" secondItem="cfV-yt-dm1" secondAttribute="bottom" constant="30" id="wQd-aC-Mjr"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="x0w-gl-wRk"/>
                 <constraint firstAttribute="trailing" secondItem="oum-zS-9g3" secondAttribute="trailing" constant="0.5" id="xiG-nf-EMY"/>
@@ -143,6 +144,7 @@
             <size key="customSize" width="231" height="263"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="59r-2N-jJp"/>
                     <exclude reference="8AU-1r-I5p"/>
                     <exclude reference="Apc-vH-RIp"/>
                     <exclude reference="SLi-KS-TK3"/>

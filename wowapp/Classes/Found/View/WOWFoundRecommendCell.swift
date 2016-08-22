@@ -77,7 +77,7 @@ class WOWFoundRecommendCell: UITableViewCell {
     
     func setUI_btnLike() {
         
-        let image                   = UIImage(named: "likeblack") as UIImage?
+        let image                   = UIImage(named: "like-gray") as UIImage?
         let image_selected          = UIImage(named: "like_select") as UIImage?
         
         let button                  = UIButton(type: UIButtonType.Custom)
@@ -219,7 +219,7 @@ class WOWFoundRecommendCell: UITableViewCell {
                                 
                                 btnLike.configure({
                                     $0.style.dimensions = ( 40 , 40)
-                                    $0.style.margin     = (0, Float(-10.h), 0, 0, 0,5)
+                                    $0.style.margin     = (0, Float(-15.h), 0, 0, 0,5)
                                     $0.style.alignSelf  = .FlexEnd
 
                                 })

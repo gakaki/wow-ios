@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freightInfo" translatesAutoresizingMaskIntoConstraints="NO" id="qL0-on-iip">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freightInfo" translatesAutoresizingMaskIntoConstraints="NO" id="qL0-on-iip">
                         <rect key="frame" x="60.5" y="18" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="Bi6-ol-TtB"/>

@@ -223,9 +223,9 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
             
             if let pic = self.vo_topic?.topicImg {
                 headerView.imageView.set_webimage_url(pic )
-                headerView.label_name.text = self.vo_topic?.topicName
+                headerView.label_name.text = self.vo_topic?.topicMainTitle
                 headerView.label_desc.text = self.vo_topic?.topicDesc
-                headerView.label_name.text = "归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋"
+//                headerView.label_name.text = "归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋"
 
             }
             

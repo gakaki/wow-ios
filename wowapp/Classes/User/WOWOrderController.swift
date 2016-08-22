@@ -141,9 +141,9 @@ class WOWOrderController: WOWBaseViewController {
                     }
 
                 }else {
-//                    if strongSelf.pageIndex == 1{
+                    if strongSelf.pageIndex == 1{
                         strongSelf.dataArr = []
-//                    }
+                    }
 
                     strongSelf.tableView.mj_footer = nil
 

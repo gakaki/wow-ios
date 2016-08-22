@@ -43,21 +43,7 @@ class WOWCouponController: WOWBaseViewController {
         self.tableView.mj_footer = self.mj_footer
     }
     
-    override func navBack() {
-        switch entrance {
-        case .orderEntrance:
-            if let ac = action{
-                ac(object: couponModel ?? "")
-            }
-            super.navBack()
-            return
-        default:
-            super.navBack()
-            return
-        }
-        
 
-    }
     override func request(){
         var params = [String: AnyObject]?()
         switch entrance {
@@ -188,20 +174,14 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         switch entrance {
             
         case .orderEntrance:
-            let selectCoupon = vo_cupons[indexPath.section]
-            if selectCoupon.canUsed ?? false{
-                for coupon in vo_cupons {
-                    coupon.isSelect = false
+                if let ac = action{
+                    ac(object: vo_cupons[indexPath.section])
+                    navigationController?.popViewControllerAnimated(true)
                 }
-                selectCoupon.isSelect = true
-                couponModel = selectCoupon
-            }
-            tableView.reloadData()
             
         default:
             return
         }
-        print(indexPath.section)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

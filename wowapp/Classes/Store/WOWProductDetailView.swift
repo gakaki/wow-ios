@@ -14,8 +14,17 @@ class WOWProductDetailView: UIView {
    
     
     func showDataa (model:WOWProductModel) {
-            productNameLabel.text = model.productName ?? ""
-            productDescLabel.text = model.sellingPoint ?? ""
+        productNameLabel.text = model.productName ?? ""
+
+        
+        let descStr = NSMutableAttributedString(string: model.productName ?? "")
+        let descStyle = NSMutableParagraphStyle()
+        descStyle.lineHeightMultiple = 1.5      //设置1.5倍行距
+        descStyle.lineBreakMode = .ByTruncatingTail
+        descStyle.alignment = .Center
+        descStr.addAttribute(NSParagraphStyleAttributeName, value: descStyle, range: NSMakeRange(0, descStr.length))
+        productDescLabel.attributedText = descStr
+
 
     }
     

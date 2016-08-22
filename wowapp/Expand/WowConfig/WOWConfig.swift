@@ -105,7 +105,7 @@ let ThemeBlackColor = MGRgb(20, g:20, b:20)
 
 let BorderColor     = MGRgb(200, g: 199, b: 204)
 
-let SeprateColor    = MGRgb(245, g:245, b: 245)
+let SeprateColor    = MGRgb(234, g:234, b: 234)
 
 let MaskColor       = MGRgb(0, g: 0, b: 0, alpha: 0.6)
 

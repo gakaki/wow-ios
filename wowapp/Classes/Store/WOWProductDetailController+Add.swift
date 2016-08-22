@@ -113,6 +113,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case (2,0)://温馨提示
             let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailTipsCell", forIndexPath: indexPath) as! WOWProductDetailTipsCell
+            
             returnCell = cell
 //        case (3,_)://评论
 //            let cell = tableView.dequeueReusableCellWithIdentifier("WOWCommentCell", forIndexPath: indexPath) as! WOWCommentCell

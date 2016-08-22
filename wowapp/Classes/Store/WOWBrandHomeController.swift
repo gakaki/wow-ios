@@ -23,6 +23,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     var designerId : Int?
     var designerModel : WOWDesignerModel?
     var labelHeight : CGFloat?
+    let pageSize = 2
     
     var entrance = brandOrDesignerEntrance.brandEntrance
     
@@ -52,6 +53,25 @@ class WOWBrandHomeController: WOWBaseViewController {
         self.edgesForExtendedLayout = .None
         configCollectionView()
         collectionView.mj_header = self.mj_header
+        collectionView.mj_footer = self.mj_footer
+        //判断一下是品牌详情还是设计师详情
+        switch entrance {
+        case .brandEntrance:
+            
+            requestBrandDetail()
+            if WOWUserManager.loginStatus {
+                requestIsFavoriteBrand()
+            }
+            
+        case .designerEntrance:
+            
+            requestDesignerDetail()
+            if WOWUserManager.loginStatus {
+                requestIsFavoriteDesigner()
+            }
+            
+        }
+
     }
     
     private func configCollectionView(){
@@ -123,20 +143,13 @@ class WOWBrandHomeController: WOWBaseViewController {
         //判断一下是品牌详情还是设计师详情
         switch entrance {
         case .brandEntrance:
-            
-            requestBrandDetail()
-            if WOWUserManager.loginStatus {
-                requestIsFavoriteBrand()
-            }
+            requestProductBrand()
             
         case .designerEntrance:
+            requestProductDesigner()
             
-            requestDesignerDetail()
-            if WOWUserManager.loginStatus {
-                requestIsFavoriteDesigner()
-            }
-        
         }
+
     }
     
     //品牌详情
@@ -156,16 +169,48 @@ class WOWBrandHomeController: WOWBaseViewController {
             }
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(brandId: brandID ?? 0), successClosure: {[weak self](result) in
-            if let strongSelf = self{
-                let json = JSON(result)
-                DLog(json)
-                strongSelf.dataArr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject) ?? [WOWProductModel]()
-                strongSelf.collectionView.reloadData()
-                strongSelf.endRefresh()
+        
+    }
+    
+    //品牌商品列表
+    func requestProductBrand() {
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(brandId: brandID ?? 0, pageSize: pageSize, currentPage: pageIndex), successClosure: {[weak self](result) in
+          
+                if let strongSelf = self{
+                    
+                    strongSelf.endRefresh()
+                    
+                    let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                    
+                    if let array = arr{
+                        
+                        if strongSelf.pageIndex == 1{
+                            strongSelf.dataArr = []
+                        }
+                        strongSelf.dataArr.appendContentsOf(array)
+                        //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                        if array.count < strongSelf.pageSize {
+                            strongSelf.collectionView.mj_footer = nil
+                            
+                        }else {
+                            strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                        }
+                        
+                    }else {
+                        if strongSelf.pageIndex == 1{
+                            strongSelf.dataArr = []
+                        }
+                    
+                        strongSelf.collectionView.mj_footer = nil
+                        
+                    }
+                    strongSelf.collectionView.reloadData()
+
             }
+            
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
+                strongSelf.collectionView.mj_footer = nil
                 strongSelf.endRefresh()
             }
         }
@@ -187,16 +232,47 @@ class WOWBrandHomeController: WOWBaseViewController {
             }
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_productDesigner(designerId: designerId ?? 0), successClosure: {[weak self](result) in
+       
+    }
+    //设计师商品列表
+    func requestProductDesigner() {
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_productDesigner(designerId: designerId ?? 0, pageSize: pageSize, currentPage: pageIndex), successClosure: {[weak self](result) in
+            
             if let strongSelf = self{
-                let json = JSON(result)
-                DLog(json)
-                strongSelf.dataArr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject) ?? [WOWProductModel]()
-                strongSelf.collectionView.reloadData()
+                
                 strongSelf.endRefresh()
+                
+                let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                
+                if let array = arr{
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.dataArr.appendContentsOf(array)
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < strongSelf.pageSize {
+                        strongSelf.collectionView.mj_footer = nil
+                        
+                    }else {
+                        strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                    }
+                    
+                }else {
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    
+                    strongSelf.collectionView.mj_footer = nil
+                    
+                }
+                strongSelf.collectionView.reloadData()
+                
             }
+
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
+                strongSelf.collectionView.mj_footer = nil
                 strongSelf.endRefresh()
             }
         }

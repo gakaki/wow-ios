@@ -73,7 +73,10 @@ CollectionViewWaterfallLayoutDelegate
     func reset_fetch_params(){
         self.pageIndex = 1
         self.vo_products = []
-//        self.cv_bottom.setContentOffset(CGPointZero, animated: true)
+        if ( self.cv_bottom != nil ){
+            self.cv_bottom.setContentOffset(CGPointZero, animated: true)
+
+        }
     }
     
     var query_showCount:Int     = 10

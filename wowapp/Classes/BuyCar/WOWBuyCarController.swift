@@ -158,7 +158,8 @@ class WOWBuyCarController: WOWBaseViewController {
                     let model = Mapper<WOWCarModel>().map(result)
                     if let arr = model?.shoppingCartResult {
                         strongSelf.dataArr = arr
-                        
+                        strongSelf.bottomView.hidden = false
+
                         //判断当前数组有多少默认选中的加入选中的数组
                         for product in strongSelf.dataArr {
                             if product.isSelected ?? false {

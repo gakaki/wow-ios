@@ -27,7 +27,7 @@ class WOWFavDesigner: WOWBaseViewController {
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        addObservers()
+   
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,26 +37,27 @@ class WOWFavDesigner: WOWBaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.hidden = false
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
+//       NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWRefreshFavoritNotificationKey, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
-    
-    //MARK:Private Method
-    private func addObservers(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
+    private func addObserver(){
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshList), name:WOWRefreshFavoritNotificationKey, object:nil)
         
     }
-    func loginSuccess() {
+    func refreshList()  {
         request()
     }
-    override func setUI() {
+
+    
+       override func setUI() {
         super.setUI()
         configCollectionView()
+        addObserver()
         
     }
     lazy var layout:CollectionViewWaterfallLayout = {

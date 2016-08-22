@@ -220,6 +220,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteBrand(brandId: brandID ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.likeButton.selected = !strongSelf.likeButton.selected
+                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in
             
@@ -232,6 +233,8 @@ class WOWBrandHomeController: WOWBaseViewController {
             if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.likeButton.selected = favorite ?? false
+      
+
             }
         }) {(errorMsg) in
             
@@ -244,6 +247,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteDesigner(designerId: designerId ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.likeButton.selected = !strongSelf.likeButton.selected
+                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in
             

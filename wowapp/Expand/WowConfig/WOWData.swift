@@ -30,6 +30,9 @@ let  WOWToLoginNotificationKey          = "WOWToLoginNotificationKey"
 //登录成功
 let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
 
+//登录成功
+let  WOWRefreshFavoritNotificationKey     = "WOWRefreshFavoritNotificationKey"
+
 //退出登录
 let WOWExitLoginNotificationKey         = "WOWExitLoginNotificationKey"
 

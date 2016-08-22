@@ -25,7 +25,7 @@ class WOWFavBrand: WOWBaseViewController {
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        addObservers()
+    
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,7 +35,7 @@ class WOWFavBrand: WOWBaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.hidden = false
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWRefreshFavoritNotificationKey, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,14 +48,8 @@ class WOWFavBrand: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configCollectionView()
+        addObserver()
         
-    }
-    private func addObservers(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
-        
-    }
-    func loginSuccess() {
-        request()
     }
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
@@ -90,7 +84,15 @@ class WOWFavBrand: WOWBaseViewController {
     func goStore() -> Void {
         print("去逛逛")
     }
-    
+    private func addObserver(){
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshList), name:WOWRefreshFavoritNotificationKey, object:nil)
+        
+    }
+    func refreshList()  {
+        request()
+    }
+
     //MARK:Network
     override func request() {
         super.request()

@@ -48,6 +48,11 @@ public extension UIViewController{
                 let offset = UIDevice.deviceType.rawValue > 3 ? -20 : -16
                 left.imageInsets = UIEdgeInsetsMake(0,CGFloat(offset),0, 0);
             }
+        }else{
+            if let left = self.navigationItem.rightBarButtonItem{
+                let offset = UIDevice.deviceType.rawValue > 3 ? -20 : -16
+                left.imageInsets = UIEdgeInsetsMake(0,CGFloat(offset),0, 8);
+            }
         }
     }
 

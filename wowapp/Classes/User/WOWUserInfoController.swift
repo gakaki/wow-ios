@@ -112,7 +112,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
     }
     private func removeObserver() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWExitLoginNotificationKey, object: nil)
     }
     override func setUI() {

@@ -631,12 +631,12 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                         let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.deliveryFee ?? 0],counts:[1])
 
                         cell.priceLabel.text       = result
-                        cell.saidImageView.hidden  = false
+                        cell.saidImageView.hidden  = true
                         cell.freightTypeLabel.text = "运费"
                     }
                     if indexPath.row == 1 {
                          let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
-                        cell.priceLabel.text       = result
+                        cell.priceLabel.text       = "-" + result
                         cell.saidImageView.hidden  = true
                         cell.freightTypeLabel.text = "优惠券"
                     }

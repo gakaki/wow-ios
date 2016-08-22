@@ -28,9 +28,10 @@ class WOWOrderDetailNewCell: UITableViewCell {
         let orderProductModel = orderNewDetailModel!.unShipOutOrderItems![indexRow]
         colorLabel.text = " " + (orderProductModel.color ?? " ") + "   "
         titleLabel.text = orderProductModel.productName
-//        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
-        titleImageView.set_webimage_url( orderProductModel.specImg )
+        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        
+//        titleImageView.set_webimage_url( orderProductModel.specImg )
 
         let result = WOWCalPrice.calTotalPrice([orderProductModel.sellPrice ?? 0],counts:[1])
         

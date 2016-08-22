@@ -1,3 +1,4 @@
+
 //
 //  WOWCouponController.swift
 //  wowapp
@@ -141,8 +142,11 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
 
             cell.label_amount.text          = r.minAmountLimit?.toString
             cell.label_title.text           = r.couponTitle!
-            
-            cell.label_is_used.text         = r.used ? "已使用":"未使用"
+        
+            if ( r.status == 0) { //不可用
+                cell.label_is_used.text         = r.used ? "已使用":"未使用"
+                cell.label_is_used.text         = r.statusDesc
+            }
             cell.label_time_limit.text      = "\(r.effectiveFrom!)至\(r.effectiveTo!)"
             
 //            var bgView                      = UIView(frame: cell.frame)

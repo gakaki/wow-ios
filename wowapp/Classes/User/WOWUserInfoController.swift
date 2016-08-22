@@ -63,6 +63,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
     }
    
     override func viewDidAppear(animated: Bool) {
@@ -74,12 +75,25 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+            clearImageView()
             configUserInfo()
             configPickerView()
     }
 
+    func clearImageView(){
+        self.headImageView.image      = nil
+        if ( self.image != nil ){
+            self.headImageView.image = self.image
+        }else{
+            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+        }
+        
+    }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.clearImageView()
+        
         removeObserver()
         backGroundMaskView.removeFromSuperview()
         pickerContainerView.removeFromSuperview()
@@ -145,18 +159,15 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
-
-//            
-//            if ( self.image != nil )
-//            {
-//                self.headImageView.image  = self.image
-//            }else{
-//                
-//            
-//            }
-            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
             
+            
+            
+            if ( self.image != nil ){
+                self.headImageView.image = self.image
+            }else{
+                self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+            }
+
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
             self.starTextField.userInteractionEnabled = false
@@ -448,9 +459,11 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         DLog(self.headImageUrl)
                         self.request()
                     }
+                    
                     WOWUserManager.userHeadImageUrl = self.headImageUrl
                     self.headImageView.image =  image
                     self.image               =  image
+       
                     
                     NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                     

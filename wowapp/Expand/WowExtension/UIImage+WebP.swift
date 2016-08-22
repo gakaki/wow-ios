@@ -29,6 +29,7 @@ extension UIImageView {
     
     func set_webimage_url_user( url:String? ) -> Void {
         let pic_name    = "placeholder_userhead"
+        
         self.set_webimage_url_base(url,place_holder_name: pic_name , need_random_url: true )
     }
     func set_webimage_url_base( url:String? , place_holder_name pic_name:String , need_random_url random:Bool = false ) -> Void {
@@ -36,6 +37,11 @@ extension UIImageView {
         if ( random == true ) {
             url = "\(url)/&rand=\(String.random())"
         }
+        
+        let cache = YYWebImageManager.sharedManager().cache
+        cache?.memoryCache.removeObjectForKey(url)
+        cache?.diskCache.removeObjectForKey(url)
+        
         self.yy_setImageWithURL(NSURL(string:url ?? "") , placeholder: UIImage(named: pic_name) , options: YYWebImageOptions.ProgressiveBlur, completion: nil)
     }
     

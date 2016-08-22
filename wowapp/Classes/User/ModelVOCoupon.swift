@@ -35,6 +35,11 @@ class WOWCouponModel: WOWBaseModel,Mappable {
     var canUsed: Bool?
     var isSelect: Bool = false
     
+    
+    var status: Int?
+    var statusDesc: String?
+
+    
     override init() {
         super.init()
     }
@@ -58,6 +63,9 @@ class WOWCouponModel: WOWBaseModel,Mappable {
         return_str              <- map["return"]
         used                    <- map["used"]
         canUsed                 <- map["canUsed"]
+        
+        status                  <- map["status"]
+        statusDesc              <- map["statusDesc"]
     }
 }
 

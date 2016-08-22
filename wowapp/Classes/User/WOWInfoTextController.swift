@@ -54,18 +54,19 @@ class WOWInfoTextController: WOWBaseTableViewController {
     
     private func saveInfo(){
         DLog("保存信息")
-        guard let info = textField.text where !info.isEmpty else{
-            WOWHud.showMsg("请输入" + vcTitle!)
-            return
-        }
+//        guard let info = textField.text where !info.isEmpty else{
+//            WOWHud.showMsg("请输入" + vcTitle!)
+//            return
+//        }
+        let info = textField.text
         var params = [String : String]()
         switch entrance {
         case .NickEntrance:
-           params = ["nickName":info]
+           params = ["nickName":info ?? ""]
         case .DescEntrance:
-            params = ["selfIntroduction":info]
+            params = ["selfIntroduction":info ?? ""]
         case .JobEntrance:
-            params = ["industry":info]
+            params = ["industry":info ?? ""]
         }
 
 //        switch entrance {
@@ -83,11 +84,11 @@ class WOWInfoTextController: WOWBaseTableViewController {
                 //保存一些用户信息
                 switch strongSelf.entrance {
                 case .NickEntrance:
-                WOWUserManager.userName = info
+                WOWUserManager.userName = info ?? ""
                 case .DescEntrance:
-                WOWUserManager.userDes = info
+                WOWUserManager.userDes = info ?? ""
                 case .JobEntrance:
-                WOWUserManager.userIndustry = info
+                WOWUserManager.userIndustry = info ?? ""
                 }
                 NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
 

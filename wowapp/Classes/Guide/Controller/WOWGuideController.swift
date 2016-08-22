@@ -58,6 +58,7 @@ class WOWGuideController: WOWBaseViewController {
                 titleColor1 = UIColor.blackColor()
                 titleColor2 = UIColor.blackColor()
             }
+            btn2.borderColor(1, borderColor:UIColor.whiteColor())
             
             btn1.setTitle(title1, forState: .Normal)
             btn2.setTitle(title2, forState: .Normal)

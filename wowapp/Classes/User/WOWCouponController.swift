@@ -125,7 +125,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         
         //这题注意是利用section做分隔 所以一个section 一个row
         let r = self.vo_cupons[indexPath.section]
-
+            cell.label_amount.font = UIFont.priceFont(50)
             cell.label_amount.text          = r.minAmountLimit?.toString
             cell.label_title.text           = r.couponTitle!
         

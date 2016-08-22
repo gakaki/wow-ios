@@ -16,6 +16,7 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
     var orderSettles                         : [WOWCarProductModel]?
     var endUserCouponId                      : Int?
     var deduction                            : Double?
+    var avaliableCouponCount                 : Int?
     
     required init?(_ map: Map) {
         
@@ -28,7 +29,7 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
         productTotalAmount                   <- map["productTotalAmount"]
         endUserCouponId                     <- map["endUserCouponId"]
         deduction                           <- map["deduction"]
-        
+        avaliableCouponCount                <- map["avaliableCouponCount"]
     }
     
 }

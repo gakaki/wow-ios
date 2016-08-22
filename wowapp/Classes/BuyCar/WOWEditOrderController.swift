@@ -305,8 +305,13 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 cell.nextImage.hidden = false
                 cell.couponLabel.hidden = false
                 cell.lineView.hidden = true
-                let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deduction ?? 0],counts:[1])
-                cell.couponLabel.text = "-" + result
+                if let deduction = self.orderSettle?.deduction  {
+                        let result = WOWCalPrice.calTotalPrice([deduction],counts:[1])
+                        cell.couponLabel.text = "-" + result
+                    
+                }else {
+                    cell.couponLabel.text = String(format: "您有%i张优惠券可用",self.orderSettle?.avaliableCouponCount ?? 0 )
+                }
             }
             returnCell = cell
         case 3: //订单备注
@@ -358,7 +363,6 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                         let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
                         strongSelf.totalPriceLabel.text = result
 
-              
                     }
                     
                 }

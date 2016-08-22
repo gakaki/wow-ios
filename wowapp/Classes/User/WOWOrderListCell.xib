@@ -150,7 +150,7 @@
                                     <constraint firstAttribute="height" constant="28" id="LY2-i3-lL4"/>
                                     <constraint firstAttribute="width" constant="68" id="sNO-Ka-O3C"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="立即支付">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

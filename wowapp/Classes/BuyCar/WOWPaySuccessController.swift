@@ -41,7 +41,7 @@ class WOWPaySuccessController: WOWBaseViewController {
         self.view.layer.addSublayer(dotteShapLayer)
         
         orderIdLabel.text = orderid
-        orderCountLabel.text = totalPrice.priceFormat()
+        orderCountLabel.text = totalPrice
         payMethodLabel.text = payMethod
     }
 

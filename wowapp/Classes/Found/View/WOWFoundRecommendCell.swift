@@ -122,6 +122,7 @@ class WOWFoundRecommendCell: UITableViewCell {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:self.product?.productId ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.btnLike.selected = !strongSelf.btnLike.selected
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in
             

@@ -141,7 +141,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:分享
     @IBAction func shareClick(sender: UIButton) {
-        let shareUrl = "m.wowdsgn.com/item/\(productModel?.productId ?? 0)"
+        let shareUrl = WOWShareUrl + "/item/\(productModel?.productId ?? 0)"
         WOWShareManager.share(productModel?.productName, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
@@ -291,7 +291,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
     //分享
     func sharClick() {
         backView.hideBuyView()
-        let shareUrl = "m.wowdsgn.com/item/\(productModel?.productId ?? 0)"
+        let shareUrl = WOWShareUrl + "/item/\(productModel?.productId ?? 0)"
         WOWShareManager.share(productModel?.productName, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
 
     }

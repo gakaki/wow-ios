@@ -16,6 +16,8 @@ let WOWRealm = try! Realm()
 
 let WOWCompanyUrl                       = "http://www.wowdsgn.com/"
 
+let WOWShareUrl                         = "m.wowdsgn.com"
+
 /***********************************Const**********************************/
 //拉取分类配置文件之后  进行回调更新操作
 let WOWCategoryUpdateNotificationKey    = "WOWCategoryUpdateNotificationKey"

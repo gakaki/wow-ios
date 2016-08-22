@@ -22,6 +22,7 @@ struct WOWUserManager {
     private static let WOWUserIndustry      = "WOWUserIndustry"
     private static let WOWUserConstellation = "WOWUserConstellation"
     private static let WOWUserAgeRange      = "WOWUserAgeRange"
+    private static let WOWUserLoginStatus   = "WOWUserLoginStatus"
 
     static var wechatToken = ""
     
@@ -158,15 +159,17 @@ struct WOWUserManager {
     }
     static var loginStatus:Bool{
         get{
-            guard !WOWUserManager.userName.isEmpty else{
-                return false
-            }
-            return true
+            return (MGDefault.objectForKey(WOWUserLoginStatus) as? Bool) ?? false
+        }
+        set{
+            MGDefault.setObject(newValue, forKey:WOWUserLoginStatus)
+            MGDefault.synchronize()
         }
     }
     
     
     static func saveUserInfo(model:WOWUserModel?){
+        MGDefault.setObject(true, forKey: WOWUserLoginStatus)
         MGDefault.setObject(model?.user_nick, forKey:WOWUserName)
         MGDefault.setObject(model?.user_sex, forKey:WOWUserSex)
         MGDefault.setObject(model?.user_desc, forKey:WOWUserDes)
@@ -179,6 +182,7 @@ struct WOWUserManager {
     }
     
     static func cleanUserInfo(){
+        MGDefault.setObject(false, forKey: WOWUserLoginStatus)
         MGDefault.setObject(nil, forKey:WOWUserName)
         MGDefault.setObject(nil, forKey:WOWUserSex)
         MGDefault.setObject(nil, forKey:WOWUserDes)

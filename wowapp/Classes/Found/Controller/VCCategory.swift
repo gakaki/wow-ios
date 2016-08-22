@@ -44,7 +44,11 @@ extension UIView {
     }
 }
 
-class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
+class VCCategory:VCBaseVCCategoryFound,
+UICollectionViewDelegate,
+UICollectionViewDataSource,
+CollectionViewWaterfallLayoutDelegate
+{
     
     var cid:String              = "10" {
         didSet {
@@ -55,6 +59,7 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
     
     var query_asc:Int           = 1 {
         didSet {
+            self.reset_fetch_params()
             refresh_view()
         }
     }
@@ -148,12 +153,17 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
         
         cv_bottom.mj_footer = self.mj_footer
         self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
+        
+        
+        cv_bottom.emptyDataSetSource = self;
+        cv_bottom.emptyDataSetDelegate = self;
+        
 //        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
 
 //        [self.tableView.footer setTitle:@"" forState:MJRefreshFooterStateIdle];
-
+        
     }
-    
+
     override func request(){
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
@@ -434,7 +444,15 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDelegate,UICollectionVie
 
             }
             
-            self!.vo_products         = [self!.vo_products, data].flatMap { $0 }
+            //若是为第一页那么数据直接赋值
+            if ( self!.pageIndex <= 1){
+                self!.vo_products         = data.flatMap { $0 }
+
+            }else{
+                //分页的话数据合并
+                self!.vo_products         = [self!.vo_products, data].flatMap { $0 }
+            }
+            
             self!.cv_bottom.reloadData()
             
         }){ (errorMsg) in

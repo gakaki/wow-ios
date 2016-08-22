@@ -125,7 +125,7 @@ CollectionViewWaterfallLayoutDelegate
         let layout                          = UICollectionViewFlowLayout()
         layout.scrollDirection              = .Horizontal
         layout.sectionInset                 = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        layout.minimumLineSpacing           = 15.0
+        layout.minimumLineSpacing           = 5.0
         cv!.collectionViewLayout            = layout
 
         request()
@@ -335,7 +335,7 @@ CollectionViewWaterfallLayoutDelegate
         if ( collectionView == self.cv_bottom){
             return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 75)
         }else{
-            let cellSize:CGSize = CGSizeMake(80,80 )
+            let cellSize:CGSize = CGSizeMake(80.w,80.w)
             return cellSize
         }
     }

@@ -89,25 +89,25 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reuse_id" id="VCZ-Hd-gJR">
-                                        <rect key="frame" x="0.0" y="15" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="25" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Baz-aN-Ayj">
-                                                    <rect key="frame" x="20" y="10" width="60" height="60"/>
+                                                <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Baz-aN-Ayj">
+                                                    <rect key="frame" x="10" y="0.0" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="KpI-x7-Ace"/>
-                                                        <constraint firstAttribute="height" constant="60" id="fBR-8D-RaX"/>
+                                                        <constraint firstAttribute="width" constant="40" id="KpI-x7-Ace"/>
+                                                        <constraint firstAttribute="height" constant="40" id="fBR-8D-RaX"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKM-cT-ZpR">
-                                                    <rect key="frame" x="20" y="60" width="60" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="40" translatesAutoresizingMaskIntoConstraints="NO" id="sKM-cT-ZpR">
+                                                    <rect key="frame" x="10" y="34" width="40" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="YUv-Oq-Tgt"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -118,24 +118,21 @@
                                             <constraint firstItem="Baz-aN-Ayj" firstAttribute="centerY" secondItem="VCZ-Hd-gJR" secondAttribute="centerY" constant="-10" id="1yJ-SZ-Zzp"/>
                                             <constraint firstItem="sKM-cT-ZpR" firstAttribute="width" secondItem="Baz-aN-Ayj" secondAttribute="width" id="FqD-o9-7yr"/>
                                             <constraint firstItem="Baz-aN-Ayj" firstAttribute="centerX" secondItem="VCZ-Hd-gJR" secondAttribute="centerX" id="IPV-rI-Y32"/>
+                                            <constraint firstItem="sKM-cT-ZpR" firstAttribute="top" secondItem="Baz-aN-Ayj" secondAttribute="bottom" constant="-6" id="UDQ-ii-TVb"/>
                                             <constraint firstItem="sKM-cT-ZpR" firstAttribute="leading" secondItem="Baz-aN-Ayj" secondAttribute="leading" id="cbc-tE-hE6"/>
-                                            <constraint firstItem="sKM-cT-ZpR" firstAttribute="top" secondItem="Baz-aN-Ayj" secondAttribute="bottom" constant="-10" id="dYG-Y5-9rD"/>
                                         </constraints>
+                                        <size key="customSize" width="60" height="60"/>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reuse_id_label" id="tps-Vz-a3s">
-                                        <rect key="frame" x="90" y="15" width="80" height="80"/>
+                                        <rect key="frame" x="70" y="15" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHO-RX-4RS">
-                                                    <rect key="frame" x="20" y="28" width="60" height="45"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="45" id="5Ys-64-gAc"/>
-                                                        <constraint firstAttribute="width" constant="60" id="gxq-vj-VnB"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHO-RX-4RS">
+                                                    <rect key="frame" x="8" y="32" width="64" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -143,8 +140,9 @@
                                         </view>
                                         <color key="backgroundColor" red="0.93545484290000003" green="0.93545484290000003" blue="0.93545484290000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="UHO-RX-4RS" firstAttribute="centerX" secondItem="tps-Vz-a3s" secondAttribute="centerX" id="Jfn-n7-fPt"/>
-                                            <constraint firstItem="UHO-RX-4RS" firstAttribute="centerY" secondItem="tps-Vz-a3s" secondAttribute="centerY" id="YYh-wp-eI1"/>
+                                            <constraint firstItem="UHO-RX-4RS" firstAttribute="leading" secondItem="tps-Vz-a3s" secondAttribute="leadingMargin" id="7fA-HV-Ous"/>
+                                            <constraint firstItem="UHO-RX-4RS" firstAttribute="centerX" secondItem="tps-Vz-a3s" secondAttribute="centerX" id="jW8-eF-B7g"/>
+                                            <constraint firstItem="UHO-RX-4RS" firstAttribute="centerY" secondItem="tps-Vz-a3s" secondAttribute="centerY" id="lxp-Yz-LsA"/>
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>

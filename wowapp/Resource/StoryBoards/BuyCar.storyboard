@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QDu-1s-RJp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QDu-1s-RJp">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -403,7 +403,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9C-xw-bET">
-                                        <rect key="frame" x="324.5" y="248" width="35.5" height="20"/>
+                                        <rect key="frame" x="325" y="248" width="35" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="y4f-3U-jZv"/>
                                         </constraints>
@@ -412,7 +412,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUz-QD-aOE">
-                                        <rect key="frame" x="324.5" y="213" width="35.5" height="20"/>
+                                        <rect key="frame" x="325" y="213" width="35" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="d78-Tw-cVp"/>
                                         </constraints>
@@ -421,7 +421,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jP-d2-LEZ">
-                                        <rect key="frame" x="324.5" y="178" width="35.5" height="20"/>
+                                        <rect key="frame" x="325" y="178" width="35" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="WkI-mY-JV5"/>
                                         </constraints>
@@ -430,10 +430,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjT-9T-Fzx">
-                                        <rect key="frame" x="161.5" y="41" width="52" height="52"/>
+                                        <rect key="frame" x="162" y="41" width="52" height="52"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duihao" translatesAutoresizingMaskIntoConstraints="NO" id="oox-A9-7kU">
-                                                <rect key="frame" x="12" y="12.5" width="27.5" height="27.5"/>
+                                                <rect key="frame" x="12" y="13" width="28" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27.5" id="0eZ-Qc-Kmc"/>
                                                     <constraint firstAttribute="width" constant="27.5" id="ek4-3c-RRd"/>
@@ -449,7 +449,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2R-CT-1eH">
-                                        <rect key="frame" x="147.5" y="110" width="80" height="28"/>
+                                        <rect key="frame" x="148" y="110" width="80" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="Hon-WM-Cbg"/>
                                         </constraints>

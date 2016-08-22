@@ -46,7 +46,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     var pickDataArr:[Int:String] = [Int:String]()
     var editingGroupAndRow:[Int:Int] = [0:0]
-    
+    var image:UIImage!
     
 //MARK:Lazy
     lazy var imagePicker:UIImagePickerController = {
@@ -145,16 +145,22 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
+
+//            
+//            if ( self.image != nil )
+//            {
+//                self.headImageView.image  = self.image
+//            }else{
+//                
+//            
+//            }
             self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-            
-//            self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
-            
-//             self.headImageView.kf_setImageWithURL(NSURL(string: WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
-            
+            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
             
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
             self.starTextField.userInteractionEnabled = false
+
         }
     }
     
@@ -214,8 +220,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 WOWUserManager.userAgeRange = strongSelf.age
                 WOWUserManager.userConstellation = strongSelf.star
                 strongSelf.configUserInfo()
-                
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+          
                 
                 if let action = strongSelf.editInfoAction{
                     action()
@@ -445,7 +450,10 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                     }
                     WOWUserManager.userHeadImageUrl = self.headImageUrl
                     self.headImageView.image =  image
-
+                    self.image               =  image
+                    
+                    NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
+                    
                 },
                 option: uploadOption
             )

@@ -110,7 +110,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     private func configBarItem(){
         
         
-        makeCustomerImageNavigationItem("telephonekefu", left:false) {[weak self] () -> () in
+        makeCustomerImageNavigationItem("telephonekefu", left:false) { () -> () in
 //            if let strongSelf = self{
 
                 WOWTool.callPhone()
@@ -1087,9 +1087,9 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
     func headerSectionView(headerTitle:String,headetHeight:CGFloat) -> UIView {
         let view = UIView()
         view.frame = CGRectMake(0, 0, MGScreenWidth, headetHeight)
-        view.backgroundColor = BorderMColor
+        view.backgroundColor = GrayColorLevel5
         let lbTitle = UILabel()
-        lbTitle.backgroundColor = BorderMColor
+        lbTitle.backgroundColor = GrayColorLevel5
         lbTitle.frame = CGRectMake(15, 0, MGScreenWidth, headetHeight)
         lbTitle.textColor = GrayColorlevel3
         lbTitle.text = headerTitle
@@ -1153,26 +1153,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         return view
         
     }
-    
-    // 关闭页眉页脚的停留
-//        func scrollViewDidScroll(scrollView: UIScrollView) {
-//            let sectionHeaderHeight:CGFloat = 38
-//    
-//            let sectionFooterHeight:CGFloat = 40
-//            let offsetY:CGFloat = scrollView.contentOffset.y;
-//            if offsetY >= 0 && offsetY <= sectionHeaderHeight
-//            {
-//                scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -sectionFooterHeight, 0)
-//            }else if offsetY >= sectionHeaderHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight
-//            {
-//                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, -sectionFooterHeight, 0)
-//            }else if offsetY >= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height
-//            {
-//                scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight), 0)
-//            }
-//    
-//            }
-    func clickAction(sender:UIButton)  {
+     func clickAction(sender:UIButton)  {
         
         
         switch OrderDetailNewaType {

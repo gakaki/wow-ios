@@ -53,7 +53,7 @@ class WOWUserTopView: UIView {
             if let _ = weakSelf{
                 make.right.equalTo(topContainerView.snp_right).offset(-15)
                 make.centerY.equalTo(topContainerView)
-                make.size.equalTo(CGSizeMake(8, 13))
+                make.size.equalTo(CGSizeMake(9, 16))
             }
         }
         

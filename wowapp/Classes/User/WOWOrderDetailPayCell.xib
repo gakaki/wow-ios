@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -32,10 +32,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lVT-eG-irk">
-                        <rect key="frame" x="284" y="22" width="15" height="15"/>
+                        <rect key="frame" x="279" y="22" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="DN3-kg-n64"/>
-                            <constraint firstAttribute="width" constant="15" id="vWb-Lo-BGs"/>
+                            <constraint firstAttribute="height" constant="20" id="DN3-kg-n64"/>
+                            <constraint firstAttribute="width" constant="20" id="vWb-Lo-BGs"/>
                         </constraints>
                     </imageView>
                 </subviews>

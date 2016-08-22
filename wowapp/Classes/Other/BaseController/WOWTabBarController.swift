@@ -103,30 +103,35 @@ class WOWTabBarController: UITabBarController {
 
 extension WOWTabBarController:UITabBarControllerDelegate{
     
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-            let controllers = tabBarController.viewControllers
-            let index = controllers?.indexOf(viewController)
-            if index == 1{
-                guard WOWUserManager.loginStatus else {
-                     UIApplication.currentViewController()?.toLoginVC(true)
-                    return
-                }
-            }
-        
-        WOWTool.lastTabIndex = index ?? 0
-    }
+//    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+//            let controllers = tabBarController.viewControllers
+//            let index = controllers?.indexOf(viewController)
+//            if index == 1{
+//                guard WOWUserManager.loginStatus else {
+//                     UIApplication.currentViewController()?.toLoginVC(true)
+//                    return
+//                }
+//            }
+//        
+//        WOWTool.lastTabIndex = index ?? 0
+//    }
 
 //    //将要点击
-//    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-//        let controllers = tabBarController.viewControllers
-//        let index = controllers?.indexOf(viewController)
-//        if index == 2{
-//            showBuyCar()
-//            return false
-//        }
-//        return true
-//    }
-//    
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        let controllers = tabBarController.viewControllers
+        let index = controllers?.indexOf(viewController)
+        if index == 1{
+            guard WOWUserManager.loginStatus else {
+                UIApplication.currentViewController()?.toLoginVC(true)
+                return false
+            }
+        }
+        
+        WOWTool.lastTabIndex = index ?? 0
+        return true
+    }
+    
+//
 //    func showBuyCar(){
 //        let buyCar = UIStoryboard.initialViewController("BuyCar")
 //

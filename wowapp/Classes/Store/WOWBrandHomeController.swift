@@ -106,11 +106,11 @@ class WOWBrandHomeController: WOWBaseViewController {
         switch entrance {
         case .brandEntrance:
             
-            let shareUrl = "m.wowdsgn.com/brand/\(brandID ?? 0)"
+            let shareUrl = WOWShareUrl + "/brand/\(brandID ?? 0)"
             WOWShareManager.share(brandModel?.brandEname, shareText: brandModel?.desc, url:shareUrl,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
         case .designerEntrance:
             
-            let shareUrl = "m.wowdsgn.com/designer/\(designerId ?? 0)"
+            let shareUrl = WOWShareUrl + "/designer/\(designerId ?? 0)"
             WOWShareManager.share(designerModel?.designerName, shareText: designerModel?.designerDesc, url:shareUrl,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
             
         }
@@ -220,6 +220,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteBrand(brandId: brandID ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.likeButton.selected = !strongSelf.likeButton.selected
+                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in
             
@@ -232,6 +233,8 @@ class WOWBrandHomeController: WOWBaseViewController {
             if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.likeButton.selected = favorite ?? false
+      
+
             }
         }) {(errorMsg) in
             
@@ -244,6 +247,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteDesigner(designerId: designerId ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.likeButton.selected = !strongSelf.likeButton.selected
+                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in
             

@@ -73,7 +73,7 @@ class WOWNetManager {
                         // obj is not a String
                     }
                     
-//                     print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
+                     print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
                     
                     //其实也只有登入能获得session token 而已了
 

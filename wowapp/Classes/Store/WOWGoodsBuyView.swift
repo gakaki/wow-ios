@@ -226,7 +226,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
             
             nameLabel.text = p.productName
-            perPriceLabel.text = WOWBuyCarMananger.sharedBuyCar.defaultPrice?.priceFormat()
+            perPriceLabel.text = WOWBuyCarMananger.sharedBuyCar.defaultPrice
             goodsImageView.layer.borderWidth = 0.5
             goodsImageView.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
             if let img = WOWBuyCarMananger.sharedBuyCar.defaultImg {

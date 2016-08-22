@@ -42,7 +42,7 @@ extension UIImageView {
         cache?.memoryCache.removeObjectForKey(url)
         cache?.diskCache.removeObjectForKey(url)
         
-        self.yy_setImageWithURL(NSURL(string:url ?? "") , placeholder: UIImage(named: pic_name) , options: YYWebImageOptions.ProgressiveBlur, completion: nil)
+        self.yy_setImageWithURL(NSURL(string:url ?? "") , placeholder: UIImage(named: pic_name) , options: YYWebImageOptions.Progressive, completion: nil)
     }
     
     func set_webimage_url( url:String? ) -> Void {

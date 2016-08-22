@@ -21,18 +21,28 @@
                             <constraint firstAttribute="width" secondItem="vqi-uS-piU" secondAttribute="height" multiplier="1:1" id="8Cz-Zu-Wbx"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iDS-VQ-jVC" userLabel="line_blow">
+                        <rect key="frame" x="0.0" y="232" width="375" height="17"/>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="9UC-Mx-tlc"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="iDS-VQ-jVC" firstAttribute="top" secondItem="vqi-uS-piU" secondAttribute="bottom" id="0rj-zy-APT"/>
                     <constraint firstItem="vqi-uS-piU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9eP-4U-Xml"/>
+                    <constraint firstItem="iDS-VQ-jVC" firstAttribute="trailing" secondItem="vqi-uS-piU" secondAttribute="trailing" id="C60-e9-Cl9"/>
                     <constraint firstAttribute="bottom" secondItem="vqi-uS-piU" secondAttribute="bottom" id="OSc-oM-gCm"/>
                     <constraint firstAttribute="trailing" secondItem="vqi-uS-piU" secondAttribute="trailing" id="c6i-CM-cR8"/>
+                    <constraint firstItem="iDS-VQ-jVC" firstAttribute="leading" secondItem="vqi-uS-piU" secondAttribute="leading" id="jss-W4-fjZ"/>
                     <constraint firstItem="vqi-uS-piU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="oVf-lI-gBz"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bigImageView" destination="vqi-uS-piU" id="zFl-cg-3XT"/>
             </connections>
-            <point key="canvasLocation" x="387" y="394"/>
+            <point key="canvasLocation" x="386.5" y="394"/>
         </tableViewCell>
     </objects>
     <resources>

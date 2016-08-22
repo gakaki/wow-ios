@@ -925,48 +925,92 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         }
         
     }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return nil
         switch OrderDetailNewaType {
         case .payMent:
             let titles = [" ","收货人","商品清单","","支付方式"]
-            return titles[section]
+            let heights = [CellHight.minHight,38,38,12,38]
+            return headerSectionView(titles[section], headetHeight: heights[section])
+//                titles[section]
         case .forGoods,.noForGoods,.finish:
             let titles = [" ","收货人","商品清单",""]
-            return titles[section]
+            let heights = [CellHight.minHight,38,38,12]
+            return headerSectionView(titles[section], headetHeight: heights[section])
         case .someFinishForGoods:
             
             switch section {
             case 0:
-                return " "
+                return headerSectionView(" ", headetHeight: CellHight.minHight)
             case 1:
-                return "收货人"
+                return headerSectionView("收货人", headetHeight: 38)
             case 2:
                 if isSomeForGoodsType == true {
-                        return "已发货商品清单"
+                    return headerSectionView("已发货商品清单", headetHeight: 38)
                 }else{
-                        return "商品清单"
+                    return headerSectionView("商品清单", headetHeight: 38)
                 }
                 
             case goodsArray.count + 2:
                 
                 switch goodsNoArray.count {
                 case 0:
-                    return " "
+                    return headerSectionView(" ", headetHeight: CellHight.minHight)
                 default:
-                    return "未发货商品清单"
+                    return headerSectionView("未发货商品清单", headetHeight: 38)
                 }
-
+                
                 
             default:
-                return " "
+                return headerSectionView(" ", headetHeight: 12)
             }
             
             
         }
         
-        
+
     }
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        switch OrderDetailNewaType {
+//        case .payMent:
+//            let titles = [" ","收货人","商品清单","","支付方式"]
+//            return titles[section]
+//        case .forGoods,.noForGoods,.finish:
+//            let titles = [" ","收货人","商品清单",""]
+//            return titles[section]
+//        case .someFinishForGoods:
+//            
+//            switch section {
+//            case 0:
+//                return " "
+//            case 1:
+//                return "收货人"
+//            case 2:
+//                if isSomeForGoodsType == true {
+//                        return "已发货商品清单"
+//                }else{
+//                        return "商品清单"
+//                }
+//                
+//            case goodsArray.count + 2:
+//                
+//                switch goodsNoArray.count {
+//                case 0:
+//                    return " "
+//                default:
+//                    return "未发货商品清单"
+//                }
+//
+//                
+//            default:
+//                return " "
+//            }
+//            
+//            
+//        }
+//        
+//        
+//    }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
         
         switch OrderDetailNewaType {
@@ -1040,10 +1084,29 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         }
         
     }
+    func headerSectionView(headerTitle:String,headetHeight:CGFloat) -> UIView {
+        let view = UIView()
+        view.frame = CGRectMake(0, 0, MGScreenWidth, headetHeight)
+        view.backgroundColor = BorderMColor
+        let lbTitle = UILabel()
+        lbTitle.backgroundColor = BorderMColor
+        lbTitle.frame = CGRectMake(15, 0, MGScreenWidth, headetHeight)
+        lbTitle.textColor = GrayColorlevel3
+        lbTitle.text = headerTitle
+        lbTitle.font = UIFont.systemFontOfSize(12)
+        
+        view.addSubview(lbTitle)
+        
+        return view
+    }
     func footSectionView(indexPathSetion:Int) -> UIView {
         let view = UIView()
         view.frame = CGRectMake(0, 0, MGScreenWidth, 40)
         view.backgroundColor = UIColor.whiteColor()
+        let viewTopLine = UIView()
+        viewTopLine.backgroundColor = BorderMColor
+        viewTopLine.frame = CGRectMake(0, 0, MGScreenWidth, 0.5)
+        view.addSubview(viewTopLine)
         
         let likeButton = UIButton(type: .System)
         likeButton.frame = CGRectMake(0, 0, 100, 40)

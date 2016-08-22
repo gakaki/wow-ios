@@ -96,9 +96,12 @@ class WOWTopMenuTitleView: UIView {
         itemArr[selectedIndex].selected = true
         //下划线
         bottomLine.frame = self.itemArr[WOWCheckMenuSetting.selectedIndex].frame
+        
         bottomLine.y = self.h - 3
         bottomLine.h = 3
-        bottomLine.w += 20
+//        bottomLine.w += 20
+        bottomLine.w = 56
+//        print("\(bottomLine.frame.width)")
         bottomLine.centerX = self.itemArr[WOWCheckMenuSetting.selectedIndex].centerX
         self.addSubview(bottomLine)
     }

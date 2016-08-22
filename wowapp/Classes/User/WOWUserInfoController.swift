@@ -145,17 +145,22 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
+
+//            
+//            if ( self.image != nil )
+//            {
+//                self.headImageView.image  = self.image
+//            }else{
+//                
+//            
+//            }
             self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-            
-            if ( self.image != nil )
-            {
-                self.headImageView.image  = self.image
-            }
-            
+            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
             
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
             self.starTextField.userInteractionEnabled = false
+
         }
     }
     

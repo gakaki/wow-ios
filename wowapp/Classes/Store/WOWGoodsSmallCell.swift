@@ -20,6 +20,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var view_rightline: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +34,15 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     }
     
     func showData(model:WOWProductModel,indexPath:NSIndexPath) {
+        let i = indexPath.item
+//        print(i)
+        if ( i % 2 != 0 && i != 0){
+            view_rightline.hidden = true
+        }else{
+            view_rightline.hidden = false
+        }
+        
+        
         pictureImageView.set_webimage_url(model.productImg ?? "")
         let str = NSMutableAttributedString(string: model.productName ?? "")
         let style = NSMutableParagraphStyle()

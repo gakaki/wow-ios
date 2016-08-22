@@ -230,6 +230,8 @@ CollectionViewWaterfallLayoutDelegate
 
             return
         }
+        
+        if ( selectedButton == nil) { selectedButton = button }
         // 修改按钮状态
         selectedButton!.highlighted = true
         selectedButton!.selected = false
@@ -289,25 +291,28 @@ CollectionViewWaterfallLayoutDelegate
             button.setTitleColor(UIColor.blackColor(), forState: .Normal)
             button.setTitleColor(UIColor.blackColor(), forState: .Selected)
             
-            
             button.addTarget(self, action: #selector(titlesClick(_:)), forControlEvents: .TouchUpInside)
             
             btn_choose_view.addSubview(button)
             
+            button.selected     = false
+            button.highlighted  = true
             
             
-            
-            //默认点击了第一个按钮
-            if index == 0 {
-                button.selected = true
-                selectedButton = button
-                //让按钮内部的Label根据文字来计算内容
-                button.titleLabel?.sizeToFit()
-//                self.indicatorView.w         = button.titleLabel!.w * kIndicatorViewwRatio
-                self.indicatorView.w         = self.view.w / 3
-                self.indicatorView.centerX   = button.centerX
-                
+            if index == 0 {//默认点击了第一个按钮
+                button.sendActionsForControlEvents(.TouchUpInside)
             }
+   
+//
+//            if index == 0 {
+//                button.selected     = true
+//                selectedButton = button
+//                //让按钮内部的Label根据文字来计算内容
+//                button.titleLabel?.sizeToFit()
+//                 self.indicatorView.w         = self.view.w / 3
+//                self.indicatorView.centerX   = button.centerX
+//                
+//            }
         }
         
         btn_choose_view.addSubview(self.indicatorView)

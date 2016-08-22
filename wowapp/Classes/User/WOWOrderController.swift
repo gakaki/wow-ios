@@ -286,7 +286,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderListCell", forIndexPath: indexPath) as! WOWOrderListCell
-                let orderModel = self.dataArr[indexPath.section]
+        let orderModel = self.dataArr[indexPath.section]
         cell.delegate = self
         cell.showData(dataArr[indexPath.section])
         if orderModel.orderStatus == 0 {

@@ -207,6 +207,7 @@ class WOWFoundRecommendCell: UITableViewCell {
                                     $0.textAlignment = .Left
                                     $0.setLineHeightAndLineBreak(1.05)
                                     $0.font = UIFont.systemFontOfSize(14)
+                                    $0.style.margin     = (0, Float(-8.h), 0, 0, 0,5)
                                     $0.style.alignSelf  = .FlexStart
 
                                 }),
@@ -219,7 +220,7 @@ class WOWFoundRecommendCell: UITableViewCell {
                                 
                                 btnLike.configure({
                                     $0.style.dimensions = ( 40 , 40)
-                                    $0.style.margin     = (0, Float(-15.h), 0, 0, 0,5)
+                                    $0.style.margin     = (0, Float(-18.h), 0, 0, 0,5)
                                     $0.style.alignSelf  = .FlexEnd
 
                                 })

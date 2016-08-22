@@ -15,8 +15,8 @@ class WOWProductDetailPriceCell: UITableViewCell {
     @IBOutlet weak var originalPriceLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        actualPriceLabel.font   = UIFont.priceFont(17)
-        originalPriceLabel.font = UIFont.priceFont(12)
+        actualPriceLabel.font   = UIFont.priceFont(22)
+        originalPriceLabel.font = UIFont.priceFont(14)
        
         
     }

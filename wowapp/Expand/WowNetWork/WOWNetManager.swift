@@ -57,7 +57,7 @@ class WOWNetManager {
         failClosure:FailClosure
     ){
         WOWHud.showLoading()
-//        DLog("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
+        print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
         requestProvider.request(target) { (result) in
        

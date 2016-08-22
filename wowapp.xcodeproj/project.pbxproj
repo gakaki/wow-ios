@@ -968,9 +968,9 @@
 		29FF252E1CFDA86300DF2A9B /* BuyCar */ = {
 			isa = PBXGroup;
 			children = (
+				29FF271E1CFDAF1600DF2A9B /* Model */,
 				29FF271C1CFDAF0800DF2A9B /* View */,
 				29FF271D1CFDAF0F00DF2A9B /* Controller */,
-				29FF271E1CFDAF1600DF2A9B /* Model */,
 			);
 			path = BuyCar;
 			sourceTree = "<group>";

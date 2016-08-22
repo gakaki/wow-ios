@@ -38,11 +38,17 @@
                     <constraint firstItem="Txr-pI-ItL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="9Ic-un-f7B"/>
                     <constraint firstAttribute="bottom" secondItem="e2a-qC-F5G" secondAttribute="bottom" priority="750" constant="40" id="En8-jT-sEK"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Txr-pI-ItL" secondAttribute="trailing" constant="15" id="FMu-0s-64k"/>
+                    <constraint firstItem="Fd3-i3-Ffm" firstAttribute="bottom" secondItem="e2a-qC-F5G" secondAttribute="bottom" id="Rba-cc-mm5"/>
                     <constraint firstItem="Fd3-i3-Ffm" firstAttribute="leading" secondItem="e2a-qC-F5G" secondAttribute="trailing" constant="10" id="SUI-hI-UDH"/>
                     <constraint firstItem="Txr-pI-ItL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="VUH-bS-S6V"/>
                     <constraint firstItem="e2a-qC-F5G" firstAttribute="top" secondItem="Txr-pI-ItL" secondAttribute="bottom" constant="5" id="rmC-b2-l9e"/>
                     <constraint firstItem="e2a-qC-F5G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="xGQ-fm-a7h"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="0JG-co-0SO"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="actualPriceLabel" destination="e2a-qC-F5G" id="8KF-AO-U1f"/>

@@ -71,28 +71,23 @@ class WOWUserInfoController: WOWBaseTableViewController {
         addObserver()
         IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        
+        self.refresh_image()
+
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-            clearImageView()
+        
+            self.refresh_image()
+
             configUserInfo()
             configPickerView()
     }
-
-    func clearImageView(){
-        self.headImageView.image      = nil
-        if ( self.image != nil ){
-            self.headImageView.image = self.image
-        }else{
-            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-        }
-        
-    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.clearImageView()
         
         removeObserver()
         backGroundMaskView.removeFromSuperview()
@@ -100,6 +95,11 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = true
+        
+//        self.refresh_image()
+        
+        self.headImageView.image = nil
+        self.headImageView.setNeedsDisplay()
 
     }
     
@@ -151,8 +151,25 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
     }
     
+    func refresh_image(){
+        
+        self.headImageView.image = nil
+        self.headImageView.setNeedsDisplay()
+        
+        if ( self.image != nil ){
+            self.headImageView.image = self.image
+        }else{
+            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+        }
+        
+    }
     private func configUserInfo(){
+        
+        self.refresh_image()
+
         dispatch_async(dispatch_get_main_queue()) {
+            
+            
             self.sexTextField.text  = WOWSex[self.sex]
             self.desLabel.text      = WOWUserManager.userDes
             self.nickLabel.text     = WOWUserManager.userName
@@ -161,13 +178,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.jobLabel.text      = WOWUserManager.userIndustry
             
             
-            
-            if ( self.image != nil ){
-                self.headImageView.image = self.image
-            }else{
-                self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-            }
-
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
             self.starTextField.userInteractionEnabled = false
@@ -218,7 +228,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star)]
+        let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star),"avatar":self.headImageUrl]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
@@ -457,15 +467,16 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         let key = resp["key"]
                         self.headImageUrl = "http://img.wowdsgn.com/\(key!)"
                         DLog(self.headImageUrl)
+                        
+                        
+                        WOWUserManager.userHeadImageUrl = self.headImageUrl
+                        self.image               =  image
+                        
+                        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
+                        
                         self.request()
                     }
                     
-                    WOWUserManager.userHeadImageUrl = self.headImageUrl
-                    self.headImageView.image =  image
-                    self.image               =  image
-       
-                    
-                    NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                     
                 },
                 option: uploadOption

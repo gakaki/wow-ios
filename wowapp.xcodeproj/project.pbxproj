@@ -1804,7 +1804,7 @@
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = B4WSDTADTT;
+						DevelopmentTeam = 8FPQ7629B9;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -2363,7 +2363,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.wwapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";
@@ -2399,7 +2399,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.wwapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";

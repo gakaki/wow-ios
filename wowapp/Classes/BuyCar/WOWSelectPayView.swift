@@ -110,12 +110,22 @@ class WOWSelectPayView: UIView {
     
     //MARK: - Action
     @IBAction func alipayClick(sender: UIButton) {
+        if alipayButton.selected {
+            alipayButton.selected = false
+            channel = ""
+            return
+        }
         weixinButton.selected = false
         alipayButton.selected = true
         channel = "alipay"
     }
     
     @IBAction func weixinClick(sender: UIButton) {
+        if weixinButton.selected {
+            weixinButton.selected = false
+            channel = ""
+            return
+        }
         alipayButton.selected = false
         weixinButton.selected = true
         channel = "wx"

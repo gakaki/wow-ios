@@ -423,6 +423,7 @@ extension WOWEditOrderController: selectPayDelegate {
         backView.hidePayView()
         if  orderCode.isEmpty {
             WOWHud.showMsg("订单生成失败")
+            return
         }
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCharge(orderNo: orderCode ?? "", channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
             if let strongSelf = self {
@@ -439,6 +440,7 @@ extension WOWEditOrderController: selectPayDelegate {
     func canclePay() {
         if  orderCode.isEmpty {
             WOWHud.showMsg("订单生成失败")
+            return
         }
         goOrderDetail()
     }

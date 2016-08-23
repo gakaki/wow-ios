@@ -17,7 +17,7 @@ class WOWProductDetailView: UIView {
         productNameLabel.text = model.productName ?? ""
 
         
-        let descStr = NSMutableAttributedString(string: model.productName ?? "")
+        let descStr = NSMutableAttributedString(string: model.sellingPoint ?? "")
         let descStyle = NSMutableParagraphStyle()
         descStyle.lineHeightMultiple = 1.5      //设置1.5倍行距
         descStyle.lineBreakMode = .ByTruncatingTail

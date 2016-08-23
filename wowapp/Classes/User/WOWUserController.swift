@@ -146,42 +146,8 @@ class WOWUserController: WOWBaseTableViewController {
             }else{
                 
                 if   WOWUserManager.userPhotoData.length == 0 {
-                    
-                        print("\(WOWUserManager.userHeadImageUrl)")
                     headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-                    
-//                    let forecastURL = NSURL(string: WOWUserManager.userHeadImageUrl)
-//                    if let weatherData = NSData(contentsOfURL: forecastURL!, options: nil, error: nil) {
-//                        println("Ok it works \(forecastURL!)")
-//                    }
-//                    else{
-////                        println("Some error")
-//                        
-//                    }
-//                    let request:NSURLRequest = NSURLRequest(URL: NSURL(string: WOWUserManager.userHeadImageUrl)!)
-//                    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: { (response:NSURLResponse!, imageData:NSData!, error:NSError!)
-//        
-////                        imageData.writeToFile(filePath, atomically: true)
-//                         WOWUserManager.userPhotoData = imageData!
-//                    })
-//                    if  WOWUserManager.userHeadImageUrl.length != 0 {
-//                        let url = NSURL(string: WOWUserManager.userHeadImageUrl)
-//                        let data = NSData(contentsOfURL:url!)
-//                         WOWUserManager.userPhotoData = data!
-//                    }
-                   
-//                    print("\(data)")
-//                  var data = NSData(contentsOfURL: url, options: NSDataReadingOptions(), error: nil)
-//                    var data = NSData(contentsOfURL: url!)
-                    
-//                    let nsURL:NSURL = NSURL(string: WOWUserManager.userHeadImageUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
-                    // 获取返回结果，并格式化
-//                    let resultNSData:NSData = NSData(contentsOfURL: url!)!
-                    
-                    
-//                    let imageData:NSData = NSKeyedArchiver.archivedDataWithRootObject(headerView.headImageView.image!)
-//                 
-                   
+                                       
 
                 }else{
                     dispatch_async(dispatch_get_main_queue()) {

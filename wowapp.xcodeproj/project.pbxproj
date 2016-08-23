@@ -31,6 +31,9 @@
 		069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094F1D57942C00F8AE8F /* UILabel+Style.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
 		06A2DBC11D6A268D00F4D479 /* TooglePriceBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A2DBC01D6A268D00F4D479 /* TooglePriceBtn.swift */; };
+		06B25A431D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B25A421D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift */; };
+		06B25A451D6C464E001A1016 /* WOWProductDetailTipsWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B25A441D6C464E001A1016 /* WOWProductDetailTipsWebViewCell.xib */; };
+		06B25A471D6C49C9001A1016 /* product_detail_tips.html in Resources */ = {isa = PBXBuildFile; fileRef = 06B25A461D6C49C9001A1016 /* product_detail_tips.html */; };
 		06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */; };
 		06DDAD751D61811500280210 /* VCBaseVCCategoryFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */; };
 		06FB94B11D6306C100554871 /* VCTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B01D6306C100554871 /* VCTopic.swift */; };
@@ -391,6 +394,9 @@
 		069E094F1D57942C00F8AE8F /* UILabel+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
 		06A2DBC01D6A268D00F4D479 /* TooglePriceBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooglePriceBtn.swift; sourceTree = "<group>"; };
+		06B25A421D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWProductDetailTipsWebViewCell.swift; sourceTree = "<group>"; };
+		06B25A441D6C464E001A1016 /* WOWProductDetailTipsWebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWProductDetailTipsWebViewCell.xib; sourceTree = "<group>"; };
+		06B25A461D6C49C9001A1016 /* product_detail_tips.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = product_detail_tips.html; sourceTree = "<group>"; };
 		06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlexboxLayout.framework; sourceTree = "<group>"; };
 		06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+VCManager.swift"; sourceTree = "<group>"; };
 		06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBaseVCCategoryFound.swift; sourceTree = "<group>"; };
@@ -1358,6 +1364,7 @@
 				06FED4431D4634A600D7B068 /* city.json */,
 				29FF262F1CFDA86300DF2A9B /* Assets.xcassets */,
 				29FF26301CFDA86300DF2A9B /* intro.gif */,
+				06B25A461D6C49C9001A1016 /* product_detail_tips.html */,
 				29FF263B1CFDA86300DF2A9B /* wowprotocol.html */,
 				29FF26311CFDA86300DF2A9B /* StoryBoards */,
 			);
@@ -1593,6 +1600,8 @@
 				632A93491D49E0E3003A5966 /* WOWProductDetailView.xib */,
 				632A934D1D49E31D003A5966 /* WOWProductDetailCell.swift */,
 				632A934E1D49E31D003A5966 /* WOWProductDetailCell.xib */,
+				06B25A421D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift */,
+				06B25A441D6C464E001A1016 /* WOWProductDetailTipsWebViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1880,6 +1889,7 @@
 				63C42DCE1D65642B00879FEB /* WOWProductOrderCell.xib in Resources */,
 				29FF26FB1CFDA86300DF2A9B /* UMSCommentInputController.xib in Resources */,
 				636C33D01D51DB3700CA4E69 /* WOWTypeCollectionCell.xib in Resources */,
+				06B25A471D6C49C9001A1016 /* product_detail_tips.html in Resources */,
 				29FF27111CFDA86300DF2A9B /* User.storyboard in Resources */,
 				29FF265D1CFDA86300DF2A9B /* WOWlListCell.xib in Resources */,
 				29FF26FE1CFDA86300DF2A9B /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -1901,6 +1911,7 @@
 				29FF266F1CFDA86300DF2A9B /* WOWSenceImageCell.xib in Resources */,
 				29FF269E1CFDA86300DF2A9B /* WOWGoodsDetailCell.xib in Resources */,
 				636C33D81D52E5FE00CA4E69 /* WOWOrderFooterView.xib in Resources */,
+				06B25A451D6C464E001A1016 /* WOWProductDetailTipsWebViewCell.xib in Resources */,
 				297F187C1D0520A3003CCA2F /* WOWProductParamCell.xib in Resources */,
 				29FF26AA1CFDA86300DF2A9B /* WOWStoreBrandCell.xib in Resources */,
 				068B60B11D4F3561001AD778 /* Found.storyboard in Resources */,
@@ -2153,6 +2164,7 @@
 				635716C01D4607EE006BD746 /* WOWHomeBanner.swift in Sources */,
 				29FF26DB1CFDA86300DF2A9B /* WOWMacrofunc.swift in Sources */,
 				29FF26451CFDA86300DF2A9B /* WOWBuyCarController.swift in Sources */,
+				06B25A431D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift in Sources */,
 				29FF26C91CFDA86300DF2A9B /* WOWProvinceModel.swift in Sources */,
 				29FF26901CFDA86300DF2A9B /* WOWBrandDetailController.swift in Sources */,
 				636C33CF1D51DB3700CA4E69 /* WOWTypeCollectionCell.swift in Sources */,

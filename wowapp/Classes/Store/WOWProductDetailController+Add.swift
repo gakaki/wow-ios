@@ -21,7 +21,10 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.registerNib(UINib.nibName(String(WOWProductDetailPicTextCell)), forCellReuseIdentifier:String(WOWProductDetailPicTextCell))
 //        tableView.registerNib(UINib.nibName(String(WOWProductParamCell)), forCellReuseIdentifier:String(WOWProductParamCell))
                 tableView.registerNib(UINib.nibName(String(WOWProductParameter)), forCellReuseIdentifier:String(WOWProductParameter))
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailTipsCell)), forCellReuseIdentifier:String(WOWProductDetailTipsCell))
+//        tableView.registerNib(UINib.nibName(String(WOWProductDetailTipsCell)), forCellReuseIdentifier:String(WOWProductDetailTipsCell))
+        tableView.registerNib(UINib.nibName(String(WOWProductDetailTipsWebViewCell)), forCellReuseIdentifier:String(WOWProductDetailTipsWebViewCell))
+
+        
         //先不要评论
 //        tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
         //相关商品也不要
@@ -112,9 +115,13 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
 
             returnCell = cell
         case (2,0)://温馨提示
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailTipsCell", forIndexPath: indexPath) as! WOWProductDetailTipsCell
+//            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailTipsCell", forIndexPath: indexPath) as! WOWProductDetailTipsCell
+//            
+//            returnCell = cell
             
+            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailTipsWebViewCell", forIndexPath: indexPath) as! WOWProductDetailTipsWebViewCell
             returnCell = cell
+            
 //        case (3,_)://评论
 //            let cell = tableView.dequeueReusableCellWithIdentifier("WOWCommentCell", forIndexPath: indexPath) as! WOWCommentCell
 //            returnCell = cell

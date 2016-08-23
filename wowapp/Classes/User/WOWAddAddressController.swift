@@ -171,7 +171,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
 //        let message = "索引：\(provinceIndex)-\(cityIndex)-\(districtIndex)\n"
 //            + "值：\(province.name) - \(city.name) - \(district.name)"
         
-        let message = "\(province.name) - \(city.name) - \(district.name)"
+        let message = "\(province.name!) - \(city.name!) - \(district.name!)"
         addressInfo.provinceId = (province.id)!.toInt()
         addressInfo.cityId = (city.id)!.toInt()
         addressInfo.countyId = (district.id)!.toInt()

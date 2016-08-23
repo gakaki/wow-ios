@@ -25,6 +25,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         self.telTextField.text = WOWUserManager.userMobile
         self.nickTextField.text = WOWUserManager.userName
 //        headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
+        headImageView.borderRadius(25)
         headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
 
         // Do any additional setup after loading the view.

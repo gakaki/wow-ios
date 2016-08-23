@@ -124,11 +124,11 @@ WOWFoundCategoryCellDelegate
 	
 //MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if(indexPath.section == 1){
-            toVCProduct(   vo_recommend_product?.productId         )
-        }
-    }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        if(indexPath.section == 1){
+//            toVCProduct(   vo_recommend_product?.productId         )
+//        }
+//    }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 
@@ -263,6 +263,10 @@ WOWFoundCategoryCellDelegate
         if  (!WOWUserManager.loginStatus){
             toLoginVC(true)
         }
+    }
+    
+    func toProductDetail(productId: Int?) {
+        toVCProduct(productId)
     }
 
   

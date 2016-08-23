@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */; };
 		060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060869721D49EB74008FB61D /* ModelVoSld.swift */; };
+		06108A011D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */; };
+		06108A031D6BFA5E00CA58B3 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */; };
 		062A91E71D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062A91E61D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift */; };
 		0633527B1D6435970026177E /* VCBaseNavCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633527A1D6435970026177E /* VCBaseNavCart.swift */; };
 		0633527E1D6540560026177E /* WowLikeBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633527D1D6540560026177E /* WowLikeBtn.swift */; };
@@ -366,6 +368,8 @@
 /* Begin PBXFileReference section */
 		0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayGroupBy.swift; sourceTree = "<group>"; };
 		060869721D49EB74008FB61D /* ModelVoSld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVoSld.swift; sourceTree = "<group>"; };
+		06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVoSldObjectMapper.swift; sourceTree = "<group>"; };
+		06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		062A91E61D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWFoundWeeklyNewCellElementCell.swift; sourceTree = "<group>"; };
 		0633527A1D6435970026177E /* VCBaseNavCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBaseNavCart.swift; sourceTree = "<group>"; };
 		0633527D1D6540560026177E /* WowLikeBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowLikeBtn.swift; sourceTree = "<group>"; };
@@ -1514,6 +1518,8 @@
 		29FF27211CFDAFDB00DF2A9B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */,
+				06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */,
 				060869721D49EB74008FB61D /* ModelVoSld.swift */,
 				29FF25B31CFDA86300DF2A9B /* WOWAddressListModel.swift */,
 				29FF25B51CFDA86300DF2A9B /* WOWFavoriteListModel.swift */,
@@ -1798,7 +1804,7 @@
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VSWKQE5HA8;
+						DevelopmentTeam = B4WSDTADTT;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -2103,6 +2109,7 @@
 				0633527E1D6540560026177E /* WowLikeBtn.swift in Sources */,
 				29FF26851CFDA86300DF2A9B /* WOWCheckSelectView.swift in Sources */,
 				060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */,
+				06108A031D6BFA5E00CA58B3 /* Stopwatch.swift in Sources */,
 				29FF26A51CFDA86300DF2A9B /* WOWGoodsTypeCell.swift in Sources */,
 				29FF26BD1CFDA86300DF2A9B /* WOWMeSocietyController.swift in Sources */,
 				632A93291D47307D003A5966 /* FavoriteEmpty.swift in Sources */,
@@ -2214,6 +2221,7 @@
 				63C42DC91D646B0400879FEB /* SimpleHUD.swift in Sources */,
 				2D6B02821D589622003D21C1 /* WOWOrderDetailCostCell.swift in Sources */,
 				29FF26471CFDA86300DF2A9B /* WOWBuyCarNormalCell.swift in Sources */,
+				06108A011D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift in Sources */,
 				29FF26CD1CFDA86300DF2A9B /* WOWTransLineCell.swift in Sources */,
 				06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */,
 				29FF267F1CFDA86300DF2A9B /* WOWTabBarController.swift in Sources */,

@@ -11,11 +11,11 @@ import UIKit
 class WOWGuideController: WOWBaseViewController {
     
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var skipButton:  UIButton!
+//    @IBOutlet weak var skipButton:  UIButton!
     
     private var scrollerView: UIScrollView!
     
-    private let numOfPages = 3
+    private let numOfPages = 1
     
     // 所有必要的状态
     enum State {
@@ -40,10 +40,10 @@ class WOWGuideController: WOWBaseViewController {
             
             var title1 = "加入我们"
             var title2 = "先逛逛"
-            var backGroundColor1 = UIColor.yellowColor()
-            var backGroundColor2 = UIColor.clearColor()
-            var titleColor1 = UIColor.blackColor()
-            var titleColor2 = UIColor.whiteColor()
+            var backGroundColor1 = MGRgb(32, g: 32, b: 32)
+            var backGroundColor2 = UIColor.whiteColor()
+            var titleColor1 = UIColor.whiteColor()
+            var titleColor2 = UIColor.blackColor()
             
             
             switch currentState {
@@ -52,13 +52,12 @@ class WOWGuideController: WOWBaseViewController {
                 case .Register:
                     title1 = "绑定微信"
                     title2 = "手机注册"
-                skipButton.hidden = false
                 backGroundColor1 = UIColor.whiteColor()
                 backGroundColor2 = UIColor.whiteColor()
                 titleColor1 = UIColor.blackColor()
                 titleColor2 = UIColor.blackColor()
             }
-            btn2.borderColor(1, borderColor:UIColor.whiteColor())
+//            btn2.borderColor(1, borderColor:UIColor.whiteColor())
             
             btn1.setTitle(title1, forState: .Normal)
             btn2.setTitle(title2, forState: .Normal)
@@ -85,7 +84,7 @@ class WOWGuideController: WOWBaseViewController {
         scrollerView.delegate = self
         
         for index in 0..<numOfPages {
-            let imageView = UIImageView(image: UIImage(named: "guide\(index)"))
+            let imageView = UIImageView(image: UIImage(named: "guideBackground"))
             imageView.frame = CGRect(x: frame.size.width * CGFloat(index), y: 0, w: frame.size.width, h: frame.size.height)
             scrollerView.addSubview(imageView)
         }
@@ -111,9 +110,9 @@ class WOWGuideController: WOWBaseViewController {
     }
     
     
-    @IBAction func btnSkipAction(sender: UIButton) {
-        self.toMainVC()
-    }
+//    @IBAction func btnSkipAction(sender: UIButton) {
+//        self.toMainVC()
+//    }
     
     @IBAction func btnLoginAction(sender: UIButton, forEvent event: UIEvent) {
         self.toLoginVC()

@@ -146,6 +146,8 @@ class WOWUserController: WOWBaseTableViewController {
             }else{
                 
                 if   WOWUserManager.userPhotoData.length == 0 {
+                    
+                        print("\(WOWUserManager.userHeadImageUrl)")
                     headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
                     
 //                    let forecastURL = NSURL(string: WOWUserManager.userHeadImageUrl)

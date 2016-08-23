@@ -442,7 +442,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        
+        let image = image.fixOrientation()
         let data = UIImageJPEGRepresentation(image,0.5)
         WOWHud.showLoading()
        

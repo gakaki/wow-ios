@@ -38,18 +38,30 @@ class WOWInfoTextController: WOWBaseTableViewController {
         }
         
         super.setUI()
-        textField.text = userInfo
+        if userInfo.isEmpty {
+            switch entrance {
+            case .NickEntrance:
+                 textField.placeholder = "请输入昵称"
+            case .DescEntrance:
+                 textField.placeholder = "请输入个性签名"
+            case .JobEntrance:
+                 textField.placeholder = "请输入职业"
+            }
+        }else{
+                textField.text = userInfo
+        }
         switch entrance {
         case .NickEntrance:
             navigationItem.title = "昵称"
-            vcTitle = "昵称"
+            vcTitle              = "昵称"
         case .DescEntrance:
             navigationItem.title = "个性签名"
-            vcTitle = "个性签名"
+            vcTitle              = "个性签名"
         case .JobEntrance:
             navigationItem.title = "职业"
-            vcTitle = "职业"
+            vcTitle              = "职业"
         }
+
     }
     
     private func saveInfo(){

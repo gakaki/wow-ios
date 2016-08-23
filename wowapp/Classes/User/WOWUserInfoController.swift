@@ -63,12 +63,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addObserver()
         
+
     }
    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        addObserver()
         IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         
@@ -80,8 +81,9 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.viewWillAppear(animated)
         
             self.refresh_image()
-
+        
             configUserInfo()
+        
             configPickerView()
     }
     
@@ -169,19 +171,18 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
         dispatch_async(dispatch_get_main_queue()) {
             
-            
             self.sexTextField.text  = WOWSex[self.sex]
             self.desLabel.text      = WOWUserManager.userDes
             self.nickLabel.text     = WOWUserManager.userName
             self.ageTextField.text  = WOWAgeRange[self.age]
             self.starTextField.text = WOWConstellation[self.star]
             self.jobLabel.text      = WOWUserManager.userIndustry
-            
+    
             
             self.ageTextField.userInteractionEnabled = false
             self.sexTextField.userInteractionEnabled = false
             self.starTextField.userInteractionEnabled = false
-
+            self.tableView.reloadData()
         }
     }
     

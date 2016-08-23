@@ -137,7 +137,7 @@ struct WOWUserManager {
         get{
             let des = (MGDefault.objectForKey(WOWUserDes) as? String) ?? ""
             if des.isEmpty {
-                return "点击修改签名"
+                return ""
             }else{
                 return des
             }

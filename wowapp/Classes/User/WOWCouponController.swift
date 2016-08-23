@@ -72,7 +72,10 @@ class WOWCouponController: WOWBaseViewController {
                  
                     }
                 }else {
-                    strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.vo_cupons = []
+                    }
+                    strongSelf.tableView.mj_footer = nil
                 }
 
                 strongSelf.tableView.reloadData()

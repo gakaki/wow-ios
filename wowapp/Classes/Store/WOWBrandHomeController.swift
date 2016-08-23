@@ -23,7 +23,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     var designerId : Int?
     var designerModel : WOWDesignerModel?
     var labelHeight : CGFloat?
-    let pageSize = 2
+    let pageSize = 10
     
     var entrance = brandOrDesignerEntrance.brandEntrance
     

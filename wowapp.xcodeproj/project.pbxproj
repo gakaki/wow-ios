@@ -272,6 +272,7 @@
 		29FF27391CFDB5E000DF2A9B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF27381CFDB5E000DF2A9B /* CoreTelephony.framework */; };
 		29FF273B1CFDB5E600DF2A9B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */; };
 		29FF273D1CFDB5EC00DF2A9B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29FF273C1CFDB5EC00DF2A9B /* libz.tbd */; };
+		2D2187471D6BFA740022074B /* WOWSingPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2187461D6BFA740022074B /* WOWSingPhoto.swift */; };
 		2D6B02761D5895F5003D21C1 /* WOWOrderDetailNewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B02741D5895F5003D21C1 /* WOWOrderDetailNewCell.swift */; };
 		2D6B02771D5895F5003D21C1 /* WOWOrderDetailNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D6B02751D5895F5003D21C1 /* WOWOrderDetailNewCell.xib */; };
 		2D6B027A1D589606003D21C1 /* WOWOrderDetailTwoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B02781D589606003D21C1 /* WOWOrderDetailTwoCell.swift */; };
@@ -652,6 +653,7 @@
 		29FF27381CFDB5E000DF2A9B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		29FF273C1CFDB5EC00DF2A9B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2D2187461D6BFA740022074B /* WOWSingPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSingPhoto.swift; sourceTree = "<group>"; };
 		2D6B02741D5895F5003D21C1 /* WOWOrderDetailNewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderDetailNewCell.swift; sourceTree = "<group>"; };
 		2D6B02751D5895F5003D21C1 /* WOWOrderDetailNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWOrderDetailNewCell.xib; sourceTree = "<group>"; };
 		2D6B02781D589606003D21C1 /* WOWOrderDetailTwoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderDetailTwoCell.swift; sourceTree = "<group>"; };
@@ -1519,6 +1521,7 @@
 				29FF25C41CFDA86300DF2A9B /* WOWProvinceModel.swift */,
 				29FF25D01CFDA86300DF2A9B /* WOWUserModel.swift */,
 				06FB94B41D63FB4800554871 /* ModelVOCoupon.swift */,
+				2D2187461D6BFA740022074B /* WOWSingPhoto.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2052,6 +2055,7 @@
 				29FF26E31CFDA86300DF2A9B /* WOWNetManager.swift in Sources */,
 				29D5EC381D01295B0001266C /* WOWProductDetailController+Add.swift in Sources */,
 				29FF27051CFDA86300DF2A9B /* CollectionViewWaterfallLayout.swift in Sources */,
+				2D2187471D6BFA740022074B /* WOWSingPhoto.swift in Sources */,
 				635716BA1D45EB89006BD746 /* AuxiliaryModels.swift in Sources */,
 				63C42DCD1D65642B00879FEB /* WOWProductOrderCell.swift in Sources */,
 				29D5EC3F1D0150700001266C /* WOWProductDetailPicTextCell.swift in Sources */,

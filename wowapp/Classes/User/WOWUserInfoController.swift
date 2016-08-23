@@ -157,12 +157,17 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
         self.headImageView.image = nil
         self.headImageView.setNeedsDisplay()
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let objData:NSData = userDefault.objectForKey("imageData") as! NSData
+        let myImage = NSKeyedUnarchiver.unarchiveObjectWithData(objData) as! UIImage
+     
+        self.headImageView.image = myImage
         
-        if ( self.image != nil ){
-            self.headImageView.image = self.image
-        }else{
-            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-        }
+//        if ( self.image != nil ){
+//            self.headImageView.image = self.image
+//        }else{
+//            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+//        }
         
     }
     private func configUserInfo(){
@@ -226,6 +231,32 @@ class WOWUserInfoController: WOWBaseTableViewController {
         cancelPicker()
     }
     
+    func saveWithFile(strImg:String) {
+        // 1、获得沙盒的根路径
+        let home = NSHomeDirectory() as NSString;
+        // 2、获得Documents路径，使用NSString对象的stringByAppendingPathComponent()方法拼接路径
+        let docPath = home.stringByAppendingPathComponent("Documents") as NSString;
+        // 3、获取文本文件路径
+        let filePath = docPath.stringByAppendingPathComponent("data.plist");
+        let dataSource = NSMutableArray();
+        dataSource.addObject(strImg);
+//        dataSource.addObject("为伊消得人憔悴");
+//        dataSource.addObject("故国不堪回首明月中");
+//        dataSource.addObject("人生若只如初见");
+//        dataSource.addObject("暮然回首，那人却在灯火阑珊处");
+        // 4、将数据写入文件中
+        dataSource.writeToFile(filePath, atomically: true);
+    }
+    func readWithFile() {
+        /// 1、获得沙盒的根路径
+        let home = NSHomeDirectory() as NSString;
+        /// 2、获得Documents路径，使用NSString对象的stringByAppendingPathComponent()方法拼接路径
+        let docPath = home.stringByAppendingPathComponent("Documents") as NSString;
+        /// 3、获取文本文件路径
+        let filePath = docPath.stringByAppendingPathComponent("data.plist");
+        let dataSource = NSArray(contentsOfFile: filePath);
+        print(dataSource);
+    }
 //MARK:Private Network
     override func request() {
         super.request()
@@ -472,7 +503,10 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         
                         WOWUserManager.userHeadImageUrl = self.headImageUrl
                         self.image               =  image
-                        
+//                        self.saveWithFile(self.headImageUrl)
+                        let imageData:NSData = NSKeyedArchiver.archivedDataWithRootObject(image)
+                        let userDefault = NSUserDefaults.standardUserDefaults()
+                        userDefault.setObject(imageData, forKey: "imageData")
                         NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                         
                         self.request()
@@ -527,7 +561,8 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
     
   
 }
-
+extension WOWUserInfoController{
+  }
 extension WOWUserInfoController: addressDelegate {
     func editAddress() {
         requestAddressInfo()

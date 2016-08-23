@@ -751,12 +751,12 @@ extension WOWGoodsBuyView {
         animation.path = self.path.CGPath
         
         //旋转动画
-        let expandAnimation1 = CABasicAnimation(keyPath: "transform.rotation.z")
-        
-        expandAnimation1.duration = 1.0
-        expandAnimation1.repeatCount = 1
-        expandAnimation1.fromValue = NSNumber(float: 0.0)
-        expandAnimation1.toValue = NSNumber(double: 10 * M_PI)
+//        let expandAnimation1 = CABasicAnimation(keyPath: "transform.rotation.z")
+//        
+//        expandAnimation1.duration = 1.0
+//        expandAnimation1.repeatCount = 1
+//        expandAnimation1.fromValue = NSNumber(float: 0.0)
+//        expandAnimation1.toValue = NSNumber(double: 10 * M_PI)
         
         
         //到中间的动画
@@ -781,7 +781,7 @@ extension WOWGoodsBuyView {
         
         let groups = CAAnimationGroup()
         
-        groups.animations = [animation,expandAnimation1,expandAnimation,narrowAnimation]
+        groups.animations = [animation,expandAnimation,narrowAnimation]
         groups.duration = 1.5
         groups.removedOnCompletion=false
         groups.fillMode=kCAFillModeForwards

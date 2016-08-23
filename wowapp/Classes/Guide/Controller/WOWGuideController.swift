@@ -110,9 +110,9 @@ class WOWGuideController: WOWBaseViewController {
     }
     
     
-//    @IBAction func btnSkipAction(sender: UIButton) {
-//        self.toMainVC()
-//    }
+    @IBAction func btnSkipAction(sender: UIButton) {
+        self.toMainVC()
+    }
     
     @IBAction func btnLoginAction(sender: UIButton, forEvent event: UIEvent) {
         self.toLoginVC()

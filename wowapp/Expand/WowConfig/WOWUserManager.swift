@@ -23,6 +23,8 @@ struct WOWUserManager {
     private static let WOWUserConstellation = "WOWUserConstellation"
     private static let WOWUserAgeRange      = "WOWUserAgeRange"
     private static let WOWUserLoginStatus   = "WOWUserLoginStatus"
+    private static let WOWUserPhotoData     = "WOWUserPhotoData"
+
 
     static var wechatToken = ""
     
@@ -102,7 +104,23 @@ struct WOWUserManager {
             MGDefault.synchronize()
         }
     }
-    
+    static var userPhotoData:NSData{
+        get{
+            
+            if  let aaa = MGDefault.objectForKey(WOWUserPhotoData)  {
+                 return aaa as! NSData
+            }else{
+                return NSData()
+            }
+            
+//            return (MGDefault.objectForKey(WOWUserPhotoData) as? NSData)!
+        }
+        set{
+            MGDefault.setObject(newValue, forKey:WOWUserPhotoData)
+            MGDefault.synchronize()
+        }
+    }
+
     static var userSex:Int{
         get{
             return (MGDefault.objectForKey(WOWUserSex) as? Int) ?? 3
@@ -191,6 +209,7 @@ struct WOWUserManager {
         MGDefault.setObject(nil, forKey:WOWUserAgeRange)
         MGDefault.setObject(nil, forKey:WOWUserCarCount)
         MGDefault.setObject(nil, forKey:WOWUserIndustry)
+        MGDefault.setObject(nil, forKey:WOWUserPhotoData)
         MGDefault.synchronize()
     }
     /**

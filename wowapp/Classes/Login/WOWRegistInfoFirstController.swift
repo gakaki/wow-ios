@@ -88,7 +88,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
             nextView.tipsLabel.text = "请输入昵称"
             return
         }
-        let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? ""]
+        let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? "","avatar":self.headImageUrl]
         WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)

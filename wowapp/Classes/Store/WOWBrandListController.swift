@@ -55,17 +55,7 @@ class WOWBrandListController: WOWBaseViewController {
         configBarItem()
     }
     private func configBarItem(){
-        
-        //                makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
-        //                    if let strongSelf = self{
-        //                        let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
-        //                        let transition = CATransition.init()
-        //                        transition.duration = 0.3
-        //                        transition.subtype = kCATransitionFromBottom
-        //                        strongSelf.navigationController?.view.layer.addAnimation(transition, forKey: nil)
-        //                        strongSelf.navigationController?.pushViewController(vc, animated: true)
-        //                    }
-        //                }
+
         
         makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
             if let strongSelf = self{
@@ -106,6 +96,15 @@ class WOWBrandListController: WOWBaseViewController {
         tableView.tableHeaderView = searchController.searchBar
     }
     
+    
+    func isStringContainsNumber( _string : String) -> Bool{
+        
+        let numberRegEx  = ".*[0-9]+.*"
+        let testCase = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
+        let containsNumber = testCase.evaluateWithObject(_string)
+        
+        return containsNumber
+    }
 //MARK:Network
     override func request() {
         super.request()
@@ -119,11 +118,20 @@ class WOWBrandListController: WOWBaseViewController {
                     let brands  = Mapper<WOWBrandV1Model>().mapArray(dataArr)
                     
                     //循环所有的然后给分组
-                      for letter in strongSelf.headerIndexs{
+                    for letter in strongSelf.headerIndexs{
                         let group_row    = brands!.filter{ (brand) in brand.letter == letter }
-                        strongSelf.dataArray.append(group_row)
-                        strongSelf.originalArray.appendContentsOf(group_row)
+                            strongSelf.dataArray.append(group_row)
+                            strongSelf.originalArray.appendContentsOf(group_row)
+                        
                     }
+                    //for #
+                    let group_row    = brands!.filter{ (brand) in self!.isStringContainsNumber(brand.letter!) == true }
+                    
+                    strongSelf.dataArray.removeLast()
+                    strongSelf.originalArray.removeLast()
+
+                    strongSelf.dataArray.append(group_row)
+                    strongSelf.originalArray.appendContentsOf(group_row)
 
                     
                     strongSelf.tableView.reloadData()

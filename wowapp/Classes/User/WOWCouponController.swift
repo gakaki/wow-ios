@@ -155,13 +155,15 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let coupon = vo_cupons[indexPath.section]
         switch entrance {
-            
         case .orderEntrance:
+            if coupon.status == 1 {
                 if let ac = action{
-                    ac(object: vo_cupons[indexPath.section])
+                    ac(object: coupon)
                     navigationController?.popViewControllerAnimated(true)
                 }
+            }
             
         default:
             return

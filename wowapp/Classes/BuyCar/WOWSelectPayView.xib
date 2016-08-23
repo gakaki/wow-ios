@@ -12,11 +12,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMH-vb-kWc">
-                    <rect key="frame" x="255" y="8" width="50" height="40"/>
+                    <rect key="frame" x="270" y="0.0" width="50" height="45"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="0MQ-7v-Qug"/>
-                        <constraint firstAttribute="height" constant="40" id="Mcb-ds-poj"/>
+                        <constraint firstAttribute="height" constant="45" id="Mcb-ds-poj"/>
                     </constraints>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="15" maxY="0.0"/>
                     <state key="normal" image="close"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择支付方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXy-F2-HpT">
@@ -104,13 +105,13 @@
                 <constraint firstItem="29r-9F-HrL" firstAttribute="leading" secondItem="E8w-Kj-1sH" secondAttribute="trailing" constant="15" id="GIZ-1P-SV7"/>
                 <constraint firstAttribute="trailing" secondItem="ISY-or-DSp" secondAttribute="trailing" id="LEe-KI-lOg"/>
                 <constraint firstItem="3Oc-7B-Ncd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qf3-CQ-O6e"/>
-                <constraint firstAttribute="trailing" secondItem="QMH-vb-kWc" secondAttribute="trailing" constant="15" id="SdI-Se-AH7"/>
+                <constraint firstAttribute="trailing" secondItem="QMH-vb-kWc" secondAttribute="trailing" id="SdI-Se-AH7"/>
                 <constraint firstAttribute="trailing" secondItem="13n-gp-XjB" secondAttribute="trailing" id="Tzu-6z-UBY"/>
                 <constraint firstItem="j4B-hz-vgO" firstAttribute="leading" secondItem="vXy-F2-HpT" secondAttribute="leading" id="WCj-hH-Uxm"/>
                 <constraint firstItem="3Oc-7B-Ncd" firstAttribute="top" secondItem="E8w-Kj-1sH" secondAttribute="bottom" constant="36" id="YgG-YL-k5t"/>
                 <constraint firstAttribute="bottom" secondItem="3Oc-7B-Ncd" secondAttribute="bottom" id="aIo-nb-wbE"/>
                 <constraint firstItem="ngd-SG-sGB" firstAttribute="leading" secondItem="j4B-hz-vgO" secondAttribute="trailing" constant="15" id="bGv-pv-2Wa"/>
-                <constraint firstItem="QMH-vb-kWc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="d84-Di-qu8"/>
+                <constraint firstItem="QMH-vb-kWc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="d84-Di-qu8"/>
                 <constraint firstItem="13n-gp-XjB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dwE-od-KV4"/>
                 <constraint firstItem="E8w-Kj-1sH" firstAttribute="leading" secondItem="vXy-F2-HpT" secondAttribute="leading" id="e83-XF-tgk"/>
                 <constraint firstItem="vXy-F2-HpT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="eTD-4H-pa8"/>

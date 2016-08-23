@@ -64,7 +64,9 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.viewDidLoad()
         
         addObserver()
-        
+        configUserInfo()
+       
+
 
     }
    
@@ -84,9 +86,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
 //        let userDefault = NSUserDefaults.standardUserDefaults()
 //        userDefault.setObject("", forKey: "imageData")
         
-            self.refresh_image()
         
-            configUserInfo()
+        
         
             configPickerView()
     }
@@ -476,7 +477,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                 DLog(data)
                 DLog(error)
             
-            self.headImageView.image =  image
+//            self.headImageView.image =  image
 
             if (( error ) != nil){
                 WOWHud.dismiss()

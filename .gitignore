@@ -25,3 +25,6 @@ xcuserdata/
 *.hmap
 *.ipa
 .DS_Store
+
+.idea/
+.idea/*

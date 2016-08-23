@@ -39,8 +39,8 @@ public extension UIButton{
         dispatch_source_set_timer(timer, dispatch_walltime(nil, 0), 1 * NSEC_PER_SEC, 0)
         
         // 内建事件
-        dispatch_source_set_event_handler(timer) { () -> Void in
-            
+        dispatch_source_set_event_handler(timer) {[weak self] () -> Void in
+            if let strongSelf = self {
             if time == 1 {
                 
                 // 只能用这种方式取消
@@ -48,10 +48,11 @@ public extension UIButton{
                 // 刷新UI要回到主线程
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     
-                    self.backgroundColor = mainBGColor
-                    self.setTitleColor(mainTitleColor, forState: .Normal)
-                    self.setTitle(title, forState: .Normal)
-                    self.userInteractionEnabled = true // 这里不要用enable
+                    
+                    strongSelf.backgroundColor = mainBGColor
+                    strongSelf.setTitleColor(mainTitleColor, forState: .Normal)
+                    strongSelf.setTitle(title, forState: .Normal)
+                    strongSelf.userInteractionEnabled = true // 这里不要用enable
                     
                 })
                 
@@ -59,17 +60,22 @@ public extension UIButton{
                 let content = "重新获取" + "（\((time - 1) % 60)s）"
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     
-                    self.backgroundColor = countBGColor
-                    self.setTitleColor(countTitleColor, forState: .Normal)
-                    self.setTitle(content, forState: .Normal)
+                    strongSelf.backgroundColor = countBGColor
+                    strongSelf.setTitleColor(countTitleColor, forState: .Normal)
+                    strongSelf.setTitle(content, forState: .Normal)
 //                    self.titleLabel?.text = content
-                    self.userInteractionEnabled = false // 这里不要用enable
+                    strongSelf.userInteractionEnabled = false // 这里不要用enable
                     
                 })
                 
+            
+                }
+            
             }
             
             time -= 1
+            
+        
             
         }
         

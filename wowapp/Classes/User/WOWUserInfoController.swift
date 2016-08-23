@@ -458,7 +458,8 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         )
         
         
-        let hashids                 = Hashids(salt:FCUUID.uuidForDevice())
+        let onlyStr = FCUUID.uuidForDevice() + (NSDate().timeIntervalSince1970 * 1000).toString
+        let hashids                 = Hashids(salt:onlyStr)
         let mobile                  = WOWUserManager.userMobile;
         let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
 //        let qiniu_key               = "user/avatar/13621822254"

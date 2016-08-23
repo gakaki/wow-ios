@@ -18,6 +18,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var telTextField: UITextField!
     @IBOutlet weak var descTextField: UITextField!
+    var phoneNumber  :String?
     private var headImageUrl:String = WOWUserManager.userHeadImageUrl
     var nextView : WOWRegistInfoSureView!
     override func viewDidLoad() {
@@ -155,6 +156,7 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
 //        let data = UIImageJPEGRepresentation(image,0.5)
+        let image = image.fixOrientation()
         headImageView.image = image
         picker.dismissViewControllerAnimated(true, completion: nil)
         
@@ -172,8 +174,9 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
             cancellationSignal: nil
         )
         
-        
-        let hashids                 = Hashids(salt:FCUUID.uuidForDevice())
+        let onlyStr = FCUUID.uuidForDevice() + (NSDate().timeIntervalSince1970 * 1000).toString
+        let hashids                 = Hashids(salt:onlyStr)
+//        let hashids = Hashids(salt: WOWUserManager.userMobile)
         let mobile                  = WOWUserManager.userMobile;
         let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
         //        let qiniu_key               = "user/avatar/13621822254"

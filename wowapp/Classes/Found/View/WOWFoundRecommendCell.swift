@@ -57,6 +57,8 @@ class WOWFoundRecommendCell: UITableViewCell {
         
         if (WOWUserManager.loginStatus){
             self.requestIsFavoriteProduct()
+        }else {
+            btnLike.selected = false
         }
         
     }

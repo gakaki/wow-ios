@@ -27,7 +27,8 @@ class WOWAddAddressController: WOWBaseTableViewController {
     @IBOutlet weak var warnImg4              : UIImageView!
     private var defaultAddress:Bool         = false
     
-    var data:VoSldData                      = VoSldData()
+    var data:VoSldDataOM! //城市三联动选择数据
+    
     var addressEntrance:AddressEntrance?
     
     //选择的省索引
@@ -80,22 +81,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
 //        self.lookBigImg((sender.view?.tag)!)
         
     }
-    func loadJson(){
-        if let path = NSBundle.mainBundle().pathForResource("city", ofType: "json") {
-            
-            do {
-                let json_str    = try! String(contentsOfURL: NSURL(fileURLWithPath: path), encoding: NSUTF8StringEncoding)
-                data = try! VoSldData(JSONString:json_str)
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }catch {
-                print("error")
-            }
-        } else {
-            print("Invalid filename/path.")
-        }
-    }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -119,22 +105,9 @@ class WOWAddAddressController: WOWBaseTableViewController {
                 strongSelf.saveAddress()
             }
         }
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-//
-//            self.loadJson()
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//
-//             self.configPicker()
-//            })
-//        })
-        weak var weakSelf = self
-        dispatch_async(dispatch_get_main_queue()) {
-            
-            weakSelf!.loadJson()
-            
-        }
-
+        
+        
+        self.data = CityDataManager.data
         self.configPicker()
     }
     
@@ -175,10 +148,10 @@ class WOWAddAddressController: WOWBaseTableViewController {
         cityTextField.resignFirstResponder()
 
         //获取选中的省
-        let province = self.data.provinces[provinceIndex]
+        let province    = self.data.provinces[provinceIndex]
         
         //获取选中的市
-        let cities      = self.data.getSubCities(province)
+        let cities      = province.subCities!
         if ( cities.count <= 0) { //没有找到城市的问题其实还是需要从源头json上处理的
             //消息显示
             let alertController = UIAlertController(title: "出错没有找到城市",
@@ -191,7 +164,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
         let city        = cities[cityIndex]
         
         //获取选中的县（地区）
-        let districts   = self.data.getSubDistricts(city)
+        let districts   = city.subDistricts!
         let district    = districts[districtIndex]
         
         //拼接输出消息
@@ -199,9 +172,9 @@ class WOWAddAddressController: WOWBaseTableViewController {
 //            + "值：\(province.name) - \(city.name) - \(district.name)"
         
         let message = "\(province.name) - \(city.name) - \(district.name)"
-        addressInfo.provinceId = (province.id).toInt()
-        addressInfo.cityId = (city.id).toInt()
-        addressInfo.countyId = (district.id).toInt()
+        addressInfo.provinceId = (province.id)!.toInt()
+        addressInfo.cityId = (city.id)!.toInt()
+        addressInfo.countyId = (district.id)!.toInt()
         
         cityTextField.text = message
     }
@@ -360,17 +333,17 @@ extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
             return self.data.provinces.count
         case 1:
             let province    = self.data.provinces[provinceIndex]
-            let cities      = self.data.getSubCities(province)
+            let cities      = province.subCities!
             return cities.count
         case 2:
             
             let province    = self.data.provinces[provinceIndex]
-            let cities      = self.data.getSubCities(province)
+            let cities      = province.subCities!
             if ( cities.count <= 0 ){
                 return 0
             }
             let  city       = cities[cityIndex]
-            let districts   = self.data.getSubDistricts(city)
+            let districts   = city.subDistricts!
             return districts.count
         default:
             return 0
@@ -385,14 +358,14 @@ extension WOWAddAddressController:UIPickerViewDelegate,UIPickerViewDataSource{
             return province.name
         case 1:
             let province    = self.data.provinces[provinceIndex]
-            let cities      = self.data.getSubCities(province)
+            let cities      = province.subCities!
             let city        = cities[row]
             return city.name
         case 2:
             let province    = self.data.provinces[provinceIndex]
-            let cities      = self.data.getSubCities(province)
+            let cities      = province.subCities!
             let city        = cities[cityIndex]
-            let districts   = self.data.getSubDistricts(city)
+            let districts   = city.subDistricts!
             if ( districts.count > 0) {
                 let district    = districts[row]
                 return district.name

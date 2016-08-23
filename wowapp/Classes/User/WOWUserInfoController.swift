@@ -73,12 +73,16 @@ class WOWUserInfoController: WOWBaseTableViewController {
         IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         
-        self.refresh_image()
+//        self.refresh_image()
 
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+//        let imageData:NSData = NSKeyedArchiver.archivedDataWithRootObject(image)
+//        let userDefault = NSUserDefaults.standardUserDefaults()
+//        userDefault.setObject("", forKey: "imageData")
         
             self.refresh_image()
         
@@ -157,18 +161,22 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
         self.headImageView.image = nil
         self.headImageView.setNeedsDisplay()
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        let objData:NSData = userDefault.objectForKey("imageData") as! NSData
-        let myImage = NSKeyedUnarchiver.unarchiveObjectWithData(objData) as! UIImage
-     
-        self.headImageView.image = myImage
-        
-//        if ( self.image != nil ){
-//            self.headImageView.image = self.image
-//        }else{
-//            self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-//        }
-        
+
+        if   WOWUserManager.userPhotoData.length == 0 {
+                    if ( self.image != nil ){
+                        self.headImageView.image = self.image
+                    }else{
+                        self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+                    }
+
+        }else{
+            dispatch_async(dispatch_get_main_queue()) {
+
+            let myImage = NSKeyedUnarchiver.unarchiveObjectWithData(WOWUserManager.userPhotoData) as! UIImage
+            
+            self.headImageView.image = myImage
+            }
+        }
     }
     private func configUserInfo(){
         
@@ -505,8 +513,9 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                         self.image               =  image
 //                        self.saveWithFile(self.headImageUrl)
                         let imageData:NSData = NSKeyedArchiver.archivedDataWithRootObject(image)
-                        let userDefault = NSUserDefaults.standardUserDefaults()
-                        userDefault.setObject(imageData, forKey: "imageData")
+//                        let userDefault = NSUserDefaults.standardUserDefaults()
+//                        userDefault.setObject(imageData, forKey: "imageData")
+                        WOWUserManager.userPhotoData = imageData
                         NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                         
                         self.request()

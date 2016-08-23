@@ -226,7 +226,10 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
                             
                             WOWUserManager.userHeadImageUrl = self.headImageUrl
 //                            self.image               =  image
-                            
+                            let imageData:NSData = NSKeyedArchiver.archivedDataWithRootObject(image)
+                            //                        let userDefault = NSUserDefaults.standardUserDefaults()
+                            //                        userDefault.setObject(imageData, forKey: "imageData")
+                            WOWUserManager.userPhotoData = imageData
 //                            NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                             
 //                            self.request()

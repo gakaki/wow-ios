@@ -144,8 +144,31 @@ class WOWUserController: WOWBaseTableViewController {
             if ( self.image_next_view != nil){
                 headerView.headImageView.image =  self.image_next_view 
             }else{
-                headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-            }
+                
+                if   WOWUserManager.userPhotoData.length == 0 {
+                    headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+//                    let url = NSURL(string: WOWUserManager.userHeadImageUrl)
+//                  var data = NSData(contentsOfURL: url, options: NSDataReadingOptions(), error: nil)
+//                    var data = NSData(contentsOfURL: url!)
+                    
+//                    let nsURL:NSURL = NSURL(string: WOWUserManager.userHeadImageUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+                    // 获取返回结果，并格式化
+//                    let resultNSData:NSData = NSData(contentsOfURL: url!)!
+                    
+//                    let imageData:NSData = NSKeyedArchiver.archivedDataWithRootObject(headerView.headImageView.image!)
+//                 
+//                    WOWUserManager.userPhotoData = imageData
+
+                }else{
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        let myImage = NSKeyedUnarchiver.unarchiveObjectWithData(WOWUserManager.userPhotoData) as! UIImage
+                        
+                        self.headerView.headImageView.image = myImage
+                    }
+                }
+
+              }
             
             headerView.nameLabel.text = WOWUserManager.userName
             headerView.desLabel.text  = WOWUserManager.userDes

@@ -47,7 +47,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         primaryImgs             <- map["primaryImgs"]
         productName             <- map["productName"]
         sellPrice               <- map["sellPrice"]
-        original_price          <- map["original_price"]
+        original_price          <- map["originalPrice"]
         sellingPoint            <- map["sellingPoint"]
         brandCname              <- map["brandCname"]
         brandId                 <- map["brandId"]

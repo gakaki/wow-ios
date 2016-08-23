@@ -154,15 +154,15 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     func refresh_image(){
         
-        self.headImageView.image = nil
-        self.headImageView.setNeedsDisplay()
+//        self.headImageView.image = nil
+//        self.headImageView.setNeedsDisplay()
 
         if   WOWUserManager.userPhotoData.length == 0 {
                     if ( self.image != nil ){
                         self.headImageView.image = self.image
                     }else{
-                        self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-                        
+//                        self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+                        self.headImageView.kf_setImageWithURL(NSURL(string: WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
                     }
 
         }else{

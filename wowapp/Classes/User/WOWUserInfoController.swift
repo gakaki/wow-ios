@@ -74,19 +74,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.viewDidAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        
-//        self.refresh_image()
+
 
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        let imageData:NSData = NSKeyedArchiver.archivedDataWithRootObject(image)
-//        let userDefault = NSUserDefaults.standardUserDefaults()
-//        userDefault.setObject("", forKey: "imageData")
-        
-        
+    
         
         
             configPickerView()
@@ -105,8 +99,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
 //        self.refresh_image()
         
-        self.headImageView.image = nil
-        self.headImageView.setNeedsDisplay()
+//        self.headImageView.image = nil
+//        self.headImageView.setNeedsDisplay()
 
     }
     
@@ -168,6 +162,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
                         self.headImageView.image = self.image
                     }else{
                         self.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+                        
                     }
 
         }else{
@@ -240,33 +235,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         cancelPicker()
     }
     
-    func saveWithFile(strImg:String) {
-        // 1、获得沙盒的根路径
-        let home = NSHomeDirectory() as NSString;
-        // 2、获得Documents路径，使用NSString对象的stringByAppendingPathComponent()方法拼接路径
-        let docPath = home.stringByAppendingPathComponent("Documents") as NSString;
-        // 3、获取文本文件路径
-        let filePath = docPath.stringByAppendingPathComponent("data.plist");
-        let dataSource = NSMutableArray();
-        dataSource.addObject(strImg);
-//        dataSource.addObject("为伊消得人憔悴");
-//        dataSource.addObject("故国不堪回首明月中");
-//        dataSource.addObject("人生若只如初见");
-//        dataSource.addObject("暮然回首，那人却在灯火阑珊处");
-        // 4、将数据写入文件中
-        dataSource.writeToFile(filePath, atomically: true);
-    }
-    func readWithFile() {
-        /// 1、获得沙盒的根路径
-        let home = NSHomeDirectory() as NSString;
-        /// 2、获得Documents路径，使用NSString对象的stringByAppendingPathComponent()方法拼接路径
-        let docPath = home.stringByAppendingPathComponent("Documents") as NSString;
-        /// 3、获取文本文件路径
-        let filePath = docPath.stringByAppendingPathComponent("data.plist");
-        let dataSource = NSArray(contentsOfFile: filePath);
-        print(dataSource);
-    }
-//MARK:Private Network
+  //MARK:Private Network
     override func request() {
         super.request()
         let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star),"avatar":self.headImageUrl]
@@ -549,31 +518,30 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-     
-        if editingGroupAndRow == [0:3] {
-            
-//            sex = row + 1
-
-//            sexTextField?.text = pickDataArr[row + 1]
-            
-        }else if editingGroupAndRow == [0:4]{
-            
-//            age = row
-
-//            ageTextField?.text = pickDataArr[row]
-
-        }else if editingGroupAndRow == [0:5] {
-//            star = row + 1
-
-//            starTextField?.text = pickDataArr[row + 1]
-        }
-    }
+//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//     
+//        if editingGroupAndRow == [0:3] {
+//            
+////            sex = row + 1
+//
+////            sexTextField?.text = pickDataArr[row + 1]
+//            
+//        }else if editingGroupAndRow == [0:4]{
+//            
+////            age = row
+//
+////            ageTextField?.text = pickDataArr[row]
+//
+//        }else if editingGroupAndRow == [0:5] {
+////            star = row + 1
+//
+////            starTextField?.text = pickDataArr[row + 1]
+//        }
+//    }
     
   
 }
-extension WOWUserInfoController{
-  }
+
 extension WOWUserInfoController: addressDelegate {
     func editAddress() {
         requestAddressInfo()

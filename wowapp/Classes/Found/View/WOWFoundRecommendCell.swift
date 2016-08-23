@@ -4,6 +4,7 @@ import FlexboxLayout
 
 protocol WOWFoundRecommendCellDelegate:class{
     func notLoginThanToLogin()
+    func toProductDetail(productId: Int?)
 }
 
 class WOWFoundRecommendCell: UITableViewCell {
@@ -38,6 +39,13 @@ class WOWFoundRecommendCell: UITableViewCell {
         
         imageName                            = p.productImg!
         self.iv.set_webimage_url(imageName)
+        self.iv.addTapGesture {[weak self] (tap) in
+            if let strongSelf = self {
+                if let del = strongSelf.delegate {
+                    del.toProductDetail(p.productId)
+                }
+            }
+        }
         right_label_top.text                 = p.productName
         right_label_ceneter.text             = p.detailDescription
         right_label_price_stroke.text        = p.get_formted_original_price()
@@ -219,10 +227,10 @@ class WOWFoundRecommendCell: UITableViewCell {
                                 //                                }),
                                 
                                 btnLike.configure({
-                                    $0.style.dimensions = ( 40 , 40)
+                                    $0.style.dimensions = ( 60 , 60)
                                     $0.style.margin     = (0, Float(-18.h), 0, 0, 0,5)
-                                    $0.style.alignSelf  = .FlexEnd
-
+                                    $0.style.alignSelf  = .Auto
+                                
                                 })
                             ])
                     ])

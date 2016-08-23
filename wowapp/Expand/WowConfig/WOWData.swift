@@ -64,7 +64,7 @@ let WOWConstellation:[Int:String] = [1:"白羊座",2:"金牛座",3:"双子座",4
 
 let WOWAgeRange:[Int:String] = [0:"保密", 1:"60后", 2:"70后", 3:"80后", 4:"85后", 5:"90后", 6:"95后", 7:"00后"]
 
-let WOWSex:[Int:String] = [1:"男",2:"女",3:"保密"]
+let WOWSex:[Int:String] = [1:"男",2:"女",3:"未知"]
 
 
 //let WOWTestUID   = "20"

@@ -105,8 +105,9 @@ class WOWUserController: WOWBaseTableViewController {
             toLoginVC(true)
             return
         }
-        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
-        vc.selectIndex = type
+//        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
+//        vc.selectIndex = type
+        let vc = WOWOrderListViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -144,14 +145,16 @@ class WOWUserController: WOWBaseTableViewController {
             if ( self.image_next_view != nil){
                 headerView.headImageView.image =  self.image_next_view 
             }else{
-                
+                /**
+                 *  先判断 本地是否有保存头像数据
+                 */
                 if   WOWUserManager.userPhotoData.length == 0 {
                     headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
                                        
 
                 }else{
                     dispatch_async(dispatch_get_main_queue()) {
-                        
+                        // 取头像数据
                         let myImage = NSKeyedUnarchiver.unarchiveObjectWithData(WOWUserManager.userPhotoData) as! UIImage
                         
                         self.headerView.headImageView.image = myImage
@@ -159,7 +162,7 @@ class WOWUserController: WOWBaseTableViewController {
                 }
 
               }
-            
+            // UI
             headerView.nameLabel.text = WOWUserManager.userName
             headerView.desLabel.text  = WOWUserManager.userDes
         }else{
@@ -170,6 +173,9 @@ class WOWUserController: WOWBaseTableViewController {
     
     
     private func addObserver(){
+        /**
+         添加通知
+         */
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(changeHeaderImage), name:WOWUpdateUserHeaderImageNotificationKey, object:nil)

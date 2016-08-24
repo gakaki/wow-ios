@@ -14,6 +14,9 @@ class WOWLoginController: WOWBaseViewController {
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var tipsLabel: UILabel!
     var isPresent:Bool = false
+    
+    var isPopRootVC:Bool = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,10 +42,14 @@ class WOWLoginController: WOWBaseViewController {
         makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
 //                strongSelf.dismissViewControllerAnimated(true, completion: nil)
-                strongSelf.dismissViewControllerAnimated(true, completion: {
-//                       UIApplication.currentViewController()?.navigationController?.popToRootViewControllerAnimated(true)
-                })
+                if strongSelf.isPopRootVC {
+                    strongSelf.dismissViewControllerAnimated(true, completion: {
+                        UIApplication.currentViewController()?.navigationController?.popToRootViewControllerAnimated(true)
+                    })
 
+                }else{
+                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                }
                 if WOWTool.lastTabIndex == 1 {
                     WOWTool.lastTabIndex = 0
                 }

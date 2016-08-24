@@ -38,6 +38,29 @@ extension  UIViewController {
         
         
     }
+    /**
+     跳转登录界面 点击叉号返回 导航控制器根视图
+     
+     - parameter isPresent: true：present跳转 false：push跳转
+     */
+    func toLoginVCPopRootVC(isPresent:Bool = false){
+        
+        if isPresent {
+            let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
+            let login = vc.topViewController as! WOWLoginController
+            login.isPresent = isPresent
+            login.isPopRootVC = true
+            presentViewController(vc, animated: true, completion: nil)
+            
+        }else {
+            let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWLoginController)) as! WOWLoginController
+            vc.isPresent = isPresent
+            self.pushVC( vc )
+        }
+        
+        
+    }
+
     //跳转注册/绑定微信界面需要传从哪跳转来的
     func toRegVC(fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:NSDictionary?){
         

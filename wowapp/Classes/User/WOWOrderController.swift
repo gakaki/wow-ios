@@ -107,7 +107,7 @@ class WOWOrderController: WOWBaseViewController {
         }else{
             params = ["orderStatus": type, "currentPage": pageIndex,"pageSize":totalPage]
         }
-    WOWNetManager.sharedManager.requestProvider
+
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderList(params:params), successClosure: { [weak self](result) in
             
             let json = JSON(result)["orderLists"].arrayObject

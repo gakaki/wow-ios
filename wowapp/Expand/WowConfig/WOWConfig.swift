@@ -99,6 +99,9 @@ let GrayColorlevel4 = MGRgb(240, g: 240, b: 240)
 /// 250 同时也是tableView全局的背景颜色
 let GrayColorLevel5 = MGRgb(245, g: 245, b: 245)
 
+let GrayColorLevel6 = UIColor(hue:0.00, saturation:0.00, brightness:0.91, alpha:1.00)
+
+
 let ThemeColor      = MGRgb(255, g: 230, b:0)
 
 let ThemeBlackColor = MGRgb(20, g:20, b:20)

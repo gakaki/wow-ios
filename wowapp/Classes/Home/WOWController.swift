@@ -67,16 +67,17 @@ class WOWController: WOWBaseViewController {
     
 //MARK:Private Method
     override func setUI() {
-//        navigationItem.title = "尖叫设计"
+        
         tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
-        tableView.backgroundColor = DefaultBackColor
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
-//        tableView.rowHeight = CGFloat(1242)
-//        configBarItem()
+
+        //        configBarItem()
         tableView.mj_header = mj_header
         tableView.tableHeaderView = banner
 //        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+        self.tableView.backgroundColor = GrayColorLevel6
 
         
         configBarItem()
@@ -236,24 +237,34 @@ extension WOWController:LeftSideProtocol{
 
 
 extension WOWController:UITableViewDelegate,UITableViewDataSource{
-
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return dataArr.count ?? 0
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArr.count
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
-        cell.delegate = self
-        let model = dataArr[indexPath.row]
-        cell.showData(model)
-        
-        return cell
+  
+            let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
+            cell.delegate       = self
+            let model           = dataArr[indexPath.section]
+            cell.showData(model)
+            return cell
+   
     }
-    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
+        return 15.h
+    }
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+        return CGFloat.min
+    }
+
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-      
+       
         let model = dataArr[indexPath.row]
         goController(model)
     }

@@ -38,13 +38,22 @@ extension UIImageView {
         self.set_webimage_url_base(url,place_holder_name: pic_name , need_random_url: true )
     }
     func set_webimage_url_base( url:String? , place_holder_name pic_name:String , need_random_url random:Bool = false ) -> Void {
-//        if ( random == true ) {
-//            url = "\(url)/&rand=\(String.random())"
-//        }
-        
-        
-        self.yy_setImageWithURL(NSURL(string:url ?? "") , placeholder: UIImage(named: pic_name) , options: YYWebImageOptions.Progressive, completion: nil)
-    }
+        do{
+    
+            try! self.yy_setImageWithURL( NSURL(string:url ?? ""), placeholder: UIImage(named: pic_name) , options:  [YYWebImageOptions.ProgressiveBlur , YYWebImageOptions.SetImageWithFadeAnimation], completion: { ( image, url, from:YYWebImageFromType, stage:YYWebImageStage, e:NSError?) in
+
+                let url_str = url.URLString
+                if ( from == YYWebImageFromType.Remote ||  from == YYWebImageFromType.None ){
+                    DLog("image url is \(url_str),from remote or none,\(stage)")
+                }
+  
+            })
+           
+        }catch let e {
+            DLog(e)
+        }
+       
+     }
     
     func set_webimage_url( url:String? ) -> Void {
         let url         = self.webp_url(url)

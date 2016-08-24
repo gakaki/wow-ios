@@ -60,7 +60,7 @@ CollectionViewWaterfallLayoutDelegate
     var query_asc:Int           = 1 {
         didSet {
             self.reset_fetch_params()
-//            refresh_view()
+            refresh_view()
         }
     }
     
@@ -72,7 +72,6 @@ CollectionViewWaterfallLayoutDelegate
     }
     func reset_fetch_params(){
         self.pageIndex = 1
-//        self.vo_products = []
         if ( self.cv_bottom != nil ){
             self.cv_bottom.setContentOffset(CGPointZero, animated: true)
 
@@ -224,22 +223,28 @@ CollectionViewWaterfallLayoutDelegate
     
     /// 标签上的按钮点击
     func titlesClick(button: UIButton) {
-        
-        
-        if ( selectedButton == nil) { selectedButton = button }
-        // 修改按钮状态
-        selectedButton!.highlighted = true
-        selectedButton!.selected = false
+        if ( selectedButton == button ){
+            //自身咯
+        }else{
+            
+            if ( selectedButton == nil) { selectedButton = button }
+            
+            // 修改按钮状态
+            selectedButton!.highlighted = true
+            selectedButton!.selected = false
+            
+            button.highlighted = false
+            button.selected = true
+            selectedButton = button
+            // 让标签执行动画
+            UIView.animateWithDuration(kAnimationDuration) {
+                //            self.indicatorView.w = self.selectedButton!.titleLabel!.w * kIndicatorViewwRatio
+                self.indicatorView.w   = self.view.w / 3
+                self.indicatorView.centerX = self.selectedButton!.centerX
+            }
 
-        button.highlighted = false
-        button.selected = true
-        selectedButton = button
-        // 让标签执行动画
-        UIView.animateWithDuration(kAnimationDuration) {
-//            self.indicatorView.w = self.selectedButton!.titleLabel!.w * kIndicatorViewwRatio
-            self.indicatorView.w   = self.view.w / 3
-            self.indicatorView.centerX = self.selectedButton!.centerX
         }
+        
         
         query_asc    = 0
         if let b = button as? TooglePriceBtn{

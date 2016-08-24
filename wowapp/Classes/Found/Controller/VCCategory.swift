@@ -273,9 +273,12 @@ CollectionViewWaterfallLayoutDelegate
                     width,
                     height
                 )
-                button          = TooglePriceBtn(frame: frame) { (status) in
-                    self.query_asc = status.rawValue
-                    DLog("you clicket status is \(self.query_asc)")
+                button          = TooglePriceBtn(frame: frame) { [weak self] (status) in
+                    if let strongSelf = self {
+                        strongSelf.query_asc = status.rawValue
+                        DLog("you clicket status is \(strongSelf.query_asc)")
+                    }
+                  
 
                 }
 
@@ -434,35 +437,40 @@ CollectionViewWaterfallLayoutDelegate
         
         //                {"asc":1,"currentPage":1,"showCount":10,"sortBy":1,"categoryId":16}
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(asc: self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.cid.toInt()! ), successClosure: {[weak self] (result) in
-            
-            self!.endRefresh()
-
-            let res                   = JSON(result)
-            let data                  = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
-            DLog(self!.vo_products.count)
-
-            if ( data.count <= 0 || data.count < self?.query_showCount){
-                self!.cv_bottom.mj_footer = nil
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+                
+                let res                   = JSON(result)
+                let data                  = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
+                DLog(strongSelf.vo_products.count)
+                
+                if ( data.count <= 0 || data.count < strongSelf.query_showCount){
+                    strongSelf.cv_bottom.mj_footer = nil
+                }
+                else{
+                    strongSelf.cv_bottom.mj_footer = strongSelf.mj_footer
+                    
+                }
+                
+                //若是为第一页那么数据直接赋值
+                if ( strongSelf.pageIndex <= 1){
+                    strongSelf.vo_products         = data.flatMap { $0 }
+                    
+                }else{
+                    //分页的话数据合并
+                    strongSelf.vo_products         = [strongSelf.vo_products, data].flatMap { $0 }
+                }
+                
+                strongSelf.cv_bottom.reloadData()
             }
-            else{
-                self!.cv_bottom.mj_footer = self?.mj_footer
-
-            }
             
-            //若是为第一页那么数据直接赋值
-            if ( self!.pageIndex <= 1){
-                self!.vo_products         = data.flatMap { $0 }
-
-            }else{
-                //分页的话数据合并
-                self!.vo_products         = [self!.vo_products, data].flatMap { $0 }
-            }
             
-            self!.cv_bottom.reloadData()
-            
-        }){ (errorMsg) in
+        }){[weak self] (errorMsg) in
             print(errorMsg)
-            self.endRefresh()
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+            }
+            
         }
 
     }

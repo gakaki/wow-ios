@@ -12,14 +12,15 @@ class WOWOrderListViewController: WOWBaseViewController {
     var entrance = orderDetailEntrance.orderList
     var pageMenu:CAPSPageMenu?
     var controllerArray : [UIViewController] = []
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(hexString: "efeff4")
         
         self.title = "我的订单"
         
-        let titleArray  = ["全部","待付款","待发货","待收货","以完成"]
+        let titleArray  = ["全部","待付款","待发货","待收货","已完成"]
         for index in 0..<titleArray.count {
             
             let orderListVC = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
@@ -44,6 +45,7 @@ class WOWOrderListViewController: WOWBaseViewController {
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
         pageMenu?.viewBackgroundColor = UIColor.init(hexString: "efeff4")!
+        pageMenu?.delegate = self
         self.view.addSubview(pageMenu!.view)
 
     }
@@ -82,5 +84,16 @@ class WOWOrderListViewController: WOWBaseViewController {
     }
     
 
+
+}
+extension WOWOrderListViewController:CAPSPageMenuDelegate{
+    // 滑动结束 再请求网络
+    func didMoveToPage(controller: UIViewController, index: Int){
+   
+
+        let currentVC = controller as! WOWOrderController
+        currentVC.request()
+        
+    }
 
 }

@@ -52,23 +52,16 @@ class WOWBrandListController: WOWBaseViewController {
         navigationItem.title = "品牌"
         configureSearchController()
         tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
-        configBarItem()
+        configBuyBarItem(WOWUserManager.userCarCount)
+        addObserver()
     }
-    private func configBarItem(){
 
+    private func addObserver(){
         
-        makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
-            if let strongSelf = self{
-                guard WOWUserManager.loginStatus else {
-                    strongSelf.toLoginVC(true)
-                    return
-                }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
-                vc.hideNavigationBar = false
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        
     }
+  
 
     private func configureSearchController() {
         let resultVC = WOWSearchResultController()

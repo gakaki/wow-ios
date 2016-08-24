@@ -25,7 +25,6 @@ class WOWUserController: WOWBaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addObserver()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,37 +40,13 @@ class WOWUserController: WOWBaseTableViewController {
     override func setUI() {
         super.setUI()
         configHeaderView()
-        addObserver()
         configClickAction()
-        configBarItem()
-
-    }
-    private func configBarItem(){
-        
-        //                makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
-        //                    if let strongSelf = self{
-        //                        let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
-        //                        let transition = CATransition.init()
-        //                        transition.duration = 0.3
-        //                        transition.subtype = kCATransitionFromBottom
-        //                        strongSelf.navigationController?.view.layer.addAnimation(transition, forKey: nil)
-        //                        strongSelf.navigationController?.pushViewController(vc, animated: true)
-        //                    }
-        //                }
-        
-        makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
-            if let strongSelf = self{
-                guard WOWUserManager.loginStatus else {
-                    strongSelf.toLoginVC(true)
-                    return
-                }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
-                vc.hideNavigationBar = false
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        configBuyBarItem(WOWUserManager.userCarCount)
+        addObserver()
     }
 
+     
+    
     private func configClickAction(){
         allOrderView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
@@ -173,6 +148,7 @@ class WOWUserController: WOWBaseTableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(changeHeaderImage), name:WOWUpdateUserHeaderImageNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
         
     }
     

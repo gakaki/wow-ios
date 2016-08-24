@@ -23,13 +23,13 @@ public class MIBadgeButton: UIButton {
         }
     }
     
-    public var badgeBackgroundColor = UIColor.redColor() {
+    public var badgeBackgroundColor = UIColor.yellowColor() {
         didSet {
             badgeLabel.backgroundColor = badgeBackgroundColor
         }
     }
     
-    public var badgeTextColor = UIColor.whiteColor() {
+    public var badgeTextColor = UIColor.blackColor() {
         didSet {
             badgeLabel.textColor = badgeTextColor
         }
@@ -59,13 +59,13 @@ public class MIBadgeButton: UIButton {
     private func setupBadgeViewWithString(badgeText badgeText: String?) {
         badgeLabel.clipsToBounds = true
         badgeLabel.text = badgeText
-        badgeLabel.font = UIFont.systemFontOfSize(12)
+        badgeLabel.font = UIFont.systemFontOfSize(10)
         badgeLabel.textAlignment = .Center
         badgeLabel.sizeToFit()
         let badgeSize = badgeLabel.frame.size
         
-        let height = max(20, Double(badgeSize.height) + 5.0)
-        let width = max(height, Double(badgeSize.width) + 10.0)
+        let height = max(15, Double(badgeSize.height) + 5)
+        let width = max(height, Double(badgeSize.width))
         
         var vertical: Double?, horizontal: Double?
         if let badgeInset = self.badgeEdgeInsets {
@@ -76,8 +76,8 @@ public class MIBadgeButton: UIButton {
             let y = -(Double(badgeSize.height) / 2) - 10 + vertical!
             badgeLabel.frame = CGRect(x: x, y: y, width: width, height: height)
         } else {
-            let x = CGRectGetWidth(self.frame) - CGFloat((width / 2.0))
-            let y = CGFloat(-(height / 2.0))
+            let x = CGRectGetWidth(self.frame) - CGFloat((width / 2.0) + 10)
+            let y = CGFloat(-(height / 2.0) + 10)
             badgeLabel.frame = CGRectMake(x, y, CGFloat(width), CGFloat(height))
         }
         

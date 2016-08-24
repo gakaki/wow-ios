@@ -121,7 +121,8 @@ extension  UIViewController {
     
     //登录成功方法
     func toLoginSuccess(isPresent:Bool = false){
-        WOWBuyCarMananger.updateBadge(true)
+//        WOWBuyCarMananger.updateBadge(true)
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
         NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
         if isPresent{
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {

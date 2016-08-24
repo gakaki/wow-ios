@@ -111,7 +111,6 @@ class WOWBuyCarController: WOWBaseViewController {
     
     
     private func updateCarCountBadge(){
-        WOWBuyCarMananger.updateBadge()
         NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
     }
     
@@ -159,7 +158,12 @@ class WOWBuyCarController: WOWBaseViewController {
                     if let arr = model?.shoppingCartResult {
                         strongSelf.dataArr = arr
                         strongSelf.bottomView.hidden = false
-
+                        //重新计算购物车数量
+                        WOWUserManager.userCarCount = 0
+                        for product in arr {
+                            WOWUserManager.userCarCount += product.productQty ?? 1
+                        }
+                        strongSelf.updateCarCountBadge()
                         //判断当前数组有多少默认选中的加入选中的数组
                         for product in strongSelf.dataArr {
                             if product.isSelected ?? false {
@@ -189,6 +193,9 @@ class WOWBuyCarController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CartRemove(shoppingCartId:shoppingCartId), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                strongSelf.dataArr.removeObject(model)
+                WOWUserManager.userCarCount -= model.productQty ?? 1
+                //更新购物车数量信息
+                strongSelf.updateCarCountBadge()
                 //判断一下如果删除的商品是已选中商品。那么从selectedArr中也要删除这个元素
                 
                 if model.isSelected ?? false{
@@ -213,6 +220,14 @@ class WOWBuyCarController: WOWBaseViewController {
             if let strongSelf = self{
                 let model = strongSelf.dataArr[indexPath.section]
                 model.productQty = productQty
+                
+                //重新计算购物车数量
+                WOWUserManager.userCarCount = 0
+                for product in strongSelf.dataArr {
+                    WOWUserManager.userCarCount += product.productQty ?? 1
+                }
+                strongSelf.updateCarCountBadge()
+                
                 if model.isSelected ?? false{
                     strongSelf.selectedArr.removeObject(model)
                     strongSelf.selectedArr.append(model)
@@ -301,19 +316,6 @@ class WOWBuyCarController: WOWBaseViewController {
         }
     
     }
-
-    
-    private func removeObjectsInArray(items:[WOWCarProductModel]){
-        for item in items{
-            if let index = self.dataArr.indexOf({$0 == item}){
-                self.dataArr.removeAtIndex(index)
-            }
-        }
-        updateCarCountBadge()
-    }
-    
-
-    
 }
 
 
@@ -401,7 +403,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         let model = dataArr[sender.tag]
             var count = model.productQty ?? 1
             count -= 1
-            count = (count == 0 ? 1:count)
+            count = (count <= 0 ? 1:count)
         let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
         asyncUpdateCount(model.shoppingCartId!, productQty: count, indexPath: indexPath)
     }

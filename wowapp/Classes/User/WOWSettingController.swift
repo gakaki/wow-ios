@@ -107,7 +107,7 @@ class WOWSettingController: WOWBaseTableViewController {
         WOWUserManager.exitLogin()
         tableView.reloadData()
         NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-        WOWUserManager.exitLogin()
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
         WOWHud.showMsg("退出登录")
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
             self.navigationController?.popViewControllerAnimated(true)

@@ -70,13 +70,23 @@ class WOWProductDetailController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configTable()
-        carEntranceButton.badgeString = "5"
+        buyCarCount()
     }
 
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSucces), name: WOWLoginSuccessNotificationKey, object:nil)
-
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(buyCarCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+    }
+    
+    func buyCarCount()  {
+        if WOWUserManager.userCarCount <= 0 {
+            carEntranceButton.badgeString = ""
+        }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
+            carEntranceButton.badgeString = "\(WOWUserManager.userCarCount)"
+        }else {
+            carEntranceButton.badgeString = "99+"
+        }
         
 
     }
@@ -95,11 +105,9 @@ class WOWProductDetailController: WOWBaseViewController {
 //MARK:Actions
     //MARK:更新角标
     func updateCarBadge(){
-        carEntranceButton.badgeString = "355"
         WOWUserManager.userCarCount += 1
+        buyCarCount()
         NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
-
-//        carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(0, 0, 0,15)
 
     }
     //MARK:购物车

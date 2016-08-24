@@ -12,8 +12,7 @@ import UIKit
 class WOWOrderController: WOWBaseViewController {
     var entrance = orderDetailEntrance.orderList
     var dataArr  = [WOWNewOrderListModel]()
-    
-//    var currentPage = 1
+      var parentNavigationController : UINavigationController?
     
     var type = ""  //100代表全部
     var selectIndex:Int = 0{
@@ -53,12 +52,12 @@ class WOWOrderController: WOWBaseViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if entrance == .orderPay{
-            self.navigationController?.interactivePopGestureRecognizer?.enabled = false;
+            self.parentNavigationController?.interactivePopGestureRecognizer?.enabled = false;
         }
     }
     
     override func viewWillDisappear(animated: Bool) {
-        self.navigationController?.interactivePopGestureRecognizer?.enabled = true;
+        self.parentNavigationController?.interactivePopGestureRecognizer?.enabled = true;
         self.navigationShadowImageView?.hidden = false
     }
     
@@ -72,7 +71,7 @@ class WOWOrderController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         navigationItem.title = "我的订单"
-        configCheckView()
+//        configCheckView()
         configTable()
         
     }
@@ -82,24 +81,17 @@ class WOWOrderController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWOrderListCell)), forCellReuseIdentifier:"WOWOrderListCell")
     }
     
-    private func configCheckView(){
-        WOWCheckMenuSetting.defaultSetUp()
-        WOWCheckMenuSetting.fill = true
-        WOWCheckMenuSetting.selectedIndex = selectIndex
-        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.w, 40), titles: ["全部","待付款","待发货","待收货","已完成"])
-        menuView.delegate = self
-        menuView.addBorderBottom(size:0.5, color:BorderMColor)
-        self.view.addSubview(menuView)
-    }
+//    private func configCheckView(){
+//        WOWCheckMenuSetting.defaultSetUp()
+//        WOWCheckMenuSetting.fill = true
+//        WOWCheckMenuSetting.selectedIndex = selectIndex
+//        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.w, 40), titles: ["全部","待付款","待发货","待收货","已完成"])
+//        menuView.delegate = self
+//        menuView.addBorderBottom(size:0.5, color:BorderMColor)
+//        self.view.addSubview(menuView)
+//    }
     
-    override func navBack() {
-        if entrance == .orderPay {
-            navigationController?.popToRootViewControllerAnimated(true)
-        }else{
-            popVC()
-        }
-    }
-    
+       
     
     //MARK:Network
     override func request() {
@@ -110,11 +102,12 @@ class WOWOrderController: WOWBaseViewController {
         let totalPage = 10
         
         var params = [String: AnyObject]?()
-        if selectIndex == 2 { // 待发货 
+        if selectIndex == 2 { // 待发货 要 显示 部分发货
             params = ["orderStatusList": [1,2], "currentPage": pageIndex,"pageSize":totalPage]
         }else{
             params = ["orderStatus": type, "currentPage": pageIndex,"pageSize":totalPage]
         }
+    WOWNetManager.sharedManager.requestProvider
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderList(params:params), successClosure: { [weak self](result) in
             
             let json = JSON(result)["orderLists"].arrayObject
@@ -155,9 +148,7 @@ class WOWOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.tableView.mj_footer = nil
                 strongSelf.endRefresh()
-
             }
-
         }
     }
     
@@ -214,7 +205,7 @@ extension WOWOrderController:OrderCellDelegate{
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
         vc.orderID = orderID.toInt()
         vc.delegate = self
-        navigationController?.pushViewController(vc, animated: true)
+        parentNavigationController?.pushViewController(vc, animated: true)
     }
     
     //确认收货
@@ -321,14 +312,14 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
         vc.orderCode = orderCode
         vc.delegate = self
-        navigationController!.pushViewController(vc, animated: true)
+        parentNavigationController!.pushViewController(vc, animated: true)
 
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
                 vc.orderCode = dataArr[indexPath.section].orderCode
                 vc.delegate = self
-        navigationController!.pushViewController(vc, animated: true)
+        parentNavigationController!.pushViewController(vc, animated: true)
     }
     
     

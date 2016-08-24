@@ -68,7 +68,7 @@ class WOWOrderDetailController: WOWBaseViewController{
 
     var isOpen                      : Bool!
     
-    var isSomeForGoodsType          : Bool!
+    var isSomeForGoodsType          : Bool! // 记录是否是 部分发货 的布局。 区分页眉上 标题不同
     
     
     @IBOutlet weak var tableView    : UITableView!
@@ -121,7 +121,8 @@ class WOWOrderDetailController: WOWBaseViewController{
     override func navBack() {
         switch entrance {
         case .orderPay:
-            let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderController") as! WOWOrderController
+//            let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderController") as! WOWOrderController
+            let vc = WOWOrderListViewController()
             vc.entrance = orderDetailEntrance.orderPay
             navigationController?.pushViewController(vc, animated: true)
         default:
@@ -140,7 +141,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         tableView.registerNib(UINib.nibName("WOWOrderDetailPayCell"), forCellReuseIdentifier: "WOWOrderDetailPayCell")
         tableView.clearRestCell()
     }
-    
+    // 取消订单
     @IBAction func clooseOrderButtonClick(sender: UIButton) {
         func clooseOrder(){
             WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderCancel(orderCode: orderCode), successClosure: { [weak self](result) in
@@ -167,6 +168,7 @@ class WOWOrderDetailController: WOWBaseViewController{
 
 
     }
+    // 右边点击按钮
     @IBAction func rightButtonClick(sender: UIButton) {
         
         if let orderNewModel = orderNewDetailModel {
@@ -227,7 +229,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 hideRightBtn()
             case 4:
                 self.OrderDetailNewaType = OrderNewType.finish
-                if orderNewModel.packages?.count > 1 {
+                if orderNewModel.packages?.count > 1 { // 如果大于1， 说明有不多个包裹的订单 则 换UI界面
                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
                     isSomeForGoodsType = false
                 }
@@ -246,7 +248,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 let result = WOWCalPrice.calTotalPrice([orderNewModel.orderAmount ?? 0],counts:[1])
                 self.priceLabel.text          = result
 
-                if orderNewModel.packages?.count > 1 {
+                if orderNewModel.packages?.count > 1 {// 如果大于1， 说明有不多个包裹的订单 则 换UI界面
                      self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
                     isSomeForGoodsType = false
                 }
@@ -335,10 +337,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         
 //        orderType()
         
-        isOpen = true
-        
-//        if let orderNewModel = orderNewModel {
-        
+                isOpen = true // 默认 不展开
             WOWNetManager.sharedManager.requestWithTarget(.Api_OrderDetail(OrderCode:self.orderCode!), successClosure: { [weak self](result) in
                 
                 if let strongSelf = self{
@@ -357,7 +356,6 @@ class WOWOrderDetailController: WOWBaseViewController{
             }
             
         }
-//    }
 }
 // MARK: - 订单支付相关
 extension WOWOrderDetailController{
@@ -628,19 +626,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailCostCell", forIndexPath: indexPath) as! WOWOrderDetailCostCell
                 if let orderNewDetailModel = orderNewDetailModel {
-                    if indexPath.row == 0 {
-                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.deliveryFee ?? 0],counts:[1])
-
-                        cell.priceLabel.text       = result
-                        cell.saidImageView.hidden  = true
-                        cell.freightTypeLabel.text = "运费"
-                    }
-                    if indexPath.row == 1 {
-                         let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
-                        cell.priceLabel.text       = "-" + result
-                        cell.saidImageView.hidden  = true
-                        cell.freightTypeLabel.text = "优惠券"
-                    }
+                    
+                    cell.showUI(orderNewDetailModel, indexPath: indexPath)
                     
                     
                 }
@@ -738,22 +725,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailCostCell", forIndexPath: indexPath) as! WOWOrderDetailCostCell
                 if let orderNewDetailModel = orderNewDetailModel {
-                    if indexPath.row == 0 {
-                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.deliveryFee ?? 0],counts:[1])
-            
-                        cell.priceLabel.text       = result
-
-                        cell.saidImageView.hidden  = false
-                        cell.freightTypeLabel.text = "运费"
-                    }
-                    if indexPath.row == 1 {
-                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
-                        cell.priceLabel.text       = "-" + result
-
-                        cell.saidImageView.hidden  = true
-                        cell.freightTypeLabel.text = "优惠券"
-                    }
                     
+                    cell.showUI(orderNewDetailModel, indexPath: indexPath)
                     
                 }
                 
@@ -798,21 +771,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case goodsArray.count + 3 :
                 let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderDetailCostCell", forIndexPath: indexPath) as! WOWOrderDetailCostCell
                 if let orderNewDetailModel = orderNewDetailModel {
-                    if indexPath.row == 0 {
-                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.deliveryFee ?? 0],counts:[1])
-                        cell.priceLabel.text       = result
-
-                        cell.saidImageView.hidden  = false
-                        cell.freightTypeLabel.text = "运费"
-                    }
-                    if indexPath.row == 1 {
-                        let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
-                        cell.priceLabel.text       = "-" + result
-
-                        cell.saidImageView.hidden  = true
-                        cell.freightTypeLabel.text = "优惠券"
-                    }
                     
+                    cell.showUI(orderNewDetailModel, indexPath: indexPath)
                     
                 }
                 
@@ -862,7 +822,6 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     self.surePayType = PayType.none
                 default:
                     self.surePayType = PayType.payAli
-//                    break
                 }
                 
                
@@ -873,11 +832,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     self.surePayType = PayType.none
                 default:
                     self.surePayType = PayType.payWiXin
-//                    break
                 }
 
-             
-                
             default:
                 break
             }
@@ -903,8 +859,6 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 default:
                     return 38
                 }
-
-//                return 38
                 
             case goodsArray.count + 3 :
                 return 12
@@ -927,13 +881,13 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return nil
+
         switch OrderDetailNewaType {
         case .payMent:
             let titles = [" ","收货人","商品清单","","支付方式"]
             let heights = [CellHight.minHight,38,38,12,38]
             return headerSectionView(titles[section], headetHeight: heights[section])
-//                titles[section]
+
         case .forGoods,.noForGoods,.finish:
             let titles = [" ","收货人","商品清单",""]
             let heights = [CellHight.minHight,38,38,12]
@@ -971,47 +925,6 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
 
     }
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch OrderDetailNewaType {
-//        case .payMent:
-//            let titles = [" ","收货人","商品清单","","支付方式"]
-//            return titles[section]
-//        case .forGoods,.noForGoods,.finish:
-//            let titles = [" ","收货人","商品清单",""]
-//            return titles[section]
-//        case .someFinishForGoods:
-//            
-//            switch section {
-//            case 0:
-//                return " "
-//            case 1:
-//                return "收货人"
-//            case 2:
-//                if isSomeForGoodsType == true {
-//                        return "已发货商品清单"
-//                }else{
-//                        return "商品清单"
-//                }
-//                
-//            case goodsArray.count + 2:
-//                
-//                switch goodsNoArray.count {
-//                case 0:
-//                    return " "
-//                default:
-//                    return "未发货商品清单"
-//                }
-//
-//                
-//            default:
-//                return " "
-//            }
-//            
-//            
-//        }
-//        
-//        
-//    }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
         
         switch OrderDetailNewaType {
@@ -1085,6 +998,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         }
         
     }
+    // 页眉View
     func headerSectionView(headerTitle:String,headetHeight:CGFloat) -> UIView {
         let view = UIView()
         view.frame = CGRectMake(0, 0, MGScreenWidth, headetHeight)
@@ -1100,6 +1014,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
         return view
     }
+     // 页脚View
     func footSectionView(indexPathSetion:Int) -> UIView {
         let view = UIView()
         view.frame = CGRectMake(0, 0, MGScreenWidth, 40)
@@ -1118,7 +1033,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         var totalNum : String?
         
         switch OrderDetailNewaType {
-        case .payMent,.noForGoods:
+        case .payMent,.noForGoods: // 相对应的取的数组不一样
             if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
                 
                 totalNum = "共" + noForGoodsArr.count.toString + "件"

@@ -265,7 +265,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
-        let model = dataArr[indexPath.row]
+        let model = dataArr[indexPath.section]
         goController(model)
     }
     

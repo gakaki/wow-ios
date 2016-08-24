@@ -122,6 +122,13 @@ class WOWBuyCarController: WOWBaseViewController {
             WOWHud.showMsg("您还没有选中商品哦")
             return
         }
+        
+        for product in selectedArr {
+            if product.productQty > product.productStock {
+                WOWHud.showMsg((product.productName ?? "您有商品") + "库存不足")
+                return
+            }
+        }
          //结算
             let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
             sv.entrance = editOrderEntrance.carEntrance
@@ -219,8 +226,8 @@ class WOWBuyCarController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_CartModify(shoppingCartId:shoppingCartId, productQty: productQty), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let model = strongSelf.dataArr[indexPath.section]
-                model.productQty = productQty
                 
+                model.productQty = productQty
                 //重新计算购物车数量
                 WOWUserManager.userCarCount = 0
                 for product in strongSelf.dataArr {
@@ -394,7 +401,12 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func addCountClick(sender: UIButton) {
         let model = dataArr[sender.tag]
         var productQty = model.productQty ?? 1
-        productQty += 1
+        
+        if productQty > model.productStock {
+            productQty = model.productStock ?? 0
+        }else {
+            productQty += 1
+        }
         let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
         asyncUpdateCount(model.shoppingCartId!, productQty: productQty, indexPath: indexPath)
     }
@@ -402,8 +414,14 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func subCountClick(sender: UIButton) {
         let model = dataArr[sender.tag]
             var count = model.productQty ?? 1
+        if count > model.productStock  {
+            count = model.productStock ?? 0
+//            model.productQty = model.productStock
+        }else {
             count -= 1
-            count = (count <= 0 ? 1:count)
+        }
+        
+        count = (count <= 0 ? 1:count)
         let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
         asyncUpdateCount(model.shoppingCartId!, productQty: count, indexPath: indexPath)
     }

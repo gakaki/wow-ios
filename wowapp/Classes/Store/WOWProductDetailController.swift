@@ -35,20 +35,17 @@ class WOWProductDetailController: WOWBaseViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        addObservers()
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
-      
-
     }
+    deinit {
+        removeObservers()
+    }
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
+        addObservers()
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,6 +73,11 @@ class WOWProductDetailController: WOWBaseViewController {
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSucces), name: WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(buyCarCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+    }
+    
+    private func removeObservers() {
+         NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
+         NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWUpdateCarBadgeNotificationKey, object: nil)
     }
     
     func buyCarCount()  {

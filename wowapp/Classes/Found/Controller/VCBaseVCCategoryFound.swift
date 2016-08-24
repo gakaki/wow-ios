@@ -8,20 +8,16 @@ class VCBaseVCCategoryFound:WOWBaseViewController{
     
     override func setUI(){
         super.setUI()
-        self.configBarItem()
-        
-    }
-    func configBarItem(){
-        
-        makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
-            if let strongSelf = self{
-                strongSelf.toVCCart()
-            }
-        }
+        configBuyBarItem(WOWUserManager.userCarCount)
+        addObserver()
     }
     
-   
-    
+    private func addObserver(){
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        
+    }
+
     override func loadMore() {
         if isRreshing {
             return

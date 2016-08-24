@@ -60,7 +60,7 @@ CollectionViewWaterfallLayoutDelegate
     var query_asc:Int           = 1 {
         didSet {
             self.reset_fetch_params()
-            refresh_view()
+//            refresh_view()
         }
     }
     
@@ -225,11 +225,6 @@ CollectionViewWaterfallLayoutDelegate
     /// 标签上的按钮点击
     func titlesClick(button: UIButton) {
         
-        if ( selectedButton == button && button is TooglePriceBtn){
-            //价格
-
-            return
-        }
         
         if ( selectedButton == nil) { selectedButton = button }
         // 修改按钮状态
@@ -246,7 +241,12 @@ CollectionViewWaterfallLayoutDelegate
             self.indicatorView.centerX = self.selectedButton!.centerX
         }
         
+        query_asc    = 0
+        if let b = button as? TooglePriceBtn{
+            query_asc = b.status.rawValue
+        }
         query_sortBy = button.tag
+
     }
 //    MARK:选项卡
     func addChooseCard(){

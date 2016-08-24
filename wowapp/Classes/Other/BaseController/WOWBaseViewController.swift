@@ -12,7 +12,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     var hideNavigationBar:Bool = false
     var pageIndex = 1 //翻页
     var isRreshing : Bool = false
-    
+    var carBadgeCount: MIBadgeButton?
  
     
     override func viewDidLoad() {
@@ -155,4 +155,89 @@ extension WOWBaseViewController{
     func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
         return GrayColorLevel5
     }
+}
+
+// MARK: - 购物车显示数量
+extension WOWBaseViewController {
+    func configBuyBarItem(badgeCount: Int){
+        
+        carBadgeCount = MIBadgeButton(type: .Custom)
+        carBadgeCount!.frame = CGRectMake(0, 0, 35, 35)
+        carBadgeCount!.setImage(UIImage(named: "buy"), forState: .Normal)
+        if WOWUserManager.userCarCount <= 0 {
+            carBadgeCount!.badgeString = ""
+        }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
+            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+        }else {
+            carBadgeCount!.badgeString = "99+"
+        }
+
+        makeBuyCarNavigationItem(carBadgeCount!){[weak self] () -> () in
+            if let strongSelf = self{
+                guard WOWUserManager.loginStatus else {
+                    strongSelf.toLoginVC(true)
+                    return
+                }
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+                vc.hideNavigationBar = false
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    func updateBageCount() {
+        if WOWUserManager.userCarCount <= 0 {
+            carBadgeCount!.badgeString = ""
+        }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
+            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+        }else {
+            carBadgeCount!.badgeString = "99+"
+        }
+        
+    }
+
+}
+
+extension WOWBaseTableViewController {
+    
+    func configBuyBarItem(badgeCount: Int){
+        
+        carBadgeCount = MIBadgeButton(type: .Custom)
+        carBadgeCount!.frame = CGRectMake(0, 0, 35, 35)
+        carBadgeCount!.setImage(UIImage(named: "buy"), forState: .Normal)
+        if WOWUserManager.userCarCount <= 0 {
+            carBadgeCount!.badgeString = ""
+        }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
+            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+        }else {
+            carBadgeCount!.badgeString = "99+"
+        }
+        makeBuyCarNavigationItem(carBadgeCount!){[weak self] () -> () in
+            if let strongSelf = self{
+                guard WOWUserManager.loginStatus else {
+                    strongSelf.toLoginVC(true)
+                    return
+                }
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+                vc.hideNavigationBar = false
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    func updateBageCount() {
+        if WOWUserManager.userCarCount <= 0 {
+            carBadgeCount!.badgeString = ""
+        }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
+            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+        }else {
+            carBadgeCount!.badgeString = "99+"
+        }
+        
+    }
+
 }

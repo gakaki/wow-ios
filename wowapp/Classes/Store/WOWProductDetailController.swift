@@ -42,7 +42,7 @@ class WOWProductDetailController: WOWBaseViewController {
         super.viewDidDisappear(animated)
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWUpdateCarBadgeNotificationKey, object: nil)
+      
 
     }
     
@@ -70,13 +70,23 @@ class WOWProductDetailController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configTable()
-
+        buyCarCount()
     }
 
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSucces), name: WOWLoginSuccessNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateCarBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(buyCarCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+    }
+    
+    func buyCarCount()  {
+        if WOWUserManager.userCarCount <= 0 {
+            carEntranceButton.badgeString = ""
+        }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
+            carEntranceButton.badgeString = "\(WOWUserManager.userCarCount)"
+        }else {
+            carEntranceButton.badgeString = "99+"
+        }
         
 
     }
@@ -95,12 +105,10 @@ class WOWProductDetailController: WOWBaseViewController {
 //MARK:Actions
     //MARK:更新角标
     func updateCarBadge(){
-//        WOWBuyCarMananger.updateBadge()
-//        carEntranceButton.badgeString = WOWBuyCarMananger.calCarCount()
-//        carEntranceButton.badgeEdgeInsets = UIEdgeInsetsMake(15, 0, 0,15)
-//        if let action = updateBadgeAction {
-//            action()
-//        }
+        WOWUserManager.userCarCount += 1
+        buyCarCount()
+        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+
     }
     //MARK:购物车
     @IBAction func carEntranceButton(sender: UIButton) {
@@ -268,8 +276,11 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         backView.hideBuyView()
         if let product = product {
             
-            WOWNetManager.sharedManager.requestWithTarget(.Api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: { (result) in
-
+            WOWNetManager.sharedManager.requestWithTarget(.Api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self] (result) in
+                if let strongSelf = self {
+                    strongSelf.updateCarBadge()
+                }
+                
             }) { (errorMsg) in
                 
             }

@@ -153,12 +153,16 @@ class WOWEditOrderController: WOWBaseViewController {
     func requestBuyNowProduct() -> Void {
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderBuyNow(productId: productId ?? 0, productQty: productQty ?? 1), successClosure: { [weak self](result) in
             if let strongSelf = self {
+                
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
+                
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
+                
                 let coupon = WOWCouponModel.init()
                 coupon.id = strongSelf.orderSettle?.endUserCouponId
                 coupon.deduction = strongSelf.orderSettle?.deduction
                 strongSelf.couponModel = coupon
+                
                 let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
                 strongSelf.totalPriceLabel.text = result
                 strongSelf.tableView.reloadData()
@@ -180,6 +184,13 @@ class WOWEditOrderController: WOWBaseViewController {
         
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
+                
+                //重新计算购物车数量
+                for product in (strongSelf.productArr ?? [WOWCarProductModel]()) {
+                    WOWUserManager.userCarCount -= product.productQty ?? 1
+                }
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+                
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
             }

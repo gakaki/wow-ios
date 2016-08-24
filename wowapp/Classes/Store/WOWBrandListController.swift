@@ -52,23 +52,22 @@ class WOWBrandListController: WOWBaseViewController {
         navigationItem.title = "品牌"
         configureSearchController()
         tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
-        configBarItem()
-    }
-    private func configBarItem(){
+        configBuyBarItem(WOWUserManager.userCarCount)
+        addObserver()
 
         
-        makeCustomerImageNavigationItem("buy", left:false) {[weak self] () -> () in
-            if let strongSelf = self{
-                guard WOWUserManager.loginStatus else {
-                    strongSelf.toLoginVC(true)
-                    return
-                }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
-                vc.hideNavigationBar = false
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        tableView.mj_header = self.mj_header
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        
     }
+
+    private func addObserver(){
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        
+    }
+  
 
     private func configureSearchController() {
         let resultVC = WOWSearchResultController()
@@ -111,6 +110,10 @@ class WOWBrandListController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandList, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 
+                
+                strongSelf.dataArray.removeAll()
+                strongSelf.originalArray.removeAll()
+                
                 let arr        = JSON(result)["brandVoList"].arrayObject
      
                 if let dataArr = arr{
@@ -133,7 +136,8 @@ class WOWBrandListController: WOWBaseViewController {
                     strongSelf.dataArray.append(group_row)
                     strongSelf.originalArray.appendContentsOf(group_row)
 
-                    
+                    strongSelf.endRefresh()
+
                     strongSelf.tableView.reloadData()
                 }
             }

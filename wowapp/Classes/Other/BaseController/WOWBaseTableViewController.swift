@@ -11,6 +11,8 @@ import UIKit
 class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource {
 //    var reuestIndex = 0 //翻页
 //    var isRreshing : Bool = false
+    var carBadgeCount: MIBadgeButton?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()

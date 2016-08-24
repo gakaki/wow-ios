@@ -7,6 +7,33 @@ protocol WOWFoundRecommendCellDelegate:class{
     func toProductDetail(productId: Int?)
 }
 
+extension Double {
+    var intStr:String {
+        get {
+            return String(format:"%.f",self)
+        }
+    }
+    var doubleStr:String {
+        get {
+            return String(format:"%.2f",self)
+        }
+    }
+    
+    var intYuan:String {
+        get {
+            let str = self.intStr
+            return "¥ \(str)"
+        }
+    }
+}
+extension UILabel{
+    func setStrokeWithText( str:String ){
+        
+        let attrString      = NSAttributedString(string: str, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
+        self.attributedText = attrString
+
+    }
+}
 class WOWFoundRecommendCell: UITableViewCell {
     
     var product:WOWFoundProductModel?
@@ -48,18 +75,20 @@ class WOWFoundRecommendCell: UITableViewCell {
         }
         right_label_top.text                 = p.productName
         right_label_ceneter.text             = p.detailDescription
-        right_label_price_stroke.text        = p.get_formted_original_price()
+        right_label_price_stroke.setStrokeWithText(p.get_formted_original_price())
         right_label_price_bottom.text        = p.get_formted_sell_price()
-        
+
         self.product                         = p
         
-        render()
         
         if (WOWUserManager.loginStatus){
             self.requestIsFavoriteProduct()
         }else {
             btnLike.selected = false
         }
+        
+        
+        render()
         
     }
     override func setSelected(selected: Bool, animated: Bool) {
@@ -151,8 +180,8 @@ class WOWFoundRecommendCell: UITableViewCell {
         
         self.product_view =  UIView().configure({
             
-            $0.style.justifyContent = .Center
-            $0.style.alignSelf      = .Stretch
+            $0.style.justifyContent = .SpaceAround
+            $0.style.alignSelf      = .FlexStart
             $0.style.margin         = defaultMargin
             $0.style.flexDirection  = .Row
             
@@ -168,6 +197,8 @@ class WOWFoundRecommendCell: UITableViewCell {
                 UIView().configure({
                     $0.style.flex           = 1
                     $0.style.justifyContent = .SpaceBetween
+//                    $0.style.dimensions     = ( Float(180.w) , Float(180.w))
+                    $0.style.margin     =  (0, 0.0, 0, 0, 0.0, 8)
 
                     }, children: [
                         
@@ -179,7 +210,8 @@ class WOWFoundRecommendCell: UITableViewCell {
                             
                             $0.font = UIFont.systemScaleFontSize(16)
                             $0.style.alignSelf = .FlexStart
-                            $0.style.margin   = (0, 0, 0, 0, 0.0, 0)
+                            $0.style.flex       = 2
+
                         }),
                         
                         right_label_ceneter.configure({
@@ -189,27 +221,24 @@ class WOWFoundRecommendCell: UITableViewCell {
                             $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
                             $0.numberOfLines    = 3
                             $0.style.alignSelf  = .FlexStart
-                            $0.style.dimensions = ( Float(180.w) , 60)
+                            $0.style.flex       = 5
                             
                         }),
                         
-                        //                       right_label_price_stroke.configure({
-                        //                            $0.textAlignment = .Center
-                        //                            $0.font = UIFont.systemFontOfSize(8, weight: UIFontWeightLight)
-                        //                            $0.textColor = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
-                        //                            $0.style.alignSelf = .FlexStart
-                        //                            $0.style.margin = (0,4.0, 0, -13, 8.0, 0)
-                        //
-                        //                            //显示下划线
-                        //                            let attrString = NSAttributedString(string: "¥ 123123", attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
-                        //                            $0.attributedText = attrString
-                        //
-                        //                        }),
+                       right_label_price_stroke.configure({
+                            $0.textAlignment    = .Left
+                            $0.font             = UIFont.systemScaleFontSize(10)
+                            $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
+                            $0.style.alignSelf  = .FlexStart
+                            $0.style.flex       = 1.5
+
+                        }),
                         
                         UIView().configure({
 
                             $0.style.flexDirection  = .Row
                             $0.style.justifyContent = .SpaceBetween
+                            $0.style.flex       = 2
 
                             }, children: [
                                 
@@ -217,7 +246,6 @@ class WOWFoundRecommendCell: UITableViewCell {
                                     $0.textAlignment = .Left
                                     $0.setLineHeightAndLineBreak(1.05)
                                     $0.font = UIFont.systemFontOfSize(14)
-                                    $0.style.margin     = (0, Float(-8.h), 0, 0, 0,5)
                                     $0.style.alignSelf  = .FlexStart
 
                                 }),
@@ -225,14 +253,13 @@ class WOWFoundRecommendCell: UITableViewCell {
                                 //                                button.configure({
                                 //                                    $0.style.alignSelf  = .FlexStart
                                 //                                    $0.style.dimensions = ( 10 , 10)
-                                //                                    $0.style.margin     =  (0, 5.0, 0, 0, 8.0, 0)
                                 //                                }),
                                 
                                 btnLike.configure({
-                                    $0.style.dimensions = ( 60 , 60)
-                                    $0.style.margin     = (0, Float(-18.h), 0, 0, 0,5)
-                                    $0.style.alignSelf  = .Auto
-                                
+                                    $0.style.dimensions = ( Float(32.w) , Float(32.w))
+                                    $0.style.alignSelf  = .FlexStart
+                                    $0.style.margin     =  (0, Float(-7.h), 0, 0, 0.0, 0)
+
                                 })
                             ])
                     ])

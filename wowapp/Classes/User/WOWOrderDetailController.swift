@@ -147,6 +147,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 if let strongSelf = self{
                     //取消订单成功后重新请求下网络刷新列表
                     strongSelf.request()
+                    strongSelf.delegate?.orderStatusChange()
                 }
             }) { (errorMsg) in
                 
@@ -747,7 +748,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     }
                     if indexPath.row == 1 {
                         let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
-                        cell.priceLabel.text       = result
+                        cell.priceLabel.text       = "-" + result
 
                         cell.saidImageView.hidden  = true
                         cell.freightTypeLabel.text = "优惠券"
@@ -806,7 +807,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     }
                     if indexPath.row == 1 {
                         let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
-                        cell.priceLabel.text       = result
+                        cell.priceLabel.text       = "-" + result
 
                         cell.saidImageView.hidden  = true
                         cell.freightTypeLabel.text = "优惠券"

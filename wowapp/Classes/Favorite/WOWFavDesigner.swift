@@ -15,15 +15,14 @@ class WOWFavDesigner: WOWBaseViewController {
     
     var dataArr  = [WOWFavoriteDesignerModel]()
     var parentNavigationController : UINavigationController?
+    var isRefresh: Bool = false
 
     
     @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if WOWUserManager.loginStatus {
-            request()
-        }
+        
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -46,12 +45,10 @@ class WOWFavDesigner: WOWBaseViewController {
     }
     private func addObserver(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshList), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWRefreshFavoritNotificationKey, object:nil)
         
     }
-    func refreshList()  {
-        request()
-    }
+   
 
     
        override func setUI() {
@@ -104,6 +101,7 @@ class WOWFavDesigner: WOWBaseViewController {
                     strongSelf.dataArr = designerList
                 }
                 strongSelf.collectionView.reloadData()
+                strongSelf.isRefresh = true
                 strongSelf.endRefresh()
             }
         }) {[weak self] (errorMsg) in

@@ -16,6 +16,7 @@ class WOWFavoriteController: WOWBaseViewController {
         super.viewDidLoad()
      
         let productVC = UIStoryboard.initialViewController("Favorite", identifier:String(WOWFavProduct)) as! WOWFavProduct
+    
         productVC.title = "单品"
         
         productVC.parentNavigationController = self.navigationController
@@ -43,7 +44,7 @@ class WOWFavoriteController: WOWBaseViewController {
         ]
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
-
+        pageMenu?.delegate = self
         self.view.addSubview(pageMenu!.view)
 
         
@@ -83,4 +84,28 @@ class WOWFavoriteController: WOWBaseViewController {
     
 
 }
-
+extension WOWFavoriteController:CAPSPageMenuDelegate{
+    // 滑动结束 再请求网络
+    func didMoveToPage(controller: UIViewController, index: Int){
+        if index == 0 {
+            let currentVC = controller as! WOWFavProduct
+            guard currentVC.isRefresh else {
+                currentVC.request()
+                return
+            }
+        }else if index == 1 {
+            let currentVC = controller as! WOWFavBrand
+            guard currentVC.isRefresh else {
+                currentVC.request()
+                return
+            }
+        }else {
+            let currentVC = controller as! WOWFavDesigner
+            guard currentVC.isRefresh else {
+                currentVC.request()
+                return
+            }
+        }
+    }
+    
+}

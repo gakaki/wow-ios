@@ -178,7 +178,9 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WOWBaseStyleCell", forIndexPath: indexPath) as! WOWBaseStyleCell
         let model = dataArray[indexPath.section][indexPath.row]
-        cell.leftImageView.set_webimage_url(model.image)
+//        cell.leftImageView.set_webimage_url(model.image)
+//         修改来回上下加载 内存不减的问题
+        cell.leftImageView.set_webimage_url_base(model.image, place_holder_name: "placeholder_product")
         cell.centerTitleLabel!.text = model.name
         return cell
     }

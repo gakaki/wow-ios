@@ -43,7 +43,10 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }
         
         
-        pictureImageView.set_webimage_url(model.productImg ?? "")
+//        pictureImageView.set_webimage_url(model.productImg ?? "")
+        // 修改来回上下加载 内存不减的问题
+        pictureImageView.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
+        
         let str = NSMutableAttributedString(string: model.productName ?? "")
         let style = NSMutableParagraphStyle()
         style.lineHeightMultiple = 1.5      //设置1.5倍行距

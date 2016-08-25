@@ -76,6 +76,16 @@ class WOWFoundRecommendCell: UITableViewCell {
         right_label_top.text                 = p.productName
         right_label_ceneter.text             = p.detailDescription
         right_label_price_stroke.setStrokeWithText(p.get_formted_original_price())
+        /// 如果原价大于售价显示原价并加下划线，如果没有原价或是等于售价不显示
+        if let price = p.sellPrice {
+            if let originalPrice = p.originalPrice {
+                if originalPrice > price{
+                    right_label_price_stroke.hidden = false
+                }
+            }else {
+                right_label_price_stroke.hidden = true
+            }
+        }
         right_label_price_bottom.text        = p.get_formted_sell_price()
 
         self.product                         = p

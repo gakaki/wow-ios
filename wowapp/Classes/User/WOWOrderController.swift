@@ -12,8 +12,8 @@ import UIKit
 class WOWOrderController: WOWBaseViewController {
     var entrance = orderDetailEntrance.orderList
     var dataArr  = [WOWNewOrderListModel]()
-      var parentNavigationController : UINavigationController?
-    
+    var parentNavigationController : UINavigationController?
+    var isRequest :Bool = false
     var type = ""  //100代表全部
     var selectIndex:Int = 0{
         didSet{
@@ -40,11 +40,10 @@ class WOWOrderController: WOWBaseViewController {
         tableView.mj_header = self.mj_header
         
         tableView.mj_footer = self.mj_footer
-//      NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:"aaaaa", object:nil)
+        // 默认进入0 下标， 请求网络
         if selectIndex == 0 {
              request()
         }
-//
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -117,7 +116,7 @@ class WOWOrderController: WOWBaseViewController {
             DLog(json)
             
             if let strongSelf = self{
-                
+                strongSelf.isRequest = true
                 strongSelf.endRefresh()
                 
                 let arr = Mapper<WOWNewOrderListModel>().mapArray(json)

@@ -17,6 +17,8 @@ class WOWFavProduct: WOWBaseViewController {
     
     var parentNavigationController : UINavigationController?
     
+    var isRefresh: Bool = false
+    
     @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -90,12 +92,10 @@ class WOWFavProduct: WOWBaseViewController {
     }
     private func addObserver(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshList), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWRefreshFavoritNotificationKey, object:nil)
         
     }
-    func refreshList()  {
-        request()
-    }
+ 
 
     //MARK:Network
     override func request() {
@@ -108,7 +108,7 @@ class WOWFavProduct: WOWBaseViewController {
                     strongSelf.dataArr = productList
                 }
                 strongSelf.endRefresh()
-
+                strongSelf.isRefresh = true
                 strongSelf.collectionView.reloadData()
 
             }

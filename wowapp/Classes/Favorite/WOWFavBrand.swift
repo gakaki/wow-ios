@@ -14,14 +14,13 @@ class WOWFavBrand: WOWBaseViewController {
     var dataArr  = [WOWBrandListModel]()
     var parentNavigationController : UINavigationController?
 
-    
+    var isRefresh: Bool = false
+
     @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if WOWUserManager.loginStatus {
-            request()
-        }
+        
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -86,12 +85,9 @@ class WOWFavBrand: WOWBaseViewController {
     }
     private func addObserver(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshList), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWRefreshFavoritNotificationKey, object:nil)
         
-    }
-    func refreshList()  {
-        request()
-    }
+    }   
 
     //MARK:Network
     override func request() {
@@ -104,7 +100,7 @@ class WOWFavBrand: WOWBaseViewController {
                     strongSelf.dataArr = brandList
                 }
                 strongSelf.endRefresh()
-                
+                strongSelf.isRefresh = true
                 strongSelf.collectionView.reloadData()
                 
             }

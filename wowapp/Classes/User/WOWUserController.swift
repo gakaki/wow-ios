@@ -41,7 +41,7 @@ class WOWUserController: WOWBaseTableViewController {
         super.setUI()
         configHeaderView()
         configClickAction()
-        configBuyBarItem(WOWUserManager.userCarCount)
+        configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
         addObserver()
     }
 
@@ -85,9 +85,12 @@ class WOWUserController: WOWBaseTableViewController {
         let vc = WOWOrderListViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+    /**
+     刷新headerView上面的用户信息
+     */
     private func configHeaderView(){
-        headerView       = WOWUserTopView()     
+        headerView       = WOWUserTopView()
+        configBuyBarItem(WOWUserManager.userCarCount)
         headerView.frame = CGRectMake(0, 0, MGScreenWidth, 75)
         headerView.configShow(WOWUserManager.loginStatus)
         headerView.topContainerView.addAction {[weak self] in

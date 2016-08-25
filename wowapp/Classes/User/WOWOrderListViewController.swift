@@ -90,9 +90,12 @@ extension WOWOrderListViewController:CAPSPageMenuDelegate{
     // 滑动结束 再请求网络
     func didMoveToPage(controller: UIViewController, index: Int){
    
-
+        
         let currentVC = controller as! WOWOrderController
-        currentVC.request()
+        if currentVC.isRequest == false { // 如果未请求，才去请求网络。
+            currentVC.request()
+        }
+        
         
     }
 

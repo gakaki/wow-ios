@@ -118,16 +118,24 @@ class WOWBuyCarController: WOWBaseViewController {
     
 //MARK:结算
     @IBAction func endButtonClick(sender: UIButton) {
+        /**
+         *  商品结算之前首先判断有没有选中商品，然后判断商品的库存是否充足，再判断所选商品是否下架
+         */
         if selectedArr.isEmpty {
             WOWHud.showMsg("您还没有选中商品哦")
             return
         }
         
         for product in selectedArr {
+            if product.productStatus == 2 {
+                WOWHud.showMsg((product.productName ?? "您有商品") + "已下架")
+                return
+            }
             if product.productQty > product.productStock {
                 WOWHud.showMsg((product.productName ?? "您有商品") + "库存不足")
                 return
             }
+            
         }
          //结算
             let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
@@ -169,8 +177,19 @@ class WOWBuyCarController: WOWBaseViewController {
                         WOWUserManager.userCarCount = 0
                         for product in arr {
                             WOWUserManager.userCarCount += product.productQty ?? 1
+                            /**
+                             *  productStatus 产品状态
+                             1 已上架 2已下架
+                             
+                             如果已下架，isSelect = false
+                             */
+                            if product.productStatus == 2 {
+                                product.isSelected = false
+                            }
                         }
                         strongSelf.updateCarCountBadge()
+                    
+                        
                         //判断当前数组有多少默认选中的加入选中的数组
                         for product in strongSelf.dataArr {
                             if product.isSelected ?? false {
@@ -415,6 +434,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         let model = dataArr[sender.tag]
             var count = model.productQty ?? 1
         if count > model.productStock  {
+//            WOWHud.showMsg("商品可用库存仅剩\(model.productStock)")
             count = model.productStock ?? 0
 //            model.productQty = model.productStock
         }else {

@@ -22,6 +22,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     @IBOutlet weak var countTextField: UITextField!
     @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var perPriceLabel: UILabel!
+    @IBOutlet weak var detailView: UIView!
     
     @IBOutlet weak var countLabel: UILabel!
     let identifier = "WOWTypeCollectionCell"
@@ -79,15 +80,18 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
             subCountButton.enabled = true
             subCountButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
-        
+        detailView.addTapGesture {[weak self] (tap) in
+            if let strongSelf = self {
+                if let del = strongSelf.delegate {
+                    del.goProductDetail(model.parentProductId)
+                }
+            }
+            
+        }
        
     }
 
-    @IBAction func productDetailClick (sender: UIButton) {
-        if let del = self.delegate {
-            del.goProductDetail(model.parentProductId)
-        }
-    }
+   
     
     
     

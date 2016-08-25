@@ -70,7 +70,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var productStock                        : Int?
     var color                               : String?
     var specImg                             : String?
-    var productStatus                       : String?
+    var productStatus                       : Int?
     var productStatusName                   : String?
     var isSelected                          : Bool?
     var specName                            : String?   //图片地址

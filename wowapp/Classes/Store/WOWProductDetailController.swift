@@ -106,8 +106,8 @@ class WOWProductDetailController: WOWBaseViewController {
     
 //MARK:Actions
     //MARK:更新角标
-    func updateCarBadge(){
-        WOWUserManager.userCarCount += 1
+    func updateCarBadge(carCount: Int){
+        WOWUserManager.userCarCount += carCount
         buyCarCount()
         NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
 
@@ -280,7 +280,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             
             WOWNetManager.sharedManager.requestWithTarget(.Api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self] (result) in
                 if let strongSelf = self {
-                    strongSelf.updateCarBadge()
+                    strongSelf.updateCarBadge(product.productQty ?? 1)
                 }
                 
             }) { (errorMsg) in

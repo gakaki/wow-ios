@@ -118,43 +118,41 @@
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zg1-SQ-PJH">
-                        <rect key="frame" x="15" y="65" width="345" height="81"/>
-                        <connections>
-                            <action selector="productDetailClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8UL-xV-c2R"/>
-                        </connections>
-                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXg-C3-HFX">
+                        <rect key="frame" x="15" y="66" width="345" height="80"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="qgX-zd-Hl4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="369-71-Svm"/>
-                    <constraint firstItem="zg1-SQ-PJH" firstAttribute="top" secondItem="dyR-ah-l3S" secondAttribute="bottom" constant="14.5" id="3RJ-Do-cfs"/>
                     <constraint firstAttribute="trailing" secondItem="eTf-lT-f2D" secondAttribute="trailing" constant="15" id="8lg-Eb-v68"/>
                     <constraint firstAttribute="trailing" secondItem="u5r-HJ-88T" secondAttribute="trailing" constant="15" id="9Cd-Ne-OcS"/>
-                    <constraint firstItem="zg1-SQ-PJH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="9lJ-lK-s1k"/>
                     <constraint firstItem="fXp-Sn-M48" firstAttribute="bottom" secondItem="qgX-zd-Hl4" secondAttribute="bottom" id="A3D-er-wz6"/>
                     <constraint firstAttribute="bottomMargin" secondItem="qgX-zd-Hl4" secondAttribute="bottom" constant="5" id="C2Y-CU-Tmz"/>
                     <constraint firstAttribute="trailing" secondItem="fXp-Sn-M48" secondAttribute="trailing" constant="15" id="C82-XB-zcy"/>
-                    <constraint firstAttribute="bottom" secondItem="zg1-SQ-PJH" secondAttribute="bottom" constant="13.5" id="Dig-fO-WRD"/>
                     <constraint firstItem="fXp-Sn-M48" firstAttribute="top" secondItem="u5r-HJ-88T" secondAttribute="bottom" constant="8" id="F3c-bx-Yxx"/>
+                    <constraint firstAttribute="bottom" secondItem="bXg-C3-HFX" secondAttribute="bottom" constant="13.5" id="HUj-8E-RR2"/>
                     <constraint firstItem="7gH-zu-kOK" firstAttribute="leading" secondItem="nRw-uF-qyi" secondAttribute="trailing" id="IHm-Mc-JST"/>
                     <constraint firstItem="dyR-ah-l3S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="JqD-dX-KHi"/>
+                    <constraint firstItem="bXg-C3-HFX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="M3O-kf-YzB"/>
                     <constraint firstItem="1L5-Zq-KJv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ONF-OC-xUH"/>
                     <constraint firstItem="dyR-ah-l3S" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="50" id="P5Y-MS-dE6"/>
                     <constraint firstItem="Yig-fi-lNd" firstAttribute="leading" secondItem="qgX-zd-Hl4" secondAttribute="trailing" constant="15" id="Tse-fY-cfy"/>
                     <constraint firstItem="eTf-lT-f2D" firstAttribute="leading" secondItem="7gH-zu-kOK" secondAttribute="trailing" id="Ty2-rI-8Ee"/>
                     <constraint firstItem="eTf-lT-f2D" firstAttribute="centerY" secondItem="1L5-Zq-KJv" secondAttribute="centerY" id="Tzl-Zu-U5Q"/>
                     <constraint firstAttribute="trailing" secondItem="dyR-ah-l3S" secondAttribute="trailing" id="UFv-lY-lwT"/>
+                    <constraint firstItem="bXg-C3-HFX" firstAttribute="top" secondItem="dyR-ah-l3S" secondAttribute="bottom" constant="15.5" id="ZEj-hJ-Fcb"/>
                     <constraint firstItem="u5r-HJ-88T" firstAttribute="top" secondItem="Yig-fi-lNd" secondAttribute="bottom" constant="3" id="bcT-fZ-80N"/>
                     <constraint firstItem="Yig-fi-lNd" firstAttribute="top" secondItem="qgX-zd-Hl4" secondAttribute="top" id="dEj-v2-b8U"/>
                     <constraint firstItem="Ks0-k6-Sg4" firstAttribute="leading" secondItem="qgX-zd-Hl4" secondAttribute="trailing" constant="15" id="ea2-Zu-sDB"/>
                     <constraint firstItem="nRw-uF-qyi" firstAttribute="centerY" secondItem="1L5-Zq-KJv" secondAttribute="centerY" id="eu9-34-VQ8"/>
+                    <constraint firstAttribute="trailing" secondItem="bXg-C3-HFX" secondAttribute="trailing" constant="15" id="klg-VR-K5I"/>
                     <constraint firstItem="u5r-HJ-88T" firstAttribute="leading" secondItem="qgX-zd-Hl4" secondAttribute="trailing" constant="15" id="pB3-cO-WpE"/>
                     <constraint firstItem="eTf-lT-f2D" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="toM-qM-2OD"/>
                     <constraint firstItem="7gH-zu-kOK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="wLw-Ve-V5w"/>
                     <constraint firstItem="qgX-zd-Hl4" firstAttribute="top" secondItem="dyR-ah-l3S" secondAttribute="bottom" constant="15" id="xC5-82-uf4"/>
                     <constraint firstItem="7gH-zu-kOK" firstAttribute="centerY" secondItem="1L5-Zq-KJv" secondAttribute="centerY" id="ycD-jr-8Ua"/>
                     <constraint firstItem="Ks0-k6-Sg4" firstAttribute="bottom" secondItem="qgX-zd-Hl4" secondAttribute="bottom" id="ydt-IF-bcP"/>
-                    <constraint firstAttribute="trailing" secondItem="zg1-SQ-PJH" secondAttribute="trailing" constant="15" id="zQM-rG-Oea"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -162,6 +160,7 @@
                 <outlet property="collectionView" destination="u5r-HJ-88T" id="s6F-do-aHW"/>
                 <outlet property="countLabel" destination="fXp-Sn-M48" id="LDq-ed-n1x"/>
                 <outlet property="countTextField" destination="7gH-zu-kOK" id="IOy-Yf-pDW"/>
+                <outlet property="detailView" destination="bXg-C3-HFX" id="uBp-WB-rVb"/>
                 <outlet property="goodsImageView" destination="qgX-zd-Hl4" id="tRm-aA-kFx"/>
                 <outlet property="nameLabel" destination="Yig-fi-lNd" id="1SS-hX-zki"/>
                 <outlet property="perPriceLabel" destination="Ks0-k6-Sg4" id="IpS-V9-7sE"/>

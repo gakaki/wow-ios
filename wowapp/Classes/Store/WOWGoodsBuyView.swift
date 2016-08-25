@@ -10,9 +10,9 @@ import UIKit
 
 //MARK:*****************************背景视图******************************************
 enum carEntrance{
-    case SpecEntrance
-    case AddEntrance
-    case PayEntrance
+    case SpecEntrance   //选择规格
+    case AddEntrance    //添加购物车
+    case PayEntrance    //立即支付
 }
 class WOWBuyBackView: UIView {
 //MARK:Lazy
@@ -121,24 +121,24 @@ protocol goodsBuyViewDelegate:class {
 
 
 class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UICollectionViewDataSource{
-    @IBOutlet weak var countTextField: UITextField!
-    @IBOutlet weak var perPriceLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var goodsImageView: UIImageView!
+    @IBOutlet weak var countTextField: UITextField!     //商品数量显示
+    @IBOutlet weak var perPriceLabel: UILabel!          //商品价格
+    @IBOutlet weak var collectionView: UICollectionView!    //颜色标签
+    @IBOutlet weak var nameLabel: UILabel!              //商品名字
+    @IBOutlet weak var goodsImageView: UIImageView!     //商品图片
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var subButton: UIButton!
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var secondCollectionView: UICollectionView!
-    @IBOutlet weak var secondCollectionViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var specView: UIView!
-    @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var colorWarnImg: UIImageView!
+    @IBOutlet weak var subButton: UIButton!             //增加数量
+    @IBOutlet weak var addButton: UIButton!             //减少数量
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!  //颜色视图的高度
+    @IBOutlet weak var secondCollectionView: UICollectionView!      //规格标签
+    @IBOutlet weak var secondCollectionViewHeight: NSLayoutConstraint!  //规格视图的高度
+    @IBOutlet weak var specView: UIView!        //选择规格的底部view
+    @IBOutlet weak var favoriteButton: UIButton!        //喜欢按钮
+    @IBOutlet weak var colorWarnImg: UIImageView!       //警告图标
     @IBOutlet weak var specWarnImg: UIImageView!
-    @IBOutlet weak var addCarButton: UIButton!
-    @IBOutlet weak var payButton: UIButton!
-    @IBOutlet weak var sureButton: UIButton!
+    @IBOutlet weak var addCarButton: UIButton!          //加入购物车
+    @IBOutlet weak var payButton: UIButton!             //立即支付
+    @IBOutlet weak var sureButton: UIButton!            //确定按钮
   
     private var _layer: CALayer!
     private var path: UIBezierPath!
@@ -167,20 +167,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     var productInfo : WOWProductInfoModel?
     
     private var skuCount:Int = 1
-    private var skuPerPrice :String = ""
-    private var skuName     :String = ""
-    private var skuImageUrl :String = ""
-    private var skuID       :String = ""
-    private var productName :String = ""
-    private var productID   :String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
 
     }
-    
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -283,6 +275,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                         color_SpecArr = array.specMapVoList
                     }
                 }
+                //去产品的信息
                 getProductInfo()
             }
         }
@@ -628,7 +621,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         
     }
     
-    
     //更新cell点击状态
     func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
         
@@ -639,7 +631,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         cell.userInteractionEnabled = true
 
     }
-    
 
     //如果颜色和规格都选中的话就拿出这个产品的信息
     func getProductInfo() {
@@ -684,33 +675,36 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             if skuCount == 0 {
                 skuCount = 1
             }
+            showStock(true)
             
-            addButton.enabled = true
-            subButton.enabled = true
             showResult(skuCount)
             
             addCarButton.hidden = false
-            payButton.enabled = true
             payButton.setBackgroundColor(MGRgb(255, g: 230, b: 0), forState: .Normal)
             
-            sureButton.enabled = true
             sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .Normal)
 
             
         }else {
             skuCount = 0
-            addButton.enabled = false
-            subButton.enabled = false
+           
             showResult(skuCount)
             
             addCarButton.hidden = true
-            payButton.enabled = false
             payButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .Disabled)
             
-            sureButton.enabled = false
             sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .Disabled)
             
         }
+    }
+    //按钮是否可点击
+    
+    func showStock(hasStock: Bool) -> Void {
+        addButton.enabled = hasStock
+        subButton.enabled = hasStock
+        payButton.enabled = hasStock
+        sureButton.enabled = hasStock
+
     }
 
     
@@ -738,10 +732,10 @@ extension WOWGoodsBuyView {
             self.path.addQuadCurveToPoint(CGPointMake(MGScreenWidth - 22, -MGScreenHeight + self.size.height + 42), controlPoint: CGPointMake(MGScreenWidth/2, 0))
             
             
-            
         }
         self.groupAnimation()
     }
+    
     func groupAnimation()
     {
         self.userInteractionEnabled = false
@@ -844,11 +838,8 @@ extension WOWGoodsBuyView {
             if let img = img {
                 //                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
                 goodsImageView.set_webimage_url(img)
-                
             }
         }
-
-        
     }
     
     /**

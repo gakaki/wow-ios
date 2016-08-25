@@ -15,6 +15,9 @@ class WOWBuyCarController: WOWBaseViewController {
     
     private var dataArr = [WOWCarProductModel](){
         didSet{
+            /**
+             *  如果购物车内没有商品底部view就隐藏
+             */
             if dataArr.isEmpty {
                 bottomView.hidden = true
             }else{
@@ -32,9 +35,13 @@ class WOWBuyCarController: WOWBaseViewController {
                 let counts = selectedArr.map({ (model) -> Int in
                     return model.productQty ?? 0
                 })
+            
+            //计算价钱
                 let result = WOWCalPrice.calTotalPrice(prices,counts:counts)
                 totalPrice = result
                 totalPriceLabel.text = result
+            
+            //如果选中的数组数量跟购物车内总商品数量相同全选按钮置为选中状态
             if selectedArr.count == dataArr.count {
                 allButton.selected = true
             }else{
@@ -44,11 +51,10 @@ class WOWBuyCarController: WOWBaseViewController {
     }
     
     
-    @IBOutlet weak var allButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var endButton: UIButton!
-    @IBOutlet weak var totalPriceLabel: UILabel!
-    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var allButton: UIButton!             //全选按钮
+    @IBOutlet weak var tableView: UITableView!          //购物车列表
+    @IBOutlet weak var endButton: UIButton!             //去结算按钮
+    @IBOutlet weak var totalPriceLabel: UILabel!        //商品总价
     @IBOutlet weak var bottomView: UIView!
 
     
@@ -82,9 +88,11 @@ class WOWBuyCarController: WOWBaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
         
     }
+    
     func loginSuccess() {
         configData()
     }
+    
     private func configData(){
        
         asyncCarList()
@@ -405,10 +413,11 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         return 0.1
     }
     
-    //MARK: - cellAction 
+    //MARK: - cellAction
     func selectClick(sender: UIButton) {
         let model = dataArr[sender.tag]
         let select = model.isSelected ?? false
+        
         if select {
             asynCartUnSelect([model])
         }else {
@@ -416,6 +425,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         }
         
     }
+    
     //添加商品数量
     func addCountClick(sender: UIButton) {
         let model = dataArr[sender.tag]
@@ -429,6 +439,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         let indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: sender.tag)
         asyncUpdateCount(model.shoppingCartId!, productQty: productQty, indexPath: indexPath)
     }
+    
     //减少商品数量
     func subCountClick(sender: UIButton) {
         let model = dataArr[sender.tag]

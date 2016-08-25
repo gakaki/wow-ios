@@ -70,9 +70,9 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                     if originalPrice > price{
                         //显示下划线
                         let result = WOWCalPrice.calTotalPrice([originalPrice],counts:[1])
-
-                        let attrString = NSAttributedString(string: result, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
-                        cell.originalPriceLabel.attributedText = attrString
+                        
+                        cell.originalPriceLabel.setStrokeWithText(result)
+                       
                     }
                 }
             }
@@ -87,11 +87,10 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 cell.showData(productModel?.firstNonPrimaryImgUrl, imgDesc: productModel?.firstNonPrimaryImgDesc)
                 cell.moreContainerView.addTapGesture {[weak self] (tap) in
                 if let strongSelf = self{
-                    DLog("跳转到详情去")
                     let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductSecondDetailController)) as! WOWProductSecondDetailController
+                    
                     if let productModel = strongSelf.productModel{
                         vc.productModel = productModel
-
                     }
                     strongSelf.navigationController?.pushViewController(vc, animated: true)
                 }

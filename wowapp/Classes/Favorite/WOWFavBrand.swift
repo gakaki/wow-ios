@@ -101,6 +101,7 @@ class WOWFavBrand: WOWBaseViewController {
                 }
                 strongSelf.endRefresh()
                 strongSelf.isRefresh = true
+
                 strongSelf.collectionView.reloadData()
                 
             }

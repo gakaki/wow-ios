@@ -98,15 +98,12 @@ class WOWEditOrderController: WOWBaseViewController {
             WOWHud.showMsg("请选择收货地址")
             return
         }
-        if orderCode.isEmpty {
-            switch entrance! {
-            case editOrderEntrance.buyEntrance:
-                requestBuyNowOrderCreat()
-            case editOrderEntrance.carEntrance:
-                requestOrderCreat()
-            }
-
-            
+        
+        switch entrance! {
+        case editOrderEntrance.buyEntrance:
+            requestBuyNowOrderCreat()
+        case editOrderEntrance.carEntrance:
+            requestOrderCreat()
         }
 
     }
@@ -310,15 +307,14 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 cell.couponLabel.hidden = true
                 cell.nextImage.hidden = true
                 cell.freightPriceLabel.hidden = false
-//                cell.freightInfoImage.hidden = false
                 cell.lineView.hidden = false
             }else {
                 cell.leftLabel.text = "优惠券"
                 cell.freightPriceLabel.hidden = true
-//                cell.freightInfoImage.hidden = true
                 cell.nextImage.hidden = false
                 cell.couponLabel.hidden = false
                 cell.lineView.hidden = true
+                
                 if let deduction = self.orderSettle?.deduction  {
                         let result = WOWCalPrice.calTotalPrice([deduction],counts:[1])
                         cell.couponLabel.text = "-" + result
@@ -367,12 +363,13 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                         let section = NSIndexSet(index: 2)
                         strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
                         
-                        //重新计算总金额
+                        //重新计算总金额，先把double转为number类型的，避免计算过程中由于浮点型而改变数值
                         let productTotal = NSDecimalNumber(double: strongSelf.orderSettle?.productTotalAmount ?? 0)
                         
                         let delivery = NSDecimalNumber(double: strongSelf.orderSettle?.deliveryFee ?? 0)
                         let deduction = NSDecimalNumber(double: couponInfo?.deduction ?? 0)
                         
+                        //用商品的总价加上运费然后减去优惠券金额得出结算价格
                         strongSelf.orderSettle?.totalAmount = (productTotal.decimalNumberByAdding(delivery).decimalNumberBySubtracting(deduction)).doubleValue
                         
                         
@@ -383,9 +380,6 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                     }
                     
                 }
-                
-                
-                
             }
             navigationController?.pushViewController(vc, animated: true)
 

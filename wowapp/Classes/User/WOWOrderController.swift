@@ -40,8 +40,11 @@ class WOWOrderController: WOWBaseViewController {
         tableView.mj_header = self.mj_header
         
         tableView.mj_footer = self.mj_footer
-        
-        request()
+//      NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:"aaaaa", object:nil)
+        if selectIndex == 0 {
+             request()
+        }
+//
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -260,8 +263,6 @@ extension WOWOrderController:OrderDetailDelegate{
         request()
     }
 }
-
-
 extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.dataArr.count

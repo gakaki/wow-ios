@@ -16,7 +16,8 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        
+        self.navigationController?.navigationBar.shadowImage = UIImage(named: "line")
+
     }
     
     

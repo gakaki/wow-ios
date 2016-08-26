@@ -18,7 +18,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        
+        self.navigationController?.navigationBar.shadowImage = UIImage(named: "line")
     }
     
     
@@ -28,6 +28,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
     private func getNavShadow(paramView:UIView?) -> UIView?{
         if let bar = paramView{
+            
             if bar.bounds.size.height <= 1.0 {
                 DLog("找到了")
                 return bar

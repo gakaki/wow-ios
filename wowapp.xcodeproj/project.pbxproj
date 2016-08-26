@@ -28,6 +28,10 @@
 		068B60C11D4F563C001AD778 /* WowFoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60C01D4F563B001AD778 /* WowFoundModel.swift */; };
 		069056DF1D36665B00A851F9 /* WOWGuideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069056DE1D36665B00A851F9 /* WOWGuideController.swift */; };
 		069056E11D36666F00A851F9 /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069056E01D36666F00A851F9 /* WOWController.swift */; };
+		0697D1981D6EFB960061EBD4 /* VCVTMagic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D1971D6EFB960061EBD4 /* VCVTMagic.swift */; };
+		0697D19A1D6F03C70061EBD4 /* VCCategoryProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D1991D6F03C70061EBD4 /* VCCategoryProducts.swift */; };
+		0697D19C1D6F11040061EBD4 /* VCMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19B1D6F11040061EBD4 /* VCMe.swift */; };
+		0697D19E1D6F112E0061EBD4 /* UIView+BorderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */; };
 		069E094E1D576B3200F8AE8F /* UIImage+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */; };
 		069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094F1D57942C00F8AE8F /* UILabel+Style.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
@@ -393,6 +397,10 @@
 		068B60C01D4F563B001AD778 /* WowFoundModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowFoundModel.swift; sourceTree = "<group>"; };
 		069056DE1D36665B00A851F9 /* WOWGuideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGuideController.swift; sourceTree = "<group>"; };
 		069056E01D36666F00A851F9 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
+		0697D1971D6EFB960061EBD4 /* VCVTMagic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCVTMagic.swift; sourceTree = "<group>"; };
+		0697D1991D6F03C70061EBD4 /* VCCategoryProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategoryProducts.swift; sourceTree = "<group>"; };
+		0697D19B1D6F11040061EBD4 /* VCMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMe.swift; sourceTree = "<group>"; };
+		0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BorderLine.swift"; sourceTree = "<group>"; };
 		069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WebP.swift"; sourceTree = "<group>"; };
 		069E094F1D57942C00F8AE8F /* UILabel+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
@@ -794,10 +802,13 @@
 		068B60AD1D4F34AF001AD778 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0697D19B1D6F11040061EBD4 /* VCMe.swift */,
+				0697D1971D6EFB960061EBD4 /* VCVTMagic.swift */,
 				06A2DBC01D6A268D00F4D479 /* TooglePriceBtn.swift */,
 				068B60B21D4F3DD5001AD778 /* VCFound.swift */,
 				063968731D54950B00631BDF /* VCCategory.swift */,
 				06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */,
+				0697D1991D6F03C70061EBD4 /* VCCategoryProducts.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1157,6 +1168,7 @@
 				069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */,
 				069E094F1D57942C00F8AE8F /* UILabel+Style.swift */,
 				06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */,
+				0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */,
 			);
 			path = WowExtension;
 			sourceTree = "<group>";
@@ -2024,6 +2036,7 @@
 			files = (
 				29FF26BC1CFDA86300DF2A9B /* WOWInviteController.swift in Sources */,
 				29FF26931CFDA86300DF2A9B /* WOWBrandListModel.swift in Sources */,
+				0697D19A1D6F03C70061EBD4 /* VCCategoryProducts.swift in Sources */,
 				29FF26891CFDA86300DF2A9B /* WOWDropMenuView.swift in Sources */,
 				29FF26B81CFDA86300DF2A9B /* WOWAddressListModel.swift in Sources */,
 				29FF268E1CFDA86300DF2A9B /* WOWBrandDetailCell.swift in Sources */,
@@ -2091,6 +2104,7 @@
 				29FF26CB1CFDA86300DF2A9B /* WOWSocietyCell.swift in Sources */,
 				29FF26951CFDA86300DF2A9B /* WOWBrandTopView.swift in Sources */,
 				29FF26691CFDA86300DF2A9B /* WOWSearchController.swift in Sources */,
+				0697D19C1D6F11040061EBD4 /* VCMe.swift in Sources */,
 				29FF26751CFDA86300DF2A9B /* WOWLoginController.swift in Sources */,
 				29FF267D1CFDA86300DF2A9B /* WOWNavigationController.swift in Sources */,
 				29FF26E21CFDA86300DF2A9B /* WOWApiPath.swift in Sources */,
@@ -2122,6 +2136,7 @@
 				29FF26611CFDA86300DF2A9B /* WOWProductModel.swift in Sources */,
 				29FF26A81CFDA86300DF2A9B /* WOWSearchResultController.swift in Sources */,
 				29FF26601CFDA86300DF2A9B /* WOWMenuTopView.swift in Sources */,
+				0697D1981D6EFB960061EBD4 /* VCVTMagic.swift in Sources */,
 				29FF26501CFDA86300DF2A9B /* WOWValue2Cell.swift in Sources */,
 				29FF26941CFDA86300DF2A9B /* WOWBrandModel.swift in Sources */,
 				29FF26821CFDA86300DF2A9B /* WOWBaseStyleCell.swift in Sources */,
@@ -2167,6 +2182,7 @@
 				068B60C11D4F563C001AD778 /* WowFoundModel.swift in Sources */,
 				29FF26D91CFDA86300DF2A9B /* WOWData.swift in Sources */,
 				29FF26EC1CFDA86300DF2A9B /* KMPlaceholderTextView.swift in Sources */,
+				0697D19E1D6F112E0061EBD4 /* UIView+BorderLine.swift in Sources */,
 				06FB94B11D6306C100554871 /* VCTopic.swift in Sources */,
 				29FF26B91CFDA86300DF2A9B /* WOWCopyrightController.swift in Sources */,
 				635716C01D4607EE006BD746 /* WOWHomeBanner.swift in Sources */,

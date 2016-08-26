@@ -43,6 +43,7 @@ class WOWOrderController: WOWBaseViewController {
         // 默认进入0 下标， 请求网络
         if selectIndex == 0 {
              request()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateOrderListAllInfo), name:WOWUpdateOrderListAllNotificationKey, object:nil)
         }
     }
     
@@ -82,19 +83,9 @@ class WOWOrderController: WOWBaseViewController {
         tableView.backgroundColor = DefaultBackColor
         tableView.registerNib(UINib.nibName(String(WOWOrderListCell)), forCellReuseIdentifier:"WOWOrderListCell")
     }
-    
-//    private func configCheckView(){
-//        WOWCheckMenuSetting.defaultSetUp()
-//        WOWCheckMenuSetting.fill = true
-//        WOWCheckMenuSetting.selectedIndex = selectIndex
-//        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.w, 40), titles: ["全部","待付款","待发货","待收货","已完成"])
-//        menuView.delegate = self
-//        menuView.addBorderBottom(size:0.5, color:BorderMColor)
-//        self.view.addSubview(menuView)
-//    }
-    
-       
-    
+    func updateOrderListAllInfo() {
+        request()
+    }
     //MARK:Network
     override func request() {
         

@@ -1,26 +1,33 @@
 
 import UIKit
 
+
 class TooglePriceBtn:UIButton {
     
-    enum PriceArrowViewStatus : Int {
-        case None = 2
-        case Up   = 1
-        case Down = 0
-    }
-    
-    var _status      = PriceArrowViewStatus.None
-    var action : ((PriceArrowViewStatus) -> ())?
-    
-    var status:PriceArrowViewStatus {
+    var asc:Int {
         get {
-            return _status
+            return Int(upDown)
         }
-        set(newStatus) {
-            _status = newStatus
+    }
+    //UP TRUE DOWN FALSE
+    var upDown:Bool = false {
+        didSet{
+            if upDown == true {
+                self.setImage(UIImage(named: "btnPriceStatusUp"), forState: UIControlState.Selected)
+            }else{
+                self.setImage(UIImage(named: "btnPriceStatusDown"), forState: UIControlState.Selected)
+            }
+            
+            if let a = self.action {
+              a(asc: asc) // up 0 down 1
+            }
         }
     }
     
+    var action : ((asc:Int) -> ())?
+    var in_title:String = "价格"
+    
+
     override func awakeFromNib() {
         setUI()
     }
@@ -29,12 +36,15 @@ class TooglePriceBtn:UIButton {
     }
     
     init(
+        title:String = "价格",
         frame: CGRect,
-        tocuhClosure: (PriceArrowViewStatus) -> ()
-        ) {
+        tocuhClosure: (asc:Int) -> ()
+    )
+    {
         
         super.init(frame: frame)
         self.action = tocuhClosure
+        self.in_title = title
         setUI()
     }
     
@@ -42,21 +52,11 @@ class TooglePriceBtn:UIButton {
         self.sendActionsForControlEvents(.TouchUpInside)
         self.highlighted = false
     }
-    func state_default(){
-        self.highlighted = true
-        self.selected = false
-    }
-    
+
     func btnTouchInside(){
-        
-        self.selected = !self.selected
-        
-        self.status = self.selected ? .Up : .Down
-        
-        if let a = self.action {
-            a(self.status)
+        if ( self.selected == true){
+             self.upDown = !self.upDown
         }
-        
     }
     
     let wOk = CGFloat(  45 )
@@ -64,33 +64,28 @@ class TooglePriceBtn:UIButton {
     
     func setUI(){
         
-        self.backgroundColor             = UIColor.whiteColor()
+
+        self.setTitle( self.in_title, forState: UIControlState.Normal)
+        self.setTitleColor(UIColor.grayColor(), forState: .Normal)
+        self.setImage(UIImage(named: "btnPriceStatusNone"), forState: UIControlState.Normal)
         
-        self.setTitle("价格", forState: UIControlState.Normal)
-        
-        
+        self.setTitleColor(UIColor.blackColor(), forState: .Selected)
+
         
         self.titleLabel!.font            = UIFont.systemFontOfSize(14)
         self.imageEdgeInsets             = UIEdgeInsetsMake(0, 77, 0, 0)
+//        self.frame                       = CGRectMake(0, 0, wOk, hOk)
         
-        //        self.frame                       = CGRectMake(0, 0, wOk, hOk)
-        
-        self.setTitleColor(UIColor.grayColor(), forState: .Highlighted)
-        self.setTitleColor(UIColor.blackColor(), forState: .Selected)
-        self.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        
-        self.setImage(UIImage(named: "btnPriceStatusNone"), forState: UIControlState.Highlighted)
-        self.setImage(UIImage(named: "btnPriceStatusUp"), forState: UIControlState.Selected)
-        self.setImage(UIImage(named: "btnPriceStatusDown"), forState: UIControlState.Normal)
-        
+
         self.imageView!.contentMode      = UIViewContentMode.ScaleAspectFill
         //        self.titleLabel!.contentMode     = UIViewContentMode.TopLeft
         self.titleLabel?.textAlignment   = .Center
         //        self.contentHorizontalAlignment  = .Left 有效果
         
         self.addTarget(self, action:#selector(btnTouchInside), forControlEvents:UIControlEvents.TouchUpInside)
+
         
-        self.highlighted = true
+        self.upDown = true
         
     }
     

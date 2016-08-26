@@ -6,7 +6,12 @@ use_frameworks!
 
 pod 'SnapKit', '~> 0.19.1'
 pod 'Moya', '~> 6.1.3'
-pod 'RxSwift', '~> 2.2.0'
+
+# pod 'RxSwift', '~> 2.3.1'
+# pod 'RxCocoa', '~> 2.3.1'
+pod 'RxDataSources', '~> 0.8.1'
+
+
 pod 'SwiftyJSON'
 pod 'ObjectMapper'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
@@ -18,6 +23,7 @@ pod 'YYImage'
 pod 'Kingfisher'
 pod 'StyleKit'
 pod 'UIColor_Hex_Swift'
+pod 'VTMagic'
 
 #七牛 sdk
 pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"

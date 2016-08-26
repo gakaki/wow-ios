@@ -83,6 +83,7 @@ class WOWUserController: WOWBaseTableViewController {
 //        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
 //        vc.selectIndex = type
         let vc = WOWOrderListViewController()
+        vc.selectCurrentIndex = type
         navigationController?.pushViewController(vc, animated: true)
     }
     /**
@@ -158,7 +159,7 @@ class WOWUserController: WOWBaseTableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(changeHeaderImage), name:WOWUpdateUserHeaderImageNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
-        
+         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWChangeUserInfoNotificationKey, object:nil)
     }
     
 //MARK:Actions

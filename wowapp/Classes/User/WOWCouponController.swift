@@ -131,10 +131,12 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
 
         if ( r.status == 0) { //不可用
             cell.showData(false)
+            cell.label_is_used.text         = r.statusDesc
         }else {
             cell.showData(true)
+            cell.label_is_used.text         = "未使用"
         }
-        cell.label_is_used.text         = r.statusDesc
+        
 
   
         if entrance == .orderEntrance {

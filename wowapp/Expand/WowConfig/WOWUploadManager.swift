@@ -106,15 +106,3 @@ class WOWUploadManager {
     }
 
 }
-
-
-
-
-
-
-
-//class WOWUploadManager {
-
-//}
-//extension WOWUploadManager{
-//     var buttonBlock: (() -> Void)?

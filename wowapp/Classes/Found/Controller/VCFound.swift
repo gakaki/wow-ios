@@ -14,6 +14,7 @@ class VCFound: VCBaseVCCategoryFound {
     var vo_recommend_product:WOWFoundProductModel?
     var vo_categories        = [WOWCategoryModel]()
     
+    var isFavorite: Bool = false
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -44,6 +45,10 @@ class VCFound: VCBaseVCCategoryFound {
                         let r                             =  JSON(result)
                         strongSelf.vo_products            =  Mapper<WOWFoundProductModel>().mapArray(r["pageNewProductVoList"].arrayObject) ?? [WOWFoundProductModel]()
                         strongSelf.vo_recommend_product   =  Mapper<WOWFoundProductModel>().map( r["recommendProduct"].object )
+                        if (WOWUserManager.loginStatus){
+                            strongSelf.requestIsFavoriteProduct()
+                        }
+                    
                         //还要请求一次分类 在加载数据 以后改成rxswift 2者合并 现在代码真糟糕
                     
                         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_2nd, successClosure: {[weak self] (result) in
@@ -72,6 +77,22 @@ class VCFound: VCBaseVCCategoryFound {
       
     }
     
+    //用户是否喜欢单品
+    func requestIsFavoriteProduct() -> Void {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: vo_recommend_product?.productId ?? 0), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                let favorite = JSON(result)["favorite"].bool
+                strongSelf.isFavorite = favorite ?? false
+                let secction = NSIndexSet(index: 1)
+                strongSelf.tableView.reloadSections(secction, withRowAnimation: .None)
+            }
+        }) {(errorMsg) in
+            
+        }
+        
+    }
+    
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         addObserver()
@@ -88,13 +109,13 @@ class VCFound: VCBaseVCCategoryFound {
     }
     //MARK:Actions
     func exitLogin() {
+        isFavorite = false
         let secction = NSIndexSet(index: 1)
         tableView.reloadSections(secction, withRowAnimation: .None)
     }
     
     func loginSuccess(){
-        let secction = NSIndexSet(index: 1)
-        tableView.reloadSections(secction, withRowAnimation: .None)
+        requestIsFavoriteProduct()
     }
     override func setUI() {
         super.setUI()
@@ -218,6 +239,7 @@ WOWFoundCategoryCellDelegate
             
             if let data  = vo_recommend_product {
                 cell.assign_val(data)
+                cell.btnLike.selected = isFavorite
             }
             
             cell.bringSubviewToFront(cell.product_view)

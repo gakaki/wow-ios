@@ -90,12 +90,7 @@ class WOWFoundRecommendCell: UITableViewCell {
 
         self.product                         = p
         
-        
-        if (WOWUserManager.loginStatus){
-            self.requestIsFavoriteProduct()
-        }else {
-            btnLike.selected = false
-        }
+      
         
         
         render()
@@ -152,19 +147,7 @@ class WOWFoundRecommendCell: UITableViewCell {
 
     }
     
-    //用户是否喜欢单品
-    func requestIsFavoriteProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: self.product?.productId ?? 0), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-                let favorite = JSON(result)["favorite"].bool
-                strongSelf.btnLike.selected = favorite ?? false
-            }
-        }) {(errorMsg) in
-            
-        }
-        
-    }
-    
+   
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
         

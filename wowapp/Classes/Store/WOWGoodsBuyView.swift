@@ -768,7 +768,7 @@ extension WOWGoodsBuyView {
         
         narrowAnimation.beginTime = 0.5
         narrowAnimation.fromValue = NSNumber(float: 0.7)
-        narrowAnimation.duration = 1.0
+        narrowAnimation.duration = 0.5
         narrowAnimation.toValue = NSNumber(float: 0.3)
         
         narrowAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
@@ -776,7 +776,7 @@ extension WOWGoodsBuyView {
         let groups = CAAnimationGroup()
         
         groups.animations = [animation,expandAnimation,narrowAnimation]
-        groups.duration = 1.5
+        groups.duration = 1.0
         groups.removedOnCompletion=false
         groups.fillMode=kCAFillModeForwards
         groups.delegate = self

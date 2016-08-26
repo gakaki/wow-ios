@@ -149,6 +149,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                     //取消订单成功后重新请求下网络刷新列表
                     strongSelf.request()
                     strongSelf.delegate?.orderStatusChange()
+                    NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateOrderListAllNotificationKey, object: nil)
                 }
             }) { (errorMsg) in
                 
@@ -312,6 +313,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                     //确认收货成功后重新请求下网络刷新列表
                     strongSelf.request()
                     strongSelf.delegate?.orderStatusChange()
+                     NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateOrderListAllNotificationKey, object: nil)
                 }
             }) { (errorMsg) in
                 
@@ -408,6 +410,9 @@ extension WOWOrderDetailController{
             if let strongSelf = self {
                 strongSelf.request() // 更新最新状态
                 strongSelf.delegate?.orderStatusChange()
+                 NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateOrderListAllNotificationKey, object: nil)
+                
+                
                 let json = JSON(result)
                 let orderCode = json["orderCode"].string
                 let payAmount = json["payAmount"].double

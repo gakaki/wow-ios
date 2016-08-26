@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+typealias ChangeInfo = (String) ->Void
 enum InfoTextEntrance{
     case NickEntrance()
     case DescEntrance()
@@ -17,6 +17,8 @@ enum InfoTextEntrance{
 class WOWInfoTextController: WOWBaseTableViewController {
     var userInfo:String = ""
     var vcTitle: String?
+    var changeInfotext :ChangeInfo?
+    
     @IBOutlet weak var textField: UITextField!
     var entrance : InfoTextEntrance = InfoTextEntrance.NickEntrance()
     override func viewDidLoad() {
@@ -102,8 +104,9 @@ class WOWInfoTextController: WOWBaseTableViewController {
                 case .JobEntrance:
                 WOWUserManager.userIndustry = info ?? ""
                 }
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWChangeUserInfoNotificationKey, object: nil)
 
+                strongSelf.changeInfotext!(info!)
                 strongSelf.popVC()
             
                 
@@ -113,7 +116,11 @@ class WOWInfoTextController: WOWBaseTableViewController {
             DLog(errorMsg)
         }
     }
-    
+    //闭包变量的Seter方法
+    func setBackMyClosure(tempClosure:ChangeInfo) {
+        self.changeInfotext = tempClosure
+    }
+
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 15
     }

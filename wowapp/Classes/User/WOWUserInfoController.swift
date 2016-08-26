@@ -108,7 +108,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.didReceiveMemoryWarning()
     }
     private func addObserver(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
         
     }
@@ -304,6 +304,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
             toVC.userInfo = WOWUserManager.userIndustry
         default:break
         }
+        toVC.setBackMyClosure {[weak self] (str:String) in
+            
+            self!.loginSuccess()
+        }
+    }
+    deinit{
+        print("释放")
     }
 }
 

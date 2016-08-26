@@ -12,7 +12,7 @@ class WOWOrderListViewController: WOWBaseViewController {
     var entrance = orderDetailEntrance.orderList
     var pageMenu:CAPSPageMenu?
     var controllerArray : [UIViewController] = []
-    
+    var selectCurrentIndex : Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,10 @@ class WOWOrderListViewController: WOWBaseViewController {
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
         pageMenu?.viewBackgroundColor = UIColor.init(hexString: "efeff4")!
         pageMenu?.delegate = self
+        
+//        pageMenu!.currentPageIndex = selectCurrentIndex!
+        pageMenu?.moveToPage(selectCurrentIndex!)
+//        pageMenu!.startingPageForScroll = selectCurrentIndex!
         self.view.addSubview(pageMenu!.view)
 
     }
@@ -87,6 +91,15 @@ class WOWOrderListViewController: WOWBaseViewController {
 
 }
 extension WOWOrderListViewController:CAPSPageMenuDelegate{
+    
+    func willMoveToPage(controller: UIViewController, index: Int) {
+        if selectCurrentIndex == index {// 第一次进列表页 请求数据
+            let currentVC = controller as! WOWOrderController
+            if currentVC.isRequest == false { // 如果未请求，才去请求网络。
+                currentVC.request()
+            }
+        }
+    }
     // 滑动结束 再请求网络
     func didMoveToPage(controller: UIViewController, index: Int){
    

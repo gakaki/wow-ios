@@ -32,6 +32,9 @@ let  WOWToLoginNotificationKey          = "WOWToLoginNotificationKey"
 //登录成功
 let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
 
+//修改信息成功，更新主界面的信息
+let  WOWChangeUserInfoNotificationKey     = "WOWChangeUserInfoNotificationKey"
+
 //登录成功
 let  WOWRefreshFavoritNotificationKey     = "WOWRefreshFavoritNotificationKey"
 
@@ -44,7 +47,8 @@ let WOWUpdateCarBadgeNotificationKey    = "WOWUpdateCarBadgeNotificationKey"
 //更新用户头像之后 更新user home页面的头像
 let WOWUpdateUserHeaderImageNotificationKey  = "WOWUpdateUserHeaderImageNotificationKey"
 
-
+//更新订单状态之后， 更新订单全部列表的信息
+let WOWUpdateOrderListAllNotificationKey  = "WOWUpdateOrderListAllNotificationKey"
 
 
 let WOWEmptyNetWorkText  = "网络错误"

@@ -80,6 +80,9 @@ class WOWProductDetailController: WOWBaseViewController {
          NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWUpdateCarBadgeNotificationKey, object: nil)
     }
     
+    /**
+     购物车数量显示
+     */
     func buyCarCount()  {
         if WOWUserManager.userCarCount <= 0 {
             carEntranceButton.badgeString = ""
@@ -93,7 +96,7 @@ class WOWProductDetailController: WOWBaseViewController {
 
     }
 
-    
+    //初始化数据，商品banner
     private func configData(){
         cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
         cycleView.delegate = self
@@ -163,13 +166,6 @@ class WOWProductDetailController: WOWBaseViewController {
            requestFavoriteProduct()
         }
     }
-    
-    
-    private func goLogin(){
-        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
-        presentViewController(vc, animated: true, completion: nil)
-    }
-    
 
     //MARK:选择规格,有两种视图
     func chooseStyle(entrue: carEntrance) {

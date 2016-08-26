@@ -31,6 +31,14 @@ struct WOWCalPrice {
         return result!
     }
     
+    /**
+     计算商品价格，根据单价与数量计算
+     
+     - parameter prices: 商品的单价数组
+     - parameter counts: 商品的数量
+     
+     - returns: 返回总价钱的字符串 （是带 ¥ 的）
+     */
     static func calTotalPrice(prices:[Double],counts:[Int]) ->String{
         if prices.isEmpty {
             return "¥ 0.00"

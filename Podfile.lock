@@ -46,7 +46,12 @@ PODS:
     - HappyDNS (~> 0.3)
   - Result (1.0.2)
   - RongCloudIMKit (2.6.0)
-  - RxSwift (2.2.0)
+  - RxCocoa (2.6.0):
+    - RxSwift (~> 2.5)
+  - RxDataSources (0.8.1):
+    - RxCocoa (~> 2.2)
+    - RxSwift (~> 2.2)
+  - RxSwift (2.6.0)
   - SnapKit (0.19.1)
   - StyleKit (1.0.0)
   - SVProgressHUD (2.0.3)
@@ -55,6 +60,9 @@ PODS:
   - UICKeyChainStore (2.1.0)
   - UIColor_Hex_Swift (2.1)
   - UMengAnalytics-NO-IDFA (4.0.5)
+  - VTMagic (1.2.4):
+    - VTMagic/Core (= 1.2.4)
+  - VTMagic/Core (1.2.4)
   - WowBase (0.1.0)
   - YYCache (1.0.3)
   - YYImage (1.0.2):
@@ -84,7 +92,7 @@ DEPENDENCIES:
   - PonyFrameworkOnSwift (from `PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec`)
   - Qiniu (from `qiniu-sdk/Qiniu.podspec`)
   - RongCloudIMKit (= 2.6.0)
-  - RxSwift (~> 2.2.0)
+  - RxDataSources (~> 0.8.1)
   - SnapKit (~> 0.19.1)
   - StyleKit
   - SVProgressHUD (~> 2.0.2)
@@ -92,6 +100,7 @@ DEPENDENCIES:
   - SwiftyUserDefaults
   - UIColor_Hex_Swift
   - UMengAnalytics-NO-IDFA
+  - VTMagic
   - WowBase (from `WowBase/WowBase.podspec`)
   - YYImage
   - YYImage/WebP
@@ -130,7 +139,9 @@ SPEC CHECKSUMS:
   Qiniu: 0e92ff0d1b9afbc55275306671284e4ebeb08d03
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RongCloudIMKit: bbfcb34596b25666fb1be470644162142368bcdb
-  RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
+  RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
+  RxDataSources: 4a87345847d66ef84ecc10bdfa189190f3cd6b12
+  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   StyleKit: 7dac3ff9ffec40fec57f9a8582c4ff5a95ca17e8
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
@@ -139,11 +150,12 @@ SPEC CHECKSUMS:
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UIColor_Hex_Swift: e91dc51f6bf252ec7bf74c8704ceedeeb7640c1c
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b
+  VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
   WowBase: 523ccd9bffdfca85097853e3b73902fb4368b24c
   YYCache: 282f35b5b0990833d0b7a06d864a87141a021da2
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: 91a55bdb18df1da10864cac569f3c5d407655c4c
+PODFILE CHECKSUM: ddddc1de15f131e5df9e12193f18a3bb1211e957
 
 COCOAPODS: 1.1.0.beta.1

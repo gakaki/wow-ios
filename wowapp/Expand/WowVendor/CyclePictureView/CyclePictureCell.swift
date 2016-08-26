@@ -22,7 +22,7 @@ class CyclePictureCell: UICollectionViewCell {
                 self.imageView.image = UIImage(named: name)
             case let .Network(urlStr):
 //                self.imageView.kf_setImageWithURL(NSURL(string:urlStr)!, placeholderImage: placeholderImage)
-                self.imageView.set_webimage_url(urlStr)
+                self.imageView.set_webimage_url_base(urlStr, place_holder_name: "placeholder_product")
             }
         }
     }

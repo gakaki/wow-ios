@@ -1,42 +1,47 @@
 
 import UIKit
 import SnapKit
-
+import VTMagic
+import RxSwift
 
 let kAnimationDuration = 0.25
 let kIndicatorViewH: CGFloat = 3     // 首页顶部标签指示条的高度
 let kTitlesViewH: CGFloat = 25          // 顶部标题的高度
 let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度倍
 
-
-
 class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource
 {
     var vo_categories           = [WOWFoundCategoryModel]()
     var top_category_image_view:UIImageView! = UIImageView()
+    var v_bottom : VCVTMagic!
     
-    var cid:String              = "10" {
-        didSet {
-//            self.reset_fetch_params()
-            refresh_view()
-        }
+    //    self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.cid.toInt()! ), successClosure: {[weak self] (result) in
+    //{"asc":1,"currentPage":1,"showCount":10,"sortBy":1,"categoryId":16}
+    var cid                 = Variable<String>("10")
+    var query_asc           = Variable<Int>(1)
+    var query_sortBy        = Variable<Int>(1)
+    var query_showCount     = Variable<Int>(30)
+    
+//    self.reset_fetch_params()
+//    refresh_view()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        request()
+        
+        trigger()
     }
-//
-//    var query_asc:Int           = 1 {
-//        didSet {
-//            self.reset_fetch_params()
-//            refresh_view()
-//        }
-//    }
-//    
-//    var query_sortBy:Int        = 1 {
-//        didSet {
-//            self.reset_fetch_params()
-//            refresh_view()
-//        }
-//    }
-//       var query_showCount:Int     = 10
-    
+    func trigger(){
+       
+        // s,t を結合
+        _ = Observable.combineLatest(cid, query_asc , query_sortBy,query_showCount) {
+            "\($0)\($1)\($2)\($3) "
+            }
+            .subscribe {
+                print($0)
+        }
+        
+        
+    }
     
     @IBOutlet weak var cv: UICollectionView!
     
@@ -50,6 +55,12 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         
         self.edgesForExtendedLayout = .None
         
+        addTopView()
+        addBottomProductView()
+
+    }
+    
+    func addTopView(){
         cv.delegate = self
         cv.dataSource = self
         
@@ -65,20 +76,34 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         layout.sectionInset                 = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         layout.minimumLineSpacing           = 15.0
         cv!.collectionViewLayout            = layout
+    }
+    
+    func addBottomProductView(){
+        
+        v_bottom = VCVTMagic()
+        v_bottom.magicView.navigationColor     = UIColor.whiteColor()
+        v_bottom.magicView.sliderColor         = UIColor.blackColor()
+        v_bottom.magicView.layoutStyle         = .Divide
+        v_bottom.magicView.switchStyle         = .Default
+        
+        v_bottom.magicView.navigationHeight    = 40
+        
+        v_bottom.magicView.dataSource          = self
+        v_bottom.magicView.delegate            = self
+        
+        self.addChildViewController(v_bottom)
+        self.view.addSubview(v_bottom.magicView)
+        
+        v_bottom.magicView.snp_makeConstraints { (make) -> Void in
+            make.width.equalTo(self.view)
+            make.top.equalTo(cv.snp_bottom)
+            make.bottom.equalTo(self.view.bottom)
+            
+        }
 
-        self.addProductPageAndTabBar()
+        
+        v_bottom.magicView.reloadData()
     }
-    
-    func addProductPageAndTabBar(){
-        
-        
-        
-        
-    }
-    
-    
-    
-    
     
     override func request(){
         
@@ -107,10 +132,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     let cell_reuse_id        = "reuse_id"
     let cell_reuse_id_label  = "reuse_id_label"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        request()
-    }
+  
     
 //    
 ////    MARK:选项卡

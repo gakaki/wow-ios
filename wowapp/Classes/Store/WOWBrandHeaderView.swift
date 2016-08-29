@@ -30,13 +30,8 @@ class WOWBrandHeaderView: UICollectionReusableView {
 //        logoImage.set_webimage_url( model.image)
         
         brandNameLabel.text = model.brandEname ?? ""
-        let str = NSMutableAttributedString(string: model.desc ?? "")
-        let style = NSMutableParagraphStyle()
-        style.lineHeightMultiple = 1.5      //设置1.5倍行距
-        style.lineBreakMode = .ByTruncatingTail
-        str.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
-        brandDescLabel.attributedText = str
-
+        brandDescLabel.text = model.desc ?? ""
+        brandDescLabel.setLineHeightAndLineBreak(1.5)
     }
     
     //显示设计师信息
@@ -49,13 +44,8 @@ class WOWBrandHeaderView: UICollectionReusableView {
         logoImage.set_webimage_url( model.designerPhoto )
 
         brandNameLabel.text = model.designerName ?? ""
-        let str = NSMutableAttributedString(string: model.designerDesc ?? "")
-        let style = NSMutableParagraphStyle()
-        style.lineHeightMultiple = 1.5      //设置1.5倍行距
-        style.lineBreakMode = .ByTruncatingTail
-        str.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
-        brandDescLabel.attributedText = str
-        
+        brandDescLabel.text = model.designerDesc ?? ""
+        brandDescLabel.setLineHeightAndLineBreak(1.5)
     }
     
     @IBAction func moreButtonClick(sender: UIButton!) {

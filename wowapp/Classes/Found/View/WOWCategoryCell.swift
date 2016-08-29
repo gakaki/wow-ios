@@ -29,12 +29,8 @@ class WOWCategoryCell: UICollectionViewCell {
     
     func showData(model:WOWProductModel,indexPath:NSIndexPath) {
         pictureImageView.set_webimage_url(model.productImg ?? "")
-        let str = NSMutableAttributedString(string: model.productName ?? "")
-        let style = NSMutableParagraphStyle()
-        style.lineHeightMultiple = 1.5      //设置1.5倍行距
-        style.lineBreakMode = .ByTruncatingTail
-        str.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
-        desLabel.attributedText = str
+        desLabel.text = model.productName ?? ""
+        desLabel.setLineHeightAndLineBreak(1.5)
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         priceLabel.text     = result //千万不用格式化了
         

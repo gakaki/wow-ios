@@ -136,14 +136,8 @@ extension WOWProductSecondDetailController:UITableViewDelegate,UITableViewDataSo
         let model = dataArray[indexPath.row]
         
         cell.productImg.set_webimage_url( model.image! )
-        
-        let descStr = NSMutableAttributedString(string: model.text ?? "")
-        let descStyle = NSMutableParagraphStyle()
-        descStyle.lineHeightMultiple = 1.5      //设置1.5倍行距
-        descStyle.lineBreakMode = .ByTruncatingTail
-        descStr.addAttribute(NSParagraphStyleAttributeName, value: descStyle, range: NSMakeRange(0, descStr.length))
-        cell.imgDescLabel.attributedText = descStr
-
+        cell.imgDescLabel.text = model.text
+        cell.imgDescLabel.setLineHeightAndLineBreak(1.5)
 
         let gesture = UITapGestureRecognizer(target: self, action:#selector(viewTap(_:)))
         

@@ -380,7 +380,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return  170
+        return  160
     }
 
     

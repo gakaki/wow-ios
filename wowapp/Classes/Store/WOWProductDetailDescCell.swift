@@ -52,13 +52,8 @@ class WOWProductDetailDescCell: UITableViewCell {
     func showData(model:WOWProductModel?){
         productModel = model
         brandNameLabel.text = model?.brandCname
-        let str = NSMutableAttributedString(string: model?.sellingPoint ?? "")
-        let style = NSMutableParagraphStyle()
-        style.lineHeightMultiple = 1.5      //设置1.5倍行距
-        style.lineBreakMode = .ByTruncatingTail
-        style.alignment = .Center
-        str.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
-        descLabel.attributedText = str
+        descLabel.text = model?.sellingPoint ?? ""
+        descLabel.setLineHeightAndLineBreak(1.5)
         brandButton.kf_setBackgroundImageWithURL(NSURL(string:model?.brandLogoImg ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
         guard let designerName = model?.designerName where !designerName.isEmpty else{
             designerContainerView.hidden = true

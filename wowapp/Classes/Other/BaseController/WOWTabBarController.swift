@@ -31,22 +31,34 @@ class WOWTabBarController: UITabBarController {
         self.delegate = self;
         let storys = ["Home","Favorite","Found","Brand","User"]
         let images = ["home","Favorite","store","brand","me"]
+        let imagesTitle = ["尖叫","尖叫","尖叫","尖叫","尖叫"]
         var viewControllers = [UIViewController]()
         for index in 0..<storys.count{
             let vc = UIStoryboard.initialViewController(storys[index])
             vc.tabBarItem.image = UIImage(named:images[index])?.imageWithRenderingMode(.AlwaysOriginal)
             vc.tabBarItem.selectedImage = UIImage(named:images[index] + "_selected")?.imageWithRenderingMode(.AlwaysOriginal)
             
-            vc.tabBarItem.imageInsets = UIEdgeInsetsMake(4, 0, -4, 0);
+//            vc.tabBarItem.imageInsets = UIEdgeInsetsMake(4, 0, -4, 0);
             
+            vc.tabBarItem.title = imagesTitle[index]
 
             viewControllers.append(vc)
         }
         self.viewControllers = viewControllers
         WOWTool.lastTabIndex = 0
 //        configBadge()
+        configTabBar()
     }
-    
+    func configTabBar() {
+        let items = self.tabBar.items
+        for item in items! as [UITabBarItem] {
+            let dic = NSDictionary(object: UIColor.yellowColor(),
+                                   forKey: NSForegroundColorAttributeName)
+
+            item.setTitleTextAttributes(dic as? [String : AnyObject],
+                                        forState: UIControlState.Selected)
+        }
+    }
     private func configBadge(){
         WOWBuyCarMananger.updateBadge()
 //        if WOWUserManager.loginStatus { //登录了

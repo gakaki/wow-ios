@@ -27,13 +27,8 @@ class WOWProductDetailPicTextCell: UITableViewCell {
     }
     
     func showData(imgUrl:String?,imgDesc:String?) {
-        let str = NSMutableAttributedString(string: imgDesc ?? "")
-        let style = NSMutableParagraphStyle()
-        style.lineHeightMultiple = 1.5      //设置1.5倍行距
-        style.lineBreakMode = .ByTruncatingTail
-        str.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
-        productTextLabel.attributedText = str
-
+        productTextLabel.text = imgDesc ?? ""
+        productTextLabel.setLineHeightAndLineBreak(1.5)
         if let title = imgDesc where title.isEmpty {
             itemSpacing.constant = 0
         }

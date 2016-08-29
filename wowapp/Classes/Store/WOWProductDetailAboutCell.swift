@@ -52,7 +52,8 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
             cell.pictureImageView.set_webimage_url(url)
             
             cell.desLabel.text       = m.productName
-            cell.priceLabel.text     = String(format: "¥ %.2f",m.sellPrice ?? 0) //千万不用格式化了
+            let result = WOWCalPrice.calTotalPrice([m.sellPrice ?? 0],counts:[1])
+            cell.priceLabel.text     = result //千万不用格式化了
         }
         return cell
     }

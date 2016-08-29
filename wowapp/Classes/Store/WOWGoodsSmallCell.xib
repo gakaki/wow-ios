@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -29,8 +29,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LJT-CF-ioX">
                         <rect key="frame" x="0.0" y="194" width="188" height="69"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch7-KJ-x6p">
-                                <rect key="frame" x="15" y="28" width="158" height="7"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch7-KJ-x6p">
+                                <rect key="frame" x="15" y="17.5" width="158" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="Stm-J0-e3Y"/>
                                 </constraints>
@@ -42,19 +42,28 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Trd-cg-Kla">
-                                <rect key="frame" x="0.0" y="45" width="188" height="0.0"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trd-cg-Kla">
+                                <rect key="frame" x="0.0" y="68.5" width="188" height="0.0"/>
                                 <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="U5A-ot-MPh"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="   " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="157" translatesAutoresizingMaskIntoConstraints="NO" id="kCJ-4c-ZI5">
-                                <rect key="frame" x="15" y="0.0" width="158" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="   " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="157" translatesAutoresizingMaskIntoConstraints="NO" id="kCJ-4c-ZI5">
+                                <rect key="frame" x="15" y="0.0" width="158" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpj-Ns-tSc">
+                                <rect key="frame" x="138" y="33" width="48" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="Pfo-mD-aRT"/>
+                                    <constraint firstAttribute="height" constant="30" id="Vux-fq-jWA"/>
+                                </constraints>
+                                <state key="normal" image="like-gray"/>
+                                <state key="selected" image="like_select"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -65,9 +74,11 @@
                             <constraint firstItem="kCJ-4c-ZI5" firstAttribute="leading" secondItem="LJT-CF-ioX" secondAttribute="leading" constant="15" id="Rhm-bz-6r6"/>
                             <constraint firstItem="Trd-cg-Kla" firstAttribute="leading" secondItem="LJT-CF-ioX" secondAttribute="leading" id="Sf2-iq-F8l"/>
                             <constraint firstItem="Ch7-KJ-x6p" firstAttribute="top" secondItem="kCJ-4c-ZI5" secondAttribute="bottom" constant="3" id="V9d-uT-Geh"/>
+                            <constraint firstAttribute="bottom" secondItem="gpj-Ns-tSc" secondAttribute="bottom" constant="6" id="gbK-TU-oZ2"/>
                             <constraint firstAttribute="bottom" secondItem="Trd-cg-Kla" secondAttribute="bottom" constant="0.5" id="iag-By-lWB"/>
                             <constraint firstAttribute="trailing" secondItem="Trd-cg-Kla" secondAttribute="trailing" id="iqI-ye-hbv"/>
                             <constraint firstAttribute="trailing" secondItem="Ch7-KJ-x6p" secondAttribute="trailing" constant="15" id="lpD-M3-vEH"/>
+                            <constraint firstAttribute="trailing" secondItem="gpj-Ns-tSc" secondAttribute="trailing" constant="2" id="q7S-SH-V2a"/>
                             <constraint firstAttribute="height" constant="74" id="uxj-p5-B1P"/>
                         </constraints>
                         <variation key="default">
@@ -177,4 +188,8 @@
             <point key="canvasLocation" x="1320" y="464.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="like-gray" width="30" height="30"/>
+        <image name="like_select" width="30" height="30"/>
+    </resources>
 </document>

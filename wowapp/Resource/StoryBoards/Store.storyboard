@@ -501,13 +501,14 @@
                                     <outlet property="delegate" destination="WaH-lQ-3xj" id="cHm-qM-CAK"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCT-FQ-sCz">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCT-FQ-sCz">
                                 <rect key="frame" x="234" y="28" width="40" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="J7K-rd-Oxb"/>
                                     <constraint firstAttribute="height" constant="32" id="dYW-ZF-rcU"/>
                                 </constraints>
                                 <state key="normal" image="likeblack"/>
+                                <state key="disabled" image="like-gray"/>
                                 <state key="selected" image="like_select"/>
                                 <connections>
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="O3Y-a0-d1W"/>
@@ -630,6 +631,7 @@
         <image name="icon_like" width="16" height="13"/>
         <image name="icon_like_hightlighted" width="16" height="13"/>
         <image name="icon_share" width="14" height="14"/>
+        <image name="like-gray" width="30" height="30"/>
         <image name="like_select" width="30" height="30"/>
         <image name="like_white" width="30" height="30"/>
         <image name="likeblack" width="30" height="30"/>

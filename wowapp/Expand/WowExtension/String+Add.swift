@@ -18,11 +18,23 @@ extension String{
         }
         return "#"
     }
-    
+    /**
+     返回价格带“¥” 的字符串
+     */
     func get_formted_price() -> String {
         if ( self.length <= 0){
             return ""
         }
         return "¥\(self)"
     }
+    /**
+     返回 前后都加空格 的字符串
+     */
+    func get_formted_Space() -> String {
+        if ( self.length <= 0){
+            return ""
+        }
+        return  "  " + "\(self)" + "   "
+    }
+
 }

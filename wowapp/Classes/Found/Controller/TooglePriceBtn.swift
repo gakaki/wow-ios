@@ -9,18 +9,39 @@ class TooglePriceBtn:UIButton {
             return Int(upDown)
         }
     }
+    
+    var image_is_show:Bool = true{
+        didSet{
+            if image_is_show == true{
+                //显示图片
+                self.imageView?.hidden = false
+            }else{
+                //不显示图片
+                self.imageView?.hidden = true
+
+                self.setImage(nil, forState: UIControlState.Normal)
+                self.setImage(nil, forState: UIControlState.Selected)
+
+                
+            }
+        }
+    }
     //UP TRUE DOWN FALSE
     var upDown:Bool = false {
         didSet{
-            if upDown == true {
-                self.setImage(UIImage(named: "btnPriceStatusUp"), forState: UIControlState.Selected)
-            }else{
-                self.setImage(UIImage(named: "btnPriceStatusDown"), forState: UIControlState.Selected)
+            //有图像的时候在调用 asc 的函数
+            if ( image_is_show == true ){
+                if upDown == true {
+                    self.setImage(UIImage(named: "btnPriceStatusUp"), forState: UIControlState.Selected)
+                }else{
+                    self.setImage(UIImage(named: "btnPriceStatusDown"), forState: UIControlState.Selected)
+                }
+                
+                if let a = self.action {
+                    a(asc: asc) // up 0 down 1
+                }
             }
             
-            if let a = self.action {
-              a(asc: asc) // up 0 down 1
-            }
         }
     }
     
@@ -54,6 +75,7 @@ class TooglePriceBtn:UIButton {
     }
 
     func btnTouchInside(){
+
         if ( self.selected == true){
              self.upDown = !self.upDown
         }
@@ -67,6 +89,7 @@ class TooglePriceBtn:UIButton {
 
         self.setTitle( self.in_title, forState: UIControlState.Normal)
         self.setTitleColor(UIColor.grayColor(), forState: .Normal)
+        
         self.setImage(UIImage(named: "btnPriceStatusNone"), forState: UIControlState.Normal)
         
         self.setTitleColor(UIColor.blackColor(), forState: .Selected)

@@ -31,7 +31,7 @@ class WOWTabBarController: UITabBarController {
         self.delegate = self;
         let storys = ["Home","Favorite","Found","Brand","User"]
         let images = ["home","Favorite","store","brand","me"]
-        let imagesTitle = ["尖叫","尖叫","尖叫","尖叫","尖叫"]
+        let imagesTitle = ["首页","分类","尖叫","喜欢","我"]
         var viewControllers = [UIViewController]()
         for index in 0..<storys.count{
             let vc = UIStoryboard.initialViewController(storys[index])

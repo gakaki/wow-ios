@@ -26,18 +26,19 @@ class WOWOrderDetailNewCell: UITableViewCell {
         orderNewDetailModel = m
         
         let orderProductModel = orderNewDetailModel!.unShipOutOrderItems![indexRow]
-        colorLabel.text = " " + (orderProductModel.color ?? " ") + "   "
+
+        colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
         
         titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
-//        titleImageView.set_webimage_url( orderProductModel.specImg )
 
         let result = WOWCalPrice.calTotalPrice([orderProductModel.sellPrice ?? 0],counts:[1])
         
         priceLabel.text = result
-        goodsNumber.text = "X" + (orderProductModel.productQty)!.toString
-        contentLabel.text = " " + (orderProductModel.specName ?? " ") + "   "
+        goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
+
+        contentLabel.text = orderProductModel.specName?.get_formted_Space()
 
         
         
@@ -45,16 +46,17 @@ class WOWOrderDetailNewCell: UITableViewCell {
     func showPackages(m:WOWNewOrderDetailModel, indexSection:Int, indexRow:Int){
         orderNewDetailModel = m
         let orderProductModel = orderNewDetailModel!.packages![indexSection].orderItems![indexRow]
-        colorLabel.text = " " + (orderProductModel.color ?? " ") + "   "
+
+        colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
-//        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
-        titleImageView.set_webimage_url( orderProductModel.specImg )
 
         
-        priceLabel.text = "¥" + (orderProductModel.sellPrice)!.toString
-        goodsNumber.text = "X" + (orderProductModel.productQty)!.toString
-        contentLabel.text = " " + (orderProductModel.specName ?? " ") + "   "
+        priceLabel.text = (orderProductModel.sellPrice)!.toString.get_formted_price()
+        goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
+
+        contentLabel.text = orderProductModel.specName?.get_formted_Space()
 
 
         

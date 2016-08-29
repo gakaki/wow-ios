@@ -32,7 +32,6 @@
 		0697D19A1D6F03C70061EBD4 /* VCCategoryProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D1991D6F03C70061EBD4 /* VCCategoryProducts.swift */; };
 		0697D19C1D6F11040061EBD4 /* VCMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19B1D6F11040061EBD4 /* VCMe.swift */; };
 		0697D19E1D6F112E0061EBD4 /* UIView+BorderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */; };
-		0697D1A01D7010C50061EBD4 /* VCCategoryVTMagicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19F1D7010C50061EBD4 /* VCCategoryVTMagicDelegate.swift */; };
 		0697D1A21D70130E0061EBD4 /* VCCategoryTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */; };
 		069E094E1D576B3200F8AE8F /* UIImage+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */; };
 		069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094F1D57942C00F8AE8F /* UILabel+Style.swift */; };
@@ -406,7 +405,6 @@
 		0697D1991D6F03C70061EBD4 /* VCCategoryProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategoryProducts.swift; sourceTree = "<group>"; };
 		0697D19B1D6F11040061EBD4 /* VCMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMe.swift; sourceTree = "<group>"; };
 		0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BorderLine.swift"; sourceTree = "<group>"; };
-		0697D19F1D7010C50061EBD4 /* VCCategoryVTMagicDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategoryVTMagicDelegate.swift; sourceTree = "<group>"; };
 		0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategoryTabBar.swift; sourceTree = "<group>"; };
 		069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WebP.swift"; sourceTree = "<group>"; };
 		069E094F1D57942C00F8AE8F /* UILabel+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
@@ -819,7 +817,6 @@
 				063968731D54950B00631BDF /* VCCategory.swift */,
 				06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */,
 				0697D1991D6F03C70061EBD4 /* VCCategoryProducts.swift */,
-				0697D19F1D7010C50061EBD4 /* VCCategoryVTMagicDelegate.swift */,
 				0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */,
 			);
 			path = Controller;
@@ -2040,7 +2037,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2060,7 +2057,6 @@
 				2953F19A1D06A6A2006D7D95 /* WOWFavoriteController.swift in Sources */,
 				29FF26D21CFDA86300DF2A9B /* WOWUserHomeTopView.swift in Sources */,
 				636C34241D585BF500CA4E69 /* WOWDesignerModel.swift in Sources */,
-				0697D1A01D7010C50061EBD4 /* VCCategoryVTMagicDelegate.swift in Sources */,
 				29FF26ED1CFDA86300DF2A9B /* MIBadgeButton.swift in Sources */,
 				632A934C1D49E104003A5966 /* WOWProductDetailView.swift in Sources */,
 				636C33C81D51D13B00CA4E69 /* WOWEditOrderController.swift in Sources */,

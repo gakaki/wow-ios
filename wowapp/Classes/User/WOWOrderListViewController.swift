@@ -93,7 +93,7 @@ class WOWOrderListViewController: WOWBaseViewController {
 extension WOWOrderListViewController:CAPSPageMenuDelegate{
     
     func willMoveToPage(controller: UIViewController, index: Int) {
-        if selectCurrentIndex == index {// 第一次进列表页 请求数据
+        if selectCurrentIndex == index {// 点击不同的列表页  第一次进列表页 请求数据
             let currentVC = controller as! WOWOrderController
             if currentVC.isRequest == false { // 如果未请求，才去请求网络。
                 currentVC.request()

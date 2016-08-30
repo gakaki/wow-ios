@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="351" id="K6H-Gl-pdl" customClass="WOWHomeFormCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K6H-Gl-pdl" id="hrT-wK-i7Y">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="350.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="H3h-wo-f2h">
+                        <rect key="frame" x="0.0" y="91" width="320" height="234"/>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="234" id="5hG-Wd-TPq"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nNp-b0-2ME">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <connections>
+                            <outlet property="dataSource" destination="K6H-Gl-pdl" id="tW6-Rv-YTM"/>
+                            <outlet property="delegate" destination="K6H-Gl-pdl" id="oJc-8G-pUp"/>
+                        </connections>
+                    </collectionView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="感受生活的体温与呼吸" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQP-HU-LnF">
+                        <rect key="frame" x="15" y="22" width="290" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="如果对生活麻木了，那么请你坐下" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yF-Le-TIF">
+                        <rect key="frame" x="15" y="47" width="290" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="5yF-Le-TIF" secondAttribute="trailing" constant="7" id="6E0-SZ-sY2"/>
+                    <constraint firstItem="5yF-Le-TIF" firstAttribute="top" secondItem="oQP-HU-LnF" secondAttribute="bottom" constant="8" id="7wU-7f-93j"/>
+                    <constraint firstAttribute="trailing" secondItem="H3h-wo-f2h" secondAttribute="trailing" id="Cys-Wk-6Dn"/>
+                    <constraint firstItem="5yF-Le-TIF" firstAttribute="top" secondItem="oQP-HU-LnF" secondAttribute="bottom" constant="8" id="GLQ-27-cd4"/>
+                    <constraint firstAttribute="bottom" secondItem="H3h-wo-f2h" secondAttribute="bottom" priority="750" constant="20" id="GUW-Rz-iTI"/>
+                    <constraint firstItem="oQP-HU-LnF" firstAttribute="leading" secondItem="hrT-wK-i7Y" secondAttribute="leadingMargin" constant="7" id="Tin-Zv-pt5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="oQP-HU-LnF" secondAttribute="trailing" constant="7" id="Vbq-E7-uUh"/>
+                    <constraint firstItem="H3h-wo-f2h" firstAttribute="top" secondItem="5yF-Le-TIF" secondAttribute="bottom" constant="19" id="aqr-W6-zDG"/>
+                    <constraint firstItem="oQP-HU-LnF" firstAttribute="top" secondItem="hrT-wK-i7Y" secondAttribute="topMargin" constant="14" id="gFP-c1-ojX"/>
+                    <constraint firstItem="5yF-Le-TIF" firstAttribute="leading" secondItem="hrT-wK-i7Y" secondAttribute="leadingMargin" constant="7" id="jAU-ME-acz"/>
+                    <constraint firstItem="H3h-wo-f2h" firstAttribute="top" secondItem="hrT-wK-i7Y" secondAttribute="top" constant="91" id="pVa-OO-an8"/>
+                    <constraint firstItem="H3h-wo-f2h" firstAttribute="leading" secondItem="hrT-wK-i7Y" secondAttribute="leading" id="zmb-go-znt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionView" destination="H3h-wo-f2h" id="3yg-23-eix"/>
+            </connections>
+            <point key="canvasLocation" x="182" y="255.5"/>
+        </tableViewCell>
+    </objects>
+</document>

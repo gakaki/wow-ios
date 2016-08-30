@@ -10,24 +10,30 @@ import UIKit
 
 class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
+//    let WOWProductDetailAboutCell = String( WOWProductDetailAboutCell )
+
     var dataArr = [WOWCarouselBanners]()    //商品列表数组
     var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
+    
+    let bottomListArray : Int = 5
+    
     @IBOutlet var tableView: UITableView!
-//    var hidingNavBarManager: HidingNavigationBarManager?
+//    var hidingNavBarManager: HidingNavigationBarManager?  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-        self.hideNavigationBar = true
+//        self.hideNavigationBar = true
+      
         request()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
+//        hidingNavBarManager?.viewWillAppear(animated)
+         self.navigationController?.setNavigationBarHidden(false, animated: true)
         //FIXME:为了让动画出现 所以多reload一次咯
 //        tableView.reloadData()
-//        hidingNavBarManager?.viewWillAppear(animated)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -54,6 +60,7 @@ class WOWController: WOWBaseViewController {
         return a
     }()
 
+
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
         view.cyclePictureView.delegate = self
@@ -65,44 +72,38 @@ class WOWController: WOWBaseViewController {
     }()
 
     
+    
 //MARK:Private Method
     override func setUI() {
         
         tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
+ 
+        tableView.registerNib(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
+        tableView.registerNib(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
+        
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
 
         //        configBarItem()
         tableView.mj_header = mj_header
-        tableView.tableHeaderView = banner
-//        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+
         self.tableView.backgroundColor = GrayColorLevel6
 
-        
         configBarItem()
         
     }
 
    
     private func configBarItem(){
-        /*菜单暂时不需要
-        makeCustomerImageNavigationItem("menu", left: true) {[weak self] () -> () in
-            if let strongSelf = self{
-                let sideVC = strongSelf.appdelegate.sideController
-                if sideVC.showing{//显示中
-                    sideVC.hideSide()
-                }else{//隐藏中
-                    sideVC.showSide()
-                }
-            }
+        
+        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+//            if let strongSelf = self{
+//                strongSelf.toVCCart()
+                print("111")
+//            }
         }
-         */
-        makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
-            if let strongSelf = self{
-                strongSelf.toVCCart()
-            }
-        }
+        configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }
     
 
@@ -240,7 +241,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        return dataArr.count ?? 0
+        return (dataArr.count ?? 0) + bottomListArray.getParityCellNumber()
+//        return 11
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -248,33 +250,100 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
   
-            let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
-            cell.delegate       = self
-            let model           = dataArr[indexPath.section]
-            cell.showData(model)
+        guard indexPath.section < dataArr.count  else {
+            let cell                = tableView.dequeueReusableCellWithIdentifier("HomeBottomCell", forIndexPath: indexPath) as! HomeBottomCell
+            cell.indexPath = indexPath
+            
+            if bottomListArray.isOdd {
+                if indexPath.section + 1 == (dataArr.count) + bottomListArray.getParityCellNumber() { // 如果奇数 满足则 覆盖第二个视图
+                    
+                    cell.twoLb.hidden = false
+                    
+                }else{
+                    
+                    cell.twoLb.hidden = true
+                    
+                }
+            }else{
+                 cell.twoLb.hidden = true
+            }
+            cell.oneBtn.tag = (indexPath.section  - dataArr.count + 0) * 2
+            cell.twoBtn.tag = ((indexPath.section  - dataArr.count + 1) * 2) - 1
+            
             return cell
-   
+            
+        }
+
+            if  indexPath.section%2 == 0 {
+                let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
+                cell.delegate       = self
+                let model           = dataArr[indexPath.section]
+                cell.showData(model)
+                return cell
+            }else{
+
+                //                let cell                = tableView.dequeueReusableCellWithIdentifier("WOWHomeFormCell", forIndexPath: indexPath) as! WOWHomeFormCell
+                let cellID = "WOWHomeFormCell"
+                var cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+                if cell == nil {
+                    cell = WOWHomeFormCell(style: .Default, reuseIdentifier:cellID)
+                }
+                
+//                cell.collectionView.setContentOffset(CGPointMake(0, 0), animated: false)
+                
+//                else{
+//                    while cell?.contentView.subviews.last != nil {
+//                        cell?.contentView.subviews.last?.removeFromSuperview()
+//                    }
+//                }
+                return cell!
+                
+            }
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
-        return 15.h
-    }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+//        return 15.h
         return CGFloat.min
     }
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+        if section == dataArr.count {
+            return 110.h
+        }else{
+            return CGFloat.min
+        }
 
+    }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == dataArr.count {
+            let view = UIView()
+            view.frame = CGRectMake(0, 0, MGScreenWidth, 110.h)
+            view.backgroundColor = GrayColorLevel6
+            let lb = UILabel()
+            lb.frame = CGRectMake(0, 0, MGScreenWidth, 50.h)
+            lb.center = view.center
+            lb.text = "---------为你推荐---------"
+            lb.textAlignment = .Center
+            lb.font = UIFont.systemFontOfSize(18)
+            lb.textColor = UIColor.darkGrayColor()
+            view.addSubview(lb)
+            return view
+        }else{
+            return nil
+        }
+
+       
+    }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       
-        let model = dataArr[indexPath.section]
-        goController(model)
+//       
+//        let model = dataArr[indexPath.section]
+//        goController(model)
     }
     
     func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
 //        hidingNavBarManager?.shouldScrollToTop()
         return true
     }
-
-
+   
     
 }
 
@@ -306,4 +375,3 @@ extension WOWController: CyclePictureViewDelegate {
 //        
 //    }
 //}
-

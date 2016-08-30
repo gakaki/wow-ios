@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import JSONCodable
+//import JSONCodable
 import IQKeyboardManagerSwift
 enum AddressEntrance {
     case addAddress

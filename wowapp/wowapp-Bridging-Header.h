@@ -17,13 +17,18 @@
 
 @import EZSwiftExtensions;
 
-@import HidingNavigationBar;
+//@import HidingNavigationBar;
 @import YYImage;
 @import YYCache;
 @import YYWebImage;
 @import Kingfisher;
 @import FlexboxLayout;
 @import WowBase;
+
+
+
+#import "JPPlayground.h"
+
 //@import MLeaksFinder;
 //@import QiniuTokenIOS;
 
@@ -40,11 +45,14 @@
 #import <RongIMKit/RongIMKit.h>
 #import "RCDCustomerServiceViewController.h"
 
+
 //友盟
 #import "UMSocial.h"
 #import <UMMobClick/MobClick.h>
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
+
+
 
 
 

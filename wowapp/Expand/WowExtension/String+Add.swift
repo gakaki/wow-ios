@@ -34,7 +34,16 @@ extension String{
         if ( self.length <= 0){
             return ""
         }
-        return  "  " + "\(self)" + "   "
+        return  " " + "\(self)" + "    "
+    }
+    /**
+     返回数量带“X” 的字符串
+     */
+    func get_formted_X() -> String {
+        if ( self.length <= 0){
+            return ""
+        }
+        return  "X\(self)"
     }
 
 }

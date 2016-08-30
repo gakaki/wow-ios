@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */; };
-		060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060869721D49EB74008FB61D /* ModelVoSld.swift */; };
 		0608F8391D6CBE2B00F18373 /* WowControllerSepratorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0608F8381D6CBE2B00F18373 /* WowControllerSepratorCell.swift */; };
 		06108A011D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */; };
 		06108A031D6BFA5E00CA58B3 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */; };
@@ -33,6 +32,16 @@
 		0697D19C1D6F11040061EBD4 /* VCMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19B1D6F11040061EBD4 /* VCMe.swift */; };
 		0697D19E1D6F112E0061EBD4 /* UIView+BorderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */; };
 		0697D1A21D70130E0061EBD4 /* VCCategoryTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */; };
+		069922301D75324F00579C51 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0699222F1D75324F00579C51 /* JavaScriptCore.framework */; };
+		069923551D7544B100579C51 /* JPPlayground.m in Sources */ = {isa = PBXBuildFile; fileRef = 069923471D7544B100579C51 /* JPPlayground.m */; };
+		069923561D7544B100579C51 /* JPKeyCommands.m in Sources */ = {isa = PBXBuildFile; fileRef = 0699234A1D7544B100579C51 /* JPKeyCommands.m */; };
+		069923571D7544B100579C51 /* SGDirWatchdog.m in Sources */ = {isa = PBXBuildFile; fileRef = 0699234C1D7544B100579C51 /* SGDirWatchdog.m */; };
+		069923581D7544B100579C51 /* JPDevErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0699234F1D7544B100579C51 /* JPDevErrorView.m */; };
+		069923591D7544B100579C51 /* JPDevMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 069923511D7544B100579C51 /* JPDevMenu.m */; };
+		0699235A1D7544B100579C51 /* JPDevTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069923531D7544B100579C51 /* JPDevTipView.m */; };
+		0699235B1D7544B100579C51 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 069923541D7544B100579C51 /* README.md */; };
+		0699235E1D75508C00579C51 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = 0699235D1D75508C00579C51 /* demo.js */; };
+		069923671D755A6800579C51 /* JSPatchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069923661D755A6800579C51 /* JSPatchHelper.swift */; };
 		069E094E1D576B3200F8AE8F /* UIImage+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */; };
 		069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094F1D57942C00F8AE8F /* UILabel+Style.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
@@ -378,7 +387,6 @@
 
 /* Begin PBXFileReference section */
 		0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayGroupBy.swift; sourceTree = "<group>"; };
-		060869721D49EB74008FB61D /* ModelVoSld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVoSld.swift; sourceTree = "<group>"; };
 		0608F8381D6CBE2B00F18373 /* WowControllerSepratorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowControllerSepratorCell.swift; sourceTree = "<group>"; };
 		06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVoSldObjectMapper.swift; sourceTree = "<group>"; };
 		06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
@@ -389,7 +397,6 @@
 		0639686F1D54601500631BDF /* IPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		063968731D54950B00631BDF /* VCCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategory.swift; sourceTree = "<group>"; };
 		06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObjectMapper+Transform.swift"; sourceTree = "<group>"; };
-		06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONNeverDie.framework; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
 		068B60B21D4F3DD5001AD778 /* VCFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCFound.swift; sourceTree = "<group>"; };
 		068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWFoundWeeklyNewCell.xib; sourceTree = "<group>"; };
@@ -404,6 +411,22 @@
 		0697D19B1D6F11040061EBD4 /* VCMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMe.swift; sourceTree = "<group>"; };
 		0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BorderLine.swift"; sourceTree = "<group>"; };
 		0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategoryTabBar.swift; sourceTree = "<group>"; };
+		0699222F1D75324F00579C51 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		069923461D7544B100579C51 /* JPPlayground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPPlayground.h; sourceTree = "<group>"; };
+		069923471D7544B100579C51 /* JPPlayground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPPlayground.m; sourceTree = "<group>"; };
+		069923491D7544B100579C51 /* JPKeyCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPKeyCommands.h; sourceTree = "<group>"; };
+		0699234A1D7544B100579C51 /* JPKeyCommands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPKeyCommands.m; sourceTree = "<group>"; };
+		0699234B1D7544B100579C51 /* SGDirWatchdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDirWatchdog.h; sourceTree = "<group>"; };
+		0699234C1D7544B100579C51 /* SGDirWatchdog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGDirWatchdog.m; sourceTree = "<group>"; };
+		0699234E1D7544B100579C51 /* JPDevErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPDevErrorView.h; sourceTree = "<group>"; };
+		0699234F1D7544B100579C51 /* JPDevErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPDevErrorView.m; sourceTree = "<group>"; };
+		069923501D7544B100579C51 /* JPDevMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPDevMenu.h; sourceTree = "<group>"; };
+		069923511D7544B100579C51 /* JPDevMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPDevMenu.m; sourceTree = "<group>"; };
+		069923521D7544B100579C51 /* JPDevTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPDevTipView.h; sourceTree = "<group>"; };
+		069923531D7544B100579C51 /* JPDevTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPDevTipView.m; sourceTree = "<group>"; };
+		069923541D7544B100579C51 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0699235D1D75508C00579C51 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
+		069923661D755A6800579C51 /* JSPatchHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSPatchHelper.swift; sourceTree = "<group>"; };
 		069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WebP.swift"; sourceTree = "<group>"; };
 		069E094F1D57942C00F8AE8F /* UILabel+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
@@ -762,6 +785,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069922301D75324F00579C51 /* JavaScriptCore.framework in Frameworks */,
 				29FF273D1CFDB5EC00DF2A9B /* libz.tbd in Frameworks */,
 				29FF273B1CFDB5E600DF2A9B /* libstdc++.tbd in Frameworks */,
 				29FF27391CFDB5E000DF2A9B /* CoreTelephony.framework in Frameworks */,
@@ -870,6 +894,58 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		069923451D7544B100579C51 /* JPPlaygroundTool */ = {
+			isa = PBXGroup;
+			children = (
+				069923461D7544B100579C51 /* JPPlayground.h */,
+				069923471D7544B100579C51 /* JPPlayground.m */,
+				069923481D7544B100579C51 /* JPPlaygroundModule */,
+				0699234D1D7544B100579C51 /* JPPlaygroundView */,
+				069923541D7544B100579C51 /* README.md */,
+			);
+			path = JPPlaygroundTool;
+			sourceTree = "<group>";
+		};
+		069923481D7544B100579C51 /* JPPlaygroundModule */ = {
+			isa = PBXGroup;
+			children = (
+				069923491D7544B100579C51 /* JPKeyCommands.h */,
+				0699234A1D7544B100579C51 /* JPKeyCommands.m */,
+				0699234B1D7544B100579C51 /* SGDirWatchdog.h */,
+				0699234C1D7544B100579C51 /* SGDirWatchdog.m */,
+			);
+			path = JPPlaygroundModule;
+			sourceTree = "<group>";
+		};
+		0699234D1D7544B100579C51 /* JPPlaygroundView */ = {
+			isa = PBXGroup;
+			children = (
+				0699234E1D7544B100579C51 /* JPDevErrorView.h */,
+				0699234F1D7544B100579C51 /* JPDevErrorView.m */,
+				069923501D7544B100579C51 /* JPDevMenu.h */,
+				069923511D7544B100579C51 /* JPDevMenu.m */,
+				069923521D7544B100579C51 /* JPDevTipView.h */,
+				069923531D7544B100579C51 /* JPDevTipView.m */,
+			);
+			path = JPPlaygroundView;
+			sourceTree = "<group>";
+		};
+		0699235C1D754FCA00579C51 /* JSPatchCode */ = {
+			isa = PBXGroup;
+			children = (
+				0699235D1D75508C00579C51 /* demo.js */,
+			);
+			path = JSPatchCode;
+			sourceTree = "<group>";
+		};
+		069923651D755A5E00579C51 /* BaseJSPatch */ = {
+			isa = PBXGroup;
+			children = (
+				069923661D755A6800579C51 /* JSPatchHelper.swift */,
+			);
+			path = BaseJSPatch;
 			sourceTree = "<group>";
 		};
 		06DCF8191D37C41B00039F8A /* Model */ = {
@@ -1031,6 +1107,7 @@
 		29FF256A1CFDA86300DF2A9B /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				069923651D755A5E00579C51 /* BaseJSPatch */,
 				0633527C1D65404D0026177E /* BaseUI */,
 				29FF256B1CFDA86300DF2A9B /* BaseController */,
 				29FF25721CFDA86300DF2A9B /* BaseDatasource */,
@@ -1192,8 +1269,8 @@
 		29FF25E41CFDA86300DF2A9B /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
+				069923451D7544B100579C51 /* JPPlaygroundTool */,
 				63C42DC01D646B0400879FEB /* PhotoBrowser */,
-				06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */,
 				06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */,
 				0639686D1D545FE900631BDF /* hex-kit.swift */,
 				632A93421D488DCC003A5966 /* CAPSPageMenu */,
@@ -1383,6 +1460,7 @@
 		29FF262D1CFDA86300DF2A9B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				0699235C1D754FCA00579C51 /* JSPatchCode */,
 				06FED4431D4634A600D7B068 /* city.json */,
 				29FF262F1CFDA86300DF2A9B /* Assets.xcassets */,
 				29FF26301CFDA86300DF2A9B /* intro.gif */,
@@ -1550,7 +1628,6 @@
 			children = (
 				06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */,
 				06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */,
-				060869721D49EB74008FB61D /* ModelVoSld.swift */,
 				29FF25B31CFDA86300DF2A9B /* WOWAddressListModel.swift */,
 				29FF25B51CFDA86300DF2A9B /* WOWFavoriteListModel.swift */,
 				29FF25C01CFDA86300DF2A9B /* WOWOrderListModel.swift */,
@@ -1784,6 +1861,7 @@
 		EF468D690CFDA424F86FC10D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0699222F1D75324F00579C51 /* JavaScriptCore.framework */,
 				29FF273C1CFDB5EC00DF2A9B /* libz.tbd */,
 				29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */,
 				29FF27381CFDB5E000DF2A9B /* CoreTelephony.framework */,
@@ -1965,6 +2043,7 @@
 				29FF26F71CFDA86300DF2A9B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				632A93501D49E31D003A5966 /* WOWProductDetailCell.xib in Resources */,
 				29DD40EC1D018C07002507EC /* WOWProductDetailAboutCell.xib in Resources */,
+				0699235E1D75508C00579C51 /* demo.js in Resources */,
 				29FF264D1CFDA86300DF2A9B /* WOWTipsCell.xib in Resources */,
 				29FF26EB1CFDA86300DF2A9B /* Info.plist in Resources */,
 				29FF27081CFDA86300DF2A9B /* Assets.xcassets in Resources */,
@@ -2121,6 +2200,7 @@
 				638849FB1D61B1E900FCCFCC /* WOWCouponCell.swift in Sources */,
 				29FF269C1CFDA86300DF2A9B /* WOWGoodsController.swift in Sources */,
 				63C42DCA1D646B0400879FEB /* UIViewExtension.swift in Sources */,
+				069923581D7544B100579C51 /* JPDevErrorView.m in Sources */,
 				068B60BB1D4F41B1001AD778 /* WOWFoundCategoryCell.swift in Sources */,
 				068B60BD1D4F41BC001AD778 /* WOWFoundRecommendCell.swift in Sources */,
 				29FF264C1CFDA86300DF2A9B /* WOWTipsCell.swift in Sources */,
@@ -2140,15 +2220,16 @@
 				636C33DB1D52EA1F00CA4E69 /* WOWOrderFreightCell.swift in Sources */,
 				29FF26D51CFDA86300DF2A9B /* WOWUserModel.swift in Sources */,
 				29FF26611CFDA86300DF2A9B /* WOWProductModel.swift in Sources */,
+				0699235B1D7544B100579C51 /* README.md in Sources */,
 				29FF26A81CFDA86300DF2A9B /* WOWSearchResultController.swift in Sources */,
 				29FF26601CFDA86300DF2A9B /* WOWMenuTopView.swift in Sources */,
 				0697D1981D6EFB960061EBD4 /* VCVTMagic.swift in Sources */,
 				29FF26501CFDA86300DF2A9B /* WOWValue2Cell.swift in Sources */,
 				29FF26941CFDA86300DF2A9B /* WOWBrandModel.swift in Sources */,
 				29FF26821CFDA86300DF2A9B /* WOWBaseStyleCell.swift in Sources */,
+				069923591D7544B100579C51 /* JPDevMenu.m in Sources */,
 				0633527E1D6540560026177E /* WowLikeBtn.swift in Sources */,
 				29FF26851CFDA86300DF2A9B /* WOWCheckSelectView.swift in Sources */,
-				060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */,
 				06108A031D6BFA5E00CA58B3 /* Stopwatch.swift in Sources */,
 				29FF26A51CFDA86300DF2A9B /* WOWGoodsTypeCell.swift in Sources */,
 				29FF26BD1CFDA86300DF2A9B /* WOWMeSocietyController.swift in Sources */,
@@ -2174,6 +2255,7 @@
 				29FF266D1CFDA86300DF2A9B /* WOWSenceHelper.swift in Sources */,
 				29FF26D61CFDA86300DF2A9B /* WOWUserTopView.swift in Sources */,
 				29FF26E11CFDA86300DF2A9B /* UIApplication+Add.swift in Sources */,
+				069923561D7544B100579C51 /* JPKeyCommands.m in Sources */,
 				638849F81D61B06500FCCFCC /* WOWCouponController.swift in Sources */,
 				29FF265A1CFDA86300DF2A9B /* WOWLikeListCell.swift in Sources */,
 				29FF26721CFDA86300DF2A9B /* WOWSubArtCell.swift in Sources */,
@@ -2219,8 +2301,10 @@
 				29FF26C61CFDA86300DF2A9B /* WOWOrderTransCell.swift in Sources */,
 				06FB94B71D64102C00554871 /* ModelTopic.swift in Sources */,
 				636C33DE1D5314F200CA4E69 /* WOWEditOrderModel.swift in Sources */,
+				069923551D7544B100579C51 /* JPPlayground.m in Sources */,
 				292CBA0A1CFE867D00248C88 /* WOWRegistInfoSecondController.swift in Sources */,
 				29FF26D81CFDA86300DF2A9B /* WOWConfig.swift in Sources */,
+				069923671D755A6800579C51 /* JSPatchHelper.swift in Sources */,
 				0633527B1D6435970026177E /* VCBaseNavCart.swift in Sources */,
 				29FF26E01CFDA86300DF2A9B /* String+Add.swift in Sources */,
 				29FF26C21CFDA86300DF2A9B /* WOWOrderDetailController.swift in Sources */,
@@ -2263,6 +2347,7 @@
 				29FF26981CFDA86300DF2A9B /* WOWGoodsBigCell.swift in Sources */,
 				636C33CB1D51D90300CA4E69 /* WOWOrderCell.swift in Sources */,
 				63C42DC91D646B0400879FEB /* SimpleHUD.swift in Sources */,
+				069923571D7544B100579C51 /* SGDirWatchdog.m in Sources */,
 				2D6B02821D589622003D21C1 /* WOWOrderDetailCostCell.swift in Sources */,
 				29FF26471CFDA86300DF2A9B /* WOWBuyCarNormalCell.swift in Sources */,
 				06108A011D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift in Sources */,
@@ -2273,6 +2358,7 @@
 				29FF26E41CFDA86300DF2A9B /* WOWRequestApi.swift in Sources */,
 				292CBA081CFE85B000248C88 /* WOWRegistInfoFirstController.swift in Sources */,
 				063968701D54601500631BDF /* IPManager.swift in Sources */,
+				0699235A1D7544B100579C51 /* JPDevTipView.m in Sources */,
 				068B60B31D4F3DD5001AD778 /* VCFound.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

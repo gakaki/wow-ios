@@ -72,7 +72,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOP-D1-4WL">
                                 <rect key="frame" x="0.0" y="0.0" width="159" height="220"/>
                                 <connections>
-                                    <action selector="clickOneBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iYW-sJ-cDn"/>
+                                    <action selector="clickOneBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="O8l-oV-U16"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -165,12 +165,20 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yP7-tK-paf">
                                 <rect key="frame" x="0.0" y="0.0" width="159" height="220"/>
                                 <connections>
-                                    <action selector="clickTwoBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Hdv-Ny-KSv"/>
+                                    <action selector="clickTwoBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="plv-DM-JmD"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC1-bw-FXV">
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="278"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="lC1-bw-FXV" secondAttribute="bottom" id="1bC-Cr-NQG"/>
                             <constraint firstItem="WH3-ye-0AX" firstAttribute="trailing" secondItem="q5n-g9-amI" secondAttribute="trailingMargin" id="4fA-WT-Eey"/>
                             <constraint firstItem="dVW-fZ-oE6" firstAttribute="top" secondItem="q5n-g9-amI" secondAttribute="top" constant="1" id="4ml-Or-4GA"/>
                             <constraint firstItem="kkE-dz-1jw" firstAttribute="top" secondItem="WH3-ye-0AX" secondAttribute="bottom" constant="8" id="7JY-r4-Ukm"/>
@@ -184,10 +192,13 @@
                             <constraint firstAttribute="height" constant="278" id="V8q-C8-5sv"/>
                             <constraint firstAttribute="bottom" secondItem="kkE-dz-1jw" secondAttribute="bottom" id="W3g-2p-qck"/>
                             <constraint firstItem="sG1-Ct-LZV" firstAttribute="firstBaseline" secondItem="9pA-Sb-rpU" secondAttribute="firstBaseline" id="XpC-dB-P5G"/>
+                            <constraint firstItem="lC1-bw-FXV" firstAttribute="top" secondItem="q5n-g9-amI" secondAttribute="top" id="Y68-ma-JN1"/>
                             <constraint firstItem="6ux-Gr-EIm" firstAttribute="top" secondItem="dVW-fZ-oE6" secondAttribute="bottom" constant="16" id="br6-2m-fzK"/>
+                            <constraint firstItem="lC1-bw-FXV" firstAttribute="leading" secondItem="q5n-g9-amI" secondAttribute="leading" id="c4h-C5-IYP"/>
                             <constraint firstItem="6ux-Gr-EIm" firstAttribute="leading" secondItem="sG1-Ct-LZV" secondAttribute="leading" id="dxf-Di-0ms"/>
                             <constraint firstItem="sG1-Ct-LZV" firstAttribute="baseline" secondItem="9pA-Sb-rpU" secondAttribute="baseline" id="esI-rV-Udt"/>
                             <constraint firstAttribute="trailing" secondItem="dVW-fZ-oE6" secondAttribute="trailing" id="hdd-rT-LF3"/>
+                            <constraint firstAttribute="trailing" secondItem="lC1-bw-FXV" secondAttribute="trailing" id="iwa-sg-AgC"/>
                             <constraint firstAttribute="trailing" secondItem="yP7-tK-paf" secondAttribute="trailing" constant="1" id="jjU-G9-aq1"/>
                             <constraint firstAttribute="trailing" secondItem="kkE-dz-1jw" secondAttribute="trailing" id="kiq-fi-6du"/>
                             <constraint firstAttribute="trailing" secondItem="6ux-Gr-EIm" secondAttribute="trailing" constant="15" id="lAb-eS-x8y"/>
@@ -218,7 +229,12 @@
                     <constraint firstItem="Jwb-us-tnA" firstAttribute="width" secondItem="q5n-g9-amI" secondAttribute="width" constant="-1" id="nuy-wM-17R"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="226" y="212.5"/>
+            <connections>
+                <outlet property="oneBtn" destination="DOP-D1-4WL" id="Tne-eL-8cW"/>
+                <outlet property="twoBtn" destination="yP7-tK-paf" id="tMX-aM-z8D"/>
+                <outlet property="twoLb" destination="lC1-bw-FXV" id="0EA-6X-KjI"/>
+            </connections>
+            <point key="canvasLocation" x="11" y="530.5"/>
         </tableViewCell>
     </objects>
     <resources>

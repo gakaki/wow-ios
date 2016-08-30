@@ -19,10 +19,12 @@ class WOWHomeFormCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.registerNib(UINib.nibName(String(WOWHomeFormCollectionCell)), forCellWithReuseIdentifier: "WOWHomeFormCollectionCell")
+         self.resetSeparators()
+        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
         
          collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
-        
+//        collectionView.contentOffset = CGPointMake(0, 0)
+//        collectionView.setContentOffset(CGPointMake(0, 0), animated: false)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         
@@ -62,7 +64,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
 //        return headView
 //    }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWHomeFormCollectionCell", forIndexPath: indexPath) as! WOWHomeFormCollectionCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
         //FIX 测试数据
         cell.pictureImageView.image = UIImage(named: "4")
         let model = dataArr?[indexPath.item]
@@ -79,7 +81,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWHomeFormCollectionCell.itemWidth,WOWHomeFormCollectionCell.itemWidth + 75)
+        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 75)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {

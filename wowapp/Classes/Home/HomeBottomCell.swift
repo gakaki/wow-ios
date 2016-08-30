@@ -11,18 +11,28 @@ import UIKit
 class HomeBottomCell: UITableViewCell {
     
     var indexPath:NSIndexPath!
+    var currentIndexPath : Int = 0
+       @IBOutlet weak var oneBtn: UIButton!
+       @IBOutlet weak var twoBtn: UIButton!
+        @IBOutlet weak var twoLb: UILabel!
     
     @IBAction func clickOneBtn(sender: AnyObject) {
-        print("-----\(indexPath.section)")
-        print("你点击了第一个Item,tag : \(sender.tag + (indexPath.section%2 == 0 ? (indexPath.section) : (indexPath.section + 1)))")
+        print("==\(sender.tag)")
+     
+//        print("你点击了第一个Item,tag : \((sender.tag + currentIndexPath.getParityCellNumber())*2)")
     }
     @IBAction func clickTwoBtn(sender: AnyObject) {
-         print("------\(indexPath.section)")
-         print("你点击了第二个Item,tag : \(sender.tag + (indexPath.section%2 == 0 ? (indexPath.section) : (indexPath.section + 1)))")
+         print("==\(sender.tag)")
+//         print("你点击了第二个Item,tag : \((sender.tag + currentIndexPath.getParityCellNumber())*2)")
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        if let indexPath = indexPath {
+//              currentIndexPath = indexPath.section - 10
+//        }
+        
+      
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -10,7 +10,6 @@ import UIKit
 
 class WOWProductDetailDescCell: UITableViewCell {
 
-    @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var brandButton: UIButton!
     @IBOutlet weak var brandNameLabel: UILabel!
     @IBOutlet weak var designerButton: UIButton!
@@ -52,8 +51,6 @@ class WOWProductDetailDescCell: UITableViewCell {
     func showData(model:WOWProductModel?){
         productModel = model
         brandNameLabel.text = model?.brandCname
-        descLabel.text = model?.sellingPoint ?? ""
-        descLabel.setLineHeightAndLineBreak(1.5)
         brandButton.kf_setBackgroundImageWithURL(NSURL(string:model?.brandLogoImg ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
         guard let designerName = model?.designerName where !designerName.isEmpty else{
             designerContainerView.hidden = true

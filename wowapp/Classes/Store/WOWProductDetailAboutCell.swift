@@ -66,17 +66,17 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
         return 15
     }
     //第一个和最后一个cell居中显示
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        let itemCount = self.collectionView(collectionView, numberOfItemsInSection: section)
-        
-        let firstIndexPath = NSIndexPath(forItem: 0, inSection: section)
-        let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: firstIndexPath)
-        
-        let lastIndexPath = NSIndexPath(forItem: itemCount - 1, inSection: section)
-        let lastSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: lastIndexPath)
-        
-        return UIEdgeInsetsMake(0, (collectionView.bounds.size.width - firstSize.width) / 2,
-                                0, (collectionView.bounds.size.width - lastSize.width) / 2)
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+//        let itemCount = self.collectionView(collectionView, numberOfItemsInSection: section)
+//        
+//        let firstIndexPath = NSIndexPath(forItem: 0, inSection: section)
+//        let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: firstIndexPath)
+//        
+//        let lastIndexPath = NSIndexPath(forItem: itemCount - 1, inSection: section)
+//        let lastSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: lastIndexPath)
+//        
+//        return UIEdgeInsetsMake(0, (collectionView.bounds.size.width - firstSize.width) / 2,
+//                                0, (collectionView.bounds.size.width - lastSize.width) / 2)
+//    }
 
 }

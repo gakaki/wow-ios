@@ -15,7 +15,7 @@ class WOWController: WOWBaseViewController {
     var dataArr = [WOWCarouselBanners]()    //商品列表数组
     var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
     @IBOutlet var tableView: UITableView!
-    var hidingNavBarManager: HidingNavigationBarManager?
+//    var hidingNavBarManager: HidingNavigationBarManager?  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
@@ -24,8 +24,8 @@ class WOWController: WOWBaseViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-        hidingNavBarManager?.viewWillAppear(animated)
+        super.viewWillAppear(animated)
+//        hidingNavBarManager?.viewWillAppear(animated)
 //        self.hideNavigationBar = false
          self.navigationController?.setNavigationBarHidden(false, animated: true)
         //FIXME:为了让动画出现 所以多reload一次咯
@@ -38,13 +38,13 @@ class WOWController: WOWBaseViewController {
     }
     
     override func viewWillDisappear(animated: Bool) {
-//        super.viewWillDisappear(animated)
-        hidingNavBarManager?.viewWillDisappear(animated)
+        super.viewWillDisappear(animated)
+//        hidingNavBarManager?.viewWillDisappear(animated)
     }
     
     override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-        hidingNavBarManager?.viewDidLayoutSubviews()
+        super.viewDidLayoutSubviews()
+//        hidingNavBarManager?.viewDidLayoutSubviews()
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,11 +57,6 @@ class WOWController: WOWBaseViewController {
         return a
     }()
 
-    lazy var bannerFoorter:WOWFoorter = {
-        let view = NSBundle.mainBundle().loadNibNamed(String(WOWFoorter), owner: self, options: nil).last as! WOWFoorter
-
-        return view
-    }()
 
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner

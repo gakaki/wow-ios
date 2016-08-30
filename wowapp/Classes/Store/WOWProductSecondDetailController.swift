@@ -35,11 +35,11 @@ class WOWProductSecondDetailController: WOWBaseViewController {
         request()
     }
     //MARK:lazy
-    lazy var headView:WOWProductDetailView = {
-        let view = NSBundle.mainBundle().loadNibNamed(String(WOWProductDetailView), owner: self, options: nil).last as! WOWProductDetailView
-
-        return view
-    }()
+//    lazy var headView:WOWProductDetailView = {
+//        let view = NSBundle.mainBundle().loadNibNamed(String(WOWProductDetailView), owner: self, options: nil).last as! WOWProductDetailView
+//
+//        return view
+//    }()
     
     //MARK:Private Method
     override func setUI() {
@@ -55,9 +55,9 @@ class WOWProductSecondDetailController: WOWBaseViewController {
         tableView.backgroundColor = DefaultBackColor
         tableView.estimatedRowHeight = 200
         tableView.mj_header = mj_header
-        headView.showDataa(productModel)
-        headView.size = CGSize(width: MGScreenWidth, height: 88 + headView.productDescLabel.getEstimatedHeight())
-        tableView.tableHeaderView = headView
+//        headView.showDataa(productModel)
+//        headView.size = CGSize(width: MGScreenWidth, height: 88 + headView.productDescLabel.getEstimatedHeight())
+//        tableView.tableHeaderView = headView
     }
     
     func setPhoto() -> [PhotoModel] {

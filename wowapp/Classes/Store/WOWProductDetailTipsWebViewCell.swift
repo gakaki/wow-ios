@@ -26,16 +26,11 @@ class WOWProductDetailTipsWebViewCell: UITableViewCell,UIWebViewDelegate {
         super.setSelected(selected, animated: animated)
         
         
-        telButton.addBorder(width: 1, color:UIColor.blackColor())
         //        customerButton.addBorder(width: 1, color:UIColor.blackColor())
     }
     
-    @IBAction func callClick(sender: UIButton) {
-        WOWTool.callPhone()
-    }
     
-    //    @IBAction func customerServiceClick(sender: UIButton) {
-    //        DLog("在线客服")
-    //    }
+    
+
     
 }

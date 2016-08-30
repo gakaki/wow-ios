@@ -20,7 +20,10 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
     
-    
+    //是否展开参数
+    var isOpenParam: Bool = false
+    //是否展开温馨提示
+    var isOpenTips: Bool = false
     private var shareProductImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
         let image = UIImageView()
@@ -32,7 +35,20 @@ class WOWProductDetailController: WOWBaseViewController {
         v.buyView.delegate = self
         return v
     }()
+    lazy var productDescView:WOWProductDescView = {
+        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductDescView), owner: self, options: nil).last as! WOWProductDescView
+        return v
+    }()
+    lazy var paramView:WOWProductHeaderView = {
+        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductHeaderView), owner: self, options: nil).last as! WOWProductHeaderView
+        return v
+    }()
     
+    lazy var tipsView:WOWProductHeaderView = {
+        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductHeaderView), owner: self, options: nil).last as! WOWProductHeaderView
+        v.lineView.hidden = false
+        return v
+    }()
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -195,7 +211,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.productModel?.productId = strongSelf.productId
                 strongSelf.configData()
-                strongSelf.numberSections = 4
+                strongSelf.numberSections = 7
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }

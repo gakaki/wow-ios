@@ -7,16 +7,13 @@ use_frameworks!
 pod 'SnapKit', '~> 0.19.1'
 pod 'Moya', '~> 6.1.3'
 
-# pod 'RxSwift', '~> 2.3.1'
-# pod 'RxCocoa', '~> 2.3.1'
-pod 'RxDataSources', '~> 0.8.1'
-
+pod "JSPatch"
+pod "JSPatch/Extensions"
+pod "JSPatch/Loader"
 
 pod 'SwiftyJSON'
 pod 'ObjectMapper'
 pod 'SVProgressHUD', '~> 2.0.2' #提示框
-#pod 'MonkeyKing', '~> 0.9.2'
-pod 'JSONCodable'
 pod 'YYWebImage'
 pod 'YYImage/WebP'
 pod 'YYImage'
@@ -24,6 +21,7 @@ pod 'Kingfisher'
 pod 'StyleKit'
 pod 'UIColor_Hex_Swift'
 pod 'VTMagic'
+pod 'Hashids-Swift'			#短id生成
 
 #七牛 sdk
 pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"
@@ -34,16 +32,13 @@ pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
 pod 'EZSwiftExtensions', '~> 1.2.3' #通用的拓展库
-pod 'HidingNavigationBar', '~> 0.3.0'
 pod 'IQKeyboardManagerSwift'
+#pod 'HidingNavigationBar', '~> 0.3.0'
 
 
 #Ping++支付
 pod 'Pingpp/Alipay',:path => "pingpp-ios/Pingpp.podspec"
 pod 'Pingpp/Wx',:path => "pingpp-ios/Pingpp.podspec"
-
-#LeanCloud
-#pod 'AVOSCloud'               # 数据存储、短信、云引target :wowapp do #实例工程
 
 ## ShareSDK主模块(必须)
 #pod 'ShareSDK3'
@@ -59,10 +54,6 @@ pod 'Pingpp/Wx',:path => "pingpp-ios/Pingpp.podspec"
 #pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 
 
-#LeanCloud
-#pod 'AVOSCloud'             # 数据存储、短信、云引擎调用等基础服务模块
-pod 'Hashids-Swift'			#短id生成
-#pod 'AwaitKit', '~> 1.0.1'	#对付该死的多重network请求
 pod 'FCUUID'
 pod 'SwiftyUserDefaults'
 

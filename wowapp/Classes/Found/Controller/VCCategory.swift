@@ -81,13 +81,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     func addBottomProductView(){
         
         v_bottom = VCVTMagic()
-        v_bottom.magicView.navigationColor     = UIColor.whiteColor()
-        v_bottom.magicView.sliderColor         = UIColor.blackColor()
-        v_bottom.magicView.layoutStyle         = .Divide
-        v_bottom.magicView.switchStyle         = .Default
-        
-        v_bottom.magicView.navigationHeight    = 40
-        
+
         v_bottom.magicView.dataSource          = self
         v_bottom.magicView.delegate            = self
         

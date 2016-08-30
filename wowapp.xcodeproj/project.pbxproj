@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */; };
-		060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060869721D49EB74008FB61D /* ModelVoSld.swift */; };
 		0608F8391D6CBE2B00F18373 /* WowControllerSepratorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0608F8381D6CBE2B00F18373 /* WowControllerSepratorCell.swift */; };
 		06108A011D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */; };
 		06108A031D6BFA5E00CA58B3 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */; };
@@ -33,6 +32,7 @@
 		0697D19C1D6F11040061EBD4 /* VCMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19B1D6F11040061EBD4 /* VCMe.swift */; };
 		0697D19E1D6F112E0061EBD4 /* UIView+BorderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */; };
 		0697D1A21D70130E0061EBD4 /* VCCategoryTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */; };
+		069922301D75324F00579C51 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0699222F1D75324F00579C51 /* JavaScriptCore.framework */; };
 		069E094E1D576B3200F8AE8F /* UIImage+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */; };
 		069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094F1D57942C00F8AE8F /* UILabel+Style.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
@@ -378,7 +378,6 @@
 
 /* Begin PBXFileReference section */
 		0608696E1D49C81E008FB61D /* ArrayGroupBy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayGroupBy.swift; sourceTree = "<group>"; };
-		060869721D49EB74008FB61D /* ModelVoSld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVoSld.swift; sourceTree = "<group>"; };
 		0608F8381D6CBE2B00F18373 /* WowControllerSepratorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowControllerSepratorCell.swift; sourceTree = "<group>"; };
 		06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVoSldObjectMapper.swift; sourceTree = "<group>"; };
 		06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
@@ -389,7 +388,6 @@
 		0639686F1D54601500631BDF /* IPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		063968731D54950B00631BDF /* VCCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategory.swift; sourceTree = "<group>"; };
 		06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObjectMapper+Transform.swift"; sourceTree = "<group>"; };
-		06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONNeverDie.framework; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
 		068B60B21D4F3DD5001AD778 /* VCFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCFound.swift; sourceTree = "<group>"; };
 		068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWFoundWeeklyNewCell.xib; sourceTree = "<group>"; };
@@ -404,6 +402,7 @@
 		0697D19B1D6F11040061EBD4 /* VCMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMe.swift; sourceTree = "<group>"; };
 		0697D19D1D6F112E0061EBD4 /* UIView+BorderLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BorderLine.swift"; sourceTree = "<group>"; };
 		0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategoryTabBar.swift; sourceTree = "<group>"; };
+		0699222F1D75324F00579C51 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WebP.swift"; sourceTree = "<group>"; };
 		069E094F1D57942C00F8AE8F /* UILabel+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
@@ -762,6 +761,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069922301D75324F00579C51 /* JavaScriptCore.framework in Frameworks */,
 				29FF273D1CFDB5EC00DF2A9B /* libz.tbd in Frameworks */,
 				29FF273B1CFDB5E600DF2A9B /* libstdc++.tbd in Frameworks */,
 				29FF27391CFDB5E000DF2A9B /* CoreTelephony.framework in Frameworks */,
@@ -1193,7 +1193,6 @@
 			isa = PBXGroup;
 			children = (
 				63C42DC01D646B0400879FEB /* PhotoBrowser */,
-				06568A8A1D5861F1008D2B1A /* JSONNeverDie.framework */,
 				06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */,
 				0639686D1D545FE900631BDF /* hex-kit.swift */,
 				632A93421D488DCC003A5966 /* CAPSPageMenu */,
@@ -1550,7 +1549,6 @@
 			children = (
 				06108A021D6BFA5E00CA58B3 /* Stopwatch.swift */,
 				06108A001D6BF9F000CA58B3 /* ModelVoSldObjectMapper.swift */,
-				060869721D49EB74008FB61D /* ModelVoSld.swift */,
 				29FF25B31CFDA86300DF2A9B /* WOWAddressListModel.swift */,
 				29FF25B51CFDA86300DF2A9B /* WOWFavoriteListModel.swift */,
 				29FF25C01CFDA86300DF2A9B /* WOWOrderListModel.swift */,
@@ -1784,6 +1782,7 @@
 		EF468D690CFDA424F86FC10D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0699222F1D75324F00579C51 /* JavaScriptCore.framework */,
 				29FF273C1CFDB5EC00DF2A9B /* libz.tbd */,
 				29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */,
 				29FF27381CFDB5E000DF2A9B /* CoreTelephony.framework */,
@@ -2149,7 +2148,6 @@
 				29FF26821CFDA86300DF2A9B /* WOWBaseStyleCell.swift in Sources */,
 				0633527E1D6540560026177E /* WowLikeBtn.swift in Sources */,
 				29FF26851CFDA86300DF2A9B /* WOWCheckSelectView.swift in Sources */,
-				060869731D49EB74008FB61D /* ModelVoSld.swift in Sources */,
 				06108A031D6BFA5E00CA58B3 /* Stopwatch.swift in Sources */,
 				29FF26A51CFDA86300DF2A9B /* WOWGoodsTypeCell.swift in Sources */,
 				29FF26BD1CFDA86300DF2A9B /* WOWMeSocietyController.swift in Sources */,

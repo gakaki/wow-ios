@@ -10,6 +10,7 @@ import UIKit
 //import MonkeyKing
 import IQKeyboardManagerSwift
 import YYWebImage
+import JSPatch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame:UIScreen.mainScreen().bounds)
+        
+        
         IQKeyboardManager.sharedManager().enable = true
         //初始化外观
         //com.wowdsgn.Wow
@@ -36,12 +39,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         asyncLoad()
+        let stopwatch = Stopwatch()
+        jspatch_init()
+        print("jspatch elapsed time: \(stopwatch.elapsedTimeString())")
+
         return true
     }
  
+    
+    func jspatch_init(){
+        
+//        JSPatch.startWithAppKey("df0431d2643f2f41")
+//        JSPatch.setupCallback { (type, data, error) in
+//            print(type)
+//            print(data)
+//        }
+//        
+//        #if DEBUG
+//            JSPatch.setupDevelopment()
+//            JSPatch
+//        
+//        #else
+//
+//        #endif
+//        JSPatch.sync()
+    }
+    
     func asyncLoad(){
-        
-        
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { [unowned self] in
             CityDataManager.data
         }

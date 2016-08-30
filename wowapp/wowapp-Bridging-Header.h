@@ -17,13 +17,14 @@
 
 @import EZSwiftExtensions;
 
-@import HidingNavigationBar;
+//@import HidingNavigationBar;
 @import YYImage;
 @import YYCache;
 @import YYWebImage;
 @import Kingfisher;
 @import FlexboxLayout;
 @import WowBase;
+
 //@import MLeaksFinder;
 //@import QiniuTokenIOS;
 
@@ -39,6 +40,7 @@
 //融云
 #import <RongIMKit/RongIMKit.h>
 #import "RCDCustomerServiceViewController.h"
+
 
 //友盟
 #import "UMSocial.h"

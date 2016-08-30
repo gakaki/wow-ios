@@ -35,35 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         configRootVC()
     
-        
         window?.makeKeyAndVisible()
         
         asyncLoad()
-        let stopwatch = Stopwatch()
-        jspatch_init()
-        print("jspatch elapsed time: \(stopwatch.elapsedTimeString())")
-
+        
+        JSPatchHelper.jspatch_playground()
+//        JSPatchHelper.jspatch_init()
+ 
         return true
     }
  
-    
-    func jspatch_init(){
-        
-//        JSPatch.startWithAppKey("df0431d2643f2f41")
-//        JSPatch.setupCallback { (type, data, error) in
-//            print(type)
-//            print(data)
-//        }
-//        
-//        #if DEBUG
-//            JSPatch.setupDevelopment()
-//            JSPatch
-//        
-//        #else
-//
-//        #endif
-//        JSPatch.sync()
-    }
     
     func asyncLoad(){
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { [unowned self] in

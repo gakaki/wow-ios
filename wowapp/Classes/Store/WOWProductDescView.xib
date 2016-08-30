@@ -20,8 +20,8 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8P-pi-a38">
-                    <rect key="frame" x="15" y="55" width="345" height="10"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8P-pi-a38">
+                    <rect key="frame" x="15" y="50" width="345" height="15"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -34,7 +34,7 @@
                 <constraint firstAttribute="bottom" secondItem="K8P-pi-a38" secondAttribute="bottom" constant="9" id="YTS-Oo-JXl"/>
                 <constraint firstItem="ZP9-Nd-FVk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="bDo-Yv-77E"/>
                 <constraint firstItem="ZP9-Nd-FVk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="hK0-KQ-EOH"/>
-                <constraint firstItem="K8P-pi-a38" firstAttribute="top" secondItem="ZP9-Nd-FVk" secondAttribute="bottom" constant="13" id="la0-pC-GHb"/>
+                <constraint firstItem="K8P-pi-a38" firstAttribute="top" secondItem="ZP9-Nd-FVk" secondAttribute="bottom" constant="8" id="la0-pC-GHb"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

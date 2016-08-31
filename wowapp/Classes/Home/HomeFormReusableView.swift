@@ -14,5 +14,8 @@ class HomeFormReusableView: UICollectionReusableView {
         super.awakeFromNib()
         // Initialization code
     }
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
 }

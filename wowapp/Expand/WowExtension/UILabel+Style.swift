@@ -22,4 +22,14 @@ extension UILabel {
 
         }
     }
+    
+    class func initLable(title:String , titleColor:UIColor ,textAlignment:NSTextAlignment ,font:CGFloat) -> UILabel {
+        let label = UILabel()
+        label.text = title
+        label.textColor = titleColor
+        label.textAlignment = textAlignment
+        label.font = UIFont.systemFontOfSize(font)
+        return label
+    }
+
 }

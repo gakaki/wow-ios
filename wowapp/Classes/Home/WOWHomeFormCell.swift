@@ -9,27 +9,40 @@
 import UIKit
 
 class WOWHomeFormCell: UITableViewCell {
-
+    
+    var scrollViewOffsetDic = Dictionary<Int, CGFloat>() //空字典
+    
     @IBOutlet weak var collectionView: UICollectionView!
-      let headIdenString = "HomeFormReusableView"
+    
+    let headIdenString = "HomeFormReusableView"
+    
     var dataArr:[WOWProductModel]?{
         didSet{
             collectionView.reloadData()
         }
     }
+    // 当前那一组 （哪一组下的collectionView）
+    var indexPathSection : Int? = 0{
+        didSet{
+            // 给collectionView 的 tag 值 方便记录不同collectionView 的偏移量
+            collectionView.tag = indexPathSection ?? 0
+            // 回滚collectionView本应偏移的位置
+            collectionView.setContentOffset(CGPointMake(self.scrollViewOffsetDic[collectionView.tag] ?? 0, 0), animated: false)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-         self.resetSeparators()
+        self.resetSeparators()
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
         
-         collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
-//        collectionView.contentOffset = CGPointMake(0, 0)
-//        collectionView.setContentOffset(CGPointMake(0, 0), animated: false)
+        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
+        
+        
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         
     }
-    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -45,24 +58,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
         //        return dataArr?.count ?? 0
         return 5
     }
-//    //返回HeadView的宽高
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
-//        
-//        return CGSize(width: zj_width, height: 50.h)
-//    }
-//    
-//    //返回自定义HeadView或者FootView，我这里以headview为例
-//    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView{
-//        var headView = UICollectionReusableView()
-//        if kind == UICollectionElementKindSectionHeader
-//        {
-//            headView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headIdenString, forIndexPath: indexPath)
-////            headView.backgroundColor = UIColor.redColor()
-//            
-//            
-//        }
-//        return headView
-//    }
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
         //FIX 测试数据
@@ -101,11 +97,23 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
                                 0, (collectionView.bounds.size.width - lastSize.width) / 2)
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
-       
+        
         if scrollView.mj_offsetX > 810.0 && scrollView.mj_offsetX < 812.0{
-            print("跳转详情页") // 待处理细致逻辑
+            //            print("跳转详情页") // 待处理细致逻辑
         }
+        guard scrollView is UICollectionView else{
+            
+            return
+        }
+        
+        // 记录当前collectionView的偏移量
+        let horizontalOffset = scrollView.contentOffset.x
+        
+        self.scrollViewOffsetDic[scrollView.tag] = horizontalOffset
+        
+        
     }
-
+    
+    
     
 }

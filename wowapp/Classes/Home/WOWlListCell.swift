@@ -87,7 +87,10 @@ class WOWlListCell: UITableViewCell {
         }
     }
     
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
     func startAnimate() {
         UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse,.AllowUserInteraction], animations: {
             self.productBtns.forEach({ (view) in

@@ -4,10 +4,11 @@ import SnapKit
 
 class VCFound: VCBaseVCCategoryFound {
     
+    let cellID0              = String( WOWFoundCategoryNewCell )
     let cellID1              = String( WOWFoundWeeklyNewCell )
     let cellID2              = String( WOWFoundRecommendCell )
     let cellID3              = String( WOWFoundCategoryCell )
-
+    
     let cell3_height         = CGFloat(MGScreenWidth / 3 - 10 )*4
     
     var vo_products          = [WOWFoundProductModel]()

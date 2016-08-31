@@ -16,23 +16,24 @@ class HomeBottomCell: UITableViewCell {
        @IBOutlet weak var twoBtn: UIButton!
         @IBOutlet weak var twoLb: UILabel!
     
+    @IBOutlet weak var priceLbOne: UILabel!
+    @IBOutlet weak var priceLbTwo: UILabel!
+    
+    
     @IBAction func clickOneBtn(sender: AnyObject) {
         print("==\(sender.tag)")
      
-//        print("你点击了第一个Item,tag : \((sender.tag + currentIndexPath.getParityCellNumber())*2)")
     }
     @IBAction func clickTwoBtn(sender: AnyObject) {
          print("==\(sender.tag)")
-//         print("你点击了第二个Item,tag : \((sender.tag + currentIndexPath.getParityCellNumber())*2)")
+
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-//        if let indexPath = indexPath {
-//              currentIndexPath = indexPath.section - 10
-//        }
+
         
-      
+        priceLbOne.strokeWithText("¥1666.00", str2: "¥1600.00", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+        priceLbTwo.strokeWithText("¥1666.00", str2: "¥1600.00", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
     }
     override func prepareForReuse() {
         super.prepareForReuse()

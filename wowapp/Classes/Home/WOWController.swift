@@ -25,8 +25,8 @@ class WOWController: WOWBaseViewController {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         //        self.hideNavigationBar = true
+        requestQueue()
         
-        request()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -126,8 +126,41 @@ class WOWController: WOWBaseViewController {
         toVCCategory("11",cname: "厨房")
         
     }
-    
     //MARK:Private Networkr
+    func requestQueue() {
+        var queue: dispatch_queue_t = dispatch_get_main_queue()// 主线程
+        
+        queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)// 后台执行
+        // 分组执行
+        
+        let group = dispatch_group_create()
+        
+        queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)// 默认优先级执行
+        
+            //异步执行队列任务
+            
+            dispatch_group_async(group, queue, { () -> Void in
+
+                self.request()
+            })
+            
+            dispatch_group_async(group, queue, { () -> Void in
+            
+                self.requestBottomList()
+            })
+
+        
+        // 分组队列执行完毕后执行
+        
+        dispatch_group_notify(group, queue) { () -> Void in
+            
+            print("dispatch_group_notify")
+            
+        }
+    }
+    
+    
+
     override func request() {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Home_Banners, successClosure: {[weak self] (result) in
             if let strongSelf = self{
@@ -159,7 +192,9 @@ class WOWController: WOWBaseViewController {
             }
         }
     }
-    
+    func requestBottomList()  {
+        print("load...")
+    }
     
     //点击跳转
     func goController(model: WOWCarouselBanners) {
@@ -251,7 +286,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+       
         guard indexPath.section < dataArr.count  else {
             let cell                = tableView.dequeueReusableCellWithIdentifier("HomeBottomCell", forIndexPath: indexPath) as! HomeBottomCell
             
@@ -272,7 +307,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             }
             cell.oneBtn.tag = (indexPath.section  - dataArr.count + 0) * 2
             cell.twoBtn.tag = ((indexPath.section  - dataArr.count + 1) * 2) - 1
-            
+             cell.selectionStyle = .None
             return cell
             
         }
@@ -283,12 +318,14 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             cell.delegate       = self
             let model           = dataArr[indexPath.section]
             cell.showData(model)
+             cell.selectionStyle = .None
             return cell
         }else{
             
             let cell                = tableView.dequeueReusableCellWithIdentifier("WOWHomeFormCell", forIndexPath: indexPath) as! WOWHomeFormCell
             
             cell.indexPathSection = indexPath.section
+            cell.selectionStyle = .None
             return cell
             
         }

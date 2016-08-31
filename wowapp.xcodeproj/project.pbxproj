@@ -42,6 +42,7 @@
 		0699235B1D7544B100579C51 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 069923541D7544B100579C51 /* README.md */; };
 		0699235E1D75508C00579C51 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = 0699235D1D75508C00579C51 /* demo.js */; };
 		069923671D755A6800579C51 /* JSPatchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069923661D755A6800579C51 /* JSPatchHelper.swift */; };
+		0699236B1D757A0500579C51 /* WOWFoundCategoryNewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699236A1D757A0500579C51 /* WOWFoundCategoryNewCell.swift */; };
 		069E094E1D576B3200F8AE8F /* UIImage+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */; };
 		069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069E094F1D57942C00F8AE8F /* UILabel+Style.swift */; };
 		069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069F230D1D3F7E860061CFAA /* Brand.storyboard */; };
@@ -434,6 +435,7 @@
 		069923541D7544B100579C51 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0699235D1D75508C00579C51 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		069923661D755A6800579C51 /* JSPatchHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSPatchHelper.swift; sourceTree = "<group>"; };
+		0699236A1D757A0500579C51 /* WOWFoundCategoryNewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWFoundCategoryNewCell.swift; sourceTree = "<group>"; };
 		069E094D1D576B3200F8AE8F /* UIImage+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WebP.swift"; sourceTree = "<group>"; };
 		069E094F1D57942C00F8AE8F /* UILabel+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		069F230D1D3F7E860061CFAA /* Brand.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Brand.storyboard; sourceTree = "<group>"; };
@@ -874,6 +876,7 @@
 				062A91E61D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift */,
 				63884A051D64150F00FCCFCC /* WOWCategoryCell.swift */,
 				63884A061D64150F00FCCFCC /* WOWCategoryCell.xib */,
+				0699236A1D757A0500579C51 /* WOWFoundCategoryNewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2133,7 +2136,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2268,6 +2271,7 @@
 				29FF26F41CFDA86300DF2A9B /* TagView.swift in Sources */,
 				29FF26A71CFDA86300DF2A9B /* WOWProductStyleModel.swift in Sources */,
 				29FF26661CFDA86300DF2A9B /* WOWSearchCell.swift in Sources */,
+				0699236B1D757A0500579C51 /* WOWFoundCategoryNewCell.swift in Sources */,
 				29FF26D41CFDA86300DF2A9B /* WOWUserInfoController.swift in Sources */,
 				29FF26F01CFDA86300DF2A9B /* TagCellLayout.swift in Sources */,
 				29FF26B71CFDA86300DF2A9B /* WOWAddressController.swift in Sources */,

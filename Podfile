@@ -34,6 +34,7 @@ pod 'DZNEmptyDataSet'
 pod 'EZSwiftExtensions', '~> 1.2.3' #通用的拓展库
 pod 'IQKeyboardManagerSwift'
 #pod 'HidingNavigationBar', '~> 0.3.0'
+pod 'XZMRefresh'            #横向刷新
 
 
 #Ping++支付

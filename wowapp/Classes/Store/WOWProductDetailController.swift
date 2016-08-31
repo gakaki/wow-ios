@@ -14,7 +14,7 @@ class WOWProductDetailController: WOWBaseViewController {
     var productModel                    : WOWProductModel?
     var productSpecModel                : WOWProductSpecModel?
     private(set) var numberSections = 0
-    
+    let pageSize = 10
     //UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var likeButton: UIButton!
@@ -30,26 +30,7 @@ class WOWProductDetailController: WOWBaseViewController {
         return image
     }()
     
-    lazy var backView:WOWBuyBackView = {
-        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.w,self.view.h))
-        v.buyView.delegate = self
-        return v
-    }()
-    lazy var productDescView:WOWProductDescView = {
-        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductDescView), owner: self, options: nil).last as! WOWProductDescView
-        return v
-    }()
-    lazy var paramView:WOWProductHeaderView = {
-        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductHeaderView), owner: self, options: nil).last as! WOWProductHeaderView
-        return v
-    }()
-    
-    lazy var tipsView:WOWProductHeaderView = {
-        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductHeaderView), owner: self, options: nil).last as! WOWProductHeaderView
-        v.lineView.hidden = false
-        return v
-    }()
-    override func viewDidAppear(animated: Bool) {
+        override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
     }
@@ -76,6 +57,27 @@ class WOWProductDetailController: WOWBaseViewController {
         v.currentDotColor = UIColor.blackColor()
         v.otherDotColor   = UIColor(hexString: "#000000", alpha: 0.2)!
         v.timeInterval = 3
+        return v
+    }()
+    lazy var backView:WOWBuyBackView = {
+        let v = WOWBuyBackView(frame:CGRectMake(0,0,self.view.w,self.view.h))
+        v.buyView.delegate = self
+        return v
+    }()
+    //产品描述
+    lazy var productDescView:WOWProductDescView = {
+        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductDescView), owner: self, options: nil).last as! WOWProductDescView
+        return v
+    }()
+    //产品参数
+    lazy var paramView:WOWProductHeaderView = {
+        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductHeaderView), owner: self, options: nil).last as! WOWProductHeaderView
+        return v
+    }()
+    //温馨提示
+    lazy var tipsView:WOWProductHeaderView = {
+        let v = NSBundle.mainBundle().loadNibNamed(String(WOWProductHeaderView), owner: self, options: nil).last as! WOWProductHeaderView
+        v.lineView.hidden = false
         return v
     }()
 
@@ -114,6 +116,12 @@ class WOWProductDetailController: WOWBaseViewController {
 
     //初始化数据，商品banner
     private func configData(){
+        //详情页共分为7组数据
+        numberSections = 7
+        //产品描述说明
+        productDescView.productDescLabel.text = productModel?.sellingPoint
+        productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)
+        //banner轮播
         cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
         cycleView.delegate = self
         placeImageView.kf_setImageWithURL(NSURL(string:productModel?.primaryImgs![0] ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
@@ -210,8 +218,9 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.productModel?.productId = strongSelf.productId
+                //初始化详情页数据
                 strongSelf.configData()
-                strongSelf.numberSections = 7
+                
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }
@@ -269,6 +278,8 @@ class WOWProductDetailController: WOWBaseViewController {
         
         }
     }
+    
+   
     
     
 }

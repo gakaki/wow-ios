@@ -24,6 +24,7 @@
 @import Kingfisher;
 @import FlexboxLayout;
 @import WowBase;
+@import XZMRefresh;
 
 
 

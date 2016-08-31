@@ -13,8 +13,10 @@ class WOWProductDetailController: WOWBaseViewController {
     var productId                       : Int?
     var productModel                    : WOWProductModel?
     var productSpecModel                : WOWProductSpecModel?
+    var aboutProductArray               = [WOWProductModel]()
+    
     private(set) var numberSections = 0
-    let pageSize = 10
+    let pageSize = 5
     //UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var likeButton: UIButton!
@@ -116,10 +118,16 @@ class WOWProductDetailController: WOWBaseViewController {
 
     //初始化数据，商品banner
     private func configData(){
-        //详情页共分为7组数据
-        numberSections = 7
+        //如果相关商品有数据显示。如果没有数据则不显示
+        if aboutProductArray.count > 0 {
+            //详情页共分为7组数据
+            numberSections = 7
+        }else {
+            numberSections = 6
+        }
+        
         //产品描述说明
-        productDescView.productDescLabel.text = productModel?.sellingPoint
+        productDescView.productDescLabel.text = productModel?.detailDescription
         productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)
         //banner轮播
         cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
@@ -130,6 +138,7 @@ class WOWProductDetailController: WOWBaseViewController {
             }
         }
     }
+
     
 //MARK:Actions
     //MARK:更新角标
@@ -218,11 +227,9 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(result)
                 strongSelf.productModel?.productId = strongSelf.productId
-                //初始化详情页数据
-                strongSelf.configData()
                 
-                strongSelf.tableView.reloadData()
-                strongSelf.endRefresh()
+                strongSelf.requestAboutProduct()
+                
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
@@ -279,6 +286,32 @@ class WOWProductDetailController: WOWBaseViewController {
         }
     }
     
+    // 相关商品信息
+    func requestAboutProduct()  {
+        let params = ["brandId": productModel?.brandId ?? 0, "currentPage": pageIndex,"pageSize":pageSize, "excludes": [productModel?.productId ?? 0]]
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(params: params as? [String : AnyObject]), successClosure: {[weak self] (result) in
+            
+            if let strongSelf = self {
+                let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                
+                if let array = arr{
+                    strongSelf.aboutProductArray = array
+                    
+                }
+                //初始化详情页数据
+                strongSelf.configData()
+                strongSelf.tableView.reloadData()
+                strongSelf.endRefresh()
+            }
+
+            
+        }) {[weak self] (errorMsg) in
+            
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+    }
    
     
     
@@ -337,9 +370,9 @@ extension WOWProductDetailController : CyclePictureViewDelegate {
     func cyclePictureView(cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         func setPhoto() -> [PhotoModel] {
             var photos: [PhotoModel] = []
-            for (index, photoURLString) in (productModel?.primaryImgs ?? [""]).enumerate() {
+            for (_, photoURLString) in (productModel?.primaryImgs ?? [""]).enumerate() {
                 // 这个方法只能返回可见的cell, 如果不可见, 返回值为nil
-                let cell = cyclePictureView.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? CyclePictureCell
+//                let cell = cyclePictureView.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? CyclePictureCell
                 
 //                let sourceView = cell?.imageView
                 
@@ -361,5 +394,6 @@ extension WOWProductDetailController : CyclePictureViewDelegate {
         photoBrowser.show(inVc: self, beginPage: indexPath.row)
     }
 }
+
 
 

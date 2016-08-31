@@ -45,7 +45,7 @@ public enum RequestApi{
     
     case Api_BrandDetail(brandId: Int)
     
-    case Api_ProductBrand(brandId: Int, pageSize: Int, currentPage: Int)
+    case Api_ProductBrand(params: [String: AnyObject]?)
     //设计师
     case Api_DesignerDetail(designerId: Int)
     
@@ -374,8 +374,8 @@ extension RequestApi:TargetType{
                 params = ["mobile":account,"password":password]
             case let .Api_BrandDetail(brandid):
                 params = ["brandId": brandid]
-            case let .Api_ProductBrand(brandId, pageSize, currentPage):
-                params = ["brandId": brandId, "pageSize": pageSize, "currentPage": currentPage]
+            case let .Api_ProductBrand(param):
+                params = param
             case let .Api_DesignerDetail(designerId):
                 params = ["designerId": designerId]
             case let .Api_productDesigner(designerId, pageSize, currentPage):

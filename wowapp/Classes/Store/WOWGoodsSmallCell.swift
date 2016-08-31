@@ -21,6 +21,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var view_rightline: UIView!
+    @IBOutlet weak var likeBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

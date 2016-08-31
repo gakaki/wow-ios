@@ -27,7 +27,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var detailDescription     : String?
     var productParameter      : WOWParameter?
     var productImg            : String?
-    
+    var secondaryImgs         : [WOWProductPicTextModel]?
     
     
     override init() {
@@ -60,7 +60,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         detailDescription       <- map["detailDescription"]
         productParameter        <- map["productParameter"]
         productImg              <- map["productImg"]
-    
+        secondaryImgs           <- map["secondaryImgs"]
         
     }
     

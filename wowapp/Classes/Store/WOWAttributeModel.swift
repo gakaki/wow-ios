@@ -62,8 +62,8 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
     }
     
     func mapping(map: Map) {
-        image <- map["imgUrl"]
-        text  <- map["imgDesc"]
+        image <- map["url"]
+        text  <- map["desc"]
     }
 }
 

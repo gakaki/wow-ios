@@ -174,7 +174,10 @@ class WOWBrandHomeController: WOWBaseViewController {
     
     //品牌商品列表
     func requestProductBrand() {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(brandId: brandID ?? 0, pageSize: pageSize, currentPage: pageIndex), successClosure: {[weak self](result) in
+//        var params = [String: AnyObject]?()
+        let params = ["brandId": brandID ?? 0, "currentPage": pageIndex,"pageSize":pageSize]
+       
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(params: params), successClosure: {[weak self](result) in
           
                 if let strongSelf = self{
                     

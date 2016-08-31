@@ -18,6 +18,7 @@
 		063968701D54601500631BDF /* IPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0639686F1D54601500631BDF /* IPManager.swift */; };
 		063968741D54950B00631BDF /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063968731D54950B00631BDF /* VCCategory.swift */; };
 		06568A881D585A30008D2B1A /* ObjectMapper+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */; };
+		066D889A1D7682FA008CE271 /* VCSceneCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066D88991D7682FA008CE271 /* VCSceneCategory.swift */; };
 		068B60B11D4F3561001AD778 /* Found.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B01D4F3560001AD778 /* Found.storyboard */; };
 		068B60B31D4F3DD5001AD778 /* VCFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60B21D4F3DD5001AD778 /* VCFound.swift */; };
 		068B60B51D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */; };
@@ -405,6 +406,7 @@
 		0639686F1D54601500631BDF /* IPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		063968731D54950B00631BDF /* VCCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategory.swift; sourceTree = "<group>"; };
 		06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObjectMapper+Transform.swift"; sourceTree = "<group>"; };
+		066D88991D7682FA008CE271 /* VCSceneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCSceneCategory.swift; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
 		068B60B21D4F3DD5001AD778 /* VCFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCFound.swift; sourceTree = "<group>"; };
 		068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWFoundWeeklyNewCell.xib; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 				06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */,
 				0697D1991D6F03C70061EBD4 /* VCCategoryProducts.swift */,
 				0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */,
+				066D88991D7682FA008CE271 /* VCSceneCategory.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2236,6 +2239,7 @@
 				29FF264C1CFDA86300DF2A9B /* WOWTipsCell.swift in Sources */,
 				29FF268A1CFDA86300DF2A9B /* WOWShareView.swift in Sources */,
 				2958BD921CFECA9300F6A6D7 /* SwiftWebViewProgress.swift in Sources */,
+				066D889A1D7682FA008CE271 /* VCSceneCategory.swift in Sources */,
 				29FF26781CFDA86300DF2A9B /* WOWRegistController.swift in Sources */,
 				632A93341D474848003A5966 /* WOWFavoriteBrandCell.swift in Sources */,
 				636C34201D57286A00CA4E69 /* WOWBrandHeaderView.swift in Sources */,

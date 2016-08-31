@@ -24,7 +24,7 @@ class JSPatchHelper:NSObject{
     
     dynamic static func testVC(){
         
-        let vcName =  "JPDemoController"
+        let vcName =  "VCSceneCategory"
         root_vc_change(vcName)
 
     }

@@ -40,7 +40,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 2:
-            return 1
+            return productModel?.secondaryImgs?.count ?? 0
         case 3: //产品参数可展开
             if isOpenParam {
                 return 1
@@ -84,6 +84,17 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case (2,_): //产品描述
             let cell =  tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailCell), forIndexPath: indexPath) as! WOWProductDetailCell
+            if let array = productModel?.secondaryImgs {
+                let model = array[indexPath.row]
+                cell.showData(model)
+                cell.productImg.tag = indexPath.row
+                cell.productImg.addTapGesture(action: {[weak self] (tap) in
+                    if let strongSelf = self {
+                        strongSelf.lookBigImg((tap.view?.tag)!)
+                    }
+                    
+                })
+            }
             
             returnCell = cell
         case (3,_): //参数
@@ -106,7 +117,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case (6,_)://相关商品
             let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailAboutCell", forIndexPath: indexPath) as! WOWProductDetailAboutCell
             cell.delegate = self
-            cell.showData()
+            cell.dataArr = aboutProductArray
+            
             returnCell = cell
         default:
             break
@@ -118,12 +130,16 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         switch section {
         case 2:
             //动态获取产品描述的label高度
-            return 64 + productDescView.productDescLabel.getEstimatedHeight()
+            return 67 + productDescView.productDescLabel.getEstimatedHeight()
         case 3,4:
             //产品参数与温馨提示cell头
             return 60
-        case 6:
-            return 15
+        case 6: //如果相关商品有数据显示，如果没有就不显示
+            if aboutProductArray.count > 0 {
+                return 15
+            }else {
+                return 0.01
+            }
         default:
             return 0.01
         }
@@ -141,8 +157,13 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 6:
-            return "相关商品"
+        case 6:     //如果相关商品有数据显示，如果没有就不显示
+            if aboutProductArray.count > 0 {
+                return "相关商品"
+            }else {
+                return nil
+            }
+            
         default:
             return nil
         }
@@ -200,8 +221,9 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
-    func requestAboutProduct(productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int) {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(brandId:productModel?.brandId ?? 0, pageSize: pageSize, currentPage: pageIndex), successClosure: {(result) in
+    func aboutProduct(productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int) {
+        let params = ["brandId": productModel?.brandId ?? 0, "currentPage": pageIndex,"pageSize":pageSize, "excludes": [productModel?.productId ?? 0]]
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(params: params as? [String : AnyObject]), successClosure: {(result) in
             
                 productDetailAboutCell.endRefresh()
                 
@@ -209,24 +231,18 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
                 
                 if let array = arr{
                     
-                    if productDetailAboutCell.pageIndex == 1{
-                        productDetailAboutCell.dataArr = []
-                    }
                     productDetailAboutCell.dataArr?.appendContentsOf(array)
                     //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                     if array.count < productDetailAboutCell.pageSize {
-                        productDetailAboutCell.collectionView.mj_footer = nil
+                        productDetailAboutCell.collectionView.xzm_footer = nil
                         
                     }else {
-                        productDetailAboutCell.collectionView.mj_footer = productDetailAboutCell.mj_footer
+                        productDetailAboutCell.collectionView.xzm_footer = productDetailAboutCell.xzm_footer
                     }
                     
                 }else {
-                    if productDetailAboutCell.pageIndex == 1{
-                        productDetailAboutCell.dataArr = []
-                    }
                     
-                    productDetailAboutCell.collectionView.mj_footer = nil
+                    productDetailAboutCell.collectionView.xzm_footer = nil
                     
                 }
                 productDetailAboutCell.collectionView.reloadData()
@@ -235,105 +251,54 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
             
         }) {(errorMsg) in
             
-                productDetailAboutCell.collectionView.mj_footer = nil
+                productDetailAboutCell.collectionView.xzm_footer = nil
                 productDetailAboutCell.endRefresh()
             
         }
         
-
     }
+    func selectCollectionIndex(productId: Int?) {
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        vc.hideNavigationBar = true
+        vc.productId = productId ?? 0
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
 }
 
-class DetailSectionFooterView:UIView{
-    var containerView = UIView()
-    var leftLabel = UILabel()
-    var rightImageView = UIImageView()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = UIColor.whiteColor()
-        configSubview()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configSubview(){
-        addSubview(containerView)
-        containerView.snp_makeConstraints {[weak self](make) in
-            if let strongSelf = self{
-                make.center.equalTo(strongSelf.snp_center)
+
+extension WOWProductDetailController {
+    func setPhoto() -> [PhotoModel] {
+        var photos: [PhotoModel] = []
+        
+        for  aa:WOWProductPicTextModel in productModel?.secondaryImgs ?? [WOWProductPicTextModel](){
+            
+            if let imgStr = aa.image{
+                
+                let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)
+                photos.append(photoModel)
             }
         }
         
-        containerView.addSubview(leftLabel)
-        leftLabel.text = "查看详情"
-        leftLabel.font = Fontlevel004
-        leftLabel.textColor = GrayColorlevel3
-        leftLabel.snp_makeConstraints {[weak self](make) in
-            if let strongSelf = self{
-                make.left.top.bottom.equalTo(strongSelf.containerView).offset(0)
+        
+        return photos
+    }
+    
+    func lookBigImg(beginPage:Int)  {
+        dispatch_async(dispatch_get_main_queue()) {
+            let photoBrowser = PhotoBrowser(photoModels:self.setPhoto()) {[weak self] (extraBtn) in
+                if let sSelf = self {
+                    let hud = SimpleHUD(frame:CGRect(x: 0.0, y: (sSelf.view.zj_height - 80)*0.5, width: sSelf.view.zj_width, height: 80.0))
+                    sSelf.view.addSubview(hud)
+                }
+                
             }
-        }
-        rightImageView.image = UIImage(named: "detailmore")
-        containerView.addSubview(rightImageView)
-        rightImageView.snp_makeConstraints {[weak self](make) in
-            if let strongSelf = self{
-                make.right.equalTo(strongSelf.containerView.snp_right).offset(0)
-                make.left.equalTo(strongSelf.leftLabel.snp_right).offset(5)
-                make.centerY.equalTo(strongSelf.leftLabel.snp_centerY)
-            }
+            // 指定代理
+            photoBrowser.show(inVc: self, beginPage: beginPage)
+            
         }
         
     }
-    
-}
 
-class DetailSectionHeaderView:UIView{
-    var leftLabel:UILabel!
-    var line:UIView!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configSubviews()
-    }
-    
-    private func configSubviews(){
-        leftLabel = UILabel()
-        addSubview(leftLabel)
-        leftLabel.snp_makeConstraints {[weak self](make) in
-            if let strongSelf = self{
-                make.left.equalTo(strongSelf.snp_left).offset(15)
-                make.centerY.equalTo(strongSelf.snp_centerY)
-            }
-        }
-        line = UIView()
-        line.backgroundColor = SeprateColor
-        addSubview(line)
-        line.snp_makeConstraints {[weak self](make) in
-            if let strongSelf = self{
-                make.left.equalTo(strongSelf.leftLabel.snp_right).offset(10)
-                make.right.equalTo(strongSelf).offset(0)
-                make.centerY.equalTo(strongSelf.leftLabel.snp_centerY)
-                make.height.equalTo(0.5)
-            }
-        }
-        
-    }
-    
-    convenience init(leftTitle:String,backColor:UIColor = UIColor.whiteColor(),leftTtileColor:UIColor = UIColor.blackColor()){
-        self.init(frame:CGRectMake(0,0,MGScreenWidth,30))
-        self.backgroundColor = backColor
-        self.leftLabel.textColor = leftTtileColor
-        self.leftLabel.text = leftTitle
-        self.leftLabel.font = Fontlevel002
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
 }
-
 

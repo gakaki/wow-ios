@@ -37,19 +37,21 @@ class WOWHomeFormCell: UITableViewCell {
     }
     lazy var xzm_footer:XZMRefreshNormalFooter = {
         let f = XZMRefreshNormalFooter()
-         f.pullingPercent = 0.1
+//         f.pullingPercent = 0.1
         
         f.setRefreshingTarget(self, refreshingAction: #selector(loadMore))
   
         f.pullToRefreshText = "查\n看\n更\n多\n商\n品"
         f.refreshingText = " "
         f.releaseToRefreshText = " "
-
+        f.beginRefreshingCallback = {
+            print("进入刷新")
+        }
         return f
     }()
     
     func loadMore()  {
-
+        
             self.delegate?.goToVC()
             self.endRefresh()
 

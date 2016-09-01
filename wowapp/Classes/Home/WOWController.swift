@@ -103,7 +103,13 @@ class WOWController: WOWBaseViewController {
             //            if let strongSelf = self{
             //                strongSelf.toVCCart()
             print("111")
+//            let view = RefreshView()
+            
+//            RefreshView.showInView(self?.view)
+//            view.showInView((self?.view)!)
             //            }
+            WOWHudRefresh.showInView((self?.view)!)
+            
         }
         configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }

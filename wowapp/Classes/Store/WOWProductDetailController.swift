@@ -16,7 +16,7 @@ class WOWProductDetailController: WOWBaseViewController {
     var aboutProductArray               = [WOWProductModel]()
     
     private(set) var numberSections = 0
-    let pageSize = 5
+    let pageSize = 10
     //UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var likeButton: UIButton!
@@ -203,7 +203,6 @@ class WOWProductDetailController: WOWBaseViewController {
     //MARK:选择规格,有两种视图
     func chooseStyle(entrue: carEntrance) {
         WOWBuyCarMananger.sharedBuyCar.productSpecModel      = self.productSpecModel
-        WOWBuyCarMananger.sharedBuyCar.isFavorite       = likeButton.selected
         if let product = productModel {
             WOWBuyCarMananger.sharedBuyCar.defaultImg = product.primaryImgs![0]
             let result = WOWCalPrice.calTotalPrice([product.sellPrice ?? 0],counts:[1])
@@ -348,22 +347,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         }
 
     }
-    //收藏单品
-    func favoriteClick() -> Bool{
-        if !WOWUserManager.loginStatus {
-            toLoginVC(true)
-        }else{
-            requestFavoriteProduct()
-        }
-        return likeButton.selected
-    }
-    //分享
-    func sharClick() {
-        backView.hideBuyView()
-        let shareUrl = WOWShareUrl + "/item/\(productModel?.productId ?? 0)"
-        WOWShareManager.share(productModel?.productName, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
-
-    }
+   
 }
 
 extension WOWProductDetailController : CyclePictureViewDelegate {

@@ -12,9 +12,9 @@ class HomeBottomCell: UITableViewCell {
     
     var indexPath:NSIndexPath!
     var currentIndexPath : Int = 0
-       @IBOutlet weak var oneBtn: UIButton!
-       @IBOutlet weak var twoBtn: UIButton!
-        @IBOutlet weak var twoLb: UILabel!
+    @IBOutlet weak var oneBtn: UIButton!
+    @IBOutlet weak var twoBtn: UIButton!
+    @IBOutlet weak var twoLb: UILabel!
     
     @IBOutlet weak var priceLbOne: UILabel!
     @IBOutlet weak var priceLbTwo: UILabel!

@@ -10,7 +10,7 @@ import UIKit
 
 //MARK:*****************************背景视图******************************************
 enum carEntrance{
-    case SpecEntrance   //选择规格
+    
     case AddEntrance    //添加购物车
     case PayEntrance    //立即支付
 }
@@ -59,14 +59,11 @@ class WOWBuyBackView: UIView {
         addSubview(backClear)
         backClear.addSubview(buyView)
         switch entrance {
-        case .SpecEntrance:
-            buyView.specView.hidden = false
-            buyView.entrance = .SpecEntrance
         case .AddEntrance:
-            buyView.specView.hidden = true
+        
             buyView.entrance = .AddEntrance
         case .PayEntrance:
-            buyView.specView.hidden = true
+           
             buyView.entrance = .PayEntrance
         }
         buyView.snp_makeConstraints {[weak self](make) in
@@ -74,7 +71,7 @@ class WOWBuyBackView: UIView {
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
             }
         }
-        buyView.favoriteButton.selected = WOWBuyCarMananger.sharedBuyCar.isFavorite ?? false
+       
         backClear.insertSubview(dismissButton, belowSubview: buyView)
         dismissButton.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{
@@ -112,17 +109,14 @@ protocol goodsBuyViewDelegate:class {
     func sureBuyClick(product: WOWProductInfoModel?)
     //确定加车
     func sureAddCarClick(product: WOWProductInfoModel?)
-    //收藏单品
-    func favoriteClick() ->Bool
-   
-    //分享
-    func sharClick()
+  
 }
 
 
 class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UICollectionViewDataSource{
     @IBOutlet weak var countTextField: UITextField!     //商品数量显示
     @IBOutlet weak var perPriceLabel: UILabel!          //商品价格
+    @IBOutlet weak var sizeTextLabel: UILabel!          //商品尺寸
     @IBOutlet weak var collectionView: UICollectionView!    //颜色标签
     @IBOutlet weak var nameLabel: UILabel!              //商品名字
     @IBOutlet weak var goodsImageView: UIImageView!     //商品图片
@@ -132,12 +126,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!  //颜色视图的高度
     @IBOutlet weak var secondCollectionView: UICollectionView!      //规格标签
     @IBOutlet weak var secondCollectionViewHeight: NSLayoutConstraint!  //规格视图的高度
-    @IBOutlet weak var specView: UIView!        //选择规格的底部view
-    @IBOutlet weak var favoriteButton: UIButton!        //喜欢按钮
+
     @IBOutlet weak var colorWarnImg: UIImageView!       //警告图标
     @IBOutlet weak var specWarnImg: UIImageView!
-    @IBOutlet weak var addCarButton: UIButton!          //加入购物车
-    @IBOutlet weak var payButton: UIButton!             //立即支付
+ 
     @IBOutlet weak var sureButton: UIButton!            //确定按钮
   
     private var _layer: CALayer!
@@ -145,7 +137,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 
     
     let identifier = "WOWTagCollectionViewCell"
-    var entrance : carEntrance = carEntrance.SpecEntrance
+    var entrance : carEntrance = carEntrance.AddEntrance
     weak var delegate: goodsBuyViewDelegate?
     //通过颜色选规格的数组
     var colorSpecArr : [WOWColorSpecModel]!
@@ -221,8 +213,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             nameLabel.text = p.productName
             perPriceLabel.text = WOWBuyCarMananger.sharedBuyCar.defaultPrice
-            goodsImageView.layer.borderWidth = 0.5
-            goodsImageView.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
+            goodsImageView.borderColor(0.5, borderColor: MGRgb(234, g: 234, b: 234))
             if let img = WOWBuyCarMananger.sharedBuyCar.defaultImg {
 //                goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
                 goodsImageView.set_webimage_url(img)
@@ -376,25 +367,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         
        
     }
-    /**
-     
-     收藏按钮
-     
-     */
-    @IBAction func favoriteButtonClick(sender: UIButton) {
-        
-        if let del = delegate {
-            let favorite = del.favoriteClick()
-            favoriteButton.selected = !favorite
-        }
-        
-    }
-    
-    @IBAction func sharButtonClick(sender: UIButton) {
-        if let del = delegate {
-            del.sharClick()
-        }
-    }
+
     /**
      加入购物车
      
@@ -587,9 +560,17 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 //取消选中时恢复有库存状态
                 productStock(true)
                 colorIndex = -1
+                //取消选中欧时恢复默认图片
+                if let img = WOWBuyCarMananger.sharedBuyCar.defaultImg {
+                    //                goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                    goodsImageView.set_webimage_url(img)
+                    
+                }
+
                 for selectSpec in specArr {
                     selectSpec.isSelect = true
                 }
+                
                 self.collectionView.reloadData()
                 secondCollectionView.reloadData()
                 return
@@ -604,6 +585,8 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 //取消选中时恢复有库存状态
                 productStock(true)
                 specIndex = -1
+                //取消选中时不显示产品规格
+                sizeTextLabel.text = ""
                 for selectColor in colorArr {
                     selectColor.isSelect = true
                 }
@@ -679,9 +662,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             showResult(skuCount)
             
-            addCarButton.hidden = false
-            payButton.setBackgroundColor(MGRgb(255, g: 230, b: 0), forState: .Normal)
-            
             sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .Normal)
 
             
@@ -689,9 +669,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             skuCount = 0
            
             showResult(skuCount)
-            
-            addCarButton.hidden = true
-            payButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .Disabled)
             
             sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .Disabled)
             
@@ -702,7 +679,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     func showStock(hasStock: Bool) -> Void {
         addButton.enabled = hasStock
         subButton.enabled = hasStock
-        payButton.enabled = hasStock
         sureButton.enabled = hasStock
 
     }
@@ -840,6 +816,8 @@ extension WOWGoodsBuyView {
                 goodsImageView.set_webimage_url(img)
             }
         }
+        
+        
     }
     
     /**
@@ -874,7 +852,15 @@ extension WOWGoodsBuyView {
         self.collectionView.reloadData()
         
         secondCollectionView.reloadData()
-
+        
+        //根据选中的规格改变产品尺寸
+        if spec_ColorArr?.count > 0 {
+            let sizeText = spec_ColorArr![0].subProductInfo?.sizeText
+            if let sizeText = sizeText {
+                //                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                sizeTextLabel.text = sizeText
+            }
+        }
     }
 
 }

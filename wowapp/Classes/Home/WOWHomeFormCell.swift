@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol WOWHomeFormDelegate:class {
+    func goToVC()
+}
 class WOWHomeFormCell: UITableViewCell {
     
     var scrollViewOffsetDic = Dictionary<Int, CGFloat>() //空字典
+    
+    weak var delegate : WOWHomeFormDelegate?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -30,14 +35,41 @@ class WOWHomeFormCell: UITableViewCell {
             collectionView.setContentOffset(CGPointMake(self.scrollViewOffsetDic[collectionView.tag] ?? 0, 0), animated: false)
         }
     }
+    lazy var xzm_footer:XZMRefreshNormalFooter = {
+        let f = XZMRefreshNormalFooter()
+         f.pullingPercent = 0.1
+        
+        f.setRefreshingTarget(self, refreshingAction: #selector(loadMore))
+  
+        f.pullToRefreshText = "查\n看\n更\n多\n商\n品"
+        f.refreshingText = " "
+        f.releaseToRefreshText = " "
+
+        return f
+    }()
     
+    func loadMore()  {
+
+            self.delegate?.goToVC()
+            self.endRefresh()
+
+    }
+    func endRefresh() {
+        
+        xzm_footer.endRefreshing()
+        
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.resetSeparators()
+        
+        
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
         
         collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
         
+        collectionView.xzm_footer = self.xzm_footer
         
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -90,11 +122,11 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
         let firstIndexPath = NSIndexPath(forItem: 0, inSection: section)
         let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: firstIndexPath)
         
-        let lastIndexPath = NSIndexPath(forItem: itemCount - 1, inSection: section)
-        let lastSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: lastIndexPath)
+//        let lastIndexPath = NSIndexPath(forItem: itemCount - 1, inSection: section)
+//        let lastSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: lastIndexPath)
         
         return UIEdgeInsetsMake(0, (collectionView.bounds.size.width - firstSize.width) / 2,
-                                0, (collectionView.bounds.size.width - lastSize.width) / 2)
+                                0, 15)
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
         

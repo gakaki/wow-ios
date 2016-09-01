@@ -325,6 +325,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             let cell                = tableView.dequeueReusableCellWithIdentifier("WOWHomeFormCell", forIndexPath: indexPath) as! WOWHomeFormCell
             
             cell.indexPathSection = indexPath.section
+            cell.delegate = self
             cell.selectionStyle = .None
             return cell
             
@@ -393,6 +394,17 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 
     }
 }
+extension WOWController:WOWHomeFormDelegate{
+    func goToVC(){
+//        print("跳转到专题列表")
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+        vc.hideNavigationBar = false
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+
+}
+
 
 extension WOWController:SenceCellDelegate{
     func senceProductClick(produtID: Int) {

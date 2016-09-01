@@ -51,6 +51,21 @@
 		06B25A431D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B25A421D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift */; };
 		06B25A451D6C464E001A1016 /* WOWProductDetailTipsWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B25A441D6C464E001A1016 /* WOWProductDetailTipsWebViewCell.xib */; };
 		06B25A471D6C49C9001A1016 /* product_detail_tips.html in Resources */ = {isa = PBXBuildFile; fileRef = 06B25A461D6C49C9001A1016 /* product_detail_tips.html */; };
+		06B766121D77E96600F803A9 /* NSString+mock.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B765F51D77E96600F803A9 /* NSString+mock.m */; };
+		06B766131D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B765F71D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.m */; };
+		06B766141D77E96600F803A9 /* GYHttpMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B765F91D77E96600F803A9 /* GYHttpMock.m */; };
+		06B766151D77E96600F803A9 /* GYHttpMock.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 06B765FA1D77E96600F803A9 /* GYHttpMock.podspec */; };
+		06B766161D77E96600F803A9 /* GYMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B765FC1D77E96600F803A9 /* GYMatcher.m */; };
+		06B766171D77E96600F803A9 /* GYMockURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B765FE1D77E96600F803A9 /* GYMockURLProtocol.m */; };
+		06B766181D77E96600F803A9 /* GYHttpClientHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B766011D77E96600F803A9 /* GYHttpClientHook.m */; };
+		06B766191D77E96600F803A9 /* GYNSURLHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B766031D77E96600F803A9 /* GYNSURLHook.m */; };
+		06B7661A1D77E96600F803A9 /* GYNSURLSessionHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B766051D77E96600F803A9 /* GYNSURLSessionHook.m */; };
+		06B7661B1D77E96600F803A9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 06B766061D77E96600F803A9 /* LICENSE */; };
+		06B7661C1D77E96600F803A9 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 06B766071D77E96600F803A9 /* README.md */; };
+		06B7661D1D77E96600F803A9 /* GYMockRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7660A1D77E96600F803A9 /* GYMockRequest.m */; };
+		06B7661E1D77E96600F803A9 /* GYMockRequestDSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7660C1D77E96600F803A9 /* GYMockRequestDSL.m */; };
+		06B7661F1D77E96600F803A9 /* GYMockResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7660F1D77E96600F803A9 /* GYMockResponse.m */; };
+		06B766201D77E96600F803A9 /* GYMockResponseDSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B766111D77E96600F803A9 /* GYMockResponseDSL.m */; };
 		06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */; };
 		06DDAD751D61811500280210 /* VCBaseVCCategoryFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */; };
 		06FB94B11D6306C100554871 /* VCTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B01D6306C100554871 /* VCTopic.swift */; };
@@ -445,6 +460,33 @@
 		06B25A421D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWProductDetailTipsWebViewCell.swift; sourceTree = "<group>"; };
 		06B25A441D6C464E001A1016 /* WOWProductDetailTipsWebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWProductDetailTipsWebViewCell.xib; sourceTree = "<group>"; };
 		06B25A461D6C49C9001A1016 /* product_detail_tips.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = product_detail_tips.html; sourceTree = "<group>"; };
+		06B765F41D77E96600F803A9 /* NSString+mock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+mock.h"; sourceTree = "<group>"; };
+		06B765F51D77E96600F803A9 /* NSString+mock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+mock.m"; sourceTree = "<group>"; };
+		06B765F61D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+GYURLRequestProtocol.h"; sourceTree = "<group>"; };
+		06B765F71D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+GYURLRequestProtocol.m"; sourceTree = "<group>"; };
+		06B765F81D77E96600F803A9 /* GYHttpMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYHttpMock.h; sourceTree = "<group>"; };
+		06B765F91D77E96600F803A9 /* GYHttpMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYHttpMock.m; sourceTree = "<group>"; };
+		06B765FA1D77E96600F803A9 /* GYHttpMock.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GYHttpMock.podspec; sourceTree = "<group>"; };
+		06B765FB1D77E96600F803A9 /* GYMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMatcher.h; sourceTree = "<group>"; };
+		06B765FC1D77E96600F803A9 /* GYMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMatcher.m; sourceTree = "<group>"; };
+		06B765FD1D77E96600F803A9 /* GYMockURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMockURLProtocol.h; sourceTree = "<group>"; };
+		06B765FE1D77E96600F803A9 /* GYMockURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMockURLProtocol.m; sourceTree = "<group>"; };
+		06B766001D77E96600F803A9 /* GYHttpClientHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYHttpClientHook.h; sourceTree = "<group>"; };
+		06B766011D77E96600F803A9 /* GYHttpClientHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYHttpClientHook.m; sourceTree = "<group>"; };
+		06B766021D77E96600F803A9 /* GYNSURLHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYNSURLHook.h; sourceTree = "<group>"; };
+		06B766031D77E96600F803A9 /* GYNSURLHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYNSURLHook.m; sourceTree = "<group>"; };
+		06B766041D77E96600F803A9 /* GYNSURLSessionHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYNSURLSessionHook.h; sourceTree = "<group>"; };
+		06B766051D77E96600F803A9 /* GYNSURLSessionHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYNSURLSessionHook.m; sourceTree = "<group>"; };
+		06B766061D77E96600F803A9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		06B766071D77E96600F803A9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		06B766091D77E96600F803A9 /* GYMockRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMockRequest.h; sourceTree = "<group>"; };
+		06B7660A1D77E96600F803A9 /* GYMockRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMockRequest.m; sourceTree = "<group>"; };
+		06B7660B1D77E96600F803A9 /* GYMockRequestDSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMockRequestDSL.h; sourceTree = "<group>"; };
+		06B7660C1D77E96600F803A9 /* GYMockRequestDSL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMockRequestDSL.m; sourceTree = "<group>"; };
+		06B7660E1D77E96600F803A9 /* GYMockResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMockResponse.h; sourceTree = "<group>"; };
+		06B7660F1D77E96600F803A9 /* GYMockResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMockResponse.m; sourceTree = "<group>"; };
+		06B766101D77E96600F803A9 /* GYMockResponseDSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMockResponseDSL.h; sourceTree = "<group>"; };
+		06B766111D77E96600F803A9 /* GYMockResponseDSL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMockResponseDSL.m; sourceTree = "<group>"; };
 		06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlexboxLayout.framework; sourceTree = "<group>"; };
 		06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+VCManager.swift"; sourceTree = "<group>"; };
 		06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBaseVCCategoryFound.swift; sourceTree = "<group>"; };
@@ -968,6 +1010,72 @@
 			path = BaseJSPatch;
 			sourceTree = "<group>";
 		};
+		06B765F21D77E96600F803A9 /* GYHttpMock */ = {
+			isa = PBXGroup;
+			children = (
+				06B765F31D77E96600F803A9 /* Categories */,
+				06B765F81D77E96600F803A9 /* GYHttpMock.h */,
+				06B765F91D77E96600F803A9 /* GYHttpMock.m */,
+				06B765FA1D77E96600F803A9 /* GYHttpMock.podspec */,
+				06B765FB1D77E96600F803A9 /* GYMatcher.h */,
+				06B765FC1D77E96600F803A9 /* GYMatcher.m */,
+				06B765FD1D77E96600F803A9 /* GYMockURLProtocol.h */,
+				06B765FE1D77E96600F803A9 /* GYMockURLProtocol.m */,
+				06B765FF1D77E96600F803A9 /* Hooks */,
+				06B766061D77E96600F803A9 /* LICENSE */,
+				06B766071D77E96600F803A9 /* README.md */,
+				06B766081D77E96600F803A9 /* Request */,
+				06B7660D1D77E96600F803A9 /* Response */,
+			);
+			path = GYHttpMock;
+			sourceTree = "<group>";
+		};
+		06B765F31D77E96600F803A9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				06B765F41D77E96600F803A9 /* NSString+mock.h */,
+				06B765F51D77E96600F803A9 /* NSString+mock.m */,
+				06B765F61D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.h */,
+				06B765F71D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		06B765FF1D77E96600F803A9 /* Hooks */ = {
+			isa = PBXGroup;
+			children = (
+				06B766001D77E96600F803A9 /* GYHttpClientHook.h */,
+				06B766011D77E96600F803A9 /* GYHttpClientHook.m */,
+				06B766021D77E96600F803A9 /* GYNSURLHook.h */,
+				06B766031D77E96600F803A9 /* GYNSURLHook.m */,
+				06B766041D77E96600F803A9 /* GYNSURLSessionHook.h */,
+				06B766051D77E96600F803A9 /* GYNSURLSessionHook.m */,
+			);
+			path = Hooks;
+			sourceTree = "<group>";
+		};
+		06B766081D77E96600F803A9 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				06B766091D77E96600F803A9 /* GYMockRequest.h */,
+				06B7660A1D77E96600F803A9 /* GYMockRequest.m */,
+				06B7660B1D77E96600F803A9 /* GYMockRequestDSL.h */,
+				06B7660C1D77E96600F803A9 /* GYMockRequestDSL.m */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		06B7660D1D77E96600F803A9 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				06B7660E1D77E96600F803A9 /* GYMockResponse.h */,
+				06B7660F1D77E96600F803A9 /* GYMockResponse.m */,
+				06B766101D77E96600F803A9 /* GYMockResponseDSL.h */,
+				06B766111D77E96600F803A9 /* GYMockResponseDSL.m */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		06DCF8191D37C41B00039F8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1290,6 +1398,7 @@
 		29FF25E41CFDA86300DF2A9B /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
+				06B765F21D77E96600F803A9 /* GYHttpMock */,
 				069923451D7544B100579C51 /* JPPlaygroundTool */,
 				63C42DC01D646B0400879FEB /* PhotoBrowser */,
 				06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */,
@@ -1999,6 +2108,7 @@
 				29FF26E51CFDA86300DF2A9B /* LICENSE in Resources */,
 				29FF26511CFDA86300DF2A9B /* WOWValue2Cell.xib in Resources */,
 				631847D11D7559BE00656678 /* WOWProductDescView.xib in Resources */,
+				06B7661B1D77E96600F803A9 /* LICENSE in Resources */,
 				2D6B02831D589622003D21C1 /* WOWOrderDetailCostCell.xib in Resources */,
 				06FED4441D4634A600D7B068 /* city.json in Resources */,
 				29FF26C71CFDA86300DF2A9B /* WOWOrderTransCell.xib in Resources */,
@@ -2015,6 +2125,7 @@
 				29FF26D31CFDA86300DF2A9B /* WOWUserHomeTopView.xib in Resources */,
 				632A93351D474848003A5966 /* WOWFavoriteBrandCell.xib in Resources */,
 				29FF270B1CFDA86300DF2A9B /* BuyCar.storyboard in Resources */,
+				06B766151D77E96600F803A9 /* GYHttpMock.podspec in Resources */,
 				29FF26831CFDA86300DF2A9B /* WOWBaseStyleCell.xib in Resources */,
 				2D3273FD1D754DD80013BDB1 /* HomeBottomCell.xib in Resources */,
 				63C42DCE1D65642B00879FEB /* WOWProductOrderCell.xib in Resources */,
@@ -2139,7 +2250,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2160,9 +2271,12 @@
 				2953F19A1D06A6A2006D7D95 /* WOWFavoriteController.swift in Sources */,
 				29FF26D21CFDA86300DF2A9B /* WOWUserHomeTopView.swift in Sources */,
 				636C34241D585BF500CA4E69 /* WOWDesignerModel.swift in Sources */,
+				06B766141D77E96600F803A9 /* GYHttpMock.m in Sources */,
 				29FF26ED1CFDA86300DF2A9B /* MIBadgeButton.swift in Sources */,
+				06B7661E1D77E96600F803A9 /* GYMockRequestDSL.m in Sources */,
 				636C33C81D51D13B00CA4E69 /* WOWEditOrderController.swift in Sources */,
 				06FB94B51D63FB4800554871 /* ModelVOCoupon.swift in Sources */,
+				06B766181D77E96600F803A9 /* GYHttpClientHook.m in Sources */,
 				2D6B027E1D589615003D21C1 /* WOWOrderDetailSThreeCell.swift in Sources */,
 				068B60BF1D4F41CD001AD778 /* WOWFoundWeeklyNewCell.swift in Sources */,
 				29FF26571CFDA86300DF2A9B /* WOWCommentListModel.swift in Sources */,
@@ -2193,6 +2307,7 @@
 				632A93451D49B417003A5966 /* WOWProductParameter.swift in Sources */,
 				29FF26B31CFDA86300DF2A9B /* WOWAddAddressController.swift in Sources */,
 				2958BD931CFECA9300F6A6D7 /* SwiftWebViewProgressView.swift in Sources */,
+				06B766171D77E96600F803A9 /* GYMockURLProtocol.m in Sources */,
 				29FF267C1CFDA86300DF2A9B /* WOWLeftSideController.swift in Sources */,
 				29FF264E1CFDA86300DF2A9B /* WOWValue1Cell.swift in Sources */,
 				0697D1A21D70130E0061EBD4 /* VCCategoryTabBar.swift in Sources */,
@@ -2229,6 +2344,7 @@
 				63C42DC61D646B0400879FEB /* PhotoBrowser.swift in Sources */,
 				632A93391D475F8B003A5966 /* WOWBuyCarEmpty.swift in Sources */,
 				29FF264B1CFDA86300DF2A9B /* WOWSureOrderController.swift in Sources */,
+				06B766191D77E96600F803A9 /* GYNSURLHook.m in Sources */,
 				29FF26C81CFDA86300DF2A9B /* WOWOrderTransController.swift in Sources */,
 				638849FB1D61B1E900FCCFCC /* WOWCouponCell.swift in Sources */,
 				29FF269C1CFDA86300DF2A9B /* WOWGoodsController.swift in Sources */,
@@ -2252,6 +2368,7 @@
 				29FF26921CFDA86300DF2A9B /* WOWBrandListController.swift in Sources */,
 				632A934F1D49E31D003A5966 /* WOWProductDetailCell.swift in Sources */,
 				636C33DB1D52EA1F00CA4E69 /* WOWOrderFreightCell.swift in Sources */,
+				06B766131D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.m in Sources */,
 				29FF26D51CFDA86300DF2A9B /* WOWUserModel.swift in Sources */,
 				29FF26611CFDA86300DF2A9B /* WOWProductModel.swift in Sources */,
 				0699235B1D7544B100579C51 /* README.md in Sources */,
@@ -2260,6 +2377,7 @@
 				0697D1981D6EFB960061EBD4 /* VCVTMagic.swift in Sources */,
 				29FF26501CFDA86300DF2A9B /* WOWValue2Cell.swift in Sources */,
 				29FF26941CFDA86300DF2A9B /* WOWBrandModel.swift in Sources */,
+				06B766121D77E96600F803A9 /* NSString+mock.m in Sources */,
 				29FF26821CFDA86300DF2A9B /* WOWBaseStyleCell.swift in Sources */,
 				069923591D7544B100579C51 /* JPDevMenu.m in Sources */,
 				0633527E1D6540560026177E /* WowLikeBtn.swift in Sources */,
@@ -2292,6 +2410,7 @@
 				29FF26E11CFDA86300DF2A9B /* UIApplication+Add.swift in Sources */,
 				069923561D7544B100579C51 /* JPKeyCommands.m in Sources */,
 				638849F81D61B06500FCCFCC /* WOWCouponController.swift in Sources */,
+				06B766201D77E96600F803A9 /* GYMockResponseDSL.m in Sources */,
 				29FF265A1CFDA86300DF2A9B /* WOWLikeListCell.swift in Sources */,
 				29FF26721CFDA86300DF2A9B /* WOWSubArtCell.swift in Sources */,
 				29FF263C1CFDA86300DF2A9B /* AppDelegate.swift in Sources */,
@@ -2299,6 +2418,7 @@
 				29FF265F1CFDA86300DF2A9B /* WOWMenuModel.swift in Sources */,
 				292CBA0D1CFE86AB00248C88 /* WOWRegistInfoSureView.swift in Sources */,
 				631847D31D7559D200656678 /* WOWProductDescView.swift in Sources */,
+				06B7661D1D77E96600F803A9 /* GYMockRequest.m in Sources */,
 				29FF266A1CFDA86300DF2A9B /* WOWSearchItemModel.swift in Sources */,
 				29FF26E71CFDA86300DF2A9B /* BTNavigationDropdownMenu.swift in Sources */,
 				29FF26BA1CFDA86300DF2A9B /* WOWFavoriteListModel.swift in Sources */,
@@ -2311,6 +2431,7 @@
 				06FB94B11D6306C100554871 /* VCTopic.swift in Sources */,
 				29FF26B91CFDA86300DF2A9B /* WOWCopyrightController.swift in Sources */,
 				635716C01D4607EE006BD746 /* WOWHomeBanner.swift in Sources */,
+				06B7661A1D77E96600F803A9 /* GYNSURLSessionHook.m in Sources */,
 				29FF26DB1CFDA86300DF2A9B /* WOWMacrofunc.swift in Sources */,
 				29FF26451CFDA86300DF2A9B /* WOWBuyCarController.swift in Sources */,
 				06B25A431D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift in Sources */,
@@ -2324,6 +2445,7 @@
 				29FF26641CFDA86300DF2A9B /* WOWSearchBarView.swift in Sources */,
 				63C42DC71D646B0400879FEB /* PhotoToolBar.swift in Sources */,
 				29FF26801CFDA86300DF2A9B /* PageControllerDataSource.swift in Sources */,
+				06B7661C1D77E96600F803A9 /* README.md in Sources */,
 				29DD40EB1D018C07002507EC /* WOWProductDetailAboutCell.swift in Sources */,
 				2D6B027A1D589606003D21C1 /* WOWOrderDetailTwoCell.swift in Sources */,
 				0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */,
@@ -2343,6 +2465,7 @@
 				069923671D755A6800579C51 /* JSPatchHelper.swift in Sources */,
 				0633527B1D6435970026177E /* VCBaseNavCart.swift in Sources */,
 				29FF26E01CFDA86300DF2A9B /* String+Add.swift in Sources */,
+				06B766161D77E96600F803A9 /* GYMatcher.m in Sources */,
 				29FF26C21CFDA86300DF2A9B /* WOWOrderDetailController.swift in Sources */,
 				635716BB1D45EB89006BD746 /* CyclePictureCell.swift in Sources */,
 				636C33E41D54933700CA4E69 /* WOWFavoriteProductModel.swift in Sources */,
@@ -2360,6 +2483,7 @@
 				635716BC1D45EB89006BD746 /* CyclePictureView.swift in Sources */,
 				297F187B1D0520A3003CCA2F /* WOWProductParamCell.swift in Sources */,
 				29FF26491CFDA86300DF2A9B /* WOWCarGoodsListController.swift in Sources */,
+				06B7661F1D77E96600F803A9 /* GYMockResponse.m in Sources */,
 				2958BD951CFEECF400F6A6D7 /* WOWLeaveTipsController.swift in Sources */,
 				632A93301D474825003A5966 /* WOWFavoritrSingleCell.swift in Sources */,
 				29FF26811CFDA86300DF2A9B /* WOWBaseModel.swift in Sources */,

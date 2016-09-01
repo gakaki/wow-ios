@@ -3,11 +3,11 @@ import UIKit
 import SnapKit
 import VTMagic
 
-
 let kAnimationDuration = 0.25
 let kIndicatorViewH: CGFloat = 3     // 首页顶部标签指示条的高度
 let kTitlesViewH: CGFloat = 25          // 顶部标题的高度
 let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度倍
+
 
 class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource
 {
@@ -26,6 +26,16 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 //    refresh_view()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let r = mockRequest("POST", "http://www.google.com").
+//        withHeaders(["Accept": "application/json"]).
+//        isUpdatePartResponseBody(false).
+//        andReturn(200).
+//        withBody("google.json");
+        
+        
+        mockRequest("GET", "\(BaseUrl)category/sub-category(.*?)".regex()).andReturn(200).withBody("city.json")
+        
         request()
         
         trigger()

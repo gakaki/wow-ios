@@ -13,7 +13,7 @@ class WOWTipsCell: UITableViewCell {
     @IBOutlet weak var textView: HolderTextView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        textView.placeHolder = "写下您的特殊要求"
+//        textView.placeHolder = "写下您的特殊要求"
         // Initialization code
     }
 

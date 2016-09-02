@@ -326,6 +326,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             returnCell = cell
         case 3: //订单备注
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWTipsCell), forIndexPath:indexPath) as! WOWTipsCell
+            cell.textView.placeHolder = "写下您的特殊要求"
             tipsTextField = cell.textView
             returnCell = cell
         default:

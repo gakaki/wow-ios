@@ -48,7 +48,7 @@ class RefreshView:UIView {
         let image = YYImage(named: "loadRefresh")
         let imageView = YYAnimatedImageView(image: image)
 
-        imageView.frame = CGRectMake(0,0,65,65)
+        imageView.frame = CGRectMake(0,0,50.w,50.h)
         imageView.center = self.center
         
         return imageView

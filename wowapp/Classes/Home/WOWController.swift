@@ -171,7 +171,8 @@ class WOWController: WOWBaseViewController {
     override func request() {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Home_Banners, successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                WOWHud.dismiss()
+//                WOWHud.dismiss()
+               
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.endRefresh()

@@ -19,6 +19,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
         super.viewDidLoad()
         setUI()
         self.navigationController?.navigationBar.shadowImage = UIImage(named: "line")
+        WOWHud.showLoading()
     }
     
     
@@ -150,6 +151,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
             pageIndex = 1
            isRreshing = true
         }
+        LoadView.sharedInstance.dissMissView()
         request()
     }
     

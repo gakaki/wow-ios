@@ -11,15 +11,27 @@ import SVProgressHUD
 
 struct WOWHud {
     static func showLoading(){
-        SVProgressHUD.setDefaultStyle(.Custom)
-        SVProgressHUD.setDefaultMaskType(.Clear)
-        SVProgressHUD.setForegroundColor(UIColor.blackColor())
-        SVProgressHUD.setBackgroundColor(UIColor(white: 0.8, alpha: 0.8))
-        SVProgressHUD.show()
+//        SVProgressHUD.setDefaultStyle(.Custom)
+//        SVProgressHUD.setDefaultMaskType(.Clear)
+//        SVProgressHUD.setForegroundColor(UIColor.blackColor())
+//        SVProgressHUD.setBackgroundColor(UIColor(white: 0.8, alpha: 0.8))
+//        SVProgressHUD.show()
+    
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            UIApplication.currentViewController()?.view.addSubview(LoadView.sharedInstance)
+            
+        }
+
     }
     
     static func dismiss(){
-        SVProgressHUD.popActivity()
+//        SVProgressHUD.popActivity()
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            LoadView.sharedInstance.dissMissView()
+        }
+
     }
     
     static func showMsg(message:String?){

@@ -37,7 +37,7 @@ class WOWOrderAddressCell: UITableViewCell {
             nameLabel.text = addressInfo.name ?? ""
             if let mobile = addressInfo.mobile {
                 if mobile.length > 7 {
-                    mobileLabel.text = mobile.stringByX(3,endindex:7)
+                    mobileLabel.text = addressInfo.mobile!.get_formted_xxPhone()
                 }
             }
             addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "") + (addressInfo.addressDetail ?? "")

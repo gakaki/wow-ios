@@ -30,7 +30,7 @@ class WOWAddressCell: UITableViewCell {
         nameLabel.text = model.name
         if let mobile = model.mobile {
             if mobile.length > 7 {
-                phoneLabel.text = mobile.stringByX(3,endindex:7)
+                phoneLabel.text = model.mobile!.get_formted_xxPhone()
             }
         }
         detailAddressLabel.text = (model.province ?? "") + (model.city ?? "") + (model.county ?? "") + (model.addressDetail ?? "")

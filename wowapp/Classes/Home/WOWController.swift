@@ -100,15 +100,8 @@ class WOWController: WOWBaseViewController {
     private func configBarItem(){
         
         makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
-                        if let strongSelf = self{
-            //                strongSelf.toVCCart()
-            print("111")
-//            let view = RefreshView()
-            
-//            RefreshView.showInView(self?.view)
-//            view.showInView((self?.view)!)
-            //            }
-                            
+            if let strongSelf = self{
+                
             if strongSelf.isOpen == true {
                 strongSelf.isOpen = false
                   WOWHudRefresh.dismiss()
@@ -117,8 +110,8 @@ class WOWController: WOWBaseViewController {
                 WOWHudRefresh.showInView((self?.view)!)
               
             }
-            }
         }
+      }
         configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }
     

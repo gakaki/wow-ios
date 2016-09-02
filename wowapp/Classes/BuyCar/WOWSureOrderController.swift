@@ -18,7 +18,7 @@ class WOWSureOrderController: WOWBaseViewController {
     var addressArr                      = [WOWAddressListModel]()
     
     //post的参数
-    private var tipsTextField           : UITextField!
+    private var tipsTextField           : HolderTextView!
     private var addressID               : String?
     private var payType                 = "ali"
     
@@ -202,7 +202,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             returnCell = cell
         case 3: //订单备注
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWTipsCell), forIndexPath:indexPath) as! WOWTipsCell
-            tipsTextField = cell.textField
+            tipsTextField = cell.textView
             returnCell = cell
         case 4: //订单汇总
             let titles = ["订单合计","运费","实付金额"]

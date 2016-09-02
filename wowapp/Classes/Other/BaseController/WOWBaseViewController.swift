@@ -97,9 +97,10 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
             let image = UIImage(named: String(format:"refresh-%i",i))
             refreshImages.append(image!)
         }
+        h.automaticallyChangeAlpha = true
         h.setImages(normalImages, forState: .Idle)
         h.setImages(normalImages, forState: .Pulling)
-        h.setImages(refreshImages, duration:3, forState: .Refreshing)
+        h.setImages(refreshImages, duration:2.2, forState: .Refreshing)
         h.lastUpdatedTimeLabel.hidden = true
         h.stateLabel.hidden = true
         return h

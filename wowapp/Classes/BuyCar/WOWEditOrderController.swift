@@ -28,7 +28,7 @@ class WOWEditOrderController: WOWBaseViewController {
     var orderCode                       = String()
     var couponModel                     :WOWCouponModel?
     
-    private var tipsTextField           : UITextField!
+    private var tipsTextField           : HolderTextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -326,7 +326,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             returnCell = cell
         case 3: //订单备注
             let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWTipsCell), forIndexPath:indexPath) as! WOWTipsCell
-            tipsTextField = cell.textField
+            tipsTextField = cell.textView
             returnCell = cell
         default:
             break

@@ -14,35 +14,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="387" height="129.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="写下您的特殊要求" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="ecU-HV-o4K">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oG0-OC-mpN" customClass="HolderTextView" customModule="wowapp" customModuleProvider="target">
                         <rect key="frame" x="15" y="15" width="357" height="99.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="44" id="DKm-Ne-eMS"/>
-                            <constraint firstAttribute="height" constant="43" id="h0c-28-9E8"/>
-                            <constraint firstAttribute="height" constant="99.5" id="yRd-YR-IfU"/>
+                            <constraint firstAttribute="height" constant="99.5" id="XZK-js-7qd"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="DKm-Ne-eMS"/>
-                                <exclude reference="h0c-28-9E8"/>
-                            </mask>
-                        </variation>
-                        <connections>
-                            <outlet property="delegate" destination="Pc7-KI-CrF" id="AT8-Bi-ct4"/>
-                        </connections>
-                    </textField>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ecU-HV-o4K" firstAttribute="top" secondItem="pCJ-3x-6Az" secondAttribute="top" constant="15" id="Exn-zB-eq3"/>
-                    <constraint firstAttribute="trailing" secondItem="ecU-HV-o4K" secondAttribute="trailing" constant="15" id="HFq-Bw-DzE"/>
-                    <constraint firstItem="ecU-HV-o4K" firstAttribute="leading" secondItem="pCJ-3x-6Az" secondAttribute="leading" constant="15" id="RBu-2l-Yh0"/>
-                    <constraint firstAttribute="bottom" secondItem="ecU-HV-o4K" secondAttribute="bottom" priority="999" constant="15" id="iB8-2V-3nj"/>
+                    <constraint firstItem="oG0-OC-mpN" firstAttribute="top" secondItem="pCJ-3x-6Az" secondAttribute="top" constant="15" id="2Tg-X5-sYU"/>
+                    <constraint firstAttribute="trailing" secondItem="oG0-OC-mpN" secondAttribute="trailing" constant="15" id="OYA-Pn-PEn"/>
+                    <constraint firstAttribute="bottom" secondItem="oG0-OC-mpN" secondAttribute="bottom" constant="15" id="Rxf-OZ-U3j"/>
+                    <constraint firstItem="oG0-OC-mpN" firstAttribute="leading" secondItem="pCJ-3x-6Az" secondAttribute="leading" constant="15" id="khC-RD-ODy"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="textField" destination="ecU-HV-o4K" id="515-Oa-szQ"/>
+                <outlet property="textView" destination="oG0-OC-mpN" id="kGF-vk-6qp"/>
             </connections>
             <point key="canvasLocation" x="267.5" y="526"/>
         </tableViewCell>

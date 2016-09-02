@@ -88,6 +88,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     }
     
 //MARK:Lazy
+
 //    lazy var mj_header:MJRefreshGifHeader = {
 //        let h = MJRefreshGifHeader(refreshingTarget: self, refreshingAction:#selector(pullToRefresh))
 //        let image = UIImage.init(named: "refresh-1")

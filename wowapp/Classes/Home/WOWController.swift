@@ -12,7 +12,7 @@ class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
     //    let WOWProductDetailAboutCell = String( WOWProductDetailAboutCell )
     
-    
+    var isOpen: Bool! = false
     
     var dataArr = [WOWCarouselBanners]()    //商品列表数组
     var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
@@ -100,11 +100,18 @@ class WOWController: WOWBaseViewController {
     private func configBarItem(){
         
         makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
-            //            if let strongSelf = self{
-            //                strongSelf.toVCCart()
-            print("111")
-            //            }
+            if let strongSelf = self{
+                
+            if strongSelf.isOpen == true {
+                strongSelf.isOpen = false
+                  WOWHudRefresh.dismiss()
+            }else{
+               strongSelf.isOpen = true
+                WOWHudRefresh.showInView((self?.view)!)
+              
+            }
         }
+      }
         configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }
     

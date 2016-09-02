@@ -35,7 +35,11 @@ class WOWOrderAddressCell: UITableViewCell {
             addressLabel.hidden = false
             addAddressLabel.hidden = true
             nameLabel.text = addressInfo.name ?? ""
-            mobileLabel.text = addressInfo.mobile ?? ""
+            if let mobile = addressInfo.mobile {
+                if mobile.length > 7 {
+                    mobileLabel.text = mobile.stringByX(3,endindex:7)
+                }
+            }
             addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "") + (addressInfo.addressDetail ?? "")
         }else {
             nextImage.hidden = true

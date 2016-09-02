@@ -45,5 +45,25 @@ extension String{
         }
         return  "X\(self)"
     }
+    /**
+     将字符串替换*号
+     
+     - parameter startindex: 开始字符索引
+     - parameter endindex:   结束字符索引
+     
+     - returns: 替换后的字符串
+     */
+    func stringByX(startindex:Int,endindex:Int) -> String{
+        //开始字符索引
+        let startIndex = self.startIndex.advancedBy(startindex)
+        //结束字符索引
+        let endIndex = self.startIndex.advancedBy(endindex)
+        let range = Range<String.Index>(startIndex..<endIndex)
+        var s = String()
+        for _ in 0..<endindex - startindex{
+            s += "*"
+        }
+        return self.stringByReplacingCharactersInRange(range, withString: s)
+    }
 
 }

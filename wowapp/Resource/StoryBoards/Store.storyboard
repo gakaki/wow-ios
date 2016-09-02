@@ -205,7 +205,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHb-tb-mKs" customClass="MIBadgeButton" customModule="wowapp" customModuleProvider="target">
-                                <rect key="frame" x="268" y="20" width="44" height="44"/>
+                                <rect key="frame" x="276" y="20" width="36" height="36"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" backgroundImage="top_car"/>
                                 <connections>
@@ -214,7 +214,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sv-7U-gSt">
-                                <rect key="frame" x="8" y="20" width="44" height="44"/>
+                                <rect key="frame" x="8" y="20" width="36" height="36"/>
                                 <state key="normal" image="top_back"/>
                                 <connections>
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="RiE-4Y-czh"/>
@@ -544,7 +544,7 @@
         <image name="share_white" width="30" height="30"/>
         <image name="shareblack" width="30" height="30"/>
         <image name="store_buyCar" width="26" height="25"/>
-        <image name="top_back" width="44" height="44"/>
-        <image name="top_car" width="44" height="44"/>
+        <image name="top_back" width="36" height="36"/>
+        <image name="top_car" width="36" height="36"/>
     </resources>
 </document>

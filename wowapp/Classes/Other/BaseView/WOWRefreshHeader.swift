@@ -13,7 +13,7 @@ class WOWRefreshHeader: MJRefreshHeader {
 
     override func prepare() {
         super.prepare()
-        self.mj_h = 80.h
+        self.mj_h = 75.h
         
         let image = YYImage(named: "loadRefresh")
         img = YYAnimatedImageView(image: image)

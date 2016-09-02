@@ -28,7 +28,11 @@ class WOWAddressCell: UITableViewCell {
 
     func showData(model:WOWAddressListModel)  {
         nameLabel.text = model.name
-        phoneLabel.text = model.mobile
+        if let mobile = model.mobile {
+            if mobile.length > 7 {
+                phoneLabel.text = mobile.stringByX(3,endindex:7)
+            }
+        }
         detailAddressLabel.text = (model.province ?? "") + (model.city ?? "") + (model.county ?? "") + (model.addressDetail ?? "")
         checkButton.selected = model.isDefault ?? false
         

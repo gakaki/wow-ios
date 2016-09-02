@@ -20,7 +20,7 @@ class WOWOrderDetailSThreeCell: UITableViewCell {
     func showData(m:WOWNewOrderDetailModel){
         orderNewDetailModel = m
         
-        personNameLabel.text = (orderNewDetailModel!.receiverName)! + "  " + (orderNewDetailModel!.receiverMobile)!
+        personNameLabel.text = (orderNewDetailModel!.receiverName)! + "  " + (orderNewDetailModel!.receiverMobile?.get_formted_xxPhone())!
         
         addressLabel.text = orderNewDetailModel!.receiverAddress
         

@@ -45,5 +45,17 @@ extension String{
         }
         return  "X\(self)"
     }
+    /**
+     替换手机号中间四位为“****”
+     */
+    mutating func get_formted_xxPhone() ->  String{
+        
+        let subRange = Range(self.startIndex.advancedBy(3) ..< self.startIndex.advancedBy(7))
+        
+        self.replaceRange(subRange, with: "****")
+        
+        
+        return self
+    }
 
 }

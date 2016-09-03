@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          注册第三方
          */
-        registAppKey()
+        registAppKey(launchOptions)
         
         configRootVC()
     
@@ -82,10 +82,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMSocialSnsService.applicationDidBecomeActive()
     }
     
+    
+    
+    func application(application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
+    {
+        //DeepShare
+        if DeepShare.continueUserActivity(userActivity) {
+            return true
+        }
+        
+        
+        return true
+    }
+
+    
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         if Pingpp.handleOpenURL(url, withCompletion: nil) {
             return true
         }
+        
+        
+        //growing io
+        if Growing.handleUrl(url) {
+            return true
+        }
+        
+        //DeepShare
+        if DeepShare.handleURL(url) {
+            return true
+        }
+        
+        
 //        if MonkeyKing.handleOpenURL(url) {
 //            return true
 //        }
@@ -99,6 +126,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         Pingpp.handleOpenURL(url, withCompletion: nil)
         UMSocialSnsService.handleOpenURL(url)
+        
+        
+        //growing io
+        if Growing.handleUrl(url) {
+            return true
+        }
+        
+        //DeepShare
+        if DeepShare.handleURL(url) {
+            return true
+        }
+        
         return true
     }
     
@@ -109,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-extension AppDelegate{
+extension AppDelegate:DeepShareDelegate{
     
     func rootVCGuide(){
         let nav = UIStoryboard.initNavVC("Login", identifier:String(WOWGuideController))
@@ -148,7 +187,19 @@ extension AppDelegate{
 
     }
     
-    func registAppKey(){
+
+    func onInappDataReturned(params: [NSObject : AnyObject]!, withError error: NSError!) {
+        
+        if ((error == nil)) {
+            DLog("finished init with params = \(params.description)");
+            let name  = params["name"]
+//            goToLinuxCmd(cmdName); //调用应用自己的接口跳转到分享时页面
+        } else {
+            DLog("init error id: \(error.code) error.toString()");
+        }
+    }
+    
+    func registAppKey(launchOptions: [NSObject: AnyObject]?){
         //友盟
         UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
         UMAnalyticsConfig.sharedInstance().channelId = ""
@@ -159,6 +210,11 @@ extension AppDelegate{
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
         
         //Growing
+        Growing.startWithAccountId("a04e14656f08dc7e")
+        //DeepShare
+        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
+        //Talking Data
+        TalkingData.sessionStarted("88C9035CD51E8009BE4441263D83003A", withChannelId: "app store")
         
         
         

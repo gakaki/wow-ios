@@ -37,6 +37,17 @@
 #import "WXApi.h"
 #import <Pingpp.h>
 
+//DeepShare(DeepLink)
+#import "DeepShare.h"
+#import "DSError.h"
+
+//GrowingIO 分析
+#import "Growing.h"
+
+//Talking Data 分析
+#import "TalkingData.h"
+#import "TalkingDataSMS.h"
+
 
 //Leancloud
 //#import <AVOSCloud/AVOSCloud.h>

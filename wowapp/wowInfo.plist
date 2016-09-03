@@ -54,6 +54,16 @@
 			<key>CFBundleURLName</key>
 			<string>dse494427d3e67f207</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>GrowingIO</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>growing.664f2b0f4a4c123a</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>8</string>

@@ -10,7 +10,7 @@ import UIKit
 //import MonkeyKing
 import IQKeyboardManagerSwift
 import YYWebImage
-import JSPatch
+//import JSPatch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         asyncLoad()
         
-        JSPatchHelper.jspatch_playground()
+//        JSPatchHelper.jspatch_playground()
 //        JSPatchHelper.jspatch_init()
  
         return true

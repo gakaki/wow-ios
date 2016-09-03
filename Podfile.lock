@@ -23,13 +23,6 @@ PODS:
   - HappyDNS (0.3.10)
   - Hashids-Swift (0.3.0)
   - IQKeyboardManagerSwift (4.0.4)
-  - JSPatch (1.1):
-    - JSPatch/Core (= 1.1)
-  - JSPatch/Core (1.1)
-  - JSPatch/Extensions (1.1):
-    - JSPatch/Core
-  - JSPatch/Loader (1.1):
-    - JSPatch/Core
   - Kingfisher (2.4.2)
   - MJRefresh (3.1.10)
   - Moya (6.1.3):
@@ -87,9 +80,6 @@ DEPENDENCIES:
   - FlexboxLayout (from `FlexBoxLayout/FlexboxLayout.podspec`)
   - Hashids-Swift
   - IQKeyboardManagerSwift
-  - JSPatch
-  - JSPatch/Extensions
-  - JSPatch/Loader
   - Kingfisher
   - MJRefresh
   - Moya (~> 6.1.3)
@@ -138,7 +128,6 @@ SPEC CHECKSUMS:
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Hashids-Swift: 5d7c069b0d4a3b70d4e2a840c420115dd517050d
   IQKeyboardManagerSwift: e0964d04d6a29b71016fd346dca13ecb80a2823a
-  JSPatch: ade285ad1d8f06146ed6054a39cef87509453299
   Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
   Moya: 26b290a8d675c167ea6229ba08e07dce562265a5
@@ -166,6 +155,6 @@ SPEC CHECKSUMS:
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: cd839aa8c54b391b69ddbd67b6b63b4d2cc3503d
+PODFILE CHECKSUM: ce6924dd876065b513fae2fae49706ca9fedc451
 
 COCOAPODS: 1.1.0.beta.1

@@ -51,6 +51,12 @@ PODS:
     - HappyDNS (~> 0.3)
   - Result (1.0.2)
   - RongCloudIMKit (2.6.0)
+  - RxCocoa (2.6.0):
+    - RxSwift (~> 2.5)
+  - RxDataSources (0.8.1):
+    - RxCocoa (~> 2.2)
+    - RxSwift (~> 2.2)
+  - RxSwift (2.6.0)
   - SnapKit (0.19.1)
   - StyleKit (1.0.0)
   - SVProgressHUD (2.0.3)
@@ -93,6 +99,9 @@ DEPENDENCIES:
   - PonyFrameworkOnSwift (from `PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec`)
   - Qiniu (from `qiniu-sdk/Qiniu.podspec`)
   - RongCloudIMKit (= 2.6.0)
+  - RxCocoa (= 2.6.0)
+  - RxDataSources (= 0.8.1)
+  - RxSwift (= 2.6.0)
   - SnapKit (~> 0.19.1)
   - StyleKit
   - SVProgressHUD (~> 2.0.2)
@@ -139,6 +148,9 @@ SPEC CHECKSUMS:
   Qiniu: 0e92ff0d1b9afbc55275306671284e4ebeb08d03
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RongCloudIMKit: bbfcb34596b25666fb1be470644162142368bcdb
+  RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
+  RxDataSources: 4a87345847d66ef84ecc10bdfa189190f3cd6b12
+  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   StyleKit: 7dac3ff9ffec40fec57f9a8582c4ff5a95ca17e8
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
@@ -154,6 +166,6 @@ SPEC CHECKSUMS:
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: 1b09375cdd6e4df568839cc5d5bc46b36709b796
+PODFILE CHECKSUM: cd839aa8c54b391b69ddbd67b6b63b4d2cc3503d
 
 COCOAPODS: 1.1.0.beta.1

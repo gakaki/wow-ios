@@ -71,6 +71,16 @@
 		06FB94B11D6306C100554871 /* VCTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B01D6306C100554871 /* VCTopic.swift */; };
 		06FB94B51D63FB4800554871 /* ModelVOCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B41D63FB4800554871 /* ModelVOCoupon.swift */; };
 		06FB94B71D64102C00554871 /* ModelTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B61D64102C00554871 /* ModelTopic.swift */; };
+		06FD5EF91D7AB4600070B763 /* libGrowing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5EF31D7AB4600070B763 /* libGrowing.a */; };
+		06FD5EFA1D7AB4600070B763 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 06FD5EF41D7AB4600070B763 /* VERSION */; };
+		06FD5EFB1D7AB4600070B763 /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5EF61D7AB4600070B763 /* libTalkingData.a */; };
+		06FD5EFD1D7AB5410070B763 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5EFC1D7AB5410070B763 /* libicucore.tbd */; };
+		06FD5EFF1D7AB5680070B763 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5EFE1D7AB5680070B763 /* Foundation.framework */; };
+		06FD5F011D7AB7F10070B763 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5F001D7AB7F10070B763 /* AdSupport.framework */; };
+		06FD5F031D7AB7FB0070B763 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5F021D7AB7FB0070B763 /* CoreMotion.framework */; };
+		06FD5F071D7AB8B70070B763 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5F061D7AB8B70070B763 /* SafariServices.framework */; };
+		06FD5F0E1D7ABA0A0070B763 /* libDeepShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5F0C1D7ABA0A0070B763 /* libDeepShare.a */; };
+		06FD5F0F1D7ABA0A0070B763 /* release notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06FD5F0D1D7ABA0A0070B763 /* release notes.txt */; };
 		06FED4441D4634A600D7B068 /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 06FED4431D4634A600D7B068 /* city.json */; };
 		292CBA081CFE85B000248C88 /* WOWRegistInfoFirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */; };
 		292CBA0A1CFE867D00248C88 /* WOWRegistInfoSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */; };
@@ -495,6 +505,22 @@
 		06FB94B01D6306C100554871 /* VCTopic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCTopic.swift; sourceTree = "<group>"; };
 		06FB94B41D63FB4800554871 /* ModelVOCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVOCoupon.swift; sourceTree = "<group>"; };
 		06FB94B61D64102C00554871 /* ModelTopic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTopic.swift; sourceTree = "<group>"; };
+		06FD5EF21D7AB4600070B763 /* Growing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growing.h; sourceTree = "<group>"; };
+		06FD5EF31D7AB4600070B763 /* libGrowing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGrowing.a; sourceTree = "<group>"; };
+		06FD5EF41D7AB4600070B763 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		06FD5EF61D7AB4600070B763 /* libTalkingData.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTalkingData.a; sourceTree = "<group>"; };
+		06FD5EF71D7AB4600070B763 /* TalkingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingData.h; sourceTree = "<group>"; };
+		06FD5EF81D7AB4600070B763 /* TalkingDataSMS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataSMS.h; sourceTree = "<group>"; };
+		06FD5EFC1D7AB5410070B763 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		06FD5EFE1D7AB5680070B763 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		06FD5F001D7AB7F10070B763 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		06FD5F021D7AB7FB0070B763 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		06FD5F041D7AB85E0070B763 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		06FD5F061D7AB8B70070B763 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		06FD5F0A1D7ABA0A0070B763 /* DeepShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepShare.h; sourceTree = "<group>"; };
+		06FD5F0B1D7ABA0A0070B763 /* DSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSError.h; sourceTree = "<group>"; };
+		06FD5F0C1D7ABA0A0070B763 /* libDeepShare.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDeepShare.a; sourceTree = "<group>"; };
+		06FD5F0D1D7ABA0A0070B763 /* release notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "release notes.txt"; sourceTree = "<group>"; };
 		06FED4431D4634A600D7B068 /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
 		292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoFirstController.swift; sourceTree = "<group>"; };
 		292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoSecondController.swift; sourceTree = "<group>"; };
@@ -849,13 +875,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06FD5F071D7AB8B70070B763 /* SafariServices.framework in Frameworks */,
+				06FD5F031D7AB7FB0070B763 /* CoreMotion.framework in Frameworks */,
+				06FD5F011D7AB7F10070B763 /* AdSupport.framework in Frameworks */,
+				06FD5EFF1D7AB5680070B763 /* Foundation.framework in Frameworks */,
+				06FD5EFD1D7AB5410070B763 /* libicucore.tbd in Frameworks */,
 				069922301D75324F00579C51 /* JavaScriptCore.framework in Frameworks */,
 				29FF273D1CFDB5EC00DF2A9B /* libz.tbd in Frameworks */,
+				06FD5EFB1D7AB4600070B763 /* libTalkingData.a in Frameworks */,
 				29FF273B1CFDB5E600DF2A9B /* libstdc++.tbd in Frameworks */,
 				29FF27391CFDB5E000DF2A9B /* CoreTelephony.framework in Frameworks */,
 				29FF27371CFDB5D800DF2A9B /* libsqlite3.tbd in Frameworks */,
 				29FF27351CFDB5D200DF2A9B /* CoreGraphics.framework in Frameworks */,
 				29FF27331CFDB5C300DF2A9B /* libiconv.tbd in Frameworks */,
+				06FD5F0E1D7ABA0A0070B763 /* libDeepShare.a in Frameworks */,
 				29FF27311CFDB5BD00DF2A9B /* Security.framework in Frameworks */,
 				29FF272F1CFDB5B500DF2A9B /* ImageIO.framework in Frameworks */,
 				29FF272D1CFDB5AB00DF2A9B /* SystemConfiguration.framework in Frameworks */,
@@ -863,6 +896,7 @@
 				29FF27031CFDA86300DF2A9B /* libSocialWechat.a in Frameworks */,
 				29FF27041CFDA86300DF2A9B /* libWeChatSDK.a in Frameworks */,
 				29FF26F61CFDA86300DF2A9B /* TencentOpenAPI.framework in Frameworks */,
+				06FD5EF91D7AB4600070B763 /* libGrowing.a in Frameworks */,
 				29FF27151CFDA8C000DF2A9B /* Realm.framework in Frameworks */,
 				29FF26F91CFDA86300DF2A9B /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
 				29FF27171CFDA8C100DF2A9B /* RealmSwift.framework in Frameworks */,
@@ -1119,6 +1153,54 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		06FD5EF01D7AB4600070B763 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				06FD5EF11D7AB4600070B763 /* GrowingIO */,
+				06FD5EF51D7AB4600070B763 /* TalkingData */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		06FD5EF11D7AB4600070B763 /* GrowingIO */ = {
+			isa = PBXGroup;
+			children = (
+				06FD5EF21D7AB4600070B763 /* Growing.h */,
+				06FD5EF31D7AB4600070B763 /* libGrowing.a */,
+				06FD5EF41D7AB4600070B763 /* VERSION */,
+			);
+			path = GrowingIO;
+			sourceTree = "<group>";
+		};
+		06FD5EF51D7AB4600070B763 /* TalkingData */ = {
+			isa = PBXGroup;
+			children = (
+				06FD5EF61D7AB4600070B763 /* libTalkingData.a */,
+				06FD5EF71D7AB4600070B763 /* TalkingData.h */,
+				06FD5EF81D7AB4600070B763 /* TalkingDataSMS.h */,
+			);
+			path = TalkingData;
+			sourceTree = "<group>";
+		};
+		06FD5F081D7ABA0A0070B763 /* DeepLink */ = {
+			isa = PBXGroup;
+			children = (
+				06FD5F091D7ABA0A0070B763 /* DeepShare */,
+			);
+			path = DeepLink;
+			sourceTree = "<group>";
+		};
+		06FD5F091D7ABA0A0070B763 /* DeepShare */ = {
+			isa = PBXGroup;
+			children = (
+				06FD5F0A1D7ABA0A0070B763 /* DeepShare.h */,
+				06FD5F0B1D7ABA0A0070B763 /* DSError.h */,
+				06FD5F0C1D7ABA0A0070B763 /* libDeepShare.a */,
+				06FD5F0D1D7ABA0A0070B763 /* release notes.txt */,
+			);
+			path = DeepShare;
 			sourceTree = "<group>";
 		};
 		292CBA0B1CFE868800248C88 /* View */ = {
@@ -1404,6 +1486,8 @@
 		29FF25E41CFDA86300DF2A9B /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
+				06FD5F081D7ABA0A0070B763 /* DeepLink */,
+				06FD5EF01D7AB4600070B763 /* Analytics */,
 				638B18A21D7829F800F89C76 /* HolderTextView */,
 				06B765F21D77E96600F803A9 /* GYHttpMock */,
 				069923451D7544B100579C51 /* JPPlaygroundTool */,
@@ -2011,6 +2095,12 @@
 		EF468D690CFDA424F86FC10D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06FD5F061D7AB8B70070B763 /* SafariServices.framework */,
+				06FD5F041D7AB85E0070B763 /* WebKit.framework */,
+				06FD5F021D7AB7FB0070B763 /* CoreMotion.framework */,
+				06FD5F001D7AB7F10070B763 /* AdSupport.framework */,
+				06FD5EFE1D7AB5680070B763 /* Foundation.framework */,
+				06FD5EFC1D7AB5410070B763 /* libicucore.tbd */,
 				0699222F1D75324F00579C51 /* JavaScriptCore.framework */,
 				29FF273C1CFDB5EC00DF2A9B /* libz.tbd */,
 				29FF273A1CFDB5E600DF2A9B /* libstdc++.tbd */,
@@ -2103,6 +2193,7 @@
 				2D6B027F1D589615003D21C1 /* WOWOrderDetailSThreeCell.xib in Resources */,
 				636C33DC1D52EA1F00CA4E69 /* WOWOrderFreightCell.xib in Resources */,
 				068B60B51D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib in Resources */,
+				06FD5F0F1D7ABA0A0070B763 /* release notes.txt in Resources */,
 				29FF26671CFDA86300DF2A9B /* WOWSearchCell.xib in Resources */,
 				29FF26481CFDA86300DF2A9B /* WOWBuyCarNormalCell.xib in Resources */,
 				29FF27121CFDA86300DF2A9B /* wowprotocol.html in Resources */,
@@ -2176,6 +2267,7 @@
 				068B60B11D4F3561001AD778 /* Found.storyboard in Resources */,
 				2D6B027B1D589606003D21C1 /* WOWOrderDetailTwoCell.xib in Resources */,
 				29FF264F1CFDA86300DF2A9B /* WOWValue1Cell.xib in Resources */,
+				06FD5EFA1D7AB4600070B763 /* VERSION in Resources */,
 				29FF270C1CFDA86300DF2A9B /* Home.storyboard in Resources */,
 				29FF26FC1CFDA86300DF2A9B /* UMSCommentInputControlleriPad.xib in Resources */,
 				632A93371D475F70003A5966 /* WOWBuyCarEmpty.xib in Resources */,
@@ -2668,6 +2760,9 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/TencentOpenAPI",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
+					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/GrowingIO",
+					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/TalkingData",
+					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/DeepLink/DeepShare",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2704,6 +2799,9 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/TencentOpenAPI",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/UMeng/Wechat",
+					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/GrowingIO",
+					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/TalkingData",
+					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/DeepLink/DeepShare",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";

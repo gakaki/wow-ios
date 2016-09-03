@@ -158,6 +158,9 @@ extension AppDelegate{
         UMSocialData.setAppKey(WOWID.UMeng.appID)
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
         
+        //Growing
+        
+        
         
 //        //MonkeyKing
 //        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))

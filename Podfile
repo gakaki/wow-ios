@@ -4,12 +4,17 @@ inhibit_all_warnings!
 platform :ios, '8.0'
 use_frameworks!
 
+pod 'RxSwift', '2.6.0'
+pod 'RxCocoa', '2.6.0'
+pod 'RxDataSources', '0.8.1'
+
+
 pod 'SnapKit', '~> 0.19.1'
 pod 'Moya', '~> 6.1.3'
 
-pod "JSPatch"
-pod "JSPatch/Extensions"
-pod "JSPatch/Loader"
+# pod "JSPatch"
+# pod "JSPatch/Extensions"
+# pod "JSPatch/Loader"
 
 pod 'SwiftyJSON'
 pod 'ObjectMapper'

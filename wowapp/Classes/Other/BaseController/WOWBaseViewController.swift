@@ -8,6 +8,13 @@
 
 import UIKit
 
+
+extension UIViewController {
+    static var identifier: String {
+        let mirror = Mirror(reflecting: self)
+        return String(mirror.subjectType)
+    }
+}
 class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource{
     var hideNavigationBar:Bool = false
     var pageIndex = 1 //翻页
@@ -48,12 +55,23 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 //MARK:Life
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        //TalkingData统计页面
+        TalkingData.trackPageEnd( self.title )
+
+        
         MobClick.endLogPageView(self.title)
         UIApplication.sharedApplication().keyWindow?.endEditing(true)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        //growing io 统计页面
+        
+        
+        //TalkingData统计页面
+        TalkingData.trackPageBegin( self.title )
+        
         //友盟统计页面
         MobClick.beginLogPageView(self.title)
         setCustomerBack()

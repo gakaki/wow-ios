@@ -1,6 +1,9 @@
 import UIKit
 import SnapKit
 //import FlexboxLayout
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 class VCFound: VCBaseVCCategoryFound {
     
@@ -18,9 +21,22 @@ class VCFound: VCBaseVCCategoryFound {
     var isFavorite: Bool = false
     @IBOutlet weak var tableView: UITableView!
     
+    let currentQuestionIndex                        = Variable(0)
+    let selectedIndexPaths: Variable<[NSIndexPath]> = Variable([])
+    let displayAnswers: Variable                    = Variable(false)
+    let disposeBag                                  = DisposeBag()
+    
+    private func setupCurrentQuestionIndexObserver() {
+        currentQuestionIndex
+            .asObservable()
+            .subscribeNext { index -> Void in
+            }
+            .addDisposableTo(disposeBag)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         do {
             try request_with_throw()
         }catch{

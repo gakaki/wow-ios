@@ -9,19 +9,11 @@
 import UIKit
 
 class WOWSearchController: WOWBaseViewController {
-    var menuView:WOWTopMenuTitleView!
-    @IBOutlet weak var containerView: UIView!
-    
-    var pageController:UIPageViewController!
-    var controllers:[UIViewController] = []
-    var lastPage = 0
-    var currentPage:Int = 0{
-        didSet{
-            
-        }
-    }
+    @IBOutlet weak var collectionView: UICollectionView!
 
-    
+    let identifier = "WOWTagCollectionViewCell"
+    var keyWords = [String]()
+
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +62,13 @@ class WOWSearchController: WOWBaseViewController {
         return v
     }()
     
+    lazy var layout: WOWSearchFlowLayout = {
+      let layout = WOWSearchFlowLayout()
+        layout.estimatedItemSize = CGSizeMake(100, 35)
+        layout.sectionInset                 = UIEdgeInsetsMake(15, 15, 0, 15)
+        layout.headerReferenceSize = CGSizeMake(MGScreenWidth, 40)
+        return layout
+    }()
 
     
 //MARK:Private Method
@@ -78,26 +77,16 @@ class WOWSearchController: WOWBaseViewController {
         navigationController?.navigationBar.addSubview(searchView)
         navigationItem.leftBarButtonItems = nil
         makeCustomerNavigationItem("", left: true, handler:nil)
-        configCheckView()
-        configChildControllers()
+        defaultSetup()
+        keyWords = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
     }
     
-    private func configChildControllers(){
-        pageController = self.childViewControllers.first as! UIPageViewController
-        pageController.dataSource = self
-        pageController.delegate = self
-        let vc1 = UIStoryboard.initialViewController("Home", identifier:"WOWSearchChildController")
-        let vc2 = UIStoryboard.initialViewController("Home", identifier:"WOWSearchChildController")
-        pageController.setViewControllers([vc1], direction:UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
-        controllers = [vc1,vc2]
-    }
-    
-    private func configCheckView(){
-        WOWCheckMenuSetting.defaultSetUp()
-        menuView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, MGScreenWidth, 40), titles: ["热门搜索","搜索历史"])
-        menuView.delegate = self
-        WOWBorderColor(menuView)
-        self.view.addSubview(menuView)
+    func defaultSetup() {
+
+        collectionView.registerNib(UINib.nibName(String(WOWSearchCell)), forCellWithReuseIdentifier:"WOWSearchCell")
+        collectionView.collectionViewLayout = layout
+        collectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
+        
     }
     
     
@@ -112,47 +101,52 @@ class WOWSearchController: WOWBaseViewController {
 
 
 //MARK:Delegate
-
-extension WOWSearchController:UIPageViewControllerDataSource,UIPageViewControllerDelegate{
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let vcIndex = controllers.indexOf(viewController)
-        if vcIndex >= controllers.count - 1{
-            return nil
-        }else{
-            return controllers[vcIndex! + 1]
-        }
+extension WOWSearchController: UICollectionViewDelegate, UICollectionViewDataSource {
+    //MARK: - UICollectionView Delegate/Datasource Methods
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWSearchCell), forIndexPath: indexPath) as! WOWSearchCell
+        cell.titleLabel.text = keyWords[indexPath.row]
+        return cell
+        
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let vcIndex = controllers.indexOf(viewController)
-        if vcIndex <= 0{
-            return nil
-        }else{
-            return controllers[vcIndex! - 1]
-        }
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 2
     }
     
-    //PageViewController滚动结束
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let v = pageViewController.viewControllers?.first
-        let index = Int(controllers.indexOf(v!)!)
-        menuView.selectedIndex = index
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return keyWords.count
     }
-}
-
-
-//左右滑动翻页的
-extension WOWSearchController:TopMenuProtocol{
-    func topMenuItemClick(index: Int) {
-        DLog("选择了\(index)")
-        currentPage = index
-        if currentPage > lastPage {
-             pageController.setViewControllers([controllers[currentPage]], direction:.Forward, animated: true, completion: nil)
-        }else{
-             pageController.setViewControllers([controllers[currentPage]], direction:.Reverse, animated: true, completion: nil)
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        var returnView:UICollectionReusableView!
+        switch indexPath.section {
+        case 0:
+            let view = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWCollectionHeaderCell", forIndexPath: indexPath) as! WOWReuseSectionView
+            view.titleLabel.text = "热门搜索"
+            returnView = view
+        case 1:
+            let view = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWCollectionHeaderCell", forIndexPath: indexPath) as! WOWReuseSectionView
+            view.titleLabel.text = "历史搜索"
+            returnView = view
+        default:
+            return returnView
         }
+        
+       
+        return returnView
+
+
     }
+    
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        DLog(keyWords[indexPath.row])
+    }
+
+
 }
+
 
 //搜索结果的item点击
 extension WOWSearchController:SearchResultViewDelegate{

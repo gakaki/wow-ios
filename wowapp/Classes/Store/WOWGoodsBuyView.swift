@@ -203,7 +203,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
         secondCollectionView?.registerNib(nib, forCellWithReuseIdentifier: identifier)
         let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
-
+        
         secondCollectionView?.collectionViewLayout = tagCellLayout
         secondCollectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
     }

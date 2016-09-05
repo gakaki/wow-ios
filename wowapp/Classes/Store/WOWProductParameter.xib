@@ -171,7 +171,7 @@
                 <outlet property="originLabel" destination="Iy7-1X-k99" id="uEk-Tq-hie"/>
                 <outlet property="styleLabel" destination="Iaq-Zt-pPu" id="LtH-h9-jjX"/>
             </connections>
-            <point key="canvasLocation" x="112" y="278"/>
+            <point key="canvasLocation" x="68" y="278"/>
         </tableViewCell>
     </objects>
 </document>

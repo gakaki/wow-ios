@@ -387,6 +387,7 @@
 		63884A071D64150F00FCCFCC /* WOWCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63884A051D64150F00FCCFCC /* WOWCategoryCell.swift */; };
 		63884A081D64150F00FCCFCC /* WOWCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63884A061D64150F00FCCFCC /* WOWCategoryCell.xib */; };
 		638B18A41D7829F800F89C76 /* HolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B18A31D7829F800F89C76 /* HolderTextView.swift */; };
+		63B8AAC41D7D232A00282536 /* WOWSearchFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8AAC31D7D232A00282536 /* WOWSearchFlowLayout.swift */; };
 		63C42DC61D646B0400879FEB /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC11D646B0400879FEB /* PhotoBrowser.swift */; };
 		63C42DC71D646B0400879FEB /* PhotoToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC21D646B0400879FEB /* PhotoToolBar.swift */; };
 		63C42DC81D646B0400879FEB /* PhotoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC31D646B0400879FEB /* PhotoViewCell.swift */; };
@@ -833,6 +834,7 @@
 		63884A051D64150F00FCCFCC /* WOWCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCategoryCell.swift; sourceTree = "<group>"; };
 		63884A061D64150F00FCCFCC /* WOWCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWCategoryCell.xib; sourceTree = "<group>"; };
 		638B18A31D7829F800F89C76 /* HolderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HolderTextView.swift; sourceTree = "<group>"; };
+		63B8AAC31D7D232A00282536 /* WOWSearchFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchFlowLayout.swift; sourceTree = "<group>"; };
 		63C42DC11D646B0400879FEB /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
 		63C42DC21D646B0400879FEB /* PhotoToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoToolBar.swift; sourceTree = "<group>"; };
 		63C42DC31D646B0400879FEB /* PhotoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewCell.swift; sourceTree = "<group>"; };
@@ -1903,6 +1905,7 @@
 				2D3273EF1D752DF70013BDB1 /* HomeFormReusableView.xib */,
 				2D3273FA1D754DD80013BDB1 /* HomeBottomCell.swift */,
 				2D3273FB1D754DD80013BDB1 /* HomeBottomCell.xib */,
+				63B8AAC31D7D232A00282536 /* WOWSearchFlowLayout.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2514,6 +2517,7 @@
 				29FF26EF1CFDA86300DF2A9B /* TagCellLayout+Helper.swift in Sources */,
 				06A2DBC11D6A268D00F4D479 /* TooglePriceBtn.swift in Sources */,
 				632A933B1D487388003A5966 /* CAPSPageMenu.swift in Sources */,
+				63B8AAC41D7D232A00282536 /* WOWSearchFlowLayout.swift in Sources */,
 				29FF26621CFDA86300DF2A9B /* WOWReuseSectionView.swift in Sources */,
 				29FF267A1CFDA86300DF2A9B /* WOWBaseTableViewController.swift in Sources */,
 				29FF265E1CFDA86300DF2A9B /* WOWMenuCell.swift in Sources */,

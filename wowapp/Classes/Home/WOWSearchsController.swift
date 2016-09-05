@@ -165,7 +165,7 @@ extension WOWSearchsController:UITextFieldDelegate{
         }
         keyword = text
         pageIndex = 0
-        request()
+//        request()
     }
 }
 

@@ -17,6 +17,10 @@ class WOWSearchController: WOWBaseViewController {
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        
+        
+       
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -48,7 +52,7 @@ class WOWSearchController: WOWBaseViewController {
     lazy var searchView:WOWSearchBarView = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWSearchBarView), owner: self, options: nil).last as! WOWSearchBarView
         view.frame = CGRectMake(15, 8, MGScreenWidth - 30,30)
-        view.layer.shadowColor = UIColor(white: 0, alpha: 0.5).CGColor
+//        view.layer.shadowColor = UIColor(white: 0, alpha: 0.5).CGColor
         view.searchTextField.delegate = self
         view.searchTextField.becomeFirstResponder()
         view.cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
@@ -124,18 +128,19 @@ extension WOWSearchController: UICollectionViewDelegate, UICollectionViewDataSou
         case 0:
             let view = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWCollectionHeaderCell", forIndexPath: indexPath) as! WOWReuseSectionView
             view.titleLabel.text = "热门搜索"
+            view.clearButton.hidden = true
             returnView = view
         case 1:
             let view = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWCollectionHeaderCell", forIndexPath: indexPath) as! WOWReuseSectionView
             view.titleLabel.text = "历史搜索"
+            view.clearButton.hidden = false
+            view.delegate = self
             returnView = view
         default:
             return returnView
         }
-        
        
         return returnView
-
 
     }
     
@@ -147,7 +152,11 @@ extension WOWSearchController: UICollectionViewDelegate, UICollectionViewDataSou
 
 }
 
-
+extension WOWSearchController: WOWReuseSectionViewDelegate {
+    func clearHistoryClick() {
+        DLog("清除历史搜索")
+    }
+}
 //搜索结果的item点击
 extension WOWSearchController:SearchResultViewDelegate{
     func goodsItemClick(model: WOWGoodsModel) {

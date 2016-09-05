@@ -108,22 +108,6 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
 //MARK:Lazy
 
-//    lazy var mj_header:MJRefreshGifHeader = {
-//        let h = MJRefreshGifHeader(refreshingTarget: self, refreshingAction:#selector(pullToRefresh))
-//        let image = UIImage.init(named: "refresh-1")
-//        let normalImages = [image!]
-//        var refreshImages = [UIImage]()
-//        for  i in 1...72 {
-//            let image = UIImage(named: String(format:"refresh-%i",i))
-//            refreshImages.append(image!)
-//        }
-//        h.setImages(normalImages, forState: .Idle)
-//        h.setImages(normalImages, forState: .Pulling)
-//        h.setImages(refreshImages, duration:3, forState: .Refreshing)
-//        h.lastUpdatedTimeLabel.hidden = true
-//        h.stateLabel.hidden = true
-//        return h
-//    }()
     
     lazy var mj_header:WOWRefreshHeader = {
         

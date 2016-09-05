@@ -40,6 +40,7 @@ pod 'EZSwiftExtensions', '~> 1.2.3' #通用的拓展库
 pod 'IQKeyboardManagerSwift'
 #pod 'HidingNavigationBar', '~> 0.3.0'
 pod 'XZMRefresh'            #横向刷新
+pod 'YTKKeyValueStore_Swift', '~> 0.3.4'          #数据存储
 
 
 

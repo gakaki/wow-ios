@@ -23,7 +23,7 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
     var groupId                     :Int?
     var canShow                     :Int?
     var createTime                  :NSNumber?
-    
+    var products                  :[WOWFoundProductModel]?
     required init?(_ map: Map) {
         
         
@@ -39,5 +39,6 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
         groupId        <- map["groupId"]
         canShow        <- map["canShow"]
         createTime     <- map["createTime"]
+        products     <- map["products"]
     }
 }

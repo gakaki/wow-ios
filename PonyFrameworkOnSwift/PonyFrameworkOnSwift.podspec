@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
 
 
-  s.author             = { "ponycoder" => "571533442@qq.com" }
+  s.author      = { "ponycoder" => "571533442@qq.com" }
 
 
   s.source       = { :git => "https://github.com/MakeBetterMe/PonyFrameworkOnSwift.git", :tag => "0.0.1" }

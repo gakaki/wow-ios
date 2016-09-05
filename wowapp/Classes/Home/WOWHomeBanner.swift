@@ -24,6 +24,35 @@ class WOWHomeBanner: WOWBaseModel,Mappable {
     }
 
 }
+class WOWHomeBannerr: WOWBaseModel,Mappable {
+    //moduleType = 101
+    var banners               :   [WOWCarouselBanners]?
+    //moduleType = 201
+    var bannerImgSrc          :     String?
+    var bannerLinkType        :     Int?
+    var bannerLinkTargetId    :     Int?
+    var bannerLinkUrl         :     String?
+    //moduleType = 601
+    
+   
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        banners                 <- map["banners"]
+
+        bannerImgSrc            <- map["bannerImgSrc"]
+        bannerLinkType          <- map["bannerLinkType"]
+        bannerLinkTargetId      <- map["bannerLinkTargetId"]
+        bannerLinkUrl           <- map["bannerLinkUrl"]
+
+        
+    }
+    
+}
+
+
 final class WOWCarouselBanners: WOWBaseModel,Mappable{
     var bannerLinkTargetId    :   Int?
     var bannerLinkUrl         :   String?

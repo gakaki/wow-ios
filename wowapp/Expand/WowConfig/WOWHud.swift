@@ -35,6 +35,10 @@ struct WOWHud {
     }
     
     static func showMsg(message:String?){
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            LoadView.sharedInstance.dissMissView()
+        }
         configSVHud()
         let msg = message ?? "网络错误"
         SVProgressHUD.showInfoWithStatus(msg)

@@ -18,6 +18,9 @@ public enum RequestApi{
     //Tab 第一个栏 首页 该死的那3个url
     case Api_Home_Banners
     
+    // 首页Url
+    case Api_Home_List(region: Int)
+    
     //发现 分类 页面
     case Api_Found_Main
     case Api_Found_2nd
@@ -197,6 +200,11 @@ extension RequestApi:TargetType{
         //Tab 第一个栏 首页 该死的那3个url
         case .Api_Home_Banners:
             return URL_home_banners
+            
+        case .Api_Home_List:
+            return URL_home_List
+            
+            
 //        case .Api_Home_Scenes:
 //            return URL_home_scenes
 //        case .Api_Home_Topics:
@@ -349,7 +357,7 @@ extension RequestApi:TargetType{
     public var method:Moya.Method{
         switch self {
 
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products, .Api_Home_List:
 
             return .GET
 
@@ -479,6 +487,10 @@ extension RequestApi:TargetType{
             
             case .Api_Home_Banners():
                 params =  ["pageType":1]
+            
+            case let .Api_Home_List(region):
+                params = ["pageId":1, "region":region]
+            
             case .Api_Found_2nd:
                 break
             case .Api_Found_Main:

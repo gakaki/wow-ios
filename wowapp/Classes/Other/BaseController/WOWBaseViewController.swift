@@ -13,13 +13,13 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     var pageIndex = 1 //翻页
     var isRreshing : Bool = false
     var carBadgeCount: MIBadgeButton?
- 
+    var isCurrentRequest : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         self.navigationController?.navigationBar.shadowImage = UIImage(named: "line")
-        WOWHud.showLoading()
+       
     }
     
     
@@ -128,7 +128,12 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     }
     
     func request(){
-
+        if isCurrentRequest == false{
+             WOWHud.showLoading()
+            isCurrentRequest = true
+        }
+      
+        
     }
     
     func loadMore() {
@@ -151,6 +156,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
             pageIndex = 1
            isRreshing = true
         }
+        // 关闭动画， 防止下拉刷新此界面再次出来
         LoadView.sharedInstance.dissMissView()
         request()
     }

@@ -43,8 +43,8 @@ class WOWNetManager {
 
     
     func getPresentedController() -> UIViewController? {
-        var appRootVC: UIViewController = UIApplication.sharedApplication().keyWindow!.rootViewController!
-        var topVC: UIViewController     = appRootVC
+        let appRootVC: UIViewController = UIApplication.sharedApplication().keyWindow!.rootViewController!
+        let topVC: UIViewController     = appRootVC
         let presentedVC                 = topVC.presentedViewController
         
         return presentedVC
@@ -56,7 +56,7 @@ class WOWNetManager {
         successClosure:SuccessClosure,
         failClosure:FailClosure
     ){
-        
+       
         print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
         requestProvider.request(target) { (result) in

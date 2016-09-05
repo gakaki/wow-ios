@@ -26,7 +26,7 @@ class WOWController: WOWBaseViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         //        self.hideNavigationBar = true
         requestQueue()
-        
+        requestTest()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -166,7 +166,39 @@ class WOWController: WOWBaseViewController {
         }
     }
     
-    
+    func requestTest() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_List(region: 1), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                //                WOWHud.dismiss()
+                
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.endRefresh()
+                
+                let bannerList = Mapper<WOWHomeModule>().mapArray(JSON(result)["moduleDataList"].arrayObject)
+                print(bannerList)
+                
+//                let carouselBanners = Mapper<WOWCarouselBanners>().mapArray(JSON(result)["carouselBanners"].arrayObject)
+//                if let carouselBanners = carouselBanners{
+//                    strongSelf.bannerArray = []
+//                    strongSelf.bannerArray = carouselBanners
+//                }
+//                if let brandArray = bannerList{
+//                    strongSelf.dataArr = []
+//                    strongSelf.dataArr.appendContentsOf(brandArray)
+//                }
+//                strongSelf.banner.reloadBanner(strongSelf.bannerArray)
+//                
+//                strongSelf.tableView.reloadData()
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+
+    }
 
     override func request() {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Home_Banners, successClosure: {[weak self] (result) in

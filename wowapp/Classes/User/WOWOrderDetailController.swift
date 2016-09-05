@@ -341,7 +341,8 @@ class WOWOrderDetailController: WOWBaseViewController{
         
                 isOpen = true // 默认 不展开
             WOWNetManager.sharedManager.requestWithTarget(.Api_OrderDetail(OrderCode:self.orderCode!), successClosure: { [weak self](result) in
-                
+                let json = JSON(result)
+                DLog(json)
                 if let strongSelf = self{
                     
                     strongSelf.orderNewDetailModel = Mapper<WOWNewOrderDetailModel>().map(result)

@@ -43,7 +43,9 @@ let URL_storeHome               = "shop"
 
 let URL_home_banners            = "page/banners"    //1.1首页 查看首页Banner
 let URL_home_scenes             = "page/scenes"     //1.2首页 查看首页场景
-let URL_home_List               = "page"     //1.2首页 查看首页场景
+let URL_home_List               = "page"     // 首页 全新场景
+let URL_home_BottomList         = "product/recommend"     //首页 底部列表
+
 //2.2商品列表
 let URL_product                 = "product"
 //2.3商品详情

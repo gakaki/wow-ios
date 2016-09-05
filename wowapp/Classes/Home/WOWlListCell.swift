@@ -28,7 +28,7 @@ class WOWlListCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func showData(model:WOWCarouselBanners) {
+    func showData(model:WOWHomeBannerr) {
         let url = model.bannerImgSrc ?? ""
       DLog(url)
 //        bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))

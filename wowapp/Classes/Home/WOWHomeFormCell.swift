@@ -19,9 +19,20 @@ class WOWHomeFormCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var lbMainTitle: UILabel!
+    
+    @IBOutlet weak var lbContent: UILabel!
+    
     let headIdenString = "HomeFormReusableView"
     
-    var dataArr:[WOWProductModel]?{
+//    var mainModel : WOWModelVoTopic   {
+//    
+//        didSet{
+//        
+//        }
+//    }
+    
+    var dataArr:[WOWFoundProductModel]?{
         didSet{
             collectionView.reloadData()
         }
@@ -89,8 +100,8 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //        return dataArr?.count ?? 0
-        return 5
+                return dataArr?.count ?? 0
+//        return 5
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

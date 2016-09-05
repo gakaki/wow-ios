@@ -14,10 +14,12 @@ class WOWController: WOWBaseViewController {
     
     var isOpen: Bool! = false
     
-    var dataArr = [WOWCarouselBanners]()    //商品列表数组
+    var dataArr = [WOWHomeModle]()    //商品列表数组
     var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
     
-    let bottomListArray : Int = 5
+    var bottomListArray = [WOWFoundProductModel]() //底部列表数组
+    
+    var bottomListCount :Int = 0//底部列表数组的个数
     
     @IBOutlet var tableView: UITableView!
     //    var hidingNavBarManager: HidingNavigationBarManager?
@@ -25,8 +27,9 @@ class WOWController: WOWBaseViewController {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         //        self.hideNavigationBar = true
-        requestQueue()
-        requestTest()
+//        requestQueue()
+        request()
+//        requestTest()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -83,6 +86,7 @@ class WOWController: WOWBaseViewController {
         tableView.registerNib(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
         tableView.registerNib(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
         
+        tableView.registerNib(UINib.nibName("HomeBrannerCell"), forCellReuseIdentifier: "HomeBrannerCell")
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
@@ -100,17 +104,9 @@ class WOWController: WOWBaseViewController {
     private func configBarItem(){
         
         makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
-            if let strongSelf = self{
-                
-            if strongSelf.isOpen == true {
-                strongSelf.isOpen = false
-                  WOWHudRefresh.dismiss()
-            }else{
-               strongSelf.isOpen = true
-                WOWHudRefresh.showInView((self?.view)!)
-              
-            }
-        }
+
+                WOWHud.showMsg("跳转搜索界面")
+
       }
         configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }
@@ -134,7 +130,10 @@ class WOWController: WOWBaseViewController {
         
     }
     //MARK:Private Networkr
-    func requestQueue() {
+    override func request() {
+        
+        super.request()
+        
         var queue: dispatch_queue_t = dispatch_get_main_queue()// 主线程
         
         queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)// 后台执行
@@ -143,87 +142,49 @@ class WOWController: WOWBaseViewController {
         let group = dispatch_group_create()
         
         queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)// 默认优先级执行
-        
+    
             //异步执行队列任务
-            
+            dispatch_group_wait(group, 100)// 等待队列中任务完成，设置等待超时的时间
             dispatch_group_async(group, queue, { () -> Void in
 
-                self.request()
+                self.requestTop()
+  
             })
-            
+        
             dispatch_group_async(group, queue, { () -> Void in
             
-                self.requestBottomList()
+                self.requestBottom()
+      
             })
 
+        // 分组队列执行完毕后执行 由于网络请求也是异步，所以这个数据不稳定 暂时不考虑在这刷新
         
-        // 分组队列执行完毕后执行
-        
-        dispatch_group_notify(group, queue) { () -> Void in
-            
+        dispatch_group_notify(group, dispatch_get_main_queue()) { () -> Void in
+          
             print("dispatch_group_notify")
             
         }
     }
     
-    func requestTest() {
+    func requestTop() {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Home_List(region: 1), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                //                WOWHud.dismiss()
+                WOWHud.dismiss()
                 
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.endRefresh()
                 
-                let bannerList = Mapper<WOWHomeModule>().mapArray(JSON(result)["moduleDataList"].arrayObject)
-                print(bannerList)
-                
-//                let carouselBanners = Mapper<WOWCarouselBanners>().mapArray(JSON(result)["carouselBanners"].arrayObject)
-//                if let carouselBanners = carouselBanners{
-//                    strongSelf.bannerArray = []
-//                    strongSelf.bannerArray = carouselBanners
-//                }
-//                if let brandArray = bannerList{
-//                    strongSelf.dataArr = []
-//                    strongSelf.dataArr.appendContentsOf(brandArray)
-//                }
-//                strongSelf.banner.reloadBanner(strongSelf.bannerArray)
-//                
-//                strongSelf.tableView.reloadData()
-                
-            }
-        }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
-                strongSelf.endRefresh()
-            }
-        }
 
-    }
-
-    override func request() {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_Banners, successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-//                WOWHud.dismiss()
-               
-                let json = JSON(result)
-                DLog(json)
-                strongSelf.endRefresh()
+                let bannerList = Mapper<WOWHomeModle>().mapArray(JSON(result)["modules"].arrayObject)
                 
-                let bannerList = Mapper<WOWCarouselBanners>().mapArray(JSON(result)["bannerList"].arrayObject)
-                print(bannerList)
                 
-                let carouselBanners = Mapper<WOWCarouselBanners>().mapArray(JSON(result)["carouselBanners"].arrayObject)
-                if let carouselBanners = carouselBanners{
-                    strongSelf.bannerArray = []
-                    strongSelf.bannerArray = carouselBanners
-                }
                 if let brandArray = bannerList{
                     strongSelf.dataArr = []
-                    strongSelf.dataArr.appendContentsOf(brandArray)
+                    strongSelf.dataArr = brandArray
+
                 }
-                strongSelf.banner.reloadBanner(strongSelf.bannerArray)
-                
-                strongSelf.tableView.reloadData()
+                 strongSelf.tableView.reloadData()
                 
             }
         }) {[weak self] (errorMsg) in
@@ -231,9 +192,40 @@ class WOWController: WOWBaseViewController {
                 strongSelf.endRefresh()
             }
         }
+
     }
-    func requestBottomList()  {
-        print("load...")
+
+    func requestBottom()  {
+        var params = [String: AnyObject]?()
+        
+        let totalPage = 10
+
+        params = ["excludes": [], "currentPage": pageIndex,"pageSize":totalPage]
+
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_BottomList(params : params), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                WOWHud.dismiss()
+                
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.endRefresh()
+                
+                let bannerList = Mapper<WOWFoundProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+               
+                if let bannerList = bannerList{
+                    strongSelf.bottomListArray = []
+                    strongSelf.bottomListArray = bannerList
+                    strongSelf.bottomListCount = strongSelf.bottomListArray.count
+                }
+                strongSelf.tableView.reloadData()
+
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+
     }
     
     //点击跳转
@@ -312,14 +304,12 @@ extension WOWController:LeftSideProtocol{
      */
 }
 
-
-
 extension WOWController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        return (dataArr.count ?? 0) + bottomListArray.getParityCellNumber()
-        //        return 11
+        return (dataArr.count ?? 0) + bottomListCount.getParityCellNumber()
+
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -332,8 +322,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
             cell.indexPath = indexPath
             
-            if bottomListArray.isOdd {
-                if indexPath.section + 1 == (dataArr.count) + bottomListArray.getParityCellNumber() { // 如果奇数 满足则 第二个Item 不出现
+            if bottomListCount.isOdd {
+                if indexPath.section + 1 == (dataArr.count) + bottomListCount.getParityCellNumber() { // 如果奇数 满足则 第二个Item 不出现
                     
                     cell.twoLb.hidden = false
                     
@@ -345,30 +335,63 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             }else{
                 cell.twoLb.hidden = true
             }
-            cell.oneBtn.tag = (indexPath.section  - dataArr.count + 0) * 2
-            cell.twoBtn.tag = ((indexPath.section  - dataArr.count + 1) * 2) - 1
-             cell.selectionStyle = .None
+            let OneCellNumber = (indexPath.section  - dataArr.count + 0) * 2
+            let TwoCellNumber = ((indexPath.section  - dataArr.count + 1) * 2) - 1
+            
+            let modelOne = bottomListArray[OneCellNumber]
+            
+            let modelTwo = bottomListArray[TwoCellNumber]
+            
+            cell.showDataOne(modelOne)
+            cell.showDataTwo(modelTwo)
+            cell.oneBtn.tag = OneCellNumber
+            cell.twoBtn.tag = TwoCellNumber
+            
+            cell.selectionStyle = .None
             return cell
             
         }
-        
-        if  indexPath.section%2 == 0 {
+        let model = dataArr[indexPath.section]
+
+        if model.moduleType == 201 {
+            
             let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
             
             cell.delegate       = self
-            let model           = dataArr[indexPath.section]
-            cell.showData(model)
-             cell.selectionStyle = .None
+//            let model           = dataArr[indexPath.section]
+            cell.showData(model.moduleContent!)
+            
+            cell.selectionStyle = .None
+            
             return cell
-        }else{
+
+        }else if model.moduleType == 601{
             
             let cell                = tableView.dequeueReusableCellWithIdentifier("WOWHomeFormCell", forIndexPath: indexPath) as! WOWHomeFormCell
             
             cell.indexPathSection = indexPath.section
             cell.delegate = self
+//            cell.mainModel = model
+            
+            cell.lbMainTitle.text = model.moduleContentList?.topicMainTitle
+            cell.lbContent.text = model.moduleContentList?.topicDesc
+            
+            cell.dataArr = model.moduleContentList?.products
             cell.selectionStyle = .None
+            
             return cell
             
+        }else if model.moduleType == 101{
+            let cell                = tableView.dequeueReusableCellWithIdentifier("HomeBrannerCell", forIndexPath: indexPath) as! HomeBrannerCell
+            
+            cell.reloadBanner((model.moduleContent?.banners)!)
+            cell.selectionStyle = .None
+            
+            return cell
+
+            
+        }else{
+            return UITableViewCell()
         }
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{

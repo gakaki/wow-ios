@@ -1,39 +1,38 @@
 //
-//  WOWBanner.swift
+//  HomeBrannerCell.swift
 //  wowapp
 //
-//  Created by 安永超 on 16/7/25.
+//  Created by 陈旭 on 16/9/5.
 //  Copyright © 2016年 小黑. All rights reserved.
 //
 
 import UIKit
 
-class WOWBanner: UIView {
+class HomeBrannerCell: UITableViewCell {
     var imageURLArray: [String] = []
     @IBOutlet weak var cyclePictureView: CyclePictureView!
-    @IBOutlet weak var jsButton:UIButton!
-    @IBOutlet weak var dgButton:UIButton!
-    @IBOutlet weak var zdButton:UIButton!
-    @IBOutlet weak var sjButton:UIButton!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
+        // Initialization code
     }
     func reloadBanner(dataArr:[WOWCarouselBanners]){
         imageURLArray = []
         for i in 0..<dataArr.count {
             imageURLArray.append(dataArr[i].bannerImgSrc! as String)
         }
-
-        cyclePictureView.showPageControl = false
+        
+        cyclePictureView.showPageControl = true
+        cyclePictureView.currentDotColor = UIColor.blackColor()
+        cyclePictureView.otherDotColor = UIColor.whiteColor()
         cyclePictureView.imageURLArray = imageURLArray
         cyclePictureView.timeInterval = 3
-        jsButton.hidden = true
-        dgButton.hidden = true
-        zdButton.hidden = true
-        sjButton.hidden = true
+     
     }
 
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
 }

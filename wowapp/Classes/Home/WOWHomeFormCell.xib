@@ -3,23 +3,25 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="351" id="K6H-Gl-pdl" customClass="WOWHomeFormCell" customModule="wowapp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="405" id="K6H-Gl-pdl" customClass="WOWHomeFormCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="426"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K6H-Gl-pdl" id="hrT-wK-i7Y">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="371.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="425.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="H3h-wo-f2h">
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="H3h-wo-f2h">
                         <rect key="frame" x="0.0" y="107" width="320" height="234"/>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="234" id="5hG-Wd-TPq"/>
+                            <constraint firstAttribute="width" secondItem="H3h-wo-f2h" secondAttribute="height" multiplier="160:117" id="e7t-ej-oIT"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nNp-b0-2ME">
                             <size key="itemSize" width="50" height="50"/>
@@ -38,7 +40,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="751" text="如果对生活麻木了，那么请你坐下" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yF-Le-TIF">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="751" misplaced="YES" text="如果对生活麻木了，那么请你坐下" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yF-Le-TIF">
                         <rect key="frame" x="15" y="66" width="290" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,6 +57,7 @@
                     <constraint firstItem="oQP-HU-LnF" firstAttribute="leading" secondItem="hrT-wK-i7Y" secondAttribute="leadingMargin" constant="7" id="Tin-Zv-pt5"/>
                     <constraint firstAttribute="trailingMargin" secondItem="oQP-HU-LnF" secondAttribute="trailing" constant="7" id="Vbq-E7-uUh"/>
                     <constraint firstItem="H3h-wo-f2h" firstAttribute="top" secondItem="5yF-Le-TIF" secondAttribute="bottom" constant="24" id="aqr-W6-zDG"/>
+                    <constraint firstItem="5yF-Le-TIF" firstAttribute="top" secondItem="oQP-HU-LnF" secondAttribute="bottom" constant="6.5" id="cjS-Ur-DQA"/>
                     <constraint firstItem="oQP-HU-LnF" firstAttribute="top" secondItem="hrT-wK-i7Y" secondAttribute="topMargin" constant="30" id="gFP-c1-ojX"/>
                     <constraint firstItem="5yF-Le-TIF" firstAttribute="leading" secondItem="hrT-wK-i7Y" secondAttribute="leadingMargin" constant="7" id="jAU-ME-acz"/>
                     <constraint firstItem="H3h-wo-f2h" firstAttribute="top" secondItem="hrT-wK-i7Y" secondAttribute="top" constant="107" id="pVa-OO-an8"/>
@@ -64,13 +67,16 @@
                     <mask key="constraints">
                         <exclude reference="7wU-7f-93j"/>
                         <exclude reference="GLQ-27-cd4"/>
+                        <exclude reference="pVa-OO-an8"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="H3h-wo-f2h" id="3yg-23-eix"/>
+                <outlet property="lbContent" destination="5yF-Le-TIF" id="gaC-ns-a5n"/>
+                <outlet property="lbMainTitle" destination="oQP-HU-LnF" id="ewD-Bo-r97"/>
             </connections>
-            <point key="canvasLocation" x="182" y="255"/>
+            <point key="canvasLocation" x="182" y="228"/>
         </tableViewCell>
     </objects>
 </document>

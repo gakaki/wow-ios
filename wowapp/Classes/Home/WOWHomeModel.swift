@@ -11,7 +11,7 @@ import ObjectMapper
 class WOWHomeModel: WOWBaseModel,Mappable {
     var pageId               :   Int?
     var region          :   Int?
-    var moduleDataList          :  [WOWCarouselBanners]?
+    var moduleDataList          :  [WOWHomeModle]?
     
     required init?(_ map: Map) {
         
@@ -20,15 +20,15 @@ class WOWHomeModel: WOWBaseModel,Mappable {
     func mapping(map: Map) {
         pageId                 <- map["pageId"]
         region            <- map["region"]
-        moduleDataList            <- map["moduleDataList"]
+        moduleDataList            <- map["modules"]
         
     }
 
 }
-final class WOWHomeModule: WOWBaseModel,Mappable{
+final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleType    :   Int?
-    var moduleContent         :  [WOWHomeBannerr]?
-    var moduleContentList         :  [WOWModelVoTopic]?
+    var moduleContent           :  WOWHomeBannerr?
+    var moduleContentList       :  WOWModelVoTopic?//产品列表CollectionView
     
     required init?(_ map: Map) {
         
@@ -38,19 +38,16 @@ final class WOWHomeModule: WOWBaseModel,Mappable{
         moduleType    <- map["moduleType"]
         
         switch moduleType! {
-        case 101:
+        case 101://顶部轮播
             moduleContent         <- map["moduleContent"]
-            print("顶部轮播")
-        case 201:
+        case 201://单个图片
             moduleContent         <- map["moduleContent"]
-            print("单个图片")
-        case 601:
-            print("产品列表CollectionView")
+        case 601://产品列表CollectionView
             moduleContentList         <- map["moduleContent"]
         default:
             break
         }
-//        moduleContent         <- map["moduleContent"]
+
 
     }
 }

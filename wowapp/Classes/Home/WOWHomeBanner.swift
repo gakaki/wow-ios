@@ -24,6 +24,8 @@ class WOWHomeBanner: WOWBaseModel,Mappable {
     }
 
 }
+
+
 class WOWHomeBannerr: WOWBaseModel,Mappable {
     //moduleType = 101
     var banners               :   [WOWCarouselBanners]?
@@ -32,7 +34,7 @@ class WOWHomeBannerr: WOWBaseModel,Mappable {
     var bannerLinkType        :     Int?
     var bannerLinkTargetId    :     Int?
     var bannerLinkUrl         :     String?
-    //moduleType = 601
+
     
    
     required init?(_ map: Map) {

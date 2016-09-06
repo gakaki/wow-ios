@@ -219,6 +219,7 @@ class WOWGoodsController: WOWBaseViewController {
     
 //MARK:Private Network
     override func request() {
+        super.request()
         let uid = WOWUserManager.userID
         WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid,keyword:""), successClosure: {[weak self] (result) in
             if let strongSelf = self{

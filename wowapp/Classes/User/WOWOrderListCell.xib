@@ -101,7 +101,7 @@
                             <constraint firstItem="uos-Cj-sUP" firstAttribute="top" secondItem="pTP-S8-vpY" secondAttribute="top" constant="12" id="yV1-7X-2rl"/>
                         </constraints>
                     </view>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="J6H-fM-Fnp">
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="J6H-fM-Fnp">
                         <rect key="frame" x="0.0" y="44" width="438" height="75.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aLG-V0-X6j">

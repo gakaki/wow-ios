@@ -45,6 +45,7 @@ class WOWCouponController: WOWBaseViewController {
     
 
     override func request(){
+        super.request()
         var params = [String: AnyObject]?()
         switch entrance {
         case .userEntrance:

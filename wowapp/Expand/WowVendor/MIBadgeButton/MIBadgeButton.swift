@@ -23,7 +23,7 @@ public class MIBadgeButton: UIButton {
         }
     }
     
-    public var badgeBackgroundColor = UIColor.yellowColor() {
+    public var badgeBackgroundColor = UIColor.init(hexString: "#FFE600") {
         didSet {
             badgeLabel.backgroundColor = badgeBackgroundColor
         }
@@ -76,8 +76,8 @@ public class MIBadgeButton: UIButton {
             let y = -(Double(badgeSize.height) / 2) - 10 + vertical!
             badgeLabel.frame = CGRect(x: x, y: y, width: width, height: height)
         } else {
-            let x = CGRectGetWidth(self.frame) - CGFloat((width / 2.0) + 10)
-            let y = CGFloat(-(height / 2.0) + 10)
+            let x = CGRectGetWidth(self.frame) - CGFloat((width / 2.0) + 9)
+            let y = CGFloat(-(height / 2.0) + 9)
             badgeLabel.frame = CGRectMake(x, y, CGFloat(width), CGFloat(height))
         }
         

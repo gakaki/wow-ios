@@ -29,8 +29,8 @@ class WOWSearchChildController: UIViewController{
         let keyWords = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
         tagListView.delegate = self
         tagListView.backgroundColor = MGRgb(245, g: 245, b: 245)
-        tagListView.borderColor = BorderColor
-        tagListView.borderWidth = 0.5
+//        tagListView.borderColor = BorderColor
+//        tagListView.borderWidth = 0.5
         for word in keyWords{
             tagListView.addTag(word)
         }

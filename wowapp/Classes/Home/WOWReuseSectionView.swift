@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol WOWReuseSectionViewDelegate: class {
+    func clearHistoryClick()
+}
 class WOWReuseSectionView: UICollectionReusableView {
 
     var titleLabel: UILabel!
-    var line      : UIView!
+    var clearButton: UIButton!
+    weak var delegate: WOWReuseSectionViewDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -19,13 +23,6 @@ class WOWReuseSectionView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.whiteColor()
-        let spaceView = UIView()
-        spaceView.backgroundColor = UIColor(hexString:"#EFEFF4")
-        addSubview(spaceView)
-        spaceView.snp_makeConstraints { (make) in
-            make.left.right.top.equalTo(0)
-            make.height.equalTo(20)
-        }
         
         titleLabel = MGfactoryLabel()
         titleLabel.textAlignment = .Left
@@ -34,14 +31,24 @@ class WOWReuseSectionView: UICollectionReusableView {
         titleLabel.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(25, 15, 0, 0))
         }
-        line = UIView()
-        line.backgroundColor = SeprateColor
-        self.addSubview(line)
-        line.snp_makeConstraints { (make) in
-            make.left.bottom.right.equalTo(self).offset(0)
-            make.height.equalTo(0.5)
+       
+        clearButton = UIButton(type: .Custom)
+        clearButton.setTitle("清空", forState: .Normal)
+        clearButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+        clearButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.addSubview(clearButton)
+        clearButton.snp_makeConstraints { (make) in
+            make.width.equalTo(40)
+            make.height.equalTo(30)
+            make.rightMargin.equalTo(-15)
+            make.top.equalTo(25)
         }
         
+        clearButton.addAction {
+            if let del = self.delegate {
+                del.clearHistoryClick()
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -156,15 +156,8 @@
                                             <action selector="buyClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="gdj-Gq-bdA"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKF-3e-dBR" userLabel="line">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="0.5" id="YAx-N2-D8e"/>
-                                        </constraints>
-                                    </view>
                                     <button opaque="NO" tag="4003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wo2-sn-OfK">
-                                        <rect key="frame" x="120" y="1" width="100" height="49"/>
+                                        <rect key="frame" x="120" y="0.0" width="100" height="50"/>
                                         <color key="backgroundColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="as6-DY-ZGN"/>
@@ -180,20 +173,17 @@
                                 <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="VfS-7l-afX" secondAttribute="bottom" constant="7" id="0d4-IY-fVB"/>
-                                    <constraint firstAttribute="trailing" secondItem="lKF-3e-dBR" secondAttribute="trailing" id="4aI-eF-XjM"/>
                                     <constraint firstAttribute="bottom" secondItem="wo2-sn-OfK" secondAttribute="bottom" id="KOo-He-mS6"/>
                                     <constraint firstItem="q6M-Jc-5fm" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="Lkc-l3-wz5"/>
-                                    <constraint firstItem="wo2-sn-OfK" firstAttribute="top" secondItem="lKF-3e-dBR" secondAttribute="bottom" id="Mba-ad-FG6"/>
                                     <constraint firstAttribute="trailing" secondItem="Ui9-Q6-WqD" secondAttribute="trailing" id="Qbk-fQ-dmb"/>
-                                    <constraint firstItem="lKF-3e-dBR" firstAttribute="leading" secondItem="Sdm-uj-kwH" secondAttribute="leading" id="Y2V-aY-T3x"/>
                                     <constraint firstItem="Ui9-Q6-WqD" firstAttribute="leading" secondItem="wo2-sn-OfK" secondAttribute="trailing" id="YrI-hH-cbI"/>
                                     <constraint firstItem="q6M-Jc-5fm" firstAttribute="leading" secondItem="VfS-7l-afX" secondAttribute="trailing" id="caG-zr-ikj"/>
                                     <constraint firstItem="VfS-7l-afX" firstAttribute="leading" secondItem="Sdm-uj-kwH" secondAttribute="leading" id="ipL-pa-4Tx"/>
                                     <constraint firstItem="Ui9-Q6-WqD" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="lkX-lO-7qa"/>
                                     <constraint firstAttribute="bottom" secondItem="q6M-Jc-5fm" secondAttribute="bottom" id="lmT-7p-6Zl"/>
+                                    <constraint firstItem="wo2-sn-OfK" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="mIb-fd-WDF"/>
                                     <constraint firstItem="VfS-7l-afX" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" constant="7" id="oCw-bw-Gis"/>
                                     <constraint firstAttribute="bottom" secondItem="Ui9-Q6-WqD" secondAttribute="bottom" id="vzs-MW-dgz"/>
-                                    <constraint firstItem="lKF-3e-dBR" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="zVb-n6-qgq"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Z1W-LA-2Dq">
@@ -205,16 +195,18 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHb-tb-mKs" customClass="MIBadgeButton" customModule="wowapp" customModuleProvider="target">
-                                <rect key="frame" x="276" y="20" width="36" height="36"/>
+                                <rect key="frame" x="266" y="28" width="44" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" backgroundImage="top_car"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-7"/>
+                                <state key="normal" image="top_car"/>
                                 <connections>
                                     <action selector="carEntranceButton:" destination="7vb-eE-k6p" eventType="touchUpInside" id="Mws-gL-um2"/>
                                     <action selector="carEntranceClick:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="IJp-1j-7b1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sv-7U-gSt">
-                                <rect key="frame" x="8" y="20" width="36" height="36"/>
+                                <rect key="frame" x="10" y="28" width="44" height="44"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-7"/>
                                 <state key="normal" image="top_back"/>
                                 <connections>
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="RiE-4Y-czh"/>
@@ -224,10 +216,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="nHb-tb-mKs" secondAttribute="trailing" constant="8" id="Bym-b8-4Jx"/>
-                            <constraint firstItem="0sv-7U-gSt" firstAttribute="top" secondItem="Xv8-16-Gtv" secondAttribute="top" constant="20" id="C3i-SX-A74"/>
+                            <constraint firstAttribute="trailing" secondItem="nHb-tb-mKs" secondAttribute="trailing" constant="10" id="Bym-b8-4Jx"/>
+                            <constraint firstItem="0sv-7U-gSt" firstAttribute="top" secondItem="Xv8-16-Gtv" secondAttribute="top" constant="28" id="C3i-SX-A74"/>
                             <constraint firstAttribute="trailing" secondItem="Z1W-LA-2Dq" secondAttribute="trailing" id="D42-Xx-HhO"/>
-                            <constraint firstItem="0sv-7U-gSt" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" constant="8" id="LGY-Gj-3x1"/>
+                            <constraint firstItem="0sv-7U-gSt" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" constant="10" id="LGY-Gj-3x1"/>
                             <constraint firstItem="Z1W-LA-2Dq" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" id="XLp-KY-zm1"/>
                             <constraint firstItem="nHb-tb-mKs" firstAttribute="top" secondItem="0sv-7U-gSt" secondAttribute="top" id="bNg-Z6-GYh"/>
                             <constraint firstItem="Z1W-LA-2Dq" firstAttribute="top" secondItem="Xv8-16-Gtv" secondAttribute="top" id="cNm-rn-P34"/>
@@ -246,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPE-Cf-PNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="513"/>
+            <point key="canvasLocation" x="833" y="519"/>
         </scene>
         <!--分类-->
         <scene sceneID="Irw-0d-MOm">
@@ -544,7 +536,7 @@
         <image name="share_white" width="30" height="30"/>
         <image name="shareblack" width="30" height="30"/>
         <image name="store_buyCar" width="26" height="25"/>
-        <image name="top_back" width="36" height="36"/>
-        <image name="top_car" width="36" height="36"/>
+        <image name="top_back" width="44" height="44"/>
+        <image name="top_car" width="44" height="44"/>
     </resources>
 </document>

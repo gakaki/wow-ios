@@ -12,7 +12,7 @@
     "gakaki": "gakaki@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/FlexboxLayout.git",
+    "git": "https://github.com/gakaki/FlexboxLayout.git",
     "tag": "0.1.0"
   },
   "platforms": {

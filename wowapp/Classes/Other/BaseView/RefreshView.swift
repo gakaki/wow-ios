@@ -16,7 +16,7 @@ class RefreshView:UIView {
     
     override func drawRect(rect: CGRect) {
         self.addSubview(self.backView)
-        self.gifImage.center = self.center
+//        self.gifImage.center = self.center
         self.addSubview(self.gifImage)
 
     }
@@ -49,7 +49,7 @@ class RefreshView:UIView {
         let imageView = YYAnimatedImageView(image: image)
 
         imageView.frame = CGRectMake(0,0,50.w,50.h)
-        imageView.center = self.center
+        imageView.center = CGPoint(x: MGScreenWidth/2, y: MGScreenHeight/2 - 64)
         
         return imageView
     }()

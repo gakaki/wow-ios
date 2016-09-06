@@ -1,5 +1,5 @@
 target :wowapp do #实例工程
-
+xcodeproj 'wowapp.xcodeproj'
 inhibit_all_warnings!
 platform :ios, '8.0'
 use_frameworks!
@@ -40,6 +40,8 @@ pod 'EZSwiftExtensions', '~> 1.2.3' #通用的拓展库
 pod 'IQKeyboardManagerSwift'
 #pod 'HidingNavigationBar', '~> 0.3.0'
 pod 'XZMRefresh'            #横向刷新
+#pod 'YTKKeyValueStore_Swift', '~> 0.3.4'          #数据存储
+#pod 'SQLite.swift',git: 'https://github.com/stephencelis/SQLite.swift.git',branch: 'cocoapods-xcode-7-3'
 
 
 

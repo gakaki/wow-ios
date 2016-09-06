@@ -105,9 +105,16 @@ class WOWController: WOWBaseViewController {
         
         makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
 
-                WOWHud.showMsg("跳转搜索界面")
+      
 
-      }
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController))
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+
+        }
+
         configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }
     

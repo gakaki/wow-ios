@@ -22,7 +22,6 @@
 // THE SOFTWARE.
 
 
-import Foundation
 import UIKit
 
 private var kIQShouldHidePlaceholderText    = "kIQShouldHidePlaceholderText"
@@ -66,8 +65,7 @@ public extension UIView {
             
             if let toolbar = self.inputAccessoryView as? IQToolbar {
                 if self.respondsToSelector(Selector("placeholder")) {
-                    let textField = self as AnyObject
-                    toolbar.title = textField.drawingPlaceholderText
+                    toolbar.title = self.drawingPlaceholderText
                 }
             }
         }
@@ -87,8 +85,7 @@ public extension UIView {
             
             if let toolbar = self.inputAccessoryView as? IQToolbar {
                 if self.respondsToSelector(Selector("placeholder")) {
-                    let textField = self as AnyObject
-                    toolbar.title = textField.drawingPlaceholderText
+                    toolbar.title = self.drawingPlaceholderText
                 }
             }
         }
@@ -98,21 +95,26 @@ public extension UIView {
      `drawingPlaceholderText` will be actual text used to draw on toolbar. This would either `placeholder` or `placeholderText`.
      */
     public var drawingPlaceholderText: String? {
-        get {
-            if (self.shouldHidePlaceholderText)
-            {
-                return nil
-            }
-            else if (self.placeholderText?.isEmpty == false) {
-                return self.placeholderText
-            }
-            else if self.respondsToSelector(Selector("placeholder")) {
-                let textField = self as AnyObject
+
+        if (self.shouldHidePlaceholderText)
+        {
+            return nil
+        }
+        else if (self.placeholderText?.isEmpty == false) {
+            return self.placeholderText
+        }
+        else if self.respondsToSelector(Selector("placeholder")) {
+            
+            if let textField = self as? UITextField {
                 return textField.placeholder
-            }
-            else {
+            } else if let textView = self as? IQTextView {
+                return textView.placeholder
+            } else {
                 return nil
             }
+        }
+        else {
+            return nil
         }
     }
 

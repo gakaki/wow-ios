@@ -56,6 +56,8 @@ class WOWHomeBannerr: WOWBaseModel,Mappable {
 
 
 final class WOWCarouselBanners: WOWBaseModel,Mappable{
+    var banners               :   [WOWCarouselBanners]?
+    
     var bannerLinkTargetId    :   Int?
     var bannerLinkUrl         :   String?
     var bannerImgSrc          :   String?
@@ -66,6 +68,8 @@ final class WOWCarouselBanners: WOWBaseModel,Mappable{
     }
     
     func mapping(map: Map) {
+        banners                 <- map["banners"]
+        
         bannerLinkTargetId    <- map["bannerLinkTargetId"]
         bannerLinkUrl         <- map["bannerLinkUrl"]
         bannerImgSrc          <- map["bannerImgSrc"]

@@ -27,7 +27,7 @@ class WOWHomeModel: WOWBaseModel,Mappable {
 }
 final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleType    :   Int?
-    var moduleContent           :  WOWHomeBannerr?
+    var moduleContent           :  WOWCarouselBanners?
     var moduleContentList       :  WOWModelVoTopic?//产品列表CollectionView
     
     required init?(_ map: Map) {

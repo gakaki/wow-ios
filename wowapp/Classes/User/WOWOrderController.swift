@@ -13,7 +13,7 @@ class WOWOrderController: WOWBaseViewController {
     var entrance = orderDetailEntrance.orderList
     var dataArr  = [WOWNewOrderListModel]()
     var parentNavigationController : UINavigationController?
-    var isRequest :Bool = false
+    var isRequest :Bool = false// 判断此页面是不是第一次网络请求
     var type = ""  //100代表全部
     var selectIndex:Int = 0{
         didSet{

@@ -10,26 +10,24 @@ import UIKit
 
 class WOWController: WOWBaseViewController {
     let cellID = String(WOWlListCell)
-    //    let WOWProductDetailAboutCell = String( WOWProductDetailAboutCell )
     
-    var isOpen: Bool! = false
-    
-    var dataArr = [WOWHomeModle]()    //商品列表数组
+    var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
     
     var bottomListArray = [WOWFoundProductModel]() //底部列表数组
     
     var bottomListCount :Int = 0//底部列表数组的个数
     
+//    var modelPro = WOWCarouselBanners()
+    
+    let group = dispatch_group_create() // 分组网络请求
+    
     @IBOutlet var tableView: UITableView!
     //    var hidingNavBarManager: HidingNavigationBarManager?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-        //        self.hideNavigationBar = true
-//        requestQueue()
-        request()
-//        requestTest()
+        setUI()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -43,6 +41,7 @@ class WOWController: WOWBaseViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -77,10 +76,9 @@ class WOWController: WOWBaseViewController {
     }()
     
     
-    
     //MARK:Private Method
     override func setUI() {
-        
+        super.setUI()
         tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
         
         tableView.registerNib(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
@@ -93,14 +91,30 @@ class WOWController: WOWBaseViewController {
         
         //        configBarItem()
         tableView.mj_header = mj_header
+        tableView.mj_footer = mj_footerHome
         
         self.tableView.backgroundColor = GrayColorLevel6
         
         configBarItem()
-        
+        request()
     }
     
+    lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
+        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
+        return f
+    }()
     
+
+    func loadBottomData()  {
+        if isRreshing {
+            return
+        }else{
+            pageIndex += 1
+            isRreshing = true
+        }
+        requestBottom()
+
+    }
     private func configBarItem(){
         
         makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
@@ -144,22 +158,19 @@ class WOWController: WOWBaseViewController {
         var queue: dispatch_queue_t = dispatch_get_main_queue()// 主线程
         
         queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)// 后台执行
-        // 分组执行
-        
-        let group = dispatch_group_create()
         
         queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)// 默认优先级执行
-    
-            //异步执行队列任务
-            dispatch_group_wait(group, 100)// 等待队列中任务完成，设置等待超时的时间
-            dispatch_group_async(group, queue, { () -> Void in
-
-                self.requestTop()
-  
-            })
         
+//            dispatch_group_enter(group)// 增加计数， 保证网络请求拿到数据之后 ，才算完成任务
+            //异步执行队列任务
             dispatch_group_async(group, queue, { () -> Void in
-            
+ 
+                self.requestTop()
+                
+            })
+//            dispatch_group_enter(group)
+            dispatch_group_async(group, queue, { () -> Void in
+          
                 self.requestBottom()
       
             })
@@ -167,8 +178,8 @@ class WOWController: WOWBaseViewController {
         // 分组队列执行完毕后执行 由于网络请求也是异步，所以这个数据不稳定 暂时不考虑在这刷新
         
         dispatch_group_notify(group, dispatch_get_main_queue()) { () -> Void in
-          
-            print("dispatch_group_notify")
+            
+           self.tableView.reloadData()
             
         }
     }
@@ -181,17 +192,16 @@ class WOWController: WOWBaseViewController {
                 let json = JSON(result)
                 DLog(json)
                 strongSelf.endRefresh()
-                
 
                 let bannerList = Mapper<WOWHomeModle>().mapArray(JSON(result)["modules"].arrayObject)
-                
                 
                 if let brandArray = bannerList{
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
-
+                    
                 }
                  strongSelf.tableView.reloadData()
+//                dispatch_group_leave(strongSelf.group);// 减少计数，证明此网络请求结束
                 
             }
         }) {[weak self] (errorMsg) in
@@ -212,29 +222,45 @@ class WOWController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Home_BottomList(params : params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
-                
+                strongSelf.endRefresh()
+
                 let json = JSON(result)
                 DLog(json)
-                strongSelf.endRefresh()
+                strongSelf.mj_footerHome.endRefreshing()
                 
                 let bannerList = Mapper<WOWFoundProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
                
                 if let bannerList = bannerList{
-                    strongSelf.bottomListArray = []
-                    strongSelf.bottomListArray = bannerList
+                    if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
+                        strongSelf.bottomListArray = []
+                    }
+                    if bannerList.count < totalPage {// 如果拿到的数据，小于分页，则说明，无下一页
+                        strongSelf.tableView.mj_footer = nil
+                        
+                    }else {
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footerHome
+                    }
+
+                    strongSelf.bottomListArray.appendContentsOf(bannerList)
                     strongSelf.bottomListCount = strongSelf.bottomListArray.count
+                }else {
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.bottomListArray = []
+                    }
+                    
+                    strongSelf.tableView.mj_footer = nil
+                    
                 }
                 strongSelf.tableView.reloadData()
-
+//                dispatch_group_leave(strongSelf.group);
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
             }
         }
-
     }
-    
     //点击跳转
     func goController(model: WOWCarouselBanners) {
         if let bannerLinkType = model.bannerLinkType {
@@ -353,7 +379,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             cell.showDataTwo(modelTwo)
             cell.oneBtn.tag = OneCellNumber
             cell.twoBtn.tag = TwoCellNumber
-            
+            cell.delegate = self
             cell.selectionStyle = .None
             return cell
             
@@ -365,7 +391,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
             
             cell.delegate       = self
-//            let model           = dataArr[indexPath.section]
+
             cell.showData(model.moduleContent!)
             
             cell.selectionStyle = .None
@@ -378,8 +404,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
             cell.indexPathSection = indexPath.section
             cell.delegate = self
-//            cell.mainModel = model
-            
+
             cell.lbMainTitle.text = model.moduleContentList?.topicMainTitle
             cell.lbContent.text = model.moduleContentList?.topicDesc
             
@@ -391,7 +416,9 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }else if model.moduleType == 101{
             let cell                = tableView.dequeueReusableCellWithIdentifier("HomeBrannerCell", forIndexPath: indexPath) as! HomeBrannerCell
             
-            cell.reloadBanner((model.moduleContent?.banners)!)
+            self.bannerArray = (model.moduleContent?.banners)!
+            cell.reloadBanner(self.bannerArray)
+            cell.cyclePictureView.delegate = self
             cell.selectionStyle = .None
             
             return cell
@@ -425,9 +452,26 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //
-        //        let model = dataArr[indexPath.section]
-        //        goController(model)
+        guard indexPath.section < dataArr.count  else {
+            return
+        }
+        
+        let model = dataArr[indexPath.section]
+        switch model.moduleType ?? 0{
+        case 101:
+            print("101")
+        case 201://单个图片
+
+            if let modelBanner = model.moduleContent {
+              goController(modelBanner)
+            }
+
+        case 601://产品列表CollectionView
+            print("1")
+        default:
+            break
+        }
+
     }
     func hearderView() -> UIView {
         let view = UIView()
@@ -463,18 +507,40 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         return view
 
     }
+    func ProductDetailVC(productId: Int?)  {
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        vc.hideNavigationBar = true
+        vc.productId = productId ?? 0
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+}
+extension WOWController:HomeBottomDelegate{
+    
+    func goToProductDetailVC(indexRow: Int?) {//跳转产品详情
+        
+        let model = bottomListArray[indexRow!]
+        self.ProductDetailVC(model.productId)
+        
+    }
 }
 extension WOWController:WOWHomeFormDelegate{
-    func goToVC(){
-//        print("跳转到专题列表")
+    
+    func goToVC(){//右滑更多
+        
         let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
         vc.hideNavigationBar = false
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
+    
+    func goToProdectDetailVC(productId: Int?) {// 跳转产品详情页
+        
+          self.ProductDetailVC(productId)
+    
+    }
 
 }
-
 
 extension WOWController:SenceCellDelegate{
     func senceProductClick(produtID: Int) {

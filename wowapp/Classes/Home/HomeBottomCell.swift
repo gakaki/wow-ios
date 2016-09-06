@@ -7,8 +7,15 @@
 //
 
 import UIKit
+protocol HomeBottomDelegate:class {
+    // 跳转产品详情代理
+    func goToProductDetailVC(indexRow: Int?)
+    
+}
 
 class HomeBottomCell: UITableViewCell {
+    
+    weak var delegate : HomeBottomDelegate?
     
     var indexPath:NSIndexPath!
     var currentIndexPath : Int = 0
@@ -30,11 +37,22 @@ class HomeBottomCell: UITableViewCell {
 
     
     @IBAction func clickOneBtn(sender: AnyObject) {
-        print("==\(sender.tag)")
+
+        if let del = delegate{
+     
+            del.goToProductDetailVC(sender.tag)
+
+        }
      
     }
     @IBAction func clickTwoBtn(sender: AnyObject) {
-         print("==\(sender.tag)")
+        
+        if let del = delegate{
+            
+            del.goToProductDetailVC(sender.tag)
+            
+        }
+
 
     }
     override func awakeFromNib() {
@@ -43,7 +61,7 @@ class HomeBottomCell: UITableViewCell {
     }
     func showDataOne(model:WOWFoundProductModel) {
 
-    self.imgShowOne.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+        imgShowOne.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleOne.text = model.productName
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
@@ -57,8 +75,8 @@ class HomeBottomCell: UITableViewCell {
         
     }
     func showDataTwo(model:WOWFoundProductModel) {
-        
-        self.imgShowTwo.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
+
+        imgShowTwo.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleTwo.text = model.productName
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])

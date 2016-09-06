@@ -128,7 +128,7 @@ class WOWBrandListController: WOWBaseViewController {
                         
                     }
                     //for #
-                    let group_row    = brands!.filter{ (brand) in self!.isStringContainsNumber(brand.letter!) == true }
+                    let group_row    = brands!.filter{ (brand) in self!.isStringContainsNumber(brand.letter ?? "") == true }
                     
                     strongSelf.dataArray.removeLast()
                     strongSelf.originalArray.removeLast()

@@ -393,6 +393,7 @@
 		63884A081D64150F00FCCFCC /* WOWCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63884A061D64150F00FCCFCC /* WOWCategoryCell.xib */; };
 		638B18A41D7829F800F89C76 /* HolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B18A31D7829F800F89C76 /* HolderTextView.swift */; };
 		63B8AAC41D7D232A00282536 /* WOWSearchFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8AAC31D7D232A00282536 /* WOWSearchFlowLayout.swift */; };
+		63B8AB1E1D7E65DA00282536 /* WOWSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8AB1D1D7E65DA00282536 /* WOWSearchManager.swift */; };
 		63C42DC61D646B0400879FEB /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC11D646B0400879FEB /* PhotoBrowser.swift */; };
 		63C42DC71D646B0400879FEB /* PhotoToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC21D646B0400879FEB /* PhotoToolBar.swift */; };
 		63C42DC81D646B0400879FEB /* PhotoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC31D646B0400879FEB /* PhotoViewCell.swift */; };
@@ -847,6 +848,7 @@
 		638B18A31D7829F800F89C76 /* HolderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HolderTextView.swift; sourceTree = "<group>"; };
 		63B8AAC31D7D232A00282536 /* WOWSearchFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchFlowLayout.swift; sourceTree = "<group>"; };
 		63B8AACE1D7D7B0F00282536 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = "../../../Library/Developer/Xcode/DerivedData/WowApp-aiwpknyejtbkehdaaierqyyhxkfh/Build/Products/Debug-iphonesimulator/SQLite.swift/SQLite.framework"; sourceTree = "<group>"; };
+		63B8AB1D1D7E65DA00282536 /* WOWSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchManager.swift; sourceTree = "<group>"; };
 		63C42DC11D646B0400879FEB /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
 		63C42DC21D646B0400879FEB /* PhotoToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoToolBar.swift; sourceTree = "<group>"; };
 		63C42DC31D646B0400879FEB /* PhotoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewCell.swift; sourceTree = "<group>"; };
@@ -1397,6 +1399,7 @@
 				2DB923D11D703A59001EA570 /* WOWUploadManager.swift */,
 				29FF25DB1CFDA86300DF2A9B /* WOWTool.swift */,
 				29FF25DC1CFDA86300DF2A9B /* WOWUserManager.swift */,
+				63B8AB1D1D7E65DA00282536 /* WOWSearchManager.swift */,
 			);
 			path = WowConfig;
 			sourceTree = "<group>";
@@ -2308,7 +2311,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2533,6 +2536,7 @@
 				29FF268D1CFDA86300DF2A9B /* WOWBannerModel.swift in Sources */,
 				29FF26BB1CFDA86300DF2A9B /* WOWILikeController.swift in Sources */,
 				29FF26B41CFDA86300DF2A9B /* WOWAddressBottomView.swift in Sources */,
+				63B8AB1E1D7E65DA00282536 /* WOWSearchManager.swift in Sources */,
 				069E09501D57942C00F8AE8F /* UILabel+Style.swift in Sources */,
 				069056DF1D36665B00A851F9 /* WOWGuideController.swift in Sources */,
 				635716BC1D45EB89006BD746 /* CyclePictureView.swift in Sources */,

@@ -57,5 +57,17 @@ extension String{
         
         return self
     }
+    
+    
+    /**
+     *  获取路径
+     */
+    
+    func documentDir() -> String {
+        let mypaths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        let mydocpath:String = mypaths.objectAtIndex(0) as! String
+        let filepath = NSURL(fileURLWithPath: mydocpath).URLByAppendingPathComponent(self).path
+        return filepath!
+    }
 
 }

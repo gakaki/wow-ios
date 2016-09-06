@@ -9,8 +9,11 @@
 import UIKit
 
 protocol WOWHomeFormDelegate:class {
+    // 右滑进入更多商品代理
     func goToVC()
-}
+    // 点击CollentcionView－Item代理
+    func goToProdectDetailVC(productId: Int?)
+  }
 class WOWHomeFormCell: UITableViewCell {
     
     var scrollViewOffsetDic = Dictionary<Int, CGFloat>() //空字典
@@ -130,7 +133,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     //第一个和最后一个cell居中显示
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        let itemCount = self.collectionView(collectionView, numberOfItemsInSection: section)
+//        let itemCount = self.collectionView(collectionView, numberOfItemsInSection: section)
         
         let firstIndexPath = NSIndexPath(forItem: 0, inSection: section)
         let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: firstIndexPath)
@@ -140,6 +143,18 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
         
         return UIEdgeInsetsMake(0, (collectionView.bounds.size.width - firstSize.width) / 2,
                                 0, 15)
+    }
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        if let del = delegate {
+            
+            let product = dataArr?[indexPath.row]
+            del.goToProdectDetailVC(product?.productId)
+            
+        }
+
+        
+        print(indexPath.row)
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
         

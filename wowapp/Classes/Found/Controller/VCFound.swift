@@ -5,7 +5,12 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+
+
+
 class VCFound: VCBaseVCCategoryFound {
+    
+    var data                 = [WowModulePageVO]()
     
     let cellID0              = String( WOWFoundCategoryNewCell )
     let cellID1              = String( WOWFoundWeeklyNewCell )
@@ -18,80 +23,129 @@ class VCFound: VCBaseVCCategoryFound {
     var vo_recommend_product:WOWFoundProductModel?
     var vo_categories        = [WOWCategoryModel]()
     
-    var isFavorite: Bool = false
+    var isFavorite: Bool     = false
+    
     @IBOutlet weak var tableView: UITableView!
-    
-    let currentQuestionIndex                        = Variable(0)
-    let selectedIndexPaths: Variable<[NSIndexPath]> = Variable([])
-    let displayAnswers: Variable                    = Variable(false)
-    let disposeBag                                  = DisposeBag()
-    
-    private func setupCurrentQuestionIndexObserver() {
-        currentQuestionIndex
-            .asObservable()
-            .subscribeNext { index -> Void in
-            }
-            .addDisposableTo(disposeBag)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         do {
-            try request_with_throw()
+            
+            try request_module_page_with_throw()
+            
         }catch{
             DLog(error)
         }
+    }
+    
+    override func setUI() {
+        super.setUI()
         
+        tableView.rowHeight          = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 500
+        tableView.separatorColor     = SeprateColor;
+
+        
+        tableView.separatorStyle     = .None
+        tableView.mj_header          = mj_header
+        self.edgesForExtendedLayout  = .None
+        
+        registerCell()
+    }
+
+    
+    func registerCell(){
+        
+        for (k,c) in ModulePageType.d {
+            if c is ModuleViewElement.Type {
+                let cell            = (c as! ModuleViewElement.Type)
+                let isNib           = cell.isNib()
+                let cellName        = String(cell)
+                if (isNib == true){
+                    tableView.registerNib(UINib.nibName(cellName), forCellReuseIdentifier:String(k))
+                }else{
+                    tableView.registerClass(c.self, forCellReuseIdentifier:String(k))
+                }
+                print("\(k) = \(c)")
+            }
+        }
+//        tableView.registerNib(UINib.nibName(String(WOWFoundWeeklyNewCell)), forCellReuseIdentifier:cellID1)
+//        tableView.registerClass(WOWFoundRecommendCell.self, forCellReuseIdentifier:cellID2)
+//        tableView.registerClass(WOWFoundCategoryCell.self, forCellReuseIdentifier:cellID3)
     }
     
     override func pullToRefresh() {
         super.pullToRefresh()
         do {
-            try request_with_throw()
+//            try request_with_throw()
+            try request_module_page_with_throw()
         }catch{
             DLog(error)
         }
     }
     
-    func request_with_throw() throws -> Void {
-            super.request()
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_Main, successClosure: {[weak self] (result) in
-                if let strongSelf = self{
-                    
-                        let r                             =  JSON(result)
-                        strongSelf.vo_products            =  Mapper<WOWFoundProductModel>().mapArray(r["pageNewProductVoList"].arrayObject) ?? [WOWFoundProductModel]()
-                        strongSelf.vo_recommend_product   =  Mapper<WOWFoundProductModel>().map( r["recommendProduct"].object )
-                        if (WOWUserManager.loginStatus){
-                            strongSelf.requestIsFavoriteProduct()
+    
+ 
+    func request_module_page_with_throw() throws -> Void {
+        
+        super.request()
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Module_Page2, successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                
+                var r                             =  JSON(result)
+                strongSelf.data                   =  Mapper<WowModulePageVO>().mapArray(r["modules"].arrayObject) ?? [WowModulePageVO]()
+                
+                for  var t:WowModulePageVO in strongSelf.data
+                {
+                    if t.moduleType == 302
+                    {
+                        if let s  = t.contentTmp!["categories"] as? [AnyObject] {
+                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
                         }
-                    
-                        //还要请求一次分类 在加载数据 以后改成rxswift 2者合并 现在代码真糟糕
-                    
-                        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Found_2nd, successClosure: {[weak self] (result) in
-                            if let strongSelf = self{
-                                
-                                let r                             =  JSON(result)
-                                strongSelf.vo_categories          =  Mapper<WOWCategoryModel>().mapArray(r["pageCategoryVoList"].arrayObject) ?? [WOWCategoryModel]()
-                                
-                                strongSelf.tableView.reloadData()
-                                strongSelf.endRefresh()
-
-                            }
-                            
-                        }){ (errorMsg) in
-                            print(errorMsg)
-                            strongSelf.endRefresh()
+                    }
+                    if t.moduleType == 401
+                    {
+                        if let s  = t.contentTmp!["products"] as? [AnyObject] {
+                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
                         }
-                 
+                    }
+                    if t.moduleType == 201
+                    {
+                        if let s  = t.contentTmp  {
+                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(s)
+                        }
+                    }
+                    if t.moduleType == 501
+                    {
+                        if let s  = t.contentTmp  {
+                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(s)
+                        }
+                    }
+                    if t.moduleType == 301
+                    {
+                        if let s  = t.contentTmp!["categories"] as? [AnyObject] {
+                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
+                        }
+                    }
+                    
+                    t.moduleClassName     =  ModulePageType.getIdentifier(t.moduleType!)
                 }
                 
-            }){ (errorMsg) in
-                print(errorMsg)
-                self.endRefresh()
-
+                if (WOWUserManager.loginStatus){
+                    strongSelf.requestIsFavoriteProduct()
+                }
+                
+//                strongSelf.tableView.reloadData()
+                strongSelf.endRefresh()
             }
-      
+            
+        }){ (errorMsg) in
+            print(errorMsg)
+            self.endRefresh()
+            
+        }
     }
     
     //用户是否喜欢单品
@@ -106,9 +160,7 @@ class VCFound: VCBaseVCCategoryFound {
         }) {(errorMsg) in
             
         }
-        
     }
-    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -133,21 +185,6 @@ class VCFound: VCBaseVCCategoryFound {
     
     func loginSuccess(){
         requestIsFavoriteProduct()
-    }
-    override func setUI() {
-        super.setUI()
-    
-       
-        tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 500
-        tableView.separatorColor     = SeprateColor;
-        tableView.registerNib(UINib.nibName(String(WOWFoundWeeklyNewCell)), forCellReuseIdentifier:cellID1)
-        tableView.registerClass(WOWFoundRecommendCell.self, forCellReuseIdentifier:cellID2)
-        tableView.registerClass(WOWFoundCategoryCell.self, forCellReuseIdentifier:cellID3)
-        tableView.separatorStyle     = .None
-        tableView.mj_header          = mj_header
-        self.edgesForExtendedLayout  = .None
-        
     }
 
 }
@@ -229,9 +266,9 @@ WOWFoundCategoryCellDelegate
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return self.data.count
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -241,7 +278,7 @@ WOWFoundCategoryCellDelegate
         let section = indexPath.section
         let row     = indexPath.row
         
-        if ( section == 0 && row == 0){
+        if ( section == 0   && row == 0){
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID1 , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
             cell.products = self.vo_products
             cell.delegate = self
@@ -273,7 +310,32 @@ WOWFoundCategoryCellDelegate
             cell.categories     = self.vo_categories
             return cell
         
-        }else{
+        }
+            
+        else if ( section == 3 && row == 0){
+            
+            let cell            = tableView.dequeueReusableCellWithIdentifier(cellID3 , forIndexPath: indexPath) as! WOWFoundCategoryCell
+            cell.delegate       = self
+            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
+            cell.setUI()
+            cell.selectionStyle = .None
+            cell.categories     = self.vo_categories
+            return cell
+            
+        }
+        
+            
+        else if ( section == 4 && row == 0){
+            
+            let cell            = tableView.dequeueReusableCellWithIdentifier(cellID3 , forIndexPath: indexPath) as! WOWFoundCategoryCell
+            cell.delegate       = self
+            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
+            cell.setUI()
+            cell.selectionStyle = .None
+            cell.categories     = self.vo_categories
+            return cell
+        }
+        else{
             return UITableViewCell()
         }
     }

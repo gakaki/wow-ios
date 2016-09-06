@@ -1,7 +1,7 @@
 import ObjectMapper
 
-
 class WOWFoundProductModel: WOWBaseModel,Mappable{
+    
     var productId               :   Int?
     var productName             :   String?
     var productImg              :   String?
@@ -38,5 +38,4 @@ class WOWFoundProductModel: WOWBaseModel,Mappable{
         pageModuleType             <- map["pageModuleType"]
     }
 }
-
 

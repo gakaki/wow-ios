@@ -134,6 +134,9 @@ let URL_OrderCancel            = "order/cancel"           //取消订单
 let URL_Found_Main              = "page/find/product"       
 let URL_Found_2nd               = "page/find/category"
 
+//新发现页面 还是用moyax吧 
+let URL_Module_Page2            = "page"
+
 //5.个人中心
 let URL_UpdateInfo              = "usermongo/userupdate"
 let URL_FavoriteList            = "like/get"

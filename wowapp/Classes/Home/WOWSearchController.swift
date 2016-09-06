@@ -10,18 +10,19 @@ import UIKit
 
 class WOWSearchController: WOWBaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-
-    let identifier = "WOWTagCollectionViewCell"
     var keyWords = [String]()
-
+    var searchArray = [String]()
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
        
         
-        
+        defaultData()
+       
        
     }
+    
+  
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -83,6 +84,8 @@ class WOWSearchController: WOWBaseViewController {
         makeCustomerNavigationItem("", left: true, handler:nil)
         defaultSetup()
         keyWords = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
+        searchArray = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
+   
     }
     
     func defaultSetup() {
@@ -91,6 +94,30 @@ class WOWSearchController: WOWBaseViewController {
         collectionView.collectionViewLayout = layout
         collectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
         
+    }
+    
+    func defaultData() {
+        /// 查询语句
+        let sql2 = "SELECT * FROM t_searchModel;"
+        // 1.查询数据库
+        let result = WOWSearchManager.shareInstance.db!.executeQuery(sql2, withArgumentsInArray: nil)
+        
+        // 2.从结果集中取出数据
+        while result.next(){
+            let data = result.objectForColumnName("searchModel") as! NSData
+            searchArray = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [String]
+        }
+    }
+    
+    func saveSearch() {
+        WOWSearchManager.shareInstance.delect("1")
+        // 1.编写SQL语句
+        let sql = "INSERT INTO t_searchModel \n" + "(searchModel, searchModel_idstr) \n" + "VALUES \n" + "(?, ?);"
+        
+        // 2.执行SQL语句
+        // 注意: 在FMDB中, 除了查询以外的操作都称之为更新
+        let data = NSKeyedArchiver.archivedDataWithRootObject(searchArray)
+        WOWSearchManager.shareInstance.db!.executeUpdate(sql, withArgumentsInArray: [data, "1"])
     }
     
     
@@ -109,7 +136,13 @@ extension WOWSearchController: UICollectionViewDelegate, UICollectionViewDataSou
     //MARK: - UICollectionView Delegate/Datasource Methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWSearchCell), forIndexPath: indexPath) as! WOWSearchCell
-        cell.titleLabel.text = keyWords[indexPath.row]
+        if indexPath.section == 0 {
+            cell.titleLabel.text = keyWords[indexPath.row]
+
+        }else {
+            cell.titleLabel.text = searchArray[indexPath.row]
+        }
+    
         return cell
         
     }
@@ -119,7 +152,13 @@ extension WOWSearchController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return keyWords.count
+        if section == 0 {
+            return keyWords.count
+
+        }else {
+            return searchArray.count
+        }
+    
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -155,6 +194,9 @@ extension WOWSearchController: UICollectionViewDelegate, UICollectionViewDataSou
 extension WOWSearchController: WOWReuseSectionViewDelegate {
     func clearHistoryClick() {
         DLog("清除历史搜索")
+        WOWSearchManager.shareInstance.delect("1")
+        searchArray.removeAll()
+        collectionView.reloadData()
     }
 }
 //搜索结果的item点击
@@ -162,6 +204,7 @@ extension WOWSearchController:SearchResultViewDelegate{
     func goodsItemClick(model: WOWGoodsModel) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
+        
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -170,7 +213,19 @@ extension WOWSearchController:SearchResultViewDelegate{
 
 extension WOWSearchController:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField.text == "" {
+            WOWHud.showMsg("请输入搜索关键字")
+            return false
+        }
         textField.resignFirstResponder()
+        if searchArray .contains(textField.text!) {
+            searchArray.removeObject(textField.text!)
+        }
+        searchArray.insertAsFirst(textField.text!)
+        saveSearch()
+
+        let section = NSIndexSet(index: 1)
+        collectionView.reloadSections(section)
         showResult()
         return true
     }
@@ -184,6 +239,7 @@ extension WOWSearchController:UITextFieldDelegate{
     func showResult() {
         view.addSubview(resultView)
         resultView.hidden = false
+        
         UIView.animateWithDuration(0.3) { 
             self.resultView.y = 0
         }
@@ -206,7 +262,7 @@ protocol SearchResultViewDelegate:class{
     func goodsItemClick(model:WOWGoodsModel)
 }
 
-class  SearchResultView:UIView,DropMenuViewDelegate{
+class  SearchResultView:UIView{
     
     var dataArr = [WOWProductModel](){
         didSet{
@@ -255,23 +311,10 @@ class  SearchResultView:UIView,DropMenuViewDelegate{
     }
     
     private func configMenuView(){
-        WOWDropMenuSetting.columnTitles = ["综合排序","全部风格"]
-        WOWDropMenuSetting.rowTitles =  [
-            ["综合排序","销量","价格","信誉","性价比吧","口碑吧"],
-            ["全部风格","现代简约","中式传统","清新田园","古朴禅意","自然清雅","经典怀旧","LOFT工业风","商务质感","玩味童趣","后现代"]
-        ]
-        WOWDropMenuSetting.maxShowCellNumber = 4
-        WOWDropMenuSetting.cellTextLabelSelectColoror = GrayColorlevel2
-        WOWDropMenuSetting.showDuration = 0.2
-        let menuView = WOWDropMenuView(frame:CGRectMake(0,0,MGScreenWidth,44))
-        menuView.delegate = self
-        self.addSubview(menuView)
+        
     }
     
-//MARK:Delegate
-    func dropMenuClick(column: Int, row: Int) {
-        DLog("点击了\(column)列,\(row)行")
-    }
+
 }
 
 

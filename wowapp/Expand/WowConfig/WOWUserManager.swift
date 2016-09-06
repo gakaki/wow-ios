@@ -185,6 +185,7 @@ struct WOWUserManager {
         }
     }
     
+   
     
     static func saveUserInfo(model:WOWUserModel?){
         MGDefault.setObject(true, forKey: WOWUserLoginStatus)

@@ -20,6 +20,9 @@ PODS:
   - FCUUID (1.3.0):
     - UICKeyChainStore (~> 2.1.0)
   - FlexboxLayout (0.1.0)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
   - HappyDNS (0.3.10)
   - Hashids-Swift (0.3.0)
   - IQKeyboardManagerSwift (4.0.5)
@@ -78,6 +81,7 @@ DEPENDENCIES:
   - EZSwiftExtensions (~> 1.2.3)
   - FCUUID
   - FlexboxLayout (from `FlexBoxLayout/FlexboxLayout.podspec`)
+  - FMDB
   - Hashids-Swift
   - IQKeyboardManagerSwift
   - Kingfisher
@@ -125,6 +129,7 @@ SPEC CHECKSUMS:
   EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
   FCUUID: f0cd5df92e4689b7d9d7264e2b32c588dc54c1f3
   FlexboxLayout: e55b026f1bfc572015cafcb8cf032b8749248d55
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Hashids-Swift: 5d7c069b0d4a3b70d4e2a840c420115dd517050d
   IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
@@ -155,6 +160,6 @@ SPEC CHECKSUMS:
   YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: 9e67e1c83298658f270092a758b71d420fdffc4b
+PODFILE CHECKSUM: 4610104323ff346bb8f4392e68176b9fc2553c8c
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.beta.2

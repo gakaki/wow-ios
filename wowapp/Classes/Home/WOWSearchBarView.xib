@@ -14,10 +14,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PxL-gg-4Xw" userLabel="backView">
                     <rect key="frame" x="0.0" y="0.0" width="560" height="47"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="lrg-yh-3xJ">
-                            <rect key="frame" x="8" y="16" width="16" height="16"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchBar" translatesAutoresizingMaskIntoConstraints="NO" id="lrg-yh-3xJ">
+                            <rect key="frame" x="0.0" y="9" width="30" height="30"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入搜索关键字" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BHX-xr-5fV">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入搜索关键字" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BHX-xr-5fV">
                             <rect key="frame" x="32" y="0.0" width="528" height="47"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -32,7 +32,7 @@
                         <constraint firstAttribute="trailing" secondItem="BHX-xr-5fV" secondAttribute="trailing" id="X3I-aI-vRM"/>
                         <constraint firstItem="BHX-xr-5fV" firstAttribute="leading" secondItem="lrg-yh-3xJ" secondAttribute="trailing" constant="8" id="hEM-SB-MXG"/>
                         <constraint firstItem="lrg-yh-3xJ" firstAttribute="centerY" secondItem="PxL-gg-4Xw" secondAttribute="centerY" id="njc-bx-iiu"/>
-                        <constraint firstItem="lrg-yh-3xJ" firstAttribute="leading" secondItem="PxL-gg-4Xw" secondAttribute="leading" constant="8" id="pSc-Uo-ujE"/>
+                        <constraint firstItem="lrg-yh-3xJ" firstAttribute="leading" secondItem="PxL-gg-4Xw" secondAttribute="leading" id="pSc-Uo-ujE"/>
                         <constraint firstItem="BHX-xr-5fV" firstAttribute="top" secondItem="PxL-gg-4Xw" secondAttribute="top" id="sIs-a5-Kkf"/>
                     </constraints>
                     <variation key="default">
@@ -77,6 +77,6 @@
         </view>
     </objects>
     <resources>
-        <image name="search" width="16" height="16"/>
+        <image name="searchBar" width="30" height="30"/>
     </resources>
 </document>

@@ -30,7 +30,7 @@ class WOWSearchManager: NSObject {
             return
         }
         
-        let sql = "CREATE TABLE IF NOT EXISTS t_searchModel (searchStr text, typeData text);"
+        let sql = "CREATE TABLE IF NOT EXISTS t_searchModel (id integer PRIMARY KEY, searchStr text, typeData text);"
         
         db.executeUpdate(sql, withArgumentsInArray: nil)
     }
@@ -39,13 +39,38 @@ class WOWSearchManager: NSObject {
      *  删除语句
      */
     
-    func delect(typeData: String) -> Bool
+    func delectAll(typeData: String) -> Bool
     {
 
-        let sql = "DELETE  FROM t_searchModel WHERE searchStr = (?)"
+        let sql = "DELETE  FROM t_searchModel WHERE typeData = (?)"
         
         return (db?.executeUpdate(sql, withArgumentsInArray: [typeData]))!
 
+    }
+    
+    /**
+     *  删除语句
+     */
+    
+    func delectSame(searchStr: String) -> Bool
+    {
+        
+        let sql = "DELETE  FROM t_searchModel WHERE searchStr = (?)"
+        
+        return (db?.executeUpdate(sql, withArgumentsInArray: [searchStr]))!
+        
+    }
+    
+    /**
+     *  插入语句
+     */
+    func insert(search: String) -> Bool {
+        if !delectSame(search) {
+            return false
+        }
+        let sql = "INSERT INTO t_searchModel(searchStr,typeData)VALUES(?,?);"
+        
+        return db!.executeUpdate(sql, withArgumentsInArray: [search,"1"])
     }
    
 }

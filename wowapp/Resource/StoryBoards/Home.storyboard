@@ -374,10 +374,10 @@
             </objects>
             <point key="canvasLocation" x="97" y="2045"/>
         </scene>
-        <!--搜索-->
+        <!--Search Controller-->
         <scene sceneID="eSF-SW-C5k">
             <objects>
-                <viewController storyboardIdentifier="WOWSearchController" title="搜索" id="8Qs-qZ-KeY" customClass="WOWSearchController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSearchController" id="8Qs-qZ-KeY" customClass="WOWSearchController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nvl-lx-KCO"/>
                         <viewControllerLayoutGuide type="bottom" id="gCz-qx-jEY"/>
@@ -386,26 +386,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yyj-30-doT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nqY-Hd-BwQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewLayout key="collectionViewLayout" id="mHa-Js-RVt" customClass="WOWSearchFlowLayout" customModule="wowapp" customModuleProvider="target"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="8Qs-qZ-KeY" id="Bxu-IX-joC"/>
-                                    <outlet property="delegate" destination="8Qs-qZ-KeY" id="R3h-mP-q0H"/>
-                                </connections>
-                            </collectionView>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yyj-30-doT" firstAttribute="leading" secondItem="hWu-o2-kc5" secondAttribute="leading" id="WzR-LH-yUT"/>
-                            <constraint firstItem="gCz-qx-jEY" firstAttribute="top" secondItem="yyj-30-doT" secondAttribute="bottom" id="XwO-tY-x9S"/>
-                            <constraint firstAttribute="trailing" secondItem="yyj-30-doT" secondAttribute="trailing" id="fdZ-sj-GTI"/>
-                            <constraint firstItem="yyj-30-doT" firstAttribute="top" secondItem="hWu-o2-kc5" secondAttribute="top" id="rZ2-Nc-FFz"/>
+                            <constraint firstAttribute="trailing" secondItem="nqY-Hd-BwQ" secondAttribute="trailing" id="DBg-cl-nyu"/>
+                            <constraint firstItem="nqY-Hd-BwQ" firstAttribute="leading" secondItem="hWu-o2-kc5" secondAttribute="leading" id="N8W-ib-Gj6"/>
+                            <constraint firstItem="nqY-Hd-BwQ" firstAttribute="top" secondItem="hWu-o2-kc5" secondAttribute="top" id="d3R-hw-YsP"/>
+                            <constraint firstItem="gCz-qx-jEY" firstAttribute="top" secondItem="nqY-Hd-BwQ" secondAttribute="bottom" id="izO-gq-xBx"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="yyj-30-doT" id="aHR-48-Yx9"/>
+                        <outlet property="tableView" destination="nqY-Hd-BwQ" id="8CM-M6-DrO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7x-e3-Cq1" userLabel="First Responder" sceneMemberID="firstResponder"/>

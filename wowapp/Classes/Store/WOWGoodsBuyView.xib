@@ -197,6 +197,13 @@
                                 <constraint firstAttribute="width" constant="13" id="LrU-tz-9BE"/>
                             </constraints>
                         </imageView>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning" translatesAutoresizingMaskIntoConstraints="NO" id="axe-qX-a7a">
+                            <rect key="frame" x="47" y="2" width="13" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="1el-cd-ji9"/>
+                                <constraint firstAttribute="width" constant="13" id="VBb-vE-2XH"/>
+                            </constraints>
+                        </imageView>
                         <collectionView clipsSubviews="YES" tag="101" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-40-vwt">
                             <rect key="frame" x="15" y="105" width="365" height="47"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -209,13 +216,6 @@
                                 <outlet property="delegate" destination="iN0-l3-epB" id="0g7-Nc-s2K"/>
                             </connections>
                         </collectionView>
-                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning" translatesAutoresizingMaskIntoConstraints="NO" id="axe-qX-a7a">
-                            <rect key="frame" x="47" y="2" width="13" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="13" id="1el-cd-ji9"/>
-                                <constraint firstAttribute="width" constant="13" id="VBb-vE-2XH"/>
-                            </constraints>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>

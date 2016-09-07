@@ -138,24 +138,29 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
         self.cv.reloadData()
     }
     
+    let size_padding                          = CGFloat(15.h)
+    let size_line_spacing                     = CGFloat(8.h)
+    
+    var heightAll                             = CGFloat(0.h)
+    
     func setUI(){
         
         let size_frame_width                  = self.frame.width
         let layout                            = UICollectionViewFlowLayout()
         layout.scrollDirection                = .Horizontal
         
-        let size_padding                      = CGFloat(15.0)
-        let size_line_spacing                 = CGFloat(8)
         
+        // 240 315 1.3125
         layout.sectionInset                   = UIEdgeInsets(top: size_padding, left: size_padding, bottom: size_padding, right: size_padding)
         let item_width                        = ( size_frame_width - size_padding * 2 - size_line_spacing * 3 ) / 4
-        let item_height                       = item_width * 1.54411
+        let item_height                       = item_width * 1.3125
         
         layout.itemSize                       = CGSize(width: item_width ,height: item_height)
         layout.minimumInteritemSpacing        = size_line_spacing
         layout.minimumLineSpacing             = size_line_spacing
         
-        let frame                             = CGRectMake(0, 0, size_frame_width, item_height * 2 + size_padding * 2 + size_line_spacing)
+        heightAll                             = item_height * 2 + size_padding * 2 + size_line_spacing
+        let frame                             = CGRectMake(0, 0, size_frame_width, heightAll)
         
         cv                                    = UICollectionView(frame: frame, collectionViewLayout: layout)
         

@@ -6,14 +6,12 @@ import RxCocoa
 import RxDataSources
 
 
-
-
 class VCFound: VCBaseVCCategoryFound {
     
     var data                    = [WowModulePageVO]()
-    let cell3_height            = CGFloat(MGScreenWidth / 3 - 10 )*4
     var isFavorite: Bool        = false
     var vo_recommend_product_id = 0
+    var cell_heights            = [0:0.h]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,7 +29,7 @@ class VCFound: VCBaseVCCategoryFound {
         super.setUI()
         
         tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 500
+        tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
 
         
@@ -59,6 +57,7 @@ class VCFound: VCBaseVCCategoryFound {
         }
     }
     
+//MARK: PURLL TO REFRESH AND REQUEST
     override func pullToRefresh() {
         super.pullToRefresh()
         do {
@@ -179,7 +178,6 @@ class VCFound: VCBaseVCCategoryFound {
 extension VCFound : UITableViewDataSource,UITableViewDelegate,
 WOWFoundRecommendCellDelegate,
 FoundWeeklyNewCellDelegate,
-
 WOWFoundCategoryCellDelegate
 {
 	
@@ -195,11 +193,11 @@ WOWFoundCategoryCellDelegate
 
         switch indexPath.section {
         case 0:
-            return 130.h
+            return cell_heights[0]!
         case 1:
             return 180.w
         case 2:
-            return cell3_height
+            return CGFloat(MGScreenWidth / 3 - 10 )*4
         default:
             return 180
             
@@ -209,11 +207,16 @@ WOWFoundCategoryCellDelegate
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let frame                   = CGRectMake(0, 0, tableView.frame.size.width, 65.h)
+        var frame_height            = 65.h
+        let frame_width             = tableView.frame.size.width
+        if section == 0 {
+            frame_height            = 15.h
+        }
+        let frame                   = CGRectMake(0, 0, frame_width, frame_height)
         let header                  = UIView(frame: frame)
         header.backgroundColor      = UIColor.whiteColor()
         
-        let grayView                = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 15.h))
+        let grayView                = UIView(frame: CGRectMake(0, 0, frame_width, 15.h))
         grayView.backgroundColor    = MGRgb(245, g: 245, b: 245)
         
         let l                       = UILabel(frame: CGRectMake(15.w, 15.h, 200.w, 50.h))
@@ -241,7 +244,7 @@ WOWFoundCategoryCellDelegate
         l.text          = t
 
         header.addSubview(grayView)
-        if ( l.text != ""){ //第一个不加文字显示
+        if t != "" {
             header.addSubview(l)
         }
         
@@ -250,7 +253,11 @@ WOWFoundCategoryCellDelegate
 
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-       return 65.h
+        if  section == 0 {
+            return 15.h
+        }else{
+            return 65.h
+        }
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -275,6 +282,8 @@ WOWFoundCategoryCellDelegate
         if ( section == 0   && row == 0){
             let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302
             cell.setData( d.moduleContentArr! )
+            print(cell.heightAll)
+            cell_heights[0] = cell.heightAll
 //            cell.delegate = self
             cell.selectionStyle = .None
             cell.bringSubviewToFront(cell.cv)

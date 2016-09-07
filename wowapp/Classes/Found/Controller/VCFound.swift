@@ -178,25 +178,28 @@ class VCFound: VCBaseVCCategoryFound {
 extension VCFound : UITableViewDataSource,UITableViewDelegate,
 WOWFoundRecommendCellDelegate,
 FoundWeeklyNewCellDelegate,
-WOWFoundCategoryCellDelegate
+WOWFoundCategoryCellDelegate,
+MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
 {
 	
-//MARK: UITableViewDelegate
-    
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        if(indexPath.section == 1){
-//            toVCProduct(   vo_recommend_product?.productId         )
-//        }
-//    }
-    
+
+    func getCellHeight(sectionIndex:Int) -> CGFloat{
+        if let h = cell_heights[sectionIndex] {
+            return h
+        }else{
+            return CGFloat.min
+        }
+    }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 
         switch indexPath.section {
         case 0:
-            return cell_heights[0]!
+            return getCellHeight(0)
         case 1:
-            return 180.w
+            return getCellHeight(1)
         case 2:
+            return 180.w
+        case 3:
             return CGFloat(MGScreenWidth / 3 - 10 )*4
         default:
             return 180
@@ -282,21 +285,21 @@ WOWFoundCategoryCellDelegate
         if ( section == 0   && row == 0){
             let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302
             cell.setData( d.moduleContentArr! )
-            print(cell.heightAll)
-            cell_heights[0] = cell.heightAll
-//            cell.delegate = self
+            cell_heights[section] = cell.heightAll
+            cell.delegate = self
             cell.selectionStyle = .None
             cell.bringSubviewToFront(cell.cv)
             return cell
         }
-//        if ( section == 0   && row == 0){
-//            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
-//            cell.products = self.vo_products
-//            cell.delegate = self
-//            cell.selectionStyle = .None
-//            cell.bringSubviewToFront(cell.collectionView)
-//            return cell
-//        }
+        if ( section == 1   && row == 0){
+            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
+            cell.setData( d.moduleContentArr! )
+            cell_heights[section]  = cell.heightAll
+            cell.delegate = self
+            cell.selectionStyle = .None
+            cell.bringSubviewToFront(cell.cv)
+            return cell
+        }
 //        else if ( section == 1 && row == 0){
 //            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundRecommendCell
 //            cell.delegate       = self
@@ -381,7 +384,22 @@ WOWFoundCategoryCellDelegate
         toVCProduct(productId)
     }
 
-  
+    
+    func cellFoundWeeklyNewCellTouchInside(m:WowModulePageItemVO){
+        print(m.productId as Int?)
+        
+        if let pid = m.productId as Int? {
+            self.toVCProduct(pid)
+        }
+    }
+    func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(cid:Int){
+        if cid == 0 {
+            
+        }
+//        toVCMoreCategory(cid)
+    }
+    
+
 }
 
 

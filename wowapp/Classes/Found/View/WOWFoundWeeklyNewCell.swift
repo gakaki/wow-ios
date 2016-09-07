@@ -5,10 +5,11 @@ protocol FoundWeeklyNewCellDelegate:class{
     func cellTouchInside(m:WOWFoundProductModel)
 }
 
-
-
-class WOWFoundWeeklyNewCell: UITableViewCell {
+//401 本周上新
+class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
     
+    static func isNib() -> Bool { return false }
+
     @IBOutlet weak var collectionView: UICollectionView!
     
     weak var delegate:FoundWeeklyNewCellDelegate?

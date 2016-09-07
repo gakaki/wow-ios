@@ -28,7 +28,8 @@ public enum RequestApi{
     case Api_Found_Main
     case Api_Found_2nd
     
-
+    //module 页面 发现 页面 新
+    case Api_Module_Page2
     
     case Api_Activity
     
@@ -340,6 +341,9 @@ extension RequestApi:TargetType{
         case .Api_Invite:
             return URL_Invite
         //发现页面
+        //module 页面 发现 页面 新
+        case .Api_Module_Page2:
+            return URL_Module_Page2
         case .Api_Found_Main:
             return URL_Found_Main
         case .Api_Found_2nd:
@@ -362,7 +366,10 @@ extension RequestApi:TargetType{
     public var method:Moya.Method{
         switch self {
 
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products, .Api_Home_List, .Api_Home_BottomList:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products, .Api_Home_List, .Api_Home_BottomList
+            ,Api_Module_Page2
+            
+            :
 
             return .GET
 
@@ -498,7 +505,10 @@ extension RequestApi:TargetType{
             
             case let .Api_Home_BottomList(param):
                 params = param
-            
+
+            case .Api_Module_Page2:
+                params = ["pageId":2, "region":1]
+
             case .Api_Found_2nd:
                 break
             case .Api_Found_Main:

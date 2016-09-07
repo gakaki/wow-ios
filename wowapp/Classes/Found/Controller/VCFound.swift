@@ -10,30 +10,18 @@ import RxDataSources
 
 class VCFound: VCBaseVCCategoryFound {
     
-    var data                 = [WowModulePageVO]()
-    
-    let cellID0              = String( WOWFoundCategoryNewCell )
-    let cellID1              = String( WOWFoundWeeklyNewCell )
-    let cellID2              = String( WOWFoundRecommendCell )
-    let cellID3              = String( WOWFoundCategoryCell )
-    
-    let cell3_height         = CGFloat(MGScreenWidth / 3 - 10 )*4
-    
-    var vo_products          = [WOWFoundProductModel]()
-    var vo_recommend_product:WOWFoundProductModel?
-    var vo_categories        = [WOWCategoryModel]()
-    
-    var isFavorite: Bool     = false
+    var data                    = [WowModulePageVO]()
+    let cell3_height            = CGFloat(MGScreenWidth / 3 - 10 )*4
+    var isFavorite: Bool        = false
+    var vo_recommend_product_id = 0
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         do {
-            
             try request_module_page_with_throw()
-            
         }catch{
             DLog(error)
         }
@@ -54,50 +42,42 @@ class VCFound: VCBaseVCCategoryFound {
         registerCell()
     }
 
-    
     func registerCell(){
-        
         for (k,c) in ModulePageType.d {
             if c is ModuleViewElement.Type {
                 let cell            = (c as! ModuleViewElement.Type)
                 let isNib           = cell.isNib()
                 let cellName        = String(cell)
+                let identifier      = "\(k)"
                 if (isNib == true){
-                    tableView.registerNib(UINib.nibName(cellName), forCellReuseIdentifier:String(k))
+                    tableView.registerNib(UINib.nibName(cellName), forCellReuseIdentifier:identifier)
                 }else{
-                    tableView.registerClass(c.self, forCellReuseIdentifier:String(k))
+                    tableView.registerClass(c.self, forCellReuseIdentifier:identifier)
                 }
                 print("\(k) = \(c)")
             }
         }
-//        tableView.registerNib(UINib.nibName(String(WOWFoundWeeklyNewCell)), forCellReuseIdentifier:cellID1)
-//        tableView.registerClass(WOWFoundRecommendCell.self, forCellReuseIdentifier:cellID2)
-//        tableView.registerClass(WOWFoundCategoryCell.self, forCellReuseIdentifier:cellID3)
     }
     
     override func pullToRefresh() {
         super.pullToRefresh()
         do {
-//            try request_with_throw()
             try request_module_page_with_throw()
         }catch{
             DLog(error)
         }
     }
     
-    
- 
     func request_module_page_with_throw() throws -> Void {
         
         super.request()
-        
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Module_Page2, successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 
                 var r                             =  JSON(result)
                 strongSelf.data                   =  Mapper<WowModulePageVO>().mapArray(r["modules"].arrayObject) ?? [WowModulePageVO]()
                 
-                for  var t:WowModulePageVO in strongSelf.data
+                for  t:WowModulePageVO in strongSelf.data
                 {
                     if t.moduleType == 302
                     {
@@ -137,7 +117,13 @@ class VCFound: VCBaseVCCategoryFound {
                     strongSelf.requestIsFavoriteProduct()
                 }
                 
-//                strongSelf.tableView.reloadData()
+                
+                strongSelf.data = strongSelf.data.filter({
+                    $0.moduleType != 201 //201 单条banner的去掉
+                })
+
+                
+                strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }
             
@@ -150,7 +136,7 @@ class VCFound: VCBaseVCCategoryFound {
     
     //用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: vo_recommend_product?.productId ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: vo_recommend_product_id ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.isFavorite = favorite ?? false
@@ -241,18 +227,24 @@ WOWFoundCategoryCellDelegate
 
         var t           = "本周上新"
         switch section {
+        case 0:
+            t           = ""
         case 1:
+            t           = "本周上新"
+        case 2:
             t           = "单品推荐"
         case 2:
-            t           = "全部分类"
+            t           = "场景"
         default:
             t           = "本周上新"
         }
         l.text          = t
 
         header.addSubview(grayView)
-        header.addSubview(l)
-     
+        if ( l.text != ""){ //第一个不加文字显示
+            header.addSubview(l)
+        }
+        
         return header
     }
 
@@ -275,66 +267,76 @@ WOWFoundCategoryCellDelegate
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let section = indexPath.section
-        let row     = indexPath.row
+        let section     = indexPath.section
+        let row         = indexPath.row
+        let d           = self.data[section]
+        let identifier  = "\(d.moduleType!)"
         
         if ( section == 0   && row == 0){
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellID1 , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
-            cell.products = self.vo_products
-            cell.delegate = self
+            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302
+            cell.setData( d.moduleContentArr! )
+//            cell.delegate = self
             cell.selectionStyle = .None
-            cell.bringSubviewToFront(cell.collectionView)
+            cell.bringSubviewToFront(cell.cv)
             return cell
         }
-        else if ( section == 1 && row == 0){
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellID2 , forIndexPath: indexPath) as! WOWFoundRecommendCell
-            cell.delegate       = self
-            cell.selectionStyle = .None
-            
-            if let data  = vo_recommend_product {
-                cell.assign_val(data)
-                cell.btnLike.selected = isFavorite
-            }
-            
-            cell.bringSubviewToFront(cell.product_view)
-
-            return cell
-        }
-        else if ( section == 2 && row == 0){
-            
-            let cell            = tableView.dequeueReusableCellWithIdentifier(cellID3 , forIndexPath: indexPath) as! WOWFoundCategoryCell
-            cell.delegate       = self
-            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
-            cell.setUI()
-            cell.selectionStyle = .None
-            cell.categories     = self.vo_categories
-            return cell
-        
-        }
-            
-        else if ( section == 3 && row == 0){
-            
-            let cell            = tableView.dequeueReusableCellWithIdentifier(cellID3 , forIndexPath: indexPath) as! WOWFoundCategoryCell
-            cell.delegate       = self
-            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
-            cell.setUI()
-            cell.selectionStyle = .None
-            cell.categories     = self.vo_categories
-            return cell
-            
-        }
-        
-            
-        else if ( section == 4 && row == 0){
-            
-            let cell            = tableView.dequeueReusableCellWithIdentifier(cellID3 , forIndexPath: indexPath) as! WOWFoundCategoryCell
-            cell.delegate       = self
-            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
-            cell.setUI()
-            cell.selectionStyle = .None
-            cell.categories     = self.vo_categories
-            return cell
-        }
+//        if ( section == 0   && row == 0){
+//            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
+//            cell.products = self.vo_products
+//            cell.delegate = self
+//            cell.selectionStyle = .None
+//            cell.bringSubviewToFront(cell.collectionView)
+//            return cell
+//        }
+//        else if ( section == 1 && row == 0){
+//            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundRecommendCell
+//            cell.delegate       = self
+//            cell.selectionStyle = .None
+//            
+//            if let data  = vo_recommend_product {
+//                cell.assign_val(data)
+//                cell.btnLike.selected = isFavorite
+//            }
+//            
+//            cell.bringSubviewToFront(cell.product_view)
+//
+//            return cell
+//        }
+//        else if ( section == 2 && row == 0){
+//            
+//            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundCategoryCell
+//            cell.delegate       = self
+//            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
+//            cell.setUI()
+//            cell.selectionStyle = .None
+//            cell.categories     = self.vo_categories
+//            return cell
+//        
+//        }
+//            
+//        else if ( section == 3 && row == 0){
+//            
+//            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! WOWFoundCategoryCell
+//            cell.delegate       = self
+//            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
+//            cell.setUI()
+//            cell.selectionStyle = .None
+//            cell.categories     = self.vo_categories
+//            return cell
+//            
+//        }
+//        
+//            
+//        else if ( section == 4 && row == 0){
+//            
+//            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! WOWFoundCategoryCell
+//            cell.delegate       = self
+//            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
+//            cell.setUI()
+//            cell.selectionStyle = .None
+//            cell.categories     = self.vo_categories
+//            return cell
+//        }
         else{
             return UITableViewCell()
         }

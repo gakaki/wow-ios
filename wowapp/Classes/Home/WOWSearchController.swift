@@ -17,7 +17,7 @@ class WOWSearchController: WOWBaseViewController {
         super.viewDidLoad()
        
         
-        defaultData()
+      
        
        
     }
@@ -32,11 +32,12 @@ class WOWSearchController: WOWBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        searchView.hidden = false
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        searchView.hidden = false
+        
     }
     
 
@@ -60,12 +61,12 @@ class WOWSearchController: WOWBaseViewController {
         return view
     }()
     
-    lazy var resultView : SearchResultView = {
-        let v = SearchResultView()
-        v.delegate = self
-        v.frame = CGRectMake(0, MGScreenHeight,MGScreenWidth,MGScreenHeight - 64)
-        return v
-    }()
+//    lazy var resultView : SearchResultView = {
+//        let v = SearchResultView()
+//        v.delegate = self
+//        v.frame = CGRectMake(0, MGScreenHeight,MGScreenWidth,MGScreenHeight - 64)
+//        return v
+//    }()
     
     lazy var layout: WOWSearchFlowLayout = {
       let layout = WOWSearchFlowLayout()
@@ -82,9 +83,14 @@ class WOWSearchController: WOWBaseViewController {
         navigationController?.navigationBar.addSubview(searchView)
         navigationItem.leftBarButtonItems = nil
         makeCustomerNavigationItem("", left: true, handler:nil)
-        defaultSetup()
+        
+        defaultData()
         keyWords = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
-        searchArray = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
+        
+        defaultSetup()
+     
+//        searchArray = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
+//        searchArray = [String]
    
     }
     
@@ -93,31 +99,34 @@ class WOWSearchController: WOWBaseViewController {
         collectionView.registerNib(UINib.nibName(String(WOWSearchCell)), forCellWithReuseIdentifier:"WOWSearchCell")
         collectionView.collectionViewLayout = layout
         collectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
-        
+       
     }
     
     func defaultData() {
-        /// 查询语句
-        let sql2 = "SELECT * FROM t_searchModel;"
-        // 1.查询数据库
-        let result = WOWSearchManager.shareInstance.db!.executeQuery(sql2, withArgumentsInArray: nil)
+        searchArray.removeAll()
+        let sql = "SELECT * FROM t_searchModel;"
         
-        // 2.从结果集中取出数据
-        while result.next(){
-            let data = result.objectForColumnName("searchModel") as! NSData
-            searchArray = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [String]
+        let resultSet = WOWSearchManager.shareInstance.db.executeQuery(sql, withArgumentsInArray: nil)
+        
+        while resultSet.next() {
+        
+            let searchStr = resultSet.stringForColumn("searchStr")
+    
+            searchArray.append(searchStr)
+            print("searchStr = \(searchStr)")
         }
+        print(searchArray)
+        
+//        collectionView.reloadData()
     }
     
     func saveSearch() {
-        WOWSearchManager.shareInstance.delect("1")
-        // 1.编写SQL语句
-        let sql = "INSERT INTO t_searchModel \n" + "(searchModel, searchModel_idstr) \n" + "VALUES \n" + "(?, ?);"
+
+        let sql = "INSERT INTO t_searchModel(searchStr,typeData)VALUES(?,?);"
         
-        // 2.执行SQL语句
-        // 注意: 在FMDB中, 除了查询以外的操作都称之为更新
-        let data = NSKeyedArchiver.archivedDataWithRootObject(searchArray)
-        WOWSearchManager.shareInstance.db!.executeUpdate(sql, withArgumentsInArray: [data, "1"])
+        WOWSearchManager.shareInstance.db.executeUpdate(sql, withArgumentsInArray: [searchView.searchTextField.text!,"1"])
+        
+        defaultData()
     }
     
     
@@ -142,7 +151,8 @@ extension WOWSearchController: UICollectionViewDelegate, UICollectionViewDataSou
         }else {
             cell.titleLabel.text = searchArray[indexPath.row]
         }
-    
+//        cell.setNeedsLayout()
+//        cell.setNeedsDisplay()
         return cell
         
     }
@@ -195,8 +205,10 @@ extension WOWSearchController: WOWReuseSectionViewDelegate {
     func clearHistoryClick() {
         DLog("清除历史搜索")
         WOWSearchManager.shareInstance.delect("1")
+
         searchArray.removeAll()
         collectionView.reloadData()
+       
     }
 }
 //搜索结果的item点击
@@ -226,32 +238,32 @@ extension WOWSearchController:UITextFieldDelegate{
 
         let section = NSIndexSet(index: 1)
         collectionView.reloadSections(section)
-        showResult()
+//        showResult()
         return true
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
-        hideResult()
+//        hideResult()
         
         return true
     }
     
-    func showResult() {
-        view.addSubview(resultView)
-        resultView.hidden = false
-        
-        UIView.animateWithDuration(0.3) { 
-            self.resultView.y = 0
-        }
-    }
-    
-    func hideResult()  {
-        UIView.animateWithDuration(0.3, animations: { 
-            self.resultView.y = MGScreenHeight + 20
-        }) { (ret) in
-            self.resultView.removeFromSuperview()
-        }
-    }
+//    func showResult() {
+//        view.addSubview(resultView)
+//        resultView.hidden = false
+//        
+//        UIView.animateWithDuration(0.3) { 
+//            self.resultView.y = 0
+//        }
+//    }
+//    
+//    func hideResult()  {
+//        UIView.animateWithDuration(0.3, animations: { 
+//            self.resultView.y = MGScreenHeight + 20
+//        }) { (ret) in
+//            self.resultView.removeFromSuperview()
+//        }
+//    }
 }
 
 
@@ -264,87 +276,87 @@ protocol SearchResultViewDelegate:class{
 
 class  SearchResultView:UIView{
     
-    var dataArr = [WOWProductModel](){
-        didSet{
-            collectionView.reloadData()
-        }
-    }
+//    var dataArr = [WOWProductModel](){
+//        didSet{
+//            collectionView.reloadData()
+//        }
+//    }
     
-    weak var delegate:SearchResultViewDelegate?
+//    weak var delegate:SearchResultViewDelegate?
     
 //MARK:Lazy
-    lazy var layout:CollectionViewWaterfallLayout = {
-        let l = CollectionViewWaterfallLayout()
-        l.columnCount = 2
-        l.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0)
-        l.minimumColumnSpacing = 1
-        l.minimumInteritemSpacing = 1
-        return l
-    }()
+//    lazy var layout:CollectionViewWaterfallLayout = {
+//        let l = CollectionViewWaterfallLayout()
+//        l.columnCount = 2
+//        l.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0)
+//        l.minimumColumnSpacing = 1
+//        l.minimumInteritemSpacing = 1
+//        return l
+//    }()
     
-    private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,MGScreenWidth,MGScreenHeight - 64 - 45), collectionViewLayout:self.layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.whiteColor()
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
-        return collectionView
-    }()
+//    private lazy var collectionView:UICollectionView = {
+//        let collectionView = UICollectionView.init(frame:CGRectMake(0, 45,MGScreenWidth,MGScreenHeight - 64 - 45), collectionViewLayout:self.layout)
+//        collectionView.dataSource = self
+//        collectionView.delegate = self
+//        collectionView.backgroundColor = UIColor.whiteColor()
+//        collectionView.showsHorizontalScrollIndicator = false
+//        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
+//        return collectionView
+//    }()
 
+//    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        configSubview()
+//    }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configSubview()
-    }
     
     
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configSubview(){
-        backgroundColor = UIColor.whiteColor()
-        configMenuView()
-        self.addSubview(collectionView)
-    }
-    
-    private func configMenuView(){
-        
-    }
+//    private func configSubview(){
+//        backgroundColor = UIColor.whiteColor()
+//        configMenuView()
+//        self.addSubview(collectionView)
+//    }
+//    
+//    private func configMenuView(){
+//        
+//    }
     
 
 }
 
 
-extension SearchResultView:UICollectionViewDelegate,UICollectionViewDataSource{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
-            cell.showData(dataArr[indexPath.item],indexPath: indexPath)
-            return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let _ = self.delegate {
-           
-        }
-    }
-}
+//extension SearchResultView:UICollectionViewDelegate,UICollectionViewDataSource{
+//    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return dataArr.count
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+//            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
+//            cell.showData(dataArr[indexPath.item],indexPath: indexPath)
+//            return cell
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        if let _ = self.delegate {
+//           
+//        }
+//    }
+//}
 
-extension SearchResultView:CollectionViewWaterfallLayoutDelegate{
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)
-    }
-}
+//extension SearchResultView:CollectionViewWaterfallLayoutDelegate{
+//    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        return CGSizeMake(WOWGoodsSmallCell.itemWidth,dataArr[indexPath.item].cellHeight)
+//    }
+//}
 
 
 

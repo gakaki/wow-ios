@@ -200,10 +200,9 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         case 2:
             return 180.w
         case 3:
-            return CGFloat(MGScreenWidth / 3 - 10 )*4
+            return getCellHeight(3)
         default:
             return 180
-            
         }
     }
     
@@ -239,7 +238,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             t           = "本周上新"
         case 2:
             t           = "单品推荐"
-        case 2:
+        case 3:
             t           = "场景"
         default:
             t           = "本周上新"
@@ -300,32 +299,26 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             cell.bringSubviewToFront(cell.cv)
             return cell
         }
-//        else if ( section == 1 && row == 0){
-//            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundRecommendCell
+        else if ( section == 2 && row == 0){
+            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundRecommendCell
+            cell.delegate       = self
+            cell.selectionStyle = .None
+            cell.setData( d.moduleContentItem! )
+            cell.btnLike.selected = isFavorite
+            cell.bringSubviewToFront(cell.product_view)
+            
+            return cell
+        }
+        else if ( section == 3 && row == 0){
+            
+            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301
 //            cell.delegate       = self
-//            cell.selectionStyle = .None
-//            
-//            if let data  = vo_recommend_product {
-//                cell.assign_val(data)
-//                cell.btnLike.selected = isFavorite
-//            }
-//            
-//            cell.bringSubviewToFront(cell.product_view)
+            cell.selectionStyle = .None
+            cell.setData(d.moduleContentArr!)
+            cell_heights[section]  = cell.heightAll
+            return cell
+        }
 //
-//            return cell
-//        }
-//        else if ( section == 2 && row == 0){
-//            
-//            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundCategoryCell
-//            cell.delegate       = self
-//            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
-//            cell.setUI()
-//            cell.selectionStyle = .None
-//            cell.categories     = self.vo_categories
-//            return cell
-//        
-//        }
-//            
 //        else if ( section == 3 && row == 0){
 //            
 //            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! WOWFoundCategoryCell
@@ -339,16 +332,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
 //        }
 //        
 //            
-//        else if ( section == 4 && row == 0){
-//            
-//            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! WOWFoundCategoryCell
-//            cell.delegate       = self
-//            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
-//            cell.setUI()
-//            cell.selectionStyle = .None
-//            cell.categories     = self.vo_categories
-//            return cell
-//        }
+        
         else{
             return UITableViewCell()
         }

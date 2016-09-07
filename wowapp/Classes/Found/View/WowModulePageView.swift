@@ -17,11 +17,6 @@ class MODULE_TYPE_BANNER_CV_CELL_201:UITableViewCell,ModuleViewElement{
     static func isNib() -> Bool { return false }
 }
 
-//301 一级分类
-class MODULE_TYPE_CATEGORIES_CV_CELL_301:UITableViewCell,ModuleViewElement{
-    static func isNib() -> Bool { return false }
-}
-
 
 
 //402 推荐商品
@@ -60,7 +55,7 @@ struct ModulePageType {
         PAGE_MODULE_TYPE_CATEGORIES_MORE 			: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302.classForCoder(), //302 二级分类
         PAGE_MODULE_TYPE_NEW_ARRIVAL_RPODUCTS 		: WOWFoundWeeklyNewCell.classForCoder(), //401 本周上新
         PAGE_MODULE_TYPE_PINTEREST_PRODUCTS 		: MODULE_TYPE_PINTEREST_PRODUCTS_CV_CELL_402.classForCoder(), //402 推荐商品
-        PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT	: MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT_CV_CELL_501.classForCoder(), //501 单品推荐
+        PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT	: WOWFoundRecommendCell.classForCoder(), //501 单品推荐
         PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: MODULE_TYPE_TOPIC_PRODUCTS_CV_CELL_601.classForCoder()            //601 专题商品列表
     ]
 

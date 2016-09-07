@@ -112,7 +112,6 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell:UICollectionViewCell{
     func setModel(m:WowModulePageItemVO){
         self.bg_pic.set_webimage_url(m.categoryBgImg)
     }
- 
 }
 
 class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -147,7 +146,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
     
     func setUI(){
         
-        let size_frame_width                  = self.frame.width
+        let size_frame_width                  = MGScreenWidth
         let layout                            = UICollectionViewFlowLayout()
         layout.scrollDirection                = .Horizontal
         

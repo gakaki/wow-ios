@@ -11,9 +11,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7Ba-X5-A2A">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7Ba-X5-A2A">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vfv-cj-9nZ">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="vfv-cj-9nZ">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -34,7 +34,7 @@
                 <constraint firstItem="7Ba-X5-A2A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tyy-Yk-Nnb"/>
             </constraints>
             <connections>
-                <outlet property="collectionView" destination="7Ba-X5-A2A" id="RGb-zP-6U9"/>
+                <outlet property="cv" destination="7Ba-X5-A2A" id="GVa-9e-FGo"/>
             </connections>
             <point key="canvasLocation" x="336" y="435"/>
         </view>

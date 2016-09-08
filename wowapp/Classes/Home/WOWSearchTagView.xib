@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="187"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aje-PA-1hJ">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aje-PA-1hJ">
                     <rect key="frame" x="0.0" y="111" width="320" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="历史搜索" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnN-du-eQI">
@@ -20,7 +20,7 @@
                             <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKH-5c-DBM">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKH-5c-DBM">
                             <rect key="frame" x="274" y="7" width="46" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="XoJ-U3-ImC"/>
@@ -36,9 +36,12 @@
                         <constraint firstItem="aKH-5c-DBM" firstAttribute="centerY" secondItem="aje-PA-1hJ" secondAttribute="centerY" id="fOZ-P6-kks"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bi5-PL-G5g" customClass="TagListView" customModule="wowapp" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bi5-PL-G5g" customClass="TagListView" customModule="wowapp" customModuleProvider="target">
                     <rect key="frame" x="15" y="155" width="290" height="32"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="250" constant="32" id="nRb-um-KPQ"/>
+                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
                             <real key="value" value="10"/>
@@ -60,9 +63,12 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BUd-dR-4iv" customClass="TagListView" customModule="wowapp" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BUd-dR-4iv" customClass="TagListView" customModule="wowapp" customModuleProvider="target">
                     <rect key="frame" x="15" y="44" width="290" height="32"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="250" constant="32" id="pKA-7a-sah"/>
+                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="removeButtonIconSize">
                             <real key="value" value="0.0"/>
@@ -119,6 +125,11 @@
                 <constraint firstItem="bi5-PL-G5g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="wUE-1I-Saz"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="1ep-ke-05w"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="deleteButton" destination="aKH-5c-DBM" id="kbJ-ds-vc2"/>
                 <outlet property="historyTagListView" destination="bi5-PL-G5g" id="2hJ-L0-Cwd"/>

@@ -386,7 +386,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nqY-Hd-BwQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nqY-Hd-BwQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -575,8 +575,8 @@
     </scenes>
     <resources>
         <image name="closeNav" width="40" height="32"/>
-        <image name="icon_like" width="16" height="13"/>
-        <image name="icon_like_hightlighted" width="16" height="13"/>
+        <image name="icon_like" width="30" height="30"/>
+        <image name="icon_like_hightlighted" width="30" height="30"/>
         <image name="icon_share" width="14" height="14"/>
     </resources>
 </document>

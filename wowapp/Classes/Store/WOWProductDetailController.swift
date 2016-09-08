@@ -130,14 +130,18 @@ class WOWProductDetailController: WOWBaseViewController {
         productDescView.productDescLabel.text = productModel?.detailDescription
         productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)
         //banner轮播
-        cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
-        cycleView.delegate = self
+        
         if let array = productModel?.primaryImgs {
-            placeImageView.kf_setImageWithURL(NSURL(string:array[0] ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
-                if let strongSelf = self{
-                    strongSelf.shareProductImage = image
+            if array.count >= 1 {
+                cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
+                cycleView.delegate = self
+                placeImageView.kf_setImageWithURL(NSURL(string:array[0] ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+                    if let strongSelf = self{
+                        strongSelf.shareProductImage = image
+                    }
                 }
             }
+            
 
         }
         
@@ -202,13 +206,17 @@ class WOWProductDetailController: WOWBaseViewController {
         }else{
            requestFavoriteProduct()
         }
+        
     }
 
     //MARK:选择规格,有两种视图
     func chooseStyle(entrue: carEntrance) {
         WOWBuyCarMananger.sharedBuyCar.productSpecModel      = self.productSpecModel
         if let product = productModel {
-            WOWBuyCarMananger.sharedBuyCar.defaultImg = product.primaryImgs![0]
+            if product.primaryImgs?.count > 0 {
+                WOWBuyCarMananger.sharedBuyCar.defaultImg = product.primaryImgs![0]
+            }
+            
             let result = WOWCalPrice.calTotalPrice([product.sellPrice ?? 0],counts:[1])
 
             WOWBuyCarMananger.sharedBuyCar.defaultPrice = result

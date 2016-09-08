@@ -23,7 +23,7 @@ public class MIBadgeButton: UIButton {
         }
     }
     
-    public var badgeBackgroundColor = UIColor.init(hexString: "#FFE600") {
+    public var badgeBackgroundColor = UIColor.init(hexString: "#FFD444") {
         didSet {
             badgeLabel.backgroundColor = badgeBackgroundColor
         }

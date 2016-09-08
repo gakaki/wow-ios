@@ -211,6 +211,7 @@ struct WOWUserManager {
         MGDefault.setObject(nil, forKey:WOWUserCarCount)
         MGDefault.setObject(nil, forKey:WOWUserIndustry)
         MGDefault.setObject(nil, forKey:WOWUserPhotoData)
+        MGDefault.setObject(nil, forKey: WOWSessionToken)
         MGDefault.synchronize()
     }
     /**

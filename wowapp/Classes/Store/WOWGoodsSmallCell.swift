@@ -50,6 +50,6 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         desLabel.setLineHeightAndLineBreak(1.5)
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         priceLabel.text     = result//千万不用格式化了
- 
+        
     }
 }

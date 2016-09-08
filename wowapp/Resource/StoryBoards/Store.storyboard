@@ -144,7 +144,7 @@
                                     </button>
                                     <button opaque="NO" tag="4004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ui9-Q6-WqD">
                                         <rect key="frame" x="220" y="0.0" width="100" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="qmY-e4-p7v"/>
                                         </constraints>
@@ -525,8 +525,8 @@
     <resources>
         <image name="car_right" width="63" height="36"/>
         <image name="closeNav" width="40" height="32"/>
-        <image name="icon_like" width="16" height="13"/>
-        <image name="icon_like_hightlighted" width="16" height="13"/>
+        <image name="icon_like" width="30" height="30"/>
+        <image name="icon_like_hightlighted" width="30" height="30"/>
         <image name="icon_share" width="14" height="14"/>
         <image name="like-gray" width="30" height="30"/>
         <image name="like_select" width="30" height="30"/>

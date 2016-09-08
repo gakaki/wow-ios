@@ -12,6 +12,7 @@ class WOWSearchController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var keyWords = [String]()
     var searchArray = [String]()
+    var myContext = 0
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +85,7 @@ class WOWSearchController: WOWBaseViewController {
         
         defaultSetup()
        
-        searchTagView.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight - 64)
+//        searchTagView.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight - 64)
         tableView.tableHeaderView = searchTagView
    
     }
@@ -101,6 +102,9 @@ class WOWSearchController: WOWBaseViewController {
             searchTagView.historyTagListView.addTag(key)
         }
         searchTagView.historyTagListView.alignment = .Left
+        let height = searchTagView.hotTagListView.frame.height + searchTagView.historyTagListView.frame.height + 123
+        searchTagView.frame = CGRectMake(0, 0, MGScreenWidth, height)
+       
        
     }
     
@@ -159,6 +163,12 @@ class WOWSearchController: WOWBaseViewController {
 extension WOWSearchController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         print("Tag pressed: \(title), \(sender)")
+        print(sender.frame.height)
+       let height = searchTagView.hotTagListView.frame.height + searchTagView.historyTagListView.frame.height + 123
+        searchTagView.frame = CGRectMake(0, 0, MGScreenWidth, height)
+        tableView.beginUpdates()
+        tableView.tableHeaderView = searchTagView
+        tableView.endUpdates()
         searchHistory(title)
     }
     

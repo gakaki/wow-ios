@@ -98,6 +98,13 @@ class WOWNetManager {
                                     return
 //                                }
                             }
+                            if code == RequestCode.FailError.rawValue {
+                                
+                                WOWHud.showMsg("您未登录,请先登录")
+                                UIApplication.currentViewController()?.toLoginVC(true)
+                                failClosure(errorMsg:info?.message)
+                                return
+                            }
                             failClosure(errorMsg:info?.message)
                             WOWHud.showMsg(info?.message)
                             return

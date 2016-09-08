@@ -52,7 +52,7 @@ class WOWTabBarController: UITabBarController {
     func configTabBar() {
         let items = self.tabBar.items
         for item in items! as [UITabBarItem] {
-            let dic = NSDictionary(object: UIColor.yellowColor(),
+            let dic = NSDictionary(object: UIColor(hexString: "#FFD444")!,
                                    forKey: NSForegroundColorAttributeName)
 
             item.setTitleTextAttributes(dic as? [String : AnyObject],

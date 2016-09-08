@@ -61,6 +61,8 @@ class WOWGoodsSmallCell: UICollectionViewCell {
             likeBtn.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
        
         }
+        }else{
+            likeBtn.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
         }
     }
 }

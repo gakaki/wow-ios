@@ -27,6 +27,7 @@ class WOWController: WOWBaseViewController {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         setUI()
+        addObserver()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -62,7 +63,22 @@ class WOWController: WOWBaseViewController {
         let a =  UIApplication.sharedApplication().delegate as! AppDelegate
         return a
     }()
-    
+    func loginSuccess()  {// 重新刷新数据购物车数量
+        tableView.reloadData()
+        configBarItem()
+    }
+    func exitLogin()  {// 重新刷新数据，清空购物车数量
+        tableView.reloadData()
+         configBarItem()
+    }
+
+    private func addObserver(){
+        /**
+         添加通知
+         */
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
+    }
     
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
@@ -124,7 +140,6 @@ class WOWController: WOWBaseViewController {
             }
             
         }
-        
         configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }
     

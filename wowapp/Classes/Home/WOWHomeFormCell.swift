@@ -104,7 +104,6 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
                 return dataArr?.count ?? 0
-//        return 5
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -158,10 +157,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
         let horizontalOffset = scrollView.contentOffset.x
         
         self.scrollViewOffsetDic[scrollView.tag] = horizontalOffset
-        
-        
+
     }
-    
-    
-    
+
 }

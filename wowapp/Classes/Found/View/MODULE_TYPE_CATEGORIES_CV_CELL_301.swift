@@ -48,13 +48,19 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
     
     func setData(d:[WowModulePageItemVO]){
         self.data = d
-        self.changeUI()
+        
         collectionView.reloadData()
+        self.changeUI()
+//        self.setNeedsLayout()
+//        self.setNeedsDisplay()
+//        collectionView.invalidateIntrinsicContentSize()
+        collectionView.collectionViewLayout.invalidateLayout() // this is useful
     }
     
     override init(style: UITableViewCellStyle,reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setUI()
+        self.changeUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,6 +72,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
 
     func changeUI(){
         
+        
         var count                                         = CGFloat(self.data.count / 2)
         let mod                                           = self.data.count % 2 == 0 ? 0 : 1
         count                                             = count + CGFloat(mod)
@@ -76,10 +83,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         
         let frame                                         = CGRectMake(0, 0, MGScreenWidth, heightAll)
         collectionView.frame                              = frame
-//        collectionView.setNeedsDisplay()
-//        collectionView.setNeedsLayout()
-//        collectionView.invalidateIntrinsicContentSize()
-        collectionView.collectionViewLayout.invalidateLayout() // this is useful
+
 
     }
     
@@ -117,6 +121,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         
         
         self.addSubview(collectionView)
+        
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

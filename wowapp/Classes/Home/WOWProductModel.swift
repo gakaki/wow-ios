@@ -14,7 +14,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var primaryImgs           : Array<String>?
     var productName           : String?
     var sellPrice             : Double?
-    var original_price        : Double?
+    var originalprice        : Double?
     var sellingPoint          : String?
     var brandCname            : String?
     var brandId               : Int?
@@ -28,7 +28,9 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var productParameter      : WOWParameter?
     var productImg            : String?
     var secondaryImgs         : [WOWProductPicTextModel]?
+    var pageModuleType          :   Int?
     
+    var favorite              : Bool?
     
     override init() {
         super.init()
@@ -47,7 +49,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         primaryImgs             <- map["primaryImgs"]
         productName             <- map["productName"]
         sellPrice               <- map["sellPrice"]
-        original_price          <- map["originalPrice"]
+        originalprice          <- map["originalPrice"]
         sellingPoint            <- map["sellingPoint"]
         brandCname              <- map["brandCname"]
         brandId                 <- map["brandId"]
@@ -61,7 +63,11 @@ class WOWProductModel: WOWBaseModel,Mappable{
         productParameter        <- map["productParameter"]
         productImg              <- map["productImg"]
         secondaryImgs           <- map["secondaryImgs"]
+        pageModuleType          <- map["pageModuleType"]
+
         
+        favorite                <- map["favorite"]
+
     }
     
     /// 商品列表瀑布流需要用的高度

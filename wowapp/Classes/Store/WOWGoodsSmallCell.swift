@@ -50,6 +50,17 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         desLabel.setLineHeightAndLineBreak(1.5)
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         priceLabel.text     = result//千万不用格式化了
- 
+        
+        if WOWUserManager.loginStatus {
+        if (model.favorite == true) {
+            
+            likeBtn.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+            
+        }else{
+            
+            likeBtn.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+       
+        }
+        }
     }
 }

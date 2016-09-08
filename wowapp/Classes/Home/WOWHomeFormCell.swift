@@ -35,7 +35,7 @@ class WOWHomeFormCell: UITableViewCell {
 //        }
 //    }
     
-    var dataArr:[WOWFoundProductModel]?{
+    var dataArr:[WOWProductModel]?{
         didSet{
             collectionView.reloadData()
         }
@@ -112,23 +112,10 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
         //FIX 测试数据
         cell.pictureImageView.image = UIImage(named: "4")
         let model = dataArr?[indexPath.item]
-        if let m = model {
-            let url             = m.productImg ?? ""
-            //            cell.pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
-            cell.pictureImageView.set_webimage_url(url)
-            
-            cell.desLabel.text       = m.productName
-            let result = WOWCalPrice.calTotalPrice([m.sellPrice ?? 0],counts:[1])
-            cell.priceLabel.text     = result //千万不用格式化了
-            if (model!.favorite == true) {
-                    cell.likeBtn.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
-                
-            }else{
-                    cell.likeBtn.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
-//                  cell.likeBtn.setBackgroundImage(UIImage(named: "icon_like"), forState: .Normal)
-            }
-          
+        if let m = model{
+            cell.showData(m, indexPath: indexPath)
         }
+    
         return cell
     }
     
@@ -139,15 +126,11 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 15
     }
-    //第一个和最后一个cell居中显示
+    //第一个cell居中显示
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-//        let itemCount = self.collectionView(collectionView, numberOfItemsInSection: section)
-        
+
         let firstIndexPath = NSIndexPath(forItem: 0, inSection: section)
         let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: firstIndexPath)
-        
-//        let lastIndexPath = NSIndexPath(forItem: itemCount - 1, inSection: section)
-//        let lastSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: lastIndexPath)
         
         return UIEdgeInsetsMake(0, (collectionView.bounds.size.width - firstSize.width) / 2,
                                 0, 15)
@@ -160,9 +143,6 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
             del.goToProdectDetailVC(product?.productId)
             
         }
-
-        
-        print(indexPath.row)
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
         

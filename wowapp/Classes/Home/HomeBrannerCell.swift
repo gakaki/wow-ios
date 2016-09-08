@@ -23,7 +23,7 @@ class HomeBrannerCell: UITableViewCell {
         
         cyclePictureView.showPageControl = true
         cyclePictureView.currentDotColor = UIColor.blackColor()
-        cyclePictureView.otherDotColor = UIColor.whiteColor()
+        cyclePictureView.otherDotColor = UIColor.init(hexString: "000000", alpha: 0.2)!
         cyclePictureView.imageURLArray = imageURLArray
         cyclePictureView.timeInterval = 3
      

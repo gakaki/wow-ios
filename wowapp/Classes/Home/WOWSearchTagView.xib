@@ -62,6 +62,11 @@
                             <color key="value" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="nRb-um-KPQ"/>
+                        </mask>
+                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BUd-dR-4iv" customClass="TagListView" customModule="wowapp" customModuleProvider="target">
                     <rect key="frame" x="15" y="44" width="290" height="32"/>
@@ -92,6 +97,11 @@
                             <color key="value" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="pKA-7a-sah"/>
+                        </mask>
+                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CfE-MS-RrI">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -118,6 +128,7 @@
                 <constraint firstAttribute="trailing" secondItem="bi5-PL-G5g" secondAttribute="trailing" constant="15" id="Lti-28-j3h"/>
                 <constraint firstItem="bi5-PL-G5g" firstAttribute="top" secondItem="aje-PA-1hJ" secondAttribute="bottom" id="QaY-iy-tuy"/>
                 <constraint firstAttribute="trailing" secondItem="BUd-dR-4iv" secondAttribute="trailing" constant="15" id="c2a-Vc-rgC"/>
+                <constraint firstAttribute="bottom" secondItem="bi5-PL-G5g" secondAttribute="bottom" id="dRB-Eo-riD"/>
                 <constraint firstItem="CfE-MS-RrI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fRC-Gv-JZm"/>
                 <constraint firstAttribute="trailing" secondItem="CfE-MS-RrI" secondAttribute="trailing" id="kgO-VS-wm1"/>
                 <constraint firstItem="CfE-MS-RrI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pq2-8o-LHo"/>
@@ -128,6 +139,7 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="1ep-ke-05w"/>
+                    <exclude reference="dRB-Eo-riD"/>
                 </mask>
             </variation>
             <connections>

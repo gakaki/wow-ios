@@ -12,7 +12,6 @@ class WOWSearchController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var keyWords = [String]()
     var searchArray = [String]()
-    var myContext = 0
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +45,10 @@ class WOWSearchController: WOWBaseViewController {
     }
     
     deinit{
+//        searchTagView.hotTagListView.removeObserver(self, forKeyPath: "bounds")
+        searchTagView.historyTagListView.removeObserver(self, forKeyPath: "bounds")
         searchView.removeFromSuperview()
+        
     }
 
     
@@ -81,33 +83,47 @@ class WOWSearchController: WOWBaseViewController {
         navigationController?.navigationBar.addSubview(searchView)
         
         defaultData()
-        keyWords = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
+        keyWords = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
         
         defaultSetup()
        
-//        searchTagView.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight - 64)
         tableView.tableHeaderView = searchTagView
    
     }
     
     func defaultSetup() {
+//        searchTagView.hotTagListView.addObserver(self, forKeyPath: "bounds", options: .Old, context: nil)
         searchTagView.hotTagListView.delegate = self
         for key in keyWords {
             searchTagView.hotTagListView.addTag(key)
         }
         searchTagView.hotTagListView.alignment = .Left
         
+        searchTagView.historyTagListView.addObserver(self, forKeyPath: "bounds", options: .Old, context: nil)
         searchTagView.historyTagListView.delegate = self
         for key in searchArray {
             searchTagView.historyTagListView.addTag(key)
         }
         searchTagView.historyTagListView.alignment = .Left
-        let height = searchTagView.hotTagListView.frame.height + searchTagView.historyTagListView.frame.height + 123
-        searchTagView.frame = CGRectMake(0, 0, MGScreenWidth, height)
+        
        
        
     }
-    
+    override func observeValueForKeyPath(keyPath: String?,
+                                         ofObject object: AnyObject?,
+                                                  change: [String : AnyObject]?,
+                                                  context: UnsafeMutablePointer<Void>)
+    {
+        
+        let height = searchTagView.hotTagListView.bounds.height + searchTagView.historyTagListView.bounds.height + 123
+        searchTagView.frame = CGRectMake(0, 0, MGScreenWidth, height)
+        tableView.beginUpdates()
+        tableView.tableHeaderView = searchTagView
+        tableView.endUpdates()
+        print(height)
+        print("高度发生变化")
+        
+    }
     func defaultData() {
         let sql = "SELECT * FROM t_searchModel order by id desc;"
         
@@ -163,12 +179,7 @@ class WOWSearchController: WOWBaseViewController {
 extension WOWSearchController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         print("Tag pressed: \(title), \(sender)")
-        print(sender.frame.height)
-       let height = searchTagView.hotTagListView.frame.height + searchTagView.historyTagListView.frame.height + 123
-        searchTagView.frame = CGRectMake(0, 0, MGScreenWidth, height)
-        tableView.beginUpdates()
-        tableView.tableHeaderView = searchTagView
-        tableView.endUpdates()
+       
         searchHistory(title)
     }
     

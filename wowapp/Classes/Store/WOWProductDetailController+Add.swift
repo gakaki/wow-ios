@@ -67,7 +67,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             if let price = productModel?.sellPrice {
                 let result = WOWCalPrice.calTotalPrice([price],counts:[1])
                 cell.actualPriceLabel.text = result
-                if let originalPrice = productModel?.original_price {
+                if let originalPrice = productModel?.originalprice {
                     if originalPrice > price{
                         //显示下划线
                         let result = WOWCalPrice.calTotalPrice([originalPrice],counts:[1])

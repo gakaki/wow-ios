@@ -23,7 +23,7 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
     var groupId                     :Int?
     var canShow                     :Int?
     var createTime                  :NSNumber?
-    var products                  :[WOWFoundProductModel]?
+    var products                  :[WOWProductModel]?
     required init?(_ map: Map) {
         
         

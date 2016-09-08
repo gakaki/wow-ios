@@ -12,6 +12,7 @@ class WOWFoundProductModel: WOWBaseModel,Mappable{
     var detailDescription       :   String?
     var pageModuleType          :   Int?
 
+    var favorite                :   Bool?
     
     func get_formted_sell_price() -> String {
         return WOWCalPrice.calTotalPrice([sellPrice ?? 0],counts:[1])
@@ -36,6 +37,7 @@ class WOWFoundProductModel: WOWBaseModel,Mappable{
         originalPrice              <- map["originalPrice"]
         detailDescription          <- map["detailDescription"]
         pageModuleType             <- map["pageModuleType"]
+        favorite                   <- map["favorite"]
     }
 }
 

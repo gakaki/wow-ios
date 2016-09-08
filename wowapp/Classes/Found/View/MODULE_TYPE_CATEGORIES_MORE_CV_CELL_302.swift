@@ -2,12 +2,14 @@ import UIKit
 //302 二级分类
 
 protocol MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate:class{
-    func cellTouchInside(cid:Int)
+    func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(cid:Int)
 }
 
 class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
     
-    let color          = UIColor(hue:0.00, saturation:0.00, brightness:0.83, alpha:1.00)
+    let color_bg       = UIColor.init(hexString: "f5f5f5")
+    let color_text     = UIColor.init(hexString: "808080")
+    let color_line     = UIColor.init(hexString: "CCCCCC")
     
     var name: UILabel!
     var line:UIView!
@@ -25,8 +27,8 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
         
         super.init(frame: frame)
         
-        self.backgroundColor    = UIColor.blackColor()
-        
+        self.backgroundColor    = color_bg
+
         name                    = UILabel()
         name.textAlignment      = NSTextAlignment.Center
         name_en                 = UILabel()
@@ -41,8 +43,8 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
         
         name.snp_makeConstraints { (make) -> Void in
             
-            name.font           = UIFont.systemFontOfSize(12)
-            name.textColor      = color
+            name.font           = UIFont.systemFontOfSize(11)
+            name.textColor      = color_text
             name.text           = "全部分类"
             
             make.width.equalTo(60)
@@ -53,11 +55,11 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
         
         line.snp_makeConstraints { (make) -> Void in
             
-            line.backgroundColor = color
+            line.backgroundColor = color_line
             
-            make.width.equalTo(name)
-            make.height.equalTo(1)
-            make.left.equalTo(name.snp_left)
+            make.width.equalTo(50)
+            make.height.equalTo(0.5)
+            make.centerX.equalTo(name.centerX)
             make.top.equalTo(name.snp_bottom).offset(1)
             
         }
@@ -65,11 +67,11 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
         name_en.snp_makeConstraints { (make) -> Void in
             
             name_en.font      = UIFont.systemFontOfSize(12)
-            name_en.textColor = color
-            name_en.text      = "More"
+            name_en.textColor = color_text
+            name_en.text      = "MORE"
             make.width.equalTo(60)
             make.height.equalTo(20)
-            make.left.equalTo(line.snp_left)
+            make.centerX.equalTo(line.centerX)
             make.top.equalTo(line.snp_bottom).offset(1)
             
         }
@@ -110,7 +112,6 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell:UICollectionViewCell{
     func setModel(m:WowModulePageItemVO){
         self.bg_pic.set_webimage_url(m.categoryBgImg)
     }
- 
 }
 
 class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -120,7 +121,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
     var data:[WowModulePageItemVO] = [WowModulePageItemVO]()
     var cv: UICollectionView!
     weak var delegate:MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate?
-
+    
     override init(style: UITableViewCellStyle,reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setUI()
@@ -145,7 +146,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
     
     func setUI(){
         
-        let size_frame_width                  = self.frame.width
+        let size_frame_width                  = MGScreenWidth
         let layout                            = UICollectionViewFlowLayout()
         layout.scrollDirection                = .Horizontal
         
@@ -183,11 +184,18 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.data.count ?? 0
+        var c  =  self.data.count  ?? 0
+        if  c > 6 {
+            c  =  c + 1 //没办法啦最后一个是more啦
+            return c
+        }
+        else{
+            return 0
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if (indexPath.item < 7){
+        if (indexPath.item < 7 ){
             let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell), forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell
             let m               = self.data[indexPath.item]
             cell.setModel(m)
@@ -200,12 +208,11 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let del = self.delegate {
-            let m = self.data[indexPath.row]
-            
-            if let cid = m.categoryId {
-                del.cellTouchInside(cid)
+            if indexPath.item < 7 {
+                let m = self.data[indexPath.row]
+                del.MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(m.categoryId!)
             }else{
-                del.cellTouchInside(0) //更多
+                del.MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(0) //更多
             }
         }
     }

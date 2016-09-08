@@ -34,11 +34,16 @@ extension UILabel{
 
     }
 }
-class WOWFoundRecommendCell: UITableViewCell {
+
+
+
+class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
     
-    var product:WOWFoundProductModel?
+    var product:WowModulePageItemVO?
     var delegate:WOWFoundRecommendCellDelegate?
     
+    static func isNib() -> Bool { return false }
+
     override init(style: UITableViewCellStyle,reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -62,7 +67,7 @@ class WOWFoundRecommendCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func assign_val(p:WOWFoundProductModel){
+    func setData(p:WowModulePageItemVO){
         
         imageName                            = p.productImg!
         self.iv.set_webimage_url(imageName)
@@ -91,7 +96,6 @@ class WOWFoundRecommendCell: UITableViewCell {
         self.product                         = p
         
       
-        
         
         render()
         

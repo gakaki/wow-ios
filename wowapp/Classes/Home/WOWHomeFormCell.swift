@@ -120,6 +120,14 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
             cell.desLabel.text       = m.productName
             let result = WOWCalPrice.calTotalPrice([m.sellPrice ?? 0],counts:[1])
             cell.priceLabel.text     = result //千万不用格式化了
+            if (model!.favorite == true) {
+                    cell.likeBtn.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+                
+            }else{
+                    cell.likeBtn.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+//                  cell.likeBtn.setBackgroundImage(UIImage(named: "icon_like"), forState: .Normal)
+            }
+          
         }
         return cell
     }

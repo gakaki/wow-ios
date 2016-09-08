@@ -69,7 +69,16 @@ class HomeBottomCell: UITableViewCell {
         if let originalPrice = model.originalPrice {
               originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ?? 0],counts:[1])
         }
-       
+
+        if (model.favorite == true) {
+            btnIsLikeOne.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+            
+        }else{
+            btnIsLikeOne.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+            //                  cell.likeBtn.setBackgroundImage(UIImage(named: "icon_like"), forState: .Normal)
+        }
+
+    
         // 格式化富文本
         priceLbOne.strokeWithText(sellPrice ?? "", str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
         
@@ -84,7 +93,14 @@ class HomeBottomCell: UITableViewCell {
         if let originalPrice = model.originalPrice {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ?? 0],counts:[1])
         }
-        
+        if (model.favorite == true) {
+            btnIsLikeTwo.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+            
+        }else{
+            btnIsLikeTwo.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+            //                  cell.likeBtn.setBackgroundImage(UIImage(named: "icon_like"), forState: .Normal)
+        }
+
          // 格式化富文本
         priceLbTwo.strokeWithText(sellPrice ?? "", str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
         

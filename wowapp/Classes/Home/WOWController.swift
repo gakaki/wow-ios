@@ -175,7 +175,7 @@ class WOWController: WOWBaseViewController {
         
         dispatch_group_notify(group, dispatch_get_main_queue()) { () -> Void in
             
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
             
         }
     }
@@ -196,7 +196,10 @@ class WOWController: WOWBaseViewController {
                     strongSelf.dataArr = brandArray
                     
                 }
-                strongSelf.tableView.reloadData()
+                if strongSelf.bottomListArray.count > 0 {
+                     strongSelf.tableView.reloadData()
+                }
+               
                 //                dispatch_group_leave(strongSelf.group);// 减少计数，证明此网络请求结束
                 
             }
@@ -248,7 +251,10 @@ class WOWController: WOWBaseViewController {
                     strongSelf.tableView.mj_footer = nil
                     
                 }
-                strongSelf.tableView.reloadData()
+                if strongSelf.dataArr.count > 0 {
+                    strongSelf.tableView.reloadData()
+                }
+
                 //                dispatch_group_leave(strongSelf.group);
             }
         }) {[weak self] (errorMsg) in

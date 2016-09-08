@@ -132,11 +132,15 @@ class WOWProductDetailController: WOWBaseViewController {
         //banner轮播
         cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
         cycleView.delegate = self
-        placeImageView.kf_setImageWithURL(NSURL(string:productModel?.primaryImgs![0] ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
-            if let strongSelf = self{
-                strongSelf.shareProductImage = image
+        if let array = productModel?.primaryImgs {
+            placeImageView.kf_setImageWithURL(NSURL(string:array[0] ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+                if let strongSelf = self{
+                    strongSelf.shareProductImage = image
+                }
             }
+
         }
+        
     }
 
     

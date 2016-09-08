@@ -73,7 +73,10 @@ class WOWController: WOWBaseViewController {
         view.sjButton.addTarget(self, action: #selector(sjClick), forControlEvents: .TouchUpInside)
         return view
     }()
-    
+    lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
+        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
+        return f
+    }()
     
     //MARK:Private Method
     override func setUI() {
@@ -95,14 +98,16 @@ class WOWController: WOWBaseViewController {
         self.tableView.backgroundColor = GrayColorLevel6
         
         configBarItem()
+        addObserver()
         request()
     }
     
-    lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
-        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
-        return f
-    }()
     
+    private func addObserver(){
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        
+    }
     
     func loadBottomData()  {
         if isRreshing {

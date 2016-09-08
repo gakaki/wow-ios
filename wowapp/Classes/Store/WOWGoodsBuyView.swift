@@ -498,6 +498,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             //当选择产品规格的时候才会进到这个数组,通过判断所对应颜色的bool值来判断是否可选中
             if specIndex >= 0 {
                 let str = colorArr[indexPath.row]
+                //不可选中状态
                 if !str.isSelect {
                     cell.textLabel.textColor = MGRgb(204, g: 204, b: 204)
                     cell.textLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
@@ -523,6 +524,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             //当选择产品颜色的时候才会进到这个数组,通过判断所对应规格的bool值来判断是否可选中
             if colorIndex >= 0 {
                 let str = specArr[indexPath.row]
+                //不可选中状态
                 if !str.isSelect {
                     cell.textLabel.textColor = MGRgb(204, g: 204, b: 204)
                     cell.textLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
@@ -585,8 +587,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 //取消选中时恢复有库存状态
                 productStock(true)
                 specIndex = -1
-                //取消选中时不显示产品规格
-                sizeTextLabel.text = ""
+               
                 for selectColor in colorArr {
                     selectColor.isSelect = true
                 }
@@ -607,10 +608,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     //更新cell点击状态
     func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
         
-        cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
-        cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
-        cell.textLabel.backgroundColor = MGRgb(255, g: 255, b: 255)
-        cell.textLabel.textColor = selected ? UIColor.blackColor() : MGRgb(128, g: 128, b: 128)
+//        cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
+//        cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
+        cell.textLabel.backgroundColor = selected ? UIColor(hexString: "#FFD444") : UIColor(hexString: "#F5F5F5")
+        cell.textLabel.textColor = UIColor(hexString: "#000000")
         cell.userInteractionEnabled = true
 
     }
@@ -853,14 +854,14 @@ extension WOWGoodsBuyView {
         
         secondCollectionView.reloadData()
         
-        //根据选中的规格改变产品尺寸
-        if spec_ColorArr?.count > 0 {
-            let sizeText = spec_ColorArr![0].subProductInfo?.sizeText
-            if let sizeText = sizeText {
-                //                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
-                sizeTextLabel.text = sizeText
-            }
-        }
+//        //根据选中的规格改变产品尺寸
+//        if spec_ColorArr?.count > 0 {
+//            let sizeText = spec_ColorArr![0].subProductInfo?.sizeText
+//            if let sizeText = sizeText {
+//                //                    goodsImageView.kf_setImageWithURL(NSURL(string: img)!, placeholderImage:UIImage(named: "placeholder_product"))
+//                sizeTextLabel.text = sizeText
+//            }
+//        }
     }
 
 }

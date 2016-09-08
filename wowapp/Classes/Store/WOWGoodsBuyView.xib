@@ -73,43 +73,37 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXG-bR-i5f" userLabel="topView">
                     <rect key="frame" x="0.0" y="287" width="395" height="82"/>
                     <subviews>
-                        <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Wu-oK-qHK">
-                            <rect key="frame" x="133" y="27" width="30" height="35"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                        <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Wu-oK-qHK">
+                            <rect key="frame" x="103" y="27" width="35" height="35"/>
+                            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="35" id="ROn-vD-w5G"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="+">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="disabled" title="+">
                                 <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="countButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="TYp-tl-xQy"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMQ-s7-DD5">
-                            <rect key="frame" x="15" y="27" width="30" height="35"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMQ-s7-DD5">
+                            <rect key="frame" x="15" y="27" width="35" height="35"/>
+                            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="35" id="70h-QH-Hia"/>
                                 <constraint firstAttribute="height" constant="35" id="gOu-JL-ZCf"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="-">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="disabled" title="-">
                                 <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="countButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="zqa-2Z-FK1"/>
                             </connections>
@@ -124,17 +118,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-yM-ked">
-                            <rect key="frame" x="44" y="27" width="90" height="35"/>
+                            <rect key="frame" x="44" y="27" width="60" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="90" id="2bQ-IT-G7j"/>
+                                <constraint firstAttribute="width" constant="60" id="2bQ-IT-G7j"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <textInputTraits key="textInputTraits"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -143,7 +132,7 @@
                         <constraint firstAttribute="bottom" secondItem="QMQ-s7-DD5" secondAttribute="bottom" constant="20" id="G3P-Mh-IOu"/>
                         <constraint firstItem="9Wu-oK-qHK" firstAttribute="leading" secondItem="sR8-yM-ked" secondAttribute="trailing" constant="-1" id="IdB-lR-RtZ"/>
                         <constraint firstItem="mi8-xN-53N" firstAttribute="top" secondItem="pXG-bR-i5f" secondAttribute="top" id="MRf-PC-MmH"/>
-                        <constraint firstItem="sR8-yM-ked" firstAttribute="leading" secondItem="QMQ-s7-DD5" secondAttribute="trailing" constant="-1" id="Pfh-5g-YJs"/>
+                        <constraint firstItem="sR8-yM-ked" firstAttribute="leading" secondItem="QMQ-s7-DD5" secondAttribute="trailing" constant="-6" id="Pfh-5g-YJs"/>
                         <constraint firstItem="mi8-xN-53N" firstAttribute="leading" secondItem="pXG-bR-i5f" secondAttribute="leading" constant="15" id="TlI-uc-GzJ"/>
                         <constraint firstItem="sR8-yM-ked" firstAttribute="centerY" secondItem="QMQ-s7-DD5" secondAttribute="centerY" id="UmX-1v-dV1">
                             <userDefinedRuntimeAttributes>

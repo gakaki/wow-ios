@@ -24,6 +24,7 @@ class WOWProductDetailCell: UITableViewCell {
     }
     func showData(secondaryImg: WOWProductPicTextModel?) {
         if let secondaryImg = secondaryImg {
+            
             productImg.kf_setImageWithURL(NSURL(string:secondaryImg.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
 //            productImg.set_webimage_url_base(secondaryImg.image, place_holder_name: "placeholder_product")
             imgDescLabel.text = secondaryImg.text

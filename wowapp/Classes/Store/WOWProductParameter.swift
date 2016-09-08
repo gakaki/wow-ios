@@ -15,6 +15,7 @@ class WOWProductParameter: UITableViewCell {
     @IBOutlet weak var styleLabel: UILabel!
     @IBOutlet weak var applicableSceneLabel: UILabel!
     @IBOutlet weak var applicablePeopleLabel: UILabel!
+    @IBOutlet weak var sizeText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -40,6 +41,7 @@ class WOWProductParameter: UITableViewCell {
             styleLabel.text = model.style
             applicableSceneLabel.text = model.applicableSceneText
             applicablePeopleLabel.text = model.applicablePeople
+            sizeText.text = model.sizeText
         
         
     }

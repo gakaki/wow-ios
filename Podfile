@@ -43,7 +43,6 @@ pod 'XZMRefresh'            #横向刷新
 pod 'FMDB'              
 
 
-
 #Ping++支付
 pod 'Pingpp/Alipay',:path => "pingpp-ios/Pingpp.podspec"
 pod 'Pingpp/Wx',:path => "pingpp-ios/Pingpp.podspec"

@@ -36,6 +36,7 @@ class WOWParameter: WOWBaseModel,Mappable{
     var style               :String?
     var applicableSceneText :String?
     var applicablePeople    :String?
+    var sizeText            :String?
     
     required init?(_ map: Map) {
         
@@ -48,7 +49,7 @@ class WOWParameter: WOWBaseModel,Mappable{
         style                   <- map["style"]
         applicableSceneText     <- map["applicableSceneText"]
         applicablePeople        <- map["applicablePeople"]
-
+        sizeText                <- map["sizeText"]
     }
 }
 

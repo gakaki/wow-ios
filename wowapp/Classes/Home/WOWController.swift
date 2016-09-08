@@ -65,11 +65,11 @@ class WOWController: WOWBaseViewController {
     }()
     func loginSuccess()  {// 重新刷新数据购物车数量
         tableView.reloadData()
-        configBarItem()
+//        configBarItem()
     }
     func exitLogin()  {// 重新刷新数据，清空购物车数量
         tableView.reloadData()
-         configBarItem()
+//         configBarItem()x
     }
 
     private func addObserver(){
@@ -78,6 +78,7 @@ class WOWController: WOWBaseViewController {
          */
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
     }
     
     lazy var banner:WOWBanner = {

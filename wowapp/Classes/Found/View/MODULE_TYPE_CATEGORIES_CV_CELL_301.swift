@@ -1,6 +1,11 @@
 
 import UIKit
 
+
+protocol MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate:class{
+    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(m:WowModulePageItemVO)
+}
+
 class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
     
     var bg_pic: UIImageView!
@@ -37,12 +42,14 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
     var heightAll:CGFloat = CGFloat.min
     
     var collectionView: UICollectionView!
-    
+    weak var delegate:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate?
+
     var data = [WowModulePageItemVO]()
     
     func setData(d:[WowModulePageItemVO]){
         self.data = d
-        self.collectionView.reloadData()
+        self.changeUI()
+        collectionView.reloadData()
     }
     
     override init(style: UITableViewCellStyle,reuseIdentifier: String?){
@@ -57,6 +64,27 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         super.awakeFromNib()
     }
 
+    func changeUI(){
+        
+        var count                                         = CGFloat(self.data.count / 2)
+        let mod                                           = self.data.count % 2 == 0 ? 0 : 1
+        count                                             = count + CGFloat(mod)
+        
+        let item_width                                    = ( MGScreenWidth - size_padding * 2 - size_line_spacing * 1 ) / 2
+        let item_height                                   = item_width
+        self.heightAll                                    = item_height * count + size_padding * 2 + size_line_spacing * (count - 1)
+        
+        let frame                                         = CGRectMake(0, 0, MGScreenWidth, heightAll)
+        collectionView.frame                              = frame
+//        collectionView.setNeedsDisplay()
+//        collectionView.setNeedsLayout()
+//        collectionView.invalidateIntrinsicContentSize()
+        collectionView.collectionViewLayout.invalidateLayout() // this is useful
+
+    }
+    
+    let size_padding                                      = CGFloat(15)
+    let size_line_spacing                                 = CGFloat(8)
     
     func setUI(){
         
@@ -64,10 +92,8 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         let layout                                        = UICollectionViewFlowLayout()
         layout.scrollDirection                            = .Horizontal
         
-        let size_padding                                  = CGFloat(15)
-        let size_line_spacing                             = CGFloat(8)
-        
-        layout.sectionInset                               = UIEdgeInsets(top: size_padding, left: size_padding, bottom: size_padding, right: size_padding)
+   
+        layout.sectionInset                               = UIEdgeInsets(top: 0, left: size_padding, bottom: size_padding, right: size_padding)
         let item_width                                    = ( MGScreenWidth - size_padding * 2 - size_line_spacing * 1 ) / 2
         let item_height                                   = item_width
         
@@ -80,17 +106,15 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         let frame                                         = CGRectMake(0, 0, MGScreenWidth, heightAll)
         
         collectionView                                    = UICollectionView(frame: frame, collectionViewLayout: layout)
-        
+        collectionView.backgroundColor                    = UIColor.blackColor()
         collectionView.delegate                           = self
         collectionView.dataSource                         = self
         collectionView.backgroundColor                    = UIColor.clearColor()
-        
+        collectionView.autoresizingMask                   = [UIViewAutoresizing.FlexibleHeight , UIViewAutoresizing.FlexibleWidth] //其实没啥用
         collectionView.registerClass(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self, forCellWithReuseIdentifier:String(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell))
-        
         collectionView.showsVerticalScrollIndicator       = false
         collectionView.showsHorizontalScrollIndicator     = false
         
-        collectionView.reloadData()
         
         self.addSubview(collectionView)
     }
@@ -111,9 +135,10 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //        if let del = self.delegate {
-        ////            del.foundCategorycellTouchInside(categories[indexPath.item])
-        //        }
+        if let del = self.delegate {
+            let m               = data[indexPath.item]
+            del.MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(m)
+        }
     }
 
     

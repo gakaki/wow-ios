@@ -2,10 +2,10 @@
 
 import UIKit
 
-class VCMe:WOWBaseViewController{
+class VCCategoryChoose:WOWBaseViewController{
     
     var label:UILabel!
-
+    
     init() {
         
         super.init(nibName: nil, bundle: nil)
@@ -25,6 +25,6 @@ class VCMe:WOWBaseViewController{
         fatalError("init(coder:) has not been implemented")
     }
     
-
-
+    
+    
 }

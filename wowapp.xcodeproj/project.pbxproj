@@ -63,6 +63,11 @@
 		06B7661E1D77E96600F803A9 /* GYMockRequestDSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7660C1D77E96600F803A9 /* GYMockRequestDSL.m */; };
 		06B7661F1D77E96600F803A9 /* GYMockResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7660F1D77E96600F803A9 /* GYMockResponse.m */; };
 		06B766201D77E96600F803A9 /* GYMockResponseDSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B766111D77E96600F803A9 /* GYMockResponseDSL.m */; };
+		06D0516C1D811A6F00BADD38 /* VCBuy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D0516B1D811A6F00BADD38 /* VCBuy.swift */; };
+		06D0516E1D811C7900BADD38 /* VCCategoryChoose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D0516D1D811C7900BADD38 /* VCCategoryChoose.swift */; };
+		06D051701D81253B00BADD38 /* VCDesignerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D0516F1D81253B00BADD38 /* VCDesignerList.swift */; };
+		06D051721D813E7D00BADD38 /* Designer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06D051711D813E7D00BADD38 /* Designer.storyboard */; };
+		06D051761D81522600BADD38 /* VCDesignerListSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D051751D81522600BADD38 /* VCDesignerListSearchResult.swift */; };
 		06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */; };
 		06DDAD751D61811500280210 /* VCBaseVCCategoryFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */; };
 		06FB94B11D6306C100554871 /* VCTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B01D6306C100554871 /* VCTopic.swift */; };
@@ -494,6 +499,11 @@
 		06B7660F1D77E96600F803A9 /* GYMockResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMockResponse.m; sourceTree = "<group>"; };
 		06B766101D77E96600F803A9 /* GYMockResponseDSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMockResponseDSL.h; sourceTree = "<group>"; };
 		06B766111D77E96600F803A9 /* GYMockResponseDSL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMockResponseDSL.m; sourceTree = "<group>"; };
+		06D0516B1D811A6F00BADD38 /* VCBuy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBuy.swift; sourceTree = "<group>"; };
+		06D0516D1D811C7900BADD38 /* VCCategoryChoose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCategoryChoose.swift; sourceTree = "<group>"; };
+		06D0516F1D81253B00BADD38 /* VCDesignerList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCDesignerList.swift; sourceTree = "<group>"; };
+		06D051711D813E7D00BADD38 /* Designer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Designer.storyboard; sourceTree = "<group>"; };
+		06D051751D81522600BADD38 /* VCDesignerListSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCDesignerListSearchResult.swift; sourceTree = "<group>"; };
 		06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlexboxLayout.framework; sourceTree = "<group>"; };
 		06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+VCManager.swift"; sourceTree = "<group>"; };
 		06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBaseVCCategoryFound.swift; sourceTree = "<group>"; };
@@ -940,6 +950,10 @@
 				0697D1A11D70130E0061EBD4 /* VCCategoryTabBar.swift */,
 				066D88991D7682FA008CE271 /* VCSceneCategory.swift */,
 				06435C1E1D800775005A62BE /* VCMoreCategorie.swift */,
+				06D0516B1D811A6F00BADD38 /* VCBuy.swift */,
+				06D0516D1D811C7900BADD38 /* VCCategoryChoose.swift */,
+				06D0516F1D81253B00BADD38 /* VCDesignerList.swift */,
+				06D051751D81522600BADD38 /* VCDesignerListSearchResult.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1659,6 +1673,7 @@
 		29FF26311CFDA86300DF2A9B /* StoryBoards */ = {
 			isa = PBXGroup;
 			children = (
+				06D051711D813E7D00BADD38 /* Designer.storyboard */,
 				068B60B01D4F3560001AD778 /* Found.storyboard */,
 				29FF26331CFDA86300DF2A9B /* BuyCar.storyboard */,
 				29FF26341CFDA86300DF2A9B /* Home.storyboard */,
@@ -2179,6 +2194,7 @@
 				29FF26B61CFDA86300DF2A9B /* WOWAddressCell.xib in Resources */,
 				29D5EC331D0124140001266C /* WOWProductDetailPriceCell.xib in Resources */,
 				29FF26FF1CFDA86300DF2A9B /* UMSLoginViewController.xib in Resources */,
+				06D051721D813E7D00BADD38 /* Designer.storyboard in Resources */,
 				29FF26F21CFDA86300DF2A9B /* Info.plist in Resources */,
 				632A93311D474825003A5966 /* WOWFavoritrSingleCell.xib in Resources */,
 				636C34221D57288400CA4E69 /* WOWBrandHeaderView.xib in Resources */,
@@ -2367,6 +2383,7 @@
 				29FF26B51CFDA86300DF2A9B /* WOWAddressCell.swift in Sources */,
 				29FF26BF1CFDA86300DF2A9B /* WOWNumberMessageView.swift in Sources */,
 				06568A881D585A30008D2B1A /* ObjectMapper+Transform.swift in Sources */,
+				06D051701D81253B00BADD38 /* VCDesignerList.swift in Sources */,
 				29FF264A1CFDA86300DF2A9B /* WOWPaySuccessController.swift in Sources */,
 				635716A81D45E494006BD746 /* WOWBanner.swift in Sources */,
 				2D45AC441D7982A800EF3835 /* WOWHomeModel.swift in Sources */,
@@ -2451,6 +2468,7 @@
 				29FF26701CFDA86300DF2A9B /* WOWSenceLikeCell.swift in Sources */,
 				638B18A41D7829F800F89C76 /* HolderTextView.swift in Sources */,
 				29FF26921CFDA86300DF2A9B /* WOWBrandListController.swift in Sources */,
+				06D0516E1D811C7900BADD38 /* VCCategoryChoose.swift in Sources */,
 				632A934F1D49E31D003A5966 /* WOWProductDetailCell.swift in Sources */,
 				636C33DB1D52EA1F00CA4E69 /* WOWOrderFreightCell.swift in Sources */,
 				06B766131D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.m in Sources */,
@@ -2459,6 +2477,7 @@
 				29FF26A81CFDA86300DF2A9B /* WOWSearchResultController.swift in Sources */,
 				29FF26601CFDA86300DF2A9B /* WOWMenuTopView.swift in Sources */,
 				0697D1981D6EFB960061EBD4 /* VCVTMagic.swift in Sources */,
+				06D0516C1D811A6F00BADD38 /* VCBuy.swift in Sources */,
 				29FF26501CFDA86300DF2A9B /* WOWValue2Cell.swift in Sources */,
 				29FF26941CFDA86300DF2A9B /* WOWBrandModel.swift in Sources */,
 				06B766121D77E96600F803A9 /* NSString+mock.m in Sources */,
@@ -2481,6 +2500,7 @@
 				29FF26D41CFDA86300DF2A9B /* WOWUserInfoController.swift in Sources */,
 				29FF26F01CFDA86300DF2A9B /* TagCellLayout.swift in Sources */,
 				29FF26B71CFDA86300DF2A9B /* WOWAddressController.swift in Sources */,
+				06D051761D81522600BADD38 /* VCDesignerListSearchResult.swift in Sources */,
 				069056E11D36666F00A851F9 /* WOWController.swift in Sources */,
 				06182C461D7E904700B5FE8F /* WowModulePageView.swift in Sources */,
 				29FF26AC1CFDA86300DF2A9B /* WOWStoreSectionView.swift in Sources */,

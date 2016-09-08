@@ -86,6 +86,8 @@ let URL_LikeDesigner            = "user/designer/favorite-list"    //喜欢的�
 
 let URL_LikeBrand               = "user/brand/favorite-list"    //喜欢的品牌列表
 
+let URL_DesignerList            = "designer/designerList"    //设计师列表
+
 let URL_DesignerDetail          = "designer/detail"         //设计师详情
 
 let URL_ProductDesigner         = "product/designer"            //设计师产品

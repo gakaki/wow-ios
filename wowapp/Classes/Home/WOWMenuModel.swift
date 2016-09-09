@@ -64,6 +64,8 @@ final class WOWCategoryModel : WOWBaseModel{
      var categoryIconBg:String?
      var categoryIconSmall:String?
     
+     var productImg :String?
+
      var subCats:[WOWSubCategoryModel]?
 }
 
@@ -78,6 +80,8 @@ extension WOWCategoryModel:Mappable{
         categoryIconBig <-    map["categoryIconBig"]
         categoryIconBg  <-    map["categoryIconBg"]
         categoryIconSmall  <-    map["categoryIconSmall"]
+
+        productImg      <-    map["productImg"]
 
     }
     
@@ -96,6 +100,16 @@ final class WOWFoundCategoryModel : WOWBaseModel{
     var categoryID:Int?
     var categoryIconSmall:String?
     
+    var categoryCount:Int?
+    
+    var categoryBgImg:String?
+    var categoryIconBig:String?
+    var categoryIconBg:String?
+    
+    var productImg :String?
+    
+ 
+
 }
 
 extension WOWFoundCategoryModel:Mappable{
@@ -103,6 +117,17 @@ extension WOWFoundCategoryModel:Mappable{
         categoryName            <-    map["categoryName"]
         categoryID              <-    map["id"]
         categoryIconSmall       <-    map["categoryIconSmall"]
+        
+        
+        categoryCount   <-    map["sum"]
+        
+        categoryBgImg   <-    map["categoryBgImg"]
+        categoryIconBig <-    map["categoryIconBig"]
+        categoryIconBg  <-    map["categoryIconBg"]
+        categoryIconSmall  <-    map["categoryIconSmall"]
+        
+        productImg      <-    map["productImg"]
+
     }
     
     convenience init?(_ map: Map) {

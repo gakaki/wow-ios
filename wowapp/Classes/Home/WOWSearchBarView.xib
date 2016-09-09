@@ -50,7 +50,7 @@
                         <constraint firstAttribute="width" constant="46" id="Jur-HH-6IH"/>
                         <constraint firstAttribute="height" constant="32" id="QfG-Vi-e0F"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="取消">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

@@ -47,6 +47,9 @@ public enum RequestApi{
     
     case Api_SenceDetail(sceneid:String,uid:String)
     
+    //搜索
+    case Api_SearchHot
+    
     //品牌
     case Api_BrandList
     
@@ -216,6 +219,8 @@ extension RequestApi:TargetType{
 //        case .Api_Home_Topics:
 //            return URL_home_topics
 //            
+        case .Api_SearchHot:
+            return URL_Search_hot
         case .Api_ProductList:
             return URL_product
         case .Api_ProductDetail:
@@ -367,7 +372,7 @@ extension RequestApi:TargetType{
         switch self {
 
         case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products, .Api_Home_List, .Api_Home_BottomList
-            ,Api_Module_Page2
+            ,Api_Module_Page2, .Api_SearchHot
             
             :
 

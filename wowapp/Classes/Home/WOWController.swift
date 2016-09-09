@@ -118,7 +118,7 @@ class WOWController: WOWBaseViewController {
         addObserver()
         request()
     }
-    
+
     func loadBottomData()  {
         if isRreshing {
             return
@@ -131,14 +131,7 @@ class WOWController: WOWBaseViewController {
     }
     private func configBarItem(){
         
-        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
-            if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController)) as! WOWSearchController
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-                
-            }
-            
-        }
+        
         configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }
     

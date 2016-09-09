@@ -217,6 +217,15 @@ extension WOWBaseViewController {
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
+        
+        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController)) as! WOWSearchController
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            
+        }
     }
     
     func updateBageCount() {
@@ -258,6 +267,14 @@ extension WOWBaseTableViewController {
                 vc.hideNavigationBar = false
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
+        }
+        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+            if let strongSelf = self{
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController)) as! WOWSearchController
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            
         }
     }
     

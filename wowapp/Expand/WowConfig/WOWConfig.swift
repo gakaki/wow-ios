@@ -117,6 +117,8 @@ let MaskColor       = MGRgb(0, g: 0, b: 0, alpha: 0.6)
 
 let DefaultBackColor = GrayColorLevel5
 
+let YellowColor     = UIColor(hexString: "#FFD444")
+
 
 //MARK:Font
  /// 

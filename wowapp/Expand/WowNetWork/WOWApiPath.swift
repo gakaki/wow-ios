@@ -25,8 +25,9 @@ import Foundation
 
 //1.app首页
 
-let URL_category                = "category/sub-category"
-let URL_producty_by_category    = "category/product"
+let URL_category                        = "category/sub-category"
+let URL_producty_by_category            = "category/product"
+let URL_category_subCategory_with_image = "category/img-category"
 
 let URL_scene                   = "scene"
 
@@ -85,6 +86,8 @@ let URL_LikeProduct             = "user/product/favorite-list"    //喜欢的品
 let URL_LikeDesigner            = "user/designer/favorite-list"    //喜欢的品牌列表
 
 let URL_LikeBrand               = "user/brand/favorite-list"    //喜欢的品牌列表
+
+let URL_DesignerList            = "designer/designerList"    //设计师列表
 
 let URL_DesignerDetail          = "designer/detail"         //设计师详情
 

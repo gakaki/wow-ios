@@ -2,10 +2,10 @@
 
 import UIKit
 
-class VCMe:UIViewController{
+class VCMe:WOWBaseViewController{
     
     var label:UILabel!
-    
+
     init() {
         
         super.init(nibName: nil, bundle: nil)

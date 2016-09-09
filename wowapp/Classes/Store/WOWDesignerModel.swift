@@ -10,10 +10,11 @@ import UIKit
 import ObjectMapper
 
 class WOWDesignerModel: WOWBaseModel,Mappable{
-    var designerId        : Int?
-    var designerName      : String?
-    var designerPhoto     = String()
-    var designerDesc      : String?
+    var designerId              : Int?
+    var designerName            : String?
+    var designerPhoto           = String()
+    var designerDesc            : String?
+    var designerNameFirstLetter : String?
     
     required init?(_ map: Map) {
         
@@ -24,5 +25,6 @@ class WOWDesignerModel: WOWBaseModel,Mappable{
         designerName            <- map["designerName"]
         designerPhoto           <- map["designerPhoto"]
         designerDesc            <- map["designerDesc"]
+        designerNameFirstLetter <- map["designerNameFirstLetter"]
     }
 }

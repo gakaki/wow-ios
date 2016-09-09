@@ -61,8 +61,12 @@ public enum RequestApi{
     
     case Api_productDesigner(designerId: Int, pageSize: Int, currentPage: Int)
     
+    case Api_DesignerList //设计师列表
+    
     
     case Api_Category(categoryId:String) //查看分类
+    case Api_Category_subCategory_with_image(categoryId:String) //查看分类并且带上对应销量第一的商品的图片
+    
     case Api_Product_By_Category(asc:Int , currentPage: Int, showCount :Int , sortBy:Int, categoryId:Int ) //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
 
     case Api_Captcha(mobile:String) //绑定微信验证码
@@ -192,7 +196,10 @@ extension RequestApi:TargetType{
         switch self{
         case .Api_Category:
             return URL_category
-        case .Api_Product_By_Category:
+
+        case .Api_Category_subCategory_with_image:
+            return URL_category_subCategory_with_image
+         case .Api_Product_By_Category:
             return URL_producty_by_category
         case .Api_Activity:
             return URL_activity
@@ -239,7 +246,8 @@ extension RequestApi:TargetType{
             return URL_DesignerDetail
         case .Api_productDesigner:
             return URL_ProductDesigner
-            
+        case .Api_DesignerList:
+            return URL_DesignerList
         case .Api_CommentList:
             return URL_CommentList
         case .Api_SubmitComment:
@@ -372,7 +380,10 @@ extension RequestApi:TargetType{
         switch self {
 
         case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products, .Api_Home_List, .Api_Home_BottomList
-            ,Api_Module_Page2, .Api_SearchHot
+            ,Api_Module_Page2,
+            .Api_SearchHot,
+            .Api_DesignerList,
+            .Api_Category_subCategory_with_image
             
             :
 
@@ -391,6 +402,9 @@ extension RequestApi:TargetType{
         switch self{
             case let .Api_Category(categoryId):
                 params = ["categoryId":categoryId]
+            case let .Api_Category_subCategory_with_image(categoryId):
+                params = ["categoryId":categoryId]
+            
             case let .Api_SenceDetail(sceneid,uid):
                 params = ["scene_id":sceneid,"uid":uid]
             case let .Api_Register(account,password,code):
@@ -518,7 +532,8 @@ extension RequestApi:TargetType{
                 break
             case .Api_Found_Main:
                 break
-
+            case .Api_DesignerList:
+                break
             case let .Api_Product_By_Category(asc , currentPage, showCount , sortBy, categoryId ): //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
                     params = ["asc": asc, "currentPage": currentPage, "showCount": showCount, "sortBy": sortBy, "categoryId":categoryId]
                     break

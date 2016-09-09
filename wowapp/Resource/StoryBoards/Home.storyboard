@@ -488,20 +488,6 @@
                                             <action selector="share:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="F4P-2n-bMG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InS-kG-pkp">
-                                        <rect key="frame" x="195" y="0.0" width="125" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="rJe-fi-VeR"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <state key="normal" title="加入购物车">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="carClick:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="rgl-AY-E6L"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E70-rc-q8q">
                                         <rect key="frame" x="160" y="0.0" width="20" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -524,6 +510,20 @@
                                         <state key="selected" image="icon_like_hightlighted"/>
                                         <connections>
                                             <action selector="favorite:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="s4L-YQ-W7w"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InS-kG-pkp">
+                                        <rect key="frame" x="195" y="0.0" width="125" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="125" id="rJe-fi-VeR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <state key="normal" title="加入购物车">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="carClick:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="rgl-AY-E6L"/>
                                         </connections>
                                     </button>
                                 </subviews>

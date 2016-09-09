@@ -310,7 +310,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kb2-fM-0fJ">
                                         <rect key="frame" x="195" y="0.0" width="125" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.90196078431372551" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="125" id="3oP-Yt-8Je"/>
                                         </constraints>

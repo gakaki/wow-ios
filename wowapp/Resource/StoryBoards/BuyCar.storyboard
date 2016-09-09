@@ -43,7 +43,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdO-TL-ks9">
                                         <rect key="frame" x="230" y="0.0" width="90" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ACv-ZW-PBA"/>
                                             <constraint firstAttribute="width" constant="90" id="poG-G3-8vL"/>
@@ -251,7 +251,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQO-fa-lux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="442"/>
+            <point key="canvasLocation" x="828" y="428"/>
         </scene>
         <!--订单确认-->
         <scene sceneID="cfl-lC-mPJ">
@@ -278,7 +278,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKh-9C-YNC">
                                         <rect key="frame" x="230" y="0.0" width="90" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="fMa-nD-0qz"/>
                                         </constraints>
@@ -481,7 +481,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvc-PA-dGc">
                                 <rect key="frame" x="15" y="320" width="345" height="50"/>
-                                <color key="backgroundColor" red="1" green="0.90196078431372551" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="TcN-n4-m1B"/>
                                 </constraints>

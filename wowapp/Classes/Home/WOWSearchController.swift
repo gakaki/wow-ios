@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import VTMagic
 
 class WOWSearchController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
-    var keyWords = [String]()
+    
+
+    var keyWords = [AnyObject]()
     var searchArray = [String]()
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+       requestHotKey()
        
     }
     
@@ -45,7 +48,7 @@ class WOWSearchController: WOWBaseViewController {
     }
     
     deinit{
-//        searchTagView.hotTagListView.removeObserver(self, forKeyPath: "bounds")
+        searchTagView.hotTagListView.removeObserver(self, forKeyPath: "bounds")
         searchTagView.historyTagListView.removeObserver(self, forKeyPath: "bounds")
         searchView.removeFromSuperview()
         
@@ -65,7 +68,10 @@ class WOWSearchController: WOWBaseViewController {
     lazy var resultView : SearchResultView = {
         let v = SearchResultView()
         v.delegate = self
+        v.backgroundColor = UIColor.orangeColor()
         v.frame = CGRectMake(0, MGScreenHeight,MGScreenWidth,MGScreenHeight - 64)
+       
+
         return v
     }()
     
@@ -75,36 +81,43 @@ class WOWSearchController: WOWBaseViewController {
         return view
     }()
     
+    lazy var v_bottom: VCVTMagic = {
+        let v = VCVTMagic()
+        v.magicView.dataSource = self
+        v.magicView.delegate = self
+        v.magicView.backgroundColor = UIColor.whiteColor()
+        self.addChildViewController(v)
+        self.view.addSubview(v.magicView)
+        v.magicView.frame = CGRectMake(0, 0,MGScreenWidth,MGScreenHeight - 64)
+        v.magicView.hidden = true
+        v.magicView.reloadData()
+
+        return v
+    }()
    
 
-    
+
 //MARK:Private Method
     override func setUI() {
         navigationController?.navigationBar.addSubview(searchView)
         
         defaultData()
-        keyWords = ["本周特价","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计","新年福袋","天天","分享甘甜的难得时光","上帝在细节中","Umbr","充满爱的设计"]
         
         defaultSetup()
-       
+//        addBottomProductView()
         tableView.tableHeaderView = searchTagView
    
     }
     
     func defaultSetup() {
-//        searchTagView.hotTagListView.addObserver(self, forKeyPath: "bounds", options: .Old, context: nil)
+        searchTagView.hotTagListView.addObserver(self, forKeyPath: "bounds", options: .Old, context: nil)
         searchTagView.hotTagListView.delegate = self
-        for key in keyWords {
-            searchTagView.hotTagListView.addTag(key)
-        }
         searchTagView.hotTagListView.alignment = .Left
         
         searchTagView.historyTagListView.addObserver(self, forKeyPath: "bounds", options: .Old, context: nil)
-        searchTagView.historyTagListView.delegate = self
-        for key in searchArray {
-            searchTagView.historyTagListView.addTag(key)
-        }
         searchTagView.historyTagListView.alignment = .Left
+        searchTagView.historyTagListView.delegate = self
+        
         
        
        
@@ -135,7 +148,11 @@ class WOWSearchController: WOWBaseViewController {
     
             searchArray.append(searchStr)
         }
-      
+        
+        for key in searchArray {
+            searchTagView.historyTagListView.addTag(key)
+        }
+        
         
     }
     
@@ -173,13 +190,35 @@ class WOWSearchController: WOWBaseViewController {
     }
 }
 
-
+// MARK: - NET
+extension WOWSearchController {
+    func requestHotKey() {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_SearchHot, successClosure: {[weak self] (result) in
+            if let strongSelf = self {
+                let json = JSON(result)
+                let array = json["keywords"].arrayObject
+                if let keyWords = array {
+//                    strongSelf.keyWords = keyWords
+                    for key in keyWords {
+                        strongSelf.searchTagView.hotTagListView.addTag(key as! String)
+                
+                    }
+                
+                }
+                
+            }
+            }) { (errorMsg) in
+                
+        }
+    }
+}
 //MARK:Delegate
 
 extension WOWSearchController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         print("Tag pressed: \(title), \(sender)")
-       
+        searchView.searchTextField.text = title
+        showResult()
         searchHistory(title)
     }
     
@@ -207,31 +246,38 @@ extension WOWSearchController:UITextFieldDelegate{
         }
         textField.resignFirstResponder()
         searchHistory(textField.text!)
-//        showResult()
+        showResult()
         return true
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
-//        hideResult()
+        hideResult()
         
         return true
     }
     
     func showResult() {
-        view.addSubview(resultView)
-        resultView.hidden = false
-        
-        UIView.animateWithDuration(0.3) { 
-            self.resultView.y = 0
-        }
+//        view.addSubview(resultView)
+        self.view.addSubview(v_bottom.magicView)
+//        resultView.hidden = false
+        v_bottom.magicView.hidden = false
+//        UIView.animateWithDuration(0.3) { 
+////            self.resultView.y = 40
+//            self.v_bottom.magicView.y = 0
+//        }
     }
     
     func hideResult()  {
-        UIView.animateWithDuration(0.3, animations: { 
-            self.resultView.y = MGScreenHeight + 20
-        }) { (ret) in
-            self.resultView.removeFromSuperview()
-        }
+        v_bottom.magicView.hidden = true
+        self.v_bottom.magicView.removeFromSuperview()
+
+//        UIView.animateWithDuration(0.3, animations: {
+////            self.resultView.y = MGScreenHeight + 20
+//            self.v_bottom.magicView.y = MGScreenHeight + 20
+//        }) { (ret) in
+////            self.resultView.removeFromSuperview()
+//            self.v_bottom.magicView.removeFromSuperview()
+//        }
     }
 }
 
@@ -250,7 +296,7 @@ class  SearchResultView:UIView{
             collectionView.reloadData()
         }
     }
-    
+
     weak var delegate:SearchResultViewDelegate?
     
 //MARK:Lazy
@@ -288,13 +334,12 @@ class  SearchResultView:UIView{
     private func configSubview(){
         backgroundColor = UIColor.whiteColor()
         configMenuView()
-        self.addSubview(collectionView)
+//        self.addSubview(collectionView)
     }
     
     private func configMenuView(){
         
     }
-    
 
 }
 
@@ -328,11 +373,88 @@ extension SearchResultView:CollectionViewWaterfallLayoutDelegate{
 }
 
 
-
-
-
-
-
+extension WOWSearchController:VTMagicViewDataSource{
+    
+    var identifier_magic_view_bar_item : String {
+        get {
+            return "identifier_magic_view_bar_item"
+        }
+    }
+    var identifier_magic_view_page : String {
+        get {
+            return "identifier_magic_view_page"
+        }
+    }
+    
+    //获取所有菜单名，数组中存放字符串类型对象
+    func menuTitlesForMagicView(magicView: VTMagicView) -> [String] {
+        return ["上新","销量","价格"]
+    }
+    func magicView(magicView: VTMagicView, menuItemAtIndex itemIndex: UInt) -> UIButton{
+        
+        let button = magicView .dequeueReusableItemWithIdentifier(self.identifier_magic_view_bar_item)
+        
+        if ( button == nil) {
+            
+            let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRectMake(0, 0, self.view.frame.width / 3, 50)) { (asc) in
+                print("you clicket status is "  , asc)
+            }
+            
+            if ( itemIndex <= 1) {
+                b.image_is_show = false
+            }else{
+                b.image_is_show = true
+            }
+            return b
+            
+        }
+        
+        return button!
+    }
+    
+    func magicView(magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
+        
+        let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
+        
+        if ((vc == nil)) {
+            
+            //            let vc_me  = VCMe.init()
+            //            vc_me.label.text = "label text \(pageIndex)"
+            //            return vc_me
+            
+            let vc_me = VCCategoryProducts()
+            return vc_me
+        }
+        
+        return vc!;
+    }
+    func touchClick(btn:UIButton){
+        print(btn.state)
+    }
+}
+//extension ViewController:VTMagicReuseProtocol{
+//    func vtm_prepareForReuse(){
+//        pring("clear old data if needed: ", self)
+////        self.copy()
+////        [self.collectionView setContentOffset:CGPointZero];
+//    }
+//
+//}
+//
+extension WOWSearchController:VTMagicViewDelegate{
+    func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
+        print("viewDidAppear:", pageIndex);
+        
+        if let b = magicView.menuItemAtIndex(pageIndex) as! TooglePriceBtn? {
+            print("  button asc is ", b.asc)
+        }
+    }
+    func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
+        print("didSelectItemAtIndex:", itemIndex);
+        
+    }
+    
+}
 
 
 

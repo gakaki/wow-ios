@@ -120,11 +120,7 @@ class WOWController: WOWBaseViewController {
     }
     
     
-    private func addObserver(){
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
-        
-    }
+    
     
     func loadBottomData()  {
         if isRreshing {
@@ -138,14 +134,7 @@ class WOWController: WOWBaseViewController {
     }
     private func configBarItem(){
         
-        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
-            if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController)) as! WOWSearchController
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-                
-            }
-            
-        }
+        
         configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
     }
     

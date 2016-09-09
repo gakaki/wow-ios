@@ -46,6 +46,8 @@ let URL_home_scenes             = "page/scenes"     //1.2首页 查看首页场�
 let URL_home_List               = "page"     // 首页 全新场景
 let URL_home_BottomList         = "product/recommend"     //首页 底部列表
 
+let URL_Search_hot              = "product/search/hot-keywords"  //热门搜索
+
 //2.2商品列表
 let URL_product                 = "product"
 //2.3商品详情

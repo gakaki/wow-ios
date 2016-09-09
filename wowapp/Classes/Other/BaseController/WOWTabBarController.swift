@@ -57,11 +57,19 @@ class WOWTabBarController: UITabBarController {
     func configTabBar() {
         let items = self.tabBar.items
         for item in items! as [UITabBarItem] {
-            let dic = NSDictionary(object: UIColor(hexString: "#FFD444")!,
+            
+            let dic_corlor   = NSDictionary(object: WowColor.grayColor(),
+                                            forKey: NSForegroundColorAttributeName)
+
+            let dic_selected = NSDictionary(object: WowColor.orangeColor(),
                                    forKey: NSForegroundColorAttributeName)
 
-            item.setTitleTextAttributes(dic as? [String : AnyObject],
+            item.setTitleTextAttributes(dic_selected as? [String : AnyObject],
                                         forState: UIControlState.Selected)
+
+            
+            item.setTitleTextAttributes(dic_corlor as? [String : AnyObject],
+                                        forState: UIControlState.Normal)
         }
     }
     private func configBadge(){

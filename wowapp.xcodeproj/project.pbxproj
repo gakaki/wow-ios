@@ -26,6 +26,7 @@
 		06568A881D585A30008D2B1A /* ObjectMapper+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */; };
 		066048A21D82AEDA002A6040 /* VCShopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066048A11D82AEDA002A6040 /* VCShopping.swift */; };
 		066048A41D82BED2002A6040 /* WowColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066048A31D82BED2002A6040 /* WowColor.swift */; };
+		066048A61D82C307002A6040 /* WowBaseVCCartSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066048A51D82C307002A6040 /* WowBaseVCCartSearch.swift */; };
 		066D889A1D7682FA008CE271 /* VCSceneCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066D88991D7682FA008CE271 /* VCSceneCategory.swift */; };
 		068B60B11D4F3561001AD778 /* Found.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B01D4F3560001AD778 /* Found.storyboard */; };
 		068B60B31D4F3DD5001AD778 /* VCFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60B21D4F3DD5001AD778 /* VCFound.swift */; };
@@ -452,6 +453,7 @@
 		06568A871D585A30008D2B1A /* ObjectMapper+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObjectMapper+Transform.swift"; sourceTree = "<group>"; };
 		066048A11D82AEDA002A6040 /* VCShopping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCShopping.swift; sourceTree = "<group>"; };
 		066048A31D82BED2002A6040 /* WowColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowColor.swift; sourceTree = "<group>"; };
+		066048A51D82C307002A6040 /* WowBaseVCCartSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowBaseVCCartSearch.swift; sourceTree = "<group>"; };
 		066D88991D7682FA008CE271 /* VCSceneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCSceneCategory.swift; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
 		068B60B21D4F3DD5001AD778 /* VCFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCFound.swift; sourceTree = "<group>"; };
@@ -928,6 +930,7 @@
 			children = (
 				0633527D1D6540560026177E /* WowLikeBtn.swift */,
 				066048A31D82BED2002A6040 /* WowColor.swift */,
+				066048A51D82C307002A6040 /* WowBaseVCCartSearch.swift */,
 			);
 			path = BaseUI;
 			sourceTree = "<group>";
@@ -2473,6 +2476,7 @@
 				062A91E71D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift in Sources */,
 				29FF26701CFDA86300DF2A9B /* WOWSenceLikeCell.swift in Sources */,
 				638B18A41D7829F800F89C76 /* HolderTextView.swift in Sources */,
+				066048A61D82C307002A6040 /* WowBaseVCCartSearch.swift in Sources */,
 				29FF26921CFDA86300DF2A9B /* WOWBrandListController.swift in Sources */,
 				06D0516E1D811C7900BADD38 /* VCCategoryChoose.swift in Sources */,
 				632A934F1D49E31D003A5966 /* WOWProductDetailCell.swift in Sources */,

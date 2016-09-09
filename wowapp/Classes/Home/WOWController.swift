@@ -119,13 +119,6 @@ class WOWController: WOWBaseViewController {
         request()
     }
     
-    
-    private func addObserver(){
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
-        
-    }
-    
     func loadBottomData()  {
         if isRreshing {
             return

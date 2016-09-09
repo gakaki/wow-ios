@@ -27,11 +27,16 @@ class WOWTabBarController: UITabBarController {
     }
     //MARK:Private Method
     func setViewControllers(){
+        
         self.view.backgroundColor = DefaultBackColor
-        self.delegate = self;
-        let storys = ["Home","Favorite","Found","Brand","User"]
-        let images = ["home","Favorite","store","brand","me"]
-        let imagesTitle = ["首页","分类","尖叫","喜欢","我"]
+        self.delegate = self
+        
+        let storys =        ["Home",    "Found",       "Found",        "Favorite",     "User"      ]
+        let images =        ["tab_home","tab_shopping","tab_special",  "tab_like",     "tab_me"    ]
+        let imagesTitle =   ["首页",      "购物",       "精选",          "喜欢",          "我"        ]
+    
+
+        
         var viewControllers = [UIViewController]()
         for index in 0..<storys.count{
             let vc = UIStoryboard.initialViewController(storys[index])
@@ -132,7 +137,7 @@ extension WOWTabBarController:UITabBarControllerDelegate{
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         let controllers = tabBarController.viewControllers
         let index = controllers?.indexOf(viewController)
-        if index == 1{
+        if index == 3{
             guard WOWUserManager.loginStatus else {
                 UIApplication.currentViewController()?.toLoginVC(true)
                 return false

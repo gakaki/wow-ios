@@ -42,10 +42,10 @@ class WOWTabBarController: UITabBarController {
             let vc = UIStoryboard.initialViewController(storys[index])
             vc.tabBarItem.image = UIImage(named:images[index])?.imageWithRenderingMode(.AlwaysOriginal)
             vc.tabBarItem.selectedImage = UIImage(named:images[index] + "_selected")?.imageWithRenderingMode(.AlwaysOriginal)
-            
-//            vc.tabBarItem.imageInsets = UIEdgeInsetsMake(4, 0, -4, 0);
-            
             vc.tabBarItem.title = imagesTitle[index]
+
+            vc.tabBarItem.imageInsets = UIEdgeInsetsMake(-2, 0, 2, 0);
+            vc.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
 
             viewControllers.append(vc)
         }

@@ -63,13 +63,11 @@ class WOWController: WOWBaseViewController {
         let a =  UIApplication.sharedApplication().delegate as! AppDelegate
         return a
     }()
-    func loginSuccess()  {// 重新刷新数据购物车数量
-        tableView.reloadData()
-//        configBarItem()
+    func loginSuccess()  {// 重新刷新数据
+        request()
     }
-    func exitLogin()  {// 重新刷新数据，清空购物车数量
-        tableView.reloadData()
-//         configBarItem()x
+    func exitLogin()  {// 重新刷新数据
+        request()
     }
 
     private func addObserver(){
@@ -318,34 +316,6 @@ class WOWController: WOWBaseViewController {
         
     }
 }
-
-
-extension WOWController:LeftSideProtocol{
-    func sideMenuSelect(tagString: String!, index: Int,dataArr:[WOWCategoryModel]) {
-        /*
-         let tab = WOWTool.appTabBarController
-         tab.selectedIndex = 1
-         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
-         vc.categoryIndex    = index
-         vc.categoryTitles   = categoryTitles
-         vc.categoryID       = WOWRealm.objects(WOWCategoryModel)[index].categoryID
-         vc.categoryArr      = dataArr
-         let nav = tab.selectedViewController as! WOWNavigationController
-         nav.pushViewController(vc, animated: true)
-         */
-    }
-    /*
-     var categoryTitles:[String]{
-     get{
-     let categorys = WOWRealm.objects(WOWCategoryModel)
-     return categorys.map { (model) -> String in
-     return model.categoryName
-     }
-     }
-     }
-     */
-}
-
 extension WOWController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -522,6 +492,9 @@ extension WOWController:HomeBottomDelegate{
         toVCProduct(model.productId)
         
     }
+    func reloadTableViewData() {
+        request()
+    }
 }
 extension WOWController:WOWHomeFormDelegate{
     
@@ -532,12 +505,13 @@ extension WOWController:WOWHomeFormDelegate{
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
-    
     func goToProdectDetailVC(productId: Int?) {// 跳转产品详情页
         toVCProduct(productId)
         
     }
-    
+    func reloadBottomTableViewData(){
+        request()
+    }
 }
 
 extension WOWController:SenceCellDelegate{

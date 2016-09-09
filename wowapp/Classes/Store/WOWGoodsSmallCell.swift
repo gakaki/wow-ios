@@ -15,7 +15,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }
     }
     
-    
+    var productId :Int?
     @IBOutlet weak var label_soldout: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
@@ -33,7 +33,11 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         self.label_soldout.hidden = false
 //        self.pictureImageView.alpha = 0.4
     }
-    
+//    @IBAction func favoriteAction(sender: AnyObject) {
+//
+//       
+//    }
+
     func showData(model:WOWProductModel,indexPath:NSIndexPath) {
         let i = indexPath.item
         if ( i % 2 != 0 && i != 0){
@@ -41,7 +45,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }else{
             view_rightline.hidden = false
         }
-        
+        productId = model.productId
         
 //        pictureImageView.set_webimage_url(model.productImg ?? "")
         // 修改来回上下加载 内存不减的问题
@@ -52,17 +56,17 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         priceLabel.text     = result//千万不用格式化了
         
         if WOWUserManager.loginStatus {
-        if (model.favorite == true) {
+            if (model.favorite == true) {
+                likeBtn.selected = true
             
-            likeBtn.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
-            
-        }else{
-            
-            likeBtn.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+            }else{
+                likeBtn.selected = false
        
-        }
+            }
         }else{
-            likeBtn.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+            
+            likeBtn.selected = false
+    
         }
     }
 }

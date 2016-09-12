@@ -144,7 +144,9 @@
             </variation>
             <connections>
                 <outlet property="deleteButton" destination="aKH-5c-DBM" id="kbJ-ds-vc2"/>
+                <outlet property="hisSearchView" destination="aje-PA-1hJ" id="2FF-na-RtZ"/>
                 <outlet property="historyTagListView" destination="bi5-PL-G5g" id="2hJ-L0-Cwd"/>
+                <outlet property="hotSearchView" destination="CfE-MS-RrI" id="lCc-xm-X5p"/>
                 <outlet property="hotTagListView" destination="BUd-dR-4iv" id="zAC-VL-fqC"/>
             </connections>
             <point key="canvasLocation" x="256" y="153.5"/>

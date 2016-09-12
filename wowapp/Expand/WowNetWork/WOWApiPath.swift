@@ -48,6 +48,8 @@ let URL_home_BottomList         = "product/recommend"     //首页 底部列表
 
 let URL_Search_hot              = "product/search/hot-keywords"  //热门搜索
 
+let URL_Search_result           = "product/condition"           //搜索结果
+
 //2.2商品列表
 let URL_product                 = "product"
 //2.3商品详情

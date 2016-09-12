@@ -12,9 +12,33 @@ import VTMagic
 class WOWSearchController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
-
-    var keyWords = [AnyObject]()
-    var searchArray = [String]()
+    var dataArr = [WOWProductModel]()
+    private var keyWords = [AnyObject](){
+        didSet{
+            /**
+             *  如果热门搜索没有view就隐藏
+             */
+            if keyWords.isEmpty {
+                searchTagView.hotSearchView.hidden = true
+            }else{
+                searchTagView.hotSearchView.hidden = false
+            }
+        }
+    }
+    
+    private var searchArray = [String](){
+        didSet{
+            /**
+             *  如果搜索历史没有view就隐藏
+             */
+            if searchArray.isEmpty {
+                searchTagView.hisSearchView.hidden = true
+            }else{
+                searchTagView.hisSearchView.hidden = false
+            }
+        }
+    }
+    
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +75,7 @@ class WOWSearchController: WOWBaseViewController {
         searchTagView.hotTagListView.removeObserver(self, forKeyPath: "bounds")
         searchTagView.historyTagListView.removeObserver(self, forKeyPath: "bounds")
         searchView.removeFromSuperview()
-        
+        self.v_bottom.magicView.removeFromSuperview()
     }
 
     
@@ -65,15 +89,15 @@ class WOWSearchController: WOWBaseViewController {
         return view
     }()
     
-    lazy var resultView : SearchResultView = {
-        let v = SearchResultView()
-        v.delegate = self
-        v.backgroundColor = UIColor.orangeColor()
-        v.frame = CGRectMake(0, MGScreenHeight,MGScreenWidth,MGScreenHeight - 64)
-       
-
-        return v
-    }()
+//    lazy var resultView : SearchResultView = {
+//        let v = SearchResultView()
+//        v.delegate = self
+//        v.backgroundColor = UIColor.orangeColor()
+//        v.frame = CGRectMake(0, MGScreenHeight,MGScreenWidth,MGScreenHeight - 64)
+//       
+//
+//        return v
+//    }()
     
     lazy var searchTagView: WOWSearchTagView = {
          let view = NSBundle.mainBundle().loadNibNamed(String(WOWSearchTagView), owner: self, options: nil).last as! WOWSearchTagView
@@ -142,6 +166,7 @@ class WOWSearchController: WOWBaseViewController {
         
         let resultSet = WOWSearchManager.shareInstance.db.executeQuery(sql, withArgumentsInArray: nil)
         
+        searchArray = [String]()
         while resultSet.next() {
         
             let searchStr = resultSet.stringForColumn("searchStr")
@@ -198,7 +223,7 @@ extension WOWSearchController {
                 let json = JSON(result)
                 let array = json["keywords"].arrayObject
                 if let keyWords = array {
-//                    strongSelf.keyWords = keyWords
+                    strongSelf.keyWords = keyWords
                     for key in keyWords {
                         strongSelf.searchTagView.hotTagListView.addTag(key as! String)
                 
@@ -218,6 +243,7 @@ extension WOWSearchController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         print("Tag pressed: \(title), \(sender)")
         searchView.searchTextField.text = title
+        searchView.searchTextField.resignFirstResponder()
         showResult()
         searchHistory(title)
     }
@@ -256,10 +282,16 @@ extension WOWSearchController:UITextFieldDelegate{
         return true
     }
     
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        hideResult()
+        return true
+    }
     func showResult() {
 //        view.addSubview(resultView)
-        self.view.addSubview(v_bottom.magicView)
+//        self.view.addSubview(v_bottom.magicView)
 //        resultView.hidden = false
+        self.navigationShadowImageView?.hidden = true
         v_bottom.magicView.hidden = false
 //        UIView.animateWithDuration(0.3) { 
 ////            self.resultView.y = 40
@@ -268,8 +300,9 @@ extension WOWSearchController:UITextFieldDelegate{
     }
     
     func hideResult()  {
+        self.navigationShadowImageView?.hidden = false
         v_bottom.magicView.hidden = true
-        self.v_bottom.magicView.removeFromSuperview()
+//        self.v_bottom.magicView.removeFromSuperview()
 
 //        UIView.animateWithDuration(0.3, animations: {
 ////            self.resultView.y = MGScreenHeight + 20
@@ -414,7 +447,7 @@ extension WOWSearchController:VTMagicViewDataSource{
     
     func magicView(magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
         
-        let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
+        var vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
         
         if ((vc == nil)) {
             
@@ -422,8 +455,7 @@ extension WOWSearchController:VTMagicViewDataSource{
             //            vc_me.label.text = "label text \(pageIndex)"
             //            return vc_me
             
-            let vc_me = VCCategoryProducts()
-            return vc_me
+            vc = UIStoryboard.initialViewController("Home", identifier:String(WOWSearchChildController)) as! WOWSearchChildController
         }
         
         return vc!;
@@ -450,12 +482,35 @@ extension WOWSearchController:VTMagicViewDelegate{
         }
     }
     func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
+        if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? {
+            print("  button asc is ", b.asc)
+        }
         print("didSelectItemAtIndex:", itemIndex);
         
+        
+        print(magicView.viewControllers.count)
+        requestSearchResult(1, asc: 0, seoKey: "虎娃")
     }
     
 }
 
+extension WOWSearchController {
+    func requestSearchResult(sortBy: Int, asc: Int, seoKey: String) {
+        WOWNetManager.sharedManager.requestWithTarget(.Api_SearchResult(pageSize: 10, currentPage: 1, sortBy: sortBy, asc: asc, seoKey: "户外"), successClosure: { [weak self](result) in
+            let json = JSON(result)
+            DLog(json)
+            if let strongSelf = self {
+                let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                if let arrar = arr {
+                }
+                
+            }
+            
+            }) { (errorMsg) in
+                
+        }
+    }
+}
 
 
 

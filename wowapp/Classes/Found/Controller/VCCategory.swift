@@ -11,6 +11,7 @@ let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度�
 
 class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource
 {
+    
     var vo_categories           = [WOWFoundCategoryModel]()
     var top_category_image_view:UIImageView! = UIImageView()
     var v_bottom : VCVTMagic!
@@ -34,7 +35,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 //        withBody("google.json");
         
         
-        mockRequest("GET", "\(BaseUrl)category/sub-category(.*?)".regex()).andReturn(200).withBody("city.json")
+//        mockRequest("GET", "\(BaseUrl)category/sub-category(.*?)".regex()).andReturn(200).withBody("city.json")
         
         request()
         

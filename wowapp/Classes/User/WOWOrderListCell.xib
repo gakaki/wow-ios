@@ -145,7 +145,7 @@
                             </label>
                             <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ntl-M0-EFU">
                                 <rect key="frame" x="355" y="8" width="68" height="28"/>
-                                <color key="backgroundColor" red="1" green="0.90196078431372551" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="LY2-i3-lL4"/>
                                     <constraint firstAttribute="width" constant="68" id="sNO-Ka-O3C"/>

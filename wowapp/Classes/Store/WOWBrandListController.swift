@@ -109,7 +109,8 @@ class WOWBrandListController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_BrandList, successClosure: { [weak self](result) in
             if let strongSelf = self{
-                
+                strongSelf.endRefresh()
+
                 
                 strongSelf.dataArray.removeAll()
                 strongSelf.originalArray.removeAll()
@@ -138,11 +139,12 @@ class WOWBrandListController: WOWBaseViewController {
 
                     strongSelf.endRefresh()
 
-                    strongSelf.tableView.reloadData()
                 }
+                strongSelf.tableView.reloadData()
+
             }
         }) {(errorMsg) in
-                
+            self.endRefresh()
         }
     }
 }

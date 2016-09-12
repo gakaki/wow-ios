@@ -111,14 +111,14 @@ class WOWSearchController: WOWBaseViewController {
         v.magicView.delegate = self
         v.magicView.backgroundColor = UIColor.whiteColor()
         self.addChildViewController(v)
-        self.view.addSubview(v.magicView)
         v.magicView.frame = CGRectMake(0, 0,MGScreenWidth,MGScreenHeight - 64)
         v.magicView.hidden = true
-        v.magicView.reloadData()
+//        v.magicView.reloadData()
 
         return v
     }()
    
+ 
 
 
 //MARK:Private Method
@@ -289,11 +289,13 @@ extension WOWSearchController:UITextFieldDelegate{
     }
     func showResult() {
 //        view.addSubview(resultView)
-//        self.view.addSubview(v_bottom.magicView)
+        self.view.addSubview(v_bottom.magicView)
 //        resultView.hidden = false
         self.navigationShadowImageView?.hidden = true
         v_bottom.magicView.hidden = false
-//        UIView.animateWithDuration(0.3) { 
+        v_bottom.magicView.reloadDataToPage(0)
+//        v_bottom.magicView.switchToPage(0, animated: false)
+//        UIView.animateWithDuration(0.3) {
 ////            self.resultView.y = 40
 //            self.v_bottom.magicView.y = 0
 //        }
@@ -302,7 +304,8 @@ extension WOWSearchController:UITextFieldDelegate{
     func hideResult()  {
         self.navigationShadowImageView?.hidden = false
         v_bottom.magicView.hidden = true
-//        self.v_bottom.magicView.removeFromSuperview()
+        v_bottom.magicView.clearMemoryCache()
+        self.v_bottom.magicView.removeFromSuperview()
 
 //        UIView.animateWithDuration(0.3, animations: {
 ////            self.resultView.y = MGScreenHeight + 20
@@ -425,6 +428,7 @@ extension WOWSearchController:VTMagicViewDataSource{
     }
     func magicView(magicView: VTMagicView, menuItemAtIndex itemIndex: UInt) -> UIButton{
         
+        
         let button = magicView .dequeueReusableItemWithIdentifier(self.identifier_magic_view_bar_item)
         
         if ( button == nil) {
@@ -433,7 +437,7 @@ extension WOWSearchController:VTMagicViewDataSource{
                 print("you clicket status is "  , asc)
             }
             
-            if ( itemIndex <= 1) {
+            if ( itemIndex != 2) {
                 b.image_is_show = false
             }else{
                 b.image_is_show = true
@@ -451,10 +455,6 @@ extension WOWSearchController:VTMagicViewDataSource{
         
         if ((vc == nil)) {
             
-            //            let vc_me  = VCMe.init()
-            //            vc_me.label.text = "label text \(pageIndex)"
-            //            return vc_me
-            
             vc = UIStoryboard.initialViewController("Home", identifier:String(WOWSearchChildController)) as! WOWSearchChildController
         }
         
@@ -464,53 +464,55 @@ extension WOWSearchController:VTMagicViewDataSource{
         print(btn.state)
     }
 }
-//extension ViewController:VTMagicReuseProtocol{
-//    func vtm_prepareForReuse(){
-//        pring("clear old data if needed: ", self)
-////        self.copy()
-////        [self.collectionView setContentOffset:CGPointZero];
-//    }
-//
-//}
-//
+
 extension WOWSearchController:VTMagicViewDelegate{
     func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-        print("viewDidAppear:", pageIndex);
         
         if let b = magicView.menuItemAtIndex(pageIndex) as! TooglePriceBtn? {
             print("  button asc is ", b.asc)
+            
         }
+        if pageIndex == 0 || pageIndex == 2{
+            if let vc = viewController  as? WOWSearchChildController {
+                vc.asc = 1
+                vc.pageVc = pageIndex.toInt + 1
+                vc.seoKey = searchView.searchTextField.text
+                vc.dataArr = [WOWProductModel]()
+                vc.request()
+            }
+        }
+        
     }
     func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
         if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? {
             print("  button asc is ", b.asc)
+            if let vc = v_bottom.magicView.viewControllerAtPage(itemIndex) as? WOWSearchChildController {
+                if itemIndex == 2 {
+                    vc.asc = b.asc
+                    
+                }else {
+                    vc.asc = 1
+                }
+                vc.pageIndex = 1
+                vc.pageVc = itemIndex.toInt + 1
+                vc.seoKey = searchView.searchTextField.text
+                vc.dataArr = [WOWProductModel]()
+                vc.request()
+            }
+
         }
         print("didSelectItemAtIndex:", itemIndex);
         
         
-        print(magicView.viewControllers.count)
-        requestSearchResult(1, asc: 0, seoKey: "虎娃")
+        
     }
     
 }
 
-extension WOWSearchController {
-    func requestSearchResult(sortBy: Int, asc: Int, seoKey: String) {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_SearchResult(pageSize: 10, currentPage: 1, sortBy: sortBy, asc: asc, seoKey: "户外"), successClosure: { [weak self](result) in
-            let json = JSON(result)
-            DLog(json)
-            if let strongSelf = self {
-                let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
-                if let arrar = arr {
-                }
-                
-            }
-            
-            }) { (errorMsg) in
-                
-        }
+extension WOWSearchChildController {
+
+    
     }
-}
 
 
 

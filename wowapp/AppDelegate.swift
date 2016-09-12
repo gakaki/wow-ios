@@ -184,6 +184,12 @@ extension AppDelegate:DeepShareDelegate{
 
 //        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:String(VCCategory))
 //        window?.rootViewController =  UIStoryboard.initialViewController("Found")
+//          window?.rootViewController =  VCBuy(nibName: nil, bundle: nil)
+//        let vc_designer_list = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList
+//        window?.rootViewController =  vc_designer_list
+//          window?.rootViewController = UINavigationController(rootViewController: VCCategoryChoose())
+        
+        window?.rootViewController = UINavigationController(rootViewController: VCShopping())
 
     }
     

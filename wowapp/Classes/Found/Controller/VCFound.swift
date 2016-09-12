@@ -22,6 +22,7 @@ class VCFound: VCBaseVCCategoryFound {
             try request_module_page_with_throw()
         }catch{
             DLog(error)
+            self.endRefresh()
         }
     }
     
@@ -64,6 +65,8 @@ class VCFound: VCBaseVCCategoryFound {
             try request_module_page_with_throw()
         }catch{
             DLog(error)
+            self.endRefresh()
+
         }
     }
     
@@ -71,7 +74,13 @@ class VCFound: VCBaseVCCategoryFound {
         
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Module_Page2, successClosure: {[weak self] (result) in
+            
+
             if let strongSelf = self{
+                
+                
+                strongSelf.endRefresh()
+                
                 
                 var r                             =  JSON(result)
                 strongSelf.data                   =  Mapper<WowModulePageVO>().mapArray(r["modules"].arrayObject) ?? [WowModulePageVO]()
@@ -123,7 +132,6 @@ class VCFound: VCBaseVCCategoryFound {
 
                 
                 strongSelf.tableView.reloadData()
-                strongSelf.endRefresh()
             }
             
         }){ (errorMsg) in
@@ -136,14 +144,17 @@ class VCFound: VCBaseVCCategoryFound {
     //用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
         WOWNetManager.sharedManager.requestWithTarget(.Api_IsFavoriteProduct(productId: vo_recommend_product_id ?? 0), successClosure: {[weak self] (result) in
+            
+
             if let strongSelf = self{
+                strongSelf.endRefresh()
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.isFavorite = favorite ?? false
                 let secction = NSIndexSet(index: 1)
                 strongSelf.tableView.reloadSections(secction, withRowAnimation: .None)
             }
         }) {(errorMsg) in
-            
+            self.endRefresh()
         }
     }
     
@@ -316,22 +327,11 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             cell.selectionStyle = .None
             cell.setData(d.moduleContentArr!)
             cell_heights[section]  = cell.heightAll
+//            print("cel height is ",cell_heights[section])
+            cell.bringSubviewToFront(cell.collectionView)
+            
             return cell
         }
-//
-//        else if ( section == 3 && row == 0){
-//            
-//            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! WOWFoundCategoryCell
-//            cell.delegate       = self
-//            cell.frame          = CGRectMake(0, 0, MGScreenWidth, cell3_height)
-//            cell.setUI()
-//            cell.selectionStyle = .None
-//            cell.categories     = self.vo_categories
-//            return cell
-//            
-//        }
-//        
-//            
         
         else{
             return UITableViewCell()
@@ -383,7 +383,14 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
 //        toVCMoreCategory(cid)
     }
     
+    
+}
 
+extension VCFound :MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate {
+    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(m:WowModulePageItemVO)
+    {
+        
+    }
 }
 
 

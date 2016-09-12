@@ -15,13 +15,38 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     var vo_categories                           = [WOWFoundCategoryModel]()
     var top_category_image_view:UIImageView!    = UIImageView()
     var v_bottom : VCVTMagic!
-    
-    //    self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.cid.toInt()! ), successClosure: {[weak self] (result) in
-    //{"asc":1,"currentPage":1,"showCount":10,"sortBy":1,"categoryId":16}
+
     var cid                 = "10"
-    var query_asc           = 1
-    var query_sortBy        = 1
-    var query_showCount     = 30
+    
+    var prev_page_index:UInt    = 0
+    var current_page_index:UInt = 0 {
+        didSet{
+            prev_page_index = oldValue
+        }
+    }
+    
+    override func request(){
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
+            
+            if let strongSelf = self{
+                //                MARK: 对付图片
+                let r                             =  JSON(result)
+                strongSelf.vo_categories          =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                strongSelf.cv.reloadData()
+                
+                if let image_url = r["bgImg"].string {
+                    strongSelf.top_category_image_view.set_webimage_url(image_url) //设置顶部分类背景图
+                }
+                //导航默认选中第一个
+                strongSelf.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
+            }
+            
+        }){ (errorMsg) in
+            print(errorMsg)
+        }
+    }
+
     
 //    self.reset_fetch_params()
 //    refresh_view()
@@ -102,7 +127,6 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         v_bottom.magicView.scrollEnabled        = true
 
         
-        
         self.addChildViewController(v_bottom)
         self.view.addSubview(v_bottom.magicView)
         
@@ -115,113 +139,13 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 
         
         v_bottom.magicView.reloadData()
+//        v_bottom.magicView.switchToPage(0, animated: true)
     }
     
-    override func request(){
-        
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
-            
-            if let strongSelf = self{
-//                MARK: 对付图片
-                let r                             =  JSON(result)
-                strongSelf.vo_categories          =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
-                strongSelf.cv.reloadData()
-                
-                if let image_url = r["bgImg"].string {
-                    strongSelf.top_category_image_view.set_webimage_url(image_url) //设置顶部分类背景图
-                }
-                //导航默认选中第一个
-                strongSelf.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
-
-                
-            }
-            
-        }){ (errorMsg) in
-            print(errorMsg)
-        }
-    }
 
     let cell_reuse_id        = "reuse_id"
     let cell_reuse_id_label  = "reuse_id_label"
     
-  
-    
-//    
-////    MARK:选项卡
-//    func addChooseCard(){
-//        //内部子标签
-//        let btn_titles      = ["上新","销量","价格"]
-//        
-//        for index in 0..<count {
-//            
-//            var button      = UIButton()
-//
-//            if ( index <= 1) {
-//                button.h        = height
-//                button.w        = width
-//                button.x        = CGFloat(index) * width
-//              
-//            }else{
-//                
-//                let frame       = CGRectMake(
-//                    CGFloat(index) * width,
-//                    0,
-//                    width,
-//                    height
-//                )
-//                button          = TooglePriceBtn(frame: frame) { [weak self] (status) in
-//                    if let strongSelf = self {
-//                        strongSelf.query_asc = status.rawValue
-//                        DLog("you clicket status is \(strongSelf.query_asc)")
-//                    }
-//                  
-//
-//                }
-//
-//            }
-//            
-//            
-//            button.tag      = index + 1 // 1 2 3
-//            
-//            button.titleLabel!.font = UIFont.systemFontOfSize(14)
-//            button.setTitle(btn_titles[index], forState: .Normal)
-//            
-//            button.setTitleColor(UIColor.grayColor(), forState: .Highlighted)
-//            button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-//            button.setTitleColor(UIColor.blackColor(), forState: .Selected)
-//            
-//            button.addTarget(self, action: #selector(titlesClick(_:)), forControlEvents: .TouchUpInside)
-//            
-//            btn_choose_view.addSubview(button)
-//            
-//            button.selected     = false
-//            button.highlighted  = true
-//            
-//            
-//            if index == 0 {//默认点击了第一个按钮
-//                button.sendActionsForControlEvents(.TouchUpInside)
-//            }
-//   
-////
-////            if index == 0 {
-////                button.selected     = true
-////                selectedButton = button
-////                //让按钮内部的Label根据文字来计算内容
-////                button.titleLabel?.sizeToFit()
-////                 self.indicatorView.w         = self.view.w / 3
-////                self.indicatorView.centerX   = button.centerX
-////                
-////            }
-//        }
-//        
-//        btn_choose_view.addSubview(self.indicatorView)
-//
-//        //底部的下划线
-//        let c  = UIColor(hue:0.00, saturation:0.00, brightness:0.92, alpha:1.00)
-//        btn_choose_view.addBottomBorderWithColor(c,width: 0.5)
-//
-//
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -341,7 +265,13 @@ extension VCCategory:VTMagicViewDataSource{
             
             let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRectMake(0, 0, self.view.frame.width / 3, 50)) { (asc) in
                 print("you clicket status is "  , asc)
+                
+                
+                //刷新该死的第三个magicview的数值
+                
+                
             }
+
             
             if ( itemIndex <= 1) {
                 b.image_is_show = false
@@ -349,54 +279,153 @@ extension VCCategory:VTMagicViewDataSource{
                 b.image_is_show = true
             }
             return b
-            
         }
-        
         return button!
     }
     
     func magicView(magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
-        
         let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
-        
         if (vc == nil) {
-            
-            var vc_me  = VCMe.init()
-            vc_me.label.text = "label text \(pageIndex)"
-            
-//            let vc_me = VCCategoryProducts()
-            
+            let vc_me       = VCCategoryProducts()
             addChildViewController(vc_me)
             return vc_me
-            
         }
-        
         return vc!;
     }
     func touchClick(btn:UIButton){
         print(btn.state)
     }
 }
-//extension ViewController:VTMagicReuseProtocol{
-//    func vtm_prepareForReuse(){
-//        pring("clear old data if needed: ", self)
-////        self.copy()
-////        [self.collectionView setContentOffset:CGPointZero];
-//    }
-//
-//}
-//
+
+
+
 extension VCCategory:VTMagicViewDelegate{
+    
     func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-        print("viewDidAppear:", pageIndex);
         
+        current_page_index = pageIndex
+        print("prev_page_index:", self.prev_page_index);
+
         if let b = magicView.menuItemAtIndex(pageIndex) as! TooglePriceBtn? {
-            print("  button asc is ", b.asc)
+            if prev_page_index != pageIndex {
+                b.sendActionsForControlEvents(.TouchUpInside)
+            }
         }
     }
+    
     func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
         print("didSelectItemAtIndex:", itemIndex);
+        
+        
+        if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? ,
+            vc = magicView.viewControllerAtPage(itemIndex) as? VCCategoryProducts
+        {
+            print("  button asc is ", b.asc)
+
+            
+            
+            //            vc.query_currentPage   = 1
+            //            vc.query_showCount     = 30
+
+            let query_sortBy       = Int(pageIndex) + 1 //从0开始呀这个 viewmagic的pageindex
+            let query_cid          = self.cid.toInt()!
+            var query_asc          = 1
+            if ( pageIndex == 2){
+                query_asc          = b.asc
+            }else{
+                query_asc          = 1
+            }
+
+            vc.query_sortBy        = query_sortBy
+            vc.query_asc           = query_asc
+            vc.query_categoryId    = query_cid
+            
+            vc.request()
+            //导航默认选中第一个 若不是分页的话
+            
+        }
+
         
     }
     
 }
+
+
+//MARK: old UICollectionViewDataSource
+
+//
+////    MARK:选项卡
+//    func addChooseCard(){
+//        //内部子标签
+//        let btn_titles      = ["上新","销量","价格"]
+//
+//        for index in 0..<count {
+//
+//            var button      = UIButton()
+//
+//            if ( index <= 1) {
+//                button.h        = height
+//                button.w        = width
+//                button.x        = CGFloat(index) * width
+//
+//            }else{
+//
+//                let frame       = CGRectMake(
+//                    CGFloat(index) * width,
+//                    0,
+//                    width,
+//                    height
+//                )
+//                button          = TooglePriceBtn(frame: frame) { [weak self] (status) in
+//                    if let strongSelf = self {
+//                        strongSelf.query_asc = status.rawValue
+//                        DLog("you clicket status is \(strongSelf.query_asc)")
+//                    }
+//
+//
+//                }
+//
+//            }
+//
+//
+//            button.tag      = index + 1 // 1 2 3
+//
+//            button.titleLabel!.font = UIFont.systemFontOfSize(14)
+//            button.setTitle(btn_titles[index], forState: .Normal)
+//
+//            button.setTitleColor(UIColor.grayColor(), forState: .Highlighted)
+//            button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//            button.setTitleColor(UIColor.blackColor(), forState: .Selected)
+//
+//            button.addTarget(self, action: #selector(titlesClick(_:)), forControlEvents: .TouchUpInside)
+//
+//            btn_choose_view.addSubview(button)
+//
+//            button.selected     = false
+//            button.highlighted  = true
+//
+//
+//            if index == 0 {//默认点击了第一个按钮
+//                button.sendActionsForControlEvents(.TouchUpInside)
+//            }
+//
+////
+////            if index == 0 {
+////                button.selected     = true
+////                selectedButton = button
+////                //让按钮内部的Label根据文字来计算内容
+////                button.titleLabel?.sizeToFit()
+////                 self.indicatorView.w         = self.view.w / 3
+////                self.indicatorView.centerX   = button.centerX
+////
+////            }
+//        }
+//
+//        btn_choose_view.addSubview(self.indicatorView)
+//
+//        //底部的下划线
+//        let c  = UIColor(hue:0.00, saturation:0.00, brightness:0.92, alpha:1.00)
+//        btn_choose_view.addBottomBorderWithColor(c,width: 0.5)
+//
+//
+//    }

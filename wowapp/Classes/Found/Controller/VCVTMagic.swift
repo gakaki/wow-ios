@@ -17,4 +17,5 @@ class VCVTMagic:VTMagicController{
         magicView.scrollEnabled         = false
 
     }
+ 
 }

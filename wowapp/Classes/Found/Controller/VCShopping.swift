@@ -116,15 +116,7 @@ extension VCShopping:VTMagicViewDataSource{
         return vc!
     }
 }
-//extension ViewController:VTMagicReuseProtocol{
-//    func vtm_prepareForReuse(){
-//        pring("clear old data if needed: ", self)
-////        self.copy()
-////        [self.collectionView setContentOffset:CGPointZero];
-//    }
-//
-//}
-//
+
 extension VCShopping:VTMagicViewDelegate{
     func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         print("viewDidAppear:", pageIndex);

@@ -18,10 +18,9 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         }
         
         func setModel(m:WOWFoundCategoryModel){
-            if let pic = m.productImg {
-                pictureImageView.set_webimage_url(pic)
+ 
+                pictureImageView.set_webimage_url(m.productImg)
                 label_name.text      = m.categoryName
-            }
         }
         
         override init(frame: CGRect) {
@@ -238,9 +237,13 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             if let strongSelf = self{
                 
                 let r                             =  JSON(result)
+                
+
+
                 strongSelf.vo_categories_sub_arr  =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryProductImgVoList"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.cv.reloadData()
                 
+             
                 //默认选中第一个
                 let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                 strongSelf.cv.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
@@ -275,7 +278,7 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
         let cell                = tableView.dequeueReusableCellWithIdentifier(String(TvCell), forIndexPath: indexPath) as! TvCell
         cell.selectionStyle     = .None
         let model               = vo_categories_arr[indexPath.section]
-        cell.setModel(model)
+        cell.setModel(model) 
         
         
         return cell

@@ -95,7 +95,7 @@ extension WOWCategoryModel:Mappable{
 
 
 
-final class WOWFoundCategoryModel : WOWBaseModel{
+final class WOWFoundCategoryModel : WOWBaseModel,Mappable{
     var categoryName:String?
     var categoryID:Int?
     var categoryIconSmall:String?
@@ -109,10 +109,6 @@ final class WOWFoundCategoryModel : WOWBaseModel{
     var productImg :String?
     
  
-
-}
-
-extension WOWFoundCategoryModel:Mappable{
     func mapping(map: Map) {
         categoryName            <-    map["categoryName"]
         categoryID              <-    map["id"]

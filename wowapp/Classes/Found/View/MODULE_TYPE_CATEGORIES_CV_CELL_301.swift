@@ -3,7 +3,7 @@ import UIKit
 
 
 protocol MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate:class{
-    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(m:WowModulePageItemVO)
+    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(m:WowModulePageItemVO?)
 }
 
 class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{

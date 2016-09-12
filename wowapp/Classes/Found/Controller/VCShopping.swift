@@ -6,7 +6,11 @@ import VTMagic
 class VCShopping: WowBaseVCCartSearch {
     
     var v : VCVTMagic!
-
+    
+    var vc_found:UIViewController?
+    var vc_brand:WOWBrandListController?
+    var vc_designer:VCDesignerList?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -15,27 +19,37 @@ class VCShopping: WowBaseVCCartSearch {
         super.setUI()
         
         self.title = "购物"
-        
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
-     
+
         
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
         v.magicView.delegate            = self
         
-        v.magicView.layoutStyle       = .Center
-        v.magicView.switchStyle       = .Default
+        v.magicView.layoutStyle         = .Center
+        v.magicView.switchStyle         = .Default
         
-  
+        v.magicView.sliderWidth         = 50.w
+        v.magicView.itemWidth           = MGScreenWidth / 3
+        v.magicView.sliderColor         = WowColor.blackColor()
+        v.magicView.sliderHeight        = 3.w
+
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
         
         v.magicView.snp_makeConstraints { (make) -> Void in
             make.size.equalTo(self.view)
-//            make.top.equalTo(self.snp_topLayoutGuideTop)
         }
 
+        
+        vc_found    = UIStoryboard.initialViewController("Found", identifier:String(VCFound)) as! VCFound
+        vc_brand    = UIStoryboard.initialViewController("Brand", identifier:String(WOWBrandListController)) as! WOWBrandListController
+        vc_designer = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList
+        
+        
+        addChildViewController(vc_found!)
+        addChildViewController(vc_brand!)
+        addChildViewController(vc_designer!)
+        
         v.magicView.reloadData()
     }
     
@@ -67,41 +81,40 @@ extension VCShopping:VTMagicViewDataSource{
         let button = magicView .dequeueReusableItemWithIdentifier(self.identifier_magic_view_bar_item)
         
         if ( button == nil) {
+            let width           = self.view.frame.width / 3
+            let b               = UIButton(type: .Custom)
+            b.frame             = CGRectMake(0, 0, width, 50)
+            b.titleLabel!.font  =  UIFont.systemFontOfSize(14)
+            b.setTitleColor(WowColor.grayLightColor(), forState: .Normal)
+            b.setTitleColor(WowColor.blackColor(), forState: .Selected)
+            b.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
             
-            let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRectMake(0, 0, self.view.frame.width / 3, 50)) { (asc) in
-                print("you clicket status is "  , asc)
-            }
-            
-            if ( itemIndex <= 1) {
-                b.image_is_show = false
-            }else{
-                b.image_is_show = true
-            }
             return b
-            
         }
         
         return button!
+    }
+    
+    func buttonAction(){
+        print("button")
     }
     
     func magicView(magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
         
         let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
         
-        if ((vc == nil)) {
-            
-            //            let vc_me  = VCMe.init()
-            //            vc_me.label.text = "label text \(pageIndex)"
-            //            return vc_me
-            
-            let vc_me = VCCategoryProducts()
-            return vc_me
+        if (vc == nil) {
+
+            if (pageIndex == 0){
+                return vc_found!
+            }else if (pageIndex == 1){
+                return vc_brand!
+            }else{
+                return vc_designer!
+            }
         }
         
-        return vc!;
-    }
-    func touchClick(btn:UIButton){
-        print(btn.state)
+        return vc!
     }
 }
 //extension ViewController:VTMagicReuseProtocol{
@@ -117,8 +130,8 @@ extension VCShopping:VTMagicViewDelegate{
     func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         print("viewDidAppear:", pageIndex);
         
-        if let b = magicView.menuItemAtIndex(pageIndex) as! TooglePriceBtn? {
-            print("  button asc is ", b.asc)
+        if let b = magicView.menuItemAtIndex(pageIndex) {
+            print("  button asc is ", b)
         }
     }
     func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){

@@ -150,7 +150,7 @@ class VCCategoryChoose: VCBaseNavCart {
     func createCvRight()  {
     
         let cv_width                           = MGScreenWidth - self.tv_width
-        let padding                            = 15.w
+        let padding                            = CGFloat(15)
         let cell_width                         = (cv_width  - padding * 3) / 2
         let cell_height                        = cell_width + 1 + 30
         let frame                              = CGRectMake( self.tv_width, 0, cv_width, MGScreenHeight)

@@ -377,10 +377,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         }
     }
     func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(cid:Int){
-        if cid == 0 {
-            
-        }
-//        toVCMoreCategory(cid)
+        toVCCategoryChoose(cid)
     }
     
     

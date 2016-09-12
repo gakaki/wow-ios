@@ -172,9 +172,9 @@ extension  UIViewController {
     }
 
     
-    func toVCMoreCategory(cid:Int){
-        let vc      = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(VCMoreCategorie)) as! VCMoreCategorie
-        vc.cid      = cid
+    func toVCCategoryChoose(cid:Int){
+        let vc          = VCCategoryChoose()
+        vc.cid          = cid.toString
         self.pushVC(vc)
     }
 

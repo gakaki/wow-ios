@@ -6,7 +6,7 @@ import SnapKit
 import UIKit
 
 
-class VCSpecial:VCBaseNavCart {
+class VCSpecial:VCBaseVCCategoryFound {
     
     
     

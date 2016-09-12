@@ -1,10 +1,9 @@
 
 import UIKit
 
-class VCCategoryChoose: VCBaseNavCart {
+class VCCategoryChoose: VCBaseVCCategoryFound {
 
     class CVCell: UICollectionViewCell {
-        
         
         let borderColor          = UIColor(hexString:"EAEAEA")
 
@@ -125,11 +124,9 @@ class VCCategoryChoose: VCBaseNavCart {
     var vo_categories_arr           = [WOWFoundCategoryModel]()
     var vo_categories_sub_arr       = [WOWFoundCategoryModel]()
     var cid                         = "10"
-
     let tv_width                    = 110.w
-
-    weak var delegate:VCCategoryChoose_cv_cell_touch_delegate?
-
+    
+    
     var tv:UITableView!
     var cv:UICollectionView!
 
@@ -141,7 +138,7 @@ class VCCategoryChoose: VCBaseNavCart {
         tv.delegate          = self
         tv.dataSource        = self
         tv.registerClass(TvCell.self, forCellReuseIdentifier:String(TvCell))
-        tv.bounces           = false
+//        tv.bounces           = false
         tv.showsVerticalScrollIndicator = false
         self.view.addSubview(tv)
     }
@@ -193,6 +190,7 @@ class VCCategoryChoose: VCBaseNavCart {
     }
     
     override func setUI() {
+        super.setUI()
 
         createTvLeft()
         createCvRight()
@@ -293,12 +291,14 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let m = vo_categories_arr[indexPath.section]
-        request_sub_cid(m.categoryID!.toString)
+
+        if let cid = m.categoryID {
+            request_sub_cid(cid.toString)
+        }
+
     }
 }
-protocol VCCategoryChoose_cv_cell_touch_delegate:class{
-    func cv_cell_touch(cid:String)
-}
+
 extension VCCategoryChoose:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     
@@ -319,9 +319,10 @@ extension VCCategoryChoose:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let del = self.delegate  {
-            let m = vo_categories_sub_arr[indexPath.item]
-            del.cv_cell_touch(m.categoryID!.toString)
+        let m = vo_categories_sub_arr[indexPath.item]
+        if let cid = m.categoryID , cname = m.categoryName{
+                toVCCategory( String(cid) ,cname: cname)
         }
+ 
     }
 }

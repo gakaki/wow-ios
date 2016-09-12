@@ -17,7 +17,6 @@ class VCBaseNavCart:WOWBaseViewController{
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
     override func viewDidDisappear(animated: Bool) {
         
@@ -27,7 +26,6 @@ class VCBaseNavCart:WOWBaseViewController{
     }
     
     private func addObservers(){
-       
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(buyCarCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
     }
     private func removeObservers() {
@@ -74,8 +72,6 @@ class VCBaseNavCart:WOWBaseViewController{
         }else {
             carEntranceButton.badgeString = "99+"
         }
-        
-        
     }
     
    

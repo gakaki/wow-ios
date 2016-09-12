@@ -105,7 +105,7 @@ final class WOWFoundCategoryModel : WOWBaseModel,Mappable{
     var categoryBgImg:String?
     var categoryIconBig:String?
     var categoryIconBg:String?
-    
+    var categoryDesc:String?
     var productImg :String?
     
  
@@ -121,7 +121,8 @@ final class WOWFoundCategoryModel : WOWBaseModel,Mappable{
         categoryIconBig <-    map["categoryIconBig"]
         categoryIconBg  <-    map["categoryIconBg"]
         categoryIconSmall  <-    map["categoryIconSmall"]
-        
+        categoryDesc  <-    map["categoryDesc"]
+
         productImg      <-    map["productImg"]
 
     }

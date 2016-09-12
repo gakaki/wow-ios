@@ -28,6 +28,7 @@ import Foundation
 let URL_category                        = "category/sub-category"
 let URL_producty_by_category            = "category/product"
 let URL_category_subCategory_with_image = "category/img-category"
+let URL_category_v2                     = "category"
 
 let URL_scene                   = "scene"
 

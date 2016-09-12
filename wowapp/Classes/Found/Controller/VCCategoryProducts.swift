@@ -51,7 +51,7 @@ class VCCategoryProducts:UIViewController ,CollectionViewWaterfallLayoutDelegate
         
         edgesForExtendedLayout = .None
         
-        
+//        
 //        cv.mj_footer = self.mj_footer
 //        cv.mj_footer.setTitle("", forState: MJRefreshState.Idle)
     }

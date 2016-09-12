@@ -12,8 +12,8 @@ let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度�
 class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource
 {
     
-    var vo_categories           = [WOWFoundCategoryModel]()
-    var top_category_image_view:UIImageView! = UIImageView()
+    var vo_categories                           = [WOWFoundCategoryModel]()
+    var top_category_image_view:UIImageView!    = UIImageView()
     var v_bottom : VCVTMagic!
     
     //    self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.cid.toInt()! ), successClosure: {[weak self] (result) in
@@ -95,6 +95,13 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 
         v_bottom.magicView.dataSource          = self
         v_bottom.magicView.delegate            = self
+        
+        
+        v_bottom.magicView.menuScrollEnabled    = true
+        v_bottom.magicView.switchAnimated       = true
+        v_bottom.magicView.scrollEnabled        = true
+
+        
         
         self.addChildViewController(v_bottom)
         self.view.addSubview(v_bottom.magicView)
@@ -352,14 +359,16 @@ extension VCCategory:VTMagicViewDataSource{
         
         let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
         
-        if ((vc == nil)) {
+        if (vc == nil) {
             
-            //            let vc_me  = VCMe.init()
-            //            vc_me.label.text = "label text \(pageIndex)"
-            //            return vc_me
+            var vc_me  = VCMe.init()
+            vc_me.label.text = "label text \(pageIndex)"
             
-            let vc_me = VCCategoryProducts()
+//            let vc_me = VCCategoryProducts()
+            
+            addChildViewController(vc_me)
             return vc_me
+            
         }
         
         return vc!;

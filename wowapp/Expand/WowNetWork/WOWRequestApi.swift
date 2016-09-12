@@ -65,6 +65,8 @@ public enum RequestApi{
     
     
     case Api_Category(categoryId:String) //查看分类
+    case Api_Category_V2(categoryId:String) //查看分类v2
+
     case Api_Category_subCategory_with_image(categoryId:String) //查看分类并且带上对应销量第一的商品的图片
     
     case Api_Product_By_Category(asc:Int , currentPage: Int, showCount :Int , sortBy:Int, categoryId:Int ) //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
@@ -196,6 +198,8 @@ extension RequestApi:TargetType{
         switch self{
         case .Api_Category:
             return URL_category
+        case .Api_Category_V2:
+            return URL_category_v2
 
         case .Api_Category_subCategory_with_image:
             return URL_category_subCategory_with_image
@@ -383,8 +387,8 @@ extension RequestApi:TargetType{
             ,Api_Module_Page2,
             .Api_SearchHot,
             .Api_DesignerList,
-            .Api_Category_subCategory_with_image
-            
+            .Api_Category_subCategory_with_image,
+            .Api_Category_V2
             :
 
             return .GET
@@ -401,6 +405,8 @@ extension RequestApi:TargetType{
         var params = [String: AnyObject]?()
         switch self{
             case let .Api_Category(categoryId):
+                params = ["categoryId":categoryId]
+            case let .Api_Category_V2(categoryId):
                 params = ["categoryId":categoryId]
             case let .Api_Category_subCategory_with_image(categoryId):
                 params = ["categoryId":categoryId]

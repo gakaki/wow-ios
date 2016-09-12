@@ -323,7 +323,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         else if ( section == 3 && row == 0){
             
             let cell            = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301
-//            cell.delegate       = self
+            cell.delegate       = self
             cell.selectionStyle = .None
             cell.setData(d.moduleContentArr!)
             cell_heights[section]  = cell.heightAll

@@ -108,6 +108,8 @@ class VCDesignerList: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_DesignerList, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 
+                strongSelf.endRefresh()
+
                 
                 strongSelf.dataArray.removeAll()
                 strongSelf.originalArray.removeAll()
@@ -131,14 +133,18 @@ class VCDesignerList: WOWBaseViewController {
                     strongSelf.dataArray.append(group_row)
                     strongSelf.originalArray.appendContentsOf(group_row)
                     
-                    strongSelf.endRefresh()
                     
-                    strongSelf.tableView.reloadData()
                 }
+                
+                
+                
+                strongSelf.tableView.reloadData()
+
             }
+
             
         }) {(errorMsg) in
-            
+            self.endRefresh()
         }
     }
 }

@@ -51,10 +51,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         
         collectionView.reloadData()
         self.changeUI()
-//        self.setNeedsLayout()
-//        self.setNeedsDisplay()
-//        collectionView.invalidateIntrinsicContentSize()
-        collectionView.collectionViewLayout.invalidateLayout() // this is useful
+
     }
     
     override init(style: UITableViewCellStyle,reuseIdentifier: String?){
@@ -69,7 +66,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     func changeUI(){
         
         
@@ -79,12 +76,16 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         
         let item_width                                    = ( MGScreenWidth - size_padding * 2 - size_line_spacing * 1 ) / 2
         let item_height                                   = item_width
-        self.heightAll                                    = item_height * count + size_padding * 2 + size_line_spacing * (count - 1)
+        self.heightAll                                    = item_height * count + size_padding * 1 + size_line_spacing * (count - 1)
+        //因为top那个padding去掉额
         
         let frame                                         = CGRectMake(0, 0, MGScreenWidth, heightAll)
         collectionView.frame                              = frame
 
-
+//        collectionView.setNeedsLayout()
+//        collectionView.setNeedsDisplay()
+//        collectionView.invalidateIntrinsicContentSize()
+//        collectionView.collectionViewLayout.invalidateLayout() // this is useful
     }
     
     let size_padding                                      = CGFloat(15)
@@ -92,11 +93,9 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
     
     func setUI(){
         
-//        self.backgroundColor                              = UIColor.blackColor()
         let layout                                        = UICollectionViewFlowLayout()
-        layout.scrollDirection                            = .Horizontal
+        layout.scrollDirection                            = .Vertical
         
-   
         layout.sectionInset                               = UIEdgeInsets(top: 0, left: size_padding, bottom: size_padding, right: size_padding)
         let item_width                                    = ( MGScreenWidth - size_padding * 2 - size_line_spacing * 1 ) / 2
         let item_height                                   = item_width
@@ -110,17 +109,16 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         let frame                                         = CGRectMake(0, 0, MGScreenWidth, heightAll)
         
         collectionView                                    = UICollectionView(frame: frame, collectionViewLayout: layout)
-        collectionView.backgroundColor                    = UIColor.blackColor()
         collectionView.delegate                           = self
         collectionView.dataSource                         = self
         collectionView.backgroundColor                    = UIColor.clearColor()
-        collectionView.autoresizingMask                   = [UIViewAutoresizing.FlexibleHeight , UIViewAutoresizing.FlexibleWidth] //其实没啥用
+//        collectionView.autoresizingMask                   = [UIViewAutoresizing.FlexibleHeight , UIViewAutoresizing.FlexibleWidth] //其实没啥用
         collectionView.registerClass(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self, forCellWithReuseIdentifier:String(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell))
         collectionView.showsVerticalScrollIndicator       = false
         collectionView.showsHorizontalScrollIndicator     = false
         
-        
         self.addSubview(collectionView)
+       
         
     }
     

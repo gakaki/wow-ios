@@ -188,6 +188,9 @@ extension AppDelegate:DeepShareDelegate{
 //        let vc_designer_list = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList
 //        window?.rootViewController =  vc_designer_list
 //          window?.rootViewController = UINavigationController(rootViewController: VCCategoryChoose())
+        
+        window?.rootViewController = UINavigationController(rootViewController: VCShopping())
+
     }
     
 

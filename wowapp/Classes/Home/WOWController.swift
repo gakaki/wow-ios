@@ -18,6 +18,8 @@ class WOWController: WOWBaseViewController {
     
     var bottomListCount :Int = 0//底部列表数组的个数
     
+    var offsetY :CGFloat = 0
+    
     
     let group = dispatch_group_create() // 分组网络请求
     
@@ -29,6 +31,15 @@ class WOWController: WOWBaseViewController {
 //         self.tabBarController!.title = "尖叫设计"
         setUI()
         addObserver()
+        self.view.addSubview(self.topBtn)
+
+        self.topBtn.snp_makeConstraints { (make) in
+            make.width.equalTo(98)
+            make.height.equalTo(30)
+            make.centerX.equalTo(self.view)
+            make.top.equalTo(self.view).offset(10)
+        }
+        self.topBtn.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -64,6 +75,21 @@ class WOWController: WOWBaseViewController {
         let a =  UIApplication.sharedApplication().delegate as! AppDelegate
         return a
     }()
+    
+    //MARK:Lazy
+    lazy var topBtn:UIButton = {
+        var btn = UIButton(type: UIButtonType.Custom)
+        btn = btn as UIButton
+        btn.setBackgroundImage(UIImage(named: "backTop"), forState: .Normal)
+        btn.addTarget(self, action:#selector(backTop), forControlEvents:.TouchUpInside)
+        return btn
+    }()
+    func backTop()  {
+        let index = NSIndexPath.init(forRow: 0, inSection: 0)
+        self.tableView.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.None, animated: true)
+//        self.tableView.setContentOffset(CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top), animated: true)
+    }
+    
     func loginSuccess()  {// 重新刷新数据
         request()
     }
@@ -493,7 +519,19 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         return view
         
     }
-    
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if pageIndex >= 4 {
+            self.topBtn.hidden = false
+            if offsetY == 0 {
+                offsetY = scrollView.mj_offsetY
+            }
+        }
+        if scrollView.mj_offsetY < offsetY {
+            self.topBtn.hidden = true
+        }
+        
+    }
 }
 extension WOWController:HomeBottomDelegate{
     

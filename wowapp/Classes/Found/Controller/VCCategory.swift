@@ -2,11 +2,7 @@
 import UIKit
 import SnapKit
 import VTMagic
-
-let kAnimationDuration = 0.25
-let kIndicatorViewH: CGFloat = 3     // 首页顶部标签指示条的高度
-let kTitlesViewH: CGFloat = 25          // 顶部标题的高度
-let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度倍
+import RxSwift
 
 
 class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource
@@ -16,15 +12,10 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     var top_category_image_view:UIImageView!    = UIImageView()
     var v_bottom : VCVTMagic!
 
-    var cid                 = "10"
-    
-    var prev_page_index:UInt    = 0
-    var current_page_index:UInt = 0 {
-        didSet{
-            prev_page_index = oldValue
-        }
-    }
-    
+    var cid                                     = "10"
+    var ob_cid                                  = Variable(10)
+    var ob_tab_index                            = Variable(UInt(0))
+
     override func request(){
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
@@ -43,42 +34,26 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             }
             
         }){ (errorMsg) in
-            print(errorMsg)
+            DLog(errorMsg)
         }
     }
 
     
-//    self.reset_fetch_params()
-//    refresh_view()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let r = mockRequest("POST", "http://www.google.com").
-//        withHeaders(["Accept": "application/json"]).
-//        isUpdatePartResponseBody(false).
-//        andReturn(200).
-//        withBody("google.json");
-        
-        
-//        mockRequest("GET", "\(BaseUrl)category/sub-category(.*?)".regex()).andReturn(200).withBody("city.json")
-        
+
         request()
+ 
+        _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
+            ($0,$1)
+        }.throttle(0.3, scheduler: MainScheduler.instance)
+        .subscribe(onNext: { cid,tab_index in
+            self.refreshSubView(tab_index)
+        })
         
-        trigger()
+
     }
-    func trigger(){
-       
-//        // s,t を結合
-//        _ = Observable.combineLatest(cid, query_asc , query_sortBy,query_showCount) {
-//            "\($0)\($1)\($2)\($3) "
-//            }
-//            .subscribe {
-//                print($0)
-//        }
-        
-        
-    }
-    
+
     @IBOutlet weak var cv: UICollectionView!
     
     override func setUI()
@@ -132,14 +107,11 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         
         v_bottom.magicView.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(self.view)
-            make.top.equalTo(cv.snp_bottom)
-            make.bottom.equalTo(self.view.bottom)
-            
+            make.top.equalTo(self.cv.snp_bottom)
+            make.bottom.equalTo(self.snp_bottomLayoutGuideBottom)
         }
-
         
         v_bottom.magicView.reloadData()
-//        v_bottom.magicView.switchToPage(0, animated: true)
     }
     
 
@@ -232,11 +204,11 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             cell.selected  = true;
             if ( row.categoryID != nil ){
                 self.cid = "\(row.categoryID!)"
+                self.ob_cid.value = row.categoryID!
             }
         }
     }
     
-
 }
 
 
@@ -264,15 +236,10 @@ extension VCCategory:VTMagicViewDataSource{
         if ( button == nil) {
             
             let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRectMake(0, 0, self.view.frame.width / 3, 50)) { (asc) in
-                print("you clicket status is "  , asc)
-                
-                
-                //刷新该死的第三个magicview的数值
-                
-                
-            }
 
-            
+            }
+            b.btnIndex = itemIndex
+                
             if ( itemIndex <= 1) {
                 b.image_is_show = false
             }else{
@@ -293,7 +260,7 @@ extension VCCategory:VTMagicViewDataSource{
         return vc!;
     }
     func touchClick(btn:UIButton){
-        print(btn.state)
+        DLog(btn.state)
     }
 }
 
@@ -301,10 +268,9 @@ extension VCCategory:VTMagicViewDataSource{
 
 extension VCCategory:VTMagicViewDelegate{
     
-    func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-        
-        current_page_index = pageIndex
-        print("prev_page_index:", self.prev_page_index);
+    func refreshSubView( tab_index:UInt )
+    {
+        DLog("cid \(cid) tab_index \(tab_index)")
 
         if let b = magicView.menuItemAtIndex(pageIndex) as! TooglePriceBtn? {
             if prev_page_index != pageIndex {
@@ -318,33 +284,32 @@ extension VCCategory:VTMagicViewDelegate{
         
         if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? ,
             vc = magicView.viewControllerAtPage(itemIndex) as? VCCategoryProducts
+        if let b    = self.v_bottom.magicView.menuItemAtIndex(tab_index) as! TooglePriceBtn? ,
+                vc  = self.v_bottom.magicView.viewControllerAtPage(tab_index) as? VCCategoryProducts
         {
-            print("  button asc is ", b.asc)
-
-            
-            
-            //            vc.query_currentPage   = 1
-            //            vc.query_showCount     = 30
-
-            let query_sortBy       = Int(pageIndex) + 1 //从0开始呀这个 viewmagic的pageindex
+            let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
             let query_cid          = self.cid.toInt()!
             var query_asc          = 1
-            if ( pageIndex == 2){
+            if ( tab_index == 2){ //价格的话用他的排序 其他 正常升序
                 query_asc          = b.asc
             }else{
                 query_asc          = 1
             }
-
+            
             vc.query_sortBy        = query_sortBy
             vc.query_asc           = query_asc
             vc.query_categoryId    = query_cid
             
             vc.request()
-            //导航默认选中第一个 若不是分页的话
-            
         }
-
-        
+    }
+    
+    func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
+        self.ob_tab_index.value = pageIndex
+    }
+    
+    func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
+        self.ob_tab_index.value = itemIndex
     }
     
 }

@@ -4,7 +4,7 @@ import UIKit
 
 class TooglePriceBtn:UIButton {
     
-    
+    var btnIndex:UInt = 0
     
     var asc:Int {
         get {

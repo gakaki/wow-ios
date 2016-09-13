@@ -44,11 +44,11 @@ class VCCategoryProducts:WOWBaseViewController
     {
         super.setUI()
         
-        
-        
         edgesForExtendedLayout = .None
         
-        cv = UICollectionView(frame: self.view.bounds, collectionViewLayout: self.layout)
+        
+        let frame = CGRectMake(0,0, MGScreenWidth, MGScreenHeight - 210)
+        cv = UICollectionView(frame: frame, collectionViewLayout: self.layout)
         cv.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
         //        view.backgroundColor = UIColor(patternImage: UIImage(named: "10")!)
 
@@ -66,8 +66,9 @@ class VCCategoryProducts:WOWBaseViewController
         
         cv.emptyDataSetSource = self;
         cv.emptyDataSetDelegate = self;
+ 
 
-        cv.mj_footer = self.mj_footer
+//        cv.mj_footer = self.mj_footer
         
         self.view.addSubview(cv)
         
@@ -77,9 +78,11 @@ class VCCategoryProducts:WOWBaseViewController
         self.mj_footer.setTitle("", forState: MJRefreshState.Refreshing)
         self.mj_footer.setTitle("", forState: MJRefreshState.Pulling)
         
-        //为了在autolayout的视图里获得真的宽度 主要是给snapkit用的要先来一次
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
+//        //为了在autolayout的视图里获得真的宽度 主要是给snapkit用的要先来一次
+//        view.setNeedsLayout()
+//        view.layoutIfNeeded()
+        
+        
     }
     
   

@@ -4,11 +4,6 @@ import SnapKit
 import VTMagic
 import RxSwift
 
-let kAnimationDuration = 0.25
-let kIndicatorViewH: CGFloat = 3     // 首页顶部标签指示条的高度
-let kTitlesViewH: CGFloat = 25          // 顶部标题的高度
-let kIndicatorViewwRatio:CGFloat = 1.9  // 首页顶部标签指示条的宽度倍
-
 
 class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource
 {
@@ -68,12 +63,12 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         super.setUI()
         
         //为了在autolayout的视图里获得真的宽度
-//        self.view.setNeedsLayout()
-//        self.view.layoutIfNeeded()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
         
         self.edgesForExtendedLayout = .None
         
-        addTopView()
+//        addTopView()
         addBottomProductView()
 
     }
@@ -114,7 +109,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         
         v_bottom.magicView.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(self.view)
-            make.top.equalTo(cv.snp_bottom)
+            make.top.equalTo(self.cv.snp_bottom)
             make.bottom.equalTo(self.snp_bottomLayoutGuideBottom)
         }
         

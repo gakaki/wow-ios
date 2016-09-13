@@ -69,15 +69,16 @@ class HomeBottomCell: UITableViewCell {
             if let strongSelf = self{
                 
                 let favorite = JSON(result)["favorite"].bool
-                strongSelf.btnIsLikeOne.selected = favorite ?? false
-                strongSelf.delegate?.reloadTableViewData()
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+                if  favorite != nil{
+
+                       strongSelf.delegate?.reloadTableViewData()
+                    
+                }
+//  NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in
             
-            
         }
-        
     }
     @IBAction func favoriteActionTwo(sender: AnyObject) {
         
@@ -85,17 +86,19 @@ class HomeBottomCell: UITableViewCell {
             if let strongSelf = self{
                 
                 let favorite = JSON(result)["favorite"].bool
-                strongSelf.btnIsLikeTwo.selected = favorite ?? false
-                 strongSelf.delegate?.reloadTableViewData()
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+
+                if  favorite != nil{
+
+                    strongSelf.delegate?.reloadTableViewData()
+                    
+                }
+// NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in
-            
             
         }
         
     }
-
 
     func showDataOne(model:WOWFoundProductModel) {
 

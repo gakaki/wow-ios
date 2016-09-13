@@ -78,6 +78,9 @@ class WOWController: WOWBaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWRefreshFavoritNotificationKey, object:nil)
+        
     }
     
     lazy var banner:WOWBanner = {
@@ -187,9 +190,14 @@ class WOWController: WOWBaseViewController {
     }
     
     func requestTop() {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_List(region: 1), successClosure: {[weak self] (result) in
+        var params = [String: AnyObject]?()
+     
+        params = ["pageId": 1, "region": 1]
+       
+
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_List(params: params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                WOWHud.dismiss()
+               
                 
                 let json = JSON(result)
                 DLog(json)
@@ -204,6 +212,7 @@ class WOWController: WOWBaseViewController {
                 }
                 if strongSelf.bottomListArray.count > 0 {
                      strongSelf.tableView.reloadData()
+                     WOWHud.dismiss()
                 }
                
                 //                dispatch_group_leave(strongSelf.group);// 减少计数，证明此网络请求结束
@@ -226,7 +235,7 @@ class WOWController: WOWBaseViewController {
         
         WOWNetManager.sharedManager.requestWithTarget(.Api_Home_BottomList(params : params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                WOWHud.dismiss()
+               
                 strongSelf.endRefresh()
                 
                 let json = JSON(result)
@@ -259,6 +268,7 @@ class WOWController: WOWBaseViewController {
                 }
                 if strongSelf.dataArr.count > 0 {
                     strongSelf.tableView.reloadData()
+                     WOWHud.dismiss()
                 }
 
                 //                dispatch_group_leave(strongSelf.group);

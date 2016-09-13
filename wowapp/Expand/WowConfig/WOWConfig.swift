@@ -144,7 +144,7 @@ let FontMediumlevel003 = UIFont.mediumScaleFontSize(13)
 /// 12号字体
 let FontMediumlevel004 = UIFont.mediumScaleFontSize(12)
 
-
+let product = "placeholder_product" // 产品展位图
 
 //MARK:Layer
 func WOWBorderColor(view:UIView){

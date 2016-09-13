@@ -19,7 +19,7 @@ public enum RequestApi{
     case Api_Home_Banners
     
     // 首页Url
-    case Api_Home_List(region: Int)
+    case Api_Home_List(params: [String: AnyObject]?)
     
     // 首页底部列表
     case Api_Home_BottomList(params: [String: AnyObject]?)
@@ -519,8 +519,8 @@ extension RequestApi:TargetType{
             case .Api_Home_Banners():
                 params =  ["pageType":1]
             
-            case let .Api_Home_List(region):
-                params = ["pageId":1, "region":region]
+            case let .Api_Home_List(param):
+                params = param
             
             case let .Api_Home_BottomList(param):
                 params = param

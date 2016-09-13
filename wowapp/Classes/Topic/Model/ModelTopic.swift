@@ -23,22 +23,28 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
     var groupId                     :Int?
     var canShow                     :Int?
     var createTime                  :NSNumber?
-    var products                  :[WOWProductModel]?
+    var products                    :[WOWProductModel]?
+    var brand                       :WOWBrandStyleModel?
+    var likeQty                     :Int?
+    var readQty                     :Int?
     required init?(_ map: Map) {
         
         
     }
     
     func mapping(map: Map) {
-        id             <- map["id"]
-        topicName      <- map["topicName"]
-        topicImg       <- map["topicImg"]
-        topicMainTitle <- map["topicMainTitle"]
-        topicDesc      <- map["topicDesc"]
-        topicType      <- map["topicType"]
-        groupId        <- map["groupId"]
-        canShow        <- map["canShow"]
-        createTime     <- map["createTime"]
-        products     <- map["products"]
+        id              <- map["id"]
+        topicName       <- map["topicName"]
+        topicImg        <- map["topicImg"]
+        topicMainTitle  <- map["topicMainTitle"]
+        topicDesc       <- map["topicDesc"]
+        topicType       <- map["topicType"]
+        groupId         <- map["groupId"]
+        canShow         <- map["canShow"]
+        createTime      <- map["createTime"]
+        products        <- map["products"]
+        brand           <- map["brand"]
+        likeQty         <- map["likeQty"]
+        readQty         <- map["readQty"]
     }
 }

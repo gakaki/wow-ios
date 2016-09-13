@@ -35,7 +35,7 @@ let  WOWLoginSuccessNotificationKey     = "WOWLoginSuccessNotificationKey"
 //修改信息成功，更新主界面的信息
 let  WOWChangeUserInfoNotificationKey     = "WOWChangeUserInfoNotificationKey"
 
-//登录成功
+//刷新喜欢列表
 let  WOWRefreshFavoritNotificationKey     = "WOWRefreshFavoritNotificationKey"
 
 //退出登录

@@ -9,13 +9,15 @@
 import UIKit
 
 class WOWHotStyleMain: WOWBaseViewController {
-    let cellID = String(WOWHotStyleCell)
-      @IBOutlet var tableView: UITableView!
+    let cellID      = String(WOWHotStyleCell)
+    var dataArr     = [WOWHomeModle]()    //商品列表数组
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "精选"
         // Do any additional setup after loading the view.
-        
+        request()
     }
     
     //MARK:Private Method
@@ -25,9 +27,45 @@ class WOWHotStyleMain: WOWBaseViewController {
         tableView.registerNib(UINib.nibName(String(WOWHotStyleCell)), forCellReuseIdentifier:cellID)
         self.tableView.backgroundColor = GrayColorLevel6
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.mj_header = mj_header
         tableView.estimatedRowHeight = 410
     }
+    override func request() {
+        super.request()
+        var params = [String: AnyObject]?()
+        
+        params = ["pageId": 3]
+        
+        
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_List(params: params), successClosure: {[weak self] (result) in
+            if let strongSelf = self{
+                
+                
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.endRefresh()
+                
+                let bannerList = Mapper<WOWHomeModle>().mapArray(JSON(result)["modules"].arrayObject)
+                
+                if let brandArray = bannerList{
+                    strongSelf.dataArr = []
+                    strongSelf.dataArr = brandArray
+                    
+                }
+             
+                    strongSelf.tableView.reloadData()
+                    WOWHud.dismiss()
 
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+        
+
+    }
       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,7 +74,7 @@ class WOWHotStyleMain: WOWBaseViewController {
 extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 5;
+        return dataArr.count;
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1;
@@ -45,10 +83,10 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
         
         let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWHotStyleCell
         
-//        cell.delegate       = self
-        
-//        cell.showData(model.moduleContent!)
-        
+        let homeModel = dataArr[indexPath.section]
+            
+        cell.showData(homeModel)
+
         cell.selectionStyle = .None
         
         return cell

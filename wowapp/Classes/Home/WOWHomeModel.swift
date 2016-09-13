@@ -8,28 +8,29 @@
 
 import UIKit
 import ObjectMapper
-class WOWHomeModel: WOWBaseModel,Mappable {
-    var pageId               :   Int?
-    var region          :   Int?
-    var moduleDataList          :  [WOWHomeModle]?
-    
-    required init?(_ map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        pageId                 <- map["pageId"]
-        region            <- map["region"]
-        moduleDataList            <- map["modules"]
-        
-    }
-
-}
+//class WOWHomeModel: WOWBaseModel,Mappable {
+//    var pageId               :   Int?
+//    var region          :   Int?
+//    var moduleDataList          :  [WOWHomeModle]?
+//    
+//    required init?(_ map: Map) {
+//        
+//    }
+//    
+//    func mapping(map: Map) {
+//        pageId                 <- map["pageId"]
+//        region            <- map["region"]
+//        moduleDataList            <- map["modules"]
+//        
+//    }
+//
+//}
 final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleType    :   Int?
     var moduleContent           :  WOWCarouselBanners?
     var moduleContentList       :  WOWModelVoTopic?//产品列表CollectionView
-    
+    var moduleImage         : String?
+    var moduleTitle         : String?
     required init?(_ map: Map) {
         
     }
@@ -44,6 +45,10 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
             moduleContent         <- map["moduleContent"]
         case 601://产品列表CollectionView
             moduleContentList         <- map["moduleContent"]
+        case 701://产品列表CollectionView
+            moduleImage         <- map["moduleImage"]
+            moduleTitle         <- map["moduleTitle"]
+            moduleContentList   <- map["moduleContent"]
         default:
             break
         }

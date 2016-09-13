@@ -271,24 +271,9 @@ extension VCCategory:VTMagicViewDelegate{
     func refreshSubView( tab_index:UInt )
     {
         DLog("cid \(cid) tab_index \(tab_index)")
-
-<<<<<<< HEAD
-        if let b = magicView.menuItemAtIndex(pageIndex) as! TooglePriceBtn? {
-            if prev_page_index != pageIndex {
-                b.sendActionsForControlEvents(.TouchUpInside)
-            }
-        }
-    }
-    
-    func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
-        print("didSelectItemAtIndex:", itemIndex);
         
-        if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? ,
-            vc = magicView.viewControllerAtPage(itemIndex) as? VCCategoryProducts
-=======
         if let b    = self.v_bottom.magicView.menuItemAtIndex(tab_index) as! TooglePriceBtn? ,
-                vc  = self.v_bottom.magicView.viewControllerAtPage(tab_index) as? VCCategoryProducts
->>>>>>> a83f129cadc7ffe6009917e928bcdc772ed1e9b0
+            vc  = self.v_bottom.magicView.viewControllerAtPage(tab_index) as? VCCategoryProducts
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
             let query_cid          = self.cid.toInt()!

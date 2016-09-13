@@ -28,6 +28,7 @@ import Foundation
 let URL_category                        = "category/sub-category"
 let URL_producty_by_category            = "category/product"
 let URL_category_subCategory_with_image = "category/img-category"
+let URL_category_v2                     = "category"
 
 let URL_scene                   = "scene"
 
@@ -48,6 +49,8 @@ let URL_home_List               = "page"     // 首页 全新场景
 let URL_home_BottomList         = "product/recommend"     //首页 底部列表
 
 let URL_Search_hot              = "product/search/hot-keywords"  //热门搜索
+
+let URL_Search_result           = "product/condition"           //搜索结果
 
 //2.2商品列表
 let URL_product                 = "product"

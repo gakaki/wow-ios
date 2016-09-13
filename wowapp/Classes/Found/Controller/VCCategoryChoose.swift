@@ -18,9 +18,12 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         }
         
         func setModel(m:WOWFoundCategoryModel){
- 
+//            label_name.text      = m.categoryName
+//            print(label_name)
+//            if let pic = m.productImg {
                 pictureImageView.set_webimage_url(m.productImg)
                 label_name.text      = m.categoryName
+//            }
         }
         
         override init(frame: CGRect) {
@@ -122,7 +125,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
     //左侧和右侧数据
     var vo_categories_arr           = [WOWFoundCategoryModel]()
     var vo_categories_sub_arr       = [WOWFoundCategoryModel]()
-    var cid                         = "10"
+    var cid                         = "0"
     let tv_width                    = 110.w
     
     
@@ -205,12 +208,12 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         super.request()
         
         WOWHud.showLoading()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category_V2(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
 
                 let r                             =  JSON(result)
-                strongSelf.vo_categories_arr      =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                strongSelf.vo_categories_arr      =  Mapper<WOWFoundCategoryModel>().mapArray( r["children"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.tv.reloadData()
                 
                 //默认选中第一个 触发collection变化
@@ -278,7 +281,7 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
         let cell                = tableView.dequeueReusableCellWithIdentifier(String(TvCell), forIndexPath: indexPath) as! TvCell
         cell.selectionStyle     = .None
         let model               = vo_categories_arr[indexPath.section]
-        cell.setModel(model) 
+        cell.setModel(model)
         
         
         return cell

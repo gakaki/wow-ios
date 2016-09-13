@@ -117,29 +117,29 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
         let model = dataArr?[indexPath.item]
         if let m = model{
             cell.showData(m, indexPath: indexPath)
-            cell.likeBtn.tag = m.productId!
-            cell.likeBtn.addTarget(self, action: #selector(WOWHomeFormCell.favorite(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//            cell.likeBtn.tag = m.productId!
+//            cell.likeBtn.addTarget(self, action: #selector(WOWHomeFormCell.favorite(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
     
         return cell
     }
-    func favorite(sender: UIButton) {
-        
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:sender.tag ?? 0), successClosure: { [weak self](result) in
-            if let strongSelf = self{
-                
-//                let favorite = JSON(result)["favorite"].bool
-//                sender.selected = favorite ?? false // 在这注释掉，是因为会多闪一下
-                
-                strongSelf.delegate?.reloadBottomTableViewData()
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-            }
-        }) { (errorMsg) in
-            
-            
-        }
-
-    }
+//    func favorite(sender: UIButton) {
+//        
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:sender.tag ?? 0), successClosure: { [weak self](result) in
+//            if let strongSelf = self{
+//                
+////                let favorite = JSON(result)["favorite"].bool
+////                sender.selected = favorite ?? false // 在这注释掉，是因为会多闪一下
+//                
+//                strongSelf.delegate?.reloadBottomTableViewData()
+//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+//            }
+//        }) { (errorMsg) in
+//            
+//            
+//        }
+//
+//    }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 75)
     }

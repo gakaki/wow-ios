@@ -4,6 +4,8 @@ import UIKit
 
 class TooglePriceBtn:UIButton {
     
+    
+    
     var asc:Int {
         get {
             return Int(upDown)
@@ -37,9 +39,10 @@ class TooglePriceBtn:UIButton {
                     self.setImage(UIImage(named: "btnPriceStatusDown"), forState: UIControlState.Selected)
                 }
                 
-                if let a = self.action {
-                    a(asc: asc) // up 0 down 1
-                }
+                
+            }
+            if let a = self.action {
+                a(asc: asc) // up 0 down 1
             }
             
         }

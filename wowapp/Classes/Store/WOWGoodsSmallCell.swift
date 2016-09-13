@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol WOWGoodsSmallCellDelegate: class {
+    func likeClick(productId: Int)
+}
+
 class WOWGoodsSmallCell: UICollectionViewCell {
      class var itemWidth:CGFloat{
         get{
@@ -15,6 +19,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }
     }
     
+    weak var delegate: WOWGoodsSmallCellDelegate?
     var productId :Int?
     @IBOutlet weak var label_soldout: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
@@ -68,5 +73,27 @@ class WOWGoodsSmallCell: UICollectionViewCell {
             likeBtn.selected = false
     
         }
+        
+        likeBtn.addTarget(self, action: #selector(likeClick(_:)), forControlEvents: .TouchUpInside)
     }
+    
+    func likeClick(sender: UIButton)  {
+        requestFavoriteProduct(productId ?? 0)
+    }
+    
+    //用户喜欢某个单品
+    func requestFavoriteProduct(productId: Int)  {
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+            }
+        }) { (errorMsg) in
+            
+            
+        }
+    }
+    
+    
 }

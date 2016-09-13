@@ -12,7 +12,8 @@ class WOWSearchTagView: UIView {
     @IBOutlet weak var hotTagListView: TagListView!
     @IBOutlet weak var historyTagListView: TagListView!
     @IBOutlet weak var deleteButton: UIButton!
-    
+    @IBOutlet weak var hotSearchView: UIView!
+    @IBOutlet weak var hisSearchView: UIView!
     
     /*
     // Only override drawRect: if you perform custom drawing.

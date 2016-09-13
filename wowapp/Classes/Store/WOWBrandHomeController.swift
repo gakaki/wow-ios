@@ -333,6 +333,9 @@ class WOWBrandHomeController: WOWBaseViewController {
             
         }
     }
+    
+   
+    
 }
 
 
@@ -349,6 +352,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
         let model = dataArr[indexPath.row]
         cell.showData(model, indexPath: indexPath)
+//        cell.delegate = self
 
         return cell
     }
@@ -389,6 +393,16 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     }
 }
 
+//extension WOWBrandHomeController: WOWGoodsSmallCellDelegate {
+//    func likeClick(productId: Int) {
+//        if WOWUserManager.loginStatus{
+////            strongSelf.goUserInfo()
+////            requestFavoriteProduct(productId)
+//        }else{
+//            toLoginVC(true)
+//        }
+//    }
+//}
 
 extension WOWBrandHomeController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

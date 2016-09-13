@@ -413,6 +413,8 @@
 		63884A081D64150F00FCCFCC /* WOWCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63884A061D64150F00FCCFCC /* WOWCategoryCell.xib */; };
 		638B18A41D7829F800F89C76 /* HolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B18A31D7829F800F89C76 /* HolderTextView.swift */; };
 		63B8AB1E1D7E65DA00282536 /* WOWSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8AB1D1D7E65DA00282536 /* WOWSearchManager.swift */; };
+		63BB5AA21D86A86F00F41580 /* WOWEmptySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB5AA11D86A86F00F41580 /* WOWEmptySearchView.swift */; };
+		63BB5AA41D86A87A00F41580 /* WOWEmptySearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BB5AA31D86A87A00F41580 /* WOWEmptySearchView.xib */; };
 		63C42DC61D646B0400879FEB /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC11D646B0400879FEB /* PhotoBrowser.swift */; };
 		63C42DC71D646B0400879FEB /* PhotoToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC21D646B0400879FEB /* PhotoToolBar.swift */; };
 		63C42DC81D646B0400879FEB /* PhotoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C42DC31D646B0400879FEB /* PhotoViewCell.swift */; };
@@ -887,6 +889,8 @@
 		638B18A31D7829F800F89C76 /* HolderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HolderTextView.swift; sourceTree = "<group>"; };
 		63B8AACE1D7D7B0F00282536 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = "../../../Library/Developer/Xcode/DerivedData/WowApp-aiwpknyejtbkehdaaierqyyhxkfh/Build/Products/Debug-iphonesimulator/SQLite.swift/SQLite.framework"; sourceTree = "<group>"; };
 		63B8AB1D1D7E65DA00282536 /* WOWSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchManager.swift; sourceTree = "<group>"; };
+		63BB5AA11D86A86F00F41580 /* WOWEmptySearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWEmptySearchView.swift; sourceTree = "<group>"; };
+		63BB5AA31D86A87A00F41580 /* WOWEmptySearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWEmptySearchView.xib; sourceTree = "<group>"; };
 		63C42DC11D646B0400879FEB /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
 		63C42DC21D646B0400879FEB /* PhotoToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoToolBar.swift; sourceTree = "<group>"; };
 		63C42DC31D646B0400879FEB /* PhotoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewCell.swift; sourceTree = "<group>"; };
@@ -1991,6 +1995,8 @@
 				2D45AC461D7D420400EF3835 /* HomeBrannerCell.xib */,
 				635A4DDB1D7FC030006FFCB6 /* WOWSearchTagView.swift */,
 				635A4DDD1D7FC053006FFCB6 /* WOWSearchTagView.xib */,
+				63BB5AA11D86A86F00F41580 /* WOWEmptySearchView.swift */,
+				63BB5AA31D86A87A00F41580 /* WOWEmptySearchView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2281,6 +2287,7 @@
 				29FF26831CFDA86300DF2A9B /* WOWBaseStyleCell.xib in Resources */,
 				2D3273FD1D754DD80013BDB1 /* HomeBottomCell.xib in Resources */,
 				2D32740D1D77F9A20013BDB1 /* loadRefresh.gif in Resources */,
+				63BB5AA41D86A87A00F41580 /* WOWEmptySearchView.xib in Resources */,
 				63C42DCE1D65642B00879FEB /* WOWProductOrderCell.xib in Resources */,
 				29FF26FB1CFDA86300DF2A9B /* UMSCommentInputController.xib in Resources */,
 				636C33D01D51DB3700CA4E69 /* WOWTypeCollectionCell.xib in Resources */,
@@ -2640,6 +2647,7 @@
 				29FF26DD1CFDA86300DF2A9B /* WOWShareManager.swift in Sources */,
 				632A935A1D4B50F7003A5966 /* WOWProductSpecModel.swift in Sources */,
 				29FF26631CFDA86300DF2A9B /* WOWSceneModel.swift in Sources */,
+				63BB5AA21D86A86F00F41580 /* WOWEmptySearchView.swift in Sources */,
 				29FF268C1CFDA86300DF2A9B /* WOWAttributeModel.swift in Sources */,
 				29FF268D1CFDA86300DF2A9B /* WOWBannerModel.swift in Sources */,
 				29FF26BB1CFDA86300DF2A9B /* WOWILikeController.swift in Sources */,

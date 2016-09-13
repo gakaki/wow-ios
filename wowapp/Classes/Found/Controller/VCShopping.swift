@@ -45,9 +45,6 @@ class VCShopping: WowBaseVCCartSearch {
         vc_brand    = UIStoryboard.initialViewController("Brand", identifier:String(WOWBrandListController)) as! WOWBrandListController
         vc_designer = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList
         
-        
-        
-        
         addChildViewController(vc_found!)
         addChildViewController(vc_brand!)
         addChildViewController(vc_designer!)
@@ -119,15 +116,7 @@ extension VCShopping:VTMagicViewDataSource{
         return vc!
     }
 }
-//extension ViewController:VTMagicReuseProtocol{
-//    func vtm_prepareForReuse(){
-//        pring("clear old data if needed: ", self)
-////        self.copy()
-////        [self.collectionView setContentOffset:CGPointZero];
-//    }
-//
-//}
-//
+
 extension VCShopping:VTMagicViewDelegate{
     func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         print("viewDidAppear:", pageIndex);

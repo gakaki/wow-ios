@@ -76,7 +76,6 @@ class VCTopicHeaderView:UICollectionReusableView{
         }
         label_desc.snp_makeConstraints { (make) -> Void in
             make.width.equalTo( self.frame.width * 0.7 )
-//            make.height.equalTo(100)
             make.centerX.equalTo(self.snp_centerX)
             make.top.equalTo(label_name.snp_bottom).offset(5)
         }

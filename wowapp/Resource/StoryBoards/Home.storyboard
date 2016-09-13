@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-207" y="1142"/>
         </scene>
-        <!--尖叫-->
+        <!--尖叫设计-->
         <scene sceneID="bzw-ue-Dsp">
             <objects>
-                <viewController storyboardIdentifier="WOWController" title="尖叫" automaticallyAdjustsScrollViewInsets="NO" id="iWL-Oz-JyM" customClass="WOWController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWController" title="尖叫设计" automaticallyAdjustsScrollViewInsets="NO" id="iWL-Oz-JyM" customClass="WOWController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zth-Uz-Pao"/>
                         <viewControllerLayoutGuide type="bottom" id="Qr7-pK-v6K"/>
@@ -63,6 +63,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4TL-3M-Zrf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="437" y="1886"/>
+        </scene>
+        <!--Search Child Controller-->
+        <scene sceneID="9pm-4I-9RS">
+            <objects>
+                <viewController storyboardIdentifier="WOWSearchChildController" id="xIA-EI-VR5" customClass="WOWSearchChildController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wun-Qi-xCQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="hYh-pH-xBY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="agS-oZ-ndb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kMz-wK-YYB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewLayout key="collectionViewLayout" id="Tff-du-cJp"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5sB-ZI-qjl">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="xIA-EI-VR5" id="b0h-j6-3eP"/>
+                                    <outlet property="delegate" destination="xIA-EI-VR5" id="Jxb-0q-97D"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kMz-wK-YYB" firstAttribute="top" secondItem="agS-oZ-ndb" secondAttribute="top" id="EEY-tC-ktB"/>
+                            <constraint firstAttribute="trailing" secondItem="kMz-wK-YYB" secondAttribute="trailing" id="HgB-ku-7Zz"/>
+                            <constraint firstItem="hYh-pH-xBY" firstAttribute="top" secondItem="kMz-wK-YYB" secondAttribute="bottom" id="Ozu-rj-d6b"/>
+                            <constraint firstItem="kMz-wK-YYB" firstAttribute="leading" secondItem="agS-oZ-ndb" secondAttribute="leading" id="xcg-yA-8I6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="kMz-wK-YYB" id="dpG-RR-Gxh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eg9-n4-FFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="787" y="2219"/>
         </scene>
         <!--喜欢-->
         <scene sceneID="QUc-1l-x1X">
@@ -268,67 +317,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mHC-Ug-XcV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1193" y="782"/>
-        </scene>
-        <!--搜索子视图-->
-        <scene sceneID="HmX-pJ-0Az">
-            <objects>
-                <viewController storyboardIdentifier="WOWSearchChildController" title="搜索子视图" id="vj4-bI-v0s" customClass="WOWSearchChildController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VkB-ui-fMO"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZWs-k5-JjC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="55L-Wj-hYD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIy-or-tjJ" customClass="TagListView" customModule="wowapp" customModuleProvider="target">
-                                <rect key="frame" x="15" y="35" width="290" height="518"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="250" constant="100" id="bSU-G8-N4J"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="tagSelectedBackgroundColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
-                                        <real key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="marginY">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="marginX">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                        <color key="value" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="RIy-or-tjJ" secondAttribute="trailing" constant="15" id="E1h-4I-93R"/>
-                            <constraint firstItem="ZWs-k5-JjC" firstAttribute="top" secondItem="RIy-or-tjJ" secondAttribute="bottom" constant="15" id="E1j-hH-IyM"/>
-                            <constraint firstItem="RIy-or-tjJ" firstAttribute="top" secondItem="VkB-ui-fMO" secondAttribute="bottom" constant="15" id="I4t-bq-jsG"/>
-                            <constraint firstItem="RIy-or-tjJ" firstAttribute="leading" secondItem="55L-Wj-hYD" secondAttribute="leading" constant="15" id="pep-4B-GQx"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="tagListView" destination="RIy-or-tjJ" id="VWn-Zj-nlO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v4l-ic-TJk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="816" y="2388"/>
         </scene>
         <!--搜索-->
         <scene sceneID="f5z-DS-P3L">

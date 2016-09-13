@@ -45,7 +45,6 @@ class VCShopping: WowBaseVCCartSearch {
         vc_brand    = UIStoryboard.initialViewController("Brand", identifier:String(WOWBrandListController)) as! WOWBrandListController
         vc_designer = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList
         
-        
         addChildViewController(vc_found!)
         addChildViewController(vc_brand!)
         addChildViewController(vc_designer!)

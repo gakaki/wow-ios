@@ -116,6 +116,7 @@ class WOWLoginController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.Api_Login(phone,passwd), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)
+                
                 let model = Mapper<WOWUserModel>().map(result)
                 WOWUserManager.saveUserInfo(model)
                 strongSelf.toLoginSuccess(strongSelf.isPresent)

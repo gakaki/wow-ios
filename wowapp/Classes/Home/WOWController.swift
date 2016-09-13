@@ -26,6 +26,7 @@ class WOWController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
+         self.title = "尖叫设计"
         setUI()
         addObserver()
     }

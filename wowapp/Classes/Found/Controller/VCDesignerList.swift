@@ -197,12 +197,18 @@ extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let model = dataArray[indexPath.section][indexPath.row]
+        
         //设计师的首页
-//        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-//        vc.brandID = model.id
-//        vc.hideNavigationBar = true
-//        navigationController?.pushViewController(vc, animated: true)
+
+        let model = dataArray[indexPath.section][indexPath.row]
+        
+        let vc                  = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.designerId           = model.designerId
+        vc.entrance             = .designerEntrance
+        vc.hideNavigationBar    = true
+//        self.parentViewController?.navigationController!.pushViewController(vc, animated: true)
+        
+        self.navigationController!.pushViewController(vc, animated: true)
     }
 }
 

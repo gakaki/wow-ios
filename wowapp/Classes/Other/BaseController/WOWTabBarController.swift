@@ -31,7 +31,7 @@ class WOWTabBarController: UITabBarController {
         self.view.backgroundColor = DefaultBackColor
         self.delegate = self
         
-        let storys =        ["Home",    "Found",       "Special",        "Favorite",     "User"      ]
+        let storys =        ["Home",    "Found",       "HotStyle",        "Favorite",     "User"      ]
         let images =        ["tab_home","tab_shopping","tab_special",  "tab_like",     "tab_me"    ]
         let imagesTitle =   ["首页",      "购物",       "精选",          "喜欢",          "我"        ]
     

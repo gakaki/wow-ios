@@ -189,8 +189,7 @@ extension AppDelegate:DeepShareDelegate{
 //        window?.rootViewController =  vc_designer_list
 //          window?.rootViewController = UINavigationController(rootViewController: VCCategoryChoose())
         
-        window?.rootViewController = UINavigationController(rootViewController: VCShopping())
-
+//        window?.rootViewController = UINavigationController(rootViewController: VCShopping())
     }
     
 

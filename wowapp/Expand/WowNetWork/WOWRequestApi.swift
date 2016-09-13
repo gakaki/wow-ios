@@ -67,6 +67,8 @@ public enum RequestApi{
     
     
     case Api_Category(categoryId:String) //查看分类
+    case Api_Category_V2(categoryId:String) //查看分类v2
+
     case Api_Category_subCategory_with_image(categoryId:String) //查看分类并且带上对应销量第一的商品的图片
     
     case Api_Product_By_Category(asc:Int , currentPage: Int, showCount :Int , sortBy:Int, categoryId:Int ) //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
@@ -198,6 +200,8 @@ extension RequestApi:TargetType{
         switch self{
         case .Api_Category:
             return URL_category
+        case .Api_Category_V2:
+            return URL_category_v2
 
         case .Api_Category_subCategory_with_image:
             return URL_category_subCategory_with_image
@@ -382,8 +386,12 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-
-        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products, .Api_Home_List, .Api_Home_BottomList, .Api_SearchResult, .Api_Module_Page2, .Api_SearchHot, .Api_DesignerList, .Api_Category_subCategory_with_image:
+        case .Api_Addresslist, Api_BrandList, .Api_Home_Banners, .Api_LikeBrand, .Api_LikeProduct, .Api_LikeDesigner, .Api_IsFavoriteProduct, .Api_IsFavoriteBrand, .Api_IsFavoriteDesigner, .Api_ProductDetail, .Api_ProductImgDetail, .Api_ProductSpec, .Api_OrderList,.Api_CartGet, .Api_AddressDefault, .Api_OrderSettle, .Api_BrandDetail, .Api_ProductBrand, .Api_Found_Main , .Api_Found_2nd, .Api_DesignerDetail, .Api_productDesigner, .Api_Category, .Api_PayResult, .Api_OrderDetail , .Api_Product_By_Category , .Api_Coupons , .Api_Topics, .Api_Topic_Products, .Api_Home_List, .Api_Home_BottomList
+            ,Api_Module_Page2,
+            .Api_SearchHot, .Api_SearchResult,
+            .Api_DesignerList,
+            .Api_Category_subCategory_with_image,
+            .Api_Category_V2:
 
             return .GET
 
@@ -399,6 +407,8 @@ extension RequestApi:TargetType{
         var params = [String: AnyObject]?()
         switch self{
             case let .Api_Category(categoryId):
+                params = ["categoryId":categoryId]
+            case let .Api_Category_V2(categoryId):
                 params = ["categoryId":categoryId]
             case let .Api_Category_subCategory_with_image(categoryId):
                 params = ["categoryId":categoryId]

@@ -39,8 +39,6 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     }
 
     
-//    self.reset_fetch_params()
-//    refresh_view()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,7 +66,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         
         self.edgesForExtendedLayout = .None
         
-//        addTopView()
+        addTopView()
         addBottomProductView()
 
     }

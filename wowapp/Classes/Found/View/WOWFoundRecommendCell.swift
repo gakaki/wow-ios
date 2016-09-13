@@ -154,7 +154,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
    
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
-        
+          WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:self.product?.productId ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.btnLike.selected = !strongSelf.btnLike.selected

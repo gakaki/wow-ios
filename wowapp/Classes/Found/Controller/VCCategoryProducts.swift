@@ -1,4 +1,6 @@
-import MJRefresh
+import RxSwift
+import RxCocoa
+
 
 class VCCategoryProducts:WOWBaseViewController
 {
@@ -30,6 +32,30 @@ class VCCategoryProducts:WOWBaseViewController
         fatalError("init(coder:) has not been implemented")
     }
 
+    
+    
+    let rx_disposeBag = DisposeBag()
+    func is_load_more(y:CGFloat) -> Bool
+    {
+        
+        let contentSize  = self.cv.contentSize.height
+        let view_height  = self.view.frame.size.height * 1.5
+        var is_load_more = false
+        if ( y > contentSize - view_height ) && ( contentSize - view_height > 0 ) {
+            is_load_more = true
+        }else{
+            is_load_more = false
+        }
+        
+        //        print( "conteoff  y  : ", y )
+        //        print( "view_height  : ", view_height )
+        //        print( "contentSize  : ", contentSize )
+        //        print( "is_load_more : ", is_load_more )
+        //        print( "contentSize - view_height : ", contentSize - view_height )
+        
+        return is_load_more
+    }
+    
     override func setUI()
     {
         super.setUI()
@@ -64,6 +90,23 @@ class VCCategoryProducts:WOWBaseViewController
 //        //为了在autolayout的视图里获得真的宽度 主要是给snapkit用的要先来一次
 //        view.setNeedsLayout()
 //        view.layoutIfNeeded()
+        
+        
+        self.cv.rx_contentOffset
+            .map { $0.y }
+            .map { y in
+                return self.is_load_more(y)
+            }
+            .distinctUntilChanged()
+            .subscribeNext { [unowned self] in
+                self.title = "contentOffset.y = \($0)"
+                print("rx_contentOffset : \(self.title!)")
+                
+                self.request()
+            
+            }.addDisposableTo(rx_disposeBag)
+        
+
     }
     
     override func request(){
@@ -81,12 +124,12 @@ class VCCategoryProducts:WOWBaseViewController
                   let data                  = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
                   DLog(strongSelf.vo_products.count)
     
-                  if ( data.count <= 0 || data.count < strongSelf.query_showCount){
-                      strongSelf.cv.mj_footer = nil
-                  }
-                  else{
-                      strongSelf.cv.mj_footer = strongSelf.mj_footer
-                  }
+//                  if ( data.count <= 0 || data.count < strongSelf.query_showCount){
+//                      strongSelf.cv.mj_footer = nil
+//                  }
+//                  else{
+//                      strongSelf.cv.mj_footer = strongSelf.mj_footer
+//                  }
     
                   //若是为第一页那么数据直接赋值
                   if ( strongSelf.pageIndex <= 1){
@@ -97,6 +140,7 @@ class VCCategoryProducts:WOWBaseViewController
                       strongSelf.vo_products         = [strongSelf.vo_products, data].flatMap { $0 }
                   }
     
+                
                   strongSelf.cv.reloadData()
               }
     

@@ -291,7 +291,13 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.likeButton.selected = favorite ?? false
-                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+
+                var params = [String: AnyObject]?()
+                
+                params = ["productId": strongSelf.productId!, "favorite": favorite!]
+                
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+//                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
             }) { (errorMsg) in
                 

@@ -105,10 +105,22 @@ class WOWController: WOWBaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
         
     }
-    
+    func refreshData(sender: NSNotification)  {
+        
+        for a in 0..<bottomListArray.count{
+            let model = bottomListArray[a]
+          
+            if model.productId! == sender.object!["productId"] as! Int {
+                model.favorite = sender.object!["favorite"] as? Bool
+            }
+            
+        }
+        self.tableView.reloadData()
+
+    }
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
         view.cyclePictureView.delegate = self
@@ -542,6 +554,7 @@ extension WOWController:HomeBottomDelegate{
         toVCProduct(model.productId)
         
     }
+    
     func reloadTableViewData(productId: Int?,favorite: Bool) {
 
         for a in 0..<bottomListArray.count{

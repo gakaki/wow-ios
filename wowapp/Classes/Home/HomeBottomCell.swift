@@ -11,7 +11,7 @@ protocol HomeBottomDelegate:class {
     // 跳转产品详情代理
     func goToProductDetailVC(indexRow: Int?)
     //刷新主页数据 有一个情况，当上面的collectionView 中的产品与下面的tableView的产品为同一个产品， 喜欢下面的，让上面的刷新
-    func reloadTableViewData()
+    func reloadTableViewData(productId: Int?,favorite:Bool)
     
 }
 
@@ -64,14 +64,14 @@ class HomeBottomCell: UITableViewCell {
 
     }
     @IBAction func favoriteActionOne(sender: AnyObject) {
-        
+        WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdOne ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 
                 let favorite = JSON(result)["favorite"].bool
                 if  favorite != nil{
 
-                       strongSelf.delegate?.reloadTableViewData()
+                       strongSelf.delegate?.reloadTableViewData(self!.productIdOne,favorite: favorite!)
                     
                 }
 //  NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
@@ -81,7 +81,7 @@ class HomeBottomCell: UITableViewCell {
         }
     }
     @IBAction func favoriteActionTwo(sender: AnyObject) {
-        
+          WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdTwo ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 
@@ -89,7 +89,7 @@ class HomeBottomCell: UITableViewCell {
 
                 if  favorite != nil{
 
-                    strongSelf.delegate?.reloadTableViewData()
+                    strongSelf.delegate?.reloadTableViewData(self!.productIdTwo,favorite: favorite!)
                     
                 }
 // NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)

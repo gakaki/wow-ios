@@ -286,6 +286,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
         
+            WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.likeButton.selected = !strongSelf.likeButton.selected

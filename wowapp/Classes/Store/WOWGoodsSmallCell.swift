@@ -84,6 +84,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     //用户喜欢某个单品
     func requestFavoriteProduct(productId: Int)  {
         
+          WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: { (result) in
 //            if let strongSelf = self{
 //                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected

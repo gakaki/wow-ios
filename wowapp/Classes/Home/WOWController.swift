@@ -232,6 +232,7 @@ class WOWController: WOWBaseViewController {
                 let bannerList = Mapper<WOWHomeModle>().mapArray(JSON(result)["modules"].arrayObject)
                 
                 if let brandArray = bannerList{
+                    
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
                     
@@ -541,8 +542,17 @@ extension WOWController:HomeBottomDelegate{
         toVCProduct(model.productId)
         
     }
-    func reloadTableViewData() {
-        request()
+    func reloadTableViewData(productId: Int?,favorite: Bool) {
+
+        for a in 0..<bottomListArray.count{
+            let model = bottomListArray[a]
+            if model.productId == productId {
+                model.favorite = favorite
+            }
+
+        }
+        self.tableView.reloadData()
+
     }
 }
 extension WOWController:WOWHomeFormDelegate{

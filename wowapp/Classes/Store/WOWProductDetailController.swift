@@ -289,7 +289,8 @@ class WOWProductDetailController: WOWBaseViewController {
             WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
-                strongSelf.likeButton.selected = !strongSelf.likeButton.selected
+                let favorite = JSON(result)["favorite"].bool
+                strongSelf.likeButton.selected = favorite ?? false
                  NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
             }) { (errorMsg) in

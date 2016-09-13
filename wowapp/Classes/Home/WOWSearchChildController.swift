@@ -58,23 +58,24 @@ class WOWSearchChildController: WOWBaseViewController{
                     strongSelf.dataArr.appendContentsOf(array)
                     //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                     if array.count < 10 {
-                        strongSelf.collectionView.mj_footer = nil
+                        strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
                         
                     }else {
                         strongSelf.collectionView.mj_footer = strongSelf.mj_footer
                     }
-                    
+    
                 }else {
                     if strongSelf.pageIndex == 1{
                         strongSelf.dataArr = []
                     }
-                    
-                    strongSelf.collectionView.mj_footer = nil
-                    
+                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
                 }
                 strongSelf.collectionView.reloadData()
-                
+                if ( strongSelf.pageIndex == 1 ){
+                    strongSelf.collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.Top)
+                }
             }
+            
             
             
             

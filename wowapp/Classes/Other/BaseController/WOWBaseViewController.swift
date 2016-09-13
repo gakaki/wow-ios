@@ -118,6 +118,8 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 
     lazy var mj_footer:MJRefreshAutoNormalFooter = {
         let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadMore))
+        
+        f.automaticallyHidden = true
         return f
     }()
     

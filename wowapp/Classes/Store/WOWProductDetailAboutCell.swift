@@ -72,14 +72,15 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
         cell.pictureImageView.image = UIImage(named: "4")
         let model = dataArr?[indexPath.item]
         if let m = model {
-            let url             = m.productImg ?? ""
-//            cell.pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
-            cell.pictureImageView.set_webimage_url(url)
-            
-            cell.desLabel.text       = m.productName
-            let result = WOWCalPrice.calTotalPrice([m.sellPrice ?? 0],counts:[1])
-            cell.priceLabel.text     = result //千万不用格式化了
-            cell.likeBtn.hidden = false
+            cell.showData(m, indexPath: indexPath)
+//            let url             = m.productImg ?? ""
+////            cell.pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
+//            cell.pictureImageView.set_webimage_url(url)
+//            
+//            cell.desLabel.text       = m.productName
+//            let result = WOWCalPrice.calTotalPrice([m.sellPrice ?? 0],counts:[1])
+//            cell.priceLabel.text     = result //千万不用格式化了
+//            cell.likeBtn.hidden = false
         }
         return cell
     }

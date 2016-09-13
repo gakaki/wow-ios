@@ -28,7 +28,7 @@ class WOWController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-         self.title = "尖叫设计"
+//         self.tabBarController!.title = "尖叫设计"
         setUI()
         addObserver()
         self.view.addSubview(self.topBtn)

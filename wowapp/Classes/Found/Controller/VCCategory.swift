@@ -316,7 +316,6 @@ extension VCCategory:VTMagicViewDelegate{
     func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
         print("didSelectItemAtIndex:", itemIndex);
         
-        
         if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? ,
             vc = magicView.viewControllerAtPage(itemIndex) as? VCCategoryProducts
         {

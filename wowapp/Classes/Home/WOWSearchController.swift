@@ -12,7 +12,6 @@ import VTMagic
 class WOWSearchController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var isLoadNew: Bool = false
     var isLoadPrice: Bool = false
     var dataArr = [WOWProductModel]()
     private var keyWords = [AnyObject](){
@@ -391,6 +390,9 @@ extension WOWSearchController:VTMagicViewDelegate{
             
                 if let vc = viewController  as? WOWSearchChildController {
                     vc.dataArr = dataArr
+                    vc.asc = 1
+                    vc.pageVc = pageIndex.toInt + 1
+                    vc.seoKey = searchView.searchTextField.text
                     vc.collectionView.reloadData()
                 }
         }
@@ -411,27 +413,23 @@ extension WOWSearchController:VTMagicViewDelegate{
         
     }
     func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
-        if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? {
+        if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? ,
+            vc = magicView.viewControllerAtPage(itemIndex) as? WOWSearchChildController{
             print("  button asc is ", b.asc)
-            if let vc = v_bottom.magicView.viewControllerAtPage(itemIndex) as? WOWSearchChildController {
                 if itemIndex == 2 {
                     vc.asc = b.asc
                     //价格第一次点击不知道为什么不会进这里
                     isLoadPrice = true
                 }else {
                     vc.asc = 1
-                    isLoadNew = true
                 }
                 vc.pageIndex = 1
                 vc.pageVc = itemIndex.toInt + 1
                 vc.seoKey = searchView.searchTextField.text
                 vc.dataArr = [WOWProductModel]()
                 vc.request()
-            }
 
-        }
-        print("didSelectItemAtIndex:", itemIndex);
-        
+        }        
         
         
     }

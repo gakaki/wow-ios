@@ -17,6 +17,9 @@ class TooglePriceBtn:UIButton {
             if image_is_show == true{
                 //显示图片
                 self.imageView?.hidden = false
+                self.imageEdgeInsets             = UIEdgeInsetsMake(0, 65, 0, 0)
+                self.titleEdgeInsets             = UIEdgeInsetsMake(0, -15, 0, 0)
+
             }else{
                 //不显示图片
                 self.imageView?.hidden = true
@@ -99,7 +102,7 @@ class TooglePriceBtn:UIButton {
 
         
         self.titleLabel!.font            = UIFont.systemFontOfSize(14)
-        self.imageEdgeInsets             = UIEdgeInsetsMake(0, 77, 0, 0)
+//        self.imageEdgeInsets             = UIEdgeInsetsMake(0, 77, 0, 0)
 //        self.frame                       = CGRectMake(0, 0, wOk, hOk)
         
 

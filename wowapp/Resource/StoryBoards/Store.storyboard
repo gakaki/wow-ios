@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3Sm-BO-NMd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3Sm-BO-NMd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -130,7 +130,7 @@
                                         </state>
                                         <state key="selected" image="like_select"/>
                                         <connections>
-                                            <action selector="likeClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="wc7-ES-c06"/>
+                                            <action selector="likeClick:" destination="7vb-eE-k6p" eventType="touchDown" id="nJh-gj-4hn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6M-Jc-5fm" userLabel="share">
@@ -529,7 +529,7 @@
         <image name="closeNav" width="40" height="32"/>
         <image name="icon_like" width="30" height="30"/>
         <image name="icon_like_hightlighted" width="30" height="30"/>
-        <image name="icon_share" width="14" height="14"/>
+        <image name="icon_share" width="30" height="30"/>
         <image name="like-gray" width="30" height="30"/>
         <image name="like_select" width="30" height="30"/>
         <image name="like_white" width="30" height="30"/>

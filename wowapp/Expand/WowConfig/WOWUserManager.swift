@@ -177,18 +177,23 @@ struct WOWUserManager {
     }
     static var loginStatus:Bool{
         get{
-            return (MGDefault.objectForKey(WOWUserLoginStatus) as? Bool) ?? false
+            if sessionToken.isEmpty {
+                return false
+            }else {
+                return true
+            }
+//            return (MGDefault.objectForKey(WOWUserLoginStatus) as? Bool) ?? false
         }
-        set{
-            MGDefault.setObject(newValue, forKey:WOWUserLoginStatus)
-            MGDefault.synchronize()
-        }
+//        set{
+//            MGDefault.setObject(newValue, forKey:WOWUserLoginStatus)
+//            MGDefault.synchronize()
+//        }
     }
     
    
     
     static func saveUserInfo(model:WOWUserModel?){
-        MGDefault.setObject(true, forKey: WOWUserLoginStatus)
+//        MGDefault.setObject(true, forKey: WOWUserLoginStatus)
         MGDefault.setObject(model?.user_nick, forKey:WOWUserName)
         MGDefault.setObject(model?.user_sex, forKey:WOWUserSex)
         MGDefault.setObject(model?.user_desc, forKey:WOWUserDes)
@@ -201,7 +206,7 @@ struct WOWUserManager {
     }
     
     static func cleanUserInfo(){
-        MGDefault.setObject(false, forKey: WOWUserLoginStatus)
+//        MGDefault.setObject(false, forKey: WOWUserLoginStatus)
         MGDefault.setObject(nil, forKey:WOWUserName)
         MGDefault.setObject(nil, forKey:WOWUserSex)
         MGDefault.setObject(nil, forKey:WOWUserDes)

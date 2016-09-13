@@ -90,20 +90,25 @@ class WOWNetManager {
                                 NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                                 WOWHud.showMsg("登录已过期，请重新登录")
                                 WOWUserManager.exitLogin()
-//                                if ( self.getPresentedController()  != nil){
-//                                    return
-//                                }else{
+                                if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
+                                    return
+                                }else{
                                     UIApplication.currentViewController()?.toLoginVC(true)
                                 failClosure(errorMsg:info?.message)
                                     return
-//                                }
+                                }
                             }
                             if code == RequestCode.FailError.rawValue {
                                 
                                 WOWHud.showMsg("您未登录,请先登录")
-                                UIApplication.currentViewController()?.toLoginVC(true)
-                                failClosure(errorMsg:info?.message)
-                                return
+                                if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
+                                    return
+                                }else{
+                                    WOWUserManager.sessionToken = ""
+                                    UIApplication.currentViewController()?.toLoginVC(true)
+                                    failClosure(errorMsg:info?.message)
+                                    return
+                                }
                             }
                             failClosure(errorMsg:info?.message)
                             WOWHud.showMsg(info?.message)

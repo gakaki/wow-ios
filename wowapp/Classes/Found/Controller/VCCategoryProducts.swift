@@ -1,5 +1,4 @@
-
-import UIKit
+import MJRefresh
 
 class VCCategoryProducts:WOWBaseViewController
 {
@@ -37,10 +36,6 @@ class VCCategoryProducts:WOWBaseViewController
         self.setUI()
     }
     
-    override  func viewDidLoad() {
-        request()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,13 +45,10 @@ class VCCategoryProducts:WOWBaseViewController
         super.setUI()
         
         
-        //为了在autolayout的视图里获得真的宽度 主要是给snapkit用的要先来一次
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
         
         edgesForExtendedLayout = .None
         
-        cv = UICollectionView(frame: self.view.frame, collectionViewLayout: self.layout)
+        cv = UICollectionView(frame: self.view.bounds, collectionViewLayout: self.layout)
         cv.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
         //        view.backgroundColor = UIColor(patternImage: UIImage(named: "10")!)
 
@@ -69,7 +61,7 @@ class VCCategoryProducts:WOWBaseViewController
         cv.showsHorizontalScrollIndicator   = false
         cv.showsVerticalScrollIndicator     = false
         
-        cv.decelerationRate                 = UIScrollViewDecelerationRateNormal
+        cv.decelerationRate                 = UIScrollViewDecelerationRateFast
         //cv.bounces = false
         
         cv.emptyDataSetSource = self;
@@ -78,6 +70,16 @@ class VCCategoryProducts:WOWBaseViewController
         cv.mj_footer = self.mj_footer
         
         self.view.addSubview(cv)
+        
+        //隐藏下拉刷新头部
+        
+        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
+        self.mj_footer.setTitle("", forState: MJRefreshState.Refreshing)
+        self.mj_footer.setTitle("", forState: MJRefreshState.Pulling)
+        
+        //为了在autolayout的视图里获得真的宽度 主要是给snapkit用的要先来一次
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     
   
@@ -88,7 +90,8 @@ class VCCategoryProducts:WOWBaseViewController
           WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(
             asc: self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.query_categoryId ), successClosure: {[weak self] (result) in
                 
-              
+                //            WOWHud.dismiss()
+
               if let strongSelf = self {
                   strongSelf.endRefresh()
     
@@ -115,8 +118,7 @@ class VCCategoryProducts:WOWBaseViewController
                   strongSelf.cv.reloadData()
               }
     
-//            WOWHud.dismiss()
-
+                //导航默认选中第一个 若不是分页的话
                 if ( self?.pageIndex == 1 ){
                     self!.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.Top)
                 }

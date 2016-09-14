@@ -215,4 +215,14 @@ extension  UIViewController {
         }
         
     }
+    // 跳转专题详情页
+    func toVCTopidDetail( topic_id:Int? ){
+        
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(WOWContentTopicController)) as! WOWContentTopicController
+        //                vc.hideNavigationBar = true
+        vc.topic_id = topic_id ?? 0
+        navigationController?.pushViewController(vc, animated: true)
+
+    }
+
 }

@@ -20,6 +20,7 @@ class WOWController: WOWBaseViewController {
     
     var offsetY :CGFloat = 0
     
+    var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
     let group = dispatch_group_create() // 分组网络请求
     
@@ -154,7 +155,7 @@ class WOWController: WOWBaseViewController {
         tableView.mj_header = mj_header
         tableView.mj_footer = mj_footerHome
         
-        self.tableView.backgroundColor = GrayColorLevel6
+        self.tableView.backgroundColor = GrayColorLevel5
         
         configBarItem()
         addObserver()
@@ -284,9 +285,11 @@ class WOWController: WOWBaseViewController {
                 if let bannerList = bannerList{
                     if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
                         strongSelf.bottomListArray = []
+                        strongSelf.isOverBottomData = false
                     }
                     if bannerList.count < totalPage {// 如果拿到的数据，小于分页，则说明，无下一页
                         strongSelf.tableView.mj_footer = nil
+                        strongSelf.isOverBottomData = true
                         
                     }else {
                         strongSelf.tableView.mj_footer = strongSelf.mj_footerHome
@@ -352,12 +355,9 @@ class WOWController: WOWBaseViewController {
                 print("分类详情页")
                 
             case 8:
-//                toVCTopic(model.bannerLinkTargetId!)
+                toVCTopic(model.bannerLinkTargetId!)
                 print("场景还是专题")
-                let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(WOWContentTopicController)) as! WOWContentTopicController
-//                vc.hideNavigationBar = true
-//                vc.productId = model.bannerLinkTargetId
-                navigationController?.pushViewController(vc, animated: true)
+
                 
                 
             default:
@@ -464,11 +464,31 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
+        print("\(dataArr.count)--\(bottomListCount.getParityCellNumber())++\(section)")
         guard section < dataArr.count  else {
+            
+            if section == ((dataArr.count ?? 0) + bottomListCount.getParityCellNumber()) - 1{
+                if isOverBottomData == true {
+                    return 70
+                }
+            }
             return CGFloat.min
         }
             return 15.h
-//        return CGFloat.min
+
+    }
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard section < dataArr.count  else {
+            
+            if section == ((dataArr.count ?? 0) + bottomListCount.getParityCellNumber()) - 1{
+                if isOverBottomData == true {
+                    return footerView()
+                }
+            }
+            return nil
+        }
+        return nil
+
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         if section == dataArr.count {
@@ -538,6 +558,23 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         return view
         
     }
+    func footerView() -> UIView {
+        let view = UIView()
+        view.frame = CGRectMake(0, 0, MGScreenWidth, 70)
+        view.backgroundColor = UIColor.whiteColor()
+    
+        let img = UIImageView()
+        img.image = UIImage(named: "wowdsgn")
+        view.addSubview(img)
+        img.snp_makeConstraints { (make) -> Void in
+            make.width.equalTo(97)
+            make.height.equalTo(10)
+            make.center.equalTo(view)
+        }
+        
+        return view
+        
+    }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if pageIndex >= 4 {
@@ -560,39 +597,22 @@ extension WOWController:HomeBottomDelegate{
         toVCProduct(model.productId)
         
     }
-//    
-//    func reloadTableViewData(productId: Int?,favorite: Bool) {
-//
-//        for a in 0..<bottomListArray.count{
-//            let model = bottomListArray[a]
-//            if model.productId == productId {
-//                model.favorite = favorite
-//            }
-//
-//        }
-//        self.tableView.reloadData()
-//
-//    }
+
 }
 extension WOWController:WOWHomeFormDelegate{
     
-    func goToVC(m:WOWModelVoTopic){//右滑更多
-        if let cid = m.groupId , cname = m.topicName{
-            toVCCategory( String(cid) ,cname: cname)
-        }
+    func goToVC(m:WOWModelVoTopic){//右滑更多 跳转专题详情
+        if let cid = m.id{
 
-//        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
-//        vc.hideNavigationBar = false
-//        self.navigationController?.pushViewController(vc, animated: true)
-        
+            toVCTopidDetail(cid)
+            
+        }
     }
     func goToProdectDetailVC(productId: Int?) {// 跳转产品详情页
+       
         toVCProduct(productId)
         
     }
-//    func reloadBottomTableViewData(){
-//        request()
-//    }
 }
 
 extension WOWController:SenceCellDelegate{
@@ -608,15 +628,3 @@ extension WOWController: CyclePictureViewDelegate {
         goController(model)
     }
 }
-
-//extension WOWController:HidingNavigationBarManagerDelegate{
-//    func hidingNavigationBarManagerDidChangeState(manager: HidingNavigationBarManager, toState state: HidingNavigationBarState) {
-//        if state == .Closed {
-//            DLog("dismiss")
-//        }
-//    }
-//    
-//    func hidingNavigationBarManagerDidUpdateScrollViewInsets(manager: HidingNavigationBarManager) {
-//        
-//    }
-//}

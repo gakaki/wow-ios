@@ -1287,7 +1287,6 @@
 				069056DA1D3665FC00A851F9 /* Guide */,
 				29FF25401CFDA86300DF2A9B /* Home */,
 				2953F1981D06A678006D7D95 /* Favorite */,
-				29FF252E1CFDA86300DF2A9B /* BuyCar */,
 				29FF25851CFDA86300DF2A9B /* Store */,
 				29FF25AA1CFDA86300DF2A9B /* User */,
 				29FF25631CFDA86300DF2A9B /* Login */,
@@ -1303,7 +1302,8 @@
 				29FF271C1CFDAF0800DF2A9B /* View */,
 				29FF271D1CFDAF0F00DF2A9B /* Controller */,
 			);
-			path = BuyCar;
+			name = BuyCar;
+			path = ../BuyCar;
 			sourceTree = "<group>";
 		};
 		29FF25401CFDA86300DF2A9B /* Home */ = {
@@ -1311,6 +1311,7 @@
 			children = (
 				29FF27291CFDB07000DF2A9B /* View */,
 				29FF272A1CFDB08300DF2A9B /* Controller */,
+				29FF252E1CFDA86300DF2A9B /* BuyCar */,
 				29FF27281CFDB05D00DF2A9B /* Model */,
 				29FF272B1CFDB09C00DF2A9B /* Other */,
 			);
@@ -2014,11 +2015,11 @@
 			isa = PBXGroup;
 			children = (
 				069056E01D36666F00A851F9 /* WOWController.swift */,
-				29FF254A1CFDA86300DF2A9B /* WOWLikeListController.swift */,
 				29FF25571CFDA86300DF2A9B /* WOWSearchChildController.swift */,
 				29FF25451CFDA86300DF2A9B /* WOWCommentController.swift */,
 				29FF25581CFDA86300DF2A9B /* WOWSearchController.swift */,
 				29FF255A1CFDA86300DF2A9B /* WOWSearchsController.swift */,
+				29FF254A1CFDA86300DF2A9B /* WOWLikeListController.swift */,
 				29FF255B1CFDA86300DF2A9B /* WOWSenceController.swift */,
 			);
 			name = Controller;

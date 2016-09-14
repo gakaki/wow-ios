@@ -26,7 +26,7 @@ class WOWHotStyleMain: WOWBaseViewController {
         super.setUI()
         configBuyBarItem(WOWUserManager.userCarCount)
         tableView.registerNib(UINib.nibName(String(WOWHotStyleCell)), forCellReuseIdentifier:cellID)
-        self.tableView.backgroundColor = GrayColorLevel6
+        self.tableView.backgroundColor = GrayColorLevel5
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.mj_header = mj_header
         tableView.estimatedRowHeight = 410

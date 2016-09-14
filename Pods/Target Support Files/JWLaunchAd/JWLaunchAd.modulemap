@@ -1,0 +1,6 @@
+framework module JWLaunchAd {
+  umbrella header "JWLaunchAd-umbrella.h"
+
+  export *
+  module * { export * }
+}

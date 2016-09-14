@@ -8,7 +8,8 @@ pod 'RxSwift', '2.6.0'
 pod 'RxCocoa', '2.6.0'
 pod 'RxDataSources', '0.8.1'
 
-pod 'XHLaunchAd'
+
+pod 'JWLaunchAd' #这个是加入到keywindow里
 pod 'SnapKit', '~> 0.19.1'
 pod 'Moya', '~> 6.1.3'
 

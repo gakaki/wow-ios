@@ -11,7 +11,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import YYWebImage
 //import JSPatch
-import XHLaunchAd
+import JWLaunchAd
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,12 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          */
         registAppKey(launchOptions)
 
-        
+        self.configRootVC()
         let useAd = true
         if useAd == true {
             self.startAD()
-        }else{
-            self.configRootVC()
         }
        
         
@@ -63,98 +61,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func startAD(){
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AD, successClosure: { [weak self](result) in
-            if let strongSelf = self{
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AD, successClosure: { [unowned self](result) in
+   
                 print(result)
+         
+            JWLaunchAd.initImageWithAttribute(6, showSkipType: SkipShowType.Default) { (ad) in
+                let url   = "http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg"
+                ad.setWebImageWithURL(url, options: JWWebImageOptions.Default, result: { (img, url) in
+                    
+                    ad.launchAdViewFrame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight-100)
+                    }, adClickBlock: {
+                        print("click")
+                })
+                
             }
+
+            
         }) { (errorMsg) in
             
         }
-        
-        
-        //请求网络 获得图片
-        //这个ad方案不好 侵入性太强 还是做到keywindow上加个 uiview 遮罩是更好的做法 这样也没法让 rootview预先加载 以后换
-        //1.显示启动广告
-        let frame = CGRectMake(0, 0, self.window!.bounds.size.width, self.window!.bounds.size.height-150)
-        XHLaunchAd.showWithAdFrame( frame, setAdImage: { launchAd in
-            
-            //未检测到广告数据,启动页停留时间,默认3,(设置4即表示:启动页显示了4s,还未检测到广告数据,就自动进入window根控制器)
-            launchAd.noDataDuration = 3
-            
-            //广告图片地址
-            let imgUrl   = "http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg"
-            //广告停留时间
-            let duration = 3
-            //广告点击跳转链接
-
-            //2.设置广告数据
-                launchAd.setImageUrl(imgUrl, duration: duration, skipType:SkipType.TimeText , options: XHWebImageOptions.Default, completed: { img, url in
-                    //异步加载图片完成回调(若需根据图片尺寸,刷新广告frame,可在这里操作)
-                    //weakLaunchAd.adFrame = ...;
-                }, click: {
-                    //1.用浏览器打开
-//                    let openUrl  =  "http://www.returnoc.com";
-//                    UIApplication.sharedApplication().openURL(NSURL(string:openUrl)!)
-                    //2.在webview中打开
-                   
-//                    WebViewController *VC = [[WebViewController alloc] init];
-//                    VC.URLString = openUrl;
-//                    [weakLaunchAd presentViewController:VC animated:YES completion:nil];
-//                    self.configRootVC()
-//                    XHLaunchAd.dismissVC()
-
-                    
-                    if ( self.is_started_root_vc == false){
-                        self.configRootVC()
-                        self.is_started_root_vc = true
-                    }
-                    
-                    launchAd.view.hidden = true
-
-//                }];
-                })
-        }) {
-            if ( self.is_started_root_vc == false){
-                self.configRootVC()
-                self.is_started_root_vc = true
-
-            }
-        }
-        
-//        [XHLaunchAd showWithAdFrame:CGRectMake(0, 0,self.window.bounds.size.width, self.window.bounds.size.height-150) setAdImage:^(XHLaunchAd *launchAd) {
-//
-//            
-//            //广告图片地址
-//            NSString *imgUrl = @"http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg";
-//            //广告停留时间
-//            NSInteger duration = 6;
-//            //广告点击跳转链接
-//            NSString *openUrl = @"http://www.returnoc.com";
-//            
-//            //2.设置广告数据
-//            /定义一个weakLaunchAd
-//            __weak __typeof(launchAd) weakLaunchAd = launchAd;
-//            [launchAd setImageUrl:imgUrl duration:duration skipType:SkipTypeTimeText options:XHWebImageDefault completed:^(UIImage *image, NSURL *url) {
-//            
-//            
-//            } click:^{
-//            
-//                       //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl]];
-//            
-//            //2.在webview中打开
-//            WebViewController *VC = [[WebViewController alloc] init];
-//            VC.URLString = openUrl;
-//            [weakLaunchAd presentViewController:VC animated:YES completion:nil];
-//            
-//            }];
-//            
-//            } showFinish:^{
-//            
-//            //广告展示完成回调,设置window根控制器
-//            self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[UIViewController alloc] init]];
-//            
-//            }];
-        
         
         
     }
@@ -416,5 +341,57 @@ extension AppDelegate:DeepShareDelegate{
         let tabBarItem = UITabBarItem.appearance()
         tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], forState: .Normal)
         tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], forState: .Selected)
+    }
+    
+    func xhlanuchad(){
+//        //请求网络 获得图片
+//        //这个ad方案不好 侵入性太强 还是做到keywindow上加个 uiview 遮罩是更好的做法 这样也没法让 rootview预先加载 以后换
+//        //1.显示启动广告
+//        let frame = CGRectMake(0, 0, self.window!.bounds.size.width, self.window!.bounds.size.height-150)
+//        XHLaunchAd.showWithAdFrame( frame, setAdImage: { launchAd in
+//            
+//            //未检测到广告数据,启动页停留时间,默认3,(设置4即表示:启动页显示了4s,还未检测到广告数据,就自动进入window根控制器)
+//            launchAd.noDataDuration = 3
+//            
+//            //广告图片地址
+//            let imgUrl   = "http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg"
+//            //广告停留时间
+//            let duration = 3
+//            //广告点击跳转链接
+//            
+//            //2.设置广告数据
+//            launchAd.setImageUrl(imgUrl, duration: duration, skipType:SkipType.TimeText , options: XHWebImageOptions.Default, completed: { img, url in
+//                //异步加载图片完成回调(若需根据图片尺寸,刷新广告frame,可在这里操作)
+//                //weakLaunchAd.adFrame = ...;
+//                }, click: {
+//                    //1.用浏览器打开
+//                    //                    let openUrl  =  "http://www.returnoc.com";
+//                    //                    UIApplication.sharedApplication().openURL(NSURL(string:openUrl)!)
+//                    //2.在webview中打开
+//                    
+//                    //                    WebViewController *VC = [[WebViewController alloc] init];
+//                    //                    VC.URLString = openUrl;
+//                    //                    [weakLaunchAd presentViewController:VC animated:YES completion:nil];
+//                    //                    self.configRootVC()
+//                    //                    XHLaunchAd.dismissVC()
+//                    
+//                    
+//                    if ( self.is_started_root_vc == false){
+//                        self.configRootVC()
+//                        self.is_started_root_vc = true
+//                    }
+//                    
+//                    launchAd.view.hidden = true
+//                    
+//                    //                }];
+//            })
+//        }) {
+//            if ( self.is_started_root_vc == false){
+//                self.configRootVC()
+//                self.is_started_root_vc = true
+//                
+//            }
+//        }
+//
     }
 }

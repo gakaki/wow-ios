@@ -949,6 +949,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060784BD1D895DA80094BF3E /* AD */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AD;
+			sourceTree = "<group>";
+		};
 		0633527C1D65404D0026177E /* BaseUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1287,6 +1294,7 @@
 		29FF25271CFDA86300DF2A9B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				060784BD1D895DA80094BF3E /* AD */,
 				2DF502601D864BF500BF6622 /* HotStyle */,
 				06FB94AC1D62FD2800554871 /* Topic */,
 				068B60AC1D4F34AF001AD778 /* Found */,

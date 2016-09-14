@@ -11,7 +11,8 @@ import UIKit
 class WOWProductDetailCell: UITableViewCell {
     @IBOutlet weak var productImg:UIImageView!
     @IBOutlet weak var imgDescLabel:UILabel!
-
+    @IBOutlet weak var multiplier: NSLayoutConstraint!
+    @IBOutlet weak var space: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,7 +25,13 @@ class WOWProductDetailCell: UITableViewCell {
     }
     func showData(secondaryImg: WOWProductPicTextModel?) {
         if let secondaryImg = secondaryImg {
-            productImg.kf_setImageWithURL(NSURL(string:secondaryImg.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
+            if let img = secondaryImg.image {
+                productImg.kf_setImageWithURL(NSURL(string:img)!, placeholderImage:UIImage(named: "placeholder_product"))
+            }else {
+                space.constant = 0
+                multiplier.constant = 345
+            }
+            
 //            productImg.set_webimage_url_base(secondaryImg.image, place_holder_name: "placeholder_product")
             imgDescLabel.text = secondaryImg.text
             imgDescLabel.setLineHeightAndLineBreak(1.5)

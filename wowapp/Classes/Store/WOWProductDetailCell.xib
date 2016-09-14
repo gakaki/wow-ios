@@ -33,7 +33,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5j1-JJ-Q5E">
                         <rect key="frame" x="15" y="0.0" width="345" height="210"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="115:70" id="vlW-Uj-xG3"/>
+                            <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="23:14" id="m0f-TH-d7y"/>
                             <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="115:86" id="wxP-gV-r7w"/>
                         </constraints>
                         <variation key="default">
@@ -55,9 +55,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="imgDescLabel" destination="lrp-Fq-IZ9" id="4I6-rS-XKp"/>
+                <outlet property="multiplier" destination="m0f-TH-d7y" id="IBf-BK-dkJ"/>
                 <outlet property="productImg" destination="5j1-JJ-Q5E" id="ysO-nY-uKS"/>
+                <outlet property="space" destination="QAD-rz-dvt" id="vAq-uu-6OR"/>
             </connections>
-            <point key="canvasLocation" x="244.5" y="254"/>
+            <point key="canvasLocation" x="117.5" y="259"/>
         </tableViewCell>
     </objects>
 </document>

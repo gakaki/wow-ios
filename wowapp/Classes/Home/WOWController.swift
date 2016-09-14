@@ -352,8 +352,12 @@ class WOWController: WOWBaseViewController {
                 print("分类详情页")
                 
             case 8:
-                toVCTopic(model.bannerLinkTargetId!)
+//                toVCTopic(model.bannerLinkTargetId!)
                 print("场景还是专题")
+                let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(WOWContentTopicController)) as! WOWContentTopicController
+//                vc.hideNavigationBar = true
+//                vc.productId = model.bannerLinkTargetId
+                navigationController?.pushViewController(vc, animated: true)
                 
                 
             default:

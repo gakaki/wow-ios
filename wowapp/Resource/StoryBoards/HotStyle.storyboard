@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lgq-sk-XB7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Lgq-sk-XB7">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -22,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ych-RL-xab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-969" y="-297"/>
+            <point key="canvasLocation" x="-516.79999999999995" y="-281.16000000000003"/>
         </scene>
         <!--Hot Style Main-->
         <scene sceneID="xE2-am-frJ">
@@ -61,7 +61,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ndt-ef-aNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-614" y="-312"/>
+            <point key="canvasLocation" x="-327.46666666666664" y="-295.36000000000001"/>
+        </scene>
+        <!--Content Topic Controller-->
+        <scene sceneID="Ydd-6e-nnG">
+            <objects>
+                <viewController storyboardIdentifier="WOWContentTopicController" id="C3y-1R-y6w" customClass="WOWContentTopicController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pXV-gw-fpQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="d0c-fw-cs2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zUY-3I-nOK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qsq-X8-h1m">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="C3y-1R-y6w" id="0rx-Gi-FfM"/>
+                                    <outlet property="delegate" destination="C3y-1R-y6w" id="ZwW-Ku-z62"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qsq-X8-h1m" firstAttribute="leading" secondItem="zUY-3I-nOK" secondAttribute="leading" id="L1i-r2-qE0"/>
+                            <constraint firstItem="Qsq-X8-h1m" firstAttribute="top" secondItem="zUY-3I-nOK" secondAttribute="top" id="ZBA-pe-5uP"/>
+                            <constraint firstAttribute="trailing" secondItem="Qsq-X8-h1m" secondAttribute="trailing" id="yUN-ga-4Ft"/>
+                            <constraint firstItem="d0c-fw-cs2" firstAttribute="top" secondItem="Qsq-X8-h1m" secondAttribute="bottom" id="zwm-5C-eut"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Qsq-X8-h1m" id="Mnd-o7-09i"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gkh-lv-sOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-61" y="-357"/>
         </scene>
     </scenes>
 </document>

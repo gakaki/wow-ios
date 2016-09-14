@@ -118,7 +118,13 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailAboutCell", forIndexPath: indexPath) as! WOWProductDetailAboutCell
             cell.delegate = self
             cell.dataArr = aboutProductArray
-            
+            if aboutProductArray.count == 6 {
+                if noMoreData {
+                    cell.collectionView.xzm_footer = cell.xzm_footer
+                }else {
+                    cell.collectionView.xzm_footer = nil
+                }
+            }
             returnCell = cell
         default:
             break
@@ -223,18 +229,21 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
 extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
     func aboutProduct(productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int) {
         let params = ["brandId": productModel?.brandId ?? 0, "currentPage": pageIndex,"pageSize":pageSize, "excludes": [productModel?.productId ?? 0]]
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(params: params as? [String : AnyObject]), successClosure: {(result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ProductBrand(params: params as? [String : AnyObject]), successClosure: {[weak self] (result) in
             
+            if let strongSelf = self {
                 productDetailAboutCell.endRefresh()
                 
                 let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
                 
                 if let array = arr{
-                    
+                    strongSelf.aboutProductArray.appendContentsOf(array)
                     productDetailAboutCell.dataArr?.appendContentsOf(array)
                     //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                     if array.count < productDetailAboutCell.pageSize {
                         productDetailAboutCell.collectionView.xzm_footer = nil
+                        //如果没有数据了就设为false，防止cell重用会出错，一直显示可以刷新
+                        strongSelf.noMoreData = false
                         
                     }else {
                         productDetailAboutCell.collectionView.xzm_footer = productDetailAboutCell.xzm_footer
@@ -243,13 +252,16 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
                 }else {
                     
                     productDetailAboutCell.collectionView.xzm_footer = nil
-                    
+                    strongSelf.noMoreData = false
+
                 }
                 productDetailAboutCell.collectionView.reloadData()
                 
+                
+
+            }
             
-            
-        }) {(errorMsg) in
+        }) { (errorMsg) in
             
                 productDetailAboutCell.collectionView.xzm_footer = nil
                 productDetailAboutCell.endRefresh()
@@ -257,10 +269,10 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
         }
         
     }
-    func selectCollectionIndex(productId: Int?) {
+    func selectCollectionIndex(productId: Int) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
-        vc.productId = productId ?? 0
+        vc.productId = productId
         navigationController?.pushViewController(vc, animated: true)
     }
 

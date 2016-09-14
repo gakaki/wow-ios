@@ -27,6 +27,7 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
     var brand                       :WOWBrandStyleModel?
     var likeQty                     :Int?
     var readQty                     :Int?
+    var imageSerial                 :WOWImageSerial?
     required init?(_ map: Map) {
         
         
@@ -46,5 +47,21 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
         brand           <- map["brand"]
         likeQty         <- map["likeQty"]
         readQty         <- map["readQty"]
+        imageSerial     <- map["imageSerial"]
+    }
+}
+
+class WOWImageSerial: WOWBaseModel, Mappable {
+    var serialId:           Int?
+    var records:            [WOWProductPicTextModel]?
+    
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        serialId        <- map["serialId"]
+        records         <- map["records"]
     }
 }

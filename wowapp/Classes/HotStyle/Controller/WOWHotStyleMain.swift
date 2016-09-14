@@ -24,7 +24,7 @@ class WOWHotStyleMain: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        configBuyBarItem(WOWUserManager.userCarCount)
+        configBuyBarItem()
         tableView.registerNib(UINib.nibName(String(WOWHotStyleCell)), forCellReuseIdentifier:cellID)
         self.tableView.backgroundColor = GrayColorLevel5
         tableView.rowHeight = UITableViewAutomaticDimension

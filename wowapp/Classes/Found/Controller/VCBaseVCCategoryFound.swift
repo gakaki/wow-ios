@@ -8,7 +8,7 @@ class VCBaseVCCategoryFound:WOWBaseViewController{
     
     override func setUI(){
         super.setUI()
-        configBuyBarItem(WOWUserManager.userCarCount)
+        configBuyBarItem()
         addObserver()
     }
     

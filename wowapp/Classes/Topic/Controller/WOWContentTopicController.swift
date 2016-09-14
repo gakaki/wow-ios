@@ -17,12 +17,55 @@ class WOWContentTopicController: WOWBaseViewController {
     var topic_id: Int           = 1
     var vo_topic:WOWModelVoTopic?
     
+    private var shareProductImage:UIImage? //供分享使用
+    lazy var placeImageView:UIImageView={  //供分享使用
+        let image = UIImageView()
+        return image
+    }()
+    
     private(set) var numberSections = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObservers()
         request()
         // Do any additional setup after loading the view.
+    }
+    deinit {
+        removeObservers()
+    }
+    
+     //MARK:    - lazy
+    lazy var nagationItem:WOWTopicNavigationItem = {
+        let view = NSBundle.mainBundle().loadNibNamed(String(WOWTopicNavigationItem), owner: self, options: nil).last as! WOWTopicNavigationItem
+        view.thumbButton.addTarget(self, action: #selector(dgClick), forControlEvents: .TouchUpInside)
+        view.shareButton.addTarget(self, action: #selector(zdClick), forControlEvents: .TouchUpInside)
+        view.buyCarBUttion.addTarget(self, action: #selector(sjClick), forControlEvents: .TouchUpInside)
+        return view
+    }()
+    
+    //MARK:Actions
+
+    func dgClick() -> Void {
+        print("dianzan")
+        
+        
+    }
+    func zdClick() -> Void {
+        let shareUrl = WOWShareUrl + "/item/\(topic_id ?? 0)"
+        WOWShareManager.share(vo_topic?.topicMainTitle, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+
+        
+    }
+    func sjClick() -> Void {
+        guard WOWUserManager.loginStatus else {
+            toLoginVC(true)
+            return
+        }
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+        vc.hideNavigationBar = false
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     //MARK:Private Method
     override func setUI() {
@@ -30,7 +73,7 @@ class WOWContentTopicController: WOWBaseViewController {
         configTable()
         configBarItem()
     }
-    
+
     //初始化数据，商品banner
     private func configData(){
         //如果相关商品有数据显示。如果没有数据则不显示
@@ -45,8 +88,41 @@ class WOWContentTopicController: WOWBaseViewController {
     
     private func configBarItem(){
         
+        if WOWUserManager.userCarCount <= 0 {
+            nagationItem.buyCarBUttion.badgeString = ""
+        }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
+            nagationItem.buyCarBUttion.badgeString = "\(WOWUserManager.userCarCount)"
+        }else {
+            nagationItem.buyCarBUttion.badgeString = "99+"
+        }
+
+        makeRightNavigationItem(nagationItem)
+    }
+    private func addObservers(){
         
-        configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(buyCarCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+    }
+    
+    private func removeObservers() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWUpdateCarBadgeNotificationKey, object: nil)
+    }
+    
+    /**
+     购物车数量显示
+     */
+    func buyCarCount()  {
+        if WOWUserManager.userCarCount <= 0 {
+            nagationItem.buyCarBUttion.badgeString = ""
+        }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
+            nagationItem.buyCarBUttion.badgeString = "\(WOWUserManager.userCarCount)"
+        }else {
+            nagationItem.buyCarBUttion.badgeString = "99+"
+        }
+        
+        
     }
     //MARK: - NET
     override func request(){

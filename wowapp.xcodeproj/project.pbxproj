@@ -407,6 +407,8 @@
 		636C34201D57286A00CA4E69 /* WOWBrandHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C341F1D57286A00CA4E69 /* WOWBrandHeaderView.swift */; };
 		636C34221D57288400CA4E69 /* WOWBrandHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636C34211D57288400CA4E69 /* WOWBrandHeaderView.xib */; };
 		636C34241D585BF500CA4E69 /* WOWDesignerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C34231D585BF400CA4E69 /* WOWDesignerModel.swift */; };
+		637D134A1D89421F005A5C51 /* WOWTopicNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D13491D89421F005A5C51 /* WOWTopicNavigationItem.swift */; };
+		637D134C1D894236005A5C51 /* WOWTopicNavigationItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637D134B1D894236005A5C51 /* WOWTopicNavigationItem.xib */; };
 		638849F81D61B06500FCCFCC /* WOWCouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638849F71D61B06500FCCFCC /* WOWCouponController.swift */; };
 		638849FB1D61B1E900FCCFCC /* WOWCouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638849F91D61B1E900FCCFCC /* WOWCouponCell.swift */; };
 		638849FC1D61B1E900FCCFCC /* WOWCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638849FA1D61B1E900FCCFCC /* WOWCouponCell.xib */; };
@@ -885,6 +887,8 @@
 		636C341F1D57286A00CA4E69 /* WOWBrandHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBrandHeaderView.swift; sourceTree = "<group>"; };
 		636C34211D57288400CA4E69 /* WOWBrandHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWBrandHeaderView.xib; sourceTree = "<group>"; };
 		636C34231D585BF400CA4E69 /* WOWDesignerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWDesignerModel.swift; sourceTree = "<group>"; };
+		637D13491D89421F005A5C51 /* WOWTopicNavigationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WOWTopicNavigationItem.swift; path = wowapp/Classes/Topic/Controller/WOWTopicNavigationItem.swift; sourceTree = SOURCE_ROOT; };
+		637D134B1D894236005A5C51 /* WOWTopicNavigationItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WOWTopicNavigationItem.xib; path = wowapp/Classes/Topic/Controller/WOWTopicNavigationItem.xib; sourceTree = SOURCE_ROOT; };
 		638849F71D61B06500FCCFCC /* WOWCouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCouponController.swift; sourceTree = "<group>"; };
 		638849F91D61B1E900FCCFCC /* WOWCouponCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCouponCell.swift; sourceTree = "<group>"; };
 		638849FA1D61B1E900FCCFCC /* WOWCouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWCouponCell.xib; sourceTree = "<group>"; };
@@ -1159,6 +1163,8 @@
 			children = (
 				634ED5FA1D8807E60042791B /* WOWContentTopicTopCell.swift */,
 				634ED5FB1D8807E60042791B /* WOWContentTopicTopCell.xib */,
+				637D13491D89421F005A5C51 /* WOWTopicNavigationItem.swift */,
+				637D134B1D894236005A5C51 /* WOWTopicNavigationItem.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2273,6 +2279,7 @@
 				636C34221D57288400CA4E69 /* WOWBrandHeaderView.xib in Resources */,
 				29FF26E51CFDA86300DF2A9B /* LICENSE in Resources */,
 				29FF26511CFDA86300DF2A9B /* WOWValue2Cell.xib in Resources */,
+				637D134C1D894236005A5C51 /* WOWTopicNavigationItem.xib in Resources */,
 				631847D11D7559BE00656678 /* WOWProductDescView.xib in Resources */,
 				06B7661B1D77E96600F803A9 /* LICENSE in Resources */,
 				2D6B02831D589622003D21C1 /* WOWOrderDetailCostCell.xib in Resources */,
@@ -2515,6 +2522,7 @@
 				2DF502681D864D8F00BF6622 /* WOWHotStyleCell.swift in Sources */,
 				29FF26A31CFDA86300DF2A9B /* WOWGoodsSmallCell.swift in Sources */,
 				29FF26CB1CFDA86300DF2A9B /* WOWSocietyCell.swift in Sources */,
+				637D134A1D89421F005A5C51 /* WOWTopicNavigationItem.swift in Sources */,
 				29FF26951CFDA86300DF2A9B /* WOWBrandTopView.swift in Sources */,
 				2D3273F01D752DF70013BDB1 /* HomeFormReusableView.swift in Sources */,
 				29FF26691CFDA86300DF2A9B /* WOWSearchController.swift in Sources */,

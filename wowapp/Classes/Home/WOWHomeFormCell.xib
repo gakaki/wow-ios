@@ -16,11 +16,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="425.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="H3h-wo-f2h">
-                        <rect key="frame" x="0.0" y="107" width="320" height="234"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="H3h-wo-f2h">
+                        <rect key="frame" x="0.0" y="149.5" width="320" height="246"/>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="234" id="5hG-Wd-TPq"/>
+                            <constraint firstAttribute="height" constant="246" id="5hG-Wd-TPq"/>
                             <constraint firstAttribute="width" secondItem="H3h-wo-f2h" secondAttribute="height" multiplier="160:117" id="e7t-ej-oIT"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nNp-b0-2ME">
@@ -29,6 +29,11 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="e7t-ej-oIT"/>
+                            </mask>
+                        </variation>
                         <connections>
                             <outlet property="dataSource" destination="K6H-Gl-pdl" id="tW6-Rv-YTM"/>
                             <outlet property="delegate" destination="K6H-Gl-pdl" id="oJc-8G-pUp"/>
@@ -40,8 +45,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="751" misplaced="YES" text="如果对生活麻木了，那么请你坐下" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yF-Le-TIF">
-                        <rect key="frame" x="15" y="66" width="290" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="751" text="如果对生活麻木了，那么请你坐下" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yF-Le-TIF">
+                        <rect key="frame" x="15" y="66" width="290" height="59.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

@@ -73,7 +73,7 @@ class WOWFavoriteController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        configBuyBarItem(WOWUserManager.userCarCount)
+        configBuyBarItem()
         addObserver()
     }
     private func addObserver(){

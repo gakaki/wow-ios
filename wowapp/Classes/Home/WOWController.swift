@@ -173,7 +173,7 @@ class WOWController: WOWBaseViewController {
         
     }
     private func configBarItem(){
-        configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
+        configBuyBarItem() // 购物车数量
     }
     
     //MARK:Actions

@@ -47,7 +47,7 @@ class VCDesignerList: WOWBaseViewController {
         navigationItem.title = "设计师"
         configureSearchController()
         tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
-        configBuyBarItem(WOWUserManager.userCarCount)
+        configBuyBarItem()
        
         //这个界面不需要了
 //        addObserver()

@@ -92,6 +92,7 @@ class WOWFavProduct: WOWBaseViewController {
     }
     private func addObserver(){
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWRefreshFavoritNotificationKey, object:nil)
         
     }

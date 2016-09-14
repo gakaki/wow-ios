@@ -10,12 +10,12 @@ import UIKit
 
 protocol WOWHomeFormDelegate:class {
     // 右滑进入更多商品代理
-    func goToVC()
+    func goToVC(m:WOWModelVoTopic)
     // 点击CollentcionView－Item代理
     func goToProdectDetailVC(productId: Int?)
     
     //刷新主页数据 有一个情况，当上面的collectionView 中的产品与下面的tableView的产品为同一个产品， 喜欢上面的，让下面的实时刷新
-    func reloadBottomTableViewData()
+//    func reloadBottomTableViewData()
     
   }
 class WOWHomeFormCell: UITableViewCell {
@@ -29,7 +29,7 @@ class WOWHomeFormCell: UITableViewCell {
     @IBOutlet weak var lbMainTitle: UILabel!
     
     @IBOutlet weak var lbContent: UILabel!
-    
+    var modelData : WOWModelVoTopic?
     let headIdenString = "HomeFormReusableView"
     
 //    var mainModel : WOWModelVoTopic   {
@@ -70,7 +70,7 @@ class WOWHomeFormCell: UITableViewCell {
     
     func loadMore()  {
         
-            self.delegate?.goToVC()
+            self.delegate?.goToVC(modelData!)
             self.endRefresh()
 
     }
@@ -137,29 +137,11 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
         let model = dataArr?[indexPath.item]
         if let m = model{
             cell.showData(m, indexPath: indexPath)
-//            cell.likeBtn.tag = m.productId!
-//            cell.likeBtn.addTarget(self, action: #selector(WOWHomeFormCell.favorite(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
     
         return cell
     }
-//    func favorite(sender: UIButton) {
-//        
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:sender.tag ?? 0), successClosure: { [weak self](result) in
-//            if let strongSelf = self{
-//                
-////                let favorite = JSON(result)["favorite"].bool
-////                sender.selected = favorite ?? false // 在这注释掉，是因为会多闪一下
-//                
-//                strongSelf.delegate?.reloadBottomTableViewData()
-//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-//            }
-//        }) { (errorMsg) in
-//            
-//            
-//        }
-//
-//    }
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 75)
     }

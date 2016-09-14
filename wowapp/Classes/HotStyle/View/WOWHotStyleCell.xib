@@ -124,6 +124,9 @@
                                 <exclude reference="xjw-cY-FDi"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="shareClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="p6p-Te-Vdd"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -176,12 +179,12 @@
                         <exclude reference="NWT-hv-g1L"/>
                         <exclude reference="en9-UD-FB2"/>
                         <exclude reference="fKY-ON-B3w"/>
-                        <exclude reference="PtL-zL-wiO"/>
-                        <exclude reference="SvI-ft-sWm"/>
-                        <exclude reference="ygN-Rz-42C"/>
                         <exclude reference="4xn-I9-GFE"/>
                         <exclude reference="5tv-Xf-SWb"/>
                         <exclude reference="WrO-QY-3b4"/>
+                        <exclude reference="PtL-zL-wiO"/>
+                        <exclude reference="SvI-ft-sWm"/>
+                        <exclude reference="ygN-Rz-42C"/>
                         <exclude reference="DFN-4D-zEe"/>
                         <exclude reference="GEK-xA-imf"/>
                         <exclude reference="We0-tt-dPp"/>

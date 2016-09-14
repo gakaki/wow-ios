@@ -29,8 +29,8 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleType    :   Int?
     var moduleContent           :  WOWCarouselBanners?
     var moduleContentList       :  WOWModelVoTopic?//产品列表CollectionView
-    var moduleImage         : String?
-    var moduleTitle         : String?
+    var moduleAdditionalInfo    :   WOWHomeAdditionalInfo? // 配置信息～
+
     required init?(_ map: Map) {
         
     }
@@ -45,14 +45,41 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
             moduleContent         <- map["moduleContent"]
         case 601://产品列表CollectionView
             moduleContentList         <- map["moduleContent"]
-        case 701://产品列表CollectionView
-            moduleImage         <- map["moduleImage"]
-            moduleTitle         <- map["moduleTitle"]
-            moduleContentList   <- map["moduleContent"]
+            moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
+        case 701://爆款页 参数
+
+            moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
+
+            moduleContentList       <- map["moduleContent"]
         default:
             break
         }
 
 
     }
+}
+class WOWHomeAdditionalInfo: WOWBaseModel,Mappable {
+    // 701  imageUrl:背景图片地址  title：标题
+    var imageUrl                :       String?
+    var title                   :       String?
+    var showTitle               :       Bool?
+    // 601 , 标题简介应该显示多少个字
+    var descLen                 :       Int?
+
+    
+    
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        
+        imageUrl            <- map["imageUrl"]
+        showTitle           <- map["showTitle"]
+        title               <- map["title"]
+        descLen             <- map["descLen"]
+        
+    }
+    
 }

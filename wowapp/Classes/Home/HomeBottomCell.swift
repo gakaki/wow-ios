@@ -11,7 +11,7 @@ protocol HomeBottomDelegate:class {
     // 跳转产品详情代理
     func goToProductDetailVC(indexRow: Int?)
     //刷新主页数据 有一个情况，当上面的collectionView 中的产品与下面的tableView的产品为同一个产品， 喜欢下面的，让上面的刷新
-    func reloadTableViewData(productId: Int?,favorite:Bool)
+//    func reloadTableViewData(productId: Int?,favorite:Bool)
     
 }
 

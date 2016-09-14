@@ -78,7 +78,12 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     }
     
     func likeClick(sender: UIButton)  {
-        requestFavoriteProduct(productId ?? 0)
+        if !WOWUserManager.loginStatus {
+            UIApplication.currentViewController()?.toLoginVC(true)
+        }else{
+            requestFavoriteProduct(productId ?? 0)
+        }
+        
     }
     
     //用户喜欢某个单品

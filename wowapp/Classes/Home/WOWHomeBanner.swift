@@ -8,7 +8,7 @@
 
 import UIKit
 import ObjectMapper
-
+//暂时不用
 class WOWHomeBanner: WOWBaseModel,Mappable {
     var bannerList               :   [WOWCarouselBanners]?
     var carouselBanners          :   [WOWCarouselBanners]?
@@ -25,7 +25,7 @@ class WOWHomeBanner: WOWBaseModel,Mappable {
 
 }
 
-
+//暂时不用
 class WOWHomeBannerr: WOWBaseModel,Mappable {
     //moduleType = 101
     var banners               :   [WOWCarouselBanners]?

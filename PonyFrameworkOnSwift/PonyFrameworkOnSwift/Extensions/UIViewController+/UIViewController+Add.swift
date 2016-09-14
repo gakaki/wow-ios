@@ -57,35 +57,7 @@ public extension UIViewController{
     }
     
     func makeBuyCarNavigationItem(carEntranceButton:UIButton, handler:NavigationItemHandler){
-       
-//        let buyCarView = UIView(frame: CGRectMake(0, 0, 35, 35))
-//        buyCarView.userInteractionEnabled = true
-//        
-//        let image = UIImage(named: "buy")
-//        image?.imageWithRenderingMode(.AlwaysOriginal)
-//        let imageView = UIImageView.init(image: image)
-//        imageView.frame = CGRectMake(13, 2, 30, 30)
-//        buyCarView.addSubview(imageView)
-//        
-//        let frame = CGRectMake(24, 0, 16, 16)
-//        let numView = UIView(frame: frame)
-//        numView.borderRadius(8)
-//        numView.backgroundColor = UIColor.yellowColor()
-//        buyCarView.addSubview(numView)
-//        
-//        let numLabel = UILabel(frame: CGRectMake(0, 0, 16, 16))
-//        numLabel.numberOfLines = 1
-//        numLabel.textAlignment = .Center
-//        numLabel.backgroundColor = UIColor.clearColor()
-//        numLabel.font = UIFont.systemFontOfSize(10)
-//        numLabel.text = "\(carCount)"
-//        numView.addSubview(numLabel)
-//        
-//        if carCount == 0 {
-//            numView.hidden = true
-//        }else {
-//            numView.hidden = false
-//        }
+
         
         let item = UIBarButtonItem(customView: carEntranceButton)
 

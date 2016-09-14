@@ -18,6 +18,7 @@ class WOWHotStyleMain: WOWBaseViewController {
         self.title = "精选"
         // Do any additional setup after loading the view.
         request()
+        addObserver()
     }
     
     //MARK:Private Method
@@ -65,6 +66,12 @@ class WOWHotStyleMain: WOWBaseViewController {
         }
         
 
+    }
+    
+    private func addObserver(){
+        // 刷新购物车数量
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        
     }
       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

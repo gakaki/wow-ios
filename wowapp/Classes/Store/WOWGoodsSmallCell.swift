@@ -69,6 +69,8 @@ class WOWGoodsSmallCell: UICollectionViewCell {
                     
                     originalpriceLabel.setStrokeWithText(result)
                 }
+            }else {
+                originalpriceLabel.setStrokeWithText("")
             }
         }
 

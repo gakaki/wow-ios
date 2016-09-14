@@ -108,18 +108,20 @@ class WOWController: WOWBaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
         
     }
+    // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(sender: NSNotification)  {
-        
-        for a in 0..<bottomListArray.count{
+        guard (sender.object != nil) else{//
+                    return
+        }
+        for a in 0..<bottomListArray.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = bottomListArray[a]
           
             if model.productId! == sender.object!["productId"] as! Int {
                 model.favorite = sender.object!["favorite"] as? Bool
+                self.tableView.reloadData()
+                return
             }
-            
         }
-        self.tableView.reloadData()
-
     }
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
@@ -169,11 +171,9 @@ class WOWController: WOWBaseViewController {
         requestBottom()
         
     }
-    private func configBarItem(){        
+    private func configBarItem(){
         configBuyBarItem() // 购物车数量
     }
-    
-    
     
     //MARK:Actions
     func jsClick() -> Void {
@@ -247,7 +247,7 @@ class WOWController: WOWBaseViewController {
                     strongSelf.dataArr = brandArray
                     
                 }
-                if strongSelf.bottomListArray.count > 0 {
+                if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
                      strongSelf.tableView.reloadData()
                      WOWHud.dismiss()
                 }
@@ -303,7 +303,7 @@ class WOWController: WOWBaseViewController {
                     strongSelf.tableView.mj_footer = nil
                     
                 }
-                if strongSelf.dataArr.count > 0 {
+                if strongSelf.dataArr.count > 0 {// 确保reloadData 数据都存在
                     strongSelf.tableView.reloadData()
                      WOWHud.dismiss()
                 }
@@ -399,6 +399,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             }else{
                 cell.twoLb.hidden = true
             }
+            // 排序 0，1，2，3，4...
             let OneCellNumber = (indexPath.section  - dataArr.count + 0) * 2
             let TwoCellNumber = ((indexPath.section  - dataArr.count + 1) * 2) - 1
             
@@ -435,7 +436,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
             cell.indexPathSection = indexPath.section
             cell.delegate = self
-            
+            cell.modelData = model.moduleContentList
             cell.lbMainTitle.text = model.moduleContentList?.topicMainTitle
             cell.lbContent.text = model.moduleContentList?.topicDesc
             
@@ -447,9 +448,12 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }else if model.moduleType == 101{
             let cell                = tableView.dequeueReusableCellWithIdentifier("HomeBrannerCell", forIndexPath: indexPath) as! HomeBrannerCell
             
-            self.bannerArray = (model.moduleContent?.banners)!
-            cell.reloadBanner(self.bannerArray)
-            cell.cyclePictureView.delegate = self
+            if let banners = model.moduleContent?.banners{
+                self.bannerArray = banners
+                cell.reloadBanner(self.bannerArray)
+                cell.cyclePictureView.delegate = self
+            }
+          
             cell.selectionStyle = .None
             
             return cell
@@ -556,36 +560,39 @@ extension WOWController:HomeBottomDelegate{
         toVCProduct(model.productId)
         
     }
-    
-    func reloadTableViewData(productId: Int?,favorite: Bool) {
-
-        for a in 0..<bottomListArray.count{
-            let model = bottomListArray[a]
-            if model.productId == productId {
-                model.favorite = favorite
-            }
-
-        }
-        self.tableView.reloadData()
-
-    }
+//    
+//    func reloadTableViewData(productId: Int?,favorite: Bool) {
+//
+//        for a in 0..<bottomListArray.count{
+//            let model = bottomListArray[a]
+//            if model.productId == productId {
+//                model.favorite = favorite
+//            }
+//
+//        }
+//        self.tableView.reloadData()
+//
+//    }
 }
 extension WOWController:WOWHomeFormDelegate{
     
-    func goToVC(){//右滑更多
-        
-        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
-        vc.hideNavigationBar = false
-        self.navigationController?.pushViewController(vc, animated: true)
+    func goToVC(m:WOWModelVoTopic){//右滑更多
+        if let cid = m.groupId , cname = m.topicName{
+            toVCCategory( String(cid) ,cname: cname)
+        }
+
+//        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+//        vc.hideNavigationBar = false
+//        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     func goToProdectDetailVC(productId: Int?) {// 跳转产品详情页
         toVCProduct(productId)
         
     }
-    func reloadBottomTableViewData(){
-        request()
-    }
+//    func reloadBottomTableViewData(){
+//        request()
+//    }
 }
 
 extension WOWController:SenceCellDelegate{

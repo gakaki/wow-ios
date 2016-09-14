@@ -17,6 +17,12 @@ class WOWContentTopicController: WOWBaseViewController {
     var topic_id: Int           = 1
     var vo_topic:WOWModelVoTopic?
     
+    private var shareProductImage:UIImage? //供分享使用
+    lazy var placeImageView:UIImageView={  //供分享使用
+        let image = UIImageView()
+        return image
+    }()
+    
     private(set) var numberSections = 0
 
     override func viewDidLoad() {
@@ -46,7 +52,8 @@ class WOWContentTopicController: WOWBaseViewController {
         
     }
     func zdClick() -> Void {
-        print("dianzan")
+        let shareUrl = WOWShareUrl + "/item/\(topic_id ?? 0)"
+        WOWShareManager.share(vo_topic?.topicMainTitle, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
 
         
     }

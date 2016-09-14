@@ -1,6 +1,8 @@
-import MJRefresh
+import RxSwift
+import RxCocoa
+import RxDataSources
 
-class VCCategoryProducts:WOWBaseViewController
+class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 {
     var cv:UICollectionView!
     var vo_products         = [WOWProductModel]()
@@ -30,6 +32,29 @@ class VCCategoryProducts:WOWBaseViewController
         fatalError("init(coder:) has not been implemented")
     }
 
+    
+    
+    func is_load_more(y:CGFloat) -> Bool
+    {
+        
+        let contentSize  = self.cv.contentSize.height
+        let view_height  = self.view.frame.size.height * 1.5
+        var is_load_more = false
+        if ( y > contentSize - view_height ) && ( contentSize - view_height > 0 ) {
+            is_load_more = true
+        }else{
+            is_load_more = false
+        }
+        
+        //        print( "conteoff  y  : ", y )
+        //        print( "view_height  : ", view_height )
+        //        print( "contentSize  : ", contentSize )
+        //        print( "is_load_more : ", is_load_more )
+        //        print( "contentSize - view_height : ", contentSize - view_height )
+        
+        return is_load_more
+    }
+    
     override func setUI()
     {
         super.setUI()
@@ -55,15 +80,39 @@ class VCCategoryProducts:WOWBaseViewController
         cv.emptyDataSetSource = self;
         cv.emptyDataSetDelegate = self;
  
-        self.view.addSubview(cv)
+        view.addSubview(cv)
         
-        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
-        self.mj_footer.setTitle("", forState: MJRefreshState.Refreshing)
-        self.mj_footer.setTitle("", forState: MJRefreshState.Pulling)
+//        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
+//        self.mj_footer.setTitle("", forState: MJRefreshState.Refreshing)
+//        self.mj_footer.setTitle("", forState: MJRefreshState.Pulling)
         
 //        //为了在autolayout的视图里获得真的宽度 主要是给snapkit用的要先来一次
 //        view.setNeedsLayout()
 //        view.layoutIfNeeded()
+        
+        self.pageIndex = 0
+        self.ob_content_offset.asObservable()
+            .map { $0 }
+            .map { y in
+//                return y
+////                print(y)
+                return self.is_load_more(y)
+            }
+            .distinctUntilChanged()
+            .subscribeNext { [unowned self] in
+                self.title = "contentOffset.y = \($0)"
+                print("rx_contentOffset : \(self.title!)")
+                self.pageIndex = self.pageIndex + 1
+                self.request()
+            }
+            .addDisposableTo(rx_disposeBag)
+    }
+    
+    let ob_content_offset   = Variable(CGFloat(0))
+    let rx_disposeBag       = DisposeBag()
+
+    func scrollViewDidScroll( scrollView: UIScrollView){
+        ob_content_offset.value = scrollView.contentOffset.y
     }
     
     override func request(){
@@ -82,10 +131,10 @@ class VCCategoryProducts:WOWBaseViewController
                   DLog(strongSelf.vo_products.count)
     
                   if ( data.count <= 0 || data.count < strongSelf.query_showCount){
-                      strongSelf.cv.mj_footer = nil
+//                      strongSelf.cv.mj_footer = nil
                   }
                   else{
-                      strongSelf.cv.mj_footer = strongSelf.mj_footer
+//                      strongSelf.cv.mj_footer = strongSelf.mj_footer
                   }
     
                   //若是为第一页那么数据直接赋值
@@ -97,6 +146,7 @@ class VCCategoryProducts:WOWBaseViewController
                       strongSelf.vo_products         = [strongSelf.vo_products, data].flatMap { $0 }
                   }
     
+                
                   strongSelf.cv.reloadData()
               }
     

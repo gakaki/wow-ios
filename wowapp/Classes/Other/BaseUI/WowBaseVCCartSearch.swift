@@ -15,7 +15,7 @@ class WowBaseVCCartSearch: WOWBaseViewController {
         
         self.edgesForExtendedLayout = .None
   
-        configBuyBarItem(WOWUserManager.userCarCount)
+        configBuyBarItem()
         addObserver()
     }
     override func viewWillAppear(animated: Bool) {

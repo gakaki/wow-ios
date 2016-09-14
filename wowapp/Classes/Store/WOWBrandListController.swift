@@ -52,7 +52,7 @@ class WOWBrandListController: WOWBaseViewController {
         navigationItem.title = "品牌"
         configureSearchController()
         tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
-        configBuyBarItem(WOWUserManager.userCarCount)
+        configBuyBarItem()
         addObserver()
 
         

@@ -107,7 +107,23 @@ public extension UIViewController{
         }
     
     }
-
+    
+    func makeRightNavigationItem(navigationItem:UIView){
+        
+        let item = UIBarButtonItem(customView: navigationItem)
+        
+        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        spaceItem.width = -10
+        self.navigationItem.rightBarButtonItem = item
+        self.navigationItem.rightBarButtonItems = [spaceItem,item]
+        
+        if let left = self.navigationItem.rightBarButtonItem{
+            let offset = UIDevice.deviceType.rawValue > 3 ? -20 : -16
+            left.imageInsets = UIEdgeInsetsMake(0,CGFloat(offset),0, 8);
+        }
+        
+    }
+   
     
     func itemClick(item:UIBarButtonItem){
         if let closure = ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:item)]{

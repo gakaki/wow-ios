@@ -194,7 +194,7 @@ extension WOWBaseViewController{
 
 // MARK: - 购物车显示数量
 extension WOWBaseViewController {
-    func configBuyBarItem(badgeCount: Int){
+    func configBuyBarItem(){
         
         carBadgeCount = MIBadgeButton(type: .Custom)
         carBadgeCount!.frame = CGRectMake(0, 0, 35, 35)

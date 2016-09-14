@@ -169,10 +169,8 @@ class WOWController: WOWBaseViewController {
         requestBottom()
         
     }
-    private func configBarItem(){
-        
-        
-        configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
+    private func configBarItem(){        
+        configBuyBarItem() // 购物车数量
     }
     
     

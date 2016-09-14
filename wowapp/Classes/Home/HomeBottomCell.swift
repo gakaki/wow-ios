@@ -68,12 +68,19 @@ class HomeBottomCell: UITableViewCell {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdOne ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 
+//                let favorite = JSON(result)["favorite"].bool
+//                if  favorite != nil{
+//
+//                       strongSelf.delegate?.reloadTableViewData(self!.productIdOne,favorite: favorite!)
+//                    
+//                }/
+                
                 let favorite = JSON(result)["favorite"].bool
-                if  favorite != nil{
-
-                       strongSelf.delegate?.reloadTableViewData(self!.productIdOne,favorite: favorite!)
-                    
-                }
+                var params = [String: AnyObject]?()
+                
+                params = ["productId": strongSelf.productIdOne!, "favorite": favorite!]
+                
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
 //  NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in
@@ -85,13 +92,19 @@ class HomeBottomCell: UITableViewCell {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdTwo ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 
+//                let favorite = JSON(result)["favorite"].bool
+//
+//                if  favorite != nil{
+//
+//                    strongSelf.delegate?.reloadTableViewData(self!.productIdTwo,favorite: favorite!)
+//                    
+//                }
                 let favorite = JSON(result)["favorite"].bool
-
-                if  favorite != nil{
-
-                    strongSelf.delegate?.reloadTableViewData(self!.productIdTwo,favorite: favorite!)
-                    
-                }
+                var params = [String: AnyObject]?()
+                
+                params = ["productId": strongSelf.productIdTwo!, "favorite": favorite!]
+                
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
 // NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
         }) { (errorMsg) in

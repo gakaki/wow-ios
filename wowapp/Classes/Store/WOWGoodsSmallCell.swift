@@ -95,7 +95,12 @@ class WOWGoodsSmallCell: UICollectionViewCell {
                 strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
 //            if let strongSelf = self{
 //                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+                let favorite = JSON(result)["favorite"].bool
+                var params = [String: AnyObject]?()
+                
+                params = ["productId": productId, "favorite": favorite!]
+                
+                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
             }
         }) { (errorMsg) in
             

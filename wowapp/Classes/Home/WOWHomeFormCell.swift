@@ -94,7 +94,27 @@ class WOWHomeFormCell: UITableViewCell {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        
     }
+    
+
+    func refreshData(sender: NSNotification)  {
+    
+        for a in 0..<dataArr!.count{
+                let model = dataArr![a]
+            
+                if model.productId! == sender.object!["productId"] as! Int {
+                model.favorite = sender.object!["favorite"] as? Bool
+            }
+        
+        }
+        collectionView.reloadData()
+
+    
+}
+
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         

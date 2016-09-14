@@ -13,6 +13,8 @@ public enum RequestApi{
     
     static var HostUrl:String! = BaseUrl
     
+    
+    case Api_AD
     case Api_Sence
     
     //Tab 第一个栏 首页 该死的那3个url
@@ -198,6 +200,9 @@ extension RequestApi:TargetType{
     
     public var path:String{
         switch self{
+            
+        case .Api_AD:
+            return URL_AD
         case .Api_Category:
             return URL_category
         case .Api_Category_V2:
@@ -391,7 +396,8 @@ extension RequestApi:TargetType{
             .Api_SearchHot, .Api_SearchResult,
             .Api_DesignerList,
             .Api_Category_subCategory_with_image,
-            .Api_Category_V2:
+            .Api_Category_V2,
+            .Api_AD:
 
             return .GET
 

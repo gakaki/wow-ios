@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registAppKey(launchOptions)
 
         
-        let useAd = false
+        let useAd = true
         if useAd == true {
             self.startAD()
         }else{
@@ -62,6 +62,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var is_started_root_vc = false
     
     func startAD(){
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AD, successClosure: { [weak self](result) in
+            if let strongSelf = self{
+                print(result)
+            }
+        }) { (errorMsg) in
+            
+        }
+        
         
         //请求网络 获得图片
         //这个ad方案不好 侵入性太强 还是做到keywindow上加个 uiview 遮罩是更好的做法 这样也没法让 rootview预先加载 以后换

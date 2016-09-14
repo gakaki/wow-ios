@@ -25,8 +25,10 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var originalpriceLabel: UILabel!
     @IBOutlet weak var view_rightline: UIView!
     @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var bottomLine: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,9 +59,19 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         pictureImageView.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         desLabel.text = model.productName ?? ""
         desLabel.setLineHeightAndLineBreak(1.5)
-        let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
-        priceLabel.text     = result//千万不用格式化了
-        
+        if let price = model.sellPrice {
+            let result = WOWCalPrice.calTotalPrice([price],counts:[1])
+            priceLabel.text     = result//千万不用格式化了            
+            if let originalPrice = model.originalprice {
+                if originalPrice > price{
+                    //显示下划线
+                    let result = WOWCalPrice.calTotalPrice([originalPrice],counts:[1])
+                    
+                    originalpriceLabel.setStrokeWithText(result)
+                }
+            }
+        }
+
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
                 likeBtn.selected = true

@@ -15,8 +15,9 @@ class WOWProductDetailController: WOWBaseViewController {
     var productSpecModel                : WOWProductSpecModel?
     var aboutProductArray               = [WOWProductModel]()
     
+    var noMoreData                      :Bool = true
     private(set) var numberSections = 0
-    let pageSize = 10
+    let pageSize = 6
     //UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var likeButton: UIButton!

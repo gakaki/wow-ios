@@ -294,7 +294,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         
         if ( section == 0   && row == 0){
             let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302
-            cell.setData( d.moduleContentArr! )
+            cell.setData( d.moduleContentArr ?? [WowModulePageItemVO]() )
             cell_heights[section] = cell.heightAll
             cell.delegate = self
             cell.selectionStyle = .None
@@ -303,7 +303,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         }
         if ( section == 1   && row == 0){
             let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
-            cell.setData( d.moduleContentArr! )
+            cell.setData( d.moduleContentArr ?? [WowModulePageItemVO]())
             cell_heights[section]  = cell.heightAll
             cell.delegate = self
             cell.selectionStyle = .None
@@ -325,7 +325,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             let cell            = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301
             cell.delegate       = self
             cell.selectionStyle = .None
-            cell.setData(d.moduleContentArr!)
+            cell.setData(d.moduleContentArr ?? [WowModulePageItemVO]())
             cell_heights[section]  = cell.heightAll
 //            print("cel height is ",cell_heights[section])
             cell.bringSubviewToFront(cell.collectionView)

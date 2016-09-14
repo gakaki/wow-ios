@@ -10,7 +10,6 @@ import UIKit
 
 class WOWContentTopicTopCell: UITableViewCell {
     
-    @IBOutlet weak var labelWidth: NSLayoutConstraint!
     @IBOutlet weak var topicImg: UIImageView!
     @IBOutlet weak var topicTitle: UILabel!
     @IBOutlet weak var topicDesc: UILabel!
@@ -28,6 +27,11 @@ class WOWContentTopicTopCell: UITableViewCell {
     }
     
     func showData(model: WOWModelVoTopic?) {
-        labelWidth.constant = MGScreenWidth*0.7
+        if let model = model {
+            topicImg.set_webimage_url(model.topicImg)
+            topicTitle.text = model.topicMainTitle
+            topicDesc.text = model.topicDesc
+            topicDesc.setLineHeightAndLineBreak(1.5)
+        }
     }
 }

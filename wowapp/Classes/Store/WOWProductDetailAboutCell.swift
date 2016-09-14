@@ -7,17 +7,19 @@
 //
 
 import UIKit
-protocol  WOWProductDetailAboutCellDelegate: class{
-    func aboutProduct(productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int)
+@objc protocol  WOWProductDetailAboutCellDelegate: NSObjectProtocol{
     
-    func selectCollectionIndex(productId: Int?)
+    
+    optional func aboutProduct(productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int)
+    func selectCollectionIndex(productId: Int)
+
 }
 
 class WOWProductDetailAboutCell: UITableViewCell {
     
     var pageIndex = 1 //翻页
     var isRreshing : Bool = false
-    let pageSize = 10
+    let pageSize = 6
     
     weak var delegate: WOWProductDetailAboutCellDelegate?
     //MARK: ->  params
@@ -45,7 +47,6 @@ class WOWProductDetailAboutCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
-        collectionView.xzm_footer = self.xzm_footer
     }
     
 
@@ -73,6 +74,8 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
         let model = dataArr?[indexPath.item]
         if let m = model {
             cell.showData(m, indexPath: indexPath)
+            cell.view_rightline.hidden = true
+            cell.bottomLine.hidden = true
 //            let url             = m.productImg ?? ""
 ////            cell.pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
 //            cell.pictureImageView.set_webimage_url(url)
@@ -96,7 +99,7 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let del = delegate {
             let product = dataArr?[indexPath.row]
-            del.selectCollectionIndex(product?.productId)
+            del.selectCollectionIndex(product?.productId ?? 0)
 
         }
 
@@ -116,7 +119,7 @@ extension WOWProductDetailAboutCell {
             isRreshing = true
         }
         if let del = delegate {
-            del.aboutProduct(self, pageIndex: pageIndex, isRreshing: isRreshing, pageSize: pageSize)
+            del.aboutProduct!(self, pageIndex: pageIndex, isRreshing: isRreshing, pageSize: pageSize)
         }
     }
     

@@ -89,8 +89,6 @@
 		06FD5F011D7AB7F10070B763 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5F001D7AB7F10070B763 /* AdSupport.framework */; };
 		06FD5F031D7AB7FB0070B763 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5F021D7AB7FB0070B763 /* CoreMotion.framework */; };
 		06FD5F071D7AB8B70070B763 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5F061D7AB8B70070B763 /* SafariServices.framework */; };
-		06FD5F0E1D7ABA0A0070B763 /* libDeepShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FD5F0C1D7ABA0A0070B763 /* libDeepShare.a */; };
-		06FD5F0F1D7ABA0A0070B763 /* release notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06FD5F0D1D7ABA0A0070B763 /* release notes.txt */; };
 		06FED4441D4634A600D7B068 /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 06FED4431D4634A600D7B068 /* city.json */; };
 		292CBA081CFE85B000248C88 /* WOWRegistInfoFirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */; };
 		292CBA0A1CFE867D00248C88 /* WOWRegistInfoSecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */; };
@@ -552,10 +550,6 @@
 		06FD5F021D7AB7FB0070B763 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		06FD5F041D7AB85E0070B763 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		06FD5F061D7AB8B70070B763 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		06FD5F0A1D7ABA0A0070B763 /* DeepShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepShare.h; sourceTree = "<group>"; };
-		06FD5F0B1D7ABA0A0070B763 /* DSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSError.h; sourceTree = "<group>"; };
-		06FD5F0C1D7ABA0A0070B763 /* libDeepShare.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDeepShare.a; sourceTree = "<group>"; };
-		06FD5F0D1D7ABA0A0070B763 /* release notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "release notes.txt"; sourceTree = "<group>"; };
 		06FED4431D4634A600D7B068 /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
 		292CBA071CFE85B000248C88 /* WOWRegistInfoFirstController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoFirstController.swift; sourceTree = "<group>"; };
 		292CBA091CFE867D00248C88 /* WOWRegistInfoSecondController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRegistInfoSecondController.swift; sourceTree = "<group>"; };
@@ -942,7 +936,6 @@
 				29FF27371CFDB5D800DF2A9B /* libsqlite3.tbd in Frameworks */,
 				29FF27351CFDB5D200DF2A9B /* CoreGraphics.framework in Frameworks */,
 				29FF27331CFDB5C300DF2A9B /* libiconv.tbd in Frameworks */,
-				06FD5F0E1D7ABA0A0070B763 /* libDeepShare.a in Frameworks */,
 				29FF27311CFDB5BD00DF2A9B /* Security.framework in Frameworks */,
 				29FF272F1CFDB5B500DF2A9B /* ImageIO.framework in Frameworks */,
 				29FF272D1CFDB5AB00DF2A9B /* SystemConfiguration.framework in Frameworks */,
@@ -1228,25 +1221,6 @@
 				06FD5EF81D7AB4600070B763 /* TalkingDataSMS.h */,
 			);
 			path = TalkingData;
-			sourceTree = "<group>";
-		};
-		06FD5F081D7ABA0A0070B763 /* DeepLink */ = {
-			isa = PBXGroup;
-			children = (
-				06FD5F091D7ABA0A0070B763 /* DeepShare */,
-			);
-			path = DeepLink;
-			sourceTree = "<group>";
-		};
-		06FD5F091D7ABA0A0070B763 /* DeepShare */ = {
-			isa = PBXGroup;
-			children = (
-				06FD5F0A1D7ABA0A0070B763 /* DeepShare.h */,
-				06FD5F0B1D7ABA0A0070B763 /* DSError.h */,
-				06FD5F0C1D7ABA0A0070B763 /* libDeepShare.a */,
-				06FD5F0D1D7ABA0A0070B763 /* release notes.txt */,
-			);
-			path = DeepShare;
 			sourceTree = "<group>";
 		};
 		292CBA0B1CFE868800248C88 /* View */ = {
@@ -1537,7 +1511,6 @@
 			isa = PBXGroup;
 			children = (
 				061304A11D8E378C001F05D6 /* DACircularProgress */,
-				06FD5F081D7ABA0A0070B763 /* DeepLink */,
 				06FD5EF01D7AB4600070B763 /* Analytics */,
 				638B18A21D7829F800F89C76 /* HolderTextView */,
 				06B765F21D77E96600F803A9 /* GYHttpMock */,
@@ -2293,7 +2266,6 @@
 				2D6B027F1D589615003D21C1 /* WOWOrderDetailSThreeCell.xib in Resources */,
 				636C33DC1D52EA1F00CA4E69 /* WOWOrderFreightCell.xib in Resources */,
 				068B60B51D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib in Resources */,
-				06FD5F0F1D7ABA0A0070B763 /* release notes.txt in Resources */,
 				29FF26671CFDA86300DF2A9B /* WOWSearchCell.xib in Resources */,
 				29FF26481CFDA86300DF2A9B /* WOWBuyCarNormalCell.xib in Resources */,
 				29FF27121CFDA86300DF2A9B /* wowprotocol.html in Resources */,
@@ -2893,6 +2865,88 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/TalkingData",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/DeepLink/DeepShare",
 				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking/AFNetworking.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire/Alamofire.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/DZNEmptyDataSet/DZNEmptyDataSet.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/EZSwiftExtensions/EZSwiftExtensions.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FCUUID/FCUUID.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB/FMDB.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FlexboxLayout/FlexboxLayout.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/HappyDNS/HappyDNS.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Hashids-Swift/Hashids_Swift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/JWLaunchAd/JWLaunchAd.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Kingfisher/Kingfisher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MJRefresh/MJRefresh.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Moya/Moya.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/ObjectMapper/ObjectMapper.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/PonyFrameworkOnSwift/PonyFrameworkOnSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Qiniu/Qiniu.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Result/Result.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa/RxCocoa.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxDataSources/RxDataSources.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift/RxSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage/SDWebImage.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SVProgressHUD/SVProgressHUD.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/StyleKit/StyleKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyUserDefaults/SwiftyUserDefaults.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/UICKeyChainStore/UICKeyChainStore.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/UIColor_Hex_Swift/UIColor_Hex_Swift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/VTMagic/VTMagic.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/WowBase/WowBase.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/XZMRefresh/XZMRefresh.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/YYCache/YYCache.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/YYImage/YYImage.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/YYWebImage/YYWebImage.framework/Headers\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Pingpp\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/RongCloudIMKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/UMengAnalytics-NO-IDFA\"",
+					"-fembed-bitcode",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2932,6 +2986,88 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/GrowingIO",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/TalkingData",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/DeepLink/DeepShare",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking/AFNetworking.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire/Alamofire.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/DZNEmptyDataSet/DZNEmptyDataSet.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/EZSwiftExtensions/EZSwiftExtensions.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FCUUID/FCUUID.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB/FMDB.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FlexboxLayout/FlexboxLayout.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/HappyDNS/HappyDNS.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Hashids-Swift/Hashids_Swift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/JWLaunchAd/JWLaunchAd.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Kingfisher/Kingfisher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MJRefresh/MJRefresh.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Moya/Moya.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/ObjectMapper/ObjectMapper.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/PonyFrameworkOnSwift/PonyFrameworkOnSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Qiniu/Qiniu.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Result/Result.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa/RxCocoa.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxDataSources/RxDataSources.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift/RxSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage/SDWebImage.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SVProgressHUD/SVProgressHUD.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/StyleKit/StyleKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyUserDefaults/SwiftyUserDefaults.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/UICKeyChainStore/UICKeyChainStore.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/UIColor_Hex_Swift/UIColor_Hex_Swift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/VTMagic/VTMagic.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/WowBase/WowBase.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/XZMRefresh/XZMRefresh.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/YYCache/YYCache.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/YYImage/YYImage.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/YYWebImage/YYWebImage.framework/Headers\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Pingpp\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/RongCloudIMKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/UMengAnalytics-NO-IDFA\"",
+					"-fembed-bitcode",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";

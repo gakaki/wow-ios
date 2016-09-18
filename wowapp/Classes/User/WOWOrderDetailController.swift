@@ -421,7 +421,7 @@ extension WOWOrderDetailController{
                 let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                 vc.payMethod = paymentChannelName ?? ""
                 vc.orderid = orderCode ?? ""
-                vc.totalPrice = String(format: "%.2f",payAmount ?? 0)
+                vc.totalPrice = "¥ " + String(format: "%.2f",payAmount ?? 0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
             

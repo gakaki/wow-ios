@@ -14,7 +14,7 @@ class WOWPaySuccessController: WOWBaseViewController {
     var payMethod   = ""
     @IBOutlet weak var orderIdLabel: UILabel!
     @IBOutlet weak var payMethodLabel: UILabel!
-    @IBOutlet weak var orderCountLabel: UILabel!
+    @IBOutlet weak var orderCountLabel: UILabel!// 订单总金额
     @IBOutlet weak var successView: UIView!
     
     override func viewDidLoad() {

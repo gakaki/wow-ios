@@ -88,7 +88,6 @@ class WOWController: WOWBaseViewController {
     func backTop()  {
         let index = NSIndexPath.init(forRow: 0, inSection: 0)
         self.tableView.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.None, animated: true)
-//        self.tableView.setContentOffset(CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top), animated: true)
     }
     
     func loginSuccess()  {// 重新刷新数据

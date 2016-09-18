@@ -99,7 +99,9 @@ class WOWSureOrderController: WOWBaseViewController {
                         let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                         vc.payMethod = (strongSelf.payType == "ali" ? "支付宝":"微信")
                         vc.orderid = orderid
-                        vc.totalPrice = totalPrice
+                        
+                        vc.totalPrice = "¥ " + String(format: "%@",totalPrice ?? "")
+                        
                         strongSelf.navigationController?.pushViewController(vc, animated: true)
                     case "cancel":
                         WOWHud.showMsg("支付取消")

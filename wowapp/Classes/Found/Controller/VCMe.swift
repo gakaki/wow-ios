@@ -17,6 +17,7 @@ class VCMe:WOWBaseViewController{
         label.textAlignment = NSTextAlignment.Center
         label.text = "test label"
         
+        self.view.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(label)
         
     }

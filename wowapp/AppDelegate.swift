@@ -11,7 +11,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import YYWebImage
 //import JSPatch
-import XHLaunchAd
+import SwiftyUserDefaults
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,136 +19,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     static var rootVC : UIViewController?
     //    var sideController:WOWSideContainerController!
-    
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        window = UIWindow(frame:UIScreen.mainScreen().bounds)
-        
-        
-        IQKeyboardManager.sharedManager().enable = true
-        //初始化外观
-        //com.wowdsgn.Wow
-        initialAppearance()
-//        let webpSupport = YYImageWebPAvailable()
-        /**
-         注册第三方
-         */
-        registAppKey(launchOptions)
+    var adLaunchView: AdLaunchView?
 
-        
-        let useAd = false
-        if useAd == true {
-            self.startAD()
-        }else{
-            self.configRootVC()
-        }
-       
-        
+    
+    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+        window?.makeKeyAndVisible()
+        self.configRootVC()
+        return true
+    }
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        self.fetchADImage()
         asyncLoad()
 
-        
-        window?.makeKeyAndVisible()
-        
-        
+        IQKeyboardManager.sharedManager().enable = true
+        initialAppearance()     //初始化外观
+        registAppKey(launchOptions) //注册第三方
 //        JSPatchHelper.jspatch_playground()
 //        JSPatchHelper.jspatch_init()
-        
-        
-        //显示启动
+        adLaunchView    = AdLaunchView(frame: UIScreen.mainScreen().bounds)
+        adLaunchView?.delegate = self
+        window?.addSubview(adLaunchView!)
         
         return true
     }
  
     
-    var is_started_root_vc = false
-    
-    func startAD(){
-        
-        //请求网络 获得图片
-        //这个ad方案不好 侵入性太强 还是做到keywindow上加个 uiview 遮罩是更好的做法 这样也没法让 rootview预先加载 以后换
-        //1.显示启动广告
-        let frame = CGRectMake(0, 0, self.window!.bounds.size.width, self.window!.bounds.size.height-150)
-        XHLaunchAd.showWithAdFrame( frame, setAdImage: { launchAd in
-            
-            //未检测到广告数据,启动页停留时间,默认3,(设置4即表示:启动页显示了4s,还未检测到广告数据,就自动进入window根控制器)
-            launchAd.noDataDuration = 3
-            
-            //广告图片地址
-            let imgUrl   = "http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg"
-            //广告停留时间
-            let duration = 3
-            //广告点击跳转链接
-
-            //2.设置广告数据
-                launchAd.setImageUrl(imgUrl, duration: duration, skipType:SkipType.TimeText , options: XHWebImageOptions.Default, completed: { img, url in
-                    //异步加载图片完成回调(若需根据图片尺寸,刷新广告frame,可在这里操作)
-                    //weakLaunchAd.adFrame = ...;
-                }, click: {
-                    //1.用浏览器打开
-//                    let openUrl  =  "http://www.returnoc.com";
-//                    UIApplication.sharedApplication().openURL(NSURL(string:openUrl)!)
-                    //2.在webview中打开
-                   
-//                    WebViewController *VC = [[WebViewController alloc] init];
-//                    VC.URLString = openUrl;
-//                    [weakLaunchAd presentViewController:VC animated:YES completion:nil];
-//                    self.configRootVC()
-//                    XHLaunchAd.dismissVC()
-
-                    
-                    if ( self.is_started_root_vc == false){
-                        self.configRootVC()
-                        self.is_started_root_vc = true
-                    }
-                    
-                    launchAd.view.hidden = true
-
-//                }];
-                })
-        }) {
-            if ( self.is_started_root_vc == false){
-                self.configRootVC()
-                self.is_started_root_vc = true
-
-            }
-        }
-        
-//        [XHLaunchAd showWithAdFrame:CGRectMake(0, 0,self.window.bounds.size.width, self.window.bounds.size.height-150) setAdImage:^(XHLaunchAd *launchAd) {
-//
-//            
-//            //广告图片地址
-//            NSString *imgUrl = @"http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg";
-//            //广告停留时间
-//            NSInteger duration = 6;
-//            //广告点击跳转链接
-//            NSString *openUrl = @"http://www.returnoc.com";
-//            
-//            //2.设置广告数据
-//            /定义一个weakLaunchAd
-//            __weak __typeof(launchAd) weakLaunchAd = launchAd;
-//            [launchAd setImageUrl:imgUrl duration:duration skipType:SkipTypeTimeText options:XHWebImageDefault completed:^(UIImage *image, NSURL *url) {
-//            
-//            
-//            } click:^{
-//            
-//                       //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl]];
-//            
-//            //2.在webview中打开
-//            WebViewController *VC = [[WebViewController alloc] init];
-//            VC.URLString = openUrl;
-//            [weakLaunchAd presentViewController:VC animated:YES completion:nil];
-//            
-//            }];
-//            
-//            } showFinish:^{
-//            
-//            //广告展示完成回调,设置window根控制器
-//            self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[UIViewController alloc] init]];
-//            
-//            }];
-        
-        
-        
-    }
+   
     
     func asyncLoad(){
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { [unowned self] in
@@ -408,4 +304,32 @@ extension AppDelegate:DeepShareDelegate{
         tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], forState: .Normal)
         tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], forState: .Selected)
     }
+    
+}
+
+//ADLaunchView 广告view
+extension AppDelegate: AdLaunchViewDelegate {
+    func adLaunchView(launchView: AdLaunchView, bannerImageDidClick imageURL: String) {
+        let urls = "http://www.desgard.com/"
+        if let url: NSURL = NSURL(string: urls) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        
+    }
+    
+    
+    func fetchADImage(){
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AD, successClosure: { (result) in
+            var r                     =  JSON(result)
+            let res                   =  Mapper<WOWVOAd>().mapArray(r.arrayObject) ?? [WOWVOAd]()
+            if let imgUrl = res.first?.imgUrl {
+                Defaults[.pic_ad] = imgUrl
+            }
+        }) { (errorMsg) in
+            
+        }
+        
+    }
+    
 }

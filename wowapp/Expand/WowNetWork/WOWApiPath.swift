@@ -14,8 +14,8 @@ import Foundation
 
 
 //#if WOWDEBUG
-   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
-//  let BaseUrl = "http://api.c.wowdsgn.com:10999/mobile-api-dev/v1/" //外网访问内网也可以的地址
+//   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
+  let BaseUrl = "http://api.c.wowdsgn.com:10999/mobile-api-dev/v1/" //外网访问内网也可以的地址
 //   let BaseUrl = "https://mobile-api.wowdsgn.com/v1/" //内网开发
 //  let BaseUrl = "https://mobile-api.stg.wowdsgn.com/v1/" //内网开发
 //#else
@@ -23,9 +23,8 @@ import Foundation
 //#endif
 
 /****************************API_URL接口**********************************/
-
 //1.app首页
-
+let URL_AD                              = "page/startupimg"
 let URL_category                        = "category/sub-category"
 let URL_producty_by_category            = "category/product"
 let URL_category_subCategory_with_image = "category/img-category"

@@ -87,9 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
     {
         //DeepShare
-        if DeepShare.continueUserActivity(userActivity) {
-            return true
-        }
+//        if DeepShare.continueUserActivity(userActivity) {
+//            return true
+//        }
         
         
         return true
@@ -107,10 +107,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        //DeepShare
-        if DeepShare.handleURL(url) {
-            return true
-        }
+//        //DeepShare
+//        if DeepShare.handleURL(url) {
+//            return true
+//        }
         
         
 //        if MonkeyKing.handleOpenURL(url) {
@@ -133,10 +133,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        //DeepShare
-        if DeepShare.handleURL(url) {
-            return true
-        }
+//        //DeepShare
+//        if DeepShare.handleURL(url) {
+//            return true
+//        }
         
         return true
     }
@@ -148,8 +148,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-extension AppDelegate:DeepShareDelegate{
-    
+//extension AppDelegate:DeepShareDelegate{
+extension AppDelegate{
     func rootVCGuide(){
         let nav = UIStoryboard.initNavVC("Login", identifier:String(WOWGuideController))
         nav.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -217,7 +217,7 @@ extension AppDelegate:DeepShareDelegate{
         //Growing
         Growing.startWithAccountId("a04e14656f08dc7e")
         //DeepShare
-        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
+//        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
         //Talking Data
         TalkingData.sessionStarted("88C9035CD51E8009BE4441263D83003A", withChannelId: "app store")
         

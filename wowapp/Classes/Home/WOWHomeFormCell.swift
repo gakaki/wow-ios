@@ -101,7 +101,10 @@ class WOWHomeFormCell: UITableViewCell {
     
 
     func refreshData(sender: NSNotification)  {
-    
+        guard (sender.object != nil) else{//
+            return
+        }
+
         for a in 0..<dataArr!.count{
                 let model = dataArr![a]
             
@@ -111,6 +114,7 @@ class WOWHomeFormCell: UITableViewCell {
         
         }
         collectionView.reloadData()
+        
 
     
 }
@@ -169,21 +173,13 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
             
         }
     }
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        
-//        if scrollView.mj_offsetX > 810.0 && scrollView.mj_offsetX < 812.0{
-//            //            print("跳转详情页") // 待处理细致逻辑
-//        }
-//        guard scrollView is UICollectionView else{
-//            
-//            return
-//        }
-//        
-//        // 记录当前collectionView的偏移量
-//        let horizontalOffset = scrollView.contentOffset.x
-//        
-//        self.scrollViewOffsetDic[scrollView.tag] = horizontalOffset
-//
-//    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        // 记录当前collectionView的偏移量
+        let horizontalOffset = scrollView.contentOffset.x
+        
+        self.scrollViewOffsetDic[scrollView.tag] = horizontalOffset
+
+    }
 
 }

@@ -117,12 +117,13 @@ class WOWController: WOWBaseViewController {
         for a in 0..<bottomListArray.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = bottomListArray[a]
           
-            if model.productId! == sender.object!["productId"] as! Int {
+            if model.productId! == sender.object!["productId"] as? Int {
                 model.favorite = sender.object!["favorite"] as? Bool
-                self.tableView.reloadData()
-                return
+               
+                break
             }
         }
+         self.tableView.reloadData()
     }
     lazy var banner:WOWBanner = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
@@ -464,7 +465,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
-        print("\(dataArr.count)--\(bottomListCount.getParityCellNumber())++\(section)")
+//        print("\(dataArr.count)--\(bottomListCount.getParityCellNumber())++\(section)")
         guard section < dataArr.count  else {
             
             if section == ((dataArr.count ?? 0) + bottomListCount.getParityCellNumber()) - 1{
@@ -546,8 +547,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }
         lb1.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(view)
-            make.top.equalTo(lb).offset(10)
-            make.bottom.equalTo(view).offset(10)
+            make.top.equalTo(lb).offset(7)
+            make.bottom.equalTo(view).offset(-13)
         }
         lbBottom.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(view)

@@ -110,6 +110,10 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
       
         return CGFloat.min
         
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let model = dataArr[indexPath.section]
         
+        toVCTopidDetail(model.moduleContentList?.id)
     }
 }

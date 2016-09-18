@@ -54,6 +54,9 @@ PODS:
     - RxCocoa (~> 2.2)
     - RxSwift (~> 2.2)
   - RxSwift (2.6.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - SnapKit (0.19.1)
   - StyleKit (1.0.0)
   - SVProgressHUD (2.0.3)
@@ -98,6 +101,7 @@ DEPENDENCIES:
   - RxCocoa (= 2.6.0)
   - RxDataSources (= 0.8.1)
   - RxSwift (= 2.6.0)
+  - SDWebImage
   - SnapKit (~> 0.19.1)
   - StyleKit
   - SVProgressHUD (~> 2.0.2)
@@ -148,6 +152,7 @@ SPEC CHECKSUMS:
   RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
   RxDataSources: 4a87345847d66ef84ecc10bdfa189190f3cd6b12
   RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   StyleKit: 7dac3ff9ffec40fec57f9a8582c4ff5a95ca17e8
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
@@ -163,6 +168,6 @@ SPEC CHECKSUMS:
   YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: cca5f4592c109b539cb3eb68cc906b60a31b3007
+PODFILE CHECKSUM: 700cc51bdefb3f8a019154922f795ba8c48e2408
 
 COCOAPODS: 1.1.0.beta.1

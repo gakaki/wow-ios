@@ -28,6 +28,7 @@ pod 'StyleKit'
 pod 'UIColor_Hex_Swift'
 pod 'VTMagic'
 pod 'Hashids-Swift'			#短id生成
+pod 'SDWebImage'
 
 #七牛 sdk
 pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"

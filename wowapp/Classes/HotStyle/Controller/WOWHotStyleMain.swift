@@ -71,9 +71,18 @@ class WOWHotStyleMain: WOWBaseViewController {
     private func addObserver(){
         // 刷新购物车数量
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
         
     }
-      override func didReceiveMemoryWarning() {
+    func loginSuccess()  {// 重新刷新数据
+        request()
+    }
+    func exitLogin()  {// 重新刷新数据
+        request()
+    }
+
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -114,6 +123,19 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let model = dataArr[indexPath.section]
         
-        toVCTopidDetail(model.moduleContentList?.id)
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(WOWContentTopicController)) as! WOWContentTopicController
+        //                vc.hideNavigationBar = true
+        vc.topic_id = model.moduleContentList?.id ?? 0
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+        
+//        toVCTopidDetail(model.moduleContentList?.id)
     }
+}
+extension WOWHotStyleMain:WOWHotStyleDelegate{
+    
+    func reloadTableViewData(){
+        request()
+    }
+
 }

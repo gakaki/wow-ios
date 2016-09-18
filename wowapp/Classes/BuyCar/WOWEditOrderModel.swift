@@ -11,7 +11,7 @@ import ObjectMapper
 
 class WOWEditOrderModel: WOWBaseModel,Mappable {
     var deliveryFee                          : Double?
-    var totalAmount                         : Double?
+    var totalAmount                          : Double?
     var productTotalAmount                   : Double?
     var orderSettles                         : [WOWCarProductModel]?
     var endUserCouponId                      : Int?

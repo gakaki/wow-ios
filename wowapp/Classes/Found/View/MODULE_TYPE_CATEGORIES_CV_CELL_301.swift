@@ -26,6 +26,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         bg_pic                  = UIImageView()
+        bg_pic.contentMode =   .ScaleToFill
         self.addSubview(bg_pic)
         bg_pic.snp_makeConstraints { (make) -> Void in
             make.size.equalTo(self)

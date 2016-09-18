@@ -10,6 +10,7 @@ import UIKit
 
 class WOWHotStyleCell: UITableViewCell {
 
+    @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var lbLogoName: UILabel!// 左上角logo名字
     @IBOutlet weak var imgLogo: UIImageView!// 左上角logo 图片
     @IBOutlet weak var lbPraise: UILabel!//多少人看
@@ -60,9 +61,10 @@ class WOWHotStyleCell: UITableViewCell {
             }
         }
         
-            lbBrowse.text =   model.moduleContentList?.likeQty?.toString
-        
-            lbPraise.text = model.moduleContentList?.readQty?.toString
+            lbBrowse.text    = model.moduleContentList?.likeQty?.toString
+
+            lbPraise.text    = model.moduleContentList?.readQty?.toString
+            btnLike.selected = model.moduleContentList?.favorite ?? false
 
     }
     @IBAction func shareClick(sender: UIButton) {

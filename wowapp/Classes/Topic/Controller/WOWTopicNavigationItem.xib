@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -36,6 +36,7 @@
                         <constraint firstAttribute="width" constant="35" id="IwU-r7-7QD"/>
                     </constraints>
                     <state key="normal" image="Thumb-black"/>
+                    <state key="selected" image="Thumb-active"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOC-QX-LeV">
                     <rect key="frame" x="35" y="10.5" width="7.5" height="14.5"/>
@@ -67,6 +68,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Thumb-active" width="30" height="30"/>
         <image name="Thumb-black" width="30" height="30"/>
         <image name="buy" width="30" height="30"/>
         <image name="icon_share" width="30" height="30"/>

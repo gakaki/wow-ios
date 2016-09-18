@@ -120,6 +120,8 @@ public enum RequestApi{
     
     case Api_LikeDesigner
     
+    case Api_LikeProject(topicId: Int)
+    
     case Api_Coupons(params: [String: AnyObject]? )  //用户优惠券列表
 
     
@@ -308,7 +310,8 @@ extension RequestApi:TargetType{
             return URL_LikeBrand
         case .Api_LikeDesigner:
             return URL_LikeDesigner
-            
+        case .Api_LikeProject:
+            return URL_LikeProject
         case .Api_Login:
             return URL_login
         case .Api_Register:
@@ -473,6 +476,10 @@ extension RequestApi:TargetType{
             //用户喜欢相关
             case let .Api_FavoriteProduct(productId):
                 params = ["productId":productId]
+            
+            case let .Api_LikeProject(topicId):
+            params = ["id":topicId]
+            
             case let .Api_FavoriteBrand(brandId):
                 params = ["brandId":brandId]
             case let .Api_FavoriteDesigner(designerId):

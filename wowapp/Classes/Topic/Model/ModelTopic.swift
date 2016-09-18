@@ -28,6 +28,8 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
     var likeQty                     :Int?
     var readQty                     :Int?
     var imageSerial                 :WOWImageSerial?
+    var favorite                    : Bool?
+    
     required init?(_ map: Map) {
         
         
@@ -48,6 +50,7 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
         likeQty         <- map["likeQty"]
         readQty         <- map["readQty"]
         imageSerial     <- map["imageSerial"]
+        favorite        <- map["favorite"]
     }
 }
 

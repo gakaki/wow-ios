@@ -59,6 +59,27 @@ struct WOWCalPrice {
         
         return result!
     }
+    static func totalPrice(prices:[Double],counts:[Int]) ->String{
+        if prices.isEmpty {
+            return "0.00"
+        }
+        var totalPrice = NSDecimalNumber(double:0.00)
+        for (index,value) in prices.enumerate() {
+            let perPrice = NSDecimalNumber(double: value)
+            let countNumber = NSDecimalNumber(integer:counts[index])
+            let itemPrice = perPrice.decimalNumberByMultiplyingBy(countNumber)
+            totalPrice = totalPrice.decimalNumberByAdding(itemPrice)
+        }
+        let numberFormat = NSNumberFormatter()
+        numberFormat.numberStyle = .DecimalStyle
+        numberFormat.minimumFractionDigits = 2
+        numberFormat.maximumFractionDigits = 2
+        var result = numberFormat.stringFromNumber(totalPrice)
+        result = result ?? "0.00"
+        
+        return result!
+    }
+
 }
 
 /**

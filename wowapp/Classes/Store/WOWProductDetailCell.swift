@@ -48,7 +48,7 @@ class WOWProductDetailCell: UITableViewCell {
             
 //            dispatch_async(dispatch_get_main_queue()) {
 //                
-                 self.loadImage(secondaryImg.image!)
+//                 self.loadImage(secondaryImg.image!)
 //            }
 //           
 //            productImg.set_webimage_url_base(secondaryImg.image, place_holder_name: "placeholder_product")

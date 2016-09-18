@@ -173,10 +173,13 @@ class WOWEditOrderController: WOWBaseViewController {
     //请求创建订单
     func requestOrderCreat() -> Void {
         var params = [String: AnyObject]?()
+        // 截取两位小数点，确保金额正确
+        let totalAmoutStr = String(format: "%.2f",orderSettle?.totalAmount ?? 0)
+        
         if let endUserCouponId = couponModel?.id {
-            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount) ?? 0, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": totalAmoutStr, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
         }else {
-            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": (orderSettle?.totalAmount) ?? 0, "remark": tipsTextField.text ?? ""]
+            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": totalAmoutStr, "remark": tipsTextField.text ?? ""]
         }
         
         WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in

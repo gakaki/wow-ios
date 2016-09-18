@@ -170,7 +170,23 @@ class VCFound: VCBaseVCCategoryFound {
     private func addObserver(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
         
+    }
+    func refreshData(sender: NSNotification)  {
+
+        guard (sender.object != nil) else{//
+            return
+        }
+
+        for a in 0 ..< self.data.count {
+            let model = self.data[a]
+            if model.moduleType == 501 {
+                model.moduleContentItem?.favorite = sender.object!["favorite"] as? Bool
+                break
+            }
+        }
+        tableView.reloadData()
     }
     //MARK:Actions
     func exitLogin() {
@@ -315,7 +331,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             cell.delegate       = self
             cell.selectionStyle = .None
             cell.setData( d.moduleContentItem! )
-            cell.btnLike.selected = isFavorite
+//            cell.btnLike.selected = isFavorite
             cell.bringSubviewToFront(cell.product_view)
             
             return cell

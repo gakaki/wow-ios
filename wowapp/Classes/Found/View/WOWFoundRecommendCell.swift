@@ -92,7 +92,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
             }
         }
         right_label_price_bottom.text        = p.get_formted_sell_price()
-
+        self.btnLike.selected = p.favorite ?? false
         self.product                         = p
         
       
@@ -133,7 +133,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         button.setImage(image_selected, forState: .Selected)
         
         button.addTarget(self, action: #selector(btn_like_toggle),forControlEvents:.TouchUpInside)
-        button.selected = false
+//        button.selected = false
         btnLike                     = button
         self.addSubview(btnLike)
     }
@@ -157,9 +157,11 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
           WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:self.product?.productId ?? 0), successClosure: { [weak self](result) in
             if let strongSelf = self{
+                
 //                strongSelf.btnLike.selected = !strongSelf.btnLike.selected
                 
                 let favorite = JSON(result)["favorite"].bool
+                strongSelf.btnLike.selected  = favorite!
                 var params = [String: AnyObject]?()
                 
                 params = ["productId": strongSelf.product!, "favorite": favorite!]

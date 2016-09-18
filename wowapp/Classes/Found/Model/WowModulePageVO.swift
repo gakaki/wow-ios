@@ -42,7 +42,7 @@ class WowModulePageItemVO:Mappable
     var sellPrice               :   Double?
     var originalPrice           :   Double?
     var detailDescription       :   String?
-    
+    var favorite                :   Bool?
     var pageModuleType          :   Int?
 
     required init?(_ map: Map) {
@@ -73,6 +73,7 @@ class WowModulePageItemVO:Mappable
         sellPrice               <- map["sellPrice"]
         originalPrice           <- map["originalPrice"]
         detailDescription       <- map["detailDescription"]
+        favorite                <- map["favorite"]
     }
     
     func get_formted_sell_price() -> String {

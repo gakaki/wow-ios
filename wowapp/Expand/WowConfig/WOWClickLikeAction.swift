@@ -19,7 +19,11 @@ class WOWClickLikeAction {
      - parameter isFavorite: 请求结果，是否喜欢
      */
    static func requestLikeProject(topicId: Int,isFavorite:LikeAction){
-    
+        guard WOWUserManager.loginStatus == true else{
+            WOWHud.dismiss()
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProject(topicId: topicId), successClosure: {(result) in
            
@@ -43,7 +47,11 @@ class WOWClickLikeAction {
      - parameter isFavorite: 请求结果，是否喜欢
      */
      static func requestFavoriteProduct(productId: Int,isFavorite:LikeAction)  {
-        
+        guard WOWUserManager.loginStatus == true else{
+            WOWHud.dismiss()
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: { (result) in
             
             

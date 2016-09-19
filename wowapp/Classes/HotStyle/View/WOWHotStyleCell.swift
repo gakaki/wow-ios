@@ -44,7 +44,7 @@ class WOWHotStyleCell: UITableViewCell {
     func showData(model: WOWHomeModle)  {
         
         if let brandModel = model.moduleContentList?.brand {
-            modelData = model.moduleContentList
+//            modelData = model.moduleContentList
             lbLogoName.text = brandModel.brandEname
             imgLogo.set_webimage_url_base(brandModel.brandLogoImg, place_holder_name: product)
             

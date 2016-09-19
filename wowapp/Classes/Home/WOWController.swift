@@ -450,7 +450,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             cell.modelData = model.moduleContentList
             cell.lbMainTitle.text = model.moduleContentList?.topicMainTitle
             cell.lbContent.text = model.moduleContentList?.topicDesc
-            
+            cell.lbContent.setLineHeightAndLineBreak(1.5)
             cell.dataArr = model.moduleContentList?.products
             cell.selectionStyle = .None
             

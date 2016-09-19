@@ -8,7 +8,6 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     var vo_products         = [WOWProductModel]()
 
     var query_asc           = 1
-    var query_currentPage   = 1
     var query_showCount     = 30
     var query_sortBy        = 1
     var query_categoryId    = 16
@@ -77,8 +76,8 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         cv.decelerationRate                 = UIScrollViewDecelerationRateFast
         //cv.bounces = false
         
-        cv.emptyDataSetSource = self;
-        cv.emptyDataSetDelegate = self;
+        cv.emptyDataSetSource               = self;
+        cv.emptyDataSetDelegate             = self;
  
         view.addSubview(cv)
         
@@ -90,7 +89,6 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 //        view.setNeedsLayout()
 //        view.layoutIfNeeded()
         
-        request()
         self.pageIndex = 0
         self.ob_content_offset.asObservable()
             .map { $0 }
@@ -120,6 +118,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     override func request(){
 
           super.request()
+        
           WOWHud.dismiss()
 
           WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(
@@ -152,7 +151,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
                   strongSelf.cv.reloadData()
               }
     
-                if ( self?.pageIndex == 1 ){
+               if ( self?.pageIndex == 1 ){
                     if self!.vo_products.count > 0 {
                         self!.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.Top)
                     }

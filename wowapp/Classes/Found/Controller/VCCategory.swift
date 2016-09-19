@@ -316,7 +316,7 @@ extension VCCategory:VTMagicViewDelegate{
             vc.query_sortBy        = query_sortBy
             vc.query_asc           = query_asc
             vc.query_categoryId    = query_cid
-            
+            vc.pageIndex           = 1 //每次点击都初始化咯
             vc.request()
         }
     }

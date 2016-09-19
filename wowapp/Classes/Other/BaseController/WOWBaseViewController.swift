@@ -118,7 +118,9 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 
     lazy var mj_footer:MJRefreshAutoNormalFooter = {
         let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadMore))
-        
+                f.setTitle("- WOWDSGN -",  forState: .NoMoreData)
+        f.stateLabel.textColor = UIColor(hexString: "CCCCCC")
+        f.stateLabel.font = UIFont.systemFontOfSize(14)
         f.automaticallyHidden = true
         return f
     }()

@@ -37,10 +37,15 @@ public extension UIViewController{
         let image = UIImage(named:image)
         let item = UIBarButtonItem(image:image?.imageWithRenderingMode(.AlwaysOriginal), style: .Plain, target: self, action: #selector(UIViewController.itemClick(_:)))
         ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:item)] = handler
+        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        spaceItem.width = -10
+        
         if left{
             self.navigationItem.leftBarButtonItem = item
+            self.navigationItem.leftBarButtonItems = [spaceItem,item]
         }else{
             self.navigationItem.rightBarButtonItem = item
+            self.navigationItem.rightBarButtonItems = [spaceItem,item]
         }
         
         if isOffset {

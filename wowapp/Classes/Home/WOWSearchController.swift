@@ -84,7 +84,7 @@ class WOWSearchController: WOWBaseViewController {
 //MARK:Lazy
     lazy var searchView:WOWSearchBarView = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWSearchBarView), owner: self, options: nil).last as! WOWSearchBarView
-        view.frame = CGRectMake(10, 8, MGScreenWidth - 30,30)
+        view.frame = CGRectMake(6, 6, MGScreenWidth - 18,30)
         view.searchTextField.delegate = self
         view.searchTextField.becomeFirstResponder()
         view.cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)

@@ -241,9 +241,9 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         
         var frame_height            = 65.h
         let frame_width             = tableView.frame.size.width
-        if section == 0 {
-            frame_height            = 15.h
-        }
+//        if section == 0 {
+//            frame_height            = 15.h
+//        }
         let frame                   = CGRectMake(0, 0, frame_width, frame_height)
         let header                  = UIView(frame: frame)
         header.backgroundColor      = UIColor.whiteColor()

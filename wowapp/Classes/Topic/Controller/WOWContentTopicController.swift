@@ -7,7 +7,7 @@
 //
 
 import UIKit
-typealias LikeAction            = (isFavorite:Bool?) -> ()
+
 protocol WOWHotStyleDelegate:class {
     // 刷新住列表数据
     func reloadTableViewData()
@@ -58,10 +58,10 @@ class WOWContentTopicController: WOWBaseViewController {
     //MARK:Actions
 
     func dgClick(sender: UIButton) -> Void {
-
-        requestLikeProject(topic_id) { [weak self](isFavorite) in
+        
+        WOWClickLikeAction.requestLikeProject(topic_id) { [weak self](isFavorite) in
             if let strongSelf = self{
-
+                
                 // strongSelf.request()
                 
                 // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
@@ -70,11 +70,11 @@ class WOWContentTopicController: WOWBaseViewController {
                 }else{
                     strongSelf.vo_topic!.likeQty = strongSelf.vo_topic!.likeQty! - 1
                 }
-
+                
                 strongSelf.reloadNagationItemThumbButton(isFavorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
                 strongSelf.delegate?.reloadTableViewData()
             }
-            
+
         }
         
     }
@@ -195,26 +195,26 @@ class WOWContentTopicController: WOWBaseViewController {
             
         }
     }
-    func requestLikeProject(topicId: Int,isFavorite:LikeAction){
-        //用户喜欢某个单品
-     
-            WOWHud.showLoadingSV()
-            
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProject(topicId: topicId), successClosure: {[weak self] (result) in
-                if let strongSelf = self{
-                   
-                    let favorite = JSON(result)["favorite"].bool ?? false
-
-                    isFavorite(isFavorite: favorite)
-
-                }
-            }) { (errorMsg) in
-                
-                return false
-        
-            }
-        
-    }
+//    func requestLikeProject(topicId: Int,isFavorite:LikeAction){
+//        //用户喜欢某个单品
+//     
+//            WOWHud.showLoadingSV()
+//            
+//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProject(topicId: topicId), successClosure: {[weak self] (result) in
+//                if let strongSelf = self{
+//                   
+//                    let favorite = JSON(result)["favorite"].bool ?? false
+//
+//                    isFavorite(isFavorite: favorite)
+//
+//                }
+//            }) { (errorMsg) in
+//                
+//                return false
+//        
+//            }
+//        
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol WOWHotStyleCellDelegate:class {
+    func reloadTableViewDataWithCell()
+}
 class WOWHotStyleCell: UITableViewCell {
 
     @IBOutlet weak var btnLike: UIButton!
@@ -18,11 +20,26 @@ class WOWHotStyleCell: UITableViewCell {
     @IBOutlet weak var lbBrowse: UILabel!//多少人赞
     @IBOutlet weak var imgBackMain: UIImageView!// 背景图片
     private var shareProductImage:UIImage? //供分享使用
+    
+    weak var    delegate   :  WOWHotStyleCellDelegate?
     var brandModel : WOWBrandStyleModel?
     var modelData : WOWModelVoTopic?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    // 点赞按钮
+    @IBAction func clickLikeAction(sender: AnyObject) {
+        
+        WOWClickLikeAction.requestLikeProject(modelData?.id ?? 0) { [weak self](isFavorite) in
+            if let strongSelf = self{
+                
+                strongSelf.delegate?.reloadTableViewDataWithCell()
+
+            }
+            
+        }
+        
     }
     func showData(model: WOWHomeModle)  {
         

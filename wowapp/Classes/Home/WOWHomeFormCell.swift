@@ -55,16 +55,10 @@ class WOWHomeFormCell: UITableViewCell {
     }
     lazy var xzm_footer:XZMRefreshNormalFooter = {
         let f = XZMRefreshNormalFooter()
-//         f.pullingPercent = 0.1
-        
         f.setRefreshingTarget(self, refreshingAction: #selector(loadMore))
-  
         f.pullToRefreshText = "查\n看\n更\n多\n商\n品"
-        f.refreshingText = " "
-        f.releaseToRefreshText = " "
-        f.beginRefreshingCallback = {
-            print("进入刷新")
-        }
+        f.releaseToRefreshText = "跳\n转\n到\n专\n题\n页"
+        f.xzm_width = 1
         return f
     }()
     
@@ -87,7 +81,7 @@ class WOWHomeFormCell: UITableViewCell {
         
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
         
-        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
+//        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
         
         collectionView.xzm_footer = self.xzm_footer
         
@@ -130,7 +124,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-                return dataArr?.count ?? 0
+        return dataArr?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -172,6 +166,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
             
         }
     }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         // 记录当前collectionView的偏移量

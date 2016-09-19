@@ -345,7 +345,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         switch entrance {
         case .AddEntrance:
             startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.8 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
                 
                 if let del = self.delegate {
                     self.productInfo?.productQty = self.skuCount
@@ -378,7 +378,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         }
 
         startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.8 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
             
             if let del = self.delegate {
                 self.productInfo?.productQty = self.skuCount
@@ -706,7 +706,7 @@ extension WOWGoodsBuyView {
             self.path.moveToPoint(_layer.position)
             
             //动画移动的位置
-            self.path.addQuadCurveToPoint(CGPointMake(MGScreenWidth - 22, -MGScreenHeight + self.size.height + 42), controlPoint: CGPointMake(MGScreenWidth/2, 0))
+            self.path.addQuadCurveToPoint(CGPointMake(MGScreenWidth - 22, -MGScreenHeight + self.size.height + 42), controlPoint: CGPointMake(50, -MGScreenHeight/4))
             
             
         }
@@ -733,7 +733,7 @@ extension WOWGoodsBuyView {
         //到中间的动画
         let expandAnimation = CABasicAnimation(keyPath: "transform.scale")
         
-        expandAnimation.duration = 0.5
+        expandAnimation.duration = 0.4
         expandAnimation.fromValue = NSNumber(float: 1)
         expandAnimation.toValue = NSNumber(float: 0.7)
         
@@ -743,9 +743,9 @@ extension WOWGoodsBuyView {
         
         let narrowAnimation = CABasicAnimation(keyPath: "transform.scale")
         
-        narrowAnimation.beginTime = 0.5
+        narrowAnimation.beginTime = 0.4
         narrowAnimation.fromValue = NSNumber(float: 0.7)
-        narrowAnimation.duration = 0.5
+        narrowAnimation.duration = 0.4
         narrowAnimation.toValue = NSNumber(float: 0.3)
         
         narrowAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
@@ -753,7 +753,7 @@ extension WOWGoodsBuyView {
         let groups = CAAnimationGroup()
         
         groups.animations = [animation,expandAnimation,narrowAnimation]
-        groups.duration = 1.0
+        groups.duration = 0.8
         groups.removedOnCompletion=false
         groups.fillMode=kCAFillModeForwards
         groups.delegate = self

@@ -39,7 +39,7 @@
                                 <constraint firstAttribute="width" constant="60" id="7kl-RE-DDV"/>
                                 <constraint firstAttribute="height" constant="45" id="FMV-Y0-wDJ"/>
                             </constraints>
-                            <inset key="contentEdgeInsets" minX="0.0" minY="15" maxX="15" maxY="0.0"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="7" maxX="7" maxY="0.0"/>
                             <state key="normal" image="close"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKs-F8-49X">
@@ -280,7 +280,7 @@
         </view>
     </objects>
     <resources>
-        <image name="close" width="12" height="12"/>
+        <image name="close" width="30" height="30"/>
         <image name="warning" width="11" height="11"/>
     </resources>
 </document>

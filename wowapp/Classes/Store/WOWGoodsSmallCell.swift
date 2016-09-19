@@ -95,32 +95,38 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         if !WOWUserManager.loginStatus {
             UIApplication.currentViewController()?.toLoginVC(true)
         }else{
-            requestFavoriteProduct(productId ?? 0)
+
+            WOWClickLikeAction.requestFavoriteProduct(productId ?? 0, isFavorite: { [weak self](isFavorite) in
+                if let strongSelf = self{
+                    
+                      strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
+                }
+            })
         }
         
     }
     
-    //用户喜欢某个单品
-    func requestFavoriteProduct(productId: Int)  {
-        WOWHud.showLoadingSV()
-
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
+//    //用户喜欢某个单品
+//    func requestFavoriteProduct(productId: Int)  {
+//        WOWHud.showLoadingSV()
+//
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: {[weak self] (result) in
 //            if let strongSelf = self{
 //                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
-                let favorite = JSON(result)["favorite"].bool
-                var params = [String: AnyObject]?()
-                
-                params = ["productId": productId, "favorite": favorite!]
-                
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-            }
-        }) { (errorMsg) in
-            
-            
-        }
-    }
+////            if let strongSelf = self{
+////                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
+//                let favorite = JSON(result)["favorite"].bool
+//                var params = [String: AnyObject]?()
+//                
+//                params = ["productId": productId, "favorite": favorite!]
+//                
+//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+//            }
+//        }) { (errorMsg) in
+//            
+//            
+//        }
+//    }
     
     
 }

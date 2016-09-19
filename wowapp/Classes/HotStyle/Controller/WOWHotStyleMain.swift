@@ -129,11 +129,11 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
         vc.delegate = self
         
         navigationController?.pushViewController(vc, animated: true)
-        
-//        toVCTopidDetail(model.moduleContentList?.id)
+
     }
 }
 extension WOWHotStyleMain:WOWHotStyleCellDelegate{
+    
     func reloadTableViewDataWithCell(){
         request()
     }

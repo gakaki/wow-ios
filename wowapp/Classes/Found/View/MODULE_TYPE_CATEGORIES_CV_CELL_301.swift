@@ -40,6 +40,10 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
 class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     static func isNib() -> Bool { return false }
+    static func cell_type() -> Int {
+        return 301
+    }
+    
     var heightAll:CGFloat = CGFloat.min
     
     var collectionView: UICollectionView!

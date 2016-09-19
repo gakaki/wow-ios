@@ -12,16 +12,16 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     var top_category_image_view:UIImageView!    = UIImageView()
     var v_bottom : VCVTMagic!
 
-    var cid                                     = "10"
     var ob_cid                                  = Variable(10)
     var ob_tab_index                            = Variable(UInt(0))
 
     override func request(){
+        let cid = self.ob_cid.value
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
-                //                MARK: 对付图片
+
                 let r                             =  JSON(result)
                 strongSelf.vo_categories          =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.cv.reloadData()
@@ -203,7 +203,6 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             let row = vo_categories[indexPath.row]
             cell.selected  = true;
             if ( row.categoryID != nil ){
-                self.cid = "\(row.categoryID!)"
                 self.ob_cid.value = row.categoryID!
             }
         }
@@ -270,13 +269,13 @@ extension VCCategory:VTMagicViewDelegate{
     
     func refreshSubView( tab_index:UInt )
     {
-        DLog("cid \(cid) tab_index \(tab_index)")
+        DLog("cid \(ob_cid.value) tab_index \(tab_index)")
         
         if let b    = self.v_bottom.magicView.menuItemAtIndex(tab_index) as! TooglePriceBtn? ,
             vc  = self.v_bottom.magicView.viewControllerAtPage(tab_index) as? VCCategoryProducts
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
-            let query_cid          = self.cid.toInt()!
+            let query_cid          = ob_cid.value
             var query_asc          = 1
             if ( tab_index == 2){ //价格的话用他的排序 其他 正常升序
                 query_asc          = b.asc

@@ -75,18 +75,21 @@ class VCFound: VCBaseVCCategoryFound {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Module_Page2, successClosure: {[weak self] (result) in
             
-
             if let strongSelf = self{
-                
-                
+                                
                 strongSelf.endRefresh()
-                
                 
                 var r                             =  JSON(result)
                 strongSelf.data                   =  Mapper<WowModulePageVO>().mapArray(r["modules"].arrayObject) ?? [WowModulePageVO]()
                 
                 for  t:WowModulePageVO in strongSelf.data
                 {
+                    if t.moduleType == 101
+                    {
+                        if let s  = t.contentTmp!["banners"] as? [AnyObject] {
+                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
+                        }
+                    }
                     if t.moduleType == 302
                     {
                         if let s  = t.contentTmp!["categories"] as? [AnyObject] {
@@ -304,51 +307,57 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let section     = indexPath.section
-        let row         = indexPath.row
+//        let row         = indexPath.row
         let d           = self.data[section]
         let identifier  = "\(d.moduleType!)"
         
-        if ( section == 0   && row == 0){
-            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302
-            cell.setData( d.moduleContentArr ?? [WowModulePageItemVO]() )
-            cell_heights[section] = cell.heightAll
-            cell.delegate = self
-            cell.selectionStyle = .None
-            cell.bringSubviewToFront(cell.cv)
-            return cell
-        }
-        if ( section == 1   && row == 0){
-            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
-            cell.setData( d.moduleContentArr ?? [WowModulePageItemVO]())
-            cell_heights[section]  = cell.heightAll
-            cell.delegate = self
-            cell.selectionStyle = .None
-            cell.bringSubviewToFront(cell.cv)
-            return cell
-        }
-        else if ( section == 2 && row == 0){
-            let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundRecommendCell
-            cell.delegate       = self
-            cell.selectionStyle = .None
-            cell.setData( d.moduleContentItem! )
-//            cell.btnLike.selected = isFavorite
-            cell.bringSubviewToFront(cell.product_view)
-            
-            return cell
-        }
-        else if ( section == 3 && row == 0){
-            
-            let cell            = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301
-            cell.delegate       = self
-            cell.selectionStyle = .None
-            cell.setData(d.moduleContentArr ?? [WowModulePageItemVO]())
-            cell_heights[section]  = cell.heightAll
-//            print("cel height is ",cell_heights[section])
-            cell.bringSubviewToFront(cell.collectionView)
-            
-            return cell
-        }
+        if let cell_type   = d.moduleType {
         
+            
+            if ( cell_type == MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302.cell_type() ){
+                let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302
+                cell.setData( d.moduleContentArr ?? [WowModulePageItemVO]() )
+                cell_heights[section] = cell.heightAll
+                cell.delegate = self
+                cell.selectionStyle = .None
+                cell.bringSubviewToFront(cell.cv)
+                return cell
+            }
+            else if ( cell_type == WOWFoundWeeklyNewCell.cell_type() ){
+                let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundWeeklyNewCell
+                cell.setData( d.moduleContentArr ?? [WowModulePageItemVO]())
+                cell_heights[section]  = cell.heightAll
+                cell.delegate = self
+                cell.selectionStyle = .None
+                cell.bringSubviewToFront(cell.cv)
+                return cell
+            }
+            else if ( cell_type == WOWFoundRecommendCell.cell_type() ){
+                let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! WOWFoundRecommendCell
+                cell.delegate       = self
+                cell.selectionStyle = .None
+                cell.setData( d.moduleContentItem! )
+                //            cell.btnLike.selected = isFavorite
+                cell.bringSubviewToFront(cell.product_view)
+                
+                return cell
+            }
+            else if (  cell_type == MODULE_TYPE_CATEGORIES_CV_CELL_301.cell_type() ){
+                
+                let cell            = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301
+                cell.delegate       = self
+                cell.selectionStyle = .None
+                cell.setData(d.moduleContentArr ?? [WowModulePageItemVO]())
+                cell_heights[section]  = cell.heightAll
+                //            print("cel height is ",cell_heights[section])
+                cell.bringSubviewToFront(cell.collectionView)
+                
+                return cell
+            }
+            else{
+                return UITableViewCell()
+            }
+        }
         else{
             return UITableViewCell()
         }
@@ -368,7 +377,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
     
     func foundCategorycellTouchInside(m:WOWCategoryModel)
     {
-        if let cid = m.categoryID{
+        if let cid = m.categoryID?.toInt(){
             toVCCategory(cid,cname: m.categoryName!)
         }
       
@@ -400,7 +409,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             toVCCategoryChoose()
         }else{
             if let cid = m!.categoryId , cname = m!.categoryName{
-                toVCCategory( String(cid) ,cname: cname)
+                toVCCategory( cid,cname: cname)
             }
         }
         
@@ -412,7 +421,7 @@ extension VCFound :MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate {
     func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(m:WowModulePageItemVO?)
     {
         if let cid = m!.categoryId , cname = m!.categoryName{
-            toVCCategory( String(cid) ,cname: cname)
+            toVCCategory( cid ,cname: cname)
         }
     }
 }

@@ -117,7 +117,9 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell:UICollectionViewCell{
 class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     static func isNib() -> Bool { return false }
-    
+    static func cell_type() -> Int {
+        return 302
+    }
     var data:[WowModulePageItemVO] = [WowModulePageItemVO]()
     var cv: UICollectionView!
     weak var delegate:MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate?

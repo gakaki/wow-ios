@@ -9,9 +9,9 @@
 import Foundation
 import SwiftyJSON
 import ObjectMapper
-
-typealias FailClosure             = (errorMsg:String?) -> ()
-typealias SuccessClosure          = (result:AnyObject) ->()
+typealias LikeAction                = (isFavorite:Bool?) -> ()
+typealias FailClosure               = (errorMsg:String?) -> ()
+typealias SuccessClosure            = (result:AnyObject) ->()
 
 enum RequestCode:String{
     case FailError = "40000"

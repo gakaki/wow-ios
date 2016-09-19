@@ -102,7 +102,7 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
         let homeModel = dataArr[indexPath.section]
             
         cell.showData(homeModel)
-
+        cell.delegate = self
         cell.selectionStyle = .None
         
         return cell
@@ -127,10 +127,17 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
         //                vc.hideNavigationBar = true
         vc.topic_id = model.moduleContentList?.id ?? 0
         vc.delegate = self
+        
         navigationController?.pushViewController(vc, animated: true)
         
 //        toVCTopidDetail(model.moduleContentList?.id)
     }
+}
+extension WOWHotStyleMain:WOWHotStyleCellDelegate{
+    func reloadTableViewDataWithCell(){
+        request()
+    }
+
 }
 extension WOWHotStyleMain:WOWHotStyleDelegate{
     

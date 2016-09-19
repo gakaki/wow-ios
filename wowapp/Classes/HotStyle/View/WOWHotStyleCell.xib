@@ -92,6 +92,9 @@
                                 <exclude reference="aEc-4m-scJ"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="clickLikeAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="w7f-Me-lEc"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-ED-frs">
                         <rect key="frame" x="56" y="286" width="1" height="21"/>

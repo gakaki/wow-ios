@@ -91,6 +91,7 @@ class WOWController: WOWBaseViewController {
     }
     
     func loginSuccess()  {// 重新刷新数据
+        self.pageIndex = 1
         request()
     }
     func exitLogin()  {// 重新刷新数据
@@ -324,6 +325,11 @@ class WOWController: WOWBaseViewController {
         if let bannerLinkType = model.bannerLinkType {
             switch bannerLinkType {
             case 1:
+                let vc = UIStoryboard.initialViewController("Home", identifier:String(WOWWebViewController)) as! WOWWebViewController
+//                vc.brandID = model.bannerLinkTargetId
+//                vc.entrance = .brandEntrance
+//                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
                 print("web后台填连接")
             case 2:
                 print("专题详情页（商品列表）")

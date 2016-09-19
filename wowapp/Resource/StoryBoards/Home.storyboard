@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="TR4-mJ-1qI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="TR4-mJ-1qI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -112,6 +112,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eg9-n4-FFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="787" y="2219"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="JdB-PA-gT9">
+            <objects>
+                <viewController storyboardIdentifier="WOWWebViewController" id="ESY-ZA-1nY" customClass="WOWWebViewController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qhQ-Ep-reC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lu9-Lj-Ogy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3KU-oR-zbU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kkS-Z8-f26">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ESY-ZA-1nY" id="PAf-Re-k6h"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kkS-Z8-f26" secondAttribute="trailing" id="JzC-jm-TKF"/>
+                            <constraint firstItem="kkS-Z8-f26" firstAttribute="top" secondItem="3KU-oR-zbU" secondAttribute="top" id="e1v-RK-nK6"/>
+                            <constraint firstItem="kkS-Z8-f26" firstAttribute="leading" secondItem="3KU-oR-zbU" secondAttribute="leading" id="syT-59-dhq"/>
+                            <constraint firstItem="kkS-Z8-f26" firstAttribute="bottom" secondItem="Lu9-Lj-Ogy" secondAttribute="top" id="tJ6-np-wGH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="kkS-Z8-f26" id="3Q0-Vo-VDx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3vy-de-9yk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1164" y="2212"/>
         </scene>
         <!--喜欢-->
         <scene sceneID="QUc-1l-x1X">

@@ -155,6 +155,8 @@ class HomeBottomCell: UITableViewCell {
                 
             }
 
+        }else{
+            btnIsLikeOne.selected = false
         }
      
     

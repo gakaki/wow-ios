@@ -35,6 +35,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
+        addObserver()
     }
     
     lazy var layout:CollectionViewWaterfallLayout = {
@@ -73,7 +74,29 @@ class WOWBrandHomeController: WOWBaseViewController {
         }
 
     }
-    
+    private func addObserver(){
+        /**
+         添加通知
+         */
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        
+    }
+    func refreshData(sender: NSNotification)  {
+        guard (sender.object != nil) else{//
+            return
+        }
+        for a in 0..<dataArr.count{// 遍历数据，拿到productId model 更改favorite 状态
+            let model = dataArr[a]
+            
+            if model.productId! == sender.object!["productId"] as? Int {
+                model.favorite = sender.object!["favorite"] as? Bool
+                
+                break
+            }
+        }
+        self.collectionView.reloadData()
+    }
     private func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))

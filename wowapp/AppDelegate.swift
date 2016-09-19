@@ -36,13 +36,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registAppKey(launchOptions) //注册第三方
 //        JSPatchHelper.jspatch_playground()
 //        JSPatchHelper.jspatch_init()
-        adLaunchView    = AdLaunchView(frame: UIScreen.mainScreen().bounds)
-        adLaunchView?.delegate = self
-        window?.addSubview(adLaunchView!)
-        
+     
+//        ADLaunchView()
         return true
     }
  
+    func ADLaunchView(){
+        adLaunchView    = AdLaunchView(frame: UIScreen.mainScreen().bounds)
+        adLaunchView?.delegate = self
+        window?.addSubview(adLaunchView!)
+    }
     
    
     

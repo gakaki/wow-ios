@@ -4,17 +4,21 @@ protocol ModuleViewElement{
     //    func setModel(m:ModuleData)
     //    func show()
     static func isNib() -> Bool
+    static func cell_type() -> Int
 }
 
 //轮播 101 banner
 class MODULE_TYPE_CAROUSEL_CV_CELL_101:UITableViewCell,ModuleViewElement
 {
     static func isNib() -> Bool { return true }
+    static func cell_type() -> Int { return 101 }
+
 }
 
 //单条 201 banner
 class MODULE_TYPE_BANNER_CV_CELL_201:UITableViewCell,ModuleViewElement{
     static func isNib() -> Bool { return false }
+    static func cell_type() -> Int { return 201 }
 }
 
 
@@ -22,18 +26,21 @@ class MODULE_TYPE_BANNER_CV_CELL_201:UITableViewCell,ModuleViewElement{
 //402 推荐商品
 class MODULE_TYPE_PINTEREST_PRODUCTS_CV_CELL_402:UITableViewCell,ModuleViewElement{
     static func isNib() -> Bool { return false }
+    static func cell_type() -> Int { return 402 }
 
 }
 
 //501 单品推荐
 class MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT_CV_CELL_501:UITableViewCell,ModuleViewElement{
     static func isNib() -> Bool { return false }
-
+    static func cell_type() -> Int { return 501 }
 }
 
 //601 专题商品列表
 class MODULE_TYPE_TOPIC_PRODUCTS_CV_CELL_601:UITableViewCell,ModuleViewElement{
     static func isNib() -> Bool { return false }
+    static func cell_type() -> Int { return 601 }
+
 }
 
 struct ModulePageType {

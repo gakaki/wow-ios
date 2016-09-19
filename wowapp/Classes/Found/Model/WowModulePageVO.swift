@@ -3,6 +3,7 @@ import ObjectMapper
 
 class WowModulePageVO:Mappable
 {
+    var moduleID:Int?
     var moduleType:Int?
     var contentTmp:AnyObject?
     
@@ -17,6 +18,7 @@ class WowModulePageVO:Mappable
     func mapping(map: Map) {
         moduleType              <- map["moduleType"]
         contentTmp              <- map["moduleContent"]
+        moduleID                <- map["moduleId"]
     }
     
 

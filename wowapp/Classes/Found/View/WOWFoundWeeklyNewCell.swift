@@ -9,7 +9,9 @@ protocol FoundWeeklyNewCellDelegate:class{
 class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
     
     static func isNib() -> Bool { return true }
-
+    static func cell_type() -> Int {
+        return 401
+    }
     @IBOutlet weak var cv: UICollectionView!
     
     weak var delegate:FoundWeeklyNewCellDelegate?

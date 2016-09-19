@@ -12,7 +12,7 @@ struct WOWShareManager {
     
     static let vc = UIApplication.currentViewController()
     
-    static var shareBackView = WOWShareBackView(frame:CGRectMake(0, 0, vc?.view.w ?? MGScreenWidth, vc?.view.h ?? MGScreenHeight))
+    static var shareBackView = WOWShareBackView(frame:CGRectMake(0, 0,MGScreenWidth,  MGScreenHeight))
     
 
     static func share(title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){

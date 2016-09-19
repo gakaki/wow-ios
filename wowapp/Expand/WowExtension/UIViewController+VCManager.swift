@@ -179,11 +179,13 @@ extension  UIViewController {
     }
 
     
-    func toVCCategory( cid: String? = "10" , cname:String? ){
-        let vc      = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(VCCategory)) as! VCCategory
-        vc.cid      = cid!
-        vc.title    = cname!
-        self.pushVC(vc)
+    func toVCCategory( cid: Int = 10 , cname:String? ){
+        
+            let vc              = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(VCCategory)) as! VCCategory
+            vc.ob_cid.value     = cid
+            vc.title    = cname!
+            self.pushVC(vc)
+
     }
     
     

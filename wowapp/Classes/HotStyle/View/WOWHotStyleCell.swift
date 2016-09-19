@@ -78,9 +78,18 @@ class WOWHotStyleCell: UITableViewCell {
             }
         }
         
-            lbBrowse.text    = model.moduleContentList?.likeQty?.toString
+        
+            if model.moduleContentList?.likeQty == 0 {
+                lbBrowse.text = ""
+            }else{
+                lbBrowse.text    = model.moduleContentList?.likeQty?.toString
+            }
+            if model.moduleContentList?.readQty == 0 {
+                lbPraise.text = ""
+            }else{
+                lbPraise.text    = model.moduleContentList?.readQty?.toString
+            }
 
-            lbPraise.text    = model.moduleContentList?.readQty?.toString
             btnLike.selected = model.moduleContentList?.favorite ?? false
 
     }

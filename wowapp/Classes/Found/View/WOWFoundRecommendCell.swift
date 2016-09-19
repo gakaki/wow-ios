@@ -38,7 +38,9 @@ extension UILabel{
 
 
 class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
-    
+    static func cell_type() -> Int {
+        return 501
+    }
     var product:WowModulePageItemVO?
     var delegate:WOWFoundRecommendCellDelegate?
     

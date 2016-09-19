@@ -208,12 +208,12 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         super.request()
         
         WOWHud.showLoading()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category_V2(categoryId:cid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
 
                 let r                             =  JSON(result)
-                strongSelf.vo_categories_arr      =  Mapper<WOWFoundCategoryModel>().mapArray( r["children"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                strongSelf.vo_categories_arr      =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryProductImgVoList"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.tv.reloadData()
                 
                 //默认选中第一个 触发collection变化
@@ -327,7 +327,7 @@ extension VCCategoryChoose:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let m = vo_categories_sub_arr[indexPath.item]
         if let cid = m.categoryID , cname = m.categoryName{
-                toVCCategory( String(cid) ,cname: cname)
+                toVCCategory( cid ,cname: cname)
         }
  
     }

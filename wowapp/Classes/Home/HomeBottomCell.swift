@@ -65,51 +65,67 @@ class HomeBottomCell: UITableViewCell {
     }
     @IBAction func favoriteActionOne(sender: AnyObject) {
         WOWHud.showLoadingSV()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdOne ?? 0), successClosure: { [weak self](result) in
+        
+        WOWClickLikeAction.requestFavoriteProduct(productIdOne ?? 0, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 
-//                let favorite = JSON(result)["favorite"].bool
-//                if  favorite != nil{
-//
-//                       strongSelf.delegate?.reloadTableViewData(self!.productIdOne,favorite: favorite!)
-//                    
-//                }/
-                
-                let favorite = JSON(result)["favorite"].bool
-                var params = [String: AnyObject]?()
-                
-                params = ["productId": strongSelf.productIdOne!, "favorite": favorite!]
-                
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-//  NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+                print("11")
             }
-        }) { (errorMsg) in
-            
-        }
+        })
+
+        
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdOne ?? 0), successClosure: { [weak self](result) in
+//            if let strongSelf = self{
+//                
+////                let favorite = JSON(result)["favorite"].bool
+////                if  favorite != nil{
+////
+////                       strongSelf.delegate?.reloadTableViewData(self!.productIdOne,favorite: favorite!)
+////                    
+////                }/
+//                
+//                let favorite = JSON(result)["favorite"].bool
+//                var params = [String: AnyObject]?()
+//                
+//                params = ["productId": strongSelf.productIdOne!, "favorite": favorite!]
+//                
+//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+////  NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+//            }
+//        }) { (errorMsg) in
+//            
+//        }
     }
     @IBAction func favoriteActionTwo(sender: AnyObject) {
           WOWHud.showLoadingSV()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdTwo ?? 0), successClosure: { [weak self](result) in
+        WOWClickLikeAction.requestFavoriteProduct(productIdTwo ?? 0, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 
-//                let favorite = JSON(result)["favorite"].bool
-//
-//                if  favorite != nil{
-//
-//                    strongSelf.delegate?.reloadTableViewData(self!.productIdTwo,favorite: favorite!)
-//                    
-//                }
-                let favorite = JSON(result)["favorite"].bool
-                var params = [String: AnyObject]?()
-                
-                params = ["productId": strongSelf.productIdTwo!, "favorite": favorite!]
-                
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-// NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+                print("11")
             }
-        }) { (errorMsg) in
-            
-        }
+            })
+
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdTwo ?? 0), successClosure: { [weak self](result) in
+//            if let strongSelf = self{
+//                
+////                let favorite = JSON(result)["favorite"].bool
+////
+////                if  favorite != nil{
+////
+////                    strongSelf.delegate?.reloadTableViewData(self!.productIdTwo,favorite: favorite!)
+////                    
+////                }
+//                let favorite = JSON(result)["favorite"].bool
+//                var params = [String: AnyObject]?()
+//                
+//                params = ["productId": strongSelf.productIdTwo!, "favorite": favorite!]
+//                
+//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+//// NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+//            }
+//        }) { (errorMsg) in
+//            
+//        }
         
     }
 

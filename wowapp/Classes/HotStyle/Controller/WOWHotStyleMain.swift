@@ -100,7 +100,7 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
         let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWHotStyleCell
         
         let homeModel = dataArr[indexPath.section]
-            
+        cell.modelData = homeModel.moduleContentList
         cell.showData(homeModel)
         cell.delegate = self
         cell.selectionStyle = .None
@@ -129,11 +129,11 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
         vc.delegate = self
         
         navigationController?.pushViewController(vc, animated: true)
-        
-//        toVCTopidDetail(model.moduleContentList?.id)
+
     }
 }
 extension WOWHotStyleMain:WOWHotStyleCellDelegate{
+    
     func reloadTableViewDataWithCell(){
         request()
     }

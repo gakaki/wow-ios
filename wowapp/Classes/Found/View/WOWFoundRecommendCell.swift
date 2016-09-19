@@ -154,27 +154,38 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
    
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
-          WOWHud.showLoadingSV()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:self.product?.productId ?? 0), successClosure: { [weak self](result) in
+        
+        WOWHud.showLoadingSV()
+
+        WOWClickLikeAction.requestFavoriteProduct(self.product?.productId ?? 0, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 
-//                strongSelf.btnLike.selected = !strongSelf.btnLike.selected
+               strongSelf.btnLike.selected  = isFavorite!
                 
-                let favorite = JSON(result)["favorite"].bool
-                strongSelf.btnLike.selected  = favorite!
-                var params = [String: AnyObject]?()
-                
-                params = ["productId": strongSelf.product!, "favorite": favorite!]
-                
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-
-                
-//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
             }
-        }) { (errorMsg) in
-            
-            
-        }
+        })
+
+        
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:self.product?.productId ?? 0), successClosure: { [weak self](result) in
+//            if let strongSelf = self{
+//                
+////                strongSelf.btnLike.selected = !strongSelf.btnLike.selected
+//                
+//                let favorite = JSON(result)["favorite"].bool
+//                strongSelf.btnLike.selected  = favorite!
+//                var params = [String: AnyObject]?()
+//                
+//                params = ["productId": strongSelf.product!, "favorite": favorite!]
+//                
+//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+//
+        
+//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+//            }
+//        }) { (errorMsg) in
+//            
+//            
+//        }
     }
     
 

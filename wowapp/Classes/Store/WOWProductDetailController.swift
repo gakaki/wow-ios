@@ -288,22 +288,31 @@ class WOWProductDetailController: WOWBaseViewController {
     func requestFavoriteProduct()  {
         
             WOWHud.showLoadingSV()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId ?? 0), successClosure: { [weak self](result) in
+        WOWClickLikeAction.requestFavoriteProduct(productId ?? 0, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
-                let favorite = JSON(result)["favorite"].bool
-                strongSelf.likeButton.selected = favorite ?? false
-
-                var params = [String: AnyObject]?()
                 
-                params = ["productId": strongSelf.productId!, "favorite": favorite!]
-                
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-//                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+               strongSelf.likeButton.selected = isFavorite ?? false
             }
-            }) { (errorMsg) in
-                
+            })
+
         
-        }
+        
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId ?? 0), successClosure: { [weak self](result) in
+//            if let strongSelf = self{
+//                let favorite = JSON(result)["favorite"].bool
+//                strongSelf.likeButton.selected = favorite ?? false
+//
+//                var params = [String: AnyObject]?()
+//                
+//                params = ["productId": strongSelf.productId!, "favorite": favorite!]
+//                
+//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+////                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+//            }
+//            }) { (errorMsg) in
+//                
+//        
+//        }
     }
     
     // 相关商品信息

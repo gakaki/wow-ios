@@ -42,10 +42,9 @@ public extension UIViewController{
         
         if left{
             self.navigationItem.leftBarButtonItem = item
-            self.navigationItem.leftBarButtonItems = [spaceItem,item]
+//            self.navigationItem.leftBarButtonItems = [spaceItem,item]
         }else{
             self.navigationItem.rightBarButtonItem = item
-            self.navigationItem.rightBarButtonItems = [spaceItem,item]
         }
         
         if isOffset {

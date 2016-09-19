@@ -26,12 +26,12 @@ class WOWFavoritrSingleCell: UICollectionViewCell {
 
         imageView.set_webimage_url( url)
 
-        switch indexPath.item {
-        case 0,1:
-            topLine.hidden = false
-        default:
-            topLine.hidden = true
-        }
+//        switch indexPath.item {
+//        case 0,1:
+//            topLine.hidden = false
+//        default:
+//            topLine.hidden = true
+//        }
     }
     
     

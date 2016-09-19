@@ -222,7 +222,7 @@ extension WOWBaseViewController {
             }
         }
         
-        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+        makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController)) as! WOWSearchController
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
@@ -272,7 +272,7 @@ extension WOWBaseTableViewController {
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
-        makeCustomerImageNavigationItem("search", left:true) {[weak self] () -> () in
+        makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController)) as! WOWSearchController
                 strongSelf.navigationController?.pushViewController(vc, animated: true)

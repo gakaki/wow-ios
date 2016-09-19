@@ -58,7 +58,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         // 修改来回上下加载 内存不减的问题
         pictureImageView.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         desLabel.text = model.productName ?? ""
-        desLabel.setLineHeightAndLineBreak(1.5)
+//        desLabel.setLineHeightAndLineBreak(1.5)
         if let price = model.sellPrice {
             let result = WOWCalPrice.calTotalPrice([price],counts:[1])
             priceLabel.text     = result//千万不用格式化了            

@@ -50,7 +50,7 @@ class WOWLoginController: WOWBaseViewController {
                 }else{
                     strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 }
-                if WOWTool.lastTabIndex == 1 {
+                if WOWTool.lastTabIndex == 3 {
                     WOWTool.lastTabIndex = 0
                 }
                 UIApplication.appTabBarController.selectedIndex = WOWTool.lastTabIndex

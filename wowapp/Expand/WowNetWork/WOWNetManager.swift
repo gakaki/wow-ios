@@ -104,7 +104,7 @@ class WOWNetManager {
                                 if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
                                     return
                                 }else{
-                                    WOWUserManager.sessionToken = ""
+                                    WOWUserManager.exitLogin()
                                     UIApplication.currentViewController()?.toLoginVC(true)
                                     failClosure(errorMsg:info?.message)
                                     return

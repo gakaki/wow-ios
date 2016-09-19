@@ -178,18 +178,18 @@ class WOWController: WOWBaseViewController {
     
     //MARK:Actions
     func jsClick() -> Void {
-        toVCCategory("10",cname: "客厅与卧室")
+        toVCCategory(10,cname: "客厅与卧室")
     }
     func dgClick() -> Void {
-        toVCCategory("15",cname: "照明")
+        toVCCategory(15,cname: "照明")
         
     }
     func zdClick() -> Void {
-        toVCCategory("16",cname: "家装配饰")
+        toVCCategory(16,cname: "家装配饰")
         
     }
     func sjClick() -> Void {
-        toVCCategory("11",cname: "厨房")
+        toVCCategory(11,cname: "厨房")
         
     }
     //MARK:Private Networkr

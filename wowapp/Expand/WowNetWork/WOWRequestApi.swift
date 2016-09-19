@@ -68,8 +68,8 @@ public enum RequestApi{
     case Api_DesignerList //设计师列表
     
     
-    case Api_Category(categoryId:String) //查看分类
-    case Api_Category_V2(categoryId:String) //查看分类v2
+    case Api_Category(categoryId:Int) //查看分类
+    case Api_Category_V2(categoryId:Int) //查看分类v2
 
     case Api_Category_subCategory_with_image(categoryId:String) //查看分类并且带上对应销量第一的商品的图片
     

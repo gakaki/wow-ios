@@ -27,7 +27,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LJT-CF-ioX">
-                        <rect key="frame" x="0.0" y="195" width="188" height="68"/>
+                        <rect key="frame" x="0.0" y="188" width="188" height="75"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch7-KJ-x6p">
                                 <rect key="frame" x="10" y="18" width="11.5" height="17"/>
@@ -43,7 +43,7 @@
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trd-cg-Kla">
-                                <rect key="frame" x="0.0" y="68" width="188" height="0.0"/>
+                                <rect key="frame" x="0.0" y="75" width="188" height="0.0"/>
                                 <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="U5A-ot-MPh"/>
@@ -93,8 +93,21 @@
                             <constraint firstAttribute="width" constant="0.5" id="fm0-rI-jPW"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpj-Ns-tSc">
+                        <rect key="frame" x="139" y="225" width="48" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="Pfo-mD-aRT"/>
+                            <constraint firstAttribute="height" constant="30" id="Vux-fq-jWA"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                        <state key="normal" image="like-gray">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="like_select"/>
+                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfV-yt-dm1">
-                        <rect key="frame" x="0.0" y="0.0" width="188" height="188"/>
+                        <rect key="frame" x="8" y="8" width="172" height="172"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="cfV-yt-dm1" secondAttribute="height" multiplier="1:1" id="BMd-yG-t8p"/>
                             <constraint firstAttribute="width" secondItem="cfV-yt-dm1" secondAttribute="height" multiplier="1:1" priority="750" id="FLA-pK-sbw"/>
@@ -115,19 +128,6 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpj-Ns-tSc">
-                        <rect key="frame" x="139" y="225" width="48" height="30"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="48" id="Pfo-mD-aRT"/>
-                            <constraint firstAttribute="height" constant="30" id="Vux-fq-jWA"/>
-                        </constraints>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                        <state key="normal" image="like-gray">
-                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </state>
-                        <state key="selected" image="like_select"/>
-                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -137,18 +137,19 @@
                 <constraint firstItem="iO4-53-yGM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="79" id="7MX-hm-hB1"/>
                 <constraint firstAttribute="bottom" secondItem="cfV-yt-dm1" secondAttribute="bottom" constant="75" id="8AU-1r-I5p"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-42" id="Apc-vH-RIp"/>
+                <constraint firstAttribute="trailing" secondItem="cfV-yt-dm1" secondAttribute="trailing" constant="8" id="Ci1-6V-8pC"/>
                 <constraint firstItem="oum-zS-9g3" firstAttribute="leading" secondItem="LJT-CF-ioX" secondAttribute="trailing" id="JlH-GG-3pd"/>
                 <constraint firstItem="LJT-CF-ioX" firstAttribute="top" secondItem="iO4-53-yGM" secondAttribute="bottom" constant="82" id="K4Z-tv-PtZ"/>
                 <constraint firstItem="LJT-CF-ioX" firstAttribute="top" secondItem="iO4-53-yGM" secondAttribute="bottom" constant="78" id="PaQ-NA-ctW"/>
-                <constraint firstItem="cfV-yt-dm1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RAT-3t-JU9"/>
+                <constraint firstItem="cfV-yt-dm1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="RAT-3t-JU9"/>
                 <constraint firstItem="iO4-53-yGM" firstAttribute="centerX" secondItem="cfV-yt-dm1" secondAttribute="centerX" constant="1" id="RcI-jo-X9G"/>
                 <constraint firstItem="iO4-53-yGM" firstAttribute="centerY" secondItem="cfV-yt-dm1" secondAttribute="centerY" constant="6" id="Rrd-7H-1jy"/>
                 <constraint firstItem="LJT-CF-ioX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="S1G-pe-BoQ"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="158:263" id="SLi-KS-TK3"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="UTK-cJ-Yt2"/>
-                <constraint firstItem="cfV-yt-dm1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UvJ-xK-mBy"/>
+                <constraint firstItem="cfV-yt-dm1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="UvJ-xK-mBy"/>
                 <constraint firstItem="oum-zS-9g3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Wpi-Iv-9kz"/>
-                <constraint firstItem="LJT-CF-ioX" firstAttribute="top" secondItem="cfV-yt-dm1" secondAttribute="bottom" constant="7" id="Xg8-23-fwd"/>
+                <constraint firstItem="LJT-CF-ioX" firstAttribute="top" secondItem="cfV-yt-dm1" secondAttribute="bottom" constant="8" id="Xg8-23-fwd"/>
                 <constraint firstAttribute="trailing" secondItem="LJT-CF-ioX" secondAttribute="trailing" id="XuF-9a-QW8"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Xxc-c8-snU"/>
                 <constraint firstItem="cfV-yt-dm1" firstAttribute="top" secondItem="oum-zS-9g3" secondAttribute="top" id="Yme-mz-Q0U"/>
@@ -179,6 +180,7 @@
                     <exclude reference="Yme-mz-Q0U"/>
                     <exclude reference="eRC-F5-Weq"/>
                     <exclude reference="ovW-c5-vLN"/>
+                    <exclude reference="vA3-VH-4Vt"/>
                     <exclude reference="x0w-gl-wRk"/>
                     <exclude reference="zae-CA-1EN"/>
                     <exclude reference="7MX-hm-hB1"/>

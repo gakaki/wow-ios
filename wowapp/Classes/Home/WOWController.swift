@@ -385,30 +385,35 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             let cell                = tableView.dequeueReusableCellWithIdentifier("HomeBottomCell", forIndexPath: indexPath) as! HomeBottomCell
             
             cell.indexPath = indexPath
-            
+          
+            let OneCellNumber = (indexPath.section  - dataArr.count + 0) * 2
+            let TwoCellNumber = ((indexPath.section  - dataArr.count + 1) * 2) - 1
             if bottomListCount.isOdd {
                 if indexPath.section + 1 == (dataArr.count) + bottomListCount.getParityCellNumber() { // 如果奇数 满足则 第二个Item 不出现
-                    
+                    let  modelOne = bottomListArray[OneCellNumber]
+
+                    cell.showDataOne(modelOne)
+
+             
                     cell.twoLb.hidden = false
-                    
-                }else{
-                    
-                    cell.twoLb.hidden = true
                     
                 }
             }else{
+
+               let  modelOne = bottomListArray[OneCellNumber]
+               let  modelTwo = bottomListArray[TwoCellNumber]
+                cell.showDataOne(modelOne)
+                cell.showDataTwo(modelTwo)
                 cell.twoLb.hidden = true
             }
             // 排序 0，1，2，3，4...
-            let OneCellNumber = (indexPath.section  - dataArr.count + 0) * 2
-            let TwoCellNumber = ((indexPath.section  - dataArr.count + 1) * 2) - 1
+         
             
-            let modelOne = bottomListArray[OneCellNumber]
+//            let modelOne = bottomListArray[OneCellNumber]
             
-            let modelTwo = bottomListArray[TwoCellNumber]
+//            let modelTwo = bottomListArray[TwoCellNumber]
             
-            cell.showDataOne(modelOne)
-            cell.showDataTwo(modelTwo)
+            
             cell.oneBtn.tag = OneCellNumber
             cell.twoBtn.tag = TwoCellNumber
             cell.delegate = self
@@ -524,31 +529,23 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }
         
     }
-    func hearderView() -> UIView {
+    func hearderView() -> UIView { // 137 37
+        
         let view = UIView()
         view.frame = CGRectMake(0, 0, MGScreenWidth, 70)
         view.backgroundColor = UIColor.whiteColor()
         
-        let lb = UILabel.initLable("一  为 你 推 荐  一", titleColor: UIColor.blackColor(), textAlignment: .Center, font: 20)
-        
-        let lb1 = UILabel.initLable("F    O    R    Y    O    U", titleColor: UIColor.blackColor(), textAlignment: .Center, font: 11)
+        let img = UIImageView()
+        img.image = UIImage(named: "recommend")
+        view.addSubview(img)
+        img.snp_makeConstraints { (make) -> Void in
+            make.width.equalTo(137)
+            make.height.equalTo(37)
+            make.center.equalTo(view)
+        }
         let lbBottom = UILabel.initLable(" ", titleColor: UIColor.blackColor(), textAlignment: .Center, font: 10)
         lbBottom.backgroundColor = UIColor.init(hexString: "eaeaea")
-        
-        view.addSubview(lb)
-        
-        view.addSubview(lb1)
         view.addSubview(lbBottom)
-        lb.snp_makeConstraints { (make) -> Void in
-            make.width.equalTo(view)
-            make.top.equalTo(view).offset(20)
-            make.bottom.equalTo(view).offset(-35)
-        }
-        lb1.snp_makeConstraints { (make) -> Void in
-            make.width.equalTo(view)
-            make.top.equalTo(lb).offset(7)
-            make.bottom.equalTo(view).offset(-13)
-        }
         lbBottom.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(view)
             make.height.equalTo(0.5)

@@ -56,8 +56,9 @@ class WOWHomeFormCell: UITableViewCell {
     lazy var xzm_footer:XZMRefreshNormalFooter = {
         let f = XZMRefreshNormalFooter()
         f.setRefreshingTarget(self, refreshingAction: #selector(loadMore))
-        f.pullToRefreshText = "查\n看\n更\n多\n商\n品"
-        f.releaseToRefreshText = "跳\n转\n到\n专\n题\n页"
+        f.pullToRefreshText = "查\n看\n更\n多"
+        f.refreshingText = "释\n放\n查\n看"
+        f.releaseToRefreshText = "释\n放\n查\n看"
         f.xzm_width = 1
         return f
     }()

@@ -36,6 +36,8 @@ class WOWFavoriteController: WOWBaseViewController {
             .ScrollMenuBackgroundColor(UIColor.whiteColor()),
             .MenuHeight(40),
             .MenuMargin((MGScreenWidth - 180)/4),
+            .MenuItemFont(UIFont.systemFontOfSize(14)),
+            .UnselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
             .MenuItemWidth(60),
             .SelectionIndicatorColor(UIColor.blackColor()),
             .SelectedMenuItemLabelColor(UIColor.blackColor()),

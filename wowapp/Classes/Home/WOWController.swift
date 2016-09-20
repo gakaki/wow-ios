@@ -404,6 +404,12 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
              
                     cell.twoLb.hidden = false
                     
+                }else{
+                    let  modelOne = bottomListArray[OneCellNumber]
+                    let  modelTwo = bottomListArray[TwoCellNumber]
+                    cell.showDataOne(modelOne)
+                    cell.showDataTwo(modelTwo)
+                    cell.twoLb.hidden = true
                 }
             }else{
 

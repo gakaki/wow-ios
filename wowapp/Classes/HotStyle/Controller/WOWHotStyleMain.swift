@@ -36,8 +36,7 @@ class WOWHotStyleMain: WOWBaseViewController {
         var params = [String: AnyObject]?()
         
         params = ["pageId": 3]
-        
-        
+
         WOWNetManager.sharedManager.requestWithTarget(.Api_Home_List(params: params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 
@@ -73,6 +72,7 @@ class WOWHotStyleMain: WOWBaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
          NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWUpdateProjectThumbNotificationKey, object:nil)
         
     }
     func loginSuccess()  {// 重新刷新数据

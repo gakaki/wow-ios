@@ -49,6 +49,8 @@ let WOWUpdateUserHeaderImageNotificationKey  = "WOWUpdateUserHeaderImageNotifica
 //更新订单状态之后， 更新订单全部列表的信息
 let WOWUpdateOrderListAllNotificationKey  = "WOWUpdateOrderListAllNotificationKey"
 
+//更新专题点赞数
+let WOWUpdateProjectThumbNotificationKey  = "WOWUpdateProjectThumbNotificationKey"
 
 let WOWEmptyNetWorkText  = "网络错误"
 

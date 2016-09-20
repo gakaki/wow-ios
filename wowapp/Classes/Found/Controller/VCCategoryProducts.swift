@@ -57,7 +57,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     override func setUI()
     {
         super.setUI()
-        
+        addObserver()
         edgesForExtendedLayout = .None
         
         let frame = CGRectMake(0,0, MGScreenWidth, MGScreenHeight - 210)
@@ -114,7 +114,31 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     func scrollViewDidScroll( scrollView: UIScrollView){
         ob_content_offset.value = scrollView.contentOffset.y
     }
-    
+    private func addObserver(){
+        /**
+         添加通知
+         */
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        
+    }
+    // 刷新物品的收藏状态与否 传productId 和 favorite状态
+    func refreshData(sender: NSNotification)  {
+        guard (sender.object != nil) else{//
+            return
+        }
+        for a in 0..<vo_products.count{// 遍历数据，拿到productId model 更改favorite 状态
+            let model = vo_products[a]
+            
+            if model.productId! == sender.object!["productId"] as? Int {
+                model.favorite = sender.object!["favorite"] as? Bool
+                
+                break
+            }
+        }
+        cv.reloadData()
+    }
+
     override func request(){
 
           super.request()

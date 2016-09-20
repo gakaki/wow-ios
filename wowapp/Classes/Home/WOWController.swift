@@ -329,6 +329,7 @@ class WOWController: WOWBaseViewController {
 //                vc.brandID = model.bannerLinkTargetId
 //                vc.entrance = .brandEntrance
 //                vc.hideNavigationBar = true
+                vc.bannerUrl = model.bannerLinkUrl
                 navigationController?.pushViewController(vc, animated: true)
                 print("web后台填连接")
             case 2:
@@ -403,6 +404,12 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
              
                     cell.twoLb.hidden = false
                     
+                }else{
+                    let  modelOne = bottomListArray[OneCellNumber]
+                    let  modelTwo = bottomListArray[TwoCellNumber]
+                    cell.showDataOne(modelOne)
+                    cell.showDataTwo(modelTwo)
+                    cell.twoLb.hidden = true
                 }
             }else{
 

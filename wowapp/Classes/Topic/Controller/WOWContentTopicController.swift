@@ -72,14 +72,16 @@ class WOWContentTopicController: WOWBaseViewController {
                 }
                 
                 strongSelf.reloadNagationItemThumbButton(isFavorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
-                strongSelf.delegate?.reloadTableViewData()
+//                strongSelf.delegate?.reloadTableViewData()
+                 NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateProjectThumbNotificationKey, object: nil)
             }
 
         }
         
     }
     func zdClick() -> Void {
-        let shareUrl = WOWShareUrl + "/item/\(topic_id ?? 0)"
+
+        let shareUrl = WOWShareUrl + "/topic/\(topic_id ?? 0)"
         WOWShareManager.share(vo_topic?.topicMainTitle, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
 
         

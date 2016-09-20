@@ -10,11 +10,12 @@ import UIKit
 
 class WOWWebViewController: WOWBaseViewController {
     @IBOutlet weak var webView: UIWebView!
+    var           bannerUrl   :   String? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "WebView"
+        navigationItem.title = ""
 
-        let url = NSURL(string: "http://wj.qq.com/s/611249/a813")!
+        let url = NSURL(string: bannerUrl ?? "")!
         
         // 2.建立网络请求
         let request = NSURLRequest(URL: url)

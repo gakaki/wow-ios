@@ -216,10 +216,11 @@ extension VCDesignerList:VCDesignerListSearchResultDelegate{
     func searchResultSelect(model:WOWDesignerModel){
         //        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
         searchController.active = false
-//        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
-//        vc.brandID = model.id
-//        vc.hideNavigationBar = true
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        vc.designerId = model.designerId
+        vc.entrance             = .designerEntrance
+        vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

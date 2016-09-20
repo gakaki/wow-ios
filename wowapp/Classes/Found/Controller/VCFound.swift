@@ -120,7 +120,12 @@ class VCFound: VCBaseVCCategoryFound {
                             t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
                         }
                     }
-                    
+                    if t.moduleType == 201
+                    {
+                        if let s  = t.contentTmp {
+                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(s)
+                        }
+                    }
                     t.moduleClassName     =  ModulePageType.getIdentifier(t.moduleType!)
                 }
                 
@@ -129,9 +134,9 @@ class VCFound: VCBaseVCCategoryFound {
                 }
                 
                 
-                strongSelf.data = strongSelf.data.filter({
-                    $0.moduleType != 201 //201 单条banner的去掉
-                })
+//                strongSelf.data = strongSelf.data.filter({
+//                    $0.moduleType != 201 //201 单条banner的去掉
+//                })
 
                 
                 strongSelf.tableView.reloadData()
@@ -228,9 +233,11 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         case 1:
             return getCellHeight(1)
         case 2:
-            return 180.w
+            return getCellHeight(2)
         case 3:
-            return getCellHeight(3)
+            return 180.w
+        case 4:
+            return getCellHeight(4)
         default:
             return 180
         }
@@ -239,14 +246,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        var frame_height            = 65.h
         let frame_width             = tableView.frame.size.width
-//        if section == 0 {
-//            frame_height            = 15.h
-//        }
-        let frame                   = CGRectMake(0, 0, frame_width, frame_height)
-        let header                  = UIView(frame: frame)
-        header.backgroundColor      = UIColor.whiteColor()
         
         let grayView                = UIView(frame: CGRectMake(0, 0, frame_width, 15.h))
         grayView.backgroundColor    = MGRgb(245, g: 245, b: 245)
@@ -267,25 +267,37 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         case 1:
             t           = "本周上新"
         case 2:
-            t           = "单品推荐"
+            t           = ""
         case 3:
+            t           = "单品推荐"
+        case 4:
             t           = "场景"
         default:
             t           = "本周上新"
         }
         l.text          = t
 
+        var frame_height            = 65.h
+
+        if t == "" {
+            frame_height            = 15.h
+        }
+        
+        let frame                   = CGRectMake(0, 0, frame_width, frame_height)
+        let header                  = UIView(frame: frame)
+        header.backgroundColor      = UIColor.whiteColor()
         header.addSubview(grayView)
+
         if t != "" {
             header.addSubview(l)
         }
-        
+
         return header
     }
 
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if  section == 0 {
+        if  section == 0 || section == 2{
             return 15.h
         }else{
             return 65.h
@@ -313,6 +325,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         
         if let cell_type   = d.moduleType {
         
+            DLog("cell type is \(cell_type)")
             
             if ( cell_type == MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302.cell_type() ){
                 let cell = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302
@@ -330,6 +343,16 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 cell.delegate = self
                 cell.selectionStyle = .None
                 cell.bringSubviewToFront(cell.cv)
+                return cell
+            }
+            else if (  cell_type == MODULE_TYPE_SINGLE_BANNER_CELL_201.cell_type() ){
+                
+                let cell            = tableView.dequeueReusableCellWithIdentifier( identifier , forIndexPath: indexPath) as! MODULE_TYPE_SINGLE_BANNER_CELL_201
+                //                cell.delegate       = self
+                cell.selectionStyle = .None
+                cell.setData(d.moduleContentItem!)
+                cell_heights[section]  = cell.heightAll
+                //            print("cel height is ",cell_heights[section])
                 return cell
             }
             else if ( cell_type == WOWFoundRecommendCell.cell_type() ){
@@ -354,6 +377,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 
                 return cell
             }
+            
             else{
                 return UITableViewCell()
             }

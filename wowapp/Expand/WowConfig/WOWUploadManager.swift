@@ -37,8 +37,8 @@ class WOWUploadManager {
         let hashids                 = Hashids(salt:onlyStr)
        
         let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
-   
-        let qiniu_token_url         = "\(BaseUrl)qiniutoken"
+        
+        let qiniu_token_url         = [BaseUrl,"/",URL_QINIU_TOKEN].joinWithSeparator("")
         
         let json_str                = json_serialize( ["key": qiniu_key,"bucket": "wowdsgn"] )
         let params_qiniu            = ["paramJson": json_str ]

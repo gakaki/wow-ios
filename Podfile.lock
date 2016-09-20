@@ -26,7 +26,6 @@ PODS:
   - HappyDNS (0.3.10)
   - Hashids-Swift (0.3.0)
   - IQKeyboardManagerSwift (4.0.5)
-  - JWLaunchAd (1.3.4)
   - Kingfisher (2.5.0)
   - MJRefresh (3.1.12)
   - Moya (6.1.3):
@@ -90,7 +89,6 @@ DEPENDENCIES:
   - FMDB
   - Hashids-Swift
   - IQKeyboardManagerSwift
-  - JWLaunchAd
   - Kingfisher
   - MJRefresh
   - Moya (~> 6.1.3)
@@ -143,7 +141,6 @@ SPEC CHECKSUMS:
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Hashids-Swift: 5d7c069b0d4a3b70d4e2a840c420115dd517050d
   IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
-  JWLaunchAd: b7898e445362a32713049cf1eba3212c3bd6f258
   Kingfisher: d467bd710907ec9aa94aaddecaa5390aa3559819
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   Moya: 26b290a8d675c167ea6229ba08e07dce562265a5
@@ -174,6 +171,6 @@ SPEC CHECKSUMS:
   YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: fb4a40017c3928e7fa567e5371914cbe88cf2303
+PODFILE CHECKSUM: b8e57711361b5155f8c1d3ec7fcd4e0243cbce5f
 
 COCOAPODS: 1.1.0.beta.1

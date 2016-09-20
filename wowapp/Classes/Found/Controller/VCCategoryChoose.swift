@@ -137,6 +137,8 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         self.title           = "全部分类"
         tv                   = UITableView(frame:CGRectMake(0, 0 , self.tv_width, MGScreenHeight), style:.Plain)
         tv.separatorColor    = UIColor(hexString:"EAEAEA")
+        tv.estimatedRowHeight  = 60.w
+        
         tv.delegate          = self
         tv.dataSource        = self
         tv.registerClass(TvCell.self, forCellReuseIdentifier:String(TvCell))
@@ -290,10 +292,14 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
-    
-    func tableView( tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        return 60.w
-    }
+//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+//    {
+//        return 60.w
+//        
+//    }
+//    func tableView( tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+//        return 60.w
+//    }
    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let m = vo_categories_arr[indexPath.section]

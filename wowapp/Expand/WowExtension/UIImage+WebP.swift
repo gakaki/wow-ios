@@ -56,9 +56,12 @@ extension UIImageView {
      }
     
     func set_webimage_url( url:String? ) -> Void {
-        let url         = self.webp_url(url)
-        let pic_name    = "placeholder_product"
-        self.set_webimage_url_base(url,place_holder_name: pic_name)
+        if let u = url {
+            let url         = self.webp_url(url)
+            let pic_name    = "placeholder_product"
+            self.set_webimage_url_base(url,place_holder_name: pic_name)
+
+        }
     }
     
     func webp_url(url:String?) -> String {

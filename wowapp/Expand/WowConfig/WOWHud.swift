@@ -15,7 +15,8 @@ struct WOWHud {
     
         dispatch_async(dispatch_get_main_queue()) {
             
-            UIApplication.currentViewController()?.view.addSubview(LoadView.sharedInstance)
+            UIApplication.currentViewController()?.view.addSubview(LoadView.show())
+            
             
         }
 
@@ -32,15 +33,16 @@ struct WOWHud {
         SVProgressHUD.popActivity()
         dispatch_async(dispatch_get_main_queue()) {
             
-            LoadView.sharedInstance.dissMissView()
+//            LoadView.sharedInstance.dissMissView()
+            LoadView.dissMissView()
         }
 
     }
     
     static func showMsg(message:String?){
         dispatch_async(dispatch_get_main_queue()) {
-            
-            LoadView.sharedInstance.dissMissView()
+            LoadView.dissMissView()
+//            LoadView.sharedInstance.dissMissView()
         }
         configSVHud()
         let msg = message ?? "网络错误"

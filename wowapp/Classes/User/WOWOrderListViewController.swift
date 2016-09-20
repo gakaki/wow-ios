@@ -29,14 +29,25 @@ class WOWOrderListViewController: WOWBaseViewController {
             controllerArray.append(orderListVC)
             orderListVC.parentNavigationController = self.navigationController
         }
-        
+
+        var itemWidth :CGFloat = 0.00
+        switch UIDevice.deviceType {
+        case .DT_iPhone5:
+            itemWidth = 46
+        case.DT_iPhone6:
+            itemWidth = 56
+        case.DT_iPhone6_Plus:
+            itemWidth = 64
+        default:
+            itemWidth = 56*MGScreenWidth/375
+        }
         let parameters: [CAPSPageMenuOption] = [
             .ScrollMenuBackgroundColor(UIColor.whiteColor()),
             .MenuHeight(40),
             .MenuMargin(15),
             .MenuItemFont(UIFont.systemFontOfSize(14)),
             .UnselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
-            .MenuItemWidth(56),
+            .MenuItemWidth(itemWidth),
             .SelectionIndicatorColor(UIColor.blackColor()),
             .SelectedMenuItemLabelColor(UIColor.blackColor()),
             .MenuItemSeparatorPercentageHeight(0.1),

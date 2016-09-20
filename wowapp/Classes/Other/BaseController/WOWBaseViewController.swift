@@ -163,7 +163,8 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
            isRreshing = true
         }
         // 关闭动画， 防止下拉刷新此界面再次出来
-        LoadView.sharedInstance.dissMissView()
+//        LoadView.sharedInstance.dissMissView()
+        LoadView.dissMissView()
         request()
     }
     

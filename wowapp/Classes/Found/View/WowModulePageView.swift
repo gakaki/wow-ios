@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 protocol ModuleViewElement{
     //    func setModel(m:ModuleData)
@@ -7,21 +8,60 @@ protocol ModuleViewElement{
     static func cell_type() -> Int
 }
 
+
 //轮播 101 banner
 class MODULE_TYPE_CAROUSEL_CV_CELL_101:UITableViewCell,ModuleViewElement
 {
     static func isNib() -> Bool { return true }
     static func cell_type() -> Int { return 101 }
-
 }
 
-//单条 201 banner
-class MODULE_TYPE_BANNER_CV_CELL_201:UITableViewCell,ModuleViewElement{
+//201 单品banner
+class MODULE_TYPE_SINGLE_BANNER_CELL_201:UITableViewCell,ModuleViewElement{
     static func isNib() -> Bool { return false }
     static func cell_type() -> Int { return 201 }
+    
+    var product:WowModulePageItemVO?
+    var bigImageView: UIImageView = UIImageView()
+    var heightAll:CGFloat   = MGScreenWidth
+//    var delegate:MODULE_TYPE_CAROUSEL_CV_CELL_101_Delegate?
+    
+    override init(style: UITableViewCellStyle,reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+   
+        addSubview(bigImageView)
+        
+        bigImageView.snp_makeConstraints { (make) in
+            make.size.equalTo(MGScreenWidth)
+            make.center.equalTo(self)
+        }
+//        
+        bigImageView.userInteractionEnabled = true
+        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(singleTapAction))
+        bigImageView.addGestureRecognizer(singleTap)
+    }
+    func singleTapAction(){
+////        if let del = self.delegate {
+////            del.MODULE_TYPE_CAROUSEL_CV_CELL_101_cell_touch(product)
+////        }
+//        
+        self.viewController()?.toVCProduct(product?.bannerLinkTargetId)
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    func setData(p:WowModulePageItemVO){
+        self.product = p
+        bigImageView.set_webimage_url(p.bannerImgSrc)
+    }
+   
 }
-
-
 
 //402 推荐商品
 class MODULE_TYPE_PINTEREST_PRODUCTS_CV_CELL_402:UITableViewCell,ModuleViewElement{
@@ -57,7 +97,7 @@ struct ModulePageType {
     static let d = [
 
         PAGE_MODULE_TYPE_CAROUSEL 					: MODULE_TYPE_CAROUSEL_CV_CELL_101.classForCoder(), //轮播 101 banner
-        PAGE_MODULE_TYPE_BANNER 					: MODULE_TYPE_BANNER_CV_CELL_201.classForCoder(), //单条 201 banner
+        PAGE_MODULE_TYPE_BANNER 					: MODULE_TYPE_SINGLE_BANNER_CELL_201.classForCoder(), //单条 201 banner
         PAGE_MODULE_TYPE_CATEGORIES 				: MODULE_TYPE_CATEGORIES_CV_CELL_301.classForCoder(), //301 一级分类
         PAGE_MODULE_TYPE_CATEGORIES_MORE 			: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302.classForCoder(), //302 二级分类
         PAGE_MODULE_TYPE_NEW_ARRIVAL_RPODUCTS 		: WOWFoundWeeklyNewCell.classForCoder(), //401 本周上新

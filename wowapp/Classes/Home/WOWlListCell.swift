@@ -16,22 +16,24 @@ protocol SenceCellDelegate:class{
 class WOWlListCell: UITableViewCell {
     
     @IBOutlet var bigImageView: UIImageView!
-
+    
     private var productBtns = [UIButton]()
+    
+    var heightAll:CGFloat   = MGScreenWidth
+    
     weak var delegate:SenceCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     func showData(model:WOWCarouselBanners) {
         let url = model.bannerImgSrc ?? ""
-      DLog(url)
-//        bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
+        DLog(url)
+//      bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
         bigImageView.set_webimage_url(url);
 //        bigImageView
 //        
@@ -99,5 +101,23 @@ class WOWlListCell: UITableViewCell {
         }) { (ret) in
                 
         }
+    }
+}
+
+
+//单条 201 banner
+extension WOWlListCell:ModuleViewElement{
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int { return 201 }
+    func setData(model:WowModulePageItemVO) {
+        let url = model.bannerImgSrc ?? ""
+        DLog(url)
+        bigImageView.set_webimage_url(url);
+        
+        productBtns.forEach { (view) in
+            view.removeFromSuperview()
+        }
+        bigImageView.userInteractionEnabled = true
+
     }
 }

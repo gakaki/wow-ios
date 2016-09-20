@@ -126,8 +126,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         
         v_bottom = VCVTMagic()
 
-        v_bottom.magicView.dataSource          = self
-        v_bottom.magicView.delegate            = self
+        v_bottom.magicView.dataSource           = self
+        v_bottom.magicView.delegate             = self
         
         
         v_bottom.magicView.menuScrollEnabled    = true

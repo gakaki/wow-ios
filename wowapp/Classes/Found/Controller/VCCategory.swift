@@ -17,7 +17,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     var ob_cid                                  = Variable(10)
     var ob_tab_index                            = Variable(UInt(0))
 
-
+    
     func get_category_index() -> Int {
         let indexes     = vo_categories.flatMap { $0.categoryID! }
         if let res      = indexes.indexOf(ob_cid.value){
@@ -39,6 +39,9 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
                 strongSelf.vo_category_top      =  category_paths[0]
                 
                 let top_category_cid            =  strongSelf.vo_category_top.categoryID!
+                strongSelf.title                =  strongSelf.vo_category_top.categoryName!
+                
+                
                 WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:top_category_cid), successClosure: {[weak self] (result) in
                     
                     if let strongSelf = self{
@@ -70,12 +73,12 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = ""
         request()
  
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
             ($0,$1)
-        }.throttle(0.27, scheduler: MainScheduler.instance)
+        }.throttle(0.1, scheduler: MainScheduler.instance)
         .subscribe(onNext: { cid,tab_index in
             
             self.refreshSubView(tab_index)

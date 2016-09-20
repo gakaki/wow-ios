@@ -8,7 +8,6 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     var vo_products         = [WOWProductModel]()
 
     var query_asc           = 1
-    var query_currentPage   = 1
     var query_showCount     = 30
     var query_sortBy        = 1
     var query_categoryId    = 16
@@ -77,8 +76,8 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         cv.decelerationRate                 = UIScrollViewDecelerationRateFast
         //cv.bounces = false
         
-        cv.emptyDataSetSource = self;
-        cv.emptyDataSetDelegate = self;
+        cv.emptyDataSetSource               = self;
+        cv.emptyDataSetDelegate             = self;
  
         view.addSubview(cv)
         
@@ -94,16 +93,17 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         self.ob_content_offset.asObservable()
             .map { $0 }
             .map { y in
-//                return y
-////                print(y)
                 return self.is_load_more(y)
             }
             .distinctUntilChanged()
             .subscribeNext { [unowned self] in
                 self.title = "contentOffset.y = \($0)"
-                print("rx_contentOffset : \(self.title!)")
-                self.pageIndex = self.pageIndex + 1
-                self.request()
+
+                if $0 == true {
+                    self.pageIndex = self.pageIndex + 1
+                    self.request()
+                }
+                
             }
             .addDisposableTo(rx_disposeBag)
     }
@@ -118,6 +118,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     override func request(){
 
           super.request()
+        
           WOWHud.dismiss()
 
           WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(
@@ -150,7 +151,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
                   strongSelf.cv.reloadData()
               }
     
-                if ( self?.pageIndex == 1 ){
+               if ( self?.pageIndex == 1 ){
                     if self!.vo_products.count > 0 {
                         self!.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.Top)
                     }
@@ -191,5 +192,12 @@ extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource
             return cell
             
     }
+    
+    //选中时的操作
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+         let model = vo_products[indexPath.row]
+         toVCProduct(model.productId)
+    }
+
     
 }

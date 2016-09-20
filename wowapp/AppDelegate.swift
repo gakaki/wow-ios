@@ -193,6 +193,8 @@ extension AppDelegate{
 //          window?.rootViewController = UINavigationController(rootViewController: VCCategoryChoose())
         
 //        window?.rootViewController = UINavigationController(rootViewController: VCShopping())
+        
+//        window?.rootViewController =  VCCategoryProducts()
     }
     
 

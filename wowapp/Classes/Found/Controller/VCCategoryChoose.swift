@@ -125,7 +125,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
     //左侧和右侧数据
     var vo_categories_arr           = [WOWFoundCategoryModel]()
     var vo_categories_sub_arr       = [WOWFoundCategoryModel]()
-    var cid                         = "0"
+    var cid                         = 0
     let tv_width                    = 110.w
     
     
@@ -231,7 +231,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         }
     }
     
-    func request_sub_cid(cid:String) {
+    func request_sub_cid(cid:Int) {
     
         WOWHud.showLoading()
 
@@ -299,7 +299,7 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
         let m = vo_categories_arr[indexPath.section]
 
         if let cid = m.categoryID {
-            request_sub_cid(cid.toString)
+            request_sub_cid(cid)
         }
 
     }

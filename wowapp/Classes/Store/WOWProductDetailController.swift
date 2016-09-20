@@ -94,8 +94,25 @@ class WOWProductDetailController: WOWBaseViewController {
     private func addObservers(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSucces), name: WOWLoginSuccessNotificationKey, object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(buyCarCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
     }
-    
+    // 刷新物品的收藏状态与否 传productId 和 favorite状态
+    func refreshData(sender: NSNotification)  {
+        guard (sender.object != nil) else{//
+            return
+        }
+        for a in 0..<aboutProductArray.count{// 遍历数据，拿到productId model 更改favorite 状态
+            let model = aboutProductArray[a]
+            
+            if model.productId! == sender.object!["productId"] as? Int {
+                model.favorite = sender.object!["favorite"] as? Bool
+                
+                break
+            }
+        }
+        self.tableView.reloadData()
+    }
+
     private func removeObservers() {
          NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
          NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWUpdateCarBadgeNotificationKey, object: nil)

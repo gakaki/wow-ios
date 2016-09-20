@@ -54,6 +54,7 @@ PODS:
     - RxCocoa (~> 2.2)
     - RxSwift (~> 2.2)
   - RxSwift (2.6.0)
+  - SDAutoLayout (2.1.7)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -64,6 +65,7 @@ PODS:
   - SwiftyUserDefaults (2.2.1)
   - UICKeyChainStore (2.1.0)
   - UIColor_Hex_Swift (2.1)
+  - UITableView+FDTemplateLayoutCell (1.5.beta)
   - UMengAnalytics-NO-IDFA (4.1.1)
   - VTMagic (1.2.4):
     - VTMagic/Core (= 1.2.4)
@@ -101,6 +103,7 @@ DEPENDENCIES:
   - RxCocoa (= 2.6.0)
   - RxDataSources (= 0.8.1)
   - RxSwift (= 2.6.0)
+  - SDAutoLayout (~> 2.1.6)
   - SDWebImage
   - SnapKit (~> 0.19.1)
   - StyleKit
@@ -108,6 +111,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - SwiftyUserDefaults
   - UIColor_Hex_Swift
+  - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
   - UMengAnalytics-NO-IDFA
   - VTMagic
   - WowBase (from `WowBase/WowBase.podspec`)
@@ -152,6 +156,7 @@ SPEC CHECKSUMS:
   RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
   RxDataSources: 4a87345847d66ef84ecc10bdfa189190f3cd6b12
   RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
+  SDAutoLayout: e9b36d04b8c0b504762a04d76fbbe5108944297a
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   StyleKit: 7dac3ff9ffec40fec57f9a8582c4ff5a95ca17e8
@@ -160,6 +165,7 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 7abdba50a50ea0c18ee8903af3c88e4c1cb8448d
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UIColor_Hex_Swift: e91dc51f6bf252ec7bf74c8704ceedeeb7640c1c
+  UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
   UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
   VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
   WowBase: 523ccd9bffdfca85097853e3b73902fb4368b24c
@@ -168,6 +174,6 @@ SPEC CHECKSUMS:
   YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: 700cc51bdefb3f8a019154922f795ba8c48e2408
+PODFILE CHECKSUM: fb4a40017c3928e7fa567e5371914cbe88cf2303
 
 COCOAPODS: 1.1.0.beta.1

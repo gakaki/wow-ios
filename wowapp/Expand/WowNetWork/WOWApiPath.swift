@@ -18,8 +18,8 @@ import Foundation
 //let WOWShareUrl                         = "m.wowdsgn.com" // 正式服务器 分享地址
 let WOWShareUrl                         = "http://10.0.60.121:7070"// 测试服务器分享地址
 
-//   let BaseUrl = "http://10.0.60.121:8080/mobile-api-dev/v1/" //内网开发
-  let BaseUrl = "http://api.c.wowdsgn.com:10999/mobile-api-dev/v1/" //外网访问内网也可以的地址
+//   let BaseUrl = "http://10.0.60.121:8080/v1/" //内网开发
+  let BaseUrl = "http://api.c.wowdsgn.com:10999/v1" //外网访问内网也可以的地址
 //   let BaseUrl = "https://mobile-api.wowdsgn.com/v1/" //内网开发
 //  let BaseUrl = "https://mobile-api.stg.wowdsgn.com/v1/" //内网开发
 //#else

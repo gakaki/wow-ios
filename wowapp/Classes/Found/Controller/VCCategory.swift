@@ -188,7 +188,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(cell_reuse_id_label, forIndexPath: indexPath)
             if let lv = cell.viewWithTag(1) as? UILabel {
                 lv.font = UIFont.systemFontOfSize(13)
-                lv.text =  row.categoryName!
+                lv.text =  row.categoryName ?? ""
             }
         }
         self.updateCellStatus(cell, is_selected: false)

@@ -13,6 +13,7 @@ class WOWProductDetailCell: UITableViewCell {
     @IBOutlet weak var imgDescLabel:UILabel!
     @IBOutlet weak var multiplier: NSLayoutConstraint!
     @IBOutlet weak var space: NSLayoutConstraint!
+    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     
     //内容图片的宽高比约束
     internal var aspectConstraint : NSLayoutConstraint? {
@@ -40,12 +41,13 @@ class WOWProductDetailCell: UITableViewCell {
         if let secondaryImg = secondaryImg {
             if let img = secondaryImg.image {
                 productImg.kf_setImageWithURL(NSURL(string:img)!, placeholderImage:UIImage(named: "placeholder_product"))
-//                productImg.kf_indicator?.setScale(x: 100, y: 1000)
+//                bottomSpace.constant = 30
+////                productImg.kf_indicator?.setScale(x: 100, y: 1000)
             }else {
                 space.constant = 0
                 multiplier.constant = 345
             }
-            
+        
 //            dispatch_async(dispatch_get_main_queue()) {
 //                
 //                 self.loadImage(secondaryImg.image!)
@@ -54,12 +56,13 @@ class WOWProductDetailCell: UITableViewCell {
 //            productImg.set_webimage_url_base(secondaryImg.image, place_holder_name: "placeholder_product")
             imgDescLabel.text = secondaryImg.text
             imgDescLabel.setLineHeightAndLineBreak(1.5)
+
         }
     }
     override func prepareForReuse() {
         super.prepareForReuse()
         //清除内容图片的宽高比约束
-        aspectConstraint = nil
+//        aspectConstraint = nil
     }
 
     //加载内容图片（并设置高度约束）

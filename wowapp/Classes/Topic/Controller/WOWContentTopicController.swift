@@ -178,7 +178,7 @@ class WOWContentTopicController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Topics(topicId:topic_id), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
-                
+                DLog(result)
                 let r                                     =  JSON(result)
                 strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map( r.object )
                 

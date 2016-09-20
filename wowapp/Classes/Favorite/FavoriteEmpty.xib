@@ -9,17 +9,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoriteEmpty" customModule="wowapp" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="FavoriteEmpty" customClass="FavoriteEmpty" customModule="wowapp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="347"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoritrEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="k4Y-zq-DaN">
-                    <rect key="frame" x="95" y="0.0" width="185" height="139"/>
+                    <rect key="frame" x="95" y="47" width="185" height="139"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="k4Y-zq-DaN" secondAttribute="height" multiplier="4:3" id="kWs-AZ-PjG"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎加入尖叫设计" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGp-2D-Wao">
-                    <rect key="frame" x="87" y="199" width="200" height="21"/>
+                    <rect key="frame" x="87" y="246" width="200" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="h7n-eA-2UL"/>
                         <constraint firstAttribute="width" constant="200" id="pGe-jF-gHT"/>
@@ -29,7 +29,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="去收藏您喜欢的单品、品牌、设计师吧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2P-PW-7Uq">
-                    <rect key="frame" x="81" y="228" width="213" height="21"/>
+                    <rect key="frame" x="81" y="275" width="213" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="213" id="6Jt-yQ-04C"/>
                         <constraint firstAttribute="height" constant="21" id="eQ2-wd-Q2C"/>
@@ -44,14 +44,14 @@
                 <constraint firstItem="Y2P-PW-7Uq" firstAttribute="top" secondItem="iGp-2D-Wao" secondAttribute="bottom" constant="8" id="9gl-ES-qRP"/>
                 <constraint firstItem="Y2P-PW-7Uq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="El0-GL-60a"/>
                 <constraint firstAttribute="bottom" secondItem="Y2P-PW-7Uq" secondAttribute="bottom" constant="98" id="UOm-a8-OQE"/>
-                <constraint firstItem="k4Y-zq-DaN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YCX-Mn-C0L"/>
+                <constraint firstItem="k4Y-zq-DaN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="47" id="YCX-Mn-C0L"/>
                 <constraint firstItem="iGp-2D-Wao" firstAttribute="top" secondItem="k4Y-zq-DaN" secondAttribute="bottom" constant="60" id="ahZ-KW-5za"/>
                 <constraint firstItem="iGp-2D-Wao" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jQt-pf-f5o"/>
                 <constraint firstItem="iGp-2D-Wao" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qM3-5s-nkP"/>
                 <constraint firstItem="k4Y-zq-DaN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qwU-Qq-gGb"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="259.5" y="126.5"/>
+            <point key="canvasLocation" x="259.5" y="103"/>
         </view>
     </objects>
     <resources>

@@ -179,8 +179,9 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         if ( indexPath.row == 0) {
             
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(cell_reuse_id, forIndexPath: indexPath)
-            if let iv = cell.viewWithTag(2) as? UIImageView {
-                iv.set_webimage_url(row.categoryIconSmall!)
+            if let iv = cell.viewWithTag(2) as? UIImageView ,
+                let img = row.categoryIconSmall {
+                iv.set_webimage_url(img)
             }
             
         }else{

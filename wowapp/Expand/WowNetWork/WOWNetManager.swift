@@ -57,7 +57,7 @@ class WOWNetManager {
         failClosure:FailClosure
     ){
        
-        print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
+//        DLog("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
         requestProvider.request(target) { (result) in
        
@@ -73,7 +73,7 @@ class WOWNetManager {
                         // obj is not a String
                     }
                     
-                     print("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
+//                     DLog("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
                     
                     //其实也只有登入能获得session token 而已了
 

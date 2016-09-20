@@ -9,45 +9,78 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 {
     
     var vo_categories                           = [WOWFoundCategoryModel]()
+    var vo_category_top                         = WOWFoundCategoryModel()
+
     var top_category_image_view:UIImageView!    = UIImageView()
     var v_bottom : VCVTMagic!
 
     var ob_cid                                  = Variable(10)
     var ob_tab_index                            = Variable(UInt(0))
 
+    
+    func get_category_index() -> Int {
+        let indexes     = vo_categories.flatMap { $0.categoryID! }
+        if let res      = indexes.indexOf(ob_cid.value){
+            return res
+        }
+        return 0
+    }
+
     override func request(){
         let cid = self.ob_cid.value
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:cid), successClosure: {[weak self] (result) in
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category_path_category(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
-
-                let r                             =  JSON(result)
-                strongSelf.vo_categories          =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
-                strongSelf.cv.reloadData()
                 
-                if let image_url = r["bgImg"].string {
-                    strongSelf.top_category_image_view.set_webimage_url(image_url) //设置顶部分类背景图
+                let r                           =  JSON(result)
+                let category_paths              =  Mapper<WOWFoundCategoryModel>().mapArray( r["path"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                strongSelf.vo_category_top      =  category_paths[0]
+                
+                let top_category_cid            =  strongSelf.vo_category_top.categoryID!
+                strongSelf.title                =  strongSelf.vo_category_top.categoryName!
+                
+                
+                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:top_category_cid), successClosure: {[weak self] (result) in
+                    
+                    if let strongSelf = self{
+                        
+                        let r                             =  JSON(result)
+                        strongSelf.vo_categories          =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                        strongSelf.cv.reloadData()
+                        
+                        if let image_url = r["bgImg"].string {
+                            strongSelf.top_category_image_view.set_webimage_url(image_url) //设置顶部分类背景图
+                        }
+                        strongSelf.cv.selectItemAtIndexPath(NSIndexPath(forItem: strongSelf.get_category_index(), inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
+                    }
+                    
+                }){ (errorMsg) in
+                    DLog(errorMsg)
                 }
-                //导航默认选中第一个
-                strongSelf.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
+            
             }
             
         }){ (errorMsg) in
             DLog(errorMsg)
         }
+
+        
+        
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = ""
         request()
  
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
             ($0,$1)
-        }.throttle(0.3, scheduler: MainScheduler.instance)
+        }.throttle(0.1, scheduler: MainScheduler.instance)
         .subscribe(onNext: { cid,tab_index in
+            
             self.refreshSubView(tab_index)
         })
         
@@ -286,7 +319,7 @@ extension VCCategory:VTMagicViewDelegate{
             vc.query_sortBy        = query_sortBy
             vc.query_asc           = query_asc
             vc.query_categoryId    = query_cid
-            
+            vc.pageIndex           = 1 //每次点击都初始化咯
             vc.request()
         }
     }

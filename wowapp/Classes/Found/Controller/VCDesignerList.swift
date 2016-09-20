@@ -45,7 +45,7 @@ class VCDesignerList: WOWBaseViewController {
         tableView.sectionIndexColor = GrayColorlevel1
         tableView.clearRestCell()
         navigationItem.title = "设计师"
-        configureSearchController()
+//        configureSearchController()
         tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
         configBuyBarItem()
        

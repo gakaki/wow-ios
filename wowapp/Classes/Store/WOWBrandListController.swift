@@ -50,7 +50,7 @@ class WOWBrandListController: WOWBaseViewController {
         tableView.sectionIndexColor = GrayColorlevel1
         tableView.clearRestCell()
         navigationItem.title = "品牌"
-        configureSearchController()
+//        configureSearchController()
         tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
         configBuyBarItem()
         addObserver()

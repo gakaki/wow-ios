@@ -209,8 +209,20 @@ extension AppDelegate{
         }
     }
     
+    func get_version_full() -> String{
+        var v = "0.0.0"
+        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String,
+            let version_build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
+        {
+            v = "\(version).\(version_build)"
+        }
+        return v
+    }
     func registAppKey(launchOptions: [NSObject: AnyObject]?){
         //友盟
+
+        MobClick.setAppVersion(self.get_version_full())
+       
         UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
         UMAnalyticsConfig.sharedInstance().channelId = ""
         MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
@@ -218,6 +230,9 @@ extension AppDelegate{
         
         UMSocialData.setAppKey(WOWID.UMeng.appID)
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
+   
+
+        
         
         //Growing
         Growing.startWithAccountId("a04e14656f08dc7e")

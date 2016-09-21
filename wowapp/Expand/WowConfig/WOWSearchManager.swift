@@ -11,7 +11,7 @@ import UIKit
 //private let _SingletonASharedInstance = WOWSearchManager()
 
 class WOWSearchManager: NSObject {
-    var dbQueue: FMDatabaseQueue!
+    var db: FMDatabase!
     
     static let shareInstance = WOWSearchManager()
     
@@ -24,33 +24,29 @@ class WOWSearchManager: NSObject {
         
         let filePath = (path as NSString).stringByAppendingPathComponent("demo.sqlite")
         
-        dbQueue = FMDatabaseQueue(path: filePath)
+        db = FMDatabase(path: filePath)
         
-//        if db.open() == false {
-//            return
-//        }
+        if db.open() == false {
+            return
+        }
         
         let sql = "CREATE TABLE IF NOT EXISTS t_searchModel (id integer PRIMARY KEY, searchStr text, typeData text);"
         
        
-        dbQueue.inDatabase { (db) in
-             db.executeUpdate(sql, withArgumentsInArray: nil)
-        }
+        db.executeUpdate(sql, withArgumentsInArray: nil)
+    
     }
     
     /**
      *  删除语句
      */
     
-    func delectAll(typeData: String) -> Void
+    func delectAll(typeData: String) -> Bool
     {
 
         let sql = "DELETE  FROM t_searchModel WHERE typeData = (?)"
-        dbQueue.inDatabase { (db) in
-            db.executeUpdate(sql, withArgumentsInArray: [typeData])
-        }
         
-//        return (dbQueue?.executeUpdate(sql, withArgumentsInArray: [typeData]))!
+        return (db?.executeUpdate(sql, withArgumentsInArray: [typeData]))!
 
     }
     
@@ -58,28 +54,23 @@ class WOWSearchManager: NSObject {
      *  删除语句
      */
     
-    func delectSame(searchStr: String) -> Void
+    func delectSame(searchStr: String) -> Bool
     {
         
         let sql = "DELETE  FROM t_searchModel WHERE searchStr = (?)"
-        
-        dbQueue.inDatabase { (db) in
-            db.executeUpdate(sql, withArgumentsInArray: [searchStr])
-        }
-//        return (db?.executeUpdate(sql, withArgumentsInArray: [searchStr]))!
+  
+        return (db?.executeUpdate(sql, withArgumentsInArray: [searchStr]))!
         
     }
     
     /**
      *  插入语句
      */
-    func insert(search: String) -> Void {
+    func insert(search: String) -> Bool {
         delectSame(search)
         let sql = "INSERT INTO t_searchModel(searchStr,typeData)VALUES(?,?);"
-        dbQueue.inDatabase { (db) in
-            db.executeUpdate(sql, withArgumentsInArray: [search,"1"])
-        }
-//        return db!.executeUpdate(sql, withArgumentsInArray: [search,"1"])
+
+        return db!.executeUpdate(sql, withArgumentsInArray: [search,"1"])
     }
    
 }

@@ -27,11 +27,13 @@ class RefreshView:UIView {
         let blackView = UIView()
         blackView.frame = CGRectMake(0,0,80.w,80.h)
         blackView.center = CGPoint(x: MGScreenWidth/2, y: MGScreenHeight/2 - 64)
-        blackView.backgroundColor = UIColor.whiteColor()
+//        blackView.backgroundColor = UIColor.whiteColor()
+        blackView.backgroundColor = UIColor.init(hexString: "f5f5f5")
         blackView.layer.shadowColor = UIColor.blackColor().CGColor
-
-        blackView.layer.shadowOpacity = 0.2;//阴影透明度，默认0
-        blackView.layer.shadowRadius = 4;//阴影半径，默认3
+        
+        blackView.layer.shadowOffset = CGSizeMake(0,2)// 阴影偏移量
+        blackView.layer.shadowOpacity = 0.05//阴影透明度，默认0
+        blackView.layer.shadowRadius = 2//阴影半径，默认3
         blackView.layer.cornerRadius = 8.0
         blackView.alpha = 0.9
         
@@ -46,7 +48,7 @@ class RefreshView:UIView {
 
         imageView.frame = CGRectMake(0,0,50.w,50.h)
         imageView.center = CGPoint(x: MGScreenWidth/2, y: MGScreenHeight/2 - 64)
-        
+//        imageView.alpha = 0.8
         return imageView
     }()
     
@@ -55,7 +57,6 @@ class LoadView {
 
     static let sharedInstance: RefreshView = {
         let instance = RefreshView()
-        instance.alpha = 1.0
         instance.frame = UIScreen.mainScreen().bounds
        
         return instance
@@ -68,9 +69,9 @@ class LoadView {
     
     static func dissMissView()  {
         
-        UIView.animateWithDuration(0.2) {
+        UIView.animateWithDuration(0.8) {
             sharedInstance.alpha = 0.0
-            sharedInstance.removeFromSuperview()
+//            sharedInstance.removeFromSuperview()
         }
         
     }

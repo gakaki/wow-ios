@@ -53,10 +53,9 @@ class WOWProductDetailCell: UITableViewCell {
 //                 self.loadImage(secondaryImg.image!)
 //            }
 //           
-//            productImg.set_webimage_url_base(secondaryImg.image, place_holder_name: "placeholder_product")
+
             imgDescLabel.text = secondaryImg.text
             imgDescLabel.setLineHeightAndLineBreak(1.5)
-
         }
     }
     override func prepareForReuse() {
@@ -64,6 +63,7 @@ class WOWProductDetailCell: UITableViewCell {
         //清除内容图片的宽高比约束
 //        aspectConstraint = nil
     }
+
 
     //加载内容图片（并设置高度约束）
     func loadImage(urlString: String) {
@@ -84,17 +84,14 @@ class WOWProductDetailCell: UITableViewCell {
                 self.productImg.image = nil
             }
 
-            
             //操作完成，调用主线程来刷新界面
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                println("main refresh")
                 self.aspectConstraint = NSLayoutConstraint(item: self.productImg,
                     attribute: .Width, relatedBy: .Equal,
                     toItem: self.productImg, attribute: .Height,
                     multiplier: aspect ?? 0, constant: 0.0)
-
             })
         })
-     
-           }
+        
+    }
 }

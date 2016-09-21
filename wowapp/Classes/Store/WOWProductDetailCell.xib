@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrp-Fq-IZ9">
-                        <rect key="frame" x="15" y="225" width="345" height="68.5"/>
+                        <rect key="frame" x="15" y="240" width="345" height="53.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="k4Q-HT-73x"/>
                         </constraints>
@@ -30,10 +30,10 @@
                             </mask>
                         </variation>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5j1-JJ-Q5E">
-                        <rect key="frame" x="15" y="0.0" width="345" height="210"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5j1-JJ-Q5E">
+                        <rect key="frame" x="15" y="0.0" width="345" height="225"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="23:14" id="6Qw-g5-Ghc"/>
+                            <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="23:15" id="6Qw-g5-Ghc"/>
                             <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="23:14" id="m0f-TH-d7y"/>
                             <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="115:86" id="wxP-gV-r7w"/>
                         </constraints>

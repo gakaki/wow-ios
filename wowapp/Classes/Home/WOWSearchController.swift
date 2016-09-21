@@ -72,6 +72,8 @@ class WOWSearchController: WOWBaseViewController {
         super.viewWillAppear(animated)
         navigationItem.leftBarButtonItems = nil
         makeCustomerNavigationItem("", left: true, handler:nil)
+        navigationItem.rightBarButtonItem = nil
+        makeCustomerNavigationItem("", left: false, handler: nil)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         searchView.hidden = false
     }

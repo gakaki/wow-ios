@@ -127,7 +127,7 @@ class WOWSearchController: WOWBaseViewController {
    
     lazy var emptyView: UIView = {
         let view = NSBundle.mainBundle().loadNibNamed(String(WOWEmptySearchView), owner: self, options: nil).last as! WOWEmptySearchView
-        view.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight - 64)
+        view.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight)
         view.hidden = true
         return view
 
@@ -174,20 +174,29 @@ class WOWSearchController: WOWBaseViewController {
     }
     func defaultData() {
         let sql = "SELECT * FROM t_searchModel order by id desc;"
-        
-        let resultSet = WOWSearchManager.shareInstance.db.executeQuery(sql, withArgumentsInArray: nil)
-        
-        searchArray = [String]()
-        while resultSet.next() {
-        
-            let searchStr = resultSet.stringForColumn("searchStr")
-    
-            searchArray.append(searchStr)
+        WOWSearchManager.shareInstance.dbQueue.inDatabase {[weak self]  (db) in
+            if let strongSelf = self {
+                let resultSet = db.executeQuery(sql, withArgumentsInArray: nil)
+                strongSelf.searchArray = [String]()
+                while resultSet.next() {
+                    
+                    let searchStr = resultSet.stringForColumn("searchStr")
+                    
+                    strongSelf.searchArray.append(searchStr)
+                }
+                
+                for key in strongSelf.searchArray {
+                    strongSelf.searchTagView.historyTagListView.addTag(key)
+                }
+
+            }
+            
+          
         }
         
-        for key in searchArray {
-            searchTagView.historyTagListView.addTag(key)
-        }
+//        let resultSet = WOWSearchManager.shareInstance.dbQueue.executeQuery(sql, withArgumentsInArray: nil)
+        
+        
     }
     
     /**
@@ -200,11 +209,12 @@ class WOWSearchController: WOWBaseViewController {
             searchArray.removeObject(searchStr)
         }
         searchArray.insertAsFirst(searchStr)
-        WOWSearchManager.shareInstance.insert(searchStr)
         searchTagView.historyTagListView.removeAllTags()
         for key in searchArray {
             searchTagView.historyTagListView.addTag(key)
         }
+        WOWSearchManager.shareInstance.insert(searchStr)
+
     }
     
     
@@ -296,8 +306,9 @@ extension WOWSearchController:UITextFieldDelegate{
             return false
         }
         textField.resignFirstResponder()
-        searchHistory(textField.text!)
         requestResult()
+
+        searchHistory(textField.text!)
         return true
     }
     

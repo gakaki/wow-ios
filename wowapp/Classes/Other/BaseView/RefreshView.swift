@@ -68,12 +68,15 @@ class LoadView {
     }
     
     static func dissMissView()  {
-        
-        UIView.animateWithDuration(0.8) {
+
+        UIView.animateWithDuration(0.8, animations: {
+            
             sharedInstance.alpha = 0.0
-//            sharedInstance.removeFromSuperview()
+            
+            }) { (true) in
+                
+                sharedInstance.removeFromSuperview()
         }
-        
     }
 }
 

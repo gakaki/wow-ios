@@ -26,29 +26,29 @@ class WOWReuseSectionView: UICollectionReusableView {
         
         titleLabel = MGfactoryLabel()
         titleLabel.textAlignment = .Left
-        titleLabel.font = Fontlevel003
+        titleLabel.font = Fontlevel004
+        titleLabel.textColor = UIColor(hexString: "808080")
         self.addSubview(titleLabel)
         titleLabel.snp_makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(25, 15, 0, 0))
+            make.edges.equalTo(UIEdgeInsetsMake(15, 0, 0, 0))
         }
        
         clearButton = UIButton(type: .Custom)
-        clearButton.setTitle("清空", forState: .Normal)
-        clearButton.titleLabel?.font = UIFont.systemFontOfSize(14)
-        clearButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        clearButton.contentHorizontalAlignment = .Right
+        clearButton.setImage(UIImage(named: "delete"), forState: .Normal)
         self.addSubview(clearButton)
         clearButton.snp_makeConstraints { (make) in
-            make.width.equalTo(40)
+            make.width.equalTo(46)
             make.height.equalTo(30)
-            make.rightMargin.equalTo(-15)
-            make.top.equalTo(25)
+            make.rightMargin.equalTo(0)
+            make.top.equalTo(10)
         }
         
-        clearButton.addAction {
-            if let del = self.delegate {
-                del.clearHistoryClick()
-            }
-        }
+//        clearButton.addAction {
+//            if let del = self.delegate {
+//                del.clearHistoryClick()
+//            }
+//        }
     }
     
     required init?(coder aDecoder: NSCoder) {

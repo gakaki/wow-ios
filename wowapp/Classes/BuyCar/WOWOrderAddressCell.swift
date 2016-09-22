@@ -21,19 +21,19 @@ class WOWOrderAddressCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func  showData(addressInfo: WOWAddressListModel?) -> Void {
+    func  showData(_ addressInfo: WOWAddressListModel?) -> Void {
         if let addressInfo = addressInfo {
-            nextImage.hidden = false
-            nameLabel.hidden = false
-            mobileLabel.hidden = false
-            addressLabel.hidden = false
-            addAddressLabel.hidden = true
+            nextImage.isHidden = false
+            nameLabel.isHidden = false
+            mobileLabel.isHidden = false
+            addressLabel.isHidden = false
+            addAddressLabel.isHidden = true
             nameLabel.text = addressInfo.name ?? ""
             if let mobile = addressInfo.mobile {
                 if mobile.length > 7 {
@@ -42,11 +42,11 @@ class WOWOrderAddressCell: UITableViewCell {
             }
             addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "") + (addressInfo.addressDetail ?? "")
         }else {
-            nextImage.hidden = true
-            nameLabel.hidden = true
-            mobileLabel.hidden = true
-            addressLabel.hidden = true
-            addAddressLabel.hidden = false
+            nextImage.isHidden = true
+            nameLabel.isHidden = true
+            mobileLabel.isHidden = true
+            addressLabel.isHidden = true
+            addAddressLabel.isHidden = false
 
         }
     

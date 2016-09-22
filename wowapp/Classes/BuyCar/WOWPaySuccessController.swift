@@ -24,12 +24,12 @@ class WOWPaySuccessController: WOWBaseViewController {
         successView.layer.borderWidth = 2
         successView.layer.cornerRadius = 26
         successView.layer.masksToBounds = true
-        successView.layer.borderColor = UIColor.blackColor().CGColor
+        successView.layer.borderColor = UIColor.black.cgColor
         
         //画虚线
         let dotteShapLayer = CAShapeLayer()
-        let mdotteShapePath = CGPathCreateMutable()
-        dotteShapLayer.fillColor = UIColor.clearColor().CGColor
+        let mdotteShapePath = CGMutablePath()
+        dotteShapLayer.fillColor = UIColor.clear.cgColor
         dotteShapLayer.strokeColor = MGRgb(151, g: 151, b: 151).CGColor
         dotteShapLayer.lineWidth = 0.5
         CGPathMoveToPoint(mdotteShapePath, nil, 15, 162)
@@ -52,7 +52,7 @@ class WOWPaySuccessController: WOWBaseViewController {
     /**
      查看订单详情
      */
-     @IBAction func goOrderDetailClick(sender: UIButton) {
+     @IBAction func goOrderDetailClick(_ sender: UIButton) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
         vc.orderCode = orderid
         vc.entrance = orderDetailEntrance.orderPay
@@ -60,7 +60,7 @@ class WOWPaySuccessController: WOWBaseViewController {
     }
 
     override func navBack() {
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popToRootViewController(animated: true)
         
     }
     

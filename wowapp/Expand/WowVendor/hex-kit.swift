@@ -2,7 +2,7 @@ import UIKit
 
 extension String {
     
-    public var CGColor: CGColorRef {
+    public var CGColor: CGColor {
         return self.CGColor(1)
     }
     
@@ -10,15 +10,15 @@ extension String {
         return self.UIColor(1)
     }
     
-    public func CGColor (alpha: CGFloat) -> CGColorRef {
-        return self.UIColor(alpha).CGColor
+    public func CGColor (_ alpha: CGFloat) -> CGColor {
+        return self.UIColor(alpha).cgColor
     }
     
-    public func UIColor (alpha: CGFloat) -> UIKit.UIColor {
+    public func UIColor (_ alpha: CGFloat) -> UIKit.UIColor {
         var hex = self
         
         if hex.hasPrefix("#") { // Strip leading "#" if it exists
-            hex = hex.substringFromIndex(hex.startIndex.successor())
+            hex = hex.substring(from: hex.characters.index(after: hex.startIndex))
         }
         
         switch hex.characters.count {
@@ -38,9 +38,9 @@ extension String {
         var g: UInt32 = 0
         var b: UInt32 = 0
         
-        NSScanner(string: "0x" + hex[0...1]).scanHexInt(&r)
-        NSScanner(string: "0x" + hex[2...3]).scanHexInt(&g)
-        NSScanner(string: "0x" + hex[4...5]).scanHexInt(&b)
+        Scanner(string: "0x" + hex[0...1]).scanHexInt32(&r)
+        Scanner(string: "0x" + hex[2...3]).scanHexInt32(&g)
+        Scanner(string: "0x" + hex[4...5]).scanHexInt32(&b)
         
         let red = CGFloat(Int(r)) / CGFloat(255.0)
         let green = CGFloat(Int(g)) / CGFloat(255.0)
@@ -52,8 +52,8 @@ extension String {
 
 private extension String {
     
-    func _repeat (count: Int) -> String {
-        return "".stringByPaddingToLength((self as NSString).length * count, withString: self, startingAtIndex:0)
+    func _repeat (_ count: Int) -> String {
+        return "".padding(toLength: (self as NSString).length * count, withPad: self, startingAt:0)
     }
     
     subscript (i: Int) -> String {
@@ -61,6 +61,6 @@ private extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
+        return substring(with: (characters.index(startIndex, offsetBy: r.lowerBound) ..< characters.index(startIndex, offsetBy: r.upperBound)))
     }
 }

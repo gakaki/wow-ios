@@ -32,15 +32,15 @@ class WOWProductDetailCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    func showData(secondaryImg: WOWProductPicTextModel?) {
+    func showData(_ secondaryImg: WOWProductPicTextModel?) {
         if let secondaryImg = secondaryImg {
             if let img = secondaryImg.image {
-                productImg.kf_setImageWithURL(NSURL(string:img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                productImg.kf_setImageWithURL(URL(string:img)!, placeholderImage:UIImage(named: "placeholder_product"))
 //                bottomSpace.constant = 30
 ////                productImg.kf_indicator?.setScale(x: 100, y: 1000)
             }else {
@@ -66,13 +66,13 @@ class WOWProductDetailCell: UITableViewCell {
 
 
     //加载内容图片（并设置高度约束）
-    func loadImage(urlString: String) {
+    func loadImage(_ urlString: String) {
         //定义NSURL对象
-        let url = NSURL(string: urlString)
+        let url = URL(string: urlString)
         var aspect :CGFloat?
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: { () -> Void in
    
-            if let data = NSData(contentsOfURL: url!), image = UIImage(data: data) {
+            if let data = try? Data(contentsOf: url!), let image = UIImage(data: data) {
                 //计算原始图片的宽高比
                 aspect = image.size.width / image.size.height
                 //            //设置imageView宽高比约束
@@ -85,10 +85,10 @@ class WOWProductDetailCell: UITableViewCell {
             }
 
             //操作完成，调用主线程来刷新界面
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.aspectConstraint = NSLayoutConstraint(item: self.productImg,
-                    attribute: .Width, relatedBy: .Equal,
-                    toItem: self.productImg, attribute: .Height,
+                    attribute: .width, relatedBy: .equal,
+                    toItem: self.productImg, attribute: .height,
                     multiplier: aspect ?? 0, constant: 0.0)
             })
         })

@@ -22,10 +22,10 @@ class WOWReuseSectionView: UICollectionReusableView {
    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         
         titleLabel = MGfactoryLabel()
-        titleLabel.textAlignment = .Left
+        titleLabel.textAlignment = .left
         titleLabel.font = Fontlevel004
         titleLabel.textColor = UIColor(hexString: "808080")
         self.addSubview(titleLabel)
@@ -33,9 +33,9 @@ class WOWReuseSectionView: UICollectionReusableView {
             make.edges.equalTo(UIEdgeInsetsMake(15, 0, 0, 0))
         }
        
-        clearButton = UIButton(type: .Custom)
-        clearButton.contentHorizontalAlignment = .Right
-        clearButton.setImage(UIImage(named: "delete"), forState: .Normal)
+        clearButton = UIButton(type: .custom)
+        clearButton.contentHorizontalAlignment = .right
+        clearButton.setImage(UIImage(named: "delete"), for: UIControlState())
         self.addSubview(clearButton)
         clearButton.snp_makeConstraints { (make) in
             make.width.equalTo(46)

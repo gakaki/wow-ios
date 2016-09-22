@@ -18,14 +18,14 @@ class VCDesignerList: WOWBaseViewController {
         request()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.translucent = false
+        navigationController?.navigationBar.isTranslucent = false
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.translucent = true
+        navigationController?.navigationBar.isTranslucent = true
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -46,7 +46,7 @@ class VCDesignerList: WOWBaseViewController {
         tableView.clearRestCell()
         navigationItem.title = "设计师"
 //        configureSearchController()
-        tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
+        tableView.register(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
         configBuyBarItem()
        
         //这个界面不需要了
@@ -59,14 +59,14 @@ class VCDesignerList: WOWBaseViewController {
         
     }
     
-    private func addObserver(){
+    fileprivate func addObserver(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         
     }
     
     
-    private func configureSearchController() {
+    fileprivate func configureSearchController() {
         
         let resultVC = VCDesignerListSearchResult()
         resultVC.delegate = self
@@ -75,13 +75,13 @@ class VCDesignerList: WOWBaseViewController {
         searchController.searchResultsUpdater = self
         //输入搜索关键字的时候，整个view背景变暗淡
         //        searchController.dimsBackgroundDuringPresentation = true
-        searchController.searchBar.setSearchFieldBackgroundImage(UIImage(named: "searchbar"), forState:.Normal)
-        searchController.searchBar.backgroundColor = UIColor.whiteColor()
-        searchController.searchBar.searchBarStyle = .Minimal
-        searchController.view.backgroundColor = UIColor.whiteColor()
+        searchController.searchBar.setSearchFieldBackgroundImage(UIImage(named: "searchbar"), for:UIControlState())
+        searchController.searchBar.backgroundColor = UIColor.white
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.view.backgroundColor = UIColor.white
         searchController.searchBar.placeholder = "请输入搜索关键字"
         searchController.searchBar.delegate = self
-        searchController.searchBar.barTintColor = UIColor.whiteColor()
+        searchController.searchBar.barTintColor = UIColor.white
         searchController.searchBar.setValue("取消", forKey:"_cancelButtonText")
         if #available(iOS 9.0, *) {
             UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.blackColor(),NSFontAttributeName:Fontlevel002], forState: .Normal)
@@ -94,18 +94,18 @@ class VCDesignerList: WOWBaseViewController {
     }
     
     
-    func isStringContainsNumber( _string : String) -> Bool{
+    func isStringContainsNumber( _ _string : String) -> Bool{
         
         let numberRegEx  = ".*[0-9]+.*"
         let testCase = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
-        let containsNumber = testCase.evaluateWithObject(_string)
+        let containsNumber = testCase.evaluate(with: _string)
         
         return containsNumber
     }
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_DesignerList, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_DesignerList, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 
                 strongSelf.endRefresh()
@@ -116,7 +116,7 @@ class VCDesignerList: WOWBaseViewController {
                 
                 let arr        = JSON(result)["designerVoList"].arrayObject
                 
-                if let dataArr = arr , designers = Mapper<WOWDesignerModel>().mapArray(dataArr) {
+                if let dataArr = arr , let designers = Mapper<WOWDesignerModel>().mapArray(dataArr) {
                     
                     //循环所有的然后给分组
                     for letter in strongSelf.headerIndexs{
@@ -151,14 +151,14 @@ class VCDesignerList: WOWBaseViewController {
 
 extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
     //实现索引数据源代理方法
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return headerIndexs
     }
     
     //点击索引，移动TableView的组位置
-    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         //遍历索引值
-        for (index,character) in headerIndexs.enumerate(){
+        for (index,character) in headerIndexs.enumerated(){
             //判断索引值和组名称相等，返回组坐标
             if character == title{
                 return index
@@ -169,17 +169,17 @@ extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
     
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dataArray.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray[section].count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WOWBaseStyleCell", forIndexPath: indexPath) as! WOWBaseStyleCell
-        let model = dataArray[indexPath.section][indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WOWBaseStyleCell", for: indexPath) as! WOWBaseStyleCell
+        let model = dataArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         //         修改来回上下加载 内存不减的问题
 //        cell.leftImageView.set_webimage_url_base(model.designerPhoto, place_holder_name: "placeholder_product")
         cell.leftImageView.set_webimage_url(model.designerPhoto)
@@ -187,22 +187,22 @@ extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return headerIndexs[section]
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //设计师的首页
 
-        let model = dataArray[indexPath.section][indexPath.row]
+        let model = dataArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         
-        let vc                  = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc                  = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.designerId           = model.designerId
         vc.entrance             = .designerEntrance
         vc.hideNavigationBar    = true
@@ -213,10 +213,10 @@ extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension VCDesignerList:VCDesignerListSearchResultDelegate{
-    func searchResultSelect(model:WOWDesignerModel){
+    func searchResultSelect(_ model:WOWDesignerModel){
         //        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
-        searchController.active = false
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        searchController.isActive = false
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.designerId = model.designerId
         vc.entrance             = .designerEntrance
         vc.hideNavigationBar = true
@@ -225,15 +225,15 @@ extension VCDesignerList:VCDesignerListSearchResultDelegate{
 }
 
 extension VCDesignerList:UISearchResultsUpdating,UISearchBarDelegate{
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
             return
         }
         //根据searchString进行过滤
         let arr = originalArray.filter { (model) -> Bool in
-            if model.designerName?.rangeOfString(text) != nil{
+            if model.designerName?.range(of: text) != nil{
                 return true
-            }else if model.designerNameFirstLetter?.rangeOfString(text) != nil{
+            }else if model.designerNameFirstLetter?.range(of: text) != nil{
                 return true
             }else{
                 return false

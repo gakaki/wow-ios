@@ -34,61 +34,61 @@ class WOWSenceController: WOWBaseViewController {
         navigationItem.title = "场景"
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(UINib.nibName(String(WOWSenceImageCell)), forCellReuseIdentifier:String(WOWSenceImageCell))
-        tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
-        tableView.registerNib(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
-        tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
+        tableView.register(UINib.nibName(String(WOWSenceImageCell)), forCellReuseIdentifier:String(WOWSenceImageCell))
+        tableView.register(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
+        tableView.register(UINib.nibName(String(WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
+        tableView.register(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
         tableView.mj_header = self.mj_header
         WOWSenceHelper.senceController = self
         configTableFooterView()
     }
     
-    private func configData(){
+    fileprivate func configData(){
         totalPriceLabel.text = sceneModel?.totalPrice?.priceFormat()
-        favoriteButton.selected = (sceneModel?.userLike ?? "fasle") == "true"
+        favoriteButton.isSelected = (sceneModel?.userLike ?? "fasle") == "true"
     }
     
 
-    @IBAction func backButtonClick(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func backButtonClick(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
     
     
     func configTableFooterView(){
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake((self.view.w - 0.5)/2,(self.view.w - 0.5)/2)
-        layout.headerReferenceSize = CGSizeMake(MGScreenWidth,70);  //设置head大小
+        layout.itemSize = CGSize(width: (self.view.w - 0.5)/2,height: (self.view.w - 0.5)/2)
+        layout.headerReferenceSize = CGSize(width: MGScreenWidth,height: 70);  //设置head大小
         layout.minimumInteritemSpacing = 0.5;
         layout.minimumLineSpacing = 0.5;
-        layout.scrollDirection = .Vertical
+        layout.scrollDirection = .vertical
         footerCollectionView = UICollectionView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: 0), collectionViewLayout: layout)
         footerCollectionView.backgroundColor = DefaultBackColor
         WOWBorderColor(footerCollectionView)
-        footerCollectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
-        footerCollectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
+        footerCollectionView.register(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
+        footerCollectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell))
         footerCollectionView.delegate = self
         footerCollectionView.dataSource = self
         tableView.tableFooterView = footerCollectionView
-        footerCollectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
+        footerCollectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context:nil)
     }
  
  
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let height = self.footerCollectionView.collectionViewLayout.collectionViewContentSize().height
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        let height = self.footerCollectionView.collectionViewLayout.collectionViewContentSize.height
         guard height != footerCollectionView.size.height else{
             return
         }
-        footerCollectionView.size = CGSizeMake(MGScreenWidth, height)
+        footerCollectionView.size = CGSize(width: MGScreenWidth, height: height)
         tableView.tableFooterView = footerCollectionView
     }
     
 //MARK:Actions
     
-    @IBAction func carClick(sender: UIButton) {
+    @IBAction func carClick(_ sender: UIButton) {
         let products = sceneModel?.products
-        let alert = UIAlertController(title:"温馨提示", message:"确定添加\(products?.count ?? 0)件商品进购物车", preferredStyle: .Alert)
-        let cancel = UIAlertAction(title:"取消", style: .Cancel, handler: nil)
-        let sure   = UIAlertAction(title: "确定", style: .Default) { (action) in
+        let alert = UIAlertController(title:"温馨提示", message:"确定添加\(products?.count ?? 0)件商品进购物车", preferredStyle: .alert)
+        let cancel = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        let sure   = UIAlertAction(title: "确定", style: .default) { (action) in
             if let arr = products{
                 if WOWUserManager.loginStatus { //登录了
                     self.saveNetCar(arr)
@@ -99,22 +99,22 @@ class WOWSenceController: WOWBaseViewController {
         }
         alert.addAction(cancel)
         alert.addAction(sure)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     //同步到云端购物车
-    private func saveNetCar(arr:[WOWProductModel]){
+    fileprivate func saveNetCar(_ arr:[WOWProductModel]){
         let uid = WOWUserManager.userID
         var cars = [AnyObject]()
-        var param:[String:AnyObject] = ["uid":uid]
+        var param:[String:AnyObject] = ["uid":uid as AnyObject]
         if arr.count != 0 {
 //            for obj in arr {
 //                let dict = ["skuid":obj.skuID ?? "","count":"1","productid":String(obj.productId) ?? ""]
 //                cars.append(dict)
 //            }
-            param["cart"] = cars
+            param["cart"] = cars as AnyObject?
             let string = JSONStringify(param)
-            WOWNetManager.sharedManager.requestWithTarget(.Api_CartList(cart:string), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(.api_CartList(cart:string), successClosure: { [weak self](result) in
                 if let _ = self{
                     let json = JSON(result)
                     DLog(json)
@@ -154,16 +154,16 @@ class WOWSenceController: WOWBaseViewController {
 //        WOWHud.showMsg("添加购物车成功")
 //    }
 
-    @IBAction func share(sender: UIButton) {
+    @IBAction func share(_ sender: UIButton) {
         //FIXME:暂时分享出去公司的官网
         WOWShareManager.share(sceneModel?.name, shareText: sceneModel?.desc, url: WOWCompanyUrl, shareImage:WOWSenceHelper.shareImage ?? UIImage(named: "me_logo")!)
     }
     
-    @IBAction func favorite(sender: UIButton) {
+    @IBAction func favorite(_ sender: UIButton) {
         let uid         = WOWUserManager.userID
         let thingid     = self.sceneID ?? ""
         let type        = "2" //1为商品 2 为场景
-        let is_delete   = favoriteButton.selected ? "1":"0"
+        let is_delete   = favoriteButton.isSelected ? "1":"0"
 //        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id:"", uid: uid, type: type, is_delete:is_delete, scene_id:thingid), successClosure: { [weak self](result) in
 //            let json = JSON(result)
 //            DLog(json)
@@ -181,7 +181,7 @@ class WOWSenceController: WOWBaseViewController {
     override func request() {
         super.request()
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_SenceDetail(sceneid:sceneID ?? "",uid:uid), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_SenceDetail(sceneid:sceneID ?? "",uid:uid), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -205,7 +205,7 @@ class WOWSenceController: WOWBaseViewController {
 
 //MARK: Delegate
 extension WOWSenceController:WOWSubAlertDelegate{
-    func subAlertItemClick(productID:Int) {
+    func subAlertItemClick(_ productID:Int) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.productId = productID
         vc.hideNavigationBar = true
@@ -215,47 +215,47 @@ extension WOWSenceController:WOWSubAlertDelegate{
 
 
 extension WOWSenceController:UITableViewDelegate,UITableViewDataSource{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return WOWSenceHelper.sectionsNumber()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return WOWSenceHelper.rowsNumberInSection(section)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return WOWSenceHelper.cellForRow(tableView, indexPath: indexPath)
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return WOWSenceHelper.heightForHeaderInSection(section)
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return WOWSenceHelper.viewForHeaderInSection(tableView, section: section)
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return WOWSenceHelper.heightForFooterInSection(section)
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return WOWSenceHelper.viewForFooterInSection(tableView, section: section)
     }
 }
 
 
 extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sceneModel?.recommendProducts?.count ?? 0
     }
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let  cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
-        let  model = sceneModel?.recommendProducts?[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWImageCell", for: indexPath) as! WOWImageCell
+        let  model = sceneModel?.recommendProducts?[(indexPath as NSIndexPath).row]
 //        cell.pictureImageView.kf_setImageWithURL(NSURL(string:model?.productImg ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
         cell.pictureImageView.set_webimage_url(model?.productImg )
 
@@ -263,8 +263,8 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let  model = sceneModel?.recommendProducts?[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let  model = sceneModel?.recommendProducts?[(indexPath as NSIndexPath).row]
         let  pid = model?.productId ?? 0
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.productId = pid
@@ -273,15 +273,15 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var returnView:UICollectionReusableView!
         if kind == UICollectionElementKindSectionHeader{
-            let view = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWCollectionHeaderCell", forIndexPath: indexPath) as! WOWReuseSectionView
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWCollectionHeaderCell", for: indexPath) as! WOWReuseSectionView
             view.titleLabel.text = "猜你喜欢"
             returnView = view
         }
         if kind == UICollectionElementKindSectionFooter{
-            let view = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: "WOWCollectionFooterCell", forIndexPath: indexPath) as!  WOWReuseSectionView
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "WOWCollectionFooterCell", for: indexPath) as!  WOWReuseSectionView
             view.titleLabel.text = ""
             returnView = view
         }

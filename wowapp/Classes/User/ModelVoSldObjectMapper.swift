@@ -15,7 +15,7 @@ struct VoSldOM:Mappable {
         
     }
     
-    mutating func mapping(map: Map) {
+    mutating func mapping(_ map: Map) {
         id              <- map["id"]
         name            <- map["name"]
         parent_id       <- map["parent_id"]
@@ -26,7 +26,7 @@ struct VoSldOM:Mappable {
 
 struct CityDataManager {
     static let data = VoSldDataOM()
-    private init() {}
+    fileprivate init() {}
 }
 
 struct VoSldDataOM {
@@ -38,11 +38,11 @@ struct VoSldDataOM {
     var is_load:Bool = false
     
     mutating func loadJsonObjectMapper() throws {
-        if let path = NSBundle.mainBundle().pathForResource("city", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "city", ofType: "json") {
             
             do {
-                let json_str            = try! String(contentsOfURL: NSURL(fileURLWithPath: path), encoding: NSUTF8StringEncoding)
-                if let dataFromString   = json_str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                let json_str            = try! String(contentsOf: URL(fileURLWithPath: path), encoding: String.Encoding.utf8)
+                if let dataFromString   = json_str.data(using: String.Encoding.utf8, allowLossyConversion: false) {
                     let json            = JSON(data: dataFromString)
                     let a               = json["RECORDS"].arrayObject
                     slds                = try! Mapper<VoSldOM>().mapArray(a)!
@@ -77,15 +77,15 @@ struct VoSldDataOM {
         reload()
         is_load = true
     }
-    mutating func filter ( slds:[VoSldOM] ){
+    mutating func filter ( _ slds:[VoSldOM] ){
         self.slds       = slds
         self.provinces  = slds.filter{ (sld) in sld.level_type == "1" }
         self.cities     = slds.filter{ (sld) in sld.level_type == "2" }
         self.districts  = slds.filter{ (sld) in sld.level_type == "3" }
-        for (index, item) in provinces.enumerate() {
+        for (index, item) in provinces.enumerated() {
             provinces[index].subCities = cities.filter{ (sld) in sld.parent_id == item.id }
             
-            for (index_city, item_city) in provinces[index].subCities!.enumerate() {
+            for (index_city, item_city) in provinces[index].subCities!.enumerated() {
                 
                 provinces[index].subCities![index_city].subDistricts = districts.filter{ (sld) in sld.parent_id == item_city.id }
             }

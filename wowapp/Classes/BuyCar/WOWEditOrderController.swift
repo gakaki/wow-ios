@@ -28,7 +28,7 @@ class WOWEditOrderController: WOWBaseViewController {
     var orderCode                       = String()
     var couponModel                     :WOWCouponModel?
     
-    private var tipsTextField           : HolderTextView!
+    fileprivate var tipsTextField           : HolderTextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,17 +50,17 @@ class WOWEditOrderController: WOWBaseViewController {
     }
     //MARK: - lazy
     lazy var backView:WOWPayBackView = {
-        let v = WOWPayBackView(frame:CGRectMake(0,0,self.view.w,self.view.h + 64))
+        let v = WOWPayBackView(frame:CGRect(x: 0,y: 0,width: self.view.w,height: self.view.h + 64))
         v.payView.delegate = self
         return v
     }()
     
     //MARK: - 弹出选择支付窗口
     func chooseStyle() {
-        let window = UIApplication.sharedApplication().windows.last
+        let window = UIApplication.shared.windows.last
         
         window?.addSubview(backView)
-        window?.bringSubviewToFront(backView)
+        window?.bringSubview(toFront: backView)
         backView.show()
     }
 
@@ -72,11 +72,11 @@ class WOWEditOrderController: WOWBaseViewController {
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = GrayColorLevel5
-        tableView.registerNib(UINib.nibName(String(WOWOrderAddressCell)), forCellReuseIdentifier:String(WOWOrderAddressCell))
-        tableView.registerNib(UINib.nibName(String(WOWProductOrderCell)), forCellReuseIdentifier:String(WOWProductOrderCell))
-        tableView.registerNib(UINib.nibName(String(WOWOrderFreightCell)), forCellReuseIdentifier:String(WOWOrderFreightCell))
-        tableView.registerNib(UINib.nibName(String(WOWTipsCell)), forCellReuseIdentifier:String(WOWTipsCell))
-        tableView.keyboardDismissMode = .OnDrag
+        tableView.register(UINib.nibName(String(describing: WOWOrderAddressCell())), forCellReuseIdentifier:String(describing: WOWOrderAddressCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWProductOrderCell())), forCellReuseIdentifier:String(describing: WOWProductOrderCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWOrderFreightCell.self)), forCellReuseIdentifier:String(describing: WOWOrderFreightCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWTipsCell())), forCellReuseIdentifier:String(describing: WOWTipsCell.self))
+        tableView.keyboardDismissMode = .onDrag
  
     }
     
@@ -93,7 +93,7 @@ class WOWEditOrderController: WOWBaseViewController {
     }
     
     //MARK: - Action
-    @IBAction func sureClick(sender: UIButton) {
+    @IBAction func sureClick(_ sender: UIButton) {
         guard addressInfo != nil else {
             WOWHud.showMsg("请选择收货地址")
             return
@@ -113,11 +113,11 @@ class WOWEditOrderController: WOWBaseViewController {
     override func request() {
         super.request()
         //请求地址数据
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDefault, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result) in
             if let strongSelf = self{
-                strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(result)
-                let section = NSIndexSet(index: 0)
-                strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
+                strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(JSONObject:result)
+                let section = IndexSet(integer: 0)
+                strongSelf.tableView.reloadSections(section, with: .none)
             
             }
         }) { (errorMsg) in
@@ -127,9 +127,9 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求商品列表
     func requestProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderSettle, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderSettle, successClosure: { [weak self](result) in
             if let strongSelf = self {
-                strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
+                strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(JSONObject:result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
                 let coupon = WOWCouponModel.init()
                 coupon.id = strongSelf.orderSettle?.endUserCouponId
@@ -148,10 +148,10 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求立即购买订单信息
     func requestBuyNowProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderBuyNow(productId: productId ?? 0, productQty: productQty ?? 1), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderBuyNow(productId: productId ?? 0, productQty: productQty ?? 1), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 
-                strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(result)
+                strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(JSONObject:result)
                 
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
                 
@@ -172,24 +172,24 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求创建订单
     func requestOrderCreat() -> Void {
-        var params = [String: AnyObject]?()
+        var params = [String: AnyObject]()
         // 截取两位小数点，确保金额正确
         let totalAmoutStr = String(format: "%.2f",orderSettle?.totalAmount ?? 0)
         
         if let endUserCouponId = couponModel?.id {
-            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": totalAmoutStr, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+            params = ["shippingInfoId": (addressInfo?.id)! as AnyObject, "orderSource": 2 as AnyObject, "orderAmount": totalAmoutStr, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
         }else {
-            params = ["shippingInfoId": (addressInfo?.id)!, "orderSource": 2, "orderAmount": totalAmoutStr, "remark": tipsTextField.text ?? ""]
+            params = ["shippingInfoId": (addressInfo?.id)! as AnyObject, "orderSource": 2 as AnyObject, "orderAmount": totalAmoutStr, "remark": tipsTextField.text ?? ""]
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 
                 //重新计算购物车数量
                 for product in (strongSelf.productArr ?? [WOWCarProductModel]()) {
                     WOWUserManager.userCarCount -= product.productQty ?? 1
                 }
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                 
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
@@ -202,7 +202,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //立即支付创建订单
     func requestBuyNowOrderCreat() -> Void {
-        var params = [String: AnyObject]?()
+        var params = [String: AnyObject]()
         let totalAmount = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
         if let endUserCouponId = couponModel?.id {
             params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": totalAmount, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
@@ -210,7 +210,7 @@ class WOWEditOrderController: WOWBaseViewController {
             params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": totalAmount, "remark": tipsTextField.text ?? ""]
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCreate(params: params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
@@ -222,8 +222,8 @@ class WOWEditOrderController: WOWBaseViewController {
     }
     
     //去支付
-    private func goPay(charge:AnyObject){
-        dispatch_async(dispatch_get_main_queue()) {
+    fileprivate func goPay(_ charge:AnyObject){
+        DispatchQueue.main.async {
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
                 if let strongSelf = self{
                     switch ret{
@@ -247,7 +247,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //从服务端去拉取支付结果
     func requestPayResult() {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_PayResult(orderCode: orderCode), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_PayResult(orderCode: orderCode), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let orderCode = json["orderCode"].string
@@ -269,11 +269,11 @@ class WOWEditOrderController: WOWBaseViewController {
 }
 
 extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:     //地址
             return 1
@@ -288,35 +288,35 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell:UITableViewCell?
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
         case 0: //地址
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWOrderAddressCell), forIndexPath: indexPath) as! WOWOrderAddressCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderAddressCell), for: indexPath) as! WOWOrderAddressCell
             cell.showData(addressInfo)
             returnCell = cell
         case 1: //商品清单
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWProductOrderCell), forIndexPath: indexPath) as! WOWProductOrderCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductOrderCell), for: indexPath) as! WOWProductOrderCell
             if let productArr = productArr {
-                cell.showData(productArr[indexPath.row])
+                cell.showData(productArr[(indexPath as NSIndexPath).row])
             }
             returnCell = cell
         case 2: //运费及优惠券信息
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWOrderFreightCell), forIndexPath: indexPath) as! WOWOrderFreightCell
-            if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderFreightCell), for: indexPath) as! WOWOrderFreightCell
+            if (indexPath as NSIndexPath).row == 0 {
                 cell.leftLabel.text = "运费"
                 let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0],counts:[1])
                 cell.freightPriceLabel.text = result
-                cell.couponLabel.hidden = true
-                cell.nextImage.hidden = true
-                cell.freightPriceLabel.hidden = false
-                cell.lineView.hidden = false
+                cell.couponLabel.isHidden = true
+                cell.nextImage.isHidden = true
+                cell.freightPriceLabel.isHidden = false
+                cell.lineView.isHidden = false
             }else {
                 cell.leftLabel.text = "优惠券"
-                cell.freightPriceLabel.hidden = true
-                cell.nextImage.hidden = false
-                cell.couponLabel.hidden = false
-                cell.lineView.hidden = true
+                cell.freightPriceLabel.isHidden = true
+                cell.nextImage.isHidden = false
+                cell.couponLabel.isHidden = false
+                cell.lineView.isHidden = true
                 
                 if let deduction = self.orderSettle?.deduction  {
                         let result = WOWCalPrice.calTotalPrice([deduction],counts:[1])
@@ -328,7 +328,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             }
             returnCell = cell
         case 3: //订单备注
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWTipsCell), forIndexPath:indexPath) as! WOWTipsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell), for:indexPath) as! WOWTipsCell
             cell.textView.placeHolder = "写下您的特殊要求"
             tipsTextField = cell.textView
             returnCell = cell
@@ -338,12 +338,12 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         return returnCell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch (indexPath.section, indexPath.row ){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row ){
         case (0, 0):
             
             let vc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
-            vc.entrance = WOWAddressEntrance.SureOrder
+            vc.entrance = WOWAddressEntrance.sureOrder
             vc.action = {(model:AnyObject) in
                 self.addressInfo = model as? WOWAddressListModel
                 self.tableView.reloadData()
@@ -364,17 +364,17 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                         
                         strongSelf.orderSettle?.deduction = strongSelf.couponModel?.deduction
                         
-                        let section = NSIndexSet(index: 2)
-                        strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
+                        let section = IndexSet(integer: 2)
+                        strongSelf.tableView.reloadSections(section, with: .none)
                         
                         //重新计算总金额，先把double转为number类型的，避免计算过程中由于浮点型而改变数值
-                        let productTotal = NSDecimalNumber(double: strongSelf.orderSettle?.productTotalAmount ?? 0)
+                        let productTotal = NSDecimalNumber(value: strongSelf.orderSettle?.productTotalAmount ?? 0 as Double)
                         
-                        let delivery = NSDecimalNumber(double: strongSelf.orderSettle?.deliveryFee ?? 0)
-                        let deduction = NSDecimalNumber(double: couponInfo?.deduction ?? 0)
+                        let delivery = NSDecimalNumber(value: strongSelf.orderSettle?.deliveryFee ?? 0 as Double)
+                        let deduction = NSDecimalNumber(value: couponInfo?.deduction ?? 0 as Double)
                         
                         //用商品的总价加上运费然后减去优惠券金额得出结算价格
-                        strongSelf.orderSettle?.totalAmount = (productTotal.decimalNumberByAdding(delivery).decimalNumberBySubtracting(deduction)).doubleValue
+                        strongSelf.orderSettle?.totalAmount = (productTotal.adding(delivery).subtracting(deduction)).doubleValue
                         
                         
                         let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
@@ -413,7 +413,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
 //    }
     
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 1:
             return 0.01
@@ -422,7 +422,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         }
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 3:
             return 50
@@ -434,13 +434,13 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
 
 //MARK: - selectPayDelegate
 extension WOWEditOrderController: selectPayDelegate {
-    func surePay(channel: String) {
+    func surePay(_ channel: String) {
         backView.hidePayView()
         if  orderCode.isEmpty {
             WOWHud.showMsg("订单生成失败")
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderCharge(orderNo: orderCode ?? "", channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode ?? "", channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let charge = json["charge"]

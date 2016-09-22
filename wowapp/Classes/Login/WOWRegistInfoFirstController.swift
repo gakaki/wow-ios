@@ -19,7 +19,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     @IBOutlet weak var telTextField: UITextField!
     @IBOutlet weak var descTextField: UITextField!
     var phoneNumber  :String?
-    private var headImageUrl:String = WOWUserManager.userHeadImageUrl
+    fileprivate var headImageUrl:String = WOWUserManager.userHeadImageUrl
     var nextView : WOWRegistInfoSureView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,24 +49,24 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         configTable()
     }
     
-    private func configTable(){
-        nextView = NSBundle.mainBundle().loadNibNamed(String(WOWRegistInfoSureView), owner: self, options: nil).last as! WOWRegistInfoSureView
-        nextView.sureButton.addTarget(self, action: #selector(nextButton), forControlEvents: .TouchUpInside)
-        nextView.tipsLabel.hidden = true
-        nextView.frame = CGRectMake(0,0, self.view.w, 200)
+    fileprivate func configTable(){
+        nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView), owner: self, options: nil)?.last as! WOWRegistInfoSureView
+        nextView.sureButton.addTarget(self, action: #selector(nextButton), for: .touchUpInside)
+        nextView.tipsLabel.isHidden = true
+        nextView.frame = CGRect(x: 0,y: 0, width: self.view.w, height: 200)
         tableView.tableFooterView = nextView
     }
     
     override func navBack() {
-        let alert = UIAlertController(title: "您有资料未填写", message: "确定退出？", preferredStyle: .Alert)
-        let cancel = UIAlertAction(title:"取消", style: .Cancel, handler: { (action) in
+        let alert = UIAlertController(title: "您有资料未填写", message: "确定退出？", preferredStyle: .alert)
+        let cancel = UIAlertAction(title:"取消", style: .cancel, handler: { (action) in
             DLog("取消")
         })
 
-        let sure   = UIAlertAction(title: "确定", style: .Default) {[weak self] (action) in
+        let sure   = UIAlertAction(title: "确定", style: .default) {[weak self] (action) in
             if let strongSelf = self{
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                    strongSelf.navigationController?.popViewControllerAnimated(true)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                    strongSelf.navigationController?.popViewController(animated: true)
                     if strongSelf.isPresent{
                         UIApplication.appTabBarController.selectedIndex = 0
                     }
@@ -76,21 +76,21 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         }
         alert.addAction(cancel)
         alert.addAction(sure)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
 
     }
     
 //MARK:Actions
     func nextButton() {
-        guard let nickName = nickTextField.text where !nickName.isEmpty else{
+        guard let nickName = nickTextField.text , !nickName.isEmpty else{
             WOWHud.showMsg("请输入昵称")
-            nextView.tipsLabel.hidden = false
-            nextView.tipsLabel.textColor = .redColor()
+            nextView.tipsLabel.isHidden = false
+            nextView.tipsLabel.textColor = .red()
             nextView.tipsLabel.text = "请输入昵称"
             return
         }
         let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? "","avatar":self.headImageUrl]
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)
                 //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯
@@ -115,8 +115,8 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
 
 
 extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.row {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch (indexPath as NSIndexPath).row {
         case 0: //头像
             showPicture()
         default:
@@ -124,37 +124,37 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
         }
     }
     
-    private func showPicture(){
-        let actionSheetController: UIAlertController = UIAlertController(title: "更改头像", message: nil, preferredStyle: .ActionSheet)
-        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .Cancel) { action -> Void in
+    fileprivate func showPicture(){
+        let actionSheetController: UIAlertController = UIAlertController(title: "更改头像", message: nil, preferredStyle: .actionSheet)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .cancel) { action -> Void in
             
         }
         actionSheetController.addAction(cancelAction)
-        let takePictureAction: UIAlertAction = UIAlertAction(title: "相机拍照", style: .Default) { action -> Void in
-            self.choosePhtot(.Camera)
+        let takePictureAction: UIAlertAction = UIAlertAction(title: "相机拍照", style: .default) { action -> Void in
+            self.choosePhtot(.camera)
         }
         actionSheetController.addAction(takePictureAction)
-        let choosePictureAction: UIAlertAction = UIAlertAction(title: "相册选取", style: .Default) { action -> Void in
-            self.choosePhtot(.PhotoLibrary)
+        let choosePictureAction: UIAlertAction = UIAlertAction(title: "相册选取", style: .default) { action -> Void in
+            self.choosePhtot(.photoLibrary)
         }
         actionSheetController.addAction(choosePictureAction)
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        self.present(actionSheetController, animated: true, completion: nil)
     }
     
-    private func choosePhtot(type:UIImagePickerControllerSourceType){
+    fileprivate func choosePhtot(_ type:UIImagePickerControllerSourceType){
         if UIImagePickerController.isSourceTypeAvailable(type){
             //指定图片控制器类型
             imagePicker.sourceType = type
             //弹出控制器，显示界面
-            self.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-            self.presentViewController(imagePicker, animated: true, completion:nil)
+            self.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(imagePicker, animated: true, completion:nil)
         }else{
             DLog("读取相册错误")
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        picker.dismiss(animated: true, completion: nil)
         
         WOWUploadManager.upload(image, successClosure: { [weak self](result) in
            
@@ -176,7 +176,7 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
 //MARK:Delegate
 
 extension WOWRegistInfoFirstController:UITextFieldDelegate{
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }

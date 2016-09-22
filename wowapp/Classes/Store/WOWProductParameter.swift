@@ -21,13 +21,13 @@ class WOWProductParameter: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func showData(model:WOWParameter){
+    func showData(_ model:WOWParameter){
         
             materialLabel.text = model.materialText
         if model.needAssemble ?? false {

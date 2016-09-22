@@ -23,17 +23,17 @@ class WOWCommentCell: UITableViewCell {
         headImageView.borderRadius(22)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     func hideHeadImage() {
-        headImageView.hidden = true
+        headImageView.isHidden = true
         headImageWidth.constant = 0
         headImageLeftMargin.constant = 0
     }
     
-    func showData(model:WOWCommentListModel) {
+    func showData(_ model:WOWCommentListModel) {
 //        self.headImageView.kf_setImageWithURL(NSURL(string: model.user_headimage ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
         
         self.headImageView.set_webimage_url_user( model.user_headimage! )

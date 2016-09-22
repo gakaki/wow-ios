@@ -10,7 +10,7 @@ import QuartzCore
 /// The underlying time reference is `mach_absolute_time()`
 
 public struct Stopwatch {
-    private var startTime: NSTimeInterval
+    fileprivate var startTime: TimeInterval
     
     /// Initialize with current time as start point.
     public init() {
@@ -25,7 +25,7 @@ public struct Stopwatch {
     /// Calculate elapsed time since initialization or last call to `reset()`.
     ///
     /// - returns: `NSTimeInterval`
-    public func elapsedTimeInterval() -> NSTimeInterval {
+    public func elapsedTimeInterval() -> TimeInterval {
         return CACurrentMediaTime() - startTime
     }
     

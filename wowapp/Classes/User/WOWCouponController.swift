@@ -34,7 +34,7 @@ class WOWCouponController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         navigationItem.title = "优惠券"
-        tableView.registerNib(UINib.nibName(String(WOWCouponCell)), forCellReuseIdentifier: "WOWCouponCell")
+        tableView.register(UINib.nibName(String(WOWCouponCell)), forCellReuseIdentifier: "WOWCouponCell")
         tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.backgroundColor = GrayColorLevel5
@@ -54,7 +54,7 @@ class WOWCouponController: WOWBaseViewController {
             params = ["currentPage": pageIndex, "pageSize": pageSize, "minAmountLimit": minAmountLimit ?? 0, "couponLimitType": 0]
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Coupons(params: params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Coupons(params: params), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
                 
@@ -105,20 +105,20 @@ class WOWCouponController: WOWBaseViewController {
 }
 
 extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.vo_cupons.count ?? 0
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
   
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WOWCouponCell", forIndexPath:indexPath) as! WOWCouponCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WOWCouponCell", for:indexPath) as! WOWCouponCell
         
         //这题注意是利用section做分隔 所以一个section 一个row
-        let r = self.vo_cupons[indexPath.section]
+        let r = self.vo_cupons[(indexPath as NSIndexPath).section]
             cell.label_amount.font = UIFont.priceFont(40)
             cell.label_amount.text          = String(format: "%.f",r.deduction ?? 0)
             cell.label_title.text           = r.couponTitle!
@@ -146,10 +146,10 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
                 r.isSelect = true
             }
             if r.isSelect {
-                cell.image_check.hidden         = false
+                cell.image_check.isHidden         = false
                     
             }else {
-                cell.image_check.hidden         = true
+                cell.image_check.isHidden         = true
             }
         }
         
@@ -157,14 +157,14 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let coupon = vo_cupons[indexPath.section]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let coupon = vo_cupons[(indexPath as NSIndexPath).section]
         switch entrance {
         case .orderEntrance:
             if coupon.status == 1 {
                 if let ac = action{
-                    ac(object: coupon)
-                    navigationController?.popViewControllerAnimated(true)
+                    ac(coupon)
+                    navigationController?.popViewController(animated: true)
                 }
             }
             
@@ -173,14 +173,14 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
             if entrance == .userEntrance {
@@ -193,30 +193,30 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
             if entrance == .userEntrance {
                 let view = UIView()
-                view.backgroundColor = UIColor.clearColor()
+                view.backgroundColor = UIColor.clear
                 return view
             }else {
-                let view = NSBundle.mainBundle().loadNibNamed(String(WOWCouponheaderView), owner: self, options: nil).last as! WOWCouponheaderView
-                view.noUseButton.addTarget(self, action: #selector(noUserClick(_:)), forControlEvents:.TouchUpInside)
+                let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView), owner: self, options: nil)?.last as! WOWCouponheaderView
+                view.noUseButton.addTarget(self, action: #selector(noUserClick(_:)), for:.touchUpInside)
                 return view
             }
         default:
             let view = UIView()
-            view.backgroundColor = UIColor.clearColor()
+            view.backgroundColor = UIColor.clear
             return view
         }
     }
     
-    func noUserClick(sender: UIButton)  {
+    func noUserClick(_ sender: UIButton)  {
         if let ac = action{
             couponModel = nil
-            ac(object: couponModel ?? "")
-            navigationController?.popViewControllerAnimated(true)
+            ac(couponModel ?? "" as AnyObject)
+            navigationController?.popViewController(animated: true)
         }
         
     }
@@ -224,16 +224,16 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
 
 extension WOWCouponController {
     //MARK: - EmptyData
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "emptyCoupon")
     }
     
-    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "没有优惠券哦~"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
         return attri
     }
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
     

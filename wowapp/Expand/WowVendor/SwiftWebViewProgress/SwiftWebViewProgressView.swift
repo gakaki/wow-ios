@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class WebViewProgressView: UIView {
+open class WebViewProgressView: UIView {
     
     var progress: Float = 0.0
     var progressBarView: UIView!
-    var barAnimationDuration: NSTimeInterval!
-    var fadeAnimationDuration: NSTimeInterval!
-    var fadeOutDelay: NSTimeInterval!
+    var barAnimationDuration: TimeInterval!
+    var fadeAnimationDuration: TimeInterval!
+    var fadeOutDelay: TimeInterval!
     
     // MARK: Initializer
     override init(frame: CGRect) {
@@ -26,19 +26,19 @@ public class WebViewProgressView: UIView {
         super.init(coder: aDecoder)
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         configureViews()
     }
     
     // MARK: Private Method
-    private func configureViews() {
-        self.userInteractionEnabled = false
-        self.autoresizingMask = .FlexibleWidth
+    fileprivate func configureViews() {
+        self.isUserInteractionEnabled = false
+        self.autoresizingMask = .flexibleWidth
         progressBarView = UIView(frame: self.bounds)
-        progressBarView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        progressBarView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         var tintColor = UIColor(red: 22/255, green: 126/255, blue: 251/255, alpha: 1.0)
-        if let color = UIApplication.sharedApplication().delegate?.window??.tintColor {
+        if let color = UIApplication.shared.delegate?.window??.tintColor {
             tintColor = color
         }
         progressBarView.backgroundColor = tintColor
@@ -50,16 +50,16 @@ public class WebViewProgressView: UIView {
     }
     
     // MARK: Public Method
-    public func setProgress(progress: Float, animated: Bool = false) {
+    open func setProgress(_ progress: Float, animated: Bool = false) {
         let isGrowing = progress > 0.0
-        UIView.animateWithDuration((isGrowing && animated) ? barAnimationDuration : 0.0, delay: 0.0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: (isGrowing && animated) ? barAnimationDuration : 0.0, delay: 0.0, options: UIViewAnimationOptions(), animations: {
             var frame = self.progressBarView.frame
             frame.size.width = CGFloat(progress) * self.bounds.size.width
             self.progressBarView.frame = frame
         }, completion: nil)
         
         if progress >= 1.0 {
-            UIView.animateWithDuration(animated ? fadeAnimationDuration : 0.0, delay: fadeOutDelay, options: .CurveEaseInOut, animations: {
+            UIView.animate(withDuration: animated ? fadeAnimationDuration : 0.0, delay: fadeOutDelay, options: UIViewAnimationOptions(), animations: {
                 self.progressBarView.alpha = 0.0
                 }, completion: {
                     completed in
@@ -68,7 +68,7 @@ public class WebViewProgressView: UIView {
                     self.progressBarView.frame = frame
             })
         } else {
-            UIView.animateWithDuration(animated ? fadeAnimationDuration : 0.0, delay: 0.0, options: .CurveEaseInOut, animations: {
+            UIView.animate(withDuration: animated ? fadeAnimationDuration : 0.0, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                 self.progressBarView.alpha = 1.0
             }, completion: nil)
         }

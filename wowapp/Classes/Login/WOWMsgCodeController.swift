@@ -52,13 +52,13 @@ class WOWMsgCodeController: WOWBaseViewController {
     }
 
 //MARK:Actions
-    @IBAction func msgCodeButtonClick(sender: UIButton) {
+    @IBAction func msgCodeButtonClick(_ sender: UIButton) {
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }
         let mobile = phoneTextField.text ?? ""
         
-        WOWNetManager.sharedManager.requestWithTarget(.Api_PwdResetCode(mobile:mobile), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_PwdResetCode(mobile:mobile), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.showMsg("验证码发送成功")
                 strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor(), mainTitleColor: UIColor.blackColor(), countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
@@ -70,23 +70,23 @@ class WOWMsgCodeController: WOWBaseViewController {
     
     }
 
-    @IBAction func sureClick(sender: UIButton) {
+    @IBAction func sureClick(_ sender: UIButton) {
         
         //手机号验证成功才进去验证码界面
         if !validatePhone(phoneTextField.text){
             return
         }
-        guard let code = codeTextField.text where !code.isEmpty else{
+        guard let code = codeTextField.text , !code.isEmpty else{
             WOWHud.showMsg("请输入验证码")
             tipsLabel.text = "请输入验证码"
             return
         }
-        guard let newPwd = newPwdTextField.text where !newPwd.isEmpty else{
+        guard let newPwd = newPwdTextField.text , !newPwd.isEmpty else{
             WOWHud.showMsg("请输入密码")
             tipsLabel.text = "请输入密码"
             return
         }
-        guard let passwd = pwdTextField.text where !passwd.isEmpty else{
+        guard let passwd = pwdTextField.text , !passwd.isEmpty else{
             WOWHud.showMsg("请输入确认密码")
             tipsLabel.text = "请输入确认密码"
             return
@@ -107,15 +107,15 @@ class WOWMsgCodeController: WOWBaseViewController {
             tipsLabel.text = "密码不能大于20位"
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_ResetPwd(mobile:phoneTextField.text!, captcha:code, newPwd:newPwd), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ResetPwd(mobile:phoneTextField.text!, captcha:code, newPwd:newPwd), successClosure: {[weak self](result) in
             if let strongSelf = self{
                 switch strongSelf.entrance {
                 case .loginEntrance:
-                    strongSelf.navigationController?.popViewControllerAnimated(true)
+                    strongSelf.navigationController?.popViewController(animated: true)
                 default:
                     WOWUserManager.exitLogin()
-                    NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-                    strongSelf.navigationController?.popToRootViewControllerAnimated(false)
+                    NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+                    strongSelf.navigationController?.popToRootViewController(animated: false)
                     strongSelf.toLoginVC(true)
                 }
                 
@@ -128,13 +128,13 @@ class WOWMsgCodeController: WOWBaseViewController {
     }
     
     
-    private func entranceSmsCode(){
+    fileprivate func entranceSmsCode(){
         //手机号验证成功才进去验证码界面
         if !validatePhone(codeTextField.text){
             return
         }
         let mobile = codeTextField.text ?? ""
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_PwdResetCode(mobile: mobile), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_PwdResetCode(mobile: mobile), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
                 vc.mobile = strongSelf.codeTextField.text
@@ -147,8 +147,8 @@ class WOWMsgCodeController: WOWBaseViewController {
         }
     }
     
-    private func validatePhone(phoneNumber:String?) -> Bool{
-        guard let phone = phoneNumber where !phone.isEmpty else{
+    fileprivate func validatePhone(_ phoneNumber:String?) -> Bool{
+        guard let phone = phoneNumber , !phone.isEmpty else{
             WOWHud.showMsg("请输入手机号")
             tipsLabel.text = "请输入手机号"
             return false
@@ -162,8 +162,8 @@ class WOWMsgCodeController: WOWBaseViewController {
         return true
     }
     
-    private func validatePhone(phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
-        guard let phone = phoneNumber where !phone.isEmpty else{
+    fileprivate func validatePhone(_ phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
+        guard let phone = phoneNumber , !phone.isEmpty else{
             WOWHud.showMsg("请输入手机号")
             tipsLabel.text = "请输入手机号"
             return false
@@ -188,7 +188,7 @@ class WOWMsgCodeController: WOWBaseViewController {
 
 //MARK:Delegate
 extension WOWMsgCodeController:UITextFieldDelegate{
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }

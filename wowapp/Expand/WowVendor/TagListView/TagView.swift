@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-public class TagView: UIButton {
+open class TagView: UIButton {
 
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
@@ -24,17 +24,17 @@ public class TagView: UIButton {
     }
     @IBInspectable var borderColor: UIColor? {
         didSet {
-            layer.borderColor = borderColor?.CGColor
+            layer.borderColor = borderColor?.cgColor
         }
     }
-    @IBInspectable var textColor: UIColor = UIColor.whiteColor() {
+    @IBInspectable var textColor: UIColor = UIColor.white {
         didSet {
-            setTitleColor(textColor, forState: .Normal)
+            setTitleColor(textColor, for: UIControlState())
         }
     }
-    @IBInspectable var selectedTextColor: UIColor = UIColor.whiteColor() {
+    @IBInspectable var selectedTextColor: UIColor = UIColor.white {
         didSet {
-            setTitleColor(selected ? selectedTextColor : textColor, forState: .Normal)
+            setTitleColor(isSelected ? selectedTextColor : textColor, for: UIControlState())
         }
     }
     @IBInspectable var paddingY: CGFloat = 2 {
@@ -50,15 +50,15 @@ public class TagView: UIButton {
         }
     }
 
-    @IBInspectable public var tagBackgroundColor: UIColor = UIColor.grayColor() {
+    @IBInspectable open var tagBackgroundColor: UIColor = UIColor.gray {
         didSet {
             backgroundColor = tagBackgroundColor
         }
     }
     
-    @IBInspectable public var tagHighlightedBackgroundColor: UIColor? {
+    @IBInspectable open var tagHighlightedBackgroundColor: UIColor? {
         didSet {
-            if let color = tagHighlightedBackgroundColor where highlighted {
+            if let color = tagHighlightedBackgroundColor , isHighlighted {
                 backgroundColor = color
             }
             else {
@@ -67,38 +67,38 @@ public class TagView: UIButton {
         }
     }
     
-    @IBInspectable public var tagSelectedBackgroundColor: UIColor = UIColor.redColor() {
+    @IBInspectable open var tagSelectedBackgroundColor: UIColor = UIColor.red {
         didSet {
-            backgroundColor = selected ? tagSelectedBackgroundColor : tagBackgroundColor
+            backgroundColor = isSelected ? tagSelectedBackgroundColor : tagBackgroundColor
         }
     }
     
-    var textFont: UIFont = UIFont.systemFontOfSize(12) {
+    var textFont: UIFont = UIFont.systemFont(ofSize: 12) {
         didSet {
             titleLabel?.font = textFont
         }
     }
     
-    override public var highlighted: Bool {
+    override open var isHighlighted: Bool {
         didSet {
-            if let color = tagHighlightedBackgroundColor where highlighted {
+            if let color = tagHighlightedBackgroundColor , isHighlighted {
                 backgroundColor = color
             }
             else {
-                backgroundColor = selected ? tagSelectedBackgroundColor : tagBackgroundColor
+                backgroundColor = isSelected ? tagSelectedBackgroundColor : tagBackgroundColor
             }
         }
     }
     
-    override public var selected: Bool {
+    override open var isSelected: Bool {
         didSet {
-            if selected {
+            if isSelected {
                 backgroundColor = tagSelectedBackgroundColor
-                setTitleColor(selectedTextColor, forState: .Normal)
+                setTitleColor(selectedTextColor, for: UIControlState())
             }
             else {
                 backgroundColor = tagBackgroundColor
-                setTitleColor(textColor, forState: .Normal)
+                setTitleColor(textColor, for: UIControlState())
             }
         }
     }
@@ -109,7 +109,7 @@ public class TagView: UIButton {
     
     @IBInspectable var enableRemoveButton: Bool = false {
         didSet {
-            removeButton.hidden = !enableRemoveButton
+            removeButton.isHidden = !enableRemoveButton
             updateRightInsets()
         }
     }
@@ -126,14 +126,14 @@ public class TagView: UIButton {
             removeButton.lineWidth = removeIconLineWidth
         }
     }
-    @IBInspectable var removeIconLineColor: UIColor = UIColor.whiteColor().colorWithAlphaComponent(0.54) {
+    @IBInspectable var removeIconLineColor: UIColor = UIColor.white.withAlphaComponent(0.54) {
         didSet {
             removeButton.lineColor = removeIconLineColor
         }
     }
     
     /// Handles Tap (TouchUpInside)
-    public var onTap: ((TagView) -> Void)?
+    open var onTap: ((TagView) -> Void)?
     
     // MARK: - init
     
@@ -144,21 +144,21 @@ public class TagView: UIButton {
     }
     
     public init(title: String) {
-        super.init(frame: CGRectZero)
-        setTitle(title, forState: .Normal)
+        super.init(frame: CGRect.zero)
+        setTitle(title, for: UIControlState())
         
         setupView()
     }
     
-    private func setupView() {
-        frame.size = intrinsicContentSize()
+    fileprivate func setupView() {
+        frame.size = intrinsicContentSize
         addSubview(removeButton)
         removeButton.tagView = self
     }
     
     // MARK: - layout
 
-    private func updateRightInsets() {
+    fileprivate func updateRightInsets() {
         if enableRemoveButton {
             titleEdgeInsets.right = paddingX  + removeButtonIconSize + paddingX
         }
@@ -167,8 +167,8 @@ public class TagView: UIButton {
         }
     }
     
-    override public func intrinsicContentSize() -> CGSize {
-        var size = titleLabel?.text?.sizeWithAttributes([NSFontAttributeName: textFont]) ?? CGSizeZero
+    override open var intrinsicContentSize : CGSize {
+        var size = titleLabel?.text?.size(attributes: [NSFontAttributeName: textFont]) ?? CGSize.zero
         size.height = textFont.pointSize + paddingY * 2
         size.width += paddingX * 2
         if enableRemoveButton {
@@ -177,7 +177,7 @@ public class TagView: UIButton {
         return size
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         if enableRemoveButton {
             removeButton.frame.size.width = paddingX + removeButtonIconSize + paddingX

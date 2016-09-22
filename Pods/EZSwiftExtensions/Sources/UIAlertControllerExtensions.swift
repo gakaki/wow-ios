@@ -8,9 +8,8 @@
 import UIKit
 
 extension UIAlertController {
-    
     /// EZSE: Easy way to present UIAlertController
     func show() {
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(self, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.present(self, animated: true, completion: nil)
     }
 }

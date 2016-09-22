@@ -18,11 +18,11 @@ class WOWSearchManager: NSObject {
     override init() {
         super.init()
         
-        guard let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last else {
+        guard let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last else {
             return
         }
         
-        let filePath = (path as NSString).stringByAppendingPathComponent("demo.sqlite")
+        let filePath = (path as NSString).appendingPathComponent("demo.sqlite")
         
         db = FMDatabase(path: filePath)
         
@@ -41,7 +41,7 @@ class WOWSearchManager: NSObject {
      *  删除语句
      */
     
-    func delectAll(typeData: String) -> Bool
+    func delectAll(_ typeData: String) -> Bool
     {
 
         let sql = "DELETE  FROM t_searchModel WHERE typeData = (?)"
@@ -54,7 +54,7 @@ class WOWSearchManager: NSObject {
      *  删除语句
      */
     
-    func delectSame(searchStr: String) -> Bool
+    func delectSame(_ searchStr: String) -> Bool
     {
         
         let sql = "DELETE  FROM t_searchModel WHERE searchStr = (?)"
@@ -66,7 +66,7 @@ class WOWSearchManager: NSObject {
     /**
      *  插入语句
      */
-    func insert(search: String) -> Bool {
+    func insert(_ search: String) -> Bool {
         delectSame(search)
         let sql = "INSERT INTO t_searchModel(searchStr,typeData)VALUES(?,?);"
 

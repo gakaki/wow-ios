@@ -9,7 +9,7 @@
 import UIKit
 
 protocol WOWGoodsSmallCellDelegate: class {
-    func likeClick(productId: Int)
+    func likeClick(_ productId: Int)
 }
 
 class WOWGoodsSmallCell: UICollectionViewCell {
@@ -37,7 +37,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     }
     
     func set_sold_out_status(){
-        self.label_soldout.hidden = false
+        self.label_soldout.isHidden = false
 //        self.pictureImageView.alpha = 0.4
     }
 //    @IBAction func favoriteAction(sender: AnyObject) {
@@ -45,12 +45,12 @@ class WOWGoodsSmallCell: UICollectionViewCell {
 //       
 //    }
 
-    func showData(model:WOWProductModel,indexPath:NSIndexPath) {
-        let i = indexPath.item
+    func showData(_ model:WOWProductModel,indexPath:IndexPath) {
+        let i = (indexPath as NSIndexPath).item
         if ( i % 2 != 0 && i != 0){
-            view_rightline.hidden = true
+            view_rightline.isHidden = true
         }else{
-            view_rightline.hidden = false
+            view_rightline.isHidden = false
         }
         productId = model.productId
         
@@ -76,22 +76,22 @@ class WOWGoodsSmallCell: UICollectionViewCell {
 
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
-                likeBtn.selected = true
+                likeBtn.isSelected = true
             
             }else{
-                likeBtn.selected = false
+                likeBtn.isSelected = false
        
             }
         }else{
             
-            likeBtn.selected = false
+            likeBtn.isSelected = false
     
         }
         
-        likeBtn.addTarget(self, action: #selector(likeClick(_:)), forControlEvents: .TouchUpInside)
+        likeBtn.addTarget(self, action: #selector(likeClick(_:)), for: .touchUpInside)
     }
     
-    func likeClick(sender: UIButton)  {
+    func likeClick(_ sender: UIButton)  {
         if !WOWUserManager.loginStatus {
             UIApplication.currentViewController()?.toLoginVC(true)
         }else{
@@ -99,7 +99,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
             WOWClickLikeAction.requestFavoriteProduct(productId ?? 0, isFavorite: { [weak self](isFavorite) in
                 if let strongSelf = self{
                     
-                      strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
+                      strongSelf.likeBtn.isSelected = !strongSelf.likeBtn.isSelected
                 }
             })
         }

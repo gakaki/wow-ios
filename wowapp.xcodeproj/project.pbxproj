@@ -15,6 +15,7 @@
 		061304A71D8E378C001F05D6 /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 061304A51D8E378C001F05D6 /* DALabeledCircularProgressView.m */; };
 		06182C441D7E8DB800B5FE8F /* WowModulePageVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06182C431D7E8DB800B5FE8F /* WowModulePageVO.swift */; };
 		06182C461D7E904700B5FE8F /* WowModulePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06182C451D7E904700B5FE8F /* WowModulePageView.swift */; };
+		061A3A2C1D93C510006DC8E5 /* ClassHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061A3A2B1D93C510006DC8E5 /* ClassHelper.swift */; };
 		062A91E71D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062A91E61D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift */; };
 		06318B181D8642A9009A9945 /* Special.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06318B171D8642A9009A9945 /* Special.storyboard */; };
 		0633527B1D6435970026177E /* VCBaseNavCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633527A1D6435970026177E /* VCBaseNavCart.swift */; };
@@ -461,6 +462,7 @@
 		061304A51D8E378C001F05D6 /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		06182C431D7E8DB800B5FE8F /* WowModulePageVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowModulePageVO.swift; sourceTree = "<group>"; };
 		06182C451D7E904700B5FE8F /* WowModulePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowModulePageView.swift; sourceTree = "<group>"; };
+		061A3A2B1D93C510006DC8E5 /* ClassHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassHelper.swift; sourceTree = "<group>"; };
 		061B72A91D7ACD5800EAC844 /* wowapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = wowapp.entitlements; path = ../wowapp.entitlements; sourceTree = "<group>"; };
 		062A91E61D54CB9200CD35D2 /* WOWFoundWeeklyNewCellElementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWFoundWeeklyNewCellElementCell.swift; sourceTree = "<group>"; };
 		06318B171D8642A9009A9945 /* Special.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Special.storyboard; sourceTree = "<group>"; };
@@ -1310,6 +1312,7 @@
 				29FF25AA1CFDA86300DF2A9B /* User */,
 				29FF25631CFDA86300DF2A9B /* Login */,
 				29FF256A1CFDA86300DF2A9B /* Other */,
+				061A3A2B1D93C510006DC8E5 /* ClassHelper.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2235,6 +2238,7 @@
 					29FF250F1CFDA75700DF2A9B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = B4WSDTADTT;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -2665,6 +2669,7 @@
 				06B7661C1D77E96600F803A9 /* README.md in Sources */,
 				29DD40EB1D018C07002507EC /* WOWProductDetailAboutCell.swift in Sources */,
 				2D6B027A1D589606003D21C1 /* WOWOrderDetailTwoCell.swift in Sources */,
+				061A3A2C1D93C510006DC8E5 /* ClassHelper.swift in Sources */,
 				0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */,
 				29FF26871CFDA86300DF2A9B /* WOWDropMenuColumn.swift in Sources */,
 				29FF26C01CFDA86300DF2A9B /* WOWOrderCommentController.swift in Sources */,
@@ -2866,7 +2871,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = wowapp/wowInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2964,7 +2969,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2988,7 +2993,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor",
 				);
 				INFOPLIST_FILE = wowapp/wowInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3085,7 +3090,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowapp/wowapp-Bridging-Header.h";
-				SWIFT_VERSION = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

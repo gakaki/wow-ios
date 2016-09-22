@@ -9,8 +9,8 @@
 import UIKit
 
 protocol BrandCellDelegate:class{
-    func hotBrandCellClick(brandModel:WOWBrandListModel)
-    func recommenProductCellClick(productModel:WOWProductModel)
+    func hotBrandCellClick(_ brandModel:WOWBrandListModel)
+    func recommenProductCellClick(_ productModel:WOWProductModel)
 }
 
 class WOWStoreBrandCell: UITableViewCell {
@@ -31,10 +31,10 @@ class WOWStoreBrandCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
+        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell))
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
@@ -43,11 +43,11 @@ class WOWStoreBrandCell: UITableViewCell {
 
 
 extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if showBrand {
             return brandDataArr.count
         }else{
@@ -55,15 +55,15 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
         }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWImageCell", for: indexPath) as! WOWImageCell
         if showBrand {
-            let model = brandDataArr[indexPath.item]
+            let model = brandDataArr[(indexPath as NSIndexPath).item]
 //            cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
             cell.pictureImageView.set_webimage_url(model.brandLogoImg)
             WOWBorderColor(cell)
         }else{
-            let model = productArr[indexPath.item]
+            let model = productArr[(indexPath as NSIndexPath).item]
 //            cell.pictureImageView.kf_setImageWithURL(url!, placeholderImage:UIImage(named: "placeholder_product"))
             cell.pictureImageView.set_webimage_url(model.productImg)
         }
@@ -72,16 +72,16 @@ extension WOWStoreBrandCell:UICollectionViewDelegate,UICollectionViewDataSource,
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((self.w - 45)/3, (self.w - 45)/3)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (self.w - 45)/3, height: (self.w - 45)/3)
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = self.delegate {
             if showBrand {
-                 del.hotBrandCellClick(brandDataArr[indexPath.row])
+                 del.hotBrandCellClick(brandDataArr[(indexPath as NSIndexPath).row])
             }else{
-                del.recommenProductCellClick(productArr[indexPath.row])
+                del.recommenProductCellClick(productArr[(indexPath as NSIndexPath).row])
             }
         }
     }

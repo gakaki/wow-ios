@@ -23,7 +23,7 @@ class WOWNumberMessageView: UIView {
     }
     
     
-    private func configSubViews(){
+    fileprivate func configSubViews(){
 
         rightImageView.image = UIImage(named: "icon_message")
         addSubview(rightImageView)
@@ -34,7 +34,7 @@ class WOWNumberMessageView: UIView {
             }
         }
         
-        leftLabel.textColor = UIColor.blackColor()
+        leftLabel.textColor = UIColor.black
         leftLabel.font = FontLevel005
         //FIXME:测试数据
         leftLabel.text = "1222"

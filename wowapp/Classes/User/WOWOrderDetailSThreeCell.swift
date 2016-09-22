@@ -17,7 +17,7 @@ class WOWOrderDetailSThreeCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func showData(m:WOWNewOrderDetailModel){
+    func showData(_ m:WOWNewOrderDetailModel){
         orderNewDetailModel = m
         
         personNameLabel.text = (orderNewDetailModel!.receiverName)! + "  " + (orderNewDetailModel!.receiverMobile?.get_formted_xxPhone())!
@@ -27,7 +27,7 @@ class WOWOrderDetailSThreeCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

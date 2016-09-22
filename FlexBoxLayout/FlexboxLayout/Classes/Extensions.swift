@@ -25,36 +25,34 @@
 //  THE SOFTWARE.
 //
 
-#if os(iOS)
 
 import UIKit
-    
-extension FlexboxView where Self: ViewType {
-    
-    /// content-size calculation for the scrollview should be applied after the layout
-    /// This is called after the scroll view is rendered.
-    /// TableViews and CollectionViews are excluded from this post-render pass
-    func postRender() {
-        if let scrollView = self as? UIScrollView {
-            if let _ = self as? UITableView { return }
-            if let _ = self as? UICollectionView { return }
-            scrollView.postRender()
-        }
+
+extension FlexboxView where Self: UIView {
+
+  /// content-size calculation for the scrollview should be applied after the layout
+  /// This is called after the scroll view is rendered.
+  /// TableViews and CollectionViews are excluded from this post-render pass
+  func postRender() {
+    if let scrollView = self as? UIScrollView {
+      if let _ = self as? UITableView { return }
+      if let _ = self as? UICollectionView { return }
+      scrollView.postRender()
     }
+  }
 }
 
 extension UIScrollView {
-    
-    private func postRender() {
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        for subview in self.subviews {
-            x = CGRectGetMaxX(subview.frame) > x ? CGRectGetMaxX(subview.frame) : x
-            y = CGRectGetMaxY(subview.frame) > y ? CGRectGetMaxY(subview.frame) : y
-        }
-        self.contentSize = CGSize(width: x, height: y)
-        self.scrollEnabled = true
+
+  fileprivate func postRender() {
+    var x: CGFloat = 0
+    var y: CGFloat = 0
+    for subview in self.subviews {
+      x = subview.frame.maxX > x ? subview.frame.maxX : x
+      y = subview.frame.maxY > y ? subview.frame.maxY : y
     }
+    self.contentSize = CGSize(width: x, height: y)
+    self.isScrollEnabled = true
+  }
 }
 
-#endif

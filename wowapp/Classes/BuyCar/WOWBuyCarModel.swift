@@ -51,7 +51,7 @@ class WOWCarModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         totalPrice                            <- map["totalPrice"]
         shoppingCartResult                    <- map["shoppingCartResult"]
         
@@ -79,7 +79,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         parentProductId                      <- map["parentProductId"]
         shoppingCartId                       <- map["shoppingCartId"]
         productId                            <- map["productId"]

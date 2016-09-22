@@ -36,7 +36,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     var pickDataArr:[Int:String] = [Int:String]()
     lazy var pickerContainerView :WOWPickerView = {
-        let v = NSBundle.mainBundle().loadNibNamed("WOWPickerView", owner: self, options: nil).last as! WOWPickerView
+        let v = Bundle.main.loadNibNamed("WOWPickerView", owner: self, options: nil)?.last as! WOWPickerView
         return v
     }()
     override func viewDidLoad() {
@@ -44,14 +44,14 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
 //        sex = WOWUserManager.userSex
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         configPickerView()
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         backGroundMaskView.removeFromSuperview()
@@ -72,44 +72,44 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }
     //MARK:实例pickerView
     
-    private func configPickerView(){
+    fileprivate func configPickerView(){
         
         backGroundMaskView = UIView()
-        backGroundMaskView.frame = CGRectMake(0, 0 , MGScreenWidth, MGScreenHeight)
-        backGroundMaskView.backgroundColor = UIColor.blackColor()
+        backGroundMaskView.frame = CGRect(x: 0, y: 0 , width: MGScreenWidth, height: MGScreenHeight)
+        backGroundMaskView.backgroundColor = UIColor.black
         backGroundMaskView.alpha = 0.2
         
         
         
         backGroundMaskView.addTapGesture(target: self, action: #selector(cancelPicker))
         
-        pickerContainerView.frame = CGRectMake(0, MGScreenHeight,UIApplication.currentViewController()?.view.w ?? MGScreenWidth, 250)
+        pickerContainerView.frame = CGRect(x: 0, y: MGScreenHeight,width: UIApplication.currentViewController()?.view.w ?? MGScreenWidth, height: 250)
         
         
         pickerContainerView.pickerView.delegate = self
         
-        pickerContainerView.cancelButton.hidden = false
-        pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), forControlEvents:.TouchUpInside)
-        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
+        pickerContainerView.cancelButton.isHidden = false
+        pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
+        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancel), for:.touchUpInside)
         
         //        pickerContainerView.tag == 1001
         
-        backGroundWindow = UIApplication.sharedApplication().keyWindow
+        backGroundWindow = UIApplication.shared.keyWindow
         
         backGroundWindow.addSubview(backGroundMaskView)
         backGroundWindow.addSubview(pickerContainerView)
-        backGroundMaskView.hidden = true
+        backGroundMaskView.isHidden = true
         
         
     }
     
-    private func configNav(){
+    fileprivate func configNav(){
         makeCustomerNavigationItem("跳过", left: false) {[weak self] in
             if let strongSelf = self{
                 
                 
                 if strongSelf.isPresent{
-                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                    strongSelf.dismiss(animated: true, completion: nil)
                     UIApplication.appTabBarController.selectedIndex = 0
                 }else {
                     //进入首页
@@ -119,11 +119,11 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         }
     }
     
-    private func configTable(){
-        let nextView = NSBundle.mainBundle().loadNibNamed(String(WOWRegistInfoSureView), owner: self, options: nil).last as! WOWRegistInfoSureView
-        nextView.sureButton.addTarget(self, action: #selector(sure), forControlEvents: .TouchUpInside)
-        nextView.sureButton.setTitle("完成", forState: .Normal)
-        nextView.frame = CGRectMake(0,0, self.view.w, 200)
+    fileprivate func configTable(){
+        let nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView), owner: self, options: nil)?.last as! WOWRegistInfoSureView
+        nextView.sureButton.addTarget(self, action: #selector(sure), for: .touchUpInside)
+        nextView.sureButton.setTitle("完成", for: UIControlState())
+        nextView.frame = CGRect(x: 0,y: 0, width: self.view.w, height: 200)
         tableView.tableFooterView = nextView
     }
     
@@ -133,7 +133,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         ageTextField.resignFirstResponder()
         starTextField.resignFirstResponder()
         
-        self.backGroundMaskView.hidden = true
+        self.backGroundMaskView.isHidden = true
         UIView.animateWithDuration(0.3){
             self.pickerContainerView.mj_y = MGScreenHeight
         }
@@ -141,7 +141,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }
     
     func surePicker() {
-        let row = pickerContainerView.pickerView.selectedRowInComponent(0)
+        let row = pickerContainerView.pickerView.selectedRow(inComponent: 0)
         
         let currentType = clickType
         switch currentType {// 星座下标从1开始，所以，做＋1处理 ，性别从1开始，默认为1，年龄从0开始
@@ -160,7 +160,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     
     func cancel() {
-        self.backGroundMaskView.hidden = true
+        self.backGroundMaskView.isHidden = true
         UIView.animateWithDuration(0.3){
             self.pickerContainerView.mj_y = MGScreenHeight
         }
@@ -170,7 +170,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     func sure() {
 //        print("\(sex)","\(ageRow)","\(starRow)")
         let params = ["sex":String(sex),"ageRange":String(ageRow),"constellation":String(starRow),"industry":jobTextField.text ?? ""]
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params ), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params ), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)
                 //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯
@@ -192,7 +192,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
      点击年龄选择按钮
      
      */
-    @IBAction func ageClick(sender: UIButton){
+    @IBAction func ageClick(_ sender: UIButton){
         clickType = ClickActionType.ageType
         pickDataArr = WOWAgeRange
         
@@ -206,7 +206,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
      点击星座选择按钮
      
      */
-    @IBAction func starClick(sender: UIButton){
+    @IBAction func starClick(_ sender: UIButton){
         clickType = ClickActionType.starType
         pickDataArr = WOWConstellation
         
@@ -222,9 +222,9 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
      点击性别选择按钮
      
      */
-    @IBAction func sexClick(sender: UIButton) {
-        manButton.selected = (sender == manButton)
-        womanButton.selected = (sender == womanButton)
+    @IBAction func sexClick(_ sender: UIButton) {
+        manButton.isSelected = (sender == manButton)
+        womanButton.isSelected = (sender == womanButton)
         if sender.tag == 1001 { //男
             sex = 1
         }else{ //女
@@ -234,15 +234,15 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
 }
 
 extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate{
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickDataArr.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         let currentType = clickType
         switch currentType {
@@ -259,7 +259,7 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
         
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
 //        let currentType = clickType
 //        switch currentType {
@@ -277,9 +277,9 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
     /**
      弹出选择器
      */
-    private func showPickerView(){
+    fileprivate func showPickerView(){
         
-        self.backGroundMaskView.hidden = false
+        self.backGroundMaskView.isHidden = false
         
         UIView.animateWithDuration(0.3){
             self.pickerContainerView.mj_y = self.view.h - 250 + 64

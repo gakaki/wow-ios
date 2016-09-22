@@ -27,7 +27,7 @@ class WOWCategoryCell: UICollectionViewCell {
         desLabel.preferredMaxLayoutWidth = (UIApplication.currentViewController()?.view.w)! / CGFloat(2) - 30
     }
     
-    func showData(model:WOWProductModel,indexPath:NSIndexPath) {
+    func showData(_ model:WOWProductModel,indexPath:IndexPath) {
         pictureImageView.set_webimage_url(model.productImg ?? "")
         desLabel.text = model.productName ?? ""
         desLabel.setLineHeightAndLineBreak(1.5)

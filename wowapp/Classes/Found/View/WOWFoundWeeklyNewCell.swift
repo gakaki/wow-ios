@@ -2,7 +2,7 @@
 import UIKit
 
 protocol FoundWeeklyNewCellDelegate:class{
-    func cellFoundWeeklyNewCellTouchInside(m:WowModulePageItemVO)
+    func cellFoundWeeklyNewCellTouchInside(_ m:WowModulePageItemVO)
 }
 
 //401 本周上新
@@ -17,7 +17,7 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
     weak var delegate:FoundWeeklyNewCellDelegate?
     
     var data        = [WowModulePageItemVO]()
-    var heightAll   = CGFloat.min
+    var heightAll   = CGFloat.leastNormalMagnitude
     
     
     override func awakeFromNib() {
@@ -25,15 +25,15 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
         
         cv.delegate                           = self
         cv.dataSource                         = self
-        cv.backgroundColor                    = UIColor.whiteColor()
-        cv.registerClass(WOWFoundWeeklyNewCellElementCell.self, forCellWithReuseIdentifier:String(WOWFoundWeeklyNewCellElementCell))
+        cv.backgroundColor                    = UIColor.white
+        cv.register(WOWFoundWeeklyNewCellElementCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundWeeklyNewCellElementCell()))
         
         cv.showsVerticalScrollIndicator       = false
         cv.showsHorizontalScrollIndicator     = false
         
         
         let layout                            = UICollectionViewFlowLayout()
-        layout.scrollDirection                = .Horizontal
+        layout.scrollDirection                = .horizontal
         layout.itemSize                       = CGSizeD( 100 ,height: 150 )
         self.heightAll                        = layout.itemSize.height
         
@@ -45,35 +45,35 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
         
     }
     
-    func setData(d:[WowModulePageItemVO]){
+    func setData(_ d:[WowModulePageItemVO]){
         self.data = d
         self.cv.reloadData()
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
 }
 
 extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.data.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFoundWeeklyNewCellElementCell), forIndexPath: indexPath) as! WOWFoundWeeklyNewCellElementCell
-        let m               = self.data[indexPath.item]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundWeeklyNewCellElementCell()), for: indexPath) as! WOWFoundWeeklyNewCellElementCell
+        let m               = self.data[(indexPath as NSIndexPath).item]
         cell.setModel(m)
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = self.delegate {
-            del.cellFoundWeeklyNewCellTouchInside(self.data[indexPath.row])
+            del.cellFoundWeeklyNewCellTouchInside(self.data[(indexPath as NSIndexPath).row])
         }
     }
 }

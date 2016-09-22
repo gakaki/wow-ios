@@ -31,9 +31,9 @@ class WOWLeaveTipsController: WOWBaseViewController {
         }
     }
     
-    private func commit(){
+    fileprivate func commit(){
         let tips = textView.text
-        if tips.isEmpty {
+        if (tips?.isEmpty)! {
             WOWHud.showMsg("请输入您的意见或反馈")
             return
         }

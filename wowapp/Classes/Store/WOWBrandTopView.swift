@@ -11,13 +11,13 @@ import UIKit
 let scale : CGFloat = MGScreenWidth / 375
 
 protocol WOWActionDelegate:class {
-    func itemAction(tag:Int)
+    func itemAction(_ tag:Int)
 }
 
 enum WOWItemActionType:Int{
-    case Like  = 1001
-    case Share = 1002
-    case Brand = 1003
+    case like  = 1001
+    case share = 1002
+    case brand = 1003
 }
 
 class WOWBrandTopView: UICollectionReusableView{

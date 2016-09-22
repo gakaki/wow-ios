@@ -13,7 +13,7 @@ struct WOWHud {
     static func showLoading(){
 
     
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             
             UIApplication.currentViewController()?.view.addSubview(LoadView.show())
             
@@ -22,16 +22,16 @@ struct WOWHud {
 
     }
      static func showLoadingSV(){
-                SVProgressHUD.setDefaultStyle(.Custom)
-                SVProgressHUD.setDefaultMaskType(.Clear)
-                SVProgressHUD.setForegroundColor(UIColor.blackColor())
+                SVProgressHUD.setDefaultStyle(.custom)
+                SVProgressHUD.setDefaultMaskType(.clear)
+                SVProgressHUD.setForegroundColor(UIColor.black)
                 SVProgressHUD.setBackgroundColor(UIColor(white: 0.8, alpha: 0.8))
                 SVProgressHUD.show()
         
     }
     static func dismiss(){
         SVProgressHUD.popActivity()
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             
 //            LoadView.sharedInstance.dissMissView()
             LoadView.dissMissView()
@@ -39,23 +39,23 @@ struct WOWHud {
 
     }
     
-    static func showMsg(message:String?){
-        dispatch_async(dispatch_get_main_queue()) {
+    static func showMsg(_ message:String?){
+        DispatchQueue.main.async {
             LoadView.dissMissView()
 //            LoadView.sharedInstance.dissMissView()
         }
         configSVHud()
         let msg = message ?? "网络错误"
-        SVProgressHUD.showInfoWithStatus(msg)
+        SVProgressHUD.showInfo(withStatus: msg)
     }
     
     
     static func configSVHud(){
-        SVProgressHUD.setDefaultMaskType(.Clear)
-        SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.setDefaultStyle(.custom)
         SVProgressHUD.setInfoImage(UIImage(named:"  "))
-        SVProgressHUD.setBackgroundColor(UIColor.blackColor())
-        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.setBackgroundColor(UIColor.black)
+        SVProgressHUD.setForegroundColor(UIColor.white)
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)
     }
     

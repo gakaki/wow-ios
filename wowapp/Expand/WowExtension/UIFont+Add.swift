@@ -9,71 +9,71 @@
 import UIKit
 
 public enum FontWeight {
-    case Normal
-    case Regular
-    case Bold
-    case Black
-    case Heavy
-    case Semibold
-    case Thin
-    case Light
-    case UltraLight
+    case normal
+    case regular
+    case bold
+    case black
+    case heavy
+    case semibold
+    case thin
+    case light
+    case ultraLight
 }
 
 extension  UIFont{
-   class func priceFont(size:CGFloat = 12) -> UIFont{
-        return UIFont(name: "DIN Alternate", size:size) ?? UIFont.systemFontOfSize(size)
+   class func priceFont(_ size:CGFloat = 12) -> UIFont{
+        return UIFont(name: "DIN Alternate", size:size) ?? UIFont.systemFont(ofSize: size)
     }
 }
 // MARK:systemFontOfSize
 extension UIFont {
     
     @available(iOS 7, *)
-    public class func systemFontOfSize(size: Double, weight: FontWeight) -> UIFont {
+    public class func systemFontOfSize(_ size: Double, weight: FontWeight) -> UIFont {
         if #available(iOS 8.2, *) {
             let fontWeightFloat: CGFloat
             switch weight {
-            case .UltraLight:
+            case .ultraLight:
                 fontWeightFloat = UIFontWeightUltraLight
-            case .Light:
+            case .light:
                 fontWeightFloat = UIFontWeightLight
-            case .Thin:
+            case .thin:
                 fontWeightFloat = UIFontWeightThin
-            case .Normal:
+            case .normal:
                 fontWeightFloat = UIFontWeightRegular
-            case .Regular:
+            case .regular:
                 fontWeightFloat = UIFontWeightMedium
-            case .Semibold:
+            case .semibold:
                 fontWeightFloat = UIFontWeightSemibold
-            case .Bold:
+            case .bold:
                 fontWeightFloat = UIFontWeightBold
-            case .Heavy:
+            case .heavy:
                 fontWeightFloat = UIFontWeightHeavy
-            case .Black:
+            case .black:
                 fontWeightFloat = UIFontWeightBlack
             }
             
-            return UIFont.systemFontOfSize(CGFloat(size), weight: fontWeightFloat)
+            return UIFont.systemFont(ofSize: CGFloat(size), weight: fontWeightFloat)
         } else {
             let systemFontName: String
             switch weight {
-            case .UltraLight:
+            case .ultraLight:
                 systemFontName = "HelveticaNeue-UltraLight"
-            case .Light:
+            case .light:
                 systemFontName = "HelveticaNeue-Light"
-            case .Thin:
+            case .thin:
                 systemFontName = "HelveticaNeue-Thin"
-            case .Normal:
+            case .normal:
                 systemFontName = "HelveticaNeue"
-            case .Regular:
+            case .regular:
                 systemFontName = "HelveticaNeue-Medium"
-            case .Semibold:
+            case .semibold:
                 systemFontName = "HelveticaNeue-Medium"
-            case .Bold:
+            case .bold:
                 systemFontName = "HelveticaNeue-Bold"
-            case .Heavy:
+            case .heavy:
                 systemFontName = "HelveticaNeue-Bold"
-            case .Black:
+            case .black:
                 systemFontName = "HelveticaNeue-Bold"
             }
             

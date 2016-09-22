@@ -16,7 +16,7 @@ class WOWOrderListViewController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.init(hexString: "efeff4")
+        self.view.backgroundColor = UIColor.init(coder: "efeff4")
         
         self.title = "我的订单"
         
@@ -32,11 +32,11 @@ class WOWOrderListViewController: WOWBaseViewController {
 
         var itemWidth :CGFloat = 0.00
         switch UIDevice.deviceType {
-        case .DT_iPhone5:
+        case .dt_iPhone5:
             itemWidth = 46
-        case.DT_iPhone6:
+        case.dt_iPhone6:
             itemWidth = 56
-        case.DT_iPhone6_Plus:
+        case.dt_iPhone6_Plus:
             itemWidth = 64
         default:
             itemWidth = 56*MGScreenWidth/375
@@ -55,7 +55,7 @@ class WOWOrderListViewController: WOWBaseViewController {
             
         ]
         
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
         pageMenu?.viewBackgroundColor = UIColor.init(hexString: "efeff4")!
         pageMenu?.delegate = self
         
@@ -67,7 +67,7 @@ class WOWOrderListViewController: WOWBaseViewController {
     }
     override func navBack() {
         if entrance == .orderPay {
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            self.navigationController?.popToRootViewController(animated: true)
         }else{
             popVC()
         }
@@ -78,17 +78,17 @@ class WOWOrderListViewController: WOWBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationShadowImageView?.hidden = true
+        self.navigationShadowImageView?.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationShadowImageView?.hidden = false
+        self.navigationShadowImageView?.isHidden = false
         
     }
     deinit{
@@ -104,7 +104,7 @@ class WOWOrderListViewController: WOWBaseViewController {
 }
 extension WOWOrderListViewController:CAPSPageMenuDelegate{
     
-    func willMoveToPage(controller: UIViewController, index: Int) {
+    func willMoveToPage(_ controller: UIViewController, index: Int) {
         if selectCurrentIndex == index {// 点击不同的列表页  第一次进列表页 请求数据
             let currentVC = controller as! WOWOrderController
             if currentVC.isRequest == false { // 如果未请求，才去请求网络。
@@ -113,7 +113,7 @@ extension WOWOrderListViewController:CAPSPageMenuDelegate{
         }
     }
     // 滑动结束 再请求网络
-    func didMoveToPage(controller: UIViewController, index: Int){
+    func didMoveToPage(_ controller: UIViewController, index: Int){
    
         
         let currentVC = controller as! WOWOrderController

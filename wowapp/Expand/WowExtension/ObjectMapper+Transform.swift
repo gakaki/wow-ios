@@ -1,13 +1,13 @@
 
 import ObjectMapper
 
-public class StringDecimalNumberTransform: TransformType {
+open class StringDecimalNumberTransform: TransformType {
     public typealias Object = String
     public typealias JSON = String
     
     public init() {}
     
-    public func transformFromJSON(value: AnyObject?) -> String? {
+    open func transformFromJSON(_ value: AnyObject?) -> String? {
         if let string = value as? String {
             return string
         }
@@ -17,7 +17,7 @@ public class StringDecimalNumberTransform: TransformType {
         return nil
     }
     
-    public func transformToJSON(value: String?) -> String? {
+    open func transformToJSON(_ value: String?) -> String? {
         guard let v = value else { return nil }
         return v
     }

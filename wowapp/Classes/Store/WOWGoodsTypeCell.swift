@@ -18,17 +18,17 @@ class WOWGoodsTypeCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func showData(model:WOWProductModel?) {
+    func showData(_ model:WOWProductModel?) {
         titleLabel.text = model?.productName
         summaryLabel.text = model?.sellingPoint
         if let m = model {
-            headImageView.kf_setBackgroundImageWithURL(NSURL(string:m.brandLogoImg ?? " ")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
+            headImageView.kf_setBackgroundImageWithURL(URL(string:m.brandLogoImg ?? " ")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
         }
     }
     

@@ -12,9 +12,9 @@ class WOWProductDetailTipsWebViewCell: UITableViewCell,UIWebViewDelegate {
         super.awakeFromNib()
         self.webView.delegate = self
 
-        let url = NSBundle.mainBundle().URLForResource("product_detail_tips", withExtension:"html")
-        webView.loadRequest( NSURLRequest(URL: url!))
-        webView.scrollView.scrollEnabled = false
+        let url = Bundle.main.url(forResource: "product_detail_tips", withExtension:"html")
+        webView.loadRequest( URLRequest(url: url!))
+        webView.scrollView.isScrollEnabled = false
         webView.scrollView.bounces = false
 
     }
@@ -22,7 +22,7 @@ class WOWProductDetailTipsWebViewCell: UITableViewCell,UIWebViewDelegate {
     
     @IBOutlet weak var telButton: UIButton!
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         

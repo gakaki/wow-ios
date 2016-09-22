@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProductCellDelegate :class{
-    func productCellAction(tag:Int,model:WOWProductModel,cell:WOWGoodsBigCell)
+    func productCellAction(_ tag:Int,model:WOWProductModel,cell:WOWGoodsBigCell)
 }
 
 
@@ -29,23 +29,23 @@ class WOWGoodsBigCell: UICollectionViewCell {
     
     @IBOutlet weak var priceLabel: UILabel!
     
-    private var model:WOWProductModel!
+    fileprivate var model:WOWProductModel!
     
     weak var delegate : ProductCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    @IBAction func actionButtonClick(sender: UIButton) {
+    @IBAction func actionButtonClick(_ sender: UIButton) {
         if let del = self.delegate{
             del.productCellAction(sender.tag, model:self.model,cell: self)
         }
     }
     
-    func showData(model:WOWProductModel){
+    func showData(_ model:WOWProductModel){
         self.model = model
         let priceImage = UIImage(named: "yellow_corner_back")
-        priceBackImageView.image = priceImage?.stretchableImageWithLeftCapWidth(15, topCapHeight:Int((priceImage?.size.height)!)/2)
+        priceBackImageView.image = priceImage?.stretchableImage(withLeftCapWidth: 15, topCapHeight:Int((priceImage?.size.height)!)/2)
         let url = model.productImg ?? ""
 //        bigPictureImageView.kf_setImageWithURL(NSURL(string:url)!, placeholderImage: UIImage(named: "placeholder_product"))
         bigPictureImageView.set_webimage_url(url)

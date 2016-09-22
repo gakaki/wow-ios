@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol LeftSideProtocol{
-    func sideMenuSelect(tagString:String!,index:Int,dataArr:[WOWCategoryModel])
+    func sideMenuSelect(_ tagString:String!,index:Int,dataArr:[WOWCategoryModel])
 
 }
 

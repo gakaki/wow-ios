@@ -18,9 +18,9 @@ class WOWSureOrderController: WOWBaseViewController {
     var addressArr                      = [WOWAddressListModel]()
     
     //post的参数
-    private var tipsTextField           : HolderTextView!
-    private var addressID               : String?
-    private var payType                 = "ali"
+    fileprivate var tipsTextField           : HolderTextView!
+    fileprivate var addressID               : String?
+    fileprivate var payType                 = "ali"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,19 +39,19 @@ class WOWSureOrderController: WOWBaseViewController {
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = GrayColorLevel5
-        tableView.registerNib(UINib.nibName(String(WOWAddressCell)), forCellReuseIdentifier:String(WOWAddressCell))
-        tableView.registerNib(UINib.nibName(String(WOWValue1Cell)), forCellReuseIdentifier:String(WOWValue1Cell))
-        tableView.registerNib(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
-        tableView.registerNib(UINib.nibName(String(WOWTipsCell)), forCellReuseIdentifier:String(WOWTipsCell))
-        tableView.registerNib(UINib.nibName(String(WOWValue2Cell)), forCellReuseIdentifier:String(WOWValue2Cell))
-        tableView.keyboardDismissMode = .OnDrag
-        tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true, scrollPosition: .None)
+        tableView.register(UINib.nibName(String(WOWAddressCell)), forCellReuseIdentifier:String(WOWAddressCell))
+        tableView.register(UINib.nibName(String(WOWValue1Cell)), forCellReuseIdentifier:String(WOWValue1Cell))
+        tableView.register(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
+        tableView.register(UINib.nibName(String(WOWTipsCell)), forCellReuseIdentifier:String(WOWTipsCell))
+        tableView.register(UINib.nibName(String(WOWValue2Cell)), forCellReuseIdentifier:String(WOWValue2Cell))
+        tableView.keyboardDismissMode = .onDrag
+        tableView.selectRow(at: IndexPath(row: 0, section: 1), animated: true, scrollPosition: .none)
     }
     
     
 //MARK:Actions
     
-    @IBAction func payButtonClick(sender: UIButton) {
+    @IBAction func payButtonClick(_ sender: UIButton) {
         guard let addressid = addressID else{
             WOWHud.showMsg("请先选择收货地址")
             return
@@ -63,9 +63,9 @@ class WOWSureOrderController: WOWBaseViewController {
 //            let dict = ["skuid":item.skuID,"count":item.skuProductCount,"productid":item.productID]
 //            productParam.append(dict)
 //        }
-        let requestParam  = ["cart":productParam,"uid":uid,"pay_method":payType,"tips":tips,"address_id":addressid]
+        let requestParam  = ["cart":productParam,"uid":uid,"pay_method":payType,"tips":tips,"address_id":addressid] as [String : Any]
         let requestString = JSONStringify(requestParam)
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_CartCommit(car:requestString), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_CartCommit(car:requestString), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -84,14 +84,14 @@ class WOWSureOrderController: WOWBaseViewController {
         }
     }
     
-    private func updateCarCountBadge(){
+    fileprivate func updateCarCountBadge(){
         WOWBuyCarMananger.updateBadge()
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+        NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
     }
     
     
-    private func goPay(charge:AnyObject,totalPrice:String,orderid:String){
-        dispatch_async(dispatch_get_main_queue()) { 
+    fileprivate func goPay(_ charge:AnyObject,totalPrice:String,orderid:String){
+        DispatchQueue.main.async { 
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
                 if let strongSelf = self{
                     switch ret{
@@ -116,7 +116,7 @@ class WOWSureOrderController: WOWBaseViewController {
         }
     }
     
-    private func resolveOrderRet(){
+    fileprivate func resolveOrderRet(){
 //        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
 //        vc.selectIndex = 0
         let vc = WOWOrderListViewController()
@@ -131,14 +131,14 @@ class WOWSureOrderController: WOWBaseViewController {
         super.request()
         //请求地址数据
 //        let uid =  WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Addresslist, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Addresslist, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(result)
                 if let array = arr{
                     strongSelf.addressArr = []
                     strongSelf.addressArr.appendContentsOf(array)
                     strongSelf.tableView.reloadData()
-                    strongSelf.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true, scrollPosition: .None)
+                    strongSelf.tableView.selectRow(at: IndexPath(row: 0, section: 1), animated: true, scrollPosition: .none)
                 }
             }
         }) { (errorMsg) in
@@ -150,11 +150,11 @@ class WOWSureOrderController: WOWBaseViewController {
 
 
 extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:     //地址
             return addressArr.count > 1 ? 1 : addressArr.count
@@ -170,28 +170,28 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell:UITableViewCell?
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
         case 0: //地址
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWAddressCell), forIndexPath: indexPath) as! WOWAddressCell
-            cell.userInteractionEnabled = false
-            cell.checkButton.selected = true
-            cell.showData(addressArr[indexPath.row])
-            addressID = String(addressArr[indexPath.row].id)
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWAddressCell), for: indexPath) as! WOWAddressCell
+            cell.isUserInteractionEnabled = false
+            cell.checkButton.isSelected = true
+            cell.showData(addressArr[(indexPath as NSIndexPath).row])
+            addressID = String(describing: addressArr[(indexPath as NSIndexPath).row].id)
             returnCell = cell
         case 1: //支付方式
             let type = ["支付宝","微信支付"]
             let titles = ["支","微"]
             let colors = [MGRgb(84, g: 199, b: 252),MGRgb(68, g: 219, b: 94)]
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWValue1Cell), forIndexPath: indexPath) as! WOWValue1Cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWValue1Cell), for: indexPath) as! WOWValue1Cell
             cell.leftButton.borderRadius(6)
             cell.leftButton.backgroundColor = colors[indexPath.row]
-            cell.leftLabel?.text = type[indexPath.row]
-            cell.leftButton.setTitle(titles[indexPath.row], forState:.Normal)
+            cell.leftLabel?.text = type[(indexPath as NSIndexPath).row]
+            cell.leftButton.setTitle(titles[(indexPath as NSIndexPath).row], for:UIControlState())
             returnCell = cell
         case 2: //商品清单
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell), forIndexPath: indexPath) as! WOWSenceLikeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell), for: indexPath) as! WOWSenceLikeCell
             cell.rightTitleLabel.text = "共\(productArr.count)件"
             cell.orderArr = productArr
             cell.rightBackView.addAction({ [weak self] in
@@ -203,23 +203,23 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             })
             returnCell = cell
         case 3: //订单备注
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWTipsCell), forIndexPath:indexPath) as! WOWTipsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell), for:indexPath) as! WOWTipsCell
             tipsTextField = cell.textView
             returnCell = cell
         case 4: //订单汇总
             let titles = ["订单合计","运费","实付金额"]
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(WOWValue2Cell), forIndexPath:indexPath) as! WOWValue2Cell
-            cell.userInteractionEnabled = false
-            cell.leftViseLabel.hidden = indexPath.row == 0 ? false : true
-            cell.leftLabel.text = titles[indexPath.row]
-            switch indexPath.row {
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWValue2Cell), for:indexPath) as! WOWValue2Cell
+            cell.isUserInteractionEnabled = false
+            cell.leftViseLabel.isHidden = (indexPath as NSIndexPath).row == 0 ? false : true
+            cell.leftLabel.text = titles[(indexPath as NSIndexPath).row]
+            switch (indexPath as NSIndexPath).row {
             case 0,2:
                 cell.rightLabel.text = "¥" + (totalPrice ?? "")
             default:
                 cell.rightLabel.text = "¥ 0.0"
             }
             cell.leftViseLabel.text = "(共\(productArr.count)件)"
-            if indexPath.row == 2 {
+            if (indexPath as NSIndexPath).row == 2 {
                 cell.leftLabel.font = FontMediumlevel003
             }
             returnCell = cell
@@ -229,10 +229,10 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         return returnCell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.section {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch (indexPath as NSIndexPath).section {
         case 1:
-            if indexPath.row == 0 {
+            if (indexPath as NSIndexPath).row == 0 {
                 payType = "ali"
             }else{
                 payType = "wx"
@@ -243,12 +243,12 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     }
 
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let titles = ["收货信息","支付方式","商品清单","订单备注","订单汇总"]
         return titles[section]
     }
     
-    func tableView(tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textColor = MGRgb(109, g: 109, b: 114)
             headerView.textLabel?.font = Fontlevel003
@@ -256,7 +256,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     }
     
     //尾视图  只有地址栏需要
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 { //地址
             let footerView = WOWMenuTopView(leftTitle: "", rightHiden:false, topLineHiden: true, bottomLineHiden: false)
             if addressArr.isEmpty {
@@ -264,7 +264,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 footerView.addAction({[weak self] in
                     if let strongSelf = self{
                         let addvc = UIStoryboard.initialViewController("User", identifier:String(WOWAddAddressController)) as! WOWAddAddressController
-                        addvc.entrance = .SureOrder
+                        addvc.entrance = .sureOrder
                         addvc.action = {
                             strongSelf.request()
                         }
@@ -277,7 +277,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 footerView.addAction({[weak self] in
                     if let strongSelf = self{
                         let addvc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
-                        addvc.entrance = .SureOrder
+                        addvc.entrance = .sureOrder
                         addvc.selectModel = strongSelf.addressArr.first
                         addvc.action = {(model:AnyObject) in
                             let m = model as! WOWAddressListModel
@@ -296,11 +296,11 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     }
     
    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 41
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
             return 44
         }else{

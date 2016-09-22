@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWHotStyleMain: WOWBaseViewController {
-    let cellID      = String(WOWHotStyleCell)
+    let cellID      = String(describing: WOWHotStyleCell())
     var dataArr     = [WOWHomeModle]()    //商品列表数组
     @IBOutlet var tableView: UITableView!
     
@@ -25,7 +25,7 @@ class WOWHotStyleMain: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configBuyBarItem()
-        tableView.registerNib(UINib.nibName(String(WOWHotStyleCell)), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(String(describing: WOWHotStyleCell.self)), forCellReuseIdentifier:cellID)
         self.tableView.backgroundColor = GrayColorLevel5
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.mj_header = mj_header
@@ -33,11 +33,11 @@ class WOWHotStyleMain: WOWBaseViewController {
     }
     override func request() {
         super.request()
-        var params = [String: AnyObject]?()
+        var params = [String: AnyObject]()
         
-        params = ["pageId": 3]
+        params = ["pageId": 3 as AnyObject]
 
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_List(params: params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 
                 
@@ -45,7 +45,7 @@ class WOWHotStyleMain: WOWBaseViewController {
                 DLog(json)
                 strongSelf.endRefresh()
                 
-                let bannerList = Mapper<WOWHomeModle>().mapArray(JSON(result)["modules"].arrayObject)
+                let bannerList = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
                 
                 if let brandArray = bannerList{
                     strongSelf.dataArr = []
@@ -67,12 +67,12 @@ class WOWHotStyleMain: WOWBaseViewController {
 
     }
     
-    private func addObserver(){
+    fileprivate func addObserver(){
         // 刷新购物车数量
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
-         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWUpdateProjectThumbNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+         NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWUpdateProjectThumbNotificationKey), object:nil)
         
     }
     func loginSuccess()  {// 重新刷新数据
@@ -89,41 +89,41 @@ class WOWHotStyleMain: WOWBaseViewController {
 }
 extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dataArr.count;
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1;
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWHotStyleCell
+        let cell                = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWHotStyleCell
         
-        let homeModel = dataArr[indexPath.section]
+        let homeModel = dataArr[(indexPath as NSIndexPath).section]
         cell.modelData = homeModel.moduleContentList
         cell.showData(homeModel)
         cell.delegate = self
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         
         return cell
 
     }
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 4 {
-            return CGFloat.min
+            return CGFloat.leastNormalMagnitude
         }else{
             return 15.h
         }
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
       
-        return CGFloat.min
+        return CGFloat.leastNormalMagnitude
         
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let model = dataArr[indexPath.section]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = dataArr[(indexPath as NSIndexPath).section]
         
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(WOWContentTopicController)) as! WOWContentTopicController
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController)) as! WOWContentTopicController
         //                vc.hideNavigationBar = true
         vc.topic_id = model.moduleContentList?.id ?? 0
         vc.delegate = self

@@ -30,7 +30,7 @@ class WOWSettingController: WOWBaseTableViewController {
     }
     
 //MARK:Private Method
-    private func calCacheSize(){
+    fileprivate func calCacheSize(){
         
         KingfisherManager.sharedManager.cache.calculateDiskCacheSizeWithCompletionHandler {[weak self](size) in
             if let strongSelf = self{
@@ -43,7 +43,7 @@ class WOWSettingController: WOWBaseTableViewController {
     
     
 //MARK:Delegate
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         switch WOWUserManager.loginStatus {
         case true:
             return 2
@@ -52,16 +52,16 @@ class WOWSettingController: WOWBaseTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        switch indexPath.section {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch (indexPath as NSIndexPath).section {
         case 0:
-            if indexPath.row == 0 {
+            if (indexPath as NSIndexPath).row == 0 {
                 let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
                 vc.entrance = msgCodeEntrance.userEntrance
                 navigationController?.pushViewController(vc, animated: true)
             }
-            if indexPath.row == 1 {
+            if (indexPath as NSIndexPath).row == 1 {
                 KingfisherManager.sharedManager.cache.clearDiskCacheWithCompletionHandler({[weak self] in
                     if let _ = self{
                         WOWHud.showMsg("清除成功")
@@ -91,30 +91,30 @@ class WOWSettingController: WOWBaseTableViewController {
     }
     
     
-    private func alertExit(){
-        let alertController: UIAlertController = UIAlertController(title: "退出登录", message: nil, preferredStyle: .Alert)
-        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style:.Cancel, handler: nil)
+    fileprivate func alertExit(){
+        let alertController: UIAlertController = UIAlertController(title: "退出登录", message: nil, preferredStyle: .alert)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style:.cancel, handler: nil)
         alertController.addAction(cancelAction)
-        let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .Default) { action -> Void in
+        let sureAction: UIAlertAction = UIAlertAction(title: "确定", style: .default) { action -> Void in
             self.exitLogin()
         }
         alertController.addAction(sureAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
-    private func exitLogin(){
+    fileprivate func exitLogin(){
         WOWUserManager.exitLogin()
         tableView.reloadData()
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+        NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+        NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
         WOWHud.showMsg("退出登录")
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            self.navigationController?.popViewControllerAnimated(true)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            self.navigationController?.popViewController(animated: true)
         })
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
             return 15
@@ -123,7 +123,7 @@ class WOWSettingController: WOWBaseTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
 }

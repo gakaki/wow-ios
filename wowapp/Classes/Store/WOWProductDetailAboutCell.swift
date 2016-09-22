@@ -10,8 +10,8 @@ import UIKit
 @objc protocol  WOWProductDetailAboutCellDelegate: NSObjectProtocol{
     
     
-    optional func aboutProduct(productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int)
-    func selectCollectionIndex(productId: Int)
+    @objc optional func aboutProduct(_ productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int)
+    func selectCollectionIndex(_ productId: Int)
 
 }
 
@@ -46,11 +46,11 @@ class WOWProductDetailAboutCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
+        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
     }
     
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
@@ -58,24 +58,24 @@ class WOWProductDetailAboutCell: UITableViewCell {
 
 
 extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArr?.count ?? 0
 
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWGoodsSmallCell", for: indexPath) as! WOWGoodsSmallCell
         //FIX 测试数据
         cell.pictureImageView.image = UIImage(named: "4")
-        let model = dataArr?[indexPath.item]
+        let model = dataArr?[(indexPath as NSIndexPath).item]
         if let m = model {
             cell.showData(m, indexPath: indexPath)
-            cell.view_rightline.hidden = true
-            cell.bottomLine.hidden = true
+            cell.view_rightline.isHidden = true
+            cell.bottomLine.isHidden = true
 //            let url             = m.productImg ?? ""
 ////            cell.pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
 //            cell.pictureImageView.set_webimage_url(url)
@@ -88,17 +88,17 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(160,246)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 160,height: 246)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 15
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = delegate {
-            let product = dataArr?[indexPath.row]
+            let product = dataArr?[(indexPath as NSIndexPath).row]
             del.selectCollectionIndex(product?.productId ?? 0)
 
         }

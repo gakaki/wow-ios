@@ -15,7 +15,7 @@ class WowModulePageVO:Mappable
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         moduleType              <- map["moduleType"]
         contentTmp              <- map["moduleContent"]
         moduleID                <- map["moduleId"]
@@ -51,7 +51,7 @@ class WowModulePageItemVO:Mappable
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         //201
         bannerImgSrc            <- map["bannerImgSrc"]

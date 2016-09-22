@@ -7,12 +7,32 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 
 extension UIViewController {
     static var identifier: String {
         let mirror = Mirror(reflecting: self)
-        return String(mirror.subjectType)
+        return String(describing: mirror.subjectType)
     }
 }
 class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource{
@@ -34,7 +54,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
         return self.getNavShadow(self.navigationController?.navigationBar)
     }()
     
-    private func getNavShadow(paramView:UIView?) -> UIView?{
+    fileprivate func getNavShadow(_ paramView:UIView?) -> UIView?{
         if let bar = paramView{
             
             if bar.bounds.size.height <= 1.0 {
@@ -53,7 +73,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
 
 //MARK:Life
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         //TalkingData统计页面
@@ -61,10 +81,10 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 
         
         MobClick.endLogPageView(self.title)
-        UIApplication.sharedApplication().keyWindow?.endEditing(true)
+        UIApplication.shared.keyWindow?.endEditing(true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //growing io 统计页面
         
@@ -92,13 +112,13 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 //    
     func setCustomerBack() {
         if navigationController?.viewControllers.count > 1 {
-            let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.Plain, target: self, action:#selector(navBack))
+            let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(navBack))
             navigationItem.leftBarButtonItem = item
         }
     }
     
     func navBack() {
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -176,21 +196,21 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
 
 //MARK:Private Actions
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        UIApplication.sharedApplication().keyWindow?.endEditing(true)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIApplication.shared.keyWindow?.endEditing(true)
     }
 
 }
 
 
 extension WOWBaseViewController{
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = WOWEmptyNoDataText
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
     }
     
-    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+    func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
         return GrayColorLevel5
     }
 }
@@ -199,9 +219,9 @@ extension WOWBaseViewController{
 extension WOWBaseViewController {
     func configBuyBarItem(){
         
-        carBadgeCount = MIBadgeButton(type: .Custom)
-        carBadgeCount!.frame = CGRectMake(0, 0, 35, 35)
-        carBadgeCount!.setImage(UIImage(named: "buy"), forState: .Normal)
+        carBadgeCount = MIBadgeButton(type: .custom)
+        carBadgeCount!.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+        carBadgeCount!.setImage(UIImage(named: "buy"), for: UIControlState())
         if WOWUserManager.userCarCount <= 0 {
             carBadgeCount!.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
@@ -249,11 +269,11 @@ extension WOWBaseViewController {
 
 extension WOWBaseTableViewController {
     
-    func configBuyBarItem(badgeCount: Int){
+    func configBuyBarItem(_ badgeCount: Int){
         
-        carBadgeCount = MIBadgeButton(type: .Custom)
-        carBadgeCount!.frame = CGRectMake(0, 0, 35, 35)
-        carBadgeCount!.setImage(UIImage(named: "buy"), forState: .Normal)
+        carBadgeCount = MIBadgeButton(type: .custom)
+        carBadgeCount!.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+        carBadgeCount!.setImage(UIImage(named: "buy"), for: UIControlState())
         if WOWUserManager.userCarCount <= 0 {
             carBadgeCount!.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{

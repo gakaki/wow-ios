@@ -11,12 +11,12 @@ import UIKit
 extension UIView {
     
     /// 裁剪 view 的圆角
-    func clipRectCorner(direction: UIRectCorner, cornerRadius: CGFloat) {
-        let cornerSize = CGSizeMake(cornerRadius, cornerRadius)
+    func clipRectCorner(_ direction: UIRectCorner, cornerRadius: CGFloat) {
+        let cornerSize = CGSize(width: cornerRadius, height: cornerRadius)
         let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: direction, cornerRadii: cornerSize)
         let maskLayer = CAShapeLayer()
         maskLayer.frame = bounds
-        maskLayer.path = maskPath.CGPath
+        maskLayer.path = maskPath.cgPath
         layer.addSublayer(maskLayer)
         layer.mask = maskLayer
     }

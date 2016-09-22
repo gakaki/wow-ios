@@ -22,12 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var adLaunchView: AdLaunchView?
 
     
-    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window?.makeKeyAndVisible()
         self.configRootVC()
         return true
     }
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.fetchADImage()
         asyncLoad()
 
@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  
     func ADLaunchView(){
-        adLaunchView    = AdLaunchView(frame: UIScreen.mainScreen().bounds)
+        adLaunchView    = AdLaunchView(frame: UIScreen.main.bounds)
         adLaunchView?.delegate = self
         window?.addSubview(adLaunchView!)
     }
@@ -50,44 +50,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
     
     func asyncLoad(){
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { [unowned self] in
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async { [unowned self] in
             CityDataManager.data
         }
     }
     
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
         DLog("applicationWillResignActive")
     }
     
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
 
         DLog("applicationDidEnterBackground")
 
     }
     
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
 
         DLog("applicationWillEnterForeground")
 
     }
     
     
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
 
         DLog("applicationWillTerminate")
 
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         UMSocialSnsService.applicationDidBecomeActive()
     }
     
     
     
-    func application(application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
+    func application(_ application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
     {
         //DeepShare
 //        if DeepShare.continueUserActivity(userActivity) {
@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if Pingpp.handleOpenURL(url, withCompletion: nil) {
             return true
         }
@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // iOS 9 以上请用这个
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         Pingpp.handleOpenURL(url, withCompletion: nil)
         UMSocialSnsService.handleOpenURL(url)
         
@@ -156,17 +156,17 @@ extension AppDelegate{
     func rootVCGuide(){
         let nav = UIStoryboard.initNavVC("Login", identifier:String(WOWGuideController))
         nav.navigationController?.setNavigationBarHidden(true, animated: false)
-        nav.navigationBarHidden = true
+        nav.isNavigationBarHidden = true
         window?.rootViewController =    nav
     }
     
    
     func configRootVC(){
-        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let infoDictionary = Bundle.main.infoDictionary
         let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
         // 取出之前保存的版本号
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let appVersion = userDefaults.stringForKey("appVersion")
+        let userDefaults = UserDefaults.standard
+        let appVersion = userDefaults.string(forKey: "appVersion")
         // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
         if appVersion == nil || appVersion != currentAppVersion {
             // 保存最新的版本号
@@ -177,7 +177,7 @@ extension AppDelegate{
             
         }else{
             
-            let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
+            let mainVC = UIStoryboard(name: "Main", bundle:Bundle.main).instantiateInitialViewController()
             AppDelegate.rootVC = mainVC
             window?.rootViewController = mainVC
             
@@ -198,7 +198,7 @@ extension AppDelegate{
     }
     
 
-    func onInappDataReturned(params: [NSObject : AnyObject]!, withError error: NSError!) {
+    func onInappDataReturned(_ params: [AnyHashable: Any]!, withError error: NSError!) {
         
         if ((error == nil)) {
             DLog("finished init with params = \(params.description)");
@@ -211,14 +211,14 @@ extension AppDelegate{
     
     func get_version_full() -> String{
         var v = "0.0.0"
-        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String,
-            let version_build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+            let version_build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         {
             v = "\(version).\(version_build)"
         }
         return v
     }
-    func registAppKey(launchOptions: [NSObject: AnyObject]?){
+    func registAppKey(_ launchOptions: [AnyHashable: Any]?){
         //友盟
 
         MobClick.setAppVersion(self.get_version_full())
@@ -297,14 +297,14 @@ extension AppDelegate{
     }
     
     func initialAppearance(){
-        window?.backgroundColor = UIColor.whiteColor()
+        window?.backgroundColor = UIColor.white
         let barButtonItem = UIBarButtonItem.appearance()
         barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], forState: .Normal)
         
         let navBar = UINavigationBar.appearance()
-        navBar.translucent = false
-        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSizeMake(MGScreenWidth, 64)), forBarPosition: .Any, barMetrics: .Default)
-        navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSizeMake(MGScreenWidth, 0.5)) //去除导航栏下方黑线
+        navBar.isTranslucent = false
+        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSize(width: MGScreenWidth, height: 64)), forBarPosition: .Any, barMetrics: .Default)
+        navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSize(width: MGScreenWidth, height: 0.5)) //去除导航栏下方黑线
         
         //        navBar.shadowImage = UIImage()
         //更换导航栏返回按图片
@@ -312,13 +312,13 @@ extension AppDelegate{
         //        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
         
         //设置导航条背景
-        navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()] //导航栏标题颜色
-        navBar.tintColor = UIColor.blackColor() //导航栏元素颜色
-        navBar.translucent = false
+        navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black] //导航栏标题颜色
+        navBar.tintColor = UIColor.black //导航栏元素颜色
+        navBar.isTranslucent = false
         
         let tabBar = UITabBar.appearance()
         tabBar.barTintColor = MGRgb(20, g: 20, b: 20)
-        tabBar.translucent = false
+        tabBar.isTranslucent = false
         
         let tabBarItem = UITabBarItem.appearance()
         tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], forState: .Normal)
@@ -329,10 +329,10 @@ extension AppDelegate{
 
 //ADLaunchView 广告view
 extension AppDelegate: AdLaunchViewDelegate {
-    func adLaunchView(launchView: AdLaunchView, bannerImageDidClick imageURL: String) {
+    func adLaunchView(_ launchView: AdLaunchView, bannerImageDidClick imageURL: String) {
         let urls = "http://www.desgard.com/"
-        if let url: NSURL = NSURL(string: urls) {
-            UIApplication.sharedApplication().openURL(url)
+        if let url: URL = URL(string: urls) {
+            UIApplication.shared.openURL(url)
         }
         
     }
@@ -340,7 +340,7 @@ extension AppDelegate: AdLaunchViewDelegate {
     
     func fetchADImage(){
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AD, successClosure: { (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AD, successClosure: { (result) in
             var r                     =  JSON(result)
             let res                   =  Mapper<WOWVOAd>().mapArray(r.arrayObject) ?? [WOWVOAd]()
             if let imgUrl = res.first?.imgUrl {

@@ -18,7 +18,7 @@ class WOWRefreshHeader: MJRefreshHeader {
         let image = YYImage(named: "loadRefresh")
         img = YYAnimatedImageView(image: image)
         
-        img.frame = CGRectMake(0,0,50.w,50.h)
+        img.frame = CGRect(x: 0,y: 0,width: 50.w,height: 50.h)
         
         self.addSubview(img)
     
@@ -27,17 +27,17 @@ class WOWRefreshHeader: MJRefreshHeader {
     override func placeSubviews() {
         super.placeSubviews()
 
-        img.center = CGPointMake(UIScreen.mainScreen().bounds.size.width/2, self.center.y + 80)
+        img.center = CGPoint(x: UIScreen.mainScreen().bounds.size.width/2, y: self.center.y + 80)
 
     }
     
-    override func scrollViewContentOffsetDidChange(change: [NSObject : AnyObject]!) {
+    override func scrollViewContentOffsetDidChange(_ change: [AnyHashable: Any]!) {
         super.scrollViewContentOffsetDidChange(change)
     }
-    override func scrollViewContentSizeDidChange(change: [NSObject : AnyObject]!) {
+    override func scrollViewContentSizeDidChange(_ change: [AnyHashable: Any]!) {
         super.scrollViewContentSizeDidChange(change)
     }
-    override func scrollViewPanStateDidChange(change: [NSObject : AnyObject]!) {
+    override func scrollViewPanStateDidChange(_ change: [AnyHashable: Any]!) {
         super.scrollViewPanStateDidChange(change)
     }
 

@@ -17,7 +17,7 @@ class WOWHomeBanner: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         bannerList                 <- map["bannerList"]
         carouselBanners            <- map["carouselBanners"]
        
@@ -41,7 +41,7 @@ class WOWHomeBannerr: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         banners                 <- map["banners"]
 
         bannerImgSrc            <- map["bannerImgSrc"]
@@ -67,7 +67,7 @@ final class WOWCarouselBanners: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         banners                 <- map["banners"]
         
         bannerLinkTargetId    <- map["bannerLinkTargetId"]

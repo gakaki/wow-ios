@@ -15,16 +15,16 @@ class WOWFavoriteController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        let productVC = UIStoryboard.initialViewController("Favorite", identifier:String(WOWFavProduct)) as! WOWFavProduct
+        let productVC = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavProduct.self)) as! WOWFavProduct
     
         productVC.title = "单品"
         
         productVC.parentNavigationController = self.navigationController
-        let brandVC = UIStoryboard.initialViewController("Favorite", identifier:String(WOWFavBrand)) as! WOWFavBrand
+        let brandVC = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as! WOWFavBrand
         brandVC.title = "品牌"
         brandVC.parentNavigationController = self.navigationController
 
-        let designerVC = UIStoryboard.initialViewController("Favorite", identifier:String(WOWFavDesigner)) as! WOWFavDesigner
+        let designerVC = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavDesigner.self)) as! WOWFavDesigner
         designerVC.title = "设计师"
         designerVC.parentNavigationController = self.navigationController
 
@@ -33,36 +33,36 @@ class WOWFavoriteController: WOWBaseViewController {
         controllerArray.append(designerVC)
         
         let parameters: [CAPSPageMenuOption] = [
-            .ScrollMenuBackgroundColor(UIColor.whiteColor()),
-            .MenuHeight(40),
-            .MenuMargin((MGScreenWidth - 180)/4),
-            .MenuItemFont(UIFont.systemFontOfSize(14)),
-            .UnselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
-            .MenuItemWidth(60),
-            .SelectionIndicatorColor(UIColor.blackColor()),
-            .SelectedMenuItemLabelColor(UIColor.blackColor()),
-            .MenuItemSeparatorPercentageHeight(0.1),
+            .scrollMenuBackgroundColor(UIColor.whiteColor),
+            .menuHeight(40),
+            .menuMargin((MGScreenWidth - 180)/4),
+            .menuItemFont(UIFont.systemFontOfSize(14)),
+            .unselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
+            .menuItemWidth(60),
+            .selectionIndicatorColor(UIColor.blackColor),
+            .selectedMenuItemLabelColor(UIColor.blackColor),
+            .menuItemSeparatorPercentageHeight(0.1),
             .BottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
         ]
         
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
         pageMenu?.delegate = self
         self.view.addSubview(pageMenu!.view)
 
         
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationShadowImageView?.hidden = true
+        self.navigationShadowImageView?.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: true)
             
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationShadowImageView?.hidden = false
+        self.navigationShadowImageView?.isHidden = false
 
     }
     
@@ -78,9 +78,9 @@ class WOWFavoriteController: WOWBaseViewController {
         configBuyBarItem()
         addObserver()
     }
-    private func addObserver(){
+    fileprivate func addObserver(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         
     }
     
@@ -88,7 +88,7 @@ class WOWFavoriteController: WOWBaseViewController {
 }
 extension WOWFavoriteController:CAPSPageMenuDelegate{
     // 滑动结束 再请求网络
-    func didMoveToPage(controller: UIViewController, index: Int){
+    func didMoveToPage(_ controller: UIViewController, index: Int){
         if index == 0 {
             let currentVC = controller as! WOWFavProduct
             guard currentVC.isRefresh else {

@@ -51,15 +51,15 @@ extension String{
     mutating func get_formted_xxPhone() ->  String{
         
         //开始字符索引
-        let startIndex = self.startIndex.advancedBy(3)
+        let startIndex = self.characters.index(self.startIndex, offsetBy: 3)
         //结束字符索引
-        let endIndex = self.startIndex.advancedBy(7)
+        let endIndex = self.characters.index(self.startIndex, offsetBy: 7)
         let range = Range<String.Index>(startIndex..<endIndex)
         var s = String()
         for _ in 0..<7 - 3{
             s += "*"
         }
-        return self.stringByReplacingCharactersInRange(range, withString: s)
+        return self.replacingCharacters(in: range, with: s)
     }
     /**
      将字符串替换*号
@@ -71,17 +71,17 @@ extension String{
      - returns: 替换后的字符串
      */
     
-    static func stringByX(str:String,startindex:Int,endindex:Int) -> String{
+    static func stringByX(_ str:String,startindex:Int,endindex:Int) -> String{
         //开始字符索引
-        let startIndex = str.startIndex.advancedBy(startindex)
+        let startIndex = str.characters.index(str.startIndex, offsetBy: startindex)
         //结束字符索引
-        let endIndex = str.startIndex.advancedBy(endindex)
+        let endIndex = str.characters.index(str.startIndex, offsetBy: endindex)
         let range = Range<String.Index>(startIndex..<endIndex)
         var s = String()
         for _ in 0..<endindex - startindex{
             s += "*"
         }
-        return str.stringByReplacingCharactersInRange(range, withString: s)
+        return str.replacingCharacters(in: range, with: s)
     }
     
     /**
@@ -89,10 +89,10 @@ extension String{
      */
     
     func documentDir() -> String {
-        let mypaths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        let mydocpath:String = mypaths.objectAtIndex(0) as! String
-        let filepath = NSURL(fileURLWithPath: mydocpath).URLByAppendingPathComponent(self).path
-        return filepath!
+        let mypaths:NSArray = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true) as NSArray
+        let mydocpath:String = mypaths.object(at: 0) as! String
+        let filepath = URL(fileURLWithPath: mydocpath).appendingPathComponent(self).path
+        return filepath
     }
 
 }

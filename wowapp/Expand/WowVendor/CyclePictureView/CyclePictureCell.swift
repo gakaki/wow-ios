@@ -15,13 +15,13 @@ import UIKit
 
 class CyclePictureCell: UICollectionViewCell {
 
-    var imageSource: ImageSource = ImageSource.Local(name: ""){
+    var imageSource: ImageSource = ImageSource.local(name: ""){
         didSet {
             switch imageSource {
-            case let .Local(name):
+            case let .local(name):
                 self.imageView.image = UIImage(named: name)
-            case let .Network(urlStr):
-                self.imageView.kf_setImageWithURL(NSURL(string:urlStr)!, placeholderImage: placeholderImage)
+            case let .network(urlStr):
+                self.imageView.kf_setImageWithURL(URL(string:urlStr)!, placeholderImage: placeholderImage)
 //                self.imageView.set_webimage_url_base(urlStr, place_holder_name: "placeholder_product")
             
             }
@@ -32,7 +32,7 @@ class CyclePictureCell: UICollectionViewCell {
     
     var imageDetail: String? {
         didSet {
-            detailLable.hidden = false
+            detailLable.isHidden = false
             detailLable.text = imageDetail
 
         }
@@ -44,13 +44,13 @@ class CyclePictureCell: UICollectionViewCell {
         }
     }
     
-    var detailLableTextColor: UIColor = UIColor.whiteColor() {
+    var detailLableTextColor: UIColor = UIColor.white {
         didSet {
             detailLable.textColor = detailLableTextColor
         }
     }
     
-    var detailLableBackgroundColor: UIColor = UIColor.clearColor() {
+    var detailLableBackgroundColor: UIColor = UIColor.clear {
         didSet {
             detailLable.backgroundColor = detailLableBackgroundColor
         }
@@ -68,14 +68,14 @@ class CyclePictureCell: UICollectionViewCell {
         }
     }
     
-    var pictureContentMode: UIViewContentMode = .ScaleAspectFill {
+    var pictureContentMode: UIViewContentMode = .scaleAspectFill {
         didSet {
             imageView.contentMode = pictureContentMode
         }
     }
     
      var imageView: UIImageView!
-    private var detailLable: UILabel!
+    fileprivate var detailLable: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -85,21 +85,21 @@ class CyclePictureCell: UICollectionViewCell {
 //        self.backgroundColor = UIColor.grayColor()
     }
     
-    private func setupImageView() {
+    fileprivate func setupImageView() {
         imageView = UIImageView()
         imageView.contentMode = pictureContentMode
         imageView.clipsToBounds = true
         self.addSubview(imageView)
     }
     
-    private func setupDetailLable() {
+    fileprivate func setupDetailLable() {
         detailLable = UILabel()
         detailLable.textColor = detailLableTextColor
-        detailLable.shadowColor = UIColor.grayColor()
+        detailLable.shadowColor = UIColor.gray
         detailLable.numberOfLines = 0
         detailLable.backgroundColor = detailLableBackgroundColor
 
-        detailLable.hidden = true //默认是没有描述的，所以隐藏它
+        detailLable.isHidden = true //默认是没有描述的，所以隐藏它
         
         self.addSubview(detailLable!)
     }
@@ -117,7 +117,7 @@ class CyclePictureCell: UICollectionViewCell {
             let lableH: CGFloat = detailLableHeight
             let lableW: CGFloat = self.frame.width - lableX
             let lableY: CGFloat = self.frame.height - lableH
-            detailLable.frame = CGRectMake(lableX, lableY, lableW, lableH)
+            detailLable.frame = CGRect(x: lableX, y: lableY, width: lableW, height: lableH)
             detailLable.font = detailLableTextFont
         }
     }

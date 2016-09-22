@@ -38,17 +38,17 @@ class WOWLoginController: WOWBaseViewController {
         wechatButton.hidden = !WXApi.isWXAppInstalled()
     }
     
-    private func configNavItem(){
+    fileprivate func configNavItem(){
         makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
 //                strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 if strongSelf.isPopRootVC {
-                    strongSelf.dismissViewControllerAnimated(true, completion: {
-                        UIApplication.currentViewController()?.navigationController?.popToRootViewControllerAnimated(true)
+                    strongSelf.dismiss(animated: true, completion: {
+                        UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: true)
                     })
 
                 }else{
-                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                    strongSelf.dismiss(animated: true, completion: nil)
                 }
                 if WOWTool.lastTabIndex == 3 {
                     WOWTool.lastTabIndex = 0
@@ -62,20 +62,20 @@ class WOWLoginController: WOWBaseViewController {
     
     
 //MARK:Actions
-    @IBAction func regist(sender: UIButton) {
+    @IBAction func regist(_ sender: UIButton) {
 //        toRegVC(false,isPresent: isPresent)
         toRegVC(false, isPresent: isPresent, userInfoFromWechat: nil)
         
     }
     
     
-    @IBAction func forgetPasswordClick(sender: UIButton) {
+    @IBAction func forgetPasswordClick(_ sender: UIButton) {
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
         navigationController?.pushViewController(vc, animated: true)
         
     }
     
-    @IBAction func wechatLogin(sender: UIButton) {
+    @IBAction func wechatLogin(_ sender: UIButton) {
 //        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
 //        UMSocialControllerService.defaultControllerService().socialUIDelegate = self
 //        snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {[weak self]response in
@@ -96,13 +96,13 @@ class WOWLoginController: WOWBaseViewController {
     }
     
     
-    @IBAction func login(sender: UIButton) {
-        guard let phone = accountTextField.text where !phone.isEmpty else{
+    @IBAction func login(_ sender: UIButton) {
+        guard let phone = accountTextField.text , !phone.isEmpty else{
             WOWHud.showMsg("请输入手机号")
             tipsLabel.text = "请输入手机号"
             return
         }
-        guard let passwd = passWordTextField.text where !passwd.isEmpty else{
+        guard let passwd = passWordTextField.text , !passwd.isEmpty else{
             WOWHud.showMsg("请输入密码")
             tipsLabel.text = "请输入密码"
             return
@@ -113,7 +113,7 @@ class WOWLoginController: WOWBaseViewController {
             return
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Login(phone,passwd), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Login(phone,passwd), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 DLog(result)
                 
@@ -137,7 +137,7 @@ extension WOWLoginController:UMSocialUIDelegate{
 }
 
 extension WOWLoginController:UITextFieldDelegate{
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }

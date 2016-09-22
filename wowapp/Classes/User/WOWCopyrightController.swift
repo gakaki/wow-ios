@@ -28,10 +28,10 @@ class WOWCopyrightController: WOWBaseViewController {
         super.setUI()
         navigationItem.title = "用户协议"
 
-        let path = NSBundle.mainBundle().pathForResource("wowprotocol", ofType:"html")
-        let url = NSURL(fileURLWithPath: path!)
+        let path = Bundle.main.path(forResource: "wowprotocol", ofType:"html")
+        let url = URL(fileURLWithPath: path!)
         //创建请求
-        let request = NSURLRequest(URL: url)
+        let request = URLRequest(url: url)
         //加载请求
         webview.loadRequest(request)
         //添加wkwebview

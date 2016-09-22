@@ -9,15 +9,15 @@
 import UIKit
 
 enum OrderCellAction {
-    case ShowTrans
-    case Pay
-    case Comment
-    case SureReceive
-    case Delete
+    case showTrans
+    case pay
+    case comment
+    case sureReceive
+    case delete
 }
 
 protocol OrderCellDelegate:class{
-    func  OrderCellClick(type:OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell)
+    func  OrderCellClick(_ type:OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell)
 }
 
 class WOWOrderListCell: UITableViewCell {
@@ -47,31 +47,31 @@ class WOWOrderListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.resetSeparators()
-        collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
+        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
     
-    func showData(m:WOWNewOrderListModel){
+    func showData(_ m:WOWNewOrderListModel){
         modelNew = m
         
         switch m.orderStatus ?? 0 {
         case 4,5,6:
             statusLabel.textColor = UIColor.init(hexString: "000000")
-            rightButton.hidden = true
+            rightButton.isHidden = true
         case 0:
-            rightButton.hidden = false
-            rightButton.setTitle("立即支付", forState: .Normal)
+            rightButton.isHidden = false
+            rightButton.setTitle("立即支付", for: UIControlState())
             statusLabel.textColor = UIColor.init(hexString: "FE3824")
         case 3:
-            rightButton.hidden = false
-            rightButton.setTitle("确认收货", forState: .Normal)
+            rightButton.isHidden = false
+            rightButton.setTitle("确认收货", for: UIControlState())
             statusLabel.textColor = UIColor.init(hexString: "FE3824")
         default:
-            rightButton.hidden = true
+            rightButton.isHidden = true
             statusLabel.textColor = UIColor.init(hexString: "FE3824")
         }
 
@@ -83,26 +83,26 @@ class WOWOrderListCell: UITableViewCell {
         let result = WOWCalPrice.calTotalPrice([m.orderAmount ?? 0],counts:[1])
         
         totalPriceLabel.text = result
-        rightViseButton.hidden = true
+        rightViseButton.isHidden = true
         collectionView.reloadData()
     }
     
-    @IBAction func rightButtonClick(sender: UIButton) {
+    @IBAction func rightButtonClick(_ sender: UIButton) {
         if sender.tag == 1001 {
             if let del = delegate {
-                del.OrderCellClick(.ShowTrans,model:self.modelNew!,cell: self)
+                del.OrderCellClick(.showTrans,model:self.modelNew!,cell: self)
             }
         }else{
-            var action = OrderCellAction.Pay
+            var action = OrderCellAction.pay
             switch modelNew?.orderStatus ?? 2{
             case 0: //待付款
-                action = .Pay
+                action = .pay
             case 2: //部分收货
-                action = .SureReceive
+                action = .sureReceive
             case 3: //待收货
-                action = .SureReceive
+                action = .sureReceive
             case 4: //已完成
-                action = .Delete
+                action = .delete
             default:
                 break
             }
@@ -153,34 +153,34 @@ class WOWOrderListCell: UITableViewCell {
 }
 
 extension WOWOrderListCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return modelNew?.productSpecImgs.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWImageCell", for: indexPath) as! WOWImageCell
 //        let model = dataArr[indexPath.row]
 //        DLog((modelNew?.productSpecImgs[indexPath.row])!)
-        cell.pictureImageView.kf_setImageWithURL(NSURL(string: (modelNew?.productSpecImgs[indexPath.row])!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        cell.pictureImageView.kf_setImageWithURL(URL(string: (modelNew?.productSpecImgs[indexPath.row])!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
 //        cell.pictureImageView.set_webimage_url(modelNew?.productSpecImgs[indexPath.row])
 
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(10, 15, 10, 15)
     }
     

@@ -20,13 +20,13 @@ class WOWAddressCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
 
         super.setSelected(selected, animated: animated)
         
     }
 
-    func showData(model:WOWAddressListModel)  {
+    func showData(_ model:WOWAddressListModel)  {
         nameLabel.text = model.name
         if let mobile = model.mobile {
             if mobile.length > 7 {
@@ -34,7 +34,7 @@ class WOWAddressCell: UITableViewCell {
             }
         }
         detailAddressLabel.text = (model.province ?? "") + (model.city ?? "") + (model.county ?? "") + (model.addressDetail ?? "")
-        checkButton.selected = model.isDefault ?? false
+        checkButton.isSelected = model.isDefault ?? false
         
     }
     

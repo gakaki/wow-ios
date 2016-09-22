@@ -10,14 +10,14 @@ import UIKit
 import YYWebImage
 
 protocol SenceCellDelegate:class{
-    func senceProductClick(produtID:Int)
+    func senceProductClick(_ produtID:Int)
 }
 
 class WOWlListCell: UITableViewCell {
     
     @IBOutlet var bigImageView: UIImageView!
     
-    private var productBtns = [UIButton]()
+    fileprivate var productBtns = [UIButton]()
     
     var heightAll:CGFloat   = MGScreenWidth
     
@@ -26,11 +26,11 @@ class WOWlListCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func showData(model:WOWCarouselBanners) {
+    func showData(_ model:WOWCarouselBanners) {
         let url = model.bannerImgSrc ?? ""
         DLog(url)
 //      bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
@@ -53,7 +53,7 @@ class WOWlListCell: UITableViewCell {
         productBtns.forEach { (view) in
             view.removeFromSuperview()
         }
-        bigImageView.userInteractionEnabled = true
+        bigImageView.isUserInteractionEnabled = true
 //        let products = model.products ?? []
 //        productBtns = []
 //        for productModel in products {
@@ -80,7 +80,7 @@ class WOWlListCell: UITableViewCell {
 //        }
     }
 
-    func productBtnClick(sender:UIButton) {
+    func productBtnClick(_ sender:UIButton) {
         guard sender.tag != -1111 else{
             return
         }
@@ -94,7 +94,7 @@ class WOWlListCell: UITableViewCell {
         
     }
     func startAnimate() {
-        UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse,.AllowUserInteraction], animations: {
+        UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse,.allowUserInteraction], animations: {
             self.productBtns.forEach({ (view) in
                 view.layer.transform = CATransform3DMakeScale(1.4, 1.4, 1)
             })
@@ -109,7 +109,7 @@ class WOWlListCell: UITableViewCell {
 extension WOWlListCell:ModuleViewElement{
     static func isNib() -> Bool { return true }
     static func cell_type() -> Int { return 201 }
-    func setData(model:WowModulePageItemVO) {
+    func setData(_ model:WowModulePageItemVO) {
         let url = model.bannerImgSrc ?? ""
         DLog(url)
         bigImageView.set_webimage_url(url);
@@ -117,7 +117,7 @@ extension WOWlListCell:ModuleViewElement{
         productBtns.forEach { (view) in
             view.removeFromSuperview()
         }
-        bigImageView.userInteractionEnabled = true
+        bigImageView.isUserInteractionEnabled = true
 
     }
 }

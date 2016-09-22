@@ -20,17 +20,17 @@ class WOWGoodsDetailCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
     
-    func showData(model:WOWProductPicTextModel?) {
+    func showData(_ model:WOWProductPicTextModel?) {
         goodsDesLabel.text = model?.text
-        if let title = model?.text where title.isEmpty {
+        if let title = model?.text , title.isEmpty {
             itemSpacing.constant = 0
         }
-        guard let imageUrl = model?.image where !imageUrl.isEmpty else{
+        guard let imageUrl = model?.image , !imageUrl.isEmpty else{
             cellHeightConstraint.constant = 0
             return
         }

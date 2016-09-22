@@ -5,6 +5,7 @@
 //  Created by Goktug Yilmaz on 15/07/15.
 //  Copyright (c) 2015 Goktug Yilmaz. All rights reserved.
 //
+
 import UIKit
 
 /// EZSwiftExtensions
@@ -36,71 +37,177 @@ private let DeviceList = [
 ]
 
 extension UIDevice {
-    
     /// EZSwiftExtensions
-    public class func idForVendor() -> String {
-        return UIDevice.currentDevice().identifierForVendor!.UUIDString
+    public class func idForVendor() -> String? {
+        return UIDevice.current.identifierForVendor?.uuidString
     }
-    
+
     /// EZSwiftExtensions - Operating system name
     public class func systemName() -> String {
-        return UIDevice.currentDevice().systemName
+        return UIDevice.current.systemName
     }
-    
+
     /// EZSwiftExtensions - Operating system version
     public class func systemVersion() -> String {
-        return UIDevice.currentDevice().systemVersion
+        return UIDevice.current.systemVersion
     }
-    
+
+    /// EZSwiftExtensions - Operating system version
+    public class func systemFloatVersion() -> Float {
+        return (systemVersion() as NSString).floatValue
+    }
+
     /// EZSwiftExtensions
     public class func deviceName() -> String {
-        return UIDevice.currentDevice().name
+        return UIDevice.current.name
     }
-    
+
     /// EZSwiftExtensions
     public class func deviceLanguage() -> String {
-        return NSBundle.mainBundle().preferredLocalizations[0] 
+        return Bundle.main.preferredLocalizations[0]
     }
-    
+
     /// EZSwiftExtensions
     public class func deviceModelReadable() -> String {
         return DeviceList[deviceModel()] ?? deviceModel()
     }
- 
+
+    /// EZSE: Returns true if the device is iPhone //TODO: Add to readme
+    public class func isPhone() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone
+    }
+
+    /// EZSE: Returns true if the device is iPad //TODO: Add to readme
+    public class func isPad() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
+    }
+
     /// EZSwiftExtensions
     public class func deviceModel() -> String {
         var systemInfo = utsname()
         uname(&systemInfo)
-        
+
         let machine = systemInfo.machine
         var identifier = ""
         let mirror = Mirror(reflecting: machine)
-        
+
         for child in mirror.children {
             let value = child.value
-            
-            if let value = value as? Int8 where value != 0 {
-                identifier.append(UnicodeScalar(UInt8(value)))
+            if let value = value as? Int8, value != 0 {
+                identifier.append(String(UnicodeScalar(UInt8(value))))
             }
         }
-       
+
         return identifier
     }
-    
+
+    //TODO: Fix syntax, add docs and readme for these methods:
+    //TODO: Delete isSystemVersionOver()
+    // MARK: - Device Version Checks
+
+    public enum Versions: Float {
+        case five = 5.0
+        case six = 6.0
+        case seven = 7.0
+        case eight = 8.0
+        case nine = 9.0
+    }
+
+    public class func isVersion(_ version: Versions) -> Bool {
+        return systemFloatVersion() >= version.rawValue && systemFloatVersion() < (version.rawValue + 1.0)
+    }
+
+    public class func isVersionOrLater(_ version: Versions) -> Bool {
+        return systemFloatVersion() >= version.rawValue
+    }
+
+    public class func isVersionOrEarlier(_ version: Versions) -> Bool {
+        return systemFloatVersion() < (version.rawValue + 1.0)
+    }
+
+    public class var CURRENT_VERSION: String {
+        return "\(systemFloatVersion())"
+    }
+
+    // MARK: iOS 5 Checks
+
+    public class func IS_OS_5() -> Bool {
+        return isVersion(.five)
+    }
+
+    public class func IS_OS_5_OR_LATER() -> Bool {
+        return isVersionOrLater(.five)
+    }
+
+    public class func IS_OS_5_OR_EARLIER() -> Bool {
+        return isVersionOrEarlier(.five)
+    }
+
+    // MARK: iOS 6 Checks
+
+    public class func IS_OS_6() -> Bool {
+        return isVersion(.six)
+    }
+
+    public class func IS_OS_6_OR_LATER() -> Bool {
+        return isVersionOrLater(.six)
+    }
+
+    public class func IS_OS_6_OR_EARLIER() -> Bool {
+        return isVersionOrEarlier(.six)
+    }
+
+    // MARK: iOS 7 Checks
+
+    public class func IS_OS_7() -> Bool {
+        return isVersion(.seven)
+    }
+
+    public class func IS_OS_7_OR_LATER() -> Bool {
+        return isVersionOrLater(.seven)
+    }
+
+    public class func IS_OS_7_OR_EARLIER() -> Bool {
+        return isVersionOrEarlier(.seven)
+    }
+
+    // MARK: iOS 8 Checks
+
+    public class func IS_OS_8() -> Bool {
+        return isVersion(.eight)
+    }
+
+    public class func IS_OS_8_OR_LATER() -> Bool {
+        return isVersionOrLater(.eight)
+    }
+
+    public class func IS_OS_8_OR_EARLIER() -> Bool {
+        return isVersionOrEarlier(.eight)
+    }
+
+    // MARK: iOS 9 Checks
+
+    public class func IS_OS_9() -> Bool {
+        return isVersion(.nine)
+    }
+
+    public class func IS_OS_9_OR_LATER() -> Bool {
+        return isVersionOrLater(.nine)
+    }
+
+    public class func IS_OS_9_OR_EARLIER() -> Bool {
+        return isVersionOrEarlier(.nine)
+    }
+
     /// EZSwiftExtensions
-    public class func isSystemVersionOver(requiredVersion: String) -> Bool {
-        switch systemVersion().compare(requiredVersion, options: NSStringCompareOptions.NumericSearch) {
-        case .OrderedSame, .OrderedDescending:
+    public class func isSystemVersionOver(_ requiredVersion: String) -> Bool {
+        switch systemVersion().compare(requiredVersion, options: String.CompareOptions.numeric) {
+        case .orderedSame, .orderedDescending:
             //println("iOS >= 8.0")
             return true
-        case .OrderedAscending:
+        case .orderedAscending:
             //println("iOS < 8.0")
             return false
         }
     }
-    
 }
-
-
-
-

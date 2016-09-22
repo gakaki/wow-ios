@@ -147,11 +147,11 @@ let FontMediumlevel004 = UIFont.mediumScaleFontSize(12)
 let product = "placeholder_product" // 产品展位图
 
 //MARK:Layer
-func WOWBorderColor(view:UIView){
+func WOWBorderColor(_ view:UIView){
     view.borderColor(0.5, borderColor:SeprateColor)
 }
 
-func WOWBorderRadius(view:UIView){
+func WOWBorderRadius(_ view:UIView){
     view.borderRadius(6)
 }
 

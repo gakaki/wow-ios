@@ -13,6 +13,6 @@ public extension UITableView{
      剔除多余的cell
      */
     func clearRestCell(){
-        self.tableFooterView = UIView(frame:CGRectZero)
+        self.tableFooterView = UIView(frame:CGRect.zero)
     }
 }

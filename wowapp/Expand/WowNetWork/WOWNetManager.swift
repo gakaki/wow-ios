@@ -9,9 +9,9 @@
 import Foundation
 import SwiftyJSON
 import ObjectMapper
-typealias LikeAction                = (isFavorite:Bool?) -> ()
-typealias FailClosure               = (errorMsg:String?) -> ()
-typealias SuccessClosure            = (result:AnyObject) ->()
+typealias LikeAction                = (_ isFavorite:Bool?) -> ()
+typealias FailClosure               = (_ errorMsg:String?) -> ()
+typealias SuccessClosure            = (_ result:AnyObject) ->()
 
 enum RequestCode:String{
     case FailError = "40000"
@@ -27,7 +27,7 @@ class ReturnInfo: Mappable {
     required init?(_ map: Map) {
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         data          <-    map["data"]
         code          <-    map["resCode"]
         message       <-    map["resMsg"]
@@ -37,13 +37,13 @@ class ReturnInfo: Mappable {
 
 class WOWNetManager {
     static let sharedManager = WOWNetManager()
-    private init(){}
+    fileprivate init(){}
 
     let requestProvider = MoyaProvider<RequestApi>()
 
     
     func getPresentedController() -> UIViewController? {
-        let appRootVC: UIViewController = UIApplication.sharedApplication().keyWindow!.rootViewController!
+        let appRootVC: UIViewController = UIApplication.shared.keyWindow!.rootViewController!
         let topVC: UIViewController     = appRootVC
         let presentedVC                 = topVC.presentedViewController
         
@@ -52,9 +52,9 @@ class WOWNetManager {
    
 
     func requestWithTarget(
-        target:RequestApi,
-        successClosure:SuccessClosure,
-        failClosure:FailClosure
+        _ target:RequestApi,
+        successClosure:@escaping SuccessClosure,
+        failClosure:@escaping FailClosure
     ){
        
 //        DLog("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)

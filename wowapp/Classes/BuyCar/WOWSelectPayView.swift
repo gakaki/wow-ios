@@ -12,15 +12,15 @@ import UIKit
 class WOWPayBackView: UIView {
     //MARK:Lazy
     lazy var payView:WOWSelectPayView = {
-        let v = NSBundle.loadResourceName(String(WOWSelectPayView)) as! WOWSelectPayView
-        v.closeButton.addTarget(self, action: #selector(closeButtonClick), forControlEvents:.TouchUpInside)
-        v.userInteractionEnabled = true
+        let v = Bundle.loadResourceName(String(WOWSelectPayView)) as! WOWSelectPayView
+        v.closeButton.addTarget(self, action: #selector(closeButtonClick), for:.touchUpInside)
+        v.isUserInteractionEnabled = true
         return v
     }()
     
     lazy var backClear:UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.clearColor()
+        v.backgroundColor = UIColor.clear
         return v
     }()
     
@@ -34,14 +34,14 @@ class WOWPayBackView: UIView {
     }
     
     lazy var dismissButton:UIButton = {
-        let b = UIButton(type: .System)
-        b.backgroundColor = UIColor.clearColor()
+        let b = UIButton(type: .system)
+        b.backgroundColor = UIColor.clear
 //        b.addTarget(self, action: #selector(hidePayView), forControlEvents:.TouchUpInside)
         return b
     }()
     //MARK:Private Method
-    private func setUP(){
-        self.frame = CGRectMake(0, 0, self.w, self.h)
+    fileprivate func setUP(){
+        self.frame = CGRect(x: 0, y: 0, width: self.w, height: self.h)
         backgroundColor = MaskColor
         self.alpha = 0
     }
@@ -50,7 +50,7 @@ class WOWPayBackView: UIView {
     
     //MARK:Actions
     func show() {
-        backClear.frame = CGRectMake(0,self.h,self.w,self.h)
+        backClear.frame = CGRect(x: 0,y: self.h,width: self.w,height: self.h)
         addSubview(backClear)
         backClear.addSubview(payView)
         payView.snp_makeConstraints {[weak self](make) in
@@ -66,10 +66,10 @@ class WOWPayBackView: UIView {
             }
         }
         
-        UIView.animateWithDuration(0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1
             self.backClear.y = 0
-        }
+        }) 
     }
     
     func closeButtonClick()  {
@@ -80,12 +80,12 @@ class WOWPayBackView: UIView {
     }
     
     func hidePayView(){
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.backClear.y = self.h + 10
             self.alpha = 0
-        }) { (ret) in
+        }, completion: { (ret) in
             self.removeFromSuperview()
-        }
+        }) 
     }
     
     
@@ -93,7 +93,7 @@ class WOWPayBackView: UIView {
 
 protocol selectPayDelegate: class {
     //确定支付
-    func surePay(channel: String)
+    func surePay(_ channel: String)
     //取消支付
     func canclePay()
 }
@@ -109,30 +109,30 @@ class WOWSelectPayView: UIView {
     
     
     //MARK: - Action
-    @IBAction func alipayClick(sender: UIButton) {
-        if alipayButton.selected {
-            alipayButton.selected = false
+    @IBAction func alipayClick(_ sender: UIButton) {
+        if alipayButton.isSelected {
+            alipayButton.isSelected = false
             channel = ""
             return
         }
-        weixinButton.selected = false
-        alipayButton.selected = true
+        weixinButton.isSelected = false
+        alipayButton.isSelected = true
         channel = "alipay"
     }
     
-    @IBAction func weixinClick(sender: UIButton) {
-        if weixinButton.selected {
-            weixinButton.selected = false
+    @IBAction func weixinClick(_ sender: UIButton) {
+        if weixinButton.isSelected {
+            weixinButton.isSelected = false
             channel = ""
             return
         }
-        alipayButton.selected = false
-        weixinButton.selected = true
+        alipayButton.isSelected = false
+        weixinButton.isSelected = true
         channel = "wx"
     }
 
-    @IBAction func sureClick(sender: UIButton) {
-        if !weixinButton.selected && !alipayButton.selected{
+    @IBAction func sureClick(_ sender: UIButton) {
+        if !weixinButton.isSelected && !alipayButton.isSelected{
             WOWHud.showMsg("请选择支付方式")
             return
         }

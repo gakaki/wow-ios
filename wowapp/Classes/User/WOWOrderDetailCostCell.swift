@@ -18,25 +18,25 @@ class WOWOrderDetailCostCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func showUI(m:WOWNewOrderDetailModel,indexPath:NSIndexPath) {
+    func showUI(_ m:WOWNewOrderDetailModel,indexPath:IndexPath) {
         orderNewDetailModel = m
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             let result = WOWCalPrice.calTotalPrice([orderNewDetailModel!.deliveryFee ?? 0],counts:[1])
             self.priceLabel.text       = result
             
-            self.saidImageView.hidden  = true
+            self.saidImageView.isHidden  = true
             self.freightTypeLabel.text = "运费"
         }
-        if indexPath.row == 1 {
+        if (indexPath as NSIndexPath).row == 1 {
             let result = WOWCalPrice.calTotalPrice([orderNewDetailModel!.couponAmount ?? 0],counts:[1])
             self.priceLabel.text       = "-" + result
             
-            self.saidImageView.hidden  = true
+            self.saidImageView.isHidden  = true
             self.freightTypeLabel.text = "优惠券"
         }
 
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

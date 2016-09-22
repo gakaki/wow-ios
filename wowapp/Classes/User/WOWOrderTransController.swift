@@ -30,23 +30,23 @@ class WOWOrderTransController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.title = "查看物流"
         tableView.clearRestCell()
-        tableView.registerNib(UINib.nibName("WOWTransLineCell"), forCellReuseIdentifier:"WOWTransLineCell")
+        tableView.register(UINib.nibName("WOWTransLineCell"), forCellReuseIdentifier:"WOWTransLineCell")
     }
     
 }
 
 extension WOWOrderTransController:UITableViewDelegate,UITableViewDataSource{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WOWTransLineCell", forIndexPath: indexPath) as! WOWTransLineCell
-        cell.topLine.hidden = indexPath.row == 0
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WOWTransLineCell", for: indexPath) as! WOWTransLineCell
+        cell.topLine.isHidden = (indexPath as NSIndexPath).row == 0
         cell.spotView.backgroundColor = indexPath.row == 0 ? UIColor.redColor() : MGRgb(128, g: 128, b: 128)
         //FIXME:测试数据
         cell.desLabel.text = "快递到达上海市尖叫公司快递到达上海市尖叫公司快递到达上海市尖叫公司快递到达上海市尖叫公司快递到达上海市尖叫公司快递到达上海市尖叫公司"

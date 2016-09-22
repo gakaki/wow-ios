@@ -22,7 +22,7 @@ class WOWTabBarController: UITabBarController {
         
     }
     //MARK: UITableViewDataSource
-    func configureCell(cell: UITableViewCell, forRowAtIndexPath: NSIndexPath) {
+    func configureCell(_ cell: UITableViewCell, forRowAtIndexPath: IndexPath) {
         
     }
     //MARK:Private Method
@@ -40,8 +40,8 @@ class WOWTabBarController: UITabBarController {
         var viewControllers = [UIViewController]()
         for index in 0..<storys.count{
             let vc = UIStoryboard.initialViewController(storys[index])
-            vc.tabBarItem.image = UIImage(named:images[index])?.imageWithRenderingMode(.AlwaysOriginal)
-            vc.tabBarItem.selectedImage = UIImage(named:images[index] + "_selected")?.imageWithRenderingMode(.AlwaysOriginal)
+            vc.tabBarItem.image = UIImage(named:images[index])?.withRenderingMode(.alwaysOriginal)
+            vc.tabBarItem.selectedImage = UIImage(named:images[index] + "_selected")?.withRenderingMode(.alwaysOriginal)
             vc.tabBarItem.title = imagesTitle[index]
 
             vc.tabBarItem.imageInsets = UIEdgeInsetsMake(-2, 0, 2, 0);
@@ -58,21 +58,21 @@ class WOWTabBarController: UITabBarController {
         let items = self.tabBar.items
         for item in items! as [UITabBarItem] {
             
-            let dic_corlor   = NSDictionary(object: WowColor.grayColor(),
-                                            forKey: NSForegroundColorAttributeName)
+            let dic_corlor   = NSDictionary(object: WowColor.gray,
+                                            forKey: NSForegroundColorAttributeName as NSCopying)
 
-            let dic_selected = NSDictionary(object: WowColor.orangeColor(),
-                                   forKey: NSForegroundColorAttributeName)
+            let dic_selected = NSDictionary(object: WowColor.orange,
+                                   forKey: NSForegroundColorAttributeName as NSCopying)
 
             item.setTitleTextAttributes(dic_selected as? [String : AnyObject],
-                                        forState: UIControlState.Selected)
+                                        for: UIControlState.selected)
 
             
             item.setTitleTextAttributes(dic_corlor as? [String : AnyObject],
-                                        forState: UIControlState.Normal)
+                                        for: UIControlState())
         }
     }
-    private func configBadge(){
+    fileprivate func configBadge(){
         WOWBuyCarMananger.updateBadge()
 //        if WOWUserManager.loginStatus { //登录了
 //           //FIXME:赞不考虑与电脑同步
@@ -142,9 +142,9 @@ extension WOWTabBarController:UITabBarControllerDelegate{
 //    }
 
 //    //将要点击
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let controllers = tabBarController.viewControllers
-        let index = controllers?.indexOf(viewController)
+        let index = controllers?.index(of: viewController)
         if index == 3{
             guard WOWUserManager.loginStatus else {
                 UIApplication.currentViewController()?.toLoginVC(true)

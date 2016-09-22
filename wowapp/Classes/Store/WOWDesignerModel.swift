@@ -16,7 +16,7 @@ class WOWDesignerModel: WOWBaseModel,Mappable{
     var designerDesc            : String?
     var designerNameFirstLetter : String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     

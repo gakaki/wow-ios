@@ -14,17 +14,17 @@ class WOWUserTopView: UIView {
     var headImageView: UIImageView!
     var nameLabel: UILabel!
     var desLabel: UILabel!
-    private var bottomContainerView: UIView!
+    fileprivate var bottomContainerView: UIView!
     var focusCountLabel: UILabel!
     var fansCountLabel: UILabel!
     var focusBackView:UIView!
     var fansBackView:UIView!
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         //上方容器
         topContainerView = UIView()
-        topContainerView.backgroundColor = UIColor.whiteColor()
+        topContainerView.backgroundColor = UIColor.white
         addSubview(topContainerView)
         weak var weakSelf = self
         topContainerView.snp_makeConstraints { (make) in
@@ -95,7 +95,7 @@ class WOWUserTopView: UIView {
         loginLabel.text = "点击登录/注册"
         loginLabel.font = Fontlevel001
         loginLabel.textColor = GrayColorlevel3
-        loginLabel.hidden = true
+        loginLabel.isHidden = true
         topContainerView.addSubview(loginLabel)
         loginLabel.snp_makeConstraints { (make) in
             if let _ = weakSelf{
@@ -218,14 +218,14 @@ class WOWUserTopView: UIView {
         */
     }
     
-    private func createNumberLabel() ->UILabel{
+    fileprivate func createNumberLabel() ->UILabel{
         let l1 = UILabel()
         l1.textColor = GrayColorlevel1
         l1.font = Fontlevel001
         return l1
     }
     
-    private func createLabel(title:String) ->UILabel{
+    fileprivate func createLabel(_ title:String) ->UILabel{
         let l1 = UILabel()
         l1.text = title
         l1.textColor = GrayColorlevel3
@@ -239,12 +239,12 @@ class WOWUserTopView: UIView {
     
     
     
-    func configShow(loginStatus:Bool) {
+    func configShow(_ loginStatus:Bool) {
         switch loginStatus {
         case false:
-            loginLabel.hidden = false
-            nameLabel.hidden = true
-            desLabel.hidden = true
+            loginLabel.isHidden = false
+            nameLabel.isHidden = true
+            desLabel.isHidden = true
 //            self.bottomContainerView.hidden = true
 //            self.height = 76
         case true:

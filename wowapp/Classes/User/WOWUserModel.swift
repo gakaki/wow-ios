@@ -26,7 +26,7 @@ class WOWUserModel:NSObject,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         user_desc           <- map["selfIntroduction"]
         user_headimage      <- map["avatar"]
         user_nick           <- map["nickName"]

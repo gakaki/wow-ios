@@ -9,14 +9,14 @@
 import UIKit
 
 enum CommentType {
-    case Sence
-    case Product
+    case sence
+    case product
 }
 
 class WOWCommentController: WOWBaseViewController {
     var mainID:Int!
-    let cellID = String(WOWCommentCell)
-    var commentType:CommentType = CommentType.Sence
+    let cellID = String(describing: WOWCommentCell())
+    var commentType:CommentType = CommentType.sence
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!
     var dataArr = [WOWCommentListModel]()
@@ -31,7 +31,7 @@ class WOWCommentController: WOWBaseViewController {
         request()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -41,7 +41,7 @@ class WOWCommentController: WOWBaseViewController {
     }
     
     deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func setUI() {
@@ -51,37 +51,37 @@ class WOWCommentController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 200
         tableView.clearRestCell()
-        tableView.registerNib(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(String(describing: WOWCommentCell)), forCellReuseIdentifier:cellID)
         tableView.mj_header = self.mj_header
         tableView.mj_footer = self.mj_footer
         navigationItem.title = "评论"
     }
     
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!
-    @IBAction func sendButtonClick(sender: UIButton) {
+    @IBAction func sendButtonClick(_ sender: UIButton) {
         send()
     }
     
     
-    private func send(){
+    fileprivate func send(){
         guard WOWUserManager.loginStatus else{
             goLogin()
             return
         }
         let comments = inputTextView.text
-        guard !comments.isEmpty else{
+        guard !(comments?.isEmpty)! else{
             WOWHud.showMsg("请输入评论")
             return
         }
         var type = "scene"
         switch commentType {
-        case .Product:
+        case .product:
             type = "product"
-        case .Sence:
+        case .sence:
             type = "scene"
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.Api_SubmitComment(uid:WOWUserManager.userID,comment:comments,thingid:self.mainID,type:type), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_SubmitComment(uid:WOWUserManager.userID,comment:comments!,thingid:self.mainID,type:type), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endEditing()
                 let model = WOWCommentListModel()
@@ -99,7 +99,7 @@ class WOWCommentController: WOWBaseViewController {
         }
     }
     
-    private func endEditing(){
+    fileprivate func endEditing(){
         self.inputTextView.resignFirstResponder()
         self.inputTextView.text = ""
         self.inputConstraint.constant = 30
@@ -107,22 +107,22 @@ class WOWCommentController: WOWBaseViewController {
     }
     
     
-    private func goLogin(){
+    fileprivate func goLogin(){
         let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
-        presentViewController(vc, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
     }
     
     
-    private func addObserver(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyBoardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyBoardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
+    fileprivate func addObserver(){
+        NotificationCenter.default.addObserver(self, selector:#selector(keyBoardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyBoardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     
-    func keyBoardWillShow(note:NSNotification){
-        let userInfo  = note.userInfo as [NSObject:AnyObject]!
-        let  keyBoardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+    func keyBoardWillShow(_ note:Notification){
+        let userInfo  = (note as NSNotification).userInfo as [AnyHashable: Any]!
+        let  keyBoardBounds = (userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let duration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let deltaY = keyBoardBounds.size.height
         let animations:(() -> Void) = {
             self.bottomViewConstraint.constant = deltaY
@@ -130,24 +130,24 @@ class WOWCommentController: WOWBaseViewController {
         }
         
         if duration > 0 {
-            let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
-            UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+            let options = UIViewAnimationOptions(rawValue: UInt((userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+            UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
         }else{
             animations()
         }
         
     }
     
-    func keyBoardWillHide(note:NSNotification){
-        let userInfo  = note.userInfo as [NSObject:AnyObject]!
-        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+    func keyBoardWillHide(_ note:Notification){
+        let userInfo  = (note as NSNotification).userInfo as [AnyHashable: Any]!
+        let duration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let animations:(() -> Void) = {
             self.bottomViewConstraint.constant = 0
             self.view.layoutIfNeeded()
         }
         if duration > 0 {
-            let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
-            UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+            let options = UIViewAnimationOptions(rawValue: UInt((userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+            UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
         }else{
             animations()
         }
@@ -156,13 +156,13 @@ class WOWCommentController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        let type = (commentType == .Product) ? "product":"scene"
-        WOWNetManager.sharedManager.requestWithTarget(.Api_CommentList(pageindex:"\(self.pageIndex)",thingid:self.mainID,type:type), successClosure: {[weak self](result) in
+        let type = (commentType == .product) ? "product":"scene"
+        WOWNetManager.sharedManager.requestWithTarget(.api_CommentList(pageindex:"\(self.pageIndex)",thingid:self.mainID,type:type), successClosure: {[weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
             let totalPage = JSON(result)["totalPages"].intValue
-               let arr = Mapper<WOWCommentListModel>().mapArray(result["comment"])
+                let arr = Mapper<WOWCommentListModel>().mapArray(result["comment"] as! [String:AnyObject])
                 strongSelf.endRefresh()
                 if let array = arr{
                     if strongSelf.pageIndex == 0{
@@ -195,18 +195,18 @@ extension WOWCommentController:UITextViewDelegate{
     }
 //    
 //    //中文和其他字符的判断方式不一样
-    func textViewDidChange(textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         guard inputConstraint.constant < 100 else{
             return
         }
         let fixedWidth = inputTextView.frame.size.width
-        inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
-        let newSize = inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
+        inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        let newSize = inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         inputConstraint.constant = newSize.height
         self.view.layoutIfNeeded()
     }
 
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             send()
             return false
@@ -222,26 +222,26 @@ extension WOWCommentController:UITextViewDelegate{
 
 
 extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArr.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWCommentCell
-        cell.showData(dataArr[indexPath.row])
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWCommentCell
+        cell.showData(dataArr[(indexPath as NSIndexPath).row])
         return cell
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.inputTextView.resignFirstResponder()
     }
     
-    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无评论"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri

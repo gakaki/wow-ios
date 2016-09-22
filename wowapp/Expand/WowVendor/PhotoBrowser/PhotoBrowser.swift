@@ -33,17 +33,17 @@ import UIKit
 // MARK:- PhotoBrowserDelegate
 public protocol PhotoBrowserDelegate: NSObjectProtocol {
     /// 更新当前的sourceImageView(update the currentSourceImageView)
-    func sourceImageViewForCurrentIndex(index: Int) -> UIImageView?
+    func sourceImageViewForCurrentIndex(_ index: Int) -> UIImageView?
     ///  正在显示第几页(the current displaying page)
-    func photoBrowserDidDisplayPage(currentPage: Int, totalPages: Int)
+    func photoBrowserDidDisplayPage(_ currentPage: Int, totalPages: Int)
     ///  将要展示图片, 进入浏览模式, 可以用来进行个性化的设置, 比如在这个时候, 隐藏状态栏 和原来的图片 (photoBrowser is preparing well and will begin display the first page )
-    func photoBrowerWillDisplay(beginPage: Int)
+    func photoBrowerWillDisplay(_ beginPage: Int)
     /// 结束展示图片, 将要退出浏览模式,销毁photoBrowser, 可以用来进行个性化的设置 比如显示状态栏, 显示原来的图片(photoBrowser will be dismissed)
-    func photoBrowserWillEndDisplay(endPage: Int)
+    func photoBrowserWillEndDisplay(_ endPage: Int)
     ///  photoBrowser is now dismissed
-    func photoBrowserDidEndDisplay(endPage: Int)
+    func photoBrowserDidEndDisplay(_ endPage: Int)
     
-    func extraBtnOnClick(extraBtn: UIButton)
+    func extraBtnOnClick(_ extraBtn: UIButton)
 }
 
 // 协议扩展, 实现oc协议的optional效果, 当然可以直接在协议前 加上@objc
@@ -51,32 +51,32 @@ public protocol PhotoBrowserDelegate: NSObjectProtocol {
 // MARK:-  extension PhotoBrowserDelegate
 extension PhotoBrowserDelegate {
     // 更新当前的sourceImageView
-    public func sourceImageViewForCurrentIndex(index: Int) -> UIImageView? {
+    public func sourceImageViewForCurrentIndex(_ index: Int) -> UIImageView? {
         return nil
     }
     ///  正在显示第几页
-    public func photoBrowserDidDisplayPage(currentPage: Int, totalPages: Int) { }
+    public func photoBrowserDidDisplayPage(_ currentPage: Int, totalPages: Int) { }
     //  将要展示图片, 进入浏览模式, 可以用来进行个性化的设置, 比如在这个时候, 隐藏状态栏 和原来的图片
-    public func photoBrowerWillDisplay(beginPage: Int) { }
+    public func photoBrowerWillDisplay(_ beginPage: Int) { }
     // 结束展示图片, 将要退出浏览模式,销毁photoBrowser, 可以用来进行个性化的设置 比如显示状态栏, 显示原来的图片
-    public func photoBrowserWillEndDisplay(endPage: Int) { }
-    public func photoBrowserDidEndDisplay(endPage: Int) { }
+    public func photoBrowserWillEndDisplay(_ endPage: Int) { }
+    public func photoBrowserDidEndDisplay(_ endPage: Int) { }
     
     ///  点击附加的按钮的响应方法
-    public func extraBtnOnClick(extraBtn: UIButton) { }
+    public func extraBtnOnClick(_ extraBtn: UIButton) { }
     
 }
 
 
 
-public class PhotoBrowser: UIViewController {
+open class PhotoBrowser: UIViewController {
     
     // MARK:- public property
     
     /// 点击附加的按钮响应Closure
-    public var extraBtnOnClickAction: ((extraBtn: UIButton) -> Void)?
+    open var extraBtnOnClickAction: ((_ extraBtn: UIButton) -> Void)?
     /// delegate
-    public weak var delegate: PhotoBrowserDelegate?
+    open weak var delegate: PhotoBrowserDelegate?
     
     /// 每一页之间的间隔
     static let contentMargin: CGFloat = 20.0
@@ -85,16 +85,16 @@ public class PhotoBrowser: UIViewController {
     
     // MARK:- private property
     
-    private var toolBarStyle: ToolBarStyle!
+    fileprivate var toolBarStyle: ToolBarStyle!
     // 用于在屏幕旋转的时候(不要改变图片索引和旋转后更新布局)
-    private var isOritenting = false
-    private var photoModels: [PhotoModel] = []
+    fileprivate var isOritenting = false
+    fileprivate var photoModels: [PhotoModel] = []
     
     /// 用来添加当前控制器为子控制器
-    private weak var parentVc: UIViewController!
+    fileprivate weak var parentVc: UIViewController!
     
     /// 用来记录当前的图片索引 默认为0 这里设置为-1 是为了在进来的时候设置初始为0也能使oldValue != currentIndex
-    private var currentIndex: Int = -1 {
+    fileprivate var currentIndex: Int = -1 {
         didSet {
             if oldValue == currentIndex { return }
             
@@ -105,40 +105,40 @@ public class PhotoBrowser: UIViewController {
         }
     }
     
-    private lazy var flowLayout: UICollectionViewFlowLayout = {
+    fileprivate lazy var flowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .Horizontal
+        flowLayout.scrollDirection = .horizontal
         // 每个cell的尺寸  -- 宽度设置为UICollectionView.bounds.size.width ---> 滚一页就是一个完整的cell
         flowLayout.itemSize = CGSize(width: self.view.zj_width + PhotoBrowser.contentMargin, height: self.view.zj_height)
         flowLayout.minimumLineSpacing = 0.0
         flowLayout.minimumInteritemSpacing = 0.0
-        flowLayout.sectionInset = UIEdgeInsetsZero
+        flowLayout.sectionInset = UIEdgeInsets.zero
         return flowLayout
     }()
     
-    private lazy var collectionView: UICollectionView = {[unowned self] in
+    fileprivate lazy var collectionView: UICollectionView = {[unowned self] in
         
         // 分页每次滚动 UICollectionView.bounds.size.width
         let collectionView = UICollectionView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.zj_width + PhotoBrowser.contentMargin, height: self.view.zj_height), collectionViewLayout: self.flowLayout)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.pagingEnabled = true
-        collectionView.registerClass(PhotoViewCell.self, forCellWithReuseIdentifier: PhotoBrowser.cellID)
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.isPagingEnabled = true
+        collectionView.register(PhotoViewCell.self, forCellWithReuseIdentifier: PhotoBrowser.cellID)
+        collectionView.backgroundColor = UIColor.clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
-    private lazy var toolBar: PhotoToolBar = {
+    fileprivate lazy var toolBar: PhotoToolBar = {
         
         let toolBar = PhotoToolBar(frame: CGRect(x: 0.0, y: self.view.zj_height - 44.0, width: self.view.zj_width, height: 44.0), toolBarStyle: ToolBarStyle())
-        toolBar.backgroundColor = UIColor.clearColor()
+        toolBar.backgroundColor = UIColor.clear
         return toolBar
     }()
     
     // MARK:- life cycle
-    public init(photoModels: [PhotoModel], extraBtnOnClickAction: ((extraBtn: UIButton) -> Void)? = nil) {
+    public init(photoModels: [PhotoModel], extraBtnOnClickAction: ((_ extraBtn: UIButton) -> Void)? = nil) {
         self.photoModels = photoModels
         self.extraBtnOnClickAction = extraBtnOnClickAction
         super.init(nibName: nil, bundle: nil)
@@ -154,14 +154,14 @@ public class PhotoBrowser: UIViewController {
         print("\(self.debugDescription) --- 销毁")
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.black
         automaticallyAdjustsScrollViewInsets = false
 
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 不能在viewDidLoad里面设置
         setupFrame()
@@ -171,7 +171,7 @@ public class PhotoBrowser: UIViewController {
 
     }
 
-    public override func viewDidLayoutSubviews() {
+    open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        print("视图布局完成")
         
@@ -184,8 +184,8 @@ public class PhotoBrowser: UIViewController {
     
     // MARK:- orientation
     // 开始旋转
-    public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         // 正在旋转屏幕
         isOritenting = true
         // to solve the error or complaint that 'the behavior of the UICollectionViewFlowLayout is not defined because:
@@ -198,11 +198,11 @@ public class PhotoBrowser: UIViewController {
 
     }
     
-    public override func shouldAutorotate() -> Bool {
+    open override var shouldAutorotate : Bool {
         return true
     }
-    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.All
+    open override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.all
     }
     
 }
@@ -217,10 +217,10 @@ extension PhotoBrowser {
     public func show(inVc parentVc: UIViewController, beginPage: Int) {
         currentIndex = beginPage
         self.parentVc = parentVc
-        self.view.frame = UIScreen.mainScreen().bounds
+        self.view.frame = UIScreen.main.bounds
         self.parentVc.view.addSubview(self.view)
         self.parentVc.addChildViewController(self)
-        self.didMoveToParentViewController(self.parentVc)
+        self.didMove(toParentViewController: self.parentVc)
 //        navigationController?.navigationBarHidden = true
 //        tabBarController?.tabBar.hidden = true
         
@@ -230,7 +230,7 @@ extension PhotoBrowser {
     ///
     ///  - parameter currentIndex: 指定的页数
     ///  - parameter animated:     是否执行动画滚动到指定的页
-    public func currentIndex(currentIndex: Int, animated: Bool) {
+    public func currentIndex(_ currentIndex: Int, animated: Bool) {
         assert(currentIndex >= 0 && currentIndex < photoModels.count, "设置的下标有误")
         if currentIndex < 0 || currentIndex >= photoModels.count { return }
         // 更新当前下标
@@ -244,7 +244,7 @@ extension PhotoBrowser {
 // MARK: - private helper
 extension PhotoBrowser {
     /// 当前的sourceImageView, 以便于设置默认图片和执行动画退出
-    private func getCurrentSourceImageView(index: Int) -> UIImageView? {
+    fileprivate func getCurrentSourceImageView(_ index: Int) -> UIImageView? {
         // 更新当前的sourceImageView, 以便于执行动画退出
         let currentModel = photoModels[index]
         if let sourceView = delegate?.sourceImageViewForCurrentIndex(index) { // 首先判断是否实现了代理方法返回sourceImageView, 如果有,就使用代理返回的
@@ -261,7 +261,7 @@ extension PhotoBrowser {
         
     }
     
-    private func setupFrame() {
+    fileprivate func setupFrame() {
         // to solve the error or complaint that 'the behavior of the UICollectionViewFlowLayout is not defined because:
         // the item height must be less that the height of the UICollectionView minus the section insets top and bottom values '
         // http://stackoverflow.com/questions/14469251/uicollectionviewflowlayout-size-warning-when-rotating-device-to-landscape
@@ -269,18 +269,18 @@ extension PhotoBrowser {
         // Call -invalidateLayout to indicate that the collection view needs to requery the layout information.
         collectionView.collectionViewLayout.invalidateLayout()
         
-        let collectionX = NSLayoutConstraint(item: collectionView, attribute: .Leading, relatedBy: .Equal, toItem: view, attribute: .Leading, multiplier: 1.0, constant: 0.0)
-        let collectionY = NSLayoutConstraint(item: collectionView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1.0, constant: 0.0)
-        let collectionW = NSLayoutConstraint(item: collectionView, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1.0, constant: PhotoBrowser.contentMargin)
-        let collectionH = NSLayoutConstraint(item: collectionView, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1.0, constant: 0.0)
+        let collectionX = NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let collectionY = NSLayoutConstraint(item: collectionView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let collectionW = NSLayoutConstraint(item: collectionView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: PhotoBrowser.contentMargin)
+        let collectionH = NSLayoutConstraint(item: collectionView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1.0, constant: 0.0)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([collectionX, collectionY, collectionW, collectionH])
         
-        let toolBarX = NSLayoutConstraint(item: toolBar, attribute: .Leading, relatedBy: .Equal, toItem: view, attribute: .Leading, multiplier: 1.0, constant: 0.0)
-        let toolBarY = NSLayoutConstraint(item: toolBar, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
-        let toolBarW = NSLayoutConstraint(item: toolBar, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1.0, constant: 0.0)
-        let toolBarH = NSLayoutConstraint(item: toolBar, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 44.0)
+        let toolBarX = NSLayoutConstraint(item: toolBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let toolBarY = NSLayoutConstraint(item: toolBar, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        let toolBarW = NSLayoutConstraint(item: toolBar, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: 0.0)
+        let toolBarH = NSLayoutConstraint(item: toolBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 44.0)
         
         toolBar.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([toolBarX, toolBarY, toolBarW, toolBarH])
@@ -292,19 +292,19 @@ extension PhotoBrowser {
 // MARK: - toolBar
 extension PhotoBrowser {
     
-    private func setupToolBarIndexText(index: Int) {
+    fileprivate func setupToolBarIndexText(_ index: Int) {
         toolBar.indexText = "\(index + 1)/\(photoModels.count)"
         
     }
     
-    private func setupToolBarAction() {
+    fileprivate func setupToolBarAction() {
         
         toolBar.saveBtnOnClick = {[unowned self] (saveBtn: UIButton) in
             // 保存到相册
-            let currentCell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: self.currentIndex, inSection: 0)) as! PhotoViewCell
+            let currentCell = self.collectionView.cellForItem(at: IndexPath(row: self.currentIndex, section: 0)) as! PhotoViewCell
             guard let currentImage = currentCell.imageView.image else { return }
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0).async(execute: {
                 
                 UIImageWriteToSavedPhotosAlbum(currentImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
                 
@@ -313,13 +313,13 @@ extension PhotoBrowser {
         }
         toolBar.extraBtnOnClick = {[unowned self] (extraBtn: UIButton) in
 
-            self.extraBtnOnClickAction?(extraBtn: extraBtn)
+            self.extraBtnOnClickAction?(extraBtn)
             self.delegate?.extraBtnOnClick(extraBtn)
         }
         
         
     }
-    @objc func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafePointer<Void>) {
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         let hud = SimpleHUD(frame:CGRect(x: 0.0, y: (self.view.zj_height - 80)*0.5, width: self.view.zj_width, height: 80.0))
 
         self.view.addSubview(hud)
@@ -338,16 +338,16 @@ extension PhotoBrowser {
 // MARK: - animation
 extension PhotoBrowser {
     
-    private func animateZoomIn() {
+    fileprivate func animateZoomIn() {
 
         let currentModel = photoModels[currentIndex]
         let sourceView = getCurrentSourceImageView(currentIndex)
         
         if let sourceImageView = sourceView {
             //  当前的sourceView 将它的frame从它的坐标系转换为self的坐标系中来
-            let window = UIApplication.sharedApplication().keyWindow!
+            let window = UIApplication.shared.keyWindow!
             
-            let beginFrame = window.convertRect(sourceImageView.frame, fromView: sourceImageView)
+            let beginFrame = window.convert(sourceImageView.frame, from: sourceImageView)
             
 //            print("\(beginFrame) --- \(sourceImageView.frame)")
             
@@ -388,41 +388,41 @@ extension PhotoBrowser {
                         
                     }
                 } else {
-                    endFrame = CGRectZero
+                    endFrame = CGRect.zero
                 }
             }
             
             window.addSubview(sourceViewSnap)
             view.alpha = 1.0
-            collectionView.hidden = true
-            toolBar.hidden = true
+            collectionView.isHidden = true
+            toolBar.isHidden = true
             // 将要进入浏览模式
             delegate?.photoBrowerWillDisplay(currentIndex)
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 
                 sourceViewSnap.frame = endFrame
-            }) {[unowned self] (_) in
+            }, completion: {[unowned self] (_) in
                 sourceViewSnap.removeFromSuperview()
-                self.collectionView.hidden = false
-                self.toolBar.hidden = false
+                self.collectionView.isHidden = false
+                self.toolBar.isHidden = false
                 
-            }
+            }) 
 
         } else {
             view.alpha = 0.0
 
             // 将要进入浏览模式
             delegate?.photoBrowerWillDisplay(currentIndex)
-            UIView.animateWithDuration(0.5, animations: {[unowned self] in
+            UIView.animate(withDuration: 0.5, animations: {[unowned self] in
                 self.view.alpha = 1.0
-            }) { (_) in
+            }, completion: { (_) in
 
                 
-            }
+            }) 
         }
     }
     
-    private func animateZoomOut() {
+    fileprivate func animateZoomOut() {
 //        navigationController?.navigationBarHidden = false
 //        tabBarController?.tabBar.hidden = false
 
@@ -430,7 +430,7 @@ extension PhotoBrowser {
         
         if let sourceImageView = sourceView {
             // 当前的cell一定可以获取到
-            let currentCell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: self.currentIndex, inSection: 0)) as! PhotoViewCell
+            let currentCell = self.collectionView.cellForItem(at: IndexPath(row: self.currentIndex, section: 0)) as! PhotoViewCell
             let currentImageView: UIView
             // 如果超出imageView屏幕则截取整个屏幕
             if currentCell.imageView.bounds.size.height > view.zj_height {
@@ -441,53 +441,53 @@ extension PhotoBrowser {
             
             let currentImageSnap = snapView(currentImageView)
             
-            let window = UIApplication.sharedApplication().keyWindow!
+            let window = UIApplication.shared.keyWindow!
             window.addSubview(currentImageSnap)
             //        let beginFrame = window.convertRect(currentImageView.frame, toView: window)
             //        print(beginFrame)
             currentImageSnap.frame = currentImageView.frame
 //            print(currentImageView.frame)
-            let endFrame = sourceImageView.convertRect(sourceImageView.frame, toView: window)
+            let endFrame = sourceImageView.convert(sourceImageView.frame, to: window)
 //            print(endFrame)
             // 将要退出
             delegate?.photoBrowserWillEndDisplay(currentIndex)
             
-            UIView.animateWithDuration(0.5, animations: {[unowned self] in
+            UIView.animate(withDuration: 0.5, animations: {[unowned self] in
                 currentImageSnap.frame = endFrame
                 self.view.alpha = 0.0
                 
-            }) {[unowned self] (_) in
+            }, completion: {[unowned self] (_) in
                 // 退出浏览模式
                 self.delegate?.photoBrowserDidEndDisplay(self.currentIndex)
                 currentImageSnap.removeFromSuperview()
                 
-                self.willMoveToParentViewController(nil)
+                self.willMove(toParentViewController: nil)
                 self.view.removeFromSuperview()
                 self.removeFromParentViewController()
-            }
+            }) 
 
         } else {
             delegate?.photoBrowserWillEndDisplay(currentIndex)
             
-            UIView.animateWithDuration(0.5, animations: {[unowned self] in
+            UIView.animate(withDuration: 0.5, animations: {[unowned self] in
                 self.view.alpha = 0.0
                 
-            }) {[unowned self] (_) in
+            }, completion: {[unowned self] (_) in
                 // 退出浏览模式
                 self.delegate?.photoBrowserDidEndDisplay(self.currentIndex)
                 
-                self.willMoveToParentViewController(nil)
+                self.willMove(toParentViewController: nil)
                 self.view.removeFromSuperview()
                 self.removeFromParentViewController()
-            }
+            }) 
         }
     }
     
-    private func snapView(view: UIView) -> UIView {
+    fileprivate func snapView(_ view: UIView) -> UIView {
         
         UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()
-        view.layer.renderInContext(context!)
+        view.layer.render(in: context!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -496,7 +496,7 @@ extension PhotoBrowser {
         
     }
     
-    private func dismiss() {
+    fileprivate func dismiss() {
         animateZoomOut()
     }
 }
@@ -504,22 +504,22 @@ extension PhotoBrowser {
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension PhotoBrowser: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    public final func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    public final func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    public final func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public final func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoModels.count
     }
     
-    public final func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PhotoBrowser.cellID, forIndexPath: indexPath) as! PhotoViewCell
+    public final func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoBrowser.cellID, for: indexPath) as! PhotoViewCell
         // 避免出现重用出错的问题(to avoid reusing mistakes)
         cell.resetUI()
-        let currentModel = photoModels[indexPath.row]
+        let currentModel = photoModels[(indexPath as NSIndexPath).row]
         // 可能在代理方法中重新设置了sourceImageView,所以需要更新当前的sourceImageView
         // maybe we update the sourceImageView through the delegare, so we need to reset the currentModel.sourceImageView
-        currentModel.sourceImageView = getCurrentSourceImageView(indexPath.row)
+        currentModel.sourceImageView = getCurrentSourceImageView((indexPath as NSIndexPath).row)
         cell.photoModel = currentModel
         
         // 注意之前直接传了self的一个函数给singleTapAction 造成了循环引用
@@ -530,12 +530,12 @@ extension PhotoBrowser: UICollectionViewDelegate, UICollectionViewDataSource, UI
         return cell
     }
     
-    public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //        let size = UIScreen.mainScreen().bounds.size
         return collectionView.bounds.size
     }
     
-    public final func scrollViewDidScroll(scrollView: UIScrollView) {
+    public final func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if isOritenting { return }
         // 向下取整
         currentIndex = Int(scrollView.contentOffset.x / scrollView.zj_width + 0.5)

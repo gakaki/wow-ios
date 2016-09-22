@@ -26,7 +26,7 @@ class WOWCarGoodsListController: WOWBaseTableViewController {
         super.setUI()
         navigationItem.title = "商品清单"
         makeCustomerNavigationItem("共\(productArr.count)件", left: false, handler: nil)
-        tableView.registerNib(UINib.nibName(String(WOWBuyCarNormalCell)), forCellReuseIdentifier:"WOWBuyCarNormalCell")
+        tableView.register(UINib.nibName(String(WOWBuyCarNormalCell)), forCellReuseIdentifier:"WOWBuyCarNormalCell")
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = 108
     }
@@ -37,16 +37,16 @@ class WOWCarGoodsListController: WOWBaseTableViewController {
 
 
 extension WOWCarGoodsListController{
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return productArr.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WOWBuyCarNormalCell", forIndexPath: indexPath) as! WOWBuyCarNormalCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WOWBuyCarNormalCell", for: indexPath) as! WOWBuyCarNormalCell
 //        cell.showData(productArr[indexPath.row])
 //        cell.hideLeftCheck()
 

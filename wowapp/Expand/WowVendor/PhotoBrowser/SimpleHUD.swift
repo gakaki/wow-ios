@@ -33,24 +33,24 @@ class SimpleHUD: UIView {
     
     class LoadingView: UIView {
         
-        private let lineWidth: CGFloat = 8.0
-        private var radius: CGFloat {
+        fileprivate let lineWidth: CGFloat = 8.0
+        fileprivate var radius: CGFloat {
             return min(zj_width, zj_height) * 0.5
         }
         
-        private var progressText: String = "0%" {
+        fileprivate var progressText: String = "0%" {
             didSet {
                 addSubview(progressLabel)
                 progressLabel.text = progressText
             }
         }
         
-        private lazy var progressLabel: UILabel = {
+        fileprivate lazy var progressLabel: UILabel = {
             let label = UILabel(frame: CGRect(x: 10.0, y: (self.zj_height - 30.0) * 0.5, width: self.zj_width - 20.0, height: 30.0))
             label.center = self.center
-            label.font = UIFont.boldSystemFontOfSize(16.0)
-            label.textColor = UIColor.whiteColor()
-            label.textAlignment = .Center
+            label.font = UIFont.boldSystemFont(ofSize: 16.0)
+            label.textColor = UIColor.white
+            label.textAlignment = .center
             
             return label
         }()
@@ -71,7 +71,7 @@ class SimpleHUD: UIView {
         
         override init(frame: CGRect) {
             super.init(frame: frame)
-            backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+            backgroundColor = UIColor.black.withAlphaComponent(0.3)
             layer.cornerRadius = frame.size.width * 0.5
             layer.masksToBounds = true
         }
@@ -81,37 +81,37 @@ class SimpleHUD: UIView {
         }
         
         
-        override func drawRect(rect: CGRect) {
+        override func draw(_ rect: CGRect) {
             
             
             let context = UIGraphicsGetCurrentContext()
             
             // 画圆环
-            CGContextSetLineWidth(context, lineWidth)
+            context?.setLineWidth(lineWidth)
             
-            CGContextSetLineCap(context, .Round)
+            context?.setLineCap(.round)
             let endAngle = CGFloat(progress * M_PI * 2 - M_PI_2 + 0.01)
             
             CGContextAddArc(context, rect.size.width/2, rect.size.height/2, radius, -CGFloat(M_PI_2), endAngle, 0)
             
-            CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
-            CGContextStrokePath(context)
+            context?.setStrokeColor(UIColor.white.cgColor)
+            context?.strokePath()
             
         }
         
     }
     
     /// 加载错误提示
-    private lazy var messageLabel: UILabel = {
+    fileprivate lazy var messageLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: (self.bounds.size.width - 80.0) * 0.5, y:0.0, width: 80.0 , height: 30.0))
         
-        label.font = UIFont.boldSystemFontOfSize(16.0)
-        label.backgroundColor = UIColor.blackColor()
+        label.font = UIFont.boldSystemFont(ofSize: 16.0)
+        label.backgroundColor = UIColor.black
         label.layer.cornerRadius = label.bounds.size.height / 2
         label.layer.masksToBounds = true
         
-        label.textColor = UIColor.whiteColor()
-        label.textAlignment = .Center
+        label.textColor = UIColor.white
+        label.textAlignment = .center
         
         return label
     }()
@@ -122,14 +122,14 @@ class SimpleHUD: UIView {
         }
     }
     
-    private lazy var loadingView: LoadingView = {
+    fileprivate lazy var loadingView: LoadingView = {
         let loadingView = LoadingView(frame: CGRect(x: (self.bounds.width - 80)*0.5, y: (self.bounds.height - 80)*0.5, width: 80.0, height: 80.0))
         return loadingView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -145,20 +145,20 @@ class SimpleHUD: UIView {
     ///
     ///  - parameter autoHide: 是否自动隐藏
     ///  - parameter time:     自动隐藏的时间 只有当autoHide = true的时候有效
-    func showHUD(text: String, autoHide: Bool, afterTime time: Double) {
+    func showHUD(_ text: String, autoHide: Bool, afterTime time: Double) {
         
         loadingView.removeFromSuperview()
         addSubview(messageLabel)
         messageLabel.text = text
         
-        let textSize = (text as NSString).boundingRectWithSize(CGSizeMake(CGFloat(MAXFLOAT), 0.0), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: messageLabel.font], context: nil)
+        let textSize = (text as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 0.0), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: messageLabel.font], context: nil)
         messageLabel.frame = CGRect(x: (self.bounds.width - textSize.width - 16)*0.5, y: (self.bounds.height - 40.0)*0.5, width: textSize.width + 16, height: 40.0)
         
         messageLabel.layer.cornerRadius = messageLabel.bounds.height / 2
 
         
         if autoHide {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {[unowned self] in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(time * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {[unowned self] in
                 self.hideHUD()
                 
             })

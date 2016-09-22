@@ -10,7 +10,7 @@ import Foundation
 
 public extension UINib{
     
-    class func nibName(name:String) ->UINib{
-        return UINib(nibName: name, bundle: NSBundle.mainBundle())
+    class func nibName(_ name:String) ->UINib{
+        return UINib(nibName: name, bundle: Bundle.main)
     }
 }

@@ -11,21 +11,21 @@ import UIKit
 class WOWClickLikeAction {
     
     static let sharedAction = WOWClickLikeAction()
-    private init(){}
+    fileprivate init(){}
     /**
      用户喜欢某个专题
      
      - parameter topicId:    专题ID
      - parameter isFavorite: 请求结果，是否喜欢
      */
-   static func requestLikeProject(topicId: Int,isFavorite:LikeAction){
+   static func requestLikeProject(_ topicId: Int,isFavorite:@escaping LikeAction){
         guard WOWUserManager.loginStatus == true else{
             WOWHud.dismiss()
             UIApplication.currentViewController()?.toLoginVC(true)
             return
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProject(topicId: topicId), successClosure: {(result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProject(topicId: topicId), successClosure: {(result) in
            
                 let favorite = JSON(result)["favorite"].bool ?? false
                 
@@ -46,13 +46,13 @@ class WOWClickLikeAction {
      - parameter productId:  单品ID
      - parameter isFavorite: 请求结果，是否喜欢
      */
-     static func requestFavoriteProduct(productId: Int,isFavorite:LikeAction)  {
+     static func requestFavoriteProduct(_ productId: Int,isFavorite:@escaping LikeAction)  {
         guard WOWUserManager.loginStatus == true else{
             WOWHud.dismiss()
             UIApplication.currentViewController()?.toLoginVC(true)
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: { (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteProduct(productId:productId), successClosure: { (result) in
             
             
                 let favorite = JSON(result)["favorite"].bool
@@ -60,7 +60,7 @@ class WOWClickLikeAction {
                 
                 params = ["productId": productId, "favorite": favorite!]
                 
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+                NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
             
                 isFavorite(isFavorite: favorite)
             

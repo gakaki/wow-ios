@@ -35,7 +35,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         moduleType    <- map["moduleType"]
         
         switch moduleType! {
@@ -73,7 +73,7 @@ class WOWHomeAdditionalInfo: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         imageUrl            <- map["imageUrl"]
         showTitle           <- map["showTitle"]

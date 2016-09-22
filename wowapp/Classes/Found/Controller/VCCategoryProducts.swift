@@ -33,7 +33,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 
     
     
-    func is_load_more(y:CGFloat) -> Bool
+    func is_load_more(_ y:CGFloat) -> Bool
     {
         
         let contentSize  = self.cv.contentSize.height
@@ -58,14 +58,14 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     {
         super.setUI()
         addObserver()
-        edgesForExtendedLayout = .None
+        edgesForExtendedLayout = UIRectEdge()
         
-        let frame = CGRectMake(0,0, MGScreenWidth, MGScreenHeight - 210)
+        let frame = CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight - 210)
         cv = UICollectionView(frame: frame, collectionViewLayout: self.layout)
-        cv.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
 
         let bg_view                         = UIView()
-        bg_view.backgroundColor             = UIColor.whiteColor()
+        bg_view.backgroundColor             = UIColor.white
         cv.backgroundView                   = bg_view
         
         cv.delegate                         = self
@@ -111,29 +111,31 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     let ob_content_offset   = Variable(CGFloat(0))
     let rx_disposeBag       = DisposeBag()
 
-    func scrollViewDidScroll( scrollView: UIScrollView){
+    func scrollViewDidScroll( _ scrollView: UIScrollView){
         ob_content_offset.value = scrollView.contentOffset.y
     }
-    private func addObserver(){
+    fileprivate func addObserver(){
         /**
          添加通知
          */
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
         
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
-    func refreshData(sender: NSNotification)  {
+    func refreshData(_ sender: NSNotification)  {
         guard (sender.object != nil) else{//
             return
         }
         for a in 0..<vo_products.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = vo_products[a]
             
-            if model.productId! == sender.object!["productId"] as? Int {
-                model.favorite = sender.object!["favorite"] as? Bool
-                
-                break
+            if  let send_obj =  sender.object as? [String:AnyObject] {
+
+                if model.productId! == send_obj["productId"] as? Int {
+                    model.favorite = send_obj["favorite"] as? Bool
+                    break
+                }
             }
         }
         cv.reloadData()
@@ -145,14 +147,17 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         
           WOWHud.dismiss()
 
-          WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Product_By_Category(
+          WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Product_By_Category(
             asc: self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.query_categoryId ), successClosure: {[weak self] (result) in
                 
               if let strongSelf = self {
                   strongSelf.endRefresh()
     
+                
                   let res                   = JSON(result)
-                  let data                  = Mapper<WOWProductModel>().mapArray(res["productVoList"].arrayObject) ?? [WOWProductModel]()
+                  let arr                   = res["productVoList"].arrayObject
+                  let data                  = Mapper<WOWProductModel>().mapArray( JSONObject:arr  ) ?? [WOWProductModel]()
+                
                   DLog(strongSelf.vo_products.count)
     
                   if ( data.count <= 0 || data.count < strongSelf.query_showCount){
@@ -177,7 +182,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     
                if ( self?.pageIndex == 1 ){
                     if self!.vo_products.count > 0 {
-                        self!.cv.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.Top)
+                        self!.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.top)
                     }
                 }
           }){[weak self] (errorMsg) in
@@ -194,22 +199,22 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
     
     
-    func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
+    func collectionView(_ collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:IndexPath) -> CGSize
     {
-      return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 75)
+        return CGSize(width:WOWGoodsSmallCell.itemWidth, height:WOWGoodsSmallCell.itemWidth + 75)
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vo_products.count ?? 0
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return vo_products.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell()), for: indexPath) as! WOWGoodsSmallCell
             let model = vo_products[indexPath.row]
             cell.showData(model, indexPath: indexPath)
             //            cell.set_sold_out_status()
@@ -218,7 +223,7 @@ extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     //选中时的操作
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
          let model = vo_products[indexPath.row]
          toVCProduct(model.productId)
     }

@@ -11,7 +11,7 @@ import SDWebImage
 import SwiftyUserDefaults
 
 @objc protocol AdLaunchViewDelegate: NSObjectProtocol {
-    func adLaunchView(launchView: AdLaunchView, bannerImageDidClick imageURL: String)
+    func adLaunchView(_ launchView: AdLaunchView, bannerImageDidClick imageURL: String)
 }
 
 private var sloganHeight: CGFloat = 128
@@ -21,12 +21,12 @@ final class AdLaunchView: UIView {
     weak var delegate: AdLaunchViewDelegate?
     
     // 启动广告背景
-    private lazy var adBackground: UIView = {
-        let wid = UIScreen.mainScreen().bounds.width
-        let hei = UIScreen.mainScreen().bounds.height
+    fileprivate lazy var adBackground: UIView = {
+        let wid = UIScreen.main.bounds.width
+        let hei = UIScreen.main.bounds.height
         
-        var footer: UIView = UIView(frame: CGRectMake(0, hei - sloganHeight, wid, sloganHeight))
-        footer.backgroundColor = UIColor.whiteColor()
+        var footer: UIView = UIView(frame: CGRect(x: 0, y: hei - sloganHeight, width: wid, height: sloganHeight))
+        footer.backgroundColor = UIColor.white
         
         var slogan: UIImageView = UIImageView(image: UIImage(named: "KDTKLaunchSlogan_Content"))
         footer.addSubview(slogan)
@@ -35,23 +35,23 @@ final class AdLaunchView: UIView {
             make.center.equalTo(footer)
         })
         
-        var view: UIView = UIView(frame: UIScreen.mainScreen().bounds)
-        view.backgroundColor = UIColor.whiteColor()
+        var view: UIView = UIView(frame: UIScreen.main.bounds)
+        view.backgroundColor = UIColor.white
         view.addSubview(footer)
         return view
     }()
     
     // 图片链接
-    private var imageURL: String = "http://mg.soupingguo.com/bizhi/big/10/258/043/10258043.jpg"
+    fileprivate var imageURL: String = "http://mg.soupingguo.com/bizhi/big/10/258/043/10258043.jpg"
     
     // 启动页广告
-    private var adImageView: UIImageView?
+    fileprivate var adImageView: UIImageView?
 
     // 进度条
-    private var progressView: DACircularProgressView?
+    fileprivate var progressView: DACircularProgressView?
     
     // 跳过广告按钮
-    private var progressButtonView: UIButton?
+    fileprivate var progressButtonView: UIButton?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,18 +68,18 @@ final class AdLaunchView: UIView {
         requestBanner()
         showProgressView()
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             self.removeFromSuperview()
         }
     }
     
     override func removeFromSuperview() {
-        UIView.animateWithDuration(1, animations: {
+        UIView.animate(withDuration: 1, animations: {
                 self.alpha = 0
-            }) { (finished: Bool) in
+            }, completion: { (finished: Bool) in
                 super.removeFromSuperview()
-            }
+            }) 
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -92,15 +92,15 @@ private extension AdLaunchView {
     
     func displayCachedAd() {
         let manange: SDWebImageManager = SDWebImageManager()
-        if (((manange.imageCache.imageFromDiskCacheForKey(imageURL)) == nil)) {
-            self.hidden = true
+        if (((manange.imageCache.imageFromDiskCache(forKey: imageURL)) == nil)) {
+            self.isHidden = true
         } else {
             showImage()
         }
     }
     
     func requestBanner() {
-        SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: self.imageURL), options: SDWebImageOptions.AvoidAutoSetImage, progress: nil) { (image:UIImage!, error:NSError!, cacheType:SDImageCacheType, finished:Bool, url:NSURL!) in
+        SDWebImageManager.shared().downloadImage(with: URL(string: self.imageURL), options: SDWebImageOptions.avoidAutoSetImage, progress: nil) { (image:UIImage!, error:NSError!, cacheType:SDImageCacheType, finished:Bool, url:URL!) in
             print("图片下载成功")
         }
         
@@ -108,10 +108,10 @@ private extension AdLaunchView {
     }
     
     func showImage() {
-        adImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height - sloganHeight))
+        adImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - sloganHeight))
         if let adImageView = adImageView {
-            adImageView.sd_setImageWithURL(NSURL(string: imageURL))
-            adImageView.userInteractionEnabled = true
+            adImageView.sd_setImage(with: URL(string: imageURL))
+            adImageView.isUserInteractionEnabled = true
             let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AdLaunchView.singleTapAction))
             adImageView.addGestureRecognizer(singleTap)
             
@@ -120,16 +120,16 @@ private extension AdLaunchView {
     }
     
     func showProgressView() {
-        progressButtonView = UIButton(frame: CGRectMake(UIScreen.mainScreen().bounds.width - 60, 20, 40, 40))
+        progressButtonView = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 60, y: 20, width: 40, height: 40))
         if let progressButtonView = progressButtonView {
-            progressButtonView.setTitle("跳", forState: .Normal)
-            progressButtonView.titleLabel?.textAlignment = .Center
-            progressButtonView.backgroundColor = UIColor.clearColor()
-            progressButtonView.addTarget(self, action: #selector(toHidenState), forControlEvents: .TouchUpInside)
+            progressButtonView.setTitle("跳", for: UIControlState())
+            progressButtonView.titleLabel?.textAlignment = .center
+            progressButtonView.backgroundColor = UIColor.clear
+            progressButtonView.addTarget(self, action: #selector(toHidenState), for: .touchUpInside)
             addSubview(progressButtonView)
         }
         
-        progressView = DACircularProgressView(frame: CGRectMake(UIScreen.mainScreen().bounds.width - 60, 20, 40, 40))
+        progressView = DACircularProgressView(frame: CGRect(x: UIScreen.mainScreen().bounds.width - 60, y: 20, width: 40, height: 40))
         if let progressView = progressView {
             progressView.userInteractionEnabled = false
             progressView.progress = 0
@@ -144,10 +144,10 @@ private extension AdLaunchView {
     }
     
     @objc func toHidenState() {
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0
-        }) { (finished: Bool) in
-            self.hidden = true
-        }
+        }, completion: { (finished: Bool) in
+            self.isHidden = true
+        }) 
     }
 }

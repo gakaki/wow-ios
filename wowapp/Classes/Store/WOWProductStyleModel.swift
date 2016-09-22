@@ -20,7 +20,7 @@ class WOWProductStyleModel: Object,Mappable{
     }
     
     
-     func mapping(map: Map) {
+     func mapping(_ map: Map) {
         styleName   <- map["name"]
         styleValue  <- map["value"]
     }

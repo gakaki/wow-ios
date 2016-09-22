@@ -6,17 +6,17 @@ class VCVTMagic:VTMagicController{
     
     override func viewDidLoad() {
         
-        magicView.navigationColor       = UIColor.whiteColor()
-        magicView.sliderColor           = UIColor.blackColor()
+        magicView.navigationColor       = UIColor.white
+        magicView.sliderColor           = UIColor.black
         magicView.separatorColor        = UIColor(hexString: "#EAEAEA")
-        magicView.layoutStyle           = .Divide
-        magicView.switchStyle           = .Default
+        magicView.layoutStyle           = .divide
+        magicView.switchStyle           = .default
         magicView.navigationHeight      = 40
         magicView.sliderWidth           = 50
         
-        magicView.menuScrollEnabled     = false
-        magicView.switchAnimated        = false
-        magicView.scrollEnabled         = false
+        magicView.isMenuScrollEnabled     = false
+        magicView.isSwitchAnimated        = false
+        magicView.isScrollEnabled         = false
 
     }
  

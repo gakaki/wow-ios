@@ -25,12 +25,12 @@ class VCShopping: WowBaseVCCartSearch {
         v.magicView.dataSource          = self
         v.magicView.delegate            = self
         
-        v.magicView.layoutStyle         = .Center
-        v.magicView.switchStyle         = .Default
+        v.magicView.layoutStyle         = .center
+        v.magicView.switchStyle         = .default
         
         v.magicView.sliderWidth         = 50.w
         v.magicView.itemWidth           = MGScreenWidth / 3
-        v.magicView.sliderColor         = WowColor.blackColor()
+        v.magicView.sliderColor         = WowColor.black
         v.magicView.sliderHeight        = 3.w
 
         self.addChildViewController(v)
@@ -72,21 +72,21 @@ extension VCShopping:VTMagicViewDataSource{
     }
     
     //获取所有菜单名，数组中存放字符串类型对象
-    func menuTitlesForMagicView(magicView: VTMagicView) -> [String] {
+    func menuTitles(for magicView: VTMagicView) -> [String] {
         return ["分类","品牌","设计师"]
     }
-    func magicView(magicView: VTMagicView, menuItemAtIndex itemIndex: UInt) -> UIButton{
+    func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
-        let button = magicView .dequeueReusableItemWithIdentifier(self.identifier_magic_view_bar_item)
+        let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
         
         if ( button == nil) {
             let width           = self.view.frame.width / 3
-            let b               = UIButton(type: .Custom)
-            b.frame             = CGRectMake(0, 0, width, 50)
-            b.titleLabel!.font  =  UIFont.systemFontOfSize(14)
-            b.setTitleColor(WowColor.grayLightColor(), forState: .Normal)
-            b.setTitleColor(WowColor.blackColor(), forState: .Selected)
-            b.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+            let b               = UIButton(type: .custom)
+            b.frame             = CGRect(x: 0, y: 0, width: width, height: 50)
+            b.titleLabel!.font  =  UIFont.systemFont(ofSize: 14)
+            b.setTitleColor(WowColor.grayLightColor(), for: UIControlState())
+            b.setTitleColor(WowColor.black, for: .selected)
+            b.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
             
             return b
         }
@@ -98,9 +98,9 @@ extension VCShopping:VTMagicViewDataSource{
         print("button")
     }
     
-    func magicView(magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
+    func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
         
-        let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
+        let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
         
         if (vc == nil) {
 
@@ -118,14 +118,14 @@ extension VCShopping:VTMagicViewDataSource{
 }
 
 extension VCShopping:VTMagicViewDelegate{
-    func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
+    func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         print("viewDidAppear:", pageIndex);
         
-        if let b = magicView.menuItemAtIndex(pageIndex) {
+        if let b = magicView.menuItem(at: pageIndex) {
             print("  button asc is ", b)
         }
     }
-    func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
+    func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
         print("didSelectItemAtIndex:", itemIndex);
         
     }

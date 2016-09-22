@@ -23,7 +23,7 @@ class WOWBrandModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         id       <- map["id"]
         name     <- map["name"]
         image    <- map["image"]
@@ -50,7 +50,7 @@ class WOWBrandV1Model: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         id       <- map["id"]
         letter   <- map["brandNameFirstLetter"]
         name     <- map["brandCname"]

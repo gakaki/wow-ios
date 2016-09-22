@@ -18,7 +18,7 @@ class WOWOrderDetailTwoCell: UITableViewCell {
         // Initialization code
         
     }
-    func showData(m:WOWNewOrderDetailModel){
+    func showData(_ m:WOWNewOrderDetailModel){
         orderNewDetailModel = m
         
         orderNumberLabel.text = "订单： " + (orderNewDetailModel!.orderCode)!
@@ -35,7 +35,7 @@ class WOWOrderDetailTwoCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

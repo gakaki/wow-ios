@@ -43,25 +43,25 @@ class WOWOrderController: WOWBaseViewController {
         // 默认进入0 下标， 请求网络
         if selectIndex == 0 {
              request()
-            NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateOrderListAllInfo), name:WOWUpdateOrderListAllNotificationKey, object:nil)
+            NotificationCenter.default.addObserver(self, selector:#selector(updateOrderListAllInfo), name:NSNotification.Name(rawValue: WOWUpdateOrderListAllNotificationKey), object:nil)
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationShadowImageView?.hidden = true
+        self.navigationShadowImageView?.isHidden = true
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if entrance == .orderPay{
-            self.parentNavigationController?.interactivePopGestureRecognizer?.enabled = false;
+            self.parentNavigationController?.interactivePopGestureRecognizer?.isEnabled = false;
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        self.parentNavigationController?.interactivePopGestureRecognizer?.enabled = true;
-        self.navigationShadowImageView?.hidden = false
+    override func viewWillDisappear(_ animated: Bool) {
+        self.parentNavigationController?.interactivePopGestureRecognizer?.isEnabled = true;
+        self.navigationShadowImageView?.isHidden = false
     }
     
     
@@ -78,10 +78,10 @@ class WOWOrderController: WOWBaseViewController {
         configTable()
         
     }
-    private func configTable(){
+    fileprivate func configTable(){
         tableView.clearRestCell()
         tableView.backgroundColor = DefaultBackColor
-        tableView.registerNib(UINib.nibName(String(WOWOrderListCell)), forCellReuseIdentifier:"WOWOrderListCell")
+        tableView.register(UINib.nibName(String(WOWOrderListCell)), forCellReuseIdentifier:"WOWOrderListCell")
     }
     func updateOrderListAllInfo() {
         request()
@@ -101,7 +101,7 @@ class WOWOrderController: WOWBaseViewController {
             params = ["orderStatus": type, "currentPage": pageIndex,"pageSize":totalPage]
         }
 
-        WOWNetManager.sharedManager.requestWithTarget(.Api_OrderList(params:params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderList(params:params), successClosure: { [weak self](result) in
             
             let json = JSON(result)["orderLists"].arrayObject
             DLog(json)
@@ -148,7 +148,7 @@ class WOWOrderController: WOWBaseViewController {
 }
 
 extension WOWOrderController:TopMenuProtocol{
-    func topMenuItemClick(index: Int) {
+    func topMenuItemClick(_ index: Int) {
         selectIndex = index
         self.dataArr  = [WOWNewOrderListModel]()
         self.pageIndex = 1
@@ -157,27 +157,27 @@ extension WOWOrderController:TopMenuProtocol{
 }
 
 extension WOWOrderController:OrderCellDelegate{
-    func OrderCellClick(type: OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell) {
+    func OrderCellClick(_ type: OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell) {
         switch type {
-        case .Comment:
+        case .comment:
             print("评价")
 //            commentOrder(model.id ?? "")
-        case .Delete:
+        case .delete:
             print("删除")
 //            deleteOrder(model,cell: cell)
-        case .Pay:
+        case .pay:
             print("支付")
 //            payOrder(model.id ?? "",model: model)
             goOrderDetailAction(model.orderCode ?? "")
-        case .ShowTrans:
+        case .showTrans:
             DLog("查看物流")
-        case .SureReceive:
+        case .sureReceive:
             confirmReceive(model.orderCode ?? "",cell: cell)
         }
     }
     
     //支付
-    private func payOrder(orderID:String,model:WOWOrderListModel){
+    fileprivate func payOrder(_ orderID:String,model:WOWOrderListModel){
         if let charge = model.charge {
             Pingpp.createPayment(charge as! NSObject, appURLScheme: WOWDSGNSCHEME, withCompletion: {[weak self] (ret, error) in
                 if let strongSelf = self{
@@ -194,7 +194,7 @@ extension WOWOrderController:OrderCellDelegate{
     }
     
     //评价订单
-    private func commentOrder(orderID:String){
+    fileprivate func commentOrder(_ orderID:String){
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
         vc.orderID = orderID.toInt()
         vc.delegate = self
@@ -202,9 +202,9 @@ extension WOWOrderController:OrderCellDelegate{
     }
     
     //确认收货
-    private func confirmReceive(orderCode:String,cell:WOWOrderListCell){
+    fileprivate func confirmReceive(_ orderCode:String,cell:WOWOrderListCell){
         func confirm(){
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result) in
                 if let strongSelf = self{
                     //确认收货成功后重新请求下网络刷新列表
                     strongSelf.request()
@@ -214,22 +214,22 @@ extension WOWOrderController:OrderCellDelegate{
             }
         }
         
-        let alert = UIAlertController(title:"确认收货", message:nil, preferredStyle:.Alert)
-        let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
-        let sure = UIAlertAction(title: "确定", style: .Default) { (action) in
+        let alert = UIAlertController(title:"确认收货", message:nil, preferredStyle:.alert)
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let sure = UIAlertAction(title: "确定", style: .default) { (action) in
             confirm()
         }
         
         alert.addAction(cancel)
         alert.addAction(sure)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
-    private func deleteOrder(model:WOWOrderListModel,cell:WOWOrderListCell){
+    fileprivate func deleteOrder(_ model:WOWOrderListModel,cell:WOWOrderListCell){
         let uid      = WOWUserManager.userID
         let order_id = model.id ?? ""
         let status   = "20" //删除被回收
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_OrderStatus(uid:uid, order_id:order_id, status:status), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderStatus(uid:uid, order_id:order_id, status:status), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let ret = JSON(result).int ?? 0
                 if ret == 1{
@@ -254,31 +254,31 @@ extension WOWOrderController:OrderDetailDelegate{
     }
 }
 extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.dataArr.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 164
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WOWOrderListCell", forIndexPath: indexPath) as! WOWOrderListCell
-        let orderModel = self.dataArr[indexPath.section]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderListCell", for: indexPath) as! WOWOrderListCell
+        let orderModel = self.dataArr[(indexPath as NSIndexPath).section]
         cell.delegate = self
-        cell.showData(dataArr[indexPath.section])
+        cell.showData(dataArr[(indexPath as NSIndexPath).section])
         if orderModel.orderStatus == 0 {
-            cell.rightButton.hidden = false
-            cell.rightButton.setTitle("立即支付", forState: .Normal)
+            cell.rightButton.isHidden = false
+            cell.rightButton.setTitle("立即支付", for: UIControlState())
         }else if orderModel.orderStatus == 3{
-            cell.rightButton.hidden = false
-            cell.rightButton.setTitle("确认收货", forState: .Normal)
+            cell.rightButton.isHidden = false
+            cell.rightButton.setTitle("确认收货", for: UIControlState())
         }else{
-            cell.rightButton.hidden = true
+            cell.rightButton.isHidden = true
         }
        
         return cell
@@ -299,38 +299,38 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     //        let model = dataArr[indexPath.row]
     //        return model.status == 0 //待付款的是可以取消的
     //    }
-    func goOrderDetailAction(orderCode:String) {
+    func goOrderDetailAction(_ orderCode:String) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
         vc.orderCode = orderCode
         vc.delegate = self
         parentNavigationController!.pushViewController(vc, animated: true)
 
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
-                vc.orderCode = dataArr[indexPath.section].orderCode
+                vc.orderCode = dataArr[(indexPath as NSIndexPath).section].orderCode
                 vc.delegate = self
         parentNavigationController!.pushViewController(vc, animated: true)
     }
     
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 15
     }
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
     
-    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无订单哦"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
     }
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
         return -40
     }
 }

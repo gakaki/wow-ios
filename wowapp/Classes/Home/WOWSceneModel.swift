@@ -27,7 +27,7 @@ class WOWSenceModel: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         id                  <- map["_id"]
         name                <- map["name"]
         senceTime           <- map["time"]

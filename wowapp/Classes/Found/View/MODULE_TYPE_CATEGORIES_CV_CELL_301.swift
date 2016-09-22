@@ -3,7 +3,7 @@ import UIKit
 
 
 protocol MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate:class{
-    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(m:WowModulePageItemVO?)
+    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(_ m:WowModulePageItemVO?)
 }
 
 class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
@@ -20,13 +20,13 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setModel(m:WowModulePageItemVO){
+    func setModel(_ m:WowModulePageItemVO){
         bg_pic.set_webimage_url(m.categoryBgImg)
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
         bg_pic                  = UIImageView()
-        bg_pic.contentMode =   .ScaleToFill
+        bg_pic.contentMode =   .scaleToFill
         self.addSubview(bg_pic)
         bg_pic.snp_makeConstraints { (make) -> Void in
             make.size.equalTo(self)
@@ -44,14 +44,14 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         return 301
     }
     
-    var heightAll:CGFloat = CGFloat.min
+    var heightAll:CGFloat = CGFloat.leastNormalMagnitude
     
     var collectionView: UICollectionView!
     weak var delegate:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate?
 
     var data = [WowModulePageItemVO]()
     
-    func setData(d:[WowModulePageItemVO]){
+    func setData(_ d:[WowModulePageItemVO]){
         self.data = d
         
         collectionView.reloadData()
@@ -84,7 +84,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         self.heightAll                                    = item_height * count + size_padding * 1 + size_line_spacing * (count - 1)
         //因为top那个padding去掉额
         
-        let frame                                         = CGRectMake(0, 0, MGScreenWidth, heightAll)
+        let frame                                         = CGRect(x: 0, y: 0, width: MGScreenWidth, height: heightAll)
         collectionView.frame                              = frame
 
 //        collectionView.setNeedsLayout()
@@ -99,7 +99,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
     func setUI(){
         
         let layout                                        = UICollectionViewFlowLayout()
-        layout.scrollDirection                            = .Vertical
+        layout.scrollDirection                            = .vertical
         
         layout.sectionInset                               = UIEdgeInsets(top: 0, left: size_padding, bottom: size_padding, right: size_padding)
         let item_width                                    = ( MGScreenWidth - size_padding * 2 - size_line_spacing * 1 ) / 2
@@ -111,14 +111,14 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         
         
         heightAll                                         = item_height * 2 + size_padding * 2 + size_line_spacing
-        let frame                                         = CGRectMake(0, 0, MGScreenWidth, heightAll)
+        let frame                                         = CGRect(x: 0, y: 0, width: MGScreenWidth, height: heightAll)
         
         collectionView                                    = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.delegate                           = self
         collectionView.dataSource                         = self
-        collectionView.backgroundColor                    = UIColor.clearColor()
+        collectionView.backgroundColor                    = UIColor.clear
 //        collectionView.autoresizingMask                   = [UIViewAutoresizing.FlexibleHeight , UIViewAutoresizing.FlexibleWidth] //其实没啥用
-        collectionView.registerClass(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self, forCellWithReuseIdentifier:String(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell))
+        collectionView.register(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell))
         collectionView.showsVerticalScrollIndicator       = false
         collectionView.showsHorizontalScrollIndicator     = false
         
@@ -127,24 +127,24 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell), forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell
-        let m               = data[indexPath.item]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell), for: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell
+        let m               = data[(indexPath as NSIndexPath).item]
         cell.setModel(m)
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = self.delegate {
-            let m               = data[indexPath.item]
+            let m               = data[(indexPath as NSIndexPath).item]
             del.MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(m)
         }
     }

@@ -19,13 +19,13 @@ class WOWDesignerCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func showData(model:WOWProductModel?) {
+    func showData(_ model:WOWProductModel?) {
         designerDesLabel.text   = model?.designerName
         designerNameLabel.text  = model?.designerName
         //暂时不要设计师图片

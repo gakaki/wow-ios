@@ -29,21 +29,21 @@ class WOWOrderCommentController: WOWBaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func submitButtonClick(sender: UIButton) {
+    @IBAction func submitButtonClick(_ sender: UIButton) {
         let text = textView.text
-        guard !text.isEmpty else{
+        guard !(text?.isEmpty)! else{
             WOWHud.showMsg("请输入您的评论")
             return
         }
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_SubmitComment(uid: uid, comment:text, thingid: orderID ?? 0, type:"order"), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_SubmitComment(uid: uid, comment:text, thingid: orderID ?? 0, type:"order"), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
                 if let del = strongSelf.delegate{
                     del.orderCommentSuccess()
                 }
-                strongSelf.navigationController?.popViewControllerAnimated(true)
+                strongSelf.navigationController?.popViewController(animated: true)
             }
         }) { (errorMsg) in
             

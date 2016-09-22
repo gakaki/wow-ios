@@ -2,15 +2,18 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)  
-[![License](https://img.shields.io/cocoapods/l/EZSwiftExtensions.svg?style=flat)](http://cocoapods.org/pods/EZSwiftExtensions)
+[![License](https://img.shields.io/cocoapods/l/EZSwiftExtensions.svg?style=flat)](https://cocoapods.org/pods/EZSwiftExtensions)
 [![Platform](https://img.shields.io/cocoapods/p/EZSwiftExtensions.svg?style=flat)](http://cocoapods.org/pods/EZSwiftExtensions)
 [![Language](https://img.shields.io/badge/swift-2.1-orange.svg)](http://swift.org)
+[![Build Status](https://travis-ci.org/goktugyil/EZSwiftExtensions.svg?branch=master)](https://travis-ci.org/goktugyil/EZSwiftExtensions)
 
 <img src="charizard.png" width="200">
 
 How Swift standard types and classes were supposed to work. A collection of useful extensions for the Swift Standard Library, Foundation, and UIKit.
 
-### Contents
+- [Gitter chat room](https://gitter.im/EZSwiftExtensions/Lobby)
+
+## Contents
 
 - [EZ functions and variables](#ez-functions-and-variables)
 - [NSObject](#nsobject-extensions)
@@ -25,6 +28,7 @@ How Swift standard types and classes were supposed to work. A collection of usef
 - [NSTimer](#nstimer-extensions)
 - [CGRect](#cgrect-extensions)
 - [UIViewController](#uiviewcontroller-extensions)
+- [UIStoryBoard](#uistoryboard-extensions)
 - [UIView](#uiview-extensions)
 - [UITextView](#uitextview-extensions)
 - [UILabel](#uilabel-extensions)
@@ -35,7 +39,7 @@ How Swift standard types and classes were supposed to work. A collection of usef
 - [NSUserDefaults](#nsuserdefaults-extensions)
 - [NSURL](#nsurl-extensions)
 
-##EZ functions and variables:
+### EZ functions and variables:
 
 Easily access your projects version and build numbers:
 
@@ -48,8 +52,8 @@ print(ez.appVersionAndBuild) // v0.3(7)
 Easily access your ViewController on top of your view stack:
 
 ``` swift
-ez.topMostVC?.presentViewController(myAlertController, animated: true, completion: nil)
-// topMostVC is your rootViewController
+ez.topMostViewController?.presentViewController(myAlertController, animated: true, completion: nil)
+// topMostViewController is your rootViewController
 // Intended for showing small VCs like UIAlertController
 ```
 
@@ -123,7 +127,7 @@ ez.runThisInBackground { () -> () in
 }
 ```
 
-##NSObject Extensions
+### NSObject Extensions
 
 Easily get the name of your class:
 
@@ -134,7 +138,7 @@ print(vc.className) // UIViewController
 print(UIViewController.className) // UIViewController
 ```
 
-##Bool Extensions
+### Bool Extensions
 
 Easily toggle it:
 
@@ -143,7 +147,7 @@ var myBool: Bool = true
 print(myBool.toggle()) // false
 ```
 
-##Int Extensions
+### Int Extensions
 
 Easy instance variables:
 
@@ -188,7 +192,7 @@ var myDouble = myString.toDouble
 var myInt = myDouble.toInt
 ```
 
-##String Extensions
+### String Extensions
 
 Easily access with subscripts:
 
@@ -223,8 +227,10 @@ Easily check if string is empty and trim it:
 var myString = "\n    eZSwiftExtensions is awesome!     \n \n "
 let emptyStr = "   \n \n \n"
 
-print(myString.isOnlyEmptySpacesAndNewLineCharacters()) // false
-print(emptyStr.isOnlyEmptySpacesAndNewLineCharacters()) // true
+print(myString.isOnlyEmptySpacesAndNewLineCharacters()) // false //v. 1.5 and earlier
+print(emptyStr.isOnlyEmptySpacesAndNewLineCharacters()) // true //v. 1.5 and earlier
+print(myString.isBlank) // false
+print(emptyStr.isBlank) // true
 
 myString.trim()
 print(myString) // eZSwiftExtensions is awesome!
@@ -241,7 +247,7 @@ print(emailStr.isEmail) // true
 let urlString = "http://www.google.com is great but www.facebook.com not that much"
 print(myString.extractURLs) // []
 print(emailStr.extractURLs) // [mailto:charmander@gmail.com]
-print(urlString.extractURLs) // [http://www.google.com, http://www.facebook.com]
+print(urlString.extractURLs) // [http://www.google.com, https://www.facebook.com/]
 ```
 Easily convert to numbers:
 
@@ -277,14 +283,15 @@ let str = "yes yes yes yesyesyes"
 print(str.count("yes")) // 6
 ```
 
-##NSAttributedString Extensions
+### NSAttributedString Extensions
+
 Easily change the typeface:
 
 ``` swift
 var str = NSAttributedString(string: "Hello")
-let attrStr1 = myStr.undeline()
-let attrStr2 = myStr.bold()
-let attrStr3 = myStr.italic()
+let attrStr1 = str.underline()
+let attrStr2 = str.bold()
+let attrStr3 = str.italic()
 ```
 
 Easily change the color:
@@ -295,19 +302,22 @@ str.color(UIColor.blueColor())
 ```
 
 Easily use multiple options:
+
 ``` swift
 var str = NSAttributedString(string: "Hello")
 str.bold().underline().color(UIColor.blueColor())
 ```
 
 Easily add NSAttributedStrings:
+
 ``` swift
 var str = NSAttributedString(string: "Hello")
 var str2 = NSAttributedString(string: " World")
 str += str2 //Hello World
 ```
 
-##Array Extensions
+### Array Extensions
+
 Easily access a random element:
 
 ``` swift
@@ -320,6 +330,14 @@ Easily find the indexes of an object:
 var myArray = ["charmander","bulbasaur","squirtle","charmander"]
 print(myArray.indexesOf("charmander")) // [0,3]
 ```
+
+Easily get index of last occurrence of an object:
+
+``` swift
+var myArray = ["charmander","bulbasaur","squirtle","charmander"]
+print(myArray.lastIndexOf("charmander")) // 3
+```
+
 Easily remove an object:
 
 ``` swift
@@ -344,10 +362,76 @@ print(myArray.containsArray(["charmander","bulbasaur"])) // true
 print(myArray.containsArray(["string"])) // false
 ```
 
-##Dictionary Extensions
+Easily shuffle an array:
+
+``` swift
+var myArray = ["charmander","bulbasaur","squirtle",1,2,3]
+myArray.shuffle()
+print(myArray) // [1,"squirtle","charmander",3,"bulbasaur",2]
+```
+
+Easily get an object at a specified index:
+
+``` swift
+var myArray = ["charmander","bulbasaur","squirtle"]
+print(myArray.get(1)) // "bulbasaur"
+```
+
+Easily prepend an object to an array:
+
+``` swift
+var myArray = ["charmander","bulbasaur","squirtle"]
+myArray.insertAsFirst("snorlax")
+print(myArray) // ["snorlax","charmander","bulbasaur","squirtle"]
+```
+
+Easily determine if an array contains an object:
+
+``` swift
+var myArray = ["charmander","bulbasaur","squirtle"]
+print(myArray.containsInstanceOf("squirtle")) // true
+print(myArray.containsInstanceOf(11)) // false
+```
+
+Easily get intersection and union of two arrays:
+
+``` swift
+var myArray = ["charmander","bulbasaur","squirtle"]
+
+print(myArray.intersection(["charmander","pikachu","bulbasaur"])) // ["charmander","bulbasaur"]
+
+print(myArray.union(["charmander","pikachu"])) // ["charmander","bulbasaur","squirtle","pikachu"]
+```
+
+Easily get difference between two arrays (the elements in the an array which are not present in another input array):
+
+``` swift
+var myArray = ["charmander","bulbasaur","squirtle","pikachu"]
+print(myArray.difference(["charmander","bulbasaur"])) // ["squirtle","pikachu"]
+```
+
+Easily test all elements of an array against a closure:
+
+``` swift
+let myArray = ["charmander","bulbasaur","squirtle"]
+let result = myArray.testAll {
+    if $0 == "charmander" { return true }
+    else { return false }
+}
+print(result) // false
+```
+
+### Dictionary Extensions
+
+Easily check if a key exists in the dictionary:
+
+``` swift
+var myDict = ["charmander": "fire","bulbasaur": "grass","squirtle": "water"]
+print(myDict.has("charmander")) // True
+print(myDict.has("pikachu")) // False
+```
 
 Easily access a random element:
-
 ``` swift
 var myDict = ["charmander": "fire","bulbasaur": "grass","squirtle": "water"]
 print(myDict.random()) // grass or something else
@@ -356,16 +440,33 @@ print(myDict.random()) // grass or something else
 Easily add dictionaries to create new ones:
 
 ``` swift
-var dictionary1 = ["fire" : "charmander"]
-var dictionary2 = ["water" : "squirtle"]
-
-var dictionary3 = dictionary1.union(dictionary2)
-print(dictionary3) // ["fire": "charmander", "water": "squirtle"]
+var dictionary1 = ["charmander" : "fire"]
+var dictionary2 = ["squirtle" : "water"]
 
 dictionary1 += dictionary2
-print(dictionary1) // ["fire": "charmander", "water": "squirtle"]
+print(dictionary1) // ["charmander" : "fire", "squirtle" : "water"]
 ```
-##NSDate Extensions
+Easily get intersection or union of two dictionaries:
+
+``` swift
+var dictionary1 = ["charmander" : "fire", "bulbasaur" : "grass"]
+var dictionary2 = ["charmander": "fire","squirtle": "water"]
+
+var dictionary3 = dictionary1.intersection(dictionary2)
+print(dictionary3)// ["charmander" : "fire"]
+
+dictionary3 = dictionary1.union(dictionary2)
+print(dictionary3) // ["charmander": "fire","bulbasaur": "grass","squirtle": "water"]
+```
+Easily get difference of two dictionaries (key value pairs that are only present in one dictionary):
+
+``` swift
+var dictionary1 = ["charmander" : "fire", "bulbasaur" : "grass"]
+var dictionary2 = ["charmander": "fire","squirtle": "water"]
+difference(dictionary1, dictionary2) // ["bulbasaur" : "grass", "squirtle": "water"]
+```
+
+### NSDate Extensions
 
 Easily initialize your string:
 
@@ -374,7 +475,6 @@ let format = "yyyy/MM/dd"
 let fromString = "2016/01/11"
 print(NSDate(fromString: fromString, format: format)) // Optional("2016/01/11 00:00:00 +0000")
 ```
-
 Easily convert date into string:
 
 ``` swift
@@ -383,7 +483,6 @@ print(now.toString())
 print(now.toString(dateStyle: .MediumStyle, timeStyle: .MediumStyle))
 print(now.toString(format: "yyyy/MM/dd HH:mm:ss"))
 ```
-
 Easily see how much time passed:
 
 ``` swift
@@ -419,7 +518,8 @@ let now2 = NSDate()
 print(now < now2) // true
 print(now2 < now) // false  
 ```
-##NSTimer Extensions
+
+### NSTimer Extensions
 
 Easily run block of codes after a certain delay:
 
@@ -449,7 +549,7 @@ NSTimer.runThisEvery(seconds: 1) { (timer) -> Void in
 }
 ```
 
-##CGRect Extensions
+### CGRect Extensions
 
 Easily initialize:
 
@@ -457,7 +557,7 @@ Easily initialize:
 let rect = CGRect(x: 100, y: 100, w: 100, h: 100)
 ```
 
-##UIViewController Extensions
+### UIViewController Extensions
 
 Easily access ViewController sizes:
 
@@ -497,7 +597,6 @@ override func viewDidAppear(animated: Bool) {
 
     dismissVC(completion: nil) // Instead of dismissViewControllerAnimated(true, completion: completion)}
 ```
-
 Easily hide the keyboard when user taps around the UIViewController:
 
 ```swift 
@@ -506,7 +605,6 @@ Easily hide the keyboard when user taps around the UIViewController:
         self.hideKeyboardWhenTappedAround()
     }
 ```
-
 Easily add UIViewControllers:
 
 ``` swift
@@ -514,7 +612,22 @@ Easily add UIViewControllers:
     addAsChildViewController(myViewController, toView: self.anySubview) // Adding view controller as a child view controller to subview
 ```
 
-##UIView Extensions
+### UIStoryboard Extensions
+
+Easily get the main storyboard:
+
+``` swift
+    let storyboard = UIStoryboard.mainStoryboard
+```
+
+Easily get view controller from storyboard:
+
+``` swift
+    //ViewController must be set both as custom class and StoryboardID in identity inspector
+    let vc = storyboard!.instantiateVC(ViewController) //vc is of type ViewController
+```
+
+### UIView Extensions
 
 Easily initialize your objects:
 
@@ -528,7 +641,6 @@ print(myView2.frame) // (0.0, 0.0, 100.0, 100.0)
 let myView3 = UIView(superView: myView2, padding: 20)
 print(myView3.frame) // (20.0, 20.0, 60.0, 60.0)
 ```
-
 Easily resize your UIView to contain its subviews:
 
 ``` swift
@@ -601,9 +713,7 @@ print(bview.frame) // (0.0, 10.0, 10.0, 10.0)
 print(cview.frame) // (0.0, 20.0, 10.0, 10.0)
 // This only works in reordering vertically
 ```
-
 Ignore specific subviews while reordering:
-
 
 ``` swift
 let mainview = UIView(x: 0, y: 0, w: 100, h: 100)
@@ -721,7 +831,7 @@ mainview.addPinchGesture { (pinch) -> () in
 // OR    
 mainview.addPinchGesture(target: self, action: "userAction")
 func userAction() {
-	print("panned")
+	print("pinched")
 }
 ```
 ``` swift      
@@ -751,7 +861,7 @@ let image = UIImage()
 self.setBackgroundImage(image)
 ```
 
-##UITextView Extensions
+### UITextView Extensions
 
 Easily declare a UITextView with standard details:
 
@@ -774,7 +884,7 @@ mytext.textAlignment = NSTextAlignment.Right
 mytext.editable = true
 ```
 
-##UILabel Extensions
+### UILabel Extensions
 
 Easily declare a UILabel with standard details:
 
@@ -818,7 +928,7 @@ myLabel.setText("I am your father!", animated: true, duration: 0.3)
 
 ```
 
-##UIImageView Extensions
+### UIImageView Extensions
 
 Easily initialize your UIImageViews:
 
@@ -868,7 +978,7 @@ myImageView.imageWithUrl(url: "http://images.buystarwarscostumes.com/products/85
 
 
 
-##UIImage Extensions
+### UIImage Extensions
 
 Easily find out the size of your images:
 
@@ -909,7 +1019,7 @@ print(image.size) // (800.0, 1420.0)
 let croppedImage = image.croppedImage(CGRect(x: 0, y: 0, w: 200, h: 100))
 print(croppedImage.size) // (200.0, 100.0)
 ```
-##UIColor Extensions
+### UIColor Extensions
 
 Easily initialize your colors:
 
@@ -951,7 +1061,7 @@ Easily get a random color:
 let myRandomColor = UIColor.randomColor()
 ```
 
-##UIFont Extensions
+### UIFont Extensions
 
 Easily declare common fonts:
 
@@ -961,7 +1071,7 @@ let myFont1 = UIFont.AvenirNext(type: FontType.Italic, size: 13)
 let myFont2 = UIFont.Font(FontName.SanFranciscoDisplay, type: FontType.None, size: 20)
 ```
 
-##UIButton Extensions
+### UIButton Extensions
 
 Easily initialize your buttons:
 
@@ -979,7 +1089,7 @@ let myButton = UIButton()
 myButton.setBackgroundColor(UIColor.redColor(), forState: UIControlState.Normal)
 myButton.setBackgroundColor(UIColor.blueColor(), forState: UIControlState.Selected)
 ```
-##UIDevice Extensions
+### UIDevice Extensions
 
 Easily access your device information:
 
@@ -999,7 +1109,7 @@ print(UIDevice.isSystemVersionOver("8.1")) // true
 print(UIDevice.isSystemVersionOver("9.3")) // false
 // You might not need this after Swift2.0
 ```
-##Block Objects
+### Block Objects
 
 These objects use completion blocks instead of selectors, taken from: [CEMKit-Swift](https://github.com/cemolcay/CEMKit-Swift)
 
@@ -1018,7 +1128,7 @@ button1.addAction { (sender) -> Void in
 // There are also BlockWebView, BlockTap, BlockPan, BlockSwipe, BlockPinch, BlockLongPress
 ```
 
-##NSUserDefaults Extensions
+### NSUserDefaults Extensions
 
 Easily get values from NSUserDefaults with subscripts:
 
@@ -1032,7 +1142,7 @@ Defaults["userName"] = someUserName
 
 ```
 
-##NSURL Extensions
+### NSURL Extensions
 
 Easily get query in the Dictionary:
 
@@ -1045,12 +1155,14 @@ if let queryParameters = url?.queryParameters {
 }
 ```
 
-##Installation (~10 seconds)
+##Installation
+
+### Manually (~10 seconds)
 
 1. Download and drop '/Sources' in your project.  
 2. Congratulations!  
 
-## Install via CocoaPods (~10 seconds)
+### Install via CocoaPods (~10 seconds)
 
 You can use [CocoaPods](http://cocoapods.org/) to install `EZSwiftExtensions` by adding it to your `Podfile`:
 
@@ -1067,7 +1179,7 @@ import UIKit
 import EZSwiftExtensions
 ```
 
-## Install via [Carthage](https://github.com/Carthage/Carthage)
+### Install via [Carthage](https://github.com/Carthage/Carthage)
 
 Create a `Cartfile` that lists the framework and run `carthage bootstrap`. Follow the [instructions](https://github.com/Carthage/Carthage#if-youre-building-for-ios) to add `$(SRCROOT)/Carthage/Build/iOS/EZSwiftExtensions.framework` to an iOS project.
 
@@ -1075,11 +1187,11 @@ Create a `Cartfile` that lists the framework and run `carthage bootstrap`. Follo
 github "goktugyil/EZSwiftExtensions"
 ```
 
-##Requirements
+## Requirements
 
 - Swift 2 or later
 
-##Possible features
+## Possible features
 
 - More extensions! Please if there is an extension you are constantly using, send a pull request now!
 - Fancy pictures and jpgs in documentation.
@@ -1088,7 +1200,7 @@ github "goktugyil/EZSwiftExtensions"
 - Completing `TODO`s in source code.
 - OSX compatibility and add here https://github.com/AndrewSB/awesome-osx
 
-##Sources Used
+## Sources Used
 
 - [ExSwift by pNre](https://github.com/pNre/ExSwift)
 - [SKTUtils by raywenderlich](https://github.com/raywenderlich/SKTUtils)
@@ -1097,14 +1209,14 @@ github "goktugyil/EZSwiftExtensions"
 - [Geometry by artman](https://github.com/artman/Geometry)
 - [Swift-Extensions by vitkuzmenko](https://github.com/vitkuzmenko/Swift-Extensions)
 - [SwiftTweetGettr by jmenter](https://github.com/jmenter/SwiftTweetGettr)
-- [Basics by dennisweissmann](https://github.com/dennisweissmann/Basics)
+- [Basics by dennisweissmann](https://github.com/dennisweissmann/DeviceKit)
 - [toNumber by Mamesoft](https://github.com/Mamesoft/toNumber)
 - [RBResizer by hcatlin](https://gist.github.com/hcatlin/180e81cd961573e3c54d)
 
 And countless gists and stackoverflow answers.
 
-##License
+## License
 EZSwiftExtensions is available under the MIT license. See the [LICENSE file](https://github.com/goktugyil/EZSwiftExtensions/blob/master/LICENSE).
 
-##Keywords
+## Keywords
 swift, extension, uikit, exswift, foundation, library, framework, tool

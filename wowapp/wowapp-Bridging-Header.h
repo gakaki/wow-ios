@@ -56,8 +56,8 @@
 //#import <AVOSCloud/AVOSCloud.h>
 
 //融云
-#import <RongIMKit/RongIMKit.h>
-#import "RCDCustomerServiceViewController.h"
+//#import <RongIMKit/RongIMKit.h>
+//#import "RCDCustomerServiceViewController.h"
 
 
 //友盟

@@ -14,7 +14,7 @@ struct WOWCheckMenuSetting {
     static var itemMargin:CGFloat = 30
     static var selectedIndex:Int = 0
     static var normalTitleColor = GrayColorlevel3
-    static var selectTitleColor = UIColor.blackColor()
+    static var selectTitleColor = UIColor.black
     static var titleFont:UIFont = UIFont.systemScaleFontSize(12)
     
     static func defaultSetUp(){
@@ -23,7 +23,7 @@ struct WOWCheckMenuSetting {
         itemMargin       = 30
         selectedIndex    = 0
         normalTitleColor = GrayColorlevel3
-        selectTitleColor = UIColor.blackColor()
+        selectTitleColor = UIColor.black
         titleFont        = UIFont.systemScaleFontSize(14)
     }
 }
@@ -31,7 +31,7 @@ struct WOWCheckMenuSetting {
 
 
 protocol TopMenuProtocol:class{
-    func topMenuItemClick(index:Int)
+    func topMenuItemClick(_ index:Int)
 }
 
 class WOWTopMenuTitleView: UIView {
@@ -47,12 +47,12 @@ class WOWTopMenuTitleView: UIView {
     
     var itemWidths:[CGFloat]!
     
-    private var titleTotalWidth:CGFloat = 0
+    fileprivate var titleTotalWidth:CGFloat = 0
     
-    private var itemArr = [UIButton]()
+    fileprivate var itemArr = [UIButton]()
     
-    private lazy var bottomLine:UIView = {
-        let v = UIView(frame: CGRectMake(0,0,20,1))
+    fileprivate lazy var bottomLine:UIView = {
+        let v = UIView(frame: CGRect(x: 0,y: 0,width: 20,height: 1))
         v.backgroundColor = ThemeBlackColor
 //        v.backgroundColor =  UIColor.init(hexString: "000000")
         return v
@@ -64,16 +64,16 @@ class WOWTopMenuTitleView: UIView {
         configSubViews()
     }
     
-    private func configSubViews(){
-        backgroundColor = UIColor.whiteColor()
+    fileprivate func configSubViews(){
+        backgroundColor = UIColor.white
         itemWidths = itemTitles.map({
             $0.size(WOWCheckMenuSetting.titleFont).width + 8
         })
-        titleTotalWidth = itemWidths.reduce(0, combine:{$0 + $1})
+        titleTotalWidth = itemWidths.reduce(0, {$0 + $1})
         configItems()
     }
     
-    private func configItems(){
+    fileprivate func configItems(){
         if  WOWCheckMenuSetting.fill{ //铺满
             WOWCheckMenuSetting.itemMargin = (self.w - titleTotalWidth - WOWCheckMenuSetting.margin * 2) / CGFloat((itemTitles.count - 1))
         }else{ //不铺满
@@ -81,19 +81,19 @@ class WOWTopMenuTitleView: UIView {
              WOWCheckMenuSetting.margin = restWidth / 2
         }
         
-        for (index,item) in itemTitles.enumerate(){
+        for (index,item) in itemTitles.enumerated(){
             let btn = createItem(item)
             if index == 0 {
-                btn.frame = CGRectMake(WOWCheckMenuSetting.margin, 5,itemWidths[index],self.h-5)
+                btn.frame = CGRect(x: WOWCheckMenuSetting.margin, y: 5,width: itemWidths[index],height: self.h-5)
             }else{
-                btn.frame = CGRectMake(itemArr[index - 1].right + WOWCheckMenuSetting.itemMargin,5,itemWidths[index],self.h - 5)
+                btn.frame = CGRect(x: itemArr[index - 1].right + WOWCheckMenuSetting.itemMargin,y: 5,width: itemWidths[index],height: self.h - 5)
             }
             btn.tag = 1000 + index
-            btn.addTarget(self, action:#selector(itemClick(_:)), forControlEvents:.TouchUpInside)
+            btn.addTarget(self, action:#selector(itemClick(_:)), for:.touchUpInside)
             self.addSubview(btn)
             itemArr.append(btn)
         }
-        itemArr[selectedIndex].selected = true
+        itemArr[selectedIndex].isSelected = true
         //下划线
         bottomLine.frame = self.itemArr[WOWCheckMenuSetting.selectedIndex].frame
         
@@ -108,7 +108,7 @@ class WOWTopMenuTitleView: UIView {
     
     
     
-    func itemClick(btn:UIButton){
+    func itemClick(_ btn:UIButton){
         let index = btn.tag - 1000
         guard selectedIndex != index else{
             return
@@ -117,29 +117,29 @@ class WOWTopMenuTitleView: UIView {
         UIView.animateWithDuration(0.4) { 
             self.bottomLine.centerX = centerX
         }
-        itemArr[selectedIndex].selected = false
+        itemArr[selectedIndex].isSelected = false
         selectedIndex = index
-        itemArr[selectedIndex].selected = true
+        itemArr[selectedIndex].isSelected = true
         if  let del = self.delegate{
             del.topMenuItemClick(selectedIndex)
         }
     }
     
-    private func changeIndex(){
-        itemArr[selectedIndex].selected = true
+    fileprivate func changeIndex(){
+        itemArr[selectedIndex].isSelected = true
         let centerX = itemArr[selectedIndex].centerX
         UIView.animateWithDuration(0.4) {
             self.bottomLine.centerX = centerX
         }
     }
     
-    private func createItem(title:String) ->UIButton{
-        let button = UIButton(type:.System)
+    fileprivate func createItem(_ title:String) ->UIButton{
+        let button = UIButton(type:.system)
         button.titleLabel?.font = WOWCheckMenuSetting.titleFont
-        button.setTitleColor(WOWCheckMenuSetting.normalTitleColor, forState: .Normal)
-        button.setTitleColor(WOWCheckMenuSetting.selectTitleColor, forState: .Selected)
-        button.tintColor = UIColor.whiteColor()
-        button.setTitle(title, forState: .Normal)
+        button.setTitleColor(WOWCheckMenuSetting.normalTitleColor, for: .Normal)
+        button.setTitleColor(WOWCheckMenuSetting.selectTitleColor, for: .selected)
+        button.tintColor = UIColor.white
+        button.setTitle(title, for: UIControlState())
         return button
     }
     

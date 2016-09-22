@@ -24,13 +24,13 @@ class WOWContentTopicController: WOWBaseViewController {
     var topic_id: Int           = 1
     var vo_topic:WOWModelVoTopic?
     weak var  delegate :WOWHotStyleDelegate?
-    private var shareProductImage:UIImage? //供分享使用
+    fileprivate var shareProductImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
         let image = UIImageView()
         return image
     }()
     
-    private(set) var numberSections = 0
+    fileprivate(set) var numberSections = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,20 +44,20 @@ class WOWContentTopicController: WOWBaseViewController {
     
      //MARK:    - lazy
     lazy var nagationItem:WOWTopicNavigationItem = {
-        let view = NSBundle.mainBundle().loadNibNamed(String(WOWTopicNavigationItem), owner: self, options: nil).last as! WOWTopicNavigationItem
-        view.thumbButton.addTarget(self, action: #selector(dgClick), forControlEvents: .TouchDown)
-        view.shareButton.addTarget(self, action: #selector(zdClick), forControlEvents: .TouchUpInside)
-        view.buyCarBUttion.addTarget(self, action: #selector(sjClick), forControlEvents: .TouchUpInside)
+        let view = Bundle.main.loadNibNamed(String(describing: WOWTopicNavigationItem), owner: self, options: nil)?.last as! WOWTopicNavigationItem
+        view.thumbButton.addTarget(self, action: #selector(dgClick), for: .touchDown)
+        view.shareButton.addTarget(self, action: #selector(zdClick), for: .touchUpInside)
+        view.buyCarBUttion.addTarget(self, action: #selector(sjClick), for: .touchUpInside)
         return view
     }()
     // 刷新顶部数据
-    func reloadNagationItemThumbButton(isFavorite: Bool, thumbNum: Int)  {
-        nagationItem.thumbButton.selected = isFavorite
+    func reloadNagationItemThumbButton(_ isFavorite: Bool, thumbNum: Int)  {
+        nagationItem.thumbButton.isSelected = isFavorite
         nagationItem.numLabel.text = thumbNum.toString
     }
     //MARK:Actions
 
-    func dgClick(sender: UIButton) -> Void {
+    func dgClick(_ sender: UIButton) -> Void {
         
         WOWClickLikeAction.requestLikeProject(topic_id) { [weak self](isFavorite) in
             if let strongSelf = self{
@@ -73,7 +73,7 @@ class WOWContentTopicController: WOWBaseViewController {
                 
                 strongSelf.reloadNagationItemThumbButton(isFavorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
 //                strongSelf.delegate?.reloadTableViewData()
-                 NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateProjectThumbNotificationKey, object: nil)
+                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateProjectThumbNotificationKey, object: nil)
             }
 
         }
@@ -104,7 +104,7 @@ class WOWContentTopicController: WOWBaseViewController {
     }
 
     //初始化数据，商品banner
-    private func configData(){
+    fileprivate func configData(){
         //如果相关商品有数据显示。如果没有数据则不显示
         if vo_products.count > 0 {
             //详情页共分为7组数据
@@ -115,7 +115,7 @@ class WOWContentTopicController: WOWBaseViewController {
     }
     
     
-    private func configBarItem(){
+    fileprivate func configBarItem(){
         
         if WOWUserManager.userCarCount <= 0 {
             nagationItem.buyCarBUttion.badgeString = ""
@@ -128,13 +128,13 @@ class WOWContentTopicController: WOWBaseViewController {
 
         makeRightNavigationItem(nagationItem)
     }
-    private func addObservers(){
+    fileprivate func addObservers(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(buyCarCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
-    func refreshData(sender: NSNotification)  {
+    func refreshData(_ sender: Notification)  {
         guard (sender.object != nil) else{//
             return
         }
@@ -151,9 +151,9 @@ class WOWContentTopicController: WOWBaseViewController {
     }
 
     
-    private func removeObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWUpdateCarBadgeNotificationKey, object: nil)
+    fileprivate func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
     }
     
     /**
@@ -175,7 +175,7 @@ class WOWContentTopicController: WOWBaseViewController {
     override func request(){
         
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Topics(topicId:topic_id), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topics(topicId:topic_id), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
                 DLog(result)
@@ -196,7 +196,7 @@ class WOWContentTopicController: WOWBaseViewController {
     }
     
     func requestAboutProduct() {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Topic_Products(topicId:topic_id), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topic_Products(topicId:topic_id), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 
                 let r                             =  JSON(result)
@@ -250,18 +250,18 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.mj_header = self.mj_header
         //显示价格的cell
-        tableView.registerNib(UINib.nibName(String(WOWContentTopicTopCell)), forCellReuseIdentifier:String(WOWContentTopicTopCell))
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailCell)), forCellReuseIdentifier:String(WOWProductDetailCell))
+        tableView.register(UINib.nibName(String(WOWContentTopicTopCell)), forCellReuseIdentifier:String(WOWContentTopicTopCell))
+        tableView.register(UINib.nibName(String(WOWProductDetailCell)), forCellReuseIdentifier:String(WOWProductDetailCell))
                //相关商品
-        tableView.registerNib(UINib.nibName(String(WOWProductDetailAboutCell)), forCellReuseIdentifier:String(WOWProductDetailAboutCell))
+        tableView.register(UINib.nibName(String(WOWProductDetailAboutCell)), forCellReuseIdentifier:String(WOWProductDetailAboutCell))
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return numberSections
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 1:
             return vo_topic?.imageSerial?.records?.count ?? 0
@@ -271,19 +271,19 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
 
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell :UITableViewCell!
-        switch (indexPath.section,indexPath.row) {
+        switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (0,_): //
-            let cell =  tableView.dequeueReusableCellWithIdentifier(String(WOWContentTopicTopCell), forIndexPath: indexPath) as! WOWContentTopicTopCell
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentTopicTopCell), for: indexPath) as! WOWContentTopicTopCell
             cell.showData(vo_topic)
             returnCell = cell
         case (1,_): //产品描述
-            let cell =  tableView.dequeueReusableCellWithIdentifier(String(WOWProductDetailCell), forIndexPath: indexPath) as! WOWProductDetailCell
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell), for: indexPath) as! WOWProductDetailCell
             if let array = vo_topic?.imageSerial?.records {
-                let model = array[indexPath.row]
+                let model = array[(indexPath as NSIndexPath).row]
                 cell.showData(model)
-                cell.productImg.tag = indexPath.row
+                cell.productImg.tag = (indexPath as NSIndexPath).row
                 cell.productImg.addTapGesture(action: {[weak self] (tap) in
                     if let strongSelf = self {
                         strongSelf.lookBigImg((tap.view?.tag)!)
@@ -295,7 +295,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             returnCell = cell
 
         case (2,_)://相关商品
-            let cell = tableView.dequeueReusableCellWithIdentifier("WOWProductDetailAboutCell", forIndexPath: indexPath) as! WOWProductDetailAboutCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailAboutCell", for: indexPath) as! WOWProductDetailAboutCell
             cell.dataArr = vo_products
             cell.delegate = self
             returnCell = cell
@@ -305,7 +305,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         return returnCell
     }
 
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 2: //如果相关商品有数据显示，如果没有就不显示
             if vo_products.count > 0 {
@@ -318,7 +318,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 2:
             return 15
@@ -328,7 +328,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 2:     //如果相关商品有数据显示，如果没有就不显示
             if vo_products.count > 0 {
@@ -341,10 +341,10 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             return nil
         }
     }
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
         let view = UIView()
-        view.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clear
         return view
         
     }
@@ -367,8 +367,8 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
         return photos
     }
     
-    func lookBigImg(beginPage:Int)  {
-        dispatch_async(dispatch_get_main_queue()) {
+    func lookBigImg(_ beginPage:Int)  {
+        DispatchQueue.main.async {
             let photoBrowser = PhotoBrowser(photoModels:self.setPhoto()) {[weak self] (extraBtn) in
                 if let sSelf = self {
                     let hud = SimpleHUD(frame:CGRect(x: 0.0, y: (sSelf.view.zj_height - 80)*0.5, width: sSelf.view.zj_width, height: 80.0))
@@ -383,10 +383,10 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
         }
         
     }
-    func photoBrowerWillDisplay(beginPage: Int){
+    func photoBrowerWillDisplay(_ beginPage: Int){
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    func photoBrowserWillEndDisplay(endPage: Int){
+    func photoBrowserWillEndDisplay(_ endPage: Int){
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -394,7 +394,7 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
 }
 
 extension WOWContentTopicController: WOWProductDetailAboutCellDelegate {
-        @objc func selectCollectionIndex(productId: Int) {
+        @objc func selectCollectionIndex(_ productId: Int) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productId

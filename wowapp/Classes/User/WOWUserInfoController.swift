@@ -36,13 +36,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
     var addressInfo                     :WOWAddressListModel?
 
     
-    private var headImageUrl:String = WOWUserManager.userHeadImageUrl
-    private var nick        :String = WOWUserManager.userName
-    private var job         :String = WOWUserManager.userIndustry
-    private var sex         :Int = WOWUserManager.userSex
-    private var des         :String = WOWUserManager.userDes
-    private var star        :Int = WOWUserManager.userConstellation
-    private var age         :Int = WOWUserManager.userAgeRange
+    fileprivate var headImageUrl:String = WOWUserManager.userHeadImageUrl
+    fileprivate var nick        :String = WOWUserManager.userName
+    fileprivate var job         :String = WOWUserManager.userIndustry
+    fileprivate var sex         :Int = WOWUserManager.userSex
+    fileprivate var des         :String = WOWUserManager.userDes
+    fileprivate var star        :Int = WOWUserManager.userConstellation
+    fileprivate var age         :Int = WOWUserManager.userAgeRange
     
     var pickDataArr:[Int:String] = [Int:String]()
     var editingGroupAndRow:[Int:Int] = [0:0]
@@ -56,7 +56,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }()
     
     lazy var pickerContainerView :WOWPickerView = {
-        let v = NSBundle.mainBundle().loadNibNamed("WOWPickerView", owner: self, options: nil).last as! WOWPickerView
+        let v = Bundle.main.loadNibNamed("WOWPickerView", owner: self, options: nil)?.last as! WOWPickerView
         return v
     }()
     
@@ -70,7 +70,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
     }
    
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
@@ -78,7 +78,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
         
@@ -86,7 +86,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             configPickerView()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         
@@ -107,14 +107,14 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    private func addObserver(){
+    fileprivate func addObserver(){
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
         
     }
-    private func removeObserver() {
+    fileprivate func removeObserver() {
 //        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWExitLoginNotificationKey, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object: nil)
     }
     override func setUI() {
         super.setUI()
@@ -124,31 +124,31 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
     }
     
-    private func configPickerView(){
+    fileprivate func configPickerView(){
         
         backGroundMaskView = UIView()
-        backGroundMaskView.frame = CGRectMake(0, 0 , MGScreenWidth, MGScreenHeight)
-        backGroundMaskView.backgroundColor = UIColor.blackColor()
+        backGroundMaskView.frame = CGRect(x: 0, y: 0 , width: MGScreenWidth, height: MGScreenHeight)
+        backGroundMaskView.backgroundColor = UIColor.black
         backGroundMaskView.alpha = 0.2
         
 //        backGroundMaskView.tag == 1000
 
         backGroundMaskView.addTapGesture(target: self, action: #selector(cancelPicker))
         
-        pickerContainerView.frame = CGRectMake(0, MGScreenHeight,UIApplication.currentViewController()?.view.w ?? MGScreenWidth, PickerViewHeight)
+        pickerContainerView.frame = CGRect(x: 0, y: MGScreenHeight,width: UIApplication.currentViewController()?.view.w ?? MGScreenWidth, height: PickerViewHeight)
         
 
         pickerContainerView.pickerView.delegate = self
-        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancelPicker), forControlEvents:.TouchUpInside)
-        pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), forControlEvents:.TouchUpInside)
+        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancelPicker), for:.touchUpInside)
+        pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
 
 //        pickerContainerView.tag == 1001 
         
-        backGroundWindow = UIApplication.sharedApplication().keyWindow
+        backGroundWindow = UIApplication.shared.keyWindow
         
         backGroundWindow.addSubview(backGroundMaskView)
         backGroundWindow.addSubview(pickerContainerView)
-        backGroundMaskView.hidden = true
+        backGroundMaskView.isHidden = true
 
     }
     
@@ -157,7 +157,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 //        self.headImageView.image = nil
 //        self.headImageView.setNeedsDisplay()
 
-        if   WOWUserManager.userPhotoData.length == 0 {
+        if   WOWUserManager.userPhotoData.count == 0 {
                     if ( self.image != nil ){
                         self.headImageView.image = self.image
                     }else{
@@ -168,19 +168,19 @@ class WOWUserInfoController: WOWBaseTableViewController {
                     }
 
         }else{
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
 
-            let myImage = NSKeyedUnarchiver.unarchiveObjectWithData(WOWUserManager.userPhotoData) as! UIImage
+            let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as! UIImage
             
             self.headImageView.image = myImage
             }
         }
     }
-    private func configUserInfo(){
+    fileprivate func configUserInfo(){
         
         self.refresh_image()
 
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             
             self.sexTextField.text  = WOWSex[self.sex]
             self.desLabel.text      = WOWUserManager.userDes
@@ -190,9 +190,9 @@ class WOWUserInfoController: WOWBaseTableViewController {
             self.jobLabel.text      = WOWUserManager.userIndustry
     
             
-            self.ageTextField.userInteractionEnabled = false
-            self.sexTextField.userInteractionEnabled = false
-            self.starTextField.userInteractionEnabled = false
+            self.ageTextField.isUserInteractionEnabled = false
+            self.sexTextField.isUserInteractionEnabled = false
+            self.starTextField.isUserInteractionEnabled = false
             self.tableView.reloadData()
         }
     }
@@ -207,14 +207,14 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }
     func cancelPicker(){
 
-        self.backGroundMaskView.hidden = true
+        self.backGroundMaskView.isHidden = true
         UIView.animateWithDuration(0.3){
             self.pickerContainerView.mj_y = MGScreenHeight
         }
     }
     
     func surePicker() {
-        let row = pickerContainerView.pickerView.selectedRowInComponent(0)
+        let row = pickerContainerView.pickerView.selectedRow(inComponent: 0)
         
         if editingGroupAndRow == [0:3] {
             
@@ -241,7 +241,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func request() {
         super.request()
         let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star),"avatar":self.headImageUrl]
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -268,14 +268,14 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     func requestAddressInfo() {
         //请求默认地址数据
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_AddressDefault, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(result)
                 if let addressInfo = strongSelf.addressInfo {
                     DLog((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
                     strongSelf.addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "")
-                    let section = NSIndexSet(index: 1)
-                    strongSelf.tableView.reloadSections(section, withRowAnimation: .None)
+                    let section = IndexSet(integer: 1)
+                    strongSelf.tableView.reloadSections(section, with: .none)
                 }
             }
             
@@ -288,21 +288,21 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
 
 //MARK: - prepareForSegue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destina = segue.destinationViewController as? WOWInfoTextController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destina = segue.destination as? WOWInfoTextController
         guard let toVC = destina else{
             return
         }
         let segueid = segue.identifier
         switch segueid!{
         case "usernick":
-            toVC.entrance = InfoTextEntrance.NickEntrance()
+            toVC.entrance = InfoTextEntrance.nickEntrance()
             toVC.userInfo = WOWUserManager.userName
         case "userdesc":
-            toVC.entrance = InfoTextEntrance.DescEntrance()
+            toVC.entrance = InfoTextEntrance.descEntrance()
             toVC.userInfo = WOWUserManager.userDes
         case "userjob":
-            toVC.entrance = InfoTextEntrance.JobEntrance()
+            toVC.entrance = InfoTextEntrance.jobEntrance()
             toVC.userInfo = WOWUserManager.userIndustry
         default:break
         }
@@ -318,8 +318,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
 
 extension WOWUserInfoController{
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch (indexPath.section,indexPath.row) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (0,0):
             showPicture()
         case (0,3):
@@ -349,7 +349,7 @@ extension WOWUserInfoController{
         case (1, 0):
             
             let vc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
-            vc.entrance = WOWAddressEntrance.Me
+            vc.entrance = WOWAddressEntrance.me
             vc.delegate = self
             navigationController?.pushViewController(vc, animated: true)
         default:
@@ -357,43 +357,43 @@ extension WOWUserInfoController{
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 0.01 : 15
     }
-    private func showPickerView(){
+    fileprivate func showPickerView(){
         
-        self.backGroundMaskView.hidden = false
+        self.backGroundMaskView.isHidden = false
         
         UIView.animateWithDuration(0.3){
             self.pickerContainerView.mj_y = self.view.h - PickerViewHeight + 64
 
         }
     }
-    private func showPicture(){
-        let actionSheetController: UIAlertController = UIAlertController(title: "更改头像", message: nil, preferredStyle: .ActionSheet)
-        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .Cancel) { action -> Void in
+    fileprivate func showPicture(){
+        let actionSheetController: UIAlertController = UIAlertController(title: "更改头像", message: nil, preferredStyle: .actionSheet)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .cancel) { action -> Void in
             
         }
          actionSheetController.addAction(cancelAction)
-        let takePictureAction: UIAlertAction = UIAlertAction(title: "相机拍照", style: .Default) { action -> Void in
-            self.choosePhtot(.Camera)
+        let takePictureAction: UIAlertAction = UIAlertAction(title: "相机拍照", style: .default) { action -> Void in
+            self.choosePhtot(.camera)
         }
         actionSheetController.addAction(takePictureAction)
-        let choosePictureAction: UIAlertAction = UIAlertAction(title: "相册选取", style: .Default) { action -> Void in
-            self.choosePhtot(.PhotoLibrary)
+        let choosePictureAction: UIAlertAction = UIAlertAction(title: "相册选取", style: .default) { action -> Void in
+            self.choosePhtot(.photoLibrary)
         }
         actionSheetController.addAction(choosePictureAction)
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        self.present(actionSheetController, animated: true, completion: nil)
     }
     
     
-    private func choosePhtot(type:UIImagePickerControllerSourceType){
+    fileprivate func choosePhtot(_ type:UIImagePickerControllerSourceType){
         if UIImagePickerController.isSourceTypeAvailable(type){
             //指定图片控制器类型
             imagePicker.sourceType = type
             //弹出控制器，显示界面
-            self.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-            self.presentViewController(imagePicker, animated: true, completion:nil)
+            self.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(imagePicker, animated: true, completion:nil)
         }else{
             DLog("读取相册错误")
         }
@@ -402,13 +402,13 @@ extension WOWUserInfoController{
 
 
 //MARK:Delegate
-func json_serialize( dict:[String:AnyObject]) -> String {
+func json_serialize( _ dict:[String:AnyObject]) -> String {
     var str = ""
     
     do {
 //        let jsonData        = try NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.PrettyPrinted)
-        let jsonData        = try NSJSONSerialization.dataWithJSONObject(dict, options: [])
-         str                = NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
+        let jsonData        = try JSONSerialization.data(withJSONObject: dict, options: [])
+         str                = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
 
     } catch let error as NSError {
         DLog(error)
@@ -419,12 +419,12 @@ func json_serialize( dict:[String:AnyObject]) -> String {
 extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        picker.dismiss(animated: true, completion: nil)
 
         WOWUploadManager.upload(image, successClosure: { [weak self](result) in
             
-            NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
+            NotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                 self!.headImageUrl = result as! String
                 self!.request()
             
@@ -437,15 +437,15 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
      
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickDataArr.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if editingGroupAndRow == [0:4]  {
             return pickDataArr[row]

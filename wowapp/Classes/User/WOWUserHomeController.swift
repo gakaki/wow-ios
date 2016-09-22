@@ -35,8 +35,8 @@ class WOWUserHomeController: WOWBaseViewController {
         return l
     }()
     
-    private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0,0,self.view.w,self.view.h), collectionViewLayout:self.layout)
+    fileprivate lazy var collectionView:UICollectionView = {
+        let collectionView = UICollectionView.init(frame:CGRect(x: 0,y: 0,width: self.view.w,height: self.view.h), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.whiteColor()
@@ -45,7 +45,7 @@ class WOWUserHomeController: WOWBaseViewController {
     }()
 
 //MARK:Private Method
-    private func initData(){
+    fileprivate func initData(){
         //FIXME:测试数据
         let string = ["年成立，总部设立在丹麦的Aarup。Carl Hansen & Son公司缘起于1908年Carl Hansen先生创立他的橱柜制造"," 11208"]
         for index in 1...40 {
@@ -59,46 +59,46 @@ class WOWUserHomeController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         configColelction()
-        view.bringSubviewToFront(backButton)
+        view.bringSubview(toFront: backButton)
     }
     
-    private func configColelction(){
+    fileprivate func configColelction(){
         view.addSubview(collectionView)
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
-        collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
-        collectionView.registerClass(WOWUserHomeContainerView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
+        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
+        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
+        collectionView.register(WOWUserHomeContainerView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
     
 //MARK:Actions
-    @IBAction func backButtonClick(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func backButtonClick(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
 }
 
 //MARK:Delegate
 extension WOWUserHomeController:UICollectionViewDelegate,UICollectionViewDataSource{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return goodsDataArr.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell), for: indexPath) as! WOWGoodsSmallCell
         
         return cell
     }
     
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var reusableView: UICollectionReusableView? = nil
         if kind == CollectionViewWaterfallElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as? WOWUserHomeContainerView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? WOWUserHomeContainerView
             if let view = headerView {
                 view.showData()
                 //FIXME:这个地方填充数据
@@ -110,7 +110,7 @@ extension WOWUserHomeController:UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
@@ -119,22 +119,22 @@ extension WOWUserHomeController:UICollectionViewDelegate,UICollectionViewDataSou
 
 
 extension WOWUserHomeController:CollectionViewWaterfallLayoutDelegate{
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         switch selectIndex {
         case 0:
             //返回正方形
-            return CGSizeMake((MGScreenWidth - 12) / 2,(MGScreenWidth - 12) / 2)
+            return CGSize(width: (MGScreenWidth - 12) / 2,height: (MGScreenWidth - 12) / 2)
         case 1:
-            return CGSizeMake((MGScreenWidth - 12) / 2,(MGScreenWidth - 12) / 2)
+            return CGSize(width: (MGScreenWidth - 12) / 2,height: (MGScreenWidth - 12) / 2)
         default:
-            return CGSizeMake(0, 0)
+            return CGSize(width: 0, height: 0)
         }
     }
 }
 
 
 extension WOWUserHomeController:TopMenuProtocol{
-    func topMenuItemClick(index: Int) {
+    func topMenuItemClick(_ index: Int) {
         DLog("选择了第\(index)个")
     }
 }

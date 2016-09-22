@@ -21,13 +21,13 @@ public extension UIButton{
     /// - parameter handle: 点击按钮的事件
     /// - returns: void
     
-    func startTimer( timeLine: Int, title: String, mainBGColor: UIColor, mainTitleColor: UIColor, countBGColor: UIColor, countTitleColor: UIColor, handle: (() -> Void)?) {
+    func startTimer( _ timeLine: Int, title: String, mainBGColor: UIColor, mainTitleColor: UIColor, countBGColor: UIColor, countTitleColor: UIColor, handle: (() -> Void)?) {
         var time = timeLine
         // 先创建一个默认队列
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
         
         // 再创建一个用户事件 source 倒计时
-        let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+        let timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: UInt(0)), queue: queue)
         
         // 把timer设置进去
         /**
@@ -36,35 +36,35 @@ public extension UIButton{
          leeway参数比较有意思。这个参数告诉系统我们需要计时器触发的精准程度。所有的计时器都不会保证100%精准，这个参数用来告诉系统你希望系统保证精准的努力程度。如果你希望一个计时器没五秒触发一次，并且越准越好，那么你传递0为参数。另外，如果是一个周期性任务，比如检查email，那么你会希望每十分钟检查一次，但是不用那么精准。所以你可以传入60，告诉系统60秒的误差是可接受的。
          */
         
-        dispatch_source_set_timer(timer, dispatch_walltime(nil, 0), 1 * NSEC_PER_SEC, 0)
+//        timer.setTimer(start: DispatchWallTime(time: nil), interval: 1 * NSEC_PER_SEC, leeway: 0)
         
         // 内建事件
-        dispatch_source_set_event_handler(timer) {[weak self] () -> Void in
+        timer.setEventHandler {[weak self] () -> Void in
             if let strongSelf = self {
             if time == 1 {
                 
                 // 只能用这种方式取消
-                dispatch_source_cancel(timer)
+                timer.cancel()
                 // 刷新UI要回到主线程
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     
                     
                     strongSelf.backgroundColor = mainBGColor
-                    strongSelf.setTitleColor(mainTitleColor, forState: .Normal)
-                    strongSelf.setTitle(title, forState: .Normal)
-                    strongSelf.userInteractionEnabled = true // 这里不要用enable
+                    strongSelf.setTitleColor(mainTitleColor, for: UIControlState())
+                    strongSelf.setTitle(title, for: UIControlState())
+                    strongSelf.isUserInteractionEnabled = true // 这里不要用enable
                     
                 })
                 
             } else {
                 let content = "重新获取" + "（\((time - 1) % 60)s）"
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     
                     strongSelf.backgroundColor = countBGColor
-                    strongSelf.setTitleColor(countTitleColor, forState: .Normal)
-                    strongSelf.setTitle(content, forState: .Normal)
+                    strongSelf.setTitleColor(countTitleColor, for: UIControlState())
+                    strongSelf.setTitle(content, for: UIControlState())
 //                    self.titleLabel?.text = content
-                    strongSelf.userInteractionEnabled = false // 这里不要用enable
+                    strongSelf.isUserInteractionEnabled = false // 这里不要用enable
                     
                 })
                 
@@ -80,7 +80,7 @@ public extension UIButton{
         }
         
         // 启动
-        dispatch_resume(timer)
+        timer.resume()
         
         if handle != nil {
             handle!()

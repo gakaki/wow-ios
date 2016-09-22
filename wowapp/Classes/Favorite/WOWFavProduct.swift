@@ -27,20 +27,20 @@ class WOWFavProduct: WOWBaseViewController {
             request()
         }
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
    
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationShadowImageView?.hidden = true
+        self.navigationShadowImageView?.isHidden = true
 
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationShadowImageView?.hidden = false
+        self.navigationShadowImageView?.isHidden = false
 
 //        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWRefreshFavoritNotificationKey, object: nil)
     }
@@ -64,10 +64,10 @@ class WOWFavProduct: WOWBaseViewController {
         l.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         return l
     }()
-    private func configCollectionView(){
+    fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
-        collectionView.registerNib(UINib.nibName(String(WOWFavoritrSingleCell)), forCellWithReuseIdentifier:String(WOWFavoritrSingleCell))
+        collectionView.register(UINib.nibName(String(WOWFavoritrSingleCell)), forCellWithReuseIdentifier:String(WOWFavoritrSingleCell))
         WOWBorderColor(collectionView)
         
     }
@@ -75,14 +75,14 @@ class WOWFavProduct: WOWBaseViewController {
     
     //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
     
-    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
-        let view = NSBundle.mainBundle().loadNibNamed(String(FavoriteEmpty), owner: self, options: nil).last as! FavoriteEmpty
+    func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
+        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty), owner: self, options: nil)?.last as! FavoriteEmpty
         
 //        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
         return view
     }
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
     
@@ -90,10 +90,10 @@ class WOWFavProduct: WOWBaseViewController {
     func goStore() -> Void {
         DLog("去逛逛")
     }
-    private func addObserver(){
+    fileprivate func addObserver(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWLoginSuccessNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(request), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(request), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
         
     }
  
@@ -101,7 +101,7 @@ class WOWFavProduct: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProduct, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProduct, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
                 let productList = Mapper<WOWFavoriteProductModel>().mapArray(JSON(result)["favoriteProductVoList"].arrayObject)
@@ -126,20 +126,20 @@ class WOWFavProduct: WOWBaseViewController {
 extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  dataArr.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoritrSingleCell), forIndexPath: indexPath) as! WOWFavoritrSingleCell
-        let model = dataArr[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoritrSingleCell), for: indexPath) as! WOWFavoritrSingleCell
+        let model = dataArr[(indexPath as NSIndexPath).row]
 //        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.imageView.set_webimage_url(model.productImg)
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let product = dataArr[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let product = dataArr[(indexPath as NSIndexPath).row]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = product.productId
@@ -150,8 +150,8 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
 }
 //MARK: Delegate
 extension WOWFavProduct:CollectionViewWaterfallLayoutDelegate{
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWFavoritrSingleCell.itemWidth,WOWFavoritrSingleCell.itemWidth)
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width: WOWFavoritrSingleCell.itemWidth,height: WOWFavoritrSingleCell.itemWidth)
     }
 }
 

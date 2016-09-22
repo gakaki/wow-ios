@@ -19,7 +19,7 @@ class WOWUserController: WOWBaseTableViewController {
     @IBOutlet weak var noReceiveView: UIView!
     @IBOutlet weak var noCommentView: UIView!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
 //         configUserInfo()
     }
     
@@ -33,7 +33,7 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
 //MARK:Private Method
@@ -47,7 +47,7 @@ class WOWUserController: WOWBaseTableViewController {
 
      
     
-    private func configClickAction(){
+    fileprivate func configClickAction(){
         allOrderView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
                 strongSelf.goOrder(0)
@@ -75,7 +75,7 @@ class WOWUserController: WOWBaseTableViewController {
         }
     }
     
-    func goOrder(type:Int) {
+    func goOrder(_ type:Int) {
         guard WOWUserManager.loginStatus else{
             toLoginVC(true)
             return
@@ -89,10 +89,10 @@ class WOWUserController: WOWBaseTableViewController {
     /**
      刷新headerView上面的用户信息
      */
-    private func configHeaderView(){
+    fileprivate func configHeaderView(){
         headerView       = WOWUserTopView()
         configBuyBarItem(WOWUserManager.userCarCount)
-        headerView.frame = CGRectMake(0, 0, MGScreenWidth, 75)
+        headerView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 75)
         headerView.configShow(WOWUserManager.loginStatus)
         headerView.topContainerView.addAction {[weak self] in
             if let strongSelf = self{
@@ -108,8 +108,8 @@ class WOWUserController: WOWBaseTableViewController {
         self.tableView.tableHeaderView = headerView
     }
     
-    private func goUserInfo(){
-        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWUserInfoController)) as! WOWUserInfoController
+    fileprivate func goUserInfo(){
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserInfoController())) as! WOWUserInfoController
         vc.editInfoAction = { [weak self] in
             if let strongSelf = self{
                 strongSelf.configUserInfo()
@@ -118,7 +118,7 @@ class WOWUserController: WOWBaseTableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func configUserInfo(){
+    fileprivate func configUserInfo(){
         if WOWUserManager.loginStatus {
             
             if ( self.image_next_view != nil){
@@ -127,15 +127,15 @@ class WOWUserController: WOWBaseTableViewController {
                 /**
                  *  先判断 本地是否有保存头像数据
                  */
-                if   WOWUserManager.userPhotoData.length == 0 {
+                if   WOWUserManager.userPhotoData.count == 0 {
                     headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_product")
 //                    headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
                     
 
                 }else{
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         // 取头像数据
-                        let myImage = NSKeyedUnarchiver.unarchiveObjectWithData(WOWUserManager.userPhotoData) as! UIImage
+                        let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as! UIImage
                         
                         self.headerView.headImageView.image = myImage
                     }
@@ -152,22 +152,22 @@ class WOWUserController: WOWBaseTableViewController {
     
     
     
-    private func addObserver(){
+    fileprivate func addObserver(){
         /**
          添加通知
          */
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(changeHeaderImage), name:WOWUpdateUserHeaderImageNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
-         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWChangeUserInfoNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(changeHeaderImage), name:NSNotification.Name(rawValue: WOWUpdateUserHeaderImageNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+         NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWChangeUserInfoNotificationKey), object:nil)
     }
     
 //MARK:Actions
 
-    func changeHeaderImage(notification: NSNotification){
+    func changeHeaderImage(_ notification: Notification){
         
-        let userInfo = notification.userInfo
+        let userInfo = (notification as NSNotification).userInfo
         if  let image  = userInfo!["image"] as? UIImage {
             self.headerView.headImageView.image = image
             self.image_next_view = image
@@ -190,9 +190,9 @@ class WOWUserController: WOWBaseTableViewController {
 //MARK:Delegate
 extension WOWUserController:SKStoreProductViewControllerDelegate{
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        switch (indexPath.section,indexPath.row) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (1,1): //打电话
             WOWTool.callPhone()
             return
@@ -200,7 +200,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             evaluateApp()
             return
         case (2,_)://设置
-            let vc = UIStoryboard.initialViewController("User", identifier:String(WOWSettingController)) as! WOWSettingController
+            let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWSettingController())) as! WOWSettingController
             navigationController?.pushViewController(vc, animated: true)
             return
         default:
@@ -210,7 +210,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             toLoginVC(true)
             return
         }
-        switch (indexPath.section,indexPath.row){
+        switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row){
         case let (1,row):
             switch row {
             case 0://优惠券
@@ -235,26 +235,26 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 15
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
     
-    private func goLeavaTips(){
-        let vc = UIStoryboard.initialViewController("User", identifier: String(WOWLeaveTipsController))
+    fileprivate func goLeavaTips(){
+        let vc = UIStoryboard.initialViewController("User", identifier: String(describing: WOWLeaveTipsController()))
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func evaluateApp(){
-        let url = NSURL(string:"https://itunes.apple.com/cn/app/jian-jiao-she-ji/id1110300308?mt=8")
-        UIApplication.sharedApplication().openURL(url!)
+    fileprivate func evaluateApp(){
+        let url = URL(string:"https://itunes.apple.com/cn/app/jian-jiao-she-ji/id1110300308?mt=8")
+        UIApplication.shared.openURL(url!)
     }
     
-    func productViewControllerDidFinish(viewController: SKStoreProductViewController) {
-        viewController.dismissViewControllerAnimated(true, completion: nil)
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
     
 }

@@ -26,13 +26,13 @@ class WOWCouponCell: UITableViewCell {
         
     }
 
-    func draw_dashed_line( color:UIColor ){
+    func draw_dashed_line( _ color:UIColor ){
         
         //画虚线
         let dotteShapLayer = CAShapeLayer()
-        let mdotteShapePath = CGPathCreateMutable()
-        dotteShapLayer.fillColor = UIColor.clearColor().CGColor
-        dotteShapLayer.strokeColor = color.CGColor
+        let mdotteShapePath = CGMutablePath()
+        dotteShapLayer.fillColor = UIColor.clear.cgColor
+        dotteShapLayer.strokeColor = color.cgColor
         dotteShapLayer.lineWidth = 1
         CGPathMoveToPoint(mdotteShapePath, nil, 55, 0)
         CGPathAddLineToPoint(mdotteShapePath, nil, 55, 90)
@@ -46,14 +46,14 @@ class WOWCouponCell: UITableViewCell {
     
     let color_status_disable = MGRgb(204, g: 204, b: 204)
     
-    func showData(status: Bool) {
+    func showData(_ status: Bool) {
         if status {
-            label_amount.textColor             = UIColor.blackColor()
-            label_title.textColor              = UIColor.blackColor()
+            label_amount.textColor             = UIColor.black
+            label_title.textColor              = UIColor.black
             label_is_used.textColor            = MGRgb(210, g: 181, b: 148)
             label_time_limit.textColor         = MGRgb(128, g: 128, b: 128)
             
-            label_unit.textColor               = UIColor.blackColor()
+            label_unit.textColor               = UIColor.black
             label_identifier.backgroundColor   = MGRgb(210, g: 181, b: 148)
             
             draw_dashed_line(MGRgb(210, g: 181, b: 148))
@@ -70,7 +70,7 @@ class WOWCouponCell: UITableViewCell {
             
         }
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     

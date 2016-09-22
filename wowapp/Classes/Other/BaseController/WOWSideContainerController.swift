@@ -27,19 +27,19 @@ class WOWSideContainerController: UIViewController {
         configContent()
     }
     
-    private func configContent(){
+    fileprivate func configContent(){
         self.view.addSubview(mainViewContainer)
         self.view.addSubview(sideViewContainer)
-        sideViewContainer.frame = CGRectMake(-self.view.bounds.size.width, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height)
-        sideViewContainer.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+        sideViewContainer.frame = CGRect(x: -self.view.bounds.size.width, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        sideViewContainer.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         self.addChildViewController(sideController)
         sideController.view.frame = self.view.bounds
-        sideController.view.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+        sideController.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         sideViewContainer.addSubview(sideController.view)
-        sideViewContainer.hidden = true
+        sideViewContainer.isHidden = true
         
         mainViewContainer.frame = self.view.bounds
-        mainViewContainer.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+        mainViewContainer.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         self.addChildViewController(mainController)
         self.mainController.view.frame = self.view.bounds
         mainViewContainer.addSubview(mainController.view)
@@ -47,10 +47,10 @@ class WOWSideContainerController: UIViewController {
     
     func showSide(){
         showing = true
-        sideViewContainer.hidden = false
-        UIView.animateWithDuration(showDuration, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.8, options: .CurveEaseOut, animations: { () -> Void in
+        sideViewContainer.isHidden = false
+        UIView.animate(withDuration: showDuration, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: { () -> Void in
             var mainTranslateForm = self.mainViewContainer.layer.transform
-            mainTranslateForm = CATransform3DTranslate(mainTranslateForm,UIScreen.mainScreen().bounds.size.width-80, 0, 0)
+            mainTranslateForm = CATransform3DTranslate(mainTranslateForm,UIScreen.main.bounds.size.width-80, 0, 0)
             self.mainViewContainer.layer.transform = mainTranslateForm
             
             var sideTranslateForm = self.sideViewContainer.layer.transform //值类型
@@ -61,11 +61,11 @@ class WOWSideContainerController: UIViewController {
     
     func hideSide(){
         showing = false
-        UIView.animateWithDuration(showDuration, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.8, options: .CurveEaseOut, animations: { () -> Void in
+        UIView.animate(withDuration: showDuration, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: { () -> Void in
             self.mainViewContainer.layer.transform = CATransform3DIdentity
             self.sideViewContainer.layer.transform = CATransform3DIdentity
         }) { (bool) -> Void in
-            self.sideViewContainer.hidden = true
+            self.sideViewContainer.isHidden = true
         }
     }
     

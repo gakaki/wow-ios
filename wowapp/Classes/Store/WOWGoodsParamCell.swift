@@ -17,11 +17,11 @@ class WOWGoodsParamCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func showData(model:WOWAttributeModel?) {
+    func showData(_ model:WOWAttributeModel?) {
         leftImageView.image = UIImage(named:model?.attriImage ?? " ")
         paramLabel.text     = model?.title
         valueLabel.text     = model?.value

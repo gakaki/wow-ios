@@ -10,20 +10,20 @@ import Foundation
 
 
 struct WOWUserManager {
-    private static let WOWUserID            = "WOWUserID"
-    private static let WOWUserHeadImage     = "WOWUserHeadImage"
-    private static let WOWUserName          = "WOWUserName"
-    private static let WOWUserSex           = "WOWUserSex"
-    private static let WOWUserDes           = "WOWUserDes"
-    private static let WOWUserEmail         = "WOWUserEmail"
-    private static let WOWUserMobile        = "WOWUserMobile"
-    private static let WOWUserCarCount      = "WOWUserCarCount"
-    private static let WOWSessionToken      = "WOWSessionToken"
-    private static let WOWUserIndustry      = "WOWUserIndustry"
-    private static let WOWUserConstellation = "WOWUserConstellation"
-    private static let WOWUserAgeRange      = "WOWUserAgeRange"
-    private static let WOWUserLoginStatus   = "WOWUserLoginStatus"
-    private static let WOWUserPhotoData     = "WOWUserPhotoData"
+    fileprivate static let WOWUserID            = "WOWUserID"
+    fileprivate static let WOWUserHeadImage     = "WOWUserHeadImage"
+    fileprivate static let WOWUserName          = "WOWUserName"
+    fileprivate static let WOWUserSex           = "WOWUserSex"
+    fileprivate static let WOWUserDes           = "WOWUserDes"
+    fileprivate static let WOWUserEmail         = "WOWUserEmail"
+    fileprivate static let WOWUserMobile        = "WOWUserMobile"
+    fileprivate static let WOWUserCarCount      = "WOWUserCarCount"
+    fileprivate static let WOWSessionToken      = "WOWSessionToken"
+    fileprivate static let WOWUserIndustry      = "WOWUserIndustry"
+    fileprivate static let WOWUserConstellation = "WOWUserConstellation"
+    fileprivate static let WOWUserAgeRange      = "WOWUserAgeRange"
+    fileprivate static let WOWUserLoginStatus   = "WOWUserLoginStatus"
+    fileprivate static let WOWUserPhotoData     = "WOWUserPhotoData"
 
 
     static var wechatToken = ""
@@ -104,13 +104,13 @@ struct WOWUserManager {
             MGDefault.synchronize()
         }
     }
-    static var userPhotoData:NSData{
+    static var userPhotoData:Data{
         get{
             
             if  let aaa = MGDefault.objectForKey(WOWUserPhotoData)  {
                  return aaa as! NSData
             }else{
-                return NSData()
+                return Data()
             }
             
 //            return (MGDefault.objectForKey(WOWUserPhotoData) as? NSData)!
@@ -192,7 +192,7 @@ struct WOWUserManager {
     
    
     
-    static func saveUserInfo(model:WOWUserModel?){
+    static func saveUserInfo(_ model:WOWUserModel?){
 //        MGDefault.setObject(true, forKey: WOWUserLoginStatus)
         MGDefault.setObject(model?.user_nick, forKey:WOWUserName)
         MGDefault.setObject(model?.user_sex, forKey:WOWUserSex)

@@ -7,25 +7,45 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 //MARK:*****************************背景视图******************************************
 enum carEntrance{
     
-    case AddEntrance    //添加购物车
-    case PayEntrance    //立即支付
+    case addEntrance    //添加购物车
+    case payEntrance    //立即支付
 }
 class WOWBuyBackView: UIView {
 //MARK:Lazy
     lazy var buyView:WOWGoodsBuyView = {
-        let v = NSBundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView
-        v.closeButton.addTarget(self, action: #selector(closeButtonClick), forControlEvents:.TouchUpInside)
-        v.userInteractionEnabled = true
+        let v = Bundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView
+        v.closeButton.addTarget(self, action: #selector(closeButtonClick), for:.touchUpInside)
+        v.isUserInteractionEnabled = true
         return v
     }()
     
     lazy var backClear:UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.clearColor()
+        v.backgroundColor = UIColor.clear
         return v
     }()
     
@@ -39,14 +59,14 @@ class WOWBuyBackView: UIView {
     }
     
     lazy var dismissButton:UIButton = {
-        let b = UIButton(type: .System)
-        b.backgroundColor = UIColor.clearColor()
+        let b = UIButton(type: .system)
+        b.backgroundColor = UIColor.clear
 //        b.addTarget(self, action: #selector(hideBuyView), forControlEvents:.TouchUpInside)
         return b
     }()
 //MARK:Private Method
-    private func setUP(){
-        self.frame = CGRectMake(0, 0, self.w, self.h)
+    fileprivate func setUP(){
+        self.frame = CGRect(x: 0, y: 0, width: self.w, height: self.h)
         backgroundColor = MaskColor
         self.alpha = 0
     }
@@ -54,17 +74,17 @@ class WOWBuyBackView: UIView {
     
 
 //MARK:Actions
-    func show(entrance: carEntrance) {
-        backClear.frame = CGRectMake(0,self.h,self.w,self.h)
+    func show(_ entrance: carEntrance) {
+        backClear.frame = CGRect(x: 0,y: self.h,width: self.w,height: self.h)
         addSubview(backClear)
         backClear.addSubview(buyView)
         switch entrance {
-        case .AddEntrance:
+        case .addEntrance:
         
-            buyView.entrance = .AddEntrance
-        case .PayEntrance:
+            buyView.entrance = .addEntrance
+        case .payEntrance:
            
-            buyView.entrance = .PayEntrance
+            buyView.entrance = .payEntrance
         }
         buyView.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{
@@ -80,10 +100,10 @@ class WOWBuyBackView: UIView {
             }
         }
         
-        UIView.animateWithDuration(0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1
             self.backClear.y = 0
-        }
+        }) 
     }
     
     func closeButtonClick()  {
@@ -91,12 +111,12 @@ class WOWBuyBackView: UIView {
     }
     
     func hideBuyView(){
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.backClear.y = self.h + 10
             self.alpha = 0
-        }) { (ret) in
+        }, completion: { (ret) in
             self.removeFromSuperview()
-        }
+        }) 
     }
     
     
@@ -106,9 +126,9 @@ class WOWBuyBackView: UIView {
 //MARK **********************************内容视图***********************************
 protocol goodsBuyViewDelegate:class {
     //确定购买
-    func sureBuyClick(product: WOWProductInfoModel?)
+    func sureBuyClick(_ product: WOWProductInfoModel?)
     //确定加车
-    func sureAddCarClick(product: WOWProductInfoModel?)
+    func sureAddCarClick(_ product: WOWProductInfoModel?)
   
 }
 
@@ -132,12 +152,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
  
     @IBOutlet weak var sureButton: UIButton!            //确定按钮
   
-    private var _layer: CALayer!
-    private var path: UIBezierPath!
+    fileprivate var _layer: CALayer!
+    fileprivate var path: UIBezierPath!
 
     
     let identifier = "WOWTagCollectionViewCell"
-    var entrance : carEntrance = carEntrance.AddEntrance
+    var entrance : carEntrance = carEntrance.addEntrance
     weak var delegate: goodsBuyViewDelegate?
     //通过颜色选规格的数组
     var colorSpecArr : [WOWColorSpecModel]!
@@ -158,7 +178,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     //所选产品的信息
     var productInfo : WOWProductInfoModel?
     
-    private var skuCount:Int = 1
+    fileprivate var skuCount:Int = 1
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -191,21 +211,21 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 //MARK:Private Method
     func defaultSetup1() {
         //颜色视图
-        let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
-        collectionView?.registerNib(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
+        let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:Bundle.main)
+        collectionView?.register(nib, forCellWithReuseIdentifier: identifier)
+        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
         collectionView?.collectionViewLayout = tagCellLayout
-        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
+        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context:nil)
     }
     
     func defaultSetup2() {
         //规格视图
-        let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:NSBundle.mainBundle())
-        secondCollectionView?.registerNib(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
+        let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:Bundle.main)
+        secondCollectionView?.register(nib, forCellWithReuseIdentifier: identifier)
+        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
         
         secondCollectionView?.collectionViewLayout = tagCellLayout
-        secondCollectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
+        secondCollectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context:nil)
     }
     
     func configDefaultData() {
@@ -273,9 +293,9 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-            let height = self.collectionView.collectionViewLayout.collectionViewContentSize().height
+            let height = self.collectionView.collectionViewLayout.collectionViewContentSize.height
             var endHeight:CGFloat = 200
             if UIDevice.deviceType.rawValue < 2{
                 endHeight = 130
@@ -288,7 +308,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }
             DLog("颜色的collectionView的高度\(height)")
 
-            let height2 = self.secondCollectionView.collectionViewLayout.collectionViewContentSize().height
+            let height2 = self.secondCollectionView.collectionViewLayout.collectionViewContentSize.height
             var endHeight2:CGFloat = 200
             if UIDevice.deviceType.rawValue < 2{
                 endHeight2 = 130
@@ -305,7 +325,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 
     
 //MARK:Actions    
-    @IBAction func countButtonClick(sender: UIButton) {
+    @IBAction func countButtonClick(_ sender: UIButton) {
         /**
          *  更改商品数量，商品数量为1时不能再减少
          *  加商品时要判断商品的库存数量和已加商品数，如果库存数大于购买数可以继续增加
@@ -336,16 +356,16 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
      2. 从立即支付进来，点击确定直接进入到确认订单页
      
      */
-    @IBAction func sureButtonClick(sender: UIButton) {
+    @IBAction func sureButtonClick(_ sender: UIButton) {
         
         if !validateMethods(){
             return
         }
         self.productInfo?.productQty = skuCount
         switch entrance {
-        case .AddEntrance:
+        case .addEntrance:
             startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.8 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.8 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                 
                 if let del = self.delegate {
                     self.productInfo?.productQty = self.skuCount
@@ -355,7 +375,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 }
             })
 
-        case .PayEntrance:
+        case .payEntrance:
        
              if let del = delegate {
                 del.sureBuyClick(productInfo)
@@ -372,13 +392,13 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
      加入购物车
      
      */
-    @IBAction func addCarButtonClick(sender: UIButton) {
+    @IBAction func addCarButtonClick(_ sender: UIButton) {
         if !validateMethods(){
             return
         }
 
         startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.8 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.8 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
             
             if let del = self.delegate {
                 self.productInfo?.productQty = self.skuCount
@@ -393,7 +413,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
      立即支付
     
      */
-    @IBAction func payButtonClick(sender: UIButton) {
+    @IBAction func payButtonClick(_ sender: UIButton) {
         if !validateMethods(){
             return
         }
@@ -409,34 +429,34 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
      
      - parameter count: 传入数量
      */
-    private func showResult(count:Int){
+    fileprivate func showResult(_ count:Int){
         if count <= 1 {
-            subButton.enabled = false
+            subButton.isEnabled = false
             subButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
         }else {
-            subButton.enabled = true
-            subButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            subButton.isEnabled = true
+            subButton.setTitleColor(UIColor.black, for: UIControlState())
         }
         self.countTextField.text = "\(count)"
     }
     
     //MARK: - validate Methods
-    private func validateMethods() -> Bool{
-        colorWarnImg.hidden = true
-        specWarnImg.hidden = true
+    fileprivate func validateMethods() -> Bool{
+        colorWarnImg.isHidden = true
+        specWarnImg.isHidden = true
         if colorIndex < 0 && specIndex < 0 {
-            colorWarnImg.hidden = false
-            specWarnImg.hidden = false
+            colorWarnImg.isHidden = false
+            specWarnImg.isHidden = false
             WOWHud.showMsg("请选择产品颜色与规格")
             return false
         }
         guard colorIndex >= 0 else {
-            colorWarnImg.hidden = false
+            colorWarnImg.isHidden = false
             WOWHud.showMsg("请选择产品颜色")
             return false
         }
         guard specIndex >= 0 else {
-            specWarnImg.hidden = false
+            specWarnImg.isHidden = false
             WOWHud.showMsg("请选择产品规格")
             return false
         }
@@ -451,11 +471,11 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 
     
 //MARK: - TagCellLayout Delegate Methods
-    func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat {
+    func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
         return CGFloat(45.0)
     }
     
-    func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
+    func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
         if layout == collectionView?.collectionViewLayout {
             
                 let item = colorArr[index]
@@ -477,7 +497,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
     
 //MARK: - UICollectionView Delegate/Datasource Methods
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         /**
          *  颜色规格显示
@@ -485,11 +505,11 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         if collectionView.tag == 100 {
             
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
-                let item = colorArr[indexPath.row]
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTagCollectionViewCell
+                let item = colorArr[(indexPath as NSIndexPath).row]
                 cell.textLabel.text = item.colorDisplayName
                       //当选中某个cell时更改某个cell的颜色
-            if indexPath.row == colorIndex {
+            if (indexPath as NSIndexPath).row == colorIndex {
                 updateCellStatus(cell, selected: true)
             }else {
                 updateCellStatus(cell, selected: false)
@@ -497,12 +517,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             //当选择产品规格的时候才会进到这个数组,通过判断所对应颜色的bool值来判断是否可选中
             if specIndex >= 0 {
-                let str = colorArr[indexPath.row]
+                let str = colorArr[(indexPath as NSIndexPath).row]
                 //不可选中状态
                 if !str.isSelect {
                     cell.textLabel.textColor = MGRgb(204, g: 204, b: 204)
                     cell.textLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
-                    cell.userInteractionEnabled = false
+                    cell.isUserInteractionEnabled = false
                 }
             }
             
@@ -510,12 +530,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             return cell
         }else {
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTagCollectionViewCell
-                let item = specArr[indexPath.row]
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTagCollectionViewCell
+                let item = specArr[(indexPath as NSIndexPath).row]
                 cell.textLabel.text = item.specName
             
                       //当选中某个cell时更改某个cell的颜色
-            if indexPath.row == specIndex {
+            if (indexPath as NSIndexPath).row == specIndex {
                 updateCellStatus(cell, selected: true)
             }else {
                 updateCellStatus(cell, selected: false)
@@ -523,12 +543,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             //当选择产品颜色的时候才会进到这个数组,通过判断所对应规格的bool值来判断是否可选中
             if colorIndex >= 0 {
-                let str = specArr[indexPath.row]
+                let str = specArr[(indexPath as NSIndexPath).row]
                 //不可选中状态
                 if !str.isSelect {
                     cell.textLabel.textColor = MGRgb(204, g: 204, b: 204)
                     cell.textLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
-                    cell.userInteractionEnabled = false
+                    cell.isUserInteractionEnabled = false
                 }
                 
             }
@@ -539,11 +559,11 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 100 {
             return colorArr.count
 
@@ -552,13 +572,13 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         }
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         /**
          *  选中颜色规格视图
          */
         if collectionView.tag == 100 {
             
-            if colorIndex == indexPath.row {
+            if colorIndex == (indexPath as NSIndexPath).row {
                 //取消选中时恢复有库存状态
                 productStock(true)
                 colorIndex = -1
@@ -578,12 +598,12 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 return
             }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
-            colorIndex = indexPath.row
+            colorIndex = (indexPath as NSIndexPath).row
             
             selectColorIndex()
             
         }else {
-            if specIndex == indexPath.row {
+            if specIndex == (indexPath as NSIndexPath).row {
                 //取消选中时恢复有库存状态
                 productStock(true)
                 specIndex = -1
@@ -596,7 +616,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 return
             }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
-            specIndex = indexPath.row
+            specIndex = (indexPath as NSIndexPath).row
             selectSpecIndex()
           
         }
@@ -606,13 +626,13 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     
     //更新cell点击状态
-    func updateCellStatus(cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
+    func updateCellStatus(_ cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
         
 //        cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
 //        cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
         cell.textLabel.backgroundColor = selected ? UIColor(hexString: "#FFD444") : UIColor(hexString: "#F5F5F5")
         cell.textLabel.textColor = UIColor(hexString: "#000000")
-        cell.userInteractionEnabled = true
+        cell.isUserInteractionEnabled = true
 
     }
 
@@ -646,7 +666,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     /**
      商品有无库存
      */
-    func productStock(hasStock: Bool) {
+    func productStock(_ hasStock: Bool) {
         if hasStock {
             
             //如果所加数量大于已有库存，则显示库存最大数
@@ -677,10 +697,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     //按钮是否可点击
     
-    func showStock(hasStock: Bool) -> Void {
-        addButton.enabled = hasStock
-        subButton.enabled = hasStock
-        sureButton.enabled = hasStock
+    func showStock(_ hasStock: Bool) -> Void {
+        addButton.isEnabled = hasStock
+        subButton.isEnabled = hasStock
+        sureButton.isEnabled = hasStock
 
     }
 
@@ -689,7 +709,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 //MARK: - 添加购物车动画
 extension WOWGoodsBuyView {
 
-    func startAnimationWithRect(rect: CGRect, ImageView imageView:UIImageView)
+    func startAnimationWithRect(_ rect: CGRect, ImageView imageView:UIImageView)
     {
         if _layer == nil {
             
@@ -699,14 +719,14 @@ extension WOWGoodsBuyView {
             _layer.contentsGravity = kCAGravityResizeAspectFill
             _layer.frame = rect
             // 导航64
-            _layer.position = CGPointMake(imageView.center.x, CGRectGetMidY(rect));
+            _layer.position = CGPoint(x: imageView.center.x, y: rect.midY);
             self.layer.addSublayer(_layer)
             
             self.path = UIBezierPath()
-            self.path.moveToPoint(_layer.position)
+            self.path.move(to: _layer.position)
             
             //动画移动的位置
-            self.path.addQuadCurveToPoint(CGPointMake(MGScreenWidth - 22, -MGScreenHeight + self.size.height + 42), controlPoint: CGPointMake(50, -MGScreenHeight/4))
+            self.path.addQuadCurveToPoint(CGPoint(x: MGScreenWidth - 22, y: -MGScreenHeight + self.size.height + 42), controlPoint: CGPoint(x: 50, y: -MGScreenHeight/4))
             
             
         }
@@ -715,11 +735,11 @@ extension WOWGoodsBuyView {
     
     func groupAnimation()
     {
-        self.userInteractionEnabled = false
+        self.isUserInteractionEnabled = false
     
         let animation = CAKeyframeAnimation(keyPath: "position")
         
-        animation.path = self.path.CGPath
+        animation.path = self.path.cgPath
         
         //旋转动画
 //        let expandAnimation1 = CABasicAnimation(keyPath: "transform.rotation.z")
@@ -734,8 +754,8 @@ extension WOWGoodsBuyView {
         let expandAnimation = CABasicAnimation(keyPath: "transform.scale")
         
         expandAnimation.duration = 0.4
-        expandAnimation.fromValue = NSNumber(float: 1)
-        expandAnimation.toValue = NSNumber(float: 0.7)
+        expandAnimation.fromValue = NSNumber(value: 1 as Float)
+        expandAnimation.toValue = NSNumber(value: 0.7 as Float)
         
         expandAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         
@@ -744,9 +764,9 @@ extension WOWGoodsBuyView {
         let narrowAnimation = CABasicAnimation(keyPath: "transform.scale")
         
         narrowAnimation.beginTime = 0.4
-        narrowAnimation.fromValue = NSNumber(float: 0.7)
+        narrowAnimation.fromValue = NSNumber(value: 0.7 as Float)
         narrowAnimation.duration = 0.4
-        narrowAnimation.toValue = NSNumber(float: 0.3)
+        narrowAnimation.toValue = NSNumber(value: 0.3 as Float)
         
         narrowAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         
@@ -754,17 +774,17 @@ extension WOWGoodsBuyView {
         
         groups.animations = [animation,expandAnimation,narrowAnimation]
         groups.duration = 0.8
-        groups.removedOnCompletion=false
+        groups.isRemovedOnCompletion=false
         groups.fillMode=kCAFillModeForwards
         groups.delegate = self
-        self._layer.addAnimation(groups, forKey: "group")
+        self._layer.add(groups, forKey: "group")
         
     }
-    override func animationDidStop(anim: CAAnimation, finished flag:Bool)
+    override func animationDidStop(_ anim: CAAnimation, finished flag:Bool)
     {
         
-        if anim == self._layer.animationForKey("group"){
-            self.userInteractionEnabled = true
+        if anim == self._layer.animation(forKey: "group"){
+            self.isUserInteractionEnabled = true
             self._layer.removeFromSuperlayer()
             
             self._layer = nil

@@ -70,7 +70,7 @@ final class WOWCategoryModel : WOWBaseModel{
 }
 
 extension WOWCategoryModel:Mappable{
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         categoryName    <-    map["categoryName"]
         categoryCount   <-    map["sum"]
         categoryID      <-    (map["categoryId"],StringDecimalNumberTransform())
@@ -109,7 +109,7 @@ final class WOWFoundCategoryModel : WOWBaseModel,Mappable{
     var productImg :String?
     
  
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         categoryName            <-    map["categoryName"]
         categoryID              <-    map["id"]
         categoryIconSmall       <-    map["categoryIconSmall"]
@@ -148,7 +148,7 @@ extension WOWSubCategoryModel{
         self.init()
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         subCatName    <-    map["name"]
         subCatID      <-    map["cid"]
     }

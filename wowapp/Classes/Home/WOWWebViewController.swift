@@ -15,10 +15,10 @@ class WOWWebViewController: WOWBaseViewController {
         super.viewDidLoad()
         navigationItem.title = ""
 
-        let url = NSURL(string: bannerUrl ?? "")!
+        let url = URL(string: bannerUrl ?? "")!
         
         // 2.建立网络请求
-        let request = NSURLRequest(URL: url)
+        let request = URLRequest(url: url)
         
         // 3.加载网络请求
         webView.loadRequest(request)

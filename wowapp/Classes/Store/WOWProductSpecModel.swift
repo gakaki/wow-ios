@@ -24,7 +24,7 @@ class WOWProductSpecModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         productId                   <- map["productId"]
         productName                 <- map["productName"]
         sizeText                    <- map["sizeText"]
@@ -64,7 +64,7 @@ class WOWColorSpecModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         colorDisplayName                   <- map["colorDisplayName"]
         specMapVoList                      <- map["specMapVoList"]
         
@@ -80,7 +80,7 @@ class WOWSpecModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         specName                            <- map["specName"]
         subProductInfo                      <- map["subProductInfo"]
         
@@ -102,7 +102,7 @@ class WOWProductInfoModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         subProductId                        <- map["subProductId"]
         productColorImg                     <- map["productColorImg"]
         sizeText                            <- map["sizeText"]
@@ -123,7 +123,7 @@ class WOWSpecColorModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         specName                            <- map["specName"]
         colorMapVoList                      <- map["colorMapVoList"]
         
@@ -139,7 +139,7 @@ class WOWColorModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         colorDisplayName                    <- map["colorDisplayName"]
         subProductInfo                      <- map["subProductInfo"]
         

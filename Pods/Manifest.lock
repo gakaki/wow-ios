@@ -14,9 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Alamofire (3.4.2)
+  - Alamofire (4.0.0)
   - DZNEmptyDataSet (1.8.1)
-  - EZSwiftExtensions (1.2.3)
+  - EZSwiftExtensions (1.6)
   - FCUUID (1.3.0):
     - UICKeyChainStore (~> 2.1.0)
   - FlexboxLayout (0.1.0)
@@ -24,15 +24,28 @@ PODS:
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
   - HappyDNS (0.3.10)
-  - Hashids-Swift (0.3.0)
-  - IQKeyboardManagerSwift (4.0.5)
-  - Kingfisher (2.5.0)
+  - Hashids-Swift (0.3.1)
+  - IQKeyboardManagerSwift (4.0.6)
+  - JSPatch (1.1):
+    - JSPatch/Core (= 1.1)
+  - JSPatch/Core (1.1)
+  - JSPatch/Extensions (1.1):
+    - JSPatch/Core
+  - JSPatch/Loader (1.1):
+    - JSPatch/Core
+  - JSPatchPlatform (1.6.1):
+    - JSPatchPlatform/Core (= 1.6.1)
+  - JSPatchPlatform/Core (1.6.1)
+  - Kingfisher (3.1.0)
   - MJRefresh (3.1.12)
-  - Moya (6.1.3):
-    - Moya/Core (= 6.1.3)
-  - Moya/Core (6.1.3):
-    - Alamofire (~> 3.0)
-    - Result (~> 1.0)
+  - Moya (7.0.0):
+    - Moya/Core (= 7.0.0)
+  - Moya/Core (7.0.0):
+    - Alamofire (~> 4.0.0)
+    - Result
+  - Moya/RxSwift (7.0.0):
+    - Moya/Core
+    - RxSwift (= 3.0.0-beta.1)
   - ObjectMapper (1.4.0)
   - Pingpp/Alipay (2.2.5):
     - Pingpp/Core
@@ -41,27 +54,26 @@ PODS:
   - Pingpp/Network (2.2.5)
   - Pingpp/Wx (2.2.5):
     - Pingpp/Core
+  - Pitaya (1.0.0)
   - PonyFrameworkOnSwift (0.0.2)
   - Qiniu (7.1.0.1):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
-  - Result (1.0.2)
-  - RongCloudIMKit (2.6.0)
-  - RxCocoa (2.6.0):
-    - RxSwift (~> 2.5)
-  - RxDataSources (0.8.1):
-    - RxCocoa (~> 2.2)
-    - RxSwift (~> 2.2)
-  - RxSwift (2.6.0)
+  - Result (3.0.0)
+  - RxCocoa (3.0.0-beta.1):
+    - RxSwift (~> 3.0.0-beta.1)
+  - RxDataSources (1.0.0-beta.2):
+    - RxCocoa (~> 3.0.0-beta.1)
+    - RxSwift (~> 3.0.0-beta.1)
+  - RxSwift (3.0.0-beta.1)
   - SDAutoLayout (2.1.7)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - SnapKit (0.19.1)
-  - StyleKit (1.0.0)
+  - SnapKit (3.0.1)
   - SVProgressHUD (2.0.3)
-  - SwiftyJSON (2.3.2)
-  - SwiftyUserDefaults (2.2.1)
+  - SwiftyJSON (3.0.0)
+  - SwiftyUserDefaults (3.0.0)
   - UICKeyChainStore (2.1.0)
   - UIColor_Hex_Swift (2.1)
   - UITableView+FDTemplateLayoutCell (1.5.beta)
@@ -82,33 +94,39 @@ PODS:
     - YYImage
 
 DEPENDENCIES:
+  - Alamofire (~> 4.0)
   - DZNEmptyDataSet
-  - EZSwiftExtensions (~> 1.2.3)
+  - EZSwiftExtensions (from `https://github.com/goktugyil/EZSwiftExtensions.git`, branch `Swift3`)
   - FCUUID
   - FlexboxLayout (from `FlexBoxLayout/FlexboxLayout.podspec`)
   - FMDB
-  - Hashids-Swift
-  - IQKeyboardManagerSwift
-  - Kingfisher
+  - Hashids-Swift (from `https://github.com/malczak/hashids.git`, branch `master`)
+  - IQKeyboardManagerSwift (~> 4.0.6)
+  - JSPatch (from `https://github.com/gakaki/JSPatch.git`, branch `master`)
+  - JSPatch/Core (from `https://github.com/gakaki/JSPatch.git`, branch `master`)
+  - JSPatch/Extensions (from `https://github.com/gakaki/JSPatch.git`, branch `master`)
+  - JSPatch/Loader (from `https://github.com/gakaki/JSPatch.git`, branch `master`)
+  - JSPatchPlatform
+  - Kingfisher (~> 3.0)
   - MJRefresh
-  - Moya (~> 6.1.3)
-  - ObjectMapper
+  - Moya (from `https://github.com/Moya/Moya.git`, branch `swift-3.0`)
+  - Moya/RxSwift (from `https://github.com/Moya/Moya.git`, branch `swift-3.0`)
+  - ObjectMapper (from `https://github.com/Hearst-DD/ObjectMapper.git`, branch `swift-3`)
   - Pingpp/Alipay (from `pingpp-ios/Pingpp.podspec`)
   - Pingpp/Wx (from `pingpp-ios/Pingpp.podspec`)
+  - Pitaya (from `https://github.com/johnlui/Pitaya.git`, branch `swift3`)
   - PonyFrameworkOnSwift (from `PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec`)
   - Qiniu (from `qiniu-sdk/Qiniu.podspec`)
-  - RongCloudIMKit (= 2.6.0)
-  - RxCocoa (= 2.6.0)
-  - RxDataSources (= 0.8.1)
-  - RxSwift (= 2.6.0)
+  - RxCocoa (= 3.0.0-beta.1)
+  - RxDataSources (~> 1.0.0-beta.2)
+  - RxSwift (= 3.0.0-beta.1)
   - SDAutoLayout (~> 2.1.6)
   - SDWebImage
-  - SnapKit (~> 0.19.1)
-  - StyleKit
+  - SnapKit (~> 3.0)
   - SVProgressHUD (~> 2.0.2)
-  - SwiftyJSON
-  - SwiftyUserDefaults
-  - UIColor_Hex_Swift
+  - SwiftyJSON (~> 3.0.0)
+  - SwiftyUserDefaults (~> 3.0.0)
+  - UIColor_Hex_Swift (~> 2.1)
   - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
   - UMengAnalytics-NO-IDFA
   - VTMagic
@@ -119,10 +137,28 @@ DEPENDENCIES:
   - YYWebImage
 
 EXTERNAL SOURCES:
+  EZSwiftExtensions:
+    :branch: Swift3
+    :git: https://github.com/goktugyil/EZSwiftExtensions.git
   FlexboxLayout:
     :path: FlexBoxLayout/FlexboxLayout.podspec
+  Hashids-Swift:
+    :branch: master
+    :git: https://github.com/malczak/hashids.git
+  JSPatch:
+    :branch: master
+    :git: https://github.com/gakaki/JSPatch.git
+  Moya:
+    :branch: swift-3.0
+    :git: https://github.com/Moya/Moya.git
+  ObjectMapper:
+    :branch: swift-3
+    :git: https://github.com/Hearst-DD/ObjectMapper.git
   Pingpp:
     :path: pingpp-ios/Pingpp.podspec
+  Pitaya:
+    :branch: swift3
+    :git: https://github.com/johnlui/Pitaya.git
   PonyFrameworkOnSwift:
     :path: PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec
   Qiniu:
@@ -130,36 +166,57 @@ EXTERNAL SOURCES:
   WowBase:
     :path: WowBase/WowBase.podspec
 
+CHECKOUT OPTIONS:
+  EZSwiftExtensions:
+    :commit: 8afb1aac46b1c977ccac69c0ee6e665099b1f65b
+    :git: https://github.com/goktugyil/EZSwiftExtensions.git
+  Hashids-Swift:
+    :commit: 173c567d959ae9327b0e63a4e463cdbdab916b7b
+    :git: https://github.com/malczak/hashids.git
+  JSPatch:
+    :commit: 4af3b496266abfc64c17f941d3c09053cb1711c9
+    :git: https://github.com/gakaki/JSPatch.git
+  Moya:
+    :commit: 7c41718d1fe2a1e8616264c3361154d9df566e97
+    :git: https://github.com/Moya/Moya.git
+  ObjectMapper:
+    :commit: 6ba230a37a4261bfad66ac573cc40b9d6c5c89f1
+    :git: https://github.com/Hearst-DD/ObjectMapper.git
+  Pitaya:
+    :commit: 270ff70e89af8f19b584422afc652b6872704bd4
+    :git: https://github.com/johnlui/Pitaya.git
+
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  EZSwiftExtensions: 3a16a8e8e8394bc18a70e114e7fa44f8264138b5
+  EZSwiftExtensions: 6c5e29ae473b3d2edbf5472eab0a3d7bdb20215c
   FCUUID: f0cd5df92e4689b7d9d7264e2b32c588dc54c1f3
   FlexboxLayout: e55b026f1bfc572015cafcb8cf032b8749248d55
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
-  Hashids-Swift: 5d7c069b0d4a3b70d4e2a840c420115dd517050d
-  IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
-  Kingfisher: d467bd710907ec9aa94aaddecaa5390aa3559819
+  Hashids-Swift: b327671abc1ac721e6cc9691ffd668525224b64a
+  IQKeyboardManagerSwift: b3015e819559ca76381f87a0833f44d178564603
+  JSPatch: ade285ad1d8f06146ed6054a39cef87509453299
+  JSPatchPlatform: 35ec095f8776340cca1d57ce35661e7f79211ad2
+  Kingfisher: 7779f22e977393e9533a89a9685beb8f679d3767
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  Moya: 26b290a8d675c167ea6229ba08e07dce562265a5
+  Moya: 24236189772d63640d9d2f7c819157f3bc947420
   ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
   Pingpp: 98db8836e52fb8ab1da494e65a9835540039646c
+  Pitaya: 9e6a94903cbce6cdab9ad8b82e88142f4abd770d
   PonyFrameworkOnSwift: 12ff0055496c68cffa297c168c282b869dd5d1e1
   Qiniu: 0e92ff0d1b9afbc55275306671284e4ebeb08d03
-  Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
-  RongCloudIMKit: bbfcb34596b25666fb1be470644162142368bcdb
-  RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
-  RxDataSources: 4a87345847d66ef84ecc10bdfa189190f3cd6b12
-  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
+  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
+  RxCocoa: 8cecf331302b8ae5381bbab1bccba4ede2eae6a8
+  RxDataSources: 1cd87dc97fd46be002942eb1dcb1b432535141dd
+  RxSwift: 0823e8d7969c23bfa9ddfb2afa4881e424a1a710
   SDAutoLayout: e9b36d04b8c0b504762a04d76fbbe5108944297a
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
-  StyleKit: 7dac3ff9ffec40fec57f9a8582c4ff5a95ca17e8
+  SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  SwiftyUserDefaults: 7abdba50a50ea0c18ee8903af3c88e4c1cb8448d
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
+  SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UIColor_Hex_Swift: e91dc51f6bf252ec7bf74c8704ceedeeb7640c1c
   UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
@@ -171,6 +228,6 @@ SPEC CHECKSUMS:
   YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: b8e57711361b5155f8c1d3ec7fcd4e0243cbce5f
+PODFILE CHECKSUM: b5fdb99c6a736baa7085945d5e5a6061e8fc38b8
 
-COCOAPODS: 1.1.0.beta.1
+COCOAPODS: 1.1.0.beta.2

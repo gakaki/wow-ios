@@ -20,7 +20,7 @@ class WOWBrandStyleModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         id                      <- map["id"]
         brandCname              <- map["brandCname"]
         brandEname              <- map["brandEname"]

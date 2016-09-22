@@ -36,7 +36,7 @@ class MODULE_TYPE_SINGLE_BANNER_CELL_201:UITableViewCell,ModuleViewElement{
             make.center.equalTo(self)
         }
 //        
-        bigImageView.userInteractionEnabled = true
+        bigImageView.isUserInteractionEnabled = true
         let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(singleTapAction))
         bigImageView.addGestureRecognizer(singleTap)
     }
@@ -56,7 +56,7 @@ class MODULE_TYPE_SINGLE_BANNER_CELL_201:UITableViewCell,ModuleViewElement{
         super.awakeFromNib()
     }
     
-    func setData(p:WowModulePageItemVO){
+    func setData(_ p:WowModulePageItemVO){
         self.product = p
         bigImageView.set_webimage_url(p.bannerImgSrc)
     }
@@ -106,13 +106,13 @@ struct ModulePageType {
         PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: MODULE_TYPE_TOPIC_PRODUCTS_CV_CELL_601.classForCoder()            //601 专题商品列表
     ]
 
-    static func getIdentifier( id:Int ) -> String {
+    static func getIdentifier( _ id:Int ) -> String {
         if let d = d[id] {
             return NSStringFromClass(d)
         }
         return ""
     }
-    static func getPageView( pageType:Int ) -> ModuleViewElement?
+    static func getPageView( _ pageType:Int ) -> ModuleViewElement?
     {
         if let p = d[pageType] {
             print( p )

@@ -9,10 +9,10 @@
 import Foundation
 
 let WOWDEBUG = true
-public func DLog (value: Any , fileName : String = #file, line : Int32 = #line ){
+public func DLog (_ value: Any , fileName : String = #file, line : Int32 = #line ){
     /// Debug Log
     if WOWDEBUG {
-        print("file：\(NSURL(string: fileName)!.lastPathComponent!)  line：\(line) \(value)\n")
+        print("file：\(URL(string: fileName)!.lastPathComponent)  line：\(line) \(value)\n")
     }
 }
 

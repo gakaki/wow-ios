@@ -32,7 +32,7 @@ class WOWSearchChildController: WOWBaseViewController{
         addObserver()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
     }
@@ -43,14 +43,14 @@ class WOWSearchChildController: WOWBaseViewController{
     override func request() {
         
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""), successClosure: { [weak self](result) in
             let json = JSON(result)
             DLog(json)
             
             if let strongSelf = self {
                 strongSelf.endRefresh()
 
-                let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 if let array = arr{
                     
                     if strongSelf.pageIndex == 1{
@@ -73,7 +73,7 @@ class WOWSearchChildController: WOWBaseViewController{
                 }
                 strongSelf.collectionView.reloadData()
                 if ( strongSelf.pageIndex == 1 ){
-                    strongSelf.collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.Top)
+                    strongSelf.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.top)
                 }
             }
             
@@ -89,16 +89,16 @@ class WOWSearchChildController: WOWBaseViewController{
             
         }
     }
-    private func addObserver(){
+    fileprivate func addObserver(){
         /**
          添加通知
          */
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
         
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
-    func refreshData(sender: NSNotification)  {
+    func refreshData(_ sender: Notification)  {
         guard (sender.object != nil) else{//
             return
         }
@@ -117,7 +117,7 @@ class WOWSearchChildController: WOWBaseViewController{
 
     override func setUI(){
         collectionView.collectionViewLayout = self.layout
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
         collectionView.mj_footer = self.mj_footer
     }
     
@@ -130,17 +130,17 @@ class WOWSearchChildController: WOWBaseViewController{
 
 
 extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewDataSource{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArr.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
-        let model = dataArr[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell), for: indexPath) as! WOWGoodsSmallCell
+        let model = dataArr[(indexPath as NSIndexPath).row]
         cell.showData(model, indexPath: indexPath)
         
         return cell
@@ -149,9 +149,9 @@ extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewData
     
     
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
-        let model = dataArr[indexPath.row]
+        let model = dataArr[(indexPath as NSIndexPath).row]
         vc.hideNavigationBar = true
         vc.productId = model.productId ?? 0
         navigationController?.pushViewController(vc, animated: true)
@@ -160,8 +160,8 @@ extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewData
 
 
 extension WOWSearchChildController:CollectionViewWaterfallLayoutDelegate{
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 75)
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width: WOWGoodsSmallCell.itemWidth,height: WOWGoodsSmallCell.itemWidth + 75)
     }
 }
 

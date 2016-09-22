@@ -21,7 +21,7 @@ class WOWBanner: UIView {
         
         
     }
-    func reloadBanner(dataArr:[WOWCarouselBanners]){
+    func reloadBanner(_ dataArr:[WOWCarouselBanners]){
         imageURLArray = []
         for i in 0..<dataArr.count {
             imageURLArray.append(dataArr[i].bannerImgSrc! as String)
@@ -30,10 +30,10 @@ class WOWBanner: UIView {
         cyclePictureView.showPageControl = false
         cyclePictureView.imageURLArray = imageURLArray
         cyclePictureView.timeInterval = 3
-        jsButton.hidden = true
-        dgButton.hidden = true
-        zdButton.hidden = true
-        sjButton.hidden = true
+        jsButton.isHidden = true
+        dgButton.isHidden = true
+        zdButton.isHidden = true
+        sjButton.isHidden = true
     }
 
 }

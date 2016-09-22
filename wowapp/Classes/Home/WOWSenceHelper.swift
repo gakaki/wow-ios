@@ -16,7 +16,7 @@ class WOWSenceHelper: NSObject {
         return 5
     }
     
-    class func rowsNumberInSection(section:Int) ->Int{
+    class func rowsNumberInSection(_ section:Int) ->Int{
         switch section {
         case 4: //评论 暂时干掉
             if let count = sceneModel?.comments_count {
@@ -30,11 +30,11 @@ class WOWSenceHelper: NSObject {
         }
     }
     
-    class func cellForRow(tableview:UITableView,indexPath:NSIndexPath) -> UITableViewCell{
+    class func cellForRow(_ tableview:UITableView,indexPath:IndexPath) -> UITableViewCell{
         var returnCell:UITableViewCell!
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
         case 0:
-            let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSenceImageCell), forIndexPath:indexPath) as! WOWSenceImageCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSenceImageCell), for:indexPath) as! WOWSenceImageCell
 //            cell.contentImageView.kf_setImageWithURL(NSURL(string:sceneModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
             
             cell.contentImageView.set_webimage_url(sceneModel?.image )
@@ -42,17 +42,17 @@ class WOWSenceHelper: NSObject {
             self.shareImage = cell.contentImageView.image
             returnCell = cell
         case 1:
-            let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWAuthorCell), forIndexPath:indexPath) as! WOWAuthorCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWAuthorCell), for:indexPath) as! WOWAuthorCell
             cell.desLabel.text = sceneModel?.desc
-            cell.contentView.bringSubviewToFront(cell.desLabel)
+            cell.contentView.bringSubview(toFront: cell.desLabel)
             returnCell = cell
         case 2:
-            let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSubArtCell),forIndexPath: indexPath) as! WOWSubArtCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSubArtCell),for: indexPath) as! WOWSubArtCell
             cell.dataArr = sceneModel?.products
             cell.delegate = WOWSenceHelper.senceController
             returnCell = cell
         case 3:
-            let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWSenceLikeCell),forIndexPath: indexPath) as! WOWSenceLikeCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell),for: indexPath) as! WOWSenceLikeCell
             cell.rightTitleLabel.text = "xx 人喜欢"
             cell.rightBackView.addAction({
                 let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
@@ -60,9 +60,9 @@ class WOWSenceHelper: NSObject {
             })
             returnCell = cell
         case 4:
-            let cell = tableview.dequeueReusableCellWithIdentifier(String(WOWCommentCell),forIndexPath: indexPath)as!WOWCommentCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWCommentCell),for: indexPath)as!WOWCommentCell
 //                cell.hideHeadImage()
-            if let model = sceneModel?.comments?[indexPath.row] {
+            if let model = sceneModel?.comments?[(indexPath as NSIndexPath).row] {
                 cell.commentLabel.text = model.comment
                 cell.dateLabel.text    = model.created_at
                 cell.nameLabel.text    = model.user_nick
@@ -74,7 +74,7 @@ class WOWSenceHelper: NSObject {
         return returnCell
     }
         
-    class func heightForHeaderInSection(section:Int) -> CGFloat{
+    class func heightForHeaderInSection(_ section:Int) -> CGFloat{
         switch section {
         case 0,1,3:
             return 0.01
@@ -89,7 +89,7 @@ class WOWSenceHelper: NSObject {
     }
     
     
-    class func heightForFooterInSection(section:Int) ->CGFloat{
+    class func heightForFooterInSection(_ section:Int) ->CGFloat{
         switch section {
         case 4:
             return 44
@@ -100,7 +100,7 @@ class WOWSenceHelper: NSObject {
         }
     }
     
-    class func viewForHeaderInSection(tableView:UITableView,section:Int) -> UIView?{
+    class func viewForHeaderInSection(_ tableView:UITableView,section:Int) -> UIView?{
         switch section {
         case 0,1,3:
             return nil
@@ -121,7 +121,7 @@ class WOWSenceHelper: NSObject {
                 headerView.addAction({
                     let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
                     vc.mainID = sceneModel?.id?.toInt()
-                    vc.commentType = CommentType.Sence
+                    vc.commentType = CommentType.sence
                     senceController.navigationController?.pushViewController(vc, animated: true)
                 })
                 return headerView
@@ -132,13 +132,13 @@ class WOWSenceHelper: NSObject {
     }
     
    
-    class func viewForFooterInSection(tableView:UITableView,section:Int) ->UIView?{
+    class func viewForFooterInSection(_ tableView:UITableView,section:Int) ->UIView?{
         if section == 4{
             let footerView = WOWMenuTopView(leftTitle: "我要评论", rightHiden: false, topLineHiden: false, bottomLineHiden: true)
             footerView.addAction({
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
                 vc.mainID = sceneModel?.id?.toInt()
-                vc.commentType = CommentType.Sence
+                vc.commentType = CommentType.sence
                 senceController.navigationController?.pushViewController(vc, animated: true)
             })
             return footerView

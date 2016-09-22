@@ -19,7 +19,7 @@ class WOWHotStyleCell: UITableViewCell {
     @IBOutlet weak var lbTitleMain: UILabel!// 主标题
     @IBOutlet weak var lbBrowse: UILabel!//多少人赞
     @IBOutlet weak var imgBackMain: UIImageView!// 背景图片
-    private var shareProductImage:UIImage? //供分享使用
+    fileprivate var shareProductImage:UIImage? //供分享使用
     
     weak var    delegate   :  WOWHotStyleCellDelegate?
     var brandModel : WOWBrandStyleModel?
@@ -29,7 +29,7 @@ class WOWHotStyleCell: UITableViewCell {
         // Initialization code
     }
     // 点赞按钮
-    @IBAction func clickLikeAction(sender: AnyObject) {
+    @IBAction func clickLikeAction(_ sender: AnyObject) {
         
         WOWClickLikeAction.requestLikeProject(modelData?.id ?? 0) { [weak self](isFavorite) in
             if let strongSelf = self{
@@ -41,7 +41,7 @@ class WOWHotStyleCell: UITableViewCell {
         }
         
     }
-    func showData(model: WOWHomeModle)  {
+    func showData(_ model: WOWHomeModle)  {
         
         if let brandModel = model.moduleContentList?.brand {
 //            modelData = model.moduleContentList
@@ -54,7 +54,7 @@ class WOWHotStyleCell: UITableViewCell {
         }
         if let moduleImage = model.moduleAdditionalInfo?.imageUrl {
             
-            imgBackMain.kf_setImageWithURL(NSURL(string: moduleImage ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+            imgBackMain.kf_setImageWithURL(URL(string: moduleImage ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
                 if let strongSelf = self{
                     strongSelf.shareProductImage = image
                 }
@@ -90,16 +90,16 @@ class WOWHotStyleCell: UITableViewCell {
                 lbPraise.text    = model.moduleContentList?.readQty?.toString
             }
 
-            btnLike.selected = model.moduleContentList?.favorite ?? false
+            btnLike.isSelected = model.moduleContentList?.favorite ?? false
 
     }
-    @IBAction func shareClick(sender: UIButton) {
+    @IBAction func shareClick(_ sender: UIButton) {
         let shareUrl = WOWShareUrl + "/topic/\(modelData?.id ?? 0)"
         WOWShareManager.share(modelData?.topicName, shareText: modelData?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

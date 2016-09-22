@@ -9,8 +9,8 @@
 import UIKit
 
 class WOWStoreController: WOWBaseViewController {
-    let cellID1     = String(WOWStoreBrandCell)
-    let cellID2     = String(WOWMenuCell)
+    let cellID1     = String(describing: WOWStoreBrandCell())
+    let cellID2     = String(describing: WOWMenuCell())
     var categoryArr = [WOWCategoryModel]()
     var brandArr    = [WOWBrandListModel]()
     var recommenArr = [WOWProductModel]()
@@ -25,7 +25,7 @@ class WOWStoreController: WOWBaseViewController {
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -37,16 +37,16 @@ class WOWStoreController: WOWBaseViewController {
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
-        tableView.registerNib(UINib.nibName(String(WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
+        tableView.register(UINib.nibName(String(describing: WOWStoreBrandCell)), forCellReuseIdentifier:cellID1)
         tableView.clearRestCell()
         tableView.mj_header          = mj_header
         configBarItem()
     }
     
-    private func configBarItem(){
+    fileprivate func configBarItem(){
         makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchsController))
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchsController))
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -60,7 +60,7 @@ class WOWStoreController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.Api_StoreHome, successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_StoreHome, successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
                 strongSelf.categoryArr = []
@@ -98,7 +98,7 @@ class WOWStoreController: WOWBaseViewController {
 
  
 extension WOWStoreController:BrandCellDelegate{
-    func hotBrandCellClick(brandModel: WOWBrandListModel) {
+    func hotBrandCellClick(_ brandModel: WOWBrandListModel) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
         vc.brandID = brandModel.brandId
         vc.hideNavigationBar = true
@@ -106,7 +106,7 @@ extension WOWStoreController:BrandCellDelegate{
     }
     
     //MARK:推荐商品
-    func recommenProductCellClick(productModel: WOWProductModel) {
+    func recommenProductCellClick(_ productModel: WOWProductModel) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productModel.productId
@@ -116,11 +116,11 @@ extension WOWStoreController:BrandCellDelegate{
 
 
 extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0,2:
             return 1
@@ -129,22 +129,22 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell : UITableViewCell!
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellID1, forIndexPath: indexPath) as! WOWStoreBrandCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID1, for: indexPath) as! WOWStoreBrandCell
             cell.showBrand = false
             cell.productArr = self.recommenArr
             cell.delegate = self
             returnCell = cell
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellID2, forIndexPath: indexPath) as! WOWMenuCell
-            cell.showDataModel(categoryArr[indexPath.row],isStore:true)
-            cell.backgroundColor = UIColor.whiteColor()
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! WOWMenuCell
+            cell.showDataModel(categoryArr[(indexPath as NSIndexPath).row],isStore:true)
+            cell.backgroundColor = UIColor.white
             returnCell = cell
         case 2:
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellID1, forIndexPath: indexPath) as! WOWStoreBrandCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID1, for: indexPath) as! WOWStoreBrandCell
             cell.showBrand = true
             cell.brandDataArr = self.brandArr
             cell.delegate = self
@@ -155,8 +155,8 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         return returnCell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 1{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).section == 1{
             return 50
         }else{
             return self.view.w
@@ -164,14 +164,14 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.section {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch (indexPath as NSIndexPath).section {
         case 0:
             break
         case 1:
-            let item = categoryArr[indexPath.row]
+            let item = categoryArr[(indexPath as NSIndexPath).row]
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsController)) as! WOWGoodsController
-            vc.categoryIndex            =   indexPath.row
+            vc.categoryIndex            =   (indexPath as NSIndexPath).row
             vc.categoryTitles           =   categoryTitles
             vc.categoryID               =   item.categoryID ?? "5"
             vc.categoryArr              =   categoryArr
@@ -191,7 +191,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 1:
             return 15
@@ -200,27 +200,27 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let v = UIView(frame:CGRectMake(0, 0, MGScreenWidth, 15))
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let v = UIView(frame:CGRect(x: 0, y: 0, width: MGScreenWidth, height: 15))
         v.backgroundColor = UIColor.whiteColor()
         return v
     }
     
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
             return configSectionHeader("推荐商品")
         case 1:
             return configSectionHeader("商品分类")
         case 2:
-            let sectionView =  NSBundle.mainBundle().loadNibNamed(String(WOWStoreSectionView), owner: self, options: nil).last as! WOWStoreSectionView
+            let sectionView =  Bundle.main.loadNibNamed(String(describing: WOWStoreSectionView), owner: self, options: nil)?.last as! WOWStoreSectionView
             sectionView.leftLabel.text = "热门品牌"
-            sectionView.bottomLine.hidden = true
+            sectionView.bottomLine.isHidden = true
             sectionView.rightDetailLabel.text = "全部\(brandsCount)个品牌"
             sectionView.rightBackView.addAction({[weak self] in
                 if let strongSelf = self{
@@ -235,10 +235,10 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         return nil
     }
     
-    private func configSectionHeader(title:String) -> WOWStoreSectionView{
-        let sectionView =  NSBundle.mainBundle().loadNibNamed(String(WOWStoreSectionView), owner: self, options: nil).last as! WOWStoreSectionView
+    fileprivate func configSectionHeader(_ title:String) -> WOWStoreSectionView{
+        let sectionView =  Bundle.main.loadNibNamed(String(describing: WOWStoreSectionView), owner: self, options: nil)?.last as! WOWStoreSectionView
         sectionView.leftLabel.text = title
-        sectionView.rightBackView.hidden = true
+        sectionView.rightBackView.isHidden = true
         return sectionView
     }
 }

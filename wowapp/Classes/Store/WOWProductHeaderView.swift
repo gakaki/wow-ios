@@ -12,7 +12,7 @@ class WOWProductHeaderView: UIView {
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var openImg: UIImageView!
-    func isOpen(isOpen: Bool = false) {
+    func isOpen(_ isOpen: Bool = false) {
         if isOpen {
             openImg.image = UIImage(named: "down")
         }else {

@@ -12,9 +12,9 @@ class VCBaseVCCategoryFound:WOWBaseViewController{
         addObserver()
     }
     
-    private func addObserver(){
+    fileprivate func addObserver(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         
     }
 

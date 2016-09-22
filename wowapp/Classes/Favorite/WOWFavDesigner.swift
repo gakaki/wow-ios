@@ -24,18 +24,18 @@ class WOWFavDesigner: WOWBaseViewController {
         super.viewDidLoad()
         
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
    
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationShadowImageView?.hidden = true
+        self.navigationShadowImageView?.isHidden = true
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationShadowImageView?.hidden = false
+        self.navigationShadowImageView?.isHidden = false
 //       NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWRefreshFavoritNotificationKey, object: nil)
     }
     
@@ -43,10 +43,10 @@ class WOWFavDesigner: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         
     }
-    private func addObserver(){
+    fileprivate func addObserver(){
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWRefreshFavoritNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(request), name:WOWLoginSuccessNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(request), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(request), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
     }
    
 
@@ -65,23 +65,23 @@ class WOWFavDesigner: WOWBaseViewController {
         l.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         return l
     }()
-    private func configCollectionView(){
+    fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
-        collectionView.registerNib(UINib.nibName(String(WOWFavoriteBrandCell)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
+        collectionView.register(UINib.nibName(String(WOWFavoriteBrandCell)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
         
         
     }
     
     //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
-    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
-        let view = NSBundle.mainBundle().loadNibNamed(String(FavoriteEmpty), owner: self, options: nil).last as! FavoriteEmpty
+    func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
+        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty), owner: self, options: nil)?.last as! FavoriteEmpty
         
 //        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
         return view
     }
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
     
@@ -93,7 +93,7 @@ class WOWFavDesigner: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeDesigner, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeDesigner, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
                 let designerList = Mapper<WOWFavoriteDesignerModel>().mapArray(JSON(result)["favoriteDesignerVoList"].arrayObject)
@@ -115,13 +115,13 @@ class WOWFavDesigner: WOWBaseViewController {
 extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
     
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  dataArr.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFavoriteBrandCell), forIndexPath: indexPath) as! WOWFavoriteBrandCell
-        let model = dataArr[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoriteBrandCell), for: indexPath) as! WOWFavoriteBrandCell
+        let model = dataArr[(indexPath as NSIndexPath).row]
 //        cell.logoImg.kf_setImageWithURL(NSURL(string:model.designerPhoto ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.logoImg.set_webimage_url(model.designerPhoto)
 
@@ -133,9 +133,9 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        DLog(indexPath.row)
-        let model = dataArr[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        DLog((indexPath as NSIndexPath).row)
+        let model = dataArr[(indexPath as NSIndexPath).row]
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
         vc.designerId = model.designerId
         vc.entrance = .designerEntrance
@@ -145,7 +145,7 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
     }
 }
 extension WOWFavDesigner:CollectionViewWaterfallLayoutDelegate{
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWFavoriteBrandCell.itemWidth,WOWFavoriteBrandCell.itemWidth)
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width: WOWFavoriteBrandCell.itemWidth,height: WOWFavoriteBrandCell.itemWidth)
     }
 }

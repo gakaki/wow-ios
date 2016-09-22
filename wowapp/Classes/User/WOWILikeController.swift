@@ -23,7 +23,7 @@ class WOWILikeController: WOWBaseViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -45,8 +45,8 @@ class WOWILikeController: WOWBaseViewController {
         return l
     }()
     
-    private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 40,self.view.w,self.view.h - 40 - 64), collectionViewLayout:self.layout)
+    fileprivate lazy var collectionView:UICollectionView = {
+        let collectionView = UICollectionView.init(frame:CGRect(x: 0, y: 40,width: self.view.w,height: self.view.h - 40 - 64), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.emptyDataSetDelegate = self
@@ -66,20 +66,20 @@ class WOWILikeController: WOWBaseViewController {
         configCheck()
     }
     
-    private func configColelction(){
+    fileprivate func configColelction(){
         view.addSubview(collectionView)
         collectionView.mj_footer = self.mj_footer
         collectionView.mj_header = self.mj_header
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
+        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
         collectionView.mj_header = self.mj_header
-        collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
+        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
     }
     
-    private func configCheck(){
+    fileprivate func configCheck(){
         WOWCheckMenuSetting.defaultSetUp()
         WOWCheckMenuSetting.fill = false
         WOWCheckMenuSetting.selectedIndex = selectIndex
-        checkView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, self.view.w, 40), titles: ["喜欢的场景","喜欢的单品"])
+        checkView = WOWTopMenuTitleView(frame:CGRect(x: 0, y: 0, width: self.view.w, height: 40), titles: ["喜欢的场景","喜欢的单品"])
         checkView.delegate = self
         WOWBorderColor(checkView)
         self.view.addSubview(checkView)
@@ -89,7 +89,7 @@ class WOWILikeController: WOWBaseViewController {
     override func request() {
         super.request()
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_UserFavorite(uid:uid, type:type,pageindex:"\(pageIndex))"), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_UserFavorite(uid:uid, type:type,pageindex:"\(pageIndex))"), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let totalPage = JSON(result)["totalPages"].int ?? 0
                 if totalPage == 0 || strongSelf.pageIndex == totalPage - 1 {
@@ -123,7 +123,7 @@ class WOWILikeController: WOWBaseViewController {
 
 
 extension WOWILikeController:TopMenuProtocol{
-    func topMenuItemClick(index: Int) {
+    func topMenuItemClick(_ index: Int) {
         selectIndex = index
         pageIndex = 0
         request()
@@ -132,25 +132,25 @@ extension WOWILikeController:TopMenuProtocol{
 
 
 extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArr.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var returnCell : UICollectionViewCell!
-        let model = dataArr[indexPath.row]
+        let model = dataArr[(indexPath as NSIndexPath).row]
         switch selectIndex {
         case 0:
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWImageCell", forIndexPath: indexPath) as! WOWImageCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWImageCell", for: indexPath) as! WOWImageCell
             cell.pictureImageView.set_webimage_url(model.imgUrl );
 
             returnCell = cell
         case 1:
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWGoodsSmallCell", for: indexPath) as! WOWGoodsSmallCell            
             cell.pictureImageView.set_webimage_url(model.imgUrl );
 
             cell.desLabel.text = model.name
@@ -164,8 +164,8 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let model = dataArr[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let model = dataArr[(indexPath as NSIndexPath).row]
         if selectIndex == 0 { //场景
             let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
             sence.hideNavigationBar = true
@@ -179,30 +179,30 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
         }
     }
     
-    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无您喜欢的" + (selectIndex == 0 ? "场景哦...":"单品哦...")
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
         return -40
     }
 }
 
 
 extension WOWILikeController:CollectionViewWaterfallLayoutDelegate{
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         switch selectIndex {
         case 0:
-            return CGSizeMake(WOWImageCell.itemWidth, WOWImageCell.itemWidth)
+            return CGSize(width: WOWImageCell.itemWidth, height: WOWImageCell.itemWidth)
         case 1:
-            return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 65)
+            return CGSize(width: WOWGoodsSmallCell.itemWidth,height: WOWGoodsSmallCell.itemWidth + 65)
         default:
-            return CGSizeMake(0, 0)
+            return CGSize(width: 0, height: 0)
         }
     }
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, insetForSection section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, insetForSection section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(5, 0, 0, 0)
     }
 }

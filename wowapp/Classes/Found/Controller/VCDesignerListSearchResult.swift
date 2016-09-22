@@ -2,7 +2,7 @@
 import UIKit
 
 protocol VCDesignerListSearchResultDelegate:class{
-    func searchResultSelect(model:WOWDesignerModel)
+    func searchResultSelect(_ model:WOWDesignerModel)
 }
 
 class VCDesignerListSearchResult: WOWBaseTableViewController {
@@ -21,25 +21,25 @@ class VCDesignerListSearchResult: WOWBaseTableViewController {
         super.setUI()
         tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableViewAutomaticDimension
-        self.edgesForExtendedLayout = .None
-        tableView.registerNib(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
-        tableView.keyboardDismissMode = .OnDrag
+        self.edgesForExtendedLayout = UIRectEdge()
+        tableView.register(UINib.nibName("WOWBaseStyleCell"), forCellReuseIdentifier:"WOWBaseStyleCell")
+        tableView.keyboardDismissMode = .onDrag
     }
 }
 
 
 extension VCDesignerListSearchResult{
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultArr.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WOWBaseStyleCell", forIndexPath: indexPath) as! WOWBaseStyleCell
-        let model = resultArr[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WOWBaseStyleCell", for: indexPath) as! WOWBaseStyleCell
+        let model = resultArr[(indexPath as NSIndexPath).row]
         //        cell.leftImageView.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.leftImageView.set_webimage_url(model.designerPhoto )
         
@@ -47,8 +47,8 @@ extension VCDesignerListSearchResult{
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let model = resultArr[indexPath.row]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = resultArr[(indexPath as NSIndexPath).row]
         if let del = delegate {
             del.searchResultSelect(model)
         }

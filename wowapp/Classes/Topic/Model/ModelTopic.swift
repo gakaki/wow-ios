@@ -35,7 +35,7 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         id              <- map["id"]
         topicName       <- map["topicName"]
         topicImg        <- map["topicImg"]
@@ -63,7 +63,7 @@ class WOWImageSerial: WOWBaseModel, Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         serialId        <- map["serialId"]
         records         <- map["records"]
     }

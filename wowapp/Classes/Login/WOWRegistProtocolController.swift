@@ -17,10 +17,10 @@ class WOWRegistProtocolController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "尖叫用户使用协议"
-        let path = NSBundle.mainBundle().pathForResource("wowprotocol", ofType:"html")
-        let url = NSURL(fileURLWithPath: path!)
+        let path = Bundle.main.path(forResource: "wowprotocol", ofType:"html")
+        let url = URL(fileURLWithPath: path!)
         //创建请求
-        let request = NSURLRequest(URL: url)
+        let request = URLRequest(url: url)
         //加载请求
         webView.loadRequest(request)
     }
@@ -30,11 +30,11 @@ class WOWRegistProtocolController: WOWBaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func agreeButtonClick(sender: UIButton) {
+    @IBAction func agreeButtonClick(_ sender: UIButton) {
         if let action = self.agreeAction {
             action()
         }
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
     
 

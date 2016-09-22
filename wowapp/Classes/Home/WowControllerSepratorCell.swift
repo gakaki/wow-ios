@@ -26,13 +26,13 @@ extension NibLoadableView where Self: UIView {
 
 extension UITableView {
     
-    func register<T: UITableViewCell where T: ReusableView, T: NibLoadableView>(_: T.Type) {
+    func register<T: UITableViewCell>(_: T.Type) where T: ReusableView, T: NibLoadableView {
         let Nib = UINib(nibName: T.NibName, bundle: nil)
         registerNib(Nib, forCellReuseIdentifier: T.reuseIdentifier)
     }
     
     
-    func register<T: UITableViewCell where T: ReusableView>(_: T.Type) {
+    func register<T: UITableViewCell>(_: T.Type) where T: ReusableView {
         registerClass(T.self, forCellReuseIdentifier: T.reuseIdentifier)
     }
 }
@@ -57,7 +57,7 @@ class WowControllerSepratorCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 

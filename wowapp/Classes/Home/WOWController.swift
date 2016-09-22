@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWController: WOWBaseViewController {
-    let cellID = String(WOWlListCell)
+    let cellID = String(describing: WOWlListCell.self)
     
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
@@ -22,7 +22,7 @@ class WOWController: WOWBaseViewController {
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
-    let group = dispatch_group_create() // 分组网络请求
+    let group = DispatchGroup() // 分组网络请求
     
     @IBOutlet var tableView: UITableView!
     //    var hidingNavBarManager: HidingNavigationBarManager?
@@ -40,10 +40,10 @@ class WOWController: WOWBaseViewController {
             make.centerX.equalTo(self.view)
             make.top.equalTo(self.view).offset(10)
         }
-        self.topBtn.hidden = true
+        self.topBtn.isHidden = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //        hidingNavBarManager?.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -52,12 +52,12 @@ class WOWController: WOWBaseViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //        hidingNavBarManager?.viewWillDisappear(animated)
     }
@@ -73,21 +73,21 @@ class WOWController: WOWBaseViewController {
     
     //MARK:Lazy
     lazy var appdelegate:AppDelegate = {
-        let a =  UIApplication.sharedApplication().delegate as! AppDelegate
+        let a =  UIApplication.shared.delegate as! AppDelegate
         return a
     }()
     
     //MARK:Lazy
     lazy var topBtn:UIButton = {
-        var btn = UIButton(type: UIButtonType.Custom)
+        var btn = UIButton(type: UIButtonType.custom)
         btn = btn as UIButton
-        btn.setBackgroundImage(UIImage(named: "backTop"), forState: .Normal)
-        btn.addTarget(self, action:#selector(backTop), forControlEvents:.TouchUpInside)
+        btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
+        btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
         return btn
     }()
     func backTop()  {
-        let index = NSIndexPath.init(forRow: 0, inSection: 0)
-        self.tableView.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.None, animated: true)
+        let index = IndexPath.init(row: 0, section: 0)
+        self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
     }
     
     func loginSuccess()  {// 重新刷新数据
@@ -98,19 +98,19 @@ class WOWController: WOWBaseViewController {
         request()
     }
 
-    private func addObserver(){
+    fileprivate func addObserver(){
         /**
          添加通知
          */
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(exitLogin), name:WOWExitLoginNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
         
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
-    func refreshData(sender: NSNotification)  {
+    func refreshData(_ sender: Notification)  {
         guard (sender.object != nil) else{//
                     return
         }
@@ -126,12 +126,12 @@ class WOWController: WOWBaseViewController {
          self.tableView.reloadData()
     }
     lazy var banner:WOWBanner = {
-        let view = NSBundle.mainBundle().loadNibNamed(String(WOWBanner), owner: self, options: nil).last as! WOWBanner
+        let view = Bundle.main.loadNibNamed(String(describing: WOWBanner), owner: self, options: nil)?.last as! WOWBanner
         view.cyclePictureView.delegate = self
-        view.jsButton.addTarget(self, action: #selector(jsClick), forControlEvents: .TouchUpInside)
-        view.dgButton.addTarget(self, action: #selector(dgClick), forControlEvents: .TouchUpInside)
-        view.zdButton.addTarget(self, action: #selector(zdClick), forControlEvents: .TouchUpInside)
-        view.sjButton.addTarget(self, action: #selector(sjClick), forControlEvents: .TouchUpInside)
+        view.jsButton.addTarget(self, action: #selector(jsClick), for: .touchUpInside)
+        view.dgButton.addTarget(self, action: #selector(dgClick), for: .touchUpInside)
+        view.zdButton.addTarget(self, action: #selector(zdClick), for: .touchUpInside)
+        view.sjButton.addTarget(self, action: #selector(sjClick), for: .touchUpInside)
         return view
     }()
     lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
@@ -142,12 +142,12 @@ class WOWController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        tableView.registerNib(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
         
-        tableView.registerNib(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
-        tableView.registerNib(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
+        tableView.register(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
+        tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
         
-        tableView.registerNib(UINib.nibName("HomeBrannerCell"), forCellReuseIdentifier: "HomeBrannerCell")
+        tableView.register(UINib.nibName("HomeBrannerCell"), forCellReuseIdentifier: "HomeBrannerCell")
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
@@ -173,7 +173,7 @@ class WOWController: WOWBaseViewController {
         requestBottom()
         
     }
-    private func configBarItem(){
+    fileprivate func configBarItem(){
         configBuyBarItem() // 购物车数量
     }
     
@@ -198,21 +198,21 @@ class WOWController: WOWBaseViewController {
         
         super.request()
         
-        var queue: dispatch_queue_t = dispatch_get_main_queue()// 主线程
+        var queue: DispatchQueue = DispatchQueue.main// 主线程
         
-        queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)// 后台执行
+        queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)// 后台执行
         
-        queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)// 默认优先级执行
+        queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)// 默认优先级执行
         
         //            dispatch_group_enter(group)// 增加计数， 保证网络请求拿到数据之后 ，才算完成任务
         //异步执行队列任务
-        dispatch_group_async(group, queue, { () -> Void in
+        queue.async(group: group, execute: { () -> Void in
             
             self.requestTop()
             
         })
         //            dispatch_group_enter(group)
-        dispatch_group_async(group, queue, { () -> Void in
+        queue.async(group: group, execute: { () -> Void in
             
             self.requestBottom()
             
@@ -220,7 +220,7 @@ class WOWController: WOWBaseViewController {
         
         // 分组队列执行完毕后执行 由于网络请求也是异步，所以这个数据不稳定 暂时不考虑在这刷新
         
-        dispatch_group_notify(group, dispatch_get_main_queue()) { () -> Void in
+        group.notify(queue: DispatchQueue.main) { () -> Void in
             
 //            self.tableView.reloadData()
             
@@ -233,7 +233,7 @@ class WOWController: WOWBaseViewController {
         params = ["pageId": 1, "region": 1]
        
 
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_List(params: params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                
                 
@@ -272,7 +272,7 @@ class WOWController: WOWBaseViewController {
         
         params = ["excludes": [], "currentPage": pageIndex,"pageSize":totalPage]
         
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Home_BottomList(params : params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                
                 strongSelf.endRefresh()
@@ -321,7 +321,7 @@ class WOWController: WOWBaseViewController {
         }
     }
     //点击跳转
-    func goController(model: WOWCarouselBanners) {
+    func goController(_ model: WOWCarouselBanners) {
         if let bannerLinkType = model.bannerLinkType {
             switch bannerLinkType {
             case 1:
@@ -377,39 +377,39 @@ class WOWController: WOWBaseViewController {
 }
 extension WOWController:UITableViewDelegate,UITableViewDataSource{
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSections(in tableView: UITableView) -> Int
     {
         return (dataArr.count ?? 0) + bottomListCount.getParityCellNumber()
         
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard indexPath.section < dataArr.count  else {
-            let cell                = tableView.dequeueReusableCellWithIdentifier("HomeBottomCell", forIndexPath: indexPath) as! HomeBottomCell
+        guard (indexPath as NSIndexPath).section < dataArr.count  else {
+            let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBottomCell", for: indexPath) as! HomeBottomCell
             
             cell.indexPath = indexPath
           
-            let OneCellNumber = (indexPath.section  - dataArr.count + 0) * 2
-            let TwoCellNumber = ((indexPath.section  - dataArr.count + 1) * 2) - 1
+            let OneCellNumber = ((indexPath as NSIndexPath).section  - dataArr.count + 0) * 2
+            let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataArr.count + 1) * 2) - 1
             if bottomListCount.isOdd {
-                if indexPath.section + 1 == (dataArr.count) + bottomListCount.getParityCellNumber() { // 如果奇数 满足则 第二个Item 不出现
+                if (indexPath as NSIndexPath).section + 1 == (dataArr.count) + bottomListCount.getParityCellNumber() { // 如果奇数 满足则 第二个Item 不出现
                     let  modelOne = bottomListArray[OneCellNumber]
 
                     cell.showDataOne(modelOne)
 
              
-                    cell.twoLb.hidden = false
+                    cell.twoLb.isHidden = false
                     
                 }else{
                     let  modelOne = bottomListArray[OneCellNumber]
                     let  modelTwo = bottomListArray[TwoCellNumber]
                     cell.showDataOne(modelOne)
                     cell.showDataTwo(modelTwo)
-                    cell.twoLb.hidden = true
+                    cell.twoLb.isHidden = true
                 }
             }else{
 
@@ -417,7 +417,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
                let  modelTwo = bottomListArray[TwoCellNumber]
                 cell.showDataOne(modelOne)
                 cell.showDataTwo(modelTwo)
-                cell.twoLb.hidden = true
+                cell.twoLb.isHidden = true
             }
             // 排序 0，1，2，3，4...
          
@@ -430,41 +430,41 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             cell.oneBtn.tag = OneCellNumber
             cell.twoBtn.tag = TwoCellNumber
             cell.delegate = self
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
             return cell
             
         }
-        let model = dataArr[indexPath.section]
+        let model = dataArr[(indexPath as NSIndexPath).section]
         
         if model.moduleType == 201 {
             
-            let cell                = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! WOWlListCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWlListCell
             
             cell.delegate       = self
             
             cell.showData(model.moduleContent!)
             
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
             
             return cell
             
         }else if model.moduleType == 601{
             
-            let cell                = tableView.dequeueReusableCellWithIdentifier("WOWHomeFormCell", forIndexPath: indexPath) as! WOWHomeFormCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWHomeFormCell", for: indexPath) as! WOWHomeFormCell
             
-            cell.indexPathSection = indexPath.section
+            cell.indexPathSection = (indexPath as NSIndexPath).section
             cell.delegate = self
             cell.modelData = model.moduleContentList
             cell.lbMainTitle.text = model.moduleContentList?.topicMainTitle
             cell.lbContent.text = model.moduleContentList?.topicDesc
             cell.lbContent.setLineHeightAndLineBreak(1.5)
             cell.dataArr = model.moduleContentList?.products
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
             
             return cell
             
         }else if model.moduleType == 101{
-            let cell                = tableView.dequeueReusableCellWithIdentifier("HomeBrannerCell", forIndexPath: indexPath) as! HomeBrannerCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBrannerCell", for: indexPath) as! HomeBrannerCell
             
             if let banners = model.moduleContent?.banners{
                 self.bannerArray = banners
@@ -472,7 +472,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
                 cell.cyclePictureView.delegate = self
             }
           
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
             
             return cell
             
@@ -481,7 +481,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             return UITableViewCell()
         }
     }
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
 //        print("\(dataArr.count)--\(bottomListCount.getParityCellNumber())++\(section)")
         guard section < dataArr.count  else {
             
@@ -490,12 +490,12 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
                     return 70
                 }
             }
-            return CGFloat.min
+            return CGFloat.leastNormalMagnitude
         }
             return 15.h
 
     }
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard section < dataArr.count  else {
             
             if section == ((dataArr.count ?? 0) + bottomListCount.getParityCellNumber()) - 1{
@@ -508,15 +508,15 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         return nil
 
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         if section == dataArr.count {
             return 70
         }else{
-            return CGFloat.min
+            return CGFloat.leastNormalMagnitude
         }
         
     }
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == dataArr.count {
             
             return hearderView()
@@ -527,11 +527,11 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         
         
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard indexPath.section < dataArr.count  else {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard (indexPath as NSIndexPath).section < dataArr.count  else {
             return
         }
-        let model = dataArr[indexPath.section]
+        let model = dataArr[(indexPath as NSIndexPath).section]
         switch model.moduleType ?? 0{
         case 201://单个图片
             if let modelBanner = model.moduleContent {
@@ -545,8 +545,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     func hearderView() -> UIView { // 137 37
         
         let view = UIView()
-        view.frame = CGRectMake(0, 0, MGScreenWidth, 70)
-        view.backgroundColor = UIColor.whiteColor()
+        view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 70)
+        view.backgroundColor = UIColor.white
         
         let img = UIImageView()
         img.image = UIImage(named: "recommend")
@@ -570,8 +570,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     }
     func footerView() -> UIView {
         let view = UIView()
-        view.frame = CGRectMake(0, 0, MGScreenWidth, 70)
-        view.backgroundColor = UIColor.whiteColor()
+        view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 70)
+        view.backgroundColor = UIColor.white
     
         let img = UIImageView()
         img.image = UIImage(named: "wowdsgn")
@@ -586,22 +586,22 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         
     }
 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if pageIndex >= 4 {
-            self.topBtn.hidden = false
+            self.topBtn.isHidden = false
             if offsetY == 0 {
                 offsetY = scrollView.mj_offsetY
             }
         }
         if scrollView.mj_offsetY < offsetY {
-            self.topBtn.hidden = true
+            self.topBtn.isHidden = true
         }
         
     }
 }
 extension WOWController:HomeBottomDelegate{
     
-    func goToProductDetailVC(indexRow: Int?) {//跳转产品详情
+    func goToProductDetailVC(_ indexRow: Int?) {//跳转产品详情
         
         let model = bottomListArray[indexRow!]
         toVCProduct(model.productId)
@@ -611,14 +611,14 @@ extension WOWController:HomeBottomDelegate{
 }
 extension WOWController:WOWHomeFormDelegate{
     
-    func goToVC(m:WOWModelVoTopic){//右滑更多 跳转专题详情
+    func goToVC(_ m:WOWModelVoTopic){//右滑更多 跳转专题详情
         if let cid = m.id{
 
             toVCTopidDetail(cid)
             
         }
     }
-    func goToProdectDetailVC(productId: Int?) {// 跳转产品详情页
+    func goToProdectDetailVC(_ productId: Int?) {// 跳转产品详情页
        
         toVCProduct(productId)
         
@@ -626,14 +626,14 @@ extension WOWController:WOWHomeFormDelegate{
 }
 
 extension WOWController:SenceCellDelegate{
-    func senceProductClick(produtID: Int) {//根据ID跳转产品详情页
+    func senceProductClick(_ produtID: Int) {//根据ID跳转产品详情页
         toVCProduct(produtID)
     }
 }
 
 extension WOWController: CyclePictureViewDelegate {
-    func cyclePictureView(cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let model = bannerArray[indexPath.row]
+    func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
+        let model = bannerArray[(indexPath as NSIndexPath).row]
         
         goController(model)
     }

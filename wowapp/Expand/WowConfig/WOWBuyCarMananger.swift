@@ -10,7 +10,7 @@ import UIKit
 
 class WOWBuyCarMananger {
     static let sharedBuyCar = WOWBuyCarMananger()
-    private init() {}
+    fileprivate init() {}
     
      /// 选规格的时候弹出的框框用到的信息
 //    var skuDataArr:[WOWProductSkuModel]?
@@ -34,7 +34,7 @@ class WOWBuyCarMananger {
     //app启动这一次添加进购物车的商品列表
     var chooseProducts      = [String]()
     //登录成功的时候要将本地的和云端购物车的进行累加
-    static func updateBadge(isLoginSuccess:Bool = false){
+    static func updateBadge(_ isLoginSuccess:Bool = false){
 //        let vc = UIApplication.appTabBarController.viewControllers![2]
 //        if WOWUserManager.loginStatus {
 //            let carCount = WOWUserManager.userCarCount

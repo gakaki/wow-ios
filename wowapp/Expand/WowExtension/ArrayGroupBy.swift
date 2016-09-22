@@ -1,6 +1,6 @@
 
-extension SequenceType  where Generator.Element == [String: AnyObject] {
-    public func groupBy(key: String) -> [String: AnyObject]{
+extension Sequence  where Iterator.Element == [String: AnyObject] {
+    public func groupBy(_ key: String) -> [String: AnyObject]{
         let  keys = self.flatMap{($0[key] as! String)}
         let tempSet = Set<String>(keys)
         let uniqueKeys = Array(tempSet)

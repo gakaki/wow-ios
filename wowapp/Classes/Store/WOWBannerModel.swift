@@ -17,7 +17,7 @@ class WOWBannerModel:NSObject,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         imageUrl  <-   map["image"]
         url       <-   map["url"]
     }

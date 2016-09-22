@@ -13,20 +13,20 @@ class WowBaseVCCartSearch: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
   
         configBuyBarItem()
         addObserver()
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationShadowImageView?.hidden = true
+        self.navigationShadowImageView?.isHidden = true
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationShadowImageView?.hidden = false
+        self.navigationShadowImageView?.isHidden = false
         
     }
     
@@ -35,8 +35,8 @@ class WowBaseVCCartSearch: WOWBaseViewController {
     }
     
     
-    private func addObserver(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(updateBageCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+    fileprivate func addObserver(){
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
     }
     
 }

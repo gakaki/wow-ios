@@ -21,12 +21,12 @@ class WOWProductParamCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
     
-    func showData(params:WOWAttributeModel...){ //可变参数
+    func showData(_ params:WOWAttributeModel...){ //可变参数
         if params.count == 1 {
             setSecond(true)
             firstTitleLabel.text = params.first?.title
@@ -43,10 +43,10 @@ class WOWProductParamCell: UITableViewCell {
         }
     }
     
-    func setSecond(hide:Bool) {
-        secondDescLabel.hidden  = hide
-        secondImageView.hidden  = hide
-        secondTitleLabel.hidden = hide
+    func setSecond(_ hide:Bool) {
+        secondDescLabel.isHidden  = hide
+        secondImageView.isHidden  = hide
+        secondTitleLabel.isHidden = hide
     }
     
 }

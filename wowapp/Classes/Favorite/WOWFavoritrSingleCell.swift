@@ -20,7 +20,7 @@ class WOWFavoritrSingleCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func showData(model:WOWProductModel,indexPath:NSIndexPath) {
+    func showData(_ model:WOWProductModel,indexPath:IndexPath) {
         let url             = model.productImg ?? ""
 //        imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
 

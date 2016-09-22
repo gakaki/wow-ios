@@ -30,14 +30,14 @@
 import UIKit
 import Kingfisher
 
-public class PhotoModel {
-    public var description: String?
+open class PhotoModel {
+    open var description: String?
     // 网络图片的URL
-    public var imageUrlString: String?
+    open var imageUrlString: String?
     // 本地图片 或者已经下载好的图片
-    public var localImage: UIImage?
+    open var localImage: UIImage?
     // 用来设置默认图片 和执行动画 如果没有提供,将没有加载时的默认图片, 并且没有动画
-    public var sourceImageView: UIImageView?
+    open var sourceImageView: UIImageView?
     // 本地图片
     public init(localImage: UIImage?, sourceImageView: UIImageView?) {
         self.localImage = localImage
@@ -54,7 +54,7 @@ public class PhotoModel {
 
 class PhotoViewCell: UICollectionViewCell {
     /// 单击响应
-    var singleTapAction: ((gesture: UITapGestureRecognizer) -> Void)?
+    var singleTapAction: ((_ gesture: UITapGestureRecognizer) -> Void)?
     /// 图片模型设置
     var photoModel: PhotoModel! = nil {
         didSet {
@@ -62,14 +62,14 @@ class PhotoViewCell: UICollectionViewCell {
         }
     }
     // 是否横屏
-    private var isLandscap: Bool {
-        let screenSize = UIScreen.mainScreen().bounds.size
+    fileprivate var isLandscap: Bool {
+        let screenSize = UIScreen.main.bounds.size
         return screenSize.width >= screenSize.height
     }
     
-    private var downloadTask: RetrieveImageTask?
+    fileprivate var downloadTask: RetrieveImageTask?
     /// 懒加载 对外可读
-    private(set) lazy var imageView: AnimatedImageView = {[unowned self] in
+    fileprivate(set) lazy var imageView: AnimatedImageView = {[unowned self] in
         let imageView = AnimatedImageView()
         imageView.contentMode = .ScaleAspectFit
         imageView.userInteractionEnabled = true
@@ -77,7 +77,7 @@ class PhotoViewCell: UICollectionViewCell {
         return imageView
     }()
     /// 懒加载
-    private(set) lazy var scrollView: UIScrollView = {
+    fileprivate(set) lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: CGRect(x: 0.0, y: 0.0, width: self.contentView.zj_width - PhotoBrowser.contentMargin, height: self.contentView.zj_height))
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = true
@@ -86,12 +86,12 @@ class PhotoViewCell: UICollectionViewCell {
         // 预设定
         scrollView.maximumZoomScale = 2.0
         scrollView.minimumZoomScale = 1.0
-        scrollView.backgroundColor = UIColor.blackColor()
+        scrollView.backgroundColor = UIColor.black
         scrollView.delegate = self
         return scrollView
     }()
     /// 进度显示
-    private lazy var hud: SimpleHUD? = {[unowned self] in
+    fileprivate lazy var hud: SimpleHUD? = {[unowned self] in
         
         let hud = SimpleHUD(frame:CGRect(x: 0.0, y: (self.zj_height - 80)*0.5, width: self.zj_width, height: 80.0))
         return hud
@@ -120,12 +120,12 @@ class PhotoViewCell: UICollectionViewCell {
         print("\(self.debugDescription) --- 销毁")
     }
     //MARK:- private 初始设置
-    private func commonInit() {
+    fileprivate func commonInit() {
         setupScrollView()
         addGestures()
     }
     
-    private func addGestures() {
+    fileprivate func addGestures() {
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.handleSingleTap(_:)))
         singleTap.numberOfTapsRequired = 1
         singleTap.numberOfTouchesRequired = 1
@@ -136,13 +136,13 @@ class PhotoViewCell: UICollectionViewCell {
         
         // 允许优先执行doubleTap, 在doubleTap执行失败的时候执行singleTap
         // 如果没有设置这个, 那么将只会执行singleTap 不会执行doubleTap
-        singleTap.requireGestureRecognizerToFail(doubleTap)
+        singleTap.require(toFail: doubleTap)
         
         addGestureRecognizer(singleTap)
         addGestureRecognizer(doubleTap)
     }
     
-    private func setupScrollView() {
+    fileprivate func setupScrollView() {
         scrollView.addSubview(imageView)
         contentView.addSubview(scrollView)
     }
@@ -150,28 +150,28 @@ class PhotoViewCell: UICollectionViewCell {
     //MARK:- 点击处理
     
     // 单击手势, 给外界处理
-    func handleSingleTap(ges: UITapGestureRecognizer) {
+    func handleSingleTap(_ ges: UITapGestureRecognizer) {
         // 首先缩放到最小倍数, 以便于执行退出动画时frame可以同步改变
         if scrollView.zoomScale != scrollView.minimumZoomScale {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
         }
-        singleTapAction?(gesture: ges)
+        singleTapAction?(ges)
     }
     
     // 双击放大至最大 或者 缩小至最小
-    func handleDoubleTap(ges: UITapGestureRecognizer) {
+    func handleDoubleTap(_ ges: UITapGestureRecognizer) {
         //        print("double---------")
         if imageView.image == nil { return }
         
         if scrollView.zoomScale <= scrollView.minimumZoomScale { // 放大
             
-            let location = ges.locationInView(scrollView)
+            let location = ges.location(in: scrollView)
             // 放大scrollView.maximumZoomScale倍, 将它的宽高缩小
             let width = scrollView.zj_width/scrollView.maximumZoomScale
             let height = scrollView.zj_height/scrollView.maximumZoomScale
             
             let rect = CGRect(x: location.x * (1 - 1/scrollView.maximumZoomScale), y: location.y * (1 - 1/scrollView.maximumZoomScale), width: width, height: height)
-            scrollView.zoomToRect(rect, animated: true)
+            scrollView.zoom(to: rect, animated: true)
             
         } else {// 缩小
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
@@ -198,7 +198,7 @@ class PhotoViewCell: UICollectionViewCell {
 
 // MARK: - private helper --- 加载图片设置
 extension PhotoViewCell {
-    private func setupImage() {
+    fileprivate func setupImage() {
         
         hud?.hideHUD()
         guard let photo = photoModel else {
@@ -216,7 +216,7 @@ extension PhotoViewCell {
         }
         
         // 加载网路图片
-        guard let urlString = photo.imageUrlString, let url = NSURL(string: urlString) else {
+        guard let urlString = photo.imageUrlString, let url = URL(string: urlString) else {
             assert(false, "设置的url不合法")
             return
         }
@@ -271,7 +271,7 @@ extension PhotoViewCell {
         
     }
     
-    private func setupImageViewFrame() {
+    fileprivate func setupImageViewFrame() {
         // 考虑长图, 考虑旋转屏幕
         if let imageV = image {
             
@@ -287,7 +287,7 @@ extension PhotoViewCell {
             if height > scrollView.zj_height {
                 imageView.frame = CGRect(x: (scrollView.zj_width - width) / 2, y: 0.0, width: width, height: height)
                 scrollView.contentSize = imageView.bounds.size
-                scrollView.contentOffset = CGPointZero
+                scrollView.contentOffset = CGPoint.zero
 //                scrollView.zoomToRect(CGRect(x: scrollView.zj_centerX, y: scrollView.zj_centerY, width: scrollView.zj_width/2, height: scrollView.zj_height/2), animated: false)
             } else {
                 // 居中显示
@@ -302,11 +302,11 @@ extension PhotoViewCell {
 
 // MARK: - UIScrollViewDelegate
 extension PhotoViewCell: UIScrollViewDelegate {
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
     
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         // 居中显示图片
         setImageViewToTheCenter()
     }

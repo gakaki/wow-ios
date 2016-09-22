@@ -29,21 +29,21 @@ class WOWSenceLikeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.collectionView.registerClass(WOWImageCell.self, forCellWithReuseIdentifier:String(WOWImageCell))
+        self.collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell))
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 }
 
 
 extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        if orderTag {
             return orderArr.count
 //        }else{
@@ -52,10 +52,10 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
 //        }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWImageCell), forIndexPath: indexPath) as! WOWImageCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWImageCell), for: indexPath) as! WOWImageCell
 //        if orderTag {
-            let orderItem = orderArr[indexPath.item]
+            let orderItem = orderArr[(indexPath as NSIndexPath).item]
 //            cell.pictureImageView.kf_setImageWithURL(NSURL(string:orderItem.skuProductImageUrl)!, placeholderImage: UIImage(named: "placeholder_product"))
 //        }
         //FIXME:测试
@@ -63,15 +63,15 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        if orderTag {
 //            return CGSizeMake(46,46)
 //        }else{
-            return CGSizeMake(40, 40)
+            return CGSize(width: 40, height: 40)
 //        }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(8, 15, 8, 8)
     }
     

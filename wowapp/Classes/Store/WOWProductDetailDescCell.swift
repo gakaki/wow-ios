@@ -28,18 +28,18 @@ class WOWProductDetailDescCell: UITableViewCell {
         WOWBorderColor(designerBorderView)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
  
-    @IBAction func brandClick(sender: UIButton) {
+    @IBAction func brandClick(_ sender: UIButton) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
         vc.brandID = productModel?.brandId 
         vc.entrance = .brandEntrance
         vc.hideNavigationBar = true
         UIApplication.currentViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
-    @IBAction func designerClick(sender: UIButton) {
+    @IBAction func designerClick(_ sender: UIButton) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
         vc.designerId = productModel?.designerId
         vc.entrance = .designerEntrance
@@ -48,16 +48,16 @@ class WOWProductDetailDescCell: UITableViewCell {
         
     }
     
-    func showData(model:WOWProductModel?){
+    func showData(_ model:WOWProductModel?){
         productModel = model
         brandNameLabel.text = model?.brandCname
-        brandButton.kf_setBackgroundImageWithURL(NSURL(string:model?.brandLogoImg ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
-        guard let designerName = model?.designerName where !designerName.isEmpty else{
-            designerContainerView.hidden = true
+        brandButton.kf_setBackgroundImageWithURL(URL(string:model?.brandLogoImg ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
+        guard let designerName = model?.designerName , !designerName.isEmpty else{
+            designerContainerView.isHidden = true
             brandContainerRightConstraint.priority = 250;
             return
         }
         designerNameLabel.text = designerName
-        designerButton.kf_setBackgroundImageWithURL(NSURL(string: model?.designerPhoto ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
+        designerButton.kf_setBackgroundImageWithURL(URL(string: model?.designerPhoto ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
     }
 }

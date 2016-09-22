@@ -7,10 +7,10 @@ import UIKit
 
 class HairlineView: UIView {
     override func awakeFromNib() {
-        guard let backgroundColor = self.backgroundColor?.CGColor else { return }
+        guard let backgroundColor = self.backgroundColor?.cgColor else { return }
         self.layer.borderColor = backgroundColor
-        self.layer.borderWidth = (1.0 / UIScreen.mainScreen().scale) / 2;
-        self.backgroundColor = UIColor.clearColor()
+        self.layer.borderWidth = (1.0 / UIScreen.main.scale) / 2;
+        self.backgroundColor = UIColor.clear
     }
 }
 
@@ -20,7 +20,7 @@ class VCTopicHeaderView:UICollectionReusableView{
     
     var label_name:UILabel      = {
         let l = UILabel()
-        l.textAlignment = .Left
+        l.textAlignment = .left
 //        l.lineBreakMode = .ByWordWrapping
         l.numberOfLines = 0
         l.setLineHeightAndLineBreak(1.05)
@@ -30,12 +30,12 @@ class VCTopicHeaderView:UICollectionReusableView{
     
     var label_desc:UILabel      = {
         let l = UILabel()
-        l.textAlignment = .Left
-        l.lineBreakMode = .ByWordWrapping
+        l.textAlignment = .left
+        l.lineBreakMode = .byWordWrapping
         l.numberOfLines = 0
-        l.textAlignment = .Center
+        l.textAlignment = .center
         l.setLineHeightAndLineBreak(1.25)
-        l.textColor     = UIColor.grayColor()
+        l.textColor     = UIColor.gray
         l.font          = UIFont.systemScaleFontSize(14)
         return l
     }()
@@ -44,7 +44,7 @@ class VCTopicHeaderView:UICollectionReusableView{
     var view_line:UIView   = {
         var l = UIView()
         l.layer.borderWidth = 0.25
-        l.layer.borderColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.00).CGColor
+        l.layer.borderColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.00).cgColor
         return l
     }()
    
@@ -53,7 +53,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         super.init(frame: frame)
         
         imageView = UIImageView()
-        imageView.contentMode = UIViewContentMode.ScaleToFill
+        imageView.contentMode = UIViewContentMode.scaleToFill
         self.addSubview(imageView)
         
         self.addSubview(label_name)
@@ -123,16 +123,16 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     func btnBack(){
         self.navBack()
     }
-    private func addObserver(){
+    fileprivate func addObserver(){
         /**
          添加通知
          */
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
         
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
-    func refreshData(sender: NSNotification)  {
+    func refreshData(_ sender: Notification)  {
         guard (sender.object != nil) else{//
             return
         }
@@ -151,14 +151,14 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     override func request(){
       
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Topics(topicId:topic_id), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topics(topicId:topic_id), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
                 
                 let r                                     =  JSON(result)
                 strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map( r.object )
                 
-                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Topic_Products(topicId:strongSelf.topic_id), successClosure: {[weak self] (result) in
+                WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topic_Products(topicId:strongSelf.topic_id), successClosure: {[weak self] (result) in
                     if let strongSelf = self{
                         
                         let r                             =  JSON(result)
@@ -201,16 +201,16 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         layout.headerHeight                 = header_height
 
         let cv                              = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        cv.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cell_reuse)
+        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell_reuse)
         cv.delegate                         = self
         cv.dataSource                       = self
-        cv.backgroundColor                  = UIColor.whiteColor()
+        cv.backgroundColor                  = UIColor.white
         
-        cv.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
-        cv.registerClass(VCTopicHeaderView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: cell_header_reuse)
+        cv.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        cv.register(VCTopicHeaderView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: cell_header_reuse)
         
         let bg_view                         = UIView()
-        bg_view.backgroundColor             = UIColor.whiteColor()
+        bg_view.backgroundColor             = UIColor.white
         cv.backgroundView                   = bg_view
         
         cv.delegate                         = self
@@ -236,13 +236,13 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
 //        return
 //    }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         var reusableView : UICollectionReusableView? = nil
         
         if kind == CollectionViewWaterfallElementKindSectionHeader {
             
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: cell_header_reuse, forIndexPath: indexPath) as! VCTopicHeaderView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: cell_header_reuse, for: indexPath) as! VCTopicHeaderView
             
             if let pic = self.vo_topic?.topicImg {
                 headerView.imageView.set_webimage_url(pic )
@@ -263,23 +263,23 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     
-    func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
+    func collectionView(_ collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:IndexPath) -> CGSize
     {
-        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 75)
+        return CGSize(width: WOWGoodsSmallCell.itemWidth,height: WOWGoodsSmallCell.itemWidth + 75)
     }
     
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return vo_products.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWGoodsSmallCell), forIndexPath: indexPath) as! WOWGoodsSmallCell
-        let model = vo_products[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell), for: indexPath) as! WOWGoodsSmallCell
+        let model = vo_products[(indexPath as NSIndexPath).row]
         cell.showData(model, indexPath: indexPath)
         return cell
         
@@ -287,12 +287,12 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     
  
     //选中时的操作
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-            if  let cell = collectionView.cellForItemAtIndexPath(indexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            if  let cell = collectionView.cellForItem(at: indexPath) {
                 
-                self.cv.deselectItemAtIndexPath(indexPath, animated: false)
-                let row = vo_products[indexPath.row]
-                cell.selected  = false;
+                self.cv.deselectItem(at: indexPath, animated: false)
+                let row = vo_products[(indexPath as NSIndexPath).row]
+                cell.isSelected  = false;
                 
                 if ( row.productId != nil ){
                     toVCProduct(row.productId!)

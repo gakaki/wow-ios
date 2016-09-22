@@ -17,7 +17,7 @@ class WOWProvinceModel: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         name    <- map["name"]
         citys   <- map["cityColection"]
     }
@@ -33,7 +33,7 @@ class WOWCityModel: WOWBaseModel ,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         name        <- map["name"]
         districts   <- map["districtCollection"]
     }
@@ -45,7 +45,7 @@ class WOWDistrictModel: WOWBaseModel ,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         name        <- map["name"]
     }
 
@@ -86,7 +86,7 @@ class WOWSimpleSSQModel: WOWBaseModel ,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         id                  <- map["id"]
         name                <- map["name"]
         parent_id           <- map["parent_id"]

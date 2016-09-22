@@ -22,7 +22,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func showData(m:WOWNewOrderDetailModel, indexRow:Int){
+    func showData(_ m:WOWNewOrderDetailModel, indexRow:Int){
         orderNewDetailModel = m
         
         let orderProductModel = orderNewDetailModel!.unShipOutOrderItems![indexRow]
@@ -30,7 +30,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
         colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
         
-        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        titleImageView.kf_setImageWithURL(URL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
 
         let result = WOWCalPrice.calTotalPrice([orderProductModel.sellPrice ?? 0],counts:[1])
@@ -43,13 +43,13 @@ class WOWOrderDetailNewCell: UITableViewCell {
         
         
     }
-    func showPackages(m:WOWNewOrderDetailModel, indexSection:Int, indexRow:Int){
+    func showPackages(_ m:WOWNewOrderDetailModel, indexSection:Int, indexRow:Int){
         orderNewDetailModel = m
         let orderProductModel = orderNewDetailModel!.packages![indexSection].orderItems![indexRow]
 
         colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
-        titleImageView.kf_setImageWithURL(NSURL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        titleImageView.kf_setImageWithURL(URL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
 
         
@@ -61,7 +61,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
 
         
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

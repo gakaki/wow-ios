@@ -43,7 +43,7 @@ class WOWCouponModel: WOWBaseModel,Mappable {
     override init() {
         super.init()
     }
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }

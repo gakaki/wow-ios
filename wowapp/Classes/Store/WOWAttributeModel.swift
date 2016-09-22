@@ -20,7 +20,7 @@ class WOWAttributeModel: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         code        <- map["key"]
         value       <- map["value"]
         title       <- map["label"]
@@ -42,7 +42,7 @@ class WOWParameter: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         materialText            <- map["materialText"]
         needAssemble            <- map["needAssemble"]
         origin                  <- map["origin"]
@@ -62,7 +62,7 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         image <- map["url"]
         text  <- map["desc"]
     }
@@ -78,7 +78,7 @@ class WOWProductSkuModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         skuID       <- map["sku"]
         skuTitle    <- map["title"]
         skuPrice    <- map["price"]

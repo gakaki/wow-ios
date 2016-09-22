@@ -19,13 +19,13 @@ class WOWMenuCell: UITableViewCell {
     }
     @IBOutlet var imageName: UIImageView!
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    func showDataModel(model:WOWCategoryModel,isStore:Bool){
+    func showDataModel(_ model:WOWCategoryModel,isStore:Bool){
         var imageName = getImageName(model.categoryID ?? "5")
         imageName = isStore ? "store_" + imageName : imageName
         menuImageView.image = UIImage(named:imageName)
@@ -33,7 +33,7 @@ class WOWMenuCell: UITableViewCell {
         menuCountLabel.text = "\(model.categoryCount ?? 0)件商品"
     }
     
-    private func getImageName(categoryID:String) -> String{
+    fileprivate func getImageName(_ categoryID:String) -> String{
         switch categoryID {
         case "5": //全部
             return "all"

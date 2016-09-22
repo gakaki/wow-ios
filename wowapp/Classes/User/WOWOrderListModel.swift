@@ -30,7 +30,7 @@ class WOWOrderListModel: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         id                  <- map["id"]
         products            <- map["items"]
         status              <- map["status"]
@@ -63,7 +63,7 @@ class WOWOrderProductModel: WOWBaseModel ,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         name        <- map["name"]
         product_id  <- map["product_id"]
         sku_id      <- map["sku_id"]
@@ -103,7 +103,7 @@ class WOWNewOrderListModel: WOWBaseModel,Mappable{
     
     
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         orderId                  <- map["orderId"]
         
@@ -156,7 +156,7 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         couponAmount                  <- map["couponAmount"]
         deliveryFee            <- map["deliveryFee"]
@@ -197,7 +197,7 @@ class WOWNewForGoodsModel: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         deliveryCompanyName                  <- map["deliveryCompanyName"]
         
@@ -231,7 +231,7 @@ class WOWNewProductModel: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         productId                  <- map["productId"]
         productName            <- map["productName"]
         sellTotalAmount              <- map["sellTotalAmount"]

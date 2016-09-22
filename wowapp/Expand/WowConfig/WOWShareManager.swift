@@ -12,32 +12,31 @@ struct WOWShareManager {
     
     static let vc = UIApplication.currentViewController()
     
-    static var shareBackView = WOWShareBackView(frame:CGRectMake(0, 0,MGScreenWidth,  MGScreenHeight))
+    static var shareBackView = WOWShareBackView(frame:CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight))
     
 
-    static func share(title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
-
+    static func share(_ title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
         shareBackView.show()
 
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             switch shareType {
             case .friends:
-                UMSocialData.defaultData().extConfig.wechatTimelineData.title = title
-                UMSocialData.defaultData().extConfig.wechatTimelineData.url = url
+                UMSocialData.default().extConfig.wechatTimelineData.title = title
+                UMSocialData.default().extConfig.wechatTimelineData.url = url
 
-                UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatTimeline], content: shareText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
-                    if response.responseCode == UMSResponseCodeSuccess {
+                UMSocialDataService.default().postSNS(withTypes: [UMShareToWechatTimeline], content: shareText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
+                    if response?.responseCode == UMSResponseCodeSuccess {
                         
                     }
                 })
                
             case .wechat:
                 
-                UMSocialData.defaultData().extConfig.wechatSessionData.title = title
-                UMSocialData.defaultData().extConfig.wechatSessionData.url = url
+                UMSocialData.default().extConfig.wechatSessionData.title = title
+                UMSocialData.default().extConfig.wechatSessionData.url = url
 
-                UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatSession], content: shareText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
-                    if response.responseCode == UMSResponseCodeSuccess {
+                UMSocialDataService.default().postSNS(withTypes: [UMShareToWechatSession], content: shareText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
+                    if response?.responseCode == UMSResponseCodeSuccess {
                         
                     }
                 })

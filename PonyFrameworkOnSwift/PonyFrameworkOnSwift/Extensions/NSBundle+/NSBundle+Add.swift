@@ -8,8 +8,8 @@
 
 import Foundation
 
-public extension NSBundle{
-    static func loadResourceName(name:String!) -> AnyObject?{
-        return  NSBundle.mainBundle().loadNibNamed(name, owner: self, options: nil).last
+public extension Bundle{
+    static func loadResourceName(_ name:String!) -> AnyObject?{
+        return  Bundle.main.loadNibNamed(name, owner: self, options: nil)?.last as AnyObject?
     }
 }

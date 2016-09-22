@@ -19,7 +19,7 @@ class WOWSearchController: WOWBaseViewController {
     var ob_cid                                  = Variable(10)
     var ob_tab_index                            = Variable(UInt(0))
     
-    private var keyWords = [AnyObject](){
+    fileprivate var keyWords = [AnyObject](){
         didSet{
             /**
              *  如果热门搜索没有view就隐藏
@@ -32,7 +32,7 @@ class WOWSearchController: WOWBaseViewController {
         }
     }
     
-    private var searchArray = [String](){
+    fileprivate var searchArray = [String](){
         didSet{
             /**
              *  如果搜索历史没有view就隐藏
@@ -63,22 +63,22 @@ class WOWSearchController: WOWBaseViewController {
     
   
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        searchView.hidden = true
+        searchView.isHidden = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.leftBarButtonItems = nil
         makeCustomerNavigationItem("", left: true, handler:nil)
         navigationItem.rightBarButtonItem = nil
         makeCustomerNavigationItem("", left: false, handler: nil)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        searchView.hidden = false
+        searchView.isHidden = false
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
@@ -96,11 +96,11 @@ class WOWSearchController: WOWBaseViewController {
     
 //MARK:Lazy
     lazy var searchView:WOWSearchBarView = {
-        let view = NSBundle.mainBundle().loadNibNamed(String(WOWSearchBarView), owner: self, options: nil).last as! WOWSearchBarView
-        view.frame = CGRectMake(9, 6, MGScreenWidth - 18,30)
+        let view = Bundle.main.loadNibNamed(String(describing: WOWSearchBarView), owner: self, options: nil)?.last as! WOWSearchBarView
+        view.frame = CGRect(x: 9, y: 6, width: MGScreenWidth - 18,height: 30)
         view.searchTextField.delegate = self
         view.searchTextField.becomeFirstResponder()
-        view.cancelButton.addTarget(self, action:#selector(cancel), forControlEvents:.TouchUpInside)
+        view.cancelButton.addTarget(self, action:#selector(cancel), for:.touchUpInside)
         return view
     }()
     
@@ -109,21 +109,21 @@ class WOWSearchController: WOWBaseViewController {
         let v = VCVTMagic()
         v.magicView.dataSource = self
         v.magicView.delegate = self
-        v.magicView.menuScrollEnabled    = true
-        v.magicView.switchAnimated       = true
-        v.magicView.scrollEnabled        = true
+        v.magicView.isMenuScrollEnabled    = true
+        v.magicView.isSwitchAnimated       = true
+        v.magicView.isScrollEnabled        = true
         
-        v.magicView.backgroundColor = UIColor.whiteColor()
+        v.magicView.backgroundColor = UIColor.white
         self.addChildViewController(v)
-        v.magicView.frame = CGRectMake(0, 0,MGScreenWidth,MGScreenHeight - 64)
-        v.magicView.hidden = true
+        v.magicView.frame = CGRect(x: 0, y: 0,width: MGScreenWidth,height: MGScreenHeight - 64)
+        v.magicView.isHidden = true
         return v
     }()
    
     lazy var emptyView: UIView = {
-        let view = NSBundle.mainBundle().loadNibNamed(String(WOWEmptySearchView), owner: self, options: nil).last as! WOWEmptySearchView
-        view.frame = CGRectMake(0, 0, MGScreenWidth, MGScreenHeight)
-        view.hidden = true
+        let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView), owner: self, options: nil)?.last as! WOWEmptySearchView
+        view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight)
+        view.isHidden = true
         return view
 
     }()
@@ -145,11 +145,11 @@ class WOWSearchController: WOWBaseViewController {
         //设置布局
         collectionView.setCollectionViewLayout(WOWSearchLayout(), animated: true)
         
-        collectionView.registerNib(UINib.nibName(String(WOWSearchCell)), forCellWithReuseIdentifier: "WOWSearchCell")
+        collectionView.register(UINib.nibName(String(WOWSearchCell)), forCellWithReuseIdentifier: "WOWSearchCell")
         
-        collectionView.registerClass(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWReuseSectionView")
+        collectionView.register(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWReuseSectionView")
         //加载cell
-        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
         //加载cell的头部
   
 
@@ -176,7 +176,7 @@ class WOWSearchController: WOWBaseViewController {
      
      - parameter searchStr: 
      */
-    func searchHistory(searchStr: String) {
+    func searchHistory(_ searchStr: String) {
         if searchArray .contains(searchStr) {
             searchArray.removeObject(searchStr)
         }
@@ -191,7 +191,7 @@ class WOWSearchController: WOWBaseViewController {
     
     func cancel(){
         searchView.searchTextField.resignFirstResponder()
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
     
     func deleteClick() {
@@ -207,7 +207,7 @@ class WOWSearchController: WOWBaseViewController {
 // MARK: - NET
 extension WOWSearchController {
     func requestHotKey() {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_SearchHot, successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchHot, successClosure: {[weak self] (result) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let array = json["keywords"].arrayObject
@@ -223,7 +223,7 @@ extension WOWSearchController {
     }
     
     func requestResult()  {
-        WOWNetManager.sharedManager.requestWithTarget(.Api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""), successClosure: { [weak self](result) in
             let json = JSON(result)
             DLog(json)
             
@@ -236,7 +236,7 @@ extension WOWSearchController {
                     strongSelf.dataArr = array
                     strongSelf.showResult()
                 }else {
-                    strongSelf.emptyView.hidden = false
+                    strongSelf.emptyView.isHidden = false
                 }
             }
             
@@ -254,12 +254,12 @@ extension WOWSearchController {
 extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
     
     //MARK - UICollectionViewDelegate
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2;
     }
     
     //MARK - UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section  {
         case 0:
             return keyWords.count
@@ -271,15 +271,15 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
         
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWSearchCell", forIndexPath: indexPath) as! WOWSearchCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWSearchCell", for: indexPath) as! WOWSearchCell
         
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
         case 0:
-            cell.titleLabel.text = keyWords[indexPath.row] as? String
+            cell.titleLabel.text = keyWords[(indexPath as NSIndexPath).row] as? String
         case 1:
-            cell.titleLabel.text = searchArray[indexPath.row]
+            cell.titleLabel.text = searchArray[(indexPath as NSIndexPath).row]
         default:
             cell.titleLabel.text = ""
         }
@@ -288,16 +288,16 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
-            let title = keyWords[indexPath.row] as! String
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 0 {
+            let title = keyWords[(indexPath as NSIndexPath).row] as! String
             searchView.searchTextField.text = title
             searchView.searchTextField.resignFirstResponder()
             requestResult()
             searchHistory(title)
 
         }else {
-            let title = searchArray[indexPath.row]
+            let title = searchArray[(indexPath as NSIndexPath).row]
             searchView.searchTextField.text = title
             searchView.searchTextField.resignFirstResponder()
             requestResult()
@@ -306,31 +306,31 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
         }
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         var reusableView:UICollectionReusableView?
         //是每组的头
         if (kind == UICollectionElementKindSectionHeader){
             
-            let searchReusable = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWReuseSectionView", forIndexPath: indexPath) as? WOWReuseSectionView
-            switch indexPath.section {
+            let searchReusable = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWReuseSectionView", for: indexPath) as? WOWReuseSectionView
+            switch (indexPath as NSIndexPath).section {
             case 0:
                 searchReusable?.titleLabel.text = "热门搜索"
-                searchReusable?.clearButton.hidden = true
+                searchReusable?.clearButton.isHidden = true
             case 1:
                 searchReusable?.titleLabel.text = "历史搜索"
-                searchReusable?.clearButton.hidden = false
-                searchReusable?.clearButton.addTarget(self, action: #selector(deleteClick), forControlEvents: .TouchUpInside)
+                searchReusable?.clearButton.isHidden = false
+                searchReusable?.clearButton.addTarget(self, action: #selector(deleteClick), for: .touchUpInside)
             default:
                 searchReusable?.titleLabel.text = ""
-                searchReusable?.clearButton.hidden = true
+                searchReusable?.clearButton.isHidden = true
             }
 
             reusableView = searchReusable!
         }
         if kind == UICollectionElementKindSectionFooter {
-            let view = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: "footer", forIndexPath: indexPath)
-            view.backgroundColor = UIColor.clearColor()
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer", for: indexPath)
+            view.backgroundColor = UIColor.clear
             reusableView = view
         }
         return reusableView!
@@ -338,31 +338,31 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
     
     
     //MARK - UICollectionViewDelegateFlowLayout  itme的大小
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        switch indexPath.section {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch (indexPath as NSIndexPath).section {
         case 0:
             if keyWords.count > 0 {
-                let text = keyWords[indexPath.row] as? String
-                let size = text!.boundingRectWithSize(CGSizeMake(CGFloat(MAXFLOAT), 35), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(12)], context: nil).size
-                return CGSizeMake(size.width+30, 35)
+                let text = keyWords[(indexPath as NSIndexPath).row] as? String
+                let size = text!.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 35), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 12)], context: nil).size
+                return CGSize(width: size.width+30, height: 35)
             }
         case 1:
             if searchArray.count > 0 {
-                let text = searchArray[indexPath.row]
-                let size = text.boundingRectWithSize(CGSizeMake(CGFloat(MAXFLOAT), 35), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(12)], context: nil).size
-                return CGSizeMake(size.width+30, 35)
+                let text = searchArray[(indexPath as NSIndexPath).row]
+                let size = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 35), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 12)], context: nil).size
+                return CGSize(width: size.width+30, height: 35)
             }
         default:
-            return CGSizeMake(80, 35)
+            return CGSize(width: 80, height: 35)
         }
         
 
-        return CGSizeMake(80, 35)
+        return CGSize(width: 80, height: 35)
         
     }
     
     //MARK - 滚动就取消响应 只有scrollView的实际内容大于scrollView的尺寸时才会有滚动事件
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         searchView.searchTextField.resignFirstResponder()
         
@@ -373,7 +373,7 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
 
 
 extension WOWSearchController:UITextFieldDelegate{
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text == "" {
             WOWHud.showMsg("请输入搜索关键字")
             return false
@@ -385,29 +385,29 @@ extension WOWSearchController:UITextFieldDelegate{
         return true
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool {
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
         hideResult()
         
         return true
     }
     
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         hideResult()
         return true
     }
     func showResult() {
         
         self.view.addSubview(v_bottom.magicView)
-        self.navigationShadowImageView?.hidden = true
-        v_bottom.magicView.hidden = false
-        v_bottom.magicView.reloadDataToPage(0)
+        self.navigationShadowImageView?.isHidden = true
+        v_bottom.magicView.isHidden = false
+        v_bottom.magicView.reloadData(toPage: 0)
     }
     
     func hideResult()  {
-        emptyView.hidden = true
-        self.navigationShadowImageView?.hidden = false
-        v_bottom.magicView.hidden = true
+        emptyView.isHidden = true
+        self.navigationShadowImageView?.isHidden = false
+        v_bottom.magicView.isHidden = true
         v_bottom.magicView.clearMemoryCache()
         self.v_bottom.magicView.removeFromSuperview()
 
@@ -435,17 +435,17 @@ extension WOWSearchController:VTMagicViewDataSource{
         
     }
     //获取所有菜单名，数组中存放字符串类型对象
-    func menuTitlesForMagicView(magicView: VTMagicView) -> [String] {
+    func menuTitles(for magicView: VTMagicView) -> [String] {
         return ["上新","销量","价格"]
     }
-    func magicView(magicView: VTMagicView, menuItemAtIndex itemIndex: UInt) -> UIButton{
+    func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
         
 //        let button = magicView .dequeueReusableItemWithIdentifier(self.identifier_magic_view_bar_item)
         
 ////        if ( button == nil) {
 //        
-            let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRectMake(0, 0, self.view.frame.width / 3, 50)) { (asc) in
+            let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: 50)) { (asc) in
                 print("you clicket status is "  , asc)
             }
             b.btnIndex = itemIndex
@@ -479,9 +479,9 @@ extension WOWSearchController:VTMagicViewDataSource{
 
     }
     
-    func magicView(magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
+    func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
         
-        let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
+        let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
         
         if ((vc == nil)) {
             
@@ -492,7 +492,7 @@ extension WOWSearchController:VTMagicViewDataSource{
         
         return vc!;
     }
-    func touchClick(btn:UIButton){
+    func touchClick(_ btn:UIButton){
         DLog(btn.state)
     }
 }
@@ -551,12 +551,12 @@ extension WOWSearchController:VTMagicViewDelegate{
 //        
 //        
 //    }
-    func refreshSubView( tab_index:UInt )
+    func refreshSubView( _ tab_index:UInt )
     {
         DLog("cid \(ob_cid.value) tab_index \(tab_index)")
         
-        if let b    = self.v_bottom.magicView.menuItemAtIndex(tab_index) as! TooglePriceBtn? ,
-            vc  = self.v_bottom.magicView.viewControllerAtPage(tab_index) as? WOWSearchChildController
+        if let b    = self.v_bottom.magicView.menuItem(at: tab_index) as! TooglePriceBtn? ,
+            let vc  = self.v_bottom.magicView.viewController(atPage: tab_index) as? WOWSearchChildController
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
 //            let query_cid          = ob_cid.value
@@ -575,11 +575,11 @@ extension WOWSearchController:VTMagicViewDelegate{
         }
     }
     
-    func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
+    func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         self.ob_tab_index.value = pageIndex
     }
     
-    func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
+    func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
         self.ob_tab_index.value = itemIndex
     }
 }

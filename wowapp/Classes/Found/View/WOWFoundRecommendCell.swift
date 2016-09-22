@@ -4,7 +4,7 @@ import FlexboxLayout
 
 protocol WOWFoundRecommendCellDelegate:class{
     func notLoginThanToLogin()
-    func toProductDetail(productId: Int?)
+    func toProductDetail(_ productId: Int?)
 }
 
 extension Double {
@@ -27,9 +27,9 @@ extension Double {
     }
 }
 extension UILabel{
-    func setStrokeWithText( str:String ){
+    func setStrokeWithText( _ str:String ){
         
-        let attrString      = NSAttributedString(string: str, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
+        let attrString      = NSAttributedString(string: str, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
         self.attributedText = attrString
 
     }
@@ -69,7 +69,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         super.awakeFromNib()
     }
     
-    func setData(p:WowModulePageItemVO){
+    func setData(_ p:WowModulePageItemVO){
         
         imageName                            = p.productImg!
         self.iv.set_webimage_url(imageName)
@@ -87,14 +87,14 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         if let price = p.sellPrice {
             if let originalPrice = p.originalPrice {
                 if originalPrice > price{
-                    right_label_price_stroke.hidden = false
+                    right_label_price_stroke.isHidden = false
                 }
             }else {
-                right_label_price_stroke.hidden = true
+                right_label_price_stroke.isHidden = true
             }
         }
         right_label_price_bottom.text        = p.get_formted_sell_price()
-        self.btnLike.selected = p.favorite ?? false
+        self.btnLike.isSelected = p.favorite ?? false
         self.product                         = p
         
       
@@ -102,7 +102,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         render()
         
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
@@ -130,11 +130,11 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         let image                   = UIImage(named: "like-gray") as UIImage?
         let image_selected          = UIImage(named: "like_select") as UIImage?
         
-        let button                  = UIButton(type: UIButtonType.Custom)
-        button.setImage(image, forState: .Normal)
-        button.setImage(image_selected, forState: .Selected)
+        let button                  = UIButton(type: UIButtonType.custom)
+        button.setImage(image, for: UIControlState())
+        button.setImage(image_selected, for: .selected)
         
-        button.addTarget(self, action: #selector(btn_like_toggle),forControlEvents:.TouchUpInside)
+        button.addTarget(self, action: #selector(btn_like_toggle),for:.touchUpInside)
 //        button.selected = false
         btnLike                     = button
         self.addSubview(btnLike)
@@ -162,7 +162,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         WOWClickLikeAction.requestFavoriteProduct(self.product?.productId ?? 0, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 
-               strongSelf.btnLike.selected  = isFavorite!
+               strongSelf.btnLike.isSelected  = isFavorite!
                 
             }
         })
@@ -201,10 +201,10 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         
         self.product_view =  UIView().configure({
             
-            $0.style.justifyContent = .SpaceAround
-            $0.style.alignSelf      = .FlexStart
+            $0.style.justifyContent = .spaceAround
+            $0.style.alignSelf      = .flexStart
             $0.style.margin         = defaultMargin
-            $0.style.flexDirection  = .Row
+            $0.style.flexDirection  = .row
             
             $0.style.dimensions     = Dimension(Float(self.w) ,Float(180.w))
             
@@ -217,57 +217,57 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
                 
                 UIView().configure({
                     $0.style.flex           = 1
-                    $0.style.justifyContent = .SpaceBetween
+                    $0.style.justifyContent = .spaceBetween
 //                    $0.style.dimensions     = ( Float(180.w) , Float(180.w))
                     $0.style.margin     =  (0, 0.0, 0, 0, 0.0, 8)
 
                     }, children: [
                         
                         right_label_top.configure({
-                            $0.textAlignment = .Left
-                            $0.lineBreakMode = .ByWordWrapping
+                            $0.textAlignment = .left
+                            $0.lineBreakMode = .byWordWrapping
                             $0.numberOfLines = 0
                             $0.setLineHeightAndLineBreak(1.03)
                             
                             $0.font = UIFont.systemScaleFontSize(16)
-                            $0.style.alignSelf = .FlexStart
+                            $0.style.alignSelf = .flexStart
                             $0.style.flex       = 2
 
                         }),
                         
                         right_label_ceneter.configure({
-                            $0.textAlignment    = .Left
+                            $0.textAlignment    = .left
                             $0.font             = UIFont.systemScaleFontSize(13)
                             $0.setLineHeightAndLineBreak(1.15)
                             $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
                             $0.numberOfLines    = 3
-                            $0.style.alignSelf  = .FlexStart
+                            $0.style.alignSelf  = .flexStart
                             $0.style.flex       = 5
                             
                         }),
                         
                        right_label_price_stroke.configure({
-                            $0.textAlignment    = .Left
+                            $0.textAlignment    = .left
                             $0.font             = UIFont.systemScaleFontSize(10)
                             $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
-                            $0.style.alignSelf  = .FlexStart
+                            $0.style.alignSelf  = .flexStart
                             $0.style.flex       = 1.5
 
                         }),
                         
                         UIView().configure({
 
-                            $0.style.flexDirection  = .Row
-                            $0.style.justifyContent = .SpaceBetween
+                            $0.style.flexDirection  = .row
+                            $0.style.justifyContent = .spaceBetween
                             $0.style.flex       = 2
 
                             }, children: [
                                 
                                 right_label_price_bottom.configure({
-                                    $0.textAlignment = .Left
+                                    $0.textAlignment = .left
                                     $0.setLineHeightAndLineBreak(1.05)
-                                    $0.font = UIFont.systemFontOfSize(14)
-                                    $0.style.alignSelf  = .FlexStart
+                                    $0.font = UIFont.systemFont(ofSize: 14)
+                                    $0.style.alignSelf  = .flexStart
 
                                 }),
                                 
@@ -278,7 +278,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
                                 
                                 btnLike.configure({
                                     $0.style.dimensions = ( Float(32.w) , Float(32.w))
-                                    $0.style.alignSelf  = .FlexStart
+                                    $0.style.alignSelf  = .flexStart
                                     $0.style.margin     =  (0, Float(-7.h), 0, 0, 0.0, 0)
 
                                 })

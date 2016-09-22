@@ -7,9 +7,29 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 protocol buyCarDelegate: class {
-    func goProductDetail(productId: Int?)
+    func goProductDetail(_ productId: Int?)
 }
 
 class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
@@ -26,7 +46,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     
     @IBOutlet weak var countLabel: UILabel!
     let identifier = "WOWTypeCollectionCell"
-    var typeArr = Array<String>?()
+    var typeArr = Array<String>()
     var model:WOWCarProductModel!
     weak var delegate: buyCarDelegate?
 
@@ -37,18 +57,18 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     }
     
     func defaultSetup() {
-        let nib = UINib(nibName:"WOWTypeCollectionCell", bundle:NSBundle.mainBundle())
-        collectionView?.registerNib(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
+        let nib = UINib(nibName:"WOWTypeCollectionCell", bundle:Bundle.main)
+        collectionView?.register(nib, forCellWithReuseIdentifier: identifier)
+        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
         collectionView?.collectionViewLayout = tagCellLayout
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func showData(model:WOWCarProductModel?) {
+    func showData(_ model:WOWCarProductModel?) {
         guard let model = model else{
             return
         }
@@ -61,24 +81,24 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
         countTextField.text = "\(model.productQty ?? 1)"
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         perPriceLabel.text = result
-        selectButton.selected = model.isSelected ?? false
+        selectButton.isSelected = model.isSelected ?? false
         let arr = [model.color ?? "",model.specName ?? ""]
         typeArr = arr
         collectionView.reloadData()
         
         if model.productQty < model.productStock {
-            addCountButton.enabled = true
-            addCountButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            addCountButton.isEnabled = true
+            addCountButton.setTitleColor(UIColor.black, for: UIControlState())
         }else {
-            addCountButton.enabled = false
-            addCountButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
+            addCountButton.isEnabled = false
+            addCountButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
         }
         if model.productQty <= 1 {
-            subCountButton.enabled = false
-            subCountButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
+            subCountButton.isEnabled = false
+            subCountButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
         }else {
-            subCountButton.enabled = true
-            subCountButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            subCountButton.isEnabled = true
+            subCountButton.setTitleColor(UIColor.black, for: UIControlState())
         }
         detailView.addTapGesture {[weak self] (tap) in
             if let strongSelf = self {
@@ -96,35 +116,33 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     
     
     //MARK: - TagCellLayout Delegate Methods
-    func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat {
+    func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
         return CGFloat(28.0)
     }
     
-    func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
+    func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
         
 
-            let item = typeArr?[index]
-            let title = item ?? ""
+            let item = typeArr[index]
+            let title = item 
             let width = title.size(Fontlevel004).width + 12
             return width
         
     }
     //MARK: - UICollectionView Delegate/Datasource Methods
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTypeCollectionCell
-            if let arr = typeArr {
-                let item = arr[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTypeCollectionCell
+                let item = arr[(indexPath as NSIndexPath).row]
                 cell.textLabel.text = item
-            }
         return cell
             
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return typeArr == nil ? 0 : (typeArr?.count)!
     }
 

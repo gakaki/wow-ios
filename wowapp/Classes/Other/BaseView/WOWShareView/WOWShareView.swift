@@ -13,7 +13,7 @@ enum WOWShareType:String{
     case wechat
 }
 
-typealias ShareViewAction = (shareType:WOWShareType) -> Void
+typealias ShareViewAction = (_ shareType:WOWShareType) -> Void
 
 class WOWShareBackView:UIView{
     var shareActionBack : ShareViewAction?
@@ -29,13 +29,13 @@ class WOWShareBackView:UIView{
     }
     
     lazy var backClear:UIView! = {
-        let v = UIView(frame:CGRectMake(0, self.h, self.w,self.popWindow.h))
+        let v = UIView(frame:CGRect(x: 0, y: self.h, width: self.w,height: self.popWindow.h))
         v.backgroundColor = UIColor.clearColor()
         return v
     }()
     
     lazy var shareView:WOWShareView = {
-       let v = NSBundle.mainBundle().loadNibNamed(String(WOWShareView), owner: self, options: nil).last as! WOWShareView
+       let v = Bundle.main.loadNibNamed(String(describing: WOWShareView), owner: self, options: nil)?.last as! WOWShareView
         v.friendView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
                 if let action = strongSelf.shareActionBack {
@@ -65,7 +65,7 @@ class WOWShareBackView:UIView{
         return v
     }()
     
-    private func setUP(){
+    fileprivate func setUP(){
         self.backgroundColor = MaskColor
         self.alpha = 0
         self.addTapGesture {[weak self](tap) in
@@ -76,7 +76,7 @@ class WOWShareBackView:UIView{
     }
 
     lazy var popWindow:UIWindow = {
-        let w = UIApplication.sharedApplication().delegate as! AppDelegate
+        let w = UIApplication.shared.delegate as! AppDelegate
         return w.window!
     }()
     
@@ -90,19 +90,19 @@ class WOWShareBackView:UIView{
                 make.height.equalTo(128)
             }
         }
-        UIView.animateWithDuration(0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1
             self.backClear.y = 0
-        }
+        }) 
     }
     
     func dismiss() {
-        UIView.animateWithDuration(0.3,animations: {
+        UIView.animate(withDuration: 0.3,animations: {
             self.alpha = 0
             self.backClear.y = MGScreenHeight + 10;
-        }){ (ret) in
+        }, completion: { (ret) in
             self.removeFromSuperview()
-        }
+        })
     }
 }
 

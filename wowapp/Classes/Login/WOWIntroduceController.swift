@@ -25,23 +25,23 @@ class WOWIntroduceController: WOWBaseViewController {
         super.setUI()
         let image = YYImage(named: "intro")
         let imageView = YYAnimatedImageView(image: image)
-        imageView.frame = CGRectMake(0, 0, self.view.w, self.view.h)
+        imageView.frame = CGRect(x: 0, y: 0, width: self.view.w, height: self.view.h)
         self.view.addSubview(imageView)
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 4.3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 4.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
             imageView.stopAnimating()
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.7 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-                mainVC?.modalTransitionStyle = .FlipHorizontal
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.7 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                let mainVC = UIStoryboard(name: "Main", bundle:Bundle.main).instantiateInitialViewController()
+                mainVC?.modalTransitionStyle = .flipHorizontal
                 AppDelegate.rootVC = mainVC
-                self.presentViewController(mainVC!, animated: true, completion: nil)
+                self.present(mainVC!, animated: true, completion: nil)
             })
         })
     }
 }
 
 extension WOWIntroduceController:UIWebViewDelegate{
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         DLog("结束了")
     }
 }

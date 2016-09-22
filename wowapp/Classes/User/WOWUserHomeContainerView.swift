@@ -16,9 +16,9 @@ class WOWUserHomeContainerView: UICollectionReusableView {
         configSubviews()
     }
     
-    private func configSubviews(){
-        backgroundColor = UIColor.whiteColor()
-        topHeadView = NSBundle.mainBundle().loadNibNamed("WOWUserHomeTopView", owner:self, options: nil).last as! WOWUserHomeTopView
+    fileprivate func configSubviews(){
+        backgroundColor = UIColor.white
+        topHeadView = Bundle.main.loadNibNamed("WOWUserHomeTopView", owner:self, options: nil)?.last as! WOWUserHomeTopView
         addSubview(topHeadView)
         topHeadView.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{
@@ -27,11 +27,11 @@ class WOWUserHomeContainerView: UICollectionReusableView {
             }
         }
     
-        topHeadView.focusButton.addTarget(self, action:#selector(focusButtonClick), forControlEvents:.TouchUpInside)
+        topHeadView.focusButton.addTarget(self, action:#selector(focusButtonClick), for:.touchUpInside)
         WOWCheckMenuSetting.defaultSetUp()
         WOWCheckMenuSetting.fill = false
         WOWCheckMenuSetting.selectedIndex = 1
-        underCheckView = WOWTopMenuTitleView(frame:CGRectMake(0, 0, MGScreenWidth, 36), titles: ["喜欢的场景","喜欢的单品"])
+        underCheckView = WOWTopMenuTitleView(frame:CGRect(x: 0, y: 0, width: MGScreenWidth, height: 36), titles: ["喜欢的场景","喜欢的单品"])
         addSubview(underCheckView)
         underCheckView.snp_makeConstraints {[weak self](make) in
             if let strongSelf = self{

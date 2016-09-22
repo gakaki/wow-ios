@@ -17,13 +17,13 @@ import UIKit
 // MARK: - 图片类型处理
 //========================================================
 enum ImageSource {
-    case Local(name: String)
-    case Network(urlStr: String)
+    case local(name: String)
+    case network(urlStr: String)
 }
 
 enum ImageType {
-    case Local
-    case Network
+    case local
+    case network
 }
 
 struct ImageBox {
@@ -36,13 +36,13 @@ struct ImageBox {
         self.imageArray = []
         
         switch imageType {
-        case .Local:
+        case .local:
             for str in imageArray {
-                self.imageArray.append(ImageSource.Local(name: str))
+                self.imageArray.append(ImageSource.local(name: str))
             }
-        case .Network:
+        case .network:
             for str in imageArray {
-                self.imageArray.append(ImageSource.Network(urlStr: str))
+                self.imageArray.append(ImageSource.network(urlStr: str))
             }
         }
     }
@@ -59,39 +59,39 @@ struct ImageBox {
 //========================================================
 
 enum PageControlAliment {
-    case CenterBottom
-    case LeftBottom
-    case RightBottom
+    case centerBottom
+    case leftBottom
+    case rightBottom
 }
 
 protocol PageControlAlimentProtocol: class{
     var pageControlAliment: PageControlAliment {get set}
-    func AdjustPageControlPlace(pageControl: UIPageControl)
+    func AdjustPageControlPlace(_ pageControl: UIPageControl)
 }
 
 extension PageControlAlimentProtocol where Self : UIView {
-    func AdjustPageControlPlace(pageControl: UIPageControl) {
+    func AdjustPageControlPlace(_ pageControl: UIPageControl) {
 
-        if !pageControl.hidden {
+        if !pageControl.isHidden {
             switch self.pageControlAliment {
-            case .CenterBottom:
+            case .centerBottom:
                 let pageW:CGFloat = CGFloat(pageControl.numberOfPages * 15)
                 let pageH:CGFloat = 20
                 let pageX = self.center.x - 0.5 * pageW
                 let pageY = self.bounds.height -  pageH
-                pageControl.frame = CGRectMake(pageX, pageY, pageW, pageH)
-            case .LeftBottom:
+                pageControl.frame = CGRect(x: pageX, y: pageY, width: pageW, height: pageH)
+            case .leftBottom:
                 let pageW:CGFloat = CGFloat(pageControl.numberOfPages * 15)
                 let pageH:CGFloat = 20
                 let pageX = self.bounds.origin.x
                 let pageY = self.bounds.height -  pageH
-                pageControl.frame = CGRectMake(pageX, pageY, pageW, pageH)
-            case .RightBottom:
+                pageControl.frame = CGRect(x: pageX, y: pageY, width: pageW, height: pageH)
+            case .rightBottom:
                 let pageW:CGFloat = CGFloat(pageControl.numberOfPages * 15)
                 let pageH:CGFloat = 20
                 let pageX = self.bounds.width - pageW
                 let pageY = self.bounds.height -  pageH
-                pageControl.frame = CGRectMake(pageX, pageY, pageW, pageH)
+                pageControl.frame = CGRect(x: pageX, y: pageY, width: pageW, height: pageH)
 
             }
         }
@@ -107,7 +107,7 @@ protocol EndlessCycleProtocol: class{
     /// 开启自动滚动后，自动翻页的时间
     var timeInterval: Double {get set}
     /// 用于控制自动滚动的定时器
-    var timer: NSTimer? {get set}
+    var timer: Timer? {get set}
     /// 是否开启无限滚动模式
     var needEndlessScroll: Bool {get set}
     /// 开启无限滚动模式后，cell需要增加的倍数
@@ -118,17 +118,17 @@ protocol EndlessCycleProtocol: class{
     /**
     设置定时器,用于控制自动翻页
     */
-    func setupTimer(userInfo: AnyObject?)
+    func setupTimer(_ userInfo: AnyObject?)
 
     /**
     在无限滚动模式中，显示的第一页其实是最中间的那一个cell
     */
-    func showFirstImagePageInCollectionView(collectionView: UICollectionView)
+    func showFirstImagePageInCollectionView(_ collectionView: UICollectionView)
 }
 
 extension EndlessCycleProtocol where Self : UIView  {
     
-    func autoChangePicture(collectionView: UICollectionView) {
+    func autoChangePicture(_ collectionView: UICollectionView) {
         
         guard actualItemCount != 0 else {
             return
@@ -142,12 +142,12 @@ extension EndlessCycleProtocol where Self : UIView  {
             showFirstImagePageInCollectionView(collectionView)
         }else {
             
-            collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: nextIndex, inSection: 0), atScrollPosition: .None, animated: true)
+            collectionView.scrollToItem(at: IndexPath(item: nextIndex, section: 0), at: UICollectionViewScrollPosition(), animated: true)
         }
         
     }
     
-    func showFirstImagePageInCollectionView(collectionView: UICollectionView) {
+    func showFirstImagePageInCollectionView(_ collectionView: UICollectionView) {
         guard actualItemCount != 0 else {
             return
         }
@@ -155,6 +155,6 @@ extension EndlessCycleProtocol where Self : UIView  {
         if needEndlessScroll {
             newIndex = actualItemCount / 2
         }
-        collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: newIndex, inSection: 0), atScrollPosition: .None, animated: false)
+        collectionView.scrollToItem(at: IndexPath(item: newIndex, section: 0), at: UICollectionViewScrollPosition(), animated: false)
     }
 }

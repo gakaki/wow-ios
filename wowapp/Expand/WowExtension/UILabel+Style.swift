@@ -8,7 +8,7 @@
 
 
 extension UILabel {
-    func setLineHeightAndLineBreak(lineHeight: CGFloat) {
+    func setLineHeightAndLineBreak(_ lineHeight: CGFloat) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 1.0
         paragraphStyle.lineHeightMultiple = lineHeight
@@ -23,7 +23,7 @@ extension UILabel {
         }
     }
     // 指定的字体加横线
-    func strokeWithText( str1:String,str2:String,str2Font:CGFloat,str2Color:UIColor){
+    func strokeWithText( _ str1:String,str2:String,str2Font:CGFloat,str2Color:UIColor){
         
         let  mustr1 = NSMutableAttributedString.init(string: str1 + str2)
         
@@ -46,7 +46,7 @@ extension UILabel {
     }
 
     // 初始化
-    class func initLable(title:String , titleColor:UIColor ,textAlignment:NSTextAlignment ,font:CGFloat) -> UILabel {
+    class func initLable(_ title:String , titleColor:UIColor ,textAlignment:NSTextAlignment ,font:CGFloat) -> UILabel {
         let label = UILabel()
         label.text = title
         label.textColor = titleColor

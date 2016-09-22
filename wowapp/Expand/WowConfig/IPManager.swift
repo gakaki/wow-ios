@@ -12,7 +12,7 @@ class IPManager {
     
     static let sharedInstance = IPManager()
     
-    private init() {
+    fileprivate init() {
         self.get_ip_public()
     } //This prevents others from using the default '()' initializer for this class.
     
@@ -36,10 +36,10 @@ class IPManager {
                     if addr.sa_family == UInt8(AF_INET) || addr.sa_family == UInt8(AF_INET6) {
                         
                         // Convert interface address to a human readable string:
-                        var hostname = [CChar](count: Int(NI_MAXHOST), repeatedValue: 0)
+                        var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
                         if (getnameinfo(&addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count),
                             nil, socklen_t(0), NI_NUMERICHOST) == 0) {
-                            if let address = String.fromCString(hostname) {
+                            if let address = String(validatingUTF8: hostname) {
                                 addresses.append(address)
                             }
                         }
@@ -70,15 +70,15 @@ class IPManager {
                 
                 if addr.sa_family == UInt8(AF_LINK) {
                     if name?.hasPrefix("en") == true {
-                        networkData = unsafeBitCast(ptr.memory.ifa_data, UnsafeMutablePointer<if_data>.self)
-                        wifiDataSent += networkData.memory.ifi_obytes
-                        wifiDataReceived += networkData.memory.ifi_ibytes
+                        networkData = unsafeBitCast(ptr.memory.ifa_data, to: UnsafeMutablePointer<if_data>.self)
+                        wifiDataSent += networkData.pointee.ifi_obytes
+                        wifiDataReceived += networkData.pointee.ifi_ibytes
                     }
                     
                     if name?.hasPrefix("pdp_ip") == true {
-                        networkData = unsafeBitCast(ptr.memory.ifa_data, UnsafeMutablePointer<if_data>.self)
-                        wwanDataSent += networkData.memory.ifi_obytes
-                        wwanDataReceived += networkData.memory.ifi_ibytes
+                        networkData = unsafeBitCast(ptr.memory.ifa_data, to: UnsafeMutablePointer<if_data>.self)
+                        wwanDataSent += networkData.pointee.ifi_obytes
+                        wwanDataReceived += networkData.pointee.ifi_ibytes
                     }
                 }
             }
@@ -93,16 +93,16 @@ class IPManager {
     func get_ip_public() -> String {
         var  ip_final  = ""
         do {
-            let ipURL       = NSURL(string: "http://pv.sohu.com/cityjson?ie=utf-8")!
-            guard var  ip: String  = try! String(contentsOfURL: ipURL, encoding: NSUTF8StringEncoding) else { return "" }
+            let ipURL       = URL(string: "http://pv.sohu.com/cityjson?ie=utf-8")!
+            guard var  ip: String  = try! String(contentsOf: ipURL, encoding: String.Encoding.utf8) else { return "" }
             
             if ip.contains("var returnCitySN = ") {
                 //对字符串进行处理，只要后面json那段
                 ip = ip[ip.getIndexOf("=")!...ip.getIndexOf(";")!]
 
                 //将字符串转换成二进制进行Json解析
-                let data: NSData = ip.dataUsingEncoding(NSUTF8StringEncoding)!
-                let dict: [String : String] = (try NSJSONSerialization.JSONObjectWithData(data, options:[])) as! [String : String]
+                let data: Data = ip.data(using: String.Encoding.utf8)!
+                let dict: [String : String] = (try JSONSerialization.jsonObject(with: data, options:[])) as! [String : String]
                 
                 ip_final = dict["cip"]!
 //                print(dict,ip_final)

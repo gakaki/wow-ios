@@ -8,7 +8,7 @@ struct WOWVOAd: Mappable {
     var contentUrl              :String?
     var isEnable                   :Bool?
     
-    init?(_ map: Map) {
+    init?(map: Map) {
         
     }
     init?() {

@@ -18,7 +18,7 @@ class WOWFavoriteListModel: WOWBaseModel,Mappable{
     
     var cellHeight:CGFloat = 0
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         id      <- map["id"]
         type    <- map["type"]
         imgUrl  <- map["imageurl"]

@@ -12,47 +12,47 @@ class VCBaseNavCart:WOWBaseViewController{
         config_btn_cart()
         buyCarCount()
         addObservers()
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         
     }
     deinit {
         removeObservers()
     }
     
-    private func addObservers(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(buyCarCount), name:WOWUpdateCarBadgeNotificationKey, object:nil)
+    fileprivate func addObservers(){
+        NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
     }
-    private func removeObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWUpdateCarBadgeNotificationKey, object: nil)
+    fileprivate func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
     }
 
     let offset_icon = {
-      return UIApplication.sharedApplication().statusBarFrame.height
+      return UIApplication.shared.statusBarFrame.height
     }
     let offset_width = CGFloat(10)
 
     func config_btn_back(){
         let image       = UIImage(named: "top_back")! as UIImage
-        let button      = UIButton(type:.Custom)
-        button.frame    = CGRectMake(offset_width, offset_icon(), btn_width_height, btn_width_height)
-        button .setBackgroundImage(image, forState: UIControlState.Normal)
-        button.addTarget(self, action:#selector(btn_back_action), forControlEvents:UIControlEvents.TouchUpInside)
+        let button      = UIButton(type:.custom)
+        button.frame    = CGRect(x: offset_width, y: offset_icon(), width: btn_width_height, height: btn_width_height)
+        button .setBackgroundImage(image, for: UIControlState())
+        button.addTarget(self, action:#selector(btn_back_action), for:UIControlEvents.touchUpInside)
         self.view.addSubview(button)
     }
     
     func config_btn_cart(){
         let image       = UIImage(named: "top_car")! as UIImage
-        carEntranceButton      = MIBadgeButton(type: .Custom)
-        carEntranceButton.frame    = CGRectMake(self.view.frame.width - btn_width_height - offset_width, offset_icon(), btn_width_height, btn_width_height)
-        carEntranceButton .setBackgroundImage(image, forState: UIControlState.Normal)
-        carEntranceButton.addTarget(self, action:#selector(btn_cart_action), forControlEvents:UIControlEvents.TouchUpInside)
+        carEntranceButton      = MIBadgeButton(type: .custom)
+        carEntranceButton.frame    = CGRect(x: self.view.frame.width - btn_width_height - offset_width, y: offset_icon(), width: btn_width_height, height: btn_width_height)
+        carEntranceButton .setBackgroundImage(image, for: UIControlState())
+        carEntranceButton.addTarget(self, action:#selector(btn_cart_action), for:UIControlEvents.touchUpInside)
         self.view.addSubview(carEntranceButton)
     }
     

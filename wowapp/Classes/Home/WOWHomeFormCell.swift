@@ -10,9 +10,9 @@ import UIKit
 
 protocol WOWHomeFormDelegate:class {
     // 右滑进入更多商品代理
-    func goToVC(m:WOWModelVoTopic)
+    func goToVC(_ m:WOWModelVoTopic)
     // 点击CollentcionView－Item代理
-    func goToProdectDetailVC(productId: Int?)
+    func goToProdectDetailVC(_ productId: Int?)
     
     //刷新主页数据 有一个情况，当上面的collectionView 中的产品与下面的tableView的产品为同一个产品， 喜欢上面的，让下面的实时刷新
 //    func reloadBottomTableViewData()
@@ -50,7 +50,7 @@ class WOWHomeFormCell: UITableViewCell {
             // 给collectionView 的 tag 值 方便记录不同collectionView 的偏移量
             collectionView.tag = indexPathSection ?? 0
             // 回滚collectionView本应偏移的位置
-            collectionView.setContentOffset(CGPointMake(self.scrollViewOffsetDic[collectionView.tag] ?? 0, 0), animated: false)
+            collectionView.setContentOffset(CGPoint(x: self.scrollViewOffsetDic[collectionView.tag] ?? 0, y: 0), animated: false)
         }
     }
     lazy var xzm_footer:XZMRefreshNormalFooter = {
@@ -80,7 +80,7 @@ class WOWHomeFormCell: UITableViewCell {
         self.resetSeparators()
         
         
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
+        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
         
 //        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
         
@@ -89,12 +89,12 @@ class WOWHomeFormCell: UITableViewCell {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
     
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(refreshData), name:WOWRefreshFavoritNotificationKey, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
         
     }
     
 
-    func refreshData(sender: NSNotification)  {
+    func refreshData(_ sender: Notification)  {
         guard (sender.object != nil) else{//
             return
         }
@@ -113,62 +113,62 @@ class WOWHomeFormCell: UITableViewCell {
     
 }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
     }
     
 }
 extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArr?.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WOWGoodsSmallCell", forIndexPath: indexPath) as! WOWGoodsSmallCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWGoodsSmallCell", for: indexPath) as! WOWGoodsSmallCell
         //FIX 测试数据
         cell.pictureImageView.image = UIImage(named: "4")
-        let model = dataArr?[indexPath.item]
+        let model = dataArr?[(indexPath as NSIndexPath).item]
         if let m = model{
             cell.showData(m, indexPath: indexPath)
-            cell.view_rightline.hidden = true
-            cell.bottomLine.hidden = true
+            cell.view_rightline.isHidden = true
+            cell.bottomLine.isHidden = true
         }
     
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(160,246)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 160,height: 246)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 15
     }
     //第一个cell居中显示
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-        let firstIndexPath = NSIndexPath(forItem: 0, inSection: section)
-        let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: firstIndexPath)
+        let firstIndexPath = IndexPath(item: 0, section: section)
+        let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: firstIndexPath)
         
         return UIEdgeInsetsMake(0, (collectionView.bounds.size.width - firstSize.width) / 2,
                                 0, 15)
     }
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if let del = delegate {
             
-            let product = dataArr?[indexPath.row]
+            let product = dataArr?[(indexPath as NSIndexPath).row]
             del.goToProdectDetailVC(product?.productId)
             
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         // 记录当前collectionView的偏移量
         let horizontalOffset = scrollView.contentOffset.x

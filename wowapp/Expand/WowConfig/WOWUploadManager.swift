@@ -15,9 +15,9 @@ import FCUUID
 class WOWUploadManager {
     
     static let sharedManager = WOWUploadManager()
-    private init(){}
+    fileprivate init(){}
     // 上传头像
-    static  func upload(image:UIImage,successClosure:SuccessClosure,failClosure:FailClosure){
+    static  func upload(_ image:UIImage,successClosure:@escaping SuccessClosure,failClosure:@escaping FailClosure){
 
         let image = image.fixOrientation()
         let data = UIImageJPEGRepresentation(image,0.5)
@@ -33,12 +33,12 @@ class WOWUploadManager {
             cancellationSignal: nil
         )
          //          拼接唯一字符串
-        let onlyStr = FCUUID.uuidForDevice() + (NSDate().timeIntervalSince1970 * 1000).toString
+        let onlyStr = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
         let hashids                 = Hashids(salt:onlyStr)
        
         let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
         
-        let qiniu_token_url         = [BaseUrl,"/",URL_QINIU_TOKEN].joinWithSeparator("")
+        let qiniu_token_url         = [BaseUrl,"/",URL_QINIU_TOKEN].joined(separator: "")
         
         let json_str                = json_serialize( ["key": qiniu_key,"bucket": "wowdsgn"] )
         let params_qiniu            = ["paramJson": json_str ]

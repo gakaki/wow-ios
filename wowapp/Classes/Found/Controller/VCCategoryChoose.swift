@@ -17,7 +17,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             super.awakeFromNib()
         }
         
-        func setModel(m:WOWFoundCategoryModel){
+        func setModel(_ m:WOWFoundCategoryModel){
 //            label_name.text      = m.categoryName
 //            print(label_name)
 //            if let pic = m.productImg {
@@ -29,7 +29,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         override init(frame: CGRect) {
             super.init(frame: frame)
             
-            backgroundColor     = UIColor.whiteColor()
+            backgroundColor     = UIColor.white
             
 
             pictureImageView    = UIImageView()
@@ -74,18 +74,18 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             super.awakeFromNib()
         }
         
-        override func setSelected(selected: Bool, animated: Bool) {
+        override func setSelected(_ selected: Bool, animated: Bool) {
             super.setSelected(selected, animated: animated)
             if ( selected == true){
-                label_name.textColor  = UIColor.blackColor()
-                v_black_r.hidden = false
+                label_name.textColor  = UIColor.black
+                v_black_r.isHidden = false
             }else{
                 label_name.textColor  = UIColor(hexString:"808080")
-                v_black_r.hidden = true
+                v_black_r.isHidden = true
             }
         }
         
-        func setModel(m:WOWFoundCategoryModel)  {
+        func setModel(_ m:WOWFoundCategoryModel)  {
             label_name.text = m.categoryName
         }
         
@@ -135,13 +135,13 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
     func createTvLeft() {
         
         self.title           = "全部分类"
-        tv                   = UITableView(frame:CGRectMake(0, 0 , self.tv_width, MGScreenHeight), style:.Plain)
+        tv                   = UITableView(frame:CGRect(x: 0, y: 0 , width: self.tv_width, height: MGScreenHeight), style:.Plain)
         tv.separatorColor    = UIColor(hexString:"EAEAEA")
         tv.estimatedRowHeight  = 60.w
         
         tv.delegate          = self
         tv.dataSource        = self
-        tv.registerClass(TvCell.self, forCellReuseIdentifier:String(TvCell))
+        tv.register(TvCell.self, forCellReuseIdentifier:String(describing: TvCell))
 //        tv.bounces           = false
         tv.showsVerticalScrollIndicator = false
         self.view.addSubview(tv)
@@ -154,10 +154,10 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         let padding                            = CGFloat(15)
         let cell_width                         = (cv_width  - padding * 3) / 2
         let cell_height                        = cell_width + 1 + 30
-        let frame                              = CGRectMake( self.tv_width, 0, cv_width, MGScreenHeight)
+        let frame                              = CGRect( x: self.tv_width, y: 0, width: cv_width, height: MGScreenHeight)
         
         let layout                             = UICollectionViewFlowLayout()
-        layout.scrollDirection                 = .Vertical
+        layout.scrollDirection                 = .vertical
         layout.sectionInset                    = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         
         
@@ -172,10 +172,10 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         cv.delegate                             = self
         cv.dataSource                           = self
         cv.backgroundColor                      = UIColor(hue:0.00, saturation:0.00, brightness:0.96, alpha:1.00)
-        cv.backgroundView                       = UIView(frame:CGRectZero)
+        cv.backgroundView                       = UIView(frame:CGRect.zero)
         
         
-        cv.registerClass(CVCell.self, forCellWithReuseIdentifier:String(CVCell))
+        cv.register(CVCell.self, forCellWithReuseIdentifier:String(describing: CVCell))
         cv.showsVerticalScrollIndicator         = false
         cv.showsHorizontalScrollIndicator       = false
 //        cv.scrollEnabled                        = false
@@ -210,7 +210,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         super.request()
         
         WOWHud.showLoading()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
 
@@ -219,9 +219,9 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
                 strongSelf.tv.reloadData()
                 
                 //默认选中第一个 触发collection变化
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                strongSelf.tv.selectRowAtIndexPath(  indexPath , animated: true, scrollPosition: UITableViewScrollPosition.Top)
-                strongSelf.tableView(strongSelf.tv, didSelectRowAtIndexPath: indexPath)
+                let indexPath = IndexPath(row: 0, section: 0)
+                strongSelf.tv.selectRow(  at: indexPath , animated: true, scrollPosition: UITableViewScrollPosition.top)
+                strongSelf.tableView(strongSelf.tv, didSelectRowAt: indexPath)
                 
             }
             
@@ -233,11 +233,11 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         }
     }
     
-    func request_sub_cid(cid:Int) {
+    func request_sub_cid(_ cid:Int) {
     
         WOWHud.showLoading()
 
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
                 
@@ -250,9 +250,9 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
                 
              
                 //默认选中第一个
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                strongSelf.cv.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
-                strongSelf.cv.setContentOffset(CGPointZero, animated: false)
+                let indexPath = IndexPath(row: 0, section: 0)
+                strongSelf.cv.scrollToItem(at: indexPath, at: .top, animated: false)
+                strongSelf.cv.setContentOffset(CGPoint.zero, animated: false)
 
                 WOWHud.dismiss()
 
@@ -271,25 +271,25 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
 
 extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return vo_categories_arr.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell                = tableView.dequeueReusableCellWithIdentifier(String(TvCell), forIndexPath: indexPath) as! TvCell
-        cell.selectionStyle     = .None
-        let model               = vo_categories_arr[indexPath.section]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell                = tableView.dequeueReusableCell(withIdentifier: String(describing: TvCell), for: indexPath) as! TvCell
+        cell.selectionStyle     = .none
+        let model               = vo_categories_arr[(indexPath as NSIndexPath).section]
         cell.setModel(model)
         
         
         return cell
     }
   
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
 //    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -301,8 +301,8 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
 //        return 60.w
 //    }
    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let m = vo_categories_arr[indexPath.section]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let m = vo_categories_arr[(indexPath as NSIndexPath).section]
 
         if let cid = m.categoryID {
             request_sub_cid(cid)
@@ -314,25 +314,25 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
 extension VCCategoryChoose:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let c = self.vo_categories_sub_arr.count
         return c
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(CVCell), forIndexPath: indexPath) as! CVCell
-        let m               = vo_categories_sub_arr[indexPath.item]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CVCell), for: indexPath) as! CVCell
+        let m               = vo_categories_sub_arr[(indexPath as NSIndexPath).item]
         cell.setModel(m)
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let m = vo_categories_sub_arr[indexPath.item]
-        if let cid = m.categoryID , cname = m.categoryName{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let m = vo_categories_sub_arr[(indexPath as NSIndexPath).item]
+        if let cid = m.categoryID , let cname = m.categoryName{
                 toVCCategory( cid ,cname: cname)
         }
  

@@ -13,9 +13,9 @@ public typealias NavigationItemHandler = () -> ()
 
 public extension UIViewController{
     
-    func makeCustomerNavigationItem(title:String!,left:Bool,isOffset:Bool = false,handler:NavigationItemHandler?){
+    func makeCustomerNavigationItem(_ title:String!,left:Bool,isOffset:Bool = false,handler:NavigationItemHandler?){
 //        self.navigationItem.leftBarButtonItems = nil
-        let item = UIBarButtonItem(title: title, style: .Plain, target: self, action: #selector(UIViewController.itemClick(_:)))
+        let item = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(UIViewController.itemClick(_:)))
         if let action = handler {
              ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:item)] = action
         }
@@ -33,11 +33,11 @@ public extension UIViewController{
         
     }
     
-    func makeCustomerImageNavigationItem(image:String!,left:Bool,isOffset:Bool = false,handler:NavigationItemHandler){
+    func makeCustomerImageNavigationItem(_ image:String!,left:Bool,isOffset:Bool = false,handler:@escaping NavigationItemHandler){
         let image = UIImage(named:image)
-        let item = UIBarButtonItem(image:image?.imageWithRenderingMode(.AlwaysOriginal), style: .Plain, target: self, action: #selector(UIViewController.itemClick(_:)))
+        let item = UIBarButtonItem(image:image?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(UIViewController.itemClick(_:)))
         ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:item)] = handler
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spaceItem.width = -10
         
         if left{
@@ -60,7 +60,7 @@ public extension UIViewController{
         }
     }
     
-    func makeBuyCarNavigationItem(carEntranceButton:UIButton, handler:NavigationItemHandler){
+    func makeBuyCarNavigationItem(_ carEntranceButton:UIButton, handler:@escaping NavigationItemHandler){
 
         
         let item = UIBarButtonItem(customView: carEntranceButton)
@@ -72,7 +72,7 @@ public extension UIViewController{
         
         ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:carEntranceButton)] = handler
         
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spaceItem.width = -10
         self.navigationItem.rightBarButtonItem = item
         self.navigationItem.rightBarButtonItems = [spaceItem,item]
@@ -84,11 +84,11 @@ public extension UIViewController{
     
     }
     
-    func makeRightNavigationItem(navigationItem:UIView){
+    func makeRightNavigationItem(_ navigationItem:UIView){
         
         let item = UIBarButtonItem(customView: navigationItem)
         
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spaceItem.width = -10
         self.navigationItem.rightBarButtonItem = item
         self.navigationItem.rightBarButtonItems = [spaceItem,item]
@@ -101,7 +101,7 @@ public extension UIViewController{
     }
    
     
-    func itemClick(item:UIBarButtonItem){
+    func itemClick(_ item:UIBarButtonItem){
         if let closure = ActionManager.sharedManager.actionDict[NSValue(nonretainedObject:item)]{
             closure()
         }
@@ -116,15 +116,15 @@ public extension UIViewController{
     func forwardController() ->UIViewController?{
         let vcs = self.navigationController?.viewControllers
         if let controllers = vcs {
-            let position =  controllers.indexOf(self)
+            let position =  controllers.index(of: self)
             return controllers[position! - 1]
         }
         return nil
     }
     
-    func forwardControllerType(controller:AnyClass) -> Bool {
+    func forwardControllerType(_ controller:AnyClass) -> Bool {
         if let v = forwardController(){
-            if v.isKindOfClass(controller) {
+            if v.isKind(of: controller) {
                 return true
             }
         }

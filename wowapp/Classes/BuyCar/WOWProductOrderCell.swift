@@ -29,18 +29,18 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     }
     
     func defaultSetup() {
-        let nib = UINib(nibName:"WOWTypeCollectionCell", bundle:NSBundle.mainBundle())
-        collectionView?.registerNib(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .Left, delegate: self)
+        let nib = UINib(nibName:"WOWTypeCollectionCell", bundle:Bundle.main)
+        collectionView?.register(nib, forCellWithReuseIdentifier: identifier)
+        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
         collectionView?.collectionViewLayout = tagCellLayout
         
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func showData(model:WOWCarProductModel?) {
+    func showData(_ model:WOWCarProductModel?) {
         guard let model = model else{
             return
         }
@@ -67,11 +67,11 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     
     
     //MARK: - TagCellLayout Delegate Methods
-    func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat {
+    func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
         return CGFloat(28.0)
     }
     
-    func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
+    func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
         
         
         let item = typeArr?[index]
@@ -81,21 +81,21 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         
     }
     //MARK: - UICollectionView Delegate/Datasource Methods
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! WOWTypeCollectionCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTypeCollectionCell
         if let arr = typeArr {
-            let item = arr[indexPath.row]
+            let item = arr[(indexPath as NSIndexPath).row]
             cell.textLabel.text = item
         }
         return cell
         
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return typeArr == nil ? 0 : (typeArr?.count)!
     }
     

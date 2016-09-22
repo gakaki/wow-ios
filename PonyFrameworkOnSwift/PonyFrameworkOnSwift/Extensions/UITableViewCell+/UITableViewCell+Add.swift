@@ -13,9 +13,9 @@ public extension UITableViewCell {
      重置cell的 margin 居中对齐
      */
     func resetSeparators() {
-        separatorInset = UIEdgeInsetsZero
+        separatorInset = UIEdgeInsets.zero
         preservesSuperviewLayoutMargins = false
-        layoutMargins = UIEdgeInsetsZero
+        layoutMargins = UIEdgeInsets.zero
     }
     
 }

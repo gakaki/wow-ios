@@ -1,6 +1,0 @@
-framework module StyleKit {
-  umbrella header "StyleKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

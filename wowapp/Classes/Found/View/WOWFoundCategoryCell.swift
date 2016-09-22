@@ -3,7 +3,7 @@ import SnapKit
 import YYImage
 
 protocol WOWFoundCategoryCellDelegate:class{
-    func foundCategorycellTouchInside(m:WOWCategoryModel)
+    func foundCategorycellTouchInside(_ m:WOWCategoryModel)
 }
 //MARK: CollectionViewCell
 class WOWFoundCategoryCellCollectionViewCell:UICollectionViewCell{
@@ -25,7 +25,7 @@ class WOWFoundCategoryCellCollectionViewCell:UICollectionViewCell{
         
         pictureImageView    = UIImageView()
         label               = UILabel()
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         
         
         overlay             = UIView()
@@ -56,7 +56,7 @@ class WOWFoundCategoryCellCollectionViewCell:UICollectionViewCell{
             make.center.equalTo(self)
         }
         
-        self.bringSubviewToFront(label)
+        self.bringSubview(toFront: label)
     }
 }
 
@@ -89,7 +89,7 @@ class WOWFoundCategoryCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
@@ -102,7 +102,7 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
         
 
         let layout                                   = UICollectionViewFlowLayout()
-        layout.scrollDirection                       = .Vertical
+        layout.scrollDirection                       = .vertical
         layout.sectionInset                          = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         layout.itemSize                              = CGSize(width: self.frame.width / 2 - CGFloat(8), height: self.frame.width / 3 - 15)
         layout.minimumInteritemSpacing               = 0
@@ -114,36 +114,36 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
         
         self.cv.delegate                             = self
         self.cv.dataSource                           = self
-        self.cv.backgroundColor                      = UIColor.whiteColor()
-        self.cv.registerClass(WOWFoundCategoryCellCollectionViewCell.self, forCellWithReuseIdentifier:String(WOWFoundCategoryCellCollectionViewCell))
+        self.cv.backgroundColor                      = UIColor.white
+        self.cv.register(WOWFoundCategoryCellCollectionViewCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundCategoryCellCollectionViewCell))
         self.cv.showsVerticalScrollIndicator         = false
         self.cv.showsHorizontalScrollIndicator       = false
-        self.cv.scrollEnabled                        = false
+        self.cv.isScrollEnabled                        = false
         self.contentView.addSubview(self.cv)
         
         
         
     }
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFoundCategoryCellCollectionViewCell), forIndexPath: indexPath) as! WOWFoundCategoryCellCollectionViewCell
-        let model           = categories[indexPath.item]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundCategoryCellCollectionViewCell), for: indexPath) as! WOWFoundCategoryCellCollectionViewCell
+        let model           = categories[(indexPath as NSIndexPath).item]
         
         cell.pictureImageView.set_webimage_url( model.categoryBgImg!)
         cell.label.text     = model.categoryName!
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = self.delegate {
-            del.foundCategorycellTouchInside(categories[indexPath.item])
+            del.foundCategorycellTouchInside(categories[(indexPath as NSIndexPath).item])
 
 //            let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(WOWFoundCategoryCellCollectionViewCell), forIndexPath: indexPath) as! WOWFoundCategoryCellCollectionViewCell
 //            
@@ -166,13 +166,13 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
 }
 
 extension UIView {
-    func fadeIn(duration: NSTimeInterval = 1.0, delay: NSTimeInterval = 0.0, completion: ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
-        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+    func fadeIn(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.alpha = 1.0
             }, completion: completion)  }
     
-    func fadeOut(duration: NSTimeInterval = 1.0, delay: NSTimeInterval = 0.0, completion: (Bool) -> Void = {(finished: Bool) -> Void in}) {
-        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+    func fadeOut(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.alpha = 0.0
             }, completion: completion)
     }

@@ -16,16 +16,16 @@ class TooglePriceBtn:UIButton {
         didSet{
             if image_is_show == true{
                 //显示图片
-                self.imageView?.hidden = false
+                self.imageView?.isHidden = false
                 self.imageEdgeInsets             = UIEdgeInsetsMake(0, 65, 0, 0)
                 self.titleEdgeInsets             = UIEdgeInsetsMake(0, -15, 0, 0)
 
             }else{
                 //不显示图片
-                self.imageView?.hidden = true
+                self.imageView?.isHidden = true
 
-                self.setImage(nil, forState: UIControlState.Normal)
-                self.setImage(nil, forState: UIControlState.Selected)
+                self.setImage(nil, for: UIControlState())
+                self.setImage(nil, for: UIControlState.selected)
 
                 
             }
@@ -37,21 +37,21 @@ class TooglePriceBtn:UIButton {
             //有图像的时候在调用 asc 的函数
             if ( image_is_show == true ){
                 if upDown == true {
-                    self.setImage(UIImage(named: "btnPriceStatusUp"), forState: UIControlState.Selected)
+                    self.setImage(UIImage(named: "btnPriceStatusUp"), for: UIControlState.selected)
                 }else{
-                    self.setImage(UIImage(named: "btnPriceStatusDown"), forState: UIControlState.Selected)
+                    self.setImage(UIImage(named: "btnPriceStatusDown"), for: UIControlState.selected)
                 }
                 
                 
             }
             if let a = self.action {
-                a(asc: asc) // up 0 down 1
+                a(asc) // up 0 down 1
             }
             
         }
     }
     
-    var action : ((asc:Int) -> ())?
+    var action : ((_ asc:Int) -> ())?
     var in_title:String = "价格"
     
 
@@ -65,7 +65,7 @@ class TooglePriceBtn:UIButton {
     init(
         title:String = "价格",
         frame: CGRect,
-        tocuhClosure: (asc:Int) -> ()
+        tocuhClosure: @escaping (_ asc:Int) -> ()
     )
     {
         
@@ -76,13 +76,13 @@ class TooglePriceBtn:UIButton {
     }
     
     func touch(){
-        self.sendActionsForControlEvents(.TouchUpInside)
-        self.highlighted = false
+        self.sendActions(for: .touchUpInside)
+        self.isHighlighted = false
     }
 
     func btnTouchInside(){
 
-        if ( self.selected == true){
+        if ( self.isSelected == true){
              self.upDown = !self.upDown
         }
     }
@@ -93,25 +93,25 @@ class TooglePriceBtn:UIButton {
     func setUI(){
         
 
-        self.setTitle( self.in_title, forState: UIControlState.Normal)
-        self.setTitleColor(UIColor.grayColor(), forState: .Normal)
+        self.setTitle( self.in_title, for: UIControlState())
+        self.setTitleColor(UIColor.gray, for: UIControlState())
         
-        self.setImage(UIImage(named: "btnPriceStatusNone"), forState: UIControlState.Normal)
+        self.setImage(UIImage(named: "btnPriceStatusNone"), for: UIControlState())
         
-        self.setTitleColor(UIColor.blackColor(), forState: .Selected)
+        self.setTitleColor(UIColor.black, for: .selected)
 
         
-        self.titleLabel!.font            = UIFont.systemFontOfSize(14)
+        self.titleLabel!.font            = UIFont.systemFont(ofSize: 14)
 //        self.imageEdgeInsets             = UIEdgeInsetsMake(0, 77, 0, 0)
 //        self.frame                       = CGRectMake(0, 0, wOk, hOk)
         
 
-        self.imageView!.contentMode      = UIViewContentMode.ScaleAspectFill
+        self.imageView!.contentMode      = UIViewContentMode.scaleAspectFill
         //        self.titleLabel!.contentMode     = UIViewContentMode.TopLeft
-        self.titleLabel?.textAlignment   = .Center
+        self.titleLabel?.textAlignment   = .center
         //        self.contentHorizontalAlignment  = .Left 有效果
         
-        self.addTarget(self, action:#selector(btnTouchInside), forControlEvents:UIControlEvents.TouchUpInside)
+        self.addTarget(self, action:#selector(btnTouchInside), for:UIControlEvents.touchUpInside)
 
         
         self.upDown = true

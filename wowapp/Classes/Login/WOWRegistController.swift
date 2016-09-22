@@ -43,10 +43,10 @@ class WOWRegistController: WOWBaseViewController {
     override func setUI() {
 //        configNavItem()
         navigationItem.title = byWechat ? "绑定手机" :"注册"
-        registButton.setTitle(byWechat ? "绑定" :"注册", forState: .Normal)
+        registButton.setTitle(byWechat ? "绑定" :"注册", for: UIControlState())
         
 //        navigationItem.title = "绑定手机"
-        registButton.setTitle( "确定" , forState: .Normal)
+        registButton.setTitle( "确定" , for: UIControlState())
 
     }
     
@@ -58,8 +58,8 @@ class WOWRegistController: WOWBaseViewController {
 //        }
 //    }
     
-    private func validatePhone(phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
-        guard let phone = phoneNumber where !phone.isEmpty else{
+    fileprivate func validatePhone(_ phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
+        guard let phone = phoneNumber , !phone.isEmpty else{
             WOWHud.showMsg(tips)
             tipsLabel.text = tips
             return false
@@ -77,12 +77,12 @@ class WOWRegistController: WOWBaseViewController {
 
     
 //MARK:Actions
-    @IBAction func msgCodeButtonClick(sender: AnyObject) {
+    @IBAction func msgCodeButtonClick(_ sender: AnyObject) {
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }
         let mobile = phoneTextField.text ?? ""
-        let Api_Code = byWechat ? RequestApi.Api_Captcha :RequestApi.Api_Sms_Code
+        let Api_Code = byWechat ? RequestApi.api_Captcha :RequestApi.api_Sms_Code
         
         WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result) in
             if let strongSelf = self{
@@ -95,7 +95,7 @@ class WOWRegistController: WOWBaseViewController {
     }
     
     
-    @IBAction func registClick(sender: UIButton) {
+    @IBAction func registClick(_ sender: UIButton) {
 
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
@@ -128,12 +128,12 @@ class WOWRegistController: WOWBaseViewController {
         }
         //FIXME:这个接口应该扩充一个字段 wechattoken 不带的话就是注册，带的话就是绑定 wowusermanager.wechatoken
         //注册时的信息
-        var registerTarget = RequestApi.Api_Register(account:phoneTextField.text!,password:passwdTextField.text!,captcha:msgCodeTextField.text!)
+        var registerTarget = RequestApi.api_Register(account:phoneTextField.text!,password:passwdTextField.text!,captcha:msgCodeTextField.text!)
         //如果是通过微信就走微信绑定的接口，如果是注册的话就走注册的接口
         if let userInfoFromWechat = userInfoFromWechat {
             //微信的用户信息
             let param = ["openId":userInfoFromWechat["openid"] as! String ,"wechatNickName":userInfoFromWechat["nickname"] as! String,"wechatAvatar":userInfoFromWechat["headimgurl"] as! String,"sex":userInfoFromWechat["sex"]! ]
-             registerTarget = RequestApi.Api_WechatBind(mobile: phoneTextField.text!, captcha: msgCodeTextField.text!, password: passwdTextField.text!, userInfoFromWechat: param)
+             registerTarget = RequestApi.api_WechatBind(mobile: phoneTextField.text!, captcha: msgCodeTextField.text!, password: passwdTextField.text!, userInfoFromWechat: param)
         }
 
         
@@ -161,16 +161,16 @@ class WOWRegistController: WOWBaseViewController {
     }
     
 
-    @IBAction func protocolCheckButtonClick(sender:UIButton) {
-        sender.selected = !sender.selected
-        agreeProtocol = sender.selected
+    @IBAction func protocolCheckButtonClick(_ sender:UIButton) {
+        sender.isSelected = !sender.isSelected
+        agreeProtocol = sender.isSelected
     }
     
-    @IBAction func showProtocol(sender: UIButton) {
+    @IBAction func showProtocol(_ sender: UIButton) {
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistProtocolController)) as! WOWRegistProtocolController
             vc.agreeAction = {[weak self] in
                 if let strongSelf = self{
-                    strongSelf.protocolCheckButton.selected = true
+                    strongSelf.protocolCheckButton.isSelected = true
                     strongSelf.agreeProtocol = true
                 }
             }
@@ -182,7 +182,7 @@ class WOWRegistController: WOWBaseViewController {
 //MARK:Delegate
 
 extension WOWRegistController:UITextFieldDelegate{
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }

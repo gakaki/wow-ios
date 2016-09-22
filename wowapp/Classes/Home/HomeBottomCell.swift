@@ -9,7 +9,7 @@
 import UIKit
 protocol HomeBottomDelegate:class {
     // 跳转产品详情代理
-    func goToProductDetailVC(indexRow: Int?)
+    func goToProductDetailVC(_ indexRow: Int?)
     //刷新主页数据 有一个情况，当上面的collectionView 中的产品与下面的tableView的产品为同一个产品， 喜欢下面的，让上面的刷新
 //    func reloadTableViewData(productId: Int?,favorite:Bool)
     
@@ -19,7 +19,7 @@ class HomeBottomCell: UITableViewCell {
     
     weak var delegate : HomeBottomDelegate?
     
-    var indexPath:NSIndexPath!
+    var indexPath:IndexPath!
     var currentIndexPath : Int = 0
         var productIdOne : Int?
         var productIdTwo : Int?
@@ -40,7 +40,7 @@ class HomeBottomCell: UITableViewCell {
     @IBOutlet weak var btnIsLikeTwo: UIButton!// 是否喜欢的btn
 
     
-    @IBAction func clickOneBtn(sender: AnyObject) {
+    @IBAction func clickOneBtn(_ sender: AnyObject) {
 
         if let del = delegate{
      
@@ -49,7 +49,7 @@ class HomeBottomCell: UITableViewCell {
         }
      
     }
-    @IBAction func clickTwoBtn(sender: AnyObject) {
+    @IBAction func clickTwoBtn(_ sender: AnyObject) {
         
         if let del = delegate{
             
@@ -63,7 +63,7 @@ class HomeBottomCell: UITableViewCell {
         super.awakeFromNib()
 
     }
-    @IBAction func favoriteActionOne(sender: AnyObject) {
+    @IBAction func favoriteActionOne(_ sender: AnyObject) {
         WOWHud.showLoadingSV()
         
         WOWClickLikeAction.requestFavoriteProduct(productIdOne ?? 0, isFavorite: { [weak self](isFavorite) in
@@ -96,7 +96,7 @@ class HomeBottomCell: UITableViewCell {
 //            
 //        }
     }
-    @IBAction func favoriteActionTwo(sender: AnyObject) {
+    @IBAction func favoriteActionTwo(_ sender: AnyObject) {
           WOWHud.showLoadingSV()
         WOWClickLikeAction.requestFavoriteProduct(productIdTwo ?? 0, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
@@ -129,7 +129,7 @@ class HomeBottomCell: UITableViewCell {
         
     }
 
-    func showDataOne(model:WOWFoundProductModel) {
+    func showDataOne(_ model:WOWFoundProductModel) {
 
         imgShowOne.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleOne.text = model.productName
@@ -147,22 +147,22 @@ class HomeBottomCell: UITableViewCell {
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
 //                btnIsLikeOne.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
-                btnIsLikeOne.selected = true
+                btnIsLikeOne.isSelected = true
                 
             }else{
-                btnIsLikeOne.selected = false
+                btnIsLikeOne.isSelected = false
 //                btnIsLikeOne.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
                 
             }
 
         }else{
-            btnIsLikeOne.selected = false
+            btnIsLikeOne.isSelected = false
         }
      
     
         
     }
-    func showDataTwo(model:WOWFoundProductModel) {
+    func showDataTwo(_ model:WOWFoundProductModel) {
 
         imgShowTwo.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleTwo.text = model.productName
@@ -179,18 +179,18 @@ class HomeBottomCell: UITableViewCell {
      
         if WOWUserManager.loginStatus {
         if (model.favorite == true) {
-            btnIsLikeTwo.selected = true
+            btnIsLikeTwo.isSelected = true
 //            btnIsLikeTwo.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
             
         }else{
-            btnIsLikeTwo.selected = false
+            btnIsLikeTwo.isSelected = false
 //            btnIsLikeTwo.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
             //                  cell.likeBtn.setBackgroundImage(UIImage(named: "icon_like"), forState: .Normal)
         }
 
      }
     }
-    func price(sellPrice:Double , originalPrice:Double) -> Array<String> {
+    func price(_ sellPrice:Double , originalPrice:Double) -> Array<String> {
         
         let sellPrice = WOWCalPrice.calTotalPrice([sellPrice ?? 0],counts:[1])
         
@@ -203,7 +203,7 @@ class HomeBottomCell: UITableViewCell {
         super.prepareForReuse()
        
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

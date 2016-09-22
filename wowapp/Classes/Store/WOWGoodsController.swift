@@ -9,13 +9,13 @@
 import UIKit
 
 enum GoodsCellStyle {
-    case Big,Small
+    case big,small
 }
 
 
 class WOWGoodsController: WOWBaseViewController {
-    private var cellBigId   = String(WOWGoodsBigCell)
-    private var cellSmallId = String(WOWGoodsSmallCell)
+    fileprivate var cellBigId   = String(describing: WOWGoodsBigCell())
+    fileprivate var cellSmallId = String(describing: WOWGoodsSmallCell())
     var categoryIndex       : Int = 0
     var categoryTitles      = ["",""]
     var categoryArr         = [WOWCategoryModel]()
@@ -23,13 +23,13 @@ class WOWGoodsController: WOWBaseViewController {
     var menuView            : BTNavigationDropdownMenu!
     var carButton           : MIBadgeButton!
 //    private var showCatIndex :Int = 0
-    private var cellShowStyle:GoodsCellStyle = .Small
+    fileprivate var cellShowStyle:GoodsCellStyle = .small
     
     
     //请求参数 //5是全部
     var categoryID          = "5"
-    private var style       = "0"
-    private var sort        = "new"
+    fileprivate var style       = "0"
+    fileprivate var sort        = "new"
     
 //MARK:Life
     override func viewDidLoad() {
@@ -37,27 +37,27 @@ class WOWGoodsController: WOWBaseViewController {
         request()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addObserver()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
          menuView.hideMenu()
     }
     
     deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -76,8 +76,8 @@ class WOWGoodsController: WOWBaseViewController {
         return l
     }()
     
-    private lazy var collectionView:UICollectionView = {
-        let collectionView = UICollectionView.init(frame:CGRectMake(0, 44,self.view.w,self.view.h - 55 - 44), collectionViewLayout:self.layout)
+    fileprivate lazy var collectionView:UICollectionView = {
+        let collectionView = UICollectionView.init(frame:CGRect(x: 0, y: 44,width: self.view.w,height: self.view.h - 55 - 44), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = DefaultBackColor
@@ -87,9 +87,9 @@ class WOWGoodsController: WOWBaseViewController {
     
 //MARK:Private Method
     
-    private func addObserver(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginSuccess), name: WOWLoginSuccessNotificationKey, object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateBadge), name: WOWUpdateCarBadgeNotificationKey, object: nil)
+    fileprivate func addObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBadge), name: NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
     }
     
     func updateBadge(){
@@ -104,7 +104,7 @@ class WOWGoodsController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         view.addSubview(collectionView)
-        collectionView.registerNib(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: cellSmallId)
+        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier: cellSmallId)
         collectionView.mj_header            = self.mj_header
         collectionView.emptyDataSetSource   = self
         collectionView.emptyDataSetDelegate = self
@@ -117,18 +117,18 @@ class WOWGoodsController: WOWBaseViewController {
     
     
     
-    private func configNav(){
-        carButton = MIBadgeButton(type: .System)
-        carButton.setImage(UIImage(named: "store_buyCar"), forState: .Normal)
+    fileprivate func configNav(){
+        carButton = MIBadgeButton(type: .system)
+        carButton.setImage(UIImage(named: "store_buyCar"), for: UIControlState())
         carButton.sizeToFit()
-        carButton.addTarget(self, action:#selector(goCar), forControlEvents:.TouchUpInside)
+        carButton.addTarget(self, action:#selector(goCar), for:.touchUpInside)
         let item = UIBarButtonItem(customView: carButton)
 //        carButton.badgeString = WOWBuyCarMananger.calCarCount()
         navigationItem.rightBarButtonItem = item
     }
 
     
-    lazy var dropMenuView : WOWDropMenuView! = {
+    lazy var dropMenuView : DropMenuViewDelegate! = {
         WOWDropMenuSetting.columnTitles = ["新品",""]
         WOWDropMenuSetting.rowTitles = [["新品","销量","价格"],[""]]
         WOWDropMenuSetting.maxShowCellNumber = 5
@@ -137,41 +137,41 @@ class WOWGoodsController: WOWBaseViewController {
         WOWDropMenuSetting.cellHeight = 50
         WOWDropMenuSetting.cellSeparatorColor = SeprateColor
         WOWDropMenuSetting.cellSelectionColor = MGRgb(250, g: 250, b: 250)
-        let v = WOWDropMenuView(frame:CGRectMake(0,0,self.view.w,44))
+        let v = WOWDropMenuView(coder:CGRect(x: 0,y: 0,width: Int(self.view.w),height: 44))
         v.delegate = self
         return v
     }()
     
-    private func configMenuView(){
+    fileprivate func configMenuView(){
         view.addSubview(dropMenuView)
         let model = self.categoryArr[self.categoryIndex]
         let subcats = model.subCats ?? []
         if categoryID == "5" || subcats.isEmpty{ //全部 或子分类为空
-            dropMenuView.columItemArr.last?.hidden = true
+            dropMenuView.columItemArr.last?.isHidden = true
         }else{
-            dropMenuView.columItemArr.last?.hidden = false
+            dropMenuView.columItemArr.last?.isHidden = false
             let subTitles = subcats.map({ (subModel) -> String in
                 return subModel.subCatName
             })
-            dropMenuView.columItemArr.last?.titleButton.setTitle("全部", forState: .Normal)
+            dropMenuView.columItemArr.last?.titleButton.setTitle("全部", for: UIControlState())
             WOWDropMenuSetting.rowTitles = [["新品","销量","价格"],subTitles]
             dropMenuView.columnShowingDict[1] = "全部"
         }
         
     }
     
-    private func configNavigation(){
-        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: categoryTitles[categoryIndex], items: categoryTitles,defaultSelectIndex: categoryIndex)
+    fileprivate func configNavigation(){
+        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: categoryTitles[categoryIndex], items: categoryTitles as [AnyObject],defaultSelectIndex: categoryIndex)
         menuView.cellHeight = 50
-        menuView.cellBackgroundColor = UIColor.whiteColor()
+        menuView.cellBackgroundColor = UIColor.white
         menuView.cellSelectionColor = MGRgb(250, g: 250, b: 250)
-        menuView.cellTextLabelColor = UIColor.blackColor()
+        menuView.cellTextLabelColor = UIColor.black
         menuView.cellSeparatorColor = SeprateColor
         menuView.cellTextLabelFont = Fontlevel001
-        menuView.cellTextLabelAlignment = .Left
+        menuView.cellTextLabelAlignment = .left
         menuView.arrowPadding = 8
         menuView.animationDuration = 0.3
-        menuView.maskBackgroundColor = UIColor.blackColor()
+        menuView.maskBackgroundColor = UIColor.black
         menuView.maskBackgroundOpacity = 0.6
         menuView.checkMarkImage = UIImage(named: "duihao")
         menuView.arrowImage = UIImage(named:"nav_arrow")
@@ -183,10 +183,10 @@ class WOWGoodsController: WOWBaseViewController {
                 strongSelf.categoryID = model.categoryID ?? "5"
                 let subcats = model.subCats ?? []
                 if strongSelf.categoryID == "5" || subcats.isEmpty{
-                    strongSelf.dropMenuView.columItemArr.last?.hidden = true
+                    strongSelf.dropMenuView.columItemArr.last?.isHidden = true
                 }else{
-                    strongSelf.dropMenuView.columItemArr.last?.hidden = false
-                    strongSelf.dropMenuView.columItemArr.last?.titleButton.setTitle("全部", forState: .Normal)
+                    strongSelf.dropMenuView.columItemArr.last?.isHidden = false
+                    strongSelf.dropMenuView.columItemArr.last?.titleButton.setTitle("全部", for: UIControlState())
                     strongSelf.dropMenuView.columnShowingDict[1] = "全部"
                 }
                 
@@ -213,7 +213,7 @@ class WOWGoodsController: WOWBaseViewController {
 //MARK:Actions
     func goCar() {
         let nav = UIStoryboard.initialViewController("BuyCar")
-        presentViewController(nav, animated: true, completion: nil)
+        present(nav, animated: true, completion: nil)
     }
 
     
@@ -221,7 +221,7 @@ class WOWGoodsController: WOWBaseViewController {
     override func request() {
         super.request()
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(.Api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid,keyword:""), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid,keyword:""), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 WOWHud.dismiss()
@@ -260,7 +260,7 @@ class WOWGoodsController: WOWBaseViewController {
 
 //MARK:Delegate
 extension WOWGoodsController:DropMenuViewDelegate{
-    func dropMenuClick(column: Int, row: Int) {
+    func dropMenuClick(_ column: Int, row: Int) {
         let sorts = ["new","sale","price"]
         switch (column,row) {
             case let (0,x):
@@ -280,23 +280,23 @@ extension WOWGoodsController:DropMenuViewDelegate{
 }
 
 extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource{
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArr.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellSmallId, forIndexPath: indexPath) as! WOWGoodsSmallCell
-            cell.showData(dataArr[indexPath.item],indexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellSmallId, for: indexPath) as! WOWGoodsSmallCell
+            cell.showData(dataArr[(indexPath as NSIndexPath).item],indexPath: indexPath)
             return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let item = dataArr[indexPath.item]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = dataArr[(indexPath as NSIndexPath).item]
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController.self)) as! WOWGoodsDetailController
         vc.updateBadgeAction = {[weak self] in
             if let strongSelf = self{
                 strongSelf.updateBadge()
@@ -309,20 +309,20 @@ extension WOWGoodsController:UICollectionViewDelegate,UICollectionViewDataSource
 }
 
 extension WOWGoodsController:CollectionViewWaterfallLayoutDelegate{
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(WOWGoodsSmallCell.itemWidth,WOWGoodsSmallCell.itemWidth + 65)
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width: WOWGoodsSmallCell.itemWidth,height: WOWGoodsSmallCell.itemWidth + 65)
     }
 }
 
 
 extension WOWGoodsController{
-    override  func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    override  func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无此分类商品"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
         return -40
     }
     
@@ -330,13 +330,13 @@ extension WOWGoodsController{
 
 
 extension WOWGoodsController:ProductCellDelegate{
-    func productCellAction(tag: Int, model: WOWProductModel,cell:WOWGoodsBigCell) {
+    func productCellAction(_ tag: Int, model: WOWProductModel,cell:WOWGoodsBigCell) {
         switch tag {
-        case WOWItemActionType.Like.rawValue:
+        case WOWItemActionType.like.rawValue:
             like(model, cell: cell)
-        case WOWItemActionType.Share.rawValue:
+        case WOWItemActionType.share.rawValue:
             share(model,image: cell.bigPictureImageView.image)
-        case WOWItemActionType.Brand.rawValue:
+        case WOWItemActionType.brand.rawValue:
             let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
             vc.hideNavigationBar = true
             vc.brandID = model.brandId
@@ -346,14 +346,14 @@ extension WOWGoodsController:ProductCellDelegate{
         }
     }
     
-    private func like(model:WOWProductModel,cell:WOWGoodsBigCell){
+    fileprivate func like(_ model:WOWProductModel,cell:WOWGoodsBigCell){
         guard WOWUserManager.loginStatus else { //未登录
             goLogin()
             return
         }
-        let is_delete = cell.likeButton.selected ? "1":"0"
+        let is_delete = cell.likeButton.isSelected ? "1":"0"
         let uid       = WOWUserManager.userID
-        let thingid   = String(model.productId) ?? ""
+        let thingid   = String(describing: model.productId) ?? ""
         let type      = "1"//1为商品 2为场景
 //        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result) in
 //            if let _ = self{
@@ -364,14 +364,14 @@ extension WOWGoodsController:ProductCellDelegate{
 //        }
     }
     
-    private func share(model:WOWProductModel,image:UIImage?){
+    fileprivate func share(_ model:WOWProductModel,image:UIImage?){
 //        let shareUrl = "http://www.wowdsgn.com/\(model.skuID ?? "").html"
 //        WOWShareManager.share((model.productName ?? "") + "-尖叫设计", shareText: model.productShortDes, url:shareUrl, shareImage:image ?? UIImage(named: "me_logo")!)
     }
     
-    private func goLogin(){
+    fileprivate func goLogin(){
         let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
-        presentViewController(vc, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
     }
 }
 

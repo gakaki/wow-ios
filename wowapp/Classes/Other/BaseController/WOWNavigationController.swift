@@ -12,7 +12,7 @@ class WOWNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.translucent = false
+        navigationBar.isTranslucent = false
         interactivePopGestureRecognizer?.delegate = nil
         
     }
@@ -21,7 +21,7 @@ class WOWNavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
     }
     
-    override func pushViewController(viewController: UIViewController, animated: Bool) {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if (self.viewControllers.count > 0) {
 //            var forwardVCTitle = self.topViewController?.navigationItem.title
 //            forwardVCTitle = forwardVCTitle ?? ""

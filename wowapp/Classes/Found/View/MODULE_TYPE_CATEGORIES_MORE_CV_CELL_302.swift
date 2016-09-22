@@ -2,7 +2,7 @@ import UIKit
 //302 二级分类
 
 protocol MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate:class{
-    func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(m:WowModulePageItemVO?)
+    func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(_ m:WowModulePageItemVO?)
 }
 
 class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
@@ -30,9 +30,9 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
         self.backgroundColor    = color_bg
 
         name                    = UILabel()
-        name.textAlignment      = NSTextAlignment.Center
+        name.textAlignment      = NSTextAlignment.center
         name_en                 = UILabel()
-        name_en.textAlignment   = NSTextAlignment.Center
+        name_en.textAlignment   = NSTextAlignment.center
         
         line                    = UIView()
         
@@ -106,10 +106,10 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell:UICollectionViewCell{
             make.width.equalTo(self)
             make.height.equalTo(self)//.multipliedBy(ratio)
         }
-        self.bringSubviewToFront(bg_pic)
+        self.bringSubview(toFront: bg_pic)
     }
     
-    func setModel(m:WowModulePageItemVO){
+    func setModel(_ m:WowModulePageItemVO){
         self.bg_pic.set_webimage_url(m.categoryBgImg)
     }
 }
@@ -136,7 +136,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
         super.awakeFromNib()
     }
     
-    func setData(d:[WowModulePageItemVO]){
+    func setData(_ d:[WowModulePageItemVO]){
         self.data = d
         self.cv.reloadData()
     }
@@ -150,7 +150,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
         
         let size_frame_width                  = MGScreenWidth
         let layout                            = UICollectionViewFlowLayout()
-        layout.scrollDirection                = .Horizontal
+        layout.scrollDirection                = .horizontal
         
         
         // 240 315 1.3125
@@ -163,16 +163,16 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
         layout.minimumLineSpacing             = size_line_spacing
         
         heightAll                             = item_height * 2 + size_padding * 2 + size_line_spacing
-        let frame                             = CGRectMake(0, 0, size_frame_width, heightAll)
+        let frame                             = CGRect(x: 0, y: 0, width: size_frame_width, height: heightAll)
         
         cv                                    = UICollectionView(frame: frame, collectionViewLayout: layout)
         
         cv.delegate                           = self
         cv.dataSource                         = self
-        cv.backgroundColor                    = UIColor.clearColor()
+        cv.backgroundColor                    = UIColor.clear
         
-        cv.registerClass(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell.self, forCellWithReuseIdentifier:String(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell))
-        cv.registerClass(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell.self, forCellWithReuseIdentifier:String(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell))
+        cv.register(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell))
+        cv.register(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell))
         
         cv.showsVerticalScrollIndicator       = false
         cv.showsHorizontalScrollIndicator     = false
@@ -181,11 +181,11 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
     }
     
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var c  =  self.data.count  ?? 0
         if  c > 6 {
             c  =  c + 1 //没办法啦最后一个是more啦
@@ -196,22 +196,22 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
         }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if (indexPath.item < 7 ){
-            let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell), forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell
-            let m               = self.data[indexPath.item]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if ((indexPath as NSIndexPath).item < 7 ){
+            let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell), for: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell
+            let m               = self.data[(indexPath as NSIndexPath).item]
             cell.setModel(m)
             return cell
         }else{
-            let cell            = collectionView.dequeueReusableCellWithReuseIdentifier(String(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell), forIndexPath: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell
+            let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell), for: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell
             return cell
         }
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = self.delegate {
-            if indexPath.item < 7 {
-                let m = self.data[indexPath.row]
+            if (indexPath as NSIndexPath).item < 7 {
+                let m = self.data[(indexPath as NSIndexPath).row]
                 del.MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(m)
             }else{
                 del.MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(nil) //更多

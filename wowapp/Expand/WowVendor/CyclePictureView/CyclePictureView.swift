@@ -14,7 +14,7 @@
 import UIKit
 
 protocol CyclePictureViewDelegate: class{
-    func cyclePictureView(cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath)
 }
 
 class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, PageControlAlimentProtocol, EndlessCycleProtocol {
@@ -27,7 +27,7 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     /// 存放本地图片名称的数组
     var localImageArray: [String]? {
         didSet {
-            self.imageBox = ImageBox(imageType: .Local, imageArray: localImageArray!)
+            self.imageBox = ImageBox(imageType: .local, imageArray: localImageArray!)
             self.reloadData()
         }
 
@@ -35,7 +35,7 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     /// 存放网络图片路径的数组
     var imageURLArray: [String]? {
         didSet {
-            self.imageBox = ImageBox(imageType: .Network, imageArray: imageURLArray!)
+            self.imageBox = ImageBox(imageType: .network, imageArray: imageURLArray!)
             self.reloadData()
         }
     }
@@ -47,21 +47,21 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
 //========================================================
     var showPageControl: Bool = true {
         didSet {
-            self.pageControl?.hidden = !showPageControl
+            self.pageControl?.isHidden = !showPageControl
         }
     }
-    var currentDotColor: UIColor = UIColor.orangeColor() {
+    var currentDotColor: UIColor = UIColor.orange {
         didSet {
             self.pageControl?.currentPageIndicatorTintColor = currentDotColor
         }
     }
-    var otherDotColor: UIColor = UIColor.grayColor() {
+    var otherDotColor: UIColor = UIColor.gray {
         didSet {
             self.pageControl?.pageIndicatorTintColor = otherDotColor
         }
     }
     /// pageControl的位置，默认是剧中在底部(PageControlAlimentProtocol提供)
-    var pageControlAliment: PageControlAliment = .CenterBottom
+    var pageControlAliment: PageControlAliment = .centerBottom
     /// 加载网络图片使用的占位图片
     var placeholderImage: UIImage?
     /// 图片的对齐模式
@@ -107,17 +107,17 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
 // MARK: - 内部属性
 //========================================================
     
-    private var imageBox: ImageBox?
+    fileprivate var imageBox: ImageBox?
     /// 开启无限滚动模式后,真实的cell数量
     var actualItemCount: Int = 0 // EndlessCycleProtocol提供
     let imageTimes: Int = 150   // EndlessCycleProtocol提供
     /// 控制自动滚动的定时器
-    var timer: NSTimer?     // EndlessCycleProtocol提供
+    var timer: Timer?     // EndlessCycleProtocol提供
     
-    private var pageControl: UIPageControl?
+    fileprivate var pageControl: UIPageControl?
      var collectionView: UICollectionView!
-    private let cellID: String = "CyclePictureCell"
-    private var flowLayout: UICollectionViewFlowLayout?
+    fileprivate let cellID: String = "CyclePictureCell"
+    fileprivate var flowLayout: UICollectionViewFlowLayout?
 
      // MARK: - 初始化方法
     
@@ -128,7 +128,7 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         
         if let array = localImageArray {
             self.localImageArray = array
-            self.imageBox = ImageBox(imageType: .Local, imageArray: localImageArray!)
+            self.imageBox = ImageBox(imageType: .local, imageArray: localImageArray!)
             self.reloadData()
         }
     }
@@ -140,10 +140,10 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         
         if let array = imageURLArray {
             self.imageURLArray = array
-            self.imageBox = ImageBox(imageType: .Local, imageArray: imageURLArray!)
+            self.imageBox = ImageBox(imageType: .local, imageArray: imageURLArray!)
             self.reloadData()
         }
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         timeInterval = 3.0
         currentDotColor = GrayColorlevel1
         otherDotColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
@@ -166,26 +166,26 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     /**
     设置CollectionView相关内容
     */
-    private func setupCollectionView() {
+    fileprivate func setupCollectionView() {
         
         // 初始化布局
         let flowLayout =  UICollectionViewFlowLayout()
 
 //        flowLayout.itemSize = self.frame.size
         flowLayout.minimumLineSpacing = 0
-        flowLayout.scrollDirection = .Horizontal
+        flowLayout.scrollDirection = .horizontal
         self.flowLayout = flowLayout
         
-        let collectionView = UICollectionView(frame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height), collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = UIColor.whiteColor()
+        let collectionView = UICollectionView(frame:CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height), collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = UIColor.white
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.bounces = false
-        collectionView.pagingEnabled = true
+        collectionView.isPagingEnabled = true
         // TODO: view充当数据源和代理，感觉不符合逻辑，待修改
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.registerClass(CyclePictureCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(CyclePictureCell.self, forCellWithReuseIdentifier: cellID)
         self.addSubview(collectionView)
 
         self.collectionView = collectionView
@@ -193,7 +193,7 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     /**
     设置PageControl
     */
-    private func setupPageControl() {
+    fileprivate func setupPageControl() {
         
         self.pageControl?.removeFromSuperview()
         
@@ -206,8 +206,8 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
             pageControl.numberOfPages = self.imageBox!.imageArray.count
             pageControl.currentPageIndicatorTintColor = self.currentDotColor
             pageControl.pageIndicatorTintColor = self.otherDotColor
-            pageControl.userInteractionEnabled = false
-            pageControl.backgroundColor = UIColor.clearColor()
+            pageControl.isUserInteractionEnabled = false
+            pageControl.backgroundColor = UIColor.clear
             self.addSubview(pageControl)
             self.pageControl = pageControl
         }
@@ -219,8 +219,8 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     /**
     解决定时器强引用视图，导致视图不被释放
     */
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         guard let _ = newSuperview else {
             self.timer?.invalidate()
             self.timer = nil
@@ -231,7 +231,7 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     重新加载数据，每当localImageArray或者imageURLArray
     被设置的时候调用
     */
-    private func reloadData() {
+    fileprivate func reloadData() {
         
         guard let imageBox = self.imageBox else {
             //print("reloadData---error")
@@ -256,10 +256,10 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         super.layoutSubviews()
         
 
-        self.flowLayout?.itemSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height)
-        self.collectionView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)
+        self.flowLayout?.itemSize = CGSize(width: self.bounds.size.width, height: self.bounds.size.height)
+        self.collectionView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height)
         //解决从SB中加载时，contentInset.Top默认为64的问题
-        self.collectionView.contentInset = UIEdgeInsetsZero
+        self.collectionView.contentInset = UIEdgeInsets.zero
         
         self.showFirstImagePageInCollectionView(self.collectionView)
         
@@ -272,10 +272,10 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     /**
     设置定时器,EndlessCycleProtocol提供
     */
-    func setupTimer(userInfo: AnyObject?) {
+    func setupTimer(_ userInfo: AnyObject?) {
         self.timer?.invalidate() //先取消先前定时器
-        let timer = NSTimer(timeInterval: timeInterval, target: self, selector: #selector(CyclePictureView.changePicture), userInfo: userInfo, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+        let timer = Timer(timeInterval: timeInterval, target: self, selector: #selector(CyclePictureView.changePicture), userInfo: userInfo, repeats: true)
+        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
         self.timer = timer
     }
     /**
@@ -291,26 +291,26 @@ class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
 
 // MARK: - scrollView 代理
 extension CyclePictureView {
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if self.autoScroll {
             self.timer?.invalidate()
             self.timer = nil
         }
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if self.autoScroll {
             self.setupTimer(nil)
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let pageControl = self.pageControl else {
             return
         }
 
         let offsetIndex = self.collectionView.contentOffset.x / self.flowLayout!.itemSize.width
-        let currentIndex = Int(offsetIndex % CGFloat(self.imageBox!.imageArray.count) + 0.5)
+        let currentIndex = Int(offsetIndex.truncatingRemainder(dividingBy: CGFloat(self.imageBox!.imageArray.count)) + 0.5)
         pageControl.currentPage = currentIndex == self.imageBox!.imageArray.count ? 0 :currentIndex
     }
 
@@ -319,14 +319,14 @@ extension CyclePictureView {
 // MARK: - collectionView 数据源
 extension CyclePictureView {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.actualItemCount
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! CyclePictureCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! CyclePictureCell
         
         if let placeholderImage = self.placeholderImage {
             cell.placeholderImage = placeholderImage
@@ -337,12 +337,12 @@ extension CyclePictureView {
         }
         
         if let imageBox = self.imageBox {
-            let actualItemIndex = indexPath.item % imageBox.imageArray.count
+            let actualItemIndex = (indexPath as NSIndexPath).item % imageBox.imageArray.count
             cell.imageSource = imageBox[actualItemIndex]
         }
         
         if let array = self.imageDetailArray {
-            let actualItemIndex = indexPath.item % array.count
+            let actualItemIndex = (indexPath as NSIndexPath).item % array.count
             cell.imageDetail = array[actualItemIndex]
             // TODO: 好恶心的判决金字塔，不知道有什么办法解决
             if let font = self.detailLableTextFont {
@@ -365,8 +365,8 @@ extension CyclePictureView {
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.delegate?.cyclePictureView(self, didSelectItemAtIndexPath: NSIndexPath(forItem: indexPath.item % self.imageBox!.imageArray.count, inSection: indexPath.section))
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.cyclePictureView(self, didSelectItemAtIndexPath: IndexPath(item: (indexPath as NSIndexPath).item % self.imageBox!.imageArray.count, section: (indexPath as NSIndexPath).section))
     }
     
 }

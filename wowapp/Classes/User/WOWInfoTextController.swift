@@ -9,9 +9,9 @@
 import UIKit
 typealias ChangeInfo = (String) ->Void
 enum InfoTextEntrance{
-    case NickEntrance()
-    case DescEntrance()
-    case JobEntrance()
+    case nickEntrance()
+    case descEntrance()
+    case jobEntrance()
 }
 
 class WOWInfoTextController: WOWBaseTableViewController {
@@ -20,7 +20,7 @@ class WOWInfoTextController: WOWBaseTableViewController {
     var changeInfotext :ChangeInfo?
     
     @IBOutlet weak var textField: UITextField!
-    var entrance : InfoTextEntrance = InfoTextEntrance.NickEntrance()
+    var entrance : InfoTextEntrance = InfoTextEntrance.nickEntrance()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,31 +42,31 @@ class WOWInfoTextController: WOWBaseTableViewController {
         super.setUI()
         if userInfo.isEmpty {
             switch entrance {
-            case .NickEntrance:
+            case .nickEntrance:
                  textField.placeholder = "请输入昵称"
-            case .DescEntrance:
+            case .descEntrance:
                  textField.placeholder = "请输入个性签名"
-            case .JobEntrance:
+            case .jobEntrance:
                  textField.placeholder = "请输入职业"
             }
         }else{
                 textField.text = userInfo
         }
         switch entrance {
-        case .NickEntrance:
+        case .nickEntrance:
             navigationItem.title = "昵称"
             vcTitle              = "昵称"
-        case .DescEntrance:
+        case .descEntrance:
             navigationItem.title = "个性签名"
             vcTitle              = "个性签名"
-        case .JobEntrance:
+        case .jobEntrance:
             navigationItem.title = "职业"
             vcTitle              = "职业"
         }
 
     }
     
-    private func saveInfo(){
+    fileprivate func saveInfo(){
         DLog("保存信息")
 //        guard let info = textField.text where !info.isEmpty else{
 //            WOWHud.showMsg("请输入" + vcTitle!)
@@ -75,11 +75,11 @@ class WOWInfoTextController: WOWBaseTableViewController {
         let info = textField.text
         var params = [String : String]()
         switch entrance {
-        case .NickEntrance:
+        case .nickEntrance:
            params = ["nickName":info ?? ""]
-        case .DescEntrance:
+        case .descEntrance:
             params = ["selfIntroduction":info ?? ""]
-        case .JobEntrance:
+        case .jobEntrance:
             params = ["industry":info ?? ""]
         }
 
@@ -91,20 +91,20 @@ class WOWInfoTextController: WOWBaseTableViewController {
 //        case .JobEntrance(_):
 //            
 //        }
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Change(param:params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
                 //保存一些用户信息
                 switch strongSelf.entrance {
-                case .NickEntrance:
+                case .nickEntrance:
                 WOWUserManager.userName = info ?? ""
-                case .DescEntrance:
+                case .descEntrance:
                 WOWUserManager.userDes = info ?? ""
-                case .JobEntrance:
+                case .jobEntrance:
                 WOWUserManager.userIndustry = info ?? ""
                 }
-                NSNotificationCenter.postNotificationNameOnMainThread(WOWChangeUserInfoNotificationKey, object: nil)
+                NotificationCenter.postNotificationNameOnMainThread(WOWChangeUserInfoNotificationKey, object: nil)
 
                 strongSelf.changeInfotext!(info!)
                 strongSelf.popVC()
@@ -117,11 +117,11 @@ class WOWInfoTextController: WOWBaseTableViewController {
         }
     }
     //闭包变量的Seter方法
-    func setBackMyClosure(tempClosure:ChangeInfo) {
+    func setBackMyClosure(_ tempClosure:@escaping ChangeInfo) {
         self.changeInfotext = tempClosure
     }
 
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 15
     }
 }

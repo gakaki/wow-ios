@@ -12,23 +12,23 @@ import UIKit
 extension  UIViewController {
     
     func toMainVC(){
-        let mainVC = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle()).instantiateInitialViewController()
-        mainVC?.modalTransitionStyle = .FlipHorizontal
+        let mainVC = UIStoryboard(name: "Main", bundle:Bundle.main).instantiateInitialViewController()
+        mainVC?.modalTransitionStyle = .flipHorizontal
         AppDelegate.rootVC = mainVC
-        self.presentViewController(mainVC!, animated: true, completion: nil)
+        self.present(mainVC!, animated: true, completion: nil)
     }
     /**
      跳转登录界面
      
      - parameter isPresent: true：present跳转 false：push跳转
      */
-    func toLoginVC(isPresent:Bool = false){
+    func toLoginVC(_ isPresent:Bool = false){
 
         if isPresent {
             let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
             let login = vc.topViewController as! WOWLoginController
             login.isPresent = isPresent
-            presentViewController(vc, animated: true, completion: nil)
+            present(vc, animated: true, completion: nil)
 
         }else {
             let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWLoginController)) as! WOWLoginController
@@ -43,14 +43,14 @@ extension  UIViewController {
      
      - parameter isPresent: true：present跳转 false：push跳转
      */
-    func toLoginVCPopRootVC(isPresent:Bool = false){
+    func toLoginVCPopRootVC(_ isPresent:Bool = false){
         
         if isPresent {
             let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
             let login = vc.topViewController as! WOWLoginController
             login.isPresent = isPresent
             login.isPopRootVC = true
-            presentViewController(vc, animated: true, completion: nil)
+            present(vc, animated: true, completion: nil)
             
         }else {
             let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWLoginController)) as! WOWLoginController
@@ -62,7 +62,7 @@ extension  UIViewController {
     }
 
     //跳转注册/绑定微信界面需要传从哪跳转来的
-    func toRegVC(fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:NSDictionary?){
+    func toRegVC(_ fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:NSDictionary?){
         
         let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController)) as! WOWRegistController
         vc.isPresent = isPresent
@@ -71,7 +71,7 @@ extension  UIViewController {
         self.pushVC( vc )
     }
     //跳转微信登录界面
-    func toWeixinVC(isPresent:Bool = false){
+    func toWeixinVC(_ isPresent:Bool = false){
         print("toWeixinVC")
                 let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
 //                UMSocialControllerService.defaultControllerService().socialUIDelegate = self
@@ -114,10 +114,10 @@ extension  UIViewController {
 //        }
         
     }
-    private func checkWechatToken(userData:NSDictionary,isPresent:Bool = false){
+    fileprivate func checkWechatToken(_ userData:NSDictionary,isPresent:Bool = false){
         //FIXME:验证token是否是第一次咯或者是第二次
         var isOpenIdBinded = Bool()//假设的bool值
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Wechat(openId:(userData["openid"] ?? "") as! String), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId:(userData["openid"] ?? "") as! String), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -143,13 +143,13 @@ extension  UIViewController {
     }
     
     //登录成功方法
-    func toLoginSuccess(isPresent:Bool = false){
+    func toLoginSuccess(_ isPresent:Bool = false){
 //        WOWBuyCarMananger.updateBadge(true)
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+        NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+        NotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
         if isPresent{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                self.dismissViewControllerAnimated(true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                self.dismiss(animated: true, completion: nil)
 //                UIApplication.appTabBarController.selectedIndex = 0
             })
         }else {
@@ -158,9 +158,9 @@ extension  UIViewController {
         }
     }
 
-    func toRegInfo(isPresent:Bool = false) {
-        NSNotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+    func toRegInfo(_ isPresent:Bool = false) {
+        NotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
             let vc = UIStoryboard.initialViewController("Login", identifier:"WOWRegistInfoFirstController") as! WOWRegistInfoFirstController
             vc.isPresent = isPresent
             self.navigationController?.pushViewController(vc, animated: true)
@@ -179,7 +179,7 @@ extension  UIViewController {
     }
 
     
-    func toVCCategory( cid: Int = 10 , cname:String? ){
+    func toVCCategory( _ cid: Int = 10 , cname:String? ){
         
             let vc              = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(VCCategory)) as! VCCategory
             vc.ob_cid.value     = cid
@@ -189,7 +189,7 @@ extension  UIViewController {
     }
     
     
-    func toVCProduct( pid: Int? ){
+    func toVCProduct( _ pid: Int? ){
         let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = pid
@@ -208,7 +208,7 @@ extension  UIViewController {
     }
     
     
-    func toVCTopic( topic_id:Int? ){
+    func toVCTopic( _ topic_id:Int? ){
         if let t = topic_id {
             let vc                  = VCTopic(nibName: nil, bundle: nil)
             vc.topic_id             = t
@@ -218,7 +218,7 @@ extension  UIViewController {
         
     }
     // 跳转专题详情页
-    func toVCTopidDetail( topic_id:Int? ){
+    func toVCTopidDetail( _ topic_id:Int? ){
         
         let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(WOWContentTopicController)) as! WOWContentTopicController
         //                vc.hideNavigationBar = true

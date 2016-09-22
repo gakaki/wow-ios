@@ -20,18 +20,18 @@ public extension UIFont{
     
      - parameter fontSize:
      */
-    static func systemScaleFontSize(fontSize:CGFloat) ->UIFont{
+    static func systemScaleFontSize(_ fontSize:CGFloat) ->UIFont{
         switch UIDevice.deviceType{
-            case .DT_iPhone6_Plus:
-                return UIFont.systemFontOfSize(fontSize * CGFloat(scale))
+            case .dt_iPhone6_Plus:
+                return UIFont.systemFont(ofSize: fontSize * CGFloat(scale))
             default:
-                return UIFont.systemFontOfSize(fontSize)
+                return UIFont.systemFont(ofSize: fontSize)
         }
     }
     
-    static func mediumScaleFontSize(fontSize:CGFloat) ->UIFont{
+    static func mediumScaleFontSize(_ fontSize:CGFloat) ->UIFont{
         switch UIDevice.deviceType{
-        case .DT_iPhone6_Plus:
+        case .dt_iPhone6_Plus:
             return UIFont.init(name:"HelveticaNeue-Medium", size:fontSize * CGFloat(scale))!
         default:
             return UIFont.init(name:"HelveticaNeue-Medium", size:fontSize)!

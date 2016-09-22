@@ -11,24 +11,25 @@ import UIKit
 extension CGFloat {
     /// EZSE: Return the central value of CGFloat.
     public var center: CGFloat { return (self / 2) }
-  
+
     /// EZSwiftExtensions
     public func toRadians() -> CGFloat {
         return (CGFloat (M_PI) * self) / 180.0
     }
-  
+
     /// EZSwiftExtensions
+    @available(*, deprecated: 1.7, renamed: "toRadians")
     public func degreesToRadians() -> CGFloat {
         return toRadians()
     }
-  
+
     /// EZSwiftExtensions
     public mutating func toRadiansInPlace() {
         self = (CGFloat (M_PI) * self) / 180.0
     }
 
     /// EZSE: Converts angle degrees to radians.
-    public func degreesToRadians (angle: CGFloat) -> CGFloat {
+    public static func degreesToRadians(_ angle: CGFloat) -> CGFloat {
         return (CGFloat (M_PI) * angle) / 180.0
     }
 }

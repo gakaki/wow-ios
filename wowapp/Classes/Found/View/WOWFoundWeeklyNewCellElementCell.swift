@@ -16,7 +16,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setModel(m:WowModulePageItemVO){
+    func setModel(_ m:WowModulePageItemVO){
             pictureImageView.set_webimage_url(m.productImg!)
             label_name.text      = m.productName
             label_price.text     = m.get_formted_sell_price()
@@ -27,7 +27,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor     = UIColor.whiteColor()
+        backgroundColor     = UIColor.white
         
         pictureImageView    = UIImageView()
         label_price         = UILabel()

@@ -20,13 +20,13 @@ class WOWContentTopicTopCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func showData(model: WOWModelVoTopic?) {
+    func showData(_ model: WOWModelVoTopic?) {
         if let model = model {
             topicImg.set_webimage_url(model.topicImg)
             topicTitle.text = model.topicMainTitle

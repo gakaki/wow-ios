@@ -15,15 +15,15 @@ class WOWMenuTopView: UIView {
     var bottomLine:UILabel!
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         configSubviews()
     }
 
-    private func configSubviews(){
+    fileprivate func configSubviews(){
         leftLabel = MGfactoryLabel()
         leftLabel.text = "商品分类"
         leftLabel.font = Fontlevel003
-        leftLabel.backgroundColor = UIColor.clearColor()
+        leftLabel.backgroundColor = UIColor.clear
         self.addSubview(leftLabel)
         weak var weakSelf = self
         leftLabel.snp_makeConstraints { (make) -> Void in
@@ -31,10 +31,10 @@ class WOWMenuTopView: UIView {
             make.centerY.equalTo(weakSelf!.snp_centerY)
         }
         
-        rightButton = UIButton(type: .System)
+        rightButton = UIButton(type: .system)
         self.addSubview(rightButton)
         weak var weakLabel = leftLabel
-        rightButton.setImage(UIImage(named: "close")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+        rightButton.setImage(UIImage(named: "close")?.withRenderingMode(.alwaysOriginal), for: UIControlState())
         rightButton.snp_makeConstraints { (make) -> Void in
             make.width.height.equalTo(40)
             make.centerY.equalTo((weakLabel?.snp_centerY)!)
@@ -60,14 +60,14 @@ class WOWMenuTopView: UIView {
             make.right.equalTo(weakSelf!).offset(0)
             make.bottom.equalTo(weakSelf!).offset(0)
         }
-        bottomLine.hidden = true
-        topLine.hidden = true
+        bottomLine.isHidden = true
+        topLine.isHidden = true
         
     }
     
-    func showLine(show:Bool) {
-        bottomLine.hidden = !show
-        topLine.hidden = !show
+    func showLine(_ show:Bool) {
+        bottomLine.isHidden = !show
+        topLine.isHidden = !show
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,13 +76,13 @@ class WOWMenuTopView: UIView {
     
     
     convenience init(leftTitle:String!,rightHiden:Bool,topLineHiden:Bool,bottomLineHiden:Bool) {
-        self.init(frame:CGRectMake(0,0,MGScreenWidth,36))
-        rightButton.setImage(UIImage(named: "next_arrow")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
+        self.init(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: 36))
+        rightButton.setImage(UIImage(named: "next_arrow")?.withRenderingMode(.alwaysOriginal), for:UIControlState())
         leftLabel.text = leftTitle
-        rightButton.userInteractionEnabled = false
-        rightButton.hidden = rightHiden
-        topLine.hidden = topLineHiden
-        bottomLine.hidden = bottomLineHiden
+        rightButton.isUserInteractionEnabled = false
+        rightButton.isHidden = rightHiden
+        topLine.isHidden = topLineHiden
+        bottomLine.isHidden = bottomLineHiden
     }
     
     

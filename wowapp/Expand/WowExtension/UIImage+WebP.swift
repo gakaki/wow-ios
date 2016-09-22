@@ -3,14 +3,14 @@ import YYWebImage
 
 extension String {
     
-    static func random(length: Int = 20) -> String {
+    static func random(_ length: Int = 20) -> String {
         
         let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var randomString: String = ""
         
         for _ in 0..<length {
             let randomValue = arc4random_uniform(UInt32(base.characters.count))
-            randomString += "\(base[base.startIndex.advancedBy(Int(randomValue))])"
+            randomString += "\(base[base.characters.index(base.startIndex, offsetBy: Int(randomValue))])"
         }
         
         return randomString
@@ -21,29 +21,29 @@ extension String {
 //YYImage WebP Support
 extension UIImageView {
     
-    class func imageWithUrlWebP(url:String) -> UIImageView {
+    class func imageWithUrlWebP(_ url:String) -> UIImageView {
         let image_view = UIImageView()
         image_view.set_webimage_url(url)
         return image_view
     }
     
-    func set_webimage_url_user( url:String? ) -> Void {
+    func set_webimage_url_user( _ url:String? ) -> Void {
         let pic_name    = "placeholder_userhead"
         var url = self.webp_url(url)
         url = "\(url)/&rand=\(String.random())"
-        let cache = YYWebImageManager.sharedManager().cache
-        cache?.memoryCache.removeObjectForKey(url)
-        cache?.diskCache.removeObjectForKey(url)
+        let cache = YYWebImageManager.shared().cache
+        cache?.memoryCache.removeObject(forKey: url)
+        cache?.diskCache.removeObject(forKey: url)
         
         self.set_webimage_url_base(url,place_holder_name: pic_name , need_random_url: true )
     }
-    func set_webimage_url_base( url:String? , place_holder_name pic_name:String , need_random_url random:Bool = false ) -> Void {
+    func set_webimage_url_base( _ url:String? , place_holder_name pic_name:String , need_random_url random:Bool = false ) -> Void {
         do{
     
-            try! self.yy_setImageWithURL( NSURL(string:url ?? ""), placeholder: UIImage(named: pic_name) , options:  [YYWebImageOptions.ProgressiveBlur , YYWebImageOptions.SetImageWithFadeAnimation], completion: { ( image, url, from:YYWebImageFromType, stage:YYWebImageStage, e:NSError?) in
+            try! self.yy_setImage( with: URL(string:url ?? ""), placeholder: UIImage(named: pic_name) , options:  [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation], completion: { ( image, url, from:YYWebImageFromType, stage:YYWebImageStage, e:NSError?) in
 
                 let url_str = url.URLString
-                if ( from == YYWebImageFromType.Remote ||  from == YYWebImageFromType.None ){
+                if ( from == YYWebImageFromType.remote ||  from == YYWebImageFromType.none ){
                     DLog("image url is \(url_str),from remote or none,\(stage)")
                 }
   
@@ -55,7 +55,7 @@ extension UIImageView {
        
      }
     
-    func set_webimage_url( url:String? ) -> Void {
+    func set_webimage_url( _ url:String? ) -> Void {
         if let u = url {
             let url         = self.webp_url(url)
             let pic_name    = "placeholder_product"
@@ -64,7 +64,7 @@ extension UIImageView {
         }
     }
     
-    func webp_url(url:String?) -> String {
+    func webp_url(_ url:String?) -> String {
         var res = url ?? ""
         if ( res.length <= 0 ){
             return ""
@@ -78,59 +78,59 @@ extension UIImageView {
 extension UIImage {
     
     func fixOrientation() -> UIImage {
-        if (self.imageOrientation == .Up) {
+        if (self.imageOrientation == .up) {
             return self
         }
         
-        var transform = CGAffineTransformIdentity
+        var transform = CGAffineTransform.identity
         
         switch (self.imageOrientation) {
-        case .Down, .DownMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.width, self.size.height)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: self.size.width, y: self.size.height)
+            transform = transform.rotated(by: CGFloat(M_PI))
             
-        case .Left, .LeftMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.width, 0)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2))
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: self.size.width, y: 0)
+            transform = transform.rotated(by: CGFloat(M_PI_2))
             
-        case .Right, .RightMirrored:
-            transform = CGAffineTransformTranslate(transform, 0, self.size.height)
-            transform = CGAffineTransformRotate(transform, CGFloat(-M_PI_2))
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: self.size.height)
+            transform = transform.rotated(by: CGFloat(-M_PI_2))
             
         default:
             break
         }
         
         switch (self.imageOrientation) {
-        case .UpMirrored, .DownMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.width, 0)
-            transform = CGAffineTransformScale(transform, -1, 1)
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: self.size.width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
             
-        case .LeftMirrored, .RightMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.height, 0)
-            transform = CGAffineTransformScale(transform, -1, 1)
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: self.size.height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
             
         default:
             break
         }
         
-        let ctx = CGBitmapContextCreate(nil, Int(self.size.width), Int(self.size.height),
-                                        CGImageGetBitsPerComponent(self.CGImage), 0,
-                                        CGImageGetColorSpace(self.CGImage),
-                                        CGImageGetBitmapInfo(self.CGImage).rawValue)
-        CGContextConcatCTM(ctx, transform)
+        let ctx = CGContext(data: nil, width: Int(self.size.width), height: Int(self.size.height),
+                                        bitsPerComponent: (self.cgImage?.bitsPerComponent)!, bytesPerRow: 0,
+                                        space: (self.cgImage?.colorSpace!)!,
+                                        bitmapInfo: (self.cgImage?.bitmapInfo.rawValue)!)
+        ctx?.concatenate(transform)
         
         switch (self.imageOrientation) {
-        case .Left, .LeftMirrored, .Right, .RightMirrored:
-            CGContextDrawImage(ctx, CGRectMake(0,0,self.size.height,self.size.width), self.CGImage)
+        case .left, .leftMirrored, .right, .rightMirrored:
+            ctx?.draw(self.cgImage!, in: CGRect(x: 0,y: 0,width: self.size.height,height: self.size.width))
             
         default:
-            CGContextDrawImage(ctx, CGRectMake(0,0,self.size.width,self.size.height), self.CGImage)
+            ctx?.draw(self.cgImage!, in: CGRect(x: 0,y: 0,width: self.size.width,height: self.size.height))
         }
         
         // And now we just create a new UIImage from the drawing context
-        let cgimg = CGBitmapContextCreateImage(ctx)
-        return UIImage(CGImage: cgimg!)
+        let cgimg = ctx?.makeImage()
+        return UIImage(cgImage: cgimg!)
     }
 }
 //

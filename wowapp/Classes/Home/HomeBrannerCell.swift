@@ -15,21 +15,21 @@ class HomeBrannerCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func reloadBanner(dataArr:[WOWCarouselBanners]){
+    func reloadBanner(_ dataArr:[WOWCarouselBanners]){
         imageURLArray = []
         for i in 0..<dataArr.count {
             imageURLArray.append(dataArr[i].bannerImgSrc! as String)
         }
         
         cyclePictureView.showPageControl = true
-        cyclePictureView.currentDotColor = UIColor.blackColor()
-        cyclePictureView.otherDotColor = UIColor.init(hexString: "000000", alpha: 0.2)!
+        cyclePictureView.currentDotColor = UIColor.black
+        cyclePictureView.otherDotColor = UIColor.init(white: "000000", alpha: 0.2)!
         cyclePictureView.imageURLArray = imageURLArray
         cyclePictureView.timeInterval = 3
      
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

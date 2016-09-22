@@ -97,7 +97,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
         
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         
         addTopView()
         addBottomProductView()
@@ -116,7 +116,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         self.cv.decelerationRate = UIScrollViewDecelerationRateFast;
         
         let layout                          = UICollectionViewFlowLayout()
-        layout.scrollDirection              = .Horizontal
+        layout.scrollDirection              = .horizontal
         layout.sectionInset                 = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         layout.minimumLineSpacing           = 15.0
         cv!.collectionViewLayout            = layout
@@ -130,9 +130,9 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         v_bottom.magicView.delegate             = self
         
         
-        v_bottom.magicView.menuScrollEnabled    = true
-        v_bottom.magicView.switchAnimated       = true
-        v_bottom.magicView.scrollEnabled        = true
+        v_bottom.magicView.isMenuScrollEnabled    = true
+        v_bottom.magicView.isSwitchAnimated       = true
+        v_bottom.magicView.isScrollEnabled        = true
 
         
         self.addChildViewController(v_bottom)
@@ -157,28 +157,28 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     }
     
 
-    func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
+    func collectionView(_ collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:IndexPath) -> CGSize
     {
-        return CGSizeMake(80.w,80.w)
+        return CGSize(width: 80.w,height: 80.w)
     }
     
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return vo_categories.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let row  =  vo_categories[indexPath.row]
+        let row  =  vo_categories[(indexPath as NSIndexPath).row]
         var cell =  UICollectionViewCell()
         
-        if ( indexPath.row == 0) {
+        if ( (indexPath as NSIndexPath).row == 0) {
             
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(cell_reuse_id, forIndexPath: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: cell_reuse_id, for: indexPath)
             if let iv = cell.viewWithTag(2) as? UIImageView ,
                 let img = row.categoryIconSmall {
                 iv.set_webimage_url(img)
@@ -186,43 +186,43 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             
         }else{
             
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(cell_reuse_id_label, forIndexPath: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: cell_reuse_id_label, for: indexPath)
             if let lv = cell.viewWithTag(1) as? UILabel {
-                lv.font = UIFont.systemFontOfSize(13)
+                lv.font = UIFont.systemFont(ofSize: 13)
                 lv.text =  row.categoryName ?? ""
             }
         }
         self.updateCellStatus(cell, is_selected: false)
         
-        if ( cell.selected == true){
+        if ( cell.isSelected == true){
             self.updateCellStatus(cell, is_selected: true)
         }
         return cell
     }
     
     // 改变cell的背景颜色
-    func updateCellStatus(cell:UICollectionViewCell  , is_selected selected:Bool ){
+    func updateCellStatus(_ cell:UICollectionViewCell  , is_selected selected:Bool ){
         
-        let color_20                    = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-        let color_100                   = UIColor.whiteColor().colorWithAlphaComponent(1.0)
+        let color_20                    = UIColor.white.withAlphaComponent(0.2)
+        let color_100                   = UIColor.white.withAlphaComponent(1.0)
         
         cell.layer.borderWidth          = 0.8
         cell.layer.cornerRadius         = 0.5
         
         if ( selected ){
             cell.backgroundColor        = color_20
-            cell.layer.borderColor      = color_100.CGColor
+            cell.layer.borderColor      = color_100.cgColor
 
         }else{
-            cell.backgroundColor        = UIColor.clearColor()
-            cell.layer.borderColor      = color_20.CGColor
+            cell.backgroundColor        = UIColor.clear
+            cell.layer.borderColor      = color_20.cgColor
         }
     }
     
     //取消选中操作
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
-        if  let cell = collectionView.cellForItemAtIndexPath(indexPath) {
+        if  let cell = collectionView.cellForItem(at: indexPath) {
             self.updateCellStatus(cell, is_selected: false)
         }
         
@@ -230,12 +230,12 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     
     
     //选中时的操作
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if  let cell = collectionView.cellForItemAtIndexPath(indexPath) {
-            self.cv.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if  let cell = collectionView.cellForItem(at: indexPath) {
+            self.cv.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
             self.updateCellStatus(cell, is_selected: true)
-            let row = vo_categories[indexPath.row]
-            cell.selected  = true;
+            let row = vo_categories[(indexPath as NSIndexPath).row]
+            cell.isSelected  = true;
             if ( row.categoryID != nil ){
                 self.ob_cid.value = row.categoryID!
             }
@@ -259,16 +259,16 @@ extension VCCategory:VTMagicViewDataSource{
     }
     
     //获取所有菜单名，数组中存放字符串类型对象
-    func menuTitlesForMagicView(magicView: VTMagicView) -> [String] {
+    func menuTitles(for magicView: VTMagicView) -> [String] {
         return ["上新","销量","价格"]
     }
-    func magicView(magicView: VTMagicView, menuItemAtIndex itemIndex: UInt) -> UIButton{
+    func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
-        let button = magicView .dequeueReusableItemWithIdentifier(self.identifier_magic_view_bar_item)
+        let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
         
         if ( button == nil) {
             
-            let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRectMake(0, 0, self.view.frame.width / 3, 50)) { (asc) in
+            let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: 50)) { (asc) in
 
             }
             b.btnIndex = itemIndex
@@ -283,8 +283,8 @@ extension VCCategory:VTMagicViewDataSource{
         return button!
     }
     
-    func magicView(magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
-        let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
+    func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
+        let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
         if (vc == nil) {
             let vc_me       = VCCategoryProducts()
             addChildViewController(vc_me)
@@ -292,7 +292,7 @@ extension VCCategory:VTMagicViewDataSource{
         }
         return vc!;
     }
-    func touchClick(btn:UIButton){
+    func touchClick(_ btn:UIButton){
         DLog(btn.state)
     }
 }
@@ -301,12 +301,12 @@ extension VCCategory:VTMagicViewDataSource{
 
 extension VCCategory:VTMagicViewDelegate{
     
-    func refreshSubView( tab_index:UInt )
+    func refreshSubView( _ tab_index:UInt )
     {
         DLog("cid \(ob_cid.value) tab_index \(tab_index)")
         
-        if let b    = self.v_bottom.magicView.menuItemAtIndex(tab_index) as! TooglePriceBtn? ,
-            vc  = self.v_bottom.magicView.viewControllerAtPage(tab_index) as? VCCategoryProducts
+        if let b    = self.v_bottom.magicView.menuItem(at: tab_index) as! TooglePriceBtn? ,
+            let vc  = self.v_bottom.magicView.viewController(atPage: tab_index) as? VCCategoryProducts
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
             let query_cid          = ob_cid.value
@@ -325,11 +325,11 @@ extension VCCategory:VTMagicViewDelegate{
         }
     }
     
-    func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
+    func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         self.ob_tab_index.value = pageIndex
     }
     
-    func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
+    func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
         self.ob_tab_index.value = itemIndex
     }
     

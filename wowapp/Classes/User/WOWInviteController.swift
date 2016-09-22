@@ -28,12 +28,12 @@ class WOWInviteController: WOWBaseViewController,UIWebViewDelegate{
 //        request()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        self.navigationController!.navigationBar.addSubview(progressView)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 //        progressView.removeFromSuperview()
     }
@@ -42,7 +42,7 @@ class WOWInviteController: WOWBaseViewController,UIWebViewDelegate{
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func inviteButtonClick(sender: AnyObject) {
+    @IBAction func inviteButtonClick(_ sender: AnyObject) {
         WOWShareManager.share(shareTitle, shareText:shareDesc, url:shareUrl + WOWUserManager.userName, shareImage:UIImage(named: "testinvitation")!)
     }
     

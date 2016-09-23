@@ -167,19 +167,19 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = dataArr[(indexPath as NSIndexPath).row]
         if selectIndex == 0 { //场景
-            let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController)) as! WOWSenceController
+            let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController.self)) as! WOWSenceController
             sence.hideNavigationBar = true
-            sence.sceneID = String(model.id)
+            sence.sceneID = String(describing: model.id)
             navigationController?.pushViewController(sence, animated: true)
         }else{ //单品
-            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWGoodsDetailController)) as! WOWGoodsDetailController
             vc.productId = model.id
             vc.hideNavigationBar = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
     
-    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无您喜欢的" + (selectIndex == 0 ? "场景哦...":"单品哦...")
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri

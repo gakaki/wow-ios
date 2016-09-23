@@ -212,7 +212,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         cv.dataSource                       = self
         cv.backgroundColor                  = UIColor.white
         
-        cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
         cv.register(VCTopicHeaderView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: cell_header_reuse)
         
         let bg_view                         = UIView()

@@ -40,7 +40,7 @@ class WOWUploadManager {
         
         let qiniu_token_url         = [BaseUrl,"/",URL_QINIU_TOKEN].joined(separator: "")
         
-        let json_str                = json_serialize( ["key": qiniu_key as AnyObject,"bucket": "wowdsgn"] )
+        let json_str                = json_serialize( ["key": qiniu_key as AnyObject,"bucket": "wowdsgn" as AnyObject] )
         let params_qiniu            = ["paramJson": json_str ]
         
         

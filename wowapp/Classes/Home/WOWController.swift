@@ -233,7 +233,7 @@ class WOWController: WOWBaseViewController {
     func requestTop() {
         var params = ["pageId": 1, "region": 1]
        
-        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                
                 
@@ -266,7 +266,7 @@ class WOWController: WOWBaseViewController {
     }
     
     func requestBottom()  {
-        var params = [String: AnyObject]?()
+        var params = [String: AnyObject]()
         
         let totalPage = 10
         
@@ -296,7 +296,7 @@ class WOWController: WOWBaseViewController {
                         strongSelf.tableView.mj_footer = strongSelf.mj_footerHome
                     }
                     
-                    strongSelf.bottomListArray.appendContentsOf(bannerList)
+                    strongSelf.bottomListArray.append(contentsOf: bannerList)
                     strongSelf.bottomListCount = strongSelf.bottomListArray.count
                 }else {
                     
@@ -325,7 +325,7 @@ class WOWController: WOWBaseViewController {
         if let bannerLinkType = model.bannerLinkType {
             switch bannerLinkType {
             case 1:
-                let vc = UIStoryboard.initialViewController("Home", identifier:String(WOWWebViewController)) as! WOWWebViewController
+                let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWWebViewController.self)) as! WOWWebViewController
 //                vc.brandID = model.bannerLinkTargetId
 //                vc.entrance = .brandEntrance
 //                vc.hideNavigationBar = true
@@ -338,7 +338,7 @@ class WOWController: WOWBaseViewController {
                 print("专题详情页（图文混排）")
             case 4:
                 print("品牌详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
                 vc.brandID = model.bannerLinkTargetId
                 vc.entrance = .brandEntrance
                 vc.hideNavigationBar = true
@@ -346,7 +346,7 @@ class WOWController: WOWBaseViewController {
                 
             case 5:
                 print("设计师详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
                 vc.designerId = model.bannerLinkTargetId
                 vc.entrance = .designerEntrance
                 vc.hideNavigationBar = true
@@ -556,7 +556,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             make.height.equalTo(37)
             make.center.equalTo(view)
         }
-        let lbBottom = UILabel.initLable(" ", titleColor: UIColor.black, textAlignment: .Center, font: 10)
+        let lbBottom = UILabel.initLable(" ", titleColor: UIColor.black, textAlignment: .center, font: 10)
         lbBottom.backgroundColor = UIColor.init(hexString: "eaeaea")
         view.addSubview(lbBottom)
         lbBottom.snp_makeConstraints { (make) -> Void in

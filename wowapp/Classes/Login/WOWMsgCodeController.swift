@@ -61,7 +61,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_PwdResetCode(mobile:mobile), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.showMsg("验证码发送成功")
-                strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor, mainTitleColor: UIColor.blackColor, countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
+                strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
             
@@ -136,7 +136,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         let mobile = codeTextField.text ?? ""
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_PwdResetCode(mobile: mobile), successClosure: { [weak self](result) in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController)) as! WOWMsgCodeController
                 vc.mobile = strongSelf.codeTextField.text
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }

@@ -365,7 +365,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 DLog(json)
                 if let strongSelf = self{
                     
-                    strongSelf.orderNewDetailModel = Mapper<WOWNewOrderDetailModel>().map(result)
+                    strongSelf.orderNewDetailModel = Mapper<WOWNewOrderDetailModel>().map(JSONObject:result)
                     strongSelf.orderCode =  strongSelf.orderNewDetailModel!.orderCode
                     
                     strongSelf.orderType(strongSelf.orderNewDetailModel)
@@ -395,7 +395,7 @@ extension WOWOrderDetailController{
                 if let strongSelf = self {
                     let json = JSON(result)
                     let charge = json["charge"]
-                    strongSelf.goPay(charge.object)
+                    strongSelf.goPay(charge.object as AnyObject)
                 }
                 
             }) { (errorMsg) in
@@ -408,8 +408,8 @@ extension WOWOrderDetailController{
     fileprivate func goPay(_ charge:AnyObject){
         DispatchQueue.main.async {
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
-                if let strongSelf = self{
-                    switch ret{
+                if let strongSelf = self  , let ret_str = ret as! String {
+                    switch ret_str{
                     case "success":
                         strongSelf.requestPayResult()
                     case "cancel":

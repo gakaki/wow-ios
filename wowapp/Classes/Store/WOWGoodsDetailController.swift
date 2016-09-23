@@ -292,7 +292,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             cell.showData(productModel)
             returnCell = cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsDetailCel()), for: indexPath) as! WOWGoodsDetailCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsDetailCell()), for: indexPath) as! WOWGoodsDetailCell
             if let pics = productModel?.primaryImgs{
                 let model = pics[(indexPath as NSIndexPath).row]
 //                cell.showData(model)
@@ -303,23 +303,23 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             cell.showData(productModel)
             returnCell = cell
         case 3: //参数
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsParamCell), for: indexPath) as! WOWGoodsParamCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsParamCell()), for: indexPath) as! WOWGoodsParamCell
 //            if let att = productModel?.attributes {
 //                cell.showData(att[indexPath.row])
 //            }
             returnCell = cell
         case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell),for: indexPath) as! WOWSenceLikeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell()),for: indexPath) as! WOWSenceLikeCell
 //            cell.rightTitleLabel.text = "\(productModel?.likesCount ?? 0)人喜欢"
             cell.rightBackView.addAction({ [weak self] in
                 if let strongSelf = self{
-                    let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
+                    let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController.self))
                     strongSelf.navigationController?.pushViewController(likeVC, animated: true)
                 }
             })
             returnCell = cell
         case 5: //评论
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWCommentCell),for: indexPath)as!WOWCommentCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWCommentCell()),for: indexPath)as!WOWCommentCell
             cell.hideHeadImage()
 //            if let model = productModel?.comments?[indexPath.row]{
 //                cell.commentLabel.text = model.comment
@@ -334,14 +334,14 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     }
     
     func brandHeadClick() {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
         vc.brandID = productModel?.brandId
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func moreLikeButtonClick(){
-        let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController))
+        let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController.self))
         navigationController?.pushViewController(likeVC, animated: true)
     }
     
@@ -415,7 +415,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     fileprivate func goComment(_ commentView:UIView!){
         commentView.addAction{[weak self] in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWCommentController)) as! WOWCommentController
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWCommentController)) as! WOWCommentController
                 vc.commentType = CommentType.product
                 vc.mainID = self?.productId ?? 0
                 strongSelf.navigationController?.pushViewController(vc, animated: true)

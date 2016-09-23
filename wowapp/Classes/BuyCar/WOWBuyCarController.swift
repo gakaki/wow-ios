@@ -131,7 +131,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     
     fileprivate func configTable(){
-        tableView.register(UINib.nibName(String(WOWBuyCarNormalCell.self)), forCellReuseIdentifier:cellNormalID)
+        tableView.register(UINib.nibName(String(describing: WOWBuyCarNormalCell.self)), forCellReuseIdentifier:cellNormalID)
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.separatorColor = SeprateColor
 
@@ -193,11 +193,11 @@ class WOWBuyCarController: WOWBaseViewController {
     /**
      2.同步登录之后个人购物车的数据
      */
-    fileprivate func asyncCarList(){
+    func asyncCarList(){
         //1.直接拉取服务器端购物车数据
             WOWNetManager.sharedManager.requestWithTarget(.api_CartGet, successClosure: {[weak self](result) in
                 if let strongSelf = self{
-                    let model = Mapper<WOWCarModel>().map(result)
+                    let model = Mapper<WOWCarModel>().map(JSONObject:result)
                     if let arr = model?.shoppingCartResult {
                         strongSelf.dataArr = arr
                         strongSelf.bottomView.isHidden = false

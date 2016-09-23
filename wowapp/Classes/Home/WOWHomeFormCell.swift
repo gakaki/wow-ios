@@ -80,7 +80,7 @@ class WOWHomeFormCell: UITableViewCell {
         self.resetSeparators()
         
         
-        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell.self)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
+        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
         
 //        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
         

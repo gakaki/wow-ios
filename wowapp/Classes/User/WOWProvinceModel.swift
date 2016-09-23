@@ -85,11 +85,11 @@ class WOWSimpleSSQModel: WOWBaseModel ,Mappable{
     var parent_id           :   String?     //"parent_id":"0",
     var level_type          :   String?     // "level_type":"1"
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         id                  <- map["id"]
         name                <- map["name"]
         parent_id           <- map["parent_id"]

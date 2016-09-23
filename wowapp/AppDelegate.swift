@@ -155,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //extension AppDelegate:DeepShareDelegate{
 extension AppDelegate{
     func rootVCGuide(){
-        let nav = UIStoryboard.initNavVC("Login", identifier:String(WOWGuideController.self))
+        let nav = UIStoryboard.initNavVC("Login", identifier:String(describing: WOWGuideController.self))
         nav.navigationController?.setNavigationBarHidden(true, animated: false)
         nav.isNavigationBarHidden = true
         window?.rootViewController =    nav
@@ -172,7 +172,7 @@ extension AppDelegate{
         if appVersion == nil || appVersion != currentAppVersion {
             // 保存最新的版本号
             userDefaults.setValue(currentAppVersion, forKey: "appVersion")
-            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController.self))
+            let introVC = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWIntroduceController.self))
             self.window?.rootViewController = introVC
             rootVCGuide()
             
@@ -300,11 +300,11 @@ extension AppDelegate{
     func initialAppearance(){
         window?.backgroundColor = UIColor.white
         let barButtonItem = UIBarButtonItem.appearance()
-        barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], forState: .normal)
+        barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], for: .normal)
         
         let navBar = UINavigationBar.appearance()
         navBar.isTranslucent = false
-        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor, size:CGSize(width: MGScreenWidth, height: 64)), forBarPosition: .Any, barMetrics: .Default)
+        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.white, size:CGSize(width: MGScreenWidth, height: 64)), forBarPosition: .Any, barMetrics: .Default)
         navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSize(width: MGScreenWidth, height: 0.5)) //去除导航栏下方黑线
         
         //        navBar.shadowImage = UIImage()
@@ -322,8 +322,8 @@ extension AppDelegate{
         tabBar.isTranslucent = false
         
         let tabBarItem = UITabBarItem.appearance()
-        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], forState: .normal)
-        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], for: .Selected)
+        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], for: .normal)
+        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], for: .selected)
     }
     
 }

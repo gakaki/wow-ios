@@ -103,7 +103,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
-        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell))
 //        WOWBorderColor(collectionView)
 
         collectionView.register(UINib.nibName(String(describing: WOWBrandHeaderView)), forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")

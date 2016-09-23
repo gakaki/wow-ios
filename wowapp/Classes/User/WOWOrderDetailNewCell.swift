@@ -30,7 +30,8 @@ class WOWOrderDetailNewCell: UITableViewCell {
         colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
         
-        titleImageView.kf_setImageWithURL(URL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
+        titleImageView.set_webimage_url(URL(string: (orderProductModel.specImg)!))
+        
         
 
         let result = WOWCalPrice.calTotalPrice([orderProductModel.sellPrice ?? 0],counts:[1])
@@ -49,8 +50,8 @@ class WOWOrderDetailNewCell: UITableViewCell {
 
         colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
-        titleImageView.kf_setImageWithURL(URL(string: (orderProductModel.specImg)!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
+        titleImageView.set_webimage_url(URL(string: (orderProductModel.specImg)!))
 
         
         priceLabel.text = (orderProductModel.sellPrice)!.toString.get_formted_price()

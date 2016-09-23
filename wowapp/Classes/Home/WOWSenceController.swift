@@ -34,7 +34,7 @@ class WOWSenceController: WOWBaseViewController {
         navigationItem.title = "场景"
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.register(UINib.nibName(String(WOWSenceImageCell.self)), forCellReuseIdentifier:String(WOWSenceImageCell))
+        tableView.register(UINib.nibName(String(describing: WOWSenceImageCell.self)), forCellReuseIdentifier:String(WOWSenceImageCell.self))
         tableView.register(UINib.nibName(String(WOWCommentCell.self)), forCellReuseIdentifier:String(WOWCommentCell))
         tableView.register(UINib.nibName(String(describing: WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
         tableView.register(UINib.nibName(String(WOWSenceLikeCell.self)), forCellReuseIdentifier:String(WOWSenceLikeCell))

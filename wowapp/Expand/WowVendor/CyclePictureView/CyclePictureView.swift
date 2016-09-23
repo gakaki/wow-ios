@@ -324,7 +324,7 @@ extension CyclePictureView {
         return self.actualItemCount
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    @objc(collectionView:cellForItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! CyclePictureCell
         
@@ -365,7 +365,7 @@ extension CyclePictureView {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    @objc(collectionView:didSelectItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.cyclePictureView(self, didSelectItemAtIndexPath: IndexPath(item: (indexPath as NSIndexPath).item % self.imageBox!.imageArray.count, section: (indexPath as NSIndexPath).section))
     }
     

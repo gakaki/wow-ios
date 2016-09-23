@@ -81,7 +81,7 @@ class WOWOrderController: WOWBaseViewController {
     fileprivate func configTable(){
         tableView.clearRestCell()
         tableView.backgroundColor = DefaultBackColor
-        tableView.register(UINib.nibName(String(WOWOrderListCell)), forCellReuseIdentifier:"WOWOrderListCell")
+        tableView.register(UINib.nibName(String(WOWOrderListCell.self)), forCellReuseIdentifier:"WOWOrderListCell")
     }
     func updateOrderListAllInfo() {
         request()
@@ -94,7 +94,7 @@ class WOWOrderController: WOWBaseViewController {
         
         let totalPage = 10
         
-        var params = [String: AnyObject]?()
+        var params = [String: AnyObject]()
         if selectIndex == 2 { // 待发货 要 显示 部分发货
             params = ["orderStatusList": [1,2], "currentPage": pageIndex,"pageSize":totalPage]
         }else{
@@ -321,7 +321,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         return 0.1
     }
     
-    titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无订单哦"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri

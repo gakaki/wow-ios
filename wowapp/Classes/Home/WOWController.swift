@@ -34,7 +34,7 @@ class WOWController: WOWBaseViewController {
         addObserver()
         self.view.addSubview(self.topBtn)
 
-        self.topBtn.snp_makeConstraints { (make) in
+        self.topBtn.snp.makeConstraints { (make) in
             make.width.equalTo(98)
             make.height.equalTo(30)
             make.centerX.equalTo(self.view)
@@ -119,8 +119,9 @@ class WOWController: WOWBaseViewController {
             
             if  let send_obj =  sender.object as? [String:AnyObject] {
                 
+                
                 if model.productId! == send_obj["productId"] as? Int {
-                    model.favorite = sender.object!["favorite"] as? Bool
+                    model.favorite = send_obj["favorite"] as? Bool
                 }
             }
           
@@ -144,7 +145,7 @@ class WOWController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        tableView.register(UINib.nibName(String(describing: WOWlListCell)), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(String(describing: WOWlListCell())), forCellReuseIdentifier:cellID)
         
         tableView.register(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
         tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
@@ -230,11 +231,8 @@ class WOWController: WOWBaseViewController {
     }
     
     func requestTop() {
-        var params = [String: AnyObject]?()
-     
-        params = ["pageId": 1, "region": 1]
+        var params = ["pageId": 1, "region": 1]
        
-
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                
@@ -355,7 +353,7 @@ class WOWController: WOWBaseViewController {
                 navigationController?.pushViewController(vc, animated: true)
             case 6:
                 print("商品详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController)) as! WOWProductDetailController
                 vc.hideNavigationBar = true
                 vc.productId = model.bannerLinkTargetId
                 navigationController?.pushViewController(vc, animated: true)
@@ -553,12 +551,12 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         let img = UIImageView()
         img.image = UIImage(named: "recommend")
         view.addSubview(img)
-        img.snp_makeConstraints { (make) -> Void in
+        img.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(137)
             make.height.equalTo(37)
             make.center.equalTo(view)
         }
-        let lbBottom = UILabel.initLable(" ", titleColor: UIColor.blackColor(), textAlignment: .Center, font: 10)
+        let lbBottom = UILabel.initLable(" ", titleColor: UIColor.black, textAlignment: .Center, font: 10)
         lbBottom.backgroundColor = UIColor.init(hexString: "eaeaea")
         view.addSubview(lbBottom)
         lbBottom.snp_makeConstraints { (make) -> Void in
@@ -578,7 +576,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         let img = UIImageView()
         img.image = UIImage(named: "wowdsgn")
         view.addSubview(img)
-        img.snp_makeConstraints { (make) -> Void in
+        img.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(97)
             make.height.equalTo(10)
             make.center.equalTo(view)

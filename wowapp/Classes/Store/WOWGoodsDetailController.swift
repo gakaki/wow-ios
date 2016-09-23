@@ -139,12 +139,12 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.mj_header = self.mj_header
-        tableView.register(UINib.nibName(String(WOWGoodsTypeCell)), forCellReuseIdentifier:String(WOWGoodsTypeCell))
-        tableView.register(UINib.nibName(String(WOWGoodsDetailCell)), forCellReuseIdentifier:String(WOWGoodsDetailCell))
-        tableView.register(UINib.nibName(String(WOWGoodsParamCell)), forCellReuseIdentifier:String(WOWGoodsParamCell))
-        tableView.register(UINib.nibName(String(WOWSenceLikeCell)), forCellReuseIdentifier:String(WOWSenceLikeCell))
-        tableView.register(UINib.nibName(String(WOWCommentCell)), forCellReuseIdentifier:String(WOWCommentCell))
-        tableView.register(UINib.nibName(String(WOWDesignerCell)), forCellReuseIdentifier:String(WOWDesignerCell))  
+        tableView.register(UINib.nibName(String(describing: WOWGoodsTypeCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsTypeCell()))
+        tableView.register(UINib.nibName(String(describing: WOWGoodsDetailCell())), forCellReuseIdentifier:String(describing: WOWGoodsDetailCell()))
+        tableView.register(UINib.nibName(String(describing: WOWGoodsParamCell())), forCellReuseIdentifier:String(describing: WOWGoodsParamCell()))
+        tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell())), forCellReuseIdentifier:String(describing: WOWSenceLikeCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWCommentCell())), forCellReuseIdentifier:String(describing: WOWCommentCell))
+        tableView.register(UINib.nibName(String(describing: WOWDesignerCell())), forCellReuseIdentifier:String(describing: WOWDesignerCell))  
     }
     
     fileprivate func configHeaderView(){
@@ -157,11 +157,13 @@ class WOWGoodsDetailController: WOWBaseViewController {
         let result = WOWCalPrice.calTotalPrice([productModel?.sellPrice ?? 0],counts:[1])
         priceLabel.text = result
         cycleView.imageURLArray = [productModel?.productImg ?? ""]
-        placeImageView.kf_setImageWithURL(URL(string:productModel?.productImg ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+        
+        placeImageView.kf_setImage(with: URL(string:productModel?.productImg ?? ""), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
             if let strongSelf = self{
                 strongSelf.shareProductImage = image
             }
-        }
+        })
+     
     }
     
 //MARK:Actions
@@ -177,7 +179,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //        let uid = WOWUserManager.userID
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                strongSelf.productModel = Mapper<WOWProductModel>().map(result)
+                strongSelf.productModel = Mapper<WOWProductModel>().map(JSONObject:result)
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
@@ -285,7 +287,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         var returnCell :UITableViewCell!
         switch (indexPath as NSIndexPath).section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsTypeCell), for: indexPath) as! WOWGoodsTypeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsTypeCell()), for: indexPath) as! WOWGoodsTypeCell
             cell.headImageView.addTarget(self, action: #selector(brandHeadClick), for:.touchUpInside)
             cell.showData(productModel)
             returnCell = cell

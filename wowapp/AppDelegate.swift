@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  Wow
@@ -87,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func application(_ application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
+    private func application(_ application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
     {
         //DeepShare
 //        if DeepShare.continueUserActivity(userActivity) {
@@ -100,13 +101,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        if Pingpp.handleOpenURL(url, withCompletion: nil) {
+        if Pingpp.handleOpen(url, withCompletion: nil) {
             return true
         }
         
         
         //growing io
-        if Growing.handleUrl(url) {
+        if Growing.handle(url) {
             return true
         }
         
@@ -119,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        if MonkeyKing.handleOpenURL(url) {
 //            return true
 //        }
-        if UMSocialSnsService.handleOpenURL(url) {
+        if UMSocialSnsService.handleOpen(url) {
             return true
         }
         return true
@@ -127,12 +128,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // iOS 9 以上请用这个
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-        Pingpp.handleOpenURL(url, withCompletion: nil)
-        UMSocialSnsService.handleOpenURL(url)
+        Pingpp.handleOpen(url, withCompletion: nil)
+        UMSocialSnsService.handleOpen(url)
         
         
         //growing io
-        if Growing.handleUrl(url) {
+        if Growing.handle(url) {
             return true
         }
         
@@ -154,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //extension AppDelegate:DeepShareDelegate{
 extension AppDelegate{
     func rootVCGuide(){
-        let nav = UIStoryboard.initNavVC("Login", identifier:String(WOWGuideController))
+        let nav = UIStoryboard.initNavVC("Login", identifier:String(WOWGuideController.self))
         nav.navigationController?.setNavigationBarHidden(true, animated: false)
         nav.isNavigationBarHidden = true
         window?.rootViewController =    nav
@@ -171,7 +172,7 @@ extension AppDelegate{
         if appVersion == nil || appVersion != currentAppVersion {
             // 保存最新的版本号
             userDefaults.setValue(currentAppVersion, forKey: "appVersion")
-            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController))
+            let introVC = UIStoryboard.initialViewController("Login", identifier:String(WOWIntroduceController.self))
             self.window?.rootViewController = introVC
             rootVCGuide()
             
@@ -225,7 +226,7 @@ extension AppDelegate{
        
         UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
         UMAnalyticsConfig.sharedInstance().channelId = ""
-        MobClick.startWithConfigure(UMAnalyticsConfig.sharedInstance())
+        MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
         
         UMSocialData.setAppKey(WOWID.UMeng.appID)
@@ -235,7 +236,7 @@ extension AppDelegate{
         
         
         //Growing
-        Growing.startWithAccountId("a04e14656f08dc7e")
+        Growing.start(withAccountId: "a04e14656f08dc7e")
         //DeepShare
 //        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
         //Talking Data
@@ -299,11 +300,11 @@ extension AppDelegate{
     func initialAppearance(){
         window?.backgroundColor = UIColor.white
         let barButtonItem = UIBarButtonItem.appearance()
-        barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], forState: .Normal)
+        barButtonItem.setTitleTextAttributes([NSFontAttributeName:Fontlevel002], forState: .normal)
         
         let navBar = UINavigationBar.appearance()
         navBar.isTranslucent = false
-        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSize(width: MGScreenWidth, height: 64)), forBarPosition: .Any, barMetrics: .Default)
+        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor, size:CGSize(width: MGScreenWidth, height: 64)), forBarPosition: .Any, barMetrics: .Default)
         navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSize(width: MGScreenWidth, height: 0.5)) //去除导航栏下方黑线
         
         //        navBar.shadowImage = UIImage()
@@ -321,8 +322,8 @@ extension AppDelegate{
         tabBar.isTranslucent = false
         
         let tabBarItem = UITabBarItem.appearance()
-        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], forState: .Normal)
-        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], forState: .Selected)
+        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], forState: .normal)
+        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], for: .Selected)
     }
     
 }
@@ -341,8 +342,9 @@ extension AppDelegate: AdLaunchViewDelegate {
     func fetchADImage(){
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AD, successClosure: { (result) in
+            
             var r                     =  JSON(result)
-            let res                   =  Mapper<WOWVOAd>().mapArray(r.arrayObject) ?? [WOWVOAd]()
+            let res                   =  Mapper<WOWVOAd>().mapArray(JSONObject:r.arrayObject) ?? [WOWVOAd]()
             if let imgUrl = res.first?.imgUrl {
                 Defaults[.pic_ad] = imgUrl
             }

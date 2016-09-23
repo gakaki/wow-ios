@@ -1,3 +1,4 @@
+
 //
 //  AdLaunchView.swift
 //  DGAdLaunchView
@@ -100,9 +101,10 @@ private extension AdLaunchView {
     }
     
     func requestBanner() {
-        SDWebImageManager.shared().downloadImage(with: URL(string: self.imageURL), options: SDWebImageOptions.avoidAutoSetImage, progress: nil) { (image:UIImage!, error:NSError!, cacheType:SDImageCacheType, finished:Bool, url:URL!) in
-            print("图片下载成功")
-        }
+        //TODO:SDWEBImage
+//        SDWebImageManager.shared().downloadImage(with: URL(string: self.imageURL), options: SDWebImageOptions.avoidAutoSetImage, progress: nil) { (image:UIImage!, error:NSError!, cacheType:SDImageCacheType, finished:Bool, url:URL!) in
+//            print("图片下载成功")
+//        }
         
         
     }
@@ -129,7 +131,7 @@ private extension AdLaunchView {
             addSubview(progressButtonView)
         }
         
-        progressView = DACircularProgressView(frame: CGRect(x: UIScreen.mainScreen.bounds.width - 60, y: 20, width: 40, height: 40))
+        progressView = DACircularProgressView(frame: CGRect(x: UIScreen.main.bounds.width - 60, y: 20, width: 40, height: 40))
         if let progressView = progressView {
             progressView.isUserInteractionEnabled = false
             progressView.progress = 0

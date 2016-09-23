@@ -7,8 +7,8 @@ extension Sequence  where Iterator.Element == [String: AnyObject] {
         var result = [String: AnyObject]()
         for item in uniqueKeys{
             let predicate = NSPredicate(format: "SELF.\(key) =[cd] %@", item)
-            let arrFilter = self.filter{predicate.evaluateWithObject($0)}
-            result[item] = arrFilter
+            let arrFilter = self.filter{predicate.evaluate(with: $0)}
+            result[item] = arrFilter as AnyObject?
         }
         return result
     }

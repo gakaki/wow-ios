@@ -1,5 +1,6 @@
 
 
+
 import UIKit
 import SnapKit
 import VTMagic
@@ -37,14 +38,14 @@ class VCShopping: WowBaseVCCartSearch {
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
         
-        v.magicView.snp_makeConstraints { (make) -> Void in
+        v.magicView.snp.makeConstraints { (make) -> Void in
             make.size.equalTo(self.view)
         }
 
         
-        vc_found    = UIStoryboard.initialViewController("Found", identifier:String(VCFound)) as! VCFound
-        vc_brand    = UIStoryboard.initialViewController("Brand", identifier:String(WOWBrandListController)) as! WOWBrandListController
-        vc_designer = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList
+        vc_found    = UIStoryboard.initialViewController("Found", identifier:String(describing: VCFound())) as! VCFound
+        vc_brand    = UIStoryboard.initialViewController("Brand", identifier:String(describing: WOWBrandListController.self)) as? WOWBrandListController
+        vc_designer = UIStoryboard.initialViewController("Designer", identifier:String(describing: VCDesignerList.self)) as! VCDesignerList
         
         addChildViewController(vc_found!)
         addChildViewController(vc_brand!)
@@ -85,7 +86,7 @@ extension VCShopping:VTMagicViewDataSource{
             let b               = UIButton(type: .custom)
             b.frame             = CGRect(x: 0, y: 0, width: width, height: 50)
             b.titleLabel!.font  =  UIFont.systemFont(ofSize: 14)
-            b.setTitleColor(WowColor.grayLightColor(), for: UIControlState())
+            b.setTitleColor(WowColor.grayLight, for: UIControlState())
             b.setTitleColor(WowColor.black, for: .selected)
             b.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
             

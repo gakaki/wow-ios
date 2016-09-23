@@ -302,7 +302,7 @@ extension PhotoBrowser {
         toolBar.saveBtnOnClick = {[unowned self] (saveBtn: UIButton) in
             // 保存到相册
             let currentCell = self.collectionView.cellForItem(at: IndexPath(row: self.currentIndex, section: 0)) as! PhotoViewCell
-            guard let currentImage = currentCell.imageView.image else { return }
+            guard currentCell.imageView.image != nil else { return }
            
             //TODO
 //            DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default).async {

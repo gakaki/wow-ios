@@ -34,7 +34,7 @@ class WOWCouponController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         navigationItem.title = "优惠券"
-        tableView.register(UINib.nibName(String(WOWCouponCell)), forCellReuseIdentifier: "WOWCouponCell")
+        tableView.register(UINib.nibName(String(WOWCouponCell.self)), forCellReuseIdentifier: "WOWCouponCell")
         tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.backgroundColor = GrayColorLevel5
@@ -46,7 +46,7 @@ class WOWCouponController: WOWBaseViewController {
 
     override func request(){
         super.request()
-        var params = [String: AnyObject]?()
+        var params = [String: AnyObject]()
         switch entrance {
         case .userEntrance:
             params = ["currentPage": pageIndex,"pageSize":pageSize]
@@ -201,7 +201,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
                 view.backgroundColor = UIColor.clear
                 return view
             }else {
-                let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView), owner: self, options: nil)?.last as! WOWCouponheaderView
+                let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView()), owner: self, options: nil)?.last as! WOWCouponheaderView
                 view.noUseButton.addTarget(self, action: #selector(noUserClick(_:)), for:.touchUpInside)
                 return view
             }
@@ -228,7 +228,7 @@ extension WOWCouponController {
         return UIImage(named: "emptyCoupon")
     }
     
-    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "没有优惠券哦~"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
         return attri

@@ -219,7 +219,7 @@ open class TagListView: UIView {
         var currentRowTagCount = 0
         var currentRowWidth: CGFloat = 0
         for (index, tagView) in tagViews.enumerated() {
-            tagView.frame.size = tagView.intrinsicContentSize()
+            tagView.frame.size = tagView.intrinsicContentSize
             tagViewHeight = tagView.frame.height
             
             if currentRowTagCount == 0 || currentRowWidth + tagView.frame.width > frame.width {

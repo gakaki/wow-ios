@@ -1,3 +1,5 @@
+
+
 //
 //  WOWUserManager.swift
 //  WowDsgn
@@ -8,52 +10,52 @@
 
 import Foundation
 
-
+//TODO
 struct WOWUserManager {
-    fileprivate static let WOWUserID            = "WOWUserID"
-    fileprivate static let WOWUserHeadImage     = "WOWUserHeadImage"
-    fileprivate static let WOWUserName          = "WOWUserName"
-    fileprivate static let WOWUserSex           = "WOWUserSex"
-    fileprivate static let WOWUserDes           = "WOWUserDes"
-    fileprivate static let WOWUserEmail         = "WOWUserEmail"
-    fileprivate static let WOWUserMobile        = "WOWUserMobile"
-    fileprivate static let WOWUserCarCount      = "WOWUserCarCount"
-    fileprivate static let WOWSessionToken      = "WOWSessionToken"
-    fileprivate static let WOWUserIndustry      = "WOWUserIndustry"
-    fileprivate static let WOWUserConstellation = "WOWUserConstellation"
-    fileprivate static let WOWUserAgeRange      = "WOWUserAgeRange"
-    fileprivate static let WOWUserLoginStatus   = "WOWUserLoginStatus"
-    fileprivate static let WOWUserPhotoData     = "WOWUserPhotoData"
+     static let WOWUserID            = "WOWUserID"
+     static let WOWUserHeadImage     = "WOWUserHeadImage"
+     static let WOWUserName          = "WOWUserName"
+     static let WOWUserSex           = "WOWUserSex"
+     static let WOWUserDes           = "WOWUserDes"
+     static let WOWUserEmail         = "WOWUserEmail"
+     static let WOWUserMobile        = "WOWUserMobile"
+     static let WOWUserCarCount      = "WOWUserCarCount"
+     static let WOWSessionToken      = "WOWSessionToken"
+     static let WOWUserIndustry      = "WOWUserIndustry"
+     static let WOWUserConstellation = "WOWUserConstellation"
+     static let WOWUserAgeRange      = "WOWUserAgeRange"
+     static let WOWUserLoginStatus   = "WOWUserLoginStatus"
+     static let WOWUserPhotoData     = "WOWUserPhotoData"
 
 
     static var wechatToken = ""
     
     static var sessionToken:String {
         get{
-            return (MGDefault.objectForKey(WOWSessionToken) as? String) ?? ""
+            return (MGDefault.object(forKey: WOWSessionToken) as? String) ?? ""
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWSessionToken)
+            MGDefault.set(newValue, forKey:WOWSessionToken)
             MGDefault.synchronize()
         }
     }
 
     static var userCarCount:Int{
         get{
-            return (MGDefault.objectForKey(WOWUserCarCount) as? Int) ?? 0
+            return (MGDefault.object(forKey: WOWUserCarCount) as? Int) ?? 0
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserCarCount)
+            MGDefault.set(newValue, forKey:WOWUserCarCount)
             MGDefault.synchronize()
         }
     }
     
     static var userHeadImageUrl:String{
         get{
-            return (MGDefault.objectForKey(WOWUserHeadImage) as? String) ?? ""
+            return (MGDefault.object(forKey: WOWUserHeadImage) as? String) ?? ""
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserHeadImage)
+            MGDefault.set(newValue, forKey:WOWUserHeadImage)
             MGDefault.synchronize()
         }
     }
@@ -61,13 +63,13 @@ struct WOWUserManager {
     
     static var userID:String{
         get{
-            return (MGDefault.objectForKey(WOWUserID) as? String) ?? ""
+            return (MGDefault.object(forKey: WOWUserID) as? String) ?? ""
         }
     }
     
     static var userName:String{
         get{
-            let name = (MGDefault.objectForKey(WOWUserName) as? String) ?? ""
+            let name = (MGDefault.object(forKey: WOWUserName) as? String) ?? ""
             if name.isEmpty {
                 if self.userMobile.isEmpty {
                     if self.userEmail.isEmpty {
@@ -84,31 +86,31 @@ struct WOWUserManager {
         }
         
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserName)
+            MGDefault.set(newValue, forKey:WOWUserName)
             MGDefault.synchronize()
         }
     }
     
     static var userEmail:String{
         get{
-            return (MGDefault.objectForKey(WOWUserEmail) as? String) ?? ""
+            return (MGDefault.object(forKey: WOWUserEmail) as? String) ?? ""
         }
     }
     
     static var userMobile:String{
         get{
-            return (MGDefault.objectForKey(WOWUserMobile) as? String) ?? ""
+            return (MGDefault.object(forKey: WOWUserMobile) as? String) ?? ""
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserMobile)
+            MGDefault.set(newValue, forKey:WOWUserMobile)
             MGDefault.synchronize()
         }
     }
     static var userPhotoData:Data{
         get{
             
-            if  let aaa = MGDefault.objectForKey(WOWUserPhotoData)  {
-                 return aaa as! NSData
+            if  let aaa = MGDefault.object(forKey: WOWUserPhotoData)  {
+                 return (aaa as! NSData) as Data
             }else{
                 return Data()
             }
@@ -116,44 +118,44 @@ struct WOWUserManager {
 //            return (MGDefault.objectForKey(WOWUserPhotoData) as? NSData)!
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserPhotoData)
+            MGDefault.set(newValue, forKey:WOWUserPhotoData)
             MGDefault.synchronize()
         }
     }
 
     static var userSex:Int{
         get{
-            return (MGDefault.objectForKey(WOWUserSex) as? Int) ?? 3
+            return (MGDefault.object(forKey: WOWUserSex) as? Int) ?? 3
         }
 
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserSex)
+            MGDefault.set(newValue, forKey:WOWUserSex)
             MGDefault.synchronize()
         }
     }
     
     static var userConstellation:Int{
         get{
-            return (MGDefault.objectForKey(WOWUserConstellation) as? Int) ?? 0
+            return (MGDefault.object(forKey: WOWUserConstellation) as? Int) ?? 0
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserConstellation)
+            MGDefault.set(newValue, forKey:WOWUserConstellation)
             MGDefault.synchronize()
         }
     }
     static var userAgeRange:Int{
         get{
-            return (MGDefault.objectForKey(WOWUserAgeRange) as? Int) ?? 0
+            return (MGDefault.object(forKey: WOWUserAgeRange) as? Int) ?? 0
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserAgeRange)
+            MGDefault.set(newValue, forKey:WOWUserAgeRange)
             MGDefault.synchronize()
         }
     }
     
     static var userDes:String{
         get{
-            let des = (MGDefault.objectForKey(WOWUserDes) as? String) ?? ""
+            let des = (MGDefault.object(forKey: WOWUserDes) as? String) ?? ""
             if des.isEmpty {
                 return ""
             }else{
@@ -162,16 +164,16 @@ struct WOWUserManager {
         }
         
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserDes)
+            MGDefault.set(newValue, forKey:WOWUserDes)
             MGDefault.synchronize()
         }
     }
     static var userIndustry:String{
         get{
-            return (MGDefault.objectForKey(WOWUserIndustry) as? String) ?? ""
+            return (MGDefault.object(forKey: WOWUserIndustry) as? String) ?? ""
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWUserIndustry)
+            MGDefault.set(newValue, forKey:WOWUserIndustry)
             MGDefault.synchronize()
         }
     }
@@ -194,29 +196,29 @@ struct WOWUserManager {
     
     static func saveUserInfo(_ model:WOWUserModel?){
 //        MGDefault.setObject(true, forKey: WOWUserLoginStatus)
-        MGDefault.setObject(model?.user_nick, forKey:WOWUserName)
-        MGDefault.setObject(model?.user_sex, forKey:WOWUserSex)
-        MGDefault.setObject(model?.user_desc, forKey:WOWUserDes)
-        MGDefault.setObject(model?.user_headimage, forKey:WOWUserHeadImage)
-        MGDefault.setObject(model?.user_constellation, forKey:WOWUserConstellation)
-        MGDefault.setObject(model?.user_ageRange, forKey:WOWUserAgeRange)
-        MGDefault.setObject(model?.user_carCount, forKey:WOWUserCarCount)
-        MGDefault.setObject(model?.user_industry, forKey:WOWUserIndustry)
+        MGDefault.set(model?.user_nick, forKey:WOWUserName)
+        MGDefault.set(model?.user_sex, forKey:WOWUserSex)
+        MGDefault.set(model?.user_desc, forKey:WOWUserDes)
+        MGDefault.set(model?.user_headimage, forKey:WOWUserHeadImage)
+        MGDefault.set(model?.user_constellation, forKey:WOWUserConstellation)
+        MGDefault.set(model?.user_ageRange, forKey:WOWUserAgeRange)
+        MGDefault.set(model?.user_carCount, forKey:WOWUserCarCount)
+        MGDefault.set(model?.user_industry, forKey:WOWUserIndustry)
         MGDefault.synchronize()
     }
     
     static func cleanUserInfo(){
 //        MGDefault.setObject(false, forKey: WOWUserLoginStatus)
-        MGDefault.setObject(nil, forKey:WOWUserName)
-        MGDefault.setObject(nil, forKey:WOWUserSex)
-        MGDefault.setObject(nil, forKey:WOWUserDes)
-        MGDefault.setObject(nil, forKey:WOWUserHeadImage)
-        MGDefault.setObject(nil, forKey:WOWUserConstellation)
-        MGDefault.setObject(nil, forKey:WOWUserAgeRange)
-        MGDefault.setObject(nil, forKey:WOWUserCarCount)
-        MGDefault.setObject(nil, forKey:WOWUserIndustry)
-        MGDefault.setObject(nil, forKey:WOWUserPhotoData)
-        MGDefault.setObject(nil, forKey: WOWSessionToken)
+        MGDefault.set(nil, forKey:WOWUserName)
+        MGDefault.set(nil, forKey:WOWUserSex)
+        MGDefault.set(nil, forKey:WOWUserDes)
+        MGDefault.set(nil, forKey:WOWUserHeadImage)
+        MGDefault.set(nil, forKey:WOWUserConstellation)
+        MGDefault.set(nil, forKey:WOWUserAgeRange)
+        MGDefault.set(nil, forKey:WOWUserCarCount)
+        MGDefault.set(nil, forKey:WOWUserIndustry)
+        MGDefault.set(nil, forKey:WOWUserPhotoData)
+        MGDefault.set(nil, forKey: WOWSessionToken)
         MGDefault.synchronize()
     }
     /**

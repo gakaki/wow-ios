@@ -25,11 +25,11 @@ class WOWFoundProductModel: WOWBaseModel,Mappable{
     }
     
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         productId                  <- map["productId"]
         productName                <- map["productName"]
         productImg                 <- map["productImg"]

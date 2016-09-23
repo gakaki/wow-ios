@@ -79,7 +79,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         parentProductId                      <- map["parentProductId"]
         shoppingCartId                       <- map["shoppingCartId"]
         productId                            <- map["productId"]

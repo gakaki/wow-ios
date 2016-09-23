@@ -178,25 +178,25 @@ class WOWEditOrderController: WOWBaseViewController {
         let totalAmoutStr   = String(format: "%.2f",orderSettle?.totalAmount ?? 0)
         let shippingInfoId  = addressInfo?.id!
         let orderSource     = 2
-        let totalAmout      = totalAmoutStr ?? ""
+        let totalAmout      = totalAmoutStr 
         let remark          = tipsTextField.text ?? ""
         
         if let endUserCouponId = couponModel?.id {
             
             params = [
-                "shippingInfoId": shippingInfoId,
-                "orderSource": orderSource,
-                "orderAmount": totalAmout,
-                "remark": remark,
+                "shippingInfoId": shippingInfoId as Optional<AnyObject>,
+                "orderSource": orderSource as Optional<AnyObject>,
+                "orderAmount": totalAmout as Optional<AnyObject>,
+                "remark": remark as Optional<AnyObject>,
                 "endUserCouponId": endUserCouponId
             ]
             
         }else {
             params = [
-                "shippingInfoId": shippingInfoId,
-                "orderSource": orderSource,
-                "orderAmount": totalAmout,
-                "remark": remark
+                "shippingInfoId": shippingInfoId as Optional<AnyObject>,
+                "orderSource": orderSource as Optional<AnyObject>,
+                "orderAmount": totalAmout as Optional<AnyObject>,
+                "remark": remark as Optional<AnyObject>
             ]
 
         }
@@ -221,30 +221,37 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //立即支付创建订单
     func requestBuyNowOrderCreat() -> Void {
-        var params = [String: AnyObject]()
-        let totalAmount = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
+        var params              = [String: AnyObject]()
+        let totalAmount         = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
+        let product_id          = productId ?? 0
+        let product_qty         = productQty ?? 1
+        let shippingInfoId      = (addressInfo?.id) ?? 0
+        let orderSource         = 2
+        let orderAmount         = totalAmount
+        let remark              = tipsTextField.text ?? ""
+        
         if let endUserCouponId = couponModel?.id {
-            params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": totalAmount, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
-            
             
             params = [
-                "shippingInfoId": shippingInfoId,
-                "orderSource": orderSource,
-                "orderAmount": totalAmout,
+                "productId": product_id as AnyObject,
+                "productQty": product_qty as AnyObject,
+                "shippingInfoId": shippingInfoId as AnyObject,
+                "orderSource": orderSource as AnyObject,
+                "orderAmount": totalAmount as AnyObject,
                 "remark": remark,
                 "endUserCouponId": endUserCouponId
             ]
             
         }else {
-            params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": totalAmount, "remark": tipsTextField.text ?? ""]
-            
+      
             
             params = [
-                "shippingInfoId": shippingInfoId,
-                "orderSource": orderSource,
-                "orderAmount": totalAmout,
-                "remark": remark,
-                "endUserCouponId": endUserCouponId
+                "productId": product_id as AnyObject,
+                "productQty": product_qty as AnyObject,
+                "shippingInfoId": shippingInfoId as AnyObject,
+                "orderSource": orderSource as AnyObject,
+                "orderAmount": totalAmount as AnyObject,
+                "remark": remark as AnyObject
             ]
         }
         
@@ -263,8 +270,10 @@ class WOWEditOrderController: WOWBaseViewController {
     fileprivate func goPay(_ charge:AnyObject){
         DispatchQueue.main.async {
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
-                if let strongSelf = self{
-                    switch ret{
+                if let strongSelf = self ,
+                    let ret_str = ret as! String!{
+                    
+                    switch ret_str{
                     case "success":
                         strongSelf.requestPayResult()
                     case "cancel":

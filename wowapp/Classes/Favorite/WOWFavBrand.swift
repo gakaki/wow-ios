@@ -121,7 +121,7 @@ extension WOWFavBrand:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoriteBrandCell), for: indexPath) as! WOWFavoriteBrandCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoriteBrandCell()), for: indexPath) as! WOWFavoriteBrandCell
         let model = dataArr[(indexPath as NSIndexPath).row]
 //        cell.logoImg.kf_setImageWithURL(NSURL(string:model.brandLogoImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         
@@ -137,7 +137,7 @@ extension WOWFavBrand:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = dataArr[(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
         vc.brandID = model.brandId
         vc.entrance = .brandEntrance
         vc.hideNavigationBar = true

@@ -197,9 +197,9 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        countTextField.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
-        addButton.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
-        subButton.layer.borderColor = MGRgb(234, g: 234, b: 234).CGColor
+        countTextField.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
+        addButton.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
+        subButton.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
         
         defaultSetup1()
         defaultSetup2()

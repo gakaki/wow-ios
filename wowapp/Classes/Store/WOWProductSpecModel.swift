@@ -65,7 +65,7 @@ class WOWColorSpecModel: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         colorDisplayName                   <- map["colorDisplayName"]
         specMapVoList                      <- map["specMapVoList"]
         

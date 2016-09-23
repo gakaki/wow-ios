@@ -186,7 +186,7 @@ class WOWProductDetailController: WOWBaseViewController {
                     },
                     completionHandler: { [weak self](image, error, cacheType, imageUrl) in
                         if let strongSelf = self{
-                            strongSelf.shareProductImage = Image
+                            strongSelf.shareProductImage = image
                         }
                     }
                 )

@@ -16,14 +16,14 @@ class WOWOrderListViewController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.init(coder: "efeff4")
+        self.view.backgroundColor = UIColor(hex_string: "efeff4")
         
         self.title = "我的订单"
         
         let titleArray  = ["全部","待付款","待发货","待收货","已完成"]
         for index in 0..<titleArray.count {
             
-            let orderListVC = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
+            let orderListVC = UIStoryboard.initialViewController("User", identifier:String(describing: WOWOrderController)) as! WOWOrderController
             orderListVC.title = titleArray[index]
             orderListVC.selectIndex = index
             controllerArray.append(orderListVC)
@@ -42,7 +42,7 @@ class WOWOrderListViewController: WOWBaseViewController {
             itemWidth = 56*MGScreenWidth/375
         }
         let parameters: [CAPSPageMenuOption] = [
-            .ScrollMenuBackgroundColor(UIColor.whiteColor()),
+            .scrollMenuBackgroundColor(UIColor.whiteColor()),
             .MenuHeight(40),
             .MenuMargin(15),
             .MenuItemFont(UIFont.systemFontOfSize(14)),

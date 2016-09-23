@@ -70,7 +70,7 @@ final class WOWCategoryModel : WOWBaseModel{
 }
 
 extension WOWCategoryModel:Mappable{
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         categoryName    <-    map["categoryName"]
         categoryCount   <-    map["sum"]
         categoryID      <-    (map["categoryId"],StringDecimalNumberTransform())

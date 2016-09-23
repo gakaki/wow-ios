@@ -58,7 +58,7 @@ class WOWClickLikeAction {
                 let favorite = JSON(result)["favorite"].bool
                 let params = ["productId": productId, "favorite": favorite!] as [String : Any]
                 
-                NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+                NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params as AnyObject?)
             
                 isFavorite(favorite)
             

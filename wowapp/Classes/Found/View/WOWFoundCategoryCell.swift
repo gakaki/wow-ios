@@ -49,8 +49,8 @@ class WOWFoundCategoryCellCollectionViewCell:UICollectionViewCell{
         label.snp_makeConstraints { (make) -> Void in
             
             label.font      = UIFont.systemScaleFontSize(14)
-            label.textColor = UIColor.whiteColor()
-            
+            label.textColor = UIColor.white
+        
             make.width.equalTo(self.snp_width)
             make.height.equalTo(20)
             make.center.equalTo(self)
@@ -115,7 +115,7 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
         self.cv.delegate                             = self
         self.cv.dataSource                           = self
         self.cv.backgroundColor                      = UIColor.white
-        self.cv.register(WOWFoundCategoryCellCollectionViewCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundCategoryCellCollectionViewCell))
+        self.cv.register(WOWFoundCategoryCellCollectionViewCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundCategoryCellCollectionViewCell()))
         self.cv.showsVerticalScrollIndicator         = false
         self.cv.showsHorizontalScrollIndicator       = false
         self.cv.isScrollEnabled                        = false
@@ -133,7 +133,7 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundCategoryCellCollectionViewCell), for: indexPath) as! WOWFoundCategoryCellCollectionViewCell
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundCategoryCellCollectionViewCell()), for: indexPath) as! WOWFoundCategoryCellCollectionViewCell
         let model           = categories[(indexPath as NSIndexPath).item]
         
         cell.pictureImageView.set_webimage_url( model.categoryBgImg!)

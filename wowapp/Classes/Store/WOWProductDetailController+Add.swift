@@ -1,3 +1,6 @@
+
+
+
 //
 //  WOWProductDetailController+Add.swift
 //  wowapp
@@ -17,19 +20,20 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.mj_header = self.mj_header
         tableView.tableHeaderView = cycleView   //banner轮播
         //显示价格的cell
-        tableView.register(UINib.nibName(String(describing: WOWProductDetailPriceCell)), forCellReuseIdentifier:String(WOWProductDetailPriceCell))
+        tableView.register(UINib.nibName(String(describing: WOWProductDetailPriceCell())), forCellReuseIdentifier:String(describing: WOWProductDetailPriceCell.self))
         //品牌故事
-        tableView.register(UINib.nibName(String(describing: WOWProductDetailDescCell)), forCellReuseIdentifier:String(WOWProductDetailDescCell))
+        tableView.register(UINib.nibName(String(describing: WOWProductDetailDescCell())), forCellReuseIdentifier:String(describing: WOWProductDetailDescCell()
+        ))
         //产品描述
-        tableView.register(UINib.nibName(String(describing: WOWProductDetailCell)), forCellReuseIdentifier:String(WOWProductDetailCell))
+        tableView.register(UINib.nibName(String(describing: WOWProductDetailCell())), forCellReuseIdentifier:String(describing: WOWProductDetailCell()))
         //产品参数
-        tableView.register(UINib.nibName(String(describing: WOWProductParameter)), forCellReuseIdentifier:String(WOWProductParameter))
+        tableView.register(UINib.nibName(String(describing: WOWProductParameter())), forCellReuseIdentifier:String(describing: WOWProductParameter.self))
         //温馨提示
-        tableView.register(UINib.nibName(String(describing: WOWProductDetailTipsWebViewCell)), forCellReuseIdentifier:String(WOWProductDetailTipsWebViewCell))
+        tableView.register(UINib.nibName(String(describing: WOWProductDetailTipsWebViewCell())), forCellReuseIdentifier:String(describing: WOWProductDetailTipsWebViewCell()))
         //客服电话
-        tableView.register(UINib.nibName(String(describing: WOWTelCell)), forCellReuseIdentifier:String(WOWTelCell))
+        tableView.register(UINib.nibName(String(describing: WOWTelCell())), forCellReuseIdentifier:String(describing: WOWTelCell.self))
         //相关商品
-        tableView.register(UINib.nibName(String(describing: WOWProductDetailAboutCell)), forCellReuseIdentifier:String(WOWProductDetailAboutCell))
+        tableView.register(UINib.nibName(String(describing: WOWProductDetailAboutCell())), forCellReuseIdentifier:String(describing: WOWProductDetailAboutCell.self))
     }
     
     
@@ -186,7 +190,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                     strongSelf.isOpenParam = !strongSelf.isOpenParam
                     strongSelf.paramView.isOpen(strongSelf.isOpenParam)
                     let sections = NSIndexSet(index: section)
-                    tableView.reloadSections(sections as IndexSet, withRowAnimation: .Automatic)
+                    tableView.reloadSections(sections as IndexSet, with: .automatic)
                 }
             })
             return paramView
@@ -197,7 +201,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                     strongSelf.isOpenTips = !strongSelf.isOpenTips
                     strongSelf.tipsView.isOpen(strongSelf.isOpenTips)
                     let sections = NSIndexSet(index: section)
-                    tableView.reloadSections(sections as IndexSet, withRowAnimation: .Automatic)
+                    tableView.reloadSections(sections as IndexSet, with: .automatic)
                 }
                 })
             return tipsView
@@ -270,7 +274,7 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
         
     }
     func selectCollectionIndex(_ productId: Int) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productId
         navigationController?.pushViewController(vc, animated: true)

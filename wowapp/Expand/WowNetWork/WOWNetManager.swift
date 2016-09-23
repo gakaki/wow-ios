@@ -60,89 +60,95 @@ class WOWNetManager {
 //        DLog("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
         requestProvider.request(target) { (result) in
-       
-            switch result{
-                
-                case let .Success(response):
-                    let info = Mapper<ReturnInfo>().map(JSON(data: response.data,options: .AllowFragments).object)
-                    
-                    
-                    if let str = info as? String {
-//                        DLog(str)
-                    }
-                    else {
-                        // obj is not a String
-                    }
-                    
-//                     DLog("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
-                    
-                    //其实也只有登入能获得session token 而已了
-
-                    if let session_token = info?.data?["sessionToken"]{
-                        WOWUserManager.sessionToken = session_token as? String ?? WOWUserManager.sessionToken
-                    }
-                    
-                    
-                    if let code = info?.code{
-                       
-                        guard code == RequestCode.Success.rawValue else{
-                            if code == RequestCode.Login.rawValue {
-                                NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-                                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
-                                WOWHud.showMsg("登录已过期，请重新登录")
-                                WOWUserManager.exitLogin()
-                                if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
-                                    return
-                                }else{
-                                    UIApplication.currentViewController()?.toLoginVC(true)
-                                failClosure(errorMsg:info?.message)
-                                    return
-                                }
-                            }
-                            if code == RequestCode.FailError.rawValue {
-                                
-                                WOWHud.showMsg("您未登录,请先登录")
-                                if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
-                                    return
-                                }else{
-                                    WOWUserManager.exitLogin()
-                                    UIApplication.currentViewController()?.toLoginVC(true)
-                                    failClosure(errorMsg:info?.message)
-                                    return
-                                }
-                            }
-                            failClosure(errorMsg:info?.message)
-                            WOWHud.showMsg(info?.message)
-                            return
-                        }
-                    }else{
-                        failClosure(errorMsg:"网络错误")
-                        WOWHud.showMsg("网络错误")
-                        return
-                    }
-                    //逻辑变化了 返回0为成功
-//                    guard let data = info?.data else{
-//                        failClosure(errorMsg:"网络错误")
+            
+//            switch result {
+//                case let .Success(moyaResponse):
+//                    let data = moyaResponse.data
+//                    let statusCode = moyaResponse.statusCode
+//           
+//            }
+//            switch result{
+//                
+//                case let .Success(moyaResponse):
+//                    let info = Mapper<ReturnInfo>().map(JSON(data: response.data,options: .AllowFragments).object)
+//                    
+//                    
+//                    if let str = info as? String {
+////                        DLog(str)
+//                    }
+//                    else {
+//                        // obj is not a String
+//                    }
+//                    
+////                     DLog("response resCode: ",info?.code,"\n resMsg: ",info?.message,"\n data: ",info?.data)
+//                    
+//                    //其实也只有登入能获得session token 而已了
+//
+//                    if let session_token = info?.data?["sessionToken"]{
+//                        WOWUserManager.sessionToken = session_token as? String ?? WOWUserManager.sessionToken
+//                    }
+//                    
+//                    
+//                    if let code = info?.code{
+//                       
+//                        guard code == RequestCode.Success.rawValue else{
+//                            if code == RequestCode.Login.rawValue {
+//                                NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+//                                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+//                                WOWHud.showMsg("登录已过期，请重新登录")
+//                                WOWUserManager.exitLogin()
+//                                if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
+//                                    return
+//                                }else{
+//                                    UIApplication.currentViewController()?.toLoginVC(true)
+//                                failClosure(errorMsg:info?.message)
+//                                    return
+//                                }
+//                            }
+//                            if code == RequestCode.FailError.rawValue {
+//                                
+//                                WOWHud.showMsg("您未登录,请先登录")
+//                                if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
+//                                    return
+//                                }else{
+//                                    WOWUserManager.exitLogin()
+//                                    UIApplication.currentViewController()?.toLoginVC(true)
+//                                    failClosure(errorMsg:info?.message)
+//                                    return
+//                                }
+//                            }
+//                            failClosure(errorMsg:info?.message)
+//                            WOWHud.showMsg(info?.message)
+//                            return
+//                        }
+//                    }else{
+//                        failClosure("网络错误")
 //                        WOWHud.showMsg("网络错误")
 //                        return
 //                    }
-                    
-                    if let endMsg = target.endSuccessMsg{
-                        if endMsg == ""{
-                            WOWHud.dismiss()
-                        }else{
-                            WOWHud.showMsg(endMsg)
-                        }
-                    }else{
-                        WOWHud.dismiss()
-                    }
-                    successClosure(result:info?.data ?? "")
-                case let .Failure(error):
-                    DLog(error)
-                    WOWHud.showMsg("网络错误")
-                    failClosure("网络错误")
-                    break
+//                    //逻辑变化了 返回0为成功
+////                    guard let data = info?.data else{
+////                        failClosure(errorMsg:"网络错误")
+////                        WOWHud.showMsg("网络错误")
+////                        return
+////                    }
+//                    
+//                    if let endMsg = target.endSuccessMsg{
+//                        if endMsg == ""{
+//                            WOWHud.dismiss()
+//                        }else{
+//                            WOWHud.showMsg(endMsg)
+//                        }
+//                    }else{
+//                        WOWHud.dismiss()
+//                    }
+//                    successClosure(result:info?.data ?? "")
+//                case let .Failure(error):
+//                    DLog(error)
+//                    WOWHud.showMsg("网络错误")
+//                    failClosure("网络错误")
+//                    break
             }
         }
     }
-}
+

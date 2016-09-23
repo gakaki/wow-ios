@@ -9,19 +9,17 @@
 import Foundation
 
 class WOWSingPhoto {
-    private static var __once: () = {
-            Singleton.single=shareSingleTwo()
-            }()
+    
+    struct Singleton{
+        static var onceToken : Int = 0
+        static var single:WOWSingPhoto?
+    }
     //单例
     class func shareSingleTwo()->WOWSingPhoto{
-        struct Singleton{
-            static var onceToken : Int = 0
-            static var single:WOWSingPhoto?
-        }
-        _ = WOWSingPhoto.__once
+        Singleton.single = shareSingleTwo()
         return Singleton.single!
     }
-   class func aaa() {
+    class func aaa() {
         print("111")
     }
 }

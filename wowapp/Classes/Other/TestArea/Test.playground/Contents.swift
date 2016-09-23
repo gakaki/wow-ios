@@ -8,7 +8,7 @@ var str = "Hello, playground"
 //if 条件语句高级用法咯
 var age = 18
 var sex = "girl"
-if case 18...20 = age where sex == "girl"{
+if case 18...20 = age , sex == "girl"{
     print("交往吧")
 }
 

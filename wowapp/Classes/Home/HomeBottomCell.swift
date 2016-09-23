@@ -67,7 +67,7 @@ class HomeBottomCell: UITableViewCell {
         WOWHud.showLoadingSV()
         
         WOWClickLikeAction.requestFavoriteProduct(productIdOne ?? 0, isFavorite: { [weak self](isFavorite) in
-            if let strongSelf = self{
+            if self != nil{
                 
                 print("11")
             }
@@ -99,7 +99,7 @@ class HomeBottomCell: UITableViewCell {
     @IBAction func favoriteActionTwo(_ sender: AnyObject) {
           WOWHud.showLoadingSV()
         WOWClickLikeAction.requestFavoriteProduct(productIdTwo ?? 0, isFavorite: { [weak self](isFavorite) in
-            if let strongSelf = self{
+            if self != nil{
                 
                 print("11")
             }
@@ -138,10 +138,10 @@ class HomeBottomCell: UITableViewCell {
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         var originalPriceStr = ""
         if let originalPrice = model.originalPrice {
-              originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ?? 0],counts:[1])
+              originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
         }
         // 格式化富文本
-        priceLbOne.strokeWithText(sellPrice ?? "", str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+        priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
 
      
         if WOWUserManager.loginStatus {
@@ -174,7 +174,7 @@ class HomeBottomCell: UITableViewCell {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
         }
         // 格式化富文本
-        priceLbTwo.strokeWithText(sellPrice ?? "", str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+        priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
 
      
         if WOWUserManager.loginStatus {

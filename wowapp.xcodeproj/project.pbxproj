@@ -542,7 +542,6 @@
 		06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+VCManager.swift"; sourceTree = "<group>"; };
 		06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBaseVCCategoryFound.swift; sourceTree = "<group>"; };
 		06FB1EBE1D94CBC200107E2E /* WOWBuyCarRequestVo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBuyCarRequestVo.swift; sourceTree = "<group>"; };
-		06FB1EC01D94F9FB00107E2E /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		06FB94B01D6306C100554871 /* VCTopic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCTopic.swift; sourceTree = "<group>"; };
 		06FB94B41D63FB4800554871 /* ModelVOCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVOCoupon.swift; sourceTree = "<group>"; };
 		06FB94B61D64102C00554871 /* ModelTopic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTopic.swift; sourceTree = "<group>"; };
@@ -1273,7 +1272,6 @@
 		29FF25071CFDA75700DF2A9B = {
 			isa = PBXGroup;
 			children = (
-				06FB1EC01D94F9FB00107E2E /* MyPlayground.playground */,
 				29FF25121CFDA75700DF2A9B /* wowapp */,
 				29FF25111CFDA75700DF2A9B /* Products */,
 				EF468D690CFDA424F86FC10D /* Frameworks */,

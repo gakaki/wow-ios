@@ -27,7 +27,7 @@ class WOWNumberMessageView: UIView {
 
         rightImageView.image = UIImage(named: "icon_message")
         addSubview(rightImageView)
-        rightImageView.snp_makeConstraints {[weak self] (make) in
+        rightImageView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.centerY.equalTo(strongSelf)
                 make.right.equalTo(strongSelf)
@@ -39,10 +39,10 @@ class WOWNumberMessageView: UIView {
         //FIXME:测试数据
         leftLabel.text = "1222"
         addSubview(leftLabel)
-        leftLabel.snp_makeConstraints {[weak self](make) in
+        leftLabel.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.centerY.equalTo(strongSelf)
-                make.right.equalTo(strongSelf.rightImageView.snp_left).offset(0)
+                make.right.equalTo(strongSelf.rightImageView.snp.left).offset(0)
             }
         }
     }

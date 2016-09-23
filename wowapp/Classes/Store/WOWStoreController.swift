@@ -78,7 +78,7 @@ class WOWStoreController: WOWBaseViewController {
                 let json = JSON(result)["cats"].arrayObject
                 if let cats = json{
                     for item in cats{
-                        let model = Mapper<WOWCategoryModel>().map(item)
+                        let model = Mapper<WOWCategoryModel>().map(JSONObject:item)
                         if let m = model{
                             strongSelf.categoryArr.append(m)
                         }
@@ -99,7 +99,7 @@ class WOWStoreController: WOWBaseViewController {
  
 extension WOWStoreController:BrandCellDelegate{
     func hotBrandCellClick(_ brandModel: WOWBrandListModel) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
         vc.brandID = brandModel.brandId
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
@@ -107,7 +107,7 @@ extension WOWStoreController:BrandCellDelegate{
     
     //MARK:推荐商品
     func recommenProductCellClick(_ productModel: WOWProductModel) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productModel.productId
         navigationController?.pushViewController(vc, animated: true)
@@ -169,13 +169,15 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             break
         case 1:
-            let item = categoryArr[(indexPath as NSIndexPath).row]
-            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWGoodsController)) as! WOWGoodsController
-            vc.categoryIndex            =   (indexPath as NSIndexPath).row
-            vc.categoryTitles           =   categoryTitles
-            vc.categoryID               =   item.categoryID ?? "5"
-            vc.categoryArr              =   categoryArr
-            navigationController?.pushViewController(vc, animated: true)
+            //TODO:
+            break
+//            let item = categoryArr[(indexPath as NSIndexPath).row]
+//            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWGuideController())) as! WOWGoodsController
+//            vc.categoryIndex            =   (indexPath as NSIndexPath).row
+//            vc.categoryTitles           =   categoryTitles
+//            vc.categoryID               =   item.categoryID ?? "5"
+//            vc.categoryArr              =   categoryArr
+//            navigationController?.pushViewController(vc, animated: true)
         case 2:
             break
         default:
@@ -202,7 +204,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let v = UIView(frame:CGRect(x: 0, y: 0, width: MGScreenWidth, height: 15))
-        v.backgroundColor = UIColor.whiteColor
+        v.backgroundColor = UIColor.white
         return v
     }
     
@@ -224,7 +226,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
             sectionView.rightDetailLabel.text = "全部\(brandsCount)个品牌"
             sectionView.rightBackView.addAction({[weak self] in
                 if let strongSelf = self{
-                    let brandVC = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandListController)) as! WOWBrandListController
+                    let brandVC = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandListController())) as! WOWBrandListController
                     strongSelf.navigationController?.pushViewController(brandVC, animated: true)
                 }
                 })

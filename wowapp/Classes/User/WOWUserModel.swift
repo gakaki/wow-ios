@@ -22,11 +22,11 @@ class WOWUserModel:NSObject,Mappable{
     var user_ageRange       : Int?
     
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         user_desc           <- map["selfIntroduction"]
         user_headimage      <- map["avatar"]
         user_nick           <- map["nickName"]

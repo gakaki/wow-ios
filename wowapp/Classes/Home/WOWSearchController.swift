@@ -1,3 +1,4 @@
+
 //
 //  WOWSearchController.swift
 //  Wow
@@ -96,7 +97,7 @@ class WOWSearchController: WOWBaseViewController {
     
 //MARK:Lazy
     lazy var searchView:WOWSearchBarView = {
-        let view = Bundle.main.loadNibNamed(String(describing: WOWSearchBarView), owner: self, options: nil)?.last as! WOWSearchBarView
+        let view = Bundle.main.loadNibNamed(String(describing: WOWSearchBarView()), owner: self, options: nil)?.last as! WOWSearchBarView
         view.frame = CGRect(x: 9, y: 6, width: MGScreenWidth - 18,height: 30)
         view.searchTextField.delegate = self
         view.searchTextField.becomeFirstResponder()
@@ -121,7 +122,7 @@ class WOWSearchController: WOWBaseViewController {
     }()
    
     lazy var emptyView: UIView = {
-        let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView), owner: self, options: nil)?.last as! WOWEmptySearchView
+        let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView()), owner: self, options: nil)?.last as! WOWEmptySearchView
         view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight)
         view.isHidden = true
         return view
@@ -145,7 +146,7 @@ class WOWSearchController: WOWBaseViewController {
         //设置布局
         collectionView.setCollectionViewLayout(WOWSearchLayout(), animated: true)
         
-        collectionView.register(UINib.nibName(String(WOWSearchCell)), forCellWithReuseIdentifier: "WOWSearchCell")
+        collectionView.register(UINib.nibName(String(describing: WOWSearchCell)), forCellWithReuseIdentifier: "WOWSearchCell")
         
         collectionView.register(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWReuseSectionView")
         //加载cell
@@ -158,13 +159,13 @@ class WOWSearchController: WOWBaseViewController {
  
     func defaultData() {
         let sql = "SELECT * FROM t_searchModel order by id desc;"
-                let resultSet = WOWSearchManager.shareInstance.db.executeQuery(sql, withArgumentsInArray: nil)
+                let resultSet = WOWSearchManager.shareInstance.db.executeQuery(sql, withArgumentsIn: nil)
                 searchArray = [String]()
-                while resultSet.next() {
+                while (resultSet?.next())! {
                     
-                    let searchStr = resultSet.stringForColumn("searchStr")
+                    let searchStr = resultSet?.string(forColumn: "searchStr")
                     
-                    searchArray.append(searchStr)
+                    searchArray.append(searchStr!)
                 }
             collectionView.reloadData()
     
@@ -212,7 +213,7 @@ extension WOWSearchController {
                 let json = JSON(result)
                 let array = json["keywords"].arrayObject
                 if let keyWords = array {
-                    strongSelf.keyWords = keyWords
+                    strongSelf.keyWords = keyWords as [AnyObject]
                     strongSelf.collectionView.reloadData()
                 }
                 
@@ -241,7 +242,7 @@ extension WOWSearchController {
             }
             
         }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
+            if self != nil{
 //                strongSelf.emptyView.hidden = false
             }
             
@@ -485,7 +486,7 @@ extension WOWSearchController:VTMagicViewDataSource{
         
         if ((vc == nil)) {
             
-            let vc_me = UIStoryboard.initialViewController("Home", identifier:String(WOWSearchChildController)) as! WOWSearchChildController
+            let vc_me = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWSearchChildController.self)) as! WOWSearchChildController
             addChildViewController(vc_me)
             return vc_me
         }

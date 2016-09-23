@@ -58,7 +58,7 @@ class WOWSureOrderController: WOWBaseViewController {
         }
         let tips = tipsTextField.text ?? ""
         let uid  = WOWUserManager.userID
-        var productParam = [AnyObject]()
+        let productParam = [AnyObject]()
 //        for item in productArr {
 //            let dict = ["skuid":item.skuID,"count":item.skuProductCount,"productid":item.productID]
 //            productParam.append(dict)
@@ -93,7 +93,7 @@ class WOWSureOrderController: WOWBaseViewController {
     fileprivate func goPay(_ charge:AnyObject,totalPrice:String,orderid:String){
         DispatchQueue.main.async { 
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
-                if let strongSelf = self,let ret_str = ret as! String {
+                if let strongSelf = self,let ret_str = ret as String! {
                     switch ret_str{
                     case "success":
                         let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
@@ -263,7 +263,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 footerView.leftLabel.text = "增加收货地址"
                 footerView.addAction({[weak self] in
                     if let strongSelf = self{
-                        let addvc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddAddressController)) as! WOWAddAddressController
+                        let addvc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddAddressController())) as! WOWAddAddressController
                         addvc.entrance = .sureOrder
                         addvc.action = {
                             strongSelf.request()
@@ -276,7 +276,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 footerView.leftLabel.text = "其他收货地址"
                 footerView.addAction({[weak self] in
                     if let strongSelf = self{
-                        let addvc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddressController)) as! WOWAddressController
+                        let addvc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddressController())) as! WOWAddressController
                         addvc.entrance = .sureOrder
                         addvc.selectModel = strongSelf.addressArr.first
                         addvc.action = {(model:AnyObject) in

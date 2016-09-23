@@ -20,7 +20,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     
     func get_category_index() -> Int {
         let indexes     = vo_categories.flatMap { $0.categoryID! }
-        if let res      = indexes.indexOf(ob_cid.value){
+        if let res      = indexes.index(of: ob_cid.value){
             return res
         }
         return 0
@@ -30,7 +30,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         let cid = self.ob_cid.value
         
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category_path_category(categoryId:cid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_path_category(categoryId:cid), successClosure: {[weak self] (result) in
             
             if let strongSelf = self{
                 
@@ -140,8 +140,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         
         v_bottom.magicView.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(self.view)
-            make.top.equalTo(self.cv.snp_bottom)
-            make.bottom.equalTo(self.snp_bottomLayoutGuideBottom)
+            make.top.equalTo(self.cv.snp.bottom)
+            make.bottom.equalTo(self.snp.bottomMargin)
         }
         
         v_bottom.magicView.reloadData()

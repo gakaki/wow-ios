@@ -6,7 +6,7 @@ open class StringDecimalNumberTransform: TransformType {
         if let string = value as? String {
             return string
         }
-        if let double = value as? Double {
+        if (value as? Double) != nil {
 //            return "\(NSDecimalNumber(double:double))"
             return "22"
         }

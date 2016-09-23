@@ -16,14 +16,13 @@ class WOWOrderListViewController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(hex_string: "efeff4")
-        
+        self.view.backgroundColor = UIColor(hexString: "efeff4")
         self.title = "我的订单"
         
         let titleArray  = ["全部","待付款","待发货","待收货","已完成"]
         for index in 0..<titleArray.count {
             
-            let orderListVC = UIStoryboard.initialViewController("User", identifier:String(describing: WOWOrderController)) as! WOWOrderController
+            let orderListVC = UIStoryboard.initialViewController("User", identifier:String(describing: WOWOrderController())) as! WOWOrderController
             orderListVC.title = titleArray[index]
             orderListVC.selectIndex = index
             controllerArray.append(orderListVC)
@@ -42,16 +41,16 @@ class WOWOrderListViewController: WOWBaseViewController {
             itemWidth = 56*MGScreenWidth/375
         }
         let parameters: [CAPSPageMenuOption] = [
-            .scrollMenuBackgroundColor(UIColor.whiteColor()),
-            .MenuHeight(40),
-            .MenuMargin(15),
-            .MenuItemFont(UIFont.systemFontOfSize(14)),
-            .UnselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
-            .MenuItemWidth(itemWidth),
-            .SelectionIndicatorColor(UIColor.blackColor()),
-            .SelectedMenuItemLabelColor(UIColor.blackColor()),
-            .MenuItemSeparatorPercentageHeight(0.1),
-            .BottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
+            .scrollMenuBackgroundColor(UIColor.white),
+            .menuHeight(40),
+            .menuMargin(15),
+            .menuItemFont(UIFont.systemFontOfSize(14)),
+            .unselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
+            .menuItemWidth(itemWidth),
+            .selectionIndicatorColor(UIColor.black),
+            .selectedMenuItemLabelColor(UIColor.black),
+            .menuItemSeparatorPercentageHeight(0.1),
+            .bottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
             
         ]
         

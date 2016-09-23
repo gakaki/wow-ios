@@ -53,15 +53,12 @@ class WOWHotStyleCell: UITableViewCell {
             imgLogo.image = nil
         }
         if let moduleImage = model.moduleAdditionalInfo?.imageUrl {
-            
-            imgBackMain.kf_setImageWithURL(URL(string: moduleImage ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
+            imgBackMain.kf.setImage(with: URL(string: moduleImage ?? "")!, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { [weak self](image, error, cacheType, imageURL) in
                 if let strongSelf = self{
                     strongSelf.shareProductImage = image
                 }
-            }
-
-            
-            
+            })
+         
             imgBackMain.set_webimage_url_base(moduleImage, place_holder_name: product)
         }
         if let showTitle =  model.moduleAdditionalInfo?.showTitle {

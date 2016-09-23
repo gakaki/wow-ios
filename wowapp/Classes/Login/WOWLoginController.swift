@@ -35,7 +35,7 @@ class WOWLoginController: WOWBaseViewController {
 //MARK:Private Method
     override func setUI() {
         configNavItem()
-        wechatButton.hidden = !WXApi.isWXAppInstalled()
+        wechatButton.isHidden = !WXApi.isWXAppInstalled()
     }
     
     fileprivate func configNavItem(){
@@ -70,7 +70,7 @@ class WOWLoginController: WOWBaseViewController {
     
     
     @IBAction func forgetPasswordClick(_ sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
+        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController.self)) as! WOWMsgCodeController
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -117,7 +117,7 @@ class WOWLoginController: WOWBaseViewController {
             if let strongSelf = self{
                 DLog(result)
                 
-                let model = Mapper<WOWUserModel>().map(result)
+                let model = Mapper<WOWUserModel>().map(JSONObject:result)
                 WOWUserManager.saveUserInfo(model)
                 strongSelf.toLoginSuccess(strongSelf.isPresent)
             }

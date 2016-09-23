@@ -1,3 +1,4 @@
+
 //
 //  WOWGoodsBuyView.swift
 //  WowDsgn
@@ -432,7 +433,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     fileprivate func showResult(_ count:Int){
         if count <= 1 {
             subButton.isEnabled = false
-            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.Normal)
+            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
         }else {
             subButton.isEnabled = true
             subButton.setTitleColor(UIColor.black, for: UIControlState())
@@ -486,7 +487,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         }else {
     
             let item = specArr[index]
-            let title = item.specName ?? ""
+            let title = item.specName 
             let width = title.size(Fontlevel004).width + 50
             return width
             
@@ -683,7 +684,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             showResult(skuCount)
             
-            sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), for: .Normal)
+            sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .normal)
 
             
         }else {
@@ -707,7 +708,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
 }
 //MARK: - 添加购物车动画
-extension WOWGoodsBuyView {
+extension WOWGoodsBuyView:CAAnimationDelegate {
 
     func startAnimationWithRect(_ rect: CGRect, ImageView imageView:UIImageView)
     {
@@ -775,7 +776,7 @@ extension WOWGoodsBuyView {
         groups.animations = [animation,expandAnimation,narrowAnimation]
         groups.duration = 0.8
         groups.isRemovedOnCompletion=false
-        groups.fillMode=kCAFillModeForwards
+        groups.fillMode =    kCAFillModeForwards
         groups.delegate = self
         self._layer.add(groups, forKey: "group")
         

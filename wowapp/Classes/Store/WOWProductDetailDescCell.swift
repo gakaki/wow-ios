@@ -60,6 +60,6 @@ class WOWProductDetailDescCell: UITableViewCell {
             return
         }
         designerNameLabel.text = designerName
-        designerButton.kf_setBackgroundImage(with: URL(string: model?.designerPhoto ?? "")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
+        designerButton.kf.setBackgroundImage(with: URL(string: model?.designerPhoto ?? "")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
     }
 }

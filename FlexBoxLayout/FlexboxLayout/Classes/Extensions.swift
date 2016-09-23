@@ -28,7 +28,7 @@
 
 import UIKit
 
-extension FlexboxView where Self: UIView {
+public extension FlexboxView where Self: UIView {
 
   /// content-size calculation for the scrollview should be applied after the layout
   /// This is called after the scroll view is rendered.
@@ -42,7 +42,7 @@ extension FlexboxView where Self: UIView {
   }
 }
 
-extension UIScrollView {
+public extension UIScrollView {
 
   fileprivate func postRender() {
     var x: CGFloat = 0

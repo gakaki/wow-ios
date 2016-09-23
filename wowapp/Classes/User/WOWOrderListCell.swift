@@ -167,7 +167,7 @@ extension WOWOrderListCell:UICollectionViewDelegate,UICollectionViewDataSource,U
 //        DLog((modelNew?.productSpecImgs[indexPath.row])!)
 //        cell.pictureImageView.kf_setImageWithURL(URL(string: (modelNew?.productSpecImgs[indexPath.row])!)!, placeholderImage: UIImage(named: "placeholder_product"))
         
-        let url = modelNew?.productSpecImgs[indexPath.row]?
+        let url = modelNew?.productSpecImgs[indexPath.row]
         cell.pictureImageView.set_webimage_url(url)
 
         return cell

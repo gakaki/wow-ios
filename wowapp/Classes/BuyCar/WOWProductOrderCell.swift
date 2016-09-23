@@ -75,7 +75,7 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         
         
         let item = typeArr[index]
-        let title = item ?? ""
+        let title = item 
         let width = title.size(Fontlevel004).width + 12
         return width
         
@@ -94,7 +94,7 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return typeArr == nil ? 0 : (typeArr.count)!
+        return typeArr == nil ? 0 : (typeArr.count)
     }
     
 }

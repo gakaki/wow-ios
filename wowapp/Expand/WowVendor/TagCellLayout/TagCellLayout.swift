@@ -259,7 +259,8 @@ private extension TagCellLayout {
         lastTagPosition.x = 0
       }
 
-      numberOfTagsInCurrentRow = moveTag ? 1 : Int(numberOfTagsInCurrentRow += 1)
+      numberOfTagsInCurrentRow = numberOfTagsInCurrentRow + 1
+      numberOfTagsInCurrentRow = moveTag ? 1 : Int(numberOfTagsInCurrentRow)
       lastTagPosition.x += layoutInfo.frame.size.width
     }
   }

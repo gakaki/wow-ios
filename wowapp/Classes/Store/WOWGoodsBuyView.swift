@@ -781,7 +781,7 @@ extension WOWGoodsBuyView:CAAnimationDelegate {
         self._layer.add(groups, forKey: "group")
         
     }
-     func animationDidStop(anim: CAAnimation, finished flag:Bool)
+     func animationDidStop(_ anim: CAAnimation, finished flag:Bool)
     {
         
         if anim == self._layer.animation(forKey: "group"){

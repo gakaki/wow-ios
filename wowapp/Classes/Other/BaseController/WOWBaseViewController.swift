@@ -237,7 +237,7 @@ extension WOWBaseViewController {
                     strongSelf.toLoginVC(true)
                     return
                 }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController)) as! WOWBuyCarController
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController())) as! WOWBuyCarController
                 vc.hideNavigationBar = false
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
@@ -245,7 +245,7 @@ extension WOWBaseViewController {
         
         makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchController)) as! WOWSearchController
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchController())) as! WOWSearchController
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
                 
             }
@@ -288,14 +288,14 @@ extension WOWBaseTableViewController {
                     strongSelf.toLoginVC(true)
                     return
                 }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController)) as! WOWBuyCarController
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController())) as! WOWBuyCarController
                 vc.hideNavigationBar = false
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
         makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchController)) as! WOWSearchController
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchController())) as! WOWSearchController
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
                 
             }

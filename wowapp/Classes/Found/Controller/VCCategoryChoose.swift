@@ -52,7 +52,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
                 
                 make.width.equalTo(self.snp_width)
                 make.height.equalTo(20)
-                make.top.equalTo(pictureImageView.snp.bottom).offset(UIEdgeInsetsMake(1.w, 0, 0, 0))
+                make.top.equalTo(pictureImageView.snp.bottom).offset(UIEdgeInsetsMake(1.w, 0, 0, 0) as! ConstraintOffsetTarget)
                 
             }
         }
@@ -216,7 +216,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             if let strongSelf = self{
 
                 let r                             =  JSON(result)
-                strongSelf.vo_categories_arr      =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryProductImgVoList"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                strongSelf.vo_categories_arr      =  Mapper<WOWFoundCategoryModel>().mapArray(JSONObject: r["categoryProductImgVoList"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.tv.reloadData()
                 
                 //默认选中第一个 触发collection变化
@@ -246,7 +246,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
                 
 
 
-                strongSelf.vo_categories_sub_arr  =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryProductImgVoList"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                strongSelf.vo_categories_sub_arr  =  Mapper<WOWFoundCategoryModel>().mapArray(JSONObject: r["categoryProductImgVoList"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.cv.reloadData()
                 
              

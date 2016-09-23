@@ -20,7 +20,7 @@ class WOWLikeListCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell))
+        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell()))
         attentionButton.setBackgroundImage(UIImage(named: "unAttentionBack"), for: UIControlState())
         attentionButton.setBackgroundImage(UIImage(named: "attentionedBack"), for: .selected)
     }
@@ -47,7 +47,7 @@ extension WOWLikeListCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWImageCell), for:indexPath) as! WOWImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWImageCell()), for:indexPath) as! WOWImageCell
         cell.pictureImageView.image = UIImage(named:"testBrand")
         return cell
     }

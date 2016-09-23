@@ -227,7 +227,6 @@ class WOWEditOrderController: WOWBaseViewController {
         let product_qty         = productQty ?? 1
         let shippingInfoId      = (addressInfo?.id) ?? 0
         let orderSource         = 2
-        let orderAmount         = totalAmount
         let remark              = tipsTextField.text ?? ""
         
         if let endUserCouponId = couponModel?.id {

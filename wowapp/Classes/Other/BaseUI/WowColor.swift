@@ -9,20 +9,20 @@ class WowColor:UIColor {
     static let black        = "#202020"
     static let blackLight   = "#000000"
     
-    override class func grayColor() -> UIColor  {
+    override class func gray() -> UIColor  {
         return UIColor(hexString: gray)!
     }
-    override class func orangeColor() -> UIColor  {
+    override class func orange() -> UIColor  {
         return UIColor(hexString: orange)!
     }
-    override class func blackColor() -> UIColor  {
+    override class func black() -> UIColor  {
         return UIColor(hexString: black)!
     }
-    class func blackLightColor() -> UIColor  {
+    class func blackLight() -> UIColor  {
         return UIColor(hexString: blackLight)!
     }
     
-    class func grayLightColor() -> UIColor  {
+    class func grayLight() -> UIColor  {
         return UIColor(hexString: grayLight)!
     }
 

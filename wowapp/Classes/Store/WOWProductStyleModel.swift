@@ -15,12 +15,12 @@ class WOWProductStyleModel: Object,Mappable{
    dynamic var styleName   :   String = ""
    dynamic var styleValue  :   String = ""
     
-    convenience required init?(_ map: Map) {
+    convenience required init?(map: Map) {
         self.init()
     }
     
     
-     func mapping(_ map: Map) {
+     func mapping(map: Map) {
         styleName   <- map["name"]
         styleValue  <- map["value"]
     }

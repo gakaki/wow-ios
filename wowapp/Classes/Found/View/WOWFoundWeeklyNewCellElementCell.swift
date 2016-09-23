@@ -54,7 +54,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
             
             make.width.equalTo(self.snp_width)
             make.height.equalTo(15.h)
-            make.top.equalTo(pictureImageView.snp.bottom).offset(UIEdgeInsetsMake(0.w, 0, 0, 0))
+            make.top.equalTo(pictureImageView.snp.bottom).offset(UIEdgeInsetsMake(0.w, 0, 0, 0) as! ConstraintOffsetTarget)
         }
 
         label_price.snp_makeConstraints { (make) -> Void in
@@ -65,7 +65,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
 
             make.width.equalTo(self.snp_width)
             make.height.equalTo(15.h)
-            make.top.equalTo(label_name.snp.bottom).offset(UIEdgeInsetsMake(0, 0, 6, 0) )
+            make.top.equalTo(label_name.snp.bottom).offset(UIEdgeInsetsMake(0, 0, 6, 0) as! ConstraintOffsetTarget )
 
         }
     }

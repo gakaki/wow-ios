@@ -47,11 +47,11 @@ class WOWCarModel: WOWBaseModel,Mappable {
     var totalPrice                          : NSNumber?
     var shoppingCartResult                  : [WOWCarProductModel]?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         totalPrice                            <- map["totalPrice"]
         shoppingCartResult                    <- map["shoppingCartResult"]
         
@@ -75,7 +75,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var isSelected                          : Bool?
     var specName                            : String?   //图片地址
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     

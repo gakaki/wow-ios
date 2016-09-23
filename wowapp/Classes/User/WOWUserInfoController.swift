@@ -208,7 +208,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     func cancelPicker(){
 
         self.backGroundMaskView.isHidden = true
-        UIView.animateWithDuration(0.3){
+        UIView.animate(withDuration: 0.3){
             self.pickerContainerView.mj_y = MGScreenHeight
         }
     }
@@ -270,7 +270,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         //请求默认地址数据
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result) in
             if let strongSelf = self{
-                strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(result)
+                strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(JSONObject:result)
                 if let addressInfo = strongSelf.addressInfo {
                     DLog((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
                     strongSelf.addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "")
@@ -348,7 +348,7 @@ extension WOWUserInfoController{
             editingGroupAndRow = [0:5]
         case (1, 0):
             
-            let vc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
+            let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddressController.self)) as! WOWAddressController
             vc.entrance = WOWAddressEntrance.me
             vc.delegate = self
             navigationController?.pushViewController(vc, animated: true)
@@ -364,7 +364,7 @@ extension WOWUserInfoController{
         
         self.backGroundMaskView.isHidden = false
         
-        UIView.animateWithDuration(0.3){
+        UIView.animate(withDuration: 0.3){
             self.pickerContainerView.mj_y = self.view.h - PickerViewHeight + 64
 
         }

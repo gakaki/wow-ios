@@ -209,7 +209,7 @@ extension WOWBrandListController:SearchResultDelegate{
     func searchResultSelect(_ model: WOWBrandV1Model) {
 //        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
         searchController.isActive = false
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
         vc.brandID = model.id
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

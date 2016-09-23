@@ -214,7 +214,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
       
         let delete = UITableViewRowAction(style: .default, title: "删除") { [weak self](action, indexPath) in
             if let strongSelf = self {
-                strongSelf.alertView(indexPath)
+                strongSelf.alertView(indexPath: indexPath)
             }
         }
         return [delete]
@@ -232,14 +232,14 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
 
 
 extension WOWAddressController{
-    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet( scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "你还没添加收货地址"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.systemScaleFontSize(17)])
         return attri
     }
     
     
-    func alertView(_ indexPath: IndexPath) {
+    func alertView(indexPath: IndexPath) {
         let alert = UIAlertController(title: "", message: "确定删除收货地址？", preferredStyle: .alert)
         let cancel = UIAlertAction(title:"取消", style: .cancel, handler: { (action) in
             DLog("取消")

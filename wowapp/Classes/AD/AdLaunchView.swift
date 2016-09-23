@@ -31,7 +31,7 @@ final class AdLaunchView: UIView {
         var slogan: UIImageView = UIImageView(image: UIImage(named: "KDTKLaunchSlogan_Content"))
         footer.addSubview(slogan)
         
-        slogan.snp_makeConstraints(closure: { (make) in
+        slogan.snp_makeConstraints({ (make) in
             make.center.equalTo(footer)
         })
         
@@ -129,9 +129,9 @@ private extension AdLaunchView {
             addSubview(progressButtonView)
         }
         
-        progressView = DACircularProgressView(frame: CGRect(x: UIScreen.mainScreen().bounds.width - 60, y: 20, width: 40, height: 40))
+        progressView = DACircularProgressView(frame: CGRect(x: UIScreen.mainScreen.bounds.width - 60, y: 20, width: 40, height: 40))
         if let progressView = progressView {
-            progressView.userInteractionEnabled = false
+            progressView.isUserInteractionEnabled = false
             progressView.progress = 0
             addSubview(progressView)
             progressView.setProgress(1, animated: true, initialDelay: 0, withDuration: 4)

@@ -12,7 +12,7 @@ import UIKit
 class WOWPayBackView: UIView {
     //MARK:Lazy
     lazy var payView:WOWSelectPayView = {
-        let v = Bundle.loadResourceName(String(WOWSelectPayView)) as! WOWSelectPayView
+        let v = Bundle.loadResourceName(String(describing: WOWSelectPayView.self)) as! WOWSelectPayView
         v.closeButton.addTarget(self, action: #selector(closeButtonClick), for:.touchUpInside)
         v.isUserInteractionEnabled = true
         return v

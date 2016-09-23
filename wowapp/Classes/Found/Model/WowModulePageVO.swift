@@ -11,11 +11,11 @@ class WowModulePageVO:Mappable
     var moduleContentItem:WowModulePageItemVO?
     var moduleClassName:String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         moduleType              <- map["moduleType"]
         contentTmp              <- map["moduleContent"]
         moduleID                <- map["moduleId"]
@@ -47,11 +47,11 @@ class WowModulePageItemVO:Mappable
     var favorite                :   Bool?
     var pageModuleType          :   Int?
 
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         
         //201
         bannerImgSrc            <- map["bannerImgSrc"]

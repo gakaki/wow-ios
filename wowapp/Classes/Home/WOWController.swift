@@ -116,17 +116,19 @@ class WOWController: WOWBaseViewController {
         }
         for a in 0..<bottomListArray.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = bottomListArray[a]
-          
-            if model.productId! == sender.object!["productId"] as? Int {
-                model.favorite = sender.object!["favorite"] as? Bool
-               
-                break
+            
+            if  let send_obj =  sender.object as? [String:AnyObject] {
+                
+                if model.productId! == send_obj["productId"] as? Int {
+                    model.favorite = sender.object!["favorite"] as? Bool
+                }
             }
+          
         }
          self.tableView.reloadData()
     }
     lazy var banner:WOWBanner = {
-        let view = Bundle.main.loadNibNamed(String(describing: WOWBanner), owner: self, options: nil)?.last as! WOWBanner
+        let view = Bundle.main.loadNibNamed(String(describing: WOWBanner()), owner: self, options: nil)?.last as! WOWBanner
         view.cyclePictureView.delegate = self
         view.jsButton.addTarget(self, action: #selector(jsClick), for: .touchUpInside)
         view.dgButton.addTarget(self, action: #selector(dgClick), for: .touchUpInside)
@@ -136,13 +138,13 @@ class WOWController: WOWBaseViewController {
     }()
     lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
         let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
-        return f
+        return f!
     }()
     
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        tableView.register(UINib.nibName(String(WOWlListCell)), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(String(describing: WOWlListCell)), forCellReuseIdentifier:cellID)
         
         tableView.register(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
         tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")

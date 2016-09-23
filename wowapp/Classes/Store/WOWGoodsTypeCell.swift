@@ -28,7 +28,8 @@ class WOWGoodsTypeCell: UITableViewCell {
         titleLabel.text = model?.productName
         summaryLabel.text = model?.sellingPoint
         if let m = model {
-            headImageView.kf_setBackgroundImageWithURL(URL(string:m.brandLogoImg ?? " ")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
+
+            headImageView.kf_setImage(with: URL(string:m.brandLogoImg ?? " ")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
         }
     }
     

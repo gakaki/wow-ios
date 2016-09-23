@@ -47,7 +47,7 @@ extension WOWOrderTransController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WOWTransLineCell", for: indexPath) as! WOWTransLineCell
         cell.topLine.isHidden = (indexPath as NSIndexPath).row == 0
-        cell.spotView.backgroundColor = indexPath.row == 0 ? UIColor.redColor() : MGRgb(128, g: 128, b: 128)
+        cell.spotView.backgroundColor = indexPath.row == 0 ? UIColor.red : MGRgb(128, g: 128, b: 128)
         //FIXME:测试数据
         cell.desLabel.text = "快递到达上海市尖叫公司快递到达上海市尖叫公司快递到达上海市尖叫公司快递到达上海市尖叫公司快递到达上海市尖叫公司快递到达上海市尖叫公司"
         cell.timeLabel.text = "2015-10-12"

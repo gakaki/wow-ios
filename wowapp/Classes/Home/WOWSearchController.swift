@@ -146,7 +146,7 @@ class WOWSearchController: WOWBaseViewController {
         //设置布局
         collectionView.setCollectionViewLayout(WOWSearchLayout(), animated: true)
         
-        collectionView.register(UINib.nibName(String(describing: WOWSearchCell)), forCellWithReuseIdentifier: "WOWSearchCell")
+        collectionView.register(UINib.nibName(String(describing: WOWSearchCell())), forCellWithReuseIdentifier: "WOWSearchCell")
         
         collectionView.register(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWReuseSectionView")
         //加载cell

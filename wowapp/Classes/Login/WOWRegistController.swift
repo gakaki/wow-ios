@@ -87,7 +87,7 @@ class WOWRegistController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.showMsg("验证码发送成功")
-                strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor(), mainTitleColor: UIColor.blackColor(), countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
+                strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
                 
@@ -109,12 +109,12 @@ class WOWRegistController: WOWBaseViewController {
             return
         }
         
-        if passwdTextField.text?.length < 6 {
+        if (passwdTextField.text?.length)! < 6 {
             WOWHud.showMsg("密码不能少于6位")
             tipsLabel.text = "密码不能少于6位"
             return
         }
-        if passwdTextField.text?.length > 20 {
+        if (passwdTextField.text?.length)! > 20 {
             WOWHud.showMsg("密码不能大于20位")
             tipsLabel.text = "密码不能大于20位"
             return
@@ -133,13 +133,13 @@ class WOWRegistController: WOWBaseViewController {
         if let userInfoFromWechat = userInfoFromWechat {
             //微信的用户信息
             let param = ["openId":userInfoFromWechat["openid"] as! String ,"wechatNickName":userInfoFromWechat["nickname"] as! String,"wechatAvatar":userInfoFromWechat["headimgurl"] as! String,"sex":userInfoFromWechat["sex"]! ]
-             registerTarget = RequestApi.api_WechatBind(mobile: phoneTextField.text!, captcha: msgCodeTextField.text!, password: passwdTextField.text!, userInfoFromWechat: param)
+             registerTarget = RequestApi.api_WechatBind(mobile: phoneTextField.text!, captcha: msgCodeTextField.text!, password: passwdTextField.text!, userInfoFromWechat: param as AnyObject)
         }
 
         
             WOWNetManager.sharedManager.requestWithTarget(registerTarget, successClosure: { [weak self](result) in
                 if let strongSelf = self{
-                let model = Mapper<WOWUserModel>().map(result)
+                    let model = Mapper<WOWUserModel>().map(JSONObject:result)
                     WOWUserManager.saveUserInfo(model)
                     //暂时保存一下手机号
                     WOWUserManager.userMobile = strongSelf.phoneTextField.text!
@@ -167,7 +167,7 @@ class WOWRegistController: WOWBaseViewController {
     }
     
     @IBAction func showProtocol(_ sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistProtocolController)) as! WOWRegistProtocolController
+        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistProtocolController())) as! WOWRegistProtocolController
             vc.agreeAction = {[weak self] in
                 if let strongSelf = self{
                     strongSelf.protocolCheckButton.isSelected = true

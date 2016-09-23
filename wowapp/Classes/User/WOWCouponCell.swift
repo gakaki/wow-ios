@@ -34,8 +34,10 @@ class WOWCouponCell: UITableViewCell {
         dotteShapLayer.fillColor = UIColor.clear.cgColor
         dotteShapLayer.strokeColor = color.cgColor
         dotteShapLayer.lineWidth = 1
-        mdotteShapePath.move(to: CGPoint(55,0))
-        mdotteShapePath.addLine(to: CGPoint(55,90))
+
+
+        mdotteShapePath.move(to: CGPoint(x:55,y:0))
+        mdotteShapePath.addLine(to: CGPoint(x:55,y:90))
         dotteShapLayer.path = mdotteShapePath
         let arr :NSArray = NSArray(array: [4,4])
         dotteShapLayer.lineDashPhase = 1.0

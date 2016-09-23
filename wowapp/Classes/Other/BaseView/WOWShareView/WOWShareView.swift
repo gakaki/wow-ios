@@ -30,16 +30,16 @@ class WOWShareBackView:UIView{
     
     lazy var backClear:UIView! = {
         let v = UIView(frame:CGRect(x: 0, y: self.h, width: self.w,height: self.popWindow.h))
-        v.backgroundColor = UIColor.clearColor()
+        v.backgroundColor = UIColor.clear
         return v
     }()
     
     lazy var shareView:WOWShareView = {
-       let v = Bundle.main.loadNibNamed(String(describing: WOWShareView), owner: self, options: nil)?.last as! WOWShareView
+       let v = Bundle.main.loadNibNamed(String(describing: WOWShareView()), owner: self, options: nil)?.last as! WOWShareView
         v.friendView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
                 if let action = strongSelf.shareActionBack {
-                    action(shareType: WOWShareType.friends)
+                    action(WOWShareType.friends)
                 }
                 strongSelf.dismiss()
             }
@@ -48,7 +48,7 @@ class WOWShareBackView:UIView{
         v.wechatView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
                 if let action = strongSelf.shareActionBack {
-                    action(shareType: WOWShareType.wechat)
+                    action(WOWShareType.wechat)
                 }
                 strongSelf.dismiss()
             }
@@ -84,7 +84,7 @@ class WOWShareBackView:UIView{
         popWindow.addSubview(self)
         addSubview(backClear)
         backClear.addSubview(shareView)
-        shareView.snp_makeConstraints {[weak self] (make) in
+        shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
                 make.height.equalTo(128)
@@ -114,8 +114,8 @@ class WOWShareView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        friendView.hidden = !WXApi.isWXAppInstalled()
-        wechatView.hidden = !WXApi.isWXAppInstalled()
+        friendView.isHidden = !WXApi.isWXAppInstalled()
+        wechatView.isHidden = !WXApi.isWXAppInstalled()
     }
     
 }

@@ -26,8 +26,7 @@ class WOWBrandHeaderView: UICollectionReusableView {
        
         logoImage.layer.cornerRadius = 40
         logoImage.layer.masksToBounds = true
-        logoImage.kf_setImageWithURL(URL(string: model.image), placeholderImage: UIImage(named: "placeholder_product"))
-//        logoImage.set_webimage_url( model.image)
+        loadImage.set_webimage_url( model.image )
         
         brandNameLabel.text = model.brandEname ?? ""
         brandDescLabel.text = model.desc ?? ""
@@ -39,9 +38,7 @@ class WOWBrandHeaderView: UICollectionReusableView {
         
         logoImage.layer.cornerRadius = 40
         logoImage.layer.masksToBounds = true
-        logoImage.kf_setImageWithURL(URL(string: model.designerPhoto), placeholderImage: UIImage(named: "placeholder_product"))
-        
-        logoImage.set_webimage_url( model.designerPhoto )
+        loadImage.set_webimage_url( model.designerPhoto )
 
         brandNameLabel.text = model.designerName ?? ""
         brandDescLabel.text = model.designerDesc ?? ""

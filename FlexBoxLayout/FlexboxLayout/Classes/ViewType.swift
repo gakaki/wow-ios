@@ -55,7 +55,7 @@ extension FlexboxView where Self: UIView {
   }
 
   /// Recursively apply the configuration closure to this view tree
-  fileprivate func configure() {
+  public func configure() {
     func configure(_ view: UIView) {
 
       //runs the configure closure
@@ -178,7 +178,7 @@ extension UIView: FlexboxView {
   }
 
   /// Recursively computes the layout of this view
-  fileprivate func layout(_ bounds: CGSize = CGSize.undefined) {
+  public func layout(_ bounds: CGSize = CGSize.undefined) {
 
     func prepare(_ view: UIView) {
       for subview in view.subviews where subview.hasFlexNode {
@@ -197,7 +197,7 @@ extension UIView: FlexboxView {
     compute()
   }
 
-  fileprivate func recursivelyAddChildren() {
+  public func recursivelyAddChildren() {
 
     //adds the children at this level
     var children = [Node]()

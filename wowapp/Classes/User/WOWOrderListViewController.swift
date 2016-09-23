@@ -44,7 +44,7 @@ class WOWOrderListViewController: WOWBaseViewController {
             .scrollMenuBackgroundColor(UIColor.white),
             .menuHeight(40),
             .menuMargin(15),
-            .menuItemFont(UIFont.systemFontOfSize(14)),
+            .menuItemFont(UIFont.systemFont(ofSize: 14)),
             .unselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
             .menuItemWidth(itemWidth),
             .selectionIndicatorColor(UIColor.black),

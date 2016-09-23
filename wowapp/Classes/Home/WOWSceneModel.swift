@@ -23,11 +23,11 @@ class WOWSenceModel: WOWBaseModel,Mappable{
     var comments         :   [WOWCommentListModel]?
     var comments_count   :   Int?
     
-    required init?(_ map: Map) {
+    required init?( map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         id                  <- map["_id"]
         name                <- map["name"]
         senceTime           <- map["time"]

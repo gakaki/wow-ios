@@ -1,3 +1,6 @@
+
+
+
 //
 //  WOWProvinceModel.swift
 //  WowDsgn
@@ -13,11 +16,11 @@ class WOWProvinceModel: WOWBaseModel,Mappable{
     var name    : String?
     var citys   : [WOWCityModel]?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         name    <- map["name"]
         citys   <- map["cityColection"]
     }
@@ -29,11 +32,11 @@ class WOWCityModel: WOWBaseModel ,Mappable{
     var name        :   String?
     var districts   :   [WOWDistrictModel]?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         name        <- map["name"]
         districts   <- map["districtCollection"]
     }
@@ -41,11 +44,11 @@ class WOWCityModel: WOWBaseModel ,Mappable{
 
 class WOWDistrictModel: WOWBaseModel ,Mappable{
     var name        :   String?
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         name        <- map["name"]
     }
 

@@ -131,7 +131,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     
     fileprivate func configTable(){
-        tableView.register(UINib.nibName(String(WOWBuyCarNormalCell)), forCellReuseIdentifier:cellNormalID)
+        tableView.register(UINib.nibName(String(WOWBuyCarNormalCell.self)), forCellReuseIdentifier:cellNormalID)
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.separatorColor = SeprateColor
 

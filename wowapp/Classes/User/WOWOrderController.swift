@@ -321,7 +321,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         return 0.1
     }
     
-    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+    titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无订单哦"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri

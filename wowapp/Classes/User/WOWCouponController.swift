@@ -34,7 +34,7 @@ class WOWCouponController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         navigationItem.title = "优惠券"
-        tableView.register(UINib.nibName(String(WOWCouponCell.self)), forCellReuseIdentifier: "WOWCouponCell")
+        tableView.register(UINib.nibName(String(describing: WOWCouponCell.self)), forCellReuseIdentifier: "WOWCouponCell")
         tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.backgroundColor = GrayColorLevel5
@@ -49,9 +49,9 @@ class WOWCouponController: WOWBaseViewController {
         var params = [String: AnyObject]()
         switch entrance {
         case .userEntrance:
-            params = ["currentPage": pageIndex,"pageSize":pageSize]
+            params = ["currentPage": pageIndex as AnyObject,"pageSize":pageSize]
         case .orderEntrance:
-            params = ["currentPage": pageIndex, "pageSize": pageSize, "minAmountLimit": minAmountLimit ?? 0, "couponLimitType": 0]
+            params = ["currentPage": pageIndex as AnyObject, "pageSize": pageSize, "minAmountLimit": minAmountLimit ?? 0, "couponLimitType": 0]
         }
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Coupons(params: params), successClosure: {[weak self] (result) in
@@ -66,7 +66,7 @@ class WOWCouponController: WOWBaseViewController {
                     if strongSelf.pageIndex == 1{
                         strongSelf.vo_cupons = []
                     }
-                    strongSelf.vo_cupons.appendContentsOf(array)
+                    strongSelf.vo_cupons.append(contentsOf: array)
                 //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                 if array.count < strongSelf.pageSize {
                     strongSelf.tableView.mj_footer = nil
@@ -106,7 +106,7 @@ class WOWCouponController: WOWBaseViewController {
 
 extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.vo_cupons.count ?? 0
+        return self.vo_cupons.count 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

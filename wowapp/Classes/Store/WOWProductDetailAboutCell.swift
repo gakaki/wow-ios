@@ -46,7 +46,7 @@ class WOWProductDetailAboutCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
+        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell.self)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
     }
     
 

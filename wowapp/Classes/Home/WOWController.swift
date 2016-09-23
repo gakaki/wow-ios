@@ -338,7 +338,7 @@ class WOWController: WOWBaseViewController {
                 print("专题详情页（图文混排）")
             case 4:
                 print("品牌详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
                 vc.brandID = model.bannerLinkTargetId
                 vc.entrance = .brandEntrance
                 vc.hideNavigationBar = true
@@ -346,14 +346,14 @@ class WOWController: WOWBaseViewController {
                 
             case 5:
                 print("设计师详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
                 vc.designerId = model.bannerLinkTargetId
                 vc.entrance = .designerEntrance
                 vc.hideNavigationBar = true
                 navigationController?.pushViewController(vc, animated: true)
             case 6:
                 print("商品详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController)) as! WOWProductDetailController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
                 vc.hideNavigationBar = true
                 vc.productId = model.bannerLinkTargetId
                 navigationController?.pushViewController(vc, animated: true)

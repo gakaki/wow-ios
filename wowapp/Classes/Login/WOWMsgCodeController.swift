@@ -61,7 +61,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_PwdResetCode(mobile:mobile), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 WOWHud.showMsg("验证码发送成功")
-                strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor, mainTitleColor: UIColor.blackColor(), countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
+                strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.whiteColor, mainTitleColor: UIColor.blackColor, countBGColor:UIColor.whiteColor(), countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
             

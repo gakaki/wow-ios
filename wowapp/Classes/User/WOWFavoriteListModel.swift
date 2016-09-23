@@ -1,3 +1,4 @@
+
 //
 //  WOWFavoriteListModel.swift
 //  WowDsgn
@@ -18,7 +19,7 @@ class WOWFavoriteListModel: WOWBaseModel,Mappable{
     
     var cellHeight:CGFloat = 0
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         id      <- map["id"]
         type    <- map["type"]
         imgUrl  <- map["imageurl"]
@@ -26,7 +27,7 @@ class WOWFavoriteListModel: WOWBaseModel,Mappable{
         price   <- map["price"]
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     

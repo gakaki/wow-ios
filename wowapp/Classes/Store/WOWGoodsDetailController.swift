@@ -143,26 +143,26 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.register(UINib.nibName(String(describing: WOWGoodsDetailCell())), forCellReuseIdentifier:String(describing: WOWGoodsDetailCell()))
         tableView.register(UINib.nibName(String(describing: WOWGoodsParamCell())), forCellReuseIdentifier:String(describing: WOWGoodsParamCell()))
         tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell())), forCellReuseIdentifier:String(describing: WOWSenceLikeCell.self))
-        tableView.register(UINib.nibName(String(describing: WOWCommentCell())), forCellReuseIdentifier:String(describing: WOWCommentCell))
-        tableView.register(UINib.nibName(String(describing: WOWDesignerCell())), forCellReuseIdentifier:String(describing: WOWDesignerCell))  
+        tableView.register(UINib.nibName(String(describing: WOWCommentCell())), forCellReuseIdentifier:String(describing: WOWCommentCell()))
+        tableView.register(UINib.nibName(String(describing: WOWDesignerCell())), forCellReuseIdentifier:String(describing: WOWDesignerCell()))  
     }
     
-    fileprivate func configHeaderView(){
+    func configHeaderView(){
         cycleView = CyclePictureView(frame:MGFrame(0, y: 0, width: MGScreenWidth, height: MGScreenWidth), imageURLArray: nil)
         cycleView.placeholderImage = UIImage(named: "placeholder_product")
         tableView.tableHeaderView = cycleView
     }
     
-    fileprivate func configData(){
+    func configData(){
         let result = WOWCalPrice.calTotalPrice([productModel?.sellPrice ?? 0],counts:[1])
         priceLabel.text = result
         cycleView.imageURLArray = [productModel?.productImg ?? ""]
-        
-        placeImageView.kf_setImage(with: URL(string:productModel?.productImg ?? ""), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
-            if let strongSelf = self{
-                strongSelf.shareProductImage = image
-            }
-        })
+//TODO
+//        placeImageView.kf.setImage(with: URL(string:productModel?.productImg ?? "")', placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in {
+//            if let strongSelf = self{
+//                strongSelf.shareProductImage = image
+//            }
+//        })
      
     }
     
@@ -292,14 +292,14 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             cell.showData(productModel)
             returnCell = cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsDetailCell), for: indexPath) as! WOWGoodsDetailCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsDetailCel()), for: indexPath) as! WOWGoodsDetailCell
             if let pics = productModel?.primaryImgs{
                 let model = pics[(indexPath as NSIndexPath).row]
 //                cell.showData(model)
             }
             returnCell = cell
         case 2: //设计师
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWDesignerCell), for:indexPath) as! WOWDesignerCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWDesignerCell()), for:indexPath) as! WOWDesignerCell
             cell.showData(productModel)
             returnCell = cell
         case 3: //参数

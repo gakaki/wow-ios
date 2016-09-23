@@ -80,7 +80,7 @@ class WOWHomeFormCell: UITableViewCell {
         self.resetSeparators()
         
         
-        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
+        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell.self)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
         
 //        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
         
@@ -102,9 +102,15 @@ class WOWHomeFormCell: UITableViewCell {
         for a in 0..<dataArr!.count{
                 let model = dataArr![a]
             
-                if model.productId! == sender.object!["productId"] as? Int {
-                model.favorite = sender.object!["favorite"] as? Bool
+            if  let send_obj =  sender.object as? [String:AnyObject] {
+                
+                if model.productId! == send_obj["productId"] as? Int {
+                    model.favorite = send_obj["favorite"] as? Bool
+                    break
+                }
             }
+      
+            
         
         }
         collectionView.reloadData()

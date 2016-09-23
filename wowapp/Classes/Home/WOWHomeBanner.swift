@@ -41,7 +41,7 @@ class WOWHomeBannerr: WOWBaseModel,Mappable {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         banners                 <- map["banners"]
 
         bannerImgSrc            <- map["bannerImgSrc"]
@@ -63,7 +63,7 @@ final class WOWCarouselBanners: WOWBaseModel,Mappable{
     var bannerImgSrc          :   String?
     var bannerLinkType        :   Int?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     

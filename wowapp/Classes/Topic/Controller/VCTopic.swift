@@ -139,11 +139,17 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         for a in 0..<vo_products.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = vo_products[a]
             
-            if model.productId! == sender.object!["productId"] as? Int {
-                model.favorite = sender.object!["favorite"] as? Bool
+            
+            
+            if  let send_obj =  sender.object as? [String:AnyObject] {
                 
-                break
+                if model.productId! == send_obj["productId"] as? Int {
+                    model.favorite = send_obj["favorite"] as? Bool
+                    break
+                }
             }
+            
+            
         }
         self.cv.reloadData()
     }
@@ -156,13 +162,13 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
             if let strongSelf = self{
                 
                 let r                                     =  JSON(result)
-                strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map( r.object )
+                strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map(JSONObject: r.object )
                 
                 WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topic_Products(topicId:strongSelf.topic_id), successClosure: {[weak self] (result) in
                     if let strongSelf = self{
                         
                         let r                             =  JSON(result)
-                        strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(r["productList"].arrayObject) ?? [WOWProductModel]()
+                        strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(JSONObject:r["productList"].arrayObject) ?? [WOWProductModel]()
                         
                         strongSelf.cv.reloadData()
                         strongSelf.endRefresh()
@@ -206,7 +212,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         cv.dataSource                       = self
         cv.backgroundColor                  = UIColor.white
         
-        cv.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
         cv.register(VCTopicHeaderView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: cell_header_reuse)
         
         let bg_view                         = UIView()
@@ -278,7 +284,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell), for: indexPath) as! WOWGoodsSmallCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell()), for: indexPath) as! WOWGoodsSmallCell
         let model = vo_products[(indexPath as NSIndexPath).row]
         cell.showData(model, indexPath: indexPath)
         return cell

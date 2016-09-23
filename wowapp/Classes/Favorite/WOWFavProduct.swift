@@ -67,7 +67,7 @@ class WOWFavProduct: WOWBaseViewController {
     fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
-        collectionView.register(UINib.nibName(String(describing: WOWFavoritrSingleCell.self)), forCellWithReuseIdentifier:String(WOWFavoritrSingleCell.self))
+        collectionView.register(UINib.nibName(String(describing: WOWFavoritrSingleCell.self)), forCellWithReuseIdentifier:String(describing: WOWFavoritrSingleCell.self))
         WOWBorderColor(collectionView)
         
     }
@@ -140,7 +140,7 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = dataArr[(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController.self)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = product.productId
         parentNavigationController?.pushViewController(vc, animated: true)

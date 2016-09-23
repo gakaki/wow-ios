@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class WOWProductDetailDescCell: UITableViewCell {
 
     @IBOutlet weak var brandButton: UIButton!
@@ -51,13 +51,15 @@ class WOWProductDetailDescCell: UITableViewCell {
     func showData(_ model:WOWProductModel?){
         productModel = model
         brandNameLabel.text = model?.brandCname
-        brandButton.kf_setBackgroundImageWithURL(URL(string:model?.brandLogoImg ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
+  
+        brandButton.kf.setBackgroundImage(with: URL(string: model?.brandLogoImg ?? "")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
+
         guard let designerName = model?.designerName , !designerName.isEmpty else{
             designerContainerView.isHidden = true
             brandContainerRightConstraint.priority = 250;
             return
         }
         designerNameLabel.text = designerName
-        designerButton.kf_setBackgroundImageWithURL(URL(string: model?.designerPhoto ?? "")!, forState: .Normal, placeholderImage:UIImage(named: "placeholder_product"))
+        designerButton.kf_setBackgroundImage(with: URL(string: model?.designerPhoto ?? "")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
     }
 }

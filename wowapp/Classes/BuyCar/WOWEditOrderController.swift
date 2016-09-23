@@ -174,12 +174,31 @@ class WOWEditOrderController: WOWBaseViewController {
     func requestOrderCreat() -> Void {
         var params = [String: AnyObject?]()
         // 截取两位小数点，确保金额正确
-        let totalAmoutStr = String(format: "%.2f",orderSettle?.totalAmount ?? 0)
+        
+        let totalAmoutStr   = String(format: "%.2f",orderSettle?.totalAmount ?? 0)
+        let shippingInfoId  = addressInfo?.id!
+        let orderSource     = 2
+        let totalAmout      = totalAmoutStr ?? ""
+        let remark          = tipsTextField.text ?? ""
         
         if let endUserCouponId = couponModel?.id {
-            params = ["shippingInfoId": addressInfo?.id! as Optional<AnyObject>, "orderSource": 2 as Optional<AnyObject> , "orderAmount": totalAmoutStr as AnyObject?? ?? "" as AnyObject?, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+            
+            params = [
+                "shippingInfoId": shippingInfoId,
+                "orderSource": orderSource,
+                "orderAmount": totalAmout,
+                "remark": remark,
+                "endUserCouponId": endUserCouponId
+            ]
+            
         }else {
-            params = ["shippingInfoId": addressInfo?.id! as Optional<AnyObject>, "orderSource": 2 as Optional<AnyObject> , "orderAmount": totalAmoutStr as AnyObject?? ?? "", "remark": tipsTextField.text  ?? ""]
+            params = [
+                "shippingInfoId": shippingInfoId,
+                "orderSource": orderSource,
+                "orderAmount": totalAmout,
+                "remark": remark
+            ]
+
         }
         
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params as [String : AnyObject]?), successClosure: { [weak self](result) in
@@ -206,8 +225,27 @@ class WOWEditOrderController: WOWBaseViewController {
         let totalAmount = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
         if let endUserCouponId = couponModel?.id {
             params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": totalAmount, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+            
+            
+            params = [
+                "shippingInfoId": shippingInfoId,
+                "orderSource": orderSource,
+                "orderAmount": totalAmout,
+                "remark": remark,
+                "endUserCouponId": endUserCouponId
+            ]
+            
         }else {
             params = ["productId": productId ?? 0, "productQty": productQty ?? 1, "shippingInfoId": (addressInfo?.id) ?? 0, "orderSource": 2, "orderAmount": totalAmount, "remark": tipsTextField.text ?? ""]
+            
+            
+            params = [
+                "shippingInfoId": shippingInfoId,
+                "orderSource": orderSource,
+                "orderAmount": totalAmout,
+                "remark": remark,
+                "endUserCouponId": endUserCouponId
+            ]
         }
         
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result) in

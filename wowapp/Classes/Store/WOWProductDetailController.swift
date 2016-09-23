@@ -77,7 +77,7 @@ class WOWProductDetailController: WOWBaseViewController {
     var cycleView:CyclePictureView! = {
         let v = CyclePictureView(frame:MGFrame(0, y: 0, width:MGScreenWidth, height:MGScreenWidth), imageURLArray: nil)
         v.placeholderImage = UIImage(named: "placeholder_product")
-        v.currentDotColor = UIColor.blackColor
+        v.currentDotColor = UIColor.black
         v.otherDotColor   = UIColor(hexString: "#000000", alpha: 0.2)!
         v.timeInterval = 3
         return v
@@ -89,17 +89,17 @@ class WOWProductDetailController: WOWBaseViewController {
     }()
     //产品描述
     lazy var productDescView:WOWProductDescView = {
-        let v = Bundle.main.loadNibNamed(String(describing: WOWProductDescView), owner: self, options: nil)?.last as! WOWProductDescView
+        let v = Bundle.main.loadNibNamed(String(describing: WOWProductDescView()), owner: self, options: nil)?.last as! WOWProductDescView
         return v
     }()
     //产品参数
     lazy var paramView:WOWProductHeaderView = {
-        let v = Bundle.main.loadNibNamed(String(describing: WOWProductHeaderView), owner: self, options: nil)?.last as! WOWProductHeaderView
+        let v = Bundle.main.loadNibNamed(String(describing: WOWProductHeaderView()), owner: self, options: nil)?.last as! WOWProductHeaderView
         return v
     }()
     //温馨提示
     lazy var tipsView:WOWProductHeaderView = {
-        let v = Bundle.main.loadNibNamed(String(describing: WOWProductHeaderView), owner: self, options: nil)?.last as! WOWProductHeaderView
+        let v = Bundle.main.loadNibNamed(String(describing: WOWProductHeaderView()), owner: self, options: nil)?.last as! WOWProductHeaderView
         v.lineView.isHidden = false
         return v
     }()
@@ -124,11 +124,14 @@ class WOWProductDetailController: WOWBaseViewController {
         for a in 0..<aboutProductArray.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = aboutProductArray[a]
             
-            if model.productId! == sender.object!["productId"] as? Int {
-                model.favorite = sender.object!["favorite"] as? Bool
+            if  let send_obj =  sender.object as? [String:AnyObject] {
                 
-                break
+                if model.productId! == send_obj["productId"] as? Int {
+                    model.favorite = send_obj["favorite"] as? Bool
+                    break
+                }
             }
+            
         }
         self.tableView.reloadData()
     }
@@ -173,11 +176,21 @@ class WOWProductDetailController: WOWBaseViewController {
             if array.count >= 1 {
                 cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
                 cycleView.delegate = self
-                placeImageView.kf_setImageWithURL(URL(string:array[0] ?? "")!, placeholderImage:nil, optionsInfo: nil) {[weak self](image, error, cacheType, imageURL) in
-                    if let strongSelf = self{
-                        strongSelf.shareProductImage = image
+                placeImageView.kf.setImage(
+                    with: URL(string:array[0] )!,
+                    placeholder: nil,
+                    options: nil,
+                    progressBlock: { (arg1, arg2) in
+                    
+                    
+                    },
+                    completionHandler: { [weak self](image, error, cacheType, imageUrl) in
+                        if let strongSelf = self{
+                            strongSelf.shareProductImage = Image
+                        }
                     }
-                }
+                )
+               
             }
             
 
@@ -201,7 +214,7 @@ class WOWProductDetailController: WOWBaseViewController {
             toLoginVC(true)
             return
         }
-        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController())) as! WOWBuyCarController
         vc.hideNavigationBar = false
         navigationController?.pushViewController(vc, animated: true)
 
@@ -274,7 +287,7 @@ class WOWProductDetailController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                strongSelf.productModel = Mapper<WOWProductModel>().map(result)
+                strongSelf.productModel = Mapper<WOWProductModel>().map(JSONObject:result)
                 strongSelf.productModel?.productId = strongSelf.productId
                 
                 strongSelf.requestAboutProduct()
@@ -298,7 +311,7 @@ class WOWProductDetailController: WOWBaseViewController {
     func requestProductSpec() -> Void {
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductSpec(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(result)
+                strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(JSONObject:result)
                 DLog(strongSelf.productSpecModel)
                 
             }
@@ -313,7 +326,7 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
-                strongSelf.likeButton.selected = favorite ?? false
+                strongSelf.likeButton.isSelected = favorite ?? false
             }
         }) {(errorMsg) in
             

@@ -64,7 +64,7 @@ class WOWSureOrderController: WOWBaseViewController {
 //            productParam.append(dict)
 //        }
         let requestParam  = ["cart":productParam,"uid":uid,"pay_method":payType,"tips":tips,"address_id":addressid] as [String : Any]
-        let requestString = JSONStringify(requestParam)
+        let requestString = JSONStringify(requestParam as AnyObject)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_CartCommit(car:requestString), successClosure: { [weak self](result) in
             if let strongSelf = self{
                 let json = JSON(result)

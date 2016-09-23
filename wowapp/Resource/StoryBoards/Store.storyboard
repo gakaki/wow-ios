@@ -477,7 +477,7 @@
                                     <constraint firstAttribute="width" constant="40" id="G93-wc-96j"/>
                                     <constraint firstAttribute="height" constant="32" id="TSo-eI-ha8"/>
                                 </constraints>
-                                <state key="normal" image="shareblack"/>
+                                <state key="normal" image="icon_share"/>
                                 <connections>
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="Gz9-gv-NZd"/>
                                     <action selector="shareButton:" destination="WaH-lQ-3xj" eventType="touchUpInside" id="tfb-OI-KYg"/>
@@ -536,7 +536,6 @@
         <image name="likeblack" width="30" height="30"/>
         <image name="nav_backArrow" width="9" height="16"/>
         <image name="share_white" width="30" height="30"/>
-        <image name="shareblack" width="30" height="30"/>
         <image name="store_buyCar" width="26" height="25"/>
         <image name="top_back" width="44" height="44"/>
         <image name="top_car" width="44" height="44"/>

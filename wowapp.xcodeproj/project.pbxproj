@@ -1305,6 +1305,7 @@
 				068B60AC1D4F34AF001AD778 /* Found */,
 				069056DA1D3665FC00A851F9 /* Guide */,
 				29FF25401CFDA86300DF2A9B /* Home */,
+				29FF252E1CFDA86300DF2A9B /* BuyCar */,
 				2953F1981D06A678006D7D95 /* Favorite */,
 				29FF25851CFDA86300DF2A9B /* Store */,
 				29FF25AA1CFDA86300DF2A9B /* User */,
@@ -1321,8 +1322,7 @@
 				29FF271C1CFDAF0800DF2A9B /* View */,
 				29FF271D1CFDAF0F00DF2A9B /* Controller */,
 			);
-			name = BuyCar;
-			path = ../BuyCar;
+			path = BuyCar;
 			sourceTree = "<group>";
 		};
 		29FF25401CFDA86300DF2A9B /* Home */ = {
@@ -1330,7 +1330,6 @@
 			children = (
 				29FF27291CFDB07000DF2A9B /* View */,
 				29FF272A1CFDB08300DF2A9B /* Controller */,
-				29FF252E1CFDA86300DF2A9B /* BuyCar */,
 				29FF27281CFDB05D00DF2A9B /* Model */,
 				29FF272B1CFDB09C00DF2A9B /* Other */,
 			);

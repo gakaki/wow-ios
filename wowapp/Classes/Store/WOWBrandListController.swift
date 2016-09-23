@@ -62,7 +62,7 @@ class WOWBrandListController: WOWBaseViewController {
         
     }
 
-    fileprivate func addObserver(){
+    private func addObserver(){
         
         NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         
@@ -86,7 +86,8 @@ class WOWBrandListController: WOWBaseViewController {
         searchController.searchBar.barTintColor = UIColor.white
         searchController.searchBar.setValue("取消", forKey:"_cancelButtonText")
         if #available(iOS 9.0, *) {
-            UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.blackColor(),NSFontAttributeName:Fontlevel002], forState: .Normal)
+//TODO
+//            UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.blackColor(),NSFontAttributeName:Fontlevel002], forState: .Normal)
         } else {
             
         }
@@ -125,7 +126,7 @@ class WOWBrandListController: WOWBaseViewController {
                     for letter in strongSelf.headerIndexs{
                         let group_row    = brands!.filter{ (brand) in brand.letter == letter }
                             strongSelf.dataArray.append(group_row)
-                            strongSelf.originalArray.appendContentsOf(group_row)
+                            strongSelf.originalArray.append(contentsOf: group_row)
                         
                     }
                     //for #
@@ -135,7 +136,7 @@ class WOWBrandListController: WOWBaseViewController {
                     strongSelf.originalArray.removeLast()
 
                     strongSelf.dataArray.append(group_row)
-                    strongSelf.originalArray.appendContentsOf(group_row)
+                    strongSelf.originalArray.append(contentsOf: group_row)
 
                     strongSelf.endRefresh()
 
@@ -197,7 +198,7 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
         vc.brandID = model.id
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
@@ -208,7 +209,7 @@ extension WOWBrandListController:SearchResultDelegate{
     func searchResultSelect(_ model: WOWBrandV1Model) {
 //        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
         searchController.isActive = false
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
         vc.brandID = model.id
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

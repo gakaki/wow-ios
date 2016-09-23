@@ -114,7 +114,7 @@ class WOWTopMenuTitleView: UIView {
             return
         }
         let centerX = itemArr[index].centerX
-        UIView.animateWithDuration(0.4) { 
+        UIView.animate(withDuration: 0.4) { 
             self.bottomLine.centerX = centerX
         }
         itemArr[selectedIndex].isSelected = false
@@ -128,7 +128,7 @@ class WOWTopMenuTitleView: UIView {
     fileprivate func changeIndex(){
         itemArr[selectedIndex].isSelected = true
         let centerX = itemArr[selectedIndex].centerX
-        UIView.animateWithDuration(0.4) {
+        UIView.animate(withDuration: 0.4) {
             self.bottomLine.centerX = centerX
         }
     }
@@ -136,7 +136,7 @@ class WOWTopMenuTitleView: UIView {
     fileprivate func createItem(_ title:String) ->UIButton{
         let button = UIButton(type:.system)
         button.titleLabel?.font = WOWCheckMenuSetting.titleFont
-        button.setTitleColor(WOWCheckMenuSetting.normalTitleColor, for: .Normal)
+        button.setTitleColor(WOWCheckMenuSetting.normalTitleColor, for: .normal)
         button.setTitleColor(WOWCheckMenuSetting.selectTitleColor, for: .selected)
         button.tintColor = UIColor.white
         button.setTitle(title, for: UIControlState())

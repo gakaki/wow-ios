@@ -1,4 +1,6 @@
 
+
+
 import UIKit
 import SnapKit
 import YYImage
@@ -46,25 +48,24 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
         
         label_name.snp_makeConstraints { (make) -> Void in
 
-            label_name.font             = UIFont.systemFontOfSize(12)
+            label_name.font             = UIFont.systemFont(ofSize: 12)
             label_name.textColor        = UIColor.init(hexString:"808080")
-            label_name.textAlignment    = NSTextAlignment.Center
+            label_name.textAlignment    = NSTextAlignment.center
             
             make.width.equalTo(self.snp_width)
             make.height.equalTo(15.h)
-            make.top.equalTo(pictureImageView.snp_bottom).offset(UIEdgeInsets.init(top: 0.w, left: 0, bottom: 0, right: 0))
-            
+            make.top.equalTo(pictureImageView.snp.bottom).offset(UIEdgeInsetsMake(0.w, 0, 0, 0))
         }
 
         label_price.snp_makeConstraints { (make) -> Void in
 
-            label_price.font            = UIFont.systemFontOfSize(12)
-            label_price.textColor       = UIColor.blackColor()
-            label_price.textAlignment   = NSTextAlignment.Center
+            label_price.font            = UIFont.systemFont(ofSize: 12)
+            label_price.textColor       = UIColor.black
+            label_price.textAlignment   = NSTextAlignment.center
 
             make.width.equalTo(self.snp_width)
             make.height.equalTo(15.h)
-            make.top.equalTo(label_name.snp_bottom).offset(UIEdgeInsets.init(top: 0, left: 0, bottom: 6, right: 0))
+            make.top.equalTo(label_name.snp.bottom).offset(UIEdgeInsetsMake(0, 0, 6, 0) )
 
         }
     }

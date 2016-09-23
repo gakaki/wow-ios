@@ -35,25 +35,26 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             if let strongSelf = self{
                 
                 let r                           =  JSON(result)
-                let category_paths              =  Mapper<WOWFoundCategoryModel>().mapArray( r["path"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                let category_paths              =  Mapper<WOWFoundCategoryModel>().mapArray(JSONObject: r["path"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.vo_category_top      =  category_paths[0]
                 
                 let top_category_cid            =  strongSelf.vo_category_top.categoryID!
                 strongSelf.title                =  strongSelf.vo_category_top.categoryName!
                 
                 
-                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Category(categoryId:top_category_cid), successClosure: {[weak self] (result) in
+                WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category(categoryId:top_category_cid), successClosure: {[weak self] (result) in
                     
                     if let strongSelf = self{
                         
                         let r                             =  JSON(result)
-                        strongSelf.vo_categories          =  Mapper<WOWFoundCategoryModel>().mapArray( r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                        strongSelf.vo_categories          =  Mapper<WOWFoundCategoryModel>().mapArray(JSONObject: r["categoryList"].arrayObject ) ?? [WOWFoundCategoryModel]()
                         strongSelf.cv.reloadData()
                         
                         if let image_url = r["bgImg"].string {
                             strongSelf.top_category_image_view.set_webimage_url(image_url) //设置顶部分类背景图
                         }
-                        strongSelf.cv.selectItemAtIndexPath(NSIndexPath(forItem: strongSelf.get_category_index(), inSection: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.Right)
+                        
+                        strongSelf.cv.selectItem(at: NSIndexPath(item: strongSelf.get_category_index(), section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
                     }
                     
                 }){ (errorMsg) in
@@ -141,7 +142,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         v_bottom.magicView.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(self.view)
             make.top.equalTo(self.cv.snp.bottom)
-            make.bottom.equalTo(self.snp.bottomMargin)
+            
+            make.bottom.equalTo(self.view.snp.bottomMargin)
         }
         
         v_bottom.magicView.reloadData()

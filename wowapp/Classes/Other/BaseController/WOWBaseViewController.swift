@@ -131,17 +131,17 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
     lazy var mj_header:WOWRefreshHeader = {
         
-        let h = WOWRefreshHeader(refreshingTarget:self, refreshingAction:#selector(pullToRefresh))
-        h.automaticallyChangeAlpha = true
+        let h = WOWRefreshHeader(refreshingTarget:self, refreshingAction:#selector(pullToRefresh))!
+        h.isAutomaticallyChangeAlpha = true
         return h
     }()
 
     lazy var mj_footer:MJRefreshAutoNormalFooter = {
-        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadMore))
-                f.setTitle("- WOWDSGN -",  forState: .NoMoreData)
+        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadMore))!
+                f.setTitle("- WOWDSGN -",  for: .noMoreData)
         f.stateLabel.textColor = UIColor(hexString: "CCCCCC")
-        f.stateLabel.font = UIFont.systemFontOfSize(14)
-        f.automaticallyHidden = true
+        f.stateLabel.font = UIFont.systemFont(ofSize: 14)
+        f.isAutomaticallyHidden = true
         return f
     }()
     
@@ -204,13 +204,13 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 
 
 extension WOWBaseViewController{
-    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+    @objc(titleForEmptyDataSet:) func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = WOWEmptyNoDataText
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
     }
     
-    func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
+    @objc(backgroundColorForEmptyDataSet:) func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return GrayColorLevel5
     }
 }
@@ -237,7 +237,7 @@ extension WOWBaseViewController {
                     strongSelf.toLoginVC(true)
                     return
                 }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController)) as! WOWBuyCarController
                 vc.hideNavigationBar = false
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
@@ -245,7 +245,7 @@ extension WOWBaseViewController {
         
         makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController)) as! WOWSearchController
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchController)) as! WOWSearchController
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
                 
             }
@@ -288,14 +288,14 @@ extension WOWBaseTableViewController {
                     strongSelf.toLoginVC(true)
                     return
                 }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController)) as! WOWBuyCarController
                 vc.hideNavigationBar = false
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
         makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(WOWSearchController)) as! WOWSearchController
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchController)) as! WOWSearchController
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
                 
             }

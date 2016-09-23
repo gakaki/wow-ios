@@ -22,11 +22,11 @@ class WOWBrandHeaderView: UICollectionReusableView {
     weak var delegate: brandHeaderViewDelegate?
     
     //显示品牌信息
-    func showBrandData(_ model: WOWBrandV1Model) {
+    func showBrandData( model: WOWBrandV1Model) {
        
         logoImage.layer.cornerRadius = 40
         logoImage.layer.masksToBounds = true
-        loadImage.set_webimage_url( model.image )
+        logoImage?.set_webimage_url( model.image )
         
         brandNameLabel.text = model.brandEname ?? ""
         brandDescLabel.text = model.desc ?? ""
@@ -34,18 +34,18 @@ class WOWBrandHeaderView: UICollectionReusableView {
     }
     
     //显示设计师信息
-    func showDesignerData(_ model: WOWDesignerModel) {
+    func showDesignerData(model: WOWDesignerModel) {
         
         logoImage.layer.cornerRadius = 40
         logoImage.layer.masksToBounds = true
-        loadImage.set_webimage_url( model.designerPhoto )
+        logoImage?.set_webimage_url( model.designerPhoto )
 
         brandNameLabel.text = model.designerName ?? ""
         brandDescLabel.text = model.designerDesc ?? ""
         brandDescLabel.setLineHeightAndLineBreak(1.5)
     }
     
-    @IBAction func moreButtonClick(_ sender: UIButton!) {
+    @IBAction func moreButtonClick(sender: UIButton!) {
         if let del = delegate {
             del.moreClick(sender)
         }

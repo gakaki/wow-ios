@@ -1,4 +1,5 @@
 
+
 import UIKit
 
 class VCCategoryChoose: VCBaseVCCategoryFound {
@@ -46,12 +47,12 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             
             label_name.snp_makeConstraints { (make) -> Void in
                 
-                label_name.font             = UIFont.systemFontOfSize(12)
-                label_name.textAlignment    = NSTextAlignment.Center
+                label_name.font             = UIFont.systemFont(ofSize: 12)
+                label_name.textAlignment    = NSTextAlignment.center
                 
                 make.width.equalTo(self.snp_width)
                 make.height.equalTo(20)
-                make.top.equalTo(pictureImageView.snp_bottom).offset(UIEdgeInsets.init(top: 1.w, left: 0, bottom: 0, right: 0))
+                make.top.equalTo(pictureImageView.snp.bottom).offset(UIEdgeInsetsMake(1.w, 0, 0, 0))
                 
             }
         }
@@ -99,10 +100,10 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
 
             label_name.snp_makeConstraints { (make) -> Void in
                 
-                label_name.font             = UIFont.systemFontOfSize(14)
-                label_name.textColor        = UIColor.blackColor()
-                label_name.textAlignment    = NSTextAlignment.Center
-                
+                label_name.font             = UIFont.systemFont(ofSize: 14)
+                label_name.textColor        = UIColor.black
+        label_name.textAlignment    = .center
+          
                 make.width.equalTo(self.snp_width)
                 make.height.equalTo(15.h)
                 make.center.equalTo(self.snp_center)
@@ -110,12 +111,12 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             }
             
             v_black_r.snp_makeConstraints { (make) -> Void in
-                v_black_r.backgroundColor = UIColor.blackColor()
-                make.width.equalTo(4.w)
+                v_black_r.backgroundColor = UIColor.black
+            make.width.equalTo(4.w)
                 make.height.equalTo(18.w)
                 make.right.equalTo(self.snp_right)
                 make.centerY.equalTo(self.snp_centerY)
-                v_black_r.hidden = true
+                v_black_r.isHidden = true
             }
 
  
@@ -135,13 +136,13 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
     func createTvLeft() {
         
         self.title           = "全部分类"
-        tv                   = UITableView(frame:CGRect(x: 0, y: 0 , width: self.tv_width, height: MGScreenHeight), style:.Plain)
+        tv                   = UITableView(frame:CGRect(x: 0, y: 0 , width: self.tv_width, height: MGScreenHeight), style:.plain)
         tv.separatorColor    = UIColor(hexString:"EAEAEA")
         tv.estimatedRowHeight  = 60.w
         
         tv.delegate          = self
         tv.dataSource        = self
-        tv.register(TvCell.self, forCellReuseIdentifier:String(describing: TvCell))
+        tv.register(TvCell.self, forCellReuseIdentifier:String(describing: TvCell()))
 //        tv.bounces           = false
         tv.showsVerticalScrollIndicator = false
         self.view.addSubview(tv)
@@ -175,7 +176,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         cv.backgroundView                       = UIView(frame:CGRect.zero)
         
         
-        cv.register(CVCell.self, forCellWithReuseIdentifier:String(describing: CVCell))
+        cv.register(CVCell.self, forCellWithReuseIdentifier:String(describing: CVCell()))
         cv.showsVerticalScrollIndicator         = false
         cv.showsHorizontalScrollIndicator       = false
 //        cv.scrollEnabled                        = false
@@ -280,7 +281,7 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell                = tableView.dequeueReusableCell(withIdentifier: String(describing: TvCell), for: indexPath) as! TvCell
+        let cell                = tableView.dequeueReusableCell(withIdentifier: String(describing: TvCell()), for: indexPath) as! TvCell
         cell.selectionStyle     = .none
         let model               = vo_categories_arr[(indexPath as NSIndexPath).section]
         cell.setModel(model)
@@ -324,7 +325,7 @@ extension VCCategoryChoose:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CVCell), for: indexPath) as! CVCell
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CVCell()), for: indexPath) as! CVCell
         let m               = vo_categories_sub_arr[(indexPath as NSIndexPath).item]
         cell.setModel(m)
         return cell

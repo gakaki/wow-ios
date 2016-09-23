@@ -198,94 +198,95 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
 //        public typealias Inset = (left: Float, top: Float, right: Float, bottom: Float, start: Float, end: Float)
 
         iv                       = UIImageView()
-        
-        self.product_view =  UIView().configure({
-            
-            $0.style.justifyContent = .spaceAround
-            $0.style.alignSelf      = .flexStart
-            $0.style.margin         = defaultMargin
-            $0.style.flexDirection  = .row
-            
-            $0.style.dimensions     = Dimension(Float(self.w) ,Float(180.w))
-            
-            }, children: [
-                
-                iv.configure({
-                    $0.style.dimensions     = ( Float(180.w) , Float(180.w))
-                    $0.style.flex           = 1
-                }),
-                
-                UIView().configure({
-                    $0.style.flex           = 1
-                    $0.style.justifyContent = .spaceBetween
+        //TODO
+        self.product_view =  UIView()
+//            .configure({
+//            
+//            $0.style.justifyContent = .spaceAround
+//            $0.style.alignSelf      = .flexStart
+//            $0.style.margin         = defaultMargin
+//            $0.style.flexDirection  = .row
+//            
+//            $0.style.dimensions     = Dimension(Float(self.w) ,Float(180.w))
+//            
+//            }, children: [
+//                
+//                iv.configure({
 //                    $0.style.dimensions     = ( Float(180.w) , Float(180.w))
-                    $0.style.margin     =  (0, 0.0, 0, 0, 0.0, 8)
-
-                    }, children: [
-                        
-                        right_label_top.configure({
-                            $0.textAlignment = .left
-                            $0.lineBreakMode = .byWordWrapping
-                            $0.numberOfLines = 0
-                            $0.setLineHeightAndLineBreak(1.03)
-                            
-                            $0.font = UIFont.systemScaleFontSize(16)
-                            $0.style.alignSelf = .flexStart
-                            $0.style.flex       = 2
-
-                        }),
-                        
-                        right_label_ceneter.configure({
-                            $0.textAlignment    = .left
-                            $0.font             = UIFont.systemScaleFontSize(13)
-                            $0.setLineHeightAndLineBreak(1.15)
-                            $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
-                            $0.numberOfLines    = 3
-                            $0.style.alignSelf  = .flexStart
-                            $0.style.flex       = 5
-                            
-                        }),
-                        
-                       right_label_price_stroke.configure({
-                            $0.textAlignment    = .left
-                            $0.font             = UIFont.systemScaleFontSize(10)
-                            $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
-                            $0.style.alignSelf  = .flexStart
-                            $0.style.flex       = 1.5
-
-                        }),
-                        
-                        UIView().configure({
-
-                            $0.style.flexDirection  = .row
-                            $0.style.justifyContent = .spaceBetween
-                            $0.style.flex       = 2
-
-                            }, children: [
-                                
-                                right_label_price_bottom.configure({
-                                    $0.textAlignment = .left
-                                    $0.setLineHeightAndLineBreak(1.05)
-                                    $0.font = UIFont.systemFont(ofSize: 14)
-                                    $0.style.alignSelf  = .flexStart
-
-                                }),
-                                
-                                //                                button.configure({
-                                //                                    $0.style.alignSelf  = .FlexStart
-                                //                                    $0.style.dimensions = ( 10 , 10)
-                                //                                }),
-                                
-                                btnLike.configure({
-                                    $0.style.dimensions = ( Float(32.w) , Float(32.w))
-                                    $0.style.alignSelf  = .flexStart
-                                    $0.style.margin     =  (0, Float(-7.h), 0, 0, 0.0, 0)
-
-                                })
-                            ])
-                    ])
-                
-            ])
+//                    $0.style.flex           = 1
+//                }),
+//                
+//                UIView().configure({
+//                    $0.style.flex           = 1
+//                    $0.style.justifyContent = .spaceBetween
+////                    $0.style.dimensions     = ( Float(180.w) , Float(180.w))
+//                    $0.style.margin     =  (0, 0.0, 0, 0, 0.0, 8)
+//
+//                    }, children: [
+//                        
+//                        right_label_top.configure({
+//                            $0.textAlignment = .left
+//                            $0.lineBreakMode = .byWordWrapping
+//                            $0.numberOfLines = 0
+//                            $0.setLineHeightAndLineBreak(1.03)
+//                            
+//                            $0.font = UIFont.systemScaleFontSize(16)
+//                            $0.style.alignSelf = .flexStart
+//                            $0.style.flex       = 2
+//
+//                        }),
+//                        
+//                        right_label_ceneter.configure({
+//                            $0.textAlignment    = .left
+//                            $0.font             = UIFont.systemScaleFontSize(13)
+//                            $0.setLineHeightAndLineBreak(1.15)
+//                            $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
+//                            $0.numberOfLines    = 3
+//                            $0.style.alignSelf  = .flexStart
+//                            $0.style.flex       = 5
+//                            
+//                        }),
+//                        
+//                       right_label_price_stroke.configure({
+//                            $0.textAlignment    = .left
+//                            $0.font             = UIFont.systemScaleFontSize(10)
+//                            $0.textColor        = UIColor(red:0.63, green:0.63, blue:0.63, alpha:1.00)
+//                            $0.style.alignSelf  = .flexStart
+//                            $0.style.flex       = 1.5
+//
+//                        }),
+//                        
+//                        UIView().configure({
+//
+//                            $0.style.flexDirection  = .row
+//                            $0.style.justifyContent = .spaceBetween
+//                            $0.style.flex       = 2
+//
+//                            }, children: [
+//                                
+//                                right_label_price_bottom.configure({
+//                                    $0.textAlignment = .left
+//                                    $0.setLineHeightAndLineBreak(1.05)
+//                                    $0.font = UIFont.systemFont(ofSize: 14)
+//                                    $0.style.alignSelf  = .flexStart
+//
+//                                }),
+//                                
+//                                //                                button.configure({
+//                                //                                    $0.style.alignSelf  = .FlexStart
+//                                //                                    $0.style.dimensions = ( 10 , 10)
+//                                //                                }),
+//                                
+//                                btnLike.configure({
+//                                    $0.style.dimensions = ( Float(32.w) , Float(32.w))
+//                                    $0.style.alignSelf  = .flexStart
+//                                    $0.style.margin     =  (0, Float(-7.h), 0, 0, 0.0, 0)
+//
+//                                })
+//                            ])
+//                    ])
+//                
+//            ])
         
         self.addSubview(self.product_view)
     }

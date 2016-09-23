@@ -18,12 +18,12 @@ class WOWBrandModel: WOWBaseModel,Mappable {
     var desc       : String?
     var pinyin     : String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         id       <- map["id"]
         name     <- map["name"]
         image    <- map["image"]
@@ -45,12 +45,12 @@ class WOWBrandV1Model: WOWBaseModel,Mappable {
     var desc       : String?
     var brandEname     : String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         id       <- map["id"]
         letter   <- map["brandNameFirstLetter"]
         name     <- map["brandCname"]

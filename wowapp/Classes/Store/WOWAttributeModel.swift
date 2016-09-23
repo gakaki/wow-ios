@@ -16,11 +16,11 @@ class WOWAttributeModel: WOWBaseModel,Mappable{
     var value       :String?
     var attriImage  :String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         code        <- map["key"]
         value       <- map["value"]
         title       <- map["label"]
@@ -38,11 +38,11 @@ class WOWParameter: WOWBaseModel,Mappable{
     var applicablePeople    :String?
     var sizeText            :String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         materialText            <- map["materialText"]
         needAssemble            <- map["needAssemble"]
         origin                  <- map["origin"]
@@ -58,11 +58,11 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
     var image  :String?
     var text    :String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         image <- map["url"]
         text  <- map["desc"]
     }
@@ -74,11 +74,11 @@ class WOWProductSkuModel: WOWBaseModel,Mappable {
     var skuTitle    : String?
     var skuPrice    : String?
     
-    required init?(_ map: Map) {
+    required init?( map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         skuID       <- map["sku"]
         skuTitle    <- map["title"]
         skuPrice    <- map["price"]

@@ -1,3 +1,4 @@
+
 //
 //  WowSenceLikeCell.swift
 //  Wow
@@ -29,7 +30,7 @@ class WOWSenceLikeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell))
+        self.collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell()))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,7 +54,7 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWImageCell), for: indexPath) as! WOWImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWImageCell()), for: indexPath) as! WOWImageCell
 //        if orderTag {
             let orderItem = orderArr[(indexPath as NSIndexPath).item]
 //            cell.pictureImageView.kf_setImageWithURL(NSURL(string:orderItem.skuProductImageUrl)!, placeholderImage: UIImage(named: "placeholder_product"))

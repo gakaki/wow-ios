@@ -40,7 +40,8 @@ class WOWProductDetailCell: UITableViewCell {
     func showData(_ secondaryImg: WOWProductPicTextModel?) {
         if let secondaryImg = secondaryImg {
             if let img = secondaryImg.image {
-                productImg.kf_setImageWithURL(URL(string:img)!, placeholderImage:UIImage(named: "placeholder_product"))
+                productImg.set_webimage_url(img)
+                
 //                bottomSpace.constant = 30
 ////                productImg.kf_indicator?.setScale(x: 100, y: 1000)
             }else {

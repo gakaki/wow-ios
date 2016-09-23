@@ -26,11 +26,11 @@ class WOWOrderListModel: WOWBaseModel,Mappable{
     var transCompany    : String? //物流公司
     var transNumber     : String? //物流单号
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         id                  <- map["id"]
         products            <- map["items"]
         status              <- map["status"]
@@ -59,11 +59,11 @@ class WOWOrderProductModel: WOWBaseModel ,Mappable{
     var price       : String?
     var total       : String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         name        <- map["name"]
         product_id  <- map["product_id"]
         sku_id      <- map["sku_id"]
@@ -95,7 +95,7 @@ class WOWNewOrderListModel: WOWBaseModel,Mappable{
     
     
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
         
@@ -103,7 +103,7 @@ class WOWNewOrderListModel: WOWBaseModel,Mappable{
     
     
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         
         orderId                  <- map["orderId"]
         
@@ -152,11 +152,11 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     
     
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         
         couponAmount                  <- map["couponAmount"]
         deliveryFee            <- map["deliveryFee"]
@@ -193,11 +193,11 @@ class WOWNewForGoodsModel: WOWBaseModel,Mappable{
     var orderItems : [WOWNewProductModel]? // 产品列表
     
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         
         deliveryCompanyName                  <- map["deliveryCompanyName"]
         
@@ -227,11 +227,11 @@ class WOWNewProductModel: WOWBaseModel,Mappable{
     
     var productTotalAmount             : Double?// 产品总金额
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         productId                  <- map["productId"]
         productName            <- map["productName"]
         sellTotalAmount              <- map["sellTotalAmount"]

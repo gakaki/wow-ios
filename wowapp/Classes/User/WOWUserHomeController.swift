@@ -39,7 +39,7 @@ class WOWUserHomeController: WOWBaseViewController {
         let collectionView = UICollectionView.init(frame:CGRect(x: 0,y: 0,width: self.view.w,height: self.view.h), collectionViewLayout:self.layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = UIColor.white
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -66,7 +66,7 @@ class WOWUserHomeController: WOWBaseViewController {
     
     fileprivate func configColelction(){
         view.addSubview(collectionView)
-        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
+        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
         collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
         collectionView.register(WOWUserHomeContainerView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
@@ -89,7 +89,7 @@ extension WOWUserHomeController:UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell), for: indexPath) as! WOWGoodsSmallCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell()), for: indexPath) as! WOWGoodsSmallCell
         
         return cell
     }
@@ -111,7 +111,7 @@ extension WOWUserHomeController:UICollectionViewDelegate,UICollectionViewDataSou
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWGoodsDetailController)) as! WOWGoodsDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWGoodsDetailController.self)) as! WOWGoodsDetailController
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -13,7 +13,7 @@ class WOWHomeBanner: WOWBaseModel,Mappable {
     var bannerList               :   [WOWCarouselBanners]?
     var carouselBanners          :   [WOWCarouselBanners]?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
@@ -67,7 +67,7 @@ final class WOWCarouselBanners: WOWBaseModel,Mappable{
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         banners                 <- map["banners"]
         
         bannerLinkTargetId    <- map["bannerLinkTargetId"]

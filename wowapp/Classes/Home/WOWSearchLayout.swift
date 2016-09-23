@@ -35,10 +35,9 @@ class WOWSearchLayout: UICollectionViewFlowLayout {
     //这里就是返回每个cell，通过这里来调整位置
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
-        
         let arrCell =  super.layoutAttributesForElements(in: rect)
         
-        for(var i = 1 ; i < arrCell?.count ; i += 1){
+        for i in stride(from: 0, to: arrCell?.count , by: 1){
             
             //当前 UICollectionViewLayoutAttributes
             let currentLayout = arrCell![i]

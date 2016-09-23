@@ -119,7 +119,7 @@ class WOWBrandListController: WOWBaseViewController {
      
                 if let dataArr = arr{
                     
-                    let brands  = Mapper<WOWBrandV1Model>().mapArray(dataArr)
+                    let brands  = Mapper<WOWBrandV1Model>().mapArray(JSONObject:dataArr)
                     
                     //循环所有的然后给分组
                     for letter in strongSelf.headerIndexs{

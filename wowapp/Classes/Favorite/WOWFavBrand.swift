@@ -61,14 +61,14 @@ class WOWFavBrand: WOWBaseViewController {
     fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
-        collectionView.register(UINib.nibName(String(WOWFavoriteBrandCell)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
+        collectionView.register(UINib.nibName(String(describing: WOWFavoriteBrandCell.self)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
    
         
     }
     
     //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource   
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
-        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty), owner: self, options: nil)?.last as! FavoriteEmpty
+        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty()), owner: self, options: nil)?.last as! FavoriteEmpty
         
 //        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
@@ -95,7 +95,7 @@ class WOWFavBrand: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeBrand, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
-                let brandList = Mapper<WOWBrandListModel>().mapArray(JSON(result)["favoriteBrandVoList"].arrayObject)
+                let brandList = Mapper<WOWBrandListModel>().mapArray(JSONObject:JSON(result)["favoriteBrandVoList"].arrayObject)
                 if let brandList = brandList{
                     strongSelf.dataArr = brandList
                 }

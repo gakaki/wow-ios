@@ -16,11 +16,11 @@ class WOWBrandStyleModel: WOWBaseModel,Mappable {
     var brandEname          :   String?
     var brandLogoImg        :   String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         id                      <- map["id"]
         brandCname              <- map["brandCname"]
         brandEname              <- map["brandEname"]

@@ -200,7 +200,7 @@ class WOWContentTopicController: WOWBaseViewController {
             if let strongSelf = self{
                 
                 let r                             =  JSON(result)
-                strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(r["productList"].arrayObject) ?? [WOWProductModel]()
+                strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(JSONObject:r["productList"].arrayObject) ?? [WOWProductModel]()
                 //初始化详情页数据
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()

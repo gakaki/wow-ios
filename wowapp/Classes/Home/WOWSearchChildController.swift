@@ -56,7 +56,7 @@ class WOWSearchChildController: WOWBaseViewController{
                     if strongSelf.pageIndex == 1{
                         strongSelf.dataArr = []
                     }
-                    strongSelf.dataArr.appendContentsOf(array)
+                    strongSelf.dataArr.append(contentsOf: array)
                     //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                     if array.count < 10 {
                         strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
@@ -105,11 +105,15 @@ class WOWSearchChildController: WOWBaseViewController{
         for a in 0..<dataArr.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = dataArr[a]
             
-            if model.productId! == sender.object!["productId"] as? Int {
-                model.favorite = sender.object!["favorite"] as? Bool
+
+            if  let send_obj =  sender.object as? [String:AnyObject] {
                 
-                break
+                if model.productId! == send_obj["productId"] as? Int {
+                    model.favorite = send_obj["favorite"] as? Bool
+                    break
+                }
             }
+     
         }
         self.collectionView.reloadData()
     }
@@ -117,7 +121,7 @@ class WOWSearchChildController: WOWBaseViewController{
 
     override func setUI(){
         collectionView.collectionViewLayout = self.layout
-        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
         collectionView.mj_footer = self.mj_footer
     }
     
@@ -135,11 +139,11 @@ extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr.count ?? 0
+        return dataArr.count 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell), for: indexPath) as! WOWGoodsSmallCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWGoodsSmallCell()), for: indexPath) as! WOWGoodsSmallCell
         let model = dataArr[(indexPath as NSIndexPath).row]
         cell.showData(model, indexPath: indexPath)
         
@@ -150,7 +154,7 @@ extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
         let model = dataArr[(indexPath as NSIndexPath).row]
         vc.hideNavigationBar = true
         vc.productId = model.productId ?? 0

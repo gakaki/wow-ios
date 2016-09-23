@@ -19,7 +19,7 @@ class WOWFavoriteProductModel: WOWBaseModel, Mappable {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         productId                          <- map["productId"]
         productImg                         <- map["productImg"]
         productName                        <- map["productName"]

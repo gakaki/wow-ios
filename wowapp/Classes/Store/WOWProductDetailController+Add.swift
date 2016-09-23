@@ -234,7 +234,7 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
             if let strongSelf = self {
                 productDetailAboutCell.endRefresh()
                 
-                let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 
                 if let array = arr{
                     strongSelf.aboutProductArray.appendContentsOf(array)

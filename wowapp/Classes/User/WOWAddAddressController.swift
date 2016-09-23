@@ -179,7 +179,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
         cityTextField.text = message
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+    @objc(pickerView:viewForRow:forComponent:reusingView:) func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.font = UIFont.systemFont(ofSize: 15)
         pickerLabel.numberOfLines = 0

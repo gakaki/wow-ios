@@ -32,13 +32,13 @@ class WOWSettingController: WOWBaseTableViewController {
 //MARK:Private Method
     fileprivate func calCacheSize(){
         
-        KingfisherManager.sharedManager.cache.calculateDiskCacheSizeWithCompletionHandler {[weak self](size) in
-            if let strongSelf = self{
-                let mSize = Float(size) / 1024 / 1024
-                let str = String(format:"%.1f",mSize)
-                strongSelf.cacheLabel.text = str + "m"
-            }
-        }
+//        KingfisherManager.shared.cache.calculateDiskCacheSizeWithCompletionHandler {[weak self](size) in
+//            if let strongSelf = self{
+//                let mSize = Float(size) / 1024 / 1024
+//                let str = String(format:"%.1f",mSize)
+//                strongSelf.cacheLabel.text = str + "m"
+//            }
+//        }
     }
     
     
@@ -57,25 +57,25 @@ class WOWSettingController: WOWBaseTableViewController {
         switch (indexPath as NSIndexPath).section {
         case 0:
             if (indexPath as NSIndexPath).row == 0 {
-                let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWMsgCodeController)) as! WOWMsgCodeController
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController())) as! WOWMsgCodeController
                 vc.entrance = msgCodeEntrance.userEntrance
                 navigationController?.pushViewController(vc, animated: true)
             }
             if (indexPath as NSIndexPath).row == 1 {
-                KingfisherManager.sharedManager.cache.clearDiskCacheWithCompletionHandler({[weak self] in
-                    if let _ = self{
-                        WOWHud.showMsg("清除成功")
-//                        strongSelf.cacheLabel.text = "0.0m"
-                    }
-                })
+//                KingfisherManager.sharedManager.cache.clearDiskCacheWithCompletionHandler({[weak self] in
+//                    if let _ = self{
+//                        WOWHud.showMsg("清除成功")
+////                        strongSelf.cacheLabel.text = "0.0m"
+//                    }
+//                })
                 //清楚yywebimage cache
-                if let c  = YYWebImageManager.sharedManager().cache{
+                if let c  = YYWebImageManager.shared().cache{
                     // get cache capacity
                     DLog("memoryCache.totalCost is \(c.memoryCache.totalCost), memoryCache.totalCount is \(c.memoryCache.totalCount),diskCache.totalCost is \(c.diskCache.totalCost()),diskCache.totalCount is \(c.diskCache.totalCount())")
                     
                     // clear cache
                     c.memoryCache.removeAllObjects()
-                    c.diskCache.removeAllObjectsWithBlock({
+                    c.diskCache.removeAllObjects({
                         DLog("清除成功")
                     })
 

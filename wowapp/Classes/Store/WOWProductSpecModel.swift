@@ -19,12 +19,12 @@ class WOWProductSpecModel: WOWBaseModel,Mappable {
     var colorSpecVoList             : [WOWColorSpecModel]?
     var specColorVoList             : [WOWSpecColorModel]?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         productId                   <- map["productId"]
         productName                 <- map["productName"]
         sizeText                    <- map["sizeText"]
@@ -59,7 +59,8 @@ class WOWColorSpecModel: WOWBaseModel,Mappable {
     var colorDisplayName                   : String?
     var specMapVoList                      : [WOWSpecModel]?
     
-    required init?(_ map: Map) {
+    required
+    init?(map: Map) {
         
         
     }

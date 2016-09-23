@@ -162,7 +162,7 @@ class WOWCommentController: WOWBaseViewController {
                 let json = JSON(result)
                 DLog(json)
             let totalPage = JSON(result)["totalPages"].intValue
-                let arr = Mapper<WOWCommentListModel>().mapArray(result["comment"] as! [String:AnyObject])
+                let arr = Mapper<WOWCommentListModel>().mapArray(JSONObject:result["comment"] as! [String:AnyObject])
                 strongSelf.endRefresh()
                 if let array = arr{
                     if strongSelf.pageIndex == 0{

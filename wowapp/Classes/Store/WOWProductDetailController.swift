@@ -77,7 +77,7 @@ class WOWProductDetailController: WOWBaseViewController {
     var cycleView:CyclePictureView! = {
         let v = CyclePictureView(frame:MGFrame(0, y: 0, width:MGScreenWidth, height:MGScreenWidth), imageURLArray: nil)
         v.placeholderImage = UIImage(named: "placeholder_product")
-        v.currentDotColor = UIColor.blackColor()
+        v.currentDotColor = UIColor.blackColor
         v.otherDotColor   = UIColor(hexString: "#000000", alpha: 0.2)!
         v.timeInterval = 3
         return v
@@ -358,7 +358,7 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as? [String : AnyObject]), successClosure: {[weak self] (result) in
             
             if let strongSelf = self {
-                let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 
                 if let array = arr{
                     strongSelf.aboutProductArray = array

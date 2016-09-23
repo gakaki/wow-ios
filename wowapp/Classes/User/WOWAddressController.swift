@@ -57,7 +57,7 @@ class WOWAddressController: WOWBaseViewController {
     
      override func setUI() {
         super.setUI()
-        tableView.register(UINib.nibName(String(WOWAddressCell)), forCellReuseIdentifier: "WOWAddressCell")
+        tableView.register(UINib.nibName(String(describing: WOWAddressCell.self)), forCellReuseIdentifier: "WOWAddressCell")
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.backgroundColor = GrayColorLevel5
@@ -73,10 +73,10 @@ class WOWAddressController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Addresslist, successClosure: {[weak self] (result) in
             if let strongSelf = self{
-                let arr = Mapper<WOWAddressListModel>().mapArray(JSON(result)["shippingInfoResultList"].arrayObject)
+                let arr = Mapper<WOWAddressListModel>().mapArray(JSONObject:JSON(result)["shippingInfoResultList"].arrayObject)
                 if let array = arr{
                     strongSelf.dataArr = []
-                    strongSelf.dataArr.appendContentsOf(array)
+                    strongSelf.dataArr.append(contentsOf: array)
                     strongSelf.tableView.reloadData()
                 }
             }

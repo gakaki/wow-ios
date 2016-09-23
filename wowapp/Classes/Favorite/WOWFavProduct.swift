@@ -67,7 +67,7 @@ class WOWFavProduct: WOWBaseViewController {
     fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
-        collectionView.register(UINib.nibName(String(WOWFavoritrSingleCell)), forCellWithReuseIdentifier:String(WOWFavoritrSingleCell))
+        collectionView.register(UINib.nibName(String(describing: WOWFavoritrSingleCell.self)), forCellWithReuseIdentifier:String(WOWFavoritrSingleCell.self))
         WOWBorderColor(collectionView)
         
     }
@@ -76,7 +76,7 @@ class WOWFavProduct: WOWBaseViewController {
     //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
     
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
-        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty), owner: self, options: nil)?.last as! FavoriteEmpty
+        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty()), owner: self, options: nil)?.last as! FavoriteEmpty
         
 //        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
@@ -104,7 +104,7 @@ class WOWFavProduct: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProduct, successClosure: { [weak self](result) in
             if let strongSelf = self{
                 WOWHud.dismiss()
-                let productList = Mapper<WOWFavoriteProductModel>().mapArray(JSON(result)["favoriteProductVoList"].arrayObject)
+                let productList = Mapper<WOWFavoriteProductModel>().mapArray(JSONObject:JSON(result)["favoriteProductVoList"].arrayObject)
                 if let productList = productList{
                     strongSelf.dataArr = productList
                 }
@@ -131,7 +131,7 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoritrSingleCell), for: indexPath) as! WOWFavoritrSingleCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoritrSingleCell()), for: indexPath) as! WOWFavoritrSingleCell
         let model = dataArr[(indexPath as NSIndexPath).row]
 //        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.imageView.set_webimage_url(model.productImg)
@@ -140,7 +140,7 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = dataArr[(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = product.productId
         parentNavigationController?.pushViewController(vc, animated: true)

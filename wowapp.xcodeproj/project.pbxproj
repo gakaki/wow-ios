@@ -79,6 +79,7 @@
 		06D051761D81522600BADD38 /* VCDesignerListSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D051751D81522600BADD38 /* VCDesignerListSearchResult.swift */; };
 		06DCF8181D37706400039F8A /* UIViewController+VCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */; };
 		06DDAD751D61811500280210 /* VCBaseVCCategoryFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */; };
+		06FB1EBF1D94CBC200107E2E /* WOWBuyCarRequestVo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB1EBE1D94CBC200107E2E /* WOWBuyCarRequestVo.swift */; };
 		06FB94B11D6306C100554871 /* VCTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B01D6306C100554871 /* VCTopic.swift */; };
 		06FB94B51D63FB4800554871 /* ModelVOCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B41D63FB4800554871 /* ModelVOCoupon.swift */; };
 		06FB94B71D64102C00554871 /* ModelTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB94B61D64102C00554871 /* ModelTopic.swift */; };
@@ -540,6 +541,7 @@
 		06D48E5D1D5722F400C11088 /* FlexboxLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlexboxLayout.framework; sourceTree = "<group>"; };
 		06DCF8171D37706400039F8A /* UIViewController+VCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+VCManager.swift"; sourceTree = "<group>"; };
 		06DDAD741D61811500280210 /* VCBaseVCCategoryFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCBaseVCCategoryFound.swift; sourceTree = "<group>"; };
+		06FB1EBE1D94CBC200107E2E /* WOWBuyCarRequestVo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBuyCarRequestVo.swift; sourceTree = "<group>"; };
 		06FB94B01D6306C100554871 /* VCTopic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCTopic.swift; sourceTree = "<group>"; };
 		06FB94B41D63FB4800554871 /* ModelVOCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVOCoupon.swift; sourceTree = "<group>"; };
 		06FB94B61D64102C00554871 /* ModelTopic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTopic.swift; sourceTree = "<group>"; };
@@ -1812,6 +1814,7 @@
 			children = (
 				29FF25341CFDA86300DF2A9B /* WOWBuyCarModel.swift */,
 				636C33DD1D5314F200CA4E69 /* WOWEditOrderModel.swift */,
+				06FB1EBE1D94CBC200107E2E /* WOWBuyCarRequestVo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2232,7 +2235,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "小黑";
 				TargetAttributes = {
 					29FF250F1CFDA75700DF2A9B = {
@@ -2664,6 +2667,7 @@
 				2DB923D21D703A59001EA570 /* WOWUploadManager.swift in Sources */,
 				63884A071D64150F00FCCFCC /* WOWCategoryCell.swift in Sources */,
 				29FF26641CFDA86300DF2A9B /* WOWSearchBarView.swift in Sources */,
+				06FB1EBF1D94CBC200107E2E /* WOWBuyCarRequestVo.swift in Sources */,
 				63C42DC71D646B0400879FEB /* PhotoToolBar.swift in Sources */,
 				29FF26801CFDA86300DF2A9B /* PageControllerDataSource.swift in Sources */,
 				06B7661C1D77E96600F803A9 /* README.md in Sources */,
@@ -2767,6 +2771,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2777,8 +2782,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2815,6 +2822,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2825,8 +2833,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2847,6 +2857,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "5ecc375a-c811-4677-9947-f30c285aef7d";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2855,6 +2866,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D82CF16CDE3CFCF20061FE2 /* Pods-wowapp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -2978,6 +2990,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E5C8E688B6F27D65B9C07E1 /* Pods-wowapp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;

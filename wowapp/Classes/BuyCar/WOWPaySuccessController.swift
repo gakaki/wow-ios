@@ -30,10 +30,15 @@ class WOWPaySuccessController: WOWBaseViewController {
         let dotteShapLayer = CAShapeLayer()
         let mdotteShapePath = CGMutablePath()
         dotteShapLayer.fillColor = UIColor.clear.cgColor
-        dotteShapLayer.strokeColor = MGRgb(151, g: 151, b: 151).CGColor
+        dotteShapLayer.strokeColor = MGRgb(151, g: 151, b: 151).cgColor
         dotteShapLayer.lineWidth = 0.5
-        CGPathMoveToPoint(mdotteShapePath, nil, 15, 162)
-        CGPathAddLineToPoint(mdotteShapePath, nil, MGScreenWidth - 15, 162)
+        
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: 30, y: 0))
+        
+        mdotteShapePath.move(to: CGPoint(x: 15, y: 162))
+        mdotteShapePath.addLine(to: CGPoint(x: MGScreenWidth - 15, y: 162))
+        
         dotteShapLayer.path = mdotteShapePath
         let arr :NSArray = NSArray(array: [2,2])
         dotteShapLayer.lineDashPhase = 1.0

@@ -60,7 +60,7 @@ class WOWCouponController: WOWBaseViewController {
                 
                 let r                                     =  JSON(result)
                 
-                let arr = Mapper<WOWCouponModel>().mapArray(r["couponList"].arrayObject)
+                let arr = Mapper<WOWCouponModel>().mapArray(JSONObject:r["couponList"].arrayObject)
                 if let array = arr{
                     
                     if strongSelf.pageIndex == 1{

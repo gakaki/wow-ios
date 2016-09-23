@@ -29,7 +29,7 @@ class WOWClickLikeAction {
            
                 let favorite = JSON(result)["favorite"].bool ?? false
                 
-                isFavorite(isFavorite: favorite)
+                isFavorite(favorite)
             
             
         }) { (errorMsg) in
@@ -56,13 +56,11 @@ class WOWClickLikeAction {
             
             
                 let favorite = JSON(result)["favorite"].bool
-                var params = [String: AnyObject]?()
-                
-                params = ["productId": productId, "favorite": favorite!]
+                let params = ["productId": productId, "favorite": favorite!] as [String : Any]
                 
                 NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
             
-                isFavorite(isFavorite: favorite)
+                isFavorite(favorite)
             
             
         }) { (errorMsg) in

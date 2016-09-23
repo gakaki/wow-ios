@@ -33,14 +33,14 @@ class WOWProductDetailDescCell: UITableViewCell {
     }
  
     @IBAction func brandClick(_ sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.brandID = productModel?.brandId 
         vc.entrance = .brandEntrance
         vc.hideNavigationBar = true
         UIApplication.currentViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func designerClick(_ sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
         vc.designerId = productModel?.designerId
         vc.entrance = .designerEntrance
         vc.hideNavigationBar = true

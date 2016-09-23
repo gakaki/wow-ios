@@ -198,6 +198,10 @@ public enum RequestApi{
 
 
 extension RequestApi:TargetType{
+    public var task: Task {
+        return Task()
+    }
+
 
   
    

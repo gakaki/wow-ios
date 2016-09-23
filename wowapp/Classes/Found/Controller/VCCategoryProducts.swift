@@ -96,13 +96,13 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
                 return self.is_load_more(y)
             }
             .distinctUntilChanged()
-            .subscribeNext { [unowned self] in
+            .subscribe { [unowned self] in
                 self.title = "contentOffset.y = \($0)"
 
-                if $0 == true {
+//                if $0 == true {
                     self.pageIndex = self.pageIndex + 1
                     self.request()
-                }
+//                }
                 
             }
             .addDisposableTo(rx_disposeBag)
@@ -223,7 +223,7 @@ extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     //选中时的操作
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          let model = vo_products[indexPath.row]
          toVCProduct(model.productId)
     }

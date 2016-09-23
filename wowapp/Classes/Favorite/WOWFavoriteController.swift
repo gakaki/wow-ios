@@ -33,16 +33,16 @@ class WOWFavoriteController: WOWBaseViewController {
         controllerArray.append(designerVC)
         
         let parameters: [CAPSPageMenuOption] = [
-            .scrollMenuBackgroundColor(UIColor.whiteColor),
+            .scrollMenuBackgroundColor(UIColor.white),
             .menuHeight(40),
             .menuMargin((MGScreenWidth - 180)/4),
-            .menuItemFont(UIFont.systemFontOfSize(14)),
+            .menuItemFont(UIFont.systemFont(ofSize: 14)),
             .unselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
             .menuItemWidth(60),
-            .selectionIndicatorColor(UIColor.blackColor),
-            .selectedMenuItemLabelColor(UIColor.blackColor),
+            .selectionIndicatorColor(UIColor.black),
+            .selectedMenuItemLabelColor(UIColor.black),
             .menuItemSeparatorPercentageHeight(0.1),
-            .BottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
+            .bottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
         ]
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)

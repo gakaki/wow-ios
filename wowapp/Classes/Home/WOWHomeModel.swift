@@ -31,11 +31,11 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleContentList       :  WOWModelVoTopic?//产品列表CollectionView
     var moduleAdditionalInfo    :   WOWHomeAdditionalInfo? // 配置信息～
 
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         moduleType    <- map["moduleType"]
         
         switch moduleType! {
@@ -69,11 +69,11 @@ class WOWHomeAdditionalInfo: WOWBaseModel,Mappable {
     
     
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         
         imageUrl            <- map["imageUrl"]
         showTitle           <- map["showTitle"]

@@ -30,12 +30,12 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
     var imageSerial                 :WOWImageSerial?
     var favorite                    : Bool?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         id              <- map["id"]
         topicName       <- map["topicName"]
         topicImg        <- map["topicImg"]
@@ -59,11 +59,11 @@ class WOWImageSerial: WOWBaseModel, Mappable {
     var records:            [WOWProductPicTextModel]?
     
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         serialId        <- map["serialId"]
         records         <- map["records"]
     }

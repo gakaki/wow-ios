@@ -24,10 +24,10 @@ class ReturnInfo: Mappable {
     var data:AnyObject? //若返回无数据，returnObject字段也得带上,可为空值
     var code: String?
     var message: String?
-    required init?(_ map: Map) {
+    required init?(map: Map) {
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         data          <-    map["data"]
         code          <-    map["resCode"]
         message       <-    map["resMsg"]
@@ -62,6 +62,7 @@ class WOWNetManager {
         requestProvider.request(target) { (result) in
        
             switch result{
+                
                 case let .Success(response):
                     let info = Mapper<ReturnInfo>().map(JSON(data: response.data,options: .AllowFragments).object)
                     
@@ -86,8 +87,8 @@ class WOWNetManager {
                        
                         guard code == RequestCode.Success.rawValue else{
                             if code == RequestCode.Login.rawValue {
-                                NSNotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-                                NSNotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+                                NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+                                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                                 WOWHud.showMsg("登录已过期，请重新登录")
                                 WOWUserManager.exitLogin()
                                 if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){

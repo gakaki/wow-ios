@@ -110,7 +110,7 @@ class WOWOrderController: WOWBaseViewController {
                 strongSelf.isRequest = true
                 strongSelf.endRefresh()
                 
-                let arr = Mapper<WOWNewOrderListModel>().mapArray(json)
+                let arr = Mapper<WOWNewOrderListModel>().mapArray(JSONObject:json)
                 
                 if let array = arr{
     

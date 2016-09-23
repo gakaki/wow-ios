@@ -84,7 +84,8 @@ class VCDesignerList: WOWBaseViewController {
         searchController.searchBar.barTintColor = UIColor.white
         searchController.searchBar.setValue("取消", forKey:"_cancelButtonText")
         if #available(iOS 9.0, *) {
-            UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.blackColor(),NSFontAttributeName:Fontlevel002], forState: .Normal)
+            UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+            .setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.black,NSFontAttributeName:Fontlevel002], for: .normal)
         } else {
             
         }
@@ -116,13 +117,13 @@ class VCDesignerList: WOWBaseViewController {
                 
                 let arr        = JSON(result)["designerVoList"].arrayObject
                 
-                if let dataArr = arr , let designers = Mapper<WOWDesignerModel>().mapArray(dataArr) {
+                if let dataArr = arr , let designers = Mapper<WOWDesignerModel>().mapArray(JSONObject:dataArr) {
                     
                     //循环所有的然后给分组
                     for letter in strongSelf.headerIndexs{
                         let group_row    = designers.filter{ (d) in d.designerNameFirstLetter == letter }
                         strongSelf.dataArray.append(group_row)
-                        strongSelf.originalArray.appendContentsOf(group_row)
+                        strongSelf.originalArray.append(contentsOf: group_row)
                     }
                     //for #
                     let group_row    = designers.filter{ (d) in strongSelf.isStringContainsNumber(d.designerNameFirstLetter ?? "") == true }
@@ -131,7 +132,7 @@ class VCDesignerList: WOWBaseViewController {
                     strongSelf.originalArray.removeLast()
                     
                     strongSelf.dataArray.append(group_row)
-                    strongSelf.originalArray.appendContentsOf(group_row)
+                    strongSelf.originalArray.append(contentsOf: group_row)
                     
                     
                 }
@@ -202,7 +203,7 @@ extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
 
         let model = dataArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         
-        let vc                  = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController.self)) as! WOWBrandHomeController
+        let vc                  = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.designerId           = model.designerId
         vc.entrance             = .designerEntrance
         vc.hideNavigationBar    = true
@@ -216,7 +217,7 @@ extension VCDesignerList:VCDesignerListSearchResultDelegate{
     func searchResultSelect(_ model:WOWDesignerModel){
         //        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
         searchController.isActive = false
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController.self)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.designerId = model.designerId
         vc.entrance             = .designerEntrance
         vc.hideNavigationBar = true

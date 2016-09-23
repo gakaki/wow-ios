@@ -37,7 +37,7 @@ enum carEntrance{
 class WOWBuyBackView: UIView {
 //MARK:Lazy
     lazy var buyView:WOWGoodsBuyView = {
-        let v = Bundle.loadResourceName(String(WOWGoodsBuyView)) as! WOWGoodsBuyView
+        let v = Bundle.loadResourceName(String(describing: WOWGoodsBuyView())) as! WOWGoodsBuyView
         v.closeButton.addTarget(self, action: #selector(closeButtonClick), for:.touchUpInside)
         v.isUserInteractionEnabled = true
         return v
@@ -432,7 +432,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     fileprivate func showResult(_ count:Int){
         if count <= 1 {
             subButton.isEnabled = false
-            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), forState: UIControlState.Normal)
+            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.Normal)
         }else {
             subButton.isEnabled = true
             subButton.setTitleColor(UIColor.black, for: UIControlState())
@@ -691,7 +691,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
            
             showResult(skuCount)
             
-            sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .Disabled)
+            sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .disabled)
             
         }
     }
@@ -726,7 +726,7 @@ extension WOWGoodsBuyView {
             self.path.move(to: _layer.position)
             
             //动画移动的位置
-            self.path.addQuadCurveToPoint(CGPoint(x: MGScreenWidth - 22, y: -MGScreenHeight + self.size.height + 42), controlPoint: CGPoint(x: 50, y: -MGScreenHeight/4))
+            self.path.addQuadCurve(to: CGPoint(x: MGScreenWidth - 22, y: -MGScreenHeight + self.size.height + 42), controlPoint: CGPoint(x: 50, y: -MGScreenHeight/4))
             
             
         }

@@ -80,50 +80,50 @@ class VCFound: VCBaseVCCategoryFound {
                 strongSelf.endRefresh()
                 
                 var r                             =  JSON(result)
-                strongSelf.data                   =  Mapper<WowModulePageVO>().mapArray(r["modules"].arrayObject) ?? [WowModulePageVO]()
+                strongSelf.data                   =  Mapper<WowModulePageVO>().mapArray(JSONObject:r["modules"].arrayObject) ?? [WowModulePageVO]()
                 
                 for  t:WowModulePageVO in strongSelf.data
                 {
                     if t.moduleType == 101
                     {
                         if let s  = t.contentTmp!["banners"] as? [AnyObject] {
-                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
+                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                         }
                     }
                     if t.moduleType == 302
                     {
                         if let s  = t.contentTmp!["categories"] as? [AnyObject] {
-                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
+                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                         }
                     }
                     if t.moduleType == 401
                     {
                         if let s  = t.contentTmp!["products"] as? [AnyObject] {
-                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
+                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                         }
                     }
                     if t.moduleType == 201
                     {
                         if let s  = t.contentTmp  {
-                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(s)
+                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(JSONObject:s)
                         }
                     }
                     if t.moduleType == 501
                     {
                         if let s  = t.contentTmp  {
-                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(s)
+                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(JSONObject:s)
                         }
                     }
                     if t.moduleType == 301
                     {
                         if let s  = t.contentTmp!["categories"] as? [AnyObject] {
-                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(s) ?? [WowModulePageItemVO]()
+                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                         }
                     }
                     if t.moduleType == 201
                     {
                         if let s  = t.contentTmp {
-                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(s)
+                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(JSONObject:s)
                         }
                     }
                     t.moduleClassName     =  ModulePageType.getIdentifier(t.moduleType!)
@@ -151,7 +151,7 @@ class VCFound: VCBaseVCCategoryFound {
     
     //用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: vo_recommend_product_id ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: vo_recommend_product_id ), successClosure: {[weak self] (result) in
             
 
             if let strongSelf = self{
@@ -190,7 +190,12 @@ class VCFound: VCBaseVCCategoryFound {
         for a in 0 ..< self.data.count {
             let model = self.data[a]
             if model.moduleType == 501 {
-                model.moduleContentItem?.favorite = sender.object!["favorite"] as? Bool
+                
+                if  let send_obj =  sender.object as? [String:AnyObject] {
+                    
+                        model.moduleContentItem?.favorite = send_obj["favorite"] as? Bool
+                        break
+                }
                 break
             }
         }

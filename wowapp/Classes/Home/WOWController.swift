@@ -241,7 +241,7 @@ class WOWController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.endRefresh()
                 
-                let bannerList = Mapper<WOWHomeModle>().mapArray(JSON(result)["modules"].arrayObject)
+                let bannerList = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
                 
                 if let brandArray = bannerList{
                     
@@ -281,7 +281,7 @@ class WOWController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.mj_footerHome.endRefreshing()
                 
-                let bannerList = Mapper<WOWFoundProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                let bannerList = Mapper<WOWFoundProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 
                 if let bannerList = bannerList{
                     if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据

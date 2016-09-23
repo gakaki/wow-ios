@@ -230,7 +230,7 @@ extension WOWSearchController {
             if let strongSelf = self {
                 strongSelf.endRefresh()
                 
-                let arr = Mapper<WOWProductModel>().mapArray(JSON(result)["productVoList"].arrayObject)
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 if let array = arr{
                     strongSelf.dataArr = []
                     strongSelf.dataArr = array

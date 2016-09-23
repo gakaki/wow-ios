@@ -172,17 +172,17 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求创建订单
     func requestOrderCreat() -> Void {
-        var params = [String: AnyObject]()
+        var params = [String: AnyObject?]()
         // 截取两位小数点，确保金额正确
         let totalAmoutStr = String(format: "%.2f",orderSettle?.totalAmount ?? 0)
         
         if let endUserCouponId = couponModel?.id {
-            params = ["shippingInfoId": (addressInfo?.id)! as AnyObject, "orderSource": 2 as AnyObject, "orderAmount": totalAmoutStr, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
+            params = ["shippingInfoId": addressInfo?.id! as Optional<AnyObject>, "orderSource": 2 as Optional<AnyObject> , "orderAmount": totalAmoutStr as AnyObject?? ?? "" as AnyObject?, "remark": tipsTextField.text ?? "", "endUserCouponId": endUserCouponId]
         }else {
-            params = ["shippingInfoId": (addressInfo?.id)! as AnyObject, "orderSource": 2 as AnyObject, "orderAmount": totalAmoutStr, "remark": tipsTextField.text ?? ""]
+            params = ["shippingInfoId": addressInfo?.id! as Optional<AnyObject>, "orderSource": 2 as Optional<AnyObject> , "orderAmount": totalAmoutStr as AnyObject?? ?? "", "remark": tipsTextField.text  ?? ""]
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params as [String : AnyObject]?), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 
                 //重新计算购物车数量
@@ -291,18 +291,18 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell:UITableViewCell?
         switch (indexPath as NSIndexPath).section {
-        case 0: //地址
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderAddressCell), for: indexPath) as! WOWOrderAddressCell
+        case 0: //地址
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderAddressCell()), for: indexPath) as! WOWOrderAddressCell
             cell.showData(addressInfo)
             returnCell = cell
         case 1: //商品清单
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductOrderCell), for: indexPath) as! WOWProductOrderCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductOrderCell()), for: indexPath) as! WOWProductOrderCell
             if let productArr = productArr {
                 cell.showData(productArr[(indexPath as NSIndexPath).row])
             }
             returnCell = cell
         case 2: //运费及优惠券信息
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderFreightCell), for: indexPath) as! WOWOrderFreightCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderFreightCell()), for: indexPath) as! WOWOrderFreightCell
             if (indexPath as NSIndexPath).row == 0 {
                 cell.leftLabel.text = "运费"
                 let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0],counts:[1])
@@ -328,7 +328,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             }
             returnCell = cell
         case 3: //订单备注
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell), for:indexPath) as! WOWTipsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell()), for:indexPath) as! WOWTipsCell
             cell.textView.placeHolder = "写下您的特殊要求"
             tipsTextField = cell.textView
             returnCell = cell
@@ -342,7 +342,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row ){
         case (0, 0):
             
-            let vc = UIStoryboard.initialViewController("User", identifier:String(WOWAddressController)) as! WOWAddressController
+            let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddressController.self)) as! WOWAddressController
             vc.entrance = WOWAddressEntrance.sureOrder
             vc.action = {(model:AnyObject) in
                 self.addressInfo = model as? WOWAddressListModel
@@ -444,7 +444,7 @@ extension WOWEditOrderController: selectPayDelegate {
             if let strongSelf = self {
                 let json = JSON(result)
                 let charge = json["charge"]
-                strongSelf.goPay(charge.object)
+                strongSelf.goPay(charge.object as AnyObject)
             }
             
             }) { (errorMsg) in

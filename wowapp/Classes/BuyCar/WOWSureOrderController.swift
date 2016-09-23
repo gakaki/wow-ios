@@ -76,7 +76,7 @@ class WOWSureOrderController: WOWBaseViewController {
                 let totalPrice = json["total"].string ?? ""
                 let orderid    = json["order_id"].string ?? ""
                 if charge != nil{
-                    strongSelf.goPay(charge.object,totalPrice: totalPrice,orderid: orderid)
+                    strongSelf.goPay(charge.object as AnyObject,totalPrice: totalPrice,orderid: orderid)
                 }
             }
         }) { (errorMsg) in
@@ -93,8 +93,8 @@ class WOWSureOrderController: WOWBaseViewController {
     fileprivate func goPay(_ charge:AnyObject,totalPrice:String,orderid:String){
         DispatchQueue.main.async { 
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
-                if let strongSelf = self{
-                    switch ret{
+                if let strongSelf = self,let ret_str = ret as! String {
+                    switch ret_str{
                     case "success":
                         let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                         vc.payMethod = (strongSelf.payType == "ali" ? "支付宝":"微信")

@@ -122,7 +122,7 @@ open class CollectionViewWaterfallLayout: UICollectionViewLayout {
             return;
         }
         
-        assert(delegate!.conforms(to: CollectionViewWaterfallLayoutDelegate), "UICollectionView's delegate should conform to WaterfallLayoutDelegate protocol")
+        assert(delegate!.conforms(to: CollectionViewWaterfallLayoutDelegate.self), "UICollectionView's delegate should conform to WaterfallLayoutDelegate protocol")
         assert(columnCount > 0, "WaterfallFlowLayout's columnCount should be greater than 0")
         
         // Initialize variables

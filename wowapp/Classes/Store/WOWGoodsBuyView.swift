@@ -683,7 +683,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
             showResult(skuCount)
             
-            sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .Normal)
+            sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), for: .Normal)
 
             
         }else {
@@ -780,7 +780,7 @@ extension WOWGoodsBuyView {
         self._layer.add(groups, forKey: "group")
         
     }
-    override func animationDidStop(_ anim: CAAnimation, finished flag:Bool)
+     func animationDidStop(anim: CAAnimation, finished flag:Bool)
     {
         
         if anim == self._layer.animation(forKey: "group"){

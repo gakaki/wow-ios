@@ -19,7 +19,7 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     @IBOutlet weak var totalPriceLabel: UILabel!
     
     let identifier = "WOWTypeCollectionCell"
-    var typeArr = Array<String>?()
+    var typeArr = [String]()
     var model:WOWCarProductModel!
     
     override func awakeFromNib() {
@@ -74,7 +74,7 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
         
         
-        let item = typeArr?[index]
+        let item = typeArr[index]
         let title = item ?? ""
         let width = title.size(Fontlevel004).width + 12
         return width
@@ -83,10 +83,8 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     //MARK: - UICollectionView Delegate/Datasource Methods
     func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTypeCollectionCell
-        if let arr = typeArr {
-            let item = arr[(indexPath as NSIndexPath).row]
+            let item = typeArr[(indexPath as NSIndexPath).row]
             cell.textLabel.text = item
-        }
         return cell
         
     }
@@ -96,7 +94,7 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return typeArr == nil ? 0 : (typeArr?.count)!
+        return typeArr == nil ? 0 : (typeArr.count)!
     }
     
 }

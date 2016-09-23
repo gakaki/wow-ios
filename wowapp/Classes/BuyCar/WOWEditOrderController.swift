@@ -188,7 +188,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderSource": orderSource as Optional<AnyObject>,
                 "orderAmount": totalAmout as Optional<AnyObject>,
                 "remark": remark as Optional<AnyObject>,
-                "endUserCouponId": endUserCouponId
+                "endUserCouponId": endUserCouponId as Optional<AnyObject>
             ]
             
         }else {
@@ -238,8 +238,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 "shippingInfoId": shippingInfoId as AnyObject,
                 "orderSource": orderSource as AnyObject,
                 "orderAmount": totalAmount as AnyObject,
-                "remark": remark,
-                "endUserCouponId": endUserCouponId
+                "remark": remark as AnyObject,
+                "endUserCouponId": endUserCouponId as AnyObject
             ]
             
         }else {

@@ -76,12 +76,12 @@ class WOWSpecModel: WOWBaseModel,Mappable {
     var specName                            : String?
     var subProductInfo                      : WOWProductInfoModel?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         specName                            <- map["specName"]
         subProductInfo                      <- map["subProductInfo"]
         
@@ -98,12 +98,12 @@ class WOWProductInfoModel: WOWBaseModel,Mappable {
     var hasStock                            : Bool?
     var productQty                          : Int?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         subProductId                        <- map["subProductId"]
         productColorImg                     <- map["productColorImg"]
         sizeText                            <- map["sizeText"]
@@ -119,12 +119,12 @@ class WOWSpecColorModel: WOWBaseModel,Mappable {
     var specName                            : String?
     var colorMapVoList                      : [WOWColorModel]?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         specName                            <- map["specName"]
         colorMapVoList                      <- map["colorMapVoList"]
         
@@ -135,12 +135,12 @@ class WOWColorModel: WOWBaseModel,Mappable {
     var colorDisplayName                    : String?
     var subProductInfo                      : WOWProductInfoModel?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         colorDisplayName                    <- map["colorDisplayName"]
         subProductInfo                      <- map["subProductInfo"]
         

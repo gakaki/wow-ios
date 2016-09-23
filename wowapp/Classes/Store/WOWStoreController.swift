@@ -69,7 +69,7 @@ class WOWStoreController: WOWBaseViewController {
                 strongSelf.brandsCount = JSON(result)["brands_count"].intValue
                 let brands = Mapper<WOWBrandListModel>().mapArray(JSONObject:JSON(result)["brands"].arrayObject)
                 if let brandArray = brands{
-                    strongSelf.brandArr.appendContentsOf(brandArray)
+                    strongSelf.brandArr.append(contentsOf: brandArray)
                 }
                 let products = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["products"].arrayObject)
                 if let productArr = products{

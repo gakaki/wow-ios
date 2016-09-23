@@ -137,7 +137,7 @@ extension WOWFavBrand:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = dataArr[(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
         vc.brandID = model.brandId
         vc.entrance = .brandEntrance
         vc.hideNavigationBar = true

@@ -36,7 +36,7 @@ class WOWSearchLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
             let arrCell =  super.layoutAttributesForElements(in: rect)
-            for i in 0..<arrCell.count {
+            for i in 0..<arrCell?.count {
                 
                 //当前 UICollectionViewLayoutAttributes
                 let currentLayout = arrCell[i]

@@ -85,7 +85,7 @@ extension WOWCategoryModel:Mappable{
 
     }
     
-    convenience init?(_ map: Map) {
+    convenience init?(map: Map) {
         self.init()
     }
 }
@@ -109,7 +109,7 @@ final class WOWFoundCategoryModel : WOWBaseModel,Mappable{
     var productImg :String?
     
  
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         categoryName            <-    map["categoryName"]
         categoryID              <-    map["id"]
         categoryIconSmall       <-    map["categoryIconSmall"]
@@ -127,7 +127,7 @@ final class WOWFoundCategoryModel : WOWBaseModel,Mappable{
 
     }
     
-    convenience init?(_ map: Map) {
+    convenience init?(map: Map) {
         self.init()
     }
 }
@@ -144,11 +144,11 @@ final class WOWSubCategoryModel: WOWBaseModel,Mappable{
 }
 
 extension WOWSubCategoryModel{
-    convenience init?(_ map: Map) {
+    convenience init?(map: Map) {
         self.init()
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         subCatName    <-    map["name"]
         subCatID      <-    map["cid"]
     }

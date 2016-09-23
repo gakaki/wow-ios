@@ -171,7 +171,7 @@ class HomeBottomCell: UITableViewCell {
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         var originalPriceStr = ""
         if let originalPrice = model.originalPrice {
-            originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ?? 0],counts:[1])
+            originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
         }
         // 格式化富文本
         priceLbTwo.strokeWithText(sellPrice ?? "", str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
@@ -192,9 +192,9 @@ class HomeBottomCell: UITableViewCell {
     }
     func price(_ sellPrice:Double , originalPrice:Double) -> Array<String> {
         
-        let sellPrice = WOWCalPrice.calTotalPrice([sellPrice ?? 0],counts:[1])
+        let sellPrice = WOWCalPrice.calTotalPrice([sellPrice ],counts:[1])
         
-        let originalPriceStr =  WOWCalPrice.calTotalPrice([originalPrice ?? 0],counts:[1])
+        let originalPriceStr =  WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
         
         return [sellPrice,originalPriceStr]
         

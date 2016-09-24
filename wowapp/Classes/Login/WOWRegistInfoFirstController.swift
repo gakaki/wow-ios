@@ -50,7 +50,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     }
     
     fileprivate func configTable(){
-        nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView), owner: self, options: nil)?.last as! WOWRegistInfoSureView
+        nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView()), owner: self, options: nil)?.last as! WOWRegistInfoSureView
         nextView.sureButton.addTarget(self, action: #selector(nextButton), for: .touchUpInside)
         nextView.tipsLabel.isHidden = true
         nextView.frame = CGRect(x: 0,y: 0, width: self.view.w, height: 200)
@@ -85,7 +85,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         guard let nickName = nickTextField.text , !nickName.isEmpty else{
             WOWHud.showMsg("请输入昵称")
             nextView.tipsLabel.isHidden = false
-            nextView.tipsLabel.textColor = .red()
+            nextView.tipsLabel.textColor = UIColor.red
             nextView.tipsLabel.text = "请输入昵称"
             return
         }
@@ -98,7 +98,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
 //                WOWUserManager.userHeadImageUrl = strongSelf.userInfoFromWechat.icon
                 WOWUserManager.userDes = strongSelf.descTextField.text ?? ""
                 
-                let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistInfoSecondController)) as! WOWRegistInfoSecondController
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistInfoSecondController())) as! WOWRegistInfoSecondController
                 vc.isPresent = strongSelf.isPresent
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
                 

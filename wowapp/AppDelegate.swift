@@ -304,7 +304,7 @@ extension AppDelegate{
         
         let navBar = UINavigationBar.appearance()
         navBar.isTranslucent = false
-        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.white, size:CGSize(width: MGScreenWidth, height: 64)), forBarPosition: .Any, barMetrics: .Default)
+        navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.white, size:CGSize(width: MGScreenWidth, height: 64)), for: .any, barMetrics: .default)
         navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSize(width: MGScreenWidth, height: 0.5)) //去除导航栏下方黑线
         
         //        navBar.shadowImage = UIImage()

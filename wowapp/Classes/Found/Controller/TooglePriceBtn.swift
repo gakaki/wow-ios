@@ -8,7 +8,9 @@ class TooglePriceBtn:UIButton {
     
     var asc:Int {
         get {
-            return Int(upDown)
+            return 1
+            //TODO
+//            return Int(bool:upDown)
         }
     }
     

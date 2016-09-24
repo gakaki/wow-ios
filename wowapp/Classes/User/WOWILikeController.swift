@@ -70,7 +70,7 @@ class WOWILikeController: WOWBaseViewController {
         view.addSubview(collectionView)
         collectionView.mj_footer = self.mj_footer
         collectionView.mj_header = self.mj_header
-        collectionView.register(UINib.nibName(String(WOWGoodsSmallCell)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
+        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:"WOWGoodsSmallCell")
         collectionView.mj_header = self.mj_header
         collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
     }
@@ -103,7 +103,7 @@ class WOWILikeController: WOWBaseViewController {
                         strongSelf.dataArr = []
                     }
                         for item in js{
-                        let model = Mapper<WOWFavoriteListModel>().map(item)
+                            let model = Mapper<WOWFavoriteListModel>().map(JSONObject:item)
                         if let m = model{
                             strongSelf.dataArr.append(m)
                         }
@@ -167,23 +167,23 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = dataArr[(indexPath as NSIndexPath).row]
         if selectIndex == 0 { //场景
-            let sence = UIStoryboard.initialViewController("Home", identifier:String(WOWSenceController.self)) as! WOWSenceController
+            let sence = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWSenceController.self)) as! WOWSenceController
             sence.hideNavigationBar = true
             sence.sceneID = String(describing: model.id)
             navigationController?.pushViewController(sence, animated: true)
         }else{ //单品
-            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWGoodsDetailController)) as! WOWGoodsDetailController
+            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWGoodsDetailController())) as! WOWGoodsDetailController
             vc.productId = model.id
             vc.hideNavigationBar = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "暂无您喜欢的" + (selectIndex == 0 ? "场景哦...":"单品哦...")
-        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
-        return attri
-    }
+    //TODO
+//    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+//        let text = "暂无您喜欢的" + (selectIndex == 0 ? "场景哦...":"单品哦...")
+//        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+//        return attri
+//    }
     
     func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
         return -40

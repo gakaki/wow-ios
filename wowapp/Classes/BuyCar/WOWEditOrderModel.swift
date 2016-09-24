@@ -18,7 +18,7 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
     var deduction                            : Double?
     var avaliableCouponCount                 : Int?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     

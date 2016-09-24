@@ -71,9 +71,9 @@ class PhotoViewCell: UICollectionViewCell {
     /// 懒加载 对外可读
     fileprivate(set) lazy var imageView: AnimatedImageView = {[unowned self] in
         let imageView = AnimatedImageView()
-        imageView.contentMode = .ScaleAspectFit
-        imageView.userInteractionEnabled = true
-        imageView.backgroundColor = UIColor.blackColor()
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        imageView.backgroundColor = UIColor.black
         return imageView
     }()
     /// 懒加载
@@ -232,42 +232,42 @@ extension PhotoViewCell {
         }
         
         image =  image ?? UIImage(named: "placeholder_product")
-        
-        downloadTask = imageView.kf_setImageWithURL(url, placeholderImage: image, optionsInfo: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
-            let progress = Double(receivedSize) / Double(totalSize)
-            //            print(progress)
-            if let sSelf = self {
-                
-                sSelf.hud?.progress = progress
-            }
-            
-        }) {[weak self] (image, error, cacheType, imageURL) in
-            // 加载完成
-            // 注意: 因为这个闭包是多线程调用的 所以可能存在 没有显示完图片,就点击了返回
-            // 这个时候self已经被销毁了 所以使用[unonwed self] 将会导致"野指针"的问题
-            // 使用 [weak self] 保证安全访问self
-            // 但是这也不是绝对安全的, 比如在 self 销毁之前, 进入了这个闭包 那么strongSelf 有值 进入
-            // 如果在这时恰好 self 销毁了,那么之后调用strongSelf 都将会出错crash
-            
-            //            withExtendedLifetime(self, { () -> self in
-            //
-            //            })
-            if let strongSelf = self  {
-                
-                strongSelf.image = image
-                strongSelf.hud?.hideLoadingView()
-                
-                if let _ = image {//加载成功
-                    strongSelf.hud?.hideHUD()
-                    return
-                }
-                
-                // 提示加载错误
-                strongSelf.hud?.showHUD("加载失败", autoHide: false, afterTime: 0.0)
-            }
-            
-            
-        }
+        //TODO
+//        downloadTask = imageView.kf_setImageWithURL(url, placeholderImage: image, optionsInfo: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
+//            let progress = Double(receivedSize) / Double(totalSize)
+//            //            print(progress)
+//            if let sSelf = self {
+//                
+//                sSelf.hud?.progress = progress
+//            }
+//            
+//        }) {[weak self] (image, error, cacheType, imageURL) in
+//            // 加载完成
+//            // 注意: 因为这个闭包是多线程调用的 所以可能存在 没有显示完图片,就点击了返回
+//            // 这个时候self已经被销毁了 所以使用[unonwed self] 将会导致"野指针"的问题
+//            // 使用 [weak self] 保证安全访问self
+//            // 但是这也不是绝对安全的, 比如在 self 销毁之前, 进入了这个闭包 那么strongSelf 有值 进入
+//            // 如果在这时恰好 self 销毁了,那么之后调用strongSelf 都将会出错crash
+//            
+//            //            withExtendedLifetime(self, { () -> self in
+//            //
+//            //            })
+//            if let strongSelf = self  {
+//                
+//                strongSelf.image = image
+//                strongSelf.hud?.hideLoadingView()
+//                
+//                if let _ = image {//加载成功
+//                    strongSelf.hud?.hideHUD()
+//                    return
+//                }
+//                
+//                // 提示加载错误
+//                strongSelf.hud?.showHUD("加载失败", autoHide: false, afterTime: 0.0)
+//            }
+//            
+//            
+//        }
         
     }
     

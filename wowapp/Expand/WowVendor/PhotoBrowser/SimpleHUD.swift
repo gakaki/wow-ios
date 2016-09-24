@@ -92,8 +92,9 @@ class SimpleHUD: UIView {
             context?.setLineCap(.round)
             let endAngle = CGFloat(progress * M_PI * 2 - M_PI_2 + 0.01)
             
-            CGContextAddArc(context, rect.size.width/2, rect.size.height/2, radius, -CGFloat(M_PI_2), endAngle, 0)
-            
+            //TODO
+//            CGContextAddArc(context, rect.size.width/2, rect.size.height/2, radius, -CGFloat(M_PI_2), endAngle, 0)
+
             context?.setStrokeColor(UIColor.white.cgColor)
             context?.strokePath()
             

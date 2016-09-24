@@ -61,30 +61,30 @@ class VCTopicHeaderView:UICollectionReusableView{
         self.addSubview(view_line)
 
         
-        imageView.snp_makeConstraints { (make) -> Void in
+        imageView.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(self)
             
             make.height.equalTo(280)
-            make.top.equalTo(self.snp_top)
+            make.top.equalTo(self.snp.top)
         }
         
-        label_name.snp_makeConstraints { (make) -> Void in
+        label_name.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(self.frame.width * 0.9)
             make.height.equalTo(50)
-            make.left.equalTo(imageView.snp_left).offset(20)
-            make.top.equalTo(imageView.snp_bottom).offset(10)
+            make.left.equalTo(imageView.snp.left).offset(20)
+            make.top.equalTo(imageView.snp.bottom).offset(10)
         }
-        label_desc.snp_makeConstraints { (make) -> Void in
+        label_desc.snp.makeConstraints { (make) -> Void in
             make.width.equalTo( self.frame.width * 0.7 )
-            make.centerX.equalTo(self.snp_centerX)
-            make.top.equalTo(label_name.snp_bottom).offset(5)
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(label_name.snp.bottom).offset(5)
         }
         
-        view_line.snp_makeConstraints { (make) -> Void in
+        view_line.snp.makeConstraints { (make) -> Void in
             make.width.equalTo( self.frame.width * 0.35 )
             make.height.equalTo(1)
             make.centerX.equalTo(self.snp_centerX)
-            make.top.equalTo(label_desc.snp_bottom).offset(15)
+            make.top.equalTo(label_desc.snp.bottom).offset(15)
         }
 //        
 //                self.bringSubviewToFront(imageView)
@@ -212,7 +212,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         cv.dataSource                       = self
         cv.backgroundColor                  = UIColor.white
         
-        cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(WOWGoodsSmallCell))
+        cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
         cv.register(VCTopicHeaderView.self, forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: cell_header_reuse)
         
         let bg_view                         = UIView()

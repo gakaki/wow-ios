@@ -1,3 +1,4 @@
+
 //
 //  WOWTool.swift
 //  WowDsgn
@@ -113,7 +114,7 @@ struct WOWTool {
     static func callPhone(){
         let web = UIWebView()
         let tel = URL(string: "tel:\(WOWCompanyTel)")
-        web.loadRequest(URLRequest(URL: tel!))
+        web.loadRequest(URLRequest(url: tel!))
         UIApplication.currentViewController()?.view.addSubview(web)
         
 //        if let url = NSURL(string: "tel://\(WOWCompanyTel)") {
@@ -124,10 +125,10 @@ struct WOWTool {
 
     static var lastTabIndex:Int {
         get{
-            return (MGDefault.objectForKey(WOWLastTabIndex) as? Int) ?? 0
+            return (MGDefault.object(forKey: WOWLastTabIndex) as? Int) ?? 0
         }
         set{
-            MGDefault.setObject(newValue, forKey:WOWLastTabIndex)
+            MGDefault.set(newValue, forKey:WOWLastTabIndex)
             MGDefault.synchronize()
         }
     }

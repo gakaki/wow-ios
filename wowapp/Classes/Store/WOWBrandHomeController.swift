@@ -103,15 +103,15 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
-        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell))
+        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell()))
 //        WOWBorderColor(collectionView)
 
-        collectionView.register(UINib.nibName(String(describing: WOWBrandHeaderView)), forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
+        collectionView.register(UINib.nibName(String(describing: WOWBrandHeaderView())), forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
     func configBrandData(){
         
-       placeImageView.kf_setImage(with: URL(string:(brandModel?.image)!), placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
+       placeImageView.kf.setImage(with: URL(string:(brandModel?.image)!), placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
         
             if let strongSelf = self{
                 strongSelf.shareBrandImage = image
@@ -121,7 +121,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     func configDesignerData(){
         
-        placeImageView.kf_setImage(with: URL(string:(designerModel?.designerPhoto)!), placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
+        placeImageView.kf.setImage(with: URL(string:(designerModel?.designerPhoto)!), placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
             
             if let strongSelf = self{
                 strongSelf.shareBrandImage = image
@@ -222,7 +222,8 @@ class WOWBrandHomeController: WOWBaseViewController {
                         if strongSelf.pageIndex == 1{
                             strongSelf.dataArr = []
                         }
-                        strongSelf.dataArr.appendContentsOf(array)
+                        strongSelf.dataArr.append(contentsOf: 
+                            array)
                         //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                         if array.count < strongSelf.pageSize {
                             strongSelf.collectionView.mj_footer = nil
@@ -284,7 +285,7 @@ class WOWBrandHomeController: WOWBaseViewController {
                     if strongSelf.pageIndex == 1{
                         strongSelf.dataArr = []
                     }
-                    strongSelf.dataArr.appendContentsOf(array)
+                    strongSelf.dataArr.append(contentsOf: array)
                     //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                     if array.count < strongSelf.pageSize {
                         strongSelf.collectionView.mj_footer = nil
@@ -422,7 +423,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
         let model = dataArr[(indexPath as NSIndexPath).row]
         vc.hideNavigationBar = true
         vc.productId = model.productId ?? 0

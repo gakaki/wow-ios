@@ -391,37 +391,38 @@ extension WOWOrderDetailController{
                 WOWHud.showMsg("订单不存在")
                 return
             }
-            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: self.orderCode ?? "", channel: channl, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
-                if let strongSelf = self {
-                    let json = JSON(result)
-                    let charge = json["charge"]
-                    strongSelf.goPay(charge.object as AnyObject)
-                }
-                
-            }) { (errorMsg) in
-                
-            }
+            //TODO
+//            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: self.orderCode ?? "", channel: channl, clientIp: Manager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+//                if let strongSelf = self {
+//                    let json = JSON(result)
+//                    let charge = json["charge"]
+//                    strongSelf.goPay(charge.object as AnyObject)
+//                }
+//                
+//            }) { (errorMsg) in
+//                
+//            }
         }
         
     }
     //去支付
     fileprivate func goPay(_ charge:AnyObject){
         DispatchQueue.main.async {
-            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
-                if let strongSelf = self  , let ret_str = ret as! String {
-                    switch ret_str{
-                    case "success":
-                        strongSelf.requestPayResult()
-                    case "cancel":
-                        WOWHud.showMsg("支付取消")
-                        
-                        break
-                    default:
-                        WOWHud.showMsg("支付失败")
-                        break
-                    }
-                }
-            }
+//            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
+//                if let strongSelf = self  , let ret_str = ret as? String {
+//                    switch ret_str{
+//                    case "success":
+//                        strongSelf.requestPayResult()
+//                    case "cancel":
+//                        WOWHud.showMsg("支付取消")
+//                        
+//                        break
+//                    default:
+//                        WOWHud.showMsg("支付失败")
+//                        break
+//                    }
+//                }
+//            }
         }
     }
     
@@ -1055,7 +1056,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         likeButton.center = view.center
         likeButton.centerX = view.centerX - 10
         likeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        likeButton.setTitleColor(GrayColorlevel3, forState: .Normal)
+        likeButton.setTitleColor(GrayColorlevel3, for: .normal)
         var totalNum : String?
         
         switch OrderDetailNewaType {

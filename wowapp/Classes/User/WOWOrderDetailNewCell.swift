@@ -30,7 +30,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
         colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
         
-        titleImageView.set_webimage_url(URL(string: (orderProductModel.specImg)!))
+        titleImageView.set_webimage_url(orderProductModel.specImg!)
         
         
 
@@ -51,7 +51,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
         colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
         
-        titleImageView.set_webimage_url(URL(string: (orderProductModel.specImg)!))
+        titleImageView.set_webimage_url(orderProductModel.specImg!)
 
         
         priceLabel.text = (orderProductModel.sellPrice)!.toString.get_formted_price()

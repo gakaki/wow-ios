@@ -81,7 +81,7 @@ class WOWOrderController: WOWBaseViewController {
     fileprivate func configTable(){
         tableView.clearRestCell()
         tableView.backgroundColor = DefaultBackColor
-        tableView.register(UINib.nibName(String(WOWOrderListCell.self)), forCellReuseIdentifier:"WOWOrderListCell")
+        tableView.register(UINib.nibName(String(describing: WOWOrderListCell.self)), forCellReuseIdentifier:"WOWOrderListCell")
     }
     func updateOrderListAllInfo() {
         request()
@@ -96,9 +96,11 @@ class WOWOrderController: WOWBaseViewController {
         
         var params = [String: AnyObject]()
         if selectIndex == 2 { // 待发货 要 显示 部分发货
-            params = ["orderStatusList": [1,2], "currentPage": pageIndex,"pageSize":totalPage]
+//            params = ["orderStatusList": [1,2], "currentPage": pageIndex,"pageSize":totalPage]
+            //TODO
+            params = ([ "currentPage": pageIndex,"pageSize":totalPage] as AnyObject) as! [String : AnyObject]
         }else{
-            params = ["orderStatus": type, "currentPage": pageIndex,"pageSize":totalPage]
+            params = ["orderStatus": type as AnyObject, "currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject]
         }
 
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderList(params:params), successClosure: { [weak self](result) in
@@ -117,7 +119,7 @@ class WOWOrderController: WOWBaseViewController {
                     if strongSelf.pageIndex == 1{
                         strongSelf.dataArr = []
                     }
-                    strongSelf.dataArr.appendContentsOf(array)
+                    strongSelf.dataArr.append(contentsOf: array)
                     //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                     if array.count < totalPage {
                         strongSelf.tableView.mj_footer = nil

@@ -1,4 +1,5 @@
-//
+ 
+ //
 //  WowVCManager.swift
 //  wowapp
 //
@@ -31,7 +32,7 @@ extension  UIViewController {
             present(vc, animated: true, completion: nil)
 
         }else {
-            let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWLoginController)) as! WOWLoginController
+            let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWLoginController.self)) as! WOWLoginController
             vc.isPresent = isPresent
             self.pushVC( vc )
         }
@@ -53,7 +54,7 @@ extension  UIViewController {
             present(vc, animated: true, completion: nil)
             
         }else {
-            let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWLoginController)) as! WOWLoginController
+            let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWLoginController.self)) as! WOWLoginController
             vc.isPresent = isPresent
             self.pushVC( vc )
         }
@@ -64,7 +65,7 @@ extension  UIViewController {
     //跳转注册/绑定微信界面需要传从哪跳转来的
     func toRegVC(_ fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:NSDictionary?){
         
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(WOWRegistController)) as! WOWRegistController
+        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistController.self)) as! WOWRegistController
         vc.isPresent = isPresent
         vc.byWechat = fromWechat
         vc.userInfoFromWechat = userInfoFromWechat
@@ -73,15 +74,15 @@ extension  UIViewController {
     //跳转微信登录界面
     func toWeixinVC(_ isPresent:Bool = false){
         print("toWeixinVC")
-                let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+                let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)
 //                UMSocialControllerService.defaultControllerService().socialUIDelegate = self
-                snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {[weak self]response in
+                snsPlat?.loginClickHandler(self, UMSocialControllerService.default(), true, {[weak self]response in
                     if let strongSelf = self{
-                        if response.responseCode == UMSResponseCodeSuccess {
+                        if response?.responseCode == UMSResponseCodeSuccess {
 //                            let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
                   
                             
-                            strongSelf.checkWechatToken(response.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
+                            strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
                         }else{
                             WOWHud.showMsg("授权登录失败")
                         }
@@ -125,7 +126,7 @@ extension  UIViewController {
                 
                 if isOpenIdBinded {
                     //FIXME:未写的，先保存用户信息
-                    let model = Mapper<WOWUserModel>().map(result)
+                    let model = Mapper<WOWUserModel>().map(JSONObject:result)
                     WOWUserManager.saveUserInfo(model)
                     strongSelf.toLoginSuccess(isPresent)
                     
@@ -181,7 +182,7 @@ extension  UIViewController {
     
     func toVCCategory( _ cid: Int = 10 , cname:String? ){
         
-            let vc              = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(VCCategory)) as! VCCategory
+            let vc              = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory())) as! VCCategory
             vc.ob_cid.value     = cid
             vc.title    = cname!
             self.pushVC(vc)
@@ -190,7 +191,7 @@ extension  UIViewController {
     
     
     func toVCProduct( _ pid: Int? ){
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = pid
         self.pushVC(vc)
@@ -202,7 +203,7 @@ extension  UIViewController {
             toLoginVC(true)
             return
         }
-        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController())) as! WOWBuyCarController
         vc.hideNavigationBar = false
         pushVC(vc)
     }
@@ -220,7 +221,7 @@ extension  UIViewController {
     // 跳转专题详情页
     func toVCTopidDetail( _ topic_id:Int? ){
         
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(WOWContentTopicController)) as! WOWContentTopicController
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
         //                vc.hideNavigationBar = true
         vc.topic_id = topic_id ?? 0
         navigationController?.pushViewController(vc, animated: true)

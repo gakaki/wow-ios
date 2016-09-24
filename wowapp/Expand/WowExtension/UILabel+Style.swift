@@ -13,7 +13,7 @@ extension UILabel {
         paragraphStyle.lineSpacing = 1.0
         paragraphStyle.lineHeightMultiple = lineHeight
         paragraphStyle.alignment = self.textAlignment
-        paragraphStyle.lineBreakMode = .ByTruncatingTail
+        paragraphStyle.lineBreakMode = .byTruncatingTail
         if let t = self.text {
             let attrString = NSMutableAttributedString(string: t)
             attrString.addAttribute(NSFontAttributeName, value: self.font, range: NSMakeRange(0, attrString.length))
@@ -34,12 +34,12 @@ extension UILabel {
         // 颜色
         mustr1 .addAttribute(NSForegroundColorAttributeName, value: str2Color, range: str1Range)
         // 线条
-        mustr1 .addAttribute(NSStrikethroughStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: str1Range)
+        mustr1 .addAttribute(NSStrikethroughStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: str1Range)
         // 字体
-        mustr1 .addAttribute(NSFontAttributeName, value:UIFont.systemFontOfSize(str2Font), range: str1Range)
+        mustr1 .addAttribute(NSFontAttributeName, value:UIFont.systemFont(ofSize: str2Font), range: str1Range)
         
         let strPlace = NSAttributedString.init(string: "  ")
-        mustr1 .insertAttributedString(strPlace, atIndex: strLeng)
+        mustr1 .insert(strPlace, at: strLeng)
         
         self.attributedText = mustr1
         
@@ -51,7 +51,7 @@ extension UILabel {
         label.text = title
         label.textColor = titleColor
         label.textAlignment = textAlignment
-        label.font = UIFont.systemFontOfSize(font)
+        label.font = UIFont.systemFont(ofSize: font)
         return label
     }
 

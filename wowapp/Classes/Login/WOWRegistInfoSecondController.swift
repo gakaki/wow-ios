@@ -161,7 +161,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     func cancel() {
         self.backGroundMaskView.isHidden = true
-        UIView.animateWithDuration(0.3){
+        UIView.animate(withDuration: 0.3){
             self.pickerContainerView.mj_y = MGScreenHeight
         }
 
@@ -281,7 +281,7 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
         
         self.backGroundMaskView.isHidden = false
         
-        UIView.animateWithDuration(0.3){
+        UIView.animate(withDuration: 0.3){
             self.pickerContainerView.mj_y = self.view.h - 250 + 64
             
         }

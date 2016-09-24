@@ -46,7 +46,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     
     @IBOutlet weak var countLabel: UILabel!
     let identifier = "WOWTypeCollectionCell"
-    var typeArr = Array<String>()
+    var typeArr = [String]()
     var model:WOWCarProductModel!
     weak var delegate: buyCarDelegate?
 
@@ -132,7 +132,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     //MARK: - UICollectionView Delegate/Datasource Methods
     func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTypeCollectionCell
-                let item = arr[(indexPath as NSIndexPath).row]
+                let item = typeArr[(indexPath as NSIndexPath).row]
                 cell.textLabel.text = item
         return cell
             
@@ -143,7 +143,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return typeArr == nil ? 0 : (typeArr?.count)!
+        return typeArr == nil ? 0 : (typeArr.count)
     }
 
  

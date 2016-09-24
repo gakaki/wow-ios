@@ -13,11 +13,11 @@ class WOWBannerModel:NSObject,Mappable{
     var imageUrl : String?
     var url      : String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         imageUrl  <-   map["image"]
         url       <-   map["url"]
     }

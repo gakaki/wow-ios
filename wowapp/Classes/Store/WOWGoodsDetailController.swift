@@ -313,7 +313,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
 //            cell.rightTitleLabel.text = "\(productModel?.likesCount ?? 0)人喜欢"
             cell.rightBackView.addAction({ [weak self] in
                 if let strongSelf = self{
-                    let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController.self))
+                    let likeVC = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWLikeListController.self))
                     strongSelf.navigationController?.pushViewController(likeVC, animated: true)
                 }
             })
@@ -334,14 +334,14 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     }
     
     func brandHeadClick() {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
         vc.brandID = productModel?.brandId
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func moreLikeButtonClick(){
-        let likeVC = UIStoryboard.initialViewController("Home", identifier:String(WOWLikeListController.self))
+        let likeVC = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWLikeListController.self))
         navigationController?.pushViewController(likeVC, animated: true)
     }
     
@@ -415,7 +415,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     fileprivate func goComment(_ commentView:UIView!){
         commentView.addAction{[weak self] in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWCommentController)) as! WOWCommentController
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWCommentController())) as! WOWCommentController
                 vc.commentType = CommentType.product
                 vc.mainID = self?.productId ?? 0
                 strongSelf.navigationController?.pushViewController(vc, animated: true)

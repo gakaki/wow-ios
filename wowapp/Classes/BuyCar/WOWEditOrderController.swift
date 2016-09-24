@@ -270,7 +270,7 @@ class WOWEditOrderController: WOWBaseViewController {
         DispatchQueue.main.async {
             Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
                 if let strongSelf = self ,
-                    let ret_str = ret as! String!{
+                    let ret_str = ret as String!{
                     
                     switch ret_str{
                     case "success":
@@ -486,16 +486,17 @@ extension WOWEditOrderController: selectPayDelegate {
             WOWHud.showMsg("订单生成失败")
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode ?? "", channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
-            if let strongSelf = self {
-                let json = JSON(result)
-                let charge = json["charge"]
-                strongSelf.goPay(charge.object as AnyObject)
-            }
-            
-            }) { (errorMsg) in
-                
-        }
+        //TODO
+//        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: Manager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+//            if let strongSelf = self {
+//                let json = JSON(result)
+//                let charge = json["charge"]
+//                strongSelf.goPay(charge.object as AnyObject)
+//            }
+//            
+//            }) { (errorMsg) in
+//                
+//        }
     }
     
     func canclePay() {

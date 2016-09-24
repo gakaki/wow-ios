@@ -84,13 +84,13 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
 
 
 extension WOWBaseTableViewController{
-    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+    @objc(titleForEmptyDataSet:) func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = WOWEmptyNoDataText
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
     }
     
-    func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
+    @objc(backgroundColorForEmptyDataSet:) func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return GrayColorLevel5
     }
 //    

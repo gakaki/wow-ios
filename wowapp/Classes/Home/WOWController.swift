@@ -269,9 +269,9 @@ class WOWController: WOWBaseViewController {
         var params = [String: AnyObject]()
         
         let totalPage = 10
-        
-        params = ["excludes": [], "currentPage": pageIndex,"pageSize":totalPage]
-        
+        //TODO
+//        params = ["excludes": [], "currentPage": pageIndex,"pageSize":totalPage]
+          params = ["currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject]
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                

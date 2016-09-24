@@ -1,3 +1,4 @@
+
 import ObjectMapper
 import SwiftyJSON
 struct VoSldOM:Mappable {
@@ -11,11 +12,11 @@ struct VoSldOM:Mappable {
     var subCities: [VoSldOM]?
     var subDistricts: [VoSldOM]?
     
-    init?(_ map: Map) {
+    init?(map: Map) {
         
     }
     
-    mutating func mapping(_ map: Map) {
+    mutating func mapping(map: Map) {
         id              <- map["id"]
         name            <- map["name"]
         parent_id       <- map["parent_id"]
@@ -45,7 +46,7 @@ struct VoSldDataOM {
                 if let dataFromString   = json_str.data(using: String.Encoding.utf8, allowLossyConversion: false) {
                     let json            = JSON(data: dataFromString)
                     let a               = json["RECORDS"].arrayObject
-                    slds                = try! Mapper<VoSldOM>().mapArray(a)!
+                    slds                = try! Mapper<VoSldOM>().mapArray(JSONObject:a)!
                 }
                 
             } catch let error as NSError {

@@ -511,7 +511,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 extension WOWBuyCarController: buyCarDelegate {
     func goProductDetail(_ productId: Int?) {
         if let productId = productId {
-            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
             vc.hideNavigationBar = true
             vc.productId = productId
             navigationController?.pushViewController(vc, animated: true)

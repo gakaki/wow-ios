@@ -39,15 +39,15 @@ extension UIImageView {
     }
     func set_webimage_url_base( _ url:String? , place_holder_name pic_name:String , need_random_url random:Bool = false ) -> Void {
         do{
-    
-            try! self.yy_setImage( with: URL(string:url ?? ""), placeholder: UIImage(named: pic_name) , options:  [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation], completion: { ( image, url, from:YYWebImageFromType, stage:YYWebImageStage, e:NSError?) in
-
-                let url_str = url.URLString
-                if ( from == YYWebImageFromType.remote ||  from == YYWebImageFromType.none ){
-                    DLog("image url is \(url_str),from remote or none,\(stage)")
-                }
-  
-            })
+//TODO
+//            try! self.yy_setImage( with: URL(string:url ?? ""), placeholder: UIImage(named: pic_name) , options:  [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation], completion: { ( image, url, from:YYWebImageFromType, stage:YYWebImageStage, e:NSError?) in
+//
+//                let url_str = url.URLString
+//                if ( from == YYWebImageFromType.remote ||  from == YYWebImageFromType.none ){
+//                    DLog("image url is \(url_str),from remote or none,\(stage)")
+//                }
+//  
+//            })
            
         }catch let e {
             DLog(e)

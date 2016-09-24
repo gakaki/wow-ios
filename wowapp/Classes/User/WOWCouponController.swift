@@ -51,7 +51,7 @@ class WOWCouponController: WOWBaseViewController {
         case .userEntrance:
             params = ["currentPage": pageIndex as AnyObject,"pageSize":pageSize as AnyObject]
         case .orderEntrance:
-            params = ["currentPage": pageIndex as AnyObject, "pageSize": pageSize as AnyObject, "minAmountLimit": minAmountLimit as AnyObject? ?? 0, "couponLimitType": 0]
+            params = ["currentPage": pageIndex as AnyObject, "pageSize": pageSize as AnyObject, "minAmountLimit": minAmountLimit as AnyObject? ?? 0 as AnyObject, "couponLimitType": 0 as AnyObject]
         }
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Coupons(params: params), successClosure: {[weak self] (result) in

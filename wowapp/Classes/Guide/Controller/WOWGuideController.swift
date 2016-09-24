@@ -52,7 +52,7 @@ class WOWGuideController: WOWBaseViewController {
                 case .register:
                     title1 = "绑定微信"
                     title2 = "手机注册"
-                backGroundColor1 = UIColor.whiteColor()
+                backGroundColor1 = UIColor.white
                 backGroundColor2 = UIColor.white
                 titleColor1 = UIColor.black
                 titleColor2 = UIColor.black

@@ -68,14 +68,14 @@ class WOWFavDesigner: WOWBaseViewController {
     fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
-        collectionView.register(UINib.nibName(String(WOWFavoriteBrandCell)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
+        collectionView.register(UINib.nibName(String(describing: WOWFavoriteBrandCell.self)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
         
         
     }
     
     //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
-        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty), owner: self, options: nil)?.last as! FavoriteEmpty
+        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty()), owner: self, options: nil)?.last as! FavoriteEmpty
         
 //        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         
@@ -120,7 +120,7 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoriteBrandCell), for: indexPath) as! WOWFavoriteBrandCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoriteBrandCell()), for: indexPath) as! WOWFavoriteBrandCell
         let model = dataArr[(indexPath as NSIndexPath).row]
 //        cell.logoImg.kf_setImageWithURL(NSURL(string:model.designerPhoto ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.logoImg.set_webimage_url(model.designerPhoto)
@@ -136,7 +136,7 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         DLog((indexPath as NSIndexPath).row)
         let model = dataArr[(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandHomeController)) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.designerId = model.designerId
         vc.entrance = .designerEntrance
         vc.hideNavigationBar = true

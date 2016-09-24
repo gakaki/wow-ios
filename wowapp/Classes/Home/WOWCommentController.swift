@@ -51,7 +51,7 @@ class WOWCommentController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 200
         tableView.clearRestCell()
-        tableView.register(UINib.nibName(String(describing: WOWCommentCell)), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(String(describing: WOWCommentCell())), forCellReuseIdentifier:cellID)
         tableView.mj_header = self.mj_header
         tableView.mj_footer = self.mj_footer
         navigationItem.title = "评论"
@@ -89,7 +89,7 @@ class WOWCommentController: WOWBaseViewController {
                 model.user_nick = WOWUserManager.userName
                 model.user_headimage = WOWUserManager.userHeadImageUrl
                 model.created_at = "刚刚"
-                strongSelf.dataArr.insert(model, atIndex: 0)
+                strongSelf.dataArr.insert(model, at: 0)
                 strongSelf.tableView.reloadData()
             }
         }) {[weak self] (errorMsg) in
@@ -168,7 +168,7 @@ class WOWCommentController: WOWBaseViewController {
                     if strongSelf.pageIndex == 0{
                         strongSelf.dataArr = []
                     }
-                    strongSelf.dataArr.appendContentsOf(array)
+                    strongSelf.dataArr.append(contentsOf: array)
                     if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
                         strongSelf.tableView.mj_footer = nil
                     }else{
@@ -241,7 +241,7 @@ extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
         self.inputTextView.resignFirstResponder()
     }
     
-    override func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无评论"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri

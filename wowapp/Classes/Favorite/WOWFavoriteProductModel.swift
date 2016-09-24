@@ -15,7 +15,7 @@ class WOWFavoriteProductModel: WOWBaseModel, Mappable {
     var productImg                         : String?
     var productName                        : String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
@@ -34,11 +34,11 @@ class WOWFavoriteDesignerModel: WOWBaseModel,Mappable{
     var designerPhoto     = String()
     var designerDesc      : String?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         designerId              <- map["designerId"]
         designerName            <- map["designerName"]
         designerPhoto           <- map["designerPhoto"]

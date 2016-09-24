@@ -199,11 +199,10 @@ public enum RequestApi{
 
 extension RequestApi:TargetType{
     public var task: Task {
-        return Task()
+        return Task.self
     }
 
-
-  
+ 
    
     public var baseURL:URL{
         return URL(string: RequestApi.HostUrl)!
@@ -425,7 +424,7 @@ extension RequestApi:TargetType{
  
     
     public var parameters:[String: Any]?{
-        var params = [String: Any]?()
+        var params = [String: Any]()
         
         switch self{
             case let .api_Category(categoryId):
@@ -445,7 +444,7 @@ extension RequestApi:TargetType{
             case let .api_BrandDetail(brandid):
                 params = ["brandId": brandid]
             case let .api_ProductBrand(param):
-                params = param
+                params = param!
             case let .api_DesignerDetail(designerId):
                 params = ["designerId": designerId]
             case let .api_productDesigner(designerId, pageSize, currentPage):
@@ -532,12 +531,12 @@ extension RequestApi:TargetType{
             
             //订单相关
             case let .api_OrderList(param):
-                params =  param
+                params =  param!
             
             case let .api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]
             case let .api_OrderCreate(param):
-                params = param
+                params = param!
             case let .api_OrderCharge(orderNo, channel, alientIp):
                 params = ["orderNo": orderNo, "channel": channel, "clientIp": alientIp]
             case let .api_OrderBuyNow(productId, productQty):
@@ -555,10 +554,10 @@ extension RequestApi:TargetType{
                 params =  ["pageType":1]
             
             case let .api_Home_List(param):
-                params = param
+                params = param!
             
             case let .api_Home_BottomList(param):
-                params = param
+                params = param!
 
             case .api_Module_Page2:
                 params = ["pageId":2, "region":1]
@@ -575,7 +574,7 @@ extension RequestApi:TargetType{
             
 //            优惠券
             case let .api_Coupons(param):
-                params =  param
+                params =  param!
 //            专题
             case let .api_Topics(topicId):
                 params =  ["topicId":topicId]
@@ -587,14 +586,14 @@ extension RequestApi:TargetType{
                 params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
             
             default:
-                params =  nil
+                params =  ["default":"params"]
 
         }
         DLog(WOWUserManager.sessionToken)
         if WOWUserManager.sessionToken.isEmpty {
-            params =   ["paramJson":JSONStringify(params ?? ""),"channel":"2"]
+            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2"]
         }else {
-            params =   ["paramJson":JSONStringify(params ?? ""),"channel":"2","sessionToken":WOWUserManager.sessionToken]
+            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2","sessionToken":WOWUserManager.sessionToken]
         }
         
 

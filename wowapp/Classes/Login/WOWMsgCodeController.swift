@@ -136,7 +136,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         let mobile = codeTextField.text ?? ""
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_PwdResetCode(mobile: mobile), successClosure: { [weak self](result) in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController)) as! WOWMsgCodeController
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController())) as! WOWMsgCodeController
                 vc.mobile = strongSelf.codeTextField.text
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }

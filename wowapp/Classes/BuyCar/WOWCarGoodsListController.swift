@@ -26,7 +26,7 @@ class WOWCarGoodsListController: WOWBaseTableViewController {
         super.setUI()
         navigationItem.title = "商品清单"
         makeCustomerNavigationItem("共\(productArr.count)件", left: false, handler: nil)
-        tableView.register(UINib.nibName(String(WOWBuyCarNormalCell)), forCellReuseIdentifier:"WOWBuyCarNormalCell")
+        tableView.register(UINib.nibName(String(describing: WOWBuyCarNormalCell.self)), forCellReuseIdentifier:"WOWBuyCarNormalCell")
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = 108
     }

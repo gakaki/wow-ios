@@ -1,3 +1,6 @@
+ 
+ 
+ 
 //
 //  WOWSenceController.swift
 //  Wow
@@ -34,10 +37,10 @@ class WOWSenceController: WOWBaseViewController {
         navigationItem.title = "场景"
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.register(UINib.nibName(String(describing: WOWSenceImageCell.self)), forCellReuseIdentifier:String(WOWSenceImageCell.self))
-        tableView.register(UINib.nibName(String(WOWCommentCell.self)), forCellReuseIdentifier:String(WOWCommentCell))
-        tableView.register(UINib.nibName(String(describing: WOWSubArtCell)), forCellReuseIdentifier:String(WOWSubArtCell))
-        tableView.register(UINib.nibName(String(WOWSenceLikeCell.self)), forCellReuseIdentifier:String(WOWSenceLikeCell))
+        tableView.register(UINib.nibName(String(describing: WOWSenceImageCell.self)), forCellReuseIdentifier:String(describing: WOWSenceImageCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:String(describing: WOWCommentCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWSubArtCell())), forCellReuseIdentifier:String(describing: WOWSubArtCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell.self)), forCellReuseIdentifier:String(describing: WOWSenceLikeCell.self))
         tableView.mj_header = self.mj_header
         WOWSenceHelper.senceController = self
         configTableFooterView()
@@ -65,7 +68,7 @@ class WOWSenceController: WOWBaseViewController {
         footerCollectionView.backgroundColor = DefaultBackColor
         WOWBorderColor(footerCollectionView)
         footerCollectionView.register(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
-        footerCollectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell))
+        footerCollectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell()))
         footerCollectionView.delegate = self
         footerCollectionView.dataSource = self
         tableView.tableFooterView = footerCollectionView
@@ -113,7 +116,7 @@ class WOWSenceController: WOWBaseViewController {
 //                cars.append(dict)
 //            }
             param["cart"] = cars as AnyObject?
-            let string = JSONStringify(param)
+            let string = JSONStringify(param as AnyObject)
             WOWNetManager.sharedManager.requestWithTarget(.api_CartList(cart:string), successClosure: { [weak self](result) in
                 if let _ = self{
                     let json = JSON(result)
@@ -185,7 +188,7 @@ class WOWSenceController: WOWBaseViewController {
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
-                strongSelf.sceneModel = Mapper<WOWSenceModel>().map(result)
+                strongSelf.sceneModel = Mapper<WOWSenceModel>().map(JSONObject:result)
                 WOWSenceHelper.sceneModel = strongSelf.sceneModel
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
@@ -206,7 +209,7 @@ class WOWSenceController: WOWBaseViewController {
 //MARK: Delegate
 extension WOWSenceController:WOWSubAlertDelegate{
     func subAlertItemClick(_ productID:Int) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
         vc.productId = productID
         vc.hideNavigationBar = true
         WOWSenceHelper.senceController.navigationController?.pushViewController(vc, animated: true)
@@ -266,7 +269,7 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let  model = sceneModel?.recommendProducts?[(indexPath as NSIndexPath).row]
         let  pid = model?.productId ?? 0
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
         vc.productId = pid
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

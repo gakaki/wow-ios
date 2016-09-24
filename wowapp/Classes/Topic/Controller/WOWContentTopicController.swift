@@ -1,10 +1,3 @@
-//
-//  WOWContentTopicController.swift
-//  wowapp
-//
-//  Created by 安永超 on 16/9/13.
-//  Copyright © 2016年 小黑. All rights reserved.
-//
 
 import UIKit
 
@@ -44,7 +37,7 @@ class WOWContentTopicController: WOWBaseViewController {
     
      //MARK:    - lazy
     lazy var nagationItem:WOWTopicNavigationItem = {
-        let view = Bundle.main.loadNibNamed(String(describing: WOWTopicNavigationItem), owner: self, options: nil)?.last as! WOWTopicNavigationItem
+        let view = Bundle.main.loadNibNamed(String(describing: WOWTopicNavigationItem()), owner: self, options: nil)?.last as! WOWTopicNavigationItem
         view.thumbButton.addTarget(self, action: #selector(dgClick), for: .touchDown)
         view.shareButton.addTarget(self, action: #selector(zdClick), for: .touchUpInside)
         view.buyCarBUttion.addTarget(self, action: #selector(sjClick), for: .touchUpInside)
@@ -81,7 +74,7 @@ class WOWContentTopicController: WOWBaseViewController {
     }
     func zdClick() -> Void {
 
-        let shareUrl = WOWShareUrl + "/topic/\(topic_id ?? 0)"
+        let shareUrl = WOWShareUrl + "/topic/\(topic_id )"
         WOWShareManager.share(vo_topic?.topicMainTitle, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
 
         
@@ -91,7 +84,7 @@ class WOWContentTopicController: WOWBaseViewController {
             toLoginVC(true)
             return
         }
-        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(WOWBuyCarController)) as! WOWBuyCarController
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController.self)) as! WOWBuyCarController
         vc.hideNavigationBar = false
         navigationController?.pushViewController(vc, animated: true)
         
@@ -141,11 +134,17 @@ class WOWContentTopicController: WOWBaseViewController {
         for a in 0..<vo_products.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = vo_products[a]
             
-            if model.productId! == sender.object!["productId"] as? Int {
-                model.favorite = sender.object!["favorite"] as? Bool
+            
+            
+            if  let send_obj =  sender.object as? [String:AnyObject] {
                 
-                break
+                if model.productId! == send_obj["productId"] as? Int {
+                    model.favorite = send_obj["favorite"] as? Bool
+                    break
+                }
             }
+        
+            
         }
         self.tableView.reloadData()
     }
@@ -180,7 +179,7 @@ class WOWContentTopicController: WOWBaseViewController {
             if let strongSelf = self{
                 DLog(result)
                 let r                                     =  JSON(result)
-                strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map( r.object )
+                strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map( JSONObject:r.object )
                 
                 strongSelf.reloadNagationItemThumbButton(strongSelf.vo_topic!.favorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
 
@@ -250,10 +249,10 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.mj_header = self.mj_header
         //显示价格的cell
-        tableView.register(UINib.nibName(String(WOWContentTopicTopCell)), forCellReuseIdentifier:String(WOWContentTopicTopCell))
-        tableView.register(UINib.nibName(String(WOWProductDetailCell)), forCellReuseIdentifier:String(WOWProductDetailCell))
+        tableView.register(UINib.nibName(String(describing: WOWContentTopicTopCell())), forCellReuseIdentifier:String(describing: WOWContentTopicTopCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWProductDetailCell())), forCellReuseIdentifier:String(describing: WOWProductDetailCell.self))
                //相关商品
-        tableView.register(UINib.nibName(String(WOWProductDetailAboutCell)), forCellReuseIdentifier:String(WOWProductDetailAboutCell))
+        tableView.register(UINib.nibName(String(describing: WOWProductDetailAboutCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailAboutCell.self))
     }
     
     
@@ -275,11 +274,11 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         var returnCell :UITableViewCell!
         switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (0,_): //
-            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentTopicTopCell), for: indexPath) as! WOWContentTopicTopCell
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentTopicTopCell()), for: indexPath) as! WOWContentTopicTopCell
             cell.showData(vo_topic)
             returnCell = cell
         case (1,_): //产品描述
-            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell), for: indexPath) as! WOWProductDetailCell
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell()), for: indexPath) as! WOWProductDetailCell
             if let array = vo_topic?.imageSerial?.records {
                 let model = array[(indexPath as NSIndexPath).row]
                 cell.showData(model)
@@ -395,7 +394,7 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
 
 extension WOWContentTopicController: WOWProductDetailAboutCellDelegate {
         @objc func selectCollectionIndex(_ productId: Int) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWProductDetailController)) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productId
         navigationController?.pushViewController(vc, animated: true)

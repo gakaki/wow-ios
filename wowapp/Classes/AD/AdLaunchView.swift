@@ -1,4 +1,5 @@
 
+
 //
 //  AdLaunchView.swift
 //  DGAdLaunchView
@@ -32,7 +33,7 @@ final class AdLaunchView: UIView {
         var slogan: UIImageView = UIImageView(image: UIImage(named: "KDTKLaunchSlogan_Content"))
         footer.addSubview(slogan)
         
-        slogan.snp_makeConstraints({ (make) in
+        slogan.snp.makeConstraints({ (make) in
             make.center.equalTo(footer)
         })
         

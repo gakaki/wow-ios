@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        self.fetchADImage()
         asyncLoad()
 
         IQKeyboardManager.sharedManager().enable = true
@@ -43,9 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  
     func ADLaunchView(){
+        self.fetchADImage()
+
         adLaunchView    = AdLaunchView(frame: UIScreen.main.bounds)
         adLaunchView?.delegate = self
         window?.addSubview(adLaunchView!)
+        
     }
     
    

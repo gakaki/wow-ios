@@ -274,7 +274,6 @@
 		29FF26E51CFDA86300DF2A9B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 29FF25E61CFDA86300DF2A9B /* LICENSE */; };
 		29FF26E61CFDA86300DF2A9B /* BTNavigationDropdownMenu.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 29FF25E81CFDA86300DF2A9B /* BTNavigationDropdownMenu.bundle */; };
 		29FF26E71CFDA86300DF2A9B /* BTNavigationDropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25E91CFDA86300DF2A9B /* BTNavigationDropdownMenu.swift */; };
-		29FF26EB1CFDA86300DF2A9B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29FF25EF1CFDA86300DF2A9B /* Info.plist */; };
 		29FF26EC1CFDA86300DF2A9B /* KMPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25F11CFDA86300DF2A9B /* KMPlaceholderTextView.swift */; };
 		29FF26ED1CFDA86300DF2A9B /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25F31CFDA86300DF2A9B /* MIBadgeButton.swift */; };
 		29FF26EE1CFDA86300DF2A9B /* RCDCustomerServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29FF25F61CFDA86300DF2A9B /* RCDCustomerServiceViewController.m */; };
@@ -743,7 +742,6 @@
 		29FF25E61CFDA86300DF2A9B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		29FF25E81CFDA86300DF2A9B /* BTNavigationDropdownMenu.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BTNavigationDropdownMenu.bundle; sourceTree = "<group>"; };
 		29FF25E91CFDA86300DF2A9B /* BTNavigationDropdownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTNavigationDropdownMenu.swift; sourceTree = "<group>"; };
-		29FF25EF1CFDA86300DF2A9B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29FF25F01CFDA86300DF2A9B /* KMPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMPlaceholderTextView.h; sourceTree = "<group>"; };
 		29FF25F11CFDA86300DF2A9B /* KMPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMPlaceholderTextView.swift; sourceTree = "<group>"; };
 		29FF25F31CFDA86300DF2A9B /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeButton.swift; sourceTree = "<group>"; };
@@ -1566,7 +1564,6 @@
 		29FF25EE1CFDA86300DF2A9B /* KMPlaceholderTextView */ = {
 			isa = PBXGroup;
 			children = (
-				29FF25EF1CFDA86300DF2A9B /* Info.plist */,
 				29FF25F01CFDA86300DF2A9B /* KMPlaceholderTextView.h */,
 				29FF25F11CFDA86300DF2A9B /* KMPlaceholderTextView.swift */,
 			);
@@ -2389,7 +2386,6 @@
 				634ED5FD1D8807E60042791B /* WOWContentTopicTopCell.xib in Resources */,
 				29FF264D1CFDA86300DF2A9B /* WOWTipsCell.xib in Resources */,
 				2D3273F11D752DF70013BDB1 /* HomeFormReusableView.xib in Resources */,
-				29FF26EB1CFDA86300DF2A9B /* Info.plist in Resources */,
 				29FF27081CFDA86300DF2A9B /* Assets.xcassets in Resources */,
 				29FF27001CFDA86300DF2A9B /* UMSnsAccountViewController.xib in Resources */,
 			);

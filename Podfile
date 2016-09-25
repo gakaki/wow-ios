@@ -44,7 +44,7 @@ target :wowapp do
 	pod 'YYImage'
 	pod 'Kingfisher', '~> 3.0'
 #	pod 'StyleKit'       		暂时不用
-	pod 'UIColor_Hex_Swift', '~> 2.1'
+#	pod 'UIColor_Hex_Swift', '~> 2.1'
 	pod 'VTMagic'
 #	pod 'Hashids-Swift'			#短id生成
 	pod 'SDWebImage'

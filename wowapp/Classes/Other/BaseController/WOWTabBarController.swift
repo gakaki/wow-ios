@@ -73,7 +73,7 @@ class WOWTabBarController: UITabBarController {
         }
     }
     func configBadge(){
-    WOWBuyCarMananger.updateBadge()
+        WOWBuyCarMananger.updateBadge()
 //        if WOWUserManager.loginStatus { //登录了
 //           //FIXME:赞不考虑与电脑同步
 //            WOWBuyCarMananger.updateBadge()

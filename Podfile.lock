@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - Alamofire (4.0.0)
+  - BTNavigationDropdownMenu (0.4.1)
   - DZNEmptyDataSet (1.8.1)
   - EZSwiftExtensions (1.6)
   - FCUUID (1.3.0):
@@ -75,7 +76,6 @@ PODS:
   - SwiftyJSON (3.0.0)
   - SwiftyUserDefaults (3.0.0)
   - UICKeyChainStore (2.1.0)
-  - UIColor_Hex_Swift (2.1)
   - UITableView+FDTemplateLayoutCell (1.5.beta)
   - UMengAnalytics-NO-IDFA (4.1.1)
   - VTMagic (1.2.4):
@@ -95,6 +95,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
   - DZNEmptyDataSet
   - EZSwiftExtensions (from `https://github.com/goktugyil/EZSwiftExtensions.git`, branch `Swift3`)
   - FCUUID
@@ -126,7 +127,6 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.0.2)
   - SwiftyJSON (~> 3.0.0)
   - SwiftyUserDefaults (~> 3.0.0)
-  - UIColor_Hex_Swift (~> 2.1)
   - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
   - UMengAnalytics-NO-IDFA
   - VTMagic
@@ -137,6 +137,9 @@ DEPENDENCIES:
   - YYWebImage
 
 EXTERNAL SOURCES:
+  BTNavigationDropdownMenu:
+    :branch: swift-3.0
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
   EZSwiftExtensions:
     :branch: Swift3
     :git: https://github.com/goktugyil/EZSwiftExtensions.git
@@ -167,6 +170,9 @@ EXTERNAL SOURCES:
     :path: WowBase/WowBase.podspec
 
 CHECKOUT OPTIONS:
+  BTNavigationDropdownMenu:
+    :commit: 2c08c8579cf7a53ecb3dbf578e6e1034080a9859
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
   EZSwiftExtensions:
     :commit: 8afb1aac46b1c977ccac69c0ee6e665099b1f65b
     :git: https://github.com/goktugyil/EZSwiftExtensions.git
@@ -189,6 +195,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 6c5e29ae473b3d2edbf5472eab0a3d7bdb20215c
   FCUUID: f0cd5df92e4689b7d9d7264e2b32c588dc54c1f3
@@ -218,7 +225,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
-  UIColor_Hex_Swift: e91dc51f6bf252ec7bf74c8704ceedeeb7640c1c
   UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
   UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
   VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
@@ -228,6 +234,6 @@ SPEC CHECKSUMS:
   YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: b5fdb99c6a736baa7085945d5e5a6061e8fc38b8
+PODFILE CHECKSUM: e1f562fda519b083221cfe69434fb470c289255c
 
 COCOAPODS: 1.1.0.beta.2

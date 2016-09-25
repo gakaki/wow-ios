@@ -1,12 +1,4 @@
-
-
-//
-//  AdLaunchView.swift
 //  DGAdLaunchView
-//
-//  Created by Desgard_Duan on 16/5/23.
-//  Copyright © 2016年 Desgard_Duan. All rights reserved.
-//
 
 import UIKit
 import SDWebImage
@@ -94,6 +86,7 @@ private extension AdLaunchView {
     
     func displayCachedAd() {
         let manange: SDWebImageManager = SDWebImageManager()
+        
         if (((manange.imageCache.imageFromDiskCache(forKey: imageURL)) == nil)) {
             self.isHidden = true
         } else {
@@ -102,12 +95,15 @@ private extension AdLaunchView {
     }
     
     func requestBanner() {
-        //TODO:SDWEBImage
-//        SDWebImageManager.shared().downloadImage(with: URL(string: self.imageURL), options: SDWebImageOptions.avoidAutoSetImage, progress: nil) { (image:UIImage!, error:NSError!, cacheType:SDImageCacheType, finished:Bool, url:URL!) in
-//            print("图片下载成功")
-//        }
         
+        let url = URL(string: self.imageURL)
         
+        SDWebImageManager.shared().downloadImage(
+            with: url,
+            options: SDWebImageOptions.avoidAutoSetImage,
+            progress: nil) { (image, error, cacheType, finisned, url) in
+                print("图片下载成功")
+            }
     }
     
     func showImage() {

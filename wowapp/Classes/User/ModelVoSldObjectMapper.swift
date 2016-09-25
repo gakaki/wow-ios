@@ -27,7 +27,7 @@ struct VoSldOM:Mappable {
 
 struct CityDataManager {
     static let data = VoSldDataOM()
-    fileprivate init() {}
+    init() {}
 }
 
 struct VoSldDataOM {

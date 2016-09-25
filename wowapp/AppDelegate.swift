@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        JSPatchHelper.jspatch_playground()
 //        JSPatchHelper.jspatch_init()
      
-//        ADLaunchView()
+        ADLaunchView()
         return true
     }
  
@@ -53,8 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
     
     func asyncLoad(){
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async { [unowned self] in
-            CityDataManager.data
+
+        DispatchQueue.global(qos: .background).async {
+            print("task" + "\(Thread.current)")
+            
+            CityDataManager.init()
+
         }
     }
     

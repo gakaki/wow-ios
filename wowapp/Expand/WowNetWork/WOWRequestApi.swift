@@ -199,11 +199,10 @@ public enum RequestApi{
 
 extension RequestApi:TargetType{
     public var task: Task {
-        return Task.self
+      return .request
     }
 
- 
-   
+    
     public var baseURL:URL{
         return URL(string: RequestApi.HostUrl)!
     }
@@ -599,7 +598,10 @@ extension RequestApi:TargetType{
 
         return params
     }
-    
+    var multipartBody: [MultipartFormData]? {
+        // Optional
+        return nil
+    }
     
         /// 返回""空串的话代表需要在回调函数里面自己提示
     public var endSuccessMsg:String?{

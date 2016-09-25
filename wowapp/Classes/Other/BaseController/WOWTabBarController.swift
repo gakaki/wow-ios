@@ -28,8 +28,8 @@ class WOWTabBarController: UITabBarController {
     //MARK:Private Method
     func setViewControllers(){
         
-        self.view.backgroundColor = DefaultBackColor
-        self.delegate = self
+        self.view.backgroundColor   = DefaultBackColor
+        self.delegate               = self
         
         let storys =        ["Home",    "Found",       "HotStyle",        "Favorite",     "User"      ]
         let images =        ["tab_home","tab_shopping","tab_special",  "tab_like",     "tab_me"    ]
@@ -72,8 +72,8 @@ class WOWTabBarController: UITabBarController {
                                         for: UIControlState())
         }
     }
-    fileprivate func configBadge(){
-        WOWBuyCarMananger.updateBadge()
+    func configBadge(){
+    WOWBuyCarMananger.updateBadge()
 //        if WOWUserManager.loginStatus { //登录了
 //           //FIXME:赞不考虑与电脑同步
 //            WOWBuyCarMananger.updateBadge()

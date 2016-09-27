@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window?.makeKeyAndVisible()
         self.configRootVC()
+        DLog("whats")
         return true
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -56,9 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         DispatchQueue.global(qos: .background).async {
             print("task" + "\(Thread.current)")
-            
-            CityDataManager.init()
-
+            CityDataManager.data
         }
     }
     

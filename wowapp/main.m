@@ -1,9 +1,9 @@
 //
 //  main.m
-//  WowBase
+//  wowapp
 //
-//  Created by g on 16/8/20.
-//  Copyright © 2016年 CocoaPods. All rights reserved.
+//  Created by g on 2016/9/25.
+//  Copyright © 2016年 小黑. All rights reserved.
 //
 
 #ifndef main_h

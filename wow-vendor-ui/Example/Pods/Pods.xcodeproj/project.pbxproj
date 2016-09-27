@@ -1,0 +1,556 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04F7712C67EF7B5187B85854242D69B0 /* wow-vendor-ui-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D4669E18931DA9829FCFCEDE5846BD /* wow-vendor-ui-dummy.m */; };
+		747A883642BCB0E37FC9224FB5268ACA /* wow-vendor-ui-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E72292DC45EBDFDCA690AD97D0AF0D0 /* wow-vendor-ui-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7CA33CA7B68729C57B268621E36AE724 /* Pods-wow-vendor-ui_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CCF74009B2666E70895A447838E62F93 /* Pods-wow-vendor-ui_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8CA2810A6DC6C5A62B65669180803AA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		8DE9C4DD355257393AC401D82930F5AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		DCF172A187B4045DB4891370C78C3D9C /* Pods-wow-vendor-ui_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01597DA68F9988338BD95BEF220735D8 /* Pods-wow-vendor-ui_Example-dummy.m */; };
+		E89F01A058FD52C5A68BFF08A5AD7FD9 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093EEF420F1F56DFDDA06FC4E99419F1 /* ReplaceMe.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1BD4EC64CDA8A5C369CFD7A2D5FF8D82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C7E309F8D2D84CB7DB1E4D160D954D2;
+			remoteInfo = "wow-vendor-ui";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01597DA68F9988338BD95BEF220735D8 /* Pods-wow-vendor-ui_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-wow-vendor-ui_Example-dummy.m"; sourceTree = "<group>"; };
+		093EEF420F1F56DFDDA06FC4E99419F1 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
+		25072C7C77F1E1DEECE6DFDA11E460E6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BB29FE9BF897AC55C548F44784F5AD6 /* Pods-wow-vendor-ui_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-wow-vendor-ui_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3692B5D6EE134062B5B7D604F8D8788B /* Pods-wow-vendor-ui_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-wow-vendor-ui_Example.release.xcconfig"; sourceTree = "<group>"; };
+		4546286EE376454443A9C47D2FC44BDC /* Pods-wow-vendor-ui_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-wow-vendor-ui_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		46D50529AEA4D73FCCA35ACD5886C8D0 /* Pods-wow-vendor-ui_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-wow-vendor-ui_Example-frameworks.sh"; sourceTree = "<group>"; };
+		548F3BC916DD91F299C7B9E19A23F28F /* wow-vendor-ui.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "wow-vendor-ui.modulemap"; sourceTree = "<group>"; };
+		62F6B45DE7F6A00A0384177FCACC756F /* Pods_wow_vendor_ui_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wow_vendor_ui_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E72292DC45EBDFDCA690AD97D0AF0D0 /* wow-vendor-ui-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "wow-vendor-ui-umbrella.h"; sourceTree = "<group>"; };
+		84D4669E18931DA9829FCFCEDE5846BD /* wow-vendor-ui-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "wow-vendor-ui-dummy.m"; sourceTree = "<group>"; };
+		897E0C76543B70AC0E95CF9FE08C5261 /* wow-vendor-ui.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "wow-vendor-ui.xcconfig"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A731B4B24A5A954A9E314346778C13C7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC0AC176E9FAE8E48C0B2ACCF6D153B1 /* Pods-wow-vendor-ui_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-wow-vendor-ui_Example.modulemap"; sourceTree = "<group>"; };
+		BD4A71DC4640175F5B01B92CEB4A69DD /* wow_vendor_ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = wow_vendor_ui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCF74009B2666E70895A447838E62F93 /* Pods-wow-vendor-ui_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-wow-vendor-ui_Example-umbrella.h"; sourceTree = "<group>"; };
+		CD27C89893BE8EF3AA91E1FF49C7E559 /* wow-vendor-ui-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "wow-vendor-ui-prefix.pch"; sourceTree = "<group>"; };
+		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		F28BC9B6582E855369D471F84D13833E /* Pods-wow-vendor-ui_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-wow-vendor-ui_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		FFCAB3591DA5DAA08E646612DC2AEF7C /* Pods-wow-vendor-ui_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-wow-vendor-ui_Example-resources.sh"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00B084E7E757E95EE11FEF7BA86A40FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DE9C4DD355257393AC401D82930F5AA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E876D702BB4CB7C69DBE37E7C03777C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CA2810A6DC6C5A62B65669180803AA3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		085DF577F613FE9A0225A8AF54425454 /* wow-vendor-ui */ = {
+			isa = PBXGroup;
+			children = (
+				08759D1A8BE2864DD4E597E7F355781F /* Support Files */,
+				A894F3E3D4A21970F85E503A2C6616DA /* wow-vendor-ui */,
+			);
+			name = "wow-vendor-ui";
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		08759D1A8BE2864DD4E597E7F355781F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A731B4B24A5A954A9E314346778C13C7 /* Info.plist */,
+				548F3BC916DD91F299C7B9E19A23F28F /* wow-vendor-ui.modulemap */,
+				897E0C76543B70AC0E95CF9FE08C5261 /* wow-vendor-ui.xcconfig */,
+				84D4669E18931DA9829FCFCEDE5846BD /* wow-vendor-ui-dummy.m */,
+				CD27C89893BE8EF3AA91E1FF49C7E559 /* wow-vendor-ui-prefix.pch */,
+				7E72292DC45EBDFDCA690AD97D0AF0D0 /* wow-vendor-ui-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/wow-vendor-ui";
+			sourceTree = "<group>";
+		};
+		3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		477D0240CB98CC78C88A1B734226478C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				62F6B45DE7F6A00A0384177FCACC756F /* Pods_wow_vendor_ui_Example.framework */,
+				BD4A71DC4640175F5B01B92CEB4A69DD /* wow_vendor_ui.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		496A18AF86854B7F2D2E293BA09CF735 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F898D0F9B894CC892498C9916A5E60F0 /* Pods-wow-vendor-ui_Example */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		513A5EAC68039E80AAB753FCA73C6F70 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				085DF577F613FE9A0225A8AF54425454 /* wow-vendor-ui */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				513A5EAC68039E80AAB753FCA73C6F70 /* Development Pods */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				477D0240CB98CC78C88A1B734226478C /* Products */,
+				496A18AF86854B7F2D2E293BA09CF735 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		A894F3E3D4A21970F85E503A2C6616DA /* wow-vendor-ui */ = {
+			isa = PBXGroup;
+			children = (
+				BE40C9F0B83DD961D99ED613298E5572 /* Classes */,
+			);
+			path = "wow-vendor-ui";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE40C9F0B83DD961D99ED613298E5572 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				093EEF420F1F56DFDDA06FC4E99419F1 /* ReplaceMe.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F898D0F9B894CC892498C9916A5E60F0 /* Pods-wow-vendor-ui_Example */ = {
+			isa = PBXGroup;
+			children = (
+				25072C7C77F1E1DEECE6DFDA11E460E6 /* Info.plist */,
+				AC0AC176E9FAE8E48C0B2ACCF6D153B1 /* Pods-wow-vendor-ui_Example.modulemap */,
+				2BB29FE9BF897AC55C548F44784F5AD6 /* Pods-wow-vendor-ui_Example-acknowledgements.markdown */,
+				4546286EE376454443A9C47D2FC44BDC /* Pods-wow-vendor-ui_Example-acknowledgements.plist */,
+				01597DA68F9988338BD95BEF220735D8 /* Pods-wow-vendor-ui_Example-dummy.m */,
+				46D50529AEA4D73FCCA35ACD5886C8D0 /* Pods-wow-vendor-ui_Example-frameworks.sh */,
+				FFCAB3591DA5DAA08E646612DC2AEF7C /* Pods-wow-vendor-ui_Example-resources.sh */,
+				CCF74009B2666E70895A447838E62F93 /* Pods-wow-vendor-ui_Example-umbrella.h */,
+				F28BC9B6582E855369D471F84D13833E /* Pods-wow-vendor-ui_Example.debug.xcconfig */,
+				3692B5D6EE134062B5B7D604F8D8788B /* Pods-wow-vendor-ui_Example.release.xcconfig */,
+			);
+			name = "Pods-wow-vendor-ui_Example";
+			path = "Target Support Files/Pods-wow-vendor-ui_Example";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B14C291BC26E9FECC04E1D79CC5D7AE8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CA33CA7B68729C57B268621E36AE724 /* Pods-wow-vendor-ui_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD452475444C7828F1BE8C360B91D82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				747A883642BCB0E37FC9224FB5268ACA /* wow-vendor-ui-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1C7E309F8D2D84CB7DB1E4D160D954D2 /* wow-vendor-ui */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE4D8F20CE54F5D995EDCBC1CDA9DC76 /* Build configuration list for PBXNativeTarget "wow-vendor-ui" */;
+			buildPhases = (
+				F11D78EA8605348D2907D042C5976D53 /* Sources */,
+				00B084E7E757E95EE11FEF7BA86A40FF /* Frameworks */,
+				BFD452475444C7828F1BE8C360B91D82 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "wow-vendor-ui";
+			productName = "wow-vendor-ui";
+			productReference = BD4A71DC4640175F5B01B92CEB4A69DD /* wow_vendor_ui.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		43FBDEDD8FFE298321C49918D4465280 /* Pods-wow-vendor-ui_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A21B5D2CB7CE73C4558686BC1A8B4035 /* Build configuration list for PBXNativeTarget "Pods-wow-vendor-ui_Example" */;
+			buildPhases = (
+				95A35CBA2B85523BAEDC1F27829DBC52 /* Sources */,
+				0E876D702BB4CB7C69DBE37E7C03777C /* Frameworks */,
+				B14C291BC26E9FECC04E1D79CC5D7AE8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C9121BEB2AC1C6A90A780313D9FFF1E8 /* PBXTargetDependency */,
+			);
+			name = "Pods-wow-vendor-ui_Example";
+			productName = "Pods-wow-vendor-ui_Example";
+			productReference = 62F6B45DE7F6A00A0384177FCACC756F /* Pods_wow_vendor_ui_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 477D0240CB98CC78C88A1B734226478C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43FBDEDD8FFE298321C49918D4465280 /* Pods-wow-vendor-ui_Example */,
+				1C7E309F8D2D84CB7DB1E4D160D954D2 /* wow-vendor-ui */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		95A35CBA2B85523BAEDC1F27829DBC52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCF172A187B4045DB4891370C78C3D9C /* Pods-wow-vendor-ui_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F11D78EA8605348D2907D042C5976D53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89F01A058FD52C5A68BFF08A5AD7FD9 /* ReplaceMe.swift in Sources */,
+				04F7712C67EF7B5187B85854242D69B0 /* wow-vendor-ui-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C9121BEB2AC1C6A90A780313D9FFF1E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "wow-vendor-ui";
+			target = 1C7E309F8D2D84CB7DB1E4D160D954D2 /* wow-vendor-ui */;
+			targetProxy = 1BD4EC64CDA8A5C369CFD7A2D5FF8D82 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2D8BDDCA13563FEA29CF943ED8C9D327 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 897E0C76543B70AC0E95CF9FE08C5261 /* wow-vendor-ui.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/wow-vendor-ui/wow-vendor-ui-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/wow-vendor-ui/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/wow-vendor-ui/wow-vendor-ui.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = wow_vendor_ui;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		33EB0D2DB68D0C9784F7051845EC2AA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3692B5D6EE134062B5B7D604F8D8788B /* Pods-wow-vendor-ui_Example.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-wow-vendor-ui_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Pods-wow-vendor-ui_Example/Pods-wow-vendor-ui_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_wow_vendor_ui_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		542468E8EAA77E2637B6D40E7A9E0B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F28BC9B6582E855369D471F84D13833E /* Pods-wow-vendor-ui_Example.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-wow-vendor-ui_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Pods-wow-vendor-ui_Example/Pods-wow-vendor-ui_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_wow_vendor_ui_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8DED8AD26D381A6ACFF202E5217EC498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9E1E4E48AF2EAB23169E611BF694090A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		ED46FDF1A7A3F80E513662791799B74F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 897E0C76543B70AC0E95CF9FE08C5261 /* wow-vendor-ui.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/wow-vendor-ui/wow-vendor-ui-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/wow-vendor-ui/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/wow-vendor-ui/wow-vendor-ui.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = wow_vendor_ui;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E1E4E48AF2EAB23169E611BF694090A /* Debug */,
+				8DED8AD26D381A6ACFF202E5217EC498 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A21B5D2CB7CE73C4558686BC1A8B4035 /* Build configuration list for PBXNativeTarget "Pods-wow-vendor-ui_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				542468E8EAA77E2637B6D40E7A9E0B9A /* Debug */,
+				33EB0D2DB68D0C9784F7051845EC2AA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE4D8F20CE54F5D995EDCBC1CDA9DC76 /* Build configuration list for PBXNativeTarget "wow-vendor-ui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED46FDF1A7A3F80E513662791799B74F /* Debug */,
+				2D8BDDCA13563FEA29CF943ED8C9D327 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

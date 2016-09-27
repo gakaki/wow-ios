@@ -1,0 +1,16 @@
+PODS:
+  - wow-vendor-ui (0.1.0)
+
+DEPENDENCIES:
+  - wow-vendor-ui (from `../`)
+
+EXTERNAL SOURCES:
+  wow-vendor-ui:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  wow-vendor-ui: 372d459b1066a992a4c6d23be56c6c405d813374
+
+PODFILE CHECKSUM: 11437e53eaea712f05e713b2c101971b93de1a97
+
+COCOAPODS: 1.1.0.rc.2

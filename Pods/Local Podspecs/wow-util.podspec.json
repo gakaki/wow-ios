@@ -1,0 +1,22 @@
+{
+  "name": "wow-util",
+  "version": "0.1.0",
+  "summary": "A short description of wow-util.",
+  "description": "WowUtil",
+  "homepage": "https://github.com/gakaki/wow-util",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gakaki": "gakaki@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/gakaki/wow-util.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "wow-util/Classes/**/*"
+}

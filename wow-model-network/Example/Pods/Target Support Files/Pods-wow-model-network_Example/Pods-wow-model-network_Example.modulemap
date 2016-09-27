@@ -1,0 +1,6 @@
+framework module Pods_wow_model_network_Example {
+  umbrella header "Pods-wow-model-network_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

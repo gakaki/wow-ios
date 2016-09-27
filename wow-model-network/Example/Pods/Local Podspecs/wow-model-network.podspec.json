@@ -1,0 +1,43 @@
+{
+  "name": "wow-model-network",
+  "version": "0.1.0",
+  "summary": "wow-model-network",
+  "description": "wowdsgn model",
+  "homepage": "https://github.com/gakaki/wow-model-network",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gakaki": "gakaki@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/gakaki/wow-model-network.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "wow-model-network/Classes/**/*",
+  "requires_arc": true,
+  "dependencies": {
+    "ObjectMapper": [
+      "~> 2.0.0"
+    ],
+    "SwiftyUserDefaults": [
+      "~> 3.0.0"
+    ],
+    "SwiftyJSON": [
+      "~> 3.0.0"
+    ],
+    "Moya": [
+      "~> 8.0.0-beta.2"
+    ],
+    "RxSwift": [
+      "~> 3.0.0-beta.1"
+    ],
+    "RxCocoa": [
+      "~> 3.0.0-beta.1"
+    ]
+  }
+}

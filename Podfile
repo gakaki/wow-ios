@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '9.0'
 
 target :wowapp do
 
@@ -25,8 +25,8 @@ target :wowapp do
 	pod 'Hashids-Swift' , git: "https://github.com/malczak/hashids.git" , :branch => 'master'
 
 	pod 'Pitaya', git: "https://github.com/johnlui/Pitaya.git", :branch => 'swift3'
-	pod 'Moya', git: "https://github.com/Moya/Moya.git", :branch => 'swift-3.0'
-	pod 'Moya/RxSwift', git: "https://github.com/Moya/Moya.git", :branch => 'swift-3.0'
+	pod 'Moya','~> 8.0.0-beta.2'
+	pod 'Moya/RxSwift','~> 8.0.0-beta.2'
 	pod 'EZSwiftExtensions', git: "https://github.com/goktugyil/EZSwiftExtensions.git", :branch => 'Swift3' #通用的拓展库
   
 	pod 'JSPatch', git: "https://github.com/gakaki/JSPatch.git", :branch => 'master'
@@ -36,7 +36,7 @@ target :wowapp do
 	pod 'JSPatchPlatform'
 	
 	pod 'SwiftyJSON', '~> 3.0.0'
-	pod 'ObjectMapper',	 git: "https://github.com/Hearst-DD/ObjectMapper.git", :branch => 'swift-3'
+	pod 'ObjectMapper',	 '~> 2.0.0'
 	
 	pod 'SVProgressHUD', '~> 2.0.2' #提示框
 	pod 'YYWebImage'
@@ -83,9 +83,12 @@ target :wowapp do
 #融云
 #	pod 'RongCloudIMKit', '2.7.2' #融云用的realm 版本太低
 
+#自己的私有pod
 #王云鹏自己的framework
-	pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
-
+		pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
+    pod 'wow-model-network',	 :path => "wow-model-network/wow-model-network.podspec"
+    pod 'wow-util',						 :path => "wow-util/wow-util.podspec"
+    pod 'wow-ui',							 :path => "wow-ui/wow-ui.podspec"
 
 #waitting For use
 #列表空的占位图 TBEmptyDataSet

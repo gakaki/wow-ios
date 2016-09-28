@@ -6,7 +6,8 @@
 //  Copyright © 2016年 wowdsgn. All rights reserved.
 //
 
-import Foundation
+import Moya
+import SwiftyJSON
 
 public enum RequestApi{
     

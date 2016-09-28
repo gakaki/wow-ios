@@ -55,7 +55,6 @@
 		09CE60A185240BC8B913291D9FA0BB2F /* SDWebImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 81F78D75FBFEC8344EF93DD41296DE2C /* SDWebImageDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		09E687A01DC215044E486B1DFF349C29 /* RxSearchBarDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD7502ADE88E9E1512D816E6416C08 /* RxSearchBarDelegateProxy.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		0A5381B060E29A591C2818C3D750A830 /* MJRefreshBackGifFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = A0B5C28FE7AC0CAE2CD792048D8320DF /* MJRefreshBackGifFooter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0A5EBBE879DA1EDD6393E83E8A456E91 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F395676318D7C5948D073474FCC8B5 /* ReplaceMe.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		0AA88974CBC9E4B661AD7B5CF3A71D8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25DB86F6BD5F5872C7173533FAEEE1D8 /* UIKit.framework */; };
 		0AA8BACAE89FE8E3E440F00E5EBCC2B8 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B947FD12722D43F2168CE27C848FA486 /* RxCollectionViewSectionedReloadDataSource.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		0AC9BA3F29770DDB216ABF661E2307C5 /* RxTableViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7106AAC08448ECFD327212C249E44 /* RxTableViewDataSourceType.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -1902,7 +1901,6 @@
 		5917B7450E79541720AB816ADC77974F /* CurrentThreadScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CurrentThreadScheduler.swift; path = RxSwift/Schedulers/CurrentThreadScheduler.swift; sourceTree = "<group>"; };
 		5947E2489AD333495F97453209CF40DF /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshBackFooter.h; path = MJRefresh/Base/MJRefreshBackFooter.h; sourceTree = "<group>"; };
 		595CCCF1BD6ED207981AF32B2DF9ECDA /* RxDataSources.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RxDataSources.xcconfig; sourceTree = "<group>"; };
-		59F395676318D7C5948D073474FCC8B5 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
 		5A5CF26577F201F27B4ED3B85536D31C /* SizeDesigner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SizeDesigner.swift; sourceTree = "<group>"; };
 		5A8B7AF646CDC77C4AF82570F7CDAD5B /* EZSwiftExtensions-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EZSwiftExtensions-dummy.m"; sourceTree = "<group>"; };
 		5AB93C7C24F8B14C24289ADC30CF4486 /* ResultProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResultProtocol.swift; path = Result/ResultProtocol.swift; sourceTree = "<group>"; };
@@ -3091,6 +3089,27 @@
 			path = "../Target Support Files/IQKeyboardManagerSwift";
 			sourceTree = "<group>";
 		};
+		06183EDA1D9AD0000028CAE4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		068349FD1D9A4F43003E97BE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		068349FE1D9A4F43003E97BE /* Vo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vo;
+			sourceTree = "<group>";
+		};
 		07530750F9DEA20E172D3C07696CB456 /* SDAutoLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -4271,7 +4290,9 @@
 		97B82DD35A5E09E1D9A0C2112E02F394 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				59F395676318D7C5948D073474FCC8B5 /* ReplaceMe.swift */,
+				06183EDA1D9AD0000028CAE4 /* Model */,
+				068349FD1D9A4F43003E97BE /* Network */,
+				068349FE1D9A4F43003E97BE /* Vo */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -7738,7 +7759,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A5EBBE879DA1EDD6393E83E8A456E91 /* ReplaceMe.swift in Sources */,
 				CAFFF9104F7BA9B0ADBFE78345CD8EB8 /* wow-model-network-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

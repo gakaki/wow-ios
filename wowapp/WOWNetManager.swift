@@ -6,9 +6,11 @@
 //  Copyright © 2016年 wowdsgn. All rights reserved.
 //
 
-import Foundation
+
 import SwiftyJSON
 import ObjectMapper
+import Moya
+
 typealias LikeAction                = (_ isFavorite:Bool?) -> ()
 typealias FailClosure               = (_ errorMsg:String?) -> ()
 typealias SuccessClosure            = (_ result:AnyObject) ->()
@@ -59,21 +61,29 @@ class WOWNetManager {
        
 //        DLog("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
-        requestProvider.request(target) { (result) in
-            
-            switch result {
-                case let .Success(moyaResponse):
-                    let data = moyaResponse.data
-                    let statusCode = moyaResponse.statusCode
-           
-            }
+       _ =  requestProvider.request(target) { (result) in
+        
+        
             switch result{
                 
-                case let .Success(moyaResponse):
-                    let info = Mapper<ReturnInfo>().map(JSON(data: response.data,options: .AllowFragments).object)
+                case let .success(response):
                     
+                    _ = response.data
+                    _ = response.statusCode
+
+                    var jsonString      = ""
+                    do {
+                        
+                        jsonString      = try! response.mapString() 
                     
-                    if let str = info as? String {
+                    } catch {
+                        DLog("could not decode to string")
+                    }
+
+//                    let json_data = JSON(data: response.data,options: .allowFragments).string! 
+                    let info = Mapper<ReturnInfo>().map(JSONString:jsonString)
+                    
+                    if (info as? String) != nil {
 //                        DLog(str)
                     }
                     else {
@@ -101,7 +111,7 @@ class WOWNetManager {
                                     return
                                 }else{
                                     UIApplication.currentViewController()?.toLoginVC(true)
-                                failClosure(errorMsg:info?.message)
+                                failClosure(info?.message)
                                     return
                                 }
                             }
@@ -113,11 +123,11 @@ class WOWNetManager {
                                 }else{
                                     WOWUserManager.exitLogin()
                                     UIApplication.currentViewController()?.toLoginVC(true)
-                                    failClosure(errorMsg:info?.message)
+                                    failClosure(info?.message)
                                     return
                                 }
                             }
-                            failClosure(errorMsg:info?.message)
+                            failClosure(info?.message)
                             WOWHud.showMsg(info?.message)
                             return
                         }
@@ -142,8 +152,8 @@ class WOWNetManager {
                     }else{
                         WOWHud.dismiss()
                     }
-                    successClosure(result:info?.data ?? "")
-                case let .Failure(error):
+                    successClosure((info?.data)!)
+                case let .failure(error):
                     DLog(error)
                     WOWHud.showMsg("网络错误")
                     failClosure("网络错误")

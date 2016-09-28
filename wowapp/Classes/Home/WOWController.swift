@@ -22,7 +22,6 @@ class WOWController: WOWBaseViewController {
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
-    let group = DispatchGroup() // 分组网络请求
     
     @IBOutlet var tableView: UITableView!
     //    var hidingNavBarManager: HidingNavigationBarManager?
@@ -41,6 +40,9 @@ class WOWController: WOWBaseViewController {
             make.top.equalTo(self.view).offset(10)
         }
         self.topBtn.isHidden = true
+        
+        request()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,7 +165,6 @@ class WOWController: WOWBaseViewController {
         
         configBarItem()
         addObserver()
-        request()
     }
 
     func loadBottomData()  {
@@ -200,34 +201,9 @@ class WOWController: WOWBaseViewController {
     override func request() {
         
         super.request()
-        
-        var queue: DispatchQueue = DispatchQueue.main// 主线程
-        
-        queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)// 后台执行
-        
-        queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)// 默认优先级执行
-        
-        //            dispatch_group_enter(group)// 增加计数， 保证网络请求拿到数据之后 ，才算完成任务
-        //异步执行队列任务
-        queue.async(group: group, execute: { () -> Void in
+        self.requestTop()
+        self.requestBottom()
             
-            self.requestTop()
-            
-        })
-        //            dispatch_group_enter(group)
-        queue.async(group: group, execute: { () -> Void in
-            
-            self.requestBottom()
-            
-        })
-        
-        // 分组队列执行完毕后执行 由于网络请求也是异步，所以这个数据不稳定 暂时不考虑在这刷新
-        
-        group.notify(queue: DispatchQueue.main) { () -> Void in
-            
-//            self.tableView.reloadData()
-            
-        }
     }
     
     func requestTop() {

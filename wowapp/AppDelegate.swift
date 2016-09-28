@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        JSPatchHelper.jspatch_playground()
 //        JSPatchHelper.jspatch_init()
      
-        ADLaunchView()
+//        ADLaunchView() will be crash ios 10 todo
         return true
     }
  

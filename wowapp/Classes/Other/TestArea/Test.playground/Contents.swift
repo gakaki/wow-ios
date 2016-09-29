@@ -13,9 +13,9 @@ if case 18...20 = age , sex == "girl"{
 }
 
 
-for i in 1.stride(to: 9, by: 3){
-    print(i)
-}
+//for i in 1.stride(to: 9, by: 3){
+//    print(i)
+//}
 
 //let tuple1 = (age:2,name:"xiaohei")
 //let tuple2 = (2,"xiaohei")

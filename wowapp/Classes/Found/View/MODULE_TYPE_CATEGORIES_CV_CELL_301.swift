@@ -136,7 +136,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell()), for: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self), for: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell
         let m               = data[(indexPath as NSIndexPath).item]
         cell.setModel(m)
         return cell

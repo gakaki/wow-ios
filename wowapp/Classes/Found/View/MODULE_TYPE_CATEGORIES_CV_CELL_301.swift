@@ -28,7 +28,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
         bg_pic                  = UIImageView()
         bg_pic.contentMode =   .scaleToFill
         self.addSubview(bg_pic)
-        bg_pic.snp_makeConstraints { (make) -> Void in
+        bg_pic.snp.makeConstraints { (make) -> Void in
             make.size.equalTo(self)
             make.center.equalTo(self)
         }

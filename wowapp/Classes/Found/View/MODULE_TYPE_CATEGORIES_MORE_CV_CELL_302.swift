@@ -41,7 +41,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
         self.addSubview(line)
         self.addSubview(name_en)
         
-        name.snp_makeConstraints { (make) -> Void in
+        name.snp.makeConstraints { (make) -> Void in
             
             name.font           = UIFont.systemFont(ofSize: 11)
             name.textColor      = color_text
@@ -49,18 +49,18 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
             
             make.width.equalTo(60)
             make.height.equalTo(20)
-            make.center.equalTo(self.snp_center).offset(UIEdgeInsetsMake(-10, 0, 0, 0) as! ConstraintOffsetTarget)
-            
+            //TODO
+//            make.center.equalTo(self.snp.center).offset(CGPoint(-10,0)
         }
-        
-        line.snp_makeConstraints { (make) -> Void in
+ 
+        line.snp.makeConstraints { (make) -> Void in
             
             line.backgroundColor = color_line
             
             make.width.equalTo(50)
             make.height.equalTo(0.5)
             make.centerX.equalTo(name.centerX)
-            make.top.equalTo(name.snp_bottom).offset(1)
+            make.top.equalTo(name.snp.bottom).offset(1)
             
         }
         
@@ -72,7 +72,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
             make.width.equalTo(60)
             make.height.equalTo(20)
             make.centerX.equalTo(line.centerX)
-            make.top.equalTo(line.snp_bottom).offset(1)
+            make.top.equalTo(line.snp.bottom).offset(1)
             
         }
         
@@ -171,8 +171,8 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
         cv.dataSource                         = self
         cv.backgroundColor                    = UIColor.clear
         
-        cv.register(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell()))
-        cv.register(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell()))
+        cv.register(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell.self))
+        cv.register(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell.self))
         
         cv.showsVerticalScrollIndicator       = false
         cv.showsHorizontalScrollIndicator     = false
@@ -198,12 +198,12 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if ((indexPath as NSIndexPath).item < 7 ){
-            let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell()), for: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell
+            let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell.self), for: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell
             let m               = self.data[(indexPath as NSIndexPath).item]
             cell.setModel(m)
             return cell
         }else{
-            let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell()), for: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell
+            let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell.self), for: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell
             return cell
         }
     }

@@ -314,7 +314,6 @@
 		4B0CA49ED3D1429494BB88E1B34EBC14 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A3ABF9126879F6A0973D9F1E18E01C /* Changeset.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4B66475E5CCC73B33197444DEFC00E1A /* QNIP.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E12C0F84D853F3B7BE011E35525A18C /* QNIP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B94F53BC5A1C8A5DE32ADBEB13B0F91 /* JPCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = 02784762F46074ED0F5FECD16DDF8B0C /* JPCleaner.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4C47DCDFA62F71F5690C502BC05E05C7 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68712B964A7F97DE80014B346AFF42B /* ReplaceMe.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4C749956895E66C9BF53B441C4803F96 /* ReplaySubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7606118B508F913774979C3B1AC37C /* ReplaySubject.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4C87A421297D78EEE8BE01799A43AE65 /* types.c in Sources */ = {isa = PBXBuildFile; fileRef = DA23BBDFCBC092CE9396C2FE0EEC5C98 /* types.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4CDBCE6F5E7B299E5297B29B0BA6D2BD /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D50A8C2B3F4919EA9C91CB674BBD2B /* ConstraintPriorityTarget.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -2622,7 +2621,6 @@
 		F616594DED855D56FD2D0B830568C276 /* ShareReplay1WhileConnected.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShareReplay1WhileConnected.swift; path = RxSwift/Observables/Implementations/ShareReplay1WhileConnected.swift; sourceTree = "<group>"; };
 		F61CEF4AF51293CB8F579F34CD2E743B /* UILabelExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UILabelExtensions.swift; path = Sources/UILabelExtensions.swift; sourceTree = "<group>"; };
 		F624D0663CAF467C44EF94A0D9BE3790 /* RecursiveScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecursiveScheduler.swift; path = RxSwift/Schedulers/RecursiveScheduler.swift; sourceTree = "<group>"; };
-		F68712B964A7F97DE80014B346AFF42B /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
 		F69589B49FD042A403DCFB2542D63DA1 /* RxSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxSwift-umbrella.h"; sourceTree = "<group>"; };
 		F729F8CB44AD2BFE278FBF9F9C71CE07 /* QNALAssetFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QNALAssetFile.h; sourceTree = "<group>"; };
 		F73D47057A1F14FE17C3DAACA4301920 /* UISwitchExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UISwitchExtensions.swift; path = Sources/UISwitchExtensions.swift; sourceTree = "<group>"; };
@@ -4191,7 +4189,6 @@
 		8C4F09B8F7E3B8B85DBD7A9646B50B17 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F68712B964A7F97DE80014B346AFF42B /* ReplaceMe.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -7078,7 +7075,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C47DCDFA62F71F5690C502BC05E05C7 /* ReplaceMe.swift in Sources */,
 				5E651CED9DF9B675435701BE6597D1C4 /* wow-ui-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

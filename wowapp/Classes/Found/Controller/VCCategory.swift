@@ -139,7 +139,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         self.addChildViewController(v_bottom)
         self.view.addSubview(v_bottom.magicView)
         
-        v_bottom.magicView.snp_makeConstraints { (make) -> Void in
+        v_bottom.magicView.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(self.view)
             make.top.equalTo(self.cv.snp.bottom)
             

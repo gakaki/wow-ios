@@ -26,25 +26,25 @@ class WOWMenuTopView: UIView {
         leftLabel.backgroundColor = UIColor.clear
         self.addSubview(leftLabel)
         weak var weakSelf = self
-        leftLabel.snp_makeConstraints { (make) -> Void in
+        leftLabel.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(weakSelf!).offset(15)
-            make.centerY.equalTo(weakSelf!.snp_centerY)
+            make.centerY.equalTo(weakSelf!.snp.centerY)
         }
         
         rightButton = UIButton(type: .system)
         self.addSubview(rightButton)
         weak var weakLabel = leftLabel
         rightButton.setImage(UIImage(named: "close")?.withRenderingMode(.alwaysOriginal), for: UIControlState())
-        rightButton.snp_makeConstraints { (make) -> Void in
+        rightButton.snp.makeConstraints { (make) -> Void in
             make.width.height.equalTo(40)
-            make.centerY.equalTo((weakLabel?.snp_centerY)!)
-            make.right.equalTo(weakSelf!).offset(0)
+            make.centerY.equalTo((weakLabel?.snp.centerY)!)
+            make.right.equalTo(weakSelf!)
         }
         
         topLine = UILabel()
         topLine.backgroundColor = SeprateColor
         self.addSubview(topLine)
-        topLine.snp_makeConstraints { (make) in
+        topLine.snp.makeConstraints { (make) in
             make.height.equalTo(0.5)
             make.left.equalTo(weakSelf!).offset(0)
             make.top.equalTo(weakSelf!).offset(0)
@@ -54,7 +54,7 @@ class WOWMenuTopView: UIView {
         bottomLine = UILabel()
         bottomLine.backgroundColor = SeprateColor
         self.addSubview(bottomLine)
-        bottomLine.snp_makeConstraints { (make) in
+        bottomLine.snp.makeConstraints { (make) in
             make.height.equalTo(0.5)
             make.left.equalTo(weakSelf!).offset(0)
             make.right.equalTo(weakSelf!).offset(0)

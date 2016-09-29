@@ -27,7 +27,7 @@ class WOWImageCell: UICollectionViewCell {
         backgroundColor = UIColor.white
         pictureImageView = UIImageView()
         self.addSubview(pictureImageView)
-        pictureImageView.snp_makeConstraints { (make) -> Void in
+        pictureImageView.snp.makeConstraints { (make) -> Void in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
     }

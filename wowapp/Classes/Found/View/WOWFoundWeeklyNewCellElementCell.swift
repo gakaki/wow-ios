@@ -40,21 +40,21 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
         self.addSubview(label_name)
         self.addSubview(label_price)
         
-        pictureImageView.snp_makeConstraints { (make) -> Void in
+        pictureImageView.snp.makeConstraints { (make) -> Void in
             make.size.equalTo(CGSizeD( 100 , height: 100))
-            make.top.equalTo(self.snp_top)
-            make.width.equalTo(self.snp_width)
+            make.top.equalTo(self)
+            make.width.equalTo(self)
         }
         
-        label_name.snp_makeConstraints { (make) -> Void in
+        label_name.snp.makeConstraints { (make) -> Void in
 
             label_name.font             = UIFont.systemFont(ofSize: 12)
             label_name.textColor        = UIColor.init(hexString:"808080")
             label_name.textAlignment    = NSTextAlignment.center
             
-            make.width.equalTo(self.snp_width)
+            make.width.equalTo(self.snp.width)
             make.height.equalTo(15.h)
-            make.top.equalTo(pictureImageView.snp.bottom).offset(UIEdgeInsetsMake(0.w, 0, 0, 0) as! ConstraintOffsetTarget)
+            make.top.equalTo(pictureImageView.snp.bottom)
         }
 
         label_price.snp_makeConstraints { (make) -> Void in
@@ -65,7 +65,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
 
             make.width.equalTo(self.snp_width)
             make.height.equalTo(15.h)
-            make.top.equalTo(label_name.snp.bottom).offset(UIEdgeInsetsMake(0, 0, 6, 0) as! ConstraintOffsetTarget )
+            make.top.equalTo(label_name.snp.bottom).offset(6)
 
         }
     }

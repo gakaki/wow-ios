@@ -111,10 +111,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-        //growing io
-        if Growing.handle(url) {
-            return true
-        }
+//        //growing io
+//        if Growing.handle(url) {
+//            return true
+//        }
         
 //        //DeepShare
 //        if DeepShare.handleURL(url) {
@@ -137,11 +137,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMSocialSnsService.handleOpen(url)
         
         
-        //growing io
-        if Growing.handle(url) {
-            return true
-        }
-        
+//        //growing io
+//        if Growing.handle(url) {
+//            return true
+//        }
+//        
 //        //DeepShare
 //        if DeepShare.handleURL(url) {
 //            return true
@@ -191,8 +191,13 @@ extension AppDelegate{
         
 
 
-//        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:String(VCCategory))
+//        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:String(describing: VCCategory.self))
 //        window?.rootViewController =  UIStoryboard.initialViewController("Found")
+        
+        let storyboard = UIStoryboard(name: "Found", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "VCFound") as! VCFound
+
+        window?.rootViewController = viewController
 //          window?.rootViewController =  VCBuy(nibName: nil, bundle: nil)
 //        let vc_designer_list = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList
 //        window?.rootViewController =  vc_designer_list
@@ -227,27 +232,27 @@ extension AppDelegate{
     func registAppKey(_ launchOptions: [AnyHashable: Any]?){
         //友盟
 
-        MobClick.setAppVersion(self.get_version_full())
-       
-        UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
-        UMAnalyticsConfig.sharedInstance().channelId = ""
-        MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
-        MobClick.setCrashReportEnabled(true)
-        
-        UMSocialData.setAppKey(WOWID.UMeng.appID)
-        UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
-   
-
-        
-        
-        //Growing
-        Growing.start(withAccountId: "a04e14656f08dc7e")
-        //DeepShare
-//        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
-        //Talking Data
-        TalkingData.sessionStarted("88C9035CD51E8009BE4441263D83003A", withChannelId: "app store")
-        
-        
+//        MobClick.setAppVersion(self.get_version_full())
+//       
+//        UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
+//        UMAnalyticsConfig.sharedInstance().channelId = ""
+//        MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
+//        MobClick.setCrashReportEnabled(true)
+//        
+//        UMSocialData.setAppKey(WOWID.UMeng.appID)
+//        UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
+//   
+//
+//        
+//        
+//        //Growing
+//        Growing.start(withAccountId: "a04e14656f08dc7e")
+//        //DeepShare
+////        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
+//        //Talking Data
+//        TalkingData.sessionStarted("88C9035CD51E8009BE4441263D83003A", withChannelId: "app store")
+//        
+//        
         
 //        //MonkeyKing
 //        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))

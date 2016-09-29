@@ -43,13 +43,13 @@ class VCShopping: WowBaseVCCartSearch {
         }
 
         
-        vc_found    = UIStoryboard.initialViewController("Found", identifier:String(describing: VCFound())) as! VCFound
-        vc_brand    = UIStoryboard.initialViewController("Brand", identifier:String(describing: WOWBrandListController.self)) as? WOWBrandListController
+        vc_found    = UIStoryboard.initialViewController("Found", identifier:String(describing: VCFound.self)) as! VCFound
+        vc_brand    = UIStoryboard.initialViewController("Brand", identifier:String(describing: WOWBrandListController.self)) as! WOWBrandListController
         vc_designer = UIStoryboard.initialViewController("Designer", identifier:String(describing: VCDesignerList.self)) as! VCDesignerList
         
-        addChildViewController(vc_found!)
-        addChildViewController(vc_brand!)
-        addChildViewController(vc_designer!)
+        addChildViewController(vc_found)
+        addChildViewController(vc_brand)
+        addChildViewController(vc_designer)
         
         v.magicView.reloadData()
     }

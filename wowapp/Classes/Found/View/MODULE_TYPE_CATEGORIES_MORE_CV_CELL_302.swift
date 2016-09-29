@@ -64,7 +64,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
             
         }
         
-        name_en.snp_makeConstraints { (make) -> Void in
+        name_en.snp.makeConstraints { (make) -> Void in
             
             name_en.font      = UIFont.systemFont(ofSize: 12)
             name_en.textColor = color_text
@@ -100,7 +100,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell:UICollectionViewCell{
         self.addSubview(bg_pic)
 
         //et ratio = bg_pic.image!.size.height / bg_pic.image!.size.width
-        bg_pic.snp_makeConstraints { (make) -> Void in
+        bg_pic.snp.makeConstraints { (make) -> Void in
             //            make.size.equalTo(self)
             make.center.equalTo(self)
             make.width.equalTo(self)

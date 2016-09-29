@@ -62,7 +62,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         
         let frame = CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight - 210)
         cv = UICollectionView(frame: frame, collectionViewLayout: self.layout)
-        cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
+        cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
 
         let bg_view                         = UIView()
         bg_view.backgroundColor             = UIColor.white

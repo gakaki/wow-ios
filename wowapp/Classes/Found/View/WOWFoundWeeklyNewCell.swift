@@ -26,7 +26,7 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
         cv.delegate                           = self
         cv.dataSource                         = self
         cv.backgroundColor                    = UIColor.white
-        cv.register(WOWFoundWeeklyNewCellElementCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundWeeklyNewCellElementCell()))
+        cv.register(WOWFoundWeeklyNewCellElementCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundWeeklyNewCellElementCell.self))
         
         cv.showsVerticalScrollIndicator       = false
         cv.showsHorizontalScrollIndicator     = false
@@ -65,7 +65,7 @@ extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundWeeklyNewCellElementCell()), for: indexPath) as! WOWFoundWeeklyNewCellElementCell
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundWeeklyNewCellElementCell.self), for: indexPath) as! WOWFoundWeeklyNewCellElementCell
         let m               = self.data[(indexPath as NSIndexPath).item]
         cell.setModel(m)
         return cell

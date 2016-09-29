@@ -3,7 +3,7 @@
 
 import UIKit
 import SnapKit
-import YYImage
+
 
 class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
     
@@ -57,13 +57,13 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
             make.top.equalTo(pictureImageView.snp.bottom)
         }
 
-        label_price.snp_makeConstraints { (make) -> Void in
+        label_price.snp.makeConstraints { (make) -> Void in
 
             label_price.font            = UIFont.systemFont(ofSize: 12)
             label_price.textColor       = UIColor.black
             label_price.textAlignment   = NSTextAlignment.center
 
-            make.width.equalTo(self.snp_width)
+            make.width.equalTo(self.snp.width)
             make.height.equalTo(15.h)
             make.top.equalTo(label_name.snp.bottom).offset(6)
 

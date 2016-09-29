@@ -20,7 +20,7 @@ class WOWUserHomeContainerView: UICollectionReusableView {
         backgroundColor = UIColor.white
         topHeadView = Bundle.main.loadNibNamed("WOWUserHomeTopView", owner:self, options: nil)?.last as! WOWUserHomeTopView
         addSubview(topHeadView)
-        topHeadView.snp_makeConstraints {[weak self](make) in
+        topHeadView.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.top.equalTo(strongSelf).offset(0)
                 make.bottom.equalTo(strongSelf).offset(-40)

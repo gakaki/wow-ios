@@ -20,7 +20,7 @@ class WOWLikeListCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell()))
+        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell.self))
         attentionButton.setBackgroundImage(UIImage(named: "unAttentionBack"), for: UIControlState())
         attentionButton.setBackgroundImage(UIImage(named: "attentionedBack"), for: .selected)
     }

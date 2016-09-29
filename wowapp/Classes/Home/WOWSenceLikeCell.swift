@@ -30,7 +30,7 @@ class WOWSenceLikeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell()))
+        self.collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell.self))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

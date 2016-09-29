@@ -31,7 +31,7 @@ class MODULE_TYPE_SINGLE_BANNER_CELL_201:UITableViewCell,ModuleViewElement{
    
         addSubview(bigImageView)
         
-        bigImageView.snp_makeConstraints { (make) in
+        bigImageView.snp.makeConstraints { (make) in
             make.size.equalTo(MGScreenWidth)
             make.center.equalTo(self)
         }

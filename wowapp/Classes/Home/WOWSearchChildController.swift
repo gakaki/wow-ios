@@ -121,7 +121,7 @@ class WOWSearchChildController: WOWBaseViewController{
 
     override func setUI(){
         collectionView.collectionViewLayout = self.layout
-        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
+        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
         collectionView.mj_footer = self.mj_footer
     }
     

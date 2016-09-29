@@ -24,7 +24,7 @@ class WOWSubArtCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell()))
+        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell.self))
     }
     
     

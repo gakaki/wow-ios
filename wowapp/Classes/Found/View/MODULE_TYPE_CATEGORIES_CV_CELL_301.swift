@@ -118,7 +118,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         collectionView.dataSource                         = self
         collectionView.backgroundColor                    = UIColor.clear
 //        collectionView.autoresizingMask                   = [UIViewAutoresizing.FlexibleHeight , UIViewAutoresizing.FlexibleWidth] //其实没啥用
-        collectionView.register(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell()))
+        collectionView.register(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self))
         collectionView.showsVerticalScrollIndicator       = false
         collectionView.showsHorizontalScrollIndicator     = false
         

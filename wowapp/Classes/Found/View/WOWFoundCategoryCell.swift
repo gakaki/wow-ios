@@ -36,22 +36,22 @@ class WOWFoundCategoryCellCollectionViewCell:UICollectionViewCell{
         self.addSubview(pictureImageView)
         self.addSubview(overlay)
 
-        pictureImageView.snp_makeConstraints { (make) -> Void in
+        pictureImageView.snp.makeConstraints { (make) -> Void in
             make.size.equalTo(self)
             make.center.equalTo(self)
         }
         
-        overlay.snp_makeConstraints { (make) -> Void in
+        overlay.snp.makeConstraints { (make) -> Void in
             make.size.equalTo(self)
             make.center.equalTo(self)
         }
 
-        label.snp_makeConstraints { (make) -> Void in
+        label.snp.makeConstraints { (make) -> Void in
             
             label.font      = UIFont.systemScaleFontSize(14)
             label.textColor = UIColor.white
         
-            make.width.equalTo(self.snp_width)
+            make.width.equalTo(self.snp.width)
             make.height.equalTo(20)
             make.center.equalTo(self)
         }
@@ -115,7 +115,7 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
         self.cv.delegate                             = self
         self.cv.dataSource                           = self
         self.cv.backgroundColor                      = UIColor.white
-        self.cv.register(WOWFoundCategoryCellCollectionViewCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundCategoryCellCollectionViewCell()))
+        self.cv.register(WOWFoundCategoryCellCollectionViewCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundCategoryCellCollectionViewCell.self))
         self.cv.showsVerticalScrollIndicator         = false
         self.cv.showsHorizontalScrollIndicator       = false
         self.cv.isScrollEnabled                        = false

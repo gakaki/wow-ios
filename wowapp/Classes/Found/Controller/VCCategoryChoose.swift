@@ -176,7 +176,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         cv.backgroundView                       = UIView(frame:CGRect.zero)
         
         
-        cv.register(CVCell.self, forCellWithReuseIdentifier:String(describing: CVCell()))
+        cv.register(CVCell.self, forCellWithReuseIdentifier:String(describing: CVCell.self))
         cv.showsVerticalScrollIndicator         = false
         cv.showsHorizontalScrollIndicator       = false
 //        cv.scrollEnabled                        = false

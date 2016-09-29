@@ -27,7 +27,7 @@ class WOWUserTopView: UIView {
         topContainerView.backgroundColor = UIColor.white
         addSubview(topContainerView)
         weak var weakSelf = self
-        topContainerView.snp_makeConstraints { (make) in
+        topContainerView.snp.makeConstraints { (make) in
             if let _ = weakSelf{
                 make.left.right.top.equalTo(0)
                 make.height.equalTo(76)
@@ -37,7 +37,7 @@ class WOWUserTopView: UIView {
         headImageView = UIImageView()
         headImageView.image = UIImage(named: "placeholder_userhead")
         topContainerView.addSubview(headImageView)
-        headImageView.snp_makeConstraints { (make) in
+        headImageView.snp.makeConstraints { (make) in
             if let _ = weakSelf{
                 make.height.width.equalTo(46)
                 make.centerY.equalTo(topContainerView)
@@ -49,7 +49,7 @@ class WOWUserTopView: UIView {
         let arrowImageView = UIImageView()
         arrowImageView.image = UIImage(named: "next_arrow")
         topContainerView.addSubview(arrowImageView)
-        arrowImageView.snp_makeConstraints { (make) in
+        arrowImageView.snp.makeConstraints { (make) in
             if let _ = weakSelf{
                 make.right.equalTo(topContainerView.snp_right).offset(-15)
                 make.centerY.equalTo(topContainerView)
@@ -62,11 +62,11 @@ class WOWUserTopView: UIView {
         nameLabel.font = Fontlevel000
         nameLabel.textColor = GrayColorlevel1
         topContainerView.addSubview(nameLabel)
-        nameLabel.snp_makeConstraints { (make) in
+        nameLabel.snp.makeConstraints { (make) in
             if let _ = weakSelf{
-                make.centerY.equalTo(headImageView.snp_centerY).offset(-8)
-                make.left.equalTo(headImageView.snp_right).offset(15)
-                make.right.equalTo(arrowImageView.snp_left).offset(-8)
+                make.centerY.equalTo(headImageView.snp.centerY).offset(-8)
+                make.left.equalTo(headImageView.snp.right).offset(15)
+                make.right.equalTo(arrowImageView.snp.left).offset(-8)
             }
         }
         
@@ -75,18 +75,18 @@ class WOWUserTopView: UIView {
         desLabel.font = FontLevel005
         desLabel.textColor = GrayColorlevel3
         topContainerView.addSubview(desLabel)
-        desLabel.snp_makeConstraints { (make) in
+        desLabel.snp.makeConstraints { (make) in
             if let _ = weakSelf{
-                make.centerY.equalTo(headImageView.snp_centerY).offset(12)
-                make.left.equalTo(headImageView.snp_right).offset(15)
-                make.right.equalTo(nameLabel.snp_right)
+                make.centerY.equalTo(headImageView.snp.centerY).offset(12)
+                make.left.equalTo(headImageView.snp.right).offset(15)
+                make.right.equalTo(nameLabel.snp.right)
             }
         }
         
         let centerLine = UIView()
         centerLine.backgroundColor = SeprateColor
         topContainerView.addSubview(centerLine)
-        centerLine.snp_makeConstraints { (make) in
+        centerLine.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
             make.height.equalTo(0.5)
         }
@@ -97,9 +97,9 @@ class WOWUserTopView: UIView {
         loginLabel.textColor = GrayColorlevel3
         loginLabel.isHidden = true
         topContainerView.addSubview(loginLabel)
-        loginLabel.snp_makeConstraints { (make) in
+        loginLabel.snp.makeConstraints { (make) in
             if let _ = weakSelf{
-                make.left.equalTo(headImageView.snp_right).offset(8)
+                make.left.equalTo(headImageView.snp.right).offset(8)
                 make.centerY.equalTo(topContainerView.centerY).offset(0)
                 make.right.lessThanOrEqualTo(topContainerView.right).offset(-15)
             }

@@ -59,10 +59,10 @@ class WOWPayBackView: UIView {
             }
         }
         backClear.insertSubview(dismissButton, belowSubview: payView)
-        dismissButton.snp_makeConstraints {[weak self](make) in
+        dismissButton.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.top.right.equalTo(strongSelf.backClear).offset(0)
-                make.bottom.equalTo(strongSelf.payView.snp_top).offset(0)
+                make.bottom.equalTo(strongSelf.payView.snp.top).offset(0)
             }
         }
         

@@ -31,7 +31,7 @@ class WOWStoreBrandCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell()))
+        collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell.self))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

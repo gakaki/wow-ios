@@ -533,7 +533,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         let lbBottom = UILabel.initLable(" ", titleColor: UIColor.black, textAlignment: .center, font: 10)
         lbBottom.backgroundColor = UIColor.init(hexString: "eaeaea")
         view.addSubview(lbBottom)
-        lbBottom.snp_makeConstraints { (make) -> Void in
+        lbBottom.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(view)
             make.height.equalTo(0.5)
             make.left.equalTo(view)

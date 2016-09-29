@@ -87,17 +87,17 @@ class WOWBuyBackView: UIView {
            
             buyView.entrance = .payEntrance
         }
-        buyView.snp_makeConstraints {[weak self](make) in
+        buyView.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
             }
         }
        
         backClear.insertSubview(dismissButton, belowSubview: buyView)
-        dismissButton.snp_makeConstraints {[weak self](make) in
+        dismissButton.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.top.right.equalTo(strongSelf.backClear).offset(0)
-                make.bottom.equalTo(strongSelf.buyView.snp_top).offset(0)
+                make.bottom.equalTo(strongSelf.buyView.snp.top).offset(0)
             }
         }
         

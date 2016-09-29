@@ -68,7 +68,7 @@ class WOWSenceController: WOWBaseViewController {
         footerCollectionView.backgroundColor = DefaultBackColor
         WOWBorderColor(footerCollectionView)
         footerCollectionView.register(WOWReuseSectionView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier:"WOWCollectionHeaderCell")
-        footerCollectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell()))
+        footerCollectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:String(describing: WOWImageCell.self))
         footerCollectionView.delegate = self
         footerCollectionView.dataSource = self
         tableView.tableFooterView = footerCollectionView

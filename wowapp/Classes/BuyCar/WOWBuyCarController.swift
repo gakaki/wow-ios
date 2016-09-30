@@ -33,7 +33,7 @@ class WOWBuyCarController: WOWBaseViewController {
 //    private var editingModel    : WOWBuyCarModel?
     fileprivate var totalPrice      : String?
     
-    fileprivate var dataArr = [WOWCarProductModel](){
+    var dataArr = [WOWCarProductModel](){
         didSet{
             /**
              *  如果购物车内没有商品底部view就隐藏
@@ -241,12 +241,13 @@ class WOWBuyCarController: WOWBaseViewController {
      3.删除购物车数据
      - parameter items:
      */
-    fileprivate func asyncCarDelete(_ model: WOWCarProductModel){
+    func asyncCarDelete(_ model: WOWCarProductModel){
         var shoppingCartId = [Int]()
         shoppingCartId.append(model.shoppingCartId ?? 0)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_CartRemove(shoppingCartId:shoppingCartId), successClosure: {[weak self] (result) in
             if let strongSelf = self{
-               strongSelf.dataArr.removeObject(model)
+                
+                strongSelf.dataArr.removeObject(model)
                 WOWUserManager.userCarCount -= model.productQty ?? 1
                 //更新购物车数量信息
                 strongSelf.updateCarCountBadge()

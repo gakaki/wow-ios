@@ -486,17 +486,18 @@ extension WOWEditOrderController: selectPayDelegate {
             WOWHud.showMsg("订单生成失败")
             return
         }
-        //TODO
-//        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: Manager.sharedInstance.ip_public), successClosure: { [weak self](result) in
-//            if let strongSelf = self {
-//                let json = JSON(result)
-//                let charge = json["charge"]
-//                strongSelf.goPay(charge.object as AnyObject)
-//            }
-//            
-//            }) { (errorMsg) in
-//                
-//        }
+        
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: Manager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+            if let strongSelf = self {
+                let json = JSON(result)
+                let charge = json["charge"]
+                strongSelf.goPay(charge.object as AnyObject)
+            }
+            
+            }) { (errorMsg) in
+                
+        }
     }
     
     func canclePay() {

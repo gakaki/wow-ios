@@ -49,8 +49,8 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
             
             make.width.equalTo(60)
             make.height.equalTo(20)
-            //TODO
-//            make.center.equalTo(self.snp.center).offset(CGPoint(-10,0)
+
+            make.center.equalTo(self.snp.center).inset(UIEdgeInsetsMake(-10, 0, 0, 0))
         }
  
         line.snp.makeConstraints { (make) -> Void in

@@ -39,24 +39,29 @@ extension UIImageView {
     }
     func set_webimage_url_base( _ url:String? , place_holder_name pic_name:String , need_random_url random:Bool = false ) -> Void {
         do{
-//TODO
-//            try! self.yy_setImage( with: URL(string:url ?? ""), placeholder: UIImage(named: pic_name) , options:  [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation], completion: { ( image, url, from:YYWebImageFromType, stage:YYWebImageStage, e:NSError?) in
-//
-//                let url_str = url.URLString
-//                if ( from == YYWebImageFromType.remote ||  from == YYWebImageFromType.none ){
-//                    DLog("image url is \(url_str),from remote or none,\(stage)")
-//                }
-//  
-//            })
-           
+            let url_obj            = URL(string:url ?? "")
+            let image_place_holder = UIImage(named: pic_name)
+            
+            try! self.yy_setImage(
+                with: url_obj,
+                placeholder: image_place_holder,
+                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+                completion: { (img, url, from_type, image_stage,err ) in
+                    
+                    let url_str = url.absoluteString
+                    if ( from_type == YYWebImageFromType.remote ||  from_type == YYWebImageFromType.none ){
+                        DLog("image url is \(url_str),from remote or none,\(image_stage)")
+                    }
+
+            })
+            
         }catch let e {
             DLog(e)
         }
-       
      }
     
     func set_webimage_url( _ url:String? ) -> Void {
-        if let u = url {
+        if url != nil {
             let url         = self.webp_url(url)
             let pic_name    = "placeholder_product"
             self.set_webimage_url_base(url,place_holder_name: pic_name)

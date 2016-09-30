@@ -304,6 +304,11 @@ extension PhotoBrowser {
             let currentCell = self.collectionView.cellForItem(at: IndexPath(row: self.currentIndex, section: 0)) as! PhotoViewCell
             guard currentCell.imageView.image != nil else { return }
            
+//            DispatchQueue.global(attributes: [.qosDefault]).async {
+//                
+//                UIImageWriteToSavedPhotosAlbum(currentImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+//
+//            }
             //TODO
 //            DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default).async {
 //                

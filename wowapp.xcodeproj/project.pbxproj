@@ -69,7 +69,6 @@
 		06B766191D77E96600F803A9 /* GYNSURLHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B766031D77E96600F803A9 /* GYNSURLHook.m */; };
 		06B7661A1D77E96600F803A9 /* GYNSURLSessionHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B766051D77E96600F803A9 /* GYNSURLSessionHook.m */; };
 		06B7661B1D77E96600F803A9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 06B766061D77E96600F803A9 /* LICENSE */; };
-		06B7661C1D77E96600F803A9 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 06B766071D77E96600F803A9 /* README.md */; };
 		06B7661D1D77E96600F803A9 /* GYMockRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7660A1D77E96600F803A9 /* GYMockRequest.m */; };
 		06B7661E1D77E96600F803A9 /* GYMockRequestDSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7660C1D77E96600F803A9 /* GYMockRequestDSL.m */; };
 		06B7661F1D77E96600F803A9 /* GYMockResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7660F1D77E96600F803A9 /* GYMockResponse.m */; };
@@ -524,7 +523,6 @@
 		06B766041D77E96600F803A9 /* GYNSURLSessionHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYNSURLSessionHook.h; sourceTree = "<group>"; };
 		06B766051D77E96600F803A9 /* GYNSURLSessionHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYNSURLSessionHook.m; sourceTree = "<group>"; };
 		06B766061D77E96600F803A9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		06B766071D77E96600F803A9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		06B766091D77E96600F803A9 /* GYMockRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMockRequest.h; sourceTree = "<group>"; };
 		06B7660A1D77E96600F803A9 /* GYMockRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYMockRequest.m; sourceTree = "<group>"; };
 		06B7660B1D77E96600F803A9 /* GYMockRequestDSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYMockRequestDSL.h; sourceTree = "<group>"; };
@@ -1100,7 +1098,6 @@
 				06B765FE1D77E96600F803A9 /* GYMockURLProtocol.m */,
 				06B765FF1D77E96600F803A9 /* Hooks */,
 				06B766061D77E96600F803A9 /* LICENSE */,
-				06B766071D77E96600F803A9 /* README.md */,
 				06B766081D77E96600F803A9 /* Request */,
 				06B7660D1D77E96600F803A9 /* Response */,
 			);
@@ -2638,7 +2635,6 @@
 				06FB1EBF1D94CBC200107E2E /* WOWBuyCarRequestVo.swift in Sources */,
 				63C42DC71D646B0400879FEB /* PhotoToolBar.swift in Sources */,
 				29FF26801CFDA86300DF2A9B /* PageControllerDataSource.swift in Sources */,
-				06B7661C1D77E96600F803A9 /* README.md in Sources */,
 				29DD40EB1D018C07002507EC /* WOWProductDetailAboutCell.swift in Sources */,
 				2D6B027A1D589606003D21C1 /* WOWOrderDetailTwoCell.swift in Sources */,
 				0608696F1D49C81E008FB61D /* ArrayGroupBy.swift in Sources */,
@@ -2763,7 +2759,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -2775,9 +2771,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PROVISIONING_PROFILE = "5ecc375a-c811-4677-9947-f30c285aef7d";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2819,8 +2816,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "5ecc375a-c811-4677-9947-f30c285aef7d";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -2961,8 +2959,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = wowapp/wowapp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = B4WSDTADTT;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (

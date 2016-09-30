@@ -195,8 +195,7 @@ if let u = url {
     print("空的")
 }
 
-let arr = [1,2,3]
-let index = arr.indexOf(2)
+
 
 
 

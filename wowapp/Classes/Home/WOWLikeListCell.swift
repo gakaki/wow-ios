@@ -47,7 +47,7 @@ extension WOWLikeListCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWImageCell()), for:indexPath) as! WOWImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWImageCell.self), for:indexPath) as! WOWImageCell
         cell.pictureImageView.image = UIImage(named:"testBrand")
         return cell
     }

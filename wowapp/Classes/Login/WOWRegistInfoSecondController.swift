@@ -120,7 +120,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }
     
     fileprivate func configTable(){
-        let nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView()), owner: self, options: nil)?.last as! WOWRegistInfoSureView
+        let nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView.self), owner: self, options: nil)?.last as! WOWRegistInfoSureView
         nextView.sureButton.addTarget(self, action: #selector(sure), for: .touchUpInside)
         nextView.sureButton.setTitle("完成", for: UIControlState())
         nextView.frame = CGRect(x: 0,y: 0, width: self.view.w, height: 200)

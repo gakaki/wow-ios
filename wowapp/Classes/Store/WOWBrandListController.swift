@@ -198,7 +198,7 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.brandID = model.id
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
@@ -209,7 +209,7 @@ extension WOWBrandListController:SearchResultDelegate{
     func searchResultSelect(_ model: WOWBrandV1Model) {
 //        searchController.searchResultsController?.dismissViewControllerAnimated(false, completion: nil)
         searchController.isActive = false
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.brandID = model.id
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

@@ -57,7 +57,7 @@ class WOWSettingController: WOWBaseTableViewController {
         switch (indexPath as NSIndexPath).section {
         case 0:
             if (indexPath as NSIndexPath).row == 0 {
-                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController())) as! WOWMsgCodeController
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController.self)) as! WOWMsgCodeController
                 vc.entrance = msgCodeEntrance.userEntrance
                 navigationController?.pushViewController(vc, animated: true)
             }

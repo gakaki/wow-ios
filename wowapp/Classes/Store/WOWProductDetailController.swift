@@ -89,17 +89,17 @@ class WOWProductDetailController: WOWBaseViewController {
     }()
     //产品描述
     lazy var productDescView:WOWProductDescView = {
-        let v = Bundle.main.loadNibNamed(String(describing: WOWProductDescView()), owner: self, options: nil)?.last as! WOWProductDescView
+        let v = Bundle.main.loadNibNamed(String(describing: WOWProductDescView.self), owner: self, options: nil)?.last as! WOWProductDescView
         return v
     }()
     //产品参数
     lazy var paramView:WOWProductHeaderView = {
-        let v = Bundle.main.loadNibNamed(String(describing: WOWProductHeaderView()), owner: self, options: nil)?.last as! WOWProductHeaderView
+        let v = Bundle.main.loadNibNamed(String(describing: WOWProductHeaderView.self), owner: self, options: nil)?.last as! WOWProductHeaderView
         return v
     }()
     //温馨提示
     lazy var tipsView:WOWProductHeaderView = {
-        let v = Bundle.main.loadNibNamed(String(describing: WOWProductHeaderView()), owner: self, options: nil)?.last as! WOWProductHeaderView
+        let v = Bundle.main.loadNibNamed(String(describing: WOWProductHeaderView.self), owner: self, options: nil)?.last as! WOWProductHeaderView
         v.lineView.isHidden = false
         return v
     }()
@@ -214,7 +214,7 @@ class WOWProductDetailController: WOWBaseViewController {
             toLoginVC(true)
             return
         }
-        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController())) as! WOWBuyCarController
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController.self)) as! WOWBuyCarController
         vc.hideNavigationBar = false
         navigationController?.pushViewController(vc, animated: true)
 

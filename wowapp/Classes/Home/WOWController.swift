@@ -131,7 +131,7 @@ class WOWController: WOWBaseViewController {
          self.tableView.reloadData()
     }
     lazy var banner:WOWBanner = {
-        let view = Bundle.main.loadNibNamed(String(describing: WOWBanner()), owner: self, options: nil)?.last as! WOWBanner
+        let view = Bundle.main.loadNibNamed(String(describing: WOWBanner.self), owner: self, options: nil)?.last as! WOWBanner
         view.cyclePictureView.delegate = self
         view.jsButton.addTarget(self, action: #selector(jsClick), for: .touchUpInside)
         view.dgButton.addTarget(self, action: #selector(dgClick), for: .touchUpInside)
@@ -147,7 +147,7 @@ class WOWController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        tableView.register(UINib.nibName(String(describing: WOWlListCell())), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(String(describing: WOWlListCell.self)), forCellReuseIdentifier:cellID)
         
         tableView.register(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
         tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
@@ -312,7 +312,7 @@ class WOWController: WOWBaseViewController {
                 print("专题详情页（图文混排）")
             case 4:
                 print("品牌详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
                 vc.brandID = model.bannerLinkTargetId
                 vc.entrance = .brandEntrance
                 vc.hideNavigationBar = true
@@ -320,14 +320,14 @@ class WOWController: WOWBaseViewController {
                 
             case 5:
                 print("设计师详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
                 vc.designerId = model.bannerLinkTargetId
                 vc.entrance = .designerEntrance
                 vc.hideNavigationBar = true
                 navigationController?.pushViewController(vc, animated: true)
             case 6:
                 print("商品详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
                 vc.hideNavigationBar = true
                 vc.productId = model.bannerLinkTargetId
                 navigationController?.pushViewController(vc, animated: true)

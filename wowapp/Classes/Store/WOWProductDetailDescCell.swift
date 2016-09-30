@@ -40,7 +40,7 @@ class WOWProductDetailDescCell: UITableViewCell {
         UIApplication.currentViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func designerClick(_ sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.designerId = productModel?.designerId
         vc.entrance = .designerEntrance
         vc.hideNavigationBar = true

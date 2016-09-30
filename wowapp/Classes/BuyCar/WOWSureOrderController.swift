@@ -39,11 +39,11 @@ class WOWSureOrderController: WOWBaseViewController {
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = GrayColorLevel5
-        tableView.register(UINib.nibName(String(describing: WOWAddressCell())), forCellReuseIdentifier:String(describing: WOWAddressCell()))
-        tableView.register(UINib.nibName(String(describing: WOWValue1Cell())), forCellReuseIdentifier:String(describing:WOWValue1Cell()))
-        tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell())), forCellReuseIdentifier:String(describing:WOWSenceLikeCell()))
-        tableView.register(UINib.nibName(String(describing: WOWTipsCell())), forCellReuseIdentifier:String(describing:WOWTipsCell()))
-        tableView.register(UINib.nibName(String(describing: WOWValue2Cell())), forCellReuseIdentifier:String(describing:WOWValue2Cell()))
+        tableView.register(UINib.nibName(String(describing: WOWAddressCell.self)), forCellReuseIdentifier:String(describing: WOWAddressCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWValue1Cell.self)), forCellReuseIdentifier:String(describing:WOWValue1Cell.self))
+        tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell.self)), forCellReuseIdentifier:String(describing:WOWSenceLikeCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWTipsCell.self)), forCellReuseIdentifier:String(describing:WOWTipsCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWValue2Cell.self)), forCellReuseIdentifier:String(describing:WOWValue2Cell.self))
         tableView.keyboardDismissMode = .onDrag
         tableView.selectRow(at: IndexPath(row: 0, section: 1), animated: true, scrollPosition: .none)
     }
@@ -174,7 +174,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         var returnCell:UITableViewCell?
         switch (indexPath as NSIndexPath).section {
         case 0: //地址
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWAddressCell()), for: indexPath) as! WOWAddressCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWAddressCell.self), for: indexPath) as! WOWAddressCell
             cell.isUserInteractionEnabled = false
             cell.checkButton.isSelected = true
             cell.showData(addressArr[(indexPath as NSIndexPath).row])
@@ -184,14 +184,14 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             let type = ["支付宝","微信支付"]
             let titles = ["支","微"]
             let colors = [MGRgb(84, g: 199, b: 252),MGRgb(68, g: 219, b: 94)]
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWValue1Cell()), for: indexPath) as! WOWValue1Cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWValue1Cell.self), for: indexPath) as! WOWValue1Cell
             cell.leftButton.borderRadius(6)
             cell.leftButton.backgroundColor = colors[indexPath.row]
             cell.leftLabel?.text = type[(indexPath as NSIndexPath).row]
             cell.leftButton.setTitle(titles[(indexPath as NSIndexPath).row], for:UIControlState())
             returnCell = cell
         case 2: //商品清单
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell()), for: indexPath) as! WOWSenceLikeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell.self), for: indexPath) as! WOWSenceLikeCell
             cell.rightTitleLabel.text = "共\(productArr.count)件"
             cell.orderArr = productArr
             cell.rightBackView.addAction({ [weak self] in
@@ -203,12 +203,12 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             })
             returnCell = cell
         case 3: //订单备注
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell()), for:indexPath) as! WOWTipsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell.self), for:indexPath) as! WOWTipsCell
             tipsTextField = cell.textView
             returnCell = cell
         case 4: //订单汇总
             let titles = ["订单合计","运费","实付金额"]
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWValue2Cell()), for:indexPath) as! WOWValue2Cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWValue2Cell.self), for:indexPath) as! WOWValue2Cell
             cell.isUserInteractionEnabled = false
             cell.leftViseLabel.isHidden = (indexPath as NSIndexPath).row == 0 ? false : true
             cell.leftLabel.text = titles[(indexPath as NSIndexPath).row]
@@ -263,7 +263,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 footerView.leftLabel.text = "增加收货地址"
                 footerView.addAction({[weak self] in
                     if let strongSelf = self{
-                        let addvc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddAddressController())) as! WOWAddAddressController
+                        let addvc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddAddressController.self)) as! WOWAddAddressController
                         addvc.entrance = .sureOrder
                         addvc.action = {
                             strongSelf.request()
@@ -276,7 +276,7 @@ extension WOWSureOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 footerView.leftLabel.text = "其他收货地址"
                 footerView.addAction({[weak self] in
                     if let strongSelf = self{
-                        let addvc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddressController())) as! WOWAddressController
+                        let addvc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddressController.self)) as! WOWAddressController
                         addvc.entrance = .sureOrder
                         addvc.selectModel = strongSelf.addressArr.first
                         addvc.action = {(model:AnyObject) in

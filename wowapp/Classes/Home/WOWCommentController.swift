@@ -15,7 +15,7 @@ enum CommentType {
 
 class WOWCommentController: WOWBaseViewController {
     var mainID:Int!
-    let cellID = String(describing: WOWCommentCell())
+    let cellID = String(describing: WOWCommentCell.self)
     var commentType:CommentType = CommentType.sence
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!

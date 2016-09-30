@@ -109,7 +109,7 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     fileprivate func goUserInfo(){
-        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserInfoController())) as! WOWUserInfoController
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserInfoController.self)) as! WOWUserInfoController
         vc.editInfoAction = { [weak self] in
             if let strongSelf = self{
                 strongSelf.configUserInfo()
@@ -200,7 +200,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             evaluateApp()
             return
         case (2,_)://设置
-            let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWSettingController())) as! WOWSettingController
+            let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWSettingController.self)) as! WOWSettingController
             navigationController?.pushViewController(vc, animated: true)
             return
         default:
@@ -244,7 +244,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
     }
     
     fileprivate func goLeavaTips(){
-        let vc = UIStoryboard.initialViewController("User", identifier: String(describing: WOWLeaveTipsController()))
+        let vc = UIStoryboard.initialViewController("User", identifier: String(describing: WOWLeaveTipsController.self))
         navigationController?.pushViewController(vc, animated: true)
     }
     

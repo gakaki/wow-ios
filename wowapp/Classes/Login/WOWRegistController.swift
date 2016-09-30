@@ -167,7 +167,7 @@ class WOWRegistController: WOWBaseViewController {
     }
     
     @IBAction func showProtocol(_ sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistProtocolController())) as! WOWRegistProtocolController
+        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistProtocolController.self)) as! WOWRegistProtocolController
             vc.agreeAction = {[weak self] in
                 if let strongSelf = self{
                     strongSelf.protocolCheckButton.isSelected = true

@@ -36,7 +36,7 @@ class WOWSenceHelper: NSObject {
         var returnCell:UITableViewCell!
         switch (indexPath as NSIndexPath).section {
         case 0:
-            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSenceImageCell()), for:indexPath) as! WOWSenceImageCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSenceImageCell.self), for:indexPath) as! WOWSenceImageCell
 //            cell.contentImageView.kf_setImageWithURL(NSURL(string:sceneModel?.image ?? "")!, placeholderImage: UIImage(named: "placeholder_product"))
             
             cell.contentImageView.set_webimage_url(sceneModel?.image )
@@ -44,25 +44,25 @@ class WOWSenceHelper: NSObject {
             self.shareImage = cell.contentImageView.image
             returnCell = cell
         case 1:
-            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWAuthorCell()), for:indexPath) as! WOWAuthorCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWAuthorCell.self), for:indexPath) as! WOWAuthorCell
             cell.desLabel.text = sceneModel?.desc
             cell.contentView.bringSubview(toFront: cell.desLabel)
             returnCell = cell
         case 2:
-            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSubArtCell()),for: indexPath) as! WOWSubArtCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSubArtCell.self),for: indexPath) as! WOWSubArtCell
             cell.dataArr = sceneModel?.products
             cell.delegate = WOWSenceHelper.senceController
             returnCell = cell
         case 3:
-            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell()),for: indexPath) as! WOWSenceLikeCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell.self),for: indexPath) as! WOWSenceLikeCell
             cell.rightTitleLabel.text = "xx 人喜欢"
             cell.rightBackView.addAction({
-                let likeVC = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWLikeListController()))
+                let likeVC = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWLikeListController.self))
                 senceController.navigationController?.pushViewController(likeVC, animated: true)
             })
             returnCell = cell
         case 4:
-            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWCommentCell()),for: indexPath)as!WOWCommentCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWCommentCell.self),for: indexPath)as!WOWCommentCell
 //                cell.hideHeadImage()
             if let model = sceneModel?.comments?[(indexPath as NSIndexPath).row] {
                 cell.commentLabel.text = model.comment

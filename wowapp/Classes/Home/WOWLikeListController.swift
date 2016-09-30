@@ -49,7 +49,7 @@ extension WOWLikeListController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWLikeListCell()), for:indexPath) as! WOWLikeListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWLikeListCell.self), for:indexPath) as! WOWLikeListCell
         cell.delegate  = self
         //FIXME:
         cell.nameLabel.text = "尖叫君"

@@ -9,8 +9,8 @@
 import UIKit
 
 class WOWStoreController: WOWBaseViewController {
-    let cellID1     = String(describing: WOWStoreBrandCell())
-    let cellID2     = String(describing: WOWMenuCell())
+    let cellID1     = String(describing: WOWStoreBrandCell.self)
+    let cellID2     = String(describing: WOWMenuCell.self)
     var categoryArr = [WOWCategoryModel]()
     var brandArr    = [WOWBrandListModel]()
     var recommenArr = [WOWProductModel]()
@@ -37,7 +37,7 @@ class WOWStoreController: WOWBaseViewController {
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
-        tableView.register(UINib.nibName(String(describing: WOWStoreBrandCell())), forCellReuseIdentifier:cellID1)
+        tableView.register(UINib.nibName(String(describing: WOWStoreBrandCell.self)), forCellReuseIdentifier:cellID1)
         tableView.clearRestCell()
         tableView.mj_header          = mj_header
         configBarItem()
@@ -46,7 +46,7 @@ class WOWStoreController: WOWBaseViewController {
     fileprivate func configBarItem(){
         makeCustomerImageNavigationItem("search", left:false) {[weak self] () -> () in
             if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchsController()))
+                let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchsController.self))
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -99,7 +99,7 @@ class WOWStoreController: WOWBaseViewController {
  
 extension WOWStoreController:BrandCellDelegate{
     func hotBrandCellClick(_ brandModel: WOWBrandListModel) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.brandID = brandModel.brandId
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
@@ -107,7 +107,7 @@ extension WOWStoreController:BrandCellDelegate{
     
     //MARK:推荐商品
     func recommenProductCellClick(_ productModel: WOWProductModel) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productModel.productId
         navigationController?.pushViewController(vc, animated: true)
@@ -220,13 +220,13 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         case 1:
             return configSectionHeader("商品分类")
         case 2:
-            let sectionView =  Bundle.main.loadNibNamed(String(describing: WOWStoreSectionView()), owner: self, options: nil)?.last as! WOWStoreSectionView
+            let sectionView =  Bundle.main.loadNibNamed(String(describing: WOWStoreSectionView.self), owner: self, options: nil)?.last as! WOWStoreSectionView
             sectionView.leftLabel.text = "热门品牌"
             sectionView.bottomLine.isHidden = true
             sectionView.rightDetailLabel.text = "全部\(brandsCount)个品牌"
             sectionView.rightBackView.addAction({[weak self] in
                 if let strongSelf = self{
-                    let brandVC = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandListController())) as! WOWBrandListController
+                    let brandVC = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandListController.self)) as! WOWBrandListController
                     strongSelf.navigationController?.pushViewController(brandVC, animated: true)
                 }
                 })
@@ -238,7 +238,7 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
     }
     
     fileprivate func configSectionHeader(_ title:String) -> WOWStoreSectionView{
-        let sectionView =  Bundle.main.loadNibNamed(String(describing: WOWStoreSectionView()), owner: self, options: nil)?.last as! WOWStoreSectionView
+        let sectionView =  Bundle.main.loadNibNamed(String(describing: WOWStoreSectionView.self), owner: self, options: nil)?.last as! WOWStoreSectionView
         sectionView.leftLabel.text = title
         sectionView.rightBackView.isHidden = true
         return sectionView

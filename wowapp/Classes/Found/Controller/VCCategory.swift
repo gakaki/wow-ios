@@ -75,6 +75,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = ""
+        self.mj_footer.isHidden = true
+        
         request()
  
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {

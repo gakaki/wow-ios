@@ -39,7 +39,7 @@ class WOWSenceController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib.nibName(String(describing: WOWSenceImageCell.self)), forCellReuseIdentifier:String(describing: WOWSenceImageCell.self))
         tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:String(describing: WOWCommentCell.self))
-        tableView.register(UINib.nibName(String(describing: WOWSubArtCell())), forCellReuseIdentifier:String(describing: WOWSubArtCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWSubArtCell.self)), forCellReuseIdentifier:String(describing: WOWSubArtCell.self))
         tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell.self)), forCellReuseIdentifier:String(describing: WOWSenceLikeCell.self))
         tableView.mj_header = self.mj_header
         WOWSenceHelper.senceController = self
@@ -209,7 +209,7 @@ class WOWSenceController: WOWBaseViewController {
 //MARK: Delegate
 extension WOWSenceController:WOWSubAlertDelegate{
     func subAlertItemClick(_ productID:Int) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.productId = productID
         vc.hideNavigationBar = true
         WOWSenceHelper.senceController.navigationController?.pushViewController(vc, animated: true)
@@ -269,7 +269,7 @@ extension WOWSenceController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let  model = sceneModel?.recommendProducts?[(indexPath as NSIndexPath).row]
         let  pid = model?.productId ?? 0
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.productId = pid
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

@@ -50,7 +50,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     }
     
     fileprivate func configTable(){
-        nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView()), owner: self, options: nil)?.last as! WOWRegistInfoSureView
+        nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView.self), owner: self, options: nil)?.last as! WOWRegistInfoSureView
         nextView.sureButton.addTarget(self, action: #selector(nextButton), for: .touchUpInside)
         nextView.tipsLabel.isHidden = true
         nextView.frame = CGRect(x: 0,y: 0, width: self.view.w, height: 200)
@@ -98,7 +98,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
 //                WOWUserManager.userHeadImageUrl = strongSelf.userInfoFromWechat.icon
                 WOWUserManager.userDes = strongSelf.descTextField.text ?? ""
                 
-                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistInfoSecondController())) as! WOWRegistInfoSecondController
+                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistInfoSecondController.self)) as! WOWRegistInfoSecondController
                 vc.isPresent = strongSelf.isPresent
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
                 

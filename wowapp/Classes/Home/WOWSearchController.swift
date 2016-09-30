@@ -97,7 +97,7 @@ class WOWSearchController: WOWBaseViewController {
     
 //MARK:Lazy
     lazy var searchView:WOWSearchBarView = {
-        let view = Bundle.main.loadNibNamed(String(describing: WOWSearchBarView()), owner: self, options: nil)?.last as! WOWSearchBarView
+        let view = Bundle.main.loadNibNamed(String(describing: WOWSearchBarView.self), owner: self, options: nil)?.last as! WOWSearchBarView
         view.frame = CGRect(x: 9, y: 6, width: MGScreenWidth - 18,height: 30)
         view.searchTextField.delegate = self
         view.searchTextField.becomeFirstResponder()
@@ -122,7 +122,7 @@ class WOWSearchController: WOWBaseViewController {
     }()
    
     lazy var emptyView: UIView = {
-        let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView()), owner: self, options: nil)?.last as! WOWEmptySearchView
+        let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView.self), owner: self, options: nil)?.last as! WOWEmptySearchView
         view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight)
         view.isHidden = true
         return view

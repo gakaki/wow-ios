@@ -182,7 +182,7 @@ extension  UIViewController {
     
     func toVCCategory( _ cid: Int = 10 , cname:String? ){
         
-            let vc              = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory())) as! VCCategory
+            let vc              = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory.self)) as! VCCategory
             vc.ob_cid.value     = cid
             vc.title    = cname!
             self.pushVC(vc)
@@ -191,7 +191,7 @@ extension  UIViewController {
     
     
     func toVCProduct( _ pid: Int? ){
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = pid
         self.pushVC(vc)
@@ -203,7 +203,7 @@ extension  UIViewController {
             toLoginVC(true)
             return
         }
-        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController())) as! WOWBuyCarController
+        let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController.self)) as! WOWBuyCarController
         vc.hideNavigationBar = false
         pushVC(vc)
     }

@@ -29,7 +29,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 class WOWBuyCarController: WOWBaseViewController {
-    let cellNormalID = String(describing: WOWBuyCarNormalCell())
+    let cellNormalID = String(describing: WOWBuyCarNormalCell.self)
 //    private var editingModel    : WOWBuyCarModel?
     fileprivate var totalPrice      : String?
     

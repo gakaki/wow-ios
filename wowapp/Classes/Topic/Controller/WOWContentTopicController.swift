@@ -37,7 +37,7 @@ class WOWContentTopicController: WOWBaseViewController {
     
      //MARK:    - lazy
     lazy var nagationItem:WOWTopicNavigationItem = {
-        let view = Bundle.main.loadNibNamed(String(describing: WOWTopicNavigationItem()), owner: self, options: nil)?.last as! WOWTopicNavigationItem
+        let view = Bundle.main.loadNibNamed(String(describing: WOWTopicNavigationItem.self), owner: self, options: nil)?.last as! WOWTopicNavigationItem
         view.thumbButton.addTarget(self, action: #selector(dgClick), for: .touchDown)
         view.shareButton.addTarget(self, action: #selector(zdClick), for: .touchUpInside)
         view.buyCarBUttion.addTarget(self, action: #selector(sjClick), for: .touchUpInside)
@@ -249,8 +249,8 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.mj_header = self.mj_header
         //显示价格的cell
-        tableView.register(UINib.nibName(String(describing: WOWContentTopicTopCell())), forCellReuseIdentifier:String(describing: WOWContentTopicTopCell.self))
-        tableView.register(UINib.nibName(String(describing: WOWProductDetailCell())), forCellReuseIdentifier:String(describing: WOWProductDetailCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWContentTopicTopCell.self)), forCellReuseIdentifier:String(describing: WOWContentTopicTopCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWProductDetailCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailCell.self))
                //相关商品
         tableView.register(UINib.nibName(String(describing: WOWProductDetailAboutCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailAboutCell.self))
     }
@@ -274,11 +274,11 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         var returnCell :UITableViewCell!
         switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (0,_): //
-            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentTopicTopCell()), for: indexPath) as! WOWContentTopicTopCell
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentTopicTopCell.self), for: indexPath) as! WOWContentTopicTopCell
             cell.showData(vo_topic)
             returnCell = cell
         case (1,_): //产品描述
-            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell()), for: indexPath) as! WOWProductDetailCell
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell.self), for: indexPath) as! WOWProductDetailCell
             if let array = vo_topic?.imageSerial?.records {
                 let model = array[(indexPath as NSIndexPath).row]
                 cell.showData(model)
@@ -394,7 +394,7 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
 
 extension WOWContentTopicController: WOWProductDetailAboutCellDelegate {
         @objc func selectCollectionIndex(_ productId: Int) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController())) as! WOWProductDetailController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productId
         navigationController?.pushViewController(vc, animated: true)

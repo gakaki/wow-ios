@@ -35,7 +35,7 @@ class WOWShareBackView:UIView{
     }()
     
     lazy var shareView:WOWShareView = {
-       let v = Bundle.main.loadNibNamed(String(describing: WOWShareView()), owner: self, options: nil)?.last as! WOWShareView
+       let v = Bundle.main.loadNibNamed(String(describing: WOWShareView.self), owner: self, options: nil)?.last as! WOWShareView
         v.friendView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
                 if let action = strongSelf.shareActionBack {

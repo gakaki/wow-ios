@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWHotStyleMain: WOWBaseViewController {
-    let cellID      = String(describing: WOWHotStyleCell())
+    let cellID      = String(describing: WOWHotStyleCell.self)
     var dataArr     = [WOWHomeModle]()    //商品列表数组
     @IBOutlet var tableView: UITableView!
     
@@ -123,7 +123,7 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataArr[(indexPath as NSIndexPath).section]
         
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController())) as! WOWContentTopicController
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
         //                vc.hideNavigationBar = true
         vc.topic_id = model.moduleContentList?.id ?? 0
         vc.delegate = self

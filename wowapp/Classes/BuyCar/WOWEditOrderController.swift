@@ -72,10 +72,10 @@ class WOWEditOrderController: WOWBaseViewController {
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = GrayColorLevel5
-        tableView.register(UINib.nibName(String(describing: WOWOrderAddressCell())), forCellReuseIdentifier:String(describing: WOWOrderAddressCell.self))
-        tableView.register(UINib.nibName(String(describing: WOWProductOrderCell())), forCellReuseIdentifier:String(describing: WOWProductOrderCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWOrderAddressCell.self)), forCellReuseIdentifier:String(describing: WOWOrderAddressCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWProductOrderCell.self)), forCellReuseIdentifier:String(describing: WOWProductOrderCell.self))
         tableView.register(UINib.nibName(String(describing: WOWOrderFreightCell.self)), forCellReuseIdentifier:String(describing: WOWOrderFreightCell.self))
-        tableView.register(UINib.nibName(String(describing: WOWTipsCell())), forCellReuseIdentifier:String(describing: WOWTipsCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWTipsCell.self)), forCellReuseIdentifier:String(describing: WOWTipsCell.self))
         tableView.keyboardDismissMode = .onDrag
  
     }
@@ -338,17 +338,17 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         var returnCell:UITableViewCell?
         switch (indexPath as NSIndexPath).section {
         case 0: //地址
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderAddressCell()), for: indexPath) as! WOWOrderAddressCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderAddressCell.self), for: indexPath) as! WOWOrderAddressCell
             cell.showData(addressInfo)
             returnCell = cell
         case 1: //商品清单
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductOrderCell()), for: indexPath) as! WOWProductOrderCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductOrderCell.self), for: indexPath) as! WOWProductOrderCell
             if let productArr = productArr {
                 cell.showData(productArr[(indexPath as NSIndexPath).row])
             }
             returnCell = cell
         case 2: //运费及优惠券信息
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderFreightCell()), for: indexPath) as! WOWOrderFreightCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderFreightCell.self), for: indexPath) as! WOWOrderFreightCell
             if (indexPath as NSIndexPath).row == 0 {
                 cell.leftLabel.text = "运费"
                 let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0],counts:[1])
@@ -374,7 +374,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             }
             returnCell = cell
         case 3: //订单备注
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell()), for:indexPath) as! WOWTipsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell.self), for:indexPath) as! WOWTipsCell
             cell.textView.placeHolder = "写下您的特殊要求"
             tipsTextField = cell.textView
             returnCell = cell

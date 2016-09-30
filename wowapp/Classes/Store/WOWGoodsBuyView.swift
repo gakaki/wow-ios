@@ -38,7 +38,7 @@ enum carEntrance{
 class WOWBuyBackView: UIView {
 //MARK:Lazy
     lazy var buyView:WOWGoodsBuyView = {
-        let v = Bundle.loadResourceName(String(describing: WOWGoodsBuyView())) as! WOWGoodsBuyView
+        let v = Bundle.loadResourceName(String(describing: WOWGoodsBuyView.self)) as! WOWGoodsBuyView
         v.closeButton.addTarget(self, action: #selector(closeButtonClick), for:.touchUpInside)
         v.isUserInteractionEnabled = true
         return v

@@ -139,12 +139,12 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.mj_header = self.mj_header
-        tableView.register(UINib.nibName(String(describing: WOWGoodsTypeCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsTypeCell()))
-        tableView.register(UINib.nibName(String(describing: WOWGoodsDetailCell())), forCellReuseIdentifier:String(describing: WOWGoodsDetailCell()))
-        tableView.register(UINib.nibName(String(describing: WOWGoodsParamCell())), forCellReuseIdentifier:String(describing: WOWGoodsParamCell()))
-        tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell())), forCellReuseIdentifier:String(describing: WOWSenceLikeCell.self))
-        tableView.register(UINib.nibName(String(describing: WOWCommentCell())), forCellReuseIdentifier:String(describing: WOWCommentCell()))
-        tableView.register(UINib.nibName(String(describing: WOWDesignerCell())), forCellReuseIdentifier:String(describing: WOWDesignerCell()))  
+        tableView.register(UINib.nibName(String(describing: WOWGoodsTypeCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsTypeCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWGoodsDetailCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsDetailCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWGoodsParamCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsParamCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell.self)), forCellReuseIdentifier:String(describing: WOWSenceLikeCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:String(describing: WOWCommentCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWDesignerCell.self)), forCellReuseIdentifier:String(describing: WOWDesignerCell.self))
     }
     
     func configHeaderView(){
@@ -287,29 +287,29 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         var returnCell :UITableViewCell!
         switch (indexPath as NSIndexPath).section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsTypeCell()), for: indexPath) as! WOWGoodsTypeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsTypeCell.self), for: indexPath) as! WOWGoodsTypeCell
             cell.headImageView.addTarget(self, action: #selector(brandHeadClick), for:.touchUpInside)
             cell.showData(productModel)
             returnCell = cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsDetailCell()), for: indexPath) as! WOWGoodsDetailCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsDetailCell.self), for: indexPath) as! WOWGoodsDetailCell
             if let pics = productModel?.primaryImgs{
                 let model = pics[(indexPath as NSIndexPath).row]
 //                cell.showData(model)
             }
             returnCell = cell
         case 2: //设计师
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWDesignerCell()), for:indexPath) as! WOWDesignerCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWDesignerCell.self), for:indexPath) as! WOWDesignerCell
             cell.showData(productModel)
             returnCell = cell
         case 3: //参数
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsParamCell()), for: indexPath) as! WOWGoodsParamCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsParamCell.self), for: indexPath) as! WOWGoodsParamCell
 //            if let att = productModel?.attributes {
 //                cell.showData(att[indexPath.row])
 //            }
             returnCell = cell
         case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell()),for: indexPath) as! WOWSenceLikeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell.self),for: indexPath) as! WOWSenceLikeCell
 //            cell.rightTitleLabel.text = "\(productModel?.likesCount ?? 0)人喜欢"
             cell.rightBackView.addAction({ [weak self] in
                 if let strongSelf = self{
@@ -319,7 +319,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             })
             returnCell = cell
         case 5: //评论
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWCommentCell()),for: indexPath)as!WOWCommentCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWCommentCell.self),for: indexPath)as!WOWCommentCell
             cell.hideHeadImage()
 //            if let model = productModel?.comments?[indexPath.row]{
 //                cell.commentLabel.text = model.comment
@@ -334,7 +334,7 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
     }
     
     func brandHeadClick() {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController())) as! WOWBrandHomeController
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
         vc.brandID = productModel?.brandId
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)

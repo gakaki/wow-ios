@@ -138,7 +138,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         
         tv.delegate          = self
         tv.dataSource        = self
-        tv.register(TvCell.self, forCellReuseIdentifier:String(describing: TvCell()))
+        tv.register(TvCell.self, forCellReuseIdentifier:String(describing: TvCell.self))
 //        tv.bounces           = false
         tv.showsVerticalScrollIndicator = false
         self.view.addSubview(tv)

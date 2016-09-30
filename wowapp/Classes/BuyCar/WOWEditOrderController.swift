@@ -488,7 +488,7 @@ extension WOWEditOrderController: selectPayDelegate {
         }
         
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: Manager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let charge = json["charge"]

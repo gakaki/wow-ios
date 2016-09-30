@@ -169,15 +169,14 @@ extension WOWStoreController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             break
         case 1:
-            //TODO:
-            break
-//            let item = categoryArr[(indexPath as NSIndexPath).row]
-//            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWGuideController())) as! WOWGoodsController
-//            vc.categoryIndex            =   (indexPath as NSIndexPath).row
-//            vc.categoryTitles           =   categoryTitles
-//            vc.categoryID               =   item.categoryID ?? "5"
-//            vc.categoryArr              =   categoryArr
-//            navigationController?.pushViewController(vc, animated: true)
+            let item = categoryArr[(indexPath as NSIndexPath).row]
+            let vc = UIStoryboard.initialViewController("Store",
+                                                        identifier:String(describing: WOWGoodsController.self)) as! WOWGoodsController
+            vc.categoryIndex            =   (indexPath as NSIndexPath).row
+            vc.categoryTitles           =   categoryTitles
+            vc.categoryID               =   item.categoryID ?? "5"
+            vc.categoryArr              =   categoryArr
+            navigationController?.pushViewController(vc, animated: true)
         case 2:
             break
         default:

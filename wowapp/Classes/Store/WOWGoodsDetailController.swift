@@ -157,6 +157,8 @@ class WOWGoodsDetailController: WOWBaseViewController {
         let result = WOWCalPrice.calTotalPrice([productModel?.sellPrice ?? 0],counts:[1])
         priceLabel.text = result
         cycleView.imageURLArray = [productModel?.productImg ?? ""]
+        
+        
 //TODO
 //        placeImageView.kf.setImage(with: URL(string:productModel?.productImg ?? "")', placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in {
 //            if let strongSelf = self{

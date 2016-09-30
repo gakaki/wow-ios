@@ -96,9 +96,8 @@ class WOWOrderController: WOWBaseViewController {
         
         var params = [String: AnyObject]()
         if selectIndex == 2 { // 待发货 要 显示 部分发货
-//            params = ["orderStatusList": [1,2], "currentPage": pageIndex,"pageSize":totalPage]
-            //TODO
-            params = ([ "currentPage": pageIndex,"pageSize":totalPage] as AnyObject) as! [String : AnyObject]
+
+            params = (["orderStatusList": [1,2], "currentPage": pageIndex,"pageSize":totalPage] as AnyObject) as! [String : AnyObject]
         }else{
             params = ["orderStatus": type as AnyObject, "currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject]
         }

@@ -14,8 +14,8 @@
 //
 //
 //class WOWGoodsController: WOWBaseViewController {
-//    fileprivate var cellBigId   = String(describing: WOWGoodsBigCell())
-//    fileprivate var cellSmallId = String(describing: WOWGoodsSmallCell())
+//    fileprivate var cellBigId   = String(describing: WOWGoodsBigCell.self)
+//    fileprivate var cellSmallId = String(describing: WOWGoodsSmallCell.self)
 //    var categoryIndex       : Int = 0
 //    var categoryTitles      = ["",""]
 //    var categoryArr         = [WOWCategoryModel]()
@@ -104,7 +104,7 @@
 //    override func setUI() {
 //        super.setUI()
 //        view.addSubview(collectionView)
-//        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell())), forCellWithReuseIdentifier: cellSmallId)
+//        collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier: cellSmallId)
 //        collectionView.mj_header            = self.mj_header
 //        collectionView.emptyDataSetSource   = self
 //        collectionView.emptyDataSetDelegate = self
@@ -119,7 +119,7 @@
 //    
 //    fileprivate func configNav(){
 //        carButton = MIBadgeButton(type: .system)
-//        carButton.setImage(UIImage(named: "store_buyCar"), for: UIControlState())
+//        carButton.setImage(UIImage(named: "store_buyCar"), for: .normal)
 //        carButton.sizeToFit()
 //        carButton.addTarget(self, action:#selector(goCar), for:.touchUpInside)
 //        let item = UIBarButtonItem(customView: carButton)

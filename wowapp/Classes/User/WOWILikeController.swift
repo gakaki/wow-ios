@@ -178,13 +178,12 @@ extension WOWILikeController:UICollectionViewDelegate,UICollectionViewDataSource
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    //TODO
-//    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
-//        let text = "暂无您喜欢的" + (selectIndex == 0 ? "场景哦...":"单品哦...")
-//        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
-//        return attri
-//    }
-    
+    override func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let text = "暂无您喜欢的" + (selectIndex == 0 ? "场景哦...":"单品哦...")
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
+   
     func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
         return -40
     }

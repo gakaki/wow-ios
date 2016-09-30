@@ -302,19 +302,13 @@ extension PhotoBrowser {
         toolBar.saveBtnOnClick = {[unowned self] (saveBtn: UIButton) in
             // 保存到相册
             let currentCell = self.collectionView.cellForItem(at: IndexPath(row: self.currentIndex, section: 0)) as! PhotoViewCell
-            guard currentCell.imageView.image != nil else { return }
+            guard let currentImage  = currentCell.imageView.image  else { return }
            
-//            DispatchQueue.global(attributes: [.qosDefault]).async {
-//                
-//                UIImageWriteToSavedPhotosAlbum(currentImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
-//
-//            }
-            //TODO
-//            DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default).async {
-//                
-//                UIImageWriteToSavedPhotosAlbum(currentImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
-//                
-//            }
+            DispatchQueue.global().async {
+                
+                UIImageWriteToSavedPhotosAlbum(currentImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+
+            }
             
         }
         toolBar.extraBtnOnClick = {[unowned self] (extraBtn: UIButton) in

@@ -391,17 +391,17 @@ extension WOWOrderDetailController{
                 WOWHud.showMsg("订单不存在")
                 return
             }
-            //TODO
-//            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: self.orderCode ?? "", channel: channl, clientIp: Manager.sharedInstance.ip_public), successClosure: { [weak self](result) in
-//                if let strongSelf = self {
-//                    let json = JSON(result)
-//                    let charge = json["charge"]
-//                    strongSelf.goPay(charge.object as AnyObject)
-//                }
-//                
-//            }) { (errorMsg) in
-//                
-//            }
+
+            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: self.orderCode ?? "", channel: channl, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+                if let strongSelf = self {
+                    let json = JSON(result)
+                    let charge = json["charge"]
+                    strongSelf.goPay(charge.object as AnyObject)
+                }
+                
+            }) { (errorMsg) in
+                
+            }
         }
         
     }

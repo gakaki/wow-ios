@@ -71,6 +71,7 @@ class WOWProductDetailCell: UITableViewCell {
         //定义NSURL对象
         let url = URL(string: urlString)
         var aspect :CGFloat?
+        
         DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: { () -> Void in
    
             if let data = try? Data(contentsOf: url!), let image = UIImage(data: data) {

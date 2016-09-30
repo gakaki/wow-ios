@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        JSPatchHelper.jspatch_playground()
 //        JSPatchHelper.jspatch_init()
      
-        ADLaunchView()
+//        ADLaunchView()
         return true
     }
  
@@ -190,13 +190,12 @@ extension AppDelegate{
         }
         
 
-
-//        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:String(describing: VCCategory.self))
+//
+//        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:)
 //        window?.rootViewController =  UIStoryboard.initialViewController("Found")
-        
-        let storyboard = UIStoryboard(name: "Found", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "VCFound") as! VCFound
-
+//        
+        let storyboard      = UIStoryboard(name: "Found", bundle: nil)
+        let viewController  = storyboard.instantiateViewController(withIdentifier: String(describing: VCCategory.self)) as! VCCategory
         window?.rootViewController = viewController
 //          window?.rootViewController =  VCBuy(nibName: nil, bundle: nil)
 //        let vc_designer_list = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList

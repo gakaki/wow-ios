@@ -131,7 +131,7 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoritrSingleCell()), for: indexPath) as! WOWFavoritrSingleCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoritrSingleCell.self), for: indexPath) as! WOWFavoritrSingleCell
         let model = dataArr[(indexPath as NSIndexPath).row]
 //        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.imageView.set_webimage_url(model.productImg)

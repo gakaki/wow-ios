@@ -186,7 +186,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var c  =  self.data.count  ?? 0
+        var c  =  self.data.count  
         if  c > 6 {
             c  =  c + 1 //没办法啦最后一个是more啦
             return c

@@ -79,7 +79,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
  
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
             ($0,$1)
-        }.throttle(0.1, scheduler: MainScheduler.instance)
+        }
+//            .throttle(0.1, scheduler: MainScheduler.instance)
         .subscribe(onNext: { cid,tab_index in
             
             self.refreshSubView(tab_index)
@@ -131,9 +132,9 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         v_bottom.magicView.delegate             = self
         
         
-        v_bottom.magicView.isMenuScrollEnabled    = true
-        v_bottom.magicView.isSwitchAnimated       = true
-        v_bottom.magicView.isScrollEnabled        = true
+//        v_bottom.magicView.isMenuScrollEnabled    = true
+//        v_bottom.magicView.isSwitchAnimated       = true
+//        v_bottom.magicView.isScrollEnabled        = true
 
         
         self.addChildViewController(v_bottom)
@@ -142,7 +143,6 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         v_bottom.magicView.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(self.view)
             make.top.equalTo(self.cv.snp.bottom)
-            
             make.bottom.equalTo(self.view.snp.bottomMargin)
         }
         
@@ -328,7 +328,7 @@ extension VCCategory:VTMagicViewDelegate{
     }
     
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-        self.ob_tab_index.value = pageIndex
+//        self.ob_tab_index.value = pageIndex
     }
     
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){

@@ -120,7 +120,7 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoriteBrandCell()), for: indexPath) as! WOWFavoriteBrandCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoriteBrandCell.self), for: indexPath) as! WOWFavoriteBrandCell
         let model = dataArr[(indexPath as NSIndexPath).row]
 //        cell.logoImg.kf_setImageWithURL(NSURL(string:model.designerPhoto ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.logoImg.set_webimage_url(model.designerPhoto)

@@ -133,7 +133,7 @@ extension WOWFoundCategoryCell:UICollectionViewDelegate,UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundCategoryCellCollectionViewCell()), for: indexPath) as! WOWFoundCategoryCellCollectionViewCell
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundCategoryCellCollectionViewCell.self), for: indexPath) as! WOWFoundCategoryCellCollectionViewCell
         let model           = categories[(indexPath as NSIndexPath).item]
         
         cell.pictureImageView.set_webimage_url( model.categoryBgImg!)

@@ -19,12 +19,8 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         }
         
         func setModel(_ m:WOWFoundCategoryModel){
-//            label_name.text      = m.categoryName
-//            print(label_name)
-//            if let pic = m.productImg {
-                pictureImageView.set_webimage_url(m.productImg)
-                label_name.text      = m.categoryName
-//            }
+            pictureImageView.set_webimage_url(m.productImg)
+            label_name.text      = m.categoryName
         }
         
         override init(frame: CGRect) {
@@ -281,7 +277,7 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell                = tableView.dequeueReusableCell(withIdentifier: String(describing: TvCell()), for: indexPath) as! TvCell
+        let cell                = tableView.dequeueReusableCell(withIdentifier: String(describing: TvCell.self), for: indexPath) as! TvCell
         cell.selectionStyle     = .none
         let model               = vo_categories_arr[(indexPath as NSIndexPath).section]
         cell.setModel(model)
@@ -325,7 +321,7 @@ extension VCCategoryChoose:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CVCell()), for: indexPath) as! CVCell
+        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CVCell.self), for: indexPath) as! CVCell
         let m               = vo_categories_sub_arr[(indexPath as NSIndexPath).item]
         cell.setModel(m)
         return cell

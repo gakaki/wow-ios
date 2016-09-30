@@ -201,7 +201,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
             goLogin()
         }else{
             let uid         = WOWUserManager.userID
-            let thingid     = self.productId ?? 0
+            _     = self.productId ?? 0
             let type        = "1" //1为商品 2 为场景
             let is_delete   = favoriteButton.isSelected ? "1":"0"
 //            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Apifa(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in

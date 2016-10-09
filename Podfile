@@ -4,7 +4,7 @@ target :wowapp do
 
 	project 'wowapp.xcodeproj'
 
-    inhibit_all_warnings!
+  inhibit_all_warnings!
 
 	use_frameworks!
 
@@ -28,16 +28,17 @@ target :wowapp do
 	pod 'Moya','~> 8.0.0-beta.2'
 	pod 'Moya/RxSwift','~> 8.0.0-beta.2'
 	pod 'EZSwiftExtensions', git: "https://github.com/goktugyil/EZSwiftExtensions.git", :branch => 'Swift3' #通用的拓展库
-  
-	pod 'JSPatch', git: "https://github.com/gakaki/JSPatch.git", :branch => 'master'
-	pod 'JSPatch/Core', git: "https://github.com/gakaki/JSPatch.git", :branch => 'master'
-	pod 'JSPatch/Extensions', git: "https://github.com/gakaki/JSPatch.git", :branch => 'master'
-	pod 'JSPatch/Loader', git: "https://github.com/gakaki/JSPatch.git", :branch => 'master'
+
+	pod 'JSPatch', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'
+	pod 'JSPatch/Core', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'
+	pod 'JSPatch/Extensions', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'
+	pod 'JSPatch/Loader', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'
 	pod 'JSPatchPlatform'
 	
+
 	pod 'SwiftyJSON', '~> 3.0.0'
 	pod 'ObjectMapper',	 '~> 2.0.0'
-	
+
 	pod 'SVProgressHUD', '~> 2.0.2' #提示框
 	pod 'YYWebImage'
 	pod 'YYImage/WebP'
@@ -49,7 +50,7 @@ target :wowapp do
 #	pod 'Hashids-Swift'			#短id生成
 	pod 'SDWebImage'
 
-	
+
 	pod "Qiniu",:path => "qiniu-sdk/Qiniu.podspec"	#七牛 sdk
 	pod "FlexboxLayout",:path => "FlexBoxLayout/FlexboxLayout.podspec"
 	pod "WowBase",:path => "WowBase/WowBase.podspec"
@@ -60,7 +61,7 @@ target :wowapp do
 	pod 'IQKeyboardManagerSwift', '~> 4.0.6'
 	#pod 'HidingNavigationBar', '~> 0.3.0'
 	pod 'XZMRefresh'            #横向刷新
-	pod 'FMDB'              
+	pod 'FMDB'
 	pod 'FCUUID'
 
 #Ping++支付

@@ -121,7 +121,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/YYCache/YYCache.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYImage/YYImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYWebImage/YYWebImage.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/wow-model-network/wow_model_network.framework"
   install_framework "$BUILT_PRODUCTS_DIR/wow-ui/wow_ui.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -162,6 +161,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/YYCache/YYCache.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYImage/YYImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYWebImage/YYWebImage.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/wow-model-network/wow_model_network.framework"
   install_framework "$BUILT_PRODUCTS_DIR/wow-ui/wow_ui.framework"
 fi

@@ -6,5 +6,9 @@
 	<array>
 		<string>applinks:fds.so</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.wowdsgn.app</string>
+	</array>
 </dict>
 </plist>

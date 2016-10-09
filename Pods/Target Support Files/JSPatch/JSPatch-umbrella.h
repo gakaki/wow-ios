@@ -33,6 +33,7 @@
 #import "JPUIImage.h"
 #import "JPUIKit.h"
 #import "JPCleaner.h"
+#import "JPDispatch.h"
 #import "JPLocker.h"
 #import "JPNumber.h"
 #import "JPPlayground.h"
@@ -41,6 +42,7 @@
 #import "JPDevErrorView.h"
 #import "JPDevMenu.h"
 #import "JPDevTipView.h"
+#import "JPProtocol.h"
 #import "JPSpecialInit.h"
 #import "JPLoader.h"
 

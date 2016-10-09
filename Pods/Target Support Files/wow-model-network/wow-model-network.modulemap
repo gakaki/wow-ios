@@ -1,6 +1,0 @@
-framework module wow_model_network {
-  umbrella header "wow-model-network-umbrella.h"
-
-  export *
-  module * { export * }
-}

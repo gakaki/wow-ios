@@ -15,7 +15,7 @@ import FCUUID
 class WOWUploadManager {
     
     static let sharedManager = WOWUploadManager()
-    fileprivate init(){}
+    init(){}
     // 上传头像
     static  func upload(_ image:UIImage,successClosure:@escaping SuccessClosure,failClosure:@escaping FailClosure){
 
@@ -38,11 +38,57 @@ class WOWUploadManager {
        
         let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])!)"
         
-        let qiniu_token_url         = [BaseUrl,"/",URL_QINIU_TOKEN].joined(separator: "")
+//        let qiniu_token_url         = [BaseUrl,"/",URL_QINIU_TOKEN].joined(separator: "")
         
-        let json_str                = json_serialize( ["key": qiniu_key as AnyObject,"bucket": "wowdsgn" as AnyObject] )
-        let params_qiniu            = ["paramJson": json_str ]
+//        let json_str                = json_serialize( ["key": qiniu_key as AnyObject,"bucket": "wowdsgn" as AnyObject] )
+//        let params_qiniu            = ["paramJson": json_str ]
         
+        WOWNetManager.sharedManager.requestWithTarget(.api_qiniu_token(qiniuKey: qiniu_key, bucket: "wowdsgn"), successClosure: { (result) in
+            
+                let token       = JSON(result)["data"]["token"].string
+                if let qm          = QNUploadManager(){
+                   
+                    qm.put(data, key: qiniu_key, token: token, complete: { (info, key, resp) in
+                        WOWHud.dismiss()
+                        
+                        
+                        if (info?.error != nil) {
+                            DLog(info?.error)
+                            WOWHud.showMsg("头像修改失败")
+                            
+                            failClosure("错误")
+                            
+                        } else {
+                            
+                            print(resp,resp?["key"])
+                            print(info,key,resp)
+                            let key = resp?["key"]
+                            let headImageUrl = "http://img.wowdsgn.com/\(key!)"
+                            
+                            
+                            // 保存用户URL
+                            WOWUserManager.userHeadImageUrl = headImageUrl
+                            
+                            // 保存 照片数据到本地，为了处理图像，不闪。  －－
+                            let imageData:NSData = NSKeyedArchiver.archivedData(withRootObject: image) as NSData
+                            
+                            WOWUserManager.userPhotoData = imageData as Data
+                            
+                            successClosure(headImageUrl as AnyObject)
+                            
+                        }
+
+                    }, option: uploadOption)
+            }
+            
+            
+
+            
+        }) {(errorMsg) in
+
+     
+        
+        }
         //TODO
 //        Alamofire.request(qiniu_token_url,method:.post, parameters: params_qiniu)
 //            .response { request, response, data, error in
@@ -82,8 +128,7 @@ class WOWUploadManager {
 //                            print(resp,resp["key"])
 //                            print(info,key,resp)
 //                            let key = resp["key"]
-//                           let headImageUrl = "http://img.wowdsgn.com/\(key!)"
-//                            
+//
 //                            
 //                            // 保存用户URL
 //                            WOWUserManager.userHeadImageUrl = headImageUrl

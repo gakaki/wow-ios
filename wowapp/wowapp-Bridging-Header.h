@@ -38,8 +38,8 @@
 #import <Pingpp.h>
 
 //DeepShare(DeepLink)
-//#import "DeepShare.h"
-//#import "DSError.h"
+#import "DeepShare.h"
+#import "DSError.h"
 
 //GrowingIO 分析
 #import "Growing.h"

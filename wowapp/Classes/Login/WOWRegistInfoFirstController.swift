@@ -19,7 +19,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     @IBOutlet weak var telTextField: UITextField!
     @IBOutlet weak var descTextField: UITextField!
     var phoneNumber  :String?
-    fileprivate var headImageUrl:String = WOWUserManager.userHeadImageUrl
+    var headImageUrl:String = WOWUserManager.userHeadImageUrl
     var nextView : WOWRegistInfoSureView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         configTable()
     }
     
-    fileprivate func configTable(){
+    func configTable(){
         nextView = Bundle.main.loadNibNamed(String(describing: WOWRegistInfoSureView.self), owner: self, options: nil)?.last as! WOWRegistInfoSureView
         nextView.sureButton.addTarget(self, action: #selector(nextButton), for: .touchUpInside)
         nextView.tipsLabel.isHidden = true
@@ -124,7 +124,7 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
         }
     }
     
-    fileprivate func showPicture(){
+    func showPicture(){
         let actionSheetController: UIAlertController = UIAlertController(title: "更改头像", message: nil, preferredStyle: .actionSheet)
         let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .cancel) { action -> Void in
             
@@ -141,7 +141,7 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
         self.present(actionSheetController, animated: true, completion: nil)
     }
     
-    fileprivate func choosePhtot(_ type:UIImagePickerControllerSourceType){
+    func choosePhtot(_ type:UIImagePickerControllerSourceType){
         if UIImagePickerController.isSourceTypeAvailable(type){
             //指定图片控制器类型
             imagePicker.sourceType = type

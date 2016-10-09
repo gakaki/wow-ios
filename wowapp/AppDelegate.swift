@@ -11,8 +11,9 @@ import UIKit
 //import MonkeyKing
 import IQKeyboardManagerSwift
 import YYWebImage
-//import JSPatch
+import JSPatch
 import SwiftyUserDefaults
+//import JSPatchHelper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -96,7 +97,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func application(_ application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
     {
         //DeepShare
-//        if DeepShare.continueUserActivity(userActivity) {
+//        if DeepShare.con
+//        if DeepShare.continue(userActivity) {
 //            return true
 //        }
         
@@ -111,15 +113,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-//        //growing io
-//        if Growing.handle(url) {
-//            return true
-//        }
+        //growing io
+        if Growing.handle(url) {
+            return true
+        }
         
-//        //DeepShare
-//        if DeepShare.handleURL(url) {
-//            return true
-//        }
+        //DeepShare
+        if DeepShare.handle(url) {
+            return true
+        }
         
         
 //        if MonkeyKing.handleOpenURL(url) {
@@ -137,15 +139,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMSocialSnsService.handleOpen(url)
         
         
-//        //growing io
-//        if Growing.handle(url) {
-//            return true
-//        }
-//        
-//        //DeepShare
-//        if DeepShare.handleURL(url) {
-//            return true
-//        }
+        //growing io
+        if Growing.handle(url) {
+            return true
+        }
+//
+        //DeepShare
+        if DeepShare.handle(url) {
+            return true
+        }
         
         return true
     }
@@ -245,7 +247,7 @@ extension AppDelegate{
         //Growing
         Growing.start(withAccountId: "a04e14656f08dc7e")
         //DeepShare
-//        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
+        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
         //Talking Data
         TalkingData.sessionStarted("88C9035CD51E8009BE4441263D83003A", withChannelId: "app store")
         

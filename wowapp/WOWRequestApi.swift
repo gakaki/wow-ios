@@ -13,8 +13,9 @@ public enum RequestApi{
     
     
     static var HostUrl:String! = BaseUrl
-    
-    
+
+    case api_qiniu_token(qiniuKey: String, bucket: String)
+
     case api_AD
     case api_Sence
     
@@ -112,6 +113,7 @@ public enum RequestApi{
     case api_FavoriteDesigner(designerId: Int)
     
     case api_IsFavoriteProduct(productId: Int)
+    
     
     case api_IsFavoriteBrand(brandId: Int)
     
@@ -211,6 +213,8 @@ extension RequestApi:TargetType{
     public var path:String{
         switch self{
             
+        case .api_qiniu_token:
+            return URL_QINIU_TOKEN
         case .api_AD:
             return URL_AD
         case .api_Category:
@@ -427,6 +431,8 @@ extension RequestApi:TargetType{
         var params = [String: Any]()
         
         switch self{
+            case let .api_qiniu_token(qiniuKey,bucket):
+                params = ["key": qiniuKey,"bucket": bucket]
             case let .api_Category(categoryId):
                 params = ["categoryId":categoryId]
             case let .api_Category_V2(categoryId):

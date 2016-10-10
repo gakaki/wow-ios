@@ -2,8 +2,8 @@
   "name": "wow-ui",
   "version": "0.1.0",
   "summary": "A short description of wow-ui.",
-  "description": "wow-ui",
-  "homepage": "https://github.com/gakaki/wow-ui",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/wow-ui",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "gakaki": "gakaki@gmail.com"
   },
   "source": {
-    "git": "https://github.com/gakaki/wow-ui.git",
+    "git": "https://github.com/<GITHUB_USERNAME>/wow-ui.git",
     "tag": "0.1.0"
   },
   "platforms": {

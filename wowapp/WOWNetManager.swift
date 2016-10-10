@@ -152,7 +152,8 @@ class WOWNetManager {
                     }else{
                         WOWHud.dismiss()
                     }
-                    successClosure((info?.data)!)
+                    let res = info?.data ?? [] as AnyObject
+                    successClosure(res)
                 case let .failure(error):
                     DLog(error)
                     WOWHud.showMsg("网络错误")

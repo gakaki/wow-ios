@@ -112,10 +112,10 @@ DEPENDENCIES:
   - FMDB
   - Hashids-Swift (from `https://github.com/malczak/hashids.git`, branch `master`)
   - IQKeyboardManagerSwift (~> 4.0.6)
-  - JSPatch (from `https://github.com/gakaki/JSPatch.git`, branch `master`)
-  - JSPatch/Core (from `https://github.com/gakaki/JSPatch.git`, branch `master`)
-  - JSPatch/Extensions (from `https://github.com/gakaki/JSPatch.git`, branch `master`)
-  - JSPatch/Loader (from `https://github.com/gakaki/JSPatch.git`, branch `master`)
+  - JSPatch (from `https://github.com/bang590/JSPatch.git`, branch `master`)
+  - JSPatch/Core (from `https://github.com/bang590/JSPatch.git`, branch `master`)
+  - JSPatch/Extensions (from `https://github.com/bang590/JSPatch.git`, branch `master`)
+  - JSPatch/Loader (from `https://github.com/bang590/JSPatch.git`, branch `master`)
   - JSPatchPlatform
   - Kingfisher (~> 3.0)
   - MJRefresh
@@ -162,7 +162,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/malczak/hashids.git
   JSPatch:
     :branch: master
-    :git: https://github.com/gakaki/JSPatch.git
+    :git: https://github.com/bang590/JSPatch.git
   Pingpp:
     :path: pingpp-ios/Pingpp.podspec
   Pitaya:
@@ -192,8 +192,8 @@ CHECKOUT OPTIONS:
     :commit: 173c567d959ae9327b0e63a4e463cdbdab916b7b
     :git: https://github.com/malczak/hashids.git
   JSPatch:
-    :commit: 4af3b496266abfc64c17f941d3c09053cb1711c9
-    :git: https://github.com/gakaki/JSPatch.git
+    :commit: 15415f2fd0f955bfcb5fa02e6993c609f737f994
+    :git: https://github.com/bang590/JSPatch.git
   Pitaya:
     :commit: 270ff70e89af8f19b584422afc652b6872704bd4
     :git: https://github.com/johnlui/Pitaya.git
@@ -201,7 +201,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  BTNavigationDropdownMenu: '093f3cbfad1572f2c222bdf8d17584d1e13380d4'
+  BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EZSwiftExtensions: 6c5e29ae473b3d2edbf5472eab0a3d7bdb20215c
   FCUUID: f0cd5df92e4689b7d9d7264e2b32c588dc54c1f3
@@ -223,9 +223,9 @@ SPEC CHECKSUMS:
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   RxCocoa: 8cecf331302b8ae5381bbab1bccba4ede2eae6a8
   RxDataSources: 1cd87dc97fd46be002942eb1dcb1b432535141dd
-  RxSwift: '0823e8d7969c23bfa9ddfb2afa4881e424a1a710'
+  RxSwift: 0823e8d7969c23bfa9ddfb2afa4881e424a1a710
   SDAutoLayout: e9b36d04b8c0b504762a04d76fbbe5108944297a
-  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
@@ -235,7 +235,7 @@ SPEC CHECKSUMS:
   UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
   VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
   wow-model-network: f60ea26fc0f28318702cbf896c95163b79baf192
-  wow-ui: f000e38997058030c161267a482aaabe54399c91
+  wow-ui: 741d77d1ceea72159f0736e1db1bae42f478624b
   wow-util: 5d88cd2088678896c6704a070cb66ed5979bc985
   WowBase: 523ccd9bffdfca85097853e3b73902fb4368b24c
   XZMRefresh: 2c0f1b70d9fe97a1d0286373e29986d44f0a7b1a
@@ -243,6 +243,6 @@ SPEC CHECKSUMS:
   YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: b75c1237ade38cac1d8dc611ab91d76655e62722
+PODFILE CHECKSUM: 5e9c2e1ad4bcf66a1f09921bc782d098a4471169
 
 COCOAPODS: 1.1.0.rc.2

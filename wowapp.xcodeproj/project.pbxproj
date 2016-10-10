@@ -35,6 +35,7 @@
 		066048A61D82C307002A6040 /* WowBaseVCCartSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066048A51D82C307002A6040 /* WowBaseVCCartSearch.swift */; };
 		066A8D8C1D8E50A7002DE82C /* AdLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066A8D8B1D8E50A7002DE82C /* AdLaunchView.swift */; };
 		066D889A1D7682FA008CE271 /* VCSceneCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066D88991D7682FA008CE271 /* VCSceneCategory.swift */; };
+		067CEDE21DAA97160032031F /* libDeepShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 067CEDE11DAA97160032031F /* libDeepShare.a */; };
 		068B60B11D4F3561001AD778 /* Found.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B01D4F3560001AD778 /* Found.storyboard */; };
 		068B60B31D4F3DD5001AD778 /* VCFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B60B21D4F3DD5001AD778 /* VCFound.swift */; };
 		068B60B51D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */; };
@@ -481,6 +482,9 @@
 		066048A51D82C307002A6040 /* WowBaseVCCartSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowBaseVCCartSearch.swift; sourceTree = "<group>"; };
 		066A8D8B1D8E50A7002DE82C /* AdLaunchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdLaunchView.swift; sourceTree = "<group>"; };
 		066D88991D7682FA008CE271 /* VCSceneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCSceneCategory.swift; sourceTree = "<group>"; };
+		067CEDDF1DAA97160032031F /* DeepShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepShare.h; sourceTree = "<group>"; };
+		067CEDE01DAA97160032031F /* DSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSError.h; sourceTree = "<group>"; };
+		067CEDE11DAA97160032031F /* libDeepShare.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDeepShare.a; sourceTree = "<group>"; };
 		068B60B01D4F3560001AD778 /* Found.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Found.storyboard; sourceTree = "<group>"; };
 		068B60B21D4F3DD5001AD778 /* VCFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCFound.swift; sourceTree = "<group>"; };
 		068B60B41D4F418E001AD778 /* WOWFoundWeeklyNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWFoundWeeklyNewCell.xib; sourceTree = "<group>"; };
@@ -931,6 +935,7 @@
 				06FD5F011D7AB7F10070B763 /* AdSupport.framework in Frameworks */,
 				06FD5EFF1D7AB5680070B763 /* Foundation.framework in Frameworks */,
 				06FD5EFD1D7AB5410070B763 /* libicucore.tbd in Frameworks */,
+				067CEDE21DAA97160032031F /* libDeepShare.a in Frameworks */,
 				069922301D75324F00579C51 /* JavaScriptCore.framework in Frameworks */,
 				29FF273D1CFDB5EC00DF2A9B /* libz.tbd in Frameworks */,
 				06FD5EFB1D7AB4600070B763 /* libTalkingData.a in Frameworks */,
@@ -985,6 +990,16 @@
 				066048A51D82C307002A6040 /* WowBaseVCCartSearch.swift */,
 			);
 			path = BaseUI;
+			sourceTree = "<group>";
+		};
+		067CEDDE1DAA97160032031F /* DeepShare */ = {
+			isa = PBXGroup;
+			children = (
+				067CEDDF1DAA97160032031F /* DeepShare.h */,
+				067CEDE01DAA97160032031F /* DSError.h */,
+				067CEDE11DAA97160032031F /* libDeepShare.a */,
+			);
+			path = DeepShare;
 			sourceTree = "<group>";
 		};
 		068B60AC1D4F34AF001AD778 /* Found */ = {
@@ -1199,6 +1214,7 @@
 		06FD5EF01D7AB4600070B763 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				067CEDDE1DAA97160032031F /* DeepShare */,
 				06FD5EF11D7AB4600070B763 /* GrowingIO */,
 				06FD5EF51D7AB4600070B763 /* TalkingData */,
 			);
@@ -1305,6 +1321,7 @@
 				068B60AC1D4F34AF001AD778 /* Found */,
 				069056DA1D3665FC00A851F9 /* Guide */,
 				29FF25401CFDA86300DF2A9B /* Home */,
+				29FF252E1CFDA86300DF2A9B /* BuyCar */,
 				2953F1981D06A678006D7D95 /* Favorite */,
 				29FF25851CFDA86300DF2A9B /* Store */,
 				29FF25AA1CFDA86300DF2A9B /* User */,
@@ -1321,8 +1338,7 @@
 				29FF271C1CFDAF0800DF2A9B /* View */,
 				29FF271D1CFDAF0F00DF2A9B /* Controller */,
 			);
-			name = BuyCar;
-			path = ../BuyCar;
+			path = BuyCar;
 			sourceTree = "<group>";
 		};
 		29FF25401CFDA86300DF2A9B /* Home */ = {
@@ -1330,7 +1346,6 @@
 			children = (
 				29FF27291CFDB07000DF2A9B /* View */,
 				29FF272A1CFDB08300DF2A9B /* Controller */,
-				29FF252E1CFDA86300DF2A9B /* BuyCar */,
 				29FF27281CFDB05D00DF2A9B /* Model */,
 				29FF272B1CFDB09C00DF2A9B /* Other */,
 			);
@@ -2208,6 +2223,9 @@
 						DevelopmentTeam = B4WSDTADTT;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 0;
 							};
@@ -2857,6 +2875,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/GrowingIO",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/TalkingData",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/DeepLink/DeepShare",
+					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/DeepShare",
 				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -2980,6 +2999,7 @@
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/GrowingIO",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/TalkingData",
 					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/DeepLink/DeepShare",
+					"$(PROJECT_DIR)/wowapp/Expand/WowVendor/Analytics/DeepShare",
 				);
 				OTHER_CFLAGS = (
 					"$(inherited)",

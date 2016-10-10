@@ -96,11 +96,12 @@ class WOWGoodsSmallCell: UICollectionViewCell {
             UIApplication.currentViewController()?.toLoginVC(true)
         }else{
 
-            WOWClickLikeAction.requestFavoriteProduct(productId ?? 0, isFavorite: { [weak self](isFavorite) in
-                if let strongSelf = self{
-                    
-                      strongSelf.likeBtn.isSelected = !strongSelf.likeBtn.isSelected
-                }
+            WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view: self.contentView,btn: sender, isFavorite: {(isFavorite) in
+                //                if let strongSelf = self{
+                print("请求成功")
+                //                      strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
+                //                }
+
             })
         }
         

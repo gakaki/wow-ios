@@ -480,7 +480,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         if layout == collectionView?.collectionViewLayout {
             
                 let item = colorArr[index]
-                let title = item.colorDisplayName ?? ""
+                let title = item.colorDisplayName
                 let width = title.size(Fontlevel004).width + 50
                 return width
             

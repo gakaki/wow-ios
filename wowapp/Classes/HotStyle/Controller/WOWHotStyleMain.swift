@@ -101,7 +101,7 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
         
         let homeModel = dataArr[(indexPath as NSIndexPath).section]
         cell.modelData = homeModel.moduleContentList
-        cell.showData(homeModel)
+        cell.showData(model: homeModel)
         cell.delegate = self
         cell.selectionStyle = .none
         

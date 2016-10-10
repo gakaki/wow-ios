@@ -52,7 +52,8 @@ class WOWContentTopicController: WOWBaseViewController {
 
     func dgClick(_ sender: UIButton) -> Void {
         
-        WOWClickLikeAction.requestLikeProject(topic_id) { [weak self](isFavorite) in
+        WOWClickLikeAction.requestLikeProject(topicId: topic_id,view: nagationItem,btn: sender) { [weak self](isFavorite) in
+
             if let strongSelf = self{
                 
                 // strongSelf.request()

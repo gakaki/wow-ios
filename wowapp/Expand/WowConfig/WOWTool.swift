@@ -107,6 +107,24 @@ func JSONStringify(_ value: AnyObject,prettyPrinted:Bool = false) -> String{
     return ""
     
 }
+/**
+ *  自增自减 1
+ */
+struct Calculate {
+    
+    static func increase(input:Int) -> Int{
+        return input + 1
+    }
+    
+    static func reduce(input:Int) -> Int{
+        return input - 1
+    }
+    //定义一个返回函数类型的函数
+    static func calculateType(type:Bool) -> (Int) -> Int{
+        return type ? increase : reduce
+    }
+    
+}
 
 
 

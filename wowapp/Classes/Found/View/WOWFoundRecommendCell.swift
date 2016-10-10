@@ -159,7 +159,8 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         
         WOWHud.showLoadingSV()
 
-        WOWClickLikeAction.requestFavoriteProduct(self.product?.productId ?? 0, isFavorite: { [weak self](isFavorite) in
+        WOWClickLikeAction.requestFavoriteProduct(productId: self.product?.productId ?? 0,view: self.contentView,btn: btnLike, isFavorite: { [weak self](isFavorite) in
+
             if let strongSelf = self{
                 
                strongSelf.btnLike.isSelected  = isFavorite!

@@ -42,7 +42,7 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
-    
+    @IBOutlet weak var bottomView: UIView!
     //是否展开参数
     var isOpenParam: Bool = false
     //是否展开温馨提示
@@ -322,23 +322,24 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     
     //用户是否喜欢单品
+//    用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
         WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
+//            if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
-                strongSelf.likeButton.isSelected = favorite ?? false
-            }
+                self!.likeButton.isSelected = favorite ?? false
+//            }
         }) {(errorMsg) in
             
         }
-
+        
     }
     
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
         
             WOWHud.showLoadingSV()
-        WOWClickLikeAction.requestFavoriteProduct(productId ?? 0, isFavorite: { [weak self](isFavorite) in
+        WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view:bottomView,btn:likeButton, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 
                strongSelf.likeButton.isSelected = isFavorite ?? false

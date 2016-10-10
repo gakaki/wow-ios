@@ -100,7 +100,7 @@ class WOWSureOrderController: WOWBaseViewController {
                         vc.payMethod = (strongSelf.payType == "ali" ? "支付宝":"微信")
                         vc.orderid = orderid
                         
-                        vc.totalPrice = "¥ " + String(format: "%@",totalPrice ?? "")
+                        vc.totalPrice = "¥ " + String(format: "%@",totalPrice )
                         
                         strongSelf.navigationController?.pushViewController(vc, animated: true)
                     case "cancel":

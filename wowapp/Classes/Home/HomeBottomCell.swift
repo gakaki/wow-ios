@@ -18,7 +18,9 @@ protocol HomeBottomDelegate:class {
 class HomeBottomCell: UITableViewCell {
     
     weak var delegate : HomeBottomDelegate?
-    
+    @IBOutlet weak var oneBaseView: UIView!
+    @IBOutlet weak var twoBaseView: UIView!
+
     var indexPath:IndexPath!
     var currentIndexPath : Int = 0
         var productIdOne : Int?
@@ -66,7 +68,8 @@ class HomeBottomCell: UITableViewCell {
     @IBAction func favoriteActionOne(_ sender: AnyObject) {
         WOWHud.showLoadingSV()
         
-        WOWClickLikeAction.requestFavoriteProduct(productIdOne ?? 0, isFavorite: { [weak self](isFavorite) in
+        WOWClickLikeAction.requestFavoriteProduct(productId: productIdOne ?? 0,view: oneBaseView,btn: btnIsLikeOne , isFavorite: { (isFavorite) in
+
             if self != nil{
                 
                 print("11")
@@ -97,8 +100,9 @@ class HomeBottomCell: UITableViewCell {
 //        }
     }
     @IBAction func favoriteActionTwo(_ sender: AnyObject) {
-          WOWHud.showLoadingSV()
-        WOWClickLikeAction.requestFavoriteProduct(productIdTwo ?? 0, isFavorite: { [weak self](isFavorite) in
+        WOWHud.showLoadingSV()
+        WOWClickLikeAction.requestFavoriteProduct(productId: productIdTwo ?? 0,view: twoBaseView,btn: btnIsLikeTwo, isFavorite: { (isFavorite) in
+
             if self != nil{
                 
                 print("11")

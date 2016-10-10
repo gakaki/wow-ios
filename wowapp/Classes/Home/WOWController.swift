@@ -207,7 +207,7 @@ class WOWController: WOWBaseViewController {
     }
     
     func requestTop() {
-        var params = ["pageId": 1, "region": 1]
+        let params = ["pageId": 1, "region": 1]
        
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result) in
             if let strongSelf = self{
@@ -353,7 +353,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        return (dataArr.count ?? 0) + bottomListCount.getParityCellNumber()
+        return (dataArr.count ) + bottomListCount.getParityCellNumber()
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -459,7 +459,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 //        print("\(dataArr.count)--\(bottomListCount.getParityCellNumber())++\(section)")
         guard section < dataArr.count  else {
             
-            if section == ((dataArr.count ?? 0) + bottomListCount.getParityCellNumber()) - 1{
+            if section == ((dataArr.count ) + bottomListCount.getParityCellNumber()) - 1{
                 if isOverBottomData == true {
                     return 70
                 }
@@ -472,7 +472,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard section < dataArr.count  else {
             
-            if section == ((dataArr.count ?? 0) + bottomListCount.getParityCellNumber()) - 1{
+            if section == ((dataArr.count ) + bottomListCount.getParityCellNumber()) - 1{
                 if isOverBottomData == true {
                     return footerView()
                 }

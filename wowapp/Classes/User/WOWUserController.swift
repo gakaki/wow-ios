@@ -135,9 +135,11 @@ class WOWUserController: WOWBaseTableViewController {
                 }else{
                     DispatchQueue.main.async {
                         // 取头像数据
-                        let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as! UIImage
+                        if let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as? UIImage {
+                            self.headerView.headImageView.image = myImage
+
+                        }
                         
-                        self.headerView.headImageView.image = myImage
                     }
                 }
 

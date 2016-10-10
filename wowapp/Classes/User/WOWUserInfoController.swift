@@ -168,12 +168,21 @@ class WOWUserInfoController: WOWBaseTableViewController {
                     }
 
         }else{
-            DispatchQueue.main.async {
-
-            let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as! UIImage
             
-            self.headImageView.image = myImage
+            DispatchQueue.global(qos: .background).async { [weak self] () -> Void in
+                
+                
+                if let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as? UIImage {
+                    DispatchQueue.main.async { [weak self] () -> Void in
+                        self?.headImageView.image = myImage
+                    }
+                }
+
+            
+                
             }
+            
+            
         }
     }
     fileprivate func configUserInfo(){
@@ -387,7 +396,7 @@ extension WOWUserInfoController{
     }
     
     
-    fileprivate func choosePhtot(_ type:UIImagePickerControllerSourceType){
+    func choosePhtot(_ type:UIImagePickerControllerSourceType){
         if UIImagePickerController.isSourceTypeAvailable(type){
             //指定图片控制器类型
             imagePicker.sourceType = type

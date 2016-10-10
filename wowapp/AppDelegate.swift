@@ -36,9 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         initialAppearance()     //初始化外观
         registAppKey(launchOptions) //注册第三方
-//        JSPatchHelper.jspatch_playground()
-//        JSPatchHelper.jspatch_init()
-     
+       
 //        ADLaunchView()
         return true
     }

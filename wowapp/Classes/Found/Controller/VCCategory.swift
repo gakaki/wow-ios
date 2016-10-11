@@ -82,7 +82,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
             ($0,$1)
         }
-//            .throttle(0.1, scheduler: MainScheduler.instance)
+            .throttle(0.1, scheduler: MainScheduler.instance)
         .subscribe(onNext: { cid,tab_index in
             
             self.refreshSubView(tab_index)
@@ -330,7 +330,7 @@ extension VCCategory:VTMagicViewDelegate{
     }
     
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-//        self.ob_tab_index.value = pageIndex
+        self.ob_tab_index.value = pageIndex
     }
     
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){

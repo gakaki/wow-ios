@@ -27,8 +27,8 @@ class WOWSearchLayout: UICollectionViewFlowLayout {
         //cell数据离头距离
         self.sectionInset = UIEdgeInsetsMake(15, 0, 0, 0)
         //每组头的大小
-        self.headerReferenceSize = CGSize(width: UIScreen.main.bounds.size.width, height: 35)
-        self.footerReferenceSize = CGSize(width: MGScreenWidth, height: 35)
+//        self.headerReferenceSize = CGSize(width: UIScreen.main.bounds.size.width, height: 35)
+//        self.footerReferenceSize = CGSize(width: MGScreenWidth, height: 35)
         self.minimumInteritemSpacing = 10
     }
     
@@ -36,7 +36,7 @@ class WOWSearchLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
             let arrCell =  super.layoutAttributesForElements(in: rect)!
-            for i in 0..<arrCell.count {
+            for i in 1..<arrCell.count {
                 
                 //当前 UICollectionViewLayoutAttributes
                 let currentLayout = arrCell[i]

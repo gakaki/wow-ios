@@ -12,7 +12,6 @@ import VTMagic
 import RxSwift
 
 class WOWSearchController: WOWBaseViewController {
-//    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     var isLoadPrice: Bool = false
@@ -22,27 +21,13 @@ class WOWSearchController: WOWBaseViewController {
     
     fileprivate var keyWords = [AnyObject](){
         didSet{
-            /**
-             *  如果热门搜索没有view就隐藏
-             */
-            if keyWords.isEmpty {
-//                searchTagView.hotSearchView.hidden = true
-            }else{
-//                searchTagView.hotSearchView.hidden = false
-            }
+   
         }
     }
     
     fileprivate var searchArray = [String](){
         didSet{
-            /**
-             *  如果搜索历史没有view就隐藏
-             */
-            if searchArray.isEmpty {
-//                searchTagView.hisSearchView.hidden = true
-            }else{
-//                searchTagView.hisSearchView.hidden = false
-            }
+     
         }
     }
     
@@ -50,13 +35,15 @@ class WOWSearchController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       requestHotKey()
+       request()
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
             ($0,$1)
             }.throttle(0.1, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { cid,tab_index in
-                
-                self.refreshSubView(tab_index)
+            .subscribe(onNext: {[weak self] cid,tab_index in
+                if let strongSelf = self {
+                    strongSelf.refreshSubView(tab_index)
+
+                }
             })
 
        
@@ -110,10 +97,10 @@ class WOWSearchController: WOWBaseViewController {
         let v = VCVTMagic()
         v.magicView.dataSource = self
         v.magicView.delegate = self
-        v.magicView.isMenuScrollEnabled    = true
-        v.magicView.isSwitchAnimated       = true
-        v.magicView.isScrollEnabled        = true
-        
+//        v.magicView.isMenuScrollEnabled    = true
+//        v.magicView.isSwitchAnimated       = true
+//        v.magicView.isScrollEnabled        = true
+//        
         v.magicView.backgroundColor = UIColor.white
         self.addChildViewController(v)
         v.magicView.frame = CGRect(x: 0, y: 0,width: MGScreenWidth,height: MGScreenHeight - 64)
@@ -200,14 +187,14 @@ class WOWSearchController: WOWBaseViewController {
         WOWSearchManager.shareInstance.delectAll("1")
         searchArray.removeAll()
         collectionView.reloadData()
-//        searchTagView.historyTagListView.removeAllTags()
 
     }
 }
 
 // MARK: - NET
 extension WOWSearchController {
-    func requestHotKey() {
+    override func request() {
+        super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_SearchHot, successClosure: {[weak self] (result) in
             if let strongSelf = self {
                 let json = JSON(result)
@@ -337,6 +324,22 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
         return reusableView!
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: MGScreenWidth, height: 35)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        switch section {
+        case 0:
+            if keyWords.count > 0 {
+                return CGSize(width: MGScreenWidth, height: 35)
+            }else {
+                return CGSize(width: MGScreenWidth, height: 0)
+            }
+        default:
+            return CGSize(width: MGScreenWidth, height: 0)
+        }
+    }
     
     //MARK - UICollectionViewDelegateFlowLayout  itme的大小
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -460,23 +463,7 @@ extension WOWSearchController:VTMagicViewDataSource{
 ////        }
 //        
 ////        return button!
-//        let button = magicView .dequeueReusableItemWithIdentifier(self.identifier_magic_view_bar_item)
-//        
-//        if ( button == nil) {
-//            
-//            let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRectMake(0, 0, self.view.frame.width / 3, 50)) { (asc) in
-//                
-//            }
-//            b.btnIndex = itemIndex
-//            
-//            if ( itemIndex <= 1) {
-//                b.image_is_show = false
-//            }else{
-//                b.image_is_show = true
-//            }
-//            return b
-//        }
-//        return button!
+
 
     }
     
@@ -499,59 +486,7 @@ extension WOWSearchController:VTMagicViewDataSource{
 }
 
 extension WOWSearchController:VTMagicViewDelegate{
-//    func magicView(magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-//        
-//        if let b = magicView.menuItemAtIndex(pageIndex) as! TooglePriceBtn? {
-//            print("  button asc is ", b.asc)
-//            
-//        }
-//        if pageIndex == 0 {
-//            
-//                if let vc = viewController  as? WOWSearchChildController {
-//                    vc.dataArr = dataArr
-//                    vc.asc = 1
-//                    vc.pageVc = pageIndex.toInt + 1
-//                    vc.seoKey = searchView.searchTextField.text
-//                    vc.collectionView.reloadData()
-//                }
-//        }
-//        
-//        if pageIndex == 2{
-//            guard isLoadPrice else {
-//                if let vc = viewController  as? WOWSearchChildController {
-//                    vc.asc = 1
-//                    vc.pageVc = pageIndex.toInt + 1
-//                    vc.seoKey = searchView.searchTextField.text
-//                    vc.dataArr = [WOWProductModel]()
-//                    vc.request()
-//                }
-//                return
-//            }
-//            
-//        }
-//        
-//    }
-//    func magicView(magicView: VTMagicView, didSelectItemAtIndex itemIndex: UInt){
-//        if let b = magicView.menuItemAtIndex(itemIndex) as! TooglePriceBtn? ,
-//            vc = magicView.viewControllerAtPage(itemIndex) as? WOWSearchChildController{
-//            print("  button asc is ", b.asc)
-//                if itemIndex == 2 {
-//                    vc.asc = b.asc
-//                    //价格第一次点击不知道为什么不会进这里
-//                    isLoadPrice = true
-//                }else {
-//                    vc.asc = 1
-//                }
-//                vc.pageIndex = 1
-//                vc.pageVc = itemIndex.toInt + 1
-//                vc.seoKey = searchView.searchTextField.text
-//                vc.dataArr = [WOWProductModel]()
-//                vc.request()
-//
-//        }        
-//        
-//        
-//    }
+
     func refreshSubView( _ tab_index:UInt )
     {
         DLog("cid \(ob_cid.value) tab_index \(tab_index)")

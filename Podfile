@@ -34,7 +34,7 @@ target :wowapp do
 	pod 'JSPatch/Extensions', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'
 	pod 'JSPatch/Loader', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'
 	pod 'JSPatchPlatform'
-	
+	pod 'Reachability', '~> 3.2'
 
 	pod 'SwiftyJSON', '~> 3.0.0'
 	pod 'ObjectMapper',	 '~> 2.0.0'
@@ -89,7 +89,7 @@ target :wowapp do
 		pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
     pod 'wow-model-network',	 :path => "wow-model-network/wow-model-network.podspec"
     pod 'wow-util',						 :path => "wow-util/wow-util.podspec"
-    pod 'wow-ui',							 :path => "wow-ui/wow-ui.podspec"
+#    pod 'wow-ui',							 :path => "wow-ui/wow-ui.podspec"
 
 #waitting For use
 #列表空的占位图 TBEmptyDataSet

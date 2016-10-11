@@ -38,7 +38,7 @@ struct WOWHud {
         }
 
     }
-    
+    // 接口请求成功，返回code码错误
     static func showMsg(_ message:String?){
         DispatchQueue.main.async {
             LoadView.dissMissView()
@@ -48,7 +48,35 @@ struct WOWHud {
         let msg = message ?? "网络错误"
         SVProgressHUD.showInfo(withStatus: msg)
     }
+    // 接口请求不成功
+    static func showMsgNoNetWrok(message:String?){
+        DispatchQueue.main.async {
+            LoadView.dissMissView()
+        }
+        configSVHud()
+        let msg = message ?? "网络错误"
+        SVProgressHUD.showInfo(withStatus: msg)
+        
+        WOWNetWorkType.netWorkType { (NotReachable) in
+            
+            if NotReachable == false {
+                self.noNetView.refreshDataBlock = {
+                    noNetView.removeNoDataAndNetworkView()
+                    (UIApplication.currentViewController() as? WOWBaseViewController)?.request()
+                }
+                self.noNetView.showView(view: (UIApplication.currentViewController()?.view)!)
+            }
+        }
+        
+    }
     
+    static var noNetView:WOWNoNetView = {
+        let view = WOWNoNetView()
+        view.frame = UIScreen.main.bounds
+        return view
+    }()
+    
+
     
     static func configSVHud(){
         SVProgressHUD.setDefaultMaskType(.clear)

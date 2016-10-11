@@ -103,6 +103,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Pitaya/Pitaya.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PonyFrameworkOnSwift/PonyFrameworkOnSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Qiniu/Qiniu.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Reachability/Reachability.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Result/Result.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxCocoa/RxCocoa.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxDataSources/RxDataSources.framework"
@@ -121,7 +122,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/YYCache/YYCache.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYImage/YYImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYWebImage/YYWebImage.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/wow-ui/wow_ui.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
@@ -143,6 +143,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Pitaya/Pitaya.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PonyFrameworkOnSwift/PonyFrameworkOnSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Qiniu/Qiniu.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Reachability/Reachability.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Result/Result.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxCocoa/RxCocoa.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxDataSources/RxDataSources.framework"
@@ -161,5 +162,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/YYCache/YYCache.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYImage/YYImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYWebImage/YYWebImage.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/wow-ui/wow_ui.framework"
 fi

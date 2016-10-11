@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,16 +13,15 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="332"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="331.5"/>
+                <frame key="frameInset" width="375" height="331.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrp-Fq-IZ9">
-                        <rect key="frame" x="15" y="240" width="345" height="53.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="k4Q-HT-73x"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -31,22 +30,13 @@
                         </variation>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5j1-JJ-Q5E">
-                        <rect key="frame" x="15" y="0.0" width="345" height="225"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="23:15" id="6Qw-g5-Ghc"/>
-                            <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="23:14" id="m0f-TH-d7y"/>
-                            <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="115:86" id="wxP-gV-r7w"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="m0f-TH-d7y"/>
-                                <exclude reference="wxP-gV-r7w"/>
-                            </mask>
-                        </variation>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="lrp-Fq-IZ9" secondAttribute="bottom" constant="30" id="4Eq-RI-lwB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="lrp-Fq-IZ9" secondAttribute="bottom" constant="15" id="4Eq-RI-lwB"/>
                     <constraint firstAttribute="trailing" secondItem="5j1-JJ-Q5E" secondAttribute="trailing" constant="15" id="CcP-eN-E9l"/>
                     <constraint firstItem="lrp-Fq-IZ9" firstAttribute="top" secondItem="5j1-JJ-Q5E" secondAttribute="bottom" constant="15" id="J5z-jn-avN"/>
                     <constraint firstItem="5j1-JJ-Q5E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KXX-5G-ZQl"/>
@@ -62,9 +52,9 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="aspect" destination="6Qw-g5-Ghc" id="iff-L4-bmZ"/>
                 <outlet property="bottomSpace" destination="4Eq-RI-lwB" id="Ib4-of-Tt8"/>
                 <outlet property="imgDescLabel" destination="lrp-Fq-IZ9" id="4I6-rS-XKp"/>
-                <outlet property="multiplier" destination="6Qw-g5-Ghc" id="2QL-4E-FrG"/>
                 <outlet property="productImg" destination="5j1-JJ-Q5E" id="ysO-nY-uKS"/>
                 <outlet property="space" destination="J5z-jn-avN" id="7MZ-Y4-nBo"/>
             </connections>

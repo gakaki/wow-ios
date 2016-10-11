@@ -338,10 +338,10 @@ extension AppDelegate{
 //ADLaunchView 广告view
 extension AppDelegate: AdLaunchViewDelegate {
     func adLaunchView(_ launchView: AdLaunchView, bannerImageDidClick imageURL: String) {
-        let urls = "http://www.desgard.com/"
-        if let url: URL = URL(string: urls) {
-            UIApplication.shared.openURL(url)
-        }
+//        let urls = "http://www.desgard.com/"
+//        if let url: URL = URL(string: urls) {
+//            UIApplication.shared.openURL(url)
+//        }
         
     }
     
@@ -350,7 +350,7 @@ extension AppDelegate: AdLaunchViewDelegate {
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AD, successClosure: { (result) in
             
-            var r                     =  JSON(result)
+            var r                     =  JSON(result)["startupImageList"]
             let res                   =  Mapper<WOWVOAd>().mapArray(JSONObject:r.arrayObject) ?? [WOWVOAd]()
             if let imgUrl = res.first?.imgUrl {
                 Defaults[.pic_ad] = imgUrl

@@ -233,7 +233,29 @@ extension PhotoViewCell {
         
         image =  image ?? UIImage(named: "placeholder_product")
         //TODO
-//        downloadTask = imageView.kf_setImageWithURL(url, placeholderImage: image, optionsInfo: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
+        downloadTask = imageView.kf.setImage(with: url, placeholder: image, options: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
+            let progress = Double(receivedSize) / Double(totalSize)
+            //            print(progress)
+            if let sSelf = self {
+                
+                sSelf.hud?.progress = progress
+            }
+            }, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                if let strongSelf = self  {
+                    
+                    strongSelf.image = image
+                    strongSelf.hud?.hideLoadingView()
+                    
+                    if let _ = image {//加载成功
+                        strongSelf.hud?.hideHUD()
+                        return
+                    }
+                    
+                    // 提示加载错误
+                    strongSelf.hud?.showHUD("加载失败", autoHide: false, afterTime: 0.0)
+                }
+        })
+//        downloadTask = imageView.kf.setImageWithURL(url, placeholderImage: image, optionsInfo: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
 //            let progress = Double(receivedSize) / Double(totalSize)
 //            //            print(progress)
 //            if let sSelf = self {
@@ -265,8 +287,8 @@ extension PhotoViewCell {
 //                // 提示加载错误
 //                strongSelf.hud?.showHUD("加载失败", autoHide: false, afterTime: 0.0)
 //            }
-//            
-//            
+        
+            
 //        }
         
     }

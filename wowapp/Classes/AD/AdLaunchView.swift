@@ -8,7 +8,7 @@ import SwiftyUserDefaults
     func adLaunchView(_ launchView: AdLaunchView, bannerImageDidClick imageURL: String)
 }
 
-private var sloganHeight: CGFloat = 128
+private var sloganHeight: CGFloat = 0
 
 final class AdLaunchView: UIView {
     
@@ -31,16 +31,21 @@ final class AdLaunchView: UIView {
         
         var view: UIView = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = UIColor.white
-        view.addSubview(footer)
+        //        view.addSubview(footer)
         return view
     }()
     
     // 图片链接
-    fileprivate var imageURL: String = "http://mg.soupingguo.com/bizhi/big/10/258/043/10258043.jpg"
+    fileprivate var imageURL: String = ""
     
     // 启动页广告
     fileprivate var adImageView: UIImageView?
-
+    //logo图片
+    fileprivate var logoImageView: UIImageView?
+    
+    //文字
+    fileprivate var logoLabel: UILabel?
+    
     // 进度条
     fileprivate var progressView: DACircularProgressView?
     
@@ -60,7 +65,7 @@ final class AdLaunchView: UIView {
         // 广告主流程
         displayCachedAd()
         requestBanner()
-        showProgressView()
+        //        showProgressView()
         
         let delayTime = DispatchTime.now() + Double(Int64(4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
@@ -70,10 +75,10 @@ final class AdLaunchView: UIView {
     
     override func removeFromSuperview() {
         UIView.animate(withDuration: 1, animations: {
-                self.alpha = 0
+            self.alpha = 0
             }, completion: { (finished: Bool) in
                 super.removeFromSuperview()
-            }) 
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -88,7 +93,8 @@ private extension AdLaunchView {
         let manange: SDWebImageManager = SDWebImageManager()
         
         if (((manange.imageCache.imageFromDiskCache(forKey: imageURL)) == nil)) {
-            self.isHidden = true
+//            self.isHidden = true
+            showDefaultImage()
         } else {
             showImage()
         }
@@ -103,7 +109,7 @@ private extension AdLaunchView {
             options: SDWebImageOptions.avoidAutoSetImage,
             progress: nil) { (image, error, cacheType, finisned, url) in
                 print("图片下载成功")
-            }
+        }
     }
     
     func showImage() {
@@ -115,8 +121,68 @@ private extension AdLaunchView {
             adImageView.addGestureRecognizer(singleTap)
             
             addSubview(adImageView)
+            
+            logoImageView = UIImageView(image: UIImage(named: "logo"))
+            if let logoImageView = logoImageView {
+                addSubview(logoImageView)
+                logoImageView.snp.makeConstraints { [weak self](make) -> Void in
+                    make.width.equalTo(110)
+                    make.height.equalTo(169)
+                    make.top.equalTo(MGScreenHeight*0.15)
+                    make.centerX.equalTo(self!)
+                }
+            }
+            
+            logoLabel = UILabel()
+            logoLabel?.text = "聚焦与众不同的日常设计"
+            logoLabel?.font = UIFont.systemFont(ofSize: 12)
+            if let logoLabel = logoLabel {
+                addSubview(logoLabel)
+                logoLabel.snp.makeConstraints { [weak self](make) -> Void in
+                    
+                    make.bottom.equalTo(self!).offset(-MGScreenHeight*0.08)
+                    make.centerX.equalTo(self!)
+                }
+            }
         }
     }
+    
+    func showDefaultImage() {
+        adImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - sloganHeight))
+        if let adImageView = adImageView {
+            adImageView.image = UIImage(named: "default")
+            adImageView.isUserInteractionEnabled = true
+            let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AdLaunchView.singleTapAction))
+            adImageView.addGestureRecognizer(singleTap)
+            
+            addSubview(adImageView)
+            
+            logoImageView = UIImageView(image: UIImage(named: "logo"))
+            if let logoImageView = logoImageView {
+                addSubview(logoImageView)
+                logoImageView.snp.makeConstraints { [weak self](make) -> Void in
+                    make.width.equalTo(110)
+                    make.height.equalTo(169)
+                    make.top.equalTo(MGScreenHeight*0.15)
+                    make.centerX.equalTo(self!)
+                }
+            }
+            
+            logoLabel = UILabel()
+            logoLabel?.text = "聚焦与众不同的日常设计"
+            logoLabel?.font = UIFont.systemFont(ofSize: 12)
+            if let logoLabel = logoLabel {
+                addSubview(logoLabel)
+                logoLabel.snp.makeConstraints { [weak self](make) -> Void in
+                    
+                    make.bottom.equalTo(self!).offset(-MGScreenHeight*0.08)
+                    make.centerX.equalTo(self!)
+                }
+            }
+            
+        }
+    }
+    
     
     func showProgressView() {
         progressButtonView = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 60, y: 20, width: 40, height: 40))
@@ -145,8 +211,8 @@ private extension AdLaunchView {
     @objc func toHidenState() {
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0
-        }, completion: { (finished: Bool) in
-            self.isHidden = true
+            }, completion: { (finished: Bool) in
+                self.isHidden = true
         }) 
     }
 }

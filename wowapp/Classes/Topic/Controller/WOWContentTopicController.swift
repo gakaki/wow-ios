@@ -181,7 +181,22 @@ class WOWContentTopicController: WOWBaseViewController {
                 DLog(result)
                 let r                                     =  JSON(result)
                 strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map( JSONObject:r.object )
-                
+                let imgView = UIImageView()
+                imgView.kf.setImage(
+                    with: URL(string:strongSelf.vo_topic!.topicImg ?? "" )!,
+                    placeholder: nil,
+                    options: nil,
+                    progressBlock: { (arg1, arg2) in
+                        
+                        
+                    },
+                    completionHandler: { [weak self](image, error, cacheType, imageUrl) in
+                        if let strongSelf = self{
+                            strongSelf.shareProductImage = image
+                        }
+                    }
+                )
+
                 strongSelf.reloadNagationItemThumbButton(strongSelf.vo_topic!.favorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
 
                 

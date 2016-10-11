@@ -156,7 +156,9 @@ class WOWNetManager {
                     successClosure(res)
                 case let .failure(error):
                     DLog(error)
-                    WOWHud.showMsg("网络错误")
+//                    WOWHud.showMsg("网络错误")
+                    WOWHud.showMsgNoNetWrok(message: "网络错误")
+
                     failClosure("网络错误")
                     break
             }

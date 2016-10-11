@@ -45,7 +45,7 @@ class WOWSearchController: WOWBaseViewController {
 
                 }
             })
-
+    
        
     }
     
@@ -406,6 +406,8 @@ extension WOWSearchController:UITextFieldDelegate{
         self.navigationShadowImageView?.isHidden = true
         v_bottom.magicView.isHidden = false
         v_bottom.magicView.reloadData(toPage: 0)
+     
+        refreshSubView(0)
     }
     
     func hideResult()  {
@@ -491,14 +493,18 @@ extension WOWSearchController:VTMagicViewDelegate{
     {
         DLog("cid \(ob_cid.value) tab_index \(tab_index)")
         
-        if let b    = self.v_bottom.magicView.menuItem(at: tab_index) as! TooglePriceBtn? ,
-            let vc  = self.v_bottom.magicView.viewController(atPage: tab_index) as? WOWSearchChildController
+        if let b    = self.v_bottom.magicView.menuItem(at: tab_index) as? TooglePriceBtn ,
+             let vc  = self.v_bottom.magicView.viewController(atPage: tab_index) as? WOWSearchChildController
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
 //            let query_cid          = ob_cid.value
             var query_asc          = 1
             if ( tab_index == 2){ //价格的话用他的排序 其他 正常升序
-                query_asc          = b.asc
+                if b.asc {
+                    query_asc = 1
+                }else {
+                    query_asc = 0
+                }
             }else{
                 query_asc          = 1
             }
@@ -518,6 +524,7 @@ extension WOWSearchController:VTMagicViewDelegate{
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
         self.ob_tab_index.value = itemIndex
     }
+    
 }
 
 

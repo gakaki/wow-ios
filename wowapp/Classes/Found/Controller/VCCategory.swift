@@ -316,7 +316,12 @@ extension VCCategory:VTMagicViewDelegate{
             let query_cid          = ob_cid.value
             var query_asc          = 1
             if ( tab_index == 2){ //价格的话用他的排序 其他 正常升序
-                query_asc          = b.asc
+                
+                if b.asc {
+                    query_asc = 1
+                }else {
+                    query_asc = 0
+                }
             }else{
                 query_asc          = 1
             }

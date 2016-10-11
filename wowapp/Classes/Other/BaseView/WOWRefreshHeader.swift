@@ -27,7 +27,7 @@ class WOWRefreshHeader: MJRefreshHeader {
     override func placeSubviews() {
         super.placeSubviews()
 
-        img.center = CGPoint(x: UIScreen.main.bounds.size.width/2, y: self.center.y + 80)
+        img.center = CGPoint(x: UIScreen.main.bounds.size.width/2, y: self.center.y + 80.h)
 
     }
     

@@ -543,19 +543,20 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         
     }
     func footerView() -> UIView {
-        let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 70)
-        view.backgroundColor = UIColor.white
-    
-        let img = UIImageView()
-        img.image = UIImage(named: "wowdsgn")
-        view.addSubview(img)
-        img.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(97)
-            make.height.equalTo(10)
-            make.center.equalTo(view)
-        }
-        
+//        let view = UIView()
+//        view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 70)
+//        view.backgroundColor = UIColor.white
+//    
+//        let img = UIImageView()
+//        img.image = UIImage(named: "wowdsgn")
+//        view.addSubview(img)
+//        img.snp.makeConstraints { (make) -> Void in
+//            make.width.equalTo(97)
+//            make.height.equalTo(10)
+//            make.center.equalTo(view)
+//        }
+        let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70))
+
         return view
         
     }

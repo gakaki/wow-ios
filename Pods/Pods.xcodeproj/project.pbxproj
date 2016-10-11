@@ -503,7 +503,6 @@
 		792B183C831F60D2651A953E95DA35DC /* UIButton+YYWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 845ED7DF9CECF5703614570AE3CE6C2C /* UIButton+YYWebImage.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		798D403C2D24CC8E588118A382F9D26A /* RxCollectionViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B9D0C18FD5BB78FF6CAC0679CCE60A /* RxCollectionViewDataSourceType.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		7A2240EA04EC60BC8E1BFF0457824F86 /* CurrentThreadScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917B7450E79541720AB816ADC77974F /* CurrentThreadScheduler.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		7A23BC2BFEF3B5F268F49A9B159B2E24 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06ACB56FDE278A9264E2A954FB2D975 /* ReplaceMe.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		7A3B36F104BD260AA1BB73ACE471C588 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C29B9D0A6F34FEAAAB6FD05E5B9FC80 /* Scan.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		7A88CFE9124662B4435828DBCFED0E18 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8854CC5FB9D5F68002F847D4D428A406 /* Security.framework */; };
 		7A9CB012665849D9347A17A993122E28 /* Repeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF67313927912CF436C52A6B3CB46E6 /* Repeat.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -2349,7 +2348,6 @@
 		C002639015EB61E0A4CF66734FACC2B0 /* UITableView+FDIndexPathHeightCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableView+FDIndexPathHeightCache.h"; path = "Classes/UITableView+FDIndexPathHeightCache.h"; sourceTree = "<group>"; };
 		C018C771ED8A806C1382D50B2FB9E187 /* UITableView+FDTemplateLayoutCell.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "UITableView+FDTemplateLayoutCell.modulemap"; sourceTree = "<group>"; };
 		C045B51A5B5D4AA3E32561806FBBB6E6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C06ACB56FDE278A9264E2A954FB2D975 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
 		C082788900E0888C52548518BFCC3A7A /* Hashids-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Hashids-Swift-prefix.pch"; sourceTree = "<group>"; };
 		C083F320B18A0C227ADE385F508EE4FE /* Pods-wowapp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-wowapp-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C0DD5085F6D0C46FF8BFE444B7FA4672 /* UIImageView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImageView+Rx.swift"; path = "RxCocoa/iOS/UIImageView+Rx.swift"; sourceTree = "<group>"; };
@@ -3718,7 +3716,6 @@
 		62C6B0D33A5E3D9539C929A93A137C68 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C06ACB56FDE278A9264E2A954FB2D975 /* ReplaceMe.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -7273,7 +7270,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A23BC2BFEF3B5F268F49A9B159B2E24 /* ReplaceMe.swift in Sources */,
 				9827418C66E4774D02E0D80D58DF8CA9 /* wow-ui-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

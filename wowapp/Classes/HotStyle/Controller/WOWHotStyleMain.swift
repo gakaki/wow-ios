@@ -109,8 +109,8 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
 
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 4 {
-            return CGFloat.leastNormalMagnitude
+        if section == dataArr.count - 1{
+            return 70
         }else{
             return 15.h
         }
@@ -120,6 +120,22 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
         return CGFloat.leastNormalMagnitude
         
     }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == dataArr.count - 1{
+            return footerView()
+        }else{
+            return nil
+        }
+    }
+    func footerView() -> UIView {
+        
+        let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70))
+        view.backgroundColor = tableView.backgroundColor
+        return view
+        
+    }
+    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataArr[(indexPath as NSIndexPath).section]
         

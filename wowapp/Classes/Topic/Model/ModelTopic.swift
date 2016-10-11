@@ -29,6 +29,7 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
     var readQty                     :Int?
     var imageSerial                 :WOWImageSerial?
     var favorite                    : Bool?
+    var imageAspect:CGFloat = 0
     
     required init?(map: Map) {
         
@@ -51,6 +52,26 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
         readQty         <- map["readQty"]
         imageSerial     <- map["imageSerial"]
         favorite        <- map["favorite"]
+       
+        if imageAspect == 0 {
+            calImageHeight()
+        }
+        
+    }
+    func calImageHeight(){
+        //定义NSURL对象
+        let url = NSURL(string: topicImg ?? "")
+        DispatchQueue.global(qos: .background).async {
+            if let data = NSData(contentsOf: url as! URL), let image = UIImage(data: data as Data) {
+                //计算原始图片的宽高比
+                self.imageAspect = image.size.width / image.size.height
+                //            //设置imageView宽高比约束
+                //            //加载图片
+                //
+                
+            }
+        }
+        
     }
 }
 

@@ -13,8 +13,21 @@ class WOWContentTopicTopCell: UITableViewCell {
     @IBOutlet weak var topicImg: UIImageView!
     @IBOutlet weak var topicTitle: UILabel!
     @IBOutlet weak var topicDesc: UILabel!
+    @IBOutlet weak var aspect: NSLayoutConstraint!
     
-    
+    //内容图片的宽高比约束
+    internal var aspectConstraint : NSLayoutConstraint? = nil{
+        didSet {
+            if oldValue != nil {
+                topicImg.removeConstraint(oldValue!)
+            }
+            if aspectConstraint != nil {
+                aspect.priority = 750
+                topicImg.addConstraint(aspectConstraint!)
+            }
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,6 +41,13 @@ class WOWContentTopicTopCell: UITableViewCell {
     
     func showData(_ model: WOWModelVoTopic?) {
         if let model = model {
+            aspectConstraint = NSLayoutConstraint(item: self.topicImg,
+                                                  attribute: .width, relatedBy: .equal,
+                                                  toItem: self.topicImg, attribute: .height,
+                                                  multiplier: model.imageAspect , constant: 0.0)
+            self.updateConstraints()
+            topicImg.updateConstraints()
+
             topicImg.set_webimage_url(model.topicImg)
             topicTitle.text = model.topicMainTitle
             topicDesc.text = model.topicDesc

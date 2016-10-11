@@ -10,6 +10,7 @@ import UIKit
 class WOWSearchChildController: WOWBaseViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     var dataArr = [WOWProductModel]()
     
     //param
@@ -31,7 +32,13 @@ class WOWSearchChildController: WOWBaseViewController{
         super.viewDidLoad()
         addObserver()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        request()
+    }
+    deinit {
+        print("销毁")
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -73,7 +80,7 @@ class WOWSearchChildController: WOWBaseViewController{
                 }
                 strongSelf.collectionView.reloadData()
                 if ( strongSelf.pageIndex == 1 ){
-                    strongSelf.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.top)
+                    strongSelf.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.top)
                 }
             }
             

@@ -6,10 +6,11 @@ class TooglePriceBtn:UIButton {
     
     var btnIndex:UInt = 0
     
-    var asc:Int {
+    var asc:Bool {
         get {
-            return 1
+//            return 1
             //TODO
+            return upDown
 //            return Int(bool:upDown)
         }
     }
@@ -53,7 +54,7 @@ class TooglePriceBtn:UIButton {
         }
     }
     
-    var action : ((_ asc:Int) -> ())?
+    var action : ((_ asc:Bool) -> ())?
     var in_title:String = "价格"
     
 
@@ -67,7 +68,7 @@ class TooglePriceBtn:UIButton {
     init(
         title:String = "价格",
         frame: CGRect,
-        tocuhClosure: @escaping (_ asc:Int) -> ()
+        tocuhClosure: @escaping (_ asc:Bool) -> ()
     )
     {
         

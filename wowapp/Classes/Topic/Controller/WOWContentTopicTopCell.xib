@@ -16,7 +16,7 @@
                 <frame key="frameInset" width="375" height="469.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzM-CY-eO3">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzM-CY-eO3">
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hpX-iz-6Aa">
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="hpX-iz-6Aa" secondAttribute="height" multiplier="375:320" id="4r3-hH-msF"/>
+                            <constraint firstAttribute="width" secondItem="hpX-iz-6Aa" secondAttribute="height" multiplier="750:422" id="4r3-hH-msF"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -63,6 +63,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="aspect" destination="4r3-hH-msF" id="Znb-2Y-vLl"/>
                 <outlet property="topicDesc" destination="Bx0-9A-5J2" id="SCa-Vu-3cE"/>
                 <outlet property="topicImg" destination="hpX-iz-6Aa" id="2aa-UJ-5tT"/>
                 <outlet property="topicTitle" destination="gzM-CY-eO3" id="mAP-Ta-vtM"/>

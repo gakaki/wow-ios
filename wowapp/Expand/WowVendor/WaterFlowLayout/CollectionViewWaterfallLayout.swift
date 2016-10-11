@@ -121,9 +121,11 @@ open class CollectionViewWaterfallLayout: UICollectionViewLayout {
         if numberOfSections == 0 {
             return;
         }
-        
-        assert(delegate!.conforms(to: CollectionViewWaterfallLayoutDelegate.self), "UICollectionView's delegate should conform to WaterfallLayoutDelegate protocol")
-        assert(columnCount > 0, "WaterfallFlowLayout's columnCount should be greater than 0")
+        if let del = delegate {
+            assert(del.conforms(to: CollectionViewWaterfallLayoutDelegate.self), "UICollectionView's delegate should conform to WaterfallLayoutDelegate protocol")
+            assert(columnCount > 0, "WaterfallFlowLayout's columnCount should be greater than 0")
+
+        }
         
         // Initialize variables
         headersAttribute.removeAll(keepingCapacity: false)

@@ -195,17 +195,17 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func back(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+       _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func likeButtonClick(_ sender: UIButton) {
         if !WOWUserManager.loginStatus {
             goLogin()
         }else{
-            let uid         = WOWUserManager.userID
-            _     = self.productId ?? 0
-            let type        = "1" //1为商品 2 为场景
-            let is_delete   = favoriteButton.isSelected ? "1":"0"
+//            let uid         = WOWUserManager.userID
+//            _     = self.productId ?? 0
+//            let type        = "1" //1为商品 2 为场景
+//            let is_delete   = favoriteButton.isSelected ? "1":"0"
 //            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Apifa(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
 //                let json = JSON(result)
 //                DLog(json)
@@ -295,10 +295,10 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsDetailCell.self), for: indexPath) as! WOWGoodsDetailCell
-            if let pics = productModel?.primaryImgs{
-                let model = pics[(indexPath as NSIndexPath).row]
+//            if let pics = productModel?.primaryImgs{
+//                let model = pics[(indexPath as NSIndexPath).row]
 //                cell.showData(model)
-            }
+//            }
             returnCell = cell
         case 2: //设计师
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWDesignerCell.self), for:indexPath) as! WOWDesignerCell

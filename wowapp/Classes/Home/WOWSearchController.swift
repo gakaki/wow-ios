@@ -179,7 +179,7 @@ class WOWSearchController: WOWBaseViewController {
     
     func cancel(){
         searchView.searchTextField.resignFirstResponder()
-        navigationController?.popViewController(animated: true)
+      _ =  navigationController?.popViewController(animated: true)
     }
     
     func deleteClick() {

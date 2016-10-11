@@ -63,7 +63,7 @@ class WOWSearchsController: WOWBaseViewController {
 //MARK:Actions
     func cancel(){
         searchView.searchTextField.resignFirstResponder()
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
 //MARK:Network

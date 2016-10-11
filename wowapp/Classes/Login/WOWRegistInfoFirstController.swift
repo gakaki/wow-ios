@@ -66,7 +66,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         let sure   = UIAlertAction(title: "确定", style: .default) {[weak self] (action) in
             if let strongSelf = self{
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                    strongSelf.navigationController?.popViewController(animated: true)
+                  _ =  strongSelf.navigationController?.popViewController(animated: true)
                     if strongSelf.isPresent{
                         UIApplication.appTabBarController.selectedIndex = 0
                     }

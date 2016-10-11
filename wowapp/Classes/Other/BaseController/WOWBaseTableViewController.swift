@@ -65,7 +65,7 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
     }
     
     func navBack() {
-        navigationController?.popViewController(animated: true)
+      _ = navigationController?.popViewController(animated: true)
     }
 
     

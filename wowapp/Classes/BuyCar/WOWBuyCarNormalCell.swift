@@ -143,7 +143,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return typeArr == nil ? 0 : (typeArr.count)
+        return typeArr.isEmpty ? 0 : (typeArr.count)
     }
 
  

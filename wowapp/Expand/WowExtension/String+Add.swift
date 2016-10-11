@@ -9,7 +9,7 @@
 import Foundation
 extension String{
     func toPinYin() -> String {
-        let s = self ?? ""
+        let s = self 
         let string = NSMutableString(string:s) as CFMutableString
         if CFStringTransform(string, nil, kCFStringTransformMandarinLatin,false) == true{
             if CFStringTransform(string,nil, kCFStringTransformStripDiacritics, false) == true{

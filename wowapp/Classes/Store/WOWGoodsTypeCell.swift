@@ -29,7 +29,7 @@ class WOWGoodsTypeCell: UITableViewCell {
         summaryLabel.text = model?.sellingPoint
         if let m = model {
 
-            headImageView.kf_setImage(with: URL(string:m.brandLogoImg ?? " ")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
+            headImageView.kf.setImage(with: URL(string:m.brandLogoImg ?? " ")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
         }
     }
     

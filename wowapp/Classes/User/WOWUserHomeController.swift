@@ -74,7 +74,7 @@ class WOWUserHomeController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func backButtonClick(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+       _ = navigationController?.popViewController(animated: true)
     }
 }
 

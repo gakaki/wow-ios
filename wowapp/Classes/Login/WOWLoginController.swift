@@ -44,7 +44,7 @@ class WOWLoginController: WOWBaseViewController {
 //                strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 if strongSelf.isPopRootVC {
                     strongSelf.dismiss(animated: true, completion: {
-                        UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: true)
+                       _ = UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: true)
                     })
 
                 }else{

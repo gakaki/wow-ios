@@ -133,7 +133,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func back(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+       _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func favoriteButton(_ sender: UIButton) {
@@ -383,7 +383,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr.count ?? 0
+        return dataArr.count 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

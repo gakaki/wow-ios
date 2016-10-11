@@ -187,7 +187,7 @@ extension WOWAddressController:UITableViewDelegate,UITableViewDataSource{
         if entrance == .sureOrder {
             if let ac = action{
                 ac(dataArr[(indexPath as NSIndexPath).section])
-                navigationController?.popViewController(animated: true)
+               _ = navigationController?.popViewController(animated: true)
             }
         }
     }

@@ -53,7 +53,7 @@ class WOWPayBackView: UIView {
         backClear.frame = CGRect(x: 0,y: self.h,width: self.w,height: self.h)
         addSubview(backClear)
         backClear.addSubview(payView)
-        payView.snp_makeConstraints {[weak self](make) in
+        payView.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
             }

@@ -111,11 +111,11 @@ class WOWMsgCodeController: WOWBaseViewController {
             if let strongSelf = self{
                 switch strongSelf.entrance {
                 case .loginEntrance:
-                    strongSelf.navigationController?.popViewController(animated: true)
+                  _ =  strongSelf.navigationController?.popViewController(animated: true)
                 default:
                     WOWUserManager.exitLogin()
                     NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-                    strongSelf.navigationController?.popToRootViewController(animated: false)
+                  _ =  strongSelf.navigationController?.popToRootViewController(animated: false)
                     strongSelf.toLoginVC(true)
                 }
                 

@@ -43,7 +43,7 @@ class WOWOrderCommentController: WOWBaseViewController {
                 if let del = strongSelf.delegate{
                     del.orderCommentSuccess()
                 }
-                strongSelf.navigationController?.popViewController(animated: true)
+             _ = strongSelf.navigationController?.popViewController(animated: true)
             }
         }) { (errorMsg) in
             

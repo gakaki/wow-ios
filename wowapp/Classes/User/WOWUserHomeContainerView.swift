@@ -33,22 +33,22 @@ class WOWUserHomeContainerView: UICollectionReusableView {
         WOWCheckMenuSetting.selectedIndex = 1
         underCheckView = WOWTopMenuTitleView(frame:CGRect(x: 0, y: 0, width: MGScreenWidth, height: 36), titles: ["喜欢的场景","喜欢的单品"])
         addSubview(underCheckView)
-        underCheckView.snp_makeConstraints {[weak self](make) in
+        underCheckView.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.equalTo(strongSelf).offset(0)
 //                make.bottom.equalTo(strongSelf).offset(-2)
                 make.height.equalTo(36)
-                make.top.equalTo(strongSelf.topHeadView.snp_bottom).offset(0)
+                make.top.equalTo(strongSelf.topHeadView.snp.bottom).offset(0)
             }
         }
         
         let line = UIView()
         line.backgroundColor = BorderColor
         addSubview(line)
-        line.snp_makeConstraints {[weak self] (make) in
+        line.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.left.right.equalTo(strongSelf).offset(0)
-                make.top.equalTo(strongSelf.underCheckView.snp_bottom).offset(0)
+                make.top.equalTo(strongSelf.underCheckView.snp.bottom).offset(0)
                 make.height.equalTo(0.5)
             }
         }

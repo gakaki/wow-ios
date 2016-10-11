@@ -66,7 +66,7 @@ class WOWOrderListViewController: WOWBaseViewController {
     }
     override func navBack() {
         if entrance == .orderPay {
-            self.navigationController?.popToRootViewController(animated: true)
+           _ = self.navigationController?.popToRootViewController(animated: true)
         }else{
             popVC()
         }

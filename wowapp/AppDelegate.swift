@@ -212,7 +212,7 @@ extension AppDelegate{
         
         if ((error == nil)) {
             DLog("finished init with params = \(params.description)");
-            let name  = params["name"]
+//            let name  = params["name"]
 //            goToLinuxCmd(cmdName); //调用应用自己的接口跳转到分享时页面
         } else {
             DLog("init error id: \(error.code) error.toString()");

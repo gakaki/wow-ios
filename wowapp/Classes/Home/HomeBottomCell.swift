@@ -145,7 +145,7 @@ class HomeBottomCell: UITableViewCell {
               originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
         }
         // 格式化富文本
-        priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+        priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
 
      
         if WOWUserManager.loginStatus {
@@ -178,7 +178,7 @@ class HomeBottomCell: UITableViewCell {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
         }
         // 格式化富文本
-        priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr ?? "", str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+        priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
 
      
         if WOWUserManager.loginStatus {

@@ -65,7 +65,7 @@ class WOWPaySuccessController: WOWBaseViewController {
     }
 
     override func navBack() {
-        navigationController?.popToRootViewController(animated: true)
+       _ = navigationController?.popToRootViewController(animated: true)
         
     }
     

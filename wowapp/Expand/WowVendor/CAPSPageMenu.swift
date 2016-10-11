@@ -998,7 +998,7 @@ open class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureRecogn
             }
             
             // Move controller scroll view when tapping menu item
-            let duration : Double = Double(scrollAnimationDurationOnMenuItemTap) / Double(1000)
+//            let duration : Double = Double(scrollAnimationDurationOnMenuItemTap) / Double(1000)
             
 //            UIView.animateWithDuration(duration, animations: { () -> Void in
                 let xOffset : CGFloat = CGFloat(index) * self.controllerScrollView.frame.width

@@ -51,7 +51,7 @@ class WOWUserTopView: UIView {
         topContainerView.addSubview(arrowImageView)
         arrowImageView.snp.makeConstraints { (make) in
             if let _ = weakSelf{
-                make.right.equalTo(topContainerView.snp_right).offset(-15)
+                make.right.equalTo(topContainerView.snp.right).offset(-15)
                 make.centerY.equalTo(topContainerView)
                 make.size.equalTo(CGSize(width:9, height:16))
             }

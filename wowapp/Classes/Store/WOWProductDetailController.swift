@@ -279,7 +279,7 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     
     @IBAction func backClick(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+       _ = navigationController?.popViewController(animated: true)
     }
     
 //MARK:Private Network

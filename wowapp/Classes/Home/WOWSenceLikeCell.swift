@@ -56,7 +56,7 @@ extension WOWSenceLikeCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWImageCell.self), for: indexPath) as! WOWImageCell
 //        if orderTag {
-            let orderItem = orderArr[(indexPath as NSIndexPath).item]
+//            let orderItem = orderArr[(indexPath as NSIndexPath).item]
 //            cell.pictureImageView.kf_setImageWithURL(NSURL(string:orderItem.skuProductImageUrl)!, placeholderImage: UIImage(named: "placeholder_product"))
 //        }
         //FIXME:测试

@@ -164,7 +164,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
             if coupon.status == 1 {
                 if let ac = action{
                     ac(coupon)
-                    navigationController?.popViewController(animated: true)
+                  _ = navigationController?.popViewController(animated: true)
                 }
             }
             
@@ -216,7 +216,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         if let ac = action{
             couponModel = nil
             ac(couponModel ?? "" as AnyObject)
-            navigationController?.popViewController(animated: true)
+           _ = navigationController?.popViewController(animated: true)
         }
         
     }

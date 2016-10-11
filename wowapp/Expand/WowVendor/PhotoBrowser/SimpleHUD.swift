@@ -90,7 +90,7 @@ class SimpleHUD: UIView {
             context?.setLineWidth(lineWidth)
             
             context?.setLineCap(.round)
-            let endAngle = CGFloat(progress * M_PI * 2 - M_PI_2 + 0.01)
+//            let endAngle = CGFloat(progress * M_PI * 2 - M_PI_2 + 0.01)
             
             //TODO
 //            CGContextAddArc(context, rect.size.width/2, rect.size.height/2, radius, -CGFloat(M_PI_2), endAngle, 0)

@@ -270,7 +270,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
             if let strongSelf = self{
                 if let ac = strongSelf.action{
                     ac()
-                    strongSelf.navigationController?.popViewController(animated: true)
+                  _ =  strongSelf.navigationController?.popViewController(animated: true)
                     
                 }
             }
@@ -286,7 +286,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
             if let strongSelf = self{
                 if let ac = strongSelf.action{
                     ac()
-                    strongSelf.navigationController?.popViewController(animated: true)
+                   _ = strongSelf.navigationController?.popViewController(animated: true)
                     
                 }
             }

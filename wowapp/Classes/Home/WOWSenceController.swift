@@ -53,7 +53,7 @@ class WOWSenceController: WOWBaseViewController {
     
 
     @IBAction func backButtonClick(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+      _ =  navigationController?.popViewController(animated: true)
     }
     
     
@@ -108,7 +108,7 @@ class WOWSenceController: WOWBaseViewController {
     //同步到云端购物车
     fileprivate func saveNetCar(_ arr:[WOWProductModel]){
         let uid = WOWUserManager.userID
-        var cars = [AnyObject]()
+        let cars = [AnyObject]()
         var param:[String:AnyObject] = ["uid":uid as AnyObject]
         if arr.count != 0 {
 //            for obj in arr {
@@ -163,10 +163,12 @@ class WOWSenceController: WOWBaseViewController {
     }
     
     @IBAction func favorite(_ sender: UIButton) {
-        let uid         = WOWUserManager.userID
-        let thingid     = self.sceneID ?? ""
-        let type        = "2" //1为商品 2 为场景
-        let is_delete   = favoriteButton.isSelected ? "1":"0"
+//        let uid         = WOWUserManager.userID
+//        let thingid     = self.sceneID ?? ""
+//        let type        = "2" //1为商品 2 为场景
+//        let is_delete   = favoriteButton.isSelected ? "1":"0"
+        
+        
 //        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id:"", uid: uid, type: type, is_delete:is_delete, scene_id:thingid), successClosure: { [weak self](result) in
 //            let json = JSON(result)
 //            DLog(json)

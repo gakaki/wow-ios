@@ -34,7 +34,7 @@ class WOWRegistProtocolController: WOWBaseViewController {
         if let action = self.agreeAction {
             action()
         }
-        navigationController?.popViewController(animated: true)
+       _ = navigationController?.popViewController(animated: true)
     }
     
 

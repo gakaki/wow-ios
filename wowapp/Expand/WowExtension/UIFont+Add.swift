@@ -30,31 +30,31 @@ extension UIFont {
     
     @available(iOS 7, *)
     public class func systemFontOfSize(_ size: Double, weight: FontWeight) -> UIFont {
-        if #available(iOS 8.2, *) {
-            let fontWeightFloat: CGFloat
-            switch weight {
-            case .ultraLight:
-                fontWeightFloat = UIFontWeightUltraLight
-            case .light:
-                fontWeightFloat = UIFontWeightLight
-            case .thin:
-                fontWeightFloat = UIFontWeightThin
-            case .normal:
-                fontWeightFloat = UIFontWeightRegular
-            case .regular:
-                fontWeightFloat = UIFontWeightMedium
-            case .semibold:
-                fontWeightFloat = UIFontWeightSemibold
-            case .bold:
-                fontWeightFloat = UIFontWeightBold
-            case .heavy:
-                fontWeightFloat = UIFontWeightHeavy
-            case .black:
-                fontWeightFloat = UIFontWeightBlack
-            }
-            
-            return UIFont.systemFont(ofSize: CGFloat(size), weight: fontWeightFloat)
-        } else {
+//        if #available(iOS 8.2, *) {
+//            let fontWeightFloat: CGFloat
+//            switch weight {
+//            case .ultraLight:
+//                fontWeightFloat = UIFontWeightUltraLight
+//            case .light:
+//                fontWeightFloat = UIFontWeightLight
+//            case .thin:
+//                fontWeightFloat = UIFontWeightThin
+//            case .normal:
+//                fontWeightFloat = UIFontWeightRegular
+//            case .regular:
+//                fontWeightFloat = UIFontWeightMedium
+//            case .semibold:
+//                fontWeightFloat = UIFontWeightSemibold
+//            case .bold:
+//                fontWeightFloat = UIFontWeightBold
+//            case .heavy:
+//                fontWeightFloat = UIFontWeightHeavy
+//            case .black:
+//                fontWeightFloat = UIFontWeightBlack
+//            }
+//            
+//            return UIFont.systemFont(ofSize: CGFloat(size), weight: fontWeightFloat)
+//        } else {
             let systemFontName: String
             switch weight {
             case .ultraLight:
@@ -79,6 +79,6 @@ extension UIFont {
             
             return UIFont(name: systemFontName, size: CGFloat(size))!
         }
-    }
+//    }
     
 }

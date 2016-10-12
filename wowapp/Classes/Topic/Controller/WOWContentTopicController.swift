@@ -73,6 +73,7 @@ class WOWContentTopicController: WOWBaseViewController {
         }
         
     }
+    //分享
     func zdClick() -> Void {
 
         let shareUrl = WOWShareUrl + "/topic/\(topic_id )"
@@ -80,6 +81,7 @@ class WOWContentTopicController: WOWBaseViewController {
 
         
     }
+    //去购物车
     func sjClick() -> Void {
         guard WOWUserManager.loginStatus else {
             toLoginVC(true)

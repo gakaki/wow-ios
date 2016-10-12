@@ -22,6 +22,7 @@ class WOWController: WOWBaseViewController {
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
+    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
     
     @IBOutlet var tableView: UITableView!
     //    var hidingNavBarManager: HidingNavigationBarManager?
@@ -551,14 +552,11 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if pageIndex >= 4 {
-            self.topBtn.isHidden = false
-            if offsetY == 0 {
-                offsetY = scrollView.mj_offsetY
-            }
-        }
-        if scrollView.mj_offsetY < offsetY {
+        
+        if scrollView.mj_offsetY < backTopBtnScrollViewOffsetY {
             self.topBtn.isHidden = true
+        }else{
+            self.topBtn.isHidden = false
         }
         
     }
@@ -577,8 +575,8 @@ extension WOWController:WOWHomeFormDelegate{
     
     func goToVC(_ m:WOWModelVoTopic){//右滑更多 跳转专题详情
         if let cid = m.id{
-
-            toVCTopidDetail(cid)
+            
+            toVCTopic(cid)
             
         }
     }

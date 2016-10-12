@@ -115,10 +115,11 @@ class WOWClickLikeAction {
                 let favorite = JSON(result)["favorite"].bool
                 
                 if favorite == true {
-                    btn.isSelected  = favorite!
+//                    btn.isSelected  = favorite!
                     likeAnimate(view: view, btn: btn)
                     
                 }else{
+                    btn.isSelected  = favorite!
                     NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object:nil)
                 }
                 
@@ -147,10 +148,11 @@ class WOWClickLikeAction {
             let favorite = JSON(result)["favorite"].bool
             
             if favorite == true {
-                btn.isSelected  = favorite!
+//                btn.isSelected  = favorite!
                 likeAnimate(view: view, btn: btn)
                 
             }else{
+                btn.isSelected  = favorite!
                 NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object:nil)
             }
             

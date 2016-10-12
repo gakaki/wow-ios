@@ -9,18 +9,24 @@
 
 import UIKit
 
+protocol orderCarDelegate: class {
+    func toProductDetail(_ productId: Int?)
+}
+
 class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     @IBOutlet weak var goodsImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var perPriceLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
-
+    @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var statusLabel: UILabel!
     
     let identifier = "WOWTypeCollectionCell"
     var typeArr = [String]()
     var model:WOWCarProductModel!
-    
+    weak var delegate: orderCarDelegate?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -55,7 +61,16 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         typeArr = arr
         collectionView.reloadData()
         
+        detailView.addTapGesture {[weak self] (tap) in
+            if let strongSelf = self {
+                if let del = strongSelf.delegate {
+                    del.toProductDetail(model.parentProductId)
+                }
+            }
+            
         }
+    
+    }
     
     
     
@@ -89,7 +104,7 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return typeArr == nil ? 0 : (typeArr.count)
+        return typeArr.isEmpty ? 0 : (typeArr.count)
     }
     
     

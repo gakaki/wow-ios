@@ -62,12 +62,12 @@ class WOWSettingController: WOWBaseTableViewController {
                 navigationController?.pushViewController(vc, animated: true)
             }
             if (indexPath as NSIndexPath).row == 1 {
-//                KingfisherManager.sharedManager.cache.clearDiskCacheWithCompletionHandler({[weak self] in
-//                    if let _ = self{
-//                        WOWHud.showMsg("清除成功")
-////                        strongSelf.cacheLabel.text = "0.0m"
-//                    }
-//                })
+
+                
+                KingfisherManager.shared.cache.clearDiskCache(completion: {
+                    WOWHud.showMsg("清除成功")
+                })
+                KingfisherManager.shared.cache.clearMemoryCache()
                 //清楚yywebimage cache
                 if let c  = YYWebImageManager.shared().cache{
                     // get cache capacity

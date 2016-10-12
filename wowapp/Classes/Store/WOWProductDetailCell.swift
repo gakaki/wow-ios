@@ -12,7 +12,7 @@ class WOWProductDetailCell: UITableViewCell {
     @IBOutlet weak var productImg:UIImageView!
     @IBOutlet weak var imgDescLabel:UILabel!
     @IBOutlet weak var space: NSLayoutConstraint!
-    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
+//    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var aspect: NSLayoutConstraint!
     
     //内容图片的宽高比约束

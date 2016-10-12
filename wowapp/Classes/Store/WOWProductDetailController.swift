@@ -321,7 +321,6 @@ class WOWProductDetailController: WOWBaseViewController {
 
     }
     
-    //用户是否喜欢单品
 //    用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
         WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result) in

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,40 +12,37 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ohb-ya-mQS">
-                    <rect key="frame" x="147" y="80" width="80" height="80"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="6G5-gm-DZi"/>
                         <constraint firstAttribute="height" constant="80" id="gma-Ml-7np"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fv5-qX-1fH">
-                    <rect key="frame" x="166" y="190" width="43" height="21"/>
+                    <frame key="frameInset" minX="166" minY="190" width="43" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="ijt-fQ-2xY"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rt-cJ-Y51">
-                    <rect key="frame" x="15" y="231" width="345" height="75"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thB-Tx-0s4">
-                    <rect key="frame" x="15" y="311" width="345" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="w3o-NG-kyP"/>
                     </constraints>
                     <state key="normal" image="down"/>
                     <state key="selected" image="up"/>
                     <connections>
-                        <action selector="moreButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="qdI-V2-0AR"/>
+                        <action selector="moreButtonClickWithSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="fwT-gx-UB4"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ohb-ya-mQS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="80" id="1kV-qF-9km"/>
                 <constraint firstItem="thB-Tx-0s4" firstAttribute="top" secondItem="1Rt-cJ-Y51" secondAttribute="bottom" constant="5" id="BcA-Rc-vM6"/>
@@ -70,7 +67,12 @@
         </view>
     </objects>
     <resources>
-        <image name="down" width="17" height="10"/>
+        <image name="down" width="7" height="5"/>
         <image name="up" width="17" height="10"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

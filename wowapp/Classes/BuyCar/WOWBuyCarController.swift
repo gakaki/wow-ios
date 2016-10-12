@@ -30,6 +30,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class WOWBuyCarController: WOWBaseViewController {
     let cellNormalID = String(describing: WOWBuyCarNormalCell.self)
+    let cellID = String(describing: WOWOrderCell.self)
 //    private var editingModel    : WOWBuyCarModel?
     fileprivate var totalPrice      : String?
     
@@ -45,6 +46,8 @@ class WOWBuyCarController: WOWBaseViewController {
             }
         }
     }
+    //有效商品的数组
+    var validArr = [WOWCarProductModel]()
 
     //存放选中的数组
     fileprivate var selectedArr = [WOWCarProductModel](){
@@ -61,8 +64,8 @@ class WOWBuyCarController: WOWBaseViewController {
                 totalPrice = result
                 totalPriceLabel.text = result
             
-            //如果选中的数组数量跟购物车内总商品数量相同全选按钮置为选中状态
-            if selectedArr.count == dataArr.count {
+            //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
+            if selectedArr.count == validArr.count {
                 allButton.isSelected = true
             }else{
                 allButton.isSelected = false
@@ -177,10 +180,10 @@ class WOWBuyCarController: WOWBaseViewController {
     @IBAction func allButtonClick(_ sender: UIButton) {
         //判断全选按钮的状态，如果是全部选中的状态，点击按钮取消全部选中，如果未选中状态，点击按钮则要全部选中
         if sender.isSelected {
-            asynCartUnSelect(dataArr)
+            asynCartUnSelect(validArr)
           
         }else{
-            asyncCartSelect(dataArr)
+            asyncCartSelect(validArr)
         }
         
     }
@@ -220,6 +223,10 @@ class WOWBuyCarController: WOWBaseViewController {
                         
                         //判断当前数组有多少默认选中的加入选中的数组
                         for product in strongSelf.dataArr {
+                            
+                            if product.productStatus == 1 {
+                                strongSelf.validArr.append(product)
+                            }
                             if product.isSelected ?? false {
                                 strongSelf.selectedArr.append(product)
                             }
@@ -308,8 +315,8 @@ class WOWBuyCarController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_CartSelect(shoppingCartIds: shoppingCartIdArray), successClosure: {[weak self] (result) in
             if let strongSelf = self {
                
-                for index in 0..<strongSelf.dataArr.count {
-                    let model = strongSelf.dataArr[index]
+                for index in 0..<array.count {
+                    let model = array[index]
                     //判断是全部取消还是逐个取消，如果array.count大于1，则是全部选中，选择状态要都置为true
                     //如果逐个取消，只把选择的那个对象状态置为true
                     if array.count > 1 {
@@ -351,8 +358,8 @@ class WOWBuyCarController: WOWBaseViewController {
                 for carProduct in array {
                     strongSelf.selectedArr.removeObject(carProduct)
                 }
-                for index in 0..<strongSelf.dataArr.count {
-                    let model = strongSelf.dataArr[index]
+                for index in 0..<array.count {
+                    let model = array[index]
                     //判断是全部取消还是逐个取消，如果array.count大于1，则是全部取消，选择状态要都置为false
                     //如果逐个取消，只把选择的那个对象状态置为false
                     if array.count > 1 {
@@ -385,7 +392,8 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = dataArr[(indexPath as NSIndexPath).section]
-        
+        //productStatus = 1 已上架，productStatus = 2 已下架
+        if model.productStatus == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellNormalID, for: indexPath) as! WOWBuyCarNormalCell
             cell.showData(model)
             cell.selectButton.tag = (indexPath as NSIndexPath).section
@@ -396,12 +404,25 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
             cell.addCountButton.addTarget(self, action: #selector(addCountClick(_:)), for: .touchUpInside)
             cell.delegate = self
             return cell
+
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWOrderCell
+            cell.showData(model)
+            cell.delegate = self
+            return cell
+
+        }
         
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return  160
+        let model = dataArr[(indexPath as NSIndexPath).section]
+        if model.productStatus == 1 {
+            return 160
+        }else {
+            return  111
+        }
     }
 
     
@@ -511,6 +532,17 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 
 extension WOWBuyCarController: buyCarDelegate {
     func goProductDetail(_ productId: Int?) {
+        if let productId = productId {
+            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
+            vc.hideNavigationBar = true
+            vc.productId = productId
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
+extension WOWBuyCarController: orderCarDelegate {
+    func toProductDetail(_ productId: Int?) {
         if let productId = productId {
             let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
             vc.hideNavigationBar = true

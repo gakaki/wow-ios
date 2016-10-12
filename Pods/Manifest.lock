@@ -90,7 +90,6 @@ PODS:
     - SwiftyJSON (~> 3.0.0)
     - SwiftyUserDefaults (~> 3.0.0)
   - wow-talkingData (0.1.0)
-  - wow-util (0.1.0)
   - WowBase (0.1.0)
   - XZMRefresh (1.1.3)
   - YYCache (1.0.3)
@@ -143,7 +142,6 @@ DEPENDENCIES:
   - VTMagic
   - wow-model-network (from `wow-model-network/wow-model-network.podspec`)
   - wow-talkingData (from `wow-talkingData/wow-talkingData.podspec`)
-  - wow-util (from `wow-util/wow-util.podspec`)
   - WowBase (from `WowBase/WowBase.podspec`)
   - XZMRefresh
   - YYImage
@@ -178,8 +176,6 @@ EXTERNAL SOURCES:
     :path: wow-model-network/wow-model-network.podspec
   wow-talkingData:
     :path: wow-talkingData/wow-talkingData.podspec
-  wow-util:
-    :path: wow-util/wow-util.podspec
   WowBase:
     :path: WowBase/WowBase.podspec
 
@@ -239,13 +235,12 @@ SPEC CHECKSUMS:
   VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
   wow-model-network: f60ea26fc0f28318702cbf896c95163b79baf192
   wow-talkingData: 87b4d0b661fb7f7fdaba340a284629fcbe6f00e2
-  wow-util: 5d88cd2088678896c6704a070cb66ed5979bc985
   WowBase: 523ccd9bffdfca85097853e3b73902fb4368b24c
   XZMRefresh: 2c0f1b70d9fe97a1d0286373e29986d44f0a7b1a
   YYCache: 282f35b5b0990833d0b7a06d864a87141a021da2
   YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
   YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
-PODFILE CHECKSUM: f1cbcd591ffc60ad152cf8e59fd11521fcff9564
+PODFILE CHECKSUM: 7dfa6a8a8a22165f6e53c548e874f8d650568743
 
 COCOAPODS: 1.1.0.rc.2

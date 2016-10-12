@@ -14,6 +14,7 @@ import YYWebImage
 import JSPatch
 import SwiftyUserDefaults
 //import JSPatchHelper
+import wow_talkingData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initialAppearance()     //初始化外观
         registAppKey(launchOptions) //注册第三方
        
+        
 //       ADLaunchView()
         return true
     }
@@ -249,7 +251,8 @@ extension AppDelegate{
         //Talking Data
         TalkingData.sessionStarted("88C9035CD51E8009BE4441263D83003A", withChannelId: "app store")
         
-        
+        //Talking Data ADTracking
+//        Talk
         
 //        //MonkeyKing
 //        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))

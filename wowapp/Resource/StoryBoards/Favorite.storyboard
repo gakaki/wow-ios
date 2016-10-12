@@ -107,8 +107,7 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>
-                                    <outlet property="dataSource" destination="xuv-6Z-SnT" id="pGs-81-nbG"/>
-                                    <outlet property="prefetchDataSource" destination="xuv-6Z-SnT" id="Unc-xH-GNl"/>
+                                    <outlet property="prefetchDataSource" destination="xuv-6Z-SnT" id="4A8-Sw-CEN"/>
                                 </connections>
                             </collectionView>
                         </subviews>

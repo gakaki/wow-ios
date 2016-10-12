@@ -61,14 +61,17 @@ class WOWFavBrand: WOWBaseViewController {
     fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
+        collectionView.delegate = self
+        collectionView.dataSource = self 
         collectionView.register(UINib.nibName(String(describing: WOWFavoriteBrandCell.self)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
-   
+        collectionView.emptyDataSetDelegate = self
+        collectionView.emptyDataSetSource = self
         
     }
     
     //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource   
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
-        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty()), owner: self, options: nil)?.last as! FavoriteEmpty
+        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty.self), owner: self, options: nil)?.last as! FavoriteEmpty
         
 //        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
         

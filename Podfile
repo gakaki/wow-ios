@@ -90,6 +90,7 @@ target :wowapp do
     pod 'wow-model-network',	 :path => "wow-model-network/wow-model-network.podspec"
     pod 'wow-util',						 :path => "wow-util/wow-util.podspec"
 #    pod 'wow-ui',							 :path => "wow-ui/wow-ui.podspec"
+    pod 'wow-talkingData',		:path => "wow-talkingData/wow-talkingData.podspec"
 
 #waitting For use
 #列表空的占位图 TBEmptyDataSet

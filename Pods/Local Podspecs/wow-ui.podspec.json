@@ -1,9 +1,9 @@
 {
-  "name": "wow-ui",
+  "name": "wow-talkingData",
   "version": "0.1.0",
-  "summary": "A short description of wow-ui.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/wow-ui",
+  "summary": "talkingdata",
+  "description": "talking datga",
+  "homepage": "https://github.com/gakaki/wow-talkingData",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,11 +12,26 @@
     "gakaki": "gakaki@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/wow-ui.git",
+    "git": "https://github.com/gakaki/wow-talkingData.git",
     "tag": "0.1.0"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "wow-ui/Classes/**/*"
+  "source_files": [
+    "wow-talkingData/Classes/**/*",
+    "libs/*.h"
+  ],
+  "frameworks": [
+    "UIKit",
+    "Security",
+    "CoreTelephony",
+    "AdSupport",
+    "SystemConfiguration"
+  ],
+  "libraries": "z",
+  "ios": {
+    "vendored_libraries": "libs/libTalkingDataAppCpa.a"
+  },
+  "requires_arc": true
 }

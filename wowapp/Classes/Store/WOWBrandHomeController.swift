@@ -144,12 +144,21 @@ class WOWBrandHomeController: WOWBaseViewController {
         }
         switch entrance {
         case .brandEntrance:
-          
-            requestFavoriteBrand()
+          WOWClickLikeAction.requestFavoriteBrand(brandId:brandID ?? 0 , view: self.view, btn: sender, isFavorite: { (isFavorite) in
+    
+                sender.isSelected = isFavorite ?? false
+
+          })
+//            requestFavoriteBrand()
             
         case .designerEntrance:
-            
-            requestFavoriteDesigner()
+            WOWClickLikeAction.requestFavoriteDesigner(designerId:designerId ?? 0 , view: self.view, btn: sender, isFavorite: { (isFavorite) in
+                
+                sender.isSelected = isFavorite ?? false
+                
+            })
+           
+//            requestFavoriteDesigner()
             
         }
 

@@ -98,5 +98,68 @@ class WOWClickLikeAction {
         }
     }
     
-    
+    /**
+     用户喜欢某个品牌
+     
+     - parameter productId:  品牌ID
+     - parameter isFavorite: 请求结果，是否喜欢
+     */
+    static func requestFavoriteBrand(brandId: Int,view: UIView, btn: UIButton,isFavorite: @escaping LikeAction){
+        guard WOWUserManager.loginStatus == true else{
+            WOWHud.dismiss()
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandId), successClosure: { (result) in
+                let favorite = JSON(result)["favorite"].bool
+                
+                if favorite == true {
+                    btn.isSelected  = favorite!
+                    likeAnimate(view: view, btn: btn)
+                    
+                }else{
+                    NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object:nil)
+                }
+                
+                isFavorite(favorite)
+
+        }) { (errorMsg) in
+            
+             WOWHud.showMsg("网络错误")
+        }
+        
+    }
+    /**
+     用户喜欢某个设计师
+     
+     - parameter productId:  设计师ID
+     - parameter isFavorite: 请求结果，是否喜欢
+     */
+    static func requestFavoriteDesigner(designerId: Int,view: UIView, btn: UIButton,isFavorite: @escaping LikeAction){
+        guard WOWUserManager.loginStatus == true else{
+            WOWHud.dismiss()
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId), successClosure: {(result) in
+            let favorite = JSON(result)["favorite"].bool
+            
+            if favorite == true {
+                btn.isSelected  = favorite!
+                likeAnimate(view: view, btn: btn)
+                
+            }else{
+                NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object:nil)
+            }
+            
+            isFavorite(favorite)
+            
+        }) { (errorMsg) in
+            
+            WOWHud.showMsg("网络错误")
+        }
+    }
+
 }

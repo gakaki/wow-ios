@@ -68,7 +68,7 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     
     //MARK: - TagCellLayout Delegate Methods
     func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
-        return CGFloat(28.0)
+        return CGFloat(25.0)
     }
     
     func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {

@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registAppKey(launchOptions) //注册第三方
        
         
-//       ADLaunchView()
+       ADLaunchView()
         return true
     }
  

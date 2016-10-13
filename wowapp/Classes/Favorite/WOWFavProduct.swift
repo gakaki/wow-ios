@@ -103,6 +103,35 @@ class WOWFavProduct: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProduct, successClosure: { [weak self](result) in
             if let strongSelf = self{
+//                strongSelf.endRefresh()
+//                WOWHud.dismiss()
+//                let productList = Mapper<WOWFavoriteProductModel>().mapArray(JSONObject:JSON(result)["favoriteProductVoList"].arrayObject)
+//                
+//                if let productList = productList{
+//                    if strongSelf.pageIndex == 1{
+//                        strongSelf.dataArr = []
+//                    }
+//                    strongSelf.dataArr.append(contentsOf: productList)
+//                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+//                    if productList.count < 10 {
+//                        strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+//                        
+//                    }else {
+//                        strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+//                    }
+//                    
+//                }else {
+//                    if strongSelf.pageIndex == 1{
+//                        strongSelf.dataArr = []
+//                    }
+//                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+//                }
+//                
+//                //                    strongSelf.dataArr = productList
+//                
+//                //                strongSelf.isRefresh = true
+//                strongSelf.collectionView.reloadData()
+
                 WOWHud.dismiss()
                 let productList = Mapper<WOWFavoriteProductModel>().mapArray(JSONObject:JSON(result)["favoriteProductVoList"].arrayObject)
                 if let productList = productList{

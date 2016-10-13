@@ -59,11 +59,11 @@ class IPManager {
                 let dict: [String : String] = (try JSONSerialization.jsonObject(with: data, options:[])) as! [String : String]
                 
                 ip_final = dict["cip"]!
-//                print(dict,ip_final)
+                print(dict,ip_final)
             }
 
         }
-        catch let error {
+        catch _ {
 //            print(error)
             //若得不到外网ip地址 只能使用 本地ip地址
             if let tmp = self.getIPAddress()?[0]{

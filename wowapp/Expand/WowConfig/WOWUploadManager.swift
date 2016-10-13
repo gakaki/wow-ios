@@ -11,17 +11,15 @@ import Qiniu
 import Alamofire
 import Hashids_Swift
 import FCUUID
-
 class WOWUploadManager {
     
     static let sharedManager = WOWUploadManager()
     init(){}
     // 上传头像
     static  func upload(_ image:UIImage,successClosure:@escaping SuccessClosure,failClosure:@escaping FailClosure){
-
+        
         let image = image.fixOrientation()
         let data = UIImageJPEGRepresentation(image,0.5)
-        WOWHud.showLoading()
 
         let uploadOption            = QNUploadOption.init(
             mime: nil,
@@ -32,6 +30,7 @@ class WOWUploadManager {
             checkCrc: false,
             cancellationSignal: nil
         )
+
          //          拼接唯一字符串
         let onlyStr = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
         let hashids                 = Hashids(salt:onlyStr)
@@ -42,15 +41,14 @@ class WOWUploadManager {
         
 //        let json_str                = json_serialize( ["key": qiniu_key as AnyObject,"bucket": "wowdsgn" as AnyObject] )
 //        let params_qiniu            = ["paramJson": json_str ]
-        
         WOWNetManager.sharedManager.requestWithTarget(.api_qiniu_token(qiniuKey: qiniu_key, bucket: "wowdsgn"), successClosure: { (result) in
             
                 let token       = JSON(result)["token"].string
+                WOWHud.showLoadingSV()
+
                 if let qm          = QNUploadManager(){
                    
                     qm.put(data, key: qiniu_key, token: token, complete: { (info, key, resp) in
-                        WOWHud.dismiss()
-                        
                         
                         if (info?.error != nil) {
                             DLog(info?.error)
@@ -65,7 +63,6 @@ class WOWUploadManager {
                             let key = resp?["key"]
                             let headImageUrl = "http://img.wowdsgn.com/\(key!)"
                             
-                            
                             // 保存用户URL
                             WOWUserManager.userHeadImageUrl = headImageUrl
                             
@@ -73,20 +70,15 @@ class WOWUploadManager {
                             let imageData:NSData = NSKeyedArchiver.archivedData(withRootObject: image) as NSData
                             
                             WOWUserManager.userPhotoData = imageData as Data
-                            
                             successClosure(headImageUrl as AnyObject)
                             
                         }
 
                     }, option: uploadOption)
             }
-            
-            
 
             
         }) {(errorMsg) in
-
-     
         
         }
         //TODO

@@ -254,6 +254,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
+                WOWHud.dismiss()
 //                let model = Mapper<WOWUserModel>().map(result["user"])
 //                WOWUserManager.saveUserInfo(model)
                 //保存一些用户信息
@@ -433,10 +434,10 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
 
         WOWUploadManager.upload(image, successClosure: { [weak self](result) in
             
-            NotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
-                self!.headImageUrl = result as! String
-                self!.request()
             
+                self!.headImageUrl = (result as? String) ?? ""
+                self!.request()
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                 print(result)
             
             }) { (errorMsg) in

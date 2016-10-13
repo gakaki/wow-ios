@@ -1,0 +1,6 @@
+framework module wow_talkingData {
+  umbrella header "wow-talkingData-umbrella.h"
+
+  export *
+  module * { export * }
+}

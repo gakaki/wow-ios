@@ -1,0 +1,16 @@
+PODS:
+  - wow-talkingData (0.1.0)
+
+DEPENDENCIES:
+  - wow-talkingData (from `../`)
+
+EXTERNAL SOURCES:
+  wow-talkingData:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  wow-talkingData: 87b4d0b661fb7f7fdaba340a284629fcbe6f00e2
+
+PODFILE CHECKSUM: 0b55ba7e140888b1edd59752cd3ac37684306332
+
+COCOAPODS: 1.1.0.rc.2

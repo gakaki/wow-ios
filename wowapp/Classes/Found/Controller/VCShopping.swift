@@ -38,8 +38,8 @@ class VCShopping: WowBaseVCCartSearch {
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
         
-        v.magicView.snp.makeConstraints { (make) -> Void in
-            make.size.equalTo(self.view)
+        v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
+            make.size.equalTo(self!.view)
         }
 
         

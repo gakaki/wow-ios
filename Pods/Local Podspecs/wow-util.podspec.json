@@ -15,8 +15,11 @@
     "git": "https://github.com/gakaki/wow-util.git",
     "tag": "0.1.0"
   },
+  "source_files": "wow-util/Classes/**/*",
   "platforms": {
-    "ios": "8.0"
-  },
-  "source_files": "wow-util/Classes/**/*"
+    "osx": null,
+    "ios": null,
+    "tvos": null,
+    "watchos": null
+  }
 }

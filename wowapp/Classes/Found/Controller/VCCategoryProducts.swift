@@ -114,6 +114,9 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     func scrollViewDidScroll( _ scrollView: UIScrollView){
         ob_content_offset.value = scrollView.contentOffset.y
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
+    }
     fileprivate func addObserver(){
         /**
          添加通知

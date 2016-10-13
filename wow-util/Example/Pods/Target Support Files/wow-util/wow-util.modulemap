@@ -1,6 +1,0 @@
-framework module wow_util {
-  umbrella header "wow-util-umbrella.h"
-
-  export *
-  module * { export * }
-}

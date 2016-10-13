@@ -1109,7 +1109,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## wow-util
+## wow-talkingData
 
 Copyright (c) 2016 gakaki <gakaki@gmail.com>
 

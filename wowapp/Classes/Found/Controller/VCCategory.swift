@@ -83,9 +83,9 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             ($0,$1)
         }
             .throttle(0.1, scheduler: MainScheduler.instance)
-        .subscribe(onNext: { cid,tab_index in
+        .subscribe(onNext: {[weak self]cid,tab_index in
             
-            self.refreshSubView(tab_index)
+            self!.refreshSubView(tab_index)
         })
         
 
@@ -142,10 +142,10 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         self.addChildViewController(v_bottom)
         self.view.addSubview(v_bottom.magicView)
         
-        v_bottom.magicView.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(self.view)
-            make.top.equalTo(self.cv.snp.bottom)
-            make.bottom.equalTo(self.view.snp.bottomMargin)
+        v_bottom.magicView.snp.makeConstraints { [weak self](make) -> Void in
+            make.width.equalTo(self!.view)
+            make.top.equalTo(self!.cv.snp.bottom)
+            make.bottom.equalTo(self!.view.snp.bottomMargin)
         }
         
         v_bottom.magicView.reloadData()

@@ -118,11 +118,11 @@
                 <constraints>
                     <constraint firstItem="qgX-zd-Hl4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="369-71-Svm"/>
                     <constraint firstAttribute="trailing" secondItem="eTf-lT-f2D" secondAttribute="trailing" constant="15" id="8lg-Eb-v68"/>
-                    <constraint firstAttribute="trailing" secondItem="u5r-HJ-88T" secondAttribute="trailing" constant="15" id="9Cd-Ne-OcS"/>
+                    <constraint firstAttribute="trailing" secondItem="u5r-HJ-88T" secondAttribute="trailing" constant="10" id="9Cd-Ne-OcS"/>
                     <constraint firstItem="fXp-Sn-M48" firstAttribute="bottom" secondItem="qgX-zd-Hl4" secondAttribute="bottom" id="A3D-er-wz6"/>
                     <constraint firstAttribute="bottomMargin" secondItem="qgX-zd-Hl4" secondAttribute="bottom" constant="5" id="C2Y-CU-Tmz"/>
                     <constraint firstAttribute="trailing" secondItem="fXp-Sn-M48" secondAttribute="trailing" constant="15" id="C82-XB-zcy"/>
-                    <constraint firstItem="fXp-Sn-M48" firstAttribute="top" secondItem="u5r-HJ-88T" secondAttribute="bottom" constant="8" id="F3c-bx-Yxx"/>
+                    <constraint firstItem="fXp-Sn-M48" firstAttribute="top" secondItem="u5r-HJ-88T" secondAttribute="bottom" constant="4" id="F3c-bx-Yxx"/>
                     <constraint firstAttribute="bottom" secondItem="bXg-C3-HFX" secondAttribute="bottom" constant="13.5" id="HUj-8E-RR2"/>
                     <constraint firstItem="7gH-zu-kOK" firstAttribute="leading" secondItem="nRw-uF-qyi" secondAttribute="trailing" id="IHm-Mc-JST"/>
                     <constraint firstItem="dyR-ah-l3S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="JqD-dX-KHi"/>

@@ -51,15 +51,24 @@ class WOWProductDetailDescCell: UITableViewCell {
     func showData(_ model:WOWProductModel?){
         productModel = model
         brandNameLabel.text = model?.brandCname
-  
-        brandButton.kf.setBackgroundImage(with: URL(string: model?.brandLogoImg ?? "")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
-
+        if let url = URL(string: model?.brandLogoImg ?? ""){
+            brandButton.kf.setBackgroundImage(with: url, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
+        }else {
+            brandButton.setImage(UIImage(named: "placeholder_product"), for: .normal)
+        }
+        
         guard let designerName = model?.designerName , !designerName.isEmpty else{
             designerContainerView.isHidden = true
             brandContainerRightConstraint.priority = 250;
             return
         }
         designerNameLabel.text = designerName
-        designerButton.kf.setBackgroundImage(with: URL(string: model?.designerPhoto ?? "")!, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
+        if let url = URL(string: model?.designerPhoto ?? "") {
+             designerButton.kf.setBackgroundImage(with: url, for: .normal, placeholder: UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: nil)
+        }else {
+            designerButton.setImage(UIImage(named: "placeholder_product"), for: .normal)
+
+        }
+       
     }
 }

@@ -322,11 +322,18 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         return 0.1
     }
     
-    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "暂无订单哦"
-        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
-        return attri
+    func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWOrderEmptyView.self), owner: self, options: nil)?.last as! WOWOrderEmptyView
+//        view.center = self.view.center
+        view.backgroundColor = DefaultBackColor
+        return view
     }
+
+//    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
+//        let text = "暂无订单哦"
+//        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+//        return attri
+//    }
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }

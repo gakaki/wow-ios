@@ -29,6 +29,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var view_rightline: UIView!
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var bottomLine: UIView!
+    @IBOutlet weak var topView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,6 +52,11 @@ class WOWGoodsSmallCell: UICollectionViewCell {
             view_rightline.isHidden = true
         }else{
             view_rightline.isHidden = false
+        }
+        if i > 1 {
+            topView.isHidden = true
+        }else {
+            topView.isHidden = false
         }
         productId = model.productId
         

@@ -226,10 +226,11 @@ class WOWBuyCarController: WOWBaseViewController {
                             
                             if product.productStatus == 1 {
                                 strongSelf.validArr.append(product)
+                                if product.isSelected ?? false {
+                                    strongSelf.selectedArr.append(product)
+                                }
                             }
-                            if product.isSelected ?? false {
-                                strongSelf.selectedArr.append(product)
-                            }
+                            
                         }
                     }else {
                         strongSelf.bottomView.isHidden = true

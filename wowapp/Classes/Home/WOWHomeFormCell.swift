@@ -141,6 +141,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
         let model = dataArr?[(indexPath as NSIndexPath).item]
         if let m = model{
             cell.showData(m, indexPath: indexPath)
+            cell.topView.isHidden = true
             cell.view_rightline.isHidden = true
             cell.bottomLine.isHidden = true
         }

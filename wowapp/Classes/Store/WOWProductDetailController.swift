@@ -108,7 +108,7 @@ class WOWProductDetailController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configTable()
-        buyCarCount()
+//        buyCarCount()
     }
 
     fileprivate func addObservers(){
@@ -203,7 +203,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //MARK:更新角标
     func updateCarBadge(_ carCount: Int){
         WOWUserManager.userCarCount += carCount
-        buyCarCount()
+//        buyCarCount()
         NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
 
     }
@@ -291,7 +291,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 strongSelf.productModel?.productId = strongSelf.productId
                 
                 strongSelf.requestAboutProduct()
-                
+                strongSelf.buyCarCount()
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{

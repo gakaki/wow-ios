@@ -59,7 +59,7 @@ class WOWNetManager {
         failClosure:@escaping FailClosure
     ){
        
-//        DLog("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
+        print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
        _ =  requestProvider.request(target) { (result) in
         

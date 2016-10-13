@@ -33,7 +33,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         l.textAlignment = .left
         l.lineBreakMode = .byWordWrapping
         l.numberOfLines = 0
-        l.textAlignment = .center
+//        l.textAlignment = .center
         l.setLineHeightAndLineBreak(1.25)
         l.textColor     = UIColor.gray
         l.font          = UIFont.systemScaleFontSize(14)
@@ -58,7 +58,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         
         self.addSubview(label_name)
         self.addSubview(label_desc)
-        self.addSubview(view_line)
+//        self.addSubview(view_line)
 
         
         imageView.snp.makeConstraints { (make) -> Void in
@@ -75,18 +75,18 @@ class VCTopicHeaderView:UICollectionReusableView{
             make.top.equalTo(imageView.snp.bottom).offset(10)
         }
         label_desc.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo( self.frame.width * 0.7 )
+            make.width.equalTo( self.frame.width * 0.9 )
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(label_name.snp.bottom).offset(5)
         }
         
-        view_line.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo( self.frame.width * 0.35 )
-            make.height.equalTo(1)
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(label_desc.snp.bottom).offset(15)
-        }
-//        
+//        view_line.snp.makeConstraints { (make) -> Void in
+//            make.width.equalTo( self.frame.width * 0.35 )
+//            make.height.equalTo(1)
+//            make.centerX.equalTo(self.snp.centerX)
+//            make.top.equalTo(label_desc.snp.bottom).offset(15)
+//        }
+//
 //                self.bringSubviewToFront(imageView)
 
     } 
@@ -101,7 +101,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     var vo_products             = [WOWProductModel]()
     let cell_reuse              = "cell_reuse"
     let cell_header_reuse       = "cell_header_reuse"
-    let header_height           = Float(500)
+    let header_height           = Float(440)
 
     var topic_id                = 4
     var vo_topic:WOWModelVoTopic?

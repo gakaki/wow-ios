@@ -67,7 +67,7 @@ class IPManager {
 //            print(error)
             //若得不到外网ip地址 只能使用 本地ip地址
             if let tmp = self.getIPAddress()?[0]{
-                ip_final = tmp
+                ip_final = "192.168.1.1"
             }
         }
 

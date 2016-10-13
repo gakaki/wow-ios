@@ -151,7 +151,7 @@ public enum RequestApi{
     
     case api_OrderBuyNow(productId: Int, productQty: Int)
     
-    case api_OrderCreate(params: [String: AnyObject]?)
+    case api_OrderCreate(params: [String: AnyObject])
     
     case api_OrderCharge(orderNo: String, channel: String, clientIp: String)
     
@@ -542,7 +542,7 @@ extension RequestApi:TargetType{
             case let .api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]
             case let .api_OrderCreate(param):
-                params = param!
+                params = param
             case let .api_OrderCharge(orderNo, channel, alientIp):
                 params = ["orderNo": orderNo, "channel": channel, "clientIp": alientIp]
             case let .api_OrderBuyNow(productId, productQty):

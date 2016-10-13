@@ -34,7 +34,7 @@ class VCBaseNavCart:WOWBaseViewController{
     }
 
     let offset_icon = {
-      return UIApplication.shared.statusBarFrame.height
+      return UIApplication.shared.statusBarFrame.height + 10
     }
     let offset_width = CGFloat(10)
 

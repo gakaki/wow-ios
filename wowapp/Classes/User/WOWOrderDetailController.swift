@@ -408,21 +408,21 @@ extension WOWOrderDetailController{
     //去支付
     fileprivate func goPay(_ charge:AnyObject){
         DispatchQueue.main.async {
-//            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
-//                if let strongSelf = self  , let ret_str = ret as? String {
-//                    switch ret_str{
-//                    case "success":
-//                        strongSelf.requestPayResult()
-//                    case "cancel":
-//                        WOWHud.showMsg("支付取消")
-//                        
-//                        break
-//                    default:
-//                        WOWHud.showMsg("支付失败")
-//                        break
-//                    }
-//                }
-//            }
+            Pingpp.createPayment(charge as! NSObject, appURLScheme:WOWDSGNSCHEME) {[weak self] (ret, error) in
+                if let strongSelf = self  , let ret_str = ret as String! {
+                    switch ret_str{
+                    case "success":
+                        strongSelf.requestPayResult()
+                    case "cancel":
+                        WOWHud.showMsg("支付取消")
+                        
+                        break
+                    default:
+                        WOWHud.showMsg("支付失败")
+                        break
+                    }
+                }
+            }
         }
     }
     

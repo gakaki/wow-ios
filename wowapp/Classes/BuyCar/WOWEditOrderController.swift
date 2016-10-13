@@ -172,11 +172,11 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求创建订单
     func requestOrderCreat() -> Void {
-        var params = [String: AnyObject?]()
+        var params = [String: AnyObject]()
         // 截取两位小数点，确保金额正确
         
-        let totalAmoutStr   = String(format: "%.2f",orderSettle?.totalAmount ?? 0)
-        let shippingInfoId  = addressInfo?.id!
+        let totalAmoutStr   = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
+        let shippingInfoId  = (addressInfo?.id) ?? 0
         let orderSource     = 2
         let totalAmout      = totalAmoutStr 
         let remark          = tipsTextField.text ?? ""
@@ -184,24 +184,24 @@ class WOWEditOrderController: WOWBaseViewController {
         if let endUserCouponId = couponModel?.id {
             
             params = [
-                "shippingInfoId": shippingInfoId as Optional<AnyObject>,
-                "orderSource": orderSource as Optional<AnyObject>,
-                "orderAmount": totalAmout as Optional<AnyObject>,
-                "remark": remark as Optional<AnyObject>,
-                "endUserCouponId": endUserCouponId as Optional<AnyObject>
+                "shippingInfoId": shippingInfoId as AnyObject,
+                "orderSource": orderSource as AnyObject,
+                "orderAmount": totalAmout as AnyObject,
+                "remark": remark as AnyObject,
+                "endUserCouponId": endUserCouponId  as AnyObject
             ]
             
         }else {
             params = [
-                "shippingInfoId": shippingInfoId as Optional<AnyObject>,
-                "orderSource": orderSource as Optional<AnyObject>,
-                "orderAmount": totalAmout as Optional<AnyObject>,
-                "remark": remark as Optional<AnyObject>
+                "shippingInfoId": shippingInfoId as AnyObject ,
+                "orderSource": orderSource  as AnyObject,
+                "orderAmount": totalAmout  as AnyObject,
+                "remark": remark  as AnyObject
             ]
 
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params as [String : AnyObject]?), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result) in
             if let strongSelf = self {
                 
                 //重新计算购物车数量
@@ -217,6 +217,8 @@ class WOWEditOrderController: WOWBaseViewController {
             }) { (errorMsg) in
                 
         }
+        
+      
     }
     
     //立即支付创建订单

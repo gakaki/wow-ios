@@ -17,14 +17,14 @@ struct WOWShareManager {
 
     static func share(_ title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
         shareBackView.show()
-
+        let shareNewText = "尖叫设计，生活即风格－4600元新人礼包等你来拿！"
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             switch shareType {
             case .friends:
                 UMSocialData.default().extConfig.wechatTimelineData.title = title
                 UMSocialData.default().extConfig.wechatTimelineData.url = url
 
-                UMSocialDataService.default().postSNS(withTypes: [UMShareToWechatTimeline], content: shareText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
+                UMSocialDataService.default().postSNS(withTypes: [UMShareToWechatTimeline], content: shareNewText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
                     if response?.responseCode == UMSResponseCodeSuccess {
                         
                     }
@@ -35,7 +35,7 @@ struct WOWShareManager {
                 UMSocialData.default().extConfig.wechatSessionData.title = title
                 UMSocialData.default().extConfig.wechatSessionData.url = url
 
-                UMSocialDataService.default().postSNS(withTypes: [UMShareToWechatSession], content: shareText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
+                UMSocialDataService.default().postSNS(withTypes: [UMShareToWechatSession], content: shareNewText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
                     if response?.responseCode == UMSResponseCodeSuccess {
                         
                     }

@@ -70,12 +70,14 @@ extension WOWProductDetailAboutCell:UICollectionViewDelegate,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWGoodsSmallCell", for: indexPath) as! WOWGoodsSmallCell
         //FIX 测试数据
-        cell.pictureImageView.image = UIImage(named: "4")
+//        cell.pictureImageView.image = UIImage(named: "4")
         let model = dataArr?[(indexPath as NSIndexPath).item]
         if let m = model {
             cell.showData(m, indexPath: indexPath)
             cell.view_rightline.isHidden = true
-            cell.bottomLine.isHidden = true
+            cell.topView.isHidden = true
+            cell.bottomLine.backgroundColor = UIColor.white
+//            cell.bottomLine.isHidden = true
 //            let url             = m.productImg ?? ""
 ////            cell.pictureImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
 //            cell.pictureImageView.set_webimage_url(url)

@@ -45,7 +45,7 @@ class WOWUploadManager {
         
         WOWNetManager.sharedManager.requestWithTarget(.api_qiniu_token(qiniuKey: qiniu_key, bucket: "wowdsgn"), successClosure: { (result) in
             
-                let token       = JSON(result)["data"]["token"].string
+                let token       = JSON(result)["token"].string
                 if let qm          = QNUploadManager(){
                    
                     qm.put(data, key: qiniu_key, token: token, complete: { (info, key, resp) in

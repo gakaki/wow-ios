@@ -60,7 +60,7 @@ class WOWHotStyleCell: UITableViewCell {
         if let brandModel = model.moduleContentList?.brand {
             lbLogoName.text = brandModel.brandEname
             imgLogo.set_webimage_url_base(brandModel.brandLogoImg, place_holder_name: product)
-            
+            imgLogo.borderRadius(20)
         }else{
             lbLogoName.text = " "
             imgLogo.image = nil

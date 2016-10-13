@@ -156,13 +156,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
 //        self.headImageView.image = nil
 //        self.headImageView.setNeedsDisplay()
-
-        if   WOWUserManager.userPhotoData.count == 0 {
+        
+        if   WOWUserManager.userPhotoData.isEmpty {
                     if ( self.image != nil ){
                         self.headImageView.image = self.image
                     }else{
 
-                        print(WOWUserManager.userHeadImageUrl)
+                       print(WOWUserManager.userHeadImageUrl)
                        self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_product")
 //                        self.headImageView.kf_setImageWithURL(NSURL(string: WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
                     }

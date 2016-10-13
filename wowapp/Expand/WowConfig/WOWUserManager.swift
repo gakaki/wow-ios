@@ -108,9 +108,9 @@ struct WOWUserManager {
         get{
             
             if  let aaa = MGDefault.object(forKey: WOWUserPhotoData)  {
-                 return (aaa as! NSData) as Data
+                 return (aaa as? Data) ?? Data()
             }else{
-                return Data()
+                return  Data()
             }
             
 //            return (MGDefault.objectForKey(WOWUserPhotoData) as? NSData)!
@@ -215,7 +215,7 @@ struct WOWUserManager {
         MGDefault.set(nil, forKey:WOWUserAgeRange)
         MGDefault.set(nil, forKey:WOWUserCarCount)
         MGDefault.set(nil, forKey:WOWUserIndustry)
-        MGDefault.set(nil, forKey:WOWUserPhotoData)
+        MGDefault.set("", forKey:WOWUserPhotoData)
         MGDefault.set(nil, forKey: WOWSessionToken)
         MGDefault.synchronize()
     }

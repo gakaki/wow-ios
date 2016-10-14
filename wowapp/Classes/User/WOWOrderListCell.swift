@@ -18,6 +18,8 @@ enum OrderCellAction {
 
 protocol OrderCellDelegate:class{
     func  OrderCellClick(_ type:OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell)
+    
+    func clickGoToDetail(orderCoder: String)
 }
 
 class WOWOrderListCell: UITableViewCell {
@@ -48,6 +50,14 @@ class WOWOrderListCell: UITableViewCell {
         super.awakeFromNib()
         self.resetSeparators()
         collectionView.register(WOWImageCell.self, forCellWithReuseIdentifier:"WOWImageCell")
+        collectionView.addTapGesture (action: {[weak self] (tap) in
+            
+            if let strongSelf = self {
+               print("你点击了")
+                strongSelf.delegate?.clickGoToDetail(orderCoder: strongSelf.orderIdLabel.text ?? "")
+            }
+            
+        })
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -184,5 +194,9 @@ extension WOWOrderListCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(10, 15, 10, 15)
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        delegate?.clickGoToDetail(orderCoder: orderIdLabel.text ?? "")
+        
+    }
 }

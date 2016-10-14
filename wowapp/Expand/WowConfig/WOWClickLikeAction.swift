@@ -20,7 +20,7 @@ class WOWClickLikeAction {
         imgView.contentMode = .scaleAspectFit
         imgView.image = btn.image(for: .selected)
         view.addSubview(imgView)
-        UIView.animate(withDuration: 0.6, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             imgView.transform = CGAffineTransform(scaleX: 2, y: 2)
             imgView.alpha = 0
         }) { (finished) in

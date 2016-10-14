@@ -158,6 +158,11 @@ extension WOWOrderController:TopMenuProtocol{
 }
 
 extension WOWOrderController:OrderCellDelegate{
+    func clickGoToDetail(orderCoder: String) {
+        
+        gotoOrderDatailVC(orderCode: orderCoder)
+        
+    }
     func OrderCellClick(_ type: OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell) {
         switch type {
         case .comment:
@@ -307,11 +312,16 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         parentNavigationController!.pushViewController(vc, animated: true)
 
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func gotoOrderDatailVC(orderCode:String) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
-                vc.orderCode = dataArr[(indexPath as NSIndexPath).section].orderCode
-                vc.delegate = self
+        vc.orderCode = orderCode
+        vc.delegate = self
         parentNavigationController!.pushViewController(vc, animated: true)
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+
+        gotoOrderDatailVC(orderCode: dataArr[(indexPath as NSIndexPath).section].orderCode ?? "")
     }
     
     
@@ -329,11 +339,6 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         return view
     }
 
-//    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
-//        let text = "暂无订单哦"
-//        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
-//        return attri
-//    }
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }

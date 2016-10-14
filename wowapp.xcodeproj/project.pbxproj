@@ -355,6 +355,12 @@
 		2DB923D21D703A59001EA570 /* WOWUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB923D11D703A59001EA570 /* WOWUploadManager.swift */; };
 		2DCE14EE1DACCCE00052A0C0 /* WOWNoNetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE14ED1DACCCE00052A0C0 /* WOWNoNetView.swift */; };
 		2DCE14F01DACD04A0052A0C0 /* WOWNetWorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE14EF1DACD04A0052A0C0 /* WOWNetWorkType.swift */; };
+		2DD4203C1DB0B9AF00A8E838 /* Cell_103_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD4203A1DB0B9AF00A8E838 /* Cell_103_Product.swift */; };
+		2DD4203D1DB0B9AF00A8E838 /* Cell_103_Product.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DD4203B1DB0B9AF00A8E838 /* Cell_103_Product.xib */; };
+		2DD420401DB0B9D400A8E838 /* Cell_102_Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD4203E1DB0B9D400A8E838 /* Cell_102_Project.swift */; };
+		2DD420411DB0B9D400A8E838 /* Cell_102_Project.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DD4203F1DB0B9D400A8E838 /* Cell_102_Project.xib */; };
+		2DD420441DB0C59900A8E838 /* Cell_104_Hot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD420421DB0C59900A8E838 /* Cell_104_Hot.swift */; };
+		2DD420451DB0C59900A8E838 /* Cell_104_Hot.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DD420431DB0C59900A8E838 /* Cell_104_Hot.xib */; };
 		2DF502591D86482000BF6622 /* HotStyle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF502581D86482000BF6622 /* HotStyle.storyboard */; };
 		2DF502651D864C3200BF6622 /* WOWHotStyleMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF502641D864C3200BF6622 /* WOWHotStyleMain.swift */; };
 		2DF502681D864D8F00BF6622 /* WOWHotStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF502661D864D8F00BF6622 /* WOWHotStyleCell.swift */; };
@@ -853,6 +859,12 @@
 		2DB923D11D703A59001EA570 /* WOWUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUploadManager.swift; sourceTree = "<group>"; };
 		2DCE14ED1DACCCE00052A0C0 /* WOWNoNetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNoNetView.swift; sourceTree = "<group>"; };
 		2DCE14EF1DACD04A0052A0C0 /* WOWNetWorkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNetWorkType.swift; sourceTree = "<group>"; };
+		2DD4203A1DB0B9AF00A8E838 /* Cell_103_Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_103_Product.swift; sourceTree = "<group>"; };
+		2DD4203B1DB0B9AF00A8E838 /* Cell_103_Product.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_103_Product.xib; sourceTree = "<group>"; };
+		2DD4203E1DB0B9D400A8E838 /* Cell_102_Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_102_Project.swift; sourceTree = "<group>"; };
+		2DD4203F1DB0B9D400A8E838 /* Cell_102_Project.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_102_Project.xib; sourceTree = "<group>"; };
+		2DD420421DB0C59900A8E838 /* Cell_104_Hot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_104_Hot.swift; sourceTree = "<group>"; };
+		2DD420431DB0C59900A8E838 /* Cell_104_Hot.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_104_Hot.xib; sourceTree = "<group>"; };
 		2DF502581D86482000BF6622 /* HotStyle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HotStyle.storyboard; sourceTree = "<group>"; };
 		2DF502641D864C3200BF6622 /* WOWHotStyleMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWHotStyleMain.swift; sourceTree = "<group>"; };
 		2DF502661D864D8F00BF6622 /* WOWHotStyleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWHotStyleCell.swift; sourceTree = "<group>"; };
@@ -2033,6 +2045,7 @@
 				29FF255F1CFDA86300DF2A9B /* WOWSenceLikeCell.swift */,
 				29FF25601CFDA86300DF2A9B /* WOWSenceLikeCell.xib */,
 				29FF25611CFDA86300DF2A9B /* WOWSubArtCell.swift */,
+				2D45AC461D7D420400EF3835 /* HomeBrannerCell.xib */,
 				29FF25621CFDA86300DF2A9B /* WOWSubArtCell.xib */,
 				0608F8381D6CBE2B00F18373 /* WowControllerSepratorCell.swift */,
 				2D3273E61D7526010013BDB1 /* WOWHomeFormCell.swift */,
@@ -2042,13 +2055,13 @@
 				2D3273FA1D754DD80013BDB1 /* HomeBottomCell.swift */,
 				2D3273FB1D754DD80013BDB1 /* HomeBottomCell.xib */,
 				2D45AC451D7D420400EF3835 /* HomeBrannerCell.swift */,
-				2D45AC461D7D420400EF3835 /* HomeBrannerCell.xib */,
+				634E36C81D922E0600BC6805 /* WOWSearchLayout.swift */,
 				635A4DDB1D7FC030006FFCB6 /* WOWSearchTagView.swift */,
 				635A4DDD1D7FC053006FFCB6 /* WOWSearchTagView.xib */,
 				63BB5AA11D86A86F00F41580 /* WOWEmptySearchView.swift */,
 				63BB5AA31D86A87A00F41580 /* WOWEmptySearchView.xib */,
-				634E36C81D922E0600BC6805 /* WOWSearchLayout.swift */,
 				2DAD5E791DAC8B6600677681 /* WOWDSGNFooterView.swift */,
+				2DD420291DB0B72400A8E838 /* HomeCellView */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2074,6 +2087,19 @@
 				29FF255C1CFDA86300DF2A9B /* WOWSenceHelper.swift */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		2DD420291DB0B72400A8E838 /* HomeCellView */ = {
+			isa = PBXGroup;
+			children = (
+				2DD4203A1DB0B9AF00A8E838 /* Cell_103_Product.swift */,
+				2DD4203B1DB0B9AF00A8E838 /* Cell_103_Product.xib */,
+				2DD4203E1DB0B9D400A8E838 /* Cell_102_Project.swift */,
+				2DD4203F1DB0B9D400A8E838 /* Cell_102_Project.xib */,
+				2DD420421DB0C59900A8E838 /* Cell_104_Hot.swift */,
+				2DD420431DB0C59900A8E838 /* Cell_104_Hot.xib */,
+			);
+			path = HomeCellView;
 			sourceTree = "<group>";
 		};
 		2DF502601D864BF500BF6622 /* HotStyle */ = {
@@ -2304,6 +2330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				069F230E1D3F7E860061CFAA /* Brand.storyboard in Resources */,
+				2DD420411DB0B9D400A8E838 /* Cell_102_Project.xib in Resources */,
 				632A932A1D47307D003A5966 /* FavoriteEmpty.xib in Resources */,
 				2D6B027F1D589615003D21C1 /* WOWOrderDetailSThreeCell.xib in Resources */,
 				636C33DC1D52EA1F00CA4E69 /* WOWOrderFreightCell.xib in Resources */,
@@ -2323,6 +2350,7 @@
 				2DF502691D864D8F00BF6622 /* WOWHotStyleCell.xib in Resources */,
 				29FF26FF1CFDA86300DF2A9B /* UMSLoginViewController.xib in Resources */,
 				06D051721D813E7D00BADD38 /* Designer.storyboard in Resources */,
+				2DD420451DB0C59900A8E838 /* Cell_104_Hot.xib in Resources */,
 				29FF26F21CFDA86300DF2A9B /* Info.plist in Resources */,
 				632A93311D474825003A5966 /* WOWFavoritrSingleCell.xib in Resources */,
 				636C34221D57288400CA4E69 /* WOWBrandHeaderView.xib in Resources */,
@@ -2372,6 +2400,7 @@
 				631847C51D752BE500656678 /* WOWProductHeaderView.xib in Resources */,
 				29FF26CE1CFDA86300DF2A9B /* WOWTransLineCell.xib in Resources */,
 				632A938E1D4E0F09003A5966 /* WOWBuyCarHeadView.xib in Resources */,
+				2DD4203D1DB0B9AF00A8E838 /* Cell_103_Product.xib in Resources */,
 				29D5EC3C1D0135850001266C /* WOWProductDetailDescCell.xib in Resources */,
 				29FF26FD1CFDA86300DF2A9B /* UMShareEditViewController.xib in Resources */,
 				635A4DDE1D7FC054006FFCB6 /* WOWSearchTagView.xib in Resources */,
@@ -2606,6 +2635,7 @@
 				2958BD921CFECA9300F6A6D7 /* SwiftWebViewProgress.swift in Sources */,
 				066D889A1D7682FA008CE271 /* VCSceneCategory.swift in Sources */,
 				29FF26781CFDA86300DF2A9B /* WOWRegistController.swift in Sources */,
+				2DD4203C1DB0B9AF00A8E838 /* Cell_103_Product.swift in Sources */,
 				632A93341D474848003A5966 /* WOWFavoriteBrandCell.swift in Sources */,
 				061304A71D8E378C001F05D6 /* DALabeledCircularProgressView.m in Sources */,
 				636C34201D57286A00CA4E69 /* WOWBrandHeaderView.swift in Sources */,
@@ -2621,6 +2651,7 @@
 				632A934F1D49E31D003A5966 /* WOWProductDetailCell.swift in Sources */,
 				636C33DB1D52EA1F00CA4E69 /* WOWOrderFreightCell.swift in Sources */,
 				06B766131D77E96600F803A9 /* NSURLRequest+GYURLRequestProtocol.m in Sources */,
+				2DD420401DB0B9D400A8E838 /* Cell_102_Project.swift in Sources */,
 				29FF26D51CFDA86300DF2A9B /* WOWUserModel.swift in Sources */,
 				29FF26611CFDA86300DF2A9B /* WOWProductModel.swift in Sources */,
 				29FF26A81CFDA86300DF2A9B /* WOWSearchResultController.swift in Sources */,
@@ -2696,6 +2727,7 @@
 				29FF26451CFDA86300DF2A9B /* WOWBuyCarController.swift in Sources */,
 				06B25A431D6C454D001A1016 /* WOWProductDetailTipsWebViewCell.swift in Sources */,
 				29FF26C91CFDA86300DF2A9B /* WOWProvinceModel.swift in Sources */,
+				2DD420441DB0C59900A8E838 /* Cell_104_Hot.swift in Sources */,
 				636C33CF1D51DB3700CA4E69 /* WOWTypeCollectionCell.swift in Sources */,
 				29FF26C11CFDA86300DF2A9B /* WOWOrderController.swift in Sources */,
 				29D5EC321D0124140001266C /* WOWProductDetailPriceCell.swift in Sources */,
@@ -2822,8 +2854,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wang DONG (55AADS68RH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wang DONG (55AADS68RH)";
+
+				CODE_SIGN_ENTITLEMENTS = wowapp/wowapp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = B4WSDTADTT;
@@ -2848,7 +2883,9 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
-				PROVISIONING_PROFILE = "40d914db-54a6-4769-86b8-12e14ddfe949";
+
+				PROVISIONING_PROFILE = "5f01a51a-03dd-4a7e-af51-504dc4a47b06";
+
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2875,8 +2912,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wang DONG (55AADS68RH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wang DONG (55AADS68RH)";
+
+				CODE_SIGN_ENTITLEMENTS = wowapp/wowapp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B4WSDTADTT;
@@ -2893,7 +2932,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "";
-				PROVISIONING_PROFILE = "40d914db-54a6-4769-86b8-12e14ddfe949";
+
+				PROVISIONING_PROFILE = "5f01a51a-03dd-4a7e-af51-504dc4a47b06";
+
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -3035,7 +3076,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = wowapp/wowapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+
 				DEVELOPMENT_TEAM = B4WSDTADTT;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (

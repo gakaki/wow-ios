@@ -185,7 +185,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     
                if ( self?.pageIndex == 1 ){
                     if self!.vo_products.count > 0 {
-                        self!.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.top)
+                        self!.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.top)
                     }
                 }
           }){[weak self] (errorMsg) in

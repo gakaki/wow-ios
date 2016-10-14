@@ -90,6 +90,7 @@ class WOWBuyBackView: UIView {
         buyView.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
+                make.height.equalTo(MGScreenHeight*0.75)
             }
         }
        
@@ -134,22 +135,14 @@ protocol goodsBuyViewDelegate:class {
 }
 
 
-class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UICollectionViewDataSource{
-    @IBOutlet weak var countTextField: UITextField!     //商品数量显示
+class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, ProductSpecFootViewDelegate{
     @IBOutlet weak var perPriceLabel: UILabel!          //商品价格
     @IBOutlet weak var sizeTextLabel: UILabel!          //商品尺寸
     @IBOutlet weak var collectionView: UICollectionView!    //颜色标签
     @IBOutlet weak var nameLabel: UILabel!              //商品名字
     @IBOutlet weak var goodsImageView: UIImageView!     //商品图片
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var subButton: UIButton!             //增加数量
-    @IBOutlet weak var addButton: UIButton!             //减少数量
-    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!  //颜色视图的高度
-    @IBOutlet weak var secondCollectionView: UICollectionView!      //规格标签
-    @IBOutlet weak var secondCollectionViewHeight: NSLayoutConstraint!  //规格视图的高度
 
-    @IBOutlet weak var colorWarnImg: UIImageView!       //警告图标
-    @IBOutlet weak var specWarnImg: UIImageView!
  
     @IBOutlet weak var sureButton: UIButton!            //确定按钮
   
@@ -157,7 +150,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     fileprivate var path: UIBezierPath!
 
     
-    let identifier = "WOWTagCollectionViewCell"
+    let identifier = "WOWSearchCell"
     var entrance : carEntrance = carEntrance.addEntrance
     weak var delegate: goodsBuyViewDelegate?
     //通过颜色选规格的数组
@@ -178,6 +171,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     var spec_ColorArr : [WOWColorModel]?
     //所选产品的信息
     var productInfo : WOWProductInfoModel?
+    //未选择颜色
+    var selectColor = true
+    //未选择规格
+    var selectSpec = true
     
     fileprivate var skuCount:Int = 1
     
@@ -192,42 +189,35 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     
     
     deinit{
-        collectionView.removeObserver(self, forKeyPath: "contentSize")
-        secondCollectionView.removeObserver(self, forKeyPath: "contentSize")
+  
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        countTextField.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
-        addButton.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
-        subButton.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
         
-        defaultSetup1()
-        defaultSetup2()
+        
+        defaultSetup()
         configDefaultData()
 
     }
     
 
 //MARK:Private Method
-    func defaultSetup1() {
-        //颜色视图
-        let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:Bundle.main)
-        collectionView?.register(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
-        collectionView?.collectionViewLayout = tagCellLayout
-        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context:nil)
+    func defaultSetup() {
+        
+        //设置布局
+        collectionView.setCollectionViewLayout(WOWProductSpecLayout(), animated: true)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UINib.nibName(String(describing: WOWSearchCell.self)), forCellWithReuseIdentifier: "WOWSearchCell")
+        
+   
+        collectionView.register(UINib.nibName(String(describing: WOWProductSpecReusableView.self)), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWProductSpecReusableView")
+        
+        collectionView.register(UINib.nibName(String(describing: WOWProductSpecFootView.self)), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "WOWProductSpecFootView")
     }
     
-    func defaultSetup2() {
-        //规格视图
-        let nib = UINib(nibName:"WOWTagCollectionViewCell", bundle:Bundle.main)
-        secondCollectionView?.register(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
-        
-        secondCollectionView?.collectionViewLayout = tagCellLayout
-        secondCollectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context:nil)
-    }
+ 
     
     func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
@@ -277,7 +267,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
            
 
             collectionView.reloadData()
-            showResult(skuCount)
+//            showResult(skuCount)
             /**
              *  如果规格和颜色都是一个的话，默认选中第一个
              */
@@ -294,62 +284,10 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
     }
     
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-            let height = self.collectionView.collectionViewLayout.collectionViewContentSize.height
-            var endHeight:CGFloat = 200
-            if UIDevice.deviceType.rawValue < 2{
-                endHeight = 130
-            }
-            
-            if height > endHeight {
-                self.collectionViewHeight.constant = endHeight
-            }else{
-                self.collectionViewHeight.constant = height
-            }
-            DLog("颜色的collectionView的高度\(height)")
-
-            let height2 = self.secondCollectionView.collectionViewLayout.collectionViewContentSize.height
-            var endHeight2:CGFloat = 200
-            if UIDevice.deviceType.rawValue < 2{
-                endHeight2 = 130
-            }
-            
-            if height2 > endHeight2 {
-                self.secondCollectionViewHeight.constant = endHeight2
-            }else{
-                self.secondCollectionViewHeight.constant = height2
-            }
-            DLog("规格的collectionView的高度\(height)")
-
-    }
 
     
 //MARK:Actions    
-    @IBAction func countButtonClick(_ sender: UIButton) {
-        /**
-         *  更改商品数量，商品数量为1时不能再减少
-         *  加商品时要判断商品的库存数量和已加商品数，如果库存数大于购买数可以继续增加
-         *  如果库存数小于等于购买数，则提示库存不足
-         */
-        if sender.tag == 1001 {
-            skuCount -= 1
-            skuCount = skuCount == 0 ? 1 : skuCount
-            showResult(skuCount)
-        }else{
-            if colorIndex >= 0 && specIndex >= 0 {
-                if productInfo?.availableStock! > skuCount {
-                    skuCount += 1
-                }else {
-                    WOWHud.showMsg("库存不足")
-                }
-            
-            }else {
-                skuCount += 1
-            }
-            showResult(skuCount)
-        }
-    }
+ 
     
     /**
      确定按钮分为两个入口
@@ -425,44 +363,48 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             
         }
     }
-    /**
-     显示商品数量
-     
-     - parameter count: 传入数量
-     */
-    fileprivate func showResult(_ count:Int){
-        if count <= 1 {
-            subButton.isEnabled = false
-            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
-        }else {
-            subButton.isEnabled = true
-            subButton.setTitleColor(UIColor.black, for: UIControlState())
-        }
-        self.countTextField.text = "\(count)"
-    }
+//    /**
+//     显示商品数量
+//     
+//     - parameter count: 传入数量
+//     */
+//    fileprivate func showResult(_ count:Int){
+//        if count <= 1 {
+//            subButton.isEnabled = false
+//            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
+//        }else {
+//            subButton.isEnabled = true
+//            subButton.setTitleColor(UIColor.black, for: UIControlState())
+//        }
+//        self.countTextField.text = "\(count)"
+//    }
     
     //MARK: - validate Methods
     fileprivate func validateMethods() -> Bool{
-        colorWarnImg.isHidden = true
-        specWarnImg.isHidden = true
+        selectSpec = true
+        selectColor = true
         if colorIndex < 0 && specIndex < 0 {
-            colorWarnImg.isHidden = false
-            specWarnImg.isHidden = false
+            selectSpec = false
+            selectColor = false
             WOWHud.showMsg("请选择产品颜色与规格")
+            collectionView.reloadData()
             return false
         }
         guard colorIndex >= 0 else {
-            colorWarnImg.isHidden = false
+            selectColor = false
             WOWHud.showMsg("请选择产品颜色")
+            collectionView.reloadData()
             return false
         }
         guard specIndex >= 0 else {
-            specWarnImg.isHidden = false
+            selectSpec = false
             WOWHud.showMsg("请选择产品规格")
+            collectionView.reloadData()
             return false
         }
         guard skuCount > 0 else {
             WOWHud.showMsg("所选产品无库存")
+            collectionView.reloadData()
             return false
         }
 
@@ -471,45 +413,14 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
 
 
     
-//MARK: - TagCellLayout Delegate Methods
-    func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
-        return CGFloat(45.0)
-    }
-    
-    func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
-        if layout == collectionView?.collectionViewLayout {
-            
-                let item = colorArr[index]
-                let title = item.colorDisplayName
-                let width = title.size(Fontlevel004).width + 50
-                return width
-            
-        }else {
-    
-            let item = specArr[index]
-            let title = item.specName 
-            let width = title.size(Fontlevel004).width + 50
-            return width
-            
-        }
-       
-    }
-
-    
     
 //MARK: - UICollectionView Delegate/Datasource Methods
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        /**
-         *  颜色规格显示
-         */
-        if collectionView.tag == 100 {
-            
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTagCollectionViewCell
-                let item = colorArr[(indexPath as NSIndexPath).row]
-                cell.textLabel.text = item.colorDisplayName
-                      //当选中某个cell时更改某个cell的颜色
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWSearchCell
+        if indexPath.section == 0 {
+            let item = colorArr[(indexPath as NSIndexPath).row]
+            cell.titleLabel.text = item.colorDisplayName
+            //当选中某个cell时更改某个cell的颜色
             if (indexPath as NSIndexPath).row == colorIndex {
                 updateCellStatus(cell, selected: true)
             }else {
@@ -521,21 +432,20 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 let str = colorArr[(indexPath as NSIndexPath).row]
                 //不可选中状态
                 if !str.isSelect {
-                    cell.textLabel.textColor = MGRgb(204, g: 204, b: 204)
-                    cell.textLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
+                    cell.titleLabel.textColor = MGRgb(204, g: 204, b: 204)
+                    cell.titleLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
                     cell.isUserInteractionEnabled = false
                 }
             }
             
-
+            
             return cell
+
         }else {
+            let item = specArr[(indexPath as NSIndexPath).row]
+            cell.titleLabel.text = item.specName
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTagCollectionViewCell
-                let item = specArr[(indexPath as NSIndexPath).row]
-                cell.textLabel.text = item.specName
-            
-                      //当选中某个cell时更改某个cell的颜色
+            //当选中某个cell时更改某个cell的颜色
             if (indexPath as NSIndexPath).row == specIndex {
                 updateCellStatus(cell, selected: true)
             }else {
@@ -547,25 +457,26 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 let str = specArr[(indexPath as NSIndexPath).row]
                 //不可选中状态
                 if !str.isSelect {
-                    cell.textLabel.textColor = MGRgb(204, g: 204, b: 204)
-                    cell.textLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
+                    cell.titleLabel.textColor = MGRgb(204, g: 204, b: 204)
+                    cell.titleLabel.backgroundColor = MGRgb(245, g: 245, b: 245)
                     cell.isUserInteractionEnabled = false
                 }
                 
             }
             
-
+            
             return cell
+
         }
-        
+
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == 100 {
+        if section == 0 {
             return colorArr.count
 
         }else {
@@ -577,7 +488,7 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         /**
          *  选中颜色规格视图
          */
-        if collectionView.tag == 100 {
+        if indexPath.section == 0 {
             
             if colorIndex == (indexPath as NSIndexPath).row {
                 //取消选中时恢复有库存状态
@@ -595,7 +506,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                 }
                 
                 self.collectionView.reloadData()
-                secondCollectionView.reloadData()
                 return
             }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
@@ -613,7 +523,6 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
                     selectColor.isSelect = true
                 }
                 self.collectionView.reloadData()
-                secondCollectionView.reloadData()
                 return
             }
             //记录每次点击的cell下标，以便确定选择的商品规格颜色
@@ -626,13 +535,101 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
         
     }
     
-    //更新cell点击状态
-    func updateCellStatus(_ cell: WOWTagCollectionViewCell, selected:Bool) -> Void {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-//        cell.textLabel.layer.borderColor = selected ? UIColor.blackColor().CGColor : MGRgb(234, g: 234, b: 234).CGColor
-//        cell.textLabel.layer.borderWidth = selected ? 1.5 : 1
-        cell.textLabel.backgroundColor = selected ? UIColor(hexString: "#FFD444") : UIColor(hexString: "#F5F5F5")
-        cell.textLabel.textColor = UIColor(hexString: "#000000")
+        var reusableView:UICollectionReusableView?
+        //是每组的头
+        if (kind == UICollectionElementKindSectionHeader){
+            
+            let searchReusable = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWProductSpecReusableView", for: indexPath as IndexPath) as? WOWProductSpecReusableView
+            if indexPath.section == 0 {
+                searchReusable?.specLabel.text = "颜色"
+                searchReusable?.warnImg.isHidden = selectColor
+                
+
+            }else {
+                searchReusable?.specLabel.text = "规格"
+                searchReusable?.warnImg.isHidden = selectSpec
+               
+            }
+            
+            
+            reusableView = searchReusable!
+        }
+        if (kind == UICollectionElementKindSectionFooter){
+            if indexPath.section == 1 {
+                let searchReusable = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "WOWProductSpecFootView", for: indexPath as IndexPath) as? WOWProductSpecFootView
+                searchReusable?.delegate = self
+                searchReusable?.showResult(skuCount)
+                reusableView = searchReusable!
+            }
+            
+        }
+        
+        return reusableView!
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: MGScreenWidth, height: 35)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: MGScreenWidth, height: 0)
+        }else {
+            return CGSize(width: MGScreenWidth, height: 82)
+        }
+        
+    }
+    //MARK - UICollectionViewDelegateFlowLayout  itme的大小
+    
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.section == 0 {
+            let text = colorArr[(indexPath as NSIndexPath).row].colorDisplayName
+            let size = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 35), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 12)], context: nil).size
+            return CGSize(width: size.width+32, height: 35)
+        }else {
+            let text = specArr[(indexPath as NSIndexPath).row].specName
+            let size = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 35), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 12)], context: nil).size
+            return CGSize(width: size.width+32, height: 35)
+        }
+      
+        
+        
+    }
+    //MARK - ProductSpecFootViewDelegate
+    func countClick(_ sender: UIButton!) {
+        /**
+         *  更改商品数量，商品数量为1时不能再减少
+         *  加商品时要判断商品的库存数量和已加商品数，如果库存数大于购买数可以继续增加
+         *  如果库存数小于等于购买数，则提示库存不足
+         */
+        if sender.tag == 1001 {
+            skuCount -= 1
+            skuCount = skuCount == 0 ? 1 : skuCount
+
+        }else{
+            if colorIndex >= 0 && specIndex >= 0 {
+                if productInfo?.availableStock! > skuCount {
+                    skuCount += 1
+                }else {
+                    WOWHud.showMsg("库存不足")
+                }
+                
+            }else {
+                skuCount += 1
+            }
+        }
+        collectionView.reloadData()
+    }
+    
+    
+    //更新cell点击状态
+    func updateCellStatus(_ cell: WOWSearchCell, selected:Bool) -> Void {
+        
+
+        cell.titleLabel.backgroundColor = selected ? UIColor(hexString: "#FFD444") : UIColor(hexString: "#F5F5F5")
+        cell.titleLabel.textColor = UIColor(hexString: "#000000")
         cell.isUserInteractionEnabled = true
 
     }
@@ -682,26 +679,24 @@ class WOWGoodsBuyView: UIView,TagCellLayoutDelegate,UICollectionViewDelegate,UIC
             }
             showStock(true)
             
-            showResult(skuCount)
-            
             sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .normal)
 
             
         }else {
             skuCount = 0
            
-            showResult(skuCount)
             
             sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .disabled)
             
         }
+        collectionView.reloadData()
     }
     //按钮是否可点击
     
     func showStock(_ hasStock: Bool) -> Void {
-        addButton.isEnabled = hasStock
-        subButton.isEnabled = hasStock
-        sureButton.isEnabled = hasStock
+//        addButton.isEnabled = hasStock
+//        subButton.isEnabled = hasStock
+//        sureButton.isEnabled = hasStock
 
     }
 
@@ -828,7 +823,6 @@ extension WOWGoodsBuyView {
             
         }
         self.collectionView.reloadData()
-        secondCollectionView.reloadData()
         
         //根据选中的颜色改变产品图片
         if color_SpecArr?.count > 0 {
@@ -873,7 +867,6 @@ extension WOWGoodsBuyView {
         }
         self.collectionView.reloadData()
         
-        secondCollectionView.reloadData()
         
 //        //根据选中的规格改变产品尺寸
 //        if spec_ColorArr?.count > 0 {

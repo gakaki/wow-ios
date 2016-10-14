@@ -348,6 +348,8 @@
 		2D6B02871D58962E003D21C1 /* WOWOrderDetailPayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D6B02851D58962E003D21C1 /* WOWOrderDetailPayCell.xib */; };
 		2D8E361B1D8F7E12005C2FDE /* WOWClickLikeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8E361A1D8F7E12005C2FDE /* WOWClickLikeAction.swift */; };
 		2D8E361D1D8FF690005C2FDE /* WOWWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8E361C1D8FF690005C2FDE /* WOWWebViewController.swift */; };
+		2D9DE58B1DAF58280005E790 /* WOWOrderEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9DE58A1DAF58280005E790 /* WOWOrderEmptyView.swift */; };
+		2D9DE58D1DAF58630005E790 /* WOWOrderEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DE58C1DAF58630005E790 /* WOWOrderEmptyView.xib */; };
 		2DAD5E7A1DAC8B6600677681 /* WOWDSGNFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD5E791DAC8B6600677681 /* WOWDSGNFooterView.swift */; };
 		2DB9238E1D6D826C001EA570 /* WOWOrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB9238D1D6D826C001EA570 /* WOWOrderListViewController.swift */; };
 		2DB923D21D703A59001EA570 /* WOWUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB923D11D703A59001EA570 /* WOWUploadManager.swift */; };
@@ -843,6 +845,8 @@
 		2D6B02851D58962E003D21C1 /* WOWOrderDetailPayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWOrderDetailPayCell.xib; sourceTree = "<group>"; };
 		2D8E361A1D8F7E12005C2FDE /* WOWClickLikeAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWClickLikeAction.swift; sourceTree = "<group>"; };
 		2D8E361C1D8FF690005C2FDE /* WOWWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWWebViewController.swift; sourceTree = "<group>"; };
+		2D9DE58A1DAF58280005E790 /* WOWOrderEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderEmptyView.swift; sourceTree = "<group>"; };
+		2D9DE58C1DAF58630005E790 /* WOWOrderEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWOrderEmptyView.xib; sourceTree = "<group>"; };
 		2DAD5E791DAC8B6600677681 /* WOWDSGNFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWDSGNFooterView.swift; sourceTree = "<group>"; };
 		2DB9238D1D6D826C001EA570 /* WOWOrderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOrderListViewController.swift; sourceTree = "<group>"; };
 		2DB923D11D703A59001EA570 /* WOWUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUploadManager.swift; sourceTree = "<group>"; };
@@ -1878,6 +1882,8 @@
 				638849FA1D61B1E900FCCFCC /* WOWCouponCell.xib */,
 				63884A031D61C3BF00FCCFCC /* WOWCouponheaderView.swift */,
 				63884A011D61C3B100FCCFCC /* WOWCouponheaderView.xib */,
+				2D9DE58A1DAF58280005E790 /* WOWOrderEmptyView.swift */,
+				2D9DE58C1DAF58630005E790 /* WOWOrderEmptyView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2314,6 +2320,7 @@
 				06B7661B1D77E96600F803A9 /* LICENSE in Resources */,
 				2D6B02831D589622003D21C1 /* WOWOrderDetailCostCell.xib in Resources */,
 				06FED4441D4634A600D7B068 /* city.json in Resources */,
+				2D9DE58D1DAF58630005E790 /* WOWOrderEmptyView.xib in Resources */,
 				29FF26C71CFDA86300DF2A9B /* WOWOrderTransCell.xib in Resources */,
 				29FF270D1CFDA86300DF2A9B /* LaunchScreen.storyboard in Resources */,
 				29FF26861CFDA86300DF2A9B /* icon_chose_bottom@2x.png in Resources */,
@@ -2654,6 +2661,7 @@
 				29FF263C1CFDA86300DF2A9B /* AppDelegate.swift in Sources */,
 				29FF26A01CFDA86300DF2A9B /* WOWGoodsModel.swift in Sources */,
 				29FF265F1CFDA86300DF2A9B /* WOWMenuModel.swift in Sources */,
+				2D9DE58B1DAF58280005E790 /* WOWOrderEmptyView.swift in Sources */,
 				292CBA0D1CFE86AB00248C88 /* WOWRegistInfoSureView.swift in Sources */,
 				631847D31D7559D200656678 /* WOWProductDescView.swift in Sources */,
 				06B7661D1D77E96600F803A9 /* GYMockRequest.m in Sources */,

@@ -35,7 +35,7 @@ class TooglePriceBtn:UIButton {
         }
     }
     //UP TRUE DOWN FALSE
-    var upDown:Bool = false {
+    var upDown:Bool = true {
         didSet{
             //有图像的时候在调用 asc 的函数
             if ( image_is_show == true ){

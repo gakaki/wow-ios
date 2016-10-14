@@ -115,7 +115,14 @@ class WOWSearchController: WOWBaseViewController {
         return view
 
     }()
-
+    
+    lazy var layout: UICollectionViewLeftAlignedLayout = {
+        let layout = UICollectionViewLeftAlignedLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 10
+        return layout
+        
+    }()
 
 //MARK:Private Method
     override func setUI() {
@@ -131,7 +138,7 @@ class WOWSearchController: WOWBaseViewController {
         
         
         //设置布局
-        collectionView.setCollectionViewLayout(WOWSearchLayout(), animated: true)
+        collectionView.setCollectionViewLayout(layout, animated: true)
         
         collectionView.register(UINib.nibName(String(describing: WOWSearchCell.self)), forCellWithReuseIdentifier: "WOWSearchCell")
         

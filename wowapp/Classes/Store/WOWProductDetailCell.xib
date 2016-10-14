@@ -16,17 +16,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrp-Fq-IZ9">
-                        <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="k4Q-HT-73x"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="k4Q-HT-73x"/>
-                            </mask>
-                        </variation>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5j1-JJ-Q5E">
                         <constraints>
@@ -36,27 +28,21 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="5j1-JJ-Q5E" secondAttribute="trailing" constant="15" id="CcP-eN-E9l"/>
-                    <constraint firstItem="lrp-Fq-IZ9" firstAttribute="top" secondItem="5j1-JJ-Q5E" secondAttribute="bottom" constant="15" id="J5z-jn-avN"/>
-                    <constraint firstItem="5j1-JJ-Q5E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KXX-5G-ZQl"/>
-                    <constraint firstItem="lrp-Fq-IZ9" firstAttribute="top" secondItem="5j1-JJ-Q5E" secondAttribute="bottom" constant="15" id="QAD-rz-dvt"/>
-                    <constraint firstItem="lrp-Fq-IZ9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="X6W-gR-0iL"/>
+                    <constraint firstItem="lrp-Fq-IZ9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="VlB-IW-sOy"/>
                     <constraint firstItem="5j1-JJ-Q5E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XoZ-GB-OcE"/>
-                    <constraint firstAttribute="trailing" secondItem="lrp-Fq-IZ9" secondAttribute="trailing" constant="15" id="dFd-bF-Fts"/>
-                    <constraint firstAttribute="bottom" secondItem="lrp-Fq-IZ9" secondAttribute="bottom" constant="15" id="sY9-u0-yh7"/>
+                    <constraint firstItem="lrp-Fq-IZ9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="-9" id="iv8-zN-sdq"/>
+                    <constraint firstAttribute="bottom" secondItem="5j1-JJ-Q5E" secondAttribute="bottom" constant="15" id="kgk-Oq-HKs"/>
+                    <constraint firstAttribute="trailing" secondItem="lrp-Fq-IZ9" secondAttribute="trailing" constant="15" id="mDs-u2-F6m"/>
+                    <constraint firstItem="5j1-JJ-Q5E" firstAttribute="top" secondItem="lrp-Fq-IZ9" secondAttribute="bottom" constant="15" id="xQr-6h-U5A"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="QAD-rz-dvt"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="aspect" destination="6Qw-g5-Ghc" id="iff-L4-bmZ"/>
                 <outlet property="imgDescLabel" destination="lrp-Fq-IZ9" id="4I6-rS-XKp"/>
                 <outlet property="productImg" destination="5j1-JJ-Q5E" id="ysO-nY-uKS"/>
-                <outlet property="space" destination="J5z-jn-avN" id="7MZ-Y4-nBo"/>
+                <outlet property="space" destination="xQr-6h-U5A" id="9iZ-aN-j8C"/>
             </connections>
-            <point key="canvasLocation" x="117.5" y="259"/>
+            <point key="canvasLocation" x="-15" y="232"/>
         </tableViewCell>
     </objects>
 </document>

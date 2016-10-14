@@ -29,15 +29,16 @@ class WOWHomeFormCell: UITableViewCell {
     @IBOutlet weak var lbMainTitle: UILabel!
     
     @IBOutlet weak var lbContent: UILabel!
-    var modelData : WOWModelVoTopic?
+    var modelData : WOWModelVoTopic?{
+        didSet{
+            lbMainTitle.text = modelData?.topicMainTitle
+            lbContent.text   = modelData?.topicDesc
+            lbContent.setLineHeightAndLineBreak(1.5)
+            dataArr          = modelData?.products
+        }
+    }
+
     let headIdenString = "HomeFormReusableView"
-    
-//    var mainModel : WOWModelVoTopic   {
-//    
-//        didSet{
-//        
-//        }
-//    }
     
     var dataArr:[WOWProductModel]?{
         didSet{

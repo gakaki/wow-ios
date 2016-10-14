@@ -7,6 +7,19 @@
 //
 
 import UIKit
+struct HomeCellType {
+    
+    static let cell_101      = "HomeBrannerCell"
+    
+    static let cell_201      = "WOWlListCell"
+    
+    static let cell_601      = "WOWHomeFormCell"
+    
+    static let cell_701      = "WOWHotStyleCell"
+    
+    static let cell_HomeList = "HomeBottomCell"// 底部列表
+    
+}
 
 class WOWController: WOWBaseViewController {
     let cellID = String(describing: WOWlListCell.self)
@@ -148,12 +161,14 @@ class WOWController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
-        tableView.register(UINib.nibName(String(describing: WOWlListCell.self)), forCellReuseIdentifier:cellID)
         
-        tableView.register(UINib.nibName("WOWHomeFormCell"), forCellReuseIdentifier: "WOWHomeFormCell")
-        tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
+        tableView.register(UINib.nibName(HomeCellType.cell_201), forCellReuseIdentifier:HomeCellType.cell_201)
         
-        tableView.register(UINib.nibName("HomeBrannerCell"), forCellReuseIdentifier: "HomeBrannerCell")
+        tableView.register(UINib.nibName(HomeCellType.cell_601), forCellReuseIdentifier: HomeCellType.cell_601)
+        
+        tableView.register(UINib.nibName(HomeCellType.cell_101), forCellReuseIdentifier: HomeCellType.cell_101)
+        
+        tableView.register(UINib.nibName(HomeCellType.cell_HomeList), forCellReuseIdentifier: HomeCellType.cell_HomeList)
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
@@ -411,9 +426,9 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }
         let model = dataArr[(indexPath as NSIndexPath).section]
         
-        if model.moduleType == 201 {
-            
-            let cell                = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWlListCell
+        switch model.moduleType ?? 0 {
+        case 201:
+            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_201, for: indexPath) as! WOWlListCell
             
             cell.delegate       = self
             
@@ -422,37 +437,28 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             cell.selectionStyle = .none
             
             return cell
+        case 601:
+            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_601, for: indexPath) as! WOWHomeFormCell
             
-        }else if model.moduleType == 601{
-            
-            let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWHomeFormCell", for: indexPath) as! WOWHomeFormCell
-            
-            cell.indexPathSection = (indexPath as NSIndexPath).section
-            cell.delegate = self
-            cell.modelData = model.moduleContentList
-            cell.lbMainTitle.text = model.moduleContentList?.topicMainTitle
-            cell.lbContent.text = model.moduleContentList?.topicDesc
-            cell.lbContent.setLineHeightAndLineBreak(1.5)
-            cell.dataArr = model.moduleContentList?.products
-            cell.selectionStyle = .none
+            cell.indexPathSection = indexPath.section
+            cell.delegate         = self
+            cell.modelData        = model.moduleContentList
+            cell.selectionStyle   = .none
             
             return cell
-            
-        }else if model.moduleType == 101{
-            let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBrannerCell", for: indexPath) as! HomeBrannerCell
+        case 101:
+            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_101, for: indexPath) as! HomeBrannerCell
             
             if let banners = model.moduleContent?.banners{
-                self.bannerArray = banners
+                self.bannerArray               = banners
                 cell.reloadBanner(self.bannerArray)
                 cell.cyclePictureView.delegate = self
             }
-          
-            cell.selectionStyle = .none
             
+            cell.selectionStyle = .none
             return cell
             
-            
-        }else{
+        default:
             return UITableViewCell()
         }
     }

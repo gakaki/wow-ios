@@ -537,7 +537,7 @@ extension RequestApi:TargetType{
             
             //订单相关
             case let .api_OrderList(param):
-                params =  param!
+                params =  param ?? ["": AnyObject.self]
             
             case let .api_OrderStatus(uid,order_id,status):
                 params =  ["uid":uid,"order_id":order_id,"status":status]

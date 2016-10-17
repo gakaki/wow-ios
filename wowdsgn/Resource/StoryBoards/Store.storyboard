@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -8,7 +8,7 @@
         <!--Navigation Controller-->
         <scene sceneID="lmm-YX-XXG">
             <objects>
-                <navigationController id="3Sm-BO-NMd" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="3Sm-BO-NMd" customClass="WOWNavigationController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="TKr-vl-phK"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zxf-Qg-Jxk">
@@ -26,7 +26,7 @@
         <!--Empty Data Set Delegate-->
         <scene sceneID="p4Y-Dx-v6l">
             <objects>
-                <viewController storyboardIdentifier="WOWStoreController" id="AiG-sc-6dI" customClass="WOWStoreController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWStoreController" id="AiG-sc-6dI" customClass="WOWStoreController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="maa-bU-8qV"/>
                         <viewControllerLayoutGuide type="bottom" id="ZUJ-M0-5fH"/>
@@ -38,7 +38,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BS1-Lt-l4e">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WOWMenuCell" rowHeight="55" id="TxM-ue-7O0" customClass="WOWMenuCell" customModule="wowapp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WOWMenuCell" rowHeight="55" id="TxM-ue-7O0" customClass="WOWMenuCell" customModule="wowdsgn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TxM-ue-7O0" id="eOA-7t-rvq">
@@ -103,7 +103,7 @@
         <!--Product Detail Controller-->
         <scene sceneID="60a-yq-Y6h">
             <objects>
-                <viewController storyboardIdentifier="WOWProductDetailController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="7vb-eE-k6p" customClass="WOWProductDetailController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWProductDetailController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="7vb-eE-k6p" customClass="WOWProductDetailController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FL2-WA-EUQ"/>
                         <viewControllerLayoutGuide type="bottom" id="hb1-eN-9rh"/>
@@ -185,7 +185,7 @@
                                     <outlet property="delegate" destination="7vb-eE-k6p" id="pLQ-2V-Cug"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHb-tb-mKs" customClass="MIBadgeButton" customModule="wowapp" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHb-tb-mKs" customClass="MIBadgeButton" customModule="wow_vendor_ui">
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-7"/>
                                 <state key="normal" image="top_car"/>
@@ -221,19 +221,19 @@
                     </view>
                     <connections>
                         <outlet property="bottomView" destination="Sdm-uj-kwH" id="VwI-Rh-3J4"/>
-                        <outlet property="carEntranceButton" destination="nHb-tb-mKs" id="nar-pM-UCm"/>
+                        <outlet property="carEntranceButton" destination="nHb-tb-mKs" id="fRs-pe-rRy"/>
                         <outlet property="likeButton" destination="VfS-7l-afX" id="FDp-Xs-Fr1"/>
                         <outlet property="tableView" destination="Z1W-LA-2Dq" id="0W3-7j-PpS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPE-Cf-PNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="519"/>
+            <point key="canvasLocation" x="679" y="519"/>
         </scene>
         <!--分类-->
         <scene sceneID="Irw-0d-MOm">
             <objects>
-                <viewController storyboardIdentifier="WOWGoodsController" title="分类" id="b4E-cP-ysV" customClass="WOWGoodsController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWGoodsController" title="分类" id="b4E-cP-ysV" customClass="WOWGoodsController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uDF-4f-Jy1"/>
                         <viewControllerLayoutGuide type="bottom" id="6X2-NQ-Wkg"/>
@@ -251,7 +251,7 @@
         <!--商品详情-->
         <scene sceneID="DlB-ev-69l">
             <objects>
-                <viewController storyboardIdentifier="WOWGoodsDetailController" title="商品详情" id="C9Q-UM-zRR" customClass="WOWGoodsDetailController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWGoodsDetailController" title="商品详情" id="C9Q-UM-zRR" customClass="WOWGoodsDetailController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lU6-12-fda"/>
                         <viewControllerLayoutGuide type="bottom" id="MWA-7z-euj"/>
@@ -266,7 +266,7 @@
                                     <action selector="back:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="0bl-no-dGH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVK-7E-esP" customClass="MIBadgeButton" customModule="wowapp" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVK-7E-esP" customClass="MIBadgeButton" customModule="wowdsgn" customModuleProvider="target">
                                 <state key="normal" image="store_buyCar" backgroundImage="car_right"/>
                                 <connections>
                                     <action selector="carEntranceClick:" destination="C9Q-UM-zRR" eventType="touchUpInside" id="Tmc-kQ-shn"/>
@@ -375,7 +375,7 @@
         <!--品牌列表-->
         <scene sceneID="Cvm-UP-XDW">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandListController" title="品牌列表" automaticallyAdjustsScrollViewInsets="NO" id="KNs-x8-LYF" customClass="WOWBrandListController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandListController" title="品牌列表" automaticallyAdjustsScrollViewInsets="NO" id="KNs-x8-LYF" customClass="WOWBrandListController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xwk-R0-2CC"/>
                         <viewControllerLayoutGuide type="bottom" id="cRj-ol-oIh"/>
@@ -411,7 +411,7 @@
         <!--品牌主页-->
         <scene sceneID="WGN-WR-BPF">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandHomeController" title="品牌主页" hidesBottomBarWhenPushed="YES" id="WaH-lQ-3xj" customClass="WOWBrandHomeController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandHomeController" title="品牌主页" hidesBottomBarWhenPushed="YES" id="WaH-lQ-3xj" customClass="WOWBrandHomeController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8R7-fJ-UlM"/>
                         <viewControllerLayoutGuide type="bottom" id="TMI-x8-ieU"/>

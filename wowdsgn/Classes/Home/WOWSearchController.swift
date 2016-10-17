@@ -505,7 +505,7 @@ extension WOWSearchController:VTMagicViewDelegate{
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
 //            let query_cid          = ob_cid.value
-            var query_asc          = 1
+            var query_asc          = 0
             if ( tab_index == 2){ //价格的话用他的排序 其他 正常升序
                 if b.asc {
                     query_asc = 1
@@ -513,7 +513,7 @@ extension WOWSearchController:VTMagicViewDelegate{
                     query_asc = 0
                 }
             }else{
-                query_asc          = 1
+                query_asc          = 0
             }
             
             vc.pageVc        = query_sortBy

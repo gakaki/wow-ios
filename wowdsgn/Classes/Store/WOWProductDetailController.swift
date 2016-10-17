@@ -150,7 +150,6 @@ class WOWProductDetailController: WOWBaseViewController {
         if WOWUserManager.userCarCount <= 0 {
             carEntranceButton.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
-            
             carEntranceButton.badgeString = "\(WOWUserManager.userCarCount)"
         }else {
             carEntranceButton.badgeString = "99+"

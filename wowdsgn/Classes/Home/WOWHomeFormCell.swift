@@ -56,20 +56,21 @@ class WOWHomeFormCell: UITableViewCell {
     }
     lazy var xzm_footer:XZMRefreshNormalFooter = {
         let f = XZMRefreshNormalFooter()
+        f.textColor = UIColor.black
         f.setRefreshingTarget(self, refreshingAction: #selector(loadMore))
         f.pullToRefreshText = "查\n看\n更\n多"
         f.refreshingText = "释\n放\n查\n看"
         f.releaseToRefreshText = "释\n放\n查\n看"
-        switch UIDevice.deviceType {
-        case .dt_iPhone5:
-            f.xzm_width = 14
-        case.dt_iPhone6:
-            f.xzm_width = 1
-        case.dt_iPhone6_Plus:
-            f.xzm_width = 1
-        default:
-            f.xzm_width = 14
-        }
+//        switch UIDevice.deviceType {
+//        case .dt_iPhone5:
+//            f.xzm_width = 14
+//        case.dt_iPhone6:
+//            f.xzm_width = 30
+//        case.dt_iPhone6_Plus:
+//            f.xzm_width = 1
+//        default:
+//            f.xzm_width = 14
+//        }
         return f
     }()
     

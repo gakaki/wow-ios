@@ -425,6 +425,13 @@ extension WOWOrderDetailController{
                 vc.orderid = orderCode ?? ""
                 vc.totalPrice = "¥ " + String(format: "%.2f",payAmount ?? 0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
+                
+                
+                //
+                
+                
+                
+                
             }
             
         }) { (errorMsg) in

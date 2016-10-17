@@ -189,22 +189,18 @@ extension WOWOrderController:OrderCellDelegate{
                 if let strongSelf = self{
                     if ret == "success"{ //支付成功
                         
-                        
                         //TalkingData 支付成功
+                        let sum                  = Int32(model.total) ?? 0
+                        let order_id             = String(orderID)
                         
-//                        let order = TDOrder.
-//                        TDOrder *order = [TDOrder orderWithOrderId:@"your_orderId" total:order_total currencyType:@"currency_type"];
-//                        [order addItemWithCategory:@"item_category" name:@"item_name" unitPrice:item_unitPrice amount:item_count];
-//                        [order addItemWithCategory:@"item_category" itemId:@"item_id" name:@"item_name" unitPrice:item_unitPrice amount:item_count];
-//                        [TalkingDataAppCpa onPay:@"Your_userId" withOrderId:@"your_orderId" withAmount:order_amount withCurrencyType:@"currency_type" withPayType:@"pay_type" withOrder:order];
-                        
-//                        let sum                  = Int32(totalAmout)!
-//                        let order_id             = strongSelf.orderCode
-//                        
-//                        let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
-//                        order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
-//                        order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
-//                        TalkingDataAppCpa.onPay(WOWUserManager.userID, with: order)
+                        let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
+                        for m:WOWOrderProductModel in model.products! {
+                            let price = Int32(m.price) ?? 0
+                            let total = Int32(m.total) ?? 0
+                            order?.addItem(withCategory: "", name:      m.name, unitPrice: price, amount: total)
+                            order?.addItem(withCategory: "", itemId:    order_id, name: "", unitPrice: price, amount: total)
+                        }
+                        TalkingDataAppCpa.onPay(WOWUserManager.userID, with: order)
                         
                         
                         strongSelf.request()

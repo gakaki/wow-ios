@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="WOWOrderAddressCell" selectionStyle="none" indentationWidth="10" rowHeight="69" id="KGk-i7-Jjw" userLabel="OrderAddressCell" customClass="WOWOrderAddressCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="68.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-ip-tmE">
+                        <rect key="frame" x="15" y="15" width="4" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxU-dP-KQ5">
+                        <rect key="frame" x="34" y="15" width="13" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海市" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLf-EW-KVQ">
+                        <rect key="frame" x="15" y="37" width="45" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="qvF-l0-0Y0">
+                        <rect key="frame" x="352" y="27" width="8" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="8" id="aNY-wn-hhP"/>
+                            <constraint firstAttribute="height" constant="13" id="mtm-GW-cJe"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＋添加收货地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qv9-1E-Pgq">
+                        <rect key="frame" x="127" y="23" width="121" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="0Yh-ZI-mdO"/>
+                            <constraint firstAttribute="width" constant="121" id="7TM-SC-kHd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="oxU-dP-KQ5" firstAttribute="leading" secondItem="Wvl-ip-tmE" secondAttribute="trailing" constant="15" id="1sT-9p-FBq"/>
+                    <constraint firstItem="Qv9-1E-Pgq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2hS-W1-4tZ"/>
+                    <constraint firstItem="Wvl-ip-tmE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="6sm-xS-5Qg"/>
+                    <constraint firstAttribute="bottom" secondItem="vLf-EW-KVQ" secondAttribute="bottom" constant="15" id="AsO-hB-UhO"/>
+                    <constraint firstItem="qvF-l0-0Y0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CWo-cz-T0k"/>
+                    <constraint firstItem="Qv9-1E-Pgq" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="IV2-oy-dLe"/>
+                    <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="vLf-EW-KVQ" secondAttribute="trailing" constant="307" id="Owa-iy-cPr"/>
+                    <constraint firstItem="oxU-dP-KQ5" firstAttribute="top" secondItem="Wvl-ip-tmE" secondAttribute="top" id="ZQ7-aS-fsH"/>
+                    <constraint firstItem="vLf-EW-KVQ" firstAttribute="top" secondItem="oxU-dP-KQ5" secondAttribute="bottom" constant="6" id="fNe-I0-Hvt"/>
+                    <constraint firstItem="Wvl-ip-tmE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="iI1-8y-kez"/>
+                    <constraint firstItem="vLf-EW-KVQ" firstAttribute="leading" secondItem="Wvl-ip-tmE" secondAttribute="leading" id="mkU-qP-8Kq"/>
+                    <constraint firstItem="oxU-dP-KQ5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="zAp-pi-bFd"/>
+                    <constraint firstAttribute="trailing" secondItem="qvF-l0-0Y0" secondAttribute="trailing" constant="15" id="zdW-44-yQh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="addAddressLabel" destination="Qv9-1E-Pgq" id="1Ba-Cz-2xw"/>
+                <outlet property="addressLabel" destination="vLf-EW-KVQ" id="gBn-rI-yZj"/>
+                <outlet property="mobileLabel" destination="oxU-dP-KQ5" id="sis-cd-r6P"/>
+                <outlet property="nameLabel" destination="Wvl-ip-tmE" id="E03-Qd-ofj"/>
+                <outlet property="nextImage" destination="qvF-l0-0Y0" id="Kkn-oS-mhp"/>
+            </connections>
+            <point key="canvasLocation" x="294.5" y="243.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="rectangle" width="9" height="16"/>
+    </resources>
+</document>

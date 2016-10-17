@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="WOWRegistInfoSureView" id="iN0-l3-epB" customClass="WOWRegistInfoSureView" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="165"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCJ-cv-Bh4">
+                    <rect key="frame" x="20" y="113" width="560" height="44"/>
+                    <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="JDh-fS-YEw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="下一步">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="填写更多信息让我们更好的了解您" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5CC-Dw-LjL">
+                    <rect key="frame" x="20" y="15" width="165" height="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="5CC-Dw-LjL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="1hn-fo-dtz"/>
+                <constraint firstItem="5CC-Dw-LjL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="K7s-Qa-Hdu"/>
+                <constraint firstAttribute="bottom" secondItem="SCJ-cv-Bh4" secondAttribute="bottom" constant="8" id="OwR-mn-rbl"/>
+                <constraint firstAttribute="trailing" secondItem="SCJ-cv-Bh4" secondAttribute="trailing" constant="20" id="POC-ZT-V9t"/>
+                <constraint firstItem="SCJ-cv-Bh4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="vCN-qx-gmG"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="sureButton" destination="SCJ-cv-Bh4" id="6gg-xb-akU"/>
+                <outlet property="tipsLabel" destination="5CC-Dw-LjL" id="Hnq-1Z-Rjz"/>
+            </connections>
+            <point key="canvasLocation" x="837" y="583.5"/>
+        </view>
+    </objects>
+</document>

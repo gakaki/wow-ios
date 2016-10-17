@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WOWDesignerCell" rowHeight="514" id="KGk-i7-Jjw" customClass="WOWDesignerCell" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="514"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="513.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ME0-zc-DJs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="320" id="X3q-bD-sc6"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="     " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Goa-5O-gLF">
+                        <rect key="frame" x="15" y="335" width="290" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIC-00-FVv">
+                        <rect key="frame" x="15" y="361" width="290" height="137"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QIC-00-FVv" firstAttribute="top" secondItem="Goa-5O-gLF" secondAttribute="bottom" constant="8" id="0YO-dx-LYG"/>
+                    <constraint firstAttribute="bottom" secondItem="QIC-00-FVv" secondAttribute="bottom" priority="999" constant="15" id="1ge-e6-Hxi"/>
+                    <constraint firstAttribute="trailing" secondItem="ME0-zc-DJs" secondAttribute="trailing" id="4l2-2l-US8"/>
+                    <constraint firstAttribute="trailing" secondItem="QIC-00-FVv" secondAttribute="trailing" constant="15" id="CkF-Wz-a0B"/>
+                    <constraint firstItem="Goa-5O-gLF" firstAttribute="top" secondItem="ME0-zc-DJs" secondAttribute="bottom" constant="15" id="HDN-e8-BOa"/>
+                    <constraint firstItem="QIC-00-FVv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="V8H-e2-0FJ"/>
+                    <constraint firstItem="ME0-zc-DJs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YGX-zA-uZ2"/>
+                    <constraint firstItem="Goa-5O-gLF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fPf-3s-r04"/>
+                    <constraint firstAttribute="trailing" secondItem="Goa-5O-gLF" secondAttribute="trailing" constant="15" id="lKm-o4-vrr"/>
+                    <constraint firstItem="ME0-zc-DJs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="u7o-js-91w"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="designerDesLabel" destination="QIC-00-FVv" id="R25-GB-ljj"/>
+                <outlet property="designerImageHeight" destination="X3q-bD-sc6" id="AfC-tL-h6T"/>
+                <outlet property="designerImageView" destination="ME0-zc-DJs" id="Hds-Ib-l6A"/>
+                <outlet property="designerNameLabel" destination="Goa-5O-gLF" id="Mbp-a2-8jd"/>
+            </connections>
+            <point key="canvasLocation" x="479" y="559"/>
+        </tableViewCell>
+    </objects>
+</document>

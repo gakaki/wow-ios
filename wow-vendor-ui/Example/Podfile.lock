@@ -1,0 +1,22 @@
+PODS:
+  - EZSwiftExtensions (1.7)
+  - Kingfisher (3.1.3)
+  - wow-vendor-ui (0.1.0):
+    - EZSwiftExtensions
+    - Kingfisher
+
+DEPENDENCIES:
+  - wow-vendor-ui (from `../`)
+
+EXTERNAL SOURCES:
+  wow-vendor-ui:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EZSwiftExtensions: 4afef248066a036903d8496bf07bc355b22ce766
+  Kingfisher: 007f5851c18c81e7cc106c9cbac1bafea1cce5dc
+  wow-vendor-ui: 995f591940b0eb4c18ad78401e0f1c07bd1d50b8
+
+PODFILE CHECKSUM: 82457c9f0f3e48fd820e7d689c939a15bc22af80
+
+COCOAPODS: 1.1.0.rc.3

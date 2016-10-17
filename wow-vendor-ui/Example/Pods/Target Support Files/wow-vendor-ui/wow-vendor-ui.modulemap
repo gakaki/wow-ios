@@ -1,0 +1,6 @@
+framework module wow_vendor_ui {
+  umbrella header "wow-vendor-ui-umbrella.h"
+
+  export *
+  module * { export * }
+}

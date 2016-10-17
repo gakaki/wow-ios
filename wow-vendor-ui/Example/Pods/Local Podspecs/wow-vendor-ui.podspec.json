@@ -1,0 +1,30 @@
+{
+  "name": "wow-vendor-ui",
+  "version": "0.1.0",
+  "summary": "A short description of wow-vendor-ui.",
+  "description": "wow vendo ui",
+  "homepage": "https://github.com/gakaki/wow-vendor-ui",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gakaki": "gakaki@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/gakaki/wow-vendor-ui.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "wow-vendor-ui/Classes/**/*",
+  "dependencies": {
+    "Kingfisher": [
+
+    ],
+    "EZSwiftExtensions": [
+
+    ]
+  }
+}

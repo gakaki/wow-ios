@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="WOWProductHeaderView" id="iN0-l3-epB" customClass="WOWProductHeaderView" customModule="wowapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bc3-Lr-OLT">
+                    <rect key="frame" x="15" y="14" width="42" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqI-QG-x6y">
+                    <rect key="frame" x="15" y="0.0" width="360" height="0.5"/>
+                    <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="kd6-RU-r33"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="ZJy-uw-ky5">
+                    <rect key="frame" x="15" y="0.0" width="345" height="60"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="xqI-QG-x6y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="AHO-u6-j6F"/>
+                <constraint firstItem="bc3-Lr-OLT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="I37-q7-6rK"/>
+                <constraint firstAttribute="trailing" secondItem="ZJy-uw-ky5" secondAttribute="trailing" constant="15" id="M15-Mf-gSE"/>
+                <constraint firstItem="ZJy-uw-ky5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="SPf-He-L24"/>
+                <constraint firstItem="ZJy-uw-ky5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V1T-Gl-J5W"/>
+                <constraint firstAttribute="bottom" secondItem="ZJy-uw-ky5" secondAttribute="bottom" id="iWx-gD-WWR"/>
+                <constraint firstAttribute="trailing" secondItem="xqI-QG-x6y" secondAttribute="trailing" id="jxd-bY-Lvb"/>
+                <constraint firstItem="bc3-Lr-OLT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="qgf-ow-2XE"/>
+                <constraint firstItem="xqI-QG-x6y" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="u27-JV-oR3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="label" destination="bc3-Lr-OLT" id="dof-KY-hIe"/>
+                <outlet property="lineView" destination="xqI-QG-x6y" id="eId-th-8Mf"/>
+                <outlet property="openImg" destination="ZJy-uw-ky5" id="wUZ-3E-bRx"/>
+            </connections>
+            <point key="canvasLocation" x="246.5" y="469"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="next_arrow" width="9" height="16"/>
+    </resources>
+</document>

@@ -1,0 +1,22 @@
+{
+  "name": "FlexboxLayout",
+  "version": "0.1.0",
+  "summary": "FlexboxLayout for swift",
+  "description": "swift version flexboxlayout",
+  "homepage": "https://github.com/gakaki/FlexboxLayout",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gakaki": "gakaki@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/gakaki/FlexboxLayout.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "FlexboxLayout/Classes/**/*"
+}

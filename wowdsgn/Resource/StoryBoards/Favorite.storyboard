@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="70d-dw-kWz">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Ini-d5-Ktd">
+            <objects>
+                <navigationController id="70d-dw-kWz" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7vY-Bo-D5Y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="pq5-Ec-fe3" kind="relationship" relationship="rootViewController" id="oIs-lb-JYo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CrA-83-8Pf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-35" y="547"/>
+        </scene>
+        <!--我喜欢的-->
+        <scene sceneID="Ieh-JQ-4vO">
+            <objects>
+                <viewController storyboardIdentifier="WOWFavoriteController" id="pq5-Ec-fe3" customClass="WOWFavoriteController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zuN-MM-c4H"/>
+                        <viewControllerLayoutGuide type="bottom" id="KIF-H8-Pof"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pJW-xs-0sq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="我喜欢的" id="bDq-SF-S0f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s9U-F6-NWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="293" y="547"/>
+        </scene>
+        <!--单品-->
+        <scene sceneID="gi0-bU-cFC">
+            <objects>
+                <viewController storyboardIdentifier="WOWFavProduct" hidesBottomBarWhenPushed="YES" id="Fuy-2C-wxh" userLabel="单品" customClass="WOWFavProduct" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RZ0-Rw-Lcu"/>
+                        <viewControllerLayoutGuide type="bottom" id="55t-Ti-MX7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="om0-po-4VD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v7Q-AS-lex">
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CAg-L8-BEw">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Fuy-2C-wxh" id="ISw-5g-pMZ"/>
+                                    <outlet property="delegate" destination="Fuy-2C-wxh" id="jgq-S4-54p"/>
+                                    <outlet property="emptyDataSetDelegate" destination="Fuy-2C-wxh" id="sv9-Xm-BJO"/>
+                                    <outlet property="emptyDataSetSource" destination="Fuy-2C-wxh" id="wPd-CK-Ms6"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="55t-Ti-MX7" firstAttribute="top" secondItem="v7Q-AS-lex" secondAttribute="bottom" id="3io-8C-n1G"/>
+                            <constraint firstAttribute="trailing" secondItem="v7Q-AS-lex" secondAttribute="trailing" id="EIi-am-WMb"/>
+                            <constraint firstItem="v7Q-AS-lex" firstAttribute="leading" secondItem="om0-po-4VD" secondAttribute="leading" id="ISe-bX-z8X"/>
+                            <constraint firstItem="v7Q-AS-lex" firstAttribute="top" secondItem="om0-po-4VD" secondAttribute="top" id="Xzb-kV-UG6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="v7Q-AS-lex" id="hU9-2g-tfx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aah-3s-fyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="628" y="530"/>
+        </scene>
+        <!--品牌-->
+        <scene sceneID="qPq-EV-42j">
+            <objects>
+                <viewController storyboardIdentifier="WOWFavBrand" hidesBottomBarWhenPushed="YES" id="xuv-6Z-SnT" userLabel="品牌" customClass="WOWFavBrand" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aid-ZT-c99"/>
+                        <viewControllerLayoutGuide type="bottom" id="Msz-fi-hcV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m1W-jK-bJh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wkc-GX-Ce9">
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6ku-L7-Oqv">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="prefetchDataSource" destination="xuv-6Z-SnT" id="4A8-Sw-CEN"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Msz-fi-hcV" firstAttribute="top" secondItem="wkc-GX-Ce9" secondAttribute="bottom" id="4ym-FV-rwt"/>
+                            <constraint firstItem="wkc-GX-Ce9" firstAttribute="leading" secondItem="m1W-jK-bJh" secondAttribute="leading" id="QF2-FG-QOM"/>
+                            <constraint firstAttribute="trailing" secondItem="wkc-GX-Ce9" secondAttribute="trailing" id="hsS-bV-Vfm"/>
+                            <constraint firstItem="wkc-GX-Ce9" firstAttribute="top" secondItem="m1W-jK-bJh" secondAttribute="top" id="qua-5R-unM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="wkc-GX-Ce9" id="m0Z-L2-Qe0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bi9-5c-GaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1053" y="587"/>
+        </scene>
+        <!--设计师-->
+        <scene sceneID="1W9-IC-LPh">
+            <objects>
+                <viewController storyboardIdentifier="WOWFavDesigner" hidesBottomBarWhenPushed="YES" id="EUw-Xk-tIp" userLabel="设计师" customClass="WOWFavDesigner" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hDd-fj-eKr"/>
+                        <viewControllerLayoutGuide type="bottom" id="Nx6-NT-ZQf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ldN-I2-S47">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vtv-TV-Jk3">
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="X5I-0W-4Oh">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EUw-Xk-tIp" id="LKI-Nd-J1B"/>
+                                    <outlet property="delegate" destination="EUw-Xk-tIp" id="YF9-cp-A0R"/>
+                                    <outlet property="emptyDataSetDelegate" destination="EUw-Xk-tIp" id="pR3-Xt-g6E"/>
+                                    <outlet property="emptyDataSetSource" destination="EUw-Xk-tIp" id="KOI-OR-rnw"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Nx6-NT-ZQf" firstAttribute="top" secondItem="Vtv-TV-Jk3" secondAttribute="bottom" id="2UG-cH-uRu"/>
+                            <constraint firstItem="Vtv-TV-Jk3" firstAttribute="leading" secondItem="ldN-I2-S47" secondAttribute="leading" id="6K4-Lu-OOJ"/>
+                            <constraint firstItem="Vtv-TV-Jk3" firstAttribute="top" secondItem="ldN-I2-S47" secondAttribute="top" id="9bi-Pa-cBc"/>
+                            <constraint firstAttribute="trailing" secondItem="Vtv-TV-Jk3" secondAttribute="trailing" id="InW-PI-hME"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Vtv-TV-Jk3" id="uMp-H9-vER"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFH-Um-Fk2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="866" y="530"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>

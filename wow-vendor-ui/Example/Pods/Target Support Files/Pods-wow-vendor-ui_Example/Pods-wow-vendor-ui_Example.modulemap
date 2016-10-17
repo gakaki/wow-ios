@@ -1,0 +1,6 @@
+framework module Pods_wow_vendor_ui_Example {
+  umbrella header "Pods-wow-vendor-ui_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

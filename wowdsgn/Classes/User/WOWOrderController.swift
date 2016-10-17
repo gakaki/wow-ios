@@ -200,7 +200,7 @@ extension WOWOrderController:OrderCellDelegate{
                             order?.addItem(withCategory: "", name:      m.name, unitPrice: price, amount: total)
                             order?.addItem(withCategory: "", itemId:    order_id, name: "", unitPrice: price, amount: total)
                         }
-                        TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: "weixin" , withOrder:order)
+                        TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: "weixin" , with:order)
                         
 
                         

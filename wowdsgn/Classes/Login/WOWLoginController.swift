@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UMSocialNetwork
 class WOWLoginController: WOWBaseViewController {
     @IBOutlet weak var wechatButton: UIButton!
     @IBOutlet weak var accountTextField: UITextField!

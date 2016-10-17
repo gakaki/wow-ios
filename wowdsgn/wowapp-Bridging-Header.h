@@ -25,6 +25,8 @@
 @import wow_vendor_ui;
 @import XZMRefresh;
 @import FMDB;
+@import UMSocialCore;
+
 
 //#import "JPPlayground.h"
 //#import "GYHttpMock.h"
@@ -59,10 +61,13 @@
 
 
 //友盟
-#import "UMSocial.h"
+#import <UMSocialCore/UMSocialCore.h>
+//#import <UMSocialCore/UMSocialUIManager.h>
+//#import "UMSocialUIManager.h"
+
 #import <UMMobClick/MobClick.h>
-#import "UMSocialWechatHandler.h"
-#import "UMSocialQQHandler.h"
+//#import "UMSocialWechatHandler.h"
+//#import "UMSocialQQHandler.h"
 
 //#import "DACircularProgressView.h"
 

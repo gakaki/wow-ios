@@ -8,6 +8,7 @@
 
 import Foundation
 //import MonkeyKing
+
 struct WOWShareManager {
     
     static let vc = UIApplication.currentViewController()

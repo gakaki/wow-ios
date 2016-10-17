@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        UMSocialSnsService.applicationDidBecomeActive()
+//        UMSocialSnsService.applicationDidBecomeActive()
     }
     
     
@@ -130,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        if MonkeyKing.handleOpenURL(url) {
 //            return true
 //        }
-        if UMSocialSnsService.handleOpen(url) {
+        if UMSocialManager.default().handleOpen(url){
             return true
         }
         return true
@@ -139,7 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // iOS 9 以上请用这个
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         Pingpp.handleOpen(url, withCompletion: nil)
-        UMSocialSnsService.handleOpen(url)
+        UMSocialManager.default().handleOpen(url)
         
         //growing io
         if Growing.handle(url) {
@@ -248,9 +248,10 @@ extension AppDelegate{
         MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
         
-        UMSocialData.setAppKey(WOWID.UMeng.appID)
-        UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
-   
+        UMSocialManager.default().umSocialAppkey = WOWID.UMeng.appID
+        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatSession, appKey: "wxdc1e388c3822c80b", appSecret: "3baf1193c85774b3fd9d18447d76cab0", redirectURL: "http://mobile.umeng.com/social")
+
+//   
 
         //Growing
         Growing.start(withAccountId: "a04e14656f08dc7e")

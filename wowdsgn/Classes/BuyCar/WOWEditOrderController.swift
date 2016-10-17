@@ -213,7 +213,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
                 
-                let sum                  = Int32(totalAmout)!
+                let sum                  = Int32(totalAmout) ?? 0
                 let order_id             = strongSelf.orderCode
                 
                 let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")

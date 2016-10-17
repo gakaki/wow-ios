@@ -881,6 +881,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
 				0681214E1DB4D03600407319 /* libSocialQQ.a in Frameworks */,
 				069D2F741DB4793300A059D0 /* libz.tbd in Frameworks */,
 				0681215D1DB4D03700407319 /* libWeChatSDK.a in Frameworks */,
@@ -897,7 +898,6 @@
 				065722F71DB4BF4700781B1C /* libTalkingDataAppCpa.a in Frameworks */,
 				069D2F7A1DB4794C00A059D0 /* CoreGraphics.framework in Frameworks */,
 				069D2F781DB4794400A059D0 /* libstdc++.tbd in Frameworks */,
-				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
 				069D2F721DB4792E00A059D0 /* JavaScriptCore.framework in Frameworks */,
 				069D2F701DB4792300A059D0 /* libicucore.tbd in Frameworks */,
 				069D2F6E1DB4791600A059D0 /* AdSupport.framework in Frameworks */,

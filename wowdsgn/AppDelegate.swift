@@ -251,6 +251,7 @@ extension AppDelegate{
         UMSocialData.setAppKey(WOWID.UMeng.appID)
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
    
+        WXApi.registerApp(WOWID.Wechat.appID)
 
         //Growing
         Growing.start(withAccountId: "a04e14656f08dc7e")
@@ -355,7 +356,6 @@ extension AppDelegate: AdLaunchViewDelegate {
 //        }
         
     }
-    
     
     func fetchADImage(){
         

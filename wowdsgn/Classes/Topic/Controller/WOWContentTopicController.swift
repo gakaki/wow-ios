@@ -97,12 +97,12 @@ class WOWContentTopicController: WOWBaseViewController {
         super.setUI()
         configTable()
         configBarItem()
-        configBarItem()
     }
 
     //初始化数据，商品banner
     fileprivate func configData(){
-        
+        configBarItem()
+
         //如果相关商品有数据显示。如果没有数据则不显示
         if vo_products.count > 0 {
             //详情页共分为7组数据

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import UMSocialNetwork
 class WOWLoginController: WOWBaseViewController {
     @IBOutlet weak var wechatButton: UIButton!
     @IBOutlet weak var accountTextField: UITextField!
@@ -138,9 +138,9 @@ class WOWLoginController: WOWBaseViewController {
 
 
 //MARK:Delegate
-extension WOWLoginController:UMSocialUIDelegate{
-    
-}
+//extension WOWLoginController:UMSocialUIDelegate{
+//    
+//}
 
 extension WOWLoginController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -100,8 +100,8 @@ class WOWUserTopView: UIView {
         loginLabel.snp.makeConstraints { (make) in
             if let _ = weakSelf{
                 make.left.equalTo(headImageView.snp.right).offset(8)
-                make.centerY.equalTo(topContainerView.centerY).offset(0)
-                make.right.lessThanOrEqualTo(topContainerView.right).offset(-15)
+                make.centerY.equalTo(topContainerView.snp.centerY).offset(0)
+                make.right.lessThanOrEqualTo(topContainerView.snp.right).offset(-15)
             }
         }
         

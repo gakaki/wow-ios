@@ -117,7 +117,7 @@ class TooglePriceBtn:UIButton {
         self.addTarget(self, action:#selector(btnTouchInside), for:UIControlEvents.touchUpInside)
 
         
-        self.upDown = true
+        self.upDown = false
         
     }
     

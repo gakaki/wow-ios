@@ -420,6 +420,8 @@
 		069D33D51DB4828D00A059D0 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 069D33B91DB4828D00A059D0 /* UMSocialSDKResourcesNew.bundle */; };
 		069D33D61DB4828D00A059D0 /* UMSShareListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069D33BE1DB4828D00A059D0 /* UMSShareListController.xib */; };
 		069D33D71DB4828D00A059D0 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 069D33C21DB4828D00A059D0 /* UMSocialLocalizable.strings */; };
+		069D33DA1DB4931200A059D0 /* libTalkingDataAppCpa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 069D33D81DB4931200A059D0 /* libTalkingDataAppCpa.a */; };
+		069D33DB1DB4942900A059D0 /* TalkingDataAppCpa.h in Sources */ = {isa = PBXBuildFile; fileRef = 069D33D91DB4931200A059D0 /* TalkingDataAppCpa.h */; };
 		458523D0F557C0CFD1003B89 /* Pods_wowdsgn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D22051AC3698C3AAC002B1 /* Pods_wowdsgn.framework */; };
 /* End PBXBuildFile section */
 
@@ -866,6 +868,8 @@
 		069D33C01DB4828D00A059D0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		069D33C11DB4828D00A059D0 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		069D33C31DB4828D00A059D0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMSocialLocalizable.strings"; sourceTree = "<group>"; };
+		069D33D81DB4931200A059D0 /* libTalkingDataAppCpa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTalkingDataAppCpa.a; sourceTree = "<group>"; };
+		069D33D91DB4931200A059D0 /* TalkingDataAppCpa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataAppCpa.h; sourceTree = "<group>"; };
 		215C6F175F8DEB1B0D61D6FA /* Pods-wowdsgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.release.xcconfig"; sourceTree = "<group>"; };
 		42D22051AC3698C3AAC002B1 /* Pods_wowdsgn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowdsgn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD449CB28CB16A176F60958 /* Pods-wowdsgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -876,9 +880,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069D33DA1DB4931200A059D0 /* libTalkingDataAppCpa.a in Frameworks */,
+				069D2F741DB4793300A059D0 /* libz.tbd in Frameworks */,
+				069D2F841DB4796D00A059D0 /* SystemConfiguration.framework in Frameworks */,
 				069D33C71DB4828D00A059D0 /* libSocialQQ.a in Frameworks */,
 				069D33CA1DB4828D00A059D0 /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
-				069D2F841DB4796D00A059D0 /* SystemConfiguration.framework in Frameworks */,
 				069D33C91DB4828D00A059D0 /* libTalkingData.a in Frameworks */,
 				069D2F821DB4796800A059D0 /* ImageIO.framework in Frameworks */,
 				069D2F801DB4796200A059D0 /* Security.framework in Frameworks */,
@@ -891,7 +897,6 @@
 				069D33C61DB4828D00A059D0 /* libGrowing.a in Frameworks */,
 				069D2F781DB4794400A059D0 /* libstdc++.tbd in Frameworks */,
 				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
-				069D2F741DB4793300A059D0 /* libz.tbd in Frameworks */,
 				069D2F721DB4792E00A059D0 /* JavaScriptCore.framework in Frameworks */,
 				069D33CB1DB4828D00A059D0 /* libWeChatSDK.a in Frameworks */,
 				069D2F701DB4792300A059D0 /* libicucore.tbd in Frameworks */,
@@ -1744,6 +1749,8 @@
 		069D33991DB4828D00A059D0 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				069D33D81DB4931200A059D0 /* libTalkingDataAppCpa.a */,
+				069D33D91DB4931200A059D0 /* TalkingDataAppCpa.h */,
 				069D339A1DB4828D00A059D0 /* DeepShare.h */,
 				069D339B1DB4828D00A059D0 /* DSError.h */,
 				069D339C1DB4828D00A059D0 /* Growing.h */,
@@ -2210,6 +2217,7 @@
 				069D326A1DB47ADD00A059D0 /* WOWGoodsController.swift in Sources */,
 				069D32AA1DB47ADD00A059D0 /* WOWAddressBottomView.swift in Sources */,
 				069D32581DB47ADD00A059D0 /* WOWAttributeModel.swift in Sources */,
+				069D33DB1DB4942900A059D0 /* TalkingDataAppCpa.h in Sources */,
 				069D31B31DB47ADD00A059D0 /* WOWBuyCarRequestVo.swift in Sources */,
 				069D33221DB47ADE00A059D0 /* TagCellLayout+Helper.swift in Sources */,
 				069D32F21DB47ADD00A059D0 /* String+Add.swift in Sources */,

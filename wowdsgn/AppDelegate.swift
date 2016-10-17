@@ -253,7 +253,7 @@ extension AppDelegate{
         TalkingData.sessionStarted("88C9035CD51E8009BE4441263D83003A", withChannelId: "app store")
         
         //Talking Data ADTracking
-//        Talk
+//        TalkingDataAppCpa.initWithAppID(
         
 //        //MonkeyKing
 //        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))

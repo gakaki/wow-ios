@@ -48,7 +48,7 @@
 #import "TalkingDataSMS.h"
 
 #import "UICollectionViewLeftAlignedLayout.h"
-
+#import "TalkingDataAppCpa.h"
 
 //Leancloud
 //#import <AVOSCloud/AVOSCloud.h>

@@ -200,13 +200,20 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         configDefaultData()
 
     }
-    
+    lazy var layout: UICollectionViewLeftAlignedLayout = {
+        let layout = UICollectionViewLeftAlignedLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+        layout.minimumInteritemSpacing = 15
+        layout.minimumLineSpacing = 15
+        return layout
+        
+    }()
 
 //MARK:Private Method
     func defaultSetup() {
         
         //设置布局
-        collectionView.setCollectionViewLayout(WOWProductSpecLayout(), animated: true)
+        collectionView.setCollectionViewLayout(layout, animated: true)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib.nibName(String(describing: WOWSearchCell.self)), forCellWithReuseIdentifier: "WOWSearchCell")

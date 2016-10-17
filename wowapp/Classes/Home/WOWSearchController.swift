@@ -115,7 +115,14 @@ class WOWSearchController: WOWBaseViewController {
         return view
 
     }()
-
+    
+    lazy var layout: UICollectionViewLeftAlignedLayout = {
+        let layout = UICollectionViewLeftAlignedLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 10
+        return layout
+        
+    }()
 
 //MARK:Private Method
     override func setUI() {
@@ -131,7 +138,7 @@ class WOWSearchController: WOWBaseViewController {
         
         
         //设置布局
-        collectionView.setCollectionViewLayout(WOWSearchLayout(), animated: true)
+        collectionView.setCollectionViewLayout(layout, animated: true)
         
         collectionView.register(UINib.nibName(String(describing: WOWSearchCell.self)), forCellWithReuseIdentifier: "WOWSearchCell")
         
@@ -498,7 +505,7 @@ extension WOWSearchController:VTMagicViewDelegate{
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
 //            let query_cid          = ob_cid.value
-            var query_asc          = 1
+            var query_asc          = 0
             if ( tab_index == 2){ //价格的话用他的排序 其他 正常升序
                 if b.asc {
                     query_asc = 1
@@ -506,7 +513,7 @@ extension WOWSearchController:VTMagicViewDelegate{
                     query_asc = 0
                 }
             }else{
-                query_asc          = 1
+                query_asc          = 0
             }
             
             vc.pageVc        = query_sortBy

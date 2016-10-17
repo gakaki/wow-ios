@@ -52,7 +52,7 @@ class IPManager {
             
             if ip.contains("var returnCitySN = ") {
                 //对字符串进行处理，只要后面json那段
-                ip = ip[ip.getIndexOf("=")!...ip.getIndexOf(";")!]
+                ip = ip[ip.getIndexOf("{")!...ip.getIndexOf("}")!]
 
                 //将字符串转换成二进制进行Json解析
                 let data: Data = ip.data(using: String.Encoding.utf8)!

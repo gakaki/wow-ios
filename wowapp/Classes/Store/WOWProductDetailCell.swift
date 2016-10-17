@@ -56,6 +56,8 @@ class WOWProductDetailCell: UITableViewCell {
             imgDescLabel.text = secondaryImg.text
             if secondaryImg.text == "" {
                 space.constant = 0
+            }else {
+                space.constant = 15
             }
             imgDescLabel.setLineHeightAndLineBreak(1.5)
         }

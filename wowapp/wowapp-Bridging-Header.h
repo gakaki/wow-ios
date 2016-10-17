@@ -48,7 +48,7 @@
 #import "TalkingData.h"
 #import "TalkingDataSMS.h"
 
-
+#import "UICollectionViewLeftAlignedLayout.h"
 
 
 //Leancloud

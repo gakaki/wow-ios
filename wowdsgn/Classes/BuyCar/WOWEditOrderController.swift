@@ -215,7 +215,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 
                 let sum                  = Int(totalAmout)
                 let order_id             = strongSelf.orderCode
-                let order                = TDOrder.orderWithOrderId(order_id,total:sum , currencyType:"CNY")
+//                let order                = TDOrder.orderWithOrderId(order_id,total:sum , currencyType:"CNY")
                 
 
             }

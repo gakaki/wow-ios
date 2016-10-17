@@ -69,7 +69,7 @@ class WOWProductDetailController: WOWBaseViewController {
         request()
         addObservers()
         
-        
+
       }
 
     override func didReceiveMemoryWarning() {

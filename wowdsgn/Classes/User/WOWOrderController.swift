@@ -183,11 +183,30 @@ extension WOWOrderController:OrderCellDelegate{
     }
     
     //支付
-    fileprivate func payOrder(_ orderID:String,model:WOWOrderListModel){
+    public func payOrder(_ orderID:String,model:WOWOrderListModel){
         if let charge = model.charge {
             Pingpp.createPayment(charge as! NSObject, appURLScheme: WOWDSGNSCHEME, withCompletion: {[weak self] (ret, error) in
                 if let strongSelf = self{
                     if ret == "success"{ //支付成功
+                        
+                        
+                        //TalkingData 支付成功
+                        
+//                        let order = TDOrder.
+//                        TDOrder *order = [TDOrder orderWithOrderId:@"your_orderId" total:order_total currencyType:@"currency_type"];
+//                        [order addItemWithCategory:@"item_category" name:@"item_name" unitPrice:item_unitPrice amount:item_count];
+//                        [order addItemWithCategory:@"item_category" itemId:@"item_id" name:@"item_name" unitPrice:item_unitPrice amount:item_count];
+//                        [TalkingDataAppCpa onPay:@"Your_userId" withOrderId:@"your_orderId" withAmount:order_amount withCurrencyType:@"currency_type" withPayType:@"pay_type" withOrder:order];
+                        
+//                        let sum                  = Int32(totalAmout)!
+//                        let order_id             = strongSelf.orderCode
+//                        
+//                        let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
+//                        order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
+//                        order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
+//                        TalkingDataAppCpa.onPay(WOWUserManager.userID, with: order)
+                        
+                        
                         strongSelf.request()
                     }else{//订单支付取消或者失败
                         if ret == "fail"{

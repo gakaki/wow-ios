@@ -124,7 +124,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        
+        //TalkingData ADTracking
+        TalkingDataAppCpa.onReceiveDeepLink(url)
+            
 //        if MonkeyKing.handleOpenURL(url) {
 //            return true
 //        }
@@ -139,7 +141,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Pingpp.handleOpen(url, withCompletion: nil)
         UMSocialSnsService.handleOpen(url)
         
-        
         //growing io
         if Growing.handle(url) {
             return true
@@ -150,11 +151,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
+        //TalkingData ADTracking
+        TalkingDataAppCpa.onReceiveDeepLink(url)
         return true
     }
     
     
-    
+    func application(_ app: UIApplication, _ userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+        TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
+        return true
+    }
+
 }
 
 
@@ -253,7 +260,7 @@ extension AppDelegate{
         TalkingData.sessionStarted("88C9035CD51E8009BE4441263D83003A", withChannelId: "app store")
         
         //Talking Data ADTracking
-//        TalkingDataAppCpa.initWithAppID(
+        TalkingDataAppCpa.init("e81f26ce70664a9dab698bae55be2044", withChannelId: "AppStore")
         
 //        //MonkeyKing
 //        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))

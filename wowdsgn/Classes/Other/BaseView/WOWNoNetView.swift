@@ -24,7 +24,7 @@ class WOWNoNetView: UIView {
         self.addSubview(self.btnRefresh)
         self.imgBack.snp.makeConstraints { [weak self](make) in
             if let strongSelf = self {
-                make.centerX.equalTo(strongSelf.centerX)
+                make.centerX.equalTo(strongSelf.snp.centerX).offset(0)
                 make.width.equalTo(49)
                 make.height.equalTo(63)
                 make.top.equalTo(strongSelf).offset(150)
@@ -32,7 +32,7 @@ class WOWNoNetView: UIView {
         }
         self.lbTitle.snp.makeConstraints { [weak self](make) in
             if let strongSelf = self {
-                make.centerX.equalTo(strongSelf.centerX)
+                make.centerX.equalTo(strongSelf.snp.centerX).offset(0)
                 make.width.equalTo(320)
                 make.height.equalTo(21)
                 make.top.equalTo(strongSelf.imgBack).offset(83)
@@ -41,7 +41,7 @@ class WOWNoNetView: UIView {
         
         self.btnRefresh.snp.makeConstraints { [weak self](make) in
             if let strongSelf = self {
-                make.centerX.equalTo(strongSelf.centerX)
+                make.centerX.equalTo(strongSelf.snp.centerX).offset(0)
                 make.width.equalTo(80)
                 make.height.equalTo(35)
                 make.top.equalTo(strongSelf.lbTitle).offset(45)

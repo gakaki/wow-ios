@@ -195,8 +195,8 @@ extension WOWOrderController:OrderCellDelegate{
                         
                         let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
                         for m:WOWOrderProductModel in model.products! {
-                            let price = Int32(m.price ?? 0 )
-                            let total = Int32(m.total ?? 0 )
+                            let price = Int32(m.price ?? "0" ) ?? 0
+                            let total = Int32(m.total ?? "0" ) ?? 0
                             order?.addItem(withCategory: "", name:      m.name, unitPrice: price, amount: total)
                             order?.addItem(withCategory: "", itemId:    order_id, name: "", unitPrice: price, amount: total)
                         }

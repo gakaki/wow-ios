@@ -119,7 +119,13 @@ class WOWLoginController: WOWBaseViewController {
                 
                 let model = Mapper<WOWUserModel>().map(JSONObject:result)
                 WOWUserManager.saveUserInfo(model)
+                
+                TalkingDataAppCpa.onLogin(phone)
+                
                 strongSelf.toLoginSuccess(strongSelf.isPresent)
+                
+                
+                
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{

@@ -157,7 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func application(_ app: UIApplication, _ userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+    func application(_ app: UIApplication, _ userActivity: NSUserActivity,  restorationHandler: @escaping ([AnyObject]?) -> Void) -> Bool {
         TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
         return true
     }

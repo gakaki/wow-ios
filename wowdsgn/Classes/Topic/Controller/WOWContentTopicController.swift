@@ -101,6 +101,8 @@ class WOWContentTopicController: WOWBaseViewController {
 
     //初始化数据，商品banner
     fileprivate func configData(){
+        configBarItem()
+
         //如果相关商品有数据显示。如果没有数据则不显示
         if vo_products.count > 0 {
             //详情页共分为7组数据
@@ -201,7 +203,8 @@ class WOWContentTopicController: WOWBaseViewController {
 
                 strongSelf.reloadNagationItemThumbButton(strongSelf.vo_topic!.favorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
 
-                
+              
+
                 strongSelf.requestAboutProduct()
             }
             
@@ -221,6 +224,7 @@ class WOWContentTopicController: WOWBaseViewController {
                 //初始化详情页数据
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
+                
                 strongSelf.endRefresh()
             }
             

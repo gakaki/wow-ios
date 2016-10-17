@@ -50,13 +50,13 @@ extension UIImageView {
                     
                     let url_str = url.absoluteString
                     if ( from_type == YYWebImageFromType.remote ||  from_type == YYWebImageFromType.none ){
-                        DLog("image url is \(url_str),from remote or none,\(image_stage)")
+//                        DLog("image url is \(url_str),from remote or none,\(image_stage)")
                     }
 
             })
             
         }catch let e {
-            DLog(e)
+//            DLog(e)
         }
      }
     

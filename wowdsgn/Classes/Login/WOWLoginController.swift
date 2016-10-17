@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class WOWLoginController: WOWBaseViewController {
     @IBOutlet weak var wechatButton: UIButton!
     @IBOutlet weak var accountTextField: UITextField!
@@ -119,7 +118,13 @@ class WOWLoginController: WOWBaseViewController {
                 
                 let model = Mapper<WOWUserModel>().map(JSONObject:result)
                 WOWUserManager.saveUserInfo(model)
+                
+                TalkingDataAppCpa.onLogin(phone)
+                
                 strongSelf.toLoginSuccess(strongSelf.isPresent)
+                
+                
+                
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
@@ -132,9 +137,9 @@ class WOWLoginController: WOWBaseViewController {
 
 
 //MARK:Delegate
-extension WOWLoginController:UMSocialUIDelegate{
-    
-}
+//extension WOWLoginController:UMSocialUIDelegate{
+//    
+//}
 
 extension WOWLoginController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -144,6 +144,9 @@ class WOWRegistController: WOWBaseViewController {
                     //暂时保存一下手机号
                     WOWUserManager.userMobile = strongSelf.phoneTextField.text!
                     
+                    
+                    TalkingDataAppCpa.onRegister(strongSelf.phoneTextField.text!)
+
                 let newUser = JSON(result)["newUser"].int
                     //判断如果是新用户的话就去填写资料，如果不是的话就登录成功
                     if newUser == 0 {

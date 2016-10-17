@@ -68,8 +68,11 @@ class WOWFavDesigner: WOWBaseViewController {
     fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.register(UINib.nibName(String(describing: WOWFavoriteBrandCell.self)), forCellWithReuseIdentifier:"WOWFavoriteBrandCell")
-        
+        collectionView.emptyDataSetDelegate = self
+        collectionView.emptyDataSetSource = self
         
     }
     

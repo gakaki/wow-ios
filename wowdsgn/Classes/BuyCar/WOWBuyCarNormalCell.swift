@@ -7,25 +7,6 @@
 //
 
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l <= r
-  default:
-    return !(rhs < lhs)
-  }
-}
 
 
 protocol buyCarDelegate: class {
@@ -93,7 +74,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
             addCountButton.isEnabled = false
             addCountButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
         }
-        if model.productQty <= 1 {
+        if model.productQty! <= 1 {
             subCountButton.isEnabled = false
             subCountButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
         }else {

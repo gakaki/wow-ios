@@ -213,7 +213,13 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
                 
-//                let talkingData_ad_order = TDOrder.orderWithOrderId(strongSelf.orderCode,total:totalAmout as Int!,currencyType:"CNY")
+                let sum                  = Int32(totalAmout)!
+                let order_id             = strongSelf.orderCode
+                
+                let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
+                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
+                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
+                TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
 
             }
             

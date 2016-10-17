@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="WOWTopicNavigationItem" id="iN0-l3-epB" customClass="WOWTopicNavigationItem" customModule="wowapp" customModuleProvider="target">
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="WOWTopicNavigationItem" id="iN0-l3-epB" customClass="WOWTopicNavigationItem" customModule="wowdsgn" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="133" height="35"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBu-Mb-evA" customClass="MIBadgeButton" customModule="wowapp" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBu-Mb-evA" customClass="MIBadgeButton" customModule="wow_vendor_ui">
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="BhJ-N3-vEX"/>
                         <constraint firstAttribute="height" constant="35" id="wWL-A7-veo"/>
@@ -60,7 +60,7 @@
                 <outlet property="shareButton" destination="oHO-Fa-i1e" id="fWJ-xs-VXk"/>
                 <outlet property="thumbButton" destination="PzQ-58-Zq4" id="i43-IE-9ov"/>
             </connections>
-            <point key="canvasLocation" x="215" y="25.5"/>
+            <point key="canvasLocation" x="165" y="26"/>
         </view>
     </objects>
     <resources>

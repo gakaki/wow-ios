@@ -124,13 +124,20 @@ extension  UIViewController {
                 DLog(json)
                 isOpenIdBinded = JSON(result)["isOpenIdBinded"].bool ?? true
                 
+                
                 if isOpenIdBinded {
                     //FIXME:未写的，先保存用户信息
                     let model = Mapper<WOWUserModel>().map(JSONObject:result)
                     WOWUserManager.saveUserInfo(model)
+                    
+                    TalkingDataAppCpa.onLogin("wechatUser_\(123123213123)")
+
                     strongSelf.toLoginSuccess(isPresent)
                     
                 }else{ //第一次登陆
+                    
+                    TalkingDataAppCpa.onLogin("wechatUser_\(123123213123)")
+
                     strongSelf.toRegVC(true,isPresent: isPresent,userInfoFromWechat: userData)
                 }
             }

@@ -49,7 +49,7 @@ class WOWProductDetailCell: UITableViewCell {
                 productImg.updateConstraints()
 
                 productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
-                
+                space.constant = 15
             }else {
                 space.constant = 0
             }

@@ -9,7 +9,7 @@
 import UIKit
 import wow_vendor_ui
 
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+public func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -20,7 +20,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+public func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r
@@ -38,7 +38,7 @@ class WOWProductDetailController: WOWBaseViewController {
     var aboutProductArray               = [WOWProductModel]()
     
     var noMoreData                      :Bool = true
-    fileprivate(set) var numberSections = 0
+    public var numberSections = 0
     let pageSize = 6
     //UI
     @IBOutlet weak var tableView: UITableView!
@@ -49,7 +49,7 @@ class WOWProductDetailController: WOWBaseViewController {
     var isOpenParam: Bool = false
     //是否展开温馨提示
     var isOpenTips: Bool = false
-    fileprivate var shareProductImage:UIImage? //供分享使用
+    public var shareProductImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
         let image = UIImageView()
         return image
@@ -68,7 +68,9 @@ class WOWProductDetailController: WOWBaseViewController {
         super.viewDidLoad()
         request()
         addObservers()
-    }
+        
+
+      }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -293,6 +295,15 @@ class WOWProductDetailController: WOWBaseViewController {
                 
                 strongSelf.requestAboutProduct()
                 strongSelf.buyCarCount()
+                
+                //Talking Data order detail 浏览商品 clear
+                let price   =  strongSelf.productModel?.sellPrice ?? 0
+                let id      =  String(describing:strongSelf.productId)
+                let name    =  strongSelf.productModel?.productName
+                TalkingDataAppCpa.onViewItem(withCategory: "", itemId: id, name: name, unitPrice:Int32(price))
+  
+                
+
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
@@ -414,10 +425,23 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         backView.hideBuyView()
         if let product = product {
             
-            WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self] (result) in
+            var c = product.productQty ?? 1
+            
+            WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.subProductId ?? 0, productQty:c), successClosure: {[weak self] (result) in
                 if let strongSelf = self {
                     strongSelf.updateCarBadge(product.productQty ?? 1)
                 }
+                
+                //查看购物车
+                let id      = String(describing:product.subProductId)
+                let price   = Int32(product.sellPrice!)
+                
+                let shoppingCart = TDShoppingCart.create()
+                shoppingCart?.addItem(withCategory: "", itemId: id, name: "", unitPrice: price, amount: Int32(c))
+                TalkingDataAppCpa.onViewShoppingCart(shoppingCart)
+               
+                
+                
                 
             }) { (errorMsg) in
                 

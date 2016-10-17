@@ -434,7 +434,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
                 
                 //查看购物车
                 let id      = String(describing:product.subProductId)
-                let price   = Int32(product.sellPrice!)
+                let price   = Int32(product.sellPrice ?? 0)
                 
                 let shoppingCart = TDShoppingCart.create()
                 shoppingCart?.addItem(withCategory: "", itemId: id, name: "", unitPrice: price, amount: Int32(c))

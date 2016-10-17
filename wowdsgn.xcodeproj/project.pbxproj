@@ -13,17 +13,6 @@
 		065722F51DB4BF4700781B1C /* libSocialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E31DB4BF4700781B1C /* libSocialWeChat.a */; };
 		065722F61DB4BF4700781B1C /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E41DB4BF4700781B1C /* libTalkingData.a */; };
 		065722F71DB4BF4700781B1C /* libTalkingDataAppCpa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E51DB4BF4700781B1C /* libTalkingDataAppCpa.a */; };
-		065723391DB4C02000781B1C /* libSocialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0657231B1DB4C02000781B1C /* libSocialWeChat.a */; };
-		0657233A1DB4C02000781B1C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0657231C1DB4C02000781B1C /* libWeChatSDK.a */; };
-		0657233B1DB4C02000781B1C /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0657231D1DB4C02000781B1C /* read_me.txt */; };
-		0657233C1DB4C02000781B1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0657231E1DB4C02000781B1C /* README.txt */; };
-		0657233D1DB4C02000781B1C /* UMSocialCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065723241DB4C02000781B1C /* UMSocialCore.framework */; };
-		0657233E1DB4C02000781B1C /* UMSocialNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065723251DB4C02000781B1C /* UMSocialNetwork.framework */; };
-		0657233F1DB4C02000781B1C /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 065723281DB4C02000781B1C /* UMSocialSDKResources.bundle */; };
-		065723401DB4C02000781B1C /* UMShareMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0657232A1DB4C02000781B1C /* UMShareMenuItem.m */; };
-		065723411DB4C02000781B1C /* UMShareMenuSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0657232C1DB4C02000781B1C /* UMShareMenuSelectionView.m */; };
-		065723421DB4C02000781B1C /* UMSocialShareScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0657232E1DB4C02000781B1C /* UMSocialShareScrollView.m */; };
-		065723431DB4C02000781B1C /* UMSocialUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 065723301DB4C02000781B1C /* UMSocialUIManager.m */; };
 		069D2F581DB46AD100A059D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D2F571DB46AD100A059D0 /* AppDelegate.swift */; };
 		069D2F5F1DB46AD100A059D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 069D2F5E1DB46AD100A059D0 /* Assets.xcassets */; };
 		069D2F6A1DB4790C00A059D0 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069D2F691DB4790C00A059D0 /* SafariServices.framework */; };
@@ -433,25 +422,6 @@
 		065722E91DB4BF4700781B1C /* TalkingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingData.h; sourceTree = "<group>"; };
 		065722EA1DB4BF4700781B1C /* TalkingDataAppCpa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataAppCpa.h; sourceTree = "<group>"; };
 		065722EB1DB4BF4700781B1C /* TalkingDataSMS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataSMS.h; sourceTree = "<group>"; };
-		0657231B1DB4C02000781B1C /* libSocialWeChat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWeChat.a; sourceTree = "<group>"; };
-		0657231C1DB4C02000781B1C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		0657231D1DB4C02000781B1C /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
-		0657231E1DB4C02000781B1C /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		0657231F1DB4C02000781B1C /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
-		065723201DB4C02000781B1C /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		065723211DB4C02000781B1C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		065723221DB4C02000781B1C /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		065723241DB4C02000781B1C /* UMSocialCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMSocialCore.framework; sourceTree = "<group>"; };
-		065723251DB4C02000781B1C /* UMSocialNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMSocialNetwork.framework; sourceTree = "<group>"; };
-		065723281DB4C02000781B1C /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
-		065723291DB4C02000781B1C /* UMShareMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMShareMenuItem.h; sourceTree = "<group>"; };
-		0657232A1DB4C02000781B1C /* UMShareMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMShareMenuItem.m; sourceTree = "<group>"; };
-		0657232B1DB4C02000781B1C /* UMShareMenuSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMShareMenuSelectionView.h; sourceTree = "<group>"; };
-		0657232C1DB4C02000781B1C /* UMShareMenuSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMShareMenuSelectionView.m; sourceTree = "<group>"; };
-		0657232D1DB4C02000781B1C /* UMSocialShareScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialShareScrollView.h; sourceTree = "<group>"; };
-		0657232E1DB4C02000781B1C /* UMSocialShareScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSocialShareScrollView.m; sourceTree = "<group>"; };
-		0657232F1DB4C02000781B1C /* UMSocialUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialUIManager.h; sourceTree = "<group>"; };
-		065723301DB4C02000781B1C /* UMSocialUIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSocialUIManager.m; sourceTree = "<group>"; };
 		069D2F541DB46AD100A059D0 /* wowdsgn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wowdsgn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069D2F571DB46AD100A059D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		069D2F5E1DB46AD100A059D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -864,20 +834,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				069D2F741DB4793300A059D0 /* libz.tbd in Frameworks */,
-				0657233E1DB4C02000781B1C /* UMSocialNetwork.framework in Frameworks */,
 				069D2F841DB4796D00A059D0 /* SystemConfiguration.framework in Frameworks */,
 				069D2F821DB4796800A059D0 /* ImageIO.framework in Frameworks */,
 				069D2F801DB4796200A059D0 /* Security.framework in Frameworks */,
 				069D2F7E1DB4795A00A059D0 /* libiconv.tbd in Frameworks */,
 				065722F31DB4BF4700781B1C /* libDeepShare.a in Frameworks */,
-				0657233D1DB4C02000781B1C /* UMSocialCore.framework in Frameworks */,
 				069D2F7C1DB4795100A059D0 /* libsqlite3.tbd in Frameworks */,
 				065722F61DB4BF4700781B1C /* libTalkingData.a in Frameworks */,
 				065722F41DB4BF4700781B1C /* libGrowing.a in Frameworks */,
 				065722F71DB4BF4700781B1C /* libTalkingDataAppCpa.a in Frameworks */,
 				069D2F7A1DB4794C00A059D0 /* CoreGraphics.framework in Frameworks */,
 				069D2F781DB4794400A059D0 /* libstdc++.tbd in Frameworks */,
-				0657233A1DB4C02000781B1C /* libWeChatSDK.a in Frameworks */,
 				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
 				069D2F721DB4792E00A059D0 /* JavaScriptCore.framework in Frameworks */,
 				069D2F701DB4792300A059D0 /* libicucore.tbd in Frameworks */,
@@ -886,7 +853,6 @@
 				069D2F6A1DB4790C00A059D0 /* SafariServices.framework in Frameworks */,
 				065722F51DB4BF4700781B1C /* libSocialWeChat.a in Frameworks */,
 				458523D0F557C0CFD1003B89 /* Pods_wowdsgn.framework in Frameworks */,
-				065723391DB4C02000781B1C /* libSocialWeChat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,7 +862,6 @@
 		065722DC1DB4BF4700781B1C /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
-				065722FD1DB4C02000781B1C /* UMSocial */,
 				065722DD1DB4BF4700781B1C /* DeepShare.h */,
 				065722DE1DB4BF4700781B1C /* DSError.h */,
 				065722DF1DB4BF4700781B1C /* Growing.h */,
@@ -911,72 +876,6 @@
 				065722EB1DB4BF4700781B1C /* TalkingDataSMS.h */,
 			);
 			path = 3rdParty;
-			sourceTree = "<group>";
-		};
-		065722FD1DB4C02000781B1C /* UMSocial */ = {
-			isa = PBXGroup;
-			children = (
-				065722FE1DB4C02000781B1C /* SocialLibraries */,
-				065723231DB4C02000781B1C /* UMSocialSDK */,
-				065723261DB4C02000781B1C /* UMSocialUI */,
-			);
-			path = UMSocial;
-			sourceTree = "<group>";
-		};
-		065722FE1DB4C02000781B1C /* SocialLibraries */ = {
-			isa = PBXGroup;
-			children = (
-				0657231A1DB4C02000781B1C /* WeChat */,
-			);
-			path = SocialLibraries;
-			sourceTree = "<group>";
-		};
-		0657231A1DB4C02000781B1C /* WeChat */ = {
-			isa = PBXGroup;
-			children = (
-				0657231B1DB4C02000781B1C /* libSocialWeChat.a */,
-				0657231C1DB4C02000781B1C /* libWeChatSDK.a */,
-				0657231D1DB4C02000781B1C /* read_me.txt */,
-				0657231E1DB4C02000781B1C /* README.txt */,
-				0657231F1DB4C02000781B1C /* UMSocialWechatHandler.h */,
-				065723201DB4C02000781B1C /* WechatAuthSDK.h */,
-				065723211DB4C02000781B1C /* WXApi.h */,
-				065723221DB4C02000781B1C /* WXApiObject.h */,
-			);
-			path = WeChat;
-			sourceTree = "<group>";
-		};
-		065723231DB4C02000781B1C /* UMSocialSDK */ = {
-			isa = PBXGroup;
-			children = (
-				065723241DB4C02000781B1C /* UMSocialCore.framework */,
-				065723251DB4C02000781B1C /* UMSocialNetwork.framework */,
-			);
-			path = UMSocialSDK;
-			sourceTree = "<group>";
-		};
-		065723261DB4C02000781B1C /* UMSocialUI */ = {
-			isa = PBXGroup;
-			children = (
-				065723271DB4C02000781B1C /* Resource */,
-				065723291DB4C02000781B1C /* UMShareMenuItem.h */,
-				0657232A1DB4C02000781B1C /* UMShareMenuItem.m */,
-				0657232B1DB4C02000781B1C /* UMShareMenuSelectionView.h */,
-				0657232C1DB4C02000781B1C /* UMShareMenuSelectionView.m */,
-				0657232D1DB4C02000781B1C /* UMSocialShareScrollView.h */,
-				0657232E1DB4C02000781B1C /* UMSocialShareScrollView.m */,
-				0657232F1DB4C02000781B1C /* UMSocialUIManager.h */,
-				065723301DB4C02000781B1C /* UMSocialUIManager.m */,
-			);
-			path = UMSocialUI;
-			sourceTree = "<group>";
-		};
-		065723271DB4C02000781B1C /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-				065723281DB4C02000781B1C /* UMSocialSDKResources.bundle */,
-			);
-			path = Resource;
 			sourceTree = "<group>";
 		};
 		069D2F4B1DB46AD100A059D0 = {
@@ -1981,7 +1880,6 @@
 				069D32801DB47ADD00A059D0 /* WOWProductDetailPriceCell.xib in Resources */,
 				069D320C1DB47ADD00A059D0 /* WOWEmptySearchView.xib in Resources */,
 				069D31BA1DB47ADD00A059D0 /* WOWOrderCell.xib in Resources */,
-				0657233F1DB4C02000781B1C /* UMSocialSDKResources.bundle in Resources */,
 				069D32C61DB47ADD00A059D0 /* WOWOrderDetailSThreeCell.xib in Resources */,
 				069D33401DB47ADE00A059D0 /* Designer.storyboard in Resources */,
 				069D31EB1DB47ADD00A059D0 /* WOWCategoryCell.xib in Resources */,
@@ -1994,9 +1892,7 @@
 				069D32051DB47ADD00A059D0 /* WOWCommentCell.xib in Resources */,
 				069D33421DB47ADE00A059D0 /* Found.storyboard in Resources */,
 				069D31F11DB47ADD00A059D0 /* WOWFoundWeeklyNewCell.xib in Resources */,
-				0657233B1DB4C02000781B1C /* read_me.txt in Resources */,
 				069D324E1DB47ADD00A059D0 /* icon_chose_bottom@2x.png in Resources */,
-				0657233C1DB4C02000781B1C /* README.txt in Resources */,
 				069D31FE1DB47ADD00A059D0 /* Cell_104_Hot.xib in Resources */,
 				069D32CA1DB47ADD00A059D0 /* WOWOrderEmptyView.xib in Resources */,
 				069D32A81DB47ADD00A059D0 /* WOWAboutHeaderView.xib in Resources */,
@@ -2110,7 +2006,6 @@
 				069D320A1DB47ADD00A059D0 /* WOWDSGNFooterView.swift in Sources */,
 				069D31EE1DB47ADD00A059D0 /* WOWFoundRecommendCell.swift in Sources */,
 				069D32731DB47ADD00A059D0 /* WOWGoodsTypeCell.swift in Sources */,
-				065723411DB4C02000781B1C /* UMShareMenuSelectionView.m in Sources */,
 				069D32011DB47ADD00A059D0 /* WOWAuthorCell.swift in Sources */,
 				069D32791DB47ADD00A059D0 /* WOWProductDetailCell.swift in Sources */,
 				069D31F41DB47ADD00A059D0 /* WOWGuideController.swift in Sources */,
@@ -2215,7 +2110,6 @@
 				069D32631DB47ADD00A059D0 /* WOWDesignerCell.swift in Sources */,
 				069D32421DB47ADD00A059D0 /* WOWTabBarController.swift in Sources */,
 				069D32B51DB47ADD00A059D0 /* WOWFavoriteListModel.swift in Sources */,
-				065723421DB4C02000781B1C /* UMSocialShareScrollView.m in Sources */,
 				069D328D1DB47ADD00A059D0 /* WOWProductSpecReusableView.swift in Sources */,
 				069D31BB1DB47ADD00A059D0 /* WOWOrderFooterView.swift in Sources */,
 				069D32EC1DB47ADD00A059D0 /* WOWTool.swift in Sources */,
@@ -2261,7 +2155,6 @@
 				069D32471DB47ADD00A059D0 /* WowColor.swift in Sources */,
 				069D32AD1DB47ADD00A059D0 /* WOWAddressController.swift in Sources */,
 				069D32A31DB47ADD00A059D0 /* ModelVOCoupon.swift in Sources */,
-				065723431DB4C02000781B1C /* UMSocialUIManager.m in Sources */,
 				069D31FF1DB47ADD00A059D0 /* HomeFormReusableView.swift in Sources */,
 				069D32EE1DB47ADD00A059D0 /* WOWUserManager.swift in Sources */,
 				069D32111DB47ADD00A059D0 /* WOWImageCell.swift in Sources */,
@@ -2355,7 +2248,6 @@
 				069D31FD1DB47ADD00A059D0 /* Cell_104_Hot.swift in Sources */,
 				069D32F41DB47ADD00A059D0 /* UIFont+Add.swift in Sources */,
 				069D32751DB47ADD00A059D0 /* WOWProductDescView.swift in Sources */,
-				065723401DB4C02000781B1C /* UMShareMenuItem.m in Sources */,
 				069D331D1DB47ADE00A059D0 /* SimpleHUD.swift in Sources */,
 				069D32871DB47ADD00A059D0 /* WOWProductParameter.swift in Sources */,
 				069D32D11DB47ADD00A059D0 /* WOWOrderTransController.swift in Sources */,

@@ -26,6 +26,8 @@
 @import XZMRefresh;
 @import FMDB;
 @import UMSocialCore;
+
+
 //#import "JPPlayground.h"
 //#import "GYHttpMock.h"
 //@import MLeaksFinder;
@@ -59,7 +61,7 @@
 
 
 //友盟
-//#import <UMSocialCore/UMSocialCore.h>
+#import <UMSocialCore/UMSocialCore.h>
 //#import <UMSocialCore/UMSocialUIManager.h>
 //#import "UMSocialUIManager.h"
 

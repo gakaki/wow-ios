@@ -12,6 +12,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import YYWebImage
 import SwiftyUserDefaults
+import UMSocialNetwork
 
 //import JSPatch
 //import JSPatchHelper

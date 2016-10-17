@@ -35,10 +35,17 @@ public extension UIButton{
          interval参数没什么好解释的。
          leeway参数比较有意思。这个参数告诉系统我们需要计时器触发的精准程度。所有的计时器都不会保证100%精准，这个参数用来告诉系统你希望系统保证精准的努力程度。如果你希望一个计时器没五秒触发一次，并且越准越好，那么你传递0为参数。另外，如果是一个周期性任务，比如检查email，那么你会希望每十分钟检查一次，但是不用那么精准。所以你可以传入60，告诉系统60秒的误差是可接受的。
          */
-        
+        timer.scheduleRepeating(deadline: DispatchTime.now(),
+                                
+                                interval: .seconds(1),
+                                
+                                leeway: .seconds(0)
+            
+        )
 //        timer.setTimer(start: DispatchWallTime(time: nil), interval: 1 * NSEC_PER_SEC, leeway: 0)
         
         // 内建事件
+        
         timer.setEventHandler {[weak self] () -> Void in
             if let strongSelf = self {
             if time == 1 {

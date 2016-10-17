@@ -28,7 +28,7 @@ class WOWBrandHeaderView: UICollectionReusableView {
         logoImage.layer.masksToBounds = true
         logoImage?.set_webimage_url( model.image )
         
-        brandNameLabel.text = model.brandEname ?? ""
+        brandNameLabel.text = model.name ?? ""
         brandDescLabel.text = model.desc ?? ""
         brandDescLabel.setLineHeightAndLineBreak(1.5)
     }

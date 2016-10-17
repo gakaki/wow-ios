@@ -1864,6 +1864,9 @@
 							com.apple.Push = {
 								enabled = 0;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -2476,7 +2479,7 @@
 					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/Wechat",
 					"$(PROJECT_DIR)/wowdsgn/3rdParty",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.wowdsgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowdsgn/wowapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -2510,7 +2513,7 @@
 					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/Wechat",
 					"$(PROJECT_DIR)/wowdsgn/3rdParty",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.wowdsgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowdsgn/wowapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

@@ -34,7 +34,7 @@ class WOWLoginController: WOWBaseViewController {
 //MARK:Private Method
     override func setUI() {
         configNavItem()
-//        wechatButton.isHidden = !WXApi.isWXAppInstalled()
+        wechatButton.isHidden = !WXApi.isWXAppInstalled()
     }
     
     fileprivate func configNavItem(){

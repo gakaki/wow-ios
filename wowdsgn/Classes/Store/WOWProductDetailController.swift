@@ -425,10 +425,23 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         backView.hideBuyView()
         if let product = product {
             
-            WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.subProductId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self] (result) in
+            var c = product.productQty ?? 1
+            
+            WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.subProductId ?? 0, productQty:c), successClosure: {[weak self] (result) in
                 if let strongSelf = self {
                     strongSelf.updateCarBadge(product.productQty ?? 1)
                 }
+                
+                //查看购物车
+                let id      = String(describing:product.subProductId)
+                let price   = Int32(product.sellPrice!)
+                
+                let shoppingCart = TDShoppingCart.create()
+                shoppingCart?.addItem(withCategory: "", itemId: id, name: "", unitPrice: price, amount: Int32(c))
+                TalkingDataAppCpa.onViewShoppingCart(shoppingCart)
+               
+                
+                
                 
             }) { (errorMsg) in
                 

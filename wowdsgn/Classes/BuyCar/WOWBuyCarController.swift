@@ -96,7 +96,7 @@ class WOWBuyCarController: WOWBaseViewController {
         configData()
     }
     
-    fileprivate func configData(){
+    public func configData(){
        
         asyncCarList()
         

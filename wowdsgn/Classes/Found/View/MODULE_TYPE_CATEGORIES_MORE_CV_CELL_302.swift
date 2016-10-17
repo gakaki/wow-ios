@@ -59,7 +59,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
             
             make.width.equalTo(50)
             make.height.equalTo(0.5)
-            make.centerX.equalTo(name.centerX)
+            make.centerX.equalTo(name.snp.centerX)
             make.top.equalTo(name.snp.bottom).offset(1)
             
         }
@@ -71,7 +71,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell:UICollectionViewCell{
             name_en.text      = "MORE"
             make.width.equalTo(60)
             make.height.equalTo(20)
-            make.centerX.equalTo(line.centerX)
+            make.centerX.equalTo(line.snp.centerX)
             make.top.equalTo(line.snp.bottom).offset(1)
             
         }

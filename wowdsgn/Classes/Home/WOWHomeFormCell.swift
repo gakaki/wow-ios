@@ -91,9 +91,8 @@ class WOWHomeFormCell: UITableViewCell {
         
         
         collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
-        
-//        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headIdenString)
-        
+  
+        self.contentView.layoutIfNeeded()
         collectionView.xzm_footer = self.xzm_footer
         
         collectionView.showsVerticalScrollIndicator = false

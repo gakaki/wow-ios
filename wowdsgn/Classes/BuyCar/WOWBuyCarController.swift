@@ -484,7 +484,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "buyCarEmpty")
     }
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "您的购物车还是空的\n快去逛逛吧"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
         return attri

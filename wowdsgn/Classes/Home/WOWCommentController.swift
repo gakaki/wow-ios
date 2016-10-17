@@ -241,7 +241,7 @@ extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
         self.inputTextView.resignFirstResponder()
     }
     
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无评论"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri

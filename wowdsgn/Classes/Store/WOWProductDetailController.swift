@@ -336,10 +336,10 @@ class WOWProductDetailController: WOWBaseViewController {
 //    用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
         WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result) in
-//            if let strongSelf = self{
+            if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
-                self!.likeButton.isSelected = favorite ?? false
-//            }
+                strongSelf.likeButton.isSelected = favorite ?? false
+            }
         }) {(errorMsg) in
             
         }

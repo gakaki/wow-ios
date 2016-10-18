@@ -45,10 +45,15 @@ class WOWProductDetailCell: UITableViewCell {
                                                       attribute: .width, relatedBy: .equal,
                                                       toItem: self.productImg, attribute: .height,
                                                       multiplier: secondaryImg.imageAspect , constant: 0.0)
-                self.updateConstraints()
-                productImg.updateConstraints()
-
-                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
+//                self.updateConstraints()
+//                productImg.updateConstraints()
+                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: { (image, error, chcheTypr, imageUrl) in
+                    if let image = image {
+//                        secondaryImg.imageAspect = image.size.width / image.size.height
+                    }
+                })
+                
+//                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
                 space.constant = 15
             }else {
                 space.constant = 0

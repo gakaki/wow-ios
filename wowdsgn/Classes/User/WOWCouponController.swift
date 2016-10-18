@@ -124,7 +124,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
             cell.label_title.text           = r.couponTitle!
         
         
-            cell.label_time_limit.text      = "\(r.effectiveFrom!)至\(r.effectiveTo!)"
+            cell.label_time_limit.text      = "\(r.effectiveFrom ?? "")至\(r.effectiveTo ?? "")"
             
 //            var bgView                      = UIView(frame: cell.frame)
 //            bgView.backgroundColor          = UIColor(red:0.80, green:0.80, blue:0.80, alpha:0.50)

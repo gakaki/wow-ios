@@ -60,9 +60,9 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }
         productId = model.productId
         
-//        pictureImageView.set_webimage_url(model.productImg ?? "")
+        pictureImageView.set_webimage_url(model.productImg ?? "")
         // 修改来回上下加载 内存不减的问题
-        pictureImageView.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
+//        pictureImageView.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         desLabel.text = model.productName ?? ""
 //        desLabel.setLineHeightAndLineBreak(1.5)
         if let price = model.sellPrice {

@@ -1,3 +1,4 @@
+
 //
 //  WOWRegistController.swift
 //  Wow
@@ -142,16 +143,19 @@ class WOWRegistController: WOWBaseViewController {
                     let model = Mapper<WOWUserModel>().map(JSONObject:result)
                     WOWUserManager.saveUserInfo(model)
                     //暂时保存一下手机号
-                    WOWUserManager.userMobile = strongSelf.phoneTextField.text!
+                    
+                    let user_mobile           = strongSelf.phoneTextField.text!
+                    WOWUserManager.userMobile = user_mobile
                     
                     
-                    TalkingDataAppCpa.onRegister(strongSelf.phoneTextField.text!)
 
                 let newUser = JSON(result)["newUser"].int
                     //判断如果是新用户的话就去填写资料，如果不是的话就登录成功
                     if newUser == 0 {
+                        TalkingDataAppCpa.onLogin(user_mobile)
                         strongSelf.toLoginSuccess(strongSelf.isPresent)
                     }else {
+                        TalkingDataAppCpa.onRegister(user_mobile)
                         strongSelf.toRegInfo(strongSelf.isPresent)
                     }
                     

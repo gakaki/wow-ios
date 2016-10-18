@@ -213,12 +213,14 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
                 
-                let sum                  = Int32(totalAmout) ?? 0
+                //TalkingData 下单
+                var sum                  = Int32(totalAmout ) ?? 0
+                sum                      = sum * 100
                 let order_id             = strongSelf.orderCode
                 
                 let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
-                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
-                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
+//                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
+//                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
                 TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
 
             }
@@ -269,6 +271,17 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
+                
+                //TalkingData 下单
+                var sum                  = Int32( totalAmount ) ?? 0
+                sum                      = sum * 100
+                let order_id             = strongSelf.orderCode
+                
+                let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
+                //                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
+                //                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
+                TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
+
             }
             
         }) { (errorMsg) in
@@ -315,6 +328,11 @@ class WOWEditOrderController: WOWBaseViewController {
                 vc.orderid = orderCode ?? ""
                 let result = WOWCalPrice.calTotalPrice([payAmount ?? 0],counts:[1])
                 vc.totalPrice = result
+                
+                //支付结果
+                
+                
+                
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
             

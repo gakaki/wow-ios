@@ -463,7 +463,6 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
-//        print("\(dataArr.count)--\(bottomListCount.getParityCellNumber())++\(section)")
         guard section < dataArr.count  else {
             
             if section == ((dataArr.count ) + bottomListCount.getParityCellNumber()) - 1{
@@ -525,27 +524,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
     }
     func hearderView() -> UIView { // 137 37
         
-        let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 70)
-        view.backgroundColor = UIColor.white
-        
-        let img = UIImageView()
-        img.image = UIImage(named: "recommend")
-        view.addSubview(img)
-        img.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(137)
-            make.height.equalTo(37)
-            make.center.equalTo(view)
-        }
-        let lbBottom = UILabel.initLable(" ", titleColor: UIColor.black, textAlignment: .center, font: 10)
-        lbBottom.backgroundColor = UIColor.init(hexString: "eaeaea")
-        view.addSubview(lbBottom)
-        lbBottom.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(view)
-            make.height.equalTo(0.5)
-            make.left.equalTo(view)
-            make.bottom.equalTo(view).offset(0)
-        }
+        let view = WOWHearderView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70))
         return view
         
     }

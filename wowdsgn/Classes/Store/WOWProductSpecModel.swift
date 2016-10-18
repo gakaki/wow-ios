@@ -97,6 +97,7 @@ class WOWProductInfoModel: WOWBaseModel,Mappable {
     var availableStock                      : Int?
     var hasStock                            : Bool?
     var productQty                          : Int?
+    var productName                         : String?
     
     required init?(map: Map) {
         
@@ -111,6 +112,9 @@ class WOWProductInfoModel: WOWBaseModel,Mappable {
         sellPrice                           <- map["sellPrice"]
         availableStock                      <- map["availableStock"]
         hasStock                            <- map["hasStock"]
+
+        
+        productName                         <- map["productName"]
 
     }
     

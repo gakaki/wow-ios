@@ -10,8 +10,6 @@ import UIKit
 protocol HomeBottomDelegate:class {
     // 跳转产品详情代理
     func goToProductDetailVC(_ indexRow: Int?)
-    //刷新主页数据 有一个情况，当上面的collectionView 中的产品与下面的tableView的产品为同一个产品， 喜欢下面的，让上面的刷新
-//    func reloadTableViewData(productId: Int?,favorite:Bool)
     
 }
 
@@ -69,67 +67,20 @@ class HomeBottomCell: UITableViewCell {
         WOWHud.showLoadingSV()
         
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdOne ?? 0,view: oneBaseView,btn: btnIsLikeOne , isFavorite: { (isFavorite) in
-
-            if self != nil{
-                
-                print("11")
-            }
+            
+            print("完成请求")
+   
         })
 
-        
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdOne ?? 0), successClosure: { [weak self](result) in
-//            if let strongSelf = self{
-//                
-////                let favorite = JSON(result)["favorite"].bool
-////                if  favorite != nil{
-////
-////                       strongSelf.delegate?.reloadTableViewData(self!.productIdOne,favorite: favorite!)
-////                    
-////                }/
-//                
-//                let favorite = JSON(result)["favorite"].bool
-//                var params = [String: AnyObject]?()
-//                
-//                params = ["productId": strongSelf.productIdOne!, "favorite": favorite!]
-//                
-//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-////  NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-//            }
-//        }) { (errorMsg) in
-//            
-//        }
     }
     @IBAction func favoriteActionTwo(_ sender: AnyObject) {
         WOWHud.showLoadingSV()
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdTwo ?? 0,view: twoBaseView,btn: btnIsLikeTwo, isFavorite: { (isFavorite) in
 
-            if self != nil{
-                
-                print("11")
-            }
-            })
+            print("完成请求")
+            
+        })
 
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productIdTwo ?? 0), successClosure: { [weak self](result) in
-//            if let strongSelf = self{
-//                
-////                let favorite = JSON(result)["favorite"].bool
-////
-////                if  favorite != nil{
-////
-////                    strongSelf.delegate?.reloadTableViewData(self!.productIdTwo,favorite: favorite!)
-////                    
-////                }
-//                let favorite = JSON(result)["favorite"].bool
-//                var params = [String: AnyObject]?()
-//                
-//                params = ["productId": strongSelf.productIdTwo!, "favorite": favorite!]
-//                
-//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-//// NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-//            }
-//        }) { (errorMsg) in
-//            
-//        }
         
     }
 
@@ -150,12 +101,12 @@ class HomeBottomCell: UITableViewCell {
      
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
-//                btnIsLikeOne.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
+
                 btnIsLikeOne.isSelected = true
                 
             }else{
+                
                 btnIsLikeOne.isSelected = false
-//                btnIsLikeOne.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
                 
             }
 
@@ -183,13 +134,13 @@ class HomeBottomCell: UITableViewCell {
      
         if WOWUserManager.loginStatus {
         if (model.favorite == true) {
+            
             btnIsLikeTwo.isSelected = true
-//            btnIsLikeTwo.setImage(UIImage(named: "icon_like_hightlighted")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
             
         }else{
+            
             btnIsLikeTwo.isSelected = false
-//            btnIsLikeTwo.setImage(UIImage(named: "like-gray")?.imageWithRenderingMode(.AlwaysOriginal), forState: .Normal)
-            //                  cell.likeBtn.setBackgroundImage(UIImage(named: "icon_like"), forState: .Normal)
+
         }
 
      }

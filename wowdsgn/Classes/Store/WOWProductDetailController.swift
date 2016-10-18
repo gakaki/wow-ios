@@ -301,11 +301,12 @@ class WOWProductDetailController: WOWBaseViewController {
                 strongSelf.requestAboutProduct()
                 strongSelf.buyCarCount()
                 
-                //Talking Data order detail 浏览商品 clear
-                let price   =  strongSelf.productModel?.sellPrice ?? 0
-                let id      =  String(describing:strongSelf.productId)
-                let name    =  strongSelf.productModel?.productName
-                TalkingDataAppCpa.onViewItem(withCategory: "", itemId: id, name: name, unitPrice:Int32(price))
+                //Talking Data order detail 浏览商品 商品详情
+                var price:Int32     =  Int32(strongSelf.productModel?.sellPrice ?? 0)
+                price               =  Int32(price) * 100
+                let id              =  String(describing:(strongSelf.productId ?? 0)!)
+                let name            =  strongSelf.productModel?.productName
+                TalkingDataAppCpa.onViewItem(withCategory: "", itemId: id, name: name, unitPrice:price)
   
                 
 
@@ -431,7 +432,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         if let product = product {
             
             var c = product.productQty ?? 1
-            
+
             WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.subProductId ?? 0, productQty:c), successClosure: {[weak self] (result) in
                 if let strongSelf = self {
                     strongSelf.updateCarBadge(product.productQty ?? 1)
@@ -439,14 +440,12 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
                 
                 //查看购物车
                 let id      = String(describing:product.subProductId)
-                let price   = Int32(product.sellPrice ?? 0)
-                
-                let shoppingCart = TDShoppingCart.create()
-                shoppingCart?.addItem(withCategory: "", itemId: id, name: "", unitPrice: price, amount: Int32(c))
-                TalkingDataAppCpa.onViewShoppingCart(shoppingCart)
-               
+                let price   = Int32(product.sellPrice ?? 0) * 100
+                let name    = self?.productModel?.productName ?? ""
                 
                 
+                TalkingDataAppCpa.onAddItemToShoppingCart(withCategory: "", itemId: id, name: name, unitPrice: price, amount:  Int32(c))
+
                 
             }) { (errorMsg) in
                 

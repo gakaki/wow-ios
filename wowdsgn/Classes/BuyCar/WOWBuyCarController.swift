@@ -63,6 +63,8 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MobClick.e(.Shoppingcart)
         configData()
     }
     
@@ -180,6 +182,10 @@ class WOWBuyCarController: WOWBaseViewController {
         //1.直接拉取服务器端购物车数据
             WOWNetManager.sharedManager.requestWithTarget(.api_CartGet, successClosure: {[weak self](result) in
                 if let strongSelf = self{
+                    
+                    //TalkingData 购物车显示
+                    let shoppingCart = TDShoppingCart.create()
+
                     let model = Mapper<WOWCarModel>().map(JSONObject:result)
                     if let arr = model?.shoppingCartResult {
                         strongSelf.dataArr = arr
@@ -201,6 +207,8 @@ class WOWBuyCarController: WOWBaseViewController {
                         strongSelf.updateCarCountBadge()
                     
                         
+                        
+                        
                         //判断当前数组有多少默认选中的加入选中的数组
                         for product in strongSelf.dataArr {
                             
@@ -209,6 +217,13 @@ class WOWBuyCarController: WOWBaseViewController {
                                 if product.isSelected ?? false {
                                     strongSelf.selectedArr.append(product)
                                 }
+                                
+                                let id    = String(describing:(product.productId ?? 0))
+                                let price = Int32( product.sellPrice ?? 0 ) * 100
+                                let name  = product.productName ?? ""
+                                let amount = Int32( product.productQty ?? 0 )
+                                shoppingCart?.addItem(withCategory: "", itemId: id, name: name, unitPrice: price, amount: amount)
+
                             }
                             
                         }
@@ -218,6 +233,9 @@ class WOWBuyCarController: WOWBaseViewController {
                     
 //                    strongSelf.updateCarCountBadge()
                     strongSelf.tableView.reloadData()
+                    
+                    
+                    TalkingDataAppCpa.onViewShoppingCart(shoppingCart)
 
                 }
                 }, failClosure: { (errorMsg) in

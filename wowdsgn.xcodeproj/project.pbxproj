@@ -12,6 +12,7 @@
 		065722F41DB4BF4700781B1C /* libGrowing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E21DB4BF4700781B1C /* libGrowing.a */; };
 		065722F61DB4BF4700781B1C /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E41DB4BF4700781B1C /* libTalkingData.a */; };
 		065722F71DB4BF4700781B1C /* libTalkingDataAppCpa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E51DB4BF4700781B1C /* libTalkingDataAppCpa.a */; };
+		067940A61DB60B5000348691 /* UMengEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067940A51DB60B5000348691 /* UMengEvent.swift */; };
 		0681214E1DB4D03600407319 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 068121281DB4D03600407319 /* libSocialQQ.a */; };
 		0681214F1DB4D03600407319 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 068121291DB4D03600407319 /* TencentOpenAPI.framework */; };
 		068121501DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0681212A1DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle */; };
@@ -436,6 +437,7 @@
 		065722E91DB4BF4700781B1C /* TalkingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingData.h; sourceTree = "<group>"; };
 		065722EA1DB4BF4700781B1C /* TalkingDataAppCpa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataAppCpa.h; sourceTree = "<group>"; };
 		065722EB1DB4BF4700781B1C /* TalkingDataSMS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataSMS.h; sourceTree = "<group>"; };
+		067940A51DB60B5000348691 /* UMengEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMengEvent.swift; sourceTree = "<group>"; };
 		068121281DB4D03600407319 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		068121291DB4D03600407319 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		0681212A1DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
@@ -928,6 +930,14 @@
 			path = 3rdParty;
 			sourceTree = "<group>";
 		};
+		067940A41DB60B4000348691 /* 3rdPartyHelper */ = {
+			isa = PBXGroup;
+			children = (
+				067940A51DB60B5000348691 /* UMengEvent.swift */,
+			);
+			path = 3rdPartyHelper;
+			sourceTree = "<group>";
+		};
 		068121261DB4D03600407319 /* UMeng */ = {
 			isa = PBXGroup;
 			children = (
@@ -1028,6 +1038,7 @@
 		069D2F561DB46AD100A059D0 /* wowdsgn */ = {
 			isa = PBXGroup;
 			children = (
+				067940A41DB60B4000348691 /* 3rdPartyHelper */,
 				065722DC1DB4BF4700781B1C /* 3rdParty */,
 				069D33501DB47B3E00A059D0 /* model-network */,
 				069D2F871DB47ADC00A059D0 /* Classes */,
@@ -2430,6 +2441,7 @@
 				069D32EB1DB47ADD00A059D0 /* WOWShareManager.swift in Sources */,
 				069D31AA1DB47ADD00A059D0 /* WOWBuyCarEmpty.swift in Sources */,
 				069D31E51DB47ADD00A059D0 /* VCVTMagic.swift in Sources */,
+				067940A61DB60B5000348691 /* UMengEvent.swift in Sources */,
 				069D325C1DB47ADD00A059D0 /* WOWBrandHeaderView.swift in Sources */,
 				069D324F1DB47ADD00A059D0 /* WOWDropMenuColumn.swift in Sources */,
 				069D31D51DB47ADD00A059D0 /* WOWFavoritrSingleCell.swift in Sources */,

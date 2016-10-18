@@ -477,7 +477,6 @@
 		84D9CF5B169F6A1D52B17CFEEF3521C2 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA34AB95379D44A9CE450DAE52242B0 /* SwiftyUserDefaults.swift */; };
 		850400FDF1DE18E7DCBF7BCBE137AA74 /* UILabel+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC06187A835DD23329B1EF0EE7C86489 /* UILabel+Rx.swift */; };
 		8539DE312BF49D7197B6C69B2B940BF8 /* UIImageView+YYWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9879165EA123372278592522582708 /* UIImageView+YYWebImage.m */; };
-		85655A47508C9AD9E213F727BCC98EC9 /* UIButton+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB40D4597D1CB103027AD7224B2C3CC /* UIButton+Add.swift */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		856DDC71614A9139708C1596C0008185 /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390BF08ADFFD86C8146284A0254129ED /* UILabelExtensions.swift */; };
 		8571FD7B759452143CFA6AF64E8BE245 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA618E9A4C815DFCEC89FCD28AED45F6 /* Changeset.swift */; };
 		85879262462211AD7A9C374AA38E4EB6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F119084DFFA7F4C57EEDDB02D6D292FC /* AssetsLibrary.framework */; };
@@ -1386,7 +1385,6 @@
 		0E84FFEBF297B1CBB0D7E96F8DAE04C4 /* YYWebImageOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYWebImageOperation.m; path = YYWebImage/YYWebImageOperation.m; sourceTree = "<group>"; };
 		0E8F4B0271BC5146592ED2628712376F /* UITableView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITableView+Rx.swift"; path = "RxCocoa/iOS/UITableView+Rx.swift"; sourceTree = "<group>"; };
 		0F1B879F8BD94C5FD953E9B768B2BABE /* NSTimerExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSTimerExtensions.swift; path = Sources/NSTimerExtensions.swift; sourceTree = "<group>"; };
-		0FB40D4597D1CB103027AD7224B2C3CC /* UIButton+Add.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIButton+Add.swift"; sourceTree = "<group>"; };
 		0FC91DBC93365F4F73CE8CA288410705 /* MJRefreshAutoStateFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshAutoStateFooter.h; path = MJRefresh/Custom/Footer/Auto/MJRefreshAutoStateFooter.h; sourceTree = "<group>"; };
 		0FF69D679828DB6548D1B8B9EC51EF5E /* XZMRefreshNormalHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XZMRefreshNormalHeader.m; path = XZMRefresh/Custom/Header/XZMRefreshNormalHeader.m; sourceTree = "<group>"; };
 		10225109832CCCB6C28276774CB3B2DF /* IQKeyboardManagerSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IQKeyboardManagerSwift-dummy.m"; sourceTree = "<group>"; };
@@ -3549,7 +3547,6 @@
 		4D6033DA9231349E2EAD6A717579A98A /* UIButton+ */ = {
 			isa = PBXGroup;
 			children = (
-				0FB40D4597D1CB103027AD7224B2C3CC /* UIButton+Add.swift */,
 			);
 			path = "UIButton+";
 			sourceTree = "<group>";
@@ -6528,7 +6525,6 @@
 				9715BCB755608DC9C3752A91F6128057 /* PonyFrameworkOnSwift-dummy.m in Sources */,
 				455AAD7913C2EA4459387BCFF2D8D88A /* String+Add.swift in Sources */,
 				DFF97D6BC724B8CD1BB2532D86C96E29 /* UIApplication+Add.swift in Sources */,
-				85655A47508C9AD9E213F727BCC98EC9 /* UIButton+Add.swift in Sources */,
 				FA71C6521BE9A18AD2E1791080C7E24E /* UIColor+Add.swift in Sources */,
 				58826AE308B069D3B700E65B8D51B234 /* UIDevice+Add.swift in Sources */,
 				245E69F3BB8E79E556A428C96378E659 /* UIFont+Add.swift in Sources */,

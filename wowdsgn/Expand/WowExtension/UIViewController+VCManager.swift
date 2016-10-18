@@ -118,12 +118,16 @@ extension  UIViewController {
     fileprivate func checkWechatToken(_ userData:NSDictionary,isPresent:Bool = false){
         //FIXME:验证token是否是第一次咯或者是第二次
         var isOpenIdBinded = Bool()//假设的bool值
-        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId:(userData["openid"] ?? "") as! String), successClosure: {[weak self] (result) in
+        let open_id        = (userData["openid"] ?? "") as! String
+
+        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId:open_id), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
                 isOpenIdBinded = JSON(result)["isOpenIdBinded"].bool ?? true
                 
+                //微信登录成功
+                TalkingDataAppCpa.onLogin("wechatUser_\(open_id)")
                 
                 if isOpenIdBinded {
                     //FIXME:未写的，先保存用户信息

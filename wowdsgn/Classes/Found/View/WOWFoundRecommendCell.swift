@@ -66,15 +66,20 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
+
+
     }
     
     func setData(_ p:WowModulePageItemVO){
         
         imageName                            = p.productImg!
         self.iv.set_webimage_url(imageName)
+      
         self.iv.addTapGesture {[weak self] (tap) in
             if let strongSelf = self {
                 if let del = strongSelf.delegate {
+                      print(strongSelf.iv.frame)
+                     print(strongSelf.btnLike.frame)
                     del.toProductDetail(p.productId)
                 }
             }
@@ -117,6 +122,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
 
     func viewDidLayoutSubviews() {
         self.render()
+
     }
     
     func render() {
@@ -126,15 +132,10 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
     
     func setUI_btnLike() {
         
-        let image                   = UIImage(named: "like-gray") as UIImage?
-        let image_selected          = UIImage(named: "like_select") as UIImage?
-        
-        let button                  = UIButton(type: UIButtonType.custom)
-        button.setImage(image, for: UIControlState())
-        button.setImage(image_selected, for: .selected)
+        let button = LikeBtn.init(frame: CGRect.zero)
         
         button.addTarget(self, action: #selector(btn_like_toggle),for:.touchUpInside)
-//        button.selected = false
+
         btnLike                     = button
         self.addSubview(btnLike)
     }
@@ -158,7 +159,16 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         
         WOWHud.showLoadingSV()
 
-        WOWClickLikeAction.requestFavoriteProduct(productId: self.product?.productId ?? 0,view: self.contentView,btn: btnLike, isFavorite: { [weak self](isFavorite) in
+        let btn = LikeBtn.init(frame: CGRect.zero)
+        btn.alpha = 0.0
+        self.contentView.addSubview(btn)
+        btn.snp.makeConstraints { [weak self](make) -> Void in
+            make.width.equalTo(32)
+            make.height.equalTo(32)
+            make.bottom.equalTo(self!).offset(-9)
+            make.right.equalTo(self!).offset(-8)
+        }
+        WOWClickLikeAction.requestFavoriteProduct(productId: self.product?.productId ?? 0,view: self.contentView,btn: btn, isFavorite: { [weak self](isFavorite) in
 
             if let strongSelf = self{
                 
@@ -167,30 +177,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
             }
         })
 
-        
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:self.product?.productId ?? 0), successClosure: { [weak self](result) in
-//            if let strongSelf = self{
-//                
-////                strongSelf.btnLike.selected = !strongSelf.btnLike.selected
-//                
-//                let favorite = JSON(result)["favorite"].bool
-//                strongSelf.btnLike.selected  = favorite!
-//                var params = [String: AnyObject]?()
-//                
-//                params = ["productId": strongSelf.product!, "favorite": favorite!]
-//                
-//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-//
-        
-//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-//            }
-//        }) { (errorMsg) in
-//            
-//            
-//        }
     }
-    
-
 
     func prepareViewHierarchy() {
         
@@ -294,5 +281,24 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
 
         
         self.addSubview(self.product_view)
+
     }
+}
+//收藏btn
+class LikeBtn: UIButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        let image                   = UIImage(named: "like-gray") as UIImage?
+        let image_selected          = UIImage(named: "like_select") as UIImage?
+    
+        self.setImage(image, for: UIControlState())
+        self.setImage(image_selected, for: .selected)
+        
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
 }

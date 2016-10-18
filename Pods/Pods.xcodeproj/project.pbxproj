@@ -32,6 +32,7 @@
 		05B1DD3A7E06C5A0407DEB7BAC83069F /* QNDnspodEnterprise.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EB5BA4C1A75695765812DE7636D718B /* QNDnspodEnterprise.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05DF29BD7C9950081DBD50804CFF450E /* DistinctUntilChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5979EC2AA2FC0CB1CB61DBDC0A2F6 /* DistinctUntilChanged.swift */; };
 		065E0F9B1A07CDADC8F19096F2A6B36D /* MJRefreshBackStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9CC87FCC8018F1A8530966A2070F65 /* MJRefreshBackStateFooter.m */; };
+		067940A31DB5F33F00348691 /* UIButton+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067940A21DB5F33F00348691 /* UIButton+Add.swift */; };
 		06E0239DD63A2C1D0930A7F57C7EF2CB /* QNAssessment.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A0851556D867DAA818291547BC8619 /* QNAssessment.m */; };
 		06EDB944284E74970F312CB7F2910C07 /* IQBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9954957CF288E0FF71E0359E5B25D2E7 /* IQBarButtonItem.swift */; };
 		073510F158C76F91C6968AE9AFAA3964 /* _RXObjCRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3531DE67BDA67128AF00EE20F6F30BA6 /* _RXObjCRuntime.m */; };
@@ -1337,6 +1338,7 @@
 		061BEF41D496BF59A4E274ED6F33F87B /* UIColor+VTMagic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+VTMagic.h"; path = "VTMagic/UIColor+VTMagic.h"; sourceTree = "<group>"; };
 		0621F8EE46ED9D31D09BCAD536E54E45 /* GYHttpMock.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = GYHttpMock.podspec; sourceTree = "<group>"; };
 		0640A84EBDAF7E39C7BC05C2085E346F /* MJRefreshStateHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshStateHeader.h; path = MJRefresh/Custom/Header/MJRefreshStateHeader.h; sourceTree = "<group>"; };
+		067940A21DB5F33F00348691 /* UIButton+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Add.swift"; sourceTree = "<group>"; };
 		06B23C1087B98BB88A673631836DA6E5 /* Scan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Scan.swift; path = RxSwift/Observables/Implementations/Scan.swift; sourceTree = "<group>"; };
 		06B66957A3A185C9F3860ED0243B5B33 /* SynchronizedOnType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SynchronizedOnType.swift; path = RxSwift/Concurrency/SynchronizedOnType.swift; sourceTree = "<group>"; };
 		06ED9A0870795A9376D21B431A4293DF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -3547,6 +3549,7 @@
 		4D6033DA9231349E2EAD6A717579A98A /* UIButton+ */ = {
 			isa = PBXGroup;
 			children = (
+				067940A21DB5F33F00348691 /* UIButton+Add.swift */,
 			);
 			path = "UIButton+";
 			sourceTree = "<group>";
@@ -6518,6 +6521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				067940A31DB5F33F00348691 /* UIButton+Add.swift in Sources */,
 				698511B31E35B5E7C70ACCDBDCC60BCB /* Array+Add.swift in Sources */,
 				4A6B4E15D092125BB819660F344CCF58 /* MacroFunctions.swift in Sources */,
 				51AB1997DAC7C26791B93476EA86A692 /* NotificationCenter+Add.swift in Sources */,

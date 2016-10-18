@@ -190,19 +190,22 @@ extension WOWOrderController:OrderCellDelegate{
                     if ret == "success"{ //支付成功
                         
                         //TalkingData 支付成功
-                        let sum                  = Int32(model.total!) ?? 0
-                        let order_id             = String(orderID)
+                        var sum                  = Int32(model.total ?? "0" ) ?? 0
+                        sum                      = sum * 100
+                        let order_id             = orderID
                         
-                        let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
-                        for m:WOWOrderProductModel in model.products! {
-                            let price = Int32(m.price ?? "0") ?? 0
-                            let total = Int32(m.total ?? "0" ) ?? 0
-                            order?.addItem(withCategory: "", name:      m.name, unitPrice: price, amount: total)
-                            order?.addItem(withCategory: "", itemId:    order_id, name: "", unitPrice: price, amount: total)
-                        }
-                        TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: "weixin" , with:order)
-                        
-
+//                        let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
+//                        for m:WOWOrderProductModel in model.products! {
+//                            var price = Int32(m.price ?? "0") ?? 0
+//                            var total = Int32(m.total ?? "0" ) ?? 0
+//                            price     = price * 100
+//                            total     = price * 100
+//                            order?.addItem(withCategory: "", name:      m.name,     unitPrice: price,               amount: total)
+//                            order?.addItem(withCategory: "", itemId:    order_id,   name: m.name, unitPrice: price, amount: total)
+//                        }
+                        let pay_type             = model.pay_method
+//                        TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: "weixin" , with:order)
+                        TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: pay_type)
                         
                         strongSelf.request()
                     }else{//订单支付取消或者失败

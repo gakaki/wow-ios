@@ -427,9 +427,12 @@ extension WOWOrderDetailController{
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
                 
                 
-                //
                 
-                
+                //TalkingData 支付成功
+                var sum                  = Int32( payAmount ?? 0  )
+                sum                      = sum * 100
+                let order_id             = orderCode ?? ""
+                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: paymentChannelName)
                 
                 
             }

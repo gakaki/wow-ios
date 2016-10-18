@@ -436,12 +436,8 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
                 //查看购物车
                 let id      = String(describing:product.subProductId)
                 let price   = Int32(product.sellPrice ?? 0) * 100
-                let name    = product.productName ?? ""
-                let shoppingCart = TDShoppingCart.create()
+                let name    = self?.productModel?.productName ?? ""
                 
-                shoppingCart?.addItem(withCategory: "", itemId: id, name: "", unitPrice: price, amount: Int32(c))
-                TalkingDataAppCpa.onViewShoppingCart(shoppingCart)
-               
                 
                 TalkingDataAppCpa.onAddItemToShoppingCart(withCategory: "", itemId: id, name: name, unitPrice: price, amount:  Int32(c))
 

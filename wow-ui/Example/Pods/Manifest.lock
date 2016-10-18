@@ -1,0 +1,35 @@
+PODS:
+  - wow-ui (0.1.0):
+    - wow-util
+    - YYImage/WebP
+    - YYWebImage
+  - wow-util (0.1.0):
+    - YYImage/WebP
+    - YYWebImage
+  - YYCache (1.0.4)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
+  - YYImage/WebP (1.0.4):
+    - YYImage/Core
+  - YYWebImage (1.0.5):
+    - YYCache
+    - YYImage
+
+DEPENDENCIES:
+  - wow-ui (from `../`)
+
+EXTERNAL SOURCES:
+  wow-ui:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  wow-ui: f3f198dd6df8639feaa8ace4911626797c4d3ea2
+  wow-util: 71871737af3af3af26657f954741542623803e2a
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
+
+PODFILE CHECKSUM: c36de1c8d52845c898b8180ffa0562b6a2bffed9
+
+COCOAPODS: 1.1.0.rc.3

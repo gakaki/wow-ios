@@ -1,0 +1,6 @@
+framework module wow_ui {
+  umbrella header "wow-ui-umbrella.h"
+
+  export *
+  module * { export * }
+}

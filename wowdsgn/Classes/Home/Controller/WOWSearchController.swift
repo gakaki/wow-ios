@@ -35,7 +35,9 @@ class WOWSearchController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       request()
+        MobClick.e(.Search)
+        
+        request()
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
             ($0,$1)
             }.throttle(0.1, scheduler: MainScheduler.instance)
@@ -288,6 +290,9 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
             let title = keyWords[(indexPath as NSIndexPath).row] as! String
             searchView.searchTextField.text = title
             searchView.searchTextField.resignFirstResponder()
+            
+            MobClick.e(.Search_Popular_Tags)
+            
             requestResult()
             searchHistory(title)
 
@@ -295,6 +300,9 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
             let title = searchArray[(indexPath as NSIndexPath).row]
             searchView.searchTextField.text = title
             searchView.searchTextField.resignFirstResponder()
+            
+            MobClick.e(.Search_History_Tags)
+            
             requestResult()
             searchHistory(title)
 

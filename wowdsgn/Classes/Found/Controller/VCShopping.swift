@@ -125,6 +125,20 @@ extension VCShopping:VTMagicViewDelegate{
         
         if let b = magicView.menuItem(at: pageIndex) {
             print("  button asc is ", b)
+            
+            switch pageIndex {
+                case  0: break
+                case  1:
+                    MobClick.e(.Brands_List)
+                    break
+                case  2:
+                    MobClick.e(.Designers_List)
+                    break
+                default:
+                    MobClick.e(.Home)
+                    break
+            }
+
         }
     }
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){

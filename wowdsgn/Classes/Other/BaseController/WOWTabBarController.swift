@@ -151,6 +151,24 @@ extension WOWTabBarController:UITabBarControllerDelegate{
                 return false
             }
         }
+        if let i = controllers?.index(of: viewController) {
+            switch i {
+            case  0:
+                MobClick.e(.Home)
+            case  1:
+                MobClick.e(.Shopping)
+            case  2:
+                MobClick.e(.Selection)
+            case  3:
+                MobClick.e(.Like)
+            case  4:
+                MobClick.e(.Me)
+            default:
+                MobClick.e(.Home)
+            }
+        }
+        
+        
         
         WOWTool.lastTabIndex = index ?? 0
         return true

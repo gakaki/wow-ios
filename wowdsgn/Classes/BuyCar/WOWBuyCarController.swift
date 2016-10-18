@@ -63,6 +63,8 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MobClick.e(.Shoppingcart)
         configData()
     }
     

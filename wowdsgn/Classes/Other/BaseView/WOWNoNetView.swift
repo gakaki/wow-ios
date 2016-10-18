@@ -90,10 +90,9 @@ class WOWNoNetView: UIView {
         refreshDataBlock()
     }
     func removeNoDataAndNetworkView(){
-//        if self {
-       
+
             self.removeFromSuperview()
-//        }
+
     }
 }
 

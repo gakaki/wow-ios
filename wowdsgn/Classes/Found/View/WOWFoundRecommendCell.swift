@@ -162,11 +162,23 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         let btn = LikeBtn.init(frame: CGRect.zero)
         btn.alpha = 0.0
         self.contentView.addSubview(btn)
+        var offSet = 7
+        switch UIDevice.deviceType {
+        case .dt_iPhone5:
+            offSet = 7
+        case .dt_iPhone6:
+            offSet = 8
+        case .dt_iPhone6_Plus:
+            offSet = 9
+        default:
+            break
+        }
+        
         btn.snp.makeConstraints { [weak self](make) -> Void in
             make.width.equalTo(32)
             make.height.equalTo(32)
-            make.bottom.equalTo(self!).offset(-9)
-            make.right.equalTo(self!).offset(-8)
+            make.bottom.equalTo(self!).offset(-(offSet + 1).h)
+            make.right.equalTo(self!).offset(-offSet.w)
         }
         WOWClickLikeAction.requestFavoriteProduct(productId: self.product?.productId ?? 0,view: self.contentView,btn: btn, isFavorite: { [weak self](isFavorite) in
 

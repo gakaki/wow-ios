@@ -48,6 +48,10 @@ class WOWUserController: WOWBaseTableViewController {
      
     
     fileprivate func configClickAction(){
+        
+        MobClick.e(.My_Orders)
+
+        
         allOrderView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
                 strongSelf.goOrder(0)
@@ -76,10 +80,13 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     func goOrder(_ type:Int) {
+        
+
         guard WOWUserManager.loginStatus else{
             toLoginVC(true)
             return
         }
+
 //        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
 //        vc.selectIndex = type
         let vc = WOWOrderListViewController()
@@ -197,11 +204,15 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
         switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (1,1): //打电话
             WOWTool.callPhone()
+            MobClick.e(.Service_Phone)
             return
         case (1,2): //支持尖叫设计
             evaluateApp()
+            MobClick.e(.Support_Us)
             return
         case (2,_)://设置
+            MobClick.e(.Setting)
+
             let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWSettingController.self)) as! WOWSettingController
             navigationController?.pushViewController(vc, animated: true)
             return
@@ -220,6 +231,8 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
                     toLoginVC(true)
                     return
                 }
+                
+                MobClick.e(.My_Coupons)
                 let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
                 vc.entrance = couponEntrance.userEntrance
                 navigationController?.pushViewController(vc, animated: true)

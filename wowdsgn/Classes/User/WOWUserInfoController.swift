@@ -63,6 +63,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        MobClick.e(.Personal_Information)
+        
         addObserver()
         configUserInfo()
        

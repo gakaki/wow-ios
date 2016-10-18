@@ -51,7 +51,7 @@ class WOWCommentController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 200
         tableView.clearRestCell()
-        tableView.register(UINib.nibName(String(describing: WOWCommentCell())), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:cellID)
         tableView.mj_header = self.mj_header
         tableView.mj_footer = self.mj_footer
         navigationItem.title = "评论"

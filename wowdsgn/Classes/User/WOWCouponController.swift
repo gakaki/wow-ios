@@ -201,7 +201,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
                 view.backgroundColor = UIColor.clear
                 return view
             }else {
-                let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView()), owner: self, options: nil)?.last as! WOWCouponheaderView
+                let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView.self), owner: self, options: nil)?.last as! WOWCouponheaderView
                 view.noUseButton.addTarget(self, action: #selector(noUserClick(_:)), for:.touchUpInside)
                 return view
             }

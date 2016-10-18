@@ -146,7 +146,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             return 60
         case 6: //如果相关商品有数据显示，如果没有就不显示
             if aboutProductArray.count > 0 {
-                return 15
+                return 39
             }else {
                 return 0.01
             }
@@ -158,6 +158,12 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 3:
+            if isOpenParam {
+                return 20
+            }else {
+                return 0.01
+            }
+        case 5:
             return 0.01
         default:
             return 15
@@ -165,25 +171,25 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 6:     //如果相关商品有数据显示，如果没有就不显示
-            if aboutProductArray.count > 0 {
-                return "相关商品"
-            }else {
-                return nil
-            }
-            
-        default:
-            return nil
-        }
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        switch section {
+//        case 6:     //如果相关商品有数据显示，如果没有就不显示
+//            if aboutProductArray.count > 0 {
+//                return "相关商品"
+//            }else {
+//                return nil
+//            }
+//            
+//        default:
+//            return nil
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 2:     //产品描述
             return productDescView
-        case 3:     
+        case 3:
             paramView.label.text = "产品参数"
             paramView.openImg.addTapGesture(action: { [weak self](tap) in
                 if let strongSelf = self  {
@@ -192,7 +198,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                     let sections = NSIndexSet(index: section)
                     tableView.reloadSections(sections as IndexSet, with: .automatic)
                 }
-            })
+                })
             return paramView
         case 4:
             tipsView.label.text = "温馨提示"
@@ -205,6 +211,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return tipsView
+        case 6:
+            return aboutView
         default:
             return nil
         }
@@ -215,10 +223,12 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         
         let view = UIView()
         view.backgroundColor = UIColor.clear
+        if section == 3 {
+            view.backgroundColor = UIColor.white
+        }
         return view
         
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath as NSIndexPath).section {
         case 5:

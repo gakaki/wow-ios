@@ -108,6 +108,11 @@ class WOWProductDetailController: WOWBaseViewController {
         return v
     }()
 
+    //相关商品
+    lazy var aboutView:WOWAboutHeaderView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        return v
+    }()
 //MARK:Private Method
     override func setUI() {
         super.setUI()

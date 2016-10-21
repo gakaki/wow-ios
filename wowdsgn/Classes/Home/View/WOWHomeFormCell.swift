@@ -104,27 +104,12 @@ class WOWHomeFormCell: UITableViewCell {
     
 
     func refreshData(_ sender: Notification)  {
-        guard (sender.object != nil) else{//
-            return
-        }
 
-        for a in 0..<dataArr!.count{
-                let model = dataArr![a]
+        if  let send_obj =  sender.object as? [String:AnyObject] {
             
-            if  let send_obj =  sender.object as? [String:AnyObject] {
-                
-                if model.productId! == send_obj["productId"] as? Int {
-                    model.favorite = send_obj["favorite"] as? Bool
-                    break
-                }
-            }
-      
-            
-        
+            dataArr?.ergodicArrayWithProductModel(dic: send_obj)
+            collectionView.reloadData()
         }
-        collectionView.reloadData()
-        
-
     
 }
 

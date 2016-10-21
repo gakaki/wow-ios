@@ -10,7 +10,7 @@ import UIKit
 //  bottom cell 、 402 cell
 protocol HomeBottomDelegate:class {
     // 跳转产品详情代理
-    func goToProductDetailVC(_ indexRow: Int?)
+    func goToProductDetailVC(_ productId: Int?)
     
 }
 
@@ -39,13 +39,14 @@ class HomeBottomCell: UITableViewCell {
     
      @IBOutlet weak var btnIsLikeOne: UIButton!// 是否喜欢的btn
     @IBOutlet weak var btnIsLikeTwo: UIButton!// 是否喜欢的btn
-
+    var oneModel : WOWProductModel? = nil
+    var twoModel : WOWProductModel? = nil
     
     @IBAction func clickOneBtn(_ sender: AnyObject) {
 
         if let del = delegate{
-     
-            del.goToProductDetailVC(sender.tag)
+            
+            del.goToProductDetailVC(oneModel?.productId)
 
         }
      
@@ -54,7 +55,7 @@ class HomeBottomCell: UITableViewCell {
         
         if let del = delegate{
             
-            del.goToProductDetailVC(sender.tag)
+            del.goToProductDetailVC(twoModel?.productId)
             
         }
 
@@ -85,15 +86,15 @@ class HomeBottomCell: UITableViewCell {
         
     }
 
-    func showDataOne(_ model:WOWFoundProductModel) {
-
+    func showDataOne(_ model:WOWProductModel) {
+        oneModel = model
         imgShowOne.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleOne.text = model.productName
         productIdOne = model.productId
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         var originalPriceStr = ""
-        if let originalPrice = model.originalPrice {
+        if let originalPrice = model.originalprice {
               originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
         }
         // 格式化富文本
@@ -118,15 +119,16 @@ class HomeBottomCell: UITableViewCell {
     
         
     }
-    func showDataTwo(_ model:WOWFoundProductModel) {
-
+//    originalprice
+    func showDataTwo(_ model:WOWProductModel) {
+        twoModel = model
         imgShowTwo.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleTwo.text = model.productName
         productIdTwo = model.productId
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         var originalPriceStr = ""
-        if let originalPrice = model.originalPrice {
+        if let originalPrice = model.originalprice {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
         }
         // 格式化富文本

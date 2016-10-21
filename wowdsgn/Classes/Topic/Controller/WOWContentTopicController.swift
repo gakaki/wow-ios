@@ -133,31 +133,21 @@ class WOWContentTopicController: WOWBaseViewController {
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
-        guard (sender.object != nil) else{//
-            return
+
+        if  let send_obj =  sender.object as? [String:AnyObject] {
+            
+            vo_products.ergodicArrayWithProductModel(dic: send_obj)
+            self.tableView.reloadData()
         }
-        for a in 0..<vo_products.count{// 遍历数据，拿到productId model 更改favorite 状态
-            let model = vo_products[a]
-            
-            
-            
-            if  let send_obj =  sender.object as? [String:AnyObject] {
-                
-                if model.productId! == send_obj["productId"] as? Int {
-                    model.favorite = send_obj["favorite"] as? Bool
-                    break
-                }
-            }
-        
-            
-        }
-        self.tableView.reloadData()
+
+      
     }
 
     
     fileprivate func removeObservers() {
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
     }
     
     /**

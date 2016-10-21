@@ -33,11 +33,11 @@ class WOWController: WOWBaseViewController {
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
     
-    var bottomListArray = [WOWFoundProductModel]() //底部列表数组
+    var bottomListArray = [WOWProductModel]() //底部列表数组
     
     var bottomListCount :Int = 0//底部列表数组的个数
     
-    var offsetY :CGFloat = 0
+    var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
@@ -133,22 +133,21 @@ class WOWController: WOWBaseViewController {
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
-        guard (sender.object != nil) else{//
-                    return
-        }
-        for a in 0..<bottomListArray.count{// 遍历数据，拿到productId model 更改favorite 状态
-            let model = bottomListArray[a]
+
+        if  let send_obj =  sender.object as? [String:AnyObject] {
             
-            if  let send_obj =  sender.object as? [String:AnyObject] {
-                
-                
-                if model.productId! == send_obj["productId"] as? Int {
-                    model.favorite = send_obj["favorite"] as? Bool
-                }
+            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
+
+            for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
+                let model = dataArr[j] 
+                model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
             }
-          
+
+            self.tableView.reloadData()
+            
+            
         }
-         self.tableView.reloadData()
+      
     }
     lazy var banner:WOWBanner = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWBanner.self), owner: self, options: nil)?.last as! WOWBanner
@@ -274,7 +273,7 @@ class WOWController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.mj_footerHome.endRefreshing()
                 
-                let bannerList = Mapper<WOWFoundProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
+                let bannerList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 
                 if let bannerList = bannerList{
                     if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
@@ -390,7 +389,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
             switch model.moduleType ?? 0 {
             case 402:
-                
+                        record_402_index.append(section)
                 return (model.moduleContentProduct?.products?.count.getParityCellNumber()) ?? 0
                 
             default:
@@ -403,7 +402,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         }
       
     }
-    func cellConfig(one: NSInteger, two: NSInteger ,isHiddenTwoItem: Bool, cell:HomeBottomCell,dataSourceArray:[WOWFoundProductModel])  {
+    // 配置cell的UI
+    func cellUIConfig(one: NSInteger, two: NSInteger ,isHiddenTwoItem: Bool, cell:HomeBottomCell,dataSourceArray:[WOWProductModel])  {
         let  modelOne = dataSourceArray[one]
         if isHiddenTwoItem == false {
            
@@ -433,13 +433,12 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataArr.count + 1) * 2) - 1
             if bottomListCount.isOdd && (indexPath as NSIndexPath).section + 1 == (dataArr.count) + bottomListCount.getParityCellNumber() {//  满足为奇数 第二个item 隐藏
                 
-                self.cellConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:bottomListArray)
-
-                
+                self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:bottomListArray)
                     
             }else{
-                cellConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:bottomListArray)
-
+                
+                self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:bottomListArray)
+                
             }
   
             cell.delegate = self
@@ -498,23 +497,14 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
          
          if productsArray.count.isOdd && (indexPath as NSIndexPath).row + 1 == productsArray.count.getParityCellNumber(){ //  满足为奇数 第二个item 隐藏
             
-                let  modelOne = productsArray[OneCellNumber]
-                cell.showDataOne(modelOne)
-                cell.twoLb.isHidden = false
+            self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:productsArray)
             
          }else{
-    
-            let  modelOne = productsArray[OneCellNumber]
-            let  modelTwo = productsArray[TwoCellNumber]
-            cell.showDataOne(modelOne)
-            cell.showDataTwo(modelTwo)
-            cell.twoLb.isHidden = true
+            
+            self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:productsArray)
             
          }
          // 排序 0，1，2，3，4...
-         
-         cell.oneBtn.tag = OneCellNumber
-         cell.twoBtn.tag = TwoCellNumber
          cell.delegate = self
          cell.selectionStyle = .none
 
@@ -650,10 +640,9 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 }
 extension WOWController:HomeBottomDelegate{
     
-    func goToProductDetailVC(_ indexRow: Int?) {//跳转产品详情
+    func goToProductDetailVC(_ productId: Int?) {//跳转产品详情
         
-        let model = bottomListArray[indexRow!]
-        toVCProduct(model.productId)
+        toVCProduct(productId)
         
     }
 
@@ -685,5 +674,19 @@ extension WOWController: CyclePictureViewDelegate { // 轮播banner 对应的跳
         let model = bannerArray[(indexPath as NSIndexPath).row]
         
         goController(model)
+    }
+}
+extension Array{
+    // 遍历数组，里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel
+    func ergodicArrayWithProductModel(dic: [String:AnyObject] ){
+        for a in 0..<self.count{// 遍历数据，拿到productId model 更改favorite 状态
+            let model = self[a] as? WOWProductModel
+
+                if model?.productId! == dic["productId"] as? Int {
+                    model?.favorite = dic["favorite"] as? Bool
+                }
+
+        }
+
     }
 }

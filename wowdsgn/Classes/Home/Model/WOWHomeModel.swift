@@ -78,7 +78,7 @@ class WOWHomeAdditionalInfo: WOWBaseModel,Mappable {
 class WOWHomeProduct_402_Info: WOWBaseModel,Mappable {
     // 701  imageUrl:背景图片地址  title：标题
     
-    var products                :       [WOWFoundProductModel]?
+    var products                :       [WOWProductModel]?
     
     
     required init?(map: Map) {

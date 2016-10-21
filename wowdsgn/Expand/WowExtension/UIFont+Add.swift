@@ -19,7 +19,6 @@ public enum FontWeight {
     case light
     case ultraLight
 }
-
 extension  UIFont{
    class func priceFont(_ size:CGFloat = 12) -> UIFont{
         return UIFont(name: "DIN Alternate", size:size) ?? UIFont.systemFont(ofSize: size)

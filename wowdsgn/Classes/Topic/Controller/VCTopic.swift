@@ -133,25 +133,14 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
-        guard (sender.object != nil) else{//
-            return
-        }
-        for a in 0..<vo_products.count{// 遍历数据，拿到productId model 更改favorite 状态
-            let model = vo_products[a]
+
+        if  let send_obj =  sender.object as? [String:AnyObject] {
             
-            
-            
-            if  let send_obj =  sender.object as? [String:AnyObject] {
-                
-                if model.productId! == send_obj["productId"] as? Int {
-                    model.favorite = send_obj["favorite"] as? Bool
-                    break
-                }
-            }
-            
+            vo_products.ergodicArrayWithProductModel(dic: send_obj)
+            self.cv.reloadData()
             
         }
-        self.cv.reloadData()
+
     }
 
     override func request(){

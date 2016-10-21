@@ -17,6 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBG-GM-xcP" customClass="CyclePictureView" customModule="wow_vendor_ui">
+
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="dBG-GM-xcP" secondAttribute="height" multiplier="320:320" id="Ehq-MM-w4Z"/>
@@ -31,9 +32,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="cyclePictureView" destination="dBG-GM-xcP" id="stx-e1-SGh"/>
+                <outlet property="cyclePictureView" destination="dBG-GM-xcP" id="C2t-1B-SUz"/>
             </connections>
-            <point key="canvasLocation" x="0.0" y="73.5"/>
+            <point key="canvasLocation" x="-130" y="-414"/>
         </tableViewCell>
     </objects>
 </document>

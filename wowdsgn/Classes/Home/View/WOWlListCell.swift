@@ -33,20 +33,8 @@ class WOWlListCell: UITableViewCell {
     func showData(_ model:WOWCarouselBanners) {
         let url = model.bannerImgSrc ?? ""
         DLog(url)
-//      bigImageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage:UIImage(named: "placeholder_product"))
+
         bigImageView.set_webimage_url(url);
-//        bigImageView
-//        
-//        bigImageView.yy_setImageWithURL(NSURL(string: url)!, placeholder: "placeholder_product", options: nil, progress: {(receivedSize: Int, expectedSize: Int) -> Void in
-//            let progress = Float(receivedSize) / expectedSize
-//            }, transform: {(image: UIImage, url: NSURL) -> UIImage in
-//                image = image.yy_imageByResizeToSize(CGSizeMake(100, 100), contentMode: .Center)
-//                return image.yy_imageByRoundCornerRadius(10)
-//            }, completion: {(image: UIImage, url: NSURL, from: YYWebImageFromType, stage: YYWebImageStage, error: NSError?) -> Void in
-//                if from == YYWebImageFromDiskCache {
-//                    print("load from disk cache")
-//                }
-//        })
 
         
         
@@ -54,30 +42,6 @@ class WOWlListCell: UITableViewCell {
             view.removeFromSuperview()
         }
         bigImageView.isUserInteractionEnabled = true
-//        let products = model.products ?? []
-//        productBtns = []
-//        for productModel in products {
-//            let btn = UIButton(type: .System)
-//            btn.setImage(UIImage(named: "sence_animatePot")?.imageWithRenderingMode(.AlwaysOriginal), forState:.Normal)
-//            btn.tag = Int(productModel.productID ?? "-1111") ?? -1111
-//            btn.addTarget(self, action:#selector(productBtnClick(_:)) , forControlEvents:.TouchUpInside)
-//            if let X = Float(productModel.productX ?? "0"),Y = Float(productModel.productY ?? "0") {
-////                let px = CGFloat(X) * (self.w/100)
-////                let py = CGFloat(Y) * (self.w/100)
-////                let frame = CGRectMake(px,py, 40, 40)
-//                let scale = CGFloat(1000) / MGScreenWidth
-//                let frame = CGRectMake(0,0,40,40)
-//                btn.frame = frame
-//                self.bigImageView.addSubview(btn)
-//                btn.center = CGPointMake(CGFloat(X * 10 / Float(scale)),CGFloat(Y * 10 / Float(scale)))
-//                self.productBtns.append(btn)
-//                UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse,.AllowUserInteraction], animations: { 
-//                    btn.layer.transform = CATransform3DMakeScale(1.4, 1.4, 1)
-//                }, completion: { (ret) in
-//                        
-//                })
-//            }
-//        }
     }
 
     func productBtnClick(_ sender:UIButton) {

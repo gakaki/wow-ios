@@ -54,5 +54,8 @@ extension UILabel {
         label.font = UIFont.systemFont(ofSize: font)
         return label
     }
-
+    func AddBorderRadius()  {
+        self.borderColor(0.5, borderColor: UIColor.init(hexString: "cccccc")!)
+        self.borderRadius(2)
+    }
 }

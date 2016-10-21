@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//  bottom cell 、 402 cell
 protocol HomeBottomDelegate:class {
     // 跳转产品详情代理
     func goToProductDetailVC(_ indexRow: Int?)

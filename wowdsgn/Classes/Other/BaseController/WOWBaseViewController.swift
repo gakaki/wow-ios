@@ -253,12 +253,12 @@ extension WOWBaseViewController {
     
     func updateBageCount() {
         if WOWUserManager.userCarCount <= 0 {
-            carBadgeCount!.badgeString = ""
+            carBadgeCount?.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
             
-            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+            carBadgeCount?.badgeString = "\(WOWUserManager.userCarCount)"
         }else {
-            carBadgeCount!.badgeString = "99+"
+            carBadgeCount?.badgeString = "99+"
         }
         
     }

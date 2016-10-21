@@ -13,6 +13,7 @@
 		065722F61DB4BF4700781B1C /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E41DB4BF4700781B1C /* libTalkingData.a */; };
 		065722F71DB4BF4700781B1C /* libTalkingDataAppCpa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E51DB4BF4700781B1C /* libTalkingDataAppCpa.a */; };
 		067940A61DB60B5000348691 /* UMengEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067940A51DB60B5000348691 /* UMengEvent.swift */; };
+		067AFF631DB9C4CF00D48020 /* ExtensionEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */; };
 		0681214E1DB4D03600407319 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 068121281DB4D03600407319 /* libSocialQQ.a */; };
 		0681214F1DB4D03600407319 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 068121291DB4D03600407319 /* TencentOpenAPI.framework */; };
 		068121501DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0681212A1DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle */; };
@@ -438,6 +439,7 @@
 		065722EA1DB4BF4700781B1C /* TalkingDataAppCpa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataAppCpa.h; sourceTree = "<group>"; };
 		065722EB1DB4BF4700781B1C /* TalkingDataSMS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataSMS.h; sourceTree = "<group>"; };
 		067940A51DB60B5000348691 /* UMengEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMengEvent.swift; sourceTree = "<group>"; };
+		067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionEquatable.swift; sourceTree = "<group>"; };
 		068121281DB4D03600407319 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		068121291DB4D03600407319 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		0681212A1DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
@@ -1452,6 +1454,7 @@
 				069D30EB1DB47ADC00A059D0 /* WowConfig */,
 				069D30FA1DB47ADD00A059D0 /* WowExtension */,
 				069D31051DB47ADD00A059D0 /* WowVendor */,
+				067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */,
 			);
 			path = Expand;
 			sourceTree = "<group>";
@@ -2532,6 +2535,7 @@
 				069D31CD1DB47ADD00A059D0 /* FavoriteEmpty.swift in Sources */,
 				069D31B51DB47ADD00A059D0 /* WOWEditOrderController.swift in Sources */,
 				069D31C91DB47ADD00A059D0 /* WOWValue1Cell.swift in Sources */,
+				067AFF631DB9C4CF00D48020 /* ExtensionEquatable.swift in Sources */,
 				069D31A91DB47ADD00A059D0 /* WOWBuyCarController.swift in Sources */,
 				069D31BD1DB47ADD00A059D0 /* WOWOrderFreightCell.swift in Sources */,
 				069D33391DB47ADE00A059D0 /* CollectionViewWaterfallLayout.swift in Sources */,

@@ -99,7 +99,7 @@ class WOWProductDetailController: WOWBaseViewController {
         configTable()
         //        buyCarCount()
     }
-    
+
     fileprivate func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(loginSucces), name: NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
@@ -107,27 +107,23 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
-        guard (sender.object != nil) else{//
-            return
-        }
-        for a in 0..<aboutProductArray.count{// 遍历数据，拿到productId model 更改favorite 状态
-            let model = aboutProductArray[a]
+
+        if  let send_obj =  sender.object as? [String:AnyObject] {
             
-            if  let send_obj =  sender.object as? [String:AnyObject] {
-                
-                if model.productId! == send_obj["productId"] as? Int {
-                    model.favorite = send_obj["favorite"] as? Bool
-                    break
-                }
-            }
-            
+            aboutProductArray.ergodicArrayWithProductModel(dic: send_obj)
+             self.tableView.reloadData()
         }
-        self.tableView.reloadData()
+
+       
     }
     
     fileprivate func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
+
+        
+         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
+         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
+         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
+
     }
     
     /**
@@ -319,6 +315,7 @@ class WOWProductDetailController: WOWBaseViewController {
     func requestFavoriteProduct()  {
         
         WOWHud.showLoadingSV()
+
         WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view:bottomView,btn:likeButton, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 

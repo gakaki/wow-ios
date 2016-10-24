@@ -13,6 +13,7 @@
 		065722F61DB4BF4700781B1C /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E41DB4BF4700781B1C /* libTalkingData.a */; };
 		065722F71DB4BF4700781B1C /* libTalkingDataAppCpa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E51DB4BF4700781B1C /* libTalkingDataAppCpa.a */; };
 		067940A61DB60B5000348691 /* UMengEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067940A51DB60B5000348691 /* UMengEvent.swift */; };
+		067AFF631DB9C4CF00D48020 /* ExtensionEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */; };
 		0681214E1DB4D03600407319 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 068121281DB4D03600407319 /* libSocialQQ.a */; };
 		0681214F1DB4D03600407319 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 068121291DB4D03600407319 /* TencentOpenAPI.framework */; };
 		068121501DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0681212A1DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle */; };
@@ -358,6 +359,17 @@
 		069D33541DB47B3E00A059D0 /* WOWApiPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D33511DB47B3E00A059D0 /* WOWApiPath.swift */; };
 		069D33551DB47B3E00A059D0 /* WOWNetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D33521DB47B3E00A059D0 /* WOWNetManager.swift */; };
 		069D33561DB47B3E00A059D0 /* WOWRequestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */; };
+		2D130EF71DB78D48001DE9A7 /* Cell_103_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */; };
+		2D130EF81DB78D48001DE9A7 /* Cell_103_Product.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */; };
+		2D130EFE1DB78D8C001DE9A7 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */; };
+		2D130F0B1DB869B8001DE9A7 /* WOW_SingProductView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130F071DB869B8001DE9A7 /* WOW_SingProductView.xib */; };
+		2D130F0C1DB869B8001DE9A7 /* WOW_SingProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130F081DB869B8001DE9A7 /* WOW_SingProductView.swift */; };
+		2D130F0D1DB869B8001DE9A7 /* WOWCountDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130F091DB869B8001DE9A7 /* WOWCountDownView.xib */; };
+		2D130F0E1DB869B8001DE9A7 /* WOWCountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130F0A1DB869B8001DE9A7 /* WOWCountDownView.swift */; };
+		2D130F141DB8B512001DE9A7 /* WOW_Cell_402_Hearder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130F131DB8B512001DE9A7 /* WOW_Cell_402_Hearder.swift */; };
+		2D130F161DB8B51B001DE9A7 /* WOW_Cell_402_Hearder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130F151DB8B51B001DE9A7 /* WOW_Cell_402_Hearder.xib */; };
+		2D130F191DB8B9B4001DE9A7 /* WOW_Cell_103_Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130F171DB8B9B4001DE9A7 /* WOW_Cell_103_Item.swift */; };
+		2D130F1A1DB8B9B4001DE9A7 /* WOW_Cell_103_Item.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130F181DB8B9B4001DE9A7 /* WOW_Cell_103_Item.xib */; };
 		2D509A131DB5D30B0047CD13 /* WOWCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A0F1DB5D30B0047CD13 /* WOWCommentController.swift */; };
 		2D509A141DB5D30B0047CD13 /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A101DB5D30B0047CD13 /* WOWController.swift */; };
 		2D509A151DB5D30B0047CD13 /* WOWLikeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */; };
@@ -374,10 +386,6 @@
 		2D509A5A1DB5D3120047CD13 /* HomeBrannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D509A221DB5D3120047CD13 /* HomeBrannerCell.xib */; };
 		2D509A5B1DB5D3120047CD13 /* Cell_102_Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A241DB5D3120047CD13 /* Cell_102_Project.swift */; };
 		2D509A5C1DB5D3120047CD13 /* Cell_102_Project.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D509A251DB5D3120047CD13 /* Cell_102_Project.xib */; };
-		2D509A5D1DB5D3120047CD13 /* Cell_103_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A261DB5D3120047CD13 /* Cell_103_Product.swift */; };
-		2D509A5E1DB5D3120047CD13 /* Cell_103_Product.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D509A271DB5D3120047CD13 /* Cell_103_Product.xib */; };
-		2D509A5F1DB5D3120047CD13 /* Cell_104_Hot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A281DB5D3120047CD13 /* Cell_104_Hot.swift */; };
-		2D509A601DB5D3120047CD13 /* Cell_104_Hot.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D509A291DB5D3120047CD13 /* Cell_104_Hot.xib */; };
 		2D509A611DB5D3120047CD13 /* HomeFormReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A2A1DB5D3120047CD13 /* HomeFormReusableView.swift */; };
 		2D509A621DB5D3120047CD13 /* HomeFormReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D509A2B1DB5D3120047CD13 /* HomeFormReusableView.xib */; };
 		2D509A631DB5D3120047CD13 /* WOWAuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A2C1DB5D3120047CD13 /* WOWAuthorCell.swift */; };
@@ -438,6 +446,7 @@
 		065722EA1DB4BF4700781B1C /* TalkingDataAppCpa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataAppCpa.h; sourceTree = "<group>"; };
 		065722EB1DB4BF4700781B1C /* TalkingDataSMS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataSMS.h; sourceTree = "<group>"; };
 		067940A51DB60B5000348691 /* UMengEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMengEvent.swift; sourceTree = "<group>"; };
+		067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionEquatable.swift; sourceTree = "<group>"; };
 		068121281DB4D03600407319 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		068121291DB4D03600407319 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		0681212A1DB4D03600407319 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
@@ -809,6 +818,17 @@
 		069D33521DB47B3E00A059D0 /* WOWNetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNetManager.swift; sourceTree = "<group>"; };
 		069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRequestApi.swift; sourceTree = "<group>"; };
 		215C6F175F8DEB1B0D61D6FA /* Pods-wowdsgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.release.xcconfig"; sourceTree = "<group>"; };
+		2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_103_Product.swift; sourceTree = "<group>"; };
+		2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_103_Product.xib; sourceTree = "<group>"; };
+		2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
+		2D130F071DB869B8001DE9A7 /* WOW_SingProductView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOW_SingProductView.xib; sourceTree = "<group>"; };
+		2D130F081DB869B8001DE9A7 /* WOW_SingProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOW_SingProductView.swift; sourceTree = "<group>"; };
+		2D130F091DB869B8001DE9A7 /* WOWCountDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWCountDownView.xib; sourceTree = "<group>"; };
+		2D130F0A1DB869B8001DE9A7 /* WOWCountDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCountDownView.swift; sourceTree = "<group>"; };
+		2D130F131DB8B512001DE9A7 /* WOW_Cell_402_Hearder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOW_Cell_402_Hearder.swift; sourceTree = "<group>"; };
+		2D130F151DB8B51B001DE9A7 /* WOW_Cell_402_Hearder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOW_Cell_402_Hearder.xib; sourceTree = "<group>"; };
+		2D130F171DB8B9B4001DE9A7 /* WOW_Cell_103_Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOW_Cell_103_Item.swift; sourceTree = "<group>"; };
+		2D130F181DB8B9B4001DE9A7 /* WOW_Cell_103_Item.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOW_Cell_103_Item.xib; sourceTree = "<group>"; };
 		2D509A0F1DB5D30B0047CD13 /* WOWCommentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCommentController.swift; sourceTree = "<group>"; };
 		2D509A101DB5D30B0047CD13 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
 		2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWLikeListController.swift; sourceTree = "<group>"; };
@@ -825,10 +845,6 @@
 		2D509A221DB5D3120047CD13 /* HomeBrannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeBrannerCell.xib; sourceTree = "<group>"; };
 		2D509A241DB5D3120047CD13 /* Cell_102_Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_102_Project.swift; sourceTree = "<group>"; };
 		2D509A251DB5D3120047CD13 /* Cell_102_Project.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_102_Project.xib; sourceTree = "<group>"; };
-		2D509A261DB5D3120047CD13 /* Cell_103_Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_103_Product.swift; sourceTree = "<group>"; };
-		2D509A271DB5D3120047CD13 /* Cell_103_Product.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_103_Product.xib; sourceTree = "<group>"; };
-		2D509A281DB5D3120047CD13 /* Cell_104_Hot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_104_Hot.swift; sourceTree = "<group>"; };
-		2D509A291DB5D3120047CD13 /* Cell_104_Hot.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_104_Hot.xib; sourceTree = "<group>"; };
 		2D509A2A1DB5D3120047CD13 /* HomeFormReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFormReusableView.swift; sourceTree = "<group>"; };
 		2D509A2B1DB5D3120047CD13 /* HomeFormReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeFormReusableView.xib; sourceTree = "<group>"; };
 		2D509A2C1DB5D3120047CD13 /* WOWAuthorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAuthorCell.swift; sourceTree = "<group>"; };
@@ -1452,6 +1468,7 @@
 				069D30EB1DB47ADC00A059D0 /* WowConfig */,
 				069D30FA1DB47ADD00A059D0 /* WowExtension */,
 				069D31051DB47ADD00A059D0 /* WowVendor */,
+				067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */,
 			);
 			path = Expand;
 			sourceTree = "<group>";
@@ -1699,12 +1716,19 @@
 		2D509A231DB5D3120047CD13 /* HomeCellView */ = {
 			isa = PBXGroup;
 			children = (
+				2D130F081DB869B8001DE9A7 /* WOW_SingProductView.swift */,
+				2D130F071DB869B8001DE9A7 /* WOW_SingProductView.xib */,
+				2D130F0A1DB869B8001DE9A7 /* WOWCountDownView.swift */,
+				2D130F091DB869B8001DE9A7 /* WOWCountDownView.xib */,
+				2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */,
+				2D130F131DB8B512001DE9A7 /* WOW_Cell_402_Hearder.swift */,
+				2D130F151DB8B51B001DE9A7 /* WOW_Cell_402_Hearder.xib */,
+				2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */,
+				2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */,
 				2D509A241DB5D3120047CD13 /* Cell_102_Project.swift */,
 				2D509A251DB5D3120047CD13 /* Cell_102_Project.xib */,
-				2D509A261DB5D3120047CD13 /* Cell_103_Product.swift */,
-				2D509A271DB5D3120047CD13 /* Cell_103_Product.xib */,
-				2D509A281DB5D3120047CD13 /* Cell_104_Hot.swift */,
-				2D509A291DB5D3120047CD13 /* Cell_104_Hot.xib */,
+				2D130F171DB8B9B4001DE9A7 /* WOW_Cell_103_Item.swift */,
+				2D130F181DB8B9B4001DE9A7 /* WOW_Cell_103_Item.xib */,
 			);
 			path = HomeCellView;
 			sourceTree = "<group>";
@@ -2108,7 +2132,6 @@
 				069D31CA1DB47ADD00A059D0 /* WOWValue1Cell.xib in Resources */,
 				069D32641DB47ADD00A059D0 /* WOWDesignerCell.xib in Resources */,
 				63576E781DB5F695000C3FB6 /* WOWAboutHeaderView.xib in Resources */,
-				2D509A601DB5D3120047CD13 /* Cell_104_Hot.xib in Resources */,
 				069D325B1DB47ADD00A059D0 /* WOWBrandDetailCell.xib in Resources */,
 				2D509A651DB5D3120047CD13 /* WOWBanner.xib in Resources */,
 				2D509A721DB5D3120047CD13 /* WOWlListCell.xib in Resources */,
@@ -2132,8 +2155,10 @@
 				068121591DB4D03700407319 /* UMSnsAccountViewController.xib in Resources */,
 				2D509A771DB5D3120047CD13 /* WOWSearchBarView.xib in Resources */,
 				069D32841DB47ADD00A059D0 /* WOWProductHeaderView.xib in Resources */,
+				2D130F161DB8B51B001DE9A7 /* WOW_Cell_402_Hearder.xib in Resources */,
 				069D333D1DB47ADE00A059D0 /* product_detail_tips.html in Resources */,
 				069D328E1DB47ADD00A059D0 /* WOWProductSpecReusableView.xib in Resources */,
+				2D130F0D1DB869B8001DE9A7 /* WOWCountDownView.xib in Resources */,
 				068121581DB4D03700407319 /* UMSLoginViewController.xib in Resources */,
 				065722F21DB4BF4700781B1C /* Growing_Version in Resources */,
 				069D32DD1DB47ADD00A059D0 /* WOWUserHomeTopView.xib in Resources */,
@@ -2166,7 +2191,6 @@
 				069D325D1DB47ADD00A059D0 /* WOWBrandHeaderView.xib in Resources */,
 				069D32741DB47ADD00A059D0 /* WOWGoodsTypeCell.xib in Resources */,
 				068121551DB4D03700407319 /* UMSCommentInputControlleriPad.xib in Resources */,
-				2D509A5E1DB5D3120047CD13 /* Cell_103_Product.xib in Resources */,
 				2D509A5C1DB5D3120047CD13 /* Cell_102_Project.xib in Resources */,
 				069D329E1DB47ADD00A059D0 /* WOWContentTopicTopCell.xib in Resources */,
 				069D31BC1DB47ADD00A059D0 /* WOWOrderFooterView.xib in Resources */,
@@ -2181,6 +2205,7 @@
 				2D509A581DB5D3120047CD13 /* HomeBottomCell.xib in Resources */,
 				069D33401DB47ADE00A059D0 /* Designer.storyboard in Resources */,
 				069D31EB1DB47ADD00A059D0 /* WOWCategoryCell.xib in Resources */,
+				2D130F0B1DB869B8001DE9A7 /* WOW_SingProductView.xib in Resources */,
 				069D32721DB47ADD00A059D0 /* WOWGoodsSmallCell.xib in Resources */,
 				069D32781DB47ADD00A059D0 /* WOWProductDetailAboutCell.xib in Resources */,
 				2D509A7E1DB5D3120047CD13 /* WOWSearchTagView.xib in Resources */,
@@ -2193,6 +2218,7 @@
 				069D32AC1DB47ADD00A059D0 /* WOWAddressCell.xib in Resources */,
 				069D31AD1DB47ADD00A059D0 /* WOWBuyCarFootView.xib in Resources */,
 				069D32A01DB47ADD00A059D0 /* WOWTopicNavigationItem.xib in Resources */,
+				2D130F1A1DB8B9B4001DE9A7 /* WOW_Cell_103_Item.xib in Resources */,
 				069D32CC1DB47ADD00A059D0 /* WOWOrderListCell.xib in Resources */,
 				068121541DB4D03700407319 /* UMSCommentInputController.xib in Resources */,
 				069D32691DB47ADD00A059D0 /* WOWGoodsBuyView.xib in Resources */,
@@ -2213,6 +2239,7 @@
 				069D32541DB47ADD00A059D0 /* WOWPickerView.xib in Resources */,
 				069D31C11DB47ADD00A059D0 /* WOWProductOrderCell.xib in Resources */,
 				2D509A861DB5D3120047CD13 /* WOWSubArtCell.xib in Resources */,
+				2D130EF81DB78D48001DE9A7 /* Cell_103_Product.xib in Resources */,
 				069D32571DB47ADD00A059D0 /* WOWShareView.xib in Resources */,
 				069D333A1DB47ADE00A059D0 /* city.json in Resources */,
 				069D31C31DB47ADD00A059D0 /* WOWSelectPayView.xib in Resources */,
@@ -2343,7 +2370,6 @@
 				069D32EA1DB47ADD00A059D0 /* WOWSearchManager.swift in Sources */,
 				069D31DA1DB47ADD00A059D0 /* VCBuy.swift in Sources */,
 				069D31E21DB47ADD00A059D0 /* VCMe.swift in Sources */,
-				2D509A5D1DB5D3120047CD13 /* Cell_103_Product.swift in Sources */,
 				069D32AE1DB47ADD00A059D0 /* WOWAddressListModel.swift in Sources */,
 				069D323D1DB47ADD00A059D0 /* WOWBaseTableViewController.swift in Sources */,
 				069D32381DB47ADD00A059D0 /* WOWRegistInfoFirstController.swift in Sources */,
@@ -2362,6 +2388,7 @@
 				2D509A161DB5D30C0047CD13 /* WOWSearchController.swift in Sources */,
 				2D509A561DB5D3120047CD13 /* WOWSearchItemModel.swift in Sources */,
 				069D33241DB47ADE00A059D0 /* CloseButton.swift in Sources */,
+				2D130F0C1DB869B8001DE9A7 /* WOW_SingProductView.swift in Sources */,
 				069D329A1DB47ADD00A059D0 /* VCBaseNavCart.swift in Sources */,
 				069D33541DB47B3E00A059D0 /* WOWApiPath.swift in Sources */,
 				069D32491DB47ADD00A059D0 /* RefreshView.swift in Sources */,
@@ -2415,6 +2442,7 @@
 				069D324D1DB47ADD00A059D0 /* WOWCheckSelectView.swift in Sources */,
 				069D31C01DB47ADD00A059D0 /* WOWProductOrderCell.swift in Sources */,
 				069D32A41DB47ADD00A059D0 /* ModelVoSldObjectMapper.swift in Sources */,
+				2D130EFE1DB78D8C001DE9A7 /* PagingScrollView.swift in Sources */,
 				069D32E71DB47ADD00A059D0 /* WOWMacrofunc.swift in Sources */,
 				069D31DD1DB47ADD00A059D0 /* VCCategoryProducts.swift in Sources */,
 				069D32C11DB47ADD00A059D0 /* WOWOrderDetailNewCell.swift in Sources */,
@@ -2501,23 +2529,26 @@
 				069D31E81DB47ADD00A059D0 /* MODULE_TYPE_CATEGORIES_CV_CELL_301.swift in Sources */,
 				069D31E61DB47ADD00A059D0 /* WowFoundModel.swift in Sources */,
 				2D509A6F1DB5D3120047CD13 /* WOWImageCell.swift in Sources */,
+				2D130F0E1DB869B8001DE9A7 /* WOWCountDownView.swift in Sources */,
 				069D32451DB47ADD00A059D0 /* WOWBaseModel.swift in Sources */,
 				069D32911DB47ADD00A059D0 /* WOWStoreBrandCell.swift in Sources */,
 				2D509A761DB5D3120047CD13 /* WOWSearchBarView.swift in Sources */,
 				069D31F21DB47ADD00A059D0 /* WOWFoundWeeklyNewCellElementCell.swift in Sources */,
+				2D130EF71DB78D48001DE9A7 /* Cell_103_Product.swift in Sources */,
 				069D323C1DB47ADD00A059D0 /* WOWRegistProtocolController.swift in Sources */,
 				069D32351DB47ADD00A059D0 /* WOWLoginController.swift in Sources */,
 				069D31D71DB47ADD00A059D0 /* WOWFavProduct.swift in Sources */,
 				069D32F71DB47ADD00A059D0 /* UIView+BorderLine.swift in Sources */,
 				069D32A51DB47ADD00A059D0 /* Stopwatch.swift in Sources */,
-				2D509A5F1DB5D3120047CD13 /* Cell_104_Hot.swift in Sources */,
 				2D509A571DB5D3120047CD13 /* HomeBottomCell.swift in Sources */,
+				2D130F141DB8B512001DE9A7 /* WOW_Cell_402_Hearder.swift in Sources */,
 				069D32B01DB47ADD00A059D0 /* WOWCouponCell.swift in Sources */,
 				069D32981DB47ADD00A059D0 /* WOWTelCell.swift in Sources */,
 				069D325A1DB47ADD00A059D0 /* WOWBrandDetailCell.swift in Sources */,
 				2D509A701DB5D3120047CD13 /* WOWLikeListCell.swift in Sources */,
 				069D32891DB47ADD00A059D0 /* WOWProductSpecFootView.swift in Sources */,
 				069D32DA1DB47ADD00A059D0 /* WOWUserHomeContainerView.swift in Sources */,
+				2D130F191DB8B9B4001DE9A7 /* WOW_Cell_103_Item.swift in Sources */,
 				069D32E61DB47ADD00A059D0 /* WOWHud.swift in Sources */,
 				2D509A151DB5D30B0047CD13 /* WOWLikeListController.swift in Sources */,
 				069D32DC1DB47ADD00A059D0 /* WOWUserHomeTopView.swift in Sources */,
@@ -2532,6 +2563,7 @@
 				069D31CD1DB47ADD00A059D0 /* FavoriteEmpty.swift in Sources */,
 				069D31B51DB47ADD00A059D0 /* WOWEditOrderController.swift in Sources */,
 				069D31C91DB47ADD00A059D0 /* WOWValue1Cell.swift in Sources */,
+				067AFF631DB9C4CF00D48020 /* ExtensionEquatable.swift in Sources */,
 				069D31A91DB47ADD00A059D0 /* WOWBuyCarController.swift in Sources */,
 				069D31BD1DB47ADD00A059D0 /* WOWOrderFreightCell.swift in Sources */,
 				069D33391DB47ADE00A059D0 /* CollectionViewWaterfallLayout.swift in Sources */,

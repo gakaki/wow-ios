@@ -8,28 +8,13 @@
 
 import UIKit
 import ObjectMapper
-//class WOWHomeModel: WOWBaseModel,Mappable {
-//    var pageId               :   Int?
-//    var region          :   Int?
-//    var moduleDataList          :  [WOWHomeModle]?
-//    
-//    required init?(_ map: Map) {
-//        
-//    }
-//    
-//    func mapping(map: Map) {
-//        pageId                 <- map["pageId"]
-//        region            <- map["region"]
-//        moduleDataList            <- map["modules"]
-//        
-//    }
-//
-//}
+
 final class WOWHomeModle: WOWBaseModel,Mappable{
-    var moduleType    :   Int?
-    var moduleContent           :  WOWCarouselBanners?
+    var moduleType              :   Int?
+    var moduleContent           :  WOWCarouselBanners?// 顶部轮播，单个图片
     var moduleContentList       :  WOWModelVoTopic?//产品列表CollectionView
-    var moduleAdditionalInfo    :   WOWHomeAdditionalInfo? // 配置信息～
+    var moduleContentProduct    :  WOWHomeProduct_402_Info? // 自定义产品组
+    var moduleAdditionalInfo    :  WOWHomeAdditionalInfo? // 配置信息～
 
     required init?(map: Map) {
         
@@ -44,13 +29,20 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         case 201://单个图片
             moduleContent         <- map["moduleContent"]
         case 601://产品列表CollectionView
-            moduleContentList         <- map["moduleContent"]
+            moduleContentList       <- map["moduleContent"]
             moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
         case 701://爆款页 参数
 
             moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
-
             moduleContentList       <- map["moduleContent"]
+            
+        case 402:// 自定义产品组
+            
+            moduleContentProduct     <- map["moduleContent"]
+        case 102:// 专题列表
+            
+            moduleContent            <- map["moduleContent"]
+            
         default:
             break
         }
@@ -79,6 +71,23 @@ class WOWHomeAdditionalInfo: WOWBaseModel,Mappable {
         showTitle           <- map["showTitle"]
         title               <- map["title"]
         descLen             <- map["descLen"]
+        
+    }
+    
+}
+class WOWHomeProduct_402_Info: WOWBaseModel,Mappable {
+    // 701  imageUrl:背景图片地址  title：标题
+    
+    var products                :       [WOWProductModel]?
+    
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+
+        products            <- map["products"]
         
     }
     

@@ -9,13 +9,19 @@
 import UIKit
 struct HomeCellType {
     
-    static let cell_101      = "HomeBrannerCell"
+    static let cell_101      = "HomeBrannerCell" // 首页轮播 cell
     
-    static let cell_201      = "WOWlListCell"
+    static let cell_201      = "WOWlListCell" // 首页单个图片cell
     
-    static let cell_601      = "WOWHomeFormCell"
+    static let cell_601      = "WOWHomeFormCell" // 首页左右滑动 产品列表cell
     
-    static let cell_701      = "WOWHotStyleCell"
+    static let cell_701      = "WOWHotStyleCell" // 精选页 cell
+    
+    static let cell_103      = "Cell_103_Product" // 今日单品 倒计时cell
+    
+    static let cell_102      = "Cell_102_Project" // 专题列表 cell
+    
+    static let cell_402      = "HomeBottomCell" // 自定义产品组 cell
     
     static let cell_HomeList = "HomeBottomCell"// 底部列表
     
@@ -27,11 +33,11 @@ class WOWController: WOWBaseViewController {
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
     
-    var bottomListArray = [WOWFoundProductModel]() //底部列表数组
+    var bottomListArray = [WOWProductModel]() //底部列表数组
     
     var bottomListCount :Int = 0//底部列表数组的个数
     
-    var offsetY :CGFloat = 0
+    var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
@@ -127,22 +133,18 @@ class WOWController: WOWBaseViewController {
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
-        guard (sender.object != nil) else{//
-                    return
-        }
-        for a in 0..<bottomListArray.count{// 遍历数据，拿到productId model 更改favorite 状态
-            let model = bottomListArray[a]
+
+        if  let send_obj =  sender.object as? [String:AnyObject] {
             
-            if  let send_obj =  sender.object as? [String:AnyObject] {
-                
-                
-                if model.productId! == send_obj["productId"] as? Int {
-                    model.favorite = send_obj["favorite"] as? Bool
-                }
+            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
+
+            for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
+                let model = dataArr[j] 
+                model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
             }
-          
+            self.tableView.reloadData()
         }
-         self.tableView.reloadData()
+      
     }
     lazy var banner:WOWBanner = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWBanner.self), owner: self, options: nil)?.last as! WOWBanner
@@ -161,6 +163,11 @@ class WOWController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         super.setUI()
+        configTableView()
+        configBarItem()
+        addObserver()
+    }
+    func configTableView() {
         
         tableView.register(UINib.nibName(HomeCellType.cell_201), forCellReuseIdentifier:HomeCellType.cell_201)
         
@@ -168,30 +175,21 @@ class WOWController: WOWBaseViewController {
         
         tableView.register(UINib.nibName(HomeCellType.cell_101), forCellReuseIdentifier: HomeCellType.cell_101)
         
+        tableView.register(UINib.nibName(HomeCellType.cell_103), forCellReuseIdentifier: HomeCellType.cell_103)
+        
+        tableView.register(UINib.nibName(HomeCellType.cell_102), forCellReuseIdentifier: HomeCellType.cell_102)
+        
         tableView.register(UINib.nibName(HomeCellType.cell_HomeList), forCellReuseIdentifier: HomeCellType.cell_HomeList)
+        
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
         
-        //        configBarItem()
         tableView.mj_header = mj_header
         tableView.mj_footer = mj_footerHome
         
         self.tableView.backgroundColor = GrayColorLevel5
-        
-        configBarItem()
-        addObserver()
-    }
 
-    func loadBottomData()  {
-        if isRreshing {
-            return
-        }else{
-            pageIndex += 1
-            isRreshing = true
-        }
-        requestBottom()
-        
     }
     fileprivate func configBarItem(){
         configBuyBarItem() // 购物车数量
@@ -213,6 +211,7 @@ class WOWController: WOWBaseViewController {
         toVCCategory(11,cname: "厨房")
         
     }
+    
     //MARK:Private Networkr
     override func request() {
         
@@ -271,7 +270,7 @@ class WOWController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.mj_footerHome.endRefreshing()
                 
-                let bannerList = Mapper<WOWFoundProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
+                let bannerList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 
                 if let bannerList = bannerList{
                     if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
@@ -310,15 +309,24 @@ class WOWController: WOWBaseViewController {
             }
         }
     }
+    func loadBottomData()  {
+        if isRreshing {
+            return
+        }else{
+            pageIndex += 1
+            isRreshing = true
+        }
+        requestBottom()
+        
+    }
+
     //点击跳转
     func goController(_ model: WOWCarouselBanners) {
         if let bannerLinkType = model.bannerLinkType {
             switch bannerLinkType {
             case 1:
                 let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWWebViewController.self)) as! WOWWebViewController
-//                vc.brandID = model.bannerLinkTargetId
-//                vc.entrance = .brandEntrance
-//                vc.hideNavigationBar = true
+
                 vc.bannerUrl = model.bannerLinkUrl
                 navigationController?.pushViewController(vc, animated: true)
                 print("web后台填连接")
@@ -373,9 +381,44 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section < dataArr.count {
+            let model = dataArr[section]
+            
+            switch model.moduleType ?? 0 {
+            case 402:
+                        record_402_index.append(section)
+                return (model.moduleContentProduct?.products?.count.getParityCellNumber()) ?? 0
+                
+            default:
+                
+                return 1
+
+            }
+        }else{
+                return 1
+        }
+      
     }
-    
+    // 配置cell的UI
+    func cellUIConfig(one: NSInteger, two: NSInteger ,isHiddenTwoItem: Bool, cell:HomeBottomCell,dataSourceArray:[WOWProductModel])  {
+        let  modelOne = dataSourceArray[one]
+        if isHiddenTwoItem == false {
+           
+            cell.showDataOne(modelOne)
+            cell.twoLb.isHidden = false
+            
+        }else{
+   
+            let  modelTwo = dataSourceArray[two]
+            cell.showDataOne(modelOne)
+            cell.showDataTwo(modelTwo)
+            cell.twoLb.isHidden = true
+        }
+        
+        cell.oneBtn.tag = one
+        cell.twoBtn.tag = two
+        
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard (indexPath as NSIndexPath).section < dataArr.count  else {
@@ -385,40 +428,16 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
           
             let OneCellNumber = ((indexPath as NSIndexPath).section  - dataArr.count + 0) * 2
             let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataArr.count + 1) * 2) - 1
-            if bottomListCount.isOdd {
-                if (indexPath as NSIndexPath).section + 1 == (dataArr.count) + bottomListCount.getParityCellNumber() { // 如果奇数 满足则 第二个Item 不出现
-                    let  modelOne = bottomListArray[OneCellNumber]
-
-                    cell.showDataOne(modelOne)
-
-             
-                    cell.twoLb.isHidden = false
+            if bottomListCount.isOdd && (indexPath as NSIndexPath).section + 1 == (dataArr.count) + bottomListCount.getParityCellNumber() {//  满足为奇数 第二个item 隐藏
+                
+                self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:bottomListArray)
                     
-                }else{
-                    let  modelOne = bottomListArray[OneCellNumber]
-                    let  modelTwo = bottomListArray[TwoCellNumber]
-                    cell.showDataOne(modelOne)
-                    cell.showDataTwo(modelTwo)
-                    cell.twoLb.isHidden = true
-                }
             }else{
-
-               let  modelOne = bottomListArray[OneCellNumber]
-               let  modelTwo = bottomListArray[TwoCellNumber]
-                cell.showDataOne(modelOne)
-                cell.showDataTwo(modelTwo)
-                cell.twoLb.isHidden = true
+                
+                self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:bottomListArray)
+                
             }
-            // 排序 0，1，2，3，4...
-         
-            
-//            let modelOne = bottomListArray[OneCellNumber]
-            
-//            let modelTwo = bottomListArray[TwoCellNumber]
-            
-            
-            cell.oneBtn.tag = OneCellNumber
-            cell.twoBtn.tag = TwoCellNumber
+  
             cell.delegate = self
             cell.selectionStyle = .none
             return cell
@@ -444,7 +463,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             cell.delegate         = self
             cell.modelData        = model.moduleContentList
             cell.selectionStyle   = .none
-            
+
             return cell
         case 101:
             let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_101, for: indexPath) as! HomeBrannerCell
@@ -457,6 +476,36 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
             cell.selectionStyle = .none
             return cell
+            
+        case 102:
+            
+             let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_102, for: indexPath) as! Cell_102_Project
+             cell.dataArr = model.moduleContent?.banners
+             return cell
+            
+        case 402:
+            
+         let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_402, for: indexPath) as! HomeBottomCell
+            cell.indexPath = indexPath
+
+         let OneCellNumber = indexPath.row * 2
+         let TwoCellNumber = ((indexPath.row + 1) * 2) - 1
+         let productsArray = model.moduleContentProduct?.products ?? []
+         
+         if productsArray.count.isOdd && (indexPath as NSIndexPath).row + 1 == productsArray.count.getParityCellNumber(){ //  满足为奇数 第二个item 隐藏
+            
+            self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:productsArray)
+            
+         }else{
+            
+            self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:productsArray)
+            
+         }
+         // 排序 0，1，2，3，4...
+         cell.delegate = self
+         cell.selectionStyle = .none
+
+        return cell
             
         default:
             return UITableViewCell()
@@ -489,22 +538,55 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
-        if section == dataArr.count {
+        switch section {
+        case dataArr.count:
             return 70
-        }else{
+        default:
+            if section < dataArr.count{
+                
+                let model = dataArr[section]
+                
+                switch model.moduleType ?? 0 {
+                case 402:
+                    
+                    return 50
+                    
+                default:
+                    
+                    return CGFloat.leastNormalMagnitude
+                    
+                }
+
+            }
+            
             return CGFloat.leastNormalMagnitude
         }
         
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == dataArr.count {
-            
+        switch section {
+        case dataArr.count:
             return hearderView()
+        default:
+            if section < dataArr.count{
+                
+                let model = dataArr[section]
+                
+                switch model.moduleType ?? 0 {
+                case 402:
+                    
+                    return WOW_Cell_402_Hearder()
+                    
+                default:
+                    
+                    return nil
+                    
+                }
+                
+            }
             
-        }else{
             return nil
         }
-        
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -528,6 +610,13 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         return view
         
     }
+    func WOW_Cell_402_Hearder() -> UIView {
+        
+        let v = Bundle.main.loadNibNamed("WOW_Cell_402_Hearder", owner: self, options: nil)?.last as! WOW_Cell_402_Hearder
+        v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth,height: 50)
+        return v
+    }
+
     func footerView() -> UIView {
 
         let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70))
@@ -548,10 +637,9 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
 }
 extension WOWController:HomeBottomDelegate{
     
-    func goToProductDetailVC(_ indexRow: Int?) {//跳转产品详情
+    func goToProductDetailVC(_ productId: Int?) {//跳转产品详情
         
-        let model = bottomListArray[indexRow!]
-        toVCProduct(model.productId)
+        toVCProduct(productId)
         
     }
 
@@ -578,10 +666,24 @@ extension WOWController:SenceCellDelegate{
     }
 }
 
-extension WOWController: CyclePictureViewDelegate {
+extension WOWController: CyclePictureViewDelegate { // 轮播banner 对应的跳转
     public func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
         let model = bannerArray[(indexPath as NSIndexPath).row]
         
         goController(model)
+    }
+}
+extension Array{
+    // 遍历数组，里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel
+    func ergodicArrayWithProductModel(dic: [String:AnyObject] ){
+        for a in 0..<self.count{// 遍历数据，拿到productId model 更改favorite 状态
+            let model = self[a] as? WOWProductModel
+
+                if model?.productId! == dic["productId"] as? Int {
+                    model?.favorite = dic["favorite"] as? Bool
+                }
+
+        }
+
     }
 }

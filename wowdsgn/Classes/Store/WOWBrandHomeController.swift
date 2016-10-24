@@ -74,6 +74,9 @@ class WOWBrandHomeController: WOWBaseViewController {
         }
 
     }
+    deinit {
+         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
+    }
     fileprivate func addObserver(){
         /**
          添加通知
@@ -83,23 +86,14 @@ class WOWBrandHomeController: WOWBaseViewController {
         
     }
     func refreshData(_ sender: Notification)  {
-        guard (sender.object != nil) else{//
-            return
-        }
-        for a in 0..<dataArr.count{// 遍历数据，拿到productId model 更改favorite 状态
-            let model = dataArr[a]
+
+        if  let send_obj =  sender.object as? [String:AnyObject] {
             
-            
-            if  let send_obj =  sender.object as? [String:AnyObject] {
-                
-                if model.productId! == send_obj["productId"] as? Int {
-                    model.favorite = send_obj["favorite"] as? Bool
-                    break
-                }
-            }
-           
+            dataArr.ergodicArrayWithProductModel(dic: send_obj)
+            self.collectionView.reloadData()
         }
-        self.collectionView.reloadData()
+
+     
     }
     func configCollectionView(){
         collectionView.collectionViewLayout = self.layout

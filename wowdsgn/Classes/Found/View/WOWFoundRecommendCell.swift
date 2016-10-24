@@ -157,7 +157,7 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
         
-        WOWHud.showLoadingSV()
+//        WOWHud.showLoadingSV()
 
         let btn = LikeBtn.init(frame: CGRect.zero)
         btn.alpha = 0.0

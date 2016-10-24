@@ -11,7 +11,7 @@ import UIKit
 class WOWClickLikeAction {
     
     static let sharedAction = WOWClickLikeAction()
-    static var params = [String: AnyObject]()
+    static var params :[String:AnyObject]?
     private init(){}
     
     static  func likeAnimate(view: UIView, btn: UIButton) {
@@ -27,6 +27,7 @@ class WOWClickLikeAction {
             imgView.removeFromSuperview()
             // 在动画结束之后，发送刷新数据源的通知，因为直接reloadtableView，动画不会出现
             NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params as AnyObject?)
+            
         }
         
     }
@@ -41,6 +42,7 @@ class WOWClickLikeAction {
      */
     
     static func requestLikeProject(topicId: Int,view: UIView, btn: UIButton,isFavorite: @escaping LikeAction){
+        WOWHud.showLoadingSV()
         guard WOWUserManager.loginStatus == true else{
             WOWHud.dismiss()
             UIApplication.currentViewController()?.toLoginVC(true)
@@ -71,6 +73,7 @@ class WOWClickLikeAction {
      - parameter isFavorite: 请求结果，是否喜欢
      */
     static func requestFavoriteProduct(productId: Int,view: UIView, btn: UIButton,isFavorite:@escaping LikeAction)  {
+         WOWHud.showLoadingSV()
         guard WOWUserManager.loginStatus == true else{
             WOWHud.dismiss()
             UIApplication.currentViewController()?.toLoginVC(true)
@@ -110,7 +113,7 @@ class WOWClickLikeAction {
             UIApplication.currentViewController()?.toLoginVC(true)
             return
         }
-        
+        params = nil
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandId), successClosure: { (result) in
                 let favorite = JSON(result)["favorite"].bool
                 
@@ -143,7 +146,7 @@ class WOWClickLikeAction {
             UIApplication.currentViewController()?.toLoginVC(true)
             return
         }
-        
+        params = nil
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId), successClosure: {(result) in
             let favorite = JSON(result)["favorite"].bool
             

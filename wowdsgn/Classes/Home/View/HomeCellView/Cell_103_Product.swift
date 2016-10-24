@@ -9,25 +9,32 @@
 import UIKit
 
 class Cell_103_Product: UITableViewCell {
-
+    var cardCount:Int = 0
+//        didSet{
+//      
+//             showDateNew()
+//        }
+//    }
+    var isConfigCellUI :Bool = false
+    var dataSourceArray:[WOWProductModel]?{
+        didSet{
+            cardCount = dataSourceArray?.count ?? 0
+            if isConfigCellUI == false{
+                isConfigCellUI = true
+                 configUI()
+                showDateNew()
+            }
+           
+        }
+    }
     @IBOutlet weak var pagingScrollView: PagingScrollView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-           configUI()
+//        configUI()
     }
-    // Class 初始化
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?)
-    {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-    }
     
-    required init(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)!
-    }
-     
     func countDownView() -> WOWCountDownView {
         let v = Bundle.main.loadNibNamed("WOWCountDownView", owner: self, options: nil)?.last as! WOWCountDownView
         
@@ -39,17 +46,19 @@ class Cell_103_Product: UITableViewCell {
         return v
     }
     func showDateNew()  {
-        for i in 0..<3{
+        
+        for i in 0..<cardCount{
+          let model = dataSourceArray?[i]
             let downView = pagingScrollView.viewWithTag(i + 1000) as? WOWCountDownView
-            downView?.timeStamp = 100 + i
+            downView?.timeStamp = model?.timeoutSeconds ?? 0
             
         }
     }
     func configUI() {
         let cardSize:CGSize = CGSize(width: UIScreen.main.bounds.size.width, height: 210)
    
-        pagingScrollView.cardCount = 3
-        pagingScrollView.pagingWidth  =  UIScreen.main.bounds.size.width
+        pagingScrollView.cardCount = CGFloat(cardCount)
+       pagingScrollView.pagingWidth  =  UIScreen.main.bounds.size.width
         pagingScrollView.pagingHeight = 210
         
         for i in 0..<Int(pagingScrollView.cardCount) {

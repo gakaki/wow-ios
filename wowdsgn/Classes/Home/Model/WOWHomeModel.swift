@@ -15,7 +15,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleContentList       :  WOWModelVoTopic?//产品列表CollectionView
     var moduleContentProduct    :  WOWHomeProduct_402_Info? // 自定义产品组
     var moduleAdditionalInfo    :  WOWHomeAdditionalInfo? // 配置信息～
-
+    
     required init?(map: Map) {
         
     }
@@ -42,7 +42,9 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         case 102:// 专题列表
             
             moduleContent            <- map["moduleContent"]
-            
+        case 801:// 今日单品
+            moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
+            moduleContentProduct     <- map["moduleContent"]
         default:
             break
         }

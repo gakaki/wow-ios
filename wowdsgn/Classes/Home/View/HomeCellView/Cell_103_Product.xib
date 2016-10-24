@@ -32,7 +32,7 @@
             <connections>
                 <outlet property="pagingScrollView" destination="cQH-99-9IU" id="aRh-sA-EUZ"/>
             </connections>
-            <point key="canvasLocation" x="-156" y="-221"/>
+            <point key="canvasLocation" x="-156" y="-221.5"/>
         </tableViewCell>
     </objects>
 </document>

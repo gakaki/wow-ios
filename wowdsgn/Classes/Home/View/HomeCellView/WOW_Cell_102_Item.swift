@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WOW_Cell_103_Item: UICollectionViewCell {
+class WOW_Cell_102_Item: UICollectionViewCell {
     @IBOutlet var bigImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

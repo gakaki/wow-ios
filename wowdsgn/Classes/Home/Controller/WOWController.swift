@@ -362,8 +362,6 @@ class WOWController: WOWBaseViewController {
             case 8:
                 toVCTopic(model.bannerLinkTargetId!)
                 print("场景还是专题")
-
-                
                 
             default:
                 print("其他")
@@ -386,8 +384,9 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
             switch model.moduleType ?? 0 {
             case 402:
-                        record_402_index.append(section)
-                return (model.moduleContentProduct?.products?.count.getParityCellNumber()) ?? 0
+                record_402_index.append(section)
+                let array = model.moduleContentProduct?.products ?? []
+                return (array.count.getParityCellNumber()) > 10 ? 10: (array.count.getParityCellNumber())
                 
             default:
                 
@@ -482,7 +481,13 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
              let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_102, for: indexPath) as! Cell_102_Project
              cell.dataArr = model.moduleContent?.banners
              return cell
+        case 801:
             
+            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_103, for: indexPath) as! Cell_103_Product
+             cell.dataSourceArray = model.moduleContentProduct?.products
+            cell.showDateNew()
+//
+            return cell
         case 402:
             
          let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_402, for: indexPath) as! HomeBottomCell
@@ -674,7 +679,7 @@ extension WOWController: CyclePictureViewDelegate { // 轮播banner 对应的跳
     }
 }
 extension Array{
-    // 遍历数组，里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel
+    // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel
     func ergodicArrayWithProductModel(dic: [String:AnyObject] ){
         for a in 0..<self.count{// 遍历数据，拿到productId model 更改favorite 状态
             let model = self[a] as? WOWProductModel

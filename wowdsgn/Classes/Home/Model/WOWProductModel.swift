@@ -14,7 +14,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var primaryImgs           : Array<String>?
     var productName           : String?
     var sellPrice             : Double?
-    var originalprice        : Double?
+    var originalprice         : Double?
     var sellingPoint          : String?
     var brandCname            : String?
     var brandId               : Int?
@@ -28,8 +28,11 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var productParameter      : WOWParameter?
     var productImg            : String?
     var secondaryImgs         : [WOWProductPicTextModel]?
-    var pageModuleType          :   Int?
+    var pageModuleType        :   Int?
     
+    var tag                   : String?
+    var sings                 :Array<Int>?
+    var timeoutSeconds        : Int?
     var favorite              : Bool?
     
     override init() {
@@ -47,9 +50,9 @@ class WOWProductModel: WOWBaseModel,Mappable{
         /*************************新版Map***********************/
         productId               <- map["productId"]
         primaryImgs             <- map["primaryImgs"]
-        productName             <- map["productName"]
+        productName             <- map["productTitle"]
         sellPrice               <- map["sellPrice"]
-        originalprice          <- map["originalPrice"]
+        originalprice           <- map["originalPrice"]
         sellingPoint            <- map["sellingPoint"]
         brandCname              <- map["brandCname"]
         brandId                 <- map["brandId"]
@@ -65,7 +68,9 @@ class WOWProductModel: WOWBaseModel,Mappable{
         secondaryImgs           <- map["secondaryImgs"]
         pageModuleType          <- map["pageModuleType"]
 
-        
+        tag                     <- map["tag"]
+        sings                   <- map["sings"]
+        timeoutSeconds          <- map["timeoutSeconds"]
         favorite                <- map["favorite"]
 
     }

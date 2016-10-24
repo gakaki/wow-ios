@@ -20,7 +20,7 @@ class Cell_102_Project: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        collectionView.register(UINib.nibName(String(describing: WOW_Cell_103_Item.self)), forCellWithReuseIdentifier: "WOW_Cell_103_Item")
+        collectionView.register(UINib.nibName(String(describing: WOW_Cell_102_Item.self)), forCellWithReuseIdentifier: "WOW_Cell_102_Item")
         
         self.contentView.layoutIfNeeded()
         collectionView.delegate = self
@@ -47,7 +47,7 @@ extension Cell_102_Project:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOW_Cell_103_Item", for: indexPath) as! WOW_Cell_103_Item
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOW_Cell_102_Item", for: indexPath) as! WOW_Cell_102_Item
         //FIX 测试数据
         let model = dataArr?[indexPath.row]
         cell.showData(model!)

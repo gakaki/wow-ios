@@ -42,6 +42,7 @@ class WOWClickLikeAction {
      */
     
     static func requestLikeProject(topicId: Int,view: UIView, btn: UIButton,isFavorite: @escaping LikeAction){
+        WOWHud.showLoadingSV()
         guard WOWUserManager.loginStatus == true else{
             WOWHud.dismiss()
             UIApplication.currentViewController()?.toLoginVC(true)
@@ -72,6 +73,7 @@ class WOWClickLikeAction {
      - parameter isFavorite: 请求结果，是否喜欢
      */
     static func requestFavoriteProduct(productId: Int,view: UIView, btn: UIButton,isFavorite:@escaping LikeAction)  {
+         WOWHud.showLoadingSV()
         guard WOWUserManager.loginStatus == true else{
             WOWHud.dismiss()
             UIApplication.currentViewController()?.toLoginVC(true)

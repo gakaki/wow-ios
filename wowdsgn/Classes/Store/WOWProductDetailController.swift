@@ -330,7 +330,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
         
-            WOWHud.showLoadingSV()
+//            WOWHud.showLoadingSV()
         WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view:bottomView,btn:likeButton, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 

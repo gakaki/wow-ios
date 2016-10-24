@@ -142,10 +142,7 @@ class WOWController: WOWBaseViewController {
                 let model = dataArr[j] 
                 model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
             }
-
             self.tableView.reloadData()
-            
-            
         }
       
     }

@@ -66,7 +66,7 @@ class HomeBottomCell: UITableViewCell {
 
     }
     @IBAction func favoriteActionOne(_ sender: AnyObject) {
-        WOWHud.showLoadingSV()
+//        WOWHud.showLoadingSV()
         
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdOne ?? 0,view: oneBaseView,btn: btnIsLikeOne , isFavorite: { (isFavorite) in
             
@@ -76,7 +76,7 @@ class HomeBottomCell: UITableViewCell {
 
     }
     @IBAction func favoriteActionTwo(_ sender: AnyObject) {
-        WOWHud.showLoadingSV()
+//        WOWHud.showLoadingSV()
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdTwo ?? 0,view: twoBaseView,btn: btnIsLikeTwo, isFavorite: { (isFavorite) in
 
             print("完成请求")

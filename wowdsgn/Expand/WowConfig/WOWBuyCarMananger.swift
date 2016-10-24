@@ -15,6 +15,7 @@ class WOWBuyCarMananger {
      /// 选规格的时候弹出的框框用到的信息
 //    var skuDataArr:[WOWProductSkuModel]?
     var productSpecModel    : WOWProductSpecModel?
+    var productId           : Int?
     
     var isFavorite          : Bool?
     

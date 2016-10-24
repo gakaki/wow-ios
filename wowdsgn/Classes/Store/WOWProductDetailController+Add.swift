@@ -14,7 +14,7 @@ import UIKit
 
 extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
-     func configTable(){
+    func configTable(){
         tableView.estimatedRowHeight = 200
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.mj_header = self.mj_header
@@ -27,7 +27,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         //产品描述
         tableView.register(UINib.nibName(String(describing: WOWProductDetailCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailCell.self))
         //产品参数
-        tableView.register(UINib.nibName(String(describing: WOWProductParameter.self)), forCellReuseIdentifier:String(describing: WOWProductParameter.self))
+        tableView.register(UINib.nibName(String(describing: WOWProductParamCell.self)), forCellReuseIdentifier:String(describing: WOWProductParamCell.self))
         //温馨提示
         tableView.register(UINib.nibName(String(describing: WOWProductDetailTipsWebViewCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailTipsWebViewCell.self))
         //客服电话
@@ -47,9 +47,9 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             return productModel?.secondaryImgs?.count ?? 0
         case 3: //产品参数可展开
             if isOpenParam {
-                return 1
+                return productModel?.productParameter?.count ?? 0
             }else {
-                return 0   
+                return 0
             }
         case 4: //温馨提示也可展开
             if isOpenTips {
@@ -67,7 +67,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (0,_): //标题价钱
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailPriceCell.self), for: indexPath) as! WOWProductDetailPriceCell
-            cell.nameLabel.text = productModel?.productName ?? ""
+            cell.nameLabel.text = productModel?.productTitle ?? ""
             if let price = productModel?.sellPrice {
                 let result = WOWCalPrice.calTotalPrice([price],counts:[1])
                 cell.actualPriceLabel.text = result
@@ -97,18 +97,18 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                         strongSelf.lookBigImg((tap.view?.tag)!)
                     }
                     
-                })
+                    })
             }
             
             returnCell = cell
         case (3,_): //参数
-
-            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductParameter.self), for: indexPath) as! WOWProductParameter
+            
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductParamCell.self), for: indexPath) as! WOWProductParamCell
             
             if let parameter = productModel?.productParameter {
-                  cell.showData(parameter)
+                cell.showData(parameter[indexPath.row])
             }
-
+            
             returnCell = cell
         case (4,_)://温馨提示
             
@@ -171,19 +171,19 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch section {
-//        case 6:     //如果相关商品有数据显示，如果没有就不显示
-//            if aboutProductArray.count > 0 {
-//                return "相关商品"
-//            }else {
-//                return nil
-//            }
-//            
-//        default:
-//            return nil
-//        }
-//    }
+    //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    //        switch section {
+    //        case 6:     //如果相关商品有数据显示，如果没有就不显示
+    //            if aboutProductArray.count > 0 {
+    //                return "相关商品"
+    //            }else {
+    //                return nil
+    //            }
+    //
+    //        default:
+    //            return nil
+    //        }
+    //    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
@@ -229,6 +229,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         return view
         
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath as NSIndexPath).section {
         case 5:
@@ -267,18 +268,18 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
                     
                     productDetailAboutCell.collectionView.xzm_footer = nil
                     strongSelf.noMoreData = false
-
+                    
                 }
                 productDetailAboutCell.collectionView.reloadData()
                 
                 
-
+                
             }
             
         }) { (errorMsg) in
             
-                productDetailAboutCell.collectionView.xzm_footer = nil
-                productDetailAboutCell.endRefresh()
+            productDetailAboutCell.collectionView.xzm_footer = nil
+            productDetailAboutCell.endRefresh()
             
         }
         
@@ -289,7 +290,7 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
         vc.productId = productId
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
 }
 
 
@@ -325,6 +326,6 @@ extension WOWProductDetailController {
         }
         
     }
-
+    
 }
 

@@ -29,21 +29,21 @@ class WOWProductParameter: UITableViewCell {
     
     func showData(_ model:WOWParameter){
         
-            materialLabel.text = model.materialText
-        if model.needAssemble ?? false {
-            needAssembleLabel.text = "是"
-
-        }else {
-            needAssembleLabel.text = "否"
-
-        }
-            originLabel.text = model.origin
-            styleLabel.text = model.style
-            applicableSceneLabel.text = model.applicableSceneText
-            applicablePeopleLabel.text = model.applicablePeople
-            sizeText.text = model.sizeText
-        
-        
+//            materialLabel.text = model.materialText
+//        if model.needAssemble ?? false {
+//            needAssembleLabel.text = "是"
+//
+//        }else {
+//            needAssembleLabel.text = "否"
+//
+//        }
+//            originLabel.text = model.origin
+//            styleLabel.text = model.style
+//            applicableSceneLabel.text = model.applicableSceneText
+//            applicablePeopleLabel.text = model.applicablePeople
+//            sizeText.text = model.sizeText
+//        
+//        
     }
     
 }

@@ -247,7 +247,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //        WOWBuyCarMananger.sharedBuyCar.skuDefaultSelect = 0
         view.addSubview(backView)
         view.bringSubview(toFront: backView)
-        backView.show(carEntrance.payEntrance)
+//        backView.show(carEntrance.payEntrance)
     }
 }
 

@@ -7,27 +7,7 @@
 //
 
 import UIKit
-import wow_vendor_ui
 
-public func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-public func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 
 class WOWProductDetailController: WOWBaseViewController {
@@ -38,7 +18,7 @@ class WOWProductDetailController: WOWBaseViewController {
     var aboutProductArray               = [WOWProductModel]()
     
     var noMoreData                      :Bool = true
-    public var numberSections = 0
+    fileprivate(set) var numberSections = 0
     let pageSize = 6
     //UI
     @IBOutlet weak var tableView: UITableView!
@@ -49,35 +29,35 @@ class WOWProductDetailController: WOWBaseViewController {
     var isOpenParam: Bool = false
     //是否展开温馨提示
     var isOpenTips: Bool = false
-    public var shareProductImage:UIImage? //供分享使用
+    //轮播图数组
+    var imgUrlArr = [String]()
+    fileprivate var shareProductImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
         let image = UIImageView()
         return image
     }()
     
-        override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
     deinit {
         removeObservers()
     }
-  
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
         addObservers()
-        
-
-      }
-
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-
-//MARK:Lazy
+    
+    //MARK:Lazy
     var cycleView:CyclePictureView! = {
         let v = CyclePictureView(frame:MGFrame(0, y: 0, width:MGScreenWidth, height:MGScreenWidth), imageURLArray: nil)
         v.placeholderImage = UIImage(named: "placeholder_product")
@@ -107,19 +87,19 @@ class WOWProductDetailController: WOWBaseViewController {
         v.lineView.isHidden = false
         return v
     }()
-
     //相关商品
     lazy var aboutView:WOWAboutHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
         return v
     }()
-//MARK:Private Method
+    
+    //MARK:Private Method
     override func setUI() {
         super.setUI()
         configTable()
-//        buyCarCount()
+        //        buyCarCount()
     }
-
+    
     fileprivate func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(loginSucces), name: NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
@@ -144,10 +124,10 @@ class WOWProductDetailController: WOWBaseViewController {
         }
         self.tableView.reloadData()
     }
-
+    
     fileprivate func removeObservers() {
-         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
-         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
     }
     
     /**
@@ -157,14 +137,15 @@ class WOWProductDetailController: WOWBaseViewController {
         if WOWUserManager.userCarCount <= 0 {
             carEntranceButton.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
+            
             carEntranceButton.badgeString = "\(WOWUserManager.userCarCount)"
         }else {
             carEntranceButton.badgeString = "99+"
         }
         
-
+        
     }
-
+    
     //初始化数据，商品banner
     fileprivate func configData(){
         //如果相关商品有数据显示。如果没有数据则不显示
@@ -180,17 +161,17 @@ class WOWProductDetailController: WOWBaseViewController {
         productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)
         //banner轮播
         
-        if let array = productModel?.primaryImgs {
-            if array.count >= 1 {
-                cycleView.imageURLArray = productModel?.primaryImgs ?? [""]
+        
+            if imgUrlArr.count >= 1 {
+                cycleView.imageURLArray = imgUrlArr
                 cycleView.delegate = self
                 placeImageView.kf.setImage(
-                    with: URL(string:array[0] )!,
+                    with: URL(string:imgUrlArr[0] ) ?? URL(string: "placeholder_product"),
                     placeholder: nil,
                     options: nil,
                     progressBlock: { (arg1, arg2) in
-                    
-                    
+                        
+                        
                     },
                     completionHandler: { [weak self](image, error, cacheType, imageUrl) in
                         if let strongSelf = self{
@@ -198,22 +179,20 @@ class WOWProductDetailController: WOWBaseViewController {
                         }
                     }
                 )
-               
+                
             }
-            
-
-        }
+        
         
     }
-
     
-//MARK:Actions
+    
+    //MARK:Actions
     //MARK:更新角标
     func updateCarBadge(_ carCount: Int){
         WOWUserManager.userCarCount += carCount
-//        buyCarCount()
+        //        buyCarCount()
         NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
-
+        
     }
     //MARK:购物车
     @IBAction func carEntranceButton(_ sender: UIButton) {
@@ -225,7 +204,7 @@ class WOWProductDetailController: WOWBaseViewController {
         let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController.self)) as! WOWBuyCarController
         vc.hideNavigationBar = false
         navigationController?.pushViewController(vc, animated: true)
-
+        
     }
     
     //MARK:登录成功回调
@@ -263,53 +242,37 @@ class WOWProductDetailController: WOWBaseViewController {
         if !WOWUserManager.loginStatus {
             toLoginVC(true)
         }else{
-           requestFavoriteProduct()
+            requestFavoriteProduct()
         }
         
     }
-
+    
     //MARK:选择规格,有两种视图
     func chooseStyle(_ entrue: carEntrance) {
-        WOWBuyCarMananger.sharedBuyCar.productSpecModel      = self.productSpecModel
-        if let product = productModel {
-            if product.primaryImgs?.count > 0 {
-                WOWBuyCarMananger.sharedBuyCar.defaultImg = product.primaryImgs![0]
-            }
-            
-            let result = WOWCalPrice.calTotalPrice([product.sellPrice ?? 0],counts:[1])
-
-            WOWBuyCarMananger.sharedBuyCar.defaultPrice = result
-
-        }
+        WOWBuyCarMananger.sharedBuyCar.productSpecModel = productSpecModel
+        WOWBuyCarMananger.sharedBuyCar.productId = productId
         view.addSubview(backView)
         view.bringSubview(toFront: backView)
         backView.show(entrue)
     }
     
     @IBAction func backClick(_ sender: UIButton) {
-       _ = navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
-//MARK:Private Network
+    //MARK:Private Network
     override func request() {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(JSONObject:result)
                 strongSelf.productModel?.productId = strongSelf.productId
-                
+                strongSelf.imgUrlArr = strongSelf.productModel?.primaryImgs ?? [String]()
+                if let imgUrl = strongSelf.productModel?.productImg {
+                    strongSelf.imgUrlArr.insert(imgUrl, at: 0)
+                }
                 strongSelf.requestAboutProduct()
                 strongSelf.buyCarCount()
-                
-                //Talking Data order detail 浏览商品 商品详情
-                var price:Int32     =  Int32(strongSelf.productModel?.sellPrice ?? 0)
-                price               =  Int32(price) * 100
-                let id              =  String(describing:(strongSelf.productId ?? 0)!)
-                let name            =  strongSelf.productModel?.productName
-                TalkingDataAppCpa.onViewItem(withCategory: "", itemId: id, name: name, unitPrice:price)
-  
-                
-
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
@@ -334,18 +297,18 @@ class WOWProductDetailController: WOWBaseViewController {
                 
             }
         }) {(errorMsg) in
-           
+            
         }
-
+        
     }
     
-//    用户是否喜欢单品
+    //    用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
         WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result) in
-            if let strongSelf = self{
-                let favorite = JSON(result)["favorite"].bool
-                strongSelf.likeButton.isSelected = favorite ?? false
-            }
+            //            if let strongSelf = self{
+            let favorite = JSON(result)["favorite"].bool
+            self!.likeButton.isSelected = favorite ?? false
+            //            }
         }) {(errorMsg) in
             
         }
@@ -355,32 +318,32 @@ class WOWProductDetailController: WOWBaseViewController {
     //用户喜欢某个单品
     func requestFavoriteProduct()  {
         
-            WOWHud.showLoadingSV()
+        WOWHud.showLoadingSV()
         WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view:bottomView,btn:likeButton, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 
-               strongSelf.likeButton.isSelected = isFavorite ?? false
+                strongSelf.likeButton.isSelected = isFavorite ?? false
             }
             })
-
         
         
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId ?? 0), successClosure: { [weak self](result) in
-//            if let strongSelf = self{
-//                let favorite = JSON(result)["favorite"].bool
-//                strongSelf.likeButton.selected = favorite ?? false
-//
-//                var params = [String: AnyObject]?()
-//                
-//                params = ["productId": strongSelf.productId!, "favorite": favorite!]
-//                
-//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-////                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-//            }
-//            }) { (errorMsg) in
-//                
-//        
-//        }
+        
+        //        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId ?? 0), successClosure: { [weak self](result) in
+        //            if let strongSelf = self{
+        //                let favorite = JSON(result)["favorite"].bool
+        //                strongSelf.likeButton.selected = favorite ?? false
+        //
+        //                var params = [String: AnyObject]?()
+        //
+        //                params = ["productId": strongSelf.productId!, "favorite": favorite!]
+        //
+        //                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
+        ////                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+        //            }
+        //            }) { (errorMsg) in
+        //
+        //
+        //        }
     }
     
     // 相关商品信息
@@ -400,7 +363,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }
-
+            
             
         }) {[weak self] (errorMsg) in
             
@@ -409,43 +372,32 @@ class WOWProductDetailController: WOWBaseViewController {
             }
         }
     }
-   
+    
     
     
 }
 
 extension WOWProductDetailController :goodsBuyViewDelegate {
     //确定购买
-    func sureBuyClick(_ product: WOWProductInfoModel?) {
+    func sureBuyClick(_ product: WOWProductSkuModel?) {
         backView.hideBuyView()
         let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
         //入口
         sv.entrance = editOrderEntrance.buyEntrance
-        sv.productId = product?.subProductId
+        sv.productId = product?.productId
         sv.productQty = product?.productQty
         navigationController?.pushViewController(sv, animated: true)
-
+        
     }
     //确定加车
-    func sureAddCarClick(_ product: WOWProductInfoModel?) {
+    func sureAddCarClick(_ product: WOWProductSkuModel?) {
         backView.hideBuyView()
         if let product = product {
             
-            var c = product.productQty ?? 1
-
-            WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.subProductId ?? 0, productQty:c), successClosure: {[weak self] (result) in
+            WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.productId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self] (result) in
                 if let strongSelf = self {
                     strongSelf.updateCarBadge(product.productQty ?? 1)
                 }
-                
-                //查看购物车
-                let id      = String(describing:product.subProductId)
-                let price   = Int32(product.sellPrice ?? 0) * 100
-                let name    = self?.productModel?.productName ?? ""
-                
-                
-                TalkingDataAppCpa.onAddItemToShoppingCart(withCategory: "", itemId: id, name: name, unitPrice: price, amount:  Int32(c))
-
                 
             }) { (errorMsg) in
                 
@@ -454,9 +406,9 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         }else {
             WOWHud.showMsg("添加购物车失败")
         }
-
+        
     }
-   
+    
 }
 
 extension WOWProductDetailController : CyclePictureViewDelegate {
@@ -465,9 +417,9 @@ extension WOWProductDetailController : CyclePictureViewDelegate {
             var photos: [PhotoModel] = []
             for (_, photoURLString) in (productModel?.primaryImgs ?? [""]).enumerated() {
                 // 这个方法只能返回可见的cell, 如果不可见, 返回值为nil
-//                let cell = cyclePictureView.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? CyclePictureCell
+                //                let cell = cyclePictureView.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? CyclePictureCell
                 
-//                let sourceView = cell?.imageView
+                //                let sourceView = cell?.imageView
                 
                 let photoModel = PhotoModel(imageUrlString: photoURLString, sourceImageView: nil)
                 photos.append(photoModel)

@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 protocol buyCarDelegate: class {
     func goProductDetail(_ productId: Int?)
 }

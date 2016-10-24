@@ -9,12 +9,8 @@
 import UIKit
 
 class WOWProductParamCell: UITableViewCell {
-    @IBOutlet weak var firstImageView: UIImageView!
-    @IBOutlet weak var secondImageView: UIImageView!
-    @IBOutlet weak var firstTitleLabel: UILabel!
-    @IBOutlet weak var secondTitleLabel: UILabel!
-    @IBOutlet weak var firstDescLabel: UILabel!
-    @IBOutlet weak var secondDescLabel: UILabel!
+    @IBOutlet weak var parameterShowNameLabel: UILabel!
+    @IBOutlet weak var parameterValueLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,27 +22,13 @@ class WOWProductParamCell: UITableViewCell {
 
     }
     
-    func showData(_ params:WOWAttributeModel...){ //可变参数
-        if params.count == 1 {
-            setSecond(true)
-            firstTitleLabel.text = params.first?.title
-            firstDescLabel.text  = params.first?.value
-            firstImageView.image = UIImage(named: params.first?.attriImage ?? " ")
-        }else if params.count == 2{
-            setSecond(false)
-            firstTitleLabel.text = params.first?.title
-            firstDescLabel.text  = params.first?.value
-            firstImageView.image = UIImage(named: params.first?.attriImage ?? " ")
-            secondTitleLabel.text = params[1].title
-            secondDescLabel.text  = params[1].value
-            secondImageView.image = UIImage(named: params[1].attriImage ?? " ")
+    func showData(_ params:WOWParameter?){ //可变参数
+        if let params = params {
+            parameterShowNameLabel.text = params.parameterShowName
+            parameterValueLabel.text = params.parameterValue
         }
     }
     
-    func setSecond(_ hide:Bool) {
-        secondDescLabel.isHidden  = hide
-        secondImageView.isHidden  = hide
-        secondTitleLabel.isHidden = hide
-    }
+   
     
 }

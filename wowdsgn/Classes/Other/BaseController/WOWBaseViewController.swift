@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 public func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
@@ -27,6 +26,7 @@ public func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         return rhs < lhs
     }
 }
+
 extension UIViewController {
     static var identifier: String {
         let mirror = Mirror(reflecting: self)
@@ -253,12 +253,12 @@ extension WOWBaseViewController {
     
     func updateBageCount() {
         if WOWUserManager.userCarCount <= 0 {
-            carBadgeCount?.badgeString = ""
+            carBadgeCount!.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
             
-            carBadgeCount?.badgeString = "\(WOWUserManager.userCarCount)"
+            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
         }else {
-            carBadgeCount?.badgeString = "99+"
+            carBadgeCount!.badgeString = "99+"
         }
         
     }

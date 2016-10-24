@@ -13,6 +13,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var productId             : Int?
     var primaryImgs           : Array<String>?
     var productName           : String?
+    var productTitle          : String?
     var sellPrice             : Double?
     var originalprice         : Double?
     var sellingPoint          : String?
@@ -25,7 +26,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var firstNonPrimaryImgUrl : String?
     var firstNonPrimaryImgDesc: String?
     var detailDescription     : String?
-    var productParameter      : WOWParameter?
+    var productParameter      : [WOWParameter]?
     var productImg            : String?
     var secondaryImgs         : [WOWProductPicTextModel]?
     var pageModuleType        :   Int?
@@ -50,7 +51,10 @@ class WOWProductModel: WOWBaseModel,Mappable{
         /*************************新版Map***********************/
         productId               <- map["productId"]
         primaryImgs             <- map["primaryImgs"]
-        productName             <- map["productTitle"]
+
+        productName             <- map["productName"]
+        productTitle            <- map["productTitle"]
+
         sellPrice               <- map["sellPrice"]
         originalprice           <- map["originalPrice"]
         sellingPoint            <- map["sellingPoint"]
@@ -63,14 +67,16 @@ class WOWProductModel: WOWBaseModel,Mappable{
         firstNonPrimaryImgUrl   <- map["firstNonPrimaryImgUrl"]
         firstNonPrimaryImgDesc  <- map["firstNonPrimaryImgDesc"]
         detailDescription       <- map["detailDescription"]
-        productParameter        <- map["productParameter"]
+        productParameter        <- map["parameters"]
         productImg              <- map["productImg"]
         secondaryImgs           <- map["secondaryImgs"]
         pageModuleType          <- map["pageModuleType"]
 
+
         tag                     <- map["tag"]
         sings                   <- map["sings"]
         timeoutSeconds          <- map["timeoutSeconds"]
+
         favorite                <- map["favorite"]
 
     }

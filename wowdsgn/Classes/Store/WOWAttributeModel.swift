@@ -30,26 +30,16 @@ class WOWAttributeModel: WOWBaseModel,Mappable{
 
 class WOWParameter: WOWBaseModel,Mappable{
     
-    var materialText        :String?
-    var needAssemble        :Bool?
-    var origin              :String?
-    var style               :String?
-    var applicableSceneText :String?
-    var applicablePeople    :String?
-    var sizeText            :String?
+    var parameterShowName        :String?
+    var parameterValue           :String?
     
     required init?(map: Map) {
         
     }
     
     func mapping(map: Map) {
-        materialText            <- map["materialText"]
-        needAssemble            <- map["needAssemble"]
-        origin                  <- map["origin"]
-        style                   <- map["style"]
-        applicableSceneText     <- map["applicableSceneText"]
-        applicablePeople        <- map["applicablePeople"]
-        sizeText                <- map["sizeText"]
+        parameterShowName            <- map["parameterShowName"]
+        parameterValue               <- map["parameterValue"]
     }
 }
 
@@ -58,7 +48,7 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
     var image  :String?
     var text    :String = ""
     var imageAspect:CGFloat = 0
-
+    
     
     required init?(map: Map) {
         
@@ -85,7 +75,7 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
                 
             }
         }
-       
+        
     }
 }
 
@@ -94,11 +84,11 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
 //    var skuID       : String?
 //    var skuTitle    : String?
 //    var skuPrice    : String?
-//    
+//
 //    required init?( map: Map) {
-//        
+//
 //    }
-//    
+//
 //    func mapping(map: Map) {
 //        skuID       <- map["sku"]
 //        skuTitle    <- map["title"]

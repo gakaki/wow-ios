@@ -69,7 +69,7 @@ class WOWSearchsController: WOWBaseViewController {
 //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductList(pageindex: String(pageIndex), categoryID:"", style:"", sort: "", uid:"",keyword:keyword ?? ""), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductList(pageindex: String(pageIndex), categoryID:"", style:"", sort: "", uid:"",keyword:keyword ?? ""), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)

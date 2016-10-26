@@ -169,7 +169,7 @@ class WOWContentTopicController: WOWBaseViewController {
     override func request(){
         
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topics(topicId:topic_id), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topics(topicId:topic_id), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self{
                 DLog(result)
@@ -206,7 +206,7 @@ class WOWContentTopicController: WOWBaseViewController {
     }
     
     func requestAboutProduct() {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topic_Products(topicId:topic_id), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topic_Products(topicId:topic_id), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 
                 let r                             =  JSON(result)
@@ -231,7 +231,7 @@ class WOWContentTopicController: WOWBaseViewController {
 //     
 //            WOWHud.showLoadingSV()
 //            
-//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProject(topicId: topicId), successClosure: {[weak self] (result) in
+//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProject(topicId: topicId), successClosure: {[weak self] (result, code) in
 //                if let strongSelf = self{
 //                   
 //                    let favorite = JSON(result)["favorite"].bool ?? false

@@ -31,6 +31,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var secondaryImgs         : [WOWProductPicTextModel]?
     var pageModuleType        :   Int?
     
+    var productStatus         : Int?
     var tag                   : String?
     var sings                 :Array<Int>?
     var timeoutSeconds        : Int?
@@ -72,7 +73,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
         secondaryImgs           <- map["secondaryImgs"]
         pageModuleType          <- map["pageModuleType"]
 
-
+        productStatus                        <- map["productStatus"]
         tag                     <- map["tag"]
         sings                   <- map["sings"]
         timeoutSeconds          <- map["timeoutSeconds"]

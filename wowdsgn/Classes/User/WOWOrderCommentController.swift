@@ -36,7 +36,7 @@ class WOWOrderCommentController: WOWBaseViewController {
             return
         }
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_SubmitComment(uid: uid, comment:text!, thingid: orderID ?? 0, type:"order"), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_SubmitComment(uid: uid, comment:text!, thingid: orderID ?? 0, type:"order"), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)

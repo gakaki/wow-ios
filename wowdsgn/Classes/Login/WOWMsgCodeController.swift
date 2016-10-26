@@ -58,7 +58,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         }
         let mobile = phoneTextField.text ?? ""
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_PwdResetCode(mobile:mobile), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_PwdResetCode(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 WOWHud.showMsg("验证码发送成功")
                 strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
@@ -107,7 +107,7 @@ class WOWMsgCodeController: WOWBaseViewController {
             tipsLabel.text = "密码不能大于20位"
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ResetPwd(mobile:phoneTextField.text!, captcha:code, newPwd:newPwd), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ResetPwd(mobile:phoneTextField.text!, captcha:code, newPwd:newPwd), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 switch strongSelf.entrance {
                 case .loginEntrance:
@@ -134,7 +134,7 @@ class WOWMsgCodeController: WOWBaseViewController {
             return
         }
         let mobile = codeTextField.text ?? ""
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_PwdResetCode(mobile: mobile), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_PwdResetCode(mobile: mobile), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController.self)) as! WOWMsgCodeController
                 vc.mobile = strongSelf.codeTextField.text

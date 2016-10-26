@@ -146,14 +146,14 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     override func request(){
       
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topics(topicId:topic_id), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topics(topicId:topic_id), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self{
                 
                 let r                                     =  JSON(result)
                 strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map(JSONObject: r.object )
                 
-                WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topic_Products(topicId:strongSelf.topic_id), successClosure: {[weak self] (result) in
+                WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Topic_Products(topicId:strongSelf.topic_id), successClosure: {[weak self] (result, code) in
                     if let strongSelf = self{
                         
                         let r                             =  JSON(result)

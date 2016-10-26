@@ -266,7 +266,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     //MARK: - Net 
     func addAddress(_ parameters:WOWAddressListModel) -> Void {
    
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressAdd(receiverName: parameters.name!, provinceId:parameters.provinceId ?? 0 , cityId: parameters.cityId ?? 0, countyId: parameters.countyId ?? 0, addressDetail: parameters.addressDetail ?? "", receiverMobile: parameters.mobile!, isDefault: parameters.isDefault ?? false), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressAdd(receiverName: parameters.name!, provinceId:parameters.provinceId ?? 0 , cityId: parameters.cityId ?? 0, countyId: parameters.countyId ?? 0, addressDetail: parameters.addressDetail ?? "", receiverMobile: parameters.mobile!, isDefault: parameters.isDefault ?? false), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 if let ac = strongSelf.action{
                     ac()
@@ -282,7 +282,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     func editAddress(_ parameters:WOWAddressListModel) -> Void {
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressEdit(id:parameters.id ?? 0 ,receiverName: parameters.name!, provinceId:parameters.provinceId ?? 0 , cityId: parameters.cityId ?? 0, countyId: parameters.countyId ?? 0, addressDetail: parameters.addressDetail ?? "", receiverMobile: parameters.mobile!, isDefault: parameters.isDefault ?? false), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressEdit(id:parameters.id ?? 0 ,receiverName: parameters.name!, provinceId:parameters.provinceId ?? 0 , cityId: parameters.cityId ?? 0, countyId: parameters.countyId ?? 0, addressDetail: parameters.addressDetail ?? "", receiverMobile: parameters.mobile!, isDefault: parameters.isDefault ?? false), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 if let ac = strongSelf.action{
                     ac()

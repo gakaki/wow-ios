@@ -49,7 +49,7 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         
         goodsImageView.set_webimage_url(model.specImg)
         
-        nameLabel.text = model.productName
+        nameLabel.text = model.productTitle
         countLabel.text = "x \(model.productQty ?? 1)"
         subCountLabel.text = "共\(model.productQty ?? 1)件"
         let result1 = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
@@ -57,8 +57,11 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[model.productQty ?? 1])
         totalPriceLabel.text = result
         let arr = [model.color ?? "",model.specName ?? ""]
-        typeArr = arr
-        collectionView.reloadData()
+        if let attributes = model.attributes {
+            typeArr = attributes
+            collectionView.reloadData()
+        }
+
         
     }
     

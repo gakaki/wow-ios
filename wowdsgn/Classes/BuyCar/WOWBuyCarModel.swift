@@ -64,6 +64,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var shoppingCartId                      : Int?
     var productId                           : Int?
     var productName                         : String?
+    var productTitle                        : String?
+    var oldPrcie                            : Double?
     var sellPrice                           : Double?
     var productQty                          : Int?
     var sellTotalAmount                     : Double?
@@ -73,7 +75,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var productStatus                       : Int?
     var productStatusName                   : String?
     var isSelected                          : Bool?
-    var specName                            : String?   //图片地址
+    var specName                            : String?
+    var attributes                          : [String]?
     
     required init?(map: Map) {
         
@@ -84,6 +87,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         shoppingCartId                       <- map["shoppingCartId"]
         productId                            <- map["productId"]
         productName                          <- map["productName"]
+        productTitle                         <- map["productTitle"]
+        oldPrcie                             <- map["oldPrice"]
         sellPrice                            <- map["sellPrice"]
         productQty                           <- map["productQty"]
         sellTotalAmount                      <- map["sellTotalAmount"]
@@ -94,6 +99,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         productStatusName                    <- map["productStatusName"]
         isSelected                           <- map["isSelected"]
         specName                             <- map["specName"]
+        attributes                           <- map["attributes"]
     }
     
 }

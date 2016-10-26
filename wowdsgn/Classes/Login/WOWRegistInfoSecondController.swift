@@ -170,7 +170,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     func sure() {
 //        print("\(sex)","\(ageRow)","\(starRow)")
         let params = ["sex":String(sex),"ageRange":String(ageRow),"constellation":String(starRow),"industry":jobTextField.text ?? ""]
-        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params ), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params ), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 DLog(result)
                 //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯

@@ -81,7 +81,7 @@ class WOWCommentController: WOWBaseViewController {
             type = "scene"
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_SubmitComment(uid:WOWUserManager.userID,comment:comments!,thingid:self.mainID,type:type), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_SubmitComment(uid:WOWUserManager.userID,comment:comments!,thingid:self.mainID,type:type), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 strongSelf.endEditing()
                 let model = WOWCommentListModel()
@@ -157,31 +157,31 @@ class WOWCommentController: WOWBaseViewController {
     override func request() {
         super.request()
         let type = (commentType == .product) ? "product":"scene"
-        WOWNetManager.sharedManager.requestWithTarget(.api_CommentList(pageindex:"\(self.pageIndex)",thingid:self.mainID,type:type), successClosure: {[weak self](result) in
-            if let strongSelf = self{
-                let json = JSON(result)
-                DLog(json)
-            let totalPage = JSON(result)["totalPages"].intValue
-                let arr = Mapper<WOWCommentListModel>().mapArray(JSONObject:result["comment"] as! [String:AnyObject])
-                strongSelf.endRefresh()
-                if let array = arr{
-                    if strongSelf.pageIndex == 0{
-                        strongSelf.dataArr = []
-                    }
-                    strongSelf.dataArr.append(contentsOf: array)
-                    if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
-                        strongSelf.tableView.mj_footer = nil
-                    }else{
-                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
-                    }
-                }
-                strongSelf.tableView.reloadData()
-            }
-        }) {[weak self](errorMsg) in
-            if let strongSelf = self{
-                strongSelf.endRefresh()
-            }
-        }
+//        WOWNetManager.sharedManager.requestWithTarget(.api_CommentList(pageindex:"\(self.pageIndex)",thingid:self.mainID,type:type), successClosure: {[weak self](result) in
+//            if let strongSelf = self{
+//                let json = JSON(result)
+//                DLog(json)
+//            let totalPage = JSON(result)["totalPages"].intValue
+//                let arr = Mapper<WOWCommentListModel>().mapArray(JSONObject:result["comment"] as! [String:AnyObject])
+//                strongSelf.endRefresh()
+//                if let array = arr{
+//                    if strongSelf.pageIndex == 0{
+//                        strongSelf.dataArr = []
+//                    }
+//                    strongSelf.dataArr.append(contentsOf: array)
+//                    if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
+//                        strongSelf.tableView.mj_footer = nil
+//                    }else{
+//                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
+//                    }
+//                }
+//                strongSelf.tableView.reloadData()
+//            }
+//        }) {[weak self](errorMsg) in
+//            if let strongSelf = self{
+//                strongSelf.endRefresh()
+//            }
+//        }
     }
     
 }

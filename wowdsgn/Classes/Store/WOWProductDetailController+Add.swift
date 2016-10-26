@@ -78,6 +78,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                         
                         cell.originalPriceLabel.setStrokeWithText(result)
                         
+                    }else {
+                        cell.originalPriceLabel.text = ""
                     }
                 }
             }
@@ -244,7 +246,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
 extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
     func aboutProduct(_ productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int) {
         let params = ["brandId": productModel?.brandId ?? 0, "currentPage": pageIndex,"pageSize":pageSize, "excludes": [productModel?.productId ?? 0]] as [String : Any]
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as? [String : AnyObject]), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as? [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self {
                 productDetailAboutCell.endRefresh()

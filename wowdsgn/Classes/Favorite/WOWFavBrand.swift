@@ -95,7 +95,7 @@ class WOWFavBrand: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeBrand, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeBrand, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 WOWHud.dismiss()
                 let brandList = Mapper<WOWBrandListModel>().mapArray(JSONObject:JSON(result)["favoriteBrandVoList"].arrayObject)

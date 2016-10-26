@@ -113,7 +113,7 @@ class WOWEditOrderController: WOWBaseViewController {
     override func request() {
         super.request()
         //请求地址数据
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(JSONObject:result)
                 let section = IndexSet(integer: 0)
@@ -127,7 +127,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求商品列表
     func requestProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderSettle, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderSettle, successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(JSONObject:result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
@@ -148,7 +148,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求立即购买订单信息
     func requestBuyNowProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderBuyNow(productId: productId ?? 0, productQty: productQty ?? 1), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderBuyNow(productId: productId ?? 0, productQty: productQty ?? 1), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(JSONObject:result)
@@ -201,7 +201,7 @@ class WOWEditOrderController: WOWBaseViewController {
 
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 
                 //重新计算购物车数量
@@ -267,7 +267,7 @@ class WOWEditOrderController: WOWBaseViewController {
             ]
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
@@ -317,7 +317,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //从服务端去拉取支付结果
     func requestPayResult() {
-        WOWNetManager.sharedManager.requestWithTarget(.api_PayResult(orderCode: orderCode), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_PayResult(orderCode: orderCode), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let orderCode = json["orderCode"].string
@@ -518,7 +518,7 @@ extension WOWEditOrderController: selectPayDelegate {
         }
         
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let charge = json["charge"]

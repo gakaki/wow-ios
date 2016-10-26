@@ -50,7 +50,7 @@ class WOWSearchChildController: WOWBaseViewController{
     override func request() {
         
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""), successClosure: { [weak self](result, code) in
             let json = JSON(result)
             DLog(json)
             

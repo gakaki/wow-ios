@@ -41,7 +41,7 @@ class WOWUploadManager {
         
 //        let json_str                = json_serialize( ["key": qiniu_key as AnyObject,"bucket": "wowdsgn" as AnyObject] )
 //        let params_qiniu            = ["paramJson": json_str ]
-        WOWNetManager.sharedManager.requestWithTarget(.api_qiniu_token(qiniuKey: qiniu_key, bucket: "wowdsgn"), successClosure: { (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_qiniu_token(qiniuKey: qiniu_key, bucket: "wowdsgn"), successClosure: { (result, code) in
             
                 let token       = JSON(result)["token"].string
                 WOWHud.showLoadingSV()
@@ -70,8 +70,8 @@ class WOWUploadManager {
                             let imageData:NSData = NSKeyedArchiver.archivedData(withRootObject: image) as NSData
                             
                             WOWUserManager.userPhotoData = imageData as Data
-                            successClosure(headImageUrl as AnyObject)
-                            
+//                            successClosure(headImageUrl as AnyObject)
+                            successClosure(headImageUrl as AnyObject, "")
                         }
 
                     }, option: uploadOption)

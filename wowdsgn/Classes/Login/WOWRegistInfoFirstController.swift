@@ -90,7 +90,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
             return
         }
         let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? "","avatar":self.headImageUrl]
-        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 DLog(result)
                 //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯

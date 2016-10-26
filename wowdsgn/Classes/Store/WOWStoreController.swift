@@ -60,7 +60,7 @@ class WOWStoreController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.api_StoreHome, successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_StoreHome, successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 WOWHud.dismiss()
                 strongSelf.categoryArr = []

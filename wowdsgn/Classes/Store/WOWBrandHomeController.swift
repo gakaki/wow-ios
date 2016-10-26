@@ -189,7 +189,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     
     //品牌详情
     func requestBrandDetail() {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_BrandDetail(brandId: brandID ?? 0), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_BrandDetail(brandId: brandID ?? 0), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -212,7 +212,7 @@ class WOWBrandHomeController: WOWBaseViewController {
 //        var params = [String: AnyObject]?()
         let params = ["brandId": brandID ?? 0, "currentPage": pageIndex,"pageSize":pageSize]
        
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as [String : AnyObject]?), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as [String : AnyObject]?), successClosure: {[weak self](result, code) in
           
                 if let strongSelf = self{
                     
@@ -256,7 +256,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     //设计师详情
     func requestDesignerDetail() {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_DesignerDetail(designerId: designerId ?? 0), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_DesignerDetail(designerId: designerId ?? 0), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -275,7 +275,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     //设计师商品列表
     func requestProductDesigner() {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_productDesigner(designerId: designerId ?? 0, pageSize: pageSize, currentPage: pageIndex), successClosure: {[weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_productDesigner(designerId: designerId ?? 0, pageSize: pageSize, currentPage: pageIndex), successClosure: {[weak self](result, code) in
             
             if let strongSelf = self{
                 
@@ -318,7 +318,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     //用户是否喜欢某品牌
     func requestIsFavoriteBrand() {
-        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteBrand(brandId: brandID ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteBrand(brandId: brandID ?? 0), successClosure: {[weak self] (result, code) in
             
             
             if let strongSelf = self{
@@ -337,7 +337,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     //用户喜欢某个品牌
     func requestFavoriteBrand()  {
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandID ?? 0), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandID ?? 0), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 strongSelf.likeButton.isSelected = !strongSelf.likeButton.isSelected
                  NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
@@ -349,7 +349,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     //用户是否喜欢某设计师
     func requestIsFavoriteDesigner() {
-        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteDesigner(designerId: designerId ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteDesigner(designerId: designerId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.likeButton.isSelected = favorite ?? false
@@ -364,7 +364,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     
     //用户喜欢某个设计师
     func requestFavoriteDesigner()  {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId ?? 0), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId ?? 0), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 strongSelf.likeButton.isSelected = !strongSelf.likeButton.isSelected
                  NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)

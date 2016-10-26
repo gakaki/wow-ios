@@ -102,7 +102,7 @@ class WOWOrderController: WOWBaseViewController {
             params = ["orderStatus": type as AnyObject, "currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject]
         }
 
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderList(params:params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderList(params:params), successClosure: { [weak self](result, code) in
             
             let json = JSON(result)["orderLists"].arrayObject
             DLog(json)
@@ -229,7 +229,7 @@ extension WOWOrderController:OrderCellDelegate{
     //确认收货
     fileprivate func confirmReceive(_ orderCode:String,cell:WOWOrderListCell){
         func confirm(){
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result, code) in
                 if let strongSelf = self{
                     //确认收货成功后重新请求下网络刷新列表
                     strongSelf.request()
@@ -254,7 +254,7 @@ extension WOWOrderController:OrderCellDelegate{
         let uid      = WOWUserManager.userID
         let order_id = model.id ?? ""
         let status   = "20" //删除被回收
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderStatus(uid:uid, order_id:order_id, status:status), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderStatus(uid:uid, order_id:order_id, status:status), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 let ret = JSON(result).int ?? 0
                 if ret == 1{

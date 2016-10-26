@@ -221,7 +221,7 @@
 //    override func request() {
 //        super.request()
 //        let uid = WOWUserManager.userID
-//        WOWNetManager.sharedManager.requestWithTarget(.api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid,keyword:""), successClosure: {[weak self] (result) in
+//        WOWNetManager.sharedManager.requestWithTarget(.api_ProductList(pageindex: String(pageIndex),categoryID: categoryID,style: style,sort: sort,uid:uid,keyword:""), successClosure: {[weak self] (result, code) in
 //            if let strongSelf = self{
 //                strongSelf.endRefresh()
 //                WOWHud.dismiss()
@@ -355,7 +355,7 @@
 //        let uid       = WOWUserManager.userID
 //        let thingid   = String(describing: model.productId) ?? ""
 //        let type      = "1"//1为商品 2为场景
-////        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result) in
+////        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id: thingid, uid: uid, type: type, is_delete: is_delete, scene_id: ""), successClosure: {[weak self] (result, code) in
 ////            if let _ = self{
 ////                cell.likeButton.selected = !cell.likeButton.selected
 ////            }

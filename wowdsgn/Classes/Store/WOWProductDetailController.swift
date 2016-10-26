@@ -156,31 +156,35 @@ class WOWProductDetailController: WOWBaseViewController {
         productDescView.productDescLabel.text = productModel?.detailDescription
         productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)
         //banner轮播
+        configBanner()
         
         
-            if imgUrlArr.count >= 1 {
-                cycleView.imageURLArray = imgUrlArr
-                cycleView.delegate = self
-                placeImageView.kf.setImage(
-                    with: URL(string:imgUrlArr[0] ) ?? URL(string: "placeholder_product"),
-                    placeholder: nil,
-                    options: nil,
-                    progressBlock: { (arg1, arg2) in
-                        
-                        
-                    },
-                    completionHandler: { [weak self](image, error, cacheType, imageUrl) in
-                        if let strongSelf = self{
-                            strongSelf.shareProductImage = image
-                        }
-                    }
-                )
-                
-            }
         
         
     }
     
+    fileprivate func configBanner() {
+        if imgUrlArr.count >= 1 {
+            cycleView.imageURLArray = imgUrlArr
+            cycleView.delegate = self
+            placeImageView.kf.setImage(
+                with: URL(string:imgUrlArr[0] ) ?? URL(string: "placeholder_product"),
+                placeholder: nil,
+                options: nil,
+                progressBlock: { (arg1, arg2) in
+                    
+                    
+                },
+                completionHandler: { [weak self](image, error, cacheType, imageUrl) in
+                    if let strongSelf = self{
+                        strongSelf.shareProductImage = image
+                    }
+                }
+            )
+            
+        }
+        tableView.reloadData()
+    }
     
     //MARK:Actions
     //MARK:更新角标
@@ -229,7 +233,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:分享
     @IBAction func shareClick(_ sender: UIButton) {
-        let shareUrl = WOWShareUrl + "/item/\(productModel?.productId ?? 0)"
+        let shareUrl = WOWShareUrl + "/item/\(productId ?? 0)"
         WOWShareManager.share(productModel?.productName, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
@@ -259,8 +263,9 @@ class WOWProductDetailController: WOWBaseViewController {
     //MARK:Private Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
+                print(result)
                 strongSelf.productModel = Mapper<WOWProductModel>().map(JSONObject:result)
                 strongSelf.productModel?.productId = strongSelf.productId
                 strongSelf.imgUrlArr = strongSelf.productModel?.primaryImgs ?? [String]()
@@ -286,7 +291,7 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     //产品参数
     func requestProductSpec() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.api_ProductSpec(productId: productId ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_ProductSpec(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(JSONObject:result)
                 DLog(strongSelf.productSpecModel)
@@ -300,7 +305,7 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //    用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             //            if let strongSelf = self{
             let favorite = JSON(result)["favorite"].bool
             self!.likeButton.isSelected = favorite ?? false
@@ -324,29 +329,13 @@ class WOWProductDetailController: WOWBaseViewController {
             })
         
         
-        
-        //        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId ?? 0), successClosure: { [weak self](result) in
-        //            if let strongSelf = self{
-        //                let favorite = JSON(result)["favorite"].bool
-        //                strongSelf.likeButton.selected = favorite ?? false
-        //
-        //                var params = [String: AnyObject]?()
-        //
-        //                params = ["productId": strongSelf.productId!, "favorite": favorite!]
-        //
-        //                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-        ////                 NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-        //            }
-        //            }) { (errorMsg) in
-        //
-        //
-        //        }
+      
     }
     
     // 相关商品信息
     func requestAboutProduct()  {
         let params = ["brandId": productModel?.brandId ?? 0, "currentPage": pageIndex,"pageSize":pageSize, "excludes": [productModel?.productId ?? 0]] as [String : Any]
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as [String : AnyObject]?), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self {
                 let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
@@ -357,7 +346,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 }
                 //初始化详情页数据
                 strongSelf.configData()
-                strongSelf.tableView.reloadData()
+               
                 strongSelf.endRefresh()
             }
             
@@ -391,7 +380,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         backView.hideBuyView()
         if let product = product {
             
-            WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.productId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self] (result) in
+            WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.productId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self](result, code) in
                 if let strongSelf = self {
                     strongSelf.updateCarBadge(product.productQty ?? 1)
                 }
@@ -406,13 +395,27 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         
     }
     
+    //关闭规格弹窗
+    func closeBuyView(_ productInfo: WOWProductSkuModel?) {
+        if let productInfo = productInfo {
+            productId = productInfo.productId
+            productModel?.productTitle = productInfo.productTitle
+            productModel?.sellPrice = productInfo.sellPrice
+            productModel?.originalprice = productInfo.originalPrice
+            if imgUrlArr.count >= 1 {
+                imgUrlArr[0] = productInfo.productImg ?? ""
+            }
+            configBanner()
+        }
+    }
+    
 }
 
 extension WOWProductDetailController : CyclePictureViewDelegate {
     func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
         func setPhoto() -> [PhotoModel] {
             var photos: [PhotoModel] = []
-            for (_, photoURLString) in (productModel?.primaryImgs ?? [""]).enumerated() {
+            for (_, photoURLString) in imgUrlArr.enumerated() {
                 // 这个方法只能返回可见的cell, 如果不可见, 返回值为nil
                 //                let cell = cyclePictureView.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? CyclePictureCell
                 

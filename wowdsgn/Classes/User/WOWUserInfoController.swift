@@ -252,7 +252,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func request() {
         super.request()
         let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star),"avatar":self.headImageUrl]
-        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -280,7 +280,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     func requestAddressInfo() {
         //请求默认地址数据
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(JSONObject:result)
                 if let addressInfo = strongSelf.addressInfo {

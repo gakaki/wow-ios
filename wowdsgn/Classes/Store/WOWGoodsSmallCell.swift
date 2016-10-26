@@ -63,7 +63,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         pictureImageView.set_webimage_url(model.productImg ?? "")
         // 修改来回上下加载 内存不减的问题
 //        pictureImageView.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
-        desLabel.text = model.productName ?? ""
+        desLabel.text = model.productTitle ?? ""
 //        desLabel.setLineHeightAndLineBreak(1.5)
         if let price = model.sellPrice {
             let result = WOWCalPrice.calTotalPrice([price],counts:[1])
@@ -117,7 +117,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
 //    func requestFavoriteProduct(productId: Int)  {
 //        WOWHud.showLoadingSV()
 //
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: {[weak self] (result) in
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: {[weak self] (result, code) in
 //            if let strongSelf = self{
 //                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
 ////            if let strongSelf = self{

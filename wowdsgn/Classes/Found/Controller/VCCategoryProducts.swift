@@ -151,7 +151,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
           WOWHud.dismiss()
 
           WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Product_By_Category(
-            asc: self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.query_categoryId ), successClosure: {[weak self] (result) in
+            asc: self.query_asc, currentPage: self.pageIndex, showCount: self.query_showCount, sortBy: self.query_sortBy, categoryId: self.query_categoryId ), successClosure: {[weak self] (result, code) in
                 
               if let strongSelf = self {
                   strongSelf.endRefresh()

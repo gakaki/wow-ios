@@ -114,7 +114,8 @@ protocol goodsBuyViewDelegate:class {
     func sureBuyClick(_ product: WOWProductSkuModel?)
     //确定加车
     func sureAddCarClick(_ product: WOWProductSkuModel?)
-  
+    //关掉选择规格视图
+    func closeBuyView(_ productInfo: WOWProductSkuModel?)
 }
 
 
@@ -146,7 +147,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     //sku列表
     var skuListArr          = [WOWProductSkuModel]()
     //当前产品
-    var currentProduct      : WOWProductSkuModel?
+//    var currentProduct      : WOWProductSkuModel?
     //各种规格的选择状态
     var seributeDic         = [Int: Bool]()
     
@@ -214,12 +215,11 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             if let productArray = p.products {
                 for product in productArray {
                     if product.productId == WOWBuyCarMananger.sharedBuyCar.productId {
-                        currentProduct = product
+                        productInfo = product
                     }
                 }
             }
             goodsImageView.borderColor(0.5, borderColor: MGRgb(234, g: 234, b: 234))
-            productInfo = currentProduct
             configProductInfo()
             //规格数组
             if let array = p.serialAttribute {
@@ -229,7 +229,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             if let array = p.products {
                 skuListArr = array
             }
-            if let attributes = currentProduct?.attributes {
+            if let attributes = productInfo?.attributes {
                 for proSpec in attributes.enumerated() {
                     for serial in serialAttributeArr[proSpec.offset].specName {
                         if proSpec.element.attributeValue == serial.specName {
@@ -286,14 +286,17 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         switch entrance {
         case .addEntrance:
             startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.8 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                
-                if let del = self.delegate {
-                    self.productInfo?.productQty = self.skuCount
-                    
-                    del.sureAddCarClick(self.productInfo)
-                    
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.8 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {[weak self](void) in
+                if let strongSelf = self {
+                    if let del = strongSelf.delegate {
+                        strongSelf.productInfo?.productQty = strongSelf.skuCount
+                        
+                        del.sureAddCarClick(strongSelf.productInfo)
+                        del.closeBuyView(strongSelf.productInfo)
+                    }
                 }
+               
             })
 
         case .payEntrance:
@@ -308,43 +311,49 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         
        
     }
+    
+    @IBAction func closeButtonClick(_ sender: UIButton) {
+        if let del = delegate {
+            del.closeBuyView(productInfo)
+        }
+    }
 
     /**
      加入购物车
      
      */
-    @IBAction func addCarButtonClick(_ sender: UIButton) {
-        if !validateMethods(){
-            return
-        }
-
-        startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.8 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-            
-            if let del = self.delegate {
-                self.productInfo?.productQty = self.skuCount
-                
-                del.sureAddCarClick(self.productInfo)
-                    
-            }
-        })
-        
-    }
-    /**
-     立即支付
-    
-     */
-    @IBAction func payButtonClick(_ sender: UIButton) {
-        if !validateMethods(){
-            return
-        }
-        
-        if let del = delegate {
-            self.productInfo?.productQty = skuCount
-            del.sureBuyClick(productInfo)
-            
-        }
-    }
+//    @IBAction func addCarButtonClick(_ sender: UIButton) {
+//        if !validateMethods(){
+//            return
+//        }
+//
+//        startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.8 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+//            
+//            if let del = self.delegate {
+//                self.productInfo?.productQty = self.skuCount
+//                
+//                del.sureAddCarClick(self.productInfo)
+//                    
+//            }
+//        })
+//        
+//    }
+//    /**
+//     立即支付
+//    
+//     */
+//    @IBAction func payButtonClick(_ sender: UIButton) {
+//        if !validateMethods(){
+//            return
+//        }
+//        
+//        if let del = delegate {
+//            self.productInfo?.productQty = skuCount
+//            del.sureBuyClick(productInfo)
+//            
+//        }
+//    }
 
     
     //MARK: - validate Methods
@@ -543,14 +552,16 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             showStock(true)
             
             sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .normal)
-
+            sureButton.isEnabled = true
+            sureButton.setTitle("确定", for: .normal)
             
         }else {
             skuCount = 0
            
             
             sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .disabled)
-            
+            sureButton.isEnabled = false
+            sureButton.setTitle("已售罄", for: .normal)
         }
         collectionView.reloadData()
     }
@@ -660,11 +671,7 @@ extension WOWGoodsBuyView {
                 productInfo = productArray[0]
                 configProductInfo()
             }
-        }else {
-            productInfo = currentProduct
-            configProductInfo()
         }
-        print(productArray)
         collectionView.reloadData()
 
     }

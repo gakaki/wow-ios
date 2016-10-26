@@ -91,7 +91,7 @@ class WOWInfoTextController: WOWBaseTableViewController {
 //        case .JobEntrance(_):
 //            
 //        }
-        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)

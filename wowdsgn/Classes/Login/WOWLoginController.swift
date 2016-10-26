@@ -112,7 +112,7 @@ class WOWLoginController: WOWBaseViewController {
             return
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_Login(phone,passwd), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Login(phone,passwd), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 DLog(result)
                 

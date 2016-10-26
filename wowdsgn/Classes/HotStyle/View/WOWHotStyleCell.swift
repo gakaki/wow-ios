@@ -47,7 +47,7 @@ class WOWHotStyleCell: UITableViewCell {
                 }else{
                     strongSelf.lbBrowse.text    = thumbNum.toString
                 }
-                
+                strongSelf.modelData?.favorite = isFavorite
                 strongSelf.btnLike.isSelected = isFavorite ?? false
                 
             }

@@ -74,6 +74,14 @@ class WOWBrandHomeController: WOWBaseViewController {
         }
 
     }
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    
+    }
+    
+    
     fileprivate func addObserver(){
         /**
          添加通知

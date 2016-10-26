@@ -1,0 +1,16 @@
+PODS:
+  - wow3rd (0.1.0)
+
+DEPENDENCIES:
+  - wow3rd (from `../`)
+
+EXTERNAL SOURCES:
+  wow3rd:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  wow3rd: fd0a7bcd267cd0eeb2d3bd2162a3b9827f0c9833
+
+PODFILE CHECKSUM: 8e1dfa40d18f7ff1f71b4d47dd34b5fb4718c040
+
+COCOAPODS: 1.1.0.rc.3

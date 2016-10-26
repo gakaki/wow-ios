@@ -22,8 +22,8 @@ class WOWHotStyleCell: UITableViewCell {
     private var shareProductImage:UIImage? //供分享使用
     
     weak var    delegate   :  WOWHotStyleCellDelegate?
-    var brandModel : WOWBrandStyleModel?
-    var modelData : WOWModelVoTopic?
+    var brandModel : WOWBrandStyleModel? // 左上角banner 的信息
+    var modelData : WOWModelVoTopic?// 主信息
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,7 +35,6 @@ class WOWHotStyleCell: UITableViewCell {
             
             if let strongSelf = self{
                 
-                // strongSelf.request()
                 
                 // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
                 strongSelf.modelData?.likeQty = Calculate.calculateType(type: isFavorite!)(strongSelf.modelData?.likeQty ?? 0)
@@ -47,7 +46,7 @@ class WOWHotStyleCell: UITableViewCell {
                 }else{
                     strongSelf.lbBrowse.text    = thumbNum.toString
                 }
-                
+                strongSelf.modelData?.favorite = isFavorite
                 strongSelf.btnLike.isSelected = isFavorite ?? false
                 
             }
@@ -109,9 +108,8 @@ class WOWHotStyleCell: UITableViewCell {
         }else{
             lbPraise.text    = model.moduleContentList?.readQty?.toString
         }
-        
-        btnLike.isSelected = model.moduleContentList?.favorite ?? false
-        
+
+       btnLike.isSelected = model.moduleContentList?.favorite ?? false
         
     }
     @IBAction func shareClick(sender: UIButton) {

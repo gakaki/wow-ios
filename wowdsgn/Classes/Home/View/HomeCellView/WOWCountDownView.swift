@@ -9,12 +9,25 @@
 import UIKit
 typealias TimerOver = () -> ()
 class WOWCountDownView: UIView {
-    var timerOverEvent : TimerOver!
-    var timer : Timer? = nil
-    var stamp : Int = 0
-    
-    var _timeStamp: Int = 0
-    
+    var timerOverEvent  : TimerOver!
+    var timer           : Timer?    = nil
+    var stamp           : Int       = 0
+    var isConfigCellUI  :Bool       = false
+    private var myContext           = 0
+    var _timeStamp: Int             = 0
+    var myQueueTimer: DispatchQueue?
+    var myTimer: DispatchSourceTimer?
+    var model : WOWProductModel? {
+        didSet {
+            if isConfigCellUI == false{
+                isConfigCellUI = true
+                self.getDetailTimeWithTimestamp(timeStamp: model?.timeoutSeconds ?? 0)
+                model?.addObserver(self, forKeyPath: "timeoutSeconds", options: NSKeyValueObservingOptions.new, context: &myContext);
+            }
+
+         
+        }
+    }
     var timeStamp: Int {
         get {
             
@@ -24,14 +37,18 @@ class WOWCountDownView: UIView {
         set {
             if newValue != 0{
                 _timeStamp = newValue
-                
-                if timer == nil {
-                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerr), userInfo: nil, repeats: true)
-                }
-               
+//                
+//                if timer == nil {
+//                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerr), userInfo: nil, repeats: true)
+//                    
+//                    RunLoop.current.add(timer!, forMode: RunLoopMode.commonModes)
+//                    
+//                }
                 self.getDetailTimeWithTimestamp(timeStamp: newValue )
-               
-            }else{
+                
+                self.timerCount(timeStamp: newValue)
+                
+                }else{
                 
             }
 
@@ -49,6 +66,20 @@ class WOWCountDownView: UIView {
         lbTimerSecond.AddBorderRadius()
         
     }
+    // 利用KVO完成倒计时
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+         print(change?[NSKeyValueChangeKey.newKey] as! NSInteger?)
+        if let timerNumber = change?[NSKeyValueChangeKey.newKey] as? NSInteger {
+            
+            if timerNumber > 0{
+                self.getDetailTimeWithTimestamp(timeStamp: timerNumber)
+            }else{
+                model?.removeObserver(self, forKeyPath: "timeoutSeconds", context: &myContext)
+            }
+            
+        }
+        
+    }
     func timerr()  {
         self._timeStamp -= 1
         self.getDetailTimeWithTimestamp(timeStamp: _timeStamp)
@@ -63,6 +94,16 @@ class WOWCountDownView: UIView {
     }
     
     func getDetailTimeWithTimestamp(timeStamp: NSInteger)  {
+        
+//        //转换为时间
+//        let timeInterval:TimeInterval = TimeInterval(timeStamp)
+//        let date = NSDate(timeIntervalSince1970: timeInterval)
+//        
+//        //格式话输出
+//        let dformatter = DateFormatter()
+//        dformatter.dateFormat = "HH:mm:ss"
+//        print("对应的日期时间：\(dformatter.string(from: date as Date))")
+        
         let ms = timeStamp
         let ss = 1
         let mi = ss * 60
@@ -73,9 +114,42 @@ class WOWCountDownView: UIView {
         let hour = (ms - day * dd) / hh
         let minute = (ms - day * dd - hour * hh) / mi
         let second = (ms - day * dd - hour * hh - minute * mi) / ss
-        self.lbTimerHour.text = String(hour)
-        self.lbTimerMinute.text = String(minute)
-        self.lbTimerSecond.text = String(second)
+        
+        DispatchQueue.main.async {
+            
+            self.lbTimerHour.text = String(hour).AddZero()
+            self.lbTimerMinute.text = String(minute).AddZero()
+            self.lbTimerSecond.text = String(second).AddZero()
+            
+        }
+
+       
     }
-    
+    // 利用GCD 完成倒计时
+    func timerCount(timeStamp: NSInteger){
+        var timeStamp = timeStamp
+        myQueueTimer = DispatchQueue(label: "myQueueTimer")
+        myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
+        myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
+        myTimer?.setEventHandler {
+                if timeStamp > 0{
+                    
+                    timeStamp  = timeStamp - 1
+                    self.getDetailTimeWithTimestamp(timeStamp: timeStamp)
+                }
+        }
+        
+        myTimer?.resume()
+        
+    }
+
+}
+extension String{
+    func AddZero() -> String{
+        if self.length == 1 {
+            return "0" + self
+        }else{
+            return self
+        }
+    }
 }

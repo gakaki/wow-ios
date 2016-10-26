@@ -31,6 +31,11 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var bottomLine: UIView!
     @IBOutlet weak var topView: UIView!
     
+    @IBOutlet weak var viewBottom: UIView!
+    @IBOutlet weak var lbLabel: UILabel!
+    @IBOutlet weak var lbDiscount: UILabel!
+    
+    @IBOutlet weak var LeftConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         desLabel.preferredMaxLayoutWidth = (UIApplication.currentViewController()?.view.w)! / CGFloat(2) - 30
@@ -47,6 +52,18 @@ class WOWGoodsSmallCell: UICollectionViewCell {
 //    }
 
     func showData(_ model:WOWProductModel,indexPath:IndexPath) {
+        
+        let discoutStr  = "5.5折"
+        let labelStr    = "冬季促销"
+        lbDiscount.text = discoutStr.get_formted_Space()
+        lbLabel.text    = labelStr.get_formted_Space()
+        if discoutStr.isEmpty {
+            
+            lbDiscount.isHidden       = true
+            LeftConstraint.constant = 0
+            
+        }
+        
         let i = (indexPath as NSIndexPath).item
         if ( i % 2 != 0 && i != 0){
             view_rightline.isHidden = true
@@ -102,7 +119,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
             UIApplication.currentViewController()?.toLoginVC(true)
         }else{
 
-            WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view: self.contentView,btn: sender, isFavorite: {(isFavorite) in
+            WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view: viewBottom,btn: sender, isFavorite: {(isFavorite) in
                 //                if let strongSelf = self{
                 print("请求成功")
                 //                      strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected

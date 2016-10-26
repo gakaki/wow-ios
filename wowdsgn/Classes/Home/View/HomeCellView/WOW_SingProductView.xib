@@ -46,7 +46,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="OBy-Fr-NIL"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <color key="textColor" red="1" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -86,9 +86,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="imgProduct" destination="rAd-Za-XuH" id="zYr-Fg-Uk4"/>
                 <outlet property="imgVieww" destination="rAd-Za-XuH" id="8fs-XW-bsM"/>
                 <outlet property="leftAllLayout" destination="edg-Io-zye" id="toa-R6-ro2"/>
                 <outlet property="leftImageLayout" destination="T9n-8J-jna" id="vT3-jC-Uvq"/>
+                <outlet property="originalpriceLabel" destination="PXF-k1-cJX" id="l5I-EN-evQ"/>
+                <outlet property="priceLabel" destination="5da-LB-dt8" id="iKj-fQ-liT"/>
                 <outlet property="view_CountDown" destination="5fn-gZ-zPv" id="fZL-Fe-Sba"/>
             </connections>
             <point key="canvasLocation" x="-109" y="-264"/>

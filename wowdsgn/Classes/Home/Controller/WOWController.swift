@@ -35,6 +35,8 @@ class WOWController: WOWBaseViewController {
     
     var bottomListArray = [WOWProductModel]() //底部列表数组
     
+    var singProductArray = [WOWHomeModle]() // 今日单品 倒计时的产品 数组
+    
     var bottomListCount :Int = 0//底部列表数组的个数
     
     var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
@@ -42,6 +44,9 @@ class WOWController: WOWBaseViewController {
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
+    
+    var myQueueTimer: DispatchQueue?
+    var myTimer: DispatchSourceTimer?
     
     @IBOutlet var tableView: UITableView!
     //    var hidingNavBarManager: HidingNavigationBarManager?
@@ -220,7 +225,26 @@ class WOWController: WOWBaseViewController {
         self.requestBottom()
             
     }
-    
+    func timerCount(array: Array<WOWHomeModle>){
+        myQueueTimer = DispatchQueue(label: "myQueueTimer")
+        myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
+        myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
+        myTimer?.setEventHandler {
+            for model in array {
+                if model.moduleType == 801 {
+                    for product in  (model.moduleContentProduct?.products) ?? [] {
+                        if product.timeoutSeconds > 0{
+                            product.timeoutSeconds  = product.timeoutSeconds - 1
+//                            print("\(product.productTitle) -- \(product.timeoutSeconds)")
+                        }
+                       
+                    }
+                }
+            }
+        }
+        myTimer?.resume()
+
+    }
     func requestTop() {
         let params = ["pageId": 1, "region": 1]
        
@@ -238,15 +262,19 @@ class WOWController: WOWBaseViewController {
                     
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
-                    
+                    for model in brandArray{
+                        if model.moduleType == 801 {// 只取801的model 防止多次for 循环
+                            strongSelf.singProductArray.append(model)
+                        }
+                    }
+                    // 拿到数据，倒计时刷新数据源model
+                    strongSelf.timerCount(array: strongSelf.singProductArray)
                 }
                 if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
                      strongSelf.tableView.reloadData()
                      WOWHud.dismiss()
                 }
                
-                //                dispatch_group_leave(strongSelf.group);// 减少计数，证明此网络请求结束
-                
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
@@ -484,8 +512,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         case 801:
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_103, for: indexPath) as! Cell_103_Product
-             cell.dataSourceArray = model.moduleContentProduct?.products
-            cell.showDateNew()
+            cell.dataSourceArray = model.moduleContentProduct?.products
+//            cell.showDateNew()
 //
             return cell
         case 402:

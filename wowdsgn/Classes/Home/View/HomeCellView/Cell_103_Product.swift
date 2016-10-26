@@ -27,10 +27,7 @@ class Cell_103_Product: UITableViewCell {
     @IBOutlet weak var pagingScrollView: PagingScrollView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-//        configUI()
-        
-  
+        //        configUI()
     }
     deinit {
         print("释放")
@@ -70,9 +67,7 @@ class Cell_103_Product: UITableViewCell {
             cv.frame = (v.view_CountDown?.bounds)!
             
             cv.tag = i + 1000
-            cv.timerOverEvent = {
-                print("停止")
-            }
+
             v.view_CountDown?.addSubview(cv)
             
             pagingScrollView.scrollView.addSubview(v)

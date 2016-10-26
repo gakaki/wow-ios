@@ -9,8 +9,9 @@
 import UIKit
 typealias TimerOver = () -> ()
 class WOWCountDownView: UIView {
+    
     var timerOverEvent  : TimerOver!
-    var timer           : Timer?    = nil
+
     var stamp           : Int       = 0
     var isConfigCellUI  :Bool       = false
     private var myContext           = 0
@@ -37,13 +38,7 @@ class WOWCountDownView: UIView {
         set {
             if newValue != 0{
                 _timeStamp = newValue
-//                
-//                if timer == nil {
-//                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerr), userInfo: nil, repeats: true)
-//                    
-//                    RunLoop.current.add(timer!, forMode: RunLoopMode.commonModes)
-//                    
-//                }
+
                 self.getDetailTimeWithTimestamp(timeStamp: newValue )
                 
                 self.timerCount(timeStamp: newValue)
@@ -68,7 +63,7 @@ class WOWCountDownView: UIView {
     }
     // 利用KVO完成倒计时
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-         print(change?[NSKeyValueChangeKey.newKey] as! NSInteger?)
+//         print(change?[NSKeyValueChangeKey.newKey] as! NSInteger?)
         if let timerNumber = change?[NSKeyValueChangeKey.newKey] as? NSInteger {
             
             if timerNumber > 0{
@@ -88,21 +83,11 @@ class WOWCountDownView: UIView {
         }
     }
     func timerOver()  {
-        timer?.invalidate()
-        timer = nil
+    
         timerOverEvent()
     }
     
     func getDetailTimeWithTimestamp(timeStamp: NSInteger)  {
-        
-//        //转换为时间
-//        let timeInterval:TimeInterval = TimeInterval(timeStamp)
-//        let date = NSDate(timeIntervalSince1970: timeInterval)
-//        
-//        //格式话输出
-//        let dformatter = DateFormatter()
-//        dformatter.dateFormat = "HH:mm:ss"
-//        print("对应的日期时间：\(dformatter.string(from: date as Date))")
         
         let ms = timeStamp
         let ss = 1

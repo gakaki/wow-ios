@@ -32,8 +32,7 @@ struct WOWHud {
     static func dismiss(){
         SVProgressHUD.popActivity()
         DispatchQueue.main.async {
-            
-//            LoadView.sharedInstance.dissMissView()
+
             LoadView.dissMissView()
         }
 
@@ -41,8 +40,9 @@ struct WOWHud {
     // 接口请求成功，返回code码错误
     static func showMsg(_ message:String?){
         DispatchQueue.main.async {
-            LoadView.dissMissView()
-//            LoadView.sharedInstance.dissMissView()
+            
+            WOWHud.dismiss()
+
         }
         configSVHud()
         let msg = message ?? "网络错误"
@@ -51,7 +51,7 @@ struct WOWHud {
     // 接口请求不成功
     static func showMsgNoNetWrok(message:String?){
         DispatchQueue.main.async {
-            LoadView.dissMissView()
+            WOWHud.dismiss()
         }
         configSVHud()
         let msg = message ?? "网络错误"

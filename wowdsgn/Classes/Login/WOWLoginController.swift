@@ -111,11 +111,13 @@ class WOWLoginController: WOWBaseViewController {
             tipsLabel.text = "请输入正确的手机号"
             return
         }
-        
+
+        WOWHud.showLoading()
         WOWNetManager.sharedManager.requestWithTarget(.api_Login(phone,passwd), successClosure: {[weak self](result, code) in
+
             if let strongSelf = self{
                 DLog(result)
-                
+                WOWHud.dismiss()
                 let model = Mapper<WOWUserModel>().map(JSONObject:result)
                 WOWUserManager.saveUserInfo(model)
                 
@@ -128,6 +130,7 @@ class WOWLoginController: WOWBaseViewController {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
+                WOWHud.dismiss()
                 strongSelf.tipsLabel.text = errorMsg
             }
         }

@@ -87,7 +87,16 @@ class WOWOrderDetailController: WOWBaseViewController{
         super.viewDidLoad()
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if entrance == .orderPay{
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+        }
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -146,7 +155,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     // 取消订单
     @IBAction func clooseOrderButtonClick(_ sender: UIButton) {
         func clooseOrder(){
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderCancel(orderCode: orderCode), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderCancel(orderCode: orderCode), successClosure: { [weak self](result, code) in
                 if let strongSelf = self{
                     //取消订单成功后重新请求下网络刷新列表
                     strongSelf.request()
@@ -310,7 +319,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     //确认收货
     fileprivate func confirmReceive(_ orderCode:String){
         func confirm(){
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OrderConfirm(orderCode: orderCode), successClosure: { [weak self](result, code) in
                 if let strongSelf = self{
                     //确认收货成功后重新请求下网络刷新列表
                     strongSelf.request()
@@ -342,7 +351,7 @@ class WOWOrderDetailController: WOWBaseViewController{
 //        orderType()
         
                 isOpen = true // 默认 不展开
-            WOWNetManager.sharedManager.requestWithTarget(.api_OrderDetail(OrderCode:self.orderCode!), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(.api_OrderDetail(OrderCode:self.orderCode!), successClosure: { [weak self](result, code) in
                 let json = JSON(result)
                 DLog(json)
                 if let strongSelf = self{
@@ -374,7 +383,7 @@ extension WOWOrderDetailController{
                 return
             }
 
-            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: self.orderCode ?? "", channel: channl, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: self.orderCode ?? "", channel: channl, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result, code) in
                 if let strongSelf = self {
                     let json = JSON(result)
                     let charge = json["charge"]
@@ -410,7 +419,7 @@ extension WOWOrderDetailController{
     
     //从服务端去拉取支付结果
     func requestPayResult() {
-        WOWNetManager.sharedManager.requestWithTarget(.api_PayResult(orderCode: orderCode), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_PayResult(orderCode: orderCode), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 strongSelf.request() // 更新最新状态
                 strongSelf.delegate?.orderStatusChange()

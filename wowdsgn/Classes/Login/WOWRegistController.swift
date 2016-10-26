@@ -85,7 +85,7 @@ class WOWRegistController: WOWBaseViewController {
         let mobile = phoneTextField.text ?? ""
         let Api_Code = byWechat ? RequestApi.api_Captcha :RequestApi.api_Sms_Code
         
-        WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 WOWHud.showMsg("验证码发送成功")
                 strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
@@ -138,7 +138,7 @@ class WOWRegistController: WOWBaseViewController {
         }
 
         
-            WOWNetManager.sharedManager.requestWithTarget(registerTarget, successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(registerTarget, successClosure: { [weak self](result, code)in
                 if let strongSelf = self{
                     let model = Mapper<WOWUserModel>().map(JSONObject:result)
                     WOWUserManager.saveUserInfo(model)

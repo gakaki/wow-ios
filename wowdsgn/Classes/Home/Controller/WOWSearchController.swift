@@ -204,7 +204,7 @@ class WOWSearchController: WOWBaseViewController {
 extension WOWSearchController {
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.api_SearchHot, successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchHot, successClosure: {[weak self] (result, code) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let array = json["keywords"].arrayObject
@@ -220,7 +220,7 @@ extension WOWSearchController {
     }
     
     func requestResult()  {
-        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""), successClosure: { [weak self](result, code) in
             let json = JSON(result)
             DLog(json)
             

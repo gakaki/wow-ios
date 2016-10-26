@@ -49,7 +49,7 @@ class WOWClickLikeAction {
             return
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProject(topicId: topicId), successClosure: {(result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProject(topicId: topicId), successClosure: {(result, code) in
             
             let favorite = JSON(result)["favorite"].bool ?? false
             if favorite == true {
@@ -79,7 +79,7 @@ class WOWClickLikeAction {
             UIApplication.currentViewController()?.toLoginVC(true)
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteProduct(productId:productId), successClosure: {(result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteProduct(productId:productId), successClosure: {(result, code) in
             
             
             let favorite = JSON(result)["favorite"].bool
@@ -114,7 +114,7 @@ class WOWClickLikeAction {
             return
         }
         params = nil
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandId), successClosure: { (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandId), successClosure: { (result, code) in
                 let favorite = JSON(result)["favorite"].bool
                 
                 if favorite == true {
@@ -147,7 +147,7 @@ class WOWClickLikeAction {
             return
         }
         params = nil
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId), successClosure: {(result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId), successClosure: {(result, code) in
             let favorite = JSON(result)["favorite"].bool
             
             if favorite == true {

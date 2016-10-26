@@ -71,7 +71,7 @@ class WOWAddressController: WOWBaseViewController {
     //收货地址列表
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Addresslist, successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Addresslist, successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(JSONObject:JSON(result)["shippingInfoResultList"].arrayObject)
                 if let array = arr{
@@ -92,7 +92,7 @@ class WOWAddressController: WOWBaseViewController {
         guard model.isDefault!  else {
             let addressId = model.id ?? 0
             
-            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressSetDefault(id: addressId), successClosure: {[weak self] (result) in
+            WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressSetDefault(id: addressId), successClosure: {[weak self] (result, code) in
                 if let strongSelf = self{
                     for model:WOWAddressListModel in strongSelf.dataArr {
                         model.isDefault = false
@@ -114,7 +114,7 @@ class WOWAddressController: WOWBaseViewController {
     //删除收货地址
     func deleteAddress(_ indexPath:IndexPath) {
         let model = self.dataArr[(indexPath as NSIndexPath).section]
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDelete(id:model.id ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDelete(id:model.id ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 strongSelf.dataArr.remove(at: (indexPath as NSIndexPath).section)
                 strongSelf.tableView.deleteSections(IndexSet(integer: (indexPath as NSIndexPath).section), with: .fade)

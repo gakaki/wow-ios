@@ -120,7 +120,7 @@ extension  UIViewController {
         var isOpenIdBinded = Bool()//假设的bool值
         let open_id        = (userData["openid"] ?? "") as! String
 
-        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId:open_id), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId:open_id), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)

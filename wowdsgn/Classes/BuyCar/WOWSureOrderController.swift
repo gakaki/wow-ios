@@ -65,7 +65,7 @@ class WOWSureOrderController: WOWBaseViewController {
 //        }
         let requestParam  = ["cart":productParam,"uid":uid,"pay_method":payType,"tips":tips,"address_id":addressid] as [String : Any]
         let requestString = JSONStringify(requestParam as AnyObject)
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_CartCommit(car:requestString), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_CartCommit(car:requestString), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -131,7 +131,7 @@ class WOWSureOrderController: WOWBaseViewController {
         super.request()
         //请求地址数据
 //        let uid =  WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Addresslist, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Addresslist, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 let arr = Mapper<WOWAddressListModel>().mapArray(JSONObject:result)
                 if let array = arr{

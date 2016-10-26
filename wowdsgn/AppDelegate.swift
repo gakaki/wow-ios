@@ -222,7 +222,7 @@ extension AppDelegate{
 //        window?.rootViewController =  VCCategoryProducts()
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
-        vc.productId = 49          //247到254是SKU 2 42
+        vc.productId = 1      //247到254是SKU 2 42
 //        window?.rootViewController = vc
     }
     
@@ -368,7 +368,7 @@ extension AppDelegate: AdLaunchViewDelegate {
     
     func fetchADImage(){
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AD, successClosure: { (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AD, successClosure: { (result, code) in
             
             var r                     =  JSON(result)["startupImageList"]
             let res                   =  Mapper<WOWVOAd>().mapArray(JSONObject:r.arrayObject) ?? [WOWVOAd]()

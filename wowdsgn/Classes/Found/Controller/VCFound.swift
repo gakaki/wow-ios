@@ -73,7 +73,7 @@ class VCFound: VCBaseVCCategoryFound {
     func request_module_page_with_throw() throws -> Void {
         
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Module_Page2, successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Module_Page2, successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self{
                                 
@@ -151,7 +151,7 @@ class VCFound: VCBaseVCCategoryFound {
     
     //用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
-        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: vo_recommend_product_id ), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: vo_recommend_product_id ), successClosure: {[weak self] (result, code) in
             
 
             if let strongSelf = self{

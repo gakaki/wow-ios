@@ -13,7 +13,7 @@ import UIKit
 class WOWFavProduct: WOWBaseViewController {
 
 
-    var dataArr  = [WOWFavoriteProductModel]()
+    var dataArr  = [WOWProductModel]()
     
     var parentNavigationController : UINavigationController?
     
@@ -101,7 +101,7 @@ class WOWFavProduct: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProduct, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProduct, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
 //                strongSelf.endRefresh()
 //                WOWHud.dismiss()
@@ -133,7 +133,7 @@ class WOWFavProduct: WOWBaseViewController {
 //                strongSelf.collectionView.reloadData()
 
                 WOWHud.dismiss()
-                let productList = Mapper<WOWFavoriteProductModel>().mapArray(JSONObject:JSON(result)["favoriteProductVoList"].arrayObject)
+                let productList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["favoriteProductVoList"].arrayObject)
                 if let productList = productList{
                     strongSelf.dataArr = productList
                 }
@@ -163,7 +163,8 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoritrSingleCell.self), for: indexPath) as! WOWFavoritrSingleCell
         let model = dataArr[(indexPath as NSIndexPath).row]
 //        cell.imageView.kf_setImageWithURL(NSURL(string: model.productImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
-        cell.imageView.set_webimage_url(model.productImg)
+//        cell.imageView.set_webimage_url(model.productImg)
+        cell.showData(model, indexPath: indexPath)
         return cell
     }
     

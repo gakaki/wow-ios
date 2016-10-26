@@ -28,7 +28,7 @@ class WOWCouponController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        request()
+//        request()
     }
     
     override func setUI() {
@@ -54,7 +54,7 @@ class WOWCouponController: WOWBaseViewController {
             params = ["currentPage": pageIndex as AnyObject, "pageSize": pageSize as AnyObject, "minAmountLimit": minAmountLimit as AnyObject? ?? 0 as AnyObject, "couponLimitType": 0 as AnyObject]
         }
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Coupons(params: params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Coupons(params: params), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self{
                 

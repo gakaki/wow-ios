@@ -13,12 +13,13 @@ import Moya
 
 typealias LikeAction                = (_ isFavorite:Bool?) -> ()
 typealias FailClosure               = (_ errorMsg:String?) -> ()
-typealias SuccessClosure            = (_ result:AnyObject) ->()
+typealias SuccessClosure            = (_ result:AnyObject, _ code: String?) ->()
 
 enum RequestCode:String{
     case FailError = "40000"
     case Success = "0"      //数据请求成功
     case Login = "10000"    //session过期或无效
+    case ProductExpired = "40202"   //商品过期
 }
 
 //MARK:前后端约定的返回数据结构
@@ -127,6 +128,7 @@ class WOWNetManager {
                                     return
                                 }
                             }
+                          
                             failClosure(info?.message)
                             WOWHud.showMsg(info?.message)
                             return
@@ -153,7 +155,7 @@ class WOWNetManager {
                         WOWHud.dismiss()
                     }
                     let res = info?.data ?? [] as AnyObject
-                    successClosure(res)
+                    successClosure(res, info?.code)
                 case let .failure(error):
                     DLog(error)
 //                    WOWHud.showMsg("网络错误")

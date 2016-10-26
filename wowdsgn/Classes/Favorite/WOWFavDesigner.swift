@@ -96,7 +96,7 @@ class WOWFavDesigner: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeDesigner, successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeDesigner, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 WOWHud.dismiss()
                 let designerList = Mapper<WOWFavoriteDesignerModel>().mapArray(JSONObject:JSON(result)["favoriteDesignerVoList"].arrayObject)

@@ -89,7 +89,7 @@ class WOWILikeController: WOWBaseViewController {
     override func request() {
         super.request()
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_UserFavorite(uid:uid, type:type,pageindex:"\(pageIndex))"), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_UserFavorite(uid:uid, type:type,pageindex:"\(pageIndex))"), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 let totalPage = JSON(result)["totalPages"].int ?? 0
                 if totalPage == 0 || strongSelf.pageIndex == totalPage - 1 {

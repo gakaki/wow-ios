@@ -248,7 +248,7 @@ class WOWController: WOWBaseViewController {
     func requestTop() {
         let params = ["pageId": 1, "region": 1]
        
-        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                
                 
@@ -289,7 +289,8 @@ class WOWController: WOWBaseViewController {
         
         let totalPage = 10
         params = ["excludes": [] as AnyObject ,"currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject]
-        WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result) in
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result,code) in
             if let strongSelf = self{
                
                 strongSelf.endRefresh()

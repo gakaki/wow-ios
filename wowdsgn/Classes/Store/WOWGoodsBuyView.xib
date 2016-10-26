@@ -36,6 +36,9 @@
                             </constraints>
                             <inset key="contentEdgeInsets" minX="0.0" minY="7" maxX="7" maxY="0.0"/>
                             <state key="normal" image="close"/>
+                            <connections>
+                                <action selector="closeButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dur-Oy-34K"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="adad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKs-F8-49X">
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>

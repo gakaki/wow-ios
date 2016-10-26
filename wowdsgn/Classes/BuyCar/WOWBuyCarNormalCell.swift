@@ -54,17 +54,19 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
         }
         self.model = model
 //        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
-        goodsImageView.set_webimage_url( model.specImg! )
+        goodsImageView.set_webimage_url( model.specImg ?? "" )
         
-        nameLabel.text = model.productName
+        nameLabel.text = model.productTitle
         countLabel.text = "x \(model.productQty ?? 1)"
         countTextField.text = "\(model.productQty ?? 1)"
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         perPriceLabel.text = result
         selectButton.isSelected = model.isSelected ?? false
-        let arr = [model.color ?? "",model.specName ?? ""]
-        typeArr = arr
-        collectionView.reloadData()
+//        let arr = [model.color ?? "",model.specName ?? ""]
+        if let attributes = model.attributes {
+            typeArr = attributes
+            collectionView.reloadData()
+        }
         
         if model.productQty < model.productStock {
             addCountButton.isEnabled = true
@@ -83,7 +85,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
         detailView.addTapGesture {[weak self] (tap) in
             if let strongSelf = self {
                 if let del = strongSelf.delegate {
-                    del.goProductDetail(model.parentProductId)
+                    del.goProductDetail(model.productId)
                 }
             }
             

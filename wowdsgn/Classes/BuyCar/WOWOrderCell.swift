@@ -54,17 +54,19 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         
         goodsImageView.set_webimage_url(model.specImg)
         
-        nameLabel.text = model.productName
-        countLabel.text = "x \(model.productQty ?? 1)"
+        nameLabel.text = model.productTitle
+        countLabel.text = "x \(model.productQty ?? 0)"
         perPriceLabel.text = String(format: "¥ %.2f", (model.sellPrice) ?? 0)
         let arr = [model.color ?? "",model.specName ?? ""]
-        typeArr = arr
-        collectionView.reloadData()
+        if let attributes = model.attributes {
+            typeArr = attributes
+            collectionView.reloadData()
+        }
         
         detailView.addTapGesture {[weak self] (tap) in
             if let strongSelf = self {
                 if let del = strongSelf.delegate {
-                    del.toProductDetail(model.parentProductId)
+                    del.toProductDetail(model.productId)
                 }
             }
             

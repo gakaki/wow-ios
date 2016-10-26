@@ -30,7 +30,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         let cid = self.ob_cid.value
         
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_path_category(categoryId:cid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_path_category(categoryId:cid), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self{
                 
@@ -42,7 +42,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
                 strongSelf.title                =  strongSelf.vo_category_top.categoryName!
                 
                 
-                WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category(categoryId:top_category_cid), successClosure: {[weak self] (result) in
+                WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category(categoryId:top_category_cid), successClosure: {[weak self] (result, code) in
                     
                     if let strongSelf = self{
                         

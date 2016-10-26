@@ -73,7 +73,7 @@ class WOWInviteController: WOWBaseViewController,UIWebViewDelegate{
     //MARK:Network
 //    override func request() {
 //        super.request()
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Invite, successClosure: {[weak self](result) in
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Invite, successClosure: {[weak self](result, code) in
 //            if let strongSelf = self{
 //                let json = JSON(result)
 //                strongSelf.shareTitle  = json["title"].string ?? ""

@@ -112,7 +112,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //        let carItems = [["skuid":model.skuID,"count":"\(model.skuProductCount)","productid":model.productID,"skuname":model.skuName]]
 //        let param = ["uid":uid,"cart":carItems,"tag":"0"]
 //        let string = JSONStringify(param)
-//        WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self] (result) in
+//        WOWNetManager.sharedManager.requestWithTarget(.Api_CarEdit(cart:string), successClosure: {[weak self](result, code) in
 //            if let strongSelf = self{
 //                let json = JSON(result)
 //                DLog(json)
@@ -181,7 +181,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     override func request() {
         super.request()
 //        let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 strongSelf.productModel = Mapper<WOWProductModel>().map(JSONObject:result)
                 strongSelf.configData()
@@ -208,7 +208,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
 //            _     = self.productId ?? 0
 //            let type        = "1" //1为商品 2 为场景
 //            let is_delete   = favoriteButton.isSelected ? "1":"0"
-//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Apifa(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result) in
+//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Apifa(product_id: thingid, uid: uid, type: type, is_delete:is_delete, scene_id:""), successClosure: { [weak self](result, code) in
 //                let json = JSON(result)
 //                DLog(json)
 //                if let strongSelf = self{

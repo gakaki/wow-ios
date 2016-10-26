@@ -117,7 +117,7 @@ class WOWSenceController: WOWBaseViewController {
 //            }
             param["cart"] = cars as AnyObject?
             let string = JSONStringify(param as AnyObject)
-            WOWNetManager.sharedManager.requestWithTarget(.api_CartList(cart:string), successClosure: { [weak self](result) in
+            WOWNetManager.sharedManager.requestWithTarget(.api_CartList(cart:string), successClosure: { [weak self](result, code) in
                 if let _ = self{
                     let json = JSON(result)
                     DLog(json)
@@ -169,7 +169,7 @@ class WOWSenceController: WOWBaseViewController {
 //        let is_delete   = favoriteButton.isSelected ? "1":"0"
         
         
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id:"", uid: uid, type: type, is_delete:is_delete, scene_id:thingid), successClosure: { [weak self](result) in
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Favotite(product_id:"", uid: uid, type: type, is_delete:is_delete, scene_id:thingid), successClosure: { [weak self](result, code) in
 //            let json = JSON(result)
 //            DLog(json)
 //            if let strongSelf = self{
@@ -186,7 +186,7 @@ class WOWSenceController: WOWBaseViewController {
     override func request() {
         super.request()
         let uid = WOWUserManager.userID
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_SenceDetail(sceneid:sceneID ?? "",uid:uid), successClosure: { [weak self](result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_SenceDetail(sceneid:sceneID ?? "",uid:uid), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)

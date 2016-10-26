@@ -37,7 +37,7 @@ class WOWHotStyleMain: WOWBaseViewController {
         
         params = ["pageId": 3 as AnyObject]
 
-        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 
                 

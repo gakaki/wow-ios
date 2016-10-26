@@ -207,7 +207,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         super.request()
         
         WOWHud.showLoading()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self{
 
@@ -234,7 +234,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
     
         WOWHud.showLoading()
 
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_subCategory_with_image(categoryId:cid), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self{
                 

@@ -128,7 +128,11 @@ class WOWNetManager {
                                     return
                                 }
                             }
-                          
+                            if code == RequestCode.ProductExpired.rawValue {
+                                let res = info?.data ?? [] as AnyObject
+                                WOWHud.showMsg(info?.message)
+                                successClosure(res, info?.code)
+                            }
                             failClosure(info?.message)
                             WOWHud.showMsg(info?.message)
                             return

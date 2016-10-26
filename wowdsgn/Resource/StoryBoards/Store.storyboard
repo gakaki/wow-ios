@@ -103,6 +103,7 @@
         <!--Product Detail Controller-->
         <scene sceneID="60a-yq-Y6h">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hPE-Cf-PNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WOWProductDetailController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="7vb-eE-k6p" customClass="WOWProductDetailController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FL2-WA-EUQ"/>
@@ -185,6 +186,40 @@
                                     <outlet property="delegate" destination="7vb-eE-k6p" id="pLQ-2V-Cug"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iEe-la-3xG">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8q-gg-dqF">
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productEffect" translatesAutoresizingMaskIntoConstraints="NO" id="kNP-5c-9HK">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="75" id="m9S-IP-Fdt"/>
+                                                    <constraint firstAttribute="height" constant="75" id="mRl-dc-rpS"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="该商品已过期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsI-Ur-y8Q">
+                                                <frame key="frameInset" minX="18" minY="95" width="98" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="3fw-g1-AXR"/>
+                                            <constraint firstItem="UsI-Ur-y8Q" firstAttribute="top" secondItem="kNP-5c-9HK" secondAttribute="bottom" constant="8" id="6jh-z9-TCq"/>
+                                            <constraint firstAttribute="width" constant="134" id="98V-Ra-tsW"/>
+                                            <constraint firstItem="UsI-Ur-y8Q" firstAttribute="centerX" secondItem="m8q-gg-dqF" secondAttribute="centerX" id="aTH-ck-4YO"/>
+                                            <constraint firstItem="kNP-5c-9HK" firstAttribute="centerX" secondItem="m8q-gg-dqF" secondAttribute="centerX" id="cCw-Ig-nCe"/>
+                                            <constraint firstItem="kNP-5c-9HK" firstAttribute="top" secondItem="m8q-gg-dqF" secondAttribute="top" constant="12" id="iUU-ly-bUe"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="m8q-gg-dqF" firstAttribute="centerX" secondItem="iEe-la-3xG" secondAttribute="centerX" id="cSs-yg-8J8"/>
+                                    <constraint firstItem="m8q-gg-dqF" firstAttribute="centerY" secondItem="iEe-la-3xG" secondAttribute="centerY" id="nud-JL-WHC"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHb-tb-mKs" customClass="MIBadgeButton" customModule="wow_vendor_ui">
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-7"/>
@@ -205,17 +240,21 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hb1-eN-9rh" firstAttribute="top" secondItem="iEe-la-3xG" secondAttribute="bottom" id="BOf-Lk-4Sj"/>
                             <constraint firstAttribute="trailing" secondItem="nHb-tb-mKs" secondAttribute="trailing" constant="10" id="Bym-b8-4Jx"/>
                             <constraint firstItem="0sv-7U-gSt" firstAttribute="top" secondItem="Xv8-16-Gtv" secondAttribute="top" constant="28" id="C3i-SX-A74"/>
                             <constraint firstAttribute="trailing" secondItem="Z1W-LA-2Dq" secondAttribute="trailing" id="D42-Xx-HhO"/>
+                            <constraint firstItem="iEe-la-3xG" firstAttribute="top" secondItem="Xv8-16-Gtv" secondAttribute="top" id="J2y-wk-BIF"/>
                             <constraint firstItem="0sv-7U-gSt" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" constant="10" id="LGY-Gj-3x1"/>
                             <constraint firstItem="Z1W-LA-2Dq" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" id="XLp-KY-zm1"/>
                             <constraint firstItem="nHb-tb-mKs" firstAttribute="top" secondItem="0sv-7U-gSt" secondAttribute="top" id="bNg-Z6-GYh"/>
                             <constraint firstItem="Z1W-LA-2Dq" firstAttribute="top" secondItem="Xv8-16-Gtv" secondAttribute="top" id="cNm-rn-P34"/>
                             <constraint firstItem="hb1-eN-9rh" firstAttribute="top" secondItem="Z1W-LA-2Dq" secondAttribute="bottom" constant="50" id="ea7-lO-xuE"/>
                             <constraint firstItem="Sdm-uj-kwH" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" id="gHL-Us-LXG"/>
+                            <constraint firstAttribute="trailing" secondItem="iEe-la-3xG" secondAttribute="trailing" id="jlE-2U-a9d"/>
                             <constraint firstAttribute="trailing" secondItem="Sdm-uj-kwH" secondAttribute="trailing" id="orJ-5Y-nea"/>
                             <constraint firstItem="Sdm-uj-kwH" firstAttribute="top" secondItem="Z1W-LA-2Dq" secondAttribute="bottom" id="phV-Br-j9t"/>
+                            <constraint firstItem="iEe-la-3xG" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" id="rf5-sa-43P"/>
                             <constraint firstItem="hb1-eN-9rh" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="bottom" id="wE5-VR-zKV"/>
                         </constraints>
                     </view>
@@ -223,12 +262,12 @@
                         <outlet property="bottomView" destination="Sdm-uj-kwH" id="VwI-Rh-3J4"/>
                         <outlet property="carEntranceButton" destination="nHb-tb-mKs" id="fRs-pe-rRy"/>
                         <outlet property="likeButton" destination="VfS-7l-afX" id="FDp-Xs-Fr1"/>
+                        <outlet property="productEffectView" destination="iEe-la-3xG" id="kbw-jO-IzT"/>
                         <outlet property="tableView" destination="Z1W-LA-2Dq" id="0W3-7j-PpS"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hPE-Cf-PNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="519"/>
+            <point key="canvasLocation" x="245.5" y="518.5"/>
         </scene>
         <!--分类-->
         <scene sceneID="Irw-0d-MOm">
@@ -511,6 +550,7 @@
         <image name="like_white" width="30" height="30"/>
         <image name="likeblack" width="30" height="30"/>
         <image name="nav_backArrow" width="9" height="16"/>
+        <image name="productEffect" width="53" height="50"/>
         <image name="share_white" width="30" height="30"/>
         <image name="store_buyCar" width="26" height="25"/>
         <image name="top_back" width="44" height="44"/>

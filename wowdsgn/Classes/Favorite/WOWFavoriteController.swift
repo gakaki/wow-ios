@@ -11,7 +11,11 @@ import UIKit
 class WOWFavoriteController: WOWBaseViewController {
     var pageMenu:CAPSPageMenu?
     var controllerArray : [UIViewController] = []
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -63,7 +67,7 @@ class WOWFavoriteController: WOWBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
-
+         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func didReceiveMemoryWarning() {

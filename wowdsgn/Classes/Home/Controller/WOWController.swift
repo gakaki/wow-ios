@@ -71,12 +71,13 @@ class WOWController: WOWBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //        hidingNavBarManager?.viewWillDisappear(animated)
+         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func viewDidLayoutSubviews() {

@@ -19,11 +19,13 @@ class WOWProductDetailCell: UITableViewCell {
     internal var aspectConstraint : NSLayoutConstraint? {
         didSet {
             if oldValue != nil {
-                productImg.removeConstraint(oldValue!)
+                LayoutConstraint.activate([oldValue!])
+//                productImg.removeConstraint(oldValue!)
             }
             if aspectConstraint != nil {
-                aspect.priority = 750
-                productImg.addConstraint(aspectConstraint!)
+//                aspect.priority = 750
+                LayoutConstraint.activate([aspectConstraint!])
+
             }
         }
     }
@@ -45,22 +47,30 @@ class WOWProductDetailCell: UITableViewCell {
                                                       attribute: .width, relatedBy: .equal,
                                                       toItem: self.productImg, attribute: .height,
                                                       multiplier: secondaryImg.imageAspect , constant: 0.0)
-//                self.updateConstraints()
-//                productImg.updateConstraints()
-                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: { (image, error, chcheTypr, imageUrl) in
-                    if let image = image {
-//                        secondaryImg.imageAspect = image.size.width / image.size.height
-                    }
+
+                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
+//                    if let strongSelf = self {
+//                        if let image = image {
+//                            let imageAspect = image.size.width / image.size.height
+//                            strongSelf.aspectConstraint = NSLayoutConstraint(item: strongSelf.productImg,
+//                                                                       attribute: .width, relatedBy: .equal,
+//                                                                       toItem: strongSelf.productImg, attribute: .height,
+//                                                                       multiplier: imageAspect , constant: 0.0)
+//                            
+//                        }
+//                    }
+                    
                 })
                 
-//                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
-                space.constant = 15
+
+//                space.constant = 15
             }else {
-                space.constant = 0
+                aspect.constant = 345
+//                space.constant = 0
             }
             imgDescLabel.text = secondaryImg.text
             if secondaryImg.text == "" {
-                space.constant = 0
+                space.constant = 15
             }else {
                 space.constant = 15
             }

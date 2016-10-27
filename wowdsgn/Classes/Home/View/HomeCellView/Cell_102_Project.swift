@@ -10,8 +10,10 @@ import UIKit
 // 专题 cell
 class Cell_102_Project: UITableViewCell {
     
+    @IBOutlet weak var lbTitle: UILabel!
     var dataArr:[WOWCarouselBanners]?{
         didSet{
+            
             collectionView.reloadData()
         }
     }

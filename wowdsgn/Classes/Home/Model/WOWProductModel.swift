@@ -33,8 +33,8 @@ class WOWProductModel: WOWBaseModel,Mappable{
     
     var productStatus         : Int?
     var tag                   : String?
-    var sings                 :Array<Int>?
-   dynamic var timeoutSeconds        : Int = 0
+    var sings                 : [Int]?
+   dynamic var timeoutSeconds : Int = 0
     var favorite              : Bool?
     
     override init() {
@@ -75,7 +75,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
 
         productStatus                        <- map["productStatus"]
         tag                     <- map["tag"]
-        sings                   <- map["sings"]
+        sings                   <- map["signs"]
         timeoutSeconds          <- map["timeoutSeconds"]
 
         favorite                <- map["favorite"]

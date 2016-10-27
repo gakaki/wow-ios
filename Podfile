@@ -79,6 +79,7 @@ target 'wowdsgn' do
 #王云鹏自己的framework
 		pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
 		pod 'wow-vendor-ui',:path => "wow-vendor-ui/wow-vendor-ui.podspec"
+		pod 'wow3rd',:path => "wow3rd/wow3rd.podspec"
 
   #  pod 'wow-model-network',	 :path => "wow-model-network/wow-model-network.podspec"
 #    pod 'wow-ui',							 :path => "wow-ui/wow-ui.podspec"

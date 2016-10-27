@@ -25,6 +25,7 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var productEffectView: UIView!
     //是否展开参数
     var isOpenParam: Bool = false
     //是否展开温馨提示
@@ -265,7 +266,11 @@ class WOWProductDetailController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
-                print(result)
+                if code == RequestCode.ProductExpired.rawValue {
+                    strongSelf.productEffectView.isHidden = false
+                    return
+                }
+                strongSelf.productEffectView.isHidden = true
                 strongSelf.productModel = Mapper<WOWProductModel>().map(JSONObject:result)
                 strongSelf.productModel?.productId = strongSelf.productId
                 strongSelf.imgUrlArr = strongSelf.productModel?.primaryImgs ?? [String]()

@@ -192,11 +192,11 @@ class WOWBuyCarController: WOWBaseViewController {
                             WOWUserManager.userCarCount += product.productQty ?? 1
                             /**
                              *  productStatus 产品状态
-                             1 已上架 2已下架
+                             1 已上架 2已下架 10已失效
                              
                              如果已下架，isSelect = false
                              */
-                            if product.productStatus == 2 {
+                            if product.productStatus == 2 || product.productStatus == 10{
                                 product.isSelected = false
                             }
                         }

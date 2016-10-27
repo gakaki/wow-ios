@@ -439,8 +439,9 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                         
                         strongSelf.orderSettle?.deduction = strongSelf.couponModel?.deduction
                         
-                        let section = IndexSet(integer: 2)
-                        strongSelf.tableView.reloadSections(section, with: .none)
+//                        let section = IndexSet(integer: 2)
+                        strongSelf.tableView.reloadData()
+//                        strongSelf.tableView.reloadSections(section, with: .none)
                         
                         //重新计算总金额，先把double转为number类型的，避免计算过程中由于浮点型而改变数值
                         let productTotal = NSDecimalNumber(value: strongSelf.orderSettle?.productTotalAmount ?? 0 as Double)

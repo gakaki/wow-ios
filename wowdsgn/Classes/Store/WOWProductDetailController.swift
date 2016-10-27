@@ -235,7 +235,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //MARK:分享
     @IBAction func shareClick(_ sender: UIButton) {
         let shareUrl = WOWShareUrl + "/item/\(productId ?? 0)"
-        WOWShareManager.share(productModel?.productName, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        WOWShareManager.share(productModel?.productTitle, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
     }
     
     //MARK:喜欢
@@ -370,7 +370,7 @@ class WOWProductDetailController: WOWBaseViewController {
 
 extension WOWProductDetailController :goodsBuyViewDelegate {
     //确定购买
-    func sureBuyClick(_ product: WOWProductSkuModel?) {
+    func sureBuyClick(_ product: WOWProductModel?) {
         backView.hideBuyView()
         let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
         //入口
@@ -381,7 +381,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
         
     }
     //确定加车
-    func sureAddCarClick(_ product: WOWProductSkuModel?) {
+    func sureAddCarClick(_ product: WOWProductModel?) {
         backView.hideBuyView()
         if let product = product {
             
@@ -401,12 +401,12 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
     }
     
     //关闭规格弹窗
-    func closeBuyView(_ productInfo: WOWProductSkuModel?) {
+    func closeBuyView(_ productInfo: WOWProductModel?) {
         if let productInfo = productInfo {
             productId = productInfo.productId
             productModel?.productTitle = productInfo.productTitle
             productModel?.sellPrice = productInfo.sellPrice
-            productModel?.originalprice = productInfo.originalPrice
+            productModel?.originalprice = productInfo.originalprice
             if imgUrlArr.count >= 1 {
                 imgUrlArr[0] = productInfo.productImg ?? ""
             }

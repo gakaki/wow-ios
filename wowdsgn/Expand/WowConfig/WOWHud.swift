@@ -41,7 +41,7 @@ struct WOWHud {
     static func showMsg(_ message:String?){
         DispatchQueue.main.async {
             
-            WOWHud.dismiss()
+//            WOWHud.dismiss()
 
         }
         configSVHud()
@@ -51,7 +51,7 @@ struct WOWHud {
     // 接口请求不成功
     static func showMsgNoNetWrok(message:String?){
         DispatchQueue.main.async {
-            WOWHud.dismiss()
+//            WOWHud.dismiss()
         }
         configSVHud()
         let msg = message ?? "网络错误"

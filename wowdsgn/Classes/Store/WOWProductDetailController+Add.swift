@@ -67,22 +67,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (0,_): //标题价钱
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailPriceCell.self), for: indexPath) as! WOWProductDetailPriceCell
-            cell.nameLabel.text = productModel?.productTitle ?? ""
-            if let price = productModel?.sellPrice {
-                let result = WOWCalPrice.calTotalPrice([price],counts:[1])
-                cell.actualPriceLabel.text = result
-                if let originalPrice = productModel?.originalprice {
-                    if originalPrice > price{
-                        //显示下划线
-                        let result = WOWCalPrice.calTotalPrice([originalPrice],counts:[1])
-                        
-                        cell.originalPriceLabel.setStrokeWithText(result)
-                        
-                    }else {
-                        cell.originalPriceLabel.text = ""
-                    }
-                }
-            }
+            cell.showData(productModel)
             returnCell = cell
         case (1,_): //品牌设计师
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailDescCell.self), for: indexPath) as! WOWProductDetailDescCell

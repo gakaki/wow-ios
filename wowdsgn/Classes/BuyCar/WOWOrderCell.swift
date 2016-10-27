@@ -57,18 +57,17 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         nameLabel.text = model.productTitle
         countLabel.text = "x \(model.productQty ?? 0)"
         perPriceLabel.text = String(format: "¥ %.2f", (model.sellPrice) ?? 0)
-       
-        switch model.productStatus ?? 1 {
-        case 0:
-            statusLabel.text = "待上架"
-        case 2:
-            statusLabel.text = "已下架"
-        case 10:
+        //productStatus -1已失效  2已下架  1并且库存等于0  已售罄
+        if model.productStatus == -1 {
             statusLabel.text = "已失效"
-        default:
-            statusLabel.text = ""
         }
-        let arr = [model.color ?? "",model.specName ?? ""]
+        if model.productStatus == 2 {
+            statusLabel.text = "已下架"
+        }
+        if model.productStatus == 1 && model.productStock == 0 {
+            statusLabel.text = "已售罄"
+        }
+       
         if let attributes = model.attributes {
             typeArr = attributes
             collectionView.reloadData()

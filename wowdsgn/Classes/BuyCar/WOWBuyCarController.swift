@@ -45,11 +45,14 @@ class WOWBuyCarController: WOWBaseViewController {
                 totalPriceLabel.text = result
             
             //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
-            if selectedArr.count == validArr.count {
-                allButton.isSelected = true
-            }else{
-                allButton.isSelected = false
+            if selectedArr.count > 0 {
+                if selectedArr.count == validArr.count {
+                    allButton.isSelected = true
+                }else{
+                    allButton.isSelected = false
+                }
             }
+            
         }
     }
     
@@ -130,13 +133,17 @@ class WOWBuyCarController: WOWBaseViewController {
          *  商品结算之前首先判断有没有选中商品，然后判断商品的库存是否充足，再判断所选商品是否下架
          */
         if selectedArr.isEmpty {
-            WOWHud.showMsg("您还没有选中商品哦")
+            WOWHud.showMsg("您还没有选中商品")
             return
         }
         
         for product in selectedArr {
+            if product.productStatus == -1 {
+                WOWHud.showMsg("您要购买的" + (product.productName ?? "") + "已失效")
+                return
+            }
             if product.productStatus == 2 {
-                WOWHud.showMsg((product.productName ?? "您有商品") + "已下架")
+                WOWHud.showMsg("您要购买的" + (product.productName ?? "") + "已下架")
                 return
             }
             if product.productQty > product.productStock {
@@ -192,18 +199,19 @@ class WOWBuyCarController: WOWBaseViewController {
                             WOWUserManager.userCarCount += product.productQty ?? 1
                             /**
                              *  productStatus 产品状态
-                             1 已上架 2已下架 10已失效
+                             1 已上架 2已下架 -1已失效
                              
                              如果已下架，isSelect = false
                              */
-                            if product.productStatus == 2 || product.productStatus == 10{
+                            if product.productStatus == 2 || product.productStatus == -1{
                                 product.isSelected = false
                             }
                         }
                         strongSelf.updateCarCountBadge()
 
                         
-                        
+                        strongSelf.validArr = [WOWCarProductModel]()
+                        strongSelf.selectedArr = [WOWCarProductModel]()
                         //判断当前数组有多少默认选中的加入选中的数组
                         for product in strongSelf.dataArr {
                             
@@ -390,7 +398,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = dataArr[(indexPath as NSIndexPath).section]
         //productStatus = 1 已上架，productStatus = 2 已下架
-        if model.productStatus == 1 {
+        if model.productStatus == 1 && model.productStock > 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellNormalID, for: indexPath) as! WOWBuyCarNormalCell
             cell.showData(model)
             cell.selectButton.tag = (indexPath as NSIndexPath).section

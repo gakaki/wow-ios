@@ -10,6 +10,8 @@ import UIKit
 import ObjectMapper
 
 class WOWProductModel: WOWBaseModel,Mappable{
+   
+    
     var productId             : Int?
     var primaryImgs           : Array<String>?
     var productName           : String?
@@ -36,6 +38,16 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var sings                 :Array<Int>?
    dynamic var timeoutSeconds        : Int = 0
     var favorite              : Bool?
+    
+    //商品详情中用到
+    var length                      : Double?
+    var width                       : Double?
+    var height                      : Double?
+    var netWeight                   : Double?
+    var attributes                  : [WOWSerialAttributeModel]?
+    var availableStock              : Int?
+    var hasStock                    : Bool?
+    var productQty                  : Int?
     
     override init() {
         super.init()
@@ -79,6 +91,15 @@ class WOWProductModel: WOWBaseModel,Mappable{
         timeoutSeconds          <- map["timeoutSeconds"]
 
         favorite                <- map["favorite"]
+        
+     
+        length                      <- map["length"]
+        width                       <- map["width"]
+        height                      <- map["height"]
+        netWeight                   <- map["netWeight"]
+        attributes                  <- map["attributes"]
+        availableStock              <- map["availableStock"]
+        hasStock                    <- map["hasStock"]
 
     }
     

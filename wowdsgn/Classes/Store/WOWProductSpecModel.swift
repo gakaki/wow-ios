@@ -11,7 +11,7 @@ import ObjectMapper
 
 
 class WOWProductSpecModel: WOWBaseModel,Mappable {
-    var products                     : [WOWProductSkuModel]?
+    var products                     : [WOWProductModel]?
     var serialAttribute             : [WOWSerialAttributeModel]?
     required init?(map: Map) {
         
@@ -24,52 +24,52 @@ class WOWProductSpecModel: WOWBaseModel,Mappable {
     }
 }
 
-class WOWProductSkuModel: WOWBaseModel, Mappable {
-    var productId                   : Int?
-    var parentProductId             : Int?
-    var productTitle                : String?
-    var productImg                  : String?
-    var productStatus               : Int?
-    var productCode                 : String?
-    var sellPrice                   : Double?
-    var originalPrice               : Double?
-    var length                      : Double?
-    var width                       : Double?
-    var height                      : Double?
-    var netWeight                   : Double?
-
-    var attributes                  : [WOWSerialAttributeModel]?
-    var availableStock              : Int?
-    var hasStock                    : Bool?
-    var isNewArrival                : Bool?
-    var productQty                  : Int?
-
-    required init?( map: Map) {
-        
-        
-    }
-    
-    func mapping(map: Map) {
-        productId                   <- map["productId"]
-        parentProductId                 <- map["parentProductId"]
-        productTitle                <- map["productTitle"]
-        productImg                  <- map["productImg"]
-        productStatus               <- map["productStatus"]
-        productCode                 <- map["productCode"]
-        originalPrice               <- map["originalPrice"]
-        length                      <- map["length"]
-        width                       <- map["width"]
-        height                      <- map["height"]
-        netWeight                   <- map["netWeight"]
-        attributes                  <- map["attributes"]
-        sellPrice                   <- map["sellPrice"]
-        availableStock              <- map["availableStock"]
-        hasStock                    <- map["hasStock"]
-        isNewArrival                <- map["isNewArrival"]
-        
-    }
-    
-}
+//class WOWProductSkuModel: WOWBaseModel, Mappable {
+//    var productId                   : Int?
+//    var parentProductId             : Int?
+//    var productTitle                : String?
+//    var productImg                  : String?
+//    var productStatus               : Int?
+//    var productCode                 : String?
+//    var sellPrice                   : Double?
+//    var originalPrice               : Double?
+//    var length                      : Double?
+//    var width                       : Double?
+//    var height                      : Double?
+//    var netWeight                   : Double?
+//
+//    var attributes                  : [WOWSerialAttributeModel]?
+//    var availableStock              : Int?
+//    var hasStock                    : Bool?
+//    var isNewArrival                : Bool?
+//    var productQty                  : Int?
+//
+//    required init?( map: Map) {
+//        
+//        
+//    }
+//    
+//    func mapping(map: Map) {
+//        productId                   <- map["productId"]
+//        parentProductId                 <- map["parentProductId"]
+//        productTitle                <- map["productTitle"]
+//        productImg                  <- map["productImg"]
+//        productStatus               <- map["productStatus"]
+//        productCode                 <- map["productCode"]
+//        originalPrice               <- map["originalPrice"]
+//        length                      <- map["length"]
+//        width                       <- map["width"]
+//        height                      <- map["height"]
+//        netWeight                   <- map["netWeight"]
+//        attributes                  <- map["attributes"]
+//        sellPrice                   <- map["sellPrice"]
+//        availableStock              <- map["availableStock"]
+//        hasStock                    <- map["hasStock"]
+//        isNewArrival                <- map["isNewArrival"]
+//        
+//    }
+//    
+//}
 
 
 

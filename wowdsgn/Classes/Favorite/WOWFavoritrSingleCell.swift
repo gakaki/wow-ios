@@ -34,7 +34,7 @@ class WOWFavoritrSingleCell: UICollectionViewCell {
         case 2:
             logoLabel.text = "已下架"
             logoLabel.isHidden = false
-        case 10:
+        case -1:
             logoLabel.text = "已失效"
             logoLabel.isHidden = false
         default:

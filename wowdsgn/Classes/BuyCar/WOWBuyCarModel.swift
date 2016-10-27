@@ -75,6 +75,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var productStatus                       : Int?
     var productStatusName                   : String?
     var isSelected                          : Bool?
+    var isPromotion                         : Bool?
     var specName                            : String?
     var attributes                          : [String]?
     

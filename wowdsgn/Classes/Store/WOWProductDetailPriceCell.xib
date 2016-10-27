@@ -142,10 +142,18 @@
                         <color key="backgroundColor" red="1" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="GLu-pZ-G1b"/>
-                            <constraint firstAttribute="width" constant="40" id="tIO-Xf-wDK"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdsda" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxt-gI-v37">
+                        <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="wCj-81-aQq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -161,6 +169,7 @@
                     <constraint firstAttribute="bottom" secondItem="01N-KQ-c6W" secondAttribute="bottom" constant="30" id="HHa-nE-mr9"/>
                     <constraint firstItem="01N-KQ-c6W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JoD-gS-M9t"/>
                     <constraint firstItem="eqc-Ci-0I1" firstAttribute="width" secondItem="VqS-Sn-lj4" secondAttribute="width" id="Kf4-8R-ecR"/>
+                    <constraint firstItem="wxt-gI-v37" firstAttribute="bottom" secondItem="dsK-7M-2zO" secondAttribute="bottom" id="Lnq-sx-t2e"/>
                     <constraint firstItem="eqc-Ci-0I1" firstAttribute="height" secondItem="VqS-Sn-lj4" secondAttribute="height" id="NEz-TM-OMz"/>
                     <constraint firstItem="bmf-Ck-Veq" firstAttribute="leading" secondItem="VqS-Sn-lj4" secondAttribute="trailing" id="NRX-gZ-FGt"/>
                     <constraint firstItem="Fd3-i3-Ffm" firstAttribute="bottom" secondItem="e2a-qC-F5G" secondAttribute="bottom" id="Rba-cc-mm5"/>
@@ -170,6 +179,7 @@
                     <constraint firstItem="Txr-pI-ItL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="VUH-bS-S6V"/>
                     <constraint firstItem="bmf-Ck-Veq" firstAttribute="top" secondItem="eqc-Ci-0I1" secondAttribute="top" id="XlR-I4-hPg"/>
                     <constraint firstAttribute="trailing" secondItem="eqc-Ci-0I1" secondAttribute="trailing" id="dfm-bz-mJH"/>
+                    <constraint firstItem="wxt-gI-v37" firstAttribute="leading" secondItem="dsK-7M-2zO" secondAttribute="trailing" constant="5" id="hxw-0m-Ph2"/>
                     <constraint firstAttribute="bottom" secondItem="eqc-Ci-0I1" secondAttribute="bottom" id="jab-0K-9Pn"/>
                     <constraint firstItem="dsK-7M-2zO" firstAttribute="leading" secondItem="Fd3-i3-Ffm" secondAttribute="trailing" constant="5" id="kke-4N-YP2"/>
                     <constraint firstItem="bmf-Ck-Veq" firstAttribute="width" secondItem="VqS-Sn-lj4" secondAttribute="width" id="max-ZI-Wqf"/>
@@ -179,17 +189,20 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="0JG-co-0SO"/>
                         <exclude reference="En8-jT-sEK"/>
+                        <exclude reference="0JG-co-0SO"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="LeftConstraint" destination="hxw-0m-Ph2" id="hRT-Ee-uu7"/>
                 <outlet property="actualPriceLabel" destination="e2a-qC-F5G" id="8KF-AO-U1f"/>
+                <outlet property="lbDiscount" destination="dsK-7M-2zO" id="Iy3-cg-m2z"/>
+                <outlet property="lbLabel" destination="wxt-gI-v37" id="S2n-Jh-ULu"/>
                 <outlet property="nameLabel" destination="Txr-pI-ItL" id="2g1-dr-SZu"/>
                 <outlet property="originalPriceLabel" destination="Fd3-i3-Ffm" id="rWF-js-4y5"/>
             </connections>
-            <point key="canvasLocation" x="218.5" y="508.5"/>
+            <point key="canvasLocation" x="281.5" y="508.5"/>
         </tableViewCell>
     </objects>
     <resources>

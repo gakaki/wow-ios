@@ -17,7 +17,8 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var subCountLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
-    
+    @IBOutlet weak var statusLabel: UILabel!
+
     let identifier = "WOWTypeCollectionCell"
     var typeArr = [String]()
     var model:WOWCarProductModel!
@@ -47,6 +48,18 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         self.model = model
         //        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         
+        switch model.productStatus ?? 1{
+        case -1:
+            statusLabel.isHidden = false
+            statusLabel.text = "已失效"
+        case 2:
+            statusLabel.isHidden = false
+            statusLabel.text = "已下架"
+        default:
+            statusLabel.isHidden = true
+            statusLabel.text = ""
+            
+        }
         goodsImageView.set_webimage_url(model.specImg)
         
         nameLabel.text = model.productTitle
@@ -56,7 +69,6 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         perPriceLabel.text = result1
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[model.productQty ?? 1])
         totalPriceLabel.text = result
-        let arr = [model.color ?? "",model.specName ?? ""]
         if let attributes = model.attributes {
             typeArr = attributes
             collectionView.reloadData()

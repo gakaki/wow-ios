@@ -8,7 +8,7 @@
         <!--Navigation Controller-->
         <scene sceneID="AbO-gI-MLG">
             <objects>
-                <navigationController id="QDu-1s-RJp" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="QDu-1s-RJp" customClass="WOWNavigationController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="j1e-bc-pag">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -21,7 +21,7 @@
         <!--编辑订单-->
         <scene sceneID="mqd-hk-z57">
             <objects>
-                <viewController storyboardIdentifier="WOWEditOrderController" title="编辑订单" id="Cth-Z6-gBn" customClass="WOWEditOrderController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWEditOrderController" title="编辑订单" id="Cth-Z6-gBn" customClass="WOWEditOrderController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VC2-wy-6gT"/>
                         <viewControllerLayoutGuide type="bottom" id="Dbo-Hp-4j7"/>
@@ -112,7 +112,7 @@
         <!--Empty Data Set Delegate-->
         <scene sceneID="J05-vd-CCR">
             <objects>
-                <viewController storyboardIdentifier="WOWBuyCarController" hidesBottomBarWhenPushed="YES" id="t5S-nt-7u6" customClass="WOWBuyCarController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBuyCarController" hidesBottomBarWhenPushed="YES" id="t5S-nt-7u6" customClass="WOWBuyCarController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ieb-aM-0jm"/>
                         <viewControllerLayoutGuide type="bottom" id="sXD-Ff-rxY"/>
@@ -226,7 +226,7 @@
         <!--商品清单-->
         <scene sceneID="YNJ-DT-B4T">
             <objects>
-                <tableViewController storyboardIdentifier="WOWCarGoodsListController" title="商品清单" id="Ebu-7G-X7W" customClass="WOWCarGoodsListController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WOWCarGoodsListController" title="商品清单" id="Ebu-7G-X7W" customClass="WOWCarGoodsListController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Nb5-zr-68R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -244,7 +244,7 @@
         <!--订单确认-->
         <scene sceneID="cfl-lC-mPJ">
             <objects>
-                <viewController storyboardIdentifier="WOWSureOrderController" title="订单确认" id="lG0-Wp-h5y" customClass="WOWSureOrderController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSureOrderController" title="订单确认" id="lG0-Wp-h5y" customClass="WOWSureOrderController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gpa-eZ-Iv0"/>
                         <viewControllerLayoutGuide type="bottom" id="2Wb-Ba-pEF"/>
@@ -343,7 +343,7 @@
         <!--Pay Success Controller-->
         <scene sceneID="krG-bj-956">
             <objects>
-                <viewController storyboardIdentifier="WOWPaySuccessController" id="dlt-T8-Rlp" customClass="WOWPaySuccessController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWPaySuccessController" id="dlt-T8-Rlp" customClass="WOWPaySuccessController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c81-eK-vCH"/>
                         <viewControllerLayoutGuide type="bottom" id="QAQ-UD-Q3g"/>

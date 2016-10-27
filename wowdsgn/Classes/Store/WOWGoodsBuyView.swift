@@ -111,11 +111,11 @@ class WOWBuyBackView: UIView {
 //MARK **********************************内容视图***********************************
 protocol goodsBuyViewDelegate:class {
     //确定购买
-    func sureBuyClick(_ product: WOWProductSkuModel?)
+    func sureBuyClick(_ product: WOWProductModel?)
     //确定加车
-    func sureAddCarClick(_ product: WOWProductSkuModel?)
+    func sureAddCarClick(_ product: WOWProductModel?)
     //关掉选择规格视图
-    func closeBuyView(_ productInfo: WOWProductSkuModel?)
+    func closeBuyView(_ productInfo: WOWProductModel?)
 }
 
 
@@ -145,15 +145,14 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     //规格数组
     var serialAttributeArr  = [WOWSerialAttributeModel]()
     //sku列表
-    var skuListArr          = [WOWProductSkuModel]()
+    var skuListArr          = [WOWProductModel]()
     //当前产品
-//    var currentProduct      : WOWProductSkuModel?
     //各种规格的选择状态
     var seributeDic         = [Int: Bool]()
     
 
     //所选产品的信息
-    var productInfo : WOWProductSkuModel?
+    var productInfo : WOWProductModel?
     //未选择规格
     var selectSpec = false
     //是否全选中
@@ -249,7 +248,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             nameLabel.text = productInfo.productTitle ?? ""
             let result = WOWCalPrice.calTotalPrice([productInfo.sellPrice ?? 0],counts:[1])
             perPriceLabel.text = result
-            if let originalPrice = productInfo.originalPrice {
+            if let originalPrice = productInfo.originalprice {
                 if originalPrice > productInfo.sellPrice{
                     //显示下划线
                     let result = WOWCalPrice.calTotalPrice([originalPrice],counts:[1])
@@ -549,8 +548,6 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             if skuCount == 0 {
                 skuCount = 1
             }
-            showStock(true)
-            
             sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .normal)
             sureButton.isEnabled = true
             sureButton.setTitle("确定", for: .normal)
@@ -565,14 +562,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         }
         collectionView.reloadData()
     }
-    //按钮是否可点击
-    
-    func showStock(_ hasStock: Bool) -> Void {
-//        addButton.isEnabled = hasStock
-//        subButton.isEnabled = hasStock
-//        sureButton.isEnabled = hasStock
 
-    }
 
     
 }
@@ -766,14 +756,14 @@ extension WOWGoodsBuyView:CAAnimationDelegate {
     /**
      *  格式化产品尺寸
      */
-    func productSize(productInfo: WOWProductSkuModel) -> String {
+    func productSize(productInfo: WOWProductModel) -> String {
         let format = String(format:"尺寸：L%.0f×W%.0f×H%.0fcm",productInfo.length ?? 0, productInfo.width ?? 0, productInfo.height ?? 0)
         return format
     }
     /**
      *  格式化产品尺寸重量
      */
-    func productWeight(productInfo: WOWProductSkuModel) -> String {
+    func productWeight(productInfo: WOWProductModel) -> String {
         let format = String(format:"重量：%.1fkg",productInfo.netWeight ?? 0)
         return format
     }

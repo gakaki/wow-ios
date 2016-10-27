@@ -63,7 +63,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
 //        pictureImageView.set_webimage_url(model.productImg)
       
         
-        let img_url            = "\(model.productImg!)?imageView2/0/w/400/format/webp/q/85"
+        let img_url            = "\(model.productImg ?? "")?imageView2/0/w/400/format/webp/q/85"
         let url_obj            = URL(string:img_url)
         print(img_url)
         let image_place_holder = UIImage(named: "placeholder_product")

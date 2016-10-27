@@ -59,11 +59,15 @@ class WOWFavoriteController: WOWBaseViewController {
             
         
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
-
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func didReceiveMemoryWarning() {

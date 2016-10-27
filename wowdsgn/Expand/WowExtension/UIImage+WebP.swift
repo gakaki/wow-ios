@@ -74,7 +74,9 @@ extension UIImageView {
         if ( res.length <= 0 ){
             return ""
         }else{
-            res     = "\(url!)?imageMogr2/format/webp"
+            
+//            res     = "\(url!)?imageMogr2/format/webp"z
+            res     = "\(url!)?imageView2/0/w/450/format/webp/q/90"
         }
        return res
     }

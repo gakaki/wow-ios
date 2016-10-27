@@ -39,9 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initialAppearance()     //初始化外观
         registAppKey(launchOptions) //注册第三方
        
-        YYWebImageManager.shared().cache?.memoryCache.costLimit = 50 * 1024 * 1024
-        ImageCache.default.maxDiskCacheSize = 50 * 1024 * 1024
+        YYWebImageManager.shared().cache?.memoryCache.costLimit = 40 * 1024 * 1024
 
+        
         
         
        ADLaunchView()

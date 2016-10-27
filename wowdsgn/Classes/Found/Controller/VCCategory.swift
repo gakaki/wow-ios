@@ -54,6 +54,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
                             strongSelf.top_category_image_view.set_webimage_url(image_url) //设置顶部分类背景图
                         }
                         
+                        
+                        
                         strongSelf.cv.selectItem(at: NSIndexPath(item: strongSelf.get_category_index(), section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
                     }
                     
@@ -76,7 +78,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         super.viewDidLoad()
         self.title = ""
         self.mj_footer.isHidden = true
-        
+        self.cv.allowsMultipleSelection = false
+
         request()
  
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {

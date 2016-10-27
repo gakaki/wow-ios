@@ -1,3 +1,4 @@
+
 //
 //  WOWController.swift
 //  Wow
@@ -85,6 +86,10 @@ class WOWController: WOWBaseViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
+        
+        YYWebImageManager.shared().cache?.memoryCache.removeAllObjects()
+        
     }
     
     //MARK:Lazy

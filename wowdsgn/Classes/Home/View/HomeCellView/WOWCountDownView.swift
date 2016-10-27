@@ -7,11 +7,9 @@
 //
 
 import UIKit
-typealias TimerOver = () -> ()
+
 class WOWCountDownView: UIView {
     
-    var timerOverEvent  : TimerOver!
-
     var stamp           : Int       = 0
     var isConfigCellUI  :Bool       = false
     private var myContext           = 0
@@ -74,17 +72,6 @@ class WOWCountDownView: UIView {
             
         }
         
-    }
-    func timerr()  {
-        self._timeStamp -= 1
-        self.getDetailTimeWithTimestamp(timeStamp: _timeStamp)
-        if self._timeStamp == 0 {
-            self.timerOver()
-        }
-    }
-    func timerOver()  {
-    
-        timerOverEvent()
     }
     
     func getDetailTimeWithTimestamp(timeStamp: NSInteger)  {

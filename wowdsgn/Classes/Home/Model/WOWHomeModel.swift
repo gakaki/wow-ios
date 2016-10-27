@@ -37,10 +37,10 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
             moduleContentList       <- map["moduleContent"]
             
         case 402:// 自定义产品组
-            
+            moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
             moduleContentProduct     <- map["moduleContent"]
         case 102:// 专题列表
-            
+            moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
             moduleContent            <- map["moduleContent"]
         case 801:// 今日单品
             moduleAdditionalInfo    <- map["moduleAdditionalInfo"]

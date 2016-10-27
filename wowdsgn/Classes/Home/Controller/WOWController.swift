@@ -268,7 +268,10 @@ class WOWController: WOWBaseViewController {
                         }
                     }
                     // 拿到数据，倒计时刷新数据源model
-                    strongSelf.timerCount(array: strongSelf.singProductArray)
+                    if strongSelf.singProductArray.count > 0 {
+                        strongSelf.timerCount(array: strongSelf.singProductArray)
+                    }
+                    
                 }
                 if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
                      strongSelf.tableView.reloadData()
@@ -509,6 +512,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
              let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_102, for: indexPath) as! Cell_102_Project
              cell.dataArr = model.moduleContent?.banners
+             cell.lbTitle.text = model.moduleAdditionalInfo?.title
              return cell
         case 801:
             
@@ -609,7 +613,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
                 switch model.moduleType ?? 0 {
                 case 402:
                     
-                    return WOW_Cell_402_Hearder()
+                    return WOW_Cell_402_Hearder(title: model.moduleAdditionalInfo?.title ?? "居家好物")
                     
                 default:
                     
@@ -644,10 +648,11 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         return view
         
     }
-    func WOW_Cell_402_Hearder() -> UIView {
+    func WOW_Cell_402_Hearder(title: String) -> UIView {
         
         let v = Bundle.main.loadNibNamed("WOW_Cell_402_Hearder", owner: self, options: nil)?.last as! WOW_Cell_402_Hearder
         v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth,height: 50)
+        v.lbTitle.text = title
         return v
     }
 

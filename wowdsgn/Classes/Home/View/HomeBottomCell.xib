@@ -73,7 +73,7 @@
                                 <color key="textColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.5折" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WbV-5C-qf4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WbV-5C-qf4">
                                 <color key="backgroundColor" red="1" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="A1w-Sf-7Th"/>
@@ -135,10 +135,10 @@
                             <mask key="constraints">
                                 <exclude reference="NEN-ja-Tpk"/>
                                 <exclude reference="xYQ-os-baL"/>
-                                <exclude reference="O3s-EV-fyC"/>
                                 <exclude reference="8yV-Ja-ojG"/>
                                 <exclude reference="Xbc-Mh-Vzv"/>
                                 <exclude reference="42N-hF-reM"/>
+                                <exclude reference="O3s-EV-fyC"/>
                             </mask>
                         </variation>
                     </view>
@@ -218,7 +218,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC1-bw-FXV">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -265,10 +265,10 @@
                             <mask key="constraints">
                                 <exclude reference="Kpy-43-WgU"/>
                                 <exclude reference="V8q-C8-5sv"/>
-                                <exclude reference="bfS-Su-chQ"/>
                                 <exclude reference="KuG-GY-grM"/>
                                 <exclude reference="yes-pN-yse"/>
                                 <exclude reference="7JY-r4-Ukm"/>
+                                <exclude reference="bfS-Su-chQ"/>
                             </mask>
                         </variation>
                     </view>
@@ -309,12 +309,20 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="LeftConstraintOne" destination="vFa-Zj-76Q" id="hrw-X5-6xn"/>
+                <outlet property="LeftConstraintTwo" destination="oV8-Yt-MUH" id="D0z-ND-IF0"/>
                 <outlet property="btnIsLikeOne" destination="GXh-NM-03T" id="vWG-kI-vR7"/>
                 <outlet property="btnIsLikeTwo" destination="WH3-ye-0AX" id="KUh-Bd-mgv"/>
                 <outlet property="imgShowOne" destination="uL2-Jn-fkt" id="Csy-jU-HqP"/>
                 <outlet property="imgShowTwo" destination="dVW-fZ-oE6" id="yY4-hw-XBy"/>
+                <outlet property="lbDiscountOne" destination="WbV-5C-qf4" id="6Ex-fp-Hsk"/>
+                <outlet property="lbDiscountTwo" destination="TcS-TR-lwU" id="T92-YZ-LrH"/>
+                <outlet property="lbNewOne" destination="DEm-fw-E1P" id="hiW-4e-v2B"/>
+                <outlet property="lbNewTwo" destination="m5F-G5-grt" id="age-qJ-s2Z"/>
+                <outlet property="lbPromoteOne" destination="5z3-zY-F1W" id="oWy-cL-X8B"/>
+                <outlet property="lbPromoteTwo" destination="Wsr-gs-6gP" id="P1e-vN-cKc"/>
                 <outlet property="lbTitleOne" destination="QhU-YH-d59" id="Itw-cD-hLA"/>
-                <outlet property="lbTitleTwo" destination="6ux-Gr-EIm" id="Xye-Dd-5vP"/>
+                <outlet property="lbTitleTwo" destination="6ux-Gr-EIm" id="44g-6a-rdz"/>
                 <outlet property="oneBaseView" destination="Jwb-us-tnA" id="t4z-Rj-Td4"/>
                 <outlet property="oneBtn" destination="DOP-D1-4WL" id="Tne-eL-8cW"/>
                 <outlet property="priceLbOne" destination="wkj-fT-VG6" id="FSz-gG-qgs"/>
@@ -323,7 +331,7 @@
                 <outlet property="twoBtn" destination="yP7-tK-paf" id="tMX-aM-z8D"/>
                 <outlet property="twoLb" destination="lC1-bw-FXV" id="0EA-6X-KjI"/>
             </connections>
-            <point key="canvasLocation" x="-70" y="508"/>
+            <point key="canvasLocation" x="-143" y="461"/>
         </tableViewCell>
     </objects>
     <resources>

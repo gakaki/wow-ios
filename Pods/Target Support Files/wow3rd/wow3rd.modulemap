@@ -1,0 +1,6 @@
+framework module wow3rd {
+  umbrella header "wow3rd-umbrella.h"
+
+  export *
+  module * { export * }
+}

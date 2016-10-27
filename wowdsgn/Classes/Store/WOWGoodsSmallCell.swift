@@ -77,9 +77,17 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }
         productId = model.productId
         
-        pictureImageView.set_webimage_url(model.productImg ?? "")
+        
+        
+        let img_url            = "\(model.productImg!)?imageView2/0/w/400/format/webp/q/85"
+        let url_obj            = URL(string:img_url)
+        print(img_url)
+        let image_place_holder = UIImage(named: "placeholder_product")
+        
+        pictureImageView.yy_setImage(with: url_obj, placeholder: image_place_holder)
+        
         // 修改来回上下加载 内存不减的问题
-//        pictureImageView.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
+
         desLabel.text = model.productTitle ?? ""
 //        desLabel.setLineHeightAndLineBreak(1.5)
         if let price = model.sellPrice {

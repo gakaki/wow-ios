@@ -1,0 +1,7 @@
+use_frameworks!
+
+target 'wow3rd_Example' do
+  pod 'wow3rd', :path => '../'
+
+
+end

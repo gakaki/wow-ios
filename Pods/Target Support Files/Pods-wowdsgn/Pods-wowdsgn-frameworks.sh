@@ -118,6 +118,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/YYImage/YYImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYWebImage/YYWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/wow-vendor-ui/wow_vendor_ui.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/wow3rd/wow3rd.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
@@ -154,4 +155,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/YYImage/YYImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYWebImage/YYWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/wow-vendor-ui/wow_vendor_ui.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/wow3rd/wow3rd.framework"
 fi

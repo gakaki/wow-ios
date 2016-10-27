@@ -76,7 +76,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         super.viewDidLoad()
         self.title = ""
         self.mj_footer.isHidden = true
-        
+        self.cv.allowsMultipleSelection = false
+
         request()
  
         _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {

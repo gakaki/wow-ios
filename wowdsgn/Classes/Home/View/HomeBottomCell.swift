@@ -152,7 +152,6 @@ class HomeBottomCell: UITableViewCell {
             if originalPrice > model.sellPrice {
              priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
             }
-            // 格式化富文本
            
         }
      
@@ -170,28 +169,10 @@ class HomeBottomCell: UITableViewCell {
             }
             
         }
-        lbNewTwo.isHidden = true
-        lbDiscountTwo.isHidden = true
-        lbPromoteTwo.isHidden = true
+        let discoutStr  = "5.5折"
+        let labelStr    = "冬季促销"
         
-        if let typeArray = model.sings{
-            for type in typeArray{
-                switch type {
-                case 1:
-                    lbNewTwo.isHidden = false
-                case 2:
-                    lbDiscountTwo.isHidden = false
-                case 3:
-                    lbPromoteTwo.isHidden = false
-                    if lbDiscountTwo.isHidden {
-                        LeftConstraintTwo.constant = 0
-                    }
-
-                default:
-                    break
-                }
-            }
-        }
+        isHidden(lbNew: lbNewTwo, lbDiscount: lbDiscountTwo, lbPromote: lbPromoteTwo, discountStr: discoutStr, promoteStr: labelStr,model: model)
         
     }
     func isHidden(lbNew: UILabel,lbDiscount: UILabel,lbPromote: UILabel,discountStr:String,promoteStr:String,model:WOWProductModel)  {

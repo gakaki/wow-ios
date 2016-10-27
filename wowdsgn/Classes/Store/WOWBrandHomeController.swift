@@ -74,6 +74,11 @@ class WOWBrandHomeController: WOWBaseViewController {
         }
 
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     deinit {
          NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
     }

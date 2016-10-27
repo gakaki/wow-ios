@@ -107,9 +107,13 @@ class HomeBottomCell: UITableViewCell {
         var originalPriceStr = ""
         if let originalPrice = model.originalprice {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
+            if originalPrice > model.sellPrice {
+                priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+            }
+
         }
         // 格式化富文本
-        priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+        
         
         
         if WOWUserManager.loginStatus {
@@ -145,9 +149,13 @@ class HomeBottomCell: UITableViewCell {
         var originalPriceStr = ""
         if let originalPrice = model.originalprice {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
+            if originalPrice > model.sellPrice {
+             priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+            }
+            // 格式化富文本
+           
         }
-        // 格式化富文本
-        priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+     
         
         
         if WOWUserManager.loginStatus {

@@ -230,8 +230,14 @@ extension WOWSearchController {
                 let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 if let array = arr{
                     strongSelf.dataArr = []
-                    strongSelf.dataArr = array
-                    strongSelf.showResult()
+                    if array.isEmpty {
+                        strongSelf.emptyView.isHidden = false
+
+                    }else {
+                        strongSelf.dataArr = array
+                        strongSelf.showResult()
+                    }
+                    
                 }else {
                     strongSelf.emptyView.isHidden = false
                 }

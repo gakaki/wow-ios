@@ -868,7 +868,7 @@
 		2D509A401DB5D3120047CD13 /* WOWSearchBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSearchBarView.xib; sourceTree = "<group>"; };
 		2D509A411DB5D3120047CD13 /* WOWSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchCell.swift; sourceTree = "<group>"; };
 		2D509A421DB5D3120047CD13 /* WOWSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSearchCell.xib; sourceTree = "<group>"; };
-		2D509A431DB5D3120047CD13 /* WOWSearchChildController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchChildController.swift; sourceTree = "<group>"; };
+		2D509A431DB5D3120047CD13 /* WOWSearchChildController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WOWSearchChildController.swift; path = ../View/WOWSearchChildController.swift; sourceTree = "<group>"; };
 		2D509A441DB5D3120047CD13 /* WOWSearchLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchLayout.swift; sourceTree = "<group>"; };
 		2D509A451DB5D3120047CD13 /* WOWSearchsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchsController.swift; sourceTree = "<group>"; };
 		2D509A461DB5D3120047CD13 /* WOWSearchTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchTagView.swift; sourceTree = "<group>"; };
@@ -1641,6 +1641,7 @@
 		2D509A0E1DB5D30B0047CD13 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2D509A431DB5D3120047CD13 /* WOWSearchChildController.swift */,
 				2D509A101DB5D30B0047CD13 /* WOWController.swift */,
 				2D509A0F1DB5D30B0047CD13 /* WOWCommentController.swift */,
 				2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */,
@@ -1696,9 +1697,8 @@
 				2D509A401DB5D3120047CD13 /* WOWSearchBarView.xib */,
 				2D509A411DB5D3120047CD13 /* WOWSearchCell.swift */,
 				2D509A421DB5D3120047CD13 /* WOWSearchCell.xib */,
-				2D509A431DB5D3120047CD13 /* WOWSearchChildController.swift */,
-				2D509A441DB5D3120047CD13 /* WOWSearchLayout.swift */,
 				2D509A451DB5D3120047CD13 /* WOWSearchsController.swift */,
+				2D509A441DB5D3120047CD13 /* WOWSearchLayout.swift */,
 				2D509A461DB5D3120047CD13 /* WOWSearchTagView.swift */,
 				2D509A471DB5D3120047CD13 /* WOWSearchTagView.xib */,
 				2D509A481DB5D3120047CD13 /* WOWSenceController.swift */,

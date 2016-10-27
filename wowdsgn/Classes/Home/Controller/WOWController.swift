@@ -79,14 +79,14 @@ class WOWController: WOWBaseViewController {
         //        tableView.reloadData()
         
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+              self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         //        hidingNavBarManager?.viewWillDisappear(animated)
     }
     

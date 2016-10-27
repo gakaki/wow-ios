@@ -268,6 +268,7 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 if code == RequestCode.ProductExpired.rawValue {
                     strongSelf.productEffectView.isHidden = false
+                    strongSelf.buyCarCount()
                     return
                 }
                 strongSelf.productEffectView.isHidden = true

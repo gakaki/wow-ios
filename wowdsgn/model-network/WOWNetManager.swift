@@ -132,6 +132,7 @@ class WOWNetManager {
                                 let res = info?.data ?? [] as AnyObject
                                 WOWHud.showMsg(info?.message)
                                 successClosure(res, info?.code)
+                                return
                             }
                             failClosure(info?.message)
                             WOWHud.showMsg(info?.message)

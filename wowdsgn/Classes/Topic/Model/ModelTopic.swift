@@ -54,7 +54,7 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
         favorite        <- map["favorite"]
        
         if imageAspect == 0 {
-            calImageHeight()
+//            calImageHeight()
         }
         
     }

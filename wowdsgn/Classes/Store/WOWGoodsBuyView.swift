@@ -261,7 +261,13 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             }
             sizeTextLabel.text = productSize(productInfo: productInfo)
             weightLabel.text = productWeight(productInfo: productInfo)
-            productStock(productInfo.hasStock ?? false)
+            if productInfo.productStatus == 1 {
+                productStock(productInfo.hasStock ?? false)
+            }
+            //当产品状态为2的时候商品已下架
+            if productInfo.productStatus == 2 {
+                productUndercarriage()
+            }
         }
     }
     
@@ -491,13 +497,12 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             skuCount = skuCount == 0 ? 1 : skuCount
 
         }else{
-            if allSelect{
-                if productInfo?.availableStock! > skuCount {
-                    skuCount += 1
-                }else {
-                    WOWHud.showMsg("库存不足")
-                }
-                
+            if allSelect && productInfo?.productStatus == 1 {
+                    if productInfo?.availableStock! > skuCount {
+                        skuCount += 1
+                    }else {
+                        WOWHud.showMsg("库存不足")
+                    }
             }else {
                 skuCount += 1
             }
@@ -558,11 +563,21 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             
             sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .disabled)
             sureButton.isEnabled = false
-            sureButton.setTitle("已售罄", for: .normal)
+            sureButton.setTitle("已售罄", for: .disabled)
         }
         collectionView.reloadData()
     }
 
+    /**
+     商品已下架
+     */
+    func productUndercarriage() {
+        
+            sureButton.setBackgroundColor(MGRgb(204, g: 204, b: 204), forState: .disabled)
+            sureButton.isEnabled = false
+            sureButton.setTitle("已下架", for: .disabled)
+    }
+    
 
     
 }
@@ -661,6 +676,8 @@ extension WOWGoodsBuyView {
                 productInfo = productArray[0]
                 configProductInfo()
             }
+        }else {
+            productStock(true)
         }
         collectionView.reloadData()
 

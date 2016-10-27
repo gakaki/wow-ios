@@ -27,7 +27,18 @@ class WOWBuyCarController: WOWBaseViewController {
         }
     }
     //有效商品的数组
-    var validArr = [WOWCarProductModel]()
+    var validArr = [WOWCarProductModel](){
+        didSet{
+            /**
+             *  如果购物车内没有有效商品，全选按钮设为不可点击状态
+             */
+            if validArr.isEmpty {
+                allButton.isEnabled = false
+            }else{
+                allButton.isEnabled = true
+            }
+        }
+    }
 
     //存放选中的数组
     fileprivate var selectedArr = [WOWCarProductModel](){
@@ -66,7 +77,6 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        request()
         MobClick.e(.Shoppingcart)
     }
     
@@ -85,7 +95,11 @@ class WOWBuyCarController: WOWBaseViewController {
         super.viewDidAppear(animated)
         addObservers()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        request()
+
+    }
 
 
 
@@ -114,6 +128,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     fileprivate func configTable(){
         tableView.register(UINib.nibName(String(describing: WOWBuyCarNormalCell.self)), forCellReuseIdentifier:cellNormalID)
+        tableView.register(UINib.nibName(String(describing: WOWOrderCell.self)), forCellReuseIdentifier:cellID)
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.separatorColor = SeprateColor
         self.tableView.mj_header = self.mj_header
@@ -215,7 +230,7 @@ class WOWBuyCarController: WOWBaseViewController {
                         //判断当前数组有多少默认选中的加入选中的数组
                         for product in strongSelf.dataArr {
                             
-                            if product.productStatus == 1 {
+                            if product.productStatus == 1 && product.productStock > 0{
                                 strongSelf.validArr.append(product)
                                 if product.isSelected ?? false {
                                     strongSelf.selectedArr.append(product)
@@ -423,7 +438,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let model = dataArr[(indexPath as NSIndexPath).section]
-        if model.productStatus == 1 {
+        if model.productStatus == 1 && model.productStock > 0{
             return 160
         }else {
             return  111

@@ -16,6 +16,8 @@ class WOWContentTopicController: WOWBaseViewController {
     //param
     var topic_id: Int           = 1
     var vo_topic:WOWModelVoTopic?
+    
+    var imgUrlArr = [String]()
     weak var  delegate :WOWHotStyleDelegate?
     fileprivate var shareProductImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
@@ -102,6 +104,14 @@ class WOWContentTopicController: WOWBaseViewController {
     //初始化数据，商品banner
     fileprivate func configData(){
         configBarItem()
+        imgUrlArr = [String]()
+        for  aa:WOWProductPicTextModel in vo_topic?.imageSerial?.records ?? [WOWProductPicTextModel](){
+            
+            if let imgStr = aa.image{
+                imgUrlArr.append(imgStr)
+                
+            }
+        }
 
         //如果相关商品有数据显示。如果没有数据则不显示
         if vo_products.count > 0 {
@@ -294,13 +304,18 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             if let array = vo_topic?.imageSerial?.records {
                 let model = array[(indexPath as NSIndexPath).row]
                 cell.showData(model)
-                cell.productImg.tag = (indexPath as NSIndexPath).row
-                cell.productImg.addTapGesture(action: {[weak self] (tap) in
-                    if let strongSelf = self {
-                        strongSelf.lookBigImg((tap.view?.tag)!)
+                for imgStr in imgUrlArr.enumerated() {
+                    if imgStr.element == model.image {
+                        cell.productImg.tag = imgStr.offset
+                        cell.productImg.addTapGesture(action: {[weak self] (tap) in
+                            if let strongSelf = self {
+                                strongSelf.lookBigImg((tap.view?.tag)!)
+                            }
+                            
+                            })
                     }
-                    
-                    })
+                }
+                
             }
             
             returnCell = cell
@@ -364,11 +379,11 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
 extension WOWContentTopicController: PhotoBrowserDelegate{
     func setPhoto() -> [PhotoModel] {
         var photos: [PhotoModel] = []
-        
+        imgUrlArr = [String]()
         for  aa:WOWProductPicTextModel in vo_topic?.imageSerial?.records ?? [WOWProductPicTextModel](){
             
             if let imgStr = aa.image{
-                
+                imgUrlArr.append(imgStr)
                 let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)
                 photos.append(photoModel)
             }

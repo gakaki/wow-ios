@@ -33,13 +33,7 @@ class WOWEditOrderController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
-        //如果是立即购买入口需要添加商品id和商品数量来创建订单。如果是购物车进来的，直接获取商品列表
-        switch entrance! {
-        case editOrderEntrance.buyEntrance:
-            requestBuyNowProduct()
-        case editOrderEntrance.carEntrance:
-            requestProduct()
-        }
+       
         
         // Do any additional setup after loading the view.
     }
@@ -77,7 +71,8 @@ class WOWEditOrderController: WOWBaseViewController {
         tableView.register(UINib.nibName(String(describing: WOWOrderFreightCell.self)), forCellReuseIdentifier:String(describing: WOWOrderFreightCell.self))
         tableView.register(UINib.nibName(String(describing: WOWTipsCell.self)), forCellReuseIdentifier:String(describing: WOWTipsCell.self))
         tableView.keyboardDismissMode = .onDrag
- 
+        self.tableView.mj_header = self.mj_header
+
     }
     
     /**
@@ -112,16 +107,26 @@ class WOWEditOrderController: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
+        
         //请求地址数据
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(JSONObject:result)
                 let section = IndexSet(integer: 0)
                 strongSelf.tableView.reloadSections(section, with: .none)
-            
+                strongSelf.endRefresh()
             }
-        }) { (errorMsg) in
-            
+        }) { [weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+        //如果是立即购买入口需要添加商品id和商品数量来创建订单。如果是购物车进来的，直接获取商品列表
+        switch entrance! {
+        case editOrderEntrance.buyEntrance:
+            requestBuyNowProduct()
+        case editOrderEntrance.carEntrance:
+            requestProduct()
         }
     }
     
@@ -131,6 +136,7 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(JSONObject:result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
+                
                 let coupon = WOWCouponModel.init()
                 coupon.id = strongSelf.orderSettle?.endUserCouponId
                 coupon.deduction = strongSelf.orderSettle?.deduction
@@ -181,6 +187,22 @@ class WOWEditOrderController: WOWBaseViewController {
         let totalAmout      = totalAmoutStr 
         let remark          = tipsTextField.text ?? ""
         
+        //往服务端传过去价格确保价格一致性
+        var productPriceGroup = ""
+        if let arr = productArr {
+            if arr.count > 0 {
+                for product in arr.enumerated() {
+                    if product.offset == arr.count - 1 {
+                        let str = String(format: "%i:%.2f",product.element.productId ?? 0,product.element.sellPrice ?? 0)
+                        productPriceGroup.append(str)
+                    }else {
+                        let str = String(format: "%i:%.2f,",product.element.productId ?? 0,product.element.sellPrice ?? 0)
+                        productPriceGroup.append(str)
+                    }
+                }
+            }
+            
+        }
         if let endUserCouponId = couponModel?.id {
             
             params = [
@@ -188,7 +210,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderSource": orderSource as AnyObject,
                 "orderAmount": totalAmout as AnyObject,
                 "remark": remark as AnyObject,
-                "endUserCouponId": endUserCouponId  as AnyObject
+                "endUserCouponId": endUserCouponId  as AnyObject,
+                "productPriceGroup": productPriceGroup as AnyObject
             ]
             
         }else {
@@ -196,7 +219,9 @@ class WOWEditOrderController: WOWBaseViewController {
                 "shippingInfoId": shippingInfoId as AnyObject ,
                 "orderSource": orderSource  as AnyObject,
                 "orderAmount": totalAmout  as AnyObject,
-                "remark": remark  as AnyObject
+                "remark": remark  as AnyObject,
+                "productPriceGroup": productPriceGroup as AnyObject
+
             ]
 
         }
@@ -242,6 +267,23 @@ class WOWEditOrderController: WOWBaseViewController {
         let orderSource         = 2
         let remark              = tipsTextField.text ?? ""
         
+        //往服务端传过去价格确保价格一致性
+        var productPriceGroup = ""
+        if let arr = productArr {
+            if arr.count > 0 {
+                for product in arr.enumerated() {
+                    if product.offset == arr.count - 1 {
+                        let str = String(format: "%i:%.2f",product.element.productId ?? 0,product.element.sellPrice ?? 0)
+                        productPriceGroup.append(str)
+                    }else {
+                        let str = String(format: "%i:%.2f,",product.element.productId ?? 0,product.element.sellPrice ?? 0)
+                        productPriceGroup.append(str)
+                    }
+                }
+            }
+            
+        }
+        
         if let endUserCouponId = couponModel?.id {
             
             params = [
@@ -251,7 +293,9 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderSource": orderSource as AnyObject,
                 "orderAmount": totalAmount as AnyObject,
                 "remark": remark as AnyObject,
-                "endUserCouponId": endUserCouponId as AnyObject
+                "endUserCouponId": endUserCouponId as AnyObject,
+                "productPriceGroup": productPriceGroup as AnyObject
+
             ]
             
         }else {
@@ -263,7 +307,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 "shippingInfoId": shippingInfoId as AnyObject,
                 "orderSource": orderSource as AnyObject,
                 "orderAmount": totalAmount as AnyObject,
-                "remark": remark as AnyObject
+                "remark": remark as AnyObject,
+                "productPriceGroup": productPriceGroup as AnyObject
             ]
         }
         

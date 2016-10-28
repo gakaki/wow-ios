@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 import YYWebImage
 import SwiftyUserDefaults
 
+
 //import JSPatch
 //import JSPatchHelper
 //import wow_talkingData
@@ -225,8 +226,8 @@ extension AppDelegate{
 //        window?.rootViewController =  VCCategoryProducts()
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
-        vc.productId = 1      //247到254是SKU 2 42
-//        window?.rootViewController = vc
+        vc.productId = 49      //247到254是SKU 2 42
+        window?.rootViewController = vc
     }
     
 
@@ -262,9 +263,9 @@ extension AppDelegate{
         
         UMSocialData.setAppKey(WOWID.UMeng.appID)
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
-   
+        
         WXApi.registerApp(WOWID.Wechat.appID)
-
+    
         //Growing
         Growing.start(withAccountId: "a04e14656f08dc7e")
         //DeepShare

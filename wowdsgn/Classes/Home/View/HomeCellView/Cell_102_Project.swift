@@ -7,9 +7,13 @@
 //
 
 import UIKit
+protocol cell_102_delegate:class {
+    // 跳转专题详情代理
+    func goToProjectDetailVC(_ model: WOWCarouselBanners?)
+}
 // 专题 cell
 class Cell_102_Project: UITableViewCell {
-    
+    weak var delegate : cell_102_delegate?
     @IBOutlet weak var lbTitle: UILabel!
     var dataArr:[WOWCarouselBanners]?{
         didSet{
@@ -69,7 +73,12 @@ extension Cell_102_Project:UICollectionViewDelegate,UICollectionViewDataSource,U
         return UIEdgeInsetsMake(0, 15,0, 15)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if let del = delegate{
+            let model = dataArr?[indexPath.row]
+            del.goToProjectDetailVC(model)
+            
+        }
+
     }
     
 }

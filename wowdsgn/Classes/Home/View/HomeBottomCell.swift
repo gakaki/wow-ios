@@ -70,15 +70,12 @@ class HomeBottomCell: UITableViewCell {
             
         }
         
-        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         
     }
     @IBAction func favoriteActionOne(_ sender: AnyObject) {
-        //        WOWHud.showLoadingSV()
-        
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdOne ?? 0,view: oneBaseView,btn: btnIsLikeOne , isFavorite: { (isFavorite) in
             
             print("完成请求")
@@ -87,21 +84,19 @@ class HomeBottomCell: UITableViewCell {
         
     }
     @IBAction func favoriteActionTwo(_ sender: AnyObject) {
-        //        WOWHud.showLoadingSV()
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdTwo ?? 0,view: twoBaseView,btn: btnIsLikeTwo, isFavorite: { (isFavorite) in
             
             print("完成请求")
             
         })
         
-        
     }
     
     func showDataOne(_ model:WOWProductModel) {
         oneModel = model
         imgShowOne.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
-        lbTitleOne.text = model.productName
-        productIdOne = model.productId
+        lbTitleOne.text     = model.productName
+        productIdOne        = model.productId
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         var originalPriceStr = ""
@@ -110,14 +105,10 @@ class HomeBottomCell: UITableViewCell {
             if originalPrice > model.sellPrice {
                 priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
             }else{
-                 priceLbOne.text = sellPrice
+                priceLbOne.text = sellPrice
             }
 
         }
-        // 格式化富文本
-        
-        
-        
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
                 
@@ -133,14 +124,9 @@ class HomeBottomCell: UITableViewCell {
             btnIsLikeOne.isSelected = false
         }
         
-        let discoutStr  = "5.5折"
-        let labelStr    = "冬季促销"
-        
-        isHidden(lbNew: lbNewOne, lbDiscount: lbDiscountOne, lbPromote: lbPromoteOne, discountStr: discoutStr, promoteStr: labelStr,model: model)
-        
-        
+       self.isHidden(lbNew: lbNewOne, lbDiscount: lbDiscountOne, lbPromote: lbPromoteOne,model: model)
     }
-    //    originalprice
+    //   two Item Data
     func showDataTwo(_ model:WOWProductModel) {
         twoModel = model
         imgShowTwo.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
@@ -159,8 +145,6 @@ class HomeBottomCell: UITableViewCell {
            
         }
      
-        
-        
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
                 
@@ -173,44 +157,44 @@ class HomeBottomCell: UITableViewCell {
             }
             
         }
-        let discoutStr  = "5.5折"
-        let labelStr    = "冬季促销"
-        
-        isHidden(lbNew: lbNewTwo, lbDiscount: lbDiscountTwo, lbPromote: lbPromoteTwo, discountStr: discoutStr, promoteStr: labelStr,model: model)
+
+        self.isHidden(lbNew: lbNewTwo, lbDiscount: lbDiscountTwo, lbPromote: lbPromoteTwo,model: model,isOne:false)
         
     }
-    func isHidden(lbNew: UILabel,lbDiscount: UILabel,lbPromote: UILabel,discountStr:String,promoteStr:String,model:WOWProductModel)  {
-        lbNew.isHidden = true
-        //        lbDiscountOne.isHidden = true
-        lbDiscount.text = discountStr.get_formted_Space()
-        lbPromote.isHidden = true
-        if model.tag?.isEmpty ?? false{
-            
-            lbPromote.text = model.tag?.get_formted_Space()
-            
+    
+    /// 是否隐藏三个标签
+    ///
+    /// - parameter lbNew:      是否新品标签
+    /// - parameter lbDiscount: 是否折扣标签
+    /// - parameter lbPromote:  冬日促销标签
+    /// - parameter model:      对应model
+    /// - parameter isOne:      是否第一个Item
+    func isHidden(lbNew: UILabel,lbDiscount: UILabel,lbPromote: UILabel,model:WOWProductModel,isOne:Bool = true)  {
+        lbNew.isHidden              = true
+        lbDiscount.isHidden         = true
+        lbPromote.isHidden          = true
+        if let discount = model.discount {
+            lbDiscount.isHidden  = false
+            lbDiscount.text      = (discount + "折").get_formted_Space()
         }
-        if let typeArray = model.sings{
-            for type in typeArray{
-                switch type {
-                case 1:// 喜欢
-//
-                    break
-                case 2:// 折扣
-                    lbDiscount.text      = discountStr.get_formted_Space()
-                    lbDiscount.isHidden = false
-                case 3:// 新品
-                    lbNew.isHidden = false
-//                    lbPromote.text    = promoteStr.get_formted_Space()
-//                    lbPromote.isHidden = false
-//                    if lbDiscount.isHidden || lbDiscount.text?.isEmpty ?? false{
-//                        LeftConstraintOne.constant = 0
-//                    }
-                default:
-                    break
-                }
+        for singModel in model.sings ?? []{
+            switch singModel.id ?? 0{
+            case 4:
+                
+                lbPromote.isHidden  = false
+                lbPromote.text      = singModel.desc?.get_formted_Space()
+            case 3:
+                lbNew.isHidden = false
+            default: break
             }
         }
-
+        if lbDiscount.isHidden && !lbPromote.isHidden{
+            if isOne {
+                self.LeftConstraintOne.constant = 0
+            }else{
+                self.LeftConstraintTwo.constant = 0
+            }
+        }
     }
     
     func price(_ sellPrice:Double , originalPrice:Double) -> Array<String> {

@@ -35,10 +35,10 @@ class WOWProductModel: WOWBaseModel,Mappable{
     
     var productStatus         : Int?
     var tag                   : String?
-    var sings                 : [Int]?
+    var sings                 : [WOWProductSings]?
    dynamic var timeoutSeconds : Int = 0
     var favorite              : Bool?
-    
+    var discount              : String?
     //商品详情中用到
     var length                      : Double?
     var width                       : Double?
@@ -100,7 +100,12 @@ class WOWProductModel: WOWBaseModel,Mappable{
         attributes                  <- map["attributes"]
         availableStock              <- map["availableStock"]
         hasStock                    <- map["hasStock"]
-
+        if let sellPrice = sellPrice , let originalprice = originalprice {
+            
+            if !(sellPrice >= originalprice || sellPrice == 0 || originalprice == 0) {
+                discount = String.init(format: "%.1f", sellPrice * 10/originalprice)
+            }
+        }
     }
     
     /// 商品列表瀑布流需要用的高度
@@ -110,6 +115,24 @@ class WOWProductModel: WOWBaseModel,Mappable{
 //        var height = s.heightWithConstrainedWidth((MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30, font: UIFont.systemScaleFontSize(13))
 //        height = height > 18 ? 30 : 18
 //        self.cellHeight = 20 + 5 + 14 + height + 6 + WOWGoodsSmallCell.itemWidth
+    }
+    
+}
+class WOWProductSings: WOWBaseModel,Mappable {
+    
+    var id                  : Int?
+    var desc                : String?
+    
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        
+        id              <- map["id"]
+        desc            <- map["desc"]
+        
     }
     
 }

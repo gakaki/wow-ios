@@ -42,8 +42,12 @@ class PagingScrollView: UIView {
     }
     open var cardCount:CGFloat = 0 {
         didSet {
-            self.pageControl.numberOfPages = Int(cardCount)
-            self.pageControl.currentPage = 0
+            if cardCount == 1 {
+                self.pageControl.isHidden = true
+            }else{
+                self.pageControl.numberOfPages = Int(cardCount)
+                self.pageControl.currentPage = 0
+            }
         }
     }
 

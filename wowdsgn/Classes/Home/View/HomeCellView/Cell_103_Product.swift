@@ -52,6 +52,7 @@ class Cell_103_Product: UITableViewCell {
             downView?.model = model
         }
     }
+    
     func configUI(data: [WOWProductModel]) {
         let cardSize:CGSize = CGSize(width: UIScreen.main.bounds.size.width, height: 210)
    
@@ -73,6 +74,10 @@ class Cell_103_Product: UITableViewCell {
             pagingScrollView.scrollView.addSubview(v)
             
             v.imgVieww.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
+            v.imgVieww.isUserInteractionEnabled = true
+            v.imgVieww.addTapGesture(action: { (self) in
+                print("111")
+            })
             
             if let price = model.sellPrice {
                 let result = WOWCalPrice.calTotalPrice([price],counts:[1])

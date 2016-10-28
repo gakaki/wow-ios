@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -235,6 +235,7 @@
                 <outlet property="label_soldout" destination="dZZ-XJ-GP0" id="TXe-yH-7Fv"/>
                 <outlet property="lbDiscount" destination="V68-R7-jE3" id="DiM-by-Ms4"/>
                 <outlet property="lbLabel" destination="052-3y-5xt" id="Npg-1r-Kmt"/>
+                <outlet property="lbNew" destination="DGH-70-lab" id="iUn-vl-juR"/>
                 <outlet property="likeBtn" destination="Kl3-wK-hkt" id="RO5-sY-aAp"/>
                 <outlet property="originalpriceLabel" destination="gn4-7W-J9v" id="6dC-Cd-b2W"/>
                 <outlet property="pictureImageView" destination="OpU-Dv-x7A" id="79h-yB-2Eu"/>

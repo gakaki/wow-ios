@@ -394,9 +394,12 @@ class WOWController: WOWBaseViewController {
             case 7:
                 print("分类详情页")
                 
-            case 8:
-                toVCTopic(model.bannerLinkTargetId!)
+            case 8:// 专题详情
+                toVCTopic(model.bannerLinkTargetId ?? 0)
                 print("场景还是专题")
+            case 9:// 专题详情
+                
+                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
                 
             default:
                 print("其他")
@@ -515,14 +518,14 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
              let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_102, for: indexPath) as! Cell_102_Project
              cell.dataArr = model.moduleContent?.banners
-             cell.lbTitle.text = model.moduleAdditionalInfo?.title
+             cell.lbTitle.text = model.moduleAdditionalInfo?.title ?? "专题"
+             cell.delegate = self
              return cell
         case 801:
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_103, for: indexPath) as! Cell_103_Product
             cell.dataSourceArray = model.moduleContentProduct?.products
-//            cell.showDateNew()
-//
+
             return cell
         case 402:
             
@@ -713,6 +716,14 @@ extension WOWController: CyclePictureViewDelegate { // 轮播banner 对应的跳
         let model = bannerArray[(indexPath as NSIndexPath).row]
         
         goController(model)
+    }
+}
+extension WOWController:cell_102_delegate{
+    func goToProjectDetailVC(_ model: WOWCarouselBanners?){
+        if let model = model {
+            goController(model)
+        }
+        
     }
 }
 extension Array{

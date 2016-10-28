@@ -32,9 +32,10 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var viewBottom: UIView!
-    @IBOutlet weak var lbLabel: UILabel!
-    @IBOutlet weak var lbDiscount: UILabel!
     
+    @IBOutlet weak var lbLabel: UILabel!// 冬日促销标签
+    @IBOutlet weak var lbDiscount: UILabel!// 折扣标签
+    @IBOutlet weak var lbNew: UILabel!// 新品标签
     @IBOutlet weak var LeftConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,11 +47,6 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         self.label_soldout.isHidden = false
 //        self.pictureImageView.alpha = 0.4
     }
-//    @IBAction func favoriteAction(sender: AnyObject) {
-//
-//       
-//    }
-
     func showData(_ model:WOWProductModel,indexPath:IndexPath) {
         
         let discoutStr  = "5.5折"
@@ -120,8 +116,35 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }
         
         likeBtn.addTarget(self, action: #selector(likeClick(_:)), for: .touchUpInside)
+        self.isHiddenSignsLabel(model: model)
     }
-    
+    func isHiddenSignsLabel(model:WOWProductModel)  {
+        lbNew.isHidden              = true
+        lbDiscount.isHidden         = true
+        lbLabel.isHidden            = true
+        if let discount = model.discount {
+            lbDiscount.isHidden  = false
+            lbDiscount.text      = (discount + "折").get_formted_Space()
+        }
+        for singModel in model.sings ?? []{
+            switch singModel.id ?? 0{
+            case 4:
+                
+                lbLabel.isHidden  = false
+                lbLabel.text      = singModel.desc
+            case 3:
+                lbNew.isHidden = false
+                
+            default: break
+            }
+        }
+        if lbDiscount.isHidden && !lbLabel.isHidden{
+          
+            self.LeftConstraint.constant = 0
+           
+        }
+    }
+
     func likeClick(_ sender: UIButton)  {
         if !WOWUserManager.loginStatus {
             UIApplication.currentViewController()?.toLoginVC(true)
@@ -137,28 +160,5 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }
         
     }
-    
-//    //用户喜欢某个单品
-//    func requestFavoriteProduct(productId: Int)  {
-//        WOWHud.showLoadingSV()
-//
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_FavoriteProduct(productId:productId), successClosure: {[weak self] (result, code) in
-//            if let strongSelf = self{
-//                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
-////            if let strongSelf = self{
-////                strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
-//                let favorite = JSON(result)["favorite"].bool
-//                var params = [String: AnyObject]?()
-//                
-//                params = ["productId": productId, "favorite": favorite!]
-//                
-//                NSNotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params)
-//            }
-//        }) { (errorMsg) in
-//            
-//            
-//        }
-//    }
-    
     
 }

@@ -109,6 +109,8 @@ class HomeBottomCell: UITableViewCell {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
             if originalPrice > model.sellPrice {
                 priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+            }else{
+                 priceLbOne.text = sellPrice
             }
 
         }
@@ -151,6 +153,8 @@ class HomeBottomCell: UITableViewCell {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
             if originalPrice > model.sellPrice {
              priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+            }else{
+                priceLbTwo.text = sellPrice
             }
            
         }

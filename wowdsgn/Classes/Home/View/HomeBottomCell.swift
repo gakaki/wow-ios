@@ -170,6 +170,7 @@ class HomeBottomCell: UITableViewCell {
     /// - parameter model:      对应model
     /// - parameter isOne:      是否第一个Item
     func isHidden(lbNew: UILabel,lbDiscount: UILabel,lbPromote: UILabel,model:WOWProductModel,isOne:Bool = true)  {
+        lbDiscount.text             = ""
         lbNew.isHidden              = true
         lbDiscount.isHidden         = true
         lbPromote.isHidden          = true

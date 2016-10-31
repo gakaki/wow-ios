@@ -106,11 +106,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func application(_ application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
     {
+        TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
+
         //DeepShare
-//        if DeepShare.con
-//        if DeepShare.continue(userActivity) {
-//            return true
-//        }
+        if DeepShare.continue(userActivity) {
+            return true
+        }
+        //Universal Link
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            let url = userActivity.webpageURL!
+            //handle url
+            
+            let d = " get url is \(url) , url string is \(url.absoluteString)"
+            DLog(d)
+            
+            WOWHud.showMsg(d)
+
+            if url.host == "qnssl.com" {
+                
+            }else{
+                UIApplication.shared.openURL(url)
+            }
+            return true
+        }
         
         
         return true
@@ -165,12 +183,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    
-    func application(_ app: UIApplication, _ userActivity: NSUserActivity,  restorationHandler: @escaping ([AnyObject]?) -> Void) -> Bool {
-        TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
-        return true
-    }
-
+  
 }
 
 

@@ -126,10 +126,13 @@ private extension AdLaunchView {
             if let logoImageView = logoImageView {
                 addSubview(logoImageView)
                 logoImageView.snp.makeConstraints { [weak self](make) -> Void in
-                    make.width.equalTo(110)
-                    make.height.equalTo(169)
-                    make.top.equalTo(MGScreenHeight*0.15)
-                    make.centerX.equalTo(self!)
+                    if let strongSelf = self {
+                        make.width.equalTo(110)
+                        make.height.equalTo(169)
+                        make.top.equalTo(MGScreenHeight*0.15)
+                        make.centerX.equalTo(strongSelf)
+                    }
+                    
                 }
             }
             
@@ -139,9 +142,11 @@ private extension AdLaunchView {
             if let logoLabel = logoLabel {
                 addSubview(logoLabel)
                 logoLabel.snp.makeConstraints { [weak self](make) -> Void in
+                    if let strongSelf = self {
+                        make.bottom.equalTo(strongSelf).offset(-MGScreenHeight*0.08)
+                        make.centerX.equalTo(strongSelf)
+                    }
                     
-                    make.bottom.equalTo(self!).offset(-MGScreenHeight*0.08)
-                    make.centerX.equalTo(self!)
                 }
             }
         }
@@ -161,10 +166,13 @@ private extension AdLaunchView {
             if let logoImageView = logoImageView {
                 addSubview(logoImageView)
                 logoImageView.snp.makeConstraints { [weak self](make) -> Void in
-                    make.width.equalTo(110)
-                    make.height.equalTo(169)
-                    make.top.equalTo(MGScreenHeight*0.15)
-                    make.centerX.equalTo(self!)
+                    if let strongSelf = self {
+                        make.width.equalTo(110)
+                        make.height.equalTo(169)
+                        make.top.equalTo(MGScreenHeight*0.15)
+                        make.centerX.equalTo(strongSelf)
+                    }
+                    
                 }
             }
             
@@ -174,9 +182,11 @@ private extension AdLaunchView {
             if let logoLabel = logoLabel {
                 addSubview(logoLabel)
                 logoLabel.snp.makeConstraints { [weak self](make) -> Void in
+                    if let strongSelf = self {
+                        make.bottom.equalTo(strongSelf).offset(-MGScreenHeight*0.08)
+                        make.centerX.equalTo(strongSelf)
+                    }
                     
-                    make.bottom.equalTo(self!).offset(-MGScreenHeight*0.08)
-                    make.centerX.equalTo(self!)
                 }
             }
             

@@ -25,16 +25,32 @@ class WOWProductDetailPriceCell: UITableViewCell {
         
     }
     func showData(_ model:WOWProductModel?){
-        let discoutStr  = "5.5折"
-        let labelStr    = "冬季促销"
-        lbDiscount.text = discoutStr.get_formted_Space()
-        lbLabel.text    = labelStr.get_formted_Space()
-        if discoutStr.isEmpty {
-            
-            lbDiscount.isHidden       = true
-            LeftConstraint.constant = 0
-            
+        lbDiscount.isHidden         = true
+        lbLabel.isHidden            = true
+        if let discount = model?.discount {
+            lbDiscount.isHidden  = false
+            lbDiscount.text      = (discount + "折").get_formted_Space()
+        }else {
+            lbDiscount.isHidden = true
+            lbDiscount.text = ""
         }
+        for singModel in model?.sings ?? []{
+            switch singModel.id ?? 0{
+            case 4:
+                
+                lbLabel.isHidden  = false
+                lbLabel.text      = singModel.desc?.get_formted_Space()
+            default: break
+            }
+        }
+        if lbDiscount.isHidden && !lbLabel.isHidden{
+            
+            self.LeftConstraint.constant = 0
+            
+        }else {
+            LeftConstraint.constant = 5
+        }
+       
 
         nameLabel.text = model?.productTitle ?? ""
         if let price = model?.sellPrice {

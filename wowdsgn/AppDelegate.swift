@@ -227,7 +227,7 @@ extension AppDelegate{
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = 49      //247到254是SKU 2 42
-        window?.rootViewController = vc
+//        window?.rootViewController = vc
     }
     
 

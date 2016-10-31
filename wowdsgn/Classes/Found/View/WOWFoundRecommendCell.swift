@@ -175,10 +175,13 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         }
         
         btn.snp.makeConstraints { [weak self](make) -> Void in
-            make.width.equalTo(32)
-            make.height.equalTo(32)
-            make.bottom.equalTo(self!).offset(-(offSet + 1).h)
-            make.right.equalTo(self!).offset(-offSet.w)
+            if let strongSelf = self {
+                make.width.equalTo(32)
+                make.height.equalTo(32)
+                make.bottom.equalTo(strongSelf).offset(-(offSet + 1).h)
+                make.right.equalTo(strongSelf).offset(-offSet.w)
+            }
+            
         }
         WOWClickLikeAction.requestFavoriteProduct(productId: self.product?.productId ?? 0,view: self.contentView,btn: btn, isFavorite: { [weak self](isFavorite) in
 

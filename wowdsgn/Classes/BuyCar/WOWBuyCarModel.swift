@@ -99,6 +99,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         productStatus                        <- map["productStatus"]
         productStatusName                    <- map["productStatusName"]
         isSelected                           <- map["isSelected"]
+        isPromotion                          <- map["isPromotion"]
         specName                             <- map["specName"]
         attributes                           <- map["attributes"]
     }

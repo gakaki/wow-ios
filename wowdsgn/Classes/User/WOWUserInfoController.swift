@@ -319,8 +319,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
         default:break
         }
         toVC.setBackMyClosure {[weak self] (str:String) in
-            
-            self!.loginSuccess()
+            if let strongSelf = self {
+                strongSelf.loginSuccess()
+
+            }
         }
     }
     deinit{
@@ -435,12 +437,14 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         picker.dismiss(animated: true, completion: nil)
 
         WOWUploadManager.upload(image, successClosure: { [weak self](result) in
-            
-            
-                self!.headImageUrl = (result as? String) ?? ""
-                self!.request()
+            if let strongSelf = self {
+                strongSelf.headImageUrl = (result as? String) ?? ""
+                strongSelf.request()
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                 print(result)
+            }
+            
+            
             
             }) { (errorMsg) in
                 

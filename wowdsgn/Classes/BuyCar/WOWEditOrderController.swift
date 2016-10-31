@@ -28,6 +28,9 @@ class WOWEditOrderController: WOWBaseViewController {
     var orderCode                       = String()
     var couponModel                     :WOWCouponModel?
     
+    //是否有可用优惠券
+    var isCanCoupon                     = true
+    
     fileprivate var tipsTextField           : HolderTextView!
 
     override func viewDidLoad() {
@@ -75,6 +78,28 @@ class WOWEditOrderController: WOWBaseViewController {
 
     }
     
+    func configData() {
+        let coupon = WOWCouponModel.init()
+        coupon.id = orderSettle?.endUserCouponId
+        coupon.deduction = orderSettle?.deduction
+        couponModel = coupon
+        let result = WOWCalPrice.calTotalPrice([orderSettle?.totalAmount ?? 0],counts:[1])
+        
+        //判断是否有促销产品
+        isCanCoupon = true
+        if let orderInfo = orderSettle?.orderSettles{
+            for product in orderInfo {
+                if product.isPromotion ?? false {
+                    isCanCoupon = false
+                    break
+                }
+            }
+        }
+        
+        totalPriceLabel.text = result
+        tableView.reloadData()
+
+    }
     /**
      跳转订单详情
      
@@ -136,15 +161,8 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(JSONObject:result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
+                strongSelf.configData()
                 
-                let coupon = WOWCouponModel.init()
-                coupon.id = strongSelf.orderSettle?.endUserCouponId
-                coupon.deduction = strongSelf.orderSettle?.deduction
-                strongSelf.couponModel = coupon
-                let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
-
-                strongSelf.totalPriceLabel.text = result
-                strongSelf.tableView.reloadData()
             }
             
             }) { (errorMsg) in
@@ -161,14 +179,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
                 
-                let coupon = WOWCouponModel.init()
-                coupon.id = strongSelf.orderSettle?.endUserCouponId
-                coupon.deduction = strongSelf.orderSettle?.deduction
-                strongSelf.couponModel = coupon
-                
-                let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
-                strongSelf.totalPriceLabel.text = result
-                strongSelf.tableView.reloadData()
+                strongSelf.configData()
             }
             
         }) { (errorMsg) in
@@ -178,6 +189,12 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求创建订单
     func requestOrderCreat() -> Void {
+        //下单前判断一下是否已经生成订单号，如果已经生成了则直接弹窗
+        guard orderCode.isEmpty else {
+            chooseStyle()
+            return
+        }
+        
         var params = [String: AnyObject]()
         // 截取两位小数点，确保金额正确
         
@@ -259,6 +276,13 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //立即支付创建订单
     func requestBuyNowOrderCreat() -> Void {
+        
+        //下单前判断一下是否已经生成订单号，如果已经生成了则直接弹窗
+        guard orderCode.isEmpty else {
+            chooseStyle()
+            return
+        }
+        
         var params              = [String: AnyObject]()
         let totalAmount         = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
         let product_id          = productId ?? 0
@@ -473,7 +497,14 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
             vc.entrance = couponEntrance.orderEntrance
             vc.couponModel = couponModel
-            vc.minAmountLimit = orderSettle?.productTotalAmount
+            //如果没有促销商品就可以选择优惠券。如果有促销商品就不能选择优惠券
+            if isCanCoupon {
+                vc.minAmountLimit = orderSettle?.productTotalAmount
+
+            }else {
+                //暂时这样写吧。
+                vc.minAmountLimit = 0
+            }
             //从优惠券返回的时候要重新更新减得金额
             vc.action = {[weak self] (model:AnyObject) in
                 if let strongSelf = self {

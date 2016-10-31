@@ -100,12 +100,13 @@ class WOWProductModel: WOWBaseModel,Mappable{
         attributes                  <- map["attributes"]
         availableStock              <- map["availableStock"]
         hasStock                    <- map["hasStock"]
-        if let sellPrice = sellPrice , let originalprice = originalprice {
-            
-            if !(sellPrice >= originalprice || sellPrice == 0 || originalprice == 0) {
-                discount = String.init(format: "%.1f", sellPrice * 10/originalprice)
-            }
-        }
+        // 前端自己算的 折扣数  暂时废弃，放到后台
+//        if let sellPrice = sellPrice , let originalprice = originalprice {
+//            
+//            if !(sellPrice >= originalprice || sellPrice == 0 || originalprice == 0) {
+//                discount = String.init(format: "%.1f", sellPrice * 10/originalprice)
+//            }
+//        }
     }
     
     /// 商品列表瀑布流需要用的高度

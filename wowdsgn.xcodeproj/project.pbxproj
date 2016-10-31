@@ -1644,11 +1644,11 @@
 		2D509A0E1DB5D30B0047CD13 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2D509A431DB5D3120047CD13 /* WOWSearchChildController.swift */,
 				2D509A101DB5D30B0047CD13 /* WOWController.swift */,
 				2D509A0F1DB5D30B0047CD13 /* WOWCommentController.swift */,
 				2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */,
 				2D509A121DB5D30B0047CD13 /* WOWSearchController.swift */,
+				2D509A431DB5D3120047CD13 /* WOWSearchChildController.swift */,
 				2D509A501DB5D3120047CD13 /* WOWWebViewController.swift */,
 			);
 			path = Controller;

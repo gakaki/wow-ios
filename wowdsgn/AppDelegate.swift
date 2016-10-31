@@ -224,10 +224,10 @@ extension AppDelegate{
 //        window?.rootViewController = UINavigationController(rootViewController: VCShopping())
         
 //        window?.rootViewController =  VCCategoryProducts()
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
-        vc.hideNavigationBar = true
-        vc.productId = 49      //247到254是SKU 2 42
-        window?.rootViewController = vc
+//        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
+//        vc.hideNavigationBar = true
+//        vc.productId = 49      //247到254是SKU 2 42
+//        window?.rootViewController = vc
     }
     
 

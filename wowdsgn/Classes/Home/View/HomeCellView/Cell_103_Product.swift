@@ -7,10 +7,18 @@
 //
 
 import UIKit
-
+protocol cell_801_delegate:class {
+    // 跳转专题详情代理
+    func goToProcutDetailVCWith_801(_ productId: Int?)
+}
 class Cell_103_Product: UITableViewCell {
-    var cardCount:Int = 0
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 801 // 今日单品倒计时
+    }
 
+    var cardCount:Int = 0
+    weak var delegate : cell_801_delegate?
     var isConfigCellUI :Bool = false
     var dataSourceArray:[WOWProductModel]?{
         didSet{
@@ -75,8 +83,13 @@ class Cell_103_Product: UITableViewCell {
             
             v.imgVieww.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
             v.imgVieww.isUserInteractionEnabled = true
-            v.imgVieww.addTapGesture(action: { (self) in
-                print("111")
+            v.imgVieww.addTapGesture(action: {[weak self] (make) in
+                if let strongSelf = self {
+                if let dev = strongSelf.delegate{
+                    dev.goToProcutDetailVCWith_801(model.productId)
+                }
+              }
+            
             })
             
             if let price = model.sellPrice {
@@ -100,13 +113,23 @@ class Cell_103_Product: UITableViewCell {
     
             })
         }
+        pagingScrollView.scrollView.delegate = self
         pagingScrollView.scrollView.contentSize = CGSize(width: cardSize.width*pagingScrollView.cardCount, height: cardSize.height)
 
     }
-    override func setSelected(_ selected: Bool, animated: Bool) {
+       override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
+}
+extension Cell_103_Product:UIScrollViewDelegate{
+    //scrollView滚动完毕后触发
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        //获取当前偏移量
+//        let offset = scrollView.contentOffset.x
+//        print(offset)
+    }
+
 }

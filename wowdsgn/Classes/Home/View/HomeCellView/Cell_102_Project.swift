@@ -13,6 +13,11 @@ protocol cell_102_delegate:class {
 }
 // 专题 cell
 class Cell_102_Project: UITableViewCell {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 102  //专题
+    }
+
     weak var delegate : cell_102_delegate?
     @IBOutlet weak var lbTitle: UILabel!
     var dataArr:[WOWCarouselBanners]?{

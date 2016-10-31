@@ -122,6 +122,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         lbNew.isHidden              = true
         lbDiscount.isHidden         = true
         lbLabel.isHidden            = true
+
         if let discount = model.discount {
             lbDiscount.isHidden  = false
             lbDiscount.text      = (discount + "折").get_formted_Space()
@@ -137,7 +138,9 @@ class WOWGoodsSmallCell: UICollectionViewCell {
                 lbLabel.text      = singModel.desc
             case 3:
                 lbNew.isHidden = false
-                
+            case 2:
+                lbDiscount.isHidden = false
+                lbDiscount.text     = ((singModel.desc ?? "") + "折").get_formted_Space()
             default: break
             }
         }

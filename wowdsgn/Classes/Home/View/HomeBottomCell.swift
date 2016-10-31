@@ -174,18 +174,20 @@ class HomeBottomCell: UITableViewCell {
         lbNew.isHidden              = true
         lbDiscount.isHidden         = true
         lbPromote.isHidden          = true
-        if let discount = model.discount {
-            lbDiscount.isHidden  = false
-            lbDiscount.text      = (discount + "折").get_formted_Space()
-        }
+//        if let discount = model.discount {
+//            lbDiscount.isHidden  = false
+//            lbDiscount.text      = (discount + "折").get_formted_Space()
+//        }
         for singModel in model.sings ?? []{
             switch singModel.id ?? 0{
             case 4:
-                
                 lbPromote.isHidden  = false
                 lbPromote.text      = singModel.desc?.get_formted_Space()
             case 3:
-                lbNew.isHidden = false
+                lbNew.isHidden      = false
+            case 2:
+                lbDiscount.isHidden = false
+                lbDiscount.text     = ((singModel.desc ?? "") + "折").get_formted_Space()
             default: break
             }
         }

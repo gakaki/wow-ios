@@ -82,6 +82,7 @@ class Cell_103_Product: UITableViewCell {
             if let price = model.sellPrice {
                 let result = WOWCalPrice.calTotalPrice([price],counts:[1])
                  v.priceLabel.text     = result//千万不用格式化了
+                 v.originalpriceLabel.setStrokeWithText("")
                 if let originalPrice = model.originalprice {
                     if originalPrice > price{
                         //显示下划线
@@ -89,11 +90,8 @@ class Cell_103_Product: UITableViewCell {
                         
                         v.originalpriceLabel.setStrokeWithText(result)
                     }
-                }else {
-                    v.originalpriceLabel.setStrokeWithText("")
                 }
             }
-
             v.snp.makeConstraints({ (make) in
                 
                 make.top.bottom.equalTo(pagingScrollView)

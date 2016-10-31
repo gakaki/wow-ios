@@ -25,9 +25,9 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         
         switch moduleType! {
         case 101://顶部轮播
-            moduleContent         <- map["moduleContent"]
+            moduleContent           <- map["moduleContent"]
         case 201://单个图片
-            moduleContent         <- map["moduleContent"]
+            moduleContent           <- map["moduleContent"]
         case 601://产品列表CollectionView
             moduleContentList       <- map["moduleContent"]
             moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
@@ -37,14 +37,14 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
             moduleContentList       <- map["moduleContent"]
             
         case 402:// 自定义产品组
-            moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
-            moduleContentProduct     <- map["moduleContent"]
+            moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
+            moduleContentProduct        <- map["moduleContent"]
         case 102:// 专题列表
-            moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
-            moduleContent            <- map["moduleContent"]
+            moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
+            moduleContent               <- map["moduleContent"]
         case 801:// 今日单品
-            moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
-            moduleContentProduct     <- map["moduleContent"]
+            moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
+            moduleContentProduct        <- map["moduleContent"]
         default:
             break
         }
@@ -79,7 +79,8 @@ class WOWHomeAdditionalInfo: WOWBaseModel,Mappable {
 }
 class WOWHomeProduct_402_Info: WOWBaseModel,Mappable {
     // 701  imageUrl:背景图片地址  title：标题
-    
+    var id                      :       Int?
+    var name                    :       String?
     var products                :       [WOWProductModel]?
     
     

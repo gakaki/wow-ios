@@ -619,7 +619,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
                 switch model.moduleType ?? 0 {
                 case 402:
                     
-                    return WOW_Cell_402_Hearder(title: model.moduleAdditionalInfo?.title ?? "居家好物")
+                    return WOW_Cell_402_Hearder(title: model.moduleContentProduct?.name ?? "居家好物")
                     
                 default:
                     

@@ -331,7 +331,7 @@
                 <outlet property="twoBtn" destination="yP7-tK-paf" id="tMX-aM-z8D"/>
                 <outlet property="twoLb" destination="lC1-bw-FXV" id="0EA-6X-KjI"/>
             </connections>
-            <point key="canvasLocation" x="-143" y="461"/>
+            <point key="canvasLocation" x="-188" y="455"/>
         </tableViewCell>
     </objects>
     <resources>

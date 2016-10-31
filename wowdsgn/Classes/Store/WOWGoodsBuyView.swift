@@ -60,7 +60,8 @@ class WOWBuyBackView: UIView {
         backClear.frame = CGRect(x: 0,y: self.h,width: self.w,height: self.h)
         addSubview(backClear)
 //        buyView.productSpecModel = productSpec
-        buyView.configDefaultData()
+//        buyView.configDefaultData()
+        buyView.selectSpec = false
         backClear.addSubview(buyView)
         switch entrance {
         case .addEntrance:
@@ -179,6 +180,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         
         
         defaultSetup()
+        configDefaultData()
 
     }
     lazy var layout: UICollectionViewLeftAlignedLayout = {
@@ -209,6 +211,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     
     func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
+            
             productSpecModel = p
             if let productArray = p.products {
                 for product in productArray {

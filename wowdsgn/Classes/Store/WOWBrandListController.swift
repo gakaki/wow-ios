@@ -144,8 +144,11 @@ class WOWBrandListController: WOWBaseViewController {
                 strongSelf.tableView.reloadData()
 
             }
-        }) {(errorMsg) in
-            self.endRefresh()
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+
+            }
         }
     }
 }

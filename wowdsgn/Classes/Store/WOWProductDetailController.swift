@@ -410,6 +410,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             productModel?.sellPrice = productInfo.sellPrice
             productModel?.originalprice = productInfo.originalprice
             productModel?.sings = productInfo.sings
+            productModel?.discount = productInfo.discount
             if imgUrlArr.count >= 1 {
                 imgUrlArr[0] = productInfo.productImg ?? ""
             }

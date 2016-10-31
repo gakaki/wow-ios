@@ -34,7 +34,6 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var pageModuleType        :   Int?
     
     var productStatus         : Int?
-    var tag                   : String?
     var sings                 : [WOWProductSings]?
    dynamic var timeoutSeconds : Int = 0
     var favorite              : Bool?
@@ -86,7 +85,6 @@ class WOWProductModel: WOWBaseModel,Mappable{
         pageModuleType          <- map["pageModuleType"]
 
         productStatus                        <- map["productStatus"]
-        tag                     <- map["tag"]
         sings                   <- map["signs"]
         timeoutSeconds          <- map["timeoutSeconds"]
 

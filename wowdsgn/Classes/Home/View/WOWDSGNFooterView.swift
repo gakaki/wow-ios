@@ -20,9 +20,12 @@ class WOWDSGNFooterView: UIView {
         img.image = UIImage(named: "wowdsgn")
         self.addSubview(img)
         img.snp.makeConstraints { [weak self](make) -> Void in
-            make.width.equalTo(97)
-            make.height.equalTo(10)
-            make.center.equalTo(self!)
+            if let strongSelf = self {
+                make.width.equalTo(97)
+                make.height.equalTo(10)
+                make.center.equalTo(strongSelf)
+            }
+            
         }
     }
     

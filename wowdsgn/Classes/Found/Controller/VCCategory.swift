@@ -85,8 +85,10 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         }
             .throttle(0.1, scheduler: MainScheduler.instance)
         .subscribe(onNext: {[weak self]cid,tab_index in
-            
-            self!.refreshSubView(tab_index)
+            if let strongSelf = self {
+                strongSelf.refreshSubView(tab_index)
+
+            }
         })
         
 
@@ -144,9 +146,12 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         self.view.addSubview(v_bottom.magicView)
         
         v_bottom.magicView.snp.makeConstraints { [weak self](make) -> Void in
-            make.width.equalTo(self!.view)
-            make.top.equalTo(self!.cv.snp.bottom)
-            make.bottom.equalTo(self!.view.snp.bottomMargin)
+            if let strongSelf = self {
+                make.width.equalTo(strongSelf.view)
+                make.top.equalTo(strongSelf.cv.snp.bottom)
+                make.bottom.equalTo(strongSelf.view.snp.bottomMargin)
+            }
+            
         }
         
         v_bottom.magicView.reloadData()

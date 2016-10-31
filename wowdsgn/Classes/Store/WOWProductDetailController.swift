@@ -312,10 +312,11 @@ class WOWProductDetailController: WOWBaseViewController {
     //    用户是否喜欢单品
     func requestIsFavoriteProduct() -> Void {
         WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteProduct(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
-            //            if let strongSelf = self{
-            let favorite = JSON(result)["favorite"].bool
-            self!.likeButton.isSelected = favorite ?? false
-            //            }
+            if let strongSelf = self{
+                let favorite = JSON(result)["favorite"].bool
+                strongSelf.likeButton.isSelected = favorite ?? false
+            
+            }
         }) {(errorMsg) in
             
         }
@@ -408,6 +409,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             productModel?.productTitle = productInfo.productTitle
             productModel?.sellPrice = productInfo.sellPrice
             productModel?.originalprice = productInfo.originalprice
+            productModel?.sings = productInfo.sings
             if imgUrlArr.count >= 1 {
                 imgUrlArr[0] = productInfo.productImg ?? ""
             }

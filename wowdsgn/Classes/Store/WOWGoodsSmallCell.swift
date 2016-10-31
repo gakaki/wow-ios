@@ -122,10 +122,14 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         lbNew.isHidden              = true
         lbDiscount.isHidden         = true
         lbLabel.isHidden            = true
-//        if let discount = model.discount {
-//            lbDiscount.isHidden  = false
-//            lbDiscount.text      = (discount + "折").get_formted_Space()
-//        }
+
+        if let discount = model.discount {
+            lbDiscount.isHidden  = false
+            lbDiscount.text      = (discount + "折").get_formted_Space()
+        }else {
+            lbDiscount.isHidden = true
+            lbDiscount.text = ""
+        }
         for singModel in model.sings ?? []{
             switch singModel.id ?? 0{
             case 4:
@@ -144,6 +148,8 @@ class WOWGoodsSmallCell: UICollectionViewCell {
           
             self.LeftConstraint.constant = 0
            
+        }else {
+            LeftConstraint.constant = 5
         }
     }
 

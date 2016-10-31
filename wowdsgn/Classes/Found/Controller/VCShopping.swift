@@ -47,7 +47,10 @@ class VCShopping: WowBaseVCCartSearch {
         self.view.addSubview(v.magicView)
         
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
-            make.size.equalTo(self!.view)
+            if let strongSelf = self {
+                make.size.equalTo(strongSelf.view)
+
+            }
         }
 
         

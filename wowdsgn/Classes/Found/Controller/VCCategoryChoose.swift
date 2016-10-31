@@ -36,19 +36,24 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             self.addSubview(label_name)
             
             pictureImageView.snp.makeConstraints {[weak self] (make) -> Void in
-                make.top.equalTo(self!.snp.top)
-                make.width.equalTo(self!.snp.width)
-                make.height.equalTo(self!.snp.width)
+                if let strongSelf = self {
+                    make.top.equalTo(strongSelf.snp.top)
+                    make.width.equalTo(strongSelf.snp.width)
+                    make.height.equalTo(strongSelf.snp.width)
+                }
+                
             }
             
             label_name.snp.makeConstraints {[weak self] (make) -> Void in
-                
-                self!.label_name.font             = UIFont.systemFont(ofSize: 12)
-                self!.label_name.textAlignment    = NSTextAlignment.center
-                
-                make.width.equalTo(self!.snp.width)
-                make.height.equalTo(20)
-                make.top.equalTo(self!.pictureImageView.snp.bottom).offset(1)
+                if let strongSelf = self {
+                    strongSelf.label_name.font             = UIFont.systemFont(ofSize: 12)
+                    strongSelf.label_name.textAlignment    = NSTextAlignment.center
+                    
+                    make.width.equalTo(strongSelf.snp.width)
+                    make.height.equalTo(20)
+                    make.top.equalTo(strongSelf.pictureImageView.snp.bottom).offset(1)
+                    
+                }
                 
             }
         }
@@ -95,24 +100,29 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             self.addSubview(v_black_r)
 
             label_name.snp.makeConstraints { [weak self](make) -> Void in
-                
-               self!.label_name.font             = UIFont.systemFont(ofSize: 14)
-                self!.label_name.textColor        = UIColor.black
-                self!.label_name.textAlignment    = .center
-          
-                make.width.equalTo(self!.snp.width)
-                make.height.equalTo(15.h)
-                make.center.equalTo(self!.snp.center)
+                if let strongSelf = self {
+                    strongSelf.label_name.font             = UIFont.systemFont(ofSize: 14)
+                    strongSelf.label_name.textColor        = UIColor.black
+                    strongSelf.label_name.textAlignment    = .center
+                    
+                    make.width.equalTo(strongSelf.snp.width)
+                    make.height.equalTo(15.h)
+                    make.center.equalTo(strongSelf.snp.center)
+                }
+               
                 
             }
             
             v_black_r.snp.makeConstraints {[weak self] (make) -> Void in
-                self!.v_black_r.backgroundColor = UIColor.black
-                make.width.equalTo(4.w)
-                make.height.equalTo(18.w)
-                make.right.equalTo(self!.snp.right)
-                make.centerY.equalTo(self!.snp.centerY)
-                self!.v_black_r.isHidden = true
+                if let strongSelf = self {
+                    strongSelf.v_black_r.backgroundColor = UIColor.black
+                    make.width.equalTo(4.w)
+                    make.height.equalTo(18.w)
+                    make.right.equalTo(strongSelf.snp.right)
+                    make.centerY.equalTo(strongSelf.snp.centerY)
+                    strongSelf.v_black_r.isHidden = true
+                }
+                
             }
 
  

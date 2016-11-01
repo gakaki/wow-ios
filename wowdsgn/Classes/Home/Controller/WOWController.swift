@@ -524,7 +524,8 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
         case 801:
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_103, for: indexPath) as! Cell_103_Product
-            cell.dataSourceArray = model.moduleContentProduct?.products
+            let array = model.moduleContentProduct?.products
+            cell.dataSourceArray = array
             cell.delegate = self
             return cell
         case 402:

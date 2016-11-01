@@ -16,6 +16,8 @@ class WOWOrderDetailNewCell: UITableViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var goodsNumber: UILabel!
+    
+    @IBOutlet weak var singsTagView: TagListView!
     var orderNewDetailModel : WOWNewOrderDetailModel?
 
     override func awakeFromNib() {
@@ -27,9 +29,13 @@ class WOWOrderDetailNewCell: UITableViewCell {
         
         let orderProductModel = orderNewDetailModel!.unShipOutOrderItems![indexRow]
 
-        colorLabel.text = orderProductModel.color?.get_formted_Space()
+//        colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
-        
+        singsTagView.textFont = UIFont.systemFont(ofSize: 10)
+        for sing in orderProductModel.attributes ?? [""]{
+            singsTagView.addTag(sing)
+          
+        }
         titleImageView.set_webimage_url(orderProductModel.specImg!)
         
         
@@ -39,7 +45,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
         priceLabel.text = result
         goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
 
-        contentLabel.text = orderProductModel.specName?.get_formted_Space()
+//        contentLabel.text = orderProductModel.specName?.get_formted_Space()
 
         
         
@@ -48,16 +54,20 @@ class WOWOrderDetailNewCell: UITableViewCell {
         orderNewDetailModel = m
         let orderProductModel = orderNewDetailModel!.packages![indexSection].orderItems![indexRow]
 
-        colorLabel.text = orderProductModel.color?.get_formted_Space()
+//        colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
-        
+        singsTagView.textFont = UIFont.systemFont(ofSize: 10)
+        for sing in orderProductModel.attributes ?? [""]{
+            singsTagView.addTag(sing)
+        }
+
         titleImageView.set_webimage_url(orderProductModel.specImg!)
 
         
         priceLabel.text = (orderProductModel.sellPrice)!.toString.get_formted_price()
         goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
 
-        contentLabel.text = orderProductModel.specName?.get_formted_Space()
+//        contentLabel.text = orderProductModel.specName?.get_formted_Space()
 
 
         

@@ -66,7 +66,7 @@ class PagingScrollView: UIView {
         v.isPagingEnabled = true
         v.showsVerticalScrollIndicator = false
         v.showsHorizontalScrollIndicator = false
-        v.delegate = self
+//        v.delegate = self
         return v
     }()
     
@@ -101,19 +101,13 @@ class PagingScrollView: UIView {
     
     open lazy var pageControl:UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.isUserInteractionEnabled = false
-        pageControl.autoresizingMask = UIViewAutoresizing(rawValue: UInt(0))
+//        pageControl.isUserInteractionEnabled = true
+//        pageControl.autoresizingMask = UIViewAutoresizing(rawValue: UInt(0))
         pageControl.currentPageIndicatorTintColor = UIColor.black
         pageControl.pageIndicatorTintColor = UIColor(hexString: "000000", alpha: 0.2)!
         return pageControl
     }()
-
+  
 }
-extension PagingScrollView:UIScrollViewDelegate{
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-       
-        let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
-        //设置pageController的当前页
-        pageControl.currentPage = page
-    }}
+  

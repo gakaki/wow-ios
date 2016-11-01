@@ -115,9 +115,23 @@ class Cell_103_Product: UITableViewCell {
         }
         pagingScrollView.scrollView.delegate = self
         pagingScrollView.scrollView.contentSize = CGSize(width: cardSize.width*pagingScrollView.cardCount, height: cardSize.height)
-
+        pagingScrollView.pageControl.addTarget(self, action: #selector(pageChanged),
+                                                   for: UIControlEvents.valueChanged)
+    
     }
-       override func setSelected(_ selected: Bool, animated: Bool) {
+    //点击页控件时事件处理
+    func pageChanged(sender:UIPageControl) {
+        //根据点击的页数，计算scrollView需要显示的偏移量
+                var frame =  pagingScrollView.scrollView.frame
+                frame.origin.x = frame.size.width * CGFloat(sender.currentPage)
+                frame.origin.y = 0
+                //展现当前页面内容
+//                 pagingScrollView.scrollView.scrollRectToVisible(frame, animated:true)
+        pagingScrollView.scrollView.setContentOffset(frame.origin, animated: true)
+    }
+    
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -127,9 +141,25 @@ class Cell_103_Product: UITableViewCell {
 extension Cell_103_Product:UIScrollViewDelegate{
     //scrollView滚动完毕后触发
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        //获取当前偏移量
-//        let offset = scrollView.contentOffset.x
-//        print(offset)
-    }
 
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+        //设置pageController的当前页
+        pagingScrollView.pageControl.currentPage = page
+//        print(page)
+//        if page == 0 {
+//            scrollView.scrollRectToVisible(CGRect.init(x: MGScreenWidth * 8 , y: 0, w: MGScreenWidth, h: 210), animated: false)
+//            
+//        }
+//            
+//        else if page == (dataSourceArray?.count)! + 1 {
+//            
+//            //如果是最后+1,也就是要开始循环的第一个
+//             scrollView.scrollRectToVisible(CGRect.init(x: MGScreenWidth , y: 0, w: MGScreenWidth, h: 210), animated: false)
+//        
+//            
+//        }
+    }
 }

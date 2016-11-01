@@ -27,22 +27,34 @@ class WOWProductDetailPriceCell: UITableViewCell {
     func showData(_ model:WOWProductModel?){
         lbDiscount.isHidden         = true
         lbLabel.isHidden            = true
-        if let discount = model?.discount {
-            lbDiscount.isHidden  = false
-            lbDiscount.text      = (discount + "折").get_formted_Space()
-        }else {
-            lbDiscount.isHidden = true
-            lbDiscount.text = ""
-        }
         for singModel in model?.sings ?? []{
             switch singModel.id ?? 0{
             case 4:
                 
                 lbLabel.isHidden  = false
-                lbLabel.text      = singModel.desc?.get_formted_Space()
+                lbLabel.text      = singModel.desc
+            case 2:
+                lbDiscount.isHidden = false
+                lbDiscount.text     = ((singModel.desc ?? "") + "折").get_formted_Space()
             default: break
             }
         }
+//        if let discount = model?.discount {
+//            lbDiscount.isHidden  = false
+//            lbDiscount.text      = (discount + "折").get_formted_Space()
+//        }else {
+//            lbDiscount.isHidden = true
+//            lbDiscount.text = ""
+//        }
+//        for singModel in model?.sings ?? []{
+//            switch singModel.id ?? 0{
+//            case 4:
+//                
+//                lbLabel.isHidden  = false
+//                lbLabel.text      = singModel.desc?.get_formted_Space()
+//            default: break
+//            }
+//        }
         if lbDiscount.isHidden && !lbLabel.isHidden{
             
             self.LeftConstraint.constant = 0

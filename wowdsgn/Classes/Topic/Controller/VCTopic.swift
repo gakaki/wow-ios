@@ -78,6 +78,7 @@ class VCTopicHeaderView:UICollectionReusableView{
             make.width.equalTo( self.frame.width * 0.9 )
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(label_name.snp.bottom).offset(5)
+            make.bottom.equalTo(self.snp.bottom).offset(-30)
         }
         
 //        view_line.snp.makeConstraints { (make) -> Void in
@@ -101,7 +102,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     var vo_products             = [WOWProductModel]()
     let cell_reuse              = "cell_reuse"
     let cell_header_reuse       = "cell_header_reuse"
-    let header_height           = Float(440)
+    var header_height           = Float(440)
 
     var topic_id                = 4
     var vo_topic:WOWModelVoTopic?
@@ -159,6 +160,9 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                         let r                             =  JSON(result)
                         strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(JSONObject:r["productList"].arrayObject) ?? [WOWProductModel]()
                         
+                        //这个要自适应header高度。暂时先这样获取吧。想到更好的办法之后再换
+                        strongSelf.header_height = Float(strongSelf.vo_topic?.topicDesc?.heightWithConstrainedWidth(MGScreenWidth * 0.9, font: UIFont.systemScaleFontSize(14)) ?? 0)
+                        strongSelf.layout.headerHeight = 390 + strongSelf.header_height * 1.56
                         strongSelf.cv.reloadData()
                         strongSelf.endRefresh()
                         
@@ -184,16 +188,24 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         request()
     }
     
-
+    lazy var layout:CollectionViewWaterfallLayout = {
+        let l = CollectionViewWaterfallLayout()
+        l.columnCount = 2
+        l.minimumColumnSpacing = 0
+        l.minimumInteritemSpacing = 0
+        l.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        l.headerHeight = 390
+        return l
+    }()
     
     func config_collectionView(){
         
-        let layout                          = CollectionViewWaterfallLayout()
-        layout.columnCount                  = 2
-        layout.minimumColumnSpacing         = 0
-        layout.minimumInteritemSpacing      = 0
-        layout.sectionInset                 = UIEdgeInsetsMake(0, 0, 0, 0)
-        layout.headerHeight                 = header_height
+//        let layout                          = CollectionViewWaterfallLayout()
+//        layout.columnCount                  = 2
+//        layout.minimumColumnSpacing         = 0
+//        layout.minimumInteritemSpacing      = 0
+//        layout.sectionInset                 = UIEdgeInsetsMake(0, 0, 0, 0)
+//        layout.headerHeight                 = header_height
 
         let cv                              = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell_reuse)
@@ -244,6 +256,8 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 headerView.label_name.text = self.vo_topic?.topicMainTitle
                 headerView.label_desc.text = self.vo_topic?.topicDesc
                 headerView.label_desc.setLineHeightAndLineBreak(1.5)
+             
+//                header_height = headerView.label_desc.getEstimatedHeight()
 //                headerView.label_name.text = "归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋"
 
             }
@@ -256,7 +270,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         
         return reusableView!
     }
-    
+
     
     func collectionView(_ collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:IndexPath) -> CGSize
     {

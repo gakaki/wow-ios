@@ -143,7 +143,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.mj_header = self.mj_header
         tableView.register(UINib.nibName(String(describing: WOWGoodsTypeCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsTypeCell.self))
         tableView.register(UINib.nibName(String(describing: WOWGoodsDetailCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsDetailCell.self))
-        tableView.register(UINib.nibName(String(describing: WOWGoodsParamCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsParamCell.self))
+//        tableView.register(UINib.nibName(String(describing: WOWGoodsParamCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsParamCell.self))
         tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell.self)), forCellReuseIdentifier:String(describing: WOWSenceLikeCell.self))
         tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:String(describing: WOWCommentCell.self))
         tableView.register(UINib.nibName(String(describing: WOWDesignerCell.self)), forCellReuseIdentifier:String(describing: WOWDesignerCell.self))
@@ -306,12 +306,12 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWDesignerCell.self), for:indexPath) as! WOWDesignerCell
             cell.showData(productModel)
             returnCell = cell
-        case 3: //参数
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsParamCell.self), for: indexPath) as! WOWGoodsParamCell
+//        case 3: //参数
+//            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWGoodsParamCell.self), for: indexPath) as! WOWGoodsParamCell
 //            if let att = productModel?.attributes {
 //                cell.showData(att[indexPath.row])
 //            }
-            returnCell = cell
+//            returnCell = cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWSenceLikeCell.self),for: indexPath) as! WOWSenceLikeCell
 //            cell.rightTitleLabel.text = "\(productModel?.likesCount ?? 0)人喜欢"

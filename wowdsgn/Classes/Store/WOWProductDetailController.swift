@@ -415,6 +415,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
                 imgUrlArr[0] = productInfo.productImg ?? ""
             }
             configBanner()
+            requestIsFavoriteProduct()
         }
     }
     

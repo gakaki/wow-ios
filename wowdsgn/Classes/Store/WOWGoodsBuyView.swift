@@ -60,7 +60,8 @@ class WOWBuyBackView: UIView {
         backClear.frame = CGRect(x: 0,y: self.h,width: self.w,height: self.h)
         addSubview(backClear)
 //        buyView.productSpecModel = productSpec
-//        buyView.configDefaultData()
+        buyView.refreshProductInfo()
+        buyView.productSku()
         buyView.selectSpec = false
         backClear.addSubview(buyView)
         switch entrance {
@@ -141,12 +142,12 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     var entrance : carEntrance = carEntrance.addEntrance
     weak var delegate: goodsBuyViewDelegate?
     
-    //产品规格
-    var productSpecModel    : WOWProductSpecModel?
-    //规格数组
+  
+    //规格数组数据源
     var serialAttributeArr  = [WOWSerialAttributeModel]()
-    //sku列表
+    //sku列表数据源
     var skuListArr          = [WOWProductModel]()
+  
     //当前产品
     //各种规格的选择状态
     var seributeDic         = [Int: Bool]()
@@ -177,7 +178,6 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         
         defaultSetup()
         configDefaultData()
@@ -211,8 +211,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     //初始化视图的时候把初始数据赋值
     func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
-            
-            productSpecModel = p
+//            productSpecModel = p
             //循环遍历产品列表，找出当前id对应的sku，如果找不到该商品则默认取数组中第一个。（不知道为什么会娶不到当前的，反正后台是让这么做的）
             if let productArray = p.products {
                 for product in productArray {
@@ -228,13 +227,11 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             
             goodsImageView.borderColor(0.5, borderColor: MGRgb(234, g: 234, b: 234))
             configProductInfo()
+            refreshProductInfo()
             //规格数组
             if let array = p.serialAttribute {
                 serialAttributeArr = array
-            }
-            //产品列表的数组
-            if let array = p.products {
-                skuListArr = array
+                
             }
             //把选出的产品对应的sku选中，😔这个循环太烦了。
             if let attributes = productInfo?.attributes {
@@ -252,6 +249,17 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             productSku()
         }
     }
+    
+    //刷新数据源
+    func refreshProductInfo() {
+        if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
+            //产品列表的数组,保证每次都取最新的产品信息
+            if let array = p.products {
+                skuListArr = array
+            }
+        }
+    }
+    
     /**
      把商品详情显示到视图上
      

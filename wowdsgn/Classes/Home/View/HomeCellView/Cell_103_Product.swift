@@ -145,8 +145,7 @@ class Cell_103_Product: UITableViewCell {
 
         pagingScrollView.scrollView.delegate    = self
         pagingScrollView.scrollView.contentSize = CGSize(width: self.scrollerViewWidth * 3, height: self.scrollerViewHeight)
-        pagingScrollView.pageControl.addTarget(self, action: #selector(pageChanged),
-                                               for: UIControlEvents.valueChanged)
+        
         pagingScrollView.cardCount      =     CGFloat(3)
         pagingScrollView.pagingWidth    =     self.scrollerViewWidth
         pagingScrollView.pagingHeight   =     self.scrollerViewHeight
@@ -186,14 +185,6 @@ class Cell_103_Product: UITableViewCell {
         }
 
     }
-      //点击页控件时事件处理
-    func pageChanged(sender:UIPageControl) {
-        //根据点击的页数，计算scrollView需要显示的偏移量
-        var frame       =  pagingScrollView.scrollView.frame
-        frame.origin.x  = frame.size.width * CGFloat(sender.currentPage)
-        frame.origin.y  = 0
-        pagingScrollView.scrollView.setContentOffset(frame.origin, animated: true)
-    }
     // 重新配置各个页面的信息
     func configureModel(model: WOWProductModel?,v: WOW_SingProductView?){
         for countView in  (v?.view_CountDown?.subviews)! {
@@ -220,7 +211,7 @@ class Cell_103_Product: UITableViewCell {
     }
 
     
-    //每当滚动后重新设置各个 View的数据
+    //每当滚动后重新设置各个 View 的数据
     func resetViewSource() {
         //当前显示的是第一个View
         if self.currentIndex == 0 {

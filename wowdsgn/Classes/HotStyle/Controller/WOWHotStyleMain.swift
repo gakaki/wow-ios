@@ -159,7 +159,8 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
 extension WOWHotStyleMain:WOWHotStyleCellDelegate{
     
     func reloadTableViewDataWithCell(){
-        request()
+//        tableView.reloadData()
+         request()
     }
 
 }

@@ -6,6 +6,7 @@ class WowModulePageVO:Mappable
     var moduleID:Int?
     var moduleType:Int?
     var contentTmp:AnyObject?
+    var name:String = ""
     
     var moduleContentArr:[WowModulePageItemVO]?
     var moduleContentItem:WowModulePageItemVO?

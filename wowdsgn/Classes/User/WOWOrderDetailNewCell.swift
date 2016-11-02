@@ -32,6 +32,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
 //        colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
         singsTagView.textFont = UIFont.systemFont(ofSize: 10)
+        singsTagView.removeAllTags()
         for sing in orderProductModel.attributes ?? [""]{
             singsTagView.addTag(sing)
           
@@ -57,6 +58,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
 //        colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
         singsTagView.textFont = UIFont.systemFont(ofSize: 10)
+          singsTagView.removeAllTags()
         for sing in orderProductModel.attributes ?? [""]{
             singsTagView.addTag(sing)
         }

@@ -100,6 +100,8 @@ class VCFound: VCBaseVCCategoryFound {
                     {
                         if let s  = t.contentTmp!["products"] as? [AnyObject] {
                             t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
+                            t.name = (t.contentTmp!["name"] as? String) ?? ""
+                            
                         }
                     }
                     if t.moduleType == 201
@@ -232,20 +234,21 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        switch (indexPath as NSIndexPath).section {
-        case 0:
-            return getCellHeight(0)
-        case 1:
-            return getCellHeight(1)
-        case 2:
-            return getCellHeight(2)
-        case 3:
-            return 180.w
-        case 4:
-            return getCellHeight(4)
-        default:
-            return 180
-        }
+//        switch (indexPath as NSIndexPath).section {
+//        case 0:
+//            return getCellHeight(0)
+//        case 1:
+//            return getCellHeight(1)
+//        case 2:
+//            return getCellHeight(2)
+//        case 3:
+//            return 180.w
+//        case 4:
+//            return getCellHeight(4)
+//        default:
+          return getCellHeight(indexPath.section)
+//            return 180
+//        }
     }
     
     
@@ -264,28 +267,30 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         l.setLineHeightAndLineBreak(1.25)
         l.textColor     = UIColor.black
         l.font          = UIFont.systemScaleFontSize(14)
-
+        
         var t           = "本周上新"
-        switch section {
-        case 0:
+        let model = self.data[section]
+        switch model.moduleType ?? 0{
+        case 302:
             t           = ""
-        case 1:
-            t           = "本周上新"
-        case 2:
-            t           = ""
-        case 3:
+        case 401:
+            t           = model.name
+        case 501:
             t           = "单品推荐"
-        case 4:
+        case 301:
             t           = "场景"
+
         default:
-            t           = "本周上新"
+            t           = ""
         }
+
+
         l.text          = t
 
         var frame_height            = 65.h
 
         if t == "" {
-            frame_height            = 15.h
+            frame_height            = CGFloat.leastNormalMagnitude
         }
         
         let frame                   = CGRect(x: 0, y: 0, width: frame_width, height: frame_height)
@@ -302,11 +307,16 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
 
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if  section == 0 || section == 2{
-            return 15.h
-        }else{
-            return 65.h
+        let model = self.data[section]
+        switch model.moduleType ?? 0{
+        case 302:
+             return 15.h
+        case 401,501,301:
+             return 65.h
+        default:
+             return CGFloat.leastNormalMagnitude
         }
+
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -365,6 +375,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 cell.delegate       = self
                 cell.selectionStyle = .none
                 cell.setData( d.moduleContentItem! )
+                cell_heights[section]  = cell.heightAll
                 //            cell.btnLike.selected = isFavorite
                 cell.bringSubview(toFront: cell.product_view)
                 

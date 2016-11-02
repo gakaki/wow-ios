@@ -18,6 +18,8 @@ class WOWBrandListController: WOWBaseViewController {
     var dataArray       = [[WOWBrandV1Model]]()
     //有使用Search Controller时，显示的数据源
     var filteredArray = [WOWBrandModel]()
+    
+    var headerIndexsNew  = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -115,7 +117,7 @@ class WOWBrandListController: WOWBaseViewController {
                 
                 strongSelf.dataArray.removeAll()
                 strongSelf.originalArray.removeAll()
-                
+                strongSelf.headerIndexsNew.removeAll()
                 let arr        = JSON(result)["brandVoList"].arrayObject
      
                 if let dataArr = arr{
@@ -125,19 +127,25 @@ class WOWBrandListController: WOWBaseViewController {
                     //循环所有的然后给分组
                     for letter in strongSelf.headerIndexs{
                         let group_row    = brands!.filter{ (brand) in brand.letter == letter }
+                        if group_row.count > 0 {
                             strongSelf.dataArray.append(group_row)
                             strongSelf.originalArray.append(contentsOf: group_row)
-                        
+                       
+                            strongSelf.headerIndexsNew.append(group_row[0].letter ?? "")
+                        }
+
                     }
-                    //for #
-                    let group_row    = brands!.filter{ (brand) in strongSelf.isStringContainsNumber(brand.letter ?? "") == true }
+
                     
-                    strongSelf.dataArray.removeLast()
-                    strongSelf.originalArray.removeLast()
 
-                    strongSelf.dataArray.append(group_row)
-                    strongSelf.originalArray.append(contentsOf: group_row)
+                    //for # 判断是否开头为0-9 归为# 行列
+                    let group_row    = brands!.filter{ (brand) in strongSelf.isStringContainsNumber(brand.letter ?? "") == true }
+                    if group_row.count > 0 {
+                        strongSelf.headerIndexsNew.append("#")
 
+                        strongSelf.dataArray.append(group_row)
+                        strongSelf.originalArray.append(contentsOf: group_row)
+                    }
                     strongSelf.endRefresh()
 
                 }
@@ -156,13 +164,13 @@ class WOWBrandListController: WOWBaseViewController {
 extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     //实现索引数据源代理方法
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return headerIndexs
+        return headerIndexsNew
     }
     
     //点击索引，移动TableView的组位置
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         //遍历索引值
-        for (index,character) in headerIndexs.enumerated(){
+        for (index,character) in headerIndexsNew.enumerated(){
             //判断索引值和组名称相等，返回组坐标
             if character == title{
                 return index
@@ -192,7 +200,7 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return headerIndexs[section]
+        return headerIndexsNew[section]
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

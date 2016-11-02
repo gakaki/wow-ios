@@ -13,6 +13,8 @@ class VCDesignerList: WOWBaseViewController {
     //有使用Search Controller时，显示的数据源
     var filteredArray   = [WOWBrandModel]()
     
+    var headerIndexsNew  = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -114,7 +116,7 @@ class VCDesignerList: WOWBaseViewController {
                 
                 strongSelf.dataArray.removeAll()
                 strongSelf.originalArray.removeAll()
-                
+                strongSelf.headerIndexsNew.removeAll()
                 let arr        = JSON(result)["designerVoList"].arrayObject
                 
                 if let dataArr = arr , let designers = Mapper<WOWDesignerModel>().mapArray(JSONObject:dataArr) {
@@ -122,18 +124,24 @@ class VCDesignerList: WOWBaseViewController {
                     //循环所有的然后给分组
                     for letter in strongSelf.headerIndexs{
                         let group_row    = designers.filter{ (d) in d.designerNameFirstLetter == letter }
+                        if group_row.count > 0 {
+                            
+                            strongSelf.dataArray.append(group_row)
+                            strongSelf.originalArray.append(contentsOf: group_row)
+                       
+                            strongSelf.headerIndexsNew.append(group_row[0].designerNameFirstLetter ?? "")
+                        }
+
+                    }
+                    
+                     //for # 判断是否开头为0-9 归为# 行列
+                    let group_row    = designers.filter{ (d) in strongSelf.isStringContainsNumber(d.designerNameFirstLetter ?? "") == true }
+                    if group_row.count > 0 {
+                        strongSelf.headerIndexsNew.append("#")
+                    
                         strongSelf.dataArray.append(group_row)
                         strongSelf.originalArray.append(contentsOf: group_row)
                     }
-                    //for #
-                    let group_row    = designers.filter{ (d) in strongSelf.isStringContainsNumber(d.designerNameFirstLetter ?? "") == true }
-                    
-                    strongSelf.dataArray.removeLast()
-                    strongSelf.originalArray.removeLast()
-                    
-                    strongSelf.dataArray.append(group_row)
-                    strongSelf.originalArray.append(contentsOf: group_row)
-                    
                     
                 }
                 
@@ -153,13 +161,13 @@ class VCDesignerList: WOWBaseViewController {
 extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
     //实现索引数据源代理方法
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return headerIndexs
+        return headerIndexsNew
     }
     
     //点击索引，移动TableView的组位置
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         //遍历索引值
-        for (index,character) in headerIndexs.enumerated(){
+        for (index,character) in headerIndexsNew.enumerated(){
             //判断索引值和组名称相等，返回组坐标
             if character == title{
                 return index
@@ -189,7 +197,7 @@ extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return headerIndexs[section]
+        return headerIndexsNew[section]
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

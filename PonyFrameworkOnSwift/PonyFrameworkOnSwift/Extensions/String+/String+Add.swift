@@ -29,9 +29,15 @@ public extension String{
      
      - returns:
      */
-    func heightWithConstrainedWidth(_ width: CGFloat, font: UIFont) -> CGFloat {
+    func heightWithConstrainedWidth(_ width: CGFloat, font: UIFont, lineSpace: CGFloat) -> CGFloat {
+        let attributeString = NSMutableAttributedString.init(string: self)
+        let paragraphStyle = NSMutableParagraphStyle.init()
+        paragraphStyle.lineSpacing = lineSpace
+        attributeString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, self.characters.count))
+        attributeString.addAttribute(NSFontAttributeName, value: font, range: NSMakeRange(0, self.characters.count))
         let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox = attributeString.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
+//        let boundingBox = attributeString.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
         return boundingBox.height
     }
     

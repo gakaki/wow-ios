@@ -159,9 +159,8 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                         
                         let r                             =  JSON(result)
                         strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(JSONObject:r["productList"].arrayObject) ?? [WOWProductModel]()
-                        
-                        //这个要自适应header高度。暂时先这样获取吧。想到更好的办法之后再换
-                        strongSelf.header_height = Float(strongSelf.vo_topic?.topicDesc?.heightWithConstrainedWidth(MGScreenWidth * 0.9, font: UIFont.systemScaleFontSize(14)) ?? 0)
+                        //先这样写吧，动态计算label的高度，更改header的高度
+                        strongSelf.header_height = Float(strongSelf.vo_topic?.topicDesc?.heightWithConstrainedWidth(MGScreenWidth * 0.9, font: UIFont.systemScaleFontSize(14), lineSpace: 1.5) ?? 0)
                         strongSelf.layout.headerHeight = 390 + strongSelf.header_height * 1.56
                         strongSelf.cv.reloadData()
                         strongSelf.endRefresh()

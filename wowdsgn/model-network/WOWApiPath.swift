@@ -42,7 +42,7 @@ let URL_senceDetail             = "v1/scene/detail"
 
 //1.1 专题
 let URL_topic                   = "v1/topic"
-let URL_topic_product           = "v1/topic/product"
+let URL_topic_product           = "v2/topic/product"
 
 
 //***********2.商店************

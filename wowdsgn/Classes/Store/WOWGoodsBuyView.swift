@@ -208,18 +208,24 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
  
-    
+    //初始化视图的时候把初始数据赋值
     func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
             
             productSpecModel = p
+            //循环遍历产品列表，找出当前id对应的sku，如果找不到该商品则默认取数组中第一个。（不知道为什么会娶不到当前的，反正后台是让这么做的）
             if let productArray = p.products {
                 for product in productArray {
                     if product.productId == WOWBuyCarMananger.sharedBuyCar.productId {
                         productInfo = product
                     }
                 }
+                
+                if productInfo == nil{
+                    productInfo = productArray[0]
+                }
             }
+            
             goodsImageView.borderColor(0.5, borderColor: MGRgb(234, g: 234, b: 234))
             configProductInfo()
             //规格数组
@@ -230,8 +236,11 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             if let array = p.products {
                 skuListArr = array
             }
+            //把选出的产品对应的sku选中，😔这个循环太烦了。
             if let attributes = productInfo?.attributes {
+                //先遍历产品几种规格的数组，代表有几个可选的类型，比如：颜色，尺寸
                 for proSpec in attributes.enumerated() {
+                    //再把这个产品的颜色、尺寸等去对应所有的颜色，尺寸。如果名字一样的话就置为已选中状态
                     for serial in serialAttributeArr[proSpec.offset].specName {
                         if proSpec.element.attributeValue == serial.specName {
                             serial.isSelect = true
@@ -243,13 +252,18 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             productSku()
         }
     }
-    
+    /**
+     把商品详情显示到视图上
+     
+     */
     func configProductInfo() {
         if let productInfo = productInfo {
             goodsImageView.set_webimage_url(productInfo.productImg)
             nameLabel.text = productInfo.productTitle ?? ""
+            //格式化价格，加上¥。并且保留两位小数
             let result = WOWCalPrice.calTotalPrice([productInfo.sellPrice ?? 0],counts:[1])
             perPriceLabel.text = result
+            //如果有原价的话，就判断原价跟销售价的大小，如果原价大于销售价则显示下划线的原价
             if let originalPrice = productInfo.originalprice {
                 if originalPrice > productInfo.sellPrice{
                     //显示下划线
@@ -261,8 +275,10 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
                     originalPriceLabel.text = ""
                 }
             }
+            //格式化产品的尺寸L-W-H
             sizeTextLabel.text = productSize(productInfo: productInfo)
             weightLabel.text = productWeight(productInfo: productInfo)
+            //这个还要判断下产品的状态，只有在上架的状态下才判断产品有没有库存
             if productInfo.productStatus == 1 {
                 productStock(productInfo.hasStock ?? false)
             }

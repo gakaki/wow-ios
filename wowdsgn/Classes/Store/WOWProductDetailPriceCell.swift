@@ -32,7 +32,7 @@ class WOWProductDetailPriceCell: UITableViewCell {
             case 4:
                 
                 lbLabel.isHidden  = false
-                lbLabel.text      = singModel.desc
+                lbLabel.text      = singModel.desc?.get_formted_Space()
             case 2:
                 lbDiscount.isHidden = false
                 lbDiscount.text     = ((singModel.desc ?? "") + "折").get_formted_Space()

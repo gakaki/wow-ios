@@ -125,6 +125,56 @@ class WOWSearchController: WOWBaseViewController {
         return layout
         
     }()
+    // MARK: - NET
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchHot, successClosure: {[weak self] (result, code) in
+            if let strongSelf = self {
+                let json = JSON(result)
+                let array = json["keywords"].arrayObject
+                if let keyWords = array {
+                    strongSelf.keyWords = keyWords as [AnyObject]
+                    strongSelf.collectionView.reloadData()
+                }
+                
+            }
+        }) { (errorMsg) in
+            
+        }
+    }
+    
+    func requestResult()  {
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""), successClosure: { [weak self](result, code) in
+            let json = JSON(result)
+            DLog(json)
+            
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+                
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
+                if let array = arr{
+                    strongSelf.dataArr = []
+                    if array.isEmpty {
+                        strongSelf.emptyView.isHidden = false
+                        
+                    }else {
+                        strongSelf.dataArr = array
+                        strongSelf.showResult()
+                    }
+                    
+                }else {
+                    strongSelf.emptyView.isHidden = false
+                }
+            }
+            
+        }) {[weak self] (errorMsg) in
+            if self != nil{
+                //                strongSelf.emptyView.hidden = false
+            }
+            
+        }
+        
+    }
 
 //MARK:Private Method
     override func setUI() {
@@ -200,58 +250,8 @@ class WOWSearchController: WOWBaseViewController {
     }
 }
 
-// MARK: - NET
-extension WOWSearchController {
-    override func request() {
-        super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.api_SearchHot, successClosure: {[weak self] (result, code) in
-            if let strongSelf = self {
-                let json = JSON(result)
-                let array = json["keywords"].arrayObject
-                if let keyWords = array {
-                    strongSelf.keyWords = keyWords as [AnyObject]
-                    strongSelf.collectionView.reloadData()
-                }
-                
-            }
-            }) { (errorMsg) in
-                
-        }
-    }
-    
-    func requestResult()  {
-        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""), successClosure: { [weak self](result, code) in
-            let json = JSON(result)
-            DLog(json)
-            
-            if let strongSelf = self {
-                strongSelf.endRefresh()
-                
-                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
-                if let array = arr{
-                    strongSelf.dataArr = []
-                    if array.isEmpty {
-                        strongSelf.emptyView.isHidden = false
 
-                    }else {
-                        strongSelf.dataArr = array
-                        strongSelf.showResult()
-                    }
-                    
-                }else {
-                    strongSelf.emptyView.isHidden = false
-                }
-            }
-            
-        }) {[weak self] (errorMsg) in
-            if self != nil{
-//                strongSelf.emptyView.hidden = false
-            }
-            
-        }
 
-    }
-}
 //MARK:Delegate
 
 extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{

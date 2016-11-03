@@ -209,9 +209,15 @@ class VCFound: VCBaseVCCategoryFound {
             if model.moduleType == 501 {
                 
                 if  let send_obj =  sender.object as? [String:AnyObject] {
-                    
                         model.moduleContentItem?.favorite = send_obj["favorite"] as? Bool
-                        break
+                }
+            }
+            if model.moduleType == 402 {
+                if  let send_obj =  sender.object as? [String:AnyObject] {
+                    
+                    model.moduleContent_402?.products?.ergodicArrayWithProductModel(dic: send_obj)
+            
+                    break
                 }
                 break
             }
@@ -252,7 +258,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
           return getCellHeight(indexPath.section)
 
     }
-    func headerView(title : String) -> UIView? {
+    func headerView(title : String,sectionIndex:Int) -> UIView? {
         
         let frame_width             = MGScreenWidth
         
@@ -288,7 +294,13 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         if t != "" {
             header.addSubview(l)
         }
-        
+        let model = self.data[sectionIndex]
+        if model.moduleType == 402 {
+            let lbBottom = UILabel.initLable(" ", titleColor: UIColor.black, textAlignment: .center, font: 10)
+            lbBottom.frame = CGRect(x: 0, y: frame_height - 1, width: frame_width, height: 0.5)
+            lbBottom.backgroundColor = UIColor.init(hexString: "eaeaea")
+            header.addSubview(lbBottom)
+        }
         return header
 
     }
@@ -307,18 +319,11 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         case 301:
             t           = "场景"
         case 402:
-             t           = model.moduleContent_402?.name ?? "居家好物"
-            let v = Bundle.main.loadNibNamed("WOW_Cell_402_Hearder", owner: self, options: nil)?.last as! WOW_Cell_402_Hearder
-            v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth,height: 65.h)
-            v.lbTitle.text = t
-            return v
-
-           
+            t           = model.moduleContent_402?.name ?? "居家好物"
         default:
             t           = ""
         }
-        
-        return self.headerView(title: t)!
+        return self.headerView(title: t,sectionIndex: section)!
     }
 
     

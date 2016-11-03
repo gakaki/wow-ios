@@ -12,7 +12,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import YYWebImage
 import SwiftyUserDefaults
-
+import wow3rd
 
 //import JSPatch
 //import JSPatchHelper
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var rootVC : UIViewController?
     //    var sideController:WOWSideContainerController!
     var adLaunchView: AdLaunchView?
-
+    let umessage  = AppDelegateUmengHelper()
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window?.makeKeyAndVisible()
@@ -103,9 +103,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    
-    private func application(_ application: UIApplication,  userActivity: NSUserActivity,  restorationHandler: ([AnyObject]?) -> Void) -> Bool
-    {
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+  
         TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
 
         //DeepShare
@@ -121,12 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DLog(d)
             
             WOWHud.showMsg(d)
-
-            if url.host == "qnssl.com" {
-                
-            }else{
-                UIApplication.shared.openURL(url)
-            }
+      
+//            if url.host == "qnssl.com" {
+//                
+//            }else{
+//                UIApplication.shared.openURL(url)
+//            }
             return true
         }
         
@@ -276,6 +277,11 @@ extension AppDelegate{
         
         UMSocialData.setAppKey(WOWID.UMeng.appID)
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
+
+        
+        //友盟推送
+        umessage.init_umessage(launchOptions)
+
         
         WXApi.registerApp(WOWID.Wechat.appID)
     

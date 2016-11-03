@@ -7,6 +7,10 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:fds.so</string>
+		<string>applinks:wowdsgn.com</string>
+		<string>applinks:www.wowdsgn.com</string>
+		<string>applinks:qiniu.com</string>
+		<string>applinks:ofwerpqj6.qnssl.com</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

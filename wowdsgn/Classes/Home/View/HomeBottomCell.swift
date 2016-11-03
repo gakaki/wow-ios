@@ -14,8 +14,12 @@ protocol HomeBottomDelegate:class {
     
 }
 
-class HomeBottomCell: UITableViewCell {
-    
+class HomeBottomCell: UITableViewCell,ModuleViewElement {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 402 // 今日商品推荐
+    }
+    var heightAll:CGFloat = CGFloat.leastNormalMagnitude
     weak var delegate : HomeBottomDelegate?
     @IBOutlet weak var oneBaseView: UIView!
     @IBOutlet weak var twoBaseView: UIView!

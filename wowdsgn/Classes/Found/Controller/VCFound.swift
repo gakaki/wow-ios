@@ -56,6 +56,7 @@ class VCFound: VCBaseVCCategoryFound {
                 print("\(k) = \(c)")
             }
         }
+        
     }
     
 //MARK: PURLL TO REFRESH AND REQUEST
@@ -128,6 +129,20 @@ class VCFound: VCBaseVCCategoryFound {
                             t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(JSONObject:s)
                         }
                     }
+                    if t.moduleType == 402
+                    {
+                        if let s  = t.contentTmp  {
+                            t.moduleContent_402   =  Mapper<WOWHomeProduct_402_Info>().map(JSONObject:s)
+                            t.moduleContent_402?.name = (t.contentTmp!["name"] as? String) ?? ""
+                        }
+                    }
+                    if t.moduleType == 102
+                    {
+                        if let s  = t.contentTmp  {
+                            t.moduleContent_102   =  Mapper<WOWCarouselBanners>().map(JSONObject:s)
+                        }
+                    }
+                                       
                     t.moduleClassName     =  ModulePageType.getIdentifier(t.moduleType!)
                 }
                 
@@ -234,30 +249,16 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-//        switch (indexPath as NSIndexPath).section {
-//        case 0:
-//            return getCellHeight(0)
-//        case 1:
-//            return getCellHeight(1)
-//        case 2:
-//            return getCellHeight(2)
-//        case 3:
-//            return 180.w
-//        case 4:
-//            return getCellHeight(4)
-//        default:
           return getCellHeight(indexPath.section)
-//            return 180
-//        }
+
     }
-    
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func headerView(title : String) -> UIView? {
         
-        let frame_width             = tableView.frame.size.width
+        let frame_width             = MGScreenWidth
         
         let grayView                = UIView(frame: CGRect(x: 0, y: 0, width: frame_width, height: 15.h))
         grayView.backgroundColor    = MGRgb(245, g: 245, b: 245)
+
         
         let l                       = UILabel(frame: CGRect(x: 15.w, y: 15.h, width: 200.w, height: 50.h))
         
@@ -268,41 +269,56 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         l.textColor     = UIColor.black
         l.font          = UIFont.systemScaleFontSize(14)
         
-        var t           = "本周上新"
-        let model = self.data[section]
-        switch model.moduleType ?? 0{
-        case 302:
-            t           = ""
-        case 401:
-            t           = model.name
-        case 501:
-            t           = "单品推荐"
-        case 301:
-            t           = "场景"
-
-        default:
-            t           = ""
-        }
-
-
+        let t           = title
+        
         l.text          = t
-
+        
         var frame_height            = 65.h
-
+        
         if t == "" {
             frame_height            = CGFloat.leastNormalMagnitude
+            
         }
         
         let frame                   = CGRect(x: 0, y: 0, width: frame_width, height: frame_height)
         let header                  = UIView(frame: frame)
         header.backgroundColor      = UIColor.white
         header.addSubview(grayView)
-
+        
         if t != "" {
             header.addSubview(l)
         }
-
+        
         return header
+
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let model = self.data[section]
+        var t           = "本周上新"
+       
+        switch model.moduleType ?? 0{
+        case 302:
+            t           = ""
+        case 401:
+            t           = model.name ?? "本周上新"
+        case 501:
+            t           = "单品推荐"
+        case 301:
+            t           = "场景"
+        case 402:
+             t           = model.moduleContent_402?.name ?? "居家好物"
+            let v = Bundle.main.loadNibNamed("WOW_Cell_402_Hearder", owner: self, options: nil)?.last as! WOW_Cell_402_Hearder
+            v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth,height: 65.h)
+            v.lbTitle.text = t
+            return v
+
+           
+        default:
+            t           = ""
+        }
+        
+        return self.headerView(title: t)!
     }
 
     
@@ -311,10 +327,10 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         switch model.moduleType ?? 0{
         case 302:
              return 15.h
-        case 401,501,301:
+        case 401,501,301,402:
              return 65.h
         default:
-             return CGFloat.leastNormalMagnitude
+             return 15.h
         }
 
     }
@@ -328,7 +344,20 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        let model = data[section]
+        
+        switch model.moduleType ?? 0 {
+        case 402:
+
+            let array = model.moduleContent_402?.products ?? []
+            return (array.count.getParityCellNumber()) > 10 ? 10: (array.count.getParityCellNumber())
+            
+        default:
+            
+            return 1
+            
+        }
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -393,7 +422,45 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 
                 return cell
             }
-            
+            else if ( cell_type == Cell_102_Project.cell_type()) {
+                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
+                cell.dataArr = d.moduleContent_102?.banners
+                cell.lbTitle.text = d.moduleContent_102?.name ?? "专题"
+                cell_heights[section]  = 290.h
+                cell.delegate = self
+                return cell
+
+            }
+            else if ( cell_type == HomeBottomCell.cell_type()) {
+                let model = data[section]
+                
+//                let array =
+                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeBottomCell
+                cell.indexPath = indexPath
+                
+                let OneCellNumber = indexPath.row * 2
+                let TwoCellNumber = ((indexPath.row + 1) * 2) - 1
+                let productsArray = model.moduleContent_402?.products ?? []
+                let lineCellNumber = (productsArray.count.getParityCellNumber()) > 10 ? 10: (productsArray.count.getParityCellNumber())
+                
+                cell_heights[section]  = CGFloat(lineCellNumber * 139)
+                if productsArray.count.isOdd && (indexPath as NSIndexPath).row + 1 == productsArray.count.getParityCellNumber(){ //  满足为奇数 第二个item 隐藏
+                    
+                    self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:productsArray)
+                    
+                }else{
+                    
+                    self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:productsArray)
+                    
+                }
+//                // 排序 0，1，2，3，4...
+                cell.delegate = self
+                cell.selectionStyle = .none
+                
+                return cell
+
+            }
+//
             else{
                 return UITableViewCell()
             }
@@ -402,7 +469,27 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             return UITableViewCell()
         }
     }
-    
+    // 配置cell的UI
+    func cellUIConfig(one: NSInteger, two: NSInteger ,isHiddenTwoItem: Bool, cell:HomeBottomCell,dataSourceArray:[WOWProductModel])  {
+        let  modelOne = dataSourceArray[one]
+        if isHiddenTwoItem == false {
+            
+            cell.showDataOne(modelOne)
+            cell.twoLb.isHidden = false
+            
+        }else{
+            
+            let  modelTwo = dataSourceArray[two]
+            cell.showDataOne(modelOne)
+            cell.showDataTwo(modelTwo)
+            cell.twoLb.isHidden = true
+        }
+        
+        cell.oneBtn.tag = one
+        cell.twoBtn.tag = two
+        
+    }
+
     
     func cellTouchInside(_ m:WOWFoundProductModel)
     {
@@ -455,7 +542,77 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         
     }
 }
+extension VCFound:HomeBottomDelegate{
+    
+    func goToProductDetailVC(_ productId: Int?) {//跳转产品详情
+        
+        toVCProduct(productId)
+        
+    }
+    
+}
+extension VCFound:cell_102_delegate{
+    func goToProjectDetailVC(_ model: WOWCarouselBanners?){
+        if let model = model {
+            goController(model)
+        }
+        
+    }
+    //点击跳转
+    func goController(_ model: WOWCarouselBanners) {
+        if let bannerLinkType = model.bannerLinkType {
+            switch bannerLinkType {
+            case 1:
+                let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWWebViewController.self)) as! WOWWebViewController
+                
+                vc.bannerUrl = model.bannerLinkUrl
+                navigationController?.pushViewController(vc, animated: true)
+                print("web后台填连接")
+            case 2:
+                print("专题详情页（商品列表）")
+            case 3:
+                print("专题详情页（图文混排）")
+            case 4:
+                print("品牌详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
+                vc.brandID = model.bannerLinkTargetId
+                vc.entrance = .brandEntrance
+                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
+                
+            case 5:
+                print("设计师详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
+                vc.designerId = model.bannerLinkTargetId
+                vc.entrance = .designerEntrance
+                vc.hideNavigationBar = true
+                navigationController?.pushViewController(vc, animated: true)
+            case 6:
+                print("商品详情页")
+                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
+                vc.hideNavigationBar = true
+                vc.productId = model.bannerLinkTargetId
+                navigationController?.pushViewController(vc, animated: true)
+                
+            case 7:
+                print("分类详情页")
+                
+            case 8:// 专题详情
+                toVCTopic(model.bannerLinkTargetId ?? 0)
+                print("场景还是专题")
+            case 9:// 专题详情
+                
+                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
+                
+            default:
+                print("其他")
+            }
+            
+        }
+        
+    }
 
+}
 
 extension VCFound :MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate {
     func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(_ m:WowModulePageItemVO?)

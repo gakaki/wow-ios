@@ -12,7 +12,12 @@ protocol cell_102_delegate:class {
     func goToProjectDetailVC(_ model: WOWCarouselBanners?)
 }
 // 专题 cell
-class Cell_102_Project: UITableViewCell {
+class Cell_102_Project: UITableViewCell,ModuleViewElement {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 102  //专题
+    }
+
     weak var delegate : cell_102_delegate?
     @IBOutlet weak var lbTitle: UILabel!
     var dataArr:[WOWCarouselBanners]?{

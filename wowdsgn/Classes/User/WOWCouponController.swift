@@ -28,7 +28,7 @@ class WOWCouponController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        request()
+        request()
     }
     
     override func setUI() {

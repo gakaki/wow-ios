@@ -64,11 +64,11 @@ class MODULE_TYPE_SINGLE_BANNER_CELL_201:UITableViewCell,ModuleViewElement{
 }
 
 //402 推荐商品
-class MODULE_TYPE_PINTEREST_PRODUCTS_CV_CELL_402:UITableViewCell,ModuleViewElement{
-    static func isNib() -> Bool { return false }
-    static func cell_type() -> Int { return 402 }
-
-}
+//class MODULE_TYPE_PINTEREST_PRODUCTS_CV_CELL_402:UITableViewCell,ModuleViewElement{
+//    static func isNib() -> Bool { return false }
+//    static func cell_type() -> Int { return 402 }
+//
+//}
 
 //501 单品推荐
 class MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT_CV_CELL_501:UITableViewCell,ModuleViewElement{
@@ -93,7 +93,8 @@ struct ModulePageType {
     static let PAGE_MODULE_TYPE_PINTEREST_PRODUCTS              = 402;	  //推荐商品
     static let PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT        = 501;	  //单品推荐
     static let PAGE_MODULE_TYPE_TOPIC_PRODUCTS                  = 601;	  //专题商品列表
-    
+    static let PAGE_MODULE_TYPE_PROJECT                         = 102;	  //专题 左右滑动列表
+    static let PAGE_MODULE_TYPE_SING_PRODUCT                    = 801;	  //今日单品倒计时
     static let d = [
 
         PAGE_MODULE_TYPE_CAROUSEL 					: MODULE_TYPE_CAROUSEL_CV_CELL_101.classForCoder(), //轮播 101 banner
@@ -101,9 +102,13 @@ struct ModulePageType {
         PAGE_MODULE_TYPE_CATEGORIES 				: MODULE_TYPE_CATEGORIES_CV_CELL_301.classForCoder(), //301 一级分类
         PAGE_MODULE_TYPE_CATEGORIES_MORE 			: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302.classForCoder(), //302 二级分类
         PAGE_MODULE_TYPE_NEW_ARRIVAL_RPODUCTS 		: WOWFoundWeeklyNewCell.classForCoder(), //401 本周上新
-        PAGE_MODULE_TYPE_PINTEREST_PRODUCTS 		: MODULE_TYPE_PINTEREST_PRODUCTS_CV_CELL_402.classForCoder(), //402 推荐商品
+        PAGE_MODULE_TYPE_PINTEREST_PRODUCTS 		: HomeBottomCell.classForCoder(), //402 推荐商品
         PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT	: WOWFoundRecommendCell.classForCoder(), //501 单品推荐
-        PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: MODULE_TYPE_TOPIC_PRODUCTS_CV_CELL_601.classForCoder()            //601 专题商品列表
+        PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: MODULE_TYPE_TOPIC_PRODUCTS_CV_CELL_601.classForCoder(),            //601 专题商品列表
+        PAGE_MODULE_TYPE_PROJECT :Cell_102_Project.classForCoder(),
+        PAGE_MODULE_TYPE_SING_PRODUCT:Cell_103_Product.classForCoder()
+        
+        
     ]
 
     static func getIdentifier( _ id:Int ) -> String {

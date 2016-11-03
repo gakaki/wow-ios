@@ -35,14 +35,14 @@ extension UILabel{
 }
 
 
-
+// 单品推荐
 class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 501
     }
     var product:WowModulePageItemVO?
     var delegate:WOWFoundRecommendCellDelegate?
-    
+    var heightAll   = 180.h
     static func isNib() -> Bool { return false }
 
     override init(style: UITableViewCellStyle,reuseIdentifier: String?){

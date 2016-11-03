@@ -104,7 +104,7 @@ class WOWCountDownView: UIView {
         myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
         myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
         myTimer?.setEventHandler {
-                if timeStamp > 0{
+                if timeStamp > 1{
                     
                     timeStamp  = timeStamp - 1
                     self.getDetailTimeWithTimestamp(timeStamp: timeStamp)

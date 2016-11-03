@@ -226,23 +226,23 @@ class WOWNewProductModel: WOWBaseModel,Mappable{
     var specName             : String?// 产品规格大小
     
     var productTotalAmount             : Double?// 产品总金额
-    
+    var attributes                          : [String]?
     required init?(map: Map) {
         
     }
     
     func mapping(map: Map) {
-        productId                  <- map["productId"]
-        productName            <- map["productName"]
-        sellTotalAmount              <- map["sellTotalAmount"]
-        color          <- map["color"]
-        specImg               <- map["specImg"]
-        sellPrice          <- map["sellPrice"]
-        productQty    <- map["productQty"]
-        saleOrderItemId    <- map["saleOrderItemId"]
-        specName    <- map["specName"]
-        parentProductId    <- map["parentProductId"]
-        productTotalAmount    <- map["productTotalAmount"]
-        
+        productId                           <- map["productId"]
+        productName                         <- map["productName"]
+        sellTotalAmount                     <- map["sellTotalAmount"]
+        color                               <- map["color"]
+        specImg                             <- map["specImg"]
+        sellPrice                           <- map["sellPrice"]
+        productQty                          <- map["productQty"]
+        saleOrderItemId                     <- map["saleOrderItemId"]
+        specName                            <- map["specName"]
+        parentProductId                     <- map["parentProductId"]
+        productTotalAmount                  <- map["productTotalAmount"]
+        attributes                          <- map["attributes"]
     }
 }

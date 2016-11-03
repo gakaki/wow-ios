@@ -60,7 +60,9 @@ class WOWBuyBackView: UIView {
         backClear.frame = CGRect(x: 0,y: self.h,width: self.w,height: self.h)
         addSubview(backClear)
 //        buyView.productSpecModel = productSpec
-        buyView.configDefaultData()
+        buyView.refreshProductInfo()
+        buyView.productSku()
+        buyView.selectSpec = false
         backClear.addSubview(buyView)
         switch entrance {
         case .addEntrance:
@@ -140,12 +142,12 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     var entrance : carEntrance = carEntrance.addEntrance
     weak var delegate: goodsBuyViewDelegate?
     
-    //产品规格
-    var productSpecModel    : WOWProductSpecModel?
-    //规格数组
+  
+    //规格数组数据源
     var serialAttributeArr  = [WOWSerialAttributeModel]()
-    //sku列表
+    //sku列表数据源
     var skuListArr          = [WOWProductModel]()
+  
     //当前产品
     //各种规格的选择状态
     var seributeDic         = [Int: Bool]()
@@ -177,8 +179,8 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
         defaultSetup()
+        configDefaultData()
 
     }
     lazy var layout: UICollectionViewLeftAlignedLayout = {
@@ -206,29 +208,36 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
  
-    
+    //初始化视图的时候把初始数据赋值
     func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
-            productSpecModel = p
+//            productSpecModel = p
+            //循环遍历产品列表，找出当前id对应的sku，如果找不到该商品则默认取数组中第一个。（不知道为什么会娶不到当前的，反正后台是让这么做的）
             if let productArray = p.products {
                 for product in productArray {
                     if product.productId == WOWBuyCarMananger.sharedBuyCar.productId {
                         productInfo = product
                     }
                 }
+                
+                if productInfo == nil{
+                    productInfo = productArray[0]
+                }
             }
+            
             goodsImageView.borderColor(0.5, borderColor: MGRgb(234, g: 234, b: 234))
             configProductInfo()
+            refreshProductInfo()
             //规格数组
             if let array = p.serialAttribute {
                 serialAttributeArr = array
+                
             }
-            //产品列表的数组
-            if let array = p.products {
-                skuListArr = array
-            }
+            //把选出的产品对应的sku选中，😔这个循环太烦了。
             if let attributes = productInfo?.attributes {
+                //先遍历产品几种规格的数组，代表有几个可选的类型，比如：颜色，尺寸
                 for proSpec in attributes.enumerated() {
+                    //再把这个产品的颜色、尺寸等去对应所有的颜色，尺寸。如果名字一样的话就置为已选中状态
                     for serial in serialAttributeArr[proSpec.offset].specName {
                         if proSpec.element.attributeValue == serial.specName {
                             serial.isSelect = true
@@ -241,12 +250,28 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         }
     }
     
+    //刷新数据源
+    func refreshProductInfo() {
+        if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
+            //产品列表的数组,保证每次都取最新的产品信息
+            if let array = p.products {
+                skuListArr = array
+            }
+        }
+    }
+    
+    /**
+     把商品详情显示到视图上
+     
+     */
     func configProductInfo() {
         if let productInfo = productInfo {
             goodsImageView.set_webimage_url(productInfo.productImg)
             nameLabel.text = productInfo.productTitle ?? ""
+            //格式化价格，加上¥。并且保留两位小数
             let result = WOWCalPrice.calTotalPrice([productInfo.sellPrice ?? 0],counts:[1])
             perPriceLabel.text = result
+            //如果有原价的话，就判断原价跟销售价的大小，如果原价大于销售价则显示下划线的原价
             if let originalPrice = productInfo.originalprice {
                 if originalPrice > productInfo.sellPrice{
                     //显示下划线
@@ -258,8 +283,10 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
                     originalPriceLabel.text = ""
                 }
             }
+            //格式化产品的尺寸L-W-H
             sizeTextLabel.text = productSize(productInfo: productInfo)
             weightLabel.text = productWeight(productInfo: productInfo)
+            //这个还要判断下产品的状态，只有在上架的状态下才判断产品有没有库存
             if productInfo.productStatus == 1 {
                 productStock(productInfo.hasStock ?? false)
             }

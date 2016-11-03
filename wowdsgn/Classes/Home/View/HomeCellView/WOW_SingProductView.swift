@@ -7,8 +7,9 @@
 //
 
 import UIKit
-
+typealias ClickImgBlock =  (_ productId: Int) -> ()
 class WOW_SingProductView: UIView {
+    var productIdBlock :ClickImgBlock!
     @IBOutlet weak var view_CountDown: UIView?
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var originalpriceLabel: UILabel!
@@ -44,12 +45,23 @@ class WOW_SingProductView: UIView {
     @IBOutlet weak var leftAllLayout: NSLayoutConstraint!
     @IBOutlet weak var imgVieww: UIImageView!
     @IBOutlet weak var leftImageLayout: NSLayoutConstraint!
+    var model: WOWProductModel?
     override func awakeFromNib() {
         super.awakeFromNib()
 
         leftImageLayout.constant = self.width
         leftAllLayout.constant = self.leftt
         self.layoutIfNeeded()
+ 
+                imgVieww.isUserInteractionEnabled = true
+                imgVieww.addTapGesture(action: {[weak self] (sender) in
+                    if let strongSelf = self {
+                        // block 回调ProductId
+                     strongSelf.productIdBlock(strongSelf.model?.productId ?? 0)
+
+                    }
+                }
+        )
 
     }
 }

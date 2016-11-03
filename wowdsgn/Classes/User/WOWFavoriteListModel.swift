@@ -35,7 +35,7 @@ class WOWFavoriteListModel: WOWBaseModel,Mappable{
     
     func calCellHeight(){
         let s = self.name ?? ""
-        var height = s.heightWithConstrainedWidth((MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30, font: UIFont.systemScaleFontSize(13))
+        var height = s.heightWithConstrainedWidth((MGScreenWidth - CGFloat(3)) / CGFloat(2) - 30, font: UIFont.systemScaleFontSize(13), lineSpace: 1)
         height = height > 18 ? 30 : 18
         self.cellHeight = 20 + 5 + 14 + height + 6 + WOWImageCell.itemWidth
     }

@@ -518,14 +518,15 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             
              let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_102, for: indexPath) as! Cell_102_Project
              cell.dataArr = model.moduleContent?.banners
-             cell.lbTitle.text = model.moduleAdditionalInfo?.title ?? "专题"
+             cell.lbTitle.text = model.moduleContent?.name ?? "专题"
              cell.delegate = self
              return cell
         case 801:
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_103, for: indexPath) as! Cell_103_Product
-            cell.dataSourceArray = model.moduleContentProduct?.products
-
+            let array = model.moduleContentProduct?.products
+            cell.dataSourceArray = array
+            cell.delegate = self
             return cell
         case 402:
             
@@ -724,6 +725,11 @@ extension WOWController:cell_102_delegate{
             goController(model)
         }
         
+    }
+}
+extension WOWController:cell_801_delegate{// 今日单品跳转详情
+    func goToProcutDetailVCWith_801(_ productId: Int?){
+        toVCProduct(productId)
     }
 }
 extension Array{

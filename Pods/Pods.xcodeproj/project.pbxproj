@@ -32,6 +32,7 @@
 		05B1DD3A7E06C5A0407DEB7BAC83069F /* QNDnspodEnterprise.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EB5BA4C1A75695765812DE7636D718B /* QNDnspodEnterprise.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05DF29BD7C9950081DBD50804CFF450E /* DistinctUntilChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5979EC2AA2FC0CB1CB61DBDC0A2F6 /* DistinctUntilChanged.swift */; };
 		064A7ED4ADEC57B65F333703A4BA1979 /* RxTableViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B418BD00D91F887D79425E3AB1B1613D /* RxTableViewDataSourceProxy.swift */; };
+		064FBACA1DC833DE00CBF8EF /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064FBAC91DC833DE00CBF8EF /* Config3rd.swift */; };
 		065E0F9B1A07CDADC8F19096F2A6B36D /* MJRefreshBackStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9CC87FCC8018F1A8530966A2070F65 /* MJRefreshBackStateFooter.m */; };
 		06E0239DD63A2C1D0930A7F57C7EF2CB /* QNAssessment.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A0851556D867DAA818291547BC8619 /* QNAssessment.m */; };
 		06EDB944284E74970F312CB7F2910C07 /* IQBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9954957CF288E0FF71E0359E5B25D2E7 /* IQBarButtonItem.swift */; };
@@ -626,7 +627,7 @@
 		A82FC3C9C86B131B9A324F14DFCAFE0A /* GYNSURLHook.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C9A790B2F5B5CDC4C485E62ADFC0B0 /* GYNSURLHook.m */; };
 		A968FEB1517DD1CDE36FE7C4541FF59A /* SDWebImageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BF06E9D13C22BC126B7F9C366B784A4C /* SDWebImageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9803B03390E23F39164FBD04157487E /* ISO8601DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C030250706438B943B851EF1153C83 /* ISO8601DateTransform.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A9A7C11A70949B0BF3B1EA461A224609 /* UmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A67E3F05EE82DE41CC058C0F84E0A28 /* UmengHelper.swift */; };
+		A9A7C11A70949B0BF3B1EA461A224609 /* AppDelegateUmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A67E3F05EE82DE41CC058C0F84E0A28 /* AppDelegateUmengHelper.swift */; };
 		A9ED115BC4F72686642CFF2950C5BE80 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D109094F8B84633630CF05A5C621385 /* SVProgressAnimatedView.m */; };
 		AA956E07A3E73399AF11F48FD6ACDD5F /* arrow_down_icon@2x.png in Sources */ = {isa = PBXBuildFile; fileRef = 71B6392245375BF5ACBFE8F644E03F48 /* arrow_down_icon@2x.png */; };
 		AAEF14B97764839585C97F42317310D4 /* SectionModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD8EE6AAADD3FE5878935A9B1E931 /* SectionModelType.swift */; };
@@ -1348,6 +1349,7 @@
 		05D2E228F8F7D7B99C0F6B8403D2A8DD /* IntExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntExtensions.swift; path = Sources/IntExtensions.swift; sourceTree = "<group>"; };
 		061BEF41D496BF59A4E274ED6F33F87B /* UIColor+VTMagic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+VTMagic.h"; path = "VTMagic/UIColor+VTMagic.h"; sourceTree = "<group>"; };
 		0640A84EBDAF7E39C7BC05C2085E346F /* MJRefreshStateHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshStateHeader.h; path = MJRefresh/Custom/Header/MJRefreshStateHeader.h; sourceTree = "<group>"; };
+		064FBAC91DC833DE00CBF8EF /* Config3rd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config3rd.swift; sourceTree = "<group>"; };
 		06B23C1087B98BB88A673631836DA6E5 /* Scan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Scan.swift; path = RxSwift/Observables/Implementations/Scan.swift; sourceTree = "<group>"; };
 		06B66957A3A185C9F3860ED0243B5B33 /* SynchronizedOnType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SynchronizedOnType.swift; path = RxSwift/Concurrency/SynchronizedOnType.swift; sourceTree = "<group>"; };
 		06ED9A0870795A9376D21B431A4293DF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1447,7 +1449,7 @@
 		18C84D6A11AF328A0C121F69BB0A7ACB /* RxCocoa.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxCocoa.swift; path = RxCocoa/Common/RxCocoa.swift; sourceTree = "<group>"; };
 		1A1A4B3C896EB6FAE3026307D46B6719 /* IdentifiableType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiableType.swift; path = Sources/DataSources/IdentifiableType.swift; sourceTree = "<group>"; };
 		1A41131441B95AC1E0813E66E45BA226 /* DACircularProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
-		1A67E3F05EE82DE41CC058C0F84E0A28 /* UmengHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UmengHelper.swift; sourceTree = "<group>"; };
+		1A67E3F05EE82DE41CC058C0F84E0A28 /* AppDelegateUmengHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegateUmengHelper.swift; sourceTree = "<group>"; };
 		1AA590A9B9A0FC05595DCCC494213148 /* Layout.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
 		1AD9F3D4E16F9C483D8AB838CDECD2C9 /* IQKeyboardManagerSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = IQKeyboardManagerSwift.modulemap; sourceTree = "<group>"; };
 		1C3013454CBCC5A72D6DBE194650DD38 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3922,7 +3924,8 @@
 		73B760535B3BCC166D9FDA836D6CCF32 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1A67E3F05EE82DE41CC058C0F84E0A28 /* UmengHelper.swift */,
+				1A67E3F05EE82DE41CC058C0F84E0A28 /* AppDelegateUmengHelper.swift */,
+				064FBAC91DC833DE00CBF8EF /* Config3rd.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -7038,7 +7041,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9A7C11A70949B0BF3B1EA461A224609 /* UmengHelper.swift in Sources */,
+				A9A7C11A70949B0BF3B1EA461A224609 /* AppDelegateUmengHelper.swift in Sources */,
+				064FBACA1DC833DE00CBF8EF /* Config3rd.swift in Sources */,
 				F781BDE8E2999B2510E03229EAC9C4D3 /* wow3rd-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

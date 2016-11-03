@@ -11,7 +11,7 @@ protocol cell_801_delegate:class {
     // 跳转专题详情代理
     func goToProcutDetailVCWith_801(_ productId: Int?)
 }
-class Cell_103_Product: UITableViewCell {
+class Cell_103_Product: UITableViewCell,ModuleViewElement {
     static func isNib() -> Bool { return true }
     static func cell_type() -> Int {
         return 801 // 今日单品倒计时

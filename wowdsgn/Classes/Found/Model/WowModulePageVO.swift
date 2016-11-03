@@ -6,7 +6,10 @@ class WowModulePageVO:Mappable
     var moduleID:Int?
     var moduleType:Int?
     var contentTmp:AnyObject?
-    var name:String = ""
+    var name:String?
+    
+    var moduleContent_402           :  WOWHomeProduct_402_Info?// 402 专题列表
+    var moduleContent_102           :  WOWCarouselBanners?// 402 专题列表
     
     var moduleContentArr:[WowModulePageItemVO]?
     var moduleContentItem:WowModulePageItemVO?

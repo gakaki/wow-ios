@@ -2061,6 +2061,7 @@
 				243D60FC98B1FD80C4E9E65E /* [CP] Check Pods Manifest.lock */,
 				069D2F501DB46AD100A059D0 /* Sources */,
 				069D2F511DB46AD100A059D0 /* Frameworks */,
+				063B9CFE1DC714940042DB38 /*  Increment Version Build */,
 				069D2F521DB46AD100A059D0 /* Resources */,
 				F53EF9D12AE65A6395EE59E9 /* [CP] Embed Pods Frameworks */,
 				1A83CAF2F5CB3EEA14654664 /* [CP] Copy Pods Resources */,
@@ -2252,6 +2253,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		063B9CFE1DC714940042DB38 /*  Increment Version Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = " Increment Version Build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
 		1A83CAF2F5CB3EEA14654664 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2640,7 +2655,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2684,7 +2699,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -2700,6 +2715,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = wowdsgn/wowdsgn.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = B4WSDTADTT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2732,6 +2748,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowdsgn/wowapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -2744,7 +2762,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = wowdsgn/wowdsgn.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Wowdsgn Culture Media Co., Ltd. (B4WSDTADTT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = B4WSDTADTT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2777,6 +2796,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wowdsgn/wowapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

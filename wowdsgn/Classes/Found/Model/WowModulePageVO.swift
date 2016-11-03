@@ -65,13 +65,13 @@ class WowModulePageItemVO:Mappable
         categoryBgImg           <- map["categoryBgImg"]
         
         productId               <- map["productId"]
-        productName             <- map["productName"]
+        productName             <- map["productTitle"]
         sellPrice               <- map["sellPrice"]
         productImg              <- map["productImg"]
         
         //501
         productId               <- map["productId"]
-        productName             <- map["productName"]
+        productName             <- map["productTitle"]
         productImg              <- map["productImg"]
         sellPrice               <- map["sellPrice"]
         originalPrice           <- map["originalPrice"]

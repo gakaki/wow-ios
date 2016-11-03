@@ -49,11 +49,11 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         
-        right_label_top.text     = "刀叉五件套1"
-        right_label_ceneter.text = "Cutipol12121是家专注于手工餐具制作的老店，起源于葡萄牙幽静的里斯本\n设计方面，它不仅传承了葡萄牙的餐具制作工艺传统，还运用了人体工程学和前沿科技，使产品性能和现代感达到完美融合。\n随着海外消费者的青睐"
+//        right_label_top.text     = "刀叉五件套1"
+//        right_label_ceneter.text = "Cutipol12121是家专注于手工餐具制作的老店，起源于葡萄牙幽静的里斯本\n设计方面，它不仅传承了葡萄牙的餐具制作工艺传统，还运用了人体工程学和前沿科技，使产品性能和现代感达到完美融合。\n随着海外消费者的青睐"
         
-        right_label_price_stroke.text = ""
-        right_label_price_bottom.text = "¥ 378"
+//        right_label_price_stroke.text = ""
+//        right_label_price_bottom.text = "¥ 378"
         
         
         setUI_btnLike()
@@ -86,15 +86,17 @@ class WOWFoundRecommendCell: UITableViewCell,ModuleViewElement {
         }
         right_label_top.text                 = p.productName
         right_label_ceneter.text             = p.detailDescription
-        right_label_price_stroke.setStrokeWithText(p.get_formted_original_price())
         /// 如果原价大于售价显示原价并加下划线，如果没有原价或是等于售价不显示
         if let price = p.sellPrice {
             if let originalPrice = p.originalPrice {
                 if originalPrice > price{
                     right_label_price_stroke.isHidden = false
+                    right_label_price_stroke.setStrokeWithText(p.get_formted_original_price())
                 }
             }else {
                 right_label_price_stroke.isHidden = true
+                right_label_price_stroke.text = ""
+
             }
         }
         right_label_price_bottom.text        = p.get_formted_sell_price()

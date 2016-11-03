@@ -119,8 +119,9 @@ extension  UIViewController {
         //FIXME:验证token是否是第一次咯或者是第二次
         var isOpenIdBinded = Bool()//假设的bool值
         let open_id        = (userData["openid"] ?? "") as! String
-
-        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId:open_id), successClosure: {[weak self] (result, code) in
+        let unionid        = (userData["unionid"] ?? "") as! String
+        print(userData)
+        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId:open_id, unionId: unionid), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)

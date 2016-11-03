@@ -233,7 +233,7 @@ class WOWNewProductModel: WOWBaseModel,Mappable{
     
     func mapping(map: Map) {
         productId                           <- map["productId"]
-        productName                         <- map["productName"]
+        productName                         <- map["productTitle"]
         sellTotalAmount                     <- map["sellTotalAmount"]
         color                               <- map["color"]
         specImg                             <- map["specImg"]

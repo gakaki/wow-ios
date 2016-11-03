@@ -12,7 +12,7 @@ class WOWProductDetailCell: UITableViewCell {
     @IBOutlet weak var productImg:UIImageView!
     @IBOutlet weak var imgDescLabel:UILabel!
     @IBOutlet weak var space: NSLayoutConstraint!
-//    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var aspect: NSLayoutConstraint!
     
     //内容图片的宽高比约束
@@ -63,16 +63,16 @@ class WOWProductDetailCell: UITableViewCell {
                 })
                 
 
-//                space.constant = 15
+                space.constant = 8
             }else {
                 aspect.constant = 345
-//                space.constant = 0
+                space.constant = -7
             }
             imgDescLabel.text = secondaryImg.text
             if secondaryImg.text == "" {
-                space.constant = 15
+                bottomSpace.constant = 7
             }else {
-                space.constant = 15
+                bottomSpace.constant = 15
             }
             imgDescLabel.setLineHeightAndLineBreak(1.5)
         }

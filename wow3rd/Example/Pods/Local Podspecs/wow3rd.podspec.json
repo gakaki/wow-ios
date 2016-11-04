@@ -25,5 +25,13 @@
   "frameworks": "UserNotifications",
   "libraries": "z",
   "public_header_files": "wow3rd/libs/**/*.h",
-  "vendored_libraries": "wow3rd/libs/**/*.a"
+  "vendored_libraries": "wow3rd/libs/**/*.a",
+  "dependencies": {
+    "URLNavigator": [
+      "~> 1.0"
+    ],
+    "WebViewBridge.Swift": [
+
+    ]
+  }
 }

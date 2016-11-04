@@ -27,7 +27,12 @@ wowdsgn集成各种第三方库
   s.vendored_libraries    = 'wow3rd/libs/**/*.a'
   # s.vendored_frameworks   = 'wow3rd/libs/**/*.framework'
 
+  s.dependency 'URLNavigator', '~> 1.0'
+#  s.dependency 'WebViewJavascriptBridge', '~> 5.0'
+#  s.dependency 'SwiftWebViewBridge', '~> 0.2.0'
+  s.dependency 'WebViewBridge.Swift'
+  
 
-  # s.dependency 'AFNetworking', '~> 2.3'
+
   # s.frameworks = 'UIKit', 'MapKit'
 end

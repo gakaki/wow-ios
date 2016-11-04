@@ -30,7 +30,8 @@ class VCFound: VCBaseVCCategoryFound {
         super.setUI()
         
         tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300
+        //为了防止刷新tableview上下跳动
+//        tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
 
         
@@ -175,8 +176,9 @@ class VCFound: VCBaseVCCategoryFound {
                 strongSelf.endRefresh()
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.isFavorite = favorite ?? false
-                let secction = IndexSet(integer: 1)
-                strongSelf.tableView.reloadSections(secction, with: .none)
+                strongSelf.tableView.reloadData()
+//                let secction = IndexSet(integer: 1)
+//                strongSelf.tableView.reloadSections(secction, with: .none)
             }
         }) {(errorMsg) in
             self.endRefresh()
@@ -296,9 +298,9 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         }
         let model = self.data[sectionIndex]
         if model.moduleType == 402 {
-            let lbBottom = UILabel.initLable(" ", titleColor: UIColor.black, textAlignment: .center, font: 10)
-            lbBottom.frame = CGRect(x: 0, y: frame_height - 1, width: frame_width, height: 0.5)
-            lbBottom.backgroundColor = UIColor.init(hexString: "eaeaea")
+            let lbBottom = UIView()
+            lbBottom.frame = CGRect(x: 0, y: frame_height - 0.5, width: frame_width, height: 0.5)
+            lbBottom.backgroundColor = UIColor.init(hexString: "EAEAEA")
             header.addSubview(lbBottom)
         }
         return header
@@ -449,7 +451,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 let productsArray = model.moduleContent_402?.products ?? []
                 let lineCellNumber = (productsArray.count.getParityCellNumber()) > 10 ? 10: (productsArray.count.getParityCellNumber())
                 
-                cell_heights[section]  = CGFloat(lineCellNumber * 139)
+                cell_heights[section]  = (lineCellNumber * 139).h
                 if productsArray.count.isOdd && (indexPath as NSIndexPath).row + 1 == productsArray.count.getParityCellNumber(){ //  满足为奇数 第二个item 隐藏
                     
                     self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:productsArray)

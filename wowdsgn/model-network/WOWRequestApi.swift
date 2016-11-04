@@ -189,7 +189,7 @@ public enum RequestApi{
     
     case api_UserFavorite(uid:String,type:String,pageindex:String)
 
-    case api_Wechat(openId:String) //openId
+    case api_Wechat(openId:String, unionId: String) //openId
     
     case api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
     
@@ -518,8 +518,8 @@ extension RequestApi:TargetType{
                 params =  ["mobile":mobile]
             case let .api_PwdResetCode(mobile):
                 params =  ["mobile":mobile]
-            case let .api_Wechat(openId):
-                params =  ["openId":openId]
+            case let .api_Wechat(openId,unionId):
+                params =  ["openId":openId, "unionId": unionId]
             case let .api_WechatBind(mobile,captcha,password,userInfoFromWechat):
                 params =  ["mobile":mobile,"captcha":captcha,"password":password,"userInfoFromWechat":userInfoFromWechat]
             case let .api_ResetPwd(mobile, code, password):

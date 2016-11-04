@@ -1736,8 +1736,8 @@
 			isa = PBXGroup;
 			children = (
 				069D302A1DB47ADC00A059D0 /* WOWIntroduceController.swift */,
-				069D302B1DB47ADC00A059D0 /* WOWLoginController.swift */,
 				069D302C1DB47ADC00A059D0 /* WOWMsgCodeController.swift */,
+				069D302B1DB47ADC00A059D0 /* WOWLoginController.swift */,
 				069D302D1DB47ADC00A059D0 /* WOWRegistController.swift */,
 				069D302E1DB47ADC00A059D0 /* WOWRegistInfoFirstController.swift */,
 				069D302F1DB47ADC00A059D0 /* WOWRegistInfoSecondController.swift */,

@@ -129,12 +129,24 @@ class WOWRegistController: WOWBaseViewController {
         }
         //FIXME:这个接口应该扩充一个字段 wechattoken 不带的话就是注册，带的话就是绑定 wowusermanager.wechatoken
         //注册时的信息
-        var registerTarget = RequestApi.api_Register(account:phoneTextField.text!,password:passwdTextField.text!,captcha:msgCodeTextField.text!)
+        var registerTarget = RequestApi.api_Register(account:phoneTextField.text ?? "",
+                                                     password:passwdTextField.text ?? "",
+                                                     captcha:msgCodeTextField.text ?? "")
         //如果是通过微信就走微信绑定的接口，如果是注册的话就走注册的接口
         if let userInfoFromWechat = userInfoFromWechat {
             //微信的用户信息
-            let param = ["openId":userInfoFromWechat["openid"] as! String ,"wechatNickName":userInfoFromWechat["nickname"] as! String,"wechatAvatar":userInfoFromWechat["headimgurl"] as! String,"sex":userInfoFromWechat["sex"]! ]
-             registerTarget = RequestApi.api_WechatBind(mobile: phoneTextField.text!, captcha: msgCodeTextField.text!, password: passwdTextField.text!, userInfoFromWechat: param as AnyObject)
+            let param = ["openId":userInfoFromWechat["openid"] as! String,
+                         "wechatNickName":userInfoFromWechat["nickname"] as! String,
+                         "wechatAvatar":userInfoFromWechat["headimgurl"] as! String,
+                         "sex":userInfoFromWechat["sex"] ?? "",
+                         "unionId": userInfoFromWechat["unionid"] as! String,
+                         "country": userInfoFromWechat["country"] ?? "",
+                         "province": userInfoFromWechat["province"] ?? "",
+                         "city": userInfoFromWechat["city"] ]
+             registerTarget = RequestApi.api_WechatBind(mobile: phoneTextField.text ?? "",
+                                                        captcha: msgCodeTextField.text ?? "",
+                                                        password: passwdTextField.text ?? "",
+                                                        userInfoFromWechat: param as AnyObject)
         }
 
         

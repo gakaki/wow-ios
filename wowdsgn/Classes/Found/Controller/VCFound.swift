@@ -30,7 +30,8 @@ class VCFound: VCBaseVCCategoryFound {
         super.setUI()
         
         tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300
+        //为了防止刷新tableview上下跳动
+//        tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
 
         
@@ -175,8 +176,9 @@ class VCFound: VCBaseVCCategoryFound {
                 strongSelf.endRefresh()
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.isFavorite = favorite ?? false
-                let secction = IndexSet(integer: 1)
-                strongSelf.tableView.reloadSections(secction, with: .none)
+                strongSelf.tableView.reloadData()
+//                let secction = IndexSet(integer: 1)
+//                strongSelf.tableView.reloadSections(secction, with: .none)
             }
         }) {(errorMsg) in
             self.endRefresh()

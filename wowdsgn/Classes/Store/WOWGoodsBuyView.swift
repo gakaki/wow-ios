@@ -227,6 +227,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             
             goodsImageView.borderColor(0.5, borderColor: MGRgb(234, g: 234, b: 234))
             configProductInfo()
+            //刷新数据源数据
             refreshProductInfo()
             //规格数组
             if let array = p.serialAttribute {
@@ -348,44 +349,6 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             del.closeBuyView(productInfo)
         }
     }
-
-    /**
-     加入购物车
-     
-     */
-//    @IBAction func addCarButtonClick(_ sender: UIButton) {
-//        if !validateMethods(){
-//            return
-//        }
-//
-//        startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.8 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-//            
-//            if let del = self.delegate {
-//                self.productInfo?.productQty = self.skuCount
-//                
-//                del.sureAddCarClick(self.productInfo)
-//                    
-//            }
-//        })
-//        
-//    }
-//    /**
-//     立即支付
-//    
-//     */
-//    @IBAction func payButtonClick(_ sender: UIButton) {
-//        if !validateMethods(){
-//            return
-//        }
-//        
-//        if let del = delegate {
-//            self.productInfo?.productQty = skuCount
-//            del.sureBuyClick(productInfo)
-//            
-//        }
-//    }
-
     
     //MARK: - validate Methods
     fileprivate func validateMethods() -> Bool{
@@ -608,6 +571,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     
 }
 extension WOWGoodsBuyView {
+    //每次点击都要做筛选操作
     func productSku()  {
         //每次做筛选的时候首先把所有的状态设为可点击状态
         for att in serialAttributeArr {
@@ -615,11 +579,11 @@ extension WOWGoodsBuyView {
                 spec.isCanSelect = true
             }
         }
-        
+        //本地保存的所有产品列表
         var productArray = skuListArr
         //由于不知道有几个规格选择，循环遍历所有规格的数组，如果某个被选中则进入判断，筛选出其他几个规格中的按钮点击状态
         for attribute in serialAttributeArr.enumerated() {
-            //为了记录有哪几个规格已选中
+            //为了记录有哪几个规格已选中，各种规格的选中状态，初始值都设为false
             seributeDic[attribute.offset] = false
             let array = attribute.element.specName
             
@@ -629,10 +593,13 @@ extension WOWGoodsBuyView {
                 if spec.isSelect {
                     //如果已经选中了则状态置为true
                     seributeDic[attribute.offset] = true
+                    //创建一个字典来存某个规格下的所有自规格，为了下面做减法操作。
                     var dic = [Int: [WOWSpecNameModel]]()
+                    //index用来存放当前循环的某个规格的下标，便于在做不可点击的状态时除去这个规格
                     var index = 0
-                    for a in serialAttributeArr.enumerated() {
-                        dic[a.offset] = [WOWSpecNameModel]()
+                    
+                    for serial in serialAttributeArr.enumerated() {
+                        dic[serial.offset] = [WOWSpecNameModel]()
                     }
                     //遍历所有有可能的产品列表
                     for attri in skuListArr {
@@ -642,11 +609,11 @@ extension WOWGoodsBuyView {
                             
                             //再遍历所筛选出来产品的对应的规格。除去选中的那个，存下其余规格。下标作为key，
                             for a in (attri.attributes?.enumerated())! {
+                                //记录下当前遍历的规格下标
                                 if a.offset == attribute.offset {
-                                    print(a.element.attributeValue)
                                     index = a.offset
                                 }else {
-                                    
+                                    //再遍历其他几种规格的子规格，如果产品列表中有相应子规格的名字的话就加到字典内
                                     for spe in serialAttributeArr[a.offset].specName {
                                         
                                         if a.element.attributeValue == spe.specName {
@@ -669,6 +636,7 @@ extension WOWGoodsBuyView {
                         
                         
                     }
+                    //还要遍历所有规格把字典内包含的子规格都设为可点击的，否则就是不可点击的
                     for spe in serialAttributeArr.enumerated(){
                         if spe.offset == index {
                             
@@ -688,7 +656,7 @@ extension WOWGoodsBuyView {
                 
             }
         }
-        
+        //每次初始化都把全选设为true，只要有一个规格没有选中就设为false
         allSelect = true
         for spec in serialAttributeArr.enumerated() {
             
@@ -696,14 +664,16 @@ extension WOWGoodsBuyView {
                 allSelect = false
             }
         }
-        
+        //如果全部都选中的话，确定了一个产品sku。取出产品的详情
         if allSelect {
             if productArray.count > 0 {
                 productInfo = productArray[0]
+                //选完产品之后更新一下弹窗的信息
                 configProductInfo()
             }
         }else {
-            productStock(true)
+            
+//            productStock(true)
         }
         collectionView.reloadData()
 

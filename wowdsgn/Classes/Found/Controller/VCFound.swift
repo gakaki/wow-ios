@@ -30,7 +30,8 @@ class VCFound: VCBaseVCCategoryFound {
         super.setUI()
         
         tableView.rowHeight          = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300
+        //为了防止刷新tableview上下跳动
+//        tableView.estimatedRowHeight = 300
         tableView.separatorColor     = SeprateColor;
 
         
@@ -175,8 +176,9 @@ class VCFound: VCBaseVCCategoryFound {
                 strongSelf.endRefresh()
                 let favorite = JSON(result)["favorite"].bool
                 strongSelf.isFavorite = favorite ?? false
-                let secction = IndexSet(integer: 1)
-                strongSelf.tableView.reloadSections(secction, with: .none)
+                strongSelf.tableView.reloadData()
+//                let secction = IndexSet(integer: 1)
+//                strongSelf.tableView.reloadSections(secction, with: .none)
             }
         }) {(errorMsg) in
             self.endRefresh()
@@ -209,9 +211,15 @@ class VCFound: VCBaseVCCategoryFound {
             if model.moduleType == 501 {
                 
                 if  let send_obj =  sender.object as? [String:AnyObject] {
-                    
                         model.moduleContentItem?.favorite = send_obj["favorite"] as? Bool
-                        break
+                }
+            }
+            if model.moduleType == 402 {
+                if  let send_obj =  sender.object as? [String:AnyObject] {
+                    
+                    model.moduleContent_402?.products?.ergodicArrayWithProductModel(dic: send_obj)
+            
+                    break
                 }
                 break
             }
@@ -252,7 +260,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
           return getCellHeight(indexPath.section)
 
     }
-    func headerView(title : String) -> UIView? {
+    func headerView(title : String,sectionIndex:Int) -> UIView? {
         
         let frame_width             = MGScreenWidth
         
@@ -288,7 +296,13 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         if t != "" {
             header.addSubview(l)
         }
-        
+        let model = self.data[sectionIndex]
+        if model.moduleType == 402 {
+            let lbBottom = UIView()
+            lbBottom.frame = CGRect(x: 0, y: frame_height - 0.5, width: frame_width, height: 0.5)
+            lbBottom.backgroundColor = UIColor.init(hexString: "EAEAEA")
+            header.addSubview(lbBottom)
+        }
         return header
 
     }
@@ -307,18 +321,11 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
         case 301:
             t           = "场景"
         case 402:
-             t           = model.moduleContent_402?.name ?? "居家好物"
-            let v = Bundle.main.loadNibNamed("WOW_Cell_402_Hearder", owner: self, options: nil)?.last as! WOW_Cell_402_Hearder
-            v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth,height: 65.h)
-            v.lbTitle.text = t
-            return v
-
-           
+            t           = model.moduleContent_402?.name ?? "居家好物"
         default:
             t           = ""
         }
-        
-        return self.headerView(title: t)!
+        return self.headerView(title: t,sectionIndex: section)!
     }
 
     
@@ -443,7 +450,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 let productsArray = model.moduleContent_402?.products ?? []
                 let lineCellNumber = (productsArray.count.getParityCellNumber()) > 10 ? 10: (productsArray.count.getParityCellNumber())
                 
-                cell_heights[section]  = CGFloat(lineCellNumber * 139)
+                cell_heights[section]  = (lineCellNumber * 139).h
                 if productsArray.count.isOdd && (indexPath as NSIndexPath).row + 1 == productsArray.count.getParityCellNumber(){ //  满足为奇数 第二个item 隐藏
                     
                     self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:productsArray)

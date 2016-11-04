@@ -7,90 +7,179 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00B35F5F58723BEFB57D3BAA3153C19F /* UMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = F1EBBD6D0AC21438213E64A2220AB11C /* UMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		019CCDA37AD825B81B7105B95147F1F1 /* wow3rd-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DE99DDDBF5DCC9C6CC2369F1D9B24AB /* wow3rd-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4C0676C0E43E7717A6BEB0A2CB1F9CC1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E3355E6150CEFC178DED0A361563EF /* UserNotifications.framework */; };
-		70A8A58A4A9BCD1F4C94C8AF05B1D9C1 /* Pods-wow3rd_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 01619596108938CAD72FAD72A0B2DE77 /* Pods-wow3rd_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A14EA1E989E33E2BFD8C324AF3F918D /* wow3rd-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 776D08BB81ECBD5EBF8BBF3FB5D82991 /* wow3rd-dummy.m */; };
-		93A3F6FF98C38ACC1D419499921DBC2D /* Pods-wow3rd_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E02BDC9D187B3845C1E366AAA93ADA /* Pods-wow3rd_Example-dummy.m */; };
-		C2665367E5B7787A2C7DFAB6EE553190 /* UmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E5190B977F187B07AA456ECB4D1C13 /* UmengHelper.swift */; };
-		D6B86884806D993FF590E13A715D8EB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E2C391050009FFEB8620C89D5C04A5 /* Foundation.framework */; };
-		E0DB1991161679B5A74858A23D8608F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E2C391050009FFEB8620C89D5C04A5 /* Foundation.framework */; };
+		044581740C7858FAE0C23CD1C300DABF /* wow3rd-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 776D08BB81ECBD5EBF8BBF3FB5D82991 /* wow3rd-dummy.m */; };
+		0BD00384C2D80443E545752FA487AA6A /* index.html in Sources */ = {isa = PBXBuildFile; fileRef = 735A312ED8EC734F22300C16540986A4 /* index.html */; };
+		1E171FC161FDB3971F1693D6A391A680 /* AppDelegateUmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40B1265F1B20D337CC07DE0E05314A7 /* AppDelegateUmengHelper.swift */; };
+		3C96DBE662D75C329A454571AD76307A /* ZHWebViewBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130A6AC689EBD0AB5D9D0C0819A34A2A /* ZHWebViewBridge.swift */; };
+		4F3510231CF00E605A0964B95461C902 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC41C534468D5DA7A049FB6256B71C4 /* Foundation.framework */; };
+		6EB4ECAA3CB763BF63421867B272ABF3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC41C534468D5DA7A049FB6256B71C4 /* Foundation.framework */; };
+		771699F4345619C221AE2D003A558732 /* WebViewBridge_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C789836F3738BCA50D9C83528223ABC0 /* WebViewBridge_Swift.framework */; };
+		7AA2463AA60BDCEDC73DD26180DB6B48 /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC73E6D54650DF7921FE18FFDD4EEC /* Config3rd.swift */; };
+		805D0EE133C1C2EDB24F55B080E75FE7 /* URLNavigable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEAF1542D77268BB77F38798162F9A9 /* URLNavigable.swift */; };
+		884E1FE896C0843B661C6590E5A9124E /* URLConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0513DC3AE7598949817D388B4F90B2 /* URLConvertible.swift */; };
+		904DBFE6E33A4311B2A5C86F969A3ABB /* UMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D5C5D0F9E8299013760B7E2B323280D /* UMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		90AD4DA6DD6BEAF5A5459056396B091F /* URLNavigator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DD5DB57A14D1D61C6A07B6F1CB6D700 /* URLNavigator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9EB724F3F0932C2A25260345A1D684EB /* WowWebViewSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E09E6B0A2190613C52AE0B8EA1E83A /* WowWebViewSwift.swift */; };
+		9EDADB884186F6EF8F26B4B2D2B2109E /* URLNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1CF52F2ABC1DC9B5ABB47454F3AA21 /* URLNavigator.swift */; };
+		A71DBC5AC60FD37B792F0699BE77CE17 /* WowWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB418CB8AF7757A7AED4577F0DED922 /* WowWebView.swift */; };
+		AD8C8E921E6B6AC5358C93E3497F2DA3 /* URLNavigator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE814F7D58F3FB09E2297EE108D4212 /* URLNavigator-dummy.m */; };
+		B62AEBA8DF57DC193A43687B4540F79B /* URLNavigator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A9AFF22FD11D09815A6925057CF3149 /* URLNavigator.framework */; };
+		B76C7093C25091C596934F1A738954EE /* URLMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA9C182CC1C3ABEC3EDF00BAB7998E /* URLMatcher.swift */; };
+		C1FEC5A956040700CE7C17773173CA55 /* bridge.js in Sources */ = {isa = PBXBuildFile; fileRef = 87247B0FEF8F3F0FA3B6B1EE7EB64B18 /* bridge.js */; };
+		C93822D5BF4C884416873A2324E297C2 /* wow3rd-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DE99DDDBF5DCC9C6CC2369F1D9B24AB /* wow3rd-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D906F79471F927B164B19D84824F4A3A /* Pods-wow3rd_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E02BDC9D187B3845C1E366AAA93ADA /* Pods-wow3rd_Example-dummy.m */; };
+		DA5A909D093A74F6A633371DDDCBF30E /* ConfigH5URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E9B9CF2C09BE3EC896130875D69D1 /* ConfigH5URL.swift */; };
+		DE1C008DF152D00208B446C93E58173D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC41C534468D5DA7A049FB6256B71C4 /* Foundation.framework */; };
+		E30D0EFCFE355F1FE52AEE828BBCFD59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC41C534468D5DA7A049FB6256B71C4 /* Foundation.framework */; };
+		EEC3877089717EB6F3BFEFFA99E56994 /* UIViewController+TopMostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A64756436E5EF2D67F814C52AFA9 /* UIViewController+TopMostViewController.swift */; };
+		EFF05FB950943147FD2F3225C04A4A4D /* Pods-wow3rd_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 01619596108938CAD72FAD72A0B2DE77 /* Pods-wow3rd_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3580B1C7765212B75D7388544AF8895 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272A18A2E462EC579B5259ACB45EC027 /* UserNotifications.framework */; };
+		F41F635B19060D8B3D55F80C81D922C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF95DB6ED3B862F11C4EA73EA46E468 /* UIKit.framework */; };
+		F61E7B63AB04FA92567190E53ADDC327 /* WebViewBridge.Swift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3929EE6B30DA43B0096B8E8D3031180D /* WebViewBridge.Swift-dummy.m */; };
+		FA668678DE0F515D0D34B6F3F7A50CFD /* WebViewBridge.Swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C4997A9CB299D8FC4AE1561A7A575507 /* WebViewBridge.Swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E0F1A31F933396EAA43DE4E0379108BD /* PBXContainerItemProxy */ = {
+		0CADB641C2270D9F4BB0F448CF0CF7CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C26380794909AB703B5C465EE0F35B08;
+			remoteGlobalIDString = 039AF90EB011D7B38CCCD45751472C44;
+			remoteInfo = WebViewBridge.Swift;
+		};
+		24048388A28FC2ACDBC4F56A82A8FF5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD999C8538F328E8675835BD2295FF44;
 			remoteInfo = wow3rd;
+		};
+		662E776371EA0124E1DC3A19FE78DFE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F0B685C3EF5BA9119E8CF7155BD1A12;
+			remoteInfo = URLNavigator;
+		};
+		9932E3CD32E2A5A186CC7C81AC21B5D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F0B685C3EF5BA9119E8CF7155BD1A12;
+			remoteInfo = URLNavigator;
+		};
+		EB23636E76C4F9E70AF15DD042640881 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 039AF90EB011D7B38CCCD45751472C44;
+			remoteInfo = WebViewBridge.Swift;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01471E573741F83CE8A8D7507DCC298E /* wow3rd.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = wow3rd.modulemap; sourceTree = "<group>"; };
+		01471E573741F83CE8A8D7507DCC298E /* wow3rd.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = wow3rd.modulemap; sourceTree = "<group>"; };
 		01619596108938CAD72FAD72A0B2DE77 /* Pods-wow3rd_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-wow3rd_Example-umbrella.h"; sourceTree = "<group>"; };
+		02DAD2B2F0012B801654E208A58D3094 /* URLNavigator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "URLNavigator-prefix.pch"; sourceTree = "<group>"; };
+		09101D1CFA432CF9112EB368D2876E2D /* URLNavigator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = URLNavigator.framework; path = URLNavigator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ECA9C182CC1C3ABEC3EDF00BAB7998E /* URLMatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLMatcher.swift; path = Sources/URLMatcher.swift; sourceTree = "<group>"; };
+		115E67F9ECEC218A51845108B89706CD /* URLNavigator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = URLNavigator.xcconfig; sourceTree = "<group>"; };
+		130A6AC689EBD0AB5D9D0C0819A34A2A /* ZHWebViewBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZHWebViewBridge.swift; path = Sources/ZHWebViewBridge.swift; sourceTree = "<group>"; };
 		1656D5FFA9310BCE15FE23BEEB9B47EE /* Pods-wow3rd_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-wow3rd_Example-frameworks.sh"; sourceTree = "<group>"; };
+		19CC73E6D54650DF7921FE18FFDD4EEC /* Config3rd.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Config3rd.swift; sourceTree = "<group>"; };
+		2295A64756436E5EF2D67F814C52AFA9 /* UIViewController+TopMostViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIViewController+TopMostViewController.swift"; path = "Sources/UIViewController+TopMostViewController.swift"; sourceTree = "<group>"; };
 		2672A5FCCDEA5C15AB280383735A32DC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		26E3355E6150CEFC178DED0A361563EF /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
+		272A18A2E462EC579B5259ACB45EC027 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
 		2895A3EF8045B40B14B47702ED44FC93 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C1198B36C7350906CFA6378DFE6861A /* WebViewBridge.Swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WebViewBridge.Swift.xcconfig; sourceTree = "<group>"; };
+		2DD5DB57A14D1D61C6A07B6F1CB6D700 /* URLNavigator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "URLNavigator-umbrella.h"; sourceTree = "<group>"; };
+		2FAE7FEB9C3AAFA9FABC9E7667B24CA2 /* wow3rd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = wow3rd.framework; path = wow3rd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CCCB4341984A16F425E8F099D76295 /* Pods-wow3rd_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-wow3rd_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		318B50A16D5934C5713D3A000236E232 /* wow3rd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = wow3rd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		43E2C391050009FFEB8620C89D5C04A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		35E8EED583FBDE25F1E614C1EA121E83 /* WebViewBridge.Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = WebViewBridge.Swift.modulemap; sourceTree = "<group>"; };
+		3929EE6B30DA43B0096B8E8D3031180D /* WebViewBridge.Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WebViewBridge.Swift-dummy.m"; sourceTree = "<group>"; };
 		4DE99DDDBF5DCC9C6CC2369F1D9B24AB /* wow3rd-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "wow3rd-umbrella.h"; sourceTree = "<group>"; };
-		55E5190B977F187B07AA456ECB4D1C13 /* UmengHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UmengHelper.swift; sourceTree = "<group>"; };
-		6E01F87677A47F41859ED807C030EBFA /* Pods-wow3rd_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-wow3rd_Example.modulemap"; sourceTree = "<group>"; };
+		5C3E9B9CF2C09BE3EC896130875D69D1 /* ConfigH5URL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConfigH5URL.swift; sourceTree = "<group>"; };
+		5EC41C534468D5DA7A049FB6256B71C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		6C0513DC3AE7598949817D388B4F90B2 /* URLConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLConvertible.swift; path = Sources/URLConvertible.swift; sourceTree = "<group>"; };
+		6E01F87677A47F41859ED807C030EBFA /* Pods-wow3rd_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-wow3rd_Example.modulemap"; sourceTree = "<group>"; };
+		735A312ED8EC734F22300C16540986A4 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; path = index.html; sourceTree = "<group>"; };
 		776D08BB81ECBD5EBF8BBF3FB5D82991 /* wow3rd-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "wow3rd-dummy.m"; sourceTree = "<group>"; };
+		77E96D3F786F81A2CE8C200403884608 /* WebViewBridge_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = WebViewBridge_Swift.framework; path = WebViewBridge.Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AB418CB8AF7757A7AED4577F0DED922 /* WowWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WowWebView.swift; sourceTree = "<group>"; };
+		87247B0FEF8F3F0FA3B6B1EE7EB64B18 /* bridge.js */ = {isa = PBXFileReference; includeInIndex = 1; name = bridge.js; path = Sources/bridge.js; sourceTree = "<group>"; };
+		8D5C5D0F9E8299013760B7E2B323280D /* UMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		8E1CF52F2ABC1DC9B5ABB47454F3AA21 /* URLNavigator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLNavigator.swift; path = Sources/URLNavigator.swift; sourceTree = "<group>"; };
 		8FEFBF3D4EC7C210D37DD30A192E2B1A /* Pods-wow3rd_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-wow3rd_Example.release.xcconfig"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		972ED1D668411A7E199B27A8026954D6 /* Pods_wow3rd_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wow3rd_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9A9AFF22FD11D09815A6925057CF3149 /* URLNavigator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLNavigator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DE814F7D58F3FB09E2297EE108D4212 /* URLNavigator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "URLNavigator-dummy.m"; sourceTree = "<group>"; };
 		A41DE89583BBC858B8F989273A4F7194 /* Pods-wow3rd_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-wow3rd_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A8D575A365233AD5AE26ED364B3618AD /* WebViewBridge.Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WebViewBridge.Swift-prefix.pch"; sourceTree = "<group>"; };
 		AC9B66499E4601C821D53F35C6073578 /* Pods-wow3rd_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-wow3rd_Example-resources.sh"; sourceTree = "<group>"; };
 		AD43AFA3D38EF004D39C5FE7BB88E39D /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.4.0.a; path = wow3rd/libs/libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
+		B72884ECD840256A5950FDBEBA80F26F /* Pods_wow3rd_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_wow3rd_Example.framework; path = "Pods-wow3rd_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD57C15ECCBC250FE8C539A3DD52EF84 /* wow3rd.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = wow3rd.xcconfig; sourceTree = "<group>"; };
+		BEF95DB6ED3B862F11C4EA73EA46E468 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C40B1265F1B20D337CC07DE0E05314A7 /* AppDelegateUmengHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegateUmengHelper.swift; sourceTree = "<group>"; };
+		C4997A9CB299D8FC4AE1561A7A575507 /* WebViewBridge.Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WebViewBridge.Swift-umbrella.h"; sourceTree = "<group>"; };
+		C789836F3738BCA50D9C83528223ABC0 /* WebViewBridge_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebViewBridge_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8C934AC18F636A6E920372FAC87FB04 /* Pods-wow3rd_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-wow3rd_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C99A34C64081720D63FD94F2A089A505 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D48B942CA2E14CB2334D7C386B7B57C3 /* wow3rd-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "wow3rd-prefix.pch"; sourceTree = "<group>"; };
-		F1EBBD6D0AC21438213E64A2220AB11C /* UMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		D5D09DCC1814F621B5C3CAE5B42197D9 /* URLNavigator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = URLNavigator.modulemap; sourceTree = "<group>"; };
+		E0E09E6B0A2190613C52AE0B8EA1E83A /* WowWebViewSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WowWebViewSwift.swift; sourceTree = "<group>"; };
+		EA4496ACBFEF2B0A5D75EEAB7E0837B1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBEAF1542D77268BB77F38798162F9A9 /* URLNavigable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLNavigable.swift; path = Sources/URLNavigable.swift; sourceTree = "<group>"; };
 		F9E02BDC9D187B3845C1E366AAA93ADA /* Pods-wow3rd_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-wow3rd_Example-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3E04D9CF3F53773C6AEC6BB44A7F5499 /* Frameworks */ = {
+		18AA4EEB190AD1EA355250C8FC6CFE3F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0DB1991161679B5A74858A23D8608F6 /* Foundation.framework in Frameworks */,
+				E30D0EFCFE355F1FE52AEE828BBCFD59 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ECDE64BF15171BD675A3F21D6E15F8E1 /* Frameworks */ = {
+		482E7FA9D112CA90B9B2CED493704808 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6B86884806D993FF590E13A715D8EB6 /* Foundation.framework in Frameworks */,
-				4C0676C0E43E7717A6BEB0A2CB1F9CC1 /* UserNotifications.framework in Frameworks */,
+				6EB4ECAA3CB763BF63421867B272ABF3 /* Foundation.framework in Frameworks */,
+				B62AEBA8DF57DC193A43687B4540F79B /* URLNavigator.framework in Frameworks */,
+				F3580B1C7765212B75D7388544AF8895 /* UserNotifications.framework in Frameworks */,
+				771699F4345619C221AE2D003A558732 /* WebViewBridge_Swift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		592990B5DC7DBBC05DC78C24DDD32D87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F3510231CF00E605A0964B95461C902 /* Foundation.framework in Frameworks */,
+				F41F635B19060D8B3D55F80C81D922C2 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDE855095EE097F4545FCC6ABE34B3A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE1C008DF152D00208B446C93E58173D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		095785DB4CD244B5542B003AE6C260D1 /* libs */ = {
+		03BF32A7F5A7BF1186522D36C0A8E21E /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				F1EBBD6D0AC21438213E64A2220AB11C /* UMessage.h */,
+				8D5C5D0F9E8299013760B7E2B323280D /* UMessage.h */,
 			);
+			name = libs;
 			path = libs;
-			sourceTree = "<group>";
-		};
-		0D92B72D0EF0E525D3FB99CFE84EAAB9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				972ED1D668411A7E199B27A8026954D6 /* Pods_wow3rd_Example.framework */,
-				318B50A16D5934C5713D3A000236E232 /* wow3rd.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		115BDCCFEE2E1A0C6B95A3717891424D /* Pods-wow3rd_Example */ = {
@@ -111,6 +200,15 @@
 			path = "Target Support Files/Pods-wow3rd_Example";
 			sourceTree = "<group>";
 		};
+		1F276A947477EB64E507A8DBA4A08AF2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				480F4C4CC422462350141609AA2DAA9B /* URLNavigator */,
+				BD71B182DAF794E9A79E7CBC30412F9F /* WebViewBridge.Swift */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		207CFAFDCC3428F0E9C5F48D01212E9D /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,12 +217,29 @@
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+		2B963E4F52307BFD19A45E1145C7B898 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A29144ADD5AF9E7BB8D292F4CE0D9013 /* iOS */,
+				EA4496ACBFEF2B0A5D75EEAB7E0837B1 /* Info.plist */,
+				35E8EED583FBDE25F1E614C1EA121E83 /* WebViewBridge.Swift.modulemap */,
+				2C1198B36C7350906CFA6378DFE6861A /* WebViewBridge.Swift.xcconfig */,
+				3929EE6B30DA43B0096B8E8D3031180D /* WebViewBridge.Swift-dummy.m */,
+				A8D575A365233AD5AE26ED364B3618AD /* WebViewBridge.Swift-prefix.pch */,
+				C4997A9CB299D8FC4AE1561A7A575507 /* WebViewBridge.Swift-umbrella.h */,
 			);
-			name = Frameworks;
+			name = "Support Files";
+			path = "../Target Support Files/WebViewBridge.Swift";
+			sourceTree = "<group>";
+		};
+		3E9726AADBF4EE276F4117728E225C7F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B72884ECD840256A5950FDBEBA80F26F /* Pods_wow3rd_Example.framework */,
+				09101D1CFA432CF9112EB368D2876E2D /* URLNavigator.framework */,
+				77E96D3F786F81A2CE8C200403884608 /* WebViewBridge_Swift.framework */,
+				2FAE7FEB9C3AAFA9FABC9E7667B24CA2 /* wow3rd.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		437BB870922F48B9A29B268A99CC0B48 /* wow3rd */ = {
@@ -132,10 +247,24 @@
 			children = (
 				7BB598EBE2C5BE037DB12FCFED3BD906 /* Frameworks */,
 				4C8A4C1B4711A6635741AE9388C0D526 /* Support Files */,
-				928223E9211187CE75EA20BB95ED0A89 /* wow3rd */,
+				DFCE8F0FF3668074C52489783115EE6C /* wow3rd */,
 			);
 			name = wow3rd;
 			path = ../..;
+			sourceTree = "<group>";
+		};
+		480F4C4CC422462350141609AA2DAA9B /* URLNavigator */ = {
+			isa = PBXGroup;
+			children = (
+				2295A64756436E5EF2D67F814C52AFA9 /* UIViewController+TopMostViewController.swift */,
+				6C0513DC3AE7598949817D388B4F90B2 /* URLConvertible.swift */,
+				0ECA9C182CC1C3ABEC3EDF00BAB7998E /* URLMatcher.swift */,
+				EBEAF1542D77268BB77F38798162F9A9 /* URLNavigable.swift */,
+				8E1CF52F2ABC1DC9B5ABB47454F3AA21 /* URLNavigator.swift */,
+				73445CD8CD048C9597D34006E79F1A58 /* Support Files */,
+			);
+			name = URLNavigator;
+			path = URLNavigator;
 			sourceTree = "<group>";
 		};
 		4C8A4C1B4711A6635741AE9388C0D526 /* Support Files */ = {
@@ -152,12 +281,32 @@
 			path = "Example/Pods/Target Support Files/wow3rd";
 			sourceTree = "<group>";
 		};
-		5F15CD94F6384C462B879B5A13D4AD5E /* Classes */ = {
+		716AF47EA9B52C4C9BB577751AB8A687 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				55E5190B977F187B07AA456ECB4D1C13 /* UmengHelper.swift */,
+				C40B1265F1B20D337CC07DE0E05314A7 /* AppDelegateUmengHelper.swift */,
+				19CC73E6D54650DF7921FE18FFDD4EEC /* Config3rd.swift */,
+				5C3E9B9CF2C09BE3EC896130875D69D1 /* ConfigH5URL.swift */,
+				735A312ED8EC734F22300C16540986A4 /* index.html */,
+				7AB418CB8AF7757A7AED4577F0DED922 /* WowWebView.swift */,
+				E0E09E6B0A2190613C52AE0B8EA1E83A /* WowWebViewSwift.swift */,
 			);
+			name = Classes;
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		73445CD8CD048C9597D34006E79F1A58 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C99A34C64081720D63FD94F2A089A505 /* Info.plist */,
+				D5D09DCC1814F621B5C3CAE5B42197D9 /* URLNavigator.modulemap */,
+				115E67F9ECEC218A51845108B89706CD /* URLNavigator.xcconfig */,
+				9DE814F7D58F3FB09E2297EE108D4212 /* URLNavigator-dummy.m */,
+				02DAD2B2F0012B801654E208A58D3094 /* URLNavigator-prefix.pch */,
+				2DD5DB57A14D1D61C6A07B6F1CB6D700 /* URLNavigator-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/URLNavigator";
 			sourceTree = "<group>";
 		};
 		7BB598EBE2C5BE037DB12FCFED3BD906 /* Frameworks */ = {
@@ -173,28 +322,52 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				207CFAFDCC3428F0E9C5F48D01212E9D /* Development Pods */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				0D92B72D0EF0E525D3FB99CFE84EAAB9 /* Products */,
+				EC250D2A7BE1FCCF0F1E7F94BC952D5C /* Frameworks */,
+				1F276A947477EB64E507A8DBA4A08AF2 /* Pods */,
+				3E9726AADBF4EE276F4117728E225C7F /* Products */,
 				FD9E742577F58A492822E57BFBEFE3A3 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		928223E9211187CE75EA20BB95ED0A89 /* wow3rd */ = {
+		B07170DAB86C09B506C333BECD00E6BC /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				5F15CD94F6384C462B879B5A13D4AD5E /* Classes */,
-				095785DB4CD244B5542B003AE6C260D1 /* libs */,
+				5EC41C534468D5DA7A049FB6256B71C4 /* Foundation.framework */,
+				BEF95DB6ED3B862F11C4EA73EA46E468 /* UIKit.framework */,
+				272A18A2E462EC579B5259ACB45EC027 /* UserNotifications.framework */,
 			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		BD71B182DAF794E9A79E7CBC30412F9F /* WebViewBridge.Swift */ = {
+			isa = PBXGroup;
+			children = (
+				87247B0FEF8F3F0FA3B6B1EE7EB64B18 /* bridge.js */,
+				130A6AC689EBD0AB5D9D0C0819A34A2A /* ZHWebViewBridge.swift */,
+				2B963E4F52307BFD19A45E1145C7B898 /* Support Files */,
+			);
+			name = WebViewBridge.Swift;
+			path = WebViewBridge.Swift;
+			sourceTree = "<group>";
+		};
+		DFCE8F0FF3668074C52489783115EE6C /* wow3rd */ = {
+			isa = PBXGroup;
+			children = (
+				716AF47EA9B52C4C9BB577751AB8A687 /* Classes */,
+				03BF32A7F5A7BF1186522D36C0A8E21E /* libs */,
+			);
+			name = wow3rd;
 			path = wow3rd;
 			sourceTree = "<group>";
 		};
-		A29144ADD5AF9E7BB8D292F4CE0D9013 /* iOS */ = {
+		EC250D2A7BE1FCCF0F1E7F94BC952D5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				43E2C391050009FFEB8620C89D5C04A5 /* Foundation.framework */,
-				26E3355E6150CEFC178DED0A361563EF /* UserNotifications.framework */,
+				9A9AFF22FD11D09815A6925057CF3149 /* URLNavigator.framework */,
+				C789836F3738BCA50D9C83528223ABC0 /* WebViewBridge_Swift.framework */,
+				B07170DAB86C09B506C333BECD00E6BC /* iOS */,
 			);
-			name = iOS;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FD9E742577F58A492822E57BFBEFE3A3 /* Targets Support Files */ = {
@@ -208,59 +381,113 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		89DC903CA4B4F5198C1D37849ACEA61D /* Headers */ = {
+		9FDEBFB500A26304F343409CAE91BA34 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00B35F5F58723BEFB57D3BAA3153C19F /* UMessage.h in Headers */,
-				019CCDA37AD825B81B7105B95147F1F1 /* wow3rd-umbrella.h in Headers */,
+				904DBFE6E33A4311B2A5C86F969A3ABB /* UMessage.h in Headers */,
+				C93822D5BF4C884416873A2324E297C2 /* wow3rd-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FE7FCFB2F880548DD1C77EE11472A6FF /* Headers */ = {
+		A65155073AC1B20C6D0946FC6CD091E8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70A8A58A4A9BCD1F4C94C8AF05B1D9C1 /* Pods-wow3rd_Example-umbrella.h in Headers */,
+				90AD4DA6DD6BEAF5A5459056396B091F /* URLNavigator-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D872F8DDEFD3692BF01CDFA9C608BA5A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA668678DE0F515D0D34B6F3F7A50CFD /* WebViewBridge.Swift-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E345C24A96D10CDFD4261A1574A0E7F3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFF05FB950943147FD2F3225C04A4A4D /* Pods-wow3rd_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		66A85E12811D832EA53C586E18E3A615 /* Pods-wow3rd_Example */ = {
+		039AF90EB011D7B38CCCD45751472C44 /* WebViewBridge.Swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 81F017C9EBA4ED4D8DC4413E9CF37063 /* Build configuration list for PBXNativeTarget "Pods-wow3rd_Example" */;
+			buildConfigurationList = 5B415401704C53F4FCA6AF5F3798AA20 /* Build configuration list for PBXNativeTarget "WebViewBridge.Swift" */;
 			buildPhases = (
-				777457E9FBDD76E254D3B40E9D2A18EF /* Sources */,
-				3E04D9CF3F53773C6AEC6BB44A7F5499 /* Frameworks */,
-				FE7FCFB2F880548DD1C77EE11472A6FF /* Headers */,
+				409B18A112974168E5EBC3BEF69DA8BF /* Sources */,
+				CDE855095EE097F4545FCC6ABE34B3A3 /* Frameworks */,
+				D872F8DDEFD3692BF01CDFA9C608BA5A /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				43F1993841D3C0C1AA0F2BE6696BCA5E /* PBXTargetDependency */,
+			);
+			name = WebViewBridge.Swift;
+			productName = WebViewBridge.Swift;
+			productReference = 77E96D3F786F81A2CE8C200403884608 /* WebViewBridge_Swift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		654E484CF4B66EE7B0F11C81EA759B8D /* Pods-wow3rd_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F26DDA2C52A1884862860B6FC62E7C7 /* Build configuration list for PBXNativeTarget "Pods-wow3rd_Example" */;
+			buildPhases = (
+				FAB6BFEBB771DA11ECFA5EF023621FB8 /* Sources */,
+				18AA4EEB190AD1EA355250C8FC6CFE3F /* Frameworks */,
+				E345C24A96D10CDFD4261A1574A0E7F3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5354B2FC2B161AE05182411DAB8588E /* PBXTargetDependency */,
+				3B947E0F055D32CD21CDF0DA65271488 /* PBXTargetDependency */,
+				1AF3CB073FAB6288F173371409733715 /* PBXTargetDependency */,
 			);
 			name = "Pods-wow3rd_Example";
 			productName = "Pods-wow3rd_Example";
-			productReference = 972ED1D668411A7E199B27A8026954D6 /* Pods_wow3rd_Example.framework */;
+			productReference = B72884ECD840256A5950FDBEBA80F26F /* Pods_wow3rd_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		C26380794909AB703B5C465EE0F35B08 /* wow3rd */ = {
+		7F0B685C3EF5BA9119E8CF7155BD1A12 /* URLNavigator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AEA57CF16F5292C9857B6916ECD8E84B /* Build configuration list for PBXNativeTarget "wow3rd" */;
+			buildConfigurationList = 57579F6D3B32E3B85BF3136D535A2544 /* Build configuration list for PBXNativeTarget "URLNavigator" */;
 			buildPhases = (
-				6D7812822B93FF5EAA112B9875A13CC3 /* Sources */,
-				ECDE64BF15171BD675A3F21D6E15F8E1 /* Frameworks */,
-				89DC903CA4B4F5198C1D37849ACEA61D /* Headers */,
+				A05F4AE75DAA44195EC06B94250CEC21 /* Sources */,
+				592990B5DC7DBBC05DC78C24DDD32D87 /* Frameworks */,
+				A65155073AC1B20C6D0946FC6CD091E8 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			name = URLNavigator;
+			productName = URLNavigator;
+			productReference = 09101D1CFA432CF9112EB368D2876E2D /* URLNavigator.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		AD999C8538F328E8675835BD2295FF44 /* wow3rd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED8920579E74C30273B4125AFDCD4FCE /* Build configuration list for PBXNativeTarget "wow3rd" */;
+			buildPhases = (
+				5B5EADC01A4B482920A6A2B11C281467 /* Sources */,
+				482E7FA9D112CA90B9B2CED493704808 /* Frameworks */,
+				9FDEBFB500A26304F343409CAE91BA34 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA4BD50EC1F5B9EAE8490160E1698E23 /* PBXTargetDependency */,
+				ABAF50BEF0CE09484AAD72C0B55BF39D /* PBXTargetDependency */,
+			);
 			name = wow3rd;
 			productName = wow3rd;
-			productReference = 318B50A16D5934C5713D3A000236E232 /* wow3rd.framework */;
+			productReference = 2FAE7FEB9C3AAFA9FABC9E7667B24CA2 /* wow3rd.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -280,46 +507,197 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 0D92B72D0EF0E525D3FB99CFE84EAAB9 /* Products */;
+			productRefGroup = 3E9726AADBF4EE276F4117728E225C7F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				66A85E12811D832EA53C586E18E3A615 /* Pods-wow3rd_Example */,
-				C26380794909AB703B5C465EE0F35B08 /* wow3rd */,
+				654E484CF4B66EE7B0F11C81EA759B8D /* Pods-wow3rd_Example */,
+				7F0B685C3EF5BA9119E8CF7155BD1A12 /* URLNavigator */,
+				039AF90EB011D7B38CCCD45751472C44 /* WebViewBridge.Swift */,
+				AD999C8538F328E8675835BD2295FF44 /* wow3rd */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6D7812822B93FF5EAA112B9875A13CC3 /* Sources */ = {
+		409B18A112974168E5EBC3BEF69DA8BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2665367E5B7787A2C7DFAB6EE553190 /* UmengHelper.swift in Sources */,
-				8A14EA1E989E33E2BFD8C324AF3F918D /* wow3rd-dummy.m in Sources */,
+				C1FEC5A956040700CE7C17773173CA55 /* bridge.js in Sources */,
+				F61E7B63AB04FA92567190E53ADDC327 /* WebViewBridge.Swift-dummy.m in Sources */,
+				3C96DBE662D75C329A454571AD76307A /* ZHWebViewBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		777457E9FBDD76E254D3B40E9D2A18EF /* Sources */ = {
+		5B5EADC01A4B482920A6A2B11C281467 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A3F6FF98C38ACC1D419499921DBC2D /* Pods-wow3rd_Example-dummy.m in Sources */,
+				1E171FC161FDB3971F1693D6A391A680 /* AppDelegateUmengHelper.swift in Sources */,
+				7AA2463AA60BDCEDC73DD26180DB6B48 /* Config3rd.swift in Sources */,
+				DA5A909D093A74F6A633371DDDCBF30E /* ConfigH5URL.swift in Sources */,
+				0BD00384C2D80443E545752FA487AA6A /* index.html in Sources */,
+				044581740C7858FAE0C23CD1C300DABF /* wow3rd-dummy.m in Sources */,
+				A71DBC5AC60FD37B792F0699BE77CE17 /* WowWebView.swift in Sources */,
+				9EB724F3F0932C2A25260345A1D684EB /* WowWebViewSwift.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A05F4AE75DAA44195EC06B94250CEC21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEC3877089717EB6F3BFEFFA99E56994 /* UIViewController+TopMostViewController.swift in Sources */,
+				884E1FE896C0843B661C6590E5A9124E /* URLConvertible.swift in Sources */,
+				B76C7093C25091C596934F1A738954EE /* URLMatcher.swift in Sources */,
+				805D0EE133C1C2EDB24F55B080E75FE7 /* URLNavigable.swift in Sources */,
+				AD8C8E921E6B6AC5358C93E3497F2DA3 /* URLNavigator-dummy.m in Sources */,
+				9EDADB884186F6EF8F26B4B2D2B2109E /* URLNavigator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB6BFEBB771DA11ECFA5EF023621FB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D906F79471F927B164B19D84824F4A3A /* Pods-wow3rd_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		43F1993841D3C0C1AA0F2BE6696BCA5E /* PBXTargetDependency */ = {
+		1AF3CB073FAB6288F173371409733715 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = wow3rd;
-			target = C26380794909AB703B5C465EE0F35B08 /* wow3rd */;
-			targetProxy = E0F1A31F933396EAA43DE4E0379108BD /* PBXContainerItemProxy */;
+			target = AD999C8538F328E8675835BD2295FF44 /* wow3rd */;
+			targetProxy = 24048388A28FC2ACDBC4F56A82A8FF5E /* PBXContainerItemProxy */;
+		};
+		3B947E0F055D32CD21CDF0DA65271488 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WebViewBridge.Swift;
+			target = 039AF90EB011D7B38CCCD45751472C44 /* WebViewBridge.Swift */;
+			targetProxy = 0CADB641C2270D9F4BB0F448CF0CF7CB /* PBXContainerItemProxy */;
+		};
+		ABAF50BEF0CE09484AAD72C0B55BF39D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WebViewBridge.Swift;
+			target = 039AF90EB011D7B38CCCD45751472C44 /* WebViewBridge.Swift */;
+			targetProxy = EB23636E76C4F9E70AF15DD042640881 /* PBXContainerItemProxy */;
+		};
+		CA4BD50EC1F5B9EAE8490160E1698E23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = URLNavigator;
+			target = 7F0B685C3EF5BA9119E8CF7155BD1A12 /* URLNavigator */;
+			targetProxy = 9932E3CD32E2A5A186CC7C81AC21B5D0 /* PBXContainerItemProxy */;
+		};
+		E5354B2FC2B161AE05182411DAB8588E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = URLNavigator;
+			target = 7F0B685C3EF5BA9119E8CF7155BD1A12 /* URLNavigator */;
+			targetProxy = 662E776371EA0124E1DC3A19FE78DFE3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		19578E0E57BB20225FFAF2A7612E0A60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C1198B36C7350906CFA6378DFE6861A /* WebViewBridge.Swift.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/WebViewBridge.Swift/WebViewBridge.Swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WebViewBridge.Swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WebViewBridge.Swift/WebViewBridge.Swift.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = WebViewBridge_Swift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		58E4FA23C80A987D7AB1709523254F16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 115E67F9ECEC218A51845108B89706CD /* URLNavigator.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/URLNavigator/URLNavigator-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/URLNavigator/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/URLNavigator/URLNavigator.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = URLNavigator;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5A5D72E2D8836340C4BCCDA9C3EB71FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C1198B36C7350906CFA6378DFE6861A /* WebViewBridge.Swift.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/WebViewBridge.Swift/WebViewBridge.Swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WebViewBridge.Swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WebViewBridge.Swift/WebViewBridge.Swift.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = WebViewBridge_Swift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		8DED8AD26D381A6ACFF202E5217EC498 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -359,74 +737,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		8F65ECC17EBEB7CFAA8AE486719087F6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD57C15ECCBC250FE8C539A3DD52EF84 /* wow3rd.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/wow3rd/wow3rd-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/wow3rd/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/wow3rd/wow3rd.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = wow3rd;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		974DE6D0FFC42D4BDAF6117E741A07AB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A41DE89583BBC858B8F989273A4F7194 /* Pods-wow3rd_Example.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-wow3rd_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-wow3rd_Example/Pods-wow3rd_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_wow3rd_Example;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		9E1E4E48AF2EAB23169E611BF694090A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -472,7 +782,40 @@
 			};
 			name = Debug;
 		};
-		A8263C904D9FB9E134BE3FA90E86DE46 /* Release */ = {
+		C65BF946E30140F10C4FFFB323B990DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 115E67F9ECEC218A51845108B89706CD /* URLNavigator.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/URLNavigator/URLNavigator-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/URLNavigator/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/URLNavigator/URLNavigator.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = URLNavigator;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C83541E0B04E22CC85113CAE11F848AF /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8FEFBF3D4EC7C210D37DD30A192E2B1A /* Pods-wow3rd_Example.release.xcconfig */;
 			buildSettings = {
@@ -507,7 +850,43 @@
 			};
 			name = Release;
 		};
-		EA4D44B6AB073F772FDABE7091DF066A /* Debug */ = {
+		D8E806911293B3A97530B7182B763090 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A41DE89583BBC858B8F989273A4F7194 /* Pods-wow3rd_Example.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-wow3rd_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-wow3rd_Example/Pods-wow3rd_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_wow3rd_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D90058551B61AA3980C0B4479576A23D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD57C15ECCBC250FE8C539A3DD52EF84 /* wow3rd.xcconfig */;
 			buildSettings = {
@@ -540,6 +919,38 @@
 			};
 			name = Debug;
 		};
+		DC58AE0335BC5B60277C21C34377BE02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD57C15ECCBC250FE8C539A3DD52EF84 /* wow3rd.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/wow3rd/wow3rd-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/wow3rd/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/wow3rd/wow3rd.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = wow3rd;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -552,20 +963,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		81F017C9EBA4ED4D8DC4413E9CF37063 /* Build configuration list for PBXNativeTarget "Pods-wow3rd_Example" */ = {
+		57579F6D3B32E3B85BF3136D535A2544 /* Build configuration list for PBXNativeTarget "URLNavigator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				974DE6D0FFC42D4BDAF6117E741A07AB /* Debug */,
-				A8263C904D9FB9E134BE3FA90E86DE46 /* Release */,
+				C65BF946E30140F10C4FFFB323B990DF /* Debug */,
+				58E4FA23C80A987D7AB1709523254F16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AEA57CF16F5292C9857B6916ECD8E84B /* Build configuration list for PBXNativeTarget "wow3rd" */ = {
+		5B415401704C53F4FCA6AF5F3798AA20 /* Build configuration list for PBXNativeTarget "WebViewBridge.Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EA4D44B6AB073F772FDABE7091DF066A /* Debug */,
-				8F65ECC17EBEB7CFAA8AE486719087F6 /* Release */,
+				19578E0E57BB20225FFAF2A7612E0A60 /* Debug */,
+				5A5D72E2D8836340C4BCCDA9C3EB71FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F26DDA2C52A1884862860B6FC62E7C7 /* Build configuration list for PBXNativeTarget "Pods-wow3rd_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8E806911293B3A97530B7182B763090 /* Debug */,
+				C83541E0B04E22CC85113CAE11F848AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED8920579E74C30273B4125AFDCD4FCE /* Build configuration list for PBXNativeTarget "wow3rd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D90058551B61AA3980C0B4479576A23D /* Debug */,
+				DC58AE0335BC5B60277C21C34377BE02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

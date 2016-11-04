@@ -1,5 +1,9 @@
 PODS:
-  - wow3rd (0.1.0)
+  - URLNavigator (1.0.1)
+  - WebViewBridge.Swift (1.0)
+  - wow3rd (0.1.0):
+    - URLNavigator (~> 1.0)
+    - WebViewBridge.Swift
 
 DEPENDENCIES:
   - wow3rd (from `../`)
@@ -9,8 +13,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  wow3rd: fd0a7bcd267cd0eeb2d3bd2162a3b9827f0c9833
+  URLNavigator: 830d156b8624402850ff14ec96222cfc51a05d42
+  WebViewBridge.Swift: 7a9018f73e8599517529ffc3355a32ac5b0a95d6
+  wow3rd: bb1bef564696d6e921fa5c6115f3cdb7ce4b333e
 
 PODFILE CHECKSUM: 8e1dfa40d18f7ff1f71b4d47dd34b5fb4718c040
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.1.1

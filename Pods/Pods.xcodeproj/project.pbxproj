@@ -31,6 +31,7 @@
 		05857EA843FFEA74C2A916C5C3ECCF90 /* ControlEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3668AF44087652D37AAF0156395E6D2 /* ControlEvent.swift */; };
 		05B1DD3A7E06C5A0407DEB7BAC83069F /* QNDnspodEnterprise.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EB5BA4C1A75695765812DE7636D718B /* QNDnspodEnterprise.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05DF29BD7C9950081DBD50804CFF450E /* DistinctUntilChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5979EC2AA2FC0CB1CB61DBDC0A2F6 /* DistinctUntilChanged.swift */; };
+		060FA3EE1DCB309500966C88 /* ConfigH5URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060FA3ED1DCB309500966C88 /* ConfigH5URL.swift */; };
 		064A7ED4ADEC57B65F333703A4BA1979 /* RxTableViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B418BD00D91F887D79425E3AB1B1613D /* RxTableViewDataSourceProxy.swift */; };
 		064FBACA1DC833DE00CBF8EF /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064FBAC91DC833DE00CBF8EF /* Config3rd.swift */; };
 		065E0F9B1A07CDADC8F19096F2A6B36D /* MJRefreshBackStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9CC87FCC8018F1A8530966A2070F65 /* MJRefreshBackStateFooter.m */; };
@@ -1347,6 +1348,7 @@
 		05C3949B57F4D186102BB7B5834C4FE5 /* Generate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Generate.swift; path = RxSwift/Observables/Implementations/Generate.swift; sourceTree = "<group>"; };
 		05C6243BDDB875C285D166F559FBC755 /* QNResolver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QNResolver.m; path = HappyDNS/Local/QNResolver.m; sourceTree = "<group>"; };
 		05D2E228F8F7D7B99C0F6B8403D2A8DD /* IntExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntExtensions.swift; path = Sources/IntExtensions.swift; sourceTree = "<group>"; };
+		060FA3ED1DCB309500966C88 /* ConfigH5URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigH5URL.swift; sourceTree = "<group>"; };
 		061BEF41D496BF59A4E274ED6F33F87B /* UIColor+VTMagic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+VTMagic.h"; path = "VTMagic/UIColor+VTMagic.h"; sourceTree = "<group>"; };
 		0640A84EBDAF7E39C7BC05C2085E346F /* MJRefreshStateHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshStateHeader.h; path = MJRefresh/Custom/Header/MJRefreshStateHeader.h; sourceTree = "<group>"; };
 		064FBAC91DC833DE00CBF8EF /* Config3rd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config3rd.swift; sourceTree = "<group>"; };
@@ -3926,6 +3928,7 @@
 			children = (
 				1A67E3F05EE82DE41CC058C0F84E0A28 /* AppDelegateUmengHelper.swift */,
 				064FBAC91DC833DE00CBF8EF /* Config3rd.swift */,
+				060FA3ED1DCB309500966C88 /* ConfigH5URL.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -6229,6 +6232,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					1C3436CEA5C3D39764C5F54374794ECB = {
+						LastSwiftMigration = 0810;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -7043,6 +7051,7 @@
 			files = (
 				A9A7C11A70949B0BF3B1EA461A224609 /* AppDelegateUmengHelper.swift in Sources */,
 				064FBACA1DC833DE00CBF8EF /* Config3rd.swift in Sources */,
+				060FA3EE1DCB309500966C88 /* ConfigH5URL.swift in Sources */,
 				F781BDE8E2999B2510E03229EAC9C4D3 /* wow3rd-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9250,6 +9259,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 173737A92EF6B2C56E162390109C24F8 /* AFNetworking.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -9272,6 +9282,7 @@
 				PRODUCT_NAME = AFNetworking;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -9356,6 +9367,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 173737A92EF6B2C56E162390109C24F8 /* AFNetworking.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";

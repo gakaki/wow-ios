@@ -84,8 +84,12 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/URLNavigator/URLNavigator.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WebViewBridge.Swift/WebViewBridge_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/wow3rd/wow3rd.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/URLNavigator/URLNavigator.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WebViewBridge.Swift/WebViewBridge_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/wow3rd/wow3rd.framework"
 fi

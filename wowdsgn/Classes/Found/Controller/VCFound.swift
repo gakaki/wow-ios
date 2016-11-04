@@ -435,6 +435,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 cell.lbTitle.text = d.moduleContent_102?.name ?? "专题"
                 cell_heights[section]  = 290.h
                 cell.delegate = self
+                cell.selectionStyle = .none
                 return cell
 
             }

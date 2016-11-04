@@ -189,7 +189,11 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
     func configureModel(model: WOWProductModel?,v: WOW_SingProductView?){
         for countView in  (v?.view_CountDown?.subviews)! {
            let view = (countView as! WOWCountDownView)
-            view.timeStamp = model?.timeoutSeconds ?? 0
+            if model?.timeoutSeconds > 0 {
+                view.timeStamp = model?.timeoutSeconds ?? 0
+            }else{
+                view.timeStamp = model?.timeoutSeconds ?? 0
+            }
         }
         v?.model = model
         v?.imgVieww.set_webimage_url_base(model?.productImg, place_holder_name: "placeholder_product")
@@ -239,11 +243,14 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
         else{
             
             configureModel(model: dataSourceArray?[self.currentIndex-1],v: self.leftView)
-            
+            if self.currentIndex < dataSourceArray?.count{
             configureModel(model: dataSourceArray?[self.currentIndex],v: self.middleView)
             
-            configureModel(model: dataSourceArray?[self.currentIndex+1],v: self.rightView)
-            
+            }
+            if self.currentIndex < (dataSourceArray?.count)! - 1{
+
+                configureModel(model: dataSourceArray?[self.currentIndex+1],v: self.rightView)
+            }
         }
     }
     

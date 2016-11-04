@@ -42,7 +42,7 @@ class WOWCountDownView: UIView {
                 self.timerCount(timeStamp: newValue)
                 
                 }else{
-                
+                self.getDetailTimeWithTimestamp(timeStamp: newValue )
             }
 
         }
@@ -73,7 +73,7 @@ class WOWCountDownView: UIView {
         }
         
     }
-    
+    // 实时更改UI显示数据
     func getDetailTimeWithTimestamp(timeStamp: NSInteger)  {
         
         let ms = timeStamp
@@ -104,9 +104,11 @@ class WOWCountDownView: UIView {
         myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
         myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
         myTimer?.setEventHandler {
-                if timeStamp > 1{
+                if timeStamp >= 1{
                     
                     timeStamp  = timeStamp - 1
+                    self.getDetailTimeWithTimestamp(timeStamp: timeStamp)
+                }else{
                     self.getDetailTimeWithTimestamp(timeStamp: timeStamp)
                 }
         }

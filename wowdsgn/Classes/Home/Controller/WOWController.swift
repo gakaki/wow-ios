@@ -735,14 +735,16 @@ extension WOWController:cell_801_delegate{// 今日单品跳转详情
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel
     func ergodicArrayWithProductModel(dic: [String:AnyObject] ){
-        for a in 0..<self.count{// 遍历数据，拿到productId model 更改favorite 状态
-            let model = self[a] as? WOWProductModel
-
+        DispatchQueue.global().async {
+            
+            for a in 0..<self.count{// 遍历数据，拿到productId model 更改favorite 状态
+                let model = self[a] as? WOWProductModel
+                
                 if model?.productId! == dic["productId"] as? Int {
                     model?.favorite = dic["favorite"] as? Bool
                 }
-
+            }
         }
-
+      
     }
 }

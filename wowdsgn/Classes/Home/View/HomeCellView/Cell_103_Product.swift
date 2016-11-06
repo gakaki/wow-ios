@@ -43,7 +43,7 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
             }else{// 当数据源为一个时，禁止scrollview滑动，pagecontroller隐藏，计时器销毁
                 autoScrollTimer?.invalidate()
                 pagingScrollView.pageControl.isHidden = true
-                pagingScrollView.scrollView.isUserInteractionEnabled = false
+                pagingScrollView.scrollView.isScrollEnabled = false
              
             }
 
@@ -244,12 +244,13 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
             
             configureModel(model: dataSourceArray?[self.currentIndex-1],v: self.leftView)
             if self.currentIndex < dataSourceArray?.count{
+                
             configureModel(model: dataSourceArray?[self.currentIndex],v: self.middleView)
             
             }
             if self.currentIndex < (dataSourceArray?.count)! - 1{
 
-                configureModel(model: dataSourceArray?[self.currentIndex+1],v: self.rightView)
+            configureModel(model: dataSourceArray?[self.currentIndex+1],v: self.rightView)
             }
         }
     }

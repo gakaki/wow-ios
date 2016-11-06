@@ -237,7 +237,6 @@ class WOWController: WOWBaseViewController {
             for model in self.singProductArray {
                 if model.moduleType == 801 {
                     for product in  (model.moduleContentProduct?.products) ?? [] {
-                        
                         if product.timeoutSeconds > 0{
                             product.timeoutSeconds  = product.timeoutSeconds - 1
                         }
@@ -246,6 +245,19 @@ class WOWController: WOWBaseViewController {
             }
         }
         myTimer?.resume()
+
+    }
+    // 模拟测试数据
+    func testData(i: Int){
+        for model in self.singProductArray {
+            if model.moduleType == 801 {
+                for product in  (model.moduleContentProduct?.products) ?? [] {
+                    for _ in 0..<i{
+                        model.moduleContentProduct?.products?.append(product)
+                    }
+                }
+            }
+        }
 
     }
     func requestTop() {

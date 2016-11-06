@@ -564,7 +564,6 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
          // 排序 0，1，2，3，4...
          cell.delegate = self
          cell.selectionStyle = .none
-
         return cell
             
         default:

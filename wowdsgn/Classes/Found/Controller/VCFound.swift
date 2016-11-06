@@ -152,11 +152,6 @@ class VCFound: VCBaseVCCategoryFound {
                 }
                 
                 
-//                strongSelf.data = strongSelf.data.filter({
-//                    $0.moduleType != 201 //201 单条banner的去掉
-//                })
-
-                
                 strongSelf.tableView.reloadData()
             }
             
@@ -433,7 +428,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
                 cell.dataArr = d.moduleContent_102?.banners
                 cell.lbTitle.text = d.moduleContent_102?.name ?? "专题"
-                cell_heights[section]  = 290.h
+                cell_heights[section]  = 290
                 cell.delegate = self
                 cell.selectionStyle = .none
                 return cell
@@ -441,17 +436,24 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             }
             else if ( cell_type == HomeBottomCell.cell_type()) {
                 let model = data[section]
-                
-//                let array =
+
                 let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeBottomCell
                 cell.indexPath = indexPath
                 
                 let OneCellNumber = indexPath.row * 2
                 let TwoCellNumber = ((indexPath.row + 1) * 2) - 1
                 let productsArray = model.moduleContent_402?.products ?? []
-                let lineCellNumber = (productsArray.count.getParityCellNumber()) > 10 ? 10: (productsArray.count.getParityCellNumber())
-                
-                cell_heights[section]  = (lineCellNumber * 139).h
+
+                var heightCell:CGFloat = 0.0
+                switch UIDevice.deviceType {
+                case .dt_iPhone5:
+                    heightCell = 244.0
+                case .dt_iPhone6_Plus:
+                    heightCell = 292.0
+                default:
+                    heightCell = 272.0
+                }
+                cell_heights[section]  = heightCell
                 if productsArray.count.isOdd && (indexPath as NSIndexPath).row + 1 == productsArray.count.getParityCellNumber(){ //  满足为奇数 第二个item 隐藏
                     
                     self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:productsArray)

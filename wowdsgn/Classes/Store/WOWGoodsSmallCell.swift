@@ -83,19 +83,16 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         pictureImageView.yy_setImage(with: url_obj, placeholder: image_place_holder)
         
         // 修改来回上下加载 内存不减的问题
-
         desLabel.text = model.productTitle ?? ""
-//        desLabel.setLineHeightAndLineBreak(1.5)
         if let price = model.sellPrice {
             let result = WOWCalPrice.calTotalPrice([price],counts:[1])
             priceLabel.text     = result//千万不用格式化了            
-            if let originalPrice = model.originalprice {
-                if originalPrice > price{
+            if let originalPrice = model.originalprice,model.originalprice > price{
+
                     //显示下划线
                     let result = WOWCalPrice.calTotalPrice([originalPrice],counts:[1])
-                    
                     originalpriceLabel.setStrokeWithText(result)
-                }
+
             }else {
                 originalpriceLabel.setStrokeWithText("")
             }
@@ -135,7 +132,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
             case 4:
                 
                 lbLabel.isHidden  = false
-                lbLabel.text      = singModel.desc
+                lbLabel.text      = singModel.desc?.get_formted_Space()
             case 3:
                 lbNew.isHidden = false
             case 2:

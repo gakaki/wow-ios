@@ -219,7 +219,19 @@ class WOWController: WOWBaseViewController {
         toVCCategory(11,cname: "厨房")
         
     }
-    
+    //  // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
+    func screenConfigModule() {
+        for model in self.dataArr {
+            switch model.moduleType ?? 0 {
+            case 201,601,101,102,801,402:
+                break
+            default:
+               
+                self.dataArr.removeObject(model)
+            }
+        }
+    }
+
     //MARK:Private Networkr
     override func request() {
         
@@ -277,6 +289,7 @@ class WOWController: WOWBaseViewController {
                     
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
+                    strongSelf.screenConfigModule() // 移除非本版本 上线的  模块类型 
                     strongSelf.singProductArray = []
                     for model in brandArray{
                         if model.moduleType == 801 {// 只取801的model 防止多次for 循环

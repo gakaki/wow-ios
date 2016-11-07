@@ -1,7 +1,7 @@
 import ObjectMapper
 
 
-class WowModulePageVO:Mappable
+class WowModulePageVO:WOWBaseModel, Mappable
 {
     var moduleID:Int?
     var moduleType:Int?

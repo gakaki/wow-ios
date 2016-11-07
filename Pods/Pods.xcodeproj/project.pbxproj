@@ -35,6 +35,12 @@
 		064A7ED4ADEC57B65F333703A4BA1979 /* RxTableViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B418BD00D91F887D79425E3AB1B1613D /* RxTableViewDataSourceProxy.swift */; };
 		064FBACA1DC833DE00CBF8EF /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064FBAC91DC833DE00CBF8EF /* Config3rd.swift */; };
 		065E0F9B1A07CDADC8F19096F2A6B36D /* MJRefreshBackStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9CC87FCC8018F1A8530966A2070F65 /* MJRefreshBackStateFooter.m */; };
+		06A582841DD099EF00A7C602 /* FN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5827E1DD099EF00A7C602 /* FN.swift */; };
+		06A582851DD099EF00A7C602 /* FNUrlMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5827F1DD099EF00A7C602 /* FNUrlMatcher.swift */; };
+		06A582861DD099EF00A7C602 /* FNUrlRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A582801DD099EF00A7C602 /* FNUrlRoute.swift */; };
+		06A582871DD099EF00A7C602 /* FNUrlRouteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A582811DD099EF00A7C602 /* FNUrlRouteDelegate.swift */; };
+		06A582881DD099EF00A7C602 /* FNUrlRouteHandleOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A582821DD099EF00A7C602 /* FNUrlRouteHandleOver.swift */; };
+		06A582891DD099EF00A7C602 /* FNUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A582831DD099EF00A7C602 /* FNUtil.swift */; };
 		06E0239DD63A2C1D0930A7F57C7EF2CB /* QNAssessment.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A0851556D867DAA818291547BC8619 /* QNAssessment.m */; };
 		06EDB944284E74970F312CB7F2910C07 /* IQBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9954957CF288E0FF71E0359E5B25D2E7 /* IQBarButtonItem.swift */; };
 		0769CBA8875311637F13CB936DB9A994 /* SectionedViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2948C77EAB006F2DE212AF2686F918 /* SectionedViewDataSourceType.swift */; };
@@ -1352,6 +1358,12 @@
 		061BEF41D496BF59A4E274ED6F33F87B /* UIColor+VTMagic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+VTMagic.h"; path = "VTMagic/UIColor+VTMagic.h"; sourceTree = "<group>"; };
 		0640A84EBDAF7E39C7BC05C2085E346F /* MJRefreshStateHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshStateHeader.h; path = MJRefresh/Custom/Header/MJRefreshStateHeader.h; sourceTree = "<group>"; };
 		064FBAC91DC833DE00CBF8EF /* Config3rd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config3rd.swift; sourceTree = "<group>"; };
+		06A5827E1DD099EF00A7C602 /* FN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FN.swift; sourceTree = "<group>"; };
+		06A5827F1DD099EF00A7C602 /* FNUrlMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUrlMatcher.swift; sourceTree = "<group>"; };
+		06A582801DD099EF00A7C602 /* FNUrlRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUrlRoute.swift; sourceTree = "<group>"; };
+		06A582811DD099EF00A7C602 /* FNUrlRouteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUrlRouteDelegate.swift; sourceTree = "<group>"; };
+		06A582821DD099EF00A7C602 /* FNUrlRouteHandleOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUrlRouteHandleOver.swift; sourceTree = "<group>"; };
+		06A582831DD099EF00A7C602 /* FNUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUtil.swift; sourceTree = "<group>"; };
 		06B23C1087B98BB88A673631836DA6E5 /* Scan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Scan.swift; path = RxSwift/Observables/Implementations/Scan.swift; sourceTree = "<group>"; };
 		06B66957A3A185C9F3860ED0243B5B33 /* SynchronizedOnType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SynchronizedOnType.swift; path = RxSwift/Concurrency/SynchronizedOnType.swift; sourceTree = "<group>"; };
 		06ED9A0870795A9376D21B431A4293DF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2895,6 +2907,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		06A5827D1DD099EF00A7C602 /* FNUrlRoute */ = {
+			isa = PBXGroup;
+			children = (
+				06A5827E1DD099EF00A7C602 /* FN.swift */,
+				06A5827F1DD099EF00A7C602 /* FNUrlMatcher.swift */,
+				06A582801DD099EF00A7C602 /* FNUrlRoute.swift */,
+				06A582811DD099EF00A7C602 /* FNUrlRouteDelegate.swift */,
+				06A582821DD099EF00A7C602 /* FNUrlRouteHandleOver.swift */,
+				06A582831DD099EF00A7C602 /* FNUtil.swift */,
+			);
+			path = FNUrlRoute;
+			sourceTree = "<group>";
+		};
 		0800A423579D2C50A1722F96D368BCBD /* Request */ = {
 			isa = PBXGroup;
 			children = (
@@ -3926,6 +3951,7 @@
 		73B760535B3BCC166D9FDA836D6CCF32 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				06A5827D1DD099EF00A7C602 /* FNUrlRoute */,
 				1A67E3F05EE82DE41CC058C0F84E0A28 /* AppDelegateUmengHelper.swift */,
 				064FBAC91DC833DE00CBF8EF /* Config3rd.swift */,
 				060FA3ED1DCB309500966C88 /* ConfigH5URL.swift */,
@@ -7049,9 +7075,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06A582851DD099EF00A7C602 /* FNUrlMatcher.swift in Sources */,
 				A9A7C11A70949B0BF3B1EA461A224609 /* AppDelegateUmengHelper.swift in Sources */,
 				064FBACA1DC833DE00CBF8EF /* Config3rd.swift in Sources */,
 				060FA3EE1DCB309500966C88 /* ConfigH5URL.swift in Sources */,
+				06A582871DD099EF00A7C602 /* FNUrlRouteDelegate.swift in Sources */,
+				06A582891DD099EF00A7C602 /* FNUtil.swift in Sources */,
+				06A582881DD099EF00A7C602 /* FNUrlRouteHandleOver.swift in Sources */,
+				06A582861DD099EF00A7C602 /* FNUrlRoute.swift in Sources */,
+				06A582841DD099EF00A7C602 /* FN.swift in Sources */,
 				F781BDE8E2999B2510E03229EAC9C4D3 /* wow3rd-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -196,7 +196,8 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
             }
         }
         v?.model = model
-        v?.imgVieww.set_webimage_url_base(model?.productImg, place_holder_name: "placeholder_product")
+         v?.imgVieww.set_webimage_url(model?.productImg)
+//        v?.imgVieww.set_webimage_url_base(model?.productImg, place_holder_name: "placeholder_product")
 
         if let price = model?.sellPrice {
             let result = WOWCalPrice.calTotalPrice([price],counts:[1])

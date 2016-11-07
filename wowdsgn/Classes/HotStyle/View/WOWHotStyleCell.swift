@@ -60,7 +60,8 @@ class WOWHotStyleCell: UITableViewCell {
         
         if let brandModel = model.moduleContentList?.brand {
             lbLogoName.text = brandModel.brandEname
-            imgLogo.set_webimage_url_base(brandModel.brandLogoImg, place_holder_name: product)
+//            imgLogo.set_webimage_url_base(brandModel.brandLogoImg, place_holder_name: product)
+            imgLogo.set_webimage_url(brandModel.brandLogoImg)
             imgLogo.borderRadius(20)
         }else{
             lbLogoName.text = " "
@@ -82,8 +83,8 @@ class WOWHotStyleCell: UITableViewCell {
                     }
                 }
             )
-
-            imgBackMain.set_webimage_url_base(moduleImage, place_holder_name: product)
+             imgBackMain.set_webimage_url(moduleImage)
+//            imgBackMain.set_webimage_url_base(moduleImage, place_holder_name: product)
         }
         if let showTitle =  model.moduleAdditionalInfo?.showTitle {
             if showTitle { // true 则显示label  false 则不显示

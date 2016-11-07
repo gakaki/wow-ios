@@ -38,13 +38,14 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
         didSet{
             if dataSourceArray?.count > 1 {// 如果大于1个，则显示pageController
                 configureView()
+                self.currentIndex = 0
                 configureAutoScrollTimer()
                 pagingScrollView.pageControl.isHidden       = false
                 pagingScrollView.scrollView.isScrollEnabled = true
                 pagingScrollView.pageControl.numberOfPages  = (self.dataSourceArray?.count)!
              
             }else{// 当数据源为一个时，禁止scrollview滑动，pagecontroller隐藏，计时器销毁
-               
+                self.currentIndex = 0
                 dellocTimer()
                 pagingScrollView.pageControl.isHidden       = true
                 pagingScrollView.scrollView.isScrollEnabled = false

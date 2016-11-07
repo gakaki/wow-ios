@@ -54,7 +54,7 @@ class WOWController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-//         self.tabBarController!.title = "尖叫设计"
+
         setUI()
         addObserver()
         self.view.addSubview(self.topBtn)
@@ -68,9 +68,33 @@ class WOWController: WOWBaseViewController {
         self.topBtn.isHidden = true
         
         request()
+        // 检查更新 
+        WOWCheckUpdate.checkUpdateWithDevice {[weak self] (isUpdate) in
+            if let strongSelf = self{
+                if isUpdate ?? false {
+                    
+                    strongSelf.goToUpdateVersion()
+                }
+            }
+        }
 
     }
-    
+    func goToUpdateVersion()  {
+        let alert = UIAlertController(title: "提示", message: "版本有更新", preferredStyle: .alert)
+        
+        let action_sure = UIAlertAction(title: "更新", style: .default) { (action) in
+            let url = NSURL(string: "https://itunes.apple.com/us/app/jian-jiao-she-ji-sheng-huo/id1110300308?mt=8")
+            UIApplication.shared.openURL(url! as URL)
+
+        }
+        let action_cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alert.addAction(action_sure)
+        alert.addAction(action_cancel)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //        hidingNavBarManager?.viewWillAppear(animated)

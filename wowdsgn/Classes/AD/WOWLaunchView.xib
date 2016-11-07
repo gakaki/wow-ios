@@ -14,20 +14,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="wm5-t0-b0v">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard" translatesAutoresizingMaskIntoConstraints="NO" id="wm5-t0-b0v">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="HFn-ZA-zTG">
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard" translatesAutoresizingMaskIntoConstraints="NO" id="HFn-ZA-zTG">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTX-H2-G7y">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="zEI-4p-vhd">
-                            <rect key="frame" x="121" y="79" width="133" height="175"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="zEI-4p-vhd">
+                            <rect key="frame" x="134.5" y="96.5" width="106" height="140"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="133" id="BiV-3U-PcT"/>
-                                <constraint firstAttribute="height" constant="175" id="e8q-oM-zu5"/>
+                                <constraint firstAttribute="width" constant="106" id="BiV-3U-PcT"/>
+                                <constraint firstAttribute="height" constant="140" id="e8q-oM-zu5"/>
                             </constraints>
                         </imageView>
                     </subviews>
@@ -85,7 +85,7 @@
         </view>
     </objects>
     <resources>
-        <image name="default" width="1242" height="2208"/>
+        <image name="Artboard" width="200" height="200"/>
         <image name="logo" width="110" height="168"/>
     </resources>
 </document>

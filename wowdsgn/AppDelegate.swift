@@ -413,7 +413,7 @@ extension AppDelegate: AdLaunchViewDelegate {
                 if let imgUrl = res.first?.imgUrl {
                     //                Defaults[.pic_ad] = imgUrl
                     strongSelf.lunchView.backgroundImg.kf.setImage(with: URL(string:imgUrl),
-                                        placeholder:UIImage(named: "default"),
+                                        placeholder:UIImage(named: "Artboard"),
                                         options: nil,
                                         progressBlock: nil,
                                         completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
@@ -424,9 +424,7 @@ extension AppDelegate: AdLaunchViewDelegate {
                                                     }
                                                     
                                                 })
-                                                
                                             }
-                                                                        
                     })
                     
                 }

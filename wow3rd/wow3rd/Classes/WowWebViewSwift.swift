@@ -14,22 +14,25 @@ public class WowWebViewSwift: UIViewController , WKUIDelegate, WKNavigationDeleg
     
     public let url = "http://10.0.60.116:8080/wow11-11.html"
     
+    public func toCouponMe(){
+        print("toCouponMe")
+    }
     public func bridge_router(){
         
         bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in
             if let product_id = args.first as? Int , args.count == 1 {
-                print(product_id)
+                
                 return (true, nil)
             }
             return (false, nil)
         }
-        bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in
-            if let product_id = args.first as? Int , args.count == 1 {
-                print(product_id)
-                return (true, nil)
-            }
-            return (false, nil)
+        
+        bridge.registerHandler("Wow.router.coupon_me") { (args:[Any]) -> (Bool, [Any]?) in
+           //跳转coupon  这里应该上router方案哦 router和vc的组合
+           self.toCouponMe()
+           return (true, nil)
         }
+        
         bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in
             if let product_id = args.first as? Int , args.count == 1 {
                 print(product_id)

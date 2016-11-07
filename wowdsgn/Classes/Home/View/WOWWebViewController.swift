@@ -13,7 +13,7 @@ class WOWWebViewController: WOWBaseViewController {
     var           bannerUrl   :   String? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = ""
+        navigationItem.title = "尖叫设计"
 
         let url = URL(string: bannerUrl ?? "")!
         

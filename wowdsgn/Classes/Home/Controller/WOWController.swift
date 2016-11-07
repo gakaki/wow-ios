@@ -228,24 +228,36 @@ class WOWController: WOWBaseViewController {
         self.requestBottom()
             
     }
+
     func timerCount(array: Array<WOWHomeModle>){
         myQueueTimer = DispatchQueue(label: "myQueueTimer")
         myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
         myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
         myTimer?.setEventHandler {
-            for model in array {
+            for model in self.singProductArray {
                 if model.moduleType == 801 {
                     for product in  (model.moduleContentProduct?.products) ?? [] {
                         if product.timeoutSeconds > 0{
                             product.timeoutSeconds  = product.timeoutSeconds - 1
-//                            print("\(product.productTitle) -- \(product.timeoutSeconds)")
                         }
-                       
                     }
                 }
             }
         }
         myTimer?.resume()
+
+    }
+    // 模拟测试数据
+    func testData(i: Int){
+        for model in self.singProductArray {
+            if model.moduleType == 801 {
+                for product in  (model.moduleContentProduct?.products) ?? [] {
+                    for _ in 0..<i{
+                        model.moduleContentProduct?.products?.append(product)
+                    }
+                }
+            }
+        }
 
     }
     func requestTop() {
@@ -265,6 +277,7 @@ class WOWController: WOWBaseViewController {
                     
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
+                    strongSelf.singProductArray = []
                     for model in brandArray{
                         if model.moduleType == 801 {// 只取801的model 防止多次for 循环
                             strongSelf.singProductArray.append(model)
@@ -520,6 +533,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
              cell.dataArr = model.moduleContent?.banners
              cell.lbTitle.text = model.moduleContent?.name ?? "专题"
              cell.delegate = self
+               cell.selectionStyle = .none
              return cell
         case 801:
             
@@ -527,6 +541,7 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
             let array = model.moduleContentProduct?.products
             cell.dataSourceArray = array
             cell.delegate = self
+              cell.selectionStyle = .none
             return cell
         case 402:
             
@@ -549,7 +564,6 @@ extension WOWController:UITableViewDelegate,UITableViewDataSource{
          // 排序 0，1，2，3，4...
          cell.delegate = self
          cell.selectionStyle = .none
-
         return cell
             
         default:

@@ -52,8 +52,12 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var lbDiscountTwo: UILabel!
     @IBOutlet weak var lbPromoteOne: UILabel!// 1.第一个 促销标题
     @IBOutlet weak var lbPromoteTwo: UILabel!
-    @IBOutlet weak var LeftConstraintOne: NSLayoutConstraint!
+    @IBOutlet weak var LeftConstraintOne: NSLayoutConstraint! // 标签位置
     @IBOutlet weak var LeftConstraintTwo: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomConstraintOne: NSLayoutConstraint! // 标签、喜欢、距离底部距离
+    @IBOutlet weak var bottomConstraintTwo: NSLayoutConstraint!
+    
     var oneModel : WOWProductModel? = nil
     var twoModel : WOWProductModel? = nil
     

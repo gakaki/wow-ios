@@ -47,7 +47,6 @@
 		069D2F821DB4796800A059D0 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069D2F811DB4796800A059D0 /* ImageIO.framework */; };
 		069D2F841DB4796D00A059D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069D2F831DB4796D00A059D0 /* SystemConfiguration.framework */; };
 		069D31A61DB47ADD00A059D0 /* AdLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D2F891DB47ADC00A059D0 /* AdLaunchView.swift */; };
-		069D31A71DB47ADD00A059D0 /* WOWAdLaunchView.swift1 in Resources */ = {isa = PBXBuildFile; fileRef = 069D2F8A1DB47ADC00A059D0 /* WOWAdLaunchView.swift1 */; };
 		069D31A81DB47ADD00A059D0 /* WOWVOAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D2F8B1DB47ADC00A059D0 /* WOWVOAd.swift */; };
 		069D31A91DB47ADD00A059D0 /* WOWBuyCarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D2F911DB47ADC00A059D0 /* WOWBuyCarController.swift */; };
 		069D31AA1DB47ADD00A059D0 /* WOWBuyCarEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D2F921DB47ADC00A059D0 /* WOWBuyCarEmpty.swift */; };
@@ -501,7 +500,6 @@
 		069D2F831DB4796D00A059D0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		069D2F851DB47ABD00A059D0 /* wowdsgn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wowdsgn.entitlements; sourceTree = "<group>"; };
 		069D2F891DB47ADC00A059D0 /* AdLaunchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdLaunchView.swift; sourceTree = "<group>"; };
-		069D2F8A1DB47ADC00A059D0 /* WOWAdLaunchView.swift1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WOWAdLaunchView.swift1; sourceTree = "<group>"; };
 		069D2F8B1DB47ADC00A059D0 /* WOWVOAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWVOAd.swift; sourceTree = "<group>"; };
 		069D2F911DB47ADC00A059D0 /* WOWBuyCarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBuyCarController.swift; sourceTree = "<group>"; };
 		069D2F921DB47ADC00A059D0 /* WOWBuyCarEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBuyCarEmpty.swift; sourceTree = "<group>"; };
@@ -1099,7 +1097,6 @@
 				069D2F891DB47ADC00A059D0 /* AdLaunchView.swift */,
 				6326BF3A1DD0161600917FA3 /* WOWLaunchView.swift */,
 				6326BF381DD0160700917FA3 /* WOWLaunchView.xib */,
-				069D2F8A1DB47ADC00A059D0 /* WOWAdLaunchView.swift1 */,
 				069D2F8B1DB47ADC00A059D0 /* WOWVOAd.swift */,
 			);
 			path = AD;
@@ -2199,7 +2196,6 @@
 				2D509A5C1DB5D3120047CD13 /* Cell_102_Project.xib in Resources */,
 				069D329E1DB47ADD00A059D0 /* WOWContentTopicTopCell.xib in Resources */,
 				069D31BC1DB47ADD00A059D0 /* WOWOrderFooterView.xib in Resources */,
-				069D31A71DB47ADD00A059D0 /* WOWAdLaunchView.swift1 in Resources */,
 				63A1E21B1DB9B95100C250D4 /* WOWProductParamCell.xib in Resources */,
 				068121511DB4D03600407319 /* UMSocialLocalizable.strings in Resources */,
 				069D32B41DB47ADD00A059D0 /* WOWCouponheaderView.xib in Resources */,

@@ -81,7 +81,7 @@ struct WOWHud {
     static func configSVHud(){
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setDefaultStyle(.custom)
-        SVProgressHUD.setInfoImage(UIImage(named:"  "))
+        SVProgressHUD.setInfoImage(UIImage(named:""))
         SVProgressHUD.setBackgroundColor(UIColor.black)
         SVProgressHUD.setForegroundColor(UIColor.white)
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)

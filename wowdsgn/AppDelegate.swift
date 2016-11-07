@@ -63,20 +63,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         lunchView = Bundle.main.loadNibNamed(String(describing: WOWLaunchView.self), owner: self, options: nil)?.last as! WOWLaunchView
         lunchView.frame =  CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight)
         window?.addSubview(lunchView)
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(closeButtonClick), userInfo: nil, repeats: false)
+//        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(closeButtonClick), userInfo: nil, repeats: false)
         self.fetchADImage()
     }
     
-    func closeButtonClick(){
-        UIView.animate(withDuration: 1, animations: {
-            self.lunchView.alpha = 0
-        }, completion: {[weak self] (finished: Bool) in
-            if let strongSelf = self {
-                strongSelf.lunchView.removeFromSuperview()
-            }
-        })
-        
-    }
+//    func closeButtonClick(){
+//        UIView.animate(withDuration: 1, animations: {
+//            self.lunchView.alpha = 0
+//        }, completion: {[weak self] (finished: Bool) in
+//            if let strongSelf = self {
+//                strongSelf.lunchView.removeFromSuperview()
+//            }
+//        })
+//        
+//    }
     
     func asyncLoad(){
 

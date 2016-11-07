@@ -16,6 +16,17 @@ class WOWLaunchView: UIView {
 //        UIView.animate(withDuration: 1, animations: {
 //            self.backgroundImg.alpha = 1
 //        })
+        let delayTime = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            self.removeFromSuperview()
+        }
+    }
+    override func removeFromSuperview() {
+        UIView.animate(withDuration: 1, animations: {
+            self.alpha = 0
+        }, completion: { (finished: Bool) in
+            super.removeFromSuperview()
+        })
     }
     /*
     // Only override draw() if you perform custom drawing.

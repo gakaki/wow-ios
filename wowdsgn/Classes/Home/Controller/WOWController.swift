@@ -270,7 +270,7 @@ class WOWController: WOWBaseViewController {
         myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
         myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
         myTimer?.setEventHandler {
-            for model in self.singProductArray {
+            for model in array {
                 if model.moduleType == 801 {
                     for product in  (model.moduleContentProduct?.products) ?? [] {
                         if product.timeoutSeconds > 0{
@@ -314,6 +314,7 @@ class WOWController: WOWBaseViewController {
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
                     strongSelf.screenConfigModule() // 移除非本版本 上线的  模块类型 
+                    strongSelf.singProductArray.removeAll()
                     strongSelf.singProductArray = []
                     for model in brandArray{
                         if model.moduleType == 801 {// 只取801的model 防止多次for 循环

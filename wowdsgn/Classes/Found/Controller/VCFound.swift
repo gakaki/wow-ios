@@ -137,6 +137,14 @@ class VCFound: VCBaseVCCategoryFound {
                             t.moduleContent_402?.name = (t.contentTmp!["name"] as? String) ?? ""
                         }
                     }
+                    if t.moduleType == 801
+                    {
+                        if let s  = t.contentTmp  {
+                            t.moduleContentProduct   =  Mapper<WOWHomeProduct_402_Info>().map(JSONObject:s)
+                        }
+
+                        
+                    }
                     if t.moduleType == 102
                     {
                         if let s  = t.contentTmp  {
@@ -419,6 +427,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 cell.selectionStyle = .none
                 cell.setData(d.moduleContentArr ?? [WowModulePageItemVO]())
                 cell_heights[section]  = cell.heightAll
+                
                 //            print("cel height is ",cell_heights[section])
                 cell.bringSubview(toFront: cell.collectionView)
                 
@@ -434,6 +443,19 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 return cell
 
             }
+//            else if ( cell_type == Cell_103_Product.cell_type() ){
+//            
+//                
+//                let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_103, for: indexPath) as! Cell_103_Product
+////                let array = model.moduleContentProduct?.products
+//                
+////                cell.dataSourceArray = array
+////                cell.delegate = self
+//                cell_heights[section]  = 210
+//                cell.selectionStyle = .none
+//                return cell
+//
+//            }
             else if ( cell_type == HomeBottomCell.cell_type()) {
                 let model = data[section]
 

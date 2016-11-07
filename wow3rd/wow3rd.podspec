@@ -14,7 +14,7 @@ wowdsgn集成各种第三方库
   s.author           = { 'gakaki' => 'gakaki@gmail.com' }
   s.source           = { :git => 'https://github.com/gakaki/wow3rd.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.source_files = 'wow3rd/Classes/**/*','wow3rd/libs/**/*.h'
 
   # s.resource_bundles = {
@@ -31,7 +31,8 @@ wowdsgn集成各种第三方库
 #  s.dependency 'WebViewJavascriptBridge', '~> 5.0'
 #  s.dependency 'SwiftWebViewBridge', '~> 0.2.0'
   s.dependency 'WebViewBridge.Swift'
-  
+
+
 
 
   # s.frameworks = 'UIKit', 'MapKit'

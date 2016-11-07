@@ -143,7 +143,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
         tableView.mj_header = self.mj_header
         tableView.register(UINib.nibName(String(describing: WOWGoodsTypeCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsTypeCell.self))
         tableView.register(UINib.nibName(String(describing: WOWGoodsDetailCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsDetailCell.self))
-//        tableView.register(UINib.nibName(String(describing: WOWGoodsParamCell.self)), forCellReuseIdentifier:String(describing: WOWGoodsParamCell.self))
+
         tableView.register(UINib.nibName(String(describing: WOWSenceLikeCell.self)), forCellReuseIdentifier:String(describing: WOWSenceLikeCell.self))
         tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:String(describing: WOWCommentCell.self))
         tableView.register(UINib.nibName(String(describing: WOWDesignerCell.self)), forCellReuseIdentifier:String(describing: WOWDesignerCell.self))

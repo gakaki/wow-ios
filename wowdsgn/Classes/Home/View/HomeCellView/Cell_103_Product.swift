@@ -38,7 +38,7 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
         didSet{
             if dataSourceArray?.count > 1 {// 如果大于1个，则显示pageController
                 configureView()
-                self.currentIndex = 0
+//                self.currentIndex = 0
                 configureAutoScrollTimer()
                 pagingScrollView.pageControl.isHidden       = false
                 pagingScrollView.scrollView.isScrollEnabled = true

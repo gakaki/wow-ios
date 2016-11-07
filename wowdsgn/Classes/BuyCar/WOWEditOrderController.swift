@@ -118,7 +118,32 @@ class WOWEditOrderController: WOWBaseViewController {
             WOWHud.showMsg("请选择收货地址")
             return
         }
+        if  let array = productArr {
+            //status -1 失效。2下架
+            for product in array {
+                if product.productStatus == -1 {
+                    let str = String(format:"您购买的商品\"%@\"已失效",product.productTitle ?? "")
+                    WOWHud.showWarnMsg(str)
+                    return
+                }
+                if product.productStatus == 2 {
+                    let str = String(format:"您购买的商品\"%@\"已下架",product.productTitle ?? "")
+                    WOWHud.showWarnMsg(str)
+                    return
+                }
+                if product.productStatus == 1 && product.productStock == 0 {
+                    let str = String(format:"您购买的商品\"%@\"已售罄",product.productTitle ?? "")
+                    WOWHud.showWarnMsg(str)
+                    return
+                }
+            }
+        }
         
+        //下单前判断一下是否已经生成订单号，如果已经生成了则直接弹窗
+        guard orderCode.isEmpty else {
+            chooseStyle()
+            return
+        }
         switch entrance! {
         case editOrderEntrance.buyEntrance:
             requestBuyNowOrderCreat()
@@ -189,11 +214,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //请求创建订单
     func requestOrderCreat() -> Void {
-        //下单前判断一下是否已经生成订单号，如果已经生成了则直接弹窗
-        guard orderCode.isEmpty else {
-            chooseStyle()
-            return
-        }
+       
         
         var params = [String: AnyObject]()
         // 截取两位小数点，确保金额正确
@@ -277,11 +298,6 @@ class WOWEditOrderController: WOWBaseViewController {
     //立即支付创建订单
     func requestBuyNowOrderCreat() -> Void {
         
-        //下单前判断一下是否已经生成订单号，如果已经生成了则直接弹窗
-        guard orderCode.isEmpty else {
-            chooseStyle()
-            return
-        }
         
         var params              = [String: AnyObject]()
         let totalAmount         = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))

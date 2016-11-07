@@ -60,12 +60,12 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         //productStatus -1已失效  2已下架  1并且库存等于0  已售罄
         if model.productStatus == -1 {
             statusLabel.text = "已失效"
-        }
-        if model.productStatus == 2 {
+        }else if model.productStatus == 2 {
             statusLabel.text = "已下架"
-        }
-        if model.productStatus == 1 && model.productStock == 0 {
+        }else if model.productStatus == 1 && model.productStock == 0 {
             statusLabel.text = "已售罄"
+        }else {
+            statusLabel.text = ""
         }
        
         if let attributes = model.attributes {

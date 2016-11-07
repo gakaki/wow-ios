@@ -48,7 +48,11 @@ class WOWProductDetailCell: UITableViewCell {
                                                       toItem: self.productImg, attribute: .height,
                                                       multiplier: secondaryImg.imageAspect , constant: 0.0)
 
-                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
+                productImg.kf.setImage(with: URL(string:img),
+                                       placeholder:UIImage(named: "placeholder_product"),
+                                       options: nil,
+                                       progressBlock: nil,
+                                       completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
 //                    if let strongSelf = self {
 //                        if let image = image {
 //                            let imageAspect = image.size.width / image.size.height

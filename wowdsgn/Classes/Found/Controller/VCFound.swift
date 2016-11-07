@@ -13,6 +13,9 @@ class VCFound: VCBaseVCCategoryFound {
     var vo_recommend_product_id = 0
     var cell_heights            = [0:0.h]
     
+    var myQueueTimer: DispatchQueue?
+    var myTimer: DispatchSourceTimer?
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -71,7 +74,25 @@ class VCFound: VCBaseVCCategoryFound {
 
         }
     }
-    
+    func timerCount(array: Array<WOWProductModel>){
+        myQueueTimer = DispatchQueue(label: "myQueueTimer")
+        myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
+        myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
+        myTimer?.setEventHandler {
+//            for model in self.singProductArray {
+//                if model.moduleType == 801 {
+                    for product in  array {
+                        if product.timeoutSeconds > 0{
+                            product.timeoutSeconds  = product.timeoutSeconds - 1
+                        }
+//                    }
+//                }
+            }
+        }
+        myTimer?.resume()
+        
+    }
+
     func request_module_page_with_throw() throws -> Void {
         
         super.request()
@@ -82,69 +103,62 @@ class VCFound: VCBaseVCCategoryFound {
                 strongSelf.endRefresh()
                 
                 var r                             =  JSON(result)
-                strongSelf.data                   =  Mapper<WowModulePageVO>().mapArray(JSONObject:r["modules"].arrayObject) ?? [WowModulePageVO]()
+                strongSelf.data = []
+                strongSelf.data                   =  Mapper<WowModulePageVO>().mapArray(JSONObject:r["modules"].arrayObject)!
                 
-                for  t:WowModulePageVO in strongSelf.data
+                for  t in strongSelf.data
                 {
-                    if t.moduleType == 101
-                    {
-                        if let s  = t.contentTmp!["banners"] as? [AnyObject] {
-                            t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
-                        }
-                    }
-                    if t.moduleType == 302
-                    {
+                    t.moduleClassName     =  ModulePageType.getIdentifier(t.moduleType!)
+                    switch t.moduleType ?? 0 {
+                    
+                    case 302:
                         if let s  = t.contentTmp!["categories"] as? [AnyObject] {
                             t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                         }
-                    }
-                    if t.moduleType == 401
-                    {
+                    case 401:
                         if let s  = t.contentTmp!["products"] as? [AnyObject] {
                             t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                             t.name = (t.contentTmp!["name"] as? String) ?? ""
                             
                         }
-                    }
-                    if t.moduleType == 201
-                    {
+
+                    case 201:
                         if let s  = t.contentTmp  {
                             t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(JSONObject:s)
                         }
-                    }
-                    if t.moduleType == 501
-                    {
+                    case 501:
                         if let s  = t.contentTmp  {
                             t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(JSONObject:s)
                         }
-                    }
-                    if t.moduleType == 301
-                    {
+                    case 301:
                         if let s  = t.contentTmp!["categories"] as? [AnyObject] {
                             t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                         }
-                    }
-                    if t.moduleType == 201
-                    {
-                        if let s  = t.contentTmp {
-                            t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(JSONObject:s)
-                        }
-                    }
-                    if t.moduleType == 402
-                    {
+                   
+                    case 402:
                         if let s  = t.contentTmp  {
                             t.moduleContent_402   =  Mapper<WOWHomeProduct_402_Info>().map(JSONObject:s)
                             t.moduleContent_402?.name = (t.contentTmp!["name"] as? String) ?? ""
                         }
-                    }
-                    if t.moduleType == 102
-                    {
+                    case 801:
+                        if let s  = t.contentTmp  {
+                            t.moduleContentProduct   =  Mapper<WOWHomeProduct_402_Info>().map(JSONObject:s)
+                            // 拿到数据，倒计时刷新数据源model
+                            if t.moduleContentProduct?.products?.count > 0 {
+                                strongSelf.timerCount(array: t.moduleContentProduct?.products ?? [])
+                            }
+                            
+                        }
+                    case 102:
                         if let s  = t.contentTmp  {
                             t.moduleContent_102   =  Mapper<WOWCarouselBanners>().map(JSONObject:s)
                         }
+
+                    default:
+                        // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
+                        strongSelf.data.removeObject(t)
                     }
-                                       
-                    t.moduleClassName     =  ModulePageType.getIdentifier(t.moduleType!)
+                 
                 }
                 
                 if (WOWUserManager.loginStatus){
@@ -419,6 +433,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 cell.selectionStyle = .none
                 cell.setData(d.moduleContentArr ?? [WowModulePageItemVO]())
                 cell_heights[section]  = cell.heightAll
+                
                 //            print("cel height is ",cell_heights[section])
                 cell.bringSubview(toFront: cell.collectionView)
                 
@@ -430,6 +445,19 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 cell.lbTitle.text = d.moduleContent_102?.name ?? "专题"
                 cell_heights[section]  = 290
                 cell.delegate = self
+                cell.selectionStyle = .none
+                return cell
+
+            }
+            else if ( cell_type == Cell_103_Product.cell_type() ){
+            
+                
+                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_103_Product
+                let array = d.moduleContentProduct?.products
+                
+                cell.dataSourceArray = array
+                cell.delegate = self
+                cell_heights[section]  = 210
                 cell.selectionStyle = .none
                 return cell
 
@@ -550,6 +578,11 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             }
         }
         
+    }
+}
+extension VCFound:cell_801_delegate{// 今日单品跳转详情
+    func goToProcutDetailVCWith_801(_ productId: Int?){
+        toVCProduct(productId)
     }
 }
 extension VCFound:HomeBottomDelegate{

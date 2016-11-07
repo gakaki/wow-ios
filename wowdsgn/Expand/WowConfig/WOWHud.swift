@@ -76,15 +76,32 @@ struct WOWHud {
         return view
     }()
     
-
+    // 接口请求成功
+    static func showWarnMsg(_ message:String?){
+        //        DispatchQueue.main.async {
+        //
+        ////            WOWHud.dismiss()
+        //
+        //        }
+        configErrorSVHud()
+        let msg = message ?? ""
+        SVProgressHUD.showInfo(withStatus: msg)
+    }
     
     static func configSVHud(){
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setDefaultStyle(.custom)
-        SVProgressHUD.setInfoImage(UIImage(named:"  "))
+        SVProgressHUD.setInfoImage(UIImage(named:""))
         SVProgressHUD.setBackgroundColor(UIColor.black)
         SVProgressHUD.setForegroundColor(UIColor.white)
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)
     }
-    
+    static func configErrorSVHud(){
+        SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.setDefaultStyle(.custom)
+        SVProgressHUD.setInfoImage(UIImage(named:"error"))
+        SVProgressHUD.setBackgroundColor(UIColor.black)
+        SVProgressHUD.setForegroundColor(UIColor.white)
+        SVProgressHUD.setMinimumDismissTimeInterval(1.5)
+    }
 }

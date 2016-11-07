@@ -54,7 +54,7 @@ class WOWController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-//         self.tabBarController!.title = "尖叫设计"
+
         setUI()
         addObserver()
         self.view.addSubview(self.topBtn)
@@ -68,9 +68,33 @@ class WOWController: WOWBaseViewController {
         self.topBtn.isHidden = true
         
         request()
+        // 检查更新 
+        WOWCheckUpdate.checkUpdateWithDevice {[weak self] (isUpdate) in
+            if let strongSelf = self{
+                if isUpdate ?? false {
+                    
+                    strongSelf.goToUpdateVersion()
+                }
+            }
+        }
 
     }
-    
+    func goToUpdateVersion()  {
+        let alert = UIAlertController(title: "提示", message: "版本有更新", preferredStyle: .alert)
+        
+        let action_sure = UIAlertAction(title: "更新", style: .default) { (action) in
+            let url = NSURL(string: "https://itunes.apple.com/us/app/jian-jiao-she-ji-sheng-huo/id1110300308?mt=8")
+            UIApplication.shared.openURL(url! as URL)
+
+        }
+        let action_cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alert.addAction(action_sure)
+        alert.addAction(action_cancel)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //        hidingNavBarManager?.viewWillAppear(animated)
@@ -219,7 +243,19 @@ class WOWController: WOWBaseViewController {
         toVCCategory(11,cname: "厨房")
         
     }
-    
+    //  // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
+    func screenConfigModule() {
+        for model in self.dataArr {
+            switch model.moduleType ?? 0 {
+            case 201,601,101,102,801,402:
+                break
+            default:
+               
+                self.dataArr.removeObject(model)
+            }
+        }
+    }
+
     //MARK:Private Networkr
     override func request() {
         
@@ -234,7 +270,7 @@ class WOWController: WOWBaseViewController {
         myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
         myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
         myTimer?.setEventHandler {
-            for model in self.singProductArray {
+            for model in array {
                 if model.moduleType == 801 {
                     for product in  (model.moduleContentProduct?.products) ?? [] {
                         if product.timeoutSeconds > 0{
@@ -277,6 +313,8 @@ class WOWController: WOWBaseViewController {
                     
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
+                    strongSelf.screenConfigModule() // 移除非本版本 上线的  模块类型 
+                    strongSelf.singProductArray.removeAll()
                     strongSelf.singProductArray = []
                     for model in brandArray{
                         if model.moduleType == 801 {// 只取801的model 防止多次for 循环

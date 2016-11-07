@@ -16,7 +16,11 @@ extension String {
         return randomString
     }
 }
-
+enum YYImageWidth {
+    case SMALL
+    case MEDIUM
+    case BIG
+}
 
 //YYImage WebP Support
 extension UIImageView {
@@ -65,7 +69,7 @@ extension UIImageView {
             let url         = self.webp_url(url)
             let pic_name    = "placeholder_product"
             self.set_webimage_url_base(url,place_holder_name: pic_name)
-
+        
         }
     }
     
@@ -74,8 +78,8 @@ extension UIImageView {
         if ( res.length <= 0 ){
             return ""
         }else{
-            res     = "\(url!)?imageMogr2/format/webp"            
-            res     = "\(url!)?imageView2/0/w/450/format/webp/q/90"
+//            res     = "\(url!)?imageMogr2/format/webp"            
+            res     = "\(url!)?imageView2/0/w/900/format/webp/q/90"
 
         }
        return res

@@ -1,7 +1,7 @@
 import ObjectMapper
 
 
-class WowModulePageVO:Mappable
+class WowModulePageVO:WOWBaseModel, Mappable
 {
     var moduleID:Int?
     var moduleType:Int?
@@ -10,6 +10,8 @@ class WowModulePageVO:Mappable
     
     var moduleContent_402           :  WOWHomeProduct_402_Info?// 402 专题列表
     var moduleContent_102           :  WOWCarouselBanners?// 402 专题列表
+    var moduleContentProduct    :  WOWHomeProduct_402_Info? // 自定义产品组
+    
     
     var moduleContentArr:[WowModulePageItemVO]?
     var moduleContentItem:WowModulePageItemVO?

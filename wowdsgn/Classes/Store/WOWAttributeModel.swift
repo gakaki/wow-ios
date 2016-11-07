@@ -46,7 +46,7 @@ class WOWParameter: WOWBaseModel,Mappable{
 
 class WOWProductPicTextModel:WOWBaseModel,Mappable {
     var image  :String?
-    var text    :String = ""
+    var text    :String?
     var imageAspect:CGFloat = 0
     
     

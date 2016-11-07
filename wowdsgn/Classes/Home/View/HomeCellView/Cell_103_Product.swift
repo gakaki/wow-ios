@@ -37,12 +37,17 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
     var dataSourceArray:[WOWProductModel]?{
         didSet{
             if dataSourceArray?.count > 1 {// 如果大于1个，则显示pageController
-                
-                pagingScrollView.pageControl.numberOfPages = (self.dataSourceArray?.count)!
+                configureView()
+//                self.currentIndex = 0
+                configureAutoScrollTimer()
+                pagingScrollView.pageControl.isHidden       = false
+                pagingScrollView.scrollView.isScrollEnabled = true
+                pagingScrollView.pageControl.numberOfPages  = (self.dataSourceArray?.count)!
              
             }else{// 当数据源为一个时，禁止scrollview滑动，pagecontroller隐藏，计时器销毁
-                autoScrollTimer?.invalidate()
-                pagingScrollView.pageControl.isHidden = true
+                self.currentIndex = 0
+                dellocTimer()
+                pagingScrollView.pageControl.isHidden       = true
                 pagingScrollView.scrollView.isScrollEnabled = false
              
             }
@@ -55,20 +60,27 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var pagingScrollView: PagingScrollView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        //设置三个 View 左中右
         configureView()
-        print(self.dataSourceArray)
+        
         configureAutoScrollTimer()
         
     }
     
     //设置自动滚动计时器
     func configureAutoScrollTimer() {
+        if autoScrollTimer == nil {
         //设置一个定时器，每三秒钟滚动一次
         autoScrollTimer = Timer.scheduledTimer(timeInterval: 3, target: self,
                                                selector: #selector(letItScroll),
                                                userInfo: nil, repeats: true)
         RunLoop.current.add(autoScrollTimer!, forMode: RunLoopMode.commonModes)
+        }
+    }
+    //销毁计时器
+    func dellocTimer(){
+        autoScrollTimer?.invalidate()
+        autoScrollTimer = nil
     }
     //计时器时间一到，滚动一个View
     func letItScroll(){
@@ -88,6 +100,8 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
     }
     //设置三个 View 左中右
     func configureView(){
+        pagingScrollView.scrollView.removeSubviews()
+        
         self.leftView       = singProductView()
         let cvLeft          = countDownView()
         cvLeft.frame        = (self.leftView?.view_CountDown?.bounds)!
@@ -196,7 +210,8 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
             }
         }
         v?.model = model
-        v?.imgVieww.set_webimage_url_base(model?.productImg, place_holder_name: "placeholder_product")
+         v?.imgVieww.set_webimage_url(model?.productImg)
+//        v?.imgVieww.set_webimage_url_base(model?.productImg, place_holder_name: "placeholder_product")
 
         if let price = model?.sellPrice {
             let result = WOWCalPrice.calTotalPrice([price],counts:[1])

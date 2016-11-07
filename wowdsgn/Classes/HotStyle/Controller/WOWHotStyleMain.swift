@@ -39,6 +39,19 @@ class WOWHotStyleMain: WOWBaseViewController {
         tableView.mj_header = mj_header
         tableView.estimatedRowHeight = 410
     }
+    //  // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
+    func screenConfigModule() {
+        for model in self.dataArr {
+            switch model.moduleType ?? 0 {
+            case 701:
+                break
+            default:
+                
+                self.dataArr.removeObject(model)
+            }
+        }
+    }
+
     override func request() {
         super.request()
         var params = [String: AnyObject]()
@@ -58,10 +71,10 @@ class WOWHotStyleMain: WOWBaseViewController {
                 if let brandArray = bannerList{
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
-                    
+                    strongSelf.screenConfigModule()
                 }
              
-                    strongSelf.tableView.reloadData()
+                strongSelf.tableView.reloadData()
                     WOWHud.dismiss()
 
                 
@@ -118,7 +131,7 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == dataArr.count - 1{
-            return 70
+            return 70.h
         }else{
             return 15.h
         }
@@ -137,7 +150,7 @@ extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
     }
     func footerView() -> UIView {
         
-        let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70))
+        let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70.h))
         view.backgroundColor = tableView.backgroundColor
         return view
         

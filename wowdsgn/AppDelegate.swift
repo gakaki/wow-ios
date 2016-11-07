@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //    var sideController:WOWSideContainerController!
     var adLaunchView: AdLaunchView?
     let umessage  = AppDelegateUmengHelper()
+    var lunchView: WOWLaunchView!
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window?.makeKeyAndVisible()
@@ -54,15 +55,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
     func ADLaunchView(){
-        self.fetchADImage()
-
-        adLaunchView    = AdLaunchView(frame: UIScreen.main.bounds)
-        adLaunchView?.delegate = self
-        window?.addSubview(adLaunchView!)
         
+//
+//        adLaunchView    = AdLaunchView(frame: UIScreen.main.bounds)
+//        adLaunchView?.delegate = self
+//        window?.addSubview(adLaunchView!)
+        lunchView = Bundle.main.loadNibNamed(String(describing: WOWLaunchView.self), owner: self, options: nil)?.last as! WOWLaunchView
+        lunchView.frame =  CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight)
+        window?.addSubview(lunchView)
+//        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(closeButtonClick), userInfo: nil, repeats: false)
+        self.fetchADImage()
     }
     
-   
+//    func closeButtonClick(){
+//        UIView.animate(withDuration: 1, animations: {
+//            self.lunchView.alpha = 0
+//        }, completion: {[weak self] (finished: Bool) in
+//            if let strongSelf = self {
+//                strongSelf.lunchView.removeFromSuperview()
+//            }
+//        })
+//        
+//    }
     
     func asyncLoad(){
 
@@ -391,13 +405,31 @@ extension AppDelegate: AdLaunchViewDelegate {
     
     func fetchADImage(){
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AD, successClosure: { (result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AD, successClosure: {[weak self] (result, code) in
             
             var r                     =  JSON(result)["startupImageList"]
             let res                   =  Mapper<WOWVOAd>().mapArray(JSONObject:r.arrayObject) ?? [WOWVOAd]()
-            if let imgUrl = res.first?.imgUrl {
-                Defaults[.pic_ad] = imgUrl
+            if let strongSelf = self {
+                if let imgUrl = res.first?.imgUrl {
+                    //                Defaults[.pic_ad] = imgUrl
+                    strongSelf.lunchView.backgroundImg.kf.setImage(with: URL(string:imgUrl),
+                                        placeholder:UIImage(named: "Artboard"),
+                                        options: nil,
+                                        progressBlock: nil,
+                                        completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
+                                            if let strongSelf = self {
+                                                UIView.animate(withDuration: 1, animations: {
+                                                    if strongSelf.lunchView.backgroundImg != nil {
+                                                        strongSelf.lunchView.backgroundImg.alpha = 1
+                                                    }
+                                                    
+                                                })
+                                            }
+                    })
+                    
+                }
             }
+            
         }) { (errorMsg) in
             
         }

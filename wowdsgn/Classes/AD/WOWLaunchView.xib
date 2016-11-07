@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="WOWLaunchView" id="lJl-gH-6sJ" customClass="WOWLaunchView" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard" translatesAutoresizingMaskIntoConstraints="NO" id="wm5-t0-b0v">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard" translatesAutoresizingMaskIntoConstraints="NO" id="HFn-ZA-zTG">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTX-H2-G7y">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="zEI-4p-vhd">
+                            <rect key="frame" x="134.5" y="96.5" width="106" height="140"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="106" id="BiV-3U-PcT"/>
+                                <constraint firstAttribute="height" constant="140" id="e8q-oM-zu5"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="zEI-4p-vhd" firstAttribute="centerY" secondItem="PTX-H2-G7y" secondAttribute="centerY" id="8BH-2a-7cH"/>
+                        <constraint firstItem="zEI-4p-vhd" firstAttribute="centerX" secondItem="PTX-H2-G7y" secondAttribute="centerX" id="XdO-yB-CmI"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaL-wM-23Y">
+                    <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="聚焦与众不同的日常设计" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YW8-Te-9YG">
+                            <rect key="frame" x="78" y="269" width="219" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="xMB-jC-RGc"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="YW8-Te-9YG" firstAttribute="centerX" secondItem="IaL-wM-23Y" secondAttribute="centerX" id="8IY-Wn-Mte"/>
+                        <constraint firstAttribute="bottom" secondItem="YW8-Te-9YG" secondAttribute="bottom" constant="43.5" id="fmw-p6-rN3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="PTX-H2-G7y" secondAttribute="trailing" id="7wu-TT-RGd"/>
+                <constraint firstItem="IaL-wM-23Y" firstAttribute="top" secondItem="PTX-H2-G7y" secondAttribute="bottom" id="C2H-fu-rYW"/>
+                <constraint firstItem="HFn-ZA-zTG" firstAttribute="top" secondItem="lJl-gH-6sJ" secondAttribute="top" id="Egh-zf-We3"/>
+                <constraint firstAttribute="trailing" secondItem="wm5-t0-b0v" secondAttribute="trailing" id="Tyw-hH-ez8"/>
+                <constraint firstItem="IaL-wM-23Y" firstAttribute="width" secondItem="PTX-H2-G7y" secondAttribute="width" id="UsZ-fw-ffg"/>
+                <constraint firstItem="PTX-H2-G7y" firstAttribute="top" secondItem="lJl-gH-6sJ" secondAttribute="top" id="ZWa-SC-fFQ"/>
+                <constraint firstAttribute="bottom" secondItem="wm5-t0-b0v" secondAttribute="bottom" id="eDz-NB-jM4"/>
+                <constraint firstItem="IaL-wM-23Y" firstAttribute="leading" secondItem="lJl-gH-6sJ" secondAttribute="leading" id="exk-Ei-nbt"/>
+                <constraint firstAttribute="bottom" secondItem="HFn-ZA-zTG" secondAttribute="bottom" id="nWu-SE-Q1l"/>
+                <constraint firstAttribute="bottom" secondItem="IaL-wM-23Y" secondAttribute="bottom" id="nkd-CH-YyD"/>
+                <constraint firstItem="wm5-t0-b0v" firstAttribute="top" secondItem="lJl-gH-6sJ" secondAttribute="top" id="ohl-wn-pDA"/>
+                <constraint firstItem="IaL-wM-23Y" firstAttribute="height" secondItem="PTX-H2-G7y" secondAttribute="height" id="rnz-9E-olG"/>
+                <constraint firstItem="IaL-wM-23Y" firstAttribute="top" secondItem="PTX-H2-G7y" secondAttribute="bottom" id="sA1-mA-WCa"/>
+                <constraint firstItem="HFn-ZA-zTG" firstAttribute="leading" secondItem="lJl-gH-6sJ" secondAttribute="leading" id="sbk-UU-QB3"/>
+                <constraint firstAttribute="trailing" secondItem="IaL-wM-23Y" secondAttribute="trailing" id="vXz-mN-6cM"/>
+                <constraint firstItem="wm5-t0-b0v" firstAttribute="leading" secondItem="lJl-gH-6sJ" secondAttribute="leading" id="xkG-H4-D30"/>
+                <constraint firstItem="PTX-H2-G7y" firstAttribute="leading" secondItem="lJl-gH-6sJ" secondAttribute="leading" id="xtc-sy-puT"/>
+                <constraint firstAttribute="trailing" secondItem="HFn-ZA-zTG" secondAttribute="trailing" id="zyk-aH-mYt"/>
+            </constraints>
+            <connections>
+                <outlet property="backgroundImg" destination="HFn-ZA-zTG" id="5so-UZ-lbK"/>
+            </connections>
+            <point key="canvasLocation" x="258" y="-868"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Artboard" width="200" height="200"/>
+        <image name="logo" width="110" height="168"/>
+    </resources>
+</document>

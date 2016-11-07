@@ -102,7 +102,8 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     
     func showDataOne(_ model:WOWProductModel) {
         oneModel = model
-        imgShowOne.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
+        imgShowOne.set_webimage_url(model.productImg)
+//        imgShowOne.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleOne.text     = model.productName
         productIdOne        = model.productId
         // 格式化 价格小数点
@@ -137,7 +138,8 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     //   two Item Data
     func showDataTwo(_ model:WOWProductModel) {
         twoModel = model
-        imgShowTwo.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
+        imgShowTwo.set_webimage_url(model.productImg)
+//        imgShowTwo.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleTwo.text = model.productName
         productIdTwo = model.productId
         // 格式化 价格小数点

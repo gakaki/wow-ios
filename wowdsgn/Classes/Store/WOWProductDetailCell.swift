@@ -48,7 +48,11 @@ class WOWProductDetailCell: UITableViewCell {
                                                       toItem: self.productImg, attribute: .height,
                                                       multiplier: secondaryImg.imageAspect , constant: 0.0)
 
-                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
+                productImg.kf.setImage(with: URL(string:img),
+                                       placeholder:UIImage(named: "placeholder_product"),
+                                       options: nil,
+                                       progressBlock: nil,
+                                       completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
 //                    if let strongSelf = self {
 //                        if let image = image {
 //                            let imageAspect = image.size.width / image.size.height
@@ -62,18 +66,26 @@ class WOWProductDetailCell: UITableViewCell {
                     
                 })
                 
-
+                aspect.constant = 0
                 space.constant = 8
             }else {
                 aspect.constant = 345
                 space.constant = -7
             }
-            imgDescLabel.text = secondaryImg.text
-            if secondaryImg.text == "" {
-                bottomSpace.constant = 7
-            }else {
+            if let text = secondaryImg.text {
+                imgDescLabel.text = text
                 bottomSpace.constant = 15
+            }else {
+                imgDescLabel.text = ""
+                bottomSpace.constant = 7
+
             }
+//            imgDescLabel.text = secondaryImg.text
+//            if secondaryImg.text == "" {
+//                bottomSpace.constant = 7
+//            }else {
+//                bottomSpace.constant = 15
+//            }
             imgDescLabel.setLineHeightAndLineBreak(1.5)
         }
     }

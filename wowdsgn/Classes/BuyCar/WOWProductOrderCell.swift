@@ -55,6 +55,14 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         case 2:
             statusLabel.isHidden = false
             statusLabel.text = "已下架"
+        case 1:
+            if model.productStock == 0 {
+                statusLabel.isHidden = false
+                statusLabel.text = "已售罄"
+            }else {
+                statusLabel.isHidden = true
+                statusLabel.text = ""
+            }
         default:
             statusLabel.isHidden = true
             statusLabel.text = ""

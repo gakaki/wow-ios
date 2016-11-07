@@ -19,7 +19,8 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         }
         
         func setModel(_ m:WOWFoundCategoryModel){
-            pictureImageView.set_webimage_url_base(m.productImg, place_holder_name: "placeholder_product")
+            pictureImageView.set_webimage_url(m.productImg)
+//            pictureImageView.set_webimage_url_base(m.productImg, place_holder_name: "placeholder_product")
             label_name.text      = m.categoryName
         }
         

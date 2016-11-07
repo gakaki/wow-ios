@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="BVw-Eq-vmT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard" translatesAutoresizingMaskIntoConstraints="NO" id="BVw-Eq-vmT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iqc-bq-YNA">
@@ -31,11 +31,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEb-6W-pMw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="wet-vw-Pj0">
-                                        <rect key="frame" x="121" y="79" width="133" height="175"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="wet-vw-Pj0">
+                                        <rect key="frame" x="134.5" y="96.5" width="106" height="140"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="133" id="z0V-Ux-sUf"/>
-                                            <constraint firstAttribute="height" constant="175" id="zGu-YE-e3f"/>
+                                            <constraint firstAttribute="width" constant="106" id="z0V-Ux-sUf"/>
+                                            <constraint firstAttribute="height" constant="140" id="zGu-YE-e3f"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -89,7 +89,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="default" width="1242" height="2208"/>
+        <image name="Artboard" width="200" height="200"/>
         <image name="logo" width="110" height="168"/>
     </resources>
 </document>

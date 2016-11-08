@@ -41,12 +41,15 @@ public class VCRedirect {
         {
             vc.designerId           = designerId
             vc.entrance             = .designerEntrance
+            vc.hideNavigationBar = true
             topNaVC?.pushViewController(vc, animated: true)
         }
     }
     public class func toBrand( brand_id: Int?){
         if let vc    = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as? WOWBrandHomeController {
             vc.brandID = brand_id
+            vc.entrance = .brandEntrance
+            vc.hideNavigationBar = true
             topNaVC?.pushViewController(vc, animated: true)
         }
     }
@@ -68,7 +71,18 @@ public class VCRedirect {
         
         
     }
-    
+//    toVCTopidDetail
+    public class func toToPidDetail(topicId: Int){
+        
+//        MobClick.e(.My_Orders)
+        
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
+   
+        vc.topic_id = topicId
+     
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+
     public class func toOrderList(){
         guard WOWUserManager.loginStatus else{
             toLoginVC(true)
@@ -83,6 +97,26 @@ public class VCRedirect {
         
         topNaVC?.pushViewController(vc, animated: true)
     }
+    public class func toTopicList(topicId: Int){
+        
+        let vc                  = VCTopic(nibName: nil, bundle: nil)
+        vc.topic_id             = topicId
+        vc.hideNavigationBar    = true
+
+        
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+
+    public class func toHomeIndex(index: Int){
+        guard index != 3 else{
+            toLoginVC(true)
+            return
+        }
+        
+        UIApplication.appTabBarController.selectedIndex = index
+        WOWTool.lastTabIndex = index
+    }
+    
     public class func toCouponVC(){
         guard WOWUserManager.loginStatus else{
             toLoginVC(true)

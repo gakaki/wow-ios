@@ -1,6 +1,7 @@
 import UIKit
 import WebKit
 import WebViewBridge_Swift
+import wow3rd
 
 public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavigationDelegate {
     
@@ -17,12 +18,29 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     public func toCouponMe(){
         print("toCouponMe")
     }
-    
-    
-    public func webView(WebViewNews: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
+    public func webView(_: WKWebView, decidePolicyFor: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
+    {
         
-        return true;
+        if decidePolicyFor.navigationType == .linkActivated {
+            
+            print("webView:\(webView) decidePolicyForNavigationAction:\(decidePolicyFor) decisionHandler:\(decisionHandler)")
+            if let url = decidePolicyFor.request.url {
+                print(url.absoluteString)
+                FN.open(url: url.absoluteString)
+            }
+
+        }
+        decisionHandler(.allow)
+        
+
     }
+    public func webView(_: WKWebView, decidePolicyFor: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void)
+    {
+        decisionHandler(.allow)
+
+     }
+
+  
     public func bridge_router(){
         
         bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in
@@ -73,6 +91,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         
         webView.frame       = self.view.bounds
         view.addSubview(webView)
+        webView.navigationDelegate  = self
         
         bridge = ZHWebViewBridge.bridge(webView)
         bridge_router()

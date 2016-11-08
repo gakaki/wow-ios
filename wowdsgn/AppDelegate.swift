@@ -43,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         appConfig()
         
+        
+        RouterRule.router_init()
+        
+        
         ADLaunchView()
         return true
     }

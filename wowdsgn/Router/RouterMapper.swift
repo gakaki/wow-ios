@@ -54,8 +54,7 @@ public class RouterModuleCoupon : FNUrlRouteDelegate{
 
 public class RouterModuleOrderList : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        print(params)
-        //        FNUtil.currentTopViewContro
+        VCRedirect.toOrderList()
     }
 }
 public class RouterModuleOrder : FNUrlRouteDelegate{

@@ -13,6 +13,14 @@ import wow3rd
  
 public class VCRedirect {
     
+    public class var topNaVC : UINavigationController? {
+        
+        get {
+            let topViewController = FNUtil.currentTopViewController()
+            let navigation = topViewController.navigationController
+            return navigation
+        }
+    }
     
     public class func vc_show(vc:UIViewController) {
         
@@ -26,6 +34,8 @@ public class VCRedirect {
         }
         
     }
+
+    
     public class  func toLoginVC(_ isPresent:Bool = false){
         
         if isPresent {
@@ -33,24 +43,30 @@ public class VCRedirect {
             let login = vc.topViewController as! WOWLoginController
             login.isPresent = isPresent
             
-            let topViewController = FNUtil.currentTopViewController()
-            let navigation = topViewController.navigationController
-            topViewController.present(vc, animated: true, completion: nil)
-            
+            topNaVC?.present(vc, animated: true, completion: nil)
             
         }else {
             let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWLoginController.self)) as! WOWLoginController
             vc.isPresent = isPresent
-            
-            let topViewController = FNUtil.currentTopViewController()
-            let navigation = topViewController.navigationController
-            navigation?.pushViewController(vc, animated: true)
-
+            topNaVC?.pushViewController(vc, animated: true)
         }
         
         
     }
+    
+    public class func toOrderList(){
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
+        
+        MobClick.e(.My_Coupons)
+        let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
+        vc.entrance = couponEntrance.userEntrance
+        
+        topNaVC?.pushViewController(vc, animated: true)
 
+    }
     public class func toCouponVC(){
         guard WOWUserManager.loginStatus else{
             toLoginVC(true)
@@ -61,10 +77,7 @@ public class VCRedirect {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
         vc.entrance = couponEntrance.userEntrance
         
-        let topViewController = FNUtil.currentTopViewController()
-        let navigation = topViewController.navigationController
-        navigation?.pushViewController(vc, animated: true)
-
+        topNaVC?.pushViewController(vc, animated: true)
     }
 
     

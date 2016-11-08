@@ -12,7 +12,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         return w
     }()
     
-    public var url = "http://10.0.60.116:8080/wow11-11.html"
+    public var url = ""
     
     public func toCouponMe(){
         print("toCouponMe")
@@ -77,8 +77,11 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         bridge = ZHWebViewBridge.bridge(webView)
         bridge_router()
         
-        
-        let myURL       = URL(string: url ?? "")
+        var url_final   = (url ?? "")
+        if url_final.length > 0 {
+            url_final   = "\(url_final)?platform=ios&wowdsgn=true"
+        }
+        let myURL       = URL(string: url_final ?? "")
         let myRequest   = URLRequest(url: myURL!)
         webView.load(myRequest)
     }

@@ -60,31 +60,39 @@ class WOWHotStyleCell: UITableViewCell {
         
         if let brandModel = model.moduleContentList?.brand {
             lbLogoName.text = brandModel.brandEname
-//            imgLogo.set_webimage_url_base(brandModel.brandLogoImg, place_holder_name: product)
+
             imgLogo.set_webimage_url(brandModel.brandLogoImg)
             imgLogo.borderRadius(20)
         }else{
             lbLogoName.text = " "
             imgLogo.image = nil
         }
-        if let moduleImage = model.moduleAdditionalInfo?.imageUrl {
+        if let url = model.moduleAdditionalInfo?.imageUrl {
             
-            imgBackMain.kf.setImage(
-                with: URL(string:moduleImage )!,
-                placeholder: nil,
-                options: nil,
-                progressBlock: { (arg1, arg2) in
-                    
-                    
-                },
-                completionHandler: { [weak self](image, error, cacheType, imageUrl) in
-                    if let strongSelf = self{
-                        strongSelf.shareProductImage = image
-                    }
-                }
-            )
-             imgBackMain.set_webimage_url(moduleImage)
-//            imgBackMain.set_webimage_url_base(moduleImage, place_holder_name: product)
+
+            var res :String?
+            switch UIDevice.deviceType {
+            case .dt_iPhone4S,.dt_iPhone5:
+                res     = "\(url)?imageView2/0/w/500/format/webp/q/90"
+            case .dt_iPhone6:
+                res     = "\(url)?imageView2/0/w/700/format/webp/q/90"
+            case .dt_iPhone6_Plus:
+                res     = "\(url)?imageView2/0/w/900/format/webp/q/90"
+            default:
+                res     = "\(url)?imageView2/0/w/700/format/webp/q/90"
+                
+            }
+
+            let url_obj            = URL(string:res ?? "")
+            let image_place_holder = UIImage(named: "placeholder_product")
+            imgBackMain.yy_setImage(with: url_obj,
+                                    placeholder: image_place_holder,
+                                    completion: { [weak self](image, url, cacheType, webImage, error) in
+                                        if let strongSelf = self{
+                                                strongSelf.shareProductImage = image
+                                        }
+            })
+
         }
         if let showTitle =  model.moduleAdditionalInfo?.showTitle {
             if showTitle { // true 则显示label  false 则不显示

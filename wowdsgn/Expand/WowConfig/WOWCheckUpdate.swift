@@ -67,7 +67,12 @@ class WOWCheckUpdate {
                 currentVersionArr.append("0")
             }
             
-            let appVersionNum = appVersionArr[0].toInt()! * 100 + appVersionArr[1].toInt()! * 10 + appVersionArr[2].toInt()! * 1
+            var appVersionNum = 0
+
+            if ( appVersionArr[0] != ""){
+                appVersionNum = appVersionArr[0].toInt()! * 100 + appVersionArr[1].toInt()! * 10 + appVersionArr[2].toInt()! * 1
+            }
+            
             
             let currentVersionNum = currentVersionArr[0].toInt()! * 100 + currentVersionArr[1].toInt()! * 10 + currentVersionArr[2].toInt()! * 1
             

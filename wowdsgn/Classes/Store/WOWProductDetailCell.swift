@@ -48,24 +48,8 @@ class WOWProductDetailCell: UITableViewCell {
                                                       toItem: self.productImg, attribute: .height,
                                                       multiplier: secondaryImg.imageAspect , constant: 0.0)
 
-                productImg.kf.setImage(with: URL(string:img),
-                                       placeholder:UIImage(named: "placeholder_product"),
-                                       options: nil,
-                                       progressBlock: nil,
-                                       completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
-//                    if let strongSelf = self {
-//                        if let image = image {
-//                            let imageAspect = image.size.width / image.size.height
-//                            strongSelf.aspectConstraint = NSLayoutConstraint(item: strongSelf.productImg,
-//                                                                       attribute: .width, relatedBy: .equal,
-//                                                                       toItem: strongSelf.productImg, attribute: .height,
-//                                                                       multiplier: imageAspect , constant: 0.0)
-//                            
-//                        }
-//                    }
-                    
-                })
-                
+                productImg.set_webimage_url(img)
+                           
                 aspect.constant = 0
                 space.constant = 8
             }else {

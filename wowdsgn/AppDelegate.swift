@@ -292,10 +292,9 @@ extension AppDelegate{
         UMSocialData.setAppKey(WOWID.UMeng.appID)
         UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
 
-        
+
         //友盟推送
         umessage.init_umessage(launchOptions)
-
         
         WXApi.registerApp(WOWID.Wechat.appID)
     
@@ -436,4 +435,8 @@ extension AppDelegate: AdLaunchViewDelegate {
         
     }
     
+   
+    
 }
+
+

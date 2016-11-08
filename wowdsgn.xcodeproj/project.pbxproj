@@ -356,6 +356,11 @@
 		069D33541DB47B3E00A059D0 /* WOWApiPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D33511DB47B3E00A059D0 /* WOWApiPath.swift */; };
 		069D33551DB47B3E00A059D0 /* WOWNetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D33521DB47B3E00A059D0 /* WOWNetManager.swift */; };
 		069D33561DB47B3E00A059D0 /* WOWRequestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */; };
+		06C869A21DD19A25004C05E3 /* RouterMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A11DD19A25004C05E3 /* RouterMapper.swift */; };
+		06C869A41DD19B4E004C05E3 /* AppDelegateUmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */; };
+		06C869A91DD19C07004C05E3 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */; };
+		06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869AA1DD19C8E004C05E3 /* Config3rd.swift */; };
+		06F944DE1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */; };
 		2D130EF71DB78D48001DE9A7 /* Cell_103_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */; };
 		2D130EF81DB78D48001DE9A7 /* Cell_103_Product.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */; };
 		2D130EFE1DB78D8C001DE9A7 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */; };
@@ -816,6 +821,14 @@
 		069D33511DB47B3E00A059D0 /* WOWApiPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWApiPath.swift; sourceTree = "<group>"; };
 		069D33521DB47B3E00A059D0 /* WOWNetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNetManager.swift; sourceTree = "<group>"; };
 		069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRequestApi.swift; sourceTree = "<group>"; };
+		06C869A11DD19A25004C05E3 /* RouterMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterMapper.swift; sourceTree = "<group>"; };
+		06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateUmengHelper.swift; sourceTree = "<group>"; };
+		06C869A51DD19BD7004C05E3 /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.4.0.a; path = "../../../Downloads/UMessage_Sdk_All_1.4.0(idfa)(1)/UMessage_Sdk_1.4.0/libUMessage_Sdk_1.4.0.a"; sourceTree = "<group>"; };
+		06C869A71DD19BDF004C05E3 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		06C869AA1DD19C8E004C05E3 /* Config3rd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config3rd.swift; sourceTree = "<group>"; };
+		06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.4.0.a; path = UMessage/libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
+		06F944DD1DD1A3910055BAFC /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = UMessage/UMessage.h; sourceTree = "<group>"; };
 		215C6F175F8DEB1B0D61D6FA /* Pods-wowdsgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.release.xcconfig"; sourceTree = "<group>"; };
 		2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_103_Product.swift; sourceTree = "<group>"; };
 		2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_103_Product.xib; sourceTree = "<group>"; };
@@ -901,10 +914,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06C869A91DD19C07004C05E3 /* UserNotificationsUI.framework in Frameworks */,
 				63803AE81DC325BD000AA259 /* UserNotifications.framework in Frameworks */,
 				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
 				0681214E1DB4D03600407319 /* libSocialQQ.a in Frameworks */,
 				069D2F741DB4793300A059D0 /* libz.tbd in Frameworks */,
+				06F944DE1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				0681215D1DB4D03700407319 /* libWeChatSDK.a in Frameworks */,
 				068121521DB4D03700407319 /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
 				069D2F841DB4796D00A059D0 /* SystemConfiguration.framework in Frameworks */,
@@ -935,8 +950,11 @@
 		0607088B1DD18D7600A91724 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				06C869AA1DD19C8E004C05E3 /* Config3rd.swift */,
+				06C869A71DD19BDF004C05E3 /* UMessage.h */,
 				0607088C1DD18D7600A91724 /* RouterRule.swift */,
 				0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */,
+				06C869A11DD19A25004C05E3 /* RouterMapper.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -971,6 +989,8 @@
 		068121261DB4D03600407319 /* UMeng */ = {
 			isa = PBXGroup;
 			children = (
+				06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */,
+				06F944DD1DD1A3910055BAFC /* UMessage.h */,
 				068121271DB4D03600407319 /* TencentOpenAPI */,
 				0681212C1DB4D03600407319 /* UMSocial_Sdk_5.2.1 */,
 				068121471DB4D03600407319 /* Wechat */,
@@ -1076,6 +1096,7 @@
 				069D30EA1DB47ADC00A059D0 /* Expand */,
 				069D318C1DB47ADD00A059D0 /* Resource */,
 				069D31A21DB47ADD00A059D0 /* wowapp-Bridging-Header.h */,
+				06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */,
 				069D2F851DB47ABD00A059D0 /* wowdsgn.entitlements */,
 				069D2F571DB46AD100A059D0 /* AppDelegate.swift */,
 				069D2F5E1DB46AD100A059D0 /* Assets.xcassets */,
@@ -2048,6 +2069,8 @@
 		9B30F7A8216ED8829DE900DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */,
+				06C869A51DD19BD7004C05E3 /* libUMessage_Sdk_1.4.0.a */,
 				63803AE71DC325BD000AA259 /* UserNotifications.framework */,
 				069D2F831DB4796D00A059D0 /* SystemConfiguration.framework */,
 				069D2F811DB4796800A059D0 /* ImageIO.framework */,
@@ -2078,7 +2101,6 @@
 				243D60FC98B1FD80C4E9E65E /* [CP] Check Pods Manifest.lock */,
 				069D2F501DB46AD100A059D0 /* Sources */,
 				069D2F511DB46AD100A059D0 /* Frameworks */,
-				063B9CFE1DC714940042DB38 /*  Increment Version Build */,
 				069D2F521DB46AD100A059D0 /* Resources */,
 				F53EF9D12AE65A6395EE59E9 /* [CP] Embed Pods Frameworks */,
 				1A83CAF2F5CB3EEA14654664 /* [CP] Copy Pods Resources */,
@@ -2270,20 +2292,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		063B9CFE1DC714940042DB38 /*  Increment Version Build */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = " Increment Version Build";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
-		};
 		1A83CAF2F5CB3EEA14654664 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2405,6 +2413,7 @@
 				069D323D1DB47ADD00A059D0 /* WOWBaseTableViewController.swift in Sources */,
 				069D32381DB47ADD00A059D0 /* WOWRegistInfoFirstController.swift in Sources */,
 				069D31DC1DB47ADD00A059D0 /* VCCategoryChoose.swift in Sources */,
+				06C869A41DD19B4E004C05E3 /* AppDelegateUmengHelper.swift in Sources */,
 				069D32CB1DB47ADD00A059D0 /* WOWOrderListCell.swift in Sources */,
 				069D32E11DB47ADD00A059D0 /* IPManager.swift in Sources */,
 				069D31DF1DB47ADD00A059D0 /* VCDesignerList.swift in Sources */,
@@ -2486,6 +2495,7 @@
 				069D32F21DB47ADD00A059D0 /* String+Add.swift in Sources */,
 				069D323A1DB47ADD00A059D0 /* WOWRegistInfoSureView.swift in Sources */,
 				069D32371DB47ADD00A059D0 /* WOWRegistController.swift in Sources */,
+				06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */,
 				069D325E1DB47ADD00A059D0 /* WOWBrandHomeController.swift in Sources */,
 				2D509A7D1DB5D3120047CD13 /* WOWSearchTagView.swift in Sources */,
 				069D32B31DB47ADD00A059D0 /* WOWCouponheaderView.swift in Sources */,
@@ -2611,6 +2621,7 @@
 				2D509A591DB5D3120047CD13 /* HomeBrannerCell.swift in Sources */,
 				069D32D11DB47ADD00A059D0 /* WOWOrderTransController.swift in Sources */,
 				069D32611DB47ADD00A059D0 /* WOWBrandModel.swift in Sources */,
+				06C869A21DD19A25004C05E3 /* RouterMapper.swift in Sources */,
 				069D32E51DB47ADD00A059D0 /* WOWData.swift in Sources */,
 				069D32E81DB47ADD00A059D0 /* WOWMediator.swift in Sources */,
 				069D31B01DB47ADD00A059D0 /* WOWBuyCarModel.swift in Sources */,
@@ -2765,6 +2776,7 @@
 					"$(PROJECT_DIR)/wowdsgn/UMeng/TencentOpenAPI",
 					"$(PROJECT_DIR)/wowdsgn/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowdsgn/UMeng/Wechat",
+					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/UMessage",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2813,6 +2825,7 @@
 					"$(PROJECT_DIR)/wowdsgn/UMeng/TencentOpenAPI",
 					"$(PROJECT_DIR)/wowdsgn/UMeng/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/wowdsgn/UMeng/Wechat",
+					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/UMessage",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";

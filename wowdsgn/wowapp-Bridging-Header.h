@@ -26,6 +26,7 @@
 @import XZMRefresh;
 @import FMDB;
 
+#import "UMessage.h"
 //#import "JPPlayground.h"
 //#import "GYHttpMock.h"
 //@import MLeaksFinder;

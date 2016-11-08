@@ -55,7 +55,8 @@ public class RouterModuleCoupon : FNUrlRouteDelegate{
 public class RouterModuleOrderList : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
         print(params)
-        //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
+        //        FNUtil.currentTopViewContro
+        ller().present(alert, animated: true, completion: nil)
     }
 }
 public class RouterModuleOrder : FNUrlRouteDelegate{

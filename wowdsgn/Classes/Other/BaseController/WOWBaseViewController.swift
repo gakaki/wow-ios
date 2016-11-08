@@ -33,14 +33,14 @@ extension UIViewController {
         return String(describing: mirror.subjectType)
     }
 }
-class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource{
+public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource{
     var hideNavigationBar:Bool = false
     var pageIndex = 1 //翻页
     var isRreshing : Bool = false
     var carBadgeCount: MIBadgeButton?
     var isCurrentRequest : Bool = false
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         self.navigationController?.navigationBar.shadowImage = UIImage(named: "line")
@@ -71,7 +71,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
 
 //MARK:Life
-    override func viewWillDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         //TalkingData统计页面
@@ -82,7 +82,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
         UIApplication.shared.keyWindow?.endEditing(true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //growing io 统计页面
         
@@ -119,7 +119,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
        _ = navigationController?.popViewController(animated: true)
     }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -194,7 +194,7 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
     
 
 //MARK:Private Actions
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         UIApplication.shared.keyWindow?.endEditing(true)
     }
 
@@ -202,13 +202,13 @@ class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZNEmptyDa
 
 
 extension WOWBaseViewController{
-    @objc(titleForEmptyDataSet:) func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    @objc(titleForEmptyDataSet:) public func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = WOWEmptyNoDataText
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
         return attri
     }
     
-    @objc(backgroundColorForEmptyDataSet:) func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+    @objc(backgroundColorForEmptyDataSet:) public func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return GrayColorLevel5
     }
 }

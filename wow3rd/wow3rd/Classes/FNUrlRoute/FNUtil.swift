@@ -8,14 +8,14 @@
 
 import UIKit
 
-class FNUtil {
+public class FNUtil {
     //获取当前页面
-    class func currentTopViewController() -> UIViewController {
+    public class func currentTopViewController() -> UIViewController {
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         return currentTopViewController(rootViewController: rootViewController!)
     }
     
-    class func currentTopViewController(rootViewController: UIViewController) -> UIViewController {
+    public class func currentTopViewController(rootViewController: UIViewController) -> UIViewController {
         if (rootViewController.isKind(of: UITabBarController.self)) {
             let tabBarController = rootViewController as! UITabBarController
             return currentTopViewController(rootViewController: tabBarController.selectedViewController!)
@@ -33,7 +33,7 @@ class FNUtil {
     }
     
     //获取 url 中的 query 字典
-    class func getQueryDictionary(url: String) -> Dictionary<String, AnyObject?>? {
+    public class func getQueryDictionary(url: String) -> Dictionary<String, AnyObject?>? {
         var dic = [:] as Dictionary<String, AnyObject?>?
         let query = URL.init(string: url)?.query
         if query != nil {
@@ -51,7 +51,7 @@ class FNUtil {
     }
 
     //合并两个字典
-    class func mergeDictionary(dic0: Dictionary<String, AnyObject?>?, dic1: Dictionary<String, AnyObject?>?) -> Dictionary<String, AnyObject?>? {
+    public class func mergeDictionary(dic0: Dictionary<String, AnyObject?>?, dic1: Dictionary<String, AnyObject?>?) -> Dictionary<String, AnyObject?>? {
         var dic = dic0
         if dic1 != nil {
             for (key, value) in dic1! {
@@ -62,12 +62,12 @@ class FNUtil {
     }
     
     //url 编码
-    class func URLEncode(string: String) -> String {
+    public class func URLEncode(string: String) -> String {
         return string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
     
     //url 解码
-    class func URLDecode(string: String) -> String {
+    public class func URLDecode(string: String) -> String {
         return string.removingPercentEncoding!
     }
 }

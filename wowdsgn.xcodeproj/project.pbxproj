@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0607088E1DD18D7600A91724 /* RouterRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088C1DD18D7600A91724 /* RouterRule.swift */; };
+		0607088F1DD18D7600A91724 /* WowWebViewSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */; };
 		065722F21DB4BF4700781B1C /* Growing_Version in Resources */ = {isa = PBXBuildFile; fileRef = 065722E01DB4BF4700781B1C /* Growing_Version */; };
 		065722F31DB4BF4700781B1C /* libDeepShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E11DB4BF4700781B1C /* libDeepShare.a */; };
 		065722F41DB4BF4700781B1C /* libGrowing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E21DB4BF4700781B1C /* libGrowing.a */; };
@@ -419,7 +421,6 @@
 		2D509A841DB5D3120047CD13 /* WOWSenceLikeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D509A4D1DB5D3120047CD13 /* WOWSenceLikeCell.xib */; };
 		2D509A851DB5D3120047CD13 /* WOWSubArtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A4E1DB5D3120047CD13 /* WOWSubArtCell.swift */; };
 		2D509A861DB5D3120047CD13 /* WOWSubArtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D509A4F1DB5D3120047CD13 /* WOWSubArtCell.xib */; };
-		2D509A871DB5D3120047CD13 /* WOWWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A501DB5D3120047CD13 /* WOWWebViewController.swift */; };
 		2D764FE51DD06974008D6746 /* WOWCheckUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D764FE41DD06973008D6746 /* WOWCheckUpdate.swift */; };
 		458523D0F557C0CFD1003B89 /* Pods_wowdsgn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D22051AC3698C3AAC002B1 /* Pods_wowdsgn.framework */; };
 		6326BF391DD0160700917FA3 /* WOWLaunchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6326BF381DD0160700917FA3 /* WOWLaunchView.xib */; };
@@ -434,6 +435,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0607088C1DD18D7600A91724 /* RouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterRule.swift; sourceTree = "<group>"; };
+		0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowWebViewSwift.swift; sourceTree = "<group>"; };
 		065722DD1DB4BF4700781B1C /* DeepShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepShare.h; sourceTree = "<group>"; };
 		065722DE1DB4BF4700781B1C /* DSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSError.h; sourceTree = "<group>"; };
 		065722DF1DB4BF4700781B1C /* Growing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growing.h; sourceTree = "<group>"; };
@@ -879,7 +882,6 @@
 		2D509A4D1DB5D3120047CD13 /* WOWSenceLikeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSenceLikeCell.xib; sourceTree = "<group>"; };
 		2D509A4E1DB5D3120047CD13 /* WOWSubArtCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSubArtCell.swift; sourceTree = "<group>"; };
 		2D509A4F1DB5D3120047CD13 /* WOWSubArtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSubArtCell.xib; sourceTree = "<group>"; };
-		2D509A501DB5D3120047CD13 /* WOWWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WOWWebViewController.swift; path = ../View/WOWWebViewController.swift; sourceTree = "<group>"; };
 		2D764FE41DD06973008D6746 /* WOWCheckUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCheckUpdate.swift; sourceTree = "<group>"; };
 		42D22051AC3698C3AAC002B1 /* Pods_wowdsgn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowdsgn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6326BF381DD0160700917FA3 /* WOWLaunchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWLaunchView.xib; sourceTree = "<group>"; };
@@ -930,6 +932,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0607088B1DD18D7600A91724 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				0607088C1DD18D7600A91724 /* RouterRule.swift */,
+				0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		065722DC1DB4BF4700781B1C /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -1057,6 +1068,7 @@
 		069D2F561DB46AD100A059D0 /* wowdsgn */ = {
 			isa = PBXGroup;
 			children = (
+				0607088B1DD18D7600A91724 /* Router */,
 				067940A41DB60B4000348691 /* 3rdPartyHelper */,
 				065722DC1DB4BF4700781B1C /* 3rdParty */,
 				069D33501DB47B3E00A059D0 /* model-network */,
@@ -1651,7 +1663,6 @@
 				2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */,
 				2D509A121DB5D30B0047CD13 /* WOWSearchController.swift */,
 				2D509A431DB5D3120047CD13 /* WOWSearchChildController.swift */,
-				2D509A501DB5D3120047CD13 /* WOWWebViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2067,7 +2078,6 @@
 				243D60FC98B1FD80C4E9E65E /* [CP] Check Pods Manifest.lock */,
 				069D2F501DB46AD100A059D0 /* Sources */,
 				069D2F511DB46AD100A059D0 /* Frameworks */,
-				063B9CFE1DC714940042DB38 /*  Increment Version Build */,
 				069D2F521DB46AD100A059D0 /* Resources */,
 				F53EF9D12AE65A6395EE59E9 /* [CP] Embed Pods Frameworks */,
 				1A83CAF2F5CB3EEA14654664 /* [CP] Copy Pods Resources */,
@@ -2259,20 +2269,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		063B9CFE1DC714940042DB38 /*  Increment Version Build */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = " Increment Version Build";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
-		};
 		1A83CAF2F5CB3EEA14654664 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2362,6 +2358,7 @@
 				2D509A511DB5D3120047CD13 /* WOWCommentListModel.swift in Sources */,
 				069D32BF1DB47ADD00A059D0 /* WOWOrderDetailCostCell.swift in Sources */,
 				069D32441DB47ADD00A059D0 /* JSPatchHelper.swift in Sources */,
+				0607088F1DD18D7600A91724 /* WowWebViewSwift.swift in Sources */,
 				069D329F1DB47ADD00A059D0 /* WOWTopicNavigationItem.swift in Sources */,
 				2D509A691DB5D3120047CD13 /* WOWDSGNFooterView.swift in Sources */,
 				069D329D1DB47ADD00A059D0 /* WOWContentTopicTopCell.swift in Sources */,
@@ -2449,13 +2446,13 @@
 				069D33151DB47ADE00A059D0 /* HolderTextView.swift in Sources */,
 				2D509A551DB5D3120047CD13 /* WOWSceneModel.swift in Sources */,
 				069D32631DB47ADD00A059D0 /* WOWDesignerCell.swift in Sources */,
+				0607088E1DD18D7600A91724 /* RouterRule.swift in Sources */,
 				2D509A141DB5D30B0047CD13 /* WOWController.swift in Sources */,
 				2D509A831DB5D3120047CD13 /* WOWSenceLikeCell.swift in Sources */,
 				069D32421DB47ADD00A059D0 /* WOWTabBarController.swift in Sources */,
 				069D32B51DB47ADD00A059D0 /* WOWFavoriteListModel.swift in Sources */,
 				069D328D1DB47ADD00A059D0 /* WOWProductSpecReusableView.swift in Sources */,
 				069D31BB1DB47ADD00A059D0 /* WOWOrderFooterView.swift in Sources */,
-				2D509A871DB5D3120047CD13 /* WOWWebViewController.swift in Sources */,
 				2D509A811DB5D3120047CD13 /* WOWSenceImageCell.swift in Sources */,
 				069D32EC1DB47ADD00A059D0 /* WOWTool.swift in Sources */,
 				069D324D1DB47ADD00A059D0 /* WOWCheckSelectView.swift in Sources */,

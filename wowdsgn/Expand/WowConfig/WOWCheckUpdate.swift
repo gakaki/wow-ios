@@ -34,7 +34,6 @@ class WOWCheckUpdate {
                         if let dict = arr.firstObject as? NSDictionary {
                             if let version = dict["version"] as? String {
                                 print("线上版本号：\(version)")
-                             
                                 
                                 currentAppStoreDevice = version
                             }

@@ -66,13 +66,17 @@ PODS:
   - UICKeyChainStore (2.1.0)
   - UITableView+FDTemplateLayoutCell (1.5.beta)
   - UMengAnalytics-NO-IDFA (4.1.1)
+  - URLNavigator (1.0.1)
   - VTMagic (1.2.4):
     - VTMagic/Core (= 1.2.4)
   - VTMagic/Core (1.2.4)
+  - WebViewBridge.Swift (1.0)
   - wow-vendor-ui (0.1.0):
     - EZSwiftExtensions
     - Kingfisher
-  - wow3rd (0.1.0)
+  - wow3rd (0.1.0):
+    - URLNavigator (~> 1.0)
+    - WebViewBridge.Swift
   - XZMRefresh (1.1.3)
   - YYCache (1.0.4)
   - YYImage (1.0.4):
@@ -158,7 +162,7 @@ SPEC CHECKSUMS:
   RxDataSources: ddef3c5a718ab960e287aa331a9299b56b0c7ffe
   RxSwift: 0ea939d7d97cb70657190ffde8dc2a9b455778fc
   SDAutoLayout: e9b36d04b8c0b504762a04d76fbbe5108944297a
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
@@ -166,9 +170,11 @@ SPEC CHECKSUMS:
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
   UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
+  URLNavigator: 830d156b8624402850ff14ec96222cfc51a05d42
   VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
+  WebViewBridge.Swift: 7a9018f73e8599517529ffc3355a32ac5b0a95d6
   wow-vendor-ui: 995f591940b0eb4c18ad78401e0f1c07bd1d50b8
-  wow3rd: fd0a7bcd267cd0eeb2d3bd2162a3b9827f0c9833
+  wow3rd: 83e44fff7c173ac55815c9b40355e22d781aeb40
   XZMRefresh: 2c0f1b70d9fe97a1d0286373e29986d44f0a7b1a
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
@@ -176,4 +182,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: c6a5a7fc58c16073ab3681d75f36c1262051f356
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.1.1

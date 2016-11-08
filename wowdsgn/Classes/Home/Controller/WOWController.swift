@@ -412,8 +412,10 @@ class WOWController: WOWBaseViewController {
             switch bannerLinkType {
             case 1:
                 let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWWebViewController.self)) as! WOWWebViewController
-
-                vc.bannerUrl = model.bannerLinkUrl
+                if let url = model.bannerLinkUrl{
+                    vc.url = url
+                }
+                
                 navigationController?.pushViewController(vc, animated: true)
                 print("web后台填连接")
             case 2:

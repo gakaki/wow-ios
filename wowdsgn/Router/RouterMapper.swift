@@ -36,15 +36,16 @@ public class RouterModuleProductTopic : FNUrlRouteDelegate{
 }
 public class RouterModuleBrand : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        print(params)
-//        VCRedirect.toCouponVC
-        //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
+        if let id = params?["id"] as? Int {
+            VCRedirect.toBrand(brand_id: id)
+        }
     }
 }
 public class RouterModuleDesigner : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        print(params)
-        //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
+        if let id = params?["id"] as? Int {
+            VCRedirect.toDesigner(designerId: id)
+        }
     }
 }
 public class RouterModuleCoupon : FNUrlRouteDelegate{

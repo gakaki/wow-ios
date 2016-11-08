@@ -1,15 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="TR4-mJ-1qI">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="TR4-mJ-1qI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="grd-Fr-fQg">
             <objects>
-                <navigationController id="TR4-mJ-1qI" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="TR4-mJ-1qI" customClass="WOWNavigationController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="bjo-7B-YvH"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9nJ-m5-uvl">
@@ -27,25 +30,25 @@
         <!--尖叫设计-->
         <scene sceneID="bzw-ue-Dsp">
             <objects>
-                <viewController storyboardIdentifier="WOWController" title="尖叫设计" automaticallyAdjustsScrollViewInsets="NO" id="iWL-Oz-JyM" customClass="WOWController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWController" title="尖叫设计" automaticallyAdjustsScrollViewInsets="NO" id="iWL-Oz-JyM" customClass="WOWController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zth-Uz-Pao"/>
                         <viewControllerLayoutGuide type="bottom" id="Qr7-pK-v6K"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WjY-BI-OED">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="jZw-sM-bw2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="iWL-Oz-JyM" id="1Ma-N6-H4e"/>
                                     <outlet property="delegate" destination="iWL-Oz-JyM" id="j2o-M9-qgx"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jZw-sM-bw2" firstAttribute="leading" secondItem="WjY-BI-OED" secondAttribute="leading" id="2Cl-Hb-fQZ"/>
                             <constraint firstAttribute="trailing" secondItem="jZw-sM-bw2" secondAttribute="trailing" id="H62-Rb-qJ8"/>
@@ -55,7 +58,6 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="尖叫设计" id="tLF-m6-I8Z"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="jZw-sM-bw2" id="EXi-Mh-hk2"/>
                     </connections>
@@ -67,18 +69,18 @@
         <!--Search Child Controller-->
         <scene sceneID="9pm-4I-9RS">
             <objects>
-                <viewController storyboardIdentifier="WOWSearchChildController" id="xIA-EI-VR5" customClass="WOWSearchChildController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSearchChildController" id="xIA-EI-VR5" customClass="WOWSearchChildController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wun-Qi-xCQ"/>
                         <viewControllerLayoutGuide type="bottom" id="hYh-pH-xBY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="agS-oZ-ndb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kMz-wK-YYB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="Tff-du-cJp"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5sB-ZI-qjl">
@@ -87,7 +89,6 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </collectionViewCell>
                                 </cells>
@@ -97,7 +98,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kMz-wK-YYB" firstAttribute="top" secondItem="agS-oZ-ndb" secondAttribute="top" id="EEY-tC-ktB"/>
                             <constraint firstAttribute="trailing" secondItem="kMz-wK-YYB" secondAttribute="trailing" id="HgB-ku-7Zz"/>
@@ -113,67 +114,31 @@
             </objects>
             <point key="canvasLocation" x="787" y="2219"/>
         </scene>
-        <!--Web View Controller-->
-        <scene sceneID="JdB-PA-gT9">
-            <objects>
-                <viewController storyboardIdentifier="WOWWebViewController" id="ESY-ZA-1nY" customClass="WOWWebViewController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qhQ-Ep-reC"/>
-                        <viewControllerLayoutGuide type="bottom" id="Lu9-Lj-Ogy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3KU-oR-zbU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kkS-Z8-f26">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                                <connections>
-                                    <outlet property="delegate" destination="ESY-ZA-1nY" id="PAf-Re-k6h"/>
-                                </connections>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="kkS-Z8-f26" secondAttribute="trailing" id="JzC-jm-TKF"/>
-                            <constraint firstItem="kkS-Z8-f26" firstAttribute="top" secondItem="3KU-oR-zbU" secondAttribute="top" id="e1v-RK-nK6"/>
-                            <constraint firstItem="kkS-Z8-f26" firstAttribute="leading" secondItem="3KU-oR-zbU" secondAttribute="leading" id="syT-59-dhq"/>
-                            <constraint firstItem="kkS-Z8-f26" firstAttribute="bottom" secondItem="Lu9-Lj-Ogy" secondAttribute="top" id="tJ6-np-wGH"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="webView" destination="kkS-Z8-f26" id="3Q0-Vo-VDx"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3vy-de-9yk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1164" y="2212"/>
-        </scene>
         <!--喜欢-->
         <scene sceneID="QUc-1l-x1X">
             <objects>
-                <viewController storyboardIdentifier="WOWLikeListController" title="喜欢" id="fAZ-wF-Vf3" customClass="WOWLikeListController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWLikeListController" title="喜欢" id="fAZ-wF-Vf3" customClass="WOWLikeListController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KeN-7Y-NHd"/>
                         <viewControllerLayoutGuide type="bottom" id="OW8-EB-Eqi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qxZ-zG-3aE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="191" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OXl-ap-CxQ">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWLikeListCell" rowHeight="201" id="jZf-4B-1Q7" customClass="WOWLikeListCell" customModule="wowapp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="201"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWLikeListCell" rowHeight="201" id="jZf-4B-1Q7" customClass="WOWLikeListCell" customModule="wowdsgn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="201"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jZf-4B-1Q7" id="rAr-2u-r8S">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="201"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGa-V7-hGx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMe-MI-aSc">
                                                             <rect key="frame" x="15" y="12" width="36" height="36"/>
@@ -184,21 +149,21 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRL-ws-6Wp">
                                                             <rect key="frame" x="57" y="21" width="34" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsr-Et-wxy">
-                                                            <rect key="frame" x="264" y="15" width="41" height="29"/>
+                                                            <rect key="frame" x="318" y="15" width="42" height="29"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="+ 关注">
-                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="attentionButtonClick:" destination="jZf-4B-1Q7" eventType="touchUpInside" id="bf1-ZG-Ve4"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="SRL-ws-6Wp" firstAttribute="centerY" secondItem="lMe-MI-aSc" secondAttribute="centerY" id="1VW-nb-4F7"/>
                                                         <constraint firstItem="lMe-MI-aSc" firstAttribute="top" secondItem="WGa-V7-hGx" secondAttribute="top" constant="12" id="GLN-bb-jOa"/>
@@ -212,8 +177,8 @@
                                                     </constraints>
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iKK-qc-VYT">
-                                                    <rect key="frame" x="0.0" y="60" width="320" height="130"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <rect key="frame" x="0.0" y="60" width="375" height="130"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="1" minimumInteritemSpacing="1" id="Osv-tG-w11">
                                                         <size key="itemSize" width="50" height="50"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -237,7 +202,7 @@
                                                 <constraint firstItem="iKK-qc-VYT" firstAttribute="top" secondItem="WGa-V7-hGx" secondAttribute="bottom" id="x59-vP-9BI"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="attentionButton" destination="fsr-Et-wxy" id="ZtS-yT-LrW"/>
                                             <outlet property="collectionView" destination="iKK-qc-VYT" id="8E6-GF-0tc"/>
@@ -252,7 +217,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="OXl-ap-CxQ" firstAttribute="top" secondItem="KeN-7Y-NHd" secondAttribute="bottom" id="4lP-7p-rGM"/>
                             <constraint firstItem="OW8-EB-Eqi" firstAttribute="top" secondItem="OXl-ap-CxQ" secondAttribute="bottom" id="6nc-Th-2nM"/>
@@ -269,19 +234,19 @@
         <!--Empty Data Set Delegate-->
         <scene sceneID="Ggl-Mw-UzC">
             <objects>
-                <viewController storyboardIdentifier="WOWCommentController" title="评论" id="EBo-vS-uWn" customClass="WOWCommentController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWCommentController" title="评论" id="EBo-vS-uWn" customClass="WOWCommentController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TDj-vU-p97"/>
                         <viewControllerLayoutGuide type="bottom" id="GFl-Rn-ftz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nwZ-Gz-j8d">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YAd-Tb-hmn">
-                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="EBo-vS-uWn" id="SDr-A4-FXF"/>
                                     <outlet property="delegate" destination="EBo-vS-uWn" id="lOk-yM-pic"/>
@@ -290,11 +255,11 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dta-oW-EI5">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AGh-ld-bfI" customClass="KMPlaceholderTextView" customModule="wowapp" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="7" width="241" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AGh-ld-bfI" customClass="KMPlaceholderTextView" customModule="wowdsgn" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="7" width="295" height="30"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="osd-JZ-3mC"/>
                                         </constraints>
@@ -308,17 +273,17 @@
                                         </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCM-9f-hG2">
-                                        <rect key="frame" x="271" y="5" width="34" height="33"/>
+                                        <rect key="frame" x="325" y="5" width="35" height="33"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <state key="normal" title="发送">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="sendButtonClick:" destination="EBo-vS-uWn" eventType="touchUpInside" id="MFG-aR-7vC"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="RCM-9f-hG2" secondAttribute="bottom" constant="6" id="3SO-kr-KRL"/>
                                     <constraint firstItem="AGh-ld-bfI" firstAttribute="top" secondItem="dta-oW-EI5" secondAttribute="top" priority="999" constant="7" id="6rY-IZ-AVE"/>
@@ -330,7 +295,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YAd-Tb-hmn" firstAttribute="leading" secondItem="nwZ-Gz-j8d" secondAttribute="leading" id="4Gv-eb-vgd"/>
                             <constraint firstItem="GFl-Rn-ftz" firstAttribute="top" secondItem="dta-oW-EI5" secondAttribute="bottom" id="JTl-lz-raH"/>
@@ -357,18 +322,18 @@
         <!--搜索-->
         <scene sceneID="f5z-DS-P3L">
             <objects>
-                <viewController storyboardIdentifier="WOWSearchsController" title="搜索" hidesBottomBarWhenPushed="YES" id="Xp8-SD-pEC" customClass="WOWSearchsController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSearchsController" title="搜索" hidesBottomBarWhenPushed="YES" id="Xp8-SD-pEC" customClass="WOWSearchsController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IAL-nT-SOc"/>
                         <viewControllerLayoutGuide type="bottom" id="mFd-nB-FQS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KdU-kS-09v">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iI9-cc-IAE">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZDO-eA-Fwp">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -382,7 +347,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="iI9-cc-IAE" firstAttribute="leading" secondItem="KdU-kS-09v" secondAttribute="leading" id="9jv-My-D1c"/>
                             <constraint firstItem="iI9-cc-IAE" firstAttribute="top" secondItem="KdU-kS-09v" secondAttribute="top" id="Ebb-0h-pTf"/>
@@ -401,18 +366,18 @@
         <!--Search Controller-->
         <scene sceneID="eSF-SW-C5k">
             <objects>
-                <viewController storyboardIdentifier="WOWSearchController" id="8Qs-qZ-KeY" customClass="WOWSearchController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSearchController" id="8Qs-qZ-KeY" customClass="WOWSearchController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nvl-lx-KCO"/>
                         <viewControllerLayoutGuide type="bottom" id="gCz-qx-jEY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hWu-o2-kc5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="doX-5h-ZcA">
-                                <rect key="frame" x="15" y="0.0" width="290" height="568"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="15" y="0.0" width="345" height="667"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DgZ-Ml-wmA">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -425,7 +390,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="doX-5h-ZcA" firstAttribute="top" secondItem="hWu-o2-kc5" secondAttribute="top" id="6xa-QY-W30"/>
                             <constraint firstAttribute="trailing" secondItem="doX-5h-ZcA" secondAttribute="trailing" constant="15" id="fJX-bf-Lzj"/>
@@ -444,21 +409,21 @@
         <!--场景-->
         <scene sceneID="Ra8-Sw-QwD">
             <objects>
-                <viewController storyboardIdentifier="WOWSenceController" title="场景" id="ZjH-5o-9uo" customClass="WOWSenceController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWSenceController" title="场景" id="ZjH-5o-9uo" customClass="WOWSenceController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eje-vN-Ivu"/>
                         <viewControllerLayoutGuide type="bottom" id="Mua-h8-4G3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bcz-XR-lDG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tmc-Xk-Wmi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="wowapp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49.5" width="320" height="117"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="wowdsgn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="56" width="320" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nGH-pF-T2j" id="dq8-W0-doG">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
@@ -466,18 +431,18 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sks-es-NV7">
                                                     <rect key="frame" x="30" y="37" width="23" height="60"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="23" id="KOG-74-l7q"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                    <color key="textColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="hs7-6C-6cA">
-                                                    <rect key="frame" x="61" y="45" width="224" height="28"/>
+                                                    <rect key="frame" x="61" y="45" width="279" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -491,7 +456,7 @@
                                                 <constraint firstItem="hs7-6C-6cA" firstAttribute="leading" secondItem="sks-es-NV7" secondAttribute="trailing" constant="8" id="tom-sH-W81"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="desLabel" destination="hs7-6C-6cA" id="5lj-5n-2fH"/>
                                         </connections>
@@ -510,7 +475,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uv1-Ti-RuP">
-                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ef-mh-v9m">
                                         <rect key="frame" x="50" y="0.0" width="50" height="50"/>
@@ -523,14 +488,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E70-rc-q8q">
-                                        <rect key="frame" x="160" y="0.0" width="20" height="50"/>
+                                        <rect key="frame" x="215" y="0.0" width="20" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yv9-6E-UFd" userLabel="line">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="gLu-Xu-iLT"/>
                                         </constraints>
@@ -547,21 +512,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InS-kG-pkp">
-                                        <rect key="frame" x="195" y="0.0" width="125" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="250" y="0.0" width="125" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="125" id="rJe-fi-VeR"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                         <state key="normal" title="加入购物车">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="carClick:" destination="ZjH-5o-9uo" eventType="touchUpInside" id="rgl-AY-E6L"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="yv9-6E-UFd" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="4eX-sO-Eba"/>
                                     <constraint firstItem="9ef-mh-v9m" firstAttribute="top" secondItem="uv1-Ti-RuP" secondAttribute="top" id="4w7-qK-j16"/>
@@ -581,7 +546,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Mua-h8-4G3" firstAttribute="top" secondItem="tmc-Xk-Wmi" secondAttribute="bottom" constant="50" id="BSa-34-tlc"/>
                             <constraint firstItem="uv1-Ti-RuP" firstAttribute="leading" secondItem="bcz-XR-lDG" secondAttribute="leading" id="Bfh-eg-gDU"/>
@@ -613,4 +578,9 @@
         <image name="icon_like_hightlighted" width="30" height="30"/>
         <image name="icon_share" width="30" height="30"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

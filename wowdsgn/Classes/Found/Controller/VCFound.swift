@@ -606,7 +606,7 @@ extension VCFound:cell_102_delegate{
         if let bannerLinkType = model.bannerLinkType {
             switch bannerLinkType {
             case 1:
-                let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWWebViewController.self)) as! WOWWebViewController
+                let vc =  WOWWebViewController()
                 if let url = model.bannerLinkUrl {
                     vc.url = url
                 }

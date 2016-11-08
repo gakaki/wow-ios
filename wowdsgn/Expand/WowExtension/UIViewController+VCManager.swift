@@ -61,11 +61,12 @@ public class VCRedirect {
         }
         
         MobClick.e(.My_Orders)
-        let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
-        vc.entrance = couponEntrance.userEntrance
+
+        let vc = WOWOrderListViewController()
+        vc.selectCurrentIndex = 0
+        
         
         topNaVC?.pushViewController(vc, animated: true)
-
     }
     public class func toCouponVC(){
         guard WOWUserManager.loginStatus else{

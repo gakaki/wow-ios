@@ -60,7 +60,7 @@ public class VCRedirect {
             return
         }
         
-        MobClick.e(.My_Coupons)
+        MobClick.e(.My_Orders)
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
         vc.entrance = couponEntrance.userEntrance
         
@@ -80,6 +80,13 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
 
+    public class func toVCProduct( _ pid: Int? ){
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
+        vc.hideNavigationBar = true
+        vc.productId = pid
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    
     
     
  }

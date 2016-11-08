@@ -18,6 +18,8 @@ public class RouterModuleMain : FNUrlRouteDelegate{
 }
 public class RouterModuleProduct : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
+        let productId = params?["id"] as? String
+        VCRedirect.toVCProduct(productId?.toInt())
         print(params)
         //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
     }

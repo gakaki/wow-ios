@@ -603,7 +603,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
 //MARK: - selectPayDelegate
 extension WOWEditOrderController: selectPayDelegate {
     func surePay(_ channel: String) {
-//        backView.hidePayView()
+        backView.hidePayView()
         if  orderCode.isEmpty {
             WOWHud.showMsg("订单生成失败")
             return

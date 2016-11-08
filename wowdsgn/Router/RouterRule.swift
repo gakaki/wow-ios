@@ -56,7 +56,6 @@ public class RouterModuleOrderList : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
         print(params)
         //        FNUtil.currentTopViewContro
-        ller().present(alert, animated: true, completion: nil)
     }
 }
 public class RouterModuleOrder : FNUrlRouteDelegate{

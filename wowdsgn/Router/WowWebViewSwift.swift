@@ -1,11 +1,9 @@
 import UIKit
 import WebKit
-import WebViewBridge_Swift
 
-public class WowWebViewSwift: WOWBaseViewController , WKUIDelegate, WKNavigationDelegate {
+public class WowWebViewSwift: UIViewController , WKUIDelegate, WKNavigationDelegate {
     
     public var bridge:ZHWebViewBridge!
-    public var url   :   String? = nil
 
     public let webView: WKWebView = {
         let webConfiguration    = WKWebViewConfiguration()
@@ -13,34 +11,7 @@ public class WowWebViewSwift: WOWBaseViewController , WKUIDelegate, WKNavigation
         return w
     }()
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if navigationType == .linkClicked {
-            return false
-        }
-        
-        return true
-    }
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.title = "尖叫设计"
-
-        //    专题详情
-        //    品牌专题
-        //    产品详情
-        //    优惠券
-        
-        
-        webView.frame       = self.view.bounds
-        view.addSubview(webView)
-        
-        bridge = ZHWebViewBridge.bridge(webView)
-        bridge_router()
-        
-        let myURL       = URL(string: url ?? "")!
-        let myRequest   = URLRequest(url: myURL)
-        webView.load(myRequest)
-    }
+    public let url = "http://10.0.60.116:8080/wow11-11.html"
     
     public func toCouponMe(){
         print("toCouponMe")
@@ -83,7 +54,27 @@ public class WowWebViewSwift: WOWBaseViewController , WKUIDelegate, WKNavigation
             return (false, nil)
         }
     }
-  
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //    专题详情
+        //    品牌专题
+        //    产品详情
+        //    优惠券
+        
+        
+        webView.frame       = self.view.bounds
+        view.addSubview(webView)
+        
+        bridge = ZHWebViewBridge.bridge(webView)
+        bridge_router()
+        
+        
+        let myURL       = URL(string: url)
+        let myRequest   = URLRequest(url: myURL!)
+        webView.load(myRequest)
+    }
+    
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

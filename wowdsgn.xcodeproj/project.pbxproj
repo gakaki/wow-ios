@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0607088E1DD18D7600A91724 /* RouterRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088C1DD18D7600A91724 /* RouterRule.swift */; };
+		0607088F1DD18D7600A91724 /* WowWebViewSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */; };
 		065722F21DB4BF4700781B1C /* Growing_Version in Resources */ = {isa = PBXBuildFile; fileRef = 065722E01DB4BF4700781B1C /* Growing_Version */; };
 		065722F31DB4BF4700781B1C /* libDeepShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E11DB4BF4700781B1C /* libDeepShare.a */; };
 		065722F41DB4BF4700781B1C /* libGrowing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065722E21DB4BF4700781B1C /* libGrowing.a */; };
@@ -434,6 +436,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0607088C1DD18D7600A91724 /* RouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterRule.swift; sourceTree = "<group>"; };
+		0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowWebViewSwift.swift; sourceTree = "<group>"; };
 		065722DD1DB4BF4700781B1C /* DeepShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepShare.h; sourceTree = "<group>"; };
 		065722DE1DB4BF4700781B1C /* DSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSError.h; sourceTree = "<group>"; };
 		065722DF1DB4BF4700781B1C /* Growing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growing.h; sourceTree = "<group>"; };
@@ -930,6 +934,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0607088B1DD18D7600A91724 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				0607088C1DD18D7600A91724 /* RouterRule.swift */,
+				0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		065722DC1DB4BF4700781B1C /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -1057,6 +1070,7 @@
 		069D2F561DB46AD100A059D0 /* wowdsgn */ = {
 			isa = PBXGroup;
 			children = (
+				0607088B1DD18D7600A91724 /* Router */,
 				067940A41DB60B4000348691 /* 3rdPartyHelper */,
 				065722DC1DB4BF4700781B1C /* 3rdParty */,
 				069D33501DB47B3E00A059D0 /* model-network */,
@@ -2362,6 +2376,7 @@
 				2D509A511DB5D3120047CD13 /* WOWCommentListModel.swift in Sources */,
 				069D32BF1DB47ADD00A059D0 /* WOWOrderDetailCostCell.swift in Sources */,
 				069D32441DB47ADD00A059D0 /* JSPatchHelper.swift in Sources */,
+				0607088F1DD18D7600A91724 /* WowWebViewSwift.swift in Sources */,
 				069D329F1DB47ADD00A059D0 /* WOWTopicNavigationItem.swift in Sources */,
 				2D509A691DB5D3120047CD13 /* WOWDSGNFooterView.swift in Sources */,
 				069D329D1DB47ADD00A059D0 /* WOWContentTopicTopCell.swift in Sources */,
@@ -2449,6 +2464,7 @@
 				069D33151DB47ADE00A059D0 /* HolderTextView.swift in Sources */,
 				2D509A551DB5D3120047CD13 /* WOWSceneModel.swift in Sources */,
 				069D32631DB47ADD00A059D0 /* WOWDesignerCell.swift in Sources */,
+				0607088E1DD18D7600A91724 /* RouterRule.swift in Sources */,
 				2D509A141DB5D30B0047CD13 /* WOWController.swift in Sources */,
 				2D509A831DB5D3120047CD13 /* WOWSenceLikeCell.swift in Sources */,
 				069D32421DB47ADD00A059D0 /* WOWTabBarController.swift in Sources */,

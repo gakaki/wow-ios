@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import UserNotifications
-import UserNotificationsUI
+//import UserNotifications
+//import UserNotificationsUI
 import wow3rd
 
 
@@ -56,26 +56,29 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
     
     
     //iOS10以下使用这个方法接收通知
-    public  func didReceiveRemoteNotification(_ userInfo: [AnyHashable : Any]){
-        //关闭友盟自带的弹出框
-        UMessage.setAutoAlert(false)
-        pushController(userInfo: userInfo)
-        UMessage.didReceiveRemoteNotification(userInfo)
-        
-        //    self.userInfo = userInfo;
-        //    //定制自定的的弹出框
-        //    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
-        //    {
-        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"标题"
-        //                                                            message:@"Test On ApplicationStateActive"
-        //                                                           delegate:self
-        //                                                  cancelButtonTitle:@"确定"
-        //                                                  otherButtonTitles:nil];
-        //
-        //        [alertView show];
-        //
-        //    }
-    }
+//    public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+//        //关闭友盟自带的弹出框
+//        UMessage.setAutoAlert(false)
+//        pushController(userInfo: userInfo)
+//        UMessage.didReceiveRemoteNotification(userInfo)
+//        
+//        //    self.userInfo = userInfo;
+//        //    //定制自定的的弹出框
+//        //    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
+//        //    {
+//        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"标题"
+//        //                                                            message:@"Test On ApplicationStateActive"
+//        //                                                           delegate:self
+//        //                                                  cancelButtonTitle:@"确定"
+//        //                                                  otherButtonTitles:nil];
+//        //
+//        //        [alertView show];
+//        //
+//        //    }
+//
+//    }
+   
+
     
     public func application(_ application: UIApplication,
                             continue userActivity: NSUserActivity,

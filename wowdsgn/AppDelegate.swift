@@ -216,6 +216,8 @@ extension AppDelegate{
         nav.isNavigationBarHidden = true
         window?.rootViewController =    nav
     }
+   
+    
     
    
     func configRootVC(){
@@ -394,7 +396,20 @@ extension AppDelegate{
         tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], for: .normal)
         tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], for: .selected)
     }
-    
+    //iOS10以下使用这个方法接收通知
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //关闭友盟自带的弹出框
+        UMessage.setAutoAlert(false)
+        UMessage.didReceiveRemoteNotification(userInfo)
+        switch application.applicationState {
+        case .active:
+            break
+        default:
+            umessage.pushController(userInfo: userInfo)
+            
+        }
+        
+    }
 }
 
 //ADLaunchView 广告view

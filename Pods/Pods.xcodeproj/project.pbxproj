@@ -19,7 +19,7 @@
 		030741E5705D750F0FD797B78207C433 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 612BE6A12906A35826CABD5B45A33030 /* SDImageCache.m */; };
 		030EE9F3A64656D464DFA5950DB39614 /* String+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45DAF0636DFF0F5468A8DD46BA4E63F /* String+Rx.swift */; };
 		03150DC44C5CA0ADBB6FFEE65F4F110C /* YYDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B3C2EAD1FA1ED1DC003DD3B8C03A5E5E /* YYDiskCache.m */; };
-		036DE45C849BD777A06CE7DE4730680E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D1B7F5CA7F53B03E79C4938347192A /* UserNotifications.framework */; };
+		036DE45C849BD777A06CE7DE4730680E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D1B7F5CA7F53B03E79C4938347192A /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		037578425416FDA93AB24700E604EB88 /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C753BC5014EB1210526BBC1E094260C1 /* Producer.swift */; };
 		03B6C1FDB6CE1CB4EBC05575F2190120 /* Zip+arity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266D85CFB4A26126FE205A6089A0A8A9 /* Zip+arity.swift */; };
 		03B72A7A76BC495DAE1B5CA92AA9BD13 /* TransformOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA12F6CFD609816F5053997C5B9CE54 /* TransformOf.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };

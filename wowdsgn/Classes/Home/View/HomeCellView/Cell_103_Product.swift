@@ -324,7 +324,8 @@ extension Cell_103_Product:UIScrollViewDelegate{
     //手动拖拽滚动开始
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         //使自动滚动计时器失效（防止用户手动移动图片的时候这边也在自动滚动）
-        autoScrollTimer?.invalidate()
+        dellocTimer()
+        
     }
     
     //手动拖拽滚动结束

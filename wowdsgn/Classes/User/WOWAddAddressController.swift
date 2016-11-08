@@ -108,6 +108,24 @@ class WOWAddAddressController: WOWBaseTableViewController {
         
         
         self.data = CityDataManager.data
+        // 遍历拿下标
+        for model in self.data.provinces.enumerated() {
+
+            if addressInfo.province == model.element.name {
+                provinceIndex = model.offset
+                for c in (model.element.subCities?.enumerated())!{
+                    if addressInfo.city == c.element.name{
+                        cityIndex = c.offset
+                        for d in (c.element.subDistricts?.enumerated())!{
+                            if addressInfo.county == d.element.name {
+                                districtIndex = d.offset
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
         self.configPicker()
     }
     
@@ -121,6 +139,10 @@ class WOWAddAddressController: WOWBaseTableViewController {
             nameTextField.text  = addressInfo.name
             phoneTextField.text = addressInfo.mobile
             cityTextField.text = "\(addressInfo.province ?? "") - \(addressInfo.city ?? "") - \(addressInfo.county ?? "")"
+        
+        
+      
+        
             detailAddressTextView.text = addressInfo.addressDetail ?? ""
             defaultAddress = addressInfo.isDefault ?? false
             selectButton.isSelected = defaultAddress
@@ -135,6 +157,9 @@ class WOWAddAddressController: WOWBaseTableViewController {
         pickerContainerView.pickerView.dataSource = self
         pickerContainerView.cancelButton.addTarget(self, action:#selector(cancel), for:.touchUpInside)
         pickerContainerView.sureButton.addTarget(self, action:#selector(sure), for:.touchUpInside)
+        pickerContainerView.pickerView.selectRow(self.provinceIndex, inComponent: 0, animated: false)
+        pickerContainerView.pickerView.selectRow(self.cityIndex, inComponent: 1, animated: false)
+        pickerContainerView.pickerView.selectRow(self.districtIndex, inComponent: 2, animated: false)
         
         cityTextField.inputView = pickerContainerView
     }

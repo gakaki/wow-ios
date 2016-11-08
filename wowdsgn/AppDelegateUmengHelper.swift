@@ -11,6 +11,7 @@ import UserNotifications
 import UserNotificationsUI
 import wow3rd
 
+
 public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UIApplicationDelegate  {
     
     public func init_umessage(_ launchOptions:[AnyHashable: Any]?){
@@ -58,6 +59,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
     public  func didReceiveRemoteNotification(_ userInfo: [AnyHashable : Any]){
         //关闭友盟自带的弹出框
         UMessage.setAutoAlert(false)
+        pushController(userInfo: userInfo)
         UMessage.didReceiveRemoteNotification(userInfo)
         
         //    self.userInfo = userInfo;
@@ -103,6 +105,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
             //应用处于前台时的远程推送接受
             //关闭友盟自带的弹出框
             UMessage.setAutoAlert(false)
+            pushController(userInfo: userInfo)
             //必须加这句代码
             UMessage.didReceiveRemoteNotification(userInfo)
         }else{
@@ -121,6 +124,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
         let userInfo = response.notification.request.content.userInfo
         if response.notification.request.trigger is UNPushNotificationTrigger {
             //应用处于后台时的远程推送接受
+            pushController(userInfo: userInfo)
             //必须加这句代码
             UMessage.didReceiveRemoteNotification(userInfo)
         }else{
@@ -129,5 +133,91 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
         }
     }
     
+    func pushController(userInfo: [AnyHashable : Any]) {
+        print(userInfo)
+        let dic :[String: AnyObject]? = userInfo as? [String : AnyObject]
+        if let dic = dic {
+            var type: String?
+            var id: String?
+            type = dic["type"] as? String
+            id = dic["id"] as? String
+            if let type = type {
+                switch type {
+                case "101":
+                    if let id = id {
+                        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
+                        vc.hideNavigationBar = true
+                        vc.productId = id.toInt()
+                        UIApplication.currentViewController()?.pushVC(vc)
+                    }
+                    
+                    print("商品详情")
+                case "102":
+                    if let id = id {
+                        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
+                        //                vc.hideNavigationBar = true
+                        vc.topic_id = id.toInt() ?? 0
+                        UIApplication.currentViewController()?.pushVC(vc)
+                        
+                    }
+                    
+                    print("内容专题详情")
+                case "103":
+                    if let id = id {
+                        let vc                  = VCTopic(nibName: nil, bundle: nil)
+                        vc.topic_id             = id.toInt() ?? 0
+                        vc.hideNavigationBar    = true
+                        UIApplication.currentViewController()?.pushVC(vc)
+                        
+                    }
+                    print("商品列表专题详情")
+                case "104":
+                    let vc = WOWWebViewController()
+                    if let url = id{
+                        vc.url = url
+                    }
+
+                    UIApplication.currentViewController()?.pushVC(vc)
+                        
+                    print("H5")
+                case "105":
+                    if let id = id {
+                        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
+                        vc.designerId = id.toInt()
+                        vc.entrance = .brandEntrance
+                        vc.hideNavigationBar = true
+                        UIApplication.currentViewController()?.pushVC(vc)
+                        
+                    }
+                    print("品牌详情")
+                case "106":
+                    if let id = id {
+                        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
+                        vc.designerId = id.toInt()
+                        vc.entrance = .designerEntrance
+                        vc.hideNavigationBar = true
+
+                        UIApplication.currentViewController()?.pushVC(vc)
+                        
+                    }
+                    print("设计师详情")
+                case "107":
+                    if let id = id {
+                        let vc              = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory.self)) as! VCCategory
+                        vc.ob_cid.value     = id.toInt() ?? 10
+//                        vc.title    = cname!
+                        UIApplication.currentViewController()?.pushVC(vc)
+                        
+                    }
+                    print("分类详情")
+                default:
+                    break
+                }
+            }
+        }
+        
+//        let type = userInfo["type"]
+        
+    }
     
 }

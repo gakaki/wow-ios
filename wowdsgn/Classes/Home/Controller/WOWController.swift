@@ -69,15 +69,15 @@ class WOWController: WOWBaseViewController {
         
         request()
         // 检查更新 
-        WOWCheckUpdate.checkUpdateWithDevice {[weak self] (isUpdate) in
-            if let strongSelf = self{
-                if isUpdate ?? false {
-                    
-                    strongSelf.goToUpdateVersion()
-                }
-            }
-        }
-
+//        WOWCheckUpdate.checkUpdateWithDevice {[weak self] (isUpdate) in
+//            if let strongSelf = self{
+//                if isUpdate ?? false {
+//                    
+//                    strongSelf.goToUpdateVersion()
+//                }
+//            }
+//        }
+//
     }
     func goToUpdateVersion()  {
         let alert = UIAlertController(title: "提示", message: "版本有更新", preferredStyle: .alert)

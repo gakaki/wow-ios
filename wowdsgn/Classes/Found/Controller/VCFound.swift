@@ -118,7 +118,7 @@ class VCFound: VCBaseVCCategoryFound {
                     case 401:
                         if let s  = t.contentTmp!["products"] as? [AnyObject] {
                             t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
-                            t.name = (t.contentTmp!["name"] as? String) ?? ""
+                            t.name = (t.contentTmp!["name"] as? String) ?? "本周上新"
                             
                         }
 

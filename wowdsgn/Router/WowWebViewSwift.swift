@@ -96,7 +96,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         
         var url_final   = (url ?? "")
         if url_final.length > 0 {
-            url_final   = "http://10.0.60.129:8080/links.html"
+//            url_final   = "http://10.0.60.129:8080/links.html"
             url_final   = "\(url_final)?platform=ios&wowdsgn=true"
         }
         let myURL       = URL(string: url_final ?? "")

@@ -1,7 +1,8 @@
 import UIKit
 import WebKit
+import WebViewBridge_Swift
 
-public class WowWebViewSwift: UIViewController , WKUIDelegate, WKNavigationDelegate {
+public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavigationDelegate {
     
     public var bridge:ZHWebViewBridge!
 
@@ -62,6 +63,7 @@ public class WowWebViewSwift: UIViewController , WKUIDelegate, WKNavigationDeleg
         //    产品详情
         //    优惠券
         
+        navigationItem.title = "尖叫设计"
         
         webView.frame       = self.view.bounds
         view.addSubview(webView)
@@ -70,7 +72,7 @@ public class WowWebViewSwift: UIViewController , WKUIDelegate, WKNavigationDeleg
         bridge_router()
         
         
-        let myURL       = URL(string: url)
+        let myURL       = URL(string: url ?? "")
         let myRequest   = URLRequest(url: myURL!)
         webView.load(myRequest)
     }

@@ -48,10 +48,7 @@ public class RouterModuleDesigner : FNUrlRouteDelegate{
 }
 public class RouterModuleCoupon : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        print(params)
-        
-        
-        //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
+        VCRedirect.toCouponVC()
     }
 }
 

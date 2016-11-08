@@ -15,9 +15,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     
     public var url = ""
     
-    public func toCouponMe(){
-        print("toCouponMe")
-    }
+    
     public func webView(_: WKWebView, decidePolicyFor: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
     {
         
@@ -53,7 +51,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         
         bridge.registerHandler("Wow.router.coupon_me") { (args:[Any]) -> (Bool, [Any]?) in
            //跳转coupon  这里应该上router方案哦 router和vc的组合
-           self.toCouponMe()
+//           self.toCouponMe()
            return (true, nil)
         }
         

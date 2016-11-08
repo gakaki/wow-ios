@@ -9,9 +9,68 @@
 
 //VCManager is collect the redirect code
 import UIKit
-
-extension  UIViewController {
+import wow3rd
+ 
+public class VCRedirect {
     
+    
+    public class func vc_show(vc:UIViewController) {
+        
+        let topViewController = FNUtil.currentTopViewController()
+        if (topViewController.navigationController != nil)  {
+            let navigation = topViewController.navigationController
+            navigation?.pushViewController(vc, animated: true)
+        }
+        else {
+            topViewController.present(vc, animated: true, completion: nil)
+        }
+        
+    }
+    public class  func toLoginVC(_ isPresent:Bool = false){
+        
+        if isPresent {
+            let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
+            let login = vc.topViewController as! WOWLoginController
+            login.isPresent = isPresent
+            
+            let topViewController = FNUtil.currentTopViewController()
+            let navigation = topViewController.navigationController
+            topViewController.present(vc, animated: true, completion: nil)
+            
+            
+        }else {
+            let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWLoginController.self)) as! WOWLoginController
+            vc.isPresent = isPresent
+            
+            let topViewController = FNUtil.currentTopViewController()
+            let navigation = topViewController.navigationController
+            navigation?.pushViewController(vc, animated: true)
+
+        }
+        
+        
+    }
+
+    public class func toCouponVC(){
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
+        
+        MobClick.e(.My_Coupons)
+        let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
+        vc.entrance = couponEntrance.userEntrance
+        
+        let topViewController = FNUtil.currentTopViewController()
+        let navigation = topViewController.navigationController
+        navigation?.pushViewController(vc, animated: true)
+
+    }
+
+    
+    
+ }
+extension  UIViewController {
     func toMainVC(){
         let mainVC = UIStoryboard(name: "Main", bundle:Bundle.main).instantiateInitialViewController()
         mainVC?.modalTransitionStyle = .flipHorizontal

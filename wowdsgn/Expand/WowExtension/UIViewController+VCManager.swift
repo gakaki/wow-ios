@@ -39,6 +39,7 @@ public class VCRedirect {
     public class func toDesigner(designerId:Int?){
         if let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as? WOWBrandHomeController
         {
+            vc.designerId           = designerId
             vc.entrance             = .designerEntrance
             topNaVC?.pushViewController(vc, animated: true)
         }

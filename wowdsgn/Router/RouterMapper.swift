@@ -38,15 +38,15 @@ public class RouterModuleProductTopic : FNUrlRouteDelegate{
 }
 public class RouterModuleBrand : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        if let id = params?["id"] as? Int {
-            VCRedirect.toBrand(brand_id: id)
+        if let id = params?["id"] as? String {
+            VCRedirect.toBrand(brand_id: Int(id))
         }
     }
 }
 public class RouterModuleDesigner : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        if let id = params?["id"] as? Int {
-            VCRedirect.toDesigner(designerId: id)
+        if let id = params?["id"] as? String {
+            VCRedirect.toDesigner(designerId:Int(id))
         }
     }
 }

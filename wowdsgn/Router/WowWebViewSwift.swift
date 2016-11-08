@@ -12,7 +12,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         return w
     }()
     
-    public let url = "http://10.0.60.116:8080/wow11-11.html"
+    public var url = "http://10.0.60.116:8080/wow11-11.html"
     
     public func toCouponMe(){
         print("toCouponMe")

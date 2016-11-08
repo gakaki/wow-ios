@@ -170,7 +170,7 @@ class VCFound: VCBaseVCCategoryFound {
             }
             
         }){ (errorMsg) in
-            print(errorMsg)
+            print(errorMsg ?? "")
             self.endRefresh()
             
         }
@@ -608,7 +608,7 @@ extension VCFound:cell_102_delegate{
             case 1:
                 let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWWebViewController.self)) as! WOWWebViewController
                 
-                vc.bannerUrl = model.bannerLinkUrl
+                vc.url = model.bannerLinkUrl
                 navigationController?.pushViewController(vc, animated: true)
                 print("web后台填连接")
             case 2:

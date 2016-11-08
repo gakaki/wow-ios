@@ -36,6 +36,7 @@ class WOWCheckUpdate {
                                 print("线上版本号：\(version)")
                                 
                                 currentAppStoreDevice = version
+                                isUpdateTag(compareVersion())
                             }
                         }
                     }
@@ -53,39 +54,43 @@ class WOWCheckUpdate {
                 receiveStatusDic["status"] = "-1" as AnyObject?
             }
             
-            let infoDictionary = Bundle.main.infoDictionary
-            // app版本
-            let app_Version = infoDictionary!["CFBundleShortVersionString"] as? String
-            
-            var appVersionArr = currentAppStoreDevice.components(separatedBy: ".")
-            var currentVersionArr = app_Version!.components(separatedBy: ".")
-            
-            if appVersionArr.count == 2 {
-                appVersionArr.append("0")
-            }
-            if currentVersionArr.count == 2 {
-                currentVersionArr.append("0")
-            }
-            
-            var appVersionNum = 0
-
-            if ( appVersionArr[0] != ""){
-                appVersionNum = appVersionArr[0].toInt()! * 100 + appVersionArr[1].toInt()! * 10 + appVersionArr[2].toInt()! * 1
-            }
-            
-            
-            let currentVersionNum = currentVersionArr[0].toInt()! * 100 + currentVersionArr[1].toInt()! * 10 + currentVersionArr[2].toInt()! * 1
-            
-            if currentVersionNum < appVersionNum {
-                isUpdateTag(true)
-            }else{
-                isUpdateTag(false)
-            }
-
+          
         })
         task.resume()
         
     }
-    
+  class  func compareVersion() -> Bool{
+        let infoDictionary = Bundle.main.infoDictionary
+        // app版本
+        let app_Version = infoDictionary!["CFBundleShortVersionString"] as? String
+        
+        var appVersionArr = WOWCheckUpdate.currentAppStoreDevice.components(separatedBy: ".")
+        var currentVersionArr = app_Version!.components(separatedBy: ".")
+        
+        if appVersionArr.count == 2 {
+            appVersionArr.append("0")
+        }
+        if currentVersionArr.count == 2 {
+            currentVersionArr.append("0")
+        }
+        
+        var appVersionNum = 0
+        
+        if ( appVersionArr[0] != ""){
+            appVersionNum = appVersionArr[0].toInt()! * 100 + appVersionArr[1].toInt()! * 10 + appVersionArr[2].toInt()! * 1
+        }
+        
+        
+        let currentVersionNum = currentVersionArr[0].toInt()! * 100 + currentVersionArr[1].toInt()! * 10 + currentVersionArr[2].toInt()! * 1
+        
+        if currentVersionNum < appVersionNum {
+
+            return(true)
+        }else{
+
+            return(false)
+        }
+
+    }
 }
 

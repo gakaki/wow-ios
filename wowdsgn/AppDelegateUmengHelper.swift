@@ -105,7 +105,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
             //应用处于前台时的远程推送接受
             //关闭友盟自带的弹出框
             UMessage.setAutoAlert(false)
-            pushController(userInfo: userInfo)
+//            pushController(userInfo: userInfo)
             //必须加这句代码
             UMessage.didReceiveRemoteNotification(userInfo)
         }else{
@@ -143,7 +143,36 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
             id = dic["id"] as? String
             if let type = type {
                 switch type {
-                case "101":
+                case "101"://首页
+                    
+                    let _ = UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: false)
+                    UIApplication.appTabBarController.selectedIndex = 0
+                    WOWTool.lastTabIndex = 0
+                case "102"://购物
+
+                    let _ = UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: false)
+                    UIApplication.appTabBarController.selectedIndex = 1
+                    WOWTool.lastTabIndex = 1
+                    
+                case "103"://精选
+                    let _ = UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: false)
+                    UIApplication.appTabBarController.selectedIndex = 2
+                    WOWTool.lastTabIndex = 2
+
+                case "104"://喜欢
+                    guard WOWUserManager.loginStatus else{
+                        UIApplication.currentViewController()?.toLoginVC(true)
+                        return
+                    }
+                    let _ = UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: false)
+                    UIApplication.appTabBarController.selectedIndex = 3
+                    WOWTool.lastTabIndex = 3
+                case "105"://我
+                    let _ = UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: false)
+                    UIApplication.appTabBarController.selectedIndex = 4
+                    WOWTool.lastTabIndex = 4
+
+                case "201"://商品详情
                     if let id = id {
                         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
                         vc.hideNavigationBar = true
@@ -151,8 +180,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
                         UIApplication.currentViewController()?.pushVC(vc)
                     }
                     
-                    print("商品详情")
-                case "102":
+                case "202"://内容专题详情
                     if let id = id {
                         let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
                         //                vc.hideNavigationBar = true
@@ -161,8 +189,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
                         
                     }
                     
-                    print("内容专题详情")
-                case "103":
+                case "203"://商品列表专题详情
                     if let id = id {
                         let vc                  = VCTopic(nibName: nil, bundle: nil)
                         vc.topic_id             = id.toInt() ?? 0
@@ -170,8 +197,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
                         UIApplication.currentViewController()?.pushVC(vc)
                         
                     }
-                    print("商品列表专题详情")
-                case "104":
+                case "204"://H5
                     let vc = WOWWebViewController()
                     if let url = id{
                         vc.url = url
@@ -179,18 +205,16 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
 
                     UIApplication.currentViewController()?.pushVC(vc)
                         
-                    print("H5")
-                case "105":
+                case "205"://品牌详情
                     if let id = id {
                         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
-                        vc.designerId = id.toInt()
+                        vc.brandID = id.toInt()
                         vc.entrance = .brandEntrance
                         vc.hideNavigationBar = true
                         UIApplication.currentViewController()?.pushVC(vc)
                         
                     }
-                    print("品牌详情")
-                case "106":
+                case "206"://设计师详情
                     if let id = id {
                         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
                         vc.designerId = id.toInt()
@@ -200,8 +224,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
                         UIApplication.currentViewController()?.pushVC(vc)
                         
                     }
-                    print("设计师详情")
-                case "107":
+                case "207"://分类详情
                     if let id = id {
                         let vc              = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory.self)) as! VCCategory
                         vc.ob_cid.value     = id.toInt() ?? 10
@@ -209,7 +232,25 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
                         UIApplication.currentViewController()?.pushVC(vc)
                         
                     }
-                    print("分类详情")
+                case "208"://优惠券列表
+                    guard WOWUserManager.loginStatus else{
+                        UIApplication.currentViewController()?.toLoginVC(true)
+                        return
+                    }
+                    let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
+                    vc.entrance = couponEntrance.userEntrance
+                    UIApplication.currentViewController()?.pushVC(vc)
+                case "209"://订单列表
+                    if let id = id {
+                        guard WOWUserManager.loginStatus else{
+                            UIApplication.currentViewController()?.toLoginVC(true)
+                            return
+                        }
+                        let vc = WOWOrderListViewController()
+                        vc.selectCurrentIndex = id.toInt() ?? 0
+                        UIApplication.currentViewController()?.pushVC(vc)
+                    }
+                    
                 default:
                     break
                 }

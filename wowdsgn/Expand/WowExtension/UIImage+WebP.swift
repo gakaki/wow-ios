@@ -78,9 +78,18 @@ extension UIImageView {
         if ( res.length <= 0 ){
             return ""
         }else{
-//            res     = "\(url!)?imageMogr2/format/webp"            
-            res     = "\(url!)?imageView2/0/w/900/format/webp/q/90"
+//            res     = "\(url!)?imageMogr2/format/webp" 
+            switch UIDevice.deviceType {
+            case .dt_iPhone4S,.dt_iPhone5:
+                res     = "\(url!)?imageView2/0/w/500/format/webp/q/90"
+            case .dt_iPhone6:
+                res     = "\(url!)?imageView2/0/w/700/format/webp/q/90"
+            case .dt_iPhone6_Plus:
+                res     = "\(url!)?imageView2/0/w/900/format/webp/q/90"
+            default:
+                res     = "\(url!)?imageView2/0/w/700/format/webp/q/90"
 
+            }
         }
        return res
     }

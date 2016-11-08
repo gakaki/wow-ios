@@ -62,9 +62,9 @@ class WOWContentTopicController: WOWBaseViewController {
                 
                 // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
                 if isFavorite == true {
-                    strongSelf.vo_topic!.likeQty = strongSelf.vo_topic!.likeQty! + 1
+                    strongSelf.vo_topic!.likeQty = (strongSelf.vo_topic!.likeQty ?? 0)  + 1
                 }else{
-                    strongSelf.vo_topic!.likeQty = strongSelf.vo_topic!.likeQty! - 1
+                    strongSelf.vo_topic!.likeQty = (strongSelf.vo_topic!.likeQty ?? 0) - 1
                 }
                 
                 strongSelf.reloadNagationItemThumbButton(isFavorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)

@@ -19,7 +19,12 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         }
         
         func setModel(_ m:WOWFoundCategoryModel){
-            pictureImageView.set_webimage_url(m.productImg)
+            if m.productImg != nil {
+                pictureImageView.set_webimage_url(m.productImg)
+            }
+            else{
+                pictureImageView.image = UIImage.init(named: "placeholder_product")
+            }
 //            pictureImageView.set_webimage_url_base(m.productImg, place_holder_name: "placeholder_product")
             label_name.text      = m.categoryName
         }
@@ -250,7 +255,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             if let strongSelf = self{
                 
                 let r                             =  JSON(result)
-                
+                    DLog(r)
 
 
                 strongSelf.vo_categories_sub_arr  =  Mapper<WOWFoundCategoryModel>().mapArray(JSONObject: r["categoryProductImgVoList"].arrayObject ) ?? [WOWFoundCategoryModel]()

@@ -438,7 +438,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
 
         WOWUploadManager.upload(image, successClosure: { [weak self](result) in
             if let strongSelf = self {
-                strongSelf.headImageUrl = (result as? String) ?? ""
+                strongSelf.headImageUrl = result ?? ""
                 strongSelf.request()
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                 print(result)

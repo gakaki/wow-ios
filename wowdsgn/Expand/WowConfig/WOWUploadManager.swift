@@ -11,12 +11,13 @@ import Qiniu
 import Alamofire
 import Hashids_Swift
 import FCUUID
+typealias HeadImgURL               = (_ url:String?) -> ()
 class WOWUploadManager {
     
     static let sharedManager = WOWUploadManager()
     init(){}
     // 上传头像
-    static  func upload(_ image:UIImage,successClosure:@escaping SuccessClosure,failClosure:@escaping FailClosure){
+    static  func upload(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
         
         let image = image.fixOrientation()
         let data = UIImageJPEGRepresentation(image,0.5)
@@ -71,7 +72,11 @@ class WOWUploadManager {
                             
                             WOWUserManager.userPhotoData = imageData as Data
 //                            successClosure(headImageUrl as AnyObject)
-                            successClosure(headImageUrl as AnyObject, "")
+//                            successClosure(headImageUrl as AnyObject)
+                            
+                            successClosure(headImageUrl)
+                            
+//                            successClosure(headImageUrl)
                         }
 
                     }, option: uploadOption)

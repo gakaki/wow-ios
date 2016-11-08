@@ -217,7 +217,8 @@ extension PhotoViewCell {
         
         // 加载网路图片
         guard let urlString = photo.imageUrlString, let url = URL(string: urlString) else {
-            assert(false, "设置的url不合法")
+//            assert(false, "设置的url不合法")
+            print("设置的url不合法")
             return
         }
         // 添加提示框

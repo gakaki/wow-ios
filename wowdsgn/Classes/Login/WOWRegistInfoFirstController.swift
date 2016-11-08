@@ -160,8 +160,8 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
             if let strongSelf = self {
                 WOWHud.dismiss()
                 strongSelf.headImageView.image = image
-                
-                strongSelf.headImageUrl = (result as? String) ?? ""
+                strongSelf.headImageUrl = result ?? ""
+//                strongSelf.headImageUrl = (result as? String) ?? ""
                 
                 
                 print(result)

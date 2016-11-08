@@ -17,6 +17,12 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     public func toCouponMe(){
         print("toCouponMe")
     }
+    
+    
+    public func webView(WebViewNews: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        return true;
+    }
     public func bridge_router(){
         
         bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in

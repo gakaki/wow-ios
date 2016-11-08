@@ -8,11 +8,11 @@
 
 import UIKit
 
-class FNUrlMatcher {
-    static let shared = FNUrlMatcher()
-    var urlDictionary: Dictionary<String, AnyClass> = [:]
+public class FNUrlMatcher {
+    public static let shared = FNUrlMatcher()
+    public var urlDictionary: Dictionary<String, AnyClass> = [:]
 
-    class func fetchModuleClass(key: String) -> AnyClass? {
+    public class func fetchModuleClass(key: String) -> AnyClass? {
         return FNUrlMatcher.shared.urlDictionary[key]
     }
 }

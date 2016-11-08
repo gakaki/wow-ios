@@ -9,7 +9,7 @@
 import SafariServices
 
 //在 key 都没有匹配上的时候，处理 url 的 block
-var urlRouteHandleOverBlock = { (url: String?, modal: Bool?, params:Dictionary<String, AnyClass>?) in
+public var urlRouteHandleOverBlock = { (url: String?, modal: Bool?, params:Dictionary<String, AnyClass>?) in
     if #available(iOS 9.0, *) {
         let safari = SFSafariViewController.init(url: URL.init(string: url!)!)
     

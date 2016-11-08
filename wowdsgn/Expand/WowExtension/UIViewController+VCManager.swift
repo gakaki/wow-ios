@@ -35,6 +35,20 @@ public class VCRedirect {
         
     }
 
+    //Wow开头的类  然后可以注入id
+    public class func toDesigner(designerId:Int?){
+        if let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as? WOWBrandHomeController
+        {
+            vc.entrance             = .designerEntrance
+            topNaVC?.pushViewController(vc, animated: true)
+        }
+    }
+    public class func toBrand( brand_id: Int?){
+        if let vc    = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as? WOWBrandHomeController {
+            vc.brandID = brand_id
+            topNaVC?.pushViewController(vc, animated: true)
+        }
+    }
     
     public class  func toLoginVC(_ isPresent:Bool = false){
         

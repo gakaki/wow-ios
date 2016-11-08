@@ -25,7 +25,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     var labelHeight : CGFloat?
     let pageSize = 10
     
-    var entrance = brandOrDesignerEntrance.brandEntrance
+    public var entrance = brandOrDesignerEntrance.brandEntrance
     
     fileprivate var shareBrandImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用

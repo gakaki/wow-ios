@@ -37,6 +37,7 @@ public class RouterModuleProductTopic : FNUrlRouteDelegate{
 public class RouterModuleBrand : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
         print(params)
+//        VCRedirect.toCouponVC
         //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
     }
 }

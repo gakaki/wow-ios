@@ -1088,7 +1088,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             likeButton.setImage(UIImage(named: "topOrder")?.withRenderingMode(.alwaysOriginal), for: UIControlState())
         }
         
-        likeButton.imageEdgeInsets = UIEdgeInsetsMake(10, 70, 10, 10)
+        likeButton.imageEdgeInsets = UIEdgeInsetsMake(10, 75, 10, 10)
         likeButton.addTarget(self, action: #selector(clickAction(_:)), for: .touchUpInside)
         likeButton.tag = indexPathSetion
         view.addSubview(likeButton)

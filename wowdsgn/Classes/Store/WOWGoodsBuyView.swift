@@ -131,7 +131,12 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     @IBOutlet weak var goodsImageView: UIImageView!     //商品图片
     @IBOutlet weak var closeButton: UIButton!
     
- 
+    @IBOutlet weak var subButton: UIButton!             //增加数量
+    @IBOutlet weak var addButton: UIButton!             //减少数量
+    @IBOutlet weak var countTextField: UITextField!     //商品数量显示
+    
+    @IBOutlet weak var numberView: UIView!
+    
     @IBOutlet weak var sureButton: UIButton!            //确定按钮
   
     fileprivate var _layer: CALayer!
@@ -201,7 +206,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         collectionView.delegate = self
         collectionView.register(UINib.nibName(String(describing: WOWSearchCell.self)), forCellWithReuseIdentifier: "WOWSearchCell")
         
-   
+        
         collectionView.register(UINib.nibName(String(describing: WOWProductSpecReusableView.self)), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "WOWProductSpecReusableView")
         
         collectionView.register(UINib.nibName(String(describing: WOWProductSpecFootView.self)), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "WOWProductSpecFootView")
@@ -229,10 +234,14 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             configProductInfo()
             //刷新数据源数据
             refreshProductInfo()
+           
             //规格数组
             if let array = p.serialAttribute {
                 serialAttributeArr = array
-                
+                numberView.isHidden = true
+            }else{
+                collectionView.isHidden = true
+                numberView.isHidden = false
             }
             //把选出的产品对应的sku选中，😔这个循环太烦了。
             if let attributes = productInfo?.attributes {
@@ -250,7 +259,46 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             productSku()
         }
     }
-    
+    @IBAction func countButtonClick(sender: UIButton) {
+        /**
+         *  更改商品数量，商品数量为1时不能再减少
+         *  加商品时要判断商品的库存数量和已加商品数，如果库存数大于购买数可以继续增加
+         *  如果库存数小于等于购买数，则提示库存不足
+         */
+        if sender.tag == 1001 {
+            skuCount -= 1
+            skuCount = skuCount == 0 ? 1 : skuCount
+            showResult(count: skuCount)
+        }else{
+//            if colorIndex >= 0 && specIndex >= 0 {
+                if productInfo?.availableStock! > skuCount {
+                    skuCount += 1
+                }else {
+                    WOWHud.showMsg("库存不足")
+                }
+                
+//            }else {
+//                skuCount += 1
+//            }
+            showResult(count: skuCount)
+        }
+    }
+    /**
+     显示商品数量
+     
+     - parameter count: 传入数量
+     */
+    private func showResult(count:Int){
+        if count <= 1 {
+            subButton.isEnabled = false
+            subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
+        }else {
+            subButton.isEnabled = true
+            subButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+        }
+        self.countTextField.text = "\(count)"
+    }
+
     //刷新数据源
     func refreshProductInfo() {
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{

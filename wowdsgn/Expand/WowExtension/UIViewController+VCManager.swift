@@ -75,7 +75,7 @@ public class VCRedirect {
         }
         
         MobClick.e(.My_Orders)
-        
+
         let vc = WOWOrderListViewController()
         vc.selectCurrentIndex = 0
         
@@ -95,6 +95,28 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
 
+    public class func toVCProduct( _ pid: Int? ){
+        
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
+        vc.hideNavigationBar = true
+        vc.productId = pid
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    public class func toVCH5( _ url: String? ){
+        
+        let vc = WOWWebViewController()
+        if let url = url{
+            vc.url = url
+        }
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    
+    public class func toVCCategory( _ pid: Int? ){
+        
+        let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory.self)) as! VCCategory
+        vc.ob_cid.value     = pid ?? 10
+        topNaVC?.pushViewController(vc, animated: true)
+    }
     
     
  }

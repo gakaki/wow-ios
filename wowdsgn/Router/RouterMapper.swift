@@ -18,6 +18,8 @@ public class RouterModuleMain : FNUrlRouteDelegate{
 }
 public class RouterModuleProduct : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
+        let productId = params?["id"] as? String
+        VCRedirect.toVCProduct(productId?.toInt())
         print(params)
         //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
     }
@@ -67,13 +69,16 @@ public class RouterModuleOrder : FNUrlRouteDelegate{
 }
 public class RouterModuleCategory : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
+        let categoryId = params?["id"] as? String
+        VCRedirect.toVCCategory(categoryId?.toInt())
         print(params)
         //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
     }
 }
 public class RouterModuleH5 : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        print(params)
+        let url = params?["url"] as? String
+        VCRedirect.toVCH5(url)
         //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
     }
 }

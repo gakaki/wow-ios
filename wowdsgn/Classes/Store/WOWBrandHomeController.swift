@@ -109,23 +109,29 @@ class WOWBrandHomeController: WOWBaseViewController {
     }
     
     func configBrandData(){
-        
-       placeImageView.kf.setImage(with: URL(string:(brandModel?.image)!), placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
-        
-            if let strongSelf = self{
-                strongSelf.shareBrandImage = image
+        let url =  URL(string:(brandModel?.image) ?? "")
+        if  let url = url {
+            placeImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
+                
+                if let strongSelf = self{
+                    strongSelf.shareBrandImage = image
+                }
             }
+
         }
-      
+        
     }
     func configDesignerData(){
-        
-        placeImageView.kf.setImage(with: URL(string:(designerModel?.designerPhoto)!), placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
-            
-            if let strongSelf = self{
-                strongSelf.shareBrandImage = image
+        let url = URL(string:(designerModel?.designerPhoto) ?? "")
+        if let url = url {
+            placeImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
+                
+                if let strongSelf = self{
+                    strongSelf.shareBrandImage = image
+                }
             }
         }
+        
         
         
     }

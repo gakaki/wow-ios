@@ -61,15 +61,19 @@ class WOWModelVoTopic: WOWBaseModel,Mappable {
     func calImageHeight(){
         //定义NSURL对象
         let url = NSURL(string: topicImg ?? "")
-        DispatchQueue.global(qos: .background).async {
-            if let data = NSData(contentsOf: url as! URL), let image = UIImage(data: data as Data) {
-                //计算原始图片的宽高比
-                self.imageAspect = image.size.width / image.size.height
-                //            //设置imageView宽高比约束
-                //            //加载图片
-                //
-                
+        if let url = url {
+            DispatchQueue.global(qos: .background).async {
+                if let data = NSData(contentsOf: url as URL), let image = UIImage(data: data as Data) {
+                    //计算原始图片的宽高比
+                    self.imageAspect = image.size.width / image.size.height
+                    //            //设置imageView宽高比约束
+                    //            //加载图片
+                    //
+                    
+                }
             }
+        
+        
         }
         
     }

@@ -117,6 +117,8 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
                 priceLbOne.text = sellPrice
             }
 
+        }else{
+            priceLbOne.text = sellPrice
         }
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
@@ -153,6 +155,8 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
                 priceLbTwo.text = sellPrice
             }
            
+        }else{
+            priceLbTwo.text = sellPrice
         }
      
         if WOWUserManager.loginStatus {

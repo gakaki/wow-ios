@@ -358,7 +358,6 @@
 		069D33561DB47B3E00A059D0 /* WOWRequestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */; };
 		06C869A21DD19A25004C05E3 /* RouterMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A11DD19A25004C05E3 /* RouterMapper.swift */; };
 		06C869A41DD19B4E004C05E3 /* AppDelegateUmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */; };
-		06C869A91DD19C07004C05E3 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */; };
 		06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869AA1DD19C8E004C05E3 /* Config3rd.swift */; };
 		06F944DE1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */; };
 		2D130EF71DB78D48001DE9A7 /* Cell_103_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */; };
@@ -434,7 +433,8 @@
 		63576E781DB5F695000C3FB6 /* WOWAboutHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63576E761DB5F695000C3FB6 /* WOWAboutHeaderView.xib */; };
 		63803AE11DC0843A000AA259 /* WOWProductSpecFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63803ADF1DC0843A000AA259 /* WOWProductSpecFootView.swift */; };
 		63803AE21DC0843A000AA259 /* WOWProductSpecFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63803AE01DC0843A000AA259 /* WOWProductSpecFootView.xib */; };
-		63803AE81DC325BD000AA259 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63803AE71DC325BD000AA259 /* UserNotifications.framework */; };
+		63803AE81DC325BD000AA259 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63803AE71DC325BD000AA259 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		639C13DA1DD204AA003B0F59 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		63A1E21A1DB9B95100C250D4 /* WOWProductParamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1E2181DB9B95100C250D4 /* WOWProductParamCell.swift */; };
 		63A1E21B1DB9B95100C250D4 /* WOWProductParamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63A1E2191DB9B95100C250D4 /* WOWProductParamCell.xib */; };
 /* End PBXBuildFile section */
@@ -914,7 +914,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06C869A91DD19C07004C05E3 /* UserNotificationsUI.framework in Frameworks */,
+				639C13DA1DD204AA003B0F59 /* UserNotificationsUI.framework in Frameworks */,
 				63803AE81DC325BD000AA259 /* UserNotifications.framework in Frameworks */,
 				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
 				0681214E1DB4D03600407319 /* libSocialQQ.a in Frameworks */,

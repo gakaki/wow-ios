@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Lgq-sk-XB7">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="Lgq-sk-XB7">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="hxn-V5-6cP">
             <objects>
-                <navigationController storyboardIdentifier="HotStyle" id="Lgq-sk-XB7" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HotStyle" id="Lgq-sk-XB7" customClass="WOWNavigationController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
@@ -27,7 +30,7 @@
         <!--Hot Style Main-->
         <scene sceneID="xE2-am-frJ">
             <objects>
-                <viewController id="a6V-DM-WWV" customClass="WOWHotStyleMain" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="a6V-DM-WWV" customClass="WOWHotStyleMain" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="InR-qr-U5r"/>
                         <viewControllerLayoutGuide type="bottom" id="6ds-9h-UHN"/>
@@ -38,14 +41,13 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="deR-1P-Nw9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="a6V-DM-WWV" id="w5z-Gt-OWm"/>
-                                    <outlet property="delegate" destination="a6V-DM-WWV" id="NFN-Fo-7an"/>
+                                    <outlet property="dataSource" destination="ace-3p-yRi" id="IKH-IS-P1C"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="deR-1P-Nw9" firstAttribute="bottom" secondItem="6ds-9h-UHN" secondAttribute="top" id="GpI-wg-lb3"/>
                             <constraint firstItem="deR-1P-Nw9" firstAttribute="top" secondItem="aXX-jk-4wS" secondAttribute="top" id="cpq-C3-72g"/>
@@ -54,37 +56,38 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QJv-Rg-nqm"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="dataDelegate" destination="ace-3p-yRi" id="bKp-M4-TsW"/>
                         <outlet property="tableView" destination="deR-1P-Nw9" id="8Yh-Dd-Axk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ndt-ef-aNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ace-3p-yRi" customClass="WOWTableDelegate" customModule="wowdsgn" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-327.46666666666664" y="-295.36000000000001"/>
         </scene>
         <!--Content Topic Controller-->
         <scene sceneID="Ydd-6e-nnG">
             <objects>
-                <viewController storyboardIdentifier="WOWContentTopicController" id="C3y-1R-y6w" customClass="WOWContentTopicController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWContentTopicController" id="C3y-1R-y6w" customClass="WOWContentTopicController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pXV-gw-fpQ"/>
                         <viewControllerLayoutGuide type="bottom" id="d0c-fw-cs2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zUY-3I-nOK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qsq-X8-h1m">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="C3y-1R-y6w" id="0rx-Gi-FfM"/>
                                     <outlet property="delegate" destination="C3y-1R-y6w" id="ZwW-Ku-z62"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Qsq-X8-h1m" firstAttribute="leading" secondItem="zUY-3I-nOK" secondAttribute="leading" id="L1i-r2-qE0"/>
                             <constraint firstItem="Qsq-X8-h1m" firstAttribute="top" secondItem="zUY-3I-nOK" secondAttribute="top" id="ZBA-pe-5uP"/>
@@ -101,4 +104,9 @@
             <point key="canvasLocation" x="-61" y="-357"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

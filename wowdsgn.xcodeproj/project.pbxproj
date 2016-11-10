@@ -360,6 +360,7 @@
 		06C869A41DD19B4E004C05E3 /* AppDelegateUmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */; };
 		06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869AA1DD19C8E004C05E3 /* Config3rd.swift */; };
 		06F944DE1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */; };
+		2D0043F41DD327D500A7D98A /* WOWTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0043F31DD327D500A7D98A /* WOWTableDelegate.swift */; };
 		2D130EF71DB78D48001DE9A7 /* Cell_103_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */; };
 		2D130EF81DB78D48001DE9A7 /* Cell_103_Product.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */; };
 		2D130EFE1DB78D8C001DE9A7 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */; };
@@ -830,6 +831,7 @@
 		06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.4.0.a; path = UMessage/libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
 		06F944DD1DD1A3910055BAFC /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = UMessage/UMessage.h; sourceTree = "<group>"; };
 		215C6F175F8DEB1B0D61D6FA /* Pods-wowdsgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.release.xcconfig"; sourceTree = "<group>"; };
+		2D0043F31DD327D500A7D98A /* WOWTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWTableDelegate.swift; sourceTree = "<group>"; };
 		2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_103_Product.swift; sourceTree = "<group>"; };
 		2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_103_Product.xib; sourceTree = "<group>"; };
 		2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -1321,6 +1323,7 @@
 		069D30331DB47ADC00A059D0 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				2D0043F21DD327AA00A7D98A /* TableViewDelegate */,
 				069D30341DB47ADC00A059D0 /* BaseController */,
 				069D303B1DB47ADC00A059D0 /* BaseDatasource */,
 				069D303D1DB47ADC00A059D0 /* BaseJSPatch */,
@@ -1674,6 +1677,14 @@
 				069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */,
 			);
 			path = "model-network";
+			sourceTree = "<group>";
+		};
+		2D0043F21DD327AA00A7D98A /* TableViewDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				2D0043F31DD327D500A7D98A /* WOWTableDelegate.swift */,
+			);
+			path = TableViewDelegate;
 			sourceTree = "<group>";
 		};
 		2D509A0E1DB5D30B0047CD13 /* Controller */ = {
@@ -2533,6 +2544,7 @@
 				069D325F1DB47ADD00A059D0 /* WOWBrandListController.swift in Sources */,
 				069D32311DB47ADD00A059D0 /* WOWBrandStyleModel.swift in Sources */,
 				069D32561DB47ADD00A059D0 /* WOWShareView.swift in Sources */,
+				2D0043F41DD327D500A7D98A /* WOWTableDelegate.swift in Sources */,
 				069D32BB1DB47ADD00A059D0 /* WOWNumberMessageView.swift in Sources */,
 				069D31B71DB47ADD00A059D0 /* WOWOrderAddressCell.swift in Sources */,
 				069D32B71DB47ADD00A059D0 /* WOWInfoTextController.swift in Sources */,

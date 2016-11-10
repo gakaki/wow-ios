@@ -38,7 +38,7 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
     var pageIndex = 1 //翻页
     var isRreshing : Bool = false
     var carBadgeCount: MIBadgeButton?
-    var isCurrentRequest : Bool = false
+    var isCurrentRequest : Bool = false // 记录当前页面是否网络请求过，区别是第一次进网络请求，还是下拉刷新进入网络请求
     
     override public func viewDidLoad() {
         super.viewDidLoad()

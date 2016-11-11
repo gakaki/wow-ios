@@ -8,7 +8,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     var vo_products         = [WOWProductModel]()
 
     var query_asc           = 1
-    var query_showCount     = 30
+    var query_showCount     = 10
     var query_sortBy        = 1
     var query_categoryId    = 16
     

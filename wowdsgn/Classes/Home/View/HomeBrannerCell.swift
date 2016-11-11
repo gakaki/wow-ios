@@ -15,6 +15,7 @@ class HomeBrannerCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+      var heightAll:CGFloat = MGScreenWidth
     func reloadBanner(_ dataArr:[WOWCarouselBanners]){
         imageURLArray = []
         for i in 0..<dataArr.count {

@@ -17,7 +17,7 @@ class Cell_102_Project: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 102  //专题
     }
-
+ var heightAll:CGFloat = 290
     weak var delegate : cell_102_delegate?
     @IBOutlet weak var lbTitle: UILabel!
     var dataArr:[WOWCarouselBanners]?{

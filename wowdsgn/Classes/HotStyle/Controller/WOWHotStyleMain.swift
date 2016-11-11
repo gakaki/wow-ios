@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WOWHotStyleMain: WOWBaseViewController {
+class WOWHotStyleMain: WOWBaseModuleVC {
     let cellID      = String(describing: WOWHotStyleCell.self)
     var dataArr     = [WOWHomeModle]()    //商品列表数组
     
@@ -109,22 +109,4 @@ class WOWHotStyleMain: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-}
-extension WOWHotStyleMain:WOWHotStyleCellDelegate{
-    
-    func reloadTableViewDataWithCell(){
-
-         request()
-        
-    }
-
-}
-extension WOWHotStyleMain:WOWHotStyleDelegate{
-    
-    func reloadTableViewData(){
-        
-        request()
-        
-    }
-
 }

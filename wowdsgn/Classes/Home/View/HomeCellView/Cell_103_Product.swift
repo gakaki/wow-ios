@@ -16,7 +16,7 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 801 // 今日单品倒计时
     }
-    
+     var heightAll:CGFloat = 210
     //当前展示的图片索引
     var currentIndex : Int = 0
     

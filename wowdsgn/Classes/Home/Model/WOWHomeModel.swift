@@ -16,13 +16,28 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleContentProduct    :  WOWHomeProduct_402_Info? // 自定义产品组
     var moduleAdditionalInfo    :  WOWHomeAdditionalInfo? // 配置信息～
     
+    var moduleContentTmp        :AnyObject?
+    
+    var moduleContentArr        :  [WowModulePageItemVO]?
+    
+    
+    var name:String?
+    
+    
+    
+//    var moduleContentArr:[WowModulePageItemVO]?
+    var moduleContentItem:WowModulePageItemVO?
+    
+    var moduleClassName:String?
+
+    
     required init?(map: Map) {
         
     }
     
     func mapping(map: Map) {
         moduleType    <- map["moduleType"]
-        
+       
         switch moduleType! {
         case 101://顶部轮播
             moduleContent           <- map["moduleContent"]
@@ -45,10 +60,14 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         case 801:// 今日单品
             moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
             moduleContentProduct        <- map["moduleContent"]
+        case 301,302,501,201,401:// 今日单品
+//            moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
+            moduleContentTmp        <- map["moduleContent"]
+//                moduleContentTmp              <- map["moduleContent"]
         default:
             break
         }
-
+  
 
     }
 }

@@ -26,6 +26,8 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var productEffectView: UIView!
+    @IBOutlet weak var addCartButton: UIButton!
+    @IBOutlet weak var nowBuyButton: UIButton!
     //是否展开参数
     var isOpenParam: Bool = false
     //是否展开温馨提示
@@ -51,6 +53,7 @@ class WOWProductDetailController: WOWBaseViewController {
         super.viewDidLoad()
         request()
         addObservers()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -268,6 +271,9 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 if code == RequestCode.ProductExpired.rawValue {
                     strongSelf.productEffectView.isHidden = false
+                    strongSelf.addCartButton.isHidden = true
+                    strongSelf.nowBuyButton.isEnabled = false
+                    strongSelf.nowBuyButton.setBackgroundColor(UIColor.init(hexString: "CCCCCC")!, forState: .disabled)
                     strongSelf.buyCarCount()
                     return
                 }

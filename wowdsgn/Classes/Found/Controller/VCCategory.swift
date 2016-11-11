@@ -38,8 +38,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
                 let category_paths              =  Mapper<WOWFoundCategoryModel>().mapArray(JSONObject: r["path"].arrayObject ) ?? [WOWFoundCategoryModel]()
                 strongSelf.vo_category_top      =  category_paths[0]
                 
-                let top_category_cid            =  strongSelf.vo_category_top.categoryID!
-                strongSelf.title                =  strongSelf.vo_category_top.categoryName!
+                let top_category_cid            =  strongSelf.vo_category_top.categoryID ?? 0
+                strongSelf.title                =  strongSelf.vo_category_top.categoryName ?? ""
                 
                 
                 WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category(categoryId:top_category_cid), successClosure: {[weak self] (result, code) in

@@ -18,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="331"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrp-Fq-IZ9">
-                        <rect key="frame" x="15" y="233" width="345" height="83.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrp-Fq-IZ9">
+                        <rect key="frame" x="15" y="268" width="345" height="48"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -31,23 +31,32 @@
                             <constraint firstAttribute="width" secondItem="5j1-JJ-Q5E" secondAttribute="height" multiplier="23:15" priority="750" id="6Qw-g5-Ghc"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="图片描述图片描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBj-BL-VIb">
+                        <rect key="frame" x="15" y="233" width="345" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="wBj-BL-VIb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="7d4-TS-zHc"/>
+                    <constraint firstAttribute="trailing" secondItem="wBj-BL-VIb" secondAttribute="trailing" constant="15" id="Cbr-50-Sf0"/>
                     <constraint firstAttribute="trailing" secondItem="5j1-JJ-Q5E" secondAttribute="trailing" constant="15" id="CcP-eN-E9l"/>
-                    <constraint firstItem="lrp-Fq-IZ9" firstAttribute="top" secondItem="5j1-JJ-Q5E" secondAttribute="bottom" constant="8" id="DfO-NI-XOQ"/>
                     <constraint firstItem="5j1-JJ-Q5E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="K4V-Df-6Oe"/>
                     <constraint firstAttribute="bottom" secondItem="lrp-Fq-IZ9" secondAttribute="bottom" constant="15" id="SZl-J4-5zn"/>
                     <constraint firstItem="lrp-Fq-IZ9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="VlB-IW-sOy"/>
+                    <constraint firstItem="lrp-Fq-IZ9" firstAttribute="top" secondItem="wBj-BL-VIb" secondAttribute="bottom" constant="8" id="Vrw-GV-mWl"/>
                     <constraint firstItem="5j1-JJ-Q5E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XoZ-GB-OcE"/>
+                    <constraint firstItem="wBj-BL-VIb" firstAttribute="top" secondItem="5j1-JJ-Q5E" secondAttribute="bottom" constant="8" id="f0A-Dz-tcJ"/>
                     <constraint firstAttribute="trailing" secondItem="lrp-Fq-IZ9" secondAttribute="trailing" constant="15" id="mDs-u2-F6m"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="aspect" destination="6Qw-g5-Ghc" id="iff-L4-bmZ"/>
                 <outlet property="bottomSpace" destination="SZl-J4-5zn" id="RZB-3e-O2q"/>
-                <outlet property="imgDescLabel" destination="lrp-Fq-IZ9" id="4I6-rS-XKp"/>
+                <outlet property="descLabel" destination="lrp-Fq-IZ9" id="vpd-5u-Dsh"/>
+                <outlet property="descSpace" destination="f0A-Dz-tcJ" id="bUd-co-fa0"/>
+                <outlet property="imgDescLabel" destination="wBj-BL-VIb" id="2bZ-po-1t3"/>
                 <outlet property="productImg" destination="5j1-JJ-Q5E" id="ysO-nY-uKS"/>
-                <outlet property="space" destination="DfO-NI-XOQ" id="NXd-fc-RqK"/>
             </connections>
             <point key="canvasLocation" x="-15.5" y="232"/>
         </tableViewCell>

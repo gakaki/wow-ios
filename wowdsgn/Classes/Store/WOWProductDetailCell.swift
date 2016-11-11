@@ -14,16 +14,17 @@ class WOWProductDetailCell: UITableViewCell {
     @IBOutlet weak var space: NSLayoutConstraint!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var aspect: NSLayoutConstraint!
+    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var descSpace: NSLayoutConstraint!
     
     //内容图片的宽高比约束
     internal var aspectConstraint : NSLayoutConstraint? {
         didSet {
             if oldValue != nil {
-                LayoutConstraint.activate([oldValue!])
-//                productImg.removeConstraint(oldValue!)
+                //删除旧的约束
+                LayoutConstraint.deactivate([oldValue!])
             }
             if aspectConstraint != nil {
-//                aspect.priority = 750
                 LayoutConstraint.activate([aspectConstraint!])
 
             }
@@ -57,10 +58,10 @@ class WOWProductDetailCell: UITableViewCell {
                 space.constant = -7
             }
             if let text = secondaryImg.text {
-                imgDescLabel.text = text
+                descLabel.text = text
                 bottomSpace.constant = 15
             }else {
-                imgDescLabel.text = ""
+                descLabel.text = ""
                 bottomSpace.constant = 7
 
             }

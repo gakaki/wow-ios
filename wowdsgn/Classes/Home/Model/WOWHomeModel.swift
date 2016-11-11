@@ -89,7 +89,8 @@ class WOWHomeProduct_402_Info: WOWBaseModel,Mappable {
     }
     
     func mapping(map: Map) {
-
+        id                  <- map["id"]
+        name                <- map["name"]
         products            <- map["products"]
         
     }

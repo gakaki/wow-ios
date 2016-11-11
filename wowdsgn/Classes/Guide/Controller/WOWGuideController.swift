@@ -149,7 +149,10 @@ class WOWGuideController: WOWBaseViewController {
             
         }
     }
- 
+    override func request() {
+        WOWHud.dismiss()
+    }
+
     @IBAction func btn2Action(_ sender: UIButton, forEvent event: UIEvent) {
         
         if ( currentState == .standby) {

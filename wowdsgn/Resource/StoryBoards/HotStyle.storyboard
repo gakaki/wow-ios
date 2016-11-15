@@ -58,10 +58,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="QJv-Rg-nqm"/>
                     <connections>
+                        <outlet property="dataDelegate" destination="ace-3p-yRi" id="bKp-M4-TsW"/>
                         <outlet property="tableView" destination="deR-1P-Nw9" id="8Yh-Dd-Axk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ndt-ef-aNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ace-3p-yRi" customClass="WOWTableDelegate" customModule="wowdsgn" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-327.46666666666664" y="-295.36000000000001"/>
         </scene>
@@ -79,6 +81,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qsq-X8-h1m">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="C3y-1R-y6w" id="0rx-Gi-FfM"/>

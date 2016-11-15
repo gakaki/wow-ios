@@ -30,6 +30,7 @@
 		0572D77FFC121775A7C527B2EF317CCF /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC261C6DE2EC00C5BB2B253F105A7EA /* Switch.swift */; };
 		06142D1CDC298D425348329F93521B8D /* UIScrollView+XZMRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0C8EAB6A1E2FC04A6B10691ACC824B /* UIScrollView+XZMRefresh.m */; };
 		06872215887468FE5D614908D1861C8B /* QNUploadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B172D53DE65F8E1B244DC390E45562F /* QNUploadManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		068F698C1DD563A500D83A4C /* WowAppDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068F698B1DD563A500D83A4C /* WowAppDelegateManager.swift */; };
 		06BC9A32CF069C087BB43408BF94BFD4 /* SDWebImagePrefetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 54FA5FF3C5442B309BAC46B7CEC7B413 /* SDWebImagePrefetcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C2774543005E5F0C96C8B0E55D0E13 /* RxTableViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E68B9513A5263E9922CF0F49752C0 /* RxTableViewDataSourceType.swift */; };
 		06C5F08D18D9D8F9052E0F44C1391B65 /* QNCrc32.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9CA4F4539FD33C087087420D62B618 /* QNCrc32.m */; };
@@ -1401,6 +1402,7 @@
 		05F5C437EF9D2DD63D8FC7F8F8270B38 /* UIProgressView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIProgressView+Rx.swift"; path = "RxCocoa/iOS/UIProgressView+Rx.swift"; sourceTree = "<group>"; };
 		05F98D75ED2FADB109A0637CCE5B9321 /* WebViewBridge_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebViewBridge_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06031F2A5582055508AA59EDBE224FC2 /* YYCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYCache.m; path = YYCache/YYCache.m; sourceTree = "<group>"; };
+		068F698B1DD563A500D83A4C /* WowAppDelegateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowAppDelegateManager.swift; sourceTree = "<group>"; };
 		06AECEDA19CD08B33062BBAE9E93FABE /* SectionModelType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SectionModelType.swift; path = Sources/DataSources/SectionModelType.swift; sourceTree = "<group>"; };
 		06EC0D76F56CF1C50E7309CFB3AB7FC8 /* libpingpp+network.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libpingpp+network.a"; path = "lib/Dependencies/Network/libpingpp+network.a"; sourceTree = "<group>"; };
 		07350EEED443145FA7D5ED6D2EA8591C /* SVProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
@@ -5037,6 +5039,7 @@
 		E29DFE76FDACA711D4DD8CFE67A337BD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				068F698B1DD563A500D83A4C /* WowAppDelegateManager.swift */,
 				AFDFC36D82D2F3FCB8F913864649A581 /* ConfigH5URL.swift */,
 				E23A0AE6070C2702B82E58278C27F268 /* DynamicFun.swift */,
 				920B144A1962A6BF81E800CB35ACA151 /* index.html */,
@@ -6901,6 +6904,7 @@
 			files = (
 				D2D4F49D48A59206091F877CF0053C2E /* ConfigH5URL.swift in Sources */,
 				589F601F32F78FD56D89C80C0E1475B8 /* DynamicFun.swift in Sources */,
+				068F698C1DD563A500D83A4C /* WowAppDelegateManager.swift in Sources */,
 				0CDA7FD997C4C920BF38376516794B87 /* FN.swift in Sources */,
 				1BCD8E74C3CAB9430493075EF2205DCA /* FNUrlMatcher.swift in Sources */,
 				23BE016AE340157918FFE3DE4A7B4C5E /* FNUrlRoute.swift in Sources */,

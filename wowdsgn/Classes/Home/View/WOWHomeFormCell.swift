@@ -28,6 +28,8 @@ class WOWHomeFormCell: UITableViewCell {
     
     @IBOutlet weak var lbMainTitle: UILabel!
     
+    var heightAll:CGFloat = 430
+    
     @IBOutlet weak var lbContent: UILabel!
     var modelData : WOWModelVoTopic?{
         didSet{

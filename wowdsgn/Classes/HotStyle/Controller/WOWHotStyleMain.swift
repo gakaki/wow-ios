@@ -8,9 +8,12 @@
 
 import UIKit
 
-class WOWHotStyleMain: WOWBaseViewController {
+class WOWHotStyleMain: WOWBaseModuleVC {
     let cellID      = String(describing: WOWHotStyleCell.self)
     var dataArr     = [WOWHomeModle]()    //商品列表数组
+    
+    @IBOutlet var dataDelegate: WOWTableDelegate?
+    
     @IBOutlet var tableView: UITableView!
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -33,11 +36,10 @@ class WOWHotStyleMain: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configBuyBarItem()
-        tableView.register(UINib.nibName(String(describing: WOWHotStyleCell.self)), forCellReuseIdentifier:cellID)
-        self.tableView.backgroundColor = GrayColorLevel5
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.mj_header = mj_header
-        tableView.estimatedRowHeight = 410
+        tableView.mj_header          = mj_header
+        dataDelegate?.vc = self
+        dataDelegate?.tableView = tableView
+        
     }
     //  // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
     func screenConfigModule() {
@@ -73,7 +75,7 @@ class WOWHotStyleMain: WOWBaseViewController {
                     strongSelf.dataArr = brandArray
                     strongSelf.screenConfigModule()
                 }
-             
+                strongSelf.dataDelegate?.dataSourceArray = strongSelf.dataArr
                 strongSelf.tableView.reloadData()
                     WOWHud.dismiss()
 
@@ -107,80 +109,4 @@ class WOWHotStyleMain: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-}
-extension WOWHotStyleMain:UITableViewDelegate,UITableViewDataSource{
-   
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dataArr.count;
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1;
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell                = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWHotStyleCell
-        
-        let homeModel = dataArr[(indexPath as NSIndexPath).section]
-        cell.modelData = homeModel.moduleContentList
-        cell.showData(model: homeModel)
-        cell.delegate = self
-        cell.selectionStyle = .none
-        
-        return cell
-
-    }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == dataArr.count - 1{
-            return 70.h
-        }else{
-            return 15.h
-        }
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
-      
-        return CGFloat.leastNormalMagnitude
-        
-    }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == dataArr.count - 1{
-            return footerView()
-        }else{
-            return nil
-        }
-    }
-    func footerView() -> UIView {
-        
-        let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70.h))
-        view.backgroundColor = tableView.backgroundColor
-        return view
-        
-    }
-    
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = dataArr[(indexPath as NSIndexPath).section]
-        
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
-        //                vc.hideNavigationBar = true
-        vc.topic_id = model.moduleContentList?.id ?? 0
-        vc.delegate = self
-        
-        navigationController?.pushViewController(vc, animated: true)
-
-    }
-}
-extension WOWHotStyleMain:WOWHotStyleCellDelegate{
-    
-    func reloadTableViewDataWithCell(){
-//        tableView.reloadData()
-         request()
-    }
-
-}
-extension WOWHotStyleMain:WOWHotStyleDelegate{
-    
-    func reloadTableViewData(){
-        request()
-    }
-
 }

@@ -50,7 +50,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
     weak var delegate:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate?
 
     var data = [WowModulePageItemVO]()
-    
+        
     func setData(_ d:[WowModulePageItemVO]){
         self.data = d
         
@@ -86,6 +86,12 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         
         let frame                                         = CGRect(x: 0, y: 0, width: MGScreenWidth, height: heightAll)
         collectionView.frame                              = frame
+        collectionView.snp.updateConstraints {[weak self] (make) in
+            if let strongSelf = self {
+                make.height.equalTo(strongSelf.heightAll)
+            }
+        }
+        
 
 //        collectionView.setNeedsLayout()
 //        collectionView.setNeedsDisplay()
@@ -116,7 +122,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         collectionView                                    = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.delegate                           = self
         collectionView.dataSource                         = self
-        collectionView.backgroundColor                    = UIColor.clear
+        collectionView.backgroundColor                    = UIColor.white
 //        collectionView.autoresizingMask                   = [UIViewAutoresizing.FlexibleHeight , UIViewAutoresizing.FlexibleWidth] //其实没啥用
         collectionView.register(MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell.self))
         collectionView.showsVerticalScrollIndicator       = false
@@ -124,7 +130,12 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
         
         self.addSubview(collectionView)
        
-        
+        collectionView.snp.makeConstraints { [weak self](make) in
+            if let strongSelf = self {
+                make.height.equalTo(strongSelf.heightAll)
+                make.top.bottom.left.right.equalTo(strongSelf)
+            }
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

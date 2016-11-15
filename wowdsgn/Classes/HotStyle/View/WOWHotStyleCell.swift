@@ -20,7 +20,7 @@ class WOWHotStyleCell: UITableViewCell {
     @IBOutlet weak var lbBrowse: UILabel!//多少人赞
     @IBOutlet weak var imgBackMain: UIImageView!// 背景图片
     private var shareProductImage:UIImage? //供分享使用
-    
+    var heightAll:CGFloat = MGScreenWidth
     weak var    delegate   :  WOWHotStyleCellDelegate?
     var brandModel : WOWBrandStyleModel? // 左上角banner 的信息
     var modelData : WOWModelVoTopic?// 主信息

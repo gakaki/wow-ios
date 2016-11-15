@@ -32,8 +32,9 @@ class MODULE_TYPE_SINGLE_BANNER_CELL_201:UITableViewCell,ModuleViewElement{
         addSubview(bigImageView)
         
         bigImageView.snp.makeConstraints { (make) in
-            make.size.equalTo(MGScreenWidth)
-            make.center.equalTo(self)
+//            make.size.equalTo(MGScreenWidth)
+//            make.center.equalTo(self)
+            make.top.bottom.left.right.equalTo(self)
         }
 //        
         bigImageView.isUserInteractionEnabled = true
@@ -100,13 +101,13 @@ struct ModulePageType {
         PAGE_MODULE_TYPE_CAROUSEL 					: MODULE_TYPE_CAROUSEL_CV_CELL_101.classForCoder(), //轮播 101 banner
         PAGE_MODULE_TYPE_BANNER 					: MODULE_TYPE_SINGLE_BANNER_CELL_201.classForCoder(), //单条 201 banner
         PAGE_MODULE_TYPE_CATEGORIES 				: MODULE_TYPE_CATEGORIES_CV_CELL_301.classForCoder(), //301 一级分类
-        PAGE_MODULE_TYPE_CATEGORIES_MORE 			: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302.classForCoder(), //302 二级分类
+        PAGE_MODULE_TYPE_CATEGORIES_MORE 			: Cell_302_Class.classForCoder(), //302 二级分类
         PAGE_MODULE_TYPE_NEW_ARRIVAL_RPODUCTS 		: WOWFoundWeeklyNewCell.classForCoder(), //401 本周上新
         PAGE_MODULE_TYPE_PINTEREST_PRODUCTS 		: HomeBottomCell.classForCoder(), //402 推荐商品
-        PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT	: WOWFoundRecommendCell.classForCoder(), //501 单品推荐
+        PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT	: Cell_501_Recommend.classForCoder(), //501 单品推荐
         PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: MODULE_TYPE_TOPIC_PRODUCTS_CV_CELL_601.classForCoder(),            //601 专题商品列表
-        PAGE_MODULE_TYPE_PROJECT :Cell_102_Project.classForCoder(),
-        PAGE_MODULE_TYPE_SING_PRODUCT:Cell_103_Product.classForCoder()
+        PAGE_MODULE_TYPE_PROJECT                    :Cell_102_Project.classForCoder(),
+        PAGE_MODULE_TYPE_SING_PRODUCT               :Cell_103_Product.classForCoder()
         
         
     ]

@@ -58,9 +58,9 @@ class WOWController: WOWBaseModuleVC {
         self.automaticallyAdjustsScrollViewInsets = false
 
         setUI()
-//        addObserver()
+        addObserver()
         self.view.addSubview(self.topBtn)
-
+        
         self.topBtn.snp.makeConstraints { (make) in
             make.width.equalTo(98)
             make.height.equalTo(30)
@@ -154,17 +154,17 @@ class WOWController: WOWBaseModuleVC {
         request()
     }
 
-//    fileprivate func addObserver(){
-//        /**
-//         添加通知
-//         */
-//        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
-//        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
-//        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
-//        
-//        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
-//        
-//    }
+    fileprivate func addObserver(){
+        /**
+         添加通知
+         */
+        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+        
+    }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
 
@@ -324,11 +324,13 @@ class WOWController: WOWBaseModuleVC {
                 if let bannerList = bannerList{
                     if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
                         strongSelf.bottomListArray = []
-                        strongSelf.isOverBottomData = false
+                        strongSelf.dataDelegate?.isOverBottomData = false
+                      
                     }
                     if bannerList.count < totalPage {// 如果拿到的数据，小于分页，则说明，无下一页
                         strongSelf.tableView.mj_footer = nil
-                        strongSelf.isOverBottomData = true
+                        strongSelf.dataDelegate?.isOverBottomData = true
+                      
                         
                     }else {
                         strongSelf.tableView.mj_footer = strongSelf.mj_footerHome
@@ -370,6 +372,7 @@ class WOWController: WOWBaseModuleVC {
         requestBottom()
         
     }
+  
 
   }
 extension Array{

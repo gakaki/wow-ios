@@ -12,9 +12,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
     open var vc : UIViewController?
     open var cell_heights            = [0:0.h]
     open var dataSourceArray    = [WOWHomeModle]()// 主页main的数据源
-    
+    open var isOverBottomData :Bool? //底部列表数据是否拿到全部
     open var bottomListArray    = [WOWProductModel](){//底部列表数组 ,如果有底部瀑布流的话
         didSet{
+            
             bottomListCount = bottomListArray.count
             bottomCellLine  = bottomListCount.getParityCellNumber()
         }
@@ -320,9 +321,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             guard section < dataSourceArray.count  else {
                 
                 if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
-                    //                if isOverBottomData == true {
-                    //                    return 70
-                    //                }
+                                    if isOverBottomData == true {
+                                        return 70
+                                    }
                 }
                 return CGFloat.leastNormalMagnitude
             }
@@ -339,9 +340,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             guard section < dataSourceArray.count  else {
                 
                 if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
-                    //                if isOverBottomData == true {
-                    //                    return footerView()
-                    //                }
+                                    if isOverBottomData == true {
+                                        return footerView()
+                                    }
                 }
                 return nil
             }
@@ -425,7 +426,19 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
         }
         
     }
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.vc?.className == "WOWController" {
+            let wowcontroller  = self.vc as? WOWController
+            if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
+                wowcontroller?.topBtn.isHidden = true
+            }else{
+                wowcontroller?.topBtn.isHidden = false
+            }
+        }
+       
+        
+    }
+
     func footerView() -> UIView {
         
         let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70.h))

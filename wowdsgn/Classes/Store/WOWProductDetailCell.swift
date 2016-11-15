@@ -71,7 +71,7 @@ class WOWProductDetailCell: UITableViewCell {
 //            }else {
 //                bottomSpace.constant = 15
 //            }
-            imgDescLabel.setLineHeightAndLineBreak(1.5)
+            descLabel.setLineHeightAndLineBreak(1.5)
         }
     }
     override func prepareForReuse() {

@@ -1,5 +1,6 @@
 
 import UIKit
+import IQKeyboardManagerSwift
 
 protocol WOWHotStyleDelegate:class {
     // 刷新住列表数据
@@ -11,13 +12,18 @@ protocol WOWHotStyleDelegate:class {
 class WOWContentTopicController: WOWBaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var commentView: NextGrowingTextView!
+    @IBOutlet weak var inputViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var pressButton: UIButton!
     
     var vo_products             = [WOWProductModel]()
     //param
     var topic_id: Int           = 1
     var vo_topic:WOWModelVoTopic?
-    
     var imgUrlArr = [String]()
+    let maxLength = 140
+    let minLength = 3
+    
     weak var  delegate :WOWHotStyleDelegate?
     fileprivate var shareProductImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
@@ -33,9 +39,21 @@ class WOWContentTopicController: WOWBaseViewController {
         request()
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+
+    }
     deinit {
         removeObservers()
     }
+ 
     
      //MARK:    - lazy
     lazy var nagationItem:WOWTopicNavigationItem = {
@@ -44,6 +62,16 @@ class WOWContentTopicController: WOWBaseViewController {
         view.shareButton.addTarget(self, action: #selector(zdClick), for: .touchUpInside)
         view.buyCarBUttion.addTarget(self, action: #selector(sjClick), for: .touchUpInside)
         return view
+    }()
+    //相关商品
+    lazy var conmmentView:WOWAboutHeaderView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        return v
+    }()
+    //相关商品
+    lazy var aboutView:WOWAboutHeaderView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        return v
     }()
     // 刷新顶部数据
     func reloadNagationItemThumbButton(_ isFavorite: Bool, thumbNum: Int)  {
@@ -99,6 +127,7 @@ class WOWContentTopicController: WOWBaseViewController {
         super.setUI()
         configTable()
         configBarItem()
+        configTextView()
     }
 
     //初始化数据，商品banner
@@ -116,9 +145,9 @@ class WOWContentTopicController: WOWBaseViewController {
         //如果相关商品有数据显示。如果没有数据则不显示
         if vo_products.count > 0 {
             //详情页共分为7组数据
-            numberSections = 3
+            numberSections = 5
         }else {
-            numberSections = 2
+            numberSections = 4
         }
     }
     
@@ -136,10 +165,14 @@ class WOWContentTopicController: WOWBaseViewController {
 
         makeRightNavigationItem(nagationItem)
     }
-    fileprivate func addObservers(){
+    
+        fileprivate func addObservers(){
         
         NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
@@ -155,9 +188,10 @@ class WOWContentTopicController: WOWBaseViewController {
 
     
     fileprivate func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     /**
@@ -175,7 +209,7 @@ class WOWContentTopicController: WOWBaseViewController {
         
         
     }
-    //MARK: - NET
+        //MARK: - NET
     override func request(){
         
         super.request()
@@ -273,7 +307,11 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         //显示价格的cell
         tableView.register(UINib.nibName(String(describing: WOWContentTopicTopCell.self)), forCellReuseIdentifier:String(describing: WOWContentTopicTopCell.self))
         tableView.register(UINib.nibName(String(describing: WOWProductDetailCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailCell.self))
-               //相关商品
+        tableView.register(UINib.nibName(String(describing: WOWTopicTagCell.self)), forCellReuseIdentifier:String(describing: WOWTopicTagCell.self))
+        //评论
+        tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:String(describing: WOWCommentCell.self))
+        
+        //相关商品
         tableView.register(UINib.nibName(String(describing: WOWProductDetailAboutCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailAboutCell.self))
     }
     
@@ -319,12 +357,19 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             }
             
             returnCell = cell
-
-        case (2,_)://相关商品
+        case (2,_)://标签
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWTopicTagCell", for: indexPath) as! WOWTopicTagCell
+            returnCell = cell
+        case (3,_)://评论
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWCommentCell", for: indexPath) as! WOWCommentCell
+            returnCell = cell
+        case (4,_)://相关商品
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailAboutCell", for: indexPath) as! WOWProductDetailAboutCell
             cell.dataArr = vo_products
             cell.delegate = self
             returnCell = cell
+            
+        
         default:
             break
         }
@@ -333,9 +378,11 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 2: //如果相关商品有数据显示，如果没有就不显示
+        case 3://评论
+            return 39
+        case 4: //如果相关商品有数据显示，如果没有就不显示
             if vo_products.count > 0 {
-                return 30
+                return 39
             }else {
                 return 0.01
             }
@@ -345,20 +392,39 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch section {
-        case 2:
-            return 15
-        default:
+//        switch section {
+//        case 3:
+//            return 15
+//        default:
             return 0.01
-        }
+//        }
         
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        switch section {
+//        case 3:     //如果相关商品有数据显示，如果没有就不显示
+//            if vo_products.count > 0 {
+//                
+//                return "相关商品"
+//            }else {
+//                return nil
+//            }
+//            
+//        default:
+//            return nil
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 2:     //如果相关商品有数据显示，如果没有就不显示
+        case 3:
+            conmmentView.labelText.text = "评论"
+            return conmmentView
+        case 4:     //如果相关商品有数据显示，如果没有就不显示
             if vo_products.count > 0 {
-                return "相关商品"
+                aboutView.labelText.text = "相关商品"
+                return aboutView
             }else {
                 return nil
             }
@@ -374,6 +440,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         return view
         
     }
+    
 }
 
 extension WOWContentTopicController: PhotoBrowserDelegate{
@@ -428,3 +495,113 @@ extension WOWContentTopicController: WOWProductDetailAboutCellDelegate {
     }
     
 }
+
+//评论专区
+extension WOWContentTopicController {
+    fileprivate func configTextView() {
+        
+        self.commentView.layer.cornerRadius = 4
+        self.commentView.disableAutomaticScrollToBottom = false
+        self.commentView.showsVerticalScrollIndicator = false
+        self.commentView.showsHorizontalScrollIndicator = false
+        self.commentView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        self.commentView.placeholderAttributedText = NSAttributedString(string: "添加评论...",
+                                                                        attributes: [NSFontAttributeName: self.commentView.font!,
+                                                                                     NSForegroundColorAttributeName: UIColor(hexString: "CCCCCC") ?? UIColor.lightGray
+            ]
+        )
+        
+        commentView.delegates.shouldChangeTextInRange = {[weak self] (range: NSRange, replacementText: String)  in
+            
+            if replacementText == "\n" {
+                if let stongSelf = self {
+                    stongSelf.commentView.resignFirstResponder()
+                    return false
+                }
+            }
+            return true
+        }
+    
+        commentView.delegates.textViewDidChange = { [weak self](growingTextView: NextGrowingTextView) in
+            // Do something
+            if let strongSelf = self {
+                //如果有评论发布键可点击，没有评论发布键不可点击
+                if growingTextView.text.isEmpty {
+                    strongSelf.pressButton.isEnabled = false
+                    strongSelf.pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
+                }else {
+                    strongSelf.pressButton.isEnabled = true
+                    strongSelf.pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+                }
+                
+                
+                let language = growingTextView.textInputMode?.primaryLanguage
+                //        FLOG("language:\(language)")
+                if let lang = language {
+                    if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
+                        let selectedRange = growingTextView.textView.markedTextRange
+                        var position : UITextPosition?
+                        if let range = selectedRange {
+                            position = growingTextView.textView.position(from: range.start, offset: 0)
+                        }
+                        //系统默认中文输入法会导致英文高亮部分进入输入统计，对输入完成的时候进行字数统计
+                        if position == nil {
+                            //                    FLOG("没有高亮，输入完毕")
+                            strongSelf.limitTextLength(growingTextView)
+                           
+                        }
+                    }else{//非中文输入法
+                        strongSelf.limitTextLength(growingTextView)
+                       
+                    }
+                }
+
+            }
+            
+        }
+    }
+    fileprivate func limitTextLength(_ textView: NextGrowingTextView){
+        
+        let toBeString = textView.text as NSString
+        print("tobeString：\(toBeString)")
+//        if (toBeString.length <= minLength) {
+//            WOWHud.showMsg("请您输入更多内容")
+//        }
+        if (toBeString.length > maxLength) {
+            WOWHud.showMsg("输入文字不超过140字")
+            textView.text = toBeString.substring(to: maxLength)
+        }
+    }
+
+    @IBAction func pressClick(_ sender: UIButton) {
+        
+    }
+    
+    func keyboardWillHide(_ sender: Notification) {
+        if let userInfo = (sender as NSNotification).userInfo {
+            if let _ = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
+                //key point 0,
+                self.inputViewBottom.constant =  0
+                //textViewBottomConstraint.constant = keyboardHeight
+                UIView.animate(withDuration: 0.25, animations: { () -> Void in self.view.layoutIfNeeded() })
+            }
+        }
+    }
+    func keyboardWillShow(_ sender: Notification) {
+        if let userInfo = (sender as NSNotification).userInfo {
+            if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
+                self.inputViewBottom.constant = keyboardHeight
+                UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        commentView.resignFirstResponder()
+    }
+}
+

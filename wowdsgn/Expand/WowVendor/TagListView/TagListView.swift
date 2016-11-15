@@ -223,6 +223,9 @@ open class TagListView: UIView {
             tagViewHeight = tagView.frame.height
             
             if currentRowTagCount == 0 || currentRowWidth + tagView.frame.width > frame.width {
+                if currentRow > 2 {
+                    return
+                }
                 currentRow += 1
                 currentRowWidth = 0
                 currentRowTagCount = 0
@@ -272,6 +275,7 @@ open class TagListView: UIView {
     }
     
     open func addTag(_ title: String) -> TagView {
+        
         let tagView = TagView(title: title)
         
         tagView.textColor = textColor

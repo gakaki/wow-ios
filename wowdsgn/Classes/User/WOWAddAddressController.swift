@@ -58,11 +58,11 @@ class WOWAddAddressController: WOWBaseTableViewController {
         return v
     }()
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
     }
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(false)
+        super.viewWillDisappear(animated)
         IQKeyboardManager.sharedManager().enableAutoToolbar = true
 
     }

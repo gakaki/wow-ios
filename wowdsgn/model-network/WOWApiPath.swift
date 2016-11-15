@@ -18,9 +18,9 @@ import Foundation
 let WOWShareUrl                         = "m.wowdsgn.com" // 正式服务器 分享地址
 //let WOWShareUrl                         = "http://10.0.60.121:7070"// 测试服务器分享地址
 
-//   let BaseUrl = "http://10.0.60.121:8080/" //内网开发
+   let BaseUrl = "http://10.0.60.121:8080/" //内网开发
 //  let BaseUrl = "http://api.c.wowdsgn.com:10999/" //外网访问内网也可以的地址
-   let BaseUrl = "https://mobile-api.wowdsgn.com/" //内网开发
+//   let BaseUrl = "https://mobile-api.wowdsgn.com/" //内网开发
 //  let BaseUrl = "https://mobile-api.stg.wowdsgn.com/" //内网开发
 
 //#else
@@ -173,6 +173,7 @@ let URL_Captcha                 = "v1/user/captcha/wechat-bind"      //微信绑
 let URL_PwpResetCode            = "v1/user/captcha/pwd-reset"        //重置密码获取验证码
 let URL_Change                  = "v1/user/change"                   //修改用户信息
 let URL_Coupons                 = "v1/user/coupons"                //用户优惠券列表
+let URL_GetCoupon               = "v1/user/getCouponByRedemptionCode"     //获取优惠券
 
 //7.地址
 let URL_AddressAdd              = "v1/user/shippinginfo/create"   //添加收货地址

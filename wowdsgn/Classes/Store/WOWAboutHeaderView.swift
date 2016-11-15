@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWAboutHeaderView: UIView {
-
+    @IBOutlet weak var labelText: UILabel!
  
 
 }

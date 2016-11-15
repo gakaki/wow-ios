@@ -57,6 +57,7 @@
                 <outlet property="descSpace" destination="f0A-Dz-tcJ" id="bUd-co-fa0"/>
                 <outlet property="imgDescLabel" destination="wBj-BL-VIb" id="2bZ-po-1t3"/>
                 <outlet property="productImg" destination="5j1-JJ-Q5E" id="ysO-nY-uKS"/>
+                <outlet property="space" destination="Vrw-GV-mWl" id="YL1-Pf-xvO"/>
             </connections>
             <point key="canvasLocation" x="-15.5" y="232"/>
         </tableViewCell>

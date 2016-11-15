@@ -87,7 +87,6 @@ class WOWCouponController: WOWBaseViewController {
             
             if let strongSelf = self{
 
-                print(errorMsg)
                 strongSelf.tableView.mj_footer = nil
 
                 strongSelf.endRefresh()
@@ -95,8 +94,18 @@ class WOWCouponController: WOWBaseViewController {
         }
 
     }
+    //通过优惠码获取优惠券
+    func getCoupon(redemotionCode: String) {
     
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_GetCoupon(redemptionCode: redemotionCode), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self {
+                strongSelf.request()
+            }
+        }) { (errorMsg) in
+            WOWHud.showMsg(errorMsg)
+        }
 
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -121,7 +130,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         let r = self.vo_cupons[(indexPath as NSIndexPath).section]
             cell.label_amount.font = UIFont.priceFont(40)
             cell.label_amount.text          = String(format: "%.f",r.deduction ?? 0)
-            cell.label_title.text           = r.couponTitle!
+            cell.label_title.text           = r.couponTitle ?? ""
         
         
             cell.label_time_limit.text      = "\(r.effectiveFrom ?? "")至\(r.effectiveTo ?? "")"
@@ -184,7 +193,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         switch section {
         case 0:
             if entrance == .userEntrance {
-                return 15
+                return 84
             }else {
                 return 90
             }
@@ -197,8 +206,8 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         switch section {
         case 0:
             if entrance == .userEntrance {
-                let view = UIView()
-                view.backgroundColor = UIColor.clear
+                let view = Bundle.main.loadNibNamed(String(describing: WOWCouponNumberView.self), owner: self, options: nil)?.last as! WOWCouponNumberView
+                view.delegate = self
                 return view
             }else {
                 let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView.self), owner: self, options: nil)?.last as! WOWCouponheaderView
@@ -220,9 +229,10 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         }
         
     }
+    
 }
 
-extension WOWCouponController {
+extension WOWCouponController: WOWCouponNumberViewDelegate{
     //MARK: - EmptyData
     func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "emptyCoupon")
@@ -237,4 +247,7 @@ extension WOWCouponController {
         return true
     }
     
+    func convertCouponClick(_ textField: String) {
+        getCoupon(redemotionCode: textField)
+    }
 }

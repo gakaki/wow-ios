@@ -11,9 +11,6 @@ import UIKit
 class WOWCommentCell: UITableViewCell {
 
     
-    @IBOutlet weak var headImageWidth: NSLayoutConstraint!
-    @IBOutlet weak var headImageLeftMargin: NSLayoutConstraint!
-    
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
@@ -29,8 +26,7 @@ class WOWCommentCell: UITableViewCell {
     
     func hideHeadImage() {
         headImageView.isHidden = true
-        headImageWidth.constant = 0
-        headImageLeftMargin.constant = 0
+       
     }
     
     func showData(_ model:WOWCommentListModel) {

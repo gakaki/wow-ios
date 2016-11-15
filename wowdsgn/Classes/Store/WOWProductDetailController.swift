@@ -94,6 +94,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //相关商品
     lazy var aboutView:WOWAboutHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        v.labelText.text = "相关商品"
         return v
     }()
     

@@ -34,6 +34,40 @@ class WOWBaseModuleVC: WOWBaseViewController {
 
  
     }
+//    func loginSuccess()  {// 重新刷新数据
+////        self.pageIndex = 1
+//        request()
+//    }
+//    func exitLogin()  {// 重新刷新数据
+//        request()
+//    }
+//    // 刷新物品的收藏状态与否 传productId 和 favorite状态
+//    func refreshData(_ sender: Notification)  {
+//        
+//        if  let send_obj =  sender.object as? [String:AnyObject] {
+//            
+//            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
+//            
+//            for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
+//                let model = dataArr[j]
+//                model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
+//            }
+//            self.tableView.reloadData()
+//        }
+//        
+//    }
+
+    fileprivate func addObserver(){
+        /**
+         添加通知
+         */
+//        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+//        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+        
+//        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -237,5 +271,56 @@ extension WOWBaseModuleVC:WOWHotStyleDelegate{
         request()
         
     }
+    
+}
+//func notLoginThanToLogin(){
+//    if  (!WOWUserManager.loginStatus){
+//        toLoginVC(true)
+//    }
+//}
+extension WOWBaseModuleVC:FoundWeeklyNewCellDelegate{
+    
+    func cellFoundWeeklyNewCellTouchInside(_ m:WowModulePageItemVO){
+
+        
+        if let pid = m.productId as Int? {
+            self.toVCProduct(pid)
+        }
+    }
+    
+}
+extension WOWBaseModuleVC:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate{
+    
+    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(_ m:WowModulePageItemVO?)
+    {
+        if let cid = m!.categoryId , let cname = m!.categoryName{
+            toVCCategory( cid ,cname: cname)
+        }
+    }
+    
+}
+
+extension WOWBaseModuleVC:Cell_501_Delegate{
+    
+    func toProductDetail(_ productId: Int?) {
+        toVCProduct(productId)
+    }
+    
+}
+extension WOWBaseModuleVC:Cell_302_Delegate{
+    
+    func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(_ m:WowModulePageItemVO?)
+    {
+        
+        if m == nil {
+            toVCCategoryChoose()
+        }else{
+            if let cid = m!.categoryId , let cname = m!.categoryName{
+                toVCCategory( cid,cname: cname)
+            }
+        }
+        
+    }
+
     
 }

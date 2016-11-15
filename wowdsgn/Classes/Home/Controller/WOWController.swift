@@ -58,7 +58,7 @@ class WOWController: WOWBaseModuleVC {
         self.automaticallyAdjustsScrollViewInsets = false
 
         setUI()
-        addObserver()
+//        addObserver()
         self.view.addSubview(self.topBtn)
 
         self.topBtn.snp.makeConstraints { (make) in
@@ -154,17 +154,17 @@ class WOWController: WOWBaseModuleVC {
         request()
     }
 
-    fileprivate func addObserver(){
-        /**
-         添加通知
-         */
-        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
-        
-    }
+//    fileprivate func addObserver(){
+//        /**
+//         添加通知
+//         */
+//        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+//        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
+//        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+//        
+//        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+//        
+//    }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
 
@@ -190,7 +190,7 @@ class WOWController: WOWBaseModuleVC {
         super.setUI()
         configTableView()
         configBarItem()
-        addObserver()
+//        addObserver()
     }
     func configTableView() {
         

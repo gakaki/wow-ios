@@ -20,7 +20,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     
     var moduleContentArr        :  [WowModulePageItemVO]?
     
-    
+//    var moduleClassName : String?
     var name:String?
     
     

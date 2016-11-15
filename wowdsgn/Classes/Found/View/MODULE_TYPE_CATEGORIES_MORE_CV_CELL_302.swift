@@ -102,9 +102,10 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell:UICollectionViewCell{
         //et ratio = bg_pic.image!.size.height / bg_pic.image!.size.width
         bg_pic.snp.makeConstraints { (make) -> Void in
             //            make.size.equalTo(self)
-            make.center.equalTo(self)
-            make.width.equalTo(self)
-            make.height.equalTo(self)//.multipliedBy(ratio)
+//            make.center.equalTo(self)
+//            make.width.equalTo(self)
+//            make.height.equalTo(self)//.multipliedBy(ratio)
+            make.left.right.top.bottom.equalTo(self)
         }
         self.bringSubview(toFront: bg_pic)
     }
@@ -114,7 +115,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell:UICollectionViewCell{
     }
 }
 
-class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     static func isNib() -> Bool { return false }
     static func cell_type() -> Int {
@@ -169,7 +170,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
         
         cv.delegate                           = self
         cv.dataSource                         = self
-        cv.backgroundColor                    = UIColor.clear
+        cv.backgroundColor                    = UIColor.red
         
         cv.register(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_MoreCell.self))
         cv.register(MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell.self, forCellWithReuseIdentifier:String(describing: MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_Cell.self))
@@ -178,6 +179,13 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
         cv.showsHorizontalScrollIndicator     = false
         
         self.addSubview(cv)
+        print("\(self.heightAll)")
+        cv.snp.makeConstraints { [weak self](make) in
+            if let strongSelf = self {
+                make.height.equalTo(strongSelf.heightAll)
+                make.top.left.right.equalTo(strongSelf)
+            }
+        }
     }
     
     
@@ -218,4 +226,15 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,ModuleViewElement,
             }
         }
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: 80.w, height: 105.h)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(15, 15, 15, 15)
+    }
+
 }

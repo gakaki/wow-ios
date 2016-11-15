@@ -106,7 +106,7 @@ class VCFound: WOWBaseModuleVC {
             
             if let strongSelf = self{
                                 
-                strongSelf.endRefresh()
+            strongSelf.endRefresh()
          strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
                 
 //                var r                             =  JSON(result)
@@ -262,24 +262,24 @@ class VCFound: WOWBaseModuleVC {
 
 extension VCFound : UITableViewDataSource,UITableViewDelegate,
 WOWFoundRecommendCellDelegate,
-FoundWeeklyNewCellDelegate,
+
 WOWFoundCategoryCellDelegate,
 MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
 {
 	
 
-    func getCellHeight(_ sectionIndex:Int) -> CGFloat{
-        if let h = cell_heights[sectionIndex] {
-            return h
-        }else{
-            return CGFloat.leastNormalMagnitude
-        }
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-          return getCellHeight(indexPath.section)
-
-    }
+//    func getCellHeight(_ sectionIndex:Int) -> CGFloat{
+//        if let h = cell_heights[sectionIndex] {
+//            return h
+//        }else{
+//            return CGFloat.leastNormalMagnitude
+//        }
+//    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//          return getCellHeight(indexPath.section)
+//
+//    }
     func headerView(title : String,sectionIndex:Int) -> UIView? {
         
         let frame_width             = MGScreenWidth
@@ -407,7 +407,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 cell.bringSubview(toFront: cell.cv)
                 return cell
             }
-            else if ( cell_type == WOWFoundWeeklyNewCell.cell_type() ){
+            else if ( cell_type == WOWFoundWeeklyNewCell.cell_type() ){ // 401
                 let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! WOWFoundWeeklyNewCell
                 cell.setData( d.moduleContentArr ?? [WowModulePageItemVO]())
                 cell_heights[section]  = cell.heightAll
@@ -450,65 +450,65 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
                 
                 return cell
             }
-            else if ( cell_type == Cell_102_Project.cell_type()) {
-                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
-                cell.dataArr = d.moduleContent_102?.banners
-                cell.lbTitle.text = d.moduleContent_102?.name ?? "专题"
-                cell_heights[section]  = 290
-                cell.delegate = self
-                cell.selectionStyle = .none
-                return cell
-
-            }
-            else if ( cell_type == Cell_103_Product.cell_type() ){
-            
-                
-                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_103_Product
-                let array = d.moduleContentProduct?.products
-                
-                cell.dataSourceArray = array
-                cell.delegate = self
-                cell_heights[section]  = 210
-                cell.selectionStyle = .none
-                return cell
-
-            }
-            else if ( cell_type == HomeBottomCell.cell_type()) {
-                let model = data[section]
-
-                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeBottomCell
-                cell.indexPath = indexPath
-                
-                let OneCellNumber = indexPath.row * 2
-                let TwoCellNumber = ((indexPath.row + 1) * 2) - 1
-                let productsArray = model.moduleContent_402?.products ?? []
-
-                var heightCell:CGFloat = 0.0
-                switch UIDevice.deviceType {
-                case .dt_iPhone5:
-                    heightCell = 244.0
-                case .dt_iPhone6_Plus:
-                    heightCell = 292.0
-                default:
-                    heightCell = 272.0
-                }
-                cell_heights[section]  = heightCell
-                if productsArray.count.isOdd && (indexPath as NSIndexPath).row + 1 == productsArray.count.getParityCellNumber(){ //  满足为奇数 第二个item 隐藏
-                    
-                    self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:productsArray)
-                    
-                }else{
-                    
-                    self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:productsArray)
-                    
-                }
-//                // 排序 0，1，2，3，4...
-                cell.delegate = self
-                cell.selectionStyle = .none
-                
-                return cell
-
-            }
+//            else if ( cell_type == Cell_102_Project.cell_type()) {
+//                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
+//                cell.dataArr = d.moduleContent_102?.banners
+//                cell.lbTitle.text = d.moduleContent_102?.name ?? "专题"
+//                cell_heights[section]  = 290
+//                cell.delegate = self
+//                cell.selectionStyle = .none
+//                return cell
+//
+//            }
+//            else if ( cell_type == Cell_103_Product.cell_type() ){
+//            
+//                
+//                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_103_Product
+//                let array = d.moduleContentProduct?.products
+//                
+//                cell.dataSourceArray = array
+//                cell.delegate = self
+//                cell_heights[section]  = 210
+//                cell.selectionStyle = .none
+//                return cell
+//
+//            }
+//            else if ( cell_type == HomeBottomCell.cell_type()) {
+//                let model = data[section]
+//
+//                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeBottomCell
+//                cell.indexPath = indexPath
+//                
+//                let OneCellNumber = indexPath.row * 2
+//                let TwoCellNumber = ((indexPath.row + 1) * 2) - 1
+//                let productsArray = model.moduleContent_402?.products ?? []
+//
+//                var heightCell:CGFloat = 0.0
+//                switch UIDevice.deviceType {
+//                case .dt_iPhone5:
+//                    heightCell = 244.0
+//                case .dt_iPhone6_Plus:
+//                    heightCell = 292.0
+//                default:
+//                    heightCell = 272.0
+//                }
+//                cell_heights[section]  = heightCell
+//                if productsArray.count.isOdd && (indexPath as NSIndexPath).row + 1 == productsArray.count.getParityCellNumber(){ //  满足为奇数 第二个item 隐藏
+//                    
+//                    self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:productsArray)
+//                    
+//                }else{
+//                    
+//                    self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:productsArray)
+//                    
+//                }
+////                // 排序 0，1，2，3，4...
+//                cell.delegate = self
+//                cell.selectionStyle = .none
+//                
+//                return cell
+//
+//            }
 //
             else{
                 return UITableViewCell()
@@ -542,7 +542,7 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
     
     func cellTouchInside(_ m:WOWFoundProductModel)
     {
-        print(m.productId as Int?)
+//        print(m.productId as Int?)
         
         if let pid = m.productId as Int? {
             self.toVCProduct(pid)
@@ -564,33 +564,33 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
             toLoginVC(true)
         }
     }
-    
-    func toProductDetail(_ productId: Int?) {
-        toVCProduct(productId)
-    }
+}
+//    func toProductDetail(_ productId: Int?) {
+//        toVCProduct(productId)
+//    }
 
     
-    func cellFoundWeeklyNewCellTouchInside(_ m:WowModulePageItemVO){
-        print(m.productId as Int?)
-        
-        if let pid = m.productId as Int? {
-            self.toVCProduct(pid)
-        }
-    }
-    
-    func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(_ m:WowModulePageItemVO?)
-    {
-        
-        if m == nil {
-            toVCCategoryChoose()
-        }else{
-            if let cid = m!.categoryId , let cname = m!.categoryName{
-                toVCCategory( cid,cname: cname)
-            }
-        }
-        
-    }
-}
+//    func cellFoundWeeklyNewCellTouchInside(_ m:WowModulePageItemVO){
+//        print(m.productId as Int?)
+//        
+//        if let pid = m.productId as Int? {
+//            self.toVCProduct(pid)
+//        }
+//    }
+//    
+//    func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(_ m:WowModulePageItemVO?)
+//    {
+//        
+//        if m == nil {
+//            toVCCategoryChoose()
+//        }else{
+//            if let cid = m!.categoryId , let cname = m!.categoryName{
+//                toVCCategory( cid,cname: cname)
+//            }
+//        }
+//        
+//    }
+//}
 //extension VCFound:cell_801_delegate{// 今日单品跳转详情
 //    func goToProcutDetailVCWith_801(_ productId: Int?){
 //        toVCProduct(productId)
@@ -670,13 +670,13 @@ MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate
 //
 //}
 
-extension VCFound :MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate {
-    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(_ m:WowModulePageItemVO?)
-    {
-        if let cid = m!.categoryId , let cname = m!.categoryName{
-            toVCCategory( cid ,cname: cname)
-        }
-    }
-}
+//extension VCFound :MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate {
+//    func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(_ m:WowModulePageItemVO?)
+//    {
+//        if let cid = m!.categoryId , let cname = m!.categoryName{
+//            toVCCategory( cid ,cname: cname)
+//        }
+//    }
+//}
 
 

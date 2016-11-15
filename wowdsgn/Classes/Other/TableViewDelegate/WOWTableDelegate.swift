@@ -21,7 +21,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
     }
     open var bottomListCount    = 0 // 底部数组个数
     open var bottomCellLine     = 0 // 底部cell number
-    
+    open var record_402_index   = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     
     open var tableView :UITableView!{
         didSet{
@@ -41,7 +41,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             tableView.register(UINib.nibName(HomeCellType.cell_102), forCellReuseIdentifier: HomeCellType.cell_102)
             
             tableView.register(UINib.nibName(HomeCellType.cell_HomeList), forCellReuseIdentifier: HomeCellType.cell_HomeList)
-
+            
             for (k,c) in ModulePageType.d {
                 if c is ModuleViewElement.Type {
                     let cell            = (c as! ModuleViewElement.Type)
@@ -56,15 +56,33 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
                     print("\(k) = \(c)")
                 }
             }
-
+            
             
             tableView.backgroundColor = GrayColorLevel5
             tableView.rowHeight = UITableViewAutomaticDimension
             tableView.estimatedRowHeight = 410
             
+            NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
 
         }
     }
+    
+    // 刷新物品的收藏状态与否 传productId 和 favorite状态
+    func refreshData(_ sender: Notification)  {
+        
+        if  let send_obj =  sender.object as? [String:AnyObject] {
+            
+            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
+            
+            for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
+                let model = dataSourceArray[j]
+                model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
+            }
+            self.tableView.reloadData()
+        }
+        
+    }
+
     // 配置cell的UI
     func cellUIConfig(one: NSInteger, two: NSInteger ,isHiddenTwoItem: Bool, cell:HomeBottomCell,dataSourceArray:[WOWProductModel])  {
         let  modelOne = dataSourceArray[one]
@@ -98,12 +116,25 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             return CGFloat.leastNormalMagnitude
         }
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        
-//        return getCellHeight(indexPath.section)
-//        
-//    }
-
+    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //
+    //        return getCellHeight(indexPath.section)
+    //
+    //    }
+    
+    //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        let section     = (indexPath as NSIndexPath).section
+    //        if section < dataSourceArray.count {
+    //            let model = dataSourceArray[section]
+    //            switch model.moduleType ?? 0 {
+    //            case 402:
+    //
+    //            default:
+    //
+    //            }
+    //        }
+    //
+    //    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section < dataSourceArray.count {
             let model = dataSourceArray[section]
@@ -112,7 +143,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             switch model.moduleType ?? 0 {
             case 402:
                 
-//              record_402_index.append(section)
+                record_402_index.append(section)
                 
                 let array = model.moduleContentProduct?.products ?? []
                 return (array.count.getParityCellNumber()) > 10 ? 10: (array.count.getParityCellNumber())
@@ -125,12 +156,12 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
         }else{
             return 1
         }
-
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell:UITableViewCell!
-             let section     = (indexPath as NSIndexPath).section
+        let section     = (indexPath as NSIndexPath).section
         guard (indexPath as NSIndexPath).section < dataSourceArray.count  else {
             let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBottomCell", for: indexPath) as! HomeBottomCell
             
@@ -155,7 +186,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             return returnCell
             
         }
-
+        
         let model = dataSourceArray[(indexPath as NSIndexPath).section]
         let identifier  = "\(model.moduleType!)"
         switch model.moduleType ?? 0 {
@@ -173,7 +204,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             
             cell.delegate       = self.vc as! SenceCellDelegate?
             cell.showData(model.moduleContent!)
-              cell_heights[section]  = cell.heightAll
+            cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 601:
             let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_601, for: indexPath) as! WOWHomeFormCell
@@ -181,7 +212,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             cell.indexPathSection = indexPath.section
             cell.delegate         = self.vc as! WOWHomeFormDelegate?
             cell.modelData        = model.moduleContentList
-              cell_heights[section]  = cell.heightAll
+            cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 101:
             let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_101, for: indexPath) as! HomeBrannerCell
@@ -190,9 +221,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
                 
                 cell.reloadBanner(banners)
                 cell.cyclePictureView.delegate = self.vc as! CyclePictureViewDelegate?
-           
+                
             }
-              cell_heights[section]  = cell.heightAll
+            cell_heights[section]  = cell.heightAll
             returnCell = cell
             
         case 102:
@@ -201,7 +232,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             cell.dataArr = model.moduleContent?.banners
             cell.lbTitle.text = model.moduleContent?.name ?? "专题"
             cell.delegate = self.vc as! cell_102_delegate?
-             cell_heights[section]  = cell.heightAll
+            cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 801:
             
@@ -209,7 +240,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             let array = model.moduleContentProduct?.products
             cell.dataSourceArray = array
             cell.delegate = self.vc as! cell_801_delegate?
-              cell_heights[section]  = cell.heightAll
+            cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 402:
             
@@ -231,86 +262,71 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             }
             // 排序 0，1，2，3，4...
             cell.delegate = self.vc as! HomeBottomDelegate?
-           
+            
             returnCell = cell
             
-        case  MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302.cell_type():
+        case  Cell_302_Class.cell_type():
             
-                let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302
-                cell.setData( model.moduleContentArr ?? [WowModulePageItemVO]() )
-                cell_heights[section] = cell.heightAll
-//                cell.delegate = self
-                cell.selectionStyle = .none
-                cell.bringSubview(toFront: cell.cv)
-                
-                returnCell = cell
-//                return cell
+            let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! Cell_302_Class
+            cell.setData( model.moduleContentArr ?? [WowModulePageItemVO]() )
+            
+            cell.delegate = self.vc as! Cell_302_Delegate?
+            cell.bringSubview(toFront: cell.cv)
+            
+            returnCell = cell
+            //                return cell
             
         case WOWFoundWeeklyNewCell.cell_type():
             
             let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! WOWFoundWeeklyNewCell
-                cell.setData( model.moduleContentArr ?? [WowModulePageItemVO]())
-                cell_heights[section]  = cell.heightAll
-//                cell.delegate = self
-                cell.selectionStyle = .none
-                cell.bringSubview(toFront: cell.cv)
-            
-            returnCell = cell
-//                return cell
-        case MODULE_TYPE_SINGLE_BANNER_CELL_201.cell_type():
-            
-            let cell            = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! MODULE_TYPE_SINGLE_BANNER_CELL_201
-//            //                cell.delegate       = self
-            cell.selectionStyle = .none
-            cell.setData(model.moduleContentItem!)
+            cell.setData( model.moduleContentArr ?? [WowModulePageItemVO]())
             cell_heights[section]  = cell.heightAll
-//            //            print("cel height is ",cell_heights[section])
-//            return cell
-            returnCell = cell
-        case WOWFoundRecommendCell.cell_type():
+            cell.delegate = self.vc as! FoundWeeklyNewCellDelegate?
+            cell.bringSubview(toFront: cell.cv)
             
-        let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! WOWFoundRecommendCell
-//        cell.delegate       = self
-        cell.selectionStyle = .none
-        cell.setData( model.moduleContentItem! )
-        cell_heights[section]  = cell.heightAll
-        //            cell.btnLike.selected = isFavorite
-        cell.bringSubview(toFront: cell.product_view)
-        returnCell = cell
+            returnCell = cell
+            
+            
+        case Cell_501_Recommend.cell_type():
+            
+            let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! Cell_501_Recommend
+            cell.delegate       = self.vc as! Cell_501_Delegate?
+            cell.showData(model.moduleContentItem!)
+            
+            returnCell = cell
         case MODULE_TYPE_CATEGORIES_CV_CELL_301.cell_type():
             
-        let cell            = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301
-//        cell.delegate       = self
-        cell.selectionStyle = .none
-        cell.setData(model.moduleContentArr ?? [WowModulePageItemVO]())
-        cell_heights[section]  = cell.heightAll
-        
-        //            print("cel height is ",cell_heights[section])
-        cell.bringSubview(toFront: cell.collectionView)
-        
-        return cell
-
-
+            let cell            = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! MODULE_TYPE_CATEGORIES_CV_CELL_301
+            
+            cell.delegate       = self.vc as! MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate?
+            cell.setData(model.moduleContentArr ?? [WowModulePageItemVO]())
+            cell_heights[section]  = cell.heightAll
+            cell.bringSubview(toFront: cell.collectionView)
+            
+            returnCell = cell
+            
+            
         default:
             returnCell = UITableViewCell()
             break
         }
         returnCell.selectionStyle = .none
+        
         return returnCell
-
+        
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if bottomListCount > 0 {
-        guard section < dataSourceArray.count  else {
-            
-            if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
-//                if isOverBottomData == true {
-//                    return 70
-//                }
+            guard section < dataSourceArray.count  else {
+                
+                if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
+                    //                if isOverBottomData == true {
+                    //                    return 70
+                    //                }
+                }
+                return CGFloat.leastNormalMagnitude
             }
-            return CGFloat.leastNormalMagnitude
-        }
-        return 15.h
+            return 15.h
         }
         if section == dataSourceArray.count - 1{
             return 70.h
@@ -319,17 +335,17 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-         if bottomListCount > 0 {
-        guard section < dataSourceArray.count  else {
-            
-            if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
-//                if isOverBottomData == true {
-//                    return footerView()
-//                }
+        if bottomListCount > 0 {
+            guard section < dataSourceArray.count  else {
+                
+                if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
+                    //                if isOverBottomData == true {
+                    //                    return footerView()
+                    //                }
+                }
+                return nil
             }
             return nil
-        }
-        return nil
         }
         
         if section == dataSourceArray.count - 1{
@@ -338,7 +354,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             return nil
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         switch section {
         case dataSourceArray.count:
@@ -349,9 +365,12 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
                 let model = dataSourceArray[section]
                 
                 switch model.moduleType ?? 0 {
-                case 402:
+                case 402,301,501,401:
                     
                     return 50
+                case 302:
+                    
+                    return 15
                     
                 default:
                     
@@ -365,6 +384,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
         }
         
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case dataSourceArray.count:
@@ -373,25 +393,39 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             if section < dataSourceArray.count{
                 
                 let model = dataSourceArray[section]
-                
+                var t = "本周上新"
+                var isHiddenLien = false
                 switch model.moduleType ?? 0 {
+                    
                 case 402:
                     
-                    return WOW_Cell_402_Hearder(title: model.moduleContentProduct?.name ?? "居家好物")
-                    
+                    t           =  model.moduleContentProduct?.name ?? "居家好物"
+                case 501:
+                    isHiddenLien = true
+                    t           = "单品推荐"
+                case 301:
+                    isHiddenLien = true
+                    t           = "场景"
+                case 401:
+                    isHiddenLien = true
+                    t           = model.name ?? "本周上新"
                 default:
                     
-                    return nil
+                    t = ""
                     
                 }
-                
+                if t.isEmpty {
+                    return nil
+                }else {
+                    return WOW_Cell_402_Hearder(title: t,isHiddenLine: isHiddenLien)
+                }
             }
             
             return nil
         }
         
     }
-
+    
     func footerView() -> UIView {
         
         let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70.h))
@@ -405,15 +439,19 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
         return view
         
     }
-    func WOW_Cell_402_Hearder(title: String) -> UIView {
+    func WOW_Cell_402_Hearder(title: String,isHiddenLine:Bool) -> UIView {
         
         let v = Bundle.main.loadNibNamed("WOW_Cell_402_Hearder", owner: self, options: nil)?.last as! WOW_Cell_402_Hearder
         v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth,height: 50)
         v.lbTitle.text = title
-        
+        if isHiddenLine{
+            v.lbLine.isHidden = true
+        }else{
+            v.lbLine.isHidden = false
+        }
         return v
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard (indexPath as NSIndexPath).section < dataSourceArray.count  else {
             return
@@ -425,7 +463,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
                 
                 let v = self.vc as? WOWBaseModuleVC
                 v?.goController(modelBanner)
-
+                
             }
         case 701:
             let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
@@ -434,12 +472,12 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             vc.delegate = self.vc as! WOWHotStyleDelegate?
             
             self.vc?.navigationController?.pushViewController(vc, animated: true)
-
+            
         default:
             break
         }
-
-       
+        
+        
     }
-
+    
 }

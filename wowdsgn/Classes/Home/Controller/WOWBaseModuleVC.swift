@@ -10,7 +10,7 @@ import UIKit
 
 class WOWBaseModuleVC: WOWBaseViewController {
     
- 
+
     var myQueueTimer1: DispatchQueue?
     var myTimer1: DispatchSourceTimer?
     override func viewDidLoad() {
@@ -183,14 +183,6 @@ extension WOWBaseModuleVC:WOWHomeFormDelegate{
 extension WOWBaseModuleVC:SenceCellDelegate{
     func senceProductClick(_ produtID: Int) {//根据ID跳转产品详情页
         toVCProduct(produtID)
-    }
-}
-
-extension WOWBaseModuleVC: CyclePictureViewDelegate { // 轮播banner 对应的跳转
-    public func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
-//        let model = bannerArray[(indexPath as NSIndexPath).row]
-//        
-//        goController(model)
     }
 }
 extension WOWBaseModuleVC:cell_102_delegate{

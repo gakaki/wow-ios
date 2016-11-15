@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
+class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,CyclePictureViewDelegate {
     open var vc : UIViewController?
     open var cell_heights            = [0:0.h]
     open var dataSourceArray    = [WOWHomeModle]()// 主页main的数据源
@@ -23,7 +23,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
     open var bottomListCount    = 0 // 底部数组个数
     open var bottomCellLine     = 0 // 底部cell number
     open var record_402_index   = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
-    
+    open var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
     open var tableView :UITableView!{
         didSet{
             
@@ -62,7 +62,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             tableView.backgroundColor = GrayColorLevel5
             tableView.rowHeight = UITableViewAutomaticDimension
             tableView.estimatedRowHeight = 410
-            tableView.separatorColor     = SeprateColor
+          
             NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
 
         }
@@ -221,8 +221,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             if let banners = model.moduleContent?.banners{
                 
                 cell.reloadBanner(banners)
-                cell.cyclePictureView.delegate = self.vc as! CyclePictureViewDelegate?
-                
+                self.bannerArray = banners
+                cell.cyclePictureView.delegate = self
             }
             cell_heights[section]  = cell.heightAll
             returnCell = cell
@@ -492,5 +492,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
         
         
     }
-    
+    public func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
+                let model = bannerArray[(indexPath as NSIndexPath).row]
+                let viewController = self.vc as! WOWBaseModuleVC
+                viewController.goController(model)
+    }
+
 }

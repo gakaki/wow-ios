@@ -32,7 +32,7 @@ class WOWController: WOWBaseModuleVC {
     let cellID = String(describing: WOWlListCell.self)
     
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
-    var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
+
     
     var bottomListArray = [WOWProductModel]() //底部列表数组
     
@@ -209,19 +209,6 @@ class WOWController: WOWBaseModuleVC {
         configBuyBarItem() // 购物车数量
     }
     
-    //  // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
-    func screenConfigModule() {
-        for model in self.dataArr {
-            switch model.moduleType ?? 0 {
-            case 201,601,101,102,801,402:
-                break
-            default:
-               
-                self.dataArr.removeObject(model)
-            }
-        }
-    }
-
     //MARK:Private Networkr
     override func request() {
         
@@ -240,7 +227,7 @@ class WOWController: WOWBaseModuleVC {
                 strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
                 
                 strongSelf.dataArr =  (strongSelf.dataDelegate?.dataSourceArray)!
-                strongSelf.screenConfigModule() // 移除非本版本 上线的  模块类型
+         
 
                 if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
 

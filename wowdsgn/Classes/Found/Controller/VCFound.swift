@@ -34,7 +34,7 @@ class VCFound: WOWBaseModuleVC {
         
         dataDelegate?.vc = self
         dataDelegate?.tableView = tableView
-
+        tableView.separatorColor     = SeprateColor
         tableView.mj_header          = mj_header
         self.edgesForExtendedLayout  = UIRectEdge()
 

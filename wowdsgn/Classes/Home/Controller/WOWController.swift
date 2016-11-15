@@ -209,22 +209,6 @@ class WOWController: WOWBaseModuleVC {
         configBuyBarItem() // 购物车数量
     }
     
-    //MARK:Actions
-    func jsClick() -> Void {
-        toVCCategory(10,cname: "客厅与卧室")
-    }
-    func dgClick() -> Void {
-        toVCCategory(15,cname: "照明")
-        
-    }
-    func zdClick() -> Void {
-        toVCCategory(16,cname: "家装配饰")
-        
-    }
-    func sjClick() -> Void {
-        toVCCategory(11,cname: "厨房")
-        
-    }
     //  // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
     func screenConfigModule() {
         for model in self.dataArr {
@@ -247,37 +231,6 @@ class WOWController: WOWBaseModuleVC {
             
     }
 
-    override func timerCount(array: Array<WOWHomeModle>){
-        myQueueTimer = DispatchQueue(label: "myQueueTimer")
-        myTimer = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer!)
-        myTimer?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
-        myTimer?.setEventHandler {
-            for model in array {
-                if model.moduleType == 801 {
-                    for product in  (model.moduleContentProduct?.products) ?? [] {
-                        if product.timeoutSeconds > 0{
-                            product.timeoutSeconds  = product.timeoutSeconds - 1
-                        }
-                    }
-                }
-            }
-        }
-        myTimer?.resume()
-
-    }
-    // 模拟测试数据
-    func testData(i: Int){
-        for model in self.singProductArray {
-            if model.moduleType == 801 {
-                for product in  (model.moduleContentProduct?.products) ?? [] {
-                    for _ in 0..<i{
-                        model.moduleContentProduct?.products?.append(product)
-                    }
-                }
-            }
-        }
-
-    }
     func requestTop() {
         let params = ["pageId": 1, "region": 1]
        

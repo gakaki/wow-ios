@@ -43,6 +43,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="cv" destination="NIY-uT-IRd" id="4NO-f8-Sct"/>
+                <outlet property="heightConstraint" destination="t1h-lx-qlV" id="U6z-Zg-Nee"/>
             </connections>
             <point key="canvasLocation" x="-1754" y="-337"/>
         </tableViewCell>

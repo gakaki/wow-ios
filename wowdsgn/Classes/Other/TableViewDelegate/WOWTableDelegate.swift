@@ -62,7 +62,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
             tableView.backgroundColor = GrayColorLevel5
             tableView.rowHeight = UITableViewAutomaticDimension
             tableView.estimatedRowHeight = 410
-            
+            tableView.separatorColor     = SeprateColor
             NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
 
         }
@@ -399,7 +399,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
                 switch model.moduleType ?? 0 {
                     
                 case 402:
-                    
+                    isHiddenLien = false
                     t           =  model.moduleContentProduct?.name ?? "居家好物"
                 case 501:
                     isHiddenLien = true
@@ -411,7 +411,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource {
                     isHiddenLien = true
                     t           = model.name ?? "本周上新"
                 default:
-                    
+                    isHiddenLien = false
                     t = ""
                     
                 }

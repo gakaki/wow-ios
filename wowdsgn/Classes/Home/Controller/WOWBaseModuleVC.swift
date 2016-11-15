@@ -10,23 +10,7 @@ import UIKit
 
 class WOWBaseModuleVC: WOWBaseViewController {
     
-//    let cellID = String(describing: WOWlListCell.self)
-//    
-//    var dataArr = [WOWHomeModle]()    //顶部商品列表数组
-//    var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
-//    
-//    var bottomListArray = [WOWProductModel]() //底部列表数组
-//    
-//    var singProductArray = [WOWHomeModle]() // 今日单品 倒计时的产品 数组
-//    
-//    var bottomListCount :Int = 0//底部列表数组的个数
-//    
-//    var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
-//    
-//    var isOverBottomData :Bool? //底部列表数据是否拿到全部
-//    
-//    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
-//    
+ 
     var myQueueTimer1: DispatchQueue?
     var myTimer1: DispatchSourceTimer?
     override func viewDidLoad() {
@@ -34,40 +18,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
 
  
     }
-//    func loginSuccess()  {// 重新刷新数据
-////        self.pageIndex = 1
-//        request()
-//    }
-//    func exitLogin()  {// 重新刷新数据
-//        request()
-//    }
-//    // 刷新物品的收藏状态与否 传productId 和 favorite状态
-//    func refreshData(_ sender: Notification)  {
-//        
-//        if  let send_obj =  sender.object as? [String:AnyObject] {
-//            
-//            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
-//            
-//            for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
-//                let model = dataArr[j]
-//                model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
-//            }
-//            self.tableView.reloadData()
-//        }
-//        
-//    }
 
-    fileprivate func addObserver(){
-        /**
-         添加通知
-         */
-//        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
-//        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
-        
-//        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
-        
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -95,7 +46,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
 
     func data(result: AnyObject) -> Array<WOWHomeModle> {
         
-        let dataArr = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
+        var dataArr = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
         
         if let brandArray = dataArr{
             
@@ -126,14 +77,14 @@ class WOWBaseModuleVC: WOWBaseViewController {
                     if let s  = t.moduleContentTmp!["categories"] as? [AnyObject] {
                          t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                     }
-                
+                    
                 case 801:
                      singProductArray.append(t)
-                default:break
-                    
-                // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
-//                strongSelf.data.removeObject(t)
-            
+                case 701,601,101,102,402:
+                    print("")
+                default:
+                    // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
+                    dataArr?.removeObject(t)
                 }
                 
             }

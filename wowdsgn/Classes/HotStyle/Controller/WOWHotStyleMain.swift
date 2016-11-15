@@ -36,7 +36,7 @@ class WOWHotStyleMain: WOWBaseModuleVC {
     override func setUI() {
         super.setUI()
         configBuyBarItem()
-      
+        tableView.mj_header          = mj_header
         dataDelegate?.vc = self
         dataDelegate?.tableView = tableView
         

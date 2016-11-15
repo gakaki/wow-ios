@@ -16,7 +16,9 @@ class Cell_302_Class: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 302
     }
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint! // collectionView 的高度
     weak var delegate:Cell_302_Delegate?
+    var sizeWidth = 80.w
     @IBOutlet weak var cv: UICollectionView!
        var data        = [WowModulePageItemVO]()
     func setData(_ d:[WowModulePageItemVO]){
@@ -38,7 +40,13 @@ class Cell_302_Class: UITableViewCell,ModuleViewElement {
         
         cv.showsVerticalScrollIndicator       = false
         cv.showsHorizontalScrollIndicator     = false
-
+        switch UIDevice.deviceType {
+        case .dt_iPhone5:
+            heightConstraint.constant = 215
+            sizeWidth = 75.w
+        default:
+            break
+        }
 
     }
 
@@ -78,7 +86,8 @@ extension Cell_302_Class:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: 80.w, height: 105.h)
+     
+        return CGSize.init(width: sizeWidth, height: 105.h)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8

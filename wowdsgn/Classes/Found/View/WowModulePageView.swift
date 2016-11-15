@@ -106,8 +106,8 @@ struct ModulePageType {
         PAGE_MODULE_TYPE_PINTEREST_PRODUCTS 		: HomeBottomCell.classForCoder(), //402 推荐商品
         PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT	: Cell_501_Recommend.classForCoder(), //501 单品推荐
         PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: MODULE_TYPE_TOPIC_PRODUCTS_CV_CELL_601.classForCoder(),            //601 专题商品列表
-        PAGE_MODULE_TYPE_PROJECT :Cell_102_Project.classForCoder(),
-        PAGE_MODULE_TYPE_SING_PRODUCT:Cell_103_Product.classForCoder()
+        PAGE_MODULE_TYPE_PROJECT                    :Cell_102_Project.classForCoder(),
+        PAGE_MODULE_TYPE_SING_PRODUCT               :Cell_103_Product.classForCoder()
         
         
     ]

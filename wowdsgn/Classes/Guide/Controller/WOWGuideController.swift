@@ -203,9 +203,7 @@ class WOWGuideController: WOWBaseViewController {
         navigationItem.title = "尖叫设计"
        
     }
-    override func request() {
-        WOWHud.dismiss()
-    }
+
 //MARK:Private pageController
     func didPage() {
         let frame = self.view.bounds

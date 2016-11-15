@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="TR4-mJ-1qI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="TR4-mJ-1qI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -43,8 +43,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="iWL-Oz-JyM" id="1Ma-N6-H4e"/>
-                                    <outlet property="delegate" destination="iWL-Oz-JyM" id="j2o-M9-qgx"/>
+                                    <outlet property="dataSource" destination="vUp-js-GTG" id="gO8-Bg-cym"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -59,10 +58,12 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="尖叫设计" id="tLF-m6-I8Z"/>
                     <connections>
+                        <outlet property="dataDelegate" destination="vUp-js-GTG" id="cpi-jl-RiD"/>
                         <outlet property="tableView" destination="jZw-sM-bw2" id="EXi-Mh-hk2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4TL-3M-Zrf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="vUp-js-GTG" customClass="WOWTableDelegate" customModule="wowdsgn" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="437" y="1886"/>
         </scene>
@@ -423,10 +424,10 @@
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="wowdsgn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="117"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nGH-pF-T2j" id="dq8-W0-doG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sks-es-NV7">

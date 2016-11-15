@@ -18,9 +18,8 @@ class WOWlListCell: UITableViewCell {
     @IBOutlet var bigImageView: UIImageView!
     
     fileprivate var productBtns = [UIButton]()
-    
-    var heightAll:CGFloat   = MGScreenWidth
-    
+    var heightAll:CGFloat = MGScreenWidth * 0.66
+
     weak var delegate:SenceCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()

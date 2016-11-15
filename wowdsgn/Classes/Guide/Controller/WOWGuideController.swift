@@ -67,6 +67,7 @@ class WOWGuideController: WOWBaseViewController {
             btn2.setTitleColor(titleColor2,for: UIControlState()) //普通状态下文字的颜色
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -201,6 +202,9 @@ class WOWGuideController: WOWBaseViewController {
     override func setUI() {
         navigationItem.title = "尖叫设计"
        
+    }
+    override func request() {
+        WOWHud.dismiss()
     }
 //MARK:Private pageController
     func didPage() {

@@ -10,4 +10,5 @@ import UIKit
 
 class WOW_Cell_402_Hearder: UIView {
     @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var lbLine: UILabel!
 }

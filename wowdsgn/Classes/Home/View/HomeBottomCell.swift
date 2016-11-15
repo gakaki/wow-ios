@@ -19,6 +19,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 402 // 今日商品推荐
     }
+    var heightCell:CGFloat = 244.0
     var heightAll:CGFloat = CGFloat.leastNormalMagnitude
     weak var delegate : HomeBottomDelegate?
     @IBOutlet weak var oneBaseView: UIView!

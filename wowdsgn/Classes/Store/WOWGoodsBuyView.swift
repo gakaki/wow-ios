@@ -333,8 +333,11 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
                 }
             }
             //格式化产品的尺寸L-W-H
-            sizeTextLabel.text = productSize(productInfo: productInfo)
-            weightLabel.text = productWeight(productInfo: productInfo)
+            let sizeStr = productSize(productInfo: productInfo)
+            let weightStr = productWeight(productInfo: productInfo)
+            let str = String(format:"%@ %@",sizeStr,weightStr)
+            sizeTextLabel.text = str
+//            weightLabel.text = productWeight(productInfo: productInfo)
             //这个还要判断下产品的状态，只有在上架的状态下才判断产品有没有库存
             if productInfo.productStatus == 1 {
                 productStock(productInfo.hasStock ?? false)

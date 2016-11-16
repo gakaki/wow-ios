@@ -15,6 +15,8 @@ class WOWCommentCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var thumbButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         headImageView.borderRadius(22)

@@ -12,9 +12,13 @@ protocol WOWHotStyleDelegate:class {
 class WOWContentTopicController: WOWBaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var commentView: NextGrowingTextView!
-    @IBOutlet weak var inputViewBottom: NSLayoutConstraint!
     @IBOutlet weak var pressButton: UIButton!
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var inputTextView: KMPlaceholderTextView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var inputConstraint: NSLayoutConstraint!
     
     var vo_products             = [WOWProductModel]()
     //param
@@ -63,7 +67,8 @@ class WOWContentTopicController: WOWBaseViewController {
         view.buyCarBUttion.addTarget(self, action: #selector(sjClick), for: .touchUpInside)
         return view
     }()
-    //相关商品
+  
+    //评论
     lazy var conmmentView:WOWAboutHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
         return v
@@ -71,6 +76,12 @@ class WOWContentTopicController: WOWBaseViewController {
     //相关商品
     lazy var aboutView:WOWAboutHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        return v
+    }()
+    //更多评论
+    lazy var moreCommentView:WOWMoreCommentView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWMoreCommentView.self), owner: self, options: nil)?.last as! WOWMoreCommentView
+        v.moreButton.addTarget(self, action: #selector(moreCommentClick), for: .touchUpInside)
         return v
     }()
     // 刷新顶部数据
@@ -137,7 +148,10 @@ class WOWContentTopicController: WOWBaseViewController {
         for  aa:WOWProductPicTextModel in vo_topic?.imageSerial?.records ?? [WOWProductPicTextModel](){
             
             if let imgStr = aa.image{
-                imgUrlArr.append(imgStr)
+                if !imgStr.isEmpty {
+                    imgUrlArr.append(imgStr)
+
+                }
                 
             }
         }
@@ -170,9 +184,9 @@ class WOWContentTopicController: WOWBaseViewController {
         
         NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
@@ -392,13 +406,13 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        switch section {
-//        case 3:
-//            return 15
-//        default:
+        switch section {
+        case 3:
+            return 55
+        default:
             return 0.01
-//        }
-        
+        }
+    
     }
     
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -434,11 +448,15 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        let view = UIView()
-        view.backgroundColor = UIColor.clear
-        return view
-        
+        switch section {
+        case 3:
+            return moreCommentView
+        default:
+            let view = UIView()
+            view.backgroundColor = UIColor.clear
+            return view
+        }
+    
     }
     
 }
@@ -450,9 +468,12 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
         for  aa:WOWProductPicTextModel in vo_topic?.imageSerial?.records ?? [WOWProductPicTextModel](){
             
             if let imgStr = aa.image{
-                imgUrlArr.append(imgStr)
-                let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)
-                photos.append(photoModel)
+                if !imgStr.isEmpty {
+                    imgUrlArr.append(imgStr)
+                    let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)
+                    photos.append(photoModel)
+                }
+                
             }
         }
         
@@ -497,111 +518,161 @@ extension WOWContentTopicController: WOWProductDetailAboutCellDelegate {
 }
 
 //评论专区
-extension WOWContentTopicController {
+extension WOWContentTopicController: UITextViewDelegate{
+    fileprivate func endEditing(){
+        self.inputTextView.resignFirstResponder()
+        self.inputTextView.text = ""
+        self.inputConstraint.constant = 30
+        self.view.layoutIfNeeded()
+    }
     fileprivate func configTextView() {
-        
-        self.commentView.layer.cornerRadius = 4
-        self.commentView.disableAutomaticScrollToBottom = false
-        self.commentView.showsVerticalScrollIndicator = false
-        self.commentView.showsHorizontalScrollIndicator = false
-        self.commentView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        self.commentView.placeholderAttributedText = NSAttributedString(string: "添加评论...",
-                                                                        attributes: [NSFontAttributeName: self.commentView.font!,
-                                                                                     NSForegroundColorAttributeName: UIColor(hexString: "CCCCCC") ?? UIColor.lightGray
-            ]
-        )
-        
-        commentView.delegates.shouldChangeTextInRange = {[weak self] (range: NSRange, replacementText: String)  in
-            
-            if replacementText == "\n" {
-                if let stongSelf = self {
-                    stongSelf.commentView.resignFirstResponder()
-                    return false
-                }
-            }
-            return true
-        }
-    
-        commentView.delegates.textViewDidChange = { [weak self](growingTextView: NextGrowingTextView) in
-            // Do something
-            if let strongSelf = self {
-                //如果有评论发布键可点击，没有评论发布键不可点击
-                if growingTextView.text.isEmpty {
-                    strongSelf.pressButton.isEnabled = false
-                    strongSelf.pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
-                }else {
-                    strongSelf.pressButton.isEnabled = true
-                    strongSelf.pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
-                }
-                
-                
-                let language = growingTextView.textInputMode?.primaryLanguage
-                //        FLOG("language:\(language)")
-                if let lang = language {
-                    if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
-                        let selectedRange = growingTextView.textView.markedTextRange
-                        var position : UITextPosition?
-                        if let range = selectedRange {
-                            position = growingTextView.textView.position(from: range.start, offset: 0)
-                        }
-                        //系统默认中文输入法会导致英文高亮部分进入输入统计，对输入完成的时候进行字数统计
-                        if position == nil {
-                            //                    FLOG("没有高亮，输入完毕")
-                            strongSelf.limitTextLength(growingTextView)
-                           
-                        }
-                    }else{//非中文输入法
-                        strongSelf.limitTextLength(growingTextView)
-                       
-                    }
-                }
-
-            }
-            
-        }
+        inputTextView.delegate = self
     }
-    fileprivate func limitTextLength(_ textView: NextGrowingTextView){
-        
-        let toBeString = textView.text as NSString
-        print("tobeString：\(toBeString)")
-//        if (toBeString.length <= minLength) {
-//            WOWHud.showMsg("请您输入更多内容")
+  
+//        commentView.delegates.textViewDidChange = { [weak self](growingTextView: NextGrowingTextView) in
+//            // Do something
+//            if let strongSelf = self {
+//                
+//                
+//                let language = growingTextView.textInputMode?.primaryLanguage
+//                //        FLOG("language:\(language)")
+//                if let lang = language {
+//                    if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
+//                        let selectedRange = growingTextView.textView.markedTextRange
+//                        var position : UITextPosition?
+//                        if let range = selectedRange {
+//                            position = growingTextView.textView.position(from: range.start, offset: 0)
+//                        }
+//                        //系统默认中文输入法会导致英文高亮部分进入输入统计，对输入完成的时候进行字数统计
+//                        if position == nil {
+//                            //                    FLOG("没有高亮，输入完毕")
+//                            strongSelf.limitTextLength(growingTextView)
+//                           
+//                        }
+//                    }else{//非中文输入法
+//                        strongSelf.limitTextLength(growingTextView)
+//                       
+//                    }
+//                }
+//
+//            }
+//            
 //        }
-        if (toBeString.length > maxLength) {
-            WOWHud.showMsg("输入文字不超过140字")
-            textView.text = toBeString.substring(to: maxLength)
-        }
-    }
-
+//    }
+//    fileprivate func limitTextLength(_ textView: NextGrowingTextView){
+//        
+//        let toBeString = textView.text as NSString
+//        print("tobeString：\(toBeString)")
+////        if (toBeString.length <= minLength) {
+////            WOWHud.showMsg("请您输入更多内容")
+////        }
+//        if (toBeString.length > maxLength) {
+//            WOWHud.showMsg("输入文字不超过140字")
+//            textView.text = toBeString.substring(to: maxLength)
+//        }
+//    }
+//
     @IBAction func pressClick(_ sender: UIButton) {
         
     }
-    
-    func keyboardWillHide(_ sender: Notification) {
-        if let userInfo = (sender as NSNotification).userInfo {
-            if let _ = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
-                //key point 0,
-                self.inputViewBottom.constant =  0
-                //textViewBottomConstraint.constant = keyboardHeight
-                UIView.animate(withDuration: 0.25, animations: { () -> Void in self.view.layoutIfNeeded() })
-            }
-        }
+    //更多评论
+    func moreCommentClick() {
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWCommentController.self)) as! WOWCommentController
+        navigationController?.pushViewController(vc, animated: true)
+      
+
     }
-    func keyboardWillShow(_ sender: Notification) {
-        if let userInfo = (sender as NSNotification).userInfo {
-            if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
-                self.inputViewBottom.constant = keyboardHeight
-                UIView.animate(withDuration: 0.25, animations: { () -> Void in
-                    self.view.layoutIfNeeded()
-                })
-            }
+
+    func keyBoardWillShow(_ note:Notification){
+        let userInfo  = (note as NSNotification).userInfo as [AnyHashable: Any]!
+        let  keyBoardBounds = (userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let duration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let deltaY = keyBoardBounds.size.height
+        let animations:(() -> Void) = {
+            self.bottomViewConstraint.constant = deltaY
+            self.view.layoutIfNeeded()
         }
-    }
-    
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        commentView.resignFirstResponder()
+        if duration > 0 {
+            let options = UIViewAnimationOptions(rawValue: UInt((userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+            UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
+        }else{
+            animations()
+        }
+        
     }
+    
+    func keyBoardWillHide(_ note:Notification){
+        let userInfo  = (note as NSNotification).userInfo as [AnyHashable: Any]!
+        let duration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let animations:(() -> Void) = {
+            self.bottomViewConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        if duration > 0 {
+            let options = UIViewAnimationOptions(rawValue: UInt((userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+            UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
+        }else{
+            animations()
+        }
+    }
+    var COMMENTS_LIMIT:Int{
+        get {
+            return 140
+        }
+    }
+    //delegate
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        backgroundView.isHidden = false
+        pressButton.isEnabled = true
+        pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        backgroundView.isHidden = true
+        //如果有评论发布键可点击，没有评论发布键不可点击
+        if textView.text.isEmpty {
+            pressButton.isEnabled = false
+            pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
+        }else {
+            pressButton.isEnabled = true
+            pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+        }
+
+    }
+    //    //中文和其他字符的判断方式不一样
+    func textViewDidChange(_ textView: UITextView) {
+        
+        let fixedWidth = inputTextView.frame.size.width
+        inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        let newSize = inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        if newSize.height > 120 {
+            inputConstraint.constant = 120
+        }else {
+            inputConstraint.constant = newSize.height
+            
+        }
+        self.view.layoutIfNeeded()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+//            send()
+            return false
+        }
+        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
+        if ret == false{
+            WOWHud.showMsg("您输入的字符超过限制")
+            return false
+        }
+        return true
+    }
+
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        
+//        commentView.resignFirstResponder()
+//    }
 }
 

@@ -44,17 +44,34 @@ class WOWProductDetailCell: UITableViewCell {
     func showData(_ secondaryImg: WOWProductPicTextModel?) {
         if let secondaryImg = secondaryImg {
             if let img = secondaryImg.image {
+                if img.isEmpty {
+                    self.productImg.isHidden = true
+                    aspectConstraint = NSLayoutConstraint(item: self.productImg,
+                                                          attribute: .width, relatedBy: .equal,
+                                                          toItem: self.productImg, attribute: .height,
+                                                          multiplier: 1000 , constant: 0.0)
+                    space.constant = -7
+
+                }else {
+                    self.productImg.isHidden = false
+                    aspectConstraint = NSLayoutConstraint(item: self.productImg,
+                                                          attribute: .width, relatedBy: .equal,
+                                                          toItem: self.productImg, attribute: .height,
+                                                          multiplier: secondaryImg.imageAspect , constant: 0.0)
+                    
+                    //                productImg.set_webimage_url(img)
+                    productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
+                    aspect.constant = 0
+                    space.constant = 8
+
+                }
+                
+            }else {
+                self.productImg.isHidden = true
                 aspectConstraint = NSLayoutConstraint(item: self.productImg,
                                                       attribute: .width, relatedBy: .equal,
                                                       toItem: self.productImg, attribute: .height,
-                                                      multiplier: secondaryImg.imageAspect , constant: 0.0)
-
-//                productImg.set_webimage_url(img)
-                productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
-                aspect.constant = 0
-                space.constant = 8
-            }else {
-                aspect.constant = 345
+                                                      multiplier: 1000 , constant: 0.0)
                 space.constant = -7
             }
             if let text = secondaryImg.text {

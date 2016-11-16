@@ -7,35 +7,38 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
-enum CommentType {
-    case sence
-    case product
-}
 
 class WOWCommentController: WOWBaseViewController {
-    var mainID:Int!
     let cellID = String(describing: WOWCommentCell.self)
-    var commentType:CommentType = CommentType.sence
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!
-    var dataArr = [WOWCommentListModel]()
-    
+    @IBOutlet weak var pressButton: UIButton!
+    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var inputConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
-        request()
+//        request()
     }
     
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
     }
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -46,18 +49,19 @@ class WOWCommentController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
-        WOWBorderColor(self.inputTextView)
-        WOWBorderRadius(self.inputTextView)
+        inputTextView.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 200
         tableView.clearRestCell()
         tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:cellID)
         tableView.mj_header = self.mj_header
         tableView.mj_footer = self.mj_footer
+        configBuyBarItem()
         navigationItem.title = "评论"
     }
     
-    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
     @IBAction func sendButtonClick(_ sender: UIButton) {
         send()
     }
@@ -73,30 +77,8 @@ class WOWCommentController: WOWBaseViewController {
             WOWHud.showMsg("请输入评论")
             return
         }
-        var type = "scene"
-        switch commentType {
-        case .product:
-            type = "product"
-        case .sence:
-            type = "scene"
-        }
+       
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_SubmitComment(uid:WOWUserManager.userID,comment:comments!,thingid:self.mainID,type:type), successClosure: {[weak self] (result, code) in
-            if let strongSelf = self{
-                strongSelf.endEditing()
-                let model = WOWCommentListModel()
-                model.comment = comments
-                model.user_nick = WOWUserManager.userName
-                model.user_headimage = WOWUserManager.userHeadImageUrl
-                model.created_at = "刚刚"
-                strongSelf.dataArr.insert(model, at: 0)
-                strongSelf.tableView.reloadData()
-            }
-        }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
-                strongSelf.endEditing()
-            }
-        }
     }
     
     fileprivate func endEditing(){
@@ -156,7 +138,6 @@ class WOWCommentController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
-        let type = (commentType == .product) ? "product":"scene"
 //        WOWNetManager.sharedManager.requestWithTarget(.api_CommentList(pageindex:"\(self.pageIndex)",thingid:self.mainID,type:type), successClosure: {[weak self](result) in
 //            if let strongSelf = self{
 //                let json = JSON(result)
@@ -190,19 +171,40 @@ extension WOWCommentController:UITextViewDelegate{
     
     var COMMENTS_LIMIT:Int{
         get {
-            return 250
+            return 140
         }
     }
 //    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        backgroundView.isHidden = false
+        pressButton.isEnabled = true
+        pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        backgroundView.isHidden = true
+        //如果有评论发布键可点击，没有评论发布键不可点击
+        if textView.text.isEmpty {
+            pressButton.isEnabled = false
+            pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
+        }else {
+            pressButton.isEnabled = true
+            pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+        }
+        
+    }
 //    //中文和其他字符的判断方式不一样
     func textViewDidChange(_ textView: UITextView) {
-        guard inputConstraint.constant < 100 else{
-            return
-        }
+    
         let fixedWidth = inputTextView.frame.size.width
         inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         let newSize = inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        inputConstraint.constant = newSize.height
+        if newSize.height > 100 {
+            inputConstraint.constant = 100
+        }else {
+            inputConstraint.constant = newSize.height
+
+        }
         self.view.layoutIfNeeded()
     }
 
@@ -227,12 +229,12 @@ extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArr.count
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWCommentCell
-        cell.showData(dataArr[(indexPath as NSIndexPath).row])
+//        cell.showData(dataArr[(indexPath as NSIndexPath).row])
         return cell
     }
     

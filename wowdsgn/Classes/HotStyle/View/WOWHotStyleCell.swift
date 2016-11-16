@@ -92,6 +92,9 @@ class WOWHotStyleCell: UITableViewCell {
                                                 strongSelf.shareProductImage = image
                                         }
             })
+            UIImage.requestSize(for: url_obj, completion: { (url, size) in
+                print("---\(url)=====\(size)")
+            })
 
         }
         if let showTitle =  model.moduleAdditionalInfo?.showTitle {

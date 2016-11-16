@@ -14,6 +14,7 @@ class WOWHotPeopleCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        tagListView.textFont = UIFont.systemFont(ofSize: 14)
         for i in 0..<30 {
             
             tagListView.addTag("aaaaa")
@@ -27,3 +28,6 @@ class WOWHotPeopleCell: UITableViewCell {
     }
     
 }
+//class WOWBaseTableViewCell: <#super class#> {
+//    <#code#>
+//}

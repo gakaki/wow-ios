@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="KGk-i7-Jjw" customClass="WOWHotPeopleCell" customModule="wowdsgn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIs-Y0-wyo">
@@ -59,19 +59,48 @@
                             <constraint firstItem="li6-pX-TVn" firstAttribute="centerY" secondItem="96X-Yl-NZ4" secondAttribute="centerY" id="yNr-9q-aUH"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFZ-sw-Iku" customClass="TagListView" customModule="wowdsgn">
-                        <rect key="frame" x="10" y="50" width="355" height="119"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WdQ-LM-ZFR">
+                        <rect key="frame" x="10" y="50" width="355" height="119.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFZ-sw-Iku" customClass="TagListView" customModule="wowdsgn">
+                                <rect key="frame" x="15" y="5" width="340" height="94.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="marginX">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="marginY">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="zFZ-sw-Iku" secondAttribute="bottom" constant="20" id="4uu-mz-gmt"/>
+                            <constraint firstAttribute="trailing" secondItem="zFZ-sw-Iku" secondAttribute="trailing" id="J2t-W1-6xk"/>
+                            <constraint firstItem="zFZ-sw-Iku" firstAttribute="top" secondItem="WdQ-LM-ZFR" secondAttribute="top" constant="5" id="P4f-J4-Qc8"/>
+                            <constraint firstItem="zFZ-sw-Iku" firstAttribute="leading" secondItem="WdQ-LM-ZFR" secondAttribute="leading" constant="15" id="ccZ-sy-uk8"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="zFZ-sw-Iku" secondAttribute="bottom" id="FSO-Je-VLb"/>
-                    <constraint firstItem="zFZ-sw-Iku" firstAttribute="trailing" secondItem="aIs-Y0-wyo" secondAttribute="trailing" id="H1V-Xz-nEj"/>
+                    <constraint firstItem="WdQ-LM-ZFR" firstAttribute="leading" secondItem="aIs-Y0-wyo" secondAttribute="leading" id="0qX-o1-J9C"/>
+                    <constraint firstItem="WdQ-LM-ZFR" firstAttribute="trailing" secondItem="aIs-Y0-wyo" secondAttribute="trailing" id="6u7-84-mK4"/>
+                    <constraint firstItem="WdQ-LM-ZFR" firstAttribute="top" secondItem="aIs-Y0-wyo" secondAttribute="bottom" id="BBc-SZ-2UP"/>
                     <constraint firstAttribute="trailing" secondItem="aIs-Y0-wyo" secondAttribute="trailing" constant="10" id="JCI-D6-VOG"/>
-                    <constraint firstItem="zFZ-sw-Iku" firstAttribute="top" secondItem="aIs-Y0-wyo" secondAttribute="bottom" id="YX5-uK-ETi"/>
                     <constraint firstItem="aIs-Y0-wyo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cE6-Kd-AwY"/>
-                    <constraint firstItem="zFZ-sw-Iku" firstAttribute="leading" secondItem="aIs-Y0-wyo" secondAttribute="leading" id="h7J-u8-dz8"/>
+                    <constraint firstAttribute="bottom" secondItem="WdQ-LM-ZFR" secondAttribute="bottom" constant="10" id="dxy-OA-IRf"/>
                     <constraint firstItem="aIs-Y0-wyo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="x7H-by-1tY"/>
                 </constraints>
             </tableViewCellContentView>

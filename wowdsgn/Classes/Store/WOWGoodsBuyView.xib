@@ -48,14 +48,14 @@
                                 <action selector="closeButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dur-Oy-34K"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKs-F8-49X">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKs-F8-49X">
                             <rect key="frame" x="120" y="105" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRg-tA-DvG">
-                            <rect key="frame" x="156" y="71" width="26" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRg-tA-DvG">
+                            <rect key="frame" x="124" y="103" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zax-d8-Rgu" secondAttribute="trailing" constant="10" id="bAp-De-INK"/>
                         <constraint firstItem="NRg-tA-DvG" firstAttribute="bottom" secondItem="lt0-VW-gYn" secondAttribute="bottom" id="dgT-qs-qMA"/>
                         <constraint firstItem="hgg-DS-lz6" firstAttribute="top" secondItem="gjD-vH-OUv" secondAttribute="top" id="ehK-MU-B3F"/>
-                        <constraint firstItem="zKs-F8-49X" firstAttribute="bottom" secondItem="Pm8-hJ-vcq" secondAttribute="bottom" id="njJ-sn-OGf"/>
+                        <constraint firstItem="zax-d8-Rgu" firstAttribute="bottom" secondItem="Pm8-hJ-vcq" secondAttribute="bottom" id="ipx-u2-gkX"/>
                         <constraint firstItem="ttI-Mh-Qzd" firstAttribute="leading" secondItem="Pm8-hJ-vcq" secondAttribute="trailing" constant="15" id="pkG-Zg-Apt"/>
                         <constraint firstItem="Pm8-hJ-vcq" firstAttribute="top" secondItem="gjD-vH-OUv" secondAttribute="top" constant="15" id="sGI-vV-VQv"/>
                         <constraint firstItem="zax-d8-Rgu" firstAttribute="leading" secondItem="zKs-F8-49X" secondAttribute="trailing" constant="4" id="yIs-Fh-YfH"/>

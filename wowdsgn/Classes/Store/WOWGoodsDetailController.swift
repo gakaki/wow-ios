@@ -420,8 +420,8 @@ extension WOWGoodsDetailController : UITableViewDelegate,UITableViewDataSource{
         commentView.addAction{[weak self] in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWCommentController.self)) as! WOWCommentController
-                vc.commentType = CommentType.product
-                vc.mainID = self?.productId ?? 0
+//                vc.commentType = CommentType.product
+//                vc.mainID = self?.productId ?? 0
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }

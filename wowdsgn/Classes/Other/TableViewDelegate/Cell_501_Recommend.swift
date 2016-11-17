@@ -11,7 +11,7 @@ protocol Cell_501_Delegate:class{
 //    func notLoginThanToLogin()
     func toProductDetail(_ productId: Int?)
 }
-
+// 单品推荐
 class Cell_501_Recommend: UITableViewCell,ModuleViewElement {
     static func isNib() -> Bool { return true }
     static func cell_type() -> Int {

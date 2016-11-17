@@ -18,8 +18,12 @@ protocol WOWHomeFormDelegate:class {
 //    func reloadBottomTableViewData()
     
   }
-class WOWHomeFormCell: UITableViewCell {
+class WOWHomeFormCell: UITableViewCell,ModuleViewElement {
     
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 601 //  专题商品列表
+    }
     var scrollViewOffsetDic = Dictionary<Int, CGFloat>() //空字典
     
     weak var delegate : WOWHomeFormDelegate?

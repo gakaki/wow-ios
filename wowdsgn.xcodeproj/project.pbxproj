@@ -362,8 +362,8 @@
 		2D0044661DD9920400A7D98A /* Cell_302_Class.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0044641DD9920400A7D98A /* Cell_302_Class.xib */; };
 		2D0044691DD99EBE00A7D98A /* Cell_501_Recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0044671DD99EBE00A7D98A /* Cell_501_Recommend.swift */; };
 		2D00446A1DD99EBE00A7D98A /* Cell_501_Recommend.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0044681DD99EBE00A7D98A /* Cell_501_Recommend.xib */; };
-		2D130EF71DB78D48001DE9A7 /* Cell_103_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */; };
-		2D130EF81DB78D48001DE9A7 /* Cell_103_Product.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */; };
+		2D130EF71DB78D48001DE9A7 /* Cell_801_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EF11DB78D48001DE9A7 /* Cell_801_Product.swift */; };
+		2D130EF81DB78D48001DE9A7 /* Cell_801_Product.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130EF21DB78D48001DE9A7 /* Cell_801_Product.xib */; };
 		2D130EFE1DB78D8C001DE9A7 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */; };
 		2D130F0B1DB869B8001DE9A7 /* WOW_SingProductView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D130F071DB869B8001DE9A7 /* WOW_SingProductView.xib */; };
 		2D130F0C1DB869B8001DE9A7 /* WOW_SingProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D130F081DB869B8001DE9A7 /* WOW_SingProductView.swift */; };
@@ -858,8 +858,8 @@
 		2D0044641DD9920400A7D98A /* Cell_302_Class.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Cell_302_Class.xib; path = ../Cell_302_Class.xib; sourceTree = "<group>"; };
 		2D0044671DD99EBE00A7D98A /* Cell_501_Recommend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cell_501_Recommend.swift; path = ../Cell_501_Recommend.swift; sourceTree = "<group>"; };
 		2D0044681DD99EBE00A7D98A /* Cell_501_Recommend.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Cell_501_Recommend.xib; path = ../Cell_501_Recommend.xib; sourceTree = "<group>"; };
-		2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_103_Product.swift; sourceTree = "<group>"; };
-		2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_103_Product.xib; sourceTree = "<group>"; };
+		2D130EF11DB78D48001DE9A7 /* Cell_801_Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_801_Product.swift; sourceTree = "<group>"; };
+		2D130EF21DB78D48001DE9A7 /* Cell_801_Product.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_801_Product.xib; sourceTree = "<group>"; };
 		2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
 		2D130F071DB869B8001DE9A7 /* WOW_SingProductView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOW_SingProductView.xib; sourceTree = "<group>"; };
 		2D130F081DB869B8001DE9A7 /* WOW_SingProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOW_SingProductView.swift; sourceTree = "<group>"; };
@@ -1812,8 +1812,8 @@
 				2D130EFD1DB78D8C001DE9A7 /* PagingScrollView.swift */,
 				2D130F131DB8B512001DE9A7 /* WOW_Cell_402_Hearder.swift */,
 				2D130F151DB8B51B001DE9A7 /* WOW_Cell_402_Hearder.xib */,
-				2D130EF11DB78D48001DE9A7 /* Cell_103_Product.swift */,
-				2D130EF21DB78D48001DE9A7 /* Cell_103_Product.xib */,
+				2D130EF11DB78D48001DE9A7 /* Cell_801_Product.swift */,
+				2D130EF21DB78D48001DE9A7 /* Cell_801_Product.xib */,
 				2D509A241DB5D3120047CD13 /* Cell_102_Project.swift */,
 				2D509A251DB5D3120047CD13 /* Cell_102_Project.xib */,
 				2D130F171DB8B9B4001DE9A7 /* WOW_Cell_102_Item.swift */,
@@ -2115,11 +2115,11 @@
 		2DDC99AE1DDADF4F00201856 /* CellView */ = {
 			isa = PBXGroup;
 			children = (
+				069D2FE01DB47ADC00A059D0 /* WowModulePageView.swift */,
 				069D2FD51DB47ADC00A059D0 /* MODULE_TYPE_CATEGORIES_CV_CELL_301.swift */,
 				069D2FDD1DB47ADC00A059D0 /* WOWFoundWeeklyNewCell.swift */,
 				069D2FDE1DB47ADC00A059D0 /* WOWFoundWeeklyNewCell.xib */,
 				069D2FDF1DB47ADC00A059D0 /* WOWFoundWeeklyNewCellElementCell.swift */,
-				069D2FE01DB47ADC00A059D0 /* WowModulePageView.swift */,
 				2D509A1F1DB5D3120047CD13 /* HomeBottomCell.swift */,
 				2D509A201DB5D3120047CD13 /* HomeBottomCell.xib */,
 				2D509A211DB5D3120047CD13 /* HomeBrannerCell.swift */,
@@ -2381,7 +2381,7 @@
 				069D32541DB47ADD00A059D0 /* WOWPickerView.xib in Resources */,
 				069D31C11DB47ADD00A059D0 /* WOWProductOrderCell.xib in Resources */,
 				2D509A861DB5D3120047CD13 /* WOWSubArtCell.xib in Resources */,
-				2D130EF81DB78D48001DE9A7 /* Cell_103_Product.xib in Resources */,
+				2D130EF81DB78D48001DE9A7 /* Cell_801_Product.xib in Resources */,
 				069D32571DB47ADD00A059D0 /* WOWShareView.xib in Resources */,
 				069D333A1DB47ADE00A059D0 /* city.json in Resources */,
 				2DDC99B61DDAEE2C00201856 /* WOWHotColumnCell.xib in Resources */,
@@ -2695,7 +2695,7 @@
 				069D32911DB47ADD00A059D0 /* WOWStoreBrandCell.swift in Sources */,
 				2D509A761DB5D3120047CD13 /* WOWSearchBarView.swift in Sources */,
 				069D31F21DB47ADD00A059D0 /* WOWFoundWeeklyNewCellElementCell.swift in Sources */,
-				2D130EF71DB78D48001DE9A7 /* Cell_103_Product.swift in Sources */,
+				2D130EF71DB78D48001DE9A7 /* Cell_801_Product.swift in Sources */,
 				069D323C1DB47ADD00A059D0 /* WOWRegistProtocolController.swift in Sources */,
 				069D32351DB47ADD00A059D0 /* WOWLoginController.swift in Sources */,
 				069D31D71DB47ADD00A059D0 /* WOWFavProduct.swift in Sources */,

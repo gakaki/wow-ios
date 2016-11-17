@@ -37,6 +37,7 @@ class WOWBuyCarController: WOWBaseViewController {
             }else{
                 allButton.isEnabled = true
             }
+           
         }
     }
 
@@ -55,14 +56,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 totalPrice = result
                 totalPriceLabel.text = result
             
-            //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
-            if selectedArr.count > 0 {
-                if selectedArr.count == validArr.count {
-                    allButton.isSelected = true
-                }else{
-                    allButton.isSelected = false
-                }
-            }
+
             
         }
     }
@@ -114,6 +108,16 @@ class WOWBuyCarController: WOWBaseViewController {
         request()
     }
     
+    fileprivate func allbuttonIsSelect() {
+        //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
+        if selectedArr.count > 0 {
+            if selectedArr.count == validArr.count {
+                allButton.isSelected = true
+            }else{
+                allButton.isSelected = false
+            }
+        }
+    }
  
     override func setUI() {
         super.setUI()
@@ -255,6 +259,8 @@ class WOWBuyCarController: WOWBaseViewController {
                             }
                             
                         }
+                        //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
+                       strongSelf.allbuttonIsSelect()
                     }else {
                         strongSelf.bottomView.isHidden = true
                     }
@@ -294,6 +300,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     strongSelf.selectedArr.removeObject(model)
                 }
                 strongSelf.tableView.reloadData()
+                strongSelf.allbuttonIsSelect()
             }
         }) { (errorMsg) in
                 
@@ -362,7 +369,7 @@ class WOWBuyCarController: WOWBaseViewController {
 
                 strongSelf.selectedArr.append(contentsOf: array)
                 strongSelf.tableView.reloadData()
-
+                strongSelf.allbuttonIsSelect()
             }
            
 

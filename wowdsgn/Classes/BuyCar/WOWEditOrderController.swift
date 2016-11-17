@@ -30,13 +30,14 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //是否有可用优惠券
     var isCanCoupon                     = true
+    //时间戳，用来验证唯一
+    let timeInterval = Date().timeIntervalSince1970
     
     fileprivate var tipsTextField           : HolderTextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
-       
         
         // Do any additional setup after loading the view.
     }
@@ -144,6 +145,8 @@ class WOWEditOrderController: WOWBaseViewController {
             chooseStyle()
             return
         }
+        //提交订单时候增加loading框，防止同时提交多个订单
+        WOWHud.showLoadingSV()
         switch entrance! {
         case editOrderEntrance.buyEntrance:
             requestBuyNowOrderCreat()
@@ -249,7 +252,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderAmount": totalAmout as AnyObject,
                 "remark": remark as AnyObject,
                 "endUserCouponId": endUserCouponId  as AnyObject,
-                "productPriceGroup": productPriceGroup as AnyObject
+                "productPriceGroup": productPriceGroup as AnyObject,
+                "orderToken": timeInterval as AnyObject
             ]
             
         }else {
@@ -258,7 +262,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderSource": orderSource  as AnyObject,
                 "orderAmount": totalAmout  as AnyObject,
                 "remark": remark  as AnyObject,
-                "productPriceGroup": productPriceGroup as AnyObject
+                "productPriceGroup": productPriceGroup as AnyObject,
+                "orderToken": timeInterval as AnyObject
 
             ]
 
@@ -334,7 +339,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderAmount": totalAmount as AnyObject,
                 "remark": remark as AnyObject,
                 "endUserCouponId": endUserCouponId as AnyObject,
-                "productPriceGroup": productPriceGroup as AnyObject
+                "productPriceGroup": productPriceGroup as AnyObject,
+                "orderToken": timeInterval as AnyObject
 
             ]
             
@@ -348,7 +354,9 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderSource": orderSource as AnyObject,
                 "orderAmount": totalAmount as AnyObject,
                 "remark": remark as AnyObject,
-                "productPriceGroup": productPriceGroup as AnyObject
+                "productPriceGroup": productPriceGroup as AnyObject,
+                "orderToken": timeInterval as AnyObject
+
             ]
         }
         

@@ -597,7 +597,7 @@ extension RequestApi:TargetType{
                 params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
             
             default:
-                params =  ["default":"params"]
+                break
 
         }
         DLog(WOWUserManager.sessionToken)

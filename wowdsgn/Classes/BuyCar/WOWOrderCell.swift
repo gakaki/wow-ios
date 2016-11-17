@@ -69,9 +69,6 @@ class WOWOrderCell: UITableViewCell {
             for attribute in attributes {
                 tagList.addTag(attribute)
             }
-            tagList.addTag("按时发那垃圾分别卡布达")
-            tagList.addTag("阿斯顿发苦割肉房卡不到发啥时候的姐夫哥如")
-            tagList.addTag("按时发那垃圾分别卡布达")
 
         }
         

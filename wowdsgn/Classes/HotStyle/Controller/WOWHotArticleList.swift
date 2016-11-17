@@ -1,31 +1,27 @@
 //
-//  WOWHotStyleNewMain.swift
+//  WOWHotArticleList.swift
 //  wowdsgn
 //
-//  Created by 陈旭 on 2016/11/15.
+//  Created by 陈旭 on 2016/11/16.
 //  Copyright © 2016年 g. All rights reserved.
 //
 
 import UIKit
 
-class WOWHotStyleNewMain: WOWBaseViewController {
+class WOWHotArticleList: WOWBaseViewController {
     @IBOutlet var tableView: UITableView!
     var dataArr     = [WOWHomeModle]()    //商品列表数组
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "精选"
-
-        request()
-
+        self.title = "尖叫好物"
+        // Do any additional setup after loading the view.
     }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     //MARK:Private Method
     override func setUI() {
         super.setUI()
@@ -35,7 +31,6 @@ class WOWHotStyleNewMain: WOWBaseViewController {
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 410
-        
         tableView.register(UINib.nibName("WOWHotMainCell"), forCellReuseIdentifier: "WOWHotMainCell")
         tableView.register(UINib.nibName("WOWHotPeopleCell"), forCellReuseIdentifier: "WOWHotPeopleCell")
         tableView.register(UINib.nibName("WOWHotColumnCell"), forCellReuseIdentifier: "WOWHotColumnCell")
@@ -60,7 +55,7 @@ class WOWHotStyleNewMain: WOWBaseViewController {
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
                 }
-   
+                
                 strongSelf.tableView.reloadData()
                 WOWHud.dismiss()
                 
@@ -75,77 +70,61 @@ class WOWHotStyleNewMain: WOWBaseViewController {
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
-extension WOWHotStyleNewMain:UITableViewDelegate,UITableViewDataSource{
+extension WOWHotArticleList:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 0.01
-        }else {
+//        if section == 0 {
+//            return 0.01
+//        }else {
             return 15
-        }
+//        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-       
-        if section == 1 {
-            return 55
-        }else {
+        
+//        if section == 1 {
+//            return 55
+//        }else {
             return 0.01
-        }
-      
+//        }
+        
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if section == 1 {
-            return hearderView()
-        }else {
+//        if section == 1 {
+//            return hearderView()
+//        }else {
             return nil
-        }
-
+//        }
+        
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-         return self.dataArr.count
+        return 5
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotPeopleCell", for: indexPath) as! WOWHotPeopleCell
+//        if indexPath.section == 0 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotPeopleCell", for: indexPath) as! WOWHotPeopleCell
+//            
+//            return cell
+//        }else if indexPath.section == 1 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotColumnCell", for: indexPath) as! WOWHotColumnCell
+//            
+//            return cell
+//        }
+//            
+//        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotMainCell", for: indexPath) as! WOWHotMainCell
             
             return cell
-        }else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotColumnCell", for: indexPath) as! WOWHotColumnCell
-            cell.delegate = self
-            return cell
-        }
-        
-        else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotMainCell", for: indexPath) as! WOWHotMainCell
-        
-            return cell
-        }
+//        }
     }
     func hearderView() -> UIView { // 137 37
         
         let view = Bundle.main.loadNibNamed("WOWHotHeaderView", owner: self, options: nil)?.last as! WOWHotHeaderView
-
+        
         return view
         
-    }
-}
-extension WOWHotStyleNewMain:WOWHotColumnDelegate{
-    func goToArticleListVC(_ productId: Int?) {
-        
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
-        //                vc.hideNavigationBar = true
-//        vc.topic_id = model.moduleContentList?.id ?? 0
-//        vc.delegate = self.vc as! WOWHotStyleDelegate?
-        
-        navigationController?.pushViewController(vc, animated: true)
     }
 }

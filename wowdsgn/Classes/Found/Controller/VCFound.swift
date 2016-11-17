@@ -8,7 +8,7 @@ import RxDataSources
 
 class VCFound: WOWBaseModuleVC {
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
-    var data                    = [WowModulePageVO]()
+    var dataMainArr                    = [WowModulePageVO]()
   
     @IBOutlet var dataDelegate: WOWTableDelegate?
 
@@ -61,18 +61,20 @@ class VCFound: WOWBaseModuleVC {
             
             if let strongSelf = self{
                                 
-            strongSelf.endRefresh()
-         strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
-                
-
-                
+                strongSelf.endRefresh()
+                strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
+                strongSelf.dataArr  = []
+                if let dataSource  = strongSelf.dataDelegate?.dataSourceArray{
+                        strongSelf.dataArr = dataSource
+                }
+               
                 strongSelf.tableView.reloadData()
             }
             
         }){ (errorMsg) in
             print(errorMsg ?? "")
             self.endRefresh()
-            
+       
         }
     }
     
@@ -97,9 +99,9 @@ class VCFound: WOWBaseModuleVC {
         guard (sender.object != nil) else{//
             return
         }
-
-        for a in 0 ..< self.data.count {
-            let model = self.data[a]
+//strongSelf.dataDelegate?.dataSourceArray
+        for a in 0 ..< self.dataArr.count{
+            let model = self.dataArr[a]
             if model.moduleType == 501 {
                 
                 if  let send_obj =  sender.object as? [String:AnyObject] {
@@ -109,7 +111,7 @@ class VCFound: WOWBaseModuleVC {
             if model.moduleType == 402 {
                 if  let send_obj =  sender.object as? [String:AnyObject] {
                     
-                    model.moduleContent_402?.products?.ergodicArrayWithProductModel(dic: send_obj)
+                    model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
             
                     break
                 }

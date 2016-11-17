@@ -13,15 +13,15 @@ protocol orderCarDelegate: class {
     func toProductDetail(_ productId: Int?)
 }
 
-class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
+class WOWOrderCell: UITableViewCell {
     @IBOutlet weak var goodsImageView: UIImageView!
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var perPriceLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
-    
+    @IBOutlet weak var tagList: TagListView!
+
     let identifier = "WOWTypeCollectionCell"
     var typeArr = [String]()
     var model:WOWCarProductModel!
@@ -29,17 +29,12 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        tagList.textFont = UIFont.systemFont(ofSize: 10)
+
         // Initialization code
-        defaultSetup()
     }
     
-    func defaultSetup() {
-        let nib = UINib(nibName:"WOWTypeCollectionCell", bundle:Bundle.main)
-        collectionView?.register(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
-        collectionView?.collectionViewLayout = tagCellLayout
-        
-    }
+  
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -70,8 +65,14 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         }
        
         if let attributes = model.attributes {
-            typeArr = attributes
-            collectionView.reloadData()
+            tagList.removeAllTags()
+            for attribute in attributes {
+                tagList.addTag(attribute)
+            }
+            tagList.addTag("按时发那垃圾分别卡布达")
+            tagList.addTag("阿斯顿发苦割肉房卡不到发啥时候的姐夫哥如")
+            tagList.addTag("按时发那垃圾分别卡布达")
+
         }
         
         detailView.addTapGesture {[weak self] (tap) in
@@ -83,41 +84,6 @@ class WOWOrderCell: UITableViewCell ,TagCellLayoutDelegate{
             
         }
     
-    }
-    
-    
-    
-    
-    
-    //MARK: - TagCellLayout Delegate Methods
-    func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
-        return CGFloat(28.0)
-    }
-    
-    func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
-        
-        
-        let item = typeArr[index]
-        let title = item 
-        let width = title.size(Fontlevel004).width + 12
-        return width
-        
-    }
-    //MARK: - UICollectionView Delegate/Datasource Methods
-    func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTypeCollectionCell
-            let item = typeArr[(indexPath as NSIndexPath).row]
-            cell.textLabel.text = item
-        return cell
-        
-    }
-    
-    func numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return typeArr.isEmpty ? 0 : (typeArr.count)
     }
     
     

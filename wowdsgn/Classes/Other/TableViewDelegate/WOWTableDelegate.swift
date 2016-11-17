@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import UITableView_FDTemplateLayoutCell
 class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,CyclePictureViewDelegate {
     open var vc : UIViewController?
     open var cell_heights            = [0:0.h]
@@ -25,46 +25,32 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     open var record_402_index   = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     open var bannerArray = [WOWCarouselBanners]() //顶部轮播图数组
     open var tableView :UITableView!{
+
         didSet{
-            
-            tableView.delegate    = self
-            tableView.dataSource  = self
-            tableView.register(UINib.nibName(String(describing: WOWHotStyleCell.self)), forCellReuseIdentifier:HomeCellType.cell_701)
-            
-            tableView.register(UINib.nibName(HomeCellType.cell_201), forCellReuseIdentifier:HomeCellType.cell_201)
-            
-            tableView.register(UINib.nibName(HomeCellType.cell_601), forCellReuseIdentifier: HomeCellType.cell_601)
-            
-            tableView.register(UINib.nibName(HomeCellType.cell_101), forCellReuseIdentifier: HomeCellType.cell_101)
-            
-            tableView.register(UINib.nibName(HomeCellType.cell_103), forCellReuseIdentifier: HomeCellType.cell_103)
-            
-            tableView.register(UINib.nibName(HomeCellType.cell_102), forCellReuseIdentifier: HomeCellType.cell_102)
-            
-            tableView.register(UINib.nibName(HomeCellType.cell_HomeList), forCellReuseIdentifier: HomeCellType.cell_HomeList)
+
+            self.tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
             
             for (k,c) in ModulePageType.d {
                 if c is ModuleViewElement.Type {
                     let cell            = (c as! ModuleViewElement.Type)
                     let isNib           = cell.isNib()
-                    let cellName        = String(describing: cell)
-                    let identifier      = "\(k)"
+                    let cellName        = String(describing: cell)// 以类名作为Identtifier
                     if (isNib == true){
-                        tableView.register(UINib.nibName(cellName), forCellReuseIdentifier:identifier)
+                        self.tableView.register(UINib.nibName(cellName), forCellReuseIdentifier:cellName)
                     }else{
-                        tableView.register(c.self, forCellReuseIdentifier:identifier)
+                        self.tableView.register(c.self, forCellReuseIdentifier:cellName)
                     }
                     print("\(k) = \(c)")
                 }
             }
-            
-            
-            tableView.backgroundColor = GrayColorLevel5
-            tableView.rowHeight = UITableViewAutomaticDimension
-            tableView.estimatedRowHeight = 410
-          
-            NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
 
+            self.tableView.backgroundColor = GrayColorLevel5
+            self.tableView.rowHeight = UITableViewAutomaticDimension
+            self.tableView.estimatedRowHeight = 410
+            self.tableView.delegate    = self
+            self.tableView.dataSource  = self
+            NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+            
         }
     }
     
@@ -83,7 +69,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         }
         
     }
-
+    
     // 配置cell的UI
     func cellUIConfig(one: NSInteger, two: NSInteger ,isHiddenTwoItem: Bool, cell:HomeBottomCell,dataSourceArray:[WOWProductModel])  {
         let  modelOne = dataSourceArray[one]
@@ -107,7 +93,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return dataSourceArray.count + bottomCellLine
+        return dataSourceArray.count + bottomCellLine// 主数据源 + 底部数据 （如果底部数据有的话）
         
     }
     func getCellHeight(_ sectionIndex:Int) -> CGFloat{
@@ -117,32 +103,39 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             return CGFloat.leastNormalMagnitude
         }
     }
-    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //
-    //        return getCellHeight(indexPath.section)
-    //
-    //    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let section     = (indexPath as NSIndexPath).section
+        if section < dataSourceArray.count {
+            let model = dataSourceArray[section]
+            let type = model.moduleType ?? 0
+            let identifier  = ModulePageType.getIdentifier(type)
+            switch type {
+            case 301,401,801:// AutoLayout 不完整，给指定数
+                return getCellHeight(section)
+            default:
+                return tableView.fd_heightForCell(withIdentifier: identifier , configuration: { (cell) in
+                    
+                })
+            }
+            
+        }else{
+            
+            return tableView.fd_heightForCell(withIdentifier: "HomeBottomCell" , configuration: { (cell) in
+                
+            })
+        }
+        
+        
+    }
     
-    //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    //        let section     = (indexPath as NSIndexPath).section
-    //        if section < dataSourceArray.count {
-    //            let model = dataSourceArray[section]
-    //            switch model.moduleType ?? 0 {
-    //            case 402:
-    //
-    //            default:
-    //
-    //            }
-    //        }
-    //
-    //    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section < dataSourceArray.count {
             let model = dataSourceArray[section]
             
             
             switch model.moduleType ?? 0 {
-            case 402:
+            case 402:// 多行展示
                 
                 record_402_index.append(section)
                 
@@ -189,11 +182,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         }
         
         let model = dataSourceArray[(indexPath as NSIndexPath).section]
-        let identifier  = "\(model.moduleType!)"
-        switch model.moduleType ?? 0 {
+        
+        let type = model.moduleType ?? 0
+        let identifier  = ModulePageType.getIdentifier(type) // 获取对应Type的className
+        switch type {
         case 701:
             
-            let cell                = tableView.dequeueReusableCell(withIdentifier:HomeCellType.cell_701 , for: indexPath) as! WOWHotStyleCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier:identifier , for: indexPath) as! WOWHotStyleCell
             
             cell.modelData = model.moduleContentList
             cell.showData(model: model)
@@ -201,14 +196,14 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 201:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_201, for: indexPath) as! WOWlListCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WOWlListCell
             
             cell.delegate       = self.vc as! SenceCellDelegate?
             cell.showData(model.moduleContent!)
             cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 601:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_601, for: indexPath) as! WOWHomeFormCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WOWHomeFormCell
             
             cell.indexPathSection = indexPath.section
             cell.delegate         = self.vc as! WOWHomeFormDelegate?
@@ -216,7 +211,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 101:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_101, for: indexPath) as! HomeBrannerCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeBrannerCell
             
             if let banners = model.moduleContent?.banners{
                 
@@ -229,7 +224,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
         case 102:
             
-            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_102, for: indexPath) as! Cell_102_Project
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
             cell.dataArr = model.moduleContent?.banners
             cell.lbTitle.text = model.moduleContent?.name ?? "专题"
             cell.delegate = self.vc as! cell_102_delegate?
@@ -237,7 +232,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             returnCell = cell
         case 801:
             
-            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_103, for: indexPath) as! Cell_103_Product
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_801_Product
             let array = model.moduleContentProduct?.products
             cell.dataSourceArray = array
             cell.delegate = self.vc as! cell_801_delegate?
@@ -245,7 +240,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             returnCell = cell
         case 402:
             
-            let cell                = tableView.dequeueReusableCell(withIdentifier: HomeCellType.cell_402, for: indexPath) as! HomeBottomCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeBottomCell
             cell.indexPath = indexPath
             
             let OneCellNumber = indexPath.row * 2
@@ -261,7 +256,6 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:productsArray)
                 
             }
-            // 排序 0，1，2，3，4...
             cell.delegate = self.vc as! HomeBottomDelegate?
             
             returnCell = cell
@@ -275,7 +269,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             cell.bringSubview(toFront: cell.cv)
             
             returnCell = cell
-            //                return cell
+            
             
         case WOWFoundWeeklyNewCell.cell_type():
             
@@ -306,7 +300,6 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             returnCell = cell
             
-            
         default:
             returnCell = UITableViewCell()
             break
@@ -318,12 +311,12 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if bottomListCount > 0 {
-            guard section < dataSourceArray.count  else {
+            guard section < dataSourceArray.count  else {// 说明是底部列表数据
                 
                 if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
-                                    if isOverBottomData == true {
-                                        return 70
-                                    }
+                    if isOverBottomData == true {
+                        return 70
+                    }
                 }
                 return CGFloat.leastNormalMagnitude
             }
@@ -340,9 +333,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             guard section < dataSourceArray.count  else {
                 
                 if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
-                                    if isOverBottomData == true {
-                                        return footerView()
-                                    }
+                    if isOverBottomData == true {
+                        return footerView()
+                    }
                 }
                 return nil
             }
@@ -435,10 +428,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 wowcontroller?.topBtn.isHidden = false
             }
         }
-       
+        
         
     }
-
+    
     func footerView() -> UIView {
         
         let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70.h))
@@ -478,7 +471,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 v?.goController(modelBanner)
                 
             }
-        case 701:
+        case 701:// 精选页点赞cell
             let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
             //                vc.hideNavigationBar = true
             vc.topic_id = model.moduleContentList?.id ?? 0
@@ -493,9 +486,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
     }
     public func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
-                let model = bannerArray[(indexPath as NSIndexPath).row]
-                let viewController = self.vc as! WOWBaseModuleVC
-                viewController.goController(model)
+        let model = bannerArray[(indexPath as NSIndexPath).row]
+        let viewController = self.vc as! WOWBaseModuleVC
+        viewController.goController(model)
     }
-
+    
 }

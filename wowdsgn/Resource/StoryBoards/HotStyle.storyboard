@@ -79,9 +79,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bFc-jb-WyD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bFc-jb-WyD">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Vkr-lX-m6u" id="DW9-AA-CL6"/>
@@ -89,6 +88,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bFc-jb-WyD" firstAttribute="leading" secondItem="fDS-OF-Oef" secondAttribute="leading" id="ExH-Lv-wbE"/>
+                            <constraint firstItem="KGz-y8-EDO" firstAttribute="top" secondItem="bFc-jb-WyD" secondAttribute="bottom" id="MEi-Ws-Wlt"/>
+                            <constraint firstAttribute="trailing" secondItem="bFc-jb-WyD" secondAttribute="trailing" id="N3s-NP-y8b"/>
+                            <constraint firstItem="bFc-jb-WyD" firstAttribute="top" secondItem="fDS-OF-Oef" secondAttribute="top" id="vYc-NP-95L"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="bFc-jb-WyD" id="MLr-JN-ojn"/>
@@ -111,7 +116,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qsq-X8-h1m">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="C3y-1R-y6w" id="0rx-Gi-FfM"/>
@@ -202,7 +207,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gkh-lv-sOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="870" y="-133"/>
-            <point key="canvasLocation" x="87" y="-905"/>
         </scene>
         <!--评论-->
         <scene sceneID="MKY-He-CBv">

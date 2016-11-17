@@ -10,8 +10,11 @@ import UIKit
 protocol WOWHotStyleCellDelegate:class {
     func reloadTableViewDataWithCell()
 }
-class WOWHotStyleCell: UITableViewCell {
-    
+class WOWHotStyleCell: UITableViewCell,ModuleViewElement {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 701 // 精选页点赞cell
+    }
     @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var lbLogoName: UILabel!// 左上角logo名字
     @IBOutlet weak var imgLogo: UIImageView!// 左上角logo 图片

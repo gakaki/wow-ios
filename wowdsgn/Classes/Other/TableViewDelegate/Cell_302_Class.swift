@@ -44,6 +44,9 @@ class Cell_302_Class: UITableViewCell,ModuleViewElement {
         case .dt_iPhone5:
             heightConstraint.constant = 215
             sizeWidth = 75.w
+        case .dt_iPhone6_Plus:
+            heightConstraint.constant = 271
+//            sizeWidth = 75.w
         default:
             break
         }

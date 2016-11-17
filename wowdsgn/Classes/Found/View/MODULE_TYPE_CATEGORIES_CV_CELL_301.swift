@@ -92,11 +92,6 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
             }
         }
         
-
-//        collectionView.setNeedsLayout()
-//        collectionView.setNeedsDisplay()
-//        collectionView.invalidateIntrinsicContentSize()
-//        collectionView.collectionViewLayout.invalidateLayout() // this is useful
     }
     
     let size_padding                                      = CGFloat(15)

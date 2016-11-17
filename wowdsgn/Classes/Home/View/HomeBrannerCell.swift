@@ -8,7 +8,11 @@
 
 import UIKit
 
-class HomeBrannerCell: UITableViewCell {
+class HomeBrannerCell: UITableViewCell,ModuleViewElement {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 101 // 今日商品推荐
+    }
     var imageURLArray: [String] = []
     @IBOutlet weak var cyclePictureView: CyclePictureView!
     override func awakeFromNib() {

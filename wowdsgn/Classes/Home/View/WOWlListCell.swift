@@ -13,8 +13,11 @@ protocol SenceCellDelegate:class{
     func senceProductClick(_ produtID:Int)
 }
 
-class WOWlListCell: UITableViewCell {
-    
+class WOWlListCell: UITableViewCell,ModuleViewElement {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 201 // 单条图片cell
+    }
     @IBOutlet var bigImageView: UIImageView!
     
     fileprivate var productBtns = [UIButton]()
@@ -69,18 +72,18 @@ class WOWlListCell: UITableViewCell {
 
 
 //单条 201 banner
-extension WOWlListCell:ModuleViewElement{
-    static func isNib() -> Bool { return true }
-    static func cell_type() -> Int { return 201 }
-    func setData(_ model:WowModulePageItemVO) {
-        let url = model.bannerImgSrc ?? ""
-        DLog(url)
-        bigImageView.set_webimage_url(url);
-        
-        productBtns.forEach { (view) in
-            view.removeFromSuperview()
-        }
-        bigImageView.isUserInteractionEnabled = true
-
-    }
-}
+//extension WOWlListCell:ModuleViewElement{
+//    static func isNib() -> Bool { return true }
+//    static func cell_type() -> Int { return 201 }
+//    func setData(_ model:WowModulePageItemVO) {
+//        let url = model.bannerImgSrc ?? ""
+//        DLog(url)
+//        bigImageView.set_webimage_url(url);
+//        
+//        productBtns.forEach { (view) in
+//            view.removeFromSuperview()
+//        }
+//        bigImageView.isUserInteractionEnabled = true
+//
+//    }
+//}

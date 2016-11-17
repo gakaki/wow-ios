@@ -8,48 +8,21 @@
 //
 
 import UIKit
-struct HomeCellType {
-    
-    static let cell_101      = "HomeBrannerCell" // 首页轮播 cell
-    
-    static let cell_201      = "WOWlListCell" // 首页单个图片cell
-    
-    static let cell_601      = "WOWHomeFormCell" // 首页左右滑动 产品列表cell
-    
-    static let cell_701      = "WOWHotStyleCell" // 精选页 cell
-    
-    static let cell_103      = "Cell_103_Product" // 今日单品 倒计时cell
-    
-    static let cell_102      = "Cell_102_Project" // 专题列表 cell
-    
-    static let cell_402      = "HomeBottomCell" // 自定义产品组 cell
-    
-    static let cell_HomeList = "HomeBottomCell"// 底部列表
-    
-}
 
 class WOWController: WOWBaseModuleVC {
-    let cellID = String(describing: WOWlListCell.self)
-    
-    var dataArr = [WOWHomeModle]()    //顶部商品列表数组
 
     
+    var dataArr = [WOWHomeModle]()    //顶部商品列表数组
+    
     var bottomListArray = [WOWProductModel]() //底部列表数组
-    
-    var singProductArray = [WOWHomeModle]() // 今日单品 倒计时的产品 数组
-    
-    var bottomListCount :Int = 0//底部列表数组的个数
-    
+
     var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
     
-    var myQueueTimer: DispatchQueue?
-    var myTimer: DispatchSourceTimer?
-    
-      @IBOutlet var dataDelegate: WOWTableDelegate?
+    @IBOutlet var dataDelegate: WOWTableDelegate?
     
     @IBOutlet var tableView: UITableView!
     //    var hidingNavBarManager: HidingNavigationBarManager?
@@ -278,7 +251,7 @@ class WOWController: WOWBaseModuleVC {
                     
                     strongSelf.bottomListArray.append(contentsOf: bannerList)
                     strongSelf.dataDelegate?.bottomListArray = strongSelf.bottomListArray
-                    strongSelf.bottomListCount = strongSelf.bottomListArray.count
+                   
                 }else {
                     
                     if strongSelf.pageIndex == 1{

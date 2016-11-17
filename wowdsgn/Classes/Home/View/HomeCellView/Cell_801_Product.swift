@@ -11,7 +11,7 @@ protocol cell_801_delegate:class {
     // 跳转专题详情代理
     func goToProcutDetailVCWith_801(_ productId: Int?)
 }
-class Cell_103_Product: UITableViewCell,ModuleViewElement {
+class Cell_801_Product: UITableViewCell,ModuleViewElement {
     static func isNib() -> Bool { return true }
     static func cell_type() -> Int {
         return 801 // 今日单品倒计时
@@ -278,7 +278,7 @@ class Cell_103_Product: UITableViewCell,ModuleViewElement {
     }
     
 }
-extension Cell_103_Product:UIScrollViewDelegate{
+extension Cell_801_Product:UIScrollViewDelegate{
     //scrollView滚动完毕后触发
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //获取当前偏移量

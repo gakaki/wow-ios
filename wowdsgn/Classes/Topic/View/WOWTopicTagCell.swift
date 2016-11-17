@@ -17,7 +17,6 @@ class WOWTopicTagCell: UITableViewCell ,TagListViewDelegate{
         
         super.awakeFromNib()
         tagListView.delegate = self
-        
         tagListView.addTag("")
         tagListView.addTag("TEAChart")
         tagListView.addTag("To Be Removed")

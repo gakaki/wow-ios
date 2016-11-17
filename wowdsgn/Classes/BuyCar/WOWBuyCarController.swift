@@ -127,6 +127,8 @@ class WOWBuyCarController: WOWBaseViewController {
     
     
     fileprivate func configTable(){
+        tableView.estimatedRowHeight = 162
+        tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.register(UINib.nibName(String(describing: WOWBuyCarNormalCell.self)), forCellReuseIdentifier:cellNormalID)
         tableView.register(UINib.nibName(String(describing: WOWOrderCell.self)), forCellReuseIdentifier:cellID)
         self.tableView.backgroundColor = GrayColorLevel5
@@ -444,14 +446,14 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     }
     
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = dataArr[(indexPath as NSIndexPath).section]
-        if model.productStatus == 1 && model.productStock > 0{
-            return 160
-        }else {
-            return  111
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let model = dataArr[(indexPath as NSIndexPath).section]
+//        if model.productStatus == 1 && model.productStock > 0{
+//            return 160
+//        }else {
+//            return  111
+//        }
+//    }
 
     
 //    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

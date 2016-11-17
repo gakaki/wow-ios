@@ -58,8 +58,8 @@ class WOWAddressController: WOWBaseViewController {
      override func setUI() {
         super.setUI()
         tableView.register(UINib.nibName(String(describing: WOWAddressCell.self)), forCellReuseIdentifier: "WOWAddressCell")
-        tableView.estimatedRowHeight = 80
-        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.estimatedRowHeight = 80
+//        tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.separatorColor = SeprateColor
         navigationItem.title = "收货地址"

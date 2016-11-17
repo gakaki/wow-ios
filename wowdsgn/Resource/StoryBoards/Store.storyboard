@@ -106,7 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15s-ZJ-vAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="308" y="513"/>
+            <point key="canvasLocation" x="571" y="519"/>
         </scene>
         <!--Product Detail Controller-->
         <scene sceneID="60a-yq-Y6h">
@@ -286,6 +286,7 @@
                         <outlet property="likeButton" destination="VfS-7l-afX" id="FDp-Xs-Fr1"/>
                         <outlet property="nowBuyButton" destination="Ui9-Q6-WqD" id="WPY-BS-v9U"/>
                         <outlet property="productEffectView" destination="iEe-la-3xG" id="kbw-jO-IzT"/>
+                        <outlet property="shareButton" destination="q6M-Jc-5fm" id="J3i-tN-RJc"/>
                         <outlet property="tableView" destination="Z1W-LA-2Dq" id="0W3-7j-PpS"/>
                     </connections>
                 </viewController>

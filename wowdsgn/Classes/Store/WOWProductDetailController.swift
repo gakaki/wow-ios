@@ -23,6 +23,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var carEntranceButton: MIBadgeButton!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var productEffectView: UIView!
@@ -272,6 +273,7 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 if code == RequestCode.ProductExpired.rawValue {
                     strongSelf.productEffectView.isHidden = false
+                    strongSelf.shareButton.isHidden = true
                     strongSelf.addCartButton.isHidden = true
                     strongSelf.nowBuyButton.isEnabled = false
                     strongSelf.nowBuyButton.setBackgroundColor(UIColor.init(hexString: "CCCCCC")!, forState: .disabled)

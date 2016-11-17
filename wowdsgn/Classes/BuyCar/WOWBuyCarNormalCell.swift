@@ -12,10 +12,9 @@ protocol buyCarDelegate: class {
     func goProductDetail(_ productId: Int?)
 }
 
-class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
+class WOWBuyCarNormalCell: UITableViewCell{
 
     @IBOutlet weak var goodsImageView: UIImageView!
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var subCountButton: UIButton!
     @IBOutlet weak var addCountButton: UIButton!
@@ -23,7 +22,7 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
     @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var perPriceLabel: UILabel!
     @IBOutlet weak var detailView: UIView!
-    
+    @IBOutlet weak var tagList: TagListView!
     @IBOutlet weak var countLabel: UILabel!
     let identifier = "WOWTypeCollectionCell"
     var typeArr = [String]()
@@ -32,17 +31,11 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        tagList.textFont = UIFont.systemFont(ofSize: 10)
         // Initialization code
-        defaultSetup()
     }
     
-    func defaultSetup() {
-        let nib = UINib(nibName:"WOWTypeCollectionCell", bundle:Bundle.main)
-        collectionView?.register(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
-        collectionView?.collectionViewLayout = tagCellLayout
-        
-    }
+
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -64,8 +57,10 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
         selectButton.isSelected = model.isSelected ?? false
 //        let arr = [model.color ?? "",model.specName ?? ""]
         if let attributes = model.attributes {
-            typeArr = attributes
-            collectionView.reloadData()
+            tagList.removeAllTags()
+            for attribute in attributes {
+                tagList.addTag(attribute)
+            }
         }
         
         if model.productQty < model.productStock {
@@ -91,41 +86,6 @@ class WOWBuyCarNormalCell: UITableViewCell ,TagCellLayoutDelegate{
             
         }
        
-    }
-
-   
-    
-    
-    
-    //MARK: - TagCellLayout Delegate Methods
-    func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
-        return CGFloat(25.0)
-    }
-    
-    func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
-        
-
-            let item = typeArr[index]
-            let title = item 
-            let width = title.size(Fontlevel004).width + 12
-            return width
-        
-    }
-    //MARK: - UICollectionView Delegate/Datasource Methods
-    func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTypeCollectionCell
-                let item = typeArr[(indexPath as NSIndexPath).row]
-                cell.textLabel.text = item
-        return cell
-            
-    }
-    
-    func numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return typeArr.isEmpty ? 0 : (typeArr.count)
     }
 
  

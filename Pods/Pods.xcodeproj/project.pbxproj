@@ -31,6 +31,9 @@
 		06142D1CDC298D425348329F93521B8D /* UIScrollView+XZMRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0C8EAB6A1E2FC04A6B10691ACC824B /* UIScrollView+XZMRefresh.m */; };
 		06872215887468FE5D614908D1861C8B /* QNUploadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B172D53DE65F8E1B244DC390E45562F /* QNUploadManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		068F698C1DD563A500D83A4C /* WowAppDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068F698B1DD563A500D83A4C /* WowAppDelegateManager.swift */; };
+		06987EA91DD5BDB500F44A55 /* RouterRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06987EA71DD5BDB500F44A55 /* RouterRule.swift */; };
+		06987EAA1DD5BDB500F44A55 /* RouterMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06987EA81DD5BDB500F44A55 /* RouterMapper.swift */; };
+		06987EAE1DD5C1CE00F44A55 /* WowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06987EAD1DD5C1CE00F44A55 /* WowExtension.swift */; };
 		06BC9A32CF069C087BB43408BF94BFD4 /* SDWebImagePrefetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 54FA5FF3C5442B309BAC46B7CEC7B413 /* SDWebImagePrefetcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C2774543005E5F0C96C8B0E55D0E13 /* RxTableViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E68B9513A5263E9922CF0F49752C0 /* RxTableViewDataSourceType.swift */; };
 		06C5F08D18D9D8F9052E0F44C1391B65 /* QNCrc32.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9CA4F4539FD33C087087420D62B618 /* QNCrc32.m */; };
@@ -747,7 +750,6 @@
 		C1E71B17E59F12E3AC15BC1D20509279 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6904326A3A9A9527AFD6B40885F0495E /* Security.framework */; };
 		C2787784BDF42F4A65119682E45925D8 /* SectionedViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463D76DC6780D223B0399FA971D05EBC /* SectionedViewDataSourceType.swift */; };
 		C2E6AA375FE8C61D6EC371673DEE0EA1 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442773B1ED839130D6F89787F54E6426 /* DictionaryExtensions.swift */; };
-		C3342AEFE7C7D75EA603D63DC4069E3C /* WowWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC293D741270D04A62327C1B9F3DE5 /* WowWebView.swift */; };
 		C37C8680574015C9CC7F16AC9D22EBFF /* XZMRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E67D16132BF26B6D26FFB1D6C2F806E4 /* XZMRefreshGifFooter.m */; };
 		C384695234B4F34A73F1AF944D8B36C2 /* VTContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2192B31923E023381B3AAC50E3B0F784 /* VTContentView.m */; };
 		C38727CA05A56269E4CA86B51A7C5DC0 /* YYImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F235983D173B97AFB563B66A153B9E6 /* YYImageCache.m */; };
@@ -1403,6 +1405,9 @@
 		05F98D75ED2FADB109A0637CCE5B9321 /* WebViewBridge_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebViewBridge_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06031F2A5582055508AA59EDBE224FC2 /* YYCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYCache.m; path = YYCache/YYCache.m; sourceTree = "<group>"; };
 		068F698B1DD563A500D83A4C /* WowAppDelegateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowAppDelegateManager.swift; sourceTree = "<group>"; };
+		06987EA71DD5BDB500F44A55 /* RouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterRule.swift; sourceTree = "<group>"; };
+		06987EA81DD5BDB500F44A55 /* RouterMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterMapper.swift; sourceTree = "<group>"; };
+		06987EAD1DD5C1CE00F44A55 /* WowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowExtension.swift; sourceTree = "<group>"; };
 		06AECEDA19CD08B33062BBAE9E93FABE /* SectionModelType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SectionModelType.swift; path = Sources/DataSources/SectionModelType.swift; sourceTree = "<group>"; };
 		06EC0D76F56CF1C50E7309CFB3AB7FC8 /* libpingpp+network.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libpingpp+network.a"; path = "lib/Dependencies/Network/libpingpp+network.a"; sourceTree = "<group>"; };
 		07350EEED443145FA7D5ED6D2EA8591C /* SVProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
@@ -1989,7 +1994,6 @@
 		8997DE344320FA94DFDC71E44B04E2B4 /* SwiftyUserDefaults-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyUserDefaults-umbrella.h"; sourceTree = "<group>"; };
 		89CA219FBD6BD116EF84E56C22F0EE61 /* ImageView+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ImageView+Kingfisher.swift"; path = "Sources/ImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		89D9723E713DE5D571E339705613C1D4 /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89EC293D741270D04A62327C1B9F3DE5 /* WowWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WowWebView.swift; sourceTree = "<group>"; };
 		8A370B7BC478BE35D5D22E82B95F9572 /* checkmark_icon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "checkmark_icon@3x.png"; sourceTree = "<group>"; };
 		8A404681381495660141191A772D4EB1 /* KVORepresentable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KVORepresentable.swift; path = RxCocoa/Common/KVORepresentable.swift; sourceTree = "<group>"; };
 		8A764614EA645E0234EE136DE2458F1A /* Hashids-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Hashids-Swift.modulemap"; sourceTree = "<group>"; };
@@ -5039,12 +5043,14 @@
 		E29DFE76FDACA711D4DD8CFE67A337BD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				06987EA71DD5BDB500F44A55 /* RouterRule.swift */,
+				06987EA81DD5BDB500F44A55 /* RouterMapper.swift */,
 				068F698B1DD563A500D83A4C /* WowAppDelegateManager.swift */,
 				AFDFC36D82D2F3FCB8F913864649A581 /* ConfigH5URL.swift */,
 				E23A0AE6070C2702B82E58278C27F268 /* DynamicFun.swift */,
 				920B144A1962A6BF81E800CB35ACA151 /* index.html */,
-				89EC293D741270D04A62327C1B9F3DE5 /* WowWebView.swift */,
 				16640FEE0635D293820C650224AC23E8 /* FNUrlRoute */,
+				06987EAD1DD5C1CE00F44A55 /* WowExtension.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -6906,14 +6912,16 @@
 				589F601F32F78FD56D89C80C0E1475B8 /* DynamicFun.swift in Sources */,
 				068F698C1DD563A500D83A4C /* WowAppDelegateManager.swift in Sources */,
 				0CDA7FD997C4C920BF38376516794B87 /* FN.swift in Sources */,
+				06987EA91DD5BDB500F44A55 /* RouterRule.swift in Sources */,
 				1BCD8E74C3CAB9430493075EF2205DCA /* FNUrlMatcher.swift in Sources */,
 				23BE016AE340157918FFE3DE4A7B4C5E /* FNUrlRoute.swift in Sources */,
 				5833F98DBFA4CBB56BCE10C1BCE5D3AE /* FNUrlRouteDelegate.swift in Sources */,
 				EE3672C68214F101CCBEDF5864F489A9 /* FNUrlRouteHandleOver.swift in Sources */,
+				06987EAA1DD5BDB500F44A55 /* RouterMapper.swift in Sources */,
 				29F5602C16FA056DF94B6B8E6AB8B282 /* FNUtil.swift in Sources */,
+				06987EAE1DD5C1CE00F44A55 /* WowExtension.swift in Sources */,
 				770A42E61D4072A0F0426BD30CEBAC29 /* index.html in Sources */,
 				63890FB0A5180C25EE822B92EF044AA7 /* wow3rd-dummy.m in Sources */,
-				C3342AEFE7C7D75EA603D63DC4069E3C /* WowWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

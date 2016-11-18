@@ -36,7 +36,7 @@ public class VCRedirect {
     }
 
     //Wow开头的类  然后可以注入id
-    public class func toDesigner(designerId:Int?){
+    public class func toDesigner(_ designerId:Int?){
         if let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as? WOWBrandHomeController
         {
             vc.designerId           = designerId
@@ -45,7 +45,7 @@ public class VCRedirect {
             topNaVC?.pushViewController(vc, animated: true)
         }
     }
-    public class func toBrand( brand_id: Int?){
+    public class func toBrand(_ brand_id: Int?){
         if let vc    = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as? WOWBrandHomeController {
             vc.brandID = brand_id
             vc.entrance = .brandEntrance
@@ -72,7 +72,7 @@ public class VCRedirect {
         
     }
 //    toVCTopidDetail
-    public class func toToPidDetail(topicId: Int){
+    public class func toToPidDetail(_ topicId: Int){
         
 //        MobClick.e(.My_Orders)
         
@@ -97,7 +97,7 @@ public class VCRedirect {
         
         topNaVC?.pushViewController(vc, animated: true)
     }
-    public class func toTopicList(topicId: Int){
+    public class func toTopicList(_ topicId: Int){
         
         let vc                  = VCTopic(nibName: nil, bundle: nil)
         vc.topic_id             = topicId
@@ -107,7 +107,7 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
 
-    public class func toHomeIndex(index: Int){
+    public class func toHomeIndex(_ index: Int){
         guard index != 3 else{
             toLoginVC(true)
             return

@@ -1,5 +1,4 @@
 import UIKit
-import wow3rd
 
 public class RouterModuleMain : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) { // 跳转首页
@@ -21,16 +20,15 @@ public class RouterModuleMain : FNUrlRouteDelegate{
         default:
             break
         }
-        VCRedirect.toHomeIndex(index: rootIndexVC)
         
+        DynamicFun.classFun("VCRedirect", "toHomeIndex" , rootIndexVC)
+//        VCRedirect.toHomeIndex(index: rootIndexVC)
     }
 }
 public class RouterModuleProduct : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
         let productId = params?["id"] as? String
-        VCRedirect.toVCProduct(productId?.toInt())
-        print(params)
-        //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
+        DynamicFun.classFun("VCRedirect", "toVCProduct" , productId?.toInt0())
     }
 }
 public class RouterModuleContenTopic : FNUrlRouteDelegate{
@@ -38,45 +36,46 @@ public class RouterModuleContenTopic : FNUrlRouteDelegate{
         print(params)
         
         let topicStr = params?["id"] as? String
-        let toPicId = topicStr?.toInt() ?? 0
-        VCRedirect.toToPidDetail(topicId: toPicId)
-        
-//        VCRedirect.
-        //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
+        let toPicId = topicStr?.toInt0()
+//        VCRedirect.toToPidDetail(topicId: toPicId)
+        DynamicFun.classFun("VCRedirect", "toToPidDetail" , toPicId)
     }
 }
 public class RouterModuleProductTopic : FNUrlRouteDelegate{// 跳转商品列表专题
     required public init(params: [String: AnyObject]?) {
 //        print(params)
         let topicStr = params?["id"] as? String
-        let toPicId = topicStr?.toInt() ?? 0
-        VCRedirect.toTopicList(topicId: toPicId)
-        //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
+        let toPicId = topicStr?.toInt0()
+        DynamicFun.classFun("VCRedirect", "toTopicList" ,  toPicId)
+
     }
 }
 public class RouterModuleBrand : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
         if let id = params?["id"] as? String {
-            VCRedirect.toBrand(brand_id: id.toInt())
+//            VCRedirect.toBrand(brand_id: id.toInt())
+            DynamicFun.classFun("VCRedirect", "toBrand" ,  id.toInt0() )
+
         }
     }
 }
 public class RouterModuleDesigner : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
         if let id = params?["id"] as? String {
-            VCRedirect.toDesigner(designerId: id.toInt())
+            DynamicFun.classFun("VCRedirect", "toDesigner" ,  id.toInt0() )
         }
     }
 }
 public class RouterModuleCoupon : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        VCRedirect.toCouponVC()
+        DynamicFun.classFun("VCRedirect", "toCouponVC"  )
     }
 }
 
 public class RouterModuleOrderList : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
-        VCRedirect.toOrderList()
+        DynamicFun.classFun("VCRedirect", "toOrderList" )
+        //wowdsgn://m.wowdsgn.com/vcredirectr/toorderlist/params1/params2/params3
     }
 }
 public class RouterModuleOrder : FNUrlRouteDelegate{
@@ -88,7 +87,7 @@ public class RouterModuleOrder : FNUrlRouteDelegate{
 public class RouterModuleCategory : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
         let categoryId = params?["id"] as? String
-        VCRedirect.toVCCategory(categoryId?.toInt())
+        DynamicFun.classFun("VCRedirect", "toVCCategory" ,categoryId?.toInt0())
         print(params)
         //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
     }
@@ -96,7 +95,8 @@ public class RouterModuleCategory : FNUrlRouteDelegate{
 public class RouterModuleH5 : FNUrlRouteDelegate{
     required public init(params: [String: AnyObject]?) {
         let url = params?["url"] as? String
-        VCRedirect.toVCH5(url)
+//        VCRedirect.toVCH5(url)
+        DynamicFun.classFun("VCRedirect", "toVCH5" ,url)
         //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
     }
 }

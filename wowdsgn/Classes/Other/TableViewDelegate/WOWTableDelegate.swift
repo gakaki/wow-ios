@@ -60,7 +60,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         if  let send_obj =  sender.object as? [String:AnyObject] {
             
             bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
-            
+    
             for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
                 let model = dataSourceArray[j]
                 model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)

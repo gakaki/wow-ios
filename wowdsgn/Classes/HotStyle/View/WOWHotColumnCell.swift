@@ -9,12 +9,20 @@
 import UIKit
 protocol WOWHotColumnDelegate:class {
 
-    func goToArticleListVC(_ productId: Int?)
+    func goToArticleListVC(_ columntId: Int?)
     
 }
-
-class WOWHotColumnCell: UITableViewCell {
-
+//尖叫栏目
+class WOWHotColumnCell: UITableViewCell,ModuleViewElement {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 901
+    }
+    var dataArr:[WOWHomeHot_1001_title]?{
+        didSet{
+            collectionView.reloadData()
+        }
+    }
     @IBOutlet weak var collectionView: UICollectionView!
     weak var delegate : WOWHotColumnDelegate?
     override func awakeFromNib() {
@@ -43,19 +51,22 @@ extension WOWHotColumnCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return dataArr?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWColumnCVCelll", for: indexPath) as! WOWColumnCVCelll
         //FIX 测试数据
-
+        let model = dataArr?[indexPath.row]
         
+        if let m = model {
+            cell.showData(m)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60,height: 80)
+        return CGSize(width: 60.w,height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -63,12 +74,13 @@ extension WOWHotColumnCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(0, 27.w,
-                                0, 27.w)
+        return UIEdgeInsetsMake(0, 27,
+                                0, 27)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = delegate {
-            del.goToArticleListVC(1)
+            let model = dataArr?[indexPath.row]
+            del.goToArticleListVC(model?.id ?? 0)
         }
        
     }

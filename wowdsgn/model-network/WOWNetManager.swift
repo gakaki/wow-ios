@@ -20,6 +20,7 @@ enum RequestCode:String{
     case Success = "0"      //数据请求成功
     case Login = "10000"    //session过期或无效
     case ProductExpired = "40202"   //商品过期
+    case ProductLimit = "40368" //商品限购
 }
 
 //MARK:前后端约定的返回数据结构
@@ -132,6 +133,11 @@ class WOWNetManager {
                                 let res = info?.data ?? [] as AnyObject
                                 WOWHud.showMsg(info?.message)
                                 successClosure(res, info?.code)
+                                return
+                            }
+                            if code == RequestCode.ProductLimit.rawValue {
+                                WOWHud.showWarnMsg(info?.message)
+                                failClosure(info?.message)
                                 return
                             }
                             failClosure(info?.message)

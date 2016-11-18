@@ -195,6 +195,7 @@ class WOWController: WOWBaseModuleVC {
         let params = ["pageId": 1, "region": 1]
        
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
+             WOWHud.dismiss()
             if let strongSelf = self{
                 
                 strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
@@ -205,8 +206,9 @@ class WOWController: WOWBaseModuleVC {
                 if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
 
                     strongSelf.tableView.reloadData()
-                    WOWHud.dismiss()
+               
                 }
+               
                
             }
         }) {[weak self] (errorMsg) in

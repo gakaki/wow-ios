@@ -80,7 +80,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
                     
                 case 801:
                      singProductArray.append(t)
-                case 701,601,101,102,402:
+                case 701,601,101,102,402,901,1001:
                     print("")
                 default:
                     // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
@@ -266,4 +266,12 @@ extension WOWBaseModuleVC:Cell_302_Delegate{
     }
 
     
+}
+extension WOWBaseModuleVC:WOWHotColumnDelegate{
+    func goToArticleListVC(_ columntId: Int?) {
+        
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

@@ -7,20 +7,27 @@
 //
 
 import UIKit
-
-class WOWHotPeopleCell: UITableViewCell {
-
+// 人气标签 热门标签
+class WOWHotPeopleCell: UITableViewCell,ModuleViewElement {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 1001
+    }
+//    var tagArr:[WOWHomeHot_1001_title]!
+    
     @IBOutlet weak var tagListView: TagListView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         tagListView.textFont = UIFont.systemFont(ofSize: 14)
-        for i in 0..<30 {
-            
-            tagListView.addTag("aaaaa")
+        
+    }
+    func showData(_ tagArr:[WOWHomeHot_1001_title])  {
+        tagListView.removeAllTags()
+        for m in tagArr{
+            tagListView.addTag(m.name ?? "")
         }
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

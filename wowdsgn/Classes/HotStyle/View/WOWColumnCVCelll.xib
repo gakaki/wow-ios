@@ -43,6 +43,10 @@
                 <constraint firstItem="Fnx-6H-tJ9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hXA-RC-sR7"/>
                 <constraint firstItem="Fnx-6H-tJ9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hwB-ea-T4u"/>
             </constraints>
+            <connections>
+                <outlet property="imgIcon" destination="Fnx-6H-tJ9" id="22D-Ep-7O2"/>
+                <outlet property="lbTitle" destination="kW0-TJ-Kj0" id="2i9-Ws-Jkg"/>
+            </connections>
             <point key="canvasLocation" x="-256" y="-123"/>
         </collectionViewCell>
     </objects>

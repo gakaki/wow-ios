@@ -16,11 +16,15 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleContentProduct    :  WOWHomeProduct_402_Info? // 自定义产品组
     var moduleAdditionalInfo    :  WOWHomeAdditionalInfo? // 配置信息～
     
+    var moduleContentTitle      :  WOWHomeHot_1001_title? // 精选页hot标签
+    
+    
+   
+    
     var moduleContentTmp        :AnyObject?
-    
     var moduleContentArr        :  [WowModulePageItemVO]?
+
     
-//    var moduleClassName : String?
     var name:String?
     
     
@@ -36,7 +40,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     }
     
     func mapping(map: Map) {
-        moduleType    <- map["moduleType"]
+        moduleType                  <- map["moduleType"]
        
         switch moduleType! {
         case 101://顶部轮播
@@ -60,6 +64,9 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         case 801:// 今日单品
             moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
             moduleContentProduct        <- map["moduleContent"]
+        case 901,1001:// 1001--hot标签，901--尖叫栏目
+            moduleContentTitle          <- map["moduleContent"]
+            
         case 301,302,501,201,401:// 今日单品
 //            moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
             moduleContentTmp        <- map["moduleContent"]
@@ -112,6 +119,28 @@ class WOWHomeProduct_402_Info: WOWBaseModel,Mappable {
         name                <- map["name"]
         products            <- map["products"]
         
+    }
+    
+}
+// 1001， 901 都可以用
+class WOWHomeHot_1001_title: WOWBaseModel,Mappable {
+    // 701  imageUrl:背景图片地址  title：标题
+    var id                      :       Int?
+    var name                    :       String?
+    var icon                    :       String?
+    var tags                    :       [WOWHomeHot_1001_title]?
+    var columns                 :       [WOWHomeHot_1001_title]?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id                  <- map["id"]
+        name                <- map["name"]
+        icon                <- map["icon"]
+        tags                <- map["tags"]
+        columns             <- map["columns"]
     }
     
 }

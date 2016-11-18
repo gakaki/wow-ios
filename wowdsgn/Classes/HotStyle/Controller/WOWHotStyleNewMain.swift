@@ -44,7 +44,7 @@ class WOWHotStyleNewMain: WOWBaseViewController {
         super.request()
         var params = [String: AnyObject]()
         
-        params = ["pageId": 3 as AnyObject]
+        params = ["pageId": 4 as AnyObject]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
@@ -142,9 +142,6 @@ extension WOWHotStyleNewMain:WOWHotColumnDelegate{
     func goToArticleListVC(_ productId: Int?) {
         
         let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
-        //                vc.hideNavigationBar = true
-//        vc.topic_id = model.moduleContentList?.id ?? 0
-//        vc.delegate = self.vc as! WOWHotStyleDelegate?
         
         navigationController?.pushViewController(vc, animated: true)
     }

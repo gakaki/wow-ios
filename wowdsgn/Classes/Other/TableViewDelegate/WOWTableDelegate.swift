@@ -60,7 +60,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         if  let send_obj =  sender.object as? [String:AnyObject] {
             
             bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
-            
+    
             for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
                 let model = dataSourceArray[j]
                 model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
@@ -113,6 +113,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             switch type {
             case 301,401,801:// AutoLayout 不完整，给指定数
                 return getCellHeight(section)
+            
             default:
                 return tableView.fd_heightForCell(withIdentifier: identifier , configuration: { (cell) in
                     
@@ -297,6 +298,22 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             cell.setData(model.moduleContentArr ?? [WowModulePageItemVO]())
             cell_heights[section]  = cell.heightAll
             cell.bringSubview(toFront: cell.collectionView)
+            returnCell = cell
+            
+        case WOWHotColumnCell.cell_type():
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotColumnCell", for: indexPath) as! WOWHotColumnCell
+            cell.delegate = self.vc as? WOWHotColumnDelegate
+            cell.dataArr = model.moduleContentTitle?.columns
+            returnCell = cell
+            
+        case WOWHotPeopleCell.cell_type():
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotPeopleCell", for: indexPath) as! WOWHotPeopleCell
+            
+            if let arr = model.moduleContentTitle?.tags{
+                cell.showData(arr)
+            }
             
             returnCell = cell
             
@@ -365,7 +382,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 case 302:
                     
                     return 15
-                    
+                case 901:
+                    return 55
                 default:
                     
                     return CGFloat.leastNormalMagnitude
@@ -403,6 +421,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 case 401:
                     isHiddenLien = true
                     t           = model.name ?? "本周上新"
+                case 901:
+                    return hearderColumnView()
                 default:
                     isHiddenLien = false
                     t = ""
@@ -431,7 +451,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
         
     }
-    
+    // 底层 wowdsgn 页脚
     func footerView() -> UIView {
         
         let view = WOWDSGNFooterView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70.h))
@@ -439,9 +459,18 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         return view
         
     }
+    // 首页 底部列表头部
     func hearderView() -> UIView { // 137 37
         
         let view = WOWHearderView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70))
+        return view
+        
+    }
+    // 尖叫栏目头部
+    func hearderColumnView() -> UIView { // 137 37
+        
+        let view = Bundle.main.loadNibNamed("WOWHotHeaderView", owner: self, options: nil)?.last as! WOWHotHeaderView
+        
         return view
         
     }

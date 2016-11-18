@@ -41,43 +41,27 @@ class WOWHotStyleMain: WOWBaseModuleVC {
         dataDelegate?.tableView = tableView
         
     }
-    //  // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
-    func screenConfigModule() {
-        for model in self.dataArr {
-            switch model.moduleType ?? 0 {
-            case 701:
-                break
-            default:
-                
-                self.dataArr.removeObject(model)
-            }
-        }
-    }
-
     override func request() {
         super.request()
         var params = [String: AnyObject]()
         
-        params = ["pageId": 3 as AnyObject]
+        params = ["pageId": 4 as AnyObject]
 
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self](result, code) in
+             WOWHud.dismiss()
+            
             if let strongSelf = self{
-                
-                
-                let json = JSON(result)
-                DLog(json)
                 strongSelf.endRefresh()
+                strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
                 
-                let bannerList = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
-                
-                if let brandArray = bannerList{
+                if let brandArray =  strongSelf.dataDelegate?.dataSourceArray{
+                    
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
-                    strongSelf.screenConfigModule()
+                
                 }
-                strongSelf.dataDelegate?.dataSourceArray = strongSelf.dataArr
                 strongSelf.tableView.reloadData()
-                    WOWHud.dismiss()
+               
 
                 
             }

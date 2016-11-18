@@ -20,6 +20,8 @@ struct ModulePageType {
     static let PAGE_MODULE_TYPE_PROJECT                         = 102;	  //    专题左右滑动列表
     static let PAGE_MODULE_TYPE_SING_PRODUCT                    = 801;	  //    今日单品倒计时
     static let PAGE_MODULE_TYPE_HOT_STYLE                       = 701;	  //    精选页点赞cell
+    static let PAGE_MODULE_TYPE_HOT_COLUMN                      = 901;	  //    尖叫栏目
+    static let PAGE_MODULE_TYPE_HOT_PEOPLE                      = 1001;	  //    人气标签，热门标签
     static let d = [
 
         PAGE_MODULE_TYPE_CAROUSEL 					: HomeBrannerCell.classForCoder(), //轮播 101 banner
@@ -32,8 +34,9 @@ struct ModulePageType {
         PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: WOWHomeFormCell.classForCoder(),            //601 专题商品列表
         PAGE_MODULE_TYPE_PROJECT                    : Cell_102_Project.classForCoder(),// 专题左右滑动cell
         PAGE_MODULE_TYPE_SING_PRODUCT               : Cell_801_Product.classForCoder(),// 今日单品倒计时
-        PAGE_MODULE_TYPE_HOT_STYLE                  : WOWHotStyleCell.classForCoder()// 精选页点赞cell
-        
+        PAGE_MODULE_TYPE_HOT_STYLE                  : WOWHotStyleCell.classForCoder(),// 精选页点赞cell
+        PAGE_MODULE_TYPE_HOT_COLUMN                 : WOWHotColumnCell.classForCoder(),// 精选页点赞cell
+        PAGE_MODULE_TYPE_HOT_PEOPLE                 : WOWHotPeopleCell.classForCoder()// 精选页点赞cell
     ]
     // 通过type获取classname
     static func getIdentifier( _ id:Int ) -> String {

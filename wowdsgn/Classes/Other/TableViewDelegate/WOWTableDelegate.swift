@@ -103,32 +103,32 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             return CGFloat.leastNormalMagnitude
         }
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        let section     = (indexPath as NSIndexPath).section
-        if section < dataSourceArray.count {
-            let model = dataSourceArray[section]
-            let type = model.moduleType ?? 0
-            let identifier  = ModulePageType.getIdentifier(type)
-            switch type {
-            case 301,401,801:// AutoLayout 不完整，给指定数
-                return getCellHeight(section)
-            
-            default:
-                return tableView.fd_heightForCell(withIdentifier: identifier , configuration: { (cell) in
-                    
-                })
-            }
-            
-        }else{
-            
-            return tableView.fd_heightForCell(withIdentifier: "HomeBottomCell" , configuration: { (cell) in
-                
-            })
-        }
-        
-        
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        
+//        let section     = (indexPath as NSIndexPath).section
+//        if section < dataSourceArray.count {
+//            let model = dataSourceArray[section]
+//            let type = model.moduleType ?? 0
+//            let identifier  = ModulePageType.getIdentifier(type)
+//            switch type {
+//            case 301,401,801:// AutoLayout 不完整，给指定数
+//                return getCellHeight(section)
+//            
+//            default:
+//                return tableView.fd_heightForCell(withIdentifier: identifier , configuration: { (cell) in
+//                    
+//                })
+//            }
+//            
+//        }else{
+//            
+//            return tableView.fd_heightForCell(withIdentifier: "HomeBottomCell" , configuration: { (cell) in
+//                
+//            })
+//        }
+//        
+//        
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section < dataSourceArray.count {

@@ -1,19 +1,22 @@
 //
-//  WOWProductDetailCell.swift
-//  wowapp
+//  WOWContentDetailCell.swift
+//  wowdsgn
 //
-//  Created by 安永超 on 16/7/28.
-//  Copyright © 2016年 小黑. All rights reserved.
+//  Created by 安永超 on 16/11/21.
+//  Copyright © 2016年 g. All rights reserved.
 //
 
 import UIKit
 
-class WOWProductDetailCell: UITableViewCell {
+class WOWContentDetailCell: UITableViewCell {
     @IBOutlet weak var productImg:UIImageView!
+    @IBOutlet weak var imageDesc: UILabel!
     @IBOutlet weak var space: NSLayoutConstraint!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var aspect: NSLayoutConstraint!
     @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var midSpace: NSLayoutConstraint!
+    
     
     //内容图片的宽高比约束
     internal var aspectConstraint : NSLayoutConstraint? {
@@ -24,7 +27,7 @@ class WOWProductDetailCell: UITableViewCell {
             }
             if aspectConstraint != nil {
                 LayoutConstraint.activate([aspectConstraint!])
-
+                
             }
         }
     }
@@ -33,15 +36,15 @@ class WOWProductDetailCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-    func showData(_ secondaryImg: WOWProductPicTextModel?) {
+    func showData(_ secondaryImg: WOWImages?) {
         if let secondaryImg = secondaryImg {
-            if let img = secondaryImg.image {
+            if let img = secondaryImg.url {
                 if img.isEmpty {
                     self.productImg.isHidden = true
                     aspectConstraint = NSLayoutConstraint(item: self.productImg,
@@ -49,7 +52,7 @@ class WOWProductDetailCell: UITableViewCell {
                                                           toItem: self.productImg, attribute: .height,
                                                           multiplier: 1000 , constant: 0.0)
                     space.constant = -7
-
+                    
                 }else {
                     self.productImg.isHidden = false
                     aspectConstraint = NSLayoutConstraint(item: self.productImg,
@@ -59,8 +62,9 @@ class WOWProductDetailCell: UITableViewCell {
                     
                     //                productImg.set_webimage_url(img)
                     productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
+                    aspect.constant = 0
                     space.constant = 8
-
+                    
                 }
                 
             }else {
@@ -71,25 +75,36 @@ class WOWProductDetailCell: UITableViewCell {
                                                       multiplier: 1000 , constant: 0.0)
                 space.constant = -7
             }
-            if let text = secondaryImg.text {
+            if let text = secondaryImg.desc {
                 descLabel.text = text
                 if text == "" {
                     bottomSpace.constant = 7
-
                 }else {
                     bottomSpace.constant = 15
                 }
             }else {
                 descLabel.text = ""
                 bottomSpace.constant = 7
-
+                
             }
-//            imgDescLabel.text = secondaryImg.text
-//            if secondaryImg.text == "" {
-//                bottomSpace.constant = 7
-//            }else {
-//                bottomSpace.constant = 15
-//            }
+            if let text = secondaryImg.note {
+                imageDesc.text = text
+                if text == "" {
+                    midSpace.constant = 0
+                }else {
+                    midSpace.constant = 8
+                }
+            }else {
+                imageDesc.text = ""
+                midSpace.constant = 0
+                
+            }
+            //            imgDescLabel.text = secondaryImg.text
+            //            if secondaryImg.text == "" {
+            //                bottomSpace.constant = 7
+            //            }else {
+            //                bottomSpace.constant = 15
+            //            }
             descLabel.setLineHeightAndLineBreak(1.5)
         }
     }
@@ -98,5 +113,4 @@ class WOWProductDetailCell: UITableViewCell {
         //清除内容图片的宽高比约束
         aspectConstraint = nil
     }
-
 }

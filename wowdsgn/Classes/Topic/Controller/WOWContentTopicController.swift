@@ -23,7 +23,7 @@ class WOWContentTopicController: WOWBaseViewController {
     var vo_products             = [WOWProductModel]()
     //param
     var topic_id: Int           = 1
-    var vo_topic:WOWModelVoTopic?
+    var vo_topic:WOWContentTopicModel?
     var imgUrlArr = [String]()
     let maxLength = 140
     let minLength = 3
@@ -118,7 +118,7 @@ class WOWContentTopicController: WOWBaseViewController {
     func zdClick() -> Void {
 
         let shareUrl = WOWShareUrl + "/topic/\(topic_id )"
-        WOWShareManager.share(vo_topic?.topicMainTitle, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        WOWShareManager.share(vo_topic?.topicName, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
 
         
     }
@@ -145,9 +145,9 @@ class WOWContentTopicController: WOWBaseViewController {
     fileprivate func configData(){
         configBarItem()
         imgUrlArr = [String]()
-        for  aa:WOWProductPicTextModel in vo_topic?.imageSerial?.records ?? [WOWProductPicTextModel](){
+        for  aa:WOWImages in vo_topic?.images ?? [WOWImages](){
             
-            if let imgStr = aa.image{
+            if let imgStr = aa.url{
                 if !imgStr.isEmpty {
                     imgUrlArr.append(imgStr)
 
@@ -232,7 +232,7 @@ class WOWContentTopicController: WOWBaseViewController {
             if let strongSelf = self{
                 DLog(result)
                 let r                                     =  JSON(result)
-                strongSelf.vo_topic                       =  Mapper<WOWModelVoTopic>().map( JSONObject:r.object )
+                strongSelf.vo_topic                       =  Mapper<WOWContentTopicModel>().map( JSONObject:r.object )
                 let imgView = UIImageView()
                 imgView.kf.setImage(
                     with: URL(string:strongSelf.vo_topic!.topicImg ?? "" )!,
@@ -320,7 +320,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         tableView.mj_header = self.mj_header
         //显示价格的cell
         tableView.register(UINib.nibName(String(describing: WOWContentTopicTopCell.self)), forCellReuseIdentifier:String(describing: WOWContentTopicTopCell.self))
-        tableView.register(UINib.nibName(String(describing: WOWProductDetailCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWContentDetailCell.self)), forCellReuseIdentifier:String(describing: WOWContentDetailCell.self))
         tableView.register(UINib.nibName(String(describing: WOWTopicTagCell.self)), forCellReuseIdentifier:String(describing: WOWTopicTagCell.self))
         //评论
         tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:String(describing: WOWCommentCell.self))
@@ -337,7 +337,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 1:
-            return vo_topic?.imageSerial?.records?.count ?? 0
+            return vo_topic?.images?.count ?? 0
         default:
             return 1
         }
@@ -352,12 +352,12 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             cell.showData(vo_topic)
             returnCell = cell
         case (1,_): //产品描述
-            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell.self), for: indexPath) as! WOWProductDetailCell
-            if let array = vo_topic?.imageSerial?.records {
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentDetailCell.self), for: indexPath) as! WOWContentDetailCell
+            if let array = vo_topic?.images {
                 let model = array[(indexPath as NSIndexPath).row]
                 cell.showData(model)
                 for imgStr in imgUrlArr.enumerated() {
-                    if imgStr.element == model.image {
+                    if imgStr.element == model.url {
                         cell.productImg.tag = imgStr.offset
                         cell.productImg.addTapGesture(action: {[weak self] (tap) in
                             if let strongSelf = self {
@@ -465,9 +465,9 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
     func setPhoto() -> [PhotoModel] {
         var photos: [PhotoModel] = []
         imgUrlArr = [String]()
-        for  aa:WOWProductPicTextModel in vo_topic?.imageSerial?.records ?? [WOWProductPicTextModel](){
+        for  aa:WOWImages in vo_topic?.images ?? [WOWImages](){
             
-            if let imgStr = aa.image{
+            if let imgStr = aa.url{
                 if !imgStr.isEmpty {
                     imgUrlArr.append(imgStr)
                     let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)

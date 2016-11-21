@@ -13,6 +13,7 @@ class WOWContentTopicTopCell: UITableViewCell {
     @IBOutlet weak var topicImg: UIImageView!
     @IBOutlet weak var topicTitle: UILabel!
     @IBOutlet weak var topicDesc: UILabel!
+    @IBOutlet weak var publicTime: UILabel!
     @IBOutlet weak var aspect: NSLayoutConstraint!
     
     //内容图片的宽高比约束
@@ -39,7 +40,7 @@ class WOWContentTopicTopCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func showData(_ model: WOWModelVoTopic?) {
+    func showData(_ model: WOWContentTopicModel?) {
         if let model = model {
             if let img = model.topicImg {
                 topicImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
@@ -63,7 +64,7 @@ class WOWContentTopicTopCell: UITableViewCell {
       
 
 //            topicImg.set_webimage_url(model.topicImg)
-            topicTitle.text = model.topicMainTitle
+            topicTitle.text = model.topicName
             topicDesc.text = model.topicDesc
             topicDesc.setLineHeightAndLineBreak(1.5)
         }

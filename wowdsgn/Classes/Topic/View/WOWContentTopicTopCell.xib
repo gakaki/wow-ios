@@ -95,6 +95,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="aspect" destination="4r3-hH-msF" id="Znb-2Y-vLl"/>
+                <outlet property="publicTime" destination="cys-jS-OaJ" id="bL5-vg-NAZ"/>
                 <outlet property="topicDesc" destination="Bx0-9A-5J2" id="SCa-Vu-3cE"/>
                 <outlet property="topicImg" destination="hpX-iz-6Aa" id="2aa-UJ-5tT"/>
                 <outlet property="topicTitle" destination="gzM-CY-eO3" id="mAP-Ta-vtM"/>

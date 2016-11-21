@@ -419,7 +419,8 @@ extension RequestApi:TargetType{
             .api_Category_subCategory_with_image,
             .api_Category_V2,
             .api_Category_path_category,
-            .api_AD:
+            .api_AD,
+            .api_TopicCommentList:
             return .GET
 
         default:

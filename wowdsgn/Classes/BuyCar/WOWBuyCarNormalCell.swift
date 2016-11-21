@@ -60,6 +60,10 @@ class WOWBuyCarNormalCell: UITableViewCell{
             tagList.removeAllTags()
             for attribute in attributes {
                 tagList.addTag(attribute)
+                tagList.addTag("爱上了房间八日额偶飞吧几点上班阿里山的积分八点就开放")
+                tagList.addTag("爱上了房间八日额偶飞吧几点上班阿里山的积分八点就开放")
+                tagList.addTag("爱上了房间八日额偶飞吧几点上班阿里山的积分八点就开放")
+
             }
         }
         

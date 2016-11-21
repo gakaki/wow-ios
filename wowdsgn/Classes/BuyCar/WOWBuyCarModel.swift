@@ -78,6 +78,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var isPromotion                         : Bool?
     var specName                            : String?
     var attributes                          : [String]?
+    var limitQty                            : Int?
+    var pricePromotionTag                   : String?
     
     required init?(map: Map) {
         
@@ -102,6 +104,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         isPromotion                          <- map["isPromotion"]
         specName                             <- map["specName"]
         attributes                           <- map["attributes"]
+        limitQty                             <- map["limitQty"]
+        pricePromotionTag                    <- map["pricePromotionTag"]
     }
     
 }

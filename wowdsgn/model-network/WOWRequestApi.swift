@@ -101,7 +101,7 @@ public enum RequestApi{
     case api_CartUnSelect(shoppingCartIds: [Int])
     
     
-    case api_CommentList(pageindex:String,thingid:Int,type:String)
+    case api_TopicCommentList(pageSize: Int, currentPage: Int, topicId: Int)
     
     case api_Change(param:[String:String])
     
@@ -179,7 +179,7 @@ public enum RequestApi{
     
     case api_StoreHome
     
-    case api_SubmitComment(uid:String,comment:String,thingid:Int,type:String)
+    case api_SubmitTopicComment(topicId:Int,content:String)
 
     
     case api_Sms(type:String,mobile:String) //type = 1注册  type = 2更改验证码
@@ -279,10 +279,10 @@ extension RequestApi:TargetType{
             return URL_ProductDesigner
         case .api_DesignerList:
             return URL_DesignerList
-        case .api_CommentList:
-            return URL_CommentList
-        case .api_SubmitComment:
-            return URL_SubmitComment
+        case .api_TopicCommentList:
+            return URL_TopicCommentList
+        case .api_SubmitTopicComment:
+            return URL_SubmitTopicComment
         //购物车相关
         case .api_CartModify:
             return URL_CartModify
@@ -466,10 +466,10 @@ extension RequestApi:TargetType{
                 params = ["productId":productId]
             case let .api_ProductSpec(productId):
                 params = ["productId":productId]
-            case let .api_CommentList(pageindex,thingid,type):
-                params = ["pageindex":pageindex,"thingid":thingid,"type":type]
-            case let .api_SubmitComment(uid,comment,thingid,type):
-                params =  ["uid":uid,"thingid":thingid,"comment":comment,"type":type]
+            case let .api_TopicCommentList(pageSize,currentPage,topicId):
+                params = ["pageSize": pageSize, "currentPage": currentPage, "topicId": topicId]
+            case let .api_SubmitTopicComment(topicId,content):
+                params =  ["topicId":topicId,"content":content]
             case let .api_UserUpdate(param):
                 params =  param
             case let .api_UserFavorite(uid,type,pageindex):
@@ -622,7 +622,7 @@ extension RequestApi:TargetType{
             return "登录成功"
         case .api_Register:
             return "注册成功"
-        case .api_SubmitComment:
+        case .api_SubmitTopicComment:
             return "评论成功"
         case .api_Sms:
             return "验证码发送成功"

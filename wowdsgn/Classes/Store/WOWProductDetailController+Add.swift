@@ -21,6 +21,10 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.tableHeaderView = cycleView   //banner轮播
         //显示价格的cell
         tableView.register(UINib.nibName(String(describing: WOWProductDetailPriceCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailPriceCell.self))
+        //促销标签
+        tableView.register(UINib.nibName(String(describing: WOWProductLimitCell.self)), forCellReuseIdentifier:String(describing: WOWProductLimitCell.self))
+        //产品包邮说明
+        tableView.register(UINib.nibName(String(describing: WOWProductDesCell.self)), forCellReuseIdentifier:String(describing: WOWProductDesCell.self))
         //品牌故事
         tableView.register(UINib.nibName(String(describing: WOWProductDetailDescCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailDescCell.self
         ))
@@ -43,15 +47,15 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 2:
+        case 3 + isHaveLimit:
             return productModel?.secondaryImgs?.count ?? 0
-        case 3: //产品参数可展开
+        case 4 + isHaveLimit: //产品参数可展开
             if isOpenParam {
                 return productModel?.productParameter?.count ?? 0
             }else {
                 return 0
             }
-        case 4: //温馨提示也可展开
+        case 5 + isHaveLimit: //温馨提示也可展开
             if isOpenTips {
                 return 1
             }else {
@@ -69,11 +73,17 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailPriceCell.self), for: indexPath) as! WOWProductDetailPriceCell
             cell.showData(productModel)
             returnCell = cell
-        case (1,_): //品牌设计师
+        case (0 + isHaveLimit,_): //促销标签
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductLimitCell.self), for: indexPath) as! WOWProductLimitCell
+            returnCell = cell
+        case (1 + isHaveLimit,_): //满199包邮
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDesCell.self), for: indexPath) as! WOWProductDesCell
+            returnCell = cell
+        case (2 + isHaveLimit,_): //品牌设计师
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailDescCell.self), for: indexPath) as! WOWProductDetailDescCell
             cell.showData(self.productModel)
             returnCell = cell
-        case (2,_): //产品描述
+        case (3 + isHaveLimit,_): //产品描述
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell.self), for: indexPath) as! WOWProductDetailCell
             if let array = productModel?.secondaryImgs {
                 let model = array[(indexPath as NSIndexPath).row]
@@ -88,7 +98,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             }
             
             returnCell = cell
-        case (3,_): //参数
+        case (4 + isHaveLimit,_): //参数
             
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductParamCell.self), for: indexPath) as! WOWProductParamCell
             
@@ -97,15 +107,15 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             }
             
             returnCell = cell
-        case (4,_)://温馨提示
+        case (5 + isHaveLimit,_)://温馨提示
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailTipsWebViewCell", for: indexPath) as! WOWProductDetailTipsWebViewCell
             returnCell = cell
-        case (5,_): //客服电话
+        case (6 + isHaveLimit,_): //客服电话
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
             
             returnCell = cell
-        case (6,_)://相关商品
+        case (7 + isHaveLimit + isHaveAbout + isHaveComment,_)://相关商品
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailAboutCell", for: indexPath) as! WOWProductDetailAboutCell
             cell.delegate = self
             cell.dataArr = aboutProductArray
@@ -125,13 +135,13 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 2:
+        case 3 + isHaveLimit:
             //动态获取产品描述的label高度
             return 67 + productDescView.productDescLabel.getEstimatedHeight()
-        case 3,4:
+        case 4 + isHaveLimit, 5 + isHaveLimit:
             //产品参数与温馨提示cell头
             return 60
-        case 6: //如果相关商品有数据显示，如果没有就不显示
+        case 7 + isHaveLimit + isHaveAbout + isHaveAbout: //如果相关商品有数据显示，如果没有就不显示
             if aboutProductArray.count > 0 {
                 return 39
             }else {
@@ -144,13 +154,17 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 3:
+        case 0:
+            return 0.01
+        case 0 + isHaveLimit:
+            return 0.01
+        case 4 + isHaveLimit:
             if isOpenParam {
                 return 20
             }else {
                 return 0.01
             }
-        case 5:
+        case 6 + isHaveLimit:
             return 0.01
         default:
             return 15
@@ -174,9 +188,9 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 2:     //产品描述
+        case 3 + isHaveLimit:     //产品描述
             return productDescView
-        case 3:
+        case 4 + isHaveLimit:
             paramView.label.text = "产品参数"
             paramView.openImg.addTapGesture(action: { [weak self](tap) in
                 if let strongSelf = self  {
@@ -187,7 +201,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return paramView
-        case 4:
+        case 5 + isHaveLimit:
             tipsView.label.text = "温馨提示"
             tipsView.openImg.addTapGesture(action: { [weak self](tap) in
                 if let strongSelf = self  {
@@ -198,7 +212,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return tipsView
-        case 6:
+        case 7 + isHaveLimit + isHaveAbout + isHaveComment:
             return aboutView
         default:
             return nil
@@ -210,7 +224,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         
         let view = UIView()
         view.backgroundColor = UIColor.clear
-        if section == 3 {
+        if section == 4 + isHaveLimit {
             view.backgroundColor = UIColor.white
         }
         return view
@@ -219,7 +233,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath as NSIndexPath).section {
-        case 5:
+        case 6 + isHaveLimit:
             WOWTool.callPhone()
         default:
             break

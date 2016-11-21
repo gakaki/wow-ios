@@ -115,7 +115,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
             
             returnCell = cell
-        case (7 + isHaveLimit + isHaveAbout + isHaveComment,_)://相关商品
+        case (6 + isHaveLimit + isHaveAbout + isHaveComment,_)://相关商品
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailAboutCell", for: indexPath) as! WOWProductDetailAboutCell
             cell.delegate = self
             cell.dataArr = aboutProductArray

@@ -41,7 +41,7 @@ let URL_scene                   = "v1/scene"
 let URL_senceDetail             = "v1/scene/detail"
 
 //1.1 专题
-let URL_topic                   = "v1/topic"
+let URL_topic                   = "v2/topic"
 let URL_topic_product           = "v2/topic/product"
 
 

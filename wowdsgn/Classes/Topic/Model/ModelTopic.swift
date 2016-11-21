@@ -93,3 +93,101 @@ class WOWImageSerial: WOWBaseModel, Mappable {
         records         <- map["records"]
     }
 }
+
+class WOWContentTopicModel: WOWBaseModel,Mappable {
+    var topicId                         :Int?
+    var columnId                        :Int?
+    var columnName                      :String?
+    var topicName                   :String?
+    var topicImg                    :String?
+    var topicDesc                   :String?
+    var images                      :[WOWImages]?
+    var products                    :[WOWProductModel]?
+    var likeQty                     :Int?
+    var publishTime                 :Int?
+    var allowComment                : Bool?
+    var favorite                    : Bool?
+    var imageAspect:CGFloat = 0
+    
+    required init?(map: Map) {
+        
+        
+    }
+    
+    func mapping(map: Map) {
+        topicId                 <- map["id"]
+        columnId                <- map["columnId"]
+        columnName              <- map["columnName"]
+        topicName               <- map["topicName"]
+        topicImg                <- map["topicImg"]
+        topicDesc               <- map["topicDesc"]
+        images                  <- map["images"]
+        products                <- map["products"]
+        likeQty                 <- map["likeQty"]
+        publishTime             <- map["publishTime"]
+        allowComment            <- map["allowComment"]
+        favorite                <- map["favorite"]
+        
+        if imageAspect == 0 {
+            //            calImageHeight()
+        }
+        
+    }
+    func calImageHeight(){
+        //定义NSURL对象
+        let url = NSURL(string: topicImg ?? "")
+        if let url = url {
+            DispatchQueue.global(qos: .background).async {
+                if let data = NSData(contentsOf: url as URL), let image = UIImage(data: data as Data) {
+                    //计算原始图片的宽高比
+                    self.imageAspect = image.size.width / image.size.height
+                    //            //设置imageView宽高比约束
+                    //            //加载图片
+                    //
+                    
+                }
+            }
+            
+            
+        }
+        
+    }
+}
+class WOWImages: WOWBaseModel, Mappable {
+    var url:           String?
+    var note:           String?
+    var desc:           String?
+    var imageAspect:CGFloat = 0
+
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        url             <- map["url"]
+        note            <- map["note"]
+        desc            <- map["desc"]
+        if imageAspect == 0 {
+            calImageHeight()
+        }
+    }
+    func calImageHeight(){
+        //定义NSURL对象
+        let url = NSURL(string: self.url ?? "")
+        if let url = url {
+            DispatchQueue.global(qos: .background).async {
+                if let data = NSData(contentsOf: url as URL), let image = UIImage(data: data as Data) {
+                    //计算原始图片的宽高比
+                    self.imageAspect = image.size.width / image.size.height
+                    //            //设置imageView宽高比约束
+                    //            //加载图片
+                    //
+                    
+                }
+            }
+        }
+        
+        
+    }
+}

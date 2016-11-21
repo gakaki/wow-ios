@@ -65,9 +65,9 @@ let URL_product_detail          = "v2/product"
 //产品图文详情
 let URL_Product_imageDetail     = "v1/product/images/detail"
 //2.4发表评论
-let URL_SubmitComment           = "v1/comment/add"
+let URL_SubmitTopicComment           = "v1/topic/comments"
 //2.5评论列表
-let URL_CommentList             = "v1/comment"
+let URL_TopicCommentList             = "v1/topic/comments"
 
 let URL_ProductSpec             = "v2/product/spec"    //选择产品颜色规格
 

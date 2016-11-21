@@ -194,9 +194,9 @@ open class TagListView: UIView {
     // MARK: - Interface Builder
     
     open override func prepareForInterfaceBuilder() {
-       _ = addTag("Welcome")
-       _ = addTag("to")
-           addTag("TagListView").isSelected = true
+//       _ = addTag("Welcome")
+//       _ = addTag("to")
+//           addTag("TagListView").isSelected = true
     }
     
     // MARK: - Layout
@@ -220,6 +220,9 @@ open class TagListView: UIView {
         var currentRowWidth: CGFloat = 0
         for (index, tagView) in tagViews.enumerated() {
             tagView.frame.size = tagView.intrinsicContentSize
+            if tagView.frame.size.width > self.frame.size.width {
+                tagView.frame.size.width = self.frame.size.width
+            }
             tagViewHeight = tagView.frame.height
             
             if currentRowTagCount == 0 || currentRowWidth + tagView.frame.width > frame.width {
@@ -293,6 +296,7 @@ open class TagListView: UIView {
         tagView.removeButtonIconSize = removeButtonIconSize
         tagView.enableRemoveButton = enableRemoveButton
         tagView.removeIconLineColor = removeIconLineColor
+        tagView.titleLabel?.lineBreakMode = .byTruncatingTail
         tagView.addTarget(self, action: #selector(TagListView.tagPressed(_:)), for: .touchUpInside)
         tagView.removeButton.addTarget(self, action: #selector(TagListView.removeButtonPressed(_:)), for: .touchUpInside)
         

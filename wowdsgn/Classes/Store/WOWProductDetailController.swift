@@ -19,6 +19,9 @@ class WOWProductDetailController: WOWBaseViewController {
     
     var noMoreData                      :Bool = true
     fileprivate(set) var numberSections = 0
+    var isHaveLimit = 0  //是否有促销
+    var isHaveComment = 0   //是否有评论
+    var isHaveAbout = 0 //是否有相关产品
     let pageSize = 6
     //UI
     @IBOutlet weak var tableView: UITableView!
@@ -151,13 +154,13 @@ class WOWProductDetailController: WOWBaseViewController {
     //初始化数据，商品banner
     fileprivate func configData(){
         //如果相关商品有数据显示。如果没有数据则不显示
-        if aboutProductArray.count > 0 {
-            //详情页共分为7组数据
-            numberSections = 7
-        }else {
-            numberSections = 6
-        }
-        
+//        if aboutProductArray.count > 0 {
+//            //详情页共分为7组数据
+//            numberSections = 7
+//        }else {
+//            numberSections = 6
+//        }
+        numberSections = 7 + isHaveLimit + isHaveComment + isHaveAbout
         //产品描述说明
         productDescView.productDescLabel.text = productModel?.detailDescription
         productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)
@@ -358,7 +361,11 @@ class WOWProductDetailController: WOWBaseViewController {
                 
                 if let array = arr{
                     strongSelf.aboutProductArray = array
-                    
+                    if array.count > 0 {
+                        strongSelf.isHaveAbout = 1
+                    }else {
+                        strongSelf.isHaveAbout = 0
+                    }
                 }
                 //初始化详情页数据
                 strongSelf.configData()

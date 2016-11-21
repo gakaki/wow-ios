@@ -173,7 +173,9 @@ open class TagView: UIButton {
         size.width += paddingX * 2
         if enableRemoveButton {
             size.width += removeButtonIconSize + paddingX
+            
         }
+
         return size
     }
     

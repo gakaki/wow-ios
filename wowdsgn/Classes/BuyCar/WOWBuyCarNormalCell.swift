@@ -24,6 +24,9 @@ class WOWBuyCarNormalCell: UITableViewCell{
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var tagList: TagListView!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var limitView: UIView!
+    @IBOutlet weak var limitTagLabel: UILabel!
+    @IBOutlet weak var topHeight: NSLayoutConstraint!
     let identifier = "WOWTypeCollectionCell"
     var typeArr = [String]()
     var model:WOWCarProductModel!
@@ -62,7 +65,17 @@ class WOWBuyCarNormalCell: UITableViewCell{
                 tagList.addTag(attribute)
             }
         }
-        
+        //判断产品是否是促销产品,如果是促销产品的话打上标签
+        if model.isPromotion ?? false {
+            topHeight.constant = 30
+            limitView.isHidden = false
+            limitTagLabel.text = model.pricePromotionTag ?? ""
+        }else {
+            topHeight.constant = 15
+            limitView.isHidden = true
+            limitTagLabel.text = ""
+        }
+        //判断产品数量和库存状态
         if model.productQty < model.productStock {
             addCountButton.isEnabled = true
             addCountButton.setTitleColor(UIColor.black, for: UIControlState())

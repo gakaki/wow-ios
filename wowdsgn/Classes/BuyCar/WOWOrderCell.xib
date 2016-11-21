@@ -125,6 +125,7 @@
                     <constraint firstItem="DpN-ux-8nx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8HP-IP-CEB"/>
                     <constraint firstItem="UsK-9A-9dR" firstAttribute="top" secondItem="frD-vI-5hD" secondAttribute="bottom" constant="4" id="9d0-iN-OQS"/>
                     <constraint firstItem="l9W-So-v1s" firstAttribute="leading" secondItem="Lee-dB-Ony" secondAttribute="trailing" constant="15" id="CEb-8h-NWa"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="frD-vI-5hD" secondAttribute="trailing" constant="15" id="CYb-F0-MMh"/>
                     <constraint firstItem="DpN-ux-8nx" firstAttribute="top" secondItem="kOx-EF-W1u" secondAttribute="bottom" constant="14" id="DbQ-ij-cLo"/>
                     <constraint firstAttribute="trailing" secondItem="kOx-EF-W1u" secondAttribute="trailing" constant="15" id="JXv-bJ-RrC"/>
                     <constraint firstItem="frD-vI-5hD" firstAttribute="top" secondItem="Lee-dB-Ony" secondAttribute="top" id="QM4-gv-rIY"/>

@@ -5,14 +5,28 @@
 //  Created by 陈旭 on 2016/11/9.
 //  Copyright © 2016年 g. All rights reserved.
 //
-
+enum ControllerViewType { // 区分底部列表
+    case Home         // 首页
+    case HotStyle     // 精选页
+}
 import UIKit
 import UITableView_FDTemplateLayoutCell
 class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,CyclePictureViewDelegate {
     open var vc : UIViewController?
-    open var cell_heights            = [0:0.h]
-    open var dataSourceArray    = [WOWHomeModle]()// 主页main的数据源
+
+    open var ViewControllerType  :ControllerViewType?
+    
+    open var cell_heights    = [0:0.h]
+    open var dataSourceArray = [WOWHomeModle]()// 主页main的数据源
     open var isOverBottomData :Bool? //底部列表数据是否拿到全部
+    open var bottomHotListArray = [WOWHotStyleModel]() {//精选底部列表数组
+        didSet{
+            
+            bottomListCount = bottomHotListArray.count
+            bottomCellLine  = bottomListCount.getParityCellNumber()
+        }
+
+    }
     open var bottomListArray    = [WOWProductModel](){//底部列表数组 ,如果有底部瀑布流的话
         didSet{
             
@@ -27,7 +41,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     open var tableView :UITableView!{
 
         didSet{
-
+            self.tableView.register(UINib.nibName("WOWHotMainCell"), forCellReuseIdentifier: "WOWHotMainCell")
             self.tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
             
             for (k,c) in ModulePageType.d {
@@ -44,10 +58,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 }
             }
 
-            self.tableView.backgroundColor = GrayColorLevel5
-            self.tableView.rowHeight = UITableViewAutomaticDimension
+            self.tableView.backgroundColor    = self.vc?.view.backgroundColor
+            self.tableView.rowHeight          = UITableViewAutomaticDimension
             self.tableView.estimatedRowHeight = 410
-            self.tableView.delegate    = self
+            self.tableView.delegate           = self
             self.tableView.dataSource  = self
             NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
             
@@ -158,27 +172,39 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         var returnCell:UITableViewCell!
         let section     = (indexPath as NSIndexPath).section
         guard (indexPath as NSIndexPath).section < dataSourceArray.count  else {
-            let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBottomCell", for: indexPath) as! HomeBottomCell
-            
-            cell.indexPath = indexPath
-            
-            let OneCellNumber = ((indexPath as NSIndexPath).section  - dataSourceArray.count + 0) * 2
-            let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataSourceArray.count + 1) * 2) - 1
-            if bottomListCount.isOdd && (indexPath as NSIndexPath).section + 1 == (dataSourceArray.count) + bottomListCount.getParityCellNumber() {//  满足为奇数 第二个item 隐藏
+            switch ViewControllerType ?? .Home { // 底部列表是首页的，还是精选页的
+            case .Home:
+                let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBottomCell", for: indexPath) as! HomeBottomCell
                 
-                self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:bottomListArray)
+                cell.indexPath = indexPath
                 
-            }else{
+                let OneCellNumber = ((indexPath as NSIndexPath).section  - dataSourceArray.count + 0) * 2
+                let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataSourceArray.count + 1) * 2) - 1
+                if bottomListCount.isOdd && (indexPath as NSIndexPath).section + 1 == (dataSourceArray.count) + bottomListCount.getParityCellNumber() {//  满足为奇数 第二个item 隐藏
+                    
+                    self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:bottomListArray)
+                    
+                }else{
+                    
+                    self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:bottomListArray)
+                    
+                }
                 
-                self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:bottomListArray)
+                cell.delegate         = self.vc as! HomeBottomDelegate?
+                cell.selectionStyle   = .none
+                cell_heights[section] = cell.heightCell
+                returnCell            = cell
+                return returnCell
                 
+            default:
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotMainCell", for: indexPath) as! WOWHotMainCell
+                let sectionIndex = section - dataSourceArray.count
+                let model = bottomHotListArray[sectionIndex]
+                cell.showData(model)
+                cell.selectionStyle   = .none
+                return cell
             }
-            
-            cell.delegate = self.vc as! HomeBottomDelegate?
-            cell.selectionStyle = .none
-            cell_heights[section]  = cell.heightCell
-            returnCell = cell
-            return returnCell
             
         }
         
@@ -193,13 +219,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             cell.modelData = model.moduleContentList
             cell.showData(model: model)
-            cell.delegate = self.vc as! WOWHotStyleCellDelegate?
+            cell.delegate  = self.vc as! WOWHotStyleCellDelegate?
             cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 201:
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WOWlListCell
             
-            cell.delegate       = self.vc as! SenceCellDelegate?
+            cell.delegate = self.vc as! SenceCellDelegate?
             cell.showData(model.moduleContent!)
             cell_heights[section]  = cell.heightAll
             returnCell = cell
@@ -226,17 +252,17 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         case 102:
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
-            cell.dataArr = model.moduleContent?.banners
+            cell.dataArr      = model.moduleContent?.banners
             cell.lbTitle.text = model.moduleContent?.name ?? "专题"
-            cell.delegate = self.vc as! cell_102_delegate?
+            cell.delegate     = self.vc as! cell_102_delegate?
             cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 801:
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_801_Product
-            let array = model.moduleContentProduct?.products
+            let array            = model.moduleContentProduct?.products
             cell.dataSourceArray = array
-            cell.delegate = self.vc as! cell_801_delegate?
+            cell.delegate        = self.vc as! cell_801_delegate?
             cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 402:
@@ -304,7 +330,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotColumnCell", for: indexPath) as! WOWHotColumnCell
             cell.delegate = self.vc as? WOWHotColumnDelegate
-            cell.dataArr = model.moduleContentTitle?.columns
+            cell.dataArr  = model.moduleContentTitle?.columns
             returnCell = cell
             
         case WOWHotPeopleCell.cell_type():
@@ -316,7 +342,17 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             }
             
             returnCell = cell
+        case WOWHotBannerCell.cell_type():
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WOWHotBannerCell
             
+            if let banners = model.moduleContent?.banners{
+                
+                cell.reloadBanner(banners)
+                self.bannerArray = banners
+                cell.cyclePictureView.delegate = self
+            }
+
+            returnCell = cell
         default:
             returnCell = UITableViewCell()
             break
@@ -327,26 +363,35 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if bottomListCount > 0 {
-            guard section < dataSourceArray.count  else {// 说明是底部列表数据
+
+            guard section < dataSourceArray.count  else {// 说明是底部列表 section
                 
                 if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
-                    if isOverBottomData == true {
+                    if isOverBottomData == true {// 满足最后一个cell 则显示页脚
                         return 70
                     }
                 }
-                return CGFloat.leastNormalMagnitude
+                switch ViewControllerType ?? .Home{
+                case .Home:
+                     return CGFloat.leastNormalMagnitude
+                default:
+                     return 15.h
+                }
+               
             }
-            return 15.h
+        let model = dataSourceArray[section]
+        switch model.moduleType ?? 0{
+        case 901,1001,103:// 精选页这几个Cell UI上没有 15px
+            return CGFloat.leastNormalMagnitude
+        default:
+             return 15.h
         }
-        if section == dataSourceArray.count - 1{
-            return 70.h
-        }else{
-            return 15.h
-        }
+        
+
+
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if bottomListCount > 0 {
+
             guard section < dataSourceArray.count  else {
                 
                 if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
@@ -357,19 +402,19 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 return nil
             }
             return nil
-        }
-        
-        if section == dataSourceArray.count - 1{
-            return footerView()
-        }else{
-            return nil
-        }
+
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         switch section {
         case dataSourceArray.count:
-            return 70
+            switch ViewControllerType ?? .Home {
+            case .Home:
+                return 70
+            default:
+                return 50
+            }
+          
         default:
             if section < dataSourceArray.count{
                 
@@ -400,7 +445,14 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case dataSourceArray.count:
-            return hearderView()
+            switch ViewControllerType ?? .Home {
+            case .Home:
+                return hearderView()
+            default:
+                return hearderColumnView(title: "最新")
+            }
+
+            
         default:
             if section < dataSourceArray.count{
                 
@@ -422,7 +474,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     isHiddenLien = true
                     t           = model.name ?? "本周上新"
                 case 901:
-                    return hearderColumnView()
+                    return hearderColumnView(title: model.moduleContentTitle?.name ?? "栏目")
                 default:
                     isHiddenLien = false
                     t = ""
@@ -459,21 +511,22 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         return view
         
     }
-    // 首页 底部列表头部
+    // 首页 底部列表页眉
     func hearderView() -> UIView { // 137 37
         
         let view = WOWHearderView.init(frame: CGRect(x: 0, y: 0, width: MGScreenWidth,height: 70))
         return view
         
     }
-    // 尖叫栏目头部
-    func hearderColumnView() -> UIView { // 137 37
+    // 尖叫栏目 页眉
+    func hearderColumnView(title: String) -> UIView { // 137 37
         
         let view = Bundle.main.loadNibNamed("WOWHotHeaderView", owner: self, options: nil)?.last as! WOWHotHeaderView
-        
+        view.lbTitle.text = title
         return view
         
     }
+    // 类似本周上新的页眉
     func WOW_Cell_402_Hearder(title: String,isHiddenLine:Bool) -> UIView {
         
         let v = Bundle.main.loadNibNamed("WOW_Cell_402_Hearder", owner: self, options: nil)?.last as! WOW_Cell_402_Hearder

@@ -43,7 +43,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         moduleType                  <- map["moduleType"]
        
         switch moduleType! {
-        case 101://顶部轮播
+        case 101,103://顶部轮播
             moduleContent           <- map["moduleContent"]
         case 201://单个图片
             moduleContent           <- map["moduleContent"]

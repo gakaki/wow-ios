@@ -168,14 +168,13 @@ class WOWController: WOWBaseModuleVC {
     func configTableView() {
         
         dataDelegate?.vc = self
-        dataDelegate?.tableView = tableView
+        dataDelegate?.tableView             = tableView
+        dataDelegate?.ViewControllerType    = ControllerViewType.Home
         
-
-        
-        tableView.mj_header = mj_header
-        tableView.mj_footer = mj_footerHome
-        
-        self.tableView.backgroundColor = GrayColorLevel5
+        tableView.mj_header            = mj_header
+        tableView.mj_footer            = mj_footerHome
+        self.view.backgroundColor      = GrayColorLevel5
+//        self.tableView.backgroundColor = GrayColorLevel5
 
     }
     fileprivate func configBarItem(){

@@ -7,36 +7,36 @@
 //
 
 import UIKit
-
+protocol WOWTopicTagCellDelegate: class {
+    func tagGoTopic(_ tagId: Int?)
+}
 class WOWTopicTagCell: UITableViewCell ,TagListViewDelegate{
 
     @IBOutlet weak var tagListView: TagListView!
-    
+    weak var delegate: WOWTopicTagCellDelegate?
+    var tagArray: [WOWTopicTagModel]?
    
     override func awakeFromNib() {
         
         super.awakeFromNib()
         tagListView.delegate = self
-        tagListView.addTag("")
-        tagListView.addTag("TEAChart")
-        tagListView.addTag("To Be Removed")
-        tagListView.addTag("To Be Removed")
-        tagListView.addTag("Quark Shell")
-        tagListView.addTag("TagListView")
-        tagListView.addTag("TEAChart")
-        tagListView.addTag("To Be Removed")
-        tagListView.addTag("To Be Removed")
-        tagListView.addTag("Quark Shell")
-        tagListView.addTag("TagListView")
-        tagListView.addTag("TEAChart")
-        tagListView.addTag("To Be Removed")
-        tagListView.addTag("To Be Removed")
-        tagListView.addTag("Quark Shell")
+        
         
         // Initialization code
     }
     
- 
+    func showData(_ tagArr: [WOWTopicTagModel]?) {
+        if let tagArr = tagArr {
+            tagArray = tagArr
+            tagListView.removeAllTags()
+            tagListView.addTag("")
+            for tag in tagArr {
+                tagListView.addTag(tag.name ?? "")
+            }
+        }
+    
+    
+    }
  
 
 
@@ -47,7 +47,18 @@ class WOWTopicTagCell: UITableViewCell ,TagListViewDelegate{
     }
     // MARK: TagListViewDelegate
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        print("Tag pressed: \(title), \(sender)")
+        if let tagArray = tagArray {
+            for tag in tagArray {
+                if title == tag.name ?? "" {
+                    if let del = delegate {
+                        del.tagGoTopic(tag.id ?? 0)
+                        print(tag.id)
+                    }
+                    return
+                }
+            
+            }
+        }
     }
     
         

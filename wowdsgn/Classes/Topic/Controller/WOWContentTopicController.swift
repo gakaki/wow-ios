@@ -350,6 +350,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         case (0,_): //
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentTopicTopCell.self), for: indexPath) as! WOWContentTopicTopCell
             cell.showData(vo_topic)
+            cell.delegeta = self
             returnCell = cell
         case (1,_): //产品描述
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentDetailCell.self), for: indexPath) as! WOWContentDetailCell
@@ -373,6 +374,8 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             returnCell = cell
         case (2,_)://标签
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWTopicTagCell", for: indexPath) as! WOWTopicTagCell
+            cell.showData(vo_topic?.tag)
+            cell.delegate = self
             returnCell = cell
         case (3,_)://评论
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWCommentCell", for: indexPath) as! WOWCommentCell
@@ -507,11 +510,23 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
     
 }
 
-extension WOWContentTopicController: WOWProductDetailAboutCellDelegate {
+extension WOWContentTopicController: WOWProductDetailAboutCellDelegate, WOWTopicTagCellDelegate, WOWContentTopicTopCellDelegate {
         @objc func selectCollectionIndex(_ productId: Int) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productId
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func columnGoTopic(_ columnId: Int?) {
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tagGoTopic(_ tagId: Int?) {
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

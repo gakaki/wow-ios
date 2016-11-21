@@ -103,6 +103,7 @@ class WOWContentTopicModel: WOWBaseModel,Mappable {
     var topicDesc                   :String?
     var images                      :[WOWImages]?
     var products                    :[WOWProductModel]?
+    var tag                         :[WOWTopicTagModel]?
     var likeQty                     :Int?
     var publishTime                 :Int?
     var allowComment                : Bool?
@@ -123,6 +124,7 @@ class WOWContentTopicModel: WOWBaseModel,Mappable {
         topicDesc               <- map["topicDesc"]
         images                  <- map["images"]
         products                <- map["products"]
+        tag                     <- map["tags"]
         likeQty                 <- map["likeQty"]
         publishTime             <- map["publishTime"]
         allowComment            <- map["allowComment"]
@@ -189,5 +191,20 @@ class WOWImages: WOWBaseModel, Mappable {
         }
         
         
+    }
+
+}
+class WOWTopicTagModel: WOWBaseModel, Mappable {
+    var id:                 Int?
+    var name:               String?
+    
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id              <- map["id"]
+        name            <- map["name"]
     }
 }

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol WOWContentTopicTopCellDelegate: class {
+    func columnGoTopic(_ columnId: Int?)
+}
 
 class WOWContentTopicTopCell: UITableViewCell {
     
@@ -14,17 +17,21 @@ class WOWContentTopicTopCell: UITableViewCell {
     @IBOutlet weak var topicTitle: UILabel!
     @IBOutlet weak var topicDesc: UILabel!
     @IBOutlet weak var publicTime: UILabel!
+    @IBOutlet weak var columnName: UILabel!
+    @IBOutlet weak var columnView: UIView!
     @IBOutlet weak var aspect: NSLayoutConstraint!
     
+    weak var delegeta: WOWContentTopicTopCellDelegate?
     //内容图片的宽高比约束
     internal var aspectConstraint : NSLayoutConstraint? = nil{
         didSet {
             if oldValue != nil {
-                topicImg.removeConstraint(oldValue!)
+                //删除旧的约束
+                LayoutConstraint.deactivate([oldValue!])
             }
             if aspectConstraint != nil {
-//                aspect.priority = 750
-                topicImg.addConstraint(aspectConstraint!)
+                LayoutConstraint.activate([aspectConstraint!])
+                
             }
         }
     }
@@ -64,9 +71,26 @@ class WOWContentTopicTopCell: UITableViewCell {
       
 
 //            topicImg.set_webimage_url(model.topicImg)
+            columnName.text = model.columnName ?? ""
+            columnView.addAction({[weak self] in
+                if let strongSelf = self {
+                    if let del = strongSelf.delegeta {
+                        del.columnGoTopic(model.columnId)
+                    }
+                }
+            })
+            if let publishTime = model.publishTime{
+                let timeStr = (publishTime/1000).getTimeString()
+                publicTime.text = String(format:"发布于%@", timeStr)
+            }
             topicTitle.text = model.topicName
             topicDesc.text = model.topicDesc
             topicDesc.setLineHeightAndLineBreak(1.5)
         }
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        //清除内容图片的宽高比约束
+        aspectConstraint = nil
     }
 }

@@ -53,7 +53,7 @@ let URL_home_banners            = "v1/page/banners"    //1.1首页 查看首页B
 let URL_home_scenes             = "v1/page/scenes"     //1.2首页 查看首页场景
 let URL_home_List               = "v2/page"     // 首页 全新场景
 let URL_home_BottomList         = "v2/product/recommend"     //首页 底部列表
-
+let URL_HotStyle_BottomList     = "v1/topic/topics"         // 精选页底部列表
 let URL_Search_hot              = "v1/product/search/hot-keywords"  //热门搜索
 
 let URL_Search_result           = "v2/product/condition"           //搜索结果

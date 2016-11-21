@@ -43,6 +43,9 @@
                 <constraint firstItem="oDX-Zm-Y5N" firstAttribute="centerY" secondItem="Y4G-p8-QNM" secondAttribute="centerY" id="Xus-hj-QJT"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="lbTitle" destination="Y4G-p8-QNM" id="OoN-zU-aML"/>
+            </connections>
             <point key="canvasLocation" x="-36.5" y="-221.5"/>
         </view>
     </objects>

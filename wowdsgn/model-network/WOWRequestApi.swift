@@ -27,7 +27,8 @@ public enum RequestApi{
     
     // 首页底部列表
     case api_Home_BottomList(params: [String: AnyObject]?)
-    
+    // 精选页底部列表
+    case api_HotStyle_BottomList(params: [String: AnyObject]?)
     //发现 分类 页面
     case api_Found_Main
     case api_Found_2nd
@@ -249,7 +250,10 @@ extension RequestApi:TargetType{
         
         case .api_Home_BottomList:
             return URL_home_BottomList
-        
+            
+        case .api_HotStyle_BottomList:
+            return URL_HotStyle_BottomList
+            
 //        case .Api_Home_Scenes:
 //            return URL_home_scenes
 //        case .Api_Home_Topics:
@@ -420,7 +424,9 @@ extension RequestApi:TargetType{
             .api_Category_V2,
             .api_Category_path_category,
             .api_AD,
+            .api_HotStyle_BottomList,
             .api_TopicCommentList:
+
             return .GET
 
         default:
@@ -568,7 +574,8 @@ extension RequestApi:TargetType{
             
             case let .api_Home_BottomList(param):
                 params = param!
-
+            case let .api_HotStyle_BottomList(param):
+                params = param!
             case .api_Module_Page2:
                 params = ["pageId":2, "region":1]
 

@@ -159,10 +159,10 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     //第一个cell居中显示
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-        let firstIndexPath = IndexPath(item: 0, section: section)
-        let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: firstIndexPath)
+//        let firstIndexPath = IndexPath(item: 0, section: section)
+//        let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: firstIndexPath)
         
-        return UIEdgeInsetsMake(0, (collectionView.bounds.size.width - firstSize.width) / 2,
+        return UIEdgeInsetsMake(0, 15,
                                 0, 15)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

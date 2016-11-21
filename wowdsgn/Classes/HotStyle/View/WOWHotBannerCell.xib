@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYQ-fi-cDQ" customClass="CyclePictureView" customModule="wow_vendor_ui">
@@ -33,6 +33,9 @@
                     <constraint firstAttribute="trailing" secondItem="KYQ-fi-cDQ" secondAttribute="trailing" id="cAn-4P-aZA"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="cyclePictureView" destination="KYQ-fi-cDQ" id="RhI-bp-Xo6"/>
+            </connections>
             <point key="canvasLocation" x="-373" y="-243.5"/>
         </tableViewCell>
     </objects>

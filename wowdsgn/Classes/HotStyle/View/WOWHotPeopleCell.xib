@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIs-Y0-wyo">
@@ -63,7 +63,7 @@
                         <rect key="frame" x="10" y="50" width="355" height="119.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFZ-sw-Iku" customClass="TagListView" customModule="wowdsgn">
-                                <rect key="frame" x="15" y="5" width="340" height="94.5"/>
+                                <rect key="frame" x="15" y="15" width="340" height="84.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="marginX">
@@ -88,7 +88,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="zFZ-sw-Iku" secondAttribute="bottom" constant="20" id="4uu-mz-gmt"/>
                             <constraint firstAttribute="trailing" secondItem="zFZ-sw-Iku" secondAttribute="trailing" id="J2t-W1-6xk"/>
-                            <constraint firstItem="zFZ-sw-Iku" firstAttribute="top" secondItem="WdQ-LM-ZFR" secondAttribute="top" constant="5" id="P4f-J4-Qc8"/>
+                            <constraint firstItem="zFZ-sw-Iku" firstAttribute="top" secondItem="WdQ-LM-ZFR" secondAttribute="top" constant="15" id="P4f-J4-Qc8"/>
                             <constraint firstItem="zFZ-sw-Iku" firstAttribute="leading" secondItem="WdQ-LM-ZFR" secondAttribute="leading" constant="15" id="ccZ-sy-uk8"/>
                         </constraints>
                     </view>

@@ -15,6 +15,8 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement {
     }
     var imageURLArray: [String] = []
     @IBOutlet weak var cyclePictureView: CyclePictureView!
+    @IBOutlet weak var AspectRatioConstraint: NSLayoutConstraint! // 比例
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

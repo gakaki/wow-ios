@@ -9,7 +9,7 @@ protocol ModuleViewElement{
 
 struct ModulePageType {
     
-    static let PAGE_MODULE_TYPE_CAROUSEL                        = 101;    //    轮播 banner
+    static let PAGE_MODULE_TYPE_CAROUSEL                        = 101;    //    轮播 banner 首页 比例1：1
     static let PAGE_MODULE_TYPE_BANNER                          = 201; 	  //    单条 banner
     static let PAGE_MODULE_TYPE_CATEGORIES                      = 301; 	  //    一级分类
     static let PAGE_MODULE_TYPE_CATEGORIES_MORE                 = 302;	  //    二级分类
@@ -22,6 +22,7 @@ struct ModulePageType {
     static let PAGE_MODULE_TYPE_HOT_STYLE                       = 701;	  //    精选页点赞cell
     static let PAGE_MODULE_TYPE_HOT_COLUMN                      = 901;	  //    尖叫栏目
     static let PAGE_MODULE_TYPE_HOT_PEOPLE                      = 1001;	  //    人气标签，热门标签
+    static let PAGE_MODULE_TYPE_HOT_Play                        = 103;	  //    精选页轮播 比例 3：2
     static let d = [
 
         PAGE_MODULE_TYPE_CAROUSEL 					: HomeBrannerCell.classForCoder(), //轮播 101 banner
@@ -35,8 +36,9 @@ struct ModulePageType {
         PAGE_MODULE_TYPE_PROJECT                    : Cell_102_Project.classForCoder(),// 专题左右滑动cell
         PAGE_MODULE_TYPE_SING_PRODUCT               : Cell_801_Product.classForCoder(),// 今日单品倒计时
         PAGE_MODULE_TYPE_HOT_STYLE                  : WOWHotStyleCell.classForCoder(),// 精选页点赞cell
-        PAGE_MODULE_TYPE_HOT_COLUMN                 : WOWHotColumnCell.classForCoder(),// 精选页点赞cell
-        PAGE_MODULE_TYPE_HOT_PEOPLE                 : WOWHotPeopleCell.classForCoder()// 精选页点赞cell
+        PAGE_MODULE_TYPE_HOT_COLUMN                 : WOWHotColumnCell.classForCoder(),// 精选页栏目cell
+        PAGE_MODULE_TYPE_HOT_PEOPLE                 : WOWHotPeopleCell.classForCoder(),// 精选页点赞cell
+        PAGE_MODULE_TYPE_HOT_Play                   : WOWHotBannerCell.classForCoder()//    精选页轮播 比例 3：2
     ]
     // 通过type获取classname
     static func getIdentifier( _ id:Int ) -> String {

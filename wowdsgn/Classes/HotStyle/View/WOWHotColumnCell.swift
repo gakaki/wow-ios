@@ -9,7 +9,7 @@
 import UIKit
 protocol WOWHotColumnDelegate:class {
 
-    func goToArticleListVC(_ columntId: Int?)
+    func goToArticleListVC(_ columntId: Int?, title: String?)
     
 }
 //尖叫栏目
@@ -80,7 +80,7 @@ extension WOWHotColumnCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = delegate {
             let model = dataArr?[indexPath.row]
-            del.goToArticleListVC(model?.id ?? 0)
+            del.goToArticleListVC(model?.id ?? 0,title: model?.name)
         }
        
     }

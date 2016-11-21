@@ -10,11 +10,14 @@ import UIKit
 
 class WOWHotArticleList: WOWBaseViewController {
     @IBOutlet var tableView: UITableView!
-    var dataArr     = [WOWHomeModle]()    //商品列表数组
+    var dataArr     = [WOWHotStyleModel]()    //商品列表数组
+    var titleVC     :String?
+    var columnId    = 0 // 栏目ID
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "尖叫好物"
-        // Do any additional setup after loading the view.
+//        self.title = "尖叫好物"
+        request()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,7 +29,8 @@ class WOWHotArticleList: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configBuyBarItem()
-        tableView.mj_header          = mj_header
+        tableView.mj_header = self.mj_header
+        tableView.mj_footer = self.mj_footer
         tableView.delegate = self
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -39,23 +43,46 @@ class WOWHotArticleList: WOWBaseViewController {
         super.request()
         var params = [String: AnyObject]()
         
-        params = ["pageId": 3 as AnyObject]
+        let totalPage = 10
+        params = ["currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject,"columnId":columnId as AnyObject]
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params), successClosure: {[weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_HotStyle_BottomList(params : params), successClosure: {[weak self] (result,code) in
             if let strongSelf = self{
                 
+                strongSelf.endRefresh()
                 
                 let json = JSON(result)
                 DLog(json)
-                strongSelf.endRefresh()
+
+                strongSelf.mj_footer.endRefreshing()
+                let bannerList = Mapper<WOWHotStyleModel>().mapArray(JSONObject:JSON(result)["topics"].arrayObject)
                 
-                let bannerList = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
-                
-                if let brandArray = bannerList{
-                    strongSelf.dataArr = []
-                    strongSelf.dataArr = brandArray
+                if let bannerList = bannerList{
+                    if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
+                        strongSelf.dataArr = []
+//                        strongSelf.dataDelegate?.isOverBottomData = false
+                        
+                    }
+
+                    if bannerList.count < totalPage {// 如果拿到的数据，小于分页，则说明，无下一页
+                        strongSelf.tableView.mj_footer = nil
+//                        strongSelf.dataDelegate?.isOverBottomData = true
+                        
+                        
+                    }else {
+
+//                        strongSelf.tableView.mj_footer = strongSelf.mj_footerHome
+                    }
+                    
+                    strongSelf.dataArr.append(contentsOf: bannerList)
+//                    strongSelf.dataDelegate?.bottomHotListArray = strongSelf.bottomListArray
+                    
+                }else {
+                    
+                    
+                    strongSelf.tableView.mj_footer = nil
+                    
                 }
-                
                 strongSelf.tableView.reloadData()
                 WOWHud.dismiss()
                 
@@ -66,7 +93,6 @@ class WOWHotArticleList: WOWBaseViewController {
                 strongSelf.endRefresh()
             }
         }
-        
         
     }
 
@@ -98,27 +124,20 @@ extension WOWHotArticleList:UITableViewDelegate,UITableViewDataSource{
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return self.dataArr.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.section == 0 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotPeopleCell", for: indexPath) as! WOWHotPeopleCell
-//            
-//            return cell
-//        }else if indexPath.section == 1 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotColumnCell", for: indexPath) as! WOWHotColumnCell
-//            
-//            return cell
-//        }
-//            
-//        else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotMainCell", for: indexPath) as! WOWHotMainCell
-            
-            return cell
-//        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WOWHotMainCell", for: indexPath) as! WOWHotMainCell
+ 
+        let model = dataArr[indexPath.section]
+        cell.showData(model)
+        cell.selectionStyle   = .none
+        
+        return cell
     }
     func hearderView() -> UIView { // 137 37
         

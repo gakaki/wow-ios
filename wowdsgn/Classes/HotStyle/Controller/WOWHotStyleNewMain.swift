@@ -139,10 +139,8 @@ extension WOWHotStyleNewMain:UITableViewDelegate,UITableViewDataSource{
     }
 }
 extension WOWHotStyleNewMain:WOWHotColumnDelegate{
-    func goToArticleListVC(_ productId: Int?) {
+    func goToArticleListVC(_ columntId: Int?, title: String?) {
         
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
-        
-        navigationController?.pushViewController(vc, animated: true)
+        toVCArticleListVC(columntId ?? 0, title: title ?? "")
     }
 }

@@ -64,6 +64,8 @@ class WOWHotMainCell: UITableViewCell {
             lbPraise.text    = m.readQty?.toString
         }
         lbTitleMain.text     = m.topicMainTitle
+        let timerNumber      = (m.publishTime ?? 0)/1000
+        lbTime.text          = timerNumber.getTimeString()
         
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

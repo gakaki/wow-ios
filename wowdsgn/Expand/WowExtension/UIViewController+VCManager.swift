@@ -365,7 +365,12 @@ extension  UIViewController {
         vc.hideNavigationBar = false
         pushVC(vc)
     }
-    
+    func toVCArticleListVC(_ columntId: Int,title: String ) {
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
+        vc.title = title
+        vc.columnId = columntId
+        pushVC(vc)
+    }
     
     func toVCTopic( _ topic_id:Int? ){
         if let t = topic_id {

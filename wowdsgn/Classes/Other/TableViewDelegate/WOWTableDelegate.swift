@@ -22,8 +22,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     open var bottomHotListArray = [WOWHotStyleModel]() {//精选底部列表数组
         didSet{
             
-            bottomListCount = bottomHotListArray.count
-            bottomCellLine  = bottomListCount.getParityCellNumber()
+            bottomCellLine = bottomHotListArray.count
+//            bottomCellLine  = bottomListCount
         }
 
     }
@@ -542,6 +542,14 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard (indexPath as NSIndexPath).section < dataSourceArray.count  else {
+            switch ViewControllerType ?? .Home {
+            case .Home:
+                return
+            default:
+                let model = bottomHotListArray[indexPath.section - dataSourceArray.count]
+
+                self.vc?.toVCArticleListVC(model.columnId ?? 0,title: model.columnName ?? "")
+            }
             return
         }
         let model = dataSourceArray[(indexPath as NSIndexPath).section]

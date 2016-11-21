@@ -268,10 +268,9 @@ extension WOWBaseModuleVC:Cell_302_Delegate{
     
 }
 extension WOWBaseModuleVC:WOWHotColumnDelegate{
-    func goToArticleListVC(_ columntId: Int?) {
+    func goToArticleListVC(_ columntId: Int?, title: String?) {
         
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
+        toVCArticleListVC(columntId ?? 0, title: title ?? "")
         
-        navigationController?.pushViewController(vc, animated: true)
     }
 }

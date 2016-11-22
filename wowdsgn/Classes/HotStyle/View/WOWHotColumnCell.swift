@@ -18,6 +18,7 @@ class WOWHotColumnCell: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 901
     }
+    fileprivate var cellItemSpaceing:CGFloat?
     var dataArr:[WOWHomeHot_1001_title]?{
         didSet{
             collectionView.reloadData()
@@ -35,6 +36,12 @@ class WOWHotColumnCell: UITableViewCell,ModuleViewElement {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
+        switch UIDevice.deviceType {
+        case .dt_iPhone5:
+            cellItemSpaceing = 18.w
+        default:
+            cellItemSpaceing = 27.w
+        }
 
     }
 
@@ -66,16 +73,16 @@ extension WOWHotColumnCell:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60.w,height: 80)
+        return CGSize(width: 60,height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 27.w
+        return cellItemSpaceing ?? 27.w
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(0, 27,
-                                0, 27)
+        return UIEdgeInsetsMake(0, cellItemSpaceing ?? 27.w,
+                                0, cellItemSpaceing ?? 27.w)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = delegate {

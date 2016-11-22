@@ -11,18 +11,25 @@ import UIKit
 class WOWHotArticleList: WOWBaseViewController {
     @IBOutlet var tableView: UITableView!
     var dataArr     = [WOWHotStyleModel]()    //商品列表数组
-    var titleVC     :String?
+    var titleVC     : String?
     var columnId    = 0 // 栏目ID
-
+    var keyId       : String!
+    var isOpenTag  :Bool?{// 为true  则是点击的标签 进来的
+        didSet{
+            if isOpenTag ?? false {
+                keyId = "tagId"
+            }else{
+                keyId = "columnId"
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.title = "尖叫好物"
         request()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK:Private Method
@@ -44,7 +51,13 @@ class WOWHotArticleList: WOWBaseViewController {
         var params = [String: AnyObject]()
         
         let totalPage = 10
-        params = ["currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject,"columnId":columnId as AnyObject]
+//        if isOpenTag ?? false {
+            params = ["currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject,keyId:columnId as AnyObject]
+//        }else{
+//            params = ["currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject,"columnId":columnId as AnyObject]
+
+//        }
+        
         
         WOWNetManager.sharedManager.requestWithTarget(.api_HotStyle_BottomList(params : params), successClosure: {[weak self] (result,code) in
             if let strongSelf = self{
@@ -99,28 +112,18 @@ class WOWHotArticleList: WOWBaseViewController {
 }
 extension WOWHotArticleList:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        if section == 0 {
-//            return 0.01
-//        }else {
+
             return 15
-//        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-//        if section == 1 {
-//            return 55
-//        }else {
+
             return 0.01
-//        }
+
         
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-//        if section == 1 {
-//            return hearderView()
-//        }else {
+
             return nil
-//        }
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -135,9 +138,21 @@ extension WOWHotArticleList:UITableViewDelegate,UITableViewDataSource{
  
         let model = dataArr[indexPath.section]
         cell.showData(model)
+
         cell.selectionStyle   = .none
         
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let model = dataArr[indexPath.section]
+        
+        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
+
+        vc.topic_id = model.id ?? 0
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+//        toVCTopidDetail(model.id ?? 0)
     }
     func hearderView() -> UIView { // 137 37
         
@@ -146,4 +161,13 @@ extension WOWHotArticleList:UITableViewDelegate,UITableViewDataSource{
         return view
         
     }
+}
+extension WOWHotArticleList:WOWHotStyleDelegate{
+    
+    func reloadTableViewData(){
+        
+        self.request()
+        
+    }
+    
 }

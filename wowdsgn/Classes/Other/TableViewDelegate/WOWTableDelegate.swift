@@ -340,7 +340,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             if let arr = model.moduleContentTitle?.tags{
                 cell.showData(arr)
             }
-            
+            cell.delegate = self.vc as? HotPeopleTitleDelegate
             returnCell = cell
         case WOWHotBannerCell.cell_type():
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WOWHotBannerCell
@@ -546,9 +546,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             case .Home:
                 return
             default:
+                
                 let model = bottomHotListArray[indexPath.section - dataSourceArray.count]
-
-                self.vc?.toVCArticleListVC(model.columnId ?? 0,title: model.columnName ?? "")
+                self.vc?.toVCTopidDetail(model.id ?? 0)
+//                self.vc?.toVCArticleListVC(model.columnId ?? 0,title: model.columnName ?? "")
             }
             return
         }

@@ -107,7 +107,9 @@ class WOWContentTopicController: WOWBaseViewController {
                 }
                 
                 strongSelf.reloadNagationItemThumbButton(isFavorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
-//                strongSelf.delegate?.reloadTableViewData()
+                
+                strongSelf.delegate?.reloadTableViewData()
+//                
                  NotificationCenter.postNotificationNameOnMainThread(WOWUpdateProjectThumbNotificationKey, object: nil)
             }
 

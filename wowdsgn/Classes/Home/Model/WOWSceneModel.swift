@@ -20,7 +20,7 @@ class WOWSenceModel: WOWBaseModel,Mappable{
     var totalPrice       :   String?
     var userLike         :   String?
     var recommendProducts:   [WOWProductModel]?
-    var comments         :   [WOWCommentListModel]?
+//    var comments         :   [WOWCommentListModel]?
     var comments_count   :   Int?
     
     required init?( map: Map) {
@@ -38,7 +38,7 @@ class WOWSenceModel: WOWBaseModel,Mappable{
         totalPrice          <- map["total_price"]
         userLike            <- map["user_like"]
         recommendProducts   <- map["recommend_products"]
-        comments            <- map["comments"]
+//        comments            <- map["comments"]
         comments_count      <- map["commentcount"]
     }
 }

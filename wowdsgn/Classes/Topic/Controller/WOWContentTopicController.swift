@@ -24,10 +24,13 @@ class WOWContentTopicController: WOWBaseViewController {
     //param
     var topic_id: Int           = 1
     var vo_topic:WOWContentTopicModel?
-    var imgUrlArr = [String]()
-    let maxLength = 140
-    let minLength = 3
-    
+    var topicComment: WOWTopicCommentModel?         //评论model
+    var imgUrlArr = [String]()  //存放图片url的数组
+    let maxLength = 140         //输入评论最大字数限制
+    let minLength = 3           //最小长度限制
+    var isHaveTag = 0           //是否有标签，如果没有则不显示
+    var isHaveComment = 0       //是否有评论，如果没有则不显示
+    var isHaveAbout = 0         //是否有相关商品，如果没有则不显示
     weak var  delegate :WOWHotStyleDelegate?
     fileprivate var shareProductImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
@@ -96,9 +99,7 @@ class WOWContentTopicController: WOWBaseViewController {
         WOWClickLikeAction.requestLikeProject(topicId: topic_id,view: nagationItem,btn: sender) { [weak self](isFavorite) in
 
             if let strongSelf = self{
-                
-                // strongSelf.request()
-                
+            
                 // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
                 if isFavorite == true {
                     strongSelf.vo_topic!.likeQty = (strongSelf.vo_topic!.likeQty ?? 0)  + 1
@@ -156,13 +157,7 @@ class WOWContentTopicController: WOWBaseViewController {
             }
         }
 
-        //如果相关商品有数据显示。如果没有数据则不显示
-        if vo_products.count > 0 {
-            //详情页共分为7组数据
-            numberSections = 5
-        }else {
-            numberSections = 4
-        }
+        numberSections = 2 + isHaveTag + isHaveComment + isHaveAbout
     }
     
     
@@ -248,16 +243,27 @@ class WOWContentTopicController: WOWBaseViewController {
                         }
                     }
                 )
-
+                //如果有标签的话就显示，没有的话就显示
+                if strongSelf.vo_topic?.tag?.count > 0 {
+                    strongSelf.isHaveTag = 1
+                }else {
+                    strongSelf.isHaveTag = 0
+                }
+                //如果专题不允许评论就不显示评论区域
+                if strongSelf.vo_topic?.allowComment ?? false {
+                    strongSelf.bottomView.isHidden = false
+                    strongSelf.bottomHeight.constant = 50
+                }else {
+                    strongSelf.bottomView.isHidden = true
+                    strongSelf.bottomHeight.constant = 0
+                }
                 strongSelf.reloadNagationItemThumbButton(strongSelf.vo_topic!.favorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
-
               
-
                 strongSelf.requestAboutProduct()
             }
             
         }){ (errorMsg) in
-            print(errorMsg)
+
         }
         
         
@@ -269,18 +275,61 @@ class WOWContentTopicController: WOWBaseViewController {
                 
                 let r                             =  JSON(result)
                 strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(JSONObject:r["productList"].arrayObject) ?? [WOWProductModel]()
+                //如果产品数组有数据则表示有相关产品
+                if strongSelf.vo_products.count > 0 {
+                    strongSelf.isHaveAbout = 1
+                }else {
+                    strongSelf.isHaveAbout = 0
+                }
+                
+                strongSelf.requestCommentList()
+                
+            }
+            
+        }){[weak self] (errorMsg) in
+            if let strongSelf = self {
+
+            }
+            
+        }
+    }
+    
+    ///获取评论列表
+    func requestCommentList() {
+        WOWNetManager.sharedManager.requestWithTarget(.api_TopicCommentList(pageSize: 10, currentPage: 1, topicId: topic_id), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                let r = JSON(result)
+                strongSelf.topicComment = Mapper<WOWTopicCommentModel>().map( JSONObject:r.object )
+                if strongSelf.topicComment?.comments?.count > 0 {
+                    strongSelf.isHaveComment = 1
+                }else {
+                    strongSelf.isHaveComment = 0
+                }
                 //初始化详情页数据
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
                 
                 strongSelf.endRefresh()
+
             }
             
         }){[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
             }
-            print(errorMsg)
+            
+        }
+    
+    }
+    //发表评论
+    func requestSendComment(_ content: String) {
+        WOWNetManager.sharedManager.requestWithTarget(.api_SubmitTopicComment(topicId: topic_id, content: content), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                strongSelf.endEditing()
+                strongSelf.requestCommentList()
+            }
+            
+        }){[weak self] (errorMsg) in
             
         }
     }
@@ -338,6 +387,16 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         switch section {
         case 1:
             return vo_topic?.images?.count ?? 0
+        case 1 + isHaveTag + isHaveComment://评论最多显示3条
+            if isHaveComment == 1 {
+                if let count = topicComment?.total {
+                    return count > 3 ? 3 : count
+                }
+                return 0
+            }else {
+                return 1
+            }
+
         default:
             return 1
         }
@@ -372,15 +431,16 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             }
             
             returnCell = cell
-        case (2,_)://标签
+        case (1 + isHaveTag,_)://标签
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWTopicTagCell", for: indexPath) as! WOWTopicTagCell
             cell.showData(vo_topic?.tag)
             cell.delegate = self
             returnCell = cell
-        case (3,_)://评论
+        case (1 + isHaveTag + isHaveComment,_)://评论
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWCommentCell", for: indexPath) as! WOWCommentCell
+            cell.showData(topicComment?.comments?[indexPath.row])
             returnCell = cell
-        case (4,_)://相关商品
+        case (1 + isHaveTag + isHaveComment + isHaveAbout,_)://相关商品
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailAboutCell", for: indexPath) as! WOWProductDetailAboutCell
             cell.dataArr = vo_products
             cell.delegate = self
@@ -395,9 +455,13 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 3://评论
-            return 39
-        case 4: //如果相关商品有数据显示，如果没有就不显示
+        case 1 + isHaveTag + isHaveComment://评论
+            if isHaveComment == 1 {
+                return 39
+            }else {
+                return 0.01
+            }
+        case 1 + isHaveTag + isHaveComment + isHaveAbout: //如果相关商品有数据显示，如果没有就不显示
             if vo_products.count > 0 {
                 return 39
             }else {
@@ -410,35 +474,29 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 3:
-            return 55
+        case 1 + isHaveTag + isHaveComment:     //更多评论。当评论数大于三条时才显示
+            if topicComment?.total > 3 {
+                return 55
+            }else {
+                return 0.01
+            }
         default:
             return 0.01
         }
     
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch section {
-//        case 3:     //如果相关商品有数据显示，如果没有就不显示
-//            if vo_products.count > 0 {
-//                
-//                return "相关商品"
-//            }else {
-//                return nil
-//            }
-//            
-//        default:
-//            return nil
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 3:
-            conmmentView.labelText.text = "评论"
-            return conmmentView
-        case 4:     //如果相关商品有数据显示，如果没有就不显示
+        case 1 + isHaveTag + isHaveComment:
+            if isHaveComment == 1 {
+                conmmentView.labelText.text = String(format: "评论（%i）", topicComment?.total ?? 0)
+                return conmmentView
+            }else {
+                return nil
+            }
+        case 1 + isHaveTag + isHaveComment + isHaveAbout:     //如果相关商品有数据显示，如果没有就不显示
             if vo_products.count > 0 {
                 aboutView.labelText.text = "相关商品"
                 return aboutView
@@ -452,8 +510,15 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch section {
-        case 3:
-            return moreCommentView
+        case 1 + isHaveTag + isHaveComment: //更多评论
+            if topicComment?.total > 3 {
+                return moreCommentView
+            }else {
+                let view = UIView()
+                view.backgroundColor = UIColor.clear
+                return view
+            }
+
         default:
             let view = UIView()
             view.backgroundColor = UIColor.clear
@@ -512,22 +577,16 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
 
 extension WOWContentTopicController: WOWProductDetailAboutCellDelegate, WOWTopicTagCellDelegate, WOWContentTopicTopCellDelegate {
         @objc func selectCollectionIndex(_ productId: Int) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
-        vc.hideNavigationBar = true
-        vc.productId = productId
-        navigationController?.pushViewController(vc, animated: true)
+        toVCProduct(productId)
     }
     
-    func columnGoTopic(_ columnId: Int?) {
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
-        
-        navigationController?.pushViewController(vc, animated: true)
+    func columnGoTopic(_ columnId: Int?, topicTitle title: String?) {
+       
+        toVCArticleListVC(columnId ?? 0, title: title ?? "")
     }
     
-    func tagGoTopic(_ tagId: Int?) {
-        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
-        
-        navigationController?.pushViewController(vc, animated: true)
+    func tagGoTopic(_ tagId: Int?, tagTitle title: String?) {
+        toVCArticleListVC(tagId ?? 0, title: title ?? "")
     }
     
 }
@@ -588,7 +647,19 @@ extension WOWContentTopicController: UITextViewDelegate{
 //    }
 //
     @IBAction func pressClick(_ sender: UIButton) {
-        
+        if inputTextView.text.isEmpty {
+            WOWHud.showMsg("您的评论为空")
+            return
+        }
+        if inputTextView.text.length < 3 {
+            WOWHud.showMsg("请您输入更多内容")
+            return
+        }
+        if inputTextView.text.length > 140 {
+            WOWHud.showMsg("评论的最大字数为140字，请您删减")
+            return
+        }
+        requestSendComment(inputTextView.text)
     }
     //更多评论
     func moreCommentClick() {
@@ -676,18 +747,14 @@ extension WOWContentTopicController: UITextViewDelegate{
 //            send()
             return false
         }
-        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
-        if ret == false{
-            WOWHud.showMsg("您输入的字符超过限制")
-            return false
-        }
+//        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
+//        if ret == false{
+//            WOWHud.showMsg("您输入的字符超过限制")
+//            return false
+//        }
         return true
     }
 
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        
-//        commentView.resignFirstResponder()
-//    }
 }
 

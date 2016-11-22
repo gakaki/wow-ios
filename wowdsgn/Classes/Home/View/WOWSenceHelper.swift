@@ -64,11 +64,11 @@ class WOWSenceHelper: NSObject {
         case 4:
             let cell = tableview.dequeueReusableCell(withIdentifier: String(describing: WOWCommentCell.self),for: indexPath)as!WOWCommentCell
 //                cell.hideHeadImage()
-            if let model = sceneModel?.comments?[(indexPath as NSIndexPath).row] {
-                cell.commentLabel.text = model.comment
-                cell.dateLabel.text    = model.created_at
-                cell.nameLabel.text    = model.user_nick
-            }
+//            if let model = sceneModel?.comments?[(indexPath as NSIndexPath).row] {
+//                cell.commentLabel.text = model.comment
+//                cell.dateLabel.text    = model.created_at
+//                cell.nameLabel.text    = model.user_nick
+//            }
             returnCell = cell
         default:
            break
@@ -112,22 +112,22 @@ class WOWSenceHelper: NSObject {
         
         if section == 2 {
             let headerView = WOWMenuTopView(leftTitle: "xx件商品", rightHiden: true, topLineHiden: true, bottomLineHiden:true)
-            headerView.leftLabel.text = "\(sceneModel?.products?.count ?? 0)件商品"
+//            headerView.leftLabel.text = "\(sceneModel?.products?.count ?? 0)件商品"
             return headerView
         }else if section == 4{
-            if let arr = sceneModel?.comments {
-                if arr.count == 0 {
-                    return nil
-                }
-                let headerView = WOWMenuTopView(leftTitle: "\(sceneModel?.comments_count ?? 0)条评论 ", rightHiden:false, topLineHiden: false, bottomLineHiden:false)
-                headerView.addAction({
-                    let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWCommentController.self)) as! WOWCommentController
-//                    vc.mainID = sceneModel?.id?.toInt()
-//                    vc.commentType = CommentType.sence
-                    senceController.navigationController?.pushViewController(vc, animated: true)
-                })
-                return headerView
-            }
+//            if let arr = sceneModel?.comments {
+//                if arr.count == 0 {
+//                    return nil
+//                }
+//                let headerView = WOWMenuTopView(leftTitle: "\(sceneModel?.comments_count ?? 0)条评论 ", rightHiden:false, topLineHiden: false, bottomLineHiden:false)
+//                headerView.addAction({
+//                    let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWCommentController.self)) as! WOWCommentController
+////                    vc.mainID = sceneModel?.id?.toInt()
+////                    vc.commentType = CommentType.sence
+//                    senceController.navigationController?.pushViewController(vc, animated: true)
+//                })
+//                return headerView
+//            }
             return nil
         }
         return nil

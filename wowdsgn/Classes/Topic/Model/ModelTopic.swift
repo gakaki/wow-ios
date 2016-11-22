@@ -208,3 +208,38 @@ class WOWTopicTagModel: WOWBaseModel, Mappable {
         name            <- map["name"]
     }
 }
+class WOWTopicCommentModel: WOWBaseModel, Mappable {
+    var total:                    Int?
+    var comments:                 [WOWTopicCommentListModel]?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        total              <- map["total"]
+        comments            <- map["comments"]
+        
+    }
+}
+class WOWTopicCommentListModel: WOWBaseModel, Mappable {
+    var userName:                 String?
+    var userAvatar:               String?
+    var content:                  String?
+    var createTime:                Int?
+    var favorite:                 Bool?
+    var favoriteCount:            Int?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        userName              <- map["userName"]
+        userAvatar            <- map["userAvatar"]
+        content               <- map["content"]
+        createTime             <- map["createTime"]
+        favorite              <- map["favorite"]
+        favoriteCount         <- map["favoriteCount"]
+    }
+}

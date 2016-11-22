@@ -8,7 +8,7 @@
 
 import UIKit
 protocol WOWContentTopicTopCellDelegate: class {
-    func columnGoTopic(_ columnId: Int?)
+    func columnGoTopic(_ columnId: Int?, topicTitle title: String?)
 }
 
 class WOWContentTopicTopCell: UITableViewCell {
@@ -75,7 +75,7 @@ class WOWContentTopicTopCell: UITableViewCell {
             columnView.addAction({[weak self] in
                 if let strongSelf = self {
                     if let del = strongSelf.delegeta {
-                        del.columnGoTopic(model.columnId)
+                        del.columnGoTopic(model.columnId, topicTitle: model.columnName)
                     }
                 }
             })

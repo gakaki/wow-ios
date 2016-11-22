@@ -44,7 +44,7 @@ class WOWCommentController: WOWBaseViewController {
     }
     
     deinit{
-        NotificationCenter.default.removeObserver(self)
+        removeObservers()
     }
     
     override func setUI() {
@@ -99,7 +99,11 @@ class WOWCommentController: WOWBaseViewController {
         NotificationCenter.default.addObserver(self, selector:#selector(keyBoardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(keyBoardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-
+    fileprivate func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
     
     func keyBoardWillShow(_ note:Notification){
         let userInfo  = (note as NSNotification).userInfo as [AnyHashable: Any]!

@@ -31,24 +31,21 @@ class WOWCommentCell: UITableViewCell {
        
     }
     
-    func showData(_ model:WOWCommentListModel) {
-//        self.headImageView.kf_setImageWithURL(NSURL(string: model.user_headimage ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
-        
-        self.headImageView.set_webimage_url_user( model.user_headimage! )
-
-        dateLabel.text = model.created_at
-        commentLabel.text = model.comment
-        if model.user_nick == nil {
-            if model.mobile == nil {
-                if model.email == nil {
-                    nameLabel.text = model.email
-                }
-            }else{
-                nameLabel.text = model.mobile
+    func showData(_ model: WOWTopicCommentListModel?) {
+        if let model = model {
+            headImageView.set_webimage_url(model.userAvatar)
+            commentLabel.text = model.content
+            nameLabel.text = model.userName
+            if let publishTime = model.createTime {
+                let timeStr = (publishTime/1000).getTimeString()
+                dateLabel.text = timeStr
             }
-        }else{
-            nameLabel.text = model.user_nick
+            
+            if model.favoriteCount > 0 {
+                numberLabel.text = String(format:"%i", model.favoriteCount ?? 0)
+            }
         }
+        
     }
 
 }

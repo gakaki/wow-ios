@@ -8,7 +8,7 @@
 
 import UIKit
 protocol WOWTopicTagCellDelegate: class {
-    func tagGoTopic(_ tagId: Int?)
+    func tagGoTopic(_ tagId: Int?, tagTitle title: String?)
 }
 class WOWTopicTagCell: UITableViewCell ,TagListViewDelegate{
 
@@ -51,7 +51,7 @@ class WOWTopicTagCell: UITableViewCell ,TagListViewDelegate{
             for tag in tagArray {
                 if title == tag.name ?? "" {
                     if let del = delegate {
-                        del.tagGoTopic(tag.id ?? 0)
+                        del.tagGoTopic(tag.id, tagTitle: tag.name)
                         print(tag.id)
                     }
                     return

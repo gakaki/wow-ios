@@ -270,7 +270,14 @@ extension WOWBaseModuleVC:Cell_302_Delegate{
 extension WOWBaseModuleVC:WOWHotColumnDelegate{
     func goToArticleListVC(_ columntId: Int?, title: String?) {
         
-        toVCArticleListVC(columntId ?? 0, title: title ?? "")
+        toVCArticleListVC(columntId ?? 0, title: title ?? "",isOpenTag:false)
+        
+    }
+}
+extension WOWBaseModuleVC:HotPeopleTitleDelegate{
+    func tagPressedWithToVC(titleId: Int, title: String?)   {
+        
+        toVCArticleListVC(titleId , title: title ?? "",isOpenTag:true)
         
     }
 }

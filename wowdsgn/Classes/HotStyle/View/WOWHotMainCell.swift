@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class WOWHotMainCell: UITableViewCell {
 
     @IBOutlet weak var imgBack: UIImageView!
@@ -19,12 +20,40 @@ class WOWHotMainCell: UITableViewCell {
     @IBOutlet weak var lbTitleMain: UILabel!// 主标题
     @IBOutlet weak var lbBrowse: UILabel!//多少人赞
     @IBOutlet weak var lbTime: UILabel!//发布时间
+    @IBOutlet weak var bottomView:UIView!// 底部装在点赞按钮的View
+    private var modelData:WOWHotStyleModel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    func showData(_ m:WOWHotStyleModel)  {
+    // 点赞按钮
+    @IBAction func clickLikeAction(sender: AnyObject) {
         
+        WOWClickLikeAction.requestLikeProject(topicId: modelData?.id ?? 0,view: self.bottomView,btn: sender as! UIButton) { [weak self](isFavorite) in
+            
+            if let strongSelf = self{
+
+                strongSelf.btnLike.isSelected = isFavorite ?? false
+                // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
+                strongSelf.modelData?.likeQty = Calculate.calculateType(type: isFavorite!)(strongSelf.modelData?.likeQty ?? 0)
+                
+                var thumbNum = strongSelf.modelData?.likeQty ?? 0
+                thumbNum     = (thumbNum < 0 ? 0:thumbNum)
+                if thumbNum == 0 {
+                    strongSelf.lbBrowse.text = ""
+                }else{
+                    strongSelf.lbBrowse.text    = thumbNum.toString
+                }
+                strongSelf.modelData?.favorite = isFavorite
+
+            }
+            
+        }
+        
+    }
+    func showData(_ m:WOWHotStyleModel)  {
+        modelData = m
         lbWOWTitle.text = m.columnName?.get_formted_Space()
         if let url = m.topicImg {
         
@@ -63,10 +92,10 @@ class WOWHotMainCell: UITableViewCell {
         }else{
             lbPraise.text    = m.readQty?.toString
         }
-        lbTitleMain.text     = m.topicMainTitle
+        lbTitleMain.text     = m.topicName
         let timerNumber      = (m.publishTime ?? 0)/1000
         lbTime.text          = timerNumber.getTimeString()
-        
+        btnLike.isSelected   = m.favorite ?? false
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

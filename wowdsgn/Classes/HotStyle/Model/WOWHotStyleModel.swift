@@ -25,6 +25,7 @@ class WOWHotStyleModel: WOWBaseModel,Mappable {
     var publishTime                 :   Int?
     var status                      :   Int?
     var deleted                     :   Bool?
+    var favorite                    : Bool?
     required init?(map: Map) {
         
     }
@@ -46,7 +47,7 @@ class WOWHotStyleModel: WOWBaseModel,Mappable {
         publishTime                 <- map["publishTime"]
         status                      <- map["status"]
         deleted                     <- map["deleted"]
-        
+        favorite                    <- map["favorite"]
     }
 
 }

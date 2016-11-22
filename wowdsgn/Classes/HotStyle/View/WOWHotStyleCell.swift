@@ -50,9 +50,6 @@ class WOWHotStyleCell: UITableViewCell,ModuleViewElement {
                     strongSelf.lbBrowse.text    = thumbNum.toString
                 }
                 strongSelf.modelData?.favorite = isFavorite
-//                if let del = strongSelf.delegate {
-//                    del.reloadTableViewDataWithCell()
-//                }
                 
             }
             

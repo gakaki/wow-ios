@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="321"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qWU-er-7nw" id="72x-Qx-QEg">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="321"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pd3-p5-ZKC">
@@ -68,6 +68,9 @@
                                                 <exclude reference="jzX-FZ-D7o"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="clickLikeActionWithSender:" destination="qWU-er-7nw" eventType="touchUpInside" id="2CQ-r3-UWT"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31D-k8-ysN">
                                         <rect key="frame" x="178" y="0.0" width="30" height="30"/>
@@ -166,7 +169,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尖叫好物" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPH-Zm-QhA">
-                        <rect key="frame" x="8" y="10" width="49.5" height="24"/>
+                        <rect key="frame" x="8" y="10" width="50" height="24"/>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="Dja-nj-Xeg"/>
@@ -189,6 +192,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottomView" destination="njQ-mR-4la" id="dEg-u6-ETv"/>
                 <outlet property="btnLike" destination="fao-X9-TEh" id="lxY-bJ-gRH"/>
                 <outlet property="imgBack" destination="Pd3-p5-ZKC" id="DhF-hO-Qjq"/>
                 <outlet property="lbBrowse" destination="VaJ-6u-J63" id="jhL-Mn-LHn"/>

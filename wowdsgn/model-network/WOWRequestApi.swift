@@ -115,6 +115,7 @@ public enum RequestApi{
     
     case api_IsFavoriteProduct(productId: Int)
     
+    case api_FavoriteTopicComment(commentId: Int)
     
     case api_IsFavoriteBrand(brandId: Int)
     
@@ -318,6 +319,8 @@ extension RequestApi:TargetType{
             return URL_FavoriteBrand
         case .api_FavoriteDesigner:
             return URL_FavoriteDesigner
+        case .api_FavoriteTopicComment:
+            return URL_FavoriteTopicComment
         case .api_IsFavoriteProduct:
             return URL_IsFavoriteProduct
         case .api_IsFavoriteBrand:
@@ -517,6 +520,8 @@ extension RequestApi:TargetType{
                 params = ["productId":productId]
             case let .api_IsFavoriteBrand(brandId):
                 params = ["brandId":brandId]
+            case let .api_FavoriteTopicComment(commentId):
+                params = ["id": commentId]
             case let .api_IsFavoriteDesigner(designerId):
                 params = ["designerId":designerId]
             

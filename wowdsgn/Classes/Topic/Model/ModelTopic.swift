@@ -223,6 +223,7 @@ class WOWTopicCommentModel: WOWBaseModel, Mappable {
     }
 }
 class WOWTopicCommentListModel: WOWBaseModel, Mappable {
+    var commentId:                 Int?
     var userName:                 String?
     var userAvatar:               String?
     var content:                  String?
@@ -235,6 +236,7 @@ class WOWTopicCommentListModel: WOWBaseModel, Mappable {
     }
     
     func mapping(map: Map) {
+        commentId             <- map["id"]
         userName              <- map["userName"]
         userAvatar            <- map["userAvatar"]
         content               <- map["content"]

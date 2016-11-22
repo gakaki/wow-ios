@@ -69,15 +69,7 @@ struct WOWUserManager {
         get{
             let name = (MGDefault.object(forKey: WOWUserName) as? String) ?? ""
             if name.isEmpty {
-                if self.userMobile.isEmpty {
-                    if self.userEmail.isEmpty {
-                        return ""
-                    }else{
-                        return self.userEmail
-                    }
-                }else{
-                    return self.userMobile
-                }
+                return ""
             }else{
                 return name
             }

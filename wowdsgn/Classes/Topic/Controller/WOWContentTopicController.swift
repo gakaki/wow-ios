@@ -254,19 +254,25 @@ class WOWContentTopicController: WOWBaseViewController {
                 }
                 //如果专题不允许评论就不显示评论区域
                 if strongSelf.vo_topic?.allowComment ?? false {
+                    strongSelf.bottomViewConstraint.constant = 0
                     strongSelf.bottomView.isHidden = false
-                    strongSelf.bottomHeight.constant = 50
+                    
                 }else {
+                    strongSelf.bottomViewConstraint.constant = -50
                     strongSelf.bottomView.isHidden = true
-                    strongSelf.bottomHeight.constant = 0
+                    
                 }
+                strongSelf.view.layoutIfNeeded()
+
                 strongSelf.reloadNagationItemThumbButton(strongSelf.vo_topic!.favorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
               
                 strongSelf.requestAboutProduct()
             }
             
-        }){ (errorMsg) in
-
+        }){[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+            }
         }
         
         
@@ -291,7 +297,7 @@ class WOWContentTopicController: WOWBaseViewController {
             
         }){[weak self] (errorMsg) in
             if let strongSelf = self {
-
+                strongSelf.endRefresh()
             }
             
         }
@@ -441,6 +447,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             returnCell = cell
         case (1 + isHaveTag + isHaveComment,_)://评论
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWCommentCell", for: indexPath) as! WOWCommentCell
+            cell.modelData = topicComment?.comments?[indexPath.row]
             cell.showData(topicComment?.comments?[indexPath.row])
             returnCell = cell
         case (1 + isHaveTag + isHaveComment + isHaveAbout,_)://相关商品
@@ -682,9 +689,12 @@ extension WOWContentTopicController: UITextViewDelegate{
         let  keyBoardBounds = (userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let duration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let deltaY = keyBoardBounds.size.height
-        let animations:(() -> Void) = {
-            self.bottomViewConstraint.constant = deltaY
-            self.view.layoutIfNeeded()
+        let animations:(() -> Void) = {[weak self]() in
+            if let strongSelf = self {
+                strongSelf.bottomViewConstraint.constant = deltaY
+                strongSelf.view.layoutIfNeeded()
+            }
+            
         }
         
         if duration > 0 {
@@ -699,9 +709,21 @@ extension WOWContentTopicController: UITextViewDelegate{
     func keyBoardWillHide(_ note:Notification){
         let userInfo  = (note as NSNotification).userInfo as [AnyHashable: Any]!
         let duration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
-        let animations:(() -> Void) = {
-            self.bottomViewConstraint.constant = 0
-            self.view.layoutIfNeeded()
+        let animations:(() -> Void) = { [weak self]() in
+            if let strongSelf = self {
+                //如果专题不允许评论就不显示评论区域
+                if strongSelf.vo_topic?.allowComment ?? false {
+                    strongSelf.bottomViewConstraint.constant = 0
+                    strongSelf.bottomView.isHidden = false
+                    
+                }else {
+                    strongSelf.bottomViewConstraint.constant = -50
+                    strongSelf.bottomView.isHidden = true
+                    
+                }
+                strongSelf.view.layoutIfNeeded()
+            }
+            
         }
         if duration > 0 {
             let options = UIViewAnimationOptions(rawValue: UInt((userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))

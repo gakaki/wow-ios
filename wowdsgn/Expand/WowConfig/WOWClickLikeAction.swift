@@ -166,5 +166,39 @@ class WOWClickLikeAction {
             WOWHud.showMsg("网络错误")
         }
     }
-
+    
+    /**
+     用户喜欢某个评论
+     
+     - parameter commentId:    评论ID
+     - parameter view:       点赞动画加在哪个View上
+     - parameter btn:        那个按钮需要点赞动画
+     - parameter isFavorite: 请求结果，是否喜欢
+     */
+    
+    static func requestLikeComment(commentId: Int,view: UIView, btn: UIButton,isFavorite: @escaping LikeAction){
+        WOWHud.showLoadingSV()
+        guard WOWUserManager.loginStatus == true else{
+            WOWHud.dismiss()
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteTopicComment(commentId: commentId), successClosure: {(result, code) in
+            
+            let favorite = JSON(result)["favorite"].bool ?? false
+            if favorite == true {
+                likeAnimate(view: view, btn: btn)
+            }
+            isFavorite(favorite)
+            
+            
+        }) { (errorMsg) in
+            
+            WOWHud.showMsg("网络错误")
+            
+        }
+        
+    }
 }
+

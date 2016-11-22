@@ -17,9 +17,11 @@ class WOWCommentCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var thumbButton: UIButton!
+    var modelData : WOWTopicCommentListModel?// 主信息
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        headImageView.borderRadius(22)
+        headImageView.borderRadius(15)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,9 +45,39 @@ class WOWCommentCell: UITableViewCell {
             
             if model.favoriteCount > 0 {
                 numberLabel.text = String(format:"%i", model.favoriteCount ?? 0)
+            }else {
+                numberLabel.text = ""
             }
+            thumbButton.isSelected = model.favorite ?? false
         }
         
     }
+    
+    // 点赞按钮
+    @IBAction func clickLikeAction(sender: UIButton) {
+        
+        WOWClickLikeAction.requestLikeComment(commentId: modelData?.commentId ?? 0,view: self,btn: sender) { [weak self](isFavorite) in
+            
+            if let strongSelf = self{
+                
+                strongSelf.thumbButton.isSelected = isFavorite ?? false
+                // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
+                strongSelf.modelData?.favoriteCount = Calculate.calculateType(type: isFavorite!)(strongSelf.modelData?.favoriteCount ?? 0)
+                
+                var thumbNum = strongSelf.modelData?.favoriteCount ?? 0
+                thumbNum     = (thumbNum < 0 ? 0:thumbNum)
+                if thumbNum == 0 {
+                    strongSelf.numberLabel.text = ""
+                }else{
+                    strongSelf.numberLabel.text    = thumbNum.toString
+                }
+                strongSelf.modelData?.favorite = isFavorite
+                
+            }
+            
+        }
+        
+    }
+
 
 }

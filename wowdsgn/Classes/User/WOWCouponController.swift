@@ -71,6 +71,8 @@ class WOWCouponController: WOWBaseViewController {
                 if array.count < strongSelf.pageSize {
                     strongSelf.tableView.mj_footer = nil
                  
+                }else {
+                    strongSelf.tableView.mj_footer = strongSelf.mj_footer
                     }
                 }else {
                     if strongSelf.pageIndex == 1{

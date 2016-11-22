@@ -56,6 +56,9 @@
                         </constraints>
                         <state key="normal" image="Thumb-grey"/>
                         <state key="selected" image="Thumb-active"/>
+                        <connections>
+                            <action selector="clickLikeActionWithSender:" destination="gce-L2-BPX" eventType="touchUpInside" id="zDm-M7-CK7"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

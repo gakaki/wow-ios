@@ -195,7 +195,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundView" destination="baq-m7-GwL" id="GNC-Jr-czW"/>
-                        <outlet property="bottomHeight" destination="z5I-w4-LHI" id="2dA-Yf-HmI"/>
+                        <outlet property="bottomHeight" destination="z5I-w4-LHI" id="Bmr-xB-ibH"/>
                         <outlet property="bottomView" destination="20y-du-Jwb" id="W2h-NM-2FH"/>
                         <outlet property="bottomViewConstraint" destination="cpX-7d-Dtb" id="JgY-7n-9ly"/>
                         <outlet property="inputConstraint" destination="IiA-hs-Mj0" id="1OD-uL-sSY"/>

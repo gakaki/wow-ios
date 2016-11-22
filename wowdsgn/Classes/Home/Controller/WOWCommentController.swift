@@ -12,6 +12,10 @@ import IQKeyboardManagerSwift
 
 class WOWCommentController: WOWBaseViewController {
     let cellID = String(describing: WOWCommentCell.self)
+    let pageSize        = 10
+    var commentList = [WOWTopicCommentListModel]()
+    var topic_id        = 0
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!
     @IBOutlet weak var pressButton: UIButton!
@@ -24,7 +28,7 @@ class WOWCommentController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
-//        request()
+        request()
     }
     
   
@@ -53,7 +57,7 @@ class WOWCommentController: WOWBaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension;
-        tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = 50
         tableView.clearRestCell()
         tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:cellID)
         tableView.mj_header = self.mj_header
@@ -69,29 +73,24 @@ class WOWCommentController: WOWBaseViewController {
     
     fileprivate func send(){
         guard WOWUserManager.loginStatus else{
-            goLogin()
+            toLoginVC(true)
             return
         }
-        let comments = inputTextView.text
-        guard !(comments?.isEmpty)! else{
-            WOWHud.showMsg("请输入评论")
-            return
-        }
-       
         
-    }
-    
-    fileprivate func endEditing(){
-        self.inputTextView.resignFirstResponder()
-        self.inputTextView.text = ""
-        self.inputConstraint.constant = 30
-        self.view.layoutIfNeeded()
-    }
-    
-    
-    fileprivate func goLogin(){
-        let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController")
-        present(vc, animated: true, completion: nil)
+        if inputTextView.text.isEmpty {
+            WOWHud.showMsg("您的评论为空")
+            return
+        }
+        if inputTextView.text.length < 3 {
+            WOWHud.showMsg("请您输入更多内容")
+            return
+        }
+        if inputTextView.text.length > 140 {
+            WOWHud.showMsg("评论的最大字数为140字，请您删减")
+            return
+        }
+        requestSendComment(inputTextView.text)
+        
     }
     
     
@@ -105,14 +104,84 @@ class WOWCommentController: WOWBaseViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+
+    
+//MARK:Private Network
+    override func request() {
+        super.request()
+        ///获取评论列表
+        WOWNetManager.sharedManager.requestWithTarget(.api_TopicCommentList(pageSize: pageSize, currentPage: pageIndex, topicId: topic_id), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                let r = JSON(result)
+                let arr = Mapper<WOWTopicCommentListModel>().mapArray(JSONObject:r["comments"].arrayObject)
+                if let array = arr{
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.commentList = []
+                    }
+                    strongSelf.commentList.append(contentsOf: array)
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < strongSelf.pageSize {
+                        strongSelf.tableView.mj_footer = nil
+                        
+                    }else {
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    }
+                }else {
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.commentList = []
+                    }
+                    strongSelf.tableView.mj_footer = nil
+                }
+
+                strongSelf.tableView.reloadData()
+                
+                strongSelf.endRefresh()
+            }
+                
+        
+        }){[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+            }
+                
+            
+        }
+    }
+    
+    //发表评论
+    func requestSendComment(_ content: String) {
+        WOWNetManager.sharedManager.requestWithTarget(.api_SubmitTopicComment(topicId: topic_id, content: content), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                strongSelf.endEditing()
+                strongSelf.request()
+            }
+            
+        }){[weak self] (errorMsg) in
+            
+        }
+    }
+    
+}
+
+extension WOWCommentController:UITextViewDelegate{
+    fileprivate func endEditing(){
+        self.inputTextView.resignFirstResponder()
+        self.inputTextView.text = ""
+        self.inputConstraint.constant = 30
+        self.view.layoutIfNeeded()
+    }
+   
     func keyBoardWillShow(_ note:Notification){
         let userInfo  = (note as NSNotification).userInfo as [AnyHashable: Any]!
         let  keyBoardBounds = (userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let duration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let deltaY = keyBoardBounds.size.height
-        let animations:(() -> Void) = {
-            self.bottomViewConstraint.constant = deltaY
-            self.view.layoutIfNeeded()
+        let animations:(() -> Void) = {[weak self]() in
+            if let strongSelf = self {
+                strongSelf.bottomViewConstraint.constant = deltaY
+                strongSelf.view.layoutIfNeeded()
+            }
+
         }
         
         if duration > 0 {
@@ -127,9 +196,12 @@ class WOWCommentController: WOWBaseViewController {
     func keyBoardWillHide(_ note:Notification){
         let userInfo  = (note as NSNotification).userInfo as [AnyHashable: Any]!
         let duration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
-        let animations:(() -> Void) = {
-            self.bottomViewConstraint.constant = 0
-            self.view.layoutIfNeeded()
+        let animations:(() -> Void) = { [weak self]() in
+            if let strongSelf = self {
+                strongSelf.bottomViewConstraint.constant = 0
+                strongSelf.view.layoutIfNeeded()
+            }
+
         }
         if duration > 0 {
             let options = UIViewAnimationOptions(rawValue: UInt((userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
@@ -138,47 +210,15 @@ class WOWCommentController: WOWBaseViewController {
             animations()
         }
     }
-    
-//MARK:Private Network
-    override func request() {
-        super.request()
-//        WOWNetManager.sharedManager.requestWithTarget(.api_CommentList(pageindex:"\(self.pageIndex)",thingid:self.mainID,type:type), successClosure: {[weak self](result) in
-//            if let strongSelf = self{
-//                let json = JSON(result)
-//                DLog(json)
-//            let totalPage = JSON(result)["totalPages"].intValue
-//                let arr = Mapper<WOWCommentListModel>().mapArray(JSONObject:result["comment"] as! [String:AnyObject])
-//                strongSelf.endRefresh()
-//                if let array = arr{
-//                    if strongSelf.pageIndex == 0{
-//                        strongSelf.dataArr = []
-//                    }
-//                    strongSelf.dataArr.append(contentsOf: array)
-//                    if strongSelf.pageIndex == totalPage - 1 || totalPage == 0{
-//                        strongSelf.tableView.mj_footer = nil
-//                    }else{
-//                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
-//                    }
-//                }
-//                strongSelf.tableView.reloadData()
-//            }
-//        }) {[weak self](errorMsg) in
-//            if let strongSelf = self{
-//                strongSelf.endRefresh()
-//            }
-//        }
-    }
-    
-}
 
-extension WOWCommentController:UITextViewDelegate{
-    
+
     var COMMENTS_LIMIT:Int{
         get {
             return 140
         }
     }
-//    
+    //delegate
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         backgroundView.isHidden = false
         pressButton.isEnabled = true
@@ -197,33 +237,34 @@ extension WOWCommentController:UITextViewDelegate{
         }
         
     }
-//    //中文和其他字符的判断方式不一样
+    //    //中文和其他字符的判断方式不一样
     func textViewDidChange(_ textView: UITextView) {
-    
+        
         let fixedWidth = inputTextView.frame.size.width
         inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         let newSize = inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        if newSize.height > 100 {
-            inputConstraint.constant = 100
+        if newSize.height > 120 {
+            inputConstraint.constant = 120
         }else {
             inputConstraint.constant = newSize.height
-
+            
         }
         self.view.layoutIfNeeded()
     }
-
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            send()
+            //            send()
             return false
         }
-        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
-        if ret == false{
-            WOWHud.showMsg("您输入的字符超过限制")
-            return false
-        }
+        //        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
+        //        if ret == false{
+        //            WOWHud.showMsg("您输入的字符超过限制")
+        //            return false
+        //        }
         return true
     }
+
 }
 
 
@@ -233,12 +274,13 @@ extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return commentList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWCommentCell
-//        cell.showData(dataArr[(indexPath as NSIndexPath).row])
+        cell.modelData = commentList[(indexPath as NSIndexPath).row]
+        cell.showData(commentList[(indexPath as NSIndexPath).row])
         return cell
     }
     

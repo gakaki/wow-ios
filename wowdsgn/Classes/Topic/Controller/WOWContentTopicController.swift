@@ -65,9 +65,9 @@ class WOWContentTopicController: WOWBaseViewController {
      //MARK:    - lazy
     lazy var nagationItem:WOWTopicNavigationItem = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWTopicNavigationItem.self), owner: self, options: nil)?.last as! WOWTopicNavigationItem
-        view.thumbButton.addTarget(self, action: #selector(dgClick), for: .touchDown)
-        view.shareButton.addTarget(self, action: #selector(zdClick), for: .touchUpInside)
-        view.buyCarBUttion.addTarget(self, action: #selector(sjClick), for: .touchUpInside)
+        view.thumbButton.addTarget(self, action: #selector(dzClick), for: .touchDown)
+        view.shareButton.addTarget(self, action: #selector(fxClick), for: .touchUpInside)
+        view.buyCarBUttion.addTarget(self, action: #selector(bcClick), for: .touchUpInside)
         return view
     }()
   
@@ -94,7 +94,7 @@ class WOWContentTopicController: WOWBaseViewController {
     }
     //MARK:Actions
 
-    func dgClick(_ sender: UIButton) -> Void {
+    func dzClick(_ sender: UIButton) -> Void {
         
         WOWClickLikeAction.requestLikeProject(topicId: topic_id,view: nagationItem,btn: sender) { [weak self](isFavorite) in
 
@@ -118,7 +118,7 @@ class WOWContentTopicController: WOWBaseViewController {
         
     }
     //分享
-    func zdClick() -> Void {
+    func fxClick() -> Void {
 
         let shareUrl = WOWShareUrl + "/topic/\(topic_id )"
         WOWShareManager.share(vo_topic?.topicName, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
@@ -126,7 +126,7 @@ class WOWContentTopicController: WOWBaseViewController {
         
     }
     //去购物车
-    func sjClick() -> Void {
+    func bcClick() -> Void {
         guard WOWUserManager.loginStatus else {
             toLoginVC(true)
             return
@@ -177,14 +177,7 @@ class WOWContentTopicController: WOWBaseViewController {
         makeRightNavigationItem(nagationItem)
     }
     
-        fileprivate func addObservers(){
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
+    
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
 
@@ -197,6 +190,14 @@ class WOWContentTopicController: WOWBaseViewController {
       
     }
 
+    fileprivate func addObservers(){
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
     
     fileprivate func removeObservers() {
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
@@ -649,6 +650,11 @@ extension WOWContentTopicController: UITextViewDelegate{
 //    }
 //
     @IBAction func pressClick(_ sender: UIButton) {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
+
         if inputTextView.text.isEmpty {
             WOWHud.showMsg("您的评论为空")
             return

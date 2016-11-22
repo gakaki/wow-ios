@@ -18,17 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="188" height="263"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售罄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZZ-XJ-GP0" userLabel="label_soldout">
-                        <rect key="frame" x="55" y="85" width="80" height="30"/>
-                        <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="80" id="4fL-uC-Zya"/>
-                            <constraint firstAttribute="height" constant="30" id="9tx-oV-aQU"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f00-ot-Frz">
                         <rect key="frame" x="0.0" y="188" width="188" height="75"/>
                         <subviews>
@@ -124,9 +113,9 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="ejr-m3-xQA"/>
-                                <exclude reference="cVU-q6-7Wy"/>
                                 <exclude reference="Clg-Gu-dIa"/>
                                 <exclude reference="WFL-cD-hgc"/>
+                                <exclude reference="cVU-q6-7Wy"/>
                             </mask>
                         </variation>
                     </view>
@@ -159,6 +148,17 @@
                             </mask>
                         </variation>
                     </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售罄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZZ-XJ-GP0" userLabel="label_soldout">
+                        <rect key="frame" x="67" y="72" width="56" height="56"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="56" id="4fL-uC-Zya"/>
+                            <constraint firstAttribute="height" constant="56" id="9tx-oV-aQU"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGH-70-lab">
                         <rect key="frame" x="8" y="8" width="40" height="18"/>
                         <color key="backgroundColor" red="1" green="0.83137254900000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -222,7 +222,6 @@
             <size key="customSize" width="231" height="263"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="APd-ua-jBd"/>
                     <exclude reference="1ZT-83-0sA"/>
                     <exclude reference="6ZN-hW-ND2"/>
                     <exclude reference="EWs-4I-axb"/>
@@ -238,6 +237,7 @@
                     <exclude reference="1Zo-hN-oeg"/>
                     <exclude reference="Mde-vA-s9e"/>
                     <exclude reference="Pc8-1f-79E"/>
+                    <exclude reference="APd-ua-jBd"/>
                     <exclude reference="7ma-r2-0K9"/>
                     <exclude reference="Dfk-9a-cAC"/>
                     <exclude reference="nG4-ZW-mty"/>

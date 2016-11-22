@@ -39,27 +39,22 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var LeftConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         desLabel.preferredMaxLayoutWidth = (UIApplication.currentViewController()?.view.w)! / CGFloat(2) - 30
         
     }
     
     func set_sold_out_status(){
+        label_soldout.borderRadius(28)
         self.label_soldout.isHidden = false
 //        self.pictureImageView.alpha = 0.4
     }
     func showData(_ model:WOWProductModel,indexPath:IndexPath) {
-        
-        let discoutStr  = "5.5折"
-        let labelStr    = "冬季促销"
-        lbDiscount.text = discoutStr.get_formted_Space()
-        lbLabel.text    = labelStr.get_formted_Space()
-        if discoutStr.isEmpty {
-            
-            lbDiscount.isHidden       = true
-            LeftConstraint.constant = 0
-            
-        }
-        
+//        if model.hasStock ?? false {
+//            label_soldout.isHidden = true
+//        }else {
+//            set_sold_out_status()
+//        }
         let i = (indexPath as NSIndexPath).item
         if ( i % 2 != 0 && i != 0){
             view_rightline.isHidden = true

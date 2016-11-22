@@ -15,7 +15,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     open var vc : UIViewController?
 
     open var ViewControllerType  :ControllerViewType?
-    
+    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
     open var cell_heights    = [0:0.h]
     open var dataSourceArray = [WOWHomeModle]()// 主页main的数据源
     open var isOverBottomData :Bool? //底部列表数据是否拿到全部
@@ -62,7 +62,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             self.tableView.rowHeight          = UITableViewAutomaticDimension
             self.tableView.estimatedRowHeight = 410
             self.tableView.delegate           = self
-            self.tableView.dataSource  = self
+            self.tableView.dataSource         = self
             NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
             
         }
@@ -491,8 +491,12 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         }
         
     }
+    func isHiddenTopBtn(){
+        
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.vc?.className == "WOWController" {
+
+        if self.vc?.className == "WOWController"  {
             let wowcontroller  = self.vc as? WOWController
             if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
                 wowcontroller?.topBtn.isHidden = true
@@ -500,7 +504,15 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 wowcontroller?.topBtn.isHidden = false
             }
         }
-        
+        if self.vc?.className == "VCFound" {
+            let wowcontroller  = self.vc as? VCFound
+            if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
+                wowcontroller?.topBtn.isHidden = true
+            }else{
+                wowcontroller?.topBtn.isHidden = false
+            }
+
+        }
         
     }
     // 底层 wowdsgn 页脚

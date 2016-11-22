@@ -163,7 +163,7 @@ class WOWController: WOWBaseModuleVC {
         super.setUI()
         configTableView()
         configBarItem()
-//        addObserver()
+        
     }
     func configTableView() {
         
@@ -172,9 +172,9 @@ class WOWController: WOWBaseModuleVC {
         dataDelegate?.ViewControllerType    = ControllerViewType.Home
         
         tableView.mj_header            = mj_header
-        tableView.mj_footer            = mj_footerHome
+//        tableView.mj_footer            = mj_footerHome
         self.view.backgroundColor      = GrayColorLevel5
-//        self.tableView.backgroundColor = GrayColorLevel5
+
 
     }
     fileprivate func configBarItem(){
@@ -186,8 +186,8 @@ class WOWController: WOWBaseModuleVC {
         
         super.request()
         self.requestTop()
-        self.requestBottom()
-            
+//        self.requestBottom()
+        
     }
 
     func requestTop() {
@@ -196,17 +196,17 @@ class WOWController: WOWBaseModuleVC {
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
              WOWHud.dismiss()
             if let strongSelf = self{
-                
+                strongSelf.endRefresh()
                 strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
                 
                 strongSelf.dataArr =  (strongSelf.dataDelegate?.dataSourceArray)!
          
 
-                if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
+//                if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
 
                     strongSelf.tableView.reloadData()
                
-                }
+//                }
                
                
             }
@@ -227,7 +227,7 @@ class WOWController: WOWBaseModuleVC {
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result,code) in
             if let strongSelf = self{
                
-                strongSelf.endRefresh()
+        
                 
                 let json = JSON(result)
                 DLog(json)

@@ -243,14 +243,14 @@ extension WOWBaseModuleVC:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate{
     
 }
 
-extension WOWBaseModuleVC:Cell_501_Delegate{
+extension WOWBaseModuleVC:Cell_501_Delegate{// 推荐单品跳转
     
     func toProductDetail(_ productId: Int?) {
         toVCProduct(productId)
     }
     
 }
-extension WOWBaseModuleVC:Cell_302_Delegate{
+extension WOWBaseModuleVC:Cell_302_Delegate{// more 一级分类跳转
     
     func MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302_CELL_Delegate_TouchInside(_ m:WowModulePageItemVO?)
     {
@@ -267,17 +267,17 @@ extension WOWBaseModuleVC:Cell_302_Delegate{
 
     
 }
-extension WOWBaseModuleVC:WOWHotColumnDelegate{
+extension WOWBaseModuleVC:WOWHotColumnDelegate{//点击栏目跳转
     func goToArticleListVC(_ columntId: Int?, title: String?) {
         
-        toVCArticleListVC(columntId ?? 0, title: title ?? "",isOpenTag:false)
+        toVCArticleListVC(columntId ?? 0, title: title ?? "",isOpenTag:false,isPageView: false)
         
     }
 }
-extension WOWBaseModuleVC:HotPeopleTitleDelegate{
+extension WOWBaseModuleVC:HotPeopleTitleDelegate{// 点击标签跳转
     func tagPressedWithToVC(titleId: Int, title: String?)   {
         
-        toVCArticleListVC(titleId , title: title ?? "",isOpenTag:true)
+        toVCArticleListVC(titleId , title: title ?? "",isOpenTag:true,isPageView: false)
         
     }
 }

@@ -13,7 +13,18 @@ class WOWHotArticleList: WOWBaseViewController {
     var dataArr     = [WOWHotStyleModel]()    //商品列表数组
     var titleVC     : String?
     var columnId    = 0 // 栏目ID
-    var keyId       : String!
+    var keyId       : String!// tagid - columnId
+    var valuePageView       : String!  // page - topic
+    var isPageView  :Bool?{// 为true 则是从专题详情内点击进来
+        didSet{
+            if isPageView ?? false {
+                valuePageView = "topic"
+            }else{
+                valuePageView = "page"
+            }
+        }
+    }
+    
     var isOpenTag  :Bool?{// 为true  则是点击的标签 进来的
         didSet{
             if isOpenTag ?? false {
@@ -51,13 +62,8 @@ class WOWHotArticleList: WOWBaseViewController {
         var params = [String: AnyObject]()
         
         let totalPage = 10
-//        if isOpenTag ?? false {
-            params = ["currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject,keyId:columnId as AnyObject]
-//        }else{
-//            params = ["currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject,"columnId":columnId as AnyObject]
-
-//        }
         
+        params = ["currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject,keyId:columnId as AnyObject,"channel":valuePageView as AnyObject]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_HotStyle_BottomList(params : params), successClosure: {[weak self] (result,code) in
             if let strongSelf = self{

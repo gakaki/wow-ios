@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="321"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qWU-er-7nw" id="72x-Qx-QEg">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="321"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pd3-p5-ZKC">
@@ -90,6 +90,9 @@
                                                 <exclude reference="zcZ-l3-j4s"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="shareClickWithSender:" destination="qWU-er-7nw" eventType="touchUpInside" id="pxl-rf-Q9d"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23333" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaJ-6u-J63">
                                         <rect key="frame" x="125" y="5" width="38" height="21"/>

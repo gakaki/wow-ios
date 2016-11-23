@@ -37,7 +37,7 @@ class WOWHomeFormCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var lbContent: UILabel!
     var modelData : WOWModelVoTopic?{
         didSet{
-            lbMainTitle.text = modelData?.topicMainTitle
+            lbMainTitle.text = modelData?.topicName
             lbContent.text   = modelData?.topicDesc
             lbContent.setLineHeightAndLineBreak(1.5)
             dataArr          = modelData?.products
@@ -162,7 +162,7 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
 //        let firstIndexPath = IndexPath(item: 0, section: section)
 //        let firstSize = self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: firstIndexPath)
         
-        return UIEdgeInsetsMake(0, 15,
+        return UIEdgeInsetsMake(0, 25,
                                 0, 15)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

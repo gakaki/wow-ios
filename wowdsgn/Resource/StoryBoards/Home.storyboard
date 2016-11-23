@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="TR4-mJ-1qI">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="TR4-mJ-1qI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -231,6 +231,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RQl-MO-DhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1139" y="1592"/>
+        </scene>
+        <!--Base ModuleVC-->
+        <scene sceneID="h3E-cb-fyL">
+            <objects>
+                <viewController id="mYw-c2-3pv" customClass="WOWBaseModuleVC" customModule="wowdsgn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SqP-JV-Glv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fyf-0K-xqX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7JI-1Q-tbH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="4yl-SK-VAa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Yv4-lh-V50" id="Zw7-aa-VOQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="dataDelegate" destination="Yv4-lh-V50" id="OUo-zm-Oam"/>
+                        <outlet property="tableView" destination="4yl-SK-VAa" id="c9W-kI-8Oo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FJt-Cp-jkh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Yv4-lh-V50" customClass="WOWTableDelegate" customModule="wowdsgn" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-456" y="1964"/>
         </scene>
         <!--搜索-->
         <scene sceneID="f5z-DS-P3L">

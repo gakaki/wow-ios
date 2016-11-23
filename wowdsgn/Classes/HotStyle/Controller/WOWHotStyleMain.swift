@@ -13,9 +13,6 @@ class WOWHotStyleMain: WOWBaseModuleVC {
     var dataArr     = [WOWHomeModle]()    //商品列表数组
     var bottomListArray = [WOWHotStyleModel]() //精选底部列表数组
  
-    @IBOutlet var dataDelegate: WOWTableDelegate?
-    
-    @IBOutlet var tableView: UITableView!
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -37,10 +34,10 @@ class WOWHotStyleMain: WOWBaseModuleVC {
     override func setUI() {
         super.setUI()
         configBuyBarItem()
-        tableView.mj_header                 = mj_header
+        
         dataDelegate?.vc                    = self
-        dataDelegate?.tableView             = tableView
         dataDelegate?.ViewControllerType    = ControllerViewType.HotStyle
+        
         self.view.backgroundColor           = UIColor.white
         dataDelegate?.tableView.backgroundColor = UIColor.white
     }
@@ -60,7 +57,7 @@ class WOWHotStyleMain: WOWBaseModuleVC {
             
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
+                strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.dataWithHomeModel(result: result)
                 
                 if let brandArray =  strongSelf.dataDelegate?.dataSourceArray{
                     
@@ -83,7 +80,7 @@ class WOWHotStyleMain: WOWBaseModuleVC {
         }
 
     }
-    func requestBottom()  {
+    override func requestBottom()  {
         var params = [String: AnyObject]()
         
         let totalPage = 10
@@ -140,25 +137,11 @@ class WOWHotStyleMain: WOWBaseModuleVC {
             }
         }
     }
-    lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
-        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
-        return f!
-    }()
-    func loadBottomData()  {
-        if isRreshing {
-            return
-        }else{
-            pageIndex += 1
-            isRreshing = true
-        }
-        requestBottom()
-        
-    }
 
     fileprivate func addObserver(){
         // 刷新购物车数量
         NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
-         NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWUpdateProjectThumbNotificationKey), object:nil)
         

@@ -83,7 +83,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
         label_Stock.snp.makeConstraints { (make) -> Void  in
             label_Stock.font            = UIFont.systemFont(ofSize: 14)
             label_Stock.textColor       = UIColor.white
-            label_Stock.backgroundColor       = UIColor.black.withAlphaComponent(0.4)
+            label_Stock.backgroundColor = UIColor.black.withAlphaComponent(0.4)
 
             label_Stock.textAlignment   = NSTextAlignment.center
             

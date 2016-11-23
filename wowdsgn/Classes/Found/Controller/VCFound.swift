@@ -14,28 +14,14 @@ class VCFound: WOWBaseModuleVC {
     var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
-    
-    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
-    
-    @IBOutlet var dataDelegate: WOWTableDelegate?
-
-    
+        
     var myQueueTimer: DispatchQueue?
     var myTimer: DispatchSourceTimer?
-    
-    @IBOutlet weak var tableView: UITableView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(self.topBtn)
-        
-        self.topBtn.snp.makeConstraints { (make) in
-            make.width.equalTo(98)
-            make.height.equalTo(30)
-            make.centerX.equalTo(self.view)
-            make.top.equalTo(self.view).offset(10)
-        }
-        self.topBtn.isHidden = true
+
 
         do {
             try request_module_page_with_throw()
@@ -50,27 +36,13 @@ class VCFound: WOWBaseModuleVC {
     override func setUI() {
         super.setUI()
         self.view.backgroundColor      = GrayColorLevel5
+        
         dataDelegate?.vc = self
-        dataDelegate?.tableView = tableView
         tableView.separatorColor     = SeprateColor
-        tableView.mj_header            = mj_header
         tableView.mj_footer            = mj_footerHome
-        self.edgesForExtendedLayout  = UIRectEdge()
+
 
     }
-    //MARK:Lazy
-    lazy var topBtn:UIButton = {
-        var btn = UIButton(type: UIButtonType.custom)
-        btn = btn as UIButton
-        btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
-        btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
-        return btn
-    }()
-    func backTop()  {
-        let index = IndexPath.init(row: 0, section: 0)
-        self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
-    }
-
     
 //MARK: PURLL TO REFRESH AND REQUEST
     override func pullToRefresh() {
@@ -95,7 +67,7 @@ class VCFound: WOWBaseModuleVC {
             WOWHud.dismiss()
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
+                strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.dataWithHomeModel(result: result)
                 
                 strongSelf.dataArr  = []
                 if let dataSource  = strongSelf.dataDelegate?.dataSourceArray{
@@ -115,7 +87,7 @@ class VCFound: WOWBaseModuleVC {
 
     }
     
-    func requestBottom()  {
+    override func requestBottom()  {
         var params = [String: AnyObject]()
         
         let totalPage = 10
@@ -172,21 +144,6 @@ class VCFound: WOWBaseModuleVC {
             }
         }
     }
-    func loadBottomData()  {
-        if isRreshing {
-            return
-        }else{
-            pageIndex += 1
-            isRreshing = true
-        }
-        requestBottom()
-        
-    }
-    lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
-        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
-        return f!
-    }()
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addObserver()

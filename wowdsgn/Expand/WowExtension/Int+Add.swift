@@ -107,13 +107,13 @@ public extension Int {
     
     func noYesterdayTimeStr() -> String {
         let format = DateFormatter()
-        format.dateFormat = "MM-dd HH:mm"
+        format.dateFormat = "MM月dd日"
         return format.string(from: selfDate)
     }
     
     func yearTimeStr() -> String {
         let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd HH:mm"
+        format.dateFormat = "yyyy年前"
         return format.string(from: selfDate)
     }
 }

@@ -19,7 +19,7 @@ class WOWHotPeopleCell: UITableViewCell,ModuleViewElement,TagListViewDelegate {
         return 1001
     }
 //    var tagArr:[WOWHomeHot_1001_title]!
-    
+    @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var tagListView: TagListView!
     fileprivate var dataArr:[WOWHomeHot_1001_title] = []
     weak var delegate :HotPeopleTitleDelegate?

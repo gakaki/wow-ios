@@ -13,18 +13,49 @@ class WOWBaseModuleVC: WOWBaseViewController {
 
     var myQueueTimer1: DispatchQueue?
     var myTimer1: DispatchSourceTimer?
+    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
+    @IBOutlet var tableView: UITableView!
+    
+    @IBOutlet var dataDelegate: WOWTableDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
- 
+        self.view.addSubview(self.topBtn)
+        
+        self.topBtn.snp.makeConstraints { (make) in
+            make.width.equalTo(98)
+            make.height.equalTo(30)
+            make.centerX.equalTo(self.view)
+            make.top.equalTo(self.view).offset(10)
+        }
+        self.topBtn.isHidden = true
     }
+    //MARK:Lazy
+    lazy var topBtn:UIButton = {
+        var btn = UIButton(type: UIButtonType.custom)
+        btn = btn as UIButton
+        btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
+        btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
+        return btn
+    }()
+    func backTop()  {
+        let index = IndexPath.init(row: 0, section: 0)
+        self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
+    }
+    
+    override func setUI() {
+        super.setUI()
 
-
+        tableView.mj_header             = mj_header
+        dataDelegate?.tableView         = tableView
+        self.edgesForExtendedLayout  = UIRectEdge()
+  
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
     }
-    
+    // 倒计时 ，实时更新Model层数据
     func timerCount(array: Array<WOWHomeModle>){
         myQueueTimer1 = DispatchQueue(label: "myQueueTimer")
         myTimer1 = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer1!)
@@ -43,8 +74,28 @@ class WOWBaseModuleVC: WOWBaseViewController {
         myTimer1?.resume()
         
     }
-
-    func data(result: AnyObject) -> Array<WOWHomeModle> {
+    // 底部刷新
+    lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
+        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
+        f?.stateLabel.textColor = UIColor(hexString: "CCCCCC")
+        f?.stateLabel.font = UIFont.systemFont(ofSize: 14)
+        return f!
+    }()
+    func loadBottomData()  {
+        if isRreshing {
+            return
+        }else{
+            pageIndex += 1
+            isRreshing = true
+        }
+        requestBottom()
+        
+    }
+    func requestBottom()  {
+        
+    }
+    // json 数据 转成model
+    func dataWithHomeModel(result: AnyObject) -> Array<WOWHomeModle> {
         
         var dataArr = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
         
@@ -185,7 +236,7 @@ extension WOWBaseModuleVC:SenceCellDelegate{
         toVCProduct(produtID)
     }
 }
-extension WOWBaseModuleVC:cell_102_delegate{
+extension WOWBaseModuleVC:cell_102_delegate{// 左右滑动专题跳转
     func goToProjectDetailVC(_ model: WOWCarouselBanners?){
         if let model = model {
             goController(model)
@@ -198,7 +249,7 @@ extension WOWBaseModuleVC:cell_801_delegate{// 今日单品跳转详情
         toVCProduct(productId)
     }
 }
-extension WOWBaseModuleVC:WOWHotStyleCellDelegate{
+extension WOWBaseModuleVC:WOWHotStyleCellDelegate{// 点赞刷新
     
     func reloadTableViewDataWithCell(){
         
@@ -216,12 +267,7 @@ extension WOWBaseModuleVC:WOWHotStyleDelegate{
     }
     
 }
-//func notLoginThanToLogin(){
-//    if  (!WOWUserManager.loginStatus){
-//        toLoginVC(true)
-//    }
-//}
-extension WOWBaseModuleVC:FoundWeeklyNewCellDelegate{
+extension WOWBaseModuleVC:FoundWeeklyNewCellDelegate{// 本周上新跳转
     
     func cellFoundWeeklyNewCellTouchInside(_ m:WowModulePageItemVO){
 
@@ -232,7 +278,7 @@ extension WOWBaseModuleVC:FoundWeeklyNewCellDelegate{
     }
     
 }
-extension WOWBaseModuleVC:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate{
+extension WOWBaseModuleVC:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate{//  一级 分类 场景跳转
     
     func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(_ m:WowModulePageItemVO?)
     {

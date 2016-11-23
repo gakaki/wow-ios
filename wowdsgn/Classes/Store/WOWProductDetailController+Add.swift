@@ -75,7 +75,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case (0 + isHaveLimit,_): //促销标签
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductLimitCell.self), for: indexPath) as! WOWProductLimitCell
-            cell.limitLabel.text = productModel.limitTag ?? ""
+            cell.limitLabel.text = productModel?.limitTag ?? ""
             returnCell = cell
         case (1 + isHaveLimit,_): //满199包邮
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDesCell.self), for: indexPath) as! WOWProductDesCell

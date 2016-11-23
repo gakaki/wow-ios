@@ -18,14 +18,14 @@ class WOWHotStyleModel: WOWBaseModel,Mappable {
     var topicMainTitle              :   String?
     var brandId                     :   Int?
     var designerId                  :   Int?
-    var topicDesc                   :   Int?
+    var topicDesc                   :   String?
     var topicType                   :   Int?
     var favoriteQty                 :   Int?
     var readQty                     :   Int?
     var publishTime                 :   Int?
     var status                      :   Int?
     var deleted                     :   Bool?
-    var favorite                    : Bool?
+    var favorite                    :   Bool?
     required init?(map: Map) {
         
     }

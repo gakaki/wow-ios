@@ -598,11 +598,11 @@ extension WOWContentTopicController: WOWProductDetailAboutCellDelegate, WOWTopic
     
     func columnGoTopic(_ columnId: Int?, topicTitle title: String?) {
        
-        toVCArticleListVC(columnId ?? 0, title: title ?? "",isOpenTag: false)
+        toVCArticleListVC(columnId ?? 0, title: title ?? "",isOpenTag: false,isPageView: true)
     }
     
     func tagGoTopic(_ tagId: Int?, tagTitle title: String?) {
-        toVCArticleListVC(tagId ?? 0, title: title ?? "",isOpenTag: true)
+        toVCArticleListVC(tagId ?? 0, title: title ?? "",isOpenTag: true,isPageView: true)
     }
     
 }

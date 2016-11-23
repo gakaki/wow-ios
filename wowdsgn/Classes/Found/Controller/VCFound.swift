@@ -9,7 +9,14 @@ import RxDataSources
 class VCFound: WOWBaseModuleVC {
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     var dataMainArr                    = [WowModulePageVO]()
-  
+    var bottomListArray = [WOWProductModel]() //底部列表数组
+    
+    var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
+    
+    var isOverBottomData :Bool? //底部列表数据是否拿到全部
+    
+    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
+    
     @IBOutlet var dataDelegate: WOWTableDelegate?
 
     
@@ -20,13 +27,24 @@ class VCFound: WOWBaseModuleVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(self.topBtn)
+        
+        self.topBtn.snp.makeConstraints { (make) in
+            make.width.equalTo(98)
+            make.height.equalTo(30)
+            make.centerX.equalTo(self.view)
+            make.top.equalTo(self.view).offset(10)
+        }
+        self.topBtn.isHidden = true
 
         do {
             try request_module_page_with_throw()
+                requestBottom()
         }catch{
             DLog(error)
             self.endRefresh()
         }
+        
     }
     
     override func setUI() {
@@ -35,9 +53,22 @@ class VCFound: WOWBaseModuleVC {
         dataDelegate?.vc = self
         dataDelegate?.tableView = tableView
         tableView.separatorColor     = SeprateColor
-        tableView.mj_header          = mj_header
+        tableView.mj_header            = mj_header
+        tableView.mj_footer            = mj_footerHome
         self.edgesForExtendedLayout  = UIRectEdge()
 
+    }
+    //MARK:Lazy
+    lazy var topBtn:UIButton = {
+        var btn = UIButton(type: UIButtonType.custom)
+        btn = btn as UIButton
+        btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
+        btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
+        return btn
+    }()
+    func backTop()  {
+        let index = IndexPath.init(row: 0, section: 0)
+        self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
     }
 
     
@@ -46,6 +77,7 @@ class VCFound: WOWBaseModuleVC {
         super.pullToRefresh()
         do {
             try request_module_page_with_throw()
+                requestBottom()
         }catch{
             DLog(error)
             self.endRefresh()
@@ -57,28 +89,104 @@ class VCFound: WOWBaseModuleVC {
     func request_module_page_with_throw() throws -> Void {
         
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Module_Page2, successClosure: {[weak self] (result, code) in
-            
+        let params = ["pageId": 2, "region": 1]
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
             if let strongSelf = self{
-                                
                 strongSelf.endRefresh()
                 strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
+                
                 strongSelf.dataArr  = []
                 if let dataSource  = strongSelf.dataDelegate?.dataSourceArray{
-                        strongSelf.dataArr = dataSource
+                    strongSelf.dataArr = dataSource
                 }
-               
-                strongSelf.tableView.reloadData()
+                if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
+                
+                    strongSelf.tableView.reloadData()
+                
+                }
             }
-            
-        }){ (errorMsg) in
-            print(errorMsg ?? "")
-            self.endRefresh()
-       
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
         }
+
     }
     
-    
+    func requestBottom()  {
+        var params = [String: AnyObject]()
+        
+        let totalPage = 10
+        params = ["excludes": [] as AnyObject ,"currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject]
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result,code) in
+            if let strongSelf = self{
+                
+                strongSelf.endRefresh()
+                
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.mj_footerHome.endRefreshing()
+                
+                let bannerList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
+                
+                if let bannerList = bannerList{
+                    if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
+                        strongSelf.bottomListArray = []
+                        strongSelf.dataDelegate?.isOverBottomData = false
+                        
+                    }
+                    if bannerList.count < totalPage {// 如果拿到的数据，小于分页，则说明，无下一页
+                        strongSelf.tableView.mj_footer = nil
+                        strongSelf.dataDelegate?.isOverBottomData = true
+                        
+                        
+                    }else {
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footerHome
+                    }
+                    
+                    strongSelf.bottomListArray.append(contentsOf: bannerList)
+                    strongSelf.dataDelegate?.bottomListArray = strongSelf.bottomListArray
+                    
+                }else {
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.bottomListArray = []
+                    }
+                    
+                    strongSelf.tableView.mj_footer = nil
+                    
+                }
+                if strongSelf.dataArr.count > 0 {// 确保reloadData 数据都存在
+                    
+                    strongSelf.tableView.reloadData()
+                    WOWHud.dismiss()
+                }
+
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+    }
+    func loadBottomData()  {
+        if isRreshing {
+            return
+        }else{
+            pageIndex += 1
+            isRreshing = true
+        }
+        requestBottom()
+        
+    }
+    lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
+        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
+        return f!
+    }()
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addObserver()

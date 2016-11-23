@@ -140,7 +140,7 @@ extension WOWHotStyleNewMain:UITableViewDelegate,UITableViewDataSource{
 }
 extension WOWHotStyleNewMain:WOWHotColumnDelegate{
     func goToArticleListVC(_ columntId: Int?, title: String?) {
-        
-        toVCArticleListVC(columntId ?? 0, title: title ?? "",isOpenTag: false)
+    
+        toVCArticleListVC(columntId ?? 0, title: title ?? "",isOpenTag: false,isPageView: false)
     }
 }

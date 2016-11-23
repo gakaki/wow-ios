@@ -345,7 +345,6 @@ extension  UIViewController {
 
     }
     
-    
     func toVCProduct( _ pid: Int? ){
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
@@ -365,11 +364,18 @@ extension  UIViewController {
         vc.hideNavigationBar = false
         pushVC(vc)
     }
-    func toVCArticleListVC(_ columntId: Int,title: String,isOpenTag:Bool ) {
+    
+    /// 跳转专题列表
+    ///   - columntId: 专题ID
+    ///   - title: 专题Title
+    ///   - isOpenTag: 是否点击标签进来的， true 为点击标签触发
+    ///   - isPageView: false为在首页点击触发，true为在详情页点击触发
+    func toVCArticleListVC(_ columntId: Int,title: String,isOpenTag:Bool,isPageView:Bool) {
         let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWHotArticleList.self)) as! WOWHotArticleList
-        vc.title = title
-        vc.columnId = columntId
-        vc.isOpenTag = isOpenTag
+        vc.title        = title
+        vc.columnId     = columntId
+        vc.isOpenTag    = isOpenTag
+        vc.isPageView   = isPageView
         pushVC(vc)
     }
     

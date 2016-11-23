@@ -97,6 +97,12 @@ class WOWHotMainCell: UITableViewCell {
         lbTime.text          = timerNumber.getTimeString()
         btnLike.isSelected   = m.favorite ?? false
     }
+    
+    @IBAction func shareClick(sender: UIButton) {
+        let shareUrl = WOWShareUrl + "/topic/\(modelData?.id ?? 0)"
+        WOWShareManager.share(modelData?.topicName, shareText: modelData?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

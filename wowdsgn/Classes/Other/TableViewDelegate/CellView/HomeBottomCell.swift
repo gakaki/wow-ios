@@ -189,6 +189,8 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
                 
             }
             
+        }else {
+              btnIsLikeTwo.isSelected = false
         }
 
         self.isHidden(lbNew: lbNewTwo, lbDiscount: lbDiscountTwo, lbPromote: lbPromoteTwo,model: model,isOne:false)

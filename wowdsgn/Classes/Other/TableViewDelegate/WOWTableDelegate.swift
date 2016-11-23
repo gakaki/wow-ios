@@ -339,6 +339,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             if let arr = model.moduleContentTitle?.tags{
                 cell.showData(arr)
+                cell.lbTitle.text = model.moduleContentTitle?.name
             }
             cell.delegate = self.vc as? HotPeopleTitleDelegate
             returnCell = cell
@@ -496,23 +497,23 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        if self.vc?.className == "WOWController"  {
-            let wowcontroller  = self.vc as? WOWController
+//        if self.vc?.className == "WOWController"  {
+            let wowcontroller  = self.vc as? WOWBaseModuleVC
             if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
                 wowcontroller?.topBtn.isHidden = true
             }else{
                 wowcontroller?.topBtn.isHidden = false
             }
-        }
-        if self.vc?.className == "VCFound" {
-            let wowcontroller  = self.vc as? VCFound
-            if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
-                wowcontroller?.topBtn.isHidden = true
-            }else{
-                wowcontroller?.topBtn.isHidden = false
-            }
-
-        }
+//        }
+//        if self.vc?.className == "VCFound" {
+//            let wowcontroller  = self.vc as? VCFound
+//            if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
+//                wowcontroller?.topBtn.isHidden = true
+//            }else{
+//                wowcontroller?.topBtn.isHidden = false
+//            }
+//
+//        }
         
     }
     // 底层 wowdsgn 页脚

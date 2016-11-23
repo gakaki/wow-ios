@@ -20,28 +20,14 @@ class WOWController: WOWBaseModuleVC {
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
-    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
-    
-    @IBOutlet var dataDelegate: WOWTableDelegate?
-    
-    @IBOutlet var tableView: UITableView!
-    //    var hidingNavBarManager: HidingNavigationBarManager?
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
 
         setUI()
         addObserver()
-        self.view.addSubview(self.topBtn)
-        
-        self.topBtn.snp.makeConstraints { (make) in
-            make.width.equalTo(98)
-            make.height.equalTo(30)
-            make.centerX.equalTo(self.view)
-            make.top.equalTo(self.view).offset(10)
-        }
-        self.topBtn.isHidden = true
-        
         request()
         // 检查更新 
 //        WOWCheckUpdate.checkUpdateWithDevice {[weak self] (isUpdate) in
@@ -106,19 +92,6 @@ class WOWController: WOWBaseModuleVC {
         return a
     }()
     
-    //MARK:Lazy
-    lazy var topBtn:UIButton = {
-        var btn = UIButton(type: UIButtonType.custom)
-        btn = btn as UIButton
-        btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
-        btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
-        return btn
-    }()
-    func backTop()  {
-        let index = IndexPath.init(row: 0, section: 0)
-        self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
-    }
-    
     func loginSuccess()  {// 重新刷新数据
         self.pageIndex = 1
         request()
@@ -153,10 +126,6 @@ class WOWController: WOWBaseModuleVC {
         }
       
     }
-      lazy var mj_footerHome:MJRefreshAutoNormalFooter = {
-        let f = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction:#selector(loadBottomData))
-        return f!
-    }()
     
     //MARK:Private Method
     override func setUI() {
@@ -168,14 +137,9 @@ class WOWController: WOWBaseModuleVC {
     func configTableView() {
         
         dataDelegate?.vc = self
-        dataDelegate?.tableView             = tableView
         dataDelegate?.ViewControllerType    = ControllerViewType.Home
         
-        tableView.mj_header            = mj_header
-//        tableView.mj_footer            = mj_footerHome
         self.view.backgroundColor      = GrayColorLevel5
-
-
     }
     fileprivate func configBarItem(){
         configBuyBarItem() // 购物车数量
@@ -197,7 +161,7 @@ class WOWController: WOWBaseModuleVC {
              WOWHud.dismiss()
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.data(result: result)
+                strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.dataWithHomeModel(result: result)
                 
                 strongSelf.dataArr =  (strongSelf.dataDelegate?.dataSourceArray)!
          
@@ -219,7 +183,7 @@ class WOWController: WOWBaseModuleVC {
         
     }
     
-    func requestBottom()  {
+    override func requestBottom()  {
         var params = [String: AnyObject]()
         
         let totalPage = 10
@@ -269,7 +233,6 @@ class WOWController: WOWBaseModuleVC {
                      WOWHud.dismiss()
                 }
 
-                //                dispatch_group_leave(strongSelf.group);
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
@@ -278,18 +241,6 @@ class WOWController: WOWBaseModuleVC {
             }
         }
     }
-    func loadBottomData()  {
-        if isRreshing {
-            return
-        }else{
-            pageIndex += 1
-            isRreshing = true
-        }
-        requestBottom()
-        
-    }
-  
-
   }
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel

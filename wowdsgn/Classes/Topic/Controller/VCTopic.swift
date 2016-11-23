@@ -252,7 +252,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
             
             if let pic = self.vo_topic?.topicImg {
                 headerView.imageView.set_webimage_url(pic )
-                headerView.label_name.text = self.vo_topic?.topicMainTitle
+                headerView.label_name.text = self.vo_topic?.topicName
                 headerView.label_desc.text = self.vo_topic?.topicDesc
                 headerView.label_desc.setLineHeightAndLineBreak(1.5)
              

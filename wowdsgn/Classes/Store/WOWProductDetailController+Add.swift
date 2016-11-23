@@ -141,7 +141,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case 4 + isHaveLimit, 5 + isHaveLimit:
             //产品参数与温馨提示cell头
             return 60
-        case 7 + isHaveLimit + isHaveComment + isHaveAbout: //如果相关商品有数据显示，如果没有就不显示
+        case 6 + isHaveLimit + isHaveComment + isHaveAbout: //如果相关商品有数据显示，如果没有就不显示
             if aboutProductArray.count > 0 {
                 return 39
             }else {
@@ -212,7 +212,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return tipsView
-        case 7 + isHaveLimit + isHaveAbout + isHaveComment:
+        case 6 + isHaveLimit + isHaveAbout + isHaveComment:
             return aboutView
         default:
             return nil

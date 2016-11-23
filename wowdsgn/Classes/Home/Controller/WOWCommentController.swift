@@ -224,6 +224,8 @@ extension WOWCommentController:UITextViewDelegate{
         backgroundView.isHidden = false
         pressButton.isEnabled = true
         pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+        pressButton.setTitleColor(UIColor.black, for: .normal)
+
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -232,9 +234,13 @@ extension WOWCommentController:UITextViewDelegate{
         if textView.text.isEmpty {
             pressButton.isEnabled = false
             pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
+            pressButton.setTitleColor(UIColor.white, for: .normal)
+
         }else {
             pressButton.isEnabled = true
             pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+            pressButton.setTitleColor(UIColor.black, for: .normal)
+
         }
         
     }

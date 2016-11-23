@@ -43,6 +43,9 @@ public extension Int {
                 return "\(hour)小时前"
             }
         } else if isYear {
+            if hour < 24{
+                return "\(hour)小时前"
+            }
             if day < 4 {
                 return "\(day)天前"
             }

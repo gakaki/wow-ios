@@ -469,6 +469,8 @@
 		63DD6A5E1DE29EFF005BE631 /* WOWProductLimitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63DD6A5C1DE29EFF005BE631 /* WOWProductLimitCell.xib */; };
 		63DD6A611DE2E845005BE631 /* WOWContentDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD6A5F1DE2E845005BE631 /* WOWContentDetailCell.swift */; };
 		63DD6A621DE2E845005BE631 /* WOWContentDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63DD6A601DE2E845005BE631 /* WOWContentDetailCell.xib */; };
+		63DD6A641DE44B07005BE631 /* WOWCouponEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD6A631DE44B07005BE631 /* WOWCouponEmptyView.swift */; };
+		63DD6A661DE44B13005BE631 /* WOWCouponEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63DD6A651DE44B13005BE631 /* WOWCouponEmptyView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -970,6 +972,8 @@
 		63DD6A5C1DE29EFF005BE631 /* WOWProductLimitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWProductLimitCell.xib; sourceTree = "<group>"; };
 		63DD6A5F1DE2E845005BE631 /* WOWContentDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWContentDetailCell.swift; sourceTree = "<group>"; };
 		63DD6A601DE2E845005BE631 /* WOWContentDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWContentDetailCell.xib; sourceTree = "<group>"; };
+		63DD6A631DE44B07005BE631 /* WOWCouponEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCouponEmptyView.swift; sourceTree = "<group>"; };
+		63DD6A651DE44B13005BE631 /* WOWCouponEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWCouponEmptyView.xib; sourceTree = "<group>"; };
 		DCD449CB28CB16A176F60958 /* Pods-wowdsgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1888,6 +1892,8 @@
 				069D30BD1DB47ADC00A059D0 /* WOWCouponheaderView.xib */,
 				639C13F01DD956C1003B0F59 /* WOWCouponNumberView.swift */,
 				639C13F11DD956C1003B0F59 /* WOWCouponNumberView.xib */,
+				63DD6A631DE44B07005BE631 /* WOWCouponEmptyView.swift */,
+				63DD6A651DE44B13005BE631 /* WOWCouponEmptyView.xib */,
 				069D30C41DB47ADC00A059D0 /* WOWNumberMessageView.swift */,
 				069D30C81DB47ADC00A059D0 /* WOWOrderDetailCostCell.swift */,
 				069D30C91DB47ADC00A059D0 /* WOWOrderDetailCostCell.xib */,
@@ -2299,6 +2305,7 @@
 				634AA5E21DDC108100E49D23 /* WOWMoreCommentView.xib in Resources */,
 				069D33451DB47ADE00A059D0 /* LaunchScreen.storyboard in Resources */,
 				068121571DB4D03700407319 /* UMShareEditViewControlleriPad.xib in Resources */,
+				63DD6A661DE44B13005BE631 /* WOWCouponEmptyView.xib in Resources */,
 				2DDC99C41DDAFC5400201856 /* WOWHotHeaderView.xib in Resources */,
 				6326BF391DD0160700917FA3 /* WOWLaunchView.xib in Resources */,
 				2DDA4DE21DDEFE2E00E7A7E8 /* WOWCountDownView.xib in Resources */,
@@ -2670,6 +2677,7 @@
 				069D32AD1DB47ADD00A059D0 /* WOWAddressController.swift in Sources */,
 				634AA5E01DDC107200E49D23 /* WOWMoreCommentView.swift in Sources */,
 				069D32A31DB47ADD00A059D0 /* ModelVOCoupon.swift in Sources */,
+				63DD6A641DE44B07005BE631 /* WOWCouponEmptyView.swift in Sources */,
 				069D32EE1DB47ADD00A059D0 /* WOWUserManager.swift in Sources */,
 				2DDC99C01DDAF68500201856 /* WOWHotStyleNewMain.swift in Sources */,
 				069D32F81DB47ADD00A059D0 /* UIViewController+VCManager.swift in Sources */,

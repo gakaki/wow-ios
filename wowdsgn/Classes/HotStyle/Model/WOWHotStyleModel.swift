@@ -20,7 +20,7 @@ class WOWHotStyleModel: WOWBaseModel,Mappable {
     var designerId                  :   Int?
     var topicDesc                   :   String?
     var topicType                   :   Int?
-    var likeQty                     :   Int?
+    var favoriteQty                 :   Int?
     var readQty                     :   Int?
     var publishTime                 :   Int?
     var status                      :   Int?
@@ -42,7 +42,7 @@ class WOWHotStyleModel: WOWBaseModel,Mappable {
         designerId                  <- map["designerId"]
         topicDesc                   <- map["topicDesc"]
         topicType                   <- map["topicType"]
-        likeQty                     <- map["likeQty"]
+        favoriteQty                 <- map["favoriteQty"]
         readQty                     <- map["readQty"]
         publishTime                 <- map["publishTime"]
         status                      <- map["status"]

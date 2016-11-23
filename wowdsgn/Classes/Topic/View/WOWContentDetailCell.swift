@@ -105,6 +105,7 @@ class WOWContentDetailCell: UITableViewCell {
             //            }else {
             //                bottomSpace.constant = 15
             //            }
+            imageDesc.setLineHeightAndLineBreak(1.5)
             descLabel.setLineHeightAndLineBreak(1.5)
         }
     }

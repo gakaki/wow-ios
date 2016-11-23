@@ -101,17 +101,20 @@ class WOWContentTopicController: WOWBaseViewController {
             if let strongSelf = self{
             
                 // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
-                if isFavorite == true {
-                    strongSelf.vo_topic!.likeQty = (strongSelf.vo_topic!.likeQty ?? 0)  + 1
-                }else{
-                    strongSelf.vo_topic!.likeQty = (strongSelf.vo_topic!.likeQty ?? 0) - 1
+                if let vo_topic = strongSelf.vo_topic {
+                    if isFavorite == true {
+                        vo_topic.favoriteQty = (vo_topic.favoriteQty ?? 0)  + 1
+                    }else{
+                        vo_topic.favoriteQty = (vo_topic.favoriteQty ?? 0) - 1
+                    }
+                    
+                    strongSelf.reloadNagationItemThumbButton(isFavorite ?? false, thumbNum: vo_topic.favoriteQty ?? 0)
+                    
+                    strongSelf.delegate?.reloadTableViewData()
+                    //
+                    NotificationCenter.postNotificationNameOnMainThread(WOWUpdateProjectThumbNotificationKey, object: nil)
                 }
                 
-                strongSelf.reloadNagationItemThumbButton(isFavorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
-                
-                strongSelf.delegate?.reloadTableViewData()
-//                
-                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateProjectThumbNotificationKey, object: nil)
             }
 
         }
@@ -231,22 +234,25 @@ class WOWContentTopicController: WOWBaseViewController {
                 DLog(result)
                 let r                                     =  JSON(result)
                 strongSelf.vo_topic                       =  Mapper<WOWContentTopicModel>().map( JSONObject:r.object )
-                let imgView = UIImageView()
-                imgView.kf.setImage(
-                    with: URL(string:strongSelf.vo_topic!.topicImg ?? "" )!,
-                    placeholder: nil,
-                    options: nil,
-                    progressBlock: { (arg1, arg2) in
-                        
-                        
+                if let vo_topic = strongSelf.vo_topic {
+                    let imgView = UIImageView()
+                    imgView.kf.setImage(
+                        with: URL(string:vo_topic.topicImg ?? "" ) ?? URL(string: "placeholder_product"),
+                        placeholder: nil,
+                        options: nil,
+                        progressBlock: { (arg1, arg2) in
+                            
+                            
                     },
-                    completionHandler: { [weak self](image, error, cacheType, imageUrl) in
-                        if let strongSelf = self{
-                            strongSelf.shareProductImage = image
+                        completionHandler: { [weak self](image, error, cacheType, imageUrl) in
+                            if let strongSelf = self{
+                                strongSelf.shareProductImage = image
+                            }
                         }
-                    }
-                )
-                //如果有标签的话就显示，没有的话就显示
+                    )
+
+                }
+            //如果有标签的话就显示，没有的话就显示
                 if strongSelf.vo_topic?.tag?.count > 0 {
                     strongSelf.isHaveTag = 1
                 }else {
@@ -264,7 +270,7 @@ class WOWContentTopicController: WOWBaseViewController {
                 }
                 strongSelf.view.layoutIfNeeded()
 
-                strongSelf.reloadNagationItemThumbButton(strongSelf.vo_topic!.favorite ?? false, thumbNum: strongSelf.vo_topic!.likeQty ?? 0)
+                strongSelf.reloadNagationItemThumbButton(strongSelf.vo_topic?.favorite ?? false, thumbNum: strongSelf.vo_topic?.favoriteQty ?? 0)
               
                 strongSelf.requestAboutProduct()
             }
@@ -613,49 +619,7 @@ extension WOWContentTopicController: UITextViewDelegate{
         inputTextView.delegate = self
     }
   
-//        commentView.delegates.textViewDidChange = { [weak self](growingTextView: NextGrowingTextView) in
-//            // Do something
-//            if let strongSelf = self {
-//                
-//                
-//                let language = growingTextView.textInputMode?.primaryLanguage
-//                //        FLOG("language:\(language)")
-//                if let lang = language {
-//                    if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
-//                        let selectedRange = growingTextView.textView.markedTextRange
-//                        var position : UITextPosition?
-//                        if let range = selectedRange {
-//                            position = growingTextView.textView.position(from: range.start, offset: 0)
-//                        }
-//                        //系统默认中文输入法会导致英文高亮部分进入输入统计，对输入完成的时候进行字数统计
-//                        if position == nil {
-//                            //                    FLOG("没有高亮，输入完毕")
-//                            strongSelf.limitTextLength(growingTextView)
-//                           
-//                        }
-//                    }else{//非中文输入法
-//                        strongSelf.limitTextLength(growingTextView)
-//                       
-//                    }
-//                }
-//
-//            }
-//            
-//        }
-//    }
-//    fileprivate func limitTextLength(_ textView: NextGrowingTextView){
-//        
-//        let toBeString = textView.text as NSString
-//        print("tobeString：\(toBeString)")
-////        if (toBeString.length <= minLength) {
-////            WOWHud.showMsg("请您输入更多内容")
-////        }
-//        if (toBeString.length > maxLength) {
-//            WOWHud.showMsg("输入文字不超过140字")
-//            textView.text = toBeString.substring(to: maxLength)
-//        }
-//    }
-//
+
     @IBAction func pressClick(_ sender: UIButton) {
         guard WOWUserManager.loginStatus else{
             toLoginVC(true)

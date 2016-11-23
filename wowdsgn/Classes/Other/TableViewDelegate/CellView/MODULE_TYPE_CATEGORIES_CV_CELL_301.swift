@@ -11,7 +11,7 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
     var bg_pic: UIImageView!
     var name: UILabel!
     var name_en:UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

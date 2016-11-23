@@ -37,7 +37,7 @@ class WowModulePageItemVO:Mappable
     var categoryId:             Int?
     var categoryName:           String?
     var categoryBgImg:          String?
-    
+    var productStock:           Int?
     // 201
     var bannerImgSrc:           String?
     var bannerLinkType:         Int?
@@ -68,6 +68,8 @@ class WowModulePageItemVO:Mappable
         categoryId              <- map["categoryId"]
         categoryName            <- map["categoryName"]
         categoryBgImg           <- map["categoryBgImg"]
+        
+        productStock            <- map["productStock"]
         
         productId               <- map["productId"]
         productName             <- map["productTitle"]

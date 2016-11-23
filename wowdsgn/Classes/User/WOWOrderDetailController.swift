@@ -574,41 +574,41 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        switch OrderDetailNewaType {
-        case .payMent:
-            switch (indexPath as NSIndexPath).section {
-            case 3:
-                return CellHight.CourceHight
-            case 4:
-                return CellHight.PayCellHight
-            default:
-                return CellHight.ProductCellHight
-            }
-            
-        case .forGoods,.noForGoods,.finish:
-            switch (indexPath as NSIndexPath).section {
-                
-            case 3:
-                return CellHight.CourceHight
-            default:
-                return CellHight.ProductCellHight
-            }
-        case .someFinishForGoods:
-            switch (indexPath as NSIndexPath).section {
-                
-            case goodsArray.count + 3 :
-                return CellHight.CourceHight
-            default:
-                
-                return CellHight.ProductCellHight
-            }
-            
-        }
-        
-        
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        
+//        switch OrderDetailNewaType {
+//        case .payMent:
+//            switch (indexPath as NSIndexPath).section {
+//            case 3:
+//                return CellHight.CourceHight
+//            case 4:
+//                return CellHight.PayCellHight
+//            default:
+//                return CellHight.ProductCellHight
+//            }
+//            
+//        case .forGoods,.noForGoods,.finish:
+//            switch (indexPath as NSIndexPath).section {
+//                
+//            case 3:
+//                return CellHight.CourceHight
+//            default:
+//                return CellHight.ProductCellHight
+//            }
+//        case .someFinishForGoods:
+//            switch (indexPath as NSIndexPath).section {
+//                
+//            case goodsArray.count + 3 :
+//                return CellHight.CourceHight
+//            default:
+//                
+//                return CellHight.ProductCellHight
+//            }
+//            
+//        }
+//        
+//        
+//    }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

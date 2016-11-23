@@ -90,7 +90,12 @@ class WOWContentTopicController: WOWBaseViewController {
     // 刷新顶部数据
     func reloadNagationItemThumbButton(_ isFavorite: Bool, thumbNum: Int)  {
         nagationItem.thumbButton.isSelected = isFavorite
-        nagationItem.numLabel.text = thumbNum.toString
+        if thumbNum <= 0 {
+            nagationItem.numLabel.text = ""
+        }else {
+            nagationItem.numLabel.text = thumbNum.toString
+
+        }
     }
     //MARK:Actions
 
@@ -643,6 +648,7 @@ extension WOWContentTopicController: UITextViewDelegate{
     //更多评论
     func moreCommentClick() {
         let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWCommentController.self)) as! WOWCommentController
+        vc.topic_id = topic_id
         navigationController?.pushViewController(vc, animated: true)
       
 
@@ -707,6 +713,7 @@ extension WOWContentTopicController: UITextViewDelegate{
         backgroundView.isHidden = false
         pressButton.isEnabled = true
         pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+        pressButton.setTitleColor(UIColor.black, for: .normal)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -715,9 +722,13 @@ extension WOWContentTopicController: UITextViewDelegate{
         if textView.text.isEmpty {
             pressButton.isEnabled = false
             pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
+            pressButton.setTitleColor(UIColor.white, for: .normal)
+
         }else {
             pressButton.isEnabled = true
             pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+            pressButton.setTitleColor(UIColor.black, for: .normal)
+
         }
 
     }

@@ -190,11 +190,9 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(JSONObject:result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
                 strongSelf.configData()
-                WOWHud.dismiss()
             }
             
             }) { (errorMsg) in
-                WOWHud.dismiss()
         }
     }
     
@@ -208,11 +206,9 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
                 
                 strongSelf.configData()
-                WOWHud.dismiss()
             }
             
         }) { (errorMsg) in
-            WOWHud.dismiss()
         }
     }
     
@@ -281,7 +277,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
-                
+                WOWHud.dismiss()
+
                 //TalkingData 下单
                 var sum                  = Int32(totalAmout ) ?? 0
                 sum                      = sum * 100
@@ -295,7 +292,8 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
             }) { (errorMsg) in
-                
+                WOWHud.dismiss()
+
         }
         
       
@@ -372,6 +370,8 @@ class WOWEditOrderController: WOWBaseViewController {
                 let order_id             = strongSelf.orderCode
                 
                 let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
+                WOWHud.dismiss()
+
                 //                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
                 //                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
                 TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
@@ -379,7 +379,8 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-            
+            WOWHud.dismiss()
+
         }
     }
     

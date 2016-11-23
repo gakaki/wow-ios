@@ -35,7 +35,6 @@ class WOWOrderDetailNewCell: UITableViewCell {
         singsTagView.removeAllTags()
         for sing in orderProductModel.attributes ?? [""]{
             singsTagView.addTag(sing)
-          
         }
         titleImageView.set_webimage_url(orderProductModel.specImg!)
         

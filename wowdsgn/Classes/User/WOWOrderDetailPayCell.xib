@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,16 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="59"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qVg-MK-f4f">
+                        <rect key="frame" x="15" y="15" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="SVf-Lm-Qbg"/>
                             <constraint firstAttribute="height" constant="30" id="mQq-jX-Gge"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLy-cq-xIm">
+                        <rect key="frame" x="55" y="19" width="110" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="3LX-9N-fXI"/>
                         </constraints>
@@ -30,6 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lVT-eG-irk">
+                        <rect key="frame" x="279" y="22" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="DN3-kg-n64"/>
                             <constraint firstAttribute="width" constant="20" id="vWb-Lo-BGs"/>
@@ -43,6 +49,7 @@
                     <constraint firstItem="lVT-eG-irk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="14" id="GM1-wy-Fyw"/>
                     <constraint firstItem="nLy-cq-xIm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="KtC-mj-vdV"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nLy-cq-xIm" secondAttribute="trailing" constant="147" id="Pyb-Mz-3bz"/>
+                    <constraint firstAttribute="bottom" secondItem="qVg-MK-f4f" secondAttribute="bottom" constant="14" id="cwi-GU-7Ks"/>
                     <constraint firstItem="nLy-cq-xIm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="47" id="ecd-yo-AsO"/>
                 </constraints>
             </tableViewCellContentView>

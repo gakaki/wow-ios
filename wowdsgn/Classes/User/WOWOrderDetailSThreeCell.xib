@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,10 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t1G-Wt-9he" id="S5p-Jb-qfq">
-                <frame key="frameInset" width="320" height="69"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-jx-xWu">
+                        <rect key="frame" x="15" y="13" width="286" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="I8A-Br-sRe"/>
                         </constraints>
@@ -24,6 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1z-i5-V0J">
+                        <rect key="frame" x="15" y="36" width="286" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="EQD-aj-FpS"/>
                         </constraints>
@@ -34,6 +39,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="l1z-i5-V0J" secondAttribute="trailing" constant="11" id="7dA-wG-dzg"/>
+                    <constraint firstAttribute="bottom" secondItem="l1z-i5-V0J" secondAttribute="bottom" constant="12" id="7hC-L2-yxw"/>
                     <constraint firstItem="l1z-i5-V0J" firstAttribute="top" secondItem="S5p-Jb-qfq" secondAttribute="topMargin" constant="28" id="7nY-rA-3rz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="H6J-jx-xWu" secondAttribute="trailing" constant="11" id="FgX-IJ-41d"/>
                     <constraint firstItem="H6J-jx-xWu" firstAttribute="leading" secondItem="S5p-Jb-qfq" secondAttribute="leadingMargin" constant="7" id="ZdJ-fa-QZB"/>

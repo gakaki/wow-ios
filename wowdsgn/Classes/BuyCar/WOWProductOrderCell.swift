@@ -8,16 +8,16 @@
 
 import UIKit
 
-class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
+class WOWProductOrderCell: UITableViewCell{
 
     @IBOutlet weak var goodsImageView: UIImageView!
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var perPriceLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var subCountLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var tagList: TagListView!
 
     let identifier = "WOWTypeCollectionCell"
     var typeArr = [String]()
@@ -26,16 +26,9 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        defaultSetup()
     }
     
-    func defaultSetup() {
-        let nib = UINib(nibName:"WOWTypeCollectionCell", bundle:Bundle.main)
-        collectionView?.register(nib, forCellWithReuseIdentifier: identifier)
-        let tagCellLayout = TagCellLayout(tagAlignmentType: .left, delegate: self)
-        collectionView?.collectionViewLayout = tagCellLayout
-        
-    }
+ 
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -78,46 +71,16 @@ class WOWProductOrderCell: UITableViewCell ,TagCellLayoutDelegate{
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[model.productQty ?? 1])
         totalPriceLabel.text = result
         if let attributes = model.attributes {
-            typeArr = attributes
-            collectionView.reloadData()
+            tagList.removeAllTags()
+            for attribute in attributes {
+                tagList.addTag(attribute)
+            }
+            tagList.addTag("阿塞拜疆开放花瓣发哦及办法会计师发个富国可不记得")
+            tagList.addTag("sadklfjbalrfbadd")
         }
 
         
     }
     
-    
-    
-    
-    
-    //MARK: - TagCellLayout Delegate Methods
-    func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
-        return CGFloat(25.0)
-    }
-    
-    func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
-        
-        
-        let item = typeArr[index]
-        let title = item 
-        let width = title.size(Fontlevel004).width + 12
-        return width
-        
-    }
-    //MARK: - UICollectionView Delegate/Datasource Methods
-    func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WOWTypeCollectionCell
-            let item = typeArr[(indexPath as NSIndexPath).row]
-            cell.textLabel.text = item
-        return cell
-        
-    }
-    
-    func numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return typeArr.isEmpty ? 0 : (typeArr.count)
-    }
-    
+
 }

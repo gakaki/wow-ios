@@ -56,10 +56,10 @@ class WOWClickLikeAction {
                 likeAnimate(view: view, btn: btn)
             }
             isFavorite(favorite)
-            
+            WOWHud.dismiss()
             
         }) { (errorMsg) in
-            
+            WOWHud.dismiss()
             WOWHud.showMsg("网络错误")
             
         }
@@ -94,9 +94,9 @@ class WOWClickLikeAction {
             }
             
             isFavorite(favorite)
-            
+            WOWHud.dismiss()
         }) { (errorMsg) in
-            
+            WOWHud.dismiss()
             WOWHud.showMsg("网络错误")
         }
     }
@@ -191,10 +191,10 @@ class WOWClickLikeAction {
                 likeAnimate(view: view, btn: btn)
             }
             isFavorite(favorite)
-            
+            WOWHud.dismiss()
             
         }) { (errorMsg) in
-            
+            WOWHud.dismiss()
             WOWHud.showMsg("网络错误")
             
         }

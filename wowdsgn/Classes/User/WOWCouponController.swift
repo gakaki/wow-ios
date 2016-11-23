@@ -26,6 +26,12 @@ class WOWCouponController: WOWBaseViewController {
 
     var entrance        = couponEntrance.userEntrance
     
+    lazy var emptyView: WOWCouponEmptyView = {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWCouponEmptyView.self), owner: self, options: nil)?.last as! WOWCouponEmptyView
+        view.frame = CGRect(x: 0, y: 100, w: MGScreenWidth, h: 400)
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -80,7 +86,12 @@ class WOWCouponController: WOWBaseViewController {
                     }
                     strongSelf.tableView.mj_footer = nil
                 }
-
+                let count = strongSelf.vo_cupons.count
+                if count > 0 {
+                    strongSelf.emptyView.removeFromSuperview()
+                }else {
+                    strongSelf.tableView.addSubview(strongSelf.emptyView)
+                }
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }
@@ -88,6 +99,7 @@ class WOWCouponController: WOWBaseViewController {
         }){[weak self] (errorMsg) in
             
             if let strongSelf = self{
+                strongSelf.tableView.addSubview(strongSelf.emptyView)
 
                 strongSelf.tableView.mj_footer = nil
 
@@ -101,6 +113,7 @@ class WOWCouponController: WOWBaseViewController {
     
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_GetCoupon(redemptionCode: redemotionCode), successClosure: {[weak self] (result, code) in
             if let strongSelf = self {
+                WOWHud.showMsg("您的优惠码已兑换成功！")
                 strongSelf.request()
             }
         }) { (errorMsg) in
@@ -117,7 +130,12 @@ class WOWCouponController: WOWBaseViewController {
 
 extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.vo_cupons.count 
+        let count = self.vo_cupons.count
+        if count > 0 {
+            return count
+        }else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,44 +145,45 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WOWCouponCell", for:indexPath) as! WOWCouponCell
-        
-        //这题注意是利用section做分隔 所以一个section 一个row
-        let r = self.vo_cupons[(indexPath as NSIndexPath).section]
+        let count = self.vo_cupons.count
+        if count > 0 {
+            //这题注意是利用section做分隔 所以一个section 一个row
+            let r = self.vo_cupons[(indexPath as NSIndexPath).section]
             cell.label_amount.font = UIFont.priceFont(40)
             cell.label_amount.text          = String(format: "%.f",r.deduction ?? 0)
             cell.label_title.text           = r.couponTitle ?? ""
-        
-        
+            
+            
             cell.label_time_limit.text      = "\(r.effectiveFrom ?? "")至\(r.effectiveTo ?? "")"
             
-//            var bgView                      = UIView(frame: cell.frame)
-//            bgView.backgroundColor          = UIColor(red:0.80, green:0.80, blue:0.80, alpha:0.50)
-//            cell.addSubview(bgView)
-
-        if ( r.status == 0) { //不可用
-            cell.showData(false)
-            cell.label_is_used.text         = r.statusDesc
-        }else {
-            cell.showData(true)
-            cell.label_is_used.text         = "未使用"
-        }
-        
-
-  
-        if entrance == .orderEntrance {
-             
-            if r.id == couponModel?.id {
-                r.isSelect = true
-            }
-            if r.isSelect {
-                cell.image_check.isHidden         = false
-                    
+            //            var bgView                      = UIView(frame: cell.frame)
+            //            bgView.backgroundColor          = UIColor(red:0.80, green:0.80, blue:0.80, alpha:0.50)
+            //            cell.addSubview(bgView)
+            
+            if ( r.status == 0) { //不可用
+                cell.showData(false)
+                cell.label_is_used.text         = r.statusDesc
             }else {
-                cell.image_check.isHidden         = true
+                cell.showData(true)
+                cell.label_is_used.text         = "未使用"
             }
+            
+            
+            
+            if entrance == .orderEntrance {
+                
+                if r.id == couponModel?.id {
+                    r.isSelect = true
+                }
+                if r.isSelect {
+                    cell.image_check.isHidden         = false
+                    
+                }else {
+                    cell.image_check.isHidden         = true
+                }
+            }
+
         }
-        
-        
         return cell
     }
     
@@ -185,7 +204,12 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        let count = self.vo_cupons.count
+        if count > 0 {
+            return 90
+        }else {
+            return 0.01
+        }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
@@ -244,7 +268,14 @@ extension WOWCouponController: WOWCouponNumberViewDelegate{
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
         return attri
     }
-    
+//    func customView(forEmptyDataSet scrollView: UIScrollView!) -> UIView! {
+//        let view = Bundle.main.loadNibNamed(String(describing: WOWCouponEmptyView.self), owner: self, options: nil)?.last as! WOWCouponEmptyView
+//        view.frame.size = CGSize(width: MGScreenWidth, height: MGScreenHeight)
+//        //        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
+//      
+//        view.backgroundColor = UIColor.blue
+//        return view
+//    }
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }

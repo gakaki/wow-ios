@@ -14,7 +14,7 @@ class WOWCouponCell: UITableViewCell {
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_is_used: UILabel!
     @IBOutlet weak var label_time_limit: UILabel!
-    
+    @IBOutlet weak var label_rmb: UILabel!
     @IBOutlet weak var label_unit: UILabel!
     @IBOutlet weak var label_identifier: UILabel!
     
@@ -49,6 +49,7 @@ class WOWCouponCell: UITableViewCell {
     let color_status_disable = MGRgb(204, g: 204, b: 204)
     
     func showData(_ status: Bool) {
+        label_rmb.text = "元"
         if status {
             label_amount.textColor             = UIColor.black
             label_title.textColor              = UIColor.black

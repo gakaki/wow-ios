@@ -104,7 +104,7 @@ class WOWContentTopicModel: WOWBaseModel,Mappable {
     var images                      :[WOWImages]?
     var products                    :[WOWProductModel]?
     var tag                         :[WOWTopicTagModel]?
-    var likeQty                     :Int?
+    var favoriteQty                     :Int?
     var publishTime                 :Int?
     var allowComment                : Bool?
     var favorite                    : Bool?
@@ -125,7 +125,7 @@ class WOWContentTopicModel: WOWBaseModel,Mappable {
         images                  <- map["images"]
         products                <- map["products"]
         tag                     <- map["tags"]
-        likeQty                 <- map["likeQty"]
+        favoriteQty                 <- map["favoriteQty"]
         publishTime             <- map["publishTime"]
         allowComment            <- map["allowComment"]
         favorite                <- map["favorite"]
@@ -229,7 +229,7 @@ class WOWTopicCommentListModel: WOWBaseModel, Mappable {
     var content:                  String?
     var createTime:                Int?
     var favorite:                 Bool?
-    var favoriteCount:            Int?
+    var favoriteQty:            Int?
     
     required init?(map: Map) {
         
@@ -242,6 +242,6 @@ class WOWTopicCommentListModel: WOWBaseModel, Mappable {
         content               <- map["content"]
         createTime             <- map["createTime"]
         favorite              <- map["favorite"]
-        favoriteCount         <- map["favoriteCount"]
+        favoriteQty         <- map["favoriteQty"]
     }
 }

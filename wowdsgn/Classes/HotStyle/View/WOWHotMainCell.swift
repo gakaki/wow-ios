@@ -36,9 +36,9 @@ class WOWHotMainCell: UITableViewCell {
 
                 strongSelf.btnLike.isSelected = isFavorite ?? false
                 // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
-                strongSelf.modelData?.likeQty = Calculate.calculateType(type: isFavorite!)(strongSelf.modelData?.likeQty ?? 0)
+                strongSelf.modelData?.favoriteQty = Calculate.calculateType(type: isFavorite!)(strongSelf.modelData?.favoriteQty ?? 0)
                 
-                var thumbNum = strongSelf.modelData?.likeQty ?? 0
+                var thumbNum = strongSelf.modelData?.favoriteQty ?? 0
                 thumbNum     = (thumbNum < 0 ? 0:thumbNum)
                 if thumbNum == 0 {
                     strongSelf.lbBrowse.text = ""
@@ -82,10 +82,10 @@ class WOWHotMainCell: UITableViewCell {
 
         }
         
-        if m.likeQty == 0 {
+        if m.favoriteQty == 0 {
             lbBrowse.text = ""
         }else{
-            lbBrowse.text    = m.likeQty?.toString
+            lbBrowse.text    = m.favoriteQty?.toString
         }
         if m.readQty == 0 {
             lbPraise.text = ""

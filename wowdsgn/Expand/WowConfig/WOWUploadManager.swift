@@ -50,7 +50,7 @@ class WOWUploadManager {
                 if let qm          = QNUploadManager(){
                    
                     qm.put(data, key: qiniu_key, token: token, complete: { (info, key, resp) in
-                        
+                         WOWHud.dismiss()
                         if (info?.error != nil) {
                             DLog(info?.error)
                             WOWHud.showMsg("头像修改失败")
@@ -73,7 +73,7 @@ class WOWUploadManager {
                             WOWUserManager.userPhotoData = imageData as Data
 //                            successClosure(headImageUrl as AnyObject)
 //                            successClosure(headImageUrl as AnyObject)
-                            
+                           
                             successClosure(headImageUrl)
                             
 //                            successClosure(headImageUrl)
@@ -84,7 +84,7 @@ class WOWUploadManager {
 
             
         }) {(errorMsg) in
-        
+
         }
         //TODO
 //        Alamofire.request(qiniu_token_url,method:.post, parameters: params_qiniu)

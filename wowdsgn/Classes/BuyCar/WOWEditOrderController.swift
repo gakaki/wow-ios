@@ -190,11 +190,11 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.orderSettle = Mapper<WOWEditOrderModel>().map(JSONObject:result)
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
                 strongSelf.configData()
-                
+                WOWHud.dismiss()
             }
             
             }) { (errorMsg) in
-                
+                WOWHud.dismiss()
         }
     }
     
@@ -208,10 +208,11 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.productArr = strongSelf.orderSettle?.orderSettles ?? [WOWCarProductModel]()
                 
                 strongSelf.configData()
+                WOWHud.dismiss()
             }
             
         }) { (errorMsg) in
-            
+            WOWHud.dismiss()
         }
     }
     

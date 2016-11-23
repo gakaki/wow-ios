@@ -158,12 +158,20 @@ class WOWNetManager {
                     
                     if let endMsg = target.endSuccessMsg{
                         if endMsg == ""{
-                            WOWHud.dismiss()
+//                            WOWHud.dismiss()
+                            DispatchQueue.main.async {
+                                
+                                LoadView.dissMissView()
+                            }
                         }else{
                             WOWHud.showMsg(endMsg)
                         }
                     }else{
-                        WOWHud.dismiss()
+//                        WOWHud.dismiss()
+                        DispatchQueue.main.async {
+                            
+                            LoadView.dissMissView()
+                        }
                     }
                     let res = info?.data ?? [] as AnyObject
                     successClosure(res, info?.code)
@@ -171,7 +179,10 @@ class WOWNetManager {
                     DLog(error)
 //                    WOWHud.showMsg("网络错误")
                     WOWHud.showMsgNoNetWrok(message: "网络错误")
-
+                    DispatchQueue.main.async {
+                        
+                        LoadView.dissMissView()
+                    }
                     failClosure("网络错误")
                     break
             }

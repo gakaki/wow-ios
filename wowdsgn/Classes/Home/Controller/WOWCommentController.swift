@@ -67,6 +67,7 @@ class WOWCommentController: WOWBaseViewController {
     }
     
     @IBAction func sendButtonClick(_ sender: UIButton) {
+        
         send()
     }
     

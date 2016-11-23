@@ -153,13 +153,19 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //初始化数据，商品banner
     fileprivate func configData(){
+        //如果没有促销标签，则不显示
+        if productModel?.limitType == 1 {
+            isHaveLimit = 1
+        }else {
+            isHaveLimit = 0
+        }
         //如果相关商品有数据显示。如果没有数据则不显示
-//        if aboutProductArray.count > 0 {
-//            //详情页共分为7组数据
-//            numberSections = 7
-//        }else {
-//            numberSections = 6
-//        }
+        if aboutProductArray.count > 0 {
+            //详情页共分为7组数据
+            isHaveAbout = 1
+        }else {
+            isHaveAbout = 0
+        }
         numberSections = 7 + isHaveLimit + isHaveComment + isHaveAbout
         //产品描述说明
         productDescView.productDescLabel.text = productModel?.detailDescription
@@ -194,7 +200,15 @@ class WOWProductDetailController: WOWBaseViewController {
         }
         tableView.reloadData()
     }
-    
+    //商品过期
+    fileprivate func productExpired() {
+        productEffectView.isHidden = false
+        shareButton.isHidden = true
+        addCartButton.isHidden = true
+        nowBuyButton.isEnabled = false
+        nowBuyButton.setBackgroundColor(UIColor.init(hexString: "CCCCCC")!, forState: .disabled)
+        buyCarCount()
+    }
     //MARK:Actions
     //MARK:更新角标
     func updateCarBadge(_ carCount: Int){
@@ -274,19 +288,17 @@ class WOWProductDetailController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
+                //商品过期
                 if code == RequestCode.ProductExpired.rawValue {
-                    strongSelf.productEffectView.isHidden = false
-                    strongSelf.shareButton.isHidden = true
-                    strongSelf.addCartButton.isHidden = true
-                    strongSelf.nowBuyButton.isEnabled = false
-                    strongSelf.nowBuyButton.setBackgroundColor(UIColor.init(hexString: "CCCCCC")!, forState: .disabled)
-                    strongSelf.buyCarCount()
+                    
+                    strongSelf.productExpired()
                     return
                 }
                 strongSelf.productEffectView.isHidden = true
                 strongSelf.productModel = Mapper<WOWProductModel>().map(JSONObject:result)
                 strongSelf.productModel?.productId = strongSelf.productId
                 strongSelf.imgUrlArr = strongSelf.productModel?.primaryImgs ?? [String]()
+                //把当前产品的url加入到图片url中，显示到第一个
                 if let imgUrl = strongSelf.productModel?.productImg {
                     strongSelf.imgUrlArr.insert(imgUrl, at: 0)
                 }
@@ -361,11 +373,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 
                 if let array = arr{
                     strongSelf.aboutProductArray = array
-                    if array.count > 0 {
-                        strongSelf.isHaveAbout = 1
-                    }else {
-                        strongSelf.isHaveAbout = 0
-                    }
+                    
                 }
                 //初始化详情页数据
                 strongSelf.configData()

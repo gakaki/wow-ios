@@ -8,13 +8,16 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-
+protocol WOWCommentControllerDelegate: class {
+    func refreshComments()
+}
 
 class WOWCommentController: WOWBaseViewController {
     let cellID = String(describing: WOWCommentCell.self)
     let pageSize        = 10
     var commentList = [WOWTopicCommentListModel]()
     var topic_id        = 0
+    weak var delegate:   WOWCommentControllerDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!
@@ -24,7 +27,9 @@ class WOWCommentController: WOWBaseViewController {
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var inputConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var numberLabel: UILabel!
+    //顶部蒙层
+    var navBackgroundView: WOWMaskColorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
@@ -65,6 +70,10 @@ class WOWCommentController: WOWBaseViewController {
         configBuyBarItem()
         navigationItem.title = "评论"
     }
+    override func navBack() {
+        super.navBack()
+        print("返回")
+    }
     
     @IBAction func sendButtonClick(_ sender: UIButton) {
         
@@ -73,10 +82,6 @@ class WOWCommentController: WOWBaseViewController {
     
     
     fileprivate func send(){
-        guard WOWUserManager.loginStatus else{
-            toLoginVC(true)
-            return
-        }
         
         if inputTextView.text.isEmpty {
             WOWHud.showMsg("您的评论为空")
@@ -91,9 +96,15 @@ class WOWCommentController: WOWBaseViewController {
             return
         }
         requestSendComment(inputTextView.text)
-        
+        //点赞或者发表评论的时候刷新数据
+        refreshCommentList()
     }
     
+    fileprivate func refreshCommentList() {
+        if let del = delegate {
+            del.refreshComments()
+        }
+    }
     
     fileprivate func addObserver(){
         NotificationCenter.default.addObserver(self, selector:#selector(keyBoardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -166,10 +177,43 @@ class WOWCommentController: WOWBaseViewController {
 
 extension WOWCommentController:UITextViewDelegate{
     fileprivate func endEditing(){
+        noEnableSend()
         self.inputTextView.resignFirstResponder()
         self.inputTextView.text = ""
         self.inputConstraint.constant = 30
         self.view.layoutIfNeeded()
+    }
+    fileprivate func addNavBackgroundView() {
+        navBackgroundView = WOWMaskColorView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: 64.5))
+        let window = UIApplication.shared.windows.last
+        window?.addSubview(navBackgroundView)
+        window?.bringSubview(toFront: navBackgroundView)
+    }
+    fileprivate func removeNavBackgroundView() {
+        navBackgroundView.removeFromSuperview()
+    }
+    //可点击状态
+    fileprivate func enableSend() {
+        pressButton.isEnabled = true
+        pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+        pressButton.setTitleColor(UIColor.black, for: .normal)
+    }
+    //不可点击状态
+    fileprivate func noEnableSend() {
+        pressButton.isEnabled = false
+        pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
+        pressButton.setTitleColor(UIColor.white, for: .normal)
+    }
+    fileprivate func limitTextLength(_ textView: UITextView){
+        
+        let toBeString = textView.text as NSString
+        
+        if (toBeString.length > COMMENTS_LIMIT) {
+            numberLabel.colorWithText(toBeString.length.toString, str2: "/140", str1Color: UIColor.red)
+            
+        }else {
+            numberLabel.text = String(format: "%i/140", toBeString.length)
+        }
     }
    
     func keyBoardWillShow(_ note:Notification){
@@ -219,34 +263,33 @@ extension WOWCommentController:UITextViewDelegate{
         }
     }
     //delegate
-    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return false
+        }
+        return true
+    }
     func textViewDidBeginEditing(_ textView: UITextView) {
         backgroundView.isHidden = false
-        pressButton.isEnabled = true
-        pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
-        pressButton.setTitleColor(UIColor.black, for: .normal)
+        addNavBackgroundView()
 
+       limitTextLength(textView)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         backgroundView.isHidden = true
-        //如果有评论发布键可点击，没有评论发布键不可点击
-        if textView.text.isEmpty {
-            pressButton.isEnabled = false
-            pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
-            pressButton.setTitleColor(UIColor.white, for: .normal)
-
-        }else {
-            pressButton.isEnabled = true
-            pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
-            pressButton.setTitleColor(UIColor.black, for: .normal)
-
-        }
-        
+        removeNavBackgroundView()
     }
     //    //中文和其他字符的判断方式不一样
     func textViewDidChange(_ textView: UITextView) {
-        
+        if textView.text.isEmpty {
+            noEnableSend()
+            
+        }else {
+            enableSend()
+        }
+
         let fixedWidth = inputTextView.frame.size.width
         inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         let newSize = inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -257,11 +300,30 @@ extension WOWCommentController:UITextViewDelegate{
             
         }
         self.view.layoutIfNeeded()
+        let language = textView.textInputMode?.primaryLanguage
+        //        FLOG("language:\(language)")
+        if let lang = language {
+            if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
+                let selectedRange = textView.markedTextRange
+                var position : UITextPosition?
+                if let range = selectedRange {
+                    position = textView.position(from: range.start, offset: 0)
+                }
+                //系统默认中文输入法会导致英文高亮部分进入输入统计，对输入完成的时候进行字数统计
+                if position == nil {
+                    //                    FLOG("没有高亮，输入完毕")
+                    limitTextLength(textView)
+                }
+            }else{//非中文输入法
+                limitTextLength(textView)
+            }
+        }
+
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            //            send()
+            send()
             return false
         }
         //        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
@@ -275,7 +337,7 @@ extension WOWCommentController:UITextViewDelegate{
 }
 
 
-extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
+extension WOWCommentController:UITableViewDelegate,UITableViewDataSource, WOWCommentCellDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -288,6 +350,7 @@ extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWCommentCell
         cell.modelData = commentList[(indexPath as NSIndexPath).row]
         cell.showData(commentList[(indexPath as NSIndexPath).row])
+        cell.delegate = self
         return cell
     }
     
@@ -296,6 +359,10 @@ extension WOWCommentController:UITableViewDelegate,UITableViewDataSource{
         self.inputTextView.resignFirstResponder()
     }
     
+    func commentLikeList() {
+        //点赞或者发表评论的时候刷新数据
+        refreshCommentList()
+    }
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "暂无评论"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])

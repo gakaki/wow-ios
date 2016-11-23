@@ -39,11 +39,15 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var favorite              : Bool?
     var discount              : String?
     var productStock          : Int?
+    //商品限购信息
+    var limitType                   : Int?
+    var limitQty                    : Int?
+    var limitTag                    : String?
     //商品详情中用到
-    var length                      : Double?
-    var width                       : Double?
-    var height                      : Double?
-    var netWeight                   : Double?
+    var length                      : NSNumber?
+    var width                       : NSNumber?
+    var height                      : NSNumber?
+    var netWeight                   : NSNumber?
     var attributes                  : [WOWSerialAttributeModel]?
     var availableStock              : Int?
     var hasStock                    : Bool?
@@ -93,6 +97,9 @@ class WOWProductModel: WOWBaseModel,Mappable{
         
         favorite                <- map["favorite"]
         
+        limitType               <- map["limitType"]
+        limitQty                <- map["limitQty"]
+        limitTag                <- map["limitTag"]
      
         length                      <- map["length"]
         width                       <- map["width"]

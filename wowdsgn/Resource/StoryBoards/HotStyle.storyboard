@@ -123,9 +123,21 @@
                                     <outlet property="delegate" destination="C3y-1R-y6w" id="ZwW-Ku-z62"/>
                                 </connections>
                             </tableView>
-                            <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="baq-m7-GwL">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="baq-m7-GwL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2MT-Qb-hD1">
+                                        <rect key="frame" x="360" y="613" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2MT-Qb-hD1" secondAttribute="trailing" constant="15" id="moc-4k-nVZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="2MT-Qb-hD1" secondAttribute="bottom" constant="4" id="zge-tw-69i"/>
+                                </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20y-du-Jwb">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
@@ -200,13 +212,14 @@
                         <outlet property="bottomViewConstraint" destination="cpX-7d-Dtb" id="JgY-7n-9ly"/>
                         <outlet property="inputConstraint" destination="IiA-hs-Mj0" id="1OD-uL-sSY"/>
                         <outlet property="inputTextView" destination="roO-4c-ksM" id="cFL-GQ-IZC"/>
+                        <outlet property="numberLabel" destination="2MT-Qb-hD1" id="rPm-Hr-FdL"/>
                         <outlet property="pressButton" destination="3i1-nf-qjH" id="OvC-po-Awz"/>
                         <outlet property="tableView" destination="Qsq-X8-h1m" id="Mnd-o7-09i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gkh-lv-sOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="-133"/>
+            <point key="canvasLocation" x="840.5" y="-123.5"/>
         </scene>
         <!--评论-->
         <scene sceneID="MKY-He-CBv">
@@ -224,9 +237,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view hidden="YES" alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLK-ry-hpS">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLK-ry-hpS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ire-0y-zc8">
+                                        <rect key="frame" x="360" y="613" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ire-0y-zc8" secondAttribute="trailing" constant="15" id="7Wk-Qi-pr7"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ire-0y-zc8" secondAttribute="bottom" constant="4" id="DaK-UY-Ez1"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wDz-Kp-woe">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
@@ -301,13 +326,14 @@
                         <outlet property="bottomViewConstraint" destination="yZ2-6i-87N" id="ake-PH-1py"/>
                         <outlet property="inputConstraint" destination="6Wt-Gd-qge" id="HKe-8k-Rrl"/>
                         <outlet property="inputTextView" destination="tm3-oG-OJv" id="gnf-s2-AeW"/>
+                        <outlet property="numberLabel" destination="Ire-0y-zc8" id="Zaa-dL-8tB"/>
                         <outlet property="pressButton" destination="5gC-G4-wrx" id="qQY-rI-9Sy"/>
                         <outlet property="tableView" destination="IW4-Q4-3Va" id="adI-9y-d5T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJT-6O-ON8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="543" y="-927"/>
+            <point key="canvasLocation" x="483" y="-944"/>
         </scene>
         <!--Hot Style New Main-->
         <scene sceneID="Gdk-bQ-P3v">

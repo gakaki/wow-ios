@@ -175,6 +175,14 @@ class WOWBuyCarController: WOWBaseViewController {
                 WOWHud.showMsg(str)
                 return
             }
+            if product.isPromotion ?? false{
+                if product.productQty > product.limitQty {
+                    let str = String(format:"%@每人限购%i件，请修改",product.productTitle ?? "", product.limitQty ?? 1)
+                    WOWHud.showMsg(str)
+                    return
+                }
+            }
+            
 //            if product.productQty > product.productStock {
 //                WOWHud.showMsg((product.productName ?? "您有商品") + "库存不足")
 //                return

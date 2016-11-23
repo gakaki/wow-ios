@@ -75,8 +75,6 @@ class WOWProductOrderCell: UITableViewCell{
             for attribute in attributes {
                 tagList.addTag(attribute)
             }
-            tagList.addTag("阿塞拜疆开放花瓣发哦及办法会计师发个富国可不记得")
-            tagList.addTag("sadklfjbalrfbadd")
         }
 
         

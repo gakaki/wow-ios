@@ -10,6 +10,8 @@ import UIKit
 
 class WOWProductLimitCell: UITableViewCell {
 
+    @IBOutlet weak var limitLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

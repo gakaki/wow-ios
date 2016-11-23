@@ -213,6 +213,7 @@ class WOWController: WOWBaseModuleVC {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.dismiss()
             }
         }
         
@@ -273,6 +274,7 @@ class WOWController: WOWBaseModuleVC {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.dismiss()
             }
         }
     }

@@ -72,6 +72,11 @@ class WOWContentTopicTopCell: UITableViewCell {
 
 //            topicImg.set_webimage_url(model.topicImg)
             columnName.text = model.columnName ?? ""
+            if columnName.text == "" {
+                columnView.isHidden = true
+            }else {
+                columnView.isHidden = false
+            }
             columnView.addAction({[weak self] in
                 if let strongSelf = self {
                     if let del = strongSelf.delegeta {

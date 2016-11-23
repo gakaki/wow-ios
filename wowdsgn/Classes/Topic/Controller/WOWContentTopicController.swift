@@ -7,7 +7,26 @@ protocol WOWHotStyleDelegate:class {
     func reloadTableViewData()
     
 }
+class WOWMaskColorView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUP()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
+    //MARK:Private Method
+    fileprivate func setUP(){
+        self.frame = CGRect(x: 0, y: 0, width: self.w, height: self.h)
+        backgroundColor = MaskColor
+    }
+    
+    
+}
 
 class WOWContentTopicController: WOWBaseViewController {
     
@@ -19,6 +38,7 @@ class WOWContentTopicController: WOWBaseViewController {
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var inputConstraint: NSLayoutConstraint!
+    @IBOutlet weak var numberLabel: UILabel!
     
     var vo_products             = [WOWProductModel]()
     //param
@@ -37,6 +57,7 @@ class WOWContentTopicController: WOWBaseViewController {
         let image = UIImageView()
         return image
     }()
+    var navBackgroundView: WOWMaskColorView!
     
     fileprivate(set) var numberSections = 0
 
@@ -87,6 +108,7 @@ class WOWContentTopicController: WOWBaseViewController {
         v.moreButton.addTarget(self, action: #selector(moreCommentClick), for: .touchUpInside)
         return v
     }()
+    
     // 刷新顶部数据
     func reloadNagationItemThumbButton(_ isFavorite: Bool, thumbNum: Int)  {
         nagationItem.thumbButton.isSelected = isFavorite
@@ -202,14 +224,19 @@ class WOWContentTopicController: WOWBaseViewController {
         
         NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
     }
     
     fileprivate func removeObservers() {
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object: nil)
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -228,6 +255,13 @@ class WOWContentTopicController: WOWBaseViewController {
         }
         
         
+    }
+    
+    func loginSuccess()  {// 重新刷新数据
+        requestCommentList()
+    }
+    func exitLogin()  {// 重新刷新数据
+        requestCommentList()
     }
         //MARK: - NET
     override func request(){
@@ -316,7 +350,7 @@ class WOWContentTopicController: WOWBaseViewController {
     
     ///获取评论列表
     func requestCommentList() {
-        WOWNetManager.sharedManager.requestWithTarget(.api_TopicCommentList(pageSize: 10, currentPage: 1, topicId: topic_id), successClosure: {[weak self] (result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_TopicCommentList(pageSize: 3, currentPage: 1, topicId: topic_id), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let r = JSON(result)
                 strongSelf.topicComment = Mapper<WOWTopicCommentModel>().map( JSONObject:r.object )
@@ -596,7 +630,7 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
     
 }
 
-extension WOWContentTopicController: WOWProductDetailAboutCellDelegate, WOWTopicTagCellDelegate, WOWContentTopicTopCellDelegate {
+extension WOWContentTopicController: WOWProductDetailAboutCellDelegate, WOWTopicTagCellDelegate, WOWContentTopicTopCellDelegate ,WOWCommentControllerDelegate{
         @objc func selectCollectionIndex(_ productId: Int) {
         toVCProduct(productId)
     }
@@ -610,11 +644,21 @@ extension WOWContentTopicController: WOWProductDetailAboutCellDelegate, WOWTopic
         toVCArticleListVC(tagId ?? 0, title: title ?? "",isOpenTag: true,isPageView: true)
     }
     
+    func refreshComments() {
+        requestCommentList()
+    }
+    
 }
 
 //评论专区
 extension WOWContentTopicController: UITextViewDelegate{
+    var COMMENTS_LIMIT:Int{
+        get {
+            return 140
+        }
+    }
     fileprivate func endEditing(){
+        noEnableSend()
         self.inputTextView.resignFirstResponder()
         self.inputTextView.text = ""
         self.inputConstraint.constant = 30
@@ -623,14 +667,43 @@ extension WOWContentTopicController: UITextViewDelegate{
     fileprivate func configTextView() {
         inputTextView.delegate = self
     }
-  
-
-    @IBAction func pressClick(_ sender: UIButton) {
-        guard WOWUserManager.loginStatus else{
-            toLoginVC(true)
-            return
+    
+    fileprivate func addNavBackgroundView() {
+        navBackgroundView = WOWMaskColorView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: 64.5))
+        let window = UIApplication.shared.windows.last
+        window?.addSubview(navBackgroundView)
+        window?.bringSubview(toFront: navBackgroundView)
+    }
+    fileprivate func removeNavBackgroundView() {
+        navBackgroundView.removeFromSuperview()
+    }
+    //可点击状态
+    fileprivate func enableSend() {
+        pressButton.isEnabled = true
+        pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
+        pressButton.setTitleColor(UIColor.black, for: .normal)
+    }
+    //不可点击状态
+    fileprivate func noEnableSend() {
+        pressButton.isEnabled = false
+        pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
+        pressButton.setTitleColor(UIColor.white, for: .normal)
+    }
+    
+    fileprivate func limitTextLength(_ textView: UITextView){
+        
+        let toBeString = textView.text as NSString
+        
+        if (toBeString.length > COMMENTS_LIMIT) {
+            numberLabel.colorWithText(toBeString.length.toString, str2: "/140", str1Color: UIColor.red)
+            
+        }else {
+            numberLabel.text = String(format: "%i/140", toBeString.length)
         }
-
+    }
+    func send()  {
+        
+        
         if inputTextView.text.isEmpty {
             WOWHud.showMsg("您的评论为空")
             return
@@ -644,11 +717,19 @@ extension WOWContentTopicController: UITextViewDelegate{
             return
         }
         requestSendComment(inputTextView.text)
+
+    }
+    
+
+    @IBAction func pressClick(_ sender: UIButton) {
+        send()
+        
     }
     //更多评论
     func moreCommentClick() {
         let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWCommentController.self)) as! WOWCommentController
         vc.topic_id = topic_id
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
       
 
@@ -702,39 +783,34 @@ extension WOWContentTopicController: UITextViewDelegate{
             animations()
         }
     }
-    var COMMENTS_LIMIT:Int{
-        get {
-            return 140
-        }
-    }
-    //delegate
     
+    //delegate
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return false
+        }
+        return true
+    }
     func textViewDidBeginEditing(_ textView: UITextView) {
         backgroundView.isHidden = false
-        pressButton.isEnabled = true
-        pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
-        pressButton.setTitleColor(UIColor.black, for: .normal)
+        addNavBackgroundView()
+        limitTextLength(textView)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         backgroundView.isHidden = true
-        //如果有评论发布键可点击，没有评论发布键不可点击
-        if textView.text.isEmpty {
-            pressButton.isEnabled = false
-            pressButton.setBackgroundColor(UIColor.init(hexString: "eaeaea")!, forState: .normal)
-            pressButton.setTitleColor(UIColor.white, for: .normal)
-
-        }else {
-            pressButton.isEnabled = true
-            pressButton.setBackgroundColor(UIColor.init(hexString: "ffd444")!, forState: .normal)
-            pressButton.setTitleColor(UIColor.black, for: .normal)
-
-        }
-
-    }
-    //    //中文和其他字符的判断方式不一样
-    func textViewDidChange(_ textView: UITextView) {
+        removeNavBackgroundView()
         
+    }
+   
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            noEnableSend()
+            
+        }else {
+            enableSend()
+        }
         let fixedWidth = inputTextView.frame.size.width
         inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         let newSize = inputTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -745,13 +821,35 @@ extension WOWContentTopicController: UITextViewDelegate{
             
         }
         self.view.layoutIfNeeded()
+        
+        let language = textView.textInputMode?.primaryLanguage
+        //        FLOG("language:\(language)")
+        if let lang = language {
+            if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
+                let selectedRange = textView.markedTextRange
+                var position : UITextPosition?
+                if let range = selectedRange {
+                    position = textView.position(from: range.start, offset: 0)
+                }
+                //系统默认中文输入法会导致英文高亮部分进入输入统计，对输入完成的时候进行字数统计
+                if position == nil {
+                    //                    FLOG("没有高亮，输入完毕")
+                    limitTextLength(textView)
+                }
+            }else{//非中文输入法
+                limitTextLength(textView)
+            }
+        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
         if text == "\n" {
-//            send()
+            send()
             return false
         }
+        
+
 //        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
 //        if ret == false{
 //            WOWHud.showMsg("您输入的字符超过限制")

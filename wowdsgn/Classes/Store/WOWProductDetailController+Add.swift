@@ -47,7 +47,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 3 + isHaveLimit:
+        case 3 + isHaveLimit:   //产品图文详情
             return productModel?.secondaryImgs?.count ?? 0
         case 4 + isHaveLimit: //产品参数可展开
             if isOpenParam {
@@ -75,6 +75,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case (0 + isHaveLimit,_): //促销标签
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductLimitCell.self), for: indexPath) as! WOWProductLimitCell
+            cell.limitLabel.text = productModel.limitTag ?? ""
             returnCell = cell
         case (1 + isHaveLimit,_): //满199包邮
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDesCell.self), for: indexPath) as! WOWProductDesCell
@@ -212,8 +213,12 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return tipsView
-        case 6 + isHaveLimit + isHaveAbout + isHaveComment:
-            return aboutView
+        case 6 + isHaveLimit + isHaveAbout + isHaveComment: //相关商品
+            if aboutProductArray.count > 0 {
+                return aboutView
+            }else {
+                return nil
+            }
         default:
             return nil
         }

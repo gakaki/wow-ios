@@ -821,14 +821,14 @@ extension WOWGoodsBuyView:CAAnimationDelegate {
      *  格式化产品尺寸
      */
     func productSize(productInfo: WOWProductModel) -> String {
-        let format = String(format:"尺寸：L%.0f×W%.0f×H%.0fcm",productInfo.length ?? 0, productInfo.width ?? 0, productInfo.height ?? 0)
+        let format = String(format:"尺寸：L%@×W%@×H%@cm",productInfo.length ?? "", productInfo.width ?? "", productInfo.height ?? "")
         return format
     }
     /**
      *  格式化产品尺寸重量
      */
     func productWeight(productInfo: WOWProductModel) -> String {
-        let format = String(format:"重量：%.1fkg",productInfo.netWeight ?? 0)
+        let format = String(format:"重量：%@kg",productInfo.netWeight ?? "")
         return format
     }
 }

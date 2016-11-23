@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol WOWCommentCellDelegate: class {
+    func commentLikeList()
+}
 
 class WOWCommentCell: UITableViewCell {
 
@@ -18,6 +21,7 @@ class WOWCommentCell: UITableViewCell {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var thumbButton: UIButton!
     var modelData : WOWTopicCommentListModel?// 主信息
+    weak var delegate: WOWCommentCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,7 +59,9 @@ class WOWCommentCell: UITableViewCell {
     
     // 点赞按钮
     @IBAction func clickLikeAction(sender: UIButton) {
-        
+        if let del = delegate {
+            del.commentLikeList()
+        }
         WOWClickLikeAction.requestLikeComment(commentId: modelData?.commentId ?? 0,view: self,btn: sender) { [weak self](isFavorite) in
             
             if let strongSelf = self{

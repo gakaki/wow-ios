@@ -35,9 +35,10 @@ class WOWProductModel: WOWBaseModel,Mappable{
     
     var productStatus         : Int?
     var sings                 : [WOWProductSings]?
-   dynamic var timeoutSeconds : Int = 0
+    dynamic var timeoutSeconds : Int = 0
     var favorite              : Bool?
     var discount              : String?
+    var productStock          : Int?
     //商品详情中用到
     var length                      : Double?
     var width                       : Double?
@@ -84,10 +85,12 @@ class WOWProductModel: WOWBaseModel,Mappable{
         secondaryImgs           <- map["secondaryImgs"]
         pageModuleType          <- map["pageModuleType"]
 
-        productStatus                        <- map["productStatus"]
+        productStatus           <- map["productStatus"]
         sings                   <- map["signs"]
         timeoutSeconds          <- map["timeoutSeconds"]
-
+        
+        productStock            <- map["productStock"]
+        
         favorite                <- map["favorite"]
         
      

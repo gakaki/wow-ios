@@ -50,11 +50,13 @@ class WOWGoodsSmallCell: UICollectionViewCell {
 //        self.pictureImageView.alpha = 0.4
     }
     func showData(_ model:WOWProductModel,indexPath:IndexPath) {
-//        if model.hasStock ?? false {
-//            label_soldout.isHidden = true
-//        }else {
-//            set_sold_out_status()
-//        }
+        if model.productStock == 0 {// 以售馨展示
+            
+            set_sold_out_status()
+            
+        }else {
+           label_soldout.isHidden = true
+        }
         let i = (indexPath as NSIndexPath).item
         if ( i % 2 != 0 && i != 0){
             view_rightline.isHidden = true

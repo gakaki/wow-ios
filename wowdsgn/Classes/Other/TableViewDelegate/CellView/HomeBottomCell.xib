@@ -92,6 +92,17 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售罄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5W-D5-uPc">
+                                <rect key="frame" x="52" y="54.5" width="56" height="56"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="rDL-66-7M3"/>
+                                    <constraint firstAttribute="height" constant="56" id="v30-D6-ahc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOP-D1-4WL">
                                 <rect key="frame" x="0.0" y="0.0" width="159" height="211"/>
                                 <connections>
@@ -119,6 +130,7 @@
                             <constraint firstAttribute="trailing" secondItem="DOP-D1-4WL" secondAttribute="trailing" constant="1" id="70e-kY-6DL"/>
                             <constraint firstAttribute="trailing" secondItem="kO5-pv-mAD" secondAttribute="trailing" id="84k-oP-ETS"/>
                             <constraint firstItem="WbV-5C-qf4" firstAttribute="leading" secondItem="QhU-YH-d59" secondAttribute="leading" id="8ZG-86-ZRF"/>
+                            <constraint firstItem="f5W-D5-uPc" firstAttribute="centerY" secondItem="uL2-Jn-fkt" secondAttribute="centerY" id="8jl-oT-KFc"/>
                             <constraint firstItem="GXh-NM-03T" firstAttribute="top" secondItem="DOP-D1-4WL" secondAttribute="bottom" constant="10" id="8yV-Ja-ojG"/>
                             <constraint firstItem="wkj-fT-VG6" firstAttribute="top" secondItem="QhU-YH-d59" secondAttribute="bottom" constant="2" id="JWd-Pu-hLx"/>
                             <constraint firstAttribute="trailing" secondItem="wkj-fT-VG6" secondAttribute="trailing" constant="15" id="Jf6-aC-zKy"/>
@@ -127,6 +139,7 @@
                             <constraint firstItem="wkj-fT-VG6" firstAttribute="leading" secondItem="Jwb-us-tnA" secondAttribute="leading" constant="10" id="O3s-EV-fyC"/>
                             <constraint firstItem="QhU-YH-d59" firstAttribute="leading" secondItem="Jwb-us-tnA" secondAttribute="leadingMargin" constant="10" id="RAU-Qv-D1p"/>
                             <constraint firstAttribute="bottom" secondItem="kO5-pv-mAD" secondAttribute="bottom" id="TXI-OT-nW0"/>
+                            <constraint firstItem="f5W-D5-uPc" firstAttribute="centerX" secondItem="uL2-Jn-fkt" secondAttribute="centerX" id="UP0-uY-l2W"/>
                             <constraint firstItem="WbV-5C-qf4" firstAttribute="centerY" secondItem="GXh-NM-03T" secondAttribute="centerY" id="UqN-Tk-oEA"/>
                             <constraint firstItem="5z3-zY-F1W" firstAttribute="centerY" secondItem="GXh-NM-03T" secondAttribute="centerY" id="WFO-4g-XIT"/>
                             <constraint firstItem="GXh-NM-03T" firstAttribute="top" secondItem="wkj-fT-VG6" secondAttribute="bottom" constant="17" id="Xbc-Mh-Vzv"/>
@@ -151,10 +164,10 @@
                             <mask key="constraints">
                                 <exclude reference="NEN-ja-Tpk"/>
                                 <exclude reference="xYQ-os-baL"/>
+                                <exclude reference="O3s-EV-fyC"/>
                                 <exclude reference="8yV-Ja-ojG"/>
                                 <exclude reference="Xbc-Mh-Vzv"/>
                                 <exclude reference="42N-hF-reM"/>
-                                <exclude reference="O3s-EV-fyC"/>
                             </mask>
                         </variation>
                     </view>
@@ -225,6 +238,17 @@
                                 <color key="textColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售罄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4i6-8I-dMv">
+                                <rect key="frame" x="52" y="54.5" width="56" height="56"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="5dI-gY-6tM"/>
+                                    <constraint firstAttribute="width" constant="56" id="z8l-iv-SNB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsr-gs-6gP">
                                 <rect key="frame" x="52" y="212" width="28" height="18"/>
                                 <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -277,8 +301,10 @@
                             <constraint firstItem="sG1-Ct-LZV" firstAttribute="leading" secondItem="q5n-g9-amI" secondAttribute="leading" constant="8" id="bfS-Su-chQ"/>
                             <constraint firstItem="6ux-Gr-EIm" firstAttribute="top" secondItem="dVW-fZ-oE6" secondAttribute="bottom" constant="7" id="br6-2m-fzK"/>
                             <constraint firstItem="lC1-bw-FXV" firstAttribute="leading" secondItem="q5n-g9-amI" secondAttribute="leading" id="c4h-C5-IYP"/>
+                            <constraint firstItem="4i6-8I-dMv" firstAttribute="centerX" secondItem="dVW-fZ-oE6" secondAttribute="centerX" id="ecB-eU-TFQ"/>
                             <constraint firstItem="sG1-Ct-LZV" firstAttribute="top" secondItem="6ux-Gr-EIm" secondAttribute="bottom" constant="2" id="hSe-YL-i6h"/>
                             <constraint firstAttribute="trailing" secondItem="dVW-fZ-oE6" secondAttribute="trailing" id="hdd-rT-LF3"/>
+                            <constraint firstItem="4i6-8I-dMv" firstAttribute="centerY" secondItem="dVW-fZ-oE6" secondAttribute="centerY" id="ikL-yM-zmK"/>
                             <constraint firstAttribute="trailing" secondItem="lC1-bw-FXV" secondAttribute="trailing" id="iwa-sg-AgC"/>
                             <constraint firstAttribute="trailing" secondItem="yP7-tK-paf" secondAttribute="trailing" id="jjU-G9-aq1"/>
                             <constraint firstAttribute="trailing" secondItem="kkE-dz-1jw" secondAttribute="trailing" id="kiq-fi-6du"/>
@@ -295,10 +321,10 @@
                             <mask key="constraints">
                                 <exclude reference="Kpy-43-WgU"/>
                                 <exclude reference="V8q-C8-5sv"/>
+                                <exclude reference="bfS-Su-chQ"/>
                                 <exclude reference="KuG-GY-grM"/>
                                 <exclude reference="yes-pN-yse"/>
                                 <exclude reference="7JY-r4-Ukm"/>
-                                <exclude reference="bfS-Su-chQ"/>
                             </mask>
                         </variation>
                     </view>
@@ -338,6 +364,8 @@
                 <outlet property="lbNewTwo" destination="m5F-G5-grt" id="age-qJ-s2Z"/>
                 <outlet property="lbPromoteOne" destination="5z3-zY-F1W" id="oWy-cL-X8B"/>
                 <outlet property="lbPromoteTwo" destination="Wsr-gs-6gP" id="P1e-vN-cKc"/>
+                <outlet property="lbStockOne" destination="f5W-D5-uPc" id="Adi-1b-xKF"/>
+                <outlet property="lbStockTwo" destination="4i6-8I-dMv" id="P0i-Kn-Z7Z"/>
                 <outlet property="lbTitleOne" destination="QhU-YH-d59" id="Itw-cD-hLA"/>
                 <outlet property="lbTitleTwo" destination="6ux-Gr-EIm" id="44g-6a-rdz"/>
                 <outlet property="oneBaseView" destination="Jwb-us-tnA" id="t4z-Rj-Td4"/>

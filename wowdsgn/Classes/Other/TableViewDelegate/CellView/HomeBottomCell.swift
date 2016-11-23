@@ -53,6 +53,10 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var lbDiscountTwo: UILabel!
     @IBOutlet weak var lbPromoteOne: UILabel!// 1.第一个 促销标题
     @IBOutlet weak var lbPromoteTwo: UILabel!
+    
+    @IBOutlet weak var lbStockOne: UILabel!// 1.第一个 售馨标签
+    @IBOutlet weak var lbStockTwo: UILabel!
+    
     @IBOutlet weak var LeftConstraintOne: NSLayoutConstraint! // 标签位置
     @IBOutlet weak var LeftConstraintTwo: NSLayoutConstraint!
     
@@ -100,11 +104,20 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         })
         
     }
-    
+    func set_sold_out_status(label: UILabel){
+        label.borderRadius(28)
+        label.isHidden = false
+    }
     func showDataOne(_ model:WOWProductModel) {
         oneModel = model
+        
+        if model.productStock == 0 {// 以售馨展示
+            set_sold_out_status(label: lbStockOne)
+        }else {
+            lbStockOne.isHidden = true
+        }
+        
         imgShowOne.set_webimage_url(model.productImg)
-//        imgShowOne.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleOne.text     = model.productName
         productIdOne        = model.productId
         // 格式化 价格小数点
@@ -141,8 +154,13 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     //   two Item Data
     func showDataTwo(_ model:WOWProductModel) {
         twoModel = model
+        if model.productStock == 0 {// 以售馨展示
+            set_sold_out_status(label: lbStockTwo)
+        }else {
+            lbStockTwo.isHidden = true
+        }
+
         imgShowTwo.set_webimage_url(model.productImg)
-//        imgShowTwo.set_webimage_url_base(model.productImg, place_holder_name: "placeholder_product")
         lbTitleTwo.text = model.productName
         productIdTwo = model.productId
         // 格式化 价格小数点

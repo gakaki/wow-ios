@@ -351,7 +351,13 @@ extension  UIViewController {
         vc.productId = pid
         self.pushVC(vc)
     }
-    
+    // 跳转评论 页面
+    func toCommentVC(_ orderCode:String )  {
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
+//        self?.navigationController?.pushViewController(vc, animated: true)
+        vc.orderCode = orderCode
+        pushVC(vc)
+    }
     
     func toVCCart( ){
         

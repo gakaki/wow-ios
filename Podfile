@@ -58,7 +58,7 @@ target 'wowdsgn' do
 	pod 'FCUUID'
 	pod 'MJRefresh'
 	pod 'DZNEmptyDataSet'
-
+    pod 'TZImagePickerController'
 	## ShareSDK主模块(必须)
 	#pod 'ShareSDK3'
 	## Mob 公共库(必须) 如果同时集成SMSSDK iOS2.0:可看此注意事项：http://bbs.mob.com/thread-20051-1-1.html

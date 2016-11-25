@@ -259,8 +259,8 @@ extension AppDelegate{
 //        window?.rootViewController = UINavigationController(rootViewController: VCShopping())
         
 //        window?.rootViewController =  VCCategoryProducts()
-//        let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
-//        vc.topic_id = 48      //247到254是SKU 2 42
+//        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
+////        vc.topic_id = 48      //247到254是SKU 2 42
 //        window?.rootViewController = vc
     }
     

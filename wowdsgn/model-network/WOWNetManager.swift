@@ -133,19 +133,21 @@ class WOWNetManager {
                                     return
                                 }
                             }
+                            //产品过期或者失效
                             if code == RequestCode.ProductExpired.rawValue {
                                 let res = info?.data ?? [] as AnyObject
-                                WOWHud.showMsg(info?.message)
                                 successClosure(res, info?.code)
+                                WOWHud.showMsg(info?.message)
                                 return
                             }
+                            //产品限购
                             if code == RequestCode.ProductLimit.rawValue {
+                                
                                 WOWHud.showWarnMsg(info?.message)
-                                failClosure(info?.message)
                                 return
                             }
                             failClosure(info?.message)
-                            WOWHud.showMsg(info?.message)
+                            WOWHud.showWarnMsg(info?.message)
                             return
                         }
                     }else{

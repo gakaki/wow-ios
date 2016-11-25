@@ -102,7 +102,9 @@ public enum RequestApi{
     case api_CartUnSelect(shoppingCartIds: [Int])
     
     
-    case api_TopicCommentList(pageSize: Int, currentPage: Int, topicId: Int)
+    case api_TopicCommentList(pageSize: Int, currentPage: Int, topicId: Int, lastId: Int)
+    //商品评价
+    case api_ProductCommentList(pageSize: Int, currentPage: Int, productId: Int)
     
     case api_Change(param:[String:String])
     
@@ -163,7 +165,7 @@ public enum RequestApi{
     case api_OrderConfirm(orderCode: String)
     
     case api_OrderCancel(orderCode: String)
-//
+   
     
     case api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
     
@@ -288,6 +290,9 @@ extension RequestApi:TargetType{
             return URL_TopicCommentList
         case .api_SubmitTopicComment:
             return URL_SubmitTopicComment
+        //商品评轮列表
+        case .api_ProductCommentList:
+            return URL_productCommentList
         //购物车相关
         case .api_CartModify:
             return URL_CartModify
@@ -428,7 +433,8 @@ extension RequestApi:TargetType{
             .api_Category_path_category,
             .api_AD,
             .api_HotStyle_BottomList,
-            .api_TopicCommentList:
+            .api_TopicCommentList,
+            .api_ProductCommentList:
 
             return .GET
 
@@ -476,8 +482,11 @@ extension RequestApi:TargetType{
                 params = ["productId":productId]
             case let .api_ProductSpec(productId):
                 params = ["productId":productId]
-            case let .api_TopicCommentList(pageSize,currentPage,topicId):
-                params = ["pageSize": pageSize, "currentPage": currentPage, "topicId": topicId]
+            case let .api_TopicCommentList(pageSize,currentPage,topicId, lastId):
+                params = ["pageSize": pageSize, "currentPage": currentPage, "topicId": topicId, "lastId": lastId]
+            //商品评论
+            case let .api_ProductCommentList(pageSize,currentPage,productId):
+                params = ["pageSize": pageSize, "currentPage": currentPage, "productId": productId]
             case let .api_SubmitTopicComment(topicId,content):
                 params =  ["topicId":topicId,"content":content]
             case let .api_UserUpdate(param):

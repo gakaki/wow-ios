@@ -16,6 +16,7 @@ class WOWProductDetailController: WOWBaseViewController {
     var productModel                    : WOWProductModel?
     var productSpecModel                : WOWProductSpecModel?
     var aboutProductArray               = [WOWProductModel]()
+    var commentList = [WOWProductCommentModel]() //评论列表
     
     var noMoreData                      :Bool = true
     fileprivate(set) var numberSections = 0
@@ -95,6 +96,12 @@ class WOWProductDetailController: WOWBaseViewController {
         v.lineView.isHidden = false
         return v
     }()
+    //评价与晒单
+    lazy var commentView: WOWCommentHeaderView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWCommentHeaderView.self), owner: self, options: nil)?.last as! WOWCommentHeaderView
+        v.moreCommentClick.addTarget(self, action: #selector(moreCommentClick), for: .touchUpInside)
+        return v
+    }()
     //相关商品
     lazy var aboutView:WOWAboutHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
@@ -159,6 +166,17 @@ class WOWProductDetailController: WOWBaseViewController {
         }else {
             isHaveLimit = 0
         }
+        //如果有评论就显示，没有不显示
+        if commentList.count > 0 {
+            //商品评论
+            isHaveComment = 1
+            //如果评论数大于三条显示更多评论
+            if commentList.count > 3 {
+                commentView.moreCommentClick.isHidden = false
+            }else {
+                commentView.moreCommentClick.isHidden = true
+            }
+        }
         //如果相关商品有数据显示。如果没有数据则不显示
         if aboutProductArray.count > 0 {
             //详情页共分为7组数据
@@ -166,6 +184,7 @@ class WOWProductDetailController: WOWBaseViewController {
         }else {
             isHaveAbout = 0
         }
+       
         numberSections = 7 + isHaveLimit + isHaveComment + isHaveAbout
         //产品描述说明
         productDescView.productDescLabel.text = productModel?.detailDescription
@@ -210,12 +229,41 @@ class WOWProductDetailController: WOWBaseViewController {
         buyCarCount()
     }
     //MARK:Actions
+    //更多评论
+    func moreCommentClick() {
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductCommentController.self)) as! WOWProductCommentController
+        vc.product_id = productId ?? 0
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
     //MARK:更新角标
     func updateCarBadge(_ carCount: Int){
         WOWUserManager.userCarCount += carCount
         //        buyCarCount()
         NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
         
+    }
+    //查看大图
+    func loadBigImage(_ imageArray: Array<String>, _ index: Int) {
+        func setPhoto() -> [PhotoModel] {
+            var photos: [PhotoModel] = []
+            for photoURLString in imageArray {
+                
+                let photoModel = PhotoModel(imageUrlString: photoURLString, sourceImageView: nil)
+                photos.append(photoModel)
+            }
+            return photos
+        }
+        
+        let photoBrowser = PhotoBrowser(photoModels: setPhoto()) {[weak self] (extraBtn) in
+            if let sSelf = self {
+                let hud = SimpleHUD(frame:CGRect(x: 0.0, y: (sSelf.view.zj_height - 80)*0.5, width: sSelf.view.zj_width, height: 80.0))
+                sSelf.view.addSubview(hud)
+            }
+            
+        }
+        // 指定代理
+        photoBrowser.show(inVc: self, beginPage: index)
     }
     //MARK:购物车
     @IBAction func carEntranceButton(_ sender: UIButton) {
@@ -302,7 +350,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 if let imgUrl = strongSelf.productModel?.productImg {
                     strongSelf.imgUrlArr.insert(imgUrl, at: 0)
                 }
-                strongSelf.requestAboutProduct()
+                strongSelf.requestCommentList()
                 strongSelf.buyCarCount()
             }
         }) {[weak self](errorMsg) in
@@ -324,7 +372,7 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductSpec(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(JSONObject:result)
-                DLog(strongSelf.productSpecModel)
+//                DLog(strongSelf.productSpecModel)
                 
             }
         }) {(errorMsg) in
@@ -361,6 +409,29 @@ class WOWProductDetailController: WOWBaseViewController {
         
         
       
+    }
+    //商品评论
+    func requestCommentList() {
+        ///获取评论列表
+        WOWNetManager.sharedManager.requestWithTarget(.api_ProductCommentList(pageSize: pageSize, currentPage: pageIndex, productId: productId ?? 0), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                let r = JSON(result)
+                let arr = Mapper<WOWProductCommentModel>().mapArray(JSONObject:r["productCommentList"].arrayObject)
+                if let array = arr{
+                    strongSelf.commentList = array
+                }
+                strongSelf.requestAboutProduct()
+            }
+            
+            
+        }){[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                strongSelf.requestAboutProduct()
+            }
+            
+        }
+
     }
     
     // 相关商品信息
@@ -447,30 +518,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
 
 extension WOWProductDetailController : CyclePictureViewDelegate {
     func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
-        func setPhoto() -> [PhotoModel] {
-            var photos: [PhotoModel] = []
-            for (_, photoURLString) in imgUrlArr.enumerated() {
-                // 这个方法只能返回可见的cell, 如果不可见, 返回值为nil
-                //                let cell = cyclePictureView.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? CyclePictureCell
-                
-                //                let sourceView = cell?.imageView
-                
-                let photoModel = PhotoModel(imageUrlString: photoURLString, sourceImageView: nil)
-                photos.append(photoModel)
-            }
-            return photos
-        }
-        
-        let photoBrowser = PhotoBrowser(photoModels: setPhoto()) {[weak self] (extraBtn) in
-            if let sSelf = self {
-                let hud = SimpleHUD(frame:CGRect(x: 0.0, y: (sSelf.view.zj_height - 80)*0.5, width: sSelf.view.zj_width, height: 80.0))
-                sSelf.view.addSubview(hud)
-            }
-            
-        }
-        // 指定代理
-        
-        photoBrowser.show(inVc: self, beginPage: (indexPath as NSIndexPath).row)
+        loadBigImage(imgUrlArr, indexPath.row)
     }
 }
 

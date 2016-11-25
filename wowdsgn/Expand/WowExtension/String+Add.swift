@@ -95,5 +95,17 @@ extension String{
         return filepath
     }
     
+    func stringToTimeStamp() -> String {
+        
+        let dfmatter = DateFormatter()
+        dfmatter.dateFormat="yyyy-MM-dd HH:mm:ss"
+        let date = dfmatter.date(from: self)
+        if let date = date {
+            let dateStamp:TimeInterval = date.timeIntervalSince1970
+            let dateSt:Int = Int(dateStamp)
+            return dateSt.getTimeString()
+        }
+        return self
+    }
 
 }

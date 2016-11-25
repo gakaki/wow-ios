@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class WOWBannerModel:NSObject,Mappable{
+class WOWBannerModel:WOWBaseModel,Mappable{
     var imageUrl : String?
     var url      : String?
     

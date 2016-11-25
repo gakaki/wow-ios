@@ -39,7 +39,7 @@ class WOWCommentCell: UITableViewCell {
     
     func showData(_ model: WOWTopicCommentListModel?) {
         if let model = model {
-            headImageView.set_webimage_url(model.userAvatar)
+            headImageView.set_webimage_url_base(model.userAvatar, place_holder_name: "placeholder_product")
             commentLabel.text = model.content
             nameLabel.text = model.userName
             if let publishTime = model.createTime {
@@ -59,9 +59,7 @@ class WOWCommentCell: UITableViewCell {
     
     // 点赞按钮
     @IBAction func clickLikeAction(sender: UIButton) {
-        if let del = delegate {
-            del.commentLikeList()
-        }
+        
         WOWClickLikeAction.requestLikeComment(commentId: modelData?.commentId ?? 0,view: self,btn: sender) { [weak self](isFavorite) in
             
             if let strongSelf = self{
@@ -78,7 +76,10 @@ class WOWCommentCell: UITableViewCell {
                     strongSelf.numberLabel.text    = thumbNum.toString
                 }
                 strongSelf.modelData?.favorite = isFavorite
-                
+                //请求成功之后在详情页刷新数据
+                if let del = strongSelf.delegate {
+                    del.commentLikeList()
+                }
             }
             
         }

@@ -17,6 +17,7 @@ class WOWCommentController: WOWBaseViewController {
     let pageSize        = 10
     var commentList = [WOWTopicCommentListModel]()
     var topic_id        = 0
+    var lastId          = 0 //用来记录这一页的最后一个id，防止拉取重复数据
     weak var delegate:   WOWCommentControllerDelegate?
     
     @IBOutlet weak var tableView: UITableView!
@@ -96,10 +97,9 @@ class WOWCommentController: WOWBaseViewController {
             return
         }
         requestSendComment(inputTextView.text)
-        //点赞或者发表评论的时候刷新数据
-        refreshCommentList()
+        
     }
-    
+    //调用代理刷新评论列表
     fileprivate func refreshCommentList() {
         if let del = delegate {
             del.refreshComments()
@@ -121,12 +121,20 @@ class WOWCommentController: WOWBaseViewController {
 //MARK:Private Network
     override func request() {
         super.request()
+        //如果加载第一页的时候lastId重置为0
+        if pageIndex == 1 {
+            lastId = 0
+        }
         ///获取评论列表
-        WOWNetManager.sharedManager.requestWithTarget(.api_TopicCommentList(pageSize: pageSize, currentPage: pageIndex, topicId: topic_id), successClosure: {[weak self] (result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_TopicCommentList(pageSize: pageSize, currentPage: pageIndex, topicId: topic_id, lastId: lastId), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let r = JSON(result)
                 let arr = Mapper<WOWTopicCommentListModel>().mapArray(JSONObject:r["comments"].arrayObject)
                 if let array = arr{
+                    //取出来数组中最后一个元素，记录下id
+                    let model = array.last
+                    strongSelf.lastId = model?.commentId ?? 0
+                    
                     if strongSelf.pageIndex == 1{
                         strongSelf.commentList = []
                     }
@@ -165,6 +173,8 @@ class WOWCommentController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_SubmitTopicComment(topicId: topic_id, content: content), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 strongSelf.endEditing()
+                //点赞或者发表评论的时候刷新数据
+                strongSelf.refreshCommentList()
                 strongSelf.request()
             }
             

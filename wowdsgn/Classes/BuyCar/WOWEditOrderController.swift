@@ -292,7 +292,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
             }) { (errorMsg) in
-                WOWHud.dismiss()
+                
 
         }
         
@@ -379,7 +379,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-            WOWHud.dismiss()
+           
 
         }
     }

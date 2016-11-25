@@ -66,7 +66,7 @@ class WOWBuyCarNormalCell: UITableViewCell{
             }
         }
         //判断产品是否是促销产品,如果是促销产品的话打上标签
-        if model.isPromotion ?? false {
+        if model.limitQty > 0 {
             topHeight.constant = 30
             limitView.isHidden = false
             limitTagLabel.text = model.pricePromotionTag ?? ""

@@ -575,6 +575,39 @@
             </objects>
             <point key="canvasLocation" x="665" y="1242"/>
         </scene>
+        <!--评论-->
+        <scene sceneID="9EO-nS-7Qx">
+            <objects>
+                <viewController storyboardIdentifier="WOWProductCommentController" title="评论" id="mAI-gw-QQl" customClass="WOWProductCommentController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vjP-oA-zka"/>
+                        <viewControllerLayoutGuide type="bottom" id="xFw-v9-SrO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ejk-5N-1eS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hcK-QU-pdy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hcK-QU-pdy" secondAttribute="trailing" id="fht-5H-NQA"/>
+                            <constraint firstAttribute="bottom" secondItem="hcK-QU-pdy" secondAttribute="bottom" id="gDx-se-pvH"/>
+                            <constraint firstItem="hcK-QU-pdy" firstAttribute="top" secondItem="ejk-5N-1eS" secondAttribute="top" id="hOI-ct-paa"/>
+                            <constraint firstItem="hcK-QU-pdy" firstAttribute="leading" secondItem="ejk-5N-1eS" secondAttribute="leading" id="ug5-WV-JYh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="hcK-QU-pdy" id="MvK-y7-vEB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LFZ-Ws-uoY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="533.5" y="-943.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="car_right" width="63" height="36"/>

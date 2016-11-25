@@ -44,20 +44,39 @@ extension UILabel {
         self.attributedText = mustr1
         
     }
-    // 指定的字体加横线
+    // 指定的字体加颜色
     func colorWithText( _ str1:String,str2:String,str1Color:UIColor){
         
         let  mustr1 = NSMutableAttributedString.init(string: str1 + str2)
         
         let strLeng = str1.characters.count
-        let str1Leng = str2.characters.count
         
         let str1Range = NSMakeRange(0, strLeng)
         // 颜色
         mustr1 .addAttribute(NSForegroundColorAttributeName, value: str1Color, range: str1Range)
         
-        let strPlace = NSAttributedString.init(string: "  ")
-        mustr1 .insert(strPlace, at: strLeng)
+//        let strPlace = NSAttributedString.init(string: "")
+//        mustr1 .insert(strPlace, at: strLeng)
+        
+        self.attributedText = mustr1
+        
+    }
+    
+    // 改变指定字体
+    func fontWithText( _ str1:String,str2:String, font: UIFont){
+        
+        let  mustr1 = NSMutableAttributedString.init(string: str1 + str2)
+        
+        let strLeng = str1.characters.count
+        
+        let str1Range = NSMakeRange(0, strLeng)
+        // 颜色
+        mustr1.addAttribute(NSFontAttributeName, value: font, range: str1Range)
+       
+        
+        
+        //        let strPlace = NSAttributedString.init(string: "")
+        //        mustr1 .insert(strPlace, at: strLeng)
         
         self.attributedText = mustr1
         

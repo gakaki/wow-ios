@@ -68,6 +68,8 @@ let URL_Product_imageDetail     = "v1/product/images/detail"
 let URL_SubmitTopicComment           = "v1/topic/comments"
 //2.5评论列表
 let URL_TopicCommentList             = "v1/topic/comments"
+//商品评论列表
+let URL_productCommentList             = "v1/product/comments/list"
 //点赞评论
 let URL_FavoriteTopicComment        = "v1/user/topic-comment/favorite"
 

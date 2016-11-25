@@ -37,7 +37,7 @@ public extension Int {
             //            if minute < 5 {
             //                return "刚刚"
             //            } else
-            if hour < 2 {
+            if hour < 1 {
                 return "刚刚"
             } else {
                 return "\(hour)小时前"

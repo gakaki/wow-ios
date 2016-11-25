@@ -53,8 +53,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         super.setUI()
         self.edgesForExtendedLayout = UIRectEdge()
         configCollectionView()
-        collectionView.mj_header = self.mj_header
-        collectionView.mj_footer = self.mj_footer
+        
         //判断一下是品牌详情还是设计师详情
         switch entrance {
         case .brandEntrance:
@@ -101,6 +100,8 @@ class WOWBrandHomeController: WOWBaseViewController {
      
     }
     func configCollectionView(){
+        collectionView.mj_header = self.mj_header
+        collectionView.mj_footer = self.mj_footer
         collectionView.collectionViewLayout = self.layout
         collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
 //        WOWBorderColor(collectionView)

@@ -162,23 +162,23 @@ class WOWBuyCarController: WOWBaseViewController {
             if product.productStatus == -1 {
                 let str = String(format:"您购买的商品\"%@\"已失效",product.productTitle ?? "")
 
-                WOWHud.showMsg(str)
+                WOWHud.showWarnMsg(str)
                 return
             }
             if product.productStatus == 2 {
                 let str = String(format:"您购买的商品\"%@\"已下架",product.productTitle ?? "")
-                WOWHud.showMsg(str)
+                WOWHud.showWarnMsg(str)
                 return
             }
             if product.productStatus == 1 && product.productStock == 0 {
                 let str = String(format:"您购买的商品\"%@\"已售罄",product.productTitle ?? "")
-                WOWHud.showMsg(str)
+                WOWHud.showWarnMsg(str)
                 return
             }
-            if product.isPromotion ?? false{
+            if product.limitQty > 0 {
                 if product.productQty > product.limitQty {
                     let str = String(format:"%@每人限购%i件，请修改",product.productTitle ?? "", product.limitQty ?? 1)
-                    WOWHud.showMsg(str)
+                    WOWHud.showWarnMsg(str)
                     return
                 }
             }

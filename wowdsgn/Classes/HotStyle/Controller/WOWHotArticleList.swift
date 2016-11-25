@@ -90,7 +90,7 @@ class WOWHotArticleList: WOWBaseViewController {
                         
                     }else {
 
-//                        strongSelf.tableView.mj_footer = strongSelf.mj_footerHome
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
                     }
                     
                     strongSelf.dataArr.append(contentsOf: bannerList)

@@ -148,6 +148,11 @@ let URL_OrderConfirm            = "v1/order/confirm"           //确认收货
 
 
 let URL_OrderCancel            = "v1/order/cancel"           //取消订单
+
+let URL_OrderComment            = "v1/order/orderItem/unComment"           //订单评论
+
+let URL_OrderPushComment        = "v1/order/comment"
+
 //4. 发现页面
 let URL_Found_Main              = "v1/page/find/product"
 let URL_Found_2nd               = "v1/page/find/category"

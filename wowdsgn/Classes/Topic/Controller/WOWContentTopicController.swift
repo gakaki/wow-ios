@@ -839,6 +839,8 @@ extension WOWContentTopicController: UITextViewDelegate{
             }else{//非中文输入法
                 limitTextLength(textView)
             }
+        }else {
+            limitTextLength(textView)
         }
     }
     

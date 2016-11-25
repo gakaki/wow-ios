@@ -29,7 +29,6 @@ class WOWOrderCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        tagList.textFont = UIFont.systemFont(ofSize: 10)
 
         // Initialization code
     }
@@ -41,9 +40,11 @@ class WOWOrderCell: UITableViewCell {
     }
     
     func showData(_ model:WOWCarProductModel?) {
+        
         guard let model = model else{
             return
         }
+        tagList.textFont = UIFont.systemFont(ofSize: 10)
         self.model = model
 //        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         

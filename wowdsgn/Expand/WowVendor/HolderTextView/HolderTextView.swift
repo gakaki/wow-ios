@@ -112,6 +112,8 @@ extension HolderTextView:UITextViewDelegate{
                     delegate.holderTextViewDidChange!(textView as! HolderTextView)
                 }
             }
+        }else {
+            limitTextLength(textView)
         }
         
     }

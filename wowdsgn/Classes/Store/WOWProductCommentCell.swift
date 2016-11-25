@@ -14,7 +14,7 @@ protocol WOWProductCommentCellDelegate:class{
 class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, CollectionViewWaterfallLayoutDelegate {
     var itemWidth:CGFloat{
         get{
-            return ( MGScreenWidth - 99) / 4
+            return ( MGScreenWidth - 60 - 4 * 8 - 15) / 5
         }
     }
     @IBOutlet weak var headImg: UIImageView!        //用户头像
@@ -33,7 +33,7 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
     
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
-        l.columnCount = 4
+        l.columnCount = 5
         l.minimumColumnSpacing = 8
         l.minimumInteritemSpacing = 0
         l.sectionInset = UIEdgeInsetsMake(0, 0, 8, 0)
@@ -47,30 +47,42 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
     }
     func showData(model: WOWProductCommentModel?)  {
         if let model = model {
+            //判断评论中是否有图片。如果有图片的话就初始化collectionview。大于四张图片显示两行
             let count = model.commentImgs?.count
             if count > 0 {
                 configCollectionView()
-                if count > 4 {
-                    collectionHeight.constant = (itemWidth + 8) * 2
-                }else {
-                    collectionHeight.constant = itemWidth + 8
-                }
+                //动态改变collectionview的高度
+//                if count > 4 {
+//                    collectionHeight.constant = (itemWidth + 8) * 2
+//                }else {
+//                    collectionHeight.constant = itemWidth + 8
+//                }
+                collectionHeight.constant = itemWidth + 8
                 imgArray = model.commentImgs ?? [String]()
                 collectionView.reloadData()
             }else {
                 collectionHeight.constant = 0
             }
-            headImg.set_webimage_url_base(model.avatar, place_holder_name: "placeholder_product")
+            headImg.set_webimage_url_base(model.avatar, place_holder_name: "placeholder_userhead")
             nameLabel.text = model.nickName
+            //格式化时间
             timeLabel.text = model.publishTimeFormat?.stringToTimeStamp()
             contentLabel.text = model.comments
             if let array = model.specAttributes {
                 var str = ""
-                for spec in array{
-                    str.append(spec + " ")
+                if array.count > 0 {
+                    for spec in array.enumerated(){
+                        if spec.offset == array.count - 1 {
+                            str.append(spec.element)
+                        }else {
+                            str.append(spec.element + "  ")
+
+                        }
+                    }
                 }
                 specLabel.text = str
             }
+            //是否有回复,如果没有回复需要修改下几个约束
             if model.isReplyed ?? false {
                 topHeight.constant = 5
                 replyBottom.constant = 15

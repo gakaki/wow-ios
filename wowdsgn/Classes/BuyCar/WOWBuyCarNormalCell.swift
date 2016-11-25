@@ -34,7 +34,6 @@ class WOWBuyCarNormalCell: UITableViewCell{
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        tagList.textFont = UIFont.systemFont(ofSize: 10)
         // Initialization code
     }
     
@@ -45,6 +44,8 @@ class WOWBuyCarNormalCell: UITableViewCell{
     }
     
     func showData(_ model:WOWCarProductModel?) {
+        tagList.textFont = UIFont.systemFont(ofSize: 10)
+
         guard let model = model else{
             return
         }

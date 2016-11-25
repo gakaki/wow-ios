@@ -39,7 +39,7 @@ class WOWCommentCell: UITableViewCell {
     
     func showData(_ model: WOWTopicCommentListModel?) {
         if let model = model {
-            headImageView.set_webimage_url_base(model.userAvatar, place_holder_name: "placeholder_product")
+            headImageView.set_webimage_url_base(model.userAvatar, place_holder_name: "placeholder_userhead")
             commentLabel.text = model.content
             nameLabel.text = model.userName
             if let publishTime = model.createTime {

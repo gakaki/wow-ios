@@ -25,6 +25,7 @@ class WOWProductOrderCell: UITableViewCell{
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
     }
     
@@ -35,6 +36,7 @@ class WOWProductOrderCell: UITableViewCell{
     }
     
     func showData(_ model:WOWCarProductModel?) {
+        tagList.textFont = UIFont.systemFont(ofSize: 10)
         guard let model = model else{
             return
         }

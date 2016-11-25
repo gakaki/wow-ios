@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="333" height="291"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="333" height="291"/>
+                <rect key="frame" x="0.0" y="0.0" width="333" height="290"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eU4-t7-27c">
@@ -66,7 +66,7 @@
                             <constraint firstAttribute="bottom" secondItem="ZlA-P8-vAd" secondAttribute="bottom" id="xwq-JF-Git"/>
                         </constraints>
                     </view>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明颜色：透明" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ClZ-h5-oGk">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ClZ-h5-oGk" customClass="HolderTextView" customModule="wow_vendor_ui">
                         <rect key="frame" x="23" y="70" width="287" height="120"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -76,7 +76,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Frs-LS-VGG">
-                        <rect key="frame" x="23" y="190" width="310" height="100"/>
+                        <rect key="frame" x="0.0" y="190" width="333" height="100"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="qoU-PV-Ddo"/>
@@ -94,9 +94,9 @@
                     <constraint firstAttribute="bottom" secondItem="Frs-LS-VGG" secondAttribute="bottom" id="ZEl-nV-BTi"/>
                     <constraint firstItem="Frs-LS-VGG" firstAttribute="top" secondItem="ClZ-h5-oGk" secondAttribute="bottom" id="ZRC-QQ-fmS"/>
                     <constraint firstItem="eU4-t7-27c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Zu0-6f-WmB"/>
-                    <constraint firstItem="Frs-LS-VGG" firstAttribute="leading" secondItem="ClZ-h5-oGk" secondAttribute="leading" id="bXe-ec-yj9"/>
                     <constraint firstAttribute="trailing" secondItem="Frs-LS-VGG" secondAttribute="trailing" id="hGF-Hy-gMt"/>
                     <constraint firstItem="ClZ-h5-oGk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="l4F-3V-Uja"/>
+                    <constraint firstItem="Frs-LS-VGG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lkO-AF-zYG"/>
                     <constraint firstAttribute="trailing" secondItem="eU4-t7-27c" secondAttribute="trailing" id="sD3-vW-3wn"/>
                     <constraint firstItem="eU4-t7-27c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wv3-o2-1fH"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ClZ-h5-oGk" secondAttribute="trailing" constant="15" id="zDT-pJ-la9"/>
@@ -104,7 +104,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="Frs-LS-VGG" id="FMI-UA-EHB"/>
+                <outlet property="holderText" destination="ClZ-h5-oGk" id="ajt-fE-viY"/>
+                <outlet property="imgProduct" destination="axF-BO-Z5b" id="6Ev-s4-1W7"/>
                 <outlet property="imgShop" destination="axF-BO-Z5b" id="IwO-Ib-sba"/>
+                <outlet property="lbDes" destination="zNk-n8-l51" id="k7R-Pz-KHE"/>
+                <outlet property="lbTitle" destination="CFs-bf-7v3" id="Y8p-Kt-1m1"/>
             </connections>
             <point key="canvasLocation" x="-483.5" y="105"/>
         </tableViewCell>

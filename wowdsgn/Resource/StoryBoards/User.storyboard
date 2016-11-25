@@ -350,16 +350,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4sM-DE-hx7">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOe-zX-Weq">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vk9-rm-7kc">
+                                        <rect key="frame" x="287" y="8" width="80" height="35"/>
+                                        <color key="backgroundColor" red="1" green="0.83137254900000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="0Lc-oW-twA"/>
+                                            <constraint firstAttribute="height" constant="35" id="Pfc-X1-MPa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="发布">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="puchClickAction:" destination="Vmk-xu-wGU" eventType="touchUpInside" id="VQz-VU-Xet"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="EEa-lp-XZu"/>
+                                    <constraint firstItem="Vk9-rm-7kc" firstAttribute="centerY" secondItem="zOe-zX-Weq" secondAttribute="centerY" id="NTZ-TO-NfI"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vk9-rm-7kc" secondAttribute="trailing" constant="8" id="WmD-6t-jym"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="zOe-zX-Weq" firstAttribute="top" secondItem="4sM-DE-hx7" secondAttribute="bottom" id="462-tO-b1Q"/>
                             <constraint firstItem="4sM-DE-hx7" firstAttribute="leading" secondItem="FRi-yt-nwZ" secondAttribute="leading" id="ASo-Eo-yex"/>
                             <constraint firstAttribute="trailing" secondItem="4sM-DE-hx7" secondAttribute="trailing" id="BAi-yh-Zhs"/>
                             <constraint firstItem="4sM-DE-hx7" firstAttribute="top" secondItem="FRi-yt-nwZ" secondAttribute="top" id="E8t-AE-Xma"/>
-                            <constraint firstItem="vX2-Ea-X9H" firstAttribute="top" secondItem="4sM-DE-hx7" secondAttribute="bottom" id="Tcz-xj-oCq"/>
+                            <constraint firstAttribute="trailing" secondItem="zOe-zX-Weq" secondAttribute="trailing" id="b8S-WR-Vst"/>
+                            <constraint firstItem="vX2-Ea-X9H" firstAttribute="top" secondItem="zOe-zX-Weq" secondAttribute="bottom" id="bbO-ov-WqE"/>
+                            <constraint firstItem="zOe-zX-Weq" firstAttribute="leading" secondItem="FRi-yt-nwZ" secondAttribute="leading" id="heH-at-QU4"/>
                         </constraints>
                     </view>
                     <connections>

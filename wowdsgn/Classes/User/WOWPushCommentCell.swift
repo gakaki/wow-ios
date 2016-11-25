@@ -13,17 +13,41 @@ protocol PushCommentDelegate:class {
 }
 class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     
+    @IBOutlet weak var imgProduct: UIImageView!
+    
+    @IBOutlet weak var holderText: HolderTextView!
+    @IBOutlet weak var lbDes: UILabel!
+    
+    @IBOutlet weak var lbTitle: UILabel!
+    
+//    @IBOutlet weak var textView: HolderTextView!
+    
     var dataImageArr = [UIImage](){
         didSet{
             collectionView.reloadData()
         }
     }
-    var modelData               :    UserPhotoManage?
-    weak var delegate           :    PushCommentDelegate?
+    
+    var modelPhotosData               :    UserPhotoManage?
+    weak var delegate                 :    PushCommentDelegate?
     
     var maxNumPhoto                 = 5 // 最多显示几个
     var collectionViewOfDataSource  = Dictionary<Int, [UIImage]>() //空字典
     
+    var modelData : WOWProductCommentModel?{
+        
+        didSet{
+            self.lbTitle.text = modelData?.productName
+            self.imgProduct.set_webimage_url(modelData?.productImg ?? "")
+            var desStr : String?
+            for str in modelData?.specAttribute ?? [""] {
+                desStr = (desStr ?? "") + str
+            }
+            holderText.tag = modelData?.saleOrderItemId ?? 0
+            
+            self.lbDes.text = desStr
+        }
+    }
 
     var indexPathSection : Int? = 0{// 记录当前的CollectionView，为了维持上面的数据
         didSet{
@@ -39,6 +63,8 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
         super.awakeFromNib()
         // Initialization code
         
+//        holderText.placeHolder = "请写下您的购物体验和使用感受"
+        
         collectionView.register(UINib.nibName(String(describing: WOWSingPhotoCVCell.self)), forCellWithReuseIdentifier:String(describing: WOWSingPhotoCVCell.self))
     
         collectionView.delegate                         = self
@@ -46,13 +72,15 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     
         collectionView.showsVerticalScrollIndicator     = false
         collectionView.showsHorizontalScrollIndicator   = false
-        
-
+  
     }
+    
+    
+    
     // UI数据
     func showImageView(_ m:UserPhotoManage)  {
         
-        self.modelData      = m
+        self.modelPhotosData      = m
         self.dataImageArr   = m.imageArr
         
     }
@@ -86,8 +114,8 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
                     
                     strongSelf.dataImageArr.remove(at: indexPath.row)// 更改当前CollectionView
 
-                    strongSelf.modelData?.imageArr.remove(at: indexPath.row)// 更改原始数据层
-                    strongSelf.modelData?.assetsArr.remove(at: indexPath.row)
+                    strongSelf.modelPhotosData?.imageArr.remove(at: indexPath.row)// 更改原始数据层
+                    strongSelf.modelPhotosData?.assetsArr.remove(at: indexPath.row)
                     
                     strongSelf.collectionView.reloadData()
                 }
@@ -110,7 +138,7 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(0, 0,
+        return UIEdgeInsetsMake(0, 23,
                                 0, 15)
     }
 

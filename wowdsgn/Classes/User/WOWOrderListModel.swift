@@ -247,3 +247,26 @@ class WOWNewProductModel: WOWBaseModel,Mappable{
         attributes                          <- map["attributes"]
     }
 }
+// 商品评论model
+class WOWProductCommentModel: WOWBaseModel,Mappable{
+    
+    var productId                       : Int?          // 当前产品id
+    var saleOrderItemId                 : Int?          // 当前订单下的Id
+    var productName                     : String?       // 产品姓名
+    var specAttribute                   : [String]?     // 产品描述数组
+    var productImg                      : String?       // 产品图片
+    
+
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        productId                               <- map["productId"]
+        saleOrderItemId                         <- map["saleOrderItemId"]
+        productName                             <- map["productName"]
+        specAttribute                           <- map["specAttribute"]
+        productImg                              <- map["productImg"]
+    }
+    
+}

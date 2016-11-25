@@ -165,7 +165,11 @@ public enum RequestApi{
     case api_OrderConfirm(orderCode: String)
     
     case api_OrderCancel(orderCode: String)
-   
+
+    case api_OrderComment(orderCode: String)// 订单商品评论列表
+    
+    case api_OrderPushComment(params: [String: AnyObject]?)// 提交评论内容
+
     
     case api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
     
@@ -395,6 +399,12 @@ extension RequestApi:TargetType{
             return URL_OrderConfirm
         case .api_OrderCancel:
             return URL_OrderCancel
+        case .api_OrderComment:
+            return URL_OrderComment
+            
+        case .api_OrderPushComment:
+            return URL_OrderPushComment
+            
         case .api_Invite:
             return URL_Invite
         //发现页面
@@ -434,7 +444,10 @@ extension RequestApi:TargetType{
             .api_AD,
             .api_HotStyle_BottomList,
             .api_TopicCommentList,
-            .api_ProductCommentList:
+            .api_ProductCommentList,
+            .api_OrderComment,
+            .api_OrderPushComment:
+
 
             return .GET
 
@@ -579,6 +592,12 @@ extension RequestApi:TargetType{
                 params = ["orderCode": orderCode]
             case let .api_OrderDetail(OrderCode):
                 params =  ["orderCode":OrderCode]
+            
+            case let .api_OrderComment(OrderCode):
+                params =  ["orderCode":OrderCode]
+            
+            case let .api_OrderPushComment(param):
+                params = param!
             
             case .api_Home_Banners():
                 params =  ["pageType":1]

@@ -10,16 +10,30 @@ import UIKit
 // 记录用户选择的图片的数据
 class UserPhotoManage: NSObject {
     
-    var imageArr = [UIImage]()
+    var imageArr        = [UIImage]()
     var userIndexSection : Int?
-    var assetsArr = [AnyObject]()
-    
+    var assetsArr       = [AnyObject]()
+    var UserCommentDic  : [String:AnyObject]?
 }
-
-class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,PushCommentDelegate {
-    fileprivate var dataImageArr = [UIImage]()// 存放选择的image对象
+// 记录用户评论的操作
+class UserCommentManage :NSObject,CGYJSON{
     
-    var collectionViewOfDataSource = Dictionary<Int, UserPhotoManage>() //空字典,记录每个 cell上面的选择图片的数据
+    var saleOrderItemId         : Int?
+    var comments                : String?
+    var commentImgs             : [String]?
+  
+}
+class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,PushCommentDelegate {
+    fileprivate var dataImageArr    = [UIImage]()// 存放选择的image对象
+    
+    fileprivate var dataArr         = [WOWProductCommentModel]()// 列表cell的数据源
+    
+    fileprivate var commentArr      = [String]() // 存放评论信息的数组
+    
+    
+    fileprivate var productCommentDic : [String:AnyObject]?
+    
+    var collectionViewOfDataSource  = Dictionary<Int, UserPhotoManage>() //空字典,记录每个 cell上面的选择图片的数据
     var orderCode   :String!
     @IBOutlet weak var tableView: UITableView!
     
@@ -35,24 +49,49 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         self.tableView.dataSource           = self
         self.tableView.rowHeight            = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight   = 300
+        request()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-//    lazy var imagePicker:UIImagePickerController = {
-//        let v = UIImagePickerController()
-//        v.delegate = self
-//        return v
-//    }()
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-//        
-//        print(image)
-//        
-//        picker.dismiss(animated: true, completion: nil)
-//        
-//        
-//    }
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderComment(orderCode: orderCode), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+                
+                let json = JSON(result)
+                DLog(json)
+                let bannerList = Mapper<WOWProductCommentModel>().mapArray(JSONObject:JSON(result)["saleOrderItemList"].arrayObject)
+                
+                if let bannerList = bannerList{
+                    strongSelf.dataArr = bannerList
+//                    for commentModel in bannerList {
+//                        
+//                        let user = UserCommentManage()// 拿到统一的 评论对象
+//                        user.saleOrderItemId = commentModel.saleOrderItemId
+//                        strongSelf.commentArr.append(user)
+//                    }
+                }
+                
+                strongSelf.endRefresh()
+                strongSelf.tableView.reloadData()
+                
+     
+                
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.dismiss()
+            }
+        }
+
+    }
+    
+    
     // 选择照片
     func pushImagePickerController(collectionViewTag: Int)  {
         
@@ -93,10 +132,57 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         present(imagePickerVc!, animated: true, completion: nil)
     }
 
+   
+    @IBAction func puchClickAction(_ sender: Any) {
+        print("点击了")
+        for model in self.dataArr.enumerated(){
+            
+            let user = UserCommentManage()// 拿到统一的 评论对象
+            user.saleOrderItemId = model.element.saleOrderItemId
+            user.comments = "aaaa" + String(model.offset)
+            
+            self.commentArr.append(user.toJSONString()!)
+        }
+        
+        
+        
+        var params = [String: AnyObject]()
+        
+        params = ["commentDetails": self.commentArr as AnyObject]
+        
+        print("json----\(params)")
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderPushComment(params: nil) , successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+                
+                
+                let json = JSON(result)
+                DLog(json)
+//                let bannerList = Mapper<WOWProductCommentModel>().mapArray(JSONObject:JSON(result)["saleOrderItemList"].arrayObject)
+//                
+//                if let bannerList = bannerList{
+//                    strongSelf.dataArr = bannerList
+//                }
+//                
+//                strongSelf.endRefresh()
+//                strongSelf.tableView.reloadData()
+                
+                
+                
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.dismiss()
+            }
+        }
+
+    }
 }
 extension WOWUserCommentVC:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return self.dataArr.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -105,6 +191,9 @@ extension WOWUserCommentVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWPushCommentCell.self), for: indexPath) as! WOWPushCommentCell
 
+        
+        cell.modelData = self.dataArr[indexPath.section]
+        
         let model = self.collectionViewOfDataSource[indexPath.section]
 
         if let model = model{
@@ -118,6 +207,91 @@ extension WOWUserCommentVC:UITableViewDelegate,UITableViewDataSource{
        
         cell.indexPathSection   = indexPath.section
         cell.delegate           = self
+        cell.selectionStyle     = .none
         return cell
+    }
+}
+public protocol CGYJSON {
+    func toJSONModel() -> AnyObject?
+    func toJSONString() -> String?
+}
+
+extension CGYJSON {
+    public func toJSONModel() -> AnyObject? {
+        let mirror = Mirror(reflecting: self)
+        guard mirror.children.count > 0 else {
+            return self as? AnyObject
+        }
+        var result: [String: AnyObject] = [:]
+        var superClss = mirror.superclassMirror
+        while superClss != nil {
+            for case let (label?, value) in superClss!.children {
+                if let jsonValue = value as? CGYJSON {
+                    result[label] = jsonValue.toJSONModel()
+                }
+            }
+            superClss = superClss?.superclassMirror
+        }
+        for case let (label?, value) in mirror.children {
+            if let jsonValue = value as? CGYJSON {
+                result[label] = jsonValue.toJSONModel()
+            }
+        }
+        return result as AnyObject?
+    }
+    
+    public func toJSONString() -> String? {
+        guard let jsonModel = self.toJSONModel() else {
+            return nil
+        }
+        let data = try? JSONSerialization.data(withJSONObject: jsonModel, options: [])
+        let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+        return str as? String
+    }
+}
+
+extension Optional: CGYJSON {
+    public func toJSONModel() -> AnyObject? {
+        if let _self = self {
+            if let value = _self as? CGYJSON {
+                return value.toJSONModel()
+            }
+        }
+        return NSNull()
+    }
+}
+
+extension Array: CGYJSON {
+    public func toJSONModel() -> AnyObject? {
+        var results: [AnyObject] = []
+        for item in self {
+            if let ele = item as? CGYJSON {
+                if let eleModel = ele.toJSONModel() {
+                    results.append(eleModel)
+                }
+            }
+        }
+        return results as AnyObject?
+    }
+}
+
+extension Dictionary: CGYJSON {
+    public func toJSONModel() -> AnyObject? {
+        var results: [String: AnyObject] = [:]
+        for (key, value) in self {
+            if let key = key as? String {
+                if let value = value as? CGYJSON {
+                    if let valueModel = value.toJSONModel() {
+                        results[key] = valueModel
+                        continue
+                    }
+                } else if let value = value as? AnyObject {
+                    results[key] = value
+                    continue
+                }
+                results[key] = NSNull()
+            }
+        }
+        return results as AnyObject?
     }
 }

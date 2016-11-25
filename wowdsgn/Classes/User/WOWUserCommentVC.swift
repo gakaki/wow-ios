@@ -26,7 +26,7 @@ class UserCommentManage :NSObject,CGYJSON{
 class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,PushCommentDelegate {
     fileprivate var dataImageArr    = [UIImage]()// 存放选择的image对象
     
-    fileprivate var dataArr         = [WOWProductCommentModel]()// 列表cell的数据源
+    fileprivate var dataArr         = [WOWProductPushCommentModel]()// 列表cell的数据源
     
     fileprivate var commentArr      = [String]() // 存放评论信息的数组
     
@@ -63,7 +63,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
                 
                 let json = JSON(result)
                 DLog(json)
-                let bannerList = Mapper<WOWProductCommentModel>().mapArray(JSONObject:JSON(result)["saleOrderItemList"].arrayObject)
+                let bannerList = Mapper<WOWProductPushCommentModel>().mapArray(JSONObject:JSON(result)["saleOrderItemList"].arrayObject)
                 
                 if let bannerList = bannerList{
                     strongSelf.dataArr = bannerList

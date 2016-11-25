@@ -248,7 +248,7 @@ class WOWNewProductModel: WOWBaseModel,Mappable{
     }
 }
 // 商品评论model
-class WOWProductCommentModel: WOWBaseModel,Mappable{
+class WOWProductPushCommentModel: WOWBaseModel,Mappable{
     
     var productId                       : Int?          // 当前产品id
     var saleOrderItemId                 : Int?          // 当前订单下的Id

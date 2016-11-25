@@ -34,7 +34,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     var maxNumPhoto                 = 5 // 最多显示几个
     var collectionViewOfDataSource  = Dictionary<Int, [UIImage]>() //空字典
     
-    var modelData : WOWProductCommentModel?{
+    var modelData : WOWProductPushCommentModel?{
         
         didSet{
             self.lbTitle.text = modelData?.productName

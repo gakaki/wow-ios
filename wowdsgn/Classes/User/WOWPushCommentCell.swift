@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PushCommentDelegate:class {
-      func pushImagePickerController(collectionViewTag: Int)
+    func pushImagePickerController(collectionViewTag: Int)
 }
 class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     
@@ -20,7 +20,9 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     }
     var modelData               :    UserPhotoManage?
     weak var delegate           :    PushCommentDelegate?
-    var collectionViewOfDataSource = Dictionary<Int, [UIImage]>() //空字典
+    
+    var maxNumPhoto                 = 5 // 最多显示几个
+    var collectionViewOfDataSource  = Dictionary<Int, [UIImage]>() //空字典
     
 
     var indexPathSection : Int? = 0{// 记录当前的CollectionView，为了维持上面的数据
@@ -47,7 +49,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
         
 
     }
-    
+    // UI数据
     func showImageView(_ m:UserPhotoManage)  {
         
         self.modelData      = m
@@ -67,9 +69,9 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let number = dataImageArr.count == 0 ?  1 : dataImageArr.count + 1
+        let number = (dataImageArr.count == 0 ?  1 : dataImageArr.count + 1)
         
-        return number >= 5 ? 5 : number
+        return number >= maxNumPhoto ? maxNumPhoto : number// 最多显示 5个
         
     }
     
@@ -79,8 +81,9 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
             
             cell.imgPhoto.image = dataImageArr[indexPath.row]
             cell.datelebtn.isHidden = false
-            cell.datelebtn.addTapGesture(action: {[weak self] (sender) in
+            cell.datelebtn.addTapGesture(action: {[weak self] (sender) in// 点击删除图片操作
                 if let strongSelf = self {
+                    
                     strongSelf.dataImageArr.remove(at: indexPath.row)// 更改当前CollectionView
 
                     strongSelf.modelData?.imageArr.remove(at: indexPath.row)// 更改原始数据层
@@ -113,11 +116,31 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == dataImageArr.count{
-
-            if let del = delegate {
-                del.pushImagePickerController(collectionViewTag: collectionView.tag)
-            }
+            
+                if let del = self.delegate {
+                    del.pushImagePickerController(collectionViewTag: self.collectionView.tag)
+                }
+            
         }
         
     }
+    
+    
+//    func choosePhtot(_ type:UIImagePickerControllerSourceType){
+//        if UIImagePickerController.isSourceTypeAvailable(type){
+//            //指定图片控制器类型
+////            imagePicker.sourceType = type
+//            //弹出控制器，显示界面
+////            UIApplication.currentViewController()?.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+////            UIApplication.currentViewController()?.present(imagePicker, animated: true, completion:nil)
+//            
+//            if let del = self.delegate {
+//                del.pushImagePickerController(collectionViewTag: self.collectionView.tag,photoSourceType: type)
+//            }
+//
+//        }else{
+//            DLog("读取相册错误")
+//        }
+//    }
+
 }

@@ -200,7 +200,8 @@ class WOWOrderDetailController: WOWBaseViewController{
             case 3:// 确认收货
                 
                 confirmReceive(orderNewModel.orderCode!)
-                
+            case 4:
+                print("待评价")
             default:
                 break
             }
@@ -245,7 +246,17 @@ class WOWOrderDetailController: WOWBaseViewController{
                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
                     isSomeForGoodsType = false
                 }
-                hideRightBtn()
+                if let isComment = orderNewModel.isComment{// 判断是否评论
+                    if isComment == true {
+                        hideRightBtn()
+                    }else{
+                        self.rightButton.setTitle("待评价", for: UIControlState())
+                    }
+                }else{
+                        hideRightBtn()
+                }
+                
+               
                 
             case 2:
                 self.OrderDetailNewaType = OrderNewType.someFinishForGoods

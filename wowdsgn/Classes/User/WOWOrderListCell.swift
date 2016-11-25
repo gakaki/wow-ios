@@ -111,8 +111,8 @@ class WOWOrderListCell: UITableViewCell {
                 action = .sureReceive
             case 3: //待收货
                 action = .sureReceive
-            case 4: //已完成
-                action = .delete
+            case 4: //已完成 // 待评论
+                action = .comment
             default:
                 break
             }

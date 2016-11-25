@@ -167,7 +167,10 @@ extension WOWOrderController:OrderCellDelegate{
         switch type {
         case .comment:
             print("评价")
-//            commentOrder(model.id ?? "")
+            
+            goCommentVC(model.orderCode ?? "")
+   
+
         case .delete:
             print("删除")
 //            deleteOrder(model,cell: cell)
@@ -295,14 +298,22 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderListCell", for: indexPath) as! WOWOrderListCell
         let orderModel = self.dataArr[(indexPath as NSIndexPath).section]
         cell.delegate = self
-        cell.showData(dataArr[(indexPath as NSIndexPath).section])
+        let model = dataArr[(indexPath as NSIndexPath).section]
+        cell.showData(model)
         if orderModel.orderStatus == 0 {
             cell.rightButton.isHidden = false
             cell.rightButton.setTitle("立即支付", for: UIControlState())
         }else if orderModel.orderStatus == 3{
             cell.rightButton.isHidden = false
             cell.rightButton.setTitle("确认收货", for: UIControlState())
-        }else{
+        }else if orderModel.orderStatus == 4 && orderModel.isComment == false{
+
+                cell.rightButton.isHidden = false
+                cell.rightButton.setTitle("待评论", for: UIControlState())
+
+           
+        }
+        else{
             cell.rightButton.isHidden = true
         }
        
@@ -331,6 +342,17 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         parentNavigationController!.pushViewController(vc, animated: true)
 
     }
+    
+    func goCommentVC(_ orderCode:String) {
+       
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
+        vc.orderCode = orderCode
+        parentNavigationController!.pushViewController(vc, animated: true)
+        
+        
+    }
+
+    
     func gotoOrderDatailVC(orderCode:String) {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
         vc.orderCode = orderCode

@@ -16,7 +16,7 @@
 @import DZNEmptyDataSet;
 
 @import EZSwiftExtensions;
-
+@import TZImagePickerController;
 //@import HidingNavigationBar;
 @import YYImage;
 @import YYCache;

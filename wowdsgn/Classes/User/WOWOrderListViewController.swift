@@ -19,7 +19,7 @@ class WOWOrderListViewController: WOWBaseViewController {
         self.view.backgroundColor = UIColor(hexString: "efeff4")
         self.title = "我的订单"
         
-        let titleArray  = ["全部","待付款","待发货","待收货","已完成"]
+        let titleArray  = ["全部","待付款","待发货","待收货","待评价"]
         for index in 0..<titleArray.count {
             
             let orderListVC = UIStoryboard.initialViewController("User", identifier:String(describing: WOWOrderController.self)) as! WOWOrderController

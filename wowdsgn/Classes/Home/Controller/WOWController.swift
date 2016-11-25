@@ -25,7 +25,25 @@ class WOWController: WOWBaseModuleVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-
+        let imageView = UIImageView()
+        imageView.frame = CGRectMakeD(100, y: 100, width: 100, height: 100)
+        imageView.backgroundColor = UIColor.red
+        imageView.isUserInteractionEnabled = true
+        imageView.addTapGesture {[weak self] (tap) in// 代理跳转详情
+            if let strongSelf = self {
+                let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+//        imageView.addTapGesture { [weak self] (tap) in
+//            if let strongSelf = self {
+//            let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
+//            
+//            }
+//        }
+//        
+        self.view.addSubview(imageView)
+        
         setUI()
         addObserver()
         request()

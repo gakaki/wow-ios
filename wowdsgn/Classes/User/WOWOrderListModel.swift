@@ -92,7 +92,7 @@ class WOWNewOrderListModel: WOWBaseModel,Mappable{
     var productSpecImgs : Array<String> = [] // 产品规格图片列表
     
     var orderCreateTimeFormat : String? // 订单创建的时间
-    
+    var isComment       :Bool?
     
     
     required init?(map: Map) {
@@ -107,11 +107,11 @@ class WOWNewOrderListModel: WOWBaseModel,Mappable{
         
         orderId                  <- map["orderId"]
         
-        orderCode            <- map["orderCode"]
+        orderCode               <- map["orderCode"]
         
         orderAmount              <- map["orderAmount"]
         
-        orderStatus          <- map["orderStatus"]
+        orderStatus             <- map["orderStatus"]
         
         orderStatusName               <- map["orderStatusName"]
         
@@ -121,6 +121,7 @@ class WOWNewOrderListModel: WOWBaseModel,Mappable{
         
         orderCreateTimeFormat    <- map["orderCreateTimeFormat"]
         
+        isComment               <- map["isComment"]
     }
 }
 /// 订单详情MOdel
@@ -133,13 +134,13 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     var orderAmount                 : Double?// 订单总金额
     var orderCode                   : String?// 订单号
     var orderCreateTimeFormat                 : String?// 订单下单时间
-    var orderId                     : Int?// 订单Id
-    var orderStatus                 : Int?// 订单状态
-    var orderStatusName             : String?// 订单状态名称
-    var receiverName                : String?// 收货人姓名
-    var receiverMobile              : String?// 收货人手机
-    var receiverAddress             : String?// 收货人地址
-    
+    var orderId                     : Int?      // 订单Id
+    var orderStatus                 : Int?      // 订单状态
+    var orderStatusName             : String?   // 订单状态名称
+    var receiverName                : String?   // 收货人姓名
+    var receiverMobile              : String?   // 收货人手机
+    var receiverAddress             : String?   // 收货人地址
+    var isComment                   : Bool?     // 待评论
     
     var paymentStatus                 : Int?// 支付状态
     var paymentStatusName                 : String?// 支付状态名称
@@ -158,26 +159,26 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     
     func mapping(map: Map) {
         
-        couponAmount                  <- map["couponAmount"]
-        deliveryFee            <- map["deliveryFee"]
-        orderAmount              <- map["orderAmount"]
-        orderCode              <- map["orderCode"]
-        orderCreateTimeFormat              <- map["orderCreateTimeFormat"]
-        orderId              <- map["orderId"]
-        orderStatus              <- map["orderStatus"]
-        orderStatusName              <- map["orderStatusName"]
+        couponAmount                        <- map["couponAmount"]
+        deliveryFee                         <- map["deliveryFee"]
+        orderAmount                         <- map["orderAmount"]
+        orderCode                           <- map["orderCode"]
+        orderCreateTimeFormat               <- map["orderCreateTimeFormat"]
+        orderId                             <- map["orderId"]
+        orderStatus                         <- map["orderStatus"]
+        orderStatusName                     <- map["orderStatusName"]
         
-        receiverName              <- map["receiverName"]
-        receiverMobile              <- map["receiverMobile"]
-        receiverAddress              <- map["receiverAddress"]
-        
-        paymentStatus              <- map["paymentStatus"]
-        paymentStatusName              <- map["paymentStatusName"]
-        paymentMethod              <- map["paymentMethod"]
-        paymentMethodName              <- map["paymentMethodName"]
-        totalProductQty              <- map["totalProductQty"]
-        packages              <- map["packages"]
-        unShipOutOrderItems              <- map["unShipOutOrderItems"]
+        receiverName                        <- map["receiverName"]
+        receiverMobile                      <- map["receiverMobile"]
+        receiverAddress                     <- map["receiverAddress"]
+         isComment                          <- map["isComment"]
+        paymentStatus                       <- map["paymentStatus"]
+        paymentStatusName                   <- map["paymentStatusName"]
+        paymentMethod                       <- map["paymentMethod"]
+        paymentMethodName                   <- map["paymentMethodName"]
+        totalProductQty                     <- map["totalProductQty"]
+        packages                            <- map["packages"]
+        unShipOutOrderItems                 <- map["unShipOutOrderItems"]
     }
 }
 

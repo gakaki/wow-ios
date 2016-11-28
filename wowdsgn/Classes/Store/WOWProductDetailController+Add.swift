@@ -21,7 +21,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.tableHeaderView = cycleView   //banner轮播
         //显示价格的cell
         tableView.register(UINib.nibName(String(describing: WOWProductDetailPriceCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailPriceCell.self))
-        //促销标签
+        //限购标签
         tableView.register(UINib.nibName(String(describing: WOWProductLimitCell.self)), forCellReuseIdentifier:String(describing: WOWProductLimitCell.self))
         //产品包邮说明
         tableView.register(UINib.nibName(String(describing: WOWProductDesCell.self)), forCellReuseIdentifier:String(describing: WOWProductDesCell.self))
@@ -82,7 +82,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailPriceCell.self), for: indexPath) as! WOWProductDetailPriceCell
             cell.showData(productModel)
             returnCell = cell
-        case (0 + isHaveLimit,_): //促销标签
+        case (0 + isHaveLimit,_): //限购标签
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductLimitCell.self), for: indexPath) as! WOWProductLimitCell
             cell.limitLabel.text = productModel?.limitTag ?? ""
             returnCell = cell
@@ -177,7 +177,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         switch section {
         case 0: //商品价格
             return 0.01
-        case 0 + isHaveLimit: //促销标签
+        case 0 + isHaveLimit: //限购标签
             return 0.01
         case 4 + isHaveLimit:   //产品参数
             if isOpenParam {

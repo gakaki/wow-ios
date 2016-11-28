@@ -28,7 +28,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
     
     fileprivate var dataArr         = [WOWProductPushCommentModel]()// 列表cell的数据源
     
-    fileprivate var commentArr      = [String]() // 存放评论信息的数组
+    fileprivate var commentArr      = [[String : Any]]() // 存放评论信息的数组
     
     
     fileprivate var productCommentDic : [String:AnyObject]?
@@ -135,13 +135,14 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
    
     @IBAction func puchClickAction(_ sender: Any) {
         print("点击了")
+
         for model in self.dataArr.enumerated(){
             
             let user = UserCommentManage()// 拿到统一的 评论对象
             user.saleOrderItemId = model.element.saleOrderItemId
             user.comments = "aaaa" + String(model.offset)
-            
-            self.commentArr.append(user.toJSONString()!)
+            let parma = ["saleOrderItemId":user.saleOrderItemId ?? 0, "comments": user.comments!] as [String : Any]
+            self.commentArr.append(parma)
         }
         
         
@@ -151,7 +152,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         params = ["commentDetails": self.commentArr as AnyObject]
         
         print("json----\(params)")
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderPushComment(params: nil) , successClosure: {[weak self] (result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderPushComment(params: params) , successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let strongSelf = self{
                 

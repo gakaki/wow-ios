@@ -156,7 +156,7 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismiss(animated: true, completion: nil)
         
-        WOWUploadManager.upload(image, successClosure: { [weak self](result) in
+        WOWUploadManager.uploadPhoto(image, successClosure: { [weak self](result) in
             if let strongSelf = self {
                 WOWHud.dismiss()
                 strongSelf.headImageView.image = image

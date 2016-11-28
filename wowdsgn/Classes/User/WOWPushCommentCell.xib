@@ -66,7 +66,7 @@
                             <constraint firstAttribute="bottom" secondItem="ZlA-P8-vAd" secondAttribute="bottom" id="xwq-JF-Git"/>
                         </constraints>
                     </view>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ClZ-h5-oGk" customClass="HolderTextView" customModule="wow_vendor_ui">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ClZ-h5-oGk" customClass="KMPlaceholderTextView" customModule="wowdsgn">
                         <rect key="frame" x="23" y="70" width="287" height="120"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -74,6 +74,12 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                <color key="value" white="0.53638343209999995" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请写下您的购物体验和使用感受"/>
+                        </userDefinedRuntimeAttributes>
                     </textView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Frs-LS-VGG">
                         <rect key="frame" x="0.0" y="190" width="333" height="100"/>
@@ -104,9 +110,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="Frs-LS-VGG" id="FMI-UA-EHB"/>
-                <outlet property="holderText" destination="ClZ-h5-oGk" id="ajt-fE-viY"/>
                 <outlet property="imgProduct" destination="axF-BO-Z5b" id="6Ev-s4-1W7"/>
                 <outlet property="imgShop" destination="axF-BO-Z5b" id="IwO-Ib-sba"/>
+                <outlet property="inputTextView" destination="ClZ-h5-oGk" id="tdE-EM-dts"/>
                 <outlet property="lbDes" destination="zNk-n8-l51" id="k7R-Pz-KHE"/>
                 <outlet property="lbTitle" destination="CFs-bf-7v3" id="Y8p-Kt-1m1"/>
             </connections>

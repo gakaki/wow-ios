@@ -15,7 +15,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     
     @IBOutlet weak var imgProduct: UIImageView!
     
-    @IBOutlet weak var holderText: HolderTextView!
+    @IBOutlet weak var inputTextView: KMPlaceholderTextView!
     @IBOutlet weak var lbDes: UILabel!
     
     @IBOutlet weak var lbTitle: UILabel!
@@ -29,6 +29,17 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     }
     
     var modelPhotosData               :    UserPhotoManage?
+    var userCommentData               :    UserCommentManage?{
+        didSet{
+            if userCommentData?.comments?.isEmpty == true {
+                inputTextView.placeholderText = "请写下您的购物体验和使用感受"
+            }else{
+                inputTextView.text = userCommentData?.comments ?? ""
+            }
+        
+        }
+       
+    }
     weak var delegate                 :    PushCommentDelegate?
     
     var maxNumPhoto                 = 5 // 最多显示几个
@@ -43,7 +54,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
             for str in modelData?.specAttribute ?? [""] {
                 desStr = (desStr ?? "") + str
             }
-            holderText.tag = modelData?.saleOrderItemId ?? 0
+            inputTextView.tag = modelData?.saleOrderItemId ?? 0
             
             self.lbDes.text = desStr
         }
@@ -62,8 +73,8 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-//        holderText.placeHolder = "请写下您的购物体验和使用感受"
+
+        inputTextView.delegate = self
         
         collectionView.register(UINib.nibName(String(describing: WOWSingPhotoCVCell.self)), forCellWithReuseIdentifier:String(describing: WOWSingPhotoCVCell.self))
     
@@ -114,9 +125,9 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
                     
                     strongSelf.dataImageArr.remove(at: indexPath.row)// 更改当前CollectionView
 
-                    strongSelf.modelPhotosData?.imageArr.remove(at: indexPath.row)// 更改原始数据层
-                    strongSelf.modelPhotosData?.assetsArr.remove(at: indexPath.row)
-                    
+                    strongSelf.modelPhotosData?.imageArr.remove(at: indexPath.row)// 更改原始数据层，用户选中的image
+                    strongSelf.modelPhotosData?.assetsArr.remove(at: indexPath.row)// 用户选中的image Assets
+                    strongSelf.userCommentData?.commentImgs?.remove(at: indexPath.row)// 用户选择image 的Url数组
                     strongSelf.collectionView.reloadData()
                 }
             })
@@ -152,23 +163,10 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
         }
         
     }
-    
-    
-//    func choosePhtot(_ type:UIImagePickerControllerSourceType){
-//        if UIImagePickerController.isSourceTypeAvailable(type){
-//            //指定图片控制器类型
-////            imagePicker.sourceType = type
-//            //弹出控制器，显示界面
-////            UIApplication.currentViewController()?.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-////            UIApplication.currentViewController()?.present(imagePicker, animated: true, completion:nil)
-//            
-//            if let del = self.delegate {
-//                del.pushImagePickerController(collectionViewTag: self.collectionView.tag,photoSourceType: type)
-//            }
-//
-//        }else{
-//            DLog("读取相册错误")
-//        }
-//    }
-
+}
+extension WOWPushCommentCell:UITextViewDelegate{
+ 
+    func textViewDidEndEditing(_ textView: UITextView) {
+        userCommentData?.comments = textView.text ?? ""
+    }
 }

@@ -445,8 +445,7 @@ extension RequestApi:TargetType{
             .api_HotStyle_BottomList,
             .api_TopicCommentList,
             .api_ProductCommentList,
-            .api_OrderComment,
-            .api_OrderPushComment:
+            .api_OrderComment:
 
 
             return .GET

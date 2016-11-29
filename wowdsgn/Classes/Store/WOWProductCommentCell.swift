@@ -47,7 +47,7 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
     }
     func showData(model: WOWProductCommentModel?)  {
         if let model = model {
-            //判断评论中是否有图片。如果有图片的话就初始化collectionview。大于四张图片显示两行
+            //判断评论中是否有图片。如果有图片的话就初始化collectionview。
             let count = model.commentImgs?.count
             if count > 0 {
                 configCollectionView()
@@ -68,6 +68,7 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
             //格式化时间
             timeLabel.text = model.publishTimeFormat?.stringToTimeStamp()
             contentLabel.text = model.comments
+            //每个规格之间增加一个字符的间隔
             if let array = model.specAttributes {
                 var str = ""
                 if array.count > 0 {
@@ -87,7 +88,7 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
                 topHeight.constant = 5
                 replyBottom.constant = 15
                 replyView.isHidden = false
-                replyLabel.fontWithText("客服回复：", str2: model.replyContent ?? "", font: UIFont.boldSystemFont(ofSize: 12))
+                replyLabel.fontWithText("尖叫君：", str2: model.replyContent ?? "", font: UIFont.boldSystemFont(ofSize: 12))
             }else {
                 topHeight.constant = 0
                 replyBottom.constant = 0

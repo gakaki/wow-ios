@@ -1,18 +1,18 @@
 //
-//  WOWOrderFreightCell.swift
-//  wowapp
+//  WOWOrderRemissionCell.swift
+//  wowdsgn
 //
-//  Created by 安永超 on 16/8/4.
-//  Copyright © 2016年 小黑. All rights reserved.
+//  Created by 安永超 on 16/11/28.
+//  Copyright © 2016年 g. All rights reserved.
 //
 
 import UIKit
 
-class WOWOrderFreightCell: UITableViewCell {
-    @IBOutlet weak var leftLabel: UILabel!
-    @IBOutlet weak var couponLabel: UILabel!
-    @IBOutlet weak var lineView: UIView!
+class WOWOrderRemissionCell: UITableViewCell {
 
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

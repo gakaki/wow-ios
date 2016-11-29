@@ -27,7 +27,6 @@ class WOWBuyCarNormalCell: UITableViewCell{
     @IBOutlet weak var limitView: UIView!
     @IBOutlet weak var limitTagLabel: UILabel!
     @IBOutlet weak var topHeight: NSLayoutConstraint!
-    let identifier = "WOWTypeCollectionCell"
     var typeArr = [String]()
     var model:WOWCarProductModel!
     weak var delegate: buyCarDelegate?

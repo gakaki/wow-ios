@@ -20,7 +20,8 @@ class WOWProductDetailController: WOWBaseViewController {
     
     var noMoreData                      :Bool = true
     fileprivate(set) var numberSections = 0
-    var isHaveLimit = 0  //是否有促销
+    var isHaveLimit = 0  //是否有限购
+    var isHavePromotion = 0 //是否有促销
     var isHaveComment = 0   //是否有评论
     var isHaveAbout = 0 //是否有相关产品
     let pageSize = 6

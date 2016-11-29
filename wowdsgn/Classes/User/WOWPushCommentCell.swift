@@ -19,6 +19,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     @IBOutlet weak var lbDes: UILabel!
     
     @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
     
 //    @IBOutlet weak var textView: HolderTextView!
     
@@ -28,10 +29,10 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
         }
     }
     
-    var modelPhotosData               :    UserPhotoManage?
-    var userCommentData               :    UserCommentManage?{
+    var modelPhotosData               :    UserPhotoManage? // 记录当前cell上面选择的图片信息
+    var userCommentData               :    UserCommentManage?{// 用户评论信息
         didSet{
-            if userCommentData?.comments?.isEmpty == true {
+            if userCommentData?.comments == "" {
                 inputTextView.placeholderText = "请写下您的购物体验和使用感受"
             }else{
                 inputTextView.text = userCommentData?.comments ?? ""
@@ -45,7 +46,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     var maxNumPhoto                 = 5 // 最多显示几个
     var collectionViewOfDataSource  = Dictionary<Int, [UIImage]>() //空字典
     
-    var modelData : WOWProductPushCommentModel?{
+    var modelData : WOWProductPushCommentModel?{// 商品信息
         
         didSet{
             self.lbTitle.text = modelData?.productName
@@ -165,8 +166,43 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
     }
 }
 extension WOWPushCommentCell:UITextViewDelegate{
- 
-    func textViewDidEndEditing(_ textView: UITextView) {
-        userCommentData?.comments = textView.text ?? ""
+    
+    fileprivate func limitTextLength(_ textView: UITextView){
+        
+        let toBeString = textView.text as NSString
+        
+        if (toBeString.length > 140) {
+            numberLabel.colorWithText(toBeString.length.toString, str2: "/140", str1Color: UIColor.red)
+            
+        }else {
+            numberLabel.text = String(format: "%i/140", toBeString.length)
+        }
+        userCommentData?.commentsLength = toBeString.length// 记录字数
+        userCommentData?.comments       = toBeString as String // 记录评论内容
+    }
+    //    //中文和其他字符的判断方式不一样
+    func textViewDidChange(_ textView: UITextView) {
+
+        let language = textView.textInputMode?.primaryLanguage
+        //        FLOG("language:\(language)")
+        if let lang = language {
+            if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
+                let selectedRange = textView.markedTextRange
+                var position : UITextPosition?
+                if let range = selectedRange {
+                    position = textView.position(from: range.start, offset: 0)
+                }
+                //系统默认中文输入法会导致英文高亮部分进入输入统计，对输入完成的时候进行字数统计
+                if position == nil {
+                    //                    FLOG("没有高亮，输入完毕")
+                    limitTextLength(textView)
+                }
+            }else{//非中文输入法
+                limitTextLength(textView)
+            }
+        }else {
+            limitTextLength(textView)
+        }
+        
     }
 }

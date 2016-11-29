@@ -180,6 +180,16 @@ class WOWOrderDetailController: WOWBaseViewController{
 
 
     }
+    func goCommentVC(_ orderCode:String) {
+        
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
+        vc.orderCode = orderCode
+        vc.delegate  = self
+        navigationController?.pushViewController(vc, animated: true)
+//        pushViewController(vc, animated: true)
+        
+        
+    }
     // 右边点击按钮
     @IBAction func rightButtonClick(_ sender: UIButton) {
         
@@ -201,6 +211,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 
                 confirmReceive(orderNewModel.orderCode!)
             case 4:
+                goCommentVC(orderNewModel.orderCode!)
                 print("待评价")
             default:
                 break
@@ -1164,5 +1175,12 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             headerView.textLabel?.textColor = MGRgb(109, g: 109, b: 114)
             headerView.textLabel?.font = Fontlevel003
         }
+    }
+}
+extension WOWOrderDetailController:UserCommentSuccesDelegate {
+    
+    func reloadTableViewCommentStatus() {
+        request()
+        NotificationCenter.postNotificationNameOnMainThread(WOWUpdateOrderListAllNotificationKey, object: nil)
     }
 }

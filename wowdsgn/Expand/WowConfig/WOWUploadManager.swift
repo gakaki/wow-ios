@@ -21,10 +21,22 @@ class WOWUploadManager {
     static let sharedManager = WOWUploadManager()
     init(){}
     
+   static func onlyStr() -> String  {
+        //          拼接唯一字符串
+        let onlyStr = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
+        let hashids                 = Hashids(salt:onlyStr)
+        return hashids.encode([1,2,3])!
+        
+    }
+
     // 上传头像
     static  func uploadPhoto(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
+        //          拼接唯一字符串
+
+        let qiniu_key               = "user/avatar/\(onlyStr())"
+
         
-        PushImage(image, successClosure: { (url) in
+        PushImage(image, imagePath: qiniu_key, successClosure: { (url) in
             // 保存用户URL
             if let url = url {
                 WOWUserManager.userHeadImageUrl = url
@@ -51,13 +63,13 @@ class WOWUploadManager {
     static func pushCommentPhotos(_ images:[imageInfo],successClosure:@escaping PushImgURLs){
         var urlArray = [String]()
         
-        
         for image in images.enumerated(){
             group.enter()// 标记
             DispatchQueue.global().async(group: group) {
                 
-                
-                PushImage(image.element.image,imageName: image.element.imageName, successClosure: { (url) in
+                let qiniu_key               = "product-review/\(onlyStr() + (image.element.imageName ?? ""))"
+
+                PushImage(image.element.image, imagePath: qiniu_key, successClosure: { (url) in
                     
                     urlArray.append(url!)
                     
@@ -83,7 +95,7 @@ class WOWUploadManager {
     
 
     // 上传图片
-    static  func PushImage(_ image:UIImage,imageName:String? = nil,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
+    static  func PushImage(_ image:UIImage,imagePath:String!,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
         
         let image = image.fixOrientation()
         let data = UIImageJPEGRepresentation(image,0.5)
@@ -97,22 +109,14 @@ class WOWUploadManager {
             checkCrc: false,
             cancellationSignal: nil
         )
-
-         //          拼接唯一字符串
-        let onlyStr = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
-        let hashids                 = Hashids(salt:onlyStr)
-        let qiniu_key               = "user/avatar/\(hashids.encode([1,2,3])! + (imageName ?? ""))"
-        
-        
-
-        WOWNetManager.sharedManager.requestWithTarget(.api_qiniu_token(qiniuKey: qiniu_key, bucket: "wowdsgn"), successClosure: { (result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_qiniu_token(qiniuKey: imagePath, bucket: "wowdsgn"), successClosure: { (result, code) in
             
                 let token       = JSON(result)["token"].string
                 WOWHud.showLoadingSV()
 
                 if let qm          = QNUploadManager(){
                    
-                    qm.put(data, key: qiniu_key, token: token, complete: { (info, key, resp) in
+                    qm.put(data, key: imagePath, token: token, complete: { (info, key, resp) in
                          WOWHud.dismiss()
                         if (info?.error != nil) {
 //                            DLog(info?.error)

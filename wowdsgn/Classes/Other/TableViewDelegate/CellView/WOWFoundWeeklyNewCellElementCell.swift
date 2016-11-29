@@ -19,7 +19,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
     }
     func set_sold_out_status(label: UILabel){
         label.borderRadius(28)
-        label.text = "以售馨"
+        label.text = "已售罄"
         label.isHidden = false
     }
     func setModel(_ m:WowModulePageItemVO){

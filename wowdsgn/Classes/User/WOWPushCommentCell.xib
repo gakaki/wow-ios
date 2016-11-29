@@ -81,6 +81,12 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请写下您的购物体验和使用感受"/>
                         </userDefinedRuntimeAttributes>
                     </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/140" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICD-T8-wSb">
+                        <rect key="frame" x="277" y="175.5" width="33" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Frs-LS-VGG">
                         <rect key="frame" x="0.0" y="190" width="333" height="100"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,6 +103,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ClZ-h5-oGk" firstAttribute="top" secondItem="eU4-t7-27c" secondAttribute="bottom" id="BG8-BG-Fmk"/>
+                    <constraint firstItem="ICD-T8-wSb" firstAttribute="trailing" secondItem="ClZ-h5-oGk" secondAttribute="trailing" id="Yh6-hX-fyV"/>
                     <constraint firstAttribute="bottom" secondItem="Frs-LS-VGG" secondAttribute="bottom" id="ZEl-nV-BTi"/>
                     <constraint firstItem="Frs-LS-VGG" firstAttribute="top" secondItem="ClZ-h5-oGk" secondAttribute="bottom" id="ZRC-QQ-fmS"/>
                     <constraint firstItem="eU4-t7-27c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Zu0-6f-WmB"/>
@@ -105,6 +112,7 @@
                     <constraint firstItem="Frs-LS-VGG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lkO-AF-zYG"/>
                     <constraint firstAttribute="trailing" secondItem="eU4-t7-27c" secondAttribute="trailing" id="sD3-vW-3wn"/>
                     <constraint firstItem="eU4-t7-27c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wv3-o2-1fH"/>
+                    <constraint firstItem="ICD-T8-wSb" firstAttribute="bottom" secondItem="ClZ-h5-oGk" secondAttribute="bottom" id="yAU-36-HUU"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ClZ-h5-oGk" secondAttribute="trailing" constant="15" id="zDT-pJ-la9"/>
                 </constraints>
             </tableViewCellContentView>
@@ -115,8 +123,9 @@
                 <outlet property="inputTextView" destination="ClZ-h5-oGk" id="tdE-EM-dts"/>
                 <outlet property="lbDes" destination="zNk-n8-l51" id="k7R-Pz-KHE"/>
                 <outlet property="lbTitle" destination="CFs-bf-7v3" id="Y8p-Kt-1m1"/>
+                <outlet property="numberLabel" destination="ICD-T8-wSb" id="3iy-Cp-0xi"/>
             </connections>
-            <point key="canvasLocation" x="-483.5" y="105"/>
+            <point key="canvasLocation" x="-483.5" y="104.5"/>
         </tableViewCell>
     </objects>
     <resources>

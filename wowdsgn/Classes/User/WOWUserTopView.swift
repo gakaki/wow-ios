@@ -44,6 +44,8 @@ class WOWUserTopView: UIView {
                 make.left.equalTo(topContainerView).offset(15)
             }
         }
+        headImageView.contentMode = .scaleAspectFill
+        headImageView.clipsToBounds = true
         headImageView.borderRadius(23)
         
         let arrowImageView = UIImageView()

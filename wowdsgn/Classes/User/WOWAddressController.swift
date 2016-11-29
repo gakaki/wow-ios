@@ -60,6 +60,7 @@ class WOWAddressController: WOWBaseViewController {
         tableView.register(UINib.nibName(String(describing: WOWAddressCell.self)), forCellReuseIdentifier: "WOWAddressCell")
 //        tableView.estimatedRowHeight = 80
 //        tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.mj_header = mj_header
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.separatorColor = SeprateColor
         navigationItem.title = "收货地址"
@@ -77,11 +78,14 @@ class WOWAddressController: WOWBaseViewController {
                 if let array = arr{
                     strongSelf.dataArr = []
                     strongSelf.dataArr.append(contentsOf: array)
+                    strongSelf.endRefresh()
                     strongSelf.tableView.reloadData()
                 }
             }
-        }) { (errorMsg) in
-                
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+            }
         }
     }
     

@@ -22,7 +22,6 @@ class WOWOrderCell: UITableViewCell {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var tagList: TagListView!
 
-    let identifier = "WOWTypeCollectionCell"
     var typeArr = [String]()
     var model:WOWCarProductModel!
     weak var delegate: orderCarDelegate?

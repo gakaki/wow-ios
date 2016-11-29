@@ -227,6 +227,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         cv.decelerationRate                 = UIScrollViewDecelerationRateFast
 //        cv.bounces                          = false
         cv.mj_header                        = self.mj_header
+//        cv.mj_footer                        = self.mj_footer
 
         self.cv                             = cv
         self.view.addSubview(self.cv)

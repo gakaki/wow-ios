@@ -460,28 +460,7 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         
     }
     
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let model = dataArr[(indexPath as NSIndexPath).section]
-//        if model.productStatus == 1 && model.productStock > 0{
-//            return 160
-//        }else {
-//            return  111
-//        }
-//    }
 
-    
-//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if editingStyle == .Delete {
-//                asyncCarDelete(dataArr[indexPath.section])
-//        }
-//        
-//    }
-//    
-//    
-//    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-//        return "删除"
-//    }
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let delete = UITableViewRowAction(style: .default, title: "删除") { [weak self](action, indexPath) in

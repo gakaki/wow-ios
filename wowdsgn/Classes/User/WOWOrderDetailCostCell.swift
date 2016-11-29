@@ -32,7 +32,7 @@ class WOWOrderDetailCostCell: UITableViewCell {
             self.priceLabel.text       = "-" + result
             
             self.saidImageView.isHidden  = true
-            self.freightTypeLabel.text = "优惠券"
+            self.freightTypeLabel.text = "优惠"
         }
 
     }

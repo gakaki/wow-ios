@@ -15,10 +15,11 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     
     @IBOutlet weak var imgProduct: UIImageView!
     
-    @IBOutlet weak var holderText: HolderTextView!
+    @IBOutlet weak var inputTextView: KMPlaceholderTextView!
     @IBOutlet weak var lbDes: UILabel!
     
     @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
     
 //    @IBOutlet weak var textView: HolderTextView!
     
@@ -28,13 +29,24 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
         }
     }
     
-    var modelPhotosData               :    UserPhotoManage?
+    var modelPhotosData               :    UserPhotoManage? // 记录当前cell上面选择的图片信息
+    var userCommentData               :    UserCommentManage?{// 用户评论信息
+        didSet{
+            if userCommentData?.comments == "" {
+                inputTextView.placeholderText = "请写下您的购物体验和使用感受"
+            }else{
+                inputTextView.text = userCommentData?.comments ?? ""
+            }
+        
+        }
+       
+    }
     weak var delegate                 :    PushCommentDelegate?
     
     var maxNumPhoto                 = 5 // 最多显示几个
     var collectionViewOfDataSource  = Dictionary<Int, [UIImage]>() //空字典
     
-    var modelData : WOWProductPushCommentModel?{
+    var modelData : WOWProductPushCommentModel?{// 商品信息
         
         didSet{
             self.lbTitle.text = modelData?.productName
@@ -43,7 +55,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
             for str in modelData?.specAttribute ?? [""] {
                 desStr = (desStr ?? "") + str
             }
-            holderText.tag = modelData?.saleOrderItemId ?? 0
+            inputTextView.tag = modelData?.saleOrderItemId ?? 0
             
             self.lbDes.text = desStr
         }
@@ -62,8 +74,8 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-//        holderText.placeHolder = "请写下您的购物体验和使用感受"
+
+        inputTextView.delegate = self
         
         collectionView.register(UINib.nibName(String(describing: WOWSingPhotoCVCell.self)), forCellWithReuseIdentifier:String(describing: WOWSingPhotoCVCell.self))
     
@@ -114,9 +126,9 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
                     
                     strongSelf.dataImageArr.remove(at: indexPath.row)// 更改当前CollectionView
 
-                    strongSelf.modelPhotosData?.imageArr.remove(at: indexPath.row)// 更改原始数据层
-                    strongSelf.modelPhotosData?.assetsArr.remove(at: indexPath.row)
-                    
+                    strongSelf.modelPhotosData?.imageArr.remove(at: indexPath.row)// 更改原始数据层，用户选中的image
+                    strongSelf.modelPhotosData?.assetsArr.remove(at: indexPath.row)// 用户选中的image Assets
+                    strongSelf.userCommentData?.commentImgs?.remove(at: indexPath.row)// 用户选择image 的Url数组
                     strongSelf.collectionView.reloadData()
                 }
             })
@@ -152,23 +164,45 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
         }
         
     }
+}
+extension WOWPushCommentCell:UITextViewDelegate{
     
-    
-//    func choosePhtot(_ type:UIImagePickerControllerSourceType){
-//        if UIImagePickerController.isSourceTypeAvailable(type){
-//            //指定图片控制器类型
-////            imagePicker.sourceType = type
-//            //弹出控制器，显示界面
-////            UIApplication.currentViewController()?.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-////            UIApplication.currentViewController()?.present(imagePicker, animated: true, completion:nil)
-//            
-//            if let del = self.delegate {
-//                del.pushImagePickerController(collectionViewTag: self.collectionView.tag,photoSourceType: type)
-//            }
-//
-//        }else{
-//            DLog("读取相册错误")
-//        }
-//    }
+    fileprivate func limitTextLength(_ textView: UITextView){
+        
+        let toBeString = textView.text as NSString
+        
+        if (toBeString.length > 140) {
+            numberLabel.colorWithText(toBeString.length.toString, str2: "/140", str1Color: UIColor.red)
+            
+        }else {
+            numberLabel.text = String(format: "%i/140", toBeString.length)
+        }
+        userCommentData?.commentsLength = toBeString.length// 记录字数
+        userCommentData?.comments       = toBeString as String // 记录评论内容
+    }
+    //    //中文和其他字符的判断方式不一样
+    func textViewDidChange(_ textView: UITextView) {
 
+        let language = textView.textInputMode?.primaryLanguage
+        //        FLOG("language:\(language)")
+        if let lang = language {
+            if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
+                let selectedRange = textView.markedTextRange
+                var position : UITextPosition?
+                if let range = selectedRange {
+                    position = textView.position(from: range.start, offset: 0)
+                }
+                //系统默认中文输入法会导致英文高亮部分进入输入统计，对输入完成的时候进行字数统计
+                if position == nil {
+                    //                    FLOG("没有高亮，输入完毕")
+                    limitTextLength(textView)
+                }
+            }else{//非中文输入法
+                limitTextLength(textView)
+            }
+        }else {
+            limitTextLength(textView)
+        }
+        
+    }
 }

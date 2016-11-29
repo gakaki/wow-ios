@@ -168,8 +168,8 @@ extension WOWOrderController:OrderCellDelegate{
         case .comment:
             print("评价")
             
-            goCommentVC(model.orderCode ?? "")
-   
+//            goCommentVC(model.orderCode ?? "") // 前往评价页
+            goOrderDetailAction(model.orderCode ?? "") // 前往详情页 评价
 
         case .delete:
             print("删除")

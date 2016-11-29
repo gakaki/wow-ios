@@ -18,6 +18,8 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!
     @IBOutlet weak var lbDes: UILabel!
     
+    var itemWidth : CGFloat  = (MGScreenWidth - 23 - 15 - 15*4)/5
+    
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     
@@ -87,8 +89,6 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
   
     }
     
-    
-    
     // UI数据
     func showImageView(_ m:UserPhotoManage)  {
         
@@ -128,7 +128,7 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
 
                     strongSelf.modelPhotosData?.imageArr.remove(at: indexPath.row)// 更改原始数据层，用户选中的image
                     strongSelf.modelPhotosData?.assetsArr.remove(at: indexPath.row)// 用户选中的image Assets
-                    strongSelf.userCommentData?.commentImgs?.remove(at: indexPath.row)// 用户选择image 的Url数组
+                    strongSelf.userCommentData?.commentImgs.remove(at: indexPath.row)// 用户选择image 的Url数组
                     strongSelf.collectionView.reloadData()
                 }
             })

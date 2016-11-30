@@ -19,11 +19,19 @@ class WOWHotColumnCell: UITableViewCell,ModuleViewElement {
         return 901
     }
     fileprivate var cellItemSpaceing:CGFloat?
+    @IBOutlet weak var heightCollectionViewLayout: NSLayoutConstraint!
     var dataArr:[WOWHomeHot_1001_title]?{
         didSet{
+            if (dataArr?.count) ?? 0 <= 4 {
+
+                collectionView.isScrollEnabled = false
+            }else {
+                collectionView.isScrollEnabled = true
+            }
             collectionView.reloadData()
         }
     }
+    
     @IBOutlet weak var collectionView: UICollectionView!
     weak var delegate : WOWHotColumnDelegate?
     override func awakeFromNib() {
@@ -39,9 +47,14 @@ class WOWHotColumnCell: UITableViewCell,ModuleViewElement {
         switch UIDevice.deviceType {
         case .dt_iPhone5:
             cellItemSpaceing = 18.w
-        default:
+        case .dt_iPhone6:
             cellItemSpaceing = 27.w
+        case .dt_iPhone6_Plus:
+            cellItemSpaceing = 27.w + 5
+        default:
+            cellItemSpaceing = 18.w
         }
+//        heightCollectionViewLayout.constant = 80.h
 
     }
 

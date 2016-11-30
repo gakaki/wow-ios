@@ -224,14 +224,10 @@ class WOWOrderDetailController: WOWBaseViewController{
      隐藏右边按钮
      */
     func hideRightBtn() {
+        
         self.rightButton.isHidden       = true
         self.clooseOrderButton.isHidden = true
-        if let orderNewModel          = orderNewDetailModel {
-            
-            let result = WOWCalPrice.calTotalPrice([orderNewModel.orderAmount ?? 0],counts:[1])
-            self.priceLabel.text          = result
-        }
-        
+    
     }
     /**
      *  区分订单类型 UI
@@ -244,10 +240,7 @@ class WOWOrderDetailController: WOWBaseViewController{
             case 0:
                 self.OrderDetailNewaType          = OrderNewType.payMent
                 self.rightButton.setTitle("立即支付", for: UIControlState())
-                
-                let result = WOWCalPrice.calTotalPrice([orderNewModel.orderAmount ?? 0],counts:[1])
-                self.priceLabel.text          = result
-                
+        
             case 1,5,6:
                 self.OrderDetailNewaType = OrderNewType.noForGoods
                 hideRightBtn()
@@ -261,26 +254,21 @@ class WOWOrderDetailController: WOWBaseViewController{
                     if isComment == true {
                         hideRightBtn()
                     }else{
+                        self.clooseOrderButton.isHidden = true
                         self.rightButton.setTitle("待评价", for: UIControlState())
                     }
                 }else{
                         hideRightBtn()
                 }
-                
-               
-                
             case 2:
                 self.OrderDetailNewaType = OrderNewType.someFinishForGoods
                 
                 hideRightBtn()
                 
-                
             case 3:
                 self.OrderDetailNewaType          = OrderNewType.forGoods
                 self.clooseOrderButton.isHidden     = true
                 self.rightButton.setTitle("确认收货", for: UIControlState())
-                let result = WOWCalPrice.calTotalPrice([orderNewModel.orderAmount ?? 0],counts:[1])
-                self.priceLabel.text          = result
 
                 if orderNewModel.packages?.count > 1 {// 如果大于1， 说明有不多个包裹的订单 则 换UI界面
                      self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
@@ -289,6 +277,9 @@ class WOWOrderDetailController: WOWBaseViewController{
             default:
                 break
             }
+            let result = WOWCalPrice.calTotalPrice([orderNewModel.orderAmount ?? 0],counts:[1])
+            self.priceLabel.text          = result
+            
         }
     }
     /**

@@ -43,7 +43,7 @@ class WOWOrderListCell: UITableViewCell {
     weak var delegate : OrderCellDelegate?
 //    var model : WOWOrderListModel?
      var modelNew : WOWNewOrderListModel?
-    let statuTitles = ["待付款","待发货","待收货","待评价","已完成","已关闭"]
+    let statuTitles = ["待付款","待发货","待收货","待评论","已完成","已关闭"]
     let rightTitles = ["立即支付","","确认收货","评价","删除订单",""]
     var dataArr = [WOWOrderProductModel] ()
     override func awakeFromNib() {

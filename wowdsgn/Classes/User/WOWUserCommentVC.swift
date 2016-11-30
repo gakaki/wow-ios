@@ -28,7 +28,7 @@ class UserCommentManage :NSObject{
     
     var saleOrderItemId         : Int? // 对应产品 Id
     var comments                : String = "" // 输入的评论内容
-    var commentImgs             : [String]?// 选择的照片Url的数组
+    var commentImgs             = [String]()// 选择的照片Url的数组
     var commentsLength          : Int = 0 //评论内容的个数 有表情内容会影响string的length 不准，所以记录textView上面的length
   
 }
@@ -66,6 +66,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         self.tableView.dataSource           = self
         self.tableView.rowHeight            = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight   = 300
+        self.tableView.backgroundColor      = GrayColorLevel5
         request()
     }
     override func didReceiveMemoryWarning() {
@@ -159,7 +160,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
                 //                strongSelf.tableView.reloadRows(at: [indexPath as IndexPath], with: .none)
                 
                 strongSelf.tableView.reloadData()
-                // 点击完成即开始上传图片操作
+//                 点击完成即开始上传图片操作
                 WOWUploadManager.pushCommentPhotos(strongSelf.printAssetsName(assets: asstes as [AnyObject], images: images), successClosure: {[weak self] (urlArray) in
                     if let strongSelf = self {
                         // 拿到url数组，赋值给Model数据层
@@ -198,9 +199,9 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         
         for model in self.commentArr{ // 遍历各个商品对应的评论信息
             
-            if !((model.comments == "" && model.commentImgs == nil) ) {
+            if !((model.comments == "" && model.commentImgs.count == 0) ) {
 //                print("----\(model.comments.length)")
-                if model.commentImgs?.count > 0 {// 如果选择了照片，而没用输入内容，则提示他输入内容
+                if model.commentImgs.count > 0 {// 如果选择了照片，而没用输入内容，则提示他输入内容
                     if model.commentsLength == 0 {
                         
                         WOWHud.showMsg("请输入的评论内容")
@@ -221,13 +222,9 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
                         return
                 
                 }
-                var imgStr    = ""
-                
-                if let imgArr = model.commentImgs {
-                    
-                    imgStr = self.jointImgStr(imgArray: imgArr)
-                    
-                }
+
+                let imgStr = self.jointImgStr(imgArray: model.commentImgs)
+
                 let parma = ["saleOrderItemId":model.saleOrderItemId ?? 0, "comments": model.comments ,"commentImgs":imgStr] as [String : Any]
                 
                 commentParma.append(parma)
@@ -310,5 +307,11 @@ extension WOWUserCommentVC:UITableViewDelegate,UITableViewDataSource{
         cell.delegate           = self
         cell.selectionStyle     = .none
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 15
     }
 }

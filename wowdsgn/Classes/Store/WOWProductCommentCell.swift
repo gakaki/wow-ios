@@ -58,11 +58,13 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
 //                    collectionHeight.constant = itemWidth + 8
 //                }
                 collectionHeight.constant = itemWidth + 8
-                imgArray = model.commentImgs ?? [String]()
+                
+                imgArray = WOWArrayAddStr.strAddJPG(array: model.commentImgs ?? [String]())
                 collectionView.reloadData()
             }else {
                 collectionHeight.constant = 0
             }
+            headImg.setCornerRadius(radius: 15)
             headImg.set_webimage_url_base(model.avatar, place_holder_name: "placeholder_userhead")
             nameLabel.text = model.nickName
             //格式化时间

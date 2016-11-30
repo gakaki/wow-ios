@@ -69,6 +69,7 @@
                     <constraint firstItem="MjL-Ga-mgn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="46q-dZ-2Z5"/>
                     <constraint firstAttribute="bottom" secondItem="95m-1U-wxq" secondAttribute="bottom" id="7y4-WA-l8F"/>
                     <constraint firstItem="I3F-YQ-meT" firstAttribute="leading" secondItem="6bw-i0-dcq" secondAttribute="trailing" constant="2" id="I0D-zp-nAJ"/>
+                    <constraint firstItem="dgN-gi-k8r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="I3F-YQ-meT" secondAttribute="trailing" constant="10" id="N3y-Hp-naW"/>
                     <constraint firstItem="I3F-YQ-meT" firstAttribute="leading" secondItem="6bw-i0-dcq" secondAttribute="trailing" constant="2" id="Z0p-Dd-idR"/>
                     <constraint firstAttribute="trailing" secondItem="95m-1U-wxq" secondAttribute="trailing" id="bg6-3b-9nN"/>
                     <constraint firstItem="95m-1U-wxq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ctd-eF-QnS"/>
@@ -90,6 +91,7 @@
                 <outlet property="couponLabel" destination="dgN-gi-k8r" id="TUX-Mh-YQd"/>
                 <outlet property="leftLabel" destination="I3F-YQ-meT" id="MPj-eL-j5n"/>
                 <outlet property="lineView" destination="95m-1U-wxq" id="0Qr-TW-CyD"/>
+                <outlet property="selectBtn" destination="6bw-i0-dcq" id="qvX-83-krt"/>
             </connections>
             <point key="canvasLocation" x="290.5" y="221"/>
         </tableViewCell>

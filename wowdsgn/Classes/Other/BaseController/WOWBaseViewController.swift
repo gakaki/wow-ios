@@ -262,6 +262,8 @@ extension WOWBaseViewController {
         }
         
     }
+    
+    
 
 }
 
@@ -312,5 +314,6 @@ extension WOWBaseTableViewController {
         }
         
     }
+    
 
 }

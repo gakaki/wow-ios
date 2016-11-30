@@ -28,6 +28,8 @@ class WOWEditOrderController: WOWBaseViewController {
     var orderCode                       = String()
     var couponModel                     :WOWCouponModel?
     
+    //是否使用促销优惠
+    var isPromotion                     = true
     //是否有可用优惠券
 //    var isCanCoupon                     = true
     //时间戳，用来验证唯一
@@ -558,21 +560,25 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         case 2: //运费及优惠券信息
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderFreightCell.self), for: indexPath) as! WOWOrderFreightCell
             if (indexPath as NSIndexPath).row == 0 {
-                cell.leftLabel.text = "运费"
-                let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0],counts:[1])
-                cell.couponLabel.text = result
-                cell.lineView.isHidden = false
-            }else {
                 cell.leftLabel.text = "优惠券"
-                cell.lineView.isHidden = true
-                
+                cell.lineView.isHidden = false
+                cell.selectBtn.isSelected = !isPromotion
+                cell.selectBtn.addTarget(self, action: #selector(selectCoupons), for:.touchUpInside)
                 if let deduction = self.orderSettle?.deduction  {
-                        let result = WOWCalPrice.calTotalPrice([deduction],counts:[1])
-                        cell.couponLabel.text = "-" + result
-                    
+                    let result = WOWCalPrice.calTotalPrice([deduction],counts:[1])
+                    cell.couponLabel.text = "-" + result
+
                 }else {
                     cell.couponLabel.text = String(format: "您有%i张优惠券可用",self.orderSettle?.avaliableCouponCount ?? 0 )
                 }
+
+            }else {
+                cell.leftLabel.text = "促销"
+                let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0],counts:[1])
+                cell.couponLabel.text = result
+                cell.lineView.isHidden = true
+                cell.selectBtn.isSelected = isPromotion
+                cell.selectBtn.addTarget(self, action: #selector(selectPromotion), for:.touchUpInside)
             }
             returnCell = cell
         case 3: //订单备注
@@ -628,6 +634,21 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         default:
             return 0.01
         }
+    }
+    
+    
+    //MARK: Action -selectRemissionType 选择优惠类型
+    //选择优惠券
+    func selectCoupons()  {
+        isPromotion = false
+        let section = IndexSet(integer: 2)
+        tableView.reloadSections(section, with: .automatic)
+    }
+    //选择促销
+    func selectPromotion() {
+        isPromotion = true
+        let section = IndexSet(integer: 2)
+        tableView.reloadSections(section, with: .automatic)
     }
 }
 

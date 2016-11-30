@@ -281,12 +281,13 @@ extension WOWOrderController:OrderDetailDelegate{
         request()
     }
 }
-extension WOWOrderController:UserCommentSuccesDelegate {
-    
-    func reloadTableViewCommentStatus() {
-        request()
-    }
-}
+//extension WOWOrderController:UserCommentSuccesDelegate {
+//    
+//    func reloadTableViewCommentStatus() {
+//        WOWHud.showMsg("发布评论成功！")
+//        request()
+//    }
+//}
 extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.dataArr.count
@@ -353,7 +354,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
        
         let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
         vc.orderCode = orderCode
-        vc.delegate  = self
+//        vc.delegate  = self
         parentNavigationController!.pushViewController(vc, animated: true)
         
         

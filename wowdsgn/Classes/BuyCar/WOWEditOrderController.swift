@@ -23,15 +23,15 @@ class WOWEditOrderController: WOWBaseViewController {
     
     var productArr                      :[WOWCarProductModel]?
     var orderSettle                     :WOWEditOrderModel?
-    var totalPrice                      : String?
+//    var totalPrice                      : String?
     var addressInfo                     :WOWAddressListModel?
     var orderCode                       = String()
     var couponModel                     :WOWCouponModel?
+    var discountAmount                  : Double?  //优惠金额
     
     //是否使用促销优惠
-    var isPromotion                     = true
-    //是否有可用优惠券
-//    var isCanCoupon                     = true
+    var isPromotion                     = false
+
     //时间戳，用来验证唯一
     let timeInterval = Date().timeIntervalSince1970
     
@@ -65,7 +65,6 @@ class WOWEditOrderController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         navigationItem.title = "确认订单"
-        totalPriceLabel.text = "¥ " + (totalPrice ?? "")
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = GrayColorLevel5
@@ -89,19 +88,19 @@ class WOWEditOrderController: WOWBaseViewController {
         coupon.id = orderSettle?.endUserCouponId
         coupon.deduction = orderSettle?.deduction
         couponModel = coupon
+        if orderSettle?.totalPromotionDeduction == 0 {
+            isPromotion = false
+        }else {
+            if orderSettle?.deduction > orderSettle?.totalPromotionDeduction {
+                isPromotion = false
+                discountAmount = orderSettle?.deduction
+            }else {
+                isPromotion = true
+                discountAmount = orderSettle?.totalPromotionDeduction
+            }
+        }
+        
         let result = WOWCalPrice.calTotalPrice([orderSettle?.totalAmount ?? 0],counts:[1])
-        
-        //判断是否有促销产品
-//        isCanCoupon = true
-//        if let orderInfo = orderSettle?.orderSettles{
-//            for product in orderInfo {
-//                if product.isPromotion ?? false {
-//                    isCanCoupon = false
-//                    break
-//                }
-//            }
-//        }
-        
         totalPriceLabel.text = result
         tableView.reloadData()
 
@@ -121,6 +120,7 @@ class WOWEditOrderController: WOWBaseViewController {
         
         window?.addSubview(remissionView)
         window?.bringSubview(toFront: remissionView)
+        remissionView.remissionView.promotionInfoArr = self.orderSettle?.promotionProductInfoVos
         remissionView.show()
     }
     
@@ -140,15 +140,9 @@ class WOWEditOrderController: WOWBaseViewController {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
         vc.entrance = couponEntrance.orderEntrance
         vc.couponModel = couponModel
-        //如果没有促销商品就可以选择优惠券。如果有促销商品就不能选择优惠券
-        //又不互斥了
-        //            if isCanCoupon {
         vc.minAmountLimit = orderSettle?.productTotalAmount
         
-        //            }else {
-        //暂时这样写吧。
-        //                vc.minAmountLimit = 0
-        //            }
+  
         //从优惠券返回的时候要重新更新减得金额
         vc.action = {[weak self] (model:AnyObject) in
             if let strongSelf = self {
@@ -157,25 +151,16 @@ class WOWEditOrderController: WOWBaseViewController {
                 if couponInfo?.id != strongSelf.couponModel?.id {
                     strongSelf.couponModel = model as? WOWCouponModel
                     
-                    strongSelf.orderSettle?.deduction = strongSelf.couponModel?.deduction
+                    strongSelf.orderSettle?.deductionName = strongSelf.couponModel?.couponTitle
+                    //优惠金额
+                    strongSelf.orderSettle?.deduction = couponInfo?.deduction
+                    if !strongSelf.isPromotion {
+                        strongSelf.discountAmount = strongSelf.orderSettle?.deduction
+                        strongSelf.reCalTotalPrice()
+                    }
                     
-                    //                        let section = IndexSet(integer: 2)
-                    //                        strongSelf.tableView.reloadSections(section, with: .none)
                     strongSelf.tableView.reloadData()
                     
-                    //重新计算总金额，先把double转为number类型的，避免计算过程中由于浮点型而改变数值
-                    let productTotal = NSDecimalNumber(value: strongSelf.orderSettle?.productTotalAmount ?? 0 as Double)
-                    
-                    let delivery = NSDecimalNumber(value: strongSelf.orderSettle?.deliveryFee ?? 0 as Double)
-                    let deduction = NSDecimalNumber(value: couponInfo?.deduction ?? 0 as Double)
-                    
-                    //用商品的总价加上运费然后减去优惠券金额得出结算价格
-                    strongSelf.orderSettle?.totalAmount = (productTotal.adding(delivery).subtracting(deduction)).doubleValue
-                    
-                    
-                    let result = WOWCalPrice.calTotalPrice([strongSelf.orderSettle?.totalAmount ?? 0],counts:[1])
-                    
-                    strongSelf.totalPriceLabel.text = result
                     
                 }
                 
@@ -184,7 +169,33 @@ class WOWEditOrderController: WOWBaseViewController {
         navigationController?.pushViewController(vc, animated: true)
 
     }
-    
+    //重新计算总金额
+    func reCalTotalPrice() {
+        //重新计算总金额，先把double转为number类型的，避免计算过程中由于浮点型而改变数值
+        //所有产品总金额
+        let productTotal = NSDecimalNumber(value: orderSettle?.productTotalAmount ?? 0 as Double)
+        //优惠金额
+        let deduction = NSDecimalNumber(value: discountAmount ?? 0 as Double)
+        //产品总金额减去优惠总金额，判断下是否需要增加运费
+        let amount = productTotal.subtracting(deduction)
+        //如果订单金额满足免邮，邮费=0
+        
+        if amount.doubleValue < orderSettle?.deliveryFeeThreshold {
+            orderSettle?.deliveryFee = orderSettle?.deliveryStandard
+        }else {
+            orderSettle?.deliveryFee = 0
+        }
+        //运费
+        let delivery = NSDecimalNumber(value: orderSettle?.deliveryFee ?? 0 as Double)
+        
+        //用商品的总价加上运费然后减去优惠券金额得出结算价格
+        orderSettle?.totalAmount = (amount.adding(delivery)).doubleValue
+        
+        
+        let result = WOWCalPrice.calTotalPrice([orderSettle?.totalAmount ?? 0],counts:[1])
+        
+        totalPriceLabel.text = result
+    }
     /**
      跳转订单详情
      
@@ -325,30 +336,52 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }
-        if let endUserCouponId = couponModel?.id {
+        if isPromotion {
+            var promotionIds = [String]()
+            if let promotionProductInfoVos = orderSettle?.promotionProductInfoVos {
+                for promotion in promotionProductInfoVos {
+                    promotionIds.append(String(format:"%i", promotion.promotionId ?? 0))
+                }
+            }
             
             params = [
                 "shippingInfoId": shippingInfoId as AnyObject,
                 "orderSource": orderSource as AnyObject,
                 "orderAmount": totalAmout as AnyObject,
                 "remark": remark as AnyObject,
-                "endUserCouponId": endUserCouponId  as AnyObject,
+                "promotionIds": promotionIds  as AnyObject,
                 "productPriceGroup": productPriceGroup as AnyObject,
                 "orderToken": timeInterval as AnyObject
             ]
-            
-        }else {
-            params = [
-                "shippingInfoId": shippingInfoId as AnyObject ,
-                "orderSource": orderSource  as AnyObject,
-                "orderAmount": totalAmout  as AnyObject,
-                "remark": remark  as AnyObject,
-                "productPriceGroup": productPriceGroup as AnyObject,
-                "orderToken": timeInterval as AnyObject
 
-            ]
+        }else {
+            if let endUserCouponId = couponModel?.id {
+                
+                params = [
+                    "shippingInfoId": shippingInfoId as AnyObject,
+                    "orderSource": orderSource as AnyObject,
+                    "orderAmount": totalAmout as AnyObject,
+                    "remark": remark as AnyObject,
+                    "endUserCouponId": endUserCouponId  as AnyObject,
+                    "productPriceGroup": productPriceGroup as AnyObject,
+                    "orderToken": timeInterval as AnyObject
+                ]
+                
+            }else {
+                params = [
+                    "shippingInfoId": shippingInfoId as AnyObject ,
+                    "orderSource": orderSource  as AnyObject,
+                    "orderAmount": totalAmout  as AnyObject,
+                    "remark": remark  as AnyObject,
+                    "productPriceGroup": productPriceGroup as AnyObject,
+                    "orderToken": timeInterval as AnyObject
+                    
+                ]
+                
+            }
 
         }
+        
         
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
@@ -411,8 +444,13 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }
-        
-        if let endUserCouponId = couponModel?.id {
+        if isPromotion {
+            var promotionIds = [String]()
+            if let promotionProductInfoVos = orderSettle?.promotionProductInfoVos {
+                for promotion in promotionProductInfoVos {
+                    promotionIds.append(String(format:"%i", promotion.promotionId ?? 0))
+                }
+            }
             
             params = [
                 "productId": product_id as AnyObject,
@@ -421,27 +459,44 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderSource": orderSource as AnyObject,
                 "orderAmount": totalAmount as AnyObject,
                 "remark": remark as AnyObject,
-                "endUserCouponId": endUserCouponId as AnyObject,
+                "promotionIds": promotionIds  as AnyObject,
                 "productPriceGroup": productPriceGroup as AnyObject,
                 "orderToken": timeInterval as AnyObject
-
             ]
             
         }else {
-      
-            
-            params = [
-                "productId": product_id as AnyObject,
-                "productQty": product_qty as AnyObject,
-                "shippingInfoId": shippingInfoId as AnyObject,
-                "orderSource": orderSource as AnyObject,
-                "orderAmount": totalAmount as AnyObject,
-                "remark": remark as AnyObject,
-                "productPriceGroup": productPriceGroup as AnyObject,
-                "orderToken": timeInterval as AnyObject
-
-            ]
+            if let endUserCouponId = couponModel?.id {
+                
+                params = [
+                    "productId": product_id as AnyObject,
+                    "productQty": product_qty as AnyObject,
+                    "shippingInfoId": shippingInfoId as AnyObject,
+                    "orderSource": orderSource as AnyObject,
+                    "orderAmount": totalAmount as AnyObject,
+                    "remark": remark as AnyObject,
+                    "endUserCouponId": endUserCouponId as AnyObject,
+                    "productPriceGroup": productPriceGroup as AnyObject,
+                    "orderToken": timeInterval as AnyObject
+                    
+                ]
+                
+            }else {
+                
+                
+                params = [
+                    "productId": product_id as AnyObject,
+                    "productQty": product_qty as AnyObject,
+                    "shippingInfoId": shippingInfoId as AnyObject,
+                    "orderSource": orderSource as AnyObject,
+                    "orderAmount": totalAmount as AnyObject,
+                    "remark": remark as AnyObject,
+                    "productPriceGroup": productPriceGroup as AnyObject,
+                    "orderToken": timeInterval as AnyObject
+                    
+                ]
+            }
         }
+        
         
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
@@ -533,8 +588,8 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             return 1
         case 1:     //商品清单
             return productArr?.count ?? 0
-        case 2:   //优惠券
-            return 2
+        case 2:   //优惠券 如果促销金额 = 0不显示促销
+            return orderSettle?.totalPromotionDeduction == 0 ? 1 : 2
         case 3:     //订单备注
             return 1
         case 4:     //运费。优惠显示
@@ -564,9 +619,9 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 cell.lineView.isHidden = false
                 cell.selectBtn.isSelected = !isPromotion
                 cell.selectBtn.addTarget(self, action: #selector(selectCoupons), for:.touchUpInside)
-                if let deduction = self.orderSettle?.deduction  {
-                    let result = WOWCalPrice.calTotalPrice([deduction],counts:[1])
-                    cell.couponLabel.text = "-" + result
+                if let deductionName = self.orderSettle?.deductionName  {
+                    
+                    cell.couponLabel.text = deductionName
 
                 }else {
                     cell.couponLabel.text = String(format: "您有%i张优惠券可用",self.orderSettle?.avaliableCouponCount ?? 0 )
@@ -574,8 +629,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
 
             }else {
                 cell.leftLabel.text = "促销"
-                let result = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0],counts:[1])
-                cell.couponLabel.text = result
+                cell.couponLabel.text = self.orderSettle?.promotionNames?.formatArray("；")
                 cell.lineView.isHidden = true
                 cell.selectBtn.isSelected = isPromotion
                 cell.selectBtn.addTarget(self, action: #selector(selectPromotion), for:.touchUpInside)
@@ -591,11 +645,11 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             if (indexPath as NSIndexPath).row == 0 {
                 cell.label.text = "运费"
                 cell.amountLabel.textColor = UIColor.black
-                cell.amountLabel.text = "¥100"
+                cell.amountLabel.text = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0], counts: [1])
             }else {
                 cell.label.text = "优惠"
                 cell.amountLabel.textColor = UIColor(hexString: "FF7070")
-                cell.amountLabel.text = "-¥100"
+                cell.amountLabel.text = WOWCalPrice.calTotalPrice([self.discountAmount ?? 0], counts: [1])
             }
             returnCell = cell
         default:
@@ -609,9 +663,9 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         case (0, 0):        //选择地址
             goAddress()
         case (2, 0):        //选择优惠券
-            remissionInfo()
-        case (2, 1):        //查看促销信息
             goCoupons()
+        case (2, 1):        //查看促销信息
+            remissionInfo()
         default:
             break
         }
@@ -641,14 +695,20 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     //选择优惠券
     func selectCoupons()  {
         isPromotion = false
-        let section = IndexSet(integer: 2)
-        tableView.reloadSections(section, with: .automatic)
+        discountAmount = orderSettle?.deduction
+        reCalTotalPrice()
+        tableView.reloadData()
+//        let section = IndexSet(integer: 2)
+//        tableView.reloadSections(section, with: .automatic)
     }
     //选择促销
     func selectPromotion() {
         isPromotion = true
-        let section = IndexSet(integer: 2)
-        tableView.reloadSections(section, with: .automatic)
+        discountAmount = orderSettle?.totalPromotionDeduction
+        reCalTotalPrice()
+        tableView.reloadData()
+//        let section = IndexSet(integer: 2)
+//        tableView.reloadSections(section, with: .automatic)
     }
 }
 

@@ -9,6 +9,7 @@
 import UIKit
 
 class WOWRemissionHeaderView: UIView {
+    @IBOutlet weak var promotionLabel: UILabel!
 
     /*
     // Only override draw() if you perform custom drawing.

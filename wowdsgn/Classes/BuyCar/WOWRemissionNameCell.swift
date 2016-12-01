@@ -10,6 +10,7 @@ import UIKit
 
 class WOWRemissionNameCell: UITableViewCell {
 
+    @IBOutlet weak var productNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

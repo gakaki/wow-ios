@@ -60,6 +60,8 @@ struct WOWCalPrice {
         
         return result!
     }
+    
+    
     static func totalPrice(_ prices:[Double],counts:[Int]) ->String{
         if prices.isEmpty {
             return "0.00"
@@ -125,7 +127,12 @@ struct Calculate {
     }
     
 }
-
+/**
+ 转换数组url
+ - parameter array:     需要转化的数组
+ 
+ - returns:
+ */
 struct WOWArrayAddStr {
     static func strAddJPG(array : [String]) -> Array<String>{
         var newArray = [String]()

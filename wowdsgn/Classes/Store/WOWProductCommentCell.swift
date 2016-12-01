@@ -72,18 +72,7 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
             contentLabel.text = model.comments
             //每个规格之间增加一个字符的间隔
             if let array = model.specAttributes {
-                var str = ""
-                if array.count > 0 {
-                    for spec in array.enumerated(){
-                        if spec.offset == array.count - 1 {
-                            str.append(spec.element)
-                        }else {
-                            str.append(spec.element + "  ")
-
-                        }
-                    }
-                }
-                specLabel.text = str
+                    specLabel.text = array.formatArray("  ")
             }
             //是否有回复,如果没有回复需要修改下几个约束
             if model.isReplyed ?? false {

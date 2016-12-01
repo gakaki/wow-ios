@@ -10,13 +10,21 @@ import UIKit
 import ObjectMapper
 
 class WOWEditOrderModel: WOWBaseModel,Mappable {
-    var deliveryFee                          : Double?
-    var totalAmount                          : Double?
-    var productTotalAmount                   : Double?
-    var orderSettles                         : [WOWCarProductModel]?
-    var endUserCouponId                      : Int?
-    var deduction                            : Double?
-    var avaliableCouponCount                 : Int?
+    var deliveryFee                          : Double?  //运费
+    var totalAmount                          : Double?  //结算总金额
+    var productTotalAmount                   : Double?    //产品总金额
+    var orderSettles                         : [WOWCarProductModel]?    //订单信息
+    var endUserCouponId                      : Int?         //优惠券id
+    var deduction                            : Double?    //优惠券优惠金额
+    var avaliableCouponCount                 : Int?         //可用优惠券数量
+    
+    /**************************V2增加字段*****************************/
+    var deductionName                        : String?      //优惠券名字
+    var deliveryFeeThreshold                 : Double?      //最低免运费金额
+    var deliveryStandard                     : Double?          //运费金额
+    var promotionNames                       : [String]?         //促销活动的名字
+    var promotionProductInfoVos              : [WOWPromotionProductInfoModel]?   //促销信息
+    var totalPromotionDeduction              : Double?          //促销优惠金额
     
     required init?(map: Map) {
         
@@ -30,6 +38,33 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
         endUserCouponId                     <- map["endUserCouponId"]
         deduction                           <- map["deduction"]
         avaliableCouponCount                <- map["avaliableCouponCount"]
+        
+        deductionName                          <- map["deductionName"]
+        deliveryFeeThreshold                         <- map["deliveryFeeThreshold"]
+        deliveryStandard                         <- map["deliveryStandard"]
+        promotionNames                          <- map["promotionNames"]
+        promotionProductInfoVos                   <- map["promotionProductInfoVos"]
+        totalPromotionDeduction                     <- map["totalPromotionDeduction"]
+
+    }
+    
+}
+
+class WOWPromotionProductInfoModel: WOWBaseModel,Mappable {
+    var promotionId                          : Int?  //促销活动id
+    var productNames                          : [String]?  //参加促销产品名字
+    var promotionName                           : String?    //促销名字
+
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        promotionId                          <- map["promotionId"]
+        productNames                         <- map["productNames"]
+        promotionName                         <- map["promotionName"]
+       
     }
     
 }

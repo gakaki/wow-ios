@@ -33,6 +33,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zKX-vz-D7X" secondAttribute="trailing" constant="15" id="Ehz-U8-TdW"/>
                 <constraint firstAttribute="bottom" secondItem="Hxp-hJ-mR6" secondAttribute="bottom" id="FW2-hq-jOE"/>
                 <constraint firstItem="zKX-vz-D7X" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Ihc-y8-QvG"/>
                 <constraint firstAttribute="trailing" secondItem="Hxp-hJ-mR6" secondAttribute="trailing" id="OGW-Hc-URW"/>
@@ -43,6 +44,9 @@
                 <constraint firstItem="Hxp-hJ-mR6" firstAttribute="top" secondItem="zKX-vz-D7X" secondAttribute="bottom" constant="8" id="qlI-m5-YAU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="promotionLabel" destination="zKX-vz-D7X" id="Fe2-Gs-tAr"/>
+            </connections>
             <point key="canvasLocation" x="-2.5" y="92.5"/>
         </view>
     </objects>

@@ -31,6 +31,9 @@
                     <constraint firstItem="bvf-6f-oQW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="hPr-Cu-iEV"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="productNameLabel" destination="bvf-6f-oQW" id="xUq-kn-1Yh"/>
+            </connections>
             <point key="canvasLocation" x="32" y="110"/>
         </tableViewCell>
     </objects>

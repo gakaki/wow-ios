@@ -88,6 +88,7 @@ class WOWRemissionBackView: UIView {
 
 class WOWOrderRemissionView: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    var promotionInfoArr: [WOWPromotionProductInfoModel]?
     
     let cellID = String(describing: WOWRemissionNameCell.self)
 
@@ -123,22 +124,23 @@ class WOWOrderRemissionView: UIView, UITableViewDelegate, UITableViewDataSource 
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return promotionInfoArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return promotionInfoArr?[section].productNames?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWRemissionNameCell
-        
+            cell.productNameLabel.text = promotionInfoArr?[indexPath.section].productNames?[indexPath.row]
             return cell
         
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let v = Bundle.main.loadNibNamed(String(describing: WOWRemissionHeaderView.self), owner: self, options: nil)?.last as! WOWRemissionHeaderView
+        v.promotionLabel.text = promotionInfoArr?[section].promotionName
         return v
         
     }

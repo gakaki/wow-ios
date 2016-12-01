@@ -39,22 +39,7 @@ class WOWProductDetailPriceCell: UITableViewCell {
             default: break
             }
         }
-//        if let discount = model?.discount {
-//            lbDiscount.isHidden  = false
-//            lbDiscount.text      = (discount + "折").get_formted_Space()
-//        }else {
-//            lbDiscount.isHidden = true
-//            lbDiscount.text = ""
-//        }
-//        for singModel in model?.sings ?? []{
-//            switch singModel.id ?? 0{
-//            case 4:
-//                
-//                lbLabel.isHidden  = false
-//                lbLabel.text      = singModel.desc?.get_formted_Space()
-//            default: break
-//            }
-//        }
+
         if lbDiscount.isHidden && !lbLabel.isHidden{
             
             self.LeftConstraint.constant = 0

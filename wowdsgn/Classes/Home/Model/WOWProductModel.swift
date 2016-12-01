@@ -40,8 +40,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var discount              : String?
     var productStock          : Int?
     //商品限购信息
-    var limitType                   : Int?
-    var limitQty                    : Int?
+
     var limitTag                    : String?
     //商品详情中用到
     var length                      : NSNumber?
@@ -96,10 +95,6 @@ class WOWProductModel: WOWBaseModel,Mappable{
         productStock            <- map["productStock"]
         
         favorite                <- map["favorite"]
-        
-        limitType               <- map["limitType"]
-        limitQty                <- map["limitQty"]
-        limitTag                <- map["limitTag"]
      
         length                      <- map["length"]
         width                       <- map["width"]

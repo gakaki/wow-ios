@@ -126,7 +126,18 @@ struct Calculate {
     
 }
 
-
+struct WOWArrayAddStr {
+    static func strAddJPG(array : [String]) -> Array<String>{
+        var newArray = [String]()
+        for a in 0..<array.count {
+            var str = array[a]
+            str = String(format: "%@?imageMogr2/format/jpg", str)
+            newArray.append(str)
+            
+        }
+        return newArray
+    }
+}
 
 struct WOWTool {
     static func callPhone(){

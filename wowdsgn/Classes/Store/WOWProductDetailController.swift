@@ -162,10 +162,15 @@ class WOWProductDetailController: WOWBaseViewController {
     //初始化数据，商品banner
     fileprivate func configData(){
         //如果没有促销标签，则不显示
-        if productModel?.limitType == 1 {
-            isHaveLimit = 1
-        }else {
-            isHaveLimit = 0
+        isHaveLimit = 0
+        productModel?.limitTag = ""
+        for singModel in productModel?.sings ?? []{
+            switch singModel.id ?? 0{
+            case 5: //限购相关的信息
+                isHaveLimit = 1
+                productModel?.limitTag = singModel.desc
+            default: break
+            }
         }
         //如果有评论就显示，没有不显示
         if commentList.count > 0 {

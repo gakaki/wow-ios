@@ -37,8 +37,8 @@ class RefreshView:UIView {
         blackView.layer.shadowOffset = CGSize(width: 0,height: 2)// 阴影偏移量
         blackView.layer.shadowOpacity = 0.05//阴影透明度，默认0
         blackView.layer.shadowRadius = 2//阴影半径，默认3
-        blackView.layer.cornerRadius = 8.0
-        blackView.alpha = 0.9
+        blackView.layer.cornerRadius = 8.0// 边框角度
+        blackView.alpha = 0.9// 透明度
         
         return blackView
         

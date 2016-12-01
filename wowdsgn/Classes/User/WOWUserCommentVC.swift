@@ -248,17 +248,28 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
 //        print("json----\(params)")
         WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderPushComment(params: params) , successClosure: {[weak self] (result, code) in
-            WOWHud.dismiss()
+//            WOWHud.dismiss()
             if let strongSelf = self{
                 if code == "0" {
+                    
+                   
                     WOWHud.showMsg("发布评论成功！")
+                    let delayQueue = DispatchQueue.global()
+                    delayQueue.asyncAfter(deadline: .now() + 1.0) {
+                        
+                        DispatchQueue.main.async {
+                            WOWHud.dismiss()
+                            strongSelf.popVC()
+
+                        }
+                        
+                    }
                     if let del = strongSelf.delegate {
                         
                         del.reloadTableViewCommentStatus()
                         
                         
                     }
-                    strongSelf.popVC()
                     
                 }else {
                     WOWHud.showWarnMsg("发布评论失败")

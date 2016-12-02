@@ -31,7 +31,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNy-WA-dJy">
-                                <rect key="frame" x="50" y="15" width="0.0" height="19.5"/>
+                                <rect key="frame" x="50" y="5.5" width="0.0" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -47,11 +47,11 @@
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aSY-yI-JHg" secondAttribute="trailing" constant="15" id="6jt-kw-FP7"/>
                             <constraint firstAttribute="bottom" secondItem="aSY-yI-JHg" secondAttribute="bottom" constant="12" id="8rd-Pu-7wX"/>
-                            <constraint firstItem="xNy-WA-dJy" firstAttribute="top" secondItem="niE-KP-hZ5" secondAttribute="bottom" constant="14" id="CVq-Qh-nfb"/>
                             <constraint firstItem="niE-KP-hZ5" firstAttribute="leading" secondItem="FBU-zm-Af7" secondAttribute="leading" constant="15" id="GFt-Ia-Ksu"/>
                             <constraint firstAttribute="trailing" secondItem="niE-KP-hZ5" secondAttribute="trailing" id="L8b-zl-A8S"/>
                             <constraint firstItem="xNy-WA-dJy" firstAttribute="leading" secondItem="IQM-3x-VsY" secondAttribute="trailing" constant="8" id="TbZ-1M-cbF"/>
                             <constraint firstItem="niE-KP-hZ5" firstAttribute="top" secondItem="FBU-zm-Af7" secondAttribute="top" id="YWq-KS-dyA"/>
+                            <constraint firstItem="xNy-WA-dJy" firstAttribute="centerY" secondItem="IQM-3x-VsY" secondAttribute="centerY" id="Yd3-LV-57T"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xNy-WA-dJy" secondAttribute="trailing" constant="15" id="d2q-JM-79K"/>
                             <constraint firstItem="aSY-yI-JHg" firstAttribute="top" secondItem="xNy-WA-dJy" secondAttribute="bottom" constant="8" id="kvl-4M-NBn"/>
                             <constraint firstItem="IQM-3x-VsY" firstAttribute="leading" secondItem="FBU-zm-Af7" secondAttribute="leading" constant="15" id="uEL-FI-3KC"/>

@@ -65,8 +65,8 @@
                         <constraint firstAttribute="height" constant="40" id="LUh-x9-0Vx"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
-                    <state key="normal" image="car_check"/>
-                    <state key="selected" image="select"/>
+                    <state key="normal" image="unselectBig"/>
+                    <state key="selected" image="selectBig"/>
                     <state key="highlighted" image="select"/>
                     <connections>
                         <action selector="alipayClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="5hx-tV-Y8e"/>
@@ -89,10 +89,10 @@
                         <constraint firstAttribute="height" constant="40" id="hYu-14-HZd"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
-                    <state key="normal" image="car_check">
+                    <state key="normal" image="unselectBig">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" image="select"/>
+                    <state key="selected" image="selectBig"/>
                     <state key="highlighted" image="select"/>
                     <connections>
                         <action selector="weixinClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QSs-fY-IA2"/>
@@ -136,9 +136,10 @@
     </objects>
     <resources>
         <image name="alipay" width="30" height="30"/>
-        <image name="car_check" width="16" height="16"/>
         <image name="close" width="30" height="30"/>
         <image name="select" width="16" height="17"/>
+        <image name="selectBig" width="20" height="20"/>
+        <image name="unselectBig" width="20" height="20"/>
         <image name="weixin" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

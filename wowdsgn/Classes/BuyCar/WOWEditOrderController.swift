@@ -626,17 +626,24 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 cell.selectBtn.isSelected = !isPromotion
                 cell.selectBtn.addTarget(self, action: #selector(selectCoupons), for:.touchUpInside)
                 if let deductionName = self.orderSettle?.deductionName  {
-                    
+                    cell.selectBtn.isEnabled = true
                     cell.couponLabel.text = deductionName
 
                 }else {
                     cell.couponLabel.text = String(format: "您有%i张优惠券可用",self.orderSettle?.avaliableCouponCount ?? 0 )
+                    cell.selectBtn.setImage(UIImage.init(named: "disable"), for: .disabled)
+                    cell.selectBtn.isEnabled = false
+                    //如果有促销不使用优惠券则默认选中促销
+                    if orderSettle?.totalPromotionDeduction != 0 {
+                        isPromotion = true
+                    }
                 }
 
             }else {
                 cell.leftLabel.text = "促销"
                 cell.couponLabel.text = self.orderSettle?.promotionNames?.formatArray("；")
                 cell.lineView.isHidden = true
+                cell.selectBtn.isEnabled = true
                 cell.selectBtn.isSelected = isPromotion
                 cell.selectBtn.addTarget(self, action: #selector(selectPromotion), for:.touchUpInside)
             }

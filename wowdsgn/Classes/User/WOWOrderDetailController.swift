@@ -683,9 +683,9 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     switch surePayType {
                         
                     case PayType.payAli:
-                        cell.isClooseImageView.image = UIImage(named: "select")
+                        cell.isClooseImageView.image = UIImage(named: "selectBig")
                     default:
-                        cell.isClooseImageView.image = UIImage(named: "car_check")
+                        cell.isClooseImageView.image = UIImage(named: "unselectBig")
                     }
 
                 }
@@ -694,9 +694,9 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     cell.payTypeLabel.text      = "微信支付"
                     switch surePayType {
                     case PayType.payWiXin:
-                        cell.isClooseImageView.image = UIImage(named: "select")
+                        cell.isClooseImageView.image = UIImage(named: "selectBig")
                     default:
-                        cell.isClooseImageView.image = UIImage(named: "car_check")
+                        cell.isClooseImageView.image = UIImage(named: "unselectBig")
                     }
 
                 }

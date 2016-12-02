@@ -39,9 +39,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2fE-JT-yC8" firstAttribute="centerY" secondItem="AYc-Um-6lj" secondAttribute="centerY" id="4fp-V3-RfM"/>
                             <constraint firstItem="Two-Mb-3Td" firstAttribute="top" secondItem="5qc-51-emt" secondAttribute="top" id="54c-bC-MBB"/>
                             <constraint firstAttribute="height" constant="40" id="8Xt-M3-os0"/>
-                            <constraint firstItem="2fE-JT-yC8" firstAttribute="top" secondItem="Two-Mb-3Td" secondAttribute="bottom" constant="12" id="F85-3s-ULe"/>
                             <constraint firstAttribute="trailing" secondItem="Two-Mb-3Td" secondAttribute="trailing" id="GHq-4n-BHu"/>
                             <constraint firstItem="AYc-Um-6lj" firstAttribute="top" secondItem="Two-Mb-3Td" secondAttribute="bottom" constant="12" id="WVE-4L-xkl"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2fE-JT-yC8" secondAttribute="trailing" constant="15" id="gIP-JP-o65"/>

@@ -118,8 +118,8 @@
                             <constraint firstAttribute="height" constant="30" id="aFG-s3-mYA"/>
                             <constraint firstAttribute="width" constant="30" id="qRN-h8-gSO"/>
                         </constraints>
-                        <state key="normal" image="car_check"/>
-                        <state key="selected" image="select"/>
+                        <state key="normal" image="unselectBig"/>
+                        <state key="selected" image="selectBig"/>
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7gH-zu-kOK">
                         <rect key="frame" x="301" y="13" width="35" height="24"/>
@@ -224,8 +224,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="car_check" width="16" height="16"/>
         <image name="limit" width="27" height="14"/>
-        <image name="select" width="16" height="17"/>
+        <image name="selectBig" width="20" height="20"/>
+        <image name="unselectBig" width="20" height="20"/>
     </resources>
 </document>

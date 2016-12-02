@@ -19,6 +19,7 @@ class WOWContentTopicTopCell: UITableViewCell {
     @IBOutlet weak var publicTime: UILabel!
     @IBOutlet weak var columnName: UILabel!
     @IBOutlet weak var columnView: UIView!
+    @IBOutlet weak var columnBtn: UIButton!
     @IBOutlet weak var aspect: NSLayoutConstraint!
     
     weak var delegeta: WOWContentTopicTopCellDelegate?
@@ -74,10 +75,14 @@ class WOWContentTopicTopCell: UITableViewCell {
             columnName.text = model.columnName ?? ""
             if columnName.text == "" {
                 columnView.isHidden = true
+                columnBtn.isHidden = true
             }else {
                 columnView.isHidden = false
+                columnBtn.isHidden = false
             }
-            columnView.addAction({[weak self] in
+            
+            
+            columnBtn.addAction({[weak self] in
                 if let strongSelf = self {
                     if let del = strongSelf.delegeta {
                         del.columnGoTopic(model.columnId, topicTitle: model.columnName)
@@ -98,4 +103,6 @@ class WOWContentTopicTopCell: UITableViewCell {
         //清除内容图片的宽高比约束
         aspectConstraint = nil
     }
+  
+    
 }

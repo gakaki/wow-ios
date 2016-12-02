@@ -35,7 +35,7 @@ class WOWCouponModel: WOWBaseModel,Mappable {
     var canUsed: Bool?
     var isSelect: Bool = false
     
-    
+    var title: String?
     var status: Int?
     var statusDesc: String?
 
@@ -64,6 +64,7 @@ class WOWCouponModel: WOWBaseModel,Mappable {
         used                    <- map["used"]
         canUsed                 <- map["canUsed"]
         
+        title                   <- map["title"]
         status                  <- map["status"]
         statusDesc              <- map["statusDesc"]
     }

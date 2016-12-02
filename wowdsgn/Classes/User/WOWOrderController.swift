@@ -43,10 +43,13 @@ class WOWOrderController: WOWBaseViewController {
         // 默认进入0 下标， 请求网络
         if selectIndex == 0 {
              request()
-            NotificationCenter.default.addObserver(self, selector:#selector(updateOrderListAllInfo), name:NSNotification.Name(rawValue: WOWUpdateOrderListAllNotificationKey), object:nil)
         }
+        NotificationCenter.default.addObserver(self, selector:#selector(updateOrderListAllInfo), name:NSNotification.Name(rawValue: WOWUpdateOrderListAllNotificationKey), object:nil)
+
     }
-    
+    deinit {
+          NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateOrderListAllNotificationKey), object: nil)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
@@ -84,6 +87,7 @@ class WOWOrderController: WOWBaseViewController {
         tableView.register(UINib.nibName(String(describing: WOWOrderListCell.self)), forCellReuseIdentifier:"WOWOrderListCell")
     }
     func updateOrderListAllInfo() {
+        self.pageIndex = 1
         request()
     }
     //MARK:Network
@@ -278,6 +282,7 @@ extension WOWOrderController:OrderCommentDelegate{
 
 extension WOWOrderController:OrderDetailDelegate{
     func orderStatusChange() {
+        self.pageIndex = 1
         request()
     }
 }

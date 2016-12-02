@@ -143,9 +143,14 @@ class WOWHotStyleMain: WOWBaseModuleVC {
         NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWUpdateProjectThumbNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(reloadData), name:NSNotification.Name(rawValue: WOWUpdateProjectThumbNotificationKey), object:nil)
         
     }
+    
+    func reloadData()  {
+        tableView.reloadData()
+    }
+    
     func loginSuccess()  {// 重新刷新数据
         request()
     }

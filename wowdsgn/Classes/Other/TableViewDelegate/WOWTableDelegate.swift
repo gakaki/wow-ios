@@ -561,7 +561,16 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             default:
                 
                 let model = bottomHotListArray[indexPath.section - dataSourceArray.count]
-                self.vc?.toVCTopidDetail(model.id ?? 0)
+                
+                let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
+                //                vc.hideNavigationBar = true
+                vc.topic_id = model.id ?? 0
+                
+                vc.modelStyleData = model
+                
+                   self.vc?.navigationController?.pushViewController(vc, animated: true)
+                
+//                self.vc?.toVCTopidDetail(model.id ?? 0)
 //                self.vc?.toVCArticleListVC(model.columnId ?? 0,title: model.columnName ?? "")
             }
             return

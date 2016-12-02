@@ -22,7 +22,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
         super.viewDidLoad()
         self.view.addSubview(self.topBtn)
         
-        self.topBtn.snp.makeConstraints { (make) in
+        self.topBtn.snp.makeConstraints {[unowned self] (make) in
             make.width.equalTo(98)
             make.height.equalTo(30)
             make.centerX.equalTo(self.view)

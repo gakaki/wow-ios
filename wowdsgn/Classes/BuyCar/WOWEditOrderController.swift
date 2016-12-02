@@ -17,16 +17,16 @@ class WOWEditOrderController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalPriceLabel: UILabel!
     
-    var productId                       :Int?
-    var productQty                      :Int?
-    var entrance                        :editOrderEntrance?
+    var productId                       :Int?       //立即购买过来的产品id
+    var productQty                      :Int?       //立即购买的产品数量
+    var entrance                        :editOrderEntrance?     //入口
     
-    var productArr                      :[WOWCarProductModel]?
-    var orderSettle                     :WOWEditOrderModel?
+    var productArr                      :[WOWCarProductModel]?  //产品列表清单
+    var orderSettle                     :WOWEditOrderModel?     //确认订单的信息
 //    var totalPrice                      : String?
-    var addressInfo                     :WOWAddressListModel?
-    var orderCode                       = String()
-    var couponModel                     :WOWCouponModel?
+    var addressInfo                     :WOWAddressListModel?       //地址信息
+    var orderCode                       = String()      //订单号
+    var couponModel                     :WOWCouponModel?        //优惠券信息
     var discountAmount                  : Double?  //优惠金额
     
     //是否使用促销优惠
@@ -54,7 +54,7 @@ class WOWEditOrderController: WOWBaseViewController {
         v.payView.delegate = self
         return v
     }()
-    
+    //促销信息
     lazy var remissionView:WOWRemissionBackView = {
         let v = WOWRemissionBackView(frame:CGRect(x: 0,y: 0,width: self.view.w,height: self.view.h + 64))
         return v

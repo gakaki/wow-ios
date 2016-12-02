@@ -172,8 +172,8 @@ extension WOWOrderController:OrderCellDelegate{
         case .comment:
             print("评价")
             
-//            goCommentVC(model.orderCode ?? "") // 前往评价页
-            goOrderDetailAction(model.orderCode ?? "") // 前往详情页 评价
+            goCommentVC(model.orderCode ?? "") // 前往评价页
+//            goOrderDetailAction(model.orderCode ?? "") // 前往详情页 评价
 
         case .delete:
             print("删除")
@@ -286,13 +286,14 @@ extension WOWOrderController:OrderDetailDelegate{
         request()
     }
 }
-//extension WOWOrderController:UserCommentSuccesDelegate {
-//    
-//    func reloadTableViewCommentStatus() {
+extension WOWOrderController:UserCommentSuccesDelegate {
+    
+    func reloadTableViewCommentStatus() {
 //        WOWHud.showMsg("发布评论成功！")
-//        request()
-//    }
-//}
+        self.pageIndex = 1
+        request()
+    }
+}
 extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.dataArr.count
@@ -359,7 +360,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
        
         let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
         vc.orderCode = orderCode
-//        vc.delegate  = self
+        vc.delegate  = self
         parentNavigationController!.pushViewController(vc, animated: true)
         
         

@@ -255,7 +255,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                         hideRightBtn()
                     }else{
                         self.clooseOrderButton.isHidden = true
-                        self.rightButton.setTitle("待评价", for: UIControlState())
+                        self.rightButton.setTitle("去评论", for: UIControlState())
                     }
                 }else{
                         hideRightBtn()
@@ -578,7 +578,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 
                 let goods : WOWNewForGoodsModel = goodsArray[section - 2]
                 
-                return goods.orderItems!.count + 1
+                return ((goods.orderItems?.count) ?? 0) + 1
                 
             }
             
@@ -1139,13 +1139,13 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             
         case .forGoods,.finish:
             if isOpen == true {
-                if  let forGoodsArr = self.orderNewDetailModel?.packages![0].orderItems {
+                if  let forGoodsArr = self.orderNewDetailModel?.packages?[0].orderItems {
                     self.orderGoodsNumber = forGoodsArr.count
                 }
                 
                 isOpen = false
             }else{
-                if  let forGoodsArr = self.orderNewDetailModel?.packages![0].orderItems {
+                if  let forGoodsArr = self.orderNewDetailModel?.packages?[0].orderItems {
                     self.orderGoodsNumber = forGoodsArr.count > 3 ? 3 : forGoodsArr.count
                 }
                 

@@ -316,7 +316,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         }else if orderModel.orderStatus == 4 && orderModel.isComment == false{
 
                 cell.rightButton.isHidden = false
-                cell.rightButton.setTitle("待评论", for: UIControlState())
+                cell.rightButton.setTitle("去评论", for: UIControlState())
 
            
         }

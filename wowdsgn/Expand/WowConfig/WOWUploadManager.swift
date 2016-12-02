@@ -65,6 +65,7 @@ class WOWUploadManager {
         
         for image in images.enumerated(){
             group.enter()// 标记
+            
             DispatchQueue.global().async(group: group) {
                 
                 let qiniu_key               = "product-review/\(onlyStr() + (image.element.imageName ?? ""))"

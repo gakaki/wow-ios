@@ -25,7 +25,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgN-gi-k8r">
-                        <rect key="frame" x="311" y="18" width="31" height="14.5"/>
+                        <rect key="frame" x="311" y="17" width="31" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="1" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -58,8 +58,9 @@
                             <constraint firstAttribute="height" constant="36" id="7Cd-9D-r69"/>
                             <constraint firstAttribute="width" constant="36" id="lbp-zm-toh"/>
                         </constraints>
-                        <state key="normal" image="car_check"/>
-                        <state key="selected" image="select"/>
+                        <state key="normal" image="unselectBig"/>
+                        <state key="disabled" image="disable"/>
+                        <state key="selected" image="selectBig"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -97,8 +98,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="car_check" width="16" height="16"/>
+        <image name="disable" width="20" height="20"/>
         <image name="rectangle" width="9" height="16"/>
-        <image name="select" width="16" height="17"/>
+        <image name="selectBig" width="20" height="20"/>
+        <image name="unselectBig" width="20" height="20"/>
     </resources>
 </document>

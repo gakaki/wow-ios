@@ -39,6 +39,9 @@ class WOWContentTopicController: WOWBaseViewController {
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var inputConstraint: NSLayoutConstraint!
     @IBOutlet weak var numberLabel: UILabel!
+
+    
+    var modelStyleData : WOWHotStyleModel?
     
     var vo_products             = [WOWProductModel]()
     //param
@@ -138,6 +141,9 @@ class WOWContentTopicController: WOWBaseViewController {
                     strongSelf.reloadNagationItemThumbButton(isFavorite ?? false, thumbNum: vo_topic.favoriteQty ?? 0)
                     
                     strongSelf.delegate?.reloadTableViewData()
+                    
+                    strongSelf.modelStyleData?.favorite = isFavorite ?? false
+                    strongSelf.modelStyleData?.favoriteQty = vo_topic.favoriteQty
                     //
                     NotificationCenter.postNotificationNameOnMainThread(WOWUpdateProjectThumbNotificationKey, object: nil)
                 }

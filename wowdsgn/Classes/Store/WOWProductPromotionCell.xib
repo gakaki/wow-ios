@@ -68,7 +68,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="limitLabel" destination="xNy-WA-dJy" id="1kW-gX-003"/>
+                <outlet property="promotionTag" destination="xNy-WA-dJy" id="uWg-mt-NeT"/>
+                <outlet property="promotionTime" destination="aSY-yI-JHg" id="OX9-cC-4Rs"/>
             </connections>
             <point key="canvasLocation" x="37" y="79.5"/>
         </tableViewCell>

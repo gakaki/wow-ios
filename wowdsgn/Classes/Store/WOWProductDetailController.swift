@@ -16,6 +16,9 @@ class WOWProductDetailController: WOWBaseViewController {
     var productModel                    : WOWProductModel?
     var productSpecModel                : WOWProductSpecModel?
     var aboutProductArray               = [WOWProductModel]()
+    //商品促销信息
+    var promotionTag                : String?
+    var promotionTime               : String?
     var commentList = [WOWProductCommentModel]() //评论列表
     
     var noMoreData                      :Bool = true
@@ -163,12 +166,19 @@ class WOWProductDetailController: WOWBaseViewController {
     fileprivate func configData(){
         //如果没有促销标签，则不显示
         isHaveLimit = 0
+        isHavePromotion = 0
         productModel?.limitTag = ""
+        promotionTag = ""
+        promotionTime = ""
         for singModel in productModel?.sings ?? []{
             switch singModel.id ?? 0{
             case 5: //限购相关的信息
                 isHaveLimit = 1
                 productModel?.limitTag = singModel.desc
+            case 6: //促销相关信息
+                isHavePromotion = 1
+                promotionTag = singModel.desc
+                promotionTime = singModel.extra
             default: break
             }
         }
@@ -191,7 +201,7 @@ class WOWProductDetailController: WOWBaseViewController {
             isHaveAbout = 0
         }
        
-        numberSections = 7 + isHaveLimit + isHaveComment + isHaveAbout
+        numberSections = 7 + isHaveLimit + isHavePromotion + isHaveComment + isHaveAbout
         //产品描述说明
         productDescView.productDescLabel.text = productModel?.detailDescription
         productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)
@@ -515,7 +525,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             if imgUrlArr.count >= 1 {
                 imgUrlArr[0] = productInfo.productImg ?? ""
             }
-            configBanner()
+            configData()
             requestIsFavoriteProduct()
         }
     }

@@ -851,12 +851,6 @@ extension WOWContentTopicController: UITextViewDelegate{
             return false
         }
         
-
-//        let ret = textView.text.characters.count + text.characters.count - range.length <= COMMENTS_LIMIT
-//        if ret == false{
-//            WOWHud.showMsg("您输入的字符超过限制")
-//            return false
-//        }
         return true
     }
 

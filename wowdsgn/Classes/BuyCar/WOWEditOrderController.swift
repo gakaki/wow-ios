@@ -30,7 +30,7 @@ class WOWEditOrderController: WOWBaseViewController {
     var discountAmount                  : Double?  //优惠金额
     
     //是否使用促销优惠
-    var isPromotion                     = false
+    var isPromotion                     = true
 
     //时间戳，用来验证唯一
     let timeInterval = Date().timeIntervalSince1970
@@ -65,7 +65,7 @@ class WOWEditOrderController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         navigationItem.title = "确认订单"
-        tableView.estimatedRowHeight = 50
+        tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = GrayColorLevel5
         //选择地址
@@ -88,16 +88,21 @@ class WOWEditOrderController: WOWBaseViewController {
         coupon.id = orderSettle?.endUserCouponId
         coupon.deduction = orderSettle?.deduction
         couponModel = coupon
+        //如果优惠金额 = 0 ，说明没有优惠
+        //默认选促销
         if orderSettle?.totalPromotionDeduction == 0 {
             isPromotion = false
+            discountAmount = orderSettle?.deduction
         }else {
-            if orderSettle?.deduction > orderSettle?.totalPromotionDeduction {
-                isPromotion = false
-                discountAmount = orderSettle?.deduction
-            }else {
-                isPromotion = true
-                discountAmount = orderSettle?.totalPromotionDeduction
-            }
+            isPromotion = true
+            discountAmount = orderSettle?.totalPromotionDeduction
+//            if orderSettle?.deduction > orderSettle?.totalPromotionDeduction {
+//                isPromotion = false
+//                discountAmount = orderSettle?.deduction
+//            }else {
+//                isPromotion = true
+//                discountAmount = orderSettle?.totalPromotionDeduction
+//            }
         }
         
         let result = WOWCalPrice.calTotalPrice([orderSettle?.totalAmount ?? 0],counts:[1])
@@ -154,6 +159,7 @@ class WOWEditOrderController: WOWBaseViewController {
                     strongSelf.orderSettle?.deductionName = strongSelf.couponModel?.couponTitle
                     //优惠金额
                     strongSelf.orderSettle?.deduction = couponInfo?.deduction
+                    //如果
                     if !strongSelf.isPromotion {
                         strongSelf.discountAmount = strongSelf.orderSettle?.deduction
                         strongSelf.reCalTotalPrice()
@@ -649,7 +655,8 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             }else {
                 cell.label.text = "优惠"
                 cell.amountLabel.textColor = UIColor(hexString: "FF7070")
-                cell.amountLabel.text = WOWCalPrice.calTotalPrice([self.discountAmount ?? 0], counts: [1])
+                let amount = WOWCalPrice.calTotalPrice([self.discountAmount ?? 0], counts: [1])
+                cell.amountLabel.text = String(format: "－%@", amount)
             }
             returnCell = cell
         default:

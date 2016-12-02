@@ -42,6 +42,7 @@ class WOWProductModel: WOWBaseModel,Mappable{
     //商品限购信息
 
     var limitTag                    : String?
+    
     //商品详情中用到
     var length                      : NSNumber?
     var width                       : NSNumber?
@@ -126,7 +127,7 @@ class WOWProductSings: WOWBaseModel,Mappable {
     
     var id                  : Int?
     var desc                : String?
-    
+    var extra               : String?
     
     required init?(map: Map) {
         
@@ -136,6 +137,7 @@ class WOWProductSings: WOWBaseModel,Mappable {
         
         id              <- map["id"]
         desc            <- map["desc"]
+        extra           <- map["extra"]
         
     }
     

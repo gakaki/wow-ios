@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -95,7 +95,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23333" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaJ-6u-J63">
-                                        <rect key="frame" x="125" y="5" width="38" height="21"/>
+                                        <rect key="frame" x="125" y="5.5" width="38" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="ZLq-W3-qOn"/>
                                             <constraint firstAttribute="width" constant="42" id="beR-hE-zSB"/>
@@ -110,7 +110,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7W-L9-sMz">
-                                        <rect key="frame" x="40" y="5" width="38" height="21"/>
+                                        <rect key="frame" x="40" y="5.5" width="38" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="49" id="ObE-cR-VlT"/>
                                             <constraint firstAttribute="height" constant="21" id="pS0-5M-w2L"/>
@@ -125,7 +125,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一天前" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caJ-CY-RIi">
-                                        <rect key="frame" x="288" y="5" width="42" height="21"/>
+                                        <rect key="frame" x="288" y="5.5" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="4yr-k9-BEc"/>
                                             <constraint firstAttribute="width" constant="42" id="cKv-O0-M13"/>
@@ -150,10 +150,10 @@
                                     <constraint firstItem="diG-eR-k7s" firstAttribute="top" secondItem="njQ-mR-4la" secondAttribute="top" id="IvJ-t0-IBd"/>
                                     <constraint firstItem="S7W-L9-sMz" firstAttribute="leading" secondItem="diG-eR-k7s" secondAttribute="trailing" constant="2" id="Kc4-GG-bg5"/>
                                     <constraint firstAttribute="bottom" secondItem="diG-eR-k7s" secondAttribute="bottom" id="SUK-Hf-pbs"/>
-                                    <constraint firstItem="caJ-CY-RIi" firstAttribute="centerY" secondItem="diG-eR-k7s" secondAttribute="centerY" id="WKH-Z9-2Tg"/>
-                                    <constraint firstItem="VaJ-6u-J63" firstAttribute="centerY" secondItem="diG-eR-k7s" secondAttribute="centerY" id="ajV-Xx-Or4"/>
+                                    <constraint firstItem="caJ-CY-RIi" firstAttribute="centerY" secondItem="diG-eR-k7s" secondAttribute="centerY" constant="1" id="WKH-Z9-2Tg"/>
+                                    <constraint firstItem="VaJ-6u-J63" firstAttribute="centerY" secondItem="diG-eR-k7s" secondAttribute="centerY" constant="1" id="ajV-Xx-Or4"/>
                                     <constraint firstItem="diG-eR-k7s" firstAttribute="leading" secondItem="njQ-mR-4la" secondAttribute="leading" constant="8" id="gmF-hL-iaJ"/>
-                                    <constraint firstItem="S7W-L9-sMz" firstAttribute="centerY" secondItem="diG-eR-k7s" secondAttribute="centerY" id="oey-S1-MyN"/>
+                                    <constraint firstItem="S7W-L9-sMz" firstAttribute="centerY" secondItem="diG-eR-k7s" secondAttribute="centerY" constant="1" id="oey-S1-MyN"/>
                                     <constraint firstAttribute="trailing" secondItem="caJ-CY-RIi" secondAttribute="trailing" constant="15" id="ojn-LH-dhx"/>
                                     <constraint firstItem="31D-k8-ysN" firstAttribute="centerY" secondItem="diG-eR-k7s" secondAttribute="centerY" id="wl2-Bx-9X1"/>
                                     <constraint firstItem="fao-X9-TEh" firstAttribute="leading" secondItem="S7W-L9-sMz" secondAttribute="trailing" constant="15" id="wwQ-dW-uNm"/>

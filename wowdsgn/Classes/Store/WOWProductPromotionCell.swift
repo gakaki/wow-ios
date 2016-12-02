@@ -10,6 +10,8 @@ import UIKit
 
 class WOWProductPromotionCell: UITableViewCell {
 
+    @IBOutlet weak var promotionTag: UILabel!
+    @IBOutlet weak var promotionTime: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

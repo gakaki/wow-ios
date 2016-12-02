@@ -51,21 +51,21 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 3 + isHaveLimit:   //产品图文详情
+        case 3 + isHaveLimit + isHavePromotion:   //产品图文详情
             return productModel?.secondaryImgs?.count ?? 0
-        case 4 + isHaveLimit: //产品参数可展开
+        case 4 + isHaveLimit + isHavePromotion: //产品参数可展开
             if isOpenParam {
                 return productModel?.productParameter?.count ?? 0
             }else {
                 return 0
             }
-        case 5 + isHaveLimit: //温馨提示也可展开
+        case 5 + isHaveLimit + isHavePromotion: //温馨提示也可展开
             if isOpenTips {
                 return 1
             }else {
                 return 0
             }
-        case 6 + isHaveLimit + isHaveComment: //商品评论
+        case 6 + isHaveLimit + isHavePromotion + isHaveComment: //商品评论
             if isHaveComment == 1 {
                 return commentList.count > 3 ? 3 : commentList.count
 
@@ -90,7 +90,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case (0 + isHaveLimit + isHavePromotion,_): //促销标签
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductPromotionCell.self), for: indexPath) as! WOWProductPromotionCell
-            
+            cell.promotionTag.text = promotionTag
+            cell.promotionTime.text = promotionTime
             returnCell = cell
         case (1 + isHaveLimit + isHavePromotion,_): //满199包邮
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDesCell.self), for: indexPath) as! WOWProductDesCell

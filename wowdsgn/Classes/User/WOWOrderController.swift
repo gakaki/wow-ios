@@ -87,6 +87,7 @@ class WOWOrderController: WOWBaseViewController {
         tableView.register(UINib.nibName(String(describing: WOWOrderListCell.self)), forCellReuseIdentifier:"WOWOrderListCell")
     }
     func updateOrderListAllInfo() {
+        self.pageIndex = 1
         request()
     }
     //MARK:Network
@@ -281,6 +282,7 @@ extension WOWOrderController:OrderCommentDelegate{
 
 extension WOWOrderController:OrderDetailDelegate{
     func orderStatusChange() {
+        self.pageIndex = 1
         request()
     }
 }

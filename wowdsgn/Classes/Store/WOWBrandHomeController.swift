@@ -224,7 +224,7 @@ class WOWBrandHomeController: WOWBaseViewController {
 //        var params = [String: AnyObject]?()
         let params = ["brandId": brandID ?? 0, "currentPage": pageIndex,"pageSize":pageSize]
        
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as [String : AnyObject]?), successClosure: {[weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as [String : AnyObject]), successClosure: {[weak self](result, code) in
           
                 if let strongSelf = self{
                     

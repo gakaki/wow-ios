@@ -228,17 +228,17 @@ class WOWEditOrderController: WOWBaseViewController {
             //status -1 失效。2下架
             for product in array {
                 if product.productStatus == -1 {
-                    let str = String(format:"您购买的商品\"%@\"已失效",product.productTitle ?? "")
+                    let str = String(format:"您购买的商品\"%@\"已失效",product.productName ?? "")
                     WOWHud.showWarnMsg(str)
                     return
                 }
                 if product.productStatus == 2 {
-                    let str = String(format:"您购买的商品\"%@\"已下架",product.productTitle ?? "")
+                    let str = String(format:"您购买的商品\"%@\"已下架",product.productName ?? "")
                     WOWHud.showWarnMsg(str)
                     return
                 }
                 if product.productStatus == 1 && product.productStock == 0 {
-                    let str = String(format:"您购买的商品\"%@\"已售罄",product.productTitle ?? "")
+                    let str = String(format:"您购买的商品\"%@\"已售罄",product.productName ?? "")
                     WOWHud.showWarnMsg(str)
                     return
                 }

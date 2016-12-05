@@ -64,7 +64,7 @@ class WOWProductOrderCell: UITableViewCell{
         }
         goodsImageView.set_webimage_url(model.specImg)
         
-        nameLabel.text = model.productTitle
+        nameLabel.text = model.productName
         countLabel.text = "x \(model.productQty ?? 1)"
         subCountLabel.text = "共\(model.productQty ?? 1)件"
         let result1 = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])

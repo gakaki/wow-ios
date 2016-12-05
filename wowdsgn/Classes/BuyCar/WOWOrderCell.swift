@@ -49,7 +49,7 @@ class WOWOrderCell: UITableViewCell {
         
         goodsImageView.set_webimage_url(model.specImg)
         
-        nameLabel.text = model.productTitle
+        nameLabel.text = model.productName
         countLabel.text = "x \(model.productQty ?? 0)"
         perPriceLabel.text = String(format: "¥ %.2f", (model.sellPrice) ?? 0)
         //productStatus -1已失效  2已下架  1并且库存等于0  已售罄

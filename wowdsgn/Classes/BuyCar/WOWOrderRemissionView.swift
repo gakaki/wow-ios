@@ -13,6 +13,7 @@ class WOWRemissionBackView: UIView {
     //MARK:Lazy
     lazy var remissionView:WOWOrderRemissionView = {
         let v = Bundle.loadResourceName(String(describing: WOWOrderRemissionView.self)) as! WOWOrderRemissionView
+        v.closeBtn.addTarget(self, action: #selector(hidePayView), for:.touchUpInside)
         v.isUserInteractionEnabled = true
         return v
     }()
@@ -88,6 +89,8 @@ class WOWRemissionBackView: UIView {
 
 class WOWOrderRemissionView: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var closeBtn: UIButton!
+    
     var promotionInfoArr: [WOWPromotionProductInfoModel]?
     
     let cellID = String(describing: WOWRemissionNameCell.self)

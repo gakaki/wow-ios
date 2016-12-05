@@ -132,7 +132,7 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
         WOWBorderColor(cell.logoImg)
         cell.logoImg.borderRadius(32)
         cell.logoName.text = model.designerName ?? ""
-        cell.logoDes.text = model.designerDesc ?? ""
+//        cell.logoDes.text = model.designerDesc ?? ""
         return cell
     }
     

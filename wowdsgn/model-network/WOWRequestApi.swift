@@ -62,7 +62,7 @@ public enum RequestApi{
     
     case api_BrandDetail(brandId: Int)
     
-    case api_ProductBrand(params: [String: AnyObject]?)
+    case api_ProductBrand(params: [String: AnyObject])
     //设计师
     case api_DesignerDetail(designerId: Int)
     
@@ -108,6 +108,7 @@ public enum RequestApi{
     
     case api_Change(param:[String:String])
     
+    case api_ProductAbout(params: [String: AnyObject])
     //用户收藏相关
     case api_FavoriteProduct(productId: Int)
     
@@ -278,6 +279,8 @@ extension RequestApi:TargetType{
             return URL_Product_imageDetail
         case .api_ProductSpec:
             return URL_ProductSpec
+        case .api_ProductAbout:
+            return URL_ProductAbout
         case .api_BrandList:
             return URL_BrandList
         case .api_BrandDetail:
@@ -445,8 +448,8 @@ extension RequestApi:TargetType{
             .api_HotStyle_BottomList,
             .api_TopicCommentList,
             .api_ProductCommentList,
-            .api_OrderComment:
-
+            .api_OrderComment,
+            .api_ProductAbout:
 
             return .GET
 
@@ -481,7 +484,7 @@ extension RequestApi:TargetType{
             case let .api_BrandDetail(brandid):
                 params = ["brandId": brandid]
             case let .api_ProductBrand(param):
-                params = param!
+                params = param
             case let .api_DesignerDetail(designerId):
                 params = ["designerId": designerId]
             case let .api_productDesigner(designerId, pageSize, currentPage):
@@ -490,6 +493,8 @@ extension RequestApi:TargetType{
                 params = ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid,"keyword":keyword]
             case let .api_ProductDetail(productId):
                 params = ["productId":productId]
+            case let .api_ProductAbout(param):
+                params = param
             case let .api_ProductImgDetail(productId):
                 params = ["productId":productId]
             case let .api_ProductSpec(productId):

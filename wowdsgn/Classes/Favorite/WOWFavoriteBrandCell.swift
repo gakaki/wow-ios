@@ -16,7 +16,6 @@ class WOWFavoriteBrandCell: UICollectionViewCell {
     }
     @IBOutlet weak var logoImg:UIImageView!
     @IBOutlet weak var logoName:UILabel!
-    @IBOutlet weak var logoDes:UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

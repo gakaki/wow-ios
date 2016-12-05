@@ -134,7 +134,7 @@ extension WOWFavBrand:UICollectionViewDelegate,UICollectionViewDataSource{
         WOWBorderColor(cell.logoImg)
         cell.logoImg.borderRadius(32)
         cell.logoName.text = model.brandCName ?? ""
-        cell.logoDes.text = model.brandDesc ?? ""
+//        cell.logoDes.text = model.brandDesc ?? ""
         return cell
     }
     

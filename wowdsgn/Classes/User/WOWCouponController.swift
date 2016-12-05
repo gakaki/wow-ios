@@ -151,7 +151,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
             let r = self.vo_cupons[(indexPath as NSIndexPath).section]
             cell.label_amount.font = UIFont.priceFont(40)
             cell.label_amount.text          = String(format: "%.f",r.deduction ?? 0)
-            cell.label_title.text           = r.couponTitle ?? ""
+            cell.label_title.text           = r.title ?? ""
             
             
             cell.label_time_limit.text      = "\(r.effectiveFrom ?? "")至\(r.effectiveTo ?? "")"

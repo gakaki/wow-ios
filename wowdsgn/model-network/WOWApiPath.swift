@@ -75,6 +75,9 @@ let URL_FavoriteTopicComment        = "v1/user/topic-comment/favorite"
 
 let URL_ProductSpec             = "v2/product/spec"    //选择产品颜色规格
 
+//相关产品
+let URL_ProductAbout            = "/v1/product/relateds"
+
 //2.6收藏
 let URL_IsFavoriteProduct       = "v1/user/product/is-favorite"   //是否喜欢某个单品
 

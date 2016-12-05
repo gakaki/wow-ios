@@ -252,7 +252,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         
         let view = UIView()
         view.backgroundColor = UIColor.clear
-        if section == 4 + isHaveLimit { //产品参数
+        if section == 4 + isHaveLimit + isHavePromotion { //产品参数
             view.backgroundColor = UIColor.white
         }
         return view
@@ -272,8 +272,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
 
 extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
     func aboutProduct(_ productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int) {
-        let params = ["brandId": productModel?.brandId ?? 0, "currentPage": pageIndex,"pageSize":pageSize, "excludes": [productModel?.productId ?? 0]] as [String : Any]
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductBrand(params: params as? [String : AnyObject]), successClosure: {[weak self] (result, code) in
+        let params = ["productId": productModel?.productId ?? 0, "currentPage": pageIndex,"pageSize":pageSize] as [String : Any]
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductAbout(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self {
                 productDetailAboutCell.endRefresh()

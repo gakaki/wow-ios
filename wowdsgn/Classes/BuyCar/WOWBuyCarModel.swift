@@ -89,7 +89,7 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         parentProductId                      <- map["parentProductId"]
         shoppingCartId                       <- map["shoppingCartId"]
         productId                            <- map["productId"]
-        productName                          <- map["productTitle"]
+        productName                          <- map["productName"]
         productTitle                         <- map["productTitle"]
         oldPrcie                             <- map["oldPrice"]
         sellPrice                            <- map["sellPrice"]

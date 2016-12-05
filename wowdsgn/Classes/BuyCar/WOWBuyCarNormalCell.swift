@@ -52,7 +52,7 @@ class WOWBuyCarNormalCell: UITableViewCell{
 //        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         goodsImageView.set_webimage_url( model.specImg ?? "" )
         
-        nameLabel.text = model.productTitle
+        nameLabel.text = model.productName
         countLabel.text = "x \(model.productQty ?? 1)"
         countTextField.text = "\(model.productQty ?? 1)"
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])

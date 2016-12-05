@@ -1050,7 +1050,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vC-lT-k7q">
-                                <rect key="frame" x="60" y="398" width="200" height="45"/>
+                                <rect key="frame" x="80" y="398" width="160" height="45"/>
                                 <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="ipr-Oc-crH"/>
@@ -1063,7 +1063,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7D-yn-8Vl">
-                                <rect key="frame" x="60" y="458" width="200" height="45"/>
+                                <rect key="frame" x="80" y="458" width="160" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Aid-LJ-V1c"/>
@@ -1115,16 +1115,16 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="q8u-1M-Mdn" secondAttribute="trailing" constant="15" id="0qo-MG-yFq"/>
                             <constraint firstItem="Kdh-6z-kZj" firstAttribute="top" secondItem="168-2S-OpQ" secondAttribute="bottom" constant="18" id="9kx-FM-RlY"/>
-                            <constraint firstItem="2vC-lT-k7q" firstAttribute="leading" secondItem="Am2-xx-25L" secondAttribute="leadingMargin" constant="44" id="AFX-oV-QhV"/>
+                            <constraint firstItem="s7D-yn-8Vl" firstAttribute="leading" secondItem="Am2-xx-25L" secondAttribute="leading" constant="80" id="DNj-is-jKg"/>
                             <constraint firstItem="Coq-p4-7pr" firstAttribute="top" secondItem="q8u-1M-Mdn" secondAttribute="bottom" constant="5" id="Inc-f3-sIA"/>
                             <constraint firstItem="s7D-yn-8Vl" firstAttribute="top" secondItem="2vC-lT-k7q" secondAttribute="bottom" constant="15" id="PTs-X0-nZy"/>
+                            <constraint firstAttribute="trailing" secondItem="2vC-lT-k7q" secondAttribute="trailing" constant="80" id="Spy-fd-PH4"/>
                             <constraint firstItem="Coq-p4-7pr" firstAttribute="top" secondItem="s7D-yn-8Vl" secondAttribute="bottom" constant="65" id="YNH-kv-YHt"/>
-                            <constraint firstItem="s7D-yn-8Vl" firstAttribute="leading" secondItem="Am2-xx-25L" secondAttribute="leadingMargin" constant="44" id="Zfq-eT-6SL"/>
                             <constraint firstItem="2vC-lT-k7q" firstAttribute="top" secondItem="YyO-kq-eic" secondAttribute="bottom" constant="13" id="cHn-qi-c58"/>
                             <constraint firstItem="Kdh-6z-kZj" firstAttribute="leading" secondItem="q8u-1M-Mdn" secondAttribute="leading" id="g4I-WY-kjb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="s7D-yn-8Vl" secondAttribute="trailing" constant="44" id="iTi-UV-oXA"/>
+                            <constraint firstAttribute="trailing" secondItem="s7D-yn-8Vl" secondAttribute="trailing" constant="80" id="m0E-Mc-ycf"/>
                             <constraint firstItem="YyO-kq-eic" firstAttribute="centerX" secondItem="Am2-xx-25L" secondAttribute="centerX" id="rm6-EV-ygx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2vC-lT-k7q" secondAttribute="trailing" constant="44" id="wH2-Pc-bWt"/>
+                            <constraint firstItem="2vC-lT-k7q" firstAttribute="leading" secondItem="Am2-xx-25L" secondAttribute="leading" constant="80" id="tDq-43-ucb"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

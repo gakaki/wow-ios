@@ -7,19 +7,22 @@
 //
 
 import UIKit
-
+protocol WOWOrderDetailNewCellDelegate: class {
+    func orderGoProductDetail(_ productId: Int?)
+}
 class WOWOrderDetailNewCell: UITableViewCell {
     
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var colorLabel: UILabel!
-    @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var goodsNumber: UILabel!
+    @IBOutlet weak var tapView: UIView!
     
     @IBOutlet weak var singsTagView: TagListView!
     var orderNewDetailModel : WOWNewOrderDetailModel?
+    weak var delegeta: WOWOrderDetailNewCellDelegate?
 
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,7 +32,6 @@ class WOWOrderDetailNewCell: UITableViewCell {
         
         let orderProductModel = orderNewDetailModel!.unShipOutOrderItems![indexRow]
 
-//        colorLabel.text = orderProductModel.color?.get_formted_Space()
         titleLabel.text = orderProductModel.productName
         singsTagView.textFont = UIFont.systemFont(ofSize: 10)
         singsTagView.removeAllTags()
@@ -37,15 +39,20 @@ class WOWOrderDetailNewCell: UITableViewCell {
             singsTagView.addTag(sing)
         }
         titleImageView.set_webimage_url(orderProductModel.specImg!)
-        
-        
+        tapView.addAction({[weak self] in
+            if let strongSelf = self {
+                if let del = strongSelf.delegeta {
+                    del.orderGoProductDetail(orderProductModel.productId)
+                }
+            }
+        })
 
         let result = WOWCalPrice.calTotalPrice([orderProductModel.sellPrice ?? 0],counts:[1])
         
         priceLabel.text = result
         goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
+        
 
-//        contentLabel.text = orderProductModel.specName?.get_formted_Space()
 
         
         
@@ -63,7 +70,13 @@ class WOWOrderDetailNewCell: UITableViewCell {
         }
 
         titleImageView.set_webimage_url(orderProductModel.specImg!)
-
+        tapView.addAction({[weak self] in
+            if let strongSelf = self {
+                if let del = strongSelf.delegeta {
+                    del.orderGoProductDetail(orderProductModel.productId)
+                }
+            }
+        })
         
         priceLabel.text = (orderProductModel.sellPrice)!.toString.get_formted_price()
         goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()

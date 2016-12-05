@@ -161,13 +161,15 @@ class WOWEditOrderController: WOWBaseViewController {
                     strongSelf.orderSettle?.deduction = couponInfo?.deduction
                     //优惠title
                     strongSelf.orderSettle?.deductionName = couponInfo?.title
-                    //如果
-                    if !strongSelf.isPromotion {
-                        strongSelf.discountAmount = strongSelf.orderSettle?.deduction
-                        strongSelf.reCalTotalPrice()
-                    }
-                    
-                    strongSelf.tableView.reloadData()
+                    //选择优惠券
+                    strongSelf.selectCoupons()
+//                    //如果
+//                    if !strongSelf.isPromotion {
+//                        strongSelf.discountAmount = strongSelf.orderSettle?.deduction
+//                        strongSelf.reCalTotalPrice()
+//                    }
+//                    
+//                    strongSelf.tableView.reloadData()
                     
                     
                 }

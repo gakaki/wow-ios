@@ -655,7 +655,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailNewCell", for: indexPath) as! WOWOrderDetailNewCell
                 if let orderNewDetailModel = orderNewDetailModel {
-                    
+                    cell.delegeta = self
+
                     cell.showData(orderNewDetailModel,indexRow: (indexPath as NSIndexPath).row)
                     
                 }
@@ -749,7 +750,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailNewCell", for: indexPath) as! WOWOrderDetailNewCell
                 if let orderNewDetailModel = orderNewDetailModel {
                     
-                    
+                    cell.delegeta = self
+
                     switch OrderDetailNewaType {
                     case .forGoods,.finish:
                         cell.showPackages(orderNewDetailModel, indexSection: (indexPath as NSIndexPath).section - 2, indexRow: (indexPath as NSIndexPath).row)
@@ -803,7 +805,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case goodsArray.count + 2 :
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailNewCell", for: indexPath) as! WOWOrderDetailNewCell
                 if let orderNewDetailModel = orderNewDetailModel {
-                    
+                    cell.delegeta = self
                     cell.showData(orderNewDetailModel,indexRow: (indexPath as NSIndexPath).row)
                     
                 }
@@ -837,7 +839,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailNewCell", for: indexPath) as! WOWOrderDetailNewCell
                     
                     if let orderNewDetailModel = orderNewDetailModel {
-                        
+                        cell.delegeta = self
+
                         cell.showPackages(orderNewDetailModel,indexSection:(indexPath as NSIndexPath).section - 2 , indexRow:(indexPath as NSIndexPath).row - 1)
                         
                     }
@@ -1168,10 +1171,14 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         }
     }
 }
-extension WOWOrderDetailController:UserCommentSuccesDelegate {
+extension WOWOrderDetailController:UserCommentSuccesDelegate, WOWOrderDetailNewCellDelegate {
     
     func reloadTableViewCommentStatus() {
         request()
         NotificationCenter.postNotificationNameOnMainThread(WOWUpdateOrderListAllNotificationKey, object: nil)
+    }
+    
+    func orderGoProductDetail(_ productId: Int?) {
+        toVCProduct(productId)
     }
 }

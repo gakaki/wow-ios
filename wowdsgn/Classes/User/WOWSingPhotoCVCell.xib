@@ -11,14 +11,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gTV-IL-0wX" customClass="WOWSingPhotoCVCell" customModule="wowdsgn">
-            <rect key="frame" x="0.0" y="0.0" width="75" height="83"/>
+            <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="75" height="83"/>
+                <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera-comment" translatesAutoresizingMaskIntoConstraints="NO" id="Oaa-7J-z1V">
-                        <rect key="frame" x="0.0" y="8" width="75" height="75"/>
+                        <rect key="frame" x="0.0" y="7" width="75" height="75"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="CbM-pU-k8l"/>
@@ -26,7 +26,7 @@
                         </constraints>
                     </imageView>
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="daletePhoto" translatesAutoresizingMaskIntoConstraints="NO" id="svj-cm-mIC">
-                        <rect key="frame" x="55" y="0.0" width="20" height="20"/>
+                        <rect key="frame" x="62" y="0.0" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="2Uk-iD-PLR"/>
                             <constraint firstAttribute="height" constant="20" id="n7I-ry-7U3"/>

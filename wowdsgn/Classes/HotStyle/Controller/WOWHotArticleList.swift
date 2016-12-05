@@ -119,11 +119,11 @@ class WOWHotArticleList: WOWBaseViewController {
 extension WOWHotArticleList:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 
-            return 15
+            return 0.01
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 
-            return 0.01
+            return 15
 
         
     }

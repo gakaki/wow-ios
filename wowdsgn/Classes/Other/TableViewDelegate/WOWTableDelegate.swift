@@ -7,6 +7,7 @@
 //
 enum ControllerViewType { // 区分底部列表
     case Home         // 首页
+    case Buy          // 购物页
     case HotStyle     // 精选页
 }
 import UIKit
@@ -23,7 +24,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         didSet{
             
             bottomCellLine = bottomHotListArray.count
-//            bottomCellLine  = bottomListCount
+
         }
 
     }
@@ -568,7 +569,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 
                 vc.modelStyleData = model
                 
-                   self.vc?.navigationController?.pushViewController(vc, animated: true)
+                self.vc?.navigationController?.pushViewController(vc, animated: true)
                 
 //                self.vc?.toVCTopidDetail(model.id ?? 0)
 //                self.vc?.toVCArticleListVC(model.columnId ?? 0,title: model.columnName ?? "")

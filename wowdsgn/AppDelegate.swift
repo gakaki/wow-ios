@@ -161,33 +161,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        if Pingpp.handleOpen(url, withCompletion: nil) {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        if RouterRule.handle_open_url(url: url){
+            return true
+        }
+        if Pingpp.handleOpen(url, withCompletion: nil) {
+            return true
+        }
+        
+        //growing io
+        if Growing.handle(url) {
+            return true
+        }
+        
+        //DeepShare
+        if DeepShare.handle(url) {
+            return true
+        }
+        
+        //TalkingData ADTracking
+        TalkingDataAppCpa.onReceiveDeepLink(url)
+            
+//        if MonkeyKing.handleOpenURL(url) {
 //            return true
 //        }
-//        
-//        
-//        //growing io
-//        if Growing.handle(url) {
-//            return true
-//        }
-//        
-//        //DeepShare
-//        if DeepShare.handle(url) {
-//            return true
-//        }
-//        
-//        //TalkingData ADTracking
-//        TalkingDataAppCpa.onReceiveDeepLink(url)
-//            
-////        if MonkeyKing.handleOpenURL(url) {
-////            return true
-////        }
-//        if UMSocialSnsService.handleOpen(url) {
-//            return true
-//        }
-//        return true
-//    }
+        if UMSocialSnsService.handleOpen(url) {
+            return true
+        }
+        return true
+    }
     
  
     // iOS 9 以上请用这个

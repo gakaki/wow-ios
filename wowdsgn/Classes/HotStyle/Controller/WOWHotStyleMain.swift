@@ -66,11 +66,11 @@ class WOWHotStyleMain: WOWBaseModuleVC {
                     
                 }
                 
-                if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
-                    
+//                if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
+                
                     strongSelf.tableView.reloadData()
                     
-                }
+//                }
  
             }
         }) {[weak self] (errorMsg) in
@@ -124,11 +124,11 @@ class WOWHotStyleMain: WOWBaseModuleVC {
                     strongSelf.tableView.mj_footer = nil
                     
                 }
-                if strongSelf.dataArr.count > 0 {// 确保reloadData 数据都存在
-                    
+//                if strongSelf.dataArr.count > 0 {// 确保reloadData 数据都存在
+                
                     strongSelf.tableView.reloadData()
                     WOWHud.dismiss()
-                }
+//                }
 
             }
         }) {[weak self] (errorMsg) in

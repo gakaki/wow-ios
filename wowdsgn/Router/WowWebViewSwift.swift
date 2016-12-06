@@ -19,15 +19,15 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     public func webView(_: WKWebView, decidePolicyFor: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
     {
         
-        if decidePolicyFor.navigationType == .linkActivated {
-            
+//        if decidePolicyFor.navigationType == .linkActivated {
+        
             print("webView:\(webView) decidePolicyForNavigationAction:\(decidePolicyFor) decisionHandler:\(decisionHandler)")
             if let url = decidePolicyFor.request.url {
                 print(url.absoluteString)
                 FN.open(url: url.absoluteString)
             }
 
-        }
+//        }
         decisionHandler(.allow)
         
 

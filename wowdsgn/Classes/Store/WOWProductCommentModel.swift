@@ -20,6 +20,7 @@ class WOWProductCommentModel: WOWBaseModel, Mappable{
     var employeeRealName        : String?
     var replyContent            : String?
     var publishTimeFormat       : String?
+    var timeStamp               : String?
     
     required init?(map: Map) {
         
@@ -35,6 +36,7 @@ class WOWProductCommentModel: WOWBaseModel, Mappable{
         employeeRealName    <- map["employeeRealName"]
         replyContent        <- map["replyContent"]
         publishTimeFormat   <- map["publishTimeFormat"]
+        timeStamp           <- map["timeStamp"]
     }
 
 }

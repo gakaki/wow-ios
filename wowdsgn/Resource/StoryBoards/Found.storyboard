@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -168,10 +168,10 @@
             </objects>
             <point key="canvasLocation" x="924" y="460"/>
         </scene>
-        <!--购物-->
+        <!--分类-->
         <scene sceneID="22W-lc-5qA">
             <objects>
-                <viewController storyboardIdentifier="VCShopping" id="tb8-sZ-bTB" userLabel="购物" customClass="VCShopping" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VCShopping" id="tb8-sZ-bTB" userLabel="分类" customClass="VCShopping" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n6J-KG-bgh"/>
                         <viewControllerLayoutGuide type="bottom" id="fXl-2k-5cK"/>

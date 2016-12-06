@@ -402,15 +402,14 @@ extension AppDelegate{
         //设置导航条背景
         navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black] //导航栏标题颜色
         navBar.tintColor = UIColor.black //导航栏元素颜色
-        navBar.isTranslucent = false
         
-        let tabBar = UITabBar.appearance()
-        tabBar.barTintColor = MGRgb(20, g: 20, b: 20)
-        tabBar.isTranslucent = false
-        
-        let tabBarItem = UITabBarItem.appearance()
-        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], for: .normal)
-        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], for: .selected)
+//        let tabBar = UITabBar.appearance()
+//        tabBar.barTintColor = tabBackColor
+//        tabBar.isTranslucent = false
+//        
+//        let tabBarItem = UITabBarItem.appearance()
+//        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], for: .normal)
+//        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], for: .selected)
     }
     //iOS10以下使用这个方法接收通知
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

@@ -24,7 +24,7 @@ class WOWHotStyleMain: WOWBaseModuleVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "精选"
+        self.title = "灵感"
         // Do any additional setup after loading the view.
         request()
         addObserver()

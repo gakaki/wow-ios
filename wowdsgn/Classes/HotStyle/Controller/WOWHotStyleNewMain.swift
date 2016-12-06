@@ -21,7 +21,7 @@ class WOWHotStyleNewMain: WOWBaseViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "精选"
+        self.title = "灵感"
 
         request()
 

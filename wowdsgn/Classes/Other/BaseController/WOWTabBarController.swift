@@ -28,12 +28,19 @@ class WOWTabBarController: UITabBarController {
     //MARK:Private Method
     func setViewControllers(){
         
-        self.view.backgroundColor   = DefaultBackColor
+        self.view.backgroundColor   = tabBackColor
+        self.tabBar.backgroundColor = UIColor(hexString: "#FFFFFF")
+        self.tabBar.barTintColor = tabBackColor
+        self.tabBar.backgroundImage = UIImage()
+        self.tabBar.isTranslucent = false
+//        self.tabBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSize(width: MGScreenWidth, height: 0.5))
+        self.tabBar.shadowImage = UIImage(named: "line")
+        
         self.delegate               = self
         
         let storys =        ["Home",    "Found",       "HotStyle",        "Favorite",     "User"      ]
         let images =        ["tab_home","tab_shopping","tab_special",  "tab_like",     "tab_me"    ]
-        let imagesTitle =   ["首页",      "购物",       "精选",          "喜欢",          "我"        ]
+        let imagesTitle =   ["首页",      "分类",       "灵感",          "喜欢",          "我"        ]
     
 
         
@@ -61,7 +68,7 @@ class WOWTabBarController: UITabBarController {
             let dic_corlor   = NSDictionary(object: WowColor.gray,
                                             forKey: NSForegroundColorAttributeName as NSCopying)
 
-            let dic_selected = NSDictionary(object: WowColor.orange,
+            let dic_selected = NSDictionary(object: WowColor.blackLight,
                                    forKey: NSForegroundColorAttributeName as NSCopying)
 
             item.setTitleTextAttributes(dic_selected as? [String : AnyObject],

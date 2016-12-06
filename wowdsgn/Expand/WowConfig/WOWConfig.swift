@@ -119,6 +119,8 @@ let DefaultBackColor = GrayColorLevel5
 
 let YellowColor     = UIColor(hexString: "#FFD444")
 
+let tabBackColor    = UIColor(hexString: "#FFFFFF")
+
 
 //MARK:Font
  /// 

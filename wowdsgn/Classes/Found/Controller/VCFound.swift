@@ -35,11 +35,12 @@ class VCFound: WOWBaseModuleVC {
     
     override func setUI() {
         super.setUI()
-        self.view.backgroundColor      = GrayColorLevel5
+        self.view.backgroundColor           = GrayColorLevel5
         
-        dataDelegate?.vc = self
-        tableView.separatorColor     = SeprateColor
-        tableView.mj_footer            = mj_footerHome
+        dataDelegate?.vc                    = self
+        dataDelegate?.ViewControllerType    = ControllerViewType.Home
+        tableView.separatorColor            = SeprateColor
+        tableView.mj_footer                 = mj_footerHome
 
 
     }

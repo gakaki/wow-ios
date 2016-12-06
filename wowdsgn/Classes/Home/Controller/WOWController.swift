@@ -135,10 +135,9 @@ class WOWController: WOWBaseModuleVC {
     }
     func configTableView() {
         
-        dataDelegate?.vc = self
-        dataDelegate?.ViewControllerType    = ControllerViewType.Home
-        
-        self.view.backgroundColor      = GrayColorLevel5
+        dataDelegate?.vc                    = self
+        dataDelegate?.ViewControllerType    = ControllerViewType.Buy
+        self.view.backgroundColor           = GrayColorLevel5
     }
     fileprivate func configBarItem(){
         configBuyBarItem() // 购物车数量

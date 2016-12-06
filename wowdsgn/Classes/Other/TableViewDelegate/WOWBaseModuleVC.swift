@@ -32,14 +32,14 @@ class WOWBaseModuleVC: WOWBaseViewController {
     }
     //MARK:Lazy
     lazy var topBtn:UIButton = {
-        var btn = UIButton(type: UIButtonType.custom)
-        btn = btn as UIButton
-        btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
-        btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
+        var btn     = UIButton(type: UIButtonType.custom)
+            btn     = btn as UIButton
+            btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
+            btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
         return btn
     }()
     func backTop()  {
-        let index = IndexPath.init(row: 0, section: 0)
+        let index  = IndexPath.init(row: 0, section: 0)
         self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
     }
     

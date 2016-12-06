@@ -29,12 +29,18 @@ class WOWTabBarController: UITabBarController {
     func setViewControllers(){
         
         self.view.backgroundColor   = tabBackColor
+        
         self.tabBar.backgroundColor = UIColor(hexString: "#FFFFFF")
         self.tabBar.barTintColor = tabBackColor
         self.tabBar.backgroundImage = UIImage()
         self.tabBar.isTranslucent = false
 //        self.tabBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSize(width: MGScreenWidth, height: 0.5))
-        self.tabBar.shadowImage = UIImage(named: "line")
+//        self.tabBar.shadowImage = UIImage(named: "line")
+        
+//        self.view.backgroundColor   = tabBackColor
+        self.tabBar.layer.borderWidth = 0.5
+        self.tabBar.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
+        self.tabBar.clipsToBounds = true
         
         self.delegate               = self
         

@@ -64,7 +64,11 @@ class WOWNetManager {
         print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
         
        _ =  requestProvider.request(target) { (result) in
-        
+            //消失loading页面
+            DispatchQueue.main.async {
+            
+                LoadView.dissMissView()
+            }
         
             switch result{
                 
@@ -99,11 +103,7 @@ class WOWNetManager {
                     if let session_token = info?.data?["sessionToken"]{
                         WOWUserManager.sessionToken = session_token as? String ?? WOWUserManager.sessionToken
                     }
-                    //消失loading页面
-                    DispatchQueue.main.async {
-                        
-                        LoadView.dissMissView()
-                    }
+                    
                     
                     if let code = info?.code{
                        

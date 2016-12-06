@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 import YYWebImage
 import SwiftyUserDefaults
 import wow3rd
+import EZSwiftExtensions
 
 //import JSPatch
 //import JSPatchHelper
@@ -35,6 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        RouterRule.router_init()
+
+        
         asyncLoad()
 
         IQKeyboardManager.sharedManager().enable = true
@@ -44,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appConfig()
         
         
-        RouterRule.router_init()
         
         
         ADLaunchView()
@@ -126,6 +130,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
   
+        
+        
         TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
 
         //DeepShare
@@ -155,39 +161,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//        if Pingpp.handleOpen(url, withCompletion: nil) {
+//            return true
+//        }
+//        
+//        
+//        //growing io
+//        if Growing.handle(url) {
+//            return true
+//        }
+//        
+//        //DeepShare
+//        if DeepShare.handle(url) {
+//            return true
+//        }
+//        
+//        //TalkingData ADTracking
+//        TalkingDataAppCpa.onReceiveDeepLink(url)
+//            
+////        if MonkeyKing.handleOpenURL(url) {
+////            return true
+////        }
+//        if UMSocialSnsService.handleOpen(url) {
+//            return true
+//        }
+//        return true
+//    }
+    
+ 
+    // iOS 9 以上请用这个
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        
+        if RouterRule.handle_open_url(url: url){
+            return true
+        }
+        
         if Pingpp.handleOpen(url, withCompletion: nil) {
             return true
         }
-        
-        
-        //growing io
-        if Growing.handle(url) {
-            return true
-        }
-        
-        //DeepShare
-        if DeepShare.handle(url) {
-            return true
-        }
-        
-        //TalkingData ADTracking
-        TalkingDataAppCpa.onReceiveDeepLink(url)
-            
-//        if MonkeyKing.handleOpenURL(url) {
-//            return true
-//        }
         if UMSocialSnsService.handleOpen(url) {
             return true
         }
-        return true
-    }
-    
-    // iOS 9 以上请用这个
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-        Pingpp.handleOpen(url, withCompletion: nil)
-        UMSocialSnsService.handleOpen(url)
-        
         //growing io
         if Growing.handle(url) {
             return true

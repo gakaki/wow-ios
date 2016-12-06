@@ -1,8 +1,23 @@
 import UIKit
 import wow3rd
 import SafariServices
+
 public class RouterRule {
     
+
+    public class func handle_open_url( url:URL ) -> Bool {
+        
+        let url_full_path = url.absoluteString
+
+        //校验url对应的 host + path 是否为被注册的 key
+        if FNUrlRoute.canOpen(url: url_full_path){
+            FN.open(url:url_full_path)
+            return true
+        }else{
+            print("该url 未能被打开 \(url) ")
+            return false
+        }
+    }
     public class func router_init() {
 
         FNUrlRoute.initUrlRoute(dictionary: ["m.wowdsgn.com/main": RouterModuleMain.self,
@@ -32,8 +47,12 @@ public class RouterRule {
 //            }
         }
 
-        
-        
+//        //校验url对应的 host + path 是否为被注册的 key
+//        let url = "wowdsgn://m.wowdsgn.com/item?id=1275"
+//        if FNUrlRoute.canOpen(url: url){
+//            FN.open(url:url)
+//        }
+       
         
     }
 }

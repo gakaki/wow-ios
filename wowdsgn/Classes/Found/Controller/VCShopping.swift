@@ -28,7 +28,7 @@ class VCShopping: WowBaseVCCartSearch {
     override func setUI() {
         super.setUI()
         
-        self.title = "购物"
+        self.title = "分类"
 
         
         v                               = VCVTMagic()

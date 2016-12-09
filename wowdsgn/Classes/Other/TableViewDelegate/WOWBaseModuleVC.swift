@@ -92,7 +92,18 @@ class WOWBaseModuleVC: WOWBaseViewController {
         
     }
     func requestBottom()  {
+        if isRreshing {
+            return
+        }else{
+            pageIndex = 1
+            isRreshing = true
+        }
         
+        // 关闭动画， 防止下拉刷新此界面再次出来
+
+        LoadView.dissMissView()
+        request()
+
     }
     // json 数据 转成model
     func dataWithHomeModel(result: AnyObject) -> Array<WOWHomeModle> {

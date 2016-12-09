@@ -14,14 +14,18 @@ class WOWBuyCarController: WOWBaseViewController {
 //    private var editingModel    : WOWBuyCarModel?
     fileprivate var totalPrice      : String?
     
+    var isRecommendView : Bool = false // 是否添加过为你推荐的view
+    
     var dataArr = [WOWCarProductModel](){
         didSet{
             /**
              *  如果购物车内没有商品底部view就隐藏
              */
-            if dataArr.isEmpty {
+            if dataArr.count == 0 {
+                showRecommendView()
                 bottomView.isHidden = true
             }else{
+                hideRecommendView()
                 bottomView.isHidden = false
             }
         }
@@ -72,6 +76,7 @@ class WOWBuyCarController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         MobClick.e(.Shoppingcart)
+//        self.view.backgroundColor = UIColor.red
     }
     
     
@@ -270,6 +275,8 @@ class WOWBuyCarController: WOWBaseViewController {
                         //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
                        strongSelf.allbuttonIsSelect()
                     }else {
+//                        showRecommendView()
+                       strongSelf.dataArr = []
                         strongSelf.bottomView.isHidden = true
                     }
                     strongSelf.endRefresh()
@@ -287,7 +294,35 @@ class WOWBuyCarController: WOWBaseViewController {
                     }
             })
     }
-    
+//MARK: 显示购物车为空的界面 ‘为你推荐界面’
+    func showRecommendView(){
+        
+        self.tableView.isHidden = true
+        
+        if isRecommendView == true {
+             self.recommendView.isHidden = false
+        }else {
+            
+            isRecommendView == true
+            self.view.addSubview(self.recommendView)
+        }
+   
+       
+    }
+    func hideRecommendView(){
+        self.recommendView.isHidden = true
+        self.tableView.isHidden = false
+//        self.view.addSubview(self.recommendView)
+        
+    }
+
+    lazy var recommendView: UIView = {
+        
+        let view = Bundle.main.loadNibNamed("WOWRecommendView", owner: self, options: nil)?.last as! WOWRecommendView
+        view.frame = self.view.bounds
+        return view
+        
+    }()
     /**
      3.删除购物车数据
      - parameter items:
@@ -523,18 +558,18 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         asyncUpdateCount(model.shoppingCartId!, productQty: count, indexPath: indexPath)
     }
     
-    //MARK: - EmptyData
-    func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
-        return UIImage(named: "buyCarEmpty")
-    }
-    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "您的购物车还是空的\n快去逛逛吧"
-        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
-        return attri
-    }
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
-    }
+//    //MARK: - EmptyData
+//    func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
+//        return UIImage(named: "buyCarEmpty")
+//    }
+//    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+//        let text = "您的购物车还是空的\n快去逛逛吧"
+//        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
+//        return attri
+//    }
+//    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+//        return true
+//    }
     
     //MARK: - alertView
     func alertView(_ model: WOWCarProductModel) {
@@ -562,6 +597,7 @@ extension WOWBuyCarController: buyCarDelegate {
             let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
             vc.hideNavigationBar = true
             vc.productId = productId
+//            vc.delegate = self
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -577,6 +613,10 @@ extension WOWBuyCarController: orderCarDelegate {
         }
     }
 }
-
+//extension WOWBuyCarController:UpdateBuyCarListDelegate {
+//    func updateBuyCarList(){
+//        request()
+//    }
+//}
 
 

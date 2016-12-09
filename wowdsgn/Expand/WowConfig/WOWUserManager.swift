@@ -24,6 +24,8 @@ struct WOWUserManager {
      static let WOWUserAgeRange      = "WOWUserAgeRange"
      static let WOWUserLoginStatus   = "WOWUserLoginStatus"
      static let WOWUserPhotoData     = "WOWUserPhotoData"
+     static let WOWDeviceToken       = "WOWDeviceToken"
+
 
 
     static var wechatToken = ""
@@ -37,7 +39,15 @@ struct WOWUserManager {
             MGDefault.synchronize()
         }
     }
-
+    static var deviceToken:String {
+        get{
+            return (MGDefault.object(forKey: WOWDeviceToken) as? String) ?? ""
+        }
+        set{
+            MGDefault.set(newValue, forKey:WOWDeviceToken)
+            MGDefault.synchronize()
+        }
+    }
     static var userCarCount:Int{
         get{
             return (MGDefault.object(forKey: WOWUserCarCount) as? Int) ?? 0

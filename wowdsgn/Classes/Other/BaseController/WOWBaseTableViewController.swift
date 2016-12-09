@@ -11,7 +11,14 @@ import UIKit
 class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource {
 //    var reuestIndex = 0 //翻页
 //    var isRreshing : Bool = false
-    var carBadgeCount: MIBadgeButton?
+    
+    lazy var rightNagationItem:WOWRightNavigationItem = {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWRightNavigationItem.self), owner: self, options: nil)?.last as! WOWRightNavigationItem
+        view.newView.setCornerRadius(radius: 4)
+        view.buyCarButton.addTarget(self, action: #selector(toVCCart), for: .touchUpInside)
+        view.infoButton.addTarget(self, action: #selector(toVCMessageCenter), for: .touchUpInside)
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()

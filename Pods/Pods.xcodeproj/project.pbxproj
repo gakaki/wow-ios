@@ -940,7 +940,7 @@
 		E6DE13C5FB0BF34810D4ED3246CD166E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC1F32751B9DDE61508A86608F5938D /* Foundation.framework */; };
 		E74F8DF0C6EEAD05D2D2133F008EB97F /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9163682EEEDBB81657BFB58C7FC0F /* Zip.swift */; };
 		E7B94D9E90D84338754EF25A5D2D2420 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 476EEA68FF01D61D36813C4C6C9D6020 /* UIButton+WebCache.m */; };
-		E7E89FA0BC737DCFD609A202A7FF7DD4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D1B7F5CA7F53B03E79C4938347192A /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E7E89FA0BC737DCFD609A202A7FF7DD4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D1B7F5CA7F53B03E79C4938347192A /* UserNotifications.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		E80DB5D9B2D35085282DF057BB540AFE /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C34DD2DDCF2BD937D73D35D490908FD /* MJRefreshBackFooter.m */; };
 		E82787564F8EC45D756C1EC700771662 /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8668F3A6CBED322B4A84A412864C93 /* ConstraintMakerPriortizable.swift */; };
 		E86463B05F143F00D50C1047667DB945 /* TakeLast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1E062853C99714A0BE3C56FD2689E /* TakeLast.swift */; };

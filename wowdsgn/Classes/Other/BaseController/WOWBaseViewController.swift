@@ -37,7 +37,6 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
     var hideNavigationBar:Bool = false
     var pageIndex = 1 //翻页
     var isRreshing : Bool = false
-    var carBadgeCount: MIBadgeButton?
     var isCurrentRequest : Bool = false // 记录当前页面是否网络请求过，区别是第一次进网络请求，还是下拉刷新进入网络请求
     
     override public func viewDidLoad() {
@@ -143,7 +142,13 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
         return f
     }()
     
-   
+    lazy var rightNagationItem:WOWRightNavigationItem = {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWRightNavigationItem.self), owner: self, options: nil)?.last as! WOWRightNavigationItem
+        view.newView.setCornerRadius(radius: 4)
+        view.buyCarButton.addTarget(self, action: #selector(toVCCart), for: .touchUpInside)
+        view.infoButton.addTarget(self, action: #selector(toVCMessageCenter), for: .touchUpInside)
+        return view
+    }()
     
 //MARK:Private Method
     func setUI(){
@@ -217,30 +222,16 @@ extension WOWBaseViewController{
 extension WOWBaseViewController {
     func configBuyBarItem(){
         
-        carBadgeCount = MIBadgeButton(type: .custom)
-        carBadgeCount!.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
-        carBadgeCount!.setImage(UIImage(named: "buy"), for: UIControlState())
         if WOWUserManager.userCarCount <= 0 {
-            carBadgeCount!.badgeString = ""
+            rightNagationItem.buyCarButton.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
             
-            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+            rightNagationItem.buyCarButton.badgeString = "\(WOWUserManager.userCarCount)"
         }else {
-            carBadgeCount!.badgeString = "99+"
+            rightNagationItem.buyCarButton.badgeString = "99+"
         }
 
-        makeBuyCarNavigationItem(carBadgeCount!){[weak self] () -> () in
-            if let strongSelf = self{
-                guard WOWUserManager.loginStatus else {
-                    strongSelf.toLoginVC(true)
-                    return
-                }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController.self)) as! WOWBuyCarController
-                vc.hideNavigationBar = false
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
-        
+        makeRightNavigationItem(rightNagationItem)
         makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchController.self)) as! WOWSearchController
@@ -253,13 +244,14 @@ extension WOWBaseViewController {
     
     func updateBageCount() {
         if WOWUserManager.userCarCount <= 0 {
-            carBadgeCount!.badgeString = ""
+            rightNagationItem.buyCarButton.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
             
-            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+            rightNagationItem.buyCarButton.badgeString = "\(WOWUserManager.userCarCount)"
         }else {
-            carBadgeCount!.badgeString = "99+"
+            rightNagationItem.buyCarButton.badgeString = "99+"
         }
+        
         
     }
 
@@ -267,30 +259,18 @@ extension WOWBaseViewController {
 
 extension WOWBaseTableViewController {
     
-    func configBuyBarItem(_ badgeCount: Int){
-        
-        carBadgeCount = MIBadgeButton(type: .custom)
-        carBadgeCount!.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
-        carBadgeCount!.setImage(UIImage(named: "buy"), for: UIControlState())
+    func configBuyBarItem(){
         if WOWUserManager.userCarCount <= 0 {
-            carBadgeCount!.badgeString = ""
+            rightNagationItem.buyCarButton.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
             
-            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+            rightNagationItem.buyCarButton.badgeString = "\(WOWUserManager.userCarCount)"
         }else {
-            carBadgeCount!.badgeString = "99+"
+            rightNagationItem.buyCarButton.badgeString = "99+"
         }
-        makeBuyCarNavigationItem(carBadgeCount!){[weak self] () -> () in
-            if let strongSelf = self{
-                guard WOWUserManager.loginStatus else {
-                    strongSelf.toLoginVC(true)
-                    return
-                }
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController.self)) as! WOWBuyCarController
-                vc.hideNavigationBar = false
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+
+        makeRightNavigationItem(rightNagationItem)
+
         makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
             if let strongSelf = self{
                 let vc = UIStoryboard.initialViewController("Home", identifier: String(describing: WOWSearchController.self)) as! WOWSearchController
@@ -303,15 +283,15 @@ extension WOWBaseTableViewController {
     
     func updateBageCount() {
         if WOWUserManager.userCarCount <= 0 {
-            carBadgeCount!.badgeString = ""
+            rightNagationItem.buyCarButton.badgeString = ""
         }else if WOWUserManager.userCarCount > 0 && WOWUserManager.userCarCount <= 99{
             
-            carBadgeCount!.badgeString = "\(WOWUserManager.userCarCount)"
+            rightNagationItem.buyCarButton.badgeString = "\(WOWUserManager.userCarCount)"
         }else {
-            carBadgeCount!.badgeString = "99+"
+            rightNagationItem.buyCarButton.badgeString = "99+"
         }
         
     }
-    
+
 
 }

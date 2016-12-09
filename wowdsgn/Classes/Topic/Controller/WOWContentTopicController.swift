@@ -89,7 +89,7 @@ class WOWContentTopicController: WOWBaseViewController {
      //MARK:    - lazy
     lazy var nagationItem:WOWTopicNavigationItem = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWTopicNavigationItem.self), owner: self, options: nil)?.last as! WOWTopicNavigationItem
-        view.thumbButton.addTarget(self, action: #selector(dzClick), for: .touchDown)
+        view.thumbButton.addTarget(self, action: #selector(dzClick), for: .touchUpInside)
         view.shareButton.addTarget(self, action: #selector(fxClick), for: .touchUpInside)
         view.buyCarBUttion.addTarget(self, action: #selector(bcClick), for: .touchUpInside)
         return view

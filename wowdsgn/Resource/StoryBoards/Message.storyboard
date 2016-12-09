@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--消息中心-->
+        <scene sceneID="86b-H0-KLT">
+            <objects>
+                <viewController storyboardIdentifier="WOWMessageController" title="消息中心" id="CER-ed-c70" customClass="WOWMessageController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="orw-Ez-eJ9"/>
+                        <viewControllerLayoutGuide type="bottom" id="KkG-aA-kd4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ujE-hE-irp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="67u-iM-mXA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KkG-aA-kd4" firstAttribute="top" secondItem="67u-iM-mXA" secondAttribute="bottom" id="6Kw-dZ-cjP"/>
+                            <constraint firstAttribute="trailing" secondItem="67u-iM-mXA" secondAttribute="trailing" id="EJo-3E-oR6"/>
+                            <constraint firstItem="67u-iM-mXA" firstAttribute="leading" secondItem="ujE-hE-irp" secondAttribute="leading" id="EYX-hK-7DV"/>
+                            <constraint firstItem="67u-iM-mXA" firstAttribute="top" secondItem="ujE-hE-irp" secondAttribute="top" id="yjb-Vr-6z3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="67u-iM-mXA" id="K4w-oa-6bw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V6B-Cv-hCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-207.19999999999999" y="74.212893553223395"/>
+        </scene>
+        <!--系统消息-->
+        <scene sceneID="8Jd-62-wAV">
+            <objects>
+                <viewController storyboardIdentifier="WOWMessageInfoController" title="系统消息" id="ipa-yp-zSR" customClass="WOWMessageInfoController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bPF-cP-cO5"/>
+                        <viewControllerLayoutGuide type="bottom" id="XfZ-UH-BEp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gh4-3m-T7y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="usg-Xu-wyl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="usg-Xu-wyl" firstAttribute="leading" secondItem="Gh4-3m-T7y" secondAttribute="leading" id="5Pp-fk-4rf"/>
+                            <constraint firstItem="usg-Xu-wyl" firstAttribute="top" secondItem="Gh4-3m-T7y" secondAttribute="top" id="j6g-z9-JfQ"/>
+                            <constraint firstAttribute="trailing" secondItem="usg-Xu-wyl" secondAttribute="trailing" id="mYa-1U-8yl"/>
+                            <constraint firstItem="XfZ-UH-BEp" firstAttribute="top" secondItem="usg-Xu-wyl" secondAttribute="bottom" id="nLv-uo-bBN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="usg-Xu-wyl" id="Axs-Vv-bMC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tIn-Hd-dCO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="532" y="412.44377811094455"/>
+        </scene>
+    </scenes>
+</document>

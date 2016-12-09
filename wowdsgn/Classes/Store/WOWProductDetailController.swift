@@ -467,7 +467,6 @@ class WOWProductDetailController: WOWBaseViewController {
                 }
                 //初始化详情页数据
                 strongSelf.configData()
-               
                 strongSelf.endRefresh()
             }
             

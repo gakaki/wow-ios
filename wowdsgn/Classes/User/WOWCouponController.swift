@@ -268,14 +268,7 @@ extension WOWCouponController: WOWCouponNumberViewDelegate{
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
         return attri
     }
-//    func customView(forEmptyDataSet scrollView: UIScrollView!) -> UIView! {
-//        let view = Bundle.main.loadNibNamed(String(describing: WOWCouponEmptyView.self), owner: self, options: nil)?.last as! WOWCouponEmptyView
-//        view.frame.size = CGSize(width: MGScreenWidth, height: MGScreenHeight)
-//        //        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
-//      
-//        view.backgroundColor = UIColor.blue
-//        return view
-//    }
+
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }

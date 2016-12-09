@@ -647,9 +647,9 @@ extension RequestApi:TargetType{
         }
         DLog(WOWUserManager.sessionToken)
         if WOWUserManager.sessionToken.isEmpty {
-            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2"]
+            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2", "deviceToken": WOWUserManager.deviceToken]
         }else {
-            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2","sessionToken":WOWUserManager.sessionToken]
+            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2","sessionToken":WOWUserManager.sessionToken, "deviceToken": WOWUserManager.deviceToken]
         }
         
 

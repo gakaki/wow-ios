@@ -11,7 +11,7 @@
         <!--Navigation Controller-->
         <scene sceneID="qzf-Qc-uQM">
             <objects>
-                <navigationController id="6EW-pu-eZe" sceneMemberID="viewController">
+                <navigationController id="6EW-pu-eZe" customClass="WOWNavigationController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PBg-9H-7iv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

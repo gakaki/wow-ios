@@ -44,20 +44,11 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
         }
         
     }
-    
-    public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
-        
-        print(deviceToken)
-        // 1.2.7版本开始不需要用户再手动注册devicetoken，SDK会自动注册
-        UMessage.registerDeviceToken(deviceToken)
-        //        JPUSHService.registerDeviceToken(deviceToken)
-        
-    }
-    
+  
     
     //iOS10以下使用这个方法接收通知
 //    public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-//        //关闭友盟自带的弹出框
+//        //关闭友https://img.alicdn.com/consult/TB1vZKXOFXXXXabapXXwu0bFXXX.png盟自带的弹出框
 //        UMessage.setAutoAlert(false)
 //        pushController(userInfo: userInfo)
 //        UMessage.didReceiveRemoteNotification(userInfo)

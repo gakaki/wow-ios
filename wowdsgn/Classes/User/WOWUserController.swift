@@ -49,7 +49,7 @@ class WOWUserController: WOWBaseTableViewController {
         super.setUI()
         configHeaderView()
         configClickAction()
-        configBuyBarItem(WOWUserManager.userCarCount) // 购物车数量
+        configBuyBarItem() // 购物车数量
         addObserver()
     }
 
@@ -106,7 +106,7 @@ class WOWUserController: WOWBaseTableViewController {
      */
     fileprivate func configHeaderView(){
         headerView       = WOWUserTopView()
-        configBuyBarItem(WOWUserManager.userCarCount)
+        configBuyBarItem()
         headerView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 75)
         headerView.configShow(WOWUserManager.loginStatus)
         headerView.topContainerView.addAction {[weak self] in

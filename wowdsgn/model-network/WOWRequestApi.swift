@@ -18,6 +18,8 @@ public enum RequestApi{
 
     case api_AD
     case api_Sence
+    case api_checkVersion(params: [String: AnyObject]?)
+    
     
     //Tab 第一个栏 首页 该死的那3个url
     case api_Home_Banners
@@ -222,7 +224,8 @@ extension RequestApi:TargetType{
     
     public var path:String{
         switch self{
-            
+        case .api_checkVersion:
+            return URL_CheckVersion
         case .api_qiniu_token:
             return URL_QINIU_TOKEN
         case .api_AD:
@@ -449,7 +452,8 @@ extension RequestApi:TargetType{
             .api_TopicCommentList,
             .api_ProductCommentList,
             .api_OrderComment,
-            .api_ProductAbout:
+            .api_ProductAbout,
+            .api_checkVersion:
 
             return .GET
 
@@ -605,6 +609,9 @@ extension RequestApi:TargetType{
             
             case .api_Home_Banners():
                 params =  ["pageType":1]
+            
+            case let.api_checkVersion(param):
+                params = param!
             
             case let .api_Home_List(param):
                 params = param!

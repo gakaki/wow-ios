@@ -11,7 +11,7 @@ import UIKit
 
 class WOWController: WOWBaseModuleVC {
 
-    
+    var isCheackUpdate : Bool = false
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     
     var bottomListArray = [WOWProductModel]() //底部列表数组
@@ -28,30 +28,26 @@ class WOWController: WOWBaseModuleVC {
         setUI()
         addObserver()
         request()
-        // 检查更新 
-//        WOWCheckUpdate.checkUpdateWithDevice {[weak self] (isUpdate) in
-//            if let strongSelf = self{
-//                if isUpdate ?? false {
-//                    
-//                    strongSelf.goToUpdateVersion()
-//                }
-//            }
-//        }
-//
+       //
+    }
+    func checkUpdate() {
+        // 检查更新
+        WOWCheckUpdate.checkUpdateWithDevice {[weak self] (isUpdate) in
+            if let strongSelf = self{
+                if isUpdate ?? false {
+                    DispatchQueue.main.async {
+                        strongSelf.goToUpdateVersion()
+                    }
+                    
+                }
+            }
+        }
+
     }
     func goToUpdateVersion()  {
-        let alert = UIAlertController(title: "提示", message: "版本有更新", preferredStyle: .alert)
         
-        let action_sure = UIAlertAction(title: "更新", style: .default) { (action) in
-            let url = NSURL(string: "https://itunes.apple.com/us/app/jian-jiao-she-ji-sheng-huo/id1110300308?mt=8")
-            UIApplication.shared.openURL(url! as URL)
-
-        }
-        let action_cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        alert.addAction(action_sure)
-        alert.addAction(action_cancel)
-        
-        present(alert, animated: true, completion: nil)
+        let vc = WOWMaskViewController()
+        self.presentToViewController(viewControllerToPresent: vc, completion: nil)
         
     }
 
@@ -66,6 +62,13 @@ class WOWController: WOWBaseModuleVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//        let delayQueue = DispatchQueue.global()
+//        delayQueue.asyncAfter(deadline: .now() + 5.0) {
+//            
+//            self.checkUpdate()
+//        }
+
+       
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -169,6 +172,10 @@ class WOWController: WOWBaseModuleVC {
                     strongSelf.tableView.reloadData()
                
 //                }
+                
+                if strongSelf.isCheackUpdate == false {
+                    strongSelf.requestCheakVersion()
+                }
                
                
             }
@@ -239,6 +246,31 @@ class WOWController: WOWBaseModuleVC {
             }
         }
     }
+    
+    func requestCheakVersion() {
+        
+        let params = ["appType": 1, "platForm": 1,"version":1.5]
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_checkVersion(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+                strongSelf.isCheackUpdate = true
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.goToUpdateVersion()
+
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.dismiss()
+            }
+        }
+        
+    }
+
+    
+    
   }
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel

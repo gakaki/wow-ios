@@ -28,6 +28,8 @@ let WOWShareUrl                         = "m.wowdsgn.com" // 正式服务器 分
 //#endif
 
 /****************************API_URL接口**********************************/
+let URL_CheckVersion                    = "v1/version/check" 
+
 //1.app首页
 let URL_AD                              = "v1/page/startupimg"
 let URL_category                        = "v1/category/sub-category"

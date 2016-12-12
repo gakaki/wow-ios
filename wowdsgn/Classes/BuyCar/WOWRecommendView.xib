@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WOWRecommendView" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NKE-dz-Khs">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="HaX-4T-J7D"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="qQC-Oa-InE"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="NKE-dz-Khs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8Lh-rR-0j1"/>
+                <constraint firstAttribute="bottom" secondItem="NKE-dz-Khs" secondAttribute="bottom" id="ApP-6j-zsc"/>
+                <constraint firstItem="NKE-dz-Khs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ul2-ih-p1W"/>
+                <constraint firstAttribute="trailing" secondItem="NKE-dz-Khs" secondAttribute="trailing" id="bAc-Nw-PH6"/>
+            </constraints>
+            <connections>
+                <outlet property="tableView" destination="NKE-dz-Khs" id="Xp5-Go-fHV"/>
+            </connections>
+            <point key="canvasLocation" x="-144.5" y="43.5"/>
+        </view>
+    </objects>
+</document>

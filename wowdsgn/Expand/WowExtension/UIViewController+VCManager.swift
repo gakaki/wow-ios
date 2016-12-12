@@ -371,6 +371,12 @@ extension  UIViewController {
         pushVC(vc)
     }
     
+    //跳转消息中心
+    func toVCMessageCenter()  {
+        let vc = UIStoryboard.initialViewController("Message", identifier:String(describing: WOWMessageController.self)) as! WOWMessageController
+        vc.hideNavigationBar = false
+        pushVC(vc)
+    }
     /// 跳转专题列表
     ///   - columntId: 专题ID
     ///   - title: 专题Title

@@ -65,10 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func ADLaunchView(){
         
-//
-//        adLaunchView    = AdLaunchView(frame: UIScreen.main.bounds)
-//        adLaunchView?.delegate = self
-//        window?.addSubview(adLaunchView!)
         lunchView = Bundle.main.loadNibNamed(String(describing: WOWLaunchView.self), owner: self, options: nil)?.last as! WOWLaunchView
         lunchView.frame =  CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight)
         window?.addSubview(lunchView)
@@ -76,15 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.fetchADImage()
     }
     
-//    func closeButtonClick(){
-//        UIView.animate(withDuration: 1, animations: {
-//            self.lunchView.alpha = 0
-//        }, completion: {[weak self] (finished: Bool) in
-//            if let strongSelf = self {
-//                strongSelf.lunchView.removeFromSuperview()
-//            }
-//        })
-//        
+  
 //    }
     
     func asyncLoad(){
@@ -95,7 +83,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+        
+
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        
+        // Print it to console
+        print("APNs device token: \(deviceTokenString)")
+        WOWUserManager.deviceToken = deviceTokenString
+       
+        
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -182,10 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //TalkingData ADTracking
         TalkingDataAppCpa.onReceiveDeepLink(url)
-            
-//        if MonkeyKing.handleOpenURL(url) {
-//            return true
-//        }
+        
         if UMSocialSnsService.handleOpen(url) {
             return true
         }
@@ -406,13 +401,7 @@ extension AppDelegate{
         navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black] //导航栏标题颜色
         navBar.tintColor = UIColor.black //导航栏元素颜色
         
-//        let tabBar = UITabBar.appearance()
-//        tabBar.barTintColor = tabBackColor
-//        tabBar.isTranslucent = false
-//        
-//        let tabBarItem = UITabBarItem.appearance()
-//        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel3], for: .normal)
-//        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:GrayColorlevel1], for: .selected)
+
     }
     //iOS10以下使用这个方法接收通知
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

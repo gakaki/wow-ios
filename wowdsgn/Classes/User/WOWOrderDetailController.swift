@@ -48,6 +48,8 @@ struct CellHight {
     static var minHight         : CGFloat        = 0.01
     /// hight : 40
     static var fooderHight      : CGFloat        = 40
+    /// hight : 38 标注 “收货人，商品清单”之类的
+    static var headerHight      : CGFloat        = 38
 }
 class WOWOrderDetailController: WOWBaseViewController{
 
@@ -894,14 +896,14 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 0:
                 return CellHight.minHight
             case 1 , 2:
-                return 38
+                return CellHight.headerHight
                 
             case goodsArray.count + 2:
                 switch goodsNoArray.count {
                 case 0:
                     return 0.01
                 default:
-                    return 38
+                    return CellHight.headerHight
                 }
                 
             case goodsArray.count + 3 :
@@ -914,11 +916,16 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         default:
             switch section {
             case 0:
-                return CellHight.minHight
+                if OrderDetailNewaType == .payMent {
+                    return CellHight.headerHight
+                }else{
+                    return CellHight.minHight
+                }
+                
             case 3:
                 return 12
             default:
-                return 38
+                return CellHight.headerHight
             }
             
         }
@@ -928,13 +935,13 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
 
         switch OrderDetailNewaType {
         case .payMent:
-            let titles = [" ","收货人","商品清单","","支付方式"]
-            let heights = [CellHight.minHight,38,38,12,38]
-            return headerSectionView(titles[section], headetHeight: heights[section])
+            let titles = ["Timer","收货人","商品清单","","支付方式"]
+            let heights = [CellHight.headerHight,CellHight.headerHight,CellHight.headerHight,12,CellHight.headerHight]
+            return headerSectionView(titles[section], headetHeight: CGFloat(heights[section]))
 
         case .forGoods,.noForGoods,.finish:
             let titles = [" ","收货人","商品清单",""]
-            let heights = [CellHight.minHight,38,38,12]
+            let heights = [CellHight.minHight,CellHight.headerHight,CellHight.headerHight,12]
             return headerSectionView(titles[section], headetHeight: heights[section])
         case .someFinishForGoods:
             
@@ -942,12 +949,12 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 0:
                 return headerSectionView(" ", headetHeight: CellHight.minHight)
             case 1:
-                return headerSectionView("收货人", headetHeight: 38)
+                return headerSectionView("收货人", headetHeight: CellHight.headerHight)
             case 2:
                 if isSomeForGoodsType == true {
-                    return headerSectionView("已发货商品清单", headetHeight: 38)
+                    return headerSectionView("已发货商品清单", headetHeight: CellHight.headerHight)
                 }else{
-                    return headerSectionView("商品清单", headetHeight: 38)
+                    return headerSectionView("商品清单", headetHeight: CellHight.headerHight)
                 }
                 
             case goodsArray.count + 2:
@@ -956,7 +963,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 case 0:
                     return headerSectionView(" ", headetHeight: CellHight.minHight)
                 default:
-                    return headerSectionView("未发货商品清单", headetHeight: 38)
+                    return headerSectionView("未发货商品清单", headetHeight: CellHight.headerHight)
                 }
                 
                 
@@ -1042,8 +1049,15 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         }
         
     }
+    
     // 页眉View
-    func headerSectionView(_ headerTitle:String,headetHeight:CGFloat) -> UIView {
+    func headerSectionView(_ headerTitle:String,headetHeight:CGFloat,isTimerView:Bool = false) -> UIView {
+        guard headerTitle != "Timer" else { // 倒计时view
+            let redView = UIView()
+             redView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: headetHeight)
+            redView.backgroundColor = UIColor.red
+            return redView
+        }
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: headetHeight)
         view.backgroundColor = GrayColorLevel5
@@ -1170,6 +1184,10 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             headerView.textLabel?.font = Fontlevel003
         }
     }
+    
+    
+    
+    
 }
 extension WOWOrderDetailController:UserCommentSuccesDelegate, WOWOrderDetailNewCellDelegate {
     

@@ -790,7 +790,7 @@
             </objects>
             <point key="canvasLocation" x="582" y="947"/>
         </scene>
-        <!--Empty Data Set Delegate-->
+        <!--优惠券-->
         <scene sceneID="LzA-Z9-CHs">
             <objects>
                 <viewController storyboardIdentifier="WOWCouponController" title="优惠券" hidesBottomBarWhenPushed="YES" id="ASn-Ht-XYD" customClass="WOWCouponController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
@@ -808,8 +808,6 @@
                                 <connections>
                                     <outlet property="dataSource" destination="ASn-Ht-XYD" id="lOn-iZ-CZ4"/>
                                     <outlet property="delegate" destination="ASn-Ht-XYD" id="KdP-ee-0eQ"/>
-                                    <outlet property="emptyDataSetDelegate" destination="ASn-Ht-XYD" id="nR5-F4-SSk"/>
-                                    <outlet property="emptyDataSetSource" destination="ASn-Ht-XYD" id="UH1-RJ-Inx"/>
                                 </connections>
                             </tableView>
                         </subviews>

@@ -24,14 +24,17 @@
                                 <constraint firstAttribute="height" constant="90" id="SeO-vS-Dsb"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttI-Mh-Qzd">
-                            <rect key="frame" x="120" y="15" width="0.0" height="0.0"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sf按实际不放假阿巴斯的饭卡好几十爱空间双方都罢科技" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttI-Mh-Qzd">
+                            <rect key="frame" x="120" y="15" width="202" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lt0-VW-gYn">
-                            <rect key="frame" x="120" y="103" width="0.0" height="0.0"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lt0-VW-gYn">
+                            <rect key="frame" x="120" y="68" width="21" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="W8T-sx-twj"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -48,20 +51,20 @@
                                 <action selector="closeButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dur-Oy-34K"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKs-F8-49X">
-                            <rect key="frame" x="120" y="105" width="0.0" height="0.0"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="看脚后跟" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKs-F8-49X">
+                            <rect key="frame" x="120" y="88" width="45" height="13.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRg-tA-DvG">
-                            <rect key="frame" x="124" y="103" width="0.0" height="0.0"/>
+                            <rect key="frame" x="145" y="86" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zax-d8-Rgu">
-                            <rect key="frame" x="124" y="105" width="0.0" height="0.0"/>
+                            <rect key="frame" x="169" y="101.5" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -70,9 +73,11 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Pm8-hJ-vcq" secondAttribute="bottom" constant="20" id="0qY-Cr-Jci"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zKs-F8-49X" secondAttribute="bottom" constant="5" id="EgV-ST-i02"/>
                         <constraint firstItem="zax-d8-Rgu" firstAttribute="bottom" secondItem="zKs-F8-49X" secondAttribute="bottom" id="F7Q-gu-4qc"/>
                         <constraint firstItem="zKs-F8-49X" firstAttribute="top" secondItem="lt0-VW-gYn" secondAttribute="bottom" constant="2" id="Gvm-Ud-Tjk"/>
                         <constraint firstAttribute="trailing" secondItem="hgg-DS-lz6" secondAttribute="trailing" id="NgN-0B-B5h"/>
+                        <constraint firstItem="lt0-VW-gYn" firstAttribute="top" secondItem="ttI-Mh-Qzd" secondAttribute="bottom" constant="10" id="Psk-jz-KxO"/>
                         <constraint firstItem="lt0-VW-gYn" firstAttribute="leading" secondItem="ttI-Mh-Qzd" secondAttribute="leading" id="Sfl-52-vh9"/>
                         <constraint firstItem="zKs-F8-49X" firstAttribute="leading" secondItem="ttI-Mh-Qzd" secondAttribute="leading" id="VMZ-Aq-L2b"/>
                         <constraint firstItem="Pm8-hJ-vcq" firstAttribute="leading" secondItem="gjD-vH-OUv" secondAttribute="leading" constant="15" id="VR4-UZ-XJ7"/>
@@ -82,7 +87,6 @@
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zax-d8-Rgu" secondAttribute="trailing" constant="10" id="bAp-De-INK"/>
                         <constraint firstItem="NRg-tA-DvG" firstAttribute="bottom" secondItem="lt0-VW-gYn" secondAttribute="bottom" id="dgT-qs-qMA"/>
                         <constraint firstItem="hgg-DS-lz6" firstAttribute="top" secondItem="gjD-vH-OUv" secondAttribute="top" id="ehK-MU-B3F"/>
-                        <constraint firstItem="zax-d8-Rgu" firstAttribute="bottom" secondItem="Pm8-hJ-vcq" secondAttribute="bottom" id="ipx-u2-gkX"/>
                         <constraint firstItem="ttI-Mh-Qzd" firstAttribute="leading" secondItem="Pm8-hJ-vcq" secondAttribute="trailing" constant="15" id="pkG-Zg-Apt"/>
                         <constraint firstItem="Pm8-hJ-vcq" firstAttribute="top" secondItem="gjD-vH-OUv" secondAttribute="top" constant="15" id="sGI-vV-VQv"/>
                         <constraint firstItem="zax-d8-Rgu" firstAttribute="leading" secondItem="zKs-F8-49X" secondAttribute="trailing" constant="4" id="yIs-Fh-YfH"/>

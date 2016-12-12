@@ -8,9 +8,12 @@
 
 import UIKit
 
-
+protocol UpdateBuyCarListDelegate:class {
+    func updateBuyCarList()
+}
 
 class WOWProductDetailController: WOWBaseViewController {
+    weak var delegate:UpdateBuyCarListDelegate?
     //Param
     var productId                       : Int?
     var productModel                    : WOWProductModel?
@@ -464,7 +467,6 @@ class WOWProductDetailController: WOWBaseViewController {
                 }
                 //初始化详情页数据
                 strongSelf.configData()
-               
                 strongSelf.endRefresh()
             }
             
@@ -501,6 +503,9 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.productId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self](result, code) in
                 if let strongSelf = self {
                     strongSelf.updateCarBadge(product.productQty ?? 1)
+                    if let del = strongSelf.delegate {
+                        del.updateBuyCarList()
+                    }
                 }
                 
             }) { (errorMsg) in

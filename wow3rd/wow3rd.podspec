@@ -20,7 +20,7 @@ wowdsgn集成各种第三方库
   # s.resource_bundles = {
   #   'wow3rd' => ['wow3rd/Assets/*.png']
   # }
-  s.framework             = 'UserNotifications'
+  s.weak_framework        = 'UserNotifications'
   s.library               = 'z'
 
   s.public_header_files   = 'wow3rd/libs/**/*.h'
@@ -31,8 +31,7 @@ wowdsgn集成各种第三方库
 #  s.dependency 'WebViewJavascriptBridge', '~> 5.0'
 #  s.dependency 'SwiftWebViewBridge', '~> 0.2.0'
   s.dependency 'WebViewBridge.Swift'
-
-
+  s.dependency 'Pingpp','~> 2.2.10'
 
 
   # s.frameworks = 'UIKit', 'MapKit'

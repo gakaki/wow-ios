@@ -217,11 +217,16 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
 //            productSpecModel = p
-            //循环遍历产品列表，找出当前id对应的sku，如果找不到该商品则默认取数组中第一个。（不知道为什么会娶不到当前的，反正后台是让这么做的）
+            //循环遍历产品列表，找出当前id对应的sku，如果找不到该商品则默认取数组中第一个。（
+            
             if let productArray = p.products {
+                
                 for product in productArray {
+                    
                     if product.productId == WOWBuyCarMananger.sharedBuyCar.productId {
+                        
                         productInfo = product
+                        
                     }
                 }
                 
@@ -245,12 +250,17 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             }
             //把选出的产品对应的sku选中，😔这个循环太烦了。
             if let attributes = productInfo?.attributes {
+                
                 //先遍历产品几种规格的数组，代表有几个可选的类型，比如：颜色，尺寸
                 for proSpec in attributes.enumerated() {
+                    
                     //再把这个产品的颜色、尺寸等去对应所有的颜色，尺寸。如果名字一样的话就置为已选中状态
                     for serial in serialAttributeArr[proSpec.offset].specName {
+                        
                         if proSpec.element.attributeValue == serial.specName {
+                            
                             serial.isSelect = true
+                            
                             continue
                         }
                     }
@@ -270,16 +280,12 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             skuCount = skuCount == 0 ? 1 : skuCount
             showResult(count: skuCount)
         }else{
-//            if colorIndex >= 0 && specIndex >= 0 {
                 if productInfo?.availableStock! > skuCount {
                     skuCount += 1
                 }else {
                     WOWHud.showMsg("库存不足")
                 }
-                
-//            }else {
-//                skuCount += 1
-//            }
+            
             showResult(count: skuCount)
         }
     }
@@ -289,13 +295,19 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
      - parameter count: 传入数量
      */
     private func showResult(count:Int){
+        
         if count <= 1 {
+            
             subButton.isEnabled = false
             subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
+            
         }else {
+            
             subButton.isEnabled = true
             subButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            
         }
+        
         self.countTextField.text = "\(count)"
     }
 
@@ -317,9 +329,11 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         if let productInfo = productInfo {
             goodsImageView.set_webimage_url(productInfo.productImg)
             nameLabel.text = productInfo.productTitle ?? ""
+            
             //格式化价格，加上¥。并且保留两位小数
             let result = WOWCalPrice.calTotalPrice([productInfo.sellPrice ?? 0],counts:[1])
             perPriceLabel.text = result
+            
             //如果有原价的话，就判断原价跟销售价的大小，如果原价大于销售价则显示下划线的原价
             if let originalPrice = productInfo.originalprice {
                 if originalPrice > productInfo.sellPrice{
@@ -332,19 +346,26 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
                     originalPriceLabel.text = ""
                 }
             }
+            
             //格式化产品的尺寸L-W-H
             let sizeStr = productSize(productInfo: productInfo)
             let weightStr = productWeight(productInfo: productInfo)
             let str = String(format:"%@ %@",sizeStr,weightStr)
             sizeTextLabel.text = str
 //            weightLabel.text = productWeight(productInfo: productInfo)
+            
             //这个还要判断下产品的状态，只有在上架的状态下才判断产品有没有库存
             if productInfo.productStatus == 1 {
+                
                 productStock(productInfo.hasStock ?? false)
+                
             }
+            
             //当产品状态为2的时候商品已下架
             if productInfo.productStatus == 2 {
+                
                 productUndercarriage()
+                
             }
         }
     }
@@ -765,14 +786,6 @@ extension WOWGoodsBuyView:CAAnimationDelegate {
         let animation = CAKeyframeAnimation(keyPath: "position")
         
         animation.path = self.path.cgPath
-        
-        //旋转动画
-//        let expandAnimation1 = CABasicAnimation(keyPath: "transform.rotation.z")
-//        
-//        expandAnimation1.duration = 1.0
-//        expandAnimation1.repeatCount = 1
-//        expandAnimation1.fromValue = NSNumber(float: 0.0)
-//        expandAnimation1.toValue = NSNumber(double: 10 * M_PI)
         
         
         //到中间的动画

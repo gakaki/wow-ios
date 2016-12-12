@@ -31,6 +31,7 @@ class WOWMessageController: WOWBaseViewController {
         //隐藏消息按钮
         rightNagationItem.infoButton.isHidden = true
         rightNagationItem.newView.isHidden = true
+        
         tableView.mj_header = self.mj_header
         tableView.delegate = self
         tableView.dataSource = self
@@ -51,15 +52,18 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMessageCenterCell
         
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //跳转消息中心
             let vc = UIStoryboard.initialViewController("Message", identifier:String(describing: WOWMessageInfoController.self)) as! WOWMessageInfoController
@@ -71,6 +75,7 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
     func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "no_message_icon")
     }
+    
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "还没有消息"
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])

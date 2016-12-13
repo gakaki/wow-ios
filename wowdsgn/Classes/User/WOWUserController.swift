@@ -273,8 +273,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
     }
     
     fileprivate func evaluateApp(){
-        let url = URL(string:"https://itunes.apple.com/cn/app/jian-jiao-she-ji/id1110300308?mt=8")
-        UIApplication.shared.openURL(url!)
+        GoToItunesApp.show()
     }
     
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {

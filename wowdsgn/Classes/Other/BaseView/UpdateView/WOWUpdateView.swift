@@ -95,14 +95,17 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
       
         switch sender.tag {
         case 0:
+            
+            if let del = delegate{
+                del.actionBlcok()
+            }
             print("点击取消")
         case 1:
             print("点击更新")
+            GoToItunesApp.show()
         default:break
         }
-        if let del = delegate{
-            del.actionBlcok()
-        }
+       
     }
     func updateAction()  {
         

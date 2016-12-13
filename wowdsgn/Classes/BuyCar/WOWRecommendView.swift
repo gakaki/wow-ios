@@ -100,6 +100,8 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
         self.tableView.estimatedRowHeight = 410
         self.tableView.mj_header = mj_header
         self.tableView.mj_footer = mj_footer
+        self.backgroundColor = DefaultBackColor
+        self.tableView.backgroundColor = DefaultBackColor
         self.tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
         addObserver()
         requestBottom()

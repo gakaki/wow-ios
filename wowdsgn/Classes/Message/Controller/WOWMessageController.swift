@@ -11,15 +11,14 @@ import UIKit
 class WOWMessageController: WOWBaseViewController {
     @IBOutlet var tableView: UITableView!
     
-    var messageMain: WOWMessageMainModel?
-    var numberRow: Int    = 0
+    var messageArr: [WOWMessageModel]?
     
     let cellID = String(describing: WOWMessageCenterCell.self)
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        request()
         // Do any additional setup after loading the view.
     }
 
@@ -40,6 +39,8 @@ class WOWMessageController: WOWBaseViewController {
         tableView.dataSource = self
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+        tableView.backgroundColor = GrayColorLevel5
+        tableView.separatorColor = SeprateColor
         tableView.estimatedRowHeight = 130
         tableView.register(UINib.nibName(cellID), forCellReuseIdentifier: cellID)
 
@@ -48,8 +49,9 @@ class WOWMessageController: WOWBaseViewController {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_MessageMain, successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
-                let model = Mapper<WOWMessageMainModel>().map(JSONObject:result)
-                strongSelf.messageMain = model
+                let r                                     =  JSON(result)
+                let arr = Mapper<WOWMessageModel>().mapArray(JSONObject:r["messageLists"].arrayObject)
+                strongSelf.messageArr = arr
                 strongSelf.configData()
                 strongSelf.endRefresh()
             }
@@ -73,13 +75,23 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberRow
+        return messageArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMessageCenterCell
-        
+        if let array = messageArr {
+            cell.showData(model: array[indexPath.row])
+            //如果是最后一行的话隐藏横线
+            if array.count > 0 {
+                if indexPath.row == array.count - 1 {
+                    cell.lineView.isHidden = true
+                }else {
+                    cell.lineView.isHidden = false
+                }
+            }
+        }
         return cell
     }
     
@@ -87,6 +99,7 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
         //跳转消息中心
             let vc = UIStoryboard.initialViewController("Message", identifier:String(describing: WOWMessageInfoController.self)) as! WOWMessageInfoController
             vc.hideNavigationBar = false
+            vc.msgType = messageArr?[indexPath.row].msgType
             pushVC(vc)
     }
     

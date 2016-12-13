@@ -9,26 +9,12 @@
 import UIKit
 import ObjectMapper
 
-class WOWMessageMainModel: WOWBaseModel,Mappable {
-    var userMessageUnReadCount      : Int?
-    var systemMessageUnReadCount    : Int?
-    var userMessageVo               : WOWMessageModel?
-    var systemMessageVo             : WOWMessageModel?
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        userMessageUnReadCount      <- map["userMessageUnReadCount"]
-        systemMessageUnReadCount    <- map["systemMessageUnReadCount"]
-        userMessageVo               <- map["userMessageVo"]
-        systemMessageVo             <- map["systemMessageVo"]
-    }
-}
+
 
 class WOWMessageModel: WOWBaseModel,Mappable {
     var messageId                   : Int?
+    var msgType                     : Int?
+    var unReadCount                 : Int?
     var msgTitle                    : String?
     var msgContent                  : String?
     var openType                    : Int?
@@ -44,6 +30,8 @@ class WOWMessageModel: WOWBaseModel,Mappable {
     
     func mapping(map: Map) {
         messageId                   <- map["messageId"]
+        msgType                     <- map["msgType"]
+        unReadCount                 <- map["unReadCount"]
         msgTitle                    <- map["msgTitle"]
         msgContent                  <- map["msgContent"]
         openType                    <- map["openType"]

@@ -21,11 +21,6 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
     open var bottomListCount    = 0 // 底部数组个数
     open var bottomCellLine     = 0 // 底部cell number
     @IBOutlet weak var tableView: UITableView!
-//    var dataArr = [String](){
-//        didSet{
-//            tableView.reloadData()
-//        }
-//    }
     
     lazy var mj_header:WOWRefreshHeader = {
         
@@ -131,12 +126,13 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
                         
                     }
                     if bannerList.count < totalPage {// 如果拿到的数据，小于分页，则说明，无下一页
-                        strongSelf.tableView.mj_footer = nil
-
                         
+                        strongSelf.tableView.mj_footer.endRefreshingWithNoMoreData()
                         
                     }else {
+                        
                         strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                        
                     }
                     
                     strongSelf.bottomListArray.append(contentsOf: bannerList)
@@ -246,12 +242,5 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
         UIApplication.currentViewController()?.toVCProduct(productId)
 
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

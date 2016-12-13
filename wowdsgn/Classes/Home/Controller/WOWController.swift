@@ -173,9 +173,9 @@ class WOWController: WOWBaseModuleVC {
                
 //                }
                 
-//                if strongSelf.isCheackUpdate == false {
-//                    strongSelf.requestCheakVersion()
-//                }                     
+                if strongSelf.isCheackUpdate == false {
+                    strongSelf.requestCheakVersion()
+                }                     
                
                
             }

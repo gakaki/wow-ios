@@ -340,6 +340,12 @@
 		06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869AA1DD19C8E004C05E3 /* Config3rd.swift */; };
 		06F944DE1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */; };
 		2D0043F41DD327D500A7D98A /* WOWTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0043F31DD327D500A7D98A /* WOWTableDelegate.swift */; };
+		2D2331DF1DFF9398006E7BC0 /* WOWUpdateFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2331D91DFF9398006E7BC0 /* WOWUpdateFooter.swift */; };
+		2D2331E01DFF9398006E7BC0 /* WOWUpdateFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2331DA1DFF9398006E7BC0 /* WOWUpdateFooter.xib */; };
+		2D2331E11DFF9398006E7BC0 /* WOWUpdateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2331DB1DFF9398006E7BC0 /* WOWUpdateHeader.swift */; };
+		2D2331E21DFF9398006E7BC0 /* WOWUpdateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2331DC1DFF9398006E7BC0 /* WOWUpdateHeader.xib */; };
+		2D2331E31DFF9398006E7BC0 /* WOWUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2331DD1DFF9398006E7BC0 /* WOWUpdateView.swift */; };
+		2D2331E41DFF9398006E7BC0 /* WOWUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2331DE1DFF9398006E7BC0 /* WOWUpdateView.xib */; };
 		2D509A141DB5D30B0047CD13 /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A101DB5D30B0047CD13 /* WOWController.swift */; };
 		2D509A151DB5D30B0047CD13 /* WOWLikeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */; };
 		2D509A161DB5D30C0047CD13 /* WOWSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A121DB5D30B0047CD13 /* WOWSearchController.swift */; };
@@ -468,9 +474,6 @@
 		63A2F5A01DF95581002DF56F /* WOWMessageInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A2F59E1DF95581002DF56F /* WOWMessageInfoCell.swift */; };
 		63A2F5A11DF95581002DF56F /* WOWMessageInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63A2F59F1DF95581002DF56F /* WOWMessageInfoCell.xib */; };
 		63CBF9D41DFE39E2008D8E8F /* WOWMaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA9DD0A1DF94F4100E7C172 /* WOWMaskViewController.swift */; };
-		63CBF9D51DFE3A26008D8E8F /* WOWUpdateFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA9DD0D1DF94F5B00E7C172 /* WOWUpdateFooter.swift */; };
-		63CBF9D61DFE3A38008D8E8F /* WOWUpdateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA9DD0F1DF94F5B00E7C172 /* WOWUpdateHeader.swift */; };
-		63CBF9D71DFE3A3F008D8E8F /* WOWUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA9DD111DF94F5B00E7C172 /* WOWUpdateView.swift */; };
 		63DD6A591DE29CB9005BE631 /* WOWProductDesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD6A571DE29CB9005BE631 /* WOWProductDesCell.swift */; };
 		63DD6A5A1DE29CB9005BE631 /* WOWProductDesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63DD6A581DE29CB9005BE631 /* WOWProductDesCell.xib */; };
 		63DD6A5D1DE29EFF005BE631 /* WOWProductLimitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD6A5B1DE29EFF005BE631 /* WOWProductLimitCell.swift */; };
@@ -870,6 +873,12 @@
 		06F944DD1DD1A3910055BAFC /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = UMessage/UMessage.h; sourceTree = "<group>"; };
 		215C6F175F8DEB1B0D61D6FA /* Pods-wowdsgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.release.xcconfig"; sourceTree = "<group>"; };
 		2D0043F31DD327D500A7D98A /* WOWTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWTableDelegate.swift; sourceTree = "<group>"; };
+		2D2331D91DFF9398006E7BC0 /* WOWUpdateFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateFooter.swift; sourceTree = "<group>"; };
+		2D2331DA1DFF9398006E7BC0 /* WOWUpdateFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateFooter.xib; sourceTree = "<group>"; };
+		2D2331DB1DFF9398006E7BC0 /* WOWUpdateHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateHeader.swift; sourceTree = "<group>"; };
+		2D2331DC1DFF9398006E7BC0 /* WOWUpdateHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateHeader.xib; sourceTree = "<group>"; };
+		2D2331DD1DFF9398006E7BC0 /* WOWUpdateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateView.swift; sourceTree = "<group>"; };
+		2D2331DE1DFF9398006E7BC0 /* WOWUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateView.xib; sourceTree = "<group>"; };
 		2D509A101DB5D30B0047CD13 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
 		2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWLikeListController.swift; sourceTree = "<group>"; };
 		2D509A121DB5D30B0047CD13 /* WOWSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchController.swift; sourceTree = "<group>"; };
@@ -912,12 +921,6 @@
 		2D509A4F1DB5D3120047CD13 /* WOWSubArtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSubArtCell.xib; sourceTree = "<group>"; };
 		2D764FE41DD06973008D6746 /* WOWCheckUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCheckUpdate.swift; sourceTree = "<group>"; };
 		2DA9DD0A1DF94F4100E7C172 /* WOWMaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWMaskViewController.swift; sourceTree = "<group>"; };
-		2DA9DD0D1DF94F5B00E7C172 /* WOWUpdateFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateFooter.swift; sourceTree = "<group>"; };
-		2DA9DD0E1DF94F5B00E7C172 /* WOWUpdateFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateFooter.xib; sourceTree = "<group>"; };
-		2DA9DD0F1DF94F5B00E7C172 /* WOWUpdateHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateHeader.swift; sourceTree = "<group>"; };
-		2DA9DD101DF94F5B00E7C172 /* WOWUpdateHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateHeader.xib; sourceTree = "<group>"; };
-		2DA9DD111DF94F5B00E7C172 /* WOWUpdateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateView.swift; sourceTree = "<group>"; };
-		2DA9DD121DF94F5B00E7C172 /* WOWUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateView.xib; sourceTree = "<group>"; };
 		2DA9DD3D1DFA959C00E7C172 /* WOWRecommendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRecommendView.swift; sourceTree = "<group>"; };
 		2DA9DD3E1DFA959C00E7C172 /* WOWRecommendView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWRecommendView.xib; sourceTree = "<group>"; };
 		2DCB3BCA1DE6D36E0022528E /* WOWUserCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUserCommentVC.swift; sourceTree = "<group>"; };
@@ -1519,7 +1522,7 @@
 		069D30451DB47ADC00A059D0 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
-				2DA9DD0C1DF94F5B00E7C172 /* UpdateView */,
+				2D2331D81DFF9398006E7BC0 /* UpdateView */,
 				069D30461DB47ADC00A059D0 /* RefreshView.swift */,
 				63A2F56B1DF9014A002DF56F /* WOWRightNavigationItem.swift */,
 				63A2F56D1DF90155002DF56F /* WOWRightNavigationItem.xib */,
@@ -1815,6 +1818,19 @@
 				2DDC99AE1DDADF4F00201856 /* CellView */,
 			);
 			path = TableViewDelegate;
+			sourceTree = "<group>";
+		};
+		2D2331D81DFF9398006E7BC0 /* UpdateView */ = {
+			isa = PBXGroup;
+			children = (
+				2D2331D91DFF9398006E7BC0 /* WOWUpdateFooter.swift */,
+				2D2331DA1DFF9398006E7BC0 /* WOWUpdateFooter.xib */,
+				2D2331DB1DFF9398006E7BC0 /* WOWUpdateHeader.swift */,
+				2D2331DC1DFF9398006E7BC0 /* WOWUpdateHeader.xib */,
+				2D2331DD1DFF9398006E7BC0 /* WOWUpdateView.swift */,
+				2D2331DE1DFF9398006E7BC0 /* WOWUpdateView.xib */,
+			);
+			path = UpdateView;
 			sourceTree = "<group>";
 		};
 		2D509A0E1DB5D30B0047CD13 /* Controller */ = {
@@ -2184,19 +2200,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		2DA9DD0C1DF94F5B00E7C172 /* UpdateView */ = {
-			isa = PBXGroup;
-			children = (
-				2DA9DD0D1DF94F5B00E7C172 /* WOWUpdateFooter.swift */,
-				2DA9DD0E1DF94F5B00E7C172 /* WOWUpdateFooter.xib */,
-				2DA9DD0F1DF94F5B00E7C172 /* WOWUpdateHeader.swift */,
-				2DA9DD101DF94F5B00E7C172 /* WOWUpdateHeader.xib */,
-				2DA9DD111DF94F5B00E7C172 /* WOWUpdateView.swift */,
-				2DA9DD121DF94F5B00E7C172 /* WOWUpdateView.xib */,
-			);
-			path = UpdateView;
-			sourceTree = "<group>";
-		};
 		2DDA4DB71DDEFE2E00E7A7E8 /* HomeCellView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2368,7 +2371,6 @@
 				TargetAttributes = {
 					069D2F531DB46AD100A059D0 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = B4WSDTADTT;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -2494,6 +2496,7 @@
 				069D31BC1DB47ADD00A059D0 /* WOWOrderFooterView.xib in Resources */,
 				639C13E91DD59966003B0F59 /* WOWContentTopicTopCell.xib in Resources */,
 				63A1E21B1DB9B95100C250D4 /* WOWProductParamCell.xib in Resources */,
+				2D2331E21DFF9398006E7BC0 /* WOWUpdateHeader.xib in Resources */,
 				068121511DB4D03600407319 /* UMSocialLocalizable.strings in Resources */,
 				069D32B41DB47ADD00A059D0 /* WOWCouponheaderView.xib in Resources */,
 				069D31B21DB47ADD00A059D0 /* WOWBuyCarNormalCell.xib in Resources */,
@@ -2521,6 +2524,7 @@
 				069D31AD1DB47ADD00A059D0 /* WOWBuyCarFootView.xib in Resources */,
 				2DA9DD401DFA959C00E7C172 /* WOWRecommendView.xib in Resources */,
 				069D32CC1DB47ADD00A059D0 /* WOWOrderListCell.xib in Resources */,
+				2D2331E01DFF9398006E7BC0 /* WOWUpdateFooter.xib in Resources */,
 				2DDA4DE81DDEFE2E00E7A7E8 /* WOWHomeFormCell.xib in Resources */,
 				63F3DA881DE69C76009CE52D /* WOWCommentHeaderView.xib in Resources */,
 				068121541DB4D03700407319 /* UMSCommentInputController.xib in Resources */,
@@ -2531,6 +2535,7 @@
 				069D31EF1DB47ADD00A059D0 /* WOWFoundRecommendCell.xib in Resources */,
 				069D31AB1DB47ADD00A059D0 /* WOWBuyCarEmpty.xib in Resources */,
 				069D32C21DB47ADD00A059D0 /* WOWOrderDetailNewCell.xib in Resources */,
+				2D2331E41DFF9398006E7BC0 /* WOWUpdateView.xib in Resources */,
 				2DDA4DE01DDEFE2E00E7A7E8 /* WOW_SingProductView.xib in Resources */,
 				63A2F56E1DF90155002DF56F /* WOWRightNavigationItem.xib in Resources */,
 				069D323B1DB47ADD00A059D0 /* WOWRegistInfoSureView.xib in Resources */,
@@ -2611,9 +2616,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63CBF9D71DFE3A3F008D8E8F /* WOWUpdateView.swift in Sources */,
-				63CBF9D61DFE3A38008D8E8F /* WOWUpdateHeader.swift in Sources */,
-				63CBF9D51DFE3A26008D8E8F /* WOWUpdateFooter.swift in Sources */,
 				63CBF9D41DFE39E2008D8E8F /* WOWMaskViewController.swift in Sources */,
 				069D327C1DB47ADD00A059D0 /* WOWProductDetailController.swift in Sources */,
 				2DDFB5341DE2CBDF009641F7 /* WOWHotStyleModel.swift in Sources */,
@@ -2801,6 +2803,7 @@
 				63DD6A611DE2E845005BE631 /* WOWContentDetailCell.swift in Sources */,
 				6326BF3B1DD0161600917FA3 /* WOWLaunchView.swift in Sources */,
 				069D31D51DB47ADD00A059D0 /* WOWFavoritrSingleCell.swift in Sources */,
+				2D2331E11DFF9398006E7BC0 /* WOWUpdateHeader.swift in Sources */,
 				2DDA4DDF1DDEFE2E00E7A7E8 /* WOW_SingProductView.swift in Sources */,
 				069D32711DB47ADD00A059D0 /* WOWGoodsSmallCell.swift in Sources */,
 				2D509A751DB5D3120047CD13 /* WOWReuseSectionView.swift in Sources */,
@@ -2813,6 +2816,7 @@
 				2D509A7B1DB5D3120047CD13 /* WOWSearchLayout.swift in Sources */,
 				069D31E01DB47ADD00A059D0 /* VCDesignerListSearchResult.swift in Sources */,
 				2DDC99BD1DDAF2E000201856 /* WOWHotBannerCell.swift in Sources */,
+				2D2331DF1DFF9398006E7BC0 /* WOWUpdateFooter.swift in Sources */,
 				2DDA4DE41DDEFE2E00E7A7E8 /* WOWFoundWeeklyNewCell.swift in Sources */,
 				63DD6A5D1DE29EFF005BE631 /* WOWProductLimitCell.swift in Sources */,
 				069D32811DB47ADD00A059D0 /* WOWProductDetailTipsWebViewCell.swift in Sources */,
@@ -2855,6 +2859,7 @@
 				069D329C1DB47ADD00A059D0 /* WOWContentTopicController.swift in Sources */,
 				2D509A541DB5D3120047CD13 /* WOWProductModel.swift in Sources */,
 				63A2F59A1DF931E2002DF56F /* WOWMessageCenterCell.swift in Sources */,
+				2D2331E31DFF9398006E7BC0 /* WOWUpdateView.swift in Sources */,
 				069D32431DB47ADD00A059D0 /* PageControllerDataSource.swift in Sources */,
 				069D331C1DB47ADE00A059D0 /* PhotoViewCell.swift in Sources */,
 				069D32C71DB47ADD00A059D0 /* WOWOrderDetailTwoCell.swift in Sources */,
@@ -3049,7 +3054,7 @@
 				CODE_SIGN_ENTITLEMENTS = wowdsgn/wowdsgn.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = B4WSDTADTT;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3100,7 +3105,7 @@
 				CODE_SIGN_ENTITLEMENTS = wowdsgn/wowdsgn.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Wowdsgn Culture Media Co., Ltd. (B4WSDTADTT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = B4WSDTADTT;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

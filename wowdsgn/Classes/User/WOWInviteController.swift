@@ -9,8 +9,8 @@
 import UIKit
 
 class WOWInviteController: WOWBaseViewController,UIWebViewDelegate{
-    var webUrl = "http://wx.wowdsgn.com/invitation/app.html"
-    var shareUrl = "http://wx.wowdsgn.com/invitation/index.html?userName="
+    var webUrl = "https://wx.wowdsgn.com/invitation/app.html"
+    var shareUrl = "https://wx.wowdsgn.com/invitation/index.html?userName="
     var shareTitle :String?
     var shareDesc  :String?
     

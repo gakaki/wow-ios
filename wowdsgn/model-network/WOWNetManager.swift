@@ -21,6 +21,7 @@ enum RequestCode:String{
     case Login = "10000"    //session过期或无效
     case ProductExpired = "40202"   //商品过期
     case ProductLimit = "40368" //商品限购
+    case VersionNew = "50113" //当前为最新版本
 }
 
 //MARK:前后端约定的返回数据结构
@@ -146,6 +147,11 @@ class WOWNetManager {
                                 WOWHud.showWarnMsg(info?.message)
                                 return
                             }
+                            
+                            if code == RequestCode.VersionNew.rawValue {
+                                return
+                            }
+                            
                             failClosure(info?.message)
                             WOWHud.showWarnMsg(info?.message)
                             return

@@ -170,5 +170,13 @@ struct WOWTool {
     }
     
 }
-
+// 前往AppStore
+struct GoToItunesApp {
+    static func show (){
+        
+        let url = URL(string:urlItunes)
+        UIApplication.shared.openURL(url!)
+        
+    }
+}
 

@@ -11,12 +11,14 @@ import SnapKit
 class WOWMaskViewController: UIViewController,UpdateHeightDelegate{
     
     var updateContent = [String]()
-    
+    // 根据返回的内容的高度，来更新View的高度
     func updateHeight(height:CGFloat){
         updateView.snp.updateConstraints { (make) in
             make.height.equalTo(height + 150)
         }
     }
+    
+    // 代理方法， 点击取消，页面消失
     func actionBlcok(){
         self.dismissAction()
     }
@@ -29,6 +31,7 @@ class WOWMaskViewController: UIViewController,UpdateHeightDelegate{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    // 添加view控件
     func setupStyleView()  {
         
         let window = UIApplication.shared.keyWindow
@@ -45,7 +48,7 @@ class WOWMaskViewController: UIViewController,UpdateHeightDelegate{
             }
         }
     }
-    lazy var updateView: UIView = {
+    lazy var updateView: WOWUpdateView = {
         let view = Bundle.loadResourceName(String(describing: WOWUpdateView.self)) as! WOWUpdateView
        
         view.delegate       = self
@@ -57,26 +60,29 @@ class WOWMaskViewController: UIViewController,UpdateHeightDelegate{
     lazy var bgView: UIView = {
         
         let t = UIView()
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(WOWMaskViewController.dismissAction))
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(dismissAction))
         t.addGestureRecognizer(tap)
         return t
         
     }()
-    deinit {
+  
+    // 移除View
+    func removeAllView(){
         
         bgView.removeFromSuperview()
         updateView.removeFromSuperview()
-        
     }
+    //
     func dismissAction()  {
         
-        self.dismiss(animated: false, completion: nil)
+        self.removeAllView()
+        self.dismiss(animated: true, completion: nil)
         
     }
 }
 
 extension UIViewController {
-    
+    // presentViewController  使当前控制器 颜色透明
     func presentToViewController(viewControllerToPresent:UIViewController,completion: (() -> Swift.Void)? = nil) {
         
         self.definesPresentationContext = true

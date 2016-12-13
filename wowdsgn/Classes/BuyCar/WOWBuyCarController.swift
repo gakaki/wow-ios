@@ -14,7 +14,7 @@ class WOWBuyCarController: WOWBaseViewController {
 //    private var editingModel    : WOWBuyCarModel?
     fileprivate var totalPrice      : String?
     
-    var isRecommendView : Bool = false // 是否添加过为你推荐的view
+    var isRecommendView : Bool = false // 是否添加过 为你推荐的 view
     
     var dataArr = [WOWCarProductModel](){
         didSet{
@@ -297,21 +297,23 @@ class WOWBuyCarController: WOWBaseViewController {
 //MARK: 显示购物车为空的界面 ‘为你推荐界面’
     func showRecommendView(){
         
-        self.tableView.isHidden = true
+        self.tableView.isHidden     = true
+        self.recommendView.isHidden = false
         
-        if isRecommendView == true {
-             self.recommendView.isHidden = false
-        }else {
-            
-            isRecommendView == true
+        if isRecommendView == false {// 第一次是添加该“为你推荐”View  后续是控制 显示 or 隐藏 此View
+
+            isRecommendView = true
             self.view.addSubview(self.recommendView)
+            
         }
    
        
     }
+    
     func hideRecommendView(){
+
         self.recommendView.isHidden = true
-        self.tableView.isHidden = false
+        self.tableView.isHidden     = false
 //        self.view.addSubview(self.recommendView)
         
     }

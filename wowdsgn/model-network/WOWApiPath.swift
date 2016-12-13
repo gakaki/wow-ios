@@ -23,6 +23,8 @@ let WOWShareUrl                         = "m.wowdsgn.com" // 正式服务器 分
 //   let BaseUrl = "https://mobile-api.wowdsgn.com/" //外网开发
 //  let BaseUrl = "https://mobile-api.stg.wowdsgn.com/" //内网开发
 
+let urlItunes = "https://itunes.apple.com/cn/app/jian-jiao-she-ji/id1110300308?mt=8" // Appstore 链接
+
 //#else
 //   let BaseUrl = "https://openapi.wowdsgn.com/v1/" //外网地址
 //#endif

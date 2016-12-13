@@ -11,7 +11,7 @@ import UIKit
 
 class WOWController: WOWBaseModuleVC {
 
-    var isCheackUpdate : Bool = false
+    var isCheackUpdate : Bool = false // 是否已经提示 刷新
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     
     var bottomListArray = [WOWProductModel]() //底部列表数组
@@ -30,20 +30,7 @@ class WOWController: WOWBaseModuleVC {
         request()
        //
     }
-    func checkUpdate() {
-        // 检查更新
-        WOWCheckUpdate.checkUpdateWithDevice {[weak self] (isUpdate) in
-            if let strongSelf = self{
-                if isUpdate ?? false {
-                    DispatchQueue.main.async {
-                        strongSelf.goToUpdateVersion()
-                    }
-                    
-                }
-            }
-        }
-
-    }
+    // 跳转更新提示VC
     func goToUpdateVersion()  {
         
         let vc = WOWMaskViewController()
@@ -55,20 +42,11 @@ class WOWController: WOWBaseModuleVC {
         super.viewWillAppear(animated)
         //        hidingNavBarManager?.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        //FIXME:为了让动画出现 所以多reload一次咯
-        //        tableView.reloadData()
         
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-//        let delayQueue = DispatchQueue.global()
-//        delayQueue.asyncAfter(deadline: .now() + 5.0) {
-//            
-//            self.checkUpdate()
-//        }
-
-       
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -249,7 +227,7 @@ class WOWController: WOWBaseModuleVC {
     
     func requestCheakVersion() {
         
-        let params = ["appType": 1, "platForm": 1,"version":1.5]
+        let params = ["appType": 1, "platForm": 2,"version":1.5]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_checkVersion(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
@@ -269,8 +247,6 @@ class WOWController: WOWBaseModuleVC {
         
     }
 
-    
-    
   }
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel

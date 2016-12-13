@@ -46,8 +46,8 @@ class WOWMaskViewController: UIViewController,UpdateHeightDelegate{
         }
     }
     lazy var updateView: UIView = {
-        
-        let view = Bundle.main.loadNibNamed("WOWUpdateView", owner: self, options: nil)?.last as! WOWUpdateView
+        let view = Bundle.loadResourceName(String(describing: WOWUpdateView.self)) as! WOWUpdateView
+       
         view.delegate       = self
         view.updateContent  = self.updateContent
         return view

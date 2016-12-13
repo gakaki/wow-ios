@@ -208,6 +208,17 @@ public enum RequestApi{
     case api_Topics(topicId:Int)
     
     case api_Topic_Products(topicId:Int)
+    
+    //推送消息相关
+    case api_MessageMain
+    
+    case api_MessageList(msgType: Int, pageSize: Int, currentPage: Int)
+    
+    case api_MessageCount(params: [String: AnyObject]? )
+    
+    case api_MessageRead(messageId: Int)
+    
+    case api_MessageAllRead(msgType: Int)
 
 }
 
@@ -432,6 +443,21 @@ extension RequestApi:TargetType{
         case .api_Topic_Products:
             return URL_topic_product
 
+        //推送消息相关
+        case .api_MessageMain:
+            return URL_MessageMain
+            
+        case .api_MessageList:
+            return URL_MessageList
+            
+        case .api_MessageCount:
+            return URL_MessageCount
+            
+        case .api_MessageRead:
+            return URL_MessageRead
+            
+        case .api_MessageAllRead:
+            return URL_MessageAllRead
             
         default:
             return URL_topic
@@ -453,7 +479,10 @@ extension RequestApi:TargetType{
             .api_ProductCommentList,
             .api_OrderComment,
             .api_ProductAbout,
-            .api_checkVersion:
+            .api_checkVersion,
+            .api_MessageMain,
+            .api_MessageList,
+            .api_MessageCount:
 
             return .GET
 
@@ -648,6 +677,16 @@ extension RequestApi:TargetType{
             case let .api_SearchResult(pageSize, currentPage, sortBy, asc, seoKey):
                 params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
             
+            //推送消息
+            case let .api_MessageList(msgType, pageSize, currentPage):
+                params = ["msgType": msgType, "pageSize": pageSize, "currentPage": currentPage]
+            case let .api_MessageCount(param):
+                params = param ?? [String: Any]()
+            case let .api_MessageRead(messageId):
+                params = ["messageId": messageId]
+            case let .api_MessageAllRead(msgType):
+                params = ["msgType": msgType]
+
             default:
                 break
 

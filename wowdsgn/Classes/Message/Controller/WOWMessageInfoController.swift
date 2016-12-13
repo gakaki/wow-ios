@@ -11,6 +11,9 @@ import UIKit
 class WOWMessageInfoController: WOWBaseViewController {
     @IBOutlet var tableView: UITableView!
     
+    let pageSize        = 10
+    var msgType: Int?
+    
     let cellID = String(describing: WOWMessageInfoCell.self)
     
     
@@ -38,7 +41,17 @@ class WOWMessageInfoController: WOWBaseViewController {
     }
     override func request() {
         super.request()
-        
+        WOWNetManager.sharedManager.requestWithTarget(.api_MessageList(msgType: 1, pageSize: pageSize, currentPage: pageIndex), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                
+                strongSelf.endRefresh()
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+
     }
     
 }

@@ -10,6 +10,10 @@ import UIKit
 
 class WOWMessageCenterCell: UITableViewCell {
     @IBOutlet weak var newView: UIView!
+    @IBOutlet weak var msgImg: UIImageView!
+    @IBOutlet weak var msgTitle: UILabel!
+    @IBOutlet weak var msgContent: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

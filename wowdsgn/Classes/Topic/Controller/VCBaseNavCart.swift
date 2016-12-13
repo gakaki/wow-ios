@@ -10,6 +10,7 @@ class VCBaseNavCart:WOWBaseViewController{
         super.viewDidLoad()
         config_btn_back()
         config_btn_cart()
+        config_btn_msg()
         buyCarCount()
         addObservers()
         self.edgesForExtendedLayout = UIRectEdge()
@@ -56,11 +57,26 @@ class VCBaseNavCart:WOWBaseViewController{
         self.view.addSubview(carEntranceButton)
     }
     
+    func config_btn_msg(){
+        let image       = UIImage(named: "message_topic")! as UIImage
+        let button      = UIButton(type:.custom)
+        button.frame    = CGRect(x: self.view.frame.width - 2*(btn_width_height + offset_width), y: offset_icon(), width: btn_width_height, height: btn_width_height)
+        button .setBackgroundImage(image, for: UIControlState())
+        button.addTarget(self, action:#selector(btn_msg_action), for:UIControlEvents.touchUpInside)
+        let newView = UIView(frame: CGRect(x: btn_width_height - 4, y: 4, width: 8, height: 8))
+        button.addSubview(newView)
+        self.view.addSubview(button)
+
+    }
+    
     func btn_back_action(){
         self.navBack()
     }
     func btn_cart_action(){
         toVCCart()
+    }
+    func btn_msg_action(){
+        toVCMessageCenter()
     }
     
     func buyCarCount()  {

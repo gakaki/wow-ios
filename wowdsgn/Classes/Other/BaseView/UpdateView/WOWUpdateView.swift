@@ -80,11 +80,11 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
     }
     
     lazy var updateHeaderView: UIView = {
-        let view = Bundle.main.loadNibNamed("WOWUpdateHeader", owner: self, options: nil)?.last as! WOWUpdateHeader
+        let view = Bundle.loadResourceName(String(describing: WOWUpdateHeader.self)) as! WOWUpdateHeader
         return view
     }()
     lazy var updateFooterView: UIView = {
-        let view = Bundle.main.loadNibNamed("WOWUpdateFooter", owner: self, options: nil)?.last as! WOWUpdateFooter
+        let view = Bundle.loadResourceName(String(describing: WOWUpdateFooter.self)) as! WOWUpdateFooter
         
         view.updateBtn.addTarget(self, action: #selector(WOWUpdateView.clickAction), for: .touchUpInside)
         view.cancleBtn.addTarget(self, action:  #selector(WOWUpdateView.clickAction), for:.touchUpInside)

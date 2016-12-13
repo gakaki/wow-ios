@@ -11,6 +11,9 @@ import UIKit
 class WOWMessageController: WOWBaseViewController {
     @IBOutlet var tableView: UITableView!
     
+    var messageMain: WOWMessageMainModel?
+    var numberRow: Int    = 0
+    
     let cellID = String(describing: WOWMessageCenterCell.self)
 
 
@@ -43,7 +46,23 @@ class WOWMessageController: WOWBaseViewController {
     }
     override func request() {
         super.request()
+        WOWNetManager.sharedManager.requestWithTarget(.api_MessageMain, successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                let model = Mapper<WOWMessageMainModel>().map(JSONObject:result)
+                strongSelf.messageMain = model
+                strongSelf.configData()
+                strongSelf.endRefresh()
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+    }
+    
+    func configData() {
         
+        tableView.reloadData()
     }
 
 }
@@ -54,7 +73,7 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return numberRow
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

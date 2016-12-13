@@ -174,6 +174,12 @@ let URL_UserInfo                = "v1/usermongo/info"
 let URL_Invite                  = "v1/articleinfo"
 let URL_QINIU_TOKEN             = "v1/qiniutoken"
 
+//推送消息
+let URL_MessageMain             = "v1/message/messageMain"
+let URL_MessageList             = "v1/message/messageList"
+let URL_MessageCount            = "v1/message/unReadMessageCount"
+let URL_MessageRead             = "v1/message/messageRead"
+let URL_MessageAllRead          = "v1/message/messageAllRead"
 
 //6.app 登录注册
 let URL_Register                = "v1/user/register"

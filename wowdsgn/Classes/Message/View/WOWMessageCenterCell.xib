@@ -18,27 +18,27 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="systemInfo" translatesAutoresizingMaskIntoConstraints="NO" id="zh5-QG-pJR">
-                        <rect key="frame" x="15" y="14" width="30" height="30"/>
+                        <rect key="frame" x="15" y="14" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="dBO-z4-x1l"/>
-                            <constraint firstAttribute="width" constant="30" id="nVx-eF-vbP"/>
+                            <constraint firstAttribute="height" constant="25" id="dBO-z4-x1l"/>
+                            <constraint firstAttribute="width" constant="25" id="nVx-eF-vbP"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="系统消息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ri-6z-YwQ">
-                        <rect key="frame" x="60" y="20" width="62" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ri-6z-YwQ">
+                        <rect key="frame" x="55" y="26.5" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="cGU-Id-vRp">
-                        <rect key="frame" x="351" y="21" width="9" height="16"/>
+                        <rect key="frame" x="351" y="18.5" width="9" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="lW3-Ch-Iwy"/>
                             <constraint firstAttribute="width" constant="9" id="zpp-O7-gkC"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Bg-C2-dT7">
-                        <rect key="frame" x="333" y="25" width="8" height="8"/>
+                        <rect key="frame" x="333" y="22.5" width="8" height="8"/>
                         <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="8" id="eQR-Rn-kee"/>
@@ -46,20 +46,20 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S49-En-2Ff">
-                        <rect key="frame" x="60" y="60" width="315" height="1"/>
+                        <rect key="frame" x="55" y="48.5" width="320" height="1"/>
                         <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="tCB-BC-mG0"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJy-j3-rLW">
-                        <rect key="frame" x="60" y="76.5" width="300" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJy-j3-rLW">
+                        <rect key="frame" x="55" y="65" width="305" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esv-bP-OhT">
-                        <rect key="frame" x="60" y="101.5" width="31" height="14.5"/>
+                        <rect key="frame" x="55" y="89" width="31" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -97,6 +97,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="lineView" destination="Gwe-0F-v4e" id="45E-KK-Y5S"/>
                 <outlet property="msgContent" destination="HJy-j3-rLW" id="CwE-HX-T0B"/>
                 <outlet property="msgImg" destination="zh5-QG-pJR" id="xdQ-61-f4G"/>
                 <outlet property="msgTitle" destination="6Ri-6z-YwQ" id="QOv-z4-EBS"/>

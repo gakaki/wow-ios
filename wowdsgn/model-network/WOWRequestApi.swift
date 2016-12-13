@@ -216,7 +216,7 @@ public enum RequestApi{
     
     case api_MessageCount(params: [String: AnyObject]? )
     
-    case api_MessageRead(messageId: Int)
+    case api_MessageRead(messageId: Int, msgType: Int)
     
     case api_MessageAllRead(msgType: Int)
 
@@ -682,8 +682,8 @@ extension RequestApi:TargetType{
                 params = ["msgType": msgType, "pageSize": pageSize, "currentPage": currentPage]
             case let .api_MessageCount(param):
                 params = param ?? [String: Any]()
-            case let .api_MessageRead(messageId):
-                params = ["messageId": messageId]
+            case let .api_MessageRead(messageId, msgType):
+                params = ["messageId": messageId, "msgType": msgType]
             case let .api_MessageAllRead(msgType):
                 params = ["msgType": msgType]
 

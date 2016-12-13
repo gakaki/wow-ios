@@ -129,7 +129,7 @@ class WOWUploadManager {
 //                            print(resp,resp?["key"])
 //                            print(info,key,resp)
                             let key = resp?["key"]
-                            let headImageUrl = "http://img.wowdsgn.com/\(key!)"
+                            let headImageUrl = "https://img.wowdsgn.com/\(key!)"
                             
                            
                             successClosure(headImageUrl)

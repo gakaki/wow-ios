@@ -47,7 +47,7 @@ class IPManager {
     func get_ip_public() -> String {
         var  ip_final  = ""
         do {
-            let ipURL               = URL(string: "http://pv.sohu.com/cityjson?ie=utf-8")!
+            let ipURL               = URL(string: "https://pv.sohu.com/cityjson?ie=utf-8")!
             var ip                  = try! String(contentsOf: ipURL, encoding: String.Encoding.utf8)
             
             if ip.contains("var returnCitySN = ") {
@@ -58,7 +58,7 @@ class IPManager {
                 let data: Data = ip.data(using: String.Encoding.utf8)!
                 let dict: [String : String] = (try JSONSerialization.jsonObject(with: data, options:[])) as! [String : String]
                 
-                ip_final = dict["cip"]!
+                ip_final = dict["cip"] ?? ""
                 print(dict,ip_final)
             }
 

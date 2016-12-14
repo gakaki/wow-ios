@@ -6,7 +6,7 @@ class WOWProductDetailTipsWebViewCell: UITableViewCell,UIWebViewDelegate {
     
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var height: NSLayoutConstraint!
-    var webUrl="http://127.0.0.1:8080/product_detail_tips.html"
+    var webUrl="https://127.0.0.1:8080/product_detail_tips.html"
 
 //      var webUrl="http://baidu.com"
     override func awakeFromNib() {

@@ -1,5 +1,3 @@
-
-
 Pod::Spec.new do |s|
   s.name             = 'wow3rd'
   s.version          = '0.1.0'
@@ -35,10 +33,6 @@ wowdsgn集成各种第三方库
 #  s.dependency 'WebViewJavascriptBridge', '~> 5.0'
 #  s.dependency 'SwiftWebViewBridge', '~> 0.2.0'
   s.dependency 'WebViewBridge.Swift'
-#  s.dependency 'Pingpp','~> 2.2.10'
-
-#  s.dependency 'UMengUShare/UI'    # U-Share SDK UI模块（分享面板，建议添加）
-#  s.dependency 'UMengUShare/Social/Sina'    # 集成新浪微博
 
 
 end

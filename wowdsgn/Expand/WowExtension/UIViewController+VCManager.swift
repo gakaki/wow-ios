@@ -97,6 +97,17 @@ public class VCRedirect {
         
         topNaVC?.pushViewController(vc, animated: true)
     }
+    
+    public class func toOrderDetail(orderCode: String){
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
+        let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
+        vc.orderCode = orderCode
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+
     public class func toTopicList(topicId: Int){
         
         let vc                  = VCTopic(nibName: nil, bundle: nil)
@@ -218,13 +229,12 @@ extension  UIViewController {
     //跳转微信登录界面
     func toWeixinVC(_ isPresent:Bool = false){
         print("toWeixinVC")
-                let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)
-//                UMSocialControllerService.defaultControllerService().socialUIDelegate = self
-                snsPlat?.loginClickHandler(self, UMSocialControllerService.default(), true, {[weak self]response in
+        
+        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)
+
+        snsPlat?.loginClickHandler(self, UMSocialControllerService.default(), true, {[weak self]response in
                     if let strongSelf = self{
                         if response?.responseCode == UMSResponseCodeSuccess {
-//                            let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
-                  
                             
                             strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
                         }else{
@@ -232,31 +242,7 @@ extension  UIViewController {
                         }
                     }
                 })
-        /**
-         shareSDK第三方登录
-         */
-//        ShareSDK.getUserInfo(SSDKPlatformType.TypeWechat) { [weak self](state:SSDKResponseState, userData:SSDKUser!, error:NSError!) -> Void in
-//            if let strongSelf = self{
-//                switch state{
-//                    
-//                case SSDKResponseState.Success:
-//                    print("获取授权成功")
-//                    print(userData)
-//                    print(userData.rawData)
-//                    strongSelf.checkWechatToken(userData, isPresent: isPresent)
-//                    
-//                case SSDKResponseState.Fail:
-//                    print("授权失败,错误描述:\(error)")
-//                    
-//                case SSDKResponseState.Cancel:
-//                    print("授权取消")
-//                    
-//                default:
-//                    break
-//                }
-//            }
-//            
-//        }
+ 
         
     }
     fileprivate func checkWechatToken(_ userData:NSDictionary,isPresent:Bool = false){

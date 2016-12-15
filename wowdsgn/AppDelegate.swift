@@ -257,21 +257,6 @@ extension AppDelegate{
         }
         
 
-//
-//        window?.rootViewController =  UIStoryboard.initNavVC("Found", identifier:)
-//        window?.rootViewController =  UIStoryboard.initialViewController("Found")
-////        
-//        let storyboard      = UIStoryboard(name: "Found", bundle: nil)
-//        let viewController  = storyboard.instantiateViewController(withIdentifier: String(describing: VCCategory.self)) as! VCCategory
-//        window?.rootViewController = viewController
-//          window?.rootViewController =  VCBuy(nibName: nil, bundle: nil)
-//        let vc_designer_list = UIStoryboard.initialViewController("Designer", identifier:String(VCDesignerList)) as! VCDesignerList
-//        window?.rootViewController =  vc_designer_list
-//          window?.rootViewController = UINavigationController(rootViewController: VCCategoryChoose())
-        
-//        window?.rootViewController = UINavigationController(rootViewController: VCShopping())
-        
-//        window?.rootViewController =  VCCategoryProducts()
 //        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
 ////        vc.topic_id = 48      //247到254是SKU 2 42
 //        window?.rootViewController = vc
@@ -329,54 +314,7 @@ extension AppDelegate{
         //Talking Data ADTracking
         TalkingDataAppCpa.init("e81f26ce70664a9dab698bae55be2044", withChannelId: "AppStore")
         
-//        //MonkeyKing
-//        MonkeyKing.registerAccount(.WeChat(appID: WOWID.Wechat.appID, appKey: WOWID.Wechat.appKey))
-//        MonkeyKing.registerAccount(.Weibo(appID: WOWID.Weibo.appID, appKey: WOWID.Weibo.appKey, redirectURL: WOWID.Weibo.redirectURL))
-        
-        //LeanCloud
-//        AVOSCloud.setApplicationId(WOWID.LeanCloud.appID, clientKey:WOWID.LeanCloud.appKey)
-        
-//        //融云IM
-//        RCIM.sharedRCIM().initWithAppKey(WOWID.RongCloud.appID)
-//        RCIM.sharedRCIM().connectWithToken(WOWID.RongCloud.testToken,success: { (userId) -> Void in
-//            DLog("登陆成功。当前登录的用户ID：\(userId)")
-//            }, error: { (status) -> Void in
-//                DLog("登陆的错误码为:\(status.rawValue)")
-//            }, tokenIncorrect: {
-//                //token过期或者不正确。
-//                //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
-//                //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
-//                DLog("token错误")
-//        })
-        
-        //shareSDK
 
-//        ShareSDK.registerApp(WOWID.ShareSDK.appKey,
-//                             
-//                             activePlatforms: [SSDKPlatformType.TypeWechat.rawValue,],
-//                             onImport: {(platform : SSDKPlatformType) -> Void in
-//                                
-//                                switch platform{
-//                                    
-//                                case SSDKPlatformType.TypeWechat:
-//                                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
-//                                    
-//                                default:
-//                                    break
-//                                }
-//            },
-//                             onConfiguration: {(platform : SSDKPlatformType,appInfo : NSMutableDictionary!) -> Void in
-//                                switch platform {
-//                                    
-//                                case SSDKPlatformType.TypeWechat:
-//                                    //设置微信应用信息
-//                                    appInfo.SSDKSetupWeChatByAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey)
-//                                    
-//                                default:
-//                                    break
-//                                    
-//                                }
-//        })
 
         
         

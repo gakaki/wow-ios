@@ -104,14 +104,24 @@ class WOWSettingController: WOWBaseTableViewController {
     
     
     fileprivate func exitLogin(){
-        WOWUserManager.exitLogin()
-        tableView.reloadData()
-        NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-        NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
-        WOWHud.showMsg("退出登录")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-           _ = self.navigationController?.popViewController(animated: true)
-        })
+        WOWNetManager.sharedManager.requestWithTarget(.api_Logout, successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                WOWHud.showMsg("退出登录")
+                WOWUserManager.exitLogin()
+                strongSelf.tableView.reloadData()
+                NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                    _ = strongSelf.navigationController?.popViewController(animated: true)
+                })
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                WOWHud.showMsg("退出登录失败")
+            }
+        }
+
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -129,6 +129,7 @@ class WOWController: WOWBaseModuleVC {
         
         super.request()
         self.requestTop()
+        requestMsgCount()
 //        self.requestBottom()
         
     }
@@ -152,8 +153,8 @@ class WOWController: WOWBaseModuleVC {
 //                }
                 
                 if strongSelf.isCheackUpdate == false {
-                    strongSelf.requestCheakVersion()
-                }                     
+//                    strongSelf.requestCheakVersion()
+                }
                
                
             }
@@ -246,6 +247,27 @@ class WOWController: WOWBaseModuleVC {
         }
         
     }
+    
+    func requestMsgCount() {
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_MessageCount, successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let _ = self{
+                let json = JSON(result)
+                let systemMsg = json["systemMessageUnReadCount"].int
+                let userMsg = json["userMessageUnReadCount"].int
+                WOWUserManager.systemMsgCount = systemMsg ?? 0
+                WOWUserManager.userMsgCount = userMsg ?? 0
+                DLog(json)
+                
+            }
+        }) { (errorMsg) in
+            
+        }
+        
+    }
+    
+    
 
   }
 extension Array{

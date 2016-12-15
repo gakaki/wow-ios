@@ -142,6 +142,8 @@ public enum RequestApi{
     
     case api_Login(String,String)
     
+    case api_Logout
+    
     //订单相关
     
 
@@ -214,7 +216,7 @@ public enum RequestApi{
     
     case api_MessageList(msgType: Int, pageSize: Int, currentPage: Int)
     
-    case api_MessageCount(params: [String: AnyObject]? )
+    case api_MessageCount
     
     case api_MessageRead(messageId: Int, msgType: Int)
     
@@ -458,6 +460,8 @@ extension RequestApi:TargetType{
             
         case .api_MessageAllRead:
             return URL_MessageAllRead
+        case .api_Logout:
+            return URL_Logout
             
         default:
             return URL_topic
@@ -680,8 +684,6 @@ extension RequestApi:TargetType{
             //推送消息
             case let .api_MessageList(msgType, pageSize, currentPage):
                 params = ["msgType": msgType, "pageSize": pageSize, "currentPage": currentPage]
-            case let .api_MessageCount(param):
-                params = param ?? [String: Any]()
             case let .api_MessageRead(messageId, msgType):
                 params = ["messageId": messageId, "msgType": msgType]
             case let .api_MessageAllRead(msgType):

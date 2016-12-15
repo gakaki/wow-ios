@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0607088E1DD18D7600A91724 /* RouterRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088C1DD18D7600A91724 /* RouterRule.swift */; };
 		0607088F1DD18D7600A91724 /* WowWebViewSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */; };
+		06144D681E0247BE0028645E /* WowShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06144D671E0247BE0028645E /* WowShare.framework */; };
 		067AFF631DB9C4CF00D48020 /* ExtensionEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */; };
 		069D2F581DB46AD100A059D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D2F571DB46AD100A059D0 /* AppDelegate.swift */; };
 		069D2F5F1DB46AD100A059D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 069D2F5E1DB46AD100A059D0 /* Assets.xcassets */; };
@@ -482,6 +483,7 @@
 /* Begin PBXFileReference section */
 		0607088C1DD18D7600A91724 /* RouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterRule.swift; sourceTree = "<group>"; };
 		0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowWebViewSwift.swift; sourceTree = "<group>"; };
+		06144D671E0247BE0028645E /* WowShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WowShare.framework; path = "../../../Library/Developer/Xcode/DerivedData/wowdsgn-gjuvlizsuzwdzpafcbozkvrwdcub/Build/Products/Debug-iphonesimulator/WowShare.framework"; sourceTree = "<group>"; };
 		067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionEquatable.swift; sourceTree = "<group>"; };
 		069D2F541DB46AD100A059D0 /* wowdsgn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wowdsgn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069D2F571DB46AD100A059D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -969,6 +971,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06144D681E0247BE0028645E /* WowShare.framework in Frameworks */,
 				639C13DA1DD204AA003B0F59 /* UserNotificationsUI.framework in Frameworks */,
 				63803AE81DC325BD000AA259 /* UserNotifications.framework in Frameworks */,
 				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
@@ -2122,6 +2125,7 @@
 		9B30F7A8216ED8829DE900DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06144D671E0247BE0028645E /* WowShare.framework */,
 				06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */,
 				06C869A51DD19BD7004C05E3 /* libUMessage_Sdk_1.4.0.a */,
 				63803AE71DC325BD000AA259 /* UserNotifications.framework */,

@@ -24,7 +24,10 @@
 @import wow_vendor_ui;
 @import XZMRefresh;
 @import FMDB;
-@import Wow3rd;
+
+@import WowShare;
+@import wow3rd;
+
 
 //#import "JPPlayground.h"
 //#import "GYHttpMock.h"

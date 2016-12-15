@@ -1,3 +1,5 @@
+
+
 Pod::Spec.new do |s|
   s.name             = 'wow3rd'
   s.version          = '0.1.0'
@@ -14,25 +16,32 @@ wowdsgn集成各种第三方库
 
   s.ios.deployment_target = '9.0'
 
-  s.public_header_files   =                       'wow3rd/libs/**/*.h','wow3rd/frameworks/**/*.h'
-  s.source_files          = 'wow3rd/Classes/**/*','wow3rd/libs/**/*.h','wow3rd/frameworks/**/*.h'
-  s.frameworks            = 'UIKit','CoreTelephony','SystemConfiguration','ImageIO','CoreData'
-  s.weak_framework        = 'UserNotifications'
-  s.library               = 'z','c++','sqlite3'
+  s.public_header_files   =                       'wow3rd/lib_frameworks/**/*.h'
+  s.source_files          = 'wow3rd/Classes/**/*','wow3rd/lib_frameworks/**/*.h'
+  s.frameworks            = 'CFNetwork','QuartzCore','CoreMotion','UIKit','CoreTelephony','SystemConfiguration','ImageIO','CoreData','Security','AdSupport','Foundation','CoreLocation'
+  #'PassKit'
+#   'AddressBook.framework','AddressBookUI','AudioToolbox','CoreAudio','CoreGraphics','ImageIO','MapKit','MessageUI','MobileCoreServices'
 
-  s.vendored_libraries    = 'wow3rd/libs/**/*.a'
-  s.vendored_frameworks   = 'wow3rd/frameworks/**/*.framework'
+
+
+  s.weak_framework        = 'UserNotifications'
+  s.library               = 'z','c++','sqlite3','icucore','stdc++'
+
+  s.vendored_libraries    = 'wow3rd/lib_frameworks/**/*.a'
+  s.vendored_frameworks   = 'wow3rd/lib_frameworks/**/*.framework'
 
   s.xcconfig              = {
     # 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
     'OTHER_LDFLAGS' => '-ObjC -all_load -force_load'
   }
-
-
+  
   s.dependency 'URLNavigator', '~> 1.0'
+  s.dependency 'WebViewBridge.Swift'
+
+
 #  s.dependency 'WebViewJavascriptBridge', '~> 5.0'
 #  s.dependency 'SwiftWebViewBridge', '~> 0.2.0'
-  s.dependency 'WebViewBridge.Swift'
+
 
 
 end

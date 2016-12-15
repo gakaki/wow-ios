@@ -10,6 +10,7 @@
 //VCManager is collect the redirect code
 import UIKit
 import wow3rd
+import WowShare
  
 public class VCRedirect {
     
@@ -230,20 +231,30 @@ extension  UIViewController {
     func toWeixinVC(_ isPresent:Bool = false){
         print("toWeixinVC")
         
-        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)
+//        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)
+//        
+//        snsPlat?.loginClickHandler(self, UMSocialControllerService.default(), true, {[weak self]response in
+//            if let strongSelf = self{
+//                if response?.responseCode == UMSResponseCodeSuccess {
+//                    
+//                    strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
+//                }else{
+//                    WOWHud.showMsg("授权登录失败")
+//                }
+//            }
+//        })
 
-        snsPlat?.loginClickHandler(self, UMSocialControllerService.default(), true, {[weak self]response in
-                    if let strongSelf = self{
-                        if response?.responseCode == UMSResponseCodeSuccess {
-                            
-                            strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
-                        }else{
-                            WOWHud.showMsg("授权登录失败")
-                        }
-                    }
-                })
- 
-        
+//        WowShare.getAuthWithUserInfoFromWechat { (response) in
+//                if let strongSelf = self{
+//                    if response?.responseCode == UMSResponseCodeSuccess {
+//                        
+//                        strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
+//                    }else{
+//                        WOWHud.showMsg("授权登录失败")
+//                    }
+//                }
+//        }
+    
     }
     fileprivate func checkWechatToken(_ userData:NSDictionary,isPresent:Bool = false){
         //FIXME:验证token是否是第一次咯或者是第二次

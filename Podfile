@@ -50,8 +50,6 @@ target 'wowdsgn' do
   #	pod 'UIColor_Hex_Swift', '~> 2.1'
 
   #Ping++支付
-  pod 'Pingpp/Alipay'
-  pod 'Pingpp/Wx'
 	pod "Qiniu"
   pod 'XZMRefresh'            #横向刷新
 	pod 'FMDB'

@@ -1,9 +1,9 @@
 CONFIGURATION_BUILD_DIR = $PODS_CONFIGURATION_BUILD_DIR/wow3rd
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/frameworks" "$PODS_CONFIGURATION_BUILD_DIR/URLNavigator" "$PODS_CONFIGURATION_BUILD_DIR/WebViewBridge.Swift"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp/Channels/Alipay" "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp/Channels/CmbWallet" "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks" "$PODS_CONFIGURATION_BUILD_DIR/URLNavigator" "$PODS_CONFIGURATION_BUILD_DIR/WebViewBridge.Swift"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Pingpp"
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/libs"
-OTHER_LDFLAGS = -ObjC -all_load -l"UMessage_Sdk_1.4.0" -l"c++" -l"sqlite3" -l"z" -framework "CoreData" -framework "CoreTelephony" -framework "ImageIO" -framework "SystemConfiguration" -framework "UIKit" -framework "UMMobClick" -weak_framework "UserNotifications"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Public"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks" $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp/Channels/Alipay" $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp/Channels/CmbWallet" $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp/Channels/UnionPay" $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp/Dependencies/Network" $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp/Dependencies/WebView" $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp" $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/lib_frameworks/pingpp/One"
+OTHER_LDFLAGS = -ObjC -all_load -l"DeepShare" -l"Growing" -l"PaymentControl" -l"TalkingData" -l"TalkingDataAppCpa" -l"UMessage_Sdk_1.4.0" -l"c++" -l"icucore" -l"pingpp+alipay" -l"pingpp+cmbWallet" -l"pingpp+network" -l"pingpp+one" -l"pingpp+up" -l"pingpp+webview" -l"pingppcore" -l"sqlite3" -l"stdc++" -l"z" -framework "AdSupport" -framework "AlipaySDK" -framework "CFNetwork" -framework "CoreData" -framework "CoreLocation" -framework "CoreMotion" -framework "CoreTelephony" -framework "Foundation" -framework "ImageIO" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit" -framework "UMMobClick" -framework "cmbkeyboard" -weak_framework "UserNotifications"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

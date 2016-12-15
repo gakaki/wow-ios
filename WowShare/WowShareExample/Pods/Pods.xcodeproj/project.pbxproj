@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19840DCBB2FB5F5B82272C021C1B82CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		2DEAA7D80D22F2AD2B4B7BEE0B6546D1 /* ZHWebViewBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058F0DAD3BAAE650F4CA1EB5A83466C9 /* ZHWebViewBridge.swift */; };
+		31F48386C5851AF7F9E6B768E60F67E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		3E3898F92F084E7C8E838318D68BAD66 /* WebViewBridge.Swift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F6B0FD0BF1057B4FBBEF2757909758 /* WebViewBridge.Swift-dummy.m */; };
+		4E54F73FF809CE86596F671703A50A5A /* bridge.js in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8EB7036D8DA5DD7B3A42916B61511 /* bridge.js */; };
+		8CD354302FB3C0E6D5D317D54A823FC1 /* Pods-WowShareExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EA5B027C1AF5264406667983DA977 /* Pods-WowShareExample-dummy.m */; };
+		975DF4B43A19BB72743987BA2B744D67 /* WebViewBridge.Swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 64D1CB074796340EE1A2A9650EAEB75A /* WebViewBridge.Swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E20006BD870B0A89EA3C66B4A483FB1E /* Pods-WowShareExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0824F703F3E22B65E932D267B2319A02 /* Pods-WowShareExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		323BD6FF5170A29BC41C5FD76A3A95E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D51224E2C5F96FE9431EEC919767C94;
+			remoteInfo = WebViewBridge.Swift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		058F0DAD3BAAE650F4CA1EB5A83466C9 /* ZHWebViewBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZHWebViewBridge.swift; path = Sources/ZHWebViewBridge.swift; sourceTree = "<group>"; };
+		0824F703F3E22B65E932D267B2319A02 /* Pods-WowShareExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WowShareExample-umbrella.h"; sourceTree = "<group>"; };
+		0929004672423237D39A10C0DA99FDDB /* Pods_WowShareExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WowShareExample.framework; path = "Pods-WowShareExample.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B5EA5B027C1AF5264406667983DA977 /* Pods-WowShareExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WowShareExample-dummy.m"; sourceTree = "<group>"; };
+		23520FC7F4CE0E478CEFA7DA05397357 /* WebViewBridge.Swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WebViewBridge.Swift.xcconfig; sourceTree = "<group>"; };
+		23FACDA705111E84F9B6A6D1408326A5 /* Pods-WowShareExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WowShareExample-acknowledgements.markdown"; sourceTree = "<group>"; };
+		27F6B0FD0BF1057B4FBBEF2757909758 /* WebViewBridge.Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WebViewBridge.Swift-dummy.m"; sourceTree = "<group>"; };
+		4FBB8F3A0DCA330BA77144A4BF1DF5E2 /* Pods-WowShareExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-WowShareExample.modulemap"; sourceTree = "<group>"; };
+		4FC9433831B58205E8386F49F887FD3C /* Pods-WowShareExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WowShareExample.debug.xcconfig"; sourceTree = "<group>"; };
+		64D1CB074796340EE1A2A9650EAEB75A /* WebViewBridge.Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WebViewBridge.Swift-umbrella.h"; sourceTree = "<group>"; };
+		6B3522D4C27EB2F521708880C310BF71 /* Pods-WowShareExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WowShareExample.release.xcconfig"; sourceTree = "<group>"; };
+		6EB8852532583696013011AC147C7DF9 /* Pods-WowShareExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WowShareExample-frameworks.sh"; sourceTree = "<group>"; };
+		7CA8EB7036D8DA5DD7B3A42916B61511 /* bridge.js */ = {isa = PBXFileReference; includeInIndex = 1; name = bridge.js; path = Sources/bridge.js; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B2174F08C2AF23C226413CEFCE2B58CA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0ED42D45A0F5E1813B08F87D3702A87 /* WebViewBridge.Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WebViewBridge.Swift-prefix.pch"; sourceTree = "<group>"; };
+		C6E5006948E5E4A4BB7516F5B568F331 /* Pods-WowShareExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WowShareExample-acknowledgements.plist"; sourceTree = "<group>"; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		E76BF948B0247186EDB1DD390540F75D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8D39F7554AD65D8E6756A479EE00068 /* WebViewBridge_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = WebViewBridge_Swift.framework; path = WebViewBridge.Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F13A660959FF21FF508A8BB60058E31F /* Pods-WowShareExample-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WowShareExample-resources.sh"; sourceTree = "<group>"; };
+		F657E830AB9D2AD4449BAAA21F32D8CF /* WebViewBridge.Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = WebViewBridge.Swift.modulemap; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		25DAE5C02D1750E6A87ADB4485E51BBD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19840DCBB2FB5F5B82272C021C1B82CA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D58F228FE3C311465015787BDEB6E654 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31F48386C5851AF7F9E6B768E60F67E1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2906E0557FD3E102DFC7F33D61AF5300 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B2174F08C2AF23C226413CEFCE2B58CA /* Info.plist */,
+				F657E830AB9D2AD4449BAAA21F32D8CF /* WebViewBridge.Swift.modulemap */,
+				23520FC7F4CE0E478CEFA7DA05397357 /* WebViewBridge.Swift.xcconfig */,
+				27F6B0FD0BF1057B4FBBEF2757909758 /* WebViewBridge.Swift-dummy.m */,
+				C0ED42D45A0F5E1813B08F87D3702A87 /* WebViewBridge.Swift-prefix.pch */,
+				64D1CB074796340EE1A2A9650EAEB75A /* WebViewBridge.Swift-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/WebViewBridge.Swift";
+			sourceTree = "<group>";
+		};
+		33945B865D494BFA81C7E78A93D29B87 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B6D1513C6D35E3C8A7D53BD64CD4904B /* WebViewBridge.Swift */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3AB04F60E0C755D500D6A0D39A7E2F07 /* Pods-WowShareExample */ = {
+			isa = PBXGroup;
+			children = (
+				E76BF948B0247186EDB1DD390540F75D /* Info.plist */,
+				4FBB8F3A0DCA330BA77144A4BF1DF5E2 /* Pods-WowShareExample.modulemap */,
+				23FACDA705111E84F9B6A6D1408326A5 /* Pods-WowShareExample-acknowledgements.markdown */,
+				C6E5006948E5E4A4BB7516F5B568F331 /* Pods-WowShareExample-acknowledgements.plist */,
+				0B5EA5B027C1AF5264406667983DA977 /* Pods-WowShareExample-dummy.m */,
+				6EB8852532583696013011AC147C7DF9 /* Pods-WowShareExample-frameworks.sh */,
+				F13A660959FF21FF508A8BB60058E31F /* Pods-WowShareExample-resources.sh */,
+				0824F703F3E22B65E932D267B2319A02 /* Pods-WowShareExample-umbrella.h */,
+				4FC9433831B58205E8386F49F887FD3C /* Pods-WowShareExample.debug.xcconfig */,
+				6B3522D4C27EB2F521708880C310BF71 /* Pods-WowShareExample.release.xcconfig */,
+			);
+			name = "Pods-WowShareExample";
+			path = "Target Support Files/Pods-WowShareExample";
+			sourceTree = "<group>";
+		};
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				33945B865D494BFA81C7E78A93D29B87 /* Pods */,
+				8B4FFA6C65A44445B2A54A05F877D4AE /* Products */,
+				B10D4D3C12D0AFDEE1D565F94C24D30F /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8B4FFA6C65A44445B2A54A05F877D4AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0929004672423237D39A10C0DA99FDDB /* Pods_WowShareExample.framework */,
+				E8D39F7554AD65D8E6756A479EE00068 /* WebViewBridge_Swift.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B10D4D3C12D0AFDEE1D565F94C24D30F /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3AB04F60E0C755D500D6A0D39A7E2F07 /* Pods-WowShareExample */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		B6D1513C6D35E3C8A7D53BD64CD4904B /* WebViewBridge.Swift */ = {
+			isa = PBXGroup;
+			children = (
+				7CA8EB7036D8DA5DD7B3A42916B61511 /* bridge.js */,
+				058F0DAD3BAAE650F4CA1EB5A83466C9 /* ZHWebViewBridge.swift */,
+				2906E0557FD3E102DFC7F33D61AF5300 /* Support Files */,
+			);
+			name = WebViewBridge.Swift;
+			path = WebViewBridge.Swift;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		645A32B7BA076BDF46499A4116F7EB2E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				975DF4B43A19BB72743987BA2B744D67 /* WebViewBridge.Swift-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		689A2FCE49C8778C1176C0B9166960BA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E20006BD870B0A89EA3C66B4A483FB1E /* Pods-WowShareExample-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2B63C491FC60C91998759DD5ECDD2015 /* Pods-WowShareExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4D2F2379CE5DBB3DB08C8B8E426CE8F /* Build configuration list for PBXNativeTarget "Pods-WowShareExample" */;
+			buildPhases = (
+				BFE1E528F4099A991362ABA2DA5C5AB5 /* Sources */,
+				D58F228FE3C311465015787BDEB6E654 /* Frameworks */,
+				689A2FCE49C8778C1176C0B9166960BA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				467D7319B109F46343D22F29A884C295 /* PBXTargetDependency */,
+			);
+			name = "Pods-WowShareExample";
+			productName = "Pods-WowShareExample";
+			productReference = 0929004672423237D39A10C0DA99FDDB /* Pods_WowShareExample.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3D51224E2C5F96FE9431EEC919767C94 /* WebViewBridge.Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE91032B7BCDA6B4545E5391C3897D4E /* Build configuration list for PBXNativeTarget "WebViewBridge.Swift" */;
+			buildPhases = (
+				C740500D02F3D477DAAC5421B64319A5 /* Sources */,
+				25DAE5C02D1750E6A87ADB4485E51BBD /* Frameworks */,
+				645A32B7BA076BDF46499A4116F7EB2E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WebViewBridge.Swift;
+			productName = WebViewBridge.Swift;
+			productReference = E8D39F7554AD65D8E6756A479EE00068 /* WebViewBridge_Swift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 8B4FFA6C65A44445B2A54A05F877D4AE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2B63C491FC60C91998759DD5ECDD2015 /* Pods-WowShareExample */,
+				3D51224E2C5F96FE9431EEC919767C94 /* WebViewBridge.Swift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFE1E528F4099A991362ABA2DA5C5AB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CD354302FB3C0E6D5D317D54A823FC1 /* Pods-WowShareExample-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C740500D02F3D477DAAC5421B64319A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E54F73FF809CE86596F671703A50A5A /* bridge.js in Sources */,
+				3E3898F92F084E7C8E838318D68BAD66 /* WebViewBridge.Swift-dummy.m in Sources */,
+				2DEAA7D80D22F2AD2B4B7BEE0B6546D1 /* ZHWebViewBridge.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		467D7319B109F46343D22F29A884C295 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WebViewBridge.Swift;
+			target = 3D51224E2C5F96FE9431EEC919767C94 /* WebViewBridge.Swift */;
+			targetProxy = 323BD6FF5170A29BC41C5FD76A3A95E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2D9ADC1B9C4909BB243CF05FE51C3230 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23520FC7F4CE0E478CEFA7DA05397357 /* WebViewBridge.Swift.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/WebViewBridge.Swift/WebViewBridge.Swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WebViewBridge.Swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WebViewBridge.Swift/WebViewBridge.Swift.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = WebViewBridge_Swift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3E52CBB607DF09B735F10B5561C3A5B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B3522D4C27EB2F521708880C310BF71 /* Pods-WowShareExample.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-WowShareExample/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WowShareExample/Pods-WowShareExample.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_WowShareExample;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5518BA683F11077CC3D3547363E0E0A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FC9433831B58205E8386F49F887FD3C /* Pods-WowShareExample.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-WowShareExample/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WowShareExample/Pods-WowShareExample.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_WowShareExample;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		59B042A655B7C20CBAB90E385BF4E4C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		86C507C2ED5F28E088AA651FAEE26B7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23520FC7F4CE0E478CEFA7DA05397357 /* WebViewBridge.Swift.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/WebViewBridge.Swift/WebViewBridge.Swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WebViewBridge.Swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WebViewBridge.Swift/WebViewBridge.Swift.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = WebViewBridge_Swift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B7324857C38B065FEB1EEE3105C2367A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59B042A655B7C20CBAB90E385BF4E4C7 /* Debug */,
+				B7324857C38B065FEB1EEE3105C2367A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE91032B7BCDA6B4545E5391C3897D4E /* Build configuration list for PBXNativeTarget "WebViewBridge.Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86C507C2ED5F28E088AA651FAEE26B7C /* Debug */,
+				2D9ADC1B9C4909BB243CF05FE51C3230 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4D2F2379CE5DBB3DB08C8B8E426CE8F /* Build configuration list for PBXNativeTarget "Pods-WowShareExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5518BA683F11077CC3D3547363E0E0A2 /* Debug */,
+				3E52CBB607DF09B735F10B5561C3A5B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

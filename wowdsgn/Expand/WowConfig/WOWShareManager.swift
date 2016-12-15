@@ -32,8 +32,16 @@ struct WOWShareManager {
 //                        
 //                    }
 //                })
+                
+                
+                WowShare.share_friends(title!, shareText: shareNewText, url: url, shareImage: shareImage)
+                
+                
                return
             case .wechat:
+                
+                WowShare.share_text(title!, shareText: shareNewText, url: url, shareImage: shareImage)
+
                 
 //                UMSocialData.default().extConfig.wechatSessionData.title = title
 //                UMSocialData.default().extConfig.wechatSessionData.url = url

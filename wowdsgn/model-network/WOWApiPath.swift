@@ -138,6 +138,7 @@ let URL_CartSelect              = "v1/cart/select"     //选中购物车商品
 
 let URL_CartUnSelect            = "v1/cart/unselect"   //取消选中购物车商品
 
+let URL_CartBottomList          = "v1/cart/hot-products" // 无购物车，显示热门推荐列表
 //订单相关
 let URL_OrderSettle             = "v2/order/settle"            //查询订单内的物品
 

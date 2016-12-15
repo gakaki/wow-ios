@@ -103,15 +103,11 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
 
     }
     func requestBottom()  {
-        var params = [String: AnyObject]()
         
-        let totalPage = 10
-        params = ["excludes": [] as AnyObject ,"currentPage": pageIndex as AnyObject,"pageSize":totalPage as AnyObject]
+  
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result,code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_CartBottomList(pageSize: currentPageSize, currentPage: pageIndex), successClosure: {[weak self] (result,code) in
             if let strongSelf = self{
-                
-                
                 
                 let json = JSON(result)
                 DLog(json)
@@ -125,7 +121,7 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
 
                         
                     }
-                    if bannerList.count < totalPage {// 如果拿到的数据，小于分页，则说明，无下一页
+                    if bannerList.count < currentPageSize {// 如果拿到的数据，小于分页，则说明，无下一页
                         
                         strongSelf.tableView.mj_footer.endRefreshingWithNoMoreData()
                         

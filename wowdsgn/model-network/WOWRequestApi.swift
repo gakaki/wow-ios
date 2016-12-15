@@ -102,7 +102,8 @@ public enum RequestApi{
     case api_CartSelect(shoppingCartIds: [Int])
     
     case api_CartUnSelect(shoppingCartIds: [Int])
-    
+    // 无购物车时。显示列表
+    case api_CartBottomList(pageSize: Int, currentPage: Int)
     
     case api_TopicCommentList(pageSize: Int, currentPage: Int, topicId: Int, lastId: Int)
     //商品评价
@@ -335,7 +336,8 @@ extension RequestApi:TargetType{
             return URL_CartSelect
         case .api_CartUnSelect:
             return URL_CartUnSelect
-            
+        case .api_CartBottomList:
+            return URL_CartBottomList
         //收藏相关
         case .api_UserFavorite:
             return URL_FavoriteList
@@ -482,7 +484,8 @@ extension RequestApi:TargetType{
             .api_checkVersion,
             .api_MessageMain,
             .api_MessageList,
-            .api_MessageCount:
+            .api_MessageCount,
+            .api_CartBottomList:
 
             return .GET
 
@@ -561,6 +564,9 @@ extension RequestApi:TargetType{
             case let .api_CartUnSelect(shoppingCartIds):
                 params = ["shoppingCartIds": shoppingCartIds]
 
+            case let .api_CartBottomList(pageSize,currentPage):
+                
+                params = ["pageSize": pageSize, "currentPage": currentPage]
             
             case let .api_Change(param):
                 params = param

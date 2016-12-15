@@ -25,6 +25,8 @@ struct WOWUserManager {
      static let WOWUserLoginStatus   = "WOWUserLoginStatus"
      static let WOWUserPhotoData     = "WOWUserPhotoData"
      static let WOWDeviceToken       = "WOWDeviceToken"
+     static let WOWUserMsgCount      = "WOWUserMsgCount"
+     static let WOWSystemMsgCount    = "WOWSystemMsgCount"
 
 
 
@@ -45,6 +47,24 @@ struct WOWUserManager {
         }
         set{
             MGDefault.set(newValue, forKey:WOWDeviceToken)
+            MGDefault.synchronize()
+        }
+    }
+    static var userMsgCount:Int {
+        get{
+            return (MGDefault.object(forKey: WOWUserMsgCount) as? Int) ?? 0
+        }
+        set{
+            MGDefault.set(newValue, forKey:WOWUserMsgCount)
+            MGDefault.synchronize()
+        }
+    }
+    static var systemMsgCount:Int {
+        get{
+            return (MGDefault.object(forKey: WOWSystemMsgCount) as? Int) ?? 0
+        }
+        set{
+            MGDefault.set(newValue, forKey:WOWSystemMsgCount)
             MGDefault.synchronize()
         }
     }

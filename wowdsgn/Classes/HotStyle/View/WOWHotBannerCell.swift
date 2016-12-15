@@ -22,13 +22,14 @@ class WOWHotBannerCell: UITableViewCell,ModuleViewElement {
     func reloadBanner(_ dataArr:[WOWCarouselBanners]){
         imageURLArray = []
         for i in 0..<dataArr.count {
-            imageURLArray.append(dataArr[i].bannerImgSrc! as String)
+            imageURLArray.append(dataArr[i].bannerImgSrc ?? "" as String)
         }
         
         cyclePictureView.showPageControl = true
         cyclePictureView.currentDotColor = UIColor.black
         cyclePictureView.otherDotColor =   UIColor(hexString: "000000", alpha: 0.2)!
         cyclePictureView.imageURLArray = imageURLArray
+        cyclePictureView.placeholderImage = UIImage(named: "placeholder_product")
         cyclePictureView.timeInterval = 3
         
     }

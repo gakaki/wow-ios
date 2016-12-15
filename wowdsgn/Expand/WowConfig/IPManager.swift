@@ -70,7 +70,7 @@ class IPManager {
                 ip_final = "192.168.1.1"
             }
         }
-
+        
         if ( ip_final.length == 0 )  { ip_final = "127.0.0.1" }
         
         self.ip_public = ip_final

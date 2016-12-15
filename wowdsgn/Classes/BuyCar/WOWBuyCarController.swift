@@ -11,10 +11,18 @@ import UIKit
 class WOWBuyCarController: WOWBaseViewController {
     let cellNormalID = String(describing: WOWBuyCarNormalCell.self)
     let cellID = String(describing: WOWOrderCell.self)
-//    private var editingModel    : WOWBuyCarModel?
     fileprivate var totalPrice      : String?
-    
-    var isRecommendView : Bool = false // 是否添加过 为你推荐的 view
+    let pageSize           = 10
+    var bottomListCount    = 0 // 底部数组个数
+    var bottomCellLine     = 0 // 底部cell number
+    var bottomListArray    = [WOWProductModel](){//底部列表数组 ,如果有底部瀑布流的话
+        didSet{
+            
+            bottomListCount = bottomListArray.count
+            bottomCellLine  = bottomListCount.getParityCellNumber()
+        }
+    }
+
     
     var dataArr = [WOWCarProductModel](){
         didSet{
@@ -22,11 +30,11 @@ class WOWBuyCarController: WOWBaseViewController {
              *  如果购物车内没有商品底部view就隐藏
              */
             if dataArr.count == 0 {
-                showRecommendView()
                 bottomView.isHidden = true
+                bottomHeight.constant = 0
             }else{
-                hideRecommendView()
                 bottomView.isHidden = false
+                bottomHeight.constant = 50
             }
         }
     }
@@ -71,19 +79,20 @@ class WOWBuyCarController: WOWBaseViewController {
     @IBOutlet weak var endButton: UIButton!             //去结算按钮
     @IBOutlet weak var totalPriceLabel: UILabel!        //商品总价
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomHeight: NSLayoutConstraint!    //底部view高度
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObservers()
+        request()
         MobClick.e(.Shoppingcart)
-//        self.view.backgroundColor = UIColor.red
     }
     
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,25 +101,54 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        addObservers()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        request()
+        requestBuyCarProduct()
 
+    }
+    deinit {
+        removeObservers()
     }
 
 
-
-    
+    //促销信息
+    lazy var emptyHeaderView:WOWBuyCarEmpty = {
+        let view = Bundle.main.loadNibNamed("WOWBuyCarEmpty", owner: self, options: nil)?.last as! WOWBuyCarEmpty
+        return view
+    }()
+    lazy var headerView:WOWBuyCarHeaderView = {
+        let view = Bundle.main.loadNibNamed("WOWBuyCarHeaderView", owner: self, options: nil)?.last as! WOWBuyCarHeaderView
+        return view
+    }()
 //MARK:Private Method
     fileprivate func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
         
     }
-    
+    fileprivate func removeObservers(){
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
+        
+    }
+    //MARK notidication method
+    // 刷新物品的收藏状态与否 传productId 和 favorite状态
+    func refreshData(_ sender: Notification)  {
+        
+        if  let send_obj =  sender.object as? [String:AnyObject] {
+            
+            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+    }
     func loginSuccess() {
         request()
+        requestBuyCarProduct()
     }
     
     fileprivate func allbuttonIsSelect() {
@@ -130,7 +168,6 @@ class WOWBuyCarController: WOWBaseViewController {
         totalPriceLabel.text = "¥ 0.00"
         endButton.setTitle("去结算", for:UIControlState())
         endButton.tintColor = UIColor.clear
-
         configTable()
     }
     
@@ -140,6 +177,7 @@ class WOWBuyCarController: WOWBaseViewController {
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.register(UINib.nibName(String(describing: WOWBuyCarNormalCell.self)), forCellReuseIdentifier:cellNormalID)
         tableView.register(UINib.nibName(String(describing: WOWOrderCell.self)), forCellReuseIdentifier:cellID)
+        self.tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
         self.tableView.backgroundColor = GrayColorLevel5
         self.tableView.separatorColor = SeprateColor
         self.tableView.mj_header = self.mj_header
@@ -224,107 +262,86 @@ class WOWBuyCarController: WOWBaseViewController {
      */
     override func request() {
         super.request()
-        //1.直接拉取服务器端购物车数据
-            WOWNetManager.sharedManager.requestWithTarget(.api_CartGet, successClosure: {[weak self](result, code) in
-                if let strongSelf = self{
-                    
-                    //TalkingData 购物车显示
-                    let shoppingCart = TDShoppingCart.create()
-
-                    let model = Mapper<WOWCarModel>().map(JSONObject:result)
-                    if let arr = model?.shoppingCartResult {
-                        strongSelf.dataArr = arr
-                        strongSelf.bottomView.isHidden = false
-                        //重新计算购物车数量
-                        WOWUserManager.userCarCount = 0
-                        for product in arr {
-                            WOWUserManager.userCarCount += product.productQty ?? 1
-                            /**
-                             *  productStatus 产品状态
-                             1 已上架 2已下架 -1已失效
-                             
-                             如果已下架，isSelect = false
-                             */
-                            if product.productStatus == 2 || product.productStatus == -1{
-                                product.isSelected = false
-                            }
-                        }
-                        strongSelf.updateCarCountBadge()
-
-                        
-                        strongSelf.validArr = [WOWCarProductModel]()
-                        strongSelf.selectedArr = [WOWCarProductModel]()
-                        //判断当前数组有多少默认选中的加入选中的数组
-                        for product in strongSelf.dataArr {
-                            
-                            if product.productStatus == 1 && product.productStock > 0{
-                                strongSelf.validArr.append(product)
-                                if product.isSelected ?? false {
-                                    strongSelf.selectedArr.append(product)
-                                }
-                                
-                                let id    = String(describing:(product.productId ?? 0))
-                                let price = Int32( product.sellPrice ?? 0 ) * 100
-                                let name  = product.productName ?? ""
-                                let amount = Int32( product.productQty ?? 0 )
-                                shoppingCart?.addItem(withCategory: "", itemId: id, name: name, unitPrice: price, amount: amount)
-
-                            }
-                            
-                        }
-                        //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
-                       strongSelf.allbuttonIsSelect()
-                    }else {
-//                        showRecommendView()
-                       strongSelf.dataArr = []
-                        strongSelf.bottomView.isHidden = true
-                    }
-                    strongSelf.endRefresh()
-
-//                    strongSelf.updateCarCountBadge()
-                    strongSelf.tableView.reloadData()
-                    
-                    
-                    TalkingDataAppCpa.onViewShoppingCart(shoppingCart)
-
-                }
-                }, failClosure: {[weak self] (errorMsg) in
-                    if let strongSelf = self{
-                        strongSelf.endRefresh()
-                    }
-            })
-    }
-//MARK: 显示购物车为空的界面 ‘为你推荐界面’
-    func showRecommendView(){
-        
-        self.tableView.isHidden     = true
-        self.recommendView.isHidden = false
-        
-        if isRecommendView == false {// 第一次是添加该“为你推荐”View  后续是控制 显示 or 隐藏 此View
-
-            isRecommendView = true
-            self.view.addSubview(self.recommendView)
-            
-        }
-   
-       
+        requestBottom()
     }
     
-    func hideRecommendView(){
-
-        self.recommendView.isHidden = true
-        self.tableView.isHidden     = false
-//        self.view.addSubview(self.recommendView)
-        
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        requestBuyCarProduct()
+    }
+    
+    fileprivate func requestBuyCarProduct() {
+        //1.直接拉取服务器端购物车数据
+        WOWNetManager.sharedManager.requestWithTarget(.api_CartGet, successClosure: {[weak self](result, code) in
+            if let strongSelf = self{
+                
+                //TalkingData 购物车显示
+                let shoppingCart = TDShoppingCart.create()
+                
+                let model = Mapper<WOWCarModel>().map(JSONObject:result)
+                if let arr = model?.shoppingCartResult {
+                    strongSelf.dataArr = arr
+                    strongSelf.bottomView.isHidden = false
+                    //重新计算购物车数量
+                    WOWUserManager.userCarCount = 0
+                    for product in arr {
+                        WOWUserManager.userCarCount += product.productQty ?? 1
+                        /**
+                         *  productStatus 产品状态
+                         1 已上架 2已下架 -1已失效
+                         
+                         如果已下架，isSelect = false
+                         */
+                        if product.productStatus == 2 || product.productStatus == -1{
+                            product.isSelected = false
+                        }
+                    }
+                    strongSelf.updateCarCountBadge()
+                    
+                    
+                    strongSelf.validArr = [WOWCarProductModel]()
+                    strongSelf.selectedArr = [WOWCarProductModel]()
+                    //判断当前数组有多少默认选中的加入选中的数组
+                    for product in strongSelf.dataArr {
+                        
+                        if product.productStatus == 1 && product.productStock > 0{
+                            strongSelf.validArr.append(product)
+                            if product.isSelected ?? false {
+                                strongSelf.selectedArr.append(product)
+                            }
+                            
+                            let id    = String(describing:(product.productId ?? 0))
+                            let price = Int32( product.sellPrice ?? 0 ) * 100
+                            let name  = product.productName ?? ""
+                            let amount = Int32( product.productQty ?? 0 )
+                            shoppingCart?.addItem(withCategory: "", itemId: id, name: name, unitPrice: price, amount: amount)
+                            
+                        }
+                        
+                    }
+                    //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
+                    strongSelf.allbuttonIsSelect()
+                }else {
+                    //                        showRecommendView()
+                    strongSelf.dataArr = []
+                    strongSelf.bottomView.isHidden = true
+                }
+                strongSelf.endRefresh()
+                
+                //                    strongSelf.updateCarCountBadge()
+                strongSelf.tableView.reloadData()
+                
+                
+                TalkingDataAppCpa.onViewShoppingCart(shoppingCart)
+                
+            }
+            }) {[weak self] (errorMsg) in
+                if let strongSelf = self{
+                    strongSelf.endRefresh()
+                }
+        }
     }
 
-    lazy var recommendView: UIView = {
-        
-        let view = Bundle.main.loadNibNamed("WOWRecommendView", owner: self, options: nil)?.last as! WOWRecommendView
-        view.frame = self.view.bounds
-        return view
-        
-    }()
     /**
      3.删除购物车数据
      - parameter items:
@@ -460,12 +477,69 @@ class WOWBuyCarController: WOWBaseViewController {
         }
     
     }
+    
+    fileprivate func requestBottom()  {
+        var params = [String: AnyObject]()
+        
+        params = ["excludes": [] as AnyObject ,"currentPage": pageIndex as AnyObject,"pageSize":pageSize as AnyObject]
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result,code) in
+            if let strongSelf = self{
+                
+                
+                
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.endRefresh()
+                
+                let bannerList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
+                
+                if let bannerList = bannerList{
+                    if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
+                        strongSelf.bottomListArray = []
+                        
+                        
+                    }
+                    if bannerList.count < strongSelf.pageSize {// 如果拿到的数据，小于分页，则说明，无下一页
+                        
+                        strongSelf.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        
+                    }else {
+                        
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                        
+                    }
+                    
+                    strongSelf.bottomListArray.append(contentsOf: bannerList)
+                    
+                }else {
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.bottomListArray = []
+                    }
+                    
+                    strongSelf.tableView.mj_footer = nil
+                    
+                }
+                strongSelf.tableView.reloadData()
+                WOWHud.dismiss()
+                
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.dismiss()
+            }
+        }
+    }
+
 }
 
 
 extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataArr.count
+        return dataArr.count + bottomCellLine
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -473,44 +547,104 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = dataArr[(indexPath as NSIndexPath).section]
-        //productStatus = 1 已上架，productStatus = 2 已下架
-        if model.productStatus == 1 && model.productStock > 0{
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellNormalID, for: indexPath) as! WOWBuyCarNormalCell
-            cell.showData(model)
-            cell.selectButton.tag = (indexPath as NSIndexPath).section
-            cell.selectButton.addTarget(self, action: #selector(selectClick(_:)), for: .touchUpInside)
-            cell.subCountButton.tag = (indexPath as NSIndexPath).section
-            cell.subCountButton.addTarget(self, action: #selector(subCountClick(_:)), for: .touchUpInside)
-            cell.addCountButton.tag = (indexPath as NSIndexPath).section
-            cell.addCountButton.addTarget(self, action: #selector(addCountClick(_:)), for: .touchUpInside)
-            cell.delegate = self
-            return cell
-
+        if indexPath.section < dataArr.count {
+            let model = dataArr[(indexPath as NSIndexPath).section]
+            //productStatus = 1 已上架，productStatus = 2 已下架
+            if model.productStatus == 1 && model.productStock > 0{
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellNormalID, for: indexPath) as! WOWBuyCarNormalCell
+                cell.showData(model)
+                cell.selectButton.tag = (indexPath as NSIndexPath).section
+                cell.selectButton.addTarget(self, action: #selector(selectClick(_:)), for: .touchUpInside)
+                cell.subCountButton.tag = (indexPath as NSIndexPath).section
+                cell.subCountButton.addTarget(self, action: #selector(subCountClick(_:)), for: .touchUpInside)
+                cell.addCountButton.tag = (indexPath as NSIndexPath).section
+                cell.addCountButton.addTarget(self, action: #selector(addCountClick(_:)), for: .touchUpInside)
+                cell.delegate = self
+                return cell
+                
+            }else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWOrderCell
+                cell.showData(model)
+                cell.delegate = self
+                return cell
+                
+            }
         }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWOrderCell
-            cell.showData(model)
+            let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBottomCell", for: indexPath) as! HomeBottomCell
+            
+            cell.indexPath = indexPath
+            
+            let OneCellNumber = ((indexPath as NSIndexPath).section + 0 - dataArr.count) * 2
+            let TwoCellNumber = (((indexPath as NSIndexPath).section + 1 - dataArr.count) * 2) - 1
+            if bottomListCount.isOdd && (indexPath as NSIndexPath).section + 1 ==   bottomListCount.getParityCellNumber() {//  满足为奇数 第二个item 隐藏
+                
+                self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: false, cell: cell,dataSourceArray:bottomListArray)
+                
+            }else{
+                
+                self.cellUIConfig(one: OneCellNumber, two: TwoCellNumber, isHiddenTwoItem: true, cell: cell,dataSourceArray:bottomListArray)
+                
+            }
             cell.delegate = self
+            cell.selectionStyle   = .none
+            
             return cell
 
         }
+        
         
     }
     
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        let delete = UITableViewRowAction(style: .default, title: "删除") { [weak self](action, indexPath) in
-            if let strongSelf = self {
-                
-                strongSelf.alertView(strongSelf.dataArr[(indexPath as NSIndexPath).section])
+            let delete = UITableViewRowAction(style: .default, title: "删除") { [weak self](action, indexPath) in
+                if let strongSelf = self {
+                    
+                    strongSelf.alertView(strongSelf.dataArr[(indexPath as NSIndexPath).section])
+                }
             }
+            return [delete]
+        
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section < dataArr.count {
+            return true
+        }else {
+            return false
         }
-        return [delete]
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
+        
+        if section < dataArr.count {
+            return 15
+        }else {
+            if section == dataArr.count {
+                if dataArr.count == 0 {
+                    return 325
+                }else {
+                    return 65
+                }
+
+            }else {
+                return 0.01
+            }
+        }
+        
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == dataArr.count {
+            if dataArr.count == 0 {
+                return emptyHeaderView
+            }else {
+                return headerView
+            }
+        }else {
+            let view = UIView()
+            view.backgroundColor = UIColor.clear
+            return view
+        }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
@@ -560,18 +694,26 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
         asyncUpdateCount(model.shoppingCartId!, productQty: count, indexPath: indexPath)
     }
     
-//    //MARK: - EmptyData
-//    func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
-//        return UIImage(named: "buyCarEmpty")
-//    }
-//    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-//        let text = "您的购物车还是空的\n快去逛逛吧"
-//        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
-//        return attri
-//    }
-//    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-//        return true
-//    }
+    // 配置cell的UI
+    func cellUIConfig(one: NSInteger, two: NSInteger ,isHiddenTwoItem: Bool, cell:HomeBottomCell,dataSourceArray:[WOWProductModel])  {
+        let  modelOne = dataSourceArray[one]
+        if isHiddenTwoItem == false {
+            
+            cell.showDataOne(modelOne)
+            cell.twoLb.isHidden = false
+            
+        }else{
+            
+            let  modelTwo = dataSourceArray[two]
+            cell.showDataOne(modelOne)
+            cell.showDataTwo(modelTwo)
+            cell.twoLb.isHidden = true
+        }
+        
+        cell.oneBtn.tag = one
+        cell.twoBtn.tag = two
+        
+    }
     
     //MARK: - alertView
     func alertView(_ model: WOWCarProductModel) {
@@ -593,32 +735,27 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     
 }
 
-extension WOWBuyCarController: buyCarDelegate {
+extension WOWBuyCarController: buyCarDelegate, HomeBottomDelegate {
     func goProductDetail(_ productId: Int?) {
-        if let productId = productId {
-            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
-            vc.hideNavigationBar = true
-            vc.productId = productId
-//            vc.delegate = self
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        
+        toVCProduct(productId)
+
+    
+    }
+    // 跳转产品详情代理
+    func goToProductDetailVC(_ productId: Int?){
+        
+        toVCProduct(productId)
+        
     }
 }
 
 extension WOWBuyCarController: orderCarDelegate {
     func toProductDetail(_ productId: Int?) {
-        if let productId = productId {
-            let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
-            vc.hideNavigationBar = true
-            vc.productId = productId
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        
+        toVCProduct(productId)
     }
 }
-//extension WOWBuyCarController:UpdateBuyCarListDelegate {
-//    func updateBuyCarList(){
-//        request()
-//    }
-//}
+
 
 

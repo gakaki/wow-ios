@@ -117,13 +117,13 @@ class WOWBaseModuleVC: WOWBaseViewController {
             for t in brandArray{
                 switch t.moduleType ?? 0 {
                 case 302:
-                    if let s  = t.moduleContentTmp!["categories"] as? [AnyObject] {
+                    if let s  = t.moduleContentTmp?["categories"] as? [AnyObject] {
                         t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                     }
                 case 401:
-                    if let s  = t.moduleContentTmp!["products"] as? [AnyObject] {
+                    if let s  = t.moduleContentTmp?["products"] as? [AnyObject] {
                         t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
-                        t.name = (t.moduleContentTmp!["name"] as? String) ?? "本周上新"
+                        t.name = (t.moduleContentTmp?["name"] as? String) ?? "本周上新"
                         
                     }
                     
@@ -136,7 +136,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
                          t.moduleContentItem   =  Mapper<WowModulePageItemVO>().map(JSONObject:s)
                     }
                 case 301:
-                    if let s  = t.moduleContentTmp!["categories"] as? [AnyObject] {
+                    if let s  = t.moduleContentTmp?["categories"] as? [AnyObject] {
                          t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                     }
                     

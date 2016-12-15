@@ -218,20 +218,20 @@ extension  UIViewController {
     //跳转微信登录界面
     func toWeixinVC(_ isPresent:Bool = false){
         print("toWeixinVC")
-                let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)
-//                UMSocialControllerService.defaultControllerService().socialUIDelegate = self
-                snsPlat?.loginClickHandler(self, UMSocialControllerService.default(), true, {[weak self]response in
-                    if let strongSelf = self{
-                        if response?.responseCode == UMSResponseCodeSuccess {
-//                            let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
-                  
-                            
-                            strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
-                        }else{
-                            WOWHud.showMsg("授权登录失败")
-                        }
-                    }
-                })
+//                let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)
+////                UMSocialControllerService.defaultControllerService().socialUIDelegate = self
+//                snsPlat?.loginClickHandler(self, UMSocialControllerService.default(), true, {[weak self]response in
+//                    if let strongSelf = self{
+//                        if response?.responseCode == UMSResponseCodeSuccess {
+////                            let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
+//                  
+//                            
+//                            strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
+//                        }else{
+//                            WOWHud.showMsg("授权登录失败")
+//                        }
+//                    }
+//                })
         /**
          shareSDK第三方登录
          */

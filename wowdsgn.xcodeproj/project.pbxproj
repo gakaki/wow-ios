@@ -2856,24 +2856,7 @@
 				INFOPLIST_FILE = wowdsgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/Analytics/DeepShare",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/Analytics/GrowingIO",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/Analytics/TalkingData",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/TencentOpenAPI",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/Wechat",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty/UMSocial/SocialLibraries/AlipayShare",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty/UMSocial/SocialLibraries/QQ",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty/UMSocial/SocialLibraries/Sina",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty/UMSocial/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/wowdsgn/UMeng/TencentOpenAPI",
-					"$(PROJECT_DIR)/wowdsgn/UMeng/UMSocial_Sdk_5.2.1",
-					"$(PROJECT_DIR)/wowdsgn/UMeng/Wechat",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/UMessage",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2907,24 +2890,7 @@
 				INFOPLIST_FILE = wowdsgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/Analytics/DeepShare",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/Analytics/GrowingIO",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/Analytics/TalkingData",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/TencentOpenAPI",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/UMSocial_Sdk_5.2.1",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/Wechat",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty/UMSocial/SocialLibraries/AlipayShare",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty/UMSocial/SocialLibraries/QQ",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty/UMSocial/SocialLibraries/Sina",
-					"$(PROJECT_DIR)/wowdsgn/3rdParty/UMSocial/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/wowdsgn/UMeng/TencentOpenAPI",
-					"$(PROJECT_DIR)/wowdsgn/UMeng/UMSocial_Sdk_5.2.1",
-					"$(PROJECT_DIR)/wowdsgn/UMeng/Wechat",
-					"$(PROJECT_DIR)/wowdsgn/Expand/WowVendor/UMeng/UMessage",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

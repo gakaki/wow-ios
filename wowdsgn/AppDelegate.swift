@@ -14,6 +14,7 @@ import YYWebImage
 import SwiftyUserDefaults
 import wow3rd
 import EZSwiftExtensions
+import WowShare
 
 //import JSPatch
 //import JSPatchHelper

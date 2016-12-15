@@ -338,7 +338,6 @@
 		06C869A21DD19A25004C05E3 /* RouterMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A11DD19A25004C05E3 /* RouterMapper.swift */; };
 		06C869A41DD19B4E004C05E3 /* AppDelegateUmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */; };
 		06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869AA1DD19C8E004C05E3 /* Config3rd.swift */; };
-		06F944DE1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */; };
 		2D0043F41DD327D500A7D98A /* WOWTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0043F31DD327D500A7D98A /* WOWTableDelegate.swift */; };
 		2D2331DF1DFF9398006E7BC0 /* WOWUpdateFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2331D91DFF9398006E7BC0 /* WOWUpdateFooter.swift */; };
 		2D2331E01DFF9398006E7BC0 /* WOWUpdateFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2331DA1DFF9398006E7BC0 /* WOWUpdateFooter.xib */; };
@@ -869,8 +868,6 @@
 		06C869A71DD19BDF004C05E3 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		06C869AA1DD19C8E004C05E3 /* Config3rd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config3rd.swift; sourceTree = "<group>"; };
-		06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.4.0.a; path = UMessage/libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
-		06F944DD1DD1A3910055BAFC /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = UMessage/UMessage.h; sourceTree = "<group>"; };
 		215C6F175F8DEB1B0D61D6FA /* Pods-wowdsgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.release.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.release.xcconfig"; sourceTree = "<group>"; };
 		2D0043F31DD327D500A7D98A /* WOWTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWTableDelegate.swift; sourceTree = "<group>"; };
 		2D2331D91DFF9398006E7BC0 /* WOWUpdateFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateFooter.swift; sourceTree = "<group>"; };
@@ -1045,7 +1042,6 @@
 				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
 				0681214E1DB4D03600407319 /* libSocialQQ.a in Frameworks */,
 				069D2F741DB4793300A059D0 /* libz.tbd in Frameworks */,
-				06F944DE1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				0681215D1DB4D03700407319 /* libWeChatSDK.a in Frameworks */,
 				068121521DB4D03700407319 /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
 				069D2F841DB4796D00A059D0 /* SystemConfiguration.framework in Frameworks */,
@@ -1115,8 +1111,6 @@
 		068121261DB4D03600407319 /* UMeng */ = {
 			isa = PBXGroup;
 			children = (
-				06F944DC1DD1A3910055BAFC /* libUMessage_Sdk_1.4.0.a */,
-				06F944DD1DD1A3910055BAFC /* UMessage.h */,
 				068121271DB4D03600407319 /* TencentOpenAPI */,
 				0681212C1DB4D03600407319 /* UMSocial_Sdk_5.2.1 */,
 				068121471DB4D03600407319 /* Wechat */,

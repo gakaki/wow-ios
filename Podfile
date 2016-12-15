@@ -7,7 +7,7 @@ target 'wowdsgn' do
 
 	#pod 'BTNavigationDropdownMenu', git:"https://github.com/PhamBaTho/BTNavigationDropdownMenu.git",:branch => "swift-3.0"
 
-    pod 'Moya','~> 8.0.0-beta.2'
+  pod 'Moya','~> 8.0.0-beta.2'
 	pod 'Moya/RxSwift','~> 8.0.0-beta.2'
 	pod 'Alamofire'
 	pod 'RxDataSources', '~> 1.0.0-beta.2'
@@ -43,7 +43,7 @@ target 'wowdsgn' do
 
 	pod 'VTMagic'
 	pod 'SDWebImage'
-  pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
+  # pod 'UMengAnalytics-NO-IDFA' #放到wow-3rd 用liba了
 
   #	pod 'Hashids-Swift'			#短id生成
   #	pod 'StyleKit'       		暂时不用
@@ -58,7 +58,7 @@ target 'wowdsgn' do
 	pod 'FCUUID'
 	pod 'MJRefresh'
 	pod 'DZNEmptyDataSet'
-    pod 'TZImagePickerController'
+  pod 'TZImagePickerController'
 	## ShareSDK主模块(必须)
 	#pod 'ShareSDK3'
 	## Mob 公共库(必须) 如果同时集成SMSSDK iOS2.0:可看此注意事项：http://bbs.mob.com/thread-20051-1-1.html
@@ -105,11 +105,11 @@ target 'wowdsgn' do
 end
 
 
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
-      config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '10.10'
-    end
-  end
-end
+# post_install do |installer|
+#   installer.pods_project.targets.each do |target|
+#     target.build_configurations.each do |config|
+#       config.build_settings['SWIFT_VERSION'] = '3.0'
+#       config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '10.10'
+#     end
+#   end
+# end

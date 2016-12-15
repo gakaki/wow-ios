@@ -18,14 +18,33 @@
   "platforms": {
     "ios": "9.0"
   },
+  "public_header_files": [
+    "wow3rd/libs/**/*.h",
+    "wow3rd/frameworks/**/*.h"
+  ],
   "source_files": [
     "wow3rd/Classes/**/*",
-    "wow3rd/libs/**/*.h"
+    "wow3rd/libs/**/*.h",
+    "wow3rd/frameworks/**/*.h"
   ],
-  "frameworks": "UserNotifications",
-  "libraries": "z",
-  "public_header_files": "wow3rd/libs/**/*.h",
+  "frameworks": [
+    "UIKit",
+    "CoreTelephony",
+    "SystemConfiguration",
+    "ImageIO",
+    "CoreData"
+  ],
+  "weak_frameworks": "UserNotifications",
+  "libraries": [
+    "z",
+    "c++",
+    "sqlite3"
+  ],
   "vendored_libraries": "wow3rd/libs/**/*.a",
+  "vendored_frameworks": "wow3rd/frameworks/**/*.framework",
+  "xcconfig": {
+    "OTHER_LDFLAGS": "-ObjC -all_load -force_load"
+  },
   "dependencies": {
     "URLNavigator": [
       "~> 1.0"

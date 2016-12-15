@@ -1,12 +1,13 @@
 CONFIGURATION_BUILD_DIR = $PODS_CONFIGURATION_BUILD_DIR/wow3rd
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/URLNavigator" "$PODS_CONFIGURATION_BUILD_DIR/WebViewBridge.Swift"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/frameworks" "$PODS_CONFIGURATION_BUILD_DIR/URLNavigator" "$PODS_CONFIGURATION_BUILD_DIR/WebViewBridge.Swift"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Pingpp" "${PODS_ROOT}/Headers/Public/UMengAnalytics-NO-IDFA"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Pingpp"
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../wow3rd/wow3rd/libs"
-OTHER_LDFLAGS = -l"UMessage_Sdk_1.4.0" -l"z" -framework "UserNotifications"
+OTHER_LDFLAGS = -ObjC -all_load -l"UMessage_Sdk_1.4.0" -l"c++" -l"sqlite3" -l"z" -framework "CoreData" -framework "CoreTelephony" -framework "ImageIO" -framework "SystemConfiguration" -framework "UIKit" -framework "UMMobClick" -weak_framework "UserNotifications"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}
+PODS_TARGET_SRCROOT = ${PODS_ROOT}/../wow3rd
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
 SKIP_INSTALL = YES

@@ -144,14 +144,7 @@ class WOWController: WOWBaseModuleVC {
                     strongSelf.tableView.reloadData()
                
 //                }
-<<<<<<< HEAD
-                
-                if strongSelf.isCheackUpdate == false {
-//                    strongSelf.requestCheakVersion()
-                }
-               
-=======
->>>>>>> 71ecc5578f31ad54304d7549c4b5dc1af8b504bf
+
                
             }
         }) {[weak self] (errorMsg) in
@@ -222,28 +215,7 @@ class WOWController: WOWBaseModuleVC {
         }
     }
     
-<<<<<<< HEAD
-    func requestCheakVersion() {
-        
-        let params = ["appType": 1, "platForm": 2,"version":1.5]
-        
-        WOWNetManager.sharedManager.requestWithTarget(.api_checkVersion(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
-            WOWHud.dismiss()
-            if let strongSelf = self{
-                strongSelf.isCheackUpdate = true
-                let json = JSON(result)
-                DLog(json)
-                strongSelf.goToUpdateVersion()
 
-            }
-        }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
-                strongSelf.endRefresh()
-                WOWHud.dismiss()
-            }
-        }
-        
-    }
     
     func requestMsgCount() {
         
@@ -263,11 +235,7 @@ class WOWController: WOWBaseModuleVC {
         }
         
     }
-    
-    
-
-=======
->>>>>>> 71ecc5578f31ad54304d7549c4b5dc1af8b504bf
+     
   }
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel

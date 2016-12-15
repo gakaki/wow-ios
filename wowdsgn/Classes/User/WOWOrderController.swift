@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class WOWOrderController: WOWBaseViewController {
     var entrance = orderDetailEntrance.orderList
     var dataArr  = [WOWNewOrderListModel]()

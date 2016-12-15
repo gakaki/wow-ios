@@ -34,9 +34,10 @@ wowdsgn集成各种第三方库
     # 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
     'OTHER_LDFLAGS' => '-ObjC -all_load -force_load'
   }
-  
+
   s.dependency 'URLNavigator', '~> 1.0'
   s.dependency 'WebViewBridge.Swift'
+  s.dependency 'LeanCloud'
 
 
 #  s.dependency 'WebViewJavascriptBridge', '~> 5.0'

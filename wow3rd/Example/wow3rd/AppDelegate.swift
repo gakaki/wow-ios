@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import wow3rd
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

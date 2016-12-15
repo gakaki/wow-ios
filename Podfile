@@ -1,5 +1,5 @@
 platform :ios, '9.0'
-
+install! 'cocoapods',:deterministic_uuids => false
 target 'wowdsgn' do
 
 #  inhibit_all_warnings!
@@ -73,6 +73,8 @@ target 'wowdsgn' do
 #融云
 #	pod 'RongCloudIMKit', '2.7.2' #融云用的realm 版本太低
 
+
+
 #自己的私有pod
 #王云鹏自己的framework
 		pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
@@ -100,8 +102,23 @@ target 'wowdsgn' do
 	#https://github.com/onmyway133/fantastic-ios-animation/blob/master/Animation/popup.md 动画集合，备用，可参考代码
 	#http://cdn0.jianshu.io/p/83c069022e45/comments/802155 swift项目需要用到的开源组件
 
+
+
+	pod 'Pingpp/Alipay', '~> 2.2.10'
+	pod 'Pingpp/Wx', '~> 2.2.10'
+	pod 'Pingpp/CmbWallet', '~> 2.2.10'
+
+
+
 end
 
+
+
+post_install do |installer|
+    installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
+        configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
+    end
+end
 
 # post_install do |installer|
 #   installer.pods_project.targets.each do |target|

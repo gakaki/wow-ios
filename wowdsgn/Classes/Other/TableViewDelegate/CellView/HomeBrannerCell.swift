@@ -32,6 +32,7 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement {
         cyclePictureView.currentDotColor = UIColor.black
         cyclePictureView.otherDotColor =   UIColor(hexString: "000000", alpha: 0.2)!
         cyclePictureView.imageURLArray = imageURLArray
+        cyclePictureView.placeholderImage = UIImage.init(named: product)
         cyclePictureView.timeInterval = 3
      
     }

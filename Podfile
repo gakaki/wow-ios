@@ -1,5 +1,5 @@
 platform :ios, '9.0'
-
+install! 'cocoapods',:deterministic_uuids => false
 target 'wowdsgn' do
 
 #  inhibit_all_warnings!
@@ -7,7 +7,7 @@ target 'wowdsgn' do
 
 	#pod 'BTNavigationDropdownMenu', git:"https://github.com/PhamBaTho/BTNavigationDropdownMenu.git",:branch => "swift-3.0"
 
-    pod 'Moya','~> 8.0.0-beta.2'
+  pod 'Moya','~> 8.0.0-beta.2'
 	pod 'Moya/RxSwift','~> 8.0.0-beta.2'
 	pod 'Alamofire'
 	pod 'RxDataSources', '~> 1.0.0-beta.2'
@@ -43,22 +43,20 @@ target 'wowdsgn' do
 
 	pod 'VTMagic'
 	pod 'SDWebImage'
-  pod 'UMengAnalytics-NO-IDFA' #无IDFA版SDK
+  # pod 'UMengAnalytics-NO-IDFA' #放到wow-3rd 用liba了
 
   #	pod 'Hashids-Swift'			#短id生成
   #	pod 'StyleKit'       		暂时不用
   #	pod 'UIColor_Hex_Swift', '~> 2.1'
 
   #Ping++支付
-  pod 'Pingpp/Alipay'
-  pod 'Pingpp/Wx'
 	pod "Qiniu"
   pod 'XZMRefresh'            #横向刷新
 	pod 'FMDB'
 	pod 'FCUUID'
 	pod 'MJRefresh'
 	pod 'DZNEmptyDataSet'
-    pod 'TZImagePickerController'
+  pod 'TZImagePickerController'
 	## ShareSDK主模块(必须)
 	#pod 'ShareSDK3'
 	## Mob 公共库(必须) 如果同时集成SMSSDK iOS2.0:可看此注意事项：http://bbs.mob.com/thread-20051-1-1.html
@@ -74,6 +72,8 @@ target 'wowdsgn' do
 
 #融云
 #	pod 'RongCloudIMKit', '2.7.2' #融云用的realm 版本太低
+
+
 
 #自己的私有pod
 #王云鹏自己的framework
@@ -102,14 +102,29 @@ target 'wowdsgn' do
 	#https://github.com/onmyway133/fantastic-ios-animation/blob/master/Animation/popup.md 动画集合，备用，可参考代码
 	#http://cdn0.jianshu.io/p/83c069022e45/comments/802155 swift项目需要用到的开源组件
 
+
+
+	pod 'Pingpp/Alipay', '~> 2.2.10'
+	pod 'Pingpp/Wx', '~> 2.2.10'
+	pod 'Pingpp/CmbWallet', '~> 2.2.10'
+
+
+
 end
+
 
 
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
-      config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '10.10'
+    installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
+        configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
     end
-  end
 end
+
+# post_install do |installer|
+#   installer.pods_project.targets.each do |target|
+#     target.build_configurations.each do |config|
+#       config.build_settings['SWIFT_VERSION'] = '3.0'
+#       config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '10.10'
+#     end
+#   end
+# end

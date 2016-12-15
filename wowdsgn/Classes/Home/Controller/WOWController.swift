@@ -30,13 +30,6 @@ class WOWController: WOWBaseModuleVC {
         request()
        //
     }
-    // 跳转更新提示VC
-    func goToUpdateVersion()  {
-        
-        let vc = WOWMaskViewController()
-        self.presentToViewController(viewControllerToPresent: vc, completion: nil)
-        
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -151,11 +144,14 @@ class WOWController: WOWBaseModuleVC {
                     strongSelf.tableView.reloadData()
                
 //                }
+<<<<<<< HEAD
                 
                 if strongSelf.isCheackUpdate == false {
 //                    strongSelf.requestCheakVersion()
                 }
                
+=======
+>>>>>>> 71ecc5578f31ad54304d7549c4b5dc1af8b504bf
                
             }
         }) {[weak self] (errorMsg) in
@@ -226,6 +222,7 @@ class WOWController: WOWBaseModuleVC {
         }
     }
     
+<<<<<<< HEAD
     func requestCheakVersion() {
         
         let params = ["appType": 1, "platForm": 2,"version":1.5]
@@ -269,6 +266,8 @@ class WOWController: WOWBaseModuleVC {
     
     
 
+=======
+>>>>>>> 71ecc5578f31ad54304d7549c4b5dc1af8b504bf
   }
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel

@@ -12,12 +12,10 @@ import UIKit
 import IQKeyboardManagerSwift
 import YYWebImage
 import SwiftyUserDefaults
-import wow3rd
 import EZSwiftExtensions
 
 //import JSPatch
 //import JSPatchHelper
-//import wow_talkingData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -120,7 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        UMSocialSnsService.applicationDidBecomeActive()
+//        UMSocialSnsService.applicationDidBecomeActive()
+        
     }
     
     
@@ -181,7 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //TalkingData ADTracking
         TalkingDataAppCpa.onReceiveDeepLink(url)
         
-        if UMSocialSnsService.handleOpen(url) {
+        if WowShare.handle_open_url(url) {
             return true
         }
         return true
@@ -198,7 +197,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Pingpp.handleOpen(url, withCompletion: nil) {
             return true
         }
-        if UMSocialSnsService.handleOpen(url) {
+        if WowShare.handle_open_url(url) {
             return true
         }
         //growing io
@@ -284,24 +283,20 @@ extension AppDelegate{
         return v
     }
     func registAppKey(_ launchOptions: [AnyHashable: Any]?){
-        //友盟
-
+        //友盟 分析
         MobClick.setAppVersion(self.get_version_full())
-       
         UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
         UMAnalyticsConfig.sharedInstance().channelId = ""
         MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
         
-        UMSocialData.setAppKey(WOWID.UMeng.appID)
-        UMSocialWechatHandler.setWXAppId(WOWID.Wechat.appID, appSecret: WOWID.Wechat.appKey, url:"http://www.wowdsgn.com/")
-
+        WowShare.manual_init()
         
         //友盟推送
         umessage.init_umessage(launchOptions)
 
         
-        WXApi.registerApp(WOWID.Wechat.appID)
+//        WXApi.registerApp(WOWID.Wechat.appID)
     
         //Growing
         Growing.start(withAccountId: "a04e14656f08dc7e")

@@ -18,6 +18,7 @@ class WOWLaunchView: UIView {
 //        })
         let delayTime = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            self.requestCheakVersion()
             self.removeFromSuperview()
         }
     }
@@ -25,15 +26,41 @@ class WOWLaunchView: UIView {
         UIView.animate(withDuration: 1, animations: {
             self.alpha = 0
         }, completion: { (finished: Bool) in
+            
+           
             super.removeFromSuperview()
         })
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    // 检查更新
+    func requestCheakVersion() {
+        
+        let params = ["appType": 1, "platForm": 1,"version":1.5]
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_checkVersion(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.goToUpdateVersion()
+                
+            }
+        }) { (errorMsg) in
+            
+                WOWHud.dismiss()
+            
+        }
+        
     }
-    */
+    // 跳转更新提示VC
+    func goToUpdateVersion()  {
+        
+        let vc = WOWMaskViewController()
+        
+        UIApplication.currentViewController()?.presentToViewController(viewControllerToPresent: vc, completion: nil)
+
+        
+    }
+
 
 }

@@ -11,7 +11,6 @@
 import UIKit
 import wow3rd
 import WowShare
-//import UMSocialCore
  
 public class VCRedirect {
     
@@ -249,14 +248,14 @@ extension  UIViewController {
                 if let strongSelf = self{
 //                    if response?.responseCode == UMSResponseCodeSuccess {
 //                        
-//                        strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
-//                    }else{
-//                        WOWHud.showMsg("授权登录失败")
-//                    }
+                        strongSelf.checkWechatToken(response as! NSDictionary, isPresent: isPresent)
+                    }else{
+                        WOWHud.showMsg("授权登录失败")
+                    }
 //                    let userInfo: UMSocialUserInfoResponse = response as! UMSocialUserInfoResponse
+            
                     print(response)
 
-            }
         }
     
     }

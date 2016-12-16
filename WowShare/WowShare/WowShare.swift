@@ -138,7 +138,14 @@ public class WowShare {
     
     public static func getAuthWithUserInfoFromWechat(  success_handler: @escaping (Any?) -> Void ){
         UMSocialManager.default().getUserInfo(with: UMSocialPlatformType.wechatSession, currentViewController: nil) { (result, error) in
-            success_handler(result)
+            if error != nil {
+                print("Share Fail with error ：%@", error)
+            }else{
+                let user: UMSocialUserInfoResponse = result as! UMSocialUserInfoResponse
+                success_handler(user.originalResponse)
+            }
+
+           
         }
     }
 

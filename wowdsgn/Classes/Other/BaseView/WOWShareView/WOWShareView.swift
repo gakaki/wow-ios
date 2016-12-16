@@ -115,8 +115,8 @@ class WOWShareView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        friendView.isHidden = !WowShare.is_wx_installed()
-//        wechatView.isHidden = !WowShare.is_wx_installed()
+        friendView.isHidden = !WowShare.is_wx_installed()
+        wechatView.isHidden = !WowShare.is_wx_installed()
     }
     
 }

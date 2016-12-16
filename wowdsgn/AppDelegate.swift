@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        
         ADLaunchView()
         return true
     }
@@ -310,8 +309,9 @@ extension AppDelegate{
         TalkingDataAppCpa.init("e81f26ce70664a9dab698bae55be2044", withChannelId: "AppStore")
         
 
+        Pingpp.setDebugMode(true)
+        DLog(">>== Pingpp version is \(Pingpp.version())" )
 
-        
         
     }
     

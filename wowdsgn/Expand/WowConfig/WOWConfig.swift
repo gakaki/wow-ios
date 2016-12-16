@@ -8,7 +8,8 @@
 
 import Foundation
 
-let WOWDSGNSCHEME       = "com.wow.dsgn"
+//let WOWDSGNSCHEME       = "com.wow.dsgn"
+let WOWDSGNSCHEME       = "com.wowdsgn.app"
 
 let WOWCompanyTel        = "4008-203-237"
 

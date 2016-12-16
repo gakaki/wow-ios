@@ -32,6 +32,12 @@ enum PayType {
     
     case payWiXin            //= 微信
 
+    case payCmbWallet            //= 招行一网通
+
+    case payUnionPay            //= 银联手机支付
+
+    case payApplePay            //= ApplePay
+
 }
 protocol OrderDetailDelegate:class{
     func orderStatusChange()
@@ -204,6 +210,14 @@ class WOWOrderDetailController: WOWBaseViewController{
                     sureOrderPay("alipay")
                 case .payWiXin:
                     sureOrderPay("wx")
+                case .payCmbWallet:
+                    sureOrderPay("cmbWallet")
+                    
+//                case .payUnionPay:
+//                    sureOrderPay("unionPay")
+//                case .payApplePay:
+//                    sureOrderPay("ApplePay")
+                    
                 default:
                     WOWHud.showMsg("请选择支付方式")
                     break
@@ -501,7 +515,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 3: //运费
                 return 2
             case 4: //支付方式
-                return 2
+                return 3
             default:
                 return 1
             }
@@ -703,7 +717,18 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     }
 
                 }
-                
+                if (indexPath as NSIndexPath).row == 2 {
+                    cell.payTypeImageView.image = UIImage(named: "cmbwallet")
+                    cell.payTypeLabel.text      = "招行一网通支付"
+                    switch surePayType {
+                    case PayType.payCmbWallet:
+                        cell.isClooseImageView.image = UIImage(named: "selectBig")
+                    default:
+                        cell.isClooseImageView.image = UIImage(named: "unselectBig")
+                    }
+                    
+                }
+
                 returnCell = cell
                 
             default:

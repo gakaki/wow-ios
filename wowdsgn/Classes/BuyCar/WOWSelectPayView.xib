@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="SelectPayView" customClass="WOWSelectPayView" customModule="wowdsgn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="258"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="306"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMH-vb-kWc">
@@ -40,6 +40,13 @@
                         <constraint firstAttribute="width" constant="35" id="tn8-By-j1a"/>
                     </constraints>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cmbwallet" translatesAutoresizingMaskIntoConstraints="NO" id="72Z-Fo-GMT" userLabel="cmbwallet">
+                    <rect key="frame" x="15" y="202" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="I1K-Fb-H6p"/>
+                        <constraint firstAttribute="width" constant="35" id="PzZ-oF-Uvq"/>
+                    </constraints>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weixin" translatesAutoresizingMaskIntoConstraints="NO" id="E8w-Kj-1sH">
                     <rect key="frame" x="15" y="137" width="35" height="35"/>
                     <constraints>
@@ -48,19 +55,26 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付宝" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngd-SG-sGB">
-                    <rect key="frame" x="65" y="79.5" width="49" height="19.5"/>
+                    <rect key="frame" x="65" y="79" width="49" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信支付" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29r-9F-HrL">
-                    <rect key="frame" x="65" y="145.5" width="65.5" height="19.5"/>
+                    <rect key="frame" x="65" y="145" width="66" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="招行一网通" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fn1-8C-5zF">
+                    <rect key="frame" x="65" y="208" width="100" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13n-gp-XjB">
-                    <rect key="frame" x="0.0" y="69.5" width="320" height="40"/>
+                    <rect key="frame" x="0.0" y="70" width="320" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="LUh-x9-0Vx"/>
                     </constraints>
@@ -73,10 +87,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Oc-7B-Ncd">
-                    <rect key="frame" x="0.0" y="208" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="256" width="320" height="50"/>
                     <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="hNO-lG-m3E"/>
+                        <constraint firstAttribute="height" constant="50" id="ly4-PN-mg9"/>
                     </constraints>
                     <state key="normal" title="立即支付"/>
                     <connections>
@@ -98,30 +112,51 @@
                         <action selector="weixinClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QSs-fY-IA2"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7A-He-XU0" userLabel="CmbWalletBtn">
+                    <rect key="frame" x="0.0" y="202" width="320" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="pmF-9g-UaC"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
+                    <state key="normal" image="unselectBig">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <state key="selected" image="selectBig"/>
+                    <state key="highlighted" image="select"/>
+                    <connections>
+                        <action selector="cmbwalletClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="1xY-Jg-ldR"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="3Oc-7B-Ncd" secondAttribute="trailing" id="0nv-UC-Q10"/>
+                <constraint firstAttribute="bottom" secondItem="3Oc-7B-Ncd" secondAttribute="bottom" id="2qQ-3h-EyM"/>
                 <constraint firstItem="ISY-or-DSp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2wA-cQ-28Y"/>
+                <constraint firstItem="72Z-Fo-GMT" firstAttribute="top" secondItem="E8w-Kj-1sH" secondAttribute="bottom" constant="30" id="3L8-mJ-dLb"/>
                 <constraint firstItem="ISY-or-DSp" firstAttribute="centerY" secondItem="E8w-Kj-1sH" secondAttribute="centerY" id="5YY-AQ-AkP"/>
                 <constraint firstItem="ngd-SG-sGB" firstAttribute="centerY" secondItem="j4B-hz-vgO" secondAttribute="centerY" id="6gX-bJ-utc"/>
+                <constraint firstItem="j7A-He-XU0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7NC-s2-0xo"/>
+                <constraint firstItem="j7A-He-XU0" firstAttribute="top" secondItem="ISY-or-DSp" secondAttribute="bottom" constant="27" id="8YZ-tV-ql1"/>
+                <constraint firstItem="3Oc-7B-Ncd" firstAttribute="top" secondItem="j7A-He-XU0" secondAttribute="bottom" constant="14" id="95I-8H-Sms"/>
                 <constraint firstItem="29r-9F-HrL" firstAttribute="leading" secondItem="E8w-Kj-1sH" secondAttribute="trailing" constant="15" id="GIZ-1P-SV7"/>
+                <constraint firstItem="72Z-Fo-GMT" firstAttribute="leading" secondItem="E8w-Kj-1sH" secondAttribute="leading" id="HZ9-OY-9lM"/>
                 <constraint firstAttribute="trailing" secondItem="ISY-or-DSp" secondAttribute="trailing" id="LEe-KI-lOg"/>
-                <constraint firstItem="3Oc-7B-Ncd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qf3-CQ-O6e"/>
                 <constraint firstAttribute="trailing" secondItem="QMH-vb-kWc" secondAttribute="trailing" id="SdI-Se-AH7"/>
                 <constraint firstAttribute="trailing" secondItem="13n-gp-XjB" secondAttribute="trailing" id="Tzu-6z-UBY"/>
                 <constraint firstItem="j4B-hz-vgO" firstAttribute="leading" secondItem="vXy-F2-HpT" secondAttribute="leading" id="WCj-hH-Uxm"/>
-                <constraint firstItem="3Oc-7B-Ncd" firstAttribute="top" secondItem="E8w-Kj-1sH" secondAttribute="bottom" constant="36" id="YgG-YL-k5t"/>
-                <constraint firstAttribute="bottom" secondItem="3Oc-7B-Ncd" secondAttribute="bottom" id="aIo-nb-wbE"/>
+                <constraint firstAttribute="trailing" secondItem="j7A-He-XU0" secondAttribute="trailing" id="ZDB-Aq-ce7"/>
                 <constraint firstItem="ngd-SG-sGB" firstAttribute="leading" secondItem="j4B-hz-vgO" secondAttribute="trailing" constant="15" id="bGv-pv-2Wa"/>
                 <constraint firstItem="QMH-vb-kWc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="d84-Di-qu8"/>
                 <constraint firstItem="13n-gp-XjB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dwE-od-KV4"/>
                 <constraint firstItem="E8w-Kj-1sH" firstAttribute="leading" secondItem="vXy-F2-HpT" secondAttribute="leading" id="e83-XF-tgk"/>
+                <constraint firstItem="3Oc-7B-Ncd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eQi-Zq-k3j"/>
                 <constraint firstItem="vXy-F2-HpT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="eTD-4H-pa8"/>
+                <constraint firstItem="j7A-He-XU0" firstAttribute="centerX" secondItem="ISY-or-DSp" secondAttribute="centerX" id="g2j-b3-iTI"/>
                 <constraint firstItem="E8w-Kj-1sH" firstAttribute="top" secondItem="j4B-hz-vgO" secondAttribute="bottom" constant="30" id="hEW-Mh-OSV"/>
                 <constraint firstItem="vXy-F2-HpT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="jsy-FT-0LT"/>
                 <constraint firstItem="29r-9F-HrL" firstAttribute="centerY" secondItem="E8w-Kj-1sH" secondAttribute="centerY" id="mNG-MU-6i8"/>
                 <constraint firstItem="13n-gp-XjB" firstAttribute="centerY" secondItem="j4B-hz-vgO" secondAttribute="centerY" id="nTk-sf-tPg"/>
+                <constraint firstAttribute="trailing" secondItem="3Oc-7B-Ncd" secondAttribute="trailing" id="swA-uR-A8G"/>
                 <constraint firstItem="j4B-hz-vgO" firstAttribute="top" secondItem="vXy-F2-HpT" secondAttribute="bottom" constant="36" id="xIg-fB-0Ro"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -129,14 +164,16 @@
             <connections>
                 <outlet property="alipayButton" destination="13n-gp-XjB" id="QOU-iA-OLK"/>
                 <outlet property="closeButton" destination="QMH-vb-kWc" id="Stl-Mh-eXk"/>
+                <outlet property="cmbwalletButton" destination="j7A-He-XU0" id="aRU-Cd-UNg"/>
                 <outlet property="weixinButton" destination="ISY-or-DSp" id="ZQj-Yq-hbU"/>
             </connections>
-            <point key="canvasLocation" x="-18" y="146"/>
+            <point key="canvasLocation" x="-18" y="170"/>
         </view>
     </objects>
     <resources>
         <image name="alipay" width="30" height="30"/>
         <image name="close" width="30" height="30"/>
+        <image name="cmbwallet" width="1024" height="1024"/>
         <image name="select" width="16" height="17"/>
         <image name="selectBig" width="20" height="20"/>
         <image name="unselectBig" width="20" height="20"/>
@@ -145,6 +182,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+        <simulatedScreenMetrics key="destination" type="retina5_5.fullscreen"/>
     </simulatedMetricsContainer>
 </document>

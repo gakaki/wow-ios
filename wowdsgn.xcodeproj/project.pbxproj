@@ -463,6 +463,8 @@
 		63F2517C1E0276AD007C4B66 /* WOWBuyCarHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F2517B1E0276AD007C4B66 /* WOWBuyCarHeaderView.xib */; };
 		63F251821E02A8E8007C4B66 /* wow3rd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F251811E02A8E8007C4B66 /* wow3rd.framework */; };
 		63F251841E02AA5E007C4B66 /* WowShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F251831E02AA5E007C4B66 /* WowShare.framework */; };
+		63F251871E038804007C4B66 /* WowShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F251831E02AA5E007C4B66 /* WowShare.framework */; };
+		63F251881E038804007C4B66 /* WowShare.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63F251831E02AA5E007C4B66 /* WowShare.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		63F3DA7F1DE68420009CE52D /* WOWCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3DA7D1DE68420009CE52D /* WOWCommentCell.swift */; };
 		63F3DA801DE68420009CE52D /* WOWCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F3DA7E1DE68420009CE52D /* WOWCommentCell.xib */; };
 		63F3DA831DE6873E009CE52D /* WOWProductCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3DA811DE6873E009CE52D /* WOWProductCommentCell.swift */; };
@@ -482,6 +484,20 @@
 		63F3DA9F1DED17B5009CE52D /* WOWRemissionNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3DA9D1DED17B5009CE52D /* WOWRemissionNameCell.swift */; };
 		63F3DAA01DED17B5009CE52D /* WOWRemissionNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F3DA9E1DED17B5009CE52D /* WOWRemissionNameCell.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		63F251891E038805007C4B66 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				63F251881E038804007C4B66 /* WowShare.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0607088C1DD18D7600A91724 /* RouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterRule.swift; sourceTree = "<group>"; };
@@ -997,6 +1013,7 @@
 				069D2F6E1DB4791600A059D0 /* AdSupport.framework in Frameworks */,
 				069D2F6C1DB4791200A059D0 /* CoreMotion.framework in Frameworks */,
 				069D2F6A1DB4790C00A059D0 /* SafariServices.framework in Frameworks */,
+				63F251871E038804007C4B66 /* WowShare.framework in Frameworks */,
 				458523D0F557C0CFD1003B89 /* Pods_wowdsgn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2175,6 +2192,7 @@
 				069D2F521DB46AD100A059D0 /* Resources */,
 				F53EF9D12AE65A6395EE59E9 /* [CP] Embed Pods Frameworks */,
 				1A83CAF2F5CB3EEA14654664 /* [CP] Copy Pods Resources */,
+				63F251891E038805007C4B66 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

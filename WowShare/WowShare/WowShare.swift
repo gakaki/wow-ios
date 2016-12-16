@@ -23,12 +23,18 @@ public class WowShare {
             umm.openLog(true)
             // 获取友盟social版本号
             print("UMeng social version: \(UMSocialGlobal.umSocialSDKVersion())")
+            
+            WXApi.registerApp(WowShareID.Wechat.appID)
+
+            
+            let is_installer = WowShare.is_wx_installed()
+            print(">>>>>>检测微信安装 \(is_installer)")
+
             //设置友盟appkey
             umm.umSocialAppkey      = WowShareID.UMeng.appID
             //设置微信的appKey和appSecret
-            umm.setPlaform(UMSocialPlatformType.wechatSession, appKey: WowShareID.Wechat.appID, appSecret: WowShareID.Wechat.appKey, redirectURL: "http://www.wowdsgn.com/")
+            umm.setPlaform(UMSocialPlatformType.wechatSession, appKey: WowShareID.Wechat.appID, appSecret: WowShareID.Wechat.appKey, redirectURL: WowShareID.UMeng.share_url)
             
-            //WXApi.registerApp(WOWID.Wechat.appID)
 
             /*
              * 添加某一平台会加入平台下所有分享渠道，如微信：好友、朋友圈、收藏，QQ：QQ和QQ空间

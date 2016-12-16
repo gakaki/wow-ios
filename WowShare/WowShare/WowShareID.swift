@@ -32,6 +32,7 @@ public struct WowShareID {
     
     public struct UMeng {
         public static let appID       = "57146c72e0f55a807e000a0b"
+        public static let share_url   = "http://www.wowdsgn.com/"
     }
     
     public struct LeanCloud {

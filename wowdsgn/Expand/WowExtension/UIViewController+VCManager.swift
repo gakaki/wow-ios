@@ -244,16 +244,19 @@ extension  UIViewController {
 //            }
 //        })
 
-//        WowShare.getAuthWithUserInfoFromWechat { (response) in
-//                if let strongSelf = self{
+        WowShare.getAuthWithUserInfoFromWechat {[weak self] (response) in
+                if let strongSelf = self{
 //                    if response?.responseCode == UMSResponseCodeSuccess {
 //                        
-//                        strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
-//                    }else{
-//                        WOWHud.showMsg("授权登录失败")
-//                    }
-//                }
-//        }
+                        strongSelf.checkWechatToken(response as! NSDictionary, isPresent: isPresent)
+                    }else{
+                        WOWHud.showMsg("授权登录失败")
+                    }
+//                    let userInfo: UMSocialUserInfoResponse = response as! UMSocialUserInfoResponse
+            
+                    print(response)
+
+        }
     
     }
     fileprivate func checkWechatToken(_ userData:NSDictionary,isPresent:Bool = false){

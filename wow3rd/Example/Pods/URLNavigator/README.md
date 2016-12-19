@@ -48,13 +48,13 @@ Navigator.present("myapp://post/54321", wrap: true)
 Navigator.open("myapp://alert?title=Hello&message=World")
 ```
 
-For full documentation, see [URLNavigator Class Reference](http://cocoadocs.org/docsets/URLNavigator/1.0.1/Classes/URLNavigator.html).
+For full documentation, see [URLNavigator Class Reference](http://cocoadocs.org/docsets/URLNavigator/1.1.1/Classes/URLNavigator.html).
 
 #### 3. Implementing URLNavigable
 
-View controllers should conform a protocol `URLNavigable` to be mapped with URLs. A protocol `URLNavigable` defines an failable initializer with parameter: `url` and `values`.
+View controllers should conform a protocol `URLNavigable` to be mapped with URLs. A protocol `URLNavigable` defines an failable initializer with parameter: `url`, `values` and `userInfo`.
 
-Parameter `url` is an URL that is passed from `URLNavigator.push()` and `URLNavigator.present()`. Parameter `values` is a dictionary that contains URL placeholder keys and values.
+Parameter `url` is an URL that is passed from `URLNavigator.push()` and `URLNavigator.present()`. Parameter `values` is a dictionary that contains URL placeholder keys and values. Parameter `userInfo` is a dictionary which contains extra values passed from `push()` or `present()`.
 
 ```swift
 final class UserViewController: UIViewController, URLNavigable {
@@ -64,7 +64,7 @@ final class UserViewController: UIViewController, URLNavigable {
     // Initialize here...
   }
 
-  convenience init?(url: URLConvertible, values: [String: Any]) {
+  convenience init?(url: URLConvertible, values: [String: Any], userInfo: [AnyHashable: Any]?) {
     // Let's assume that the user id is required
     guard let userID = values["id"] as? Int else { return nil }
     self.init(userID: userID)
@@ -86,19 +86,19 @@ Installation
 - **For iOS 8+ projects** with [CocoaPods](https://cocoapods.org):
 
     ```ruby
-    pod 'URLNavigator', '~> 1.0'
+    pod 'URLNavigator', '~> 1.1'
     ```
 
 - **For iOS 8+ projects** with [Carthage](https://github.com/Carthage/Carthage):
 
     ```
-    github "devxoul/URLNavigator" ~> 1.0
+    github "devxoul/URLNavigator" ~> 1.1
     ```
 
 - **For iOS 7 projects** with [CocoaSeeds](https://github.com/devxoul/CocoaSeeds):
 
     ```ruby
-    github 'devxoul/URLNavigator', '1.0.1', :files => 'Sources/*.swift'
+    github 'devxoul/URLNavigator', '1.1.1', :files => 'Sources/*.swift'
     ```
 
 - **Using [Swift Package Manager](https://swift.org/package-manager)**:
@@ -109,7 +109,7 @@ Installation
     let package = Package(
       name: "MyAwesomeApp",
       dependencies: [
-        .Package(url: "https://github.com/devxoul/URLNavigator", "1.0.1"),
+        .Package(url: "https://github.com/devxoul/URLNavigator", "1.1.1"),
       ]
     )
     ```
@@ -267,6 +267,17 @@ Setting `scheme` property will not affect other URLs that already have schemes.
 Navigator.scheme = "myapp"
 Navigator.map("/user/<int:id>", UserViewController.self) // `myapp://user/<int:id>`
 Navigator.map("http://<path>", MyWebViewController.self) // `http://<path>`
+```
+
+
+#### Passing Extra Values when Pushing or Presenting
+
+```swift
+let userInfo: [AnyHashable: Any] = [
+  "fromViewController": self
+]
+Navigator.push("myapp://user/10", userInfo: userInfo)
+Navigator.present("myapp://user/10", userInfo: userInfo)
 ```
 
 

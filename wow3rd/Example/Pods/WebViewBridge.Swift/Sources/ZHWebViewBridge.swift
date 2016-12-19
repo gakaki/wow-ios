@@ -68,7 +68,7 @@ class ZHBridgeActionResult {
 open class ZHBridgeHelper {
     public final class func serializeData(_ data:Any) -> String {
         if let json = try? JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.init(rawValue: 0)) {
-            return NSString.init(data: json, encoding: String.Encoding.utf8.rawValue) as! String
+            return String.init(data: json, encoding: String.Encoding.utf8)!
         }
         return ""
     }
@@ -110,7 +110,7 @@ extension ZHBridgeActionResult {
 }
 
 
-private let ZHWebViewBridgeJS = "var ZHBridge=window.ZHBridge||{};window.ZHBridge=ZHBridge;ZHBridge.Core=ZHBridge.Core||(function(){var callbackId=1;var callbacks={};var actionQueue=[];var createBridge=function(){var iFrame;iFrame=document.createElement(\"iframe\");iFrame.setAttribute(\"src\",\"ZHBridge://__BRIDGE_LOADED__\");iFrame.setAttribute(\"style\",\"display:none;\");iFrame.setAttribute(\"height\",\"0px\");iFrame.setAttribute(\"width\",\"0px\");iFrame.setAttribute(\"frameborder\",\"0\");document.body.appendChild(iFrame);setTimeout(function(){document.body.removeChild(iFrame)},0)};var callNativeHandler=function(){var actionName=arguments[0];var actionArgs=arguments[1]||[];var successCallback=arguments[2];var failCallback=arguments[3];var actionId=++callbackId;if(successCallback||failCallback){callbacks[actionId]={success:successCallback,fail:failCallback}}else{actionId=0}var action={id:actionId,name:actionName,args:actionArgs,argsCount:actionArgs.length};if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.ZHBridge&&window.webkit.messageHandlers.ZHBridge.postMessage){window.webkit.messageHandlers.ZHBridge.postMessage(JSON.stringify([action]))}else{if(window.zhbridge_messageHandlers&&window.zhbridge_messageHandlers.ZHBridge&&window.zhbridge_messageHandlers.ZHBridge.postMessage){window.zhbridge_messageHandlers.ZHBridge.postMessage(JSON.stringify([action]))}else{actionQueue.push(action);createBridge()}}};var getAndClearQueuedActions=function(){var json=JSON.stringify(actionQueue);actionQueue=[];return json};var callbackJs=function(){var data=arguments[0];if(!data){return}var callInfo=JSON.parse(data);var callbackId=callInfo[\"id\"];var status=callInfo[\"status\"];var args=callInfo[\"args\"];if(!callbackId||status==undefined||args==undefined){return}var callback=callbacks[callbackId];var success=callback[\"success\"];var fail=callback[\"fail\"];if(!callback){return}var result=undefined;if(status&&success){result=success.apply(this,args)}else{if(!status&&fail){result=fail.apply(this,args)}}return result!=undefined?JSON.stringify(result):undefined};var handlerMapper={};var callJsHandler=function(data){var callInfo=JSON.parse(data);var name=callInfo[\"name\"];var args=callInfo[\"args\"];var argsCount=callInfo[\"argsCount\"];if(!name||argsCount==undefined||argsCount!=args.length){return}var handler=handlerMapper[name];if(handler){var result=handler.apply(this,args);return result!=undefined?JSON.stringify(result):undefined}};var registerJsHandler=function(handlerName,callback){handlerMapper[handlerName]=callback};var ready=function(){var readyFunction=arguments[0];if(readyFunction){document.addEventListener(\"DOMContentLoaded\",readyFunction)}};return{getAndClearJsActions:getAndClearQueuedActions,callJsHandler:callJsHandler,callbackJs:callbackJs,registerJsHandler:registerJsHandler,callNativeHandler:callNativeHandler,ready:ready}}());"
+private let ZHWebViewBridgeJS = "var ZHBridge=window.ZHBridge||{};window.ZHBridge=ZHBridge;ZHBridge.Core=ZHBridge.Core||(function(){var callbackId=1;var callbacks={};var actionQueue=[];var createBridge=function(){var iFrame;iFrame=document.createElement(\"iframe\");iFrame.setAttribute(\"src\",\"ZHBridge://__BRIDGE_LOADED__\");iFrame.setAttribute(\"style\",\"display:none;\");iFrame.setAttribute(\"height\",\"0px\");iFrame.setAttribute(\"width\",\"0px\");iFrame.setAttribute(\"frameborder\",\"0\");document.body.appendChild(iFrame);setTimeout(function(){document.body.removeChild(iFrame)},0)};var callNativeHandler=function(){var actionName=arguments[0];var actionArgs=arguments[1]||[];var successCallback=arguments[2];var failCallback=arguments[3];var actionId=++callbackId;if(successCallback||failCallback){callbacks[actionId]={success:successCallback,fail:failCallback}}else{actionId=0}var action={id:actionId,name:actionName,args:actionArgs,argsCount:actionArgs.length};if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.ZHBridge&&window.webkit.messageHandlers.ZHBridge.postMessage){window.webkit.messageHandlers.ZHBridge.postMessage(JSON.stringify([action]))}else{if(window.zhbridge_messageHandlers&&window.zhbridge_messageHandlers.ZHBridge&&window.zhbridge_messageHandlers.ZHBridge.postMessage){window.zhbridge_messageHandlers.ZHBridge.postMessage(JSON.stringify([action]))}else{actionQueue.push(action);createBridge()}}};var getAndClearQueuedActions=function(){var json=JSON.stringify(actionQueue);actionQueue=[];return json};var callbackJs=function(){var data=arguments[0];if(!data){return}var callInfo = data;var callbackId=callInfo[\"id\"];var status=callInfo[\"status\"];var args=callInfo[\"args\"];if(!callbackId||status==undefined||args==undefined){return}var callback=callbacks[callbackId];var success=callback[\"success\"];var fail=callback[\"fail\"];if(!callback){return}var result=undefined;if(status&&success){result=success.apply(this,args)}else{if(!status&&fail){result=fail.apply(this,args)}}return result!=undefined?JSON.stringify(result):undefined};var handlerMapper={};var callJsHandler=function(data){var callInfo= data;var name=callInfo[\"name\"];var args=callInfo[\"args\"];var argsCount=callInfo[\"argsCount\"];if(!name||argsCount==undefined||argsCount!=args.length){return}var handler=handlerMapper[name];if(handler){var result=handler.apply(this,args);return result!=undefined?JSON.stringify(result):undefined}};var registerJsHandler=function(handlerName,callback){handlerMapper[handlerName]=callback};var ready=function(){var readyFunction=arguments[0];if(readyFunction){document.addEventListener(\"DOMContentLoaded\",readyFunction)}};return{getAndClearJsActions:getAndClearQueuedActions,callJsHandler:callJsHandler,callbackJs:callbackJs,registerJsHandler:registerJsHandler,callNativeHandler:callNativeHandler,ready:ready}}());"
 
 protocol ZHWebViewBridgeProtocol:class {
     func zh_evaluateJavaScript(_ javaScriptString: String,
@@ -131,7 +131,7 @@ extension ZHWebViewBridgeProtocol {
             "argsCount": args.count
         ]
         let data = ZHBridgeHelper.serializeData(handlerInfo)
-        zh_evaluateJavaScript("ZHBridge.Core.callJsHandler('\(data)')") { (res:Any?, _:Error?) in
+        zh_evaluateJavaScript("ZHBridge.Core.callJsHandler(\(data))") { (res:Any?, _:Error?) in
             callback?(ZHBridgeHelper.unpackResult(res))
         }
     }
@@ -147,7 +147,7 @@ extension ZHWebViewBridgeProtocol {
             "args": (result.result == nil) ? [] : [result.result!]
         ]
         let data = ZHBridgeHelper.serializeData(callbackInfo)
-        zh_evaluateJavaScript("ZHBridge.Core.callbackJs('\(data)')", completionHandler: nil)
+        zh_evaluateJavaScript("ZHBridge.Core.callbackJs(\(data))", completionHandler: nil)
     }
 }
 
@@ -236,34 +236,39 @@ class ZHBridgeScriptMessageHandlerWrapper:NSObject, ZHBridgeScriptMessageHandler
     }
 }
 
-class ZHWebViewDelegate:NSObject, UIWebViewDelegate {
-    fileprivate weak var delegate:UIWebViewDelegate?
-    fileprivate var webViewDidFinishLoadBlock:((UIWebView) -> Void)?
-    var webViewShouldStartLoadWithRequestBlock:((UIWebView, URLRequest) -> Bool)?
-    
+class ZHWebViewDelegateProxy: NSObject, UIWebViewDelegate {
+    fileprivate weak var original:UIWebViewDelegate?
+    fileprivate weak var proxy:UIWebViewDelegate?
+
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        return  webViewShouldStartLoadWithRequestBlock?(webView, request) ?? (delegate?.webView?(webView, shouldStartLoadWith: request, navigationType: navigationType) ?? true)
+        if let load = proxy?.webView?(webView, shouldStartLoadWith: request, navigationType: navigationType), !load {
+            return false
+        }
+        return original?.webView?(webView, shouldStartLoadWith: request, navigationType: navigationType) ?? true
     }
     
     func webViewDidStartLoad(_ webView: UIWebView) {
-        delegate?.webViewDidStartLoad?(webView)
+        proxy?.webViewDidStartLoad?(webView)
+        original?.webViewDidStartLoad?(webView)
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        webViewDidFinishLoadBlock?(webView)
-        delegate?.webViewDidFinishLoad?(webView)
+        proxy?.webViewDidFinishLoad?(webView)
+        original?.webViewDidFinishLoad?(webView)
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        delegate?.webView?(webView, didFailLoadWithError: error)
+        proxy?.webView?(webView, didFailLoadWithError: error)
+        original?.webView?(webView, didFailLoadWithError: error)
     }
 }
 
 class ZHWebViewContentController:NSObject {
     fileprivate(set) var webView:UIWebView!
-    fileprivate(set) var delegateUnderProxy = false
+    fileprivate(set) var shouldProxyDelegate = false
+    fileprivate(set) var handleRequestBlock:((UIWebView, URLRequest) -> Bool)?
     fileprivate(set) weak var jsContext:JSContext?
-    fileprivate let delegate = ZHWebViewDelegate()
+    fileprivate var delegateProxy:ZHWebViewDelegateProxy! = ZHWebViewDelegateProxy()
     fileprivate(set) var messageHandlers:[String:Any] = [:]
     fileprivate(set) var pluginScripts = [String]()
     fileprivate var contextKVO:Int = 0
@@ -274,18 +279,14 @@ class ZHWebViewContentController:NSObject {
     init(webView:UIWebView, proxyDelegate:Bool = true) {
         super.init()
         
-        delegateUnderProxy = proxyDelegate
+        shouldProxyDelegate = proxyDelegate
         
         let jsContextPath = self.jsContextPath
         self.webView = webView
         jsContext = webView.value(forKeyPath: jsContextPath) as? JSContext
         webView.addObserver(self, forKeyPath: jsContextPath, options: [.initial, .new], context: &contextKVO)
         
-        delegate.webViewDidFinishLoadBlock = { [weak self] (wb:UIWebView) in
-            if let context = webView.value(forKeyPath: jsContextPath) as? JSContext , self?.jsContext !== context {
-                self?.updateJsContext(context)
-            }
-        }
+        delegateProxy.proxy = self
         updateWebViewDelegate(webView.delegate)
         webView.addObserver(self, forKeyPath: delegatePath, options: [.initial, .new], context: &contextKVO)
     }
@@ -293,6 +294,7 @@ class ZHWebViewContentController:NSObject {
     deinit {
         webView?.removeObserver(self, forKeyPath: jsContextPath)
         webView?.removeObserver(self, forKeyPath: delegatePath)
+        delegateProxy = nil
         webView = nil
     }
     
@@ -312,12 +314,15 @@ class ZHWebViewContentController:NSObject {
     }
     
     fileprivate func updateWebViewDelegate(_ delegate:UIWebViewDelegate?) {
-        if delegate !== self.delegate {
-            self.delegate.delegate = delegate
+        if delegateProxy !== delegate {
+            delegateProxy.original = delegate
         }
-
-        if delegateUnderProxy && webView.delegate !== self.delegate {
-            webView.delegate = self.delegate
+    
+        guard shouldProxyDelegate else {
+            return
+        }
+        if delegate !== delegateProxy {
+            webView.delegate = delegateProxy
         }
     }
     
@@ -363,6 +368,22 @@ class ZHWebViewContentController:NSObject {
     }
 }
 
+extension ZHWebViewContentController: UIWebViewDelegate {
+    // update js contenxt
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if let context = webView.value(forKeyPath: jsContextPath) as? JSContext, jsContext !== context {
+            updateJsContext(context)
+        }
+    }
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if let handled = handleRequestBlock?(webView, request) {
+            return !handled
+        }
+        return true
+    }
+}
+
 open class ZHWebViewBridge {
     fileprivate var handlerMapper:[String: (([Any]) -> (Bool, [Any]?))] = [:]
 
@@ -378,7 +399,7 @@ open class ZHWebViewBridge {
     
     /// initial delegate of UIWebView
     open var delegate:UIWebViewDelegate? {
-        return contentController?.delegate.delegate
+        return contentController?.delegateProxy.original
     }
     
     /**
@@ -448,8 +469,8 @@ open class ZHWebViewBridge {
         let contentController = ZHWebViewContentController.init(webView: webView, proxyDelegate: proxyDelegate)
         contentController.addUserPlugin(ZHWebViewBridgeJS)
         contentController.addScriptMessageHandler(messageHandler, name: ZHBridgeName)
-        contentController.delegate.webViewShouldStartLoadWithRequestBlock = { (wb:UIWebView, request:URLRequest) -> Bool in
-            return !bridge.handleRequest(request)
+        contentController.handleRequestBlock = { (wb:UIWebView, request:URLRequest) -> Bool in
+            return bridge.handleRequest(request)
         }
         bridge.contentController = contentController
         

@@ -7,27 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08E9AF522906BE7379CDC64F /* Pods_wow3rd_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6992A17F6BFE06D57A8B33 /* Pods_wow3rd_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
+		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		6420C788866478AF3A66C430 /* Pods_wow3rd_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09903DD8F7FBAC081B0898D3 /* Pods_wow3rd_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0614E6B51DC08F4500602C10 /* wow3rd_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wow3rd_Example.entitlements; sourceTree = "<group>"; };
-		0614E6B61DC08FFC00602C10 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
-		128F51D5FE0EC251CC9C4BA6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		52DA934236E42D5988AA5360 /* Pods-wow3rd_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wow3rd_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-wow3rd_Example/Pods-wow3rd_Example.release.xcconfig"; sourceTree = "<group>"; };
+		09903DD8F7FBAC081B0898D3 /* Pods_wow3rd_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wow3rd_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D14A355FA4A1CDD9E5555B8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0E4AAEB6FC6CDFDD8975D1C9 /* Pods-wow3rd_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wow3rd_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wow3rd_Example/Pods-wow3rd_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		18BF8C089B2F3E90868FB5AB /* Pods_wow3rd_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wow3rd_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3392FBD6A00E6BB0CD1C21CC /* Pods-wow3rd_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wow3rd_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-wow3rd_Example/Pods-wow3rd_Example.release.xcconfig"; sourceTree = "<group>"; };
+		54E0D3A5A94C9D73485365C0 /* Pods-wow3rd_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wow3rd_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wow3rd_Tests/Pods-wow3rd_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* wow3rd_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wow3rd_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		7784AD999825E371B32CC339 /* wow3rd.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = wow3rd.podspec; path = ../wow3rd.podspec; sourceTree = "<group>"; };
-		7C7C07004CAA860377AA1566 /* Pods_wow3rd_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wow3rd_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E6992A17F6BFE06D57A8B33 /* Pods_wow3rd_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wow3rd_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD9BD13DADD0BC4CE58EEA2E /* Pods-wow3rd_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wow3rd_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wow3rd_Example/Pods-wow3rd_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		DFC225976AC43E21B260EC5E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		93A9DB8E96925DFA0688DAE8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		A01E84D9DD8B1E704E953F31 /* Pods-wow3rd_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wow3rd_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wow3rd_Tests/Pods-wow3rd_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		BA6841809FB0D3A661C45A80 /* wow3rd.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = wow3rd.podspec; path = ../wow3rd.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,22 +39,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08E9AF522906BE7379CDC64F /* Pods_wow3rd_Example.framework in Frameworks */,
+				6420C788866478AF3A66C430 /* Pods_wow3rd_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EC1BDA800D495D03F4072C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09903DD8F7FBAC081B0898D3 /* Pods_wow3rd_Example.framework */,
+				18BF8C089B2F3E90868FB5AB /* Pods_wow3rd_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				0614E6B51DC08F4500602C10 /* wow3rd_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for wow3rd */,
 				607FACD11AFB9204008FA782 /* Products */,
-				C02CEE872827D8353E13683A /* Pods */,
-				CC3E74D56E893F05C8783344 /* Frameworks */,
+				A59C7B1B4776FAA915697CAB /* Pods */,
+				4EC1BDA800D495D03F4072C2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -85,30 +99,22 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				7784AD999825E371B32CC339 /* wow3rd.podspec */,
-				128F51D5FE0EC251CC9C4BA6 /* README.md */,
-				DFC225976AC43E21B260EC5E /* LICENSE */,
+				BA6841809FB0D3A661C45A80 /* wow3rd.podspec */,
+				93A9DB8E96925DFA0688DAE8 /* README.md */,
+				0D14A355FA4A1CDD9E5555B8 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		C02CEE872827D8353E13683A /* Pods */ = {
+		A59C7B1B4776FAA915697CAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DD9BD13DADD0BC4CE58EEA2E /* Pods-wow3rd_Example.debug.xcconfig */,
-				52DA934236E42D5988AA5360 /* Pods-wow3rd_Example.release.xcconfig */,
+				0E4AAEB6FC6CDFDD8975D1C9 /* Pods-wow3rd_Example.debug.xcconfig */,
+				3392FBD6A00E6BB0CD1C21CC /* Pods-wow3rd_Example.release.xcconfig */,
+				54E0D3A5A94C9D73485365C0 /* Pods-wow3rd_Tests.debug.xcconfig */,
+				A01E84D9DD8B1E704E953F31 /* Pods-wow3rd_Tests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		CC3E74D56E893F05C8783344 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0614E6B61DC08FFC00602C10 /* UserNotifications.framework */,
-				9E6992A17F6BFE06D57A8B33 /* Pods_wow3rd_Example.framework */,
-				7C7C07004CAA860377AA1566 /* Pods_wow3rd_Tests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,12 +124,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "wow3rd_Example" */;
 			buildPhases = (
-				45BA8919960127FC35B5BDD6 /* [CP] Check Pods Manifest.lock */,
+				1F1D784185FBCDFFE3F0868D /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				F4E5FCEE5ABA4DD461DECAEC /* [CP] Embed Pods Frameworks */,
-				A15DC4846EE24C423C86E5C3 /* [CP] Copy Pods Resources */,
+				9C4713783B63342E746051E4 /* [CP] Embed Pods Frameworks */,
+				02EEA93ED02F3805C862B3FF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -141,17 +147,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = B4WSDTADTT;
-						SystemCapabilities = {
-							com.apple.Push = {
-								enabled = 1;
-							};
-						};
 					};
 				};
 			};
@@ -178,6 +179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -186,22 +188,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		45BA8919960127FC35B5BDD6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		A15DC4846EE24C423C86E5C3 /* [CP] Copy Pods Resources */ = {
+		02EEA93ED02F3805C862B3FF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -216,7 +203,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wow3rd_Example/Pods-wow3rd_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F4E5FCEE5ABA4DD461DECAEC /* [CP] Embed Pods Frameworks */ = {
+		1F1D784185FBCDFFE3F0868D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9C4713783B63342E746051E4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -238,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +248,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				607FACDA1AFB9204008FA782 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -269,8 +280,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -314,8 +327,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -334,21 +349,22 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD9BD13DADD0BC4CE58EEA2E /* Pods-wow3rd_Example.debug.xcconfig */;
+			baseConfigurationReference = 0E4AAEB6FC6CDFDD8975D1C9 /* Pods-wow3rd_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = wow3rd_Example.entitlements;
 				DEVELOPMENT_TEAM = B4WSDTADTT;
 				INFOPLIST_FILE = wow3rd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -356,15 +372,15 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 52DA934236E42D5988AA5360 /* Pods-wow3rd_Example.release.xcconfig */;
+			baseConfigurationReference = 3392FBD6A00E6BB0CD1C21CC /* Pods-wow3rd_Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = wow3rd_Example.entitlements;
 				DEVELOPMENT_TEAM = B4WSDTADTT;
 				INFOPLIST_FILE = wow3rd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

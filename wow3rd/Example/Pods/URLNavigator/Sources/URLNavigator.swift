@@ -22,6 +22,9 @@
 
 import UIKit
 
+/// A typealias for avoiding namespace conflict.
+public typealias _URLConvertible = URLConvertible
+
 /// URLNavigator provides an elegant way to navigate through view controllers by URLs. URLs should be mapped by using
 /// `URLNavigator.map(_:_:)` function.
 ///
@@ -56,6 +59,9 @@ import UIKit
 ///
 /// - seealso: `URLNavigable`
 open class URLNavigator {
+
+  /// A typealias for avoiding namespace conflict.
+  public typealias URLConvertible = _URLConvertible
 
   /// A closure type which has URL and values for parameters.
   public typealias URLOpenHandler = (_ url: URLConvertible, _ values: [String: Any]) -> Bool
@@ -117,11 +123,12 @@ open class URLNavigator {
   /// Returns a matched view controller from a specified URL.
   ///
   /// - parameter url: The URL to find view controllers.
+  /// - parameter userInfo: The user extra parameters you want add.
   /// - returns: A match view controller or `nil` if not matched.
-  open func viewController(for url: URLConvertible) -> UIViewController? {
+  open func viewController(for url: URLConvertible, userInfo: [AnyHashable: Any]? = nil) -> UIViewController? {
     if let urlMatchComponents = URLMatcher.default.match(url, scheme: self.scheme, from: Array(self.urlMap.keys)) {
       let navigable = self.urlMap[urlMatchComponents.pattern]
-      return navigable?.init(url: url, values: urlMatchComponents.values) as? UIViewController
+      return navigable?.init(url: url, values: urlMatchComponents.values, userInfo: userInfo) as? UIViewController
     }
     return nil
   }
@@ -149,10 +156,11 @@ open class URLNavigator {
   @discardableResult
   open func push(
     _ url: URLConvertible,
+    userInfo: [AnyHashable: Any]? = nil,
     from: UINavigationController? = nil,
     animated: Bool = true
   ) -> UIViewController? {
-    guard let viewController = self.viewController(for: url) else {
+    guard let viewController = self.viewController(for: url, userInfo: userInfo) else {
       return nil
     }
     return self.push(viewController, from: from, animated: animated)
@@ -206,12 +214,13 @@ open class URLNavigator {
   @discardableResult
   open func present(
     _ url: URLConvertible,
+    userInfo: [AnyHashable: Any]? = nil,
     wrap: Bool = false,
     from: UIViewController? = nil,
     animated: Bool = true,
     completion: (() -> Void)? = nil
   ) -> UIViewController? {
-    guard let viewController = self.viewController(for: url) else { return nil }
+    guard let viewController = self.viewController(for: url, userInfo: userInfo) else { return nil }
     return self.present(viewController, wrap: wrap, from: from, animated: animated, completion: completion)
   }
 

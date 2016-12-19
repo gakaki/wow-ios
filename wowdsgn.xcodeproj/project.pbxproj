@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0607088E1DD18D7600A91724 /* RouterRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088C1DD18D7600A91724 /* RouterRule.swift */; };
 		0607088F1DD18D7600A91724 /* WowWebViewSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */; };
+		0613470D1E07EC5B00DCF170 /* WowShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0613470C1E07EC5B00DCF170 /* WowShare.framework */; };
+		0613470E1E07EC5B00DCF170 /* WowShare.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0613470C1E07EC5B00DCF170 /* WowShare.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		067AFF631DB9C4CF00D48020 /* ExtensionEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */; };
 		069D2F581DB46AD100A059D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D2F571DB46AD100A059D0 /* AppDelegate.swift */; };
 		069D2F5F1DB46AD100A059D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 069D2F5E1DB46AD100A059D0 /* Assets.xcassets */; };
@@ -492,6 +494,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0613470E1E07EC5B00DCF170 /* WowShare.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +504,7 @@
 /* Begin PBXFileReference section */
 		0607088C1DD18D7600A91724 /* RouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterRule.swift; sourceTree = "<group>"; };
 		0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowWebViewSwift.swift; sourceTree = "<group>"; };
+		0613470C1E07EC5B00DCF170 /* WowShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WowShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionEquatable.swift; sourceTree = "<group>"; };
 		069D2F541DB46AD100A059D0 /* wowdsgn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wowdsgn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069D2F571DB46AD100A059D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -994,6 +998,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F251841E02AA5E007C4B66 /* WowShare.framework in Frameworks */,
+				0613470D1E07EC5B00DCF170 /* WowShare.framework in Frameworks */,
 				2D142E9D1E03C1EF009A50CB /* WowShare.framework in Frameworks */,
 				63F251821E02A8E8007C4B66 /* wow3rd.framework in Frameworks */,
 				639C13DA1DD204AA003B0F59 /* UserNotificationsUI.framework in Frameworks */,
@@ -1034,6 +1039,7 @@
 		069D2F4B1DB46AD100A059D0 = {
 			isa = PBXGroup;
 			children = (
+				0613470C1E07EC5B00DCF170 /* WowShare.framework */,
 				069D2F561DB46AD100A059D0 /* wowdsgn */,
 				069D2F551DB46AD100A059D0 /* Products */,
 				44ADD77ECCF8854938543588 /* Pods */,

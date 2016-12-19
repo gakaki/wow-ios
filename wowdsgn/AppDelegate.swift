@@ -60,9 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         YYWebImageManager.shared().cache?.diskCache.costLimit       = cache_size
         ImageCache.default.maxDiskCacheSize                         = cache_size
         ImageCache.default.maxMemoryCost                            = cache_size
-        
+
 
     }
+    
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        //清除url的缓存
+        URLCache.shared.removeAllCachedResponses()
+    }
+    
     func ADLaunchView(){
         
         lunchView = Bundle.main.loadNibNamed(String(describing: WOWLaunchView.self), owner: self, options: nil)?.last as! WOWLaunchView

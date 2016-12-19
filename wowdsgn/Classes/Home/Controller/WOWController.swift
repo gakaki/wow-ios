@@ -227,12 +227,14 @@ class WOWController: WOWBaseModuleVC {
                 let userMsg = json["userMessageUnReadCount"].int
                 WOWUserManager.systemMsgCount = systemMsg ?? 0
                 WOWUserManager.userMsgCount = userMsg ?? 0
-                strongSelf.updateBageCount()
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                 DLog(json)
                 
             }
         }) { (errorMsg) in
-            
+            WOWUserManager.systemMsgCount =  0
+            WOWUserManager.userMsgCount =  0
+            NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
         }
         
     }

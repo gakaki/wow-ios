@@ -31,7 +31,7 @@ class WOWSettingController: WOWBaseTableViewController {
     
 //MARK:Private Method
     fileprivate func calCacheSize(){
-        
+
 //        KingfisherManager.shared.cache.calculateDiskCacheSizeWithCompletionHandler {[weak self](size) in
 //            if let strongSelf = self{
 //                let mSize = Float(size) / 1024 / 1024
@@ -62,12 +62,19 @@ class WOWSettingController: WOWBaseTableViewController {
                 navigationController?.pushViewController(vc, animated: true)
             }
             if (indexPath as NSIndexPath).row == 1 {
-
+         
+                let cache = KingfisherManager.shared.cache
                 
-                KingfisherManager.shared.cache.clearDiskCache(completion: {
+                cache.clearDiskCache(completion: {
                     WOWHud.showMsg("清除成功")
                 })
-                KingfisherManager.shared.cache.clearMemoryCache()
+                cache.cleanExpiredDiskCache()
+                cache.clearMemoryCache()
+                KingfisherManager.shared.cache.calculateDiskCacheSize(completion: { (size) in
+                    print("disk size in bytes: \(size)")
+
+                })
+                
                 //清楚yywebimage cache
                 if let c  = YYWebImageManager.shared().cache{
                     // get cache capacity
@@ -78,9 +85,10 @@ class WOWSettingController: WOWBaseTableViewController {
                     c.diskCache.removeAllObjects({
                         DLog("清除成功")
                     })
-        
+                    
                 }
                 
+               ClearCache()
                 
             }
         case 1:
@@ -89,8 +97,26 @@ class WOWSettingController: WOWBaseTableViewController {
             break
         }
     }
-    
-    
+
+    func ClearCache() {
+        
+        //清除url的缓存
+        URLCache.shared.removeAllCachedResponses()
+        
+        let dateFrom: Date = Date.init(timeIntervalSince1970: 0)
+        
+        if #available(iOS 9.0, *) {
+            
+            let websiteDataTypes: Set = WKWebsiteDataStore.allWebsiteDataTypes()
+            
+            WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom) {
+                
+                DLog("清空WKWebView缓存完成")
+                
+            }
+            
+        }         
+    }
     fileprivate func alertExit(){
         let alertController: UIAlertController = UIAlertController(title: "退出登录", message: nil, preferredStyle: .alert)
         let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style:.cancel, handler: nil)

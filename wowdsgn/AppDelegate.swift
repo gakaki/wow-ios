@@ -57,10 +57,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         let cache_size      = UInt(50 * 1024 * 1024)
         YYWebImageManager.shared().cache?.memoryCache.costLimit     = cache_size
+        YYWebImageManager.shared().cache?.diskCache.costLimit       = cache_size
         ImageCache.default.maxDiskCacheSize                         = cache_size
-        
+        ImageCache.default.maxMemoryCost                            = cache_size
+
 
     }
+    
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        //清除url的缓存
+        URLCache.shared.removeAllCachedResponses()
+    }
+    
     func ADLaunchView(){
         
         lunchView = Bundle.main.loadNibNamed(String(describing: WOWLaunchView.self), owner: self, options: nil)?.last as! WOWLaunchView
@@ -256,8 +264,8 @@ extension AppDelegate{
         }
         
 
-//        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
-////        vc.topic_id = 48      //247到254是SKU 2 42
+//        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductListController.self)) as! WOWProductListController
+//////        vc.topic_id = 48      //247到254是SKU 2 42
 //        window?.rootViewController = vc
     }
     

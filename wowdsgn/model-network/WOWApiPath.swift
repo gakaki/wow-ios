@@ -83,6 +83,10 @@ let URL_ProductSpec             = "v2/product/spec"    //选择产品颜色规�
 //相关产品
 let URL_ProductAbout            = "/v1/product/relateds"
 
+let URL_ProductGroupTop         = "v1/product/group"
+
+let URL_ProductGroupList        = "v1/product/group/products"
+
 //2.6收藏
 let URL_IsFavoriteProduct       = "v1/user/product/is-favorite"   //是否喜欢某个单品
 
@@ -101,6 +105,10 @@ let URL_BrandList               = "v1/brand/list"
 let URL_BrandDetail             = "v1/brand/detail"
 
 let URL_ProductBrand            = "v2/product/brand"                //查询品牌产品
+
+
+
+
 
 let URL_LikeProduct             = "v1/user/product/favorite-list"    //喜欢的品牌列表
 

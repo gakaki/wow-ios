@@ -57,7 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         let cache_size      = UInt(50 * 1024 * 1024)
         YYWebImageManager.shared().cache?.memoryCache.costLimit     = cache_size
+        YYWebImageManager.shared().cache?.diskCache.costLimit       = cache_size
         ImageCache.default.maxDiskCacheSize                         = cache_size
+        ImageCache.default.maxMemoryCost                            = cache_size
         
 
     }

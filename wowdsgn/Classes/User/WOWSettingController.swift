@@ -31,7 +31,7 @@ class WOWSettingController: WOWBaseTableViewController {
     
 //MARK:Private Method
     fileprivate func calCacheSize(){
-        
+
 //        KingfisherManager.shared.cache.calculateDiskCacheSizeWithCompletionHandler {[weak self](size) in
 //            if let strongSelf = self{
 //                let mSize = Float(size) / 1024 / 1024
@@ -62,12 +62,19 @@ class WOWSettingController: WOWBaseTableViewController {
                 navigationController?.pushViewController(vc, animated: true)
             }
             if (indexPath as NSIndexPath).row == 1 {
-
+                URLCache.shared.removeAllCachedResponses()
+                let cache = KingfisherManager.shared.cache
                 
-                KingfisherManager.shared.cache.clearDiskCache(completion: {
+                cache.clearDiskCache(completion: {
                     WOWHud.showMsg("清除成功")
                 })
-                KingfisherManager.shared.cache.clearMemoryCache()
+                cache.cleanExpiredDiskCache()
+                cache.clearMemoryCache()
+                KingfisherManager.shared.cache.calculateDiskCacheSize(completion: { (size) in
+                    print("disk size in bytes: \(size)")
+
+                })
+                
                 //清楚yywebimage cache
                 if let c  = YYWebImageManager.shared().cache{
                     // get cache capacity
@@ -82,6 +89,7 @@ class WOWSettingController: WOWBaseTableViewController {
                 }
                 
                 
+                
             }
         case 1:
             alertExit()
@@ -89,7 +97,7 @@ class WOWSettingController: WOWBaseTableViewController {
             break
         }
     }
-    
+
     
     fileprivate func alertExit(){
         let alertController: UIAlertController = UIAlertController(title: "退出登录", message: nil, preferredStyle: .alert)

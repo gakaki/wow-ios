@@ -117,7 +117,7 @@
             </objects>
             <point key="canvasLocation" x="72" y="610"/>
         </scene>
-        <!--Empty Data Set Delegate-->
+        <!--购物车-->
         <scene sceneID="J05-vd-CCR">
             <objects>
                 <viewController storyboardIdentifier="WOWBuyCarController" title="购物车" hidesBottomBarWhenPushed="YES" id="t5S-nt-7u6" customClass="WOWBuyCarController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
@@ -135,8 +135,6 @@
                                 <connections>
                                     <outlet property="dataSource" destination="t5S-nt-7u6" id="X6y-we-0vg"/>
                                     <outlet property="delegate" destination="t5S-nt-7u6" id="qpm-Be-Zma"/>
-                                    <outlet property="emptyDataSetDelegate" destination="t5S-nt-7u6" id="MZV-ql-qXq"/>
-                                    <outlet property="emptyDataSetSource" destination="t5S-nt-7u6" id="PFP-Yj-dFH"/>
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-3m-yCX" userLabel="bottomView">

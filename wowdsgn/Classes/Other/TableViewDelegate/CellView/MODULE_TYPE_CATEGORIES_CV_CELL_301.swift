@@ -23,6 +23,9 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
     func setModel(_ m:WowModulePageItemVO){
         bg_pic.set_webimage_url(m.categoryBgImg)
     }
+    func setTwoLine_Model(_ m:WOWCarouselBanners){
+        bg_pic.set_webimage_url(m.bannerImgSrc)
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         bg_pic                  = UIImageView()
@@ -157,4 +160,3 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301: UITableViewCell,ModuleViewElement,UICo
 
     
 }
-

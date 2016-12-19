@@ -264,8 +264,8 @@ extension AppDelegate{
         }
         
 
-//        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserCommentVC.self)) as! WOWUserCommentVC
-////        vc.topic_id = 48      //247到254是SKU 2 42
+//        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductListController.self)) as! WOWProductListController
+//////        vc.topic_id = 48      //247到254是SKU 2 42
 //        window?.rootViewController = vc
     }
     

@@ -27,12 +27,13 @@ class WOWProductListTopInfo: WOWBaseModel,Mappable {
 import ObjectMapper
 import UIKit
 
-class WOWProductListController: WOWBaseViewController {
+class WOWProductListController: VCBaseNavCart {
     
     fileprivate let headerIdentifier = "ProductListHeaderView"
     var vo_topic:WOWProductListTopInfo?
     var topUrl : String?
     var vo_products             = [WOWProductModel]()
+    var groupId  : Int!
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,7 @@ class WOWProductListController: WOWBaseViewController {
     }
     func requestTop(){
         
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductGroupTop(groupId: 3), successClosure: {[weak self] (result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductGroupTop(groupId: groupId), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self{
                 
@@ -65,7 +66,7 @@ class WOWProductListController: WOWBaseViewController {
     }
     func requestList(){
         
-        let params = ["groupId":3 , "currentPage": 2, "pageSize": 10]
+        let params = ["groupId":groupId , "currentPage": 1, "pageSize": 10]
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductGroupList(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
@@ -89,7 +90,8 @@ class WOWProductListController: WOWBaseViewController {
     override func setUI()
     {
         super.setUI()
-        configCollectionView() 
+        configCollectionView()
+        addObserver()
     }
     func configCollectionView()  {
         
@@ -111,7 +113,28 @@ class WOWProductListController: WOWBaseViewController {
         l.headerHeight = Float(MGScreenWidth * 0.67)
         return l
     }()
-
+    
+    fileprivate func addObserver(){
+        /**
+         添加通知
+         */
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+        
+    }
+    // 刷新物品的收藏状态与否 传productId 和 favorite状态
+    func refreshData(_ sender: Notification)  {
+        
+        if  let send_obj =  sender.object as? [String:AnyObject] {
+            
+            vo_products.ergodicArrayWithProductModel(dic: send_obj)
+            self.collectionView.reloadData()
+        }
+        
+    }
+    deinit {
+         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
@@ -156,7 +179,18 @@ extension WOWProductListController:UICollectionViewDelegate,UICollectionViewData
     {
         return CGSize(width: WOWGoodsSmallCell.itemWidth,height: WOWGoodsSmallCell.itemWidth + 75)
     }
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if  let cell = collectionView.cellForItem(at: indexPath) {
+            
+            self.collectionView.deselectItem(at: indexPath, animated: false)
+            let model = vo_products[(indexPath as NSIndexPath).row]
+            cell.isSelected  = false;
+            
+            if ( model.productId != nil ){
+                toVCProduct(model.productId!)
+            }
+        }
+    }
 }
 
 class ProductListHeaderView:UICollectionReusableView{

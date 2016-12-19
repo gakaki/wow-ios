@@ -142,7 +142,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
                     
                 case 801:
                      singProductArray.append(t)
-                case 701,601,101,102,402,901,1001,103:
+                case 701,601,101,102,402,901,1001,103,104:
                     print("")
                 default:
                     // 移除 cell for row 里面不存在的cellType类型，防止新版本增加新类型时，出现布局错误
@@ -338,3 +338,14 @@ extension WOWBaseModuleVC:HotPeopleTitleDelegate{// 点击标签跳转
         
     }
 }
+extension WOWBaseModuleVC:Cell_104_TwoLineDelegate{// 点击标签跳转'
+    
+    func goToProductGroupList(_ groupId:Int){
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductListController.self)) as! WOWProductListController
+        vc.groupId = groupId
+        vc.hideNavigationBar = true
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+  }
+

@@ -10,7 +10,7 @@ class VCBaseNavCart:WOWBaseViewController{
         super.viewDidLoad()
         config_btn_back()
         config_btn_cart()
-        config_btn_msg()
+//        config_btn_msg()
         buyCarCount()
         addObservers()
         self.edgesForExtendedLayout = UIRectEdge()

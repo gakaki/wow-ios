@@ -502,7 +502,6 @@
 /* Begin PBXFileReference section */
 		0607088C1DD18D7600A91724 /* RouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterRule.swift; sourceTree = "<group>"; };
 		0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowWebViewSwift.swift; sourceTree = "<group>"; };
-		06144D671E0247BE0028645E /* WowShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WowShare.framework; path = "../../../Library/Developer/Xcode/DerivedData/wowdsgn-gjuvlizsuzwdzpafcbozkvrwdcub/Build/Products/Debug-iphonesimulator/WowShare.framework"; sourceTree = "<group>"; };
 		067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionEquatable.swift; sourceTree = "<group>"; };
 		069D2F541DB46AD100A059D0 /* wowdsgn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wowdsgn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069D2F571DB46AD100A059D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -817,7 +816,6 @@
 		069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRequestApi.swift; sourceTree = "<group>"; };
 		06C869A11DD19A25004C05E3 /* RouterMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterMapper.swift; sourceTree = "<group>"; };
 		06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateUmengHelper.swift; sourceTree = "<group>"; };
-		06C869A51DD19BD7004C05E3 /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.4.0.a; path = "../../../Downloads/UMessage_Sdk_All_1.4.0(idfa)(1)/UMessage_Sdk_1.4.0/libUMessage_Sdk_1.4.0.a"; sourceTree = "<group>"; };
 		06C869A71DD19BDF004C05E3 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		06C869AA1DD19C8E004C05E3 /* Config3rd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config3rd.swift; sourceTree = "<group>"; };
@@ -966,7 +964,6 @@
 		63DD6A651DE44B13005BE631 /* WOWCouponEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWCouponEmptyView.xib; sourceTree = "<group>"; };
 		63F251791E0276A0007C4B66 /* WOWBuyCarHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWBuyCarHeaderView.swift; sourceTree = "<group>"; };
 		63F2517B1E0276AD007C4B66 /* WOWBuyCarHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWBuyCarHeaderView.xib; sourceTree = "<group>"; };
-		63F2517F1E02A738007C4B66 /* WowShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WowShare.framework; path = "WowShare/build/Debug-iphoneos/WowShare.framework"; sourceTree = "<group>"; };
 		63F251811E02A8E8007C4B66 /* wow3rd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = wow3rd.framework; path = "../../../Library/Developer/Xcode/DerivedData/wowdsgn-gbpjljhekxrzdugkvahqfuiqaqfo/Build/Products/Debug-iphoneos/wow3rd/wow3rd.framework"; sourceTree = "<group>"; };
 		63F251831E02AA5E007C4B66 /* WowShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WowShare.framework; path = "../../../Library/Developer/Xcode/DerivedData/wowdsgn-gbpjljhekxrzdugkvahqfuiqaqfo/Build/Products/Debug-iphoneos/WowShare.framework"; sourceTree = "<group>"; };
 		63F3DA7D1DE68420009CE52D /* WOWCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCommentCell.swift; sourceTree = "<group>"; };
@@ -2155,10 +2152,7 @@
 			children = (
 				63F251831E02AA5E007C4B66 /* WowShare.framework */,
 				63F251811E02A8E8007C4B66 /* wow3rd.framework */,
-				63F2517F1E02A738007C4B66 /* WowShare.framework */,
-				06144D671E0247BE0028645E /* WowShare.framework */,
 				06C869A81DD19C07004C05E3 /* UserNotificationsUI.framework */,
-				06C869A51DD19BD7004C05E3 /* libUMessage_Sdk_1.4.0.a */,
 				63803AE71DC325BD000AA259 /* UserNotifications.framework */,
 				069D2F831DB4796D00A059D0 /* SystemConfiguration.framework */,
 				069D2F811DB4796800A059D0 /* ImageIO.framework */,

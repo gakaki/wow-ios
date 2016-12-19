@@ -221,12 +221,13 @@ class WOWController: WOWBaseModuleVC {
         
         WOWNetManager.sharedManager.requestWithTarget(.api_MessageCount, successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
-            if let _ = self{
+            if let strongSelf = self{
                 let json = JSON(result)
                 let systemMsg = json["systemMessageUnReadCount"].int
                 let userMsg = json["userMessageUnReadCount"].int
                 WOWUserManager.systemMsgCount = systemMsg ?? 0
                 WOWUserManager.userMsgCount = userMsg ?? 0
+                strongSelf.updateBageCount()
                 DLog(json)
                 
             }

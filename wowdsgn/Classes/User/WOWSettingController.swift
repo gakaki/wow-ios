@@ -78,7 +78,13 @@ class WOWSettingController: WOWBaseTableViewController {
                     c.diskCache.removeAllObjects({
                         DLog("清除成功")
                     })
-
+                    c.clearMemoryCache()
+                    
+                    // Clear disk cache. This is an async operation.
+                    c.clearDiskCache()
+                    
+                    // Clean expired or size exceeded disk cache. This is an async operation.
+                    c.cleanExpiredDiskCache()
                 }
                 
                 

@@ -30,7 +30,7 @@ target 'wowdsgn' do
 	pod 'Reachability'
 
 
-  pod 'IQKeyboardManagerSwift'
+    pod 'IQKeyboardManagerSwift'
 	#pod 'HidingNavigationBar', '~> 0.3.0'
 	pod 'SwiftyJSON'
 	pod 'ObjectMapper'

@@ -5,8 +5,39 @@
 //  Created by 陈旭 on 2016/12/8.
 //  Copyright © 2016年 陈旭. All rights reserved.
 //
+// APP更新的信息
+class WOWUpdateVersionModel: WOWBaseModel,Mappable {
+
+    var appSize                         :       String?
+    var buildVersion                    :       String?
+    var isRequiredUpgrade               :       Bool?
+    var publishDateFormat               :       String?
+    var publishLog                      :       String?
+    var publishLogs                     :       [String]?
+    var upgradeUrl                      :       String?
+    var version                         :       String?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        
+        appSize                             <- map["appSize"]
+        buildVersion                        <- map["buildVersion"]
+        isRequiredUpgrade                   <- map["isRequiredUpgrade"]
+        publishDateFormat                   <- map["publishDateFormat"]
+        publishLog                          <- map["publishLog"]
+        publishLogs                         <- map["publishLogs"]
+        upgradeUrl                          <- map["upgradeUrl"]
+        version                             <- map["version"]
+
+    }
+    
+}
 
 import UIKit
+import ObjectMapper
 protocol UpdateHeightDelegate:class {
     
     func updateHeight(height:CGFloat)
@@ -14,13 +45,19 @@ protocol UpdateHeightDelegate:class {
     func actionBlcok()
     
 }
+
 class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
     
-    var updateContent = [String](){
+    var updateModel     : WOWUpdateVersionModel!{
         didSet{
+            updateContent = updateModel.publishLogs ?? [""]
+            updateHeaderView.lbVersion.text = updateModel.version
+            updateHeaderView.lbAppSize.text = updateModel.appSize
             tableView.reloadData()
+            
         }
     }
+    var updateContent = [String]()
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -35,7 +72,7 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
         if let del = delegate {
             del.updateHeight(height: self.tableView.contentSize.height)
         }
-//       print(self.tableView.contentSize.height)
+
     }
     override func awakeFromNib() {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UpdateCell")
@@ -58,7 +95,7 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
         cell.textLabel?.text            = jointImgStr(imgArray: updateContent)
         cell.textLabel?.font            = UIFont.systemFont(ofSize: 13)
         cell.textLabel?.numberOfLines   = 0
-        cell.textLabel?.textColor       = UIColor.red
+        cell.textLabel?.textColor       = UIColor.init(hexString: "808080")
         cell.selectionStyle             = .none
         return cell
 
@@ -79,8 +116,9 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
         return updateFooterView
     }
     
-    lazy var updateHeaderView: UIView = {
+    lazy var updateHeaderView: WOWUpdateHeader = {
         let view = Bundle.loadResourceName(String(describing: WOWUpdateHeader.self)) as! WOWUpdateHeader
+
         return view
     }()
     lazy var updateFooterView: UIView = {

@@ -54,7 +54,7 @@ struct CellHight {
 class WOWOrderDetailController: WOWBaseViewController{
 
     var orderNewModel               : WOWNewOrderListModel?
-    
+
     var orderNewDetailModel         : WOWNewOrderDetailModel?
     
     var surePayType                 : PayType = .none
@@ -74,6 +74,8 @@ class WOWOrderDetailController: WOWBaseViewController{
     
     var isSomeForGoodsType          : Bool! // 记录是否是 部分发货 的布局。 区分页眉上 标题不同
     
+    var myQueueTimer1: DispatchQueue?
+    var myTimer1: DispatchSourceTimer?
     
     @IBOutlet weak var tableView    : UITableView!
     @IBOutlet weak var countLabel   : UILabel!
@@ -103,7 +105,34 @@ class WOWOrderDetailController: WOWBaseViewController{
         super.didReceiveMemoryWarning()
         
     }
+    lazy var timerView: OrderTimerView = {
+        let view = OrderTimerView()
+        return view
+    }()
+    // 倒计时 ，实时更新Model层数据
+    func timerCount(detailModel: WOWNewOrderDetailModel){
+        myQueueTimer1 = DispatchQueue(label: "myQueueTimer")
+        myTimer1 = DispatchSource.makeTimerSource(flags: [], queue: myQueueTimer1!)
+        myTimer1?.scheduleRepeating(deadline: .now(), interval: .seconds(1) ,leeway:.milliseconds(10))
+        myTimer1?.setEventHandler {[weak self] in
+            if let strongSelf = self {
+                if detailModel.leftPaySeconds > 0 {
+                    
+                    detailModel.leftPaySeconds = detailModel.leftPaySeconds! - 1
+                    
+                    DispatchQueue.main.async {
+                        
+                        strongSelf.timerView.timeStamp = strongSelf.orderNewDetailModel?.leftPaySeconds ?? 0
+                        
+                    }
+                    
+                }
+            }
     
+        }
+        myTimer1?.resume()
+        
+    }
     //MARK:Private Method
     override func setUI() {
         super.setUI()
@@ -241,6 +270,9 @@ class WOWOrderDetailController: WOWBaseViewController{
             switch orderNewModel.orderStatus!  {
             case 0:
                 self.OrderDetailNewaType          = OrderNewType.payMent
+                
+                self.timerCount(detailModel: orderNewModel) // 更新Model层时间戳
+                
                 self.rightButton.setTitle("立即支付", for: UIControlState())
         
             case 1,5,6:
@@ -1050,13 +1082,12 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
     }
     
+ 
     // 页眉View
     func headerSectionView(_ headerTitle:String,headetHeight:CGFloat,isTimerView:Bool = false) -> UIView {
         guard headerTitle != "Timer" else { // 倒计时view
-            let redView = UIView()
-             redView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: headetHeight)
-            redView.backgroundColor = UIColor.red
-            return redView
+            
+            return timerView
         }
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: headetHeight)

@@ -139,10 +139,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
 
-        //DeepShare
-        if DeepShare.continue(userActivity) {
-            return true
-        }
+//        //DeepShare
+//        if DeepShare.continue(userActivity) {
+//            return true
+//        }
         //Universal Link
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             let url = userActivity.webpageURL!
@@ -175,16 +175,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        //growing io
-        if Growing.handle(url) {
-            return true
-        }
-        
-        //DeepShare
-        if DeepShare.handle(url) {
-            return true
-        }
-        
+//        //growing io
+//        if Growing.handle(url) {
+//            return true
+//        }
+//        
+//        //DeepShare
+//        if DeepShare.handle(url) {
+//            return true
+//        }
+//        
         //TalkingData ADTracking
         TalkingDataAppCpa.onReceiveDeepLink(url)
         
@@ -209,14 +209,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         //growing io
-        if Growing.handle(url) {
-            return true
-        }
-//
-        //DeepShare
-        if DeepShare.handle(url) {
-            return true
-        }
+//        if Growing.handle(url) {
+//            return true
+//        }
+////
+//        //DeepShare
+//        if DeepShare.handle(url) {
+//            return true
+//        }
         
         //TalkingData ADTracking
         TalkingDataAppCpa.onReceiveDeepLink(url)
@@ -307,9 +307,9 @@ extension AppDelegate{
 //        WXApi.registerApp(WOWID.Wechat.appID)
     
         //Growing
-        Growing.start(withAccountId: "a04e14656f08dc7e")
+//        Growing.start(withAccountId: "a04e14656f08dc7e")
         //DeepShare
-        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
+//        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
         //Talking Data
         TalkingData.setExceptionReportEnabled(true)
         TalkingData.sessionStarted("12430AB8C707826E0C0FBDA290E620E4", withChannelId: "AppStore")

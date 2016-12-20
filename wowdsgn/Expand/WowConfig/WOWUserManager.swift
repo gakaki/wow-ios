@@ -240,6 +240,7 @@ struct WOWUserManager {
         MGDefault.set("", forKey:WOWUserPhotoData)
         MGDefault.set(nil, forKey: WOWSessionToken)
         MGDefault.set(0, forKey: WOWUserMsgCount)
+        MGDefault.set(0, forKey: WOWSystemMsgCount)
         MGDefault.synchronize()
     }
     /**

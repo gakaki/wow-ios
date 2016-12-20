@@ -64,8 +64,9 @@ class WOWMaskViewController: UIViewController,UpdateHeightDelegate{
     lazy var bgView: UIView = {
         
         let t = UIView()
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(dismissAction))
-        t.addGestureRecognizer(tap)
+        // 点击蒙版取消页面操作，注释掉
+//        let tap = UITapGestureRecognizer.init(target: self, action: #selector(dismissAction))
+//        t.addGestureRecognizer(tap)
         return t
         
     }()

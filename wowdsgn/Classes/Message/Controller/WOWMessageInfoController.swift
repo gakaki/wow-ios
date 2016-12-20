@@ -38,6 +38,9 @@ class WOWMessageInfoController: WOWBaseViewController {
         }
         makeCustomerNavigationItem("全部已读", left: false){[weak self] () -> () in
             if let strongSelf = self{
+                guard WOWUserManager.loginStatus else{
+                    return
+                }
                 strongSelf.requestMsgAllRead()
             }
             
@@ -100,7 +103,19 @@ class WOWMessageInfoController: WOWBaseViewController {
         //单个消息已读
         WOWNetManager.sharedManager.requestWithTarget(.api_MessageRead(messageId: messageId, msgType: msgType ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
-                
+                for msg in strongSelf.msgArr {
+                    if msg.messageId == messageId {
+                        msg.isRead = true
+                    }
+                }
+                if strongSelf.msgType == 1 {
+                    let count = WOWUserManager.userMsgCount - 1
+                    WOWUserManager.userMsgCount = count < 0 ? 0 : count
+                }else{
+                    let count = WOWUserManager.systemMsgCount - 1
+                    WOWUserManager.systemMsgCount = count < 0 ? 0 : count
+                }
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                 strongSelf.tableView.reloadData()
                 
             }
@@ -113,7 +128,17 @@ class WOWMessageInfoController: WOWBaseViewController {
         //全部读取
         WOWNetManager.sharedManager.requestWithTarget(.api_MessageAllRead(msgType: msgType ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
-                
+                for msg in strongSelf.msgArr {
+                    msg.isRead = true
+                }
+                if strongSelf.msgType == 1 {
+                    let count = WOWUserManager.userMsgCount - 1
+                    WOWUserManager.userMsgCount = count < 0 ? 0 : count
+                }else{
+                    let count = WOWUserManager.systemMsgCount - 1
+                    WOWUserManager.systemMsgCount = count < 0 ? 0 : count
+                }
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                 strongSelf.tableView.reloadData()
                 
             }

@@ -39,7 +39,7 @@ class WOWMessageCenterCell: UITableViewCell {
                 newView.isHidden = true
             }
             msgContent.text = model.msgContent
-            timeLabel.text = model.createTime
+            timeLabel.text = model.createTime?.stringToTimeStamp()
         }
     }
 

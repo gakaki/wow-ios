@@ -27,7 +27,7 @@ class WOWMessageInfoCell: UITableViewCell {
 
     func  showData(model: WOWMessageModel?) {
         if let model = model {
-            timeLabel.text = model.createTime
+            timeLabel.text = model.createTime?.stringToTimeStamp()
             msgTitle.text = model.msgTitle
             msgContent.text = model.msgContent
             if model.isRead ?? false {

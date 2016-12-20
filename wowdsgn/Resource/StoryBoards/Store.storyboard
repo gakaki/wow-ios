@@ -20,9 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wU2-hn-An5">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wU2-hn-An5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iay-2O-JIY">
                                     <size key="itemSize" width="50" height="50"/>
@@ -43,6 +42,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wU2-hn-An5" secondAttribute="trailing" id="2mZ-Ok-9Fm"/>
+                            <constraint firstItem="wU2-hn-An5" firstAttribute="top" secondItem="SlN-cw-fjf" secondAttribute="top" id="RbX-kX-vzg"/>
+                            <constraint firstItem="wU2-hn-An5" firstAttribute="leading" secondItem="SlN-cw-fjf" secondAttribute="leading" id="cGE-D9-b6d"/>
+                            <constraint firstItem="aOr-jj-b8L" firstAttribute="top" secondItem="wU2-hn-An5" secondAttribute="bottom" id="jOZ-Lh-VFb"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="wU2-hn-An5" id="Aar-aE-CNG"/>

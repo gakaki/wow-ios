@@ -85,7 +85,7 @@ class WOWSettingController: WOWBaseTableViewController {
                     c.diskCache.removeAllObjects({
                         DLog("清除成功")
                     })
-                    
+
                 }
                 
                ClearCache()

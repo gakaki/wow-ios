@@ -24,7 +24,7 @@ extension String {
 
 class WowColor {
     
-    static let gray         = "CCCCCC".hexColor
+    static let gray         = "808080".hexColor
     static let grayLight    = "808080".hexColor
     static let orange       = "FFD444".hexColor
     static let black        = "202020".hexColor

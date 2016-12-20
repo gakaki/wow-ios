@@ -18,7 +18,7 @@ class WOWMessageModel: WOWBaseModel,Mappable {
     var msgTitle                    : String?
     var msgContent                  : String?
     var openType                    : Int?
-    var targetType                  : Int?
+    var targetType                  : String?
     var targetId                    : String?
     var targetUrl                   : String?
     var isRead                      : Bool?

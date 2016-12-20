@@ -93,7 +93,7 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" image="selectBig"/>
-                    <state key="highlighted" image="select"/>
+                    <state key="highlighted" image="selectBig"/>
                     <connections>
                         <action selector="weixinClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QSs-fY-IA2"/>
                     </connections>
@@ -137,7 +137,6 @@
     <resources>
         <image name="alipay" width="30" height="30"/>
         <image name="close" width="30" height="30"/>
-        <image name="select" width="16" height="17"/>
         <image name="selectBig" width="20" height="20"/>
         <image name="unselectBig" width="20" height="20"/>
         <image name="weixin" width="30" height="30"/>

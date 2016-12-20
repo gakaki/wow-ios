@@ -26,6 +26,17 @@ class WOWMessageController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    deinit {
+        removeObservers()
+    }
+    fileprivate func addObserver(){
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(updateMsgCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+        
+    }
+    fileprivate func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
+    }
     //MARK:Private Method
     override func setUI() {
         super.setUI()
@@ -33,6 +44,7 @@ class WOWMessageController: WOWBaseViewController {
         //隐藏消息按钮
         rightNagationItem.infoButton.isHidden = true
         rightNagationItem.newView.isHidden = true
+        addObserver()
         
         tableView.mj_header = self.mj_header
         tableView.delegate = self
@@ -65,6 +77,9 @@ class WOWMessageController: WOWBaseViewController {
     func configData() {
         
         tableView.reloadData()
+    }
+    func updateMsgCount() {
+        request()
     }
 
 }

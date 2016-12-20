@@ -107,13 +107,13 @@ class WOWSettingController: WOWBaseTableViewController {
         
         if #available(iOS 9.0, *) {
             
-            let websiteDataTypes: Set = WKWebsiteDataStore.allWebsiteDataTypes()
-            
-            WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom) {
-                
-                DLog("清空WKWebView缓存完成")
-                
-            }
+//            let websiteDataTypes: Set = WKWebsiteDataStore.allWebsiteDataTypes()
+//            
+//            WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom) {
+//                
+//                DLog("清空WKWebView缓存完成")
+//                
+//            }
             
         }         
     }

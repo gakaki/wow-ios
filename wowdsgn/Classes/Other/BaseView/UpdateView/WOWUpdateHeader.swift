@@ -10,6 +10,9 @@ import UIKit
 
 class WOWUpdateHeader: UIView {
 
+    @IBOutlet weak var lbVersion: UILabel!
 
 
+    @IBOutlet weak var lbAppSize: UILabel!
+    
 }

@@ -61,7 +61,23 @@ extension UILabel {
         self.attributedText = mustr1
         
     }
-    
+    // 指定的范围字体加颜色
+    func colorRangeWithText( _ str1:String,str2:String,str3:String = "",changeColor:UIColor){
+        
+        let  mustr1 = NSMutableAttributedString.init(string: str1 + str2 + str3)
+        let strLeng = str1.characters.count
+        let str1Leng = str2.characters.count
+        
+        let range = NSMakeRange(strLeng, str1Leng)
+        
+        // 颜色
+        mustr1 .addAttribute(NSForegroundColorAttributeName, value: changeColor, range: range)
+        
+        
+        
+        self.attributedText = mustr1
+        
+    }
     // 改变指定字体
     func fontWithText( _ str1:String,str2:String, font: UIFont){
         

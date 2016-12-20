@@ -42,8 +42,13 @@ class WOWLaunchView: UIView {
 
                 let json = JSON(result)
                 DLog(json)
-                strongSelf.goToUpdateVersion()
                 
+                let model        =  Mapper<WOWUpdateVersionModel>().map(JSONObject: json.object )
+                if let model = model {
+                    
+                   strongSelf.goToUpdateVersion(m: model)
+                    
+                }
             }
         }) { (errorMsg) in
             
@@ -53,10 +58,10 @@ class WOWLaunchView: UIView {
         
     }
     // 跳转更新提示VC
-    func goToUpdateVersion()  {
+    func goToUpdateVersion(m: WOWUpdateVersionModel)  {
         
         let vc = WOWMaskViewController()
-        
+        vc.updateModel = m
         UIApplication.currentViewController()?.presentToViewController(viewControllerToPresent: vc, completion: nil)
 
         

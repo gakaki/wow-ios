@@ -54,6 +54,7 @@ class WOWProductListController: VCBaseNavCart {
                 
                 let r                                     =  JSON(result)
                 DLog(r)
+                
                 strongSelf.vo_topic                       =  Mapper<WOWProductListTopInfo>().map(JSONObject: r.object )
 
                 strongSelf.topUrl = strongSelf.vo_topic?.image
@@ -66,7 +67,7 @@ class WOWProductListController: VCBaseNavCart {
     }
     func requestList(){
         
-        let params = ["groupId":groupId , "currentPage": 1, "pageSize": 10]
+        let params = ["groupId":groupId , "currentPage": pageIndex, "pageSize": 10]
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductGroupList(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
@@ -74,9 +75,39 @@ class WOWProductListController: VCBaseNavCart {
                 
                 let r                             =  JSON(result)
                 DLog(r)
-                strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(JSONObject:r["products"].arrayObject) ?? [WOWProductModel]()
+         
+                let bannerList        =  Mapper<WOWProductModel>().mapArray(JSONObject:r["products"].arrayObject)
                 //先这样写吧，动态计算label的高度，更改header的高度
           
+                if let bannerList = bannerList{
+                    if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据
+                        strongSelf.vo_products = []
+                        
+                        
+                    }
+                    if bannerList.count < currentPageSize {// 如果拿到的数据，小于分页，则说明，无下一页
+                        strongSelf.collectionView.mj_footer = nil
+//                        strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                        
+                    }else {
+                        
+                        strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                        
+                    }
+                    
+                    strongSelf.vo_products.append(contentsOf: bannerList)
+                    
+                }else {
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.vo_products = []
+                    }
+                    
+                    strongSelf.collectionView.mj_footer = nil
+                    
+                }
+
+                
                 strongSelf.collectionView.reloadData()
                 strongSelf.endRefresh()
                 
@@ -97,6 +128,8 @@ class WOWProductListController: VCBaseNavCart {
         
         collectionView.delegate     = self
         collectionView.dataSource   = self
+        self.collectionView.mj_header = mj_header
+        self.collectionView.mj_footer = mj_footer
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor                  = UIColor.white
         
@@ -201,7 +234,8 @@ class ProductListHeaderView:UICollectionReusableView{
         super.init(frame: frame)
         
         imageView = UIImageView()
-        imageView.contentMode = UIViewContentMode.scaleToFill
+//        imageView.contentMode = UIViewContentMode.scaleAspectFill
+//        imageView.clipsToBounds = true
         self.addSubview(imageView)
         
    

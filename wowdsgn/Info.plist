@@ -16,12 +16,11 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+    <key>CMBPublicKey</key>
+    <string>GavyATk1FzmyS7PF </string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.8.5</string>
 	<key>CFBundleURLTypes</key>
-    <key>CMBPublicKey</key>
-    <string>GavyATk1FzmyS7PF
-    </string>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>

@@ -126,6 +126,13 @@ class WOWOrderDetailController: WOWBaseViewController{
                         
                     }
                     
+                }else {
+                    strongSelf.myTimer1        = nil
+                    strongSelf.myQueueTimer1   = nil
+                    
+                    strongSelf.request()//拉取服务器状态， 状态改变，则就会更新UI
+                    
+                    
                 }
             }
     
@@ -271,7 +278,9 @@ class WOWOrderDetailController: WOWBaseViewController{
             case 0:
                 self.OrderDetailNewaType          = OrderNewType.payMent
                 
-                self.timerCount(detailModel: orderNewModel) // 更新Model层时间戳
+                if orderNewModel.leftPaySeconds > 0 {
+                    self.timerCount(detailModel: orderNewModel) // 更新Model层时间戳
+                }
                 
                 self.rightButton.setTitle("立即支付", for: UIControlState())
         

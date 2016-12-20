@@ -234,8 +234,8 @@ class ProductListHeaderView:UICollectionReusableView{
         super.init(frame: frame)
         
         imageView = UIImageView()
-//        imageView.contentMode = UIViewContentMode.scaleAspectFill
-//        imageView.clipsToBounds = true
+        imageView.contentMode = UIViewContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
         self.addSubview(imageView)
         
    

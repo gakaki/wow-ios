@@ -4,8 +4,8 @@ PODS:
     - LeanCloud/Storage (= 10.0.0)
   - LeanCloud/Storage (10.0.0):
     - Alamofire (~> 4.2.0)
-  - URLNavigator (1.0.1)
-  - WebViewBridge.Swift (1.0)
+  - URLNavigator (1.1.1)
+  - WebViewBridge.Swift (1.1)
   - wow3rd (0.1.0):
     - LeanCloud
     - URLNavigator (~> 1.0)
@@ -21,10 +21,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   LeanCloud: 0a6a0d52e33dd43d998ab256cc83f6c4954607b8
-  URLNavigator: 830d156b8624402850ff14ec96222cfc51a05d42
-  WebViewBridge.Swift: 7a9018f73e8599517529ffc3355a32ac5b0a95d6
+  URLNavigator: 2ec64d7ade7fa11032e57776ab826a8631377301
+  WebViewBridge.Swift: 71939acb109b0aad6300e7196189b8f55107f58d
   wow3rd: 1a12d90c0405df68f7f25c51b358079251b5de9f
 
-PODFILE CHECKSUM: 908e2d8853629c31523bcb33948815fe22bae01d
+PODFILE CHECKSUM: 7d052ecbdfe622d7d5ef8b209864732f7ded39dc
 
 COCOAPODS: 1.2.0.beta.1

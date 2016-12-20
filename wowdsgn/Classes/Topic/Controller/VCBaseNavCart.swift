@@ -5,6 +5,7 @@ class VCBaseNavCart:WOWBaseViewController{
     
     let btn_width_height = CGFloat(44)
     var carEntranceButton:MIBadgeButton!
+    var newView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +64,7 @@ class VCBaseNavCart:WOWBaseViewController{
         button.frame    = CGRect(x: self.view.frame.width - 2*(btn_width_height + offset_width), y: offset_icon(), width: btn_width_height, height: btn_width_height)
         button .setBackgroundImage(image, for: UIControlState())
         button.addTarget(self, action:#selector(btn_msg_action), for:UIControlEvents.touchUpInside)
-        let newView = UIView(frame: CGRect(x: btn_width_height - 4, y: 4, width: 8, height: 8))
+        newView = UIView(frame: CGRect(x: btn_width_height - 4, y: 4, width: 8, height: 8))
         button.addSubview(newView)
         self.view.addSubview(button)
 
@@ -88,8 +89,14 @@ class VCBaseNavCart:WOWBaseViewController{
         }else {
             carEntranceButton.badgeString = "99+"
         }
+        
+        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
+            newView.isHidden = false
+        }else {
+            newView.isHidden = true
+        }
     }
     
-   
+    
 
 }

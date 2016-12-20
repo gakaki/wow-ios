@@ -1,3 +1,4 @@
+
 //
 //  WOWProductDetailController.swift
 //  wowapp
@@ -65,7 +66,9 @@ class WOWProductDetailController: WOWBaseViewController {
         super.viewDidLoad()
         request()
         addObservers()
+     
         
+        MobClick.e(UMengEvent.Product_Detail)
     }
     
     override func didReceiveMemoryWarning() {

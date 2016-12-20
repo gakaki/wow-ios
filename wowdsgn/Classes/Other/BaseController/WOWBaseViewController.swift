@@ -258,8 +258,13 @@ extension WOWBaseViewController {
             rightNagationItem.buyCarButton.badgeString = "99+"
         }
         
-        
+        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
+            rightNagationItem.newView.isHidden = false
+        }else {
+            rightNagationItem.newView.isHidden = true
+        }
     }
+    
 
 }
 
@@ -274,7 +279,11 @@ extension WOWBaseTableViewController {
         }else {
             rightNagationItem.buyCarButton.badgeString = "99+"
         }
-
+        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
+            rightNagationItem.newView.isHidden = false
+        }else {
+            rightNagationItem.newView.isHidden = true
+        }
         makeRightNavigationItem(rightNagationItem)
 
         makeCustomerImageNavigationItem("search1", left:true) {[weak self] () -> () in
@@ -297,7 +306,12 @@ extension WOWBaseTableViewController {
             rightNagationItem.buyCarButton.badgeString = "99+"
         }
         
+        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
+            rightNagationItem.newView.isHidden = false
+        }else {
+            rightNagationItem.newView.isHidden = true
+        }
+        
     }
-
 
 }

@@ -9,8 +9,11 @@
 import UIKit
 import SnapKit
 class WOWMaskViewController: UIViewController,UpdateHeightDelegate{
+  
+    var updateModel     : WOWUpdateVersionModel!
     
-    var updateContent = [String]()
+    var updateContent   = [String]()
+    
     // 根据返回的内容的高度，来更新View的高度
     func updateHeight(height:CGFloat){
         updateView.snp.updateConstraints { (make) in
@@ -50,9 +53,10 @@ class WOWMaskViewController: UIViewController,UpdateHeightDelegate{
     }
     lazy var updateView: WOWUpdateView = {
         let view = Bundle.loadResourceName(String(describing: WOWUpdateView.self)) as! WOWUpdateView
-       
+        
         view.delegate       = self
-        view.updateContent  = self.updateContent
+        view.updateModel    = self.updateModel
+        
         return view
         
     }()

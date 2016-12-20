@@ -22,7 +22,7 @@ class VCFound: WOWBaseModuleVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        
         do {
             try request_module_page_with_throw()
                 requestBottom()

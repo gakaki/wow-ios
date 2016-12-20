@@ -22,8 +22,20 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7m0-aw-6rz">
+                    <rect key="frame" x="0.0" y="64.5" width="375" height="0.5"/>
+                    <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="Bba-Tv-v4N"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="7m0-aw-6rz" secondAttribute="trailing" id="LDt-6q-Peq"/>
+                <constraint firstAttribute="bottom" secondItem="7m0-aw-6rz" secondAttribute="bottom" id="huU-Ue-lTQ"/>
+                <constraint firstItem="7m0-aw-6rz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qTz-2p-WbX"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="32.5" y="195.5"/>
         </view>

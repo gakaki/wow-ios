@@ -150,7 +150,7 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     var packages                        : [WOWNewForGoodsModel]?//已发货清单列表
     var unShipOutOrderItems                 : [WOWNewProductModel]?//未发货清单列表
     
-    
+    var leftPaySeconds              : Int? // 订单剩余支付时间
     
     
     required init?(map: Map) {
@@ -179,6 +179,7 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
         totalProductQty                     <- map["totalProductQty"]
         packages                            <- map["packages"]
         unShipOutOrderItems                 <- map["unShipOutOrderItems"]
+        leftPaySeconds                      <- map["leftPaySeconds"]
     }
 }
 

@@ -477,13 +477,10 @@ class WOWBuyCarController: WOWBaseViewController {
         }
     
     }
-    
+    //为你推荐
     fileprivate func requestBottom()  {
-        var params = [String: AnyObject]()
         
-        params = ["excludes": [] as AnyObject ,"currentPage": pageIndex as AnyObject,"pageSize":pageSize as AnyObject]
-        
-        WOWNetManager.sharedManager.requestWithTarget(.api_Home_BottomList(params : params), successClosure: {[weak self] (result,code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_CartBottomList(pageSize: currentPageSize, currentPage: pageIndex), successClosure: {[weak self] (result,code) in
             if let strongSelf = self{
                 
                 
@@ -492,7 +489,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.endRefresh()
                 
-                let bannerList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
+                let bannerList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["products"].arrayObject)
                 
                 if let bannerList = bannerList{
                     if strongSelf.pageIndex == 1{// ＝1 说明操作的下拉刷新 清空数据

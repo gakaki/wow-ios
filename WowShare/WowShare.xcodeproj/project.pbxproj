@@ -537,6 +537,7 @@
 					"$(PROJECT_DIR)/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/UMSocial/UMSocialSDK",
 					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WowShare/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -577,6 +578,7 @@
 					"$(PROJECT_DIR)/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/UMSocial/UMSocialSDK",
 					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WowShare/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

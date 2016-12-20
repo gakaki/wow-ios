@@ -84,6 +84,14 @@ public enum RequestApi{
 
     case api_Captcha(mobile:String) //绑定微信验证码
     
+    case api_ProductGroupTop(groupId : Int)// 分组产品 上边的 图片接口
+    
+    case api_ProductGroupList(params: [String: AnyObject])// 分组产品 下面列表
+    
+    
+    
+    
+    
     //购物车相关
     case api_CartModify(shoppingCartId:Int, productQty:Int)
     
@@ -317,6 +325,10 @@ extension RequestApi:TargetType{
         //商品评轮列表
         case .api_ProductCommentList:
             return URL_productCommentList
+        case .api_ProductGroupTop:
+            return URL_ProductGroupTop
+        case .api_ProductGroupList:
+            return URL_ProductGroupList
         //购物车相关
         case .api_CartModify:
             return URL_CartModify
@@ -489,7 +501,9 @@ extension RequestApi:TargetType{
             .api_MessageMain,
             .api_MessageList,
             .api_MessageCount,
-            .api_CartBottomList:
+            .api_CartBottomList,
+            .api_ProductGroupTop,
+            .api_ProductGroupList:
 
             return .GET
 
@@ -535,6 +549,12 @@ extension RequestApi:TargetType{
                 params = ["productId":productId]
             case let .api_ProductAbout(param):
                 params = param
+            
+            case let .api_ProductGroupTop(groupId):
+                params = ["groupId":groupId]
+            case let .api_ProductGroupList(param):
+                params = param
+            
             case let .api_ProductImgDetail(productId):
                 params = ["productId":productId]
             case let .api_ProductSpec(productId):

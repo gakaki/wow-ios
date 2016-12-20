@@ -326,6 +326,16 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             cell_heights[section]  = cell.heightAll
             cell.bringSubview(toFront: cell.collectionView)
             returnCell = cell
+        
+        case Cell_104_TwoLine.cell_type():
+            let cell            = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! Cell_104_TwoLine
+            
+            cell.delegate       = self.vc as! Cell_104_TwoLineDelegate?
+//            cell.setData(model.moduleContent?.banners ?? [WOWCarouselBanners]())
+            cell.dataArr = model.moduleContent?.banners ?? [WOWCarouselBanners]()
+//            cell_heights[section]  = cell.heightAll
+//            cell.bringSubview(toFront: cell.collectionView)
+            returnCell = cell
             
         case WOWHotColumnCell.cell_type():
             
@@ -423,7 +433,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 let model = dataSourceArray[section]
                 
                 switch model.moduleType ?? 0 {
-                case 402,301,501,401:
+                case 402,301,501,401,104:
                     
                     return 50
                 case 302:
@@ -465,16 +475,19 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     
                 case 402:
                     isHiddenLien = false
-                    t           =  model.moduleContentProduct?.name ?? "居家好物"
+                    t            =  model.moduleContentProduct?.name ?? "居家好物"
                 case 501:
                     isHiddenLien = true
-                    t           = "单品推荐"
+                    t            = "单品推荐"
                 case 301:
                     isHiddenLien = true
-                    t           = "场景"
+                    t            = "场景"
+                case 104:
+                    isHiddenLien = true
+                    t            = model.moduleContent?.name ?? "推荐"
                 case 401:
                     isHiddenLien = true
-                    t           = model.name ?? "本周上新"
+                    t            = model.name ?? "本周上新"
                 case 901:
                     return hearderColumnView(title: model.moduleContentTitle?.name ?? "栏目")
                 default:

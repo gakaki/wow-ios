@@ -1,0 +1,10 @@
+framework module WowShare {
+  umbrella header "WowShare.h"
+
+  export *
+  module * { export * }
+}
+
+module WowShare.Swift {
+    header "WowShare-Swift.h"
+}

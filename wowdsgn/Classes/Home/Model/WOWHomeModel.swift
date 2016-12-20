@@ -71,6 +71,8 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
 //            moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
             moduleContentTmp        <- map["moduleContent"]
 //                moduleContentTmp              <- map["moduleContent"]
+        case 104:
+             moduleContent           <- map["moduleContent"]
         default:
             break
         }

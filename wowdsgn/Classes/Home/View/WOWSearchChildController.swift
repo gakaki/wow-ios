@@ -37,7 +37,7 @@ class WOWSearchChildController: WOWBaseViewController{
 //        request()
     }
     deinit {
-        print("销毁")
+         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

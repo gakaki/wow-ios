@@ -220,7 +220,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             MobClick.e(.Support_Us)
             return
         case (1,3): //意见反馈
-//            goLeavaTips()
+            goLeavaTips()
             return
         case (2,_)://设置
             MobClick.e(.Setting)

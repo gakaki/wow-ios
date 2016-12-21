@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="78" id="KGk-i7-Jjw" customClass="WOWFeedBackCell" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="反馈类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jeo-Pq-fau">
+                        <rect key="frame" x="15" y="15" width="106" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="EqY-s5-Fhm"/>
+                            <constraint firstAttribute="width" constant="106" id="VMp-qz-yRx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sN-h9-4KH">
+                        <rect key="frame" x="0.0" y="32" width="125" height="54"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RY7-Ei-wI6" customClass="SelectBtn" customModule="wowdsgn" customModuleProvider="target">
+                                <rect key="frame" x="12" y="17" width="100" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="8aw-NF-iBg"/>
+                                    <constraint firstAttribute="width" constant="100" id="g8h-pZ-Ksz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" title="产品建议">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="unselectBig"/>
+                                <connections>
+                                    <action selector="clickBtnForFeedBack:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PwB-VF-qFn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="54" id="USI-pj-HWA"/>
+                            <constraint firstItem="RY7-Ei-wI6" firstAttribute="centerX" secondItem="2sN-h9-4KH" secondAttribute="centerX" id="g0L-vw-Ymp"/>
+                            <constraint firstItem="RY7-Ei-wI6" firstAttribute="centerY" secondItem="2sN-h9-4KH" secondAttribute="centerY" id="mIe-md-zzm"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNy-3g-H8w">
+                        <rect key="frame" x="125" y="32" width="125" height="54"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6B-Dm-flh" customClass="SelectBtn" customModule="wowdsgn" customModuleProvider="target">
+                                <rect key="frame" x="12.5" y="17" width="100" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="cFf-c4-Gdt"/>
+                                    <constraint firstAttribute="width" constant="100" id="f39-oV-XPU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" title="功能异常">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="unselectBig"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Z6B-Dm-flh" firstAttribute="centerX" secondItem="HNy-3g-H8w" secondAttribute="centerX" id="2gv-X5-ELE"/>
+                            <constraint firstAttribute="height" constant="54" id="jxk-6r-Bqg"/>
+                            <constraint firstItem="Z6B-Dm-flh" firstAttribute="centerY" secondItem="HNy-3g-H8w" secondAttribute="centerY" id="pjR-6t-IFP"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5K-v3-SZD">
+                        <rect key="frame" x="250" y="32" width="125" height="54"/>
+                        <subviews>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFY-AA-d4T" customClass="SelectBtn" customModule="wowdsgn" customModuleProvider="target">
+                                <rect key="frame" x="12" y="17" width="100" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="aAz-jH-LD9"/>
+                                    <constraint firstAttribute="width" constant="100" id="wRc-BY-lxk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" title="其他">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="unselectBig"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JFY-AA-d4T" firstAttribute="centerX" secondItem="L5K-v3-SZD" secondAttribute="centerX" id="08n-Hu-GwE"/>
+                            <constraint firstAttribute="height" constant="54" id="9Km-HE-qDD"/>
+                            <constraint firstItem="JFY-AA-d4T" firstAttribute="centerY" secondItem="L5K-v3-SZD" secondAttribute="centerY" id="auq-SH-rPv"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="2sN-h9-4KH" firstAttribute="top" secondItem="Jeo-Pq-fau" secondAttribute="bottom" id="4mV-FL-T2d"/>
+                    <constraint firstItem="HNy-3g-H8w" firstAttribute="width" secondItem="L5K-v3-SZD" secondAttribute="width" id="4nL-WA-KIo"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="L5K-v3-SZD" secondAttribute="trailing" constant="-8" id="9kh-PU-5Kq"/>
+                    <constraint firstItem="HNy-3g-H8w" firstAttribute="leading" secondItem="2sN-h9-4KH" secondAttribute="trailing" id="AtX-PG-g4f"/>
+                    <constraint firstItem="HNy-3g-H8w" firstAttribute="top" secondItem="2sN-h9-4KH" secondAttribute="top" id="Ji8-HM-Riw"/>
+                    <constraint firstItem="Jeo-Pq-fau" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="N1j-X2-MFn"/>
+                    <constraint firstItem="2sN-h9-4KH" firstAttribute="width" secondItem="HNy-3g-H8w" secondAttribute="width" id="NRy-6E-xwz"/>
+                    <constraint firstItem="2sN-h9-4KH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="YYG-UO-ead"/>
+                    <constraint firstItem="Jeo-Pq-fau" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="eDT-Jc-GyT"/>
+                    <constraint firstAttribute="bottom" secondItem="2sN-h9-4KH" secondAttribute="bottom" id="lPl-AN-hQd"/>
+                    <constraint firstItem="L5K-v3-SZD" firstAttribute="leading" secondItem="HNy-3g-H8w" secondAttribute="trailing" id="o64-9Z-4Z1"/>
+                    <constraint firstItem="L5K-v3-SZD" firstAttribute="top" secondItem="2sN-h9-4KH" secondAttribute="top" id="oF6-L0-grZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnElse" destination="JFY-AA-d4T" id="39W-49-6kP"/>
+                <outlet property="btnError" destination="Z6B-Dm-flh" id="zYE-yy-P62"/>
+                <outlet property="btnSuggest" destination="RY7-Ei-wI6" id="omn-AI-DNJ"/>
+            </connections>
+            <point key="canvasLocation" x="-27.5" y="-225"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="unselectBig" width="20" height="20"/>
+    </resources>
+</document>

@@ -144,7 +144,7 @@ class WOWUserController: WOWBaseTableViewController {
                  */
                 if   WOWUserManager.userPhotoData.isEmpty {
                     print(WOWUserManager.userHeadImageUrl)
-                    headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
+                    headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl + "?v=33", place_holder_name: "placeholder_userhead")
 //                    headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
                     
 
@@ -220,7 +220,7 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
             MobClick.e(.Support_Us)
             return
         case (1,3): //意见反馈
-            goLeavaTips()
+//            goLeavaTips()
             return
         case (2,_)://设置
             MobClick.e(.Setting)
@@ -243,7 +243,6 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
                     toLoginVC(true)
                     return
                 }
-                
                 MobClick.e(.My_Coupons)
                 let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
                 vc.entrance = couponEntrance.userEntrance

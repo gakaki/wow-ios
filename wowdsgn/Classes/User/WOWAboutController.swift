@@ -49,7 +49,7 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
             cell.titleLabel.text = "当前版本"
             cell.arrowImg.isHidden = true
             cell.space.constant = 15
-            cell.versionLabel.text = "1.9"
+            cell.versionLabel.text = ez.appVersion ?? "检测不到版本"
             break
         case (0,1): //支持尖叫设计
             cell.titleLabel.text = "新版本更新"
@@ -76,7 +76,22 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
+        case (0,0): //当前版本
+            
+            break
+        case (0,1): //支持尖叫设计
+            GoToItunesApp.show()
+            break
+        case (1,0): //帮助与反馈
+            goLeavaTips()
+            break
+        case (1,1): //支持尖叫设计
+            GoToItunesApp.show()
+            break
+        default:
+            break
+        }
     }
     
  

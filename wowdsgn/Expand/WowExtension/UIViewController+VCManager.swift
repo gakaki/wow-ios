@@ -299,6 +299,12 @@ extension  UIViewController {
         
     }
     
+    func goLeavaTips(){
+        
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWLeaveTipsController") as! WOWLeaveTipsController
+
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     //登录成功方法
     func toLoginSuccess(_ isPresent:Bool = false){
 //        WOWBuyCarMananger.updateBadge(true)

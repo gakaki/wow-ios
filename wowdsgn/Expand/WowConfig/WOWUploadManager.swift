@@ -20,11 +20,24 @@ class WOWUploadManager {
     
     static let sharedManager = WOWUploadManager()
     init(){}
-    
+    // 压缩图片到指定的体积
+   static func imageCompressForWidth(sourceImage: UIImage, targetWidth defineWidth: CGFloat) -> UIImage {
+        let imageSize = sourceImage.size
+        let width: CGFloat = imageSize.width
+        let height: CGFloat = imageSize.height
+        let targetWidth: CGFloat = defineWidth
+        let targetHeight: CGFloat = (targetWidth / width) * height
+        UIGraphicsBeginImageContext(CGSize.init(width: targetWidth, height: targetHeight))
+        sourceImage.draw(in: CGRect.init(x: 0, y: 0, width: targetWidth, height: targetHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage ?? sourceImage
+    }
+
    static func onlyStr() -> String  {
         //          拼接唯一字符串
-        let onlyStr = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
-        let hashids                 = Hashids(salt:onlyStr)
+        let onlyStr         = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
+        let hashids         = Hashids(salt:onlyStr)
         return hashids.encode([1,2,3])!
         
     }
@@ -32,11 +45,11 @@ class WOWUploadManager {
     // 上传头像
     static  func uploadPhoto(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
         //          拼接唯一字符串
-
-        let qiniu_key               = "user/avatar/\(onlyStr())"
+        let photoImage = imageCompressForWidth(sourceImage: image, targetWidth: 200)
+        let qiniu_key  = "user/avatar/\(onlyStr())"
 
         
-        PushImage(image, imagePath: qiniu_key, successClosure: { (url) in
+        PushImage(photoImage, imagePath: qiniu_key, successClosure: { (url) in
             // 保存用户URL
             if let url = url {
                 WOWUserManager.userHeadImageUrl = url
@@ -100,7 +113,7 @@ class WOWUploadManager {
         
         let image = image.fixOrientation()
         let data = UIImageJPEGRepresentation(image,0.5)
-
+        
         let uploadOption            = QNUploadOption.init(
             mime: nil,
             progressHandler: { ( key, percent_f) in

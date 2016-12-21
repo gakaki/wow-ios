@@ -267,13 +267,10 @@ extension WOWUserController:SKStoreProductViewControllerDelegate{
         return 0.01
     }
     
-    fileprivate func goLeavaTips(){
-        let vc = UIStoryboard.initialViewController("User", identifier: String(describing: WOWLeaveTipsController.self))
-        navigationController?.pushViewController(vc, animated: true)
-    }
     
     fileprivate func evaluateApp(){
-        GoToItunesApp.show()
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWAboutController") as! WOWAboutController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {

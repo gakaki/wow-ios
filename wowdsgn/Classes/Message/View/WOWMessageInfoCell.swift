@@ -27,10 +27,12 @@ class WOWMessageInfoCell: UITableViewCell {
 
     func  showData(model: WOWMessageModel?) {
         if let model = model {
+            //格式化时间
             timeLabel.text = model.createTime?.stringToTimeStamp()
             msgTitle.text = model.msgTitle
             msgContent.text = model.msgContent
-            if model.isRead ?? false {
+            //判断是否已读，如果读了不显示标致
+            if model.isRead ?? true {
                 newView.isHidden = true
             }else {
                 newView.isHidden = false
@@ -38,6 +40,7 @@ class WOWMessageInfoCell: UITableViewCell {
             tapView.addAction({[weak self] in
                 if let strongSelf = self {
                     if let del = strongSelf.delegate {
+                        //跳转页面
                         del.goMsgDetail(model: model)
                     }
                 }

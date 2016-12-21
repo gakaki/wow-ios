@@ -16,7 +16,6 @@ class WOWCouponCell: UITableViewCell {
     @IBOutlet weak var label_time_limit: UILabel!
     @IBOutlet weak var label_rmb: UILabel!
     @IBOutlet weak var label_unit: UILabel!
-    @IBOutlet weak var label_identifier: UILabel!
     
     @IBOutlet weak var image_check: UIImageView!
     
@@ -36,8 +35,8 @@ class WOWCouponCell: UITableViewCell {
         dotteShapLayer.lineWidth = 1
 
 
-        mdotteShapePath.move(to: CGPoint(x:55,y:0))
-        mdotteShapePath.addLine(to: CGPoint(x:55,y:90))
+        mdotteShapePath.move(to: CGPoint(x:120,y:0))
+        mdotteShapePath.addLine(to: CGPoint(x:120,y:90))
         dotteShapLayer.path = mdotteShapePath
         let arr :NSArray = NSArray(array: [4,4])
         dotteShapLayer.lineDashPhase = 1.0
@@ -57,7 +56,6 @@ class WOWCouponCell: UITableViewCell {
             label_time_limit.textColor         = MGRgb(128, g: 128, b: 128)
             
             label_unit.textColor               = UIColor.black
-            label_identifier.backgroundColor   = MGRgb(210, g: 181, b: 148)
             
             draw_dashed_line(MGRgb(210, g: 181, b: 148))
         }else {
@@ -67,7 +65,6 @@ class WOWCouponCell: UITableViewCell {
             label_time_limit.textColor         = color_status_disable
             
             label_unit.textColor               = color_status_disable
-            label_identifier.backgroundColor   = color_status_disable
             
             draw_dashed_line(color_status_disable)
             

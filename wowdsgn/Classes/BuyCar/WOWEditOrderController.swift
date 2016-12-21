@@ -153,7 +153,7 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 let couponInfo: WOWCouponModel? = model as? WOWCouponModel
                 
-                if couponInfo?.id != strongSelf.couponModel?.id {
+//                if couponInfo?.id != strongSelf.couponModel?.id {
                     strongSelf.couponModel = model as? WOWCouponModel
                     
                     strongSelf.orderSettle?.deductionName = strongSelf.couponModel?.couponTitle
@@ -163,16 +163,7 @@ class WOWEditOrderController: WOWBaseViewController {
                     strongSelf.orderSettle?.deductionName = couponInfo?.title
                     //选择优惠券
                     strongSelf.selectCoupons()
-//                    //如果
-//                    if !strongSelf.isPromotion {
-//                        strongSelf.discountAmount = strongSelf.orderSettle?.deduction
-//                        strongSelf.reCalTotalPrice()
-//                    }
-//                    
-//                    strongSelf.tableView.reloadData()
-                    
-                    
-                }
+//                }
                 
             }
         }
@@ -629,7 +620,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 cell.lineView.isHidden = false
                 cell.selectBtn.isSelected = !isPromotion
                 cell.selectBtn.addTarget(self, action: #selector(selectCoupons), for:.touchUpInside)
-                if let deductionName = self.orderSettle?.deductionName  {
+                if let deductionName = self.orderSettle?.deductionName {
                     cell.selectBtn.isEnabled = true
                     cell.couponLabel.text = deductionName
 

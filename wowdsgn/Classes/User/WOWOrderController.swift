@@ -224,13 +224,6 @@ extension WOWOrderController:OrderCellDelegate{
         }
     }
     
-    //评价订单
-    fileprivate func commentOrder(_ orderID:String){
-        let vc = UIStoryboard.initialViewController("User", identifier:"WOWOrderCommentController") as! WOWOrderCommentController
-        vc.orderID = orderID.toInt()
-        vc.delegate = self
-        parentNavigationController?.pushViewController(vc, animated: true)
-    }
     
     //确认收货
     fileprivate func confirmReceive(_ orderCode:String,cell:WOWOrderListCell){
@@ -273,11 +266,6 @@ extension WOWOrderController:OrderCellDelegate{
     }
 }
 
-extension WOWOrderController:OrderCommentDelegate{
-    func orderCommentSuccess() {
-        request()
-    }
-}
 
 extension WOWOrderController:OrderDetailDelegate{
     func orderStatusChange() {

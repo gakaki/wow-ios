@@ -96,13 +96,7 @@ class WOWEditOrderController: WOWBaseViewController {
         }else {
             isPromotion = true
             discountAmount = orderSettle?.totalPromotionDeduction
-//            if orderSettle?.deduction > orderSettle?.totalPromotionDeduction {
-//                isPromotion = false
-//                discountAmount = orderSettle?.deduction
-//            }else {
-//                isPromotion = true
-//                discountAmount = orderSettle?.totalPromotionDeduction
-//            }
+
         }
         
         let result = WOWCalPrice.calTotalPrice([orderSettle?.totalAmount ?? 0],counts:[1])
@@ -144,7 +138,13 @@ class WOWEditOrderController: WOWBaseViewController {
     func goCoupons() {
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
         vc.entrance = couponEntrance.orderEntrance
-        vc.couponModel = couponModel
+        //如果使用促销，则不传优惠券信息
+        if isPromotion {
+            
+        }else {
+            vc.couponModel = couponModel
+
+        }
         vc.minAmountLimit = orderSettle?.productTotalAmount
         
   

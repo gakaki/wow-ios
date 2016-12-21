@@ -108,6 +108,7 @@ class WOWMessageInfoController: WOWBaseViewController {
                         msg.isRead = true
                     }
                 }
+                ///1为系统消息；2为官方消息
                 if strongSelf.msgType == 1 {
                     let count = WOWUserManager.userMsgCount - 1
                     WOWUserManager.userMsgCount = count < 0 ? 0 : count
@@ -115,6 +116,7 @@ class WOWMessageInfoController: WOWBaseViewController {
                     let count = WOWUserManager.systemMsgCount - 1
                     WOWUserManager.systemMsgCount = count < 0 ? 0 : count
                 }
+                //每次标记已读消息都要发一个通知，刷新前面的信封
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                 strongSelf.tableView.reloadData()
                 
@@ -131,6 +133,8 @@ class WOWMessageInfoController: WOWBaseViewController {
                 for msg in strongSelf.msgArr {
                     msg.isRead = true
                 }
+                ///1为系统消息；2为官方消息
+
                 if strongSelf.msgType == 1 {
                     let count = WOWUserManager.userMsgCount - 1
                     WOWUserManager.userMsgCount = count < 0 ? 0 : count
@@ -173,14 +177,13 @@ extension WOWMessageInfoController: WOWMessageInfoCellDelegate {
     func goMsgDetail(model: WOWMessageModel) {
         
         if let messageId = model.messageId, let isRread = model.isRead {
+            //只有在未读的时候才去请求接口
             if !isRread {
                 requestMsgRead(messageId: messageId)
             }
         }
         if let openType = model.openType {
-            if openType == 1 {
-                
-            }else if openType == 2 {
+            if openType == 2 {
                 if let type = model.targetType {
                     switch type {
                     case "101"://首页

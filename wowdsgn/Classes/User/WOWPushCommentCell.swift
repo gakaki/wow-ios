@@ -7,13 +7,34 @@
 //
 
 import UIKit
-
+enum PushType {
+    
+    case ShopComment
+    case FeebdBack
+    
+}
 protocol PushCommentDelegate:class {
     func pushImagePickerController(collectionViewTag: Int)
 }
 class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     
+    @IBOutlet weak var topView: UIView!
+    
     @IBOutlet weak var imgProduct: UIImageView!
+    @IBOutlet weak var TopHightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var LeftHightConstraint: NSLayoutConstraint!
+    
+    var cellType : PushType = .ShopComment{
+        didSet{
+            switch cellType {
+            case .FeebdBack:
+                topView.isHidden    = true
+                TopHightConstraint.constant     = 0
+//                LeftHightConstraint.constant    = 15
+            default: break
+            }
+        }
+    }
     
     @IBOutlet weak var inputTextView: KMPlaceholderTextView!
     @IBOutlet weak var lbDes: UILabel!
@@ -32,7 +53,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     }
     
     var modelPhotosData               :    UserPhotoManage? // 记录当前cell上面选择的图片信息
-    var userCommentData               :    UserCommentManage?{// 用户评论信息
+    var userCommentData:    UserCommentManage?{// 用户评论信息
         didSet{
             if userCommentData?.comments == "" {
                 inputTextView.placeholderText = "请写下您的购物体验和使用感受"
@@ -150,7 +171,7 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(0, 23,
+        return UIEdgeInsetsMake(0, 0,
                                 0, 15)
     }
 

@@ -126,6 +126,13 @@ class WOWOrderDetailController: WOWBaseViewController{
                         
                     }
                     
+                }else {
+                    strongSelf.myTimer1        = nil
+                    strongSelf.myQueueTimer1   = nil
+                    
+                    strongSelf.request()//拉取服务器状态， 状态改变，则就会更新UI
+                    
+                    
                 }
             }
     
@@ -176,6 +183,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         tableView.clearRestCell()
         tableView.backgroundColor = DefaultBackColor
         tableView.estimatedRowHeight = 70
+        tableView.mj_header = mj_header
         tableView.register(UINib.nibName("WOWOrderDetailNewCell"), forCellReuseIdentifier: "WOWOrderDetailNewCell")
         tableView.register(UINib.nibName("WOWOrderDetailTwoCell"), forCellReuseIdentifier: "WOWOrderDetailTwoCell")
         tableView.register(UINib.nibName("WOWOrderDetailSThreeCell"), forCellReuseIdentifier: "WOWOrderDetailSThreeCell")
@@ -271,7 +279,9 @@ class WOWOrderDetailController: WOWBaseViewController{
             case 0:
                 self.OrderDetailNewaType          = OrderNewType.payMent
                 
-                self.timerCount(detailModel: orderNewModel) // 更新Model层时间戳
+//                if orderNewModel.leftPaySeconds > 0 {
+                    self.timerCount(detailModel: orderNewModel) // 更新Model层时间戳
+//                }
                 
                 self.rightButton.setTitle("立即支付", for: UIControlState())
         
@@ -402,7 +412,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 let json = JSON(result)
                 DLog(json)
                 if let strongSelf = self{
-                    
+                    strongSelf.endRefresh()
                     strongSelf.orderNewDetailModel = Mapper<WOWNewOrderDetailModel>().map(JSONObject:result)
                     strongSelf.orderCode =  strongSelf.orderNewDetailModel!.orderCode
                     
@@ -412,8 +422,10 @@ class WOWOrderDetailController: WOWBaseViewController{
                 
                     strongSelf.tableView.reloadData()
                 }
-            }) { (errorMsg) in
-                
+            }) {[weak self] (errorMsg) in
+                 if let strongSelf = self{
+                  strongSelf.endRefresh()
+                }
             }
             
         }

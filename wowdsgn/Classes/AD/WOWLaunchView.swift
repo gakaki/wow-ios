@@ -34,7 +34,7 @@ class WOWLaunchView: UIView {
     // 检查更新
     func requestCheakVersion() {
         
-        let params = ["appType": 1, "platForm": 1,"version":1.5]
+        let params = ["appType": 1, "platForm": 2,"version":ez.appVersion ?? "5.0"] as [String : Any]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_checkVersion(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()

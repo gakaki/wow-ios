@@ -133,11 +133,16 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
       
         switch sender.tag {
         case 0:
-            
-            if let del = delegate{
-                del.actionBlcok()
+            // 后台 是否强制更新，  如果 为true  则强制用户更新版本 点击“取消”无反应。
+            if updateModel.isRequiredUpgrade == false {
+                
+                if let del = delegate{
+                    del.actionBlcok()
+                }
+
+            }else{
+                WOWHud.showMsg("为了您更好的体验，请您更新版本")
             }
-            print("点击取消")
         case 1:
             print("点击更新")
             GoToItunesApp.show()

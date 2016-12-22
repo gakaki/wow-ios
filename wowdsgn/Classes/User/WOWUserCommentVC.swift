@@ -32,6 +32,34 @@ class UserCommentManage :NSObject{
     var commentsLength          : Int = 0 //评论内容的个数 有表情内容会影响string的length 不准，所以记录textView上面的length
   
 }
+extension UserCommentManage {
+    
+    func cheackCommentLength() -> Bool {
+        if self.commentImgs.count > 0 {// 如果选择了照片，而没用输入内容，则提示他输入内容
+            if self.commentsLength == 0 {
+                
+                WOWHud.showMsg("请输入的评论内容")
+                
+                return false
+            }
+        }
+        if self.commentsLength < 3 && self.commentsLength > 0{// 如果输入了内容，而输入的内容小于三个字，则提示他输入更多内容
+            
+            WOWHud.showMsg("请您输入更多的评论内容")
+            return false
+            
+        }
+        if self.commentsLength > 140 {
+            
+            WOWHud.showMsg("评论的最大字数为140字，请您删减")
+            
+            return false
+            
+        }
+        return true
+
+    }
+}
 //  bottom cell 、 402 cell
 protocol UserCommentSuccesDelegate:class {
     // 跳转产品详情代理
@@ -200,34 +228,17 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         for model in self.commentArr{ // 遍历各个商品对应的评论信息
             
             if !((model.comments == "" && model.commentImgs.count == 0) ) {
-//                print("----\(model.comments.length)")
-                if model.commentImgs.count > 0 {// 如果选择了照片，而没用输入内容，则提示他输入内容
-                    if model.commentsLength == 0 {
-                        
-                        WOWHud.showMsg("请输入的评论内容")
-                        
-                        return
-                    }
-                }
-                if model.commentsLength < 3 && model.commentsLength > 0{// 如果输入了内容，而输入的内容小于三个字，则提示他输入更多内容
-                    
-                        WOWHud.showMsg("请您输入更多的评论内容")
-                        return
-               
-                }
-                if model.commentsLength > 140 {
-                
-                        WOWHud.showMsg("评论的最大字数为140字，请您删减")
-                    
-                        return
-                
-                }
 
-                let imgStr = self.jointImgStr(imgArray: model.commentImgs)
-
-                let parma = ["saleOrderItemId":model.saleOrderItemId ?? 0, "comments": model.comments ,"commentImgs":imgStr] as [String : Any]
+                if model.cheackCommentLength() {// 检查评论内容是否满足 需求
                 
-                commentParma.append(parma)
+                    let imgStr = self.jointImgStr(imgArray: model.commentImgs)
+                    
+                    let parma = ["saleOrderItemId":model.saleOrderItemId ?? 0, "comments": model.comments ,"commentImgs":imgStr] as [String : Any]
+                    
+                    commentParma.append(parma)
+                    
+                }
+                
             }
             
         }

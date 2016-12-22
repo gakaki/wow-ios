@@ -153,12 +153,9 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
             cell.label_amount.text          = String(format: "%.f",r.deduction ?? 0)
             cell.label_title.text           = r.title ?? ""
             
-            
             cell.label_time_limit.text      = "\(r.effectiveFrom ?? "")至\(r.effectiveTo ?? "")"
-            
-            //            var bgView                      = UIView(frame: cell.frame)
-            //            bgView.backgroundColor          = UIColor(red:0.80, green:0.80, blue:0.80, alpha:0.50)
-            //            cell.addSubview(bgView)
+            cell.useCouponBtn.tag = r.id ?? 0
+            cell.useCouponBtn.addTarget(self, action: #selector(goCouponProduct(_:)), for: .touchUpInside)
             
             if ( r.status == 0) { //不可用
                 cell.showData(false)
@@ -169,9 +166,9 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
             }
             
             
-            
+            //只有从订单进来的才显示×
             if entrance == .orderEntrance {
-                
+                cell.useCouponBtn.isHidden = true
                 if r.id == couponModel?.id {
                     r.isSelect = true
                 }
@@ -254,6 +251,11 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
            _ = navigationController?.popViewController(animated: true)
         }
         
+    }
+    
+    func goCouponProduct(_ sender: UIButton)  {
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWCouponProductController.self)) as! WOWCouponProductController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

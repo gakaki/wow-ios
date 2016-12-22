@@ -39,10 +39,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
     fileprivate var headImageUrl:String = WOWUserManager.userHeadImageUrl
     fileprivate var nick        :String = WOWUserManager.userName
     fileprivate var job         :String = WOWUserManager.userIndustry
-    fileprivate var sex         :Int = WOWUserManager.userSex
+    fileprivate var sex         :Int    = WOWUserManager.userSex
     fileprivate var des         :String = WOWUserManager.userDes
-    fileprivate var star        :Int = WOWUserManager.userConstellation
-    fileprivate var age         :Int = WOWUserManager.userAgeRange
+    fileprivate var star        :Int    = WOWUserManager.userConstellation
+    fileprivate var age         :Int    = WOWUserManager.userAgeRange
     
     var pickDataArr:[Int:String] = [Int:String]()
     var editingGroupAndRow:[Int:Int] = [0:0]

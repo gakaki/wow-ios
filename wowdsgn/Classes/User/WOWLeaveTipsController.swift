@@ -12,6 +12,10 @@ class WOWLeaveTipsController: WOWBaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: KMPlaceholderTextView!
+    
+    var photoMange              : UserPhotoManage?  // 记录选择 图片 的信息， 
+    
+    var commentManage           : UserCommentManage = UserCommentManage() // 记录用户的 操作信息 ，包括 评论， 图片的选择
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -38,12 +42,92 @@ class WOWLeaveTipsController: WOWBaseViewController {
         self.tableView.register(UINib.nibName("WOWPushCommentCell"), forCellReuseIdentifier: "WOWPushCommentCell")
         
     }
+    
     lazy var footerView: PhoneTextView = {
         let view = PhoneTextView()
         
         return view
     }()
 
+    @IBAction func commitAction(_ sender: Any) {
+        
+        if commentManage.cheackCommentLength() {
+            print(commentManage)
+        }
+       
+        
+    }
+}
+extension WOWLeaveTipsController:PushCommentDelegate,TZImagePickerControllerDelegate{
+  
+    func pushImagePickerController(collectionViewTag: Int){
+        
+        let imagePickerVc = TZImagePickerController.init(maxImagesCount: 5, columnNumber: 5, delegate: self, pushPhotoPickerVc: true)
+        imagePickerVc?.isSelectOriginalPhoto            = false
+        
+        imagePickerVc?.barItemTextColor                 = UIColor.black
+        imagePickerVc?.navigationBar.barTintColor       = UIColor.black
+        imagePickerVc?.navigationBar.tintColor          = UIColor.black
+        
+//        let model = collectionViewOfDataSource[collectionViewTag]
+        
+        imagePickerVc?.selectedAssets       = NSMutableArray.init(array: (photoMange?.assetsArr) ?? [])
+        imagePickerVc?.allowTakePicture     = true // 拍照按钮将隐藏,用户将不能在选择器中拍照
+        imagePickerVc?.allowPickingVideo    = false// 用户将不能选择发送视频
+        imagePickerVc?.allowPickingImage    = true // 用户可以选择发送图片
+        imagePickerVc?.allowPickingOriginalPhoto = false// 用户不能选择发送原图
+        imagePickerVc?.sortAscendingByModificationDate = false// 是否按照时间排序
+        
+        
+        
+        imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
+            if let strongSelf = self,let images = images,let asstes = asstes {
+                
+                let model = UserPhotoManage()
+                
+                model.imageArr          = images
+                model.assetsArr         = asstes as [AnyObject]
+                model.userIndexSection  = collectionViewTag
+                // 记录铺在CollectionView上面的数据，防止重用机制
+//                strongSelf.collectionViewOfDataSource[collectionViewTag] = model
+                
+                strongSelf.photoMange   = model
+                strongSelf.tableView.reloadData()
+                //                 点击完成即开始上传图片操作
+                WOWUploadManager.pushCommentPhotos(strongSelf.printAssetsName(assets: asstes as [AnyObject], images: images), successClosure: {[weak self] (urlArray) in
+                    if let strongSelf = self {
+                        // 拿到url数组，赋值给Model数据层
+//                        strongSelf.commentArr[collectionViewTag].commentImgs = urlArray
+                        strongSelf.commentManage.commentImgs = urlArray
+                        print(urlArray)
+                        
+                    }
+                    
+                })
+                
+            }
+        }
+        present(imagePickerVc!, animated: true, completion: nil)
+
+    }
+    // 存储图片名字和图片本身
+    func printAssetsName(assets: [AnyObject] ,images: [UIImage]) -> [imageInfo]{
+        var fileName: String = ""
+        var imageInfoArray = [imageInfo]()
+        for asset in assets.enumerated() {
+            if (asset.element is PHAsset) {
+                let phAsset = (asset.element as! PHAsset)
+                fileName = (phAsset.value(forKey: "filename") as! String)
+                let info = imageInfo()
+                info.imageName = fileName
+                info.image = images[asset.offset]
+                imageInfoArray.append(info)
+            }
+            
+        }
+        return imageInfoArray
+    }
+    
 }
 extension WOWLeaveTipsController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,6 +147,19 @@ extension WOWLeaveTipsController:UITableViewDelegate,UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWPushCommentCell.self), for: indexPath) as! WOWPushCommentCell
             cell.cellType           = .FeebdBack
+            cell.delegate           = self
+
+            cell.userCommentData    = self.commentManage
+            
+            if let model = photoMange{
+                
+                cell.showImageView(model)
+                
+            }else{// 如果无 给空，防止重用导致布局错误
+                
+                cell.dataImageArr = [UIImage]()
+            }
+
             cell.selectionStyle     = .none
             return cell
         }
@@ -114,10 +211,11 @@ class PhoneTextView: UIView {
         self.addSubview(lbLine)
         self.addSubview(tvPhone)
         self.backgroundColor    = UIColor.white
-//        tvPhone.placeholderText = "请写下您的联系方式"
+
         tvPhone.placeholder     = "请输入您的联系方式"
         tvPhone.font            = UIFont.systemFont(ofSize: 15)
-//        tvPhone.backgroundColor = UIColor.w
+        tvPhone.keyboardType    = .numberPad
+
         lbLine.snp.makeConstraints {[weak self] (make) -> Void in
             if  let strongSelf = self {
                 

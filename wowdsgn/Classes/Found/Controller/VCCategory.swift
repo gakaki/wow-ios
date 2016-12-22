@@ -16,6 +16,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 
     var ob_cid                                  = Variable(10)
     var ob_tab_index                            = Variable(UInt(0))
+    var index                                   = 0
 
     
     func get_category_index() -> Int {
@@ -80,16 +81,16 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 
         request()
  
-        _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
-            ($0,$1)
-        }
-            .throttle(0.1, scheduler: MainScheduler.instance)
-        .subscribe(onNext: {[weak self]cid,tab_index in
-            if let strongSelf = self {
-                strongSelf.refreshSubView(tab_index)
-
-            }
-        })
+//        _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
+//            ($0,$1)
+//        }
+//            .throttle(0.1, scheduler: MainScheduler.instance)
+//        .subscribe(onNext: {[weak self]cid,tab_index in
+//            if let strongSelf = self {
+//                strongSelf.refreshSubView(tab_index)
+//
+//            }
+//        })
         
 
     }
@@ -154,7 +155,9 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             
         }
         
-        v_bottom.magicView.reloadData()
+        v_bottom.magicView.reloadData(toPage: 0)
+        
+        refreshSubView(ob_tab_index.value)
     }
     
 
@@ -248,6 +251,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             cell.isSelected  = true;
             if ( row.categoryID != nil ){
                 self.ob_cid.value = row.categoryID!
+                refreshSubView(ob_tab_index.value)
             }
         }
     }
@@ -342,90 +346,16 @@ extension VCCategory:VTMagicViewDelegate{
     
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         self.ob_tab_index.value = pageIndex
+        if abs(index) > 1 {
+            refreshSubView(pageIndex)
+        }
+
     }
     
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
+        index = Int(ob_tab_index.value) - Int(itemIndex)
         self.ob_tab_index.value = itemIndex
+        refreshSubView(itemIndex)
     }
     
 }
-
-
-//MARK: old UICollectionViewDataSource
-
-//
-////    MARK:选项卡
-//    func addChooseCard(){
-//        //内部子标签
-//        let btn_titles      = ["上新","销量","价格"]
-//
-//        for index in 0..<count {
-//
-//            var button      = UIButton()
-//
-//            if ( index <= 1) {
-//                button.h        = height
-//                button.w        = width
-//                button.x        = CGFloat(index) * width
-//
-//            }else{
-//
-//                let frame       = CGRectMake(
-//                    CGFloat(index) * width,
-//                    0,
-//                    width,
-//                    height
-//                )
-//                button          = TooglePriceBtn(frame: frame) { [weak self] (status) in
-//                    if let strongSelf = self {
-//                        strongSelf.query_asc = status.rawValue
-//                        DLog("you clicket status is \(strongSelf.query_asc)")
-//                    }
-//
-//
-//                }
-//
-//            }
-//
-//
-//            button.tag      = index + 1 // 1 2 3
-//
-//            button.titleLabel!.font = UIFont.systemFontOfSize(14)
-//            button.setTitle(btn_titles[index], forState: .Normal)
-//
-//            button.setTitleColor(UIColor.grayColor(), forState: .Highlighted)
-//            button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-//            button.setTitleColor(UIColor.blackColor(), forState: .Selected)
-//
-//            button.addTarget(self, action: #selector(titlesClick(_:)), forControlEvents: .TouchUpInside)
-//
-//            btn_choose_view.addSubview(button)
-//
-//            button.selected     = false
-//            button.highlighted  = true
-//
-//
-//            if index == 0 {//默认点击了第一个按钮
-//                button.sendActionsForControlEvents(.TouchUpInside)
-//            }
-//
-////
-////            if index == 0 {
-////                button.selected     = true
-////                selectedButton = button
-////                //让按钮内部的Label根据文字来计算内容
-////                button.titleLabel?.sizeToFit()
-////                 self.indicatorView.w         = self.view.w / 3
-////                self.indicatorView.centerX   = button.centerX
-////
-////            }
-//        }
-//
-//        btn_choose_view.addSubview(self.indicatorView)
-//
-//        //底部的下划线
-//        let c  = UIColor(hue:0.00, saturation:0.00, brightness:0.92, alpha:1.00)
-//        btn_choose_view.addBottomBorderWithColor(c,width: 0.5)
-//
-//
-//    }

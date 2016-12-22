@@ -33,26 +33,26 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 
     
     
-    func is_load_more(_ y:CGFloat) -> Bool
-    {
-        
-        let contentSize  = self.cv.contentSize.height
-        let view_height  = self.view.frame.size.height * 1.5
-        var is_load_more = false
-        if ( y > contentSize - view_height ) && ( contentSize - view_height > 0 ) {
-            is_load_more = true
-        }else{
-            is_load_more = false
-        }
-        
-        //        print( "conteoff  y  : ", y )
-        //        print( "view_height  : ", view_height )
-        //        print( "contentSize  : ", contentSize )
-        //        print( "is_load_more : ", is_load_more )
-        //        print( "contentSize - view_height : ", contentSize - view_height )
-        
-        return is_load_more
-    }
+//    func is_load_more(_ y:CGFloat) -> Bool
+//    {
+//        
+//        let contentSize  = self.cv.contentSize.height
+//        let view_height  = self.view.frame.size.height * 1.5
+//        var is_load_more = false
+//        if ( y > contentSize - view_height ) && ( contentSize - view_height > 0 ) {
+//            is_load_more = true
+//        }else{
+//            is_load_more = false
+//        }
+//        
+//        //        print( "conteoff  y  : ", y )
+//        //        print( "view_height  : ", view_height )
+//        //        print( "contentSize  : ", contentSize )
+//        //        print( "is_load_more : ", is_load_more )
+//        //        print( "contentSize - view_height : ", contentSize - view_height )
+//        
+//        return is_load_more
+//    }
     
     override func setUI()
     {
@@ -75,7 +75,8 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         
         cv.decelerationRate                 = UIScrollViewDecelerationRateFast
         //cv.bounces = false
-        
+        cv.mj_footer = self.mj_footer
+
         cv.emptyDataSetSource               = self;
         cv.emptyDataSetDelegate             = self;
  
@@ -89,23 +90,23 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 //        view.setNeedsLayout()
 //        view.layoutIfNeeded()
         
-        self.pageIndex = 0
-        self.ob_content_offset.asObservable()
-            .map { $0 }
-            .map { y in
-                return self.is_load_more(y)
-            }
-            .distinctUntilChanged()
-            .subscribe { [unowned self] in
-                self.title = "contentOffset.y = \($0)"
-
-//                if $0 == true {
-                    self.pageIndex = self.pageIndex + 1
-                    self.request()
-//                }
-                
-            }
-            .addDisposableTo(rx_disposeBag)
+//        self.pageIndex = 0
+//        self.ob_content_offset.asObservable()
+//            .map { $0 }
+//            .map { y in
+//                return self.is_load_more(y)
+//            }
+//            .distinctUntilChanged()
+//            .subscribe { [unowned self] in
+//                self.title = "contentOffset.y = \($0)"
+//
+////                if $0 == true {
+//                    self.pageIndex = self.pageIndex + 1
+////                    self.request()
+////                }
+//                
+//            }
+//            .addDisposableTo(rx_disposeBag)
     }
     
     let ob_content_offset   = Variable(CGFloat(0))

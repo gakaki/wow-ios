@@ -18,6 +18,7 @@ class WOWSearchController: WOWBaseViewController {
     var dataArr = [WOWProductModel]()
     var ob_cid                                  = Variable(10)
     var ob_tab_index                            = Variable(UInt(0))
+    var index                                   = 0
     
     fileprivate var keyWords = [AnyObject](){
         didSet{
@@ -38,15 +39,15 @@ class WOWSearchController: WOWBaseViewController {
         MobClick.e(.Search)
         
         request()
-        _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
-            ($0,$1)
-            }.throttle(0.1, scheduler: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] cid,tab_index in
-                if let strongSelf = self {
-                    strongSelf.refreshSubView(tab_index)
-
-                }
-            })
+//        _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
+//            ($0,$1)
+//            }.throttle(0.1, scheduler: MainScheduler.instance)
+//            .subscribe(onNext: {[weak self] cid,tab_index in
+//                if let strongSelf = self {
+//                    strongSelf.refreshSubView(tab_index)
+//
+//                }
+//            })
     
        
     }
@@ -99,10 +100,7 @@ class WOWSearchController: WOWBaseViewController {
         let v = VCVTMagic()
         v.magicView.dataSource = self
         v.magicView.delegate = self
-//        v.magicView.isMenuScrollEnabled    = true
-//        v.magicView.isSwitchAnimated       = true
-//        v.magicView.isScrollEnabled        = true
-//        
+       
         v.magicView.backgroundColor = UIColor.white
         self.addChildViewController(v)
         v.magicView.frame = CGRect(x: 0, y: 0,width: MGScreenWidth,height: MGScreenHeight - 64)
@@ -468,10 +466,10 @@ extension WOWSearchController:VTMagicViewDataSource{
     func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
         
-//        let button = magicView .dequeueReusableItemWithIdentifier(self.identifier_magic_view_bar_item)
+        let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
         
-////        if ( button == nil) {
-//        
+        if ( button == nil) {
+//
             let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: 50)) { (asc) in
                 print("you clicket status is "  , asc)
             }
@@ -483,9 +481,9 @@ extension WOWSearchController:VTMagicViewDataSource{
             }
             return b
 //
-////        }
-//        
-////        return button!
+        }
+//
+        return button!
 
 
     }
@@ -540,10 +538,15 @@ extension WOWSearchController:VTMagicViewDelegate{
     
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         self.ob_tab_index.value = pageIndex
+        if abs(index) > 1 {
+            refreshSubView(pageIndex)
+        }
     }
     
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
+        index = Int(ob_tab_index.value) - Int(itemIndex)
         self.ob_tab_index.value = itemIndex
+        refreshSubView(itemIndex)
     }
     
 }

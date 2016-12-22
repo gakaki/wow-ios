@@ -16,8 +16,8 @@ class WOWCouponCell: UITableViewCell {
     @IBOutlet weak var label_time_limit: UILabel!
     @IBOutlet weak var label_rmb: UILabel!
     @IBOutlet weak var label_unit: UILabel!
-    
     @IBOutlet weak var image_check: UIImageView!
+    @IBOutlet weak var useCouponBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,7 +49,9 @@ class WOWCouponCell: UITableViewCell {
     
     func showData(_ status: Bool) {
         label_rmb.text = "元"
+        //如果优惠券可用则显示
         if status {
+            useCouponBtn.isHidden = false
             label_amount.textColor             = UIColor.black
             label_title.textColor              = UIColor.black
             label_is_used.textColor            = MGRgb(210, g: 181, b: 148)
@@ -59,6 +61,7 @@ class WOWCouponCell: UITableViewCell {
             
             draw_dashed_line(MGRgb(210, g: 181, b: 148))
         }else {
+//            useCouponBtn.isHidden = true
             label_amount.textColor             = color_status_disable
             label_title.textColor              = color_status_disable
             label_is_used.textColor            = color_status_disable
@@ -70,6 +73,8 @@ class WOWCouponCell: UITableViewCell {
             
         }
     }
+
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

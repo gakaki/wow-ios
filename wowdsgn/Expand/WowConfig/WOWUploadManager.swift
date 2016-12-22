@@ -13,6 +13,16 @@ import Hashids_Swift
 import FCUUID
 typealias HeadImgURL               = (_ url:String?) -> ()
 typealias PushImgURLs              = (_ result:[String]) ->()
+
+enum QiniuBucket:String {// 七牛的路径
+    
+    case UserPhoto          = "user/avatar/"
+    case FeebdBack          = "user/feedback/"
+    case UserShopComment    = "product-review/"
+    
+}
+
+
 class WOWUploadManager {
     
    static let globalQueue = DispatchQueue.global()
@@ -33,7 +43,7 @@ class WOWUploadManager {
         UIGraphicsEndImageContext()
         return newImage ?? sourceImage
     }
-
+    // 针对时间戳
    static func onlyStr() -> String  {
         //          拼接唯一字符串
         let onlyStr         = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
@@ -41,29 +51,43 @@ class WOWUploadManager {
         return hashids.encode([1,2,3])!
         
     }
+    // 针对 userId
+    static func hashidsUserIdStr() -> String {
+        
+        if WOWUserManager.userID.isEmpty {
+            return onlyStr()
+        }else{
+            let hashids         = Hashids(salt:WOWUserManager.userID)
+            return hashids.encode([1,2,3])!
+           
+        }
+    
+    }
 
     // 上传头像
     static  func uploadPhoto(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
         //          拼接唯一字符串
         let photoImage = imageCompressForWidth(sourceImage: image, targetWidth: 200)
-        let qiniu_key  = "user/avatar/\(onlyStr())"
-
+        
+        let qiniu_key  = QiniuBucket.UserPhoto.rawValue + hashidsUserIdStr()
         
         PushImage(photoImage, imagePath: qiniu_key, successClosure: { (url) in
             // 保存用户URL
             if let url = url {
-                WOWUserManager.userHeadImageUrl = url
+                let serverUrl = url + "?v=" + onlyStr() // 由于七牛云服务器的图片缓存问题， 所以在传给后台的时候， 要 拼上 ?v= XXX 这样的格式，确保从七牛读取图片时，拿到的最新的图片data ,同时本地也是如此
+                WOWUserManager.userHeadImageUrl = serverUrl
+                // 保存 照片数据到本地，为了处理图像，不闪。  －－
+                let imageData:NSData = NSKeyedArchiver.archivedData(withRootObject: image) as NSData
+                
+                WOWUserManager.userPhotoData = imageData as Data
+                
+                successClosure(serverUrl)
+
             }else{
                 print("上传头像格式错误")
             }
             
-            // 保存 照片数据到本地，为了处理图像，不闪。  －－
-            let imageData:NSData = NSKeyedArchiver.archivedData(withRootObject: image) as NSData
-            
-            WOWUserManager.userPhotoData = imageData as Data
-            
-            successClosure(url)
-
+           
         }) { (errorMsg) in
             
             WOWHud.showMsg("上传图片失败")
@@ -73,7 +97,7 @@ class WOWUploadManager {
     }
 
     // 发布评论 上传图片 GCD 分组
-    static func pushCommentPhotos(_ images:[imageInfo],successClosure:@escaping PushImgURLs){
+    static func pushCommentPhotos(_ images:[imageInfo],pushQiNiuPath:QiniuBucket = .UserShopComment,successClosure:@escaping PushImgURLs){
         var urlArray = [String]()
         
         for image in images.enumerated(){
@@ -81,7 +105,7 @@ class WOWUploadManager {
             
             DispatchQueue.global().async(group: group) {
                 
-                let qiniu_key               = "product-review/\(onlyStr() + (image.element.imageName ?? ""))"
+                let qiniu_key               = pushQiNiuPath.rawValue + (onlyStr() + (image.element.imageName ?? ""))
 
                 PushImage(image.element.image, imagePath: qiniu_key, successClosure: { (url) in
                     

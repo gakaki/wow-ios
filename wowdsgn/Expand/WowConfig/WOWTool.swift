@@ -182,6 +182,35 @@ struct WOWTool {
             MGDefault.synchronize()
         }
     }
+    static func cheakPhone(phontStr:String?)-> Bool {
+        guard let phone = phontStr , !phone.isEmpty else{
+            
+            WOWHud.showMsg("请输入手机号")
+            
+            return false
+        }
+        guard phone.validateMobile() || phone.validateEmail() else{
+            WOWHud.showMsg("请输入正确的手机号")
+            return false
+        }
+        return true
+    }
+    // 拼接图片url 后台定义的 以“,”间隔~~  类似于“a,b,c”
+    static func jointImgStr(imgArray:[String],spaceStr:String) -> String {
+        var imgStr = ""
+        for str in imgArray.enumerated(){
+            if str.offset == 0 {
+                imgStr = str.element
+            }else {
+                imgStr = imgStr + spaceStr + str.element
+            }
+            
+            
+        }
+        return imgStr
+        
+    }
+
     
 }
 // 前往AppStore

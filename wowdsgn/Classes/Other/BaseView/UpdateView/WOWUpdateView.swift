@@ -92,7 +92,7 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
 
         let cell = tableView.dequeueReusableCell(withIdentifier: identify,for: indexPath) as UITableViewCell
         
-        cell.textLabel?.text            = jointImgStr(imgArray: updateContent)
+        cell.textLabel?.text            = WOWTool.jointImgStr(imgArray: updateContent, spaceStr: "\n")
         cell.textLabel?.font            = UIFont.systemFont(ofSize: 13)
         cell.textLabel?.numberOfLines   = 0
         cell.textLabel?.textColor       = UIColor.init(hexString: "808080")
@@ -151,20 +151,6 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
        
     }
     func updateAction()  {
-        
-    }
-    func jointImgStr(imgArray:[String]) -> String {
-        var imgStr = ""
-        for str in imgArray.enumerated(){
-            if str.offset == 0 {
-                imgStr = str.element
-            }else {
-                imgStr = imgStr + "\n" + str.element
-            }
-            
-            
-        }
-        return imgStr
         
     }
 

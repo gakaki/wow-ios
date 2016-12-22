@@ -14,7 +14,7 @@ class WOWLeaveTipsController: WOWBaseViewController {
     @IBOutlet weak var textView: KMPlaceholderTextView!
     
     var photoMange              : UserPhotoManage?  // 记录选择 图片 的信息， 
-    
+    var clooseType              : Int = 1
     var commentManage           : UserCommentManage = UserCommentManage() // 记录用户的 操作信息 ，包括 评论， 图片的选择
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,17 +45,42 @@ class WOWLeaveTipsController: WOWBaseViewController {
     
     lazy var footerView: PhoneTextView = {
         let view = PhoneTextView()
-        
+        view.tvPhone.text = WOWUserManager.userMobile
         return view
     }()
 
     @IBAction func commitAction(_ sender: Any) {
-        
-        if commentManage.cheackCommentLength() {
-            print(commentManage)
+        // 检车格式是否正确
+        if WOWTool.cheakPhone(phontStr: footerView.tvPhone.text) && commentManage.cheackCommentLength(){
+            if commentManage.comments == "" {
+                WOWHud.showMsg("请输入反馈内容")
+            }else {
+                requestCommitLeave()
+            }
+
         }
-       
+    }
+    func requestCommitLeave()  {
+        var params = [String: AnyObject]()
+        // 拼接字符串，对应接口的上传格式
+        let imgStr = WOWTool.jointImgStr(imgArray: commentManage.commentImgs, spaceStr: ",")
         
+        params = ["feedbackType": clooseType as AnyObject, "comments": commentManage.comments as AnyObject,"endUserMobile":footerView.tvPhone.text as AnyObject,"commentImgs":imgStr as AnyObject]
+        
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_userFeedBack(params:params), successClosure: {[weak self] (result, code) in
+
+                DLog("成功")
+            if let strongSelf = self{
+                strongSelf.popVC()
+            }
+            
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+            }
+        }
+
     }
 }
 extension WOWLeaveTipsController:PushCommentDelegate,TZImagePickerControllerDelegate{
@@ -93,8 +118,8 @@ extension WOWLeaveTipsController:PushCommentDelegate,TZImagePickerControllerDele
                 
                 strongSelf.photoMange   = model
                 strongSelf.tableView.reloadData()
-                //                 点击完成即开始上传图片操作
-                WOWUploadManager.pushCommentPhotos(strongSelf.printAssetsName(assets: asstes as [AnyObject], images: images), successClosure: {[weak self] (urlArray) in
+                //  点击完成即开始上传图片操作
+                WOWUploadManager.pushCommentPhotos(WOWGetImageInfo.printAssetsName(assets: asstes as [AnyObject], images: images),pushQiNiuPath: .FeebdBack, successClosure: {[weak self] (urlArray) in
                     if let strongSelf = self {
                         // 拿到url数组，赋值给Model数据层
 //                        strongSelf.commentArr[collectionViewTag].commentImgs = urlArray
@@ -110,24 +135,6 @@ extension WOWLeaveTipsController:PushCommentDelegate,TZImagePickerControllerDele
         present(imagePickerVc!, animated: true, completion: nil)
 
     }
-    // 存储图片名字和图片本身
-    func printAssetsName(assets: [AnyObject] ,images: [UIImage]) -> [imageInfo]{
-        var fileName: String = ""
-        var imageInfoArray = [imageInfo]()
-        for asset in assets.enumerated() {
-            if (asset.element is PHAsset) {
-                let phAsset = (asset.element as! PHAsset)
-                fileName = (phAsset.value(forKey: "filename") as! String)
-                let info = imageInfo()
-                info.imageName = fileName
-                info.image = images[asset.offset]
-                imageInfoArray.append(info)
-            }
-            
-        }
-        return imageInfoArray
-    }
-    
 }
 extension WOWLeaveTipsController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -141,6 +148,12 @@ extension WOWLeaveTipsController:UITableViewDelegate,UITableViewDataSource{
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWFeedBackCell", for: indexPath) as! WOWFeedBackCell
             cell.selectionStyle     = .none
+//            cell.clooseType         = self.clooseType
+            cell.clooseType = {[weak self](type) in
+                if let strongSelf = self{
+                    strongSelf.clooseType = type ?? 1
+                }
+            }
             return cell
             
         }else{

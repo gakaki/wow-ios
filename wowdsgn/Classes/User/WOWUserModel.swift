@@ -20,7 +20,7 @@ class WOWUserModel:NSObject,Mappable{
     var user_carCount       : Int?
     var user_constellation  : Int?
     var user_ageRange       : Int?
-    
+    var user_id             : Int?
     
     required init?(map: Map) {
         
@@ -36,6 +36,7 @@ class WOWUserModel:NSObject,Mappable{
         user_ageRange       <- map["ageRange"]
         //FIXME:后台要返回的
         user_carCount       <- map["productQtyInCart"]
+        user_id             <- map["endUserId"]
     }
     
 }

@@ -27,6 +27,7 @@ struct WOWUserManager {
      static let WOWDeviceToken       = "WOWDeviceToken"
      static let WOWUserMsgCount      = "WOWUserMsgCount"
      static let WOWSystemMsgCount    = "WOWSystemMsgCount"
+//     static let WOWUserId            = "WOWUserId"
 
 
 
@@ -89,11 +90,11 @@ struct WOWUserManager {
     }
     
     
-    static var userID:String{
-        get{
-            return (MGDefault.object(forKey: WOWUserID) as? String) ?? ""
-        }
-    }
+//    static var userID:String{
+//        get{
+//            return (MGDefault.object(forKey: WOWUserID) as? String) ?? ""
+//        }
+//    }
     
     static var userName:String{
         get{
@@ -211,7 +212,16 @@ struct WOWUserManager {
 //            MGDefault.synchronize()
 //        }
     }
-    
+    static var userID:String {
+        get{
+            return (MGDefault.object(forKey: WOWUserID) as? String) ?? ""
+        }
+        set{
+            MGDefault.set(newValue, forKey:WOWUserID)
+            MGDefault.synchronize()
+        }
+
+    }
    
     
     static func saveUserInfo(_ model:WOWUserModel?){
@@ -224,6 +234,7 @@ struct WOWUserManager {
         MGDefault.set(model?.user_ageRange, forKey:WOWUserAgeRange)
         MGDefault.set(model?.user_carCount, forKey:WOWUserCarCount)
         MGDefault.set(model?.user_industry, forKey:WOWUserIndustry)
+        MGDefault.set(model?.user_id?.toString, forKey:WOWUserID)
         MGDefault.synchronize()
     }
     
@@ -241,6 +252,7 @@ struct WOWUserManager {
         MGDefault.set(nil, forKey: WOWSessionToken)
         MGDefault.set(0, forKey: WOWUserMsgCount)
         MGDefault.set(0, forKey: WOWSystemMsgCount)
+        MGDefault.set(nil, forKey:WOWUserID)
         MGDefault.synchronize()
     }
     /**

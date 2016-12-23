@@ -59,7 +59,7 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
             cell.lineView.isHidden = true
             break
         case (1,0): //帮助与反馈
-            cell.titleLabel.text = "帮助与反馈"
+            cell.titleLabel.text = "意见反馈"
             cell.arrowImg.isHidden = false
             break
         case (1,1): //支持尖叫设计

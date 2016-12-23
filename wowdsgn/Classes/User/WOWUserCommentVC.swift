@@ -10,56 +10,6 @@ import UIKit
 import PhotosUI
 import AssetsLibrary
 
-class imageInfo: NSObject {
-    var image       : UIImage! // image对象
-    var imageName   : String! // image名称，保证路径唯一
-}
-
-// 记录用户选择的图片的数据
-class UserPhotoManage: NSObject {
-    
-    var imageArr            = [UIImage]() // 所选择的数组
-    var userIndexSection    : Int?// 对应商品的下标
-    var assetsArr           = [AnyObject]()// 所选择的photo的Asset
-    var UserCommentDic      : [String:AnyObject]?//
-}
-// 记录用户评论的操作
-class UserCommentManage :NSObject{
-    
-    var saleOrderItemId         : Int? // 对应产品 Id
-    var comments                : String = "" // 输入的评论内容
-    var commentImgs             = [String]()// 选择的照片Url的数组
-    var commentsLength          : Int = 0 //评论内容的个数 有表情内容会影响string的length 不准，所以记录textView上面的length
-  
-}
-extension UserCommentManage {
-    
-    func cheackCommentLength() -> Bool {
-        if self.commentImgs.count > 0 {// 如果选择了照片，而没用输入内容，则提示他输入内容
-            if self.commentsLength == 0 {
-                
-                WOWHud.showMsg("请输入的评论内容")
-                
-                return false
-            }
-        }
-        if self.commentsLength < 3 && self.commentsLength > 0{// 如果输入了内容，而输入的内容小于三个字，则提示他输入更多内容
-            
-            WOWHud.showMsg("请您输入更多的评论内容")
-            return false
-            
-        }
-        if self.commentsLength > 140 {
-            
-            WOWHud.showMsg("评论的最大字数为140字，请您删减")
-            
-            return false
-            
-        }
-        return true
-
-    }
-}
 //  bottom cell 、 402 cell
 protocol UserCommentSuccesDelegate:class {
     // 跳转产品详情代理
@@ -136,24 +86,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         }
 
     }
-    // 存储图片名字和图片本身
-    func printAssetsName(assets: [AnyObject] ,images: [UIImage]) -> [imageInfo]{
-        var fileName: String = ""
-        var imageInfoArray = [imageInfo]()
-        for asset in assets.enumerated() {
-            if (asset.element is PHAsset) {
-                let phAsset = (asset.element as! PHAsset)
-                fileName = (phAsset.value(forKey: "filename") as! String)
-                let info = imageInfo()
-                info.imageName = fileName
-                info.image = images[asset.offset]
-                imageInfoArray.append(info)
-            }
-
-        }
-        return imageInfoArray
-    }
-    // 选择照片
+       // 选择照片
     func pushImagePickerController(collectionViewTag: Int)  {
         
         let imagePickerVc = TZImagePickerController.init(maxImagesCount: 5, columnNumber: 5, delegate: self, pushPhotoPickerVc: true)
@@ -188,8 +121,9 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
                 //                strongSelf.tableView.reloadRows(at: [indexPath as IndexPath], with: .none)
                 
                 strongSelf.tableView.reloadData()
-//                 点击完成即开始上传图片操作
-                WOWUploadManager.pushCommentPhotos(strongSelf.printAssetsName(assets: asstes as [AnyObject], images: images), successClosure: {[weak self] (urlArray) in
+               
+//                 点击完成即开始上传图片操作  传入 对应图片的信息
+                WOWUploadManager.pushCommentPhotos(WOWGetImageInfo.printAssetsName(assets: asstes as [AnyObject], images: images), successClosure: {[weak self] (urlArray) in
                     if let strongSelf = self {
                         // 拿到url数组，赋值给Model数据层
                         strongSelf.commentArr[collectionViewTag].commentImgs = urlArray
@@ -205,41 +139,21 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         present(imagePickerVc!, animated: true, completion: nil)
     }
     
-    // 拼接图片url 后台定义的 以“,”间隔~~
-    func jointImgStr(imgArray:[String]) -> String {
-        var imgStr = ""
-        for str in imgArray.enumerated(){
-            if str.offset == 0 {
-                imgStr = str.element
-            }else {
-                imgStr = imgStr + "," + str.element
-            }
-            
-            
-        }
-        return imgStr
-        
-    }
-
     @IBAction func puchClickAction(_ sender: Any) {
 
         var commentParma      = [[String : Any]]()
         
         for model in self.commentArr{ // 遍历各个商品对应的评论信息
             
-            if !((model.comments == "" && model.commentImgs.count == 0) ) {
-
                 if model.cheackCommentLength() {// 检查评论内容是否满足 需求
-                
-                    let imgStr = self.jointImgStr(imgArray: model.commentImgs)
+                    // 拼接字符串，对应接口的上传格式
+                    let imgStr = WOWTool.jointImgStr(imgArray: model.commentImgs, spaceStr: ",")
                     
                     let parma = ["saleOrderItemId":model.saleOrderItemId ?? 0, "comments": model.comments ,"commentImgs":imgStr] as [String : Any]
                     
                     commentParma.append(parma)
                     
                 }
-                
-            }
             
         }
         if commentParma.count > 0 {// 判断是否有评论信息
@@ -255,8 +169,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         var params = [String: AnyObject]()
         
         params = ["commentDetails": commentParma as AnyObject]
-        
-//        print("json----\(params)")
+
         WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderPushComment(params: params) , successClosure: {[weak self] (result, code) in
 //            WOWHud.dismiss()

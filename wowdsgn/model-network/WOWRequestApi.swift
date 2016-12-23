@@ -89,7 +89,7 @@ public enum RequestApi{
     case api_ProductGroupList(params: [String: AnyObject])// 分组产品 下面列表
     
     
-    
+    case api_userFeedBack(params: [String: AnyObject])
     
     
     //购物车相关
@@ -324,6 +324,8 @@ extension RequestApi:TargetType{
             return URL_TopicCommentList
         case .api_SubmitTopicComment:
             return URL_SubmitTopicComment
+        case .api_userFeedBack:
+            return URL_FeedBack
         //商品评轮列表
         case .api_ProductCommentList:
             return URL_productCommentList
@@ -560,6 +562,9 @@ extension RequestApi:TargetType{
             case let .api_ProductGroupList(param):
                 params = param
             
+            case let .api_userFeedBack(param):
+                params = param
+            
             case let .api_ProductImgDetail(productId):
                 params = ["productId":productId]
             case let .api_ProductSpec(productId):
@@ -764,6 +769,8 @@ extension RequestApi:TargetType{
             return "取消订单成功"
         case .api_ResetPwd:
             return "修改密码成功"
+        case .api_userFeedBack:
+            return "谢谢您的反馈"
         default:
             return ""
         }

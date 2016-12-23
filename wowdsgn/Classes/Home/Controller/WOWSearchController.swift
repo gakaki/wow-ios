@@ -532,6 +532,7 @@ extension WOWSearchController:VTMagicViewDelegate{
             vc.asc           = query_asc
             vc.seoKey       = searchView.searchTextField.text
             vc.pageIndex           = 1 //每次点击都初始化咯
+            vc.entrance     = .searchEntrance
             vc.request()
         }
     }

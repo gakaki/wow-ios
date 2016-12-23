@@ -15,7 +15,7 @@ class WOWCouponCell: UITableViewCell {
     @IBOutlet weak var label_is_used: UILabel!
     @IBOutlet weak var label_time_limit: UILabel!
     @IBOutlet weak var label_rmb: UILabel!
-    @IBOutlet weak var label_unit: UILabel!
+    @IBOutlet weak var label_limit: UILabel!
     @IBOutlet weak var image_check: UIImageView!
     @IBOutlet weak var useCouponBtn: UIButton!
     
@@ -49,27 +49,25 @@ class WOWCouponCell: UITableViewCell {
     
     func showData(_ status: Bool) {
         label_rmb.text = "元"
+        draw_dashed_line(color_status_disable)
         //如果优惠券可用则显示
         if status {
             useCouponBtn.isHidden = false
+            label_is_used.isHidden = true
             label_amount.textColor             = UIColor.black
             label_title.textColor              = UIColor.black
-            label_is_used.textColor            = MGRgb(210, g: 181, b: 148)
+            label_rmb.textColor                = UIColor.black
             label_time_limit.textColor         = MGRgb(128, g: 128, b: 128)
+            label_limit.textColor              = UIColor(hexString: "#FF7070")
             
-            label_unit.textColor               = UIColor.black
-            
-            draw_dashed_line(MGRgb(210, g: 181, b: 148))
         }else {
-//            useCouponBtn.isHidden = true
+            useCouponBtn.isHidden = true
+            label_is_used.isHidden = false
             label_amount.textColor             = color_status_disable
             label_title.textColor              = color_status_disable
-            label_is_used.textColor            = color_status_disable
             label_time_limit.textColor         = color_status_disable
-            
-            label_unit.textColor               = color_status_disable
-            
-            draw_dashed_line(color_status_disable)
+            label_rmb.textColor                = color_status_disable
+            label_limit.textColor               = color_status_disable
             
         }
     }

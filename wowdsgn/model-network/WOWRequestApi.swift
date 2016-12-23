@@ -147,6 +147,8 @@ public enum RequestApi{
 
     case api_GetCoupon(redemptionCode: String)  //获取优惠券
     
+    case api_ProductsOfCoupon(pageSize: Int, currentPage: Int, sortColumn: Int, sortType: Int, id: Int)
+    
     case api_Invite //邀请好友
     
     case api_Login(String,String)
@@ -455,6 +457,8 @@ extension RequestApi:TargetType{
             return URL_GetCoupon
         case .api_Topics:
             return URL_topic
+        case .api_ProductsOfCoupon:
+            return URL_ProductsOfCoupon
             
         case .api_Topic_Products:
             return URL_topic_product
@@ -503,7 +507,8 @@ extension RequestApi:TargetType{
             .api_MessageCount,
             .api_CartBottomList,
             .api_ProductGroupTop,
-            .api_ProductGroupList:
+            .api_ProductGroupList,
+            .api_ProductsOfCoupon:
 
             return .GET
 
@@ -695,6 +700,8 @@ extension RequestApi:TargetType{
 //            优惠券
             case let .api_Coupons(param):
                 params =  param!
+            case let .api_ProductsOfCoupon(pageSize, currentPage, sortColumn, sortType, id):
+                params = ["pageSize": pageSize, "currentPage": currentPage, "id": id, "sortColumn": sortColumn, "sortType":sortType]
             case let .api_GetCoupon(redemptionCode):
                 params = ["redemptionCode": redemptionCode]
 //            专题

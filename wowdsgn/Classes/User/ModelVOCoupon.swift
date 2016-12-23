@@ -38,6 +38,7 @@ class WOWCouponModel: WOWBaseModel,Mappable {
     var title: String?
     var status: Int?
     var statusDesc: String?
+    var limitDesc:  String?
 
     
     override init() {
@@ -67,6 +68,7 @@ class WOWCouponModel: WOWBaseModel,Mappable {
         title                   <- map["title"]
         status                  <- map["status"]
         statusDesc              <- map["statusDesc"]
+        limitDesc               <- map["limitDesc"]
     }
 }
 

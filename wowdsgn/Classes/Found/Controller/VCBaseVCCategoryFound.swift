@@ -9,6 +9,9 @@ class VCBaseVCCategoryFound:WOWBaseViewController{
     override func setUI(){
         super.setUI()
         configBuyBarItem()
+        //隐藏消息按钮
+        rightNagationItem.infoButton.isHidden = true
+        rightNagationItem.newView.isHidden = true
         addObserver()
     }
     

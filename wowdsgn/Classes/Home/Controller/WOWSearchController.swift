@@ -265,7 +265,8 @@ extension WOWSearchController: UICollectionViewDataSource,UICollectionViewDelega
         case 0:
             return keyWords.count
         case 1:
-            return searchArray.count
+            let count = searchArray.count
+            return count > 30 ? 30 : count
         default:
             return 0
         }

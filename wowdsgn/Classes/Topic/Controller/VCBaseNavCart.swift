@@ -89,7 +89,11 @@ class VCBaseNavCart:WOWBaseViewController{
         }else {
             carEntranceButton.badgeString = "99+"
         }
-        
+        //如果未登录状态下，不显示
+        guard WOWUserManager.loginStatus else {
+            newView.isHidden = true
+            return
+        }
         if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
             newView.isHidden = false
         }else {

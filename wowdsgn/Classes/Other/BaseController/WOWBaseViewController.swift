@@ -257,7 +257,11 @@ extension WOWBaseViewController {
         }else {
             rightNagationItem.buyCarButton.badgeString = "99+"
         }
-        
+        //如果未登录状态下，不显示
+        guard WOWUserManager.loginStatus else {
+            rightNagationItem.newView.isHidden = true
+            return
+        }
         if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
             rightNagationItem.newView.isHidden = false
         }else {
@@ -305,7 +309,11 @@ extension WOWBaseTableViewController {
         }else {
             rightNagationItem.buyCarButton.badgeString = "99+"
         }
-        
+        //如果未登录状态下，不显示
+        guard WOWUserManager.loginStatus else {
+            rightNagationItem.newView.isHidden = true
+            return
+        }
         if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
             rightNagationItem.newView.isHidden = false
         }else {

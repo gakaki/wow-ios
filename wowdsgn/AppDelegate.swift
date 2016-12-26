@@ -60,7 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         YYWebImageManager.shared().cache?.diskCache.costLimit       = cache_size
         ImageCache.default.maxDiskCacheSize                         = cache_size
         ImageCache.default.maxMemoryCost                            = cache_size
-
+        URLCache.shared.diskCapacity                                = Int(cache_size)
+        URLCache.shared.memoryCapacity                              = Int(cache_size)
 
     }
     
@@ -90,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
-        
+        UMessage.registerDeviceToken(deviceToken)
 
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         
@@ -358,6 +359,7 @@ extension AppDelegate{
         }
         
     }
+
 }
 
 //ADLaunchView 广告view

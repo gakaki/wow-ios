@@ -89,7 +89,8 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
         
         return true
     }
-    
+
+
     //iOS10新增：处理前台收到通知的代理方法
     @available(iOS 10.0, *)
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)

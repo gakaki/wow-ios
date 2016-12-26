@@ -135,6 +135,10 @@ class WOWSettingController: WOWBaseTableViewController {
             if let strongSelf = self{
                 WOWHud.showMsg("退出登录")
                 WOWUserManager.exitLogin()
+                
+                UIApplication.currentViewController()?.toLoginVC(true)
+                WOWTool.lastTabIndex = 0
+                strongSelf.tabBarController?.selectedIndex = 0
                 strongSelf.tableView.reloadData()
                 NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)

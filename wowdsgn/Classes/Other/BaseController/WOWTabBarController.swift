@@ -158,12 +158,13 @@ extension WOWTabBarController:UITabBarControllerDelegate{
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let controllers = tabBarController.viewControllers
         let index = controllers?.index(of: viewController)
-        if index == 3{
+        if index == 3 || index == 4{
             guard WOWUserManager.loginStatus else {
                 UIApplication.currentViewController()?.toLoginVC(true)
                 return false
             }
         }
+
         if let i = controllers?.index(of: viewController) {
             switch i {
             case  0:

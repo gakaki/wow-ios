@@ -223,3 +223,19 @@ struct GoToItunesApp {
     }
 }
 
+struct productSpec {
+    /**
+     *  格式化产品尺寸
+     */
+   static func productSize(productInfo: WOWProductModel) -> String {
+        let format = String(format:"L%g×W%g×H%gcm",productInfo.length?.floatValue ?? 0, productInfo.width?.floatValue ?? 0, productInfo.height?.floatValue ?? 0)
+        return format
+    }
+    /**
+     *  格式化产品尺寸重量
+     */
+    static func productWeight(productInfo: WOWProductModel) -> String {
+        let format = String(format:"%gkg",productInfo.netWeight?.floatValue ?? 0)
+        return format
+    }
+}

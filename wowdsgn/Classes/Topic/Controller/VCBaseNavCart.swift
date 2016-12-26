@@ -64,7 +64,9 @@ class VCBaseNavCart:WOWBaseViewController{
         button.frame    = CGRect(x: self.view.frame.width - 2*(btn_width_height + offset_width), y: offset_icon(), width: btn_width_height, height: btn_width_height)
         button .setBackgroundImage(image, for: UIControlState())
         button.addTarget(self, action:#selector(btn_msg_action), for:UIControlEvents.touchUpInside)
-        newView = UIView(frame: CGRect(x: btn_width_height - 4, y: 4, width: 8, height: 8))
+        newView = UIView(frame: CGRect(x: btn_width_height - 18, y: 9, width: 8, height: 8))
+        newView.setCornerRadius(radius: 4)
+        newView.backgroundColor = UIColor.init(hexString: "FFD444")
         button.addSubview(newView)
         self.view.addSubview(button)
 

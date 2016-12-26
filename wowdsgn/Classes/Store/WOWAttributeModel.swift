@@ -37,6 +37,11 @@ class WOWParameter: WOWBaseModel,Mappable{
         
     }
     
+    init(parameterShowName: String, parameterValue: String) {
+        self.parameterShowName = parameterShowName
+        self.parameterValue = parameterValue
+    }
+    
     func mapping(map: Map) {
         parameterShowName            <- map["parameterShowName"]
         parameterValue               <- map["parameterValue"]

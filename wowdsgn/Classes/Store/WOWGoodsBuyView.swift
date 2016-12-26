@@ -348,9 +348,9 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             }
             
             //格式化产品的尺寸L-W-H
-            let sizeStr = productSize(productInfo: productInfo)
-            let weightStr = productWeight(productInfo: productInfo)
-            let str = String(format:"%@ %@",sizeStr,weightStr)
+            let sizeStr = productSpec.productSize(productInfo: productInfo)
+            let weightStr = productSpec.productWeight(productInfo: productInfo)
+            let str = String(format:"尺寸：%@ 重量：%@",sizeStr,weightStr)
             sizeTextLabel.text = str
 //            weightLabel.text = productWeight(productInfo: productInfo)
             
@@ -830,18 +830,5 @@ extension WOWGoodsBuyView:CAAnimationDelegate {
         }
     }
 
-    /**
-     *  格式化产品尺寸
-     */
-    func productSize(productInfo: WOWProductModel) -> String {
-        let format = String(format:"尺寸：L%g×W%g×H%gcm",productInfo.length?.floatValue ?? 0, productInfo.width?.floatValue ?? 0, productInfo.height?.floatValue ?? 0)
-        return format
-    }
-    /**
-     *  格式化产品尺寸重量
-     */
-    func productWeight(productInfo: WOWProductModel) -> String {
-        let format = String(format:"重量：%gkg",productInfo.netWeight?.floatValue ?? 0)
-        return format
-    }
+
 }

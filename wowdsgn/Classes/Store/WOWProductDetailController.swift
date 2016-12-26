@@ -211,12 +211,31 @@ class WOWProductDetailController: WOWBaseViewController {
         //产品描述说明
         productDescView.productDescLabel.text = productModel?.detailDescription
         productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)
+        refreshParameter()
         //banner轮播
         configBanner()
         
         
         
         
+    }
+    
+    fileprivate func configParameter() {
+        if productModel?.productParameter?.count > 0 {
+            let sizeParam = WOWParameter.init(parameterShowName: "尺寸", parameterValue: productSpec.productSize(productInfo: productModel!))
+            let netWeightParam = WOWParameter.init(parameterShowName: "重量", parameterValue: productSpec.productWeight(productInfo: productModel!))
+            productModel?.productParameter?.insert(sizeParam, at: 0)
+            productModel?.productParameter?.insert(netWeightParam, at: 1)
+        }
+    }
+    
+    fileprivate func refreshParameter() {
+        if productModel?.productParameter?.count > 0 {
+            let sizeParam = WOWParameter.init(parameterShowName: "尺寸", parameterValue: productSpec.productSize(productInfo: productModel!))
+            let netWeightParam = WOWParameter.init(parameterShowName: "重量", parameterValue: productSpec.productWeight(productInfo: productModel!))
+            productModel?.productParameter?[0] = sizeParam
+            productModel?.productParameter?[1] = netWeightParam
+        }
     }
     
     fileprivate func configBanner() {
@@ -372,6 +391,8 @@ class WOWProductDetailController: WOWBaseViewController {
                 if let imgUrl = strongSelf.productModel?.productImg {
                     strongSelf.imgUrlArr.insert(imgUrl, at: 0)
                 }
+                //产品参数里面要拼接上尺寸重量
+                strongSelf.configParameter()
                 strongSelf.requestCommentList()
                 strongSelf.buyCarCount()
             }
@@ -394,7 +415,6 @@ class WOWProductDetailController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductSpec(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 strongSelf.productSpecModel = Mapper<WOWProductSpecModel>().map(JSONObject:result)
-//                DLog(strongSelf.productSpecModel)
                 
             }
         }) {(errorMsg) in
@@ -530,6 +550,10 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             productModel?.originalprice = productInfo.originalprice
             productModel?.sings = productInfo.sings
             productModel?.discount = productInfo.discount
+            productModel?.length = productInfo.length
+            productModel?.width = productInfo.width
+            productModel?.height = productInfo.height
+            productModel?.netWeight = productInfo.netWeight
             if imgUrlArr.count >= 1 {
                 imgUrlArr[0] = productInfo.productImg ?? ""
             }

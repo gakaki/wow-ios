@@ -237,7 +237,7 @@ struct WOWUserManager {
         MGDefault.set(model?.user_id?.toString, forKey:WOWUserID)
         MGDefault.synchronize()
     }
-    
+
     static func cleanUserInfo(){
 //        MGDefault.setObject(false, forKey: WOWUserLoginStatus)
         MGDefault.set(nil, forKey:WOWUserName)
@@ -253,6 +253,7 @@ struct WOWUserManager {
         MGDefault.set(0, forKey: WOWUserMsgCount)
         MGDefault.set(0, forKey: WOWSystemMsgCount)
         MGDefault.set(nil, forKey:WOWUserID)
+        MGDefault.set(nil, forKey:WOWUserMobile)
         MGDefault.synchronize()
     }
     /**

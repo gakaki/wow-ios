@@ -763,7 +763,7 @@ extension RequestApi:TargetType{
         case .api_ResetPwd:
             return "修改密码成功"
         case .api_userFeedBack:
-            return "谢谢您的反馈"
+            return "反馈成功"
         default:
             return ""
         }

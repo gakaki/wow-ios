@@ -14,6 +14,7 @@ class WOWAboutController: WOWBaseViewController {
     let cellId = "WOWAboutCell"
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(CheackAppVersion.cheackResult ?? 2)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +37,11 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if CheackAppVersion.cheackResult == 2 {
+            if section == 0 {
+                return 1
+            }
+        }
         return 2
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -55,7 +61,18 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
             cell.titleLabel.text = "新版本更新"
             cell.arrowImg.isHidden = false
             cell.space.constant = 31
-            cell.versionLabel.text = "2.1"
+            var showStr = ""
+            switch CheackAppVersion.cheackResult ?? 0 {
+            case 0:
+                showStr = "已经是最新版"
+            case 1:
+                showStr = CheackAppVersion.NewestVersion ?? ""
+            case 2:
+                showStr = "已经是最新版"
+            default:
+                break
+            }
+            cell.versionLabel.text = showStr
             cell.lineView.isHidden = true
             break
         case (1,0): //帮助与反馈
@@ -81,8 +98,15 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
             
             break
         case (0,1): //支持尖叫设计
-            GoToItunesApp.show()
-            break
+            
+            switch CheackAppVersion.cheackResult ?? 0 {
+          
+            case 1:
+                 GoToItunesApp.show()
+        
+            default:
+                break
+            }
         case (1,0): //帮助与反馈
             goLeavaTips()
             break

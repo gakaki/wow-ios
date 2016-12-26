@@ -45,19 +45,32 @@ class WOWLeaveTipsController: WOWBaseViewController {
     
     lazy var footerView: PhoneTextView = {
         let view = PhoneTextView()
-        view.tvPhone.text = WOWUserManager.userMobile
+        
         return view
     }()
 
     @IBAction func commitAction(_ sender: Any) {
-        // 检车格式是否正确
-        if WOWTool.cheakPhone(phontStr: footerView.tvPhone.text) && commentManage.cheackCommentLength(){
-            if commentManage.comments == "" {
-                WOWHud.showMsg("请输入反馈内容")
-            }else {
-                requestCommitLeave()
+        
+        if !WOWUserManager.loginStatus { // 未登陆状态下， 显示"输入手机"的一栏。 检查是否输入手机，和评论
+            // 检车格式是否正确
+            if WOWTool.cheakPhone(phontStr: footerView.tvPhone.text) && commentManage.cheackCommentLength(){
+                if commentManage.comments == "" {
+                    WOWHud.showMsg("请输入反馈内容")
+                }else {
+                    requestCommitLeave()
+                }
+                
             }
 
+        }else{// 登陆状态下， 不显示“输入手机”一栏。 检查评论是否 符合要求
+            if commentManage.cheackCommentLength(){
+                if commentManage.comments == "" {
+                    WOWHud.showMsg("请输入反馈内容")
+                }else {
+                    requestCommitLeave()
+                }
+                
+            }
         }
     }
     func requestCommitLeave()  {
@@ -182,7 +195,11 @@ extension WOWLeaveTipsController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 15
         case 1:
-            return 78
+            if !WOWUserManager.loginStatus {
+                return 78
+            }else{
+                return 0.01
+            }
         default:
             return 0.01
             
@@ -193,7 +210,14 @@ extension WOWLeaveTipsController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return nil
         case 1:
-            return footerView
+            if !WOWUserManager.loginStatus {
+                
+                footerView.tvPhone.text = WOWUserManager.userMobile
+                return footerView
+            }else{
+                return nil
+            }
+//            return footerView
         default:
             return nil
             

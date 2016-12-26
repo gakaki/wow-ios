@@ -5,6 +5,50 @@
 //  Created by 陈旭 on 2016/12/8.
 //  Copyright © 2016年 陈旭. All rights reserved.
 //
+
+// 检查当前版本和appStore版本的差异
+
+struct CheackAppVersion {
+    
+    static var cheackResult     : Int?// 比较的结果
+    static var NewestVersion    : String?// 最新的版本号
+
+    // 检查是否需要更新版本，以本地的bulding 参数做比较 
+    static func compareVersion( currentVersion:String,appVersion:Int ){
+        
+        let currentSum = currentVersion.toInt() ?? 1000
+        let appSum     = appVersion
+        
+        if currentSum == appSum {// 说明是最新版
+            cheackResult = 0
+        }else if currentSum < appSum { // 说明需要更新
+            cheackResult = 1
+        }else {// 说明当前的版本大于 AppStore 版本，  即，目前正在审核中
+            cheackResult = 2
+        }
+        
+    }
+    
+    static func versionToSum(version:String) ->Int{
+        
+        var array = version.components(separatedBy: ".")
+        
+        var versionSum :Int = 0
+        if array.count == 2 { // 类似于 1.0  2.0  3.0
+            array.append("0")
+            versionSum = Int(array[0])! * 100 + Int(array[1])! * 10 + Int(array[2])!
+        }
+        if array.count == 3 { // 类似于 1.0.1    2.0.2
+            versionSum = Int(array[0])! * 100 + Int(array[1])! * 10 + Int(array[2])!
+        }
+        if array.count == 4 {//  类似于 3.0.1.1
+            versionSum = Int(array[0])! * 1000 + Int(array[1])! * 100 + Int(array[2])! * 10 + Int(array[3])!
+        }
+        return versionSum
+        
+    }
+}
+
 // APP更新的信息
 class WOWUpdateVersionModel: WOWBaseModel,Mappable {
 
@@ -16,7 +60,7 @@ class WOWUpdateVersionModel: WOWBaseModel,Mappable {
     var publishLogs                     :       [String]?
     var upgradeUrl                      :       String?
     var version                         :       String?
-    
+    var versionCode                     :       Int?// 本地的 buliding 的版本号。 和远程服务器接口返回的数据作比较。 如果本地的buliding 版本号大于 服务器的版本号，说明，此时正在审核。
     required init?(map: Map) {
         
     }
@@ -31,6 +75,7 @@ class WOWUpdateVersionModel: WOWBaseModel,Mappable {
         publishLogs                         <- map["publishLogs"]
         upgradeUrl                          <- map["upgradeUrl"]
         version                             <- map["version"]
+        versionCode                         <- map["versionCode"]
 
     }
     

@@ -206,6 +206,7 @@ let URL_PwpResetCode            = "v1/user/captcha/pwd-reset"        //重置密
 let URL_Change                  = "v1/user/change"                   //修改用户信息
 let URL_Coupons                 = "v1/user/coupons"                //用户优惠券列表
 let URL_GetCoupon               = "v1/user/getCouponByRedemptionCode"     //获取优惠券
+let URL_ProductsOfCoupon        = "/v1/user/productsOfcoupon"           //优惠券可用商品
 let URL_FeedBack                = "v1/feedback"
 
 //7.地址

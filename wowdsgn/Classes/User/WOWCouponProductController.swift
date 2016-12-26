@@ -14,6 +14,8 @@ class WOWCouponProductController: WOWBaseViewController {
     var ob_cid:UInt                                  = 10
     var ob_tab_index:UInt                            = 0
     var index                                   = 0
+    var couponId                                = 0
+    var navTitle: String?
     
     lazy var v_bottom: VCVTMagic = {
         let v = VCVTMagic()
@@ -34,6 +36,7 @@ class WOWCouponProductController: WOWBaseViewController {
     }
     override func setUI() {
         super.setUI()
+        navigationItem.title = navTitle
         self.view.addSubview(v_bottom.magicView)
         self.navigationShadowImageView?.isHidden = true
         v_bottom.magicView.reloadData(toPage: 0)
@@ -133,8 +136,9 @@ extension WOWCouponProductController:VTMagicViewDelegate{
             
             vc.pageVc        = query_sortBy
             vc.asc           = query_asc
-            vc.seoKey       = "杯"
+            vc.couponId      = couponId
             vc.pageIndex           = 1 //每次点击都初始化咯
+            vc.entrance      = .couponEntrance
             vc.request()
         }
     }

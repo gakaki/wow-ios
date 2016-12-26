@@ -152,9 +152,9 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
             cell.label_amount.font = UIFont.priceFont(40)
             cell.label_amount.text          = String(format: "%.f",r.deduction ?? 0)
             cell.label_title.text           = r.title ?? ""
-            
+            cell.label_limit.text           = r.limitDesc
             cell.label_time_limit.text      = "\(r.effectiveFrom ?? "")至\(r.effectiveTo ?? "")"
-            cell.useCouponBtn.tag = r.id ?? 0
+            cell.useCouponBtn.tag = indexPath.section
             cell.useCouponBtn.addTarget(self, action: #selector(goCouponProduct(_:)), for: .touchUpInside)
             
             if ( r.status == 0) { //不可用
@@ -255,6 +255,9 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
     
     func goCouponProduct(_ sender: UIButton)  {
         let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWCouponProductController.self)) as! WOWCouponProductController
+        let couponModel = self.vo_cupons[sender.tag]
+        vc.couponId = couponModel.id ?? 0
+        vc.navTitle = couponModel.title
         navigationController?.pushViewController(vc, animated: true)
     }
     

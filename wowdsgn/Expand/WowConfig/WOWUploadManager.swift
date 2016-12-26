@@ -43,7 +43,7 @@ class WOWUploadManager {
         UIGraphicsEndImageContext()
         return newImage ?? sourceImage
     }
-    // 针对时间戳
+    // 针对时间戳 进行哈希
    static func onlyStr() -> String  {
         //          拼接唯一字符串
         let onlyStr         = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
@@ -51,7 +51,7 @@ class WOWUploadManager {
         return hashids.encode([1,2,3])!
         
     }
-    // 针对 userId
+    // 针对 userId 进行 哈希
     static func hashidsUserIdStr() -> String {
         
         if WOWUserManager.userID.isEmpty {
@@ -66,9 +66,9 @@ class WOWUploadManager {
 
     // 上传头像
     static  func uploadPhoto(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
-        //          拼接唯一字符串
+         // 压缩图片
         let photoImage = imageCompressForWidth(sourceImage: image, targetWidth: 200)
-        
+         //          拼接唯一字符串
         let qiniu_key  = QiniuBucket.UserPhoto.rawValue + hashidsUserIdStr()
         
         PushImage(photoImage, imagePath: qiniu_key, successClosure: { (url) in
@@ -96,7 +96,7 @@ class WOWUploadManager {
         
     }
 
-    // 发布评论 上传图片 GCD 分组
+    // 发布评论 上传图片 GCD 分组  pushQiniuPath ： 上传至七牛服务器的 路径， 默认为 商品评论的路径，
     static func pushCommentPhotos(_ images:[imageInfo],pushQiNiuPath:QiniuBucket = .UserShopComment,successClosure:@escaping PushImgURLs){
         var urlArray = [String]()
         

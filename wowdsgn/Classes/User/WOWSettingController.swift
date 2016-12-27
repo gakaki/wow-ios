@@ -137,7 +137,7 @@ class WOWSettingController: WOWBaseTableViewController {
                 WOWUserManager.exitLogin()
                 
                 UIApplication.currentViewController()?.toLoginVC(true)
-                WOWTool.lastTabIndex = 0
+//                WOWTool.lastTabIndex = 0
                 strongSelf.tabBarController?.selectedIndex = 0
                 strongSelf.tableView.reloadData()
                 NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)

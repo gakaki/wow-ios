@@ -63,7 +63,8 @@ class WOWLeaveTipsController: WOWBaseViewController {
             }
 
         }else{// 登陆状态下， 不显示“输入手机”一栏。 检查评论是否 符合要求
-            if commentManage.cheackCommentLength(){
+           
+            if commentManage.cheackCommentLength(TextStr: .feedBack){
                 if commentManage.comments == "" {
                     WOWHud.showMsg("请输入反馈内容")
                 }else {

@@ -81,6 +81,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
         f?.stateLabel.font = UIFont.systemFont(ofSize: 14)
         return f!
     }()
+    
     func loadBottomData()  {
         if isRreshing {
             return
@@ -207,6 +208,10 @@ class WOWBaseModuleVC: WOWBaseViewController {
             case 9:// 专题详情
                 
                 toVCTopidDetail(model.bannerLinkTargetId ?? 0)
+            case 10:// 分组产品列表
+                
+//                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
+                goToProductGroup(model.bannerLinkTargetId ?? 0)
                 
             default:
                 print("其他")
@@ -338,14 +343,10 @@ extension WOWBaseModuleVC:HotPeopleTitleDelegate{// 点击标签跳转
         
     }
 }
-extension WOWBaseModuleVC:Cell_104_TwoLineDelegate{// 点击标签跳转'
+extension WOWBaseModuleVC:Cell_104_TwoLineDelegate{// 双列产品组Item跳转
     
-    func goToProductGroupList(_ groupId:Int){
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductListController.self)) as! WOWProductListController
-        vc.groupId = groupId
-        vc.hideNavigationBar = true
-        navigationController?.pushViewController(vc, animated: true)
-        
+    func goToProductGroupList(_ model:WOWCarouselBanners){
+        goController(model)
     }
   }
 

@@ -33,9 +33,13 @@ class UserCommentManage :NSObject{
     var commentsLength          : Int = 0 //评论内容的个数 有表情内容会影响string的length 不准，所以记录textView上面的length
     
 }
+enum TextManage:String {
+    case comment    = "评论"
+    case feedBack   = "反馈"
+}
 extension UserCommentManage {
     
-    func cheackCommentLength() -> Bool {
+    func cheackCommentLength(TextStr:TextManage = .comment) -> Bool {
         
         
         if !(self.comments == "" && self.commentImgs.count == 0){
@@ -43,20 +47,20 @@ extension UserCommentManage {
             if self.commentImgs.count > 0 {// 如果选择了照片，而没用输入内容，则提示他输入内容
                 if self.commentsLength == 0 {
                     
-                    WOWHud.showMsg("请输入的评论内容")
+                    WOWHud.showMsg("请输入" + TextStr.rawValue + "的内容")
                     
                     return false
                 }
             }
             if self.commentsLength < 3 && self.commentsLength > 0{// 如果输入了内容，而输入的内容小于三个字，则提示他输入更多内容
                 
-                WOWHud.showMsg("请您输入更多的评论内容")
+                WOWHud.showMsg("请您输入更多的" + TextStr.rawValue + "内容")
                 return false
                 
             }
             if self.commentsLength > 140 {
                 
-                WOWHud.showMsg("评论的最大字数为140字，请您删减")
+                WOWHud.showMsg(TextStr.rawValue + "的最大字数为140字，请您删减")
                 
                 return false
                 

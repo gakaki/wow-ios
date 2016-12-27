@@ -81,6 +81,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
         f?.stateLabel.font = UIFont.systemFont(ofSize: 14)
         return f!
     }()
+    
     func loadBottomData()  {
         if isRreshing {
             return

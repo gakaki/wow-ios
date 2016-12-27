@@ -37,7 +37,7 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
         layout.itemSize                       = CGSizeD( 100 ,height: 150 )
         self.heightAll                        = layout.itemSize.height
         
-        layout.sectionInset                   = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.sectionInset                   = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         layout.minimumInteritemSpacing        = 5
 
         layout.minimumLineSpacing             = 1

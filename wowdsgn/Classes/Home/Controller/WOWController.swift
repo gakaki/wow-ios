@@ -232,9 +232,7 @@ class WOWController: WOWBaseModuleVC {
                 
             }
         }) { (errorMsg) in
-            WOWUserManager.systemMsgCount =  0
-            WOWUserManager.userMsgCount =  0
-            NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+      
         }
         
     }

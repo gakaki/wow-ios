@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         asyncLoad()
 
         IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
         initialAppearance()     //初始化外观
         registAppKey(launchOptions) //注册第三方
        
@@ -354,8 +355,9 @@ extension AppDelegate{
         case .active:
             break
         default:
+            WOWUserManager.systemMsgCount = Calculate.increase(input: WOWUserManager.systemMsgCount)
             umessage.pushController(userInfo: userInfo)
-            
+            NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
         }
         
     }

@@ -18,7 +18,6 @@ class WOWMessageController: WOWBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        request()
         requestMsgCount()
         // Do any additional setup after loading the view.
     }
@@ -86,14 +85,14 @@ class WOWMessageController: WOWBaseViewController {
                 let userMsg = json["userMessageUnReadCount"].int
                 WOWUserManager.systemMsgCount = systemMsg ?? 0
                 WOWUserManager.userMsgCount = userMsg ?? 0
-            
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+                
                 DLog(json)
                 
             }
         }) { (errorMsg) in
-            WOWUserManager.systemMsgCount =  0
-            WOWUserManager.userMsgCount =  0
-         
+          
+            
         }
         
     }

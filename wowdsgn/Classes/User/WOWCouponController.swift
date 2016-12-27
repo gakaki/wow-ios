@@ -129,6 +129,14 @@ class WOWCouponController: WOWBaseViewController {
 }
 
 extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
+    //MARK - 滚动就取消响应 只有scrollView的实际内容大于scrollView的尺寸时才会有滚动事件
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        UIApplication.shared.keyWindow?.endEditing(true)
+        
+    }
+
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         let count = self.vo_cupons.count
         if count > 0 {
@@ -162,7 +170,6 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
                 cell.label_is_used.text         = r.statusDesc
             }else {
                 cell.showData(true)
-                cell.label_is_used.text         = "未使用"
             }
             
             

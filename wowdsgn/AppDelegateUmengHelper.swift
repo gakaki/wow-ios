@@ -19,7 +19,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
         
         if Platform.isSimulator == false {
             //初始化方法,也可以使用(void)startWithAppkey:(NSString *)appKey launchOptions:(NSDictionary * )launchOptions httpsenable:(BOOL)value;这个方法，方便设置https请求。
-            UMessage.start(withAppkey: Config3rd.umessage_app_key, launchOptions: launchOptions, httpsenable: false)
+            UMessage.start(withAppkey: Config3rd.umessage_app_key, launchOptions: launchOptions, httpsenable: true)
             
             //注册通知，如果要使用category的自定义策略，可以参考demo中的代码。
             UMessage.registerForRemoteNotifications()
@@ -100,7 +100,6 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
             //应用处于前台时的远程推送接受
             //关闭友盟自带的弹出框
             UMessage.setAutoAlert(false)
-//            pushController(userInfo: userInfo)
             //必须加这句代码
             UMessage.didReceiveRemoteNotification(userInfo)
         }else{
@@ -118,8 +117,10 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
         
         let userInfo = response.notification.request.content.userInfo
         if response.notification.request.trigger is UNPushNotificationTrigger {
+            WOWUserManager.systemMsgCount = Calculate.increase(input: WOWUserManager.systemMsgCount)
             //应用处于后台时的远程推送接受
             pushController(userInfo: userInfo)
+            NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
             //必须加这句代码
             UMessage.didReceiveRemoteNotification(userInfo)
         }else{
@@ -129,7 +130,8 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
     }
     
     func pushController(userInfo: [AnyHashable : Any]) {
-        print(userInfo)
+        DLog(userInfo)
+        WOWUserManager.systemMsgCount = Calculate.reduce(input: WOWUserManager.systemMsgCount)
         let dic :[String: AnyObject]? = userInfo as? [String : AnyObject]
         if let dic = dic {
             var type: String?

@@ -202,6 +202,7 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         UIApplication.shared.keyWindow?.endEditing(true)
     }
+ 
 
 }
 

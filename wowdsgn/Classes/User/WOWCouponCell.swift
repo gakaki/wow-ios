@@ -52,7 +52,7 @@ class WOWCouponCell: UITableViewCell {
         draw_dashed_line(color_status_disable)
         //如果优惠券可用则显示
         if status {
-            useCouponBtn.isHidden = false
+            useCouponBtn.isHidden = false       
             label_is_used.isHidden = true
             label_amount.textColor             = UIColor.black
             label_title.textColor              = UIColor.black

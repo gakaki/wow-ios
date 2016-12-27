@@ -9,7 +9,7 @@
 import UIKit
 protocol Cell_104_TwoLineDelegate:class{
     
-    func goToProductGroupList(_ groupId:Int)
+    func goToProductGroupList(_ model:WOWCarouselBanners)
 }
 
 class Cell_104_TwoLine: UITableViewCell,ModuleViewElement{
@@ -101,7 +101,7 @@ extension Cell_104_TwoLine:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = self.delegate {
             let m               = dataArr[(indexPath as NSIndexPath).item]
-            del.goToProductGroupList(m.bannerLinkTargetId ?? 0)
+            del.goToProductGroupList(m)
         }
         
     }

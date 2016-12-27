@@ -396,7 +396,15 @@ extension  UIViewController {
         vc.isPageView   = isPageView
         pushVC(vc)
     }
-    
+    // 104 类型跳转。 linkType = 10 
+    func goToProductGroup(_ groupId:Int){
+        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductListController.self)) as! WOWProductListController
+        vc.groupId = groupId
+        vc.hideNavigationBar = true
+        pushVC(vc)
+        
+    }
+
     func toVCTopic( _ topic_id:Int? ){
         if let t = topic_id {
             let vc                  = VCTopic(nibName: nil, bundle: nil)

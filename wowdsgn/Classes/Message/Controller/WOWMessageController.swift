@@ -19,6 +19,7 @@ class WOWMessageController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
+        requestMsgCount()
         // Do any additional setup after loading the view.
     }
 
@@ -59,6 +60,7 @@ class WOWMessageController: WOWBaseViewController {
     }
     override func request() {
         super.request()
+        
         WOWNetManager.sharedManager.requestWithTarget(.api_MessageMain, successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let r                                     =  JSON(result)
@@ -72,6 +74,28 @@ class WOWMessageController: WOWBaseViewController {
                 strongSelf.endRefresh()
             }
         }
+    }
+    
+    func requestMsgCount() {
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_MessageCount, successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+                let json = JSON(result)
+                let systemMsg = json["systemMessageUnReadCount"].int
+                let userMsg = json["userMessageUnReadCount"].int
+                WOWUserManager.systemMsgCount = systemMsg ?? 0
+                WOWUserManager.userMsgCount = userMsg ?? 0
+            
+                DLog(json)
+                
+            }
+        }) { (errorMsg) in
+            WOWUserManager.systemMsgCount =  0
+            WOWUserManager.userMsgCount =  0
+         
+        }
+        
     }
     
     func configData() {

@@ -25,7 +25,7 @@ class VCFound: WOWBaseModuleVC {
         
         do {
             try request_module_page_with_throw()
-                requestBottom()
+//                requestBottom()
         }catch{
             DLog(error)
             self.endRefresh()
@@ -40,7 +40,7 @@ class VCFound: WOWBaseModuleVC {
         dataDelegate?.vc                    = self
         dataDelegate?.ViewControllerType    = ControllerViewType.Home
         tableView.separatorColor            = SeprateColor
-        tableView.mj_footer                 = mj_footerHome
+//        tableView.mj_footer                 = mj_footerHome
 
 
     }
@@ -50,7 +50,7 @@ class VCFound: WOWBaseModuleVC {
         super.pullToRefresh()
         do {
             try request_module_page_with_throw()
-                requestBottom()
+//                requestBottom()
         }catch{
             DLog(error)
             self.endRefresh()

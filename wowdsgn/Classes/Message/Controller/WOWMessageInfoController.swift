@@ -136,11 +136,9 @@ class WOWMessageInfoController: WOWBaseViewController {
                 ///1为系统消息；2为官方消息
 
                 if strongSelf.msgType == 1 {
-                    let count = WOWUserManager.userMsgCount - 1
-                    WOWUserManager.userMsgCount = count < 0 ? 0 : count
+                    WOWUserManager.userMsgCount = 0
                 }else{
-                    let count = WOWUserManager.systemMsgCount - 1
-                    WOWUserManager.systemMsgCount = count < 0 ? 0 : count
+                    WOWUserManager.systemMsgCount = 0
                 }
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                 strongSelf.tableView.reloadData()

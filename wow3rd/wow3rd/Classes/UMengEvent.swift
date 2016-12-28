@@ -35,7 +35,21 @@ public enum UMengEvent  {
     case MessageCenter               //消息中心
 
     
+    case GUIDE_JOIN                     //引导页：加入我们
+    case GUIDE_SAFRARI                  //引导页：先逛逛
+    case GUIDE_SKIP                     //引导页：skip
+    case GUIDE_WX_BIND                  //引导页：绑定微信
+    case GUIDE_MOBILE_REG               //引导页：手机注册
+    case GUIDE_LOGIN                    //引导页：登陆
     
+    case BIND_MOBILE_VALIDATE_CODE      //绑定手机页，获取验证码
+    case BIND_MOBILE_BIND               //绑定手机页，绑定
+    
+    case BIND_MY_INFO_SKIP              //个人资料页，跳过
+    case BIND_MY_INFO_NEXT              //个人资料页，下一步
+    
+    case BIND_PAGE_OTHER_INFO_SKIP      //其他页，跳过
+    case BIND_PAGE_OTHER_INFO_SUCC      //其他页，完成
   
 }
 

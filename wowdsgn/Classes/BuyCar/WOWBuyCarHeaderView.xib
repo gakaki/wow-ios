@@ -14,15 +14,22 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一 为你推荐 一" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcT-Og-Z8f">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcT-Og-Z8f">
                     <rect key="frame" x="0.0" y="15" width="375" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forYou" translatesAutoresizingMaskIntoConstraints="NO" id="ANq-uP-nze">
+                    <rect key="frame" x="133" y="32" width="108" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="108" id="Jag-2r-Y15"/>
+                        <constraint firstAttribute="height" constant="16" id="x2k-78-cBQ"/>
+                    </constraints>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7m0-aw-6rz">
-                    <rect key="frame" x="0.0" y="64.5" width="375" height="0.5"/>
+                    <rect key="frame" x="0.0" y="65" width="375" height="0.0"/>
                     <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="Bba-Tv-v4N"/>
@@ -31,10 +38,12 @@
             </subviews>
             <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="ANq-uP-nze" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="D99-WT-6pn"/>
                 <constraint firstAttribute="trailing" secondItem="AcT-Og-Z8f" secondAttribute="trailing" id="ITw-sl-NeC"/>
                 <constraint firstAttribute="trailing" secondItem="7m0-aw-6rz" secondAttribute="trailing" id="LDt-6q-Peq"/>
                 <constraint firstAttribute="bottom" secondItem="AcT-Og-Z8f" secondAttribute="bottom" id="SWM-zY-grj"/>
                 <constraint firstItem="AcT-Og-Z8f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="aip-D8-RRr"/>
+                <constraint firstItem="7m0-aw-6rz" firstAttribute="top" secondItem="ANq-uP-nze" secondAttribute="bottom" constant="17" id="huH-DO-gQs"/>
                 <constraint firstAttribute="bottom" secondItem="7m0-aw-6rz" secondAttribute="bottom" id="huU-Ue-lTQ"/>
                 <constraint firstItem="AcT-Og-Z8f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="m04-wd-Vc7"/>
                 <constraint firstItem="7m0-aw-6rz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qTz-2p-WbX"/>
@@ -43,4 +52,7 @@
             <point key="canvasLocation" x="32.5" y="195.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="forYou" width="108" height="16"/>
+    </resources>
 </document>

@@ -44,20 +44,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSt-NL-jXY">
                     <rect key="frame" x="0.0" y="275" width="375" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recommendTitle" translatesAutoresizingMaskIntoConstraints="NO" id="jCy-6V-Xqs">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forYou" translatesAutoresizingMaskIntoConstraints="NO" id="jCy-6V-Xqs">
                             <rect key="frame" x="134" y="17" width="108" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="108" id="WS3-68-D4M"/>
                                 <constraint firstAttribute="height" constant="16" id="s73-VK-kU0"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一 为你推荐 一" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6x-x1-b3P">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBK-UP-Jzv">
                             <rect key="frame" x="0.0" y="49" width="375" height="1"/>
                             <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
@@ -72,15 +65,11 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="jCy-6V-Xqs" firstAttribute="centerX" secondItem="qSt-NL-jXY" secondAttribute="centerX" id="3Qt-Yq-ISN"/>
-                        <constraint firstAttribute="trailing" secondItem="L6x-x1-b3P" secondAttribute="trailing" id="46I-Dg-yXu"/>
                         <constraint firstAttribute="trailing" secondItem="rBK-UP-Jzv" secondAttribute="trailing" id="HoX-0X-Krr"/>
-                        <constraint firstAttribute="bottom" secondItem="L6x-x1-b3P" secondAttribute="bottom" id="Ll5-kW-ugi"/>
                         <constraint firstAttribute="bottom" secondItem="rBK-UP-Jzv" secondAttribute="bottom" id="MGP-8Z-IZ4"/>
                         <constraint firstItem="jCy-6V-Xqs" firstAttribute="centerY" secondItem="qSt-NL-jXY" secondAttribute="centerY" id="Mrf-ey-DO7"/>
                         <constraint firstAttribute="height" constant="50" id="QfL-AD-TKX"/>
-                        <constraint firstItem="L6x-x1-b3P" firstAttribute="top" secondItem="qSt-NL-jXY" secondAttribute="top" id="VzQ-pp-nIV"/>
                         <constraint firstItem="rBK-UP-Jzv" firstAttribute="leading" secondItem="qSt-NL-jXY" secondAttribute="leading" id="ijI-6i-7hy"/>
-                        <constraint firstItem="L6x-x1-b3P" firstAttribute="leading" secondItem="qSt-NL-jXY" secondAttribute="leading" id="xXo-E3-abo"/>
                     </constraints>
                 </view>
             </subviews>
@@ -103,7 +92,7 @@
     </objects>
     <resources>
         <image name="buyCarEmpty" width="69" height="62"/>
-        <image name="recommendTitle" width="108" height="16"/>
+        <image name="forYou" width="108" height="16"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

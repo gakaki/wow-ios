@@ -81,24 +81,24 @@ class WOWController: WOWBaseModuleVC {
         NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         
-        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+//        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
         
     }
-    // 刷新物品的收藏状态与否 传productId 和 favorite状态
-    func refreshData(_ sender: Notification)  {
-
-        if  let send_obj =  sender.object as? [String:AnyObject] {
-            
-            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
-
-            for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
-                let model = dataArr[j] 
-                model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
-            }
-            self.tableView.reloadData()
-        }
-      
-    }
+//    // 刷新物品的收藏状态与否 传productId 和 favorite状态
+//    func refreshData(_ sender: Notification)  {
+//
+//        if  let send_obj =  sender.object as? [String:AnyObject] {
+//            
+//            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
+//
+//            for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
+//                let model = dataArr[j] 
+//                model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
+//            }
+//            self.tableView.reloadData()
+//        }
+//      
+//    }
     
     //MARK:Private Method
     override func setUI() {

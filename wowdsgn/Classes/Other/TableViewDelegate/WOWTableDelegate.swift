@@ -152,7 +152,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             switch model.moduleType ?? 0 {
             case 402:// 多行展示
-                
+                record_402_index.removeObject(section)
                 record_402_index.append(section)
                 
                 let array = model.moduleContentProduct?.products ?? []

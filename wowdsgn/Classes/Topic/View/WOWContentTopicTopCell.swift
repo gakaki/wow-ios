@@ -92,6 +92,9 @@ class WOWContentTopicTopCell: UITableViewCell {
             if let publishTime = model.publishTime{
                 let timeStr = (publishTime/1000).getTimeString()
                 publicTime.text = String(format:"发布于%@", timeStr)
+            }else {
+                publicTime.text = String(format:"发布于刚刚")
+
             }
             topicTitle.text = model.topicName
             topicDesc.text = model.topicDesc

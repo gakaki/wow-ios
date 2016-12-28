@@ -106,7 +106,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     fileprivate func configNav(){
         makeCustomerNavigationItem("跳过", left: false) {[weak self] in
             if let strongSelf = self{
-                
+                MobClick.e(UMengEvent.Bind_Other_Skip)
                 
                 if strongSelf.isPresent{
                     strongSelf.dismiss(animated: true, completion: nil)
@@ -168,6 +168,9 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }
 
     func sure() {
+        
+        MobClick.e(UMengEvent.Bind_Other_Succ)
+
 //        print("\(sex)","\(ageRow)","\(starRow)")
         let params = ["sex":String(sex),"ageRange":String(ageRow),"constellation":String(starRow),"industry":jobTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params ), successClosure: {[weak self] (result, code) in

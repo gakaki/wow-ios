@@ -58,6 +58,10 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     }
     
     override func navBack() {
+        
+        
+        MobClick.e(UMengEvent.Bind_My_Skip)
+
         let alert = UIAlertController(title: "您有资料未填写", message: "确定退出？", preferredStyle: .alert)
         let cancel = UIAlertAction(title:"取消", style: .cancel, handler: { (action) in
             DLog("取消")
@@ -82,6 +86,9 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     
 //MARK:Actions
     func nextButton() {
+        
+        
+        
         guard let nickName = nickTextField.text , !nickName.isEmpty else{
             WOWHud.showMsg("请输入昵称")
             nextView.tipsLabel.isHidden = false
@@ -89,6 +96,10 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
             nextView.tipsLabel.text = "请输入昵称"
             return
         }
+        
+        MobClick.e(UMengEvent.Bind_My_Next)
+
+        
         let params = ["nickName":nickTextField.text!,"selfIntroduction":descTextField.text ?? "","avatar":self.headImageUrl]
         WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: {[weak self](result, code) in
             if let strongSelf = self{

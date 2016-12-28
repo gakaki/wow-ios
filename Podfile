@@ -107,7 +107,7 @@ target 'wowdsgn' do
 
 	pod 'Pingpp/Alipay', '~> 2.2.10'
 	pod 'Pingpp/Wx', '~> 2.2.10'
-	pod 'Pingpp/CmbWallet', '~> 2.2.10'
+#	pod 'Pingpp/CmbWallet', '~> 2.2.10'
 
 
 

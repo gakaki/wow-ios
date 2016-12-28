@@ -126,11 +126,11 @@ class WOWGuideController: WOWBaseViewController {
     
     @IBAction func btn1Action(_ sender: UIButton, forEvent event: UIEvent) {
         
-        MobClick.e(UMengEvent.Guide_Wx_Bind)
 
         if ( currentState == .standby) {
             //播放动画
-            
+            MobClick.e(UMengEvent.Guide_Join)
+
             UIView.animate(withDuration: 0.5, animations: {
                 self.btn1.y += 50
                 self.btn1.alpha = 0.0
@@ -150,6 +150,9 @@ class WOWGuideController: WOWBaseViewController {
         }
         else if ( currentState == .register) {
             //to weixin reg vc
+            
+           MobClick.e(UMengEvent.Guide_Wx_Bind)
+
            toWeixinVC()
             
         }
@@ -171,7 +174,9 @@ class WOWGuideController: WOWBaseViewController {
         else if ( currentState == .register) {
             //to mobile reg vc
 //            toRegVC()
-            MobClick.e(UMengEvent.Guide_Join)
+            
+            MobClick.e(UMengEvent.Guide_Mobile_Reg)
+
             toRegVC(userInfoFromWechat: nil)
         }
     }

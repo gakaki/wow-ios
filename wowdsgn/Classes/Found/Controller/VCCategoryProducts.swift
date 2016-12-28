@@ -75,6 +75,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         
         cv.decelerationRate                 = UIScrollViewDecelerationRateFast
         //cv.bounces = false
+        cv.mj_header = self.mj_header
         cv.mj_footer = self.mj_footer
 
         cv.emptyDataSetSource               = self;

@@ -28,6 +28,7 @@ class WOWGoodsDetailController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         request()
     }
     
@@ -187,6 +188,14 @@ class WOWGoodsDetailController: WOWBaseViewController {
                 strongSelf.configData()
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
+                
+                let dict = [
+                    "sellprice"             :strongSelf.productModel?.sellPrice ?? "",
+                    "productId"             :strongSelf.productModel?.productId ?? "",
+                    "productName"           :strongSelf.productModel?.productName ?? ""
+                ] as [String : Any]
+                TalkingData.e(.ViewItem, dict)
+
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{

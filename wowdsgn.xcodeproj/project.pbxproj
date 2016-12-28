@@ -326,6 +326,7 @@
 		06A5C4691E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C4601E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a */; };
 		06A5C46E1E13BB4D00FE0A7A /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C46D1E13BB4D00FE0A7A /* UMMobClick.framework */; };
 		06A5C4711E13BE8100FE0A7A /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4701E13BE8100FE0A7A /* TestViewController.m */; };
+		06A5C4731E13D4D800FE0A7A /* TalkingDataEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4721E13D4D800FE0A7A /* TalkingDataEvent.swift */; };
 		06C869A21DD19A25004C05E3 /* RouterMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A11DD19A25004C05E3 /* RouterMapper.swift */; };
 		06C869A41DD19B4E004C05E3 /* AppDelegateUmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */; };
 		06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869AA1DD19C8E004C05E3 /* Config3rd.swift */; };
@@ -856,6 +857,7 @@
 		06A5C46D1E13BB4D00FE0A7A /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		06A5C46F1E13BE8100FE0A7A /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		06A5C4701E13BE8100FE0A7A /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		06A5C4721E13D4D800FE0A7A /* TalkingDataEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkingDataEvent.swift; sourceTree = "<group>"; };
 		06C869A11DD19A25004C05E3 /* RouterMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterMapper.swift; sourceTree = "<group>"; };
 		06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateUmengHelper.swift; sourceTree = "<group>"; };
 		06C869A71DD19BDF004C05E3 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
@@ -1720,6 +1722,7 @@
 				06A5C44C1E13B1F500FE0A7A /* UMengEvent.swift */,
 				06A5C44D1E13B1F500FE0A7A /* WowAppDelegateManager.swift */,
 				06A5C44E1E13B1F500FE0A7A /* WowWebView.swift */,
+				06A5C4721E13D4D800FE0A7A /* TalkingDataEvent.swift */,
 			);
 			path = WowThird;
 			sourceTree = "<group>";
@@ -2708,6 +2711,7 @@
 				069D32661DB47ADD00A059D0 /* WOWGoodsBigCell.swift in Sources */,
 				069D32831DB47ADD00A059D0 /* WOWProductHeaderView.swift in Sources */,
 				2D1AB5C51E07D43000821012 /* Cell_104_TwoLine.swift in Sources */,
+				06A5C4731E13D4D800FE0A7A /* TalkingDataEvent.swift in Sources */,
 				069D32EF1DB47ADD00A059D0 /* ArrayGroupBy.swift in Sources */,
 				069D33151DB47ADE00A059D0 /* HolderTextView.swift in Sources */,
 				2D509A551DB5D3120047CD13 /* WOWSceneModel.swift in Sources */,

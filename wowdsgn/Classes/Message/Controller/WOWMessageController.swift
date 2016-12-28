@@ -18,6 +18,9 @@ class WOWMessageController: WOWBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MobClick.e(UMengEvent.Product_Detail)
+        
         requestMsgCount()
         // Do any additional setup after loading the view.
     }

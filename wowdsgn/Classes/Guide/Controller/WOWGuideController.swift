@@ -112,10 +112,12 @@ class WOWGuideController: WOWBaseViewController {
     
     
     @IBAction func btnSkipAction(_ sender: UIButton) {
+        MobClick.e(UMengEvent.Guide_Skip)
         self.toMainVC()
     }
     
     @IBAction func btnLoginAction(_ sender: UIButton, forEvent event: UIEvent) {
+        MobClick.e(UMengEvent.Guide_Login)
         self.toLoginVC()
     }
     
@@ -124,6 +126,8 @@ class WOWGuideController: WOWBaseViewController {
     
     @IBAction func btn1Action(_ sender: UIButton, forEvent event: UIEvent) {
         
+        MobClick.e(UMengEvent.Guide_Wx_Bind)
+
         if ( currentState == .standby) {
             //播放动画
             
@@ -158,6 +162,8 @@ class WOWGuideController: WOWBaseViewController {
         
         if ( currentState == .standby) {
             
+            MobClick.e(UMengEvent.Guide_Safari)
+            
             //进入首页
             toMainVC()
             
@@ -165,6 +171,7 @@ class WOWGuideController: WOWBaseViewController {
         else if ( currentState == .register) {
             //to mobile reg vc
 //            toRegVC()
+            MobClick.e(UMengEvent.Guide_Join)
             toRegVC(userInfoFromWechat: nil)
         }
     }

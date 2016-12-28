@@ -79,6 +79,9 @@ class WOWRegistController: WOWBaseViewController {
     
 //MARK:Actions
     @IBAction func msgCodeButtonClick(_ sender: AnyObject) {
+        
+        MobClick.e(UMengEvent.Bind_Mobile_Validate)
+
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }
@@ -97,7 +100,8 @@ class WOWRegistController: WOWBaseViewController {
     
     
     @IBAction func registClick(_ sender: UIButton) {
-
+        MobClick.e(UMengEvent.Bind_Mobile_Bind)
+        
         if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
             return
         }

@@ -228,6 +228,8 @@ extension  UIViewController {
     }
     //跳转微信登录界面
     func toWeixinVC(_ isPresent:Bool = false){
+        
+        MobClick.e(UMengEvent.Guide_Wx_Bind)
         print("toWeixinVC")
         
 //        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)

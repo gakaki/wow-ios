@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<true/>
 	<key>CFBundleDisplayName</key>
 	<string>尖叫设计</string>
 	<key>CFBundleExecutable</key>
@@ -88,7 +90,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>4</string>
 	<key>CMBPublicKey</key>
 	<string>GavyATk1FzmyS7PF </string>
 	<key>LSApplicationQueriesSchemes</key>

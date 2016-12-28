@@ -536,13 +536,13 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             
             
             //添加talkingdata 加入购物车事件
-            AnalyaticEvent.e2(.AddItemToShoppingCart,
-                [
-                 "count"            :product.productQty ?? 1,
-                 "ProductName"      :product.productName ?? "",
-                 "SubProductId"     :product.productId ?? 0,
-                 "sellprice"        :product.sellPrice ?? 0
-                ] )
+            let dict = [
+                "count"            :product.productQty ?? 1,
+                "ProductName"      :product.productName ?? "",
+                "SubProductId"     :product.productId ?? 0,
+                "sellprice"        :product.sellPrice ?? 0
+            ] as [String : Any]
+            AnalyaticEvent.e2(.AddItemToShoppingCart,dict)
             
             WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.productId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self](result, code) in
                 if let strongSelf = self {

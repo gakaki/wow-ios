@@ -75,7 +75,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
 
     }
@@ -97,7 +96,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         pickerContainerView.removeFromSuperview()
         
         IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = true
         
 //        self.refresh_image()
         

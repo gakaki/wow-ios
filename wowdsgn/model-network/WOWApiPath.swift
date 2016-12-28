@@ -20,7 +20,7 @@ let WOWShareUrl                         = "m.wowdsgn.com" // 正式服务器 分
 
    let BaseUrl = "http://10.0.60.121:8080/" //内网开发
 //   let BaseUrl = "http://10.0.60.91:8080/"
-//  let BaseUrl = "http://wowdsgn.iok.la" //外网访问内网也可以的地址
+//  let BaseUrl = "https://wowdsgn.iok.la" //外网访问内网也可以的地址
 //   let BaseUrl = "https://mobile-api.wowdsgn.com/" //外网开发
 //  let BaseUrl = "https://mobile-api.stg.wowdsgn.com/" //内网开发
 

@@ -57,15 +57,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
         let v = Bundle.main.loadNibNamed("WOWPickerView", owner: self, options: nil)?.last as! WOWPickerView
         return v
     }()
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        IQKeyboardManager.sharedManager().enableAutoToolbar = true
 
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let gesture = UITapGestureRecognizer(target: self, action:#selector(viewTap(_:)))

@@ -770,7 +770,7 @@ extension RequestApi:TargetType{
         case .api_ResetPwd:
             return "修改密码成功"
         case .api_userFeedBack:
-            return "反馈成功"
+            return "感谢您的反馈"
         default:
             return ""
         }

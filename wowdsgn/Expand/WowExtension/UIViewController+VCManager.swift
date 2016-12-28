@@ -273,21 +273,24 @@ extension  UIViewController {
                 isOpenIdBinded = JSON(result)["isOpenIdBinded"].bool ?? true
                 
                 //微信登录成功
-                TalkingDataAppCpa.onLogin("wechatUser_\(open_id)")
-                
+                let user_id    = "wechatUser_\(open_id)"
+                TalkingDataAppCpa.onLogin(user_id)
+                AnalyaticEvent.e2(.Login,["user":user_id])
+
                 if isOpenIdBinded {
                     //FIXME:未写的，先保存用户信息
                     let model = Mapper<WOWUserModel>().map(JSONObject:result)
                     WOWUserManager.saveUserInfo(model)
                     
                     TalkingDataAppCpa.onLogin("wechatUser_\(WOWUserManager.WOWUserID)")
+                    AnalyaticEvent.e2(.Login,["user":"wechatUser_\(WOWUserManager.WOWUserID)"])
 
                     strongSelf.toLoginSuccess(isPresent)
                     
                 }else{ //第一次登陆
                     
                     TalkingDataAppCpa.onLogin("wechatUser_\(WOWUserManager.WOWUserID)")
-
+                    AnalyaticEvent.e2(.Login,["user":"wechatUser_\(WOWUserManager.WOWUserID)"])
                     strongSelf.toRegVC(true,isPresent: isPresent,userInfoFromWechat: userData)
                 }
             }

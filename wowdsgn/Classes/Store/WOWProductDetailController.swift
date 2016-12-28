@@ -395,6 +395,17 @@ class WOWProductDetailController: WOWBaseViewController {
                 strongSelf.configParameter()
                 strongSelf.requestCommentList()
                 strongSelf.buyCarCount()
+                
+                
+                
+                let dict = [
+                    "sellprice"             :strongSelf.productModel?.sellPrice ?? "",
+                    "productId"             :strongSelf.productModel?.productId ?? "",
+                    "productName"           :strongSelf.productModel?.productName ?? ""
+                    ] as [String : Any]
+                
+                AnalyaticEvent.e2(.ViewItem, dict)
+                
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
@@ -522,6 +533,16 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
     func sureAddCarClick(_ product: WOWProductModel?) {
         backView.hideBuyView()
         if let product = product {
+            
+            
+            //添加talkingdata 加入购物车事件
+            AnalyaticEvent.e2(.AddItemToShoppingCart,
+                [
+                 "count"            :product.productQty ?? 1,
+                 "ProductName"      :product.productName ?? "",
+                 "SubProductId"     :product.productId ?? 0,
+                 "sellprice"        :product.sellPrice ?? 0
+                ] )
             
             WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.productId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self](result, code) in
                 if let strongSelf = self {

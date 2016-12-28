@@ -406,6 +406,7 @@ class WOWEditOrderController: WOWBaseViewController {
 //                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
 //                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
                 TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
+                AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ?? 0,"OrderCode":order_id ?? 0])
 
             }
             
@@ -515,6 +516,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 //                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
                 //                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
                 TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
+                AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ?? 0,"OrderCode":order_id ?? 0])
 
             }
             

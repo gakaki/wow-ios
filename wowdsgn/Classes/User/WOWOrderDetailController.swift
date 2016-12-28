@@ -502,8 +502,8 @@ extension WOWOrderDetailController{
                 sum                      = sum * 100
                 let order_id             = orderCode ?? ""
                 TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: paymentChannelName)
-                
-                
+                AnalyaticEvent.e2(.PaySuccess,["totalAmount":sum ?? 0,"OrderCode":order_id ?? 0])
+
             }
             
         }) { (errorMsg) in

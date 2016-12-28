@@ -212,7 +212,8 @@ extension WOWOrderController:OrderCellDelegate{
                         let pay_type             = model.pay_method
 //                        TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: "weixin" , with:order)
                         TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: pay_type)
-                        
+                        AnalyaticEvent.e2(.PaySuccess,["totalAmount":sum ?? 0,"OrderCode":order_id ?? 0])
+
                         strongSelf.request()
                     }else{//订单支付取消或者失败
                         if ret == "fail"{

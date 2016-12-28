@@ -2,6 +2,12 @@
 
 import UIKit
 
+public class AnalyaticEvent {
+    public static func e2(_ structEvent:StructDataEvent , _ params: [String : Any] ){
+        let event_name = String(describing: structEvent)
+        MobClick.event(event_name, attributes: params)
+        TalkingData.trackEvent(event_name, label: "AppStore", parameters: params)
+    }}
 public extension MobClick {
 
     public static func e(_ countEvent:UMengEvent ){
@@ -10,6 +16,12 @@ public extension MobClick {
         MobClick.event(event_name)
     }
 
+    public static func e2(_ structEvent:StructDataEvent , _ params: [String : Any] ){
+        let event_name = String(describing: structEvent)
+        print(event_name)
+        MobClick.event(event_name, attributes: params)
+    }
+ 
 }
 
 public enum UMengEvent  {

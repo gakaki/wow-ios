@@ -120,7 +120,12 @@ class WOWLoginController: WOWBaseViewController {
                 WOWHud.dismiss()
                 let model = Mapper<WOWUserModel>().map(JSONObject:result)
                 WOWUserManager.saveUserInfo(model)
+                
+                
                 TalkingDataAppCpa.onLogin(phone)
+                AnalyaticEvent.e2(.Login,["user":phone])
+                
+                
                 WOWUserManager.userMobile = phone
                 strongSelf.toLoginSuccess(strongSelf.isPresent)
                 

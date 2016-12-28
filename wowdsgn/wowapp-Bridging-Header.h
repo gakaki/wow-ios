@@ -26,10 +26,18 @@
 @import FMDB;
 
 @import WowShare;
-@import wow3rd;
+
 @import LeanCloud;
 
 #import <Pingpp/Pingpp.h>
+#import <UMMobClick/MobClick.h>
+#import "UMessage.h"
+
+
+#import "TalkingData.h"
+#import "TalkingDataAppCpa.h"
+#import "TalkingDataSMS.h"
+#import <JSPatchPlatform/JSPatch.h>
 
 //#import "JPPlayground.h"
 //#import "GYHttpMock.h"

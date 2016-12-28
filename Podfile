@@ -43,20 +43,20 @@ target 'wowdsgn' do
 
 	pod 'VTMagic'
 	pod 'SDWebImage'
-  # pod 'UMengAnalytics-NO-IDFA' #放到wow-3rd 用liba了
-
+	
   #	pod 'Hashids-Swift'			#短id生成
   #	pod 'StyleKit'       		暂时不用
   #	pod 'UIColor_Hex_Swift', '~> 2.1'
 
   #Ping++支付
 	pod "Qiniu"
-  pod 'XZMRefresh'            #横向刷新
+    pod 'XZMRefresh'            #横向刷新
 	pod 'FMDB'
 	pod 'FCUUID'
 	pod 'MJRefresh'
 	pod 'DZNEmptyDataSet'
-  pod 'TZImagePickerController'
+    pod 'TZImagePickerController'
+
 	## ShareSDK主模块(必须)
 	#pod 'ShareSDK3'
 	## Mob 公共库(必须) 如果同时集成SMSSDK iOS2.0:可看此注意事项：http://bbs.mob.com/thread-20051-1-1.html
@@ -79,7 +79,8 @@ target 'wowdsgn' do
 #王云鹏自己的framework
 		pod 'PonyFrameworkOnSwift',:path => "PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec"
 		pod 'wow-vendor-ui',:path => "wow-vendor-ui/wow-vendor-ui.podspec"
-		pod 'wow3rd',:path => "wow3rd/wow3rd.podspec"
+		# pod 'wow3rd',:path => "wow3rd/wow3rd.podspec"
+		pod 'WowThird',:path => "WowThird/WowThird.podspec"
 
   #  pod 'wow-model-network',	 :path => "wow-model-network/wow-model-network.podspec"
 #    pod 'wow-ui',							 :path => "wow-ui/wow-ui.podspec"
@@ -114,11 +115,11 @@ end
 
 
 
-post_install do |installer|
-    installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
-        configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
-    end
-end
+#post_install do |installer|
+#    installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
+#        configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
+#    end
+#end
 
 # post_install do |installer|
 #   installer.pods_project.targets.each do |target|

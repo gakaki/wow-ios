@@ -1,0 +1,33 @@
+PODS:
+  - Alamofire (4.2.0)
+  - LeanCloud (10.0.0):
+    - LeanCloud/Storage (= 10.0.0)
+  - LeanCloud/Storage (10.0.0):
+    - Alamofire (~> 4.2.0)
+  - UMengAnalytics-NO-IDFA (4.1.5)
+  - URLNavigator (1.1.1)
+  - WebViewBridge.Swift (1.1)
+  - WowThird (0.1.0):
+    - LeanCloud
+    - URLNavigator
+    - WebViewBridge.Swift
+
+DEPENDENCIES:
+  - UMengAnalytics-NO-IDFA
+  - WowThird (from `../`)
+
+EXTERNAL SOURCES:
+  WowThird:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  LeanCloud: 0a6a0d52e33dd43d998ab256cc83f6c4954607b8
+  UMengAnalytics-NO-IDFA: f1b08b540eba6ebad044a574cae6d988cf40cfda
+  URLNavigator: 2ec64d7ade7fa11032e57776ab826a8631377301
+  WebViewBridge.Swift: 71939acb109b0aad6300e7196189b8f55107f58d
+  WowThird: f1526420f8b6f97634fda75e8ac7a0efb6aa381a
+
+PODFILE CHECKSUM: d0ada1841fac3de8f261b8868fd02c4340e9c617
+
+COCOAPODS: 1.2.0.beta.1

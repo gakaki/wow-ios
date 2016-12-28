@@ -7,9 +7,9 @@
 //
 
 import UIKit
+
 //import UserNotifications
 //import UserNotificationsUI
-import wow3rd
 
 
 public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UIApplicationDelegate  {

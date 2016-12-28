@@ -1,5 +1,4 @@
 import UIKit
-import wow3rd
 import SafariServices
 
 public class RouterRule {

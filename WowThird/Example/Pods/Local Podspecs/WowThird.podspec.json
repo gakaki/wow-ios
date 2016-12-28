@@ -1,0 +1,64 @@
+{
+  "name": "WowThird",
+  "version": "0.1.0",
+  "summary": "WowThird 第三方库",
+  "description": "WowThird 第三方库 POD",
+  "homepage": "https://github.com/gakaki/WowThird",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gakaki": "gakaki@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/gakaki/WowThird.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": [
+    "WowThird/Classes/**/*",
+    "WowThird/lib_frameworks/**/*.h"
+  ],
+  "public_header_files": "WowThird/lib_frameworks/**/*.h",
+  "frameworks": [
+    "CFNetwork",
+    "QuartzCore",
+    "CoreMotion",
+    "UIKit",
+    "CoreTelephony",
+    "SystemConfiguration",
+    "ImageIO",
+    "CoreData",
+    "Security",
+    "AdSupport",
+    "Foundation",
+    "CoreLocation"
+  ],
+  "weak_frameworks": "UserNotifications",
+  "libraries": [
+    "z",
+    "c++",
+    "sqlite3",
+    "icucore",
+    "stdc++"
+  ],
+  "vendored_libraries": "WowThird/lib_frameworks/**/*.a",
+  "vendored_frameworks": "WowThird/lib_frameworks/**/*.framework",
+  "xcconfig": {
+    "OTHER_LDFLAGS": "-ObjC -all_load -force_load"
+  },
+  "dependencies": {
+    "URLNavigator": [
+
+    ],
+    "WebViewBridge.Swift": [
+
+    ],
+    "LeanCloud": [
+
+    ]
+  }
+}

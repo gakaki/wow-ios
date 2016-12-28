@@ -9,7 +9,6 @@
 
 //VCManager is collect the redirect code
 import UIKit
-import wow3rd
 import WowShare
  
 public class VCRedirect {

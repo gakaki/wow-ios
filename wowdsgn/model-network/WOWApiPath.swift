@@ -221,6 +221,9 @@ let URL_OrderList               = "v1/order/get"
 
 let URL_OrderStatus             = "v1/order/setstatus" //状态客户端操作之后加上去
 
+// 8.筛选页面
 
-
+let URL_ScreenMain              = "product/searchProperty"
+let URL_ScreenPrice             = "category/price-ranges"
+let URL_ScreenResult            = "product/condition"
 

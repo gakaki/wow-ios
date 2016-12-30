@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="105" id="KGk-i7-Jjw" customClass="SVColorCell" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jU4-dj-Prs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="105" id="Dz0-dJ-Cdk"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ink-UC-9xr">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jU4-dj-Prs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="3af-Cl-uLU"/>
+                    <constraint firstAttribute="trailing" secondItem="jU4-dj-Prs" secondAttribute="trailing" id="ICf-Fp-0Fa"/>
+                    <constraint firstItem="jU4-dj-Prs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Uqr-Tp-3LM"/>
+                    <constraint firstItem="jU4-dj-Prs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YHb-9R-kFQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionView" destination="jU4-dj-Prs" id="hg8-2Q-tHJ"/>
+                <outlet property="collectionViewHeight" destination="Dz0-dJ-Cdk" id="7PE-UT-wjp"/>
+            </connections>
+            <point key="canvasLocation" x="235" y="53.5"/>
+        </tableViewCell>
+    </objects>
+</document>

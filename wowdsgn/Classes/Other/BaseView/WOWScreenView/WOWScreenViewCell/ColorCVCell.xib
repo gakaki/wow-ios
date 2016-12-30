@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ColorCVCell" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5t-F5-wk1">
+                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="C5t-F5-wk1" secondAttribute="trailing" id="2Vd-eB-0jC"/>
+                <constraint firstAttribute="bottom" secondItem="C5t-F5-wk1" secondAttribute="bottom" id="Jbd-mc-D43"/>
+                <constraint firstItem="C5t-F5-wk1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="NWH-2f-dBo"/>
+                <constraint firstItem="C5t-F5-wk1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XYU-7j-JE5"/>
+            </constraints>
+            <connections>
+                <outlet property="imgColor" destination="C5t-F5-wk1" id="bZj-N5-Qjk"/>
+            </connections>
+            <point key="canvasLocation" x="126" y="155"/>
+        </collectionViewCell>
+    </objects>
+</document>

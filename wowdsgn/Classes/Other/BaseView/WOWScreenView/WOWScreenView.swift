@@ -280,18 +280,13 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
         case 2:
             return styleArr.count
         case 0:
-            if colorArr.count > 0 {
-                return 1
-            }else {
-                return 0
-            }
+            
+            return colorArr.count > 0 ? 1 : 0
         
         case 1:
-            if priceArr.count > 0 {
-                return 1
-            }else {
-                return 0
-            }
+            
+            return priceArr.count > 0 ? 1 : 0
+            
 
         case 3:
             return sceneArr.count

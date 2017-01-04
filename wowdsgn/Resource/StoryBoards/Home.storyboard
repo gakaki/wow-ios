@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="TR4-mJ-1qI">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="TR4-mJ-1qI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -232,6 +232,78 @@
             </objects>
             <point key="canvasLocation" x="1139" y="1592"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="ORA-Se-vzd">
+            <objects>
+                <viewController storyboardIdentifier="WOWWebViewController" id="dbB-0z-XBe" customClass="WOWWebViewController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gim-uK-JRn"/>
+                        <viewControllerLayoutGuide type="bottom" id="444-7W-idp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CCi-LY-To2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TuG-FD-1R2">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7L-Ei-d3F">
+                                        <rect key="frame" x="22" y="12" width="25" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="nav_backArrow"/>
+                                        <connections>
+                                            <action selector="goBackClick:" destination="dbB-0z-XBe" eventType="touchUpInside" id="Lgc-4S-YwV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsr-Y6-ajf">
+                                        <rect key="frame" x="49" y="12" width="25" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="forward"/>
+                                        <connections>
+                                            <action selector="goFormatClick:" destination="dbB-0z-XBe" eventType="touchUpInside" id="Ut3-eJ-4pL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pd-53-5xy">
+                                        <rect key="frame" x="273" y="10" width="25" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="reload"/>
+                                        <connections>
+                                            <action selector="reloadClick:" destination="dbB-0z-XBe" eventType="touchUpInside" id="7M3-3H-9BA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPB-mV-sIm">
+                                        <rect key="frame" x="336" y="10" width="25" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="icon_share"/>
+                                        <connections>
+                                            <action selector="shareClick:" destination="dbB-0z-XBe" eventType="touchUpInside" id="nfF-1I-x6p"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8hg-WA-Jad"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="444-7W-idp" firstAttribute="top" secondItem="TuG-FD-1R2" secondAttribute="bottom" id="4wI-MC-2GB"/>
+                            <constraint firstItem="TuG-FD-1R2" firstAttribute="leading" secondItem="CCi-LY-To2" secondAttribute="leading" id="5C0-qn-pxu"/>
+                            <constraint firstAttribute="trailing" secondItem="TuG-FD-1R2" secondAttribute="trailing" id="w4d-RH-ZTY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="goBackBtn" destination="I7L-Ei-d3F" id="aqf-6O-8W2"/>
+                        <outlet property="goFormatBtn" destination="Nsr-Y6-ajf" id="kzg-BW-2Jr"/>
+                        <outlet property="reloadBtn" destination="0Pd-53-5xy" id="qiN-X1-GmC"/>
+                        <outlet property="shareBtn" destination="kPB-mV-sIm" id="Gly-92-pAz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="34E-ub-FXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1540.5" y="1679.5"/>
+        </scene>
         <!--Base ModuleVC-->
         <scene sceneID="h3E-cb-fyL">
             <objects>
@@ -369,7 +441,7 @@
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWAuthorCell" rowHeight="117" id="nGH-pF-T2j" customClass="WOWAuthorCell" customModule="wowdsgn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="117"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nGH-pF-T2j" id="dq8-W0-doG">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
@@ -520,9 +592,12 @@
     </scenes>
     <resources>
         <image name="closeNav" width="40" height="32"/>
+        <image name="forward" width="9" height="16"/>
         <image name="icon_like" width="30" height="30"/>
         <image name="icon_like_hightlighted" width="30" height="30"/>
         <image name="icon_share" width="30" height="30"/>
+        <image name="nav_backArrow" width="9" height="16"/>
+        <image name="reload" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

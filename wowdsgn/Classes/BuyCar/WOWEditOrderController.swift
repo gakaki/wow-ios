@@ -49,6 +49,7 @@ class WOWEditOrderController: WOWBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     //MARK: - lazy
+    //支付方式
     lazy var backView:WOWPayBackView = {
         let v = WOWPayBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
         v.payView.delegate = self

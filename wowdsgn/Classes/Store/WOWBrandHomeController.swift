@@ -17,15 +17,15 @@ class WOWBrandHomeController: WOWBaseViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var likeButton: UIButton!
     
-    var dataArr = [WOWProductModel]()
-    var brandID : Int?
-    var brandModel : WOWBrandV1Model?
-    var designerId : Int?
-    var designerModel : WOWDesignerModel?
-    var labelHeight : CGFloat?
-    let pageSize = 10
+    var dataArr = [WOWProductModel]()   //产品数组列表
+    var brandID : Int?                  //品牌ID
+    var brandModel : WOWBrandV1Model?   //品牌model
+    var designerId : Int?               //设计师ID
+    var designerModel : WOWDesignerModel?   //设计师model
+    var labelHeight : CGFloat?          //简介高度
+    let pageSize = 10                   //分页数据大小
     
-    public var entrance = brandOrDesignerEntrance.brandEntrance
+    public var entrance = brandOrDesignerEntrance.brandEntrance     //入口
     
     fileprivate var shareBrandImage:UIImage? //供分享使用
     lazy var placeImageView:UIImageView={  //供分享使用
@@ -99,16 +99,17 @@ class WOWBrandHomeController: WOWBaseViewController {
 
      
     }
+    
+    //初始化产品列表
     func configCollectionView(){
         collectionView.mj_header = self.mj_header
         collectionView.mj_footer = self.mj_footer
         collectionView.collectionViewLayout = self.layout
         collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
-//        WOWBorderColor(collectionView)
 
         collectionView.register(UINib.nibName(String(describing: WOWBrandHeaderView.self)), forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
-    
+    //初始化分享数据
     func configBrandData(){
         let url =  URL(string:(brandModel?.image) ?? "")
         if  let url = url {
@@ -155,7 +156,6 @@ class WOWBrandHomeController: WOWBaseViewController {
                 sender.isSelected = isFavorite ?? false
 
           })
-//            requestFavoriteBrand()
             
         case .designerEntrance:
             WOWClickLikeAction.requestFavoriteDesigner(designerId:designerId ?? 0 , view: self.view, btn: sender, isFavorite: { (isFavorite) in
@@ -164,11 +164,11 @@ class WOWBrandHomeController: WOWBaseViewController {
                 
             })
            
-//            requestFavoriteDesigner()
             
         }
 
     }
+    //分享
     @IBAction func shareButton(_ sender: UIButton) {
         switch entrance {
         case .brandEntrance:
@@ -346,19 +346,19 @@ class WOWBrandHomeController: WOWBaseViewController {
         
     }
     
-    //用户喜欢某个品牌
-    func requestFavoriteBrand()  {
-        
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandID ?? 0), successClosure: { [weak self](result, code) in
-            if let strongSelf = self{
-                strongSelf.likeButton.isSelected = !strongSelf.likeButton.isSelected
-                 NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-            }
-        }) { (errorMsg) in
-            
-            
-        }
-    }
+//    //用户喜欢某个品牌
+//    func requestFavoriteBrand()  {
+//        
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandID ?? 0), successClosure: { [weak self](result, code) in
+//            if let strongSelf = self{
+//                strongSelf.likeButton.isSelected = !strongSelf.likeButton.isSelected
+//                 NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+//            }
+//        }) { (errorMsg) in
+//            
+//            
+//        }
+//    }
     //用户是否喜欢某设计师
     func requestIsFavoriteDesigner() {
         WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteDesigner(designerId: designerId ?? 0), successClosure: {[weak self] (result, code) in
@@ -374,19 +374,19 @@ class WOWBrandHomeController: WOWBaseViewController {
         
     }
     
-    //用户喜欢某个设计师
-    func requestFavoriteDesigner()  {
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId ?? 0), successClosure: { [weak self](result, code) in
-            if let strongSelf = self{
-                strongSelf.likeButton.isSelected = !strongSelf.likeButton.isSelected
-                 NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-            }
-        }) { (errorMsg) in
-            
-            
-        }
-    }
-    
+//    //用户喜欢某个设计师
+//    func requestFavoriteDesigner()  {
+//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId ?? 0), successClosure: { [weak self](result, code) in
+//            if let strongSelf = self{
+//                strongSelf.likeButton.isSelected = !strongSelf.likeButton.isSelected
+//                 NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
+//            }
+//        }) { (errorMsg) in
+//            
+//            
+//        }
+//    }
+//    
    
     
 }
@@ -446,16 +446,7 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
     }
 }
 
-//extension WOWBrandHomeController: WOWGoodsSmallCellDelegate {
-//    func likeClick(productId: Int) {
-//        if WOWUserManager.loginStatus{
-////            strongSelf.goUserInfo()
-////            requestFavoriteProduct(productId)
-//        }else{
-//            toLoginVC(true)
-//        }
-//    }
-//}
+
 
 extension WOWBrandHomeController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
@@ -478,23 +469,7 @@ extension WOWBrandHomeController: brandHeaderViewDelegate {
         
     }
 }
-//extension WOWBrandHomeController:WOWActionDelegate{
-//    func itemAction(tag: Int) {
-//        switch tag {
-//        case WOWItemActionType.Like.rawValue:
-//            DLog("喜欢")
-//        case WOWItemActionType.Share.rawValue:
-//            WOWShareManager.share(brandModel?.name, shareText:brandModel?.desc, url:brandModel?.url,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
-//        case WOWItemActionType.Brand.rawValue:
-//            let vc = UIStoryboard.initialViewController("Store", identifier:String(WOWBrandDetailController)) as! WOWBrandDetailController
-//            vc.brandModel = brandModel!
-//            vc.modalTransitionStyle = .CrossDissolve
-//            presentViewController(vc, animated: true, completion: nil)
-//        default:
-//            break
-//        }
-//    }
-//}
+
 
 
     

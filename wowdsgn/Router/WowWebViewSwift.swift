@@ -6,6 +6,10 @@ import WebViewBridge_Swift
 public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavigationDelegate {
     
     public var bridge:ZHWebViewBridge!
+    @IBOutlet weak var goBackBtn: UIButton!
+    @IBOutlet weak var goFormatBtn: UIButton!
+    @IBOutlet weak var reloadBtn: UIButton!
+    @IBOutlet weak var shareBtn: UIButton!
 
     public let webView: WKWebView = {
         let webConfiguration    = WKWebViewConfiguration()
@@ -87,7 +91,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         
         navigationItem.title = "尖叫设计"
         
-        webView.frame       = self.view.bounds
+        webView.frame       = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight - 114)
         view.addSubview(webView)
         webView.navigationDelegate  = self
         
@@ -106,7 +110,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        webView.frame = self.view.bounds
+        webView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight - 114)
     }
 
     
@@ -152,6 +156,24 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
             })
             return (true, nil)
         }
+    }
+    
+    //MARMK: -- Action
+    @IBAction func goBackClick(_ sender: UIButton) {
+        // 获取webView当前加载的页面的数量，可以判断是否在首页，解决无法返回的问题
+        if webView.canGoBack {
+            webView.goBack()
+        }else {
+        }
+    }
+    @IBAction func goFormatClick(_ sender: UIButton) {
+        webView.goForward()
+    }
+    @IBAction func reloadClick(_ sender: UIButton) {
+        webView.reload()
+    }
+    @IBAction func shareClick(_ sender: UIButton) {
+        
     }
    
 }

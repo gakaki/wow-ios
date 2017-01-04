@@ -151,7 +151,6 @@
 		069D32691DB47ADD00A059D0 /* WOWGoodsBuyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069D306D1DB47ADC00A059D0 /* WOWGoodsBuyView.xib */; };
 		069D326B1DB47ADD00A059D0 /* WOWGoodsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D306F1DB47ADC00A059D0 /* WOWGoodsDetailCell.swift */; };
 		069D326C1DB47ADD00A059D0 /* WOWGoodsDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069D30701DB47ADC00A059D0 /* WOWGoodsDetailCell.xib */; };
-		069D326D1DB47ADD00A059D0 /* WOWGoodsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D30711DB47ADC00A059D0 /* WOWGoodsDetailController.swift */; };
 		069D326E1DB47ADD00A059D0 /* WOWGoodsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D30721DB47ADC00A059D0 /* WOWGoodsModel.swift */; };
 		069D32711DB47ADD00A059D0 /* WOWGoodsSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D30751DB47ADC00A059D0 /* WOWGoodsSmallCell.swift */; };
 		069D32721DB47ADD00A059D0 /* WOWGoodsSmallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069D30761DB47ADC00A059D0 /* WOWGoodsSmallCell.xib */; };
@@ -181,7 +180,6 @@
 		069D32901DB47ADD00A059D0 /* WOWSearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D30941DB47ADC00A059D0 /* WOWSearchResultController.swift */; };
 		069D32911DB47ADD00A059D0 /* WOWStoreBrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D30951DB47ADC00A059D0 /* WOWStoreBrandCell.swift */; };
 		069D32921DB47ADD00A059D0 /* WOWStoreBrandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069D30961DB47ADC00A059D0 /* WOWStoreBrandCell.xib */; };
-		069D32931DB47ADD00A059D0 /* WOWStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D30971DB47ADC00A059D0 /* WOWStoreController.swift */; };
 		069D32941DB47ADD00A059D0 /* WOWStoreSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D30981DB47ADC00A059D0 /* WOWStoreSectionView.swift */; };
 		069D32951DB47ADD00A059D0 /* WOWStoreSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069D30991DB47ADC00A059D0 /* WOWStoreSectionView.xib */; };
 		069D32961DB47ADD00A059D0 /* WOWCommentImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D309A1DB47ADC00A059D0 /* WOWCommentImageCell.swift */; };
@@ -672,7 +670,6 @@
 		069D306D1DB47ADC00A059D0 /* WOWGoodsBuyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWGoodsBuyView.xib; sourceTree = "<group>"; };
 		069D306F1DB47ADC00A059D0 /* WOWGoodsDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGoodsDetailCell.swift; sourceTree = "<group>"; };
 		069D30701DB47ADC00A059D0 /* WOWGoodsDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWGoodsDetailCell.xib; sourceTree = "<group>"; };
-		069D30711DB47ADC00A059D0 /* WOWGoodsDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGoodsDetailController.swift; sourceTree = "<group>"; };
 		069D30721DB47ADC00A059D0 /* WOWGoodsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGoodsModel.swift; sourceTree = "<group>"; };
 		069D30751DB47ADC00A059D0 /* WOWGoodsSmallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGoodsSmallCell.swift; sourceTree = "<group>"; };
 		069D30761DB47ADC00A059D0 /* WOWGoodsSmallCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWGoodsSmallCell.xib; sourceTree = "<group>"; };
@@ -702,7 +699,6 @@
 		069D30941DB47ADC00A059D0 /* WOWSearchResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchResultController.swift; sourceTree = "<group>"; };
 		069D30951DB47ADC00A059D0 /* WOWStoreBrandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWStoreBrandCell.swift; sourceTree = "<group>"; };
 		069D30961DB47ADC00A059D0 /* WOWStoreBrandCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWStoreBrandCell.xib; sourceTree = "<group>"; };
-		069D30971DB47ADC00A059D0 /* WOWStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWStoreController.swift; sourceTree = "<group>"; };
 		069D30981DB47ADC00A059D0 /* WOWStoreSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWStoreSectionView.swift; sourceTree = "<group>"; };
 		069D30991DB47ADC00A059D0 /* WOWStoreSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWStoreSectionView.xib; sourceTree = "<group>"; };
 		069D309A1DB47ADC00A059D0 /* WOWCommentImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCommentImageCell.swift; sourceTree = "<group>"; };
@@ -1973,12 +1969,10 @@
 			children = (
 				069D30621DB47ADC00A059D0 /* WOWBrandHomeController.swift */,
 				069D30631DB47ADC00A059D0 /* WOWBrandListController.swift */,
-				069D30711DB47ADC00A059D0 /* WOWGoodsDetailController.swift */,
 				069D307F1DB47ADC00A059D0 /* WOWProductDetailController+Add.swift */,
 				069D30801DB47ADC00A059D0 /* WOWProductDetailController.swift */,
 				63F3DA891DE6C2BD009CE52D /* WOWProductCommentController.swift */,
 				069D30941DB47ADC00A059D0 /* WOWSearchResultController.swift */,
-				069D30971DB47ADC00A059D0 /* WOWStoreController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2754,7 +2748,6 @@
 				069D32771DB47ADD00A059D0 /* WOWProductDetailAboutCell.swift in Sources */,
 				069D32511DB47ADD00A059D0 /* WOWDropMenuView.swift in Sources */,
 				069D326E1DB47ADD00A059D0 /* WOWGoodsModel.swift in Sources */,
-				069D32931DB47ADD00A059D0 /* WOWStoreController.swift in Sources */,
 				069D33261DB47ADE00A059D0 /* TagListView.swift in Sources */,
 				069D32EB1DB47ADD00A059D0 /* WOWShareManager.swift in Sources */,
 				069D31AA1DB47ADD00A059D0 /* WOWBuyCarEmpty.swift in Sources */,
@@ -2810,7 +2803,6 @@
 				069D32341DB47ADD00A059D0 /* WOWIntroduceController.swift in Sources */,
 				069D31D01DB47ADD00A059D0 /* WOWFavDesigner.swift in Sources */,
 				069D31C21DB47ADD00A059D0 /* WOWSelectPayView.swift in Sources */,
-				069D326D1DB47ADD00A059D0 /* WOWGoodsDetailController.swift in Sources */,
 				069D33231DB47ADE00A059D0 /* TagCellLayout.swift in Sources */,
 				069D32621DB47ADD00A059D0 /* WOWBrandTopView.swift in Sources */,
 				2D764FE51DD06974008D6746 /* WOWCheckUpdate.swift in Sources */,

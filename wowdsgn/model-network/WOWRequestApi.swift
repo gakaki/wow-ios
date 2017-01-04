@@ -35,6 +35,11 @@ public enum RequestApi{
     case api_Found_Main
     case api_Found_2nd
     
+    //筛选 页面
+    case Api_Screen_Main(categoryId:Int)
+    case Api_Screen_Price(categoryId:Int)
+    
+    
     //module 页面 发现 页面 新
     case api_Module_Page2
     
@@ -452,7 +457,12 @@ extension RequestApi:TargetType{
             return URL_Found_Main
         case .api_Found_2nd:
             return URL_Found_2nd
-       
+        // 筛选
+        case .Api_Screen_Main:
+            return URL_ScreenMain
+        case .Api_Screen_Price:
+            return URL_ScreenPrice
+            
         case .api_Coupons:
             return URL_Coupons
         case .api_GetCoupon:
@@ -510,7 +520,9 @@ extension RequestApi:TargetType{
             .api_CartBottomList,
             .api_ProductGroupTop,
             .api_ProductGroupList,
-            .api_ProductsOfCoupon:
+            .api_ProductsOfCoupon,
+            .Api_Screen_Main,
+            .Api_Screen_Price:
 
             return .GET
 
@@ -691,7 +703,11 @@ extension RequestApi:TargetType{
                 params = param!
             case .api_Module_Page2:
                 params = ["pageId":2, "region":1]
-
+            // 筛选
+            case let .Api_Screen_Main(categoryId):
+                params = ["categoryId":categoryId]
+            case let .Api_Screen_Price(categoryId):
+                params = ["categoryId":categoryId]
             case .api_Found_2nd:
                 break
             case .api_Found_Main:

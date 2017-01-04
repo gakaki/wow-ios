@@ -12,6 +12,15 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     var query_sortBy        = 1
     var query_categoryId    = 16
     
+    var screenView : WOWScreenView!
+    /* 筛选条件 */
+    var screenColorArr     = [String]()
+    var screenStyleArr     = [String]()
+    var screenPriceArr     = Dictionary<String, AnyObject>()
+    var screenScreenArr    = [String]()
+    
+    
+    
     var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 2
@@ -60,6 +69,8 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         addObserver()
         edgesForExtendedLayout = UIRectEdge()
         
+
+        
         let frame = CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight - 210)
         cv = UICollectionView(frame: frame, collectionViewLayout: self.layout)
         cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
@@ -82,7 +93,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         cv.emptyDataSetDelegate             = self;
  
         view.addSubview(cv)
-        
+        configScreeningView()
 //        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
 //        self.mj_footer.setTitle("", forState: MJRefreshState.Refreshing)
 //        self.mj_footer.setTitle("", forState: MJRefreshState.Pulling)
@@ -234,4 +245,45 @@ extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource
     }
 
     
+}
+extension VCCategoryProducts{
+    //MARK:筛选界面
+    func configScreeningView()  {
+        screenView = WOWScreenView(frame:CGRect(x: ScreenViewConfig.frameX,y: 0,width: MGScreenWidth - ScreenViewConfig.frameX,height: MGScreenHeight))
+        
+        screenView.screenAction = {[unowned self] (dic) in
+            print(dic)
+            let dicResult = dic as! [String:AnyObject]
+            if dicResult["colorList"] != nil {
+                self.screenColorArr  = dicResult["colorList"] as! [String]
+            }
+            if dicResult["priceObj"] != nil {
+                self.screenPriceArr  = dicResult["priceObj"] as! Dictionary
+            }
+            
+            if dicResult["styleList"] != nil {
+                self.screenStyleArr  = dicResult["styleList"] as! [String]
+            }
+            
+            if dicResult["sceneList"] != nil {
+                self.screenScreenArr  = dicResult["sceneList"] as! [String]
+            }
+
+            self.request()
+        }
+        
+        let img = UIImageView()
+        img.image = UIImage.init(named: "screen")
+        img.addTapGesture(action: {[weak self] (tap) in
+            if let strongSelf = self{
+                
+                strongSelf.screenView.showInView(view: UIApplication.shared.keyWindow!)
+            }
+        })
+        self.view.addSubview(img)
+        img.snp.makeConstraints { (make) in
+            make.width.height.equalTo(48)
+            make.right.bottom.equalTo(-30)
+        }
+    }
 }

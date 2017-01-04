@@ -52,6 +52,9 @@ let WOWUpdateOrderListAllNotificationKey  = "WOWUpdateOrderListAllNotificationKe
 //更新专题点赞数
 let WOWUpdateProjectThumbNotificationKey  = "WOWUpdateProjectThumbNotificationKey"
 
+//更新筛选条件
+let WOWUpdateScreenConditionsKey  = "WOWUpdateProjectThumbNotificationKey"
+
 let WOWEmptyNetWorkText  = "网络错误"
 
 let WOWEmptyNoDataText   = "暂无数据"

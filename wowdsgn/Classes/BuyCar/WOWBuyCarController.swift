@@ -11,8 +11,8 @@ import UIKit
 class WOWBuyCarController: WOWBaseViewController {
     let cellNormalID = String(describing: WOWBuyCarNormalCell.self)
     let cellID = String(describing: WOWOrderCell.self)
-    fileprivate var totalPrice      : String?
-    let pageSize           = 10
+//    fileprivate var totalPrice      : String?
+    let pageSize           = 10 //分页每页拉取数据
     var bottomListCount    = 0 // 底部数组个数
     var bottomCellLine     = 0 // 底部cell number
     var bottomListArray    = [WOWProductModel](){//底部列表数组 ,如果有底部瀑布流的话
@@ -23,7 +23,7 @@ class WOWBuyCarController: WOWBaseViewController {
         }
     }
 
-    
+    //购物车中全部商品数组
     var dataArr = [WOWCarProductModel](){
         didSet{
             /**
@@ -65,7 +65,7 @@ class WOWBuyCarController: WOWBaseViewController {
             
             //计算价钱
                 let result = WOWCalPrice.calTotalPrice(prices,counts:counts)
-                totalPrice = result
+//                totalPrice = result
                 totalPriceLabel.text = result
             
 

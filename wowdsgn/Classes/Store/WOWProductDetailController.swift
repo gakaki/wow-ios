@@ -16,13 +16,13 @@ protocol UpdateBuyCarListDelegate:class {
 class WOWProductDetailController: WOWBaseViewController {
     weak var delegate:UpdateBuyCarListDelegate?
     //Param
-    var productId                       : Int?
-    var productModel                    : WOWProductModel?
-    var productSpecModel                : WOWProductSpecModel?
-    var aboutProductArray               = [WOWProductModel]()
+    var productId                       : Int?                  //产品id
+    var productModel                    : WOWProductModel?      //产品model
+    var productSpecModel                : WOWProductSpecModel?  //产品规格model
+    var aboutProductArray               = [WOWProductModel]()   //相关商品数组
     //商品促销信息
-    var promotionTag                : String?
-    var promotionTime               : String?
+    var promotionTag                : String?                   //促销tag
+    var promotionTime               : String?                   //促销时间
     var commentList = [WOWProductCommentModel]() //评论列表
     
     var noMoreData                      :Bool = true
@@ -123,6 +123,7 @@ class WOWProductDetailController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         configTable()
+        cycleView.delegate = self
         //        buyCarCount()
     }
 
@@ -219,7 +220,7 @@ class WOWProductDetailController: WOWBaseViewController {
         
         
     }
-    
+    //初始化尺寸。重量
     fileprivate func configParameter() {
         if productModel?.productParameter?.count > 0 {
             let sizeParam = WOWParameter.init(parameterShowName: "尺寸", parameterValue: productSpec.productSize(productInfo: productModel!))
@@ -228,7 +229,7 @@ class WOWProductDetailController: WOWBaseViewController {
             productModel?.productParameter?.insert(netWeightParam, at: 1)
         }
     }
-    
+    //选完规格重新刷新商品尺寸、重量
     fileprivate func refreshParameter() {
         if productModel?.productParameter?.count > 0 {
             let sizeParam = WOWParameter.init(parameterShowName: "尺寸", parameterValue: productSpec.productSize(productInfo: productModel!))
@@ -240,8 +241,8 @@ class WOWProductDetailController: WOWBaseViewController {
     
     fileprivate func configBanner() {
         if imgUrlArr.count >= 1 {
+            //当前主品放到轮播的第一个
             cycleView.imageURLArray = imgUrlArr
-            cycleView.delegate = self
             placeImageView.kf.setImage(
                 with: URL(string:imgUrlArr[0] ) ?? URL(string: "placeholder_product"),
                 placeholder: nil,
@@ -280,7 +281,6 @@ class WOWProductDetailController: WOWBaseViewController {
     //MARK:更新角标
     func updateCarBadge(_ carCount: Int){
         WOWUserManager.userCarCount += carCount
-        //        buyCarCount()
         NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
         
     }

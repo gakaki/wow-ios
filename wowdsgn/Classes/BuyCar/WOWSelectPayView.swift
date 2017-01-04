@@ -103,6 +103,7 @@ class WOWSelectPayView: UIView {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var alipayButton: UIButton!
     @IBOutlet weak var weixinButton: UIButton!
+    @IBOutlet weak var cmbButton: UIButton!
     
     weak var delegate: selectPayDelegate?
     var channel: String! //支付方式
@@ -116,6 +117,7 @@ class WOWSelectPayView: UIView {
             return
         }
         weixinButton.isSelected = false
+        cmbButton.isSelected = false
         alipayButton.isSelected = true
         channel = "alipay"
     }
@@ -127,8 +129,21 @@ class WOWSelectPayView: UIView {
             return
         }
         alipayButton.isSelected = false
+        cmbButton.isSelected = false
         weixinButton.isSelected = true
         channel = "wx"
+    }
+    
+    @IBAction func cmbClick(_ sender: UIButton) {
+        if cmbButton.isSelected {
+            cmbButton.isSelected = false
+            channel = ""
+            return
+        }
+        alipayButton.isSelected = false
+        weixinButton.isSelected = false
+        cmbButton.isSelected = true
+        channel = "cmb_wallet"
     }
 
     @IBAction func sureClick(_ sender: UIButton) {

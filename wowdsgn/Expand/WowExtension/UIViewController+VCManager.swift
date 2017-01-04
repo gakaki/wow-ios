@@ -150,7 +150,8 @@ public class VCRedirect {
     }
     public class func toVCH5( _ url: String? ){
         
-        let vc = WOWWebViewController()
+//        let vc = WOWWebViewController()
+        let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWWebViewController.self)) as! WOWWebViewController
         if let url = url{
             vc.url = url
         }
@@ -231,19 +232,6 @@ extension  UIViewController {
         
         MobClick.e(UMengEvent.Guide_Wx_Bind)
         print("toWeixinVC")
-        
-//        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatform(withName: UMShareToWechatSession)
-//        
-//        snsPlat?.loginClickHandler(self, UMSocialControllerService.default(), true, {[weak self]response in
-//            if let strongSelf = self{
-//                if response?.responseCode == UMSResponseCodeSuccess {
-//                    
-//                    strongSelf.checkWechatToken(response?.thirdPlatformUserProfile as! NSDictionary, isPresent: isPresent)
-//                }else{
-//                    WOWHud.showMsg("授权登录失败")
-//                }
-//            }
-//        })
 
         WowShare.getAuthWithUserInfoFromWechat {[weak self] (response) in
                 if let strongSelf = self{
@@ -253,7 +241,6 @@ extension  UIViewController {
                     }else{
                         WOWHud.showMsg("授权登录失败")
                     }
-//                    let userInfo: UMSocialUserInfoResponse = response as! UMSocialUserInfoResponse
             
                     print(response)
 

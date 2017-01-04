@@ -164,58 +164,56 @@ class WOWBaseModuleVC: WOWBaseViewController {
 //    //点击跳转
     func goController(_ model: WOWCarouselBanners) {
         if let bannerLinkType = model.bannerLinkType {
-            switch bannerLinkType {
-            case 1:
-                let vc = WOWWebViewController()
+//            switch bannerLinkType {
+//            case 1:
                 if let url = model.bannerLinkUrl{
-                    vc.url = url
+                    VCRedirect.toVCH5("https://www.baidu.com")
+
                 }
-                
-                navigationController?.pushViewController(vc, animated: true)
-                print("web后台填连接")
-            case 2:
-                print("专题详情页（商品列表）")
-            case 3:
-                print("专题详情页（图文混排）")
-            case 4:
-                print("品牌详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
-                vc.brandID = model.bannerLinkTargetId
-                vc.entrance = .brandEntrance
-                vc.hideNavigationBar = true
-                navigationController?.pushViewController(vc, animated: true)
-                
-            case 5:
-                print("设计师详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
-                vc.designerId = model.bannerLinkTargetId
-                vc.entrance = .designerEntrance
-                vc.hideNavigationBar = true
-                navigationController?.pushViewController(vc, animated: true)
-            case 6:
-                print("商品详情页")
-                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
-                vc.hideNavigationBar = true
-                vc.productId = model.bannerLinkTargetId
-                navigationController?.pushViewController(vc, animated: true)
-                
-            case 7:
-                print("分类详情页")
-                
-            case 8:// 专题详情
-                toVCTopic(model.bannerLinkTargetId ?? 0)
-                print("场景还是专题")
-            case 9:// 专题详情
-                
-                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
-            case 10:// 分组产品列表
-                
+
+//            case 2:
+//                print("专题详情页（商品列表）")
+//            case 3:
+//                print("专题详情页（图文混排）")
+//            case 4:
+//                print("品牌详情页")
+//                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
+//                vc.brandID = model.bannerLinkTargetId
+//                vc.entrance = .brandEntrance
+//                vc.hideNavigationBar = true
+//                navigationController?.pushViewController(vc, animated: true)
+//                
+//            case 5:
+//                print("设计师详情页")
+//                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
+//                vc.designerId = model.bannerLinkTargetId
+//                vc.entrance = .designerEntrance
+//                vc.hideNavigationBar = true
+//                navigationController?.pushViewController(vc, animated: true)
+//            case 6:
+//                print("商品详情页")
+//                let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
+//                vc.hideNavigationBar = true
+//                vc.productId = model.bannerLinkTargetId
+//                navigationController?.pushViewController(vc, animated: true)
+//                
+//            case 7:
+//                print("分类详情页")
+//                
+//            case 8:// 专题详情
+//                toVCTopic(model.bannerLinkTargetId ?? 0)
+//                print("场景还是专题")
+//            case 9:// 专题详情
+//                
 //                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
-                goToProductGroup(model.bannerLinkTargetId ?? 0)
-                
-            default:
-                print("其他")
-            }
+//            case 10:// 分组产品列表
+//                
+////                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
+//                goToProductGroup(model.bannerLinkTargetId ?? 0)
+//                
+//            default:
+//                print("其他")
+//            }
             
         }
         

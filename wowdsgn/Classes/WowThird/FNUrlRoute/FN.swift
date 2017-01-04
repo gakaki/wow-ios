@@ -19,7 +19,7 @@ public class FN {
     
     public class func open(url: String, modal: Bool, params: Dictionary<String, AnyObject>?) {
         let urlTmp = URL.init(string: url)
-        let key = (urlTmp?.host)! + (urlTmp?.path)!
+        let key = (urlTmp?.host ?? "") + (urlTmp?.path ?? "")
         //有注册过 && 注册的类遵循协议
         if (FNUrlMatcher.shared.urlDictionary[key] != nil && (FNUrlMatcher.fetchModuleClass(key: key) as? FNUrlRouteDelegate != nil)) {
             

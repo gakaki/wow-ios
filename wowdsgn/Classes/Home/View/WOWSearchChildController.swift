@@ -11,15 +11,55 @@ enum productEntrance {
     case searchEntrance
     case couponEntrance
 }
+
+enum ShowTypeIndex:String {
+    case New            = "score" // 当前在上新
+    case Sales          = "sales" // 当前在销量
+    case Price          = "price" // 当前在价格
+}
+enum SortType:String {
+    
+    case Asc            = "asc"     // 升序
+    case Desc           = "desc"    // 降序
+    
+}
 class WOWSearchChildController: WOWBaseViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-    var dataArr = [WOWProductModel]()
+    var dataArr = [WOWProductModel](){
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
+    var currentTypeIndex:ShowTypeIndex  = .New
+    var currentSortType:SortType        = .Asc
     //param
-    var pageVc: Int?
-    var asc: Int?
+    var pageVc: Int?{
+        didSet{
+            if pageVc == 1 {
+                currentTypeIndex = .New
+            }
+            if pageVc == 2 {
+                currentTypeIndex = .Sales
+            }
+            if pageVc == 3 {
+                currentTypeIndex = .Price
+            }
+
+        }
+    }
+    var asc: Int? {
+        didSet{
+            if asc == 1 {
+                currentSortType = .Asc
+            }
+            if asc == 0 {
+                currentSortType = .Desc
+            }
+        }
+    }
     var seoKey: String?
     var couponId: Int?
     var entrance        = productEntrance.searchEntrance
@@ -66,14 +106,21 @@ class WOWSearchChildController: WOWBaseViewController{
     }
     
     func requestSearch()  {
-        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""), successClosure: { [weak self](result, code) in
+        var params = [String: AnyObject]()
+        
+   
+        params = ["sort": currentTypeIndex.rawValue as AnyObject ,"currentPage": pageIndex as AnyObject,"pageSize":currentPageSize as AnyObject,"order":currentSortType.rawValue as AnyObject,"keyword":seoKey  as AnyObject]
+        
+//        pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""
+//            params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(params : params), successClosure: { [weak self](result, code) in
             let json = JSON(result)
             DLog(json)
             
             if let strongSelf = self {
                 strongSelf.endRefresh()
                 
-                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["products"].arrayObject)
                 if let array = arr{
                     
                     if strongSelf.pageIndex == 1{

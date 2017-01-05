@@ -10,6 +10,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     @IBOutlet weak var goFormatBtn: UIButton!
     @IBOutlet weak var reloadBtn: UIButton!
     @IBOutlet weak var shareBtn: UIButton!
+    @IBOutlet weak var progressView: UIProgressView!
 
     public let webView: WKWebView = {
         let webConfiguration    = WKWebViewConfiguration()
@@ -20,6 +21,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     public var url = ""
     
     
+    //MARK: -- delegate
     public func webView(_: WKWebView, decidePolicyFor: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
     {
         
@@ -39,10 +41,16 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     public func webView(_: WKWebView, decidePolicyFor: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void)
     {
         decisionHandler(.allow)
+        can()
 
      }
 
-  
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        progressView.setProgress(0.0, animated: false)
+        
+    }
+    
+    
     public func bridge_router(){
         
         bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in
@@ -81,6 +89,11 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
             return (false, nil)
         }
     }
+    
+    deinit {
+        webView.removeObserver(self, forKeyPath: "estimatedProgress", context: nil)
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,7 +105,8 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         navigationItem.title = "尖叫设计"
         
         webView.frame       = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight - 114)
-        view.addSubview(webView)
+        view.insertSubview(webView, belowSubview: progressView)
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         webView.navigationDelegate  = self
         
         bridge = ZHWebViewBridge.bridge(webView)
@@ -106,7 +120,6 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         let myRequest   = URLRequest(url: myURL!)
         webView.load(myRequest)
     }
-    
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -158,21 +171,50 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         }
     }
     
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if (keyPath == "estimatedProgress") {
+            progressView.isHidden = webView.estimatedProgress == 1
+            progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+        }
+    }
+    
+
     //MARMK: -- Action
     @IBAction func goBackClick(_ sender: UIButton) {
         // 获取webView当前加载的页面的数量，可以判断是否在首页，解决无法返回的问题
-        if webView.canGoBack {
-            webView.goBack()
-        }else {
-        }
+        webView.goBack()
     }
+    
     @IBAction func goFormatClick(_ sender: UIButton) {
         webView.goForward()
     }
+    
     @IBAction func reloadClick(_ sender: UIButton) {
         webView.reload()
+        
     }
+    
     @IBAction func shareClick(_ sender: UIButton) {
+        let shareUrl = url
+        WOWShareManager.share("", shareText: "", url: shareUrl)
+     
+    }
+    
+    //MARK: - method 
+    func can() {
+        if webView.canGoBack {
+            goBackBtn.setImage(UIImage.init(named: "back1"), for: .normal)
+        }else {
+            goBackBtn.setImage(UIImage.init(named: "back2"), for: .normal)
+
+        }
+        
+        if webView.canGoForward {
+            goFormatBtn.setImage(UIImage.init(named: "forward1"), for: .normal)
+        }else {
+            goFormatBtn.setImage(UIImage.init(named: "forward2"), for: .normal)
+            
+        }
         
     }
    

@@ -31,6 +31,12 @@ enum PayType {
     case payAli              //= 支付宝
     
     case payWiXin            //= 微信
+    
+    case payCmbWallet            //= 招行一网通
+    
+    case payUnionPay            //= 银联手机支付
+    
+    case payApplePay            //= ApplePay
 
 }
 protocol OrderDetailDelegate:class{
@@ -241,6 +247,8 @@ class WOWOrderDetailController: WOWBaseViewController{
                     sureOrderPay("alipay")
                 case .payWiXin:
                     sureOrderPay("wx")
+                case .payCmbWallet:
+                    sureOrderPay("cmb_wallet")
                 default:
                     WOWHud.showMsg("请选择支付方式")
                     break
@@ -545,7 +553,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 3: //运费
                 return 2
             case 4: //支付方式
-                return 2
+                return 3
             default:
                 return 1
             }
@@ -731,6 +739,8 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                         
                     case PayType.payAli:
                         cell.isClooseImageView.image = UIImage(named: "selectBig")
+//                    case PayType.payWiXin:
+//                        cell.isClooseImageView.image = UIImage(named: "selectBig")
                     default:
                         cell.isClooseImageView.image = UIImage(named: "unselectBig")
                     }
@@ -742,11 +752,29 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     switch surePayType {
                     case PayType.payWiXin:
                         cell.isClooseImageView.image = UIImage(named: "selectBig")
+//                    case PayType.payAli:
+//                        cell.isClooseImageView.image = UIImage(named: "selectBig")
                     default:
                         cell.isClooseImageView.image = UIImage(named: "unselectBig")
+        
                     }
 
                 }
+                if (indexPath as NSIndexPath).row == 2 {
+                    cell.payTypeImageView.image = UIImage(named: "cmb_wallet")
+                    cell.payTypeLabel.text      = "招行支付"
+                    switch surePayType {
+                    case PayType.payCmbWallet:
+                        cell.isClooseImageView.image = UIImage(named: "selectBig")
+                        //                    case PayType.payAli:
+                    //                        cell.isClooseImageView.image = UIImage(named: "selectBig")
+                    default:
+                        cell.isClooseImageView.image = UIImage(named: "unselectBig")
+                        
+                    }
+                    
+                }
+
                 
                 returnCell = cell
                 
@@ -923,7 +951,13 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 default:
                     self.surePayType = PayType.payWiXin
                 }
-
+            case 2:
+                switch surePayType {
+                case .payCmbWallet:
+                    self.surePayType = PayType.none
+                default:
+                    self.surePayType = PayType.payCmbWallet
+                }
             default:
                 break
             }

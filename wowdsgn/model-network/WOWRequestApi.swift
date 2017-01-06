@@ -62,7 +62,7 @@ public enum RequestApi{
     //搜索
     case api_SearchHot
     
-    case api_SearchResult(pageSize: Int, currentPage: Int, sortBy: Int, asc: Int, seoKey: String)
+    case api_SearchResult(params: [String: AnyObject])
     
     //品牌
     case api_BrandList
@@ -732,8 +732,9 @@ extension RequestApi:TargetType{
             case let .api_Topic_Products(topicId):
                 params =  ["topicId": topicId]
             
-            case let .api_SearchResult(pageSize, currentPage, sortBy, asc, seoKey):
-                params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
+            case let .api_SearchResult(param):
+                params =  param
+//                params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
             
             //推送消息
             case let .api_MessageList(msgType, pageSize, currentPage):

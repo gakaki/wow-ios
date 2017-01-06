@@ -51,6 +51,9 @@ public extension Int {
             }
             return noYesterdayTimeStr()
         } else {
+            if year < 1 {
+                return "去年"
+            }
             return "\(year)年前"
         }
     }

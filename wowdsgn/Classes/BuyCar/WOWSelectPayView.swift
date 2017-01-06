@@ -147,7 +147,7 @@ class WOWSelectPayView: UIView {
     }
 
     @IBAction func sureClick(_ sender: UIButton) {
-        if !weixinButton.isSelected && !alipayButton.isSelected{
+        if !weixinButton.isSelected && !alipayButton.isSelected && !cmbButton.isSelected{
             WOWHud.showMsg("请选择支付方式")
             return
         }

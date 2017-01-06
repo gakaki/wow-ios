@@ -43,7 +43,7 @@ target 'wowdsgn' do
 
 	pod 'VTMagic'
 	pod 'SDWebImage'
-	
+
   #	pod 'Hashids-Swift'			#短id生成
   #	pod 'StyleKit'       		暂时不用
   #	pod 'UIColor_Hex_Swift', '~> 2.1'
@@ -107,14 +107,20 @@ target 'wowdsgn' do
 
 	pod 'Pingpp/Alipay', '~> 2.2.10'
 	pod 'Pingpp/Wx', '~> 2.2.10'
-#	pod 'Pingpp/CmbWallet', '~> 2.2.10'
+	pod 'Pingpp/CmbWallet', '~> 2.2.10'
 
 
 
 end
 
 
-
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+    end
+  end
+end
 #post_install do |installer|
 #    installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
 #        configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'

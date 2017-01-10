@@ -109,4 +109,24 @@ extension String{
         return self
     }
 
+    func webp_url() -> String {
+        var res = self
+        if ( res.length <= 0 ){
+            return ""
+        }else{
+            //            res     = "\(url!)?imageMogr2/format/webp"
+            switch UIDevice.deviceType {
+            case .dt_iPhone4S,.dt_iPhone5:
+                res     = "\(self)?imageView2/0/w/500/format/webp/q/90"
+            case .dt_iPhone6:
+                res     = "\(self)?imageView2/0/w/700/format/webp/q/90"
+            case .dt_iPhone6_Plus:
+                res     = "\(self)?imageView2/0/w/900/format/webp/q/90"
+            default:
+                res     = "\(self)?imageView2/0/w/700/format/webp/q/90"
+                
+            }
+        }
+        return res
+    }
 }

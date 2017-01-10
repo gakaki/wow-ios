@@ -655,7 +655,7 @@ extension WOWGoodsBuyView {
         var productArray = skuListArr
         //由于不知道有几个规格选择，循环遍历所有规格的数组，如果某个被选中则进入判断，筛选出其他几个规格中的按钮点击状态
         for attribute in serialAttributeArr.enumerated() {
-            //为了记录有哪几个规格已选中，各种规格的选中状态，初始值都设为false
+            //为了记录有哪几个规格已选中，各种规格的选中状态，初始值都设为false，不可选中
             seributeDic[attribute.offset] = false
             let array = attribute.element.specName
             
@@ -665,7 +665,8 @@ extension WOWGoodsBuyView {
                 if spec.isSelect {
                     //如果已经选中了则状态置为true
                     seributeDic[attribute.offset] = true
-                    //创建一个字典来存某个规格下的所有自规格，为了下面做减法操作。
+                    //创建一个字典来存某个规格下的所有子规格，为了下面做减法操作。
+                    //Int用来对应每个子规格的下标顺序
                     var dic = [Int: [WOWSpecNameModel]]()
                     //index用来存放当前循环的某个规格的下标，便于在做不可点击的状态时除去这个规格
                     var index = 0

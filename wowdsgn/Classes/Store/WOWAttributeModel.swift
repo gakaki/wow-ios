@@ -69,7 +69,7 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
     
     func calImageHeight(){
         //定义NSURL对象
-        let url = NSURL(string: image ?? "")
+        let url = NSURL(string: image?.webp_url() ?? "")
         if let url = url {
             DispatchQueue.global(qos: .background).async {
                 if let data = NSData(contentsOf: url as URL), let image = UIImage(data: data as Data) {

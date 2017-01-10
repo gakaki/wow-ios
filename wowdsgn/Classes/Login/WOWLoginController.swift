@@ -63,7 +63,7 @@ class WOWLoginController: WOWBaseViewController {
 //MARK:Actions
     @IBAction func regist(_ sender: UIButton) {
 //        toRegVC(false,isPresent: isPresent)
-        toRegVC(false, isPresent: isPresent, userInfoFromWechat: nil)
+        VCRedirect.toRegVC(false, isPresent: isPresent, userInfoFromWechat: nil)
         
     }
     
@@ -127,7 +127,7 @@ class WOWLoginController: WOWBaseViewController {
                 
                 
                 WOWUserManager.userMobile = phone
-                strongSelf.toLoginSuccess(strongSelf.isPresent)
+                VCRedirect.toLoginSuccess(strongSelf.isPresent)
                 
                 
                 

@@ -113,7 +113,7 @@ class WOWGuideController: WOWBaseViewController {
     
     @IBAction func btnSkipAction(_ sender: UIButton) {
         MobClick.e(UMengEvent.Guide_Skip)
-        self.toMainVC()
+        VCRedirect.toMainVC()
     }
     
     @IBAction func btnLoginAction(_ sender: UIButton, forEvent event: UIEvent) {
@@ -168,7 +168,7 @@ class WOWGuideController: WOWBaseViewController {
             MobClick.e(UMengEvent.Guide_Safari)
             
             //进入首页
-            toMainVC()
+            VCRedirect.toMainVC()
             
         }
         else if ( currentState == .register) {
@@ -176,8 +176,7 @@ class WOWGuideController: WOWBaseViewController {
 //            toRegVC()
             
             MobClick.e(UMengEvent.Guide_Mobile_Reg)
-
-            toRegVC(userInfoFromWechat: nil)
+            VCRedirect.toRegVC(userInfoFromWechat: nil)
         }
     }
 

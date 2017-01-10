@@ -23,8 +23,9 @@ open class MIBadgeButton: UIButton {
         }
     }
     
-    open var badgeBackgroundColor = UIColor.init(hexString: "#FFD444") {
+    open var badgeBackgroundColor = UIColor(red: 255/255, green: 212/255, blue: 68/255, alpha: 1) {
         didSet {
+            
             badgeLabel.backgroundColor = badgeBackgroundColor
         }
     }

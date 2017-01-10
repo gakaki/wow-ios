@@ -279,20 +279,30 @@ class WOWContentTopicController: WOWBaseViewController {
                 strongSelf.vo_topic                       =  Mapper<WOWContentTopicModel>().map( JSONObject:r.object )
                 if let vo_topic = strongSelf.vo_topic {
                     let imgView = UIImageView()
-                    imgView.kf.setImage(
-                        with: URL(string:vo_topic.topicImg ?? "" ) ?? URL(string: "placeholder_product"),
+                    imgView.yy_setImage(
+                        with: URL(string:vo_topic.topicImg ?? "" ),
                         placeholder: nil,
-                        options: nil,
-                        progressBlock: { (arg1, arg2) in
-                            
-                            
-                    },
-                        completionHandler: { [weak self](image, error, cacheType, imageUrl) in
+                        options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+                        completion: { [weak self] (img, url, from_type, image_stage,err ) in
                             if let strongSelf = self{
-                                strongSelf.shareProductImage = image
+                                strongSelf.shareProductImage = img
                             }
-                        }
-                    )
+                            
+                    })
+//                    imgView.kf.setImage(
+//                        with: URL(string:vo_topic.topicImg ?? "" ) ?? URL(string: "placeholder_product"),
+//                        placeholder: nil,
+//                        options: nil,
+//                        progressBlock: { (arg1, arg2) in
+//                            
+//                            
+//                    },
+//                        completionHandler: { [weak self](image, error, cacheType, imageUrl) in
+//                            if let strongSelf = self{
+//                                strongSelf.shareProductImage = image
+//                            }
+//                        }
+//                    )
 
                 }
             //如果有标签的话就显示，没有的话就显示
@@ -597,6 +607,7 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
             if let imgStr = aa.url{
                 if !imgStr.isEmpty {
                     imgUrlArr.append(imgStr)
+//                    let sourceImg = UIImageView.init(image: UIImage(named: "placeholder_product"))
                     let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)
                     photos.append(photoModel)
                 }
@@ -631,21 +642,25 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
+//    func photoBrowserDidEndDisplay(_ endPage: Int) {
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
+//
+//    }
     
 }
 
 extension WOWContentTopicController: WOWProductDetailAboutCellDelegate, WOWTopicTagCellDelegate, WOWContentTopicTopCellDelegate ,WOWCommentControllerDelegate{
         @objc func selectCollectionIndex(_ productId: Int) {
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
     }
     
     func columnGoTopic(_ columnId: Int?, topicTitle title: String?) {
        
-        toVCArticleListVC(columnId ?? 0, title: title ?? "",isOpenTag: false,isPageView: true)
+        VCRedirect.toVCArticleListVC(columnId ?? 0, title: title ?? "",isOpenTag: false,isPageView: true)
     }
     
     func tagGoTopic(_ tagId: Int?, tagTitle title: String?) {
-        toVCArticleListVC(tagId ?? 0, title: title ?? "",isOpenTag: true,isPageView: true)
+        VCRedirect.toVCArticleListVC(tagId ?? 0, title: title ?? "",isOpenTag: true,isPageView: true)
     }
     
     func refreshComments() {

@@ -294,6 +294,7 @@ extension AppDelegate{
         return v
     }
     func registAppKey(_ launchOptions: [AnyHashable: Any]?){
+        //"返回商户" 直接关闭支付页面
         Pingpp.ignoreResultUrl(true)
         //友盟 分析
         MobClick.setAppVersion(self.get_version_full())

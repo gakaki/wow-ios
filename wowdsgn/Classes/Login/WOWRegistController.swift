@@ -171,12 +171,12 @@ class WOWRegistController: WOWBaseViewController {
                         TalkingDataAppCpa.onLogin(user_mobile)
                         AnalyaticEvent.e2(.Login,["user":user_mobile])
 
-                        strongSelf.toLoginSuccess(strongSelf.isPresent)
+                        VCRedirect.toLoginSuccess(strongSelf.isPresent)
                     }else {
                         TalkingDataAppCpa.onRegister(user_mobile)
                         AnalyaticEvent.e2(.Regist,["user":user_mobile])
 
-                        strongSelf.toRegInfo(strongSelf.isPresent)
+                        VCRedirect.toRegInfo(strongSelf.isPresent)
                     }
                     
         }

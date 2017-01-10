@@ -20,7 +20,7 @@
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jU4-dj-Prs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="105" id="Dz0-dJ-Cdk"/>
+                            <constraint firstAttribute="height" priority="750" constant="105" id="Dz0-dJ-Cdk"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ink-UC-9xr">
                             <size key="itemSize" width="50" height="50"/>
@@ -33,8 +33,8 @@
                 <constraints>
                     <constraint firstItem="jU4-dj-Prs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="3af-Cl-uLU"/>
                     <constraint firstAttribute="trailing" secondItem="jU4-dj-Prs" secondAttribute="trailing" id="ICf-Fp-0Fa"/>
-                    <constraint firstItem="jU4-dj-Prs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Uqr-Tp-3LM"/>
                     <constraint firstItem="jU4-dj-Prs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YHb-9R-kFQ"/>
+                    <constraint firstAttribute="bottom" secondItem="jU4-dj-Prs" secondAttribute="bottom" id="ghR-EV-3CH"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

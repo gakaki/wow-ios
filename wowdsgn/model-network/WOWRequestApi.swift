@@ -36,7 +36,7 @@ public enum RequestApi{
     case api_Found_2nd
     
     //筛选 页面
-    case Api_Screen_Main(categoryId:Int)
+    case Api_Screen_Main
     case Api_Screen_Price(categoryId:Int)
     
     
@@ -84,8 +84,9 @@ public enum RequestApi{
     case api_Category_subCategory_with_image(categoryId:Int) //查看分类并且带上对应销量第一的商品的图片
     case api_Category_path_category(categoryId:Int) //查看分类 获得上级分类或者上上级分类的
 
+    case api_Product_By_Category(params: [String: AnyObject])//查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
     
-    case api_Product_By_Category(asc:Int , currentPage: Int, showCount :Int , sortBy:Int, categoryId:Int ) //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
+//    case api_Product_By_Category(asc:Int , currentPage: Int, showCount :Int , sortBy:Int, categoryId:Int ) //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
 
     case api_Captcha(mobile:String) //绑定微信验证码
     
@@ -704,8 +705,8 @@ extension RequestApi:TargetType{
             case .api_Module_Page2:
                 params = ["pageId":2, "region":1]
             // 筛选
-            case let .Api_Screen_Main(categoryId):
-                params = ["categoryId":categoryId]
+            case let .Api_Screen_Main:
+                break
             case let .Api_Screen_Price(categoryId):
                 params = ["categoryId":categoryId]
             case .api_Found_2nd:
@@ -714,9 +715,10 @@ extension RequestApi:TargetType{
                 break
             case .api_DesignerList:
                 break
-            case let .api_Product_By_Category(asc , currentPage, showCount , sortBy, categoryId ): //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
-                    params = ["asc": asc, "currentPage": currentPage, "showCount": showCount, "sortBy": sortBy, "categoryId":categoryId]
-                    break
+            case let .api_Product_By_Category(param): //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
+//                    params = ["asc": asc, "currentPage": currentPage, "showCount": showCount, "sortBy": sortBy, "categoryId":categoryId]
+                params = param
+                break
             
 //            优惠券
             case let .api_Coupons(param):

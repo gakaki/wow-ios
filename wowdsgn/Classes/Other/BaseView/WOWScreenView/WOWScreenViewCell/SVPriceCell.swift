@@ -38,7 +38,7 @@ class SVPriceCell: UITableViewCell {
         collectionView.backgroundColor = GrayColorLevel5
 //        let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
 //        collectionView?.collectionViewLayout = tagCellLayout
-//        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
+//        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context:nil)
 
     }
    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

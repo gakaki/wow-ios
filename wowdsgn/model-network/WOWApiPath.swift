@@ -36,7 +36,7 @@ let URL_CheckVersion                    = "v1/version/check"
 //1.app首页
 let URL_AD                              = "v1/page/startupimg"
 let URL_category                        = "v1/category/sub-category"
-let URL_producty_by_category            = "v2/category/product"
+let URL_producty_by_category            = "v1/product/category-products"
 let URL_category_subCategory_with_image = "v1/category/img-category"
 let URL_category_v2                     = "v1/category"
 let URL_category_path_category          = "v1/category/path-category"
@@ -223,7 +223,7 @@ let URL_OrderStatus             = "v1/order/setstatus" //状态客户端操作�
 
 // 8.筛选页面
 
-let URL_ScreenMain              = "product/searchProperty"
+let URL_ScreenMain              = "v1/product/filter-conditions"
 let URL_ScreenPrice             = "category/price-ranges"
 let URL_ScreenResult            = "product/condition"
 

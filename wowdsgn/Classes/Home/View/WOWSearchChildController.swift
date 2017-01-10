@@ -23,7 +23,7 @@ enum SortType:String {
     case Desc           = "desc"    // 降序
     
 }
-class WOWSearchChildController: BaseScreenViewController{
+class WOWSearchChildController: WOWBaseViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -32,7 +32,6 @@ class WOWSearchChildController: BaseScreenViewController{
             self.collectionView.reloadData()
         }
     }
-    
     var currentTypeIndex:ShowTypeIndex  = .New
     var currentSortType:SortType        = .Asc
     //param
@@ -60,6 +59,16 @@ class WOWSearchChildController: BaseScreenViewController{
             }
         }
     }
+    
+    /* 筛选条件 */
+    var screenColorArr     : [String]?
+    var screenStyleArr     : [String]?
+    var screenPriceArr     = Dictionary<String, Int>()
+    var screenScreenArr    = [String]()
+    var screenMinPrice      : Int?
+    var screenMaxPrice      : Int?
+
+    
     var seoKey: String?
     var couponId: Int?
     var entrance        = productEntrance.searchEntrance
@@ -106,14 +115,35 @@ class WOWSearchChildController: BaseScreenViewController{
     }
     
     func requestSearch()  {
-        var params = [String: AnyObject]()
         
-   
-        params = ["sort": currentTypeIndex.rawValue as AnyObject ,"currentPage": pageIndex as AnyObject,"pageSize":currentPageSize as AnyObject,"order":currentSortType.rawValue as AnyObject,"keyword":seoKey  as AnyObject]
+         var params              = [String: Any]()
+         params = ["sort": currentTypeIndex.rawValue  ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"keyword":seoKey ?? ""]
         
-//        pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""
-//            params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
-        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(params : params), successClosure: { [weak self](result, code) in
+        if let min = screenMinPrice {
+            
+            params["minPrice"] = min
+            
+        }
+        if let max = screenMaxPrice {
+            
+            params["maxPrice"] = max
+            
+        }
+        if screenColorArr?.count > 0 {
+            
+            params["colorIds"] = screenColorArr
+            
+        }
+        
+        if screenStyleArr?.count > 0 {
+            
+            params["styleIds"] = screenStyleArr
+            
+        }
+        
+        print(params)
+
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(params : params as [String : AnyObject]), successClosure: { [weak self](result, code) in
             let json = JSON(result)
             DLog(json)
             

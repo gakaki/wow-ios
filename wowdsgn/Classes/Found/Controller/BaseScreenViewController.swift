@@ -12,12 +12,50 @@ class BaseScreenViewController: WOWBaseViewController {
     
     var screenView          : WOWScreenView!
     var screenBtnimg        = UIImageView()
-    /* 筛选条件 */
-    var screenColorArr     = [String]()
-    var screenStyleArr     = [String]()
-    var screenPriceArr     = Dictionary<String, AnyObject>()
-    var screenScreenArr    = [String]()
+    /* 请求params */
+    var params              = [String: Any]()
+    /* main数据条件 */
+    var query_showCount     = 10
+    //    var query_sortBy        = 1
+    var query_categoryId    = 16
+    var currentTypeIndex:ShowTypeIndex  = .New
+    var currentSortType:SortType        = .Asc
     
+    var query_sortBy        = 1{
+        didSet{
+            if query_sortBy == 1 {
+                currentTypeIndex = .New
+            }
+            if query_sortBy == 2 {
+                currentTypeIndex = .Sales
+            }
+            if query_sortBy == 3 {
+                currentTypeIndex = .Price
+            }
+            
+        }
+    }
+    var query_asc          = 1{
+        didSet{
+            if query_asc == 1 {
+                currentSortType = .Asc
+            }
+            if query_asc == 0 {
+                currentSortType = .Desc
+            }
+        }
+    }
+
+    
+    
+    
+    /* 筛选条件 */
+    var screenColorArr     : [String]?
+    var screenStyleArr     : [String]?
+    var screenPriceArr     = Dictionary<String, Int>()
+    var screenScreenArr    = [String]()
+    var screenMinPrice      : Int?
+    var screenMaxPrice      : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,27 +71,7 @@ class BaseScreenViewController: WOWBaseViewController {
     func configScreeningView()  {
         screenView = WOWScreenView(frame:CGRect(x: ScreenViewConfig.frameX,y: 0,width: MGScreenWidth - ScreenViewConfig.frameX,height: MGScreenHeight))
         
-        screenView.screenAction = {[unowned self] (dic) in
-            print(dic)
-            let dicResult = dic as! [String:AnyObject]
-            if dicResult["colorList"] != nil {
-                self.screenColorArr  = dicResult["colorList"] as! [String]
-            }
-            if dicResult["priceObj"] != nil {
-                self.screenPriceArr  = dicResult["priceObj"] as! Dictionary
-            }
-            
-            if dicResult["styleList"] != nil {
-                self.screenStyleArr  = dicResult["styleList"] as! [String]
-            }
-            
-            if dicResult["sceneList"] != nil {
-                self.screenScreenArr  = dicResult["sceneList"] as! [String]
-            }
-            
-            self.request()
-        }
-        
+              
         
         screenBtnimg.image = UIImage.init(named: "screen")
         screenBtnimg.addTapGesture(action: {[weak self] (tap) in
@@ -69,7 +87,7 @@ class BaseScreenViewController: WOWBaseViewController {
             make.right.bottom.equalTo(-30)
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

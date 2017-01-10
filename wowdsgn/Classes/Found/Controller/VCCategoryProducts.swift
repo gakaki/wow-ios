@@ -2,18 +2,20 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class VCCategoryProducts:BaseScreenViewController,UIScrollViewDelegate
+class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 {
     var cv:UICollectionView!
     var vo_products         = [WOWProductModel]()
 
-    
+    /* 请求params */
+    var params              = [String: Any]()
+    /* main数据条件 */
     var query_showCount     = 10
-//    var query_sortBy        = 1
+    //    var query_sortBy        = 1
     var query_categoryId    = 16
-    var currentTypeIndex:ShowTypeIndex  = .New
-    var currentSortType:SortType        = .Asc
-    //param
+    var currentTypeIndex:ShowTypeIndex   = .New
+    var currentSortType :SortType        = .Asc
+    
     var query_sortBy        = 1{
         didSet{
             if query_sortBy == 1 {
@@ -38,15 +40,14 @@ class VCCategoryProducts:BaseScreenViewController,UIScrollViewDelegate
             }
         }
     }
-
-//    var screenView : WOWScreenView!
-//    /* 筛选条件 */
-//    var screenColorArr     = [String]()
-//    var screenStyleArr     = [String]()
-//    var screenPriceArr     = Dictionary<String, AnyObject>()
-//    var screenScreenArr    = [String]()
     
-    
+    /* 筛选条件 */
+    var screenColorArr     : [String]?
+    var screenStyleArr     : [String]?
+    var screenPriceArr     = Dictionary<String, Int>()
+    var screenScreenArr    = [String]()
+    var screenMinPrice      : Int?
+    var screenMaxPrice      : Int?
     
     var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
@@ -118,8 +119,8 @@ class VCCategoryProducts:BaseScreenViewController,UIScrollViewDelegate
 
         cv.emptyDataSetSource               = self;
         cv.emptyDataSetDelegate             = self;
-        view.insertSubview(cv, belowSubview: screenBtnimg)
-//        view.addSubview(cv)
+//        view.insertSubview(cv, belowSubview: screenBtnimg)
+        view.addSubview(cv)
 //        configScreeningView()
 //        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
 //        self.mj_footer.setTitle("", forState: MJRefreshState.Refreshing)
@@ -189,11 +190,32 @@ class VCCategoryProducts:BaseScreenViewController,UIScrollViewDelegate
 
           super.request()
         
-          WOWHud.dismiss()
-        var params = [String: Any]()
-        
+        WOWHud.dismiss()
         params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"categoryId":self.query_categoryId]
         
+        if let min = screenMinPrice {
+            
+            params["minPrice"] = min
+            
+        }
+        if let max = screenMaxPrice {
+            
+             params["maxPrice"] = max
+            
+        }
+        if screenColorArr?.count > 0 {
+            
+            params["colorIds"] = screenColorArr
+            
+        }
+        
+        if screenStyleArr?.count > 0 {
+            
+            params["styleIds"] = screenStyleArr
+            
+        }
+
+        print(params)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Product_By_Category(params : params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
                 
               if let strongSelf = self {
@@ -206,12 +228,12 @@ class VCCategoryProducts:BaseScreenViewController,UIScrollViewDelegate
                 
                   DLog(strongSelf.vo_products.count)
     
-                  if ( data.count <= 0 || data.count < strongSelf.query_showCount){
-//                      strongSelf.cv.mj_footer = nil
-                  }
-                  else{
-//                      strongSelf.cv.mj_footer = strongSelf.mj_footer
-                  }
+//                  if ( data.count <= 0 || data.count < strongSelf.query_showCount){
+////                      strongSelf.cv.mj_footer = nil
+//                  }
+//                  else{
+////                      strongSelf.cv.mj_footer = strongSelf.mj_footer
+//                  }
     
                   //若是为第一页那么数据直接赋值
                   if ( strongSelf.pageIndex <= 1){
@@ -276,44 +298,3 @@ extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource
 
     
 }
-//extension VCCategoryProducts{
-    //MARK:筛选界面
-//    func configScreeningView()  {
-//        screenView = WOWScreenView(frame:CGRect(x: ScreenViewConfig.frameX,y: 0,width: MGScreenWidth - ScreenViewConfig.frameX,height: MGScreenHeight))
-//        
-//        screenView.screenAction = {[unowned self] (dic) in
-//            print(dic)
-//            let dicResult = dic as! [String:AnyObject]
-//            if dicResult["colorList"] != nil {
-//                self.screenColorArr  = dicResult["colorList"] as! [String]
-//            }
-//            if dicResult["priceObj"] != nil {
-//                self.screenPriceArr  = dicResult["priceObj"] as! Dictionary
-//            }
-//            
-//            if dicResult["styleList"] != nil {
-//                self.screenStyleArr  = dicResult["styleList"] as! [String]
-//            }
-//            
-//            if dicResult["sceneList"] != nil {
-//                self.screenScreenArr  = dicResult["sceneList"] as! [String]
-//            }
-//
-//            self.request()
-//        }
-//        
-//        let img = UIImageView()
-//        img.image = UIImage.init(named: "screen")
-//        img.addTapGesture(action: {[weak self] (tap) in
-//            if let strongSelf = self{
-//                
-//                strongSelf.screenView.showInView(view: UIApplication.shared.keyWindow!)
-//            }
-//        })
-//        self.view.addSubview(img)
-//        img.snp.makeConstraints { (make) in
-//            make.width.height.equalTo(48)
-//            make.right.bottom.equalTo(-30)
-//        }
-//    }
-//}

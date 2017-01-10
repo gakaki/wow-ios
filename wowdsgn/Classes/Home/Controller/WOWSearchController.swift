@@ -10,8 +10,8 @@
 import UIKit
 import VTMagic
 import RxSwift
-
-class WOWSearchController: WOWBaseViewController {
+ 
+class WOWSearchController: BaseScreenViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     var isLoadPrice: Bool = false
@@ -39,15 +39,7 @@ class WOWSearchController: WOWBaseViewController {
         MobClick.e(.Search)
         
         request()
-//        _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
-//            ($0,$1)
-//            }.throttle(0.1, scheduler: MainScheduler.instance)
-//            .subscribe(onNext: {[weak self] cid,tab_index in
-//                if let strongSelf = self {
-//                    strongSelf.refreshSubView(tab_index)
-//
-//                }
-//            })
+
     
        
     }
@@ -57,6 +49,7 @@ class WOWSearchController: WOWBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchView.isHidden = true
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +60,7 @@ class WOWSearchController: WOWBaseViewController {
         makeCustomerNavigationItem("", left: false, handler: nil)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         searchView.isHidden = false
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -184,12 +178,41 @@ class WOWSearchController: WOWBaseViewController {
 
 //MARK:Private Method
     override func setUI() {
+        super.setUI()
         navigationController?.navigationBar.addSubview(searchView)
-
+        self.view.backgroundColor = UIColor.white
         defaultSetup()
         defaultData()
-
+        screenBtnimg.isHidden  = true
         self.view.addSubview(emptyView)
+        
+        screenView.screenAction = {[unowned self] (dic) in
+            print(dic)
+            let dicResult = dic as! [String:AnyObject]
+            if dicResult["colorList"] != nil{
+                self.screenColorArr  = dicResult["colorList"] as? [String]
+            }else{
+                 self.screenColorArr?.removeAll()
+            }
+            if dicResult["priceObj"] != nil {
+                self.screenPriceArr  = dicResult["priceObj"] as! Dictionary
+                self.screenMinPrice = self.screenPriceArr["minPrice"]
+                self.screenMaxPrice = self.screenPriceArr["maxPrice"]
+            }else{
+                self.screenMinPrice = nil
+                self.screenMaxPrice = nil
+            }
+            
+            if dicResult["styleList"] != nil{
+                self.screenStyleArr  = dicResult["styleList"] as? [String]
+            }else{
+                self.screenStyleArr?.removeAll()
+            }
+          
+            self.refreshSubView(self.ob_tab_index.value)
+        }
+        
+//         self.view.insertSubview(emptyView, belowSubview: screenBtnimg)
     }
     
     func defaultSetup() {
@@ -430,9 +453,11 @@ extension WOWSearchController:UITextFieldDelegate{
     }
     func showResult() {
         
-        self.view.addSubview(v_bottom.magicView)
+//        self.view.addSubview(v_bottom.magicView)
+        self.view.insertSubview(v_bottom.magicView, belowSubview: screenBtnimg)
         self.navigationShadowImageView?.isHidden = true
         v_bottom.magicView.isHidden = false
+        screenBtnimg.isHidden  = false
         v_bottom.magicView.reloadData(toPage: 0)
      
         refreshSubView(0)
@@ -442,6 +467,7 @@ extension WOWSearchController:UITextFieldDelegate{
         emptyView.isHidden = true
         self.navigationShadowImageView?.isHidden = false
         v_bottom.magicView.isHidden = true
+        screenBtnimg.isHidden  = true
         v_bottom.magicView.clearMemoryCache()
         self.v_bottom.magicView.removeFromSuperview()
 
@@ -475,9 +501,9 @@ extension WOWSearchController:VTMagicViewDataSource{
     func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
         
-        let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
+//        let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
         
-        if ( button == nil) {
+//        if ( button == nil) {
 //
             let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: 50)) { (asc) in
                 print("you clicket status is "  , asc)
@@ -490,9 +516,9 @@ extension WOWSearchController:VTMagicViewDataSource{
             }
             return b
 //
-        }
+//        }
 //
-        return button!
+//        return button!
 
 
     }
@@ -543,6 +569,11 @@ extension WOWSearchController:VTMagicViewDelegate{
             vc.pageIndex        = 1 //每次点击都初始化咯
             vc.entrance         = .searchEntrance
 //            vc.dataArr          = self.dataArr
+            vc.screenMinPrice     = self.screenMinPrice
+            vc.screenMaxPrice     = self.screenMaxPrice
+            vc.screenColorArr     = self.screenColorArr
+            vc.screenStyleArr     = self.screenStyleArr
+        
             
             vc.request()
         }

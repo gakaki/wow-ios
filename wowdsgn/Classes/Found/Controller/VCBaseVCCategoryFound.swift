@@ -3,7 +3,7 @@
 import UIKit
 
 
-class VCBaseVCCategoryFound:WOWBaseViewController{
+class VCBaseVCCategoryFound:BaseScreenViewController{
     
     
     override func setUI(){

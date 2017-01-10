@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,16 +34,30 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bw5-Vv-ZPK">
+                    <rect key="frame" x="0.0" y="54.5" width="375" height="0.5"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="CpE-6Q-sM1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Bw5-Vv-ZPK" secondAttribute="bottom" id="1mc-ub-tTv"/>
                 <constraint firstAttribute="bottom" secondItem="Y4G-p8-QNM" secondAttribute="bottom" constant="15" id="9MK-A9-sE3"/>
                 <constraint firstItem="oDX-Zm-Y5N" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="HQN-PE-CAC"/>
                 <constraint firstItem="Y4G-p8-QNM" firstAttribute="leading" secondItem="oDX-Zm-Y5N" secondAttribute="trailing" constant="5" id="M4t-y4-d1F"/>
+                <constraint firstItem="Bw5-Vv-ZPK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QL4-me-aPZ"/>
+                <constraint firstAttribute="trailing" secondItem="Bw5-Vv-ZPK" secondAttribute="trailing" id="Tc8-vq-GSU"/>
                 <constraint firstItem="oDX-Zm-Y5N" firstAttribute="centerY" secondItem="Y4G-p8-QNM" secondAttribute="centerY" id="Xus-hj-QJT"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="lbLine" destination="Bw5-Vv-ZPK" id="Ft4-9N-KdB"/>
                 <outlet property="lbTitle" destination="Y4G-p8-QNM" id="OoN-zU-aML"/>
             </connections>
             <point key="canvasLocation" x="-36.5" y="-221.5"/>

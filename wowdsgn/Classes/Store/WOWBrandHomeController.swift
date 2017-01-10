@@ -113,12 +113,23 @@ class WOWBrandHomeController: WOWBaseViewController {
     func configBrandData(){
         let url =  URL(string:(brandModel?.image) ?? "")
         if  let url = url {
-            placeImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
-                
-                if let strongSelf = self{
-                    strongSelf.shareBrandImage = image
-                }
-            }
+            placeImageView.yy_setImage(
+                with: url,
+                placeholder: nil,
+                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+                completion: { [weak self] (img, url, from_type, image_stage,err ) in
+                    if let strongSelf = self{
+                        strongSelf.shareBrandImage = img
+                    }
+                    
+            })
+
+//            placeImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
+//                
+//                if let strongSelf = self{
+//                    strongSelf.shareBrandImage = image
+//                }
+//            }
 
         }
         
@@ -126,12 +137,22 @@ class WOWBrandHomeController: WOWBaseViewController {
     func configDesignerData(){
         let url = URL(string:(designerModel?.designerPhoto) ?? "")
         if let url = url {
-            placeImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
-                
-                if let strongSelf = self{
-                    strongSelf.shareBrandImage = image
-                }
-            }
+            placeImageView.yy_setImage(
+                with: url,
+                placeholder: nil,
+                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+                completion: { [weak self] (img, url, from_type, image_stage,err ) in
+                    if let strongSelf = self{
+                        strongSelf.shareBrandImage = img
+                    }
+                    
+            })
+//            placeImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
+//                
+//                if let strongSelf = self{
+//                    strongSelf.shareBrandImage = image
+//                }
+//            }
         }
         
         

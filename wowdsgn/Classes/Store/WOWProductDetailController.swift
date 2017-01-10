@@ -243,20 +243,31 @@ class WOWProductDetailController: WOWBaseViewController {
         if imgUrlArr.count >= 1 {
             //当前主品放到轮播的第一个
             cycleView.imageURLArray = imgUrlArr
-            placeImageView.kf.setImage(
-                with: URL(string:imgUrlArr[0] ) ?? URL(string: "placeholder_product"),
-                placeholder: nil,
-                options: nil,
-                progressBlock: { (arg1, arg2) in
-                    
-                    
-                },
-                completionHandler: { [weak self](image, error, cacheType, imageUrl) in
-                    if let strongSelf = self{
-                        strongSelf.shareProductImage = image
-                    }
-                }
-            )
+                placeImageView.yy_setImage(
+                    with: URL(string:imgUrlArr[0] ),
+                    placeholder: nil,
+                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+                    completion: { [weak self] (img, url, from_type, image_stage,err ) in
+                        if let strongSelf = self{
+                            strongSelf.shareProductImage = img
+                        }
+                        
+                })
+
+//                        placeImageView.kf.setImage(
+//                with: URL(string:imgUrlArr[0] ) ?? URL(string: "placeholder_product"),
+//                placeholder: nil,
+//                options: nil,
+//                progressBlock: { (arg1, arg2) in
+//                    
+//                    
+//                },
+//                completionHandler: { [weak self](image, error, cacheType, imageUrl) in
+//                    if let strongSelf = self{
+//                        strongSelf.shareProductImage = image
+//                    }
+//                }
+//            )
             
         }
         tableView.reloadData()

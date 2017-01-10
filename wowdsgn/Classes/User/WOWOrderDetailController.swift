@@ -1274,6 +1274,6 @@ extension WOWOrderDetailController:UserCommentSuccesDelegate, WOWOrderDetailNewC
     }
     
     func orderGoProductDetail(_ productId: Int?) {
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
     }
 }

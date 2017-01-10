@@ -57,7 +57,8 @@ class WOWProductDetailCell: UITableViewCell {
                                                           toItem: self.productImg, attribute: .height,
                                                           multiplier: secondaryImg.imageAspect , constant: 0.0)
                     
-                    productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
+//                    productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
+                    productImg.set_webimage_url(img)
                     space.constant = 8
 
                 }

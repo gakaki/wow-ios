@@ -304,7 +304,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 cell.isSelected  = false;
                 
                 if ( row.productId != nil ){
-                    toVCProduct(row.productId!)
+                    VCRedirect.toVCProduct(row.productId!)
                 }
             }
 

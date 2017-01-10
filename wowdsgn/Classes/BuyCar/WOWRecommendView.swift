@@ -235,7 +235,7 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
     // 跳转产品详情代理
     func goToProductDetailVC(_ productId: Int?){
         
-        UIApplication.currentViewController()?.toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
 
     }
 

@@ -108,7 +108,7 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
                 break
             }
         case (1,0): //帮助与反馈
-            goLeavaTips()
+            VCRedirect.goLeavaTips()
             break
         case (1,1): //支持尖叫设计
             GoToItunesApp.show()

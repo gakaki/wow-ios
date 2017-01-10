@@ -735,14 +735,14 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 extension WOWBuyCarController: buyCarDelegate, HomeBottomDelegate {
     func goProductDetail(_ productId: Int?) {
         
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
 
     
     }
     // 跳转产品详情代理
     func goToProductDetailVC(_ productId: Int?){
         
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
         
     }
 }
@@ -750,7 +750,7 @@ extension WOWBuyCarController: buyCarDelegate, HomeBottomDelegate {
 extension WOWBuyCarController: orderCarDelegate {
     func toProductDetail(_ productId: Int?) {
         
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
     }
 }
 

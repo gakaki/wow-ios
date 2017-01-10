@@ -108,7 +108,8 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWCommentImageCell.self), for: indexPath) as! WOWCommentImageCell
-        cell.image.kf.setImage(with: URL(string:imgArray[indexPath.row]), placeholder:UIImage(named: "placeholder_product"))
+//        cell.image.kf.setImage(with: URL(string:imgArray[indexPath.row]), placeholder:UIImage(named: "placeholder_product"))
+        cell.image.set_webimage_url(imgArray[indexPath.row])
         return cell
     }
     

@@ -293,7 +293,7 @@ extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource
     //选中时的操作
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          let model = vo_products[indexPath.row]
-         toVCProduct(model.productId)
+         VCRedirect.toVCProduct(model.productId)
     }
 
     

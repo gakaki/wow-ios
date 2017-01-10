@@ -220,7 +220,7 @@ extension WOWProductListController:UICollectionViewDelegate,UICollectionViewData
             cell.isSelected  = false;
             
             if ( model.productId != nil ){
-                toVCProduct(model.productId!)
+                VCRedirect.toVCProduct(model.productId!)
             }
         }
     }

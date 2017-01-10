@@ -190,15 +190,15 @@ class WOWBaseModuleVC: WOWBaseViewController {
                 print("分类详情页")
                 
             case 8:// 专题详情
-                toVCTopic(model.bannerLinkTargetId ?? 0)
+                VCRedirect.toTopicList(topicId: model.bannerLinkTargetId ?? 0)
                 print("场景还是专题")
             case 9:// 专题详情
-                
-                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
+        
+                VCRedirect.toToPidDetail(topicId: model.bannerLinkTargetId ?? 0)
             case 10:// 分组产品列表
                 
 //                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
-                goToProductGroup(model.bannerLinkTargetId ?? 0)
+                VCRedirect.goToProductGroup(model.bannerLinkTargetId ?? 0)
                 
             default:
                 print("其他")
@@ -213,7 +213,7 @@ extension WOWBaseModuleVC:HomeBottomDelegate{
     
     func goToProductDetailVC(_ productId: Int?) {//跳转产品详情
         
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
         
     }
     
@@ -223,20 +223,20 @@ extension WOWBaseModuleVC:WOWHomeFormDelegate{
     func goToVC(_ m:WOWModelVoTopic){//右滑更多 跳转专题详情
         if let cid = m.id{
             
-            toVCTopic(cid)
+            VCRedirect.toTopicList(topicId: cid)
             
         }
     }
     func goToProdectDetailVC(_ productId: Int?) {// 跳转产品详情页
         
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
         
     }
 }
 
 extension WOWBaseModuleVC:SenceCellDelegate{
     func senceProductClick(_ produtID: Int) {//根据ID跳转产品详情页
-        toVCProduct(produtID)
+        VCRedirect.toVCProduct(produtID)
     }
 }
 extension WOWBaseModuleVC:cell_102_delegate{// 左右滑动专题跳转
@@ -249,7 +249,7 @@ extension WOWBaseModuleVC:cell_102_delegate{// 左右滑动专题跳转
 }
 extension WOWBaseModuleVC:cell_801_delegate{// 今日单品跳转详情
     func goToProcutDetailVCWith_801(_ productId: Int?){
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
     }
 }
 extension WOWBaseModuleVC:WOWHotStyleCellDelegate{// 点赞刷新
@@ -276,7 +276,7 @@ extension WOWBaseModuleVC:FoundWeeklyNewCellDelegate{// 本周上新跳转
 
         
         if let pid = m.productId as Int? {
-            self.toVCProduct(pid)
+            VCRedirect.toVCProduct(pid)
         }
     }
     
@@ -286,7 +286,7 @@ extension WOWBaseModuleVC:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate{//  �
     func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(_ m:WowModulePageItemVO?)
     {
         if let cid = m!.categoryId , let cname = m!.categoryName{
-            toVCCategory( cid ,cname: cname)
+            VCRedirect.toVCCategory( cid)
         }
     }
     
@@ -295,7 +295,7 @@ extension WOWBaseModuleVC:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate{//  �
 extension WOWBaseModuleVC:Cell_501_Delegate{// 推荐单品跳转
     
     func toProductDetail(_ productId: Int?) {
-        toVCProduct(productId)
+        VCRedirect.toVCProduct(productId)
     }
     
 }
@@ -305,10 +305,10 @@ extension WOWBaseModuleVC:Cell_302_Delegate{// more 一级分类跳转
     {
         
         if m == nil {
-            toVCCategoryChoose()
+            VCRedirect.toVCCategoryChoose()
         }else{
             if let cid = m!.categoryId , let cname = m!.categoryName{
-                toVCCategory( cid,cname: cname)
+                VCRedirect.toVCCategory( cid)
             }
         }
         
@@ -319,14 +319,14 @@ extension WOWBaseModuleVC:Cell_302_Delegate{// more 一级分类跳转
 extension WOWBaseModuleVC:WOWHotColumnDelegate{//点击栏目跳转
     func goToArticleListVC(_ columntId: Int?, title: String?) {
         
-        toVCArticleListVC(columntId ?? 0, title: title ?? "",isOpenTag:false,isPageView: false)
+        VCRedirect.toVCArticleListVC(columntId ?? 0, title: title ?? "",isOpenTag:false,isPageView: false)
         
     }
 }
 extension WOWBaseModuleVC:HotPeopleTitleDelegate{// 点击标签跳转
     func tagPressedWithToVC(titleId: Int, title: String?)   {
         
-        toVCArticleListVC(titleId , title: title ?? "",isOpenTag:true,isPageView: false)
+        VCRedirect.toVCArticleListVC(titleId , title: title ?? "",isOpenTag:true,isPageView: false)
         
     }
 }

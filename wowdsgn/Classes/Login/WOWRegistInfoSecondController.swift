@@ -113,7 +113,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
                     UIApplication.appTabBarController.selectedIndex = 0
                 }else {
                     //进入首页
-                    strongSelf.toMainVC()
+                    VCRedirect.toMainVC()
                 }
             }
         }
@@ -182,7 +182,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
                 WOWUserManager.userAgeRange = strongSelf.ageRow
                 WOWUserManager.userIndustry = strongSelf.jobTextField.text ?? ""
                 
-                strongSelf.toLoginSuccess(strongSelf.isPresent)
+                VCRedirect.toLoginSuccess(strongSelf.isPresent)
             }
         }) {[weak self] (errorMsg) in
             if let _ = self{

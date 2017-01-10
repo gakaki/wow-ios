@@ -76,10 +76,10 @@ class VCBaseNavCart:WOWBaseViewController{
         self.navBack()
     }
     func btn_cart_action(){
-        toVCCart()
+        VCRedirect.toVCCart()
     }
     func btn_msg_action(){
-        toVCMessageCenter()
+        VCRedirect.toVCMessageCenter()
     }
     
     func buyCarCount()  {

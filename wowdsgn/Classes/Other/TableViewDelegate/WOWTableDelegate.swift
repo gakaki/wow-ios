@@ -254,7 +254,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
             cell.dataArr      = model.moduleContent?.banners
-            cell.lbTitle.text = model.moduleContent?.name ?? "专题"
+//            cell.lbTitle.text = model.moduleContent?.name ?? "专题"
             cell.delegate     = self.vc as! cell_102_delegate?
             cell_heights[section]  = cell.heightAll
             returnCell = cell
@@ -433,7 +433,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 let model = dataSourceArray[section]
                 
                 switch model.moduleType ?? 0 {
-                case 402,301,501,401,104:
+                case 402,301,501,401,104,102:
                     
                     return 50
                 case 302:
@@ -472,7 +472,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 var t = "本周上新"
                 var isHiddenLien = false
                 switch model.moduleType ?? 0 {
-                    
+                case 102:
+                    isHiddenLien = true
+                    t            = model.moduleContent?.name ?? "专题"
                 case 402:
                     isHiddenLien = false
                     t            =  model.moduleContentProduct?.name ?? "居家好物"
@@ -550,13 +552,14 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
         let view = Bundle.main.loadNibNamed("WOWHotHeaderView", owner: self, options: nil)?.last as! WOWHotHeaderView
         view.lbTitle.text = title
+        view.lbLine.isHidden = true
         return view
         
     }
     // 类似本周上新的页眉
     func WOW_Cell_402_Hearder(title: String,isHiddenLine:Bool) -> UIView {
         
-        let v = Bundle.main.loadNibNamed("WOW_Cell_402_Hearder", owner: self, options: nil)?.last as! WOW_Cell_402_Hearder
+        let v = Bundle.main.loadNibNamed("WOWHotHeaderView", owner: self, options: nil)?.last as! WOWHotHeaderView
         v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth,height: 50)
         v.lbTitle.text = title
         if isHiddenLine{

@@ -21,8 +21,8 @@ class ScreenConfigModel:NSObject,Mappable{
     }
     
     func mapping(map: Map) {
-        colorList           <-   map["colorList"]
-        styleList           <-   map["styleList"]
+        colorList           <-   map["colors"]
+        styleList           <-   map["styles"]
         sceneList           <-   map["sceneList"]
     }
 }

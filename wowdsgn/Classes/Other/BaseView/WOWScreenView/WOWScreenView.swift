@@ -22,7 +22,7 @@ struct ScreenViewConfig{
 
     static var headerViewHight :CGFloat = 64
     static var footerViewHight :CGFloat = 50
-    static var screenTitles             = ["颜色","价格范围","风格","适用场景"]
+    static var screenTitles             = ["颜色","风格"]
     static let kDuration                = 0.3
     static let frameX :CGFloat          = 75.w
 }
@@ -41,7 +41,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     var sceneArr          = [ScreenModel]()
     var priceArr          = [ScreenModel]()
     /* 配置信息 */
-    var cellHightDic      = Dictionary<Int, AnyObject>()
+    var cellHightDic      = Dictionary<Int, CGFloat>()
     var arrayTitle        = [SectionModel]()
     /* 筛选条件 */
     var screenColorArr     = [String]()
@@ -91,10 +91,10 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        cellHightDic = [0 : 40 as AnyObject,
-                        1 : 100 as AnyObject,
-                        2 : 54 as AnyObject,
-                        3 : 54 as AnyObject]
+        cellHightDic = [0 : 40 ,
+                        1 : 54 ,
+                        2 : 54 ,
+                        3 : 54 ]
         
         
         for a in 0..<ScreenViewConfig.screenTitles.count {
@@ -108,7 +108,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         
     }
     private func requstSceenData(){
-        WOWNetManager.sharedManager.requestWithTarget(.Api_Screen_Main(categoryId: categoryId ?? 0), successClosure: {[weak self] (result) in
+        WOWNetManager.sharedManager.requestWithTarget(.Api_Screen_Main, successClosure: {[weak self] (result,code) in
             if let strongSelf = self{
                 
                 
@@ -124,20 +124,21 @@ class WOWScreenView: UIView,CAAnimationDelegate {
                     strongSelf.styleArr = mainModel.styleList ?? []
                     strongSelf.sceneArr = []
                     strongSelf.sceneArr = mainModel.sceneList ?? []
+                    strongSelf.tableView.reloadData()
                     
                 }
-                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Screen_Price(categoryId: strongSelf.categoryId ?? 0), successClosure: { (result) in
-                
-                        let bannerList = Mapper<ScreenModel>().mapArray(JSONObject:JSON(result)["priceRanges"].arrayObject)
-                        if let bannerList = bannerList {
-                            
-                            strongSelf.priceArr = []
-                            strongSelf.priceArr = bannerList 
-                        }
-                    
-                }){ (errorMsg) in
-                    DLog(errorMsg)
-                }
+//                WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_Screen_Price(categoryId: strongSelf.categoryId ?? 0), successClosure: { (result) in
+//                
+//                        let bannerList = Mapper<ScreenModel>().mapArray(JSONObject:JSON(result)["priceRanges"].arrayObject)
+//                        if let bannerList = bannerList {
+//                            
+//                            strongSelf.priceArr = []
+//                            strongSelf.priceArr = bannerList 
+//                        }
+//                    
+//                }){ (errorMsg) in
+//                    DLog(errorMsg)
+//                }
             }
         }) { (errorMsg) in
            
@@ -169,9 +170,9 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         }
         footerView.btnClear.addTarget(self, action:#selector(clearAction), for:.touchUpInside)
         footerView.btnSure.addTarget(self, action:#selector(sureAction), for:.touchUpInside)
-        tableView.register(UINib.nibName(String(describing: SVColorCell())), forCellReuseIdentifier:cellColorID)
-        tableView.register(UINib.nibName(String(describing: SVPriceCell())), forCellReuseIdentifier:cellPriceID)
-        tableView.register(UINib.nibName(String(describing: SVStyleCell())), forCellReuseIdentifier:cellStyleID)
+        tableView.register(UINib.nibName(cellColorID), forCellReuseIdentifier:cellColorID)
+        tableView.register(UINib.nibName(cellPriceID), forCellReuseIdentifier:cellPriceID)
+        tableView.register(UINib.nibName(cellStyleID), forCellReuseIdentifier:cellStyleID)
     
         self.addSubview(tableView)
         addObserver()
@@ -267,7 +268,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
 }
 extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return arrayTitle.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -277,13 +278,13 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
             return 0
         }
         switch section {
-        case 2:
+        case 1:
             return styleArr.count
         case 0:
             
             return colorArr.count > 0 ? 1 : 0
         
-        case 1:
+        case 2:
             
             return priceArr.count > 0 ? 1 : 0
             
@@ -296,8 +297,8 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-            return (self.cellHightDic[indexPath.section] as? CGFloat) ?? 0
+    
+            return self.cellHightDic[indexPath.section] ?? 0
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -310,14 +311,14 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
             cell.dataArr        = colorArr
             cell.selectionStyle = .none
             return cell
-        case 1:
+        case 2:
             let cell                = tableView.dequeueReusableCell(withIdentifier: cellPriceID, for: indexPath as IndexPath) as! SVPriceCell
             cell.delegate     = self
             cell.indexPathNow = indexPath as NSIndexPath!
             cell.dataArr      = priceArr
             cell.selectionStyle = .none
             return cell
-        case 2:
+        case 1:
             let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
             let model = styleArr[indexPath.row]
             cell.showData(m: model)
@@ -339,7 +340,7 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 2:
+        case 1:
             
             var params : [String: AnyObject]
              params = styleArr.getScreenCofig(index: indexPath.row,dicKey: "styleIdArr")
@@ -419,15 +420,15 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
 extension WOWScreenView:SVColorCellDelegate,SVPriceCellDelegate{
     func updataTableViewCellHight(cell: SVColorCell,hight: CGFloat,indexPath: NSIndexPath){
 
-        guard (self.cellHightDic[indexPath.section] as? CGFloat) == hight else{
-            self.cellHightDic[indexPath.section] = hight as AnyObject?
+        guard self.cellHightDic[indexPath.section] == hight else{
+            self.cellHightDic[indexPath.section] = hight
             tableView.reloadData()
             return
         }
     }
     func updataTableViewCellHightFormPrice(cell: SVPriceCell,hight: CGFloat,indexPath: NSIndexPath){
-        guard (self.cellHightDic[indexPath.section] as? CGFloat) == hight else{
-            self.cellHightDic[indexPath.section] = hight as AnyObject?
+        guard self.cellHightDic[indexPath.section] == hight else{
+            self.cellHightDic[indexPath.section] = hight
             tableView.reloadData()
             return
         }

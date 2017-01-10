@@ -30,13 +30,13 @@ class SVColorCell: UITableViewCell {
    
         self.resetSeparators()
         
-        collectionView.register(UINib.nibName(String(describing: ColorCVCell())), forCellWithReuseIdentifier: "ColorCVCell")
+        collectionView.register(UINib.nibName("ColorCVCell"), forCellWithReuseIdentifier: "ColorCVCell")
 
         collectionView.backgroundColor = GrayColorLevel5
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isUserInteractionEnabled = true
-//        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context:nil)
+//        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context:nil)
     }
   
    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -57,9 +57,8 @@ class SVColorCell: UITableViewCell {
     }
 
     func updateCollectionViewHight(hight :CGFloat)  {
-        collectionView.snp.updateConstraints { (make) in
-            make.height.equalTo(hight)
-        }
+
+        self.collectionViewHeight.constant = hight
         self.delegate?.updataTableViewCellHight(cell: self, hight: hight, indexPath: self.indexPathNow)
 
     }
@@ -71,15 +70,16 @@ class SVColorCell: UITableViewCell {
     
 }
 extension SVColorCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArr?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCVCell", for: indexPath as IndexPath) as! ColorCVCell
         //FIX 测试数据

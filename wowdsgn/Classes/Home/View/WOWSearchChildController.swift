@@ -23,7 +23,7 @@ enum SortType:String {
     case Desc           = "desc"    // 降序
     
 }
-class WOWSearchChildController: WOWBaseViewController{
+class WOWSearchChildController: BaseScreenViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -230,6 +230,7 @@ class WOWSearchChildController: WOWBaseViewController{
     }
 
     override func setUI(){
+        super.setUI()
         collectionView.collectionViewLayout = self.layout
         collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
         collectionView.mj_header = self.mj_header

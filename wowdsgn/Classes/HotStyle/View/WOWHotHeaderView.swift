@@ -10,6 +10,7 @@ import UIKit
 
 class WOWHotHeaderView: UIView {
     @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var lbLine: UILabel!
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

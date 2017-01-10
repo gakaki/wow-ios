@@ -1,57 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="KGk-i7-Jjw" customClass="Cell_102_Project" customModule="wowdsgn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="291"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="375" height="290"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="214"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ANS-gT-6sm">
-                        <frame key="frameInset" width="1000" height="1000"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="专题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUo-U1-S9L">
-                                <frame key="frameInset" width="1000" height="1000"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="S18-Y3-TZU"/>
-                                    <constraint firstAttribute="width" constant="240" id="qZF-Sb-lVN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAk-XM-Jyf">
-                                <frame key="frameInset" width="1000" height="1000"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="4EB-3C-Gdc"/>
-                                    <constraint firstAttribute="width" constant="68" id="ra6-mq-AD8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="更多" image="more-triangle">
-                                    <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="IUo-U1-S9L" firstAttribute="leading" secondItem="ANS-gT-6sm" secondAttribute="leading" constant="15" id="a3D-gk-99w"/>
-                            <constraint firstItem="VAk-XM-Jyf" firstAttribute="centerY" secondItem="ANS-gT-6sm" secondAttribute="centerY" id="f9o-sn-QJT"/>
-                            <constraint firstItem="IUo-U1-S9L" firstAttribute="top" secondItem="VAk-XM-Jyf" secondAttribute="bottom" constant="-29" id="mBm-M2-pkt"/>
-                            <constraint firstAttribute="height" constant="50" id="mdU-sa-Dxy"/>
-                            <constraint firstAttribute="trailing" secondItem="VAk-XM-Jyf" secondAttribute="trailing" constant="15" id="olH-Zu-li0"/>
-                        </constraints>
-                    </view>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nMU-U8-S4s">
-                        <frame key="frameInset" width="1000" height="1000"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nMU-U8-S4s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="200" id="KzR-Ht-lfJ"/>
@@ -65,23 +32,16 @@
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ANS-gT-6sm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0P1-YA-gZw"/>
-                    <constraint firstItem="nMU-U8-S4s" firstAttribute="top" secondItem="ANS-gT-6sm" secondAttribute="bottom" id="8FN-CJ-CcS"/>
-                    <constraint firstItem="ANS-gT-6sm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KQ4-A7-Mac"/>
+                    <constraint firstItem="nMU-U8-S4s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="31c-r2-Smi"/>
                     <constraint firstAttribute="trailing" secondItem="nMU-U8-S4s" secondAttribute="trailing" id="QIt-Iw-uAE"/>
                     <constraint firstItem="nMU-U8-S4s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="azG-oT-GQ7"/>
                     <constraint firstAttribute="bottom" secondItem="nMU-U8-S4s" secondAttribute="bottom" constant="15" id="kuz-sI-ckQ"/>
-                    <constraint firstAttribute="trailing" secondItem="ANS-gT-6sm" secondAttribute="trailing" id="qDh-iU-yIJ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="nMU-U8-S4s" id="qQt-4g-dks"/>
-                <outlet property="lbTitle" destination="IUo-U1-S9L" id="Zi6-1Z-q2S"/>
             </connections>
             <point key="canvasLocation" x="-35.5" y="71.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="more-triangle" width="4" height="6"/>
-    </resources>
 </document>

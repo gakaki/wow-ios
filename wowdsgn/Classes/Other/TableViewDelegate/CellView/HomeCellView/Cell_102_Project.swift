@@ -19,7 +19,7 @@ class Cell_102_Project: UITableViewCell,ModuleViewElement {
     }
  var heightAll:CGFloat = 290
     weak var delegate : cell_102_delegate?
-    @IBOutlet weak var lbTitle: UILabel!
+//    @IBOutlet weak var lbTitle: UILabel!
     var dataArr:[WOWCarouselBanners]?{
         didSet{
             

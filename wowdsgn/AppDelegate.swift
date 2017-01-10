@@ -294,6 +294,7 @@ extension AppDelegate{
         return v
     }
     func registAppKey(_ launchOptions: [AnyHashable: Any]?){
+        Pingpp.ignoreResultUrl(true)
         //友盟 分析
         MobClick.setAppVersion(self.get_version_full())
         UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID

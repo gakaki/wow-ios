@@ -61,7 +61,7 @@ let URL_home_BottomList         = "v2/product/recommend"     //首页 底部列�
 let URL_HotStyle_BottomList     = "v1/topic/topics"         // 精选页底部列表
 let URL_Search_hot              = "v1/product/search/hot-keywords"  //热门搜索
 
-let URL_Search_result           = "v2/product/condition"           //搜索结果
+let URL_Search_result           = "v1/product/search"           //搜索结果
 
 //2.2商品列表
 let URL_product                 = "v2/product"

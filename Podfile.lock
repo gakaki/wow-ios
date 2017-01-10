@@ -42,7 +42,12 @@ PODS:
   - ObjectMapper (2.1.0)
   - Pingpp/Alipay (2.2.10):
     - Pingpp/Core
+  - Pingpp/CmbWallet (2.2.10):
+    - Pingpp/Core
+    - Pingpp/WebView
   - Pingpp/Core (2.2.10)
+  - Pingpp/WebView (2.2.10):
+    - Pingpp/Core
   - Pingpp/Wx (2.2.10):
     - Pingpp/Core
   - PonyFrameworkOnSwift (0.0.2)
@@ -105,6 +110,7 @@ DEPENDENCIES:
   - Moya/RxSwift (~> 8.0.0-beta.2)
   - ObjectMapper
   - Pingpp/Alipay (~> 2.2.10)
+  - Pingpp/CmbWallet (~> 2.2.10)
   - Pingpp/Wx (~> 2.2.10)
   - PonyFrameworkOnSwift (from `PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec`)
   - Qiniu
@@ -184,6 +190,6 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 28373ee44bca2cfd8ee2c3c50fe9ea1386faf32b
+PODFILE CHECKSUM: 6eff85dbf060ca1aefab6e6fc67beb77853fedca
 
 COCOAPODS: 1.2.0.beta.1

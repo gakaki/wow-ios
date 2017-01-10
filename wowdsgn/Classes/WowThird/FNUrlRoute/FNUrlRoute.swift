@@ -39,9 +39,13 @@ public class FNUrlRoute {
     //校验url对应的 host + path 是否为被注册的 key
     public class func canOpen(url:String) -> Bool {
         let urlTmp = URL.init(string: url)
-        let key = (urlTmp?.host)! + (urlTmp?.path)!
-        //有注册过 && 注册的类遵循协议
-        return (FNUrlMatcher.shared.urlDictionary[key] != nil && (FNUrlMatcher.fetchModuleClass(key: key) as? FNUrlRouteDelegate != nil))
+        if let host = urlTmp?.host ,let path = urlTmp?.path {
+            let key = host + path
+            //有注册过 && 注册的类遵循协议
+            return (FNUrlMatcher.shared.urlDictionary[key] != nil && (FNUrlMatcher.fetchModuleClass(key: key) as? FNUrlRouteDelegate != nil))
+        }else{
+            return false
+        }
     }
     
     public class func setHandleOverBlock(block: @escaping FNUrlRouteHandleOver) {

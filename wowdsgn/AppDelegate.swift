@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-  
+  //universal link call back
         
         
         TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
@@ -294,6 +294,7 @@ extension AppDelegate{
         return v
     }
     func registAppKey(_ launchOptions: [AnyHashable: Any]?){
+        Pingpp.ignoreResultUrl(true)
         //友盟 分析
         MobClick.setAppVersion(self.get_version_full())
         UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID

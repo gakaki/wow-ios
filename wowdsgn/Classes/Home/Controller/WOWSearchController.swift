@@ -140,16 +140,24 @@ class WOWSearchController: WOWBaseViewController {
             
         }
     }
-    
+//    pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""
     func requestResult()  {
-        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""), successClosure: { [weak self](result, code) in
+        var params = [String: Any]()
+        
+        
+        params = ["sort": ShowTypeIndex.New.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":SortType.Asc.rawValue,"keyword":searchView.searchTextField.text ?? ""]
+        
+        //        pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""
+        //            params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
+        WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(params : params as [String : AnyObject]), successClosure: { [weak self](result, code) in
+
             let json = JSON(result)
             DLog(json)
             
             if let strongSelf = self {
                 strongSelf.endRefresh()
                 
-                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["products"].arrayObject)
                 if let array = arr{
                     strongSelf.dataArr = []
                     if array.isEmpty {
@@ -529,11 +537,13 @@ extension WOWSearchController:VTMagicViewDelegate{
                 query_asc          = 0
             }
             
-            vc.pageVc        = query_sortBy
-            vc.asc           = query_asc
-            vc.seoKey       = searchView.searchTextField.text
-            vc.pageIndex           = 1 //每次点击都初始化咯
-            vc.entrance     = .searchEntrance
+            vc.pageVc           = query_sortBy
+            vc.asc              = query_asc
+            vc.seoKey           = searchView.searchTextField.text
+            vc.pageIndex        = 1 //每次点击都初始化咯
+            vc.entrance         = .searchEntrance
+//            vc.dataArr          = self.dataArr
+            
             vc.request()
         }
     }

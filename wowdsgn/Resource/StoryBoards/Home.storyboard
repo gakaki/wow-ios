@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -247,55 +248,93 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TuG-FD-1R2">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7L-Ei-d3F">
-                                        <rect key="frame" x="22" y="12" width="25" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="nav_backArrow"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7L-Ei-d3F">
+                                        <rect key="frame" x="8" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="mbu-eK-sED"/>
+                                            <constraint firstAttribute="width" constant="30" id="vgS-p6-tdr"/>
+                                        </constraints>
+                                        <state key="normal" image="back1"/>
                                         <connections>
                                             <action selector="goBackClick:" destination="dbB-0z-XBe" eventType="touchUpInside" id="Lgc-4S-YwV"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsr-Y6-ajf">
-                                        <rect key="frame" x="49" y="12" width="25" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="forward"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsr-Y6-ajf">
+                                        <rect key="frame" x="41" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="1eM-h8-mon"/>
+                                            <constraint firstAttribute="width" constant="30" id="BU5-dG-7Lw"/>
+                                        </constraints>
+                                        <state key="normal" image="forward2"/>
                                         <connections>
                                             <action selector="goFormatClick:" destination="dbB-0z-XBe" eventType="touchUpInside" id="Ut3-eJ-4pL"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pd-53-5xy">
-                                        <rect key="frame" x="273" y="10" width="25" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pd-53-5xy">
+                                        <rect key="frame" x="299" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="EZn-8x-y7P"/>
+                                            <constraint firstAttribute="height" constant="30" id="lhg-Vu-KRz"/>
+                                        </constraints>
                                         <state key="normal" image="reload"/>
                                         <connections>
                                             <action selector="reloadClick:" destination="dbB-0z-XBe" eventType="touchUpInside" id="7M3-3H-9BA"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPB-mV-sIm">
-                                        <rect key="frame" x="336" y="10" width="25" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPB-mV-sIm">
+                                        <rect key="frame" x="337" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="tbo-uy-xNP"/>
+                                            <constraint firstAttribute="height" constant="30" id="xar-n5-Z45"/>
+                                        </constraints>
                                         <state key="normal" image="icon_share"/>
                                         <connections>
                                             <action selector="shareClick:" destination="dbB-0z-XBe" eventType="touchUpInside" id="nfF-1I-x6p"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yA-Ca-HXH">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                                        <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="ZFA-wg-aT2"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="8hg-WA-Jad"/>
+                                    <constraint firstItem="3yA-Ca-HXH" firstAttribute="top" secondItem="TuG-FD-1R2" secondAttribute="top" id="99U-0Z-p3n"/>
+                                    <constraint firstAttribute="trailing" secondItem="kPB-mV-sIm" secondAttribute="trailing" constant="8" id="LoK-Wl-JAH"/>
+                                    <constraint firstItem="kPB-mV-sIm" firstAttribute="leading" secondItem="0Pd-53-5xy" secondAttribute="trailing" constant="8" id="ObV-LX-to1"/>
+                                    <constraint firstItem="kPB-mV-sIm" firstAttribute="centerY" secondItem="TuG-FD-1R2" secondAttribute="centerY" id="Y9k-1h-bdn"/>
+                                    <constraint firstItem="0Pd-53-5xy" firstAttribute="centerY" secondItem="TuG-FD-1R2" secondAttribute="centerY" id="Zym-xA-MUc"/>
+                                    <constraint firstItem="I7L-Ei-d3F" firstAttribute="centerY" secondItem="TuG-FD-1R2" secondAttribute="centerY" id="d9S-ll-Dmc"/>
+                                    <constraint firstAttribute="trailing" secondItem="3yA-Ca-HXH" secondAttribute="trailing" id="ime-dA-oou"/>
+                                    <constraint firstItem="3yA-Ca-HXH" firstAttribute="leading" secondItem="TuG-FD-1R2" secondAttribute="leading" id="sQR-7u-nTU"/>
+                                    <constraint firstItem="Nsr-Y6-ajf" firstAttribute="centerY" secondItem="TuG-FD-1R2" secondAttribute="centerY" id="tDK-lp-LJh"/>
+                                    <constraint firstItem="Nsr-Y6-ajf" firstAttribute="leading" secondItem="I7L-Ei-d3F" secondAttribute="trailing" constant="3" id="tg0-T9-VOg"/>
+                                    <constraint firstItem="I7L-Ei-d3F" firstAttribute="leading" secondItem="TuG-FD-1R2" secondAttribute="leading" constant="8" id="vdl-ty-aOk"/>
                                 </constraints>
                             </view>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7Nc-Rr-xH8">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="2"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="trackTintColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="444-7W-idp" firstAttribute="top" secondItem="TuG-FD-1R2" secondAttribute="bottom" id="4wI-MC-2GB"/>
                             <constraint firstItem="TuG-FD-1R2" firstAttribute="leading" secondItem="CCi-LY-To2" secondAttribute="leading" id="5C0-qn-pxu"/>
+                            <constraint firstItem="7Nc-Rr-xH8" firstAttribute="leading" secondItem="CCi-LY-To2" secondAttribute="leadingMargin" constant="-20" id="Nlt-i5-xAO"/>
+                            <constraint firstItem="7Nc-Rr-xH8" firstAttribute="top" secondItem="CCi-LY-To2" secondAttribute="topMargin" id="acX-LY-xbF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7Nc-Rr-xH8" secondAttribute="trailing" constant="-20" id="rk7-fl-Y7A"/>
                             <constraint firstAttribute="trailing" secondItem="TuG-FD-1R2" secondAttribute="trailing" id="w4d-RH-ZTY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="goBackBtn" destination="I7L-Ei-d3F" id="aqf-6O-8W2"/>
                         <outlet property="goFormatBtn" destination="Nsr-Y6-ajf" id="kzg-BW-2Jr"/>
+                        <outlet property="progressView" destination="7Nc-Rr-xH8" id="BIz-Dg-DGQ"/>
                         <outlet property="reloadBtn" destination="0Pd-53-5xy" id="qiN-X1-GmC"/>
                         <outlet property="shareBtn" destination="kPB-mV-sIm" id="Gly-92-pAz"/>
                     </connections>
@@ -591,12 +630,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back1" width="30" height="30"/>
         <image name="closeNav" width="40" height="32"/>
-        <image name="forward" width="9" height="16"/>
+        <image name="forward2" width="30" height="30"/>
         <image name="icon_like" width="30" height="30"/>
         <image name="icon_like_hightlighted" width="30" height="30"/>
         <image name="icon_share" width="30" height="30"/>
-        <image name="nav_backArrow" width="9" height="16"/>
         <image name="reload" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

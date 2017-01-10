@@ -108,7 +108,7 @@
                     <state key="selected" image="selectBig"/>
                     <state key="highlighted" image="selectBig"/>
                     <connections>
-                        <action selector="weixinClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QSs-fY-IA2"/>
+                        <action selector="weixinClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Odd-mE-Quc"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PU1-Hi-U7z">
@@ -124,7 +124,6 @@
                     <state key="highlighted" image="selectBig"/>
                     <connections>
                         <action selector="cmbClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QDi-ZN-A63"/>
-                        <action selector="weixinClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="d7P-on-wnU"/>
                     </connections>
                 </button>
             </subviews>

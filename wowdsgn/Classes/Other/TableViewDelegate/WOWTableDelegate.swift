@@ -438,7 +438,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     return 50
                 case 302:
                     
-                    return 15
+                    return CGFloat.leastNormalMagnitude
                 case 901:
                     return 55
                 default:

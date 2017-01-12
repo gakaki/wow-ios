@@ -44,7 +44,14 @@ class WOWNetManager {
     static let sharedManager = WOWNetManager()
     fileprivate init(){}
 
-    let requestProvider = MoyaProvider<RequestApi>()
+    public static func endpointClosure(target: RequestApi) -> Endpoint<RequestApi> {
+        
+        let method = target.method
+        let parameters = target.parameters
+        let endpoint = Endpoint<RequestApi>(URL: target.baseURL.appendingPathComponent(target.path).absoluteString, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: method, parameters: parameters, parameterEncoding: target.encoding)
+        return endpoint.endpointByAddingHTTPHeaderFields(target.headers())
+    }
+    let requestProvider = MoyaProvider<RequestApi>(endpointClosure: WOWNetManager.endpointClosure)
 
     
     func getPresentedController() -> UIViewController? {
@@ -62,8 +69,8 @@ class WOWNetManager {
         failClosure:@escaping FailClosure
     ){
        
-        print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters)
-        
+        print("request target 请求的URL：",target.path,"\n请求的参数： ",target.parameters ?? "","\n",WOWNetManager.endpointClosure(target: target).httpHeaderFields ?? ["":""])
+    
        _ =  requestProvider.request(target) { (result) in
             //消失loading页面
             DispatchQueue.main.async {

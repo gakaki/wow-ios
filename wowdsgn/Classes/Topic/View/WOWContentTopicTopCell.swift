@@ -51,18 +51,33 @@ class WOWContentTopicTopCell: UITableViewCell {
     func showData(_ model: WOWContentTopicModel?) {
         if let model = model {
             if let img = model.topicImg {
-                topicImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
-                    if let strongSelf = self {
-                        if let image = image {
-                            let imageAspect = image.size.width / image.size.height
-                            strongSelf.aspectConstraint = NSLayoutConstraint(item: strongSelf.topicImg,
-                                                                             attribute: .width, relatedBy: .equal,
-                                                                             toItem: strongSelf.topicImg, attribute: .height,
-                                                                             multiplier: imageAspect , constant: 0.0)
+                topicImg.yy_setImage(
+                    with: URL(string:img.webp_url()),
+                    placeholder: UIImage(named: "placeholder_product"),
+                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+                    completion: {[weak self] (img, url, from_type, image_stage,err ) in
+                        if let strongSelf = self {
+                            if let image = img {
+                                let imageAspect = image.size.width / image.size.height
+                                strongSelf.aspectConstraint = NSLayoutConstraint(item: strongSelf.topicImg,
+                                                                                 attribute: .width, relatedBy: .equal,
+                                                                                 toItem: strongSelf.topicImg, attribute: .height,
+                                                                                 multiplier: imageAspect , constant: 0.0)
+                            }
                         }
-                    }
-                    
-                    })
+                })
+//                topicImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
+//                    if let strongSelf = self {
+//                        if let image = image {
+//                            let imageAspect = image.size.width / image.size.height
+//                            strongSelf.aspectConstraint = NSLayoutConstraint(item: strongSelf.topicImg,
+//                                                                             attribute: .width, relatedBy: .equal,
+//                                                                             toItem: strongSelf.topicImg, attribute: .height,
+//                                                                             multiplier: imageAspect , constant: 0.0)
+//                        }
+//                    }
+//                    
+//                    })
 
             }
            //            aspectConstraint = NSLayoutConstraint(item: self.topicImg,

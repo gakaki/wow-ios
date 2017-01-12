@@ -543,12 +543,27 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
+        case 0:
+            if isHaveTag + isHaveAbout + isHaveComment == 0 {   //最后一行的时候流出来空白
+                return 15
+            }
+            return 0.01
         case 1 + isHaveTag + isHaveComment:     //更多评论。当评论数大于三条时才显示
             if topicComment?.total > 3 {
+                if isHaveAbout == 0 {   //最后一行的时候流出来空白
+                    return 70
+                }
                 return 55
             }else {
+                if isHaveAbout + isHaveComment == 0 {   //最后一行的时候流出来空白
+                    return 15
+                }
                 return 0.01
             }
+        case 1 + isHaveTag + isHaveComment + isHaveAbout: //如果相关商品有数据显示，如果没有就不显示
+            
+            return 15
+            
         default:
             return 0.01
         }

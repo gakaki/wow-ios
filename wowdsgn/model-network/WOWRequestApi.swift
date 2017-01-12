@@ -751,11 +751,11 @@ extension RequestApi:TargetType{
 
         }
         DLog(WOWUserManager.sessionToken)
-        if WOWUserManager.sessionToken.isEmpty {
-            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2", "deviceToken": WOWUserManager.deviceToken]
-        }else {
-            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2","sessionToken":WOWUserManager.sessionToken, "deviceToken": WOWUserManager.deviceToken]
-        }
+//        if WOWUserManager.sessionToken.isEmpty {
+            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject)]
+//        }else {
+//            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2","sessionToken":WOWUserManager.sessionToken, "deviceToken": WOWUserManager.deviceToken]
+//        }
         
 
         return params
@@ -798,5 +798,28 @@ extension RequestApi:TargetType{
     //  单元测试用
     public var sampleData: Data {
         return "{}".data(using: String.Encoding.utf8)!
+    }
+    
+    public var encoding: Moya.ParameterEncoding {
+        if self.method == .GET || self.method == .HEAD {
+            return URLEncoding.default
+        }
+        else {
+            return URLEncoding.default
+        }
+    }
+    
+    public func headers() -> [String: String] {
+        var assigned: [String: String] = [
+            "X-WOW-APP-CH":"2",
+            "X-WOW-APP-DT": WOWUserManager.deviceToken,
+            ]
+        if !WOWUserManager.sessionToken.isEmpty {
+        
+            assigned += ["X-WOW-APP-ST": WOWUserManager.sessionToken]
+           
+        }
+
+        return assigned
     }
 }

@@ -85,13 +85,13 @@ extension SVColorCell:UICollectionViewDelegate,UICollectionViewDataSource,UIColl
         //FIX 测试数据
         let cellModel = dataArr![indexPath.row]
 
-//        if let moduleImage = cellModel.imgurl {
-        
+        if let moduleImage = cellModel.imgurl {
 
-               cell.imgColor.set_webimage_url("https://img.wowdsgn.com/static/product/images/1480317652001cutipol-%E9%BB%91%E9%87%91%E5%A4%A7.jpg")
+               cell.imgColor.set_webimage_url(moduleImage)
 
-
-//        }
+        }else {
+             cell.imgColor.image = UIImage()
+        }
 
         cell.btnSelect.addAction {[weak self] in
             if let strongSelf = self {

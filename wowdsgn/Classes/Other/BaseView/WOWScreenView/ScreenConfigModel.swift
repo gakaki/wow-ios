@@ -43,7 +43,7 @@ class ScreenModel:NSObject,Mappable{
     func mapping(map: Map) {
         id          <-   map["id"]
         name        <-   map["name"]
-        imgurl      <-   map["imgurl"]
+        imgurl      <-   map["icon"]
         min         <-   map["min"]
         max         <-   map["max"]
     }

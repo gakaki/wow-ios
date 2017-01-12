@@ -459,7 +459,7 @@ extension WOWSearchController:UITextFieldDelegate{
         v_bottom.magicView.isHidden = false
         screenBtnimg.isHidden  = false
         v_bottom.magicView.reloadData(toPage: 0)
-     
+        screenView.clearAction()
         refreshSubView(0)
     }
     

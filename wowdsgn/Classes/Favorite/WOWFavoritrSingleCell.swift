@@ -41,13 +41,6 @@ class WOWFavoritrSingleCell: UICollectionViewCell {
             logoLabel.isHidden = true
         }
   
-        
-//        switch indexPath.item {
-//        case 0,1:
-//            topLine.hidden = false
-//        default:
-//            topLine.hidden = true
-//        }
     }
     
     

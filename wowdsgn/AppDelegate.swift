@@ -386,20 +386,36 @@ extension AppDelegate: AdLaunchViewDelegate {
             if let strongSelf = self {
                 if let imgUrl = res.first?.imgUrl {
                     //                Defaults[.pic_ad] = imgUrl
-                    strongSelf.lunchView.backgroundImg.kf.setImage(with: URL(string:imgUrl),
-                                        placeholder:UIImage(named: "Artboard"),
-                                        options: nil,
-                                        progressBlock: nil,
-                                        completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
-                                            if let strongSelf = self {
-                                                UIView.animate(withDuration: 1, animations: {
-                                                    if strongSelf.lunchView.backgroundImg != nil {
-                                                        strongSelf.lunchView.backgroundImg.alpha = 1
-                                                    }
-                                                    
-                                                })
-                                            }
+                    strongSelf.lunchView.backgroundImg.yy_setImage(
+                        with: URL(string:imgUrl.webp_url()),
+                        placeholder: UIImage(named: "Artboard"),
+                        options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+                        completion: {[weak self] (img, url, from_type, image_stage,err ) in
+                            if let strongSelf = self {
+                                UIView.animate(withDuration: 1, animations: {
+                                    if strongSelf.lunchView.backgroundImg != nil {
+                                        strongSelf.lunchView.backgroundImg.alpha = 1
+                                    }
+                                    
+                                })
+                            }
+                            
                     })
+
+//                    strongSelf.lunchView.backgroundImg.kf.setImage(with: URL(string:imgUrl),
+//                                        placeholder:UIImage(named: "Artboard"),
+//                                        options: nil,
+//                                        progressBlock: nil,
+//                                        completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
+//                                            if let strongSelf = self {
+//                                                UIView.animate(withDuration: 1, animations: {
+//                                                    if strongSelf.lunchView.backgroundImg != nil {
+//                                                        strongSelf.lunchView.backgroundImg.alpha = 1
+//                                                    }
+//                                                    
+//                                                })
+//                                            }
+//                    })
                     
                 }
             }

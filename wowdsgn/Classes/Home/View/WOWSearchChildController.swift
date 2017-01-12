@@ -172,7 +172,7 @@ class WOWSearchChildController: WOWBaseViewController{
                     strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
                 }
                 strongSelf.collectionView.reloadData()
-                if ( strongSelf.pageIndex == 1 ){
+                if ( strongSelf.pageIndex == 1 && strongSelf.dataArr.count > 0){
                     strongSelf.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.top)
                 }
             }
@@ -265,14 +265,27 @@ class WOWSearchChildController: WOWBaseViewController{
         collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
         collectionView.mj_header = self.mj_header
         collectionView.mj_footer = self.mj_footer
+        collectionView.emptyDataSetDelegate  = self
+        collectionView.emptyDataSetSource    = self
     }
     
+    func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView.self), owner: self, options: nil)?.last as! WOWEmptySearchView
+        //        view.center = self.view.center
+//        view.backgroundColor = DefaultBackColor
+        return view
+    }
     
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
+        return -40
+    }
+
     
 }
-
-
-
 
 
 extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewDataSource{

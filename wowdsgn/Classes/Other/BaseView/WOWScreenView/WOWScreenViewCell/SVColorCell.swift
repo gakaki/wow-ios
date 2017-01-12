@@ -35,7 +35,7 @@ class SVColorCell: UITableViewCell {
         collectionView.backgroundColor = GrayColorLevel5
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.isUserInteractionEnabled = true
+//        collectionView.isUserInteractionEnabled = true
 //        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context:nil)
     }
   
@@ -85,20 +85,51 @@ extension SVColorCell:UICollectionViewDelegate,UICollectionViewDataSource,UIColl
         //FIX 测试数据
         let cellModel = dataArr![indexPath.row]
 
-        if let moduleImage = cellModel.imgurl {
-            
-            DispatchQueue.main.async {
-               cell.imgColor.set_webimage_url(moduleImage)
-            }
+//        if let moduleImage = cellModel.imgurl {
+        
 
+               cell.imgColor.set_webimage_url("https://img.wowdsgn.com/static/product/images/1480317652001cutipol-%E9%BB%91%E9%87%91%E5%A4%A7.jpg")
+
+
+//        }
+
+        cell.btnSelect.addAction {[weak self] in
+            if let strongSelf = self {
+                
+                var params : [String: AnyObject]
+                params = (strongSelf.dataArr?.getScreenCofig(index: indexPath.row,dicKey: "colorIdArr"))!
+                
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateScreenConditionsKey, object: params as AnyObject?)
+                
+                strongSelf.collectionView.reloadData()
+                
+            }
         }
+        if !cellModel.isSelect {
+
+            cell.btnSelect.setImage(UIImage(), for: UIControlState())
+            
+        }else{
+            var clooseImage:UIImage!
+            if cellModel.name?.contains("白") ?? false { // 如果是白色，则用黑色的 选中
+                clooseImage = UIImage.init(named: "Check-black")
+            }else{
+                clooseImage = UIImage.init(named: "Check-white")
+            }
+            cell.btnSelect.setImage(clooseImage, for: UIControlState())
+        }
+
         cell.imgColor.tag = indexPath.row
 
         self.updateCollectionViewHight(hight: self.collectionView.collectionViewLayout.collectionViewContentSize.height)
         
         return cell
     }
-    
+    func clickItem(sender:UIButton) {
+        
+      
+
+    }
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 30.w,height: 30.h)
     }
@@ -110,12 +141,6 @@ extension SVColorCell:UICollectionViewDelegate,UICollectionViewDataSource,UIColl
         return UIEdgeInsetsMake(20, 20, 20, 20)
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        var params : [String: AnyObject]
-        params = (dataArr?.getScreenCofig(index: indexPath.row,dicKey: "colorIdArr"))!
-        NotificationCenter.postNotificationNameOnMainThread(WOWUpdateScreenConditionsKey, object: params as AnyObject?)
-    }
     
 }
 extension Array {

@@ -5,7 +5,7 @@
 //  Created by 陈旭 on 2017/1/6.
 //  Copyright © 2017年 g. All rights reserved.
 //
-
+import IQKeyboardManagerSwift
 import UIKit
 // 页面如果有筛选，则只需，继承这个类就可以。
 class BaseScreenViewController: WOWBaseViewController {
@@ -92,8 +92,19 @@ class BaseScreenViewController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
 
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
+    }
+    
     /*
     // MARK: - Navigation
 

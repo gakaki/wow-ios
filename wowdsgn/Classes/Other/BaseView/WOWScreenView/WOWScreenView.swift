@@ -424,19 +424,31 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
         lbTitle.text = title
         lbTitle.font = Fontlevel002
         
-        let imgOut   = UIImageView()
-        imgOut.image = UIImage.init(named: "address_add")
-        imgOut.tag   = indexSection
-        imgOut.isUserInteractionEnabled = true
-        imgOut.addTapGesture(action: {[weak self] (tap) in
+        let model = self.arrayTitle[indexSection]
+        
+        let imgOut   = UILabel()
+        imgOut.font  = UIFont.systemFont(ofSize: 20)
+
+        if (model.isOut ?? false) {
+            imgOut.text   = "-"
+        }else{
+            imgOut.text   = "+"
+        }
+        imgOut.textAlignment = .center
+
+        v.addTapGesture(action: {[weak self] (tap) in
             if let strongSelf = self{
-              let model = strongSelf.arrayTitle[imgOut.tag]
+               let modelA = strongSelf.arrayTitle[indexSection]
                 
-                if (model.isOut ?? false) {
-                    model.isOut = false
+                if (modelA.isOut ?? false) {
+                    
+                    modelA.isOut = false
+                  
                 }else{
-                    model.isOut = true
+                 
+                    modelA.isOut = true
                 }
+
                strongSelf.tableView.reloadSections([indexSection], animationStyle: .automatic)
 
             }

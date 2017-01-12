@@ -20,18 +20,29 @@
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5t-F5-wk1">
                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eo3-Zv-MqQ">
+                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                        <state key="normal">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="C5t-F5-wk1" secondAttribute="trailing" id="2Vd-eB-0jC"/>
+                <constraint firstItem="eo3-Zv-MqQ" firstAttribute="width" secondItem="C5t-F5-wk1" secondAttribute="width" id="BJx-GO-lT6"/>
+                <constraint firstItem="eo3-Zv-MqQ" firstAttribute="centerY" secondItem="C5t-F5-wk1" secondAttribute="centerY" id="DbE-ax-AXo"/>
+                <constraint firstItem="eo3-Zv-MqQ" firstAttribute="centerX" secondItem="C5t-F5-wk1" secondAttribute="centerX" id="IR6-pH-2NH"/>
                 <constraint firstAttribute="bottom" secondItem="C5t-F5-wk1" secondAttribute="bottom" id="Jbd-mc-D43"/>
                 <constraint firstItem="C5t-F5-wk1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="NWH-2f-dBo"/>
                 <constraint firstItem="C5t-F5-wk1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XYU-7j-JE5"/>
+                <constraint firstItem="eo3-Zv-MqQ" firstAttribute="height" secondItem="C5t-F5-wk1" secondAttribute="height" id="b8k-AD-w3g"/>
             </constraints>
             <connections>
+                <outlet property="btnSelect" destination="eo3-Zv-MqQ" id="IpI-fB-rmR"/>
                 <outlet property="imgColor" destination="C5t-F5-wk1" id="bZj-N5-Qjk"/>
             </connections>
-            <point key="canvasLocation" x="126" y="155"/>
+            <point key="canvasLocation" x="-288" y="-107"/>
         </collectionViewCell>
     </objects>
 </document>

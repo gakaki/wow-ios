@@ -10,6 +10,7 @@ import UIKit
 
 class ColorCVCell: UICollectionViewCell {
     @IBOutlet weak var imgColor: UIImageView!
+    @IBOutlet weak var btnSelect: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

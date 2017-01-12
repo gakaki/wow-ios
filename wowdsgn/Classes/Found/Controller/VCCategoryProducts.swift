@@ -260,6 +260,19 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
           }
     }
     
+    func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView.self), owner: self, options: nil)?.last as! WOWEmptySearchView
+
+        return view
+    }
+    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
+        return -40
+    }
 
 
 }

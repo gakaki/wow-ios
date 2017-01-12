@@ -340,6 +340,8 @@
 		2D2331E21DFF9398006E7BC0 /* WOWUpdateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2331DC1DFF9398006E7BC0 /* WOWUpdateHeader.xib */; };
 		2D2331E31DFF9398006E7BC0 /* WOWUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2331DD1DFF9398006E7BC0 /* WOWUpdateView.swift */; };
 		2D2331E41DFF9398006E7BC0 /* WOWUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2331DE1DFF9398006E7BC0 /* WOWUpdateView.xib */; };
+		2D26FD2A1E2479F1006D75F4 /* SVCloosePriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FD281E2479F1006D75F4 /* SVCloosePriceCell.swift */; };
+		2D26FD2B1E2479F1006D75F4 /* SVCloosePriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D26FD291E2479F1006D75F4 /* SVCloosePriceCell.xib */; };
 		2D509A141DB5D30B0047CD13 /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A101DB5D30B0047CD13 /* WOWController.swift */; };
 		2D509A151DB5D30B0047CD13 /* WOWLikeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */; };
 		2D509A161DB5D30C0047CD13 /* WOWSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A121DB5D30B0047CD13 /* WOWSearchController.swift */; };
@@ -890,6 +892,8 @@
 		2D2331DC1DFF9398006E7BC0 /* WOWUpdateHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateHeader.xib; sourceTree = "<group>"; };
 		2D2331DD1DFF9398006E7BC0 /* WOWUpdateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateView.swift; sourceTree = "<group>"; };
 		2D2331DE1DFF9398006E7BC0 /* WOWUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateView.xib; sourceTree = "<group>"; };
+		2D26FD281E2479F1006D75F4 /* SVCloosePriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVCloosePriceCell.swift; sourceTree = "<group>"; };
+		2D26FD291E2479F1006D75F4 /* SVCloosePriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVCloosePriceCell.xib; sourceTree = "<group>"; };
 		2D509A101DB5D30B0047CD13 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
 		2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWLikeListController.swift; sourceTree = "<group>"; };
 		2D509A121DB5D30B0047CD13 /* WOWSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSearchController.swift; sourceTree = "<group>"; };
@@ -2215,6 +2219,8 @@
 				2D562C971E16038500E702CE /* SVPriceCell.xib */,
 				2D562C981E16038500E702CE /* SVStyleCell.swift */,
 				2D562C991E16038500E702CE /* SVStyleCell.xib */,
+				2D26FD281E2479F1006D75F4 /* SVCloosePriceCell.swift */,
+				2D26FD291E2479F1006D75F4 /* SVCloosePriceCell.xib */,
 			);
 			path = WOWScreenViewCell;
 			sourceTree = "<group>";
@@ -2584,6 +2590,7 @@
 				2D509A861DB5D3120047CD13 /* WOWSubArtCell.xib in Resources */,
 				069D32571DB47ADD00A059D0 /* WOWShareView.xib in Resources */,
 				069D333A1DB47ADE00A059D0 /* city.json in Resources */,
+				2D26FD2B1E2479F1006D75F4 /* SVCloosePriceCell.xib in Resources */,
 				2DDC99B61DDAEE2C00201856 /* WOWHotColumnCell.xib in Resources */,
 				069D31C31DB47ADD00A059D0 /* WOWSelectPayView.xib in Resources */,
 				069D32C41DB47ADD00A059D0 /* WOWOrderDetailPayCell.xib in Resources */,
@@ -2793,6 +2800,7 @@
 				069D32661DB47ADD00A059D0 /* WOWGoodsBigCell.swift in Sources */,
 				069D32831DB47ADD00A059D0 /* WOWProductHeaderView.swift in Sources */,
 				2D1AB5C51E07D43000821012 /* Cell_104_TwoLine.swift in Sources */,
+				2D26FD2A1E2479F1006D75F4 /* SVCloosePriceCell.swift in Sources */,
 				06A5C4731E13D4D800FE0A7A /* TalkingDataEvent.swift in Sources */,
 				069D32EF1DB47ADD00A059D0 /* ArrayGroupBy.swift in Sources */,
 				069D33151DB47ADE00A059D0 /* HolderTextView.swift in Sources */,

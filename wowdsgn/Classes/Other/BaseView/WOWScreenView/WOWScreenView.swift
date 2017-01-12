@@ -7,6 +7,12 @@
 //
 
 import UIKit
+class PriceSectionModel:NSObject {
+    
+    var maxPrice : Int?
+    var minPrice : Int?
+    
+}
 class SectionModel: NSObject {
     var sectionTitle : String?
     var isOut :Bool?
@@ -22,37 +28,40 @@ struct ScreenViewConfig{
 
     static var headerViewHight :CGFloat = 64
     static var footerViewHight :CGFloat = 50
-    static var screenTitles             = ["颜色","风格"]
+    static var screenTitles             = ["颜色","价格范围","风格"]
     static let kDuration                = 0.3
     static let frameX :CGFloat          = 75.w
 }
 typealias SureScreenAction =  (_ ScreenConditions:AnyObject) -> ()
 class WOWScreenView: UIView,CAAnimationDelegate {
     /* CellID */
-    let cellColorID       = String(describing: SVColorCell.self)
-    let cellPriceID       = String(describing: SVPriceCell.self)
-    let cellStyleID       = String(describing: SVStyleCell.self)
+    let cellColorID             = String(describing: SVColorCell.self)
+    let cellPriceID             = String(describing: SVPriceCell.self)
+    let cellStyleID             = String(describing: SVStyleCell.self)
+    let cellCloosePriceID       = String(describing: SVCloosePriceCell.self)
     /* categoryId */
     let categoryId  :Int? = 10
     /* 数据源 */
-    var mainModel         :ScreenConfigModel?
-    var colorArr          = [ScreenModel]()
-    var styleArr          = [ScreenModel]()
-    var sceneArr          = [ScreenModel]()
-    var priceArr          = [ScreenModel]()
+    var mainModel               :ScreenConfigModel?
+    var colorArr                = [ScreenModel]()
+    var styleArr                = [ScreenModel]()
+    var sceneArr                = [ScreenModel]()
+    var priceArr                = [ScreenModel]()
     /* 配置信息 */
-    var cellHightDic      = Dictionary<Int, CGFloat>()
-    var arrayTitle        = [SectionModel]()
+    var cellHightDic            = Dictionary<Int, CGFloat>()
+    var arrayTitle              = [SectionModel]()
     /* 筛选条件 */
-    var screenColorArr     = [String]()
-    var screenStyleArr     = [String]()
-    var screenPriceArr     =  Dictionary<String, AnyObject>()
-    var screenScreenArr    = [String]()
+    var screenColorArr          = [String]()
+    var screenStyleArr          = [String]()
+    var screenPriceArr          =  Dictionary<String, Any>()
+    var screenScreenArr         = [String]()
     
     var screenAction  : SureScreenAction!
     
-    private var  btnBack :UIButton!
+    var cloosePriceModel  = PriceSectionModel()
     
+    
+    private var  btnBack :UIButton!
     private lazy var headerView: UIView = {
         
            let view                 = UIView()
@@ -92,7 +101,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         super.init(frame: frame)
         
         cellHightDic = [0 : 40 ,
-                        1 : 54 ,
+                        1 : 65 ,
                         2 : 54 ,
                         3 : 54 ]
         
@@ -171,7 +180,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         footerView.btnClear.addTarget(self, action:#selector(clearAction), for:.touchUpInside)
         footerView.btnSure.addTarget(self, action:#selector(sureAction), for:.touchUpInside)
         tableView.register(UINib.nibName(cellColorID), forCellReuseIdentifier:cellColorID)
-        tableView.register(UINib.nibName(cellPriceID), forCellReuseIdentifier:cellPriceID)
+        tableView.register(UINib.nibName(cellCloosePriceID), forCellReuseIdentifier:cellCloosePriceID)
         tableView.register(UINib.nibName(cellStyleID), forCellReuseIdentifier:cellStyleID)
     
         self.addSubview(tableView)
@@ -214,9 +223,47 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     }
     func clearAction()  {
         print("clear")
+        cloosePriceModel.minPrice = nil
+        cloosePriceModel.maxPrice = nil
+        screenColorArr.removeAll()
+        screenStyleArr.removeAll()
+        for model in colorArr {
+            if model.isSelect {
+                model.isSelect = false
+            }
+            
+        }
+        for model in styleArr {
+            if model.isSelect {
+                model.isSelect = false
+            }
+            
+        }
+        self.tableView.reloadData()
+        let parms = [String: AnyObject]()
+        screenAction(parms as AnyObject)
     }
     func sureAction()  {
-        print("sure")
+    
+        if let min = cloosePriceModel.minPrice {
+            
+            screenPriceArr  = ["minPrice":min]
+            
+        }else {
+            cloosePriceModel.minPrice = 0
+        }
+        if let max = cloosePriceModel.maxPrice {
+            
+            screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0,"maxPrice":max]
+        }else{
+            screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0]
+        }
+        if let min = cloosePriceModel.minPrice ,let max = cloosePriceModel.maxPrice {
+            if min > max {
+                WOWHud.showMsg("请输入正确的价格范围")
+                return
+            }
+        }
         var parms = [String: AnyObject]()
         parms = ["colorList" :screenColorArr as AnyObject,
                  "priceObj"  :screenPriceArr as AnyObject,
@@ -278,15 +325,16 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
             return 0
         }
         switch section {
-        case 1:
+        case 2:
             return styleArr.count
         case 0:
             
             return colorArr.count > 0 ? 1 : 0
         
-        case 2:
+        case 1:
             
-            return priceArr.count > 0 ? 1 : 0
+//            return priceArr.count > 0 ? 1 : 0
+            return 1
             
 
         case 3:
@@ -305,20 +353,22 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
 
         switch indexPath.section {
         case 0:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: cellColorID, for: indexPath as IndexPath) as! SVColorCell
+            let cell            = tableView.dequeueReusableCell(withIdentifier: cellColorID, for: indexPath as IndexPath) as! SVColorCell
             cell.delegate     = self
             cell.indexPathNow = indexPath as NSIndexPath!
             cell.dataArr        = colorArr
             cell.selectionStyle = .none
             return cell
-        case 2:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: cellPriceID, for: indexPath as IndexPath) as! SVPriceCell
-            cell.delegate     = self
-            cell.indexPathNow = indexPath as NSIndexPath!
-            cell.dataArr      = priceArr
+        case 1:
+            let cell            = tableView.dequeueReusableCell(withIdentifier: cellCloosePriceID, for: indexPath as IndexPath) as! SVCloosePriceCell
+            
+//            cell.delegate     = self
+//            cell.indexPathNow = indexPath as NSIndexPath!
+//            cell.dataArr      = priceArr
+            cell.modelPrice     = self.cloosePriceModel
             cell.selectionStyle = .none
             return cell
-        case 1:
+        case 2:
             let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
             let model = styleArr[indexPath.row]
             cell.showData(m: model)
@@ -340,7 +390,7 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 1:
+        case 2:
             
             var params : [String: AnyObject]
              params = styleArr.getScreenCofig(index: indexPath.row,dicKey: "styleIdArr")
@@ -415,6 +465,9 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
         }
 
         return v
+    }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        UIApplication.shared.keyWindow?.endEditing(true)
     }
 }
 extension WOWScreenView:SVColorCellDelegate,SVPriceCellDelegate{

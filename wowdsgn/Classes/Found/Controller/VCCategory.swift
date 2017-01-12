@@ -17,7 +17,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     var ob_cid                                  = Variable(10)
     var ob_tab_index                            = Variable(UInt(0))
     var index                                   = 0
-
+    
+    var vc : VCCategoryProducts?
     
     func get_category_index() -> Int {
         let indexes     = vo_categories.flatMap { $0.categoryID! }
@@ -79,6 +80,9 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         self.mj_footer.isHidden = true
         self.cv.allowsMultipleSelection = false
 
+        
+        
+        
         request()
  
 //        _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
@@ -109,6 +113,33 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         
         addTopView()
         addBottomProductView()
+        
+        screenView.screenAction = {[unowned self] (dic) in
+            print(dic)
+            let dicResult = dic as! [String:AnyObject]
+            if dicResult["colorList"] != nil{
+                self.screenColorArr  = dicResult["colorList"] as? [String]
+            }else{
+                self.screenColorArr?.removeAll()
+            }
+            if dicResult["priceObj"] != nil {
+                self.screenPriceArr  = dicResult["priceObj"] as! Dictionary
+                self.screenMinPrice = self.screenPriceArr["minPrice"]
+                self.screenMaxPrice = self.screenPriceArr["maxPrice"]
+            }else{
+                self.screenMinPrice = nil
+                self.screenMaxPrice = nil
+            }
+            
+            if dicResult["styleList"] != nil{
+                self.screenStyleArr  = dicResult["styleList"] as? [String]
+            }else{
+                self.screenStyleArr?.removeAll()
+            }
+            
+            self.refreshSubView(self.ob_tab_index.value)
+        }
+
 
     }
     
@@ -144,8 +175,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 
         
         self.addChildViewController(v_bottom)
-        self.view.addSubview(v_bottom.magicView)
-        
+//        self.view.addSubview(v_bottom.magicView)
+         self.view.insertSubview(v_bottom.magicView, belowSubview: screenBtnimg)
         v_bottom.magicView.snp.makeConstraints { [weak self](make) -> Void in
             if let strongSelf = self {
                 make.width.equalTo(strongSelf.view)
@@ -319,8 +350,9 @@ extension VCCategory:VTMagicViewDelegate{
     {
         DLog("cid \(ob_cid.value) tab_index \(tab_index)")
         
-        if let b    = self.v_bottom.magicView.menuItem(at: tab_index) as! TooglePriceBtn? ,
+        if let b    = self.v_bottom.magicView.menuItem(at: tab_index) as! TooglePriceBtn?,
             let vc  = self.v_bottom.magicView.viewController(atPage: tab_index) as? VCCategoryProducts
+            
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
             let query_cid          = ob_cid.value
@@ -339,8 +371,17 @@ extension VCCategory:VTMagicViewDelegate{
             vc.query_sortBy        = query_sortBy
             vc.query_asc           = query_asc
             vc.query_categoryId    = query_cid
+
+            
+            vc.screenMinPrice     = self.screenMinPrice
+            vc.screenMaxPrice     = self.screenMaxPrice
+            vc.screenColorArr     = self.screenColorArr
+            vc.screenStyleArr     = self.screenStyleArr
+        
             vc.pageIndex           = 1 //每次点击都初始化咯
+            
             vc.request()
+
         }
     }
     
@@ -357,5 +398,5 @@ extension VCCategory:VTMagicViewDelegate{
         self.ob_tab_index.value = itemIndex
         refreshSubView(itemIndex)
     }
-    
+
 }

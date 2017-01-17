@@ -8,17 +8,13 @@
 //
 
 import UIKit
-import VTMagic
-import RxSwift
- 
-class WOWSearchController: BaseScreenViewController{
+
+class WOWSearchController: WOWBaseViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     var isLoadPrice: Bool = false
     var dataArr = [WOWProductModel]()
-    var ob_cid                                  = Variable(10)
-    var ob_tab_index                            = Variable(UInt(0))
-    var index                                   = 0
+    var brandArr = [WOWBrandV1Model]()
     
     fileprivate var keyWords = [AnyObject](){
         didSet{
@@ -75,7 +71,6 @@ class WOWSearchController: BaseScreenViewController{
     
     deinit{
         searchView.removeFromSuperview()
-        self.v_bottom.magicView.removeFromSuperview()
     }
 
     
@@ -88,20 +83,14 @@ class WOWSearchController: BaseScreenViewController{
         view.cancelButton.addTarget(self, action:#selector(cancel), for:.touchUpInside)
         return view
     }()
+//    lazy var childVC:WOWSearchSortController = {
+//        let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWSearchSortController.self)) as! WOWSearchSortController
+//        vc.brandArray = self.brandArr
+//        vc.view.frame = CGRect(x: 0, y: 0,width: MGScreenWidth,height: MGScreenHeight - 64)
+//        return vc
+//    }()
     
-    
-    lazy var v_bottom: VCVTMagic = {
-        let v = VCVTMagic()
-        v.magicView.dataSource = self
-        v.magicView.delegate = self
-       
-        v.magicView.backgroundColor = UIColor.white
-        self.addChildViewController(v)
-        v.magicView.frame = CGRect(x: 0, y: 0,width: MGScreenWidth,height: MGScreenHeight - 64)
-        v.magicView.isHidden = true
-        return v
-    }()
-   
+
     lazy var emptyView: UIView = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView.self), owner: self, options: nil)?.last as! WOWEmptySearchView
         view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight)
@@ -150,8 +139,13 @@ class WOWSearchController: BaseScreenViewController{
             
             if let strongSelf = self {
                 strongSelf.endRefresh()
-                
+                strongSelf.brandArr = []
                 let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["products"].arrayObject)
+                let brands = Mapper<WOWBrandV1Model>().mapArray(JSONObject:JSON(result)["brands"].arrayObject)
+                if let brands = brands {
+                    
+                    strongSelf.brandArr = brands
+                }
                 if let array = arr{
                     strongSelf.dataArr = []
                     if array.isEmpty {
@@ -183,36 +177,9 @@ class WOWSearchController: BaseScreenViewController{
         self.view.backgroundColor = UIColor.white
         defaultSetup()
         defaultData()
-        screenBtnimg.isHidden  = true
         self.view.addSubview(emptyView)
         
-        screenView.screenAction = {[unowned self] (dic) in
-            print(dic)
-            let dicResult = dic as! [String:AnyObject]
-            if dicResult["colorList"] != nil{
-                self.screenColorArr  = dicResult["colorList"] as? [String]
-            }else{
-                 self.screenColorArr?.removeAll()
-            }
-            if dicResult["priceObj"] != nil {
-                self.screenPriceArr  = dicResult["priceObj"] as! Dictionary
-                self.screenMinPrice = self.screenPriceArr["minPrice"]
-                self.screenMaxPrice = self.screenPriceArr["maxPrice"]
-            }else{
-                self.screenMinPrice = nil
-                self.screenMaxPrice = nil
-            }
-            
-            if dicResult["styleList"] != nil{
-                self.screenStyleArr  = dicResult["styleList"] as? [String]
-            }else{
-                self.screenStyleArr?.removeAll()
-            }
-          
-            self.refreshSubView(self.ob_tab_index.value)
-        }
-        
-//         self.view.insertSubview(emptyView, belowSubview: screenBtnimg)
+       
     }
     
     func defaultSetup() {
@@ -446,6 +413,10 @@ extension WOWSearchController:UITextFieldDelegate{
         return true
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        hideResult()
+        return true
+    }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         hideResult()
@@ -453,148 +424,38 @@ extension WOWSearchController:UITextFieldDelegate{
     }
     func showResult() {
         
-//        self.view.addSubview(v_bottom.magicView)
-        self.view.insertSubview(v_bottom.magicView, belowSubview: screenBtnimg)
+        let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWSearchSortController.self)) as! WOWSearchSortController
+        vc.brandArray = self.brandArr
+        vc.view.frame = CGRect(x: 0, y: 0,width: MGScreenWidth,height: MGScreenHeight - 64)
+      
+        vc.keyword = searchView.searchTextField.text ?? ""
+        
+        vc.v_bottom.magicView.clearMemoryCache()
+        vc.v_bottom.magicView.reloadData(toPage: 0)
+        vc.refreshSubView(0)
+        vc.willMove(toParentViewController: self)
+        self.addChildViewController(vc)
+        self.view.addSubview(vc.view)
+        vc.didMove(toParentViewController: self)
+
         self.navigationShadowImageView?.isHidden = true
-        v_bottom.magicView.isHidden = false
-        screenBtnimg.isHidden  = false
-        v_bottom.magicView.reloadData(toPage: 0)
-        screenView.clearAction()
-        refreshSubView(0)
+
     }
     
     func hideResult()  {
+        let array = self.childViewControllers
+        if array.count > 0 {
+            let vc = array[0] as! WOWSearchSortController
+            vc.v_bottom.magicView.clearMemoryCache()
+            vc.willMove(toParentViewController: nil)
+            vc.view.removeFromSuperview()
+            vc.removeFromParentViewController()
+        }
         emptyView.isHidden = true
         self.navigationShadowImageView?.isHidden = false
-        v_bottom.magicView.isHidden = true
-        screenBtnimg.isHidden  = true
-        v_bottom.magicView.clearMemoryCache()
-        self.v_bottom.magicView.removeFromSuperview()
 
     }
 }
-
-
-
-/**********************搜索结果的searchView********************************/
-
-
-extension WOWSearchController:VTMagicViewDataSource{
-    
-    var identifier_magic_view_bar_item : String {
-        get {
-            return "identifier_magic_view_bar_item"
-        }
-    }
-    var identifier_magic_view_page : String {
-        get {
-            return "identifier_magic_view_page"
-        }
-    }
-    override func vtm_prepareForReuse() {
-        
-    }
-    //获取所有菜单名，数组中存放字符串类型对象
-    func menuTitles(for magicView: VTMagicView) -> [String] {
-        return ["上新","销量","价格"]
-    }
-    func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
-        
-        
-//        let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
-        
-//        if ( button == nil) {
-//
-            let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: 50)) { (asc) in
-                print("you clicket status is "  , asc)
-            }
-            b.btnIndex = itemIndex
-            if ( itemIndex <= 1) {
-                b.image_is_show = false
-            }else{
-                b.image_is_show = true
-            }
-            return b
-//
-//        }
-//
-//        return button!
-
-
-    }
-    
-    func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
-        
-        let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
-        
-        if ((vc == nil)) {
-            
-            let vc_me = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWSearchChildController.self)) as! WOWSearchChildController
-            addChildViewController(vc_me)
-            return vc_me
-        }
-        
-        return vc!;
-    }
-    func touchClick(_ btn:UIButton){
-        DLog(btn.state)
-    }
-}
-
-extension WOWSearchController:VTMagicViewDelegate{
-
-    func refreshSubView( _ tab_index:UInt )
-    {
-        DLog("cid \(ob_cid.value) tab_index \(tab_index)")
-        
-        if let b    = self.v_bottom.magicView.menuItem(at: tab_index) as? TooglePriceBtn ,
-             let vc  = self.v_bottom.magicView.viewController(atPage: tab_index) as? WOWSearchChildController
-        {
-            let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
-//            let query_cid          = ob_cid.value
-            var query_asc          = 0
-            if ( tab_index == 2){ //价格的话用他的排序 其他 正常升序
-                if b.asc {
-                    query_asc = 1
-                }else {
-                    query_asc = 0
-                }
-            }else{
-                query_asc          = 0
-            }
-            
-            vc.pageVc           = query_sortBy
-            vc.asc              = query_asc
-            vc.seoKey           = searchView.searchTextField.text
-            vc.pageIndex        = 1 //每次点击都初始化咯
-            vc.entrance         = .searchEntrance
-//            vc.dataArr          = self.dataArr
-            vc.screenMinPrice     = self.screenMinPrice
-            vc.screenMaxPrice     = self.screenMaxPrice
-            vc.screenColorArr     = self.screenColorArr
-            vc.screenStyleArr     = self.screenStyleArr
-        
-            
-            vc.request()
-        }
-    }
-    
-    func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-        self.ob_tab_index.value = pageIndex
-        if abs(index) > 1 {
-            refreshSubView(pageIndex)
-        }
-    }
-    
-    func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
-        index = Int(ob_tab_index.value) - Int(itemIndex)
-        self.ob_tab_index.value = itemIndex
-        refreshSubView(itemIndex)
-    }
-    
-}
-
-
 
 
 

@@ -116,6 +116,24 @@
             </objects>
             <point key="canvasLocation" x="787" y="2219"/>
         </scene>
+        <!--Search Sort Controller-->
+        <scene sceneID="gru-fJ-RSC">
+            <objects>
+                <viewController storyboardIdentifier="WOWSearchSortController" id="OW5-lG-BzW" customClass="WOWSearchSortController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uZz-K9-Ws1"/>
+                        <viewControllerLayoutGuide type="bottom" id="TFZ-tb-MHV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EKi-uJ-WNw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RHq-a8-7Ru" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1202" y="1016"/>
+        </scene>
         <!--喜欢-->
         <scene sceneID="QUc-1l-x1X">
             <objects>
@@ -626,7 +644,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C52-5x-XiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="1285"/>
+            <point key="canvasLocation" x="658" y="1203"/>
         </scene>
     </scenes>
     <resources>

@@ -88,7 +88,7 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
         
         //TalkingData统计页面
         TalkingData.trackPageBegin( self.title )
-        
+//        self.navigationController?.hidesBarsWhenVerticallyCompact = true
         //友盟统计页面
         MobClick.beginLogPageView(self.title)
         setCustomerBack()

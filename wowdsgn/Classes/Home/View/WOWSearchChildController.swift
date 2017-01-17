@@ -23,6 +23,11 @@ enum SortType:String {
     case Desc           = "desc"    // 降序
     
 }
+
+protocol WOWSearchChildControllerDelegate :class{
+    func brandView(isHidden: Bool)
+}
+
 class WOWSearchChildController: WOWBaseViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -68,7 +73,7 @@ class WOWSearchChildController: WOWBaseViewController{
     var screenMinPrice      : Int?
     var screenMaxPrice      : Int?
 
-    
+    weak var delegate: WOWSearchChildControllerDelegate?
     var seoKey: String?
     var couponId: Int?
     var entrance        = productEntrance.searchEntrance
@@ -267,8 +272,25 @@ class WOWSearchChildController: WOWBaseViewController{
         collectionView.mj_footer = self.mj_footer
         collectionView.emptyDataSetDelegate  = self
         collectionView.emptyDataSetSource    = self
+//        collectionView.addObserver(self, forKeyPath: "contentOffset", options: .old, context: nil)
     }
     
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        if (keyPath == "contentOffset") {
+//            let scrollView = object as! UICollectionView
+//            let offsetY = scrollView.contentOffset.y
+//            var isHidden = false
+//            if offsetY >= 0 && offsetY <= 100 {
+//                isHidden = false
+//            }else {
+//                isHidden = true
+//            }
+//            if  let del = delegate {
+//                del.brandView(isHidden: isHidden)
+//            }
+//        }
+//    
+//    }
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
         let view = Bundle.main.loadNibNamed(String(describing: WOWEmptySearchView.self), owner: self, options: nil)?.last as! WOWEmptySearchView
         //        view.center = self.view.center
@@ -305,9 +327,6 @@ extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewData
         return cell
     }
     
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         let model = dataArr[(indexPath as NSIndexPath).row]
@@ -315,6 +334,29 @@ extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewData
         vc.productId = model.productId ?? 0
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        var isHidden = false
+        if offsetY > 100 {
+            isHidden = true
+        }
+        if  let del = delegate {
+            del.brandView(isHidden: isHidden)
+        }
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        if  let del = delegate {
+            del.brandView(isHidden: false)
+        }
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        
+    }
+
+    
 }
 
 

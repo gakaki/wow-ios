@@ -57,4 +57,25 @@ struct WOWShareManager {
 
         }
     }
+    
+    static func shareUrl(_ title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
+        shareBackView.show()
+      
+        shareBackView.shareActionBack = {(shareType:WOWShareType)in
+            switch shareType {
+            case .friends:
+
+                WowShare.share_friends(title ?? "", shareText: shareText, url: url, shareImage: shareImage)
+                
+                
+                return
+            case .wechat:
+                
+                WowShare.share_text(title ?? "", shareText: shareText, url: url, shareImage: shareImage)
+
+                return
+            }
+            
+        }
+    }
 }

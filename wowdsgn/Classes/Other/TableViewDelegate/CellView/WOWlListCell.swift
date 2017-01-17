@@ -18,7 +18,23 @@ class WOWlListCell: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 201 // 单条图片cell
     }
+    @IBOutlet weak var imgRationConstraints: NSLayoutConstraint!
     @IBOutlet var bigImageView: UIImageView!
+    var model : WOWCarouselBanners?{
+        didSet{
+            
+            rate = CGFloat(WOWArrayAddStr.get_img_size_withThreeTwo(str: model?.bannerImgSrc ?? ""))// 拿到图片的宽高比,
+            
+            itemHight = MGScreenWidth * rate // 计算此Item的高度
+            
+            imgRationConstraints.constant = itemHight
+
+        }
+    }
+    var rate:CGFloat = 2/3 // 宽高比
+    
+    
+    var itemHight : CGFloat = 100
     
     fileprivate var productBtns = [UIButton]()
     var heightAll:CGFloat = MGScreenWidth * 0.66
@@ -35,10 +51,7 @@ class WOWlListCell: UITableViewCell,ModuleViewElement {
     func showData(_ model:WOWCarouselBanners) {
         let url = model.bannerImgSrc ?? ""
         DLog(url)
-
-        bigImageView.set_webimage_url(url);
-
-        
+        bigImageView.set_webimage_url(url)
         
         productBtns.forEach { (view) in
             view.removeFromSuperview()

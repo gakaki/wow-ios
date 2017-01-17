@@ -228,6 +228,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             cell.delegate = self.vc as! SenceCellDelegate?
             cell.showData(model.moduleContent!)
+            cell.model = model.moduleContent!
             cell_heights[section]  = cell.heightAll
             returnCell = cell
         case 601:
@@ -265,6 +266,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             cell.dataSourceArray = array
             cell.delegate        = self.vc as! cell_801_delegate?
             cell_heights[section]  = cell.heightAll
+            cell.currentSingTodayName = model.moduleContentProduct?.name ?? "今日单品"
             returnCell = cell
         case 402:
             
@@ -478,6 +480,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 case 402:
                     isHiddenLien = false
                     t            =  model.moduleContentProduct?.name ?? "居家好物"
+                    return WOW_Cell_402_Hearder(title: t,isHiddenLine: isHiddenLien,is402: true,id: model.moduleContentProduct?.id ?? 0)
                 case 501:
                     isHiddenLien = true
                     t            = "单品推荐"
@@ -556,8 +559,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         return view
         
     }
-    // 类似本周上新的页眉
-    func WOW_Cell_402_Hearder(title: String,isHiddenLine:Bool) -> UIView {
+    // 类似本周上新的页眉 // 是否是 402 产品组模块， 是的话，显示更多 点击跳转对应的产品组详情页
+    func WOW_Cell_402_Hearder(title: String,isHiddenLine:Bool,is402:Bool = false,id:Int = 0) -> UIView {
         
         let v = Bundle.main.loadNibNamed("WOWHotHeaderView", owner: self, options: nil)?.last as! WOWHotHeaderView
         v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth,height: 50)
@@ -567,6 +570,18 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         }else{
             v.lbLine.isHidden = false
         }
+        if is402 {
+            v.btnMore.isHidden = false
+            v.btnMore.addAction {
+                print("跳转对应的产品组的详情页\(id)")
+                VCRedirect.goToProductGroup(id)
+//                VCRedirect.toTopicList(topicId: id)
+
+            }
+        }else{
+            v.btnMore.isHidden = true
+        }
+        
         return v
     }
     

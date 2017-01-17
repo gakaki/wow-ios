@@ -556,6 +556,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         let view = Bundle.main.loadNibNamed("WOWHotHeaderView", owner: self, options: nil)?.last as! WOWHotHeaderView
         view.lbTitle.text = title
         view.lbLine.isHidden = true
+        view.btnMore.isHidden = true
         return view
         
     }
@@ -575,6 +576,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             v.btnMore.addAction {
                 print("跳转对应的产品组的详情页\(id)")
                 VCRedirect.goToProductGroup(id)
+                
 //                VCRedirect.toTopicList(topicId: id)
 
             }

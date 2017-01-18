@@ -49,7 +49,7 @@ public class FNUtil {
         }
         return dic
     }
-
+    
     //合并两个字典
     public class func mergeDictionary(dic0: Dictionary<String, AnyObject?>?, dic1: Dictionary<String, AnyObject?>?) -> Dictionary<String, AnyObject?>? {
         var dic = dic0

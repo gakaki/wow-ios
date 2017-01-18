@@ -36,8 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        RouterRule.router_init()
-
+//        RouterRule.router_init()
+        JLRouterRule.router_init()
         
         asyncLoad()
 
@@ -161,6 +161,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }else{
 //                UIApplication.shared.openURL(url)
 //            }
+            
+            if JLRouterRule.handle_open_url(url: url) {
+                return true
+            }
+            
+            
+            
             return true
         }
         
@@ -171,9 +178,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
-        if RouterRule.handle_open_url(url: url){
+        if JLRouterRule.handle_open_url(url: url){
             return true
         }
+//        if RouterRule.handle_open_url(url: url){
+//            return true
+//        }
         if Pingpp.handleOpen(url, withCompletion: nil) {
             return true
         }
@@ -201,9 +211,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // iOS 9 以上请用这个
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         
-        if RouterRule.handle_open_url(url: url){
+        if JLRouterRule.handle_open_url(url: url){
             return true
         }
+//        if RouterRule.handle_open_url(url: url){
+//            return true
+//        }
         
         if Pingpp.handleOpen(url, withCompletion: nil) {
             return true
@@ -240,10 +253,7 @@ extension AppDelegate{
         nav.isNavigationBarHidden = true
         window?.rootViewController =    nav
     }
-   
     
-    
-   
     func configRootVC(){
         let infoDictionary = Bundle.main.infoDictionary
         let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String

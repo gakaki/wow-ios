@@ -29,8 +29,8 @@ target 'wowdsgn' do
 	#pod 'JSPatchPlatform'
 	pod 'Reachability'
 
-
-    pod 'IQKeyboardManagerSwift'
+	pod 'JLRoutes'
+  pod 'IQKeyboardManagerSwift'
 	#pod 'HidingNavigationBar', '~> 0.3.0'
 	pod 'SwiftyJSON'
 	pod 'ObjectMapper'
@@ -50,12 +50,12 @@ target 'wowdsgn' do
 
   #Ping++支付
 	pod "Qiniu"
-    pod 'XZMRefresh'            #横向刷新
+  pod 'XZMRefresh'            #横向刷新
 	pod 'FMDB'
 	pod 'FCUUID'
 	pod 'MJRefresh'
 	pod 'DZNEmptyDataSet'
-    pod 'TZImagePickerController'
+  pod 'TZImagePickerController'
 
 	## ShareSDK主模块(必须)
 	#pod 'ShareSDK3'

@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 import WebViewBridge_Swift
-
+import JLRoutes
 
 public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavigationDelegate {
     
@@ -34,7 +34,9 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
             print("webView:\(webView) decidePolicyForNavigationAction:\(decidePolicyFor) decisionHandler:\(decisionHandler)")
             if let url = decidePolicyFor.request.url {
                 print(url.absoluteString)
-                FN.open(url: url.absoluteString)
+                
+                JLRoutes.global().routeURL(url)
+//                FN.open(url: url.absoluteString)
             }
 
 //        }

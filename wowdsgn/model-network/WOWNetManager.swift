@@ -51,6 +51,7 @@ class WOWNetManager {
         let endpoint = Endpoint<RequestApi>(URL: target.baseURL.appendingPathComponent(target.path).absoluteString, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: method, parameters: parameters, parameterEncoding: target.encoding)
         return endpoint.endpointByAddingHTTPHeaderFields(target.headers())
     }
+    
     let requestProvider = MoyaProvider<RequestApi>(endpointClosure: WOWNetManager.endpointClosure)
 
     

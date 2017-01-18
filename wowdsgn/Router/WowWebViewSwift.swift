@@ -11,7 +11,11 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     @IBOutlet weak var reloadBtn: UIButton!
     @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var progressView: UIProgressView!
-
+    fileprivate var shareProductImage:UIImage? //供分享使用
+    lazy var placeImageView:UIImageView={  //供分享使用
+        let image = UIImageView()
+        return image
+    }()
     public let webView: WKWebView = {
         let webConfiguration    = WKWebViewConfiguration()
         let w = WKWebView(frame: .zero, configuration: webConfiguration)
@@ -178,7 +182,43 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         }
     }
     
+    //MARK: -- Net 
+    func requestH5() {
+        WOWHud.showLoadingSV()
+        WOWNetManager.sharedManager.requestWithTarget(.api_H5Share(h5Url: url), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self {
+                let json = JSON(result)
+                let shareUrl = json["h5Url"].string ?? ""
+                let shareTitle = json["h5Title"].string ?? ""
+                let shareDesc = json["h5Desc"].string ?? ""
+                let shareImg = json["h5ImgUrl"].string ?? ""
+                //加载分享图片
+                strongSelf.placeImageView.yy_setImage(
+                    with: URL(string:shareImg ),
+                    placeholder: nil,
+                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+                    completion: { [weak self] (img, url, from_type, image_stage,err ) in
+                        if let strongSelf = self{
+                            WOWHud.dismiss()
+                            strongSelf.shareProductImage = img
+                            //加载成功后弹出分享按钮
+                            WOWShareManager.shareUrl(shareTitle, shareText: shareDesc, url: shareUrl, shareImage: strongSelf.shareProductImage ?? UIImage(named: "me_logo")!)
+                            
+                        }
+                        
+                        
+                })
+                
 
+            }
+            
+        }) { (errorMsg) in
+            WOWHud.dismiss()
+            WOWHud.showMsg("获取分享链接失败！")
+        }
+
+    }
+    
     //MARMK: -- Action
     @IBAction func goBackClick(_ sender: UIButton) {
         // 获取webView当前加载的页面的数量，可以判断是否在首页，解决无法返回的问题
@@ -195,8 +235,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     }
     
     @IBAction func shareClick(_ sender: UIButton) {
-        let shareUrl = url
-        WOWShareManager.share("", shareText: "", url: shareUrl)
+        requestH5()
      
     }
     

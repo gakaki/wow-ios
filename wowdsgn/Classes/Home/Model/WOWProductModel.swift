@@ -53,6 +53,8 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var hasStock                    : Bool?
     var productQty                  : Int?
     
+  
+    
     override init() {
         super.init()
     }
@@ -104,6 +106,8 @@ class WOWProductModel: WOWBaseModel,Mappable{
         attributes                  <- map["attributes"]
         availableStock              <- map["availableStock"]
         hasStock                    <- map["hasStock"]
+        
+    
         // 前端自己算的 折扣数  暂时废弃，放到后台
 //        if let sellPrice = sellPrice , let originalprice = originalprice {
 //            

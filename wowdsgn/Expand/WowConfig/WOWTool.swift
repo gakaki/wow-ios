@@ -144,12 +144,25 @@ struct WOWArrayAddStr {
         }
         return newArray
     }
-    // 后台返回的图片后面有图片size的参数 此方法拿到。
+    // 后台返回的图片后面有图片size的参数 此方法拿到。 默认 1比1
    static func get_img_size(str:String) -> Float {
     
         let array = str.components(separatedBy: "_2dimension_")
         var pointArr:[String] = ["100","100"]
     
+        if array.count > 1 {
+            
+            pointArr = array[1].components(separatedBy: ".")[0].components(separatedBy: "x")
+            
+        }
+        return pointArr[1].toFloat()! / pointArr[0].toFloat()!
+    }
+    // 后台返回的图片后面有图片size的参数 此方法拿到。 默认 三比二
+    static func get_img_size_withThreeTwo(str:String) -> Float {
+        
+        let array = str.components(separatedBy: "_2dimension_")
+        var pointArr:[String] = ["100","67"]
+        
         if array.count > 1 {
             
             pointArr = array[1].components(separatedBy: ".")[0].components(separatedBy: "x")

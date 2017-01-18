@@ -19,7 +19,10 @@ class MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell:UICollectionViewCell{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    func setLookMoreUI()  {
+        self.backgroundColor = UIColor.white
+        bg_pic.image = UIImage.init(named: "lookMore")
+    }
     func setModel(_ m:WowModulePageItemVO){
         bg_pic.set_webimage_url(m.categoryBgImg)
     }

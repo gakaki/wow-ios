@@ -238,6 +238,9 @@ public enum RequestApi{
     case api_MessageRead(messageId: Int, msgType: Int)
     
     case api_MessageAllRead(msgType: Int)
+    
+    //分享H5
+    case api_H5Share(h5Url: String)
 
 }
 
@@ -493,6 +496,8 @@ extension RequestApi:TargetType{
             return URL_MessageAllRead
         case .api_Logout:
             return URL_Logout
+        case .api_H5Share:
+            return URL_H5Share
             
         default:
             return URL_topic
@@ -745,6 +750,8 @@ extension RequestApi:TargetType{
                 params = ["messageId": messageId, "msgType": msgType]
             case let .api_MessageAllRead(msgType):
                 params = ["msgType": msgType]
+            case let .api_H5Share(h5Url):
+                params = ["h5Url": h5Url]
 
             default:
                 break

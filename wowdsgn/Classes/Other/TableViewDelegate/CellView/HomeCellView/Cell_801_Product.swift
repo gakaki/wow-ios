@@ -19,6 +19,14 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
      var heightAll:CGFloat = 210
     //当前展示的图片索引
     var currentIndex : Int = 0
+    // 统一标题
+    var currentSingTodayName : String? {
+        didSet{
+            leftView?.lb_SingTodayName.text     = currentSingTodayName
+            middleView?.lb_SingTodayName.text   = currentSingTodayName
+            rightView?.lb_SingTodayName.text    = currentSingTodayName
+        }
+    }
     
     //用于轮播的左中右三个View（不管几张都是这三个UIView交替使用）
     var leftView , middleView , rightView : WOW_SingProductView?
@@ -95,7 +103,7 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
     }
     func singProductView() -> WOW_SingProductView {
         let v = Bundle.main.loadNibNamed("WOW_SingProductView", owner: self, options: nil)?.last as! WOW_SingProductView
-        
+
         return v
     }
     //设置三个 View 左中右
@@ -103,12 +111,14 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
         pagingScrollView.scrollView.removeSubviews()
         
         self.leftView       = singProductView()
+//        self.leftView?.lb_SingTodayName.text = self.currentSingTodayName
         let cvLeft          = countDownView()
         cvLeft.frame        = (self.leftView?.view_CountDown?.bounds)!
         cvLeft.timeStamp    = 0
         self.leftView?.view_CountDown?.addSubview(cvLeft)
         
         self.middleView     = singProductView()
+//        self.middleView?.lb_SingTodayName.text = self.currentSingTodayName
         let cvMiddle        = countDownView()
         cvMiddle.frame      = (self.middleView?.view_CountDown?.bounds)!
         cvMiddle.timeStamp  = 0
@@ -116,6 +126,7 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
         
         
         self.rightView      = singProductView()
+//        self.rightView?.lb_SingTodayName.text = self.currentSingTodayName
         let cvRight         = countDownView()
         cvRight.frame       = (self.rightView?.view_CountDown?.bounds)!
         cvRight.timeStamp   = 0
@@ -210,7 +221,8 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
             }
         }
         v?.model = model
-         v?.imgVieww.set_webimage_url(model?.productImg)
+        v?.imgVieww.set_webimage_url(model?.productImg)
+//        v?.lb_SingTodayName.text = self.currentSingTodayName
 //        v?.imgVieww.set_webimage_url_base(model?.productImg, place_holder_name: "placeholder_product")
 
         if let price = model?.sellPrice {

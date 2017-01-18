@@ -46,6 +46,7 @@ class WOWController: WOWBaseModuleVC {
         super.viewWillDisappear(animated)
               self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         //        hidingNavBarManager?.viewWillDisappear(animated)
+        
     }
     
     override func viewDidLayoutSubviews() {

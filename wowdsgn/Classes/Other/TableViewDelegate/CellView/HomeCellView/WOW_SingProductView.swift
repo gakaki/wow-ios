@@ -14,6 +14,7 @@ class WOW_SingProductView: UIView {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var originalpriceLabel: UILabel!
     @IBOutlet weak var imgProduct: UIImageView!
+    @IBOutlet weak var lb_SingTodayName: UILabel!
     // 图片局 左边lable的 数值
     var width : CGFloat  {
         get{

@@ -62,7 +62,9 @@ class BaseScreenViewController: WOWBaseViewController {
         // Do any additional setup after loading the view.
         
     }
-   
+    deinit {
+        print("销毁")
+    }
     override func setUI() {
         super.setUI()
          configScreeningView()

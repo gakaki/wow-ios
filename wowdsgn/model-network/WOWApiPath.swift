@@ -227,3 +227,6 @@ let URL_ScreenMain              = "v1/product/filter-conditions"
 let URL_ScreenPrice             = "category/price-ranges"
 let URL_ScreenResult            = "product/condition"
 
+//获取H5分享参数
+let URL_H5Share                 = "v1/h5PageForAppShare"
+

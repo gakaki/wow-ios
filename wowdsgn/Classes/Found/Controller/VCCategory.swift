@@ -19,6 +19,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     var index                                   = 0
     
     var vc : VCCategoryProducts?
+    var topIsHidden = false
     
     func get_category_index() -> Int {
         let indexes     = vo_categories.flatMap { $0.categoryID! }
@@ -100,6 +101,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     }
 
     @IBOutlet weak var cv: UICollectionView!
+    @IBOutlet weak var cvTop: NSLayoutConstraint!
     
     override func setUI()
     {
@@ -108,7 +110,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         //为了在autolayout的视图里获得真的宽度
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
-        
+        self.view.backgroundColor = UIColor.red
         self.edgesForExtendedLayout = UIRectEdge()
         
         addTopView()
@@ -146,7 +148,6 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     func addTopView(){
         cv.delegate = self
         cv.dataSource = self
-        
         //not add this where add cell in uicollectionview
         //self.cv.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "reuse_id")
         
@@ -168,29 +169,54 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         v_bottom.magicView.dataSource           = self
         v_bottom.magicView.delegate             = self
         
-        
+        v_bottom.magicView.backgroundColor = UIColor.blue
 //        v_bottom.magicView.isMenuScrollEnabled    = true
 //        v_bottom.magicView.isSwitchAnimated       = true
 //        v_bottom.magicView.isScrollEnabled        = true
 
         
-        self.addChildViewController(v_bottom)
+//        self.addChildViewController(v_bottom)
 //        self.view.addSubview(v_bottom.magicView)
          self.view.insertSubview(v_bottom.magicView, belowSubview: screenBtnimg)
         v_bottom.magicView.snp.makeConstraints { [weak self](make) -> Void in
             if let strongSelf = self {
                 make.width.equalTo(strongSelf.view)
                 make.top.equalTo(strongSelf.cv.snp.bottom)
-                make.bottom.equalTo(strongSelf.view.snp.bottomMargin)
+                make.bottom.equalTo(strongSelf.view.snp.bottom)
             }
             
         }
-        
+    
         v_bottom.magicView.reloadData(toPage: 0)
         
         refreshSubView(ob_tab_index.value)
     }
     
+    
+    func showBrand() {
+        topIsHidden = false
+        view.layoutIfNeeded()
+        cvTop.constant = 0
+      
+        UIView.animate(withDuration: 0.5) {[weak self] in
+            if let strongSelf = self {
+                strongSelf.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    func hiddenBrand() {
+        topIsHidden = true
+        view.layoutIfNeeded()
+        cvTop.constant = -110
+        
+        UIView.animate(withDuration: 0.5) {[weak self] in
+            if let strongSelf = self {
+                strongSelf.view.layoutIfNeeded()
+            }
+        }
+    }
+
 
     let cell_reuse_id        = "reuse_id"
     let cell_reuse_id_label  = "reuse_id_label"
@@ -344,7 +370,7 @@ extension VCCategory:VTMagicViewDataSource{
 
 
 
-extension VCCategory:VTMagicViewDelegate{
+extension VCCategory:VTMagicViewDelegate, VCCategoryProductsDelegate{
     
     func refreshSubView( _ tab_index:UInt )
     {
@@ -379,7 +405,7 @@ extension VCCategory:VTMagicViewDelegate{
             vc.screenStyleArr     = self.screenStyleArr
         
             vc.pageIndex           = 1 //每次点击都初始化咯
-            
+            vc.delegate = self
             vc.request()
 
         }
@@ -399,4 +425,16 @@ extension VCCategory:VTMagicViewDelegate{
         refreshSubView(itemIndex)
     }
 
+    func cvTopView(isHidden: Bool) {
+        if isHidden {
+            if !topIsHidden {
+                hiddenBrand()
+            }
+           
+        }else {
+            if topIsHidden {
+                showBrand()
+            }
+        }
+    }
 }

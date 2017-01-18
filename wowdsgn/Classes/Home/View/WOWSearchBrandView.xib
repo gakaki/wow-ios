@@ -32,13 +32,23 @@
                         <outlet property="delegate" destination="iN0-l3-epB" id="RdF-7E-4d5"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWP-wg-QA6">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                    <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="TuN-tJ-osX"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="xWP-wg-QA6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="21a-r4-GXv"/>
                 <constraint firstItem="jjQ-f0-znd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4pG-TD-Y0b"/>
                 <constraint firstItem="2YK-ML-cLV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6VA-sp-FAF"/>
                 <constraint firstAttribute="trailing" secondItem="jjQ-f0-znd" secondAttribute="trailing" id="7UM-S3-gUm"/>
+                <constraint firstItem="xWP-wg-QA6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9Ej-gE-pzv"/>
                 <constraint firstItem="jjQ-f0-znd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QLD-lI-4i4"/>
+                <constraint firstAttribute="trailing" secondItem="xWP-wg-QA6" secondAttribute="trailing" id="Vis-cU-mVw"/>
                 <constraint firstItem="2YK-ML-cLV" firstAttribute="top" secondItem="jjQ-f0-znd" secondAttribute="bottom" id="ghc-hF-6Cp"/>
                 <constraint firstAttribute="bottom" secondItem="2YK-ML-cLV" secondAttribute="bottom" constant="15" id="uhJ-DL-qja"/>
                 <constraint firstAttribute="trailing" secondItem="2YK-ML-cLV" secondAttribute="trailing" id="xpT-an-Z4W"/>

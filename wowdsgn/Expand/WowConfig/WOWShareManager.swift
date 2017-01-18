@@ -34,13 +34,18 @@ struct WOWShareManager {
 //                })
                 
                 
-                WowShare.share_friends(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage)
+                WowShare.share_friends(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage, successClosure: {
+                    WOWHud.showMsg("分享成功")
+                })
                 
                 
                return
             case .wechat:
                 
-                WowShare.share_text(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage)
+                WowShare.share_text(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage, successClosure: {
+                    WOWHud.showMsg("分享成功")
+
+                })
 
                 
 //                UMSocialData.default().extConfig.wechatSessionData.title = title
@@ -64,14 +69,20 @@ struct WOWShareManager {
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             switch shareType {
             case .friends:
-
-                WowShare.share_friends(title ?? "", shareText: shareText, url: url, shareImage: shareImage)
                 
+                WowShare.share_friends(title ?? "", shareText: shareText, url: url, shareImage: shareImage, successClosure: {
+                    WOWHud.showMsg("分享成功")
+
+                })
+               
                 
                 return
             case .wechat:
                 
-                WowShare.share_text(title ?? "", shareText: shareText, url: url, shareImage: shareImage)
+                WowShare.share_text(title ?? "", shareText: shareText, url: url, shareImage: shareImage, successClosure: {
+                    WOWHud.showMsg("分享成功")
+
+                })
 
                 return
             }

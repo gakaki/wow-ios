@@ -240,10 +240,7 @@ extension AppDelegate{
         nav.isNavigationBarHidden = true
         window?.rootViewController =    nav
     }
-   
     
-    
-   
     func configRootVC(){
         let infoDictionary = Bundle.main.infoDictionary
         let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String

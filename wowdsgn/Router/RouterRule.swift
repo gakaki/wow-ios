@@ -21,7 +21,7 @@ public class RouterRule {
 
         FNUrlRoute.initUrlRoute(dictionary: ["m.wowdsgn.com/main": RouterModuleMain.self,
                                              "m.wowdsgn.com/item": RouterModuleProduct.self,
-                                             "m.wowdsgn.com/contenttopic": RouterModuleContenTopic.self,          //product?id=id 商品详情页(产品详情)
+                                             "m.wowdsgn.com/contenttopic": RouterModuleContenTopic.self,          //商品详情页(产品详情)
                                              "m.wowdsgn.com/producttopic": RouterModuleProductTopic.self,          // 商品列表详情页(系列品)
                                              "m.wowdsgn.com/brand": RouterModuleBrand.self,                   //品牌详情页
                                              "m.wowdsgn.com/designer": RouterModuleDesigner.self,             //设计师详情页

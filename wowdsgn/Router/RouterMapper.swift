@@ -19,6 +19,7 @@ public class RouterModuleMain : FNUrlRouteDelegate{
         case "me":
             rootIndexVC = 4
         default:
+            rootIndexVC = 0 //啥都没有去首页
             break
         }
         VCRedirect.toHomeIndex(index: rootIndexVC)

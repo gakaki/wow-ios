@@ -29,8 +29,8 @@ target 'wowdsgn' do
 	#pod 'JSPatchPlatform'
 	pod 'Reachability'
 
-
-    pod 'IQKeyboardManagerSwift'
+	pod 'JLRoutes'
+  pod 'IQKeyboardManagerSwift'
 	#pod 'HidingNavigationBar', '~> 0.3.0'
 	pod 'SwiftyJSON'
 	pod 'ObjectMapper'

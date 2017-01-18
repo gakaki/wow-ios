@@ -21,7 +21,7 @@ class WOWSearchBrandCell: UITableViewCell {
     func showData(model: WOWBrandV1Model?) {
         if let model = model {
             brandImg.set_webimage_url(model.image)
-            brandName.text = model.name
+            brandName.text = String(format: "品牌：%@", model.name ?? "")
         }
     }
 

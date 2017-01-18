@@ -11,6 +11,8 @@ import UMSocialCore
 import UMSocialNetwork
 import UShareUI
 
+public typealias ShareSuccessClosure               = () -> ()
+
 public class WowShare {
     
     public static func is_wx_installed() -> Bool{
@@ -60,12 +62,13 @@ public class WowShare {
         let result = UMSocialManager.default().handleOpen(url)
         return result
     }
-    
+        
     public static func share_friends(
         _ title:String = "尖叫设计欢迎您",
         shareText:String?,
         url:String?,
-        shareImage:UIImage = UIImage(named: "me_logo")!)
+        shareImage:UIImage = UIImage(named: "me_logo")!,
+        successClosure:@escaping ShareSuccessClosure)
     {
         var messageObject                       = UMSocialMessageObject()
         let shareObject:UMShareWebpageObject    = UMShareWebpageObject.init()
@@ -86,12 +89,14 @@ public class WowShare {
                 if error != nil {
                     print("Share Fail with error ：%@", error)
                     message = "失败原因Code: \(error)"
+                    var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
+                    
+                    alert.show()
                 }else{
                     print("Share succeed")
-                    message = "分享成功"
+                    successClosure()
                 }
-                var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: NSLocalizedString("确定", comment: ""), otherButtonTitles: "")
-                alert.show()
+                
         })
     }
     
@@ -101,7 +106,8 @@ public class WowShare {
         _ title:String = "尖叫设计欢迎您",
         shareText:String?,
         url:String?,
-        shareImage:UIImage = UIImage(named: "me_logo")!)
+        shareImage:UIImage = UIImage(named: "me_logo")!,
+        successClosure:@escaping ShareSuccessClosure)
     {
         
         
@@ -124,12 +130,14 @@ public class WowShare {
                 if error != nil {
                     print("Share Fail with error ：%@", error)
                     message = "失败原因Code: \(error)"
+                    var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
+                    
+                    alert.show()
                 }else{
                     print("Share succeed")
-                    message = "分享成功"
+                    successClosure()
                 }
-                let alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: NSLocalizedString("确定", comment: ""), otherButtonTitles: "")
-                alert.show()
+                
         })
 
     }

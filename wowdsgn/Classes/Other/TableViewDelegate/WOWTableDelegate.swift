@@ -573,7 +573,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         }
         if is402 {
             v.btnMore.isHidden = false
-            v.btnMore.addAction {
+            v.btnMore.addAction {// 点击更多跳转对应的产品组详情页
                 print("跳转对应的产品组的详情页\(id)")
                 VCRedirect.goToProductGroup(id)
                 

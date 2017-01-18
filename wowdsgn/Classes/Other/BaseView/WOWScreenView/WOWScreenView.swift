@@ -242,6 +242,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         self.tableView.reloadData()
         let parms = [String: AnyObject]()
         screenAction(parms as AnyObject)
+        self.hideView()
     }
     func sureAction()  {
     
@@ -260,8 +261,13 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         }
         if let min = cloosePriceModel.minPrice ,let max = cloosePriceModel.maxPrice {
             if min > max {
-                WOWHud.showMsg("请输入正确的价格范围")
-                return
+                
+              screenPriceArr  = ["minPrice":max,"maxPrice":min]
+            cloosePriceModel.maxPrice = min
+            cloosePriceModel.minPrice = max
+            self.tableView.reloadData()
+//            WOWHud.showMsg("请输入正确的价格范围")
+//                return
             }
         }
         var parms = [String: AnyObject]()
@@ -272,6 +278,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         ]
 //        SureScreenAction(parms)
         screenAction(parms as AnyObject)
+        self.hideView()
     }
 
     deinit{

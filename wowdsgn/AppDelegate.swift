@@ -161,6 +161,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }else{
 //                UIApplication.shared.openURL(url)
 //            }
+            
+            if JLRouterRule.handle_open_url(url: url) {
+                return true
+            }
+            
+            
+            
             return true
         }
         

@@ -17,18 +17,31 @@ public class JLRouterRule {
     }
     
     public class func handle_open_url( url:URL ) -> Bool {
-        
-        //校验url对应的 host + path 是否为被注册的 key
-        if (
-            JLRoutes.canRouteURL(url) &&
-                (url.host == "m.wowdsgn.com" || url.host == "m.intra.wowdsgn.com") )
-        {
-            return JLRoutes.global().routeURL(replace_domain_name(url))
+      
+        if let host = url.host {
+            
+            if (host == "m.wowdsgn.com" || host == "m.intra.wowdsgn.com" ) {
+                //进行我们需要的处理
+                let url_replaced = replace_domain_name(url)
+                
+                if JLRoutes.canRouteURL(url_replaced) {
+                    return JLRoutes.global().routeURL(url_replaced)
+                }else{
+                    print("该url 未能被打开 \(url_replaced.absoluteString) ")
+                    return false
+                }
+            }
+            else {
+                print("该url非指定域名",host)
+                return false
+            }
         }else{
-            print("该url 未能被打开 \(url.absoluteString) ")
+            //没有url
+            print("无url 无host",url.absoluteString)
             return false
         }
-    
+
+        
     }
     
     

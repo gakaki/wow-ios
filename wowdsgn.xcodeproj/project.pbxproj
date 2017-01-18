@@ -524,6 +524,7 @@
 		63F3DA9C1DED160E009CE52D /* WOWRemissionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F3DA9B1DED160E009CE52D /* WOWRemissionHeaderView.xib */; };
 		63F3DA9F1DED17B5009CE52D /* WOWRemissionNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3DA9D1DED17B5009CE52D /* WOWRemissionNameCell.swift */; };
 		63F3DAA01DED17B5009CE52D /* WOWRemissionNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F3DA9E1DED17B5009CE52D /* WOWRemissionNameCell.xib */; };
+		9E3EEDCD1E2F44C0000D4145 /* FNUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EEDCC1E2F44C0000D4145 /* FNUtil.swift */; };
 		9E94F0751E2F0B7D0008D2CE /* JLRouterRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E94F0741E2F0B7D0008D2CE /* JLRouterRule.swift */; };
 /* End PBXBuildFile section */
 
@@ -1075,6 +1076,7 @@
 		63F3DA9B1DED160E009CE52D /* WOWRemissionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWRemissionHeaderView.xib; sourceTree = "<group>"; };
 		63F3DA9D1DED17B5009CE52D /* WOWRemissionNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRemissionNameCell.swift; sourceTree = "<group>"; };
 		63F3DA9E1DED17B5009CE52D /* WOWRemissionNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWRemissionNameCell.xib; sourceTree = "<group>"; };
+		9E3EEDCC1E2F44C0000D4145 /* FNUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUtil.swift; sourceTree = "<group>"; };
 		9E94F0741E2F0B7D0008D2CE /* JLRouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLRouterRule.swift; sourceTree = "<group>"; };
 		DCD449CB28CB16A176F60958 /* Pods-wowdsgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1123,6 +1125,7 @@
 				0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */,
 				06C869A11DD19A25004C05E3 /* RouterMapper.swift */,
 				9E94F0741E2F0B7D0008D2CE /* JLRouterRule.swift */,
+				9E3EEDCC1E2F44C0000D4145 /* FNUtil.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -2660,6 +2663,7 @@
 				069D33181DB47ADE00A059D0 /* KMPlaceholderTextView.swift in Sources */,
 				069D32D21DB47ADD00A059D0 /* WOWProvinceModel.swift in Sources */,
 				6376E23B1E0A5C78001457B7 /* WOWLeaveTipsController.swift in Sources */,
+				9E3EEDCD1E2F44C0000D4145 /* FNUtil.swift in Sources */,
 				2D509A741DB5D3120047CD13 /* WOWMenuTopView.swift in Sources */,
 				63F3DA861DE69C6D009CE52D /* WOWCommentHeaderView.swift in Sources */,
 				069D32521DB47ADD00A059D0 /* WOWNoNetView.swift in Sources */,

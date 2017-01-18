@@ -307,12 +307,6 @@
 		069D33561DB47B3E00A059D0 /* WOWRequestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */; };
 		06A5C44F1E13B1F500FE0A7A /* ConfigH5URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4411E13B1F500FE0A7A /* ConfigH5URL.swift */; };
 		06A5C4501E13B1F500FE0A7A /* DynamicFun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4421E13B1F500FE0A7A /* DynamicFun.swift */; };
-		06A5C4511E13B1F500FE0A7A /* FN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4441E13B1F500FE0A7A /* FN.swift */; };
-		06A5C4521E13B1F500FE0A7A /* FNUrlMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4451E13B1F500FE0A7A /* FNUrlMatcher.swift */; };
-		06A5C4531E13B1F500FE0A7A /* FNUrlRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4461E13B1F500FE0A7A /* FNUrlRoute.swift */; };
-		06A5C4541E13B1F500FE0A7A /* FNUrlRouteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4471E13B1F500FE0A7A /* FNUrlRouteDelegate.swift */; };
-		06A5C4551E13B1F500FE0A7A /* FNUrlRouteHandleOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4481E13B1F500FE0A7A /* FNUrlRouteHandleOver.swift */; };
-		06A5C4561E13B1F500FE0A7A /* FNUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4491E13B1F500FE0A7A /* FNUtil.swift */; };
 		06A5C4571E13B1F500FE0A7A /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 06A5C44A1E13B1F500FE0A7A /* index.html */; };
 		06A5C4581E13B1F500FE0A7A /* ThirdPartyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C44B1E13B1F500FE0A7A /* ThirdPartyHelper.swift */; };
 		06A5C4591E13B1F500FE0A7A /* UMengEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C44C1E13B1F500FE0A7A /* UMengEvent.swift */; };
@@ -531,11 +525,6 @@
 		63F3DA9F1DED17B5009CE52D /* WOWRemissionNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3DA9D1DED17B5009CE52D /* WOWRemissionNameCell.swift */; };
 		63F3DAA01DED17B5009CE52D /* WOWRemissionNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F3DA9E1DED17B5009CE52D /* WOWRemissionNameCell.xib */; };
 		9E94F0751E2F0B7D0008D2CE /* JLRouterRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E94F0741E2F0B7D0008D2CE /* JLRouterRule.swift */; };
-		9EE8D6781E2E0707006D43F6 /* JLROptionalRouteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE8D66F1E2E0706006D43F6 /* JLROptionalRouteParser.m */; };
-		9EE8D6791E2E0707006D43F6 /* JLRRouteDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE8D6711E2E0706006D43F6 /* JLRRouteDefinition.m */; };
-		9EE8D67A1E2E0707006D43F6 /* JLRRouteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE8D6731E2E0707006D43F6 /* JLRRouteRequest.m */; };
-		9EE8D67B1E2E0707006D43F6 /* JLRRouteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE8D6751E2E0707006D43F6 /* JLRRouteResponse.m */; };
-		9EE8D67C1E2E0707006D43F6 /* JLRoutes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE8D6771E2E0707006D43F6 /* JLRoutes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -861,12 +850,6 @@
 		069D33531DB47B3E00A059D0 /* WOWRequestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRequestApi.swift; sourceTree = "<group>"; };
 		06A5C4411E13B1F500FE0A7A /* ConfigH5URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigH5URL.swift; sourceTree = "<group>"; };
 		06A5C4421E13B1F500FE0A7A /* DynamicFun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicFun.swift; sourceTree = "<group>"; };
-		06A5C4441E13B1F500FE0A7A /* FN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FN.swift; sourceTree = "<group>"; };
-		06A5C4451E13B1F500FE0A7A /* FNUrlMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUrlMatcher.swift; sourceTree = "<group>"; };
-		06A5C4461E13B1F500FE0A7A /* FNUrlRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUrlRoute.swift; sourceTree = "<group>"; };
-		06A5C4471E13B1F500FE0A7A /* FNUrlRouteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUrlRouteDelegate.swift; sourceTree = "<group>"; };
-		06A5C4481E13B1F500FE0A7A /* FNUrlRouteHandleOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUrlRouteHandleOver.swift; sourceTree = "<group>"; };
-		06A5C4491E13B1F500FE0A7A /* FNUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNUtil.swift; sourceTree = "<group>"; };
 		06A5C44A1E13B1F500FE0A7A /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		06A5C44B1E13B1F500FE0A7A /* ThirdPartyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyHelper.swift; sourceTree = "<group>"; };
 		06A5C44C1E13B1F500FE0A7A /* UMengEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMengEvent.swift; sourceTree = "<group>"; };
@@ -1093,16 +1076,6 @@
 		63F3DA9D1DED17B5009CE52D /* WOWRemissionNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRemissionNameCell.swift; sourceTree = "<group>"; };
 		63F3DA9E1DED17B5009CE52D /* WOWRemissionNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWRemissionNameCell.xib; sourceTree = "<group>"; };
 		9E94F0741E2F0B7D0008D2CE /* JLRouterRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLRouterRule.swift; sourceTree = "<group>"; };
-		9EE8D66E1E2E0706006D43F6 /* JLROptionalRouteParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLROptionalRouteParser.h; sourceTree = "<group>"; };
-		9EE8D66F1E2E0706006D43F6 /* JLROptionalRouteParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLROptionalRouteParser.m; sourceTree = "<group>"; };
-		9EE8D6701E2E0706006D43F6 /* JLRRouteDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLRRouteDefinition.h; sourceTree = "<group>"; };
-		9EE8D6711E2E0706006D43F6 /* JLRRouteDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLRRouteDefinition.m; sourceTree = "<group>"; };
-		9EE8D6721E2E0707006D43F6 /* JLRRouteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLRRouteRequest.h; sourceTree = "<group>"; };
-		9EE8D6731E2E0707006D43F6 /* JLRRouteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLRRouteRequest.m; sourceTree = "<group>"; };
-		9EE8D6741E2E0707006D43F6 /* JLRRouteResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLRRouteResponse.h; sourceTree = "<group>"; };
-		9EE8D6751E2E0707006D43F6 /* JLRRouteResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLRRouteResponse.m; sourceTree = "<group>"; };
-		9EE8D6761E2E0707006D43F6 /* JLRoutes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLRoutes.h; sourceTree = "<group>"; };
-		9EE8D6771E2E0707006D43F6 /* JLRoutes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLRoutes.m; sourceTree = "<group>"; };
 		DCD449CB28CB16A176F60958 /* Pods-wowdsgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowdsgn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wowdsgn/Pods-wowdsgn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1652,7 +1625,6 @@
 		069D31051DB47ADD00A059D0 /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
-				9EE8D66C1E2E0706006D43F6 /* JLRoutes */,
 				63D20CF11E23863800105FBC /* CyclePictureView */,
 				069D31421DB47ADD00A059D0 /* HolderTextView */,
 				069D31461DB47ADD00A059D0 /* KMPlaceholderTextView */,
@@ -1784,7 +1756,6 @@
 				06A5C4401E13B1F500FE0A7A /* 3rdPartyHelper */,
 				06A5C4411E13B1F500FE0A7A /* ConfigH5URL.swift */,
 				06A5C4421E13B1F500FE0A7A /* DynamicFun.swift */,
-				06A5C4431E13B1F500FE0A7A /* FNUrlRoute */,
 				06A5C44A1E13B1F500FE0A7A /* index.html */,
 				06A5C44B1E13B1F500FE0A7A /* ThirdPartyHelper.swift */,
 				06A5C44C1E13B1F500FE0A7A /* UMengEvent.swift */,
@@ -1800,19 +1771,6 @@
 			children = (
 			);
 			path = 3rdPartyHelper;
-			sourceTree = "<group>";
-		};
-		06A5C4431E13B1F500FE0A7A /* FNUrlRoute */ = {
-			isa = PBXGroup;
-			children = (
-				06A5C4441E13B1F500FE0A7A /* FN.swift */,
-				06A5C4451E13B1F500FE0A7A /* FNUrlMatcher.swift */,
-				06A5C4461E13B1F500FE0A7A /* FNUrlRoute.swift */,
-				06A5C4471E13B1F500FE0A7A /* FNUrlRouteDelegate.swift */,
-				06A5C4481E13B1F500FE0A7A /* FNUrlRouteHandleOver.swift */,
-				06A5C4491E13B1F500FE0A7A /* FNUtil.swift */,
-			);
-			path = FNUrlRoute;
 			sourceTree = "<group>";
 		};
 		06A5C45C1E13B21600FE0A7A /* lib_frameworks */ = {
@@ -2409,31 +2367,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9EE8D66C1E2E0706006D43F6 /* JLRoutes */ = {
-			isa = PBXGroup;
-			children = (
-				9EE8D66D1E2E0706006D43F6 /* Classes */,
-				9EE8D6761E2E0707006D43F6 /* JLRoutes.h */,
-				9EE8D6771E2E0707006D43F6 /* JLRoutes.m */,
-			);
-			path = JLRoutes;
-			sourceTree = "<group>";
-		};
-		9EE8D66D1E2E0706006D43F6 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				9EE8D66E1E2E0706006D43F6 /* JLROptionalRouteParser.h */,
-				9EE8D66F1E2E0706006D43F6 /* JLROptionalRouteParser.m */,
-				9EE8D6701E2E0706006D43F6 /* JLRRouteDefinition.h */,
-				9EE8D6711E2E0706006D43F6 /* JLRRouteDefinition.m */,
-				9EE8D6721E2E0707006D43F6 /* JLRRouteRequest.h */,
-				9EE8D6731E2E0707006D43F6 /* JLRRouteRequest.m */,
-				9EE8D6741E2E0707006D43F6 /* JLRRouteResponse.h */,
-				9EE8D6751E2E0707006D43F6 /* JLRRouteResponse.m */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2718,7 +2651,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EE8D6791E2E0707006D43F6 /* JLRRouteDefinition.m in Sources */,
 				63CBF9D41DFE39E2008D8E8F /* WOWMaskViewController.swift in Sources */,
 				6376E23D1E0B729D001457B7 /* WOWCouponProductController.swift in Sources */,
 				069D327C1DB47ADD00A059D0 /* WOWProductDetailController.swift in Sources */,
@@ -2728,7 +2660,6 @@
 				069D33181DB47ADE00A059D0 /* KMPlaceholderTextView.swift in Sources */,
 				069D32D21DB47ADD00A059D0 /* WOWProvinceModel.swift in Sources */,
 				6376E23B1E0A5C78001457B7 /* WOWLeaveTipsController.swift in Sources */,
-				06A5C4561E13B1F500FE0A7A /* FNUtil.swift in Sources */,
 				2D509A741DB5D3120047CD13 /* WOWMenuTopView.swift in Sources */,
 				63F3DA861DE69C6D009CE52D /* WOWCommentHeaderView.swift in Sources */,
 				069D32521DB47ADD00A059D0 /* WOWNoNetView.swift in Sources */,
@@ -2744,7 +2675,6 @@
 				069D31EE1DB47ADD00A059D0 /* WOWFoundRecommendCell.swift in Sources */,
 				069D32731DB47ADD00A059D0 /* WOWGoodsTypeCell.swift in Sources */,
 				069D32791DB47ADD00A059D0 /* WOWProductDetailCell.swift in Sources */,
-				06A5C4521E13B1F500FE0A7A /* FNUrlMatcher.swift in Sources */,
 				069D31F41DB47ADD00A059D0 /* WOWGuideController.swift in Sources */,
 				069D331B1DB47ADE00A059D0 /* PhotoToolBar.swift in Sources */,
 				069D32A61DB47ADD00A059D0 /* WOWAboutController.swift in Sources */,
@@ -2753,7 +2683,6 @@
 				2D509A531DB5D3120047CD13 /* WOWMenuModel.swift in Sources */,
 				2D562C9B1E16038500E702CE /* SVFooterView.swift in Sources */,
 				069D327F1DB47ADD00A059D0 /* WOWProductDetailPriceCell.swift in Sources */,
-				06A5C4551E13B1F500FE0A7A /* FNUrlRouteHandleOver.swift in Sources */,
 				2D509A681DB5D3120047CD13 /* WowControllerSepratorCell.swift in Sources */,
 				63F3DA7F1DE68420009CE52D /* WOWCommentCell.swift in Sources */,
 				069D32551DB47ADD00A059D0 /* WOWRefreshHeader.swift in Sources */,
@@ -2793,7 +2722,6 @@
 				069D32F01DB47ADD00A059D0 /* Int+Add.swift in Sources */,
 				069D32E01DB47ADD00A059D0 /* WOWUserTopView.swift in Sources */,
 				2DDA4DDB1DDEFE2E00E7A7E8 /* WOW_Cell_102_Item.swift in Sources */,
-				9EE8D67B1E2E0707006D43F6 /* JLRRouteResponse.m in Sources */,
 				069D323F1DB47ADD00A059D0 /* WOWLeftSideController.swift in Sources */,
 				069D32ED1DB47ADD00A059D0 /* WOWUploadManager.swift in Sources */,
 				069D32E21DB47ADD00A059D0 /* WOWBuyCarMananger.swift in Sources */,
@@ -2892,7 +2820,6 @@
 				069D32C11DB47ADD00A059D0 /* WOWOrderDetailNewCell.swift in Sources */,
 				069D331A1DB47ADE00A059D0 /* PhotoBrowser.swift in Sources */,
 				069D32AA1DB47ADD00A059D0 /* WOWAddressBottomView.swift in Sources */,
-				9EE8D67C1E2E0707006D43F6 /* JLRoutes.m in Sources */,
 				069D32581DB47ADD00A059D0 /* WOWAttributeModel.swift in Sources */,
 				069D31B31DB47ADD00A059D0 /* WOWBuyCarRequestVo.swift in Sources */,
 				069D33221DB47ADE00A059D0 /* TagCellLayout+Helper.swift in Sources */,
@@ -2905,7 +2832,6 @@
 				069D325E1DB47ADD00A059D0 /* WOWBrandHomeController.swift in Sources */,
 				2D509A7D1DB5D3120047CD13 /* WOWSearchTagView.swift in Sources */,
 				069D32B31DB47ADD00A059D0 /* WOWCouponheaderView.swift in Sources */,
-				06A5C4531E13B1F500FE0A7A /* FNUrlRoute.swift in Sources */,
 				069D327B1DB47ADD00A059D0 /* WOWProductDetailController+Add.swift in Sources */,
 				2DDC99C21DDAFBFC00201856 /* WOWHotHeaderView.swift in Sources */,
 				069D32771DB47ADD00A059D0 /* WOWProductDetailAboutCell.swift in Sources */,
@@ -2939,7 +2865,6 @@
 				2DDC99BD1DDAF2E000201856 /* WOWHotBannerCell.swift in Sources */,
 				2D2331DF1DFF9398006E7BC0 /* WOWUpdateFooter.swift in Sources */,
 				2DDA4DE41DDEFE2E00E7A7E8 /* WOWFoundWeeklyNewCell.swift in Sources */,
-				9EE8D67A1E2E0707006D43F6 /* JLRRouteRequest.m in Sources */,
 				63DD6A5D1DE29EFF005BE631 /* WOWProductLimitCell.swift in Sources */,
 				069D32811DB47ADD00A059D0 /* WOWProductDetailTipsWebViewCell.swift in Sources */,
 				069D32F31DB47ADD00A059D0 /* UIApplication+Add.swift in Sources */,
@@ -2957,7 +2882,6 @@
 				069D31E71DB47ADD00A059D0 /* WowModulePageVO.swift in Sources */,
 				069D325F1DB47ADD00A059D0 /* WOWBrandListController.swift in Sources */,
 				069D32311DB47ADD00A059D0 /* WOWBrandStyleModel.swift in Sources */,
-				06A5C4541E13B1F500FE0A7A /* FNUrlRouteDelegate.swift in Sources */,
 				069D32561DB47ADD00A059D0 /* WOWShareView.swift in Sources */,
 				2D562CA21E16038500E702CE /* SVColorCell.swift in Sources */,
 				2D0043F41DD327D500A7D98A /* WOWTableDelegate.swift in Sources */,
@@ -3000,7 +2924,6 @@
 				06A5C45A1E13B1F500FE0A7A /* WowAppDelegateManager.swift in Sources */,
 				069D328B1DB47ADD00A059D0 /* WOWProductSpecLayout.swift in Sources */,
 				2DDC99B11DDAE14B00201856 /* WOWHotMainCell.swift in Sources */,
-				9EE8D6781E2E0707006D43F6 /* JLROptionalRouteParser.m in Sources */,
 				069D331E1DB47ADE00A059D0 /* UIViewExtension.swift in Sources */,
 				2DDA4DE31DDEFE2E00E7A7E8 /* MODULE_TYPE_CATEGORIES_CV_CELL_301.swift in Sources */,
 				069D33271DB47ADE00A059D0 /* TagView.swift in Sources */,
@@ -3070,7 +2993,6 @@
 				069D32E81DB47ADD00A059D0 /* WOWMediator.swift in Sources */,
 				069D31B01DB47ADD00A059D0 /* WOWBuyCarModel.swift in Sources */,
 				069D32D71DB47ADD00A059D0 /* WOWTransLineCell.swift in Sources */,
-				06A5C4511E13B1F500FE0A7A /* FN.swift in Sources */,
 				069D32531DB47ADD00A059D0 /* WOWPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

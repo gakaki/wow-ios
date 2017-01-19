@@ -332,7 +332,8 @@ extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewData
         let model = dataArr[(indexPath as NSIndexPath).row]
         vc.hideNavigationBar = true
         vc.productId = model.productId ?? 0
-        navigationController?.pushViewController(vc, animated: true)
+//        parentNavigationController?.pushViewController(vc, animated: true)
+        UIApplication.currentViewController()?.pushVC(vc)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

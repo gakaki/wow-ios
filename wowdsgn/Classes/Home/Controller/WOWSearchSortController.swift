@@ -20,7 +20,8 @@ class WOWSearchSortController: BaseScreenViewController{
     var keyword :String = ""
     var brandArray = [WOWBrandV1Model]()
     var brandH: CGFloat = 0
-    
+    var brandIsHidden = false
+
     fileprivate var keyWords = [AnyObject](){
         didSet{
             
@@ -140,6 +141,7 @@ class WOWSearchSortController: BaseScreenViewController{
     }
     
     func showBrand() {
+        brandIsHidden = false
         UIView.animate(withDuration: 0.5) {[weak self] in
             if let strongSelf = self {
                 strongSelf.brandHead.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: strongSelf.brandH)
@@ -150,6 +152,7 @@ class WOWSearchSortController: BaseScreenViewController{
     }
     
     func hiddenBrand() {
+        brandIsHidden = true
         UIView.animate(withDuration: 0.5) {[weak self] in
             if let strongSelf = self {
                 strongSelf.brandHead.frame = CGRect(x: 0, y: -strongSelf.brandH, width: MGScreenWidth, height: strongSelf.brandH)
@@ -280,11 +283,15 @@ extension WOWSearchSortController:VTMagicViewDelegate, WOWSearchChildControllerD
     }
     
     func brandView(isHidden: Bool) {
-        print(isHidden)
         if isHidden {
-            hiddenBrand()
+            if !brandIsHidden {
+                hiddenBrand()
+            }
+            
         }else {
-            showBrand()
+            if brandIsHidden {
+                showBrand()
+            }
         }
     }
     

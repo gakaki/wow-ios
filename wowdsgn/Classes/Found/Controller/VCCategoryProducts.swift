@@ -2,10 +2,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+
+protocol VCCategoryProductsDelegate :class{
+    func cvTopView(isHidden: Bool)
+}
 class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 {
     var cv:UICollectionView!
     var vo_products         = [WOWProductModel]()
+    weak var delegate: VCCategoryProductsDelegate?
 
     /* 请求params */
     var params              = [String: Any]()
@@ -99,7 +104,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         
 
         
-        let frame = CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight - 210)
+        let frame = CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight - 64)
         cv = UICollectionView(frame: frame, collectionViewLayout: self.layout)
         cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
 
@@ -152,9 +157,9 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     let ob_content_offset   = Variable(CGFloat(0))
     let rx_disposeBag       = DisposeBag()
 
-    func scrollViewDidScroll( _ scrollView: UIScrollView){
-        ob_content_offset.value = scrollView.contentOffset.y
-    }
+//    func scrollViewDidScroll( _ scrollView: UIScrollView){
+//        ob_content_offset.value = scrollView.contentOffset.y
+//    }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
     }
@@ -234,7 +239,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
 //                  else{
 ////                      strongSelf.cv.mj_footer = strongSelf.mj_footer
 //                  }
-    
+                
                   //若是为第一页那么数据直接赋值
                   if ( strongSelf.pageIndex <= 1){
                       strongSelf.vo_products         = data.flatMap { $0 }
@@ -244,7 +249,13 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
                       strongSelf.vo_products         = [strongSelf.vo_products, data].flatMap { $0 }
                   }
     
-                
+                //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                if data.count < currentPageSize {
+                    strongSelf.cv.mj_footer.endRefreshingWithNoMoreData()
+                    
+                }else {
+                    strongSelf.cv.mj_footer = strongSelf.mj_footer
+                }
                   strongSelf.cv.reloadData()
               }
     
@@ -309,5 +320,21 @@ extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource
          VCRedirect.toVCProduct(model.productId)
     }
 
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        var isHidden = false
+        if offsetY > 100 {
+            isHidden = true
+        }
+        if  let del = delegate {
+            del.cvTopView(isHidden: isHidden)
+        }
+    }
     
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        if  let del = delegate {
+            del.cvTopView(isHidden: false)
+        }
+    }
 }

@@ -14,6 +14,11 @@
 		<string>applinks:fds.so</string>
 		<string>applinks:img.wowdsgn.com</string>
 		<string>applinks:m.intra.wowdsgn.com</string>
+		<string>webcredentials:m.wowdsgn.com</string>
+		<string>webcredentials:m.intra.wowdsgn.com</string>
+		<string>webcredentials:wowdsgn.com</string>
+		<string>webcredentials:www.wowdsgn.com</string>
+		<string>webcredentials:*.wowdsgn.com</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

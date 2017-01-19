@@ -148,14 +148,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         //Universal Link
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-            #if DEBUG
-                let url = userActivity.webpageURL!
-                let d = " get url is \(url) , url string is \(url.absoluteString)"
-                DLog(d)
-                WOWHud.showMsg(d)
-            #endif
-         
+            let url = userActivity.webpageURL!
+            //handle url
             
+            let d = " get url is \(url) , url string is \(url.absoluteString)"
+            DLog(d)
+            
+//            WOWHud.showMsg(d)
       
 //            if url.host == "qnssl.com" {
 //                

@@ -198,7 +198,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         view.layoutIfNeeded()
         cvTop.constant = 0
       
-        UIView.animate(withDuration: 0.5) {[weak self] in
+        UIView.animate(withDuration: 0.3) {[weak self] in
             if let strongSelf = self {
                 strongSelf.view.layoutIfNeeded()
             }
@@ -210,7 +210,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         view.layoutIfNeeded()
         cvTop.constant = -110
         
-        UIView.animate(withDuration: 0.5) {[weak self] in
+        UIView.animate(withDuration: 0.3) {[weak self] in
             if let strongSelf = self {
                 strongSelf.view.layoutIfNeeded()
             }

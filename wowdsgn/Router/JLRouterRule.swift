@@ -89,16 +89,16 @@ public class JLRouterRule {
         }
         
         // 跳转产品
-        JLRoutes.global().addRoute("/item/:id") { (params) -> Bool in
+        JLRoutes.global().add(["/item","/item/:id"]) { (params) -> Bool in
             print(params)
             let productId = params["id"] as? String
             VCRedirect.toVCProduct(productId?.toInt())
             print(params)
             return true
         }
-        
+
         // 跳转商品详情页(产品详情)
-        JLRoutes.global().addRoute("/contenttopic/:id") { (params) -> Bool in
+        JLRoutes.global().add(["/contenttopic","/contenttopic/:id"]) { (params) -> Bool in
             print(params)
             let id              = params["id"] as? String
             let toPicId         = id?.toInt() ?? 0
@@ -107,7 +107,7 @@ public class JLRouterRule {
         }
         
         // 跳转商品列表详情页(系列品)
-        JLRoutes.global().addRoute("/producttopic/:id") { (params) -> Bool in
+        JLRoutes.global().add(["/producttopic","/producttopic/:id"]) { (params) -> Bool in
             print(params)
             let id              = params["id"] as? String
             let toPicId         = id?.toInt() ?? 0
@@ -116,7 +116,7 @@ public class JLRouterRule {
         }
         
         // 跳转品牌详情页
-        JLRoutes.global().addRoute("/brand/:id") { (params) -> Bool in
+        JLRoutes.global().add(["/brand","/brand/:id"]) { (params) -> Bool in
             print(params)
             if let id = params["id"] as? String {
                 VCRedirect.toBrand(brand_id: id.toInt())
@@ -125,7 +125,7 @@ public class JLRouterRule {
         }
         
         // 跳转设计师详情页
-        JLRoutes.global().addRoute("/designer/:id") { (params) -> Bool in
+        JLRoutes.global().add(["/designer","/designer/:id"]) { (params) -> Bool in
             print(params)
             if let id = params["id"] as? String {
                 VCRedirect.toDesigner(designerId: id.toInt())
@@ -157,7 +157,7 @@ public class JLRouterRule {
         }
         
         // 跳转分类详情页
-        JLRoutes.global().addRoute("/category/:id") { (params) -> Bool in
+        JLRoutes.global().add(["/category","/category/:id"]) { (params) -> Bool in
             
             let categoryId = params["id"] as? String
             VCRedirect.toVCCategory(categoryId?.toInt())
@@ -166,10 +166,18 @@ public class JLRouterRule {
         }
         
         // 跳转APP内H5页
-        JLRoutes.global().addRoute("/h5/:url") { (params) -> Bool in
-            print(params)
+        JLRoutes.global().add(["/h5","/h5/:url"]) { (params) -> Bool in
+            DLog(params)
             let url = params["url"] as? String
             VCRedirect.toVCH5(url)
+            return true
+        }
+        
+        // 跳转产品组
+        JLRoutes.global().add(["/productgroup","/productgroup/:id"]) { (params) -> Bool in
+            if let id = params["id"] as? String {
+                VCRedirect.goToProductGroup(id.toInt() ?? 0)
+            }
             return true
         }
     }

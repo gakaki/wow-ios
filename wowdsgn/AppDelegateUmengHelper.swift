@@ -234,6 +234,10 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
                 case "211"://AppStore
                     
                     GoToItunesApp.show()
+                case "212": //产品组
+                    if let id = id {
+                        VCRedirect.goToProductGroup(id.toInt() ?? 0)
+                    }
                     
                 default:
                     break

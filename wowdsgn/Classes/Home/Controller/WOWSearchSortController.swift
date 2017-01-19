@@ -142,7 +142,7 @@ class WOWSearchSortController: BaseScreenViewController{
     
     func showBrand() {
         brandIsHidden = false
-        UIView.animate(withDuration: 0.5) {[weak self] in
+        UIView.animate(withDuration: 0.3) {[weak self] in
             if let strongSelf = self {
                 strongSelf.brandHead.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: strongSelf.brandH)
                 strongSelf.v_bottom.magicView.frame = CGRect(x: 0, y: strongSelf.brandH,width: MGScreenWidth,height: MGScreenHeight - 64)
@@ -153,7 +153,7 @@ class WOWSearchSortController: BaseScreenViewController{
     
     func hiddenBrand() {
         brandIsHidden = true
-        UIView.animate(withDuration: 0.5) {[weak self] in
+        UIView.animate(withDuration: 0.3) {[weak self] in
             if let strongSelf = self {
                 strongSelf.brandHead.frame = CGRect(x: 0, y: -strongSelf.brandH, width: MGScreenWidth, height: strongSelf.brandH)
                 strongSelf.v_bottom.magicView.frame = CGRect(x: 0, y: 0,width: MGScreenWidth,height: MGScreenHeight - 64)

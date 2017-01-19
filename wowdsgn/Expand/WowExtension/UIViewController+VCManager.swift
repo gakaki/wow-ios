@@ -326,7 +326,7 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
     
-    // 104 类型跳转。 linkType = 10
+    // 104 类型跳转。 linkType = 10 产品组
     public class func goToProductGroup(_ groupId:Int){
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductListController.self)) as! WOWProductListController
         vc.groupId = groupId

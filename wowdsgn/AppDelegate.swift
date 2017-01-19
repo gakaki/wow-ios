@@ -154,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let d = " get url is \(url) , url string is \(url.absoluteString)"
             DLog(d)
             
-            WOWHud.showMsg(d)
+//            WOWHud.showMsg(d)
       
 //            if url.host == "qnssl.com" {
 //                

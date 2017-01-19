@@ -222,6 +222,7 @@ extension WOWSearchSortController:VTMagicViewDataSource{
             
             let vc_me = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWSearchChildController.self)) as! WOWSearchChildController
             addChildViewController(vc_me)
+
             return vc_me
         }
         

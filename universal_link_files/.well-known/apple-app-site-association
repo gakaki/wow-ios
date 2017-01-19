@@ -7,5 +7,8 @@
                 "paths": [ "*" ]
             }
         ]
+    },
+   "webcredentials": {
+       "apps": [    "B4WSDTADTT.com.wowdsgn.app"    ]
     }
 }

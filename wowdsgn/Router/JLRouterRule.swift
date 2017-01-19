@@ -64,23 +64,25 @@ public class JLRouterRule {
         // 跳转首页
         JLRoutes.global().add(["/","/main/:page"]) { (params) -> Bool in
             print(params)
+            
             //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
             let page = params["page"] as? String
+            
             var rootIndexVC = 0
             switch page ?? ""{
-            case "main":
-                rootIndexVC = 0
-            case "shopping":
-                rootIndexVC = 1
-            case "hotstyle":
-                rootIndexVC = 2
-            case "favorite":
-                rootIndexVC = 3
-            case "me":
-                rootIndexVC = 4
-            default:
-                rootIndexVC = 0 //啥都没有去首页
-                break
+                case "main":
+                    rootIndexVC = 0
+                case "shopping":
+                    rootIndexVC = 1
+                case "hotstyle":
+                    rootIndexVC = 2
+                case "favorite":
+                    rootIndexVC = 3
+                case "me":
+                    rootIndexVC = 4
+                default:
+                    rootIndexVC = 0 //啥都没有去首页
+                    break
             }
             VCRedirect.toHomeIndex(index: rootIndexVC)
             return true

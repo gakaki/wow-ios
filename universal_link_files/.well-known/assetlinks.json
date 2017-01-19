@@ -1,12 +1,57 @@
-[{
-    "relation": [
-        "delegate_permission/common.handle_all_urls"
-    ],
+[
+  {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+          "namespace": "android_app",
+          "package_name": "com.wowdsgn.app",
+          "sha256_cert_fingerprints": [
+              "8F:FA:EE:79:25:28:F5:53:DC:09:A4:D0:9B:F1:EF:60:63:94:1F:62:10:A4:8C:18:9A:38:C4:22:D5:9A:92:F9"
+          ]
+      }
+  },
+  {
+      "relation": ["delegate_permission/common.get_login_creds"],
+      "target": {
+          "namespace": "android_app",
+          "package_name": "com.wowdsgn.app",
+          "sha256_cert_fingerprints": [
+              "8F:FA:EE:79:25:28:F5:53:DC:09:A4:D0:9B:F1:EF:60:63:94:1F:62:10:A4:8C:18:9A:38:C4:22:D5:9A:92:F9"
+          ]
+      }
+  },
+  {
+    "relation": ["delegate_permission/common.get_login_creds"],
     "target": {
-        "namespace": "android_app",
-        "package_name": "com.wowdsgn.app",
-        "sha256_cert_fingerprints": [
-            "8F:FA:EE:79:25:28:F5:53:DC:09:A4:D0:9B:F1:EF:60:63:94:1F:62:10:A4:8C:18:9A:38:C4:22:D5:9A:92:F9"
-        ]
+        "namespace": "web",
+        "site": "https://m.wowdsgn.com"
     }
-}]
+  },
+  {
+      "relation": ["delegate_permission/common.get_login_creds"],
+      "target": {
+          "namespace": "web",
+          "site": "https://m.intra.wowdsgn.com"
+      }
+  },
+  {
+      "relation": ["delegate_permission/common.get_login_creds"],
+      "target": {
+          "namespace": "web",
+          "site": "https://intra.wowdsgn.com"
+      }
+  },
+  {
+      "relation": ["delegate_permission/common.get_login_creds"],
+      "target": {
+          "namespace": "web",
+          "site": "https://wowdsgn.com"
+      }
+  },
+  {
+      "relation": ["delegate_permission/common.get_login_creds"],
+      "target": {
+          "namespace": "web",
+          "site": "https://www.wowdsgn.com"
+      }
+  }
+]

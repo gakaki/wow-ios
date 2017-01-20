@@ -242,7 +242,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         self.tableView.reloadData()
         let parms = [String: AnyObject]()
         screenAction(parms as AnyObject)
-        self.hideView()
+//        self.hideView()
     }
     func sureAction()  {
     

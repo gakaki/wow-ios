@@ -182,7 +182,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
             if let strongSelf = self {
                 make.width.equalTo(strongSelf.view)
                 make.top.equalTo(strongSelf.cv.snp.bottom)
-                make.bottom.equalTo(strongSelf.view.snp.bottom)
+                make.bottom.equalTo(strongSelf.view).offset(0)
             }
             
         }

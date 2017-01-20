@@ -42,7 +42,7 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var addCartButton: UIButton!
     @IBOutlet weak var nowBuyButton: UIButton!
     //是否展开参数
-    var isOpenParam: Bool = false
+    var isOpenParam: Bool = true
     //是否展开温馨提示
     var isOpenTips: Bool = false
     //轮播图数组

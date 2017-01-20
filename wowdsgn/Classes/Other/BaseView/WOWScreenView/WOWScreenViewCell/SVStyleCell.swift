@@ -21,7 +21,7 @@ class SVStyleCell: UITableViewCell {
         if m.isSelect == true {
             imgSelect.image = UIImage.init(named: "select")
         }else{
-            imgSelect.image = UIImage.init(named: "car_check")
+            imgSelect.image = UIImage.init(named: "screen_choice")
         }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -102,7 +102,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         
         cellHightDic = [0 : 40 ,
                         1 : 65 ,
-                        2 : 54 ,
+                        2 : 44 ,
                         3 : 54 ]
         
         
@@ -161,10 +161,10 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     open lazy var tableView:UITableView = {
         
         let v = UITableView(frame: CGRect.init(x: 0, y: ScreenViewConfig.headerViewHight, width: self.w, height: self.h - ScreenViewConfig.headerViewHight - ScreenViewConfig.footerViewHight), style:.grouped)
-        v.separatorColor  = MGRgb(224, g: 224, b: 224)
+//        v.separatorColor  = MGRgb(224, g: 224, b: 224)
         v.delegate        = self
         v.dataSource      = self
-
+        v.separatorStyle  = .none
         v.backgroundColor = GrayColorLevel5
         return v
     }()
@@ -479,7 +479,7 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
         lbBottom.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(v)
             make.height.equalTo(0.5)
-            make.left.equalTo(v)
+            make.left.equalTo(v).offset(15)
             make.bottom.equalTo(v).offset(0)
         }
 

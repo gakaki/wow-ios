@@ -104,7 +104,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         
 
         
-        let frame = CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight - 64)
+        let frame = CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight - 215)
         cv = UICollectionView(frame: frame, collectionViewLayout: self.layout)
         cv.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
 
@@ -126,6 +126,14 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         cv.emptyDataSetDelegate             = self;
 //        view.insertSubview(cv, belowSubview: screenBtnimg)
         view.addSubview(cv)
+        cv.snp.makeConstraints { [weak self](make) in
+              if let strongSelf = self {
+            make.width.equalTo(MGScreenWidth)
+//            make.top.equalTo(0)
+                make.right.equalTo(strongSelf.view).offset(0)
+            make.top.bottom.equalTo(strongSelf.view).offset(0)
+            }
+        }
 //        configScreeningView()
 //        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
 //        self.mj_footer.setTitle("", forState: MJRefreshState.Refreshing)
@@ -281,9 +289,9 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
         return true
     }
     
-    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
-        return -40
-    }
+//    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
+//        return -40
+//    }
 
 
 }
@@ -322,6 +330,9 @@ extension VCCategoryProducts:UICollectionViewDelegate,UICollectionViewDataSource
 
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard vo_products.count > 4 else {
+            return
+        }
         let offsetY = scrollView.contentOffset.y
         var isHidden = false
         if offsetY > 100 {

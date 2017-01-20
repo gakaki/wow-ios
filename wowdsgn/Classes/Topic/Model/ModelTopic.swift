@@ -171,7 +171,10 @@ class WOWImages: WOWBaseModel, Mappable {
         note            <- map["note"]
         desc            <- map["desc"]
         if imageAspect == 0 {
-            calImageHeight()
+            imageAspect = CGFloat(WOWArrayAddStr.get_imageAspect(str: url ?? ""))// 拿到图片的宽高比,
+            if imageAspect == 0 {
+                calImageHeight()
+            }
         }
     }
     func calImageHeight(){

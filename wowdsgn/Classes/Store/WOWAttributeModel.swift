@@ -63,7 +63,10 @@ class WOWProductPicTextModel:WOWBaseModel,Mappable {
         image <- map["url"]
         text  <- map["desc"]
         if imageAspect == 0 {
-            calImageHeight()
+            imageAspect = CGFloat(WOWArrayAddStr.get_imageAspect(str: image ?? ""))// 拿到图片的宽高比,
+            if imageAspect == 0 {
+                calImageHeight()
+            }
         }
     }
     

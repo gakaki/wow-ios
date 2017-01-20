@@ -61,6 +61,7 @@ class WOWContentDetailCell: UITableViewCell {
                                                           multiplier: secondaryImg.imageAspect , constant: 0.0)
                     
                     productImg.set_webimage_url(img)
+//                    productImg.set_webimage_url_base(img, place_holder_name: "placeholder_product")
 //                    productImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"))
                     aspect.constant = 0
                     space.constant = 8

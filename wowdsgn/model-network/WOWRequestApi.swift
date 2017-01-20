@@ -241,6 +241,8 @@ public enum RequestApi{
     
     //分享H5
     case api_H5Share(h5Url: String)
+    //
+    case api_Deferreddeeplink
 
 }
 
@@ -498,6 +500,8 @@ extension RequestApi:TargetType{
             return URL_Logout
         case .api_H5Share:
             return URL_H5Share
+        case .api_Deferreddeeplink:
+            return URL_Deferreddeeplink
             
         default:
             return URL_topic
@@ -528,7 +532,8 @@ extension RequestApi:TargetType{
             .api_ProductGroupList,
             .api_ProductsOfCoupon,
             .Api_Screen_Main,
-            .Api_Screen_Price:
+            .Api_Screen_Price,
+            .api_Deferreddeeplink:
 
             return .GET
 
@@ -826,7 +831,16 @@ extension RequestApi:TargetType{
             assigned += ["X-WOW-APP-ST": WOWUserManager.sessionToken]
            
         }
-
+        assigned += ["User-Agent": getUserAgent()]
         return assigned
+    }
+    func getUserAgent() -> String {
+        let sysName = UIDevice.current.systemName //获取系统名称 例如：iPhone OS
+        let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
+        let deviceModel = UIDevice.current.model //获取设备的型号 例如：iPhone
+        let infoDic = Bundle.main.infoDictionary
+        let appVersion = infoDic?["CFBundleShortVersionString"] ?? ""// 获取App的版本
+        let user_Agent = String(format: "apple/%@/%@/%@/%@", deviceModel, sysName, sysVersion, appVersion as! String)
+        return user_Agent
     }
 }

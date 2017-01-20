@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
     func appConfig(){
     
-        let cache_size      = UInt(50 * 1024 * 1024)
+        let cache_size      = UInt(100 * 1024 * 1024)
         YYWebImageManager.shared().cache?.memoryCache.costLimit     = cache_size
         YYWebImageManager.shared().cache?.diskCache.costLimit       = cache_size
         ImageCache.default.maxDiskCacheSize                         = cache_size
@@ -261,12 +261,13 @@ extension AppDelegate{
         let userDefaults = UserDefaults.standard
         let appVersion = userDefaults.string(forKey: "appVersion")
         // 如果 appVersion 为 nil 说明是第一次启动；如果 appVersion 不等于 currentAppVersion 说明是更新了
-        if appVersion == nil || appVersion != currentAppVersion {
+        if appVersion == nil {
             // 保存最新的版本号
             userDefaults.setValue(currentAppVersion, forKey: "appVersion")
             let introVC = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWIntroduceController.self))
             self.window?.rootViewController = introVC
             rootVCGuide()
+//            requestDeferreddeeplink()
             
         }else{
             
@@ -277,11 +278,23 @@ extension AppDelegate{
         }
         
 
-//        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductListController.self)) as! WOWProductListController
-//////        vc.topic_id = 48      //247到254是SKU 2 42
-//        window?.rootViewController = vc
     }
     
+    func requestDeferreddeeplink() {
+        WOWNetManager.sharedManager.requestWithTarget(.api_Deferreddeeplink, successClosure: { [weak self](result, code) in
+            if let strongSelf = self {
+                let json = JSON(result)
+//                let orderCode = json["orderCode"].string
+//                let payAmount = json["payAmount"].double
+//                let paymentChannelName = json["paymentChannelName"].string
+                
+            }
+            
+        }) { (errorMsg) in
+            
+        }
+
+    }
 
     func onInappDataReturned(_ params: [AnyHashable: Any]!, withError error: NSError!) {
         
@@ -318,23 +331,13 @@ extension AppDelegate{
         //友盟推送
         umessage.init_umessage(launchOptions)
 
-        
-//        WXApi.registerApp(WOWID.Wechat.appID)
-    
-        //Growing
-//        Growing.start(withAccountId: "a04e14656f08dc7e")
-        //DeepShare
-//        DeepShare.initWithAppID("e494427d3e67f207", withLaunchOptions: launchOptions, withDelegate: self)
         //Talking Data
         TalkingData.setExceptionReportEnabled(true)
         TalkingData.sessionStarted("12430AB8C707826E0C0FBDA290E620E4", withChannelId: "AppStore")
         
         //Talking Data ADTracking
         TalkingDataAppCpa.init("e81f26ce70664a9dab698bae55be2044", withChannelId: "AppStore")
-        
 
-
-        
         
     }
     

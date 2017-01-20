@@ -23,6 +23,8 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     }()
     
     public var url = ""
+    var shareTitle = "尖叫设计"
+    var shareDesc = "生活即风格！"
     
     
     //MARK: -- delegate
@@ -117,7 +119,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         webView.navigationDelegate  = self
         
         bridge = ZHWebViewBridge.bridge(webView)
-        bridge_router()
+//        bridge_router()
         
         var url_final   = (url ?? "")
         if url_final.length > 0 {
@@ -126,7 +128,12 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         let myURL       = URL(string: url_final ?? "")
         let myRequest   = URLRequest(url: myURL!)
         webView.load(myRequest)
+        //获取H5信息
+        requestH5()
+
     }
+    
+
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -187,13 +194,12 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     
     //MARK: -- Net 
     func requestH5() {
-        WOWHud.showLoadingSV()
+//        WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(.api_H5Share(h5Url: url), successClosure: {[weak self] (result, code) in
             if let strongSelf = self {
                 let json = JSON(result)
-                let shareUrl = json["h5Url"].string ?? ""
-                let shareTitle = json["h5Title"].string ?? ""
-                let shareDesc = json["h5Desc"].string ?? ""
+                strongSelf.shareTitle = json["h5Title"].string ?? ""
+                strongSelf.shareDesc = json["h5Desc"].string ?? ""
                 let shareImg = json["h5ImgUrl"].string ?? ""
                 //加载分享图片
                 strongSelf.placeImageView.yy_setImage(
@@ -202,10 +208,8 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
                     options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
                     completion: { [weak self] (img, url, from_type, image_stage,err ) in
                         if let strongSelf = self{
-                            WOWHud.dismiss()
                             strongSelf.shareProductImage = img
-                            //加载成功后弹出分享按钮
-                            WOWShareManager.shareUrl(shareTitle, shareText: shareDesc, url: shareUrl, shareImage: strongSelf.shareProductImage ?? UIImage(named: "me_logo")!)
+                            
                             
                         }
                         
@@ -216,8 +220,6 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
             }
             
         }) { (errorMsg) in
-            WOWHud.dismiss()
-            WOWHud.showMsg("获取分享链接失败！")
         }
 
     }
@@ -238,11 +240,13 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     }
     
     @IBAction func shareClick(_ sender: UIButton) {
-        requestH5()
+        //加载成功后弹出分享按钮
+        WOWShareManager.shareUrl(shareTitle, shareText: shareDesc, url: url, shareImage: shareProductImage ?? UIImage(named: "me_logo")!)
+        
      
     }
     
-    //MARK: - method 
+    //MARK: - method
     func can() {
         if webView.canGoBack {
             goBackBtn.setImage(UIImage.init(named: "back1"), for: .normal)

@@ -207,7 +207,8 @@ class WOWProductDetailController: WOWBaseViewController {
         }else {
             isHaveAbout = 0
         }
-       
+        //产品参数默认打开
+        paramView.isOpen(isOpenParam)
         numberSections = 7 + isHaveLimit + isHavePromotion + isHaveComment + isHaveAbout
         //产品描述说明
         productDescView.productDescLabel.text = productModel?.detailDescription

@@ -250,13 +250,14 @@ class WOWScreenView: UIView,CAAnimationDelegate {
             
             screenPriceArr  = ["minPrice":min]
             
-        }else {
-            cloosePriceModel.minPrice = 0
         }
+//        else {
+//            cloosePriceModel.minPrice = 0
+//        }
         if let max = cloosePriceModel.maxPrice {
             
             screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0,"maxPrice":max]
-        }else{
+        }else{// 最大值无值
             screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0]
         }
         if let min = cloosePriceModel.minPrice ,let max = cloosePriceModel.maxPrice {

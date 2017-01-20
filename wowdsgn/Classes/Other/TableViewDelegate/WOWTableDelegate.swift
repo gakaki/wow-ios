@@ -156,7 +156,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 record_402_index.append(section)
                 
                 let array = model.moduleContentProduct?.products ?? []
-                return (array.count.getParityCellNumber()) > 10 ? 10: (array.count.getParityCellNumber())
+                return (array.count.getParityCellNumber()) > 3 ? 3: (array.count.getParityCellNumber())
                 
             default:
                 
@@ -389,7 +389,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 case .Home:
                      return CGFloat.leastNormalMagnitude
                 default:
-                     return 15.h
+                     return 10
                 }
                
             }
@@ -398,7 +398,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         case 901,1001,103:// 精选页这几个Cell UI上没有 15px
             return CGFloat.leastNormalMagnitude
         default:
-             return 15.h
+             return 10
         }
         
 

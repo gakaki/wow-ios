@@ -13,9 +13,9 @@ enum productEntrance {
 }
 
 enum ShowTypeIndex:String {
-    case New            = "score" // 当前在上新
-    case Sales          = "sales" // 当前在销量
-    case Price          = "price" // 当前在价格
+    case New            = "onShelfTime" // 当前在上新
+    case Sales          = "sales"       // 当前在销量
+    case Price          = "price"       // 当前在价格
 }
 enum SortType:String {
     
@@ -180,6 +180,9 @@ class WOWSearchChildController: WOWBaseViewController{
                 if ( strongSelf.pageIndex == 1 && strongSelf.dataArr.count > 0){
                     strongSelf.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.top)
                 }
+            
+                
+
             }
             
             
@@ -337,6 +340,9 @@ extension WOWSearchChildController:UICollectionViewDelegate,UICollectionViewData
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard dataArr.count > 4 else {
+            return
+        }
         let offsetY = scrollView.contentOffset.y
         var isHidden = false
         if offsetY > 100 {

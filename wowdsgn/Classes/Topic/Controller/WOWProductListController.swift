@@ -56,12 +56,22 @@ class WOWProductListController: VCBaseNavCart {
                 DLog(r)
                 
                 strongSelf.vo_topic                       =  Mapper<WOWProductListTopInfo>().map(JSONObject: r.object )
-
                 strongSelf.topUrl = strongSelf.vo_topic?.image
+                if strongSelf.topUrl?.characters.count > 0 {
+                  
+                    strongSelf.layout.headerHeight = Float(MGScreenWidth * 0.67)
+                }else {
+                 
+                   strongSelf.layout.headerHeight = 0
+                }
+
+                
+                strongSelf.collectionView.reloadData()
+                
             }
             
-        }){ (errorMsg) in
-            
+        }){[unowned self] (errorMsg) in
+            self.layout.headerHeight = 0
             self.endRefresh()
         }
     }

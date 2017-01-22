@@ -154,7 +154,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         }
 
     }
-
+   var parmsResulte = [String: AnyObject]()
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -208,6 +208,8 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     }
     func hideView()  {
         
+        getConfigScreenResulet()
+        
         let animation = CATransition.init()
         animation.delegate = self
         animation.duration = ScreenViewConfig.kDuration
@@ -240,20 +242,17 @@ class WOWScreenView: UIView,CAAnimationDelegate {
             
         }
         self.tableView.reloadData()
-        let parms = [String: AnyObject]()
-        screenAction(parms as AnyObject)
-//        self.hideView()
+
     }
-    func sureAction()  {
-    
+    func getConfigScreenResulet(){
         if let min = cloosePriceModel.minPrice {
             
             screenPriceArr  = ["minPrice":min]
             
         }
-//        else {
-//            cloosePriceModel.minPrice = 0
-//        }
+        //        else {
+        //            cloosePriceModel.minPrice = 0
+        //        }
         if let max = cloosePriceModel.maxPrice {
             
             screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0,"maxPrice":max]
@@ -263,22 +262,25 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         if let min = cloosePriceModel.minPrice ,let max = cloosePriceModel.maxPrice {
             if min > max {
                 
-              screenPriceArr  = ["minPrice":max,"maxPrice":min]
-            cloosePriceModel.maxPrice = min
-            cloosePriceModel.minPrice = max
-            self.tableView.reloadData()
-//            WOWHud.showMsg("请输入正确的价格范围")
-//                return
+                screenPriceArr  = ["minPrice":max,"maxPrice":min]
+                cloosePriceModel.maxPrice = min
+                cloosePriceModel.minPrice = max
+                self.tableView.reloadData()
+                //            WOWHud.showMsg("请输入正确的价格范围")
+                //                return
             }
         }
-        var parms = [String: AnyObject]()
-        parms = ["colorList" :screenColorArr as AnyObject,
-                 "priceObj"  :screenPriceArr as AnyObject,
-                 "styleList" :screenStyleArr as AnyObject,
-                 "sceneList" :screenScreenArr as AnyObject
+        //        var parms = [String: AnyObject]()
+        parmsResulte = ["colorList" :screenColorArr as AnyObject,
+                        "priceObj"  :screenPriceArr as AnyObject,
+                        "styleList" :screenStyleArr as AnyObject,
+                        "sceneList" :screenScreenArr as AnyObject
         ]
-//        SureScreenAction(parms)
-        screenAction(parms as AnyObject)
+        screenAction(parmsResulte as AnyObject)
+    }
+    func sureAction()  {
+    
+//
         self.hideView()
     }
 

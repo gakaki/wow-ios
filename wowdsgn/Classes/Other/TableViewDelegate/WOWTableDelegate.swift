@@ -12,7 +12,7 @@ enum ControllerViewType { // 区分底部列表
 }
 import UIKit
 import UITableView_FDTemplateLayoutCell
-class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,CyclePictureViewDelegate {
+class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,CyclePictureViewDelegate,HomeBrannerDelegate {
     open var vc : UIViewController?
 
     open var ViewControllerType  :ControllerViewType?
@@ -245,8 +245,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             if let banners = model.moduleContent?.banners{
                 
                 cell.reloadBanner(banners)
-                self.bannerArray = banners
-                cell.cyclePictureView.delegate = self
+                cell.delegate = self
+//                self.bannerArray = banners
+//                cell.cyclePictureView.delegate = self
             }
             cell_heights[section]  = cell.heightAll
             returnCell = cell
@@ -631,6 +632,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         }
         
         
+    }
+    
+    func gotoVCFormLinkType(model: WOWCarouselBanners){
+        
+                let viewController = self.vc as! WOWBaseModuleVC
+                viewController.goController(model)
+
     }
     public func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
         let model = bannerArray[(indexPath as NSIndexPath).row]

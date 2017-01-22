@@ -124,9 +124,10 @@ class WOWProductListController: VCBaseNavCart {
                 
             }
             
-        }){ (errorMsg) in
+        }){[unowned self] (errorMsg) in
             self.endRefresh()
         }
+
     }
     override func setUI()
     {

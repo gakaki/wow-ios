@@ -243,6 +243,8 @@ public enum RequestApi{
     case api_H5Share(h5Url: String)
     //
     case api_Deferreddeeplink
+    //领取优惠券
+    case api_CouponObtain(couponId: Int)
 
 }
 
@@ -502,6 +504,8 @@ extension RequestApi:TargetType{
             return URL_H5Share
         case .api_Deferreddeeplink:
             return URL_Deferreddeeplink
+        case .api_CouponObtain:
+            return URL_CouponObtain
             
         default:
             return URL_topic
@@ -757,6 +761,8 @@ extension RequestApi:TargetType{
                 params = ["msgType": msgType]
             case let .api_H5Share(h5Url):
                 params = ["h5Url": h5Url]
+            case let .api_CouponObtain(couponId):
+                params = ["couponId": couponId]
 
             default:
                 break

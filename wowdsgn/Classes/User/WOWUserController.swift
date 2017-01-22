@@ -106,7 +106,6 @@ class WOWUserController: WOWBaseTableViewController {
      */
     fileprivate func configHeaderView(){
         headerView       = WOWUserTopView()
-        configBuyBarItem()
         headerView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 75)
         headerView.configShow(WOWUserManager.loginStatus)
         headerView.topContainerView.addAction {[weak self] in

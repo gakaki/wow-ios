@@ -23,12 +23,11 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     var nextView : WOWRegistInfoSureView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.telTextField.text = WOWUserManager.userMobile
+        self.telTextField.text  = WOWUserManager.userMobile
         self.nickTextField.text = WOWUserManager.userName
 //        headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
         headImageView.borderRadius(25)
         headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-
         // Do any additional setup after loading the view.
     }
 
@@ -83,7 +82,11 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         present(alert, animated: true, completion: nil)
 
     }
-    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        nickTextField.resignFirstResponder()
+         telTextField.resignFirstResponder()
+         descTextField.resignFirstResponder()
+    }
 //MARK:Actions
     func nextButton() {
         

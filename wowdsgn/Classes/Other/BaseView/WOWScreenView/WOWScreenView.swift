@@ -107,7 +107,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         
         
         for a in 0..<ScreenViewConfig.screenTitles.count {
-            let model = SectionModel.init(sectionTitle: ScreenViewConfig.screenTitles[a], isOut: false)
+            let model = SectionModel.init(sectionTitle: ScreenViewConfig.screenTitles[a], isOut: true)
             arrayTitle.append(model)
         }
       

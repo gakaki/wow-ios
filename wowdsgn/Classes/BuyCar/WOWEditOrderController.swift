@@ -518,7 +518,7 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
-                
+                WOWHud.dismiss()
                 //TalkingData 下单
                 var sum = strongSelf.orderSettle?.totalAmount ?? 0
                 sum                  = sum * 100 

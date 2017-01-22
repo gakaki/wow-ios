@@ -12,7 +12,7 @@ enum ControllerViewType { // 区分底部列表
 }
 import UIKit
 import UITableView_FDTemplateLayoutCell
-class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,CyclePictureViewDelegate,HomeBrannerDelegate {
+class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,CyclePictureViewDelegate {
     open var vc : UIViewController?
 
     open var ViewControllerType  :ControllerViewType?
@@ -245,9 +245,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             if let banners = model.moduleContent?.banners{
                 
                 cell.reloadBanner(banners)
-                cell.delegate = self
-//                self.bannerArray = banners
-//                cell.cyclePictureView.delegate = self
+                cell.delegate = self.vc as! HomeBrannerDelegate?
+                
+
             }
             cell_heights[section]  = cell.heightAll
             returnCell = cell
@@ -363,8 +363,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             if let banners = model.moduleContent?.banners{
                 
                 cell.reloadBanner(banners)
-                self.bannerArray = banners
-                cell.cyclePictureView.delegate = self
+                cell.delegate = self.vc as! HotBrannerCellDelegate?
+
             }
 
             returnCell = cell
@@ -605,8 +605,6 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 
                 self.vc?.navigationController?.pushViewController(vc, animated: true)
                 
-//                self.vc?.toVCTopidDetail(model.id ?? 0)
-//                self.vc?.toVCArticleListVC(model.columnId ?? 0,title: model.columnName ?? "")
             }
             return
         }
@@ -633,13 +631,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
         
     }
-    
-    func gotoVCFormLinkType(model: WOWCarouselBanners){
-        
-                let viewController = self.vc as! WOWBaseModuleVC
-                viewController.goController(model)
-
-    }
+  
     public func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
         let model = bannerArray[(indexPath as NSIndexPath).row]
         let viewController = self.vc as! WOWBaseModuleVC

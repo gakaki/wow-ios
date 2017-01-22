@@ -335,5 +335,23 @@ extension WOWBaseModuleVC:Cell_104_TwoLineDelegate{// 双列产品组Item跳转
     func goToProductGroupList(_ model:WOWCarouselBanners){
         goController(model)
     }
-  }
+}
 
+extension WOWBaseModuleVC:HomeBrannerDelegate{// 首页轮播跳转 比例 1：1
+    
+    // banner 跳转
+    func gotoVCFormLinkType(model: WOWCarouselBanners){
+        
+        goController(model)
+        
+    }
+}
+extension WOWBaseModuleVC:HotBrannerCellDelegate{// 精选页轮播跳转 比例 3：2
+    
+    // banner 跳转
+    func gotoVCFormLinkType_HotBanner(model: WOWCarouselBanners){
+        
+        goController(model)
+        
+    }
+}

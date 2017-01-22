@@ -34,6 +34,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
 //        if decidePolicyFor.navigationType == .linkActivated {
         
             print("webView:\(webView) decidePolicyForNavigationAction:\(decidePolicyFor) decisionHandler:\(decisionHandler)")
+        can()
             if let url = decidePolicyFor.request.url {
                 print(url.absoluteString)
                 
@@ -49,14 +50,15 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     }
     public func webView(_: WKWebView, decidePolicyFor: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void)
     {
-        decisionHandler(.allow)
         can()
+        decisionHandler(.allow)
+      
 
      }
 
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         progressView.setProgress(0.0, animated: false)
-        
+        can()
     }
     
     
@@ -128,10 +130,10 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         view.insertSubview(webView, belowSubview: progressView)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         webView.navigationDelegate  = self
-        
+       
         bridge = ZHWebViewBridge.bridge(webView)
 //        bridge_router()
-        
+        can()
         var url_final   = (url ?? "")
         if url_final.length > 0 {
             url_final   = "\(url_final)?platform=ios&wowdsgn=true"
@@ -239,14 +241,17 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     @IBAction func goBackClick(_ sender: UIButton) {
         // 获取webView当前加载的页面的数量，可以判断是否在首页，解决无法返回的问题
         webView.goBack()
+       
     }
     
     @IBAction func goFormatClick(_ sender: UIButton) {
         webView.goForward()
+       
     }
     
     @IBAction func reloadClick(_ sender: UIButton) {
         webView.reload()
+       
         
     }
     

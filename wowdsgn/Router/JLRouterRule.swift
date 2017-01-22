@@ -98,7 +98,7 @@ public class JLRouterRule {
         }
 
         // 跳转商品详情页(产品详情)
-        JLRoutes.global().add(["/contenttopic","/contenttopic/:id"]) { (params) -> Bool in
+        JLRoutes.global().add(["/contenttopic","/contenttopic/:id","/topic/content/:id"]) { (params) -> Bool in
             print(params)
             let id              = params["id"] as? String
             let toPicId         = id?.toInt() ?? 0
@@ -107,7 +107,7 @@ public class JLRouterRule {
         }
         
         // 跳转商品列表详情页(系列品)
-        JLRoutes.global().add(["/producttopic","/producttopic/:id"]) { (params) -> Bool in
+        JLRoutes.global().add(["/producttopic","/producttopic/:id","/topic/product/:id"]) { (params) -> Bool in
             print(params)
             let id              = params["id"] as? String
             let toPicId         = id?.toInt() ?? 0
@@ -178,6 +178,16 @@ public class JLRouterRule {
             if let id = params["id"] as? String {
                 VCRedirect.goToProductGroup(id.toInt() ?? 0)
             }
+            return true
+        }
+        
+        //领券
+        JLRoutes.global().addRoute("/coupon/obtain/:couponId") { (params) -> Bool in
+            print(params)
+            if let couponId = params["couponId"] as? String {
+                VCRedirect.getCoupon(couponId.toInt() ?? 0)
+            }
+       
             return true
         }
     }

@@ -334,6 +334,22 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
         
     }
+    
+    //领取优惠券
+    public class func getCoupon(_ couponId: Int) {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_CouponObtain(couponId: couponId), successClosure: { (result, code) in
+            WOWHud.showMsg("恭喜您获得一张优惠券")
+            
+        }) { (errorMsg) in
+            
+        }
+        
+    }
 
     
  }

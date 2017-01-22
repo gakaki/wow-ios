@@ -101,8 +101,18 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     
     deinit {
         webView.removeObserver(self, forKeyPath: "estimatedProgress", context: nil)
+        removeObservers()
+
     }
-    
+
+    fileprivate func addObserver(){
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
+        
+    }
+    fileprivate func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object: nil)
+    }
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,7 +122,8 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         //    优惠券
         
         navigationItem.title = "尖叫设计"
-        
+        configBuyBarItem()
+        addObserver()
         webView.frame       = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight - 114)
         view.insertSubview(webView, belowSubview: progressView)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)

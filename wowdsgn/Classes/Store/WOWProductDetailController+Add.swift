@@ -199,7 +199,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case 6 + isHaveLimit + isHavePromotion + isHaveComment:       //商品评价
             return 0.01
         default:
-            return 15
+            return 10
         }
         
     }

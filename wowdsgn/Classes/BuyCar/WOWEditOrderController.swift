@@ -411,15 +411,16 @@ class WOWEditOrderController: WOWBaseViewController {
                 WOWHud.dismiss()
 
                 //TalkingData 下单
-                var sum                  = Int32(totalAmout ) ?? 0
-                sum                      = sum * 100
+                var sum = strongSelf.orderSettle?.totalAmount ?? 0
+                sum                  = sum * 100 
                 let order_id             = strongSelf.orderCode
                 
-                let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
-//                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
-//                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
+                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
+                order?.addItem(withCategory: "", name: "", unitPrice: Int32(sum), amount: Int32(sum))
+                order?.addItem(withCategory: "", itemId: "", name: "", unitPrice: Int32(sum), amount: Int32(sum)   )
+    
                 TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
-                AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ?? 0,"OrderCode":order_id ?? 0])
+                AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ,"OrderCode":order_id ])
 
             }
             
@@ -519,17 +520,18 @@ class WOWEditOrderController: WOWBaseViewController {
                 strongSelf.chooseStyle()
                 
                 //TalkingData 下单
-                var sum                  = Int32( totalAmount ) ?? 0
-                sum                      = sum * 100
+                var sum = strongSelf.orderSettle?.totalAmount ?? 0
+                sum                  = sum * 100 
                 let order_id             = strongSelf.orderCode
                 
-                let order                = TDOrder.init(orderId: order_id, total: sum, currencyType: "CNY")
-                WOWHud.dismiss()
-
-                //                order?.addItem(withCategory: "", name: "", unitPrice: sum, amount: sum)
-                //                order?.addItem(withCategory: "", itemId: order_id, name: "", unitPrice: sum, amount: sum    )
+        
+                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
+                order?.addItem(withCategory: "", name: "", unitPrice: Int32(sum), amount: Int32(sum))
+                order?.addItem(withCategory: "", itemId: "", name: "", unitPrice: Int32(sum), amount: Int32(sum)   )
+                
                 TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
-                AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ?? 0,"OrderCode":order_id ?? 0])
+                AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ,"OrderCode":order_id ])
+                
 
             }
             
@@ -579,11 +581,21 @@ class WOWEditOrderController: WOWBaseViewController {
                 let result = WOWCalPrice.calTotalPrice([payAmount ?? 0],counts:[1])
                 vc.totalPrice = result
                 
+                //TalkingData 支付成功
+                var sum = payAmount ?? 0
+                sum                  = sum * 100 
+                let order_id             = orderCode ?? ""
+                
+                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
+                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
+                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
+                AnalyaticEvent.e2(.PaySuccess,["totalAmount":Int32(sum) ,"OrderCode":order_id ])
+
                 //支付结果
-                
-                
-                
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
+
+                
+                
             }
             
             }) { (errorMsg) in
@@ -748,7 +760,7 @@ extension WOWEditOrderController: selectPayDelegate {
             WOWHud.showMsg("订单生成失败")
             return
         }
-        
+       
         
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result, code) in
             if let strongSelf = self {

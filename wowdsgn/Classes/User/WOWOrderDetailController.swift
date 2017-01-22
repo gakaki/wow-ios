@@ -501,16 +501,19 @@ extension WOWOrderDetailController{
                 vc.payMethod = paymentChannelName ?? ""
                 vc.orderid = orderCode ?? ""
                 vc.totalPrice = "¥ " + String(format: "%.2f",payAmount ?? 0)
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-                
-                
                 
                 //TalkingData 支付成功
-                var sum                  = Int32( payAmount ?? 0  )
-                sum                      = sum * 100
+                var sum = payAmount ?? 0
+                sum                  = sum * 100
                 let order_id             = orderCode ?? ""
-                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: sum, withCurrencyType: "CNY", withPayType: paymentChannelName)
-                AnalyaticEvent.e2(.PaySuccess,["totalAmount":sum ?? 0,"OrderCode":order_id ?? 0])
+                
+                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
+                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
+                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
+                AnalyaticEvent.e2(.PaySuccess,["totalAmount":sum ,"OrderCode":order_id ])
+                
+                
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
 
             }
             

@@ -33,9 +33,11 @@ struct WOWShareManager {
 //                    }
 //                })
                 
-                
                 WowShare.share_friends(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage, successClosure: {
                     WOWHud.showMsg("分享成功")
+                },
+                    failClosure: { e in
+                        share_cancel_deal(e)
                 })
                 
                 
@@ -43,9 +45,12 @@ struct WOWShareManager {
             case .wechat:
                 
                 WowShare.share_text(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage, successClosure: {
-                    WOWHud.showMsg("分享成功")
-
+                        WOWHud.showMsg("分享成功")
+                },
+                 failClosure: { e in
+                                        share_cancel_deal(e)
                 })
+               
 
                 
 //                UMSocialData.default().extConfig.wechatSessionData.title = title
@@ -63,17 +68,31 @@ struct WOWShareManager {
         }
     }
     
-    static func shareUrl(_ title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
+    
+    public static func share_cancel_deal(_ error:Error ){
+        
+        var message: String = ""
+        print("Share Fail with error ：%@", error)
+        message = "失败原因Code: \(error) , 用户手动取消"
+        var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
+        //最好这里能打点记录下
+        alert.show()
+    }
+    
+    
+    public static func shareUrl(_ title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
         shareBackView.show()
       
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             switch shareType {
             case .friends:
-                
-                WowShare.share_friends(title ?? "", shareText: shareText, url: url, shareImage: shareImage, successClosure: {
-                    WOWHud.showMsg("分享成功")
 
-                })
+                WowShare.share_friends(title ?? "", shareText: shareText, url: url, shareImage: shareImage, successClosure: {
+                        WOWHud.showMsg("分享成功")
+                    },
+                    failClosure: { e in
+                        share_cancel_deal(e)
+                    })
                
                 
                 return
@@ -82,6 +101,9 @@ struct WOWShareManager {
                 WowShare.share_text(title ?? "", shareText: shareText, url: url, shareImage: shareImage, successClosure: {
                     WOWHud.showMsg("分享成功")
 
+                },
+                failClosure: { e in
+                    share_cancel_deal(e)
                 })
 
                 return

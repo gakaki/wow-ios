@@ -69,7 +69,7 @@ struct WOWShareManager {
     }
     
     
-    public static func share_cancel_deal(_ error:Error ){
+    public static func share_cancel_deal(_ error: Swift.Error){
         
         var message: String = ""
         print("Share Fail with error ：%@", error)

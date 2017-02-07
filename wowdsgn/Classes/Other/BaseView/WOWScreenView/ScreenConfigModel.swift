@@ -23,7 +23,7 @@ class ScreenConfigModel:NSObject,Mappable{
     func mapping(map: Map) {
         colorList           <-   map["colors"]
         styleList           <-   map["styles"]
-        sceneList           <-   map["sceneList"]
+        sceneList           <-   map["scenes"]
     }
 }
 class ScreenModel:NSObject,Mappable{

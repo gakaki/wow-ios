@@ -28,7 +28,7 @@ struct ScreenViewConfig{
 
     static var headerViewHight :CGFloat = 64
     static var footerViewHight :CGFloat = 50
-    static var screenTitles             = ["颜色","价格范围","风格"]
+    static var screenTitles             = ["颜色","价格范围","风格","场景"] //分组的标题
     static let kDuration                = 0.3
     static let frameX :CGFloat          = 75.w
 }
@@ -103,7 +103,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         cellHightDic = [0 : 40 ,
                         1 : 65 ,
                         2 : 44 ,
-                        3 : 54 ]
+                        3 : 44 ]
         
         
         for a in 0..<ScreenViewConfig.screenTitles.count {
@@ -229,6 +229,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         cloosePriceModel.maxPrice = nil
         screenColorArr.removeAll()
         screenStyleArr.removeAll()
+        screenScreenArr.removeAll()
         for model in colorArr {
             if model.isSelect {
                 model.isSelect = false
@@ -241,36 +242,42 @@ class WOWScreenView: UIView,CAAnimationDelegate {
             }
             
         }
+        for model in sceneArr {
+            if model.isSelect {
+                model.isSelect = false
+            }
+            
+        }
         self.tableView.reloadData()
 
     }
+    /// 回调所选的 条件
     func getConfigScreenResulet(){
+        
         if let min = cloosePriceModel.minPrice {
             
             screenPriceArr  = ["minPrice":min]
             
         }
-        //        else {
-        //            cloosePriceModel.minPrice = 0
-        //        }
+ 
         if let max = cloosePriceModel.maxPrice {
             
             screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0,"maxPrice":max]
         }else{// 最大值无值
             screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0]
         }
+        
         if let min = cloosePriceModel.minPrice ,let max = cloosePriceModel.maxPrice {
-            if min > max {
+            if min > max {// 如果最小值大于最大值，则 最大值和最小值互换
                 
                 screenPriceArr  = ["minPrice":max,"maxPrice":min]
                 cloosePriceModel.maxPrice = min
                 cloosePriceModel.minPrice = max
                 self.tableView.reloadData()
-                //            WOWHud.showMsg("请输入正确的价格范围")
-                //                return
+
             }
         }
-        //        var parms = [String: AnyObject]()
+
         parmsResulte = ["colorList" :screenColorArr as AnyObject,
                         "priceObj"  :screenPriceArr as AnyObject,
                         "styleList" :screenStyleArr as AnyObject,
@@ -384,6 +391,7 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
             cell.showData(m: model)
             cell.selectionStyle = .none
             return cell
+       
         case 3:
             let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
             

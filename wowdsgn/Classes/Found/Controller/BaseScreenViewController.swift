@@ -53,9 +53,9 @@ class BaseScreenViewController: WOWBaseViewController {
     var screenColorArr     : [String]?
     var screenStyleArr     : [String]?
     var screenPriceArr     = Dictionary<String, Int>()
-    var screenScreenArr    = [String]()
-    var screenMinPrice      : Int?
-    var screenMaxPrice      : Int?
+    var screenScreenArr    : [String]?
+    var screenMinPrice     : Int?
+    var screenMaxPrice     : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,9 +71,8 @@ class BaseScreenViewController: WOWBaseViewController {
     }
     //MARK:筛选界面
     func configScreeningView()  {
-        screenView = WOWScreenView(frame:CGRect(x: ScreenViewConfig.frameX,y: 0,width: MGScreenWidth - ScreenViewConfig.frameX,height: MGScreenHeight))
         
-              
+        screenView = WOWScreenView(frame:CGRect(x: ScreenViewConfig.frameX,y: 0,width: MGScreenWidth - ScreenViewConfig.frameX,height: MGScreenHeight))
         
         screenBtnimg.image = UIImage.init(named: "screen")
         screenBtnimg.addTapGesture(action: {[weak self] (tap) in
@@ -90,6 +89,35 @@ class BaseScreenViewController: WOWBaseViewController {
         }
     }
     
+    // 解析回调来的筛选数据信息，
+    func getScreenConditions(dicResult: [String:AnyObject]) {
+        
+        if dicResult["colorList"] != nil{
+            self.screenColorArr  = dicResult["colorList"] as? [String]
+        }else{
+            self.screenColorArr?.removeAll()
+        }
+        if dicResult["priceObj"] != nil {
+            self.screenPriceArr  = dicResult["priceObj"] as! Dictionary
+            self.screenMinPrice = self.screenPriceArr["minPrice"]
+            self.screenMaxPrice = self.screenPriceArr["maxPrice"]
+        }else{
+            self.screenMinPrice = nil
+            self.screenMaxPrice = nil
+        }
+        
+        if dicResult["styleList"] != nil{
+            self.screenStyleArr  = dicResult["styleList"] as? [String]
+        }else{
+            self.screenStyleArr?.removeAll()
+        }
+        if dicResult["sceneList"] != nil{
+            self.screenScreenArr  = dicResult["sceneList"] as? [String]
+        }else{
+            self.screenScreenArr?.removeAll()
+        }
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

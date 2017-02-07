@@ -57,6 +57,9 @@ target 'wowdsgn' do
 	pod 'DZNEmptyDataSet'
   pod 'TZImagePickerController'
 
+	pod 'AVOSCloud'               # 数据存储、短信、云引擎调用等基础服务模块
+	# pod 'AVOSCloudIM'             # 实时通信模块
+	# pod 'AVOSCloudCrashReporting' # 错误报告模块
 	## ShareSDK主模块(必须)
 	#pod 'ShareSDK3'
 	## Mob 公共库(必须) 如果同时集成SMSSDK iOS2.0:可看此注意事项：http://bbs.mob.com/thread-20051-1-1.html

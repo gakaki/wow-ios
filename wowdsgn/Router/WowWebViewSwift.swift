@@ -38,8 +38,12 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
             if let url = decidePolicyFor.request.url {
                 print(url.absoluteString)
                 
-//                JLRoutes.global().routeURL(url)
-                JLRouterRule.handle_open_url(url: url)
+                let res = JLRouterRule.handle_open_url(url: url)
+                if  res == true {
+                    //静止链接继续跳转
+                    decisionHandler(.cancel)
+                    return
+                }
 //                FN.open(url: url.absoluteString)
             }
 

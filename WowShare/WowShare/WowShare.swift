@@ -11,7 +11,8 @@ import UMSocialCore
 import UMSocialNetwork
 import UShareUI
 
-public typealias ShareSuccessClosure               = () -> ()
+public typealias ShareSuccessClosure                = () -> ()
+public typealias ShareFailClosure                   = (_ e:Error) -> ()
 
 public class WowShare {
     
@@ -68,7 +69,9 @@ public class WowShare {
         shareText:String?,
         url:String?,
         shareImage:Any!,
-        successClosure:@escaping ShareSuccessClosure)
+        successClosure:@escaping ShareSuccessClosure,
+        failClosure:@escaping ShareFailClosure
+    )
     {
         var messageObject                       = UMSocialMessageObject()
         let shareObject:UMShareWebpageObject    = UMShareWebpageObject.init()
@@ -86,18 +89,14 @@ public class WowShare {
                 
                 var message: String = ""
                 
-                if error != nil {
-                    print("Share Fail with error ：%@", error)
-                    message = "失败原因Code: \(error)"
-                    var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
-                    
-                    alert.show()
+                if let e = error {
+                    failClosure(e )
                 }else{
                     print("Share succeed")
                     successClosure()
                 }
-                
-        })
+    
+            })
     }
     
     
@@ -107,9 +106,10 @@ public class WowShare {
         shareText:String?,
         url:String?,
         shareImage:Any!,
-        successClosure:@escaping ShareSuccessClosure)
+        successClosure:@escaping ShareSuccessClosure,
+        failClosure:@escaping ShareFailClosure
+    )
     {
-        
         
         var messageObject                       = UMSocialMessageObject()
         let shareObject:UMShareWebpageObject    = UMShareWebpageObject.init()
@@ -127,17 +127,13 @@ public class WowShare {
                 
                 var message: String = ""
 
-                if error != nil {
-                    print("Share Fail with error ：%@", error)
-                    print("Share Fail with error ：%@", shareResponse)
-                    message = "失败原因Code: \(error)"
-                    var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
-                    
-                    alert.show()
+                if let e = error {
+                    failClosure(e )
                 }else{
                     print("Share succeed")
                     successClosure()
                 }
+
                 
         })
 

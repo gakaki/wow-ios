@@ -50,9 +50,9 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
     var screenColorArr     : [String]?
     var screenStyleArr     : [String]?
     var screenPriceArr     = Dictionary<String, Int>()
-    var screenScreenArr    = [String]()
-    var screenMinPrice      : Int?
-    var screenMaxPrice      : Int?
+    var screenScreenArr    : [String]?
+    var screenMinPrice     : Int?
+    var screenMaxPrice     : Int?
     
     var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
@@ -227,7 +227,11 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
             params["styleIds"] = screenStyleArr
             
         }
-
+        if screenScreenArr?.count > 0 {
+            
+            params["sceneIds"] = screenScreenArr
+            
+        }
         print(params)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Product_By_Category(params : params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
                 

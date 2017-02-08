@@ -115,29 +115,11 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         
         addTopView()
         addBottomProductView()
-        
+        // 筛选回调
         screenView.screenAction = {[unowned self] (dic) in
             print(dic)
-            let dicResult = dic as! [String:AnyObject]
-            if dicResult["colorList"] != nil{
-                self.screenColorArr  = dicResult["colorList"] as? [String]
-            }else{
-                self.screenColorArr?.removeAll()
-            }
-            if dicResult["priceObj"] != nil {
-                self.screenPriceArr  = dicResult["priceObj"] as! Dictionary
-                self.screenMinPrice = self.screenPriceArr["minPrice"]
-                self.screenMaxPrice = self.screenPriceArr["maxPrice"]
-            }else{
-                self.screenMinPrice = nil
-                self.screenMaxPrice = nil
-            }
             
-            if dicResult["styleList"] != nil{
-                self.screenStyleArr  = dicResult["styleList"] as? [String]
-            }else{
-                self.screenStyleArr?.removeAll()
-            }
+            self.getScreenConditions(dicResult: dic as! [String:AnyObject])
             
             self.refreshSubView(self.ob_tab_index.value)
         }
@@ -403,8 +385,8 @@ extension VCCategory:VTMagicViewDelegate, VCCategoryProductsDelegate{
             vc.screenMaxPrice     = self.screenMaxPrice
             vc.screenColorArr     = self.screenColorArr
             vc.screenStyleArr     = self.screenStyleArr
-        
-            vc.pageIndex           = 1 //每次点击都初始化咯
+            vc.screenScreenArr    = self.screenScreenArr
+            vc.pageIndex          = 1 //每次点击都初始化咯
             vc.delegate = self
             vc.request()
 

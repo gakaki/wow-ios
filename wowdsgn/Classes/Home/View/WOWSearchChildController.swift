@@ -69,7 +69,7 @@ class WOWSearchChildController: WOWBaseViewController{
     var screenColorArr     : [String]?
     var screenStyleArr     : [String]?
     var screenPriceArr     = Dictionary<String, Int>()
-    var screenScreenArr    = [String]()
+    var screenScreenArr    : [String]?
     var screenMinPrice      : Int?
     var screenMaxPrice      : Int?
 
@@ -145,7 +145,11 @@ class WOWSearchChildController: WOWBaseViewController{
             params["styleIds"] = screenStyleArr
             
         }
-        
+        if screenScreenArr?.count > 0 {
+            
+            params["sceneIds"] = screenScreenArr
+            
+        }
         print(params)
 
         WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(params : params as [String : AnyObject]), successClosure: { [weak self](result, code) in

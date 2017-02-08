@@ -11,11 +11,11 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     @IBOutlet weak var reloadBtn: UIButton!
     @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var progressView: UIProgressView!
-    fileprivate var shareProductImage:UIImage? //供分享使用
-    lazy var placeImageView:UIImageView={  //供分享使用
-        let image = UIImageView()
-        return image
-    }()
+    fileprivate var shareProductImage:String? //供分享使用
+//    lazy var placeImageView:UIImageView={  //供分享使用
+//        let image = UIImageView()
+//        return image
+//    }()
     public let webView: WKWebView = {
         let webConfiguration    = WKWebViewConfiguration()
         let w = WKWebView(frame: .zero, configuration: webConfiguration)
@@ -214,20 +214,21 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
                 strongSelf.shareTitle = json["h5Title"].string ?? ""
                 strongSelf.shareDesc = json["h5Desc"].string ?? ""
                 let shareImg = json["h5ImgUrl"].string ?? ""
+                strongSelf.shareProductImage = shareImg
                 //加载分享图片
-                strongSelf.placeImageView.yy_setImage(
-                    with: URL(string:shareImg ),
-                    placeholder: nil,
-                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-                    completion: { [weak self] (img, url, from_type, image_stage,err ) in
-                        if let strongSelf = self{
-                            strongSelf.shareProductImage = img
-                            
-                            
-                        }
-                        
-                        
-                })
+//                strongSelf.placeImageView.yy_setImage(
+//                    with: URL(string:shareImg ),
+//                    placeholder: nil,
+//                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+//                    completion: { [weak self] (img, url, from_type, image_stage,err ) in
+//                        if let strongSelf = self{
+//                            strongSelf.shareProductImage = img
+//                            
+//                            
+//                        }
+//                        
+//                        
+//                })
                 
 
             }

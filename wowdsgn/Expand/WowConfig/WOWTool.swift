@@ -180,7 +180,7 @@ struct WOWArrayAddStr {
         if array.count > 1 {
             
             pointArr = array[1].components(separatedBy: ".")[0].components(separatedBy: "x")
-            return pointArr[1].toFloat()! / pointArr[0].toFloat()!
+            return pointArr[0].toFloat()! / pointArr[1].toFloat()!
 
         }
         return 0

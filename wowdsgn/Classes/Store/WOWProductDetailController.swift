@@ -47,11 +47,11 @@ class WOWProductDetailController: WOWBaseViewController {
     var isOpenTips: Bool = false
     //轮播图数组
     var imgUrlArr = [String]()
-    fileprivate var shareProductImage:UIImage? //供分享使用
-    lazy var placeImageView:UIImageView={  //供分享使用
-        let image = UIImageView()
-        return image
-    }()
+//    fileprivate var shareProductImage:UIImage? //供分享使用
+//    lazy var placeImageView:UIImageView={  //供分享使用
+//        let image = UIImageView()
+//        return image
+//    }()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -244,16 +244,16 @@ class WOWProductDetailController: WOWBaseViewController {
         if imgUrlArr.count >= 1 {
             //当前主品放到轮播的第一个
             cycleView.imageURLArray = imgUrlArr
-                placeImageView.yy_setImage(
-                    with: URL(string:imgUrlArr[0] ),
-                    placeholder: nil,
-                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-                    completion: { [weak self] (img, url, from_type, image_stage,err ) in
-                        if let strongSelf = self{
-                            strongSelf.shareProductImage = img
-                        }
-                        
-                })
+//                placeImageView.yy_setImage(
+//                    with: URL(string:imgUrlArr[0] ),
+//                    placeholder: nil,
+//                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+//                    completion: { [weak self] (img, url, from_type, image_stage,err ) in
+//                        if let strongSelf = self{
+//                            strongSelf.shareProductImage = img
+//                        }
+//                        
+//                })
 
 //                        placeImageView.kf.setImage(
 //                with: URL(string:imgUrlArr[0] ) ?? URL(string: "placeholder_product"),
@@ -358,7 +358,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //MARK:分享
     @IBAction func shareClick(_ sender: UIButton) {
         let shareUrl = WOWShareUrl + "/item/\(productId ?? 0)"
-        WOWShareManager.share(productModel?.productTitle, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        WOWShareManager.share(productModel?.productTitle, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:imgUrlArr[0] ?? UIImage(named: "me_logo")!)
     }
     
     //MARK:喜欢

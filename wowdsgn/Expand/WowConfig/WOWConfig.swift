@@ -67,6 +67,10 @@ struct WOWID {
         static let appKey      = "14d4601757e60"
         static let appSecret  = "342a1fa206ea35cc413f7385e1c4b56a"
     }
+    struct TalkingData {
+        static let appID       = "e81f26ce70664a9dab698bae55be2044"
+        static let appKey      = "12430AB8C707826E0C0FBDA290E620E4"
+    }
 }
 
 

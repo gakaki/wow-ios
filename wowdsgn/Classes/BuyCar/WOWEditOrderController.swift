@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import AdSupport
 
 enum editOrderEntrance {
     case buyEntrance        //立即购买入口
@@ -77,6 +78,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //MARK:Private Method
     override func setUI() {
+        
         navigationItem.title = "确认订单"
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -586,11 +588,10 @@ class WOWEditOrderController: WOWBaseViewController {
                 sum                  = sum * 100 
                 let order_id             = orderCode ?? ""
                 
-                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
-                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
-                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
+//                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
+//                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
+//                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
                 AnalyaticEvent.e2(.PaySuccess,["totalAmount":Int32(sum) ,"OrderCode":order_id ])
-
                 //支付结果
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
 
@@ -760,9 +761,14 @@ extension WOWEditOrderController: selectPayDelegate {
             WOWHud.showMsg("订单生成失败")
             return
         }
+        
+        let deviceId = TalkingDataAppCpa.getDeviceId()
+        let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+    
+        let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid]
        
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let charge = json["charge"]

@@ -11,6 +11,7 @@ import UIKit
 class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource {
 //    var reuestIndex = 0 //翻页
 //    var isRreshing : Bool = false
+    var isCurrentRequest : Bool = false // 记录当前页面是否网络请求过，区别是第一次进网络请求，还是下拉刷新进入网络请求
     
     lazy var rightNagationItem:WOWRightNavigationItem = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWRightNavigationItem.self), owner: self, options: nil)?.last as! WOWRightNavigationItem
@@ -65,7 +66,10 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
     }
 
     func request(){
-        
+        if isCurrentRequest == false{
+            WOWHud.showLoading()
+            isCurrentRequest = true
+        }
     }
 }
 

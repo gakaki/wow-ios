@@ -118,7 +118,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }
     override func setUI() {
         super.setUI()
-        navigationItem.title = "个人信息"
+        navigationItem.title = "账户设置"
         headImageView.borderRadius(25)
         requestAddressInfo()
         
@@ -242,38 +242,24 @@ class WOWUserInfoController: WOWBaseTableViewController {
             
             starTextField?.text = pickDataArr[row + 1]
         }
-        request()
+        requestEditUserInfo()
         cancelPicker()
     }
     
   //MARK:Private Network
     override func request() {
         super.request()
-        let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star),"avatar":self.headImageUrl]
-        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: { [weak self](result, code) in
+        //请求默认地址数据
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_User, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
-                let json = JSON(result)
-                DLog(json)
-                WOWHud.dismiss()
-//                let model = Mapper<WOWUserModel>().map(result["user"])
-//                WOWUserManager.saveUserInfo(model)
-                //保存一些用户信息
-                WOWUserManager.userHeadImageUrl = strongSelf.headImageUrl
-                WOWUserManager.userSex = strongSelf.sex
-                WOWUserManager.userAgeRange = strongSelf.age
-                WOWUserManager.userConstellation = strongSelf.star
-                strongSelf.configUserInfo()
-          
-                
-                if let action = strongSelf.editInfoAction{
-                    action()
-                }
+                let model = Mapper<WOWUserModel>().map(JSONObject:result)
+                WOWUserManager.saveUserInfo(model)
             }
+            
         }) { (errorMsg) in
-            WOWHud.dismiss()
-            DLog(errorMsg)
+            
         }
-       
+
     }
     
     func requestAddressInfo() {
@@ -294,6 +280,35 @@ class WOWUserInfoController: WOWBaseTableViewController {
         }
 
     }
+    
+    func requestEditUserInfo() {
+        let params = ["sex":String(sex),"ageRange":String(age),"constellation":String(star),"avatar":self.headImageUrl]
+        WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params), successClosure: { [weak self](result, code) in
+            if let strongSelf = self{
+                let json = JSON(result)
+                DLog(json)
+                WOWHud.dismiss()
+                //                let model = Mapper<WOWUserModel>().map(result["user"])
+                //                WOWUserManager.saveUserInfo(model)
+                //保存一些用户信息
+                WOWUserManager.userHeadImageUrl = strongSelf.headImageUrl
+                WOWUserManager.userSex = strongSelf.sex
+                WOWUserManager.userAgeRange = strongSelf.age
+                WOWUserManager.userConstellation = strongSelf.star
+                strongSelf.configUserInfo()
+                
+                
+                if let action = strongSelf.editInfoAction{
+                    action()
+                }
+            }
+        }) { (errorMsg) in
+            WOWHud.dismiss()
+            DLog(errorMsg)
+        }
+
+    }
+    
     
 
 
@@ -358,7 +373,7 @@ extension WOWUserInfoController{
             self.pickerContainerView.pickerView.reloadComponent(0)
             showPickerView()
             editingGroupAndRow = [0:5]
-        case (1, 0):
+        case (0, 7):
             
             let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddressController.self)) as! WOWAddressController
             vc.entrance = WOWAddressEntrance.me
@@ -370,7 +385,7 @@ extension WOWUserInfoController{
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0.01 : 15
+        return section == 0 ? 30 : 12
     }
     fileprivate func showPickerView(){
         
@@ -437,7 +452,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         WOWUploadManager.uploadPhoto(image, successClosure: { [weak self](result) in
             if let strongSelf = self {
                 strongSelf.headImageUrl = result ?? ""
-                strongSelf.request()
+                strongSelf.requestEditUserInfo()
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
                 print(result)
             }

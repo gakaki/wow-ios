@@ -55,11 +55,11 @@ class WOWContentTopicController: WOWBaseViewController {
     var isHaveComment = 0       //是否有评论，如果没有则不显示
     var isHaveAbout = 0         //是否有相关商品，如果没有则不显示
     weak var  delegate :WOWHotStyleDelegate?
-    fileprivate var shareProductImage:UIImage? //供分享使用
-    lazy var placeImageView:UIImageView={  //供分享使用
-        let image = UIImageView()
-        return image
-    }()
+//    fileprivate var shareProductImage:UIImage? //供分享使用
+//    lazy var placeImageView:UIImageView={  //供分享使用
+//        let image = UIImageView()
+//        return image
+//    }()
     var navBackgroundView: WOWMaskColorView!
     
     fileprivate(set) var numberSections = 0
@@ -155,7 +155,7 @@ class WOWContentTopicController: WOWBaseViewController {
     func fxClick() -> Void {
 
         let shareUrl = WOWShareUrl + "/topic/\(topic_id )"
-        WOWShareManager.share(vo_topic?.topicName, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        WOWShareManager.share(vo_topic?.topicName, shareText: vo_topic?.topicDesc, url:shareUrl,shareImage:vo_topic?.topicImg ?? UIImage(named: "me_logo")!)
 
         
     }
@@ -277,34 +277,21 @@ class WOWContentTopicController: WOWBaseViewController {
                 DLog(result)
                 let r                                     =  JSON(result)
                 strongSelf.vo_topic                       =  Mapper<WOWContentTopicModel>().map( JSONObject:r.object )
-                if let vo_topic = strongSelf.vo_topic {
-                    let imgView = UIImageView()
-                    imgView.yy_setImage(
-                        with: URL(string:vo_topic.topicImg ?? "" ),
-                        placeholder: nil,
-                        options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-                        completion: { [weak self] (img, url, from_type, image_stage,err ) in
-                            if let strongSelf = self{
-                                strongSelf.shareProductImage = img
-                            }
-                            
-                    })
-//                    imgView.kf.setImage(
-//                        with: URL(string:vo_topic.topicImg ?? "" ) ?? URL(string: "placeholder_product"),
+//                if let vo_topic = strongSelf.vo_topic {
+//                    let imgView = UIImageView()
+//                    imgView.yy_setImage(
+//                        with: URL(string:vo_topic.topicImg ?? "" ),
 //                        placeholder: nil,
-//                        options: nil,
-//                        progressBlock: { (arg1, arg2) in
-//                            
-//                            
-//                    },
-//                        completionHandler: { [weak self](image, error, cacheType, imageUrl) in
+//                        options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+//                        completion: { [weak self] (img, url, from_type, image_stage,err ) in
 //                            if let strongSelf = self{
-//                                strongSelf.shareProductImage = image
+//                                strongSelf.shareProductImage = img
 //                            }
-//                        }
-//                    )
+//                            
+//                    })
 
-                }
+
+//                }
             //如果有标签的话就显示，没有的话就显示
                 if strongSelf.vo_topic?.tag?.count > 0 {
                     strongSelf.isHaveTag = 1

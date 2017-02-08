@@ -17,7 +17,7 @@ struct WOWShareManager {
     static var shareBackView = WOWShareBackView(frame:CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight))
     
 
-    static func share(_ title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
+    static func share(_ title:String?,shareText:String?,url:String?,shareImage:Any!){
         shareBackView.show()
         let shareNewText = "尖叫设计，生活即风格－600元新人礼包等你来拿！"
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
@@ -63,7 +63,7 @@ struct WOWShareManager {
         }
     }
     
-    static func shareUrl(_ title:String?,shareText:String?,url:String?,shareImage:UIImage = UIImage(named: "me_logo")!){
+    static func shareUrl(_ title:String?,shareText:String?,url:String?,shareImage:Any!){
         shareBackView.show()
       
         shareBackView.shareActionBack = {(shareType:WOWShareType)in

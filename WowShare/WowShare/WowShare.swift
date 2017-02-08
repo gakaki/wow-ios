@@ -67,7 +67,7 @@ public class WowShare {
         _ title:String = "尖叫设计欢迎您",
         shareText:String?,
         url:String?,
-        shareImage:UIImage = UIImage(named: "me_logo")!,
+        shareImage:Any!,
         successClosure:@escaping ShareSuccessClosure)
     {
         var messageObject                       = UMSocialMessageObject()
@@ -106,7 +106,7 @@ public class WowShare {
         _ title:String = "尖叫设计欢迎您",
         shareText:String?,
         url:String?,
-        shareImage:UIImage = UIImage(named: "me_logo")!,
+        shareImage:Any!,
         successClosure:@escaping ShareSuccessClosure)
     {
         
@@ -129,6 +129,7 @@ public class WowShare {
 
                 if error != nil {
                     print("Share Fail with error ：%@", error)
+                    print("Share Fail with error ：%@", shareResponse)
                     message = "失败原因Code: \(error)"
                     var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
                     

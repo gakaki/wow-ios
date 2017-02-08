@@ -20,7 +20,7 @@ public enum RequestApi{
     case api_Sence
     case api_checkVersion(params: [String: AnyObject]?)
     
-    
+    case api_User
     //Tab 第一个栏 首页 该死的那3个url
     case api_Home_Banners
     
@@ -180,7 +180,7 @@ public enum RequestApi{
     
     case api_OrderCreate(params: [String: AnyObject])
     
-    case api_OrderCharge(orderNo: String, channel: String, clientIp: String)
+    case api_OrderCharge(params: [String: AnyObject])
     
     case api_PayResult(orderCode: String)
     
@@ -271,6 +271,8 @@ extension RequestApi:TargetType{
             return URL_category
         case .api_Category_V2:
             return URL_category_v2
+        case .api_User:
+            return URL_User
 
         case .api_Category_subCategory_with_image:
             return URL_category_subCategory_with_image
@@ -537,7 +539,8 @@ extension RequestApi:TargetType{
             .api_ProductsOfCoupon,
             .Api_Screen_Main,
             .Api_Screen_Price,
-            .api_Deferreddeeplink:
+            .api_Deferreddeeplink,
+            .api_User:
 
             return .GET
 
@@ -684,8 +687,8 @@ extension RequestApi:TargetType{
                 params =  ["uid":uid,"order_id":order_id,"status":status]
             case let .api_OrderCreate(param):
                 params = param
-            case let .api_OrderCharge(orderNo, channel, alientIp):
-                params = ["orderNo": orderNo, "channel": channel, "clientIp": alientIp]
+            case let .api_OrderCharge(param):
+                params = param
             case let .api_OrderBuyNow(productId, productQty):
                 params = ["productId": productId, "productQty": productQty]
             case let .api_PayResult(orderCode):
@@ -719,7 +722,7 @@ extension RequestApi:TargetType{
             case .api_Module_Page2:
                 params = ["pageId":2, "region":1]
             // 筛选
-            case let .Api_Screen_Main:
+            case .Api_Screen_Main:
                 break
             case let .Api_Screen_Price(categoryId):
                 params = ["categoryId":categoryId]
@@ -728,6 +731,8 @@ extension RequestApi:TargetType{
             case .api_Found_Main:
                 break
             case .api_DesignerList:
+                break
+            case .api_User:
                 break
             case let .api_Product_By_Category(param): //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
 //                    params = ["asc": asc, "currentPage": currentPage, "showCount": showCount, "sortBy": sortBy, "categoryId":categoryId]

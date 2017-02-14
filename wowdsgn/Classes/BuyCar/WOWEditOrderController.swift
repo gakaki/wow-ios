@@ -204,8 +204,9 @@ class WOWEditOrderController: WOWBaseViewController {
         //运费
         let delivery = NSDecimalNumber(value: orderSettle?.deliveryFee ?? 0 as Double)
         
+        let amountPrice = (amount.adding(delivery)).doubleValue
         //用商品的总价加上运费然后减去优惠券金额得出结算价格
-        orderSettle?.totalAmount = (amount.adding(delivery)).doubleValue
+        orderSettle?.totalAmount = amountPrice < 0 ? 0 : amountPrice
         
         
         let result = WOWCalPrice.calTotalPrice([orderSettle?.totalAmount ?? 0],counts:[1])
@@ -764,8 +765,9 @@ extension WOWEditOrderController: selectPayDelegate {
         
         let deviceId = TalkingDataAppCpa.getDeviceId()
         let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-    
-        let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid]
+        let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
+
+        let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid, "osversion": sysVersion]
        
         
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in

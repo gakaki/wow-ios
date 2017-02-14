@@ -79,17 +79,14 @@ public class VCRedirect {
      - parameter isPresent: true：present跳转 false：push跳转
      */
     public class func toLoginVC(_ isPresent:Bool = false){
-        
+        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWLoginController.self)) as! WOWLoginController
+            vc.isPresent = isPresent
         if isPresent {
-            let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
-            let login = vc.topViewController as! WOWLoginController
-            login.isPresent = isPresent
             
             topNaVC?.present(vc, animated: true, completion: nil)
             
         }else {
-            let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWLoginController.self)) as! WOWLoginController
-            vc.isPresent = isPresent
+            
             topNaVC?.pushViewController(vc, animated: true)
         }
         
@@ -120,7 +117,7 @@ public class VCRedirect {
     }
     
     //跳转注册/绑定微信界面需要传从哪跳转来的
-    public class func toRegVC(_ fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:NSDictionary?){
+    public class func toRegVC(_ fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:Dictionary<String, Any>?){
         
         let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistController.self)) as! WOWRegistController
         vc.isPresent = isPresent
@@ -350,7 +347,27 @@ public class VCRedirect {
         }
         
     }
-
+    
+    //绑定新手机
+    public class func bingMobileFirst() {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWBindMobileFirstController.self)) as! WOWBindMobileFirstController
+        vc.hideNavigationBar = false
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    //绑定新手机
+    public class func bingMobileSecond() {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWBindMobileSecondViewController.self)) as! WOWBindMobileSecondViewController
+        vc.hideNavigationBar = false
+        topNaVC?.pushViewController(vc, animated: true)
+    }
     
  }
 extension  UIViewController {
@@ -364,7 +381,7 @@ extension  UIViewController {
             if let strongSelf = self{
                 //                    if response?.responseCode == UMSResponseCodeSuccess {
                 //
-                strongSelf.checkWechatToken(response as! NSDictionary, isPresent: isPresent)
+                strongSelf.checkWechatToken(response as! Dictionary, isPresent: isPresent)
             }else{
                 WOWHud.showMsg("授权登录失败")
             }
@@ -375,7 +392,7 @@ extension  UIViewController {
         
     }
     
-    func checkWechatToken(_ userData:NSDictionary,isPresent:Bool = false){
+    func checkWechatToken(_ userData:Dictionary<String, Any>,isPresent:Bool = false){
         //FIXME:验证token是否是第一次咯或者是第二次
         var isOpenIdBinded = Bool()//假设的bool值
         let open_id        = (userData["openid"] ?? "") as! String

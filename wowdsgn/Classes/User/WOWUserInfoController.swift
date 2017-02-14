@@ -28,6 +28,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
     //个性签名
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var mobileLabel: UILabel!
+    @IBOutlet weak var wechatLabel: UILabel!
     
     var  backGroundMaskView : UIView!
     var  backGroundWindow : UIWindow!
@@ -37,7 +39,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
     
     fileprivate var headImageUrl:String = WOWUserManager.userHeadImageUrl
-    fileprivate var nick        :String = WOWUserManager.userName
+    fileprivate var nvar        :String = WOWUserManager.userName
     fileprivate var job         :String = WOWUserManager.userIndustry
     fileprivate var sex         :Int    = WOWUserManager.userSex
     fileprivate var des         :String = WOWUserManager.userDes
@@ -66,7 +68,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         MobClick.e(.Personal_Information)
         
         addObserver()
-        configUserInfo()
+//        configUserInfo()
        
 
 
@@ -82,9 +84,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        
-        
-            configPickerView()
+        configUserInfo()
+        configPickerView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -120,6 +121,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.setUI()
         navigationItem.title = "账户设置"
         headImageView.borderRadius(25)
+        request()
         requestAddressInfo()
         
     }
@@ -189,20 +191,31 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
         self.refresh_image()
 
-        DispatchQueue.main.async {
-            
-            self.sexTextField.text  = WOWSex[self.sex]
-            self.desLabel.text      = WOWUserManager.userDes
-            self.nickLabel.text     = WOWUserManager.userName
-            self.ageTextField.text  = WOWAgeRange[self.age]
-            self.starTextField.text = WOWConstellation[self.star]
-            self.jobLabel.text      = WOWUserManager.userIndustry
-    
-            
-            self.ageTextField.isUserInteractionEnabled = false
-            self.sexTextField.isUserInteractionEnabled = false
-            self.starTextField.isUserInteractionEnabled = false
-            self.tableView.reloadData()
+        DispatchQueue.main.async {[weak self] () -> Void in
+            if let strongSelf = self {
+                strongSelf.sexTextField.text  = WOWSex[strongSelf.sex]
+                strongSelf.desLabel.text      = WOWUserManager.userDes
+                strongSelf.nickLabel.text     = WOWUserManager.userName
+                strongSelf.ageTextField.text  = WOWAgeRange[strongSelf.age]
+                strongSelf.starTextField.text = WOWConstellation[strongSelf.star]
+                strongSelf.jobLabel.text      = WOWUserManager.userIndustry
+                if WOWUserManager.userMobile.isEmpty {
+                    strongSelf.mobileLabel.text   = "去绑定"
+                }else {
+                    strongSelf.mobileLabel.text   = WOWUserManager.userMobile.get_formted_xxPhone()
+                }
+                if WOWUserManager.userWechat {
+                    strongSelf.wechatLabel.text = "已绑定"
+                }else {
+                    strongSelf.wechatLabel.text = "未绑定"
+                }
+                
+                strongSelf.ageTextField.isUserInteractionEnabled = false
+                strongSelf.sexTextField.isUserInteractionEnabled = false
+                strongSelf.starTextField.isUserInteractionEnabled = false
+//                strongSelf.tableView.reloadData()
+            }
+
         }
     }
     
@@ -246,6 +259,35 @@ class WOWUserInfoController: WOWBaseTableViewController {
         cancelPicker()
     }
     
+    func bindMobile()  {
+        if WOWUserManager.userMobile.isEmpty {
+            VCRedirect.bingMobileSecond()
+        }else {
+            VCRedirect.bingMobileFirst()
+        }
+    }
+    
+    func bindWechat()  {
+       
+        guard WOWUserManager.userWechat else {
+            
+            WowShare.getAuthWithUserInfoFromWechat {[weak self] (response) in
+                if let strongSelf = self{
+                    //                    if response?.responseCode == UMSResponseCodeSuccess {
+                    //
+                    strongSelf.requestBindWechat(response as! Dictionary)
+                }else{
+                    WOWHud.showMsg("授权登录失败")
+                }
+                
+                DLog(response)
+                
+            }
+            return
+        }
+       
+    }
+    
   //MARK:Private Network
     override func request() {
         super.request()
@@ -254,10 +296,13 @@ class WOWUserInfoController: WOWBaseTableViewController {
             if let strongSelf = self{
                 let model = Mapper<WOWUserModel>().map(JSONObject:result)
                 WOWUserManager.saveUserInfo(model)
+                strongSelf.configUserInfo()
             }
             
-        }) { (errorMsg) in
-            
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.configUserInfo()
+            }
         }
 
     }
@@ -270,7 +315,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 if let addressInfo = strongSelf.addressInfo {
                     DLog((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
                     strongSelf.addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "")
-                    let section = IndexSet(integer: 1)
+                    let section = IndexSet(integer: 0)
                     strongSelf.tableView.reloadSections(section, with: .none)
                 }
             }
@@ -305,6 +350,29 @@ class WOWUserInfoController: WOWBaseTableViewController {
         }) { (errorMsg) in
             WOWHud.dismiss()
             DLog(errorMsg)
+        }
+
+    }
+    
+    func requestBindWechat(_ userData:Dictionary<String, Any>) {
+        
+        let open_id        = (userData["openid"] ?? "") as! String
+        let unionid        = (userData["unionid"] ?? "") as! String
+        let wechatNickName = (userData["nickname"] ?? "") as! String
+        let wechatAvatar   = (userData["headimgurl"] ?? "") as! String
+
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_BindWechatInfo(openId: open_id, wechatNickName: wechatNickName, wechatAvatar: wechatAvatar, unionId: unionid), successClosure: { [weak self](result, code) in
+            if let strongSelf = self{
+                WOWHud.showMsg("微信绑定成功")
+                WOWUserManager.userWechat = true
+                strongSelf.wechatLabel.text = "已绑定"
+                let section = IndexSet(integer: 2)
+                strongSelf.tableView.reloadSections(section, with: .none)
+                
+            }
+            
+        }) { (errorMsg) in
+            
         }
 
     }
@@ -379,6 +447,14 @@ extension WOWUserInfoController{
             vc.entrance = WOWAddressEntrance.me
             vc.delegate = self
             navigationController?.pushViewController(vc, animated: true)
+        case (1, 0):
+            self.bindMobile()
+        case (1, 1):
+            let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController.self)) as! WOWMsgCodeController
+            vc.entrance = msgCodeEntrance.userEntrance
+            navigationController?.pushViewController(vc, animated: true)
+        case (2, 0):
+            bindWechat()
         default:
             break
         }

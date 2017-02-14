@@ -24,15 +24,6 @@ struct WOWShareManager {
             switch shareType {
             case .friends:
                 
-//                UMSocialData.default().extConfig.wechatTimelineData.title = title
-//                UMSocialData.default().extConfig.wechatTimelineData.url = url
-//
-//                UMSocialDataService.default().postSNS(withTypes: [UMShareToWechatTimeline], content: shareNewText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
-//                    if response?.responseCode == UMSResponseCodeSuccess {
-//                        
-//                    }
-//                })
-                
                 WowShare.share_friends(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage, successClosure: {
                     WOWHud.showMsg("分享成功")
                 },
@@ -52,16 +43,6 @@ struct WOWShareManager {
                 })
                
 
-                
-//                UMSocialData.default().extConfig.wechatSessionData.title = title
-//                UMSocialData.default().extConfig.wechatSessionData.url = url
-//
-//                UMSocialDataService.default().postSNS(withTypes: [UMShareToWechatSession], content: shareNewText, image: shareImage, location: nil, urlResource: nil, presentedController: UIApplication.currentViewController(), completion: { response in
-//                    if response?.responseCode == UMSResponseCodeSuccess {
-//                        
-//                    }
-//                })
-//
                 return
             }
 
@@ -75,6 +56,7 @@ struct WOWShareManager {
         var message: String = ""
         print("Share Fail with error ：%@", error)
         message = "失败原因Code: \(error) , 用户手动取消"
+        message = "分享失败"
         var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
         //最好这里能打点记录下
         alert.show()

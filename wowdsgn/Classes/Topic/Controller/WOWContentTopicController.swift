@@ -182,15 +182,16 @@ class WOWContentTopicController: WOWBaseViewController {
     fileprivate func configData(){
         configBarItem()
         imgUrlArr = [String]()
-        for  aa:WOWImages in vo_topic?.images ?? [WOWImages](){
-            
-            if let imgStr = aa.url{
-                if !imgStr.isEmpty {
-                    imgUrlArr.append(imgStr)
-
+        for  model:WOWContentsModel in vo_topic?.contents ?? [WOWContentsModel](){
+            if model.type == 0{
+                if let imgStr = model.image?.url{
+                    if !imgStr.isEmpty {
+                        imgUrlArr.append(imgStr)
+                    }
+                    
                 }
-                
             }
+            
         }
 
         numberSections = 2 + isHaveTag + isHaveComment + isHaveAbout
@@ -277,21 +278,7 @@ class WOWContentTopicController: WOWBaseViewController {
                 DLog(result)
                 let r                                     =  JSON(result)
                 strongSelf.vo_topic                       =  Mapper<WOWContentTopicModel>().map( JSONObject:r.object )
-//                if let vo_topic = strongSelf.vo_topic {
-//                    let imgView = UIImageView()
-//                    imgView.yy_setImage(
-//                        with: URL(string:vo_topic.topicImg ?? "" ),
-//                        placeholder: nil,
-//                        options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-//                        completion: { [weak self] (img, url, from_type, image_stage,err ) in
-//                            if let strongSelf = self{
-//                                strongSelf.shareProductImage = img
-//                            }
-//                            
-//                    })
 
-
-//                }
             //如果有标签的话就显示，没有的话就显示
                 if strongSelf.vo_topic?.tag?.count > 0 {
                     strongSelf.isHaveTag = 1
@@ -425,6 +412,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
         //显示价格的cell
         tableView.register(UINib.nibName(String(describing: WOWContentTopicTopCell.self)), forCellReuseIdentifier:String(describing: WOWContentTopicTopCell.self))
         tableView.register(UINib.nibName(String(describing: WOWContentDetailCell.self)), forCellReuseIdentifier:String(describing: WOWContentDetailCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWTopicProductCell.self)), forCellReuseIdentifier:String(describing: WOWTopicProductCell.self))
         tableView.register(UINib.nibName(String(describing: WOWTopicTagCell.self)), forCellReuseIdentifier:String(describing: WOWTopicTagCell.self))
         //评论
         tableView.register(UINib.nibName(String(describing: WOWCommentCell.self)), forCellReuseIdentifier:String(describing: WOWCommentCell.self))
@@ -441,7 +429,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 1:
-            return vo_topic?.images?.count ?? 0
+            return vo_topic?.contents?.count ?? 0
         case 1 + isHaveTag + isHaveComment://评论最多显示3条
             if isHaveComment == 1 {
                 if let count = topicComment?.total {
@@ -467,25 +455,35 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
             cell.delegeta = self
             returnCell = cell
         case (1,_): //产品描述
-            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentDetailCell.self), for: indexPath) as! WOWContentDetailCell
-            if let array = vo_topic?.images {
+            
+            if let array = vo_topic?.contents {
                 let model = array[(indexPath as NSIndexPath).row]
-                cell.showData(model)
-                for imgStr in imgUrlArr.enumerated() {
-                    if imgStr.element == model.url {
-                        cell.productImg.tag = imgStr.offset
-                        cell.productImg.addTapGesture(action: {[weak self] (tap) in
-                            if let strongSelf = self {
-                                strongSelf.lookBigImg((tap.view?.tag)!)
-                            }
-                            
+
+                if model.type == 0 {
+                    let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWContentDetailCell.self), for: indexPath) as! WOWContentDetailCell
+                    cell.showData(model.image)
+                    for imgStr in imgUrlArr.enumerated() {
+                        if imgStr.element == model.image?.url {
+                            cell.productImg.tag = imgStr.offset
+                            cell.productImg.addTapGesture(action: {[weak self] (tap) in
+                                if let strongSelf = self {
+                                    strongSelf.lookBigImg((tap.view?.tag)!)
+                                }
+                                
                             })
+                        }
                     }
+                    returnCell = cell
+                }else if model.type == 1 {
+                    let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTopicProductCell.self), for: indexPath) as! WOWTopicProductCell
+                    cell.showData(model: model.product?.product)
+                    returnCell = cell
                 }
+                
                 
             }
             
-            returnCell = cell
+            
         case (1 + isHaveTag,_)://标签
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWTopicTagCell", for: indexPath) as! WOWTopicTagCell
             cell.showData(vo_topic?.tag)
@@ -531,7 +529,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            if isHaveTag + isHaveAbout + isHaveComment == 0 {   //最后一行的时候流出来空白
+            if isHaveTag + isHaveAbout + isHaveComment == 0, vo_topic?.contents?.count == 0 {   //最后一行的时候流出来空白
                 return 15
             }
             return 0.01
@@ -604,17 +602,18 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
     func setPhoto() -> [PhotoModel] {
         var photos: [PhotoModel] = []
         imgUrlArr = [String]()
-        for  aa:WOWImages in vo_topic?.images ?? [WOWImages](){
-            
-            if let imgStr = aa.url{
-                if !imgStr.isEmpty {
-                    imgUrlArr.append(imgStr)
-//                    let sourceImg = UIImageView.init(image: UIImage(named: "placeholder_product"))
-                    let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)
-                    photos.append(photoModel)
+        for  model:WOWContentsModel in vo_topic?.contents ?? [WOWContentsModel](){
+            if model.type == 0{
+                if let imgStr = model.image?.url{
+                    if !imgStr.isEmpty {
+                        imgUrlArr.append(imgStr)
+                        let photoModel = PhotoModel(imageUrlString: imgStr, sourceImageView: nil)
+                        photos.append(photoModel)
+                    }
+                    
                 }
-                
             }
+            
         }
         
         

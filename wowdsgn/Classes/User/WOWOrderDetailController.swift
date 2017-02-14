@@ -452,8 +452,9 @@ extension WOWOrderDetailController{
 
             let deviceId = TalkingDataAppCpa.getDeviceId()
             let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
             
-            let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid]
+            let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid, "osversion": sysVersion]
             
             WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in
                 if let strongSelf = self {

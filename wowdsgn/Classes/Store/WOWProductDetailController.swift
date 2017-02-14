@@ -415,9 +415,9 @@ class WOWProductDetailController: WOWBaseViewController {
                     "productId"             :strongSelf.productModel?.productId ?? "",
                     "productName"           :strongSelf.productModel?.productName ?? ""
                     ] as [String : Any]
-                
+                let price = (strongSelf.productModel?.sellPrice ?? 0) * 100
                 AnalyaticEvent.e2(.ViewItem, dict)
-                
+                TalkingDataAppCpa.onViewItem(withCategory: "", itemId: strongSelf.productModel?.productId?.toString, name: strongSelf.productModel?.productName ?? "", unitPrice: Int32(price))
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
@@ -552,9 +552,11 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
                 "count"            :product.productQty ?? 1,
                 "ProductName"      :product.productName ?? "",
                 "SubProductId"     :product.productId ?? 0,
-                "sellprice"        :product.sellPrice ?? 0
+                "sellprice"        :product.sellPrice ?? 0.00
             ] as [String : Any]
+            let price = (product.sellPrice ?? 0) * 100
             AnalyaticEvent.e2(.AddItemToShoppingCart,dict)
+            TalkingDataAppCpa.onAddItemToShoppingCart(withCategory: "", itemId: product.productId?.toString , name: product.productName ?? "", unitPrice: Int32(price), amount: Int32(product.productQty ?? 1))
             
             WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.productId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self](result, code) in
                 if let strongSelf = self {

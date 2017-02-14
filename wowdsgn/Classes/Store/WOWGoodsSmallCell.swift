@@ -47,7 +47,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     func set_sold_out_status(){
         label_soldout.borderRadius(28)
         self.label_soldout.isHidden = false
-//        self.pictureImageView.alpha = 0.4
+
     }
     func showData(_ model:WOWProductModel,indexPath:IndexPath) {
         if model.productStock == 0 {// 以售馨展示

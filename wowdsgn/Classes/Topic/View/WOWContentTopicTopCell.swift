@@ -66,27 +66,9 @@ class WOWContentTopicTopCell: UITableViewCell {
                             }
                         }
                 })
-//                topicImg.kf.setImage(with: URL(string:img), placeholder:UIImage(named: "placeholder_product"), options: nil, progressBlock: nil, completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
-//                    if let strongSelf = self {
-//                        if let image = image {
-//                            let imageAspect = image.size.width / image.size.height
-//                            strongSelf.aspectConstraint = NSLayoutConstraint(item: strongSelf.topicImg,
-//                                                                             attribute: .width, relatedBy: .equal,
-//                                                                             toItem: strongSelf.topicImg, attribute: .height,
-//                                                                             multiplier: imageAspect , constant: 0.0)
-//                        }
-//                    }
-//                    
-//                    })
 
             }
-           //            aspectConstraint = NSLayoutConstraint(item: self.topicImg,
-//                                                  attribute: .width, relatedBy: .equal,
-//                                                  toItem: self.topicImg, attribute: .height,
-//                                                  multiplier: model.imageAspect , constant: 0.0)
-      
 
-//            topicImg.set_webimage_url(model.topicImg)
             columnName.text = model.columnName ?? ""
             if columnName.text == "" {
                 columnView.isHidden = true

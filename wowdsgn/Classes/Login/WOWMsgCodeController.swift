@@ -15,7 +15,7 @@ enum msgCodeEntrance {
 
 class WOWMsgCodeController: WOWBaseViewController {
     
-    @IBOutlet weak var tipsLabel: UILabel!
+//    @IBOutlet weak var tipsLabel: UILabel!
 
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var codeTextField: UITextField!
@@ -53,7 +53,7 @@ class WOWMsgCodeController: WOWBaseViewController {
 
 //MARK:Actions
     @IBAction func msgCodeButtonClick(_ sender: UIButton) {
-        if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
+        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
             return
         }
         let mobile = phoneTextField.text ?? ""
@@ -73,41 +73,38 @@ class WOWMsgCodeController: WOWBaseViewController {
     @IBAction func sureClick(_ sender: UIButton) {
         
         //手机号验证成功才进去验证码界面
-        if !validatePhone(phoneTextField.text){
+        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
             return
         }
-        guard let code = codeTextField.text , !code.isEmpty else{
-            WOWHud.showMsg("请输入验证码")
-            tipsLabel.text = "请输入验证码"
+        if !validatePhone(codeTextField.text, tips: "请输入验证码"){
+
             return
         }
-        guard let newPwd = newPwdTextField.text , !newPwd.isEmpty else{
-            WOWHud.showMsg("请输入密码")
-            tipsLabel.text = "请输入密码"
+        if !validatePhone(newPwdTextField.text, tips: "请输入密码"){
+
             return
         }
-        guard let passwd = pwdTextField.text , !passwd.isEmpty else{
-            WOWHud.showMsg("请输入确认密码")
-            tipsLabel.text = "请输入确认密码"
+        if !validatePhone(pwdTextField.text, tips: "请输入确认密码"){
+
             return
         }
 
-        guard newPwd == passwd else{
+        guard newPwdTextField.text == pwdTextField.text else{
             WOWHud.showMsg("两次输入密码不一致")
-            tipsLabel.text = "两次输入密码不一致"
+//            tipsLabel.text = "两次输入密码不一致"
             return
         }
         if (pwdTextField.text?.length)! < 6 {
             WOWHud.showMsg("密码不能少于6位")
-            tipsLabel.text = "密码不能少于6位"
+//            tipsLabel.text = "密码不能少于6位"
             return
         }
         if (pwdTextField.text?.length)! > 20 {
             WOWHud.showMsg("密码不能大于20位")
-            tipsLabel.text = "密码不能大于20位"
+//            tipsLabel.text = "密码不能大于20位"
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ResetPwd(mobile:phoneTextField.text!, captcha:code, newPwd:newPwd), successClosure: {[weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ResetPwd(mobile:phoneTextField.text!, captcha:codeTextField.text!, newPwd:newPwdTextField.text!), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 switch strongSelf.entrance {
                 case .loginEntrance:
@@ -122,7 +119,7 @@ class WOWMsgCodeController: WOWBaseViewController {
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
-                strongSelf.tipsLabel.text = errorMsg
+//                strongSelf.tipsLabel.text = errorMsg
             }
         }
     }
@@ -130,7 +127,7 @@ class WOWMsgCodeController: WOWBaseViewController {
     
     fileprivate func entranceSmsCode(){
         //手机号验证成功才进去验证码界面
-        if !validatePhone(codeTextField.text){
+        if !validatePhone(codeTextField.text, tips: "请输入手机号", is_phone: true){
             return
         }
         let mobile = codeTextField.text ?? ""
@@ -142,37 +139,24 @@ class WOWMsgCodeController: WOWBaseViewController {
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
-                strongSelf.tipsLabel.text = errorMsg
+//                strongSelf.tipsLabel.text = errorMsg
             }
         }
     }
     
-    fileprivate func validatePhone(_ phoneNumber:String?) -> Bool{
-        guard let phone = phoneNumber , !phone.isEmpty else{
-            WOWHud.showMsg("请输入手机号")
-            tipsLabel.text = "请输入手机号"
-            return false
-        }
-        
-        guard phone.validateMobile() else{
-            WOWHud.showMsg("请输入正确的手机号")
-            tipsLabel.text = "请输入正确的手机号"
-            return false
-        }
-        return true
-    }
+
     
     fileprivate func validatePhone(_ phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
         guard let phone = phoneNumber , !phone.isEmpty else{
-            WOWHud.showMsg("请输入手机号")
-            tipsLabel.text = "请输入手机号"
+            WOWHud.showMsg(tips)
+//            tipsLabel.text = "请输入手机号"
             return false
         }
         
         if is_phone {
             guard phone.validateMobile() else{
-                WOWHud.showMsg(tips)
-                tipsLabel.text = tips
+                WOWHud.showMsg("请输入正确的手机号")
+//                tipsLabel.text = tips
                 return false
             }
         }

@@ -38,7 +38,7 @@ class WOWUserModel:NSObject,Mappable{
         user_ageRange       <- map["ageRange"]
         user_mobile         <- map["mobile"]
         user_email          <- map["email"]
-        bindWechat          <- map["blindWeChat"]
+        bindWechat          <- map["bindWechat"]
         //FIXME:后台要返回的
         user_carCount       <- map["productQtyInCart"]
         user_id             <- map["endUserId"]

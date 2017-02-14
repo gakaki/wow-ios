@@ -12,7 +12,7 @@ import UIKit
 class WOWRegistController: WOWBaseViewController {
     var isPresent      :Bool = false
     var byWechat            :Bool = false
-    var userInfoFromWechat  :NSDictionary?
+    var userInfoFromWechat  :Dictionary<String, Any>?
     
     
     @IBOutlet weak var phoneTextField: UITextField!
@@ -51,13 +51,7 @@ class WOWRegistController: WOWBaseViewController {
 
     }
     
-//    private func configNavItem(){
-//        makeCustomerNavigationItem("已有账号 登录", left: false) {[weak self] in
-//            if let strongSelf = self{
-//                strongSelf.navBack()
-//            }
-//        }
-//    }
+
     
     fileprivate func validatePhone(_ phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
         guard let phone = phoneNumber , !phone.isEmpty else{

@@ -46,7 +46,7 @@ let URL_scene                   = "v1/scene"
 let URL_senceDetail             = "v1/scene/detail"
 
 //1.1 专题
-let URL_topic                   = "v2/topic"
+let URL_topic                   = "v3/topic"
 let URL_topic_product           = "v2/topic/product"
 
 
@@ -81,7 +81,7 @@ let URL_FavoriteTopicComment        = "v1/user/topic-comment/favorite"
 let URL_ProductSpec             = "v2/product/spec"    //选择产品颜色规格
 
 //相关产品
-let URL_ProductAbout            = "/v1/product/relateds"
+let URL_ProductAbout            = "v1/product/relateds"
 
 let URL_ProductGroupTop         = "v1/product/group"
 
@@ -147,7 +147,7 @@ let URL_CartSelect              = "v1/cart/select"     //选中购物车商品
 
 let URL_CartUnSelect            = "v1/cart/unselect"   //取消选中购物车商品
 
-let URL_CartBottomList          = "/v1/cart/recommend-products" // 无购物车，显示热门推荐列表
+let URL_CartBottomList          = "v1/cart/recommend-products" // 无购物车，显示热门推荐列表
 //订单相关
 let URL_OrderSettle             = "v2/order/settle"            //查询订单内的物品
 
@@ -206,8 +206,15 @@ let URL_PwpResetCode            = "v1/user/captcha/pwd-reset"        //重置密
 let URL_Change                  = "v1/user/change"                   //修改用户信息
 let URL_Coupons                 = "v1/user/coupons"                //用户优惠券列表
 let URL_GetCoupon               = "v1/user/getCouponByRedemptionCode"     //获取优惠券
-let URL_ProductsOfCoupon        = "/v1/user/productsOfcoupon"           //优惠券可用商品
+let URL_ProductsOfCoupon        = "v1/user/productsOfcoupon"           //优惠券可用商品
 let URL_FeedBack                = "v1/feedback"
+let URL_BindWechatInfo          = "v1/user/bindWechatInfo"          //用户手动绑定微信
+let URL_MobileCaptcha           = "v1/user/sendOriginalMobileCaptcha"   //更改手机获取验证码
+let URL_OriginalMobile          = "v1/user/checkOriginalMobileAndCaptcha"   //更改手机
+let URL_NewMobileCaptcha        = "v1/user/sendNewMobileCaptcha"            //获取绑定手机验证码
+let URL_BindMobile              = "v1/user/changeBindedMobile"              //绑定手机
+let URL_LoginCaptcha            = "v1/user/sendLoginCaptcha"                //登录验证码
+let URL_LoginByCaptcha          = "v1/session/loginByCaptcha"               //短信登录
 
 //7.地址
 let URL_AddressAdd              = "v1/user/shippinginfo/create"   //添加收货地址

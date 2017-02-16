@@ -117,25 +117,27 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         addBottomProductView()
         // 筛选回调
         screenView.screenAction = {[unowned self] (dic) in
+            
             print(dic)
             
             self.getScreenConditions(dicResult: dic as! [String:AnyObject])
             
             self.refreshSubView(self.ob_tab_index.value)
+            
         }
 
 
     }
     
     func addTopView(){
-        cv.delegate = self
-        cv.dataSource = self
+        cv.delegate     = self
+        cv.dataSource   = self
         //not add this where add cell in uicollectionview
         //self.cv.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "reuse_id")
         
-        self.cv.backgroundView = top_category_image_view
-        self.cv.showsHorizontalScrollIndicator = false
-        self.cv.decelerationRate = UIScrollViewDecelerationRateFast;
+        self.cv.backgroundView                      = top_category_image_view
+        self.cv.showsHorizontalScrollIndicator      = false
+        self.cv.decelerationRate                    = UIScrollViewDecelerationRateFast;
         
         let layout                          = UICollectionViewFlowLayout()
         layout.scrollDirection              = .horizontal

@@ -89,7 +89,7 @@ class BaseScreenViewController: WOWBaseViewController {
         }
     }
     
-    // 解析回调来的筛选数据信息，
+    // 解析回调来的筛选数据信息， 所选择的条件
     func getScreenConditions(dicResult: [String:AnyObject]) {
         
         if dicResult["colorList"] != nil{

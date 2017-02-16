@@ -28,7 +28,7 @@ struct ScreenViewConfig{
 
     static var headerViewHight :CGFloat = 64
     static var footerViewHight :CGFloat = 50
-    static var screenTitles             = ["颜色","价格范围","风格","场景"] //分组的标题
+    static var screenTitles             = ["价格范围","场景","颜色","风格"] //分组的标题
     static let kDuration                = 0.3
     static let frameX :CGFloat          = 75.w
 }
@@ -100,14 +100,21 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        cellHightDic = [0 : 40 ,
+        cellHightDic = [0 : 65 ,
                         1 : 65 ,
-                        2 : 44 ,
-                        3 : 44 ]
+                        2 : 150 ,
+                        3 : 65 ]
         
         
         for a in 0..<ScreenViewConfig.screenTitles.count {
-            let model = SectionModel.init(sectionTitle: ScreenViewConfig.screenTitles[a], isOut: true)
+            var isOut = false
+            switch a {
+            case 0,1:
+                isOut = true
+            default:
+                break
+            }
+            let model = SectionModel.init(sectionTitle: ScreenViewConfig.screenTitles[a], isOut: isOut)
             arrayTitle.append(model)
         }
       
@@ -230,6 +237,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         screenColorArr.removeAll()
         screenStyleArr.removeAll()
         screenScreenArr.removeAll()
+        screenPriceArr.removeAll()
         for model in colorArr {
             if model.isSelect {
                 model.isSelect = false
@@ -253,7 +261,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     }
     /// 回调所选的 条件
     func getConfigScreenResulet(){
-        
+        screenPriceArr.removeAll()
         if let min = cloosePriceModel.minPrice {
             
             screenPriceArr  = ["minPrice":min]
@@ -261,10 +269,8 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         }
  
         if let max = cloosePriceModel.maxPrice {
-            
-            screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0,"maxPrice":max]
-        }else{// 最大值无值
-            screenPriceArr  = ["minPrice":cloosePriceModel.minPrice ?? 0]
+
+            screenPriceArr  = ["maxPrice":max]
         }
         
         if let min = cloosePriceModel.minPrice ,let max = cloosePriceModel.maxPrice {
@@ -343,19 +349,19 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
         }
         switch section {
         case 2:
-            return styleArr.count
-        case 0:
             
             return colorArr.count > 0 ? 1 : 0
-        
+            
+        case 0:
+
+            return 1
         case 1:
             
 //            return priceArr.count > 0 ? 1 : 0
             return 1
             
-
         case 3:
-            return sceneArr.count
+            return 1
         default:
             return 0
         }
@@ -370,35 +376,41 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
 
         switch indexPath.section {
         case 0:
+            let cell            = tableView.dequeueReusableCell(withIdentifier: cellCloosePriceID, for: indexPath as IndexPath) as! SVCloosePriceCell
+            
+            //            cell.delegate     = self
+            //            cell.indexPathNow = indexPath as NSIndexPath!
+            //            cell.dataArr      = priceArr
+            cell.modelPrice     = self.cloosePriceModel
+            cell.selectionStyle = .none
+            return cell
+        case 1:
+            let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
+            
+            cell.delegate     = self
+            cell.dataArr        = sceneArr
+            cell.indexPathNow = indexPath as NSIndexPath!
+
+            cell.selectionStyle = .none
+            return cell
+        case 2:
             let cell            = tableView.dequeueReusableCell(withIdentifier: cellColorID, for: indexPath as IndexPath) as! SVColorCell
             cell.delegate     = self
             cell.indexPathNow = indexPath as NSIndexPath!
             cell.dataArr        = colorArr
             cell.selectionStyle = .none
-            return cell
-        case 1:
-            let cell            = tableView.dequeueReusableCell(withIdentifier: cellCloosePriceID, for: indexPath as IndexPath) as! SVCloosePriceCell
-            
-//            cell.delegate     = self
-//            cell.indexPathNow = indexPath as NSIndexPath!
-//            cell.dataArr      = priceArr
-            cell.modelPrice     = self.cloosePriceModel
-            cell.selectionStyle = .none
-            return cell
-        case 2:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
-            let model = styleArr[indexPath.row]
-            cell.showData(m: model)
-            cell.selectionStyle = .none
+       
             return cell
        
         case 3:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
             
-            let model = sceneArr[indexPath.row]
-   
-            cell.showData(m: model)
+       
+            let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
+            cell.delegate       = self
+            cell.dataArr        = styleArr
+            cell.indexPathNow = indexPath as NSIndexPath!
             cell.selectionStyle = .none
+       
             return cell
         default:
             return UITableViewCell()
@@ -406,24 +418,24 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
       
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 2:
-            
-            var params : [String: AnyObject]
-             params = styleArr.getScreenCofig(index: indexPath.row,dicKey: "styleIdArr")
-             NotificationCenter.postNotificationNameOnMainThread(WOWUpdateScreenConditionsKey, object: params as AnyObject?)
-            tableView.reloadData()
-            
-        case 3:
-             var params : [String: AnyObject]
-            params = sceneArr.getScreenCofig(index: indexPath.row,dicKey: "screenIdArr")
-            NotificationCenter.postNotificationNameOnMainThread(WOWUpdateScreenConditionsKey, object: params as AnyObject?)
-            tableView.reloadData()
-        default:
-            break
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        switch indexPath.section {
+//        case 2:
+//            
+//            var params : [String: AnyObject]
+//             params = styleArr.getScreenCofig(index: indexPath.row,dicKey: "styleIdArr")
+//             NotificationCenter.postNotificationNameOnMainThread(WOWUpdateScreenConditionsKey, object: params as AnyObject?)
+//            tableView.reloadData()
+//            
+//        case 3:
+//             var params : [String: AnyObject]
+//            params = sceneArr.getScreenCofig(index: indexPath.row,dicKey: "screenIdArr")
+//            NotificationCenter.postNotificationNameOnMainThread(WOWUpdateScreenConditionsKey, object: params as AnyObject?)
+//            tableView.reloadData()
+//        default:
+//            break
+//        }
+//    }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
@@ -500,7 +512,7 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
         UIApplication.shared.keyWindow?.endEditing(true)
     }
 }
-extension WOWScreenView:SVColorCellDelegate,SVPriceCellDelegate{
+extension WOWScreenView:SVColorCellDelegate,SVPriceCellDelegate,SVStyleCellDelegate{
     func updataTableViewCellHight(cell: SVColorCell,hight: CGFloat,indexPath: NSIndexPath){
 
         guard self.cellHightDic[indexPath.section] == hight else{
@@ -516,5 +528,13 @@ extension WOWScreenView:SVColorCellDelegate,SVPriceCellDelegate{
             return
         }
 
+    }
+    func updataStyleTableViewCellHight(cell: SVStyleCell,hight: CGFloat,indexPath: NSIndexPath){
+       
+        guard self.cellHightDic[indexPath.section] == hight else{
+            self.cellHightDic[indexPath.section] = hight
+            tableView.reloadData()
+            return
+        }
     }
 }

@@ -10,20 +10,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="KGk-i7-Jjw" customClass="Cell_102_Project" customModule="wowdsgn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="Cell_106_BrandList" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nMU-U8-S4s">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IqF-2R-fav">
+                        <rect key="frame" x="15" y="0.0" width="305" height="119.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="141" id="KzR-Ht-lfJ"/>
+                            <constraint firstAttribute="height" constant="120" id="o56-Fu-86r"/>
                         </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AhA-9o-Cr3">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LYS-4F-2V8">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -32,16 +32,16 @@
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="nMU-U8-S4s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="31c-r2-Smi"/>
-                    <constraint firstAttribute="trailing" secondItem="nMU-U8-S4s" secondAttribute="trailing" id="QIt-Iw-uAE"/>
-                    <constraint firstItem="nMU-U8-S4s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="azG-oT-GQ7"/>
-                    <constraint firstAttribute="bottom" secondItem="nMU-U8-S4s" secondAttribute="bottom" id="xzq-kI-XcK"/>
+                    <constraint firstAttribute="bottom" secondItem="IqF-2R-fav" secondAttribute="bottom" constant="14.5" id="9tV-sE-MkG"/>
+                    <constraint firstItem="IqF-2R-fav" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="e10-yE-pqa"/>
+                    <constraint firstAttribute="trailing" secondItem="IqF-2R-fav" secondAttribute="trailing" id="fIr-Ek-tUS"/>
+                    <constraint firstItem="IqF-2R-fav" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ue6-fB-Ifk"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="collectionView" destination="nMU-U8-S4s" id="qQt-4g-dks"/>
+                <outlet property="collectionView" destination="IqF-2R-fav" id="GUI-CZ-XW8"/>
             </connections>
-            <point key="canvasLocation" x="-35.5" y="35.5"/>
+            <point key="canvasLocation" x="-249" y="-339"/>
         </tableViewCell>
     </objects>
 </document>

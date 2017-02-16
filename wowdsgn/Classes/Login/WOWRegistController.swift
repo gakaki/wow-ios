@@ -56,14 +56,12 @@ class WOWRegistController: WOWBaseViewController {
     fileprivate func validatePhone(_ phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
         guard let phone = phoneNumber , !phone.isEmpty else{
             WOWHud.showMsg(tips)
-            tipsLabel.text = tips
             return false
         }
         
         if is_phone {
             guard phone.validateMobile() else{
-                WOWHud.showMsg(tips)
-                tipsLabel.text = tips
+                WOWHud.showMsg("请输入正确的手机号")
                 return false
             }
         }
@@ -76,7 +74,7 @@ class WOWRegistController: WOWBaseViewController {
         
         MobClick.e(UMengEvent.Bind_Mobile_Validate)
 
-        if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
+        if !validatePhone(phoneTextField.text,tips:"请输入手机号",is_phone:true){
             return
         }
         let mobile = phoneTextField.text ?? ""
@@ -96,7 +94,7 @@ class WOWRegistController: WOWBaseViewController {
     @IBAction func registClick(_ sender: UIButton) {
         MobClick.e(UMengEvent.Bind_Mobile_Bind)
         
-        if !validatePhone(phoneTextField.text,tips:"请输入正确的手机号",is_phone:true){
+        if !validatePhone(phoneTextField.text,tips:"请输入手机号",is_phone:true){
             return
         }
         

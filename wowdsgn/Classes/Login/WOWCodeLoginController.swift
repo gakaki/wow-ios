@@ -10,8 +10,9 @@ import UIKit
 
 class WOWCodeLoginController: WOWBaseViewController {
     @IBOutlet weak var wechatButton: UIButton!
-    @IBOutlet weak var accountTextField: UITextField!
-    @IBOutlet weak var passWordTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var codeTextField: UITextField!
+    @IBOutlet weak var msgCodeButton: UIButton!
     @IBOutlet weak var codeView: UIView!
     var isPresent:Bool = false
     
@@ -47,8 +48,20 @@ class WOWCodeLoginController: WOWBaseViewController {
     
     
     @IBAction func forgetPasswordClick(_ sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController.self)) as! WOWMsgCodeController
-        navigationController?.pushViewController(vc, animated: true)
+        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
+            return
+        }
+        let mobile = phoneTextField.text ?? ""
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_LoginCaptcha(mobile:mobile), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                WOWHud.showMsg("验证码发送成功")
+                strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
+            }
+        }) { (errorMsg) in
+            
+        }
+
         
     }
     
@@ -60,21 +73,18 @@ class WOWCodeLoginController: WOWBaseViewController {
     
     
     @IBAction func login(_ sender: UIButton) {
-        guard let phone = accountTextField.text , !phone.isEmpty else{
-            WOWHud.showMsg("请输入手机号")
+        let phone = phoneTextField.text
+        let code = codeTextField.text
+        if !validatePhone(phone, tips: "请输入手机号", is_phone: true){
             return
         }
-        guard let passwd = passWordTextField.text , !passwd.isEmpty else{
-            WOWHud.showMsg("请输入验证码")
-            return
-        }
-        guard phone.validateMobile() || phone.validateEmail() else{
-            WOWHud.showMsg("请输入正确的手机号")
+        if !validatePhone(code, tips: "请输入验证码"){
+            
             return
         }
         
         WOWHud.showLoading()
-        WOWNetManager.sharedManager.requestWithTarget(.api_Login(phone,passwd), successClosure: {[weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_LoginByCaptcha(mobile: phone!, captcha: code!), successClosure: {[weak self](result, code) in
             
             if let strongSelf = self{
                 DLog(result)
@@ -83,11 +93,11 @@ class WOWCodeLoginController: WOWBaseViewController {
                 WOWUserManager.saveUserInfo(model)
                 
                 
-                TalkingDataAppCpa.onLogin(phone)
-                AnalyaticEvent.e2(.Login,["user":phone])
+                TalkingDataAppCpa.onLogin(phone!)
+                AnalyaticEvent.e2(.Login,["user":phone!])
                 
                 
-                WOWUserManager.userMobile = phone
+                WOWUserManager.userMobile = phone!
                 VCRedirect.toLoginSuccess(strongSelf.isPresent)
                 
                 
@@ -99,4 +109,21 @@ class WOWCodeLoginController: WOWBaseViewController {
             }
         }
     }
+    
+    
+    fileprivate func validatePhone(_ phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
+        guard let phone = phoneNumber , !phone.isEmpty else{
+            WOWHud.showMsg(tips)
+            return false
+        }
+        
+        if is_phone {
+            guard phone.validateMobile() else{
+                WOWHud.showMsg("请输入正确的手机号")
+                return false
+            }
+        }
+        return true
+    }
+    
 }

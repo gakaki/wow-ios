@@ -394,35 +394,36 @@ extension  UIViewController {
     
     func checkWechatToken(_ userData:Dictionary<String, Any>,isPresent:Bool = false){
         //FIXME:验证token是否是第一次咯或者是第二次
-        var isOpenIdBinded = Bool()//假设的bool值
+        var firstLogin = Bool()//假设的bool值
         let open_id        = (userData["openid"] ?? "") as! String
         let unionid        = (userData["unionid"] ?? "") as! String
-        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId:open_id, unionId: unionid), successClosure: {[weak self] (result, code) in
+        let avatar        = (userData["headimgurl"] ?? "") as! String
+        let nickName        = (userData["nickname"] ?? "") as! String
+        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId : open_id, wechatNickName: nickName, wechatAvatar: avatar, unionId: unionid), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
-                isOpenIdBinded = JSON(result)["isOpenIdBinded"].bool ?? true
+                firstLogin = JSON(result)["firstLogin"].bool ?? true
                 
                 //微信登录成功
                 let user_id    = "wechatUser_\(open_id)"
                 TalkingDataAppCpa.onLogin(user_id)
                 AnalyaticEvent.e2(.Login,["user":user_id])
                 
-                if isOpenIdBinded {
+                if !firstLogin {
                     //FIXME:未写的，先保存用户信息
                     let model = Mapper<WOWUserModel>().map(JSONObject:result)
                     WOWUserManager.saveUserInfo(model)
-                    
-                    TalkingDataAppCpa.onLogin("wechatUser_\(WOWUserManager.WOWUserID)")
-                    AnalyaticEvent.e2(.Login,["user":"wechatUser_\(WOWUserManager.WOWUserID)"])
                     
                     VCRedirect.toLoginSuccess(isPresent)
                     
                 }else{ //第一次登陆
                     
-                    TalkingDataAppCpa.onLogin("wechatUser_\(WOWUserManager.WOWUserID)")
-                    AnalyaticEvent.e2(.Login,["user":"wechatUser_\(WOWUserManager.WOWUserID)"])
-                    VCRedirect.toRegVC(true,isPresent: isPresent,userInfoFromWechat: userData)
+                 
+                    let model = Mapper<WOWUserModel>().map(JSONObject:result)
+                    WOWUserManager.saveUserInfo(model)
+                    VCRedirect.toRegInfo(isPresent)
+                    
                 }
             }
         }) {[weak self] (errorMsg) in

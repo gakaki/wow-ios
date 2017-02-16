@@ -74,14 +74,14 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
                 WOWUserManager.userMobile = strongSelf.phoneTextField.text!
                 for controller in (strongSelf.navigationController?.viewControllers)! {
                     if controller.isKind(of: WOWUserInfoController.self){
-                        strongSelf.navigationController?.popToViewController(controller, animated: true)
+                       let _ = strongSelf.navigationController?.popToViewController(controller, animated: true)
                     }
                 }
             }
-        }) {[weak self](errorMsg) in
-            if let strongSelf = self{
+        }) {(errorMsg) in
+//            if let strongSelf = self{
                 //                strongSelf.tipsLabel.text = errorMsg
-            }
+//            }
         }
     }
     

@@ -36,7 +36,6 @@ class WOWBindMobileFirstController: WOWBaseViewController {
     
             navigationItem.title = "绑定手机"
 
-        
     }
     
     //MARK:Actions
@@ -44,6 +43,7 @@ class WOWBindMobileFirstController: WOWBaseViewController {
         if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
             return
         }
+      
         let mobile = phoneTextField.text ?? ""
         
         WOWNetManager.sharedManager.requestWithTarget(.api_MobileCaptcha(mobile:mobile), successClosure: {[weak self] (result, code) in
@@ -63,6 +63,7 @@ class WOWBindMobileFirstController: WOWBaseViewController {
         if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
             return
         }
+       
         if !validatePhone(codeTextField.text, tips: "请输入验证码"){
             
             return
@@ -72,10 +73,10 @@ class WOWBindMobileFirstController: WOWBaseViewController {
             if let strongSelf = self{
                 VCRedirect.bingMobileSecond()
             }
-        }) {[weak self](errorMsg) in
-            if let strongSelf = self{
+        }) {(errorMsg) in
+//            if let strongSelf = self{
                 //                strongSelf.tipsLabel.text = errorMsg
-            }
+//            }
         }
     }
     
@@ -88,6 +89,10 @@ class WOWBindMobileFirstController: WOWBaseViewController {
         
         if is_phone {
             guard phone.validateMobile() else{
+                WOWHud.showMsg("请输入正确的手机号")
+                return false
+            }
+            guard phone == WOWUserManager.userMobile else {
                 WOWHud.showMsg("请输入正确的手机号")
                 return false
             }

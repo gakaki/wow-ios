@@ -149,14 +149,12 @@ class WOWMsgCodeController: WOWBaseViewController {
     fileprivate func validatePhone(_ phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
         guard let phone = phoneNumber , !phone.isEmpty else{
             WOWHud.showMsg(tips)
-//            tipsLabel.text = "请输入手机号"
             return false
         }
         
         if is_phone {
             guard phone.validateMobile() else{
                 WOWHud.showMsg("请输入正确的手机号")
-//                tipsLabel.text = tips
                 return false
             }
         }

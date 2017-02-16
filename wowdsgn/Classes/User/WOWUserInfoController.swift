@@ -288,6 +288,12 @@ class WOWUserInfoController: WOWBaseTableViewController {
        
     }
     
+    override func navBack() {
+        super.navBack()
+        if let action = self.editInfoAction{
+            action()
+        }
+    }
   //MARK:Private Network
     override func request() {
         super.request()
@@ -343,9 +349,9 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 strongSelf.configUserInfo()
                 
                 
-                if let action = strongSelf.editInfoAction{
-                    action()
-                }
+//                if let action = strongSelf.editInfoAction{
+//                    action()
+//                }
             }
         }) { (errorMsg) in
             WOWHud.dismiss()

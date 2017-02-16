@@ -23,7 +23,7 @@ class VCTopicHeaderView:UICollectionReusableView{
         l.textAlignment = .left
 //        l.lineBreakMode = .ByWordWrapping
         l.numberOfLines = 0
-        l.setLineHeightAndLineBreak(1.05)
+//        l.backgroundColor = UIColor.blue
         l.font          = UIFont.mediumScaleFontSize(20)
         return l
     }()
@@ -31,10 +31,10 @@ class VCTopicHeaderView:UICollectionReusableView{
     var label_desc:UILabel      = {
         let l = UILabel()
         l.textAlignment = .left
-        l.lineBreakMode = .byWordWrapping
+//        l.lineBreakMode = .byWordWrapping
         l.numberOfLines = 0
 //        l.textAlignment = .center
-        l.setLineHeightAndLineBreak(1.25)
+//        l.backgroundColor = UIColor.orange
         l.textColor     = UIColor.gray
         l.font          = UIFont.systemScaleFontSize(14)
         return l
@@ -70,15 +70,15 @@ class VCTopicHeaderView:UICollectionReusableView{
         
         label_name.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(self.frame.width * 0.9)
-            make.height.equalTo(50)
+//            make.height.equalTo(50)
             make.left.equalTo(imageView.snp.left).offset(20)
-            make.top.equalTo(imageView.snp.bottom).offset(10)
+            make.top.equalTo(imageView.snp.bottom).offset(14)
         }
         label_desc.snp.makeConstraints { (make) -> Void in
             make.width.equalTo( self.frame.width * 0.9 )
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(label_name.snp.bottom).offset(5)
-            make.bottom.equalTo(self.snp.bottom).offset(-30)
+            make.bottom.equalTo(self.snp.bottom).offset(-15)
         }
         
 //        view_line.snp.makeConstraints { (make) -> Void in
@@ -159,9 +159,10 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                         
                         let r                             =  JSON(result)
                         strongSelf.vo_products            =  Mapper<WOWProductModel>().mapArray(JSONObject:r["productList"].arrayObject) ?? [WOWProductModel]()
+//                        strongSelf.vo_topic?.topicName = "归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋"
                         //先这样写吧，动态计算label的高度，更改header的高度
-                        strongSelf.header_height = Float(strongSelf.vo_topic?.topicDesc?.heightWithConstrainedWidth(MGScreenWidth * 0.9, font: UIFont.systemScaleFontSize(14), lineSpace: 1.5) ?? 0)
-                        strongSelf.layout.headerHeight = 390 + strongSelf.header_height * 1.56
+                        strongSelf.header_height = Float(strongSelf.vo_topic?.topicDesc?.heightWithConstrainedWidth(MGScreenWidth * 0.9, font: UIFont.systemScaleFontSize(14), lineSpace: 1.5) ?? 0) * 1.3 + Float(strongSelf.vo_topic?.topicName?.heightWithConstrainedWidth(MGScreenWidth * 0.9, font: UIFont.mediumScaleFontSize(20), lineSpace: 1.05) ?? 0)
+                        strongSelf.layout.headerHeight = 315 + strongSelf.header_height
                         strongSelf.cv.reloadData()
                         strongSelf.endRefresh()
                         
@@ -255,7 +256,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 headerView.imageView.set_webimage_url(pic )
                 headerView.label_name.text = self.vo_topic?.topicName
                 headerView.label_desc.text = self.vo_topic?.topicDesc
-                headerView.label_desc.setLineHeightAndLineBreak(1.5)
+                headerView.label_desc.setLineHeightAndLineBreak(1.3)
              
 //                header_height = headerView.label_desc.getEstimatedHeight()
 //                headerView.label_name.text = "归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋"

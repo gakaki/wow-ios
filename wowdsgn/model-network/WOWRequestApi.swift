@@ -20,7 +20,7 @@ public enum RequestApi{
     case api_Sence
     case api_checkVersion(params: [String: AnyObject]?)
     
-    
+    case api_User
     //Tab 第一个栏 首页 该死的那3个url
     case api_Home_Banners
     
@@ -161,6 +161,10 @@ public enum RequestApi{
     
     case api_Logout
     
+    case api_LoginCaptcha(mobile: String)
+    
+    case api_LoginByCaptcha(mobile: String, captcha:String)
+    
     //订单相关
     
 
@@ -180,7 +184,7 @@ public enum RequestApi{
     
     case api_OrderCreate(params: [String: AnyObject])
     
-    case api_OrderCharge(orderNo: String, channel: String, clientIp: String)
+    case api_OrderCharge(params: [String: AnyObject])
     
     case api_PayResult(orderCode: String)
     
@@ -220,7 +224,7 @@ public enum RequestApi{
     
     case api_UserFavorite(uid:String,type:String,pageindex:String)
 
-    case api_Wechat(openId:String, unionId: String) //openId
+    case api_Wechat(openId: String, wechatNickName: String, wechatAvatar: String, unionId: String) //openId
     
     case api_WechatBind(mobile:String,captcha:String,password:String,userInfoFromWechat:AnyObject)
     
@@ -245,7 +249,16 @@ public enum RequestApi{
     case api_Deferreddeeplink
     //领取优惠券
     case api_CouponObtain(couponId: Int)
-
+    //用户手动绑定微信
+    case api_BindWechatInfo(openId: String, wechatNickName: String, wechatAvatar: String, unionId: String)
+    //更改手机获取验证码
+    case api_MobileCaptcha(mobile: String)
+    //更改手机
+    case api_OriginalMobile(mobile: String, captcha: String)
+    //获取绑定手机验证码
+    case api_NewMobileCaptcha(mobile: String)
+    //绑定手机
+    case api_BindMobile(mobile: String, captcha: String)
 }
 
 
@@ -271,6 +284,8 @@ extension RequestApi:TargetType{
             return URL_category
         case .api_Category_V2:
             return URL_category_v2
+        case .api_User:
+            return URL_User
 
         case .api_Category_subCategory_with_image:
             return URL_category_subCategory_with_image
@@ -506,6 +521,20 @@ extension RequestApi:TargetType{
             return URL_Deferreddeeplink
         case .api_CouponObtain:
             return URL_CouponObtain
+        case .api_BindWechatInfo:
+            return URL_BindWechatInfo
+        case .api_MobileCaptcha:
+            return URL_MobileCaptcha
+        case .api_OriginalMobile:
+            return URL_OriginalMobile
+        case .api_NewMobileCaptcha:
+            return URL_NewMobileCaptcha
+        case .api_BindMobile:
+            return URL_BindMobile
+        case .api_LoginCaptcha:
+            return URL_LoginCaptcha
+        case .api_LoginByCaptcha:
+            return URL_LoginByCaptcha
             
         default:
             return URL_topic
@@ -537,7 +566,8 @@ extension RequestApi:TargetType{
             .api_ProductsOfCoupon,
             .Api_Screen_Main,
             .Api_Screen_Price,
-            .api_Deferreddeeplink:
+            .api_Deferreddeeplink,
+            .api_User:
 
             return .GET
 
@@ -657,10 +687,14 @@ extension RequestApi:TargetType{
                 params =  ["mobile":mobile]
             case let .api_Captcha(mobile):
                 params =  ["mobile":mobile]
+            case let .api_LoginCaptcha(mobile):
+                params =  ["mobile":mobile]
+            case let .api_LoginByCaptcha(mobile, captcha):
+                params =  ["mobile":mobile, "captcha": captcha]
             case let .api_PwdResetCode(mobile):
                 params =  ["mobile":mobile]
-            case let .api_Wechat(openId,unionId):
-                params =  ["openId":openId, "unionId": unionId]
+            case let .api_Wechat(openId, wechatNickName, wechatAvatar, unionId):
+                params = ["openId": openId, "wechatNickName": wechatNickName, "wechatAvatar": wechatAvatar, "unionId": unionId]
             case let .api_WechatBind(mobile,captcha,password,userInfoFromWechat):
                 params =  ["mobile":mobile,"captcha":captcha,"password":password,"userInfoFromWechat":userInfoFromWechat]
             case let .api_ResetPwd(mobile, code, password):
@@ -684,8 +718,8 @@ extension RequestApi:TargetType{
                 params =  ["uid":uid,"order_id":order_id,"status":status]
             case let .api_OrderCreate(param):
                 params = param
-            case let .api_OrderCharge(orderNo, channel, alientIp):
-                params = ["orderNo": orderNo, "channel": channel, "clientIp": alientIp]
+            case let .api_OrderCharge(param):
+                params = param
             case let .api_OrderBuyNow(productId, productQty):
                 params = ["productId": productId, "productQty": productQty]
             case let .api_PayResult(orderCode):
@@ -719,7 +753,7 @@ extension RequestApi:TargetType{
             case .api_Module_Page2:
                 params = ["pageId":2, "region":1]
             // 筛选
-            case let .Api_Screen_Main:
+            case .Api_Screen_Main:
                 break
             case let .Api_Screen_Price(categoryId):
                 params = ["categoryId":categoryId]
@@ -728,6 +762,8 @@ extension RequestApi:TargetType{
             case .api_Found_Main:
                 break
             case .api_DesignerList:
+                break
+            case .api_User:
                 break
             case let .api_Product_By_Category(param): //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
 //                    params = ["asc": asc, "currentPage": currentPage, "showCount": showCount, "sortBy": sortBy, "categoryId":categoryId]
@@ -763,6 +799,16 @@ extension RequestApi:TargetType{
                 params = ["h5Url": h5Url]
             case let .api_CouponObtain(couponId):
                 params = ["couponId": couponId]
+            case let .api_BindWechatInfo(openId, wechatNickName, wechatAvatar, unionId):
+                params = ["openId": openId, "wechatNickName": wechatNickName, "wechatAvatar": wechatAvatar, "unionId": unionId]
+            case let .api_MobileCaptcha(mobile):
+                params = ["mobile": mobile]
+            case let .api_OriginalMobile(mobile, captcha):
+                params = ["mobile": mobile, "captcha": captcha]
+            case let .api_NewMobileCaptcha(mobile):
+                params = ["mobile": mobile]
+            case let .api_BindMobile(mobile, captcha):
+                params = ["mobile": mobile, "captcha": captcha]
 
             default:
                 break

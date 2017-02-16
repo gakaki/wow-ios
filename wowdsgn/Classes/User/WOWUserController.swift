@@ -142,7 +142,6 @@ class WOWUserController: WOWBaseTableViewController {
                  *  先判断 本地是否有保存头像数据
                  */
                 if   WOWUserManager.userPhotoData.isEmpty {
-                    print(WOWUserManager.userHeadImageUrl)
                     headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
 //                    headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
                     

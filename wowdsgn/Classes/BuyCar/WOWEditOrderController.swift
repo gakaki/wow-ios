@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import AdSupport
 
 enum editOrderEntrance {
     case buyEntrance        //立即购买入口
@@ -77,6 +78,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //MARK:Private Method
     override func setUI() {
+        
         navigationItem.title = "确认订单"
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -202,8 +204,9 @@ class WOWEditOrderController: WOWBaseViewController {
         //运费
         let delivery = NSDecimalNumber(value: orderSettle?.deliveryFee ?? 0 as Double)
         
+        let amountPrice = (amount.adding(delivery)).doubleValue
         //用商品的总价加上运费然后减去优惠券金额得出结算价格
-        orderSettle?.totalAmount = (amount.adding(delivery)).doubleValue
+        orderSettle?.totalAmount = amountPrice < 0 ? 0 : amountPrice
         
         
         let result = WOWCalPrice.calTotalPrice([orderSettle?.totalAmount ?? 0],counts:[1])
@@ -586,11 +589,10 @@ class WOWEditOrderController: WOWBaseViewController {
                 sum                  = sum * 100 
                 let order_id             = orderCode ?? ""
                 
-                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
-                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
-                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
+//                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
+//                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
+//                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
                 AnalyaticEvent.e2(.PaySuccess,["totalAmount":Int32(sum) ,"OrderCode":order_id ])
-
                 //支付结果
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
 
@@ -760,9 +762,15 @@ extension WOWEditOrderController: selectPayDelegate {
             WOWHud.showMsg("订单生成失败")
             return
         }
+        
+        let deviceId = TalkingDataAppCpa.getDeviceId()
+        let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
+
+        let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid, "osversion": sysVersion]
        
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: orderCode , channel: channel, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 let json = JSON(result)
                 let charge = json["charge"]

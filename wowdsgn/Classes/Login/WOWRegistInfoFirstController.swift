@@ -16,18 +16,18 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     var isPresent:Bool = false
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var nickTextField: UITextField!
-    @IBOutlet weak var telTextField: UITextField!
+//    @IBOutlet weak var telTextField: UITextField!
     @IBOutlet weak var descTextField: UITextField!
     var phoneNumber  :String?
     var headImageUrl:String = WOWUserManager.userHeadImageUrl
     var nextView : WOWRegistInfoSureView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.telTextField.text  = WOWUserManager.userMobile
         self.nickTextField.text = WOWUserManager.userName
-//        headImageView.kf_setImageWithURL(NSURL(string:WOWUserManager.userHeadImageUrl)!, placeholderImage: UIImage(named: "placeholder_userhead"))
         headImageView.borderRadius(25)
-        headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+//        print(WOWUserManager.userHeadImageUrl)
+//        headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl)
+        headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
         // Do any additional setup after loading the view.
     }
 
@@ -55,6 +55,8 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         nextView.frame = CGRect(x: 0,y: 0, width: self.view.w, height: 200)
         tableView.tableFooterView = nextView
     }
+    
+    
     
     override func navBack() {
         
@@ -84,7 +86,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         nickTextField.resignFirstResponder()
-         telTextField.resignFirstResponder()
+//         telTextField.resignFirstResponder()
          descTextField.resignFirstResponder()
     }
 //MARK:Actions

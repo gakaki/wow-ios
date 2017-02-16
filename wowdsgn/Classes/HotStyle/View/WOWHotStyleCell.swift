@@ -22,7 +22,7 @@ class WOWHotStyleCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var lbTitleMain: UILabel!// 主标题
     @IBOutlet weak var lbBrowse: UILabel!//多少人赞
     @IBOutlet weak var imgBackMain: UIImageView!// 背景图片
-    private var shareProductImage:UIImage? //供分享使用
+    private var shareProductImage:String? //供分享使用
     var heightAll:CGFloat = MGScreenWidth
     weak var    delegate   :  WOWHotStyleCellDelegate?
     var brandModel : WOWBrandStyleModel? // 左上角banner 的信息
@@ -67,33 +67,35 @@ class WOWHotStyleCell: UITableViewCell,ModuleViewElement {
             lbLogoName.text = " "
             imgLogo.image = nil
         }
-        if let url = model.moduleAdditionalInfo?.imageUrl {
-            
+        shareProductImage = model.moduleAdditionalInfo?.imageUrl
+//        if let url = model.moduleAdditionalInfo?.imageUrl {
+        
 
-            var res :String?
-            switch UIDevice.deviceType {
-            case .dt_iPhone4S,.dt_iPhone5:
-                res     = "\(url)?imageView2/0/w/500/format/webp/q/90"
-            case .dt_iPhone6:
-                res     = "\(url)?imageView2/0/w/700/format/webp/q/90"
-            case .dt_iPhone6_Plus:
-                res     = "\(url)?imageView2/0/w/900/format/webp/q/90"
-            default:
-                res     = "\(url)?imageView2/0/w/700/format/webp/q/90"
-                
-            }
+//            var res :String?
+//            switch UIDevice.deviceType {
+//            case .dt_iPhone4S,.dt_iPhone5:
+//                res     = "\(url)?imageView2/0/w/500/format/webp/q/90"
+//            case .dt_iPhone6:
+//                res     = "\(url)?imageView2/0/w/700/format/webp/q/90"
+//            case .dt_iPhone6_Plus:
+//                res     = "\(url)?imageView2/0/w/900/format/webp/q/90"
+//            default:
+//                res     = "\(url)?imageView2/0/w/700/format/webp/q/90"
+//                
+//            }
+//
+//            let url_obj            = URL(string:res ?? "")
+//            let image_place_holder = UIImage(named: "placeholder_product")
+            imgBackMain.set_webimage_url(model.moduleAdditionalInfo?.imageUrl)
+//            imgBackMain.yy_setImage(with: url_obj,
+//                                    placeholder: image_place_holder,
+//                                    completion: { [weak self](image, url, cacheType, webImage, error) in
+//                                        if let strongSelf = self{
+//                                                strongSelf.shareProductImage = image
+//                                        }
+//            })
 
-            let url_obj            = URL(string:res ?? "")
-            let image_place_holder = UIImage(named: "placeholder_product")
-            imgBackMain.yy_setImage(with: url_obj,
-                                    placeholder: image_place_holder,
-                                    completion: { [weak self](image, url, cacheType, webImage, error) in
-                                        if let strongSelf = self{
-                                                strongSelf.shareProductImage = image
-                                        }
-            })
-
-        }
+//        }
         if let showTitle =  model.moduleAdditionalInfo?.showTitle {
             if showTitle { // true 则显示label  false 则不显示
                 

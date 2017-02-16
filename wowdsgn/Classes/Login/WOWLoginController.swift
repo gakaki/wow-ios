@@ -7,34 +7,83 @@
 //
 
 import UIKit
+import SnapKit
+import VTMagic
+
+
 class WOWLoginController: WOWBaseViewController {
-    @IBOutlet weak var wechatButton: UIButton!
-    @IBOutlet weak var accountTextField: UITextField!
-    @IBOutlet weak var passWordTextField: UITextField!
-    @IBOutlet weak var tipsLabel: UILabel!
+    var v : VCVTMagic!
+    
+    var vc_code:WOWCodeLoginController?
+    var vc_pwd:WOWPwdLoginController?
+
     var isPresent:Bool = false
     
     var isPopRootVC:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        MobClick.e(.Guide_Login)
+
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-//MARK:Life
-
+            
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationShadowImageView?.isHidden = true
+        
+    }
     
-//MARK:Lazy
-//                
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationShadowImageView?.isHidden = false
+        
+    }
 //MARK:Private Method
     override func setUI() {
         configNavItem()
-        wechatButton.isHidden = !WXApi.isWXAppInstalled()
+        self.title = "登录"
+        
+        
+        v                               = VCVTMagic()
+        v.magicView.dataSource          = self
+        v.magicView.delegate            = self
+        
+        v.magicView.layoutStyle         = .divide
+        v.magicView.switchStyle         = .default
+        
+        v.magicView.sliderWidth         = 50.w
+        v.magicView.itemWidth           = MGScreenWidth / 2
+        v.magicView.sliderColor         = WowColor.black
+        v.magicView.sliderHeight        = 3.w
+        v.magicView.isSeparatorHidden   = true
+        
+        
+        self.addChildViewController(v)
+        self.view.addSubview(v.magicView)
+        
+        v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
+            if let strongSelf = self {
+                make.size.equalTo(strongSelf.view)
+                
+            }
+        }
+        
+        
+        vc_code    = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWCodeLoginController.self)) as? WOWCodeLoginController
+        vc_code?.isPresent = isPresent
+        vc_pwd    = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWPwdLoginController.self)) as? WOWPwdLoginController
+        vc_pwd?.isPresent = isPresent
+        
+        addChildViewController(vc_code!)
+        addChildViewController(vc_pwd!)
+        
+        v.magicView.reloadData()
+
     }
     
     fileprivate func configNavItem(){
@@ -60,99 +109,79 @@ class WOWLoginController: WOWBaseViewController {
     }
     
     
-//MARK:Actions
-    @IBAction func regist(_ sender: UIButton) {
-//        toRegVC(false,isPresent: isPresent)
-        VCRedirect.toRegVC(false, isPresent: isPresent, userInfoFromWechat: nil)
-        
+}
+
+extension WOWLoginController:VTMagicViewDataSource{
+    
+    var identifier_magic_view_bar_item : String {
+        get {
+            return "identifier_magic_view_bar_item"
+        }
+    }
+    var identifier_magic_view_page : String {
+        get {
+            return "identifier_magic_view_page"
+        }
     }
     
-    
-    @IBAction func forgetPasswordClick(_ sender: UIButton) {
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController.self)) as! WOWMsgCodeController
-        navigationController?.pushViewController(vc, animated: true)
+    //获取所有菜单名，数组中存放字符串类型对象
+    func menuTitles(for magicView: VTMagicView) -> [String] {
+        return ["短信登录","密码登录"]
+    }
+    func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
+        let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
+        
+        if ( button == nil) {
+            let width           = self.view.frame.width / 3
+            let b               = UIButton(type: .custom)
+            b.frame             = CGRect(x: 0, y: 0, width: width, height: 50)
+            b.titleLabel!.font  =  UIFont.systemFont(ofSize: 14)
+            b.setTitleColor(WowColor.grayLight, for: UIControlState())
+            b.setTitleColor(WowColor.black, for: .selected)
+            b.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+            
+            return b
+        }
+        
+        return button!
     }
     
-    @IBAction func wechatLogin(_ sender: UIButton) {
-//        let snsPlat = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
-//        UMSocialControllerService.defaultControllerService().socialUIDelegate = self
-//        snsPlat.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {[weak self]response in
-//            if let strongSelf = self{
-//                if response.responseCode == UMSResponseCodeSuccess {
-//                    let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
-//                    DLog("username is \(snsAccount.userName), uid is \(snsAccount.usid), token is \(snsAccount.accessToken) url is \(snsAccount.iconURL)")
-//                    let token = snsAccount.accessToken
-//                    strongSelf.checkWechatToken(token)
-//                }else{
-//                    DLog(response)
-//                }
-//            }
-//        })
-        
-
-        toWeixinVC(isPresent)
+    func buttonAction(){
+        print("button")
     }
     
-    
-    @IBAction func login(_ sender: UIButton) {
-        guard let phone = accountTextField.text , !phone.isEmpty else{
-            WOWHud.showMsg("请输入手机号")
-            tipsLabel.text = "请输入手机号"
-            return
-        }
-        guard let passwd = passWordTextField.text , !passwd.isEmpty else{
-            WOWHud.showMsg("请输入密码")
-            tipsLabel.text = "请输入密码"
-            return
-        }
-        guard phone.validateMobile() || phone.validateEmail() else{
-            WOWHud.showMsg("请输入正确的手机号")
-            tipsLabel.text = "请输入正确的手机号"
-            return
-        }
-
-        WOWHud.showLoading()
-        WOWNetManager.sharedManager.requestWithTarget(.api_Login(phone,passwd), successClosure: {[weak self](result, code) in
-
-            if let strongSelf = self{
-                DLog(result)
-                WOWHud.dismiss()
-                let model = Mapper<WOWUserModel>().map(JSONObject:result)
-                WOWUserManager.saveUserInfo(model)
-                
-                
-                TalkingDataAppCpa.onLogin(phone)
-                AnalyaticEvent.e2(.Login,["user":phone])
-                
-                
-                WOWUserManager.userMobile = phone
-                VCRedirect.toLoginSuccess(strongSelf.isPresent)
-                
-                
-                
-            }
-        }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
-                WOWHud.dismiss()
-                strongSelf.tipsLabel.text = errorMsg
+    func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
+        
+        let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
+        
+        if (vc == nil) {
+            
+            if (pageIndex == 0){
+                return vc_code!
+            }else{
+                return vc_pwd!
             }
         }
+        
+        return vc!
     }
 }
 
-
-
-//MARK:Delegate
-//extension WOWLoginController:UMSocialUIDelegate{
-//    
-//}
-
-extension WOWLoginController:UITextFieldDelegate{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return false
+extension WOWLoginController:VTMagicViewDelegate{
+    func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
+        print("viewDidAppear:", pageIndex);
+        
+        if let b = magicView.menuItem(at: pageIndex) {
+            print("  button asc is ", b)
+            
+        }
     }
+    func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
+        print("didSelectItemAtIndex:", itemIndex);
+        
+    }
+    
 }
 
 

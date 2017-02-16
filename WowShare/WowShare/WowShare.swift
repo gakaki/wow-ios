@@ -68,7 +68,7 @@ public class WowShare {
         _ title:String = "尖叫设计欢迎您",
         shareText:String?,
         url:String?,
-        shareImage:UIImage = UIImage(named: "me_logo")!,
+        shareImage:Any!,
         successClosure:@escaping ShareSuccessClosure,
         failClosure:@escaping ShareFailClosure
     )
@@ -105,7 +105,7 @@ public class WowShare {
         _ title:String = "尖叫设计欢迎您",
         shareText:String?,
         url:String?,
-        shareImage:UIImage = UIImage(named: "me_logo")!,
+        shareImage:Any!,
         successClosure:@escaping ShareSuccessClosure,
         failClosure:@escaping ShareFailClosure
     )
@@ -125,6 +125,8 @@ public class WowShare {
             currentViewController: self,
             completion: { (shareResponse, error) -> Void in
                 
+                var message: String = ""
+
                 if let e = error {
                     failClosure(e )
                 }else{

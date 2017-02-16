@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AdSupport
 
 
 enum orderDetailEntrance {
@@ -441,7 +441,7 @@ class WOWOrderDetailController: WOWBaseViewController{
 // MARK: - 订单支付相关
 extension WOWOrderDetailController{
     
-    func sureOrderPay(_ channl: String){
+    func sureOrderPay(_ channel: String){
         if let orderNewModel = self.orderNewDetailModel {
             
             //    backView.hidePayView()
@@ -450,7 +450,13 @@ extension WOWOrderDetailController{
                 return
             }
 
-            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(orderNo: self.orderCode ?? "", channel: channl, clientIp: IPManager.sharedInstance.ip_public), successClosure: { [weak self](result, code) in
+            let deviceId = TalkingDataAppCpa.getDeviceId()
+            let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
+            
+            let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid, "osversion": sysVersion]
+            
+            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in
                 if let strongSelf = self {
                     let json = JSON(result)
                     let charge = json["charge"]
@@ -507,9 +513,9 @@ extension WOWOrderDetailController{
                 sum                  = sum * 100
                 let order_id             = orderCode ?? ""
                 
-                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
-                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
-                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
+//                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
+//                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
+//                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
                 AnalyaticEvent.e2(.PaySuccess,["totalAmount":sum ,"OrderCode":order_id ])
                 
                 

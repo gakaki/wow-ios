@@ -333,10 +333,10 @@ extension AppDelegate{
 
         //Talking Data
         TalkingData.setExceptionReportEnabled(true)
-        TalkingData.sessionStarted("12430AB8C707826E0C0FBDA290E620E4", withChannelId: "AppStore")
+        TalkingData.sessionStarted(WOWID.TalkingData.appKey, withChannelId: "AppStore")
         
         //Talking Data ADTracking
-        TalkingDataAppCpa.init("e81f26ce70664a9dab698bae55be2044", withChannelId: "AppStore")
+        TalkingDataAppCpa.init(WOWID.TalkingData.appID, withChannelId: "AppStore")
 
         
     }

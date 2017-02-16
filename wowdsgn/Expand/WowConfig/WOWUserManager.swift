@@ -27,6 +27,8 @@ struct WOWUserManager {
      static let WOWDeviceToken       = "WOWDeviceToken"
      static let WOWUserMsgCount      = "WOWUserMsgCount"
      static let WOWSystemMsgCount    = "WOWSystemMsgCount"
+     static let WOWUserWechat         = "WOWUserWechat"
+
 //     static let WOWUserId            = "WOWUserId"
 
 
@@ -222,7 +224,17 @@ struct WOWUserManager {
         }
 
     }
-   
+    
+    static var userWechat:Bool{
+        get{
+            return (MGDefault.object(forKey: WOWUserWechat) as? Bool) ?? false
+        }
+        set{
+            MGDefault.set(newValue, forKey:WOWUserWechat)
+            MGDefault.synchronize()
+        }
+    }
+
     
     static func saveUserInfo(_ model:WOWUserModel?){
 //        MGDefault.setObject(true, forKey: WOWUserLoginStatus)
@@ -235,6 +247,8 @@ struct WOWUserManager {
         MGDefault.set(model?.user_carCount, forKey:WOWUserCarCount)
         MGDefault.set(model?.user_industry, forKey:WOWUserIndustry)
         MGDefault.set(model?.user_id?.toString, forKey:WOWUserID)
+        MGDefault.set(model?.user_mobile, forKey:WOWUserMobile)
+        MGDefault.set(model?.bindWechat, forKey: WOWUserWechat)
         MGDefault.synchronize()
     }
 
@@ -254,6 +268,7 @@ struct WOWUserManager {
         MGDefault.set(0, forKey: WOWSystemMsgCount)
         MGDefault.set(nil, forKey:WOWUserID)
         MGDefault.set(nil, forKey:WOWUserMobile)
+        MGDefault.set(false, forKey: WOWUserWechat)
         MGDefault.synchronize()
     }
     /**

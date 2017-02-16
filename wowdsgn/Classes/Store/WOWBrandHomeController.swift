@@ -24,14 +24,15 @@ class WOWBrandHomeController: WOWBaseViewController {
     var designerModel : WOWDesignerModel?   //设计师model
     var labelHeight : CGFloat?          //简介高度
     let pageSize = 10                   //分页数据大小
+    let nomarlHeight: CGFloat = 355       //默认高度
     
     public var entrance = brandOrDesignerEntrance.brandEntrance     //入口
     
-    fileprivate var shareBrandImage:UIImage? //供分享使用
-    lazy var placeImageView:UIImageView={  //供分享使用
-        let image = UIImageView()
-        return image
-    }()
+//    fileprivate var shareBrandImage:UIImage? //供分享使用
+//    lazy var placeImageView:UIImageView={  //供分享使用
+//        let image = UIImageView()
+//        return image
+//    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -109,55 +110,43 @@ class WOWBrandHomeController: WOWBaseViewController {
 
         collectionView.register(UINib.nibName(String(describing: WOWBrandHeaderView.self)), forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
-    //初始化分享数据
-    func configBrandData(){
-        let url =  URL(string:(brandModel?.image) ?? "")
-        if  let url = url {
-            placeImageView.yy_setImage(
-                with: url,
-                placeholder: nil,
-                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-                completion: { [weak self] (img, url, from_type, image_stage,err ) in
-                    if let strongSelf = self{
-                        strongSelf.shareBrandImage = img
-                    }
-                    
-            })
-
-//            placeImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
-//                
-//                if let strongSelf = self{
-//                    strongSelf.shareBrandImage = image
-//                }
-//            }
-
-        }
-        
-    }
-    func configDesignerData(){
-        let url = URL(string:(designerModel?.designerPhoto) ?? "")
-        if let url = url {
-            placeImageView.yy_setImage(
-                with: url,
-                placeholder: nil,
-                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-                completion: { [weak self] (img, url, from_type, image_stage,err ) in
-                    if let strongSelf = self{
-                        strongSelf.shareBrandImage = img
-                    }
-                    
-            })
-//            placeImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil){ [weak self] (image, error, cacheType, imageURL) in
-//                
-//                if let strongSelf = self{
-//                    strongSelf.shareBrandImage = image
-//                }
-//            }
-        }
-        
-        
-        
-    }
+//    //初始化分享数据
+//    func configBrandData(){
+//        let url =  URL(string:(brandModel?.image) ?? "")
+//        if  let url = url {
+//            placeImageView.yy_setImage(
+//                with: url,
+//                placeholder: nil,
+//                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+//                completion: { [weak self] (img, url, from_type, image_stage,err ) in
+//                    if let strongSelf = self{
+//                        strongSelf.shareBrandImage = img
+//                    }
+//                    
+//            })
+//
+//        }
+//        
+//    }
+//    func configDesignerData(){
+//        let url = URL(string:(designerModel?.designerPhoto) ?? "")
+//        if let url = url {
+//            placeImageView.yy_setImage(
+//                with: url,
+//                placeholder: nil,
+//                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
+//                completion: { [weak self] (img, url, from_type, image_stage,err ) in
+//                    if let strongSelf = self{
+//                        strongSelf.shareBrandImage = img
+//                    }
+//                    
+//            })
+//
+//        }
+//        
+//        
+//        
+//    }
     
 //MARK:Actions
     @IBAction func back(_ sender: UIButton) {
@@ -195,11 +184,11 @@ class WOWBrandHomeController: WOWBaseViewController {
         case .brandEntrance:
             
             let shareUrl = WOWShareUrl + "/brand/\(brandID ?? 0)"
-            WOWShareManager.share(brandModel?.brandEname, shareText: brandModel?.desc, url:shareUrl,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
+            WOWShareManager.share(brandModel?.brandEname, shareText: brandModel?.desc, url:shareUrl,shareImage:brandModel?.image ?? UIImage(named: "me_logo")!)
         case .designerEntrance:
             
             let shareUrl = WOWShareUrl + "/designer/\(designerId ?? 0)"
-            WOWShareManager.share(designerModel?.designerName, shareText: designerModel?.designerDesc, url:shareUrl,shareImage:shareBrandImage ?? UIImage(named: "me_logo")!)
+            WOWShareManager.share(designerModel?.designerName, shareText: designerModel?.designerDesc, url:shareUrl,shareImage:designerModel?.designerPhoto ?? UIImage(named: "me_logo")!)
             
         }
 
@@ -228,7 +217,6 @@ class WOWBrandHomeController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.brandModel = Mapper<WOWBrandV1Model>().map(JSONObject:result)
                 strongSelf.collectionView.reloadData()
-                strongSelf.configBrandData()
                 strongSelf.endRefresh()
             }
         }) {[weak self](errorMsg) in
@@ -295,7 +283,6 @@ class WOWBrandHomeController: WOWBaseViewController {
                 DLog(json)
                 strongSelf.designerModel = Mapper<WOWDesignerModel>().map(JSONObject:result)
                 strongSelf.collectionView.reloadData()
-                strongSelf.configDesignerData()
                 strongSelf.endRefresh()
             }
         }) {[weak self](errorMsg) in
@@ -367,19 +354,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         
     }
     
-//    //用户喜欢某个品牌
-//    func requestFavoriteBrand()  {
-//        
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteBrand(brandId: brandID ?? 0), successClosure: { [weak self](result, code) in
-//            if let strongSelf = self{
-//                strongSelf.likeButton.isSelected = !strongSelf.likeButton.isSelected
-//                 NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-//            }
-//        }) { (errorMsg) in
-//            
-//            
-//        }
-//    }
+
     //用户是否喜欢某设计师
     func requestIsFavoriteDesigner() {
         WOWNetManager.sharedManager.requestWithTarget(.api_IsFavoriteDesigner(designerId: designerId ?? 0), successClosure: {[weak self] (result, code) in
@@ -394,20 +369,6 @@ class WOWBrandHomeController: WOWBaseViewController {
         }
         
     }
-    
-//    //用户喜欢某个设计师
-//    func requestFavoriteDesigner()  {
-//        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_FavoriteDesigner(designerId: designerId ?? 0), successClosure: { [weak self](result, code) in
-//            if let strongSelf = self{
-//                strongSelf.likeButton.isSelected = !strongSelf.likeButton.isSelected
-//                 NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: nil)
-//            }
-//        }) { (errorMsg) in
-//            
-//            
-//        }
-//    }
-//    
    
     
 }
@@ -477,13 +438,16 @@ extension WOWBrandHomeController:CollectionViewWaterfallLayoutDelegate{
 
 extension WOWBrandHomeController: brandHeaderViewDelegate {
     func moreClick(_ sender: UIButton!) {
-        print("更多")
         if sender.isSelected {
-            layout.headerHeight = 355
+            layout.headerHeight = Float(nomarlHeight)
             
         }else {
-            layout.headerHeight = 355 + Float(labelHeight ?? 0) - 75
+            layout.headerHeight = Float(nomarlHeight) + Float(labelHeight ?? 0) - 75
 
+        }
+        
+        if labelHeight == 0 {
+            layout.headerHeight = Float(nomarlHeight) - 75
         }
         self.collectionView.reloadData()
         sender.isSelected = !sender.isSelected

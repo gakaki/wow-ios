@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 import YYWebImage
 import SwiftyUserDefaults
 import EZSwiftExtensions
+import WowShare
 
 
 //import JSPatch
@@ -224,6 +225,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if WowShare.handle_open_url(url) {
             return true
         }
+    
         //growing io
 //        if Growing.handle(url) {
 //            return true

@@ -149,7 +149,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRe-3b-Fre">
                         <rect key="frame" x="0.0" y="55" width="375" height="21"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="limit" translatesAutoresizingMaskIntoConstraints="NO" id="Rnc-H9-Xsi">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="limit" translatesAutoresizingMaskIntoConstraints="NO" id="Rnc-H9-Xsi">
                                 <rect key="frame" x="15" y="3" width="27" height="16"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7V-a1-zHr">

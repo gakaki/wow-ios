@@ -45,6 +45,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             self.tableView.register(UINib.nibName("WOWHotMainCell"), forCellReuseIdentifier: "WOWHotMainCell")
             self.tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
             
+            self.tableView.register(UINib.nibName("Cell_106_BrandList"), forCellReuseIdentifier: "Cell_106_BrandList")
+            self.tableView.register(UINib.nibName("Cell_107_ProjectSelect"), forCellReuseIdentifier: "Cell_107_ProjectSelect")
             for (k,c) in ModulePageType.d {
                 if c is ModuleViewElement.Type {
                     let cell            = (c as! ModuleViewElement.Type)

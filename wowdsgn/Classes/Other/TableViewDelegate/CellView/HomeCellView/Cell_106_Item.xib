@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Cell_106_Item" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="95" height="120"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="95" height="120"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10" translatesAutoresizingMaskIntoConstraints="NO" id="iNi-bT-PpG">
+                        <rect key="frame" x="8" y="8" width="79" height="79"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="79" id="2RS-KK-Rbg"/>
+                            <constraint firstAttribute="width" constant="79" id="bW4-JU-2zS"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vitra" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLo-q5-iu2">
+                        <rect key="frame" x="0.0" y="88" width="95" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="iNi-bT-PpG" secondAttribute="trailing" constant="8" id="9Na-ng-6Fw"/>
+                <constraint firstItem="xLo-q5-iu2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EHo-WN-dm9"/>
+                <constraint firstAttribute="bottom" secondItem="xLo-q5-iu2" secondAttribute="bottom" constant="12" id="K94-dB-Quv"/>
+                <constraint firstItem="iNi-bT-PpG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="W67-gi-kY0"/>
+                <constraint firstItem="iNi-bT-PpG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="hUU-8Y-FHD"/>
+                <constraint firstAttribute="trailing" secondItem="xLo-q5-iu2" secondAttribute="trailing" id="iQL-Ny-Gbs"/>
+                <constraint firstItem="xLo-q5-iu2" firstAttribute="top" secondItem="iNi-bT-PpG" secondAttribute="bottom" constant="1" id="zpx-eC-BWK"/>
+            </constraints>
+            <point key="canvasLocation" x="-230.5" y="-92"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="10" width="720" height="720"/>
+    </resources>
+</document>

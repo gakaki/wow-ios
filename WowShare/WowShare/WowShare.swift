@@ -124,9 +124,8 @@ public class WowShare {
             messageObject: messageObject,
             currentViewController: self,
             completion: { (shareResponse, error) -> Void in
-                
+                print(error.debugDescription)
                 var message: String = ""
-
                 if let e = error {
                     failClosure(e )
                 }else{

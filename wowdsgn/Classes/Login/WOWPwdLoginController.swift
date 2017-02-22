@@ -30,17 +30,21 @@ class WOWPwdLoginController: WOWBaseViewController {
         print("xiaohui")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        accountTextField.text = ""
+        passWordTextField.text = ""
+    }
+    
     //MARK:Private Method
     override func setUI() {
         wechatButton.isHidden = !WXApi.isWXAppInstalled()
         pwdView.borderColor(0.5, borderColor: UIColor.init(hexString: "#EAEAEA")!)
-
     }
-    
-        
+
     //MARK:Actions
     @IBAction func regist(_ sender: UIButton) {
-        //        toRegVC(false,isPresent: isPresent)
+
         VCRedirect.toRegVC(false, isPresent: isPresent, userInfoFromWechat: nil)
         
     }

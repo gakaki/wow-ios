@@ -134,13 +134,11 @@ public class VCRedirect {
     }
     //登录成功方法
     public class func toLoginSuccess(_ isPresent:Bool = false){
-        //        WOWBuyCarMananger.updateBadge(true)
         
         NotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
         if isPresent{
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                 topNaVC?.dismiss(animated: true, completion: nil)
-                //                UIApplication.appTabBarController.selectedIndex = 0
             })
         }else {
             //进入首页

@@ -31,6 +31,12 @@ class WOWCodeLoginController: WOWBaseViewController {
         print("xiaohui")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        phoneTextField.text = ""
+        codeTextField.text = ""
+    }
+    
     //MARK:Private Method
     override func setUI() {
         wechatButton.isHidden = !WXApi.isWXAppInstalled()

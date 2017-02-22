@@ -139,6 +139,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
                 case 301:
                     if let s  = t.moduleContentTmp?["categories"] as? [AnyObject] {
                          t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
+                         t.name = (t.moduleContentTmp?["name"] as? String) ?? "场景"
                     }
                     
                 case 801:

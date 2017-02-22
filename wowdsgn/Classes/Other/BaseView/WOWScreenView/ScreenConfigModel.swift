@@ -14,7 +14,7 @@ class ScreenConfigModel:NSObject,Mappable{
     var colorList       : [ScreenModel]?
     var styleList       : [ScreenModel]?
     var sceneList       : [ScreenModel]?
-   
+    var priceList       : [Int]?
     
     required init?(map: Map) {
         
@@ -24,6 +24,8 @@ class ScreenConfigModel:NSObject,Mappable{
         colorList           <-   map["colors"]
         styleList           <-   map["styles"]
         sceneList           <-   map["scenes"]
+        priceList           <-   map["prices"]
+        
     }
 }
 class ScreenModel:NSObject,Mappable{

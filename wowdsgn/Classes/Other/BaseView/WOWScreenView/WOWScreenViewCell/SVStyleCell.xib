@@ -14,19 +14,19 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="71" id="KGk-i7-Jjw" customClass="SVStyleCell" customModule="wowdsgn" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screen_choice" translatesAutoresizingMaskIntoConstraints="NO" id="hgr-Mi-Ndo">
-                        <rect key="frame" x="16" y="21" width="20" height="20"/>
+                        <rect key="frame" x="16" y="-10" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="HIg-ob-hVI"/>
                             <constraint firstAttribute="height" constant="20" id="azw-mg-2Do"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现代简约" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AlW-Yx-wk0">
-                        <rect key="frame" x="44" y="21" width="233" height="21"/>
+                        <rect key="frame" x="44" y="-10" width="233" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="233" id="pPd-r7-F1y"/>
                             <constraint firstAttribute="height" constant="21" id="w2f-FR-3hC"/>
@@ -35,7 +35,7 @@
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3R8-Se-PMY">
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3R8-Se-PMY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

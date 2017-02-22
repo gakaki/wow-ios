@@ -489,7 +489,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     t            = "单品推荐"
                 case 301:
                     isHiddenLien = true
-                    t            = "场景"
+                    t            = model.name ?? "场景"
                 case 104:
                     isHiddenLien = true
                     t            = model.moduleContent?.name ?? "推荐"

@@ -30,12 +30,22 @@ class SVStyleCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.register(UINib.nibName("StyleCVCell"), forCellWithReuseIdentifier: "StyleCVCell")
-        
+//        collectionView.setCollectionViewLayout(self.layout, animated: true)
+//        collectionView.layout
         collectionView.backgroundColor = GrayColorLevel5
         collectionView.delegate = self
         collectionView.dataSource = self
 
     }
+//    var layout:CollectionViewWaterfallLayout = {
+//        let l = CollectionViewWaterfallLayout()
+//        l.columnCount = 2
+//        l.minimumColumnSpacing = 0
+//        l.minimumInteritemSpacing = 0
+//        l.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+//        
+//        return l
+//    }()
     func updateCollectionViewHight(hight :CGFloat)  {
         
         self.collectionViewHeight.constant = hight
@@ -66,22 +76,10 @@ extension SVStyleCell:UICollectionViewDelegate,UICollectionViewDataSource,UIColl
         
         let model = dataArr?[indexPath.row]
         cell.showData(m: model!)
-        
+//        cell.backgroundColor = UIColor.red
         self.updateCollectionViewHight(hight: self.collectionView.collectionViewLayout.collectionViewContentSize.height)
         
         return cell
-    }
-    func clickItem(sender:UIButton) {
-        
-        
-        
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print((MGScreenWidth - ScreenViewConfig.frameX)/2 - 20)
-        return CGSize(width: (MGScreenWidth - ScreenViewConfig.frameX)/2 - 5 ,height: 44)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPathNow.section {
@@ -100,13 +98,27 @@ extension SVStyleCell:UICollectionViewDelegate,UICollectionViewDataSource,UIColl
         default:
             break
         }
+        
+        
+        
+    }
 
+    func clickItem(sender:UIButton) {
+        
+        
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-
+        return CGSize(width: (bounds.width)/2 - 5,height: 44)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 0,0,0)
     }
     
+  
     
 }

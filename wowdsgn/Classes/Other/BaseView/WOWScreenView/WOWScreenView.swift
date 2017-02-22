@@ -46,7 +46,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     var colorArr                = [ScreenModel]()
     var styleArr                = [ScreenModel]()
     var sceneArr                = [ScreenModel]()
-    var priceArr                = [ScreenModel]()
+    var priceArr                = [Int]()
     /* 配置信息 */
     var cellHightDic            = Dictionary<Int, CGFloat>()
     var arrayTitle              = [SectionModel]()
@@ -100,7 +100,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        cellHightDic = [0 : 65 ,
+        cellHightDic = [0 : 90 ,
                         1 : 65 ,
                         2 : 150 ,
                         3 : 65 ]
@@ -140,6 +140,9 @@ class WOWScreenView: UIView,CAAnimationDelegate {
                     strongSelf.styleArr = mainModel.styleList ?? []
                     strongSelf.sceneArr = []
                     strongSelf.sceneArr = mainModel.sceneList ?? []
+                    
+                    strongSelf.priceArr = []
+                    strongSelf.priceArr = mainModel.priceList ?? []
                     strongSelf.tableView.reloadData()
                     
                 }
@@ -189,7 +192,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         tableView.register(UINib.nibName(cellColorID), forCellReuseIdentifier:cellColorID)
         tableView.register(UINib.nibName(cellCloosePriceID), forCellReuseIdentifier:cellCloosePriceID)
         tableView.register(UINib.nibName(cellStyleID), forCellReuseIdentifier:cellStyleID)
-    
+        tableView.register(CloosePriceCell.self, forCellReuseIdentifier: "CloosePriceCell")
         self.addSubview(tableView)
         addObserver()
     }
@@ -264,13 +267,15 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         screenPriceArr.removeAll()
         if let min = cloosePriceModel.minPrice {
             
-            screenPriceArr  = ["minPrice":min]
+//            screenPriceArr  = ["minPrice":min]
+            screenPriceArr["minPrice"] = min
             
         }
  
         if let max = cloosePriceModel.maxPrice {
-
-            screenPriceArr  = ["maxPrice":max]
+            
+            screenPriceArr["maxPrice"] = max
+//            screenPriceArr  = ["maxPrice":max]
         }
         
         if let min = cloosePriceModel.minPrice ,let max = cloosePriceModel.maxPrice {
@@ -376,12 +381,13 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
 
         switch indexPath.section {
         case 0:
-            let cell            = tableView.dequeueReusableCell(withIdentifier: cellCloosePriceID, for: indexPath as IndexPath) as! SVCloosePriceCell
+            let cell            = tableView.dequeueReusableCell(withIdentifier: "CloosePriceCell", for: indexPath as IndexPath) as! CloosePriceCell
             
             //            cell.delegate     = self
             //            cell.indexPathNow = indexPath as NSIndexPath!
             //            cell.dataArr      = priceArr
             cell.modelPrice     = self.cloosePriceModel
+            cell.priceDataArray = priceArr
             cell.selectionStyle = .none
             return cell
         case 1:

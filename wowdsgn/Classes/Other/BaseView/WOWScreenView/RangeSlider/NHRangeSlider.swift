@@ -56,14 +56,14 @@ public class RangeSliderThumbLayer: CALayer {
     }
     
     /// stroke color
-    public var strokeColor: UIColor = UIColor.gray {
+    public var strokeColor: UIColor = UIColor.white {
         didSet {
             setNeedsDisplay()
         }
     }
     
     /// line width
-    public var lineWidth: CGFloat = 0.5 {
+    public var lineWidth: CGFloat = 0.0 {
         didSet {
             setNeedsDisplay()
         }
@@ -86,6 +86,13 @@ public class RangeSliderThumbLayer: CALayer {
         ctx.setFillColor(slider.thumbTintColor.cgColor)
         ctx.addPath(thumbPath.cgPath)
         ctx.fillPath()
+        
+        self.shadowColor = UIColor.black.cgColor
+        self.shadowOffset = CGSize(width: 0,height: 1)// 阴影偏移量
+        self.shadowOpacity = 0.16
+        self.cornerRadius = cornerRadius
+//        ctx.setShadow(offset: cg, blur: <#T##CGFloat#>, color: <#T##CGColor?#>)
+        
         
         // Outline
         ctx.setStrokeColor(strokeColor.cgColor)
@@ -161,7 +168,9 @@ open class NHRangeSlider: UIControl {
                 if val <= 0 {
                     stepValue = nil
                 }
+                gapBetweenThumbs = val
             }
+         
             
             updateLayerFrames()
         }
@@ -205,7 +214,7 @@ open class NHRangeSlider: UIControl {
     
     
     /// thumb border width
-    @IBInspectable open var thumbBorderWidth: CGFloat = 0.5 {
+    @IBInspectable open var thumbBorderWidth: CGFloat = 0.0 {
         didSet {
             lowerThumbLayer.lineWidth = thumbBorderWidth
             upperThumbLayer.lineWidth = thumbBorderWidth

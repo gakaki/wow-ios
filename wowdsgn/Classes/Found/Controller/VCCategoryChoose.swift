@@ -148,7 +148,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
     func createTvLeft() {
         
         self.title           = "全部分类"
-        tv                   = UITableView(frame:CGRect(x: 0, y: 0 , width: self.tv_width, height: MGScreenHeight), style:.plain)
+        tv                   = UITableView(frame:CGRect(x: 0, y: 0 , width: self.tv_width, height: MGScreenHeight - 64), style:.plain)
         tv.separatorColor    = UIColor(hexString:"EAEAEA")
         tv.estimatedRowHeight  = 60.w
         
@@ -167,7 +167,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         let padding                            = CGFloat(15)
         let cell_width                         = (cv_width  - padding * 3) / 2
         let cell_height                        = cell_width + 1 + 30
-        let frame                              = CGRect( x: self.tv_width, y: 0, width: cv_width, height: MGScreenHeight)
+        let frame                              = CGRect( x: self.tv_width, y: 0, width: cv_width, height: MGScreenHeight - 64)
         
         let layout                             = UICollectionViewFlowLayout()
         layout.scrollDirection                 = .vertical
@@ -194,6 +194,8 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
 //        cv.scrollEnabled                        = false
         
         cv.addBorderLeft(size: 0.3, color: UIColor(hexString:"EAEAEA")!)
+//        cv.bouncesZoom = true
+//        cv.alwaysBounceVertical = true
 //        cv.bounces                              = false
 //        cv.pagingEnabled                        = true
 //        cv.backgroundColor                      = UIColor.blackColor()

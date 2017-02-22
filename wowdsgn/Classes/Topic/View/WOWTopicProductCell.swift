@@ -14,8 +14,9 @@ class WOWTopicProductCell: UITableViewCell {
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var originalpriceLabel: UILabel!
+    @IBOutlet weak var productBgView: UIView!
 
-    var productId :Int?
+//    var productId :Int?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,7 +30,7 @@ class WOWTopicProductCell: UITableViewCell {
     
     func showData(model: WOWProductModel?) {
         if let model = model {
-            productId = model.productId
+//            productId = model.productId
             
             let img_url            = "\(model.productImg ?? "")?imageView2/0/w/400/format/webp/q/85"
             let url_obj            = URL(string:img_url)
@@ -53,12 +54,15 @@ class WOWTopicProductCell: UITableViewCell {
                 }
             }
 
+            productBgView.addAction {
+                VCRedirect.toVCProduct(model.productId)
+            }
         }
         
     }
     
-    @IBAction func buyAction(_ sender: UIButton) {
-        VCRedirect.toVCProduct(productId)
-    }
+//    @IBAction func buyAction(_ sender: UIButton) {
+//        VCRedirect.toVCProduct(productId)
+//    }
     
 }

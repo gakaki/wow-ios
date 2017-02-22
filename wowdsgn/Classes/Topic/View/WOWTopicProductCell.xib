@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJW-G3-Nmk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <rect key="frame" x="15" y="0.0" width="345" height="100"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eNP-Ar-lRi">
                                 <rect key="frame" x="10" y="10" width="80" height="80"/>
@@ -45,8 +45,8 @@
                                 <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsz-W0-YNS">
-                                <rect key="frame" x="285" y="60" width="80" height="30"/>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsz-W0-YNS">
+                                <rect key="frame" x="255" y="60" width="80" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.83137254900000002" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="XX3-Nk-8pM"/>
@@ -56,9 +56,6 @@
                                 <state key="normal" title="立即购买">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="buyAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="y5D-BT-yTx"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
@@ -80,9 +77,9 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="hJW-G3-Nmk" secondAttribute="trailing" id="5Wv-Yk-ufH"/>
+                    <constraint firstAttribute="trailing" secondItem="hJW-G3-Nmk" secondAttribute="trailing" constant="15" id="5Wv-Yk-ufH"/>
                     <constraint firstItem="hJW-G3-Nmk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6tI-NE-k1K"/>
-                    <constraint firstItem="hJW-G3-Nmk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Kbl-kS-z9h"/>
+                    <constraint firstItem="hJW-G3-Nmk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Kbl-kS-z9h"/>
                     <constraint firstAttribute="bottom" secondItem="hJW-G3-Nmk" secondAttribute="bottom" constant="15" id="wFM-jw-umb"/>
                 </constraints>
             </tableViewCellContentView>
@@ -91,6 +88,7 @@
                 <outlet property="originalpriceLabel" destination="cJd-ag-DPX" id="TEb-Sr-sIU"/>
                 <outlet property="pictureImageView" destination="eNP-Ar-lRi" id="Ymc-nQ-sRf"/>
                 <outlet property="priceLabel" destination="ZXn-2R-81J" id="b8F-jE-nZt"/>
+                <outlet property="productBgView" destination="hJW-G3-Nmk" id="FFk-s0-sHa"/>
             </connections>
             <point key="canvasLocation" x="32.5" y="86.5"/>
         </tableViewCell>

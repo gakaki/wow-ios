@@ -33,7 +33,7 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         
-        navigationItem.title = "绑定手机"
+        navigationItem.title = "手机绑定"
         
         
     }

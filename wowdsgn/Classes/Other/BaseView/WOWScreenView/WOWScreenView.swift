@@ -103,11 +103,11 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         cellHightDic = [0 : 90 ,
                         1 : 65 ,
                         2 : 150 ,
-                        3 : 65 ]
+                        3 : 220 ]
         
         
         for a in 0..<ScreenViewConfig.screenTitles.count {
-            var isOut = false
+            var isOut = true
             switch a {
             case 0,1:
                 isOut = true

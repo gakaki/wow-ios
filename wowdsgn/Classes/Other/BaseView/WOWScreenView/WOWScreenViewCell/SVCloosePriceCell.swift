@@ -108,7 +108,7 @@ class CloosePriceCell: UITableViewCell,NHRangeSliderViewDelegate{
         sliderCustomStringView.upperValue = 100.0
 
        
-        sliderCustomStringView.gapBetweenThumbs = 10
+//        sliderCustomStringView.gapBetweenThumbs = 10
         
         sliderCustomStringView.thumbLabelStyle = .FOLLOW
         sliderCustomStringView.delegate = self

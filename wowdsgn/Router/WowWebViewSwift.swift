@@ -145,6 +145,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         let myURL       = URL(string: url_final ?? "")
         let myRequest   = URLRequest(url: myURL!)
         webView.load(myRequest)
+        MobClick.e(.H5)
         //获取H5信息
         requestH5()
 

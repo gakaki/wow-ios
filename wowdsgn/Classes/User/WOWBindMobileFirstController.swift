@@ -34,7 +34,8 @@ class WOWBindMobileFirstController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
     
-            navigationItem.title = "手机绑定"
+        navigationItem.title = "修改绑定手机"
+        phoneTextField.text = WOWUserManager.userMobile
 
     }
     

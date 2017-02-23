@@ -67,6 +67,7 @@ class WOWContentTopicController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addObservers()
+        MobClick.e(.Content_topic)
         request()
         // Do any additional setup after loading the view.
     }

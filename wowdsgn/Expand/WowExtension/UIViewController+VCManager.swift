@@ -407,19 +407,17 @@ extension  UIViewController {
                 let user_id    = "wechatUser_\(open_id)"
                 TalkingDataAppCpa.onLogin(user_id)
                 AnalyaticEvent.e2(.Login,["user":user_id])
+                let model = Mapper<WOWUserModel>().map(JSONObject:result)
+                WOWUserManager.saveUserInfo(model)
                 
                 if !firstLogin {
                     //FIXME:未写的，先保存用户信息
-                    let model = Mapper<WOWUserModel>().map(JSONObject:result)
-                    WOWUserManager.saveUserInfo(model)
+                    
                     
                     VCRedirect.toLoginSuccess(isPresent)
                     
                 }else{ //第一次登陆
-                    
-                 
-                    let model = Mapper<WOWUserModel>().map(JSONObject:result)
-                    WOWUserManager.saveUserInfo(model)
+           
                     VCRedirect.toRegInfo(isPresent)
                     
                 }

@@ -30,6 +30,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mobileLabel: UILabel!
     @IBOutlet weak var wechatLabel: UILabel!
+    @IBOutlet weak var wechatCell:  UITableViewCell!
     
     var  backGroundMaskView : UIView!
     var  backGroundWindow : UIWindow!
@@ -59,6 +60,27 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     lazy var pickerContainerView :WOWPickerView = {
         let v = Bundle.main.loadNibNamed("WOWPickerView", owner: self, options: nil)?.last as! WOWPickerView
+        return v
+    }()
+    
+    //个人资料
+    lazy var aboutView:WOWAboutHeaderView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        v.labelText.text = "个人资料"
+        return v
+    }()
+    
+    //账号安全
+    lazy var accountView:WOWAboutHeaderView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        v.labelText.text = "账号安全"
+        return v
+    }()
+    
+    //其他登录方式
+    lazy var loginTypeView:WOWAboutHeaderView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        v.labelText.text = "其他登录方式"
         return v
     }()
     
@@ -206,8 +228,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 }
                 if WOWUserManager.userWechat {
                     strongSelf.wechatLabel.text = "已绑定"
+//                    strongSelf.wechatCell.accessoryType = .none
                 }else {
                     strongSelf.wechatLabel.text = "未绑定"
+//                    strongSelf.wechatCell.accessoryType = .disclosureIndicator
                 }
                 
                 strongSelf.ageTextField.isUserInteractionEnabled = false
@@ -372,8 +396,9 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 WOWHud.showMsg("微信绑定成功")
                 WOWUserManager.userWechat = true
                 strongSelf.wechatLabel.text = "已绑定"
-                let section = IndexSet(integer: 2)
-                strongSelf.tableView.reloadSections(section, with: .none)
+                let model = Mapper<WOWUserModel>().map(JSONObject:result)
+                WOWUserManager.saveUserInfo(model)
+                strongSelf.configUserInfo()
                 
             }
             
@@ -467,8 +492,31 @@ extension WOWUserInfoController{
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 30 : 12
+        return 30
     }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            return aboutView
+        case 1:
+            return accountView
+        case 2:
+            return loginTypeView
+        default:
+            return nil
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 2:
+            return 50
+        default:
+            return 0.01
+        }
+    }
+    
     fileprivate func showPickerView(){
         
         self.backGroundMaskView.isHidden = false

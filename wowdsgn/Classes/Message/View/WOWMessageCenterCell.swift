@@ -15,7 +15,9 @@ class WOWMessageCenterCell: UITableViewCell {
     @IBOutlet weak var msgContent: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var lineView: UIView!
-
+    @IBOutlet weak var msgView: UIView!
+    weak var delegate: WOWMessageInfoCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         newView.setCornerRadius(radius: 4)
@@ -40,7 +42,15 @@ class WOWMessageCenterCell: UITableViewCell {
             }
             msgContent.text = model.msgContent
             timeLabel.text = model.createTime?.stringToTimeStamp()
-        }
+            
+            msgView.addAction({[weak self] in
+                if let strongSelf = self {
+                    if let del = strongSelf.delegate {
+                        //跳转页面
+                        del.goMsgDetail(model: model)
+                    }
+                }
+            })        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

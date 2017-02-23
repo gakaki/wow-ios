@@ -100,6 +100,28 @@ class WOWMessageController: WOWBaseViewController {
         
     }
     
+    func requestMsgRead(messageId: Int, msgType: Int) {
+        //单个消息已读
+        WOWNetManager.sharedManager.requestWithTarget(.api_MessageRead(messageId: messageId, msgType: msgType), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self{
+                    ///1为系统消息；2为官方消息
+                if msgType == 1 {
+                    let count = WOWUserManager.userMsgCount - 1
+                    WOWUserManager.userMsgCount = count < 0 ? 0 : count
+                }else{
+                    let count = WOWUserManager.systemMsgCount - 1
+                    WOWUserManager.systemMsgCount = count < 0 ? 0 : count
+                }
+                //每次标记已读消息都要发一个通知，刷新前面的信封
+                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+                strongSelf.request()
+                
+            }
+        }) {(errorMsg) in
+            
+        }
+    }
+
     func configData() {
         
         tableView.reloadData()
@@ -124,6 +146,7 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMessageCenterCell
         if let array = messageArr {
             cell.showData(model: array[indexPath.row])
+            cell.delegate = self
             //如果是最后一行的话隐藏横线
             if array.count > 0 {
                 if indexPath.row == array.count - 1 {
@@ -160,4 +183,23 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
     }
 
     
+}
+
+extension WOWMessageController: WOWMessageInfoCellDelegate {
+    func goMsgDetail(model: WOWMessageModel) {
+        
+        if let messageId = model.messageId, let isRread = model.isRead, let msgType = model.msgType {
+            //只有在未读的时候才去请求接口
+            if !isRread {
+                requestMsgRead(messageId: messageId, msgType: msgType)
+            }
+        }
+        if let openType = model.openType {
+            if openType == 2 {
+                
+                WOWMessageToVc.goVc(type: model.targetType, id: model.targetId)
+                
+            }
+        }
+    }
 }

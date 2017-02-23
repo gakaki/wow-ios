@@ -46,6 +46,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     override func setUI() {
         super.setUI()
         configTable()
+        configNav()
     }
     
     func configTable(){
@@ -56,7 +57,21 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         tableView.tableFooterView = nextView
     }
     
-    
+    fileprivate func configNav(){
+        makeCustomerNavigationItem("跳过", left: false) {[weak self] in
+            if let strongSelf = self{
+                MobClick.e(UMengEvent.Bind_Other_Skip)
+                
+                if strongSelf.isPresent{
+                    strongSelf.dismiss(animated: true, completion: nil)
+                    UIApplication.appTabBarController.selectedIndex = 0
+                }else {
+                    //进入首页
+                    VCRedirect.toMainVC()
+                }
+            }
+        }
+    }
     
     override func navBack() {
         

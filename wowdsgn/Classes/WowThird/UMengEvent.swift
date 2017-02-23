@@ -44,6 +44,9 @@ public enum UMengEvent  {
     case Shoppingcart                //购物车
     case Support_Us                  //支持我们
     case Product_Detail              //商品详情
+    case H5                          //H5页面
+    case Productlist_topic           //导购专题
+    case Content_topic               //内容专题
     
     case Message_Center               //消息中心
 

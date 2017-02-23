@@ -37,7 +37,7 @@ class WOWProductListController: VCBaseNavCart {
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        MobClick.e(.Productlist_topic)
         // Do any additional setup after loading the view.
         request()
     }

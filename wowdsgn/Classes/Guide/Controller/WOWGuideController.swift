@@ -50,7 +50,7 @@ class WOWGuideController: WOWBaseViewController {
                 case .standby: break
                 
                 case .register:
-                    title1 = "绑定微信"
+                    title1 = "微信登录"
                     title2 = "手机注册"
                 backGroundColor1 = UIColor.white
                 backGroundColor2 = UIColor.white

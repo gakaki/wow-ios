@@ -15,17 +15,41 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelegat
     static func cell_type() -> Int {
         return 101 // 今日商品推荐
     }
-   var bannerCurrentArray = [WOWCarouselBanners]() //顶部轮播图数组
-     weak var delegate : HomeBrannerDelegate?
-    var imageURLArray: [String] = []
+    var bannerCurrentArray = [WOWCarouselBanners](){//顶部轮播图数组
+        didSet{
+            
+            rate = CGFloat(WOWArrayAddStr.get_img_size(str: imageURLArray[0] ))// 拿到图片的宽高比
+            
+            itemHight = MGScreenWidth * rate // 计算此Item的高度
+            
+            hightConstraint.constant = itemHight// 总高度
+            
+            
+            
+        }
+
+    }
+    
+    weak var delegate : HomeBrannerDelegate?
+    
+    var imageURLArray = [String]()
+        
+    
     @IBOutlet weak var cyclePictureView: CyclePictureView!
     @IBOutlet weak var AspectRatioConstraint: NSLayoutConstraint! // 比例
     
+    @IBOutlet weak var hightConstraint: NSLayoutConstraint!
+    
+    var rate:CGFloat = 1/1 // 宽高比
+    
+    
+    var itemHight : CGFloat = 100
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-      var heightAll:CGFloat = MGScreenWidth
+    var heightAll:CGFloat = MGScreenWidth
     func reloadBanner(_ dataArr:[WOWCarouselBanners]){
         imageURLArray = []
         for i in 0..<dataArr.count {

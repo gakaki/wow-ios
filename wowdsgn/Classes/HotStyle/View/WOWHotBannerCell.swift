@@ -17,7 +17,28 @@ class WOWHotBannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelega
     }
     var imageURLArray: [String] = []
     
-    var bannerCurrentArray = [WOWCarouselBanners]() //顶部轮播图数组
+    var bannerCurrentArray = [WOWCarouselBanners](){
+        didSet{
+            
+            rate = CGFloat(WOWArrayAddStr.get_img_size_withThreeTwo(str: imageURLArray[0] ))// 拿到图片的宽高比
+            
+            itemHight = MGScreenWidth * rate // 计算此Item的高度
+            
+            hightConstraint.constant = itemHight// 总高度
+            
+            
+            
+        }
+
+    } //顶部轮播图数组
+    
+    @IBOutlet weak var hightConstraint: NSLayoutConstraint!
+    
+    var rate:CGFloat = 2/3 // 宽高比
+    
+    
+    var itemHight : CGFloat = 100
+    
     weak var delegate : HotBrannerCellDelegate?
     
     @IBOutlet weak var cyclePictureView: CyclePictureView!

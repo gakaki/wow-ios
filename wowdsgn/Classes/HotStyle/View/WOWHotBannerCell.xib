@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,19 +21,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="213.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="KYQ-fi-cDQ" secondAttribute="height" multiplier="3:2" id="mJ7-O7-ce6"/>
+                            <constraint firstAttribute="height" constant="213.5" id="qci-7e-Uho"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="KYQ-fi-cDQ" secondAttribute="bottom" id="7UO-qM-Piq"/>
                     <constraint firstItem="KYQ-fi-cDQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OCu-CC-ioo"/>
                     <constraint firstItem="KYQ-fi-cDQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QBs-qW-F7v"/>
                     <constraint firstAttribute="trailing" secondItem="KYQ-fi-cDQ" secondAttribute="trailing" id="cAn-4P-aZA"/>
+                    <constraint firstAttribute="bottom" secondItem="KYQ-fi-cDQ" secondAttribute="bottom" id="pFS-kg-bqq"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="cyclePictureView" destination="KYQ-fi-cDQ" id="RhI-bp-Xo6"/>
+                <outlet property="hightConstraint" destination="qci-7e-Uho" id="ers-em-88K"/>
             </connections>
             <point key="canvasLocation" x="-373" y="-243.5"/>
         </tableViewCell>

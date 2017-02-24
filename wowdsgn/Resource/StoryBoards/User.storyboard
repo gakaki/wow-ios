@@ -757,7 +757,7 @@
                                         <rect key="frame" x="0.0" y="694" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zeD-eM-qKN" id="GnO-yu-HPi">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="               " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqo-N6-RQl">
@@ -800,6 +800,7 @@
                         <outlet property="mobileLabel" destination="XhE-DV-MJs" id="qYf-pv-4eX"/>
                         <outlet property="nickLabel" destination="xFv-Gs-KRI" id="3Ot-35-M5g"/>
                         <outlet property="sexTextField" destination="rU5-cw-vz4" id="fqO-ps-Qey"/>
+                        <outlet property="space" destination="Prg-rF-rB6" id="wpB-yU-kNT"/>
                         <outlet property="starTextField" destination="t5d-5h-9On" id="2Yq-b6-5Yl"/>
                         <outlet property="wechatCell" destination="zeD-eM-qKN" id="6Sc-js-cvf"/>
                         <outlet property="wechatLabel" destination="Xqo-N6-RQl" id="8y1-xv-siY"/>

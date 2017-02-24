@@ -26,7 +26,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7d-NB-1kk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-492" y="1356"/>
+            <point key="canvasLocation" x="-163" y="1323"/>
         </scene>
         <!--密码登录-->
         <scene sceneID="WLE-je-1E1">
@@ -123,8 +123,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7pY-Dl-XSa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="微信登录" image="login_wechat">
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title=" 微信登录" image="login_wechat">
                                     <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -171,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnE-sx-yeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-89" y="1303"/>
+            <point key="canvasLocation" x="-562" y="1335"/>
         </scene>
         <!--Regist Protocol Controller-->
         <scene sceneID="ofp-Pc-PEW">
@@ -1308,8 +1308,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="VI7-z8-fnb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="微信登录" image="login_wechat">
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title=" 微信登录" image="login_wechat">
                                     <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>

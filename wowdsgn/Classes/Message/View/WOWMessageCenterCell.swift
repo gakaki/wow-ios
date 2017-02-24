@@ -29,10 +29,10 @@ class WOWMessageCenterCell: UITableViewCell {
             ///1为系统消息；2为官方消息
             if model.msgType == 1 {
                 msgImg.image = UIImage(named: "systemInfo")
-                msgTitle.text = "通知"
+                msgTitle.text = "系统通知"
             }else{
                 msgImg.image = UIImage(named: "officialInfo")
-                msgTitle.text = "订单"
+                msgTitle.text = "尖叫精选"
             }
             //如果未读消息大于0，显示未读标示
             if model.unReadCount > 0 {

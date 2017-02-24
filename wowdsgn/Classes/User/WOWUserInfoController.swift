@@ -30,6 +30,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mobileLabel: UILabel!
     @IBOutlet weak var wechatLabel: UILabel!
+    @IBOutlet weak var changePwdCell: UITableViewCell!
     @IBOutlet weak var wechatCell:  UITableViewCell!
     
     var  backGroundMaskView : UIView!
@@ -530,6 +531,22 @@ extension WOWUserInfoController{
             return 50
         default:
             return 0.01
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 8
+        case 1:
+            if WOWUserManager.userMobile.isEmpty {
+                return 1
+            }else {
+                return 2
+            }
+
+        default:
+            return 1
         }
     }
     

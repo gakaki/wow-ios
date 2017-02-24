@@ -14,36 +14,47 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Foa-8B-S7h">
-                    <rect key="frame" x="20" y="10" width="235" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="axy-Nn-fbM"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="清除">
-                        <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Foa-8B-S7h">
+                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="重置">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHS-d0-vhx">
-                    <rect key="frame" x="255" y="0.0" width="120" height="50"/>
+                    <rect key="frame" x="188" y="0.0" width="187" height="50"/>
                     <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="ClE-XN-xWj"/>
-                        <constraint firstAttribute="width" constant="120" id="yRQ-X7-rwX"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="确定">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLe-VV-sYt">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="ovD-MQ-v9V"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Foa-8B-S7h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="6PO-Jh-ZWg"/>
+                <constraint firstItem="Foa-8B-S7h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6PO-Jh-ZWg"/>
+                <constraint firstItem="EHS-d0-vhx" firstAttribute="width" secondItem="Foa-8B-S7h" secondAttribute="width" id="UMV-Gs-Auz"/>
                 <constraint firstAttribute="trailing" secondItem="EHS-d0-vhx" secondAttribute="trailing" id="VTV-Jg-Akb"/>
+                <constraint firstItem="Foa-8B-S7h" firstAttribute="height" secondItem="EHS-d0-vhx" secondAttribute="height" id="ZK7-IR-6TB"/>
                 <constraint firstItem="Foa-8B-S7h" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bSD-MS-268"/>
                 <constraint firstItem="EHS-d0-vhx" firstAttribute="leading" secondItem="Foa-8B-S7h" secondAttribute="trailing" id="kIF-wD-vLs"/>
-                <constraint firstAttribute="bottom" secondItem="Foa-8B-S7h" secondAttribute="bottom" constant="10" id="tLg-Da-rUu"/>
+                <constraint firstAttribute="trailing" secondItem="xLe-VV-sYt" secondAttribute="trailing" id="ncq-KJ-HpU"/>
+                <constraint firstAttribute="bottom" secondItem="Foa-8B-S7h" secondAttribute="bottom" id="tLg-Da-rUu"/>
+                <constraint firstItem="xLe-VV-sYt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xbq-nT-1JG"/>
+                <constraint firstItem="xLe-VV-sYt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="y5l-x6-fZM"/>
                 <constraint firstAttribute="bottom" secondItem="EHS-d0-vhx" secondAttribute="bottom" id="zEt-zx-reD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

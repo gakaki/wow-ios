@@ -214,7 +214,12 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         pickDataArr = WOWConstellation
         
         self.pickerContainerView.pickerView.reloadComponent(0)
-        pickerContainerView.pickerView.selectRow(starRow - 1, inComponent: 0, animated: true)
+        if starRow == 0 {
+            pickerContainerView.pickerView.selectRow(starRow, inComponent: 0, animated: true)
+        }else {
+            pickerContainerView.pickerView.selectRow(starRow - 1, inComponent: 0, animated: true)
+        }
+        
 //        self.pickerContainerView.pickerView.reloadComponent(0)
         self.pickerContainerView.pickerView.reloadAllComponents()
         showPickerView()

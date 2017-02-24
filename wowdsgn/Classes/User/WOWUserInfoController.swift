@@ -285,7 +285,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     func bindMobile()  {
         if WOWUserManager.userMobile.isEmpty {
-            VCRedirect.bingMobileSecond()
+            VCRedirect.bingMobileSecond(entrance: .userInfo)
         }else {
             VCRedirect.bingMobileFirst()
         }
@@ -395,10 +395,11 @@ class WOWUserInfoController: WOWBaseTableViewController {
             if let strongSelf = self{
                 WOWHud.showMsg("微信绑定成功")
                 WOWUserManager.userWechat = true
-                strongSelf.wechatLabel.text = "已绑定"
                 let model = Mapper<WOWUserModel>().map(JSONObject:result)
                 WOWUserManager.saveUserInfo(model)
                 strongSelf.configUserInfo()
+                WOWUserManager.userWechat = true
+                strongSelf.wechatLabel.text = "已绑定"
                 
             }
             

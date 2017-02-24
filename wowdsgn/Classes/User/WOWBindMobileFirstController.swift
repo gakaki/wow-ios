@@ -35,17 +35,17 @@ class WOWBindMobileFirstController: WOWBaseViewController {
     override func setUI() {
     
         navigationItem.title = "修改绑定手机"
-        phoneTextField.text = WOWUserManager.userMobile
+        phoneTextField.text = WOWUserManager.userMobile.get_formted_xxPhone()
 
     }
     
     //MARK:Actions
     @IBAction func msgCodeButtonClick(_ sender: UIButton) {
-        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
-            return
-        }
+//        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
+//            return
+//        }
       
-        let mobile = phoneTextField.text ?? ""
+        let mobile = WOWUserManager.userMobile
         
         WOWNetManager.sharedManager.requestWithTarget(.api_MobileCaptcha(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
@@ -61,18 +61,18 @@ class WOWBindMobileFirstController: WOWBaseViewController {
     
     @IBAction func sureClick(_ sender: UIButton) {
         //手机号验证成功才进去验证码界面
-        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
-            return
-        }
+//        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
+//            return
+//        }
        
         if !validatePhone(codeTextField.text, tips: "请输入验证码"){
             
             return
         }
 
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OriginalMobile(mobile: phoneTextField.text!, captcha: codeTextField.text!), successClosure: {[weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OriginalMobile(mobile: WOWUserManager.userMobile, captcha: codeTextField.text!), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
-                VCRedirect.bingMobileSecond()
+                VCRedirect.bingMobileSecond(entrance: .bindMobile)
             }
         }) {(errorMsg) in
 //            if let strongSelf = self{

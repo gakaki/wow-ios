@@ -7,6 +7,10 @@
 //
 
 import UIKit
+ public enum BindMobileEntrance {
+    case userInfo
+    case bindMobile
+}
 
 class WOWBindMobileSecondViewController: WOWBaseViewController {
     //    @IBOutlet weak var tipsLabel: UILabel!
@@ -15,7 +19,7 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var msgCodeButton: UIButton!
     
-    
+    var entrance = BindMobileEntrance.userInfo     //入口
     var mobile:String!
     //MARK:Life
     override func viewDidLoad() {
@@ -34,7 +38,12 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
     override func setUI() {
         
         navigationItem.title = "手机绑定"
-        
+        switch entrance {
+        case .bindMobile:
+            phoneTextField.placeholder = "请输入新手机号"
+        default:
+            phoneTextField.placeholder = "请输入手机号"
+        }
         
     }
     

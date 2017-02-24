@@ -32,9 +32,9 @@ class WOWMessageInfoController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         if msgType == 1 {
-            self.title = "系统消息"
+            self.title = "通知"
         }else{
-            self.title = "官方消息"
+            self.title = "订单"
         }
         makeCustomerNavigationItem("全部已读", left: false){[weak self] () -> () in
             if let strongSelf = self{

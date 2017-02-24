@@ -357,13 +357,14 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
     //绑定新手机
-    public class func bingMobileSecond() {
+    public class func bingMobileSecond(entrance: BindMobileEntrance) {
         guard WOWUserManager.loginStatus else{
             toLoginVC(true)
             return
         }
         let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWBindMobileSecondViewController.self)) as! WOWBindMobileSecondViewController
         vc.hideNavigationBar = false
+        vc.entrance = entrance
         topNaVC?.pushViewController(vc, animated: true)
     }
     

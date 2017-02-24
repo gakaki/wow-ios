@@ -79,16 +79,19 @@ public class VCRedirect {
      - parameter isPresent: true：present跳转 false：push跳转
      */
     public class func toLoginVC(_ isPresent:Bool = false){
-        let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWLoginController.self)) as! WOWLoginController
-            vc.isPresent = isPresent
         if isPresent {
+            let vc = UIStoryboard.initialViewController("Login", identifier: "WOWLoginNavController") as! WOWNavigationController
+            let login = vc.topViewController as! WOWLoginController
+            login.isPresent = isPresent
             
             topNaVC?.present(vc, animated: true, completion: nil)
             
         }else {
-            
+            let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWLoginController.self)) as! WOWLoginController
+            vc.isPresent = isPresent
             topNaVC?.pushViewController(vc, animated: true)
         }
+
         
         
     }
@@ -138,7 +141,8 @@ public class VCRedirect {
         NotificationCenter.postNotificationNameOnMainThread(WOWLoginSuccessNotificationKey, object: nil)
         if isPresent{
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                topNaVC?.dismiss(animated: true, completion: nil)
+                
+                topNaVC?.topViewController?.dismiss(animated: true, completion: nil)
             })
         }else {
             //进入首页

@@ -49,7 +49,8 @@ public enum UMengEvent  {
     case Content_topic               //内容专题
     
     case Message_Center               //消息中心
-
+    case CategoryDetail                 //分类详情
+    case AllCategory                //全部分类
     
     case Guide_Join                  //引导页：加入我们
     case Guide_Safari                //引导页：先逛逛

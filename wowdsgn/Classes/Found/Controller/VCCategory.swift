@@ -107,6 +107,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     {
         super.setUI()
         
+        MobClick.e(.CategoryDetail)
         //为了在autolayout的视图里获得真的宽度
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()

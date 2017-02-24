@@ -124,10 +124,7 @@ class WOWMsgCodeController: WOWBaseViewController {
                 case .loginEntrance:
                   _ =  strongSelf.navigationController?.popViewController(animated: true)
                 default:
-                    WOWUserManager.exitLogin()
-                    NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
-                  _ =  strongSelf.navigationController?.popToRootViewController(animated: false)
-                    strongSelf.toLoginVC(true)
+                    strongSelf.reLogin()
                 }
                 
             }
@@ -138,7 +135,13 @@ class WOWMsgCodeController: WOWBaseViewController {
         }
     }
     
-
+    func reLogin()  {
+        WOWUserManager.exitLogin()
+        NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)
+        self.toLoginVC(true)
+        _ =  self.navigationController?.popToRootViewController(animated: false)
+        
+    }
     
     fileprivate func validatePhone(_ phoneNumber:String?,tips:String,is_phone:Bool = false) -> Bool{
         guard let phone = phoneNumber , !phone.isEmpty else{

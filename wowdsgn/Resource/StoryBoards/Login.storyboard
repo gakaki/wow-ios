@@ -1213,7 +1213,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="71e-tc-RHZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-879" y="1391"/>
+            <point key="canvasLocation" x="-1099" y="1404"/>
         </scene>
         <!--短信登录-->
         <scene sceneID="twQ-1N-TJH">

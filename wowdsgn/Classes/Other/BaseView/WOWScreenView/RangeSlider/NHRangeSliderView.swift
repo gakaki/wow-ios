@@ -62,7 +62,7 @@ open class NHRangeSliderView: UIView {
     }
     open var dataArray: Array = [Int]() {
         didSet {
-            self.stepValue = 100.0 / Double(dataArray.count - 1)
+            self.stepValue = 100.0 / Double((dataArray.count - 1) >= 0 ? dataArray.count - 1 : 1)
         }
     }
     /// vertical spacing
@@ -253,17 +253,22 @@ open class NHRangeSliderView: UIView {
         if let stepValue = stepValue {
             let a = Int(round(rangeSlider!.lowerValue / stepValue ))
             let b = Int(round(rangeSlider!.upperValue / stepValue ))
-            
-            self.lowerLabel?.text = dataArray[a].toString
-            if b == dataArray.count - 1 {
-                
-                 self.upperLabel?.text = dataArray[b].toString + "+"
-                
+            if dataArray.count > 0 {
+                self.lowerLabel?.text = dataArray[a].toString
+                if b == dataArray.count - 1 {
+                    
+                    self.upperLabel?.text = dataArray[b].toString + "+"
+                    
+                }else {
+                    
+                    self.upperLabel?.text = dataArray[b].toString
+                }
+
             }else {
-                
-                 self.upperLabel?.text = dataArray[b].toString
+                self.lowerLabel?.text = "0"
+                self.upperLabel?.text = "100+"
             }
-          
+            
         }
         
         if self.lowerLabel != nil {

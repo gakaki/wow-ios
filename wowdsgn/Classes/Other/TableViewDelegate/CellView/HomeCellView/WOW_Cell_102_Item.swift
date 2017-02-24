@@ -10,7 +10,7 @@ import UIKit
 
 class WOW_Cell_102_Item: UICollectionViewCell {
     @IBOutlet var bigImageView: UIImageView!
-    @IBOutlet weak var lbProductTitle: UILabel!
+//    @IBOutlet weak var lbProductTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -18,6 +18,6 @@ class WOW_Cell_102_Item: UICollectionViewCell {
         
         let url = model.bannerImgSrc ?? ""
         bigImageView.set_webimage_url(url);
-        lbProductTitle.text = model.bannerTitle ?? ""
+//        lbProductTitle.text = model.bannerTitle ?? ""
     }
 }

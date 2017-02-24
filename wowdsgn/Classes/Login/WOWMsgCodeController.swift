@@ -43,20 +43,28 @@ class WOWMsgCodeController: WOWBaseViewController {
         switch entrance {
         case .loginEntrance:
             navigationItem.title = "忘记密码"
-
+            phoneTextField.isUserInteractionEnabled = true
+            
         default:
             navigationItem.title = "修改密码"
-
+            phoneTextField.isUserInteractionEnabled = false
+            phoneTextField.text = WOWUserManager.userMobile.get_formted_xxPhone()
         }
        
     }
 
 //MARK:Actions
     @IBAction func msgCodeButtonClick(_ sender: UIButton) {
-        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
+        switch entrance {
+        case .loginEntrance:
+            mobile = phoneTextField.text ?? ""
+            
+        default:
+            mobile = WOWUserManager.userMobile
+        }
+        if !validatePhone(mobile, tips: "请输入手机号", is_phone: true){
             return
         }
-        let mobile = phoneTextField.text ?? ""
         
         WOWNetManager.sharedManager.requestWithTarget(.api_PwdResetCode(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
@@ -71,9 +79,15 @@ class WOWMsgCodeController: WOWBaseViewController {
     }
 
     @IBAction func sureClick(_ sender: UIButton) {
-        
+        switch entrance {
+        case .loginEntrance:
+            mobile = phoneTextField.text ?? ""
+            
+        default:
+            mobile = WOWUserManager.userMobile
+        }
         //手机号验证成功才进去验证码界面
-        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
+        if !validatePhone(mobile, tips: "请输入手机号", is_phone: true){
             return
         }
         if !validatePhone(codeTextField.text, tips: "请输入验证码"){
@@ -104,7 +118,7 @@ class WOWMsgCodeController: WOWBaseViewController {
 //            tipsLabel.text = "密码不能大于20位"
             return
         }
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ResetPwd(mobile:phoneTextField.text!, captcha:codeTextField.text!, newPwd:newPwdTextField.text!), successClosure: {[weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ResetPwd(mobile:mobile, captcha:codeTextField.text!, newPwd:newPwdTextField.text!), successClosure: {[weak self](result, code) in
             if let strongSelf = self{
                 switch strongSelf.entrance {
                 case .loginEntrance:
@@ -116,26 +130,6 @@ class WOWMsgCodeController: WOWBaseViewController {
                     strongSelf.toLoginVC(true)
                 }
                 
-            }
-        }) {[weak self](errorMsg) in
-            if let strongSelf = self{
-//                strongSelf.tipsLabel.text = errorMsg
-            }
-        }
-    }
-    
-    
-    fileprivate func entranceSmsCode(){
-        //手机号验证成功才进去验证码界面
-        if !validatePhone(codeTextField.text, tips: "请输入手机号", is_phone: true){
-            return
-        }
-        let mobile = codeTextField.text ?? ""
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_PwdResetCode(mobile: mobile), successClosure: { [weak self](result, code) in
-            if let strongSelf = self{
-                let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWMsgCodeController.self)) as! WOWMsgCodeController
-                vc.mobile = strongSelf.codeTextField.text
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{

@@ -453,7 +453,12 @@ extension WOWUserInfoController{
             pickDataArr = WOWSex
             
             self.pickerContainerView.pickerView.reloadComponent(0)
-            pickerContainerView.pickerView.selectRow(sex - 1, inComponent: 0, animated: true)
+            if  sex == 0 {
+                pickerContainerView.pickerView.selectRow(2, inComponent: 0, animated: true)
+            }else{
+                pickerContainerView.pickerView.selectRow(sex - 1, inComponent: 0, animated: true)
+            }
+           
             self.pickerContainerView.pickerView.reloadComponent(0)
             showPickerView()
             editingGroupAndRow = [0:3]
@@ -469,7 +474,17 @@ extension WOWUserInfoController{
         case (0,5):
             pickDataArr = WOWConstellation
             self.pickerContainerView.pickerView.reloadComponent(0)
-            pickerContainerView.pickerView.selectRow(star - 1, inComponent: 0, animated: true)
+            if star == 0 {
+                
+                pickerContainerView.pickerView.selectRow(star, inComponent: 0, animated: true)
+          
+            }else {
+                
+                pickerContainerView.pickerView.selectRow(star - 1, inComponent: 0, animated: true)
+         
+            }
+
+            
             self.pickerContainerView.pickerView.reloadComponent(0)
             showPickerView()
             editingGroupAndRow = [0:5]

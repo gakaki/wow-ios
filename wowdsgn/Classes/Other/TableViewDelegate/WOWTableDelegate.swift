@@ -399,7 +399,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         let model = dataSourceArray[section]
         switch model.moduleType ?? 0{
         case 901,1001,103:// 精选页这几个Cell UI上没有 15px
-            return CGFloat.leastNormalMagnitude
+            switch ViewControllerType ?? .Home{
+            case .HotStyle:
+                return CGFloat.leastNormalMagnitude
+            default:
+                return 10
+            }
+
         default:
              return 10
         }

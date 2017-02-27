@@ -33,6 +33,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var changePwdCell: UITableViewCell!
     @IBOutlet weak var wechatCell:  UITableViewCell!
     @IBOutlet weak var space: NSLayoutConstraint!
+    @IBOutlet weak var arrowImg: UIImageView!
     
     var  backGroundMaskView : UIView!
     var  backGroundWindow : UIWindow!
@@ -230,12 +231,12 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 }
                 if WOWUserManager.userWechat {
                     strongSelf.wechatLabel.text = "已绑定"
-                    strongSelf.wechatCell.accessoryType = .none
+                    strongSelf.arrowImg.isHidden = true
                     strongSelf.space.constant = 15
                 }else {
                     strongSelf.wechatLabel.text = "未绑定"
-                    strongSelf.wechatCell.accessoryType = .disclosureIndicator
-                    strongSelf.space.constant = 0
+                    strongSelf.arrowImg.isHidden = false
+                    strongSelf.space.constant = 40
                 }
                 
                 strongSelf.ageTextField.isUserInteractionEnabled = false

@@ -33,6 +33,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var changePwdCell: UITableViewCell!
     @IBOutlet weak var wechatCell:  UITableViewCell!
     @IBOutlet weak var space: NSLayoutConstraint!
+    @IBOutlet weak var arrowImg: UIImageView!
     
     var  backGroundMaskView : UIView!
     var  backGroundWindow : UIWindow!
@@ -230,12 +231,12 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 }
                 if WOWUserManager.userWechat {
                     strongSelf.wechatLabel.text = "已绑定"
-                    strongSelf.wechatCell.accessoryType = .none
+                    strongSelf.arrowImg.isHidden = true
                     strongSelf.space.constant = 15
                 }else {
                     strongSelf.wechatLabel.text = "未绑定"
-                    strongSelf.wechatCell.accessoryType = .disclosureIndicator
-                    strongSelf.space.constant = 0
+                    strongSelf.arrowImg.isHidden = false
+                    strongSelf.space.constant = 40
                 }
                 
                 strongSelf.ageTextField.isUserInteractionEnabled = false
@@ -394,8 +395,14 @@ class WOWUserInfoController: WOWBaseTableViewController {
         let unionid        = (userData["unionid"] ?? "") as! String
         let wechatNickName = (userData["nickname"] ?? "") as! String
         let wechatAvatar   = (userData["headimgurl"] ?? "") as! String
-
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_BindWechatInfo(openId: open_id, wechatNickName: wechatNickName, wechatAvatar: wechatAvatar, unionId: unionid), successClosure: { [weak self](result, code) in
+        let language        = (userData["language"] ?? "") as! String
+        let province        = (userData["province"] ?? "") as! String
+        let sex             = (userData["sex"] ?? 3) as! Int
+        let country         = (userData["country"] ?? "") as! String
+        
+        var params              = [String: Any]()
+        params = ["openId": open_id, "unionId": unionid, "wechatAvatar": wechatAvatar, "wechatNickName": wechatNickName, "language": language, "province": province, "sex": sex, "country": country]
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_BindWechatInfo(params: params as [String : AnyObject]), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 WOWHud.showMsg("微信绑定成功")
                 WOWUserManager.userWechat = true

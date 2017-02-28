@@ -152,6 +152,18 @@ public class WowShare {
            
         }
     }
+    
+    public static func cancle(  success_handler: @escaping (Any?) -> Void ){
+        UMSocialManager.default().cancelAuth(with: UMSocialPlatformType.wechatSession) { (result, error) in
+            if error != nil {
+                print("Share Fail with error ：%@", error)
+            }else{
+                
+                success_handler("sucess")
+            }
+        }
+    
+    }
 
 
 }

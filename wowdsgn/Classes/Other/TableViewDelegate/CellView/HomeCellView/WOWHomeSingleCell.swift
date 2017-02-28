@@ -1,16 +1,15 @@
 //
-//  WOWSenceImageCell.swift
-//  Wow
+//  WOWHomeSingleCell.swift
+//  wowdsgn
 //
-//  Created by wyp on 16/4/5.
-//  Copyright © 2016年 wowdsgn. All rights reserved.
+//  Created by 安永超 on 17/2/28.
+//  Copyright © 2017年 g. All rights reserved.
 //
 
 import UIKit
 
-class WOWSenceImageCell: UITableViewCell {
+class WOWHomeSingleCell: UITableViewCell {
 
-    @IBOutlet weak var contentImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

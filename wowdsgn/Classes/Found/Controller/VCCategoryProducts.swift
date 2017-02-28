@@ -134,32 +134,7 @@ class VCCategoryProducts:WOWBaseViewController,UIScrollViewDelegate
             make.top.bottom.equalTo(strongSelf.view).offset(0)
             }
         }
-//        configScreeningView()
-//        self.mj_footer.setTitle("", forState: MJRefreshState.Idle)
-//        self.mj_footer.setTitle("", forState: MJRefreshState.Refreshing)
-//        self.mj_footer.setTitle("", forState: MJRefreshState.Pulling)
-        
-//        //为了在autolayout的视图里获得真的宽度 主要是给snapkit用的要先来一次
-//        view.setNeedsLayout()
-//        view.layoutIfNeeded()
-        
-//        self.pageIndex = 0
-//        self.ob_content_offset.asObservable()
-//            .map { $0 }
-//            .map { y in
-//                return self.is_load_more(y)
-//            }
-//            .distinctUntilChanged()
-//            .subscribe { [unowned self] in
-//                self.title = "contentOffset.y = \($0)"
-//
-////                if $0 == true {
-//                    self.pageIndex = self.pageIndex + 1
-////                    self.request()
-////                }
-//                
-//            }
-//            .addDisposableTo(rx_disposeBag)
+
     }
     
     let ob_content_offset   = Variable(CGFloat(0))

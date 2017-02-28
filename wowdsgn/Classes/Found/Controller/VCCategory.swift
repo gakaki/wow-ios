@@ -80,23 +80,8 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         self.title = ""
         self.mj_footer.isHidden = true
         self.cv.allowsMultipleSelection = false
-
-        
-        
         
         request()
- 
-//        _ = Observable.combineLatest( ob_cid.asObservable() , ob_tab_index.asObservable() ) {
-//            ($0,$1)
-//        }
-//            .throttle(0.1, scheduler: MainScheduler.instance)
-//        .subscribe(onNext: {[weak self]cid,tab_index in
-//            if let strongSelf = self {
-//                strongSelf.refreshSubView(tab_index)
-//
-//            }
-//        })
-        
 
     }
 
@@ -107,7 +92,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     {
         super.setUI()
         
-        MobClick.e(.CategoryDetail)
+       
         //为了在autolayout的视图里获得真的宽度
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()

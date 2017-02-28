@@ -18,10 +18,10 @@ import Foundation
 let WOWShareUrl                         = "m.wowdsgn.com" // 正式服务器 分享地址
 //let WOWShareUrl                         = "http://10.0.60.121:7070"// 测试服务器分享地址
 
-//   let BaseUrl = "http://10.0.60.121:8080/" //内网开发
+   let BaseUrl = "http://10.0.60.121:8080/" //内网开发
 //   let BaseUrl = "http://10.0.60.91:8080/"
 //  let BaseUrl = "https://wowdsgn.iok.la" //外网访问内网也可以的地址
-   let BaseUrl = "https://mobile-api.wowdsgn.com/" //外网开发
+//   let BaseUrl = "https://mobile-api.wowdsgn.com/" //外网开发
 //  let BaseUrl = "https://mobile-api.stg.wowdsgn.com/" //内网开发
 
 let urlItunes = "https://itunes.apple.com/cn/app/jian-jiao-she-ji/id1110300308?mt=8" // Appstore 链接

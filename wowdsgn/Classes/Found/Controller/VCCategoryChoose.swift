@@ -211,7 +211,7 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
     override func setUI() {
         super.setUI()
         
-        MobClick.e(.AllCategory)
+        
         createTvLeft()
         createCvRight()
     }

@@ -2,7 +2,7 @@
 //  WOWHomeSingleCell.swift
 //  wowdsgn
 //
-//  Created by 安永超 on 17/2/27.
+//  Created by 安永超 on 17/2/28.
 //  Copyright © 2017年 g. All rights reserved.
 //
 

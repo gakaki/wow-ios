@@ -135,6 +135,7 @@ class WOWSettingController: WOWBaseTableViewController {
     fileprivate func exitLogin(){
         WOWNetManager.sharedManager.requestWithTarget(.api_Logout, successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
+//                strongSelf.cancleWecha()
                 WOWHud.showMsg("退出登录")
                 WOWUserManager.exitLogin()
                 
@@ -155,6 +156,13 @@ class WOWSettingController: WOWBaseTableViewController {
         }
 
         
+    }
+    
+    func cancleWecha()  {
+        
+        WowShare.cancle { (con) in
+            print("清楚微信缓存")
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

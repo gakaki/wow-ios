@@ -21,12 +21,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="iWL-Oz-JyM" kind="relationship" relationship="rootViewController" id="JAW-0i-TuW"/>
+                        <segue destination="JMx-Id-MkL" kind="relationship" relationship="rootViewController" id="Ynd-er-typ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHF-W0-KgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-207" y="1142"/>
+            <point key="canvasLocation" x="-847" y="1124"/>
         </scene>
         <!--尖叫设计-->
         <scene sceneID="bzw-ue-Dsp">
@@ -37,11 +37,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Qr7-pK-v6K"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WjY-BI-OED">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="jZw-sM-bw2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vUp-js-GTG" id="gO8-Bg-cym"/>
@@ -66,7 +66,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4TL-3M-Zrf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="vUp-js-GTG" customClass="WOWTableDelegate" customModule="wowdsgn" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="437" y="1886"/>
+            <point key="canvasLocation" x="230" y="1171"/>
         </scene>
         <!--Search Child Controller-->
         <scene sceneID="9pm-4I-9RS">
@@ -393,6 +393,26 @@
                 <customObject id="Yv4-lh-V50" customClass="WOWTableDelegate" customModule="wowdsgn" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-456" y="1964"/>
+        </scene>
+        <!--尖叫设计-->
+        <scene sceneID="Wwx-pC-AMR">
+            <objects>
+                <viewController title="尖叫设计" automaticallyAdjustsScrollViewInsets="NO" id="JMx-Id-MkL" customClass="WOWHomeControllers" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zg3-4L-PUH"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Xc-K2-p0g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oh3-zd-VWm">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="尖叫设计" id="tgD-eT-307"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YvN-c2-aHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-224" y="1124"/>
         </scene>
         <!--搜索-->
         <scene sceneID="f5z-DS-P3L">

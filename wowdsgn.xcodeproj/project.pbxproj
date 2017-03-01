@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0607088F1DD18D7600A91724 /* WowWebViewSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */; };
+		062560801E668A690072CA27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0625607F1E668A690072CA27 /* main.m */; };
 		067AFF631DB9C4CF00D48020 /* ExtensionEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */; };
 		069D2F581DB46AD100A059D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D2F571DB46AD100A059D0 /* AppDelegate.swift */; };
 		069D2F5F1DB46AD100A059D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 069D2F5E1DB46AD100A059D0 /* Assets.xcassets */; };
@@ -529,6 +530,7 @@
 
 /* Begin PBXFileReference section */
 		0607088D1DD18D7600A91724 /* WowWebViewSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowWebViewSwift.swift; sourceTree = "<group>"; };
+		0625607F1E668A690072CA27 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		067AFF621DB9C4CF00D48020 /* ExtensionEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionEquatable.swift; sourceTree = "<group>"; };
 		069D2F541DB46AD100A059D0 /* wowdsgn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wowdsgn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069D2F571DB46AD100A059D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1134,6 +1136,7 @@
 				069D2F631DB46AD100A059D0 /* Info.plist */,
 				06A5C46F1E13BE8100FE0A7A /* TestViewController.h */,
 				06A5C4701E13BE8100FE0A7A /* TestViewController.m */,
+				0625607F1E668A690072CA27 /* main.m */,
 			);
 			path = wowdsgn;
 			sourceTree = "<group>";
@@ -1790,7 +1793,6 @@
 			children = (
 				2D509A101DB5D30B0047CD13 /* WOWController.swift */,
 				2D01E19D1E651BCB008F71DC /* WOWHomeControllers.swift */,
-				2D509A111DB5D30B0047CD13 /* WOWLikeListController.swift */,
 				2D509A121DB5D30B0047CD13 /* WOWSearchController.swift */,
 				63EC147C1E2CB55E0027BEFD /* WOWSearchSortController.swift */,
 				2D509A431DB5D3120047CD13 /* WOWSearchChildController.swift */,
@@ -2905,6 +2907,7 @@
 				2D80F0941E0A262500B60AE8 /* WOWFeedBackCell.swift in Sources */,
 				63D20CF51E23863800105FBC /* AuxiliaryModels.swift in Sources */,
 				069D32E61DB47ADD00A059D0 /* WOWHud.swift in Sources */,
+				062560801E668A690072CA27 /* main.m in Sources */,
 				63A2F56C1DF9014B002DF56F /* WOWRightNavigationItem.swift in Sources */,
 				634AA5E61DDC329500E49D23 /* WOWCommentController.swift in Sources */,
 				069D324C1DB47ADD00A059D0 /* WOWBaseTableViewCell.swift in Sources */,

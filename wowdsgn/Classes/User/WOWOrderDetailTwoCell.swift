@@ -12,7 +12,7 @@ class WOWOrderDetailTwoCell: UITableViewCell {
     @IBOutlet weak var orderNumberLabel: UILabel! // 订单号
     @IBOutlet weak var orderTimeLabel: UILabel! // 下单时间
     @IBOutlet weak var orderTypeLabel: UILabel! // 订单状态
-    var orderNewDetailModel : WOWNewOrderDetailModel?
+    var orderNewDetailModel : WOWNewOrderDetailModel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,11 +21,11 @@ class WOWOrderDetailTwoCell: UITableViewCell {
     func showData(_ m:WOWNewOrderDetailModel){
         orderNewDetailModel = m
         
-        orderNumberLabel.text = "订单： " + (orderNewDetailModel!.orderCode)!
+        orderNumberLabel.text = "订单： " + (orderNewDetailModel.orderCode ?? "")
         
         
-        orderTypeLabel.text = orderNewDetailModel!.orderStatusName
-        orderTimeLabel.text = "下单时间：" + (orderNewDetailModel!.orderCreateTimeFormat)!
+        orderTypeLabel.text = orderNewDetailModel.orderStatusName
+        orderTimeLabel.text = "下单时间：" + (orderNewDetailModel.orderCreateTimeFormat ?? "")
         switch m.orderStatus! {
         case 4,5,6:
             orderTypeLabel.textColor = UIColor.init(hexString: "000000")

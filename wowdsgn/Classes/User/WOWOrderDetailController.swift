@@ -334,6 +334,17 @@ class WOWOrderDetailController: WOWBaseViewController{
             
         }
     }
+    // MARK: 获取已经发货清单的商品的总数
+    func getOrderGoodsNumber(packages : [WOWNewForGoodsModel]?){
+        if let forGoodsArr = packages {
+            self.goodsArray = forGoodsArr
+            if forGoodsArr.count > 0 {
+                self.orderGoodsNumber = forGoodsArr[0].orderItems?.count > 3 ? 3 : forGoodsArr[0].orderItems?.count
+                
+            }
+        }
+        
+    }
     /**
      拿到 定制tableView 所需要的数据
      */
@@ -341,14 +352,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         switch OrderDetailNewaType {
         case .forGoods,.finish:
             /// 拿出发货的商品数组
-            if  let forGoodsArr = self.orderNewDetailModel?.packages {
-                self.goodsArray = forGoodsArr
-
-                self.orderGoodsNumber = forGoodsArr[0].orderItems?.count > 3 ? 3 : forGoodsArr[0].orderItems?.count
-                
-                
-            }
-            
+            self.getOrderGoodsNumber(packages: self.orderNewDetailModel?.packages)
             
         case .payMent,.noForGoods:
             
@@ -361,13 +365,9 @@ class WOWOrderDetailController: WOWBaseViewController{
             
             
         default:
+            
             /// 拿出发货的商品数组
-            if  let forGoodsArr = self.orderNewDetailModel?.packages {
-                self.goodsArray = forGoodsArr
-              
-                self.orderGoodsNumber = forGoodsArr[0].orderItems?.count > 3 ? 3 : forGoodsArr[0].orderItems?.count
-                
-            }
+            self.getOrderGoodsNumber(packages: self.orderNewDetailModel?.packages)
             
             /// 拿出未发货的商品数组
             if  let noForGoodsArr = self.orderNewDetailModel?.unShipOutOrderItems {
@@ -806,10 +806,18 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     returnCell = cell
                 }else{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailSThreeCell", for: indexPath) as! WOWOrderDetailSThreeCell
+                   
                     if let orderNewDetailModel = orderNewDetailModel {
-                        
-                        cell.personNameLabel.text = "由 " + orderNewDetailModel.packages![(indexPath as NSIndexPath).section].deliveryCompanyName! + " 派送中"
-                        cell.addressLabel.text    = "运单号：" + orderNewDetailModel.packages![(indexPath as NSIndexPath).section].deliveryOrderNo!
+                        if let packages = orderNewDetailModel.packages { // 取出发货的清单数据
+                            if let deliveryCompanyName = packages[indexPath.section].deliveryCompanyName { // 取出发货的快递公司
+                                cell.personNameLabel.text = "由 " + deliveryCompanyName  + " 派送中"
+                            }
+                            if let deliveryOrderNo = packages[indexPath.section].deliveryOrderNo { // 取出发货的快递单号
+                                cell.addressLabel.text    = "运单号：" + deliveryOrderNo
+
+                            }
+
+                        }
                         
                     }
                     returnCell = cell
@@ -909,13 +917,24 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 
                 if (indexPath as NSIndexPath).row == 0 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailSThreeCell", for: indexPath) as! WOWOrderDetailSThreeCell
+                    
                     if let orderNewDetailModel = orderNewDetailModel {
-                        
-                        cell.personNameLabel.text = "包裹" + ((indexPath as NSIndexPath).section - 1).toString + "：" + orderNewDetailModel.packages![indexPath.section - 2].deliveryCompanyName!
-                        cell.addressLabel.text    = "运单号：" + orderNewDetailModel.packages![(indexPath as NSIndexPath).section - 2].deliveryOrderNo!
+                        if let packages = orderNewDetailModel.packages { // 取出发货的清单数据
+                            if let deliveryCompanyName = packages[indexPath.section - 2].deliveryCompanyName { // 取出发货的快递公司
+                                
+                                cell.personNameLabel.text = "包裹" + (indexPath.section - 1).toString + "：" + deliveryCompanyName
+                                
+                            }
+                            if let deliveryOrderNo = packages[indexPath.section - 2].deliveryOrderNo { // 取出发货的快递单号
+                                
+                                cell.addressLabel.text    = "运单号：" + deliveryOrderNo
+                                
+                            }
+                            
+                        }
                         
                     }
-                    
+
                     returnCell = cell
                     
                 }else{
@@ -1075,15 +1094,31 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             if let orderNewDetailModel = orderNewDetailModel {
                 switch OrderDetailNewaType {
                 case .payMent,.noForGoods:
-                    guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
+//                    break
+                if let unShipOutItems = orderNewDetailModel.unShipOutOrderItems { // 判断小与3 时 底部 “共几条” 不展示
+                    if unShipOutItems.count <= 3 {
                         return CellHight.minHight
                     }
+                }
+//                    guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
+//                        return CellHight.minHight
+//                    }
                     
                 case .forGoods,.finish:
-                    
-                    guard orderNewDetailModel.packages![0].orderItems!.count > 3 else {
-                        return CellHight.minHight
+//                    break
+                    if let packages = orderNewDetailModel.packages { // 判断小与3 时 底部 “共几条” 不展示
+                        if packages.count > 0 {
+                            if let orderItems =  packages[0].orderItems {
+                                if orderItems.count <= 3 {
+                                    return CellHight.minHight
+                                }
+                            }
+                        }
                     }
+
+//                    guard orderNewDetailModel.packages![0].orderItems!.count > 3 else {
+//                        return CellHight.minHight
+//                    }
                     
                 default:
                     break
@@ -1110,15 +1145,25 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             if let orderNewDetailModel = orderNewDetailModel {
                 switch OrderDetailNewaType {
                 case .payMent,.noForGoods:
-                    guard orderNewDetailModel.unShipOutOrderItems!.count > 3 else {
-                        return nil
+
+                    if let unShipOutItems = orderNewDetailModel.unShipOutOrderItems { // 判断小与3 时 底部 “共几条” 不展示
+                        if unShipOutItems.count <= 3 {
+                            return nil
+                        }
                     }
                     
                 case .forGoods,.finish:
-                    
-                    guard orderNewDetailModel.packages![0].orderItems!.count > 3 else {
-                        return nil
+
+                    if let packages = orderNewDetailModel.packages { // 判断小与3 时 底部 “共几条” 不展示
+                        if packages.count > 0 {
+                            if let orderItems =  packages[0].orderItems {
+                                if orderItems.count <= 3 {
+                                    return nil
+                                }
+                            }
+                        }
                     }
+
                     
                 default:
                     break
@@ -1185,9 +1230,16 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             }
             
         case .forGoods,.finish:
-            if  let forGoodsArr = self.orderNewDetailModel?.packages![0].orderItems {
+            
+            if  let forGoodsArr = self.orderNewDetailModel?.packages {
+                if forGoodsArr.count > 0 {
+                    if let goodsArr = forGoodsArr[0].orderItems {
+                        
+                          totalNum = "共" + goodsArr.count.toString + "件"
+                    }
+                  
+                }
                 
-                totalNum = "共" + forGoodsArr.count.toString + "件"
                 
             }
 

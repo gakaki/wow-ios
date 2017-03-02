@@ -9,8 +9,7 @@
 import UIKit
 
 class WOWBaseModuleVC: WOWBaseViewController {
-    
-
+        
     var myQueueTimer1: DispatchQueue?
     var myTimer1: DispatchSourceTimer?
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮

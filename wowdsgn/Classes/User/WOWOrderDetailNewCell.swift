@@ -19,7 +19,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
     @IBOutlet weak var tapView: UIView!
     
     @IBOutlet weak var singsTagView: TagListView!
-    var orderNewDetailModel : WOWNewOrderDetailModel?
+    var orderNewDetailModel : WOWNewOrderDetailModel!
     weak var delegeta: WOWOrderDetailNewCellDelegate?
 
     
@@ -27,59 +27,78 @@ class WOWOrderDetailNewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func showData(_ m:WOWNewOrderDetailModel, indexRow:Int){
-        orderNewDetailModel = m
-        
-        let orderProductModel = orderNewDetailModel!.unShipOutOrderItems![indexRow]
-
-        titleLabel.text = orderProductModel.productName
+    // 产品UI数据
+    func productData(model : WOWNewProductModel!){
+        titleLabel.text = model.productName
         singsTagView.textFont = UIFont.systemFont(ofSize: 10)
         singsTagView.removeAllTags()
-        for sing in orderProductModel.attributes ?? [""]{
+        for sing in model.attributes ?? [""]{
             singsTagView.addTag(sing)
         }
-        titleImageView.set_webimage_url(orderProductModel.specImg!)
+        titleImageView.set_webimage_url(model.specImg ?? "")
         tapView.addAction({[weak self] in
             if let strongSelf = self {
                 if let del = strongSelf.delegeta {
-                    del.orderGoProductDetail(orderProductModel.productId)
+                    del.orderGoProductDetail(model.productId)
                 }
             }
         })
-
-        let result = WOWCalPrice.calTotalPrice([orderProductModel.sellPrice ?? 0],counts:[1])
+        
+        let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         
         priceLabel.text = result
-        goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
-        
+        goodsNumber.text = (model.productQty)!.toString.get_formted_X()
 
-
+    }
+    // 展示未发货的数据
+    func showData(_ m:WOWNewOrderDetailModel, indexRow:Int){
         
+        orderNewDetailModel = m
+        
+        if let unShipOutItems = orderNewDetailModel.unShipOutOrderItems { // 判断是否为空
+            if unShipOutItems.count > indexRow { // 判断时否越界
+                let orderProductModel = unShipOutItems[indexRow]
+                
+                self.productData(model: orderProductModel)
+                
+            }
+        }
         
     }
+    // 展示发货的数据
     func showPackages(_ m:WOWNewOrderDetailModel, indexSection:Int, indexRow:Int){
         orderNewDetailModel = m
-        let orderProductModel = orderNewDetailModel!.packages![indexSection].orderItems![indexRow]
-
-//        colorLabel.text = orderProductModel.color?.get_formted_Space()
-        titleLabel.text = orderProductModel.productName
-        singsTagView.textFont = UIFont.systemFont(ofSize: 10)
-          singsTagView.removeAllTags()
-        for sing in orderProductModel.attributes ?? [""]{
-            singsTagView.addTag(sing)
-        }
-
-        titleImageView.set_webimage_url(orderProductModel.specImg!)
-        tapView.addAction({[weak self] in
-            if let strongSelf = self {
-                if let del = strongSelf.delegeta {
-                    del.orderGoProductDetail(orderProductModel.productId)
+        if let packages = orderNewDetailModel.packages { // 判断是否为空
+            if packages.count > indexSection {
+                if let orderItems = packages[indexSection].orderItems {
+                    if orderItems.count > indexRow {
+                        self.productData(model: orderItems[indexRow])
+                    }
                 }
             }
-        })
-        
-        priceLabel.text = (orderProductModel.sellPrice)!.toString.get_formted_price()
-        goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
+        }
+
+//        let orderProductModel = orderNewDetailModel.packages![indexSection].orderItems![indexRow]
+//
+////        colorLabel.text = orderProductModel.color?.get_formted_Space()
+//        titleLabel.text = orderProductModel.productName
+//        singsTagView.textFont = UIFont.systemFont(ofSize: 10)
+//          singsTagView.removeAllTags()
+//        for sing in orderProductModel.attributes ?? [""]{
+//            singsTagView.addTag(sing)
+//        }
+//
+//        titleImageView.set_webimage_url(orderProductModel.specImg ?? "")
+//        tapView.addAction({[weak self] in
+//            if let strongSelf = self {
+//                if let del = strongSelf.delegeta {
+//                    del.orderGoProductDetail(orderProductModel.productId)
+//                }
+//            }
+//        })
+//        
+//        priceLabel.text = (orderProductModel.sellPrice)!.toString.get_formted_price()
+//        goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
 
 //        contentLabel.text = orderProductModel.specName?.get_formted_Space()
 

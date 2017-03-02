@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window?.makeKeyAndVisible()
         self.configRootVC()
-        DLog("whats")
         return true
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -309,6 +308,9 @@ extension AppDelegate{
         }
     }
     
+      
+    
+    
     func get_version_full() -> String{
         var v = "0.0.0"
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
@@ -322,9 +324,11 @@ extension AppDelegate{
         //"返回商户" 直接关闭支付页面
         Pingpp.ignoreResultUrl(true)
         //友盟 分析
+        DLog(">> >>> 当前的友盟分析的版本是 " + MobClick.version().toString )
         MobClick.setAppVersion(self.get_version_full())
+        MobClick.setLogEnabled(false)
         UMAnalyticsConfig.sharedInstance().appKey = WOWID.UMeng.appID
-        UMAnalyticsConfig.sharedInstance().channelId = ""
+        UMAnalyticsConfig.sharedInstance().channelId = "App Store"
         MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
         MobClick.setCrashReportEnabled(true)
         

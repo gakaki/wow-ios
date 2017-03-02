@@ -165,8 +165,7 @@ public class VCRedirect {
      */
     public class func toToPidDetail(topicId: Int){
         
-//        MobClick.e(.My_Orders)
-        
+        MobClick.e(.Content_topic)
         let vc = UIStoryboard.initialViewController("HotStyle", identifier:String(describing: WOWContentTopicController.self)) as! WOWContentTopicController
    
         vc.topic_id = topicId
@@ -272,13 +271,14 @@ public class VCRedirect {
      ** 分类页面
      */
     public class func toVCCategory( _ pid: Int? ){
-        
+        MobClick.e(.CategoryDetail)
         let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory.self)) as! VCCategory
         vc.ob_cid.value     = pid ?? 10
         topNaVC?.pushViewController(vc, animated: true)
     }
     
     public class func toVCCategoryChoose(){
+        MobClick.e(.AllCategory)
         let vc          = VCCategoryChoose()
         //        vc.cid          = cid.toString
         topNaVC?.pushViewController(vc, animated: true)
@@ -306,6 +306,7 @@ public class VCRedirect {
     
     //跳转消息中心
     public class func toVCMessageCenter()  {
+        MobClick.e(UMengEvent.Message_Center)
         let vc = UIStoryboard.initialViewController("Message", identifier:String(describing: WOWMessageController.self)) as! WOWMessageController
         vc.hideNavigationBar = false
         topNaVC?.pushViewController(vc, animated: true)
@@ -327,6 +328,7 @@ public class VCRedirect {
     
     // 104 类型跳转。 linkType = 10 产品组
     public class func goToProductGroup(_ groupId:Int){
+        MobClick.e(.Productlist_topic)
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductListController.self)) as! WOWProductListController
         vc.groupId = groupId
         vc.hideNavigationBar = true
@@ -402,7 +404,14 @@ extension  UIViewController {
         let unionid        = (userData["unionid"] ?? "") as! String
         let avatar        = (userData["headimgurl"] ?? "") as! String
         let nickName        = (userData["nickname"] ?? "") as! String
-        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(openId : open_id, wechatNickName: nickName, wechatAvatar: avatar, unionId: unionid), successClosure: {[weak self] (result, code) in
+        let language        = (userData["language"] ?? "") as! String
+        let province        = (userData["province"] ?? "") as! String
+        let sex             = (userData["sex"] ?? 3) as! Int
+        let country         = (userData["country"] ?? "") as! String
+        
+        var params              = [String: Any]()
+        params = ["openId": open_id, "unionId": unionid, "wechatAvatar": avatar, "wechatNickName": nickName, "language": language, "province": province, "sex": sex, "country": country]
+        WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 let json = JSON(result)
                 DLog(json)
@@ -471,6 +480,7 @@ extension  UIViewController {
     
     //跳转消息中心
     func toVCMessageCenter()  {
+        MobClick.e(UMengEvent.Message_Center)
         let vc = UIStoryboard.initialViewController("Message", identifier:String(describing: WOWMessageController.self)) as! WOWMessageController
         vc.hideNavigationBar = false
         self.pushVC(vc)

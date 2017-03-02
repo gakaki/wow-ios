@@ -81,14 +81,6 @@ class VCTopicHeaderView:UICollectionReusableView{
             make.bottom.equalTo(self.snp.bottom).offset(-15)
         }
         
-//        view_line.snp.makeConstraints { (make) -> Void in
-//            make.width.equalTo( self.frame.width * 0.35 )
-//            make.height.equalTo(1)
-//            make.centerX.equalTo(self.snp.centerX)
-//            make.top.equalTo(label_desc.snp.bottom).offset(15)
-//        }
-//
-//                self.bringSubviewToFront(imageView)
 
     } 
     required init?(coder aDecoder: NSCoder) {
@@ -199,13 +191,6 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     }()
     
     func config_collectionView(){
-        
-//        let layout                          = CollectionViewWaterfallLayout()
-//        layout.columnCount                  = 2
-//        layout.minimumColumnSpacing         = 0
-//        layout.minimumInteritemSpacing      = 0
-//        layout.sectionInset                 = UIEdgeInsetsMake(0, 0, 0, 0)
-//        layout.headerHeight                 = header_height
 
         let cv                              = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell_reuse)
@@ -240,9 +225,6 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         super.didReceiveMemoryWarning()
     }
     
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
-//        return
-//    }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         

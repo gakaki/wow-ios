@@ -172,9 +172,7 @@ class WOWImages: WOWBaseModel, Mappable {
                             //计算原始图片的宽高比
                             
                         self.imageAspect = image.size.width / image.size.height
-                            //            //设置imageView宽高比约束
-                            //            //加载图片
-                            //
+                            
                     }
                 }catch let e {
                     DLog(e)

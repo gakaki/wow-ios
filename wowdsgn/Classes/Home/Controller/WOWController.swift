@@ -10,7 +10,7 @@
 import UIKit
 
 class WOWController: WOWBaseModuleVC {
-
+    var parentNavigationController : UINavigationController?
     var isCheackUpdate : Bool = false // 是否已经提示 刷新
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     
@@ -82,24 +82,10 @@ class WOWController: WOWBaseModuleVC {
         NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
         
-//        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+
         
     }
-//    // 刷新物品的收藏状态与否 传productId 和 favorite状态
-//    func refreshData(_ sender: Notification)  {
-//
-//        if  let send_obj =  sender.object as? [String:AnyObject] {
-//            
-//            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
-//
-//            for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态
-//                let model = dataArr[j] 
-//                model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
-//            }
-//            self.tableView.reloadData()
-//        }
-//      
-//    }
+
     
     //MARK:Private Method
     override func setUI() {
@@ -123,12 +109,12 @@ class WOWController: WOWBaseModuleVC {
         
         super.request()
         self.requestTop()
-        requestMsgCount()
+       
 //        self.requestBottom()
         
     }
 
-    func requestTop() {
+    func requestTop() {// 请求模块化数据
         let params = ["pageId": 1, "region": 1]
        
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
@@ -157,7 +143,7 @@ class WOWController: WOWBaseModuleVC {
         
     }
     
-    override func requestBottom()  {
+    override func requestBottom()  {// 请求底部瀑布流数据
         var params = [String: AnyObject]()
         
         let totalPage = 10
@@ -217,27 +203,7 @@ class WOWController: WOWBaseModuleVC {
     }
     
 
-    
-    func requestMsgCount() {
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_MessageCount, successClosure: {[weak self] (result, code) in
-            WOWHud.dismiss()
-            if let strongSelf = self{
-                let json = JSON(result)
-                let systemMsg = json["systemMessageUnReadCount"].int
-                let userMsg = json["userMessageUnReadCount"].int
-                WOWUserManager.systemMsgCount = systemMsg ?? 0
-                WOWUserManager.userMsgCount = userMsg ?? 0
-                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
-                DLog(json)
-                
-            }
-        }) { (errorMsg) in
-      
-        }
-        
-    }
-     
   }
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel

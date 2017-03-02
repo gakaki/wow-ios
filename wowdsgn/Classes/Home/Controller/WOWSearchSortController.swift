@@ -87,7 +87,7 @@ class WOWSearchSortController: BaseScreenViewController{
         if let strongSelf = self {
             view.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: strongSelf.brandH + 64)
             view.brandArray = strongSelf.brandArray
-            print(view.frame.height)
+ 
         }
         return view
         

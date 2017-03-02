@@ -91,6 +91,8 @@ class VCTopicHeaderView:UICollectionReusableView{
 
 class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
     
+    var selectedCell: WOWGoodsSmallCell!
+    
     var vo_products             = [WOWProductModel]()
     let cell_reuse              = "cell_reuse"
     let cell_header_reuse       = "cell_header_reuse"
@@ -178,6 +180,12 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.navigationController?.delegate = self
     }
     
     lazy var layout:CollectionViewWaterfallLayout = {
@@ -287,6 +295,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 cell.isSelected  = false;
                 
                 if ( row.productId != nil ){
+                    selectedCell = cell as! WOWGoodsSmallCell
                     VCRedirect.toVCProduct(row.productId!)
                 }
             }
@@ -295,6 +304,19 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     
 }
 
-
+extension VCTopic: UINavigationControllerDelegate
+{
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        if operation == .push, toVC.className == WOWProductDetailController.className
+        {
+            return MagicMovePush()
+        }
+        else
+        {
+            return nil
+        }
+    }
+}
 
 

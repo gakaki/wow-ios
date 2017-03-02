@@ -80,7 +80,7 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
         MobClick.endLogPageView(self.title)
         UIApplication.shared.keyWindow?.endEditing(true)
     }
-    
+      
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //growing io 统计页面

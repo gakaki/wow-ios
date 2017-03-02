@@ -115,6 +115,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
 
     }
     
+    //顶部view
     func addTopView(){
         cv.delegate     = self
         cv.dataSource   = self
@@ -132,6 +133,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         cv!.collectionViewLayout            = layout
     }
     
+    //底部产品模块
     func addBottomProductView(){
         
         v_bottom = VCVTMagic()
@@ -140,13 +142,6 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         v_bottom.magicView.delegate             = self
         
         v_bottom.magicView.backgroundColor = UIColor.blue
-//        v_bottom.magicView.isMenuScrollEnabled    = true
-//        v_bottom.magicView.isSwitchAnimated       = true
-//        v_bottom.magicView.isScrollEnabled        = true
-
-        
-//        self.addChildViewController(v_bottom)
-//        self.view.addSubview(v_bottom.magicView)
          self.view.insertSubview(v_bottom.magicView, belowSubview: screenBtnimg)
         v_bottom.magicView.snp.makeConstraints { [weak self](make) -> Void in
             if let strongSelf = self {
@@ -162,7 +157,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         refreshSubView(ob_tab_index.value)
     }
     
-    
+    //显示顶部视图
     func showBrand() {
         topIsHidden = false
         view.layoutIfNeeded()
@@ -175,6 +170,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         }
     }
     
+    //隐藏顶部视图
     func hiddenBrand() {
         topIsHidden = true
         view.layoutIfNeeded()

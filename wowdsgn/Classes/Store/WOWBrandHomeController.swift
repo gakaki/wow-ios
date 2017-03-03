@@ -420,11 +420,9 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
+         
         let model = dataArr[(indexPath as NSIndexPath).row]
-        vc.hideNavigationBar = true
-        vc.productId = model.productId ?? 0
-        navigationController?.pushViewController(vc, animated: true)
+        VCRedirect.toVCProduct(model.productId)
     }
 }
 

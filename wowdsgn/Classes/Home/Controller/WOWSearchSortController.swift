@@ -172,11 +172,6 @@ extension WOWSearchSortController:VTMagicViewDataSource{
     }
     func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
-        
-        //        let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
-        
-        //        if ( button == nil) {
-        //
         let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: 50)) { (asc) in
             print("you clicket status is "  , asc)
         }
@@ -187,10 +182,7 @@ extension WOWSearchSortController:VTMagicViewDataSource{
             b.image_is_show = true
         }
         return b
-        //
-        //        }
-        //
-        //        return button!
+
         
         
     }
@@ -214,7 +206,7 @@ extension WOWSearchSortController:VTMagicViewDataSource{
     }
 }
 
-extension WOWSearchSortController:VTMagicViewDelegate, WOWSearchChildControllerDelegate{
+extension WOWSearchSortController:VTMagicViewDelegate, WOWBaseProductsControllerDelegate{
     
     func refreshSubView( _ tab_index:UInt )
     {
@@ -238,6 +230,7 @@ extension WOWSearchSortController:VTMagicViewDelegate, WOWSearchChildControllerD
             
             vc.pageVc           = query_sortBy
             vc.asc              = query_asc
+            
             vc.seoKey           = keyword
             vc.pageIndex        = 1 //每次点击都初始化咯
             vc.entrance         = .searchEntrance
@@ -265,7 +258,7 @@ extension WOWSearchSortController:VTMagicViewDelegate, WOWSearchChildControllerD
         refreshSubView(itemIndex)
     }
     
-    func brandView(isHidden: Bool) {
+    func topView(isHidden: Bool) {
         if isHidden {
             if !brandIsHidden {
                 hiddenBrand()

@@ -259,6 +259,14 @@ public enum RequestApi{
     case api_NewMobileCaptcha(mobile: String)
     //绑定手机
     case api_BindMobile(mobile: String, captcha: String)
+    
+    case api_ProductScene(params: [String: AnyObject])
+    
+    case api_SceneProduct(params: [String: AnyObject])
+    
+    case api_ProductTag(params: [String: AnyObject])
+    
+    case api_TagProduct(params: [String: AnyObject])
 }
 
 
@@ -302,6 +310,14 @@ extension RequestApi:TargetType{
             return URL_scene
         case .api_SenceDetail:
             return URL_senceDetail
+        case .api_ProductScene:
+            return URL_ProductScene
+        case .api_SceneProduct:
+            return URL_SceneProduct
+        case .api_ProductTag:
+            return URL_ProductTag
+        case .api_TagProduct:
+            return URL_TagProduct
             
         //Tab 第一个栏 首页 该死的那3个url
         //Tab 第一个栏 首页 该死的那3个url

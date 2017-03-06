@@ -57,7 +57,7 @@ class WOWFavoriteController: WOWBaseViewController {
         self.navigationShadowImageView?.isHidden = true
         self.navigationController?.setNavigationBarHidden(false, animated: true)
             
-        
+        MobClick.e(.Like_Page)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

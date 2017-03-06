@@ -17,19 +17,20 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     var top_category_image_view:UIImageView!    = UIImageView()
     var v_bottom : VCVTMagic!
     
-    var ob_cid : Int                            = 0
-    var category                                = 0
+    var ob_cid : Int                            = 1         //场景或者标签的id
+    var category                                = 0         //分类id
     var ob_tab_index                            = Variable(UInt(0))
     var index                                   = 0
+    var entrance        = CategoryEntrance.scene
     
-    var vc : VCCategoryProducts?
+//    var vc : VCCategoryProducts?
     var topIsHidden = false
 
 
     
     @IBOutlet weak var cv: UICollectionView!
     @IBOutlet weak var cvTop: NSLayoutConstraint!
-    
+    @IBOutlet weak var cvHeight: NSLayoutConstraint!
     
     
     override func viewDidLoad() {
@@ -70,11 +71,24 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     }
     
     override func request(){
+        super.request()
+        
+        switch entrance {
+        case .scene:
+            requestScene()
+        case .tag:
+            requestTag()
+        default:
+            break
+        }
+        
+    }
     
+    func requestScene() {
         var params              = [String: Any]()
         let prats               = ["category"]
         
-        params = ["id": ob_cid, "prats": prats]
+        params = ["id": ob_cid, "parts": prats]
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductScene(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
@@ -85,21 +99,61 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
                     strongSelf.vo_categories = model
                     strongSelf.categoryArr = model.categories ?? [WOWSubCategoryModel]()
                     strongSelf.title                =  model.name
+                    if strongSelf.categoryArr.count > 0 {
+                        strongSelf.cvHeight.constant = 110
+                        strongSelf.top_category_image_view.set_webimage_url(model.background) //设置顶部分类背景图
+                        strongSelf.cv.reloadData()
+                        strongSelf.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
+                    }else {
+                        strongSelf.cvHeight.constant = 0
+
+                    }
                     
-                    strongSelf.top_category_image_view.set_webimage_url(model.background) //设置顶部分类背景图
-                    strongSelf.cv.reloadData()
-                    strongSelf.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
                 }
                 
-
+                
             }
             
         }){ (errorMsg) in
             DLog(errorMsg)
         }
+
+    }
+    
+    func requestTag() {
+        var params              = [String: Any]()
+        let prats               = ["category"]
         
+        params = ["id": ob_cid, "parts": prats]
         
-        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductTag(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
+            
+            if let strongSelf = self{
+                
+                let model = Mapper<WOWNewCategoryModel>().map(JSONObject:result)
+                if let model = model {
+                    strongSelf.vo_categories = model
+                    strongSelf.categoryArr = model.categories ?? [WOWSubCategoryModel]()
+                    strongSelf.title                =  model.name
+                    if strongSelf.categoryArr.count > 0 {
+                        strongSelf.cvHeight.constant = 110
+                        strongSelf.top_category_image_view.set_webimage_url(model.background) //设置顶部分类背景图
+                        strongSelf.cv.reloadData()
+                        strongSelf.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
+                    }else {
+                        strongSelf.cvHeight.constant = 0
+                        
+                    }
+
+                }
+                
+                
+            }
+            
+        }){ (errorMsg) in
+            DLog(errorMsg)
+        }
+
     }
     
 
@@ -266,7 +320,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
             if indexPath.row == 0 {
                 category = 0
             }else {
-                let row = categoryArr[(indexPath as NSIndexPath).row]
+                let row = categoryArr[(indexPath as NSIndexPath).row - 1]
                 category = row.id
             }
 
@@ -319,7 +373,7 @@ extension WOWSceneController:VTMagicViewDataSource{
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
         let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
         if (vc == nil) {
-            let vc_me       = VCCategoryProducts()
+            let vc_me = UIStoryboard.initialViewController("Found", identifier:String(describing: VCCategoryProducts.self)) as! VCCategoryProducts
             addChildViewController(vc_me)
             return vc_me
         }
@@ -336,14 +390,15 @@ extension WOWSceneController:VTMagicViewDelegate, WOWBaseProductsControllerDeleg
     
     func refreshSubView( _ tab_index:UInt )
     {
-        DLog("cid \(ob_cid.value) tab_index \(tab_index)")
+        DLog("cid \(ob_cid) tab_index \(tab_index)")
         
         if let b    = self.v_bottom.magicView.menuItem(at: tab_index) as! TooglePriceBtn?,
             let vc  = self.v_bottom.magicView.viewController(atPage: tab_index) as? VCCategoryProducts
             
         {
             let query_sortBy       = Int(tab_index) + 1 //从0开始呀这个 viewmagic的 tab_index
-            let query_cid          = ob_cid.value
+            let query_cid          = ob_cid
+            let categoryId          = category
             var query_asc          = 0
             if ( tab_index == 2){ //价格的话用他的排序 其他 正常升序
                 
@@ -359,8 +414,8 @@ extension WOWSceneController:VTMagicViewDelegate, WOWBaseProductsControllerDeleg
             
             vc.pageVc        = query_sortBy
             vc.asc           = query_asc
-            vc.query_categoryId    = query_cid
-            
+            vc.query_categoryId    = categoryId
+            vc.entrance = entrance
             
             vc.screenMinPrice     = self.screenMinPrice
             vc.screenMaxPrice     = self.screenMaxPrice
@@ -389,15 +444,18 @@ extension WOWSceneController:VTMagicViewDelegate, WOWBaseProductsControllerDeleg
     }
     
     func topView(isHidden: Bool) {
-        if isHidden {
-            if !topIsHidden {
-                hiddenBrand()
-            }
-            
-        }else {
-            if topIsHidden {
-                showBrand()
+        if categoryArr.count > 0 {
+            if isHidden {
+                if !topIsHidden {
+                    hiddenBrand()
+                }
+                
+            }else {
+                if topIsHidden {
+                    showBrand()
+                }
             }
         }
+        
     }
 }

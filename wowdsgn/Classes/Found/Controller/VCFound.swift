@@ -153,6 +153,7 @@ class VCFound: WOWBaseModuleVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        MobClick.e(.Shopping_Page)
     }
     fileprivate func addObserver(){
         NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)

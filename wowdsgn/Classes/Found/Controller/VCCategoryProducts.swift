@@ -2,7 +2,11 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-
+enum CategoryEntrance {
+    case category
+    case scene
+    case tag
+}
 
 class VCCategoryProducts:WOWBaseProductsController
 {
@@ -15,8 +19,9 @@ class VCCategoryProducts:WOWBaseProductsController
     //    var query_sortBy        = 1
     var query_categoryId    = 16
     
-       let ob_content_offset   = Variable(CGFloat(0))
-    let rx_disposeBag       = DisposeBag()
+    var sceneId             = 1
+    
+    var entrance        = CategoryEntrance.category
 
 
       override func request(){
@@ -24,6 +29,20 @@ class VCCategoryProducts:WOWBaseProductsController
           super.request()
         
         WOWHud.dismiss()
+        switch entrance {
+        case .category:
+            requestCategory()
+        case .scene:
+            requestScene()
+        case .tag:
+            requestTag()
+        default:
+            break
+        }
+
+    }
+    
+    func requestCategory() {
         params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"categoryId":self.query_categoryId]
         
         if let min = screenMinPrice {
@@ -33,7 +52,7 @@ class VCCategoryProducts:WOWBaseProductsController
         }
         if let max = screenMaxPrice {
             
-             params["maxPrice"] = max
+            params["maxPrice"] = max
             
         }
         if screenColorArr?.count > 0 {
@@ -54,50 +73,193 @@ class VCCategoryProducts:WOWBaseProductsController
         }
         print(params)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Product_By_Category(params : params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
+            
+            if let strongSelf = self {
+                strongSelf.endRefresh()
                 
-              if let strongSelf = self {
-                  strongSelf.endRefresh()
-    
-                
-                  let res                   = JSON(result)
-                  let arr                   = res["products"].arrayObject
-                  let data                  = Mapper<WOWProductModel>().mapArray( JSONObject:arr  ) ?? [WOWProductModel]()
-                
-                  DLog(strongSelf.dataArr.count)
-                
-                  //若是为第一页那么数据直接赋值
-                  if ( strongSelf.pageIndex <= 1){
-                      strongSelf.dataArr         = data.flatMap { $0 }
-    
-                  }else{
-                      //分页的话数据合并
-                      strongSelf.dataArr         = [strongSelf.dataArr, data].flatMap { $0 }
-                  }
-    
-                //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
-                if data.count < currentPageSize {
-                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["products"].arrayObject)
+                if let array = arr{
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.dataArr.append(contentsOf: array)
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < 10 {
+                        strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                        
+                    }else {
+                        strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                    }
                     
                 }else {
-                    strongSelf.collectionView.mj_footer = strongSelf.mj_footer
-                }
-                  strongSelf.collectionView.reloadData()
-                
-                if ( strongSelf.pageIndex == 1 ){
-                    if strongSelf.dataArr.count > 0 {
-                        strongSelf.collectionView.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.top)
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
                     }
+                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
                 }
-              }
-    
+                strongSelf.collectionView.reloadData()
+                if ( strongSelf.pageIndex == 1 ){
+                    if strongSelf.dataArr.count > 0{
+                        strongSelf.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.top)
+                    }
+                    
+                }
+            }
             
-          }){[weak self] (errorMsg) in
-              if let strongSelf = self {
-                  strongSelf.endRefresh()
-              }
-          }
-    
+        }){[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+            }
+        }
+
     }
     
+    func requestScene() {
+        params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
+        
+        if let min = screenMinPrice {
+            
+            params["minPrice"] = min
+            
+        }
+        if let max = screenMaxPrice {
+            
+            params["maxPrice"] = max
+            
+        }
+        if screenColorArr?.count > 0 {
+            
+            params["colorIds"] = screenColorArr
+            
+        }
+        
+        if screenStyleArr?.count > 0 {
+            
+            params["styleIds"] = screenStyleArr
+            
+        }
+        if screenScreenArr?.count > 0 {
+            
+            params["sceneIds"] = screenScreenArr
+            
+        }
+        print(params)
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_SceneProduct(params : params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
+            
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+                
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["products"].arrayObject)
+                if let array = arr{
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.dataArr.append(contentsOf: array)
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < 10 {
+                        strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                        
+                    }else {
+                        strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                    }
+                    
+                }else {
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                strongSelf.collectionView.reloadData()
+                if ( strongSelf.pageIndex == 1 ){
+                    if strongSelf.dataArr.count > 0{
+                        strongSelf.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.top)
+                    }
+                    
+                }
+            }
+            
+            
+        }){[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+            }
+        }
+
+    }
+    
+    func requestTag() {
+        params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
+        
+        if let min = screenMinPrice {
+            
+            params["minPrice"] = min
+            
+        }
+        if let max = screenMaxPrice {
+            
+            params["maxPrice"] = max
+            
+        }
+        if screenColorArr?.count > 0 {
+            
+            params["colorIds"] = screenColorArr
+            
+        }
+        
+        if screenStyleArr?.count > 0 {
+            
+            params["styleIds"] = screenStyleArr
+            
+        }
+        if screenScreenArr?.count > 0 {
+            
+            params["sceneIds"] = screenScreenArr
+            
+        }
+        print(params)
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_TagProduct(params : params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
+            
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+                
+                let arr = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["products"].arrayObject)
+                if let array = arr{
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.dataArr.append(contentsOf: array)
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < 10 {
+                        strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                        
+                    }else {
+                        strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                    }
+                    
+                }else {
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                strongSelf.collectionView.reloadData()
+                if ( strongSelf.pageIndex == 1 ){
+                    if strongSelf.dataArr.count > 0{
+                        strongSelf.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: UICollectionViewScrollPosition.top)
+                    }
+                    
+                }
+            }
+            
+        }){[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+            }
+        }
+
+    }
   
 }

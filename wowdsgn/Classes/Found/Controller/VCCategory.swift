@@ -17,7 +17,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
     var ob_tab_index                            = Variable(UInt(0))
     var index                                   = 0
     
-    var vc : VCCategoryProducts?
+//    var vc : VCCategoryProducts?
     var topIsHidden = false
     
     func get_category_index() -> Int {
@@ -322,7 +322,8 @@ extension VCCategory:VTMagicViewDataSource{
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
         let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
         if (vc == nil) {
-            let vc_me       = VCCategoryProducts()
+            let vc_me = UIStoryboard.initialViewController("Found", identifier:String(describing: VCCategoryProducts.self)) as! VCCategoryProducts
+
             addChildViewController(vc_me)
             return vc_me
         }
@@ -362,7 +363,7 @@ extension VCCategory:VTMagicViewDelegate, WOWBaseProductsControllerDelegate{
             vc.pageVc        = query_sortBy
             vc.asc           = query_asc
             vc.query_categoryId    = query_cid
-
+            vc.entrance       = .category
             
             vc.screenMinPrice     = self.screenMinPrice
             vc.screenMaxPrice     = self.screenMaxPrice

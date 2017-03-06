@@ -115,6 +115,8 @@ class WOWBaseProductsController: WOWBaseViewController {
         collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier:String(describing: WOWGoodsSmallCell.self))
         collectionView.mj_header = self.mj_header
         collectionView.mj_footer = self.mj_footer
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.emptyDataSetDelegate  = self
         collectionView.emptyDataSetSource    = self
     }

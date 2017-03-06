@@ -583,7 +583,11 @@ extension RequestApi:TargetType{
             .Api_Screen_Main,
             .Api_Screen_Price,
             .api_Deferreddeeplink,
-            .api_User:
+            .api_User,
+            .api_ProductScene,
+            .api_SceneProduct,
+            .api_ProductTag,
+            .api_TagProduct:
 
             return .GET
 
@@ -825,6 +829,14 @@ extension RequestApi:TargetType{
                 params = ["mobile": mobile]
             case let .api_BindMobile(mobile, captcha):
                 params = ["mobile": mobile, "captcha": captcha]
+            case let .api_ProductScene(param):
+                params = param
+            case let .api_SceneProduct(param):
+                params = param
+            case let .api_ProductTag(param):
+                params = param
+            case let .api_TagProduct(param):
+                params = param
 
             default:
                 break

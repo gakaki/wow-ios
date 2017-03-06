@@ -60,7 +60,7 @@ open class NHRangeSliderView: UIView {
             updateLabelDisplay()
         }
     }
-    open var dataArray: Array = [Int]() {
+    open var dataArray = [Int]() {
         didSet {
             self.stepValue = 100.0 / Double((dataArray.count - 1) >= 0 ? dataArray.count - 1 : 1)
         }

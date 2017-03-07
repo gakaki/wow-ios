@@ -62,7 +62,7 @@ class VCFound: WOWBaseModuleVC {
     func request_module_page_with_throw() throws -> Void {
         
         super.request()
-        let params = ["pageId": 2, "region": 1]
+        let params = ["pageId": 5, "region": 1]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WOWHomeBaseTopView" customModule="wowdsgn" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WOWHomeBaseTopView" customModule="wowdsgn" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -34,19 +34,38 @@
                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0aF-EZ-Ctw">
+                    <rect key="frame" x="0.0" y="69.5" width="375" height="0.5"/>
+                    <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="xI2-fg-PEk"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0BG-LU-Y80"/>
+                <constraint firstItem="0aF-EZ-Ctw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4bT-fh-APk"/>
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="centerY" secondItem="Dii-ud-17f" secondAttribute="centerY" id="Dhp-OS-dKQ"/>
+                <constraint firstAttribute="bottom" secondItem="0aF-EZ-Ctw" secondAttribute="bottom" id="MUa-Cy-xfM"/>
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="TKn-39-0d6"/>
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="centerX" secondItem="xDC-hw-hjt" secondAttribute="centerX" id="fKf-kd-uTH"/>
                 <constraint firstItem="xDC-hw-hjt" firstAttribute="top" secondItem="UBc-tb-mUh" secondAttribute="bottom" id="nhE-sx-G3D"/>
+                <constraint firstAttribute="trailing" secondItem="0aF-EZ-Ctw" secondAttribute="trailing" id="odb-uO-EFM"/>
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="leading" secondItem="Dii-ud-17f" secondAttribute="trailing" constant="5" id="uJI-Gt-jiC"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="26.5" y="4"/>
+            <connections>
+                <outlet property="lbLine" destination="0aF-EZ-Ctw" id="QO8-WC-jfQ"/>
+                <outlet property="lbSubTitle" destination="xDC-hw-hjt" id="LXc-70-zn6"/>
+                <outlet property="lbTitle" destination="UBc-tb-mUh" id="aAi-0u-6Eg"/>
+                <outlet property="view" destination="-1" id="TMK-iR-2fI"/>
+            </connections>
+            <point key="canvasLocation" x="-115" y="-90"/>
         </view>
     </objects>
 </document>

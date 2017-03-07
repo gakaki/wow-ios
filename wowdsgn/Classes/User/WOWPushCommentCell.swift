@@ -57,7 +57,9 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
         didSet{
             if userCommentData?.comments == "" {
                 inputTextView.placeholderText = "请写下您的购物体验和使用感受"
+                inputTextView.text = ""
             }else{
+                inputTextView.placeholderText = ""
                 inputTextView.text = userCommentData?.comments ?? ""
             }
         

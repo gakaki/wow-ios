@@ -17,16 +17,36 @@ class Cell_102_Project: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 102  //专题
     }
- var heightAll:CGFloat = 290
+    var heightAll:CGFloat = 290
     weak var delegate : cell_102_delegate?
-//    @IBOutlet weak var lbTitle: UILabel!
-    var dataArr:[WOWCarouselBanners]?{
+
+    var dataArr:[WOWCarouselBanners]!{
         didSet{
+            let lineNumber =  Int(dataArr.count > 3 ? 3 : dataArr.count) // item 最多为三个
+            itemAllHeight  =  0.0
+            heightSet.removeAll()
+            for item in dataArr.enumerated() { // 遍历数组 取对应图片的宽和高
+                if item.offset < lineNumber { // 取前三个图片的高度
+                    let rate =  CGFloat(WOWArrayAddStr.get_img_size(str: item.element.bannerImgSrc ?? ""))// 拿到图片的宽高比
+                    let itemHeight = CGFloat(round(itemWidth * rate) )
+                    heightSet.append(itemHeight)
+                    itemAllHeight = itemAllHeight + itemHeight
+                }
+            }
             
+            
+            heightConstraint.constant = itemAllHeight + CGFloat(10 * (lineNumber - 1)) // collectionView 的总高度
             collectionView.reloadData()
         }
     }
-
+    
+    var itemWidth:CGFloat       = MGScreenWidth - 30
+    
+    var itemAllHeight:CGFloat   = 0.0
+    
+    var heightSet = [CGFloat]()
+ 
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,7 +74,7 @@ extension Cell_102_Project:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr?.count ?? 0
+        return dataArr.count > 3 ? 3 : dataArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -66,7 +86,15 @@ extension Cell_102_Project:UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300,height: 200)
+//        if let heightSet = heightSet {
+        if  heightSet.count > indexPath.row {
+            return CGSize(width: itemWidth ,height: heightSet[indexPath.row])
+
+//        }
+        }else {
+            return CGSize(width: itemWidth ,height: 200)
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

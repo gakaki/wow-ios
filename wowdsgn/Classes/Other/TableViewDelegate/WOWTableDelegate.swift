@@ -370,6 +370,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             }
 
             returnCell = cell
+        case 105:
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_Class_Banner
+            cell.model_Class = model.moduleContent
+            cell.delegate = self.vc as! Cell_Class_BannerDelegate?
+            cell.indexPathSection = indexPath.section
+            returnCell = cell
+            
         default:
             returnCell = UITableViewCell()
             break
@@ -405,7 +412,16 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             default:
                 return 10
             }
-
+        case 102:
+            if (model.moduleContent?.link) != nil {
+                return 70
+            }else {
+                return CGFloat.leastNormalMagnitude
+            }
+        case 402:
+            
+            return 70
+            
         default:
              return 10
         }
@@ -415,7 +431,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 
-            guard section < dataSourceArray.count  else {
+            guard section < dataSourceArray.count  else {// 说明是底部列表 section
                 
                 if section == ((dataSourceArray.count ) + bottomCellLine) - 1{
                     if isOverBottomData == true {
@@ -424,7 +440,23 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 }
                 return nil
             }
-            return nil
+        
+            let model = dataSourceArray[section]
+                switch model.moduleType ?? 0{// 不同的type  不同的页脚
+                    case 102:
+                        if let link = model.moduleContent?.link {
+                            return hearderBaseBottomView(bannerModel: link)
+                        }else {
+                            return nil
+                        }
+                    case 402:
+                       
+                        return hearderBaseBottomView(bannerModel: nil, is402: true, id: model.moduleContentProduct?.id ?? 0)
+                    
+                default:
+                    return nil
+                }
+
 
     }
     
@@ -444,9 +476,11 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 let model = dataSourceArray[section]
                 
                 switch model.moduleType ?? 0 {
-                case 402,301,501,401,104,102:
+                case 301,501,401,104:
                     
                     return 50
+                case 102,402:
+                    return 70
                 case 302:
                     
                     return CGFloat.leastNormalMagnitude
@@ -485,11 +519,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 switch model.moduleType ?? 0 {
                 case 102:
                     isHiddenLien = true
-                    t            = model.moduleContent?.name ?? "专题"
+                    t            = model.moduleName ?? "专题"
+                    return hearderBaseTopView(title: t, subTitle: model.moduleDescription ?? "", isHiddenLine: true)
                 case 402:
                     isHiddenLien = false
-                    t            =  model.moduleContentProduct?.name ?? "居家好物"
-                    return WOW_Cell_402_Hearder(title: t,isHiddenLine: isHiddenLien,is402: true,id: model.moduleContentProduct?.id ?? 0)
+                    t            =  model.moduleName ?? "居家好物"
+                    return hearderBaseTopView(title: t, subTitle: model.moduleDescription ?? "")
+//                    return WOW_Cell_402_Hearder(title: t,isHiddenLine: isHiddenLien,is402: true,id: model.moduleContentProduct?.id ?? 0)
                 case 501:
                     isHiddenLien = true
                     t            = "单品推荐"
@@ -520,29 +556,15 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         }
         
     }
-    func isHiddenTopBtn(){
-        
-    }
+    // 控制展示  滑到顶部的按钮
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-//        if self.vc?.className == "WOWController"  {
-            let wowcontroller  = self.vc as? WOWBaseModuleVC
+        let wowcontroller  = self.vc as? WOWBaseModuleVC
             if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
                 wowcontroller?.topBtn.isHidden = true
             }else{
                 wowcontroller?.topBtn.isHidden = false
-            }
-//        }
-//        if self.vc?.className == "VCFound" {
-//            let wowcontroller  = self.vc as? VCFound
-//            if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
-//                wowcontroller?.topBtn.isHidden = true
-//            }else{
-//                wowcontroller?.topBtn.isHidden = false
-//            }
-//
-//        }
-        
+        }
     }
     // 底层 wowdsgn 页脚
     func footerView() -> UIView {
@@ -569,6 +591,48 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         return view
         
     }
+    
+    //  2.0 版本 居中页眉
+    func hearderBaseTopView(title: String,subTitle: String,isHiddenLine:Bool = false) -> UIView { // 137 37
+        
+        let view = Bundle.main.loadNibNamed("WOWHomeBaseTopView", owner: self, options: nil)?.last as! WOWHomeBaseTopView
+            view.lbTitle.text       = title
+        if isHiddenLine{
+            view.lbLine.isHidden    = true
+        }else{
+            view.lbLine.isHidden    = false
+        }
+            view.lbSubTitle.text    = subTitle
+        
+        return view
+        
+    }
+    // 2.0 版本 查看更多页脚
+    func hearderBaseBottomView(bannerModel: WOWCarouselBanners?,is402:Bool = false,id:Int = 0) -> UIView { // 137 37
+        
+        let view = Bundle.main.loadNibNamed("WOWHomeBaseBottomView", owner: self, options: nil)?.last as! WOWHomeBaseBottomView
+        
+        view.imgBackgroud.addTapGesture {[weak self] (sender) in
+            if let strongSelf = self {
+                if is402 {
+                    print("跳转对应的产品组的详情页\(id)")
+                    VCRedirect.goToProductGroup(id)
+                    
+                }else{
+                    let v = strongSelf.vc as? WOWBaseModuleVC
+                    v?.goController(bannerModel!)
+                }
+               
+                
+            }
+            
+        }
+       
+        
+
+        return view
+    }
+    
     // 类似本周上新的页眉 // 是否是 402 产品组模块， 是的话，显示更多 点击跳转对应的产品组详情页
     func WOW_Cell_402_Hearder(title: String,isHiddenLine:Bool,is402:Bool = false,id:Int = 0) -> UIView {
         
@@ -585,8 +649,6 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             v.btnMore.addAction {// 点击更多跳转对应的产品组详情页
                 print("跳转对应的产品组的详情页\(id)")
                 VCRedirect.goToProductGroup(id)
-                
-//                VCRedirect.toTopicList(topicId: id)
 
             }
         }else{
@@ -647,3 +709,4 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     }
     
 }
+

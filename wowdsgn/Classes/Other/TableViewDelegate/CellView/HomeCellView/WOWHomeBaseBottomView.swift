@@ -9,6 +9,18 @@
 import UIKit
 
 class WOWHomeBaseBottomView: UIView {
+    @IBOutlet weak var view: UIView!
+    @IBOutlet weak var imgBackgroud: UIImageView!
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        self.setup()
+//    }
+//    func setup() {
+//        _ = Bundle.main.loadNibNamed("WOWHomeBaseBottomView", owner: self, options: nil)?.last
+//        
+//        self.addSubview(self.view)
+//        self.view.frame = self.bounds
+//    }
 
     /*
     // Only override draw() if you perform custom drawing.

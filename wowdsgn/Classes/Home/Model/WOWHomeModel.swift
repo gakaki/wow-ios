@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 final class WOWHomeModle: WOWBaseModel,Mappable{
-    var moduleType              :   Int?
+    var moduleType              :  Int?
     var moduleContent           :  WOWCarouselBanners?// 顶部轮播，单个图片
     var moduleContentList       :  WOWModelVoTopic?//产品列表CollectionView
     var moduleContentProduct    :  WOWHomeProduct_402_Info? // 自定义产品组
@@ -21,13 +21,14 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     
    
     
-    var moduleContentTmp        :AnyObject?
+    var moduleContentTmp        :   AnyObject?
     var moduleContentArr        :  [WowModulePageItemVO]?
 
     
-    var name:String?
+    var name                    :   String?
     
-    
+    var moduleName              :   String?
+    var moduleDescription       :   String?
     
 //    var moduleContentArr:[WowModulePageItemVO]?
     var moduleContentItem:WowModulePageItemVO?
@@ -41,7 +42,8 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     
     func mapping(map: Map) {
         moduleType                  <- map["moduleType"]
-       
+        moduleName                  <- map["moduleName"]
+        moduleDescription           <- map["moduleDescription"]
         switch moduleType! {
         case 101,103://顶部轮播
             moduleContent           <- map["moduleContent"]
@@ -71,7 +73,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
 //            moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
             moduleContentTmp        <- map["moduleContent"]
 //                moduleContentTmp              <- map["moduleContent"]
-        case 104:
+        case 104,105:
              moduleContent           <- map["moduleContent"]
         default:
             break

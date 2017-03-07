@@ -58,7 +58,8 @@ class WOWHomeBannerr: WOWBaseModel,Mappable {
 final class WOWCarouselBanners: WOWBaseModel,Mappable{
     var id                    : Int?
     var name                  : String?
-
+    
+    var background            : String?
     
     var banners               :   [WOWCarouselBanners]?
     
@@ -67,6 +68,8 @@ final class WOWCarouselBanners: WOWBaseModel,Mappable{
     var bannerLinkUrl         :   String?
     var bannerImgSrc          :   String?
     var bannerLinkType        :   Int?
+    var link                  :   WOWCarouselBanners?
+    var bannerIsOut           = false  // banner 是否展开 默认为false 不展开
     
     required init?(map: Map) {
         
@@ -75,12 +78,13 @@ final class WOWCarouselBanners: WOWBaseModel,Mappable{
     func mapping(map: Map) {
         id              <- map["id"]
         name            <- map["name"]
-        
+        link            <- map["link"]
         banners                 <- map["banners"]
         bannerTitle             <- map["bannerTitle"]
         bannerLinkTargetId      <- map["bannerLinkTargetId"]
         bannerLinkUrl           <- map["bannerLinkUrl"]
         bannerImgSrc            <- map["bannerImgSrc"]
         bannerLinkType          <- map["bannerLinkType"]
+        background              <- map["background"]
     }
 }

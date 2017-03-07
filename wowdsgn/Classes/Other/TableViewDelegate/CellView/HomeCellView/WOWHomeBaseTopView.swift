@@ -10,6 +10,22 @@
 import UIKit
 
 class WOWHomeBaseTopView: UIView {
+    @IBOutlet weak var view: UIView!
+    
+    @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var lbSubTitle: UILabel!
+    @IBOutlet weak var lbLine: UILabel!
+    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        self.setup()
+//    }
+//    func setup() {
+//        _ = Bundle.main.loadNibNamed("WOWHomeBaseTopView", owner: self, options: nil)?.last
+//        
+//        self.addSubview(self.view)
+//        self.view.frame = self.bounds
+//    }
 
     /*
     // Only override draw() if you perform custom drawing.

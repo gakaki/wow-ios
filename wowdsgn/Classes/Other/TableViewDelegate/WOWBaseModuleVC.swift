@@ -202,6 +202,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
                 VCRedirect.goToProductGroup(model.bannerLinkTargetId ?? 0)
                 
             default:
+                WOWHud.showMsg("请您更新最新版本")
                 print("其他")
             }
             
@@ -355,4 +356,22 @@ extension WOWBaseModuleVC:HotBrannerCellDelegate{// 精选页轮播跳转 比例
         goController(model)
         
     }
+}
+extension WOWBaseModuleVC:Cell_Class_BannerDelegate{
+    
+    func updataTableViewCellHight(section: Int)  {
+//        
+        let indexSet = NSIndexSet.init(index: section)
+        tableView.reloadSections(indexSet as IndexSet, with: .automatic)
+//        tableView.reloadData()
+    }
+    
+    
+    // banner 跳转
+    func gotoVCFormLinkType_ClassBanner(model: WOWCarouselBanners){
+        
+        goController(model)
+        
+    }
+
 }

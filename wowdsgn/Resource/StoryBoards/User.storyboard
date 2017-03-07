@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="pW3-c3-z6F">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="pW3-c3-z6F">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -742,7 +742,7 @@
                             <tableViewSection headerTitle="账号安全" id="3RW-Ut-aba">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="4KZ-Gg-wCI">
-                                        <rect key="frame" x="0.0" y="538" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="539" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4KZ-Gg-wCI" id="316-0V-cJ2">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -775,7 +775,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="OdC-sZ-y7D">
-                                        <rect key="frame" x="0.0" y="588" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="589" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OdC-sZ-y7D" id="HKp-Cf-2XP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -804,7 +804,7 @@
                             <tableViewSection headerTitle="其他登录方式" id="UmW-cU-EL0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="zeD-eM-qKN">
-                                        <rect key="frame" x="0.0" y="694" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="696" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zeD-eM-qKN" id="GnO-yu-HPi">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>

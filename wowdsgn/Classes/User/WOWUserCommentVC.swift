@@ -154,7 +154,12 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
                     
                     commentParma.append(parma)
                     
+                }else {
+            
+                    return
                 }
+  
+
             
         }
         if commentParma.count > 0 {// 判断是否有评论信息

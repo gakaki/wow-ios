@@ -24,24 +24,25 @@ struct ModulePageType {
     static let PAGE_MODULE_TYPE_HOT_PEOPLE                      = 1001;	  //    人气标签，热门标签
     static let PAGE_MODULE_TYPE_HOT_Play                        = 103;	  //    精选页轮播 比例 3：2
     static let PAGE_MODULE_TYPE_CRE_TwoLine                     = 104;	  //    双列产品组
-    
+    static let PAGE_MODULE_TYOE_CLASS_Banner                    = 105;    //    分类可伸缩banner
     static let d = [
 
-        PAGE_MODULE_TYPE_CAROUSEL 					: HomeBrannerCell.classForCoder(), //轮播 101 banner
-        PAGE_MODULE_TYPE_BANNER 					: WOWlListCell.classForCoder(), //单条 201 banner
-        PAGE_MODULE_TYPE_CATEGORIES 				: MODULE_TYPE_CATEGORIES_CV_CELL_301.classForCoder(), //301 一级分类
-        PAGE_MODULE_TYPE_CATEGORIES_MORE 			: Cell_302_Class.classForCoder(), //302 二级分类
-        PAGE_MODULE_TYPE_NEW_ARRIVAL_RPODUCTS 		: WOWFoundWeeklyNewCell.classForCoder(), //401 本周上新
-        PAGE_MODULE_TYPE_PINTEREST_PRODUCTS 		: HomeBottomCell.classForCoder(), //402 推荐商品
-        PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT	: Cell_501_Recommend.classForCoder(), //501 单品推荐
-        PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: WOWHomeFormCell.classForCoder(),            //601 专题商品列表
-        PAGE_MODULE_TYPE_PROJECT                    : Cell_102_Project.classForCoder(),// 专题左右滑动cell
-        PAGE_MODULE_TYPE_SING_PRODUCT               : Cell_801_Product.classForCoder(),// 今日单品倒计时
-        PAGE_MODULE_TYPE_HOT_STYLE                  : WOWHotStyleCell.classForCoder(),// 精选页点赞cell
-        PAGE_MODULE_TYPE_HOT_COLUMN                 : WOWHotColumnCell.classForCoder(),// 精选页栏目cell
-        PAGE_MODULE_TYPE_HOT_PEOPLE                 : WOWHotPeopleCell.classForCoder(),// 精选页点赞cell
-        PAGE_MODULE_TYPE_HOT_Play                   : WOWHotBannerCell.classForCoder(),//    精选页轮播 比例 3：2
-        PAGE_MODULE_TYPE_CRE_TwoLine                : Cell_104_TwoLine.classForCoder()  //双列产品组 比例自适应
+        PAGE_MODULE_TYPE_CAROUSEL 					: HomeBrannerCell.classForCoder(),                      //轮播 101 banner
+        PAGE_MODULE_TYPE_BANNER 					: WOWlListCell.classForCoder(),                         //单条 201 banner
+        PAGE_MODULE_TYPE_CATEGORIES 				: MODULE_TYPE_CATEGORIES_CV_CELL_301.classForCoder(),   //301 一级分类
+        PAGE_MODULE_TYPE_CATEGORIES_MORE 			: Cell_302_Class.classForCoder(),                       //302 二级分类
+        PAGE_MODULE_TYPE_NEW_ARRIVAL_RPODUCTS 		: WOWFoundWeeklyNewCell.classForCoder(),                //401 本周上新
+        PAGE_MODULE_TYPE_PINTEREST_PRODUCTS 		: HomeBottomCell.classForCoder(),                       //402 推荐商品
+        PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT	: Cell_501_Recommend.classForCoder(),                   //501 单品推荐
+        PAGE_MODULE_TYPE_TOPIC_PRODUCTS				: WOWHomeFormCell.classForCoder(),                      //601 专题商品列表
+        PAGE_MODULE_TYPE_PROJECT                    : Cell_102_Project.classForCoder(),                     // 专题左右滑动cell
+        PAGE_MODULE_TYPE_SING_PRODUCT               : Cell_801_Product.classForCoder(),                     // 今日单品倒计时
+        PAGE_MODULE_TYPE_HOT_STYLE                  : WOWHotStyleCell.classForCoder(),                      // 精选页点赞cell
+        PAGE_MODULE_TYPE_HOT_COLUMN                 : WOWHotColumnCell.classForCoder(),                     // 精选页栏目cell
+        PAGE_MODULE_TYPE_HOT_PEOPLE                 : WOWHotPeopleCell.classForCoder(),                     // 精选页点赞cell
+        PAGE_MODULE_TYPE_HOT_Play                   : WOWHotBannerCell.classForCoder(),                     //    精选页轮播 比例 3：2
+        PAGE_MODULE_TYPE_CRE_TwoLine                : Cell_104_TwoLine.classForCoder(),                     //双列产品组 比例自适应
+        PAGE_MODULE_TYOE_CLASS_Banner               : Cell_Class_Banner.classForCoder()                     //    分类可伸缩banner
     ]
     // 通过type获取classname
     static func getIdentifier( _ id:Int ) -> String {

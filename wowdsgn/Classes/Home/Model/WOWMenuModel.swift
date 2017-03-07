@@ -9,50 +9,6 @@
 import UIKit
 import ObjectMapper
 
-/*
-final class WOWCategoryModel : Object{
-   dynamic var categoryName:String = ""
-   dynamic var categoryCount:Int = 0
-   dynamic var categoryID:String = ""
-   let subCats = List<WOWSubCategoryModel>()
-    
-    override static func primaryKey() -> String? {
-        return "categoryID"
-    }
-}
-
-extension WOWCategoryModel:Mappable{
-    func mapping(map: Map) {
-        categoryName    <-    map["name"]
-        categoryCount   <-    map["sum"]
-        categoryID      <-    map["cid"]
-    }
-    
-    convenience init?(_ map: Map) {
-        self.init()
-    }
-}
-
-
-
-
-final class WOWSubCategoryModel: Object,Mappable{
-    dynamic  var subCatName : String = ""
-    dynamic  var subCatID   : String = ""
-}
-
-extension WOWSubCategoryModel{
-      convenience init?(_ map: Map) {
-        self.init()
-    }
-    
-    func mapping(map: Map) {
-        subCatName    <-    map["name"]
-        subCatID      <-    map["cid"]
-    }
-}
-*/
-
 
 final class WOWCategoryModel : WOWBaseModel{
      var categoryName:String?
@@ -141,6 +97,8 @@ final class WOWFoundCategoryModel : WOWBaseModel,Mappable{
 final class WOWSubCategoryModel: WOWBaseModel,Mappable{
       var subCatName : String = ""
       var subCatID   : String = ""
+        var id         : Int = 0
+        var categoryName        : String = ""
 }
 
 extension WOWSubCategoryModel{
@@ -151,6 +109,30 @@ extension WOWSubCategoryModel{
     func mapping(map: Map) {
         subCatName    <-    map["name"]
         subCatID      <-    map["cid"]
+        id              <- map["id"]
+        categoryName    <- map["categoryName"]
+    }
+    
+}
+
+final class WOWNewCategoryModel: WOWBaseModel,Mappable {
+    var id                      :       Int?
+    var name                    :       String?
+    var icon                :       String?
+    var background              : String?
+    var categories              : [WOWSubCategoryModel]?
+    
+    
+    convenience init?(map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        id                  <- map["id"]
+        name                <- map["name"]
+        icon                <- map["icon"]
+        background          <- map["background"]
+        categories          <- map["categories"]
     }
     
 }

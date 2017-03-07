@@ -351,6 +351,7 @@ class WOWProductDetailController: WOWBaseViewController {
             toLoginVC(true)
             return
         }
+        MobClick.e(.Immebuy_Button)
         chooseStyle(carEntrance.payEntrance)
     }
     

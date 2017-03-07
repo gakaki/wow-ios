@@ -51,6 +51,16 @@ public enum UMengEvent  {
     case Message_Center               //消息中心
     case CategoryDetail                 //分类详情
     case AllCategory                //全部分类
+    case Home_Page                      //首页
+    case Like_Page                        //喜欢
+    case Me_Page                          //我
+    case Selection_Page                   //灵感
+    case Shopping_Page                    //分类
+    case Personal_Linfropage_Reg            //个人资料
+    case Other_Linfropage_Reg               //其他资料
+    case Bind_Phonepage_Reg                 //绑定手机
+    case Guide_Page_Reg                     //引导页
+    case Immebuy_Button                     //立即购买
     
     case Guide_Join                  //引导页：加入我们
     case Guide_Safari                //引导页：先逛逛

@@ -170,10 +170,7 @@ extension WOWFavProduct:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = dataArr[(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
-        vc.hideNavigationBar = true
-        vc.productId = product.productId
-        parentNavigationController?.pushViewController(vc, animated: true)
+        VCRedirect.toVCProduct(product.productId)
 
        
     }

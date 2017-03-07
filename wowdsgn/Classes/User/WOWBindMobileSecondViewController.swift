@@ -32,6 +32,10 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MobClick.e(.Bind_Phonepage_Reg)
+    }
     //MARK:Lazy
     
     //MARK:Private Method

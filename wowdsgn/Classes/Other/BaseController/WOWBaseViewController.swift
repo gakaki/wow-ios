@@ -72,36 +72,41 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
 //MARK:Life
     override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        endPageView()
         
-        //TalkingData统计页面
-        TalkingData.trackPageEnd( self.title )
-
-        
-        MobClick.endLogPageView(self.title)
         UIApplication.shared.keyWindow?.endEditing(true)
     }
-      
+    
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //growing io 统计页面
         
         
-        //TalkingData统计页面
-        TalkingData.trackPageBegin( self.title )
-//        self.navigationController?.hidesBarsWhenVerticallyCompact = true
-        //友盟统计页面
-        MobClick.beginLogPageView(self.title)
+        beginPageView()
         setCustomerBack()
         if hideNavigationBar {
             //设置导航栏透明
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
         }else {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
-
+            
         }
     }
     
-//    
+    func beginPageView() {
+        //TalkingData统计页面
+        TalkingData.trackPageBegin( self.title )
+        //友盟统计页面
+        MobClick.beginLogPageView(self.title)
+    }
+    
+    func endPageView() {
+        //TalkingData统计页面
+        TalkingData.trackPageEnd( self.title )
+        
+        MobClick.endLogPageView(self.title)
+    }
+//
 //    func hideNavSeprator(isHiden:Bool = true) {
 //        navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSizeMake(MGScreenWidth, 1)), forBarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
 //        navigationController?.navigationBar.shadowImage = UIImage()

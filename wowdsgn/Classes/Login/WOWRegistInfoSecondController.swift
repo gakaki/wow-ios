@@ -46,7 +46,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        MobClick.e(.Other_Linfropage_Reg)
         configPickerView()
     }
     

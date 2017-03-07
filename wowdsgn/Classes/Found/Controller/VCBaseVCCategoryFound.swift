@@ -21,14 +21,5 @@ class VCBaseVCCategoryFound:BaseScreenViewController{
         
     }
 
-    override func loadMore() {
-        if isRreshing {
-            return
-        }else{
-            pageIndex += 1
-            isRreshing = true
-        }
-    }
-    
    
 }

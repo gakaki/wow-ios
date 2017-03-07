@@ -275,6 +275,11 @@ public class VCRedirect {
         let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory.self)) as! VCCategory
         vc.ob_cid.value     = pid ?? 10
         topNaVC?.pushViewController(vc, animated: true)
+        
+//        let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: WOWSceneController.self)) as! WOWSceneController
+//        vc.entrance = .tag
+////        vc.ob_cid.value     = pid ?? 10
+//        topNaVC?.pushViewController(vc, animated: true)
     }
     
     public class func toVCCategoryChoose(){

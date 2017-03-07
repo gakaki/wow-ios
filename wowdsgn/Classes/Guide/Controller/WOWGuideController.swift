@@ -183,6 +183,7 @@ class WOWGuideController: WOWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        MobClick.e(.Guide_Page_Reg)
     }
     
     override func viewDidAppear(_ animated: Bool) {

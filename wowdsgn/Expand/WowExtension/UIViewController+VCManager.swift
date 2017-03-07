@@ -282,6 +282,19 @@ public class VCRedirect {
 //        topNaVC?.pushViewController(vc, animated: true)
     }
     
+    /*
+     ** 场景和标签页面 entrance代表入口
+     */
+    public class func toVCScene( _ pid: Int?, entrance: CategoryEntrance){
+
+        
+            let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: WOWSceneController.self)) as! WOWSceneController
+            vc.entrance = entrance
+            vc.ob_cid     = pid ?? 1
+            topNaVC?.pushViewController(vc, animated: true)
+    }
+    
+    
     public class func toVCCategoryChoose(){
         MobClick.e(.AllCategory)
         let vc          = VCCategoryChoose()

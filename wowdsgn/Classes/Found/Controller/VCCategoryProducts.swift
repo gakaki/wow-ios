@@ -2,7 +2,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-enum CategoryEntrance {
+public enum CategoryEntrance {
     case category
     case scene
     case tag

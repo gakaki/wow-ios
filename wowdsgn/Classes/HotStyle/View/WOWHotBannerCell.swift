@@ -58,7 +58,7 @@ class WOWHotBannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelega
         cyclePictureView.otherDotColor =   UIColor(hexString: "000000", alpha: 0.2)!
         cyclePictureView.imageURLArray = imageURLArray
         cyclePictureView.placeholderImage = UIImage(named: "placeholder_product")
-        cyclePictureView.timeInterval = 3
+        cyclePictureView.timeInterval = 5
         
     }
     

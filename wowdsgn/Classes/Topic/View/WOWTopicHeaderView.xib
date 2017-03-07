@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="WOWTopicHeaderView" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="332"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MGI-6W-p7A">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="MGI-6W-p7A" secondAttribute="height" multiplier="3:2" id="SNi-Kv-TUp"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMm-F6-vjb">
+                    <rect key="frame" x="15" y="264.5" width="345" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLL-EI-wEy">
+                    <rect key="frame" x="15" y="274.5" width="345" height="27.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="NMm-F6-vjb" firstAttribute="top" secondItem="MGI-6W-p7A" secondAttribute="bottom" constant="15" id="05v-h9-eYA"/>
+                <constraint firstAttribute="trailing" secondItem="NMm-F6-vjb" secondAttribute="trailing" constant="15" id="0fJ-8m-4lS"/>
+                <constraint firstAttribute="trailing" secondItem="YLL-EI-wEy" secondAttribute="trailing" constant="15" id="H22-aa-cbv"/>
+                <constraint firstItem="MGI-6W-p7A" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="RlX-J6-5iL"/>
+                <constraint firstItem="YLL-EI-wEy" firstAttribute="top" secondItem="NMm-F6-vjb" secondAttribute="bottom" constant="10" id="abJ-xU-ekn"/>
+                <constraint firstItem="MGI-6W-p7A" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="b8h-qA-zUs"/>
+                <constraint firstAttribute="bottom" secondItem="YLL-EI-wEy" secondAttribute="bottom" constant="30" id="lGY-Wo-6cq"/>
+                <constraint firstItem="NMm-F6-vjb" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="15" id="rwe-0C-ETh"/>
+                <constraint firstAttribute="trailing" secondItem="MGI-6W-p7A" secondAttribute="trailing" id="tZo-ix-e1D"/>
+                <constraint firstItem="YLL-EI-wEy" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="15" id="tsT-0y-fEj"/>
+            </constraints>
+            <connections>
+                <outlet property="descLabel" destination="YLL-EI-wEy" id="RoM-BS-MOQ"/>
+                <outlet property="titleLabel" destination="NMm-F6-vjb" id="5hm-Nj-aJf"/>
+                <outlet property="topicImg" destination="MGI-6W-p7A" id="lUE-D2-jhw"/>
+            </connections>
+            <point key="canvasLocation" x="-12" y="65"/>
+        </collectionReusableView>
+    </objects>
+</document>

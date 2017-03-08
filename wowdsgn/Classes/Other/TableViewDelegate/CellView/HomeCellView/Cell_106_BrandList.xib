@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IqF-2R-fav">
-                        <rect key="frame" x="15" y="0.0" width="305" height="119.5"/>
+                        <rect key="frame" x="15" y="0.0" width="290" height="134.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="120" id="o56-Fu-86r"/>
+                            <constraint firstAttribute="height" constant="134.5" id="Kjt-5e-WrZ"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LYS-4F-2V8">
                             <size key="itemSize" width="50" height="50"/>
@@ -32,14 +32,15 @@
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="IqF-2R-fav" secondAttribute="bottom" constant="14.5" id="9tV-sE-MkG"/>
+                    <constraint firstAttribute="bottom" secondItem="IqF-2R-fav" secondAttribute="bottom" id="9tV-sE-MkG"/>
                     <constraint firstItem="IqF-2R-fav" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="e10-yE-pqa"/>
-                    <constraint firstAttribute="trailing" secondItem="IqF-2R-fav" secondAttribute="trailing" id="fIr-Ek-tUS"/>
+                    <constraint firstAttribute="trailing" secondItem="IqF-2R-fav" secondAttribute="trailing" constant="15" id="fIr-Ek-tUS"/>
                     <constraint firstItem="IqF-2R-fav" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ue6-fB-Ifk"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="IqF-2R-fav" id="GUI-CZ-XW8"/>
+                <outlet property="heightConstraint" destination="Kjt-5e-WrZ" id="xM7-be-5Bl"/>
             </connections>
             <point key="canvasLocation" x="-249" y="-339"/>
         </tableViewCell>

@@ -97,8 +97,6 @@ class Cell_Class_Banner: UITableViewCell,ModuleViewElement {
     }
     
 }
-public let MGScreenWidth:CGFloat = UIScreen.main.bounds.size.width
-public let MGScreenHeight:CGFloat = UIScreen.main.bounds.size.height
 
 extension Cell_Class_Banner:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -161,18 +159,22 @@ extension Cell_Class_Banner:UICollectionViewDelegate,UICollectionViewDataSource,
                 cell.lb_BannerName.text = banners[indexPath.row - 1].bannerTitle ?? ""
                 
             }
-          
             return cell
         }
        
     }
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
        
         if indexPath.row == 0 {
-            return CGSize(width: MGScreenWidth,height: bannerHeight)
+            return CGSize(width: MGScreenWidth - 30,height: bannerHeight)
         }else {
-            return CGSize(width: MGScreenWidth,height: 50)
+            return CGSize(width: MGScreenWidth - 30,height: 50)
         }
       
     }
@@ -180,8 +182,9 @@ extension Cell_Class_Banner:UICollectionViewDelegate,UICollectionViewDataSource,
     //第一个cell居中显示
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(0, 0,0, 0)
+        return UIEdgeInsetsMake(10, 15,0, 15)
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.row > 0 else { // 第一行为banner 处理
             return

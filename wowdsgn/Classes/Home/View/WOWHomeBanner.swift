@@ -54,7 +54,6 @@ class WOWHomeBannerr: WOWBaseModel,Mappable {
     
 }
 
-
 final class WOWCarouselBanners: WOWBaseModel,Mappable{
     var id                    : Int?
     var name                  : String?
@@ -62,6 +61,9 @@ final class WOWCarouselBanners: WOWBaseModel,Mappable{
     var background            : String?
     
     var banners               :   [WOWCarouselBanners]?
+    var products              :   [WOWProductModel]?
+    
+    
     
     var bannerTitle           :   String?
     var bannerLinkTargetId    :   Int?
@@ -80,6 +82,8 @@ final class WOWCarouselBanners: WOWBaseModel,Mappable{
         name            <- map["name"]
         link            <- map["link"]
         banners                 <- map["banners"]
+        products                <- map["products"]
+
         bannerTitle             <- map["bannerTitle"]
         bannerLinkTargetId      <- map["bannerLinkTargetId"]
         bannerLinkUrl           <- map["bannerLinkUrl"]

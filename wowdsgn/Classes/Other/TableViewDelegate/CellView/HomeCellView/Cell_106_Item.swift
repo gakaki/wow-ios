@@ -10,10 +10,11 @@ import UIKit
 
 class Cell_106_Item: UICollectionViewCell {
 
+    @IBOutlet weak var imgBanner: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.borderColor(0.5, borderColor: BorderMColor)
+//        self.borderColor(0.5, borderColor: BorderMColor)
     }
 
 }

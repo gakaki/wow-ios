@@ -23,9 +23,8 @@ class WOWFavProduct: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if WOWUserManager.loginStatus {
-            request()
-        }
+        request()
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -67,9 +66,11 @@ class WOWFavProduct: WOWBaseViewController {
     fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.register(UINib.nibName(String(describing: WOWFavoritrSingleCell.self)), forCellWithReuseIdentifier:String(describing: WOWFavoritrSingleCell.self))
-        WOWBorderColor(collectionView)
-        
+        collectionView.emptyDataSetDelegate = self
+        collectionView.emptyDataSetSource = self
     }
     
     

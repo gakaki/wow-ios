@@ -34,6 +34,8 @@ class WOWProductListController: VCBaseNavCart {
     var topUrl : String?
     var vo_products             = [WOWProductModel]()
     var groupId  : Int!
+    
+    var selectedCell: WOWGoodsSmallCell!
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,12 @@ class WOWProductListController: VCBaseNavCart {
         // Do any additional setup after loading the view.
         request()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.navigationController?.delegate = self
+    }
+    
     override func request() {
         super.request()
         requestTop()
@@ -231,6 +239,7 @@ extension WOWProductListController:UICollectionViewDelegate,UICollectionViewData
             cell.isSelected  = false;
             
             if ( model.productId != nil ){
+                selectedCell = cell as! WOWGoodsSmallCell
                 VCRedirect.toVCProduct(model.productId!)
             }
         }
@@ -264,6 +273,21 @@ class ProductListHeaderView:UICollectionReusableView{
     }
     
     
+}
+
+extension WOWProductListController: UINavigationControllerDelegate
+{
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        if operation == .push, toVC.className == WOWProductDetailController.className
+        {
+            return MagicMovePush(selectView: self.selectedCell.pictureImageView)
+        }
+        else
+        {
+            return nil
+        }
+    }
 }
 
 

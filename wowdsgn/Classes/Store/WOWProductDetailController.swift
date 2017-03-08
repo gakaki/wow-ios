@@ -90,7 +90,7 @@ class WOWProductDetailController: WOWBaseViewController {
         v.placeholderImage = UIImage(named: "placeholder_product")
         v.currentDotColor = UIColor.black
         v.otherDotColor   = UIColor(hexString: "#000000", alpha: 0.2)!
-        v.timeInterval = 3
+        v.timeInterval = 5
         return v
     }()
     lazy var backView:WOWBuyBackView = {
@@ -252,31 +252,6 @@ class WOWProductDetailController: WOWBaseViewController {
         if imgUrlArr.count >= 1 {
             //当前主品放到轮播的第一个
             cycleView.imageURLArray = imgUrlArr
-//                placeImageView.yy_setImage(
-//                    with: URL(string:imgUrlArr[0] ),
-//                    placeholder: nil,
-//                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-//                    completion: { [weak self] (img, url, from_type, image_stage,err ) in
-//                        if let strongSelf = self{
-//                            strongSelf.shareProductImage = img
-//                        }
-//                        
-//                })
-
-//                        placeImageView.kf.setImage(
-//                with: URL(string:imgUrlArr[0] ) ?? URL(string: "placeholder_product"),
-//                placeholder: nil,
-//                options: nil,
-//                progressBlock: { (arg1, arg2) in
-//                    
-//                    
-//                },
-//                completionHandler: { [weak self](image, error, cacheType, imageUrl) in
-//                    if let strongSelf = self{
-//                        strongSelf.shareProductImage = image
-//                    }
-//                }
-//            )
             
         }
         tableView.reloadData()
@@ -634,9 +609,14 @@ extension WOWProductDetailController : CyclePictureViewDelegate {
 extension WOWProductDetailController: UINavigationControllerDelegate
 {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
         if operation == UINavigationControllerOperation.pop, toVC.className == VCTopic.className {
-            return MagicMovePop()
-        } else {
+            let popController = toVC as! VCTopic
+            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWProductListController.className {
+            let popController = toVC as! WOWProductListController
+            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
+        }else {
             return nil
         }
     }

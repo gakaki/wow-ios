@@ -21,9 +21,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     var category                                = 0         //分类id
     var ob_tab_index                            = Variable(UInt(0))
     var index                                   = 0
-    var entrance        = CategoryEntrance.scene
-    
-//    var vc : VCCategoryProducts?
+    var entrance        = CategoryEntrance.scene        //页面入口
     var topIsHidden = false
 
 
@@ -142,7 +140,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
                         strongSelf.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
                     }else {
                         strongSelf.cvHeight.constant = 0
-                        
+                        strongSelf.cv.reloadData()
                     }
 
                 }

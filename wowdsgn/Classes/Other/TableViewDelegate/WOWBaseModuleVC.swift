@@ -357,13 +357,32 @@ extension WOWBaseModuleVC:HotBrannerCellDelegate{// 精选页轮播跳转 比例
         
     }
 }
+extension WOWBaseModuleVC:Cell_106_BrandListDelegate{// 广告组 横向固定
+    
+    // banner 跳转
+    func goToVCFormLinkType_106_Banner(model: WOWCarouselBanners){
+        
+        goController(model)
+        
+    }
+}
+extension WOWBaseModuleVC:Cell_107_BrandZoneDelegate{//  品牌专区  一个推荐banner + 底部三个商品
+    // banner 跳转
+    func goToVCFormLinkType_107_BrandZone(model: WOWCarouselBanners){
+            goController(model)
+    }
+    // 跳转产品详情代理
+    func goToProductDetailVC_107_BrandZone(productId: Int?){
+        VCRedirect.toVCProduct(productId)
+    }
+}
 extension WOWBaseModuleVC:Cell_Class_BannerDelegate{
     
     func updataTableViewCellHight(section: Int)  {
-//        
+     
         let indexSet = NSIndexSet.init(index: section)
         tableView.reloadSections(indexSet as IndexSet, with: .automatic)
-//        tableView.reloadData()
+
     }
     
     

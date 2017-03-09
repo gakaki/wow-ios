@@ -71,10 +71,12 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
             
         case 301,302,501,201,401:// 今日单品
 //            moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
-            moduleContentTmp        <- map["moduleContent"]
+            moduleContentTmp            <- map["moduleContent"]
 //                moduleContentTmp              <- map["moduleContent"]
         case 104,105:
-             moduleContent           <- map["moduleContent"]
+             moduleContent              <- map["moduleContent"]
+        case 107,106:
+            moduleContent        <- map["moduleContent"]
         default:
             break
         }
@@ -113,6 +115,10 @@ class WOWHomeProduct_402_Info: WOWBaseModel,Mappable {
     var name                    :       String?
     var products                :       [WOWProductModel]?
     
+    var banners                 :       [WOWCarouselBanners]?
+    
+    var link                    :       WOWCarouselBanners?
+    
     
     required init?(map: Map) {
         
@@ -122,6 +128,8 @@ class WOWHomeProduct_402_Info: WOWBaseModel,Mappable {
         id                  <- map["id"]
         name                <- map["name"]
         products            <- map["products"]
+        link            <- map["link"]
+        banners                 <- map["banners"]
         
     }
     

@@ -7,27 +7,48 @@
 //
 
 import UIKit
-
-class Cell_106_BrandList: UITableViewCell {
-//    static func isNib() -> Bool { return true }
-//    static func cell_type() -> Int {
-//        return 106
-//    }
-    var dataArr = [WOWCarouselBanners]()
+protocol Cell_106_BrandListDelegate:class{
+    
+    func goToVCFormLinkType_106_Banner(model: WOWCarouselBanners)
+    
+}
+// 热门分类
+class Cell_106_BrandList: UITableViewCell,ModuleViewElement {
+    static func isNib() -> Bool { return true }
+    static func cell_type() -> Int {
+        return 106
+    }
+    weak var delegate : Cell_106_BrandListDelegate?
+    var dataArr = [WOWCarouselBanners](){
+        didSet{
+            if dataArr.count > 0 {
+                
+                rate = CGFloat(WOWArrayAddStr.get_img_size(str: dataArr[0].bannerImgSrc ?? ""))// 拿到图片的宽高比
+                itemHeight   = CGFloat(round(itemWidth * rate) )  // 计算此Item的高度
+                heightConstraint.constant = itemHeight
+            }
+            
+            self.collectionView.reloadData()
+            
+        }
+    }
+    
+    var rate:CGFloat = 1.0// 宽高比
+    
+    
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    var itemHeight : CGFloat = MGScreenWidth * 0.33
+    let itemWidth : CGFloat = (MGScreenWidth - 30 - 10 * 2) / 3
     
     @IBOutlet weak var collectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-//        collectionView.register(Cell_106_Item.self, forCellWithReuseIdentifier:String(describing: Cell_106_Item.self))
         
         collectionView.register(UINib.nibName(String(describing: Cell_106_Item.self)), forCellWithReuseIdentifier: "Cell_106_Item")
-//        self.contentView.layoutIfNeeded()
         collectionView.delegate = self
         collectionView.dataSource = self
-//        collectionView.showsVerticalScrollIndicator = false
-//        collectionView.showsHorizontalScrollIndicator = false
-//        collectionView.reloadData()
+        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,34 +64,30 @@ extension Cell_106_BrandList:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: Cell_106_Item.self), for: indexPath) as! Cell_106_Item
-//        let m               = dataArr[(indexPath as NSIndexPath).item]
-//        cell.setTwoLine_Model(m)
+        let m               = dataArr[indexPath.row]
+
+        if let imageName = m.bannerImgSrc{
+            cell.imgBanner.set_webimage_url(imageName)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 95,height: 120)
+        return CGSize(width: itemWidth,height: itemHeight)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 10
-//    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//    //第一个cell居中显示
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        
-//        return UIEdgeInsetsMake(0, 0,0, 15)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        
-//    }
-//    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let del = delegate {// 点击banner 跳转
+            del.goToVCFormLinkType_106_Banner(model: dataArr[indexPath.row])
+        }
+    }
+  
 }

@@ -18,30 +18,20 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10" translatesAutoresizingMaskIntoConstraints="NO" id="iNi-bT-PpG">
-                        <rect key="frame" x="8" y="8" width="79" height="79"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="79" id="2RS-KK-Rbg"/>
-                            <constraint firstAttribute="width" constant="79" id="bW4-JU-2zS"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="0.0" width="95" height="120"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vitra" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLo-q5-iu2">
-                        <rect key="frame" x="0.0" y="88" width="95" height="20"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="iNi-bT-PpG" secondAttribute="trailing" constant="8" id="9Na-ng-6Fw"/>
-                <constraint firstItem="xLo-q5-iu2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EHo-WN-dm9"/>
-                <constraint firstAttribute="bottom" secondItem="xLo-q5-iu2" secondAttribute="bottom" constant="12" id="K94-dB-Quv"/>
-                <constraint firstItem="iNi-bT-PpG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="W67-gi-kY0"/>
-                <constraint firstItem="iNi-bT-PpG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="hUU-8Y-FHD"/>
-                <constraint firstAttribute="trailing" secondItem="xLo-q5-iu2" secondAttribute="trailing" id="iQL-Ny-Gbs"/>
-                <constraint firstItem="xLo-q5-iu2" firstAttribute="top" secondItem="iNi-bT-PpG" secondAttribute="bottom" constant="1" id="zpx-eC-BWK"/>
+                <constraint firstItem="iNi-bT-PpG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="6p6-Rh-Jko"/>
+                <constraint firstAttribute="bottom" secondItem="iNi-bT-PpG" secondAttribute="bottom" id="APg-t1-Zfz"/>
+                <constraint firstAttribute="trailing" secondItem="iNi-bT-PpG" secondAttribute="trailing" id="Afh-3e-rEi"/>
+                <constraint firstItem="iNi-bT-PpG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kay-Nc-4bx"/>
             </constraints>
-            <point key="canvasLocation" x="-230.5" y="-92"/>
+            <connections>
+                <outlet property="imgBanner" destination="iNi-bT-PpG" id="y5r-cI-Jgl"/>
+            </connections>
+            <point key="canvasLocation" x="-379" y="-94"/>
         </collectionViewCell>
     </objects>
     <resources>

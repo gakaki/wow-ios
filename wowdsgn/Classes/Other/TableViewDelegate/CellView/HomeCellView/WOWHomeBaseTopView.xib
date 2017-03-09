@@ -29,7 +29,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你买我买大家买" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDC-hw-hjt">
-                    <rect key="frame" x="141" y="38" width="93" height="16"/>
+                    <rect key="frame" x="15" y="38" width="345" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -55,7 +55,9 @@
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="centerX" secondItem="xDC-hw-hjt" secondAttribute="centerX" id="fKf-kd-uTH"/>
                 <constraint firstItem="xDC-hw-hjt" firstAttribute="top" secondItem="UBc-tb-mUh" secondAttribute="bottom" id="nhE-sx-G3D"/>
                 <constraint firstAttribute="trailing" secondItem="0aF-EZ-Ctw" secondAttribute="trailing" id="odb-uO-EFM"/>
+                <constraint firstAttribute="trailing" secondItem="xDC-hw-hjt" secondAttribute="trailing" constant="15" id="qnp-ID-Esh"/>
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="leading" secondItem="Dii-ud-17f" secondAttribute="trailing" constant="5" id="uJI-Gt-jiC"/>
+                <constraint firstItem="xDC-hw-hjt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="ycM-7n-0FL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -6,8 +6,8 @@
 //  Copyright © 2016年 g. All rights reserved.
 //
 enum ControllerViewType { // 区分底部列表
-    case Home         // 首页
-    case Buy          // 购物页
+    case Home        // 分类页
+    case Buy            // 首页
     case HotStyle     // 精选页
 }
 import UIKit
@@ -46,7 +46,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             self.tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
             
             self.tableView.register(UINib.nibName("Cell_106_BrandList"), forCellReuseIdentifier: "Cell_106_BrandList")
-            self.tableView.register(UINib.nibName("Cell_107_ProjectSelect"), forCellReuseIdentifier: "Cell_107_ProjectSelect")
+//            self.tableView.register(UINib.nibName("Cell_107_BrandZone"), forCellReuseIdentifier: "Cell_107_BrandZone")
             for (k,c) in ModulePageType.d {
                 if c is ModuleViewElement.Type {
                     let cell            = (c as! ModuleViewElement.Type)
@@ -376,7 +376,20 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             cell.delegate = self.vc as! Cell_Class_BannerDelegate?
             cell.indexPathSection = indexPath.section
             returnCell = cell
+        case 107:
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_107_BrandZone
+            cell.delegate = self.vc as! Cell_107_BrandZoneDelegate?
+            cell.modelData = model.moduleContent
+            returnCell = cell
+        case 106:
+            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_106_BrandList
+
+            if let banners = model.moduleContent?.banners{
+                cell.dataArr = banners
+            }
+            cell.delegate = self.vc as! Cell_106_BrandListDelegate?
             
+            returnCell = cell
         default:
             returnCell = UITableViewCell()
             break
@@ -416,9 +429,11 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             if (model.moduleContent?.link) != nil {
                 return 70
             }else {
-                return CGFloat.leastNormalMagnitude
+                return 10
             }
-        case 402:
+        case 105:
+            return CGFloat.leastNormalMagnitude
+        case 402,107,106:
             
             return 70
             
@@ -443,12 +458,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
             let model = dataSourceArray[section]
                 switch model.moduleType ?? 0{// 不同的type  不同的页脚
-                    case 102:
+                    case 102,107,106:
                         if let link = model.moduleContent?.link {
                             return hearderBaseBottomView(bannerModel: link)
                         }else {
                             return nil
                         }
+
                     case 402:
                        
                         return hearderBaseBottomView(bannerModel: nil, is402: true, id: model.moduleContentProduct?.id ?? 0)
@@ -479,7 +495,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 case 301,501,401,104:
                     
                     return 50
-                case 102,402:
+                case 102,402,107,106:
                     return 70
                 case 302:
                     
@@ -517,7 +533,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 var t = "本周上新"
                 var isHiddenLien = false
                 switch model.moduleType ?? 0 {
-                case 102:
+                case 102,107,106:
                     isHiddenLien = true
                     t            = model.moduleName ?? "专题"
                     return hearderBaseTopView(title: t, subTitle: model.moduleDescription ?? "", isHiddenLine: true)
@@ -623,12 +639,9 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     v?.goController(bannerModel!)
                 }
                
-                
             }
             
         }
-       
-        
 
         return view
     }
@@ -663,7 +676,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             switch ViewControllerType ?? .Home {
             case .Home:
                 return
-            default:
+            default: // 底部列表点击事件
                 
                 let model = bottomHotListArray[indexPath.section - dataSourceArray.count]
                 
@@ -679,7 +692,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             return
         }
         let model = dataSourceArray[(indexPath as NSIndexPath).section]
-        switch model.moduleType ?? 0{
+        switch model.moduleType ?? 0{// 不同type 跳转不同的类型
         case 201://单个图片
             if let modelBanner = model.moduleContent {
                 

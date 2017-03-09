@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="灯具" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cX3-zf-GY3">
-                        <rect key="frame" x="30" y="0.0" width="232" height="50"/>
+                        <rect key="frame" x="30" y="16" width="232" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r8-Zb-qVg">
-                        <rect key="frame" x="15" y="49" width="345" height="1"/>
+                        <rect key="frame" x="0.0" y="49" width="375" height="1"/>
                         <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="x3k-6M-mqE"/>
@@ -43,16 +43,14 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="cX3-zf-GY3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="DRC-tK-EsN"/>
                 <constraint firstAttribute="trailing" secondItem="ku3-fz-wAQ" secondAttribute="trailing" constant="15" id="TJq-T4-Wf8"/>
                 <constraint firstItem="cX3-zf-GY3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="ToZ-Uz-t68"/>
-                <constraint firstAttribute="bottom" secondItem="cX3-zf-GY3" secondAttribute="bottom" id="UYn-jA-Ifb"/>
                 <constraint firstAttribute="bottom" secondItem="9r8-Zb-qVg" secondAttribute="bottom" id="V0U-4L-kbF"/>
                 <constraint firstItem="cX3-zf-GY3" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="XTi-cD-egg"/>
                 <constraint firstAttribute="trailing" secondItem="cX3-zf-GY3" secondAttribute="trailing" constant="113" id="YoJ-eM-Qge"/>
-                <constraint firstItem="9r8-Zb-qVg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="d3C-7Z-49S"/>
+                <constraint firstItem="9r8-Zb-qVg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="d3C-7Z-49S"/>
                 <constraint firstItem="ku3-fz-wAQ" firstAttribute="centerY" secondItem="cX3-zf-GY3" secondAttribute="centerY" id="jeb-VV-GvT"/>
-                <constraint firstAttribute="trailing" secondItem="9r8-Zb-qVg" secondAttribute="trailing" constant="15" id="zQK-Vm-YUB"/>
+                <constraint firstAttribute="trailing" secondItem="9r8-Zb-qVg" secondAttribute="trailing" id="zQK-Vm-YUB"/>
             </constraints>
             <connections>
                 <outlet property="lb_BannerName" destination="cX3-zf-GY3" id="FmU-2e-VCY"/>

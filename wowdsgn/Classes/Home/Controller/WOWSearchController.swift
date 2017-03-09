@@ -31,7 +31,7 @@ class WOWSearchController: WOWBaseViewController{
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "搜索"
         MobClick.e(.Search)
         
         request()

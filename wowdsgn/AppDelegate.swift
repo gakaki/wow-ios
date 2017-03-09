@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         JLRouterRule.router_init()
         
         asyncLoad()
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
 
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false

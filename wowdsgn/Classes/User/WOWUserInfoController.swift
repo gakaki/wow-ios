@@ -122,11 +122,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         pickerContainerView.removeFromSuperview()
         
         IQKeyboardManager.sharedManager().enable = true
-        
-//        self.refresh_image()
-        
-//        self.headImageView.image = nil
-//        self.headImageView.setNeedsDisplay()
+
 
     }
     
@@ -449,9 +445,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             }
         }
     }
-    deinit{
-        print("释放")
-    }
+
 }
 
 

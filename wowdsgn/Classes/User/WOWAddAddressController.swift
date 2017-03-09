@@ -315,12 +315,12 @@ class WOWAddAddressController: WOWBaseTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        UIApplication.shared.keyWindow?.endEditing(true)
+//        UIApplication.shared.keyWindow?.endEditing(true)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIApplication.shared.keyWindow?.endEditing(true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        UIApplication.shared.keyWindow?.endEditing(true)
+//    }
 }
 
 

@@ -48,6 +48,7 @@ class WOWHomeControllers: WOWBaseViewController {
         //        pageMenu!.currentPageIndex = selectCurrentIndex!
 //        pageMenu?.moveToPage(selectCurrentIndex!)
         //        pageMenu!.startingPageForScroll = selectCurrentIndex!
+        pageMenu?.delegate = self
         self.view.addSubview(pageMenu!.view)
         addObserver()
         // Do any additional setup after loading the view.
@@ -111,16 +112,13 @@ class WOWHomeControllers: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension WOWHomeControllers:CAPSPageMenuDelegate{
+    // 滑动结束 再请求网络
+    func didMoveToPage(_ controller: UIViewController, index: Int){
+        MobClick.e(.Son_Home_Page_Tab)
     }
-    */
-
+    
 }

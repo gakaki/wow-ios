@@ -12,10 +12,6 @@ import UIKit
 class WOWFavBrand: WOWBaseViewController {
 
     var dataArr  = [WOWBrandListModel]()
-    var parentNavigationController : UINavigationController?
-
-    var isRefresh: Bool = false
-
     @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -103,7 +99,6 @@ class WOWFavBrand: WOWBaseViewController {
                     strongSelf.dataArr = brandList
                 }
                 strongSelf.endRefresh()
-                strongSelf.isRefresh = true
 
                 strongSelf.collectionView.reloadData()
                 
@@ -140,12 +135,12 @@ extension WOWFavBrand:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = dataArr[(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
-        vc.brandID = model.brandId
-        vc.entrance = .brandEntrance
-        vc.hideNavigationBar = true
-        parentNavigationController?.pushViewController(vc, animated: true)
-        
+//        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
+//        vc.brandID = model.brandId
+//        vc.entrance = .brandEntrance
+//        vc.hideNavigationBar = true
+//        self.navigationController?.pushViewController(vc, animated: true)
+        VCRedirect.toBrand(brand_id: model.brandId)
     }
 }
 extension WOWFavBrand:CollectionViewWaterfallLayoutDelegate{

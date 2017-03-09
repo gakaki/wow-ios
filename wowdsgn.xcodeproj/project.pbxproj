@@ -2052,6 +2052,9 @@
 			isa = PBXGroup;
 			children = (
 				069D2FBC1DB47ADC00A059D0 /* WOWFavoriteController.swift */,
+				069D2FB81DB47ADC00A059D0 /* WOWFavBrand.swift */,
+				069D2FB91DB47ADC00A059D0 /* WOWFavDesigner.swift */,
+				069D2FC01DB47ADC00A059D0 /* WOWFavProduct.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2061,9 +2064,6 @@
 			children = (
 				069D2FB61DB47ADC00A059D0 /* FavoriteEmpty.swift */,
 				069D2FB71DB47ADC00A059D0 /* FavoriteEmpty.xib */,
-				069D2FB81DB47ADC00A059D0 /* WOWFavBrand.swift */,
-				069D2FB91DB47ADC00A059D0 /* WOWFavDesigner.swift */,
-				069D2FC01DB47ADC00A059D0 /* WOWFavProduct.swift */,
 				069D2FBA1DB47ADC00A059D0 /* WOWFavoriteBrandCell.swift */,
 				069D2FBB1DB47ADC00A059D0 /* WOWFavoriteBrandCell.xib */,
 				069D2FBE1DB47ADC00A059D0 /* WOWFavoritrSingleCell.swift */,

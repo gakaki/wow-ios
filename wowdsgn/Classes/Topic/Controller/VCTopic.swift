@@ -105,6 +105,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "列表专题"
         request()
     }
     

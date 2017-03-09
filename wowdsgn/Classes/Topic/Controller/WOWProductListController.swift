@@ -47,6 +47,7 @@ class WOWProductListController: VCBaseNavCart {
         super.viewDidAppear(animated)
         
         self.navigationController?.delegate = self
+        MobClick.e(.Product_Group_Detail_Page)
     }
     
     override func request() {

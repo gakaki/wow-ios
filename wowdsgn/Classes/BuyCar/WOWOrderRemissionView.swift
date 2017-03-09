@@ -107,10 +107,6 @@ class WOWOrderRemissionView: UIView, UITableViewDelegate, UITableViewDataSource 
     }
     
     
-    deinit{
-        
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         

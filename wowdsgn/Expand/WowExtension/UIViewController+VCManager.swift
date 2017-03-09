@@ -392,6 +392,14 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
     
+    //优惠券可用商品
+    public class func goCounponProduct(couponId: Int, navTitle: String) {
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWCouponProductController.self)) as! WOWCouponProductController
+        vc.couponId = couponId
+        vc.navTitle = navTitle
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    
  }
 extension  UIViewController {
     //跳转微信登录界面

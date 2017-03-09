@@ -14,9 +14,6 @@ class WOWFavDesigner: WOWBaseViewController {
     
     
     var dataArr  = [WOWFavoriteDesignerModel]()
-    var parentNavigationController : UINavigationController?
-    var isRefresh: Bool = false
-
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -104,7 +101,6 @@ class WOWFavDesigner: WOWBaseViewController {
                     strongSelf.dataArr = designerList
                 }
                 strongSelf.collectionView.reloadData()
-                strongSelf.isRefresh = true
                 strongSelf.endRefresh()
             }
         }) {[weak self] (errorMsg) in
@@ -139,12 +135,8 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         DLog((indexPath as NSIndexPath).row)
         let model = dataArr[(indexPath as NSIndexPath).row]
-        let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWBrandHomeController.self)) as! WOWBrandHomeController
-        vc.designerId = model.designerId
-        vc.entrance = .designerEntrance
-        vc.hideNavigationBar = true
-        parentNavigationController?.pushViewController(vc, animated: true)
 
+        VCRedirect.toDesigner(designerId: model.designerId)
     }
 }
 extension WOWFavDesigner:CollectionViewWaterfallLayoutDelegate{

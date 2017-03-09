@@ -26,9 +26,7 @@ class WOWPwdLoginController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-    deinit {
-        print("xiaohui")
-    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
+
 
 class WOWLeaveTipsController: WOWBaseViewController {
 
@@ -20,6 +22,18 @@ class WOWLeaveTipsController: WOWBaseViewController {
         super.viewDidLoad()
     }
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,6 +56,8 @@ class WOWLeaveTipsController: WOWBaseViewController {
         self.tableView.register(UINib.nibName("WOWPushCommentCell"), forCellReuseIdentifier: "WOWPushCommentCell")
         
     }
+    
+    
     
     lazy var footerView: PhoneTextView = {
         let view = PhoneTextView()
@@ -229,11 +245,11 @@ extension WOWLeaveTipsController:UITableViewDelegate,UITableViewDataSource{
     }
     
     //MARK - 滚动就取消响应 只有scrollView的实际内容大于scrollView的尺寸时才会有滚动事件
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        UIApplication.shared.keyWindow?.endEditing(true)
-        
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        
+//        UIApplication.shared.keyWindow?.endEditing(true)
+//        
+//    }
 }
 
 class PhoneTextView: UIView {

@@ -40,6 +40,17 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
         request()
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        switch entrance {
+        case .scene:
+            MobClick.e(.Space_Detail_Page)
+        case .tag:
+            MobClick.e(.Product_Tag_Detail_Page)
+        default:
+            break
+        }
+    }
     
     override func setUI()
     {

@@ -16,9 +16,7 @@ class WOWFavProduct: WOWBaseViewController {
     var dataArr  = [WOWProductModel]()
     
     var parentNavigationController : UINavigationController?
-    
-    var isRefresh: Bool = false
-    
+
     @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -139,7 +137,6 @@ class WOWFavProduct: WOWBaseViewController {
                     strongSelf.dataArr = productList
                 }
                 strongSelf.endRefresh()
-                strongSelf.isRefresh = true
                 strongSelf.collectionView.reloadData()
 
             }

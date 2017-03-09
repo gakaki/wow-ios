@@ -514,9 +514,9 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
 
         return v
     }
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        UIApplication.shared.keyWindow?.endEditing(true)
-    }
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        UIApplication.shared.keyWindow?.endEditing(true)
+//    }
 }
 extension WOWScreenView:SVColorCellDelegate,SVPriceCellDelegate,SVStyleCellDelegate{
     func updataTableViewCellHight(cell: SVColorCell,hight: CGFloat,indexPath: NSIndexPath){

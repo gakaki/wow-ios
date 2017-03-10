@@ -23,9 +23,11 @@ class WOWlListCell: UITableViewCell,ModuleViewElement {
     var model : WOWCarouselBanners?{
         didSet{
             
-            rate = CGFloat(WOWArrayAddStr.get_img_size_withThreeTwo(str: model?.bannerImgSrc ?? ""))// 拿到图片的宽高比,
+//            rate = CGFloat(WOWArrayAddStr.get_img_size_withThreeTwo(str: model?.bannerImgSrc ?? ""))// 拿到图片的宽高比,
             
-            itemHight = MGScreenWidth * rate // 计算此Item的高度
+            itemHight = WOWArrayAddStr.get_img_sizeNew(str: model?.bannerImgSrc ?? "", width: MGScreenWidth, defaule_size: .ThreeToTwo)
+            
+//            itemHight = MGScreenWidth * rate // 计算此Item的高度
             
             imgRationConstraints.constant = itemHight
 

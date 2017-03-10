@@ -79,7 +79,7 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
     func configureAutoScrollTimer() {
         if autoScrollTimer == nil {
         //设置一个定时器，每三秒钟滚动一次
-        autoScrollTimer = Timer.scheduledTimer(timeInterval: 3, target: self,
+        autoScrollTimer = Timer.scheduledTimer(timeInterval: 5, target: self,
                                                selector: #selector(letItScroll),
                                                userInfo: nil, repeats: true)
         RunLoop.current.add(autoScrollTimer!, forMode: RunLoopMode.commonModes)

@@ -66,11 +66,11 @@ public enum PageControlAliment {
 
 protocol PageControlAlimentProtocol: class{
     var pageControlAliment: PageControlAliment {get set}
-    func AdjustPageControlPlace(_ pageControl: UIPageControl)
+    func AdjustPageControlPlace(_ pageControl: UIPageControl,shadowView: UIView?)
 }
 
 extension PageControlAlimentProtocol where Self : UIView {
-    func AdjustPageControlPlace(_ pageControl: UIPageControl) {
+    func AdjustPageControlPlace(_ pageControl: UIPageControl,shadowView: UIView?) {
 
         if !pageControl.isHidden {
             switch self.pageControlAliment {
@@ -78,22 +78,34 @@ extension PageControlAlimentProtocol where Self : UIView {
                 let pageW:CGFloat = CGFloat(pageControl.numberOfPages * 15)
                 let pageH:CGFloat = 20
                 let pageX = self.center.x - 0.5 * pageW
-                let pageY = self.bounds.height -  pageH
+                let pageY = self.bounds.height -  pageH - 4
                 pageControl.frame = CGRect(x: pageX, y: pageY, width: pageW, height: pageH)
+
             case .leftBottom:
                 let pageW:CGFloat = CGFloat(pageControl.numberOfPages * 15)
                 let pageH:CGFloat = 20
                 let pageX = self.bounds.origin.x
-                let pageY = self.bounds.height -  pageH
+                let pageY = self.bounds.height -  pageH  - 4
                 pageControl.frame = CGRect(x: pageX, y: pageY, width: pageW, height: pageH)
+
             case .rightBottom:
                 let pageW:CGFloat = CGFloat(pageControl.numberOfPages * 15)
                 let pageH:CGFloat = 20
                 let pageX = self.bounds.width - pageW
-                let pageY = self.bounds.height -  pageH
+                let pageY = self.bounds.height -  pageH  - 4
                 pageControl.frame = CGRect(x: pageX, y: pageY, width: pageW, height: pageH)
 
             }
+        }
+        if let shadowView = shadowView {
+            if !shadowView.isHidden {
+                
+                shadowView.frame = CGRect.init(x: 0, y: 0, w: (pageControl.zj_width + 10)/2 + 5, h: 10)
+                shadowView.center = pageControl.center
+                
+                
+            }
+
         }
     }
 }

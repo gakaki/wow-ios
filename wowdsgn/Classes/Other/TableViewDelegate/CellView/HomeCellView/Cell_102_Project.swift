@@ -27,8 +27,11 @@ class Cell_102_Project: UITableViewCell,ModuleViewElement {
             heightSet.removeAll()
             for item in dataArr.enumerated() { // 遍历数组 取对应图片的宽和高
                 if item.offset < lineNumber { // 取前三个图片的高度
-                    let rate =  CGFloat(WOWArrayAddStr.get_img_size(str: item.element.bannerImgSrc ?? ""))// 拿到图片的宽高比
-                    let itemHeight = CGFloat(round(itemWidth * rate) )
+//                    let rate =  CGFloat(WOWArrayAddStr.get_img_size(str: item.element.bannerImgSrc ?? ""))// 拿到图片的宽高比
+//                        let itemHeight1 = CGFloat(round(itemWidth * rate) )
+                    let itemHeight = WOWArrayAddStr.get_img_sizeNew(str: item.element.bannerImgSrc ?? "", width: itemWidth, defaule_size: .ThreeToTwo)
+                    
+//
                     heightSet.append(itemHeight)
                     itemAllHeight = itemAllHeight + itemHeight
                 }

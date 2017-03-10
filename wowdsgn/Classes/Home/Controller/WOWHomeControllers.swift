@@ -140,6 +140,8 @@ class WOWHomeControllers: WOWBaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        MobClick.e(.Home_Page)
+
          self.navigationShadowImageView?.isHidden = true
      
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -167,7 +169,7 @@ extension WOWHomeControllers:CAPSPageMenuDelegate{
     // 滑动结束 再请求网络
     func didMoveToPage(_ controller: UIViewController, index: Int){
         
-        MobClick.e(.Son_Home_Page_Tab)
+        
         let currentVC = controller as! WOWController
         if currentVC.isRequest == false { // 如果未请求，才去请求网络。
             currentVC.request()

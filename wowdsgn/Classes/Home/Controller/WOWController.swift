@@ -37,7 +37,8 @@ class WOWController: WOWBaseModuleVC {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MobClick.e(.Home_Page)
+        MobClick.e(.Son_Home_Page_Tab)
+
         //        hidingNavBarManager?.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -65,20 +66,7 @@ class WOWController: WOWBaseModuleVC {
 
     }
     
-    override func beginPageView() {
-        //TalkingData统计页面
-        TalkingData.trackPageBegin( "首页" )
-        //友盟统计页面
-        MobClick.beginLogPageView("首页" )
-    }
-    
-    override func endPageView() {
-        
-        //TalkingData统计页面
-        TalkingData.trackPageEnd( "首页" )
-        
-        MobClick.endLogPageView("首页" )
-    }
+
     //MARK:Lazy
     lazy var appdelegate:AppDelegate = {
         let a =  UIApplication.shared.delegate as! AppDelegate

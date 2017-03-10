@@ -51,7 +51,7 @@ let URL_SceneProduct            = "v1/product/scene/products" //场景详情页�
 
 let URL_ProductTag              = "v1/product/tag"      //标签列表
 
-let URL_TagProduct              = "v1/product/scene/products"       //标签详情页产品
+let URL_TagProduct              = "v1/product/tag/products"       //标签详情页产品
 
 
 //1.1 专题

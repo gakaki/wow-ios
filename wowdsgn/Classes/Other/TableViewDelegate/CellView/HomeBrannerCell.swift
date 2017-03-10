@@ -18,9 +18,10 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelegat
     var bannerCurrentArray = [WOWCarouselBanners](){//顶部轮播图数组
         didSet{
             
-            rate = CGFloat(WOWArrayAddStr.get_img_size(str: imageURLArray[0] ))// 拿到图片的宽高比
+//            rate = CGFloat(WOWArrayAddStr.get_img_size(str: imageURLArray[0] ))// 拿到图片的宽高比
             
-            itemHight = MGScreenWidth * rate // 计算此Item的高度
+            itemHight = WOWArrayAddStr.get_img_sizeNew(str: imageURLArray[0], width: MGScreenWidth, defaule_size: .OneToOne)
+//            itemHight = MGScreenWidth * rate // 计算此Item的高度
             
             hightConstraint.constant = itemHight// 总高度
             
@@ -58,8 +59,9 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelegat
         bannerCurrentArray = dataArr
         cyclePictureView.delegate = self
         cyclePictureView.showPageControl = true
-        cyclePictureView.currentDotColor = UIColor.black
-        cyclePictureView.otherDotColor =   UIColor(hexString: "000000", alpha: 0.2)!
+        cyclePictureView.currentDotColor = UIColor.init(hexString: "#202020")!
+        cyclePictureView.otherDotColor =   UIColor.white
+        cyclePictureView.showShadowView = true
         cyclePictureView.imageURLArray = imageURLArray
         cyclePictureView.placeholderImage = UIImage.init(named: product)
         cyclePictureView.timeInterval = 5

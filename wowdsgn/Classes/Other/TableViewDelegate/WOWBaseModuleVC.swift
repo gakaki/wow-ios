@@ -388,12 +388,14 @@ extension WOWBaseModuleVC:Cell_107_BrandZoneDelegate{//  品牌专区  一个推
 extension WOWBaseModuleVC:Cell_Class_BannerDelegate{
     
     func updataTableViewCellHight(section: Int)  {
-//        let b = IndexPath.init(row: 0, section: section)
-//        tableView.scrollToRow(at: b, at: .top, animated: true)
+
         
         let indexSet = NSIndexSet.init(index: section)
-        tableView.reloadSections(indexSet as IndexSet, with: .automatic)
-
+//        tableView.reloadSections(indexSet as IndexSet, with: .none)
+        tableView.reloadData()
+        
+        let b = IndexPath.init(row: 0, section: section)
+        tableView.scrollToRow(at: b, at: .top, animated: true)
     }
     
     

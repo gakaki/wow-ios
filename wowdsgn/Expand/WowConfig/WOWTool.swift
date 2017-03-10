@@ -171,7 +171,7 @@ struct WOWArrayAddStr {
             }
             
         }
-        return CGFloat(rate) * width
+        return round(CGFloat(rate) * width)
     }
 
     

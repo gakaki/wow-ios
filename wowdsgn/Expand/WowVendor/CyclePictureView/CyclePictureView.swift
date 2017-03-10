@@ -50,6 +50,11 @@ public class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionVie
             self.pageControl?.isHidden = !showPageControl
         }
     }
+    public var showShadowView: Bool  = false {
+        didSet {
+            self.backShadowView?.isHidden = !showShadowView
+        }
+    }
     public var currentDotColor: UIColor = UIColor.orange {
         didSet {
             self.pageControl?.currentPageIndicatorTintColor = currentDotColor
@@ -115,6 +120,7 @@ public class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionVie
     public var timer: Timer?     // EndlessCycleProtocol提供
     
     public var pageControl: UIPageControl?
+    public var backShadowView: UIView?
     public var collectionView: UICollectionView!
     public let cellID: String = "CyclePictureCell"
     public var flowLayout: UICollectionViewFlowLayout?
@@ -146,7 +152,7 @@ public class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionVie
         backgroundColor = UIColor.white
         timeInterval = 3.0
         currentDotColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        otherDotColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
+        otherDotColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         autoScroll = true
     }
     
@@ -196,22 +202,38 @@ public class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionVie
     public func setupPageControl() {
         
         self.pageControl?.removeFromSuperview()
-        
+        self.backShadowView?.removeFromSuperview()
         guard self.imageBox!.imageArray.count > 1 else {
             return
         }
         
         if self.showPageControl {
+            
+            if self.showShadowView {
+                let shadowView = UIView()
+                shadowView.backgroundColor = UIColor.white
+                shadowView.alpha = 0.45
+                shadowView.layer.cornerRadius  = 5.0
+                //                shadowView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                self.addSubview(shadowView)
+                self.backShadowView = shadowView
+            }
+
+            
+            
             let pageControl = UIPageControl()
             pageControl.numberOfPages = self.imageBox!.imageArray.count
             pageControl.currentPageIndicatorTintColor = self.currentDotColor
             pageControl.pageIndicatorTintColor = self.otherDotColor
             pageControl.isUserInteractionEnabled = false
             pageControl.backgroundColor = UIColor.clear
+            pageControl.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             self.addSubview(pageControl)
             self.pageControl = pageControl
+//            shadowView.centerY = pageControl.centerY +
+           
         }
-
+        
     }
     
 // MARK: - 内部方法
@@ -267,7 +289,13 @@ public class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionVie
             return
         }
         //PageControlAlimentProtocol协议方法，用于调整对齐
-        self.AdjustPageControlPlace(pageControl)
+//        self.AdjustPageControlPlace(pageControl,v)
+        if let shadowView = backShadowView {
+            self.AdjustPageControlPlace(pageControl,shadowView:shadowView)
+        }else {
+            self.AdjustPageControlPlace(pageControl,shadowView: nil)
+        }
+        
     }
     /**
     设置定时器,EndlessCycleProtocol提供

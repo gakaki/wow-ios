@@ -23,8 +23,10 @@ class Cell_106_BrandList: UITableViewCell,ModuleViewElement {
         didSet{
             if dataArr.count > 0 {
                 
-                rate = CGFloat(WOWArrayAddStr.get_img_size(str: dataArr[0].bannerImgSrc ?? ""))// 拿到图片的宽高比
-                itemHeight   = CGFloat(round(itemWidth * rate) )  // 计算此Item的高度
+//                rate = CGFloat(WOWArrayAddStr.get_img_size(str: dataArr[0].bannerImgSrc ?? ""))// 拿到图片的宽高比
+                
+                itemHeight = WOWArrayAddStr.get_img_sizeNew(str: dataArr[0].bannerImgSrc ?? "", width: itemWidth, defaule_size: .OneToOne)
+//                itemHeight   = CGFloat(round(itemWidth * rate) )  // 计算此Item的高度
                 heightConstraint.constant = itemHeight
             }
             
@@ -33,7 +35,7 @@ class Cell_106_BrandList: UITableViewCell,ModuleViewElement {
         }
     }
     
-    var rate:CGFloat = 1.0// 宽高比
+//    var rate:CGFloat = 1.0// 宽高比
     
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!

@@ -23,7 +23,7 @@ public enum RequestApi{
     case api_User
     //Tab 第一个栏 首页 该死的那3个url
     case api_Home_Banners
-    
+    case api_Home_Tabs
     // 首页Url
     case api_Home_List(params: [String: AnyObject]?)
     
@@ -323,7 +323,8 @@ extension RequestApi:TargetType{
         //Tab 第一个栏 首页 该死的那3个url
         case .api_Home_Banners:
             return URL_home_banners
-            
+        case .api_Home_Tabs:
+            return URL_Home_Tabs
         case .api_Home_List:
             return URL_home_List
         
@@ -587,7 +588,8 @@ extension RequestApi:TargetType{
             .api_ProductScene,
             .api_SceneProduct,
             .api_ProductTag,
-            .api_TagProduct:
+            .api_TagProduct,
+            .api_Home_Tabs:
 
             return .GET
 
@@ -759,7 +761,8 @@ extension RequestApi:TargetType{
             
             case .api_Home_Banners():
                 params =  ["pageType":1]
-            
+            case .api_Home_Tabs():
+                params =  ["pageId":1]
             case let.api_checkVersion(param):
                 params = param!
             

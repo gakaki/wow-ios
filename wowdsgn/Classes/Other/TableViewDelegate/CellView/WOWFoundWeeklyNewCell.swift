@@ -2,7 +2,7 @@
 import UIKit
 
 protocol FoundWeeklyNewCellDelegate:class{
-    func cellFoundWeeklyNewCellTouchInside(_ m:WowModulePageItemVO)
+    func cellFoundWeeklyNewCellTouchInside(_ m:WOWProductModel)
 }
 
 //401 本周上新
@@ -12,13 +12,13 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
     static func cell_type() -> Int {
         return 401
     }
-    @IBOutlet weak var cv: UICollectionView!
     
+    @IBOutlet weak var cv: UICollectionView!
+
     weak var delegate:FoundWeeklyNewCellDelegate?
     
-    var data        = [WowModulePageItemVO]()
+    var data        = [WOWProductModel]()
     var heightAll   = CGFloat.leastNormalMagnitude
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,15 +26,15 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
         cv.delegate                           = self
         cv.dataSource                         = self
         cv.backgroundColor                    = UIColor.white
-        cv.register(WOWFoundWeeklyNewCellElementCell.self, forCellWithReuseIdentifier:String(describing: WOWFoundWeeklyNewCellElementCell.self))
-        
+
+        cv.register(UINib.nibName("WOWGoodsSmallCell"), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
         cv.showsVerticalScrollIndicator       = false
         cv.showsHorizontalScrollIndicator     = false
         
         
         let layout                            = UICollectionViewFlowLayout()
         layout.scrollDirection                = .horizontal
-        layout.itemSize                       = CGSizeD( 100 ,height: 150 )
+        layout.itemSize                       = CGSizeD( 140 ,height: 200 )
         self.heightAll                        = layout.itemSize.height
         
         layout.sectionInset                   = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
@@ -45,10 +45,7 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
         
     }
     
-    func setData(_ d:[WowModulePageItemVO]){
-        self.data = d
-        self.cv.reloadData()
-    }
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -65,9 +62,17 @@ extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell            = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFoundWeeklyNewCellElementCell.self), for: indexPath) as! WOWFoundWeeklyNewCellElementCell
-        let m               = self.data[(indexPath as NSIndexPath).item]
-        cell.setModel(m)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOWGoodsSmallCell", for: indexPath) as! WOWGoodsSmallCell
+        //FIX 测试数据
+
+        let model = self.data[(indexPath as NSIndexPath).item]
+
+            cell.showData(model, indexPath: indexPath)
+            cell.topView.isHidden           = true
+            cell.view_rightline.isHidden    = true
+            cell.bottomLine.isHidden        = true
+            cell.likeBtn.isHidden           = true
         return cell
     }
     

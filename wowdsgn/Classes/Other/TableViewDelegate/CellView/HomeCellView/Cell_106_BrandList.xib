@@ -21,7 +21,7 @@
                         <rect key="frame" x="15" y="0.0" width="290" height="134.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="134.5" id="Kjt-5e-WrZ"/>
+                            <constraint firstAttribute="height" priority="750" constant="134.5" id="Kjt-5e-WrZ"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LYS-4F-2V8">
                             <size key="itemSize" width="50" height="50"/>

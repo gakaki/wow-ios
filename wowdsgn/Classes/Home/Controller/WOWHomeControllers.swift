@@ -12,19 +12,46 @@ class WOWHomeControllers: WOWBaseViewController {
     var pageMenu:CAPSPageMenu?
     var controllerArray : [UIViewController] = []
     var selectCurrentIndex : Int? = 0
+    
+    var tabs : [WOWHomeTabs] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(hexString: "efeff4")
         
-        let titleArray  = ["推荐","礼品","家居","家具","选项1","选项2"]
+        
+        addObserver()
+        // Do any additional setup after loading the view.
+    }
+    // 配置顶部tab信息
+    func configTabs(){
+        var titleArray  = ["推荐"] // 默认 一页
+        var tabIdArrray :[Int] = []
+        
+        if tabs.count > 0 {
+            for tab in tabs.enumerated() {
+                
+                titleArray.append(tab.element.name ?? "")
+                tabIdArrray.append(tab.element.id ?? 0)
+                
+            }
+        }
+       
         for index in 0..<titleArray.count {
             
-            let orderListVC = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWController.self)) as! WOWController
-            orderListVC.title = titleArray[index]
-//            orderListVC.selectIndex = index
-            controllerArray.append(orderListVC)
-            orderListVC.parentNavigationController = self.navigationController
+            let HomeTabVC = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWController.self)) as! WOWController
+            HomeTabVC.title = titleArray[index]
+
+            if index == 0 {
+            
+            }else {
+                
+                HomeTabVC.tabId = tabIdArrray[index - 1]
+            }
+        
+            controllerArray.append(HomeTabVC)
+            HomeTabVC.parentNavigationController = self.navigationController
         }
         
         let parameters: [CAPSPageMenuOption] = [
@@ -41,18 +68,13 @@ class WOWHomeControllers: WOWBaseViewController {
         ]
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
-//        pageMenu?.viewBackgroundColor = UIColor.init(hexString: "efeff4")!
-//        pageMenu?.delegate = self
-//        pageMenu?.enableHorizontalBounce = false
-//        pageMenu?.centerMenuItems = true
-        //        pageMenu!.currentPageIndex = selectCurrentIndex!
-//        pageMenu?.moveToPage(selectCurrentIndex!)
-        //        pageMenu!.startingPageForScroll = selectCurrentIndex!
+        pageMenu?.delegate = self
+        
         pageMenu?.delegate = self
         self.view.addSubview(pageMenu!.view)
-        addObserver()
-        // Do any additional setup after loading the view.
+
     }
+    
     fileprivate func addObserver(){
         /**
          添加通知
@@ -64,13 +86,36 @@ class WOWHomeControllers: WOWBaseViewController {
     }
     override func setUI() {
         super.setUI()
-    
+        request()
         configBarItem()
         
     }
     override func request() {
         super.request()
+        requestTabs()
         requestMsgCount()
+    }
+    func requestTabs(){
+        WOWNetManager.sharedManager.requestWithTarget(.api_Home_Tabs, successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+//                let json = JSON(result)
+
+                if let array = Mapper<WOWHomeTabs>().mapArray(JSONObject:JSON(result)["tabs"].arrayObject){
+                    
+                    strongSelf.tabs = array
+                    strongSelf.configTabs()
+                }
+               
+
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.configTabs()
+            }
+        }
+
+        
     }
     // 请求消息数量接口
     func requestMsgCount() {
@@ -115,10 +160,20 @@ class WOWHomeControllers: WOWBaseViewController {
 
 }
 
+
 extension WOWHomeControllers:CAPSPageMenuDelegate{
+    
+
     // 滑动结束 再请求网络
     func didMoveToPage(_ controller: UIViewController, index: Int){
+        
         MobClick.e(.Son_Home_Page_Tab)
+        let currentVC = controller as! WOWController
+        if currentVC.isRequest == false { // 如果未请求，才去请求网络。
+            currentVC.request()
+        }
+        
+        
     }
     
 }

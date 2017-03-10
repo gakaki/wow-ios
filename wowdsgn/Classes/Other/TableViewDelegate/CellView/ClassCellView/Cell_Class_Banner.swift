@@ -48,8 +48,9 @@ class Cell_Class_Banner: UITableViewCell,ModuleViewElement {
     var model_Class     : WOWCarouselBanners?{// 数据源
         didSet{
             
-            rate = CGFloat(WOWArrayAddStr.get_img_size(str: model_Class?.background ?? ""))// 拿到图片的宽高比
-            bannerHeight   = CGFloat(round(MGScreenWidth * rate) )  // 计算此Item的高度
+//            rate = CGFloat(WOWArrayAddStr.get_img_size(str: model_Class?.background ?? ""))// 拿到图片的宽高比
+            bannerHeight   = WOWArrayAddStr.get_img_sizeNew(str: model_Class?.background ?? "", width: MGScreenWidth, defaule_size: .ThreeToOne)
+//                CGFloat(round(MGScreenWidth * rate) )  // 计算此Item的高度
 
             self.collectionView.reloadData()
             self.heightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height
@@ -60,8 +61,8 @@ class Cell_Class_Banner: UITableViewCell,ModuleViewElement {
     }
     weak var delegate : Cell_Class_BannerDelegate?
   
-    var rate:CGFloat = 1.0// 宽高比
-    
+//    var rate:CGFloat = 1.0// 宽高比
+   var itemWidth = MGScreenWidth - 30
     
     var bannerHeight : CGFloat = MGScreenWidth * 0.33
 
@@ -172,9 +173,9 @@ extension Cell_Class_Banner:UICollectionViewDelegate,UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
        
         if indexPath.row == 0 {
-            return CGSize(width: MGScreenWidth - 30,height: bannerHeight)
+            return CGSize(width: itemWidth,height: bannerHeight)
         }else {
-            return CGSize(width: MGScreenWidth - 30,height: 50)
+            return CGSize(width: itemWidth,height: 50)
         }
       
     }

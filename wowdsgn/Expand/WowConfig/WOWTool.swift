@@ -127,6 +127,12 @@ struct Calculate {
     }
     
 }
+public enum Defaule_Size : Float{
+    
+    case ThreeToTwo = 0.67
+    case ThreeToOne = 0.33
+    case OneToOne   = 1
+}
 /**
  转换数组url
  - parameter array:     需要转化的数组
@@ -144,6 +150,31 @@ struct WOWArrayAddStr {
         }
         return newArray
     }
+    // 后台返回的图片后面有图片size的参数 此方法拿到。
+    static func get_img_sizeNew(str:String,width:CGFloat,defaule_size:Defaule_Size) -> CGFloat {
+        
+        let array = str.components(separatedBy: "_2dimension_")
+        
+        
+        var rate        = defaule_size.rawValue
+        if array.count > 1 {
+            let c = array[1].components(separatedBy: ".")
+            if c.count > 1 {
+                let d = c[0].components(separatedBy: "x")
+                if d.count > 1 {
+                    
+                    if let height = d[1].toFloat(),let width = d[0].toFloat() {
+                        rate = height / width
+                    }
+                    
+                }
+            }
+            
+        }
+        return CGFloat(rate) * width
+    }
+
+    
     // 后台返回的图片后面有图片size的参数 此方法拿到。 默认 1比1
    static func get_img_size(str:String) -> Float {
     

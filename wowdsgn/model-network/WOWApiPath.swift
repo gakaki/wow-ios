@@ -63,6 +63,8 @@ let URL_topic_product           = "v2/topic/product"
 //2.1首页
 let URL_storeHome               = "v1/shop"
 
+
+let URL_Home_Tabs               = "v1/page/tabs"
 let URL_home_banners            = "v1/page/banners"    //1.1首页 查看首页Banner
 let URL_home_scenes             = "v1/page/scenes"     //1.2首页 查看首页场景
 let URL_home_List               = "v2/page"     // 首页 全新场景

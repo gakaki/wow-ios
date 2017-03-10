@@ -33,18 +33,21 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FFi-CR-Zcb">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FFi-CR-Zcb">
+                    <rect key="frame" x="104" y="0.0" width="158" height="60"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="z8Q-HA-Bqa" secondAttribute="trailing" id="6Lh-Km-NsY"/>
                 <constraint firstItem="8qm-zh-wzT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-5" id="6sX-Hi-eK5"/>
+                <constraint firstItem="FFi-CR-Zcb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="AO9-lV-OsS"/>
                 <constraint firstItem="8qm-zh-wzT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-5" id="CKL-zd-nTw"/>
+                <constraint firstAttribute="bottom" secondItem="FFi-CR-Zcb" secondAttribute="bottom" constant="10" id="Lzk-L4-2MU"/>
                 <constraint firstItem="XKq-Uh-hZN" firstAttribute="leading" secondItem="8qm-zh-wzT" secondAttribute="trailing" constant="8" id="VHF-1p-eQs"/>
+                <constraint firstItem="FFi-CR-Zcb" firstAttribute="trailing" secondItem="8qm-zh-wzT" secondAttribute="trailing" constant="50" id="enr-M6-PSf"/>
                 <constraint firstItem="z8Q-HA-Bqa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="g8K-Dd-2R6"/>
+                <constraint firstItem="FFi-CR-Zcb" firstAttribute="leading" secondItem="8qm-zh-wzT" secondAttribute="leading" constant="-50" id="heG-Gr-xIj"/>
                 <constraint firstAttribute="bottom" secondItem="z8Q-HA-Bqa" secondAttribute="bottom" id="qfd-W3-HWZ"/>
                 <constraint firstItem="XKq-Uh-hZN" firstAttribute="centerY" secondItem="8qm-zh-wzT" secondAttribute="centerY" id="rM2-hG-OEA"/>
             </constraints>

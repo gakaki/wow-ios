@@ -120,12 +120,12 @@ class WOWBaseModuleVC: WOWBaseViewController {
                     if let s  = t.moduleContentTmp?["categories"] as? [AnyObject] {
                         t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                     }
-                case 401:
-                    if let s  = t.moduleContentTmp?["products"] as? [AnyObject] {
-                        t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
-                        t.name = (t.moduleContentTmp?["name"] as? String) ?? "本周上新"
-                        
-                    }
+//                case 401:
+//                    if let s  = t.moduleContentTmp?["products"] as? [AnyObject] {
+//                        t.moduleContentArr    =  Mapper<WOWProductModel>().mapArray(JSONObject:s) ?? [WOWProductModel]()
+//                        t.name = (t.moduleContentTmp?["name"] as? String) ?? "本周上新"
+//                        
+//                    }
                     
                 case 201:
                     if let s  = t.moduleContentTmp  {
@@ -198,9 +198,18 @@ class WOWBaseModuleVC: WOWBaseViewController {
                 VCRedirect.toToPidDetail(topicId: model.bannerLinkTargetId ?? 0)
             case 10:// 分组产品列表
                 
-//                toVCTopidDetail(model.bannerLinkTargetId ?? 0)
+
                 VCRedirect.goToProductGroup(model.bannerLinkTargetId ?? 0)
+            case 11:// 跳转分类
                 
+                 VCRedirect.toVCCategory(model.bannerLinkTargetId ?? 0)
+
+            case 12:// 跳转场景分类
+                VCRedirect.toVCScene(model.bannerLinkTargetId ?? 0, entrance: .scene)
+
+            case 13:// 跳转标签分类
+                VCRedirect.toVCScene(model.bannerLinkTargetId ?? 0, entrance: .tag)
+
             default:
                 WOWHud.showMsg("请您更新最新版本")
                 print("其他")
@@ -274,7 +283,7 @@ extension WOWBaseModuleVC:WOWHotStyleDelegate{
 }
 extension WOWBaseModuleVC:FoundWeeklyNewCellDelegate{// 本周上新跳转
     
-    func cellFoundWeeklyNewCellTouchInside(_ m:WowModulePageItemVO){
+    func cellFoundWeeklyNewCellTouchInside(_ m:WOWProductModel){
 
         
         if let pid = m.productId as Int? {
@@ -379,7 +388,9 @@ extension WOWBaseModuleVC:Cell_107_BrandZoneDelegate{//  品牌专区  一个推
 extension WOWBaseModuleVC:Cell_Class_BannerDelegate{
     
     func updataTableViewCellHight(section: Int)  {
-     
+//        let b = IndexPath.init(row: 0, section: section)
+//        tableView.scrollToRow(at: b, at: .top, animated: true)
+        
         let indexSet = NSIndexSet.init(index: section)
         tableView.reloadSections(indexSet as IndexSet, with: .automatic)
 

@@ -297,7 +297,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! Cell_302_Class
             cell.setData( model.moduleContentArr ?? [WowModulePageItemVO]() )
-            
+        
             cell.delegate = self.vc as! Cell_302_Delegate?
             cell.bringSubview(toFront: cell.cv)
             
@@ -307,7 +307,11 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         case WOWFoundWeeklyNewCell.cell_type():
             
             let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! WOWFoundWeeklyNewCell
-            cell.setData( model.moduleContentArr ?? [WowModulePageItemVO]())
+//            cell.setData(model.moduleContentArr)
+            if let dataArr = model.moduleContentProduct?.products {
+                cell.data  = dataArr
+            }
+            
             cell_heights[section]  = cell.heightAll
             cell.delegate = self.vc as! FoundWeeklyNewCellDelegate?
             cell.bringSubview(toFront: cell.cv)
@@ -425,7 +429,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             default:
                 return 10
             }
-        case 102:
+        case 102,107,106,401:
             if (model.moduleContent?.link) != nil {
                 return 70
             }else {
@@ -433,7 +437,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             }
         case 105:
             return CGFloat.leastNormalMagnitude
-        case 402,107,106:
+        case 402:
             
             return 70
             
@@ -458,7 +462,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
             let model = dataSourceArray[section]
                 switch model.moduleType ?? 0{// 不同的type  不同的页脚
-                    case 102,107,106:
+                    case 102,107,106,401:
                         if let link = model.moduleContent?.link {
                             return hearderBaseBottomView(bannerModel: link)
                         }else {
@@ -492,10 +496,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 let model = dataSourceArray[section]
                 
                 switch model.moduleType ?? 0 {
-                case 301,501,401,104:
+                case 301,501,104:
                     
                     return 50
-                case 102,402,107,106:
+                case 102,402,107,106,401:
                     return 70
                 case 302:
                     
@@ -533,7 +537,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 var t = "本周上新"
                 var isHiddenLien = false
                 switch model.moduleType ?? 0 {
-                case 102,107,106:
+                case 102,107,106,401:
                     isHiddenLien = true
                     t            = model.moduleName ?? "专题"
                     return hearderBaseTopView(title: t, subTitle: model.moduleDescription ?? "", isHiddenLine: true)

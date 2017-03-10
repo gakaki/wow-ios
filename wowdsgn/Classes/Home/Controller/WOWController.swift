@@ -20,15 +20,19 @@ class WOWController: WOWBaseModuleVC {
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
     
-
+    var tabId : Int? // 对应的顶部标签 ID
+    var isRequest :Bool = false// 判断此页面是不是第一次网络请求
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         
         setUI()
         addObserver()
-        request()
-       //
+        if tabId == nil { // 说明进入的是第一页
+            
+            request()
+        }
+ 
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -130,12 +134,17 @@ class WOWController: WOWBaseModuleVC {
     }
 
     func requestTop() {// 请求模块化数据
-        let params = ["pageId": 1, "region": 1]
-       
+        var params = ["pageId": 1]
+        
+        if let tabId = tabId {
+            params["tabId"] = tabId
+        }
+        
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
              WOWHud.dismiss()
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                strongSelf.isRequest = true
                 strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.dataWithHomeModel(result: result)
                 
                 strongSelf.dataArr =  (strongSelf.dataDelegate?.dataSourceArray)!

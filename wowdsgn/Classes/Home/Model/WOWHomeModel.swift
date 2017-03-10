@@ -9,6 +9,24 @@
 import UIKit
 import ObjectMapper
 
+final class WOWHomeTabs: WOWBaseModel,Mappable{
+
+    var id                      :       Int?
+    var name                    :       String?
+
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        
+        id             <- map["id"]
+        name           <- map["name"]
+    
+    }
+
+}
+
 final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleType              :  Int?
     var moduleContent           :  WOWCarouselBanners?// 顶部轮播，单个图片
@@ -57,7 +75,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
             moduleAdditionalInfo    <- map["moduleAdditionalInfo"]
             moduleContentList       <- map["moduleContent"]
             
-        case 402:// 自定义产品组
+        case 401,402:// 自定义产品组
             moduleAdditionalInfo        <- map["moduleAdditionalInfo"]
             moduleContentProduct        <- map["moduleContent"]
         case 102:// 专题列表

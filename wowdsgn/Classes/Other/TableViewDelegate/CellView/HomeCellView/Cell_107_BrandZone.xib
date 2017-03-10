@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,17 +17,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="wnP-Te-OGo" userLabel="bigImg">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wnP-Te-OGo" userLabel="bigImg">
                         <rect key="frame" x="15" y="0.0" width="345" height="230"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="wnP-Te-OGo" secondAttribute="height" multiplier="3:2" id="vyB-8P-Qxz"/>
+                            <constraint firstAttribute="height" constant="230" id="CD0-gY-qu6"/>
                         </constraints>
                     </imageView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-lH-LIV">
                         <rect key="frame" x="15" y="240" width="345" height="136"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="Uc9-lH-LIV" secondAttribute="height" multiplier="345:136" id="Ocp-Zs-1DJ"/>
+                            <constraint firstAttribute="height" priority="750" constant="136" id="Gaf-W5-dVT"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RX8-Ve-lNh">
                             <size key="itemSize" width="50" height="50"/>
@@ -42,7 +41,6 @@
                     <constraint firstItem="wnP-Te-OGo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0NK-0p-3oQ"/>
                     <constraint firstAttribute="trailing" secondItem="wnP-Te-OGo" secondAttribute="trailing" constant="15" id="77R-AB-4wp"/>
                     <constraint firstItem="Uc9-lH-LIV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="B6Y-Lv-7tf"/>
-                    <constraint firstItem="wnP-Te-OGo" firstAttribute="width" secondItem="wnP-Te-OGo" secondAttribute="height" multiplier="3:2" id="TKy-6A-YsD"/>
                     <constraint firstAttribute="bottom" secondItem="Uc9-lH-LIV" secondAttribute="bottom" id="XZM-qb-faH"/>
                     <constraint firstAttribute="trailing" secondItem="Uc9-lH-LIV" secondAttribute="trailing" constant="15" id="blm-0c-mEM"/>
                     <constraint firstItem="Uc9-lH-LIV" firstAttribute="top" secondItem="wnP-Te-OGo" secondAttribute="bottom" constant="10" id="f9g-sD-3Rf"/>
@@ -51,13 +49,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="Uc9-lH-LIV" id="kCf-Z1-Gac"/>
+                <outlet property="heightConstraint" destination="Gaf-W5-dVT" id="IFE-WD-TV3"/>
                 <outlet property="imgBrandBanner" destination="wnP-Te-OGo" id="KU0-cN-bvH"/>
+                <outlet property="imgHeightConstraint" destination="CD0-gY-qu6" id="kww-d7-sBI"/>
                 <outlet property="imgTopBanner" destination="wnP-Te-OGo" id="e1S-n7-llY"/>
             </connections>
-            <point key="canvasLocation" x="-831" y="-151"/>
+            <point key="canvasLocation" x="-1764" y="-206"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="5" width="750" height="750"/>
-    </resources>
 </document>

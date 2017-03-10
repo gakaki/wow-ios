@@ -35,14 +35,29 @@ class Cell_107_BrandZone: UITableViewCell,ModuleViewElement {
             if let banners = modelData?.banners {
                 if banners.count > 0 {
                     imgBrandBanner.set_webimage_url(banners[0].bannerImgSrc ?? "")
-
+                    
                 }
             }
+            if let products = modelData?.products {
+                if products.count > 0 {
+                    
+                    heightConstraint.constant = itemWidth * (136/100)
+                    
+                }else {
+                    heightConstraint.constant = 0
+                }
+
+            }else {
+                heightConstraint.constant = 0
+            }
+
             collectionView.reloadData()
         }
     }
     
     
+    @IBOutlet weak var imgHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imgTopBanner: UIImageView!
     override func awakeFromNib() {
@@ -85,8 +100,12 @@ extension Cell_107_BrandZone:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-        return 3
+        if let product = modelData?.products {
+            return product.count > 3 ? 3 : product.count
+        }else {
+            return 0
+        }
+       
 
     }
     
@@ -122,9 +141,9 @@ extension Cell_107_BrandZone:UICollectionViewDelegate,UICollectionViewDataSource
         }
     }
     //第一个cell居中显示
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        return UIEdgeInsetsMake(10, 0,0, 0)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        
+//        return UIEdgeInsetsMake(10, 0,0, 0)
+//    }
     
 }

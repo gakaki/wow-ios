@@ -445,7 +445,7 @@ extension WOWOrderDetailController{
         if let orderNewModel = self.orderNewDetailModel {
             
             //    backView.hidePayView()
-            if  orderNewModel.orderCode?.isEmpty {
+            if  (orderNewModel.orderCode ?? "").isEmpty {
                 WOWHud.showMsg("订单不存在")
                 return
             }

@@ -239,7 +239,7 @@ class WOWOrderDetailController: WOWBaseViewController{
     @IBAction func rightButtonClick(_ sender: UIButton) {
         
         if let orderNewModel = orderNewDetailModel {
-        switch orderNewModel.orderStatus!  {
+        switch orderNewModel.orderStatus ?? 0  {
             case 0:// 立即支付
                 
                 switch surePayType {
@@ -256,9 +256,9 @@ class WOWOrderDetailController: WOWBaseViewController{
             
             case 3:// 确认收货
                 
-                confirmReceive(orderNewModel.orderCode!)
+                confirmReceive(orderNewModel.orderCode ?? "")
             case 4:
-                goCommentVC(orderNewModel.orderCode!)
+                goCommentVC(orderNewModel.orderCode ?? "")
                 print("待评价")
             default:
                 break
@@ -283,7 +283,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         if let orderNewModel = OrderDetailModel {
             
            
-            switch orderNewModel.orderStatus!  {
+            switch orderNewModel.orderStatus ?? 0  {
             case 0:
                 self.OrderDetailNewaType          = OrderNewType.payMent
                 
@@ -416,7 +416,7 @@ class WOWOrderDetailController: WOWBaseViewController{
 //        orderType()
         
                 isOpen = true // 默认 不展开
-            WOWNetManager.sharedManager.requestWithTarget(.api_OrderDetail(OrderCode:self.orderCode!), successClosure: { [weak self](result, code) in
+            WOWNetManager.sharedManager.requestWithTarget(.api_OrderDetail(OrderCode:self.orderCode ?? ""), successClosure: { [weak self](result, code) in
                 let json = JSON(result)
                 DLog(json)
                 if let strongSelf = self{
@@ -445,7 +445,7 @@ extension WOWOrderDetailController{
         if let orderNewModel = self.orderNewDetailModel {
             
             //    backView.hidePayView()
-            if  orderNewModel.orderCode!.isEmpty {
+            if  (orderNewModel.orderCode ?? "").isEmpty {
                 WOWHud.showMsg("订单不存在")
                 return
             }

@@ -66,8 +66,8 @@ class WOWCommentCell: UITableViewCell {
                 
                 strongSelf.thumbButton.isSelected = isFavorite ?? false
                 // 接口那边通过 请求这个页面的接口计算有多少人查看，如果此时调用这个接口拉新数据的话，会多一次请求，会造成一下两次的情况产生 ，所以前端处理 自增减1
-                strongSelf.modelData?.favoriteQty = Calculate.calculateType(type: isFavorite!)(strongSelf.modelData?.favoriteQty ?? 0)
-                
+                strongSelf.modelData?.favoriteQty = Calculate.calculateType(type: isFavorite ?? false)(strongSelf.modelData?.favoriteQty ?? 0)
+            
                 var thumbNum = strongSelf.modelData?.favoriteQty ?? 0
                 thumbNum     = (thumbNum < 0 ? 0:thumbNum)
                 if thumbNum == 0 {

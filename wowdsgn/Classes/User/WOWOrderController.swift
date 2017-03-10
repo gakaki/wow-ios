@@ -341,7 +341,7 @@ extension WOWOrderController:UITableViewDelegate,UITableViewDataSource{
         vc.orderCode = orderCode
         vc.delegate = self
         parentNavigationController!.pushViewController(vc, animated: true)
-
+        VCRedirect.toOrderDetail(orderCode: orderCode)
     }
     
     func goCommentVC(_ orderCode:String) {

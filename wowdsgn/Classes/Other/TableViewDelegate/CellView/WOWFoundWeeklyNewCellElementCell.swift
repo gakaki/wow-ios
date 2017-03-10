@@ -23,7 +23,7 @@ class WOWFoundWeeklyNewCellElementCell: UICollectionViewCell {
         label.isHidden = false
     }
     func setModel(_ m:WowModulePageItemVO){
-            pictureImageView.set_webimage_url(m.productImg!)
+            pictureImageView.set_webimage_url(m.productImg ?? "")
             label_name.text      = m.productName
             label_price.text     = m.get_formted_sell_price()
         

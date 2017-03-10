@@ -106,7 +106,7 @@ class WOWInfoTextController: WOWBaseTableViewController {
                 }
                 NotificationCenter.postNotificationNameOnMainThread(WOWChangeUserInfoNotificationKey, object: nil)
 
-                strongSelf.changeInfotext!(info!)
+                strongSelf.changeInfotext!(info ?? "")
                 strongSelf.popVC()
             
                 

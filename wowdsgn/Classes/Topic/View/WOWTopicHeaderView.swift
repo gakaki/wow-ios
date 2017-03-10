@@ -12,6 +12,7 @@ class WOWTopicHeaderView: UICollectionReusableView {
     @IBOutlet weak var topicImg: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +23,12 @@ class WOWTopicHeaderView: UICollectionReusableView {
         if let model = model {
             topicImg.set_webimage_url(model.topicImg)
             titleLabel.text = model.topicName
-            
+            if model.topicDesc == nil || model.topicDesc == ""{
+                bottomSpace.constant = 0
+            }else {
+                bottomSpace.constant = 30
+            }
+
             descLabel.text = model.topicDesc
             descLabel.setLineHeightAndLineBreak(1.3)
         }

@@ -277,7 +277,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             skuCount = skuCount == 0 ? 1 : skuCount
             showResult(count: skuCount)
         }else{
-                if productInfo?.availableStock! > skuCount {
+                if productInfo?.availableStock ?? 0 > skuCount {
                     skuCount += 1
                 }else {
                     WOWHud.showMsg("库存不足")
@@ -556,7 +556,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
 
         }else{
             if allSelect && productInfo?.productStatus == 1 {
-                    if productInfo?.availableStock! > skuCount {
+                    if productInfo?.availableStock ?? 0 > skuCount {
                         skuCount += 1
                     }else {
                         WOWHud.showMsg("库存不足")
@@ -604,7 +604,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             //如果所加数量大于已有库存，则显示库存最大数
             if let availableStock = self.productInfo?.availableStock {
                 if availableStock < skuCount {
-                    skuCount = (self.productInfo?.availableStock)!
+                    skuCount = (self.productInfo?.availableStock) ?? 0
 
                 }
             }

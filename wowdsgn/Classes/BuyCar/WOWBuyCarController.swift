@@ -393,7 +393,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     strongSelf.selectedArr.removeObject(model)
                     strongSelf.selectedArr.append(model)
                 }
-                strongSelf.tableView.reloadRows(at: [indexPath], with: .none)
+                strongSelf.tableView.reloadData()
             }
         }) { (errorMsg) in
             WOWHud.showMsg("修改失败")

@@ -44,8 +44,8 @@ class Cell_501_Recommend: UITableViewCell,ModuleViewElement {
                 
                 if let strongSelf = self {
                         print("请求成功")
-                    strongSelf.likeBtn.isSelected = isFavorite!
-                    self?.productModel?.favorite = isFavorite!
+                    strongSelf.likeBtn.isSelected = isFavorite ?? false
+                    self?.productModel?.favorite = isFavorite ?? false
                 }
                 
             })

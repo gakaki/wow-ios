@@ -47,7 +47,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         
         priceLabel.text = result
-        goodsNumber.text = (model.productQty)!.toString.get_formted_X()
+        goodsNumber.text = ((model.productQty) ?? 1).toString.get_formted_X()
 
     }
     // 展示未发货的数据

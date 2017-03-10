@@ -81,9 +81,11 @@ class WOWHomeFormCell: UITableViewCell,ModuleViewElement {
     }()
     
     func loadMore()  {
-        
-            self.delegate?.goToVC(modelData!)
-            self.endRefresh()
+        if let modelData = modelData  {
+            self.delegate?.goToVC(modelData)
+        }
+    
+        self.endRefresh()
 
     }
     func endRefresh() {
@@ -176,7 +178,10 @@ extension WOWHomeFormCell:UICollectionViewDelegate,UICollectionViewDataSource,UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == numberCell - 1 { // 点击更多进入分类页面
             if let del = delegate {
-                del.goToVC(modelData!)
+                if let modelData = modelData {
+                    del.goToVC(modelData)
+
+                }
             }
 
         }else {

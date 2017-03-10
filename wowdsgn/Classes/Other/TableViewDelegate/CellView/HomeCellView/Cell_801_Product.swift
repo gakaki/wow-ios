@@ -50,7 +50,7 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
                 configureAutoScrollTimer()
                 pagingScrollView.pageControl.isHidden       = false
                 pagingScrollView.scrollView.isScrollEnabled = true
-                pagingScrollView.pageControl.numberOfPages  = (self.dataSourceArray?.count)!
+                pagingScrollView.pageControl.numberOfPages  = (self.dataSourceArray?.count) ?? 1
              
             }else{// 当数据源为一个时，禁止scrollview滑动，pagecontroller隐藏，计时器销毁
                 self.currentIndex = 0
@@ -257,7 +257,7 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
             
         }
             //当前显示的是最后一个View
-        else if self.currentIndex == (self.dataSourceArray?.count)! - 1 {
+        else if self.currentIndex == ((self.dataSourceArray?.count) ?? 1) - 1 {
             
             configureModel(model: dataSourceArray?[self.currentIndex-1],v: self.leftView)
             
@@ -275,7 +275,7 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
             configureModel(model: dataSourceArray?[self.currentIndex],v: self.middleView)
             
             }
-            if self.currentIndex < (dataSourceArray?.count)! - 1{
+            if self.currentIndex < ((dataSourceArray?.count) ?? 1) - 1{
 
             configureModel(model: dataSourceArray?[self.currentIndex+1],v: self.rightView)
             }

@@ -311,7 +311,6 @@ class WOWProductDetailController: WOWBaseViewController {
         let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController.self)) as! WOWBuyCarController
         vc.hideNavigationBar = false
         navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     //MARK:登录成功回调
@@ -522,6 +521,8 @@ class WOWProductDetailController: WOWBaseViewController {
         }) {[weak self] (errorMsg) in
             
             if let strongSelf = self{
+                //初始化详情页数据
+                strongSelf.configData()
                 strongSelf.endRefresh()
             }
         }

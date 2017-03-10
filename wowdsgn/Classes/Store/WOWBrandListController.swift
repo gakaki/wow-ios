@@ -123,27 +123,29 @@ class WOWBrandListController: WOWBaseViewController {
                 if let dataArr = arr{
                     
                     let brands  = Mapper<WOWBrandV1Model>().mapArray(JSONObject:dataArr)
-                    
-                    //循环所有的然后给分组
-                    for letter in strongSelf.headerIndexs{
-                        let group_row    = brands!.filter{ (brand) in brand.letter == letter }
+                    if let brands = brands {
+                        //循环所有的然后给分组
+                        for letter in strongSelf.headerIndexs{
+                            let group_row    = brands.filter{ (brand) in brand.letter == letter }
+                            if group_row.count > 0 {
+                                strongSelf.dataArray.append(group_row)
+                                strongSelf.originalArray.append(contentsOf: group_row)
+                                
+                                strongSelf.headerIndexsNew.append(group_row[0].letter ?? "")
+                            }
+                            
+                        }
+                        
+                        //for # 判断是否开头为0-9 归为# 行列
+                        let group_row    = brands.filter{ (brand) in strongSelf.isStringContainsNumber(brand.letter ?? "") == true }
                         if group_row.count > 0 {
+                            strongSelf.headerIndexsNew.append("#")
+                            
                             strongSelf.dataArray.append(group_row)
                             strongSelf.originalArray.append(contentsOf: group_row)
-                       
-                            strongSelf.headerIndexsNew.append(group_row[0].letter ?? "")
                         }
-
                     }
-
-                    //for # 判断是否开头为0-9 归为# 行列
-                    let group_row    = brands!.filter{ (brand) in strongSelf.isStringContainsNumber(brand.letter ?? "") == true }
-                    if group_row.count > 0 {
-                        strongSelf.headerIndexsNew.append("#")
-
-                        strongSelf.dataArray.append(group_row)
-                        strongSelf.originalArray.append(contentsOf: group_row)
-                    }
+                    
                     strongSelf.endRefresh()
 
                 }

@@ -53,7 +53,7 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelegat
     func reloadBanner(_ dataArr:[WOWCarouselBanners]){
         imageURLArray = []
         for i in 0..<dataArr.count {
-            imageURLArray.append(dataArr[i].bannerImgSrc! as String)
+            imageURLArray.append((dataArr[i].bannerImgSrc ?? "") as String)
         }
         bannerCurrentArray = dataArr
         cyclePictureView.delegate = self

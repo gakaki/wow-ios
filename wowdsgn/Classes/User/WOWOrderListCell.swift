@@ -42,7 +42,7 @@ class WOWOrderListCell: UITableViewCell {
     
     weak var delegate : OrderCellDelegate?
 //    var model : WOWOrderListModel?
-     var modelNew : WOWNewOrderListModel?
+     var modelNew : WOWNewOrderListModel!
     let statuTitles = ["待付款","待发货","待收货","待评论","已完成","已关闭"]
     let rightTitles = ["立即支付","","确认收货","评价","删除订单",""]
     var dataArr = [WOWOrderProductModel] ()
@@ -89,7 +89,7 @@ class WOWOrderListCell: UITableViewCell {
         
         statusLabel.text = m.orderStatusName
         orderIdLabel.text = m.orderCode
-        goodsCountLabel.text = "共"+(m.totalProductQty?.toString)!+"件"
+        goodsCountLabel.text = "共"+((m.totalProductQty?.toString) ?? "1")+"件"
         let result = WOWCalPrice.calTotalPrice([m.orderAmount ?? 0],counts:[1])
         
         totalPriceLabel.text = result
@@ -100,7 +100,7 @@ class WOWOrderListCell: UITableViewCell {
     @IBAction func rightButtonClick(_ sender: UIButton) {
         if sender.tag == 1001 {
             if let del = delegate {
-                del.OrderCellClick(.showTrans,model:self.modelNew!,cell: self)
+                del.OrderCellClick(.showTrans,model:self.modelNew,cell: self)
             }
         }else{
             var action = OrderCellAction.pay
@@ -117,7 +117,7 @@ class WOWOrderListCell: UITableViewCell {
                 break
             }
             if let del = delegate {
-                del.OrderCellClick(action,model: self.modelNew!,cell:self)
+                del.OrderCellClick(action,model: self.modelNew,cell:self)
             }
         }
     }

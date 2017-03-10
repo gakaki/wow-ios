@@ -108,7 +108,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 cell.productImg.tag = (indexPath as NSIndexPath).row
                 cell.productImg.addTapGesture(action: {[weak self] (tap) in
                     if let strongSelf = self {
-                        strongSelf.lookBigImg((tap.view?.tag)!)
+                        strongSelf.lookBigImg((tap.view?.tag) ?? 0)
                     }
                     
                     })

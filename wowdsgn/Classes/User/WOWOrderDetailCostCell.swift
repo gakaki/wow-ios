@@ -12,7 +12,7 @@ class WOWOrderDetailCostCell: UITableViewCell {
     @IBOutlet weak var freightTypeLabel: UILabel!// 邮费 / 优惠券
     @IBOutlet weak var priceLabel: UILabel!// 相关费用
     @IBOutlet weak var saidImageView: UIImageView!// 相关费用
-    var orderNewDetailModel : WOWNewOrderDetailModel?
+    var orderNewDetailModel : WOWNewOrderDetailModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,14 +21,14 @@ class WOWOrderDetailCostCell: UITableViewCell {
     func showUI(_ m:WOWNewOrderDetailModel,indexPath:IndexPath) {
         orderNewDetailModel = m
         if (indexPath as NSIndexPath).row == 0 {
-            let result = WOWCalPrice.calTotalPrice([orderNewDetailModel!.deliveryFee ?? 0],counts:[1])
+            let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.deliveryFee ?? 0],counts:[1])
             self.priceLabel.text       = result
             
             self.saidImageView.isHidden  = true
             self.freightTypeLabel.text = "运费"
         }
         if (indexPath as NSIndexPath).row == 1 {
-            let result = WOWCalPrice.calTotalPrice([orderNewDetailModel!.couponAmount ?? 0],counts:[1])
+            let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.couponAmount ?? 0],counts:[1])
             self.priceLabel.text       = "-" + result
             
             self.saidImageView.isHidden  = true

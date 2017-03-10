@@ -82,7 +82,13 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
 
                         //先这样写吧，动态计算label的高度，更改header的高度
                         strongSelf.header_height = Float(strongSelf.vo_topic?.topicDesc?.heightWithConstrainedWidth(MGScreenWidth - 30, font: UIFont.systemScaleFontSize(14), lineSpace: 1.3) ?? 0) * 1.3 + Float(strongSelf.vo_topic?.topicName?.heightWithConstrainedWidth(MGScreenWidth - 30, font: UIFont.mediumScaleFontSize(20), lineSpace: 1) ?? 0)
-                        strongSelf.layout.headerHeight = Float(MGScreenWidth * (2/3)) + 55       + strongSelf.header_height
+                        if strongSelf.vo_topic?.topicDesc == nil || strongSelf.vo_topic?.topicDesc == ""{
+                            strongSelf.layout.headerHeight = Float(MGScreenWidth * (2/3)) + 25 + strongSelf.header_height
+
+                        }else {
+                            strongSelf.layout.headerHeight = Float(MGScreenWidth * (2/3)) + 55 + strongSelf.header_height
+
+                        }
                         strongSelf.cv.reloadData()
                         strongSelf.endRefresh()
                         
@@ -216,7 +222,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 
                 if ( row.productId != nil ){
                     selectedCell = cell as! WOWGoodsSmallCell
-                    VCRedirect.toVCProduct(row.productId!)
+                    VCRedirect.toVCProduct(row.productId ?? 0)
                 }
             }
 

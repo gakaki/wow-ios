@@ -277,9 +277,7 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
         
 //        let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: WOWSceneController.self)) as! WOWSceneController
-//        vc.entrance = .tag
-////        vc.ob_cid.value     = pid ?? 10
-//        topNaVC?.pushViewController(vc, animated: true)
+//        vc.entrance = .tag //        topNaVC?.pushViewController(vc, animated: true)
     }
     
     /*

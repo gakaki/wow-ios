@@ -81,7 +81,10 @@ extension Cell_102_Project:UICollectionViewDelegate,UICollectionViewDataSource,U
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WOW_Cell_102_Item", for: indexPath) as! WOW_Cell_102_Item
         //FIX 测试数据
         let model = dataArr?[indexPath.row]
-        cell.showData(model!)
+        if let model = model {
+            cell.showData(model)
+
+        }
         return cell
     }
     

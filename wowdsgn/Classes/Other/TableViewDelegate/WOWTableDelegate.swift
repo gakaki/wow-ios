@@ -229,9 +229,12 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WOWlListCell
             
             cell.delegate = self.vc as! SenceCellDelegate?
-            cell.showData(model.moduleContent!)
-            cell.model = model.moduleContent!
-            cell_heights[section]  = cell.heightAll
+            if let moduleContent = model.moduleContent {
+                cell.showData(moduleContent)
+                cell.model = moduleContent
+                cell_heights[section]  = cell.heightAll
+            }
+            
             returnCell = cell
         case 601:
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WOWHomeFormCell
@@ -319,7 +322,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             let cell = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! Cell_501_Recommend
             cell.delegate       = self.vc as! Cell_501_Delegate?
-            cell.showData(model.moduleContentItem!)
+            if let moduleContentItem = model.moduleContentItem {
+                cell.showData(moduleContentItem)
+
+            }
             
             returnCell = cell
         case MODULE_TYPE_CATEGORIES_CV_CELL_301.cell_type():
@@ -636,7 +642,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     
                 }else{
                     let v = strongSelf.vc as? WOWBaseModuleVC
-                    v?.goController(bannerModel!)
+                    if let bannerModel = bannerModel {
+                        v?.goController(bannerModel)
+
+                    }
                 }
                
             }

@@ -26,7 +26,7 @@ class WOWOrderDetailTwoCell: UITableViewCell {
         
         orderTypeLabel.text = orderNewDetailModel.orderStatusName
         orderTimeLabel.text = "下单时间：" + (orderNewDetailModel.orderCreateTimeFormat ?? "")
-        switch m.orderStatus! {
+        switch m.orderStatus ?? 0 {
         case 4,5,6:
             orderTypeLabel.textColor = UIColor.init(hexString: "000000")
         default:

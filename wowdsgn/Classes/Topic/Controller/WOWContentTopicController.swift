@@ -468,7 +468,7 @@ extension WOWContentTopicController: UITableViewDelegate, UITableViewDataSource 
                             cell.productImg.tag = imgStr.offset
                             cell.productImg.addTapGesture(action: {[weak self] (tap) in
                                 if let strongSelf = self {
-                                    strongSelf.lookBigImg((tap.view?.tag)!)
+                                    strongSelf.lookBigImg((tap.view?.tag) ?? 0)
                                 }
                                 
                             })

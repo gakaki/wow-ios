@@ -58,14 +58,15 @@ class WOWBrandHomeController: WOWBaseViewController {
         //判断一下是品牌详情还是设计师详情
         switch entrance {
         case .brandEntrance:
-            
+            self.title = "品牌主页"
             requestBrandDetail()
             if WOWUserManager.loginStatus {
                 requestIsFavoriteBrand()
             }
             
         case .designerEntrance:
-            
+            self.title = "设计师主页"
+
             requestDesignerDetail()
             if WOWUserManager.loginStatus {
                 requestIsFavoriteDesigner()

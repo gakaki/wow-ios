@@ -31,7 +31,7 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.keyWindow?.endEditing(true)
+//        UIApplication.shared.keyWindow?.endEditing(true)
     }
 
 
@@ -44,7 +44,9 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
         super.viewWillAppear(animated)
         setCustomerBack()
     }
-    
+    deinit {
+        DLog("\(self.title) --- 销毁")
+    }
     func setCustomerBack() {
         if navigationController?.viewControllers.count > 1 {
             let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(navBack))

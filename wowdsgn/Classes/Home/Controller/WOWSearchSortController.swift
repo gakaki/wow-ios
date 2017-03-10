@@ -40,9 +40,7 @@ class WOWSearchSortController: BaseScreenViewController{
 
         
     }
-    deinit {
-        print("销毁")
-    }
+
     
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -26,7 +26,6 @@ class VCBaseNavCart:WOWBaseViewController{
     deinit {
         removeObservers()
     }
-    
     fileprivate func addObservers(){
         NotificationCenter.default.addObserver(self, selector:#selector(buyCarCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
     }

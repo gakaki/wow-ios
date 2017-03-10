@@ -32,6 +32,12 @@ class WOWCouponController: WOWBaseViewController {
         return view
     }()
     
+    lazy var couponNumberView:WOWCouponNumberView = {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWCouponNumberView.self), owner: self, options: nil)?.last as! WOWCouponNumberView
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -128,14 +134,16 @@ class WOWCouponController: WOWBaseViewController {
 
 }
 
-extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
+extension WOWCouponController: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     //MARK - 滚动就取消响应 只有scrollView的实际内容大于scrollView的尺寸时才会有滚动事件
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        UIApplication.shared.keyWindow?.endEditing(true)
-        
+        couponNumberView.textField.resignFirstResponder()
     }
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        couponNumberView.textField.resignFirstResponder()
+        return true
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         let count = self.vo_cupons.count
@@ -164,7 +172,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
             cell.label_time_limit.text      = "\(r.effectiveFrom ?? "")至\(r.effectiveTo ?? "")"
             cell.useCouponBtn.tag = indexPath.section
             cell.useCouponBtn.addTarget(self, action: #selector(goCouponProduct(_:)), for: .touchUpInside)
-            
+        
             if ( r.status == 0) { //不可用
                 cell.showData(false)
                 cell.label_is_used.text         = r.statusDesc
@@ -236,9 +244,9 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
         switch section {
         case 0:
             if entrance == .userEntrance {
-                let view = Bundle.main.loadNibNamed(String(describing: WOWCouponNumberView.self), owner: self, options: nil)?.last as! WOWCouponNumberView
-                view.delegate = self
-                return view
+                couponNumberView.delegate = self
+                couponNumberView.textField.delegate = self
+                return couponNumberView
             }else {
                 let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView.self), owner: self, options: nil)?.last as! WOWCouponheaderView
                 view.noUseButton.addTarget(self, action: #selector(noUserClick(_:)), for:.touchUpInside)
@@ -261,11 +269,10 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func goCouponProduct(_ sender: UIButton)  {
-        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWCouponProductController.self)) as! WOWCouponProductController
         let couponModel = self.vo_cupons[sender.tag]
-        vc.couponId = couponModel.id ?? 0
-        vc.navTitle = couponModel.title
-        navigationController?.pushViewController(vc, animated: true)
+    
+        VCRedirect.goCounponProduct(couponId: couponModel.id ?? 0, navTitle: couponModel.title ?? "")
+        
     }
     
 }

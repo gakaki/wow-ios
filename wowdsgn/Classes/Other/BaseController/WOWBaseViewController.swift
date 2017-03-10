@@ -67,14 +67,16 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
         }
         return nil
     }
-    
+    deinit {
+        DLog("\(self.title) --- 销毁")
+    }
 
 //MARK:Life
     override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         endPageView()
         
-        UIApplication.shared.keyWindow?.endEditing(true)
+//        UIApplication.shared.keyWindow?.endEditing(true)
     }
     
     override public func viewWillAppear(_ animated: Bool) {
@@ -204,9 +206,9 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
     
 
 //MARK:Private Actions
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIApplication.shared.keyWindow?.endEditing(true)
-    }
+//    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        UIApplication.shared.keyWindow?.endEditing(true)
+//    }
  
 
 }

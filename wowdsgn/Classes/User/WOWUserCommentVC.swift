@@ -27,7 +27,6 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
     fileprivate var productCommentDic : [String:AnyObject]?
     
     weak var delegate : UserCommentSuccesDelegate?
-    
     var collectionViewOfDataSource  = Dictionary<Int, UserPhotoManage>() //空字典,记录每个 cell上面的选择图片的数据
     var orderCode   :String!
     @IBOutlet weak var tableView: UITableView!
@@ -36,7 +35,19 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         
         super.viewDidLoad()
         self.title = "评论"
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+        
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        
     }
 
     override func setUI() {
@@ -260,6 +271,5 @@ extension WOWUserCommentVC:UITableViewDelegate,UITableViewDataSource{
 //        
 ////        UIApplication.shared.keyWindow?.endEditing(true)
 //        self.view.endEditing(true)
-//        
 //    }
 }

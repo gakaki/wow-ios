@@ -177,9 +177,6 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     
-    deinit{
-  
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

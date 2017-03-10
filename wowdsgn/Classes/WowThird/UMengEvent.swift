@@ -14,12 +14,16 @@ public extension MobClick {
         let event_name = String(describing: countEvent)
         print(event_name)
         MobClick.event(event_name)
+        TalkingData.trackEvent(event_name, label: "AppStore")
+
     }
 
-    public static func e2(_ structEvent:StructDataEvent , _ params: [String : Any] ){
+    public static func e2(_ structEvent:UMengEvent , _ params: [String : Any] ){
         let event_name = String(describing: structEvent)
         print(event_name)
         MobClick.event(event_name, attributes: params)
+        TalkingData.trackEvent(event_name, label: "AppStore", parameters: params)
+
     }
  
 }
@@ -77,6 +81,12 @@ public enum UMengEvent  {
     
     case Bind_Other_Skip             //其他页，跳过
     case Bind_Other_Succ             //其他页，完成
+    
+    case Product_Group_Detail_Page      //产品组详情页
+    case Space_Detail_Page              //场景详情页
+    case Product_Tag_Detail_Page            //标签详情页
+    case Son_Home_Page_Tab              //自首页tab
+    case Banner                     //轮播内or单张banner
     
 }
 

@@ -20,6 +20,15 @@ public enum StructDataEvent  {
     case PlaceOrder                //提交订单
     case PaySuccess                //支付成功
     
+    case Banner                  //（首页）轮播模块
+    case Landscape_Banner_Group     //（首页）横向banner组模块
+    case Portrait_Banner_Group        //（首页）纵向banner组模块
+    case Landscape_Product_Group        //（首页）横向产品组模块
+    case Portrait_Product_Group          //（首页）纵向产品组模块
+    case Hot_Category_Banner            //（首页）热门分类模块
+    case Recommend_Brand                  //（首页）品牌推荐模块
+    case Category_Banner                //（分类）分类banner模块点击
+    
 }
 
 

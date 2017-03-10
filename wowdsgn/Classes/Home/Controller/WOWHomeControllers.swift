@@ -70,6 +70,7 @@ class WOWHomeControllers: WOWBaseViewController {
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
         pageMenu?.delegate = self
         
+        pageMenu?.delegate = self
         self.view.addSubview(pageMenu!.view)
 
     }
@@ -156,33 +157,17 @@ class WOWHomeControllers: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+
 extension WOWHomeControllers:CAPSPageMenuDelegate{
     
-//    func willMoveToPage(_ controller: UIViewController, index: Int) {
-////        if selectCurrentIndex == index {// 点击不同的列表页  第一次进列表页 请求数据
-//            let currentVC = controller as! WOWOrderController
-//            if currentVC.isRequest == false { // 如果未请求，才去请求网络。
-//                currentVC.request()
-//            }
-////        }
-//    }
+
     // 滑动结束 再请求网络
     func didMoveToPage(_ controller: UIViewController, index: Int){
         
-        
+        MobClick.e(.Son_Home_Page_Tab)
         let currentVC = controller as! WOWController
         if currentVC.isRequest == false { // 如果未请求，才去请求网络。
             currentVC.request()

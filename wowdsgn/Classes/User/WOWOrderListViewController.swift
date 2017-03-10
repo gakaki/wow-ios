@@ -90,9 +90,7 @@ class WOWOrderListViewController: WOWBaseViewController {
         self.navigationShadowImageView?.isHidden = false
         
     }
-    deinit{
-        print("orderList 释放")
-    }
+
     //MARK:Private Method
     override func setUI() {
         super.setUI()

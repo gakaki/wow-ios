@@ -341,7 +341,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //MARK:分享
     @IBAction func shareClick(_ sender: UIButton) {
         let shareUrl = WOWShareUrl + "/item/\(productId ?? 0)"
-        WOWShareManager.share(productModel?.productTitle, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:imgUrlArr[0] ?? UIImage(named: "me_logo")!)
+        WOWShareManager.share(productModel?.productTitle, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:imgUrlArr[0] )
     }
     
     //MARK:喜欢
@@ -629,12 +629,9 @@ extension WOWProductDetailController: UINavigationControllerDelegate
         }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWBuyCarController.className {
             let popController = toVC as! WOWBuyCarController
             return MagicMovePop(popController: popController, selectView: popController.selectedImage)
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWHomeControllers.className {
-            let popController = toVC as! WOWHomeControllers
-            return MagicMovePop(popController: popController, selectView: popController.selectedImage)
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == VCShopping.className {
-            let popController = toVC as! VCShopping
-            return MagicMovePop(popController: popController, selectView: popController.selectedImage)
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWBrandHomeController.className {
+            let popController = toVC as! WOWBrandHomeController
+            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
         }else {
             return nil
         }

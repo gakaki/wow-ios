@@ -79,7 +79,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         
         if let del = delegate{
             
-            del.goToProductDetailVC(oneModel?.productId, selectedImage: imgShowTwo)
+            del.goToProductDetailVC(twoModel?.productId, selectedImage: imgShowTwo)
             
         }
         

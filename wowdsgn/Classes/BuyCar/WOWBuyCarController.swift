@@ -734,8 +734,8 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension WOWBuyCarController: buyCarDelegate, HomeBottomDelegate {
-    func goProductDetail(_ productId: Int?) {
-        
+    func goProductDetail(_ productId: Int?, selectedImage: UIImageView!) {
+        self.selectedImage = selectedImage
         VCRedirect.toVCProduct(productId)
     
     }

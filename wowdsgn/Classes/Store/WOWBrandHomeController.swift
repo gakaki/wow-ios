@@ -26,6 +26,8 @@ class WOWBrandHomeController: WOWBaseViewController {
     let pageSize = 10                   //分页数据大小
     let nomarlHeight: CGFloat = 355       //默认高度
     
+    var selectedCell: WOWGoodsSmallCell!
+
     public var entrance = brandOrDesignerEntrance.brandEntrance     //入口
     
 //    fileprivate var shareBrandImage:UIImage? //供分享使用
@@ -48,7 +50,11 @@ class WOWBrandHomeController: WOWBaseViewController {
         l.headerHeight = 355
         return l
     }()
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.navigationController?.delegate = self
+    }
     
     override func setUI() {
         super.setUI()
@@ -421,7 +427,8 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         
+        let cell = collectionView.cellForItem(at: indexPath) as! WOWGoodsSmallCell
+        selectedCell = cell
         let model = dataArr[(indexPath as NSIndexPath).row]
         VCRedirect.toVCProduct(model.productId)
     }
@@ -454,7 +461,20 @@ extension WOWBrandHomeController: brandHeaderViewDelegate {
     }
 }
 
-
+extension WOWBrandHomeController: UINavigationControllerDelegate
+{
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        if operation == .push, toVC.className == WOWProductDetailController.className
+        {
+            return MagicMovePush(selectView: self.selectedCell.pictureImageView)
+        }
+        else
+        {
+            return nil
+        }
+    }
+}
 
     
 

@@ -44,7 +44,7 @@ struct ModulePageType {
         PAGE_MODULE_TYPE_HOT_PEOPLE                 : WOWHotPeopleCell.classForCoder(),                     //    精选页点赞cell
         PAGE_MODULE_TYPE_HOT_Play                   : WOWHotBannerCell.classForCoder(),                     //    精选页轮播 比例 3：2
         PAGE_MODULE_TYPE_CRE_TwoLine                : Cell_104_TwoLine.classForCoder(),                     //    双列产品组 比例自适应
-        PAGE_MODULE_TYOE_CLASS_Banner               : Cell_Class_Banner.classForCoder(),                    //    分类可伸缩banner
+        PAGE_MODULE_TYOE_CLASS_Banner               : Cell_105_Banner.classForCoder(),                    //    分类可伸缩banner
         PAGE_MODULE_TYOE_HOME_BRANDZONE             : Cell_107_BrandZone.classForCoder(),                   //    品牌专区  一个推荐banner + 底部三个商品
         PAGE_MODULE_TYOE_HOME_ADGROUP               : Cell_106_BrandList.classForCoder()                         //    广告组 横向固定 三个
         

@@ -392,34 +392,24 @@ extension WOWBaseModuleVC:Cell_107_BrandZoneDelegate{//  品牌专区  一个推
         VCRedirect.toVCProduct(productId)
     }
 }
-extension WOWBaseModuleVC:Cell_Class_BannerDelegate{
-    
-    func updataTableViewCellHight(section: Int)  {
-//            uivi
-        
+//extension WOWBaseModuleVC:Cell_105_BannerDelegate{
+//    
+//    func updataTableViewCellHight(section: Int)  {
+//        
 //        let indexSet = NSIndexSet.init(index: section)
-        
-//        UIView.performWithoutAnimation {
-//            tableView.beginUpdates()
-            let indexsSet = NSIndexSet.init(indexesIn: NSRange.init(location: 0, length: 4))
-            tableView.reloadSections(indexsSet as IndexSet, with: .none)
-//            tableView.layoutIfNeeded()
-//            tableView.endUpdates()
-        
-//        }
-
-//        tableView.reloadData()
-        
-        let b = IndexPath.init(row: 0, section: section)
-        tableView.scrollToRow(at: b, at: .top, animated: true)
-    }
-    
-    
-    // banner 跳转
-    func gotoVCFormLinkType_ClassBanner(model: WOWCarouselBanners){
-        
-        goController(model)
-        
-    }
-
-}
+//        
+//       tableView.reloadSections(indexSet as IndexSet, with: .none)
+//        
+//        let b = IndexPath.init(row: 0, section: section)
+//        tableView.scrollToRow(at: b, at: .top, animated: true)
+//    }
+//    
+//    
+//    // banner 跳转
+//    func gotoVCFormLinkType_ClassBanner(model: WOWCarouselBanners){
+//        
+//        goController(model)
+//        
+//    }
+//
+//}

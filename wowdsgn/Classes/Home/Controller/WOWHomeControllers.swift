@@ -14,7 +14,6 @@ class WOWHomeControllers: WOWBaseViewController {
     var selectCurrentIndex : Int? = 0
     
     var tabs : [WOWHomeTabs] = []
-    var selectedImage: UIImageView!
 
     
     override func viewDidLoad() {
@@ -143,8 +142,8 @@ class WOWHomeControllers: WOWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         MobClick.e(.Home_Page)
-
-         self.navigationShadowImageView?.isHidden = true
+        
+        self.navigationShadowImageView?.isHidden = true
      
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -152,7 +151,6 @@ class WOWHomeControllers: WOWBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        self.navigationController?.delegate = self
 
     }
 
@@ -166,20 +164,6 @@ class WOWHomeControllers: WOWBaseViewController {
 
 }
 
-extension WOWHomeControllers: UINavigationControllerDelegate
-{
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
-    {
-        if operation == .push, toVC.className == WOWProductDetailController.className
-        {
-            return MagicMovePush(selectView: self.selectedImage)
-        }
-        else
-        {
-            return nil
-        }
-    }
-}
 extension WOWHomeControllers:CAPSPageMenuDelegate{
     
 

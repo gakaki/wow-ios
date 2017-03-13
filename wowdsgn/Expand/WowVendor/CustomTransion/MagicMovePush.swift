@@ -45,7 +45,7 @@ class MagicMovePush: NSObject, UIViewControllerAnimatedTransitioning
         
         // 4.都添加到 container 中。注意顺序不能错了
         container.addSubview(toVC.view)
-        container.addSubview(snapshotView!)
+        container.addSubview(snapshotView ?? UIImageView())
         
         // 5.执行动画
         toVC.cycleView.layoutIfNeeded()

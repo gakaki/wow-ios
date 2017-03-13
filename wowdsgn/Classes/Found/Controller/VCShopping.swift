@@ -8,7 +8,6 @@ import VTMagic
 class VCShopping: WowBaseVCCartSearch {
     
     var v : VCVTMagic!
-    var selectedImage: UIImageView!
 
     var vc_found:VCFound?
     var vc_brand:WOWBrandListController?

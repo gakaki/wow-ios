@@ -225,14 +225,14 @@ class WOWBaseModuleVC: WOWBaseViewController {
 
 }
 
-//extension WOWBaseModuleVC:HomeBottomDelegate{
-//    
-//    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
-//        VCRedirect.toVCProduct(productId)
-//        
-//    }
-//
-//}
+extension WOWBaseModuleVC:HomeBottomDelegate{
+    
+    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
+        VCRedirect.toVCProduct(productId)
+        
+    }
+
+}
 
 
 

@@ -219,16 +219,6 @@ class WOWController: WOWBaseModuleVC {
     }
 }
 
-extension WOWController:HomeBottomDelegate{
-    
-    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
-        let topViewController = FNUtil.currentTopViewController() as! WOWHomeControllers
-        topViewController.selectedImage = selectedImage
-        VCRedirect.toVCProduct(productId)
-        
-    }
-    
-}
 
 
 

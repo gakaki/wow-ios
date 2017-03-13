@@ -629,12 +629,12 @@ extension WOWProductDetailController: UINavigationControllerDelegate
         }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWBuyCarController.className {
             let popController = toVC as! WOWBuyCarController
             return MagicMovePop(popController: popController, selectView: popController.selectedImage)
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWHomeControllers.className {
-            let popController = toVC as! WOWHomeControllers
-            return MagicMovePop(popController: popController, selectView: popController.selectedImage)
         }else if operation == UINavigationControllerOperation.pop, toVC.className == VCShopping.className {
             let popController = toVC as! VCShopping
             return MagicMovePop(popController: popController, selectView: popController.selectedImage)
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWBrandHomeController.className {
+            let popController = toVC as! WOWBrandHomeController
+            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
         }else {
             return nil
         }

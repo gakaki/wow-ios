@@ -384,7 +384,7 @@ extension VCCategory:VTMagicViewDelegate, WOWBaseProductsControllerDelegate{
         if abs(index) > 1 {
             refreshSubView(pageIndex)
         }
-        
+      
 
     }
     

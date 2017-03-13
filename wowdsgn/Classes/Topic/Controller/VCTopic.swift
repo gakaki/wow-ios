@@ -16,7 +16,7 @@ class HairlineView: UIView {
 
 class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
     
-    var selectedCell: WOWGoodsSmallCell!
+    weak var selectedCell: WOWGoodsSmallCell!        //转场cell
     
     var vo_products             = [WOWProductModel]()
     let cell_reuse              = "cell_reuse"

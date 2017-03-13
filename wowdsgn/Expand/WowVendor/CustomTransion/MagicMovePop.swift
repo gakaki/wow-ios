@@ -34,19 +34,19 @@ class MagicMovePop: NSObject, UIViewControllerAnimatedTransitioning
 //        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! VCTopic 
         let container = transitionContext.containerView
         
-        let snapshotView = fromVC.cycleView.snapshotView(afterScreenUpdates: false)
-        snapshotView?.frame = container.convert(fromVC.cycleView.frame, from: fromVC.tableView)
+        let snapshotView = fromVC.selectedView
+        snapshotView.frame = container.convert(fromVC.cycleView.frame, from: fromVC.tableView)
         fromVC.cycleView.isHidden = true
         
         popController.view.frame = transitionContext.finalFrame(for: popController)
         selectView.isHidden = true
         
         container.insertSubview(popController.view, belowSubview: fromVC.view)
-        container.addSubview(snapshotView!)
+        container.addSubview(snapshotView)
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions(), animations: {[weak self] () -> Void in
             if let strongSelf = self {
-                snapshotView?.frame = container.convert(strongSelf.selectView.frame, from: strongSelf.selectView
+                snapshotView.frame = container.convert(strongSelf.selectView.frame, from: strongSelf.selectView
                     .superview)
                 fromVC.view.alpha = 0
             }
@@ -54,7 +54,7 @@ class MagicMovePop: NSObject, UIViewControllerAnimatedTransitioning
         }) {[weak self] (finish: Bool) -> Void in
             if let strongSelf = self {
                 strongSelf.selectView.isHidden = false
-                snapshotView?.removeFromSuperview()
+                snapshotView.removeFromSuperview()
                 fromVC.cycleView.isHidden = false
                 
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)

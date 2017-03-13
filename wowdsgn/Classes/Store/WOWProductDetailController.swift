@@ -15,6 +15,8 @@ protocol UpdateBuyCarListDelegate:class {
 
 class WOWProductDetailController: WOWBaseViewController {
     
+    var selectedView: UIView = UIView()        //转场cell
+
     fileprivate var percentDrivenTransition: UIPercentDrivenInteractiveTransition?
 
     weak var delegate:UpdateBuyCarListDelegate?
@@ -93,7 +95,6 @@ class WOWProductDetailController: WOWBaseViewController {
 //    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         request()
         addObservers()
         if isNeedCustomPop {
@@ -161,6 +162,7 @@ class WOWProductDetailController: WOWBaseViewController {
         super.setUI()
         configTable()
         cycleView.delegate = self
+        
         //        buyCarCount()
     }
 

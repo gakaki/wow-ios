@@ -277,11 +277,9 @@ public class CyclePictureView: UIView, UICollectionViewDelegate, UICollectionVie
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-
-        self.flowLayout?.itemSize = CGSize(width: self.bounds.size.width, height: self.bounds.size.height)
-        self.collectionView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height)
         //解决从SB中加载时，contentInset.Top默认为64的问题
         self.collectionView.contentInset = UIEdgeInsets.zero
+        self.flowLayout?.itemSize = CGSize(width: self.bounds.size.width, height: self.bounds.size.height)
         
         self.showFirstImagePageInCollectionView(self.collectionView)
         

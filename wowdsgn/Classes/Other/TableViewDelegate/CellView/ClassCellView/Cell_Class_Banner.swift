@@ -82,7 +82,20 @@ class Cell_Class_Banner: UITableViewCell,ModuleViewElement {
     // 更新Layout 高度的变化
     func updateCollectionViewHight()  {
         
-        self.collectionView.reloadData()
+//        self.collectionView.reloadData()
+        let indexSet = IndexSet.init(integer: 0)
+        self.collectionView.reloadSections(indexSet)
+         var indexPaths = [IndexPath]()
+//        for i in 0..<model_Class?.banners?.count {
+//            
+//            let indexPath = IndexPath.init(row: i , section: 0)
+//            indexPaths.append(indexPath as IndexPath)
+//
+            
+//        }
+//        self.collectionView.insertItemsAtIndexPaths([0], animationStyle: .none)
+//        self.collectionView.reloadSections([0], animationStyle: .automatic)
+        self.collectionView.insertItemsAtIndexPaths(indexPaths, animationStyle: .none)
         self.heightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height
         self.updateConstraintsIfNeeded()
         

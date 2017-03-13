@@ -617,6 +617,24 @@ extension WOWProductDetailController: UINavigationControllerDelegate
         }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWProductListController.className {
             let popController = toVC as! WOWProductListController
             return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == VCCategory.className {
+            let popController = toVC as! VCCategory
+            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWSceneController.className {
+            let popController = toVC as! WOWSceneController
+            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWSearchController.className {
+            let popController = toVC as! WOWSearchController
+            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWBuyCarController.className {
+            let popController = toVC as! WOWBuyCarController
+            return MagicMovePop(popController: popController, selectView: popController.selectedImage)
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWHomeControllers.className {
+            let popController = toVC as! WOWHomeControllers
+            return MagicMovePop(popController: popController, selectView: popController.selectedImage)
+        }else if operation == UINavigationControllerOperation.pop, toVC.className == VCShopping.className {
+            let popController = toVC as! VCShopping
+            return MagicMovePop(popController: popController, selectView: popController.selectedImage)
         }else {
             return nil
         }

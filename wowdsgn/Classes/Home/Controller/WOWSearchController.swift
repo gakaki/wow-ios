@@ -11,7 +11,8 @@ import UIKit
 
 class WOWSearchController: WOWBaseViewController{
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    var selectedCell: WOWGoodsSmallCell!
+
     var isLoadPrice: Bool = false
     var dataArr = [WOWProductModel]()
     var brandArr = [WOWBrandV1Model]()
@@ -31,7 +32,7 @@ class WOWSearchController: WOWBaseViewController{
 //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "搜索"
+       
         MobClick.e(.Search)
         
         request()
@@ -40,7 +41,19 @@ class WOWSearchController: WOWBaseViewController{
        
     }
     
-  
+    override func beginPageView() {
+        //TalkingData统计页面
+        TalkingData.trackPageBegin( "搜索" )
+        //友盟统计页面
+        MobClick.beginLogPageView("搜索")
+    }
+    
+    override func endPageView() {
+        //TalkingData统计页面
+        TalkingData.trackPageEnd( "搜索" )
+        
+        MobClick.endLogPageView("搜索")
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

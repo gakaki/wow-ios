@@ -7,10 +7,7 @@
 //
 
 import UIKit
-enum productEntrance {
-    case searchEntrance
-    case couponEntrance
-}
+
 
 enum ShowTypeIndex:String {
     case New            = "onShelfTime" // 当前在上新
@@ -29,7 +26,6 @@ class WOWSearchChildController: WOWBaseProductsController{
 
     var seoKey: String?
     var couponId: Int?
-    var entrance        = productEntrance.searchEntrance
     
 
     override func request() {

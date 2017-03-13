@@ -72,7 +72,8 @@ class WOWBuyCarController: WOWBaseViewController {
             
         }
     }
-    
+    var selectedImage: UIImageView!
+
     
     @IBOutlet weak var allButton: UIButton!             //全选按钮
     @IBOutlet weak var tableView: UITableView!          //购物车列表
@@ -101,7 +102,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.navigationController?.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -736,17 +737,31 @@ extension WOWBuyCarController: buyCarDelegate, HomeBottomDelegate {
     func goProductDetail(_ productId: Int?) {
         
         VCRedirect.toVCProduct(productId)
-
     
     }
-    // 跳转产品详情代理
-    func goToProductDetailVC(_ productId: Int?){
-        
+    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
+        self.selectedImage = selectedImage
         VCRedirect.toVCProduct(productId)
         
     }
+  
 }
 
+
+extension WOWBuyCarController: UINavigationControllerDelegate
+{
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        if operation == .push, toVC.className == WOWProductDetailController.className
+        {
+            return MagicMovePush(selectView: self.selectedImage)
+        }
+        else
+        {
+            return nil
+        }
+    }
+}
 extension WOWBuyCarController: orderCarDelegate {
     func toProductDetail(_ productId: Int?) {
         

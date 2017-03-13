@@ -10,7 +10,8 @@ import UIKit
 //  bottom cell 、 402 cell
 protocol HomeBottomDelegate:class {
     // 跳转产品详情代理
-    func goToProductDetailVC(_ productId: Int?)
+    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!)
+    
     
 }
 
@@ -70,8 +71,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         
         if let del = delegate{
             
-            del.goToProductDetailVC(oneModel?.productId)
-            
+            del.goToProductDetailVC(oneModel?.productId, selectedImage: imgShowOne)
         }
         
     }
@@ -79,7 +79,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         
         if let del = delegate{
             
-            del.goToProductDetailVC(twoModel?.productId)
+            del.goToProductDetailVC(oneModel?.productId, selectedImage: imgShowTwo)
             
         }
         

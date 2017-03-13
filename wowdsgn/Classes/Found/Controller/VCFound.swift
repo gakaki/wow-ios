@@ -18,7 +18,8 @@ class VCFound: WOWBaseModuleVC {
     var myQueueTimer: DispatchQueue?
     var myTimer: DispatchSourceTimer?
 
-    
+    var selectedImage: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,9 +33,11 @@ class VCFound: WOWBaseModuleVC {
         }
         
     }
-    
+
     override func setUI() {
         super.setUI()
+        addObserver()
+
         self.view.backgroundColor           = GrayColorLevel5
         
         dataDelegate?.vc                    = self
@@ -147,7 +150,9 @@ class VCFound: WOWBaseModuleVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        addObserver()
+        let topViewController = FNUtil.currentTopViewController()
+        let navigation = topViewController.navigationController
+        navigation?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,5 +215,28 @@ class VCFound: WOWBaseModuleVC {
 
 }
 
-
-
+extension VCFound:HomeBottomDelegate{
+    
+    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
+        self.selectedImage = selectedImage
+        let topViewController = FNUtil.currentTopViewController() as! VCShopping
+        topViewController.selectedImage = self.selectedImage
+        VCRedirect.toVCProduct(productId)
+        
+    }
+    
+}
+extension VCFound: UINavigationControllerDelegate
+{
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        if operation == .push, toVC.className == WOWProductDetailController.className
+        {
+            return MagicMovePush(selectView: self.selectedImage)
+        }
+        else
+        {
+            return nil
+        }
+    }
+}

@@ -44,7 +44,7 @@ class Cell_Class_Banner: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var model = SectionBannerModel.init(BannerImg: "", isOut: false)
-    
+    var MainDataArr     = [WOWHomeModle]()
     var model_Class     : WOWCarouselBanners?{// 数据源
         didSet{
             
@@ -131,12 +131,21 @@ extension Cell_Class_Banner:UICollectionViewDelegate,UICollectionViewDataSource,
                         if strongSelf.model_Class?.bannerIsOut == false {
                             
                             strongSelf.model_Class?.bannerIsOut = true
-
+                            
                         }else{
                             
                             strongSelf.model_Class?.bannerIsOut = false
 
                             
+                        }
+                        for a in strongSelf.MainDataArr.enumerated() {
+                            let type = a.element.moduleType ?? 0
+                            let id   = a.element.moduleContent?.id ?? 0
+                            if type == 105 {
+                                if id != strongSelf.model_Class?.id {
+                                    a.element.moduleContent?.bannerIsOut = false
+                                }
+                            }
                         }
                          strongSelf.updateCollectionViewHight()
 

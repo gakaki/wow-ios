@@ -9,7 +9,7 @@
 import UIKit
 
 protocol buyCarDelegate: class {
-    func goProductDetail(_ productId: Int?)
+    func goProductDetail(_ productId: Int?, selectedImage: UIImageView!)
 }
 
 class WOWBuyCarNormalCell: UITableViewCell{
@@ -93,7 +93,7 @@ class WOWBuyCarNormalCell: UITableViewCell{
         detailView.addTapGesture {[weak self] (tap) in
             if let strongSelf = self {
                 if let del = strongSelf.delegate {
-                    del.goProductDetail(model.productId)
+                    del.goProductDetail(model.productId, selectedImage: strongSelf.goodsImageView)
                 }
             }
             

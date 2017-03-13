@@ -241,7 +241,7 @@ extension WOWProductListController:UICollectionViewDelegate,UICollectionViewData
             
             if ( model.productId != nil ){
                 selectedCell = cell as! WOWGoodsSmallCell
-                VCRedirect.toVCProduct(model.productId ?? 0)
+                VCRedirect.toVCProduct(model.productId , customPop: true)
             }
         }
     }

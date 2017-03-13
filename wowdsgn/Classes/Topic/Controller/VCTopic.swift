@@ -222,7 +222,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 
                 if ( row.productId != nil ){
                     selectedCell = cell as! WOWGoodsSmallCell
-                    VCRedirect.toVCProduct(row.productId ?? 0)
+                    VCRedirect.toVCProduct(row.productId, customPop: true)
                 }
             }
 

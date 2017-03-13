@@ -18,6 +18,8 @@ class WOWProductDetailController: WOWBaseViewController {
     fileprivate var percentDrivenTransition: UIPercentDrivenInteractiveTransition?
 
     weak var delegate:UpdateBuyCarListDelegate?
+    
+    var isNeedCustomPop                 : Bool = false             //是否需要转场动画
     //Param
     var productId                       : Int?                  //产品id
     var productModel                    : WOWProductModel?      //产品model
@@ -44,6 +46,7 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var productEffectView: UIView!
     @IBOutlet weak var addCartButton: UIButton!
     @IBOutlet weak var nowBuyButton: UIButton!
+    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     //是否展开参数
     var isOpenParam: Bool = true
     //是否展开温馨提示
@@ -64,16 +67,42 @@ class WOWProductDetailController: WOWBaseViewController {
         removeObservers()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
+    func showBottom(progress: CGFloat) {
+        UIView.animate(withDuration: 0.01, animations: {[weak self] in
+            if let strongSelf = self {
+               strongSelf.bottomSpace.constant = -(CGFloat(50.0) * progress)
+
+            }
+        }) { (finish) in
+            
+        }
+    }
+//    func hiddenBottom() {
+//        UIView.animate(withDuration: 0.3, animations: {[weak self] in
+//            if let strongSelf = self {
+//                strongSelf.bottomSpace.constant = 0
+//                
+//            }
+//        }) { (finish) in
+//            
+//        }
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         request()
         addObservers()
-        //手势监听器
-        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(edgePanGesture(_:)))
-        edgePan.edges = UIRectEdge.left
-        self.view.addGestureRecognizer(edgePan)
+        if isNeedCustomPop {
+            //手势监听器
+            let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(edgePanGesture(_:)))
+            edgePan.edges = UIRectEdge.left
+            self.view.addGestureRecognizer(edgePan)
+        }
+       
 
         
         MobClick.e(UMengEvent.Product_Detail)
@@ -370,16 +399,23 @@ class WOWProductDetailController: WOWBaseViewController {
             self.percentDrivenTransition = UIPercentDrivenInteractiveTransition()
             self.navigationController?.popViewController(animated: true)
         } else if edgePan.state == UIGestureRecognizerState.changed {
+//            self.showBottom(progress: progress)
             self.percentDrivenTransition?.update(progress)
         } else if edgePan.state == UIGestureRecognizerState.cancelled || edgePan.state == UIGestureRecognizerState.ended {
             if progress > 0.5 {
+//                self.showBottom(progress: 1)
+
                 self.percentDrivenTransition?.finish()
             } else {
+//                self.showBottom(progress: 0)
+
                 self.percentDrivenTransition?.cancel()
             }
             self.percentDrivenTransition = nil
         }
     }
+    
+    
     
     @IBAction func backClick(_ sender: UIButton) {
         _ = navigationController?.popViewController(animated: true)
@@ -607,7 +643,7 @@ extension WOWProductDetailController : CyclePictureViewDelegate {
         loadBigImage(imgUrlArr, indexPath.row)
     }
 }
-extension WOWProductDetailController: UINavigationControllerDelegate
+extension WOWProductDetailController: UINavigationControllerDelegate ,UIGestureRecognizerDelegate
 {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -644,7 +680,11 @@ extension WOWProductDetailController: UINavigationControllerDelegate
             return nil
         }
     }
-
+    
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
+    
 }
 
 

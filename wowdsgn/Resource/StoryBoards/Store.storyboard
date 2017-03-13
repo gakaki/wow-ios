@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -145,6 +145,7 @@
                                 <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="VfS-7l-afX" secondAttribute="bottom" constant="7" id="0d4-IY-fVB"/>
+                                    <constraint firstAttribute="height" constant="50" id="A0R-vf-j6k"/>
                                     <constraint firstAttribute="bottom" secondItem="wo2-sn-OfK" secondAttribute="bottom" id="KOo-He-mS6"/>
                                     <constraint firstItem="q6M-Jc-5fm" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="Lkc-l3-wz5"/>
                                     <constraint firstAttribute="trailing" secondItem="Ui9-Q6-WqD" secondAttribute="trailing" id="Qbk-fQ-dmb"/>
@@ -236,13 +237,13 @@
                             <constraint firstItem="Sdm-uj-kwH" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" id="gHL-Us-LXG"/>
                             <constraint firstAttribute="trailing" secondItem="iEe-la-3xG" secondAttribute="trailing" id="jlE-2U-a9d"/>
                             <constraint firstAttribute="trailing" secondItem="Sdm-uj-kwH" secondAttribute="trailing" id="orJ-5Y-nea"/>
-                            <constraint firstItem="Sdm-uj-kwH" firstAttribute="top" secondItem="Z1W-LA-2Dq" secondAttribute="bottom" id="phV-Br-j9t"/>
                             <constraint firstItem="iEe-la-3xG" firstAttribute="leading" secondItem="Xv8-16-Gtv" secondAttribute="leading" id="rf5-sa-43P"/>
                             <constraint firstItem="hb1-eN-9rh" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="bottom" id="wE5-VR-zKV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addCartButton" destination="wo2-sn-OfK" id="OlZ-Sd-JdC"/>
+                        <outlet property="bottomSpace" destination="wE5-VR-zKV" id="LMY-ly-wrf"/>
                         <outlet property="bottomView" destination="Sdm-uj-kwH" id="VwI-Rh-3J4"/>
                         <outlet property="carEntranceButton" destination="nHb-tb-mKs" id="fRs-pe-rRy"/>
                         <outlet property="likeButton" destination="VfS-7l-afX" id="FDp-Xs-Fr1"/>

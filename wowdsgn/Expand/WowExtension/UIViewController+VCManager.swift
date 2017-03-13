@@ -247,11 +247,12 @@ public class VCRedirect {
     /*
      ** 商品详情页面
      */
-    public class func toVCProduct( _ pid: Int? ){
+    public class func toVCProduct( _ pid: Int?, customPop: Bool = false){
         
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = pid
+        vc.isNeedCustomPop = customPop
         topNaVC?.pushViewController(vc, animated: true)
     }
     

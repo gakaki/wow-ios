@@ -153,6 +153,10 @@ class WOWHomeControllers: WOWBaseViewController {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
 
     fileprivate func configBarItem(){
         configBuyBarItem() // 购物车数量

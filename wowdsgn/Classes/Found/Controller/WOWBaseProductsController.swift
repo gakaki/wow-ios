@@ -184,8 +184,8 @@ extension WOWBaseProductsController:UICollectionViewDelegate,UICollectionViewDat
             }
             
             
-            VCRedirect.toVCProduct(model.productId)
-            
+            VCRedirect.toVCProduct(model.productId, customPop: true)
+
         }
         
     }

@@ -736,12 +736,12 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 extension WOWBuyCarController: buyCarDelegate, HomeBottomDelegate {
     func goProductDetail(_ productId: Int?, selectedImage: UIImageView!) {
         self.selectedImage = selectedImage
-        VCRedirect.toVCProduct(productId)
+        VCRedirect.toVCProduct(productId, customPop: true)
     
     }
     func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
         self.selectedImage = selectedImage
-        VCRedirect.toVCProduct(productId)
+        VCRedirect.toVCProduct(productId, customPop: true)
         
     }
   
@@ -763,10 +763,10 @@ extension WOWBuyCarController: UINavigationControllerDelegate
     }
 }
 extension WOWBuyCarController: orderCarDelegate {
-    func toProductDetail(_ productId: Int?) {
+    func toProductDetail(_ productId: Int?, selectedImage: UIImageView!) {
         
-        VCRedirect.toVCProduct(productId)
-    }
+        self.selectedImage = selectedImage
+        VCRedirect.toVCProduct(productId, customPop: true)    }
 }
 
 

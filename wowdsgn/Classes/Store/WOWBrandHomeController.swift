@@ -430,7 +430,8 @@ extension WOWBrandHomeController:UICollectionViewDelegate,UICollectionViewDataSo
         let cell = collectionView.cellForItem(at: indexPath) as! WOWGoodsSmallCell
         selectedCell = cell
         let model = dataArr[(indexPath as NSIndexPath).row]
-        VCRedirect.toVCProduct(model.productId)
+        VCRedirect.toVCProduct(model.productId, customPop: true)
+        
     }
 }
 

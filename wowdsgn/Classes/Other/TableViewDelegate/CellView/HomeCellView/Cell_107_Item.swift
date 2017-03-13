@@ -20,12 +20,12 @@ class Cell_107_Item: UICollectionViewCell {
             }
             lbTitle.text = model?.productTitle
 
-            let sellPriceStr = model?.sellPrice?.toString
+            let sellPriceStr = "¥" + ((model?.sellPrice?.toString) ?? "")
             
             if let originalPrice = model?.originalprice { // 如果有 原价 且大于现价
                 
                 if originalPrice > model?.sellPrice {
-                    lbPrice.strokeWithText(sellPriceStr ?? "" , str2: originalPrice.toString , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+                    lbPrice.strokeWithText(sellPriceStr ?? "" , str2: "¥" + originalPrice.toString , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
                 }else{
                     lbPrice.text = sellPriceStr
                 }

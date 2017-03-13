@@ -384,6 +384,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_Class_Banner
             cell.model_Class = model.moduleContent
             cell.delegate = self.vc as! Cell_Class_BannerDelegate?
+            cell.MainDataArr = self.dataSourceArray
             cell.indexPathSection = indexPath.section
             returnCell = cell
         case 107:
@@ -435,7 +436,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             default:
                 return 10
             }
-        case 102,107,106,401:
+        case 102,107,106:
             if (model.moduleContent?.link) != nil {
                 return 70
             }else {
@@ -443,7 +444,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             }
         case 105:
             return CGFloat.leastNormalMagnitude
-        case 402:
+        case 402,401:
             
             return 70
             
@@ -468,14 +469,14 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
             let model = dataSourceArray[section]
                 switch model.moduleType ?? 0{// 不同的type  不同的页脚
-                    case 102,107,106,401:
+                    case 102,107,106:
                         if let link = model.moduleContent?.link {
                             return hearderBaseBottomView(bannerModel: link)
                         }else {
                             return nil
                         }
 
-                    case 402:
+                    case 402,401:
                        
                         return hearderBaseBottomView(bannerModel: nil, is402: true, id: model.moduleContentProduct?.id ?? 0)
                     

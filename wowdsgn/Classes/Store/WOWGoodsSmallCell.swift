@@ -37,6 +37,9 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var lbDiscount: UILabel!// 折扣标签
     @IBOutlet weak var lbNew: UILabel!// 新品标签
     @IBOutlet weak var LeftConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

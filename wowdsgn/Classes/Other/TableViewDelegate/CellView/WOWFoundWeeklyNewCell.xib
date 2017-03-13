@@ -43,7 +43,7 @@
             <connections>
                 <outlet property="cv" destination="7Ba-X5-A2A" id="GVa-9e-FGo"/>
             </connections>
-            <point key="canvasLocation" x="-229" y="86"/>
+            <point key="canvasLocation" x="-347" y="48"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

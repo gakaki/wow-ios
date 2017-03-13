@@ -71,7 +71,8 @@ extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSou
             cell.showData(model, indexPath: indexPath)
             cell.topView.isHidden           = true
             cell.view_rightline.isHidden    = true
-            cell.bottomLine.isHidden        = true
+            cell.bottomLine.alpha = 0.0
+            cell.bottomConstraint.constant = 0.0
             cell.likeBtn.isHidden           = true
         return cell
     }

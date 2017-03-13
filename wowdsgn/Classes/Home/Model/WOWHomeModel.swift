@@ -36,7 +36,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     
     var moduleContentTitle      :  WOWHomeHot_1001_title? // 精选页hot标签
     
-    
+    var moduleId                : Int?
    
     
     var moduleContentTmp        :   AnyObject?
@@ -62,6 +62,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         moduleType                  <- map["moduleType"]
         moduleName                  <- map["moduleName"]
         moduleDescription           <- map["moduleDescription"]
+        moduleId                    <- map["moduleId"]
         switch moduleType! {
         case 101,103://顶部轮播
             moduleContent           <- map["moduleContent"]

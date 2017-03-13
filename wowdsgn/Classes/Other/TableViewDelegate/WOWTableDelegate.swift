@@ -45,8 +45,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             self.tableView.register(UINib.nibName("WOWHotMainCell"), forCellReuseIdentifier: "WOWHotMainCell")
             self.tableView.register(UINib.nibName("HomeBottomCell"), forCellReuseIdentifier: "HomeBottomCell")
             
-            self.tableView.register(UINib.nibName("Cell_106_BrandList"), forCellReuseIdentifier: "Cell_106_BrandList")
-//            self.tableView.register(UINib.nibName("Cell_107_BrandZone"), forCellReuseIdentifier: "Cell_107_BrandZone")
+
+            self.tableView.register(UINib.nibName("Cell_105_Item"), forCellReuseIdentifier: "Cell_105_Item")
             for (k,c) in ModulePageType.d {
                 if c is ModuleViewElement.Type {
                     let cell            = (c as! ModuleViewElement.Type)
@@ -159,6 +159,15 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 
                 let array = model.moduleContentProduct?.products ?? []
                 return (array.count.getParityCellNumber()) > 3 ? 3: (array.count.getParityCellNumber())
+            
+            case 105:
+                guard model.moduleContent?.bannerIsOut == true else {// 返回 0
+                    
+                    return 1
+                }
+                
+                return (model.moduleContent?.banners?.count ?? 1) + 1
+                
                 
             default:
                 
@@ -381,12 +390,80 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
 
             returnCell = cell
         case 105:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_Class_Banner
-            cell.model_Class = model.moduleContent
-            cell.delegate = self.vc as! Cell_Class_BannerDelegate?
-            cell.MainDataArr = self.dataSourceArray
-            cell.indexPathSection = indexPath.section
+            
+            let model_Class = model.moduleContent
+            if indexPath.row != 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_105_Item", for: indexPath) as! Cell_105_Item
+                if let banners = model_Class?.banners {
+                    
+                    cell.lb_BannerName.text = banners[indexPath.row - 1].bannerTitle ?? ""
+                    
+                }
+                returnCell  = cell
+            }else {
+            
+                let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_105_Banner
+                
+                cell.model_Class = model_Class
+                
+                if let imageName = model_Class?.background{
+                    cell.imgBanner.set_webimage_url(imageName)
+                }
+
+
+                 cell.imgBanner.addTapGesture(action: {[weak self] (sender) in// 点击banner图片处理事件 控制展开收起状态
+                    
+                    if let strongSelf = self {
+                        var nowTime = 0.0
+                        for module in strongSelf.dataSourceArray.enumerated() {// 循环遍历 确保 只有一个展开的 banner
+                            let type = module.element.moduleType ?? 0
+                            let id   = module.element.moduleContent?.id ?? 0
+                            if type == 105 {
+                                if id != model_Class?.id { // 不是当前所点击的
+                                    if module.element.moduleContent?.bannerIsOut == true { //  如果其他展开 则收起
+                                        module.element.moduleContent?.bannerIsOut = false
+                                        let indexSet = NSIndexSet.init(index: module.offset)
+                                        
+                                        strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
+                                        nowTime = 0.3 // 设定延时时间  防止同时reloadSections 闪屏
+                                    }
+                                   
+                                }
+                            }
+                        }
+
+                        let delayQueue = DispatchQueue.global()
+                        delayQueue.asyncAfter(deadline: .now() + nowTime) { // 延时 刷新sections
+                            
+                            DispatchQueue.main.async {
+                                if model_Class?.bannerIsOut == false {
+                                    
+                                    model_Class?.bannerIsOut = true
+                                    
+                                }else{
+                                    
+                                    model_Class?.bannerIsOut = false
+                                    
+                                    
+                                }
+                            
+                                let indexSet = NSIndexSet.init(index: section)
+                                strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
+                                
+                                let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
+                                strongSelf.tableView.scrollToRow(at: b, at: .top, animated: true)
+                            }
+                            
+                        }
+                        
+                    }
+                
+                })
+                
+                
+                
             returnCell = cell
+            }
         case 107:
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_107_BrandZone
             cell.delegate = self.vc as! Cell_107_BrandZoneDelegate?
@@ -721,7 +798,15 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             vc.delegate = self.vc as! WOWHotStyleDelegate?
             
             self.vc?.navigationController?.pushViewController(vc, animated: true)
+        case 105:
             
+            if let banners = model.moduleContent?.banners {
+                if indexPath.row > 0 {
+                    let v = self.vc as? WOWBaseModuleVC
+                    v?.goController(banners[indexPath.row - 1])
+                }
+            }
+
         default:
             break
         }

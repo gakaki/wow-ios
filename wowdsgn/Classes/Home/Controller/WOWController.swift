@@ -10,6 +10,8 @@
 import UIKit
 
 class WOWController: WOWBaseModuleVC {
+    
+
     var parentNavigationController : UINavigationController?
     var isCheackUpdate : Bool = false // 是否已经提示 刷新
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
@@ -43,9 +45,11 @@ class WOWController: WOWBaseModuleVC {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -213,10 +217,21 @@ class WOWController: WOWBaseModuleVC {
             }
         }
     }
-    
+}
 
+extension WOWController:HomeBottomDelegate{
+    
+    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
+        let topViewController = FNUtil.currentTopViewController() as! WOWHomeControllers
+        topViewController.selectedImage = selectedImage
+        VCRedirect.toVCProduct(productId)
         
-  }
+    }
+    
+}
+
+
+
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel
     func ergodicArrayWithProductModel(dic: [String:AnyObject] ){

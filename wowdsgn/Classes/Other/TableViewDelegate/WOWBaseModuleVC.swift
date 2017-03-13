@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWBaseModuleVC: WOWBaseViewController {
-        
+
     var myQueueTimer1: DispatchQueue?
     var myTimer1: DispatchSourceTimer?
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
@@ -40,6 +40,10 @@ class WOWBaseModuleVC: WOWBaseViewController {
     func backTop()  {
         let index  = IndexPath.init(row: 0, section: 0)
         self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     override func setUI() {
@@ -220,15 +224,18 @@ class WOWBaseModuleVC: WOWBaseViewController {
     }
 
 }
-extension WOWBaseModuleVC:HomeBottomDelegate{
-    
-    func goToProductDetailVC(_ productId: Int?) {//跳转产品详情
-        
-        VCRedirect.toVCProduct(productId)
-        
-    }
-    
-}
+
+//extension WOWBaseModuleVC:HomeBottomDelegate{
+//    
+//    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
+//        VCRedirect.toVCProduct(productId)
+//        
+//    }
+//
+//}
+
+
+
 extension WOWBaseModuleVC:WOWHomeFormDelegate{
     
     func goToVC(_ m:WOWModelVoTopic){//右滑更多 跳转专题详情

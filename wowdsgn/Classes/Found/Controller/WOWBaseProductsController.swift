@@ -8,13 +8,23 @@
 
 import UIKit
 
+public enum CategoryEntrance {
+    case category
+    case scene
+    case tag
+    case searchEntrance
+    case couponEntrance
+    
+}
 protocol WOWBaseProductsControllerDelegate :class{
     func topView(isHidden: Bool)
 }
 
 class WOWBaseProductsController: WOWBaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    var selectedCell: WOWGoodsSmallCell!
+    var entrance        = CategoryEntrance.category
+
     
     var dataArr = [WOWProductModel](){
         didSet {
@@ -82,7 +92,9 @@ class WOWBaseProductsController: WOWBaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        let topViewController = FNUtil.currentTopViewController()
+        let navigation = topViewController.navigationController
+        navigation?.delegate = self 
     }
     
     override func didReceiveMemoryWarning() {
@@ -149,12 +161,35 @@ extension WOWBaseProductsController:UICollectionViewDelegate,UICollectionViewDat
         
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            
+            let model = dataArr[(indexPath as NSIndexPath).row]
+            selectedCell = cell as! WOWGoodsSmallCell
+            switch entrance {
+            case .category:
+                let topViewController = FNUtil.currentTopViewController() as! VCCategory
+                topViewController.selectedCell = self.selectedCell
+            case .scene:
+                let topViewController = FNUtil.currentTopViewController() as! WOWSceneController
+                topViewController.selectedCell = self.selectedCell
+            case .tag:
+                let topViewController = FNUtil.currentTopViewController() as! WOWSceneController
+                topViewController.selectedCell = self.selectedCell
+            case .couponEntrance, .searchEntrance:
+                let topViewController = FNUtil.currentTopViewController() as! WOWSearchController
+                topViewController.selectedCell = self.selectedCell
+            default:
+                break
+            }
+            
+            
+            VCRedirect.toVCProduct(model.productId)
+            
+        }
         
-        let model = dataArr[(indexPath as NSIndexPath).row]
-        VCRedirect.toVCProduct(model.productId)
     }
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard dataArr.count > 4 else {
@@ -183,5 +218,20 @@ extension WOWBaseProductsController:UICollectionViewDelegate,UICollectionViewDat
 extension WOWBaseProductsController:CollectionViewWaterfallLayoutDelegate{
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return CGSize(width: WOWGoodsSmallCell.itemWidth,height: WOWGoodsSmallCell.itemWidth + 75)
+    }
+}
+
+extension WOWBaseProductsController: UINavigationControllerDelegate
+{
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        if operation == .push, toVC.className == WOWProductDetailController.className
+        {
+            return MagicMovePush(selectView: self.selectedCell.pictureImageView)
+        }
+        else
+        {
+            return nil
+        }
     }
 }

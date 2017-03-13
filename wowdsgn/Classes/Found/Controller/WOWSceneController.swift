@@ -24,6 +24,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     var entrance        = CategoryEntrance.scene        //页面入口
     var topIsHidden = false
 
+    var selectedCell: WOWGoodsSmallCell!
 
     
     @IBOutlet weak var cv: UICollectionView!
@@ -424,6 +425,7 @@ extension WOWSceneController:VTMagicViewDelegate, WOWBaseProductsControllerDeleg
             vc.pageVc        = query_sortBy
             vc.asc           = query_asc
             vc.query_categoryId    = categoryId
+            vc.sceneId = query_cid
             vc.entrance = entrance
             
             vc.screenMinPrice     = self.screenMinPrice

@@ -2,11 +2,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public enum CategoryEntrance {
-    case category
-    case scene
-    case tag
-}
+
 
 class VCCategoryProducts:WOWBaseProductsController
 {
@@ -17,11 +13,10 @@ class VCCategoryProducts:WOWBaseProductsController
     /* main数据条件 */
     var query_showCount     = 10
     //    var query_sortBy        = 1
-    var query_categoryId    = 16
+    var query_categoryId    = 0
     
-    var sceneId             = 1
+    var sceneId             = 0
     
-    var entrance        = CategoryEntrance.category
 
 
       override func request(){
@@ -116,7 +111,13 @@ class VCCategoryProducts:WOWBaseProductsController
     }
     
     func requestScene() {
-        params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
+        if query_categoryId == 0 {
+            params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
+
+        }else {
+            params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId, "categoryIds": [query_categoryId]]
+
+        }
         
         if let min = screenMinPrice {
             
@@ -190,7 +191,13 @@ class VCCategoryProducts:WOWBaseProductsController
     }
     
     func requestTag() {
-        params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
+        if query_categoryId == 0 {
+            params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
+            
+        }else {
+            params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId, "categoryIds": [query_categoryId]]
+            
+        }
         
         if let min = screenMinPrice {
             
@@ -261,5 +268,7 @@ class VCCategoryProducts:WOWBaseProductsController
         }
 
     }
+    
+   
   
 }

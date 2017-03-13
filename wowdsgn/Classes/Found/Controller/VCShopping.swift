@@ -8,7 +8,8 @@ import VTMagic
 class VCShopping: WowBaseVCCartSearch {
     
     var v : VCVTMagic!
-    
+    var selectedImage: UIImageView!
+
     var vc_found:VCFound?
     var vc_brand:WOWBrandListController?
     var vc_designer:VCDesignerList?
@@ -19,6 +20,7 @@ class VCShopping: WowBaseVCCartSearch {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

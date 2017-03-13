@@ -6,7 +6,8 @@ import RxSwift
 
 class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource
 {
-    
+    var selectedCell: WOWGoodsSmallCell!
+
     var vo_categories                           = [WOWFoundCategoryModel]()
     var vo_category_top                         = WOWFoundCategoryModel()
 
@@ -83,6 +84,7 @@ class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UIC
         request()
 
     }
+
 
     @IBOutlet weak var cv: UICollectionView!
     @IBOutlet weak var cvTop: NSLayoutConstraint!
@@ -382,6 +384,7 @@ extension VCCategory:VTMagicViewDelegate, WOWBaseProductsControllerDelegate{
         if abs(index) > 1 {
             refreshSubView(pageIndex)
         }
+        
 
     }
     

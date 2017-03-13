@@ -12,6 +12,7 @@ import RxSwift
 
 class WOWSearchSortController: BaseScreenViewController{
     
+
     var isLoadPrice: Bool = false
     var dataArr = [WOWProductModel]()
     var ob_cid                                  = Variable(10)

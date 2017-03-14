@@ -412,7 +412,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
 
 
                  cell.imgBanner.addTapGesture(action: {[weak self] (sender) in// 点击banner图片处理事件 控制展开收起状态
-                    
+                    let frameCurrent = tableView.frame
+                    let center       = tableView.center
                     if let strongSelf = self {
                         var nowTime = 0.0
                         for module in strongSelf.dataSourceArray.enumerated() {// 循环遍历 确保 只有一个展开的 banner
@@ -422,10 +423,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                                 if id != model_Class?.id { // 不是当前所点击的
                                     if module.element.moduleContent?.bannerIsOut == true { //  如果其他展开 则收起
                                         module.element.moduleContent?.bannerIsOut = false
+//                                              strongSelf.tableView.beginUpdates()
                                         let indexSet = NSIndexSet.init(index: module.offset)
-                                        
+//
                                         strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
+//                                         strongSelf.tableView.endUpdates()
                                         nowTime = 0.3 // 设定延时时间  防止同时reloadSections 闪屏
+//                                         strongSelf.tableView.endUpdates()
                                     }
                                    
                                 }
@@ -446,15 +450,63 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                                     
                                     
                                 }
-                            
-                                let indexSet = NSIndexSet.init(index: section)
-                                strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
                                 
-                                let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
-                                strongSelf.tableView.scrollToRow(at: b, at: .top, animated: true)
+//                                 strongSelf.tableView.layoutIfNeeded()
+//                                
+//                                 cell.layoutIfNeeded()
+//                                if model_Class?.bannerIsOut == true {
+//                                strongSelf.tableView.beginUpdates()
+                                    let indexSet = NSIndexSet.init(index: section)
+                                    let cellIndex = strongSelf.tableView.cellForRow(at: indexPath)
+                                    print("old a--- \(cellIndex?.frame.origin.y)")
+                                    let point = strongSelf.tableView.contentOffset
+                                    print("old b--- \(point.y)")
+//                                    print()
+                                
+//                                    strongSelf.tableView.insertSections(indexSet as IndexSet, with: .none)
+                                
+                                    strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
+                            
+//                                strongSelf.tableView.reloadData()
+                                    let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
+                                    strongSelf.tableView.scrollToRow(at: b, at: .top, animated: true)
+                                
+                                
+                                print("new a--- \(cellIndex?.frame.origin.y)")
+                          
+                                print("new b--- \(point.y)")
+//                                    strongSelf.tableView.setContentOffset(CGPoint.init(x: 0, y: 0), animated: true)
+//                                strongSelf.tableView.endUpdates()
+//                                }else {
+//                                    let indexSet = NSIndexSet.init(index: section)
+//                                    strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
+//                                    
+//                                    let b = IndexPath.init(row: 0, section: 0) // 滚动当前组 到顶部
+//                                    strongSelf.tableView.scrollToRow(at: b, at: .top, animated: true)
+                                    
+//                                    tableView.frame = frameCurrent
+//                                    
+//                                    
+//                                    strongSelf.tableView.reloadData()
+//                                }
+//                                tableView.center = (strongSelf.vc?.view.center)!
+                                
                             }
                             
                         }
+//                          let delayQueue1 = DispatchQueue.global()
+//                        delayQueue1.asyncAfter(deadline: .now() + nowTime) { // 延时 刷新sections
+//                            
+//                            DispatchQueue.main.async {
+//                                
+//                                let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
+//                                strongSelf.tableView.scrollToRow(at: b, at: .top, animated: true)
+//                                
+//                            }
+//                            
+//                        }
+
+                     
                         
                     }
                 
@@ -669,6 +721,12 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             }else{
                 wowcontroller?.topBtn.isHidden = false
         }
+        if scrollView.mj_offsetY <= 0.0 {
+            
+             self.tableView.setContentOffset(CGPoint.init(x: 0, y: 0), animated: false)
+            
+        }
+        
     }
     // 底层 wowdsgn 页脚
     func footerView() -> UIView {
@@ -813,7 +871,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
         
     }
-  
+    
     public func cyclePictureView(_ cyclePictureView: CyclePictureView, didSelectItemAtIndexPath indexPath: IndexPath) {
         let model = bannerArray[(indexPath as NSIndexPath).row]
         let viewController = self.vc as! WOWBaseModuleVC

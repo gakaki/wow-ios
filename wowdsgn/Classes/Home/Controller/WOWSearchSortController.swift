@@ -42,6 +42,19 @@ class WOWSearchSortController: BaseScreenViewController{
         
     }
 
+    override func beginPageView() {
+        //TalkingData统计页面
+        TalkingData.trackPageBegin("搜索结果页" )
+        //友盟统计页面
+        MobClick.beginLogPageView("搜索结果页")
+    }
+    
+    override func endPageView() {
+        //TalkingData统计页面
+        TalkingData.trackPageEnd( "搜索结果页")
+        
+        MobClick.endLogPageView("搜索结果页")
+    }
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,9 +64,7 @@ class WOWSearchSortController: BaseScreenViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
-     
-        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

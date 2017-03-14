@@ -166,19 +166,25 @@ extension WOWBaseProductsController:UICollectionViewDelegate,UICollectionViewDat
             
             let model = dataArr[(indexPath as NSIndexPath).row]
             selectedCell = cell as! WOWGoodsSmallCell
+            let topViewController = FNUtil.currentTopViewController()
             switch entrance {
             case .category:
-                let topViewController = FNUtil.currentTopViewController() as! VCCategory
-                topViewController.selectedCell = self.selectedCell
-            case .scene:
-                let topViewController = FNUtil.currentTopViewController() as! WOWSceneController
-                topViewController.selectedCell = self.selectedCell
-            case .tag:
-                let topViewController = FNUtil.currentTopViewController() as! WOWSceneController
-                topViewController.selectedCell = self.selectedCell
+                if topViewController.className == VCCategory.className {
+                    let vc = topViewController as! VCCategory
+                    vc.selectedCell = self.selectedCell
+                }
+            case .scene, .tag:
+                if topViewController.className == WOWSceneController.className {
+                    let vc = topViewController as! WOWSceneController
+                    vc.selectedCell = self.selectedCell
+                }
             case .couponEntrance, .searchEntrance:
-                let topViewController = FNUtil.currentTopViewController() as! WOWSearchController
-                topViewController.selectedCell = self.selectedCell
+                if topViewController.className == WOWSearchController.className {
+                    
+                    let vc = topViewController as! WOWSearchController
+                    vc.selectedCell = self.selectedCell
+                }
+              
             default:
                 break
             }

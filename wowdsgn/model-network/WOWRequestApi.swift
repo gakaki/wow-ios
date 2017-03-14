@@ -79,7 +79,6 @@ public enum RequestApi{
     
     
     case api_Category(categoryId:Int) //查看分类
-    case api_Category_V2(categoryId:Int) //查看分类v2
     
     case api_Category_subCategory_with_image(categoryId:Int) //查看分类并且带上对应销量第一的商品的图片
     case api_Category_path_category(categoryId:Int) //查看分类 获得上级分类或者上上级分类的
@@ -290,8 +289,7 @@ extension RequestApi:TargetType{
             return URL_AD
         case .api_Category:
             return URL_category
-        case .api_Category_V2:
-            return URL_category_v2
+ 
         case .api_User:
             return URL_User
 
@@ -565,7 +563,6 @@ extension RequestApi:TargetType{
             .api_SearchHot, .api_SearchResult,
             .api_DesignerList,
             .api_Category_subCategory_with_image,
-            .api_Category_V2,
             .api_Category_path_category,
             .api_AD,
             .api_HotStyle_BottomList,
@@ -608,8 +605,6 @@ extension RequestApi:TargetType{
             case let .api_qiniu_token(qiniuKey,bucket):
                 params = ["key": qiniuKey,"bucket": bucket]
             case let .api_Category(categoryId):
-                params = ["categoryId":categoryId]
-            case let .api_Category_V2(categoryId):
                 params = ["categoryId":categoryId]
             case let .api_Category_subCategory_with_image(categoryId):
                 params = ["categoryId":categoryId]

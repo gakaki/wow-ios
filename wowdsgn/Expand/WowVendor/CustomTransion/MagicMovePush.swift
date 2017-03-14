@@ -37,25 +37,25 @@ class MagicMovePush: NSObject, UIViewControllerAnimatedTransitioning
         let snapshotView = selectView.snapshotView(afterScreenUpdates: false)
         snapshotView?.frame = container.convert(selectView.frame, from: selectView.superview)
         selectView.isHidden = true
-        
         // 3.设置目标控制器的位置，并把透明度设为0，在后面的动画中慢慢显示出来变为1
         toVC.view.frame = transitionContext.finalFrame(for: toVC)
         toVC.view.alpha = 0
         toVC.cycleView.isHidden = true
-        
+        toVC.selectedView = snapshotView ?? UIView()
+
+
         // 4.都添加到 container 中。注意顺序不能错了
         container.addSubview(toVC.view)
-        container.addSubview(snapshotView ?? UIImageView())
+        container.addSubview(snapshotView ?? UIView())
         
         // 5.执行动画
         toVC.cycleView.layoutIfNeeded()
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions(), animations:{ () -> Void in
-            snapshotView!.frame = toVC.cycleView.frame
+            snapshotView!.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenWidth)
             toVC.view.alpha = 1
         }) {[weak self] (finish: Bool) -> Void in
             if let strongSelf = self {
                 strongSelf.selectView.isHidden = false
-                
                 toVC.cycleView.isHidden = false
                 snapshotView!.removeFromSuperview()
                 

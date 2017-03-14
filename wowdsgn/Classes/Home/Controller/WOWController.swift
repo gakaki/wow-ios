@@ -8,7 +8,6 @@
 //
 
 import UIKit
-import HidingNavigationBar
 
 //protocol <#name#> {
 //    <#requirements#>

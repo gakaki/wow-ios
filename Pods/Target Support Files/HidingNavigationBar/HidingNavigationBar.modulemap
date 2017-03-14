@@ -1,6 +1,0 @@
-framework module HidingNavigationBar {
-  umbrella header "HidingNavigationBar-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -469,7 +469,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                             
 //                                strongSelf.tableView.reloadData()
                                     let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
-                                    strongSelf.tableView.scrollToRow(at: b, at: .top, animated: true)
+                                    strongSelf.tableView.scrollToRow(at: b, at: .top, animated: false)
                                 
                                 
                                 print("new a--- \(cellIndex?.frame.origin.y)")
@@ -721,11 +721,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             }else{
                 wowcontroller?.topBtn.isHidden = false
         }
-        if scrollView.mj_offsetY <= 0.0 {
-            
-             self.tableView.setContentOffset(CGPoint.init(x: 0, y: 0), animated: false)
-            
-        }
+ 
         
     }
     // 底层 wowdsgn 页脚

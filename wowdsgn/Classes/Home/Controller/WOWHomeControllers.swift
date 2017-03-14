@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import HidingNavigationBar
+
 class WOWHomeControllers: WOWBaseViewController {
     var pageMenu:CAPSPageMenu?
     var controllerArray : [UIViewController] = []

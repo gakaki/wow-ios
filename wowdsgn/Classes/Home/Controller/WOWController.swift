@@ -8,15 +8,22 @@
 //
 
 import UIKit
+import HidingNavigationBar
+
+//protocol <#name#> {
+//    <#requirements#>
+//}
 
 class WOWController: WOWBaseModuleVC {
     
 
-    var parentNavigationController : UINavigationController?
+    var SuperViewController : UIViewController?
     var isCheackUpdate : Bool = false // 是否已经提示 刷新
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
     
     var bottomListArray = [WOWProductModel]() //底部列表数组
+    
+    var hidingNavBarManager: HidingNavigationBarManager?
 
     var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     
@@ -26,10 +33,13 @@ class WOWController: WOWBaseModuleVC {
     var isRequest :Bool = false// 判断此页面是不是第一次网络请求
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false
-        
+//        self.automaticallyAdjustsScrollViewInsets = false
+
         setUI()
         addObserver()
+        
+     
+        
         if tabId == nil { // 说明进入的是第一页
             
             request()
@@ -41,8 +51,9 @@ class WOWController: WOWBaseModuleVC {
         super.viewWillAppear(animated)
         MobClick.e(.Son_Home_Page_Tab)
 
-        //        hidingNavBarManager?.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        hidingNavBarManager?.viewWillAppear(animated)
+        
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
     
@@ -55,15 +66,19 @@ class WOWController: WOWBaseModuleVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
               self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        //        hidingNavBarManager?.viewWillDisappear(animated)
+                hidingNavBarManager?.viewWillDisappear(animated)
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //        hidingNavBarManager?.viewDidLayoutSubviews()
+                hidingNavBarManager?.viewDidLayoutSubviews()
     }
-    
+    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+        //              hidingNavBarManager?.shouldScrollToTop()
+        hidingNavBarManager?.shouldScrollToTop()
+        return true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         YYWebImageManager.shared().cache?.memoryCache.removeAllObjects()
@@ -103,13 +118,15 @@ class WOWController: WOWBaseModuleVC {
         super.setUI()
         configTableView()
         configBarItem()
-        
+//
+
     }
     func configTableView() {
         
         dataDelegate?.vc                    = self
         dataDelegate?.ViewControllerType    = ControllerViewType.Buy
         self.view.backgroundColor           = GrayColorLevel5
+//        hidingNavBarManager = HidingNavigationBarManager(viewController: SuperViewController!, scrollView: tableView)
     }
     fileprivate func configBarItem(){
         configBuyBarItem() // 购物车数量
@@ -125,7 +142,7 @@ class WOWController: WOWBaseModuleVC {
         
     }
     
-    
+
     func requestTop() {// 请求模块化数据
         var params = ["pageId": 1]
         

@@ -7,11 +7,13 @@
 //
 
 import UIKit
-
+import HidingNavigationBar
 class WOWHomeControllers: WOWBaseViewController {
     var pageMenu:CAPSPageMenu?
     var controllerArray : [UIViewController] = []
     var selectCurrentIndex : Int? = 0
+    
+    var hidingNavBarManager: HidingNavigationBarManager?
     
     var tabs : [WOWHomeTabs] = []
 
@@ -20,6 +22,7 @@ class WOWHomeControllers: WOWBaseViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(hexString: "efeff4")
+        
         
         
         addObserver()
@@ -50,9 +53,9 @@ class WOWHomeControllers: WOWBaseViewController {
                 
                 HomeTabVC.tabId = tabIdArrray[index - 1]
             }
-        
+           
             controllerArray.append(HomeTabVC)
-            HomeTabVC.parentNavigationController = self.navigationController
+            HomeTabVC.SuperViewController = self
         }
         
         let parameters: [CAPSPageMenuOption] = [
@@ -85,6 +88,36 @@ class WOWHomeControllers: WOWBaseViewController {
         
         
     }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        hidingNavBarManager?.viewWillAppear(animated)
+//        
+//
+//    }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//        
+//    }
+//    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//        hidingNavBarManager?.viewWillDisappear(animated)
+//        
+//    }
+//    
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        hidingNavBarManager?.viewDidLayoutSubviews()
+//    }
+//    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+//        //              hidingNavBarManager?.shouldScrollToTop()
+//        hidingNavBarManager?.shouldScrollToTop()
+//        return true
+//    }
     override func setUI() {
         super.setUI()
         request()
@@ -146,7 +179,7 @@ class WOWHomeControllers: WOWBaseViewController {
         self.navigationShadowImageView?.isHidden = true
      
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
+//        hidingNavBarManager?.viewWillAppear(animated)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -156,7 +189,18 @@ class WOWHomeControllers: WOWBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//          hidingNavBarManager?.viewWillDisappear(animated)
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        hidingNavBarManager?.viewDidLayoutSubviews()
+    }
+//    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+//                //              hidingNavBarManager?.shouldScrollToTop()
+//                hidingNavBarManager?.shouldScrollToTop()
+//            return true
+//    }
+
 
     fileprivate func configBarItem(){
         configBuyBarItem() // 购物车数量

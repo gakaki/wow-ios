@@ -30,8 +30,8 @@ target 'wowdsgn' do
 	pod 'Reachability'
 
 	pod 'JLRoutes'
-  pod 'IQKeyboardManagerSwift'
-	#pod 'HidingNavigationBar', '~> 0.3.0'
+    pod 'IQKeyboardManagerSwift'
+	pod 'HidingNavigationBar', '~> 1.0'
 	pod 'SwiftyJSON'
 	pod 'ObjectMapper'
 

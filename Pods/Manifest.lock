@@ -25,6 +25,7 @@ PODS:
   - FMDB/standard (2.6.2)
   - HappyDNS (0.3.10)
   - Hashids-Swift (0.3.1)
+  - HidingNavigationBar (1.0.0)
   - IQKeyboardManagerSwift (4.0.6)
   - JLRoutes (2.0.1)
   - Kingfisher (3.1.3)
@@ -106,6 +107,7 @@ DEPENDENCIES:
   - FCUUID
   - FMDB
   - Hashids-Swift (from `https://github.com/malczak/hashids.git`, branch `master`)
+  - HidingNavigationBar (~> 1.0)
   - IQKeyboardManagerSwift
   - JLRoutes
   - Kingfisher
@@ -162,6 +164,7 @@ SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Hashids-Swift: b327671abc1ac721e6cc9691ffd668525224b64a
+  HidingNavigationBar: 170dd21df8e89c465c01f047d4306778d1ce304c
   IQKeyboardManagerSwift: b3015e819559ca76381f87a0833f44d178564603
   JLRoutes: 3652abe3b4ac51bc93ec3a371353d762e8566092
   Kingfisher: 007f5851c18c81e7cc106c9cbac1bafea1cce5dc
@@ -196,6 +199,6 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: ade5134ee8b226a5c1b54e15318ef9b1ffd1a8a4
+PODFILE CHECKSUM: 2f018968ef568ef41b15802e1a31141aa0739397
 
-COCOAPODS: 1.2.0.rc.1
+COCOAPODS: 1.2.0.beta.3

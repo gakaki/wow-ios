@@ -13,7 +13,8 @@ import RxSwift
 class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource {
     var vo_categories                           = WOWNewCategoryModel()
     var categoryArr                             = [WOWSubCategoryModel]()
-    
+    var vo_category_top                         = WOWFoundCategoryModel()
+
     var top_category_image_view:UIImageView!    = UIImageView()
     var v_bottom : VCVTMagic!
     
@@ -25,7 +26,13 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     var topIsHidden = false
 
     var selectedCell: WOWGoodsSmallCell!
-
+    func get_category_index() -> Int {
+        let indexes     = categoryArr.flatMap { $0.id }
+        if let res      = indexes.index(of: ob_cid){
+            return res
+        }
+        return 0
+    }
     
     @IBOutlet weak var cv: UICollectionView!
     @IBOutlet weak var cvTop: NSLayoutConstraint!
@@ -44,6 +51,8 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         switch entrance {
+        case .category:
+            MobClick.e(.CategoryDetail)
         case .scene:
             MobClick.e(.Space_Detail_Page)
         case .tag:
@@ -84,12 +93,70 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
         super.request()
         
         switch entrance {
+        case .category:
+            requestCategory()
         case .scene:
             requestScene()
         case .tag:
             requestTag()
         default:
             break
+        }
+        
+    }
+    
+    func requestCategory() {
+        let cid = self.ob_cid
+        
+        
+        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Category_path_category(categoryId:cid), successClosure: {[weak self] (result, code) in
+            
+            if let strongSelf = self{
+                
+                let r                           =  JSON(result)
+                let category_paths              =  Mapper<WOWFoundCategoryModel>().mapArray(JSONObject: r["path"].arrayObject ) ?? [WOWFoundCategoryModel]()
+                strongSelf.vo_category_top      =  category_paths[0]
+                
+                let top_category_cid            =  strongSelf.vo_category_top.categoryID ?? 0
+                
+                var params              = [String: Any]()
+                let prats               = ["category"]
+                
+                params = ["id": top_category_cid, "parts": prats]
+                
+                WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductCategory(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
+                    
+                    if let strongSelf = self{
+                        
+                        let model = Mapper<WOWNewCategoryModel>().map(JSONObject:result)
+                        if let model = model {
+                            strongSelf.vo_categories = model
+                            strongSelf.categoryArr = model.categories ?? [WOWSubCategoryModel]()
+                            strongSelf.title                =  model.name
+                            if strongSelf.categoryArr.count > 0 {
+                                strongSelf.cvHeight.constant = 110
+                                strongSelf.top_category_image_view.set_webimage_url(model.background) //设置顶部分类背景图
+                                strongSelf.cv.reloadData()
+                                strongSelf.cv.selectItem(at: NSIndexPath(item: strongSelf.get_category_index(), section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
+                            }else {
+                                strongSelf.cvHeight.constant = 0
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                }){ (errorMsg) in
+                    DLog(errorMsg)
+                }
+
+                
+            }
+            
+        }){ (errorMsg) in
+            DLog(errorMsg)
         }
         
     }

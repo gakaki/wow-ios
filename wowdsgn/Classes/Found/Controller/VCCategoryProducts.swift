@@ -38,7 +38,13 @@ class VCCategoryProducts:WOWBaseProductsController
     }
     
     func requestCategory() {
-        params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"categoryId":self.query_categoryId]
+        if query_categoryId == 0 {
+            params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
+            
+        }else {
+            params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":query_categoryId]
+            
+        }
         
         if let min = screenMinPrice {
             

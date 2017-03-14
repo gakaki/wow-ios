@@ -168,12 +168,7 @@ extension WOWBaseProductsController:UICollectionViewDelegate,UICollectionViewDat
             selectedCell = cell as! WOWGoodsSmallCell
             let topViewController = FNUtil.currentTopViewController()
             switch entrance {
-            case .category:
-                if topViewController.className == VCCategory.className {
-                    let vc = topViewController as! VCCategory
-                    vc.selectedCell = self.selectedCell
-                }
-            case .scene, .tag:
+            case .scene, .tag, .category:
                 if topViewController.className == WOWSceneController.className {
                     let vc = topViewController as! WOWSceneController
                     vc.selectedCell = self.selectedCell

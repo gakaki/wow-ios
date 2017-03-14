@@ -36,9 +36,12 @@ let URL_CheckVersion                    = "v1/version/check"
 //1.app首页
 let URL_AD                              = "v1/page/startupimg"
 let URL_category                        = "v1/category/sub-category"
-let URL_producty_by_category            = "v1/product/category-products"
+let URL_producty_by_category            = "/v1/product/category/products"
 let URL_category_subCategory_with_image = "v1/category/img-category"
 let URL_category_path_category          = "v1/category/path-category"
+
+let URL_ProductCategory         = "/v1/product/category"
+
 
 let URL_scene                   = "v1/scene"
 

@@ -160,7 +160,8 @@ public class JLRouterRule {
         JLRoutes.global().add(["/category","/category/:id"]) { (params) -> Bool in
             
             let categoryId = params["id"] as? String
-            VCRedirect.toVCCategory(categoryId?.toInt())
+//            VCRedirect.toVCCategory(categoryId?.toInt())
+            VCRedirect.toVCScene(categoryId?.toInt(), entrance: .category)
             print(params)
             return true
         }

@@ -124,7 +124,8 @@ class WOWController: WOWBaseModuleVC {
 //        self.requestBottom()
         
     }
-
+    
+    
     func requestTop() {// 请求模块化数据
         var params = ["pageId": 1]
         

@@ -266,6 +266,8 @@ public enum RequestApi{
     case api_ProductTag(params: [String: AnyObject])
     
     case api_TagProduct(params: [String: AnyObject])
+    
+    case api_ProductCategory(params: [String: AnyObject])
 }
 
 
@@ -316,6 +318,8 @@ extension RequestApi:TargetType{
             return URL_ProductTag
         case .api_TagProduct:
             return URL_TagProduct
+        case .api_ProductCategory:
+            return URL_ProductCategory
             
         //Tab 第一个栏 首页 该死的那3个url
         //Tab 第一个栏 首页 该死的那3个url
@@ -586,7 +590,8 @@ extension RequestApi:TargetType{
             .api_SceneProduct,
             .api_ProductTag,
             .api_TagProduct,
-            .api_Home_Tabs:
+            .api_Home_Tabs,
+            .api_ProductCategory:
 
             return .GET
 
@@ -835,7 +840,8 @@ extension RequestApi:TargetType{
                 params = param
             case let .api_TagProduct(param):
                 params = param
-
+            case let .api_ProductCategory(param):
+                params = param
             default:
                 break
 

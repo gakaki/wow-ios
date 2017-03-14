@@ -655,9 +655,6 @@ extension WOWProductDetailController: UINavigationControllerDelegate ,UIGestureR
         }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWProductListController.className {
             let popController = toVC as! WOWProductListController
             return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == VCCategory.className {
-            let popController = toVC as! VCCategory
-            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
         }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWSceneController.className {
             let popController = toVC as! WOWSceneController
             return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )

@@ -349,8 +349,10 @@ extension VCCategoryChoose:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let m = vo_categories_sub_arr[(indexPath as NSIndexPath).item]
         if let cid = m.categoryID , let cname = m.categoryName{
+            
+//            VCRedirect.toVCCategory(cid)
+            VCRedirect.toVCScene(cid, entrance: .category)
 
-            VCRedirect.toVCCategory(cid)
         }
  
     }

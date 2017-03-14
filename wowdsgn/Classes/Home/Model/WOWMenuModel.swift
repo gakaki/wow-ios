@@ -97,8 +97,8 @@ final class WOWFoundCategoryModel : WOWBaseModel,Mappable{
 final class WOWSubCategoryModel: WOWBaseModel,Mappable{
       var subCatName : String = ""
       var subCatID   : String = ""
-        var id         : Int = 0
-        var categoryName        : String = ""
+      var id         : Int = 0
+      var categoryName        : String = ""
 }
 
 extension WOWSubCategoryModel{

@@ -81,8 +81,9 @@ public class WOWMessageToVc: NSObject {
             case "207"://分类详情
                 if let id = id {
                     
-                    VCRedirect.toVCCategory(id.toInt())
-                    
+//                    VCRedirect.toVCCategory(id.toInt())
+                    VCRedirect.toVCScene(id.toInt(), entrance: .category)
+
                 }
             case "208"://优惠券列表
                 

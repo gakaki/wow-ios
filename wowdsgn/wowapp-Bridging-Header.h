@@ -37,7 +37,7 @@
 #import "TalkingData.h"
 #import "TalkingDataAppCpa.h"
 #import "TalkingDataSMS.h"
-#import <JSPatchPlatform/JSPatch.h>
+//#import <JSPatchPlatform/JSPatch.h>
 
 //#import "JPPlayground.h"
 //#import "GYHttpMock.h"

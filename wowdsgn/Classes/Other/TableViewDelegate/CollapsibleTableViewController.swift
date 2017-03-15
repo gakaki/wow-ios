@@ -53,6 +53,7 @@ class CollapsibleTableViewController: UITableViewController {
             Section(name: "iPhone", items: ["iPhone 6s", "iPhone 6"]),
             Section(name: "iPhone", items: ["iPhone 6s", "iPhone 6"]),
         ]
+        self.tableView.register(UINib.nibName("Cell_105_Item"), forCellReuseIdentifier: "Cell_105_Item")
         request()
     }
     func request()  {
@@ -122,25 +123,44 @@ extension CollapsibleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return sections[(indexPath as NSIndexPath).section].collapsed! ? 0 : 55
+//        if isReque {
+        let model = dataArr[indexPath.section]
+        
+        let model_Class = model.moduleContent
+        
+        guard model.moduleContent?.bannerIsOut == true else {// 返回 0
+            
+            return 0
+        }
+        
+        return 55
+
+       
     }
     
     // Header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if isReque {
+//        if isReque {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
             
-            header.titleLabel.text = sections[section].name
-            header.arrowLabel.text = ">"
-            header.setCollapsed(sections[section].collapsed)
+//            header.titleLabel.text = sections[section].name
+//            header.arrowLabel.text = ">"
+//            header.setCollapsed(sections[section].collapsed)
             
+            let model = dataArr[section]
+            
+            let model_Class = model.moduleContent
+            if let imageName = model_Class?.background{
+                header.imgBanner.set_webimage_url(imageName)
+            }
+
             header.section = section
             header.delegate = self
             
             return header
-        }else {
-            return nil
-        }
+//        }else {
+//            return nil
+//        }
         
     }
     
@@ -157,19 +177,35 @@ extension CollapsibleTableViewController {
 extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
     
     func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {
-        let collapsed = !sections[section].collapsed
+        let model = dataArr[section]
+        
+        let model_Class = model.moduleContent
+        let collapsed = !(model.moduleContent?.bannerIsOut)!
+//         == true
+        
+        
+//        let collapsed = !sections[section].collapsed
         
         // Toggle collapse
-        sections[section].collapsed = collapsed
-        header.setCollapsed(collapsed)
         
+       model.moduleContent?.bannerIsOut = collapsed
+//        header.setCollapsed(collapsed)
+        
+//        let model = dataArr[section]
+//        return (model.moduleContent?.banners?.count ?? 1)
+        
+        //        return sections[section].items.count
         // Adjust the height of the rows inside the section
         tableView.beginUpdates()
-        for i in 0 ..< sections[section].items.count {
-            tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+        if let banners = model.moduleContent?.banners {
+            for i in 0 ..< banners.count {
+                tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+            }
+            
         }
+        
         tableView.endUpdates()
-          let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
+        let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
         tableView.scrollToRow(at: b, at: .top, animated: true)
     }
     

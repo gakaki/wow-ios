@@ -17,8 +17,10 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     var delegate: CollapsibleTableViewHeaderDelegate?
     var section: Int = 0
     
+    
     let titleLabel = UILabel()
     let arrowLabel = UILabel()
+    let imgBanner  = UIImageView()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -26,14 +28,14 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         //
         // Constraint the size of arrow label for auto layout
         //
-        arrowLabel.widthAnchor.constraint(equalToConstant: 12).isActive = true
-        arrowLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        arrowLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(arrowLabel)
+//        arrowLabel.widthAnchor.constraint(equalToConstant: 12).isActive = true
+//        arrowLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
+//        
+//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        arrowLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(imgBanner)
+//        contentView.addSubview(titleLabel)
+//        contentView.addSubview(arrowLabel)
         
         //
         // Call tapHeader when tapping on this header
@@ -50,37 +52,20 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         
         contentView.backgroundColor = UIColor.red
         
-        titleLabel.textColor = UIColor.white
-        arrowLabel.textColor = UIColor.white
+//        titleLabel.textColor = UIColor.white
+//        arrowLabel.textColor = UIColor.white
         
         //
         // Autolayout the lables
         //
-        let views = [
-            "titleLabel" : titleLabel,
-            "arrowLabel" : arrowLabel,
-        ]
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-20-[titleLabel]-[arrowLabel]-20-|",
-            options: [],
-            metrics: nil,
-            views: views
-        ))
-        
-        contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-[titleLabel]-|",
-            options: [],
-            metrics: nil,
-            views: views
-        ))
-        
-        contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-[arrowLabel]-|",
-            options: [],
-            metrics: nil,
-            views: views
-        ))
+        imgBanner.snp.makeConstraints { [weak self](make) in
+            if let strongSelf = self {
+                make.bottom.top.left.right.equalTo(strongSelf)
+
+            }
+        }
+
     }
     
     //

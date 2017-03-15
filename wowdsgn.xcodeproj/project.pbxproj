@@ -284,7 +284,6 @@
 		06A5C4591E13B1F500FE0A7A /* UMengEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C44C1E13B1F500FE0A7A /* UMengEvent.swift */; };
 		06A5C45A1E13B1F500FE0A7A /* WowAppDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C44D1E13B1F500FE0A7A /* WowAppDelegateManager.swift */; };
 		06A5C45B1E13B1F500FE0A7A /* WowWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C44E1E13B1F500FE0A7A /* WowWebView.swift */; };
-		06A5C4661E13B21600FE0A7A /* JSPatchPlatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C45D1E13B21600FE0A7A /* JSPatchPlatform.framework */; };
 		06A5C4671E13B21600FE0A7A /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C45E1E13B21600FE0A7A /* libTalkingData.a */; };
 		06A5C4681E13B21600FE0A7A /* libTalkingDataAppCpa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C45F1E13B21600FE0A7A /* libTalkingDataAppCpa.a */; };
 		06A5C4691E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C4601E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a */; };
@@ -823,7 +822,6 @@
 		06A5C44C1E13B1F500FE0A7A /* UMengEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMengEvent.swift; sourceTree = "<group>"; };
 		06A5C44D1E13B1F500FE0A7A /* WowAppDelegateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowAppDelegateManager.swift; sourceTree = "<group>"; };
 		06A5C44E1E13B1F500FE0A7A /* WowWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WowWebView.swift; sourceTree = "<group>"; };
-		06A5C45D1E13B21600FE0A7A /* JSPatchPlatform.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSPatchPlatform.framework; sourceTree = "<group>"; };
 		06A5C45E1E13B21600FE0A7A /* libTalkingData.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTalkingData.a; sourceTree = "<group>"; };
 		06A5C45F1E13B21600FE0A7A /* libTalkingDataAppCpa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTalkingDataAppCpa.a; sourceTree = "<group>"; };
 		06A5C4601E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
@@ -1086,7 +1084,6 @@
 				069D2F841DB4796D00A059D0 /* SystemConfiguration.framework in Frameworks */,
 				069D2F821DB4796800A059D0 /* ImageIO.framework in Frameworks */,
 				069D2F801DB4796200A059D0 /* Security.framework in Frameworks */,
-				06A5C4661E13B21600FE0A7A /* JSPatchPlatform.framework in Frameworks */,
 				069D2F7E1DB4795A00A059D0 /* libiconv.tbd in Frameworks */,
 				06A5C4681E13B21600FE0A7A /* libTalkingDataAppCpa.a in Frameworks */,
 				06A5C4671E13B21600FE0A7A /* libTalkingData.a in Frameworks */,
@@ -1773,7 +1770,6 @@
 			isa = PBXGroup;
 			children = (
 				06A5C46D1E13BB4D00FE0A7A /* UMMobClick.framework */,
-				06A5C45D1E13B21600FE0A7A /* JSPatchPlatform.framework */,
 				06A5C45E1E13B21600FE0A7A /* libTalkingData.a */,
 				06A5C45F1E13B21600FE0A7A /* libTalkingDataAppCpa.a */,
 				06A5C4601E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a */,

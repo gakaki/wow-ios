@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class WOWHomeControllers: WOWBaseViewController {
     var pageMenu:CAPSPageMenu?
     var controllerArray : [UIViewController] = []
     var selectCurrentIndex : Int? = 0
     
-    var hidingNavBarManager: HidingNavigationBarManager?
     var parameters: [CAPSPageMenuOption]? = nil
     var tabs : [WOWHomeTabs] = []{// 如果设置值 则说明 子首页tab接口请求成功 titleArray  controllerArray 清零 给新的值
         didSet {
@@ -86,8 +86,9 @@ class WOWHomeControllers: WOWBaseViewController {
             .bottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
         ]
            pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
-        self.view.addSubview(pageMenu!.view)
         
+        self.view.addSubview(pageMenu!.view)
+
         addObserver()
         // Do any additional setup after loading the view.
     }
@@ -115,36 +116,7 @@ class WOWHomeControllers: WOWBaseViewController {
         
         
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        hidingNavBarManager?.viewWillAppear(animated)
-//        
-//
-//    }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-//        
-//    }
-//    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//        hidingNavBarManager?.viewWillDisappear(animated)
-//        
-//    }
-//    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        hidingNavBarManager?.viewDidLayoutSubviews()
-//    }
-//    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
-//        //              hidingNavBarManager?.shouldScrollToTop()
-//        hidingNavBarManager?.shouldScrollToTop()
-//        return true
-//    }
+
     override func setUI() {
         super.setUI()
         request()

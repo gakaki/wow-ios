@@ -28,6 +28,7 @@ public class JLRouterRule {
                     return JLRoutes.global().routeURL(url_replaced)
                 }else{
                     print("该url 未能被打开 \(url_replaced.absoluteString) ")
+                    
                     return false
                 }
             }

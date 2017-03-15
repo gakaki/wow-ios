@@ -36,7 +36,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     func get_category_index() -> Int {
         let indexes     = categoryArr.flatMap { $0.id }
         if let res      = indexes.index(of: ob_cid){
-            return res
+            return res + 1
         }
         return 0
     }
@@ -141,13 +141,18 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
                             strongSelf.categoryArr = model.categories ?? [WOWSubCategoryModel]()
                             strongSelf.title                =  model.name
                             if strongSelf.categoryArr.count > 0 {
+                                
                                 strongSelf.cvHeight.constant = 110
+                                strongSelf.view.layoutIfNeeded()
                                 strongSelf.top_category_image_view.set_webimage_url(model.background) //设置顶部分类背景图
                                 strongSelf.cv.reloadData()
-                                strongSelf.cv.selectItem(at: NSIndexPath(item: strongSelf.get_category_index(), section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
+                                strongSelf.cv.selectItem(at: NSIndexPath(item: strongSelf.get_category_index(), section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+                             
                             }else {
                                 strongSelf.cvHeight.constant = 0
-                                
+                                strongSelf.view.layoutIfNeeded()
+                                strongSelf.cv.reloadData()
+
                             }
                             
                         }
@@ -185,11 +190,14 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
                     strongSelf.title                =  model.name
                     if strongSelf.categoryArr.count > 0 {
                         strongSelf.cvHeight.constant = 110
+                        strongSelf.view.layoutIfNeeded()
                         strongSelf.top_category_image_view.set_webimage_url(model.background) //设置顶部分类背景图
                         strongSelf.cv.reloadData()
                         strongSelf.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
                     }else {
                         strongSelf.cvHeight.constant = 0
+                        strongSelf.view.layoutIfNeeded()
+                        strongSelf.cv.reloadData()
 
                     }
                     
@@ -221,11 +229,15 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
                     strongSelf.title                =  model.name
                     if strongSelf.categoryArr.count > 0 {
                         strongSelf.cvHeight.constant = 110
+                        strongSelf.view.layoutIfNeeded()
+
                         strongSelf.top_category_image_view.set_webimage_url(model.background) //设置顶部分类背景图
                         strongSelf.cv.reloadData()
                         strongSelf.cv.selectItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.right)
                     }else {
                         strongSelf.cvHeight.constant = 0
+                        strongSelf.view.layoutIfNeeded()
+
                         strongSelf.cv.reloadData()
                     }
 

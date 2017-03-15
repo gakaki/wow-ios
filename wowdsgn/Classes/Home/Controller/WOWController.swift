@@ -36,6 +36,11 @@ class WOWController: WOWBaseModuleVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.automaticallyAdjustsScrollViewInsets = false
+//        let topViewController = FNUtil.currentTopViewController()
+//        if topViewController.className == WOWHomeControllers.className {
+//            hidingNavBarManager = HidingNavigationBarManager(viewController: topViewController, scrollView: tableView)
+//
+//        }
 
         setUI()
         addObserver()
@@ -128,7 +133,6 @@ class WOWController: WOWBaseModuleVC {
         dataDelegate?.vc                    = self
         dataDelegate?.ViewControllerType    = ControllerViewType.Buy
         self.view.backgroundColor           = GrayColorLevel5
-//        hidingNavBarManager = HidingNavigationBarManager(viewController: SuperViewController!, scrollView: tableView)
     }
     fileprivate func configBarItem(){
         configBuyBarItem() // 购物车数量

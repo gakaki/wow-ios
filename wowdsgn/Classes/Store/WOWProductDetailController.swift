@@ -120,7 +120,7 @@ class WOWProductDetailController: WOWBaseViewController {
         v.placeholderImage = UIImage(named: "placeholder_product")
         v.currentDotColor = UIColor.black
         v.otherDotColor   = UIColor(hexString: "#000000", alpha: 0.2)!
-        v.timeInterval = 5
+        v.timeInterval = 3
         return v
     }()
     lazy var backView:WOWBuyBackView = {

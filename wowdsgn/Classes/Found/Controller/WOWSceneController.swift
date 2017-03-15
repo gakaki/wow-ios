@@ -22,7 +22,14 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     var category                                = 0         //分类id
     var ob_tab_index                            = Variable(UInt(0))
     var index                                   = 0
-    var entrance        = CategoryEntrance.scene        //页面入口
+    var entrance        = CategoryEntrance.category{
+        didSet{
+            
+            self.currentVCType = entrance
+        
+        }
+        
+    }        //页面入口
     var topIsHidden = false
 
     var selectedCell: WOWGoodsSmallCell!

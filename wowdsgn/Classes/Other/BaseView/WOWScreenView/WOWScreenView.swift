@@ -28,7 +28,7 @@ struct ScreenViewConfig{
 
     static var headerViewHight :CGFloat = 64
     static var footerViewHight :CGFloat = 50
-    static var screenTitles             = ["价格范围","场景","颜色","风格"] //分组的标题
+//    static 
     static let kDuration                = 0.3
     static let frameX :CGFloat          = 75.w
 }
@@ -55,8 +55,40 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     var screenStyleArr          = [String]()
     var screenPriceArr          =  Dictionary<String, Any>()
     var screenScreenArr         = [String]()
+//    "价格范围","场景","颜色","风格"
+    var screenTitles            = [String](){
+        didSet {
+            for str in 0 ..< screenTitles.count {
+                
+                let model = SectionModel.init(sectionTitle: screenTitles[str], isOut: true)
+                arrayTitle.append(model)
+            }
+            tableView.reloadData()
+        }
+    }//分组的标题
     
     var screenAction  : SureScreenAction!
+    
+    var currentVCType:CategoryEntrance  = .category{
+        didSet{
+            switch currentVCType {
+            case .scene:
+                screenTitles = ["价格范围","颜色","风格"]
+                cellHightDic = [0 : 90 ,
+                                1 : 65 ,
+                                2 : 220
+                                    ]
+            default:
+                screenTitles = ["价格范围","场景","颜色","风格"]
+                cellHightDic = [0 : 90 ,
+                                1 : 65 ,
+                                2 : 150 ,
+                                3 : 220 ]
+            }
+        
+        }
+        
+    } // 默认是分类
     
     var cloosePriceModel  = PriceSectionModel()
     
@@ -100,24 +132,10 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        cellHightDic = [0 : 90 ,
-                        1 : 65 ,
-                        2 : 150 ,
-                        3 : 220 ]
+       
         
+
         
-        for a in 0..<ScreenViewConfig.screenTitles.count {
-            var isOut = true
-            switch a {
-            case 0,1:
-                isOut = true
-            default:
-                break
-            }
-            let model = SectionModel.init(sectionTitle: ScreenViewConfig.screenTitles[a], isOut: isOut)
-            arrayTitle.append(model)
-        }
-      
 
         configSubView()
         requstSceenData()
@@ -352,25 +370,49 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
         guard model.isOut == true else {
             return 0
         }
-        switch section {
-        case 2:
-            
-            return colorArr.count > 0 ? 1 : 0
-            
-        case 0:
-
-            return 1
-        case 1:
-            
-//            return priceArr.count > 0 ? 1 : 0
-            return 1
-            
-        case 3:
-            return 1
+        switch currentVCType {
+        case .scene:
+            switch section {
+                
+            case 0:
+                
+                return 1
+            case 1:
+                
+                //            return priceArr.count > 0 ? 1 : 0
+               return colorArr.count > 0 ? 1 : 0
+                
+            case 2:
+                return 1
+            default:
+                return 0
+            }
+   
         default:
-            return 0
-        }
+            switch section {
+            case 2:
+                
+                return colorArr.count > 0 ? 1 : 0
+                
+            case 0:
+                
+                return 1
+            case 1:
+                
+                //            return priceArr.count > 0 ? 1 : 0
+                return 1
+                
+            case 3:
+                return 1
+            default:
+                return 0
+            }
 
+      
+        }
+        
+
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
@@ -378,50 +420,88 @@ extension WOWScreenView:UITableViewDelegate,UITableViewDataSource{
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch currentVCType {
+        case .scene:
+            switch indexPath.section {
+            case 0:
+                let cell            = tableView.dequeueReusableCell(withIdentifier: "CloosePriceCell", for: indexPath as IndexPath) as! CloosePriceCell
+                
+                //            cell.delegate     = self
+                //            cell.indexPathNow = indexPath as NSIndexPath!
+                //            cell.dataArr      = priceArr
+                cell.modelPrice     = self.cloosePriceModel
+                cell.priceDataArray = priceArr
+                cell.selectionStyle = .none
+                return cell
+            case 1:
+                
+                let cell            = tableView.dequeueReusableCell(withIdentifier: cellColorID, for: indexPath as IndexPath) as! SVColorCell
+                cell.delegate     = self
+                cell.indexPathNow = indexPath as NSIndexPath!
+                cell.dataArr        = colorArr
+                cell.selectionStyle = .none
+                
+                return cell
+            case 2:
+                
+                
+                let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
+                cell.delegate       = self
+                cell.dataArr        = styleArr
+                cell.indexPathNow = indexPath as NSIndexPath!
+                cell.selectionStyle = .none
+                cell.currentVCType = self.currentVCType
+                return cell
+            default:
+                return UITableViewCell()
+            }
 
-        switch indexPath.section {
-        case 0:
-            let cell            = tableView.dequeueReusableCell(withIdentifier: "CloosePriceCell", for: indexPath as IndexPath) as! CloosePriceCell
-            
-            //            cell.delegate     = self
-            //            cell.indexPathNow = indexPath as NSIndexPath!
-            //            cell.dataArr      = priceArr
-            cell.modelPrice     = self.cloosePriceModel
-            cell.priceDataArray = priceArr
-            cell.selectionStyle = .none
-            return cell
-        case 1:
-            let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
-            
-            cell.delegate     = self
-            cell.dataArr        = sceneArr
-            cell.indexPathNow = indexPath as NSIndexPath!
-
-            cell.selectionStyle = .none
-            return cell
-        case 2:
-            let cell            = tableView.dequeueReusableCell(withIdentifier: cellColorID, for: indexPath as IndexPath) as! SVColorCell
-            cell.delegate     = self
-            cell.indexPathNow = indexPath as NSIndexPath!
-            cell.dataArr        = colorArr
-            cell.selectionStyle = .none
-       
-            return cell
-       
-        case 3:
-            
-       
-            let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
-            cell.delegate       = self
-            cell.dataArr        = styleArr
-            cell.indexPathNow = indexPath as NSIndexPath!
-            cell.selectionStyle = .none
-       
-            return cell
         default:
-            return UITableViewCell()
+            switch indexPath.section {
+            case 0:
+                let cell            = tableView.dequeueReusableCell(withIdentifier: "CloosePriceCell", for: indexPath as IndexPath) as! CloosePriceCell
+                
+                //            cell.delegate     = self
+                //            cell.indexPathNow = indexPath as NSIndexPath!
+                //            cell.dataArr      = priceArr
+                cell.modelPrice     = self.cloosePriceModel
+                cell.priceDataArray = priceArr
+                cell.selectionStyle = .none
+                return cell
+            case 1:
+                let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
+                
+                cell.delegate     = self
+                cell.dataArr        = sceneArr
+                cell.indexPathNow = indexPath as NSIndexPath!
+                
+                cell.selectionStyle = .none
+                return cell
+            case 2:
+                let cell            = tableView.dequeueReusableCell(withIdentifier: cellColorID, for: indexPath as IndexPath) as! SVColorCell
+                cell.delegate     = self
+                cell.indexPathNow = indexPath as NSIndexPath!
+                cell.dataArr        = colorArr
+                cell.selectionStyle = .none
+                
+                return cell
+                
+            case 3:
+                
+                
+                let cell                = tableView.dequeueReusableCell(withIdentifier: cellStyleID, for: indexPath as IndexPath) as! SVStyleCell
+                cell.delegate       = self
+                cell.dataArr        = styleArr
+                cell.indexPathNow = indexPath as NSIndexPath!
+                cell.selectionStyle = .none
+                cell.currentVCType = self.currentVCType
+                return cell
+            default:
+                return UITableViewCell()
+            }
+
         }
-      
+        
     }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

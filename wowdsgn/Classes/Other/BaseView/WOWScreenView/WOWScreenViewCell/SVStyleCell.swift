@@ -24,6 +24,7 @@ class SVStyleCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+    var currentVCType:CategoryEntrance  = .category
     
     @IBOutlet weak var imgSelect: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!
@@ -82,8 +83,17 @@ extension SVStyleCell:UICollectionViewDelegate,UICollectionViewDataSource,UIColl
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var styleInt = 3 //
+        switch currentVCType {
+            
+        case .scene:
+            styleInt = 2
+        default:
+            styleInt = 3
+        }
+
         switch indexPathNow.section {
-        case 3:
+        case styleInt:
             
             var params : [String: AnyObject]
             params = (dataArr?.getScreenCofig(index: indexPath.row,dicKey: "styleIdArr"))!

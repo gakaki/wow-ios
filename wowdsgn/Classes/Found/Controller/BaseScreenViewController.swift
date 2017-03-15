@@ -21,6 +21,8 @@ class BaseScreenViewController: WOWBaseViewController {
     var currentTypeIndex:ShowTypeIndex  = .New
     var currentSortType:SortType        = .Asc
     
+    var currentVCType:CategoryEntrance  = .category
+    
     var query_sortBy        = 1{
         didSet{
             if query_sortBy == 1 {
@@ -73,7 +75,7 @@ class BaseScreenViewController: WOWBaseViewController {
     func configScreeningView()  {
         
         screenView = WOWScreenView(frame:CGRect(x: ScreenViewConfig.frameX,y: 0,width: MGScreenWidth - ScreenViewConfig.frameX,height: MGScreenHeight))
-        
+        screenView.currentVCType = self.currentVCType
         screenBtnimg.image = UIImage.init(named: "screen")
         screenBtnimg.addTapGesture(action: {[weak self] (tap) in
             if let strongSelf = self{

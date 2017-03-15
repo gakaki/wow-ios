@@ -14,51 +14,66 @@ class WOWHomeControllers: WOWBaseViewController {
     var selectCurrentIndex : Int? = 0
     
     var hidingNavBarManager: HidingNavigationBarManager?
-    
-    var tabs : [WOWHomeTabs] = []
+    var parameters: [CAPSPageMenuOption]? = nil
+    var tabs : [WOWHomeTabs] = []{// 如果设置值 则说明 子首页tab接口请求成功 titleArray  controllerArray 清零 给新的值
+        didSet {
+            
+            var tabIdArrray :[Int] = []
+            titleArray.removeAll()
+            controllerArray.removeAll()
+            if tabs.count > 0 {
+                for tab in tabs.enumerated() {
+                    if tab.offset == 0 {
+                        titleArray.append("推荐")
+                        tabIdArrray.append(tab.element.id ?? 0)
+                    }else {
+                        titleArray.append(tab.element.name ?? "")
+                        tabIdArrray.append(tab.element.id ?? 0)
+                    }
+                    
+                    
+                }
+            }
+            
+            for index in 0..<titleArray.count {
+                
+                let HomeTabVC = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWController.self)) as! WOWController
+                HomeTabVC.title = titleArray[index]
+                
+                if index == 0 {
+                    
+                }else {
+                    
+                    HomeTabVC.tabId = tabIdArrray[index]
+                }
+                HomeTabVC.delegate = self
+                controllerArray.append(HomeTabVC)
+                HomeTabVC.SuperViewController = self
+            }
+            self.configTabs()
 
+        }
+    }
+    var titleArray  = ["推荐"] // 默认 一页
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(hexString: "efeff4")
         
-        
-        
-        addObserver()
-        // Do any additional setup after loading the view.
-    }
-    // 配置顶部tab信息
-    func configTabs(){
-        var titleArray  = ["推荐"] // 默认 一页
-        var tabIdArrray :[Int] = []
-        
-        if tabs.count > 0 {
-            for tab in tabs.enumerated() {
-                
-                titleArray.append(tab.element.name ?? "")
-                tabIdArrray.append(tab.element.id ?? 0)
-                
-            }
-        }
-       
-        for index in 0..<titleArray.count {
+        for index in 0..<titleArray.count {// 默认 为“推荐”
             
             let HomeTabVC = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWController.self)) as! WOWController
             HomeTabVC.title = titleArray[index]
-
-            if index == 0 {
             
-            }else {
-                
-                HomeTabVC.tabId = tabIdArrray[index - 1]
-            }
-           
+            HomeTabVC.delegate = self
+            
             controllerArray.append(HomeTabVC)
-            HomeTabVC.SuperViewController = self
+
         }
         
-        let parameters: [CAPSPageMenuOption] = [
+
+        parameters = [
             .scrollMenuBackgroundColor(UIColor.white),
             .menuHeight(40),
             .menuMargin(15),
@@ -70,12 +85,24 @@ class WOWHomeControllers: WOWBaseViewController {
             .menuItemSeparatorPercentageHeight(0.1),
             .bottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
         ]
-        
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
-        pageMenu?.delegate = self
-        
-        pageMenu?.delegate = self
+           pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
         self.view.addSubview(pageMenu!.view)
+        
+        addObserver()
+        // Do any additional setup after loading the view.
+    }
+    // 配置顶部tab信息
+    func configTabs(){
+
+        
+        pageMenu?.view.removeFromSuperview()
+        pageMenu = nil
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
+        
+        pageMenu?.delegate = self
+       
+        self.view.addSubview(pageMenu!.view)
+        
 
     }
     
@@ -136,9 +163,36 @@ class WOWHomeControllers: WOWBaseViewController {
 //                let json = JSON(result)
 
                 if let array = Mapper<WOWHomeTabs>().mapArray(JSONObject:JSON(result)["tabs"].arrayObject){
+//                    if strongSelf.tabs.elementsEqual(array)  {
+//                      
+//                         print("equal two")
+//                    }else {
+                        var isEqual = true
+                        if strongSelf.tabs.count != array.count {
+                            isEqual = false
+                        }else {
+                            for model  in array.enumerated() {
+//                                if strongSelf.tabs.count > model.offset {
+                                    let oldModel = strongSelf.tabs[model.offset]
+                                    if model.element.id == oldModel.id && model.element.name == oldModel.name {
+                                        print("equal")
+                                    }else{
+                                        isEqual = false
+                                        print("new")
+                                    }
+//                                }else {
+//                                    isEqual = false
+//                                    print("new")
+//                                }
+                            }
+                        }
                     
-                    strongSelf.tabs = array
-                    strongSelf.configTabs()
+                    if isEqual == false {
+                        strongSelf.tabs = array
+                        
+                    }
+ 
+                   
                 }
                
 
@@ -212,7 +266,7 @@ class WOWHomeControllers: WOWBaseViewController {
 
 }
 
-extension WOWHomeControllers:CAPSPageMenuDelegate{
+extension WOWHomeControllers:CAPSPageMenuDelegate,WOWChideControllerDelegate{
     
 
     // 滑动结束 再请求网络
@@ -226,5 +280,8 @@ extension WOWHomeControllers:CAPSPageMenuDelegate{
         
         
     }
-    
+    func updateTabsRequsetData(){
+        print("request ...")
+         requestTabs()
+    }
 }

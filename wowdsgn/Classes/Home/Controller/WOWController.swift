@@ -9,13 +9,16 @@
 
 import UIKit
 
-//protocol <#name#> {
-//    <#requirements#>
-//}
+protocol WOWChideControllerDelegate:class {
+    
+    func updateTabsRequsetData()
+    
+}
 
 class WOWController: WOWBaseModuleVC {
     
-
+    weak var delegate:WOWChideControllerDelegate?
+    
     var SuperViewController : UIViewController?
     var isCheackUpdate : Bool = false // 是否已经提示 刷新
     var dataArr = [WOWHomeModle]()    //顶部商品列表数组
@@ -135,6 +138,12 @@ class WOWController: WOWBaseModuleVC {
     override func request() {
         
         super.request()
+        if let del = delegate {
+            
+            del.updateTabsRequsetData()
+            
+        }
+        
         self.requestTop()
        
 //        self.requestBottom()

@@ -9,7 +9,7 @@ class VCShopping: WowBaseVCCartSearch {
     
     var v : VCVTMagic!
 
-    var vc_found:VCFound?
+    var vc_found:CollapsibleTableViewController?
     var vc_brand:WOWBrandListController?
     var vc_designer:VCDesignerList?
     
@@ -55,7 +55,8 @@ class VCShopping: WowBaseVCCartSearch {
         }
 
         
-        vc_found    = UIStoryboard.initialViewController("Found", identifier:String(describing: VCFound.self)) as? VCFound
+        vc_found    = CollapsibleTableViewController.init(style: .grouped)
+//        let vc_table =
         vc_brand    = UIStoryboard.initialViewController("Brand", identifier:String(describing: WOWBrandListController.self)) as? WOWBrandListController
         vc_designer = UIStoryboard.initialViewController("Designer", identifier:String(describing: VCDesignerList.self)) as? VCDesignerList
         

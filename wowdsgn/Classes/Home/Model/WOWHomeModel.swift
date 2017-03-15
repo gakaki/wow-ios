@@ -26,7 +26,33 @@ final class WOWHomeTabs: WOWBaseModel,Mappable{
     }
 
 }
-
+final class WOWHomeClassTabs: WOWBaseModel,Mappable{
+    
+    var id                      :       Int?
+    var name                    :       String?
+    var moduleId                :       Int?
+    var moduleType              :       Int?
+    var moduleName              :       String?
+    var moduleDescription       :       String?
+    var moduleContent           :       WOWCarouselBanners?// 顶部轮播，单个图片
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        
+        id             <- map["id"]
+        name           <- map["name"]
+        moduleId                    <- map["moduleId"]
+        moduleType                  <- map["moduleType"]
+   
+        moduleName                  <- map["moduleName"]
+        moduleDescription           <- map["moduleDescription"]
+        moduleContent              <- map["moduleContent"]
+      
+    }
+    
+}
 final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleType              :  Int?
     var moduleContent           :  WOWCarouselBanners?// 顶部轮播，单个图片

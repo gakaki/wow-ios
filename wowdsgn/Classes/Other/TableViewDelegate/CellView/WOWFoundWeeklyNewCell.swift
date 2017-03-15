@@ -34,7 +34,7 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
         
         let layout                            = UICollectionViewFlowLayout()
         layout.scrollDirection                = .horizontal
-        layout.itemSize                       = CGSizeD( 140 ,height: 210 )
+        layout.itemSize                       = CGSize.init(width: 140, height: 210)
         self.heightAll                        = layout.itemSize.height
         
         layout.sectionInset                   = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
@@ -72,7 +72,7 @@ extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSou
             cell.topView.isHidden           = true
             cell.view_rightline.isHidden    = true
             cell.bottomLine.alpha = 0.0
-            cell.bottomConstraint.constant = 8.0
+            cell.bottomConstraint.constant = 6.0
             cell.likeBtn.alpha = 0.0
 //            cell.likeBtn.isHidden           = true
         return cell

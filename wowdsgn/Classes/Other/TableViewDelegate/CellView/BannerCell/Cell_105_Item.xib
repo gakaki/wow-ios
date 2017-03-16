@@ -52,7 +52,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="img_Next" destination="pOV-1Z-mCf" id="PVo-2e-Qxx"/>
                 <outlet property="lb_BannerName" destination="AcC-v4-4SZ" id="0z1-ft-j2X"/>
+                <outlet property="lb_Line" destination="3Tg-i6-JBM" id="WqA-XI-DBw"/>
             </connections>
             <point key="canvasLocation" x="-113" y="-62"/>
         </tableViewCell>

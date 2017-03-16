@@ -9,7 +9,12 @@
 import UIKit
 
 class Cell_105_Item: UITableViewCell {
+    
     @IBOutlet weak var lb_BannerName: UILabel!
+    
+    @IBOutlet weak var lb_Line: UILabel!
+    
+    @IBOutlet weak var img_Next: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

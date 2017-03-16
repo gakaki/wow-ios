@@ -416,26 +416,26 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     let center       = tableView.center
                     if let strongSelf = self {
                         var nowTime = 0.0
-                        for module in strongSelf.dataSourceArray.enumerated() {// 循环遍历 确保 只有一个展开的 banner
-                            let type = module.element.moduleType ?? 0
-                            let id   = module.element.moduleContent?.id ?? 0
-                            if type == 105 {
-                                if id != model_Class?.id { // 不是当前所点击的
-                                    if module.element.moduleContent?.bannerIsOut == true { //  如果其他展开 则收起
-                                        module.element.moduleContent?.bannerIsOut = false
-//                                              strongSelf.tableView.beginUpdates()
-                                        let indexSet = NSIndexSet.init(index: module.offset)
+//                        for module in strongSelf.dataSourceArray.enumerated() {// 循环遍历 确保 只有一个展开的 banner
+//                            let type = module.element.moduleType ?? 0
+//                            let id   = module.element.moduleContent?.id ?? 0
+//                            if type == 105 {
+//                                if id != model_Class?.id { // 不是当前所点击的
+//                                    if module.element.moduleContent?.bannerIsOut == true { //  如果其他展开 则收起
+//                                        module.element.moduleContent?.bannerIsOut = false
+////                                              strongSelf.tableView.beginUpdates()
+////                                        let indexSet = NSIndexSet.init(index: module.offset)
+//////
+////                                        strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
+////                                         strongSelf.tableView.endUpdates()
+//                                        nowTime = 0.3 // 设定延时时间  防止同时reloadSections 闪屏
+////                                         strongSelf.tableView.endUpdates()
+//                                    }
+//                                   
+//                                }
+//                            }
+//                        }
 //
-                                        strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
-//                                         strongSelf.tableView.endUpdates()
-                                        nowTime = 0.3 // 设定延时时间  防止同时reloadSections 闪屏
-//                                         strongSelf.tableView.endUpdates()
-                                    }
-                                   
-                                }
-                            }
-                        }
-
                         let delayQueue = DispatchQueue.global()
                         delayQueue.asyncAfter(deadline: .now() + nowTime) { // 延时 刷新sections
                             
@@ -457,24 +457,24 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
 //                                if model_Class?.bannerIsOut == true {
 //                                strongSelf.tableView.beginUpdates()
                                     let indexSet = NSIndexSet.init(index: section)
-                                    let cellIndex = strongSelf.tableView.cellForRow(at: indexPath)
-                                    print("old a--- \(cellIndex?.frame.origin.y)")
-                                    let point = strongSelf.tableView.contentOffset
-                                    print("old b--- \(point.y)")
+//                                    let cellIndex = strongSelf.tableView.cellForRow(at: indexPath)
+//                                    print("old a--- \(cellIndex?.frame.origin.y)")
+//                                    let point = strongSelf.tableView.contentOffset
+//                                    print("old b--- \(point.y)")
 //                                    print()
                                 
 //                                    strongSelf.tableView.insertSections(indexSet as IndexSet, with: .none)
                                 
-                                    strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .none)
+                                    strongSelf.tableView.reloadSections(indexSet as IndexSet, with: .middle)
                             
-//                                strongSelf.tableView.reloadData()
+//                                    strongSelf.tableView.reloadData()
                                     let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
-                                    strongSelf.tableView.scrollToRow(at: b, at: .top, animated: false)
+                                    strongSelf.tableView.scrollToRow(at: b, at: .top, animated: true)
                                 
                                 
-                                print("new a--- \(cellIndex?.frame.origin.y)")
+//                                print("new a--- \(cellIndex?.frame.origin.y)")
                           
-                                print("new b--- \(point.y)")
+//                                print("new b--- \(point.y)")
 //                                    strongSelf.tableView.setContentOffset(CGPoint.init(x: 0, y: 0), animated: true)
 //                                strongSelf.tableView.endUpdates()
 //                                }else {

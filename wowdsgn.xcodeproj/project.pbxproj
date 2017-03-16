@@ -319,6 +319,8 @@
 		2D2331E21DFF9398006E7BC0 /* WOWUpdateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2331DC1DFF9398006E7BC0 /* WOWUpdateHeader.xib */; };
 		2D2331E31DFF9398006E7BC0 /* WOWUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2331DD1DFF9398006E7BC0 /* WOWUpdateView.swift */; };
 		2D2331E41DFF9398006E7BC0 /* WOWUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2331DE1DFF9398006E7BC0 /* WOWUpdateView.xib */; };
+		2D2403A21E795B8F00BC8D26 /* CollapsibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2403A01E795B8F00BC8D26 /* CollapsibleTableViewController.swift */; };
+		2D2403A31E795B8F00BC8D26 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2403A11E795B8F00BC8D26 /* CollapsibleTableViewHeader.swift */; };
 		2D26FD2A1E2479F1006D75F4 /* SVCloosePriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FD281E2479F1006D75F4 /* SVCloosePriceCell.swift */; };
 		2D26FD2B1E2479F1006D75F4 /* SVCloosePriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D26FD291E2479F1006D75F4 /* SVCloosePriceCell.xib */; };
 		2D509A141DB5D30B0047CD13 /* WOWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D509A101DB5D30B0047CD13 /* WOWController.swift */; };
@@ -866,6 +868,8 @@
 		2D2331DC1DFF9398006E7BC0 /* WOWUpdateHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateHeader.xib; sourceTree = "<group>"; };
 		2D2331DD1DFF9398006E7BC0 /* WOWUpdateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUpdateView.swift; sourceTree = "<group>"; };
 		2D2331DE1DFF9398006E7BC0 /* WOWUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWUpdateView.xib; sourceTree = "<group>"; };
+		2D2403A01E795B8F00BC8D26 /* CollapsibleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewController.swift; sourceTree = "<group>"; };
+		2D2403A11E795B8F00BC8D26 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		2D26FD281E2479F1006D75F4 /* SVCloosePriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVCloosePriceCell.swift; sourceTree = "<group>"; };
 		2D26FD291E2479F1006D75F4 /* SVCloosePriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVCloosePriceCell.xib; sourceTree = "<group>"; };
 		2D509A101DB5D30B0047CD13 /* WOWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWController.swift; sourceTree = "<group>"; };
@@ -1784,6 +1788,8 @@
 		2D0043F21DD327AA00A7D98A /* TableViewDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				2D2403A01E795B8F00BC8D26 /* CollapsibleTableViewController.swift */,
+				2D2403A11E795B8F00BC8D26 /* CollapsibleTableViewHeader.swift */,
 				2DDA4DAD1DDEFE1A00E7A7E8 /* WOWBaseModuleVC.swift */,
 				2D0043F31DD327D500A7D98A /* WOWTableDelegate.swift */,
 				2DDA4DCD1DDEFE2E00E7A7E8 /* WowModulePageView.swift */,
@@ -2667,6 +2673,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D2403A21E795B8F00BC8D26 /* CollapsibleTableViewController.swift in Sources */,
 				63CBF9D41DFE39E2008D8E8F /* WOWMaskViewController.swift in Sources */,
 				6376E23D1E0B729D001457B7 /* WOWCouponProductController.swift in Sources */,
 				069D327C1DB47ADD00A059D0 /* WOWProductDetailController.swift in Sources */,
@@ -2750,6 +2757,7 @@
 				631473EB1E67F9BA004A2737 /* WOWBaseProductsController.swift in Sources */,
 				069D323D1DB47ADD00A059D0 /* WOWBaseTableViewController.swift in Sources */,
 				069D32381DB47ADD00A059D0 /* WOWRegistInfoFirstController.swift in Sources */,
+				2D2403A31E795B8F00BC8D26 /* CollapsibleTableViewHeader.swift in Sources */,
 				2DDA4DE91DDEFE2E00E7A7E8 /* WOWlListCell.swift in Sources */,
 				06A5C4501E13B1F500FE0A7A /* DynamicFun.swift in Sources */,
 				069D31DC1DB47ADD00A059D0 /* VCCategoryChoose.swift in Sources */,

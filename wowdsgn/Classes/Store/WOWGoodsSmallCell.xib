@@ -194,6 +194,7 @@
                 <constraint firstItem="OpU-Dv-x7A" firstAttribute="top" secondItem="PQH-ia-YyY" secondAttribute="top" constant="10" id="EWs-4I-axb"/>
                 <constraint firstItem="OpU-Dv-x7A" firstAttribute="top" secondItem="PQH-ia-YyY" secondAttribute="top" constant="8" id="F0d-nb-wKh"/>
                 <constraint firstItem="f00-ot-Frz" firstAttribute="top" secondItem="OpU-Dv-x7A" secondAttribute="bottom" constant="8" id="F11-Es-Ook"/>
+                <constraint firstItem="DGH-70-lab" firstAttribute="top" secondItem="OpU-Dv-x7A" secondAttribute="top" id="FwX-Yw-tPP"/>
                 <constraint firstAttribute="bottom" secondItem="f00-ot-Frz" secondAttribute="bottom" id="GYx-gw-lzw"/>
                 <constraint firstItem="dZZ-XJ-GP0" firstAttribute="top" secondItem="PQH-ia-YyY" secondAttribute="top" constant="76" id="Mde-vA-s9e"/>
                 <constraint firstAttribute="trailing" secondItem="OpU-Dv-x7A" secondAttribute="trailing" constant="15" id="OEv-fp-Js7"/>
@@ -201,10 +202,8 @@
                 <constraint firstItem="dZZ-XJ-GP0" firstAttribute="top" secondItem="PQH-ia-YyY" secondAttribute="top" constant="79" id="Pc8-1f-79E"/>
                 <constraint firstAttribute="trailing" secondItem="f00-ot-Frz" secondAttribute="trailing" id="QZP-Yg-uSr"/>
                 <constraint firstItem="OpU-Dv-x7A" firstAttribute="top" secondItem="MP7-vA-BAP" secondAttribute="top" id="RbQ-84-KQT"/>
-                <constraint firstItem="DGH-70-lab" firstAttribute="leading" secondItem="PQH-ia-YyY" secondAttribute="leading" constant="8" id="WIK-bA-OMK"/>
                 <constraint firstAttribute="trailing" secondItem="MP7-vA-BAP" secondAttribute="trailing" constant="0.5" id="XBm-1v-Pue"/>
                 <constraint firstItem="OpU-Dv-x7A" firstAttribute="leading" secondItem="PQH-ia-YyY" secondAttribute="leading" constant="15" id="XaX-a5-b2f"/>
-                <constraint firstItem="DGH-70-lab" firstAttribute="top" secondItem="PQH-ia-YyY" secondAttribute="top" constant="8" id="bTf-wS-mGF"/>
                 <constraint firstItem="OpU-Dv-x7A" firstAttribute="width" secondItem="PQH-ia-YyY" secondAttribute="width" multiplier="100:100" id="bsN-hq-Qhk"/>
                 <constraint firstItem="OpU-Dv-x7A" firstAttribute="centerY" secondItem="PQH-ia-YyY" secondAttribute="centerY" id="dFv-Ac-Y39"/>
                 <constraint firstItem="MP7-vA-BAP" firstAttribute="top" secondItem="PQH-ia-YyY" secondAttribute="top" id="fQd-hi-dNt"/>
@@ -218,6 +217,7 @@
                 <constraint firstItem="OpU-Dv-x7A" firstAttribute="leading" secondItem="PQH-ia-YyY" secondAttribute="leading" constant="8" id="s5j-21-fIh"/>
                 <constraint firstItem="f00-ot-Frz" firstAttribute="top" secondItem="dZZ-XJ-GP0" secondAttribute="bottom" constant="82" id="ufu-90-QZu"/>
                 <constraint firstItem="OpU-Dv-x7A" firstAttribute="centerY" secondItem="PQH-ia-YyY" secondAttribute="centerY" constant="-42" id="wyK-IX-TaU"/>
+                <constraint firstItem="DGH-70-lab" firstAttribute="leading" secondItem="OpU-Dv-x7A" secondAttribute="leading" id="zbR-mD-cYu"/>
             </constraints>
             <size key="customSize" width="231" height="263"/>
             <variation key="default">

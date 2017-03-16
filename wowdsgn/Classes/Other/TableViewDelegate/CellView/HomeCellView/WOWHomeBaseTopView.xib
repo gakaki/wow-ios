@@ -15,27 +15,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人气单品" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBc-tb-mUh">
-                    <rect key="frame" x="150" y="16" width="74" height="22"/>
+                    <rect key="frame" x="15" y="15" width="345" height="22"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dii-ud-17f">
-                    <rect key="frame" x="141" y="21" width="4" height="12"/>
-                    <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="4" id="Bqt-jK-yhg"/>
-                        <constraint firstAttribute="height" constant="12" id="jS8-1x-4gM"/>
-                    </constraints>
-                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你买我买大家买" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDC-hw-hjt">
-                    <rect key="frame" x="15" y="38" width="345" height="16"/>
+                    <rect key="frame" x="15" y="37" width="345" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0aF-EZ-Ctw">
-                    <rect key="frame" x="0.0" y="69.5" width="375" height="0.5"/>
+                    <rect key="frame" x="0.0" y="70" width="375" height="0.0"/>
                     <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="xI2-fg-PEk"/>
@@ -49,14 +41,14 @@
             <constraints>
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0BG-LU-Y80"/>
                 <constraint firstItem="0aF-EZ-Ctw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4bT-fh-APk"/>
-                <constraint firstItem="UBc-tb-mUh" firstAttribute="centerY" secondItem="Dii-ud-17f" secondAttribute="centerY" id="Dhp-OS-dKQ"/>
+                <constraint firstAttribute="trailing" secondItem="UBc-tb-mUh" secondAttribute="trailing" constant="15" id="Gbf-Rq-kLv"/>
+                <constraint firstItem="UBc-tb-mUh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="KfV-f7-NOF"/>
                 <constraint firstAttribute="bottom" secondItem="0aF-EZ-Ctw" secondAttribute="bottom" id="MUa-Cy-xfM"/>
-                <constraint firstItem="UBc-tb-mUh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="TKn-39-0d6"/>
+                <constraint firstItem="UBc-tb-mUh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="TKn-39-0d6"/>
                 <constraint firstItem="UBc-tb-mUh" firstAttribute="centerX" secondItem="xDC-hw-hjt" secondAttribute="centerX" id="fKf-kd-uTH"/>
                 <constraint firstItem="xDC-hw-hjt" firstAttribute="top" secondItem="UBc-tb-mUh" secondAttribute="bottom" id="nhE-sx-G3D"/>
                 <constraint firstAttribute="trailing" secondItem="0aF-EZ-Ctw" secondAttribute="trailing" id="odb-uO-EFM"/>
                 <constraint firstAttribute="trailing" secondItem="xDC-hw-hjt" secondAttribute="trailing" constant="15" id="qnp-ID-Esh"/>
-                <constraint firstItem="UBc-tb-mUh" firstAttribute="leading" secondItem="Dii-ud-17f" secondAttribute="trailing" constant="5" id="uJI-Gt-jiC"/>
                 <constraint firstItem="xDC-hw-hjt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="ycM-7n-0FL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

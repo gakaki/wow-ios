@@ -14,7 +14,7 @@ struct ModulePageType {
     static let PAGE_MODULE_TYPE_CATEGORIES                      = 301; 	  //    一级分类
     static let PAGE_MODULE_TYPE_CATEGORIES_MORE                 = 302;	  //    二级分类
     static let PAGE_MODULE_TYPE_NEW_ARRIVAL_RPODUCTS            = 401;    //    本周上新
-    static let PAGE_MODULE_TYPE_PINTEREST_PRODUCTS              = 402;	  //    推荐商品
+    static let PAGE_MODULE_TYPE_PINTEREST_PRODUCTS              = 402;	  //    推荐商品  纵向banner组
     static let PAGE_MODULE_TYPE_SINGLE_RECOMMENT_PRODUCT        = 501;	  //    单品推荐
     static let PAGE_MODULE_TYPE_TOPIC_PRODUCTS                  = 601;	  //    专题商品列表
     static let PAGE_MODULE_TYPE_PROJECT                         = 102;	  //    专题左右滑动列表
@@ -25,7 +25,7 @@ struct ModulePageType {
     static let PAGE_MODULE_TYPE_HOT_Play                        = 103;	  //    精选页轮播 比例 3：2
     static let PAGE_MODULE_TYPE_CRE_TwoLine                     = 104;	  //    双列产品组
     static let PAGE_MODULE_TYOE_CLASS_Banner                    = 105;    //    分类可伸缩banner
-    static let PAGE_MODULE_TYOE_HOME_ADGROUP                    = 106;    //    广告组 横向固定 三个
+    static let PAGE_MODULE_TYOE_HOME_ADGROUP                    = 106;    //    广告组 横向固定 三个 热门分类
     static let PAGE_MODULE_TYOE_HOME_BRANDZONE                  = 107;    //    品牌专区  一个推荐banner + 底部三个商品
     static let d = [
 

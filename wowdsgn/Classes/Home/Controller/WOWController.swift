@@ -56,8 +56,9 @@ class WOWController: WOWBaseModuleVC {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MobClick.e(.Son_Home_Page_Tab)
-
+        let parmas = ["Secondary_Homepagename": self.title ?? "推荐", "Secondary_Homepageid": tabId ?? 1] as [String : Any]
+        MobClick.e2(.Secondary_Homepage_Pv, parmas)
+        
         hidingNavBarManager?.viewWillAppear(animated)
         
 //        self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -131,7 +132,7 @@ class WOWController: WOWBaseModuleVC {
     func configTableView() {
         
         dataDelegate?.vc                    = self
-        dataDelegate?.ViewControllerType    = ControllerViewType.Buy
+        dataDelegate?.ViewControllerType    = ControllerViewType.Home
         self.view.backgroundColor           = GrayColorLevel5
     }
     fileprivate func configBarItem(){

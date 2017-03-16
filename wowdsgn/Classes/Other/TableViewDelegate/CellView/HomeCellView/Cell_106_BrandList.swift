@@ -37,7 +37,8 @@ class Cell_106_BrandList: UITableViewCell,ModuleViewElement {
     
 //    var rate:CGFloat = 1.0// 宽高比
     
-    
+    var moduleId: Int!
+    var pageTitle: String!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     var itemHeight : CGFloat = MGScreenWidth * 0.33
     let itemWidth : CGFloat = (MGScreenWidth - 30 - 10 * 2) / 3
@@ -89,7 +90,15 @@ extension Cell_106_BrandList:UICollectionViewDelegate,UICollectionViewDataSource
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = delegate {// 点击banner 跳转
-            del.goToVCFormLinkType_106_Banner(model: dataArr[indexPath.row])
+             let model = dataArr[indexPath.row]
+            //Mob 热门分类模块 banner点击
+            let bannerId = String(format: "%i_%@_%i", moduleId, pageTitle, model.id ?? 0)
+            let bannerName = String(format: "%i_%@_%@", moduleId, pageTitle, model.bannerTitle ?? "")
+            let bannerPosition = String(format: "%i_%@_%i", moduleId, pageTitle, indexPath.row)
+            let params = ["ModuleID_Secondary_Homepagename_Bannersid": bannerId, "ModuleID_Secondary_Homepagename_Bannersname": bannerName, "ModuleID_Secondary_Homepagename_Bannersposition": bannerPosition]
+            MobClick.e2(.Hot_Category_Clicks, params)
+
+            del.goToVCFormLinkType_106_Banner(model: model)
         }
     }
   

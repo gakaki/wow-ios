@@ -40,7 +40,7 @@ class VCFound: WOWBaseModuleVC {
         self.view.backgroundColor           = GrayColorLevel5
         
         dataDelegate?.vc                    = self
-        dataDelegate?.ViewControllerType    = ControllerViewType.Home
+        dataDelegate?.ViewControllerType    = ControllerViewType.Buy
         tableView.separatorColor            = SeprateColor
 //        tableView.mj_footer                 = mj_footerHome
 

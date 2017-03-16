@@ -6,15 +6,14 @@
 //  Copyright © 2016年 g. All rights reserved.
 //
 enum ControllerViewType { // 区分底部列表
-    case Home        // 分类页
-    case Buy            // 首页
+    case Home        // 首页
+    case Buy            // 分类页
     case HotStyle     // 精选页
 }
 import UIKit
 import UITableView_FDTemplateLayoutCell
 class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,CyclePictureViewDelegate {
     open var vc : UIViewController?
-
     open var ViewControllerType  :ControllerViewType?
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
     open var cell_heights    = [0:0.h]
@@ -257,12 +256,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeBrannerCell
             
             if let banners = model.moduleContent?.banners{
-                
+            
                 cell.reloadBanner(banners)
                 cell.delegate = self.vc as! HomeBrannerDelegate?
-                
-
+                cell.moduleId = model.moduleId
+                cell.pageTitle = vc?.title
             }
+            cell.indexPathSection = indexPath.section
             cell_heights[section]  = cell.heightAll
             returnCell = cell
             
@@ -519,6 +519,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         case 107:
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_107_BrandZone
             cell.delegate = self.vc as! Cell_107_BrandZoneDelegate?
+            cell.moduleId = model.moduleId ?? 0
+            cell.pageTitle = vc?.title ?? ""
             cell.modelData = model.moduleContent
             returnCell = cell
         case 106:
@@ -526,6 +528,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
 
             if let banners = model.moduleContent?.banners{
                 cell.dataArr = banners
+                cell.pageTitle = vc?.title ?? ""
+                cell.moduleId = model.moduleId ?? 0
             }
             cell.delegate = self.vc as! Cell_106_BrandListDelegate?
             
@@ -600,14 +604,14 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 switch model.moduleType ?? 0{// 不同的type  不同的页脚
                     case 102,107,106:
                         if let link = model.moduleContent?.link {
-                            return hearderBaseBottomView(bannerModel: link)
+                            return hearderBaseBottomView(bannerModel: link, module: model)
                         }else {
                             return nil
                         }
 
                     case 402,401:
                        
-                        return hearderBaseBottomView(bannerModel: nil, is402: true, id: model.moduleContentProduct?.id ?? 0)
+                        return hearderBaseBottomView(bannerModel: nil, is402: true, id: model.moduleContentProduct?.id ?? 0, module: model)
                     
                 default:
                     return nil
@@ -766,12 +770,32 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
     }
     // 2.0 版本 查看更多页脚
-    func hearderBaseBottomView(bannerModel: WOWCarouselBanners?,is402:Bool = false,id:Int = 0) -> UIView { // 137 37
+    func hearderBaseBottomView(bannerModel: WOWCarouselBanners?,is402:Bool = false,id:Int = 0, module: WOWHomeModle) -> UIView { // 137 37
         
         let view = Bundle.main.loadNibNamed("WOWHomeBaseBottomView", owner: self, options: nil)?.last as! WOWHomeBaseBottomView
         
         view.imgBackgroud.addTapGesture {[weak self] (sender) in
             if let strongSelf = self {
+                switch module.moduleType ?? 0{// 不同的type  不同的页脚
+                case 106:
+                    //Mob 品牌专区模块 banner点击
+                    let allType = String(format: "%i_%@_%i", module.moduleId ?? 0, strongSelf.vc?.title ?? "", bannerModel?.bannerLinkType ?? 0)
+                    let params = ["ModuleID_Secondary_Homepagename_Viewalltragettype": allType]
+                    MobClick.e2(.Hot_Category_Clicks, params)
+                    
+                    break
+                case 107:
+                    //Mob 品牌专区模块 banner点击
+                    let allType = String(format: "%i_%@_%i", module.moduleId ?? 0, strongSelf.vc?.title ?? "", bannerModel?.bannerLinkType ?? 0)
+                    let params = ["ModuleID_Secondary_Homepagename_Viewalltragettype": allType]
+                    MobClick.e2(.Slide_Banners_Clicks, params)
+
+                    break
+        
+                default:
+                    break
+                }
+
                 if is402 {
                     print("跳转对应的产品组的详情页\(id)")
                     VCRedirect.goToProductGroup(id)
@@ -840,8 +864,14 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         switch model.moduleType ?? 0{// 不同type 跳转不同的类型
         case 201://单个图片
             if let modelBanner = model.moduleContent {
+                //Mob 单张banner模块
+                let bannerId = String(format: "%i_%@_%i", model.moduleId ?? 0, vc?.title ?? "", modelBanner.id ?? 0)
+                let bannerName = String(format: "%i_%@_%@", model.moduleId ?? 0, vc?.title ?? "", modelBanner.bannerTitle ?? "")
+                let params = ["ModuleID_Secondary_Homepagename_Bannerid": bannerId, "ModuleID_Secondary_Homepagename_Bannername": bannerName]
+                MobClick.e2(.Single_Banner_Clicks, params)
                 
                 let v = self.vc as? WOWBaseModuleVC
+                
                 v?.goController(modelBanner)
                 
             }

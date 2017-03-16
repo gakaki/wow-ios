@@ -21,7 +21,8 @@ class Cell_107_BrandZone: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 107  //品牌专区  一个推荐banner + 底部三个商品
     }
-    
+    var moduleId: Int!
+    var pageTitle: String!
     weak var delegate : Cell_107_BrandZoneDelegate?
     
     let itemWidth : CGFloat = (MGScreenWidth - 30 - 20 * 2) / 3
@@ -76,6 +77,11 @@ class Cell_107_BrandZone: UITableViewCell,ModuleViewElement {
                 if let del = strongSelf.delegate,let banners = strongSelf.modelData?.banners{
                     
                     if banners.count > 0 {
+                        //Mob 品牌专区模块 banner点击
+                        let bannerId = String(format: "%i_%@_%i", strongSelf.moduleId, strongSelf.pageTitle, banners[0].id ?? 0)
+                        let bannerName = String(format: "%i_%@_%@", strongSelf.moduleId, strongSelf.pageTitle, banners[0].bannerTitle ?? "")
+                        let params = ["ModuleID_Secondary_Homepagename_Brandid": bannerId, "ModuleID_Secondary_Homepagename_Brandname": bannerName]
+                        MobClick.e2(.Slide_Banners_Clicks, params)
                         
                         del.goToVCFormLinkType_107_BrandZone(model: banners[0])
                             
@@ -136,7 +142,13 @@ extension Cell_107_BrandZone:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = delegate {// 点击跳转商品详情
             let model = modelData.products?[indexPath.row]
-            
+            //Mob 品牌专区模块 product点击
+            let productId = String(format: "%i_%@_%i", moduleId, pageTitle, model?.productId ?? 0)
+            let productName = String(format: "%i_%@_%@", moduleId, pageTitle, model?.productName ?? "")
+            let productPosition = String(format: "%i_%@_%@", moduleId, pageTitle, indexPath.row)
+            let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
+            MobClick.e2(.Brand_Module_Clicks, params)
+
             del.goToProductDetailVC_107_BrandZone(productId: model?.productId ?? 0)
         }
     }

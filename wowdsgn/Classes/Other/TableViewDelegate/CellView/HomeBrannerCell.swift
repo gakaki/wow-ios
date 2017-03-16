@@ -34,7 +34,10 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelegat
     weak var delegate : HomeBrannerDelegate?
     
     var imageURLArray = [String]()
-        
+    var indexPathSection : Int? = 0
+    var moduleId: Int!
+    var pageTitle: String!
+    
     
     @IBOutlet weak var cyclePictureView: CyclePictureView!
     @IBOutlet weak var AspectRatioConstraint: NSLayoutConstraint! // 比例
@@ -72,6 +75,13 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelegat
         let model = bannerCurrentArray[(indexPath as NSIndexPath).row]
         
         if let del = delegate{
+            //Mob 轮播模块
+            let position = String(format: "%i_%@_%i", moduleId, pageTitle, indexPath.row )
+            let bannerId = String(format: "%i_%@_%i", moduleId, pageTitle, model.id ?? 0)
+            let bannerName = String(format: "%i_%@_%@", moduleId, pageTitle, model.bannerTitle ?? "")
+            let params = ["ModuleID_Secondary_Homepagename_Position": position, "ModuleID_Secondary_Homepagename_Banner_ID": bannerId, "ModuleID_Secondary_Homepagename_Banner_Name": bannerName]
+            MobClick.e2(.Slide_Banners_Clicks, params)
+            
             del.gotoVCFormLinkType(model: model)
         }
 //        let viewController = self.vc as! WOWBaseModuleVC

@@ -85,15 +85,14 @@ public enum UMengEvent  {
     case Product_Group_Detail_Page      //产品组详情页
     case Space_Detail_Page              //场景详情页
     case Product_Tag_Detail_Page            //标签详情页
-    case Son_Home_Page_Tab              //子首页tab
-    case Banner                     //轮播内or单张banner
-    case Landscape_Banner_Group     //横向banner组模块
-    case Portrait_Banner_Group      //纵向banner组模块
-    case Landscape_Product_Group       //横向产品组模块
-    case Portrait_Product_Group         //纵向产品组模块
-    case Hot_Category_Banner            //热门分类模块
-    case Recommend_Brand                //品牌推荐模块
-    case Category_Banner                //分类banner模块
+    
+    case Secondary_Homepage_Pv              //子首页tab
+    case Slide_Banners_Clicks	            //轮播内
+    case Single_Banner_Clicks               //单banner模块
+    case Bannerlist_Landscape               //横向banner组模块
+    case Bannerlist_Portrait                //纵向banner组模块
+    case Hot_Category_Clicks	            //热门分类模块
+    case Brand_Module_Clicks                //品牌专区模块
     
 }
 

@@ -168,59 +168,8 @@ class WOWBaseModuleVC: WOWBaseViewController {
     
 //    //点击跳转
     func goController(_ model: WOWCarouselBanners) {
-        if let bannerLinkType = model.bannerLinkType {
-            switch bannerLinkType {
-            case 1:
-                if let url = model.bannerLinkUrl{
-                    VCRedirect.toVCH5(url)
-                }
-
-            case 2:
-                print("专题详情页（商品列表）")
-            case 3:
-                print("专题详情页（图文混排）")
-            case 4:
-                print("品牌详情页")
-                VCRedirect.toBrand(brand_id: model.bannerLinkTargetId)
-                
-            case 5:
-                print("设计师详情页")
-                VCRedirect.toDesigner(designerId: model.bannerLinkTargetId)
-                
-            case 6:
-                print("商品详情页")
-                VCRedirect.toVCProduct(model.bannerLinkTargetId)
-                
-            case 7:
-                print("分类详情页")
-                
-            case 8:// 专题详情
-                VCRedirect.toTopicList(topicId: model.bannerLinkTargetId ?? 0)
-                print("场景还是专题")
-            case 9:// 专题详情
         
-                VCRedirect.toToPidDetail(topicId: model.bannerLinkTargetId ?? 0)
-            case 10:// 分组产品列表
-                
-
-                VCRedirect.goToProductGroup(model.bannerLinkTargetId ?? 0)
-            case 11:// 跳转分类
-                VCRedirect.toVCScene(model.bannerLinkTargetId ?? 0, entrance: .category)
-
-//                 VCRedirect.toVCCategory(model.bannerLinkTargetId ?? 0)
-
-            case 12:// 跳转场景分类
-                VCRedirect.toVCScene(model.bannerLinkTargetId ?? 0, entrance: .scene)
-
-            case 13:// 跳转标签分类
-                VCRedirect.toVCScene(model.bannerLinkTargetId ?? 0, entrance: .tag)
-
-            default:
-                WOWHud.showMsg("请您更新最新版本")
-                print("其他")
-            }
-            
-        }
+        VCRedirect.goToBannerTypeController(model)
         
     }
 

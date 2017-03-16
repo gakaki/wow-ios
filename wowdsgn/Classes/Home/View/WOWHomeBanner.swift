@@ -54,7 +54,7 @@ class WOWHomeBannerr: WOWBaseModel,Mappable {
     
 }
 
-final class WOWCarouselBanners: WOWBaseModel,Mappable{
+class WOWCarouselBanners: WOWBaseModel,Mappable{
     var id                    : Int?
     var name                  : String?
     

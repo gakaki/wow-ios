@@ -50,7 +50,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.backgroundColor = UIColor.red
+//        contentView.backgroundColor = UIColor.red
         
 //        titleLabel.textColor = UIColor.white
 //        arrowLabel.textColor = UIColor.white
@@ -61,8 +61,10 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         
         imgBanner.snp.makeConstraints { [weak self](make) in
             if let strongSelf = self {
-                make.bottom.top.left.right.equalTo(strongSelf)
-
+                make.top.equalTo(10)
+                make.bottom.equalTo(strongSelf)
+                make.left.equalTo(15)
+                make.right.equalTo(-15)
             }
         }
 

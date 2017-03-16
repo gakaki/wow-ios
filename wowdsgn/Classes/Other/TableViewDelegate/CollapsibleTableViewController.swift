@@ -29,6 +29,7 @@ struct Section {
 class CollapsibleTableViewController: UITableViewController {
     var dataArr = [WOWHomeClassTabs]()    //顶部商品列表数组
     var sections = [Section]()
+    var headerHeight = [CGFloat]()
     var isReque:Bool = false
     override init(style: UITableViewStyle) {
         super.init(style: .grouped)
@@ -39,21 +40,13 @@ class CollapsibleTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.backgroundColor = UIColor.white
         self.title = "Apple Products"
-//        tableView.style = .grouped
-        // Initialize the sections array
-        // Here we have three sections: Mac, iPad, iPhone
-        sections = [
-//            Section(name: "Mac", items: ["MacBook", "MacBook Air", "MacBook Pro", "iMac", "Mac Pro", "Mac mini"]),
-            Section(name: "Mac", items: ["MacBook", "MacBook Air", "MacBook Pro", "iMac", "Mac Pro", "Mac mini"]),
-            Section(name: "iPad", items: ["iPad Pro", "iPad Air 2", "iPad mini 4", "Accessories", "Accessories"]),
-            Section(name: "iPhone", items: ["iPhone 6s"]),
-            Section(name: "iPhone", items: ["iPhone 6s", "iPhone 6"]),
-            Section(name: "iPhone", items: ["iPhone 6s", "iPhone 6"]),
-            Section(name: "iPhone", items: ["iPhone 6s", "iPhone 6"]),
-        ]
+        self.tableView.separatorStyle = .none
+
+        self.tableView.mj_header = mjBanner_header
         self.tableView.register(UINib.nibName("Cell_105_Item"), forCellReuseIdentifier: "Cell_105_Item")
+        
         request()
     }
     func request()  {
@@ -62,13 +55,20 @@ class CollapsibleTableViewController: UITableViewController {
         
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_List(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
+         
             if let strongSelf = self{
-                
+                strongSelf.mjBanner_header.endRefreshing()
                 let bannerList = Mapper<WOWHomeClassTabs>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
                 
                 if let brandArray = bannerList{
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
+                    strongSelf.headerHeight.removeAll()
+                    for module in brandArray {
+                       
+                        let height = WOWArrayAddStr.get_img_sizeNew(str: module.moduleContent?.background ?? "", width: MGScreenWidth, defaule_size: .ThreeToOne)
+                        strongSelf.headerHeight.append(height)
+                    }
                 }
                 
                 strongSelf.isReque = true
@@ -79,12 +79,21 @@ class CollapsibleTableViewController: UITableViewController {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
-//                strongSelf.endRefresh()
+                  strongSelf.mjBanner_header.endRefreshing()
             }
         }
 
     }
     
+    lazy var mjBanner_header:WOWRefreshHeader = {
+        
+        let h = WOWRefreshHeader(refreshingTarget:self, refreshingAction:#selector(pullToRefresh))!
+        h.isAutomaticallyChangeAlpha = true
+        return h
+    }()
+    func pullToRefresh(){
+        request()
+    }
 }
 
 //
@@ -112,11 +121,20 @@ extension CollapsibleTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_105_Item", for: indexPath) as! Cell_105_Item
         let model = dataArr[(indexPath as NSIndexPath).section]
         let model_Class = model.moduleContent
-        if let banners = model_Class?.banners {
-            
-            cell.lb_BannerName.text = banners[indexPath.row].bannerTitle ?? ""
-            
+        if model.moduleContent?.bannerIsOut == true {
+            if let banners = model_Class?.banners {
+                cell.lb_BannerName.isHidden     = false
+                cell.lb_Line.isHidden           = false
+                cell.img_Next.isHidden          = false
+                cell.lb_BannerName.text = banners[indexPath.row].bannerTitle ?? ""
+                
+            }
+        }else {
+            cell.lb_BannerName.isHidden     = true
+            cell.lb_Line.isHidden           = true
+            cell.img_Next.isHidden          = true
         }
+        
        
         return cell
        
@@ -140,13 +158,9 @@ extension CollapsibleTableViewController {
     
     // Header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if isReque {
+
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
-            
-//            header.titleLabel.text = sections[section].name
-//            header.arrowLabel.text = ">"
-//            header.setCollapsed(sections[section].collapsed)
-            
+        
             let model = dataArr[section]
             
             let model_Class = model.moduleContent
@@ -158,19 +172,31 @@ extension CollapsibleTableViewController {
             header.delegate = self
             
             return header
-//        }else {
-//            return nil
-//        }
+
         
     }
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = dataArr[indexPath.section]
+        
+        guard model.moduleContent?.bannerIsOut == true else {// 如果为展开状态
+            
+            return
+        }
+        if let banners = model.moduleContent?.banners {
+
+                 VCRedirect.goToBannerTypeController(banners[indexPath.row])
+
+        }
+
+    }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 105.0
+        return headerHeight[section]
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10.0
+        return 0.1
     }
+    
     
 }
 
@@ -178,17 +204,19 @@ extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
     
     func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {
         let model = dataArr[section]
+        guard let model_Class = model.moduleContent else {
+            return
+        }
+//        let model_Class = model.moduleContent
+       
+        if model_Class.bannerIsOut == true {
+            model_Class.bannerIsOut = false
+        }else {
+            model_Class.bannerIsOut = true
+        }
         
-        let model_Class = model.moduleContent
-        let collapsed = !(model.moduleContent?.bannerIsOut)!
-//         == true
-        
-        
-//        let collapsed = !sections[section].collapsed
-        
-        // Toggle collapse
-        
-       model.moduleContent?.bannerIsOut = collapsed
+       let collapsed = model_Class.bannerIsOut
+
 //        header.setCollapsed(collapsed)
         
 //        let model = dataArr[section]
@@ -196,17 +224,47 @@ extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
         
         //        return sections[section].items.count
         // Adjust the height of the rows inside the section
+        
+        for module in dataArr.enumerated() {// 循环遍历 确保 只有一个展开的 banner
+              let type = module.element.moduleType ?? 0
+                let id   = module.element.moduleContent?.id ?? 0
+                if type == 105 {
+                   if id != model_Class.id { // 不是当前所点击的
+                        if module.element.moduleContent?.bannerIsOut == true { //  如果其他展开 则收起
+                                module.element.moduleContent?.bannerIsOut = false
+                                if let banners = module.element.moduleContent?.banners {
+                                    for i in 0 ..< banners.count {
+                                        tableView.reloadRows(at: [IndexPath(row: i, section: module.offset)], with: .none)
+                                    }
+                                
+                                }
+//                                let indexSet = NSIndexSet.init(index: module.offset)
+//
+//                                self.tableView.reloadSections(indexSet as IndexSet, with: .none)
+
+                        }
+                                               
+                    }
+                }
+        }
+
+        
         tableView.beginUpdates()
         if let banners = model.moduleContent?.banners {
             for i in 0 ..< banners.count {
-                tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+                tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .none)
             }
             
         }
-        
         tableView.endUpdates()
-        let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
-        tableView.scrollToRow(at: b, at: .top, animated: true)
+        if collapsed {
+            let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
+            tableView.scrollToRow(at: b, at: .top, animated: true)
+        }else {
+            let b = IndexPath.init(row: 0, section: section) // 滚动当前组 到顶部
+            tableView.scrollToRow(at: b, at: .none, animated: true)
+        }
+       
     }
     
 }

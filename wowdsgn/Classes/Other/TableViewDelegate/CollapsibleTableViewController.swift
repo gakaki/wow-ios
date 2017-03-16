@@ -40,8 +40,8 @@ class CollapsibleTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.backgroundColor = UIColor.white
-        self.title = "Apple Products"
         self.tableView.separatorStyle = .none
 
         self.tableView.mj_header = mjBanner_header

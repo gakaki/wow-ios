@@ -145,7 +145,7 @@ extension Cell_107_BrandZone:UICollectionViewDelegate,UICollectionViewDataSource
             //Mob 品牌专区模块 product点击
             let productId = String(format: "%i_%@_%i", moduleId, pageTitle, model?.productId ?? 0)
             let productName = String(format: "%i_%@_%@", moduleId, pageTitle, model?.productName ?? "")
-            let productPosition = String(format: "%i_%@_%@", moduleId, pageTitle, indexPath.row)
+            let productPosition = String(format: "%i_%@_%i", moduleId, pageTitle, indexPath.row)
             let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
             MobClick.e2(.Brand_Module_Clicks, params)
 

@@ -7,36 +7,24 @@
 //
 
 import UIKit
-
-//
-// MARK: - Section Data Structure
-//
-struct Section {
-    var name: String!
-    var items: [String]!
-    var collapsed: Bool!
-    
-    init(name: String, items: [String], collapsed: Bool = false) {
-        self.name = name
-        self.items = items
-        self.collapsed = collapsed
-    }
-}
-
-//
-// MARK: - View Controller
-//
-class CollapsibleTableViewController: UITableViewController {
+//全部分类
+class WOWAllClassViewController: UITableViewController {
     var dataArr = [WOWHomeClassTabs]()    //顶部商品列表数组
-    var sections = [Section]()
-    var headerHeight = [CGFloat]()
-    var isReque:Bool = false
+
+    var headerHeight = [CGFloat]() // 存放header 高度信息
+
     override init(style: UITableViewStyle) {
         super.init(style: .grouped)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        MobClick.e(.Shopping_Page)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,23 +47,29 @@ class CollapsibleTableViewController: UITableViewController {
             if let strongSelf = self{
                 strongSelf.mjBanner_header.endRefreshing()
                 let bannerList = Mapper<WOWHomeClassTabs>().mapArray(JSONObject:JSON(result)["modules"].arrayObject)
-                
+            
                 if let brandArray = bannerList{
+                   
                     strongSelf.dataArr = []
                     strongSelf.dataArr = brandArray
+                    
+                    for module in brandArray {// 移除非 105 的模块， 此页面暂时不考虑模块化
+                        if module.moduleType != 105 {
+                            strongSelf.dataArr.removeObject(module)
+                        }
+                    }
+                    
                     strongSelf.headerHeight.removeAll()
-                    for module in brandArray {
+                    for module in strongSelf.dataArr {
                        
                         let height = WOWArrayAddStr.get_img_sizeNew(str: module.moduleContent?.background ?? "", width: MGScreenWidth, defaule_size: .ThreeToOne)
                         strongSelf.headerHeight.append(height)
                     }
                 }
-                
-                strongSelf.isReque = true
+
                 
                 strongSelf.tableView.reloadData()
-                
-                //                }
+
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
@@ -99,19 +93,17 @@ class CollapsibleTableViewController: UITableViewController {
 //
 // MARK: - View Controller DataSource and Delegate
 //
-extension CollapsibleTableViewController {
+extension WOWAllClassViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return dataArr.count
     }
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 60
-//    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print(sections[section].items.count)
+
         let model = dataArr[section]
         return (model.moduleContent?.banners?.count ?? 1)
-//        return sections[section].items.count
+
     }
     
     // Cell
@@ -141,17 +133,15 @@ extension CollapsibleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if isReque {
+
         let model = dataArr[indexPath.section]
-        
-        let model_Class = model.moduleContent
-        
+    
         guard model.moduleContent?.bannerIsOut == true else {// 返回 0
             
             return 0
         }
         
-        return 55
+        return 50
 
        
     }
@@ -159,7 +149,7 @@ extension CollapsibleTableViewController {
     // Header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? WOWAllClassViewHeader ?? WOWAllClassViewHeader(reuseIdentifier: "header")
         
             let model = dataArr[section]
             
@@ -206,9 +196,9 @@ extension CollapsibleTableViewController {
     
 }
 
-extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
+extension WOWAllClassViewController: WOWAllClassViewHeaderDelegate {
     
-    func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {
+    func toggleSection(_ header: WOWAllClassViewHeader, section: Int) {
         let model = dataArr[section]
         guard let model_Class = model.moduleContent else {
             return
@@ -221,6 +211,7 @@ extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
         MobClick.e2(.Category_Banner , params)
 
 //        let model_Class = model.moduleContent
+
        
         if model_Class.bannerIsOut == true {
             model_Class.bannerIsOut = false
@@ -230,13 +221,6 @@ extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
         
        let collapsed = model_Class.bannerIsOut
 
-//        header.setCollapsed(collapsed)
-        
-//        let model = dataArr[section]
-//        return (model.moduleContent?.banners?.count ?? 1)
-        
-        //        return sections[section].items.count
-        // Adjust the height of the rows inside the section
         
         for module in dataArr.enumerated() {// 循环遍历 确保 只有一个展开的 banner
               let type = module.element.moduleType ?? 0

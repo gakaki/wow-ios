@@ -20,18 +20,19 @@ class Cell_107_Item: UICollectionViewCell {
             }
             lbTitle.text = model?.productTitle
 
-            let sellPriceStr = "¥" + ((model?.sellPrice?.toString) ?? "")
+            let sellPriceStr = "¥" + String(describing: NSDecimalNumber(value: model?.sellPrice ?? 0))
             
             if let originalPrice = model?.originalprice { // 如果有 原价 且大于现价
-                
+                let originalPriceStr = String(describing: NSDecimalNumber(value: originalPrice))
+
                 if originalPrice > model?.sellPrice {
-                    lbPrice.strokeWithText(sellPriceStr ?? "" , str2: "¥" + originalPrice.toString , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+                    lbPrice.strokeWithText(sellPriceStr , str2: "¥" + originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
                 }else{
                     lbPrice.text = sellPriceStr
                 }
                 
             }else{ // 没有原价 则显示现价
-                lbPrice.text = sellPriceStr ?? ""
+                lbPrice.text = sellPriceStr 
             }
 
         }

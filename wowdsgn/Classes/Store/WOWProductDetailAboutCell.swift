@@ -28,13 +28,8 @@ class WOWProductDetailAboutCell: UITableViewCell {
     
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var dataArr:[WOWProductModel]?{
-        didSet{
-           
-            collectionView.reloadData()
-        }
-    }
     
+    var dataArr:[WOWProductModel]?
     
     
     lazy var xzm_footer:XZMRefreshNormalFooter = {
@@ -46,9 +41,30 @@ class WOWProductDetailAboutCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        addObservers()
         collectionView.register(UINib.nibName(String(describing: WOWGoodsSmallCell.self)), forCellWithReuseIdentifier: "WOWGoodsSmallCell")
     }
+   func addObservers(){
     
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshData), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)
+    }
+    // 刷新物品的收藏状态与否 传productId 和 favorite状态
+    func refreshData(_ sender: Notification)  {
+        print("接受通知")
+        if  let send_obj =  sender.object as? [String:AnyObject] {
+
+            dataArr?.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
+                if let strongSelf = self {
+                      strongSelf.collectionView.reloadData()
+                }
+            
+            })
+
+        }
+        
+        
+    }
+
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

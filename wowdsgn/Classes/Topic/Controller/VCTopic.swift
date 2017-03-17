@@ -55,9 +55,15 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     func refreshData(_ sender: Notification)  {
 
         if  let send_obj =  sender.object as? [String:AnyObject] {
-            
-            vo_products.ergodicArrayWithProductModel(dic: send_obj)
-            self.cv.reloadData()
+            vo_products.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
+                if let strongSelf = self {
+                    strongSelf.cv.reloadData()
+//                    strongSelf.collectionView.reloadData()
+                }
+                
+            })
+//            vo_products.ergodicArrayWithProductModel(dic: send_obj)
+//            self.cv.reloadData()
             
         }
 

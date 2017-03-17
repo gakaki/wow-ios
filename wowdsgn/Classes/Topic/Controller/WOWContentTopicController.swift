@@ -219,8 +219,15 @@ class WOWContentTopicController: WOWBaseViewController {
 
         if  let send_obj =  sender.object as? [String:AnyObject] {
             
-            vo_products.ergodicArrayWithProductModel(dic: send_obj)
-            self.tableView.reloadData()
+            vo_products.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
+                if let strongSelf = self {
+                    strongSelf.tableView.reloadData()
+                    //                    strongSelf.collectionView.reloadData()
+                }
+                
+            })
+//            vo_products.ergodicArrayWithProductModel(dic: send_obj)
+//            self.tableView.reloadData()
         }
 
       

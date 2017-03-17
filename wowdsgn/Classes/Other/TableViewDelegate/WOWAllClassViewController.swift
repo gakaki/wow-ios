@@ -31,7 +31,8 @@ class WOWAllClassViewController: UITableViewController {
         
         self.tableView.backgroundColor = UIColor.white
         self.tableView.separatorStyle = .none
-
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         self.tableView.mj_header = mjBanner_header
         self.tableView.register(UINib.nibName("Cell_105_Item"), forCellReuseIdentifier: "Cell_105_Item")
         
@@ -264,4 +265,18 @@ extension WOWAllClassViewController: WOWAllClassViewHeaderDelegate {
        
     }
     
+}
+extension WOWAllClassViewController:DZNEmptyDataSetDelegate,DZNEmptyDataSetSource{
+    @objc(titleForEmptyDataSet:) public func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = WOWEmptyNoDataText
+        let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(170, g: 170, b: 170),NSFontAttributeName:UIFont.mediumScaleFontSize(17)])
+        return attri
+    }
+    
+    @objc(backgroundColorForEmptyDataSet:) public func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return GrayColorLevel5
+    }
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
 }

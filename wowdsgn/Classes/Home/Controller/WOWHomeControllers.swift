@@ -71,8 +71,9 @@ class WOWHomeControllers: WOWBaseViewController {
             controllerArray.append(HomeTabVC)
 
         }
+    
+//        let tabsWidth:CGFloat = 0.0
         
-
         parameters = [
             .scrollMenuBackgroundColor(UIColor.white),
             .menuHeight(40),
@@ -94,10 +95,11 @@ class WOWHomeControllers: WOWBaseViewController {
     }
     // 配置顶部tab信息
     func configTabs(){
-
+        
         
         pageMenu?.view.removeFromSuperview()
         pageMenu = nil
+        
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
         
         pageMenu?.delegate = self

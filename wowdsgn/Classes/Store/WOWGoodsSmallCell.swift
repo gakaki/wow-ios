@@ -75,11 +75,11 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         
         
         
-        let img_url            = "\(model.productImg ?? "")?imageView2/0/w/400/format/webp/q/85"
-        let url_obj            = URL(string:img_url)
+//        let img_url            = "\(model.productImg ?? "")?imageView2/0/w/400/format/webp/q/85"
+//        let url_obj            = URL(string:model.productImg?.webp_url())
         let image_place_holder = UIImage(named: "placeholder_product")
-        
-        pictureImageView.yy_setImage(with: url_obj, placeholder: image_place_holder)
+        pictureImageView.set_webimage_url(model.productImg)
+//        pictureImageView.yy_setImage(with: url_obj, placeholder: image_place_holder)
         
         // 修改来回上下加载 内存不减的问题
         desLabel.text = model.productTitle ?? ""

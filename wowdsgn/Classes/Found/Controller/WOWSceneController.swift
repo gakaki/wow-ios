@@ -414,7 +414,15 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
             cell.isSelected  = true
 
             if indexPath.row == 0 {
-                category = 0
+                switch entrance {
+                case .category:
+                    category = vo_categories.id ?? 0
+                    break
+                default:
+                    category = 0
+                    break
+                }
+                
             }else {
                 let row = categoryArr[(indexPath as NSIndexPath).row - 1]
                 category = row.id

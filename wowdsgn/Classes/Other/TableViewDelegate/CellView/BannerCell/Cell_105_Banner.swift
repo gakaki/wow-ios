@@ -12,11 +12,11 @@ import UIKit
 //    func updataTableViewCellHight(section: Int)
 //    func gotoVCFormLinkType_ClassBanner(model: WOWCarouselBanners)
 //}
-class Cell_105_Banner: UITableViewCell,ModuleViewElement {
-    static func isNib() -> Bool { return true }
-    static func cell_type() -> Int {
-        return 105  //分类banner
-    }
+class Cell_105_Banner: UITableViewCell {
+//    static func isNib() -> Bool { return true }
+//    static func cell_type() -> Int {
+//        return 105  //分类banner
+//    }
 //    weak var delegate : Cell_105_BannerDelegate?
     var indexPathSection:Int!
     var model_Class     : WOWCarouselBanners?{// 数据源

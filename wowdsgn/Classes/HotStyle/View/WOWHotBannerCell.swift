@@ -36,7 +36,8 @@ class WOWHotBannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelega
     
     var rate:CGFloat = 2/3 // 宽高比
     
-    
+    var moduleId: Int! = 0
+    var pageTitle: String! = ""
     var itemHight : CGFloat = 100
     
     weak var delegate : HotBrannerCellDelegate?
@@ -67,6 +68,13 @@ class WOWHotBannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelega
         let model = bannerCurrentArray[(indexPath as NSIndexPath).row]
         
         if let del = delegate{
+            //Mob 轮播模块
+            let position = String(format: "%i_%@_%i", moduleId, pageTitle, indexPath.row )
+            let bannerId = String(format: "%i_%@_%i", moduleId, pageTitle, model.id ?? 0)
+            let bannerName = String(format: "%i_%@_%@", moduleId, pageTitle, model.bannerTitle ?? "")
+            let params = ["ModuleID_Secondary_Homepagename_Position": position, "ModuleID_Secondary_Homepagename_Banner_ID": bannerId, "ModuleID_Secondary_Homepagename_Banner_Name": bannerName]
+            MobClick.e2(.Slide_Banners_Clicks, params)
+
             del.gotoVCFormLinkType_HotBanner(model: model)
         }
         

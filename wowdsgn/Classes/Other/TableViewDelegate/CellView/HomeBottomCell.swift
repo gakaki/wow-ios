@@ -64,8 +64,8 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var bottomConstraintOne: NSLayoutConstraint! // 标签、喜欢、距离底部距离
     @IBOutlet weak var bottomConstraintTwo: NSLayoutConstraint!
     
-    var moduleId: Int!
-    var pageTitle: String!
+    var moduleId: Int! = 0
+    var pageTitle: String! = ""
     
     var oneModel : WOWProductModel? = nil
     var twoModel : WOWProductModel? = nil

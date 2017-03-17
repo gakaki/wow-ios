@@ -19,8 +19,8 @@ class Cell_102_Project: UITableViewCell,ModuleViewElement {
     }
     var heightAll:CGFloat = 290
     weak var delegate : cell_102_delegate?
-    var moduleId: Int!
-    var pageTitle: String!
+    var moduleId: Int! = 0
+    var pageTitle: String! = ""
     var dataArr:[WOWCarouselBanners]!{
         didSet{
             let lineNumber =  Int(dataArr.count > 3 ? 3 : dataArr.count) // item 最多为三个

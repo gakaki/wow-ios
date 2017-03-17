@@ -73,6 +73,9 @@ class WOWHomeControllers: WOWBaseViewController {
         }
         let width =  MGScreenWidth - CGFloat(53 * controllerArray.count)
         let menuMargin = width/CGFloat(controllerArray.count + 1)
+    
+//        let tabsWidth:CGFloat = 0.0
+        
         parameters = [
             .scrollMenuBackgroundColor(UIColor.white),
             .menuHeight(40),
@@ -115,6 +118,11 @@ class WOWHomeControllers: WOWBaseViewController {
             .bottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
         ]
 
+        
+        
+        pageMenu?.view.removeFromSuperview()
+        pageMenu = nil
+        
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
         
         

@@ -121,6 +121,10 @@ class WOWContentTopicController: WOWBaseViewController {
 
         }
     }
+        override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            UIApplication.shared.keyWindow?.endEditing(true)
+        }
+    
     //MARK:Actions
 
     func dzClick(_ sender: UIButton) -> Void {

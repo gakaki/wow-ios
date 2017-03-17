@@ -347,8 +347,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 if let addressInfo = strongSelf.addressInfo {
                     DLog((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
                     strongSelf.addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "")
-                    let section = IndexSet(integer: 0)
-                    strongSelf.tableView.reloadSections(section, with: .none)
+//                    let section = IndexSet(integer: 0)
+//                    strongSelf.tableView.reloadSections(section, with: .none)
                 }
             }
             

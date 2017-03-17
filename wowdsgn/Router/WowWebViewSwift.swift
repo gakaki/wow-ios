@@ -145,13 +145,16 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         let myURL       = URL(string: url_final ?? "")
         let myRequest   = URLRequest(url: myURL!)
         webView.load(myRequest)
-        MobClick.e(.H5)
         //获取H5信息
         requestH5()
 
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MobClick.e(.H5)
 
+    }
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

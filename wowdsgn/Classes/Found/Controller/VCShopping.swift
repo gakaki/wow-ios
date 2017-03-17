@@ -147,7 +147,6 @@ extension VCShopping:VTMagicViewDelegate{
                     MobClick.e(.Designers_List)
                     break
                 default:
-                    MobClick.e(.Shopping)
                     break
             }
 

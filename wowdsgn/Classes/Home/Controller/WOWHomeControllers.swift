@@ -58,7 +58,7 @@ class WOWHomeControllers: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
         self.view.backgroundColor = UIColor(hexString: "efeff4")
         
         for index in 0..<titleArray.count {// 默认 为“推荐”

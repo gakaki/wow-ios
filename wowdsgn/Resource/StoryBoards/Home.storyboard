@@ -31,7 +31,7 @@
         <!--尖叫设计-->
         <scene sceneID="bzw-ue-Dsp">
             <objects>
-                <viewController storyboardIdentifier="WOWController" title="尖叫设计" automaticallyAdjustsScrollViewInsets="NO" id="iWL-Oz-JyM" customClass="WOWController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWController" automaticallyAdjustsScrollViewInsets="NO" id="iWL-Oz-JyM" customClass="WOWController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zth-Uz-Pao"/>
                         <viewControllerLayoutGuide type="bottom" id="Qr7-pK-v6K"/>
@@ -67,7 +67,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4TL-3M-Zrf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="vUp-js-GTG" customClass="WOWTableDelegate" customModule="wowdsgn" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="230" y="1171"/>
+            <point key="canvasLocation" x="362" y="1177"/>
         </scene>
         <!--Search Child Controller-->
         <scene sceneID="9pm-4I-9RS">
@@ -391,10 +391,10 @@
             </objects>
             <point key="canvasLocation" x="-456" y="1964"/>
         </scene>
-        <!--尖叫设计-->
+        <!--Home Controllers-->
         <scene sceneID="Wwx-pC-AMR">
             <objects>
-                <viewController title="尖叫设计" automaticallyAdjustsScrollViewInsets="NO" id="JMx-Id-MkL" customClass="WOWHomeControllers" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="JMx-Id-MkL" customClass="WOWHomeControllers" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zg3-4L-PUH"/>
                         <viewControllerLayoutGuide type="bottom" id="2Xc-K2-p0g"/>
@@ -405,11 +405,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="尖叫设计" id="tgD-eT-307"/>
+                    <navigationItem key="navigationItem" id="tgD-eT-307"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvN-c2-aHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-109" y="1113"/>
+            <point key="canvasLocation" x="8" y="1107"/>
         </scene>
         <!--搜索-->
         <scene sceneID="f5z-DS-P3L">

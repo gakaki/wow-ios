@@ -323,7 +323,6 @@ public class VCRedirect {
     
     //跳转消息中心
     public class func toVCMessageCenter()  {
-        MobClick.e(UMengEvent.Message_Center)
         let vc = UIStoryboard.initialViewController("Message", identifier:String(describing: WOWMessageController.self)) as! WOWMessageController
         vc.hideNavigationBar = false
         topNaVC?.pushViewController(vc, animated: true)
@@ -564,7 +563,6 @@ extension  UIViewController {
     
     //跳转消息中心
     func toVCMessageCenter()  {
-        MobClick.e(UMengEvent.Message_Center)
         let vc = UIStoryboard.initialViewController("Message", identifier:String(describing: WOWMessageController.self)) as! WOWMessageController
         vc.hideNavigationBar = false
         self.pushVC(vc)

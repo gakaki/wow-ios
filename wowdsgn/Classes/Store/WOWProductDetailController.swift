@@ -71,6 +71,8 @@ class WOWProductDetailController: WOWBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        MobClick.e(UMengEvent.Product_Detail)
+
     }
     
     func showBottom(progress: CGFloat) {
@@ -106,7 +108,6 @@ class WOWProductDetailController: WOWBaseViewController {
        
 
         
-        MobClick.e(UMengEvent.Product_Detail)
     }
     
     override func didReceiveMemoryWarning() {

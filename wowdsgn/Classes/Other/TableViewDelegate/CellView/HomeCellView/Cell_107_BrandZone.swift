@@ -36,7 +36,7 @@ class Cell_107_BrandZone: UITableViewCell,ModuleViewElement {
             if let banners = modelData?.banners {
                 if banners.count > 0 {
                     
-                    imgHeightConstraint.constant   = WOWArrayAddStr.get_img_sizeNew(str: banners[0].bannerImgSrc ?? "", width: MGScreenWidth - 30 , defaule_size: .ThreeToOne)
+                    imgHeightConstraint.constant   = WOWArrayAddStr.get_img_sizeNew(str: banners[0].bannerImgSrc ?? "", width: MGScreenWidth - 30 , defaule_size: .ThreeToTwo)
                     
                     imgBrandBanner.set_webimage_url(banners[0].bannerImgSrc ?? "")
                     

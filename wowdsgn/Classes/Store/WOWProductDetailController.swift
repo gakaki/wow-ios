@@ -434,7 +434,10 @@ class WOWProductDetailController: WOWBaseViewController {
     
     //MARK:Private Network
     override func request() {
+        isCurrentRequest = true
         super.request()
+        //消失loading页面
+        
         WOWNetManager.sharedManager.requestWithTarget(.api_ProductDetail(productId: productId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 //商品过期

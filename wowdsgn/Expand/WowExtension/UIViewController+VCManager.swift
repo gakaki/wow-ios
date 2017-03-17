@@ -295,7 +295,7 @@ public class VCRedirect {
     
     
     public class func toVCCategoryChoose(){
-        MobClick.e(.AllCategory)
+        
         let vc          = VCCategoryChoose()
         //        vc.cid          = cid.toString
         topNaVC?.pushViewController(vc, animated: true)

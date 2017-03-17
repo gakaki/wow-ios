@@ -140,6 +140,7 @@ extension VCShopping:VTMagicViewDelegate{
             
             switch pageIndex {
                 case  0: break
+                    MobClick.e(.AllCategory)
                 case  1:
                     MobClick.e(.Brands_List)
                     break

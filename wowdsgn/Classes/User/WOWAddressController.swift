@@ -32,6 +32,11 @@ class WOWAddressController: WOWBaseViewController {
         request()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MobClick.e(.Delivery_Address_Page)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

@@ -76,6 +76,7 @@ class WOWInfoTextController: WOWBaseTableViewController {
         var params = [String : String]()
         switch entrance {
         case .nickEntrance:
+            
            params = ["nickName":info ?? ""]
         case .descEntrance:
             params = ["selfIntroduction":info ?? ""]

@@ -54,7 +54,7 @@ extension UserCommentManage {
             }
             if self.commentsLength < 3 && self.commentsLength > 0{// 如果输入了内容，而输入的内容小于三个字，则提示他输入更多内容
                 
-                WOWHud.showMsg("请您输入更多的" + TextStr.rawValue + "内容")
+                WOWHud.showMsg("请您至少输入三个字")
                 return false
                 
             }

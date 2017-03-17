@@ -424,7 +424,7 @@ class WOWEditOrderController: WOWBaseViewController {
     
                 TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
                 AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ,"OrderCode":order_id ])
-
+                MobClick.e(.Orders_Submitted)
             }
             
             }) { (errorMsg) in
@@ -595,7 +595,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 AnalyaticEvent.e2(.PaySuccess,["totalAmount":Int32(sum) ,"OrderCode":order_id ])
                 //支付结果
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
-
+                MobClick.e(.Orders_Payment)
                 
                 
             }

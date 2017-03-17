@@ -102,7 +102,8 @@ class WOWUserInfoController: WOWBaseTableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
-
+        
+        MobClick.e(.Personal_Information_Page)
 
     }
     

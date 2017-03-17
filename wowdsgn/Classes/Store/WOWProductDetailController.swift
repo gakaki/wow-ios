@@ -358,6 +358,7 @@ class WOWProductDetailController: WOWBaseViewController {
             return
         }
         MobClick.e(.Immebuy_Button)
+        MobClick.e(.Buy_It_Now)
         chooseStyle(carEntrance.payEntrance)
     }
     
@@ -367,6 +368,7 @@ class WOWProductDetailController: WOWBaseViewController {
             toLoginVC(true)
             return
         }
+        MobClick.e(.Add_To_Cart)
         chooseStyle(carEntrance.addEntrance)
     }
     
@@ -405,7 +407,7 @@ class WOWProductDetailController: WOWBaseViewController {
 //            self.showBottom(progress: progress)
             self.percentDrivenTransition?.update(progress)
         } else if edgePan.state == UIGestureRecognizerState.cancelled || edgePan.state == UIGestureRecognizerState.ended {
-            if progress > 0.5 {
+            if progress > 0.3 {
 //                self.showBottom(progress: 1)
 
                 self.percentDrivenTransition?.finish()
@@ -602,6 +604,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
             
             WOWNetManager.sharedManager.requestWithTarget(.api_CartAdd(productId:product.productId ?? 0, productQty:product.productQty ?? 1), successClosure: {[weak self](result, code) in
                 if let strongSelf = self {
+                    MobClick.e(.Add_To_Cart_Successful)
                     strongSelf.updateCarBadge(product.productQty ?? 1)
                     if let del = strongSelf.delegate {
                         del.updateBuyCarList()

@@ -54,6 +54,14 @@ class WOWBrandHomeController: WOWBaseViewController {
         super.viewDidAppear(animated)
         
         self.navigationController?.delegate = self
+        switch entrance {
+        case .brandEntrance:
+            MobClick.e(.Brands_Detail_Page)
+            
+        case .designerEntrance:
+            MobClick.e(.Designers_Detail_Page)
+            
+        }
     }
     
     override func setUI() {

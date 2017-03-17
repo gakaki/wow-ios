@@ -82,6 +82,27 @@ public enum UMengEvent  {
     case Bind_Other_Skip             //其他页，跳过
     case Bind_Other_Succ             //其他页，完成
     
+    case Search_Results                 //搜索结果页
+    case Cart_Detail_Page               //购物车详情页
+    case Information_Center_Page            // 消息中心页
+    case Brands_Detail_Page             //品牌详情页
+    case Designers_Detail_Page           //设计师详情页
+    case Coupons_Page                   //优惠券列表页
+    case Delivery_Address_Page          //收货地址页
+    case Personal_Information_Page          //个人信息页
+    case Coupons_Detail_Page                //优惠券可用商品详情页
+    case Add_To_Cart                        //加入购物车
+    case Buy_It_Now                         //立即购买
+    case Standard_Confirm                   //选择规格
+    case Standard_Cancel                    //选择规格取消
+    case Checkout                           //购物车结算
+    case Registration_Successful             //注册成功
+    case Add_To_Cart_Successful             //加车成功
+    case Orders_Submitted                   //提交订单
+    case Orders_Payment                     //支付订单
+
+    
+    
     case Product_Group_Detail_Page      //产品组详情页
     case Space_Detail_Page              //场景详情页
     case Product_Tag_Detail_Page            //标签详情页

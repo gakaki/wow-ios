@@ -115,9 +115,15 @@ class WOWHomeFormCell: UITableViewCell,ModuleViewElement {
     func refreshData(_ sender: Notification)  {
 
         if  let send_obj =  sender.object as? [String:AnyObject] {
-            
-            dataArr?.ergodicArrayWithProductModel(dic: send_obj)
-            collectionView.reloadData()
+            dataArr?.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
+                if let strongSelf = self {
+                    strongSelf.collectionView.reloadData()
+                    //                    strongSelf.collectionView.reloadData()
+                }
+                
+            })
+//            dataArr?.ergodicArrayWithProductModel(dic: send_obj)
+//            collectionView.reloadData()
         }
     
 }

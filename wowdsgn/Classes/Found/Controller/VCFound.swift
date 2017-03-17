@@ -175,19 +175,27 @@ class VCFound: WOWBaseModuleVC {
                 
                 if  let send_obj =  sender.object as? [String:AnyObject] {
                         model.moduleContentItem?.favorite = send_obj["favorite"] as? Bool
+                        tableView.reloadData()
                 }
             }
             if model.moduleType == 402 {
                 if  let send_obj =  sender.object as? [String:AnyObject] {
                     
-                    model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj)
+                    
+                        model.moduleContentProduct?.products?.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
+                            if let strongSelf = self {
+                                strongSelf.tableView.reloadData()
+                            }
+                            
+                        })
+
             
                     break
                 }
                 break
             }
         }
-        tableView.reloadData()
+      
     }
     //MARK:Actions
     func exitLogin() {

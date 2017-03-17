@@ -72,10 +72,16 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
     func refreshData(_ sender: Notification)  {
         
         if  let send_obj =  sender.object as? [String:AnyObject] {
-            
-            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
-            
-            self.tableView.reloadData()
+            bottomListArray.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
+                if let strongSelf = self {
+                    strongSelf.tableView.reloadData()
+                    //                    strongSelf.collectionView.reloadData()
+                }
+                
+            })
+//            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
+//            
+//            self.tableView.reloadData()
             
         }
         

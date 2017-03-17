@@ -252,10 +252,10 @@ class WOWController: WOWBaseModuleVC {
 
 
 
-
+typealias SuccessLikeClosure            = () ->()
 extension Array{
     // 遍历数组里面的WOWProductModel来改变 喜欢 状态。使用时，Array数据源Model必须为WOWProductModel
-    func ergodicArrayWithProductModel(dic: [String:AnyObject] ){
+    func ergodicArrayWithProductModel(dic: [String:AnyObject],successLikeClosure:@escaping SuccessLikeClosure ){
         DispatchQueue.global().async {
             
             for a in 0..<self.count{// 遍历数据，拿到productId model 更改favorite 状态
@@ -263,9 +263,17 @@ extension Array{
                 
                 if model?.productId! == dic["productId"] as? Int {
                     model?.favorite = dic["favorite"] as? Bool
+                    break
                 }
             }
+        
+            DispatchQueue.main.async {
+        
+                successLikeClosure()
+        
+            }
+            
         }
-      
+
     }
 }

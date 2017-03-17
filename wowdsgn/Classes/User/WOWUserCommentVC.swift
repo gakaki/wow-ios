@@ -165,9 +165,13 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
                     
                     commentParma.append(parma)
                     
-                }else {
+                }else if (model.comments == "" && model.commentImgs.count == 0){
+ 
             
+                   
+                }else {
                     return
+                
                 }
   
 

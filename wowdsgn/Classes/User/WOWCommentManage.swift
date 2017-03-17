@@ -67,9 +67,13 @@ extension UserCommentManage {
             }
             
             return true
+        }else{
+            
+             WOWHud.showMsg("您的评论内容为空")
+            return false
         }
         
-        return false
+        
         
     }
 }

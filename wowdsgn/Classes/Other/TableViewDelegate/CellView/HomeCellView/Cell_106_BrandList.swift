@@ -18,6 +18,7 @@ class Cell_106_BrandList: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 106
     }
+    var itemBottomHeight:CGFloat        = 0.0 // collectionView 距底部 当有“查看更多为0”否“为10”
     weak var delegate : Cell_106_BrandListDelegate?
     var dataArr = [WOWCarouselBanners](){
         didSet{
@@ -27,7 +28,7 @@ class Cell_106_BrandList: UITableViewCell,ModuleViewElement {
                 
                 itemHeight = WOWArrayAddStr.get_img_sizeNew(str: dataArr[0].bannerImgSrc ?? "", width: itemWidth, defaule_size: .OneToOne)
 //                itemHeight   = CGFloat(round(itemWidth * rate) )  // 计算此Item的高度
-                heightConstraint.constant = itemHeight
+                heightConstraint.constant = itemHeight + itemBottomHeight
             }
             
             self.collectionView.reloadData()

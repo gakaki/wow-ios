@@ -29,7 +29,7 @@ class Cell_107_BrandZone: UITableViewCell,ModuleViewElement {
     
     @IBOutlet weak var imgBrandBanner: UIImageView!
 
-    
+    var itemBottomHeight:CGFloat        = 0.0 // collectionView 距底部 当有“查看更多为0”否“为10”
     var modelData : WOWCarouselBanners! {
         didSet{
 
@@ -45,14 +45,14 @@ class Cell_107_BrandZone: UITableViewCell,ModuleViewElement {
             if let products = modelData?.products {
                 if products.count > 0 {
                     
-                    heightConstraint.constant = itemWidth * (136/100)
+                    heightConstraint.constant = itemWidth * (136/100) + itemBottomHeight
                     
                 }else {
-                    heightConstraint.constant = 0
+                    heightConstraint.constant = itemBottomHeight
                 }
 
             }else {
-                heightConstraint.constant = 0
+                heightConstraint.constant = itemBottomHeight
             }
 
             collectionView.reloadData()

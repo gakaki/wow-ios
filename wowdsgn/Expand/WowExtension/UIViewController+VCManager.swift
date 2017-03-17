@@ -450,6 +450,9 @@ public class VCRedirect {
                     
                 default:
                     WOWHud.showMsg("请您更新最新版本")
+                    let vc = UIStoryboard.initialViewController("User", identifier:"WOWAboutController") as! WOWAboutController
+                   
+                    topNaVC?.pushViewController(vc, animated: true)
                     print("其他")
                 }
                 

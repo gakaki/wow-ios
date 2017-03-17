@@ -12,7 +12,7 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
     static func cell_type() -> Int {
         return 401
     }
-    
+//    var itemBottomHeight:CGFloat        = 0.0 // collectionView 距底部 当有“查看更多为0”否“为10”
     @IBOutlet weak var cv: UICollectionView!
 
     weak var delegate:FoundWeeklyNewCellDelegate?

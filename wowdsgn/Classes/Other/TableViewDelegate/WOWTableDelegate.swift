@@ -284,12 +284,18 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         case 102:
             
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
+            if (model.moduleContent?.link) != nil {
+                cell.itemBottomHeight = 0.0
+            }else {
+                cell.itemBottomHeight = 10.0
+            }
             cell.dataArr      = model.moduleContent?.banners
 //            cell.lbTitle.text = model.moduleContent?.name ?? "专题"
             cell.pageTitle = vc?.title ?? ""
             cell.moduleId = model.moduleId ?? 0
             cell.delegate     = self.vc as! cell_102_delegate?
             cell_heights[section]  = cell.heightAll
+            
             returnCell = cell
         case 801:
             
@@ -413,6 +419,11 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             returnCell = cell
         case 107:
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_107_BrandZone
+            if (model.moduleContent?.link) != nil {
+                cell.itemBottomHeight = 0.0
+            }else {
+                cell.itemBottomHeight = 10.0
+            }
             cell.delegate = self.vc as! Cell_107_BrandZoneDelegate?
             cell.moduleId = model.moduleId ?? 0
             cell.pageTitle = vc?.title ?? ""
@@ -420,6 +431,12 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             returnCell = cell
         case 106:
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_106_BrandList
+            
+            if (model.moduleContent?.link) != nil {
+                cell.itemBottomHeight = 0.0
+            }else {
+                cell.itemBottomHeight = 10.0
+            }
 
             if let banners = model.moduleContent?.banners{
                 cell.dataArr = banners
@@ -466,7 +483,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             }
         case 102,107,106:
             if (model.moduleContent?.link) != nil {
-                return 70
+                return 60
             }else {
                 return 10
             }
@@ -474,7 +491,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             return CGFloat.leastNormalMagnitude
         case 402,401:
             
-            return 70
+            return 60
             
         default:
              return 10

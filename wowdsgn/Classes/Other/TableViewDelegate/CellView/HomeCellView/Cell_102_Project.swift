@@ -39,14 +39,14 @@ class Cell_102_Project: UITableViewCell,ModuleViewElement {
             }
             
             
-            heightConstraint.constant = itemAllHeight + CGFloat(10 * (lineNumber - 1)) // collectionView 的总高度
+            heightConstraint.constant = itemAllHeight + itemBottomHeight + CGFloat(10 * (lineNumber - 1)) // collectionView 的总高度
             collectionView.reloadData()
         }
     }
     
     var itemWidth:CGFloat       = MGScreenWidth - 30
-    
-    var itemAllHeight:CGFloat   = 0.0
+    var itemBottomHeight:CGFloat        = 0.0 // collectionView 距底部 当有“查看更多为0”否“为10”
+    var itemAllHeight:CGFloat           = 0.0
     
     var heightSet = [CGFloat]()
  
@@ -110,7 +110,7 @@ extension Cell_102_Project:UICollectionViewDelegate,UICollectionViewDataSource,U
     //第一个cell居中显示
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(0, 15,0, 15)
+        return UIEdgeInsetsMake(0, 15,itemBottomHeight, 15)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = delegate{

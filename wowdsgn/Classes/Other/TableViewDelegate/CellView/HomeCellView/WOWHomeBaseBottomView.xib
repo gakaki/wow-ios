@@ -11,20 +11,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WOWHomeBaseBottomView" customModule="wowdsgn" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WOWHomeBaseBottomView" customModule="wowdsgn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看全部" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qm-zh-wzT">
-                    <rect key="frame" x="154" y="21.5" width="58" height="17"/>
+                    <rect key="frame" x="154" y="16.5" width="58" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackColorMore" translatesAutoresizingMaskIntoConstraints="NO" id="XKq-Uh-hZN">
-                    <rect key="frame" x="220" y="26.5" width="5" height="6"/>
+                    <rect key="frame" x="220" y="21.5" width="5" height="6"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8Q-HA-Bqa">
-                    <rect key="frame" x="0.0" y="60" width="375" height="10"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="10"/>
                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="5bH-Jk-4nn"/>
@@ -34,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FFi-CR-Zcb">
-                    <rect key="frame" x="104" y="0.0" width="158" height="60"/>
+                    <rect key="frame" x="104" y="0.0" width="158" height="50"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +57,7 @@
                 <outlet property="imgBackgroud" destination="FFi-CR-Zcb" id="D76-3J-aHu"/>
                 <outlet property="view" destination="-1" id="g90-TF-Vz1"/>
             </connections>
-            <point key="canvasLocation" x="-222.5" y="-132"/>
+            <point key="canvasLocation" x="-305" y="-206"/>
         </view>
     </objects>
     <resources>

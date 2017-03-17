@@ -57,14 +57,14 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
             return
         }
         let mobile = phoneTextField.text ?? ""
-        
+         sender.isUserInteractionEnabled = false
         WOWNetManager.sharedManager.requestWithTarget(.api_NewMobileCaptcha(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 WOWHud.showMsg("验证码发送成功")
                 strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
-            
+             sender.isUserInteractionEnabled = true
         }
         
         

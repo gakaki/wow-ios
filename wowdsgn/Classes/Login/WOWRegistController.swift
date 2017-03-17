@@ -79,14 +79,18 @@ class WOWRegistController: WOWBaseViewController {
         }
         let mobile = phoneTextField.text ?? ""
         let Api_Code = byWechat ? RequestApi.api_Captcha :RequestApi.api_Sms_Code
-        
+//        sender.isUserInteractionEnabled = false
+        WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
+                WOWHud.dismiss()
                 WOWHud.showMsg("验证码发送成功")
+                
                 strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
-                
+            WOWHud.dismiss()
+//                sender.isUserInteractionEnabled = true
         }
     }
     

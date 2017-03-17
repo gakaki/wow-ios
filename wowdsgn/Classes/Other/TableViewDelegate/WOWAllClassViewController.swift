@@ -128,7 +128,7 @@ extension WOWAllClassViewController {
             cell.img_Next.isHidden          = true
         }
         
-       
+        cell.selectionStyle   = .none
         return cell
        
     }

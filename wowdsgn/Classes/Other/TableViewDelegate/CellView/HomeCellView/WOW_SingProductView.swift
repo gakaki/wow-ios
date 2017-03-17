@@ -45,12 +45,12 @@ class WOW_SingProductView: UIView {
     }
     @IBOutlet weak var leftAllLayout: NSLayoutConstraint!
     @IBOutlet weak var imgVieww: UIImageView!
-    @IBOutlet weak var leftImageLayout: NSLayoutConstraint!
+//    @IBOutlet weak var leftImageLayout: NSLayoutConstraint!
     var model: WOWProductModel?
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        leftImageLayout.constant = self.width
+//        leftImageLayout.constant = self.width
         leftAllLayout.constant = self.leftt
         self.layoutIfNeeded()
  

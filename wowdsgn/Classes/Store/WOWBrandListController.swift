@@ -214,6 +214,10 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
         vc.hideNavigationBar = true
         navigationController?.pushViewController(vc, animated: true)
     }
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+
 }
 
 extension WOWBrandListController:SearchResultDelegate{

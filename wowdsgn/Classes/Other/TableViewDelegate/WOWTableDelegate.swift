@@ -182,8 +182,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell:UITableViewCell!
         let section     = (indexPath as NSIndexPath).section
-        let model = dataSourceArray[(indexPath as NSIndexPath).section]
-
+     
         guard (indexPath as NSIndexPath).section < dataSourceArray.count  else {
             switch ViewControllerType ?? .Home { // 底部列表是首页的，还是精选页的
             case .Home:
@@ -191,7 +190,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 
                 cell.indexPath = indexPath
                 cell.pageTitle = vc?.title ?? ""
-                cell.moduleId = model.moduleId ?? 0
+//                cell.moduleId = model.moduleId ?? 0
                 
                 let OneCellNumber = ((indexPath as NSIndexPath).section  - dataSourceArray.count + 0) * 2
                 let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataSourceArray.count + 1) * 2) - 1
@@ -223,7 +222,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
         }
         
-        
+        let model = dataSourceArray[(indexPath as NSIndexPath).section]
         let type = model.moduleType ?? 0
         let identifier  = ModulePageType.getIdentifier(type) // 获取对应Type的className
         switch type {

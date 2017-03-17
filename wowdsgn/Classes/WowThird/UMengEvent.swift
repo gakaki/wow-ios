@@ -95,7 +95,10 @@ public enum UMengEvent  {
     case Buy_It_Now                         //立即购买
     case Standard_Confirm                   //选择规格
     case Standard_Cancel                    //选择规格取消
-    case Checkout                           //购物车结算
+    case Buy_Clicks                           //购物车结算
+    case Selectnumber_Clicks               //选择商品数量按钮
+    case Delectproduct_Clicks               //删除按钮
+    case Select_All_Clicks                   //全选按钮
     case Registration_Successful             //注册成功
     case Add_To_Cart_Successful             //加车成功
     case Orders_Submitted                   //提交订单

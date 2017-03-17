@@ -240,6 +240,7 @@ class WOWBuyCarController: WOWBaseViewController {
 //            }
             
         }
+        MobClick.e(.Buy_Clicks)
          //结算
             let sv = UIStoryboard.initialViewController("BuyCar", identifier:"WOWEditOrderController") as!WOWEditOrderController
             sv.entrance = editOrderEntrance.carEntrance
@@ -250,6 +251,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
 //MARK:全选按钮点击
     @IBAction func allButtonClick(_ sender: UIButton) {
+        MobClick.e(.Select_All_Clicks)
         //判断全选按钮的状态，如果是全部选中的状态，点击按钮取消全部选中，如果未选中状态，点击按钮则要全部选中
         if sender.isSelected {
             asynCartUnSelect(validArr)
@@ -359,7 +361,7 @@ class WOWBuyCarController: WOWBaseViewController {
         shoppingCartId.append(model.shoppingCartId ?? 0)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_CartRemove(shoppingCartId:shoppingCartId), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
-                
+                MobClick.e(.Delectproduct_Clicks)
                 strongSelf.dataArr.removeObject(model)
                 WOWUserManager.userCarCount -= model.productQty ?? 1
                 //更新购物车数量信息
@@ -387,6 +389,7 @@ class WOWBuyCarController: WOWBaseViewController {
 
         WOWNetManager.sharedManager.requestWithTarget(.api_CartModify(shoppingCartId:shoppingCartId, productQty: productQty), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
+                MobClick.e(.Selectnumber_Clicks)
                 let model = strongSelf.dataArr[(indexPath as NSIndexPath).section]
                 
                 model.productQty = productQty

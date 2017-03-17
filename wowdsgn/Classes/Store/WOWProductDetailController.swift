@@ -413,7 +413,7 @@ class WOWProductDetailController: WOWBaseViewController {
 //            self.showBottom(progress: progress)
             self.percentDrivenTransition?.update(progress)
         } else if edgePan.state == UIGestureRecognizerState.cancelled || edgePan.state == UIGestureRecognizerState.ended {
-            if progress > 0.3 {
+            if progress > 0.2 {
 //                self.showBottom(progress: 1)
 
                 self.percentDrivenTransition?.finish()

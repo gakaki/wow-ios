@@ -22,10 +22,9 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日单品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfs-i6-uIR">
-                    <rect key="frame" x="50" y="27" width="99" height="21"/>
+                    <rect key="frame" x="50" y="27" width="143" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="bKQ-r9-gNm"/>
-                        <constraint firstAttribute="width" constant="99" id="lga-47-aGi"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
@@ -80,6 +79,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="rAd-Za-XuH" secondAttribute="trailing" constant="30" id="5cO-d1-szo"/>
                 <constraint firstItem="PXF-k1-cJX" firstAttribute="top" secondItem="5fn-gZ-zPv" secondAttribute="bottom" constant="22" id="5oh-8y-ZGU"/>
                 <constraint firstAttribute="bottom" secondItem="rAd-Za-XuH" secondAttribute="bottom" constant="40" id="BkN-B4-pBz"/>
                 <constraint firstItem="5fn-gZ-zPv" firstAttribute="leading" secondItem="vhn-ih-0ag" secondAttribute="leading" id="CKB-mN-Ana"/>
@@ -87,12 +87,12 @@
                 <constraint firstItem="DQp-LF-Lho" firstAttribute="top" secondItem="jfs-i6-uIR" secondAttribute="bottom" constant="15" id="HEd-Wh-cV0"/>
                 <constraint firstItem="rAd-Za-XuH" firstAttribute="top" secondItem="jfs-i6-uIR" secondAttribute="top" constant="-7" id="JS1-b1-4Fd"/>
                 <constraint firstItem="vhn-ih-0ag" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="QjN-Hv-FOf"/>
-                <constraint firstItem="rAd-Za-XuH" firstAttribute="leading" secondItem="jfs-i6-uIR" secondAttribute="trailing" constant="46" id="T9n-8J-jna"/>
                 <constraint firstItem="DQp-LF-Lho" firstAttribute="leading" secondItem="vhn-ih-0ag" secondAttribute="leading" id="ZYp-FJ-Ipt"/>
                 <constraint firstItem="vhn-ih-0ag" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="edg-Io-zye"/>
                 <constraint firstItem="5fn-gZ-zPv" firstAttribute="top" secondItem="DQp-LF-Lho" secondAttribute="bottom" constant="4" id="fah-En-ulr"/>
                 <constraint firstItem="jfs-i6-uIR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="27" id="fm2-dD-vJo"/>
                 <constraint firstItem="jfs-i6-uIR" firstAttribute="leading" secondItem="vhn-ih-0ag" secondAttribute="trailing" constant="5" id="hfd-H3-q4S"/>
+                <constraint firstItem="rAd-Za-XuH" firstAttribute="leading" secondItem="jfs-i6-uIR" secondAttribute="trailing" constant="2" id="tWO-XI-dxC"/>
                 <constraint firstItem="PXF-k1-cJX" firstAttribute="leading" secondItem="5da-LB-dt8" secondAttribute="trailing" constant="5" id="vof-ow-ukz"/>
                 <constraint firstItem="5da-LB-dt8" firstAttribute="leading" secondItem="vhn-ih-0ag" secondAttribute="leading" id="z6t-UO-jdc"/>
             </constraints>
@@ -102,7 +102,6 @@
                 <outlet property="imgVieww" destination="rAd-Za-XuH" id="8fs-XW-bsM"/>
                 <outlet property="lb_SingTodayName" destination="jfs-i6-uIR" id="1tF-qT-fVn"/>
                 <outlet property="leftAllLayout" destination="edg-Io-zye" id="toa-R6-ro2"/>
-                <outlet property="leftImageLayout" destination="T9n-8J-jna" id="vT3-jC-Uvq"/>
                 <outlet property="originalpriceLabel" destination="PXF-k1-cJX" id="l5I-EN-evQ"/>
                 <outlet property="priceLabel" destination="5da-LB-dt8" id="iKj-fQ-liT"/>
                 <outlet property="view_CountDown" destination="5fn-gZ-zPv" id="fZL-Fe-Sba"/>

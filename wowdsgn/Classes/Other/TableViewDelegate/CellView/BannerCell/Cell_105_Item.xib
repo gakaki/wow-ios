@@ -14,11 +14,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="灯具" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcC-v4-4SZ">
-                        <rect key="frame" x="30" y="15" width="31" height="18"/>
+                        <rect key="frame" x="30" y="15" width="313" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -43,6 +43,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="AcC-v4-4SZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="H2s-8B-g6u"/>
+                    <constraint firstItem="pOV-1Z-mCf" firstAttribute="leading" secondItem="AcC-v4-4SZ" secondAttribute="trailing" constant="8" id="SmG-j8-ZAc"/>
                     <constraint firstItem="pOV-1Z-mCf" firstAttribute="centerY" secondItem="AcC-v4-4SZ" secondAttribute="centerY" id="W60-sB-RUA"/>
                     <constraint firstAttribute="trailing" secondItem="pOV-1Z-mCf" secondAttribute="trailing" constant="15" id="iP2-aW-FT1"/>
                     <constraint firstAttribute="bottom" secondItem="3Tg-i6-JBM" secondAttribute="bottom" id="lxB-vo-J18"/>

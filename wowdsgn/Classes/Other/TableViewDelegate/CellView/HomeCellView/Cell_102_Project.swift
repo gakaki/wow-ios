@@ -19,7 +19,8 @@ class Cell_102_Project: UITableViewCell,ModuleViewElement {
     }
     var heightAll:CGFloat = 290
     weak var delegate : cell_102_delegate?
-
+    var moduleId: Int!
+    var pageTitle: String!
     var dataArr:[WOWCarouselBanners]!{
         didSet{
             let lineNumber =  Int(dataArr.count > 3 ? 3 : dataArr.count) // item 最多为三个
@@ -114,6 +115,13 @@ extension Cell_102_Project:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = delegate{
             let model = dataArr?[indexPath.row]
+            //Mob 纵向banner模块 banner点击
+            let bannerId = String(format: "%i_%@_%i", moduleId, pageTitle, model?.id ?? 0)
+            let bannerName = String(format: "%i_%@_%@", moduleId, pageTitle, model?.bannerTitle ?? "")
+            let bannerPosition = String(format: "%i_%@_%i", moduleId, pageTitle, indexPath.row)
+            let params = ["ModuleID_Secondary_Homepagename_Bannersid": bannerId, "ModuleID_Secondary_Homepagename_Bannersname": bannerName, "ModuleID_Secondary_Homepagename_Bannersposition": bannerPosition]
+            MobClick.e2(.Bannerlist_Portrait, params)
+
             del.goToProjectDetailVC(model)
             
         }

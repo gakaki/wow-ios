@@ -16,6 +16,8 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
     @IBOutlet weak var cv: UICollectionView!
 
     weak var delegate:FoundWeeklyNewCellDelegate?
+    var moduleId: Int!
+    var pageTitle: String!
     
     var data        = [WOWProductModel]()
     var heightAll   = CGFloat.leastNormalMagnitude
@@ -80,7 +82,15 @@ extension WOWFoundWeeklyNewCell:UICollectionViewDelegate,UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let del = self.delegate {
-            del.cellFoundWeeklyNewCellTouchInside(self.data[(indexPath as NSIndexPath).row])
+            let model = self.data[(indexPath as NSIndexPath).row]
+            //Mob 横向产品组模块 banner点击
+            let productId = String(format: "%i_%@_%i", moduleId, pageTitle, model.productId ?? 0)
+            let productName = String(format: "%i_%@_%@", moduleId, pageTitle, model.productName ?? "")
+            let productPosition = String(format: "%i_%@_%i", moduleId, pageTitle, indexPath.row)
+            let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
+            MobClick.e2(.Productlist_Landscape, params)
+            
+            del.cellFoundWeeklyNewCellTouchInside(model)
         }
     }
 }

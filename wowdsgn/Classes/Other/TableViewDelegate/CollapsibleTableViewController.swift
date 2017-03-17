@@ -183,8 +183,14 @@ extension CollapsibleTableViewController {
             return
         }
         if let banners = model.moduleContent?.banners {
-
-                 VCRedirect.goToBannerTypeController(banners[indexPath.row])
+            let bannerModel = banners[indexPath.row]
+            //Mob 分类模块 banner点击
+            let optionId = String(format: "%i_全部分类_%i", model.moduleId ?? 0, bannerModel.id ?? 0)
+            let optionName = String(format: "%i_全部分类_%@", model.moduleId ?? 0, bannerModel.bannerTitle ?? "")
+            let bannerName = String(format: "%i_全部分类_%@", model.moduleId ?? 0, model.moduleContent?.name ?? "")
+            let params = ["Module_ID_Mainpagename_OptionId": optionId, "Module_ID_Mainpagename_OptionName": optionName, "Module_ID_Mainpagename_BannerName": bannerName]
+            MobClick.e2(.Category_Option , params)
+            VCRedirect.goToBannerTypeController(banners[indexPath.row])
 
         }
 
@@ -207,6 +213,13 @@ extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
         guard let model_Class = model.moduleContent else {
             return
         }
+        //Mob 分类模块 banner点击
+        let bannerId = String(format: "%i_全部分类_%i", model.moduleId ?? 0, model_Class.id ?? 0)
+        let bannerName = String(format: "%i_全部分类_%@", model.moduleId ?? 0, model_Class.name ?? "")
+        let bannerPosition = String(format: "%i_全部分类_%i", model.moduleId ?? 0, section)
+        let params = ["Module_ID_Mainpagename_Bannerid": bannerId, "Module_ID_Mainpagename_Bannername": bannerName, "Module_ID_Mainpagename_Bannerposition": bannerPosition]
+        MobClick.e2(.Category_Banner , params)
+
 //        let model_Class = model.moduleContent
        
         if model_Class.bannerIsOut == true {

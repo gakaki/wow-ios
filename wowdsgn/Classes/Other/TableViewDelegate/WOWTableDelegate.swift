@@ -189,6 +189,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 
                 cell.indexPath = indexPath
                 
+                
                 let OneCellNumber = ((indexPath as NSIndexPath).section  - dataSourceArray.count + 0) * 2
                 let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataSourceArray.count + 1) * 2) - 1
                 if bottomListCount.isOdd && (indexPath as NSIndexPath).section + 1 == (dataSourceArray.count) + bottomListCount.getParityCellNumber() {//  满足为奇数 第二个item 隐藏
@@ -271,6 +272,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell_102_Project
             cell.dataArr      = model.moduleContent?.banners
 //            cell.lbTitle.text = model.moduleContent?.name ?? "专题"
+            cell.pageTitle = vc?.title ?? ""
+            cell.moduleId = model.moduleId ?? 0
             cell.delegate     = self.vc as! cell_102_delegate?
             cell_heights[section]  = cell.heightAll
             returnCell = cell
@@ -288,6 +291,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeBottomCell
             cell.indexPath = indexPath
             
+            cell.pageTitle = vc?.title ?? ""
+            cell.moduleId = model.moduleId ?? 0
             let OneCellNumber = indexPath.row * 2
             let TwoCellNumber = ((indexPath.row + 1) * 2) - 1
             let productsArray = model.moduleContentProduct?.products ?? []
@@ -326,6 +331,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             cell_heights[section]  = cell.heightAll
             cell.delegate = self.vc as! FoundWeeklyNewCellDelegate?
+            cell.pageTitle = vc?.title ?? ""
+            cell.moduleId = model.moduleId ?? 0
             cell.bringSubview(toFront: cell.cv)
             
             returnCell = cell
@@ -777,19 +784,39 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         view.imgBackgroud.addTapGesture {[weak self] (sender) in
             if let strongSelf = self {
                 switch module.moduleType ?? 0{// 不同的type  不同的页脚
+                case 102:
+                    //Mob 纵向banner模块 更多点击
+                    let allType = String(format: "%i_%@_%i", module.moduleId ?? 0, strongSelf.vc?.title ?? "", bannerModel?.bannerLinkType ?? 0)
+                    let params = ["ModuleID_Secondary_Homepagename_Viewalltragettype": allType]
+                    MobClick.e2(.Bannerlist_Portrait, params)
+                    
+                    break
                 case 106:
-                    //Mob 品牌专区模块 banner点击
+                    //Mob 热门分类模块 更多点击
                     let allType = String(format: "%i_%@_%i", module.moduleId ?? 0, strongSelf.vc?.title ?? "", bannerModel?.bannerLinkType ?? 0)
                     let params = ["ModuleID_Secondary_Homepagename_Viewalltragettype": allType]
                     MobClick.e2(.Hot_Category_Clicks, params)
                     
                     break
                 case 107:
-                    //Mob 品牌专区模块 banner点击
+                    //Mob 品牌专区模块 更多点击
                     let allType = String(format: "%i_%@_%i", module.moduleId ?? 0, strongSelf.vc?.title ?? "", bannerModel?.bannerLinkType ?? 0)
                     let params = ["ModuleID_Secondary_Homepagename_Viewalltragettype": allType]
                     MobClick.e2(.Slide_Banners_Clicks, params)
 
+                    break
+                case 401:
+                    //Mob 横向产品组模块 更多点击
+                    let allType = String(format: "%i_%@_%i", module.moduleId ?? 0, strongSelf.vc?.title ?? "", id)
+                    let params = ["Mod uleID_Secondary_Homepagename_Viewalltragettype": allType]
+                    MobClick.e2(.Productlist_Landscape, params)
+                    break
+                
+                case 402:
+                    //Mob 纵向产品组模块 更多点击
+                    let allType = String(format: "%i_%@_%i", module.moduleId ?? 0, strongSelf.vc?.title ?? "", id)
+                    let params = ["Mod uleID_Secondary_Homepagename_Viewalltragettype": allType]
+                    MobClick.e2(.Productlist_Portrait, params)
                     break
         
                 default:
@@ -798,6 +825,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
 
                 if is402 {
                     print("跳转对应的产品组的详情页\(id)")
+                    
                     VCRedirect.goToProductGroup(id)
                     
                 }else{

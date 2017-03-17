@@ -64,20 +64,38 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var bottomConstraintOne: NSLayoutConstraint! // 标签、喜欢、距离底部距离
     @IBOutlet weak var bottomConstraintTwo: NSLayoutConstraint!
     
+    var moduleId: Int!
+    var pageTitle: String!
+    
     var oneModel : WOWProductModel? = nil
     var twoModel : WOWProductModel? = nil
     
-    @IBAction func clickOneBtn(_ sender: AnyObject) {
+    @IBAction func clickOneBtn(_ sender: UIButton!) {
         
         if let del = delegate{
+            let index: Int = sender.tag 
+            //Mob 纵向产品组模块 banner点击
+            let productId = String(format: "%i_%@_%i", moduleId, pageTitle, oneModel?.productId ?? 0)
+            let productName = String(format: "%i_%@_%@", moduleId, pageTitle, oneModel?.productName ?? "")
+            let productPosition = String(format: "%i_%@_%i", moduleId, pageTitle, index)
+            let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
+            MobClick.e2(.Productlist_Portrait, params)
             
             del.goToProductDetailVC(oneModel?.productId, selectedImage: imgShowOne)
         }
         
     }
-    @IBAction func clickTwoBtn(_ sender: AnyObject) {
+    @IBAction func clickTwoBtn(_ sender: UIButton!) {
         
         if let del = delegate{
+            let index: Int = sender.tag
+
+            //Mob 纵向产品组模块 banner点击
+            let productId = String(format: "%i_%@_%i", moduleId, pageTitle, twoModel?.productId ?? 0)
+            let productName = String(format: "%i_%@_%@", moduleId, pageTitle, twoModel?.productName ?? "")
+            let productPosition = String(format: "%i_%@_%i", moduleId, pageTitle, index)
+            let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
+            MobClick.e2(.Productlist_Portrait, params)
             
             del.goToProductDetailVC(twoModel?.productId, selectedImage: imgShowTwo)
             

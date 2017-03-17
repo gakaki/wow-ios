@@ -87,12 +87,15 @@ public enum UMengEvent  {
     case Product_Tag_Detail_Page            //标签详情页
     
     case Secondary_Homepage_Pv              //子首页tab
-    case Slide_Banners_Clicks	            //轮播内
+    case Slide_Banners_Clicks	            //轮播
     case Single_Banner_Clicks               //单banner模块
-    case Bannerlist_Landscape               //横向banner组模块
     case Bannerlist_Portrait                //纵向banner组模块
     case Hot_Category_Clicks	            //热门分类模块
     case Brand_Module_Clicks                //品牌专区模块
+    case Productlist_Landscape               //横向产品组
+    case Productlist_Portrait               //纵向产品组
+    case Category_Banner                    //分类banner
+    case Category_Option                    //分类选项点击
     
 }
 

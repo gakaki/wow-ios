@@ -35,8 +35,8 @@ class HomeBrannerCell: UITableViewCell,ModuleViewElement,CyclePictureViewDelegat
     
     var imageURLArray = [String]()
     var indexPathSection : Int? = 0
-    var moduleId: Int!
-    var pageTitle: String!
+    var moduleId: Int! = 0
+    var pageTitle: String! = ""
     
     
     @IBOutlet weak var cyclePictureView: CyclePictureView!

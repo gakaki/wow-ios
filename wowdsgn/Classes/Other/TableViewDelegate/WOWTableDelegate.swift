@@ -182,13 +182,16 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell:UITableViewCell!
         let section     = (indexPath as NSIndexPath).section
+        let model = dataSourceArray[(indexPath as NSIndexPath).section]
+
         guard (indexPath as NSIndexPath).section < dataSourceArray.count  else {
             switch ViewControllerType ?? .Home { // 底部列表是首页的，还是精选页的
             case .Home:
                 let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBottomCell", for: indexPath) as! HomeBottomCell
                 
                 cell.indexPath = indexPath
-                
+                cell.pageTitle = vc?.title ?? ""
+                cell.moduleId = model.moduleId ?? 0
                 
                 let OneCellNumber = ((indexPath as NSIndexPath).section  - dataSourceArray.count + 0) * 2
                 let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataSourceArray.count + 1) * 2) - 1
@@ -220,7 +223,6 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
         }
         
-        let model = dataSourceArray[(indexPath as NSIndexPath).section]
         
         let type = model.moduleType ?? 0
         let identifier  = ModulePageType.getIdentifier(type) // 获取对应Type的className
@@ -389,7 +391,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             let cell                = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WOWHotBannerCell
             
             if let banners = model.moduleContent?.banners{
-                
+                cell.moduleId = model.moduleId ?? 0
+                cell.pageTitle = vc?.title ?? ""
                 cell.reloadBanner(banners)
                 cell.delegate = self.vc as! HotBrannerCellDelegate?
 

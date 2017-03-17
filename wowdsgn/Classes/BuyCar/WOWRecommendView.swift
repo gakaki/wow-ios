@@ -168,6 +168,8 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
         let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBottomCell", for: indexPath) as! HomeBottomCell
         
         cell.indexPath = indexPath
+//        cell.pageTitle = vc?.title ?? ""
+//        cell.moduleId = model.moduleId ?? 0
         
         let OneCellNumber = ((indexPath as NSIndexPath).section + 0) * 2
         let TwoCellNumber = (((indexPath as NSIndexPath).section + 1) * 2) - 1

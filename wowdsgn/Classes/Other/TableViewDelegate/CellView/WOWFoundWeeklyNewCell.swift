@@ -16,8 +16,8 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
     @IBOutlet weak var cv: UICollectionView!
 
     weak var delegate:FoundWeeklyNewCellDelegate?
-    var moduleId: Int!
-    var pageTitle: String!
+    var moduleId: Int! = 0
+    var pageTitle: String! = ""
     
     var data        = [WOWProductModel]()
     var heightAll   = CGFloat.leastNormalMagnitude

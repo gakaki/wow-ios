@@ -21,8 +21,8 @@ class Cell_107_BrandZone: UITableViewCell,ModuleViewElement {
     static func cell_type() -> Int {
         return 107  //品牌专区  一个推荐banner + 底部三个商品
     }
-    var moduleId: Int!
-    var pageTitle: String!
+    var moduleId: Int! = 0
+    var pageTitle: String! = ""
     weak var delegate : Cell_107_BrandZoneDelegate?
     
     let itemWidth : CGFloat = (MGScreenWidth - 30 - 20 * 2) / 3

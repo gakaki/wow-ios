@@ -571,7 +571,8 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
             let cell                = tableView.dequeueReusableCell(withIdentifier: "HomeBottomCell", for: indexPath) as! HomeBottomCell
             
             cell.indexPath = indexPath
-            
+            cell.pageTitle = self.title ?? ""
+//            cell.moduleId = model.moduleId ?? 0
             let OneCellNumber = ((indexPath as NSIndexPath).section + 0 - dataArr.count) * 2
             let TwoCellNumber = (((indexPath as NSIndexPath).section + 1 - dataArr.count) * 2) - 1
             if bottomListCount.isOdd && (indexPath as NSIndexPath).section + 1 ==   bottomListCount.getParityCellNumber() {//  满足为奇数 第二个item 隐藏

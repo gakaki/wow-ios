@@ -37,8 +37,8 @@ class Cell_106_BrandList: UITableViewCell,ModuleViewElement {
     
 //    var rate:CGFloat = 1.0// 宽高比
     
-    var moduleId: Int!
-    var pageTitle: String!
+    var moduleId: Int! = 0
+    var pageTitle: String! = ""
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     var itemHeight : CGFloat = MGScreenWidth * 0.33
     let itemWidth : CGFloat = (MGScreenWidth - 30 - 10 * 2) / 3

@@ -383,6 +383,8 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         if !validateMethods(){
             return
         }
+        
+        MobClick.e(.Standard_Confirm)
         self.productInfo?.productQty = skuCount
         switch entrance {
         case .addEntrance:
@@ -415,6 +417,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     
     @IBAction func closeButtonClick(_ sender: UIButton) {
         if let del = delegate {
+            MobClick.e(.Standard_Cancel)
             del.closeBuyView(productInfo)
         }
     }

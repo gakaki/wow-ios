@@ -43,6 +43,10 @@ class WOWCouponController: WOWBaseViewController {
         request()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MobClick.e(.Coupons_Page)
+    }
     override func setUI() {
         super.setUI()
         navigationItem.title = "优惠券"

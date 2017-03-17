@@ -103,6 +103,7 @@ class WOWBuyCarController: WOWBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.delegate = self
+        MobClick.e(.Cart_Detail_Page)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

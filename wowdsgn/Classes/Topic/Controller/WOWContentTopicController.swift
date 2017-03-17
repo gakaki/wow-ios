@@ -730,7 +730,7 @@ extension WOWContentTopicController: UITextViewDelegate{
             return
         }
         if inputTextView.text.length < 3 {
-            WOWHud.showMsg("请您输入更多内容")
+            WOWHud.showMsg("请您至少输入三个字")
             return
         }
         if inputTextView.text.length > 140 {

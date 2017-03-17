@@ -69,7 +69,7 @@ class WOWSearchSortController: BaseScreenViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        MobClick.e(.Search_Results)
     }
     
     

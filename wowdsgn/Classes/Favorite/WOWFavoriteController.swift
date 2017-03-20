@@ -54,7 +54,7 @@ class WOWFavoriteController: WOWBaseViewController {
         v.magicView.itemWidth           = MGScreenWidth / 3
         v.magicView.sliderColor         = WowColor.black
         v.magicView.sliderHeight        = 3.w
-        v.magicView.isSwitchAnimated        = true
+        v.magicView.isSwitchAnimated        = false
         v.magicView.isScrollEnabled         = true
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
@@ -71,10 +71,9 @@ class WOWFavoriteController: WOWBaseViewController {
         vc_brand    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as? WOWFavBrand
         vc_designer = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavDesigner.self)) as? WOWFavDesigner
         
-        addChildViewController(vc_product!)
-        addChildViewController(vc_brand!)
-        addChildViewController(vc_designer!)
-        
+//        addChildViewController(vc_product!)
+//        addChildViewController(vc_brand!)
+//        addChildViewController(vc_designer!)
         v.magicView.reloadData()
     }
     fileprivate func addObserver(){

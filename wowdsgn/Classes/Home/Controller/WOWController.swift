@@ -47,10 +47,10 @@ class WOWController: WOWBaseModuleVC {
         
      
         
-        if tabId == nil { // 说明进入的是第一页
-            
+//        if tabId == nil { // 说明进入的是第一页
+        
             request()
-        }
+//        }
  
     }
 

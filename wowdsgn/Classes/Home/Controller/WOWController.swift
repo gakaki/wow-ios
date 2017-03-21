@@ -38,7 +38,7 @@ class WOWController: WOWBaseModuleVC {
 //        self.automaticallyAdjustsScrollViewInsets = false
 //        let topViewController = FNUtil.currentTopViewController()
 //        if topViewController.className == WOWHomeControllers.className {
-//            hidingNavBarManager = HidingNavigationBarManager(viewController: topViewController, scrollView: tableView)
+//            hidingNavBarManager = HidingNavigationBarManager(viewController: self.magic, scrollView: tableView)
 //
 //        }
 

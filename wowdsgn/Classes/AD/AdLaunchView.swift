@@ -65,7 +65,7 @@ final class AdLaunchView: UIView {
         // 广告主流程
         displayCachedAd()
         requestBanner()
-        //        showProgressView()
+                showProgressView()
         
         let delayTime = DispatchTime.now() + Double(Int64(4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {

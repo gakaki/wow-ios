@@ -24,10 +24,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applogo" translatesAutoresizingMaskIntoConstraints="NO" id="zEI-4p-vhd">
-                            <rect key="frame" x="142.5" y="121.5" width="90" height="90"/>
+                            <rect key="frame" x="134.5" y="96.5" width="106" height="140"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="90" id="BiV-3U-PcT"/>
-                                <constraint firstAttribute="height" constant="90" id="e8q-oM-zu5"/>
+                                <constraint firstAttribute="width" constant="106" id="BiV-3U-PcT"/>
+                                <constraint firstAttribute="height" constant="140" id="e8q-oM-zu5"/>
                             </constraints>
                         </imageView>
                     </subviews>
@@ -86,6 +86,6 @@
     </objects>
     <resources>
         <image name="Artboard" width="200" height="200"/>
-        <image name="applogo" width="16" height="16"/>
+        <image name="applogo" width="110" height="168"/>
     </resources>
 </document>

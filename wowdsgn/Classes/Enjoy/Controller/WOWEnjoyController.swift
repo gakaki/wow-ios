@@ -14,9 +14,8 @@ class WOWEnjoyController: WOWBaseViewController {
     
     var v : VCVTMagic!
     
-    var vc_product:WOWFavProduct?
+    var vc_product:WOWNewEnjoyController?
     var vc_brand:WOWFavBrand?
-    var vc_designer:WOWFavDesigner?
     var isOpen: Bool = false
     
     override func viewDidLoad() {
@@ -35,8 +34,6 @@ class WOWEnjoyController: WOWBaseViewController {
         super.viewWillAppear(animated)
         //        self.navigationShadowImageView?.isHidden = true
         //        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        MobClick.e(.Like_Page)
     }
     lazy var navView:WOWEnjoyNavView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWEnjoyNavView.self), owner: self, options: nil)?.last as! WOWEnjoyNavView
@@ -53,17 +50,15 @@ class WOWEnjoyController: WOWBaseViewController {
         self.navigationItem.titleView = navView
         
 //        configBuyBarItem()
-        addObserver()
         
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
         v.magicView.delegate            = self
         
-        v.magicView.layoutStyle         = .center
+        v.magicView.layoutStyle         = .divide
         v.magicView.switchStyle         = .default
         
         v.magicView.sliderWidth         = 50.w
-        v.magicView.itemWidth           = MGScreenWidth / 3
         v.magicView.sliderColor         = WowColor.black
         v.magicView.sliderHeight        = 3.w
         v.magicView.isSwitchAnimated        = false
@@ -79,20 +74,12 @@ class WOWEnjoyController: WOWBaseViewController {
         }
         
         
-        vc_product    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavProduct.self)) as? WOWFavProduct
+        vc_product    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWNewEnjoyController.self)) as? WOWNewEnjoyController
         vc_brand    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as? WOWFavBrand
-        vc_designer = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavDesigner.self)) as? WOWFavDesigner
         
-        //        addChildViewController(vc_product!)
-        //        addChildViewController(vc_brand!)
-        //        addChildViewController(vc_designer!)
         v.magicView.reloadData()
     }
-    fileprivate func addObserver(){
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
-        
-    }
+
     
     //MARK: --privite 
     func categoryClick()  {
@@ -150,7 +137,7 @@ extension WOWEnjoyController:VTMagicViewDataSource{
     
     //获取所有菜单名，数组中存放字符串类型对象
     func menuTitles(for magicView: VTMagicView) -> [String] {
-        return ["单品","品牌","设计师"]
+        return ["佳作","最新"]
     }
     func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
@@ -182,11 +169,9 @@ extension WOWEnjoyController:VTMagicViewDataSource{
         if (vc == nil) {
             
             if (pageIndex == 0){
-                return vc_product!
-            }else if (pageIndex == 1){
                 return vc_brand!
-            }else{
-                return vc_designer!
+            }else if (pageIndex == 1){
+                return vc_product!
             }
         }
         
@@ -205,9 +190,6 @@ extension WOWEnjoyController:VTMagicViewDelegate{
             case  0: break
             case  1:
                 //                MobClick.e(.Brands_List)
-                break
-            case  2:
-                //                MobClick.e(.Designers_List)
                 break
             default:
                 //                MobClick.e(.Shopping)

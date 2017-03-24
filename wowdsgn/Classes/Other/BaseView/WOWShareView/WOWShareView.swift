@@ -90,14 +90,14 @@ class WOWShareBackView:UIView{
                 make.height.equalTo(128)
             }
         }
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: { [unowned self] in
             self.alpha = 1
             self.backClear.y = 0
         }) 
     }
     
     func dismiss() {
-        UIView.animate(withDuration: 0.3,animations: {
+        UIView.animate(withDuration: 0.3,animations: { [unowned self] in
             self.alpha = 0
             self.backClear.y = MGScreenHeight + 10;
         }, completion: { (ret) in

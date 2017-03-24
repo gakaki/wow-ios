@@ -198,10 +198,10 @@
             </objects>
             <point key="canvasLocation" x="1173.5999999999999" y="214.54272863568218"/>
         </scene>
-        <!--View Controller-->
+        <!--Masterpiece Controller-->
         <scene sceneID="wTE-1D-W7K">
             <objects>
-                <viewController id="yGc-p3-Epc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWMasterpieceController" id="yGc-p3-Epc" customClass="WOWMasterpieceController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d1K-3L-oLg"/>
                         <viewControllerLayoutGuide type="bottom" id="AOh-eN-n0r"/>
@@ -210,7 +210,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mqb-ZK-rQa">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mqb-ZK-rQa">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -223,6 +223,9 @@
                             <constraint firstItem="mqb-ZK-rQa" firstAttribute="top" secondItem="efi-T4-imW" secondAttribute="top" id="fdo-aV-V3J"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="mqb-ZK-rQa" id="KL1-YP-xK2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov2-RR-QWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,6 +9,8 @@
 import UIKit
 
 class WOWMasterpieceCell: UITableViewCell {
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

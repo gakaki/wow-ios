@@ -169,6 +169,8 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 45
     }
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//            UIApplication.currentViewController()?.bingWorksDetail()
+    }
 }
 

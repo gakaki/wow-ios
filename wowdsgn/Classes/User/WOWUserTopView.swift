@@ -9,6 +9,7 @@
 import UIKit
 
 class WOWUserTopView: UIView {
+    var backgroundImg: UIImageView!
     var loginLabel:UILabel!
     var topContainerView: UIView!
     var headImageView: UIImageView!
@@ -31,6 +32,17 @@ class WOWUserTopView: UIView {
             if let _ = weakSelf{
                 make.left.right.top.equalTo(0)
                 make.height.equalTo(76)
+            }
+        }
+        
+        
+        backgroundImg = UIImageView()
+        backgroundImg.image = UIImage(named: "guide0")
+        backgroundImg.contentMode = .scaleToFill
+        addSubview(backgroundImg)
+        backgroundImg.snp.makeConstraints { (make) in
+            if let _ = weakSelf{
+                make.left.right.top.bottom.equalTo(0)
             }
         }
         
@@ -85,13 +97,7 @@ class WOWUserTopView: UIView {
             }
         }
         
-        let centerLine = UIView()
-        centerLine.backgroundColor = SeprateColor
-        topContainerView.addSubview(centerLine)
-        centerLine.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(0)
-            make.height.equalTo(0.5)
-        }
+        
         
         loginLabel = UILabel()
         loginLabel.text = "点击登录/注册"

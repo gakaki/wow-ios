@@ -43,6 +43,13 @@ class WOWUserController: WOWBaseTableViewController {
     deinit{
         NotificationCenter.default.removeObserver(self)
     }
+    
+//    lazy var headerView:WOWUserHeaderView = {
+//        let v = Bundle.main.loadNibNamed(String(describing: WOWUserHeaderView.self), owner: self, options: nil)?.last as! WOWUserHeaderView
+//        v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 270)
+//        return v
+//    }()
+    
 
 //MARK:Private Method
     override func setUI() {
@@ -106,20 +113,21 @@ class WOWUserController: WOWBaseTableViewController {
      */
     fileprivate func configHeaderView(){
         headerView       = WOWUserTopView()
-        headerView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 75)
-        headerView.configShow(WOWUserManager.loginStatus)
-        headerView.topContainerView.addAction {[weak self] in
-            if let strongSelf = self{
-                if WOWUserManager.loginStatus{
-                    strongSelf.goUserInfo()
-                }else{
-                    strongSelf.toLoginVC(true)
-                }
-            }
-        }
-        configUserInfo()
-        self.tableView.tableHeaderView = nil
-        self.tableView.tableHeaderView = headerView
+        headerView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 270)
+//        headerView.configShow(WOWUserManager.loginStatus)
+//        headerView.topContainerView.addAction {[weak self] in
+//            if let strongSelf = self{
+//                if WOWUserManager.loginStatus{
+//                    strongSelf.goUserInfo()
+//                }else{
+//                    strongSelf.toLoginVC(true)
+//                }
+//            }
+//        }
+//        configUserInfo()
+//        self.tableView.tableHeaderView = nil
+        self.tableView.addSubview(headerView)
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: headerView.frame.height))
     }
     
     fileprivate func goUserInfo(){
@@ -133,37 +141,37 @@ class WOWUserController: WOWBaseTableViewController {
     }
     
     fileprivate func configUserInfo(){
-        if WOWUserManager.loginStatus {
-            
-            if ( self.image_next_view != nil){
-                headerView.headImageView.image =  self.image_next_view 
-            }else{
-                /**
-                 *  先判断 本地是否有保存头像数据
-                 */
-                if   WOWUserManager.userPhotoData.isEmpty {
-                    headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
-//                    headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-                    
-
-                }else{
-                    DispatchQueue.main.async {
-                        // 取头像数据
-                        if let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as? UIImage {
-                            self.headerView.headImageView.image = myImage
-
-                        }
-                        
-                    }
-                }
-
-              }
-            // UI
-            headerView.nameLabel.text = WOWUserManager.userName
-            headerView.desLabel.text  = WOWUserManager.userDes
-        }else{
-            headerView.headImageView.image = UIImage(named: "placeholder_userhead")
-        }
+//        if WOWUserManager.loginStatus {
+//            
+//            if ( self.image_next_view != nil){
+//                headerView.headImageView.image =  self.image_next_view 
+//            }else{
+//                /**
+//                 *  先判断 本地是否有保存头像数据
+//                 */
+//                if   WOWUserManager.userPhotoData.isEmpty {
+//                    headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
+////                    headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+//                    
+//
+//                }else{
+//                    DispatchQueue.main.async {
+//                        // 取头像数据
+//                        if let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as? UIImage {
+//                            self.headerView.headImageView.image = myImage
+//
+//                        }
+//                        
+//                    }
+//                }
+//
+//              }
+//            // UI
+//            headerView.nameLabel.text = WOWUserManager.userName
+//            headerView.desLabel.text  = WOWUserManager.userDes
+//        }else{
+//            headerView.headImageView.image = UIImage(named: "placeholder_userhead")
+//        }
     }
     
     
@@ -185,7 +193,7 @@ class WOWUserController: WOWBaseTableViewController {
         
         let userInfo = (notification as NSNotification).userInfo
         if  let image  = userInfo!["image"] as? UIImage {
-            self.headerView.headImageView.image = image
+//            self.headerView.headImageView.image = image
             self.image_next_view = image
         }
 
@@ -199,6 +207,14 @@ class WOWUserController: WOWBaseTableViewController {
     
     func loginSuccess(){
         configHeaderView()
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        super.scrollViewDidScroll(scrollView)
+        let offsetY = scrollView.contentOffset.y
+        if offsetY < 0 {
+            headerView.frame = CGRect(x: offsetY/2, y: offsetY, width: MGScreenWidth - offsetY, height: 270 - offsetY)
+        }
     }
 }
 

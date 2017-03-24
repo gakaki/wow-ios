@@ -49,6 +49,7 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var addCartButton: UIButton!
     @IBOutlet weak var nowBuyButton: UIButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var topSpace: NSLayoutConstraint!
     //是否展开参数
     var isOpenParam: Bool = true
     //是否展开温馨提示
@@ -64,6 +65,7 @@ class WOWProductDetailController: WOWBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.delegate = self
+        showBottom()
     }
     deinit {
         removeObservers()
@@ -75,26 +77,30 @@ class WOWProductDetailController: WOWBaseViewController {
 
     }
     
-    func showBottom(progress: CGFloat) {
+    func showBottom() {
+       
+        bottomSpace.constant = 0
+        topSpace.constant = 0
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: { [weak self] in
+            if let strongSelf = self {
+
+                strongSelf.view.layoutIfNeeded()
+            }
+        }) { (finish) in
+            
+        }
+    }
+    func hiddenBottom(progress: CGFloat) {
         UIView.animate(withDuration: 0.01, animations: {[weak self] in
             if let strongSelf = self {
-               strongSelf.bottomSpace.constant = -(CGFloat(50.0) * progress)
+                strongSelf.bottomSpace.constant = -(CGFloat(50.0) * progress)
+                strongSelf.topSpace.constant = -(CGFloat(72.0) * progress)
 
             }
         }) { (finish) in
             
         }
     }
-//    func hiddenBottom() {
-//        UIView.animate(withDuration: 0.3, animations: {[weak self] in
-//            if let strongSelf = self {
-//                strongSelf.bottomSpace.constant = 0
-//                
-//            }
-//        }) { (finish) in
-//            
-//        }
-//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -410,15 +416,15 @@ class WOWProductDetailController: WOWBaseViewController {
             self.percentDrivenTransition = UIPercentDrivenInteractiveTransition()
             self.navigationController?.popViewController(animated: true)
         } else if edgePan.state == UIGestureRecognizerState.changed {
-//            self.showBottom(progress: progress)
+            self.hiddenBottom(progress: progress)
             self.percentDrivenTransition?.update(progress)
         } else if edgePan.state == UIGestureRecognizerState.cancelled || edgePan.state == UIGestureRecognizerState.ended {
             if progress > 0.2 {
-//                self.showBottom(progress: 1)
+                self.hiddenBottom(progress: 1)
 
                 self.percentDrivenTransition?.finish()
             } else {
-//                self.showBottom(progress: 0)
+                self.hiddenBottom(progress: 0)
 
                 self.percentDrivenTransition?.cancel()
             }

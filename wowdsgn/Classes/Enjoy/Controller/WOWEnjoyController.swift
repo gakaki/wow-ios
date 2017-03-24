@@ -44,7 +44,7 @@ class WOWEnjoyController: WOWBaseViewController {
         return v
     }()
     lazy var backView:WOWCategoryBackView = {
-        let v = WOWCategoryBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
+        let v = WOWCategoryBackView(frame:CGRect(x: 0,y: 64,width: MGScreenWidth,height: MGScreenHeight - 64))
         return v
     }()
     
@@ -52,7 +52,7 @@ class WOWEnjoyController: WOWBaseViewController {
         super.setUI()
         self.navigationItem.titleView = navView
         
-        configBuyBarItem()
+//        configBuyBarItem()
         addObserver()
         
         v                               = VCVTMagic()
@@ -98,10 +98,14 @@ class WOWEnjoyController: WOWBaseViewController {
     func categoryClick()  {
         print("全部分类")
         changeButtonState()
-        chooseStyle()
     }
     
     func changeButtonState() {
+        if isOpen {
+            backView.hidePayView()
+        }else {
+            chooseStyle()
+        }
         UIView.animate(withDuration: 0.25) { [weak self] in
             if let strongSelf = self {
                 if strongSelf.isOpen {
@@ -121,8 +125,8 @@ class WOWEnjoyController: WOWBaseViewController {
     func chooseStyle() {
         let window = UIApplication.shared.windows.last
         
-        view.addSubview(backView)
-        view.bringSubview(toFront: backView)
+        window?.addSubview(backView)
+        window?.bringSubview(toFront: backView)
         backView.show()
     }
     override func didReceiveMemoryWarning() {

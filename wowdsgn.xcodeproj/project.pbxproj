@@ -439,6 +439,7 @@
 		63546E0C1E83BD9200DB7F82 /* WOWEnjoyNavView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63546E0B1E83BD9200DB7F82 /* WOWEnjoyNavView.xib */; };
 		63546E0E1E83E1AB00DB7F82 /* WOWSelectCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63546E0D1E83E1AB00DB7F82 /* WOWSelectCategory.swift */; };
 		63546E101E84B40E00DB7F82 /* WOWSelectCategory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63546E0F1E84B40E00DB7F82 /* WOWSelectCategory.xib */; };
+		63546E121E84D0CC00DB7F82 /* WOWNewEnjoyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63546E111E84D0CC00DB7F82 /* WOWNewEnjoyController.swift */; };
 		63576E771DB5F695000C3FB6 /* WOWAboutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63576E751DB5F695000C3FB6 /* WOWAboutHeaderView.swift */; };
 		63576E781DB5F695000C3FB6 /* WOWAboutHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63576E761DB5F695000C3FB6 /* WOWAboutHeaderView.xib */; };
 		636437B91DFE82FC004BCAE0 /* WOWMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636437B81DFE82FC004BCAE0 /* WOWMessageModel.swift */; };
@@ -997,6 +998,7 @@
 		63546E0B1E83BD9200DB7F82 /* WOWEnjoyNavView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWEnjoyNavView.xib; sourceTree = "<group>"; };
 		63546E0D1E83E1AB00DB7F82 /* WOWSelectCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSelectCategory.swift; sourceTree = "<group>"; };
 		63546E0F1E84B40E00DB7F82 /* WOWSelectCategory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSelectCategory.xib; sourceTree = "<group>"; };
+		63546E111E84D0CC00DB7F82 /* WOWNewEnjoyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNewEnjoyController.swift; sourceTree = "<group>"; };
 		63576E751DB5F695000C3FB6 /* WOWAboutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAboutHeaderView.swift; sourceTree = "<group>"; };
 		63576E761DB5F695000C3FB6 /* WOWAboutHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWAboutHeaderView.xib; sourceTree = "<group>"; };
 		636437B81DFE82FC004BCAE0 /* WOWMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWMessageModel.swift; sourceTree = "<group>"; };
@@ -2298,6 +2300,7 @@
 			isa = PBXGroup;
 			children = (
 				63546E071E83BB6000DB7F82 /* WOWEnjoyController.swift */,
+				63546E111E84D0CC00DB7F82 /* WOWNewEnjoyController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3052,6 +3055,7 @@
 				069D32601DB47ADD00A059D0 /* WOWBrandListModel.swift in Sources */,
 				069D31D31DB47ADD00A059D0 /* WOWFavoriteController.swift in Sources */,
 				069D32901DB47ADD00A059D0 /* WOWSearchResultController.swift in Sources */,
+				63546E121E84D0CC00DB7F82 /* WOWNewEnjoyController.swift in Sources */,
 				069D33281DB47ADE00A059D0 /* UICollectionViewLeftAlignedLayout.m in Sources */,
 				069D33211DB47ADE00A059D0 /* SwiftWebViewProgressView.swift in Sources */,
 				069D32F41DB47ADD00A059D0 /* UIFont+Add.swift in Sources */,

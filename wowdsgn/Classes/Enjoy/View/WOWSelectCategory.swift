@@ -25,6 +25,9 @@ class WOWCategoryBackView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.frame = frame
+        backgroundColor = MaskColor
+        self.alpha = 0
         setUP()
     }
     
@@ -35,42 +38,45 @@ class WOWCategoryBackView: UIView {
     lazy var dismissButton:UIButton = {
         let b = UIButton(type: .system)
         b.backgroundColor = UIColor.clear
-        b.addTarget(self, action: #selector(hidePayView), for:.touchUpInside)
+//        b.addTarget(self, action: #selector(hidePayView), for:.touchUpInside)
         return b
     }()
     //MARK:Private Method
     fileprivate func setUP(){
-        self.frame = CGRect(x: 0, y: 0, width: self.w, height: self.h)
-        backgroundColor = MaskColor
-        self.alpha = 0
-    }
-    
-    
-    
-    //MARK:Actions
-    func show() {
-        backClear.frame = CGRect(x: 0,y: -self.h,width: self.w,height: self.h)
-        addSubview(backClear)
-
-        backClear.addSubview(payView)
+       
+        addSubview(payView)
         payView.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.top.equalTo(strongSelf).offset(0)
-                make.height.equalTo(MGScreenHeight*0.75)
+                make.height.equalTo(0)
             }
         }
-        backClear.insertSubview(dismissButton, belowSubview: payView)
+        insertSubview(dismissButton, belowSubview: payView)
         dismissButton.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.bottom.right.equalTo(strongSelf).offset(0)
                 make.top.equalTo(strongSelf.payView.snp.bottom).offset(0)
             }
         }
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
+    
+    
+    
+    //MARK:Actions
+    func show() {
+
         
+        payView.snp.updateConstraints { (make) in
+            make.height.equalTo(MGScreenHeight*0.6)
+        }
+        self.setNeedsLayout()
+
         UIView.animate(withDuration: 0.3, animations: {[weak self] in
             if let strongSelf = self {
                 strongSelf.alpha = 1
-                strongSelf.backClear.y = 0
+                strongSelf.layoutIfNeeded()
             }
             
 
@@ -83,10 +89,16 @@ class WOWCategoryBackView: UIView {
     }
     
     func hidePayView(){
+        payView.snp.updateConstraints { (make) in
+            make.height.equalTo(0)
+        }
+        self.setNeedsLayout()
+
         UIView.animate(withDuration: 0.3, animations: {[weak self] in
             if let strongSelf = self {
-                strongSelf.backClear.y = -strongSelf.h
                 strongSelf.alpha = 0
+                strongSelf.layoutIfNeeded()
+
             }
             
         }, completion: {[weak self] (ret) in

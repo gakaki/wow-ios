@@ -171,6 +171,8 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //            UIApplication.currentViewController()?.bingWorksDetail()
+        VCRedirect.bingWorksDetails()
+
     }
 }
 

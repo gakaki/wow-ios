@@ -2306,11 +2306,8 @@
 			isa = PBXGroup;
 			children = (
 				63546E071E83BB6000DB7F82 /* WOWEnjoyController.swift */,
-
 				63546E111E84D0CC00DB7F82 /* WOWNewEnjoyController.swift */,
-
 				2D1138C81E84CB7B00A78FD6 /* WOWWorksDetailsController.swift */,
-
 			);
 			path = Controller;
 			sourceTree = "<group>";

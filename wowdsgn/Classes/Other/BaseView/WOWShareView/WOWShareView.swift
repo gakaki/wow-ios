@@ -80,16 +80,34 @@ class WOWShareBackView:UIView{
         return w.window!
     }()
     
+//    lazy var sharePhotoView:UIView = {
+//        let v = Bundle.main.loadNibNamed(String(describing: SharePhotoView.self), owner: self, options: nil)?.last as! SharePhotoView
+//
+//        return v
+//    }()
+
     func show() {
         popWindow.addSubview(self)
         addSubview(backClear)
         backClear.addSubview(shareView)
+//        backClear.addSubview(sharePhotoView)
+        
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
                 make.height.equalTo(128)
             }
         }
+//        sharePhotoView.snp.makeConstraints {[weak self] (make) in
+//            if let strongSelf = self{
+//                
+//                make.centerY.equalTo(strongSelf.backClear.centerY - strongSelf.shareView.centerY)
+//                
+//                make.left.right.equalTo(strongSelf.backClear).offset(30)
+//                
+//                make.height.equalTo(260)
+//            }
+//        }
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1
             self.backClear.y = 0

@@ -397,7 +397,12 @@ public class VCRedirect {
         vc.navTitle = navTitle
         topNaVC?.pushViewController(vc, animated: true)
     }
-    
+    //优惠券可用商品
+    public class func bingWorksDetails() {
+        let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWWorksDetailsController.self)) as! WOWWorksDetailsController
+
+        topNaVC?.pushViewController(vc, animated: true)
+    }
     //    //点击跳转
     class func goToBannerTypeController(_ model: WOWCarouselBanners) {
      

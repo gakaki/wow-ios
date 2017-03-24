@@ -29,7 +29,7 @@ class WOWShareBackView:UIView{
     }
     
     lazy var backClear:UIView! = {
-        let v = UIView(frame:CGRect(x: 0, y: self.h, width: self.w,height: self.popWindow.h))
+        let v = UIView(frame:CGRect(x: 0, y: self.h, width: self.w,height: self.h))
         v.backgroundColor = UIColor.clear
         return v
     }()
@@ -80,17 +80,17 @@ class WOWShareBackView:UIView{
         return w.window!
     }()
     
-//    lazy var sharePhotoView:UIView = {
-//        let v = Bundle.main.loadNibNamed(String(describing: SharePhotoView.self), owner: self, options: nil)?.last as! SharePhotoView
-//
-//        return v
-//    }()
+    lazy var sharePhotoView:UIView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWSharePhotoView.self), owner: self, options: nil)?.last as! WOWSharePhotoView
+
+        return v
+    }()
 
     func show() {
         popWindow.addSubview(self)
         addSubview(backClear)
         backClear.addSubview(shareView)
-//        backClear.addSubview(sharePhotoView)
+        backClear.addSubview(sharePhotoView)
         
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
@@ -98,16 +98,20 @@ class WOWShareBackView:UIView{
                 make.height.equalTo(128)
             }
         }
-//        sharePhotoView.snp.makeConstraints {[weak self] (make) in
-//            if let strongSelf = self{
-//                
+        self.layoutIfNeeded()
+        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
+        sharePhotoView.snp.makeConstraints {[weak self] (make) in
+            if let strongSelf = self{
+                make.centerY.equalTo((MGScreenHeight - 128) / 2)
 //                make.centerY.equalTo(strongSelf.backClear.centerY - strongSelf.shareView.centerY)
-//                
-//                make.left.right.equalTo(strongSelf.backClear).offset(30)
-//                
+                make.centerX.equalTo(strongSelf.backClear.centerX)
+//                make.centerY.equalTo(strongSelf.backClear.centerY - strongSelf.shareView.centerY)
+//                make.top.equalTo(strongSelf.backClear).offset(30)
+                make.left.equalTo(strongSelf.backClear).offset(30)
+                make.right.equalTo(strongSelf.backClear).offset(-30)
 //                make.height.equalTo(260)
-//            }
-//        }
+            }
+        }
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1
             self.backClear.y = 0

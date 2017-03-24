@@ -39,6 +39,12 @@ class WOWWorksDetailsController: WOWBaseViewController {
     }
     @IBAction func clickShare(_ sender: Any) {
         
+//        let shareUrl = WOWShareUrl + "/topic/\(modelData?.id ?? 0)"
+//        WOWShareManager.share(modelData?.topicName, shareText: modelData?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        
+//        self.dismiss(animated: true, completion: nil)
+        WOWShareManager.sharePhoto("", shareText: "", url: "", shareImage: UIImage(named: "me_logo"))
+        
     }
     /*
     // MARK: - Navigation

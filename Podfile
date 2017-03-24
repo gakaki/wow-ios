@@ -43,6 +43,7 @@ target 'wowdsgn' do
 
 	pod 'VTMagic'
 	pod 'SDWebImage'
+    pod 'Koloda'
 
   #	pod 'Hashids-Swift'			#短id生成
   #	pod 'StyleKit'       		暂时不用

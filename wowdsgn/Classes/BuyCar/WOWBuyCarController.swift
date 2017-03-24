@@ -363,6 +363,11 @@ class WOWBuyCarController: WOWBaseViewController {
             if let strongSelf = self{
                 MobClick.e(.Delectproduct_Clicks)
                 strongSelf.dataArr.removeObject(model)
+                if strongSelf.validArr.contains(model) {
+                    
+                    strongSelf.validArr.removeObject(model)
+
+                }
                 WOWUserManager.userCarCount -= model.productQty ?? 1
                 //更新购物车数量信息
                 strongSelf.updateCarCountBadge()

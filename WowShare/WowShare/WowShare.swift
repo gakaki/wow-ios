@@ -64,30 +64,31 @@ public class WowShare {
         return result
     }
     
-    public static func share_WechatFriendsImg(url:String?,
-                                              shareImage:Any!,
-                                              successClosure:@escaping ShareSuccessClosure,
-                                              failClosure:@escaping ShareFailClosure){
-        var messageObject                       = UMSocialMessageObject()
-        let shareObject:UMShareImageObject    = UMShareImageObject.init()
-
-    
-        shareObject.thumbImage = UIImage.init(named: "5")
-        shareObject.shareImage = "https://mobile.umeng.com/images/pic/home/social/img-1.png"
-         messageObject.shareObject               = shareObject
-        
-       UMSocialManager.default().share(to: UMSocialPlatformType.wechatTimeLine, messageObject: messageObject, currentViewController: self) { (shareResponse, error) in
-            var message: String = ""
-            if let e = error {
-                
-                failClosure(e )
-            }else{
-         
-                successClosure()
-            }
-
-        }
-    }
+//    public static func share_WechatFriendsImg(url:String?,
+//                                              shareImage:Any!,
+//                                              type:UMSocialPlatformType = .wechatTimeLine,
+//                                              successClosure:@escaping ShareSuccessClosure,
+//                                              failClosure:@escaping ShareFailClosure){
+//        var messageObject                       = UMSocialMessageObject()
+//        let shareObject:UMShareImageObject    = UMShareImageObject.init()
+//
+//    
+//        shareObject.thumbImage = shareImage
+//        shareObject.shareImage = url
+//         messageObject.shareObject               = shareObject
+//        
+//       UMSocialManager.default().share(to: type, messageObject: messageObject, currentViewController: self) { (shareResponse, error) in
+//            var message: String = ""
+//            if let e = error {
+//                
+//                failClosure(e )
+//            }else{
+//         
+//                successClosure()
+//            }
+//
+//        }
+//    }
     public static func share_friends(
         _ title:String = "尖叫设计欢迎您",
         shareText:String?,

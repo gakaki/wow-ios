@@ -30,7 +30,16 @@ class WOWWorksDetailsController: WOWBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func clickPraise(_ sender: Any) {
+        
+    }
 
+    @IBAction func clickCollection(_ sender: Any) {
+        
+    }
+    @IBAction func clickShare(_ sender: Any) {
+        
+    }
     /*
     // MARK: - Navigation
 

@@ -27,6 +27,7 @@ class WOWEnjoyController: WOWBaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+          backView.hidePayView()
         //        self.navigationShadowImageView?.isHidden = false
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }

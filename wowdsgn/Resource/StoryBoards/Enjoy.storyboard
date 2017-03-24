@@ -12,7 +12,7 @@
         <!--Works Details Controller-->
         <scene sceneID="9a7-bm-5OI">
             <objects>
-                <viewController id="aAn-1Z-NjH" customClass="WOWWorksDetailsController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWWorksDetailsController" id="aAn-1Z-NjH" customClass="WOWWorksDetailsController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xfl-yP-NS0"/>
                         <viewControllerLayoutGuide type="bottom" id="Hvo-3r-i9v"/>
@@ -35,10 +35,16 @@
                                             <constraint firstAttribute="width" constant="46" id="qf6-EH-sUe"/>
                                         </constraints>
                                         <state key="normal" title="点赞"/>
+                                        <connections>
+                                            <action selector="clickPraise:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="PWq-si-2Aw"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSA-8l-fbg">
                                         <rect key="frame" x="171.5" y="7" width="31" height="30"/>
                                         <state key="normal" title="收藏"/>
+                                        <connections>
+                                            <action selector="clickCollection:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="EIN-4v-wm8"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXe-aW-8ul">
                                         <rect key="frame" x="284" y="7" width="46" height="30"/>
@@ -47,6 +53,9 @@
                                             <constraint firstAttribute="height" constant="30" id="qBZ-9h-qXJ"/>
                                         </constraints>
                                         <state key="normal" title="分享"/>
+                                        <connections>
+                                            <action selector="clickShare:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="1ZP-I5-Y4W"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

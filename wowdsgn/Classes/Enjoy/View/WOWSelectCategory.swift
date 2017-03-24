@@ -115,7 +115,7 @@ class WOWCategoryBackView: UIView {
 class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    let cellID = String(describing: WOWRemissionNameCell.self)
+    let cellID = String(describing: WOWSelectCategoryCell.self)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -134,7 +134,7 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
         
     }
     fileprivate func configTable(){
-        tableView.estimatedRowHeight = 30
+        tableView.estimatedRowHeight = 49
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.register(UINib.nibName(cellID), forCellReuseIdentifier:cellID)
         tableView.delegate = self
@@ -145,29 +145,30 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWRemissionNameCell
-        cell.productNameLabel.text = "ceshi"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWSelectCategoryCell
+        
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let v = Bundle.main.loadNibNamed(String(describing: WOWRemissionHeaderView.self), owner: self, options: nil)?.last as! WOWRemissionHeaderView
-        v.promotionLabel.text = "全部分类"
+        let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
+        v.labelText.text = "全部分类"
         return v
         
     }
     
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
+        return 40
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //            UIApplication.currentViewController()?.bingWorksDetail()

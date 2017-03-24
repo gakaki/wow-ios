@@ -30,7 +30,8 @@ struct WOWShareManager {
                     failClosure: { e in
                         share_cancel_deal(e)
                 })
-                
+//                WowShare.share_WechatFriendsImg()
+//                WowShare.share_WechatFriendsImg()
                 
                return
             case .wechat:

@@ -66,39 +66,39 @@ struct WOWShareManager {
     }
  
     
-    public static func sharePhoto(_ title:String?,shareText:String?,url:String?,shareImage:Any!){
-        shareBackView.show()
-        
-        shareBackView.shareActionBack = {(shareType:WOWShareType)in
-            switch shareType {
-            case .friends:
-                
-                WowShare.share_WechatFriendsImg(url: url, shareImage: shareImage, successClosure: {
-                    
-                    WOWHud.showMsg("分享成功")
-                    
-                }, failClosure: { (e) in
-                    
-                    share_cancel_deal(e)
-                    
-                })
-
-                
-                
-                return
-            case .wechat:
-                
-                WowShare.share_WechatFriendsImg(url: url, shareImage: shareImage, type: .wechatSession, successClosure: {
-                         WOWHud.showMsg("分享成功")
-                }, failClosure: { (e) in
-                      share_cancel_deal(e)
-                })
-                
-                return
-            }
-            
-        }
-    }
+//    public static func sharePhoto(_ title:String?,shareText:String?,url:String?,shareImage:Any!){
+//        shareBackView.show()
+//        
+//        shareBackView.shareActionBack = {(shareType:WOWShareType)in
+//            switch shareType {
+//            case .friends:
+//                
+//                WowShare.share_WechatFriendsImg(url: url, shareImage: shareImage, successClosure: {
+//                    
+//                    WOWHud.showMsg("分享成功")
+//                    
+//                }, failClosure: { (e) in
+//                    
+//                    share_cancel_deal(e)
+//                    
+//                })
+//
+//                
+//                
+//                return
+//            case .wechat:
+//                
+//                WowShare.share_WechatFriendsImg(url: url, shareImage: shareImage, type: .wechatSession, successClosure: {
+//                         WOWHud.showMsg("分享成功")
+//                }, failClosure: { (e) in
+//                      share_cancel_deal(e)
+//                })
+//                
+//                return
+//            }
+//            
+//        }
+//    }
 
     
     public static func shareUrl(_ title:String?,shareText:String?,url:String?,shareImage:Any!){

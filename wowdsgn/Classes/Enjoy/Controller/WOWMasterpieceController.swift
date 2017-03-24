@@ -11,7 +11,7 @@ import UIKit
 class WOWMasterpieceController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     let cellID = String(describing: WOWMasterpieceCell.self)
-
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,13 @@ class WOWMasterpieceController: WOWBaseViewController {
         self.tableView.backgroundColor = UIColor.white
         self.tableView.separatorColor = UIColor.white
         
+    }
+    
+    //MARK: -- Action
+    //发布
+    @IBAction func publishAction(_ sender: UIButton) {
+    
+    
     }
        override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -18,33 +18,29 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide1" translatesAutoresizingMaskIntoConstraints="NO" id="onv-Ld-ip0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="214.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="219.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="214.5" id="cy5-0z-ka2"/>
+                            <constraint firstAttribute="height" constant="219.5" id="jV7-tv-s0l"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分类名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcK-IJ-8BN">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="分类名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcK-IJ-8BN">
                         <rect key="frame" x="22" y="167" width="76" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="76" id="AWG-KO-pbO"/>
-                            <constraint firstAttribute="height" constant="21" id="jWl-Ty-RX2"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="AcK-IJ-8BN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="5qA-H0-NZF"/>
-                    <constraint firstItem="onv-Ld-ip0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8KN-MQ-hfH"/>
-                    <constraint firstItem="onv-Ld-ip0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KbK-0O-Mvm"/>
-                    <constraint firstAttribute="trailing" secondItem="onv-Ld-ip0" secondAttribute="trailing" id="qff-x5-g47"/>
-                    <constraint firstAttribute="bottom" secondItem="onv-Ld-ip0" secondAttribute="bottom" constant="15" id="uMh-bh-IX4"/>
-                    <constraint firstAttribute="bottom" secondItem="AcK-IJ-8BN" secondAttribute="bottom" constant="41" id="vGa-8W-PR5"/>
+                    <constraint firstItem="onv-Ld-ip0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7Sp-Lj-bwW"/>
+                    <constraint firstAttribute="bottom" secondItem="AcK-IJ-8BN" secondAttribute="bottom" constant="41" id="BtL-o7-Yl2"/>
+                    <constraint firstItem="AcK-IJ-8BN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="gEG-Lp-SF1"/>
+                    <constraint firstAttribute="bottom" secondItem="onv-Ld-ip0" secondAttribute="bottom" constant="10" id="i8E-dF-cx9"/>
+                    <constraint firstAttribute="trailing" secondItem="onv-Ld-ip0" secondAttribute="trailing" id="lQC-mS-dUz"/>
+                    <constraint firstItem="onv-Ld-ip0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="osJ-mR-9eR"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="heightConstraint" destination="cy5-0z-ka2" id="tGl-4B-jQ9"/>
+                <outlet property="heightConstraint" destination="jV7-tv-s0l" id="wiS-Jf-wT2"/>
             </connections>
             <point key="canvasLocation" x="35" y="66"/>
         </tableViewCell>

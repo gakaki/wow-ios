@@ -66,7 +66,7 @@ class WOWPayBackView: UIView {
             }
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: { [unowned self] in
             self.alpha = 1
             self.backClear.y = 0
         }) 
@@ -80,7 +80,7 @@ class WOWPayBackView: UIView {
     }
     
     func hidePayView(){
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: { [unowned self] in
             self.backClear.y = self.h + 10
             self.alpha = 0
         }, completion: { (ret) in

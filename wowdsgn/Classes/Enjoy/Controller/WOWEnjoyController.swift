@@ -14,8 +14,8 @@ class WOWEnjoyController: WOWBaseViewController {
     
     var v : VCVTMagic!
     
-    var vc_product:WOWNewEnjoyController?
-    var vc_brand:WOWFavBrand?
+    var vc_newEnjoy:WOWNewEnjoyController?
+    var vc_masterpiece:WOWMasterpieceController?
     var isOpen: Bool = false
     
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class WOWEnjoyController: WOWBaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-          backView.hidePayView()
+         
         //        self.navigationShadowImageView?.isHidden = false
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -43,6 +43,7 @@ class WOWEnjoyController: WOWBaseViewController {
     }()
     lazy var backView:WOWCategoryBackView = {
         let v = WOWCategoryBackView(frame:CGRect(x: 0,y: 64,width: MGScreenWidth,height: MGScreenHeight - 64))
+        v.selectView.delegate = self
         return v
     }()
     
@@ -75,8 +76,8 @@ class WOWEnjoyController: WOWBaseViewController {
         }
         
         
-        vc_product    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWNewEnjoyController.self)) as? WOWNewEnjoyController
-        vc_brand    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as? WOWFavBrand
+        vc_newEnjoy    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWNewEnjoyController.self)) as? WOWNewEnjoyController
+        vc_masterpiece    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWMasterpieceController.self)) as? WOWMasterpieceController
         
         v.magicView.reloadData()
     }
@@ -127,7 +128,7 @@ class WOWEnjoyController: WOWBaseViewController {
     }
     func changeButtonState() {
         if isOpen {
-            backView.hidePayView()
+            backView.hideView()
         }else {
             chooseStyle()
         }
@@ -146,7 +147,7 @@ class WOWEnjoyController: WOWBaseViewController {
         isOpen = !isOpen
     }
     
-    //MARK: - 弹出选择支付窗口
+    //MARK: - 弹出选择分类窗口
     func chooseStyle() {
         let window = UIApplication.shared.windows.last
         
@@ -185,7 +186,7 @@ extension WOWEnjoyController:TZImagePickerControllerDelegate,PhotoTweaksViewCont
 
 }
 
-extension WOWEnjoyController:VTMagicViewDataSource{
+extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
     
     var identifier_magic_view_bar_item : String {
         get {
@@ -232,17 +233,14 @@ extension WOWEnjoyController:VTMagicViewDataSource{
         if (vc == nil) {
             
             if (pageIndex == 0){
-                return vc_brand!
+                return vc_masterpiece!
             }else if (pageIndex == 1){
-                return vc_product!
+                return vc_newEnjoy!
             }
         }
         
         return vc!
     }
-}
-
-extension WOWEnjoyController:VTMagicViewDelegate{
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         print("viewDidAppear:", pageIndex);
         
@@ -265,5 +263,11 @@ extension WOWEnjoyController:VTMagicViewDelegate{
         print("didSelectItemAtIndex:", itemIndex);
         
     }
+}
+
+extension WOWEnjoyController:WOWSelectCategoryDelegate{
     
+    func selectCategory() {
+       changeButtonState()
+    }
 }

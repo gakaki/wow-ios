@@ -98,28 +98,31 @@ class WOWShareBackView:UIView{
                 make.height.equalTo(128)
             }
         }
+
         self.layoutIfNeeded()
         print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
         sharePhotoView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.centerY.equalTo((MGScreenHeight - 128) / 2)
-//                make.centerY.equalTo(strongSelf.backClear.centerY - strongSelf.shareView.centerY)
+
                 make.centerX.equalTo(strongSelf.backClear.centerX)
-//                make.centerY.equalTo(strongSelf.backClear.centerY - strongSelf.shareView.centerY)
-//                make.top.equalTo(strongSelf.backClear).offset(30)
+
                 make.left.equalTo(strongSelf.backClear).offset(30)
                 make.right.equalTo(strongSelf.backClear).offset(-30)
-//                make.height.equalTo(260)
+
+
             }
         }
-        UIView.animate(withDuration: 0.3, animations: {
+
+        UIView.animate(withDuration: 0.3, animations: { [unowned self] in
+
             self.alpha = 1
             self.backClear.y = 0
         }) 
     }
     
     func dismiss() {
-        UIView.animate(withDuration: 0.3,animations: {
+        UIView.animate(withDuration: 0.3,animations: { [unowned self] in
             self.alpha = 0
             self.backClear.y = MGScreenHeight + 10;
         }, completion: { (ret) in

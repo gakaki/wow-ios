@@ -11,7 +11,7 @@ import UIKit
 
 class WOWCategoryBackView: UIView {
     //MARK:Lazy
-    lazy var payView:WOWSelectCategory = {
+    lazy var selectView:WOWSelectCategory = {
         let v = Bundle.loadResourceName(String(describing: WOWSelectCategory.self)) as! WOWSelectCategory
         v.isUserInteractionEnabled = true
         return v
@@ -44,18 +44,18 @@ class WOWCategoryBackView: UIView {
     //MARK:Private Method
     fileprivate func setUP(){
        
-        addSubview(payView)
-        payView.snp.makeConstraints {[weak self](make) in
+        addSubview(selectView)
+        selectView.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.right.top.equalTo(strongSelf).offset(0)
                 make.height.equalTo(0)
             }
         }
-        insertSubview(dismissButton, belowSubview: payView)
+        insertSubview(dismissButton, belowSubview: selectView)
         dismissButton.snp.makeConstraints {[weak self](make) in
             if let strongSelf = self{
                 make.left.bottom.right.equalTo(strongSelf).offset(0)
-                make.top.equalTo(strongSelf.payView.snp.bottom).offset(0)
+                make.top.equalTo(strongSelf.selectView.snp.bottom).offset(0)
             }
         }
         self.setNeedsLayout()
@@ -68,7 +68,7 @@ class WOWCategoryBackView: UIView {
     func show() {
 
         
-        payView.snp.updateConstraints { (make) in
+        selectView.snp.updateConstraints { (make) in
             make.height.equalTo(MGScreenHeight*0.6)
         }
         self.setNeedsLayout()
@@ -85,11 +85,11 @@ class WOWCategoryBackView: UIView {
     
     func closeButtonClick()  {
   
-        hidePayView()
+        hideView()
     }
     
-    func hidePayView(){
-        payView.snp.updateConstraints { (make) in
+    func hideView(){
+        selectView.snp.updateConstraints { (make) in
             make.height.equalTo(0)
         }
         self.setNeedsLayout()
@@ -111,11 +111,17 @@ class WOWCategoryBackView: UIView {
     
     
 }
+protocol WOWSelectCategoryDelegate:class {
 
+    //选择分类
+    func selectCategory()
+}
 class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     let cellID = String(describing: WOWSelectCategoryCell.self)
+    weak var delegate: WOWSelectCategoryDelegate?
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -171,6 +177,9 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
         return 40
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let del = delegate {
+            del.selectCategory()
+        }
 //            UIApplication.currentViewController()?.bingWorksDetail()
 //        VCRedirect.bingWorksDetails()
 //

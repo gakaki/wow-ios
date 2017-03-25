@@ -256,3 +256,9 @@ let URL_Deferreddeeplink        = "v1/deferreddeeplink"
 //领取优惠券
 let URL_CouponObtain            = "v1/user/coupon/obtain"
 
+//欣赏
+
+let URL_GetCategory             = "v1/instagram/category"       //获取分类列表
+
+let URL_GetInstagram            = "v1/instagram"                //获取图片列表
+

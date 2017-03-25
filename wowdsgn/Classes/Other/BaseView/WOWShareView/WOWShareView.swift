@@ -80,9 +80,9 @@ class WOWShareBackView:UIView{
         return w.window!
     }()
     
-    lazy var sharePhotoView:UIView = {
+    lazy var sharePhotoView:WOWSharePhotoView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWSharePhotoView.self), owner: self, options: nil)?.last as! WOWSharePhotoView
-
+        v.lbMyName.text =  WOWUserManager.userName
         return v
     }()
 
@@ -90,7 +90,7 @@ class WOWShareBackView:UIView{
         popWindow.addSubview(self)
         addSubview(backClear)
         backClear.addSubview(shareView)
-        backClear.addSubview(sharePhotoView)
+//        backClear.addSubview(sharePhotoView)
         
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
@@ -100,19 +100,19 @@ class WOWShareBackView:UIView{
         }
 
         self.layoutIfNeeded()
-        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
-        sharePhotoView.snp.makeConstraints {[weak self] (make) in
-            if let strongSelf = self{
-                make.centerY.equalTo((MGScreenHeight - 128) / 2)
-
-                make.centerX.equalTo(strongSelf.backClear.centerX)
-
-                make.left.equalTo(strongSelf.backClear).offset(30)
-                make.right.equalTo(strongSelf.backClear).offset(-30)
-
-
-            }
-        }
+//        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
+//        sharePhotoView.snp.makeConstraints {[weak self] (make) in
+//            if let strongSelf = self{
+//                make.centerY.equalTo((MGScreenHeight - 128) / 2)
+//
+//                make.centerX.equalTo(strongSelf.backClear.centerX)
+//
+//                make.left.equalTo(strongSelf.backClear).offset(30)
+//                make.right.equalTo(strongSelf.backClear).offset(-30)
+//
+//
+//            }
+//        }
 
         UIView.animate(withDuration: 0.3, animations: { [unowned self] in
 
@@ -121,11 +121,57 @@ class WOWShareBackView:UIView{
         }) 
     }
     
+    func showPhotoImg(img:UIImage) {
+        popWindow.addSubview(self)
+        addSubview(backClear)
+        backClear.addSubview(shareView)
+        backClear.addSubview(sharePhotoView)
+        
+        sharePhotoView.imgPhoto.image = img
+        
+        shareView.snp.makeConstraints {[weak self] (make) in
+            if let strongSelf = self{
+                make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
+                make.height.equalTo(128)
+            }
+        }
+        
+        self.layoutIfNeeded()
+        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
+        
+        sharePhotoView.snp.makeConstraints {[weak self] (make) in
+            if let strongSelf = self{
+                make.centerY.equalTo((MGScreenHeight - 128) / 2)
+                
+                make.centerX.equalTo(strongSelf.backClear.centerX)
+                
+                make.left.equalTo(strongSelf.backClear).offset(30)
+                make.right.equalTo(strongSelf.backClear).offset(-30)
+                
+                
+            }
+        }
+       
+      
+        sharePhotoView.heightImgConstraint.constant = sharePhotoView.mj_w
+        
+          sharePhotoView.layoutIfNeeded()
+         self.layoutIfNeeded()
+//        self.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.3, animations: { [unowned self] in
+            
+            self.alpha = 1
+            self.backClear.y = 0
+        }) 
+    }
     func dismiss() {
         UIView.animate(withDuration: 0.3,animations: { [unowned self] in
             self.alpha = 0
             self.backClear.y = MGScreenHeight + 10;
         }, completion: { (ret) in
+            self.backClear.removeFromSuperview()
+            
             self.removeFromSuperview()
         })
     }

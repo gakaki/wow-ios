@@ -95,6 +95,35 @@ class WOWUploadManager {
         }
         
     }
+    // 上传分享的图片
+    static  func uploadShareImg(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
+        // 压缩图片
+//        let photoImage = imageCompressForWidth(sourceImage: image, targetWidth: 200)
+        //          拼接唯一字符串
+        let qiniu_key  = QiniuBucket.UserPhoto.rawValue + onlyStr()
+        
+        PushImage(image, imagePath: qiniu_key, successClosure: { (url) in
+            // 保存用户URL
+            if let url = url {
+                
+                let serverUrl = url + "?v=" + onlyStr() // 由于七牛云服务器的图片缓存问题， 所以在传给后台的时候， 要 拼上 ?v= XXX 这样的格式，确保从七牛读取图片时，拿到的最新的图片data ,同时本地也是如此
+    
+                
+                successClosure(serverUrl)
+                
+            }else{
+                print("上传头像格式错误")
+            }
+            
+            
+        }) { (errorMsg) in
+            
+            WOWHud.showMsg("上传图片失败")
+            
+        }
+        
+    }
+    
 
     // 发布评论 上传图片 GCD 分组  pushQiniuPath ： 上传至七牛服务器的 路径， 默认为 商品评论的路径，
     static func pushCommentPhotos(_ images:[imageInfo],pushQiNiuPath:QiniuBucket = .UserShopComment,successClosure:@escaping PushImgURLs){

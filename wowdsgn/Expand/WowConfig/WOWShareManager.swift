@@ -67,33 +67,46 @@ struct WOWShareManager {
  
     
     public static func sharePhoto(_ title:String?,shareText:String?,url:String?,shareImage:Any!){
-        shareBackView.show()
+        shareBackView.showPhotoImg(img: shareImage as! UIImage)
+        let pushlishImg = shareBackView.sharePhotoView.createViewImage()
+        var  pushLishUrl = ""
+       
+        
         
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
-            switch shareType {
-            case .friends:
+            
+            WOWUploadManager.uploadShareImg(pushlishImg, successClosure: { (url) in
+                pushLishUrl = url!
                 
-                WowShare.share_WechatFriendsImg(url: url, shareImage: shareImage, successClosure: {
+                switch shareType {
+                case .friends:
                     
-                    WOWHud.showMsg("分享成功")
+                    WowShare.share_WechatFriendsImg(url: pushLishUrl, shareImage: pushlishImg, successClosure: {
+                        
+                        WOWHud.showMsg("分享成功")
+                        
+                    }, failClosure: { (e) in
+                        
+                        share_cancel_deal(e)
+                        
+                    })
                     
-                }, failClosure: { (e) in
+                    return
+                case .wechat:
                     
-                    share_cancel_deal(e)
+                    WowShare.share_WechatImg(url: pushLishUrl, shareImage: pushlishImg, successClosure: {
+                        WOWHud.showMsg("分享成功")
+                    }, failClosure: { (e) in
+                        share_cancel_deal(e)
+                    })
                     
-                })
-                
-                return
-            case .wechat:
-                
-                WowShare.share_WechatImg(url: url, shareImage: shareImage, successClosure: {
-                         WOWHud.showMsg("分享成功")
-                }, failClosure: { (e) in
-                      share_cancel_deal(e)
-                })
-                
-                return
+                    return
+                }
+
+            }) { (error) in
+                print("shibai")
             }
+            
             
         }
     }

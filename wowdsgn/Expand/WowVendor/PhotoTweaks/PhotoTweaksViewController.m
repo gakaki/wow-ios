@@ -40,25 +40,17 @@
 //        self.automaticallyAdjustsScrollViewInsets = NO;
 //    }
     self.title = @"编辑图片";
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0,0,60,30)];
+
     
-    [button setTitle:@"返回" forState:UIControlStateNormal];
-    
-    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    
-    button.titleLabel.font = [UIFont systemFontOfSize:12];
-    
-    [button addTarget:self action:@selector(cancelBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_backArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelBtnTapped)];
     
     UIButton *regihtbutton = [[UIButton alloc] initWithFrame:CGRectMake(0,0,60,30)];
     
     [regihtbutton setTitle:@"下一步" forState:UIControlStateNormal];
     
-    [regihtbutton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [regihtbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    regihtbutton.titleLabel.font = [UIFont systemFontOfSize:12];
+    regihtbutton.titleLabel.font = [UIFont systemFontOfSize:14];
     
     [regihtbutton addTarget:self action:@selector(saveBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     

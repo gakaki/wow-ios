@@ -32,17 +32,17 @@
 
 + (UIColor *)resetButtonColor
 {
-    return [UIColor colorWithRed:0.09 green:0.49 blue:1 alpha:1];
+    return [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1];
 }
 
 + (UIColor *)resetButtonHighlightedColor
 {
-    return [UIColor colorWithRed:0.11 green:0.17 blue:0.26 alpha:1];
+    return [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1];
 }
 
 + (UIColor *)maskColor
 {
-    return [UIColor colorWithWhite:0.0 alpha:0.6];
+    return  [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
 }
 
 + (UIColor *)cropLineColor

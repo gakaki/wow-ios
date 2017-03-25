@@ -11,23 +11,21 @@
 #import "UIView+Extension.h"
 #import <math.h>
 #import "UIButton+ImageTitleStyle.h"
-#define DV_W ([UIScreen mainScreen].bounds.size.width)
-#define DV_H ([UIScreen mainScreen].bounds.size.height)
+#define CX_W ([UIScreen mainScreen].bounds.size.width)
+#define CX_H ([UIScreen mainScreen].bounds.size.height)
 const CGFloat kMaxRotationAngle = 0.5;
 static const NSUInteger kCropLines = 2;
-static const NSUInteger kGridLines = 9;
 
-static const CGFloat kCropViewHotArea = 16;
-static const CGFloat kMinimumCropArea = 60;
+
 static const CGFloat kMaximumCanvasWidthRatio = 1;
-static const CGFloat kMaximumCanvasHeightRatio = 0.7;
-static const CGFloat kCanvasHeaderHeigth = 40;
+
 static const CGFloat kCropViewCornerLength = 22;
 
-static CGFloat distanceBetweenPoints(CGPoint point0, CGPoint point1)
-{
-    return sqrt(pow(point1.x - point0.x, 2) + pow(point1.y - point0.y, 2));
-}
+static const float singDegree = 1.0; // 一个刻度代表多少度
+static const int minDegree = -45; //  最小刻度
+static const int maxDegree = 45; // 最大刻度
+
+
 
 //#define kInstruction
 
@@ -113,7 +111,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         UIView *horizontal = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kCropViewCornerLength, lineWidth)];
         horizontal.backgroundColor = [UIColor cropLineColor];
         [self addSubview:horizontal];
-  
+        
         UIView *vertical = [[UIView alloc] initWithFrame:CGRectMake(0, 0, lineWidth, kCropViewCornerLength)];
         vertical.backgroundColor = [UIColor cropLineColor];
         [self addSubview:vertical];
@@ -183,25 +181,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
             [self addSubview:line];
         }
         
-//        _horizontalGridLines = [NSMutableArray array];
-//        for (int i = 0; i < kGridLines; i++) {
-//            UIView *line = [UIView new];
-//            line.backgroundColor = [UIColor gridLineColor];
-//            [_horizontalGridLines addObject:line];
-//            [self addSubview:line];
-//        }
-//        
-//        _verticalGridLines = [NSMutableArray array];
-//        for (int i = 0; i < kGridLines; i++) {
-//            UIView *line = [UIView new];
-//            line.backgroundColor = [UIColor gridLineColor];
-//            [_verticalGridLines addObject:line];
-//            [self addSubview:line];
-//        }
-
         
-        
-//        _cropLinesDismissed = YES;
         _gridLinesDismissed = YES;
         
         _upperLeft = [[CropCornerView alloc] initWithCornerType:CropCornerTypeUpperLeft];
@@ -223,113 +203,18 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         _lowerLeft.center = CGPointMake(kCropViewCornerLength / 2, self.frame.size.height - kCropViewCornerLength / 2);
         _lowerLeft.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
         [self addSubview:_lowerLeft];
-         [self showCropLines];
+        [self showCropLines];
     }
     return self;
 }
 
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    if ([touches count] == 1) {
-//        [self updateCropLines:NO];
-//    }
-//}
-//
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    if ([touches count] == 1) {
-//        CGPoint location = [[touches anyObject] locationInView:self];
-//        CGRect frame = self.frame;
-//        
-//        CGPoint p0 = CGPointMake(0, 0);
-//        CGPoint p1 = CGPointMake(self.frame.size.width, 0);
-//        CGPoint p2 = CGPointMake(0, self.frame.size.height);
-//        CGPoint p3 = CGPointMake(self.frame.size.width, self.frame.size.height);
-//        
-//        BOOL canChangeWidth = frame.size.width > kMinimumCropArea;
-//        BOOL canChangeHeight = frame.size.height > kMinimumCropArea;
-//        
-//        if (distanceBetweenPoints(location, p0) < kCropViewHotArea) {
-//            if (canChangeWidth) {
-//                frame.origin.x += location.x;
-//                frame.size.width -= location.x;
-//            }
-//            if (canChangeHeight) {
-//                frame.origin.y += location.y;
-//                frame.size.height -= location.y;
-//            }
-//        } else if (distanceBetweenPoints(location, p1) < kCropViewHotArea) {
-//            if (canChangeWidth) {
-//                frame.size.width = location.x;
-//            }
-//            if (canChangeHeight) {
-//                frame.origin.y += location.y;
-//                frame.size.height -= location.y;
-//            }
-//        } else if (distanceBetweenPoints(location, p2) < kCropViewHotArea) {
-//            if (canChangeWidth) {
-//                frame.origin.x += location.x;
-//                frame.size.width -= location.x;
-//            }
-//            if (canChangeHeight) {
-//                frame.size.height = location.y;
-//            }
-//        } else if (distanceBetweenPoints(location, p3) < kCropViewHotArea) {
-//            if (canChangeWidth) {
-//                frame.size.width = location.x;
-//            }
-//            if (canChangeHeight) {
-//                frame.size.height = location.y;
-//            }
-//        } else if (fabs(location.x - p0.x) < kCropViewHotArea) {
-//            if (canChangeWidth) {
-//                frame.origin.x += location.x;
-//                frame.size.width -= location.x;
-//            }
-//        } else if (fabs(location.x - p1.x) < kCropViewHotArea) {
-//            if (canChangeWidth) {
-//                frame.size.width = location.x;
-//            }
-//        } else if (fabs(location.y - p0.y) < kCropViewHotArea) {
-//            if (canChangeHeight) {
-//                frame.origin.y += location.y;
-//                frame.size.height -= location.y;
-//            }
-//        } else if (fabs(location.y - p2.y) < kCropViewHotArea) {
-//            if (canChangeHeight) {
-//                frame.size.height = location.y;
-//            }
-//        }
-//        
-//        self.frame = frame;
-//        
-//        // update crop lines
-//        [self updateCropLines:NO];
-//        
-//        if ([self.delegate respondsToSelector:@selector(cropMoved:)]) {
-//            [self.delegate cropMoved:self];
-//        }
-//    }
-//}
-//
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    if ([self.delegate respondsToSelector:@selector(cropEnded:)]) {
-//        [self.delegate cropEnded:self];
-//    }
-//}
-//
-//- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    
-//}
-//
+
 - (void)updateCropLines:(BOOL)animate
 {
     // show crop lines
-//    if (self.cropLinesDismissed) {
-        [self showCropLines];
-//    }
+    //    if (self.cropLinesDismissed) {
+    [self showCropLines];
+    //    }
     
     void (^animationBlock)(void) = ^(void) {
         [self updateLines:self.horizontalCropLines horizontal:YES];
@@ -353,7 +238,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     void (^animationBlock)(void) = ^(void) {
         
         [self updateLines:self.horizontalGridLines horizontal:YES];
-//        [self updateLines:self.verticalGridLines horizontal:NO];
+        //        [self updateLines:self.verticalGridLines horizontal:NO];
     };
     
     if (animate) {
@@ -387,7 +272,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         [self dismissLines:self.horizontalCropLines];
         [self dismissLines:self.verticalCropLines];
     } completion:^(BOOL finished) {
-//        self.cropLinesDismissed = YES;
+        //        self.cropLinesDismissed = YES;
     }];
 }
 
@@ -395,7 +280,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 {
     [UIView animateWithDuration:0.2 animations:^{
         [self dismissLines:self.horizontalGridLines];
-//        [self dismissLines:self.verticalGridLines];
+        //        [self dismissLines:self.verticalGridLines];
     } completion:^(BOOL finished) {
         self.gridLinesDismissed = YES;
     }];
@@ -410,7 +295,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 
 - (void)showCropLines
 {
-//    self.cropLinesDismissed = NO;
+    //    self.cropLinesDismissed = NO;
     [UIView animateWithDuration:0.2 animations:^{
         [self showLines:self.horizontalCropLines];
         [self showLines:self.verticalCropLines];
@@ -422,7 +307,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     self.gridLinesDismissed = NO;
     [UIView animateWithDuration:0.2 animations:^{
         [self showLines:self.horizontalGridLines];
-//        [self showLines:self.verticalGridLines];
+        //        [self showLines:self.verticalGridLines];
     }];
 }
 
@@ -454,7 +339,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 
 @property (nonatomic, assign) CGSize originalSize;
 @property (nonatomic, assign) CGFloat angle;
-
+@property (nonatomic, assign)   float changeDegree; // scrollView 移动1px对应的改变角度
 @property (nonatomic, assign) BOOL manualZoomed; // 手动缩放
 @property (nonatomic, strong) NSMutableArray *proportionBtns;
 @property (nonatomic, strong) UIButton *cropBtn;
@@ -464,7 +349,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 @property (nonatomic, strong) UIView *leftMask;
 @property (nonatomic, strong) UIView *bottomMask;
 @property (nonatomic, strong) UIView *rightMask;
-
+@property (nonatomic, strong) UIView *centerView; // 中间指示条
 // constants
 @property (nonatomic, assign) CGSize maximumCanvasSize;
 @property (nonatomic, assign) CGFloat centerY;
@@ -500,8 +385,8 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         
         _scrollView = [[PhotoScrollView alloc] initWithFrame:bounds];
         _scrollView.center = CGPointMake(CGRectGetWidth(self.frame) / 2, self.centerY);
-//        _scrollView.bounces = YES;
-//        _scrollView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        //        _scrollView.bounces = YES;
+        //        _scrollView.layer.anchorPoint = CGPointMake(0.5, 0.5);
         _scrollView.alwaysBounceVertical = YES;
         _scrollView.alwaysBounceHorizontal = YES;
         _scrollView.delegate = self;
@@ -510,7 +395,8 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.clipsToBounds = NO;
-        _scrollView.backgroundColor = [UIColor redColor];
+        _scrollView.backgroundColor = [UIColor blackColor];
+        
         _scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, self.scrollView.bounds.size.height);
         [self addSubview:_scrollView];
 #ifdef kInstruction
@@ -522,8 +408,8 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         
         _photoContentView = [[PhotoContentView alloc] initWithImage:image];// 存放 image 的View
         _photoContentView.frame = self.scrollView.bounds;
-//        _photoContentView.center = self.scrollView.center;
-        _photoContentView.backgroundColor = [UIColor blueColor];
+        //        _photoContentView.center = self.scrollView.center;
+        //        _photoContentView.backgroundColor = [UIColor blueColor];
         _photoContentView.userInteractionEnabled = YES;
         _scrollView.photoContentView = self.photoContentView;
         [self.scrollView addSubview:_photoContentView];
@@ -549,34 +435,36 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         [self updateMasks:NO];
         
         _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.mj_h - 395)];
-        _bottomView.backgroundColor = [UIColor blueColor];
-        _bottomView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, _centerY + (DV_W / 2) + (_bottomView.mj_h / 2) + 10 );
+        _bottomView.backgroundColor = [UIColor whiteColor];
+        _bottomView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, _centerY + (CX_W / 2) + (_bottomView.mj_h / 2) + 10 );
         [self addSubview:_bottomView];
         
         _cropBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cropBtn.frame = CGRectMake(30, 0, 30, 30);
-
-
+        _cropBtn.frame = CGRectMake(30, 20, 30, 30);
+        _cropBtn.center =  CGPointMake(CX_W / 2 + 35, 35);
+        
+        
         [_cropBtn addTarget:self action:@selector(cropBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
         [_cropBtn setImage:[UIImage imageNamed:@"crop-no"] forState:UIControlStateNormal];
         [_cropBtn setImage:[UIImage imageNamed:@"crop-yes"] forState:UIControlStateSelected];
         [_bottomView addSubview:_cropBtn];
         
         _rotaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _rotaBtn.frame = CGRectMake(_cropBtn.mj_x + _cropBtn.mj_w + 40, 0, 30, 30);
-        
+        _rotaBtn.frame = CGRectMake(_cropBtn.mj_x + _cropBtn.mj_w + 40, 20, 30, 30);
+        _rotaBtn.center = CGPointMake(CX_W / 2 - 35, 35);
         
         [_rotaBtn addTarget:self action:@selector(rotaBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
         [_rotaBtn setImage:[UIImage imageNamed:@"rotating-no"] forState:UIControlStateNormal];
         [_rotaBtn setImage:[UIImage imageNamed:@"rotating-yes"] forState:UIControlStateSelected];
+        _rotaBtn.selected = YES;
         [_bottomView addSubview:_rotaBtn];
         
-
+        
         [self configAngleScrollView];
         
         [self configBottomBtns];
-      
-       
+        
+        
         
         _originalPoint = [self convertPoint:self.scrollView.center toView:self];
     }
@@ -590,22 +478,26 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     NSArray *btnImg         = @[@"croponeone",@"cropthreetwo",@"cropfourthree",@"cropnice"];
     _proportionBtns = [NSMutableArray array];
     
-    _bottomBtnsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DV_W, 50)];
-    _bottomBtnsView.backgroundColor = [UIColor blueColor];
+    _bottomBtnsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CX_W, 100)];
+    //    _bottomBtnsView.backgroundColor = [UIColor blueColor];
     
     _bottomBtnsView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, _bottomView.mj_h - (_bottomBtnsView.mj_h / 2));
-    _bottomBtnsView.backgroundColor = [UIColor cyanColor];
+    //    _bottomBtnsView.backgroundColor = [UIColor cyanColor];
     [_bottomView addSubview:_bottomBtnsView];
+    float btnBottom = 40;
+    
     
     for (int i = 0; i < btnTitleArray.count; i++) {
         UIButton *sizeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        sizeBtn.backgroundColor = [UIColor redColor];
+        //        sizeBtn.backgroundColor = [UIColor redColor];
         sizeBtn.frame = CGRectMake(0, 0, 50, 50);
-        sizeBtn.center = CGPointMake(50 + (i * 90) , _bottomBtnsView.mj_h/2);
+        sizeBtn.center = CGPointMake(50 + (i * 90) , _bottomBtnsView.mj_h/2 - btnBottom);
+        
+        
         [sizeBtn setTitle:btnTitleArray[i] forState:UIControlStateNormal];
         sizeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         sizeBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        sizeBtn.titleLabel.backgroundColor = [UIColor yellowColor];
+        
         [sizeBtn setTitleColor:[UIColor resetButtonColor] forState:UIControlStateNormal];
         [sizeBtn setTitleColor:[UIColor resetButtonHighlightedColor] forState:UIControlStateSelected];
         [sizeBtn addTarget:self action:@selector(resetBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -623,46 +515,74 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         [_bottomBtnsView addSubview:sizeBtn];
         
     }
-
+    _bottomBtnsView.hidden = YES;
 }
 // 配置滚动角度的scrollView
 -(void)configAngleScrollView {
+    float angleHeight = 46;
     
     
-    _scrollViewAngle = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DV_W, 30)];
-    _scrollViewAngle.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) - 155);
+    float scroollViewWidth = CX_W - 30;
+    
+    
+    float allGrid = (maxDegree - minDegree)/singDegree;
+    float gridWidth = scroollViewWidth / 20;
+    float contentSizeX = gridWidth * allGrid;
+    
+    _changeDegree =  (maxDegree - minDegree) / contentSizeX;
+    
+    
+    _scrollViewAngle = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CX_W - 30, angleHeight + 20)];
+    _scrollViewAngle.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) - 65);
     _scrollView.alwaysBounceVertical = YES;
     _scrollView.alwaysBounceHorizontal = YES;
-    _scrollViewAngle.backgroundColor = [UIColor greenColor];
+    //    _scrollViewAngle.backgroundColor = [UIColor greenColor];
     _scrollViewAngle.showsVerticalScrollIndicator = NO;
     _scrollViewAngle.showsHorizontalScrollIndicator = NO;
     _scrollViewAngle.tag =  10000;
     _scrollViewAngle.delegate = self;
-    _scrollViewAngle.contentSize = CGSizeMake(20 * 40, 30);
-    for (int i = 0; i < 40; i++) {
+    _scrollViewAngle.contentSize = CGSizeMake(contentSizeX + scroollViewWidth, 60);
+    for (int i = 0; i <= allGrid; i++) {
         UIView *viewLine = [UIView new];
-        viewLine.frame = CGRectMake(10 + 20*i, 0, 1, 20);
+        viewLine.frame = CGRectMake(scroollViewWidth/2 + gridWidth*i, 0, 1, 36);
         viewLine.backgroundColor = [UIColor darkGrayColor];
+        viewLine.center = CGPointMake(viewLine.center.x, angleHeight / 2 );
         if (i%5 == 0) {
-            viewLine.mj_h = 30;
+            UILabel *lbDegree = [UILabel new];
             
+            viewLine.mj_h = angleHeight;
+            lbDegree.frame = CGRectMake(0, 0, 40, 10);
+            lbDegree.font = [UIFont systemFontOfSize:12];
+            
+            lbDegree.center = CGPointMake(viewLine.center.x, angleHeight - (lbDegree.mj_w / 2));
+            lbDegree.textAlignment = NSTextAlignmentCenter;
+            lbDegree.text = [NSString stringWithFormat:@"%i°",i - maxDegree];
+            
+            [_scrollViewAngle addSubview:lbDegree];
         }
         
-        viewLine.center = CGPointMake(viewLine.center.x, 15);
-
         [_scrollViewAngle addSubview:viewLine];
         
     }
+    // 指定到中间的位置
+    [_scrollViewAngle setContentOffset:CGPointMake(((gridWidth * allGrid)/2) - 0.5, 0) animated:NO];
     [self addSubview:_scrollViewAngle];
+    _centerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2, 60)];
+    _centerView.backgroundColor = [UIColor orangeColor];
+    _centerView.center =  _scrollViewAngle.center;
+    [self addSubview:_centerView];
     
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"%f",scrollView.contentOffset.x);
+    
     if ( [scrollView tag] == 10000) {
-        float change = scrollView.contentOffset.x * 0.45;
-        [self angelValueChanged:change/100];
+        
+        float zero =  scrollView.contentSize.width / 2; // 零度位置
+        float x = scrollView.contentOffset.x + scrollView.mj_w/2; // scrollView滑动角度
+        
+        [self angelValueChanged:_changeDegree * (x - zero)]; // 旋转
     }
- 
+    
 }
 - (instancetype)initWithFrame:(CGRect)frame image:(UIImage *)image
 {
@@ -674,7 +594,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     
-
+    
     if (CGRectContainsPoint(self.scrollView.frame, point)) {
         if (CGRectContainsPoint(self.bottomView.frame, point)){
             for (UIView *subview in [self.subviews reverseObjectEnumerator]) {
@@ -684,11 +604,11 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
                     return hitTestView;
                 }
             }
-
+            
         }
         
-            return self.scrollView;
-
+        return self.scrollView;
+        
     }else {//reverseObjectEnumerator 反序数组
         for (UIView *subview in [self.subviews reverseObjectEnumerator]) {
             CGPoint convertedPoint = [subview convertPoint:point fromView:self];
@@ -698,7 +618,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
             }
         }
         return self;
-
+        
     }
     
 }
@@ -722,27 +642,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 
 - (void)cropEnded:(CropView *)cropView
 {
-//    CGFloat scaleX = (cropView.mj_w - self.scrollView.photoContentView.mj_w) / self.mj_w;
     
-//        CGFloat scaleX = cropView.bounds.size.width / self.originalSize.width ;
-//        CGFloat scalePhotoX = cropView.bounds.size.width / self.photoContentView.bounds.size.width;
-//    
-//    [UIView animateWithDuration:0.23 animations:^{
-////        self.scrollView.transform = CGAffineTransformMakeScale(scaleX, scaleX);
-//        self.scrollView.bounds = CGRectMake(0, 0, cropView.bounds.size.width, 375);
-//        
-//        self.photoContentView.bounds = CGRectMake(0, 0, cropView.bounds.size.width, self.photoContentView.bounds.size.height * scalePhotoX );
-////        self.photoContentView.center = cropView.center;
-////        CGSizeMake(cropView.bounds.size.width, self.originalSize.height * 2 );
-////         self.scrollView.contentOffset =
-//    }];
-//    
-    
-//    CGFloat scaleX = self.originalSize.width / cropView.bounds.size.width;
-//    CGFloat scaleY = self.originalSize.height / cropView.bounds.size.height;
-//    CGFloat scale = MIN(scaleX, scaleY);
-    
-    // calculate the new bounds of crop view
     CGRect newCropBounds = CGRectMake(0, 0, cropView.frame.size.width, cropView.frame.size.height);
     
     // calculate the new bounds of scroll view
@@ -768,11 +668,10 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     self.scrollView.contentOffset = newContentOffset;
     
     [UIView animateWithDuration:0.25 animations:^{ // 改变内部cropView的center
-        // animate crop view
-//        cropView.bounds = CGRectMake(0, 0, newCropBounds.size.width, newCropBounds.size.height);
+        
         cropView.center = CGPointMake(CGRectGetWidth(self.frame) / 2, self.centerY);
         
-
+        
     }];
     
     self.manualZoomed = YES;
@@ -786,11 +685,11 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     CGFloat scaleW = self.scrollView.bounds.size.width / self.scrollView.contentSize.width;
     __block CGFloat scaleM = MAX(scaleH, scaleW);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        if (scaleM > 1) {
+        //        if (scaleM > 1) {
         // 改变内部cotentView的frame 大小  根据返回的比例辩护
-            scaleM = scaleM * self.scrollView.zoomScale;
-            [self.scrollView setZoomScale:scaleM animated:YES];
-//        }
+        scaleM = scaleM * self.scrollView.zoomScale;
+        [self.scrollView setZoomScale:scaleM animated:YES];
+        //        }
         [UIView animateWithDuration:0.2 animations:^{
             [self checkScrollViewContentOffset];
         }];
@@ -836,7 +735,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     [self.cropView updateGridLines:NO];
     
     // rotate scroll view
-    self.angle = sender;
+    self.angle = sender/100;
     self.scrollView.transform = CGAffineTransformMakeRotation(self.angle);
     
     // position scroll view
@@ -856,7 +755,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     if (!self.manualZoomed || shouldScale) {
         [self.scrollView setZoomScale:[self.scrollView zoomScaleToBound] animated:NO];
         self.scrollView.minimumZoomScale = [self.scrollView zoomScaleToBound];
-
+        
         self.manualZoomed = NO;
     }
     
@@ -880,7 +779,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         [self.cropView updateCropLines:NO];
         
     }];
-
+    
 }
 -(void)cropBtnTapped:(UIButton *)sender{
     if (sender.selected == NO) {// 点击状态
@@ -888,13 +787,14 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
             [self.rotaBtn setSelected:NO];
         }
         [sender setSelected:YES];
-         _bottomBtnsView.hidden = NO;
+        _centerView.hidden = YES;
+        _bottomBtnsView.hidden = NO;
         _scrollViewAngle.hidden = YES;
         
-       
+        
         
     }
-
+    
 }
 -(void)rotaBtnTapped:(UIButton *)sender{
     
@@ -903,34 +803,33 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
             [self.cropBtn setSelected:NO];
         }
         [sender setSelected:YES];
-        
+        _centerView.hidden = NO;
         _bottomBtnsView.hidden = YES;
         _scrollViewAngle.hidden = NO;
         
     }
-
+    
 }
 - (void)resetBtnTapped:(id)sender
 {
     CGFloat width   = 0;
     CGFloat height  = 0;
     switch ([sender tag]) {
-        case 0: // 3:2
-            width = DV_W;
-            height = width * 0.67;
-            
-            break;
-        case 1:// 1:1
-            width = DV_W;
+        case 0: // 1:1
+            width = CX_W;
             height = width * 1;
             break;
-        case 2:// 16:9
-            width = DV_W;
-            height = width * 0.56;
+        case 1:// 3:2
+            width = CX_W;
+            height = width * 0.67;
             break;
-        case 3:// 4:3
-            width = DV_W;
-            height = width * 0.75;
+        case 2:// 4:3
+            width = CX_W;
+            height = width * 0.75 ;
+            break;
+        case 3:// 16:9
+            width = CX_W;
+            height = width * 0.56;
             break;
         case 4://原图
             width = self.originalSize.width;
@@ -939,24 +838,28 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         default:
             break;
     }
-
+    
     
     [_proportionBtns enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         UIButton *btn = (UIButton *)obj;
-
-        if (btn.tag != [sender tag]) {
+        
+        if (btn.tag != [sender tag]) { // 取消其他按钮选中状态
             if (btn.selected == YES) {// 点击状态
-  
+                
                 [btn setSelected:NO];
-
+                
             }
-        }else {
+        }else {// 改变本身按钮选中状态
             if (btn.selected == NO) {
                 [btn setSelected:YES];
                 [self configCropView:CGSizeMake(width, height)];
+            }else{// 取消的话 恢复原本状态
+                [btn setSelected:NO];
+                
+                [self configCropView:CGSizeMake(self.originalSize.width, self.originalSize.height)];
             }
-           
+            
         }
     }];
     

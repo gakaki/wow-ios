@@ -10,10 +10,21 @@ import UIKit
 
 class WorksDetailCell: UITableViewCell {
 
+    @IBOutlet weak var imgPhoto: UIImageView!
+    
+    @IBOutlet weak var imgMyPhoto: UIImageView!
+    
+    @IBOutlet weak var lbDes: UILabel!
+    
+    @IBOutlet weak var lbMyName: UILabel!
+    
+    @IBOutlet weak var lbMyIntro: UILabel!
+    
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+         imgMyPhoto.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
         
     }
 

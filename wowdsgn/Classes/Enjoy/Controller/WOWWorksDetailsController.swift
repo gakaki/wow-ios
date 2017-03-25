@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWWorksDetailsController: WOWBaseViewController {
-
+    var photo : UIImage!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
 //        WOWShareManager.share(modelData?.topicName, shareText: modelData?.topicDesc, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
         
 //        self.dismiss(animated: true, completion: nil)
-        WOWShareManager.sharePhoto("", shareText: "", url: "", shareImage: UIImage(named: "me_logo"))
+        WOWShareManager.sharePhoto("", shareText: "", url: "", shareImage: photo)
         
     }
     /*
@@ -68,6 +68,8 @@ extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell                = tableView.dequeueReusableCell(withIdentifier: "WorksDetailCell", for: indexPath) as! WorksDetailCell
         cell.heightConstraint.constant = 200
+        cell.imgPhoto.image = photo
+        cell.selectionStyle = .none
         return cell
         
         

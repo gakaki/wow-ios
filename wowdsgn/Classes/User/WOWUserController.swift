@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 
 class WOWUserController: WOWBaseTableViewController {
-    var headerView      :   WOWUserTopView!
+//    var headerView      :   WOWUserTopView!
     var image_next_view: UIImage!
     
     @IBOutlet weak var allOrderView : UIView!
@@ -20,7 +20,8 @@ class WOWUserController: WOWBaseTableViewController {
     @IBOutlet weak var noCommentView: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
-//         configUserInfo()
+        hideNavigationBar = true
+        super.viewWillAppear(animated)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -30,6 +31,7 @@ class WOWUserController: WOWBaseTableViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +46,10 @@ class WOWUserController: WOWBaseTableViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-//    lazy var headerView:WOWUserHeaderView = {
-//        let v = Bundle.main.loadNibNamed(String(describing: WOWUserHeaderView.self), owner: self, options: nil)?.last as! WOWUserHeaderView
-//        v.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 270)
-//        return v
-//    }()
+    lazy var headerView:WOWUserHeaderView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWUserHeaderView.self), owner: self, options: nil)?.last as! WOWUserHeaderView
+        return v
+    }()
     
 
 //MARK:Private Method
@@ -56,7 +57,6 @@ class WOWUserController: WOWBaseTableViewController {
         super.setUI()
         configHeaderView()
         configClickAction()
-        configBuyBarItem() // 购物车数量
         addObserver()
     }
 
@@ -112,8 +112,8 @@ class WOWUserController: WOWBaseTableViewController {
      刷新headerView上面的用户信息
      */
     fileprivate func configHeaderView(){
-        headerView       = WOWUserTopView()
-        headerView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 270)
+//        headerView       = WOWUserTopView()
+//        headerView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 270)
 //        headerView.configShow(WOWUserManager.loginStatus)
 //        headerView.topContainerView.addAction {[weak self] in
 //            if let strongSelf = self{
@@ -127,7 +127,7 @@ class WOWUserController: WOWBaseTableViewController {
 //        configUserInfo()
 //        self.tableView.tableHeaderView = nil
         self.tableView.addSubview(headerView)
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: headerView.frame.height))
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: 9/16*MGScreenWidth))
     }
     
     fileprivate func goUserInfo(){
@@ -213,84 +213,64 @@ class WOWUserController: WOWBaseTableViewController {
 //        super.scrollViewDidScroll(scrollView)
         let offsetY = scrollView.contentOffset.y
         if offsetY < 0 {
-            headerView.frame = CGRect(x: offsetY/2, y: offsetY, width: MGScreenWidth - offsetY, height: 270 - offsetY)
+            headerView.frame = CGRect(x: 0, y: offsetY, width: MGScreenWidth, height: 9/16*MGScreenWidth - offsetY)
         }
     }
 }
 
 
 //MARK:Delegate
-extension WOWUserController:SKStoreProductViewControllerDelegate{
+extension WOWUserController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
-        case (1,1): //打电话
+        case (1, 0):  //喜欢的商品
+            VCRedirect.goFavorite()
+            return
+        case (1, 1): //我的礼券
+            VCRedirect.toCouponVC()
+        case (2,0): //打电话
             WOWTool.callPhone()
             MobClick.e(.Service_Phone)
             return
-        case (1,2): //支持尖叫设计
-            evaluateApp()
-            MobClick.e(.Support_Us)
+        case (2,1): //关于尖叫设计
+            VCRedirect.goAbout()
             return
-        case (1,3): //意见反馈
-//            goLeavaTips()
-            return
-        case (2,_)://设置
-            MobClick.e(.Setting)
-
-            let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWSettingController.self)) as! WOWSettingController
-            navigationController?.pushViewController(vc, animated: true)
+        case (2,2)://设置
+            VCRedirect.goSetting()
             return
         default:
             break
         }
-        guard WOWUserManager.loginStatus else{
-            toLoginVC(true)
-            return
-        }
-        switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row){
-        case let (1,row):
-            switch row {
-            case 0://优惠券
-                guard WOWUserManager.loginStatus else{
-                    toLoginVC(true)
-                    return
-                }
-                MobClick.e(.My_Coupons)
-                let vc = UIStoryboard.initialViewController("User", identifier: "WOWCouponController") as! WOWCouponController
-                vc.entrance = couponEntrance.userEntrance
-                navigationController?.pushViewController(vc, animated: true)
-//            case 1://邀请好友
-//                let vc = UIStoryboard.initialViewController("User", identifier: "WOWInviteController")
-//                navigationController?.pushViewController(vc, animated: true)
-//            case 3: //意见反馈
-//                goLeavaTips()
-            default:
-                break
-            }
 
-        default:
-            break
-        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
+        return 10
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
+        if section == 2 {
+            return 50
+        }else {
+            return 0.01
+
+        }
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headView = UIView()
+        headView.backgroundColor = GrayColorLevel5
+        return headView
+        
+    }
     
     fileprivate func evaluateApp(){
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWAboutController") as! WOWAboutController
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
+ 
     
 }

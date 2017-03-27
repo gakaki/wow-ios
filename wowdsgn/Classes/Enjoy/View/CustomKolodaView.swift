@@ -8,7 +8,7 @@
 
 import UIKit
 import Koloda
-private let defaultBackgroundCardsTopMargin: CGFloat = 6.0
+private let defaultBackgroundCardsTopMargin: CGFloat = 8.0
 private let defaultBackgroundCardsScalePercent: CGFloat = 0.9
 
 class CustomKolodaView: KolodaView {

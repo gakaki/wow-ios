@@ -57,6 +57,8 @@ public class JLRouterRule {
 //    "/order"           //订单详情
 //    "/category"        //分类详情页
 //    "/h5"              //APP内H5页
+//    "/productgroup"       //产品组
+//    "/coupon/obtain/:couponId"    //领券
     
     public class func router_init() {
         

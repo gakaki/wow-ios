@@ -20,6 +20,7 @@ class WOWFavoriteController: WOWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -40,6 +41,7 @@ class WOWFavoriteController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
+        self.title = "我喜欢的"
         configBuyBarItem()
         addObserver()
         
@@ -102,7 +104,7 @@ extension WOWFavoriteController:VTMagicViewDataSource{
     
     //获取所有菜单名，数组中存放字符串类型对象
     func menuTitles(for magicView: VTMagicView) -> [String] {
-        return ["单品","品牌","设计师"]
+        return ["","",""]
     }
     func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         

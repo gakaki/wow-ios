@@ -19,7 +19,8 @@ class WOWUserHeaderView: UIView {
     */
     override func draw(_ rect: CGRect) {
         // Drawing code
-        self.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 270)
+        super.draw(rect)
+        self.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 9/16*MGScreenWidth)
         
     }
 

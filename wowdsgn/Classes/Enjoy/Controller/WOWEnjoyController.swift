@@ -14,12 +14,14 @@ class WOWEnjoyController: WOWBaseViewController {
     
     var v : VCVTMagic!
     
+    var categoryArr = [WOWEnjoyCategoryModel]()
     var vc_newEnjoy:WOWNewEnjoyController?
     var vc_masterpiece:WOWMasterpieceController?
     var isOpen: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestCategory()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -81,7 +83,31 @@ class WOWEnjoyController: WOWBaseViewController {
         
         v.magicView.reloadData()
     }
+    
+    //MARK: -- NetWork
+    override func request() {
+        super.request()
+        
 
+    }
+
+    func requestCategory() {
+        WOWNetManager.sharedManager.requestWithTarget(.api_getCategory, successClosure: {[weak self](result, code) in
+            WOWHud.dismiss()
+            
+            if let strongSelf = self{
+                let r                             =  JSON(result)
+                strongSelf.categoryArr          =  Mapper<WOWEnjoyCategoryModel>().mapArray(JSONObject: r.arrayObject ) ?? [WOWEnjoyCategoryModel]()
+                let category = WOWEnjoyCategoryModel(id: 0, categoryName: "全部")
+                strongSelf.categoryArr.insertAsFirst(category)
+                strongSelf.backView.selectView.categoryArr = strongSelf.categoryArr
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+            }
+        }
+    }
     
     //MARK: --privite 
     func categoryClick()  {

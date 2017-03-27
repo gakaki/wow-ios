@@ -268,6 +268,10 @@ public enum RequestApi{
     case api_TagProduct(params: [String: AnyObject])
     
     case api_ProductCategory(params: [String: AnyObject])
+    
+    //欣赏
+    //获取分类
+    case api_getCategory
 }
 
 
@@ -554,6 +558,8 @@ extension RequestApi:TargetType{
             return URL_LoginCaptcha
         case .api_LoginByCaptcha:
             return URL_LoginByCaptcha
+        case .api_getCategory:
+            return URL_GetCategory
             
         default:
             return URL_topic
@@ -591,7 +597,8 @@ extension RequestApi:TargetType{
             .api_ProductTag,
             .api_TagProduct,
             .api_Home_Tabs,
-            .api_ProductCategory:
+            .api_ProductCategory,
+            .api_getCategory:
 
             return .GET
 

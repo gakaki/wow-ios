@@ -15,23 +15,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTc-b0-W9Z">
-                    <rect key="frame" x="116" y="5" width="114" height="34"/>
+                    <rect key="frame" x="103" y="5" width="114" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="114" id="VKi-WZ-v2r"/>
                         <constraint firstAttribute="height" constant="34" id="oTd-sd-ql6"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                     <state key="normal" title="生活创意">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="jq7-JV-qCg">
-                    <rect key="frame" x="213" y="19.5" width="10" height="6"/>
+                    <rect key="frame" x="200" y="19.5" width="10" height="6"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="jq7-JV-qCg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="58" id="263-A7-MKq"/>
-                <constraint firstItem="JTc-b0-W9Z" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="13" id="PQh-bj-aQH"/>
+                <constraint firstItem="jq7-JV-qCg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="45" id="263-A7-MKq"/>
+                <constraint firstItem="JTc-b0-W9Z" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PQh-bj-aQH"/>
                 <constraint firstItem="JTc-b0-W9Z" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dnS-T5-KS4"/>
                 <constraint firstItem="jq7-JV-qCg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hB4-SO-YoS"/>
             </constraints>

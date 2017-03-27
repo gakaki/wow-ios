@@ -84,7 +84,7 @@ class Cell_107_BrandZone: UITableViewCell,ModuleViewElement {
                         let bannerId = String(format: "%i_%@_%i", strongSelf.moduleId, strongSelf.pageTitle, banners[0].id ?? 0)
                         let bannerName = String(format: "%i_%@_%@", strongSelf.moduleId, strongSelf.pageTitle, banners[0].bannerTitle ?? "")
                         let params = ["ModuleID_Secondary_Homepagename_Brandid": bannerId, "ModuleID_Secondary_Homepagename_Brandname": bannerName]
-                        MobClick.e2(.Slide_Banners_Clicks, params)
+                        MobClick.e2(.Brand_Module_Clicks, params)
                         
                         del.goToVCFormLinkType_107_BrandZone(model: banners[0])
                             

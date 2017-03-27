@@ -15,15 +15,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PeO-pw-Ozr">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="375" y="0.0" width="0.0" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="RmT-Ug-rNC"/>
+                        <constraint firstAttribute="height" id="jma-WW-5xf"/>
+                    </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="PeO-pw-Ozr" secondAttribute="trailing" id="0hb-St-DNk"/>
-                <constraint firstItem="PeO-pw-Ozr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4Xo-BD-1P2"/>
-                <constraint firstItem="PeO-pw-Ozr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VxM-zy-qkF"/>
-                <constraint firstAttribute="bottom" secondItem="PeO-pw-Ozr" secondAttribute="bottom" id="aLf-Gq-bfq"/>
+                <constraint firstItem="PeO-pw-Ozr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KDF-J1-69I"/>
             </constraints>
             <connections>
                 <outlet property="overlayImageView" destination="PeO-pw-Ozr" id="so7-Fb-jgL"/>

@@ -5,26 +5,27 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="230" id="KGk-i7-Jjw" customClass="WOWMasterpieceCell" customModule="wowdsgn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="330" id="KGk-i7-Jjw" customClass="WOWMasterpieceCell" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="229"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide1" translatesAutoresizingMaskIntoConstraints="NO" id="onv-Ld-ip0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="219.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="219.5" id="jV7-tv-s0l"/>
+                            <constraint firstAttribute="width" secondItem="onv-Ld-ip0" secondAttribute="height" multiplier="1:1" id="hkD-xj-qvn"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="分类名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcK-IJ-8BN">
-                        <rect key="frame" x="22" y="167" width="76" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分类名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcK-IJ-8BN">
+                        <rect key="frame" x="22" y="271.5" width="57.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -39,10 +40,7 @@
                     <constraint firstItem="onv-Ld-ip0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="osJ-mR-9eR"/>
                 </constraints>
             </tableViewCellContentView>
-            <connections>
-                <outlet property="heightConstraint" destination="jV7-tv-s0l" id="wiS-Jf-wT2"/>
-            </connections>
-            <point key="canvasLocation" x="35" y="66"/>
+            <point key="canvasLocation" x="35" y="116"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import StoreKit
+
 
 class WOWAboutController: WOWBaseViewController {
 
@@ -31,7 +33,7 @@ class WOWAboutController: WOWBaseViewController {
 
     }
 }
-extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
+extension WOWAboutController: UITableViewDelegate, UITableViewDataSource, SKStoreProductViewControllerDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -111,6 +113,7 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
             VCRedirect.goLeavaTips()
             break
         case (1,1): //支持尖叫设计
+            MobClick.e(.Support_Us)
             GoToItunesApp.show()
             break
         default:
@@ -133,5 +136,7 @@ extension WOWAboutController: UITableViewDelegate, UITableViewDataSource {
         GoToItunesApp.show()
 
     }
-
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
 }

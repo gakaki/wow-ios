@@ -11,6 +11,8 @@ import Koloda
 
 class WOWNewEnjoyController: WOWBaseViewController {
     @IBOutlet weak var kolodaView: CustomKolodaView!
+    @IBOutlet weak var leftBtn: UIButton!
+    @IBOutlet weak var rightBtn: UIButton!
     
     fileprivate var dataSource: [UIImage] = {
         var array: [UIImage] = []
@@ -58,16 +60,6 @@ class WOWNewEnjoyController: WOWBaseViewController {
 
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 // MARK: KolodaViewDelegate
 
@@ -85,6 +77,32 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
 //        UIApplication.shared.openURL(URL(string: "https://yalantis.com/")!)
     }
     
+    func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection) {
+        print(finishPercentage)
+        print(direction)
+        if direction == .left {
+            leftBtn.isHighlighted = true
+        }else {
+            leftBtn.isHighlighted = false
+            
+        }
+        if direction == .right {
+            rightBtn.isHighlighted = true
+        }else {
+            rightBtn.isHighlighted = false
+            
+        }
+    }
+    
+    func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
+        if direction == .left {
+            leftBtn.isHighlighted = false
+        }
+        if direction == .right {
+            rightBtn.isHighlighted = false
+        }
+        return true
+    }
 }
 
 // MARK: KolodaViewDataSource
@@ -96,10 +114,11 @@ extension WOWNewEnjoyController: KolodaViewDataSource {
     }
     
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
-        return UIImageView(image: UIImage(named: "guide0"))
+        print(kolodaView.frame)
+        return WOWCustomKoloda(frame: CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: MGScreenWidth - 36), "https://img.wowdsgn.com/product/images/1b4a96a6-c620-46af-8e1b-021a4cac71d0.jpg")
     }
     
-    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
-        return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? OverlayView
-    }
+//    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+//        return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? OverlayView
+//    }
 }

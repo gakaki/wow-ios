@@ -707,7 +707,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     //Mob 品牌专区模块 更多点击
                     let allType = String(format: "%i_%@_%i", module.moduleId ?? 0, strongSelf.vc?.title ?? "", bannerModel?.bannerLinkType ?? 0)
                     let params = ["ModuleID_Secondary_Homepagename_Viewalltragettype": allType]
-                    MobClick.e2(.Slide_Banners_Clicks, params)
+                    MobClick.e2(.Brand_Module_Clicks, params)
 
                     break
                 case 401:

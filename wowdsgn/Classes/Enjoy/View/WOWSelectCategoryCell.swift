@@ -18,6 +18,12 @@ class WOWSelectCategoryCell: UITableViewCell {
         // Initialization code
     }
 
+    func showData(model: WOWEnjoyCategoryModel?) {
+        if let model = model {
+            titleLb.text = model.categoryName
+            selectBtn.isSelected = model.isSelect
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

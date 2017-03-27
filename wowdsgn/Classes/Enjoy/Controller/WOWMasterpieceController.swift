@@ -72,15 +72,7 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMasterpieceCell
-        if indexPath.row == 1 {
-            cell.heightConstraint.constant = 100
-        }else if indexPath.row == 2 {
-            cell.heightConstraint.constant = 200
-
-        }else {
-            cell.heightConstraint.constant = 150
-
-        }
+        
         
         return cell
         

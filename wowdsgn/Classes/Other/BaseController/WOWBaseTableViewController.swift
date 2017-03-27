@@ -11,6 +11,7 @@ import UIKit
 class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource {
 //    var reuestIndex = 0 //翻页
 //    var isRreshing : Bool = false
+    var hideNavigationBar:Bool = false
     var isCurrentRequest : Bool = false // 记录当前页面是否网络请求过，区别是第一次进网络请求，还是下拉刷新进入网络请求
     
     lazy var rightNagationItem:WOWRightNavigationItem = {
@@ -31,9 +32,23 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        endPageView()
 //        UIApplication.shared.keyWindow?.endEditing(true)
     }
 
+    func beginPageView() {
+        //TalkingData统计页面
+        TalkingData.trackPageBegin( self.title )
+        //友盟统计页面
+        MobClick.beginLogPageView(self.title)
+    }
+    
+    func endPageView() {
+        //TalkingData统计页面
+        TalkingData.trackPageEnd( self.title )
+        
+        MobClick.endLogPageView(self.title)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -42,7 +57,17 @@ class WOWBaseTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        beginPageView()
+
         setCustomerBack()
+        if hideNavigationBar {
+            //设置导航栏透明
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }else {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            
+        }
+
     }
     deinit {
         DLog("\(self.title) --- 销毁")

@@ -16,18 +16,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="pq5-Ec-fe3" kind="relationship" relationship="rootViewController" id="oIs-lb-JYo"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CrA-83-8Pf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48" y="547"/>
+            <point key="canvasLocation" x="-331" y="519"/>
         </scene>
         <!--我喜欢的-->
         <scene sceneID="Ieh-JQ-4vO">
             <objects>
-                <viewController storyboardIdentifier="WOWFavoriteController" id="pq5-Ec-fe3" customClass="WOWFavoriteController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWFavoriteController" title="我喜欢的" id="pq5-Ec-fe3" customClass="WOWFavoriteController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zuN-MM-c4H"/>
                         <viewControllerLayoutGuide type="bottom" id="KIF-H8-Pof"/>
@@ -41,7 +38,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s9U-F6-NWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="500" y="556"/>
+            <point key="canvasLocation" x="141" y="454"/>
         </scene>
         <!--单品-->
         <scene sceneID="gi0-bU-cFC">

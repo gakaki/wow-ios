@@ -397,6 +397,26 @@ public class VCRedirect {
         vc.navTitle = navTitle
         topNaVC?.pushViewController(vc, animated: true)
     }
+    //设置
+    public class func goSetting() {
+        MobClick.e(.Setting)
+
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWSettingController.self)) as! WOWSettingController
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    
+    //关于尖叫设计
+    public class func goAbout() {
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWAboutController") as! WOWAboutController
+        topNaVC?.pushViewController(vc, animated: true)
+
+    }
+    
+    //喜欢
+    public class func goFavorite() {
+        let vc = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavoriteController.self)) as! WOWFavoriteController
+        topNaVC?.pushViewController(vc, animated: true)
+    }
     //优惠券可用商品
     public class func bingWorksDetails() {
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWWorksDetailsController.self)) as! WOWWorksDetailsController

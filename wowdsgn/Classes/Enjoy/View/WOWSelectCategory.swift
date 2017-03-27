@@ -121,7 +121,11 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     let cellID = String(describing: WOWSelectCategoryCell.self)
     weak var delegate: WOWSelectCategoryDelegate?
-
+    var categoryArr = [WOWEnjoyCategoryModel](){// 为true 则是从专题详情内点击进来
+        didSet{
+            tableView.reloadData()
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -155,12 +159,13 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return categoryArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWSelectCategoryCell
-        
+        let model = categoryArr[indexPath.row]
+        cell.showData(model: model)
         return cell
         
     }
@@ -178,10 +183,15 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let del = delegate {
+            for category in categoryArr {
+                category.isSelect = false
+            }
+            categoryArr[indexPath.row].isSelect = true
+            tableView.reloadData()
             del.selectCategory()
         }
 //            UIApplication.currentViewController()?.bingWorksDetail()
-        VCRedirect.bingWorksDetails()
+//        VCRedirect.bingWorksDetails()
 
     }
 }

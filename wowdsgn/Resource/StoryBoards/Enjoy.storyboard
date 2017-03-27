@@ -124,10 +124,10 @@
             </objects>
             <point key="canvasLocation" x="444" y="306"/>
         </scene>
-        <!--New Enjoy Controller-->
+        <!--最新-->
         <scene sceneID="M1n-YK-P2x">
             <objects>
-                <viewController storyboardIdentifier="WOWNewEnjoyController" id="c60-NF-leJ" customClass="WOWNewEnjoyController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWNewEnjoyController" title="最新" id="c60-NF-leJ" customClass="WOWNewEnjoyController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pLt-cs-qjt"/>
                         <viewControllerLayoutGuide type="bottom" id="l6T-NV-pCG"/>
@@ -137,23 +137,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5O-Ag-IQN" customClass="CustomKolodaView" customModule="wowdsgn" customModuleProvider="target">
-                                <rect key="frame" x="18" y="84" width="339" height="301"/>
+                                <rect key="frame" x="18" y="25" width="339" height="339"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="P5O-Ag-IQN" secondAttribute="height" multiplier="80:71" id="03p-RG-nlo"/>
+                                    <constraint firstAttribute="width" secondItem="P5O-Ag-IQN" secondAttribute="height" multiplier="1:1" id="03p-RG-nlo"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UfN-ea-yP8">
-                                <rect key="frame" x="128" y="467" width="120" height="32"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOH-wg-bGH">
+                                <rect key="frame" x="0.0" y="364" width="375" height="303"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypr-68-nGG">
-                                        <rect key="frame" x="73" y="0.0" width="47" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="Iew-c4-Dcw"/>
-                                            <constraint firstAttribute="width" constant="47" id="wPd-RK-KC5"/>
-                                        </constraints>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypr-68-nGG">
+                                        <rect key="frame" x="248" y="126" width="70" height="70"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="喜欢">
+                                        <state key="normal" image="btn_like_normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -162,14 +158,18 @@
                                             <action selector="rightButtonTapped" destination="c60-NF-leJ" eventType="touchUpInside" id="0HE-8v-gqc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfQ-p2-Oi1">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="32"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UfN-ea-yP8">
+                                        <rect key="frame" x="187" y="111" width="1" height="80"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="0Mu-bY-kFc"/>
-                                            <constraint firstAttribute="height" constant="32" id="ZEk-AN-ux0"/>
+                                            <constraint firstAttribute="height" constant="80" id="DbD-1H-2qf"/>
+                                            <constraint firstAttribute="width" constant="1" id="ueO-Lm-l5F"/>
                                         </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfQ-p2-Oi1">
+                                        <rect key="frame" x="58" y="126" width="70" height="70"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="不喜欢">
+                                        <state key="normal" image="btn_skip_normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -179,38 +179,42 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="PfQ-p2-Oi1" firstAttribute="top" secondItem="UfN-ea-yP8" secondAttribute="top" id="Ed6-VW-9xE"/>
-                                    <constraint firstAttribute="height" constant="32" id="Ivy-nQ-zwe"/>
-                                    <constraint firstItem="Ypr-68-nGG" firstAttribute="top" secondItem="UfN-ea-yP8" secondAttribute="top" id="UcV-y0-CcE"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ypr-68-nGG" secondAttribute="trailing" id="WZt-ev-Xl3"/>
-                                    <constraint firstItem="PfQ-p2-Oi1" firstAttribute="leading" secondItem="UfN-ea-yP8" secondAttribute="leading" id="Z4o-wP-Llc"/>
-                                    <constraint firstAttribute="width" constant="120" id="o6N-MZ-AFa"/>
+                                    <constraint firstItem="Ypr-68-nGG" firstAttribute="leading" secondItem="UfN-ea-yP8" secondAttribute="trailing" constant="20" id="PmF-nt-cg5"/>
+                                    <constraint firstItem="UfN-ea-yP8" firstAttribute="centerY" secondItem="EOH-wg-bGH" secondAttribute="centerY" id="QDD-58-Kbn"/>
+                                    <constraint firstItem="PfQ-p2-Oi1" firstAttribute="centerY" secondItem="EOH-wg-bGH" secondAttribute="centerY" id="dK9-8n-IyM"/>
+                                    <constraint firstItem="UfN-ea-yP8" firstAttribute="centerX" secondItem="EOH-wg-bGH" secondAttribute="centerX" id="kUy-IX-uTy"/>
+                                    <constraint firstItem="Ypr-68-nGG" firstAttribute="centerY" secondItem="EOH-wg-bGH" secondAttribute="centerY" id="psq-UO-zn4"/>
+                                    <constraint firstItem="UfN-ea-yP8" firstAttribute="leading" secondItem="PfQ-p2-Oi1" secondAttribute="trailing" constant="20" id="vHt-U4-bOC"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="P5O-Ag-IQN" secondAttribute="trailing" constant="18" id="Ah4-hH-p4Y"/>
-                            <constraint firstItem="P5O-Ag-IQN" firstAttribute="leading" secondItem="Na9-C0-YYc" secondAttribute="leading" constant="18" id="Mw1-s9-M3U"/>
-                            <constraint firstItem="UfN-ea-yP8" firstAttribute="top" secondItem="P5O-Ag-IQN" secondAttribute="bottom" constant="82.5" id="Zol-dA-ohX"/>
-                            <constraint firstItem="P5O-Ag-IQN" firstAttribute="top" secondItem="pLt-cs-qjt" secondAttribute="bottom" constant="64" id="kh5-b2-QSH"/>
-                            <constraint firstItem="UfN-ea-yP8" firstAttribute="centerX" secondItem="Na9-C0-YYc" secondAttribute="centerX" id="w6T-5t-PZE"/>
+                            <constraint firstItem="P5O-Ag-IQN" firstAttribute="top" secondItem="Na9-C0-YYc" secondAttribute="top" constant="25" id="0Jx-bk-YrO"/>
+                            <constraint firstItem="l6T-NV-pCG" firstAttribute="top" secondItem="EOH-wg-bGH" secondAttribute="bottom" id="6qH-Ph-Ics"/>
+                            <constraint firstItem="EOH-wg-bGH" firstAttribute="leading" secondItem="Na9-C0-YYc" secondAttribute="leading" id="93z-K6-wBV"/>
+                            <constraint firstItem="P5O-Ag-IQN" firstAttribute="leading" secondItem="Na9-C0-YYc" secondAttribute="leading" constant="18" id="ATZ-vl-zSa"/>
+                            <constraint firstAttribute="trailing" secondItem="EOH-wg-bGH" secondAttribute="trailing" id="dcp-8F-lu3"/>
+                            <constraint firstItem="EOH-wg-bGH" firstAttribute="top" secondItem="P5O-Ag-IQN" secondAttribute="bottom" id="m1X-bO-qd7"/>
+                            <constraint firstAttribute="trailing" secondItem="P5O-Ag-IQN" secondAttribute="trailing" constant="18" id="y3B-MJ-F7a"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="kolodaView" destination="P5O-Ag-IQN" id="9Yu-8W-eQV"/>
+                        <outlet property="leftBtn" destination="PfQ-p2-Oi1" id="h6T-R0-RPk"/>
+                        <outlet property="rightBtn" destination="Ypr-68-nGG" id="8Hu-xO-9oM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKF-7E-ddP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1173.5999999999999" y="214.54272863568218"/>
         </scene>
-        <!--Masterpiece Controller-->
+        <!--佳作-->
         <scene sceneID="wTE-1D-W7K">
             <objects>
-                <viewController storyboardIdentifier="WOWMasterpieceController" id="yGc-p3-Epc" customClass="WOWMasterpieceController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWMasterpieceController" title="佳作" id="yGc-p3-Epc" customClass="WOWMasterpieceController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d1K-3L-oLg"/>
                         <viewControllerLayoutGuide type="bottom" id="AOh-eN-n0r"/>
@@ -229,7 +233,7 @@
                                     <constraint firstAttribute="height" constant="70" id="YVG-LV-gSZ"/>
                                     <constraint firstAttribute="width" constant="70" id="ebm-ZW-VU8"/>
                                 </constraints>
-                                <state key="normal" title="发布">
+                                <state key="normal" image="add">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -257,7 +261,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="btn_like_pressed" width="16" height="16"/>
-        <image name="btn_skip_pressed" width="16" height="16"/>
+        <image name="add" width="58" height="58"/>
+        <image name="btn_like_normal" width="70" height="70"/>
+        <image name="btn_like_pressed" width="70" height="70"/>
+        <image name="btn_skip_normal" width="70" height="70"/>
+        <image name="btn_skip_pressed" width="70" height="70"/>
     </resources>
 </document>

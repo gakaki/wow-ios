@@ -32,7 +32,7 @@
 #import <Pingpp/Pingpp.h>
 #import <UMMobClick/MobClick.h>
 #import "UMessage.h"
-
+#import "PhotoTweaksViewController.h"
 
 #import "TalkingData.h"
 #import "TalkingDataAppCpa.h"

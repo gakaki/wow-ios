@@ -111,10 +111,11 @@ class WOWEnjoyController: WOWBaseViewController {
     
     //MARK: --privite 
     func categoryClick()  {
+        print("全部分类")
+      
         changeButtonState()
     }
-    
-    func changeButtonState() {
+        func changeButtonState() {
         if isOpen {
             backView.hideView()
         }else {
@@ -147,6 +148,7 @@ class WOWEnjoyController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
     }
 }
+
 
 
 extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{

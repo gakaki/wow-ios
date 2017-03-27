@@ -193,6 +193,7 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
 //            UIApplication.currentViewController()?.bingWorksDetail()
 //        VCRedirect.bingWorksDetails()
 
+
     }
 }
 

@@ -418,9 +418,17 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
     //优惠券可用商品
+    //作品详情页
     public class func bingWorksDetails() {
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWWorksDetailsController.self)) as! WOWWorksDetailsController
 
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    //发布作品页
+    public class func bingReleaseWorks(photo:UIImage!) {
+        let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWReleaseWorksController.self)) as! WOWReleaseWorksController
+        vc.photo = photo
+//        vc.showPhoto(image: photo)
         topNaVC?.pushViewController(vc, animated: true)
     }
     //    //点击跳转

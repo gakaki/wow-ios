@@ -229,18 +229,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5O-Ag-IQN" customClass="CustomKolodaView" customModule="wowdsgn" customModuleProvider="target">
-                                <rect key="frame" x="18" y="25" width="339" height="339"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="P5O-Ag-IQN" secondAttribute="height" multiplier="1:1" id="03p-RG-nlo"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOH-wg-bGH">
-                                <rect key="frame" x="0.0" y="364" width="375" height="303"/>
+                                <rect key="frame" x="0.0" y="380" width="375" height="287"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypr-68-nGG">
-                                        <rect key="frame" x="208" y="116.5" width="70" height="70"/>
+                                        <rect key="frame" x="228" y="108.5" width="70" height="70"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" image="btn_like_normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -252,7 +245,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UfN-ea-yP8">
-                                        <rect key="frame" x="187" y="111" width="1" height="80"/>
+                                        <rect key="frame" x="187" y="103.5" width="1" height="80"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="DbD-1H-2qf"/>
@@ -260,7 +253,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfQ-p2-Oi1">
-                                        <rect key="frame" x="97" y="116.5" width="70" height="70"/>
+                                        <rect key="frame" x="77" y="108.5" width="70" height="70"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" image="btn_skip_normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -274,12 +267,19 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Ypr-68-nGG" firstAttribute="leading" secondItem="UfN-ea-yP8" secondAttribute="trailing" constant="20" id="PmF-nt-cg5"/>
+                                    <constraint firstItem="Ypr-68-nGG" firstAttribute="leading" secondItem="UfN-ea-yP8" secondAttribute="trailing" constant="40" id="PmF-nt-cg5"/>
                                     <constraint firstItem="UfN-ea-yP8" firstAttribute="centerY" secondItem="EOH-wg-bGH" secondAttribute="centerY" id="QDD-58-Kbn"/>
                                     <constraint firstItem="PfQ-p2-Oi1" firstAttribute="centerY" secondItem="EOH-wg-bGH" secondAttribute="centerY" id="dK9-8n-IyM"/>
                                     <constraint firstItem="UfN-ea-yP8" firstAttribute="centerX" secondItem="EOH-wg-bGH" secondAttribute="centerX" id="kUy-IX-uTy"/>
                                     <constraint firstItem="Ypr-68-nGG" firstAttribute="centerY" secondItem="EOH-wg-bGH" secondAttribute="centerY" id="psq-UO-zn4"/>
-                                    <constraint firstItem="UfN-ea-yP8" firstAttribute="leading" secondItem="PfQ-p2-Oi1" secondAttribute="trailing" constant="20" id="vHt-U4-bOC"/>
+                                    <constraint firstItem="UfN-ea-yP8" firstAttribute="leading" secondItem="PfQ-p2-Oi1" secondAttribute="trailing" constant="40" id="vHt-U4-bOC"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5O-Ag-IQN" customClass="CustomKolodaView" customModule="wowdsgn" customModuleProvider="target">
+                                <rect key="frame" x="18" y="25" width="339" height="355"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="P5O-Ag-IQN" secondAttribute="height" multiplier="339:355" id="96r-Mg-gpG"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -322,7 +322,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7f-Ph-La1">
                                 <rect key="frame" x="270" y="560" width="70" height="70"/>
-                                <color key="backgroundColor" red="0.99607843139999996" green="0.83137254900000002" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="YVG-LV-gSZ"/>
                                     <constraint firstAttribute="width" constant="70" id="ebm-ZW-VU8"/>

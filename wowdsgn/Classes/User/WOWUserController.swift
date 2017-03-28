@@ -48,6 +48,9 @@ class WOWUserController: WOWBaseTableViewController {
     
     lazy var headerView:WOWUserHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWUserHeaderView.self), owner: self, options: nil)?.last as! WOWUserHeaderView
+        v.userBack.addAction({
+            VCRedirect.goUserCenter()
+        })
         return v
     }()
     
@@ -127,20 +130,22 @@ class WOWUserController: WOWBaseTableViewController {
 //        configUserInfo()
 //        self.tableView.tableHeaderView = nil
         self.tableView.addSubview(headerView)
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: 9/16*MGScreenWidth))
+        let userView = UIView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: 9/16*MGScreenWidth))
+        userView.isUserInteractionEnabled = false
+        self.tableView.tableHeaderView = userView
     }
     
     fileprivate func goUserInfo(){
         let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserInfoController.self)) as! WOWUserInfoController
         vc.editInfoAction = { [weak self] in
             if let strongSelf = self{
-                strongSelf.configUserInfo()
+//                strongSelf.configUserInfo()
             }
         }
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    fileprivate func configUserInfo(){
+//    fileprivate func configUserInfo(){
 //        if WOWUserManager.loginStatus {
 //            
 //            if ( self.image_next_view != nil){
@@ -172,7 +177,7 @@ class WOWUserController: WOWBaseTableViewController {
 //        }else{
 //            headerView.headImageView.image = UIImage(named: "placeholder_userhead")
 //        }
-    }
+//    }
     
     
     
@@ -208,9 +213,8 @@ class WOWUserController: WOWBaseTableViewController {
     func loginSuccess(){
         configHeaderView()
     }
-    
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        super.scrollViewDidScroll(scrollView)
         let offsetY = scrollView.contentOffset.y
         if offsetY < 0 {
             headerView.frame = CGRect(x: 0, y: offsetY, width: MGScreenWidth, height: 9/16*MGScreenWidth - offsetY)

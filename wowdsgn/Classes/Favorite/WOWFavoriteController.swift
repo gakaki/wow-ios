@@ -104,7 +104,7 @@ extension WOWFavoriteController:VTMagicViewDataSource{
     
     //获取所有菜单名，数组中存放字符串类型对象
     func menuTitles(for magicView: VTMagicView) -> [String] {
-        return ["","",""]
+        return ["单品","品牌","设计师"]
     }
     func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         

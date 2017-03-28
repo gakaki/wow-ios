@@ -155,7 +155,8 @@ class WOWRegistController: WOWBaseViewController {
                     let model = Mapper<WOWUserModel>().map(JSONObject:result)
                     WOWUserManager.saveUserInfo(model)
                     //暂时保存一下手机号
-                    
+                    MobClick.e(.Registration_Successful)
+
                     let user_mobile           = strongSelf.phoneTextField.text!
                     WOWUserManager.userMobile = user_mobile
                     
@@ -172,7 +173,6 @@ class WOWRegistController: WOWBaseViewController {
                        
                         TalkingDataAppCpa.onRegister(user_mobile)
                         AnalyaticEvent.e2(.Regist,["user":user_mobile])
-                        MobClick.e(.Registration_Successful)
                         VCRedirect.toRegInfo(strongSelf.isPresent)
                     }
                     

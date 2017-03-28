@@ -114,8 +114,7 @@ extension WOWNewEnjoyController: KolodaViewDataSource {
     }
     
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
-        print(kolodaView.frame)
-        return WOWCustomKoloda(frame: CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: MGScreenWidth - 36), "https://img.wowdsgn.com/product/images/1b4a96a6-c620-46af-8e1b-021a4cac71d0.jpg")
+        return WOWCustomKoloda(frame: CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: MGScreenWidth - 20), "https://img.wowdsgn.com/product/images/1b4a96a6-c620-46af-8e1b-021a4cac71d0.jpg")
     }
     
 //    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {

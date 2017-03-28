@@ -15,9 +15,12 @@ class WOWUserCenterController: WOWBaseViewController {
     
     var v : VCVTMagic!
     
-    var vc_product:WOWFavProduct?
-    var vc_brand:WOWFavBrand?
-    var vc_designer:WOWFavDesigner?
+    var vc_product:WOWWorkController?
+    var vc_brand:WOWPraiseController?
+    var vc_designer:WOWCollectController?
+    @IBOutlet weak var cvTop: NSLayoutConstraint!
+    @IBOutlet weak var topView: UIView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,34 +32,27 @@ class WOWUserCenterController: WOWBaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //        self.navigationShadowImageView?.isHidden = false
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        self.navigationShadowImageView?.isHidden = true
-        //        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
+
         MobClick.e(.Like_Page)
     }
     
     override func setUI() {
         super.setUI()
-        self.title = "我喜欢的"
-        configBuyBarItem()
-        addObserver()
         
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
         v.magicView.delegate            = self
         
-        v.magicView.layoutStyle         = .center
+        v.magicView.layoutStyle         = .divide
         v.magicView.switchStyle         = .default
         
-        v.magicView.sliderWidth         = 50.w
-        v.magicView.itemWidth           = MGScreenWidth / 3
+        v.magicView.sliderWidth         = 30
         v.magicView.sliderColor         = WowColor.black
-        v.magicView.sliderHeight        = 3.w
+        v.magicView.sliderHeight        = 3
         v.magicView.isSwitchAnimated        = false
         v.magicView.isScrollEnabled         = true
         self.addChildViewController(v)
@@ -64,26 +60,22 @@ class WOWUserCenterController: WOWBaseViewController {
         
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
-                make.size.equalTo(strongSelf.view)
+                make.width.equalTo(strongSelf.view)
+                make.top.equalTo(strongSelf.topView.snp.bottom)
+                make.bottom.equalTo(strongSelf.view).offset(0)
                 
             }
         }
         
         
-        vc_product    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavProduct.self)) as? WOWFavProduct
-        vc_brand    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as? WOWFavBrand
-        vc_designer = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavDesigner.self)) as? WOWFavDesigner
+        vc_product    = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWWorkController.self)) as? WOWWorkController
+        vc_brand    = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWPraiseController.self)) as? WOWPraiseController
+        vc_designer = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWCollectController.self)) as? WOWCollectController
         
-        //        addChildViewController(vc_product!)
-        //        addChildViewController(vc_brand!)
-        //        addChildViewController(vc_designer!)
+
         v.magicView.reloadData()
     }
-    fileprivate func addObserver(){
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
-        
-    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -105,7 +97,7 @@ extension WOWUserCenterController:VTMagicViewDataSource{
     
     //获取所有菜单名，数组中存放字符串类型对象
     func menuTitles(for magicView: VTMagicView) -> [String] {
-        return ["单品","品牌","设计师"]
+        return ["","",""]
     }
     func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
@@ -115,9 +107,20 @@ extension WOWUserCenterController:VTMagicViewDataSource{
             let width           = self.view.frame.width / 3
             let b               = UIButton(type: .custom)
             b.frame             = CGRect(x: 0, y: 0, width: width, height: 50)
-            b.titleLabel!.font  =  UIFont.systemFont(ofSize: 14)
-            b.setTitleColor(WowColor.grayLight, for: UIControlState())
-            b.setTitleColor(WowColor.black, for: .selected)
+
+            if itemIndex == 0 {
+                b.setImage(UIImage(named: "upload_select"), for: .selected)
+                b.setImage(UIImage(named: "upload_unselect"), for: .normal)
+        
+            }else if itemIndex == 1 {
+                b.setImage(UIImage(named: "img_select"), for: .selected)
+                b.setImage(UIImage(named: "img_unselect"), for: .normal)
+
+            }else {
+                b.setImage(UIImage(named: "collect_select"), for: .selected)
+                b.setImage(UIImage(named: "collect_unselect"), for: .normal)
+
+            }
             b.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
             
             return b
@@ -137,6 +140,7 @@ extension WOWUserCenterController:VTMagicViewDataSource{
         if (vc == nil) {
             
             if (pageIndex == 0){
+                vc_product?.delegate = self
                 return vc_product!
             }else if (pageIndex == 1){
                 return vc_brand!
@@ -153,11 +157,14 @@ extension WOWUserCenterController:VTMagicViewDelegate{
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         print("viewDidAppear:", pageIndex);
         
-        if let b = magicView.menuItem(at: pageIndex) {
+        if let b = magicView.menuItem(at: pageIndex),
+            let vc  = magicView.viewController(atPage: pageIndex) {
             print("  button asc is ", b)
             
             switch pageIndex {
-            case  0: break
+            case  0:
+               
+                break
             case  1:
                 //                MobClick.e(.Brands_List)
                 break
@@ -176,4 +183,16 @@ extension WOWUserCenterController:VTMagicViewDelegate{
         
     }
     
+}
+
+extension WOWUserCenterController: WOWDidScrollDelegate {
+    func scrollview(scrollOffset: CGFloat) {
+
+        cvTop.constant = -139
+        UIView.animate(withDuration: 0.2) {[weak self] in
+            if let strongSelf = self {
+                strongSelf.view.layoutIfNeeded()
+            }
+        }
+    }
 }

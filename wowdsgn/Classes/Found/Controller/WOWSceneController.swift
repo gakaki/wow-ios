@@ -478,7 +478,6 @@ extension WOWSceneController:VTMagicViewDataSource{
         let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
         if (vc == nil) {
             let vc_me = UIStoryboard.initialViewController("Found", identifier:String(describing: VCCategoryProducts.self)) as! VCCategoryProducts
-            addChildViewController(vc_me)
             return vc_me
         }
         return vc!;

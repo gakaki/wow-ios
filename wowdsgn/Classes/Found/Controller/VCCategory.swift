@@ -4,7 +4,7 @@ import VTMagic
 import RxSwift
 
 
-class VCCategory:VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDelegate,UICollectionViewDataSource
+class VCCategory:VCBaseVCCategoryFound, UICollectionViewDataSource, UICollectionViewDelegate
 {
     var selectedCell: WOWGoodsSmallCell!
 

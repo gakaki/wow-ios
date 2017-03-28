@@ -412,6 +412,12 @@ public class VCRedirect {
 
     }
     
+    //个人中心内页
+    public class func goUserCenter() {
+        let vc = UIStoryboard.initialViewController("User", identifier:"WOWUserCenterController") as! WOWUserCenterController
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    
     //喜欢
     public class func goFavorite() {
         let vc = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavoriteController.self)) as! WOWFavoriteController
@@ -553,7 +559,8 @@ extension  UIViewController {
                     VCRedirect.toLoginSuccess(isPresent)
                     
                 }else{ //第一次登陆
-           
+                    MobClick.e(.Registration_Successful)
+
                     VCRedirect.toRegInfo(isPresent)
                     
                 }

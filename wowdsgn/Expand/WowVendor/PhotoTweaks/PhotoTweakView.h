@@ -38,8 +38,9 @@ extern const CGFloat kMaxRotationAngle;
 @property (nonatomic, strong, readonly) PhotoContentView *photoContentView;
 @property (nonatomic, strong, readonly) UISlider *slider;
 @property (nonatomic, strong, readonly) UIButton *resetBtn;
-
-
+@property (nonatomic, assign) BOOL isCrop;// 是否选择的原图  原图就不裁剪
+@property (nonatomic, assign) BOOL isRoat;// 原图是否旋转  原图就不裁剪
+@property (nonatomic, assign) int  sizeImgId;// 所选择的裁剪尺寸id
 - (instancetype)initWithFrame:(CGRect)frame
                         image:(UIImage *)image
              maxRotationAngle:(CGFloat)maxRotationAngle;

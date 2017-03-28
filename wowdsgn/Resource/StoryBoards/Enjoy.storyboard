@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ei6-IF-pjX">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ei6-IF-pjX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -48,6 +48,7 @@
                                         <state key="normal" title="21" image="praise-black">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" image="Thumb-active"/>
                                         <connections>
                                             <action selector="clickPraise:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="PWq-si-2Aw"/>
                                         </connections>
@@ -55,9 +56,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSA-8l-fbg">
                                         <rect key="frame" x="162" y="7" width="51" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="111" image="like-black">
+                                        <state key="normal" title="111" image="photoDetail-no">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" image="photoDetail-yes"/>
                                         <connections>
                                             <action selector="clickCollection:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="EIN-4v-wm8"/>
                                         </connections>
@@ -72,6 +74,7 @@
                                         <state key="normal" image="share-black">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" image="share-black"/>
                                         <connections>
                                             <action selector="clickShare:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="1ZP-I5-Y4W"/>
                                         </connections>
@@ -104,12 +107,54 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnCollection" destination="TSA-8l-fbg" id="gSr-47-lkj"/>
+                        <outlet property="btnPraiseCount" destination="1Ee-Wp-Dzk" id="W7r-kK-d0z"/>
                         <outlet property="tableView" destination="4mg-1d-Fbw" id="mq0-Yq-w4p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Vx-Pa-L1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1777" y="-329"/>
+        </scene>
+        <!--Choice Class Controller-->
+        <scene sceneID="py9-Ya-eN8">
+            <objects>
+                <viewController storyboardIdentifier="WOWChoiceClassController" id="B0N-au-49Y" customClass="WOWChoiceClassController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0SO-mE-0SE"/>
+                        <viewControllerLayoutGuide type="bottom" id="NpV-Ie-aya"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CyM-1B-e0X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Uvc-I1-pbH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1lN-Q1-m8v">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Uvc-I1-pbH" firstAttribute="top" secondItem="CyM-1B-e0X" secondAttribute="top" id="8dr-fx-jjD"/>
+                            <constraint firstItem="Uvc-I1-pbH" firstAttribute="leading" secondItem="CyM-1B-e0X" secondAttribute="leading" id="Lem-GF-5Ui"/>
+                            <constraint firstItem="NpV-Ie-aya" firstAttribute="top" secondItem="Uvc-I1-pbH" secondAttribute="bottom" id="Zs7-xm-nNz"/>
+                            <constraint firstAttribute="trailing" secondItem="Uvc-I1-pbH" secondAttribute="trailing" id="ks8-Cw-xAq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Uvc-I1-pbH" id="iTS-Vy-5SW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ti7-wa-ec6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3938.4000000000001" y="-312.59370314842579"/>
         </scene>
         <!--Release Works Controller-->
         <scene sceneID="sX4-Et-gSQ">
@@ -355,12 +400,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Thumb-active" width="30" height="30"/>
         <image name="add" width="58" height="58"/>
         <image name="btn_like_normal" width="70" height="70"/>
         <image name="btn_like_pressed" width="70" height="70"/>
         <image name="btn_skip_normal" width="70" height="70"/>
         <image name="btn_skip_pressed" width="70" height="70"/>
-        <image name="like-black" width="30" height="30"/>
+        <image name="photoDetail-no" width="30" height="30"/>
+        <image name="photoDetail-yes" width="30" height="30"/>
         <image name="praise-black" width="30" height="30"/>
         <image name="share-black" width="30" height="30"/>
     </resources>

@@ -14,8 +14,10 @@ class WOWEnjoyCategoryModel: WOWBaseModel,Mappable {
     var id                      :  Int?
     var categoryName            :  String?
     var isSelect                :  Bool = false
-
     
+    var title                   :  String?
+    var pic                   :  String?
+
     required init?(map: Map) {
         
     }
@@ -26,7 +28,9 @@ class WOWEnjoyCategoryModel: WOWBaseModel,Mappable {
     func mapping(map: Map) {
         id                          <- map["id"]
         categoryName                <- map["categoryName"]
-        
+        title                       <- map["title"]
+        pic                         <- map["pic"]
+     
     }
     
 }

@@ -262,3 +262,5 @@ let URL_GetCategory             = "v1/instagram/category"       //获取分类�
 
 let URL_GetInstagram            = "v1/instagram"                //获取图片列表
 
+let URL_PushImgWorks            = "v1/instagram/publish"            // 发布作品
+let URL_GetWorksDetails         = "v1/instagram/detail"             // 获取作品详情

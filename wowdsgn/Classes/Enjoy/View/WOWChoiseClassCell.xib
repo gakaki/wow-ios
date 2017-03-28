@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="WOWChoiseClassCell" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="127"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="127"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="gzB-NH-OiL">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="xLF-ap-isO"/>
+                            <constraint firstAttribute="width" constant="80" id="zzC-vV-bEZ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分类名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIk-p8-EdS">
+                        <rect key="frame" x="0.0" y="90" width="80" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分类名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDW-zr-Ajv">
+                        <rect key="frame" x="0.0" y="112" width="80" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="choiseClass-select" translatesAutoresizingMaskIntoConstraints="NO" id="Pj8-Rc-051">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Pj8-Rc-051" firstAttribute="width" secondItem="gzB-NH-OiL" secondAttribute="width" id="7ZA-Ek-olV"/>
+                <constraint firstItem="Pj8-Rc-051" firstAttribute="height" secondItem="gzB-NH-OiL" secondAttribute="height" id="KEg-hI-hy6"/>
+                <constraint firstAttribute="trailing" secondItem="gzB-NH-OiL" secondAttribute="trailing" id="M66-Lx-Bf0"/>
+                <constraint firstAttribute="trailing" secondItem="tIk-p8-EdS" secondAttribute="trailing" id="Og1-WA-kmO"/>
+                <constraint firstItem="EDW-zr-Ajv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="P1l-Qg-qxb"/>
+                <constraint firstItem="gzB-NH-OiL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Uh9-TW-sxA"/>
+                <constraint firstItem="tIk-p8-EdS" firstAttribute="top" secondItem="gzB-NH-OiL" secondAttribute="bottom" constant="10" id="VuE-9w-ZNo"/>
+                <constraint firstAttribute="bottom" secondItem="EDW-zr-Ajv" secondAttribute="bottom" constant="0.5" id="YNb-d7-2rv"/>
+                <constraint firstItem="EDW-zr-Ajv" firstAttribute="top" secondItem="tIk-p8-EdS" secondAttribute="bottom" constant="5" id="Zan-BW-eef"/>
+                <constraint firstItem="tIk-p8-EdS" firstAttribute="top" secondItem="gzB-NH-OiL" secondAttribute="bottom" constant="10" id="amd-SB-ywd"/>
+                <constraint firstItem="Pj8-Rc-051" firstAttribute="centerY" secondItem="gzB-NH-OiL" secondAttribute="centerY" id="bMk-Ml-C5I"/>
+                <constraint firstItem="gzB-NH-OiL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hiV-6S-ieW"/>
+                <constraint firstItem="tIk-p8-EdS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mZN-7V-lp9"/>
+                <constraint firstAttribute="trailing" secondItem="EDW-zr-Ajv" secondAttribute="trailing" id="pDW-pr-HoK"/>
+                <constraint firstItem="Pj8-Rc-051" firstAttribute="centerX" secondItem="gzB-NH-OiL" secondAttribute="centerX" id="yiP-yY-7sH"/>
+            </constraints>
+            <connections>
+                <outlet property="imgChoiseSelect" destination="Pj8-Rc-051" id="JIV-Ko-ByJ"/>
+                <outlet property="imgClassIcon" destination="gzB-NH-OiL" id="2uw-hQ-VcE"/>
+                <outlet property="lbClassName" destination="tIk-p8-EdS" id="9Es-Du-7Qw"/>
+                <outlet property="lbClassSubTittles" destination="EDW-zr-Ajv" id="sFp-Y1-qYv"/>
+            </connections>
+            <point key="canvasLocation" x="-96" y="-66"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="1" width="140" height="140"/>
+        <image name="choiseClass-select" width="80" height="80"/>
+    </resources>
+</document>

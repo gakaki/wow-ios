@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWWorksDetailsController: WOWBaseViewController {
-    var photo : UIImage!
+    var photo : UIImage?
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var btnPraiseCount: UIButton!
@@ -97,8 +97,13 @@ extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell                = tableView.dequeueReusableCell(withIdentifier: "WorksDetailCell", for: indexPath) as! WorksDetailCell
-        cell.heightConstraint.constant = 200
-        cell.imgPhoto.image = photo
+        
+        if let photo = photo {
+            
+         cell.imgPhoto.image = photo
+            
+        }
+        
         cell.selectionStyle = .none
         if let model = self.modelData {
             cell.showData(model)

@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,13 +14,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="329"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide1" translatesAutoresizingMaskIntoConstraints="NO" id="onv-Ld-ip0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="onv-Ld-ip0" secondAttribute="height" multiplier="1:1" id="hkD-xj-qvn"/>
+                            <constraint firstAttribute="height" constant="320" id="bKm-qJ-5G1"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分类名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcK-IJ-8BN">
@@ -40,6 +39,11 @@
                     <constraint firstItem="onv-Ld-ip0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="osJ-mR-9eR"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="heightConstraint" destination="bKm-qJ-5G1" id="Hby-xK-Sbn"/>
+                <outlet property="imgWroks" destination="onv-Ld-ip0" id="97y-no-XH0"/>
+                <outlet property="lbCategory" destination="AcK-IJ-8BN" id="DdL-V9-E55"/>
+            </connections>
             <point key="canvasLocation" x="35" y="116"/>
         </tableViewCell>
     </objects>

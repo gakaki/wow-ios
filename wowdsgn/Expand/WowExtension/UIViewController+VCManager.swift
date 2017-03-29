@@ -425,9 +425,9 @@ public class VCRedirect {
     }
     //优惠券可用商品
     //作品详情页
-    public class func bingWorksDetails() {
+    public class func bingWorksDetails(worksId:Int) {
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWWorksDetailsController.self)) as! WOWWorksDetailsController
-
+        vc.worksId = worksId
         topNaVC?.pushViewController(vc, animated: true)
     }
     //发布作品页

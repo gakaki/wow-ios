@@ -264,3 +264,7 @@ let URL_GetInstagram            = "v1/instagram"                //获取图片�
 
 let URL_PushImgWorks            = "v1/instagram/publish"            // 发布作品
 let URL_GetWorksDetails         = "v1/instagram/detail"             // 获取作品详情
+let URL_LikeWorks               = "v1/instagram/user/like"          // 喜欢作品
+let URL_CollectWorks            = "v1/instagram/user/collect"       // 收藏作品
+
+

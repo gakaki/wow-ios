@@ -28,6 +28,8 @@ class WorksDetailCell: UITableViewCell {
         
     }
     func showData(_ m : WOWWorksDetailsModel)  {
+//        itemHeight =
+        heightConstraint.constant = WOWArrayAddStr.get_img_sizeNew(str: m.pic ?? "", width: MGScreenWidth, defaule_size: .OneToOne)
         lbDes.text = m.des ?? ""
         lbMyName.text = m.nickName ?? ""
         imgPhoto.set_webimage_url(m.pic ?? "")

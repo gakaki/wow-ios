@@ -3,7 +3,6 @@
 //  wowapp
 //
 //  Created by 陈旭 on 16/8/26.
-//  Copyright © 2016年 小黑. All rights reserved.
 //
 
 import UIKit
@@ -19,7 +18,7 @@ enum QiniuBucket:String {// 七牛的路径
     case UserPhoto          = "user/avatar/"
     case FeebdBack          = "user/feedback/"
     case UserShopComment    = "product-review/"
-    
+    case ShowWorksDetail    = "social/insta/"
 }
 
 
@@ -97,22 +96,20 @@ class WOWUploadManager {
     }
     // 上传分享的图片
     static  func uploadShareImg(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
-        // 压缩图片
-//        let photoImage = imageCompressForWidth(sourceImage: image, targetWidth: 200)
-        //          拼接唯一字符串
-        let qiniu_key  = QiniuBucket.UserPhoto.rawValue + onlyStr()
+
+        // 拼接唯一字符串
+        let qiniu_key  = QiniuBucket.ShowWorksDetail.rawValue + onlyStr() + "_2dimension_" + String(describing: NSDecimalNumber(value: Int(image.size.width))) + "x" + String(describing: NSDecimalNumber(value: Int(image.size.height)))
         
         PushImage(image, imagePath: qiniu_key, successClosure: { (url) in
             // 保存用户URL
             if let url = url {
-                
-                let serverUrl = url + "?v=" + onlyStr() // 由于七牛云服务器的图片缓存问题， 所以在传给后台的时候， 要 拼上 ?v= XXX 这样的格式，确保从七牛读取图片时，拿到的最新的图片data ,同时本地也是如此
-    
-                
-                successClosure(serverUrl)
+
+                successClosure(url)
                 
             }else{
+                
                 print("上传头像格式错误")
+                
             }
             
             

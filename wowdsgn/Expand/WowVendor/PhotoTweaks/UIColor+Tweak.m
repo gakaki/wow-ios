@@ -54,6 +54,10 @@
 {
     return [UIColor colorWithRed:0.52 green:0.48 blue:0.47 alpha:0.8];
 }
++ (UIColor *)centerLineColor
+{
+    return [UIColor colorWithRed:255.0/255.0 green:212.0/255.0 blue:68.0/255.0 alpha:1];
+}
 
 + (UIColor *)photoTweakCanvasBackgroundColor
 {

@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4mg-1d-Fbw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4mg-1d-Fbw">
                                 <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -176,10 +176,10 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SS8-b6-nRB" customClass="KMPlaceholderTextView" customModule="wowdsgn">
-                                <rect key="frame" x="15" y="375" width="345" height="128"/>
+                                <rect key="frame" x="15" y="375" width="345" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="zzX-q6-h3Q"/>
+                                    <constraint firstAttribute="height" constant="80" id="zzX-q6-h3Q"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -204,6 +204,12 @@
                                     <action selector="releaseAction:" destination="yd9-sO-cjA" eventType="touchUpInside" id="a1b-08-fXg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3do-01-04G">
+                                <rect key="frame" x="333" y="440" width="27" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -215,11 +221,14 @@
                             <constraint firstAttribute="trailing" secondItem="mvA-e7-LgU" secondAttribute="trailing" constant="15" id="O4j-aU-P3S"/>
                             <constraint firstItem="SS8-b6-nRB" firstAttribute="top" secondItem="mvA-e7-LgU" secondAttribute="bottom" constant="15" id="b0G-x9-9N7"/>
                             <constraint firstItem="i9v-W4-dBQ" firstAttribute="top" secondItem="T66-rr-BU1" secondAttribute="bottom" id="dKy-Lb-uvx"/>
+                            <constraint firstItem="3do-01-04G" firstAttribute="bottom" secondItem="SS8-b6-nRB" secondAttribute="bottom" id="iYv-yH-Tli"/>
+                            <constraint firstItem="3do-01-04G" firstAttribute="trailing" secondItem="SS8-b6-nRB" secondAttribute="trailing" id="oDb-qS-7mL"/>
                             <constraint firstItem="mvA-e7-LgU" firstAttribute="top" secondItem="P2P-c7-o0p" secondAttribute="top" constant="15" id="vcM-8X-INI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imgPhoto" destination="mvA-e7-LgU" id="68E-Jh-BH7"/>
+                        <outlet property="numberLabel" destination="3do-01-04G" id="DPu-Hb-hYf"/>
                         <outlet property="textView" destination="SS8-b6-nRB" id="dve-sI-kse"/>
                     </connections>
                 </viewController>

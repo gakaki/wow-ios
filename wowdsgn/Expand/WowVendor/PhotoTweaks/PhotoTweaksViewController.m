@@ -83,11 +83,11 @@
 
 - (void)saveBtnTapped
 {
-    if (self.photoView.isCrop && self.photoView.isRoat) {
-        
-        [self.delegate photoTweaksController:self didFinishWithCroppedImage:self.image clooseSizeImgId:0];
-        return;
-    }
+//    if (self.photoView.isCrop && self.photoView.isRoat) {
+//        
+//        [self.delegate photoTweaksController:self didFinishWithCroppedImage:self.image clooseSizeImgId:self.photoView.sizeImgId];
+//        return;
+//    }
 
     CGAffineTransform transform = CGAffineTransformIdentity;
 

@@ -280,8 +280,11 @@ public enum RequestApi{
     case api_UserStatistics(params: [String: AnyObject])
     
     case api_WorksList(params: [String: AnyObject])
+    case api_LikeWorks(worksId: Int, type: Int)
+    case api_CollectWorks(worksId: Int)
+    case api_getInstagramList(params: [String: Any])
+    
 }
-
 
 extension RequestApi:TargetType{
     public var task: Task {
@@ -568,7 +571,7 @@ extension RequestApi:TargetType{
             return URL_LoginByCaptcha
         case .api_getCategory:
             return URL_GetCategory
-      
+        
         case .api_PushWorks:
             return URL_PushImgWorks
             
@@ -578,7 +581,12 @@ extension RequestApi:TargetType{
             return URL_UserStatistics
         case .api_WorksList:
             return URL_WorksList
-            
+        case .api_LikeWorks:
+            return URL_LikeWorks
+        case .api_CollectWorks:
+            return URL_CollectWorks
+        case .api_getInstagramList:
+            return URL_GetInstagram
         default:
             return URL_topic
         }
@@ -619,7 +627,10 @@ extension RequestApi:TargetType{
             .api_getCategory,
             .api_GetWorksDetails,
             .api_UserStatistics,
-            .api_WorksList:
+            .api_WorksList,
+            .api_LikeWorks,
+            .api_CollectWorks,
+            .api_getInstagramList:
 
             return .GET
 
@@ -881,6 +892,13 @@ extension RequestApi:TargetType{
             case let .api_WorksList(param):
                 params = param
             
+            case let .api_LikeWorks(worksId, type):
+                params = ["instagramId": worksId, "type": type]
+            case let .api_CollectWorks(worksId):
+                params = ["instagramId": worksId]
+            case let .api_getInstagramList(param):
+                params = param
+    
             default:
                 break
 

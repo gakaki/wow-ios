@@ -147,7 +147,8 @@ extension WOWWorkController:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = dataArr[(indexPath as NSIndexPath).row]
-        VCRedirect.bingWorksDetails()
+        VCRedirect.bingWorksDetails(worksId: product.id ?? 0)
+
 
     }
 

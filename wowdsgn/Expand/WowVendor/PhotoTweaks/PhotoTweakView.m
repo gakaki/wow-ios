@@ -183,26 +183,26 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         
         
         _gridLinesDismissed = YES;
-        
-        _upperLeft = [[CropCornerView alloc] initWithCornerType:CropCornerTypeUpperLeft];
-        _upperLeft.center = CGPointMake(kCropViewCornerLength / 2, kCropViewCornerLength / 2);
-        _upperLeft.autoresizingMask = UIViewAutoresizingNone;
-        [self addSubview:_upperLeft];
-        
-        _upperRight = [[CropCornerView alloc] initWithCornerType:CropCornerTypeUpperRight];
-        _upperRight.center = CGPointMake(self.frame.size.width - kCropViewCornerLength / 2, kCropViewCornerLength / 2);
-        _upperRight.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-        [self addSubview:_upperRight];
-        
-        _lowerRight = [[CropCornerView alloc] initWithCornerType:CropCornerTypeLowerRight];
-        _lowerRight.center = CGPointMake(self.frame.size.width - kCropViewCornerLength / 2, self.frame.size.height - kCropViewCornerLength / 2);
-        _lowerRight.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-        [self addSubview:_lowerRight];
-        
-        _lowerLeft = [[CropCornerView alloc] initWithCornerType:CropCornerTypeLowerLeft];
-        _lowerLeft.center = CGPointMake(kCropViewCornerLength / 2, self.frame.size.height - kCropViewCornerLength / 2);
-        _lowerLeft.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-        [self addSubview:_lowerLeft];
+        ////// 四个角的边框
+//        _upperLeft = [[CropCornerView alloc] initWithCornerType:CropCornerTypeUpperLeft];
+//        _upperLeft.center = CGPointMake(kCropViewCornerLength / 2, kCropViewCornerLength / 2);
+//        _upperLeft.autoresizingMask = UIViewAutoresizingNone;
+//        [self addSubview:_upperLeft];
+//        
+//        _upperRight = [[CropCornerView alloc] initWithCornerType:CropCornerTypeUpperRight];
+//        _upperRight.center = CGPointMake(self.frame.size.width - kCropViewCornerLength / 2, kCropViewCornerLength / 2);
+//        _upperRight.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+//        [self addSubview:_upperRight];
+//        
+//        _lowerRight = [[CropCornerView alloc] initWithCornerType:CropCornerTypeLowerRight];
+//        _lowerRight.center = CGPointMake(self.frame.size.width - kCropViewCornerLength / 2, self.frame.size.height - kCropViewCornerLength / 2);
+//        _lowerRight.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
+//        [self addSubview:_lowerRight];
+//        
+//        _lowerLeft = [[CropCornerView alloc] initWithCornerType:CropCornerTypeLowerLeft];
+//        _lowerLeft.center = CGPointMake(kCropViewCornerLength / 2, self.frame.size.height - kCropViewCornerLength / 2);
+//        _lowerLeft.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+//        [self addSubview:_lowerLeft];
         [self showCropLines];
     }
     return self;
@@ -470,6 +470,8 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         
         
         _originalPoint = [self convertPoint:self.scrollView.center toView:self];
+        [self configCropView:CGSizeMake(CX_W, CX_W)];
+        self.sizeImgId = 1;
     }
     return self;
 }
@@ -512,7 +514,9 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         
         // 加载按钮到视图
         sizeBtn.tag = i;
-        
+        if (i == 0) {
+            [sizeBtn setSelected:YES];
+        }
         [_proportionBtns addObject:sizeBtn];
         
         [_bottomBtnsView addSubview:sizeBtn];
@@ -554,7 +558,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
             UILabel *lbDegree = [UILabel new];
             
             
-            lbDegree.frame = CGRectMake(0, 0, 40, 10);
+            lbDegree.frame = CGRectMake(0, 0, 45, 10);
             lbDegree.font = [UIFont systemFontOfSize:12];
             
             lbDegree.center = CGPointMake(viewLine.center.x, angleHeight + (lbDegree.mj_h / 2) + 5);
@@ -579,8 +583,8 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     _scaleMaskView.image = [UIImage imageNamed:@"scaleMask"];
     [self addSubview:_scaleMaskView];
     
-    _centerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2, _scrollViewAngle.mj_h)];
-    _centerView.backgroundColor = [UIColor orangeColor];
+    _centerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2, _scrollViewAngle.mj_h - 10)];
+    _centerView.backgroundColor = [UIColor centerLineColor];
     _centerView.center = CGPointMake(_scrollViewAngle.center.x, _scrollViewAngle.center.y - (_scrollViewAngle.mj_h - angleHeight));
     [self addSubview:_centerView];
     
@@ -892,12 +896,13 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
             if (btn.selected == NO) {
                 [btn setSelected:YES];
                 [self configCropView:CGSizeMake(width, height)];
-            }else{// 取消的话 恢复原本状态
-                [btn setSelected:NO];
-                _isCrop =  YES;
-                self.sizeImgId = 0;
-                [self configCropView:CGSizeMake(self.originalSize.width, self.originalSize.height)];
             }
+//            else{// 取消的话 恢复原本状态
+//                [btn setSelected:NO];
+//                _isCrop =  YES;
+//                self.sizeImgId = 0;
+//                [self configCropView:CGSizeMake(self.originalSize.width, self.originalSize.height)];
+//            }
             
         }
     }];

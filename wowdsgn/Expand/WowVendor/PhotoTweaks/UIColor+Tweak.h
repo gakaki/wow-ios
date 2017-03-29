@@ -22,6 +22,7 @@
 + (UIColor *)cropLineColor;
 + (UIColor *)gridLineColor;
 + (UIColor *)maskColor;
++ (UIColor *)centerLineColor;
 + (UIColor *)photoTweakCanvasBackgroundColor;
 
 @end

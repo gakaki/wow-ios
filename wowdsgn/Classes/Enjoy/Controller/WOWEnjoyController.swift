@@ -18,7 +18,7 @@ class WOWEnjoyController: WOWBaseViewController {
     var vc_newEnjoy:WOWNewEnjoyController?
     var vc_masterpiece:WOWMasterpieceController?
     var isOpen: Bool = false
-    
+    var currentCategoryId = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         requestCategory()
@@ -79,7 +79,9 @@ class WOWEnjoyController: WOWBaseViewController {
         
         
         vc_newEnjoy    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWNewEnjoyController.self)) as? WOWNewEnjoyController
+//        vc_newEnjoy.
         vc_masterpiece    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWMasterpieceController.self)) as? WOWMasterpieceController
+        vc_masterpiece?.categoryId = self.currentCategoryId
         
         v.magicView.reloadData()
     }
@@ -232,7 +234,14 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
 
 extension WOWEnjoyController:WOWSelectCategoryDelegate{
     
-    func selectCategory() {
+    func selectCategory(categoryId:Int) {
+        
+        currentCategoryId = categoryId
+        
+        vc_masterpiece?.categoryId = categoryId
+        vc_masterpiece?.request()
+//        v.magicView.reloadData()
+        
        changeButtonState()
     }
 }

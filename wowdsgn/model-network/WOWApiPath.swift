@@ -268,3 +268,7 @@ let URL_GetWorksDetails         = "v1/instagram/detail"             // 获取作
 let URL_UserStatistics          = "v1/instagram/user/statistics"        //作品统计
 
 let URL_WorksList               = "v1/instagram/user"               //作品列表
+let URL_LikeWorks               = "v1/instagram/user/like"          // 喜欢作品
+let URL_CollectWorks            = "v1/instagram/user/collect"       // 收藏作品
+
+

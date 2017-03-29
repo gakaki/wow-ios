@@ -19,13 +19,13 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6p1-ko-8dp">
                         <rect key="frame" x="3" y="3" width="369" height="135"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="135" id="tfc-fl-6Ep"/>
-                        </constraints>
                     </imageView>
                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRR-aX-04E">
                         <rect key="frame" x="3" y="3" width="369" height="135"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="135" id="Kxo-zK-4OY"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <constraints>

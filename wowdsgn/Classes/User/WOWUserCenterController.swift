@@ -18,13 +18,20 @@ class WOWUserCenterController: WOWBaseViewController {
     var vc_product:WOWWorkController?
     var vc_brand:WOWPraiseController?
     var vc_designer:WOWCollectController?
+    
+    @IBOutlet weak var selfIntroduction: UILabel!
+    @IBOutlet weak var workNum: UILabel!
+    @IBOutlet weak var praiseNum: UILabel!
+    @IBOutlet weak var favoriteNum: UILabel!
+    @IBOutlet weak var userHeadImg: UIImageView!
     @IBOutlet weak var cvTop: NSLayoutConstraint!
     @IBOutlet weak var topView: UIView!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = WOWUserManager.userName
+        request()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -37,12 +44,12 @@ class WOWUserCenterController: WOWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        MobClick.e(.Like_Page)
     }
     
     override func setUI() {
         super.setUI()
-        
+        userHeadImg.borderRadius(40)
+
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
         v.magicView.delegate            = self
@@ -74,6 +81,32 @@ class WOWUserCenterController: WOWBaseViewController {
         
 
         v.magicView.reloadData()
+    }
+    //MAERK: Net
+    override func request() {
+        super.request()
+        let param = [String: AnyObject]()
+        WOWNetManager.sharedManager.requestWithTarget(.api_UserStatistics(params: param), successClosure: { [weak self](result, code) in
+            if let strongSelf = self{
+                let model = Mapper<WOWStatisticsModel>().map(JSONObject:result)
+                strongSelf.refreshUserInfo(model: model)
+            }
+            
+        }) { (errorMsg) in
+            
+        }
+        
+    }
+    func refreshUserInfo(model: WOWStatisticsModel?) {
+        if let model = model {
+            self.title = model.nickName
+            userHeadImg.set_webimage_url(model.avatar)
+            workNum.text = String(format: "%i", model.instagramCounts ?? 0)
+            praiseNum.text = String(format: "%i", model.likeCounts ?? 0)
+            favoriteNum.text = String(format: "%i", model.collectCounts ?? 0)
+            selfIntroduction.text = model.selfIntroduction
+
+        }
     }
 
     override func didReceiveMemoryWarning() {

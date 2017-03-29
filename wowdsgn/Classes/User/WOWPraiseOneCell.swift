@@ -12,12 +12,14 @@ class WOWPraiseOneCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var numLabel: UILabel!
+    @IBOutlet weak var v_height: NSLayoutConstraint!
     
     let CellID: String = String(describing: WOWWorksCell.self)
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        v_height.constant = (MGScreenWidth - 12)/3
         configCollectionView()
     }
     
@@ -60,7 +62,7 @@ extension WOWPraiseOneCell: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! WOWWorksCell
-        
+        cell.imageView.borderRadius(18.w)
         return cell
     }
 

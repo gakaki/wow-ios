@@ -10,18 +10,19 @@ import UIKit
 import StoreKit
 
 class WOWUserController: WOWBaseTableViewController {
-//    var headerView      :   WOWUserTopView!
-    var image_next_view: UIImage!
     
     @IBOutlet weak var allOrderView : UIView!
     @IBOutlet weak var noPayView    : UIView!
     @IBOutlet weak var noSendView   : UIView!
     @IBOutlet weak var noReceiveView: UIView!
     @IBOutlet weak var noCommentView: UIView!
+    var userModel: WOWStatisticsModel?
     
     override func viewWillAppear(_ animated: Bool) {
         hideNavigationBar = true
         super.viewWillAppear(animated)
+        isCurrentRequest = true
+        request()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -51,6 +52,7 @@ class WOWUserController: WOWBaseTableViewController {
         v.userBack.addAction({
             VCRedirect.goUserCenter()
         })
+        v.editBtn.addTarget(self, action: #selector(goUserInfo), for:.touchUpInside)
         return v
     }()
     
@@ -105,120 +107,71 @@ class WOWUserController: WOWBaseTableViewController {
             return
         }
 
-//        let vc = UIStoryboard.initialViewController("User", identifier:String(WOWOrderController)) as! WOWOrderController
-//        vc.selectIndex = type
         let vc = WOWOrderListViewController()
         vc.selectCurrentIndex = type
         navigationController?.pushViewController(vc, animated: true)
     }
-    /**
-     刷新headerView上面的用户信息
-     */
+   
     fileprivate func configHeaderView(){
-//        headerView       = WOWUserTopView()
-//        headerView.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: 270)
-//        headerView.configShow(WOWUserManager.loginStatus)
-//        headerView.topContainerView.addAction {[weak self] in
-//            if let strongSelf = self{
-//                if WOWUserManager.loginStatus{
-//                    strongSelf.goUserInfo()
-//                }else{
-//                    strongSelf.toLoginVC(true)
-//                }
-//            }
-//        }
-//        configUserInfo()
-//        self.tableView.tableHeaderView = nil
+
         self.tableView.addSubview(headerView)
         let userView = UIView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: 9/16*MGScreenWidth))
         userView.isUserInteractionEnabled = false
         self.tableView.tableHeaderView = userView
     }
+
     
-    fileprivate func goUserInfo(){
-        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWUserInfoController.self)) as! WOWUserInfoController
-        vc.editInfoAction = { [weak self] in
-            if let strongSelf = self{
-//                strongSelf.configUserInfo()
-            }
-        }
-        navigationController?.pushViewController(vc, animated: true)
+    /**
+     刷新headerView上面的用户信息
+     */
+    func refreshUserInfo() {
+        headerView.configUserInfo(model: userModel)
     }
-    
-//    fileprivate func configUserInfo(){
-//        if WOWUserManager.loginStatus {
-//            
-//            if ( self.image_next_view != nil){
-//                headerView.headImageView.image =  self.image_next_view 
-//            }else{
-//                /**
-//                 *  先判断 本地是否有保存头像数据
-//                 */
-//                if   WOWUserManager.userPhotoData.isEmpty {
-//                    headerView.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
-////                    headerView.headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
-//                    
-//
-//                }else{
-//                    DispatchQueue.main.async {
-//                        // 取头像数据
-//                        if let myImage = NSKeyedUnarchiver.unarchiveObject(with: WOWUserManager.userPhotoData as Data) as? UIImage {
-//                            self.headerView.headImageView.image = myImage
-//
-//                        }
-//                        
-//                    }
-//                }
-//
-//              }
-//            // UI
-//            headerView.nameLabel.text = WOWUserManager.userName
-//            headerView.desLabel.text  = WOWUserManager.userDes
-//        }else{
-//            headerView.headImageView.image = UIImage(named: "placeholder_userhead")
-//        }
-//    }
-    
     
     
     fileprivate func addObserver(){
         /**
          添加通知
          */
-        NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(changeHeaderImage), name:NSNotification.Name(rawValue: WOWUpdateUserHeaderImageNotificationKey), object:nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(updateBageCount), name:NSNotification.Name(rawValue: WOWUpdateCarBadgeNotificationKey), object:nil)
-         NotificationCenter.default.addObserver(self, selector:#selector(loginSuccess), name:NSNotification.Name(rawValue: WOWChangeUserInfoNotificationKey), object:nil)
     }
     
 //MARK:Actions
 
-    func changeHeaderImage(_ notification: Notification){
-        
-        let userInfo = (notification as NSNotification).userInfo
-        if  let image  = userInfo!["image"] as? UIImage {
-//            self.headerView.headImageView.image = image
-            self.image_next_view = image
-        }
-
+    func goUserInfo() {
+        VCRedirect.goUserInfo()
     }
-    
     
     func exitLogin() {
-        self.image_next_view = nil
-        configHeaderView()
+        userModel = nil
+        refreshUserInfo()
     }
-    
-    func loginSuccess(){
-        configHeaderView()
-    }
+
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         if offsetY < 0 {
             headerView.frame = CGRect(x: 0, y: offsetY, width: MGScreenWidth, height: 9/16*MGScreenWidth - offsetY)
         }
+    }
+    
+    //MAERK: Net
+    override func request() {
+        super.request()
+        let param = [String: AnyObject]()
+        WOWNetManager.sharedManager.requestWithTarget(.api_UserStatistics(params: param), successClosure: { [weak self](result, code) in
+            if let strongSelf = self{
+                let model = Mapper<WOWStatisticsModel>().map(JSONObject:result)
+                if model != strongSelf.userModel {
+                    strongSelf.userModel = model
+                    strongSelf.refreshUserInfo()
+                }
+            }
+            
+        }) { (errorMsg) in
+            
+        }
+
     }
 }
 
@@ -270,10 +223,6 @@ extension WOWUserController{
         
     }
     
-    fileprivate func evaluateApp(){
-        let vc = UIStoryboard.initialViewController("User", identifier:"WOWAboutController") as! WOWAboutController
-        navigationController?.pushViewController(vc, animated: true)
-    }
     
  
     

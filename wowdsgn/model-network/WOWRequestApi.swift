@@ -276,6 +276,10 @@ public enum RequestApi{
     case api_PushWorks(params: [String: AnyObject])
     
     case api_GetWorksDetails(worksId: Int)
+    
+    case api_UserStatistics(params: [String: AnyObject])
+    
+    case api_WorksList(params: [String: AnyObject])
 }
 
 
@@ -570,6 +574,10 @@ extension RequestApi:TargetType{
             
         case .api_GetWorksDetails:
             return URL_GetWorksDetails
+        case .api_UserStatistics:
+            return URL_UserStatistics
+        case .api_WorksList:
+            return URL_WorksList
             
         default:
             return URL_topic
@@ -609,7 +617,9 @@ extension RequestApi:TargetType{
             .api_Home_Tabs,
             .api_ProductCategory,
             .api_getCategory,
-            .api_GetWorksDetails:
+            .api_GetWorksDetails,
+            .api_UserStatistics,
+            .api_WorksList:
 
             return .GET
 
@@ -866,6 +876,10 @@ extension RequestApi:TargetType{
             case let .api_GetWorksDetails(worksId):
                 
                 params = ["id": worksId]
+            case let .api_UserStatistics(param):
+                params = param
+            case let .api_WorksList(param):
+                params = param
             
             default:
                 break

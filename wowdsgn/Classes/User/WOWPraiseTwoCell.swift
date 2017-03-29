@@ -60,7 +60,8 @@ extension WOWPraiseTwoCell: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! WOWWorksCell
-        
+        cell.imageView.borderRadius(18.w)
+
         return cell
     }
     

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,20 +20,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="4FJ-bI-0PZ">
-                        <rect key="frame" x="0.0" y="0.0" width="750" height="751"/>
+                        <rect key="frame" x="0.0" y="0.0" width="750" height="750.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="4FJ-bI-0PZ" secondAttribute="height" multiplier="1:1" id="CKR-CG-44A"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KaL-hi-7Cz">
-                        <rect key="frame" x="15" y="16" width="40" height="40"/>
+                        <rect key="frame" x="15" y="15" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="Qku-Jj-MbC"/>
                             <constraint firstAttribute="width" constant="40" id="u9A-gQ-jcZ"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="异见艺术" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwP-OX-uSG">
-                        <rect key="frame" x="65" y="25" width="227" height="21"/>
+                        <rect key="frame" x="65" y="24" width="227" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="4PU-qr-rnM"/>
                         </constraints>
@@ -52,7 +52,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23333" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5D-Jo-Q5N">
-                        <rect key="frame" x="103" y="718" width="42" height="21"/>
+                        <rect key="frame" x="103" y="717.5" width="42" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="42" id="3ya-9K-jhL"/>
                             <constraint firstAttribute="height" constant="21" id="Lvb-Yi-cJa"/>
@@ -82,7 +82,7 @@
                         </variation>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhE-to-c02" userLabel="Button-zan">
-                        <rect key="frame" x="73" y="712" width="30" height="30"/>
+                        <rect key="frame" x="73" y="711.5" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="APQ-Qi-tPN"/>
                             <constraint firstAttribute="height" constant="30" id="aEc-4m-scJ"/>
@@ -100,7 +100,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-ED-frs">
-                        <rect key="frame" x="57" y="718" width="1" height="21"/>
+                        <rect key="frame" x="57" y="717.5" width="1" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="1" id="FAQ-a6-mbn"/>
                             <constraint firstAttribute="height" constant="21" id="fiP-3v-P7d"/>
@@ -116,7 +116,7 @@
                         </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJl-mc-JXc">
-                        <rect key="frame" x="275" y="713" width="30" height="30"/>
+                        <rect key="frame" x="275" y="712.5" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="5nM-pp-LEh"/>
                             <constraint firstAttribute="width" constant="30" id="7YM-z9-G0M"/>
@@ -182,25 +182,25 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="Ndh-uu-0mc"/>
-                        <exclude reference="YIg-R3-7dg"/>
-                        <exclude reference="lvp-g4-ycL"/>
-                        <exclude reference="s8N-0B-W0T"/>
-                        <exclude reference="uMd-Ew-sYj"/>
-                        <exclude reference="DFN-4D-zEe"/>
-                        <exclude reference="GEK-xA-imf"/>
-                        <exclude reference="We0-tt-dPp"/>
-                        <exclude reference="PtL-zL-wiO"/>
-                        <exclude reference="SvI-ft-sWm"/>
-                        <exclude reference="ygN-Rz-42C"/>
-                        <exclude reference="4xn-I9-GFE"/>
-                        <exclude reference="5tv-Xf-SWb"/>
-                        <exclude reference="WrO-QY-3b4"/>
                         <exclude reference="4lQ-MR-orC"/>
                         <exclude reference="Bm7-h4-CaL"/>
                         <exclude reference="NWT-hv-g1L"/>
                         <exclude reference="en9-UD-FB2"/>
                         <exclude reference="fKY-ON-B3w"/>
+                        <exclude reference="4xn-I9-GFE"/>
+                        <exclude reference="5tv-Xf-SWb"/>
+                        <exclude reference="WrO-QY-3b4"/>
+                        <exclude reference="PtL-zL-wiO"/>
+                        <exclude reference="SvI-ft-sWm"/>
+                        <exclude reference="ygN-Rz-42C"/>
+                        <exclude reference="DFN-4D-zEe"/>
+                        <exclude reference="GEK-xA-imf"/>
+                        <exclude reference="We0-tt-dPp"/>
+                        <exclude reference="Ndh-uu-0mc"/>
+                        <exclude reference="YIg-R3-7dg"/>
+                        <exclude reference="lvp-g4-ycL"/>
+                        <exclude reference="s8N-0B-W0T"/>
+                        <exclude reference="uMd-Ew-sYj"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

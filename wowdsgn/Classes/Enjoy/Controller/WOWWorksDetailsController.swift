@@ -11,6 +11,13 @@ import UIKit
 class WOWWorksDetailsController: WOWBaseViewController {
     var photo : UIImage!
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var btnPraiseCount: UIButton!
+    
+    @IBOutlet weak var btnCollection: UIButton!
+    
+    var worksId : Int?
+    var modelData : WOWWorksDetailsModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -22,9 +29,32 @@ class WOWWorksDetailsController: WOWBaseViewController {
         navigationItem.title = "作品详情"
         //        configureSearchController()
         tableView.register(UINib.nibName("WorksDetailCell"), forCellReuseIdentifier:"WorksDetailCell")
-        // Do any additional setup after loading the view.
+        request()
+      
     }
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(.api_GetWorksDetails(worksId: worksId ?? 0), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+                
+                strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
+                strongSelf.btnPraiseCount.setTitle(strongSelf.modelData?.totalLikeCounts?.toString, for: .normal)
+                strongSelf.btnCollection.setTitle(strongSelf.modelData?.totalCollectCounts?.toString, for: .normal)
+                
+                strongSelf.tableView.reloadData()
 
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+              
+                WOWHud.dismiss()
+            }
+        }
+        
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -70,6 +100,10 @@ extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource{
         cell.heightConstraint.constant = 200
         cell.imgPhoto.image = photo
         cell.selectionStyle = .none
+        if let model = self.modelData {
+            cell.showData(model)
+        }
+        
         return cell
         
         

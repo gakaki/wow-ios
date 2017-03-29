@@ -272,6 +272,10 @@ public enum RequestApi{
     //欣赏
     //获取分类
     case api_getCategory
+    
+    case api_PushWorks(params: [String: AnyObject])
+    
+    case api_GetWorksDetails(worksId: Int)
 }
 
 
@@ -560,6 +564,12 @@ extension RequestApi:TargetType{
             return URL_LoginByCaptcha
         case .api_getCategory:
             return URL_GetCategory
+      
+        case .api_PushWorks:
+            return URL_PushImgWorks
+            
+        case .api_GetWorksDetails:
+            return URL_GetWorksDetails
             
         default:
             return URL_topic
@@ -598,7 +608,8 @@ extension RequestApi:TargetType{
             .api_TagProduct,
             .api_Home_Tabs,
             .api_ProductCategory,
-            .api_getCategory:
+            .api_getCategory,
+            .api_GetWorksDetails:
 
             return .GET
 
@@ -849,6 +860,13 @@ extension RequestApi:TargetType{
                 params = param
             case let .api_ProductCategory(param):
                 params = param
+            // 欣赏
+            case let .api_PushWorks(param):
+                params = param
+            case let .api_GetWorksDetails(worksId):
+                
+                params = ["id": worksId]
+            
             default:
                 break
 

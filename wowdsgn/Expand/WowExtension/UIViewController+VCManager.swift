@@ -431,11 +431,14 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
     //发布作品页
-    public class func bingReleaseWorks(photo:UIImage!) {
+    public class func bingReleaseWorks(photo:UIImage!,instagramCategoryId:Int,sizeImgId:Int) {
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWReleaseWorksController.self)) as! WOWReleaseWorksController
         vc.photo = photo
-//        vc.showPhoto(image: photo)
+        vc.instagramCategoryId = instagramCategoryId
+        vc.imgSizeId = sizeImgId
+
         topNaVC?.pushViewController(vc, animated: true)
+        
     }
     //    //点击跳转
     class func goToBannerTypeController(_ model: WOWCarouselBanners) {

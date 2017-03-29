@@ -29,16 +29,20 @@
     }
     return self;
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+   
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-//    self.navigationController.navigationBarHidden = YES;
 
-//    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
-//        self.automaticallyAdjustsScrollViewInsets = NO;
-//    }
+    self.navigationController.navigationBar.translucent = NO;
+    
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = YES;
+    }
     self.title = @"编辑图片";
 
     
@@ -61,34 +65,6 @@
 
     [self setupSubviews];
 }
-- (void)configTopView{
-    
-//    UIView *viewTop = [UIView new];
-//    viewTop.frame = CGRectMake(0, 0, DV_W, 64);
-//    viewTop.backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:viewTop];
-//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    backBtn.frame = CGRectMake(0, 0, 60, 64);
-//    backBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
-//    [backBtn setTitle:@"返回" forState:UIControlStateNormal];
-//    [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [backBtn addTarget:self action:@selector(cancelBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [viewTop addSubview:backBtn];
-//    UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    nextBtn.frame = CGRectMake(DV_W - 60, 0, 60, 64);
-//    nextBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
-//    [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
-//    [nextBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [nextBtn addTarget:self action:@selector(saveBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [viewTop addSubview:nextBtn];
-//    UILabel *lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(DV_W/2, 0, 100, 64)];
-//    lbTitle.textColor = [UIColor blackColor];
-//    lbTitle.textAlignment = NSTextAlignmentCenter;
-//    lbTitle.text = @"编辑图片";
-//    [viewTop addSubview:lbTitle];
-    
-    
-}
 - (void)setupSubviews
 {
     self.photoView = [[PhotoTweakView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64) image:self.image maxRotationAngle:self.maxRotationAngle];
@@ -96,46 +72,23 @@
     self.photoView.backgroundColor = [UIColor orangeColor];
     [self.view addSubview:self.photoView];
     
-//    [self configTopView];
-    
-    
-//    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    cancelBtn.frame = CGRectMake(8, CGRectGetHeight(self.view.frame) - 40, 60, 40);
-//    cancelBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
-//    [cancelBtn setTitle:NSLocalizedStringFromTable(@"Cancel", @"PhotoTweaks", nil) forState:UIControlStateNormal];
-//    UIColor *cancelTitleColor = !self.cancelButtonTitleColor ?
-//    [UIColor cancelButtonColor] : self.cancelButtonTitleColor;
-//    [cancelBtn setTitleColor:cancelTitleColor forState:UIControlStateNormal];
-//    UIColor *cancelHighlightTitleColor = !self.cancelButtonHighlightTitleColor ?
-//    [UIColor cancelButtonHighlightedColor] : self.cancelButtonHighlightTitleColor;
-//    [cancelBtn setTitleColor:cancelHighlightTitleColor forState:UIControlStateHighlighted];
-//    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:17];
-//    [cancelBtn addTarget:self action:@selector(cancelBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:cancelBtn];
-//    
-//    UIButton *cropBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    cropBtn.titleLabel.textAlignment = NSTextAlignmentRight;
-//    cropBtn.frame = CGRectMake(CGRectGetWidth(self.view.frame) - 60, CGRectGetHeight(self.view.frame) - 40, 60, 40);
-//    [cropBtn setTitle:NSLocalizedStringFromTable(@"Done", @"PhotoTweaks", nil) forState:UIControlStateNormal];
-//    UIColor *saveButtonTitleColor = !self.saveButtonTitleColor ?
-//    [UIColor saveButtonColor] : self.saveButtonTitleColor;
-//    [cropBtn setTitleColor:saveButtonTitleColor forState:UIControlStateNormal];
-//    
-//    UIColor *saveButtonHighlightTitleColor = !self.saveButtonHighlightTitleColor ?
-//    [UIColor saveButtonHighlightedColor] : self.saveButtonHighlightTitleColor;
-//    [cropBtn setTitleColor:saveButtonHighlightTitleColor forState:UIControlStateHighlighted];
-//    cropBtn.titleLabel.font = [UIFont systemFontOfSize:17];
-//    [cropBtn addTarget:self action:@selector(saveBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:cropBtn];
+
 }
 
 - (void)cancelBtnTapped
 {
+     self.navigationController.navigationBar.translucent = YES;
     [self.delegate photoTweaksControllerDidCancel:self];
 }
 
 - (void)saveBtnTapped
 {
+    if (self.photoView.isCrop && self.photoView.isRoat) {
+        
+        [self.delegate photoTweaksController:self didFinishWithCroppedImage:self.image clooseSizeImgId:0];
+        return;
+    }
+
     CGAffineTransform transform = CGAffineTransformIdentity;
 
     // translate
@@ -170,7 +123,7 @@
         }];
     }
 
-    [self.delegate photoTweaksController:self didFinishWithCroppedImage:image];
+    [self.delegate photoTweaksController:self didFinishWithCroppedImage:image clooseSizeImgId:self.photoView.sizeImgId];
 }
 
 - (CGImageRef)newScaledImage:(CGImageRef)source withOrientation:(UIImageOrientation)orientation toSize:(CGSize)size withQuality:(CGInterpolationQuality)quality
@@ -273,10 +226,10 @@
     return resultRef;
 }
 
-//- (UIStatusBarStyle)preferredStatusBarStyle
-//{
-//    return UIStatusBarStyleLightContent;
-//}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
 
 - (void)didReceiveMemoryWarning
 {

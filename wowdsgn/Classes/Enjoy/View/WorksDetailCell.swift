@@ -27,7 +27,13 @@ class WorksDetailCell: UITableViewCell {
          imgMyPhoto.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
         
     }
-
+    func showData(_ m : WOWWorksDetailsModel)  {
+        lbDes.text = m.des ?? ""
+        lbMyName.text = m.nickName ?? ""
+        imgPhoto.set_webimage_url(m.pic ?? "")
+        lbMyIntro.text = (m.instagramCounts?.toString)!  + "件作品／" + (m.likeCounts?.toString)! + "次被赞"
+        
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

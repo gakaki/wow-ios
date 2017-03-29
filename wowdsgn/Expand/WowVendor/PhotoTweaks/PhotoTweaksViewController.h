@@ -85,7 +85,7 @@
 /**
  Called on image cropped.
  */
-- (void)photoTweaksController:(PhotoTweaksViewController *)controller didFinishWithCroppedImage:(UIImage *)croppedImage;
+- (void)photoTweaksController:(PhotoTweaksViewController *)controller didFinishWithCroppedImage:(UIImage *)croppedImage clooseSizeImgId:(int)sizeId;
 
 /**
  Called on cropping image canceled

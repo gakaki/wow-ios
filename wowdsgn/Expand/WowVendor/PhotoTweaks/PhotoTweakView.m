@@ -350,6 +350,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 @property (nonatomic, strong) UIView *bottomMask;
 @property (nonatomic, strong) UIView *rightMask;
 @property (nonatomic, strong) UIView *centerView; // 中间指示条
+@property (nonatomic, strong) UIImageView *scaleMaskView; // 透明蒙版
 // constants
 @property (nonatomic, assign) CGSize maximumCanvasSize;
 @property (nonatomic, assign) CGFloat centerY;
@@ -369,6 +370,8 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         self.frame = frame;
         
         _image = image;
+        _isCrop = YES; // 默认不裁剪
+        _isRoat = YES; // 默认不旋转
         _maxRotationAngle = maxRotationAngle;
         
         // scale the image 画布大小
@@ -519,8 +522,8 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 }
 // 配置滚动角度的scrollView
 -(void)configAngleScrollView {
-    float angleHeight = 46;
-    
+    float angleHeight = 50;
+    float lineHeight  = 36;
     
     float scroollViewWidth = CX_W - 30;
     
@@ -544,21 +547,25 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     _scrollViewAngle.contentSize = CGSizeMake(contentSizeX + scroollViewWidth, 60);
     for (int i = 0; i <= allGrid; i++) {
         UIView *viewLine = [UIView new];
-        viewLine.frame = CGRectMake(scroollViewWidth/2 + gridWidth*i, 0, 1, 36);
+        viewLine.frame = CGRectMake(scroollViewWidth/2 + gridWidth*i, 0, 1, lineHeight);
         viewLine.backgroundColor = [UIColor darkGrayColor];
         viewLine.center = CGPointMake(viewLine.center.x, angleHeight / 2 );
         if (i%5 == 0) {
             UILabel *lbDegree = [UILabel new];
             
-            viewLine.mj_h = angleHeight;
+            
             lbDegree.frame = CGRectMake(0, 0, 40, 10);
             lbDegree.font = [UIFont systemFontOfSize:12];
             
-            lbDegree.center = CGPointMake(viewLine.center.x, angleHeight - (lbDegree.mj_w / 2));
+            lbDegree.center = CGPointMake(viewLine.center.x, angleHeight + (lbDegree.mj_h / 2) + 5);
             lbDegree.textAlignment = NSTextAlignmentCenter;
             lbDegree.text = [NSString stringWithFormat:@"%i°",i - maxDegree];
             
             [_scrollViewAngle addSubview:lbDegree];
+            
+            viewLine.mj_h = angleHeight;
+            
+            viewLine.center = CGPointMake(viewLine.center.x, (angleHeight / 2) - (angleHeight -  lineHeight)/2 );
         }
         
         [_scrollViewAngle addSubview:viewLine];
@@ -567,9 +574,14 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     // 指定到中间的位置
     [_scrollViewAngle setContentOffset:CGPointMake(((gridWidth * allGrid)/2) - 0.5, 0) animated:NO];
     [self addSubview:_scrollViewAngle];
-    _centerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2, 60)];
+    
+    _scaleMaskView = [[UIImageView alloc] initWithFrame:_scrollViewAngle.frame];
+    _scaleMaskView.image = [UIImage imageNamed:@"scaleMask"];
+    [self addSubview:_scaleMaskView];
+    
+    _centerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2, _scrollViewAngle.mj_h)];
     _centerView.backgroundColor = [UIColor orangeColor];
-    _centerView.center =  _scrollViewAngle.center;
+    _centerView.center = CGPointMake(_scrollViewAngle.center.x, _scrollViewAngle.center.y - (_scrollViewAngle.mj_h - angleHeight));
     [self addSubview:_centerView];
     
 }
@@ -725,9 +737,32 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         self.scrollView.contentOffsetX = self.scrollView.contentSize.width - self.scrollView.bounds.size.width;
     }
 }
+- (void)clearScrollViewChanged{
+    
+    self.isRoat = YES;
+    self.angle = 0;
+    
+    self.scrollView.transform = CGAffineTransformIdentity;
+    self.scrollView.center = CGPointMake(CGRectGetWidth(self.frame) / 2, self.centerY);
+    self.scrollView.bounds = CGRectMake(0, 0, self.originalSize.width, self.originalSize.height);
+    self.scrollView.minimumZoomScale = 1;
+    [self.scrollView setZoomScale:1 animated:NO];
+    
+    self.cropView.frame = self.scrollView.frame;
+    self.cropView.center = self.scrollView.center;
+    [self updateMasks:NO];
+    
+    
+}
 
 - (void)angelValueChanged:(float)sender
 {
+    if (sender < 0.04 && sender > -0.04) {
+        NSLog(@"%f 改变较小",sender);
+        [self clearScrollViewChanged];
+        return;
+    }
+    _isRoat = NO; // 旋转
     // update masks
     [self updateMasks:NO];
     
@@ -788,6 +823,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         }
         [sender setSelected:YES];
         _centerView.hidden = YES;
+        _scaleMaskView.hidden = YES;
         _bottomBtnsView.hidden = NO;
         _scrollViewAngle.hidden = YES;
         
@@ -804,6 +840,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         }
         [sender setSelected:YES];
         _centerView.hidden = NO;
+        _scaleMaskView.hidden = NO;
         _bottomBtnsView.hidden = YES;
         _scrollViewAngle.hidden = NO;
         
@@ -838,8 +875,9 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         default:
             break;
     }
-    
-    
+    self.sizeImgId = [sender tag] + 1;
+    _isCrop =  NO;
+
     [_proportionBtns enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         UIButton *btn = (UIButton *)obj;
@@ -856,7 +894,8 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
                 [self configCropView:CGSizeMake(width, height)];
             }else{// 取消的话 恢复原本状态
                 [btn setSelected:NO];
-                
+                _isCrop =  YES;
+                self.sizeImgId = 0;
                 [self configCropView:CGSizeMake(self.originalSize.width, self.originalSize.height)];
             }
             

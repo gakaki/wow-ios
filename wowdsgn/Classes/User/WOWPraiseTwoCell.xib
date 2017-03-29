@@ -139,6 +139,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottomView" destination="Qs3-5D-ZKQ" id="fAb-RU-Eyl"/>
                 <outlet property="collectionView" destination="wxk-Py-TrV" id="BQF-c3-EKK"/>
                 <outlet property="imgView" destination="OnC-1U-8R8" id="RlE-pc-q3Q"/>
                 <outlet property="numLabel" destination="eOh-rh-xwy" id="Ag8-mz-nxv"/>

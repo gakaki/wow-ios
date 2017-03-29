@@ -19,13 +19,13 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6p1-ko-8dp">
                         <rect key="frame" x="3" y="3" width="369" height="135"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="135" id="nNH-wK-ewB"/>
+                        </constraints>
                     </imageView>
                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRR-aX-04E">
                         <rect key="frame" x="3" y="3" width="369" height="135"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="135" id="Kxo-zK-4OY"/>
-                        </constraints>
                     </view>
                 </subviews>
                 <constraints>
@@ -41,6 +41,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="imgView" destination="6p1-ko-8dp" id="KSH-QB-fDS"/>
+                <outlet property="v_height" destination="nNH-wK-ewB" id="KKR-1y-fGK"/>
             </connections>
             <point key="canvasLocation" x="69" y="-191"/>
         </tableViewCell>

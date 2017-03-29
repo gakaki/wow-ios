@@ -23,9 +23,8 @@
                             <constraint firstAttribute="height" constant="135" id="5re-KZ-KYo"/>
                         </constraints>
                     </imageView>
-                    <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vzw-Sa-wg5">
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vzw-Sa-wg5">
                         <rect key="frame" x="3" y="3" width="369" height="135"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HaH-3N-qHJ">
@@ -82,10 +81,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="FkE-ec-NIw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="48z-HS-8gW"/>
+                    <constraint firstItem="Vzw-Sa-wg5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="Upn-en-O0Z"/>
                     <constraint firstAttribute="trailing" secondItem="FkE-ec-NIw" secondAttribute="trailing" constant="3" id="WsC-vW-Tco"/>
+                    <constraint firstAttribute="bottom" secondItem="Vzw-Sa-wg5" secondAttribute="bottom" id="Ymq-ka-ACl"/>
                     <constraint firstItem="HaH-3N-qHJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aux-fo-tYa"/>
                     <constraint firstItem="HaH-3N-qHJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="3" id="gtf-4H-fSn"/>
                     <constraint firstAttribute="bottom" secondItem="FkE-ec-NIw" secondAttribute="bottom" id="iJc-8e-gdS"/>
+                    <constraint firstItem="Vzw-Sa-wg5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="3" id="kWe-k0-PG8"/>
+                    <constraint firstAttribute="trailing" secondItem="Vzw-Sa-wg5" secondAttribute="trailing" constant="3" id="lue-Mk-xld"/>
                     <constraint firstItem="FkE-ec-NIw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="3" id="qTL-2w-Jii"/>
                     <constraint firstAttribute="trailing" secondItem="HaH-3N-qHJ" secondAttribute="trailing" constant="3" id="zML-yq-jE5"/>
                 </constraints>

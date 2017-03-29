@@ -423,6 +423,12 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
     
+    public class func goOtherCenter(endUserId: Int) {
+        
+        let vc = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWOtherCenterController.self)) as! WOWOtherCenterController
+        vc.endUserId = endUserId
+        topNaVC?.pushViewController(vc, animated: true)
+    }
     //喜欢
     public class func goFavorite() {
         let vc = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavoriteController.self)) as! WOWFavoriteController

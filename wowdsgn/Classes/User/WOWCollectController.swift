@@ -12,9 +12,7 @@ class WOWCollectController: WOWBaseViewController {
     
     
     var dataArr  = [WOWWorksListModel]()
-    
-    var parentNavigationController : UINavigationController?
-    
+        
     let pageSize   = 18
     
     weak var delegate: WOWDidScrollDelegate?

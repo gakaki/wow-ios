@@ -11,6 +11,7 @@ import UIKit
 class WOWOtherCenterController: WOWBaseViewController {
     @IBOutlet var collectionView: UICollectionView!
     
+    var endUserId:  Int = 0
     
     
     override func viewDidLoad() {

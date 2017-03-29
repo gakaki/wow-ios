@@ -194,7 +194,6 @@ extension WOWBrandListController:UITableViewDelegate,UITableViewDataSource{
         let model = dataArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
             cell.leftImageView.set_webimage_url(model.image)
 //         修改来回上下加载 内存不减的问题
-//        cell.leftImageView.set_webimage_url_base(model.image, place_holder_name: "placeholder_product")
         cell.centerTitleLabel!.text = model.name
         return cell
     }

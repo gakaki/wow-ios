@@ -25,7 +25,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         super.viewDidLoad()
         self.nickTextField.text = WOWUserManager.userName
         headImageView.borderRadius(25)
-        headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
+        headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl.webp_url(), place_holder_name: "placeholder_userhead")
         // Do any additional setup after loading the view.
     }
     

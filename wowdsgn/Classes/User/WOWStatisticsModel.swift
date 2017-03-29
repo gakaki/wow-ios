@@ -46,7 +46,7 @@ class WOWWorksListModel: WOWBaseModel,Mappable{
     var id                          : Int?
     var likeCounts                  : Int?
     var collectCounts               : Int?
-    var type                        : String?
+    var type                        : Int?
     var pic                         : String?
     var userList                    : [WOWStatisticsModel]?
     

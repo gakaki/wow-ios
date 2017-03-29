@@ -136,7 +136,7 @@ class WOWSearchSortController: BaseScreenViewController{
         UIView.animate(withDuration: 0.3) {[weak self] in
             if let strongSelf = self {
                 strongSelf.brandHead.frame = CGRect(x: 0, y: 0, width: MGScreenWidth, height: strongSelf.brandH)
-                strongSelf.v_bottom.magicView.frame = CGRect(x: 0, y: strongSelf.brandH,width: MGScreenWidth,height: MGScreenHeight - 64 - strongSelf.brandH)
+                strongSelf.v_bottom.magicView.frame = CGRect(x: 0, y: strongSelf.brandH,width: MGScreenWidth,height: MGScreenHeight - 64)
                 
             }
         }

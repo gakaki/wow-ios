@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8oq-H9-Day">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8oq-H9-Day">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--品牌列表-->
         <scene sceneID="V6N-hS-qCK">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandListController" title="品牌列表" automaticallyAdjustsScrollViewInsets="NO" id="bUa-ql-FLb" customClass="WOWBrandListController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandListController" title="品牌列表" automaticallyAdjustsScrollViewInsets="NO" id="bUa-ql-FLb" customClass="WOWBrandListController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AxO-zC-CEK"/>
                         <viewControllerLayoutGuide type="bottom" id="YZ1-h6-Act"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HPp-rW-CmJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zQg-ID-YEk">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="bUa-ql-FLb" id="cjH-7X-3ka"/>
                                     <outlet property="delegate" destination="bUa-ql-FLb" id="LGV-pJ-Bc5"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="zQg-ID-YEk" secondAttribute="trailing" id="Mr3-gA-Dbq"/>
                             <constraint firstItem="zQg-ID-YEk" firstAttribute="leading" secondItem="HPp-rW-CmJ" secondAttribute="leading" id="WZv-ke-2LF"/>
@@ -46,16 +49,16 @@
         <!--品牌主页-->
         <scene sceneID="qyk-qN-y0F">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandHomeController" title="品牌主页" id="lfi-ef-PcT" customClass="WOWBrandHomeController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandHomeController" title="品牌主页" id="lfi-ef-PcT" customClass="WOWBrandHomeController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cX9-BB-hf7"/>
                         <viewControllerLayoutGuide type="bottom" id="qO6-Lo-fVe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="laz-dD-kNa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSA-nG-ZER">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSA-nG-ZER">
                                 <rect key="frame" x="0.0" y="20" width="40" height="32"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
@@ -63,8 +66,8 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RmJ-l7-xJk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nm8-Aj-3M3">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -78,7 +81,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JSA-nG-ZER" firstAttribute="leading" secondItem="laz-dD-kNa" secondAttribute="leading" id="KoM-vx-XEO"/>
                             <constraint firstItem="JSA-nG-ZER" firstAttribute="top" secondItem="laz-dD-kNa" secondAttribute="top" constant="20" id="PkE-WR-jom"/>
@@ -94,36 +97,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I8S-Y0-yMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="523" y="999"/>
+            <point key="canvasLocation" x="613" y="995"/>
         </scene>
         <!--品牌详情-->
         <scene sceneID="4sz-QL-nAS">
             <objects>
-                <viewController storyboardIdentifier="WOWBrandDetailController" title="品牌详情" id="c8O-mq-ggW" customClass="WOWBrandDetailController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWBrandDetailController" title="品牌详情" id="c8O-mq-ggW" customClass="WOWBrandDetailController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f6U-cI-MaJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wCP-wD-XYa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gdK-0I-TDQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lfN-s6-8X7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="c8O-mq-ggW" id="ogY-Yd-Mmg"/>
                                     <outlet property="delegate" destination="c8O-mq-ggW" id="y3l-km-Q6F"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22g-PZ-KjQ" customClass="WOWBrandUnderView" customModule="wowapp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22g-PZ-KjQ" customClass="WOWBrandUnderView" customModule="wowdsgn" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="sqQ-Dx-ZVa"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qsb-f1-oeI">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qsb-f1-oeI">
                                 <rect key="frame" x="0.0" y="20" width="40" height="32"/>
                                 <state key="normal" image="closeNav"/>
                                 <connections>
@@ -131,7 +134,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="22g-PZ-KjQ" firstAttribute="leading" secondItem="gdK-0I-TDQ" secondAttribute="leading" id="IXk-ZA-iUQ"/>
                             <constraint firstAttribute="bottom" secondItem="lfN-s6-8X7" secondAttribute="bottom" id="NOE-DO-OJv"/>
@@ -151,12 +154,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r52-MC-zZz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="827" y="983"/>
+            <point key="canvasLocation" x="1132" y="968"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YrP-0p-Mua">
             <objects>
-                <navigationController id="8oq-H9-Day" customClass="WOWNavigationController" customModule="wowapp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="8oq-H9-Day" customClass="WOWNavigationController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eI4-kh-Lwu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -174,4 +177,9 @@
     <resources>
         <image name="closeNav" width="40" height="32"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

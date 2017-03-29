@@ -139,10 +139,10 @@
             </objects>
             <point key="canvasLocation" x="228" y="-8"/>
         </scene>
-        <!--View Controller-->
+        <!--Other Center Controller-->
         <scene sceneID="aTS-mj-sC5">
             <objects>
-                <viewController id="EO0-li-yQo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWOtherCenterController" id="EO0-li-yQo" customClass="WOWOtherCenterController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2zq-5O-NPf"/>
                         <viewControllerLayoutGuide type="bottom" id="CWa-NX-S11"/>

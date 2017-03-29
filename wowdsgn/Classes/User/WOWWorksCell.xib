@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZNt-3q-Wbw">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide2" translatesAutoresizingMaskIntoConstraints="NO" id="ZNt-3q-Wbw">
                         <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ZNt-3q-Wbw" secondAttribute="height" multiplier="1:1" id="H1q-AI-fwF"/>
@@ -39,4 +39,7 @@
             <point key="canvasLocation" x="-131.5" y="0.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="guide2" width="1242" height="2209"/>
+    </resources>
 </document>

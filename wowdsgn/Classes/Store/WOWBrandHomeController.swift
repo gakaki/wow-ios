@@ -29,12 +29,7 @@ class WOWBrandHomeController: WOWBaseViewController {
     var selectedCell: WOWGoodsSmallCell!
 
     public var entrance = brandOrDesignerEntrance.brandEntrance     //入口
-    
-//    fileprivate var shareBrandImage:UIImage? //供分享使用
-//    lazy var placeImageView:UIImageView={  //供分享使用
-//        let image = UIImageView()
-//        return image
-//    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -111,12 +106,10 @@ class WOWBrandHomeController: WOWBaseViewController {
             dataArr.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
                 if let strongSelf = self {
                     strongSelf.collectionView.reloadData()
-                    //                    strongSelf.collectionView.reloadData()
                 }
                 
             })
-//            dataArr.ergodicArrayWithProductModel(dic: send_obj)
-//            self.collectionView.reloadData()
+
         }
 
      
@@ -131,45 +124,9 @@ class WOWBrandHomeController: WOWBaseViewController {
 
         collectionView.register(UINib.nibName(String(describing: WOWBrandHeaderView.self)), forSupplementaryViewOfKind: CollectionViewWaterfallElementKindSectionHeader, withReuseIdentifier: "Header")
     }
-//    //初始化分享数据
-//    func configBrandData(){
-//        let url =  URL(string:(brandModel?.image) ?? "")
-//        if  let url = url {
-//            placeImageView.yy_setImage(
-//                with: url,
-//                placeholder: nil,
-//                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-//                completion: { [weak self] (img, url, from_type, image_stage,err ) in
-//                    if let strongSelf = self{
-//                        strongSelf.shareBrandImage = img
-//                    }
-//                    
-//            })
-//
-//        }
-//        
-//    }
-//    func configDesignerData(){
-//        let url = URL(string:(designerModel?.designerPhoto) ?? "")
-//        if let url = url {
-//            placeImageView.yy_setImage(
-//                with: url,
-//                placeholder: nil,
-//                options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-//                completion: { [weak self] (img, url, from_type, image_stage,err ) in
-//                    if let strongSelf = self{
-//                        strongSelf.shareBrandImage = img
-//                    }
-//                    
-//            })
-//
-//        }
-//        
-//        
-//        
-//    }
+
     
-//MARK:Actions
+    //MARK:Actions
     @IBAction func back(_ sender: UIButton) {
        _ = navigationController?.popViewController(animated: true)
     }

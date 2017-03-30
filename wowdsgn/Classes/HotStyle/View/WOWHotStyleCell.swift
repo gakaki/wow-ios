@@ -30,6 +30,7 @@ class WOWHotStyleCell: UITableViewCell,ModuleViewElement {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
     // 点赞按钮
     @IBAction func clickLikeAction(sender: AnyObject) {

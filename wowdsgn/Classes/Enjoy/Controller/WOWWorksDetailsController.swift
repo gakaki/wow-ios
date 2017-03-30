@@ -45,7 +45,8 @@ class WOWWorksDetailsController: WOWBaseViewController {
                 strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
                 strongSelf.btnPraiseCount.setTitle(strongSelf.modelData?.totalLikeCounts?.toString, for: .normal)
                 strongSelf.btnCollection.setTitle(strongSelf.modelData?.totalCollectCounts?.toString, for: .normal)
-                
+                strongSelf.btnPraiseCount.isSelected = strongSelf.modelData?.like ?? false
+                strongSelf.btnCollection.isSelected = strongSelf.modelData?.collect ?? false
                 strongSelf.tableView.reloadData()
 
                 
@@ -64,23 +65,61 @@ class WOWWorksDetailsController: WOWBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     func requestPraise() {
-        
-        WOWClickLikeAction.requestLikeWorksDetails(worksId: worksId ?? 0, type: 0, view: bottomView, btn: btnPraiseCount) { (Favorite) in
-            
+        if let model = self.modelData {
+            if let like = model.like {
+                var likeType = 0
+                if like {
+                    likeType = 0
+                }else {
+                    likeType = 1
+                }
+                WOWClickLikeAction.requestLikeWorksDetails(worksId: worksId ?? 0, type: likeType, view: bottomView, btn: btnPraiseCount) { (Favorite) in
+                    
+                    model.like = !like
+                    self.btnPraiseCount.isSelected = model.like ?? false
+                    model.totalLikeCounts = Calculate.calculateType(type: !like)(model.totalLikeCounts ?? 0)
+                    self.btnPraiseCount.setTitle(model.totalLikeCounts?.toString, for: .normal)
+
+                }
+            }
+           
+        }
+       
+    }
+    func requestCollect() {
+        if let model = self.modelData {
+            if let collect = model.collect {
+                var collectType = 0
+                if collect {
+                    collectType = 0
+                }else {
+                    collectType = 1
+                }
+                WOWClickLikeAction.requestCollectWorksDetails(worksId: worksId ?? 0, type: collectType, view: bottomView, btn: btnCollection) { (Favorite) in
+                    
+                    model.collect = !collect
+                    self.btnCollection.isSelected = model.collect ?? false
+                    model.totalCollectCounts = Calculate.calculateType(type: !collect)(model.totalCollectCounts ?? 0)
+                    self.btnCollection.setTitle(model.totalCollectCounts?.toString, for: .normal)
+                    
+                }
+            }
             
         }
-
+        
+        
     }
+
     @IBAction func clickPraise(_ sender: Any) {
         requestPraise()
     }
 
     @IBAction func clickCollection(_ sender: Any) {
-        
+        requestCollect()
     }
     @IBAction func clickShare(_ sender: Any) {
-
-        WOWShareManager.sharePhoto("", shareText: "", url: "", shareImage: photo)
+        
+        WOWShareManager.sharePhoto(self.modelData?.nickName ?? "", shareText: self.modelData?.des ?? "", url: "", shareImage: self.modelData?.pic ?? "")
 
     }
 

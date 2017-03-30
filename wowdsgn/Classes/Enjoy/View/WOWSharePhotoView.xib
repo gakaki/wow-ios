@@ -90,6 +90,7 @@
             <connections>
                 <outlet property="heightImgConstraint" destination="32R-aG-At7" id="j6q-2a-wse"/>
                 <outlet property="imgPhoto" destination="q1p-lJ-sno" id="cAc-JI-ZgG"/>
+                <outlet property="lbDes" destination="4Dl-lk-zlj" id="yWL-rd-e7w"/>
                 <outlet property="lbMyName" destination="qHq-Iz-SoE" id="5SO-0s-s7E"/>
             </connections>
             <point key="canvasLocation" x="-27" y="-53"/>

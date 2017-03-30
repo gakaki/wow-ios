@@ -82,7 +82,7 @@ class WOWShareBackView:UIView{
     
     lazy var sharePhotoView:WOWSharePhotoView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWSharePhotoView.self), owner: self, options: nil)?.last as! WOWSharePhotoView
-        v.lbMyName.text =  WOWUserManager.userName
+       
         return v
     }()
 
@@ -121,14 +121,15 @@ class WOWShareBackView:UIView{
         }) 
     }
     
-    func showPhotoImg(img:UIImage) {
+    func showPhotoImg(img:String,des:String,nikeName:String) {
         popWindow.addSubview(self)
         addSubview(backClear)
         backClear.addSubview(shareView)
         backClear.addSubview(sharePhotoView)
         
-        sharePhotoView.imgPhoto.image = img
-        
+        sharePhotoView.imgPhoto.set_webimage_url(img)
+        sharePhotoView.lbMyName.text = nikeName
+        sharePhotoView.lbDes.text = des 
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)

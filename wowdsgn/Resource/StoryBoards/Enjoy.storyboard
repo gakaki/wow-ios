@@ -107,7 +107,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomView" destination="fhj-Ql-j49" id="NnQ-I8-RCE"/>
+                        <outlet property="bottomView" destination="fgG-lP-gu7" id="Vx1-Qq-ZDy"/>
                         <outlet property="btnCollection" destination="TSA-8l-fbg" id="gSr-47-lkj"/>
                         <outlet property="btnPraiseCount" destination="1Ee-Wp-Dzk" id="W7r-kK-d0z"/>
                         <outlet property="tableView" destination="4mg-1d-Fbw" id="mq0-Yq-w4p"/>

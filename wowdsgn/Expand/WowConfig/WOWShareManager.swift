@@ -66,8 +66,9 @@ struct WOWShareManager {
     }
  
     
-    public static func sharePhoto(_ title:String?,shareText:String?,url:String?,shareImage:Any!){
-        shareBackView.showPhotoImg(img: shareImage as! UIImage)
+    public static func sharePhoto(_ title:String,shareText:String,url:String?,shareImage:Any!){
+        shareBackView.showPhotoImg(img: shareImage as! String ,des: shareText, nikeName: title)
+        
         let pushlishImg = shareBackView.sharePhotoView.createViewImage()
         var  pushLishUrl = ""
        

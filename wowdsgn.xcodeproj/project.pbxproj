@@ -462,8 +462,6 @@
 		63306CE81E8A4DE1005E0B32 /* WOWPraiseOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63306CE61E8A4DE1005E0B32 /* WOWPraiseOneCell.xib */; };
 		63306CEB1E8A64F9005E0B32 /* WOWPraiseTwoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63306CE91E8A64F9005E0B32 /* WOWPraiseTwoCell.swift */; };
 		63306CEC1E8A64F9005E0B32 /* WOWPraiseTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63306CEA1E8A64F9005E0B32 /* WOWPraiseTwoCell.xib */; };
-		63306CEF1E8A651A005E0B32 /* WOWPraiseThreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63306CED1E8A651A005E0B32 /* WOWPraiseThreeCell.swift */; };
-		63306CF01E8A651A005E0B32 /* WOWPraiseThreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63306CEE1E8A651A005E0B32 /* WOWPraiseThreeCell.xib */; };
 		633382981E86251C003A301C /* WOWCustomKoloda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633382971E86251C003A301C /* WOWCustomKoloda.swift */; };
 		633FD2CE1E88A9F7004C508A /* WOWEnjoyCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633FD2CD1E88A9F7004C508A /* WOWEnjoyCategoryModel.swift */; };
 		633FD2D01E891F43004C508A /* WOWUserCenterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633FD2CF1E891F43004C508A /* WOWUserCenterController.swift */; };
@@ -1073,8 +1071,6 @@
 		63306CE61E8A4DE1005E0B32 /* WOWPraiseOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWPraiseOneCell.xib; sourceTree = "<group>"; };
 		63306CE91E8A64F9005E0B32 /* WOWPraiseTwoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWPraiseTwoCell.swift; sourceTree = "<group>"; };
 		63306CEA1E8A64F9005E0B32 /* WOWPraiseTwoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWPraiseTwoCell.xib; sourceTree = "<group>"; };
-		63306CED1E8A651A005E0B32 /* WOWPraiseThreeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWPraiseThreeCell.swift; sourceTree = "<group>"; };
-		63306CEE1E8A651A005E0B32 /* WOWPraiseThreeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWPraiseThreeCell.xib; sourceTree = "<group>"; };
 		633382971E86251C003A301C /* WOWCustomKoloda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCustomKoloda.swift; sourceTree = "<group>"; };
 		633FD2CD1E88A9F7004C508A /* WOWEnjoyCategoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWEnjoyCategoryModel.swift; sourceTree = "<group>"; };
 		633FD2CF1E891F43004C508A /* WOWUserCenterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUserCenterController.swift; sourceTree = "<group>"; };
@@ -2076,8 +2072,6 @@
 				63306CE61E8A4DE1005E0B32 /* WOWPraiseOneCell.xib */,
 				63306CE91E8A64F9005E0B32 /* WOWPraiseTwoCell.swift */,
 				63306CEA1E8A64F9005E0B32 /* WOWPraiseTwoCell.xib */,
-				63306CED1E8A651A005E0B32 /* WOWPraiseThreeCell.swift */,
-				63306CEE1E8A651A005E0B32 /* WOWPraiseThreeCell.xib */,
 				63108BA71E8B5A4A004B2064 /* WOWOtherHeaderView.swift */,
 				63108BA81E8B5A4A004B2064 /* WOWOtherHeaderView.xib */,
 				63108BAB1E8B652A004B2064 /* WOWWorkdEmptyView.swift */,
@@ -2792,7 +2786,6 @@
 				63A2F59B1DF931E2002DF56F /* WOWMessageCenterCell.xib in Resources */,
 				069D324E1DB47ADD00A059D0 /* icon_chose_bottom@2x.png in Resources */,
 				069D32CA1DB47ADD00A059D0 /* WOWOrderEmptyView.xib in Resources */,
-				63306CF01E8A651A005E0B32 /* WOWPraiseThreeCell.xib in Resources */,
 				63546E001E83B98A00DB7F82 /* Enjoy.storyboard in Resources */,
 				2DDA4DE51DDEFE2E00E7A7E8 /* WOWFoundWeeklyNewCell.xib in Resources */,
 				2D96759F1E76711400F0C0F6 /* Cell_105_Banner.xib in Resources */,
@@ -3002,7 +2995,6 @@
 				069D32CB1DB47ADD00A059D0 /* WOWOrderListCell.swift in Sources */,
 				069D32E11DB47ADD00A059D0 /* IPManager.swift in Sources */,
 				63EC147F1E2CC2E80027BEFD /* WOWSearchBrandView.swift in Sources */,
-				63306CEF1E8A651A005E0B32 /* WOWPraiseThreeCell.swift in Sources */,
 				63A310531E77E41000D7C983 /* HidingViewController.swift in Sources */,
 				069D31DF1DB47ADD00A059D0 /* VCDesignerList.swift in Sources */,
 				069D32D91DB47ADD00A059D0 /* WOWUserController.swift in Sources */,

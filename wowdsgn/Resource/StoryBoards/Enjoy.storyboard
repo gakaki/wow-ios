@@ -302,6 +302,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWd-bx-Bmc">
                                         <rect key="frame" x="162" y="118" width="50" height="50"/>
                                         <state key="normal" image="refresh"/>
+                                        <connections>
+                                            <action selector="refreshButton" destination="c60-NF-leJ" eventType="touchUpInside" id="wGd-Oi-zkD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfQ-p2-Oi1">
                                         <rect key="frame" x="50" y="108" width="70" height="70"/>

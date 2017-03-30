@@ -12,7 +12,6 @@ class WOWPraiseController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     let cellOneID = String(describing: WOWPraiseOneCell.self)
     let cellTwoID = String(describing: WOWPraiseTwoCell.self)
-    let cellThreeID = String(describing: WOWPraiseThreeCell.self)
 
     var dataArr  = [WOWWorksListModel]()
     
@@ -46,7 +45,6 @@ class WOWPraiseController: WOWBaseViewController {
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.register(UINib.nibName(cellOneID), forCellReuseIdentifier:cellOneID)
         tableView.register(UINib.nibName(cellTwoID), forCellReuseIdentifier:cellTwoID)
-        tableView.register(UINib.nibName(cellThreeID), forCellReuseIdentifier:cellThreeID)
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -132,20 +130,12 @@ extension WOWPraiseController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = dataArr[indexPath.row]
         switch model.type ?? 0 {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellThreeID, for: indexPath) as! WOWPraiseThreeCell
-            cell.showData(model: model)
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellOneID, for: indexPath) as! WOWPraiseOneCell
-            cell.showData(model: model)
-            return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: cellTwoID, for: indexPath) as! WOWPraiseTwoCell
             cell.showData(model: model)
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellThreeID, for: indexPath) as! WOWPraiseThreeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellOneID, for: indexPath) as! WOWPraiseOneCell
             cell.showData(model: model)
             return cell
         }

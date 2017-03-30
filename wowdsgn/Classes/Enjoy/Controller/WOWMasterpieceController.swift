@@ -13,7 +13,7 @@ class WOWMasterpieceController: WOWBaseViewController {
     let cellID = String(describing: WOWMasterpieceCell.self)
     var categoryId = 0
     var fineWroksArr = [WOWFineWroksModel]()
-
+    var lastContentOffset :CGFloat?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,7 +41,7 @@ class WOWMasterpieceController: WOWBaseViewController {
         super.request()
         
         var params = [String: Any]()
-        params = ["categoryId": categoryId   ,"type": 0 ,"startRows":0,"pageSize":10]
+        params = ["categoryId": categoryId   ,"type": 1 ,"startRows":0,"pageSize":10]
 
         WOWNetManager.sharedManager.requestWithTarget(.api_getInstagramList(params: params), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
@@ -115,7 +115,19 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //            UIApplication.currentViewController()?.bingWorksDetail()
+        let model = fineWroksArr[indexPath.row]
+        VCRedirect.bingWorksDetails(worksId: model.id ?? 0)
     }
-
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        lastContentOffset = scrollView.contentOffset.y
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if lastContentOffset < scrollView.contentOffset.y {
+//            print("shang")
+        }else{
+//            print("xia")
+        }
+        
+    }
 }

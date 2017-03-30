@@ -200,5 +200,41 @@ class WOWClickLikeAction {
         }
         
     }
+    
+    /**
+     用户点赞某个作品详情
+     
+     - parameter commentId:    评论ID
+     - parameter view:       点赞动画加在哪个View上
+     - parameter btn:        那个按钮需要点赞动画
+     - parameter isFavorite: 请求结果，是否喜欢
+     */
+    
+    static func requestLikeWorksDetails(worksId: Int,type: Int,view: UIView, btn: UIButton,isFavorite: @escaping LikeAction){
+        WOWHud.showLoadingSV()
+        guard WOWUserManager.loginStatus == true else{
+            WOWHud.dismiss()
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_LikeWorks(worksId: worksId, type: 0), successClosure: { (result, code) in
+            WOWHud.dismiss()
+        
+                let favorite = JSON(result)
+                print(favorite)
+                likeAnimate(view: view, btn: btn)
+                
+            
+        }) { (errorMsg) in
+        
+                
+                WOWHud.dismiss()
+            
+        }
+
+    }
+    
+    
 }
 

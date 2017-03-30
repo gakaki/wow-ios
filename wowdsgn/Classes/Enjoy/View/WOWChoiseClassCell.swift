@@ -32,6 +32,11 @@ class WOWChoiseClassCell: UICollectionViewCell {
         if let img = m.pic{
              imgClassIcon.set_webimage_url(img)
         }
+        if m.isSelect {
+            imgChoiseSelect.isHidden = false
+        }else {
+            imgChoiseSelect.isHidden = true
+        }
         
     }
 }

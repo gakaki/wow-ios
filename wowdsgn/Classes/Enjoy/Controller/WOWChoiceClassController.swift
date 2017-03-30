@@ -13,12 +13,13 @@ class WOWChoiceClassController: WOWBaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var px = (MGScreenWidth - (80 * 3)) / 4
     var instagramCategoryId:Int?
+    var btnRright = UIButton()
 //    var imgSizeId : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "选择上传分类"
-        let itemReghit = UIBarButtonItem.init(title: "下一步", style: .plain, target: self, action: #selector(nextAction))
-        navigationItem.rightBarButtonItem = itemReghit
+
+    
         
         let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(navBack))
         navigationItem.leftBarButtonItem = item
@@ -31,6 +32,20 @@ class WOWChoiceClassController: WOWBaseViewController {
         
         configCollectionView()
         configNavItem()
+        configNextBarItem()
+    }
+    func configNextBarItem(){
+  
+        btnRright = UIButton(frame:CGRect.init(x: 0, y: 0, width: 50, height: 18))
+        btnRright.setTitle("下一步", for: .normal)
+        btnRright.setTitleColor(UIColor.darkGray, for: .normal)
+        btnRright.setTitleColor(UIColor.black, for: .selected)
+        btnRright.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        btnRright.isEnabled = false
+        btnRright.addTarget(self,action:#selector(nextAction),for:.touchUpInside)
+        
+        let barItem = UIBarButtonItem.init(customView: btnRright)
+        self.navigationItem.rightBarButtonItem = barItem
     }
     func configCollectionView() {
         
@@ -102,13 +117,13 @@ class WOWChoiceClassController: WOWBaseViewController {
                 imagePickerVc?.allowPreview = false // 不预览图片
                 imagePickerVc?.showSelectBtn = true // 展示完成按钮
                 imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
-                    if let strongSelf = self,let images = images,let asstes = asstes {
+                    if let strongSelf = self,let images = images {
                         
                      
                         let photoTweaksViewController = PhotoTweaksViewController(image: images[0])
                         photoTweaksViewController?.delegate = strongSelf
-                        photoTweaksViewController?.autoSaveToLibray = true
-//                        photoTweaksViewController?.maxRotationAngle = .pi
+                        photoTweaksViewController?.autoSaveToLibray = false
+
                         
                         imagePickerVc?.pushViewController(photoTweaksViewController!, animated: true)
 //
@@ -160,8 +175,29 @@ extension WOWChoiceClassController:UICollectionViewDelegate,UICollectionViewData
     }
    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
      
+        let m = categoryArr[indexPath.row]
+        for model in categoryArr {
+            if model == m {
+                if model.isSelect {
+                    btnRright.isSelected    = false
+                    btnRright.isEnabled     = false
+                    model.isSelect          = false
+                    
+                }else {
+                    btnRright.isSelected    = true
+                    btnRright.isEnabled     = true
+                    model.isSelect          = true
+                    
+                }
+            }else {
+                model.isSelect = false
+            }
+        }
+
+        
+       collectionView.reloadData()
+        
     }
     
 }

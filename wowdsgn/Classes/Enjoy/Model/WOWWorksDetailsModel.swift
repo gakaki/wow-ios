@@ -21,8 +21,8 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
     var pic                     :  String?
     var totalCollectCounts      :  Int?
     var totalLikeCounts         :  Int?
-    var like                    :  Int?
-    var collect                 :  Int?
+    var like                    :  Bool?
+    var collect                 :  Bool?
     required init?(map: Map) {
         
     }

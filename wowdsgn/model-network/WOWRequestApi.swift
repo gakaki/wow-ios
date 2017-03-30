@@ -281,7 +281,7 @@ public enum RequestApi{
     
     case api_WorksList(params: [String: AnyObject])
     case api_LikeWorks(worksId: Int, type: Int)
-    case api_CollectWorks(worksId: Int)
+    case api_CollectWorks(worksId: Int, collect: Int)
     case api_getInstagramList(params: [String: Any])
     
 }
@@ -628,8 +628,7 @@ extension RequestApi:TargetType{
             .api_GetWorksDetails,
             .api_UserStatistics,
             .api_WorksList,
-            .api_LikeWorks,
-            .api_CollectWorks,
+//            .api_CollectWorks,
             .api_getInstagramList:
 
             return .GET
@@ -894,8 +893,8 @@ extension RequestApi:TargetType{
             
             case let .api_LikeWorks(worksId, type):
                 params = ["instagramId": worksId, "type": type]
-            case let .api_CollectWorks(worksId):
-                params = ["instagramId": worksId]
+            case let .api_CollectWorks(worksId, type):
+                params = ["instagramId": worksId, "collect": type]
             case let .api_getInstagramList(param):
                 params = param
     

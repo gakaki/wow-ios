@@ -13,7 +13,7 @@ class WOWSharePhotoView: UIView {
 //    @IBOutlet weak var categoryBtn: UIButton!
     @IBOutlet weak var imgPhoto: UIImageView!
     @IBOutlet weak var lbMyName: UILabel!
-    
+    @IBOutlet weak var lbDes: UILabel!
     @IBOutlet weak var heightImgConstraint: NSLayoutConstraint!
     /*
     // Only override draw() if you perform custom drawing.

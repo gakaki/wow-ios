@@ -58,7 +58,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
                 
             }
         }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
+            if self != nil{
              
                 WOWHud.dismiss()
                 

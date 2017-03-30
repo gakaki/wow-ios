@@ -101,14 +101,14 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                     }
                     
                 }){ (errorMsg) in
-                    print(errorMsg)
+                    print(errorMsg ?? "")
                     strongSelf.endRefresh()
                 }
 
             }
             
         }){ (errorMsg) in
-            print(errorMsg)
+            print(errorMsg ?? "")
             self.endRefresh()
         }
         

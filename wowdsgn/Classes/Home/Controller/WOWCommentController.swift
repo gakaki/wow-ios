@@ -176,7 +176,7 @@ class WOWCommentController: WOWBaseViewController {
                 strongSelf.request()
             }
             
-        }){[weak self] (errorMsg) in
+        }){(errorMsg) in
             
         }
     }

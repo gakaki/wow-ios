@@ -114,7 +114,7 @@ class WOWInfoTextController: WOWBaseTableViewController {
             }
         }) { (errorMsg) in
             WOWHud.dismiss()
-            DLog(errorMsg)
+            DLog(errorMsg ?? "")
         }
     }
     //闭包变量的Seter方法

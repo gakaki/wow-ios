@@ -147,7 +147,7 @@ class WOWSettingController: WOWBaseTableViewController {
                 })
             }
         }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
+            if self != nil{
                 WOWHud.showMsg("退出登录失败")
             }
         }

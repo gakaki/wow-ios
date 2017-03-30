@@ -130,7 +130,7 @@ class WOWMsgCodeController: WOWBaseViewController {
                 
             }
         }) {[weak self](errorMsg) in
-            if let strongSelf = self{
+            if self != nil{
 //                strongSelf.tipsLabel.text = errorMsg
             }
         }

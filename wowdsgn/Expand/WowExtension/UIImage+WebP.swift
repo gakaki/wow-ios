@@ -52,14 +52,14 @@ extension UIImageView {
                 options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
                 completion: { (img, url, from_type, image_stage,err ) in
                     
-                    let url_str = url.absoluteString
+                    _ = url.absoluteString
                     if ( from_type == YYWebImageFromType.remote ||  from_type == YYWebImageFromType.none ){
 //                        DLog("image url is \(url_str),from remote or none,\(image_stage)")
                     }
 
             })
             
-        }catch let e {
+        }catch let _ {
 //            DLog(e)
         }
      }

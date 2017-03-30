@@ -15,13 +15,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q1p-lJ-sno">
-                    <rect key="frame" x="10" y="10" width="295" height="112.5"/>
+                    <rect key="frame" x="10" y="10" width="295" height="128"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="750" constant="128" id="32R-aG-At7"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片描述图片描述图片描述图片描述图片描述图片描述图片描述图片描述" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Dl-lk-zlj">
-                    <rect key="frame" x="10" y="132.5" width="295" height="31.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Dl-lk-zlj">
+                    <rect key="frame" x="10" y="148" width="295" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -29,20 +29,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLk-iM-dOj">
                     <rect key="frame" x="10" y="194" width="295" height="56"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Ym-4j-67M">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="7Ym-4j-67M">
                             <rect key="frame" x="239" y="0.0" width="56" height="56"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="56" id="Ukg-bb-P6R"/>
                                 <constraint firstAttribute="height" constant="56" id="vGc-4w-O7R"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By 这里是用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHq-Iz-SoE">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHq-Iz-SoE">
                             <rect key="frame" x="0.0" y="26.5" width="229" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017.3.23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhG-cU-CYT">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhG-cU-CYT">
                             <rect key="frame" x="0.0" y="41.5" width="229" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,7 +64,7 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quptes-sanjiao" translatesAutoresizingMaskIntoConstraints="NO" id="7v7-xa-n5G">
-                    <rect key="frame" x="10" y="85.5" width="37" height="37"/>
+                    <rect key="frame" x="10" y="101" width="37" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="37" id="ffz-sU-1RA"/>
                         <constraint firstAttribute="height" constant="37" id="jYb-dV-Bcb"/>
@@ -90,6 +90,7 @@
             <connections>
                 <outlet property="heightImgConstraint" destination="32R-aG-At7" id="j6q-2a-wse"/>
                 <outlet property="imgPhoto" destination="q1p-lJ-sno" id="cAc-JI-ZgG"/>
+                <outlet property="lbCurrentTime" destination="YhG-cU-CYT" id="vXQ-JJ-N6L"/>
                 <outlet property="lbDes" destination="4Dl-lk-zlj" id="yWL-rd-e7w"/>
                 <outlet property="lbMyName" destination="qHq-Iz-SoE" id="5SO-0s-s7E"/>
             </connections>
@@ -97,6 +98,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Qrcode" width="16" height="16"/>
         <image name="quptes-sanjiao" width="37" height="37"/>
     </resources>
 </document>

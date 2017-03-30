@@ -72,13 +72,13 @@ class CloosePriceCell: UITableViewCell,NHRangeSliderViewDelegate{
     var modelPrice : PriceSectionModel!{
         didSet{
             
-            if let min = modelPrice.minPrice {
+            if modelPrice.minPrice != nil {
               
             }else{
                 sliderCustomStringView.lowerValue = 0.0
             }
             
-            if let max = modelPrice.maxPrice {
+            if modelPrice.maxPrice != nil {
                
             }else{
                 sliderCustomStringView.upperValue = 100.0

@@ -186,8 +186,8 @@ extension WOWBaseProductsController:UICollectionViewDelegate,UICollectionViewDat
                     vc.selectedCell = self.selectedCell
                 }
               
-            default:
-                break
+//            default:
+//                break
             }
             
             

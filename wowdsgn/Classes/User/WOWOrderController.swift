@@ -108,7 +108,7 @@ class WOWOrderController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderList(params:params), successClosure: { [weak self](result, code) in
             
             let json = JSON(result)["orderLists"].arrayObject
-            DLog(json)
+            DLog(json ?? "")
             
             if let strongSelf = self{
                 strongSelf.isRequest = true

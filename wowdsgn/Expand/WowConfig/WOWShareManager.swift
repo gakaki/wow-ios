@@ -60,7 +60,7 @@ struct WOWShareManager {
         print("Share Fail with error ：%@", error)
         message = "失败原因Code: \(error) , 用户手动取消"
         message = "分享失败"
-        var alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
+        let alert = UIAlertView(title: "share", message: message, delegate: nil, cancelButtonTitle: "确定")
         //最好这里能打点记录下
         alert.show()
     }

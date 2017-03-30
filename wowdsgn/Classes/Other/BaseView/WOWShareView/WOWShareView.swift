@@ -82,7 +82,12 @@ class WOWShareBackView:UIView{
     
     lazy var sharePhotoView:WOWSharePhotoView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWSharePhotoView.self), owner: self, options: nil)?.last as! WOWSharePhotoView
-       
+        let nowDate = NSDate()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        let dateString = formatter.string(from: nowDate as Date)
+
+        v.lbCurrentTime.text = dateString
         return v
     }()
 

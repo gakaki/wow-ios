@@ -300,7 +300,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
                     WOWHud.showMsg("授权登录失败")
                 }
                 
-                DLog(response)
+                DLog(response ?? "")
                 
             }
             return
@@ -372,7 +372,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             }
         }) { (errorMsg) in
             WOWHud.dismiss()
-            DLog(errorMsg)
+            DLog(errorMsg ?? "")
         }
 
     }
@@ -613,14 +613,14 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                 strongSelf.headImageUrl = result ?? ""
                 strongSelf.requestEditUserInfo()
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
-                print(result)
+                print(result ?? "")
             }
             
             
             
             }) { (errorMsg) in
                 
-                print(errorMsg)
+                print(errorMsg ?? "")
         }
      
     }

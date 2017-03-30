@@ -253,7 +253,7 @@ extension WOWBaseModuleVC:MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate{//  �
     
     func MODULE_TYPE_CATEGORIES_CV_CELL_301_Cell_Delegate_CellTouchInside(_ m:WowModulePageItemVO?)
     {
-        if let cid = m!.categoryId , let cname = m!.categoryName{
+        if let cid = m!.categoryId , let _ = m!.categoryName{
 //            VCRedirect.toVCCategory( cid)
             VCRedirect.toVCScene(cid, entrance: .category)
 
@@ -277,7 +277,7 @@ extension WOWBaseModuleVC:Cell_302_Delegate{// more 一级分类跳转
         if m == nil {
             VCRedirect.toVCCategoryChoose()
         }else{
-            if let cid = m!.categoryId , let cname = m!.categoryName{
+            if let cid = m!.categoryId , let _ = m!.categoryName{
 //                VCRedirect.toVCCategory( cid)
                 VCRedirect.toVCScene(cid, entrance: .category)
             }

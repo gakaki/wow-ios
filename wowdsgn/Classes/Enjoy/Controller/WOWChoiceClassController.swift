@@ -43,7 +43,7 @@ class WOWChoiceClassController: WOWBaseViewController {
         btnRright.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btnRright.isEnabled = false
         btnRright.addTarget(self,action:#selector(nextAction),for:.touchUpInside)
-        
+        btnRright.isEnabled     = false
         let barItem = UIBarButtonItem.init(customView: btnRright)
         self.navigationItem.rightBarButtonItem = barItem
     }

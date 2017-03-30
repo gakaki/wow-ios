@@ -29,6 +29,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionIndexColor = GrayColorlevel1
         tableView.clearRestCell()
+        
         navigationItem.title = "作品详情"
         //        configureSearchController()
         tableView.register(UINib.nibName("WorksDetailCell"), forCellReuseIdentifier:"WorksDetailCell")

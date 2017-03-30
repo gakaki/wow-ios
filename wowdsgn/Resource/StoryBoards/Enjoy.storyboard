@@ -401,6 +401,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="publishBtn" destination="v7f-Ph-La1" id="4UM-cU-ymF"/>
                         <outlet property="tableView" destination="mqb-ZK-rQa" id="KL1-YP-xK2"/>
                     </connections>
                 </viewController>

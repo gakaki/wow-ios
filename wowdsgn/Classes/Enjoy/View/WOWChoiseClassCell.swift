@@ -21,7 +21,7 @@ class WOWChoiseClassCell: UICollectionViewCell {
        
         super.awakeFromNib()
         // Initialization code
-        imgClassIcon.borderRadius(25)
+        imgClassIcon.borderRadius(40)
         imgChoiseSelect.isHidden = true
         
     }

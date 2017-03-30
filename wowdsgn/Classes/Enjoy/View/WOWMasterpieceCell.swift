@@ -46,7 +46,7 @@ class WOWMasterpieceCell: UITableViewCell {
           heightConstraint.constant = CGFloat(height_works)
         
           imgWroks.set_webimage_url(m.pic ?? "")
-          lbCategory.text = "hahah"
+          lbCategory.text = m.categoryName ?? ""
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

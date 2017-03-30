@@ -121,7 +121,9 @@ class WOWWorkController: WOWBaseViewController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
-                
+                if strongSelf.pageIndex > 1 {
+                    strongSelf.pageIndex -= 1
+                }
             }
             
         }

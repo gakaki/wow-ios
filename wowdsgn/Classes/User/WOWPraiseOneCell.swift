@@ -12,6 +12,7 @@ class WOWPraiseOneCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var numLabel: UILabel!
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var v_height: NSLayoutConstraint!
     
     var dataArr = [WOWStatisticsModel]()
@@ -45,7 +46,10 @@ class WOWPraiseOneCell: UITableViewCell {
             numLabel.text = String(format: "%i", model.likeCounts ?? 0)
             dataArr = model.userList ?? [WOWStatisticsModel]()
             if dataArr.count > 0 {
+                bottomView.isHidden = false
                 collectionView.reloadData()
+            }else {
+                bottomView.isHidden = true
             }
         }
     }

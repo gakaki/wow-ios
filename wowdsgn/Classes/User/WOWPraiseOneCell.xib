@@ -94,6 +94,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottomView" destination="HaH-3N-qHJ" id="Ayq-iZ-DPR"/>
                 <outlet property="collectionView" destination="2Wh-KU-bcs" id="1uw-Tj-nVd"/>
                 <outlet property="imgView" destination="FkE-ec-NIw" id="ABf-Tq-C2q"/>
                 <outlet property="numLabel" destination="kLO-0H-GMb" id="Ouu-uq-WGX"/>

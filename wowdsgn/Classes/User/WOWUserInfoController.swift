@@ -38,7 +38,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     var  backGroundMaskView : UIView!
     var  backGroundWindow : UIWindow!
     
-    var editInfoAction:WOWActionClosure?
+//    var editInfoAction:WOWActionClosure?
     var addressInfo                     :WOWAddressListModel?
 
     
@@ -155,7 +155,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         backGroundMaskView.backgroundColor = UIColor.black
         backGroundMaskView.alpha = 0.2
         
-//        backGroundMaskView.tag == 1000
 
         backGroundMaskView.addTapGesture(target: self, action: #selector(cancelPicker))
         
@@ -166,7 +165,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         pickerContainerView.cancelButton.addTarget(self, action:#selector(cancelPicker), for:.touchUpInside)
         pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
 
-//        pickerContainerView.tag == 1001 
         
         backGroundWindow = UIApplication.shared.keyWindow
         
@@ -177,18 +175,14 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }
     
     func refresh_image(){
-        
-//        self.headImageView.image = nil
-//        self.headImageView.setNeedsDisplay()
+
         
         if   WOWUserManager.userPhotoData.isEmpty {
                     if ( self.image != nil ){
                         self.headImageView.image = self.image
                     }else{
 
-                       print(WOWUserManager.userHeadImageUrl)
-                       self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
-//                        self.headImageView.kf_setImageWithURL(NSURL(string: WOWUserManager.userHeadImageUrl ?? "")!, placeholderImage:UIImage(named: "placeholder_userhead"))
+                       self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl.webp_url(), place_holder_name: "placeholder_userhead")
                     }
 
         }else{
@@ -316,9 +310,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
     
     override func navBack() {
         super.navBack()
-        if let action = self.editInfoAction{
-            action()
-        }
+  
     }
   //MARK:Private Network
     override func request() {
@@ -347,8 +339,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
                 if let addressInfo = strongSelf.addressInfo {
                     DLog((addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? ""))
                     strongSelf.addressLabel.text = (addressInfo.province ?? "") + (addressInfo.city ?? "") + (addressInfo.county ?? "")
-//                    let section = IndexSet(integer: 0)
-//                    strongSelf.tableView.reloadSections(section, with: .none)
+
                 }
             }
             

@@ -222,8 +222,7 @@ class Cell_801_Product: UITableViewCell,ModuleViewElement {
         }
         v?.model = model
         v?.imgVieww.set_webimage_url(model?.productImg)
-//        v?.lb_SingTodayName.text = self.currentSingTodayName
-//        v?.imgVieww.set_webimage_url_base(model?.productImg, place_holder_name: "placeholder_product")
+
 
         if let price = model?.sellPrice {
             let result = WOWCalPrice.calTotalPrice([price],counts:[1])

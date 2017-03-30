@@ -11,9 +11,9 @@ import UIKit
 class WOWCollectController: WOWBaseViewController {
     
     
-    var dataArr  = [WOWProductModel]()
-    
-    var parentNavigationController : UINavigationController?
+    var dataArr  = [WOWWorksListModel]()
+        
+    let pageSize   = 18
     
     weak var delegate: WOWDidScrollDelegate?
     
@@ -59,6 +59,7 @@ class WOWCollectController: WOWBaseViewController {
     fileprivate func configCollectionView(){
         collectionView.collectionViewLayout = self.layout
         collectionView.mj_header  = self.mj_header
+        collectionView.mj_footer = self.mj_footer
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib.nibName(String(describing: WOWWorksCell.self)), forCellWithReuseIdentifier:String(describing: WOWWorksCell.self))
@@ -70,7 +71,7 @@ class WOWCollectController: WOWBaseViewController {
     //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
     
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
-        let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty.self), owner: self, options: nil)?.last as! FavoriteEmpty
+        let view = Bundle.main.loadNibNamed(String(describing: WOWWorkdEmptyView.self), owner: self, options: nil)?.last as! WOWWorkdEmptyView
         
         return view
     }
@@ -84,15 +85,33 @@ class WOWCollectController: WOWBaseViewController {
     //MARK:Network
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_LikeProduct, successClosure: { [weak self](result, code) in
+        let startRows = (pageIndex - 1) * pageSize
+        let params = ["startRows":startRows,"pageSize":pageSize,"type":2]
+        WOWNetManager.sharedManager.requestWithTarget(.api_WorksList(params: params as [String : AnyObject]), successClosure: { [weak self](result, code) in
             if let strongSelf = self{
-                
-                WOWHud.dismiss()
-                let productList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["favoriteProductVoList"].arrayObject)
-                if let productList = productList{
-                    strongSelf.dataArr = productList
-                }
                 strongSelf.endRefresh()
+                
+                let arr = Mapper<WOWWorksListModel>().mapArray(JSONObject:JSON(result)["list"].arrayObject)
+                if let array = arr{
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.dataArr.append(contentsOf: array)
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < strongSelf.pageSize {
+                        strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                        
+                    }else {
+                        strongSelf.collectionView.mj_footer = strongSelf.mj_footer
+                    }
+                    
+                }else {
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                }
                 strongSelf.collectionView.reloadData()
                 
             }
@@ -117,13 +136,13 @@ extension WOWCollectController:UICollectionViewDelegate,UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWWorksCell.self), for: indexPath) as! WOWWorksCell
         let model = dataArr[(indexPath as NSIndexPath).row]
         
-        cell.showData(model, indexPath: indexPath)
+        cell.showData(model)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = dataArr[(indexPath as NSIndexPath).row]
-        VCRedirect.toVCProduct(product.productId)
+        VCRedirect.bingWorksDetails(worksId: product.id ?? 0)
         
     }
     

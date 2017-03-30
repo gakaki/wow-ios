@@ -132,6 +132,7 @@
                 <outlet property="favoriteNum" destination="Q7n-gq-PQj" id="DGz-Pl-3qO"/>
                 <outlet property="praiseNum" destination="J2q-hJ-DZs" id="jz2-bI-Bq6"/>
                 <outlet property="userBack" destination="DHa-Wa-kpj" id="xRM-ey-bfb"/>
+                <outlet property="userHeadImg" destination="dZp-e1-uOI" id="JjZ-Ws-1Ei"/>
                 <outlet property="userName" destination="bCR-u8-rjf" id="dOE-Ch-e78"/>
                 <outlet property="workNum" destination="g5k-ZH-Nsb" id="4aF-JJ-3y6"/>
             </connections>

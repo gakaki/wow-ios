@@ -16,6 +16,7 @@ class WOWUserHeaderView: UIView {
     @IBOutlet weak var workNum: UILabel!
     @IBOutlet weak var praiseNum: UILabel!
     @IBOutlet weak var favoriteNum: UILabel!
+    @IBOutlet weak var userHeadImg: UIImageView!
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -30,7 +31,22 @@ class WOWUserHeaderView: UIView {
         
     }
     
-    func configUserInfo() {
+    func configUserInfo(model: WOWStatisticsModel?) {
+        if let model = model {
+            userHeadImg.set_webimage_url_base(model.avatar?.webp_url(), place_holder_name: "defaultHead")
+
+            userName.text = model.nickName
+            workNum.text = String(format: "%i", model.instagramCounts ?? 0)
+            praiseNum.text = String(format: "%i", model.likeCounts ?? 0)
+            favoriteNum.text = String(format: "%i", model.collectCounts ?? 0)
+            
+        }else {
+            userHeadImg.set_webimage_url("")
+            userName.text = ""
+            workNum.text = "0"
+            praiseNum.text = "0"
+            favoriteNum.text = "0"
+        }
         
     }
 

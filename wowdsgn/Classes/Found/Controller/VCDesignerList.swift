@@ -190,7 +190,6 @@ extension VCDesignerList:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "WOWBaseStyleCell", for: indexPath) as! WOWBaseStyleCell
         let model = dataArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         //         修改来回上下加载 内存不减的问题
-//        cell.leftImageView.set_webimage_url_base(model.designerPhoto, place_holder_name: "placeholder_product")
         cell.leftImageView.set_webimage_url(model.designerPhoto)
         cell.centerTitleLabel!.text = model.designerName
         return cell

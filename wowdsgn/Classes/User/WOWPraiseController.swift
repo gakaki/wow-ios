@@ -14,7 +14,9 @@ class WOWPraiseController: WOWBaseViewController {
     let cellTwoID = String(describing: WOWPraiseTwoCell.self)
     let cellThreeID = String(describing: WOWPraiseThreeCell.self)
 
+    var dataArr  = [WOWWorksListModel]()
     
+    let pageSize   = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,14 +50,69 @@ class WOWPraiseController: WOWBaseViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
+        tableView.mj_header = self.mj_header
+        tableView.mj_footer = self.mj_footer
         
         self.tableView.backgroundColor = UIColor.white
         self.tableView.separatorColor = UIColor.white
         
     }
     
-
+    //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
     
+    func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWWorkdEmptyView.self), owner: self, options: nil)?.last as! WOWWorkdEmptyView
+        
+        return view
+    }
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+
+    //MARK:Network
+    override func request() {
+        super.request()
+        let startRows = (pageIndex - 1) * pageSize
+        let params = ["startRows":startRows,"pageSize":pageSize,"type":1]
+        WOWNetManager.sharedManager.requestWithTarget(.api_WorksList(params: params as [String : AnyObject]), successClosure: { [weak self](result, code) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                
+                let arr = Mapper<WOWWorksListModel>().mapArray(JSONObject:JSON(result)["list"].arrayObject)
+                if let array = arr{
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.dataArr.append(contentsOf: array)
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < strongSelf.pageSize {
+                        strongSelf.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        
+                    }else {
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    }
+                    
+                }else {
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.dataArr = []
+                    }
+                    strongSelf.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                strongSelf.tableView.reloadData()
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+                
+            }
+            
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -69,29 +126,36 @@ extension WOWPraiseController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return dataArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellOneID, for: indexPath) as! WOWPraiseOneCell
-            
-            return cell
-        }else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellTwoID, for: indexPath) as! WOWPraiseTwoCell
-            
-            return cell
-        }else {
+        let model = dataArr[indexPath.row]
+        switch model.type ?? 0 {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: cellThreeID, for: indexPath) as! WOWPraiseThreeCell
-            
+            cell.showData(model: model)
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellOneID, for: indexPath) as! WOWPraiseOneCell
+            cell.showData(model: model)
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellTwoID, for: indexPath) as! WOWPraiseTwoCell
+            cell.showData(model: model)
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellThreeID, for: indexPath) as! WOWPraiseThreeCell
+            cell.showData(model: model)
             return cell
         }
-
+       
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //            UIApplication.currentViewController()?.bingWorksDetail()
+        let model = dataArr[indexPath.row]
+        VCRedirect.bingWorksDetails(worksId: model.id ?? 0)
     }
     
 }

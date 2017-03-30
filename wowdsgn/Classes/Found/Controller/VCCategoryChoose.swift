@@ -25,7 +25,6 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             else{
                 pictureImageView.image = UIImage.init(named: "placeholder_product")
             }
-//            pictureImageView.set_webimage_url_base(m.productImg, place_holder_name: "placeholder_product")
             label_name.text      = m.categoryName
         }
         

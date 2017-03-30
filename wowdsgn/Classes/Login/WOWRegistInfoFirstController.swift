@@ -25,9 +25,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
         super.viewDidLoad()
         self.nickTextField.text = WOWUserManager.userName
         headImageView.borderRadius(25)
-//        print(WOWUserManager.userHeadImageUrl)
-//        headImageView.set_webimage_url_user( WOWUserManager.userHeadImageUrl)
-        headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl, place_holder_name: "placeholder_userhead")
+        headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl.webp_url(), place_holder_name: "placeholder_userhead")
         // Do any additional setup after loading the view.
     }
     
@@ -131,7 +129,6 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
                 DLog(result)
                 //FIXME:这个地方就该保存一部分信息了  更新用户信息，并且还得发送通知，更改信息咯
                 WOWUserManager.userName = strongSelf.nickTextField.text!
-//                WOWUserManager.userHeadImageUrl = strongSelf.userInfoFromWechat.icon
                 WOWUserManager.userDes = strongSelf.descTextField.text ?? ""
                 
                 let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistInfoSecondController.self)) as! WOWRegistInfoSecondController

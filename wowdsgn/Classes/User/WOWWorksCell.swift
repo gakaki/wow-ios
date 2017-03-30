@@ -19,8 +19,8 @@ class WOWWorksCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func showData(_ model:WOWProductModel,indexPath:IndexPath) {
-        let url             = model.productImg ?? ""
+    func showData(_ model:WOWWorksListModel) {
+        let url             = model.pic ?? ""
         imageView.set_webimage_url( url)
         
     }

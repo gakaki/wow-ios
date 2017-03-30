@@ -21,7 +21,7 @@ class WOWChoiseClassCell: UICollectionViewCell {
        
         super.awakeFromNib()
         // Initialization code
-        imgClassIcon.borderRadius(25)
+        imgClassIcon.borderRadius(40)
         imgChoiseSelect.isHidden = true
         
     }
@@ -31,6 +31,11 @@ class WOWChoiseClassCell: UICollectionViewCell {
         lbClassSubTittles.text = m.title ?? ""
         if let img = m.pic{
              imgClassIcon.set_webimage_url(img)
+        }
+        if m.isSelect {
+            imgChoiseSelect.isHidden = false
+        }else {
+            imgChoiseSelect.isHidden = true
         }
         
     }

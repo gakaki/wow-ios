@@ -13,7 +13,8 @@ class WOWMasterpieceController: WOWBaseViewController {
     let cellID = String(describing: WOWMasterpieceCell.self)
     var categoryId = 0
     var fineWroksArr = [WOWFineWroksModel]()
-
+    var lastContentOffset :CGFloat = 0.0 
+    @IBOutlet weak var publishBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,7 +42,7 @@ class WOWMasterpieceController: WOWBaseViewController {
         super.request()
         
         var params = [String: Any]()
-        params = ["categoryId": categoryId   ,"type": 0 ,"startRows":0,"pageSize":10]
+        params = ["categoryId": categoryId   ,"type": 0 ,"startRows":(pageIndex-1) * 10,"pageSize":10]
 
         WOWNetManager.sharedManager.requestWithTarget(.api_getInstagramList(params: params), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
@@ -50,6 +51,15 @@ class WOWMasterpieceController: WOWBaseViewController {
                 let r = JSON(result)
 
                 strongSelf.fineWroksArr          =  Mapper<WOWFineWroksModel>().mapArray(JSONObject: r["list"].arrayObject ) ?? [WOWFineWroksModel]()
+                
+                
+                //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                if strongSelf.fineWroksArr.count < 10 {
+                    strongSelf.tableView.mj_footer = nil
+                    
+                }else {
+                    strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                }
                 
                 strongSelf.tableView.reloadData()
 
@@ -73,6 +83,7 @@ class WOWMasterpieceController: WOWBaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.mj_header          = mj_header
+        tableView.mj_footer          = mj_footer
         self.tableView.backgroundColor = UIColor.white
         self.tableView.separatorColor = UIColor.white
         
@@ -115,7 +126,79 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //            UIApplication.currentViewController()?.bingWorksDetail()
+        let model = fineWroksArr[indexPath.row]
+        VCRedirect.bingWorksDetails(worksId: model.id ?? 0)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+        let delayQueue = DispatchQueue.global()
+        delayQueue.asyncAfter(deadline: .now() + 1.0) {
+            
+            DispatchQueue.main.async {
+                //                WOWHud.dismiss()
+                //                strongSelf.popVC()
+                self.changeState(alpha: 1)
+            }
+            
+        }
+        
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+        self.perform(#selector(scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.1)
+        let a = scrollView.contentOffset.y
+        //        lastContentOffset = scrollView.contentOffset.y
+        if a -  lastContentOffset  > 50{
+            //            print("shang")
+            lastContentOffset = a
+//            hidden = true
+            changeState(alpha: 0)
+            return
+        }else if lastContentOffset - a > 50 {
+            lastContentOffset = a
+//            hidden = false
+            changeState(alpha: 1)
+            return
+        }
+        
+        
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let a = scrollView.contentOffset.y
+        if a -  lastContentOffset  > 50{
+            //            print("shang")
+            lastContentOffset = a
+//            hidden = true
+            changeState(alpha: 0)
+            return
+        }else if lastContentOffset - a > 50 {
+            lastContentOffset = a
+//            hidden = false
+            changeState(alpha: 1)
+            return
+        }
+        
+        
+    }
+    
+    func changeState(alpha:CGFloat)  {
+        UIView.animate(withDuration: 0.3) {
+            self.publishBtn.alpha = alpha
+        }
     }
 
+    
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        lastContentOffset = scrollView.contentOffset.y
+//    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        
+//        if lastContentOffset < scrollView.contentOffset.y {
+////            print("shang")
+//        }else{
+////            print("xia")
+//        }
+//        
+//    }
 }

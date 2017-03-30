@@ -24,11 +24,12 @@ class WorksDetailCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-         imgMyPhoto.set_webimage_url_user( WOWUserManager.userHeadImageUrl )
+        
         
     }
     func showData(_ m : WOWWorksDetailsModel)  {
 //        itemHeight =
+        imgMyPhoto.set_webimage_url_user( m.avatar ?? "" )
         heightConstraint.constant = WOWArrayAddStr.get_img_sizeNew(str: m.pic ?? "", width: MGScreenWidth, defaule_size: .OneToOne)
         lbDes.text = m.des ?? ""
         lbMyName.text = m.nickName ?? ""

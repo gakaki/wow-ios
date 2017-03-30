@@ -21,7 +21,8 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
     var pic                     :  String?
     var totalCollectCounts      :  Int?
     var totalLikeCounts         :  Int?
-    
+    var like                    :  Int?
+    var collect                 :  Int?
     required init?(map: Map) {
         
     }
@@ -39,7 +40,8 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
         pic                                         <- map["pic"]
         totalCollectCounts                          <- map["totalCollectCounts"]
         totalLikeCounts                             <- map["totalLikeCounts"]
-        
+        like                                        <- map["like"]
+        collect                                     <- map["collect"]
     }
 
 }

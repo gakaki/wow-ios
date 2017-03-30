@@ -97,16 +97,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Hvo-3r-i9v" firstAttribute="top" secondItem="fgG-lP-gu7" secondAttribute="bottom" id="5gT-kS-oOd"/>
+                            <constraint firstItem="4mg-1d-Fbw" firstAttribute="top" secondItem="xfl-yP-NS0" secondAttribute="bottom" id="9sA-e0-MWK"/>
                             <constraint firstItem="4mg-1d-Fbw" firstAttribute="leading" secondItem="fhj-Ql-j49" secondAttribute="leading" id="EXE-f7-5zb"/>
                             <constraint firstItem="fgG-lP-gu7" firstAttribute="top" secondItem="4mg-1d-Fbw" secondAttribute="bottom" id="F8t-iu-gm7"/>
                             <constraint firstAttribute="trailing" secondItem="4mg-1d-Fbw" secondAttribute="trailing" id="Mok-Ha-dtV"/>
-                            <constraint firstItem="4mg-1d-Fbw" firstAttribute="top" secondItem="xfl-yP-NS0" secondAttribute="bottom" id="eM6-fA-W3J"/>
+                            <constraint firstItem="Hvo-3r-i9v" firstAttribute="top" secondItem="fgG-lP-gu7" secondAttribute="bottom" id="kHt-vb-OSb"/>
                             <constraint firstItem="fgG-lP-gu7" firstAttribute="leading" secondItem="fhj-Ql-j49" secondAttribute="leading" id="vPX-o1-u4U"/>
                             <constraint firstAttribute="trailing" secondItem="fgG-lP-gu7" secondAttribute="trailing" id="xWc-Sv-n1g"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="fhj-Ql-j49" id="NnQ-I8-RCE"/>
                         <outlet property="btnCollection" destination="TSA-8l-fbg" id="gSr-47-lkj"/>
                         <outlet property="btnPraiseCount" destination="1Ee-Wp-Dzk" id="W7r-kK-d0z"/>
                         <outlet property="tableView" destination="4mg-1d-Fbw" id="mq0-Yq-w4p"/>
@@ -398,6 +399,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="publishBtn" destination="v7f-Ph-La1" id="4UM-cU-ymF"/>
                         <outlet property="tableView" destination="mqb-ZK-rQa" id="KL1-YP-xK2"/>
                     </connections>
                 </viewController>

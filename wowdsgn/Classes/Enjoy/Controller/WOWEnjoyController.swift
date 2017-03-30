@@ -239,7 +239,10 @@ extension WOWEnjoyController:WOWSelectCategoryDelegate{
         currentCategoryId = categoryId
         
         vc_masterpiece?.categoryId = categoryId
+        vc_newEnjoy?.categoryId = categoryId
+        
         vc_masterpiece?.request()
+        vc_newEnjoy?.request()
 //        v.magicView.reloadData()
         
        changeButtonState()

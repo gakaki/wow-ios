@@ -10,7 +10,7 @@ import UIKit
 
 class WOWUserHeaderView: UIView {
 
-    @IBOutlet weak var userBack: UIView!
+    @IBOutlet weak var userBack: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var editBtn: UIButton!
     @IBOutlet weak var workNum: UILabel!

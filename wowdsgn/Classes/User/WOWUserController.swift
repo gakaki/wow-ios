@@ -50,7 +50,7 @@ class WOWUserController: WOWBaseTableViewController {
     lazy var headerView:WOWUserHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWUserHeaderView.self), owner: self, options: nil)?.last as! WOWUserHeaderView
         v.userBack.addAction({
-            VCRedirect.goUserCenter()
+            VCRedirect.goOtherCenter(endUserId: 10)
         })
         v.editBtn.addTarget(self, action: #selector(goUserInfo), for:.touchUpInside)
         return v
@@ -151,7 +151,10 @@ class WOWUserController: WOWBaseTableViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         if offsetY < 0 {
-            headerView.frame = CGRect(x: 0, y: offsetY, width: MGScreenWidth, height: 9/16*MGScreenWidth - offsetY)
+            let height = MGScreenHeight
+            headerView.userHeadImg.transform = CGAffineTransform(scaleX: 1 - offsetY/height, y: 1 - offsetY/height)
+            headerView.frame = CGRect(x: 0, y: offsetY, width: MGScreenWidth , height: 9/16*MGScreenWidth - offsetY)
+
         }
     }
     

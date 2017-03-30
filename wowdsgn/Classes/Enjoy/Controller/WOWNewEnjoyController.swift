@@ -13,6 +13,9 @@ class WOWNewEnjoyController: WOWBaseViewController {
     @IBOutlet weak var kolodaView: CustomKolodaView!
     @IBOutlet weak var leftBtn: UIButton!
     @IBOutlet weak var rightBtn: UIButton!
+    @IBOutlet weak var rightSpace: NSLayoutConstraint!
+    @IBOutlet weak var leftSpace: NSLayoutConstraint!
+    
     var fineWroksArr = [WOWFineWroksModel]()
     var categoryId = 0
     var indexRows = 0
@@ -27,6 +30,12 @@ class WOWNewEnjoyController: WOWBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let space = (MGScreenWidth - 190)/3
+        rightSpace.constant = space
+        leftSpace.constant = space
+        kolodaView.dataSource = self
+        kolodaView.delegate = self
+        kolodaView.alphaValueSemiTransparent = 1.0
    
         request()
         // Do any additional setup after loading the view.
@@ -76,6 +85,11 @@ class WOWNewEnjoyController: WOWBaseViewController {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
     }
+    lazy var emptyView:WOWNewEmptyView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWNewEmptyView.self), owner: self, options: nil)?.last as! WOWNewEmptyView
+       
+        return v
+    }()
     // MARK: IBActions
     
     @IBAction func leftButtonTapped() {
@@ -84,6 +98,10 @@ class WOWNewEnjoyController: WOWBaseViewController {
     
     @IBAction func rightButtonTapped() {
         kolodaView?.swipe(.right)
+    }
+    
+    @IBAction func refreshButton() {
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -98,22 +116,23 @@ class WOWNewEnjoyController: WOWBaseViewController {
 extension WOWNewEnjoyController: KolodaViewDelegate {
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-        
 //        let position = kolodaView.currentCardIndex
-//        for i in 1...4 {
+//        for _ in 1...4 {
 //            dataSource.append(UIImage(named: "guide0")!)
 //        }
 //        kolodaView.insertCardAtIndexRange(position..<position + 4, animated: true)
+        emptyView.frame = CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: 300)
+        koloda.addSubview(emptyView)
+
         
     }
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
-//        UIApplication.shared.openURL(URL(string: "https://yalantis.com/")!)
+
     }
     
     func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection) {
-        print(finishPercentage)
-        print(direction)
+    
         if direction == .left {
             leftBtn.isHighlighted = true
         }else {

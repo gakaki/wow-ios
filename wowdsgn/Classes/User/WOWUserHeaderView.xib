@@ -10,17 +10,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="WOWUserHeaderView" id="iN0-l3-epB" customClass="WOWUserHeaderView" customModule="wowdsgn" customModuleProvider="target">
+        <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="WOWUserHeaderView" id="iN0-l3-epB" customClass="WOWUserHeaderView" customModule="wowdsgn" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide0" translatesAutoresizingMaskIntoConstraints="NO" id="dZp-e1-uOI">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                 </imageView>
-                <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHa-Wa-kpj">
+                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_cover" translatesAutoresizingMaskIntoConstraints="NO" id="74T-jB-D8r">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Znd-W2-7Qv">
                     <rect key="frame" x="229.5" y="175" width="1" height="25"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,24 +96,24 @@
                 <constraint firstItem="d6g-Op-Icx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="28" id="8ps-fj-Rqn"/>
                 <constraint firstItem="OlO-Sr-5KG" firstAttribute="centerX" secondItem="Q7n-gq-PQj" secondAttribute="centerX" id="8su-51-sps"/>
                 <constraint firstItem="K4b-0N-tyl" firstAttribute="leading" secondItem="mWG-lY-d1h" secondAttribute="trailing" constant="29" id="96U-Vy-RSr"/>
+                <constraint firstItem="74T-jB-D8r" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9iz-Jc-Doh"/>
                 <constraint firstItem="K4b-0N-tyl" firstAttribute="bottom" secondItem="mWG-lY-d1h" secondAttribute="bottom" id="Aop-sa-2Dh"/>
                 <constraint firstItem="J2q-hJ-DZs" firstAttribute="top" secondItem="g5k-ZH-Nsb" secondAttribute="top" id="BHU-2q-Nuy"/>
                 <constraint firstItem="wtR-ff-5rG" firstAttribute="centerX" secondItem="g5k-ZH-Nsb" secondAttribute="centerX" id="D02-Fq-Cif"/>
                 <constraint firstItem="bCR-u8-rjf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="EXZ-Y1-Fbc"/>
                 <constraint firstItem="dZp-e1-uOI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JM5-y6-kXA"/>
-                <constraint firstItem="DHa-Wa-kpj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SAL-xj-BYC"/>
                 <constraint firstItem="xRw-5Q-LNv" firstAttribute="top" secondItem="bCR-u8-rjf" secondAttribute="bottom" constant="20" id="SAU-yS-cfR"/>
                 <constraint firstItem="xRw-5Q-LNv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="UVH-WV-wRm"/>
                 <constraint firstAttribute="trailing" secondItem="d6g-Op-Icx" secondAttribute="trailing" constant="8" id="WLj-V9-XUV"/>
                 <constraint firstItem="K4b-0N-tyl" firstAttribute="top" secondItem="J2q-hJ-DZs" secondAttribute="bottom" constant="1" id="WtS-tF-P3s"/>
+                <constraint firstItem="74T-jB-D8r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="a6b-Wy-Sr2"/>
                 <constraint firstItem="wtR-ff-5rG" firstAttribute="top" secondItem="g5k-ZH-Nsb" secondAttribute="bottom" constant="1" id="alC-7n-WMg"/>
                 <constraint firstAttribute="trailing" secondItem="dZp-e1-uOI" secondAttribute="trailing" id="ctz-ea-PmU"/>
-                <constraint firstAttribute="trailing" secondItem="DHa-Wa-kpj" secondAttribute="trailing" id="d6O-Sc-WNM"/>
                 <constraint firstItem="OlO-Sr-5KG" firstAttribute="top" secondItem="Q7n-gq-PQj" secondAttribute="bottom" constant="1" id="dxc-5N-apQ"/>
+                <constraint firstAttribute="trailing" secondItem="74T-jB-D8r" secondAttribute="trailing" id="gLR-3h-1Mz"/>
                 <constraint firstItem="K4b-0N-tyl" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gYX-7Z-9Io"/>
                 <constraint firstItem="dZp-e1-uOI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gpU-4v-XPc"/>
-                <constraint firstAttribute="bottom" secondItem="DHa-Wa-kpj" secondAttribute="bottom" id="izM-gB-wDC"/>
-                <constraint firstItem="DHa-Wa-kpj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ogp-Va-uo2"/>
+                <constraint firstAttribute="bottom" secondItem="74T-jB-D8r" secondAttribute="bottom" id="iUf-FG-vb9"/>
                 <constraint firstAttribute="bottom" secondItem="dZp-e1-uOI" secondAttribute="bottom" id="psz-Qk-v2m"/>
                 <constraint firstAttribute="bottom" secondItem="K4b-0N-tyl" secondAttribute="bottom" constant="25" id="tIN-8K-rTm"/>
                 <constraint firstItem="J2q-hJ-DZs" firstAttribute="top" secondItem="xRw-5Q-LNv" secondAttribute="bottom" constant="20" id="tNp-Fl-8gX"/>
@@ -131,7 +130,7 @@
                 <outlet property="editBtn" destination="d6g-Op-Icx" id="Uxc-3S-YwY"/>
                 <outlet property="favoriteNum" destination="Q7n-gq-PQj" id="DGz-Pl-3qO"/>
                 <outlet property="praiseNum" destination="J2q-hJ-DZs" id="jz2-bI-Bq6"/>
-                <outlet property="userBack" destination="DHa-Wa-kpj" id="xRM-ey-bfb"/>
+                <outlet property="userBack" destination="74T-jB-D8r" id="vOa-t8-Rys"/>
                 <outlet property="userHeadImg" destination="dZp-e1-uOI" id="JjZ-Ws-1Ei"/>
                 <outlet property="userName" destination="bCR-u8-rjf" id="dOE-Ch-e78"/>
                 <outlet property="workNum" destination="g5k-ZH-Nsb" id="4aF-JJ-3y6"/>
@@ -142,5 +141,6 @@
     <resources>
         <image name="guide0" width="1242" height="2209"/>
         <image name="userEdit" width="30" height="30"/>
+        <image name="user_cover" width="375" height="210"/>
     </resources>
 </document>

@@ -151,7 +151,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eE6-a7-hyj">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eE6-a7-hyj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OAg-hL-xPe">
@@ -180,6 +180,9 @@
                             <constraint firstItem="eE6-a7-hyj" firstAttribute="top" secondItem="1Aq-Wt-W4C" secondAttribute="top" id="p86-1a-Xtu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="eE6-a7-hyj" id="ynr-08-VsC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lne-cH-zCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

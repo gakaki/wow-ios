@@ -16,6 +16,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
     @IBOutlet weak var rightSpace: NSLayoutConstraint!
     @IBOutlet weak var leftSpace: NSLayoutConstraint!
     
+    weak var delegate:WOWChideControllerDelegate?
     var fineWroksArr = [WOWFineWroksModel]()
     var categoryId = 0
     var indexRows = 0
@@ -53,9 +54,9 @@ class WOWNewEnjoyController: WOWBaseViewController {
                 
                 let r = JSON(result)
                 
-                strongSelf.fineWroksArr          =  Mapper<WOWFineWroksModel>().mapArray(JSONObject: r["list"].arrayObject ) ?? [WOWFineWroksModel]()
-        
-                strongSelf.kolodaView.resetCurrentCardIndex()
+                let array   =  Mapper<WOWFineWroksModel>().mapArray(JSONObject: r["list"].arrayObject ) ?? [WOWFineWroksModel]()
+                strongSelf.fineWroksArr = strongSelf.fineWroksArr + array
+                strongSelf.kolodaView.reloadData()
                 
             }
         }) {[weak self] (errorMsg) in
@@ -68,14 +69,11 @@ class WOWNewEnjoyController: WOWBaseViewController {
         
     }
     
-    func requestLike(type: Int) {
+    func requestLike(type: Int, works worksId: Int) {
        
-        guard WOWUserManager.loginStatus == true else{
-            UIApplication.currentViewController()?.toLoginVC(true)
-            return
-        }
+       
         
-        WOWNetManager.sharedManager.requestWithTarget(.api_LikeWorks(worksId: categoryId, type: type), successClosure: {[weak self] (result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_LikeWorks(worksId: worksId, type: type), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let _ = self {
                
@@ -116,8 +114,16 @@ class WOWNewEnjoyController: WOWBaseViewController {
     }
     
     @IBAction func refreshButton() {
+        if let del = delegate {
+            
+            del.updateTabsRequsetData()
+            
+        }
         indexRows = 0
+        fineWroksArr = [WOWFineWroksModel]()
+        kolodaView.resetCurrentCardIndex()
         request()
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -144,10 +150,11 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
     }
     
     func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool {
-        return false
+        return true
     }
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
-
+        let model = fineWroksArr[index]
+        VCRedirect.bingWorksDetails(worksId: model.id ?? 0)
     }
     
     func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection) {
@@ -192,14 +199,20 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
     }
 
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        guard WOWUserManager.loginStatus == true else{
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
+        let model = fineWroksArr[index]
         if direction == .left {
-            requestLike(type: 0)
+            requestLike(type: 0, works: model.id ?? 0)
         }
         if direction == .right {
-            requestLike(type: 1)
+            requestLike(type: 1, works: model.id ?? 0)
         }
+        
         if fineWroksArr.count - index == 5 {
-            indexRows = fineWroksArr[index].id ?? 0
+            indexRows = fineWroksArr.last?.id ?? 0
             request()
         }
     }
@@ -218,7 +231,6 @@ extension WOWNewEnjoyController: KolodaViewDataSource {
         if self.fineWroksArr.count > index {
           imgStr = self.fineWroksArr[index].pic ?? ""
         }
-        imgStr = "https://img.wowdsgn.com/social/insta/K4UnIA_2dimension_750x750"
         return WOWCustomKoloda(frame: CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: MGScreenWidth - 20), imgStr)
     }
     

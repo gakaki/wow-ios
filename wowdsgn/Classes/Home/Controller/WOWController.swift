@@ -35,23 +35,11 @@ class WOWController: WOWBaseModuleVC {
     var isRequest :Bool = false// 判断此页面是不是第一次网络请求
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.automaticallyAdjustsScrollViewInsets = false
-//        let topViewController = FNUtil.currentTopViewController()
-//        if topViewController.className == WOWHomeControllers.className {
-//            hidingNavBarManager = HidingNavigationBarManager(viewController: self.magic, scrollView: tableView)
-//
-//        }
 
         setUI()
         addObserver()
-        
-     
-        
-//        if tabId == nil { // 说明进入的是第一页
-        
-            request()
-//        }
- 
+
+        request()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -143,11 +131,6 @@ class WOWController: WOWBaseModuleVC {
     override func request() {
         
         super.request()
-        if let del = delegate {
-            
-            del.updateTabsRequsetData()
-            
-        }
         
         self.requestTop()
        
@@ -155,7 +138,14 @@ class WOWController: WOWBaseModuleVC {
         
     }
     
-
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        if let del = delegate {
+            
+            del.updateTabsRequsetData()
+            
+        }
+    }
     func requestTop() {// 请求模块化数据
         var params = ["pageId": 1]
         

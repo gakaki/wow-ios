@@ -114,7 +114,7 @@ class WOWCategoryBackView: UIView {
 protocol WOWSelectCategoryDelegate:class {
 
     //选择分类
-    func selectCategory(categoryId:Int)
+    func selectCategory(model:WOWEnjoyCategoryModel)
 }
 class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
 
@@ -188,7 +188,7 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
             }
             categoryArr[indexPath.row].isSelect = true
             tableView.reloadData()
-            del.selectCategory(categoryId: categoryArr[indexPath.row].id ?? 0)
+            del.selectCategory(model: categoryArr[indexPath.row])
         }
 //            UIApplication.currentViewController()?.bingWorksDetail()
 //        VCRedirect.bingWorksDetails()

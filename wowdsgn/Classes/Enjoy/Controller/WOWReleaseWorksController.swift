@@ -41,20 +41,14 @@ class WOWReleaseWorksController: WOWBaseViewController {
     func requestPushWorks(pic:String ,des:String){
         
         var params = [String: Any]()
-         params = ["instagramCategoryId": instagramCategoryId ?? 0  ,"pic": pic ,"description":des]
-        if let imgSizeId = imgSizeId {
-//            if imgSizeId > 0 {
-                params["measurement"] = imgSizeId
-//            }
-        }
-        
-       
+        params = ["instagramCategoryId": instagramCategoryId ?? 0  ,"pic": pic ,"description":des , "measurement":imgSizeId  ?? 1]
 
         WOWNetManager.sharedManager.requestWithTarget(.api_PushWorks(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let strongSelf = self{
                 let r = JSON(result)
                 print(r)
+                
                 strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
                 
                 strongSelf.toWorksDetails(worksId:strongSelf.modelData?.id ?? 0)
@@ -70,7 +64,6 @@ class WOWReleaseWorksController: WOWBaseViewController {
         }
 
     }
-
     // MARK: - 发布按钮
     @IBAction func releaseAction(_ sender: Any) {
         let des = textView.text ?? ""

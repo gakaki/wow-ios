@@ -150,12 +150,11 @@ struct WOWArrayAddStr {
         }
         return newArray
     }
-    // 后台返回的图片后面有图片size的参数 此方法拿到。
+    // 后台返回的图片后面有图片size的参数 此方法拿到。直接返回算出的高度
     static func get_img_sizeNew(str:String,width:CGFloat,defaule_size:Defaule_Size) -> CGFloat {
         
         let array = str.components(separatedBy: "_2dimension_")
-        
-        
+    
         var rate        = defaule_size.rawValue
         if array.count > 1 {
             let c = array[1].components(separatedBy: ".")
@@ -169,9 +168,6 @@ struct WOWArrayAddStr {
                     
                 }
             }
-//            else if c.count == 1 {
-//                
-//            }
             
         }
         return round(CGFloat(rate) * width)

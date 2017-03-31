@@ -43,20 +43,20 @@ class WOWWorksDetailsController: WOWBaseViewController {
             if let strongSelf = self{
                 
                 strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
-                strongSelf.btnPraiseCount.setTitle(strongSelf.modelData?.totalLikeCounts?.toString, for: .normal)
-                strongSelf.btnCollection.setTitle(strongSelf.modelData?.totalCollectCounts?.toString, for: .normal)
+                strongSelf.btnPraiseCount.setTitle(strongSelf.modelData?.likeCounts?.toString, for: .normal)
+                strongSelf.btnCollection.setTitle(strongSelf.modelData?.collectCounts?.toString, for: .normal)
                 strongSelf.btnPraiseCount.isSelected = strongSelf.modelData?.like ?? false
                 strongSelf.btnCollection.isSelected = strongSelf.modelData?.collect ?? false
                 strongSelf.tableView.reloadData()
 
                 
             }
-        }) {[weak self] (errorMsg) in
+            }, failClosure: {[weak self] (errorMsg) in
             if self != nil{
               
                 WOWHud.dismiss()
             }
-        }
+        })
         
 
     }
@@ -64,8 +64,9 @@ class WOWWorksDetailsController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    // MARK: - 点赞作品
     func requestPraise() {
-        if let model = self.modelData {
+        if let model = self.modelData { // 喜欢的类型  取反
             if let like = model.like {
                 var likeType = 0
                 if like {
@@ -73,21 +74,23 @@ class WOWWorksDetailsController: WOWBaseViewController {
                 }else {
                     likeType = 1
                 }
-                WOWClickLikeAction.requestLikeWorksDetails(worksId: worksId ?? 0, type: likeType, view: bottomView, btn: btnPraiseCount) { (Favorite) in
-                    
-                    model.like = !like
-                    self.btnPraiseCount.isSelected = model.like ?? false
-                    model.totalLikeCounts = Calculate.calculateType(type: !like)(model.totalLikeCounts ?? 0)
-                    self.btnPraiseCount.setTitle(model.totalLikeCounts?.toString, for: .normal)
-
+                WOWClickLikeAction.requestLikeWorksDetails(worksId: worksId ?? 0, type: likeType, view: bottomView, btn: btnPraiseCount) {[weak self] (Favorite) in
+                    if let strongSelf = self {
+                        model.like = !like
+                        strongSelf.btnPraiseCount.isSelected = model.like ?? false
+                        model.likeCounts = Calculate.calculateType(type: !like)(model.likeCounts ?? 0)
+                        strongSelf.btnPraiseCount.setTitle(model.likeCounts?.toString, for: .normal)
+                    }
                 }
+           
             }
            
         }
-       
+
     }
+    // MARK: - 收藏作品
     func requestCollect() {
-        if let model = self.modelData {
+        if let model = self.modelData { // 喜欢的类型  取反
             if let collect = model.collect {
                 var collectType = 0
                 if collect {
@@ -95,18 +98,20 @@ class WOWWorksDetailsController: WOWBaseViewController {
                 }else {
                     collectType = 1
                 }
-                WOWClickLikeAction.requestCollectWorksDetails(worksId: worksId ?? 0, type: collectType, view: bottomView, btn: btnCollection) { (Favorite) in
-                    
-                    model.collect = !collect
-                    self.btnCollection.isSelected = model.collect ?? false
-                    model.totalCollectCounts = Calculate.calculateType(type: !collect)(model.totalCollectCounts ?? 0)
-                    self.btnCollection.setTitle(model.totalCollectCounts?.toString, for: .normal)
+                WOWClickLikeAction.requestCollectWorksDetails(worksId: worksId ?? 0, type: collectType, view: bottomView, btn: btnCollection) {[weak self] (Favorite) in
+                    if let strongSelf = self {
+                        
+                        model.collect = !collect
+                        strongSelf.btnCollection.isSelected = model.collect ?? false
+                        model.collectCounts = Calculate.calculateType(type: !collect)(model.collectCounts ?? 0)
+                        strongSelf.btnCollection.setTitle(model.collectCounts?.toString, for: .normal)
+
+                    }
                     
                 }
             }
             
         }
-        
         
     }
 

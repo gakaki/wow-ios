@@ -15,19 +15,27 @@ class WOWClickLikeAction {
     private init(){}
     
     static  func likeAnimate(view: UIView, btn: UIButton) {
-        
-        let imgView = UIImageView(frame: btn.frame)
-        imgView.contentMode = .scaleAspectFit
-        imgView.image = btn.image(for: .selected)
-        view.addSubview(imgView)
-        UIView.animate(withDuration: 0.5, animations: {
-            imgView.transform = CGAffineTransform(scaleX: 2, y: 2)
-            imgView.alpha = 0
-        }) { (finished) in
-            imgView.removeFromSuperview()
-            // 在动画结束之后，发送刷新数据源的通知，因为直接reloadtableView，动画不会出现
-            NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params as AnyObject?)
-            
+        if let img = btn.imageView {
+            var x = btn.mj_x + img.mj_x
+            var y = btn.mj_y + img.mj_y
+            var w = img.mj_w
+            var h = img.mj_h
+            let imgView = UIImageView(frame: CGRect.init(x: x, y: y, w: w, h: h))
+            imgView.contentMode = .scaleAspectFit
+            imgView.image = btn.image(for: .selected)
+            view.addSubview(imgView)
+            UIView.animate(withDuration: 0.5, animations: {
+                imgView.transform = CGAffineTransform(scaleX: 2, y: 2)
+                imgView.alpha = 0
+            }) { (finished) in
+                imgView.removeFromSuperview()
+                // 在动画结束之后，发送刷新数据源的通知，因为直接reloadtableView，动画不会出现
+                NotificationCenter.postNotificationNameOnMainThread(WOWRefreshFavoritNotificationKey, object: params as AnyObject?)
+                
+            }
+
+        }else {
+            DLog("这个btn 无图片")
         }
         
     }

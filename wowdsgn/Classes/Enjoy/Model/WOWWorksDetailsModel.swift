@@ -17,6 +17,7 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
     var endUserId               :  Int?
     var instagramCounts         :  Int?
     var likeCounts              :  Int?
+    var collectCounts           :  Int?
     var nickName                :  String?
     var pic                     :  String?
     var totalCollectCounts      :  Int?
@@ -36,6 +37,7 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
         endUserId                                   <- map["endUserId"]
         instagramCounts                             <- map["instagramCounts"]
         likeCounts                                  <- map["likeCounts"]
+        collectCounts                               <- map["collectCounts"]
         nickName                                    <- map["nickName"]
         pic                                         <- map["pic"]
         totalCollectCounts                          <- map["totalCollectCounts"]

@@ -34,7 +34,7 @@ class WorksDetailCell: UITableViewCell {
         lbDes.text = m.des ?? ""
         lbMyName.text = m.nickName ?? ""
         imgPhoto.set_webimage_url(m.pic ?? "")
-        lbMyIntro.text = (m.instagramCounts?.toString)!  + "件作品／" + (m.likeCounts?.toString)! + "次被赞"
+        lbMyIntro.text = (m.instagramCounts?.toString)!  + "件作品／" + (m.totalLikeCounts?.toString)! + "次被赞"
         
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

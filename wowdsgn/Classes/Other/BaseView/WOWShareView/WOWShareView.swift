@@ -143,7 +143,7 @@ class WOWShareBackView:UIView{
         }
         
         self.layoutIfNeeded()
-        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
+//        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
         
         sharePhotoView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
@@ -159,7 +159,7 @@ class WOWShareBackView:UIView{
         }
        
       
-        sharePhotoView.heightImgConstraint.constant = sharePhotoView.mj_w
+        sharePhotoView.heightImgConstraint.constant = WOWArrayAddStr.get_img_sizeNew(str: img, width: sharePhotoView.mj_w, defaule_size: .OneToOne)
         
           sharePhotoView.layoutIfNeeded()
          self.layoutIfNeeded()

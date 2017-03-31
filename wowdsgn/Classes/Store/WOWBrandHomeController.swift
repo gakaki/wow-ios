@@ -199,6 +199,7 @@ class WOWBrandHomeController: WOWBaseViewController {
             }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
                 strongSelf.endRefresh()
             }
         }
@@ -250,6 +251,7 @@ class WOWBrandHomeController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.collectionView.mj_footer = nil
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }
@@ -266,6 +268,7 @@ class WOWBrandHomeController: WOWBaseViewController {
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
         
@@ -311,6 +314,7 @@ class WOWBrandHomeController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.collectionView.mj_footer = nil
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }
@@ -327,7 +331,7 @@ class WOWBrandHomeController: WOWBaseViewController {
             
             
         }) {(errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }
@@ -343,7 +347,7 @@ class WOWBrandHomeController: WOWBaseViewController {
 
             }
         }) {(errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }

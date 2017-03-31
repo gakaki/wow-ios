@@ -101,15 +101,18 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                     }
                     
                 }){ (errorMsg) in
-                    print(errorMsg)
                     strongSelf.endRefresh()
+                    WOWHud.showMsgNoNetWrok(message: errorMsg)
                 }
 
             }
             
-        }){ (errorMsg) in
-            print(errorMsg)
-            self.endRefresh()
+        }){[weak self] (errorMsg) in
+            if let strongSelf = self {
+                strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
+            }
+           
         }
         
         

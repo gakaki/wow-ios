@@ -90,6 +90,7 @@ class WOWMessageInfoController: WOWBaseViewController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
         
@@ -122,7 +123,7 @@ class WOWMessageInfoController: WOWBaseViewController {
                 
             }
         }) {(errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     
@@ -145,7 +146,7 @@ class WOWMessageInfoController: WOWBaseViewController {
                 
             }
         }) {(errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     

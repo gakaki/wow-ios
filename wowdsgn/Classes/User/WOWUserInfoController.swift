@@ -326,6 +326,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.configUserInfo()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 
@@ -344,7 +345,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             }
             
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }
@@ -371,8 +372,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
 //                }
             }
         }) { (errorMsg) in
-            WOWHud.dismiss()
-            DLog(errorMsg)
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }
@@ -403,7 +403,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             }
             
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }
@@ -620,7 +620,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
             
             }) { (errorMsg) in
                 
-                print(errorMsg)
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
      
     }

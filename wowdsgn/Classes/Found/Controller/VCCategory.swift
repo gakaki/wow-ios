@@ -61,13 +61,13 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDataSource, UICollection
                     }
                     
                 }){ (errorMsg) in
-                    DLog(errorMsg)
+                    WOWHud.showMsgNoNetWrok(message: errorMsg)
                 }
             
             }
             
         }){ (errorMsg) in
-            DLog(errorMsg)
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
         

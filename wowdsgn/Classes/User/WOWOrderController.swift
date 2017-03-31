@@ -145,6 +145,7 @@ class WOWOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.tableView.mj_footer = nil
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }
@@ -235,7 +236,7 @@ extension WOWOrderController:OrderCellDelegate{
                     strongSelf.request()
                 }
             }) { (errorMsg) in
-                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
         
@@ -262,7 +263,7 @@ extension WOWOrderController:OrderCellDelegate{
                 }
             }
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
 }

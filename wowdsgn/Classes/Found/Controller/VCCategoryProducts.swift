@@ -111,6 +111,7 @@ class VCCategoryProducts:WOWBaseProductsController
         }){[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 
@@ -191,6 +192,7 @@ class VCCategoryProducts:WOWBaseProductsController
         }){[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 
@@ -270,6 +272,7 @@ class VCCategoryProducts:WOWBaseProductsController
         }){[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 

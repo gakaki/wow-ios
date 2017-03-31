@@ -65,6 +65,7 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
             }
         }) { (errorMsg) in
              sender.isUserInteractionEnabled = true
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
         
@@ -92,6 +93,7 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
                 }
             }
         }) {(errorMsg) in
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
 //            if let strongSelf = self{
                 //                strongSelf.tipsLabel.text = errorMsg
 //            }

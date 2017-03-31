@@ -154,6 +154,7 @@ class VCDesignerList: WOWBaseViewController {
             
         }) {(errorMsg) in
             self.endRefresh()
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
 }

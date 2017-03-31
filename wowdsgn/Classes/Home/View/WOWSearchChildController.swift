@@ -118,7 +118,7 @@ class WOWSearchChildController: WOWBaseProductsController{
             if let strongSelf = self{
                 strongSelf.collectionView.mj_footer = nil
                 strongSelf.endRefresh()
-                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
             
         }
@@ -169,7 +169,7 @@ class WOWSearchChildController: WOWBaseProductsController{
             if let strongSelf = self{
                 strongSelf.collectionView.mj_footer = nil
                 strongSelf.endRefresh()
-                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
             
         }

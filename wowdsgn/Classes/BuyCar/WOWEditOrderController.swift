@@ -284,6 +284,7 @@ class WOWEditOrderController: WOWBaseViewController {
         }) { [weak self](errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
         //如果是立即购买入口需要添加商品id和商品数量来创建订单。如果是购物车进来的，直接获取商品列表
@@ -305,6 +306,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
             }) { (errorMsg) in
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     
@@ -321,6 +323,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     
@@ -429,7 +432,8 @@ class WOWEditOrderController: WOWBaseViewController {
             
             }) { (errorMsg) in
                 
-
+                LoadView.dissMissView()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
       
@@ -539,7 +543,8 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-           
+            LoadView.dissMissView()
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
 
         }
     }
@@ -601,7 +606,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
             }) { (errorMsg) in
-                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     
@@ -778,7 +783,7 @@ extension WOWEditOrderController: selectPayDelegate {
             }
             
             }) { (errorMsg) in
-                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     

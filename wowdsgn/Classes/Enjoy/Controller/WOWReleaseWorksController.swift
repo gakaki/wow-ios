@@ -60,7 +60,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
              
-                WOWHud.dismiss()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
                 
             }
         }

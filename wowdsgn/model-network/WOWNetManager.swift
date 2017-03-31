@@ -126,27 +126,29 @@ class WOWNetManager {
                                     return
                                 }else{
                                     UIApplication.currentViewController()?.toLoginVC(true)
-                                failClosure(info?.message)
+                                failClosure("登录已过期，请重新登录")
                                     return
                                 }
                             }
                             if code == RequestCode.FailError.rawValue {
-                                
-                                WOWHud.showMsg("您未登录,请先登录")
-                                if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
-                                    return
-                                }else{
-                                    WOWUserManager.exitLogin()
-                                    UIApplication.currentViewController()?.toLoginVC(true)
-                                    failClosure(info?.message)
-                                    return
-                                }
+                                failClosure(info?.message)
+                                return
+//                                WOWHud.showMsg("您未登录,请先登录")
+//                                if ( UIApplication.currentViewController()?.className  == WOWLoginController.className){
+//                                    return
+//                                }else{
+//                                    WOWUserManager.exitLogin()
+//                                    UIApplication.currentViewController()?.toLoginVC(true)
+//                                    failClosure("您未登录,请先登录")
+//                                    return
+//                                }
                             }
                             //产品过期或者失效
                             if code == RequestCode.ProductExpired.rawValue {
                                 let res = info?.data ?? [] as AnyObject
-                                successClosure(res, info?.code)
                                 WOWHud.showMsg(info?.message)
+                                successClosure(res, info?.code)
+                                
                                 return
                             }
                             //产品限购
@@ -161,12 +163,13 @@ class WOWNetManager {
                             }
                             
                             failClosure(info?.message)
-                            WOWHud.showWarnMsg(info?.message)
+                            
                             return
                         }
                     }else{
-                        failClosure("网络错误")
                         WOWHud.showMsg("网络错误")
+                        failClosure("网络错误")
+                        
                         return
                     }
                     
@@ -177,15 +180,11 @@ class WOWNetManager {
                         }else{
                             WOWHud.showMsg(endMsg)
                         }
-                    }else{
-//                        WOWHud.dismiss()
-                        
                     }
                     let res = info?.data ?? [] as AnyObject
                     successClosure(res, info?.code)
                 case let .failure(error):
                     DLog(error)
-//                    WOWHud.showMsg("网络错误")
                     WOWHud.showMsgNoNetWrok(message: "网络错误")
                    
                     failClosure("网络错误")

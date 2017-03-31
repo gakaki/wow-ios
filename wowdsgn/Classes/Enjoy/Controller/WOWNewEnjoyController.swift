@@ -18,7 +18,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
     
     var fineWroksArr = [WOWFineWroksModel]()
     var categoryId = 0
-    var indexRows = 6
+    var indexRows = 0
     fileprivate var dataSource: [UIImage] = {
         var array: [UIImage] = []
         for index in 0..<5 {
@@ -38,30 +38,30 @@ class WOWNewEnjoyController: WOWBaseViewController {
         kolodaView.delegate = self
         kolodaView.alphaValueSemiTransparent = 1.0
         kolodaView.reloadData()
-//        request()
+        request()
         // Do any additional setup after loading the view.
     }
     override func request() {
         super.request()
         
         var params = [String: Any]()
-        params = ["categoryId": categoryId   ,"type": 1 ,"startRows":indexRows,"pageSize":10]
+        params = ["categoryId": categoryId   ,"type": 1 ,"startRows":indexRows,"pageSize":20]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_getInstagramList(params: params), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let strongSelf = self{
-                strongSelf.endRefresh()
+                
                 let r = JSON(result)
                 
                 strongSelf.fineWroksArr          =  Mapper<WOWFineWroksModel>().mapArray(JSONObject: r["list"].arrayObject ) ?? [WOWFineWroksModel]()
         
-                
+                strongSelf.kolodaView.resetCurrentCardIndex()
                 
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
-                strongSelf.endRefresh()
-                WOWHud.dismiss()
+                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
         
@@ -69,26 +69,19 @@ class WOWNewEnjoyController: WOWBaseViewController {
     }
     
     func requestLike(type: Int) {
-        WOWHud.showLoadingSV()
+       
         guard WOWUserManager.loginStatus == true else{
-            WOWHud.dismiss()
             UIApplication.currentViewController()?.toLoginVC(true)
             return
         }
         
         WOWNetManager.sharedManager.requestWithTarget(.api_LikeWorks(worksId: categoryId, type: type), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
-            if let strongSelf = self {
-                if type == 0 {
-                    strongSelf.kolodaView?.swipe(.left)
-                }else{
-                    strongSelf.kolodaView?.swipe(.right)
-                }
+            if let _ = self {
+               
             }
 
         }) { (errorMsg) in
-            
-            
             WOWHud.dismiss()
             
         }
@@ -115,15 +108,16 @@ class WOWNewEnjoyController: WOWBaseViewController {
     // MARK: IBActions
     
     @IBAction func leftButtonTapped() {
-        requestLike(type: 0)
+        kolodaView?.swipe(.left)
     }
     
     @IBAction func rightButtonTapped() {
-        requestLike(type: 1)
+        kolodaView?.swipe(.right)
     }
     
     @IBAction func refreshButton() {
-        kolodaView.resetCurrentCardIndex()
+        indexRows = 0
+        request()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -143,15 +137,15 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
 //            dataSource.append(UIImage(named: "guide0")!)
 //        }
 //        kolodaView.insertCardAtIndexRange(position..<position + 4, animated: true)
-        emptyView.frame = CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: 300)
-        koloda.addSubview(emptyView)
+//        emptyView.frame = CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: 300)
+//        koloda.addSubview(emptyView)
 //        kolodaView.resetCurrentCardIndex()
         
     }
     
-//    func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool {
-//        return false
-//    }
+    func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool {
+        return false
+    }
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
 
     }
@@ -198,9 +192,15 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
     }
 
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
-        if index >= 3 {
-            indexRows = 10
-            kolodaView.reloadData()
+        if direction == .left {
+            requestLike(type: 0)
+        }
+        if direction == .right {
+            requestLike(type: 1)
+        }
+        if fineWroksArr.count - index == 5 {
+            indexRows = fineWroksArr[index].id ?? 0
+            request()
         }
     }
 }
@@ -210,7 +210,7 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
 extension WOWNewEnjoyController: KolodaViewDataSource {
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-        return indexRows
+        return fineWroksArr.count
     }
     
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {

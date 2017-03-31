@@ -479,6 +479,7 @@ class WOWProductDetailController: WOWBaseViewController {
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
         
@@ -498,7 +499,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 
             }
         }) {(errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }
@@ -512,7 +513,7 @@ class WOWProductDetailController: WOWBaseViewController {
             
             }
         }) {(errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }
@@ -550,6 +551,7 @@ class WOWProductDetailController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 strongSelf.requestAboutProduct()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
             
         }
@@ -580,6 +582,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 //初始化详情页数据
                 strongSelf.configData()
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }
@@ -627,7 +630,7 @@ extension WOWProductDetailController :goodsBuyViewDelegate {
                 }
                 
             }) { (errorMsg) in
-                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
             
         }else {

@@ -160,6 +160,7 @@ class WOWCommentController: WOWBaseViewController {
         }){[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
                 
             
@@ -177,7 +178,7 @@ class WOWCommentController: WOWBaseViewController {
             }
             
         }){[weak self] (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     

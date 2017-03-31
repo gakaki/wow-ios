@@ -161,14 +161,14 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
                     }
                     
                 }){ (errorMsg) in
-                    DLog(errorMsg)
+                    WOWHud.showMsgNoNetWrok(message: errorMsg)
                 }
 
                 
             }
             
         }){ (errorMsg) in
-            DLog(errorMsg)
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }
@@ -207,7 +207,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
             }
             
         }){ (errorMsg) in
-            DLog(errorMsg)
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }
@@ -247,7 +247,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
             }
             
         }){ (errorMsg) in
-            DLog(errorMsg)
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }

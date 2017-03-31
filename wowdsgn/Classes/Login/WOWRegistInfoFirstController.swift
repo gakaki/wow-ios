@@ -138,7 +138,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
             }
         }) {[weak self] (errorMsg) in
             if let _ = self{
-
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
         
@@ -203,7 +203,7 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
             
         }) { (errorMsg) in
             
-            print(errorMsg)
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }

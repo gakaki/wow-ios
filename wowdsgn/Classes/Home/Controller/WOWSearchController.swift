@@ -133,7 +133,7 @@ class WOWSearchController: WOWBaseViewController{
                 
             }
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
 //    pageSize: 10, currentPage: pageIndex, sortBy: 1, asc: 1, seoKey: searchView.searchTextField.text ?? ""
@@ -177,6 +177,7 @@ class WOWSearchController: WOWBaseViewController{
         }) {[weak self] (errorMsg) in
             if self != nil{
                 //                strongSelf.emptyView.hidden = false
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
             
         }

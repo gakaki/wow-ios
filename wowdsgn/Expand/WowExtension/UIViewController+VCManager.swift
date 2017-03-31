@@ -530,7 +530,7 @@ extension  UIViewController {
                 WOWHud.showMsg("授权登录失败")
             }
             
-            DLog(response)
+            DLog(response ?? "")
             
         }
         

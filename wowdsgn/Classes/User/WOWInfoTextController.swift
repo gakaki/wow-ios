@@ -116,6 +116,7 @@ class WOWInfoTextController: WOWBaseTableViewController {
             WOWHud.dismiss()
             WOWHud.showMsgNoNetWrok(message: errorMsg)
             DLog(errorMsg)
+
         }
     }
     //闭包变量的Seter方法

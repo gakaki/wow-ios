@@ -284,8 +284,8 @@ extension AppDelegate{
     
     func requestDeferreddeeplink() {
         WOWNetManager.sharedManager.requestWithTarget(.api_Deferreddeeplink, successClosure: { [weak self](result, code) in
-            if let strongSelf = self {
-                let json = JSON(result)
+            if self != nil {
+                _ = JSON(result)
 //                let orderCode = json["orderCode"].string
 //                let payAmount = json["payAmount"].double
 //                let paymentChannelName = json["paymentChannelName"].string
@@ -302,7 +302,7 @@ extension AppDelegate{
         
         if ((error == nil)) {
             DLog("finished init with params = \(params.description)");
-            let name  = params["name"]
+            _  = params["name"]
 //            goToLinuxCmd(cmdName); //调用应用自己的接口跳转到分享时页面
         } else {
             DLog("init error id: \(error.code) error.toString()");

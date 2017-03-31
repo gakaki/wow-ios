@@ -72,7 +72,7 @@ class WOWBindMobileFirstController: WOWBaseViewController {
         }
 
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_OriginalMobile(mobile: WOWUserManager.userMobile, captcha: codeTextField.text!), successClosure: {[weak self](result, code) in
-            if let strongSelf = self{
+            if self != nil{
                 VCRedirect.bingMobileSecond(entrance: .bindMobile)
             }
         }) {(errorMsg) in

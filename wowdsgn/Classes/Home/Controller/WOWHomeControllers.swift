@@ -252,7 +252,7 @@ class WOWHomeControllers: WOWBaseViewController {
 
             }
         }) {[weak self] (errorMsg) in
-            if let strongSelf = self {
+            if self != nil {
 //                strongSelf.configTabs()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
@@ -265,7 +265,7 @@ class WOWHomeControllers: WOWBaseViewController {
         
         WOWNetManager.sharedManager.requestWithTarget(.api_MessageCount, successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
-            if let strongSelf = self{
+            if self != nil{
                 let json = JSON(result)
                 let systemMsg = json["systemMessageUnReadCount"].int
                 let userMsg = json["userMessageUnReadCount"].int

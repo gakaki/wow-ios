@@ -11,17 +11,21 @@ import UIKit
 class WOWReleaseWorksController: WOWBaseViewController {
     var photo : UIImage!
 
+    @IBOutlet weak var imgHeightLayou: NSLayoutConstraint!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var textView: KMPlaceholderTextView!
     @IBOutlet weak var imgPhoto: UIImageView!
     var modelData : WOWWorksDetailsModel?
     var instagramCategoryId:Int?
+
     var imgSizeId : Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "发布"
         self.imgPhoto.image = photo
+        let height = self.imgPhoto.mj_w  * photo.size.height / photo.size.width
+        imgHeightLayou.constant = height
         textView.delegate = self
         self.view.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = true
@@ -58,7 +62,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
                 
             }
         }) {[weak self] (errorMsg) in
-            if let strongSelf = self{
+            if self != nil{
              
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
                 

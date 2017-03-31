@@ -86,7 +86,7 @@ class WOWMessageController: WOWBaseViewController {
         
         WOWNetManager.sharedManager.requestWithTarget(.api_MessageCount, successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
-            if let strongSelf = self{
+            if self != nil{
                 let json = JSON(result)
                 let systemMsg = json["systemMessageUnReadCount"].int
                 let userMsg = json["userMessageUnReadCount"].int

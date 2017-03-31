@@ -82,7 +82,12 @@ class WOWShareBackView:UIView{
     
     lazy var sharePhotoView:WOWSharePhotoView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWSharePhotoView.self), owner: self, options: nil)?.last as! WOWSharePhotoView
-       
+        let nowDate = NSDate()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        let dateString = formatter.string(from: nowDate as Date)
+
+        v.lbCurrentTime.text = dateString
         return v
     }()
 
@@ -138,7 +143,7 @@ class WOWShareBackView:UIView{
         }
         
         self.layoutIfNeeded()
-        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
+//        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
         
         sharePhotoView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
@@ -154,7 +159,7 @@ class WOWShareBackView:UIView{
         }
        
       
-        sharePhotoView.heightImgConstraint.constant = sharePhotoView.mj_w
+        sharePhotoView.heightImgConstraint.constant = WOWArrayAddStr.get_img_sizeNew(str: img, width: sharePhotoView.mj_w, defaule_size: .OneToOne)
         
           sharePhotoView.layoutIfNeeded()
          self.layoutIfNeeded()

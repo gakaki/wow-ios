@@ -191,7 +191,7 @@ extension WOWUserCenterController:VTMagicViewDelegate{
         print("viewDidAppear:", pageIndex);
         
         if let b = magicView.menuItem(at: pageIndex),
-            let vc  = magicView.viewController(atPage: pageIndex) {
+            let _  = magicView.viewController(atPage: pageIndex) {
             print("  button asc is ", b)
             
             switch pageIndex {

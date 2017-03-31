@@ -197,7 +197,7 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
 //                strongSelf.headImageUrl = (result as? String) ?? ""
                 
                 
-                print(result)
+                print(result ?? "")
             }
             
             

@@ -414,7 +414,7 @@ class WOWProductDetailController: WOWBaseViewController {
         
         if edgePan.state == UIGestureRecognizerState.began {
             self.percentDrivenTransition = UIPercentDrivenInteractiveTransition()
-            self.navigationController?.popViewController(animated: true)
+          _ =  self.navigationController?.popViewController(animated: true)
         } else if edgePan.state == UIGestureRecognizerState.changed {
             self.hiddenBottom(progress: progress)
             self.percentDrivenTransition?.update(progress)

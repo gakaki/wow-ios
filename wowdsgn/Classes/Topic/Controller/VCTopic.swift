@@ -101,6 +101,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                     }
                     
                 }){ (errorMsg) in
+
                     strongSelf.endRefresh()
                     WOWHud.showMsgNoNetWrok(message: errorMsg)
                 }
@@ -112,7 +113,6 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 strongSelf.endRefresh()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
-           
         }
         
         

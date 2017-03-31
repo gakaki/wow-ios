@@ -159,7 +159,7 @@ struct WOWArrayAddStr {
         var rate        = defaule_size.rawValue
         if array.count > 1 {
             let c = array[1].components(separatedBy: ".")
-            if c.count > 1 {
+            if c.count >= 1 {
                 let d = c[0].components(separatedBy: "x")
                 if d.count > 1 {
                     
@@ -169,6 +169,9 @@ struct WOWArrayAddStr {
                     
                 }
             }
+//            else if c.count == 1 {
+//                
+//            }
             
         }
         return round(CGFloat(rate) * width)

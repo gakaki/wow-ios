@@ -125,16 +125,16 @@ class WOWShareBackView:UIView{
             self.backClear.y = 0
         }) 
     }
-    
-    func showPhotoImg(img:String,des:String,nikeName:String) {
+//    img: self.modelData?.pic ?? "" ,des: self.modelData?.des ?? "", nikeName: self.modelData?.nickName ?? ""
+    func showPhotoImg(_ m: WOWWorksDetailsModel) {
         popWindow.addSubview(self)
         addSubview(backClear)
         backClear.addSubview(shareView)
         backClear.addSubview(sharePhotoView)
         
-        sharePhotoView.imgPhoto.set_webimage_url(img)
-        sharePhotoView.lbMyName.text = nikeName
-        sharePhotoView.lbDes.text = des 
+        sharePhotoView.imgPhoto.set_webimage_url(m.pic ?? "")
+        sharePhotoView.lbMyName.text = m.nickName ?? ""
+        sharePhotoView.lbDes.text = m.des ?? ""
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
@@ -143,7 +143,6 @@ class WOWShareBackView:UIView{
         }
         
         self.layoutIfNeeded()
-//        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
         
         sharePhotoView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
@@ -159,7 +158,8 @@ class WOWShareBackView:UIView{
         }
        
       
-        sharePhotoView.heightImgConstraint.constant = WOWArrayAddStr.get_img_sizeNew(str: img, width: sharePhotoView.mj_w, defaule_size: .OneToOne)
+        sharePhotoView.heightImgConstraint.constant = m.picHeight * sharePhotoView.mj_w / MGScreenWidth
+//            WOWArrayAddStr.get_img_sizeNew(str: m.pic ?? "", width: sharePhotoView.mj_w, defaule_size: .OneToOne)
         
           sharePhotoView.layoutIfNeeded()
          self.layoutIfNeeded()

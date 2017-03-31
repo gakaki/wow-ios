@@ -20,10 +20,15 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
     var collectCounts           :  Int?
     var nickName                :  String?
     var pic                     :  String?
+    
+    var picHeight               : CGFloat = MGScreenWidth
+    
     var totalCollectCounts      :  Int?
     var totalLikeCounts         :  Int?
     var like                    :  Bool?
     var collect                 :  Bool?
+    var measurement             :  Int?
+    
     required init?(map: Map) {
         
     }
@@ -44,6 +49,36 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
         totalLikeCounts                             <- map["totalLikeCounts"]
         like                                        <- map["like"]
         collect                                     <- map["collect"]
+        measurement                                 <- map["measurement"]
+        
+        if let pic = pic ,let measurement = measurement {
+            if pic.contains("_2dimension_") {
+                
+                picHeight =  WOWArrayAddStr.get_img_sizeNew(str: pic , width: MGScreenWidth, defaule_size: .OneToOne)
+                
+            }else{
+                
+                switch  measurement {
+                case 1:
+                    picHeight = MGScreenWidth * 1
+                    break
+                case 2:
+                    picHeight = MGScreenWidth * 0.67
+                    break
+                case 3:
+                    picHeight = MGScreenWidth * 0.75
+                    break
+                case 4:
+                    picHeight = MGScreenWidth * 0.56
+                    break
+                default:
+                    break
+                    
+                }
+
+            }
+        }
+        
     }
 
 }

@@ -100,7 +100,9 @@ class WOWUserCenterController: WOWBaseViewController {
     func refreshUserInfo(model: WOWStatisticsModel?) {
         if let model = model {
             self.title = model.nickName
-            userHeadImg.set_webimage_url(model.avatar)
+            
+            userHeadImg.set_webUserPhotoimage_url(model.avatar ?? "")
+
             workNum.text = String(format: "%i", model.instagramCounts ?? 0)
             praiseNum.text = String(format: "%i", model.likeCounts ?? 0)
             favoriteNum.text = String(format: "%i", model.collectCounts ?? 0)

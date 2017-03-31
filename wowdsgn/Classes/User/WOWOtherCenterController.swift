@@ -27,11 +27,6 @@ class WOWOtherCenterController: WOWBaseViewController {
         self.navigationShadowImageView?.isHidden = true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationShadowImageView?.isHidden = false
-    }
-    
     lazy var layout:CollectionViewWaterfallLayout = {
         let l = CollectionViewWaterfallLayout()
         l.columnCount = 3
@@ -41,10 +36,14 @@ class WOWOtherCenterController: WOWBaseViewController {
         l.headerHeight = 233
         return l
     }()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationShadowImageView?.isHidden = false
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-          }
+    }
     
     override func setUI() {
         super.setUI()

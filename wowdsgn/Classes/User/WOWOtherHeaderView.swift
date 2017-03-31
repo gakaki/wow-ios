@@ -24,7 +24,7 @@ class WOWOtherHeaderView: UICollectionReusableView {
     func configUserInfo(model: WOWStatisticsModel?) {
         if let model = model {
             
-            userHeadImg.set_webimage_url(model.avatar)
+            userHeadImg.set_webUserPhotoimage_url(model.avatar ?? "")
             userName.text = model.nickName
             workNum.text = String(format: "%i", model.instagramCounts ?? 0)
             praiseNum.text = String(format: "%i", model.likeCounts ?? 0)

@@ -491,12 +491,13 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     [_bottomView addSubview:_bottomBtnsView];
     float btnBottom = 40;
     
-    
+    float centerPX = CX_W / 5 ;
     for (int i = 0; i < btnTitleArray.count; i++) {
+        
         UIButton *sizeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         //        sizeBtn.backgroundColor = [UIColor redColor];
         sizeBtn.frame = CGRectMake(0, 0, 50, 50);
-        sizeBtn.center = CGPointMake(50 + (i * 90) , _bottomBtnsView.mj_h/2 - btnBottom);
+        sizeBtn.center = CGPointMake(centerPX + (i * centerPX) , _bottomBtnsView.mj_h/2 - btnBottom);
         
         
         [sizeBtn setTitle:btnTitleArray[i] forState:UIControlStateNormal];
@@ -761,11 +762,11 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 
 - (void)angelValueChanged:(float)sender
 {
-    if (sender < 0.04 && sender > -0.04) {
-        NSLog(@"%f 改变较小",sender);
-        [self clearScrollViewChanged];
-        return;
-    }
+//    if (sender < 0.04 && sender > -0.04) {
+//        NSLog(@"%f 改变较小",sender);
+//        [self clearScrollViewChanged];
+//        return;
+//    }
     _isRoat = NO; // 旋转
     // update masks
     [self updateMasks:NO];

@@ -18,6 +18,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
     
     @IBOutlet var bottomView: UIView!
     
+    var isBoolFormReleaseVC : Bool = false // 是否从发布页进来 默认为false
     
     var worksId : Int?
     var modelData : WOWWorksDetailsModel?
@@ -28,20 +29,44 @@ class WOWWorksDetailsController: WOWBaseViewController {
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionIndexColor = GrayColorlevel1
+        tableView.mj_header = mj_header
         tableView.clearRestCell()
         
         navigationItem.title = "作品详情"
         //        configureSearchController()
         tableView.register(UINib.nibName("WorksDetailCell"), forCellReuseIdentifier:"WorksDetailCell")
+      
         request()
       
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+          setLeftBack()
+    }
+    func setLeftBack() {
+//        if navigationController?.viewControllers.count > 1 {
+            let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(backAction))
+            navigationItem.leftBarButtonItem = item
+//        }
+    }
+    
+    func backAction() {
+        if self.isBoolFormReleaseVC {
+//         _ = navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }else {
+         _ = navigationController?.popViewController(animated: true)
+        }
+       
+    }
+
     override func request() {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_GetWorksDetails(worksId: worksId ?? 0), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let strongSelf = self{
                 
+                strongSelf.endRefresh()
                 strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
                 strongSelf.btnPraiseCount.setTitle(strongSelf.modelData?.likeCounts?.toString, for: .normal)
                 strongSelf.btnCollection.setTitle(strongSelf.modelData?.collectCounts?.toString, for: .normal)
@@ -52,8 +77,8 @@ class WOWWorksDetailsController: WOWBaseViewController {
                 
             }
             }, failClosure: {[weak self] (errorMsg) in
-            if self != nil{
-              
+            if let strongSelf = self{
+                strongSelf.endRefresh()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         })
@@ -124,7 +149,9 @@ class WOWWorksDetailsController: WOWBaseViewController {
     }
     @IBAction func clickShare(_ sender: Any) {
         
-        WOWShareManager.sharePhoto(self.modelData?.nickName ?? "", shareText: self.modelData?.des ?? "", url: "", shareImage: self.modelData?.pic ?? "")
+        if let modelData = self.modelData {
+            WOWShareManager.sharePhoto(modelData)
+        }
 
     }
 

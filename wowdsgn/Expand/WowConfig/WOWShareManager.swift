@@ -66,8 +66,10 @@ struct WOWShareManager {
     }
  
     
-    public static func sharePhoto(_ title:String,shareText:String,url:String?,shareImage:Any!){
-        shareBackView.showPhotoImg(img: shareImage as! String ,des: shareText, nikeName: title)
+    public static func sharePhoto(_ m: WOWWorksDetailsModel){
+//        WOWShareManager.sharePhoto(self.modelData?.nickName ?? "", shareText: self.modelData?.des ?? "", url: "", shareImage: self.modelData?.pic ?? "")
+
+        shareBackView.showPhotoImg(m)
         
         let pushlishImg = shareBackView.sharePhotoView.createViewImage()
         var  pushLishUrl = ""

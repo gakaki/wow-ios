@@ -24,13 +24,18 @@ class WorksDetailCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        imgMyPhoto.borderRadius(28)
         
     }
+
     func showData(_ m : WOWWorksDetailsModel)  {
-//        itemHeight =
-        imgMyPhoto.set_webimage_url_user( m.avatar ?? "" )
-        heightConstraint.constant = WOWArrayAddStr.get_img_sizeNew(str: m.pic ?? "", width: MGScreenWidth, defaule_size: .OneToOne)
+
+        imgMyPhoto.set_webUserPhotoimage_url(m.avatar ?? "")
+        imgMyPhoto.addTapGesture { (sender) in
+            VCRedirect.goOtherCenter(endUserId: m.endUserId ?? 0)
+        }
+        heightConstraint.constant = m.picHeight
+
         lbDes.text = m.des ?? ""
         lbMyName.text = m.nickName ?? ""
         imgPhoto.set_webimage_url(m.pic ?? "")

@@ -72,7 +72,15 @@ extension UIImageView {
         
         }
     }
-    
+    //带缓存的展位图为 uesrHead 的方法
+    func set_webUserPhotoimage_url( _ url:String? ) -> Void {
+        if url != nil {
+            let url         = self.webp_url(url)
+            let pic_name    = "placeholder_userhead"
+            self.set_webimage_url_base(url,place_holder_name: pic_name)
+            
+        }
+    }
     func webp_url(_ url:String?) -> String {
         var res = url ?? ""
         if ( res.length <= 0 ){

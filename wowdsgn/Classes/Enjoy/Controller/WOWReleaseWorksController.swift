@@ -24,8 +24,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
         super.viewDidLoad()
         self.title = "发布"
         self.imgPhoto.image = photo
-        let height = self.imgPhoto.mj_w  * photo.size.height / photo.size.width
-        imgHeightLayou.constant = height
+
         textView.delegate = self
         self.view.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = true
@@ -33,6 +32,12 @@ class WOWReleaseWorksController: WOWBaseViewController {
         navigationItem.rightBarButtonItem = itemReghit
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let height = self.imgPhoto.mj_w  * photo.size.height / photo.size.width
+        imgHeightLayou.constant = height
     }
     func cancelAction()  {
         self.dismiss(animated: true, completion: nil)
@@ -93,7 +98,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
     // MARK: - 跳转到作品详情
     func toWorksDetails(worksId:Int) {
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWWorksDetailsController.self)) as! WOWWorksDetailsController
-        
+        vc.isBoolFormReleaseVC = true
         vc.photo = photo
         vc.worksId = worksId
         self.navigationController?.pushViewController(vc, animated: true)

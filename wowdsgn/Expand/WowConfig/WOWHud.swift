@@ -53,7 +53,7 @@ struct WOWHud {
         DispatchQueue.main.async {
             WOWHud.dismiss()
         }
-        configSVHud()
+        configErrorSVHud()
         let msg = message ?? "网络错误"
         SVProgressHUD.showInfo(withStatus: msg)
         
@@ -78,11 +78,7 @@ struct WOWHud {
     
     // 接口请求成功
     static func showWarnMsg(_ message:String?){
-        //        DispatchQueue.main.async {
-        //
-        ////            WOWHud.dismiss()
-        //
-        //        }
+    
         configErrorSVHud()
         let msg = message ?? ""
         SVProgressHUD.showInfo(withStatus: msg)

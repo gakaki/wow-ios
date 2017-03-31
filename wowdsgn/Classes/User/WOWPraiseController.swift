@@ -107,6 +107,9 @@ class WOWPraiseController: WOWBaseViewController {
             if let strongSelf = self {
                 strongSelf.endRefresh()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
+                if strongSelf.pageIndex > 1 {
+                    strongSelf.pageIndex -= 1
+                }
             }
             
         }

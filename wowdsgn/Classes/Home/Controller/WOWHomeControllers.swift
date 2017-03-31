@@ -51,20 +51,14 @@ class WOWHomeControllers: WOWBaseViewController {
                 HomeTabVC.delegate = self
                 controllerArray.append(HomeTabVC)
             }
-//            self.configTabs()
             if tabs.count > 0 {
                 let count = CGFloat(titleArray.count)
                 if count > 5 {
                     v.magicView.layoutStyle         = .default
-
-//                    v.magicView.itemWidth           = 80
                     v.magicView.itemSpacing         = 40
 
                 }else {
                     v.magicView.layoutStyle         = .divide
-
-//                    v.magicView.itemWidth           = MGScreenWidth / count
-
                 }
 
 
@@ -80,65 +74,11 @@ class WOWHomeControllers: WOWBaseViewController {
         super.viewDidLoad()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
         self.view.backgroundColor = UIColor(hexString: "efeff4")
-        
-        
-//        let width =  MGScreenWidth - CGFloat(53 * controllerArray.count)
-//        let menuMargin = width/CGFloat(controllerArray.count + 1)
-//    
-//        let tabsWidth:CGFloat = 0.0
-        
-//        parameters = [
-//            .scrollMenuBackgroundColor(UIColor.white),
-//            .menuHeight(40),
-//            .menuMargin(menuMargin),
-//            .menuItemFont(UIFont.systemFont(ofSize: 14)),
-//            .unselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
-//            .menuItemWidth(53),
-//            .selectionIndicatorColor(UIColor.black),
-//            .selectedMenuItemLabelColor(UIColor.black),
-//            .menuItemSeparatorPercentageHeight(0.1),
-//            .bottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
-//        ]
-//           pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
-//        
-//        self.view.addSubview(pageMenu!.view)
 
         addObserver()
         // Do any additional setup after loading the view.
     }
-    // 配置顶部tab信息
-//    func configTabs(){
-//        
-//        pageMenu?.view.removeFromSuperview()
-//        pageMenu = nil
-//        let width =  MGScreenWidth - CGFloat(53 * controllerArray.count)
-//        var menuMargin = width/CGFloat(controllerArray.count + 1)
-//        if controllerArray.count > 5 {
-//            menuMargin = 15
-//        }
-//        parameters = [
-//            .scrollMenuBackgroundColor(UIColor.white),
-//            .menuHeight(40),
-//            .menuMargin(menuMargin),
-//            .menuItemFont(UIFont.systemFont(ofSize: 14)),
-//            .unselectedMenuItemLabelColor(MGRgb(128, g: 128, b: 128)),
-//            .menuItemWidth(53),
-//            .selectionIndicatorColor(UIColor.black),
-//            .selectedMenuItemLabelColor(UIColor.black),
-//            .menuItemSeparatorPercentageHeight(0.1),
-//            .bottomMenuHairlineColor(MGRgb(234, g: 234, b: 234))
-//        ]
-//
-//        
-//        
-//        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
-//        
-//        
-//        pageMenu?.delegate = self
-//       
-//        self.view.addSubview(pageMenu!.view)
-//        
-//
+
 //    }
     
     fileprivate func addObserver(){
@@ -165,7 +105,6 @@ class WOWHomeControllers: WOWBaseViewController {
             controllerArray.append(HomeTabVC)
             
         }
-//        let count = CGFloat(titleArray.count)
         
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
@@ -175,11 +114,8 @@ class WOWHomeControllers: WOWBaseViewController {
         v.magicView.switchStyle         = .default
         v.magicView.needPreloading      = false
         v.magicView.sliderWidth         = 50.w
-//        v.magicView.sliderExtension     = 10
-//        v.magicView.itemWidth           = MGScreenWidth / count
         v.magicView.sliderColor         = WowColor.black
         v.magicView.sliderHeight        = 3.w
-//        v.magicView.isSwitchAnimated        = true
         v.magicView.isScrollEnabled         = true
         v.magicView.isMenuScrollEnabled     = true
         self.addChildViewController(v)
@@ -191,15 +127,7 @@ class WOWHomeControllers: WOWBaseViewController {
                 
             }
         }
-        
-        
-//        vc_product    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavProduct.self)) as? WOWFavProduct
-//        vc_brand    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as? WOWFavBrand
-//        vc_designer = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavDesigner.self)) as? WOWFavDesigner
-//        
-//        addChildViewController(vc_product!)
-//        addChildViewController(vc_brand!)
-//        addChildViewController(vc_designer!)
+
         
         v.magicView.reloadData()
 
@@ -214,13 +142,9 @@ class WOWHomeControllers: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_Home_Tabs, successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let strongSelf = self{
-//                let json = JSON(result)
 
                 if let array = Mapper<WOWHomeTabs>().mapArray(JSONObject:JSON(result)["tabs"].arrayObject){
-//                    if strongSelf.tabs.elementsEqual(array)  {
-//                      
-//                         print("equal two")
-//                    }else {
+
                         var isEqual = true
                         if strongSelf.tabs.count != array.count {
                             isEqual = false
@@ -234,10 +158,7 @@ class WOWHomeControllers: WOWBaseViewController {
                                         isEqual = false
                                         print("new")
                                     }
-//                                }else {
-//                                    isEqual = false
-//                                    print("new")
-//                                }
+
                             }
                         }
                     
@@ -304,11 +225,7 @@ class WOWHomeControllers: WOWBaseViewController {
         super.viewDidLayoutSubviews()
 //        hidingNavBarManager?.viewDidLayoutSubviews()
     }
-//    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
-//                //              hidingNavBarManager?.shouldScrollToTop()
-//                hidingNavBarManager?.shouldScrollToTop()
-//            return true
-//    }
+
 
 
     fileprivate func configBarItem(){
@@ -322,19 +239,7 @@ class WOWHomeControllers: WOWBaseViewController {
 }
 
 extension WOWHomeControllers:WOWChideControllerDelegate{
-    
 
-//    // 滑动结束 再请求网络
-//    func didMoveToPage(_ controller: UIViewController, index: Int){
-//        
-//        
-//        let currentVC = controller as! WOWController
-//        if currentVC.isRequest == false { // 如果未请求，才去请求网络。
-//            currentVC.request()
-//        }
-//        
-//        
-//    }
     func updateTabsRequsetData(){
         print("request ...")
          requestTabs()
@@ -382,22 +287,9 @@ extension WOWHomeControllers:VTMagicViewDataSource{
     }
     
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
-        
-//        let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
-//        
-//        if (vc == nil) {
-            print(Int(pageIndex))
-            return controllerArray[Int(pageIndex)]
-//            if (pageIndex == 0){
-//                return vc_product!
-//            }else if (pageIndex == 1){
-//                return vc_brand!
-//            }else{
-//                return vc_designer!
-//            }
-//        }
-        
-//        return vc!
+
+        return controllerArray[Int(pageIndex)]
+
     }
 }
 

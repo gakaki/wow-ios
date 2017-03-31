@@ -21,7 +21,7 @@ class WOWEnjoyController: WOWBaseViewController {
     var currentCategoryId = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestCategory()
+        request()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -80,21 +80,17 @@ class WOWEnjoyController: WOWBaseViewController {
         
         
         vc_newEnjoy    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWNewEnjoyController.self)) as? WOWNewEnjoyController
+        vc_newEnjoy?.delegate = self
         vc_newEnjoy?.categoryId = self.currentCategoryId
         vc_masterpiece    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWMasterpieceController.self)) as? WOWMasterpieceController
         vc_masterpiece?.categoryId = self.currentCategoryId
-        
+        vc_masterpiece?.delegate = self
         v.magicView.reloadData()
     }
     
     //MARK: -- NetWork
     override func request() {
         super.request()
-        
-
-    }
-
-    func requestCategory() {
         WOWNetManager.sharedManager.requestWithTarget(.api_getCategory, successClosure: {[weak self](result, code) in
             WOWHud.dismiss()
             
@@ -102,8 +98,14 @@ class WOWEnjoyController: WOWBaseViewController {
                 let r                             =  JSON(result)
                 strongSelf.categoryArr          =  Mapper<WOWEnjoyCategoryModel>().mapArray(JSONObject: r.arrayObject ) ?? [WOWEnjoyCategoryModel]()
                 let category = WOWEnjoyCategoryModel(id: 0, categoryName: "全部")
-                category.isSelect = true
                 strongSelf.categoryArr.insertAsFirst(category)
+                for cate in strongSelf.categoryArr {
+                    if cate.id == strongSelf.currentCategoryId {
+                        cate.isSelect = true
+                        strongSelf.navView.categoryBtn.setTitle(cate.categoryName ?? "全部", for: .normal)
+                        break
+                    }
+                }
                 strongSelf.backView.selectView.categoryArr = strongSelf.categoryArr
             }
         }) {[weak self] (errorMsg) in
@@ -112,7 +114,11 @@ class WOWEnjoyController: WOWBaseViewController {
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
+
+
     }
+
+  
     
     //MARK: --privite 
     func categoryClick()  {
@@ -196,19 +202,13 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
     }
     
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
-        
-        let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
-        
-        if (vc == nil) {
-            
-            if (pageIndex == 0){
-                return vc_masterpiece!
-            }else if (pageIndex == 1){
-                return vc_newEnjoy!
-            }
+
+        if (pageIndex == 0){
+            return vc_masterpiece!
+        }else{
+            return vc_newEnjoy!
         }
-        
-        return vc!
+      
     }
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
         print("viewDidAppear:", pageIndex);
@@ -234,11 +234,11 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
     }
 }
 
-extension WOWEnjoyController:WOWSelectCategoryDelegate{
+extension WOWEnjoyController:WOWSelectCategoryDelegate, WOWChideControllerDelegate{
     
     func selectCategory(model:WOWEnjoyCategoryModel) {
         
-//        currentCategoryId = model.id
+        currentCategoryId = model.id ?? 0
         
         vc_masterpiece?.categoryId = model.id ?? 0
         vc_newEnjoy?.categoryId = model.id ?? 0
@@ -247,5 +247,9 @@ extension WOWEnjoyController:WOWSelectCategoryDelegate{
         vc_newEnjoy?.request()
         navView.categoryBtn.setTitle(model.categoryName ?? "全部", for: .normal)
        changeButtonState()
+    }
+    
+    func updateTabsRequsetData(){
+        request()
     }
 }

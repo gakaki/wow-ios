@@ -13,7 +13,10 @@ class WOWMasterpieceController: WOWBaseViewController {
     let cellID = String(describing: WOWMasterpieceCell.self)
     var categoryId = 0
     var fineWroksArr = [WOWFineWroksModel]()
-    var lastContentOffset :CGFloat = 0.0 
+    var lastContentOffset :CGFloat = 0.0
+    let pageSize   = 10
+    weak var delegate:WOWChideControllerDelegate?
+
     @IBOutlet weak var publishBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,39 +41,56 @@ class WOWMasterpieceController: WOWBaseViewController {
         configTable()
         request()
     }
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        if let del = delegate {
+            
+            del.updateTabsRequsetData()
+            
+        }
+    }
     override func request() {
         super.request()
         
         var params = [String: Any]()
-        params = ["categoryId": categoryId   ,"type": 0 ,"startRows":(pageIndex-1) * 10,"pageSize":10]
+        params = ["categoryId": categoryId   ,"type": 0 ,"startRows":(pageIndex-1) * 10,"pageSize":pageSize]
 
         WOWNetManager.sharedManager.requestWithTarget(.api_getInstagramList(params: params), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                let r = JSON(result)
-
-                strongSelf.fineWroksArr          =  Mapper<WOWFineWroksModel>().mapArray(JSONObject: r["list"].arrayObject ) ?? [WOWFineWroksModel]()
                 
-                
-                //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
-                if strongSelf.fineWroksArr.count < 10 {
-                    strongSelf.tableView.mj_footer = nil
+                let arr = Mapper<WOWFineWroksModel>().mapArray(JSONObject:JSON(result)["list"].arrayObject)
+                if let array = arr{
+                    
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.fineWroksArr = []
+                    }
+                    strongSelf.fineWroksArr.append(contentsOf: array)
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < strongSelf.pageSize {
+                        strongSelf.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        
+                    }else {
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    }
                     
                 }else {
-                    strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    if strongSelf.pageIndex == 1{
+                        strongSelf.fineWroksArr = []
+                    }
+                    strongSelf.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
-                
                 strongSelf.tableView.reloadData()
-
-                print(r)
-                
                 
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
+                WOWHud.showWarnMsg(errorMsg)
+                if strongSelf.pageIndex > 1 {
+                    strongSelf.pageIndex -= 1
+                }
             }
         }
         

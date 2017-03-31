@@ -16,6 +16,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
     @IBOutlet weak var rightSpace: NSLayoutConstraint!
     @IBOutlet weak var leftSpace: NSLayoutConstraint!
     
+    weak var delegate:WOWChideControllerDelegate?
     var fineWroksArr = [WOWFineWroksModel]()
     var categoryId = 0
     var indexRows = 0
@@ -113,6 +114,11 @@ class WOWNewEnjoyController: WOWBaseViewController {
     }
     
     @IBAction func refreshButton() {
+        if let del = delegate {
+            
+            del.updateTabsRequsetData()
+            
+        }
         indexRows = 0
         fineWroksArr = [WOWFineWroksModel]()
         kolodaView.resetCurrentCardIndex()

@@ -21,12 +21,12 @@
                         <constraint firstAttribute="height" constant="34" id="oTd-sd-ql6"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                    <state key="normal" title="生活创意">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="jq7-JV-qCg">
-                    <rect key="frame" x="200" y="19.5" width="10" height="6"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enjoy_back" translatesAutoresizingMaskIntoConstraints="NO" id="jq7-JV-qCg">
+                    <rect key="frame" x="198" y="18.5" width="14" height="8"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -45,6 +45,6 @@
         </view>
     </objects>
     <resources>
-        <image name="down_arrow" width="10" height="6"/>
+        <image name="enjoy_back" width="14" height="8"/>
     </resources>
 </document>

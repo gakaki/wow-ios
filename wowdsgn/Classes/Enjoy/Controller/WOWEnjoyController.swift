@@ -41,6 +41,7 @@ class WOWEnjoyController: WOWBaseViewController {
     lazy var navView:WOWEnjoyNavView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWEnjoyNavView.self), owner: self, options: nil)?.last as! WOWEnjoyNavView
         v.categoryBtn.addTarget(self, action: #selector(categoryClick), for: .touchUpInside)
+        v.categoryBtn.setTitle("全部", for: .normal)
         return v
     }()
     lazy var backView:WOWCategoryBackView = {
@@ -79,7 +80,7 @@ class WOWEnjoyController: WOWBaseViewController {
         
         
         vc_newEnjoy    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWNewEnjoyController.self)) as? WOWNewEnjoyController
-//        vc_newEnjoy.
+        vc_newEnjoy?.categoryId = self.currentCategoryId
         vc_masterpiece    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWMasterpieceController.self)) as? WOWMasterpieceController
         vc_masterpiece?.categoryId = self.currentCategoryId
         
@@ -101,6 +102,7 @@ class WOWEnjoyController: WOWBaseViewController {
                 let r                             =  JSON(result)
                 strongSelf.categoryArr          =  Mapper<WOWEnjoyCategoryModel>().mapArray(JSONObject: r.arrayObject ) ?? [WOWEnjoyCategoryModel]()
                 let category = WOWEnjoyCategoryModel(id: 0, categoryName: "全部")
+                category.isSelect = true
                 strongSelf.categoryArr.insertAsFirst(category)
                 strongSelf.backView.selectView.categoryArr = strongSelf.categoryArr
             }
@@ -114,7 +116,6 @@ class WOWEnjoyController: WOWBaseViewController {
     
     //MARK: --privite 
     func categoryClick()  {
-        print("全部分类")
       
         changeButtonState()
     }
@@ -235,17 +236,16 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
 
 extension WOWEnjoyController:WOWSelectCategoryDelegate{
     
-    func selectCategory(categoryId:Int) {
+    func selectCategory(model:WOWEnjoyCategoryModel) {
         
-        currentCategoryId = categoryId
+//        currentCategoryId = model.id
         
-        vc_masterpiece?.categoryId = categoryId
-        vc_newEnjoy?.categoryId = categoryId
+        vc_masterpiece?.categoryId = model.id ?? 0
+        vc_newEnjoy?.categoryId = model.id ?? 0
         
         vc_masterpiece?.request()
         vc_newEnjoy?.request()
-//        v.magicView.reloadData()
-        
+        navView.categoryBtn.setTitle(model.categoryName ?? "全部", for: .normal)
        changeButtonState()
     }
 }

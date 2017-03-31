@@ -241,10 +241,9 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             }
             
         }){ (errorMsg) in
-            print(errorMsg ?? "")
             
             WOWHud.dismiss()
-
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     
@@ -274,9 +273,9 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
             }
             
         }){ (errorMsg) in
-            print(errorMsg ?? "")
-            WOWHud.dismiss()
 
+            WOWHud.dismiss()
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
 

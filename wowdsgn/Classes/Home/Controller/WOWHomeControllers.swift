@@ -254,6 +254,7 @@ class WOWHomeControllers: WOWBaseViewController {
         }) {[weak self] (errorMsg) in
             if self != nil {
 //                strongSelf.configTabs()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 
@@ -275,7 +276,7 @@ class WOWHomeControllers: WOWBaseViewController {
                 
             }
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }

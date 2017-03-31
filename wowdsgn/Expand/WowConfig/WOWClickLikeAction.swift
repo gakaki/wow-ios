@@ -238,7 +238,7 @@ class WOWClickLikeAction {
                 isFavorite(true)
             
         }) { (errorMsg) in
-        
+                
                 
                 WOWHud.dismiss()
             

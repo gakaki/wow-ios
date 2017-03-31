@@ -90,6 +90,7 @@ class WOWAddressController: WOWBaseViewController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }
@@ -113,7 +114,7 @@ class WOWAddressController: WOWBaseViewController {
                     }
                 }
             }) { (errorMsg) in
-                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
             
             return
@@ -133,7 +134,7 @@ class WOWAddressController: WOWBaseViewController {
                 }
             }
         }) {(errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     //编辑收货地址

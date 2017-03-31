@@ -112,6 +112,7 @@ class WOWOtherCenterController: WOWBaseViewController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
                 //网络不好，或者请求失败的时候不要+1
                 if strongSelf.pageIndex > 1 {
                     strongSelf.pageIndex -= 1
@@ -132,7 +133,7 @@ class WOWOtherCenterController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }

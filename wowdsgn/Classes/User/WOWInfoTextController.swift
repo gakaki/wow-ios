@@ -114,7 +114,9 @@ class WOWInfoTextController: WOWBaseTableViewController {
             }
         }) { (errorMsg) in
             WOWHud.dismiss()
-            DLog(errorMsg ?? "")
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            DLog(errorMsg)
+
         }
     }
     //闭包变量的Seter方法

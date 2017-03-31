@@ -289,7 +289,7 @@
                                 <rect key="frame" x="0.0" y="380" width="375" height="287"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypr-68-nGG">
-                                        <rect key="frame" x="252" y="108" width="70" height="70"/>
+                                        <rect key="frame" x="252" y="107.5" width="70" height="70"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" image="btn_like_normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -301,14 +301,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWd-bx-Bmc">
-                                        <rect key="frame" x="162" y="118" width="50" height="50"/>
+                                        <rect key="frame" x="162" y="117.5" width="50" height="50"/>
                                         <state key="normal" image="refresh"/>
                                         <connections>
                                             <action selector="refreshButton" destination="c60-NF-leJ" eventType="touchUpInside" id="wGd-Oi-zkD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfQ-p2-Oi1">
-                                        <rect key="frame" x="50" y="108" width="70" height="70"/>
+                                        <rect key="frame" x="50" y="107.5" width="70" height="70"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" image="btn_skip_normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -330,6 +330,28 @@
                                     <constraint firstAttribute="trailing" secondItem="Ypr-68-nGG" secondAttribute="trailing" constant="53" id="syW-GN-ZIL"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxD-kB-NvO">
+                                <rect key="frame" x="18" y="45" width="339" height="355"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_empty" translatesAutoresizingMaskIntoConstraints="NO" id="iMK-Lf-Ijx">
+                                        <rect key="frame" x="52" y="15" width="234" height="232"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前没有新的作品，先去看看佳作吧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wF0-0b-k0R">
+                                        <rect key="frame" x="47" y="267" width="245" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="wF0-0b-k0R" firstAttribute="centerX" secondItem="oxD-kB-NvO" secondAttribute="centerX" id="F3h-Qd-0ee"/>
+                                    <constraint firstItem="iMK-Lf-Ijx" firstAttribute="top" secondItem="oxD-kB-NvO" secondAttribute="top" constant="15" id="LHc-Fe-pqE"/>
+                                    <constraint firstAttribute="width" secondItem="oxD-kB-NvO" secondAttribute="height" multiplier="339:355" id="Pqi-iH-ynf"/>
+                                    <constraint firstItem="iMK-Lf-Ijx" firstAttribute="centerX" secondItem="oxD-kB-NvO" secondAttribute="centerX" id="mKH-MZ-OcP"/>
+                                    <constraint firstItem="wF0-0b-k0R" firstAttribute="top" secondItem="iMK-Lf-Ijx" secondAttribute="bottom" constant="20" id="tQD-uQ-Le0"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5O-Ag-IQN" customClass="CustomKolodaView" customModule="wowdsgn" customModuleProvider="target">
                                 <rect key="frame" x="18" y="25" width="339" height="355"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -341,10 +363,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="P5O-Ag-IQN" firstAttribute="top" secondItem="Na9-C0-YYc" secondAttribute="top" constant="25" id="0Jx-bk-YrO"/>
+                            <constraint firstAttribute="trailing" secondItem="oxD-kB-NvO" secondAttribute="trailing" constant="18" id="29U-sF-oJm"/>
                             <constraint firstItem="l6T-NV-pCG" firstAttribute="top" secondItem="EOH-wg-bGH" secondAttribute="bottom" id="6qH-Ph-Ics"/>
                             <constraint firstItem="EOH-wg-bGH" firstAttribute="leading" secondItem="Na9-C0-YYc" secondAttribute="leading" id="93z-K6-wBV"/>
                             <constraint firstItem="P5O-Ag-IQN" firstAttribute="leading" secondItem="Na9-C0-YYc" secondAttribute="leading" constant="18" id="ATZ-vl-zSa"/>
+                            <constraint firstItem="oxD-kB-NvO" firstAttribute="leading" secondItem="Na9-C0-YYc" secondAttribute="leading" constant="18" id="Krg-fw-z5z"/>
                             <constraint firstAttribute="trailing" secondItem="EOH-wg-bGH" secondAttribute="trailing" id="dcp-8F-lu3"/>
+                            <constraint firstItem="oxD-kB-NvO" firstAttribute="top" secondItem="pLt-cs-qjt" secondAttribute="bottom" constant="25" id="hQp-tT-gQk"/>
                             <constraint firstItem="EOH-wg-bGH" firstAttribute="top" secondItem="P5O-Ag-IQN" secondAttribute="bottom" id="m1X-bO-qd7"/>
                             <constraint firstAttribute="trailing" secondItem="P5O-Ag-IQN" secondAttribute="trailing" constant="18" id="y3B-MJ-F7a"/>
                         </constraints>
@@ -419,6 +444,7 @@
         <image name="btn_like_pressed" width="70" height="70"/>
         <image name="btn_skip_normal" width="70" height="70"/>
         <image name="btn_skip_pressed" width="70" height="70"/>
+        <image name="new_empty" width="234" height="232"/>
         <image name="photoDetail-no" width="30" height="30"/>
         <image name="photoDetail-yes" width="30" height="30"/>
         <image name="praise-black" width="30" height="30"/>

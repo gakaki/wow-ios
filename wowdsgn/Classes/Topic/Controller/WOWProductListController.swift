@@ -82,6 +82,7 @@ class WOWProductListController: VCBaseNavCart {
         }){[unowned self] (errorMsg) in
             self.layout.headerHeight = 0
             self.endRefresh()
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
     func requestList(){
@@ -135,6 +136,7 @@ class WOWProductListController: VCBaseNavCart {
             
         }){[unowned self] (errorMsg) in
             self.endRefresh()
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }

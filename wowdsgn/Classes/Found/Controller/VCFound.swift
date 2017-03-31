@@ -85,6 +85,7 @@ class VCFound: WOWBaseModuleVC {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 
@@ -144,6 +145,7 @@ class VCFound: WOWBaseModuleVC {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }

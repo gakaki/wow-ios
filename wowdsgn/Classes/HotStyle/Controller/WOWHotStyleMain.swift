@@ -76,6 +76,7 @@ class WOWHotStyleMain: WOWBaseModuleVC {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 
@@ -134,6 +135,7 @@ class WOWHotStyleMain: WOWBaseModuleVC {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }

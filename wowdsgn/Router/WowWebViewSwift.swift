@@ -242,6 +242,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
             }
             
         }) { (errorMsg) in
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }

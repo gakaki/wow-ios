@@ -93,7 +93,7 @@ class WOWUserCenterController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }

@@ -50,7 +50,7 @@ class WOWUserController: WOWBaseTableViewController {
     lazy var headerView:WOWUserHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWUserHeaderView.self), owner: self, options: nil)?.last as! WOWUserHeaderView
         v.userBack.addAction({
-            VCRedirect.goOtherCenter(endUserId: 10)
+            VCRedirect.goUserCenter()
         })
         v.editBtn.addTarget(self, action: #selector(goUserInfo), for:.touchUpInside)
         return v
@@ -172,7 +172,7 @@ class WOWUserController: WOWBaseTableViewController {
             }
             
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }

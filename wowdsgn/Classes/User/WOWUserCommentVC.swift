@@ -93,7 +93,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 
@@ -227,7 +227,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 

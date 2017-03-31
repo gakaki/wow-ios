@@ -75,6 +75,7 @@ class WOWAllClassViewController: UITableViewController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                   strongSelf.mjBanner_header.endRefreshing()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 

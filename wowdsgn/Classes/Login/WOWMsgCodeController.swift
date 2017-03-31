@@ -74,6 +74,7 @@ class WOWMsgCodeController: WOWBaseViewController {
             }
         }) { (errorMsg) in
                sender.isUserInteractionEnabled = true
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     
@@ -132,6 +133,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         }) {[weak self](errorMsg) in
             if self != nil{
 //                strongSelf.tipsLabel.text = errorMsg
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }

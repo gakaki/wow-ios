@@ -363,7 +363,7 @@ public class VCRedirect {
             WOWHud.showMsg("恭喜您获得一张优惠券")
             
         }) { (errorMsg) in
-            
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
     }
@@ -578,7 +578,7 @@ extension  UIViewController {
             }
         }) {[weak self] (errorMsg) in
             if let _ = self{
-                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
     }

@@ -114,6 +114,7 @@ class WOWCouponController: WOWBaseViewController {
                 strongSelf.tableView.mj_footer = nil
 
                 strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
 
@@ -127,7 +128,7 @@ class WOWCouponController: WOWBaseViewController {
                 strongSelf.request()
             }
         }) { (errorMsg) in
-            WOWHud.showMsg(errorMsg)
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 
     }

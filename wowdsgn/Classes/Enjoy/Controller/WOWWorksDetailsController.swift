@@ -54,7 +54,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
             }, failClosure: {[weak self] (errorMsg) in
             if self != nil{
               
-                WOWHud.dismiss()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         })
         

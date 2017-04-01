@@ -157,13 +157,10 @@ class WOWShareBackView:UIView{
             }
         }
        
-      
-        sharePhotoView.heightImgConstraint.constant = m.picHeight * sharePhotoView.mj_w / MGScreenWidth
-//            WOWArrayAddStr.get_img_sizeNew(str: m.pic ?? "", width: sharePhotoView.mj_w, defaule_size: .OneToOne)
+        sharePhotoView.layoutIfNeeded()
+        self.layoutIfNeeded()
         
-          sharePhotoView.layoutIfNeeded()
-         self.layoutIfNeeded()
-//        self.layoutIfNeeded()
+        sharePhotoView.heightImgConstraint.constant = m.picHeight * sharePhotoView.mj_w / MGScreenWidth
         
         UIView.animate(withDuration: 0.3, animations: { [unowned self] in
             

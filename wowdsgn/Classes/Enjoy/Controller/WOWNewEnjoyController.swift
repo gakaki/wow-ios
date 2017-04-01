@@ -238,6 +238,7 @@ extension WOWNewEnjoyController: KolodaViewDataSource {
         return WOWCustomKoloda(frame: CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: MGScreenWidth - 20), imgStr)
     }
     
+ 
 //    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
 //        return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? OverlayView
 //    }

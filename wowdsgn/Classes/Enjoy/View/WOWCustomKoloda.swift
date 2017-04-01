@@ -27,11 +27,13 @@ class WOWCustomKoloda: UIView {
         self.layer.shadowRadius = 4 //将图层阴影的范围设为 5
         self.layer.shadowColor = UIColor.black.cgColor      //设置图层阴影的颜色
         self.backgroundColor = UIColor.white
+        self.clipsToBounds = true
         configImg(img: imgStr)
     }
     
     func configImg(img: String) {
         let imgView = UIImageView(frame: CGRect(x: 10, y: 10, width: self.w - 20, height: self.h - 36))
+        imgView.contentMode = .scaleAspectFill
         imgView.set_webimage_url(img)
         self.addSubview(imgView)
     }

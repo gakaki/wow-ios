@@ -244,7 +244,7 @@ extension WOWEnjoyController:WOWSelectCategoryDelegate, WOWChideControllerDelega
         vc_newEnjoy?.categoryId = model.id ?? 0
         
         vc_masterpiece?.request()
-        vc_newEnjoy?.request()
+        vc_newEnjoy?.refreshRequest()
         navView.categoryBtn.setTitle(model.categoryName ?? "全部", for: .normal)
        changeButtonState()
     }

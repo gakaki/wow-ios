@@ -15,7 +15,7 @@ class WOWCollectController: WOWBaseViewController {
         
     let pageSize   = 18
     
-    weak var delegate: WOWDidScrollDelegate?
+    weak var delegate:WOWChideControllerDelegate?
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -42,7 +42,14 @@ class WOWCollectController: WOWBaseViewController {
         super.didReceiveMemoryWarning()
         
     }
-    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        if let del = delegate {
+            
+            del.updateTabsRequsetData()
+            
+        }
+    }
     
     override func setUI() {
         super.setUI()

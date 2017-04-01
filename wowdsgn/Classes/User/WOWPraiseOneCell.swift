@@ -14,6 +14,7 @@ class WOWPraiseOneCell: UITableViewCell {
     @IBOutlet weak var numLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var v_height: NSLayoutConstraint!
+    @IBOutlet weak var cv_width: NSLayoutConstraint!
     
     var dataArr = [WOWStatisticsModel]()
     
@@ -45,6 +46,7 @@ class WOWPraiseOneCell: UITableViewCell {
             imgView.set_webimage_url(model.pic)
             numLabel.text = String(format: "%i", model.likeCounts ?? 0)
             dataArr = model.userList ?? [WOWStatisticsModel]()
+            cv_width.constant = (36.w + 15) * CGFloat(dataArr.count)
             if dataArr.count > 0 {
                 bottomView.isHidden = false
                 collectionView.reloadData()
@@ -81,7 +83,7 @@ extension WOWPraiseOneCell: UICollectionViewDataSource, UICollectionViewDelegate
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! WOWWorksCell
         cell.imageView.borderRadius(18.w)
         let model = dataArr[indexPath.row]
-        cell.imageView.set_webimage_url(model.avatar)
+        cell.imageView.set_webUserPhotoimage_url(model.avatar ?? "")
         return cell
     }
 

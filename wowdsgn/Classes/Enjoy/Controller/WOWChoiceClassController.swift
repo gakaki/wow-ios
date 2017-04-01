@@ -122,7 +122,7 @@ class WOWChoiceClassController: WOWBaseViewController {
                 imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
                     if let strongSelf = self,let images = images {
                         
-                     
+                        UIApplication.shared.statusBarStyle = .default
                         let photoTweaksViewController = PhotoTweaksViewController(image: images[0])
                         photoTweaksViewController?.delegate = strongSelf
                         photoTweaksViewController?.autoSaveToLibray = false

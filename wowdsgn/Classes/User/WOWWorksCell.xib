@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide2" translatesAutoresizingMaskIntoConstraints="NO" id="ZNt-3q-Wbw">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZNt-3q-Wbw">
                         <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ZNt-3q-Wbw" secondAttribute="height" multiplier="1:1" id="H1q-AI-fwF"/>
@@ -39,7 +39,4 @@
             <point key="canvasLocation" x="-131.5" y="0.5"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="guide2" width="1242" height="2209"/>
-    </resources>
 </document>

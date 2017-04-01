@@ -41,12 +41,13 @@ class WOWEnjoyController: WOWBaseViewController {
     lazy var navView:WOWEnjoyNavView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWEnjoyNavView.self), owner: self, options: nil)?.last as! WOWEnjoyNavView
         v.categoryBtn.addTarget(self, action: #selector(categoryClick), for: .touchUpInside)
-        v.categoryBtn.setTitle("全部", for: .normal)
+        v.categoryBtn.setTitle("ALL", for: .normal)
         return v
     }()
     lazy var backView:WOWCategoryBackView = {
         let v = WOWCategoryBackView(frame:CGRect(x: 0,y: 64,width: MGScreenWidth,height: MGScreenHeight - 64))
         v.selectView.delegate = self
+        v.dismissButton.addTarget(self, action: #selector(categoryClick), for:.touchUpInside)
         return v
     }()
     
@@ -97,12 +98,12 @@ class WOWEnjoyController: WOWBaseViewController {
             if let strongSelf = self{
                 let r                             =  JSON(result)
                 strongSelf.categoryArr          =  Mapper<WOWEnjoyCategoryModel>().mapArray(JSONObject: r.arrayObject ) ?? [WOWEnjoyCategoryModel]()
-                let category = WOWEnjoyCategoryModel(id: 0, categoryName: "全部")
+                let category = WOWEnjoyCategoryModel(id: 0, categoryName: "ALL")
                 strongSelf.categoryArr.insertAsFirst(category)
                 for cate in strongSelf.categoryArr {
                     if cate.id == strongSelf.currentCategoryId {
                         cate.isSelect = true
-                        strongSelf.navView.categoryBtn.setTitle(cate.categoryName ?? "全部", for: .normal)
+                        strongSelf.navView.categoryBtn.setTitle(cate.categoryName ?? "ALL", for: .normal)
                         break
                     }
                 }
@@ -245,8 +246,8 @@ extension WOWEnjoyController:WOWSelectCategoryDelegate, WOWChideControllerDelega
         
         vc_masterpiece?.request()
         vc_newEnjoy?.refreshRequest()
-        navView.categoryBtn.setTitle(model.categoryName ?? "全部", for: .normal)
-       changeButtonState()
+        navView.categoryBtn.setTitle(model.categoryName ?? "ALL", for: .normal)
+        changeButtonState()
     }
     
     func updateTabsRequsetData(){

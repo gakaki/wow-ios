@@ -52,10 +52,13 @@ class WOWWorksDetailsController: WOWBaseViewController {
     
     func backAction() {
         if self.isBoolFormReleaseVC {
-//         _ = navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.dismiss(animated: true, completion: nil)
+
+            self.navigationController?.dismiss(animated: true) {
+                _ = FNUtil.currentTopViewController().navigationController?.popViewController(animated: true)
+            }
+    
         }else {
-         _ = navigationController?.popViewController(animated: true)
+            _ = navigationController?.popViewController(animated: true)
         }
        
     }

@@ -40,7 +40,22 @@ class WOWReleaseWorksController: WOWBaseViewController {
         imgHeightLayou.constant = height
     }
     func cancelAction()  {
-        self.dismiss(animated: true, completion: nil)
+        
+        let alertController = UIAlertController(title: "温馨提示",
+                                                message: "您确定要取消发布作品吗？", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+            action in
+            
+            self.dismiss(animated: true) {
+                _ = FNUtil.currentTopViewController().navigationController?.popViewController(animated: true)
+            }
+  
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+      
     }
     
     func requestPushWorks(pic:String ,des:String){

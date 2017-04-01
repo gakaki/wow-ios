@@ -23,7 +23,7 @@ class WOWChoiceClassController: WOWBaseViewController {
         
         let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(navBack))
         navigationItem.leftBarButtonItem = item
-        request()
+    
         
         // Do any additional setup after loading the view.
     }
@@ -33,6 +33,7 @@ class WOWChoiceClassController: WOWBaseViewController {
         configCollectionView()
         configNavItem()
         configNextBarItem()
+        request()
     }
     func configNextBarItem(){
   
@@ -41,11 +42,12 @@ class WOWChoiceClassController: WOWBaseViewController {
         btnRright.setTitleColor(UIColor.darkGray, for: .normal)
         btnRright.setTitleColor(UIColor.black, for: .selected)
         btnRright.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        btnRright.isEnabled = false
+//        btnRright.isEnabled = true
         btnRright.addTarget(self,action:#selector(nextAction),for:.touchUpInside)
-        btnRright.isEnabled     = false
+//
         let barItem = UIBarButtonItem.init(customView: btnRright)
         self.navigationItem.rightBarButtonItem = barItem
+        btnRright.isEnabled     = false
     }
     func configCollectionView() {
         
@@ -222,8 +224,11 @@ extension WOWChoiceClassController:TZImagePickerControllerDelegate,PhotoTweaksVi
 //    }
     
     func photoTweaksController(_ controller: PhotoTweaksViewController, didFinishWithCroppedImage croppedImage: UIImage!, clooseSizeImgId sizeId: Int32) {
-     
-        VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: categoryArr[0].id!, sizeImgId: Int(sizeId))
+      
+        if categoryArr.count > 0 {
+            VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: categoryArr[0].id ?? 0, sizeImgId: Int(sizeId))
+        }
+        
    
     }
     

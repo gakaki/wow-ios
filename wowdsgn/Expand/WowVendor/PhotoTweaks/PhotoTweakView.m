@@ -706,6 +706,10 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         // 改变内部cotentView的frame 大小  根据返回的比例辩护
         scaleM = scaleM * self.scrollView.zoomScale;
         [self.scrollView setZoomScale:scaleM animated:YES];
+        
+        self.scrollView.minimumZoomScale = [self.scrollView zoomScaleToBound];
+        
+        self.manualZoomed = NO;
         //        }
         [UIView animateWithDuration:0.2 animations:^{
             [self checkScrollViewContentOffset];
